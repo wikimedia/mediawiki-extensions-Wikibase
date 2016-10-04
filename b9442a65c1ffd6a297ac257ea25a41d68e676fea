@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_7a6329a7",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-04T16:47:41Z",
+      "side": 1,
+      "message": "Needs a unit test",
+      "revId": "b9442a65c1ffd6a297ac257ea25a41d68e676fea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_9a353da6",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-04T16:47:41Z",
+      "side": 1,
+      "message": "Please inject the IContext/ContextSource here.\nIdeally, you would only inject a LocalizationMessageLookup, but sadly, that does not yet exist.",
+      "revId": "b9442a65c1ffd6a297ac257ea25a41d68e676fea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_1a9cedb7",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-04T16:47:41Z",
+      "side": 1,
+      "message": "Should not be a reference parameter, so remove the \u0026. Some hooks are documented that way, but that\u0027s a relict of php4 days. Reference parameters should be used only when we may actually replace the value. We are not going to replace the EditPage here.",
+      "revId": "b9442a65c1ffd6a297ac257ea25a41d68e676fea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_fad1d958",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-04T16:47:41Z",
+      "side": 1,
+      "message": "From comparing the code in EditPage::displayViewSourcePage to the code in EditPage::showEditForm, it seems that editFormTextAfterTools will not work when viewing the source. editFormTextAfterContent would perhaps be better - but that would show in the wrong place on the edit plage. Oh joy.\n\nI would prefer a separate hook in makeTemplatesOnThisPageList(), called at the end, with the HTML string as a reference (!) parameter.\n\nWe can do that in a follow-up though, and use editFormTextAfterTools for now.",
+      "revId": "b9442a65c1ffd6a297ac257ea25a41d68e676fea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_7a4c0944",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-04T16:47:41Z",
+      "side": 1,
+      "message": "no need for $context here if it gets injected in the constructor",
+      "revId": "b9442a65c1ffd6a297ac257ea25a41d68e676fea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_1a494d36",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-04T16:47:41Z",
+      "side": 1,
+      "message": "Don\u0027t pass $editor here, that that is needed is the Language object. If you inject the IContext in the constructor as requested, you don\u0027t even need to pass that here.",
+      "revId": "b9442a65c1ffd6a297ac257ea25a41d68e676fea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_5a6665b9",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-04T16:47:41Z",
+      "side": 1,
+      "message": "why does the EntityID have to be parsed? Can\u0027t we just look it up in $entities[$entityId]?\n\nBtw, variable maes are a bit confusing here. $entities contains EntityId objects, not Entity objects. But the variable called $entityId does not contain an EntityId, but a string. Hm... confusing...",
+      "revId": "b9442a65c1ffd6a297ac257ea25a41d68e676fea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_da5255dd",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-04T16:47:41Z",
+      "side": 1,
+      "message": "Don\u0027t pass $editor; private function should only ask for what they actually need (an IContext or ContextSource, in this case). No need to pass the context if it was injected in the constructor, though.",
+      "revId": "b9442a65c1ffd6a297ac257ea25a41d68e676fea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
