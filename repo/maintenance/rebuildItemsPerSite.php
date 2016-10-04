@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Maintenance;
 use Maintenance;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Store\SiteLinkTable;
-use Wikibase\Repo\Store\Sql\EntityPerPageIdPager;
+use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
 use Wikibase\Repo\Store\Sql\ItemsPerSiteBuilder;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -62,7 +62,7 @@ class RebuildItemsPerSite extends Maintenance {
 		$builder->setBatchSize( $batchSize );
 
 		$entityPerPage = $store->newEntityPerPage();
-		$stream = new EntityPerPageIdPager( $entityPerPage, 'item' );
+		$stream = new SqlEntityIdPager( $entityPerPage, 'item' );
 
 		// Now <s>kill</s> fix the table
 		$builder->rebuild( $stream );

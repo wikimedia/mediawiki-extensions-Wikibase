@@ -15,6 +15,21 @@ use Wikibase\DataModel\Entity\EntityId;
 interface EntityIdPager {
 
 	/**
+	 * Omit redirects from entity listing.
+	 */
+	const NO_REDIRECTS = 'no';
+
+	/**
+	 * Include redirects in entity listing.
+	 */
+	const INCLUDE_REDIRECTS = 'include';
+
+	/**
+	 * Include only redirects in listing.
+	 */
+	const ONLY_REDIRECTS = 'only';
+
+	/**
 	 * Fetches the next batch of IDs. Calling this has the side effect of advancing the
 	 * internal state of the page, typically implemented by some underlying resource
 	 * such as a file pointer or a database connection.

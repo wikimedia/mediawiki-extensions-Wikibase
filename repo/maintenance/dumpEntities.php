@@ -12,8 +12,7 @@ use Wikibase\Repo\Disposable;
 use Wikibase\Repo\IO\EntityIdReader;
 use Wikibase\Repo\IO\LineReader;
 use Wikibase\Repo\Store\EntityIdPager;
-use Wikibase\Repo\Store\EntityPerPage;
-use Wikibase\Repo\Store\Sql\EntityPerPageIdPager;
+use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
@@ -31,9 +30,9 @@ require_once $basePath . '/maintenance/Maintenance.php';
 abstract class DumpScript extends Maintenance {
 
 	/**
-	 * @var EntityPerPage
+	 * @var SqlEntityIdPagerFactory
 	 */
-	private $entityPerPage;
+	private $sqlEntityIdPagerFactory;
 
 	/**
 	 * @var bool|resource
@@ -56,8 +55,8 @@ abstract class DumpScript extends Maintenance {
 		$this->addOption( 'limit', "Limit how many entities are dumped.", false, true );
 	}
 
-	public function setDumpEntitiesServices( EntityPerPage $entityPerPage ) {
-		$this->entityPerPage = $entityPerPage;
+	public function setDumpEntitiesServices( SqlEntityIdPagerFactory $sqlEntityIdPagerFactory ) {
+		$this->sqlEntityIdPagerFactory = $sqlEntityIdPagerFactory;
 	}
 
 	/**
@@ -205,12 +204,12 @@ abstract class DumpScript extends Maintenance {
 	}
 
 	/**
-	 * Returns EntityPerPage::NO_REDIRECTS.
+	 * Returns EntityIdPager::NO_REDIRECTS.
 	 *
-	 * @return mixed a EntityPerPage::XXX_REDIRECTS constant
+	 * @return mixed a EntityIdPager::XXX_REDIRECTS constant
 	 */
 	protected function getRedirectMode() {
-		return EntityPerPage::NO_REDIRECTS;
+		return EntityIdPager::NO_REDIRECTS;
 	}
 
 	/**
@@ -219,8 +218,7 @@ abstract class DumpScript extends Maintenance {
 	 * @return EntityIdPager
 	 */
 	private function makeIdQueryStream( $entityType ) {
-		$stream = new EntityPerPageIdPager( $this->entityPerPage, $entityType, $this->getRedirectMode() );
-		return $stream;
+		return $this->sqlEntityIdPagerFactory->newSqlEntityIdPager( $entityType, $this->getRedirectMode() );
 	}
 
 	/**

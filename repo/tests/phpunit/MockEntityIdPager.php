@@ -6,11 +6,12 @@ use BadMethodCallException;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\Store\EntityPerPage;
+use Wikibase\Repo\Store\EntityIdPager;
 
 /**
  * @author Addshore
  */
-class MockEntityPerPage implements EntityPerPage {
+class MockEntityIdPager implements EntityPerPage, EntityIdPager {
 
 	/**
 	 * @var array
@@ -51,6 +52,25 @@ class MockEntityPerPage implements EntityPerPage {
 	}
 
 	/**
+	 * @see EntityIdPager::fetchIds
+	 *
+	 * @param int $limit The maximum number of IDs to return.
+	 *
+	 * @return EntityId[] A list of EntityIds matching the given parameters. Will
+	 * be empty if there are no more entities to list from the given offset.
+	 */
+	public function fetchIds( $limit ) {
+		$ids = $this->listEntities( $this->entityType, $limit, $this->position, $this->redirectMode );
+
+		if ( !empty( $ids ) ) {
+			$this->position = end( $ids );
+			reset( $ids );
+		}
+
+		return $ids;
+	}
+
+	/**
 	 * Lists entities of the given type (optionally including redirects).
 	 *
 	 * @since 0.5
@@ -62,7 +82,7 @@ class MockEntityPerPage implements EntityPerPage {
 	 *
 	 * @return EntityId[]
 	 */
-	public function listEntities(
+	private function listEntities(
 		$entityType,
 		$limit,
 		EntityId $after = null,
