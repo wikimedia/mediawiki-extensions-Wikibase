@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_2d541c56",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-04T13:49:27Z",
+      "side": 1,
+      "message": "The precision is an integer number, unrelated to what\u0027s in the http://www.w3.org/2001/XMLSchema#dateTime field. RDF software does not know about this, not even the WDQS UI does (it shows everything with day precision).\n\nI want to search for stuff that has precision \"day\" on wikidata.org, even if the actual day is currently not available in the RDF mapping. Manipulating the precision constant does not solve a problem, just introduces others.",
+      "parentUuid": "0e82f318_8d7188a9",
+      "revId": "80c5ff7a201594c2914fa11e49ec03419a8d7a9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_cd546004",
         "filename": "repo/tests/phpunit/includes/Rdf/Values/TimeRdfBuilderTest.php",
         "patchSetId": 1
