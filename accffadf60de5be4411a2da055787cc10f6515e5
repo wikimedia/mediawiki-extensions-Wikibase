@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_c86b6eb3",
+        "filename": "repo/tests/phpunit/includes/Validators/UrlSchemeValidatorsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 3640
+      },
+      "writtenOn": "2016-10-04T14:31:21Z",
+      "side": 1,
+      "message": "maybe you should also add a \u0027bzr\u0027 invalid URL for completness ?",
+      "revId": "accffadf60de5be4411a2da055787cc10f6515e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
