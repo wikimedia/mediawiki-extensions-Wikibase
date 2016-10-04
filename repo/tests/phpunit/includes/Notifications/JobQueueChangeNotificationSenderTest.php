@@ -3,9 +3,9 @@
 namespace Wikibase\Repo\Tests\Notifications;
 
 use JobQueueGroup;
+use JobSpecification;
 use PHPUnit_Framework_TestCase;
 use Wikibase\Change;
-use Wikibase\ChangeNotificationJob;
 use Wikibase\Repo\Notifications\JobQueueChangeNotificationSender;
 
 /**
@@ -36,9 +36,16 @@ class JobQueueChangeNotificationSenderTest extends PHPUnit_Framework_TestCase {
 				function( array $jobs ) use ( $expectedChunks ) {
 					$this->assertCount( $expectedChunks, $jobs );
 					$this->assertContainsOnlyInstancesOf(
-						ChangeNotificationJob::class,
+						JobSpecification::class,
 						$jobs
 					);
+
+					foreach ( $jobs as $job ) {
+						$params = $job->getParams();
+
+						$this->assertSame( 'repo-db', $params['repo'] );
+						$this->assertContainsOnly( 'int', $params['changeIds'] );
+					}
 				} )
 			);
 

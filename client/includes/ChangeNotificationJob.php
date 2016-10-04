@@ -6,6 +6,7 @@ use Job;
 use Title;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\WikibaseClient;
+use Wikimedia\Assert\Assert;
 
 /**
  * Job for notifying a client wiki of a batch of changes on the repository.
@@ -28,46 +29,7 @@ class ChangeNotificationJob extends Job {
 	private $changeHandler = null;
 
 	/**
-	 * Creates a ChangeNotificationJob representing the given changes.
-	 *
-	 * @param Change[] $changes The list of changes to be processed
-	 * @param string      $repo The name of the repository the changes come from (default: "").
-	 * @param array|bool  $params extra job parameters, see Job::__construct (default: false).
-	 *
-	 * @return self
-	 */
-	public static function newFromChanges( array $changes, $repo = '', $params = false ) {
-		static $dummyTitle = null;
-
-		// Note: we don't really care about the title and will use a dummy
-		if ( $dummyTitle === null ) {
-			// The Job class wants a Title object for some reason. Supply a dummy.
-			$dummyTitle = Title::newFromText( "ChangeNotificationJob", NS_SPECIAL );
-		}
-
-		// get the list of change IDs
-		$changeIds = array_map(
-			function ( Change $change ) {
-				return $change->getId();
-			},
-			$changes
-		);
-
-		if ( $params === false ) {
-			$params = array();
-		}
-
-		$params['repo'] = $repo;
-		$params['changeIds'] = $changeIds;
-
-		return new self( $dummyTitle, $params );
-	}
-
-	/**
 	 * Constructs a ChangeNotificationJob representing the changes given by $changeIds.
-	 *
-	 * @note: This is for use by Job::factory, don't call it directly;
-	 *           use newFromChanges() instead.
 	 *
 	 * @note: the constructor's signature is dictated by Job::factory, so we'll have to
 	 *           live with it even though it's rather ugly for our use case.
@@ -75,10 +37,23 @@ class ChangeNotificationJob extends Job {
 	 * @see      Job::factory.
 	 *
 	 * @param Title $title
-	 * @param array|bool $params
+	 * @param array|bool $params Needs to have two keys: "repo": the id of the repository,
+	 *     "changeIds": array of change ids.
 	 */
 	public function __construct( Title $title, $params = false ) {
 		parent::__construct( 'ChangeNotification', $title, $params );
+
+		Assert::parameterType( 'array', $params, '$params' );
+		Assert::parameter(
+			isset( $params['repo'] ),
+			'$params',
+			'$params[\'repo\'] not set.'
+		);
+		Assert::parameter(
+			isset( $params['changeIds'] ) && is_array( $params['changeIds'] ),
+			'$params',
+			'$params[\'changeIds\'] not set or not an array.'
+		);
 	}
 
 	/**
