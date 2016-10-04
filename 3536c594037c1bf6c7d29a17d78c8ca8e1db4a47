@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_6322a0fd",
+        "filename": "client/sql/entity_usage-drop-touched.sqlite.sql",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-04T21:16:06Z",
+      "side": 1,
+      "message": "huh?",
+      "revId": "3536c594037c1bf6c7d29a17d78c8ca8e1db4a47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_038ba4e8",
+        "filename": "client/sql/entity_usage-drop-touched.sqlite.sql",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-04T21:16:06Z",
+      "side": 1,
+      "message": "?",
+      "revId": "3536c594037c1bf6c7d29a17d78c8ca8e1db4a47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
