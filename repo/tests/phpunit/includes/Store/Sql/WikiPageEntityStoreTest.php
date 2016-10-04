@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
+use InvalidArgumentException;
 use MediaWikiTestCase;
 use RawMessage;
 use Revision;
@@ -653,6 +654,84 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		list( $store, ) = $this->createStoreAndLookup();
 
 		$this->assertSame( $expected, $store->canCreateWithCustomId( $id ), $id->getSerialization() );
+	}
+
+	public function testCanCreateWithCustomIdFails_GivenForeignEntityId() {
+		/* @var WikiPageEntityStore $store */
+		list( $store, ) = $this->createStoreAndLookup();
+		$this->setExpectedException( InvalidArgumentException::class );
+
+		$store->canCreateWithCustomId( new ItemId( 'foo:Q42' ) );
+	}
+
+	public function testGetWikiPageForEntityFails_GivenForeignEntityId() {
+		/* @var WikiPageEntityStore $store */
+		list( $store, ) = $this->createStoreAndLookup();
+		$this->setExpectedException( InvalidArgumentException::class );
+
+		$store->getWikiPageForEntity( new ItemId( 'foo:Q42' ) );
+	}
+
+	public function testSaveEntityFails_GivenForeignEntityId() {
+		/* @var WikiPageEntityStore $store */
+		list( $store, ) = $this->createStoreAndLookup();
+		$this->setExpectedException( InvalidArgumentException::class );
+
+		$store->saveEntity( new Item( new ItemId( 'foo:Q123' ) ), 'testing', $GLOBALS['wgUser'], EDIT_NEW );
+	}
+
+	public function testDeleteEntityFails_GivenForeignEntityId() {
+		/* @var WikiPageEntityStore $store */
+		list( $store, ) = $this->createStoreAndLookup();
+		$this->setExpectedException( InvalidArgumentException::class );
+
+		$store->deleteEntity( new ItemId( 'foo:Q123' ), 'testing', $GLOBALS['wgUser'] );
+	}
+
+	public function testUserWasLastToEditFails_GivenForeignEntityId() {
+		/* @var WikiPageEntityStore $store */
+		list( $store, ) = $this->createStoreAndLookup();
+		$this->setExpectedException( InvalidArgumentException::class );
+
+		$store->userWasLastToEdit( $GLOBALS['wgUser'], new ItemId( 'foo:Q123' ), false );
+	}
+
+	/**
+	 * @dataProvider foreignRedirectServiceProvider
+	 */
+	public function testSaveRedirectFails_GivenForeignEntityId( EntityId $source, EntityId $target ) {
+		/* @var WikiPageEntityStore $store */
+		list( $store, ) = $this->createStoreAndLookup();
+		$this->setExpectedException( InvalidArgumentException::class );
+
+		$store->saveRedirect(
+			new EntityRedirect( $source, $target ),
+			'testing',
+			$GLOBALS['wgUser']
+		);
+	}
+
+	public function foreignRedirectServiceProvider() {
+		return [
+			[ new ItemId( 'foo:Q123' ), new ItemId( 'Q42' ) ],
+			[ new ItemId( 'Q42' ), new ItemId( 'foo:Q123' ) ],
+		];
+	}
+
+	public function testUpdateWatchListFails_GivenForeignEntityId() {
+		/* @var WikiPageEntityStore $store */
+		list( $store, ) = $this->createStoreAndLookup();
+		$this->setExpectedException( InvalidArgumentException::class );
+
+		$store->updateWatchlist( $GLOBALS['wgUser'], new ItemId( 'foo:Q123' ), false );
+	}
+
+	public function testIsWatchingFails_GivenForeignEntityId() {
+		/* @var WikiPageEntityStore $store */
+		list( $store, ) = $this->createStoreAndLookup();
+		$this->setExpectedException( InvalidArgumentException::class );
+
+		$store->isWatching( $GLOBALS['wgUser'], new ItemId( 'foo:Q123' ) );
 	}
 
 }
