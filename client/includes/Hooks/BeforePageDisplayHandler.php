@@ -38,7 +38,7 @@ class BeforePageDisplayHandler {
 	public function addModules( OutputPage $out, $actionName ) {
 		$title = $out->getTitle();
 
-		if ( !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
+		if ( !$title || !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
 			return true;
 		}
 
