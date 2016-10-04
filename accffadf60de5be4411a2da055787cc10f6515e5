@@ -16,6 +16,24 @@
       "revId": "accffadf60de5be4411a2da055787cc10f6515e5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_c8b9aee7",
+        "filename": "repo/tests/phpunit/includes/Validators/UrlSchemeValidatorsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-04T15:01:28Z",
+      "side": 1,
+      "message": "As far as I can tell this is a valid CVS URI that is currently not accepted by our validator. This line is copied from the ticket. There was no similar example for bzr. No need to have one. But thanks for the suggestion.",
+      "parentUuid": "0e82f318_c86b6eb3",
+      "revId": "accffadf60de5be4411a2da055787cc10f6515e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
