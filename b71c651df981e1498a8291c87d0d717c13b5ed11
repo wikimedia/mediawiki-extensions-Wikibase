@@ -16,6 +16,24 @@
       "revId": "b71c651df981e1498a8291c87d0d717c13b5ed11",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_c8236e52",
+        "filename": "repo/includes/Parsers/DateFormatParser.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-04T14:53:16Z",
+      "side": 1,
+      "message": "I expected most of these to at least contain the Gregorian year, month and day somehow, but only very few do this. Most involve actual calculations.\n\n{{#time:\"o\": o, \"xiY\": xiY, \"xjY\": xjY, \"xkY\": xkY, \"xmY\": xmY, \"xoY\": xoY, \"xtY\": xtY, \"Y\": Y, \"F\": F, \"M\": M, \"m\": m, \"n\": n, \"xg\": xg, \"xiF\": xiF, \"xin\": xin, \"xjF\": xjF, \"xjn\": xjn, \"xjx\": xjx, \"xmF\": xmF, \"xmn\": xmn, \"d\": d, \"j\": j, \"xij\": xij, \"xjj\": xjj, \"xjt\": xjt, \"xmj\": xmj|2004-05-06}}\n\no: 2004, xiY: 1383, xjY: 5764, xkY: 2547, xmY: 1425, xoY: 93, xtY: 平成16, Y: 2004, F: Mai, M: Mai, m: 05, n: 5, xg: Mais, xiF: Ordibehesht, xin: 2, xjF: Iyar, xjn: 8, xjx: Iyar, xmF: Rabiʿ al-auwal, xmn: 3, d: 06, j: 6, xij: 17, xjj: 15, xjt: 29, xmj: 16",
+      "parentUuid": "0e82f318_678ad76f",
+      "revId": "b71c651df981e1498a8291c87d0d717c13b5ed11",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
