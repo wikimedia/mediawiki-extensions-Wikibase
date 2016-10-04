@@ -2,7 +2,8 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\Change;
+use MediaWikiTestCase;
+use Title;
 use Wikibase\ChangeNotificationJob;
 
 /**
@@ -14,34 +15,35 @@ use Wikibase\ChangeNotificationJob;
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
+ * @author Marius Hoch
  */
-class ChangeNotificationJobTest extends \MediaWikiTestCase {
+class ChangeNotificationJobTest extends MediaWikiTestCase {
 
 	// TODO: testNewFromChanges
 	// TODO: testGetChanges
 	// TODO: testRun
 
 	public function provideToString() {
-		return array(
-			array( // #0: empty
-				array(),
+		return [
+			'empty' => [
+				[],
 				'/^ChangeNotification.*/'
-			),
-			array( // #1: some changes
-				array(
-					$this->getMock( Change::class ),
-					$this->getMock( Change::class ),
-				),
+			],
+			'some changes' => [
+				[ 5, 37 ],
 				'/^ChangeNotification/'
-			),
-		);
+			],
+		];
 	}
 
 	/**
 	 * @dataProvider provideToString
 	 */
-	public function testToString( $changes, $regex ) {
-		$job = ChangeNotificationJob::newFromChanges( $changes );
+	public function testToString( $changeIds, $regex ) {
+		$job = new ChangeNotificationJob(
+			Title::newMainPage(),
+			[ 'repo' => 'repo-db', 'changeIds' => $changeIds ]
+		);
 
 		// toString used to fail on some platforms if a job contained a non-primitive parameter.
 		$s = $job->toString();
