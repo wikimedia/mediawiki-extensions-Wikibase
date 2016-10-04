@@ -16,6 +16,24 @@
       "revId": "ad547abc6dcbc6134f6c028cf1ea3250fae2170d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_a3c5780f",
+        "filename": "client/sql/entity_usage-drop-touched.sqlite.sql",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1665
+      },
+      "writtenOn": "2016-10-04T21:18:09Z",
+      "side": 1,
+      "message": "Fixed in patch set 3.",
+      "parentUuid": "0e82f318_23734815",
+      "revId": "ad547abc6dcbc6134f6c028cf1ea3250fae2170d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
