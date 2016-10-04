@@ -43,7 +43,8 @@ class OutputPageEntityIdReader {
 	 * @return EntityId|null
 	 */
 	public function getEntityIdFromOutputPage( OutputPage $out ) {
-		if ( !$this->entityContentFactory->isEntityContentModel( $out->getTitle()->getContentModel() ) ) {
+		$title = $out->getTitle();
+		if ( !$title || !$this->entityContentFactory->isEntityContentModel( $title->getContentModel() ) ) {
 			return null;
 		}
 

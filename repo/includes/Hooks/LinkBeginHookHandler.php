@@ -138,15 +138,21 @@ class LinkBeginHookHandler {
 	 */
 	public function doOnLinkBegin( Title $target, &$html, array &$customAttribs, RequestContext $context ) {
 		$out = $context->getOutput();
+		$outTitle = $out->getTitle();
 
 		if ( !$this->entityNamespaceLookup->isEntityNamespace( $target->getNamespace() ) ) {
+			return;
+		}
+
+		// For good measure: Don't do anything in case the OutputPage has no Title set.
+		if ( !$outTitle ) {
 			return;
 		}
 
 		// Only continue on pages with edit summaries (histories / diffs) or on special pages.
 		// Don't run this code when accessing it through the api (eg. for parsing) as the title is
 		// set to a special page dummy in api.php, see https://phabricator.wikimedia.org/T111346
-		if ( defined( 'MW_API' ) || !$this->shouldConvert( $out->getTitle(), $context ) ) {
+		if ( defined( 'MW_API' ) || !$this->shouldConvert( $outTitle, $context ) ) {
 			return;
 		}
 

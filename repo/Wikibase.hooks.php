@@ -30,7 +30,6 @@ use SpecialSearch;
 use StubUserLang;
 use Title;
 use User;
-use wfGetLB;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\Lib\AutoCommentFormatter;
 use Wikibase\Lib\Store\EntityChangeLookup;
@@ -402,13 +401,14 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onPageHistoryLineEnding( HistoryPager $history, &$row, &$s, array &$classes ) {
+		// Note: This assumes that HistoryPager::getTitle returns a Title.
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
-		$article = $history->getArticle();
+		$wikiPage = $history->getWikiPage();
 		$rev = new Revision( $row );
 
 		if ( $entityContentFactory->isEntityContentModel( $history->getTitle()->getContentModel() )
-			&& $article->getPage()->getLatest() !== $rev->getID()
+			&& $wikiPage->getLatest() !== $rev->getID()
 			&& $rev->getTitle()->quickUserCan( 'edit', $history->getUser() )
 			&& !$rev->isDeleted( Revision::DELETED_TEXT )
 		) {
@@ -542,7 +542,7 @@ final class RepoHooks {
 			$bodyAttrs['class'] .= ' wb-diffpage';
 		}
 
-		if ( $out->getRevisionId() !== $out->getTitle()->getLatestRevID() ) {
+		if ( $out->getTitle() && $out->getRevisionId() !== $out->getTitle()->getLatestRevID() ) {
 			$bodyAttrs['class'] .= ' wb-oldrevpage';
 		}
 
@@ -1030,7 +1030,7 @@ final class RepoHooks {
 		$title = $skinTemplate->getTitle();
 		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
-		if ( !$namespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
+		if ( !$title || !$namespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
 			return true;
 		}
 
@@ -1077,7 +1077,7 @@ final class RepoHooks {
 		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
 		// remove the editor module so that it does not get loaded on entity pages
-		if ( $namespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
+		if ( $title && $namespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
 			unset( $modules['editor'] );
 		}
 
@@ -1153,15 +1153,17 @@ final class RepoHooks {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$namespaceChecker = $wikibaseRepo->getEntityNamespaceLookup();
+		$title = $context->getTitle();
+
+		if ( !$title || !$namespaceChecker->isEntityNamespace( $title->getNamespace() ) ) {
+			// shorten out
+			return true;
+		}
+
 		$mediaWikiServices = MediaWikiServices::getInstance();
 		$loadBalancer = $mediaWikiServices->getDBLoadBalancer();
 		$subscriptionLookup = new SqlSubscriptionLookup( $loadBalancer );
 		$entityIdLookup = $wikibaseRepo->getEntityIdLookup();
-
-		if ( !$namespaceChecker->isEntityNamespace( $context->getTitle()->getNamespace() ) ) {
-			// shorten out
-			return true;
-		}
 
 		$siteLookup = $mediaWikiServices->getSiteLookup();
 		$linkRender = $mediaWikiServices->getLinkRenderer();
