@@ -7,6 +7,7 @@ use Message;
 use OutputPage;
 use Title;
 use User;
+use Wikimedia\Assert\Assert;
 
 /**
  * Handles adding user-specific or other js config to OutputPage
@@ -39,6 +40,8 @@ class OutputPageJsConfigBuilder {
 		$user = $out->getUser();
 		$lang = $out->getLanguage();
 		$title = $out->getTitle();
+
+		Assert::parameter( $title !== null, '$out', 'Passed OutputPage needs to have a Title set' );
 
 		$userConfigVars = $this->getUserConfigVars( $title, $user );
 
