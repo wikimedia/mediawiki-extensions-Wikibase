@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_8d7188a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-04T11:01:36Z",
+      "side": 1,
+      "message": "Why? We apply normalization here which reduces the precision",
+      "revId": "80c5ff7a201594c2914fa11e49ec03419a8d7a9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_cd546004",
+        "filename": "repo/tests/phpunit/includes/Rdf/Values/TimeRdfBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-04T11:01:36Z",
+      "side": 1,
+      "message": "I\u0027m not a fan of using numeric entity ids here… you could just to $p7 \u003d new PropertyId( \u0027P7\u0027 ); once and use that.",
+      "range": {
+        "startLine": 44,
+        "startChar": 33,
+        "endLine": 44,
+        "endChar": 34
+      },
+      "revId": "80c5ff7a201594c2914fa11e49ec03419a8d7a9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
