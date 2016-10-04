@@ -3,7 +3,6 @@
 namespace Wikibase\Test\Rdf;
 
 use DataValues\TimeValue;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\JulianDateTimeValueCleaner;
 use Wikibase\Rdf\RdfVocabulary;
@@ -37,24 +36,33 @@ class TimeRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideAddValue() {
-		$value = new TimeValue( '+2015-11-11T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, TimeValue::CALENDAR_GREGORIAN );
-		$snak = new PropertyValueSnak( new PropertyId( 'P7' ), $value );
+		$greg = TimeValue::CALENDAR_GREGORIAN;
+		$jul = TimeValue::CALENDAR_JULIAN;
+		$day = TimeValue::PRECISION_DAY;
 
-		$valueJulian = new TimeValue( '+1345-11-11T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, TimeValue::CALENDAR_JULIAN );
-		$snakJulian = new PropertyValueSnak( new PropertyId( 'P7' ), $valueJulian );
+		$value = new TimeValue( '+2015-11-11T00:00:00Z', 0, 0, 0, $day, $greg );
+		$snak = new PropertyValueSnak( 7, $value );
 
-		return array(
-			'simple' => array(
+		$valueJulian = new TimeValue( '+1345-11-11T00:00:00Z', 0, 0, 0, $day, $jul );
+		$snakJulian = new PropertyValueSnak( 7, $valueJulian );
+
+		$valueJulianExtreme = new TimeValue( '-4714-01-02T00:00:00Z', 0, 0, 0, $day, $jul );
+		$snakJulianExtreme = new PropertyValueSnak( 7, $valueJulianExtreme );
+
+		return [
+			'simple' => [
 				$snak,
 				false,
-				array(
-					'<http://www/Q1> <http://acme/statement/P7> "2015-11-11T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
-				)
-			),
-			'complex' => array(
+				[
+					'<http://www/Q1> '
+						. '<http://acme/statement/P7> '
+						. '"2015-11-11T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
+				]
+			],
+			'complex' => [
 				$snak,
 				true,
-				array(
+				[
 					'<http://www/Q1> '
 						. '<http://acme/statement/P7> '
 						. '"2015-11-11T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
@@ -76,19 +84,21 @@ class TimeRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 					'<http://acme/value/6a84c07a464062e0f3df0cd1884dbdfd> '
 						. '<http://acme/onto/timeCalendarModel> '
 						. '<http://www.wikidata.org/entity/Q1985727> .',
-				)
-			),
-			'simple Julian' => array(
+				]
+			],
+			'simple Julian' => [
 				$snakJulian,
 				false,
-				array(
-					'<http://www/Q1> <http://acme/statement/P7> "1345-11-19T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
-				)
-			),
-			'complex Julian' => array(
+				[
+					'<http://www/Q1> '
+						. '<http://acme/statement/P7> '
+						. '"1345-11-19T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
+				]
+			],
+			'complex Julian' => [
 				$snakJulian,
 				true,
-				array(
+				[
 					'<http://www/Q1> '
 						. '<http://acme/statement/P7> '
 						. '"1345-11-19T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
@@ -110,9 +120,43 @@ class TimeRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 					'<http://acme/value/b05c66f54b0960e1cb712466b7c192b4> '
 						. '<http://acme/onto/timeCalendarModel> '
 						. '<http://www.wikidata.org/entity/Q1985786> .',
-				)
-			),
-		);
+				]
+			],
+			'simple Julian out of supported conversion range' => [
+				$snakJulianExtreme,
+				false,
+				[
+					'<http://www/Q1> <http://acme/statement/P7> "-4713-01-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
+				]
+			],
+			'complex Julian out of supported conversion range' => [
+				$snakJulianExtreme,
+				true,
+				[
+					'<http://www/Q1> '
+						. '<http://acme/statement/P7> '
+						. '"-4713-01-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
+					'<http://www/Q1> '
+						. '<http://acme/statement/value/P7> '
+						. '<http://acme/value/c375568301bcaae670fefc22d4adce4b> .',
+					'<http://acme/value/c375568301bcaae670fefc22d4adce4b> '
+						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
+						. '<http://acme/onto/TimeValue> .',
+					'<http://acme/value/c375568301bcaae670fefc22d4adce4b> '
+						. '<http://acme/onto/timeValue> '
+						. '"-4713-01-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
+					'<http://acme/value/c375568301bcaae670fefc22d4adce4b> '
+						. '<http://acme/onto/timePrecision> '
+						. '"11"^^<http://www.w3.org/2001/XMLSchema#integer> .',
+					'<http://acme/value/c375568301bcaae670fefc22d4adce4b> '
+						. '<http://acme/onto/timeTimezone> '
+						. '"0"^^<http://www.w3.org/2001/XMLSchema#integer> .',
+					'<http://acme/value/c375568301bcaae670fefc22d4adce4b> '
+						. '<http://acme/onto/timeCalendarModel> '
+						. '<http://www.wikidata.org/entity/Q1985786> .',
+				]
+			],
+		];
 	}
 
 	/**
