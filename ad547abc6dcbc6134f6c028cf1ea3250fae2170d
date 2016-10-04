@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_23734815",
+        "filename": "client/sql/entity_usage-drop-touched.sqlite.sql",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-04T21:16:06Z",
+      "side": 1,
+      "message": "huh?",
+      "revId": "ad547abc6dcbc6134f6c028cf1ea3250fae2170d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
