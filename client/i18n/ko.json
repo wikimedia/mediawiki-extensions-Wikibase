@@ -16,6 +16,7 @@
 	},
 	"wikibase-client-desc": "위키베이스 확장 기능을 위한 클라이언트",
 	"tooltip-t-wikibase": "데이터 저장소에 연결된 항목을 가리키는 링크",
+	"apihelp-query+wblistentityusage-paramvalue-prop-url": "활성화하면 엔티티의 URL이 결과에 추가됩니다.",
 	"wikibase-after-page-move": "또한 이동된 문서에 언어 링크를 유지하기 위해 [$1 관련된 {{WBREPONAME}} 항목]을 업데이트해야 합니다.",
 	"wikibase-after-page-move-queued": "이 문서와 연결된 [$1 {{WBREPONAME}} 항목]은 곧 자동으로 갱신됩니다.",
 	"wikibase-after-page-delete": "언어 링크를 정비하려면 [$1 관련 {{WBREPONAME}} 항목]에서 이 문서의 링크도 제거해야 합니다.",

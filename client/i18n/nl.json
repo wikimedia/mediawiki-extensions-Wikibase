@@ -10,7 +10,8 @@
 			"Mar(c)",
 			"Robin0van0der0vliet",
 			"Robin van der Vliet",
-			"Patio"
+			"Patio",
+			"SPQRobin"
 		]
 	},
 	"wikibase-client-desc": "Client voor de uitbreiding Wikibase",
@@ -75,6 +76,7 @@
 	"wikibase-pageinfo-entity-id-none": "Geen",
 	"wikibase-pageinfo-entity-usage-S": "Sitekoppeling",
 	"wikibase-pageinfo-entity-usage-L": "Label: $1",
+	"wikibase-pageinfo-entity-usage-T": "Titel",
 	"wikibase-pageinfo-entity-usage-X": "Alle entiteitsgegevens",
 	"wikibase-pageinfo-entity-usage-O": "Overige (verklaringen)",
 	"wikibase-property-render-error": "Het verwerken van de eigenschap $1 is mislukt: $2",

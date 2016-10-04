@@ -42,7 +42,7 @@
 	"wikibase-validator-no-such-entity": "$1 सापडले नाही",
 	"wikibase-validator-no-such-property": "गुणधर्म $1 सापडला नाही",
 	"wikibase-validator-bad-value-type": "वाईट मुल्य प्रकार $1, अपेक्षित $2",
-	"wikibase-validator-bad-url": "विकृत यूआरएल: $1",
+	"wikibase-validator-bad-url": "यूआरएल मध्ये शब्दामधील अंतरे व चौकोनी कंसासारखे काही वर्ण असू शकत नाही: $1",
 	"wikibase-validator-unknown-unit": "अनोळखी एकक: $1",
 	"wikibase-validator-not-allowed": "अवैध किंमत:$1",
 	"datatypes-type-wikibase-item": "कलम",

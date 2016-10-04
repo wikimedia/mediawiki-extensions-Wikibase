@@ -337,6 +337,7 @@
 	"wikibase-entity-not-viewable": "Det angivna innehållet av typen \"$1\" är inte en entitet och kan inte visas av Wikibase.",
 	"action-item-merge": "sammanfoga objekt",
 	"action-property-create": "skapa egenskaper",
+	"wikibase-pageinfo-subscription-none": "Ingen",
 	"apihelp-wbcreateclaim-description": "Skapar Wikibase påståenden.",
 	"apihelp-wbcreateclaim-param-baserevid": "Den numeriska identifieraren för versionen att basera redigeringen på.\nDetta används för att kunna upptäcka konflikter under sparandet.",
 	"apihelp-wbcreateclaim-param-bot": "Markera denna redigering som en bot. Denna webbadressflagga kommer bara att respekteras om användare tillhör gruppen \"bot\".",
