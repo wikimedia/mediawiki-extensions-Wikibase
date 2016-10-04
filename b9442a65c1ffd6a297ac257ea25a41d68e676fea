@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_fd8ab3e2",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-04T19:32:20Z",
+      "side": 1,
+      "message": "That\u0027s why it\u0027s WIP, See the commit message :)",
+      "parentUuid": "0e82f318_7a6329a7",
+      "revId": "b9442a65c1ffd6a297ac257ea25a41d68e676fea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_9a353da6",
         "filename": "client/includes/Hooks/EditActionHookHandler.php",
         "patchSetId": 1
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_dd032f0e",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-04T19:32:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_1a9cedb7",
+      "revId": "b9442a65c1ffd6a297ac257ea25a41d68e676fea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_fad1d958",
         "filename": "client/includes/Hooks/EditActionHookHandler.php",
         "patchSetId": 1
@@ -64,6 +100,24 @@
       "writtenOn": "2016-10-04T16:47:41Z",
       "side": 1,
       "message": "From comparing the code in EditPage::displayViewSourcePage to the code in EditPage::showEditForm, it seems that editFormTextAfterTools will not work when viewing the source. editFormTextAfterContent would perhaps be better - but that would show in the wrong place on the edit plage. Oh joy.\n\nI would prefer a separate hook in makeTemplatesOnThisPageList(), called at the end, with the HTML string as a reference (!) parameter.\n\nWe can do that in a follow-up though, and use editFormTextAfterTools for now.",
+      "revId": "b9442a65c1ffd6a297ac257ea25a41d68e676fea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_3d3c4bbb",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-04T19:32:20Z",
+      "side": 1,
+      "message": "Hmm, yeah. I think let\u0027s have it for now and then add a new hook.",
+      "parentUuid": "0e82f318_fad1d958",
       "revId": "b9442a65c1ffd6a297ac257ea25a41d68e676fea",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +158,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_5d22dffc",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-04T19:32:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_1a494d36",
+      "revId": "b9442a65c1ffd6a297ac257ea25a41d68e676fea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_5a6665b9",
         "filename": "client/includes/Hooks/EditActionHookHandler.php",
         "patchSetId": 1
@@ -121,6 +193,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_dd85efd4",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-04T19:32:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_5a6665b9",
+      "revId": "b9442a65c1ffd6a297ac257ea25a41d68e676fea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_da5255dd",
         "filename": "client/includes/Hooks/EditActionHookHandler.php",
         "patchSetId": 1
@@ -132,6 +222,24 @@
       "writtenOn": "2016-10-04T16:47:41Z",
       "side": 1,
       "message": "Don\u0027t pass $editor; private function should only ask for what they actually need (an IContext or ContextSource, in this case). No need to pass the context if it was injected in the constructor, though.",
+      "revId": "b9442a65c1ffd6a297ac257ea25a41d68e676fea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_1d730715",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-04T19:32:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_da5255dd",
       "revId": "b9442a65c1ffd6a297ac257ea25a41d68e676fea",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
