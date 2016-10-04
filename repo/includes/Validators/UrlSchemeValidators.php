@@ -28,6 +28,7 @@ class UrlSchemeValidators {
 	 */
 	public function getValidator( $scheme ) {
 		switch ( $scheme ) {
+			// Schemes with "://", copied from $wgUrlProtocols in MediaWiki's DefaultSettings.php
 			case 'ftp':
 			case 'ftps':
 			case 'git':
@@ -43,14 +44,19 @@ class UrlSchemeValidators {
 			case 'ssh':
 			case 'svn':
 			case 'telnet':
+			case 'worldwind':
+
+			// Additional VCS schemes not supported by MediaWiki. "bzr" is GNU Bazaar from Canonical
+			// Ltd. See https://phabricator.wikimedia.org/T146692
 			case 'bzr':
 			case 'cvs':
-			case 'worldwind':
-				$regex = '!^' . preg_quote( $scheme, '!' ) . '://(' . Parser::EXT_LINK_URL_CLASS . ')+\z!ui';
+				$regex = '!^' . preg_quote( $scheme, '!' ) . '://(' . Parser::EXT_LINK_URL_CLASS
+					. ')+\z!ui';
 				break;
 
 			case 'mailto':
-				$regex = '!^mailto:(' . Parser::EXT_LINK_URL_CLASS . ')+@(' . Parser::EXT_LINK_URL_CLASS . ')+\z!ui';
+				$regex = '!^mailto:(' . Parser::EXT_LINK_URL_CLASS . ')+@('
+					. Parser::EXT_LINK_URL_CLASS . ')+\z!ui';
 				break;
 
 			case '*':
@@ -75,7 +81,7 @@ class UrlSchemeValidators {
 	 * @return ValueValidator[] a map of scheme names to ValueValidator objects.
 	 */
 	public function getValidators( array $schemes ) {
-		$validators = array();
+		$validators = [];
 
 		foreach ( $schemes as $scheme ) {
 			$validator = $this->getValidator( $scheme );

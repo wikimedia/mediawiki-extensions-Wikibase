@@ -45,66 +45,69 @@ class UrlSchemeValidatorsTest extends \MediaWikiTestCase {
 	}
 
 	public function validUrlProvider() {
-		return array(
-			array( 'http', 'http://acme.com' ),
-			array( 'http', 'http://foo:bar@acme.com/stuff/thingy.php?foo=bar#part' ),
-			array( 'https', 'https://acme.com' ),
-			array( 'https', 'https://foo:bar@acme.com/stuff/thingy.php?foo=bar#part' ),
-			array( 'https', 'https://ko.wikipedia.org/wiki/전_(요리)' ),
-			array( 'ftp', 'ftp://acme.com' ),
-			array( 'ftp', 'ftp://foo:bar@acme.com/stuff/thingy.php?foo=bar#part' ),
-			array( 'irc', 'irc://chat.freenode.net/gimp' ),
-			array( 'mailto', 'mailto:foo@bar' ),
-			array( 'mailto', 'mailto:random.korean.character.전@bar' ),
-			array( 'mailto', 'mailto:Eve.Elder+spam@some.place.else?Subject=test' ),
-			array( 'telnet', 'telnet://user:password@host:9999/' ),
-			array( 'any', 'http://acme.com' ),
-			array( 'any', 'dummy:some/stuff' ),
-			array( 'any', 'dummy+me:other-stuff' ),
-			array( 'any', 'dummy-you:some?things' ),
-			array( 'any', 'dummy.do:other#things' ),
-			array( 'any', 'random.korean.character:전' ),
-		);
+		return [
+			[ 'http', 'http://acme.com' ],
+			[ 'http', 'http://foo:bar@acme.com/stuff/thingy.php?foo=bar#part' ],
+			[ 'https', 'https://acme.com' ],
+			[ 'https', 'https://foo:bar@acme.com/stuff/thingy.php?foo=bar#part' ],
+			[ 'https', 'https://ko.wikipedia.org/wiki/전_(요리)' ],
+			[ 'ftp', 'ftp://acme.com' ],
+			[ 'ftp', 'ftp://foo:bar@acme.com/stuff/thingy.php?foo=bar#part' ],
+			[ 'irc', 'irc://chat.freenode.net/gimp' ],
+			[ 'bzr', 'bzr://archonproject.bzr.sourceforge.net/bzrroot/archonproject' ],
+			[ 'cvs', 'cvs://pserver:anonymous@cvs.delorie.com/cvs/djgpp' ],
+			[ 'mailto', 'mailto:foo@bar' ],
+			[ 'mailto', 'mailto:random.korean.character.전@bar' ],
+			[ 'mailto', 'mailto:Eve.Elder+spam@some.place.else?Subject=test' ],
+			[ 'telnet', 'telnet://user:password@host:9999/' ],
+			[ 'any', 'http://acme.com' ],
+			[ 'any', 'dummy:some/stuff' ],
+			[ 'any', 'dummy+me:other-stuff' ],
+			[ 'any', 'dummy-you:some?things' ],
+			[ 'any', 'dummy.do:other#things' ],
+			[ 'any', 'random.korean.character:전' ],
+		];
 	}
 
 	public function invalidUrlProvider() {
-		return array(
+		return [
 			// Trailing newlines
-			array( 'http', "http://example.com\n" ),
-			array( 'mailto', "mailto:mail@example.com\n" ),
-			array( 'any', "http://example.com\n" ),
+			[ 'http', "http://example.com\n" ],
+			[ 'mailto', "mailto:mail@example.com\n" ],
+			[ 'any', "http://example.com\n" ],
 
-			array( 'http', 'yadda' ),
-			array( 'http', 'http:' ),
-			array( 'http', 'http://' ),
-			array( 'http', 'http://acme.com/foo' . "\n" . 'bar' ),
-			array( 'http', '*http://acme.com/foo' ),
-			array( 'https', 'yadda' ),
-			array( 'https', 'https:' ),
-			array( 'https', 'https://' ),
-			array( 'https', 'https://acme.com/foo' . "\n" . 'bar' ),
-			array( 'https', '*https://acme.com/foo' ),
-			array( 'ftp', 'yadda' ),
-			array( 'ftp', 'ftp:' ),
-			array( 'ftp', 'ftp://' ),
-			array( 'ftp', 'ftp://acme.com/foo' . "\n" . 'bar' ),
-			array( 'ftp', '*ftp://acme.com/foo' ),
-			array( 'mailto', 'yadda' ),
-			array( 'mailto', 'mailto:stuff' ),
-			array( 'mailto', 'mailto:james@thingy' . "\n" . '.com' ),
-			array( 'mailto', '*mailto:james@thingy' ),
-			array( 'any', 'yadda' ),
-			array( 'any', 'yadda/yadda' ),
-			array( 'any', ':' ),
-			array( 'any', 'foo:' ),
-			array( 'any', ':bar' ),
-			array( 'any', '+must:start-with-character' ),
-			array( 'any', '.must:start-with-character' ),
-			array( 'any', '-must:start-with-character' ),
-			array( 'any', '0must:start-with-character' ),
-			array( 'any', 'doo*da:foo' ),
-			array( 'any', 'foo:' . "\n" . '.bar' ),
-		);
+			[ 'http', 'yadda' ],
+			[ 'http', 'http:' ],
+			[ 'http', 'http://' ],
+			[ 'http', 'http://acme.com/foo' . "\n" . 'bar' ],
+			[ 'http', '*http://acme.com/foo' ],
+			[ 'https', 'yadda' ],
+			[ 'https', 'https:' ],
+			[ 'https', 'https://' ],
+			[ 'https', 'https://acme.com/foo' . "\n" . 'bar' ],
+			[ 'https', '*https://acme.com/foo' ],
+			[ 'ftp', 'yadda' ],
+			[ 'ftp', 'ftp:' ],
+			[ 'ftp', 'ftp://' ],
+			[ 'ftp', 'ftp://acme.com/foo' . "\n" . 'bar' ],
+			[ 'ftp', '*ftp://acme.com/foo' ],
+			[ 'cvs', ':pserver:anonymous@cvs.delorie.com:/cvs/djgpp' ],
+			[ 'mailto', 'yadda' ],
+			[ 'mailto', 'mailto:stuff' ],
+			[ 'mailto', 'mailto:james@thingy' . "\n" . '.com' ],
+			[ 'mailto', '*mailto:james@thingy' ],
+			[ 'any', 'yadda' ],
+			[ 'any', 'yadda/yadda' ],
+			[ 'any', ':' ],
+			[ 'any', 'foo:' ],
+			[ 'any', ':bar' ],
+			[ 'any', '+must:start-with-character' ],
+			[ 'any', '.must:start-with-character' ],
+			[ 'any', '-must:start-with-character' ],
+			[ 'any', '0must:start-with-character' ],
+			[ 'any', 'doo*da:foo' ],
+			[ 'any', 'foo:' . "\n" . '.bar' ],
+		];
 	}
 
 	protected function assertErrorCodeLocalization( Result $result ) {
@@ -135,10 +138,10 @@ class UrlSchemeValidatorsTest extends \MediaWikiTestCase {
 	public function testGetValidators() {
 		$factory = new UrlSchemeValidators();
 
-		$schemes = array( 'http', 'https', 'ftp', 'dummy' );
+		$schemes = [ 'http', 'https', 'ftp', 'dummy' ];
 		$validators = $factory->getValidators( $schemes );
 
-		$this->assertEquals( array( 'http', 'https', 'ftp' ), array_keys( $validators ) );
+		$this->assertEquals( [ 'http', 'https', 'ftp' ], array_keys( $validators ) );
 		$this->assertContainsOnlyInstancesOf( ValueValidator::class, $validators );
 	}
 

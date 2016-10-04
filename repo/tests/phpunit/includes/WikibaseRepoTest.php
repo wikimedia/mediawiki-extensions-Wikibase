@@ -66,6 +66,7 @@ use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\Repo\SnakFactory;
 use Wikibase\Repo\ValidatorBuilders;
+use Wikibase\Repo\Validators\CompositeValidator;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
@@ -93,6 +94,42 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 
 		$second = $this->getWikibaseRepo()->getDefaultValidatorBuilders();
 		$this->assertSame( $first, $second );
+	}
+
+	/**
+	 * @dataProvider urlSchemesProvider
+	 */
+	public function testDefaultUrlValidators( $input, $expected ) {
+		$validatorBuilders = $this->getWikibaseRepo()->getDefaultValidatorBuilders();
+		$urlValidator = new CompositeValidator( $validatorBuilders->buildUrlValidators() );
+		$result = $urlValidator->validate( new StringValue( $input ) );
+		$this->assertSame( $expected, $result->isValid() );
+	}
+
+	public function urlSchemesProvider() {
+		return [
+			[ 'bzr://x', true ],
+			[ 'cvs://x', true ],
+			[ 'ftp://x', true ],
+			[ 'git://x', true ],
+			[ 'http://x', true ],
+			[ 'https://x', true ],
+			[ 'irc://x', true ],
+			[ 'mailto:x@x', true ],
+			[ 'ssh://x', true ],
+			[ 'svn://x', true ],
+
+			// Supported by UrlSchemeValidators, but not enabled by default.
+			[ 'ftps://x', false ],
+			[ 'gopher://x', false ],
+			[ 'ircs://x', false ],
+			[ 'mms://x', false ],
+			[ 'nntp://x', false ],
+			[ 'redis://x', false ],
+			[ 'sftp://x', false ],
+			[ 'telnet://x', false ],
+			[ 'worldwind://x', false ],
+		];
 	}
 
 	public function testGetDefaultValueFormatterBuilders() {
