@@ -7,6 +7,8 @@ use HashBagOStuff;
 use ObjectCache;
 use Revision;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
@@ -308,7 +310,14 @@ class SqlStore implements Store {
 	 * @return EntitiesWithoutTermFinder
 	 */
 	public function newEntitiesWithoutTermFinder() {
-		return new SqlEntitiesWithoutTermFinder( $this->entityIdComposer );
+		return new SqlEntitiesWithoutTermFinder(
+			$this->entityIdParser,
+			$this->entityNamespaceLookup,
+			[ // TODO: Make this configurable!
+				Item::ENTITY_TYPE => 'Q',
+				Property::ENTITY_TYPE => 'P'
+			]
+		);
 	}
 
 	/**
