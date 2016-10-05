@@ -522,6 +522,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_1053e1e2",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-05T21:33:02Z",
+      "side": 1,
+      "message": "Added colon-separator, thanks for the explanation. word-separator is not needed, they are separated using commaList.",
+      "parentUuid": "0e82f318_a1a1ed37",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_ef0911e1",
         "filename": "client/includes/Hooks/EditActionHookHandler.php",
         "patchSetId": 6
