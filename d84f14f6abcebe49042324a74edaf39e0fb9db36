@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_afc5590f",
+        "filename": "repo/includes/Rdf/DateTimeValueCleaner.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-05T12:27:47Z",
+      "side": 1,
+      "message": "That function (and this class) doesn\u0027t do any calendar model conversion anyway, I think this comment is wrong.",
+      "range": {
+        "startLine": 41,
+        "startChar": 39,
+        "endLine": 41,
+        "endChar": 84
+      },
+      "revId": "d84f14f6abcebe49042324a74edaf39e0fb9db36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_cff1ad67",
+        "filename": "repo/includes/Rdf/JulianDateTimeValueCleaner.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-05T12:27:47Z",
+      "side": 1,
+      "message": "No point to do conversion to Gregorian, but it would still be valid to convert to other calendars.",
+      "range": {
+        "startLine": 31,
+        "startChar": 56,
+        "endLine": 31,
+        "endChar": 85
+      },
+      "revId": "d84f14f6abcebe49042324a74edaf39e0fb9db36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_0fe82576",
+        "filename": "repo/includes/Rdf/JulianDateTimeValueCleaner.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-05T12:27:47Z",
+      "side": 1,
+      "message": "What\u0027s extreme here?",
+      "range": {
+        "startLine": 36,
+        "startChar": 7,
+        "endLine": 36,
+        "endChar": 27
+      },
+      "revId": "d84f14f6abcebe49042324a74edaf39e0fb9db36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
