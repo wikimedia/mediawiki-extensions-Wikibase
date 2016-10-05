@@ -52,6 +52,24 @@
       "revId": "accffadf60de5be4411a2da055787cc10f6515e5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_f4148853",
+        "filename": "repo/tests/phpunit/includes/Validators/UrlSchemeValidatorsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-05T09:45:12Z",
+      "side": 1,
+      "message": "ftp and bzr boil down to the same lines of code anyway. This code is already tested with all the other test cases above. The cvs test gave us something new, because there was no test with multiple colons and an at sign before. Adding \"bzr:\" does not give us something new in addition to the \"ftp:\" that\u0027s already there.",
+      "parentUuid": "0e82f318_da0ed590",
+      "revId": "accffadf60de5be4411a2da055787cc10f6515e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
