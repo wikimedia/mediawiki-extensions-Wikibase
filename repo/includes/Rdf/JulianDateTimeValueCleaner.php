@@ -33,7 +33,7 @@ class JulianDateTimeValueCleaner extends DateTimeValueCleaner {
 			// If we are less precise than a day, no point to convert
 			// Julian to Gregorian since we don't have enough information to do it anyway
 			if ( $precision >= TimeValue::PRECISION_DAY ) {
-				return $this->julianDateValue( $value->getTime() );
+				return $this->julianDateValue( $value->getTime(), $precision );
 			} else {
 				return $this->cleanupGregorianValue( $value->getTime(), $precision );
 			}
@@ -45,10 +45,11 @@ class JulianDateTimeValueCleaner extends DateTimeValueCleaner {
 	 * Get Julian date value and return it as Gregorian date
 	 *
 	 * @param string $dateValue
+	 * @param int $precision
 	 *
 	 * @return string|null Value compatible with xsd:dateTime type, null if we failed to parse
 	 */
-	private function julianDateValue( $dateValue ) {
+	private function julianDateValue( $dateValue, $precision ) {
 		try {
 			list( $minus, $y, $m, $d, $time ) = $this->parseDateValue( $dateValue );
 		} catch ( IllegalValueException $e ) {
@@ -57,21 +58,21 @@ class JulianDateTimeValueCleaner extends DateTimeValueCleaner {
 
 		$y = $minus ? -$y : $y + 0;
 		if ( !is_int( $y ) || $y < -4713 ) {
-			// Fall back to >= 1 year precision when Julian to Gregorian conversion is not possible.
-			return $this->cleanupGregorianValue( $dateValue, TimeValue::PRECISION_YEAR );
+			// Fall back to Gregorian when Julian to Gregorian conversion is not possible.
+			return $this->cleanupGregorianValue( $dateValue, $precision );
 		}
 
 		$jd = juliantojd( $m, $d, $y );
 		if ( $jd == 0 ) {
-			// Fall back to >= 1 year precision when Julian to Gregorian conversion is not possible.
-			return $this->cleanupGregorianValue( $dateValue, TimeValue::PRECISION_YEAR );
+			// Fall back to Gregorian when Julian to Gregorian conversion is not possible.
+			return $this->cleanupGregorianValue( $dateValue, $precision );
 		}
 
 		// PHP API for Julian/Gregorian conversions is kind of awful
 		$gregorian = jdtogregorian( $jd );
 		if ( $gregorian === '0/0/0' ) {
-			// Fall back to >= 1 year precision when Julian to Gregorian conversion is not possible.
-			return $this->cleanupGregorianValue( $dateValue, TimeValue::PRECISION_YEAR );
+			// Fall back to Gregorian when Julian to Gregorian conversion is not possible.
+			return $this->cleanupGregorianValue( $dateValue, $precision );
 		}
 
 		list( $m, $d, $y ) = explode( '/', $gregorian );
