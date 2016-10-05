@@ -25,6 +25,23 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_cf2fed38",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-05T11:13:24Z",
+      "side": 1,
+      "message": "this line could go one line up to preserver the order",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_7466d8b9",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 6
@@ -75,6 +92,29 @@
         "startChar": 44,
         "endLine": 451,
         "endChar": 49
+      },
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_8fe6d53d",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-05T11:13:24Z",
+      "side": 1,
+      "message": "this just duplicates the value wikibase-pageinfo-entity-usage, instead of providing the explanation",
+      "range": {
+        "startLine": 108,
+        "startChar": 22,
+        "endLine": 108,
+        "endChar": 23
       },
       "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
@@ -179,6 +219,23 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_0f0f45e5",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-05T11:13:24Z",
+      "side": 1,
+      "message": "variable naming makes it read a bit odd. What I could understand this line doing is mapping entity id to entity id.",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_94f0acc5",
         "filename": "client/includes/Hooks/EditActionHookHandler.php",
         "patchSetId": 6
@@ -207,6 +264,40 @@
       "writtenOn": "2016-10-05T07:58:03Z",
       "side": 1,
       "message": "This should probably use the colon-separator and word-separator messages.",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_ef0911e1",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-05T11:13:24Z",
+      "side": 1,
+      "message": "this could also be all in single line. Or each parameter in its own line.",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_af2ab928",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-05T11:13:24Z",
+      "side": 1,
+      "message": "rawElement",
       "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -264,6 +355,46 @@
       "writtenOn": "2016-10-05T07:58:03Z",
       "side": 1,
       "message": "missing type for $expected",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_6f6601ba",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-05T11:13:24Z",
+      "side": 1,
+      "message": "having this closing parenthesis here is a bit odd",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_af0399c0",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-05T11:13:24Z",
+      "side": 1,
+      "message": "this variable is not used says my IDE",
+      "range": {
+        "startLine": 52,
+        "startChar": 2,
+        "endLine": 52,
+        "endChar": 16
+      },
       "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -344,6 +475,29 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_0f5825fc",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-05T11:13:24Z",
+      "side": 1,
+      "message": "To conform better with the definition of LabelDescriptionLookup::getLabel the parameter should be called $entityId (type hint could be also added)\nAnd below local variable for entity id serialization should be rather called $idSerialization or so, not $entityId.",
+      "range": {
+        "startLine": 202,
+        "startChar": 16,
+        "endLine": 202,
+        "endChar": 17
+      },
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_f4b648f5",
         "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
         "patchSetId": 6
@@ -361,6 +515,23 @@
         "endLine": 225,
         "endChar": 17
       },
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_4f6dbd94",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-05T11:13:24Z",
+      "side": 1,
+      "message": "this could be called getEditPage for consistency",
       "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
