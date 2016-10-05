@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Notifications;
 
+use JobSpecification;
 use Wikibase\Change;
-use Wikibase\ChangeNotificationJob;
 
 /**
  * ChangeNotificationSender based on a JobQueueGroup and ChangeNotificationJob.
@@ -17,7 +17,7 @@ use Wikibase\ChangeNotificationJob;
 class JobQueueChangeNotificationSender implements ChangeNotificationSender {
 
 	/**
-	 * @var string
+	 * @var string|bool
 	 */
 	private $repoDB;
 
@@ -37,7 +37,7 @@ class JobQueueChangeNotificationSender implements ChangeNotificationSender {
 	private $jobQueueGroupFactory;
 
 	/**
-	 * @param string $repoDB
+	 * @param string|bool $repoDB
 	 * @param string[] $wikiDBNames An associative array mapping site IDs to logical database names.
 	 * @param int $batchSize Number of changes to push per job.
 	 * @param callable|null $jobQueueGroupFactory Function that returns a JobQueueGroup for a given wiki.
@@ -77,7 +77,7 @@ class JobQueueChangeNotificationSender implements ChangeNotificationSender {
 
 		$jobs = [];
 		foreach ( $chunks as $chunk ) {
-			$jobs[] = ChangeNotificationJob::newFromChanges( $chunk, $this->repoDB );
+			$jobs[] = $this->getJobSpecification( $chunk );
 		}
 		$qgroup->push( $jobs );
 
@@ -85,6 +85,25 @@ class JobQueueChangeNotificationSender implements ChangeNotificationSender {
 			__METHOD__,
 			"Posted " . count( $jobs ) . " notification jobs for site $siteID with " .
 				count( $changes ) . " changes to $wikiDB."
+		);
+	}
+
+	private function getJobSpecification( array $changes ) {
+		$changeIds = array_map(
+			function ( Change $change ) {
+				return $change->getId();
+			},
+			$changes
+		);
+
+		$params = [
+			'repo' => $this->repoDB,
+			'changeIds' => $changeIds
+		];
+
+		return new JobSpecification(
+			'ChangeNotification',
+			$params
 		);
 	}
 
