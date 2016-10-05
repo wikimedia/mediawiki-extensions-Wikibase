@@ -486,6 +486,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_a1a1ed37",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-05T14:43:39Z",
+      "side": 1,
+      "message": "colon-separator is i18n message you could/should use here.\nUsing that message would make proper punctuation etc (e.g. having a colon followed by a space is fine for English, and some other languages but there are also languages that use different punctuation).\nword-separator is also a message",
+      "parentUuid": "0e82f318_01cd59bc",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_ef0911e1",
         "filename": "client/includes/Hooks/EditActionHookHandler.php",
         "patchSetId": 6
