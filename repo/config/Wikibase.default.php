@@ -197,4 +197,9 @@ return [
 
 	// Map of foreign repository names to repository-specific settings such as "supportedEntityTypes"
 	'foreignRepositories' => [],
+
+	'supportedEntityTypesForEntitiesWithoutTermListings' => [
+		'item',
+		'property'
+	]
 ];
