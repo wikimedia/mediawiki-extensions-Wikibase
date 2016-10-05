@@ -216,7 +216,9 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * @return EntityId[]
 	 */
 	protected function getResult( $offset = 0, $limit = 0 ) {
-		return $this->entitiesWithoutTerm->getEntitiesWithoutTerm( $this->termType, $this->language, $this->type, $limit, $offset );
+		$type = $this->type !== null ? [ $this->type ] : null;
+
+		return $this->entitiesWithoutTerm->getEntitiesWithoutTerm( $this->termType, $this->language, $type, $limit, $offset );
 	}
 
 	/**

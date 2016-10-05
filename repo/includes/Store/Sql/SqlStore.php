@@ -308,7 +308,7 @@ class SqlStore implements Store {
 	 * @return EntitiesWithoutTermFinder
 	 */
 	public function newEntitiesWithoutTermFinder() {
-		return new SqlEntitiesWithoutTermFinder( $this->entityIdComposer );
+		return new SqlEntitiesWithoutTermFinder( $this->entityIdParser, $this->entityNamespaceLookup );
 	}
 
 	/**
