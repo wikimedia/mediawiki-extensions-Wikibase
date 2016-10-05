@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_8f8a55be",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-05T14:00:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_cf2fed38",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_7466d8b9",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 6
@@ -59,6 +77,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_0fb66585",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-05T14:00:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_7466d8b9",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_94634ca6",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 6
@@ -70,6 +106,24 @@
       "writtenOn": "2016-10-05T07:58:03Z",
       "side": 1,
       "message": "Why is this here and not in the actual class (as newFromGlobalState or some such)? Also no tests for this method :(",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_0f7585c8",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-05T14:00:06Z",
+      "side": 1,
+      "message": "Other methods here does not have tests, what its doing is pretty straightforward.",
+      "parentUuid": "0e82f318_94634ca6",
       "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -99,6 +153,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_2f7de9b0",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-05T14:00:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_b403f0c0",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_8fe6d53d",
         "filename": "client/i18n/en.json",
         "patchSetId": 6
@@ -116,6 +188,24 @@
         "endLine": 108,
         "endChar": 23
       },
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_4f7a1db9",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-05T14:00:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_8fe6d53d",
       "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -145,6 +235,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_2f640911",
+        "filename": "client/i18n/qqq.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-05T14:00:06Z",
+      "side": 1,
+      "message": "I deleted the whole the message.",
+      "parentUuid": "0e82f318_94fa6cb4",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_b42a1029",
         "filename": "client/includes/Hooks/EditActionHookHandler.php",
         "patchSetId": 6
@@ -156,6 +264,24 @@
       "writtenOn": "2016-10-05T07:58:03Z",
       "side": 1,
       "message": "Undeclared member",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_cf3c4de2",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-05T14:00:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_b42a1029",
       "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -179,6 +305,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_8f2ed59e",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-05T14:00:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_741418ee",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_94118cfe",
         "filename": "client/includes/Hooks/EditActionHookHandler.php",
         "patchSetId": 6
@@ -196,6 +340,24 @@
         "endLine": 86,
         "endChar": 36
       },
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_a12bad76",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-05T14:00:06Z",
+      "side": 1,
+      "message": "Let\u0027s do it in a follow up patch. These names have been used in several places.",
+      "parentUuid": "0e82f318_94118cfe",
       "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -253,6 +415,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_a1148d45",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-05T14:00:06Z",
+      "side": 1,
+      "message": "I don\u0027t quite remember why I didn\u0027t use $entityIds. I think it was just for better readability",
+      "parentUuid": "0e82f318_94f0acc5",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_34ed40ef",
         "filename": "client/includes/Hooks/EditActionHookHandler.php",
         "patchSetId": 6
@@ -264,6 +444,24 @@
       "writtenOn": "2016-10-05T07:58:03Z",
       "side": 1,
       "message": "This should probably use the colon-separator and word-separator messages.",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_01cd59bc",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-05T14:00:06Z",
+      "side": 1,
+      "message": "What do you mean by colon separator? I checked Language.php and we only have semicolonList which is not useful here",
+      "parentUuid": "0e82f318_34ed40ef",
       "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -287,6 +485,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_c1efc119",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-05T14:00:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_ef0911e1",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_af2ab928",
         "filename": "client/includes/Hooks/EditActionHookHandler.php",
         "patchSetId": 6
@@ -304,6 +520,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_e1a6850c",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-05T14:00:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_af2ab928",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_b4d9305e",
         "filename": "client/includes/Hooks/EditActionHookHandler.php",
         "patchSetId": 6
@@ -315,6 +549,24 @@
       "writtenOn": "2016-10-05T07:58:03Z",
       "side": 1,
       "message": "the indentation here looks weird",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_819229a0",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-05T14:00:06Z",
+      "side": 1,
+      "message": "It was Phpstorm\u0027s idea.. Fixed now.",
+      "parentUuid": "0e82f318_b4d9305e",
       "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -344,6 +596,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_e13a0593",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-05T14:00:06Z",
+      "side": 1,
+      "message": "So should I replace it to what?",
+      "parentUuid": "0e82f318_b4c05056",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_d4c5c465",
         "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
         "patchSetId": 6
@@ -361,6 +631,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_013c798d",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-05T14:00:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_d4c5c465",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_6f6601ba",
         "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
         "patchSetId": 6
@@ -372,6 +660,24 @@
       "writtenOn": "2016-10-05T11:13:24Z",
       "side": 1,
       "message": "having this closing parenthesis here is a bit odd",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_21417d0e",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-05T14:00:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_6f6601ba",
       "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -401,6 +707,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_41491135",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-05T14:00:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_af0399c0",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_b4a770b9",
         "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
         "patchSetId": 6
@@ -418,6 +742,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_a14c8d44",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-05T14:00:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_b4a770b9",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_f4ad6899",
         "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
         "patchSetId": 6
@@ -429,6 +771,24 @@
       "writtenOn": "2016-10-05T07:58:03Z",
       "side": 1,
       "message": "How is this test case different from #0 (except for the message?)",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_21589dfc",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-05T14:00:06Z",
+      "side": 1,
+      "message": "You\u0027re right. Removed now.",
+      "parentUuid": "0e82f318_f4ad6899",
       "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -458,6 +818,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_a163ada5",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-05T14:00:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_94c7cc66",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_34d46017",
         "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
         "patchSetId": 6
@@ -469,6 +847,24 @@
       "writtenOn": "2016-10-05T07:58:03Z",
       "side": 1,
       "message": "You create this $title mock twice (here and in getEditor), why not just create getTitle function?",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_81fdc9b0",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-05T14:00:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_34d46017",
       "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -498,6 +894,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_81f309d1",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-05T14:00:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_0f5825fc",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_f4b648f5",
         "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
         "patchSetId": 6
@@ -521,6 +935,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_a111edfd",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-05T14:00:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_f4b648f5",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_4f6dbd94",
         "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
         "patchSetId": 6
@@ -532,6 +964,24 @@
       "writtenOn": "2016-10-05T11:13:24Z",
       "side": 1,
       "message": "this could be called getEditPage for consistency",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_611b7520",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-05T14:00:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_4f6dbd94",
       "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
