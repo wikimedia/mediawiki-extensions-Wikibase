@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_f4b0088b",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-05T09:47:27Z",
+      "side": 1,
+      "message": "I don\u0027t think this expectation holds even today. Also, how will this interact with https://phabricator.wikimedia.org/T44783 (which we will eventually implement).",
+      "revId": "4b108ebf57841a37a9246b8fc295d9930583504f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_342b8094",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/ChangeRequeuerTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-05T09:47:27Z",
+      "side": 1,
+      "message": "Missing @group Wikibase",
+      "revId": "4b108ebf57841a37a9246b8fc295d9930583504f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
