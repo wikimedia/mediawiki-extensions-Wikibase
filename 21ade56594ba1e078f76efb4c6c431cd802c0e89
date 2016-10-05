@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_2fc88959",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-10-05T11:45:52Z",
+      "side": 1,
+      "message": "I\u0027m not sure either. This seems to be the main (or the only?) place where foreign entities really cause trouble and should not be allowed so using InvalidArgumentException seems ok here. Maybe someone else has a strong opinion about it.",
+      "parentUuid": "0e82f318_54cc7465",
+      "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_14b03cd7",
         "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2016-10-05T08:36:12Z",
       "side": 1,
       "message": "shouldn\u0027t this also say that @throws InvalidArgumentException?",
+      "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_0f202595",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-10-05T11:45:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_14b03cd7",
       "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_cf936d59",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-10-05T11:45:52Z",
+      "side": 1,
+      "message": "I changed it to returning false for this one.",
+      "parentUuid": "0e82f318_d436a44e",
+      "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_34c8e059",
         "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2016-10-05T08:36:12Z",
       "side": 1,
       "message": "@throws InvalidArgumentException",
+      "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_0f8ae51b",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-10-05T11:45:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_34c8e059",
       "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_2f824902",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-10-05T11:45:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_94bb4cb9",
+      "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_74bed8ac",
         "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
         "patchSetId": 1
@@ -98,6 +188,24 @@
       "writtenOn": "2016-10-05T08:36:12Z",
       "side": 1,
       "message": "Shouldn\u0027t this assertion be checked before it even gets here? I mean shouldn\u0027t rather public methods saveEntity and saveRedirect take care of it? The latter actually already does it in your patch.",
+      "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_b4ba106b",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-10-05T11:45:52Z",
+      "side": 1,
+      "message": "Yes, definitely! This was not meant to be here!",
+      "parentUuid": "0e82f318_74bed8ac",
       "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_4f7f7d10",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-10-05T11:45:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_b4dbf023",
+      "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_d4e064ca",
         "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
         "patchSetId": 1
@@ -138,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_6f78c126",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-10-05T11:45:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_d4e064ca",
+      "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_f4e1e8cb",
         "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
         "patchSetId": 1
@@ -149,6 +293,24 @@
       "writtenOn": "2016-10-05T08:36:12Z",
       "side": 1,
       "message": "@throws InvalidArgumentException",
+      "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_af8d5930",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-10-05T11:45:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_f4e1e8cb",
       "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -178,6 +340,30 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_ef93d14f",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-10-05T11:45:52Z",
+      "side": 1,
+      "message": "As we discussed in person it is a bit confusing whether or not it should be possible to watch entities outside of their original repository.",
+      "parentUuid": "0e82f318_74ec18b9",
+      "range": {
+        "startLine": 387,
+        "startChar": 7,
+        "endLine": 387,
+        "endChar": 9
+      },
+      "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_94e98ca9",
         "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
         "patchSetId": 1
@@ -189,6 +375,24 @@
       "writtenOn": "2016-10-05T08:36:12Z",
       "side": 1,
       "message": "Regerdless of whether we want to allow watching foreign entities in the future, or whether it is clearly not going to happen ever, wouldn\u0027t it make sense to simply return false here when foreign entity id is passed in?\nThat would not require changing code using this method to handle exceptions, for, I believe, clearly \"is not watching\" cases.",
+      "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_4f9e9d59",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-10-05T11:45:52Z",
+      "side": 1,
+      "message": "As we discussed in person I will leave the \"assertLocalEntityId\" here for now as it is unclear whether isWatching means for foreign entities the user is watching a foreign entity in this wiki or watching the entity in their original wiki.",
+      "parentUuid": "0e82f318_94e98ca9",
       "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
