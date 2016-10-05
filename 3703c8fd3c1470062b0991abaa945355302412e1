@@ -130,6 +130,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_21fedd66",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-05T14:09:27Z",
+      "side": 1,
+      "message": "That\u0027s not a good reason to write more legacy code. Methods like this have broken in the past (for example in case a constructor signature changes but that\u0027s not reflected here).",
+      "parentUuid": "0e82f318_0f7585c8",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_b403f0c0",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 6
