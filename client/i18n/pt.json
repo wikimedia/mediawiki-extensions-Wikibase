@@ -74,6 +74,7 @@
 	"wikibase-pageswithbadges-badge": "Emblema:",
 	"wikibase-pageswithbadges-submit": "Mostrar páginas",
 	"entityusage": "Utilização de Identidade",
+	"entityusage-summary": "Esta página lista as páginas que usam a determinada entidade (ex.: Q42). A lista é ordenada por ordem decrescente pelo ID de página, para que novas páginas sejam mostradas primeiro.",
 	"wikibase-entityusage-invalid-id": "$1 não é um número de identificação válido.",
 	"wikibase-entityusage-legend": "Lista de páginas que usam uma determinada entidade",
 	"wikibase-entityusage-entity": "Entidade:",
