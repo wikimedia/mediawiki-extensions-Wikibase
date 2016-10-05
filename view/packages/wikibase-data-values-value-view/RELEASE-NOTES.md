@@ -1,5 +1,9 @@
 # ValueView release notes
 
+## 0.17.4 (2016-10-05)
+* Handle null upstream values in `jQuery.valueview.ExpertExtender.LanguageSelector::onInitialShow`.
+* Properly forward API error messages in `jquery.ui.unitsuggester`.
+
 ## 0.17.3 (2016-08-01)
 * Fixed `jQuery.ui.suggester` font size.
 
