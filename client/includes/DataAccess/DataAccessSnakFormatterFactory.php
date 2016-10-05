@@ -4,7 +4,6 @@ namespace Wikibase\Client\DataAccess;
 
 use Language;
 use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatter;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\Client\Usage\UsageTrackingSnakFormatter;
 use Wikibase\LanguageFallbackChainFactory;
@@ -13,6 +12,9 @@ use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 
 /**
+ * A factory for SnakFormatters in a client context, to be reused in different methods that "access
+ * repository data" from a client (typically parser functions and Lua scripts).
+ *
  * @since 0.5
  *
  * @license GPL-2.0+
@@ -53,27 +55,24 @@ class DataAccessSnakFormatterFactory {
 		Language $language,
 		UsageAccumulator $usageAccumulator
 	) {
-		$languageFallbackChain = $this->languageFallbackChainFactory->newFromLanguage(
+		$fallbackChain = $this->languageFallbackChainFactory->newFromLanguage(
 			$language,
 			LanguageFallbackChainFactory::FALLBACK_ALL
 		);
 
-		$options = new FormatterOptions( array(
-			FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $languageFallbackChain,
-			ValueFormatter::OPT_LANG => $language->getCode(),
-			// ...more options... (?)
-		) );
+		$options = new FormatterOptions( [
+			FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $fallbackChain,
+			SnakFormatter::OPT_LANG => $language->getCode(),
+		] );
 
-		$snakFormatter = new UsageTrackingSnakFormatter(
+		return new UsageTrackingSnakFormatter(
 			$this->snakFormatterFactory->getSnakFormatter(
 				SnakFormatter::FORMAT_WIKI,
 				$options
 			),
 			$usageAccumulator,
-			$languageFallbackChain->getFetchLanguageCodes()
+			$fallbackChain->getFetchLanguageCodes()
 		);
-
-		return $snakFormatter;
 	}
 
 }

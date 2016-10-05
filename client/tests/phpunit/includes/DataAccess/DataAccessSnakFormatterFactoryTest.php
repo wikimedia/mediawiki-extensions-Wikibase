@@ -30,10 +30,14 @@ class DataAccessSnakFormatterFactoryTest extends PHPUnit_Framework_TestCase {
 		);
 	}
 
+	/**
+	 * @return LanguageFallbackChainFactory
+	 */
 	private function getLanguageFallbackChainFactory() {
 		$realFactory = new LanguageFallbackChainFactory();
 
 		$factory = $this->getMock( LanguageFallbackChainFactory::class );
+
 		$factory->expects( $this->once() )
 			->method( 'newFromLanguage' )
 			->with( $this->isInstanceOf( Language::class ), LanguageFallbackChainFactory::FALLBACK_ALL )
@@ -42,6 +46,9 @@ class DataAccessSnakFormatterFactoryTest extends PHPUnit_Framework_TestCase {
 		return $factory;
 	}
 
+	/**
+	 * @return OutputFormatSnakFormatterFactory
+	 */
 	private function getOutputFormatSnakFormatterFactory() {
 		$factory = $this->getMockBuilder( OutputFormatSnakFormatterFactory::class )
 			->disableOriginalConstructor()

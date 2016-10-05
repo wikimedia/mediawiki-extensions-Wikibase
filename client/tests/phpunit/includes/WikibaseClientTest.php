@@ -111,8 +111,8 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetLanguageFallbackLabelDescriptionLookupFactory() {
-		$returnValue = $this->getWikibaseClient()->getLanguageFallbackLabelDescriptionLookupFactory();
-		$this->assertInstanceOf( LanguageFallbackLabelDescriptionLookupFactory::class, $returnValue );
+		$instance = $this->getWikibaseClient()->getLanguageFallbackLabelDescriptionLookupFactory();
+		$this->assertInstanceOf( LanguageFallbackLabelDescriptionLookupFactory::class, $instance );
 	}
 
 	public function testGetStoreReturnType() {
@@ -272,13 +272,8 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetOtherProjectsSidebarGeneratorFactoryReturnType() {
-		$settings = $this->getWikibaseClient()->getSettings();
-		$settings->setSetting( 'otherProjectsLinks', array( 'my_wiki' ) );
-
-		$this->assertInstanceOf(
-			OtherProjectsSidebarGeneratorFactory::class,
-			$this->getWikibaseClient()->getOtherProjectsSidebarGeneratorFactory()
-		);
+		$instance = $this->getWikibaseClient()->getOtherProjectsSidebarGeneratorFactory();
+		$this->assertInstanceOf( OtherProjectsSidebarGeneratorFactory::class, $instance );
 	}
 
 	public function testGetOtherProjectsSitesProvider() {
@@ -370,20 +365,16 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetDataAccessLanguageFallbackChain() {
 		$lang = Language::factory( 'de' );
+		$fallbackChain = $this->getWikibaseClient()->getDataAccessLanguageFallbackChain( $lang );
 
-		$dataAccessLanguageFallbackChain = $this->getWikibaseClient()
-			->getDataAccessLanguageFallbackChain( $lang );
-
-		$this->assertInstanceOf( LanguageFallbackChain::class, $dataAccessLanguageFallbackChain );
-		$langCodes = $dataAccessLanguageFallbackChain->getFetchLanguageCodes();
-
+		$this->assertInstanceOf( LanguageFallbackChain::class, $fallbackChain );
 		// "de" falls back to "en"
-		$this->assertCount( 2, $langCodes );
+		$this->assertCount( 2, $fallbackChain->getFetchLanguageCodes() );
 	}
 
 	public function testGetDataAccessSnakFormatterFactory() {
-		$dataAccessSnakFormatterFactory = $this->getWikibaseClient()->getDataAccessSnakFormatterFactory();
-		$this->assertInstanceOf( DataAccessSnakFormatterFactory::class, $dataAccessSnakFormatterFactory );
+		$instance = $this->getWikibaseClient()->getDataAccessSnakFormatterFactory();
+		$this->assertInstanceOf( DataAccessSnakFormatterFactory::class, $instance );
 	}
 
 	/**
