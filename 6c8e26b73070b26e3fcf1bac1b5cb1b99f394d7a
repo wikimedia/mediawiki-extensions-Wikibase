@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_6170d506",
+        "filename": "client/includes/DataAccess/DataAccessSnakFormatterFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-05T14:54:12Z",
+      "side": 1,
+      "message": "I think this name is not optimal. From the name alone it\u0027s a factory for SnakFormatters, but these formatters are somehow special. Something with \"data access\". But what does this mean? What is special about the formatters? What is \"data access\" anyway?\n\nGood for now. Let\u0027s try to find a better name later.",
+      "range": {
+        "startLine": 22,
+        "startChar": 6,
+        "endLine": 22,
+        "endChar": 36
+      },
+      "revId": "6c8e26b73070b26e3fcf1bac1b5cb1b99f394d7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_41ae712c",
+        "filename": "client/includes/DataAccess/DataAccessSnakFormatterFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-05T14:54:12Z",
+      "side": 1,
+      "message": "SnakFormatter please, even if it is the same constant anyway.",
+      "range": {
+        "startLine": 63,
+        "startChar": 3,
+        "endLine": 63,
+        "endChar": 17
+      },
+      "revId": "6c8e26b73070b26e3fcf1bac1b5cb1b99f394d7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_219fbd07",
+        "filename": "client/includes/DataAccess/DataAccessSnakFormatterFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-05T14:54:12Z",
+      "side": 1,
+      "message": "This line is obscure. Please remove.",
+      "revId": "6c8e26b73070b26e3fcf1bac1b5cb1b99f394d7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_81a4e948",
+        "filename": "client/includes/DataAccess/DataAccessSnakFormatterFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-05T14:54:12Z",
+      "side": 1,
+      "message": "Personally I do like a straight \"return\" more.",
+      "range": {
+        "startLine": 67,
+        "startChar": 2,
+        "endLine": 67,
+        "endChar": 16
+      },
+      "revId": "6c8e26b73070b26e3fcf1bac1b5cb1b99f394d7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_c17fc1db",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-05T14:54:12Z",
+      "side": 1,
+      "message": "I prefer a short \"$instance\" in such cases.",
+      "range": {
+        "startLine": 385,
+        "startChar": 2,
+        "endLine": 385,
+        "endChar": 33
+      },
+      "revId": "6c8e26b73070b26e3fcf1bac1b5cb1b99f394d7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
