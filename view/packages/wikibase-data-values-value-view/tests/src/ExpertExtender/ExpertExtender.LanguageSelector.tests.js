@@ -38,6 +38,33 @@
 		}
 	);
 
+	QUnit.test( 'initial draw works when the upstream value is null', function( assert ) {
+		assert.expect( 1 );
+		var languageSelector = new ExpertExtender.LanguageSelector(
+			{
+				getAll: function() { return [ 'en' ]; },
+				getName: function( code ) { return code === 'en' ? 'en label' : null; }
+			},
+			messageProvider,
+			function() {
+				return null;
+			}
+		);
+		var $extender = $( '<div />' );
+
+		languageSelector.init( $extender );
+
+		if ( languageSelector.onInitialShow ) {
+			languageSelector.onInitialShow();
+		}
+
+		if ( languageSelector.draw ) {
+			languageSelector.draw();
+		}
+
+		assert.ok( true );
+	} );
+
 	QUnit.test( 'value does not change if upstream value changes', function( assert ) {
 		assert.expect( 2 );
 		var upstreamValue = 'en';

@@ -122,7 +122,7 @@
 		 */
 		onInitialShow: function() {
 			var value = this._getUpstreamValue();
-			if ( this._labels ) {
+			if ( this._labels && value ) {
 				this.$selector.data( 'languagesuggester' ).setSelectedValue( value, this._labels[ value ] || value );
 			} else {
 				this.$selector.val( value );
