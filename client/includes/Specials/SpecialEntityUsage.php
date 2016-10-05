@@ -53,7 +53,8 @@ class SpecialEntityUsage extends QueryPage {
 	 * @param string $subPage
 	 */
 	public function execute( $subPage ) {
-		$this->prepareParams( $subPage );
+		$entity = $this->getRequest()->getText( 'entity', $subPage );
+		$this->prepareParams( $entity );
 
 		if ( $this->entityId !== null ) {
 			parent::execute( $subPage );
@@ -65,11 +66,9 @@ class SpecialEntityUsage extends QueryPage {
 	}
 
 	/**
-	 * @param string $subPage
+	 * @param string $entity
 	 */
-	private function prepareParams( $subPage ) {
-		$entity = $this->getRequest()->getText( 'entity', $subPage );
-
+	public function prepareParams( $entity ) {
 		if ( $entity ) {
 			try {
 				$this->entityId = $this->idParser->parse( $entity );
@@ -128,9 +127,11 @@ class SpecialEntityUsage extends QueryPage {
 	public function getQueryInfo() {
 		$joinConds = [ 'wbc_entity_usage' => [ 'JOIN', [ 'page_id = eu_page_id' ] ] ];
 		$conds = [ 'eu_entity_id' => $this->entityId->getSerialization() ];
-		$groupConcat = wfGetDB( DB_REPLICA )
-			->buildGroupConcatField( '|', 'wbc_entity_usage',
-				'eu_aspect', $conds, $joinConds
+		$groupConcat = wfGetDB( DB_REPLICA )->buildGroupConcatField(
+			'|',
+			'wbc_entity_usage',
+			'eu_aspect',
+			'eu_page_id = page_id'
 		);
 
 		return [
