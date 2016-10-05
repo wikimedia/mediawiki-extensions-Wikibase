@@ -8,7 +8,6 @@ use StubUserLang;
 use Title;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\InterwikiSorter;
 use Wikibase\LangLinkHandler;
 use Wikibase\NamespaceChecker;
 
@@ -38,16 +37,6 @@ class ParserOutputUpdateHookHandlers {
 	 */
 	private $parserOutputDataUpdater;
 
-	/**
-	 * @var InterwikiSorter
-	 */
-	private $interwikiSorter;
-
-	/**
-	 * @var bool
-	 */
-	private $alwaysSort;
-
 	public static function newFromGlobalState() {
 		global $wgLang;
 		StubUserLang::unstub( $wgLang );
@@ -55,17 +44,10 @@ class ParserOutputUpdateHookHandlers {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$settings = $wikibaseClient->getSettings();
 
-		$interwikiSorter = new InterwikiSorter(
-			$settings->getSetting( 'sort' ),
-			$settings->getSetting( 'interwikiSortOrders' ),
-			$settings->getSetting( 'sortPrepend' )
-		);
-
 		return new ParserOutputUpdateHookHandlers(
 			$wikibaseClient->getNamespaceChecker(),
 			$wikibaseClient->getLangLinkHandler(),
 			$wikibaseClient->getParserOutputDataUpdater(),
-			$interwikiSorter,
 			$settings->getSetting( 'alwaysSort' )
 		);
 	}
@@ -92,22 +74,16 @@ class ParserOutputUpdateHookHandlers {
 	 * @param NamespaceChecker $namespaceChecker
 	 * @param LangLinkHandler $langLinkHandler
 	 * @param ClientParserOutputDataUpdater $parserOutputDataUpdater
-	 * @param InterwikiSorter $sorter
-	 * @param boolean $alwaysSort
 	 */
 	public function __construct(
 		NamespaceChecker $namespaceChecker,
 		LangLinkHandler $langLinkHandler,
-		ClientParserOutputDataUpdater $parserOutputDataUpdater,
-		InterwikiSorter $sorter,
-		$alwaysSort
+		ClientParserOutputDataUpdater $parserOutputDataUpdater
 	) {
 
 		$this->namespaceChecker = $namespaceChecker;
 		$this->langLinkHandler = $langLinkHandler;
 		$this->parserOutputDataUpdater = $parserOutputDataUpdater;
-		$this->interwikiSorter = $sorter;
-		$this->alwaysSort = $alwaysSort;
 	}
 
 	/**
@@ -135,12 +111,6 @@ class ParserOutputUpdateHookHandlers {
 		$this->parserOutputDataUpdater->updateItemIdProperty( $title, $parserOutput );
 		$this->parserOutputDataUpdater->updateOtherProjectsLinksData( $title, $parserOutput );
 		$this->parserOutputDataUpdater->updateBadgesProperty( $title, $parserOutput );
-
-		if ( $useRepoLinks || $this->alwaysSort ) {
-			$interwikiLinks = $parserOutput->getLanguageLinks();
-			$sortedLinks = $this->interwikiSorter->sortLinks( $interwikiLinks );
-			$parserOutput->setLanguageLinks( $sortedLinks );
-		}
 
 		return true;
 	}
