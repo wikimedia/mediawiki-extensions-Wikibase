@@ -10,6 +10,7 @@ use RuntimeException;
 use Site;
 use SiteStore;
 use Wikibase\Client\Changes\ChangeHandler;
+use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
@@ -378,6 +379,11 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 
 		// "de" falls back to "en"
 		$this->assertCount( 2, $langCodes );
+	}
+
+	public function testGetDataAccessSnakFormatterFactory() {
+		$dataAccessSnakFormatterFactory = $this->getWikibaseClient()->getDataAccessSnakFormatterFactory();
+		$this->assertInstanceOf( DataAccessSnakFormatterFactory::class, $dataAccessSnakFormatterFactory );
 	}
 
 	/**

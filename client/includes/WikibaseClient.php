@@ -33,6 +33,7 @@ use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\Changes\ChangeRunCoalescer;
 use Wikibase\Client\Changes\WikiPageUpdater;
+use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory;
 use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
@@ -1055,10 +1056,19 @@ final class WikibaseClient {
 		return new StatementGroupRendererFactory(
 			$propertyIdResolver,
 			new SnaksFinder(),
-			$this->getLanguageFallbackChainFactory(),
-			$this->getSnakFormatterFactory(),
 			$entityLookup,
+			$this->getDataAccessSnakFormatterFactory(),
 			$this->getSettings()->getSetting( 'allowDataAccessInUserLanguage' )
+		);
+	}
+
+	/**
+	 * @return DataAccessSnakFormatterFactory
+	 */
+	public function getDataAccessSnakFormatterFactory() {
+		return new DataAccessSnakFormatterFactory(
+			$this->getLanguageFallbackChainFactory(),
+			$this->getSnakFormatterFactory()
 		);
 	}
 
