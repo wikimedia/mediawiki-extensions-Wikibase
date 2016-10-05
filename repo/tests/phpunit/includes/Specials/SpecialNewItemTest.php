@@ -2,8 +2,13 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
+use FauxRequest;
+use RequestContext;
 use SpecialPageTestBase;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Specials\SpecialNewItem;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialNewItem
@@ -17,7 +22,6 @@ use Wikibase\Repo\Specials\SpecialNewItem;
  * @group WikibaseSpecialPage
  *
  * @group Database
- *        ^---- needed because we rely on Title objects internally
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -30,46 +34,45 @@ class SpecialNewItemTest extends SpecialPageTestBase {
 		return new SpecialNewItem();
 	}
 
-	public function testExecute() {
+	public function testExecute_creationForm() {
 		//TODO: Verify that more of the output is correct.
-		//TODO: Verify that item creation works via a faux post request
 
-		$this->setMwGlobals( 'wgGroupPermissions', array( '*' => array( 'createpage' => true ) ) );
+		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [ 'createpage' => true ] ] );
 
-		$matchers['label'] = array(
+		$matchers['label'] = [
 			'tag' => 'div',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-newentity-label',
-			),
-			'child' => array(
+			],
+			'child' => [
 				'tag' => 'input',
-				'attributes' => array(
+				'attributes' => [
 					'name' => 'label',
-				)
-			) );
-		$matchers['description'] = array(
+				]
+			] ];
+		$matchers['description'] = [
 			'tag' => 'div',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-newentity-description',
-			),
-			'child' => array(
+			],
+			'child' => [
 				'tag' => 'input',
-				'attributes' => array(
+				'attributes' => [
 					'name' => 'description',
-				)
-			) );
-		$matchers['submit'] = array(
+				]
+			] ];
+		$matchers['submit'] = [
 			'tag' => 'div',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-newentity-submit',
-			),
-			'child' => array(
+			],
+			'child' => [
 				'tag' => 'button',
-				'attributes' => array(
+				'attributes' => [
 					'type' => 'submit',
 					'name' => 'submit',
-				)
-			) );
+				]
+			] ];
 
 		list( $output, ) = $this->executeSpecialPage( '' );
 		foreach ( $matchers as $key => $matcher ) {
@@ -83,7 +86,55 @@ class SpecialNewItemTest extends SpecialPageTestBase {
 		foreach ( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
 		}
+	}
 
+	public function testExecute_itemCreation() {
+		$user = RequestContext::getMain()->getUser();
+
+		$this->setMwGlobals(
+			[
+				'wgGroupPermissions' =>
+				[ '*' => [
+					'createpage' => true,
+					'edit' => true
+				] ],
+				'wgArticlePath' => '/$1',
+				'wgServer' => 'much.data',
+			]
+		);
+
+		$label = 'SpecialNewItemTest label';
+		$description = 'SpecialNewItemTest description';
+		$request = new FauxRequest(
+			[
+				'lang' => 'en',
+				'label' => $label,
+				'description' => $description,
+				'aliases' => '',
+				'wpEditToken' => $user->getEditToken()
+			],
+			true
+		);
+
+		list( $output, $webResponse ) = $this->executeSpecialPage( '', $request );
+		$this->assertSame( '', $output );
+
+		$itemUrl = $webResponse->getHeader( 'location' );
+		$itemIdSerialization = preg_replace( '@much\.data/(.*:)?(Q\d+)@', '$2', $itemUrl );
+		$itemId = new ItemId( $itemIdSerialization );
+
+		/* @var $item Item */
+		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $itemId );
+		$this->assertInstanceOf( Item::class, $item );
+
+		$this->assertSame(
+			$label,
+			$item->getLabels()->getByLanguage( 'en' )->getText()
+		);
+		$this->assertSame(
+			$description,
+			$item->getDescriptions()->getByLanguage( 'en' )->getText()
+		);
 	}
 
 }
