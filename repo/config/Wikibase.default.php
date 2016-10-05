@@ -193,5 +193,10 @@ return [
 	'pagePropertiesRdf' => [
 		'wb-sitelinks' => [ 'name' => 'sitelinks', 'type' => 'integer' ],
 		'wb-claims' => [ 'name' => 'statements', 'type' => 'integer' ],
+	],
+
+	'supportedEntityTypesForEntitiesWithoutTermListings' => [
+		'item',
+		'property'
 	]
 ];
