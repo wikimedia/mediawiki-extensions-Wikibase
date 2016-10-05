@@ -16,8 +16,31 @@ use Wikibase\Rdf\JulianDateTimeValueCleaner;
  *
  * @license GPL-2.0+
  * @author Stas Malyshev
+ * @author Thiemo Mättig
  */
 class DateTimeValueCleanerTest extends \PHPUnit_Framework_TestCase {
+
+	/**
+	 * @dataProvider illegalTimeValueProvider
+	 */
+	public function testIllegalTimeValue( TimeValue $value, $xsd11 ) {
+		$cleaner = new JulianDateTimeValueCleaner( $xsd11 );
+		$this->assertNull( $cleaner->getStandardValue( $value ) );
+	}
+
+	public function illegalTimeValueProvider() {
+		$day = TimeValue::PRECISION_DAY;
+		$year0 = '+0000-01-01T00:00:00Z';
+		$year0Greg = new TimeValue( $year0, 0, 0, 0, $day, TimeValue::CALENDAR_GREGORIAN );
+		$year0Jul = new TimeValue( $year0, 0, 0, 0, $day, TimeValue::CALENDAR_JULIAN );
+
+		return [
+			[ $year0Greg, false ],
+			[ $year0Greg, true ],
+			[ $year0Jul, false ],
+			[ $year0Jul, true ],
+		];
+	}
 
 	public function getDates() {
 		$greg = TimeValue::CALENDAR_GREGORIAN;
