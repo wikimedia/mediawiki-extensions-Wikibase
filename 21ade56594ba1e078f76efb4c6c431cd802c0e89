@@ -1,0 +1,197 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_54cc7465",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-05T08:36:12Z",
+      "side": 1,
+      "message": "I am not sure how we want to handle such \"illegal\" cases. If we want to have some case-specific handling then maybe having a dedicated Exception class deriving from InvalidArgumentException would make sense. I am not saying this should be changed now, just wondering.",
+      "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_14b03cd7",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-05T08:36:12Z",
+      "side": 1,
+      "message": "shouldn\u0027t this also say that @throws InvalidArgumentException?",
+      "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_d436a44e",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-05T08:36:12Z",
+      "side": 1,
+      "message": "Kind of similar to what I said in the comment in isWatching, wouldn\u0027t it be worth returning false instead of throwing an exception here?",
+      "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_34c8e059",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-05T08:36:12Z",
+      "side": 1,
+      "message": "@throws InvalidArgumentException",
+      "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_94bb4cb9",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-05T08:36:12Z",
+      "side": 1,
+      "message": "@throws InvalidArgumentException",
+      "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_74bed8ac",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-05T08:36:12Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this assertion be checked before it even gets here? I mean shouldn\u0027t rather public methods saveEntity and saveRedirect take care of it? The latter actually already does it in your patch.",
+      "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_b4dbf023",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-05T08:36:12Z",
+      "side": 1,
+      "message": "@throws InvalidArgumentException",
+      "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_d4e064ca",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-05T08:36:12Z",
+      "side": 1,
+      "message": "@throws InvalidArgumentException",
+      "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_f4e1e8cb",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-05T08:36:12Z",
+      "side": 1,
+      "message": "@throws InvalidArgumentException",
+      "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_74ec18b9",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-05T08:36:12Z",
+      "side": 1,
+      "message": "I believe this is fine at this point but is it actually worth considering do we want to allow users to watch foreign entities? Does this complicate something/change some plans?",
+      "range": {
+        "startLine": 387,
+        "startChar": 7,
+        "endLine": 387,
+        "endChar": 9
+      },
+      "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_94e98ca9",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-05T08:36:12Z",
+      "side": 1,
+      "message": "Regerdless of whether we want to allow watching foreign entities in the future, or whether it is clearly not going to happen ever, wouldn\u0027t it make sense to simply return false here when foreign entity id is passed in?\nThat would not require changing code using this method to handle exceptions, for, I believe, clearly \"is not watching\" cases.",
+      "revId": "21ade56594ba1e078f76efb4c6c431cd802c0e89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
