@@ -1,0 +1,369 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_3470e06e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-05T07:58:03Z",
+      "side": 1,
+      "message": "Should be \"client\"",
+      "range": {
+        "startLine": 7,
+        "startChar": 29,
+        "endLine": 7,
+        "endChar": 35
+      },
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_7466d8b9",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-05T07:58:03Z",
+      "side": 1,
+      "message": "Other parameters undocumented",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_94634ca6",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-05T07:58:03Z",
+      "side": 1,
+      "message": "Why is this here and not in the actual class (as newFromGlobalState or some such)? Also no tests for this method :(",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_b403f0c0",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-05T07:58:03Z",
+      "side": 1,
+      "message": "You should rather use !\u003d\u003d \u0027\u0027 here",
+      "range": {
+        "startLine": 451,
+        "startChar": 44,
+        "endLine": 451,
+        "endChar": 49
+      },
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_94fa6cb4",
+        "filename": "client/i18n/qqq.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-05T07:58:03Z",
+      "side": 1,
+      "message": "Should rather be \"the edit page\"",
+      "range": {
+        "startLine": 119,
+        "startChar": 63,
+        "endLine": 119,
+        "endChar": 72
+      },
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_b42a1029",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-05T07:58:03Z",
+      "side": 1,
+      "message": "Undeclared member",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_741418ee",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-05T07:58:03Z",
+      "side": 1,
+      "message": "Missing array type hint for $rowAspects",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_94118cfe",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-05T07:58:03Z",
+      "side": 1,
+      "message": "Message re-use… either rename that message and change the Qqq or duplicate it.",
+      "range": {
+        "startLine": 86,
+        "startChar": 5,
+        "endLine": 86,
+        "endChar": 36
+      },
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_d4dea443",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-05T07:58:03Z",
+      "side": 1,
+      "message": "This function is rather large… try to split it up?",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_94f0acc5",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-05T07:58:03Z",
+      "side": 1,
+      "message": "Why is this needed? Can\u0027t you just use $entityIds instead?",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_34ed40ef",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-05T07:58:03Z",
+      "side": 1,
+      "message": "This should probably use the colon-separator and word-separator messages.",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_b4d9305e",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-05T07:58:03Z",
+      "side": 1,
+      "message": "the indentation here looks weird",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_b4c05056",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-05T07:58:03Z",
+      "side": 1,
+      "message": "Should not use fully qualified class name \"\\PHPUnit_Framework_TestCase\"",
+      "range": {
+        "startLine": 31,
+        "startChar": 40,
+        "endLine": 31,
+        "endChar": 67
+      },
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_d4c5c465",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-05T07:58:03Z",
+      "side": 1,
+      "message": "missing type for $expected",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_b4a770b9",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-05T07:58:03Z",
+      "side": 1,
+      "message": "These two should be on own line each.",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_f4ad6899",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-05T07:58:03Z",
+      "side": 1,
+      "message": "How is this test case different from #0 (except for the message?)",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_94c7cc66",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-05T07:58:03Z",
+      "side": 1,
+      "message": "Old style array syntax?",
+      "range": {
+        "startLine": 119,
+        "startChar": 18,
+        "endLine": 119,
+        "endChar": 24
+      },
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_34d46017",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-05T07:58:03Z",
+      "side": 1,
+      "message": "You create this $title mock twice (here and in getEditor), why not just create getTitle function?",
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_f4b648f5",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-05T07:58:03Z",
+      "side": 1,
+      "message": "string|null $text",
+      "range": {
+        "startLine": 225,
+        "startChar": 11,
+        "endLine": 225,
+        "endChar": 17
+      },
+      "revId": "3703c8fd3c1470062b0991abaa945355302412e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
