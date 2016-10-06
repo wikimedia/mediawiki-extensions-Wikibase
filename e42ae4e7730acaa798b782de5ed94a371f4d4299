@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_cbb8b727",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-06T12:40:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_08bad5bb",
+      "revId": "e42ae4e7730acaa798b782de5ed94a371f4d4299",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_48b04dd8",
         "filename": "client/resources/wikibase.client.action.edit.collapsibleFooter.js",
         "patchSetId": 9
