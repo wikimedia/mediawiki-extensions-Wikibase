@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_e8dbc122",
+        "filename": "client/includes/Specials/SpecialEntityUsage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-06T10:39:00Z",
+      "side": 1,
+      "message": "Do we have a regression test for this fix? I mean a test that will fail with the old code, but pass with the new code?",
+      "revId": "a19b1e223b962920c70f74f2929cdfea9855b0c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
