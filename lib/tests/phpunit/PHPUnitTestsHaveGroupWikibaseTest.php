@@ -44,8 +44,14 @@ class PHPUnitTestsHaveGroupWikibaseTest extends PHPUnit_Framework_TestCase {
 		];
 	}
 
+	/**
+	 * @param string $string
+	 * @param string $dir
+	 *
+	 * @return string[]
+	 */
 	private function getTestFilesWithoutGroup( $string, $dir ) {
-		$string = '@group ' . $string;
+		$pattern = '/@group ' . preg_quote( $string, '/' ) . '\b/';
 		$files = [];
 		$directoryIterator = new RecursiveDirectoryIterator( $dir );
 
@@ -55,12 +61,13 @@ class PHPUnitTestsHaveGroupWikibaseTest extends PHPUnit_Framework_TestCase {
 		foreach ( new RecursiveIteratorIterator( $directoryIterator ) as $fileInfo ) {
 			if ( $fileInfo->isFile() && substr( $fileInfo->getFilename(), -8 ) === 'Test.php' ) {
 				$text = file_get_contents( $fileInfo->getPathname() );
-				if ( stripos( $text, 'abstract class' ) !== false ) {
+
+				if ( strpos( $text, 'abstract class' ) !== false ) {
 					// Ignore abstract base classes.
 					continue;
 				}
 
-				if ( preg_match( '@' . preg_quote( $string, '@' ) . '[^\w]@i', $text ) === 0 ) {
+				if ( preg_match( $pattern, $text ) === 0 ) {
 					$files[] = $fileInfo->getPathname();
 				}
 			}

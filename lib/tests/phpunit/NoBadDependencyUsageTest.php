@@ -28,26 +28,24 @@ class NoBadDependencyUsageTest extends PHPUnit_Framework_TestCase {
 		$this->assertStringNotInLib( 'Wikibase\\Client\\', 2 );
 	}
 
+	/**
+	 * @param string $string
+	 * @param int $maxAllowance
+	 */
 	private function assertStringNotInLib( $string, $maxAllowance ) {
-		$this->assertStringNotInDir(
-			$string,
-			__DIR__ . '/../../',
-			$maxAllowance
+		$this->assertLessThanOrEqual(
+			$maxAllowance,
+			$this->countStringInDir( $string, __DIR__ . '/../../' ),
+			'You are not allowed to use ' . $string . ' in this component'
 		);
 	}
 
-	private function assertStringNotInDir( $string, $dirs, $maxAllowance ) {
-		$dirs = (array)$dirs;
-
-		foreach ( $dirs as $dir ) {
-			$this->assertLessThanOrEqual(
-				$maxAllowance,
-				$this->countStringInDir( $string, $dir ),
-				'You are not allowed to use ' . $string . ' in this component'
-			);
-		}
-	}
-
+	/**
+	 * @param string $string
+	 * @param string $dir
+	 *
+	 * @return int
+	 */
 	private function countStringInDir( $string, $dir ) {
 		$count = 0;
 		$directoryIterator = new RecursiveDirectoryIterator( $dir );
@@ -60,7 +58,7 @@ class NoBadDependencyUsageTest extends PHPUnit_Framework_TestCase {
 				$text = file_get_contents( $fileInfo->getPathname() );
 				$text = preg_replace( '@/\*.*?\*/@s', '', $text );
 
-				if ( stripos( $text, $string ) !== false ) {
+				if ( strpos( $text, $string ) !== false ) {
 					$count++;
 				}
 			}
