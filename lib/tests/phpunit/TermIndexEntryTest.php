@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Lib\Tests;
 
 use MWException;
 use PHPUnit_Framework_TestCase;
