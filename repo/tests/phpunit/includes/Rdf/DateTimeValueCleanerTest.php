@@ -16,8 +16,31 @@ use Wikibase\Rdf\JulianDateTimeValueCleaner;
  *
  * @license GPL-2.0+
  * @author Stas Malyshev
+ * @author Thiemo Mättig
  */
 class DateTimeValueCleanerTest extends \PHPUnit_Framework_TestCase {
+
+	/**
+	 * @dataProvider illegalTimeValueProvider
+	 */
+	public function testIllegalTimeValue( TimeValue $value, $xsd11 ) {
+		$cleaner = new JulianDateTimeValueCleaner( $xsd11 );
+		$this->assertNull( $cleaner->getStandardValue( $value ) );
+	}
+
+	public function illegalTimeValueProvider() {
+		$day = TimeValue::PRECISION_DAY;
+		$year0 = '+0000-01-01T00:00:00Z';
+		$year0Greg = new TimeValue( $year0, 0, 0, 0, $day, TimeValue::CALENDAR_GREGORIAN );
+		$year0Jul = new TimeValue( $year0, 0, 0, 0, $day, TimeValue::CALENDAR_JULIAN );
+
+		return [
+			[ $year0Greg, false ],
+			[ $year0Greg, true ],
+			[ $year0Jul, false ],
+			[ $year0Jul, true ],
+		];
+	}
 
 	public function getDates() {
 		$greg = TimeValue::CALENDAR_GREGORIAN;
@@ -55,8 +78,12 @@ class DateTimeValueCleanerTest extends \PHPUnit_Framework_TestCase {
 			[ '+00000000200-02-31T00:00:00Z', $jul, '0200-03-02T00:00:00Z' ],
 			[ '+00000000204-02-31T00:00:00Z', $jul, '0204-03-02T00:00:00Z' ],
 			[ '-02000000204-02-31T00:00:00Z', $jul, '-2000000204-02-29T00:00:00Z' ],
-			[ '-4713-12-31T00:00:00Z', $jul, '-4713-11-23T00:00:00Z' ],
-			[ '-4714-01-02T00:00:00Z', $jul, '-4714-01-02T00:00:00Z' ],
+			[ '-4713-01-02T00:00:00Z', $jul, '-4714-11-25T00:00:00Z' ],
+			[ '-4713-01-01T00:00:00Z', $jul, '-4713-01-01T00:00:00Z' ],
+			[ '+0000-01-01T00:00:00Z', $jul, null ],
+			[ '+0001-01-01T00:00:00Z', $jul, '-0001-12-30T00:00:00Z' ],
+			[ '+1465072-01-01T00:00:00Z', $jul, '1465102-01-30T00:00:00Z' ],
+			[ '+1465073-01-01T00:00:00Z', $jul, '1465073-01-01T00:00:00Z' ],
 			[ '+98765432198765-00-00T00:00:00Z', $jul, '98765432198765-01-01T00:00:00Z', $year ],
 			[ '-98765432198765-00-00T00:00:00Z', $jul, '-98765432198765-01-01T00:00:00Z', $year ],
 			[ '+8888888888888888-01-01T00:00:00Z', $jul, '8888888888888888-01-01T00:00:00Z' ],
@@ -88,8 +115,8 @@ class DateTimeValueCleanerTest extends \PHPUnit_Framework_TestCase {
 			[ '-00000002014-01-05T12:34:56Z', $jul, '-2014-12-19T12:34:56Z' ],
 			[ '-00000002014-01-05T12:34:56Z', $jul, '-2013-01-01T12:34:56Z', $year ],
 			[ '-0100-07-12T00:00:00Z', $jul, '-0099-07-10T00:00:00Z', $day ],
-			[ '-4713-12-31T00:00:00Z', $jul, '-4712-11-23T00:00:00Z' ],
-			[ '-4714-01-02T00:00:00Z', $jul, '-4713-01-02T00:00:00Z' ],
+			[ '-4713-01-02T00:00:00Z', $jul, '-4713-11-25T00:00:00Z' ],
+			[ '-4713-01-01T00:00:00Z', $jul, '-4712-01-01T00:00:00Z' ],
 			[ '+98765432198765-00-00T00:00:00Z', $jul, '98765432198765-01-01T00:00:00Z', $year ],
 			[ '-98765432198765-00-00T00:00:00Z', $jul, '-98765432198764-01-01T00:00:00Z', $year ],
 			[ '+8888888888888888-01-01T00:00:00Z', $jul, '8888888888888888-01-01T00:00:00Z' ],

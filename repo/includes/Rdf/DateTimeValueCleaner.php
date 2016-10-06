@@ -11,6 +11,7 @@ use DataValues\TimeValue;
  *
  * @license GPL-2.0+
  * @author Stas Malyshev
+ * @author Thiemo Mättig
  */
 class DateTimeValueCleaner {
 
@@ -37,7 +38,15 @@ class DateTimeValueCleaner {
 	 * @return string|null
 	 */
 	public function getStandardValue( TimeValue $value ) {
-		return $this->cleanupGregorianValue( $value->getTime(), $value->getPrecision() );
+		// If we are less precise than a day, the calendar model does not matter
+		// since we don't have enough information to do conversion anyway
+		if ( $value->getCalendarModel() === TimeValue::CALENDAR_GREGORIAN
+			|| $value->getPrecision() < TimeValue::PRECISION_DAY
+		) {
+			return $this->cleanupGregorianValue( $value->getTime(), $value->getPrecision() );
+		}
+
+		return null;
 	}
 
 	/**
@@ -105,7 +114,7 @@ class DateTimeValueCleaner {
 	 *
 	 * @param string $dateValue
 	 *
-	 * @throws IllegalValueException
+	 * @throws IllegalValueException if the input is an illegal XSD 1.0 timestamp
 	 * @return array Parsed value in parts: $minus, $y, $m, $d, $time
 	 */
 	protected function parseDateValue( $dateValue ) {
@@ -136,7 +145,8 @@ class DateTimeValueCleaner {
 			// Year 0 is invalid for now, see T94064 for discussion
 			throw new IllegalValueException();
 		}
-		return array( $minus, $y, $m, $d, $time );
+
+		return [ $minus, $y, $m, $d, $time ];
 	}
 
 }
