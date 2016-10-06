@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Test;
+namespace Wikibase\Lib\Tests;
 
 use OutOfBoundsException;
 use Wikibase\SettingsArray;

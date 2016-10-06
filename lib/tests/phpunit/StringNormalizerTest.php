@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Lib\Tests;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\StringNormalizer;
