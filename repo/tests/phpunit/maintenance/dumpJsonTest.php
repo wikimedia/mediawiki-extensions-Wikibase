@@ -31,7 +31,9 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\DumpJson;
 use Wikibase\Lib\Tests\MockRepository;
-use Wikibase\Repo\Tests\MockEntityPerPage;
+use Wikibase\Repo\Store\EntityIdPager;
+use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
+use Wikibase\Repo\Tests\MockEntityIdPager;
 
 /**
  * @covers Wikibase\DumpJson
@@ -48,7 +50,7 @@ class DumpJsonTest extends MediaWikiTestCase {
 		$dumpScript = new DumpJson();
 
 		$mockRepo = new MockRepository();
-		$mockEntityPerPage = new MockEntityPerPage();
+		$mockEntityIdPager = new MockEntityIdPager();
 
 		$snakList = new SnakList();
 		$snakList->addSnak( new PropertySomeValueSnak( new PropertyId( 'P12' ) ) );
@@ -115,7 +117,7 @@ class DumpJsonTest extends MediaWikiTestCase {
 
 		foreach ( $testEntities as $key => $testEntity ) {
 			$mockRepo->putEntity( $testEntity );
-			$mockEntityPerPage->addEntityPage( $testEntity->getId(), $key );
+			$mockEntityIdPager->addEntityPage( $testEntity->getId(), $key );
 		}
 
 		$serializerFactory = new SerializerFactory(
@@ -124,8 +126,16 @@ class DumpJsonTest extends MediaWikiTestCase {
 			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
 		);
 
+		$sqlEntityIdPagerFactory = $this->getMockBuilder( SqlEntityIdPagerFactory::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$sqlEntityIdPagerFactory->expects( $this->once() )
+			->method( 'newSqlEntityIdPager' )
+			->with( null, EntityIdPager::NO_REDIRECTS )
+			->will( $this->returnValue( $mockEntityIdPager ) );
+
 		$dumpScript->setServices(
-			$mockEntityPerPage,
+			$sqlEntityIdPagerFactory,
 			new NullEntityPrefetcher(),
 			$this->getMockPropertyDataTypeLookup(),
 			$mockRepo,

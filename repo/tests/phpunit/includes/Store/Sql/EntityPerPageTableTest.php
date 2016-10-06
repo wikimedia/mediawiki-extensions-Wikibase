@@ -8,13 +8,8 @@ use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\Lib\EntityIdComposer;
-use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\Sql\EntityPerPageTable;
 
 /**
@@ -79,8 +74,7 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 
 		$epp = new EntityPerPageTable(
 			$loadBalancer,
-			new BasicEntityIdParser(),
-			new EntityIdComposer( [] )
+			new BasicEntityIdParser()
 		);
 		$epp->addEntityPage( $entityId, 123 );
 
@@ -96,9 +90,6 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 		$epp->addRedirectPage( $redirectId, 55, $targetId );
 
 		$this->assertEquals( 55, $this->getPageIdForEntityId( $redirectId ) );
-
-		$ids = $epp->listEntities( Item::ENTITY_TYPE, 10 );
-		$this->assertEmpty( $ids, 'Redirects must not show up in ID listings' );
 	}
 
 	/**
@@ -110,8 +101,7 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 	private function newEntityPerPageTable( array $entities = array(), array $redirects = array() ) {
 		$table = new EntityPerPageTable(
 			MediaWikiServices::getInstance()->getDBLoadBalancer(),
-			new BasicEntityIdParser(),
-			new EntityIdComposer( [] )
+			new BasicEntityIdParser()
 		);
 		$table->clear();
 
@@ -126,119 +116,6 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 		}
 
 		return $table;
-	}
-
-	private function getIdStrings( array $entities ) {
-		$ids = array_map( function ( $entity ) {
-			if ( $entity instanceof EntityDocument ) {
-				$entity = $entity->getId();
-			} elseif ( $entity instanceof EntityRedirect ) {
-				$entity = $entity->getEntityId();
-			}
-
-			return $entity->getSerialization();
-		}, $entities );
-
-		return $ids;
-	}
-
-	private function assertEqualIds( array $expected, array $actual ) {
-		$expectedIds = $this->getIdStrings( $expected );
-		$actualIds = $this->getIdStrings( $actual );
-
-		$this->assertArrayEquals( $expectedIds, $actualIds, false );
-	}
-
-	/**
-	 * @dataProvider listEntitiesProvider
-	 */
-	public function testListEntities( array $entities, array $redirects, $type, $limit, $after, $redirectMode, array $expected ) {
-		$table = $this->newEntityPerPageTable( $entities, $redirects );
-
-		$actual = $table->listEntities( $type, $limit, $after, $redirectMode );
-
-		$this->assertEqualIds( $expected, $actual );
-	}
-
-	public function listEntitiesProvider() {
-		$property = new Property( new PropertyId( 'P1' ), null, 'string' );
-		$item = new Item( new ItemId( 'Q5' ) );
-		$redirect = new EntityRedirect( new ItemId( 'Q55' ), new ItemId( 'Q5' ) );
-
-		return array(
-			'empty' => array(
-				array(),
-				array(),
-				null,
-				100,
-				null,
-				EntityPerPage::NO_REDIRECTS,
-				array()
-			),
-			'some entities' => array(
-				array( $item, $property ),
-				array( $redirect ),
-				null,
-				100,
-				null,
-				EntityPerPage::NO_REDIRECTS,
-				array( $property, $item )
-			),
-			'entities after' => array(
-				array( $item, $property ),
-				array( $redirect ),
-				null,
-				100,
-				$property->getId(),
-				EntityPerPage::NO_REDIRECTS,
-				array( $item )
-			),
-			'include redirects' => array(
-				array( $item, $property ),
-				array( $redirect ),
-				null,
-				100,
-				null,
-				EntityPerPage::INCLUDE_REDIRECTS,
-				array( $property, $item, $redirect )
-			),
-			'only redirects' => array(
-				array( $item, $property ),
-				array( $redirect ),
-				null,
-				100,
-				null,
-				EntityPerPage::ONLY_REDIRECTS,
-				array( $redirect )
-			),
-			'just properties' => array(
-				array( $item, $property ),
-				array( $redirect ),
-				Property::ENTITY_TYPE,
-				100,
-				null,
-				EntityPerPage::NO_REDIRECTS,
-				array( $property )
-			),
-			'limit' => array(
-				array( $item, $property ),
-				array( $redirect ),
-				Property::ENTITY_TYPE,
-				1,
-				null,
-				EntityPerPage::NO_REDIRECTS,
-				array( $property ) // current sort order is by numeric id, then type.
-			),
-			'no matches' => array(
-				array( $property ),
-				array( $redirect ),
-				Item::ENTITY_TYPE,
-				100,
-				null,
-				EntityPerPage::NO_REDIRECTS,
-				array()
-			),
-		);
 	}
 
 	private function getPageIdForEntityId( EntityId $entityId ) {
