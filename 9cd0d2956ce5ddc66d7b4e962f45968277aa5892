@@ -22,6 +22,30 @@
       "revId": "9cd0d2956ce5ddc66d7b4e962f45968277aa5892",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e750308_463ff2d3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-06T22:42:42Z",
+      "side": 1,
+      "message": "Well, these are the entity types supported on Special:EntitiesWithoutLabel/ Special:EntitiesWithoutDescription. I agree that the name is confusing, but I can\u0027t really come up with anything better right now.",
+      "parentUuid": "0e82f318_ce57e527",
+      "range": {
+        "startLine": 7,
+        "startChar": 15,
+        "endLine": 7,
+        "endChar": 45
+      },
+      "revId": "9cd0d2956ce5ddc66d7b4e962f45968277aa5892",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
