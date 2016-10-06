@@ -1068,7 +1068,8 @@ final class WikibaseClient {
 	public function getDataAccessSnakFormatterFactory() {
 		return new DataAccessSnakFormatterFactory(
 			$this->getLanguageFallbackChainFactory(),
-			$this->getSnakFormatterFactory()
+			$this->getSnakFormatterFactory(),
+			$this->getPropertyDataTypeLookup()
 		);
 	}
 

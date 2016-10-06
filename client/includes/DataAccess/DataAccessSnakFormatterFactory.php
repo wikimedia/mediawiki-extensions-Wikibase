@@ -6,7 +6,10 @@ use Language;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\Client\Usage\UsageTrackingSnakFormatter;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\BinaryOptionDispatchingSnakFormatter;
+use Wikibase\Lib\EscapingSnakFormatter;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
@@ -34,15 +37,23 @@ class DataAccessSnakFormatterFactory {
 	private $snakFormatterFactory;
 
 	/**
+	 * @var PropertyDataTypeLookup
+	 */
+	private $propertyDataTypeLookup;
+
+	/**
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
 	 * @param OutputFormatSnakFormatterFactory $snakFormatterFactory
+	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 */
 	public function __construct(
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		OutputFormatSnakFormatterFactory $snakFormatterFactory
+		OutputFormatSnakFormatterFactory $snakFormatterFactory,
+		PropertyDataTypeLookup $propertyDataTypeLookup
 	) {
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->snakFormatterFactory = $snakFormatterFactory;
+		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 	}
 
 	/**
@@ -65,13 +76,40 @@ class DataAccessSnakFormatterFactory {
 			SnakFormatter::OPT_LANG => $language->getCode(),
 		] );
 
+		$snakFormatter = $this->getSnakFormatterForOptions( $options );
+
 		return new UsageTrackingSnakFormatter(
-			$this->snakFormatterFactory->getSnakFormatter(
-				SnakFormatter::FORMAT_WIKI,
-				$options
-			),
+			$snakFormatter,
 			$usageAccumulator,
 			$fallbackChain->getFetchLanguageCodes()
+		);
+	}
+
+	/**
+	 * Our output format is basically wikitext escaped plain text, except
+	 * for URLs, these are not wikitext escaped.
+	 *
+	 * @param FormatterOptions $options
+	 * @return BinaryOptionDispatchingSnakFormatter
+	 */
+	private function getSnakFormatterForOptions( FormatterOptions $options ) {
+		$plainTextSnakFormatter = $this->snakFormatterFactory->getSnakFormatter(
+			SnakFormatter::FORMAT_PLAIN,
+			$options
+		);
+
+		$escapingSnakFormatter = new EscapingSnakFormatter(
+			SnakFormatter::FORMAT_PLAIN,
+			$plainTextSnakFormatter,
+			'wfEscapeWikiText'
+		);
+
+		return new BinaryOptionDispatchingSnakFormatter(
+			SnakFormatter::FORMAT_PLAIN,
+			$this->propertyDataTypeLookup,
+			$plainTextSnakFormatter,
+			$escapingSnakFormatter,
+			[ 'url' ]
 		);
 	}
 

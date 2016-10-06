@@ -22,6 +22,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\LanguageFallbackChainFactory;
@@ -155,7 +156,8 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 			$this->getMock( EntityLookup::class ),
 			new DataAccessSnakFormatterFactory(
 				$this->getLanguageFallbackChainFactory(),
-				$formatterFactory
+				$formatterFactory,
+				$this->getMock( PropertyDataTypeLookup::class )
 			),
 			$allowDataAccessInUserLanguage
 		);
@@ -176,7 +178,8 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 			$this->getEntityLookup(),
 			new DataAccessSnakFormatterFactory(
 				$this->getLanguageFallbackChainFactory(),
-				$this->getSnakFormatterFactory()
+				$this->getSnakFormatterFactory(),
+				$this->getMock( PropertyDataTypeLookup::class )
 			),
 			$allowDataAccessInUserLanguage
 		);
