@@ -16,6 +16,24 @@
       "revId": "a19b1e223b962920c70f74f2929cdfea9855b0c4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_11512012",
+        "filename": "client/includes/Specials/SpecialEntityUsage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-06T17:05:21Z",
+      "side": 1,
+      "message": "I wrote that test but then I realized the special page test actually mocks the query response instead of doing the actual query. So writing it is useless :(",
+      "parentUuid": "0e82f318_e8dbc122",
+      "revId": "a19b1e223b962920c70f74f2929cdfea9855b0c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
