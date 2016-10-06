@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_11c68071",
+        "filename": "client/tests/phpunit/includes/DataAccess/DataAccessSnakFormatterOutputFormatTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-06T17:59:17Z",
+      "side": 1,
+      "message": "Long line (due to huge amount of indention). Define a variable above like $Q2013history (or whatever) and use it here instead.",
+      "revId": "c83d0df2d04b83b0e7c00f68df5982279f3638ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
