@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_911b501f",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-06T18:23:09Z",
+      "side": 1,
+      "message": "We usually have this function in the hook handler class itself as well.",
+      "revId": "10b16382529bc28d76a7589694992e277a0c9417",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_11304099",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-06T18:23:09Z",
+      "side": 1,
+      "message": "Missing type hint for \u0026$checkboxes",
+      "revId": "10b16382529bc28d76a7589694992e277a0c9417",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_51e55805",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-06T18:23:09Z",
+      "side": 1,
+      "message": "Should rather be $usageS, I think",
+      "range": {
+        "startLine": 92,
+        "startChar": 2,
+        "endLine": 92,
+        "endChar": 8
+      },
+      "revId": "10b16382529bc28d76a7589694992e277a0c9417",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_31e0e4f6",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-06T18:23:09Z",
+      "side": 1,
+      "message": "Should have a new line after the comma.",
+      "revId": "10b16382529bc28d76a7589694992e277a0c9417",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_71edfced",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-06T18:23:09Z",
+      "side": 1,
+      "message": "Should rather be $usageS, I think",
+      "range": {
+        "startLine": 125,
+        "startChar": 43,
+        "endLine": 125,
+        "endChar": 49
+      },
+      "revId": "10b16382529bc28d76a7589694992e277a0c9417",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee867f2c_e9151542",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-06T18:23:09Z",
+      "side": 1,
+      "message": "Why not just use $entityIds (as noted on PS6)",
+      "revId": "10b16382529bc28d76a7589694992e277a0c9417",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee867f2c_6921259a",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-06T18:23:09Z",
+      "side": 1,
+      "message": "Should have a new line after the comma",
+      "revId": "10b16382529bc28d76a7589694992e277a0c9417",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
