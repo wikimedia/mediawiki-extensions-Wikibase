@@ -8,11 +8,9 @@ use Linker;
 use MediaWiki\Linker\LinkRenderer;
 use SiteLookup;
 use Title;
-use Wikibase\DataModel\SiteLink;
 use Wikibase\Store\Sql\SqlSubscriptionLookup;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\NamespaceChecker;
 
 /**
  * @since 0.5

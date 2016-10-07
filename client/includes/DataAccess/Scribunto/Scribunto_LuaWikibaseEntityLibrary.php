@@ -6,16 +6,12 @@ use InvalidArgumentException;
 use Language;
 use Scribunto_LuaLibraryBase;
 use ScribuntoException;
-use ValueFormatters\FormatterOptions;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
-use Wikibase\Client\Usage\UsageTrackingSnakFormatter;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\PropertyLabelNotResolvedException;
-use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 
 /**
  * Registers and defines functions to access Wikibase through the Scribunto extension

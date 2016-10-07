@@ -6,7 +6,6 @@ use DatabaseBase;
 use DBError;
 use Exception;
 use InvalidArgumentException;
-use ResultWrapper;
 use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageTrackerException;

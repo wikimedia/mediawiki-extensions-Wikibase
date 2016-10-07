@@ -4,7 +4,6 @@ namespace Wikibase\Store\Sql;
 
 use DatabaseBase;
 use LoadBalancer;
-use ResultWrapper;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Store\SubscriptionLookup;
 
