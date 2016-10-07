@@ -185,6 +185,13 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 					new StringValue( 'abc' )
 				)
 			],
+			'external-id including wikitext' => [
+				wfEscapeWikiText( 'a [[b]] c' ),
+				new PropertyValueSnak(
+					new PropertyId( 'P8' ),
+					new StringValue( 'a [[b]] c' )
+				)
+			],
 			'wikibase-item (wikibase-entityid)' => [
 				wfEscapeWikiText( 'label [[with]] wikitext' ),
 				new PropertyValueSnak(
