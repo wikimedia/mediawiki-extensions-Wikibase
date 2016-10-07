@@ -206,6 +206,24 @@
     },
     {
       "key": {
+        "uuid": "8e750308_d58466a6",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-07T18:20:23Z",
+      "side": 1,
+      "message": "But $entityIds is EntityId[] (see line 130).",
+      "parentUuid": "8e750308_75ff3263",
+      "revId": "10b16382529bc28d76a7589694992e277a0c9417",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee867f2c_6921259a",
         "filename": "client/includes/Hooks/EditActionHookHandler.php",
         "patchSetId": 12
