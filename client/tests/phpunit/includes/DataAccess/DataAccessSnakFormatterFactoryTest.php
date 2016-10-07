@@ -7,12 +7,15 @@ use PHPUnit_Framework_TestCase;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\Usage\UsageAccumulator;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 
 /**
  * @covers Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory
+ *
+ * @note We also have integration tests for this at DataAccessSnakFormatterOutputFormatTest.
  *
  * @group Wikibase
  * @group WikibaseClient
@@ -26,7 +29,8 @@ class DataAccessSnakFormatterFactoryTest extends PHPUnit_Framework_TestCase {
 	private function getDataAccessSnakFormatterFactory() {
 		return new DataAccessSnakFormatterFactory(
 			$this->getLanguageFallbackChainFactory(),
-			$this->getOutputFormatSnakFormatterFactory()
+			$this->getOutputFormatSnakFormatterFactory(),
+			$this->getMock( PropertyDataTypeLookup::class )
 		);
 	}
 
@@ -56,7 +60,7 @@ class DataAccessSnakFormatterFactoryTest extends PHPUnit_Framework_TestCase {
 
 		$factory->expects( $this->once() )
 			->method( 'getSnakFormatter' )
-			->with( SnakFormatter::FORMAT_WIKI, $this->isInstanceOf( FormatterOptions::class ) )
+			->with( SnakFormatter::FORMAT_PLAIN, $this->isInstanceOf( FormatterOptions::class ) )
 			->will( $this->returnValue( $this->getMock( SnakFormatter::class ) ) );
 
 		return $factory;
