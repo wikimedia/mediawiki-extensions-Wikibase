@@ -91,7 +91,7 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 	public function testOutput( $expected, $snak ) {
 		// This is an integration test, use the global factory
 		$factory = WikibaseClient::getDefaultInstance()->getDataAccessSnakFormatterFactory();
-		$formatter = $factory->newSnakFormatterForLanguage(
+		$formatter = $factory->newEscapedPlainTextSnakFormatter(
 			Language::factory( 'en' ),
 			$this->getMock( UsageAccumulator::class )
 		);

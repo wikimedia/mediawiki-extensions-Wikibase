@@ -57,12 +57,16 @@ class DataAccessSnakFormatterFactory {
 	}
 
 	/**
+	 * This returns a SnakFormatter that will return wikitext escaped plain text.
+	 * The only exception are URLs, these are plain text, but not escaped in any
+	 * way.
+	 *
 	 * @param Language $language
 	 * @param UsageAccumulator $usageAccumulator
 	 *
 	 * @return SnakFormatter
 	 */
-	public function newSnakFormatterForLanguage(
+	public function newEscapedPlainTextSnakFormatter(
 		Language $language,
 		UsageAccumulator $usageAccumulator
 	) {
@@ -76,7 +80,7 @@ class DataAccessSnakFormatterFactory {
 			SnakFormatter::OPT_LANG => $language->getCode(),
 		] );
 
-		$snakFormatter = $this->getSnakFormatterForOptions( $options );
+		$snakFormatter = $this->getPlainTextSnakFormatterForOptions( $options );
 
 		return new UsageTrackingSnakFormatter(
 			$snakFormatter,
@@ -92,7 +96,7 @@ class DataAccessSnakFormatterFactory {
 	 * @param FormatterOptions $options
 	 * @return BinaryOptionDispatchingSnakFormatter
 	 */
-	private function getSnakFormatterForOptions( FormatterOptions $options ) {
+	private function getPlainTextSnakFormatterForOptions( FormatterOptions $options ) {
 		$plainTextSnakFormatter = $this->snakFormatterFactory->getSnakFormatter(
 			SnakFormatter::FORMAT_PLAIN,
 			$options

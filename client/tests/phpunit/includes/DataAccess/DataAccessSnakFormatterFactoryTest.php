@@ -68,7 +68,7 @@ class DataAccessSnakFormatterFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function testNewSnakFormatterForLanguage() {
 		$factory = $this->getDataAccessSnakFormatterFactory();
-		$snakFormatter = $factory->newSnakFormatterForLanguage(
+		$snakFormatter = $factory->newEscapedPlainTextSnakFormatter(
 			Language::factory( 'fr' ),
 			$this->getMock( UsageAccumulator::class )
 		);
