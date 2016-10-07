@@ -37,7 +37,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.event.special.eachchange',
-				'jquery.effects.blind',
 				'jquery.inputautoexpand',
 				'jquery.ui.widget',
 			),
