@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e750308_afceb984",
+        "filename": "lib/includes/Formatters/BinaryOptionDispatchingSnakFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-07T11:38:32Z",
+      "side": 1,
+      "message": "I\u0027m not happy with this name. It sounds like it dispatches based on a bit field or boolean. But it dispatches based on an array of property types. Suggestions: PropertyTypeDispatchingSnakFormatter. SpecialCaseDispatchingSnakFormatter.",
+      "range": {
+        "startLine": 19,
+        "startChar": 6,
+        "endLine": 19,
+        "endChar": 18
+      },
+      "revId": "cf0c551a81036cc105f84bc809d2abb4b7a454cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e750308_0f018db9",
+        "filename": "lib/includes/Formatters/BinaryOptionDispatchingSnakFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-07T11:38:32Z",
+      "side": 1,
+      "message": "We are trying to avoid possibly confusing terms like this. I prefer \"property type\" and \"value type\" nowadays. I can see that existing services used in this patch can not be renamed so easily, but private stuff can.",
+      "range": {
+        "startLine": 44,
+        "startChar": 22,
+        "endLine": 44,
+        "endChar": 39
+      },
+      "revId": "cf0c551a81036cc105f84bc809d2abb4b7a454cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e750308_4f0b85d9",
+        "filename": "lib/includes/Formatters/BinaryOptionDispatchingSnakFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-07T11:38:32Z",
+      "side": 1,
+      "message": "getPropertyType please.",
+      "range": {
+        "startLine": 81,
+        "startChar": 18,
+        "endLine": 81,
+        "endChar": 33
+      },
+      "revId": "cf0c551a81036cc105f84bc809d2abb4b7a454cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e750308_8fd1fd29",
+        "filename": "lib/includes/Formatters/BinaryOptionDispatchingSnakFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-07T11:38:32Z",
+      "side": 1,
+      "message": "Personally I prefer \"$snak instanceof PropertyValueSnak\".",
+      "revId": "cf0c551a81036cc105f84bc809d2abb4b7a454cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
