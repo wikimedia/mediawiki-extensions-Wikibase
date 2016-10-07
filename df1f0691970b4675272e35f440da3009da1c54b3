@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e750308_ef4ef1c3",
+        "filename": "composer.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-07T12:55:52Z",
+      "side": 1,
+      "message": "this should be a separate commit, but is ok in work in progress patch",
+      "revId": "df1f0691970b4675272e35f440da3009da1c54b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e750308_6fd201d7",
+        "filename": "lib/tests/phpunit/Store/MockEntityRevisionLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-07T12:55:52Z",
+      "side": 1,
+      "message": "I don\u0027t think this is needed, a simple phpunit mock of the interface would probably be enough.",
+      "revId": "df1f0691970b4675272e35f440da3009da1c54b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
