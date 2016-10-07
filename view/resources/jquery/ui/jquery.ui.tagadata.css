@@ -55,8 +55,6 @@ ul.tagadata li.tagadata-choice-empty .tagadata-close {
 	display: none;
 }
 
-ul.tagadata li.tagadata-choice-existing {}
-
 ul.tagadata li.tagadata-choice-empty .tagadata-label-text, /* don't underline when only placeholder is displayed */
 ul.tagadata li.tagadata-choice:last-of-type.tagadata-choice-equal .tagadata-label-text /* don't underline when conflict */ {
 	text-decoration:none;
