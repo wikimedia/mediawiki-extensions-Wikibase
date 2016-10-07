@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e6f8b3b_6485ca5a",
+        "filename": "repo/maintenance/SPARQLClient.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-07T20:36:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_20128501",
+      "revId": "c6c7db9afab916704379d5460e2e2c9be0814b66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_a0267561",
         "filename": "repo/maintenance/SPARQLClient.php",
         "patchSetId": 14
@@ -106,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "4e6f8b3b_8499e6ca",
+        "filename": "repo/maintenance/SPARQLClient.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-07T20:36:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_e0178df1",
+      "revId": "c6c7db9afab916704379d5460e2e2c9be0814b66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_60db9d54",
         "filename": "repo/maintenance/SPARQLClient.php",
         "patchSetId": 14
@@ -117,6 +153,24 @@
       "writtenOn": "2016-09-27T16:26:08Z",
       "side": 1,
       "message": "array of what?",
+      "revId": "c6c7db9afab916704379d5460e2e2c9be0814b66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e6f8b3b_a496e295",
+        "filename": "repo/maintenance/SPARQLClient.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-07T20:36:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_60db9d54",
       "revId": "c6c7db9afab916704379d5460e2e2c9be0814b66",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
