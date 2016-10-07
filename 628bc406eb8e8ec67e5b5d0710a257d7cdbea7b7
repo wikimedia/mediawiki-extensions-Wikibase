@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e750308_6f9a0168",
+        "filename": "client/includes/DataAccess/DataAccessSnakFormatterFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-07T11:55:16Z",
+      "side": 1,
+      "message": "As said in the patch that introduced this class: I suggest to have a dedicated snak formatter for this special case. Could be named \"SpecialCasePlainTextSnakFormatter\".",
+      "revId": "628bc406eb8e8ec67e5b5d0710a257d7cdbea7b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
