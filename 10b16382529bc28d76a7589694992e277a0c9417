@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "8e750308_d5bf06a6",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-07T18:00:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_11304099",
+      "revId": "10b16382529bc28d76a7589694992e277a0c9417",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_51e55805",
         "filename": "client/includes/Hooks/EditActionHookHandler.php",
         "patchSetId": 12
@@ -59,6 +77,24 @@
     },
     {
       "key": {
+        "uuid": "8e750308_b5c9aa57",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-07T18:00:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_51e55805",
+      "revId": "10b16382529bc28d76a7589694992e277a0c9417",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_31e0e4f6",
         "filename": "client/includes/Hooks/EditActionHookHandler.php",
         "patchSetId": 12
@@ -70,6 +106,24 @@
       "writtenOn": "2016-10-06T18:23:09Z",
       "side": 1,
       "message": "Should have a new line after the comma.",
+      "revId": "10b16382529bc28d76a7589694992e277a0c9417",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e750308_d5d626f6",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-07T18:00:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_31e0e4f6",
       "revId": "10b16382529bc28d76a7589694992e277a0c9417",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -99,6 +153,24 @@
     },
     {
       "key": {
+        "uuid": "8e750308_f5d32203",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-07T18:00:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_71edfced",
+      "revId": "10b16382529bc28d76a7589694992e277a0c9417",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee867f2c_e9151542",
         "filename": "client/includes/Hooks/EditActionHookHandler.php",
         "patchSetId": 12
@@ -116,6 +188,24 @@
     },
     {
       "key": {
+        "uuid": "8e750308_75ff3263",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-07T18:00:54Z",
+      "side": 1,
+      "message": "We need to send an array of EntityId to newLabelDescriptionLookup in line 148. So it\u0027s not possible",
+      "parentUuid": "ee867f2c_e9151542",
+      "revId": "10b16382529bc28d76a7589694992e277a0c9417",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee867f2c_6921259a",
         "filename": "client/includes/Hooks/EditActionHookHandler.php",
         "patchSetId": 12
@@ -127,6 +217,24 @@
       "writtenOn": "2016-10-06T18:23:09Z",
       "side": 1,
       "message": "Should have a new line after the comma",
+      "revId": "10b16382529bc28d76a7589694992e277a0c9417",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e750308_1500be6c",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-07T18:00:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee867f2c_6921259a",
       "revId": "10b16382529bc28d76a7589694992e277a0c9417",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
