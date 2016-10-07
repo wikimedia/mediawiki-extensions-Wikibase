@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "8e750308_ccea2305",
+        "filename": "repo/maintenance/SPARQLClient.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-07T20:33:27Z",
+      "side": 1,
+      "message": "3 sec is pretty low for SPARQL, especially maintenance queries we\u0027ll be running. We have default timeout on SPARQL engine, I\u0027m not sure how easy would it be to further limit it. Maybe possible. I\u0027ll look into it.",
+      "parentUuid": "0e82f318_a0267561",
+      "revId": "c6c7db9afab916704379d5460e2e2c9be0814b66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_c01c491b",
         "filename": "repo/maintenance/SPARQLClient.php",
         "patchSetId": 14
@@ -47,6 +65,24 @@
       "writtenOn": "2016-09-27T16:26:08Z",
       "side": 1,
       "message": "I generally prefer exceptions to special return values. Makes for cleaner code. Any reason not to do that here?",
+      "revId": "c6c7db9afab916704379d5460e2e2c9be0814b66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e750308_0cd43b4b",
+        "filename": "repo/maintenance/SPARQLClient.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-07T20:33:27Z",
+      "side": 1,
+      "message": "I don\u0027t like exceptions on \"normal\" failures - e.g. file not found, etc. But I can do exceptions too, just makes it harder to use the class IMHO.",
+      "parentUuid": "0e82f318_c01c491b",
       "revId": "c6c7db9afab916704379d5460e2e2c9be0814b66",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
