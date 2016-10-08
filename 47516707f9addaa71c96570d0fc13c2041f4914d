@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e6f8b3b_8a356fda",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-10-08T08:49:28Z",
+      "side": 1,
+      "message": "hooks don\u0027t have to return anything",
+      "range": {
+        "startLine": 448,
+        "startChar": 4,
+        "endLine": 448,
+        "endChar": 16
+      },
+      "revId": "47516707f9addaa71c96570d0fc13c2041f4914d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e6f8b3b_4a1c576b",
+        "filename": "client/resources/wikibase.client.action.edit.collapsibleFooter.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-10-08T08:49:28Z",
+      "side": 1,
+      "message": "I heard that looping is faster when you save the length in another var but there\u0027s only one item, so that doesn\u0027t seem to be problem right now",
+      "range": {
+        "startLine": 46,
+        "startChar": 19,
+        "endLine": 46,
+        "endChar": 42
+      },
+      "revId": "47516707f9addaa71c96570d0fc13c2041f4914d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e6f8b3b_2a271bb3",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-10-08T08:49:28Z",
+      "side": 1,
+      "message": "you could maybe import this",
+      "range": {
+        "startLine": 33,
+        "startChar": 40,
+        "endLine": 33,
+        "endChar": 67
+      },
+      "revId": "47516707f9addaa71c96570d0fc13c2041f4914d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e6f8b3b_ea150342",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-10-08T08:49:28Z",
+      "side": 1,
+      "message": "What about wrapping the whole line like this? \"\u003cp\u003e$explanation\\n\u003c/p\u003e\u003c/div\u003e\"",
+      "range": {
+        "startLine": 64,
+        "startChar": 13,
+        "endLine": 64,
+        "endChar": 51
+      },
+      "revId": "47516707f9addaa71c96570d0fc13c2041f4914d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e6f8b3b_aa322bed",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-10-08T08:49:28Z",
+      "side": 1,
+      "message": "also returns null",
+      "range": {
+        "startLine": 188,
+        "startChar": 4,
+        "endLine": 188,
+        "endChar": 16
+      },
+      "revId": "47516707f9addaa71c96570d0fc13c2041f4914d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
