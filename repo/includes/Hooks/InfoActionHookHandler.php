@@ -99,7 +99,7 @@ class InfoActionHookHandler {
 	}
 
 	/**
-	 * @param array $usage
+	 * @param string[] $subscriptions
 	 * @param Title $title
 	 *
 	 * @return string HTML[]
@@ -137,11 +137,18 @@ class InfoActionHookHandler {
 		if ( !$site ) {
 			return $subscription;
 		}
+
 		if ( !$site->getInterwikiIds() ) {
 			return $subscription;
 		}
 
-		$title = Title::makeTitle( NS_SPECIAL, 'EntityUsage/' . $title->getText(), '', $site->getInterwikiIds()[0] );
+		// Using main ns instead of special ns (T147685)
+		$title = Title::makeTitle(
+			NS_MAIN,
+			'Special:EntityUsage/' . $title->getText(),
+			'',
+			$site->getInterwikiIds()[0]
+		);
 		return $this->linkRenderer->makeLink( $title, $subscription );
 	}
 
