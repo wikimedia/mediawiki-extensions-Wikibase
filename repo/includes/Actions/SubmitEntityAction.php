@@ -101,21 +101,20 @@ class SubmitEntityAction extends EditEntityAction {
 		$latestContent = $latestRevision->getContent();
 
 		$diff = $newerContent->getDiff( $olderContent );
+		$patchedContent = $latestContent->getPatchedCopy( $diff );
 
 		$summary = $request->getText( 'wpSummary' );
 		$editToken = $request->getText( 'wpEditToken' );
 
-		if ( $newerRevision->getId() === $latestRevision->getId() ) { // restore
-			if ( $diff->isEmpty() ) {
+		if ( $request->getCheck( 'restore' ) ) { // restore
+			if ( $patchedContent->equals( $latestContent ) ) {
 				$status = Status::newGood();
 				$status->warning( 'wikibase-empty-undo' );
 			} else {
 				$summary = $this->makeRestoreSummary( $olderRevision, $summary );
-				$status = $this->attemptSave( $title, $olderContent, $summary, $editToken );
+				$status = $this->attemptSave( $title, $patchedContent, $summary, $editToken );
 			}
 		} else { // undo
-			$patchedContent = $latestContent->getPatchedCopy( $diff );
-
 			if ( $patchedContent->equals( $latestContent ) ) {
 				$status = Status::newGood();
 				$status->warning( 'wikibase-empty-undo' );
