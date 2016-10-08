@@ -105,7 +105,7 @@ class SubmitEntityAction extends EditEntityAction {
 		$summary = $request->getText( 'wpSummary' );
 		$editToken = $request->getText( 'wpEditToken' );
 
-		if ( $newerRevision->getId() === $latestRevision->getId() ) { // restore
+		if ( $request->getCheck( 'restore' ) ) { // restore
 			if ( $diff->isEmpty() ) {
 				$status = Status::newGood();
 				$status->warning( 'wikibase-empty-undo' );
