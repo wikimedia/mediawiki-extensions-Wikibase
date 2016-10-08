@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "4e6f8b3b_cdd6a1f6",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-08T23:10:44Z",
+      "side": 1,
+      "message": "Sometimes it\u0027s needed but not in this case. Done",
+      "parentUuid": "4e6f8b3b_8a356fda",
+      "revId": "47516707f9addaa71c96570d0fc13c2041f4914d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e6f8b3b_4a1c576b",
         "filename": "client/resources/wikibase.client.action.edit.collapsibleFooter.js",
         "patchSetId": 14
@@ -71,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4e6f8b3b_4dfab174",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-08T23:10:44Z",
+      "side": 1,
+      "message": "Every other hook did the same, Let\u0027s keep it for consistency (probably there was a reason behind it)",
+      "parentUuid": "4e6f8b3b_2a271bb3",
+      "revId": "47516707f9addaa71c96570d0fc13c2041f4914d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e6f8b3b_ea150342",
         "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
         "patchSetId": 14
@@ -94,6 +130,24 @@
     },
     {
       "key": {
+        "uuid": "4e6f8b3b_0d00b96c",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-08T23:10:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e6f8b3b_ea150342",
+      "revId": "47516707f9addaa71c96570d0fc13c2041f4914d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e6f8b3b_aa322bed",
         "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
         "patchSetId": 14
@@ -111,6 +165,24 @@
         "endLine": 188,
         "endChar": 16
       },
+      "revId": "47516707f9addaa71c96570d0fc13c2041f4914d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e6f8b3b_2d05757d",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-08T23:10:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e6f8b3b_aa322bed",
       "revId": "47516707f9addaa71c96570d0fc13c2041f4914d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
