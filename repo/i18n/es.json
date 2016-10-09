@@ -338,6 +338,7 @@
 	"wikibase-entity-not-viewable": "El contenido dado de tipo \"$1\" no es una entidad y Wikibase no puede mostrarlo.",
 	"action-item-merge": "fusionar elementos",
 	"action-property-create": "crear propiedades",
+	"wikibase-pageinfo-subscription-none": "Ninguno",
 	"apihelp-wbavailablebadges-description": "Consulta los elementos de insignias disponibles.",
 	"apihelp-wbavailablebadges-example-1": "Consulta todos elementos de insignias disponibles",
 	"apihelp-wbcreateredirect-param-from": "Identificador de entidad para hacer una redirección",

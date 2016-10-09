@@ -64,7 +64,7 @@
 	"wikibase-validator-no-such-property": "Omadust $1 ei leidu",
 	"wikibase-validator-bad-value": "Rikutud andmeväärtus: $1",
 	"wikibase-validator-bad-value-type": "Vigane väärtuse tüüp $1, oodatav $2",
-	"wikibase-validator-bad-url": "Internetiaadressid ei tohi sisaldada teatud märke nagu tühikud ja nurksulud.",
+	"wikibase-validator-bad-url": "Internetiaadressid ei tohi sisaldada teatud märke nagu tühikud ja nurksulud: $1",
 	"wikibase-validator-bad-url-scheme": "URL-skeemi \"$1\" tugi puudub.",
 	"wikibase-validator-unknown-unit": "Tundmatu ühik: $1",
 	"wikibase-validator-not-allowed": "Lubamatu väärtus: $1",

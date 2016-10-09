@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Don Alessandro"
+			"Don Alessandro",
+			"Danvintius Bookix"
 		]
 	},
+	"wikibase-sitelinks-wikipedia": "Википедия",
 	"wikibase-sitelinks-link-columnheading": "Багълангъан саифе"
 }

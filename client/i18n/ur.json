@@ -27,6 +27,7 @@
 	"wikibase-linkitem-input-page": "صفحہ:",
 	"wikibase-linkitem-confirmitem-button": "تصدیق",
 	"wikibase-linkitem-not-loggedin-title": "آپ کو کھاتہ میں داخل ہونے (لاگ ان) کی ضرورت ہے۔",
+	"wikibase-linkitem-success-link": "صفحات مربوط کر دیے گئے ہیں۔ آپ ان روابط پر مشتمل آئٹم کو ہمارے [$1 مرکزی ڈیٹا ذخیرے] میں دیکھ سکتے ہیں۔",
 	"wikibase-property-notfound": "$1 مواد نہیں ملا۔",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "چھپائیں",

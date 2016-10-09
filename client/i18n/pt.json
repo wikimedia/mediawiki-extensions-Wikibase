@@ -16,7 +16,8 @@
 			"He7d3r",
 			"Fúlvio",
 			"Macofe",
-			"Mansil"
+			"Mansil",
+			"Hamilton Abreu"
 		]
 	},
 	"wikibase-client-desc": "Cliente para a extensão Wikibase",
@@ -64,6 +65,7 @@
 	"wikibase-replicationnote": "Por favor, saiba que pode levar vários minutos até que as mudanças são visíveis em todos as wikis.",
 	"wikibase-watchlist-show-changes-pref": "Mostrar as edições no {{WBREPONAME}} na sua lista de páginas vigiadas",
 	"wikibase-error-invalid-entity-id": "O identificador introduzido não é reconhecido pelo sistema. Utilize um identificador válido.",
+	"wikibase-error-exceeded-entity-access-limit": "Foram acedidas demasiadas entidades {{WBREPONAME}}.",
 	"unconnectedpages": "Páginas não conectadas a itens",
 	"unconnectedpages-summary": "Esta lista contém páginas sem itens conectados (em domínios com suporte a itens conectados). A lista está ordenada pelo ID da página descendente, de modo que as páginas mais novas são mostradas primeiro.",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|ligação interlínguas|ligações interlínguas}} na página)",
