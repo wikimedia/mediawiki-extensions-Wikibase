@@ -79,7 +79,10 @@ class DumpJson extends DumpScript {
 	public function execute() {
 		if ( !$this->hasHadServicesSet ) {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory( $wikibaseRepo->getEntityIdComposer() );
+			$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
+				$wikibaseRepo->getEntityNamespaceLookup(),
+				$wikibaseRepo->getEntityIdParser()
+			);
 			$revisionLookup = $wikibaseRepo->getEntityRevisionLookup( 'uncached' );
 
 			$this->setServices(
