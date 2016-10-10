@@ -912,7 +912,8 @@ final class RepoHooks {
 	}
 
 	/**
-	 * Adds a list of data value types to the action=query&meta=siteinfo API.
+	 * Adds a list of data value types, sparql endpoint and concept base URI to
+	 * the action=query&meta=siteinfo API.
 	 *
 	 * @param ApiQuerySiteinfo $api
 	 * @param array &$data
@@ -931,6 +932,11 @@ final class RepoHooks {
 		$sparqlEndpoint = $wikibaseRepo->getSettings()->getSetting( 'sparqlEndpoint' );
 		if ( is_string( $sparqlEndpoint ) ) {
 			$data['wikibase-sparql'] = $sparqlEndpoint;
+		}
+
+		$conceptBaseUri = $wikibaseRepo->getSettings()->getSetting( 'conceptBaseUri' );
+		if ( is_string( $conceptBaseUri ) ) {
+			$data['wikibase-conceptbaseuri'] = $conceptBaseUri;
 		}
 	}
 
