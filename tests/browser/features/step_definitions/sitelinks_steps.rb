@@ -20,7 +20,7 @@ end
 
 When(/^I click the sitelink save button$/) do
   on(ItemPage) do |page|
-    page.save_sitelink_link_element.when_visible.click
+    page.save_sitelink_link_element.when_present.click
     page.wait_for_api_callback
   end
 end
