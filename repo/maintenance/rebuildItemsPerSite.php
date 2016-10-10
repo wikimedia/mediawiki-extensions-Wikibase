@@ -61,8 +61,11 @@ class RebuildItemsPerSite extends Maintenance {
 		$builder->setReporter( $reporter );
 		$builder->setBatchSize( $batchSize );
 
-		$entityPerPage = $store->newEntityPerPage();
-		$stream = new SqlEntityIdPager( $entityPerPage, 'item' );
+		$stream = new SqlEntityIdPager(
+			$wikibaseRepo->getEntityNamespaceLookup(),
+			$wikibaseRepo->getEntityIdParser(),
+			'item'
+		);
 
 		// Now <s>kill</s> fix the table
 		$builder->rebuild( $stream );
