@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e6f8b3b_5a009a04",
+        "filename": "lib/includes/Store/MultiplexingEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-10T23:33:05Z",
+      "side": 1,
+      "message": "please document the type",
+      "revId": "1e7e7040ffd07fa4ea5fdd3c3516ee0a3938856b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e6f8b3b_7a055613",
+        "filename": "lib/includes/Store/MultiplexingEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-10T23:33:05Z",
+      "side": 1,
+      "message": "please document the type",
+      "revId": "1e7e7040ffd07fa4ea5fdd3c3516ee0a3938856b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e6f8b3b_9a0a1223",
+        "filename": "lib/includes/Store/MultiplexingEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-10T23:33:05Z",
+      "side": 1,
+      "message": "why is the local lookup not simply the foreign lookup with the empty string \"\" as the key?",
+      "revId": "1e7e7040ffd07fa4ea5fdd3c3516ee0a3938856b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e6f8b3b_da0baa24",
+        "filename": "lib/includes/Store/MultiplexingEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-10T23:33:05Z",
+      "side": 1,
+      "message": "this special case should not be needed, see above",
+      "revId": "1e7e7040ffd07fa4ea5fdd3c3516ee0a3938856b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e6f8b3b_ba0eee35",
+        "filename": "lib/includes/Store/MultiplexingEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-10T23:33:05Z",
+      "side": 1,
+      "message": "We probably want a more specific exception here",
+      "revId": "1e7e7040ffd07fa4ea5fdd3c3516ee0a3938856b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
