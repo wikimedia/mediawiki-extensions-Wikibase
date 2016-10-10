@@ -502,4 +502,8 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$this->assertContains( '(wikibase-noentity)', $context->getOutput()->getHTML() );
 	}
 
+	public function testSupportsCategories() {
+		$this->assertFalse( $this->getHandler()->supportsCategories() );
+	}
+
 }

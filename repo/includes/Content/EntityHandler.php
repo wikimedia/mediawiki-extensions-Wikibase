@@ -279,6 +279,15 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
+	 * None of the Entity content models support categories.
+	 *
+	 * @return bool Always false.
+	 */
+	public function supportsCategories() {
+		return false;
+	}
+
+	/**
 	 * @see ContentHandler::makeRedirectContent
 	 *
 	 * @warn Always throws an MWException, since an EntityRedirects needs to know it's own
