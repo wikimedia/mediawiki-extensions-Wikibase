@@ -311,6 +311,7 @@
 	"wikibase-pageinfo-subscription-none": "Brak",
 	"apihelp-wbcreateclaim-description": "Tworzy stwierdzenia Wikibase.",
 	"apihelp-wbcreateclaim-param-snaktype": "Typ łącznika",
+	"apihelp-wbeditentity-example-12": "Usuwa etykietę",
 	"apihelp-wbformatvalue-description": "Formaty DataValues.",
 	"apihelp-wbmergeitems-description": "Łączy wiele elementów.",
 	"apihelp-wbremoveclaims-description": "Usuwa stwierdzenia Wikibase.",

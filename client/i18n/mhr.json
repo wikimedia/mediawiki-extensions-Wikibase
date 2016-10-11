@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Сай"
+			"Сай",
+			"Санюн Вадик"
 		]
 	},
 	"wikibase-editlinks": "Кылверым тӧрлаташ",
+	"wikibase-editlinkstitle": "Править межъязыковые ссылки",
 	"wikibase-rc-hide-wikidata-show": "ончыкташ"
 }

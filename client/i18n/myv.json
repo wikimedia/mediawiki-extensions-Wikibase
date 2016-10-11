@@ -1,9 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Botuzhaleny-sodamo"
+			"Botuzhaleny-sodamo",
+			"Rueter"
 		]
 	},
+	"wikibase-editlinks": "Витнемс-петнемс сюлмавома петнень",
+	"wikibase-editlinkstitle": "Витнемс-петнемс кельютконь сюлмавома петнень",
 	"wikibase-rc-hide-wikidata-hide": "Кекшемс",
 	"wikibase-rc-hide-wikidata-show": "Невтемс"
 }
