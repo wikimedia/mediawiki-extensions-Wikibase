@@ -1,11 +1,12 @@
 <?php
 
-namespace Wikibase\Tests;
+namespace Wikibase\Repo\Tests;
 
 use ApiQuerySiteinfo;
 use ConfigFactory;
 use DerivativeContext;
 use ImportStringSource;
+use MediaWikiTestCase;
 use MWException;
 use OutputPage;
 use ParserOutput;
@@ -13,6 +14,7 @@ use RequestContext;
 use Title;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\RepoHooks;
+use Wikibase\SettingsArray;
 use WikiImporter;
 
 /**
@@ -27,21 +29,28 @@ use WikiImporter;
  * @author Daniel Kinzler
  * @author Thiemo Mättig
  */
-class RepoHooksTest extends \MediaWikiTestCase {
+class RepoHooksTest extends MediaWikiTestCase {
 
 	private $saveAllowImport = false;
 
 	protected function setUp() {
 		parent::setUp();
 
-		$this->saveAllowImport = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'allowEntityImport' );
+		$this->saveAllowImport = $this->getSettings()->getSetting( 'allowEntityImport' );
 	}
 
 	protected function tearDown() {
-		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'allowEntityImport', $this->saveAllowImport );
+		$this->getSettings()->setSetting( 'allowEntityImport', $this->saveAllowImport );
 		Title::clearCaches();
 
 		parent::tearDown();
+	}
+
+	/**
+	 * @return SettingsArray
+	 */
+	private function getSettings() {
+		return WikibaseRepo::getDefaultInstance()->getSettings();
 	}
 
 	public function testOnAPIQuerySiteInfoGeneralInfo() {
@@ -49,42 +58,46 @@ class RepoHooksTest extends \MediaWikiTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$actual = array();
+		$actual = [];
 		RepoHooks::onAPIQuerySiteInfoGeneralInfo( $api, $actual );
+
 		foreach ( $actual['wikibase-propertytypes'] as $key => $value ) {
 			$this->assertInternalType( 'string', $key );
 			$this->assertInternalType( 'string', $value['valuetype'] );
 		}
+		$this->assertArrayNotHasKey( 'wikibase-sparql', $actual );
+		$this->assertStringStartsWith( 'http://', $actual['wikibase-conceptbaseuri'] );
+		$this->assertStringEndsWith( '/entity/', $actual['wikibase-conceptbaseuri'] );
 	}
 
 	public function revisionInfoProvider() {
-		return array(
-			'empty_allowimport' => array(
-				array(),
+		return [
+			'empty_allowimport' => [
+				[],
 				true
-			),
-			'empty_noimport' => array(
-				array(),
+			],
+			'empty_noimport' => [
+				[],
 				true
-			),
-			'wikitext_allowimport' => array(
-				array( 'model' => CONTENT_MODEL_WIKITEXT ),
+			],
+			'wikitext_allowimport' => [
+				[ 'model' => CONTENT_MODEL_WIKITEXT ],
 				true
-			),
-			'wikitext_noimport' => array(
-				array( 'model' => CONTENT_MODEL_WIKITEXT ),
+			],
+			'wikitext_noimport' => [
+				[ 'model' => CONTENT_MODEL_WIKITEXT ],
 				false
-			),
-			'item_allowimport' => array(
-				array( 'model' => CONTENT_MODEL_WIKIBASE_ITEM ),
+			],
+			'item_allowimport' => [
+				[ 'model' => CONTENT_MODEL_WIKIBASE_ITEM ],
 				false,
 				MWException::class
-			),
-			'item_noimport' => array(
-				array( 'model' => CONTENT_MODEL_WIKIBASE_ITEM ),
+			],
+			'item_noimport' => [
+				[ 'model' => CONTENT_MODEL_WIKIBASE_ITEM ],
 				true
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -100,22 +113,19 @@ class RepoHooksTest extends \MediaWikiTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting(
-			'allowEntityImport',
-			$allowEntityImport
-		);
+		$this->getSettings()->setSetting( 'allowEntityImport', $allowEntityImport );
 
 		if ( $expectedException !== null ) {
 			$this->setExpectedException( $expectedException );
 		}
 
-		RepoHooks::onImportHandleRevisionXMLTag( $importer, array(), $revisionInfo );
+		RepoHooks::onImportHandleRevisionXMLTag( $importer, [], $revisionInfo );
 		$this->assertTrue( true ); // make PHPUnit happy
 	}
 
 	public function importProvider() {
-		return array(
-			'wikitext' => array( <<<XML
+		return [
+			'wikitext' => [ <<<XML
 <mediawiki>
   <siteinfo>
     <sitename>TestWiki</sitename>
@@ -135,8 +145,8 @@ class RepoHooksTest extends \MediaWikiTestCase {
 XML
 				,
 				false
-			),
-			'item' => array( <<<XML
+			],
+			'item' => [ <<<XML
 <mediawiki>
   <siteinfo>
     <sitename>TestWiki</sitename>
@@ -157,8 +167,8 @@ XML
 				,
 				false,
 				MWException::class
-			),
-			'item (allow)' => array( <<<XML
+			],
+			'item (allow)' => [ <<<XML
 <mediawiki>
   <siteinfo>
     <sitename>TestWiki</sitename>
@@ -178,8 +188,8 @@ XML
 XML
 			,
 				true
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -191,7 +201,7 @@ XML
 		stream_wrapper_unregister( 'uploadsource' );
 		\MediaWiki\restoreWarnings();
 
-		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'allowEntityImport', $allowImport );
+		$this->getSettings()->setSetting( 'allowEntityImport', $allowImport );
 
 		$source = new ImportStringSource( $xml );
 		$importer = new WikiImporter( $source, ConfigFactory::getDefaultInstance()->makeConfig( 'main' ) );
@@ -211,7 +221,7 @@ XML
 	}
 
 	public function testOnOutputPageParserOutput() {
-		$altLinks = array( array( 'a' => 'b' ), array( 'c', 'd' ) );
+		$altLinks = [ [ 'a' => 'b' ], [ 'c', 'd' ] ];
 
 		$context = new DerivativeContext( RequestContext::getMain() );
 		$out = new OutputPage( $context );
