@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Api;
 
 use ApiBase;
+use ApiPageSet;
 use ApiQuery;
 use ApiQueryGeneratorBase;
 use ApiResult;
@@ -78,13 +79,17 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 	 * @param array $prop
 	 * @param ApiPageSet|null $resultPageSet
 	 */
-	private function formatResult( ResultWrapper $res, $limit,
-		array $prop, ApiPageSet $resultPageSet = null
+	private function formatResult(
+		ResultWrapper $res,
+		$limit,
+		array $prop,
+		ApiPageSet $resultPageSet = null
 	) {
 		$currentPageId = null;
 		$entry = [];
 		$count = 0;
 		$result = $this->getResult();
+		$prRow = null;
 
 		foreach ( $res as $row ) {
 			if ( ++$count > $limit ) {
