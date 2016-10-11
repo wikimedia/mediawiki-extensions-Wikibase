@@ -177,6 +177,7 @@ call_user_func( function() {
 	$wgAPIModules['wbavailablebadges'] = Wikibase\Repo\Api\AvailableBadges::class;
 	$wgAPIModules['wbcreateredirect'] = Wikibase\Repo\Api\CreateRedirect::class;
 	$wgAPIListModules['wbsearch'] = Wikibase\Repo\Api\QuerySearchEntities::class;
+	$wgAPIListModules['wbsubscribers'] = Wikibase\Repo\Api\Subscribers::class;
 
 	// Special page registration
 	$wgSpecialPages['NewItem'] = Wikibase\Repo\Specials\SpecialNewItem::class;
