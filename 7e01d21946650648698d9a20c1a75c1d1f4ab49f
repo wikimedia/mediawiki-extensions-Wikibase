@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e6f8b3b_597d05e4",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-11T17:45:04Z",
+      "side": 1,
+      "message": "This is OK as a part of the patch as it would implicitly be null any way.\nWhile looking at it I started to dig what this is actually happening with this variable. Are we 100% certain that code in line 108:\n$fit \u003d $this-\u003eformatPageData( $prRow, $currentPageId, $entry, $result );\nwill never be reached when processing first row of results?\nIf this happened null will be passed to addPageData, and result in the error in line 69 (trying to get undefined values when doing Title::makeTitle).\n\nIf this is actually a bug then it could also be fixed seperately. What do you think?\nAnd if this is not a bug and I am just reading it wrong than sorry for bothering",
+      "revId": "7e01d21946650648698d9a20c1a75c1d1f4ab49f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
