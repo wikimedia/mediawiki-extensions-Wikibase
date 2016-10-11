@@ -109,7 +109,7 @@ class StatementGroupRendererFactory {
 			$language,
 			$this->propertyIdResolver,
 			$this->snaksFinder,
-			$this->dataAccessSnakFormatterFactory->newSnakFormatterForLanguage( $language, $usageAccumulator ),
+			$this->dataAccessSnakFormatterFactory->newEscapedPlainTextSnakFormatter( $language, $usageAccumulator ),
 			$this->entityLookup
 		);
 
