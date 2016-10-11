@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e6f8b3b_b5ab5f1a",
+        "filename": "lib/includes/Store/MultiplexingEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-11T11:42:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e6f8b3b_5a009a04",
+      "revId": "1e7e7040ffd07fa4ea5fdd3c3516ee0a3938856b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e6f8b3b_7a055613",
         "filename": "lib/includes/Store/MultiplexingEntityRevisionLookup.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2016-10-10T23:33:05Z",
       "side": 1,
       "message": "please document the type",
+      "revId": "1e7e7040ffd07fa4ea5fdd3c3516ee0a3938856b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e6f8b3b_d5a8db1f",
+        "filename": "lib/includes/Store/MultiplexingEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-11T11:42:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e6f8b3b_7a055613",
       "revId": "1e7e7040ffd07fa4ea5fdd3c3516ee0a3938856b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4e6f8b3b_95b74381",
+        "filename": "lib/includes/Store/MultiplexingEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-11T11:42:58Z",
+      "side": 1,
+      "message": "That was what I initially did in https://github.com/wmde/WikibaseDataModelServices/pull/150 but then I decided to separate the lookup for the local repo from other. I don\u0027t really things this is a good idea so I\u0027ve now changed it back to use empty-string key for local lookup.",
+      "parentUuid": "4e6f8b3b_9a0a1223",
+      "revId": "1e7e7040ffd07fa4ea5fdd3c3516ee0a3938856b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e6f8b3b_da0baa24",
         "filename": "lib/includes/Store/MultiplexingEntityRevisionLookup.php",
         "patchSetId": 3
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "4e6f8b3b_55ef8b82",
+        "filename": "lib/includes/Store/MultiplexingEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-11T11:42:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e6f8b3b_da0baa24",
+      "revId": "1e7e7040ffd07fa4ea5fdd3c3516ee0a3938856b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e6f8b3b_ba0eee35",
         "filename": "lib/includes/Store/MultiplexingEntityRevisionLookup.php",
         "patchSetId": 3
@@ -81,6 +153,24 @@
       "writtenOn": "2016-10-10T23:33:05Z",
       "side": 1,
       "message": "We probably want a more specific exception here",
+      "revId": "1e7e7040ffd07fa4ea5fdd3c3516ee0a3938856b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e6f8b3b_35ea0f74",
+        "filename": "lib/includes/Store/MultiplexingEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-11T11:42:58Z",
+      "side": 1,
+      "message": "Switched to use the exception introduced in https://github.com/wmde/WikibaseDataModelServices/pull/150\nStill not sure what namespace the exception should be in. Curent (Wikibase\\DataModel\\Services\\Lookup) might be kind of ok as long only lookup services use it but maybe it should better one level up or so?",
+      "parentUuid": "4e6f8b3b_ba0eee35",
       "revId": "1e7e7040ffd07fa4ea5fdd3c3516ee0a3938856b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
