@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Api;
 
 use ApiBase;
+use ApiPageSet;
 use ApiQuery;
 use ApiQueryGeneratorBase;
 use ApiResult;
@@ -79,12 +80,13 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 	 * @param ApiPageSet|null $resultPageSet
 	 */
 	private function formatResult( ResultWrapper $res, $limit,
-		array $prop, ApiPageSet $resultPageSet = null
+	                               array $prop, ApiPageSet $resultPageSet = null
 	) {
 		$currentPageId = null;
 		$entry = [];
 		$count = 0;
 		$result = $this->getResult();
+		$prRow = null;
 
 		foreach ( $res as $row ) {
 			if ( ++$count > $limit ) {
@@ -276,11 +278,11 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 	protected function getExamplesMessages() {
 		return [
 			'action=query&list=wblistentityusage&wbeuentities=Q2'
-				=> 'apihelp-query+wblistentityusage-example-simple',
+			=> 'apihelp-query+wblistentityusage-example-simple',
 			'action=query&list=wblistentityusage&wbeuentities=Q2&wbeuprop=url'
-				=> 'apihelp-query+wblistentityusage-example-url',
+			=> 'apihelp-query+wblistentityusage-example-url',
 			'action=query&list=wblistentityusage&wbeuentities=Q2&wbeuaspect=S|O'
-				=> 'apihelp-query+wblistentityusage-example-aspect',
+			=> 'apihelp-query+wblistentityusage-example-aspect',
 		];
 	}
 
