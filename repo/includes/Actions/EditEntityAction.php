@@ -15,10 +15,8 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use WebRequest;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
-use Wikibase\DataModel\Services\Lookup\LanguageLabelDescriptionLookup;
-use Wikibase\Lib\EntityIdHtmlLinkFormatter;
-use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
@@ -63,10 +61,19 @@ class EditEntityAction extends ViewEntityAction {
 		) );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
 		$termLookup = new EntityRetrievingTermLookup( $wikibaseRepo->getEntityLookup() );
-		$labelDescriptionLookup = new LanguageLabelDescriptionLookup( $termLookup, $languageCode );
+		$labelDescriptionLookupFactory = new LanguageFallbackLabelDescriptionLookupFactory(
+			$wikibaseRepo->getLanguageFallbackChainFactory(),
+			$termLookup
+		);
+		$labelDescriptionLookup = $labelDescriptionLookupFactory->newLabelDescriptionLookup(
+			$this->getContext()->getLanguage(),
+			array() // TODO: populate ids of entities to prefetch
+		);
+
 		$htmlFormatterFactory = $wikibaseRepo->getEntityIdHtmlLinkFormatterFactory();
-		$propertyIdFormatter = $htmlFormatterFactory->getEntityIdFormatter( $labelDescriptionLookup );
+		$entityIdFormatter = $htmlFormatterFactory->getEntityIdFormatter( $labelDescriptionLookup );
 
 		$formatterFactory = $wikibaseRepo->getSnakFormatterFactory();
 		$snakDetailsFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML_DIFF, $options );
@@ -77,7 +84,7 @@ class EditEntityAction extends ViewEntityAction {
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
 			new ClaimDifferenceVisualizer(
 				new DifferencesSnakVisualizer(
-					$propertyIdFormatter,
+					$entityIdFormatter,
 					$snakDetailsFormatter,
 					$snakBreadCrumbFormatter,
 					$languageCode
@@ -85,11 +92,7 @@ class EditEntityAction extends ViewEntityAction {
 				$languageCode
 			),
 			$wikibaseRepo->getSiteStore(),
-			new EntityIdHtmlLinkFormatter(
-				$labelDescriptionLookup,
-				$wikibaseRepo->getEntityTitleLookup(),
-				new LanguageNameLookup( $languageCode )
-			)
+			$entityIdFormatter
 		);
 	}
 
