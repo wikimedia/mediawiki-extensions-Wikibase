@@ -1,5 +1,5 @@
 BROWSER:
-  - firefox
+  - chrome
 
 MEDIAWIKI_ENVIRONMENT:
   - beta
