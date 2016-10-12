@@ -153,7 +153,7 @@ $.widget( 'ui.tagadata', {
 			} else {
 				$tag
 				.removeClass( 'tagadata-choice ui-widget-content '
-					+ 'ui-state-default ui-corner-all ui-state-highlight remove' )
+					+ 'ui-state-default ui-corner-all remove' )
 				.empty()
 				.off( '.' + this.widgetName )
 				.text( text );
@@ -253,29 +253,6 @@ $.widget( 'ui.tagadata', {
 	},
 
 	/**
-	 * Highlights a tag for a short time.
-	 *
-	 * @param {jQuery} $tag
-	 */
-	highlightTag: function( $tag ) {
-		$tag.switchClass(
-			'',
-			'tagadata-choice-existing ui-state-highlight',
-			150,
-			'linear',
-			function() {
-				// also remove 'remove' class to avoid confusion
-				$tag.switchClass(
-					'tagadata-choice-existing ui-state-highlight remove',
-					'',
-					750,
-					'linear'
-				);
-			}
-		);
-	},
-
-	/**
 	 * Adds a new tag to the list of tags. If the tag exists in the list already, the existing tag
 	 * will be returned.
 	 *
@@ -290,10 +267,6 @@ $.widget( 'ui.tagadata', {
 		var $tag = this.getTag( value );
 
 		if ( $tag ) {
-			if ( value !== '' ) {
-				// highlight the already existing tag, except if it is the new tag input
-				this.highlightTag( $tag );
-			}
 			return $tag;
 		}
 
@@ -403,7 +376,6 @@ $.widget( 'ui.tagadata', {
 					// Remove tag if hit ENTER on an empty tag, except for the helper tag.
 					if ( $targetTag.get( 0 ) !== $tag.get( 0 ) ) {
 						self.removeTag( $tag );
-						self.highlightTag( $targetTag );
 					}
 				}
 				$targetTag.find( 'input' ).focus();
