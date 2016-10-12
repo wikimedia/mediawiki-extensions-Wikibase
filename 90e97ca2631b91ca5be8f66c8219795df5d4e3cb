@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e6f8b3b_ab769bd3",
+        "filename": "client/includes/Specials/SpecialEntityUsage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-12T13:42:31Z",
+      "side": 1,
+      "message": "I am not certainly sure but couldn\u0027t you also use \u0027eu_page_id \u003d page_id\u0027 as a condition here?\n\nTesting with a single test case (using test data you\u0027ve been trying out) it seems to give right examples too.\n\nAlso, from what I\u0027ve noticed doing it the way changed it now would break when the method is called in test environment, a.k.a. \"Unknown column \u0027wbc_entity_usage.eu_page_id\u0027 in \u0027where clause\u0027\" (whereas when running tests it is unittest_wbc_entity_usage or however it is configured)",
+      "revId": "90e97ca2631b91ca5be8f66c8219795df5d4e3cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
