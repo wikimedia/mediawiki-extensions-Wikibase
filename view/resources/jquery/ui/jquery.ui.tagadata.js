@@ -34,10 +34,6 @@
  *         Text used as placeholder in the input field if no text has been typed yet.
  *         Default: ''
  *
- * @option {boolean} [anmiate]
- *         Whether  to animate tag removals or not.
- *         Default: true
- *
  * @option {number[]} [triggerKeys]
  *         Keys which - when pressed in the input area - will trigger the current input to be added
  *         as tag. $.ui.keyCode members can be used for convenience.
@@ -92,7 +88,6 @@ $.widget( 'ui.tagadata', {
 		editableTags: true,
 		caseSensitive: true,
 		placeholderText: null,
-		animate: true,
 		triggerKeys: []
 	},
 
@@ -157,7 +152,7 @@ $.widget( 'ui.tagadata', {
 				$tag.remove(); // completely remove helper
 			} else {
 				$tag
-				.removeClass( 'tagadata-choice tagadata-choice-removed ui-widget-content '
+				.removeClass( 'tagadata-choice ui-widget-content '
 					+ 'ui-state-default ui-corner-all ui-state-highlight remove' )
 				.empty()
 				.off( '.' + this.widgetName )
@@ -185,16 +180,12 @@ $.widget( 'ui.tagadata', {
 			usedLabels = [];
 
 		this._$tagList.children( '.tagadata-choice' ).each( function() {
-			var $tag = $( this );
+			var $tag = $( this ),
+				tagLabel = self.getTagLabel( $tag );
 
-			// Check if already removed but still assigned till animations end:
-			if ( !$tag.hasClass( 'tagadata-choice-removed' ) ) {
-				var tagLabel = self.getTagLabel( $tag );
-
-				if ( tagLabel !== '' && $.inArray( tagLabel, usedLabels ) === -1 ) {
-					$tags = $tags.add( this );
-					usedLabels.push( tagLabel );
-				}
+			if ( tagLabel !== '' && $.inArray( tagLabel, usedLabels ) === -1 ) {
+				$tags = $tags.add( this );
+				usedLabels.push( tagLabel );
 			}
 		} );
 		return $tags;
@@ -527,14 +518,9 @@ $.widget( 'ui.tagadata', {
 	 * Removes a tag.
 	 *
 	 * @param {jQuery} $tag
-	 * @param {boolean} [animate]
 	 * @return {boolean}
 	 */
-	removeTag: function( $tag, animate ) {
-		var self = this;
-
-		animate = animate || this.options.animate;
-
+	removeTag: function( $tag ) {
 		if ( !$tag.hasClass( 'tagadata-choice' )
 			|| !this._$tagList[0].contains( $tag[0] )
 		) {
@@ -549,16 +535,8 @@ $.widget( 'ui.tagadata', {
 			equalTags.removeClass( 'tagadata-choice-equal' );
 		}
 
-		if ( animate ) {
-			$tag.addClass( 'tagadata-choice-removed' );
-			$tag.fadeOut( 'fast' ).hide( 'blind', { direction: 'horizontal' }, 'fast', function() {
-				$tag.remove();
-				self._trigger( 'tagRemoved', null, $tag );
-			} );
-		} else {
-			$tag.remove();
-			this._trigger( 'tagRemoved', null, $tag );
-		}
+		$tag.remove();
+		this._trigger( 'tagRemoved', null, $tag );
 
 		return true;
 	},
@@ -569,7 +547,7 @@ $.widget( 'ui.tagadata', {
 	removeAll: function() {
 		var self = this;
 		this._$tagList.children( '.tagadata-choice' ).each( function() {
-			self.removeTag( $( this ), false );
+			self.removeTag( $( this ) );
 		} );
 	},
 

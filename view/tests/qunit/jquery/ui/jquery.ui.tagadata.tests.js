@@ -7,16 +7,15 @@
 'use strict';
 
 /**
- * @param {Object} [options]
  * @return {jQuery}
  */
-function createTagadata( options ) {
+function createTagadata() {
 	return $( '<ul/>' )
 		.addClass( 'test_tagadata' )
 		.append( $( '<li/>' ).text( 'A' ) )
 		.append( $( '<li/>' ).text( 'B' ) )
 		.append( $( '<li/>' ).text( 'C' ) )
-		.tagadata( options || {} )
+		.tagadata()
 		.appendTo( 'body' );
 }
 
@@ -164,7 +163,7 @@ QUnit.test( 'disable(), enable()', function( assert ) {
 
 QUnit.test( 'hasConflict()', function( assert ) {
 	assert.expect( 5 );
-	var $tagadata = createTagadata( { animate: false } ),
+	var $tagadata = createTagadata(),
 		tagadata = $tagadata.data( 'tagadata' );
 
 	assert.ok(

@@ -113,7 +113,6 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 
 		this.$list
 		.tagadata( {
-			animate: false,
 			placeholderText: mw.msg( 'wikibase-alias-edit-placeholder' )
 		} )
 		.on(
