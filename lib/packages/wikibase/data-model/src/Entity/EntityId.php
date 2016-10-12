@@ -75,11 +75,11 @@ abstract class EntityId implements Comparable, Serializable {
 		$repoName = array_shift( $parts );
 		$prefixRemainder = implode( ':', $parts );
 
-		return array(
+		return [
 			is_string( $repoName ) ? $repoName : '',
 			$prefixRemainder,
 			$localPart
-		);
+		];
 	}
 
 	/**
@@ -129,7 +129,7 @@ abstract class EntityId implements Comparable, Serializable {
 	public function getLocalPart() {
 		$parts = self::splitSerialization( $this->serialization );
 
-		return self::joinSerialization( array( '', $parts[1], $parts[2] ) );
+		return self::joinSerialization( [ '', $parts[1], $parts[2] ] );
 	}
 
 	/**

@@ -18,7 +18,7 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 		$list = new TermList();
 		$this->assertTrue( $list->isEmpty() );
 
-		$list = new TermList( array( new Term( 'en', 'foo' ) ) );
+		$list = new TermList( [ new Term( 'en', 'foo' ) ] );
 		$this->assertFalse( $list->isEmpty() );
 	}
 
@@ -34,10 +34,10 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getTwoTerms() {
-		return array(
+		return [
 			'en' => new Term( 'en', 'foo' ),
 			'de' => new Term( 'de', 'bar' ),
-		);
+		];
 	}
 
 	public function testGivenTwoTerms_listContainsThem() {
@@ -49,7 +49,7 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenTermsWithTheSameLanguage_onlyTheLastOnesAreRetained() {
-		$array = array(
+		$array = [
 			new Term( 'en', 'foo' ),
 			new Term( 'en', 'bar' ),
 
@@ -58,44 +58,44 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 			new Term( 'nl', 'bah' ),
 			new Term( 'nl', 'blah' ),
 			new Term( 'nl', 'spam' ),
-		);
+		];
 
 		$list = new TermList( $array );
 
 		$this->assertEquals(
-			array(
+			[
 				'en' => new Term( 'en', 'bar' ),
 				'de' => new Term( 'de', 'baz' ),
 				'nl' => new Term( 'nl', 'spam' ),
-			),
+			],
 			iterator_to_array( $list )
 		);
 	}
 
 	public function testGivenNoTerms_toTextArrayReturnsEmptyArray() {
 		$list = new TermList();
-		$this->assertEquals( array(), $list->toTextArray() );
+		$this->assertEquals( [], $list->toTextArray() );
 	}
 
 	public function testGivenTerms_toTextArrayReturnsTermsInFormat() {
-		$list = new TermList( array(
+		$list = new TermList( [
 			new Term( 'en', 'foo' ),
 			new Term( 'de', 'bar' ),
-		) );
+		] );
 
 		$this->assertEquals(
-			array(
+			[
 				'en' => 'foo',
 				'de' => 'bar',
-			),
+			],
 			$list->toTextArray()
 		);
 	}
 
 	public function testCanIterateOverList() {
-		$list = new TermList( array(
+		$list = new TermList( [
 			new Term( 'en', 'foo' ),
-		) );
+		] );
 
 		foreach ( $list as $key => $term ) {
 			$this->assertEquals( 'en', $key );
@@ -106,11 +106,11 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenSetLanguageCode_getByLanguageReturnsGroup() {
 		$enTerm = new Term( 'en', 'a' );
 
-		$list = new TermList( array(
+		$list = new TermList( [
 			new Term( 'de', 'b' ),
 			$enTerm,
 			new Term( 'nl', 'c' ),
-		) );
+		] );
 
 		$this->assertEquals( $enTerm, $list->getByLanguage( 'en' ) );
 	}
@@ -132,10 +132,10 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testHasTermForLanguage() {
-		$list = new TermList( array(
+		$list = new TermList( [
 			new Term( 'en', 'foo' ),
 			new Term( 'de', 'bar' ),
-		) );
+		] );
 
 		$this->assertTrue( $list->hasTermForLanguage( 'en' ) );
 		$this->assertTrue( $list->hasTermForLanguage( 'de' ) );
@@ -156,18 +156,18 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidLanguageCodeProvider() {
-		return array(
-			array( null ),
-			array( 21 ),
-			array( '' ),
-		);
+		return [
+			[ null ],
+			[ 21 ],
+			[ '' ],
+		];
 	}
 
 	public function testGivenNotSetLanguageCode_removeByLanguageDoesNoOp() {
-		$list = new TermList( array(
+		$list = new TermList( [
 			new Term( 'en', 'foo' ),
 			new Term( 'de', 'bar' ),
-		) );
+		] );
 
 		$list->removeByLanguage( 'nl' );
 
@@ -177,15 +177,15 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenSetLanguageCode_removeByLanguageRemovesIt() {
 		$deTerm = new Term( 'de', 'bar' );
 
-		$list = new TermList( array(
+		$list = new TermList( [
 			new Term( 'en', 'foo' ),
 			$deTerm,
-		) );
+		] );
 
 		$list->removeByLanguage( 'en' );
 
 		$this->assertEquals(
-			array( 'de' => $deTerm ),
+			[ 'de' => $deTerm ],
 			iterator_to_array( $list )
 		);
 	}
@@ -194,7 +194,7 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidLanguageCodeProvider
 	 */
 	public function testGivenInvalidLanguageCode_removeByLanguageDoesNoOp( $languageCode ) {
-		$list = new TermList( array( new Term( 'en', 'foo' ) ) );
+		$list = new TermList( [ new Term( 'en', 'foo' ) ] );
 		$list->removeByLanguage( $languageCode );
 		$this->assertFalse( $list->isEmpty() );
 	}
@@ -203,8 +203,8 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 		$enTerm = new Term( 'en', 'foo' );
 		$deTerm = new Term( 'de', 'bar' );
 
-		$list = new TermList( array( $enTerm ) );
-		$expectedList = new TermList( array( $enTerm, $deTerm ) );
+		$list = new TermList( [ $enTerm ] );
+		$expectedList = new TermList( [ $enTerm, $deTerm ] );
 
 		$list->setTerm( $deTerm );
 
@@ -215,8 +215,8 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 		$enTerm = new Term( 'en', 'foo' );
 		$newEnTerm = new Term( 'en', 'bar' );
 
-		$list = new TermList( array( $enTerm ) );
-		$expectedList = new TermList( array( $newEnTerm ) );
+		$list = new TermList( [ $enTerm ] );
+		$expectedList = new TermList( [ $newEnTerm ] );
 
 		$list->setTerm( $newEnTerm );
 		$this->assertEquals( $expectedList, $list );
@@ -228,42 +228,42 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testFilledListEqualsItself() {
-		$list = new TermList( array(
+		$list = new TermList( [
 			new Term( 'en', 'foo' ),
 			new Term( 'de', 'bar' ),
-		) );
+		] );
 
 		$this->assertTrue( $list->equals( $list ) );
 		$this->assertTrue( $list->equals( clone $list ) );
 	}
 
 	public function testDifferentListsDoNotEqual() {
-		$list = new TermList( array(
+		$list = new TermList( [
 			new Term( 'en', 'foo' ),
 			new Term( 'de', 'bar' ),
-		) );
+		] );
 
 		$this->assertFalse( $list->equals( new TermList() ) );
 
 		$this->assertFalse( $list->equals(
-			new TermList( array(
+			new TermList( [
 				new Term( 'en', 'foo' ),
-			) )
+			] )
 		) );
 
 		$this->assertFalse( $list->equals(
-			new TermList( array(
+			new TermList( [
 				new Term( 'en', 'foo' ),
 				new Term( 'de', 'HAX' ),
-			) )
+			] )
 		) );
 
 		$this->assertFalse( $list->equals(
-			new TermList( array(
+			new TermList( [
 				new Term( 'en', 'foo' ),
 				new Term( 'de', 'bar' ),
 				new Term( 'nl', 'baz' ),
-			) )
+			] )
 		) );
 	}
 
@@ -274,16 +274,16 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenListsThatOnlyDifferInOrder_equalsReturnsTrue() {
-		$list = new TermList( array(
+		$list = new TermList( [
 			new Term( 'en', 'foo' ),
 			new Term( 'de', 'bar' ),
-		) );
+		] );
 
 		$this->assertTrue( $list->equals(
-			new TermList( array(
+			new TermList( [
 				new Term( 'de', 'bar' ),
 				new Term( 'en', 'foo' ),
-			) )
+			] )
 		) );
 	}
 
@@ -293,12 +293,12 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenMismatchingTerm_hasTermReturnsFalse() {
-		$list = new TermList( array( new Term( 'en', 'cats' ) ) );
+		$list = new TermList( [ new Term( 'en', 'cats' ) ] );
 		$this->assertFalse( $list->hasTerm( new Term( 'en', 'kittens' ) ) );
 	}
 
 	public function testGivenMatchingTerm_hasTermReturnsTrue() {
-		$list = new TermList( array( new Term( 'en', 'kittens' ) ) );
+		$list = new TermList( [ new Term( 'en', 'kittens' ) ] );
 		$this->assertTrue( $list->hasTerm( new Term( 'en', 'kittens' ) ) );
 	}
 
@@ -326,8 +326,8 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenEmptyList_getWithLanguagesReturnsEmptyList() {
 		$list = new TermList();
-		$this->assertEquals( new TermList(), $list->getWithLanguages( array() ) );
-		$this->assertEquals( new TermList(), $list->getWithLanguages( array( 'en', 'de' ) ) );
+		$this->assertEquals( new TermList(), $list->getWithLanguages( [] ) );
+		$this->assertEquals( new TermList(), $list->getWithLanguages( [ 'en', 'de' ] ) );
 	}
 
 	public function testGivenNoLanguages_getWithLanguagesReturnsEmptyList() {
@@ -335,7 +335,7 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 		$list->setTextForLanguage( 'en', 'foo' );
 		$list->setTextForLanguage( 'de', 'bar' );
 
-		$this->assertEquals( new TermList(), $list->getWithLanguages( array() ) );
+		$this->assertEquals( new TermList(), $list->getWithLanguages( [] ) );
 	}
 
 	public function testGivenAllLanguages_getWithLanguagesReturnsFullList() {
@@ -343,7 +343,7 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 		$list->setTextForLanguage( 'en', 'foo' );
 		$list->setTextForLanguage( 'de', 'bar' );
 
-		$this->assertEquals( $list, $list->getWithLanguages( array( 'en', 'de' ) ) );
+		$this->assertEquals( $list, $list->getWithLanguages( [ 'en', 'de' ] ) );
 	}
 
 	public function testGivenSomeLanguages_getWithLanguagesReturnsPartialList() {
@@ -357,22 +357,22 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 		$expectedList->setTextForLanguage( 'en', 'foo' );
 		$expectedList->setTextForLanguage( 'nl', 'baz' );
 
-		$this->assertEquals( $expectedList, $list->getWithLanguages( array( 'en', 'nl' ) ) );
+		$this->assertEquals( $expectedList, $list->getWithLanguages( [ 'en', 'nl' ] ) );
 	}
 
 	public function testGivenEmptyTerms_constructorOnlyAddsNonEmptyTerms() {
-		$list = new TermList( array(
+		$list = new TermList( [
 			new Term( 'en', 'foo' ),
 			new Term( 'de', '' ),
 			new Term( 'nl', 'baz' ),
 			new Term( 'fr', '' ),
-		) );
+		] );
 
 		$this->assertEquals(
-			array(
+			[
 				'en' => new Term( 'en', 'foo' ),
 				'nl' => new Term( 'nl', 'baz' ),
-			),
+			],
 			iterator_to_array( $list )
 		);
 	}
@@ -391,7 +391,7 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 		$list->setTerm( new Term( 'en', '' ) );
 
 		$this->assertEquals(
-			new TermList( array( new Term( 'de', 'bar' ) ) ),
+			new TermList( [ new Term( 'de', 'bar' ) ] ),
 			$list
 		);
 	}

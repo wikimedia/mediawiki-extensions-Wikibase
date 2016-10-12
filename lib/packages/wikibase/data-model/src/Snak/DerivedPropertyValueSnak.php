@@ -32,7 +32,7 @@ class DerivedPropertyValueSnak extends PropertyValueSnak {
 	/**
 	 * @var DataValue[]
 	 */
-	private $derivedDataValues = array();
+	private $derivedDataValues = [];
 
 	/**
 	 * @param PropertyId|EntityId|int $propertyId

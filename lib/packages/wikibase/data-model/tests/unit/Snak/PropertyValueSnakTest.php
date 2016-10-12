@@ -38,11 +38,11 @@ class PropertyValueSnakTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function validConstructorArgumentsProvider() {
-		return array(
-			array( 1, new StringValue( 'a' ) ),
-			array( new PropertyId( 'P1' ), new StringValue( 'a' ) ),
-			array( new PropertyId( 'P9001' ), new StringValue( 'bc' ) ),
-		);
+		return [
+			[ 1, new StringValue( 'a' ) ],
+			[ new PropertyId( 'P1' ), new StringValue( 'a' ) ],
+			[ new PropertyId( 'P9001' ), new StringValue( 'bc' ) ],
+		];
 	}
 
 	/**
@@ -59,12 +59,12 @@ class PropertyValueSnakTest extends PHPUnit_Framework_TestCase {
 	public function invalidConstructorArgumentsProvider() {
 		$stringValue = new StringValue( 'a' );
 
-		return array(
-			array( null, $stringValue ),
-			array( 0.1, $stringValue ),
-			array( 'Q1', $stringValue ),
-			array( new ItemId( 'Q1' ), $stringValue ),
-		);
+		return [
+			[ null, $stringValue ],
+			[ 0.1, $stringValue ],
+			[ 'Q1', $stringValue ],
+			[ new ItemId( 'Q1' ), $stringValue ],
+		];
 	}
 
 	public function testGetPropertyId() {
@@ -109,16 +109,16 @@ class PropertyValueSnakTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function notEqualsProvider() {
-		return array(
-			array(
+		return [
+			[
 				new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) ),
 				new PropertyValueSnak( new PropertyId( 'P2' ), new StringValue( 'a' ) )
-			),
-			array(
+			],
+			[
 				new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) ),
 				new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'b' ) )
-			),
-		);
+			],
+		];
 	}
 
 	public function testSerialize() {

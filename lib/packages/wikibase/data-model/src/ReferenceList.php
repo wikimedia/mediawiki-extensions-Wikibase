@@ -30,14 +30,14 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate, Seriali
 	/**
 	 * @var Reference[] Ordered list or references, indexed by SPL object hash.
 	 */
-	private $references = array();
+	private $references = [];
 
 	/**
 	 * @param Reference[]|Traversable $references
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $references = array() ) {
+	public function __construct( $references = [] ) {
 		if ( !is_array( $references ) && !( $references instanceof Traversable ) ) {
 			throw new InvalidArgumentException( '$references must be an array or an instance of Traversable' );
 		}
@@ -87,7 +87,7 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate, Seriali
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function addNewReference( $snaks = array() /*...*/ ) {
+	public function addNewReference( $snaks = [] /*...*/ ) {
 		if ( $snaks instanceof Snak ) {
 			$snaks = func_get_args();
 		}
@@ -102,7 +102,7 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate, Seriali
 	private function insertReferenceAtIndex( Reference $reference, $index ) {
 		$this->references = array_merge(
 			array_slice( $this->references, 0, $index ),
-			array( spl_object_hash( $reference ) => $reference ),
+			[ spl_object_hash( $reference ) => $reference ],
 			array_slice( $this->references, $index )
 		);
 	}

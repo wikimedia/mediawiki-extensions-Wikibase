@@ -24,16 +24,16 @@ use Wikibase\DataModel\Entity\PropertyId;
 class EntityIdTest extends \PHPUnit_Framework_TestCase {
 
 	public function instanceProvider() {
-		$ids = array();
+		$ids = [];
 
-		$ids[] = array( new ItemId( 'Q1' ), '' );
-		$ids[] = array( new ItemId( 'Q42' ), '' );
-		$ids[] = array( new ItemId( 'Q31337' ), '' );
-		$ids[] = array( new ItemId( 'Q2147483647' ), '' );
-		$ids[] = array( new ItemId( ':Q2147483647' ), '' );
-		$ids[] = array( new ItemId( 'foo:Q2147483647' ), 'foo' );
-		$ids[] = array( new PropertyId( 'P101010' ), '' );
-		$ids[] = array( new PropertyId( 'foo:bar:P101010' ), 'foo' );
+		$ids[] = [ new ItemId( 'Q1' ), '' ];
+		$ids[] = [ new ItemId( 'Q42' ), '' ];
+		$ids[] = [ new ItemId( 'Q31337' ), '' ];
+		$ids[] = [ new ItemId( 'Q2147483647' ), '' ];
+		$ids[] = [ new ItemId( ':Q2147483647' ), '' ];
+		$ids[] = [ new ItemId( 'foo:Q2147483647' ), 'foo' ];
+		$ids[] = [ new PropertyId( 'P101010' ), '' ];
+		$ids[] = [ new PropertyId( 'foo:bar:P101010' ), 'foo' ];
 
 		return $ids;
 	}
@@ -102,12 +102,12 @@ class EntityIdTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function serializationSplitProvider() {
-		return array(
-			array( 'Q42', array( '', '', 'Q42' ) ),
-			array( 'foo:Q42', array( 'foo', '', 'Q42' ) ),
-			array( '0:Q42', array( '0', '', 'Q42' ) ),
-			array( 'foo:bar:baz:Q42', array( 'foo', 'bar:baz', 'Q42' ) ),
-		);
+		return [
+			[ 'Q42', [ '', '', 'Q42' ] ],
+			[ 'foo:Q42', [ 'foo', '', 'Q42' ] ],
+			[ '0:Q42', [ '0', '', 'Q42' ] ],
+			[ 'foo:bar:baz:Q42', [ 'foo', 'bar:baz', 'Q42' ] ],
+		];
 	}
 
 	/**
@@ -141,25 +141,25 @@ class EntityIdTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidJoinSerializationDataProvider() {
-		return array(
-			array( array( 'Q42', '', '' ) ),
-			array( array( '', 'Q42', '' ) ),
-			array( array( 'foo', 'Q42', '' ) ),
-		);
+		return [
+			[ [ 'Q42', '', '' ] ],
+			[ [ '', 'Q42', '' ] ],
+			[ [ 'foo', 'Q42', '' ] ],
+		];
 	}
 
 	public function testGivenNotNormalizedSerialization_splitSerializationReturnsNormalizedParts() {
-		$this->assertSame( array( '', '', 'Q42' ), EntityId::splitSerialization( ':Q42' ) );
-		$this->assertSame( array( 'foo', 'bar', 'Q42' ), EntityId::splitSerialization( ':foo:bar:Q42' ) );
+		$this->assertSame( [ '', '', 'Q42' ], EntityId::splitSerialization( ':Q42' ) );
+		$this->assertSame( [ 'foo', 'bar', 'Q42' ], EntityId::splitSerialization( ':foo:bar:Q42' ) );
 	}
 
 	public function localPartDataProvider() {
-		return array(
-			array( 'Q42', 'Q42' ),
-			array( ':Q42', 'Q42' ),
-			array( 'foo:Q42', 'Q42' ),
-			array( 'foo:bar:Q42', 'bar:Q42' ),
-		);
+		return [
+			[ 'Q42', 'Q42' ],
+			[ ':Q42', 'Q42' ],
+			[ 'foo:Q42', 'Q42' ],
+			[ 'foo:bar:Q42', 'bar:Q42' ],
+		];
 	}
 
 	/**
@@ -171,14 +171,14 @@ class EntityIdTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidSerializationProvider() {
-		return array(
-			array( 's p a c e s:Q42' ),
-			array( '::Q42' ),
-			array( '' ),
-			array( ':' ),
-			array( 42 ),
-			array( null ),
-		);
+		return [
+			[ 's p a c e s:Q42' ],
+			[ '::Q42' ],
+			[ '' ],
+			[ ':' ],
+			[ 42 ],
+			[ null ],
+		];
 	}
 
 	/**

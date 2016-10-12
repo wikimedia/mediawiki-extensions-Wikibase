@@ -21,15 +21,15 @@ class HashArrayElement implements Hashable {
 	}
 
 	public static function getInstances() {
-		$stuff = array(
+		$stuff = [
 			'foo',
 			'bar',
 			'baz',
 			'bah',
 			'~=[,,_,,]:3',
-		);
+		];
 
-		$instances = array();
+		$instances = [];
 
 		foreach ( $stuff as $thinghy ) {
 			$instances[] = new static( $thinghy );

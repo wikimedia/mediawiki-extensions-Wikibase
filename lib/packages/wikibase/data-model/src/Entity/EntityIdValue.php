@@ -30,10 +30,10 @@ class EntityIdValue extends DataValueObject {
 	 * @return string
 	 */
 	public function serialize() {
-		return json_encode( array(
+		return json_encode( [
 			$this->entityId->getEntityType(),
 			$this->getNumericId()
-		) );
+		] );
 	}
 
 	/**
@@ -119,11 +119,11 @@ class EntityIdValue extends DataValueObject {
 	 * @return array
 	 */
 	public function getArrayValue() {
-		return array(
+		return [
 			'entity-type' => $this->entityId->getEntityType(),
 			'numeric-id' => $this->getNumericId(),
 			'id' => $this->entityId->getSerialization(),
-		);
+		];
 	}
 
 	/**

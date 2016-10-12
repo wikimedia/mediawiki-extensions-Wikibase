@@ -32,11 +32,11 @@ class PropertyNoValueSnakTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function validConstructorArgumentsProvider() {
-		return array(
-			array( 1 ),
-			array( new PropertyId( 'P1' ) ),
-			array( new PropertyId( 'P9001' ) ),
-		);
+		return [
+			[ 1 ],
+			[ new PropertyId( 'P1' ) ],
+			[ new PropertyId( 'P9001' ) ],
+		];
 	}
 
 	/**
@@ -48,12 +48,12 @@ class PropertyNoValueSnakTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidConstructorArgumentsProvider() {
-		return array(
-			array( null ),
-			array( 0.1 ),
-			array( 'Q1' ),
-			array( new ItemId( 'Q1' ) ),
-		);
+		return [
+			[ null ],
+			[ 0.1 ],
+			[ 'Q1' ],
+			[ new ItemId( 'Q1' ) ],
+		];
 	}
 
 	public function testGetPropertyId() {
@@ -98,16 +98,16 @@ class PropertyNoValueSnakTest extends PHPUnit_Framework_TestCase {
 	public function notEqualsProvider() {
 		$p1 = new PropertyId( 'P1' );
 
-		return array(
-			array(
+		return [
+			[
 				new PropertyNoValueSnak( $p1 ),
 				new PropertyNoValueSnak( new PropertyId( 'P2' ) )
-			),
-			array(
+			],
+			[
 				new PropertyNoValueSnak( $p1 ),
 				new PropertySomeValueSnak( $p1 )
-			),
-		);
+			],
+		];
 	}
 
 	public function testSerialize() {

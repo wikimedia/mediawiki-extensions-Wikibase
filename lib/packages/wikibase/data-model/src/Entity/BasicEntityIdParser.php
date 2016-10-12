@@ -42,14 +42,14 @@ class BasicEntityIdParser implements EntityIdParser {
 	 * @return callable[]
 	 */
 	public static function getBuilders() {
-		return array(
+		return [
 			ItemId::PATTERN => function( $serialization ) {
 				return new ItemId( $serialization );
 			},
 			PropertyId::PATTERN => function( $serialization ) {
 				return new PropertyId( $serialization );
 			},
-		);
+		];
 	}
 
 }

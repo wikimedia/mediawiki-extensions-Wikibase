@@ -28,11 +28,11 @@ class ReferencedStatementFilterTest extends \PHPUnit_Framework_TestCase {
 		$statement = new Statement( new PropertyValueSnak( 42, new StringValue( '\o/' ) ) );
 		$statement->setGuid( 'kittens of doom' );
 		$statement->setRank( Statement::RANK_PREFERRED );
-		$statement->setQualifiers( new SnakList( array(
+		$statement->setQualifiers( new SnakList( [
 			new PropertyValueSnak( 1, new StringValue( 'wee' ) ),
 			new PropertyValueSnak( 2, new StringValue( 'woo' ) ),
 			new PropertyValueSnak( 3, new StringValue( 'waa' ) )
-		) ) );
+		] ) );
 
 		$filter = new ReferencedStatementFilter();
 		$this->assertFalse( $filter->statementMatches( $statement ) );
@@ -40,15 +40,15 @@ class ReferencedStatementFilterTest extends \PHPUnit_Framework_TestCase {
 
 	public function testReturnsTrueForMinimalStatementWithReferences() {
 		$statement = new Statement( new PropertyValueSnak( 42, new StringValue( '\o/' ) ) );
-		$statement->setReferences( new ReferenceList( array(
-			new Reference( array(
+		$statement->setReferences( new ReferenceList( [
+			new Reference( [
 				new PropertyValueSnak( 1, new StringValue( 'wee' ) )
-			) ),
-			new Reference( array(
+			] ),
+			new Reference( [
 				new PropertyValueSnak( 2, new StringValue( 'woo' ) ),
 				new PropertyValueSnak( 3, new StringValue( 'waa' ) )
-			) )
-		) ) );
+			] )
+		] ) );
 
 		$filter = new ReferencedStatementFilter();
 		$this->assertTrue( $filter->statementMatches( $statement ) );

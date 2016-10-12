@@ -24,27 +24,27 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function notSiteLinksProvider() {
-		return array(
-			array(
-				array(
+		return [
+			[
+				[
 					null
-				)
-			),
+				]
+			],
 
-			array(
-				array(
+			[
+				[
 					42
-				)
-			),
+				]
+			],
 
-			array(
-				array(
+			[
+				[
 					new SiteLink( 'foo', 'bar' ),
 					42,
 					new SiteLink( 'baz', 'bah' ),
-				)
-			),
-		);
+				]
+			],
+		];
 	}
 
 	/**
@@ -56,30 +56,30 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function siteLinkArrayProvider() {
-		return array(
-			array(
-				array(
-				)
-			),
+		return [
+			[
+				[
+				]
+			],
 
-			array(
-				array(
+			[
+				[
 					new SiteLink( 'foo', 'bar' )
-				)
-			),
+				]
+			],
 
-			array(
-				array(
+			[
+				[
 					new SiteLink( 'foo', 'bar' ),
 					new SiteLink( 'baz', 'bah' ),
 					new SiteLink( 'hax', 'bar' ),
-				)
-			),
-		);
+				]
+			],
+		];
 	}
 
 	public function testEmptyCollectionHasZeroSize() {
-		$list = new SiteLinkList( array() );
+		$list = new SiteLinkList( [] );
 		$this->assertCount( 0, $list );
 	}
 
@@ -92,43 +92,43 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function siteLinkArrayWithDuplicateSiteIdProvider() {
-		return array(
-			array(
-				array(
+		return [
+			[
+				[
 					new SiteLink( 'foo', 'bar' ),
 					new SiteLink( 'foo', 'bar' ),
-				)
-			),
+				]
+			],
 
-			array(
-				array(
+			[
+				[
 					new SiteLink( 'foo', 'one' ),
 					new SiteLink( 'baz', 'two' ),
 					new SiteLink( 'foo', 'tree' ),
-				)
-			),
-		);
+				]
+			],
+		];
 	}
 
 	public function testGetIteratorReturnsTraversableWithSiteIdKeys() {
-		$list = new SiteLinkList( array(
+		$list = new SiteLinkList( [
 			new SiteLink( 'first', 'one' ),
 			new SiteLink( 'second', 'two' ),
 			new SiteLink( 'third', 'tree' ),
-		) );
+		] );
 
 		$this->assertEquals(
-			array(
+			[
 				'first' => new SiteLink( 'first', 'one' ),
 				'second' => new SiteLink( 'second', 'two' ),
 				'third' => new SiteLink( 'third', 'tree' ),
-			),
+			],
 			iterator_to_array( $list )
 		);
 	}
 
 	public function testGivenNonString_getBySiteIdThrowsException() {
-		$list = new SiteLinkList( array() );
+		$list = new SiteLinkList( [] );
 
 		$this->setExpectedException( 'InvalidArgumentException' );
 		$list->getBySiteId( 32202 );
@@ -137,7 +137,7 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenUnknownSiteId_getBySiteIdThrowsException() {
 		$link = new SiteLink( 'first', 'one' );
 
-		$list = new SiteLinkList( array( $link ) );
+		$list = new SiteLinkList( [ $link ] );
 
 		$this->setExpectedException( 'OutOfBoundsException' );
 		$list->getBySiteId( 'foo' );
@@ -146,7 +146,7 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenKnownSiteId_getBySiteIdReturnsSiteLink() {
 		$link = new SiteLink( 'first', 'one' );
 
-		$list = new SiteLinkList( array( $link ) );
+		$list = new SiteLinkList( [ $link ] );
 
 		$this->assertEquals( $link, $list->getBySiteId( 'first' ) );
 	}
@@ -167,29 +167,29 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenDifferentList_equalsReturnsFalse() {
-		$listOne = new SiteLinkList( array(
+		$listOne = new SiteLinkList( [
 			new SiteLink( 'foo', 'spam' ),
 			new SiteLink( 'bar', 'hax' ),
-		) );
+		] );
 
-		$listTwo = new SiteLinkList( array(
+		$listTwo = new SiteLinkList( [
 			new SiteLink( 'foo', 'spam' ),
 			new SiteLink( 'bar', 'HAX' ),
-		) );
+		] );
 
 		$this->assertFalse( $listOne->equals( $listTwo ) );
 	}
 
 	public function testGivenSetWithDifferentOrder_equalsReturnsTrue() {
-		$listOne = new SiteLinkList( array(
+		$listOne = new SiteLinkList( [
 			new SiteLink( 'foo', 'spam' ),
 			new SiteLink( 'bar', 'hax' ),
-		) );
+		] );
 
-		$listTwo = new SiteLinkList( array(
+		$listTwo = new SiteLinkList( [
 			new SiteLink( 'bar', 'hax' ),
 			new SiteLink( 'foo', 'spam' ),
-		) );
+		] );
 
 		$this->assertTrue( $listOne->equals( $listTwo ) );
 	}
@@ -198,14 +198,14 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 		$list = new SiteLinkList();
 
 		$this->setExpectedException( 'InvalidArgumentException' );
-		$list->removeLinkWithSiteId( array() );
+		$list->removeLinkWithSiteId( [] );
 	}
 
 	public function testGivenKnownId_removeSiteWithIdRemovesIt() {
-		$list = new SiteLinkList( array(
+		$list = new SiteLinkList( [
 			new SiteLink( 'foo', 'spam' ),
 			new SiteLink( 'bar', 'hax' ),
-		) );
+		] );
 
 		$list->removeLinkWithSiteId( 'foo' );
 
@@ -214,10 +214,10 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenUnknownId_removeSiteWithIdDoesNoOp() {
-		$list = new SiteLinkList( array(
+		$list = new SiteLinkList( [
 			new SiteLink( 'foo', 'spam' ),
 			new SiteLink( 'bar', 'hax' ),
-		) );
+		] );
 
 		$expected = clone $list;
 
@@ -227,12 +227,12 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testDifferentInstancesWithSameBadgesAreEqual() {
-		$list = new SiteLinkList( array(
-			new SiteLink( 'foo', 'spam', new ItemIdSet( array(
+		$list = new SiteLinkList( [
+			new SiteLink( 'foo', 'spam', new ItemIdSet( [
 				new ItemId( 'Q42' ),
 				new ItemId( 'Q1337' )
-			) ) ),
-		) );
+			] ) ),
+		] );
 
 		$otherInstance = unserialize( serialize( $list ) );
 
@@ -243,12 +243,12 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 		$list = new SiteLinkList();
 
 		$list->addNewSiteLink( 'enwiki', 'cats' );
-		$list->addNewSiteLink( 'dewiki', 'katzen', array( new ItemId( 'Q1' ) ) );
+		$list->addNewSiteLink( 'dewiki', 'katzen', [ new ItemId( 'Q1' ) ] );
 
-		$this->assertTrue( $list->equals( new SiteLinkList( array(
+		$this->assertTrue( $list->equals( new SiteLinkList( [
 			new SiteLink( 'enwiki', 'cats' ),
-			new SiteLink( 'dewiki', 'katzen', array( new ItemId( 'Q1' ) ) ),
-		) ) ) );
+			new SiteLink( 'dewiki', 'katzen', [ new ItemId( 'Q1' ) ] ),
+		] ) ) );
 	}
 
 	public function testAddSiteLink() {
@@ -257,10 +257,10 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 		$list->addSiteLink( new SiteLink( 'enwiki', 'cats' ) );
 		$list->addSiteLink( new SiteLink( 'dewiki', 'katzen' ) );
 
-		$this->assertTrue( $list->equals( new SiteLinkList( array(
+		$this->assertTrue( $list->equals( new SiteLinkList( [
 			new SiteLink( 'enwiki', 'cats' ),
 			new SiteLink( 'dewiki', 'katzen' ),
-		) ) ) );
+		] ) ) );
 	}
 
 	public function testToArray() {
@@ -268,10 +268,10 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 		$list->addNewSiteLink( 'enwiki', 'foo' );
 		$list->addNewSiteLink( 'dewiki', 'bar' );
 
-		$expected = array(
+		$expected = [
 			'enwiki' => new SiteLink( 'enwiki', 'foo' ),
 			'dewiki' => new SiteLink( 'dewiki', 'bar' ),
-		);
+		];
 
 		$this->assertEquals( $expected, $list->toArray() );
 	}

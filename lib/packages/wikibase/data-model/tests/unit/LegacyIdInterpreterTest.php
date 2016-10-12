@@ -28,10 +28,10 @@ class LegacyIdInterpreterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function idProvider() {
-		return array(
-			array( new ItemId( 'Q42' ), 'item', 42 ),
-			array( new PropertyId( 'P42' ), 'property', 42 ),
-		);
+		return [
+			[ new ItemId( 'Q42' ), 'item', 42 ],
+			[ new PropertyId( 'P42' ), 'property', 42 ],
+		];
 	}
 
 	/**
@@ -43,11 +43,11 @@ class LegacyIdInterpreterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidInputProvider() {
-		return array(
-			array( 'kittens', 42 ),
-			array( 'item', array( 'kittens' ) ),
-			array( 'item', true ),
-		);
+		return [
+			[ 'kittens', 42 ],
+			[ 'item', [ 'kittens' ] ],
+			[ 'item', true ],
+		];
 	}
 
 }

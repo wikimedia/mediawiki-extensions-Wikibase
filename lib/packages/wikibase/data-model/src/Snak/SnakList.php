@@ -109,7 +109,7 @@ class SnakList extends HashArray {
 	 *
 	 * @since 0.5
 	 */
-	public function orderByProperty( array $order = array() ) {
+	public function orderByProperty( array $order = [] ) {
 		$snaksByProperty = $this->getSnaksByProperty();
 		$orderedProperties = array_unique( array_merge( $order, array_keys( $snaksByProperty ) ) );
 
@@ -138,13 +138,13 @@ class SnakList extends HashArray {
 	 * @return array[]
 	 */
 	private function getSnaksByProperty() {
-		$snaksByProperty = array();
+		$snaksByProperty = [];
 
 		foreach ( $this as $snak ) {
 			/** @var Snak $snak */
 			$propertyId = $snak->getPropertyId()->getSerialization();
 			if ( !isset( $snaksByProperty[$propertyId] ) ) {
-				$snaksByProperty[$propertyId] = array();
+				$snaksByProperty[$propertyId] = [];
 			}
 			$snaksByProperty[$propertyId][] = $snak;
 		}

@@ -35,7 +35,7 @@ class AliasGroup implements Comparable, Countable {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $languageCode, array $aliases = array() ) {
+	public function __construct( $languageCode, array $aliases = [] ) {
 		if ( !is_string( $languageCode ) || $languageCode === '' ) {
 			throw new InvalidArgumentException( '$languageCode must be a non-empty string' );
 		}

@@ -31,23 +31,23 @@ class DerivedPropertyValueSnakTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function validConstructorArgumentsProvider() {
-		return array(
-			'No extras' => array(
+		return [
+			'No extras' => [
 				new PropertyId( 'P1' ),
 				new StringValue( 'a' ),
-				array(),
-			),
-			'2 extras' => array(
+				[],
+			],
+			'2 extras' => [
 				new PropertyId( 'P9001' ),
 				new StringValue( 'bc' ),
-				array( 'foo' => new StringValue( 'foo' ), 'bar' => new StringValue( 'bar' ) ),
-			),
-			'numeric id' => array(
+				[ 'foo' => new StringValue( 'foo' ), 'bar' => new StringValue( 'bar' ) ],
+			],
+			'numeric id' => [
 				42,
 				new StringValue( 'foo' ),
-				array()
-			)
-		);
+				[]
+			]
+		];
 	}
 
 	/**
@@ -63,18 +63,18 @@ class DerivedPropertyValueSnakTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidConstructorArgumentsProvider() {
-		return array(
-			'fail - Integer key' => array(
+		return [
+			'fail - Integer key' => [
 				new PropertyId( 'P9001' ),
 				new StringValue( 'bc' ),
-				array( new StringValue( 'foo' ) ),
-			),
-			'fail - not a value' => array(
+				[ new StringValue( 'foo' ) ],
+			],
+			'fail - not a value' => [
 				new PropertyId( 'P9001' ),
 				new StringValue( 'bc' ),
-				array( 'foo' => 'bar' ),
-			),
-		);
+				[ 'foo' => 'bar' ],
+			],
+		];
 	}
 
 	/**
@@ -84,7 +84,7 @@ class DerivedPropertyValueSnakTest extends PHPUnit_Framework_TestCase {
 		$snak = new DerivedPropertyValueSnak(
 			new PropertyId( 'P1' ),
 			new StringValue( 'a' ),
-			array( 'foo' => new StringValue( 'foo' ) )
+			[ 'foo' => new StringValue( 'foo' ) ]
 		);
 		$hash = $snak->getHash();
 
@@ -95,7 +95,7 @@ class DerivedPropertyValueSnakTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetDerivedDataValues() {
-		$derivedValues = array( 'foo' => new StringValue( 'foo' ), 'bar' => new StringValue( 'bar' ) );
+		$derivedValues = [ 'foo' => new StringValue( 'foo' ), 'bar' => new StringValue( 'bar' ) ];
 
 		$snak = new DerivedPropertyValueSnak(
 			new PropertyId( 'P9001' ),
@@ -109,7 +109,7 @@ class DerivedPropertyValueSnakTest extends PHPUnit_Framework_TestCase {
 	public function testGetDerivedDataValue() {
 		$foo = new StringValue( 'foo' );
 		$bar = new StringValue( 'bar' );
-		$derivedValues = array( 'foo' => $foo, 'bar' => $bar );
+		$derivedValues = [ 'foo' => $foo, 'bar' => $bar ];
 
 		$snak = new DerivedPropertyValueSnak(
 			new PropertyId( 'P9001' ),
@@ -125,7 +125,7 @@ class DerivedPropertyValueSnakTest extends PHPUnit_Framework_TestCase {
 		$snak = new DerivedPropertyValueSnak(
 			new PropertyId( 'P9001' ),
 			new StringValue( 'bc' ),
-			array( 'foo' => new StringValue( 'foo' ), 'bar' => new StringValue( 'bar' ) )
+			[ 'foo' => new StringValue( 'foo' ), 'bar' => new StringValue( 'bar' ) ]
 		);
 
 		$this->assertEquals(
@@ -137,9 +137,9 @@ class DerivedPropertyValueSnakTest extends PHPUnit_Framework_TestCase {
 	public function testSnakWithDerivedValuesEqualsSnakWithoutDerivedValues() {
 		$property = new PropertyId( 'P9001' );
 		$value = new StringValue( 'bc' );
-		$derivedValues = array( 'foo' => new StringValue( 'foo' ), 'bar' => new StringValue( 'bar' ) );
+		$derivedValues = [ 'foo' => new StringValue( 'foo' ), 'bar' => new StringValue( 'bar' ) ];
 
-		$emptyDerivedSnak = new DerivedPropertyValueSnak( $property, $value, array() );
+		$emptyDerivedSnak = new DerivedPropertyValueSnak( $property, $value, [] );
 		$derivedSnak = new DerivedPropertyValueSnak( $property, $value, $derivedValues );
 
 		$this->assertTrue( $emptyDerivedSnak->equals( $derivedSnak ) );
@@ -148,10 +148,10 @@ class DerivedPropertyValueSnakTest extends PHPUnit_Framework_TestCase {
 	public function testDerivedSnakDoesNoteEqualPropertyValueSnak() {
 		$property = new PropertyId( 'P9001' );
 		$value = new StringValue( 'bc' );
-		$derivedValues = array( 'foo' => new StringValue( 'foo' ), 'bar' => new StringValue( 'bar' ) );
+		$derivedValues = [ 'foo' => new StringValue( 'foo' ), 'bar' => new StringValue( 'bar' ) ];
 
 		$propertySnak = new PropertyValueSnak( $property, $value );
-		$emptyDerivedSnak = new DerivedPropertyValueSnak( $property, $value, array() );
+		$emptyDerivedSnak = new DerivedPropertyValueSnak( $property, $value, [] );
 		$derivedSnak = new DerivedPropertyValueSnak( $property, $value, $derivedValues );
 
 		$this->assertFalse( $propertySnak->equals( $emptyDerivedSnak ) );
@@ -161,7 +161,7 @@ class DerivedPropertyValueSnakTest extends PHPUnit_Framework_TestCase {
 	public function testNewPropertyValueSnak() {
 		$property = new PropertyId( 'P9001' );
 		$value = new StringValue( 'bc' );
-		$derivedValues = array( 'foo' => new StringValue( 'foo' ), 'bar' => new StringValue( 'bar' ) );
+		$derivedValues = [ 'foo' => new StringValue( 'foo' ), 'bar' => new StringValue( 'bar' ) ];
 
 		$propertySnak = new PropertyValueSnak( $property, $value );
 		$derivedSnak = new DerivedPropertyValueSnak( $property, $value, $derivedValues );

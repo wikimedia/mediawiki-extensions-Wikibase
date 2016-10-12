@@ -28,7 +28,7 @@ class PropertyId extends EntityId implements Int32EntityId {
 		$localId = strtoupper( $serializationParts[2] );
 		$this->assertValidIdFormat( $localId );
 		parent::__construct( self::joinSerialization(
-			array( $serializationParts[0], $serializationParts[1], $localId ) )
+			[ $serializationParts[0], $serializationParts[1], $localId ] )
 		);
 	}
 
@@ -75,7 +75,7 @@ class PropertyId extends EntityId implements Int32EntityId {
 	 * @return string
 	 */
 	public function serialize() {
-		return json_encode( array( 'property', $this->serialization ) );
+		return json_encode( [ 'property', $this->serialization ] );
 	}
 
 	/**

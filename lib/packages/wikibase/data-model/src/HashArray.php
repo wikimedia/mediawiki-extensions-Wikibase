@@ -41,7 +41,7 @@ abstract class HashArray extends ArrayObject implements Hashable, Comparable {
 	 *
 	 * @var array [ element hash (string) => array [ element offset (string|int) ] | element offset (string|int) ]
 	 */
-	protected $offsetHashes = array();
+	protected $offsetHashes = [];
 
 	/**
 	 * If duplicate values (based on hash) should be accepted or not.
@@ -76,7 +76,7 @@ abstract class HashArray extends ArrayObject implements Hashable, Comparable {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $input = null, $flags = 0, $iteratorClass = 'ArrayIterator' ) {
-		parent::__construct( array(), $flags, $iteratorClass );
+		parent::__construct( [], $flags, $iteratorClass );
 
 		if ( $input !== null ) {
 			if ( !is_array( $input ) && !( $input instanceof Traversable ) ) {
@@ -131,7 +131,7 @@ abstract class HashArray extends ArrayObject implements Hashable, Comparable {
 		else {
 			if ( $hasHash ) {
 				if ( !is_array( $this->offsetHashes[$hash] ) ) {
-					$this->offsetHashes[$hash] = array( $this->offsetHashes[$hash] );
+					$this->offsetHashes[$hash] = [ $this->offsetHashes[$hash] ];
 				}
 
 				$this->offsetHashes[$hash][] = $index;
@@ -317,7 +317,7 @@ abstract class HashArray extends ArrayObject implements Hashable, Comparable {
 	 * @since 0.3
 	 */
 	public function removeDuplicates() {
-		$knownHashes = array();
+		$knownHashes = [];
 
 		/**
 		 * @var Hashable $hashable
@@ -369,7 +369,7 @@ abstract class HashArray extends ArrayObject implements Hashable, Comparable {
 	public function rebuildIndices() {
 		$hashables = iterator_to_array( $this );
 
-		$this->offsetHashes = array();
+		$this->offsetHashes = [];
 
 		foreach ( $hashables as $offset => $hashable ) {
 			$this->offsetUnset( $offset );
@@ -445,10 +445,10 @@ abstract class HashArray extends ArrayObject implements Hashable, Comparable {
 	 * @return string
 	 */
 	public function serialize() {
-		return serialize( array(
+		return serialize( [
 			'data' => $this->getArrayCopy(),
 			'index' => $this->indexOffset,
-		) );
+		] );
 	}
 
 	/**

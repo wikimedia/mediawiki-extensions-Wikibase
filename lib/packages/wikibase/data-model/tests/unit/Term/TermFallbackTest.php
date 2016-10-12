@@ -36,11 +36,11 @@ class TermFallbackTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidLanguageCodeProvider() {
-		return array(
-			array( null ),
-			array( 21 ),
-			array( '' ),
-		);
+		return [
+			[ null ],
+			[ 21 ],
+			[ '' ],
+		];
 	}
 
 	/**
@@ -52,10 +52,10 @@ class TermFallbackTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidSourceLanguageCodeProvider() {
-		return array(
-			array( 21 ),
-			array( '' ),
-		);
+		return [
+			[ 21 ],
+			[ '' ],
+		];
 	}
 
 	public function testEquality() {
@@ -75,15 +75,15 @@ class TermFallbackTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function inequalTermProvider() {
-		return array(
-			'text' => array( new TermFallback( 'foor', 'spam', 'fooa', 'foos' ) ),
-			'language' => array( new TermFallback( 'spam', 'bar', 'fooa', 'foos' ) ),
-			'actualLanguage' => array( new TermFallback( 'foor', 'bar', 'spam', 'foos' ) ),
-			'sourceLanguage' => array( new TermFallback( 'foor', 'bar', 'fooa', 'spam' ) ),
-			'null sourceLanguage' => array( new TermFallback( 'foor', 'bar', 'fooa', null ) ),
-			'all' => array( new TermFallback( 'ham', 'nom', 'nom', 'nom' ) ),
-			'instance Term' => array( new Term( 'foor', 'bar' ) ),
-		);
+		return [
+			'text' => [ new TermFallback( 'foor', 'spam', 'fooa', 'foos' ) ],
+			'language' => [ new TermFallback( 'spam', 'bar', 'fooa', 'foos' ) ],
+			'actualLanguage' => [ new TermFallback( 'foor', 'bar', 'spam', 'foos' ) ],
+			'sourceLanguage' => [ new TermFallback( 'foor', 'bar', 'fooa', 'spam' ) ],
+			'null sourceLanguage' => [ new TermFallback( 'foor', 'bar', 'fooa', null ) ],
+			'all' => [ new TermFallback( 'ham', 'nom', 'nom', 'nom' ) ],
+			'instance Term' => [ new Term( 'foor', 'bar' ) ],
+		];
 	}
 
 }

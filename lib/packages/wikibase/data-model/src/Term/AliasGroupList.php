@@ -26,13 +26,13 @@ class AliasGroupList implements Countable, IteratorAggregate {
 	/**
 	 * @var AliasGroup[]
 	 */
-	private $groups = array();
+	private $groups = [];
 
 	/**
 	 * @param AliasGroup[] $aliasGroups
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( array $aliasGroups = array() ) {
+	public function __construct( array $aliasGroups = [] ) {
 		foreach ( $aliasGroups as $aliasGroup ) {
 			if ( !( $aliasGroup instanceof AliasGroup ) ) {
 				throw new InvalidArgumentException( 'Every element in $aliasGroups must be an instance of AliasGroup' );
@@ -195,7 +195,7 @@ class AliasGroupList implements Countable, IteratorAggregate {
 	 * @return array[]
 	 */
 	public function toTextArray() {
-		$array = array();
+		$array = [];
 
 		foreach ( $this->groups as $group ) {
 			$array[$group->getLanguageCode()] = $group->getAliases();

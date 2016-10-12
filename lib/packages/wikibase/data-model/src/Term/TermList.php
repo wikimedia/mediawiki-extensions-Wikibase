@@ -25,13 +25,13 @@ class TermList implements Countable, IteratorAggregate, Comparable {
 	/**
 	 * @var Term[]
 	 */
-	private $terms = array();
+	private $terms = [];
 
 	/**
 	 * @param Term[] $terms
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( array $terms = array() ) {
+	public function __construct( array $terms = [] ) {
 		foreach ( $terms as $term ) {
 			if ( !( $term instanceof Term ) ) {
 				throw new InvalidArgumentException( 'Every element in $terms must be an instance of Term' );
@@ -55,7 +55,7 @@ class TermList implements Countable, IteratorAggregate, Comparable {
 	 * @return string[]
 	 */
 	public function toTextArray() {
-		$array = array();
+		$array = [];
 
 		foreach ( $this->terms as $term ) {
 			$array[$term->getLanguageCode()] = $term->getText();

@@ -19,7 +19,7 @@ class AliasGroupListTest extends PHPUnit_Framework_TestCase {
 		$list = new AliasGroupList();
 		$this->assertTrue( $list->isEmpty() );
 
-		$list = new AliasGroupList( array( new AliasGroup( 'en', array( 'foo' ) ) ) );
+		$list = new AliasGroupList( [ new AliasGroup( 'en', [ 'foo' ] ) ] );
 		$this->assertFalse( $list->isEmpty() );
 	}
 
@@ -35,10 +35,10 @@ class AliasGroupListTest extends PHPUnit_Framework_TestCase {
 	}
 
 	private function getTwoGroups() {
-		return array(
-			'en' => new AliasGroup( 'en', array( 'foo' ) ),
-			'de' => new AliasGroup( 'de', array( 'bar', 'baz' ) ),
-		);
+		return [
+			'en' => new AliasGroup( 'en', [ 'foo' ] ),
+			'de' => new AliasGroup( 'de', [ 'bar', 'baz' ] ),
+		];
 	}
 
 	public function testGivenTwoGroups_listContainsThem() {
@@ -50,33 +50,33 @@ class AliasGroupListTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenGroupsWithTheSameLanguage_onlyTheLastOnesAreRetained() {
-		$array = array(
-			new AliasGroup( 'en', array( 'foo' ) ),
-			new AliasGroup( 'en', array( 'bar' ) ),
+		$array = [
+			new AliasGroup( 'en', [ 'foo' ] ),
+			new AliasGroup( 'en', [ 'bar' ] ),
 
-			new AliasGroup( 'de', array( 'baz' ) ),
+			new AliasGroup( 'de', [ 'baz' ] ),
 
-			new AliasGroup( 'nl', array( 'bah' ) ),
-			new AliasGroup( 'nl', array( 'blah' ) ),
-			new AliasGroup( 'nl', array( 'spam' ) ),
-		);
+			new AliasGroup( 'nl', [ 'bah' ] ),
+			new AliasGroup( 'nl', [ 'blah' ] ),
+			new AliasGroup( 'nl', [ 'spam' ] ),
+		];
 
 		$list = new AliasGroupList( $array );
 
 		$this->assertEquals(
-			array(
-				'en' => new AliasGroup( 'en', array( 'bar' ) ),
-				'de' => new AliasGroup( 'de', array( 'baz' ) ),
-				'nl' => new AliasGroup( 'nl', array( 'spam' ) ),
-			),
+			[
+				'en' => new AliasGroup( 'en', [ 'bar' ] ),
+				'de' => new AliasGroup( 'de', [ 'baz' ] ),
+				'nl' => new AliasGroup( 'nl', [ 'spam' ] ),
+			],
 			iterator_to_array( $list )
 		);
 	}
 
 	public function testCanIterateOverList() {
-		$group = new AliasGroup( 'en', array( 'foo' ) );
+		$group = new AliasGroup( 'en', [ 'foo' ] );
 
-		$list = new AliasGroupList( array( $group ) );
+		$list = new AliasGroupList( [ $group ] );
 
 		/**
 		 * @var AliasGroup $aliasGroup
@@ -89,17 +89,17 @@ class AliasGroupListTest extends PHPUnit_Framework_TestCase {
 
 	public function testGivenNonAliasGroups_constructorThrowsException() {
 		$this->setExpectedException( 'InvalidArgumentException' );
-		new AliasGroupList( array( null ) );
+		new AliasGroupList( [ null ] );
 	}
 
 	public function testGivenSetLanguageCode_getByLanguageReturnsGroup() {
-		$enGroup = new AliasGroup( 'en', array( 'foo' ) );
+		$enGroup = new AliasGroup( 'en', [ 'foo' ] );
 
-		$list = new AliasGroupList( array(
+		$list = new AliasGroupList( [
 			new AliasGroup( 'de' ),
 			$enGroup,
 			new AliasGroup( 'nl' ),
-		) );
+		] );
 
 		$this->assertEquals( $enGroup, $list->getByLanguage( 'en' ) );
 	}
@@ -121,11 +121,11 @@ class AliasGroupListTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenGroupForNewLanguage_setGroupAddsGroup() {
-		$enGroup = new AliasGroup( 'en', array( 'foo', 'bar' ) );
-		$deGroup = new AliasGroup( 'de', array( 'baz', 'bah' ) );
+		$enGroup = new AliasGroup( 'en', [ 'foo', 'bar' ] );
+		$deGroup = new AliasGroup( 'de', [ 'baz', 'bah' ] );
 
-		$list = new AliasGroupList( array( $enGroup ) );
-		$expectedList = new AliasGroupList( array( $enGroup, $deGroup ) );
+		$list = new AliasGroupList( [ $enGroup ] );
+		$expectedList = new AliasGroupList( [ $enGroup, $deGroup ] );
 
 		$list->setGroup( $deGroup );
 
@@ -133,18 +133,18 @@ class AliasGroupListTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenLabelForExistingLanguage_setLabelReplacesLabel() {
-		$enGroup = new AliasGroup( 'en', array( 'foo', 'bar' ) );
-		$newEnGroup = new AliasGroup( 'en', array( 'foo', 'bar', 'bah' ) );
+		$enGroup = new AliasGroup( 'en', [ 'foo', 'bar' ] );
+		$newEnGroup = new AliasGroup( 'en', [ 'foo', 'bar', 'bah' ] );
 
-		$list = new AliasGroupList( array( $enGroup ) );
-		$expectedList = new AliasGroupList( array( $newEnGroup ) );
+		$list = new AliasGroupList( [ $enGroup ] );
+		$expectedList = new AliasGroupList( [ $newEnGroup ] );
 
 		$list->setGroup( $newEnGroup );
 		$this->assertEquals( $expectedList, $list );
 	}
 
 	public function testGivenNotSetLanguage_removeByLanguageIsNoOp() {
-		$list = new AliasGroupList( array( new AliasGroup( 'en', array( 'foo', 'bar' ) ) ) );
+		$list = new AliasGroupList( [ new AliasGroup( 'en', [ 'foo', 'bar' ] ) ] );
 		$originalList = clone $list;
 
 		$list->removeByLanguage( 'de' );
@@ -153,7 +153,7 @@ class AliasGroupListTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenSetLanguage_removeByLanguageRemovesIt() {
-		$list = new AliasGroupList( array( new AliasGroup( 'en', array( 'foo', 'bar' ) ) ) );
+		$list = new AliasGroupList( [ new AliasGroup( 'en', [ 'foo', 'bar' ] ) ] );
 
 		$list->removeByLanguage( 'en' );
 
@@ -164,32 +164,32 @@ class AliasGroupListTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidLanguageCodeProvider
 	 */
 	public function testGivenInvalidLanguageCode_removeByLanguageIsNoOp( $languageCode ) {
-		$list = new AliasGroupList( array( new AliasGroup( 'en', array( 'foo' ) ) ) );
+		$list = new AliasGroupList( [ new AliasGroup( 'en', [ 'foo' ] ) ] );
 		$list->removeByLanguage( $languageCode );
 		$this->assertFalse( $list->isEmpty() );
 	}
 
 	public function testGivenEmptyGroups_constructorRemovesThem() {
-		$enGroup = new AliasGroup( 'en', array( 'foo' ) );
+		$enGroup = new AliasGroup( 'en', [ 'foo' ] );
 
-		$list = new AliasGroupList( array(
+		$list = new AliasGroupList( [
 			new AliasGroup( 'de' ),
 			$enGroup,
 			new AliasGroup( 'en' ),
 			new AliasGroup( 'nl' ),
-		) );
+		] );
 
-		$expectedList = new AliasGroupList( array(
+		$expectedList = new AliasGroupList( [
 			new AliasGroup( 'en' ),
-		) );
+		] );
 
 		$this->assertEquals( $expectedList, $list );
 	}
 
 	public function testGivenEmptyGroup_setGroupRemovesGroup() {
-		$list = new AliasGroupList( array(
-			new AliasGroup( 'en', array( 'foo' ) ),
-		) );
+		$list = new AliasGroupList( [
+			new AliasGroup( 'en', [ 'foo' ] ),
+		] );
 
 		$expectedList = new AliasGroupList();
 
@@ -205,29 +205,29 @@ class AliasGroupListTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testFilledListEqualsItself() {
-		$list = new AliasGroupList( array(
-			new AliasGroup( 'en', array( 'foo' ) ),
-			new AliasGroup( 'de', array( 'bar' ) ),
-		) );
+		$list = new AliasGroupList( [
+			new AliasGroup( 'en', [ 'foo' ] ),
+			new AliasGroup( 'de', [ 'bar' ] ),
+		] );
 
 		$this->assertTrue( $list->equals( $list ) );
 		$this->assertTrue( $list->equals( clone $list ) );
 	}
 
 	public function testDifferentListsDoNotEqual() {
-		$list = new AliasGroupList( array(
-			new AliasGroup( 'en', array( 'foo' ) ),
-			new AliasGroup( 'de', array( 'bar' ) ),
-		) );
+		$list = new AliasGroupList( [
+			new AliasGroup( 'en', [ 'foo' ] ),
+			new AliasGroup( 'de', [ 'bar' ] ),
+		] );
 
 		$this->assertFalse( $list->equals( new AliasGroupList() ) );
 
 		$this->assertFalse( $list->equals(
-			new AliasGroupList( array(
-				new AliasGroup( 'en', array( 'foo' ) ),
-				new AliasGroup( 'de', array( 'bar' ) ),
-				new AliasGroup( 'nl', array( 'baz' ) ),
-			) )
+			new AliasGroupList( [
+				new AliasGroup( 'en', [ 'foo' ] ),
+				new AliasGroup( 'de', [ 'bar' ] ),
+				new AliasGroup( 'nl', [ 'baz' ] ),
+			] )
 		) );
 	}
 
@@ -238,32 +238,32 @@ class AliasGroupListTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenListsThatOnlyDifferInOrder_equalsReturnsTrue() {
-		$list = new AliasGroupList( array(
-			new AliasGroup( 'en', array( 'foo' ) ),
-			new AliasGroup( 'de', array( 'bar' ) ),
-		) );
+		$list = new AliasGroupList( [
+			new AliasGroup( 'en', [ 'foo' ] ),
+			new AliasGroup( 'de', [ 'bar' ] ),
+		] );
 
 		$this->assertTrue( $list->equals(
-			new AliasGroupList( array(
-				new AliasGroup( 'de', array( 'bar' ) ),
-				new AliasGroup( 'en', array( 'foo' ) ),
-			) )
+			new AliasGroupList( [
+				new AliasGroup( 'de', [ 'bar' ] ),
+				new AliasGroup( 'en', [ 'foo' ] ),
+			] )
 		) );
 	}
 
 	public function testGivenNonSetLanguageGroup_hasAliasGroupReturnsFalse() {
 		$list = new AliasGroupList();
-		$this->assertFalse( $list->hasAliasGroup( new AliasGroup( 'en', array( 'kittens' ) ) ) );
+		$this->assertFalse( $list->hasAliasGroup( new AliasGroup( 'en', [ 'kittens' ] ) ) );
 	}
 
 	public function testGivenMismatchingGroup_hasAliasGroupReturnsFalse() {
-		$list = new AliasGroupList( array( new AliasGroup( 'en', array( 'cats' ) ) ) );
-		$this->assertFalse( $list->hasAliasGroup( new AliasGroup( 'en', array( 'kittens' ) ) ) );
+		$list = new AliasGroupList( [ new AliasGroup( 'en', [ 'cats' ] ) ] );
+		$this->assertFalse( $list->hasAliasGroup( new AliasGroup( 'en', [ 'kittens' ] ) ) );
 	}
 
 	public function testGivenMatchingGroup_hasAliasGroupReturnsTrue() {
-		$list = new AliasGroupList( array( new AliasGroup( 'en', array( 'kittens' ) ) ) );
-		$this->assertTrue( $list->hasAliasGroup( new AliasGroup( 'en', array( 'kittens' ) ) ) );
+		$list = new AliasGroupList( [ new AliasGroup( 'en', [ 'kittens' ] ) ] );
+		$this->assertTrue( $list->hasAliasGroup( new AliasGroup( 'en', [ 'kittens' ] ) ) );
 	}
 
 	public function testGivenNonSetLanguageGroup_hasGroupForLanguageReturnsFalse() {
@@ -280,30 +280,30 @@ class AliasGroupListTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidLanguageCodeProvider() {
-		return array(
-			array( null ),
-			array( 21 ),
-			array( '' ),
-		);
+		return [
+			[ null ],
+			[ 21 ],
+			[ '' ],
+		];
 	}
 
 	public function testGivenMismatchingGroup_hasGroupForLanguageReturnsFalse() {
-		$list = new AliasGroupList( array( new AliasGroup( 'en', array( 'cats' ) ) ) );
+		$list = new AliasGroupList( [ new AliasGroup( 'en', [ 'cats' ] ) ] );
 		$this->assertFalse( $list->hasGroupForLanguage( 'de' ) );
 	}
 
 	public function testGivenMatchingGroup_hasGroupForLanguageReturnsTrue() {
-		$list = new AliasGroupList( array( new AliasGroup( 'en', array( 'kittens' ) ) ) );
+		$list = new AliasGroupList( [ new AliasGroup( 'en', [ 'kittens' ] ) ] );
 		$this->assertTrue( $list->hasGroupForLanguage( 'en' ) );
 	}
 
 	public function testGivenAliasGroupArgs_setGroupTextsSetsAliasGroup() {
 		$list = new AliasGroupList();
 
-		$list->setAliasesForLanguage( 'en', array( 'foo', 'bar' ) );
+		$list->setAliasesForLanguage( 'en', [ 'foo', 'bar' ] );
 
 		$this->assertEquals(
-			new AliasGroup( 'en', array( 'foo', 'bar' ) ),
+			new AliasGroup( 'en', [ 'foo', 'bar' ] ),
 			$list->getByLanguage( 'en' )
 		);
 	}
@@ -312,22 +312,22 @@ class AliasGroupListTest extends PHPUnit_Framework_TestCase {
 		$list = new AliasGroupList();
 
 		$this->setExpectedException( 'InvalidArgumentException' );
-		$list->setAliasesForLanguage( null, array( 'foo', 'bar' ) );
+		$list->setAliasesForLanguage( null, [ 'foo', 'bar' ] );
 	}
 
 	public function testGivenInvalidAliases_setGroupTextsThrowsException() {
 		$list = new AliasGroupList();
 
 		$this->setExpectedException( 'InvalidArgumentException' );
-		$list->setAliasesForLanguage( 'en', array( 'foo', null ) );
+		$list->setAliasesForLanguage( 'en', [ 'foo', null ] );
 	}
 
 	public function testToArray() {
-		$array = array(
-			'en' => new AliasGroup( 'en', array( 'foo' ) ),
-			'de' => new AliasGroup( 'de', array( 'bar' ) ),
-			'nl' => new AliasGroup( 'nl', array( 'baz' ) ),
-		);
+		$array = [
+			'en' => new AliasGroup( 'en', [ 'foo' ] ),
+			'de' => new AliasGroup( 'de', [ 'bar' ] ),
+			'nl' => new AliasGroup( 'nl', [ 'baz' ] ),
+		];
 
 		$list = new AliasGroupList( $array );
 
@@ -336,49 +336,49 @@ class AliasGroupListTest extends PHPUnit_Framework_TestCase {
 
 	public function testGivenEmptyList_getWithLanguagesReturnsEmptyList() {
 		$list = new AliasGroupList();
-		$this->assertEquals( new AliasGroupList(), $list->getWithLanguages( array() ) );
-		$this->assertEquals( new AliasGroupList(), $list->getWithLanguages( array( 'en', 'de' ) ) );
+		$this->assertEquals( new AliasGroupList(), $list->getWithLanguages( [] ) );
+		$this->assertEquals( new AliasGroupList(), $list->getWithLanguages( [ 'en', 'de' ] ) );
 	}
 
 	public function testGivenNoLanguages_getWithLanguagesReturnsEmptyList() {
 		$list = new AliasGroupList();
-		$list->setAliasesForLanguage( 'en', array( 'foo' ) );
-		$list->setAliasesForLanguage( 'de', array( 'bar' ) );
+		$list->setAliasesForLanguage( 'en', [ 'foo' ] );
+		$list->setAliasesForLanguage( 'de', [ 'bar' ] );
 
-		$this->assertEquals( new AliasGroupList(), $list->getWithLanguages( array() ) );
+		$this->assertEquals( new AliasGroupList(), $list->getWithLanguages( [] ) );
 	}
 
 	public function testGivenAllLanguages_getWithLanguagesReturnsFullList() {
 		$list = new AliasGroupList();
-		$list->setAliasesForLanguage( 'en', array( 'foo' ) );
-		$list->setAliasesForLanguage( 'de', array( 'bar' ) );
+		$list->setAliasesForLanguage( 'en', [ 'foo' ] );
+		$list->setAliasesForLanguage( 'de', [ 'bar' ] );
 
-		$this->assertEquals( $list, $list->getWithLanguages( array( 'en', 'de' ) ) );
+		$this->assertEquals( $list, $list->getWithLanguages( [ 'en', 'de' ] ) );
 	}
 
 	public function testGivenSomeLanguages_getWithLanguagesReturnsPartialList() {
 		$list = new AliasGroupList();
-		$list->setAliasesForLanguage( 'en', array( 'foo' ) );
-		$list->setAliasesForLanguage( 'de', array( 'bar' ) );
-		$list->setAliasesForLanguage( 'nl', array( 'baz' ) );
-		$list->setAliasesForLanguage( 'fr', array( 'hax' ) );
+		$list->setAliasesForLanguage( 'en', [ 'foo' ] );
+		$list->setAliasesForLanguage( 'de', [ 'bar' ] );
+		$list->setAliasesForLanguage( 'nl', [ 'baz' ] );
+		$list->setAliasesForLanguage( 'fr', [ 'hax' ] );
 
 		$expectedList = new AliasGroupList();
-		$expectedList->setAliasesForLanguage( 'en', array( 'foo' ) );
-		$expectedList->setAliasesForLanguage( 'nl', array( 'baz' ) );
+		$expectedList->setAliasesForLanguage( 'en', [ 'foo' ] );
+		$expectedList->setAliasesForLanguage( 'nl', [ 'baz' ] );
 
-		$this->assertEquals( $expectedList, $list->getWithLanguages( array( 'en', 'nl' ) ) );
+		$this->assertEquals( $expectedList, $list->getWithLanguages( [ 'en', 'nl' ] ) );
 	}
 
 	public function testToTextArray() {
 		$list = new AliasGroupList();
-		$list->setAliasesForLanguage( 'en', array( 'foo', 'baz' ) );
-		$list->setAliasesForLanguage( 'de', array( 'bar' ) );
+		$list->setAliasesForLanguage( 'en', [ 'foo', 'baz' ] );
+		$list->setAliasesForLanguage( 'de', [ 'bar' ] );
 
-		$expected = array(
-			'en' => array( 'foo', 'baz' ),
-			'de' => array( 'bar' ),
-		);
+		$expected = [
+			'en' => [ 'foo', 'baz' ],
+			'de' => [ 'bar' ],
+		];
 
 		$this->assertEquals( $expected, $list->toTextArray() );
 	}
