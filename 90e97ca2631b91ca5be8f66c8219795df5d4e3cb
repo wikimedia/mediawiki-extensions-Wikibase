@@ -16,6 +16,24 @@
       "revId": "90e97ca2631b91ca5be8f66c8219795df5d4e3cb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_c979352c",
+        "filename": "client/includes/Specials/SpecialEntityUsage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-12T22:27:02Z",
+      "side": 1,
+      "message": "I don\u0027t think that would be needed, we join and use where in bottom of the query so doing it in the subquery won\u0027t be necessary.",
+      "parentUuid": "4e6f8b3b_ab769bd3",
+      "revId": "90e97ca2631b91ca5be8f66c8219795df5d4e3cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
