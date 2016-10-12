@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e6c1747_e977d1fb",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-12T22:52:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e6f8b3b_cbc59743",
+      "revId": "d89a92ec75eb5b803bc42528c2c4d212ff76bc07",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e6f8b3b_605bdd26",
         "filename": "client/includes/Hooks/EditActionHookHandler.php",
         "patchSetId": 15
@@ -30,6 +48,24 @@
       "writtenOn": "2016-10-12T15:58:10Z",
       "side": 1,
       "message": "that is very nit-picky, sorry:\n\nmaybe have it like:\n...-\u003emsg(\n    message stuff\n)-\u003eparse();\n\nso this \"parse\" part is not missed while going briefly through the code?",
+      "revId": "d89a92ec75eb5b803bc42528c2c4d212ff76bc07",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_09c34d0b",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-12T22:52:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e6f8b3b_605bdd26",
       "revId": "d89a92ec75eb5b803bc42528c2c4d212ff76bc07",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "2e6c1747_49cd4534",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-12T22:52:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e6f8b3b_e0aeede3",
+      "revId": "d89a92ec75eb5b803bc42528c2c4d212ff76bc07",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e6f8b3b_20b0053e",
         "filename": "client/includes/Hooks/EditActionHookHandler.php",
         "patchSetId": 15
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "2e6c1747_69d201d7",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-12T22:52:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e6f8b3b_20b0053e",
+      "revId": "d89a92ec75eb5b803bc42528c2c4d212ff76bc07",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e6f8b3b_00b3094d",
         "filename": "client/includes/Hooks/EditActionHookHandler.php",
         "patchSetId": 15
@@ -81,6 +153,24 @@
       "writtenOn": "2016-10-12T15:58:10Z",
       "side": 1,
       "message": "local variable not really needed here",
+      "revId": "d89a92ec75eb5b803bc42528c2c4d212ff76bc07",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_89d65dc7",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-12T22:52:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e6f8b3b_00b3094d",
       "revId": "d89a92ec75eb5b803bc42528c2c4d212ff76bc07",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -110,6 +200,24 @@
     },
     {
       "key": {
+        "uuid": "2e6c1747_69e9217b",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-12T22:52:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e6f8b3b_4094218e",
+      "revId": "d89a92ec75eb5b803bc42528c2c4d212ff76bc07",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e6f8b3b_20972595",
         "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
         "patchSetId": 15
@@ -127,6 +235,24 @@
     },
     {
       "key": {
+        "uuid": "2e6c1747_a9fa393e",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-12T22:52:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e6f8b3b_20972595",
+      "revId": "d89a92ec75eb5b803bc42528c2c4d212ff76bc07",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e6f8b3b_a0f23501",
         "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
         "patchSetId": 15
@@ -138,6 +264,24 @@
       "writtenOn": "2016-10-12T15:58:10Z",
       "side": 1,
       "message": "As there is only one entity with label to be available you could maybe also skip the $labelMap and simpply check if $entity\u0027s serialization is \u0027Q4\u0027 and return new term if it is, and null otherwise.\nBut I assume you are willing to expand those tests (including properties etc)? In such case please ignore make comment and keep it like it is :)",
+      "revId": "d89a92ec75eb5b803bc42528c2c4d212ff76bc07",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_e9f43153",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-12T22:52:14Z",
+      "side": 1,
+      "message": "Yes I want to expand this for other stuff too.",
+      "parentUuid": "4e6f8b3b_a0f23501",
       "revId": "d89a92ec75eb5b803bc42528c2c4d212ff76bc07",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
