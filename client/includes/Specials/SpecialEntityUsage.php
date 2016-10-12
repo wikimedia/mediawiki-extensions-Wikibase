@@ -130,9 +130,9 @@ class SpecialEntityUsage extends QueryPage {
 		$conds = [ 'eu_entity_id' => $this->entityId->getSerialization() ];
 		$groupConcat = wfGetDB( DB_REPLICA )->buildGroupConcatField(
 			'|',
-			'wbc_entity_usage AS wbc',
+			'wbc_entity_usage',
 			'eu_aspect',
-			'wbc.eu_page_id = wbc_entity_usage.eu_page_id'
+			'eu_page_id = eu_page_id'
 		);
 
 		return [
