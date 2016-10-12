@@ -1,0 +1,210 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e6c1747_2c757793",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-12T23:56:41Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 451,
+        "startChar": 33,
+        "endLine": 451,
+        "endChar": 44
+      },
+      "revId": "939f335a5a5b3d2a7482f3d55dcc93fb0f8bb0fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_ec5a7f21",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-12T23:56:41Z",
+      "side": 1,
+      "message": "are usages to show",
+      "range": {
+        "startLine": 90,
+        "startChar": 20,
+        "endLine": 90,
+        "endChar": 36
+      },
+      "revId": "939f335a5a5b3d2a7482f3d55dcc93fb0f8bb0fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_ec90bf9a",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-12T23:56:41Z",
+      "side": 1,
+      "message": "Empty line before foreach will aid readability.",
+      "revId": "939f335a5a5b3d2a7482f3d55dcc93fb0f8bb0fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_acafa7dd",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-12T23:56:41Z",
+      "side": 1,
+      "message": "$key is unused",
+      "range": {
+        "startLine": 130,
+        "startChar": 23,
+        "endLine": 130,
+        "endChar": 27
+      },
+      "revId": "939f335a5a5b3d2a7482f3d55dcc93fb0f8bb0fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_2cf2d703",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-12T23:56:41Z",
+      "side": 1,
+      "message": "Empty line before $output \u003d … will aid readability.",
+      "revId": "939f335a5a5b3d2a7482f3d55dcc93fb0f8bb0fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_acdde775",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-12T23:56:41Z",
+      "side": 1,
+      "message": "Empty line before foreach will aid readability.",
+      "revId": "939f335a5a5b3d2a7482f3d55dcc93fb0f8bb0fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_4c5473ca",
+        "filename": "client/resources/wikibase.client.action.edit.collapsibleFooter.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-12T23:56:41Z",
+      "side": 1,
+      "message": "In a better world this would not be needed… but I doubt it\u0027s worth touching the code in MediaWiki.",
+      "revId": "939f335a5a5b3d2a7482f3d55dcc93fb0f8bb0fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_cc5dc31c",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-12T23:56:41Z",
+      "side": 1,
+      "message": "Could/ should be assertSame",
+      "range": {
+        "startLine": 46,
+        "startChar": 9,
+        "endLine": 46,
+        "endChar": 21
+      },
+      "revId": "939f335a5a5b3d2a7482f3d55dcc93fb0f8bb0fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_8c6d8b99",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-12T23:56:41Z",
+      "side": 1,
+      "message": "Why not just append this to the string started last line?",
+      "range": {
+        "startLine": 63,
+        "startChar": 2,
+        "endLine": 63,
+        "endChar": 13
+      },
+      "revId": "939f335a5a5b3d2a7482f3d55dcc93fb0f8bb0fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_cc6783b3",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-12T23:56:41Z",
+      "side": 1,
+      "message": "Should be $this-\u003eonce(). Also this should be explicitly set all the time (and just return null if !$entityId).",
+      "range": {
+        "startLine": 121,
+        "startChar": 30,
+        "endLine": 121,
+        "endChar": 42
+      },
+      "revId": "939f335a5a5b3d2a7482f3d55dcc93fb0f8bb0fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
