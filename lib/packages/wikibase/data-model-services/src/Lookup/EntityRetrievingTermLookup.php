@@ -42,7 +42,7 @@ class EntityRetrievingTermLookup implements TermLookup {
 	 * @throws TermLookupException
 	 */
 	public function getLabel( EntityId $entityId, $languageCode ) {
-		$fingerprint = $this->getFingerprint( $entityId, array( $languageCode ) );
+		$fingerprint = $this->getFingerprint( $entityId, [ $languageCode ] );
 
 		if ( $fingerprint->hasLabel( $languageCode ) ) {
 			return $fingerprint->getLabel( $languageCode )->getText();
@@ -77,7 +77,7 @@ class EntityRetrievingTermLookup implements TermLookup {
 	 * @return string|null
 	 */
 	public function getDescription( EntityId $entityId, $languageCode ) {
-		$fingerprint = $this->getFingerprint( $entityId, array( $languageCode ) );
+		$fingerprint = $this->getFingerprint( $entityId, [ $languageCode ] );
 
 		if ( $fingerprint->hasDescription( $languageCode ) ) {
 			return $fingerprint->getDescription( $languageCode )->getText();

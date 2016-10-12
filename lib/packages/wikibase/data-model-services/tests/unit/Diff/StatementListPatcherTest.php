@@ -27,70 +27,70 @@ class StatementListPatcherTest extends \PHPUnit_Framework_TestCase {
 		$statement1 = new Statement( new PropertyNoValueSnak( 1 ) );
 		$statement2 = new Statement( new PropertyNoValueSnak( 2 ) );
 
-		return array(
+		return [
 			// Empty diffs
-			array(
+			[
 				new StatementList(),
 				new Diff(),
 				new StatementList()
-			),
-			array(
+			],
+			[
 				new StatementList( $statement1 ),
 				new Diff(),
 				new StatementList( $statement1 )
-			),
+			],
 
 			// Add operations
-			array(
+			[
 				new StatementList(),
-				new Diff( array( new DiffOpAdd( $statement1 ) ), true ),
+				new Diff( [ new DiffOpAdd( $statement1 ) ], true ),
 				new StatementList( $statement1 )
-			),
-			array(
+			],
+			[
 				new StatementList(),
-				new Diff( array( new DiffOpAdd( $statement1 ) ), false ),
+				new Diff( [ new DiffOpAdd( $statement1 ) ], false ),
 				new StatementList( $statement1 )
-			),
-			array(
+			],
+			[
 				new StatementList(),
-				new Diff( array( new DiffOpAdd( $statement1 ) ) ),
+				new Diff( [ new DiffOpAdd( $statement1 ) ] ),
 				new StatementList( $statement1 )
-			),
+			],
 
 			// Remove operations
-			array(
+			[
 				new StatementList( $statement1 ),
-				new Diff( array( new DiffOpRemove( $statement1 ) ), true ),
+				new Diff( [ new DiffOpRemove( $statement1 ) ], true ),
 				new StatementList()
-			),
-			array(
+			],
+			[
 				new StatementList( $statement1 ),
-				new Diff( array( new DiffOpRemove( $statement1 ) ), false ),
+				new Diff( [ new DiffOpRemove( $statement1 ) ], false ),
 				new StatementList()
-			),
-			array(
+			],
+			[
 				new StatementList( $statement1 ),
-				new Diff( array( new DiffOpRemove( $statement1 ) ) ),
+				new Diff( [ new DiffOpRemove( $statement1 ) ] ),
 				new StatementList()
-			),
+			],
 
 			// Mixed operations
-			array(
+			[
 				new StatementList( $statement1 ),
-				new Diff( array(
+				new Diff( [
 					new DiffOpRemove( $statement1 ),
 					new DiffOpAdd( $statement2 ),
-				) ),
+				] ),
 				new StatementList( $statement2 )
-			),
-			array(
+			],
+			[
 				new StatementList( $statement1 ),
-				new Diff( array(
+				new Diff( [
 					new DiffOpChange( $statement1, $statement2 ),
-				) ),
+				] ),
 				new StatementList( $statement2 )
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -114,110 +114,110 @@ class StatementListPatcherTest extends \PHPUnit_Framework_TestCase {
 		$statement2 = new Statement( new PropertyNoValueSnak( 2 ), null, null, 's2' );
 		$statement3 = new Statement( new PropertyNoValueSnak( 3 ), null, null, 's3' );
 
-		return array(
-			'Simple associative add' => array(
+		return [
+			'Simple associative add' => [
 				new StatementList(),
-				new Diff( array(
+				new Diff( [
 					's1' => new DiffOpAdd( $statement1 ),
-				), true ),
-				array( 's1' )
-			),
-			'Simple non-associative add' => array(
+				], true ),
+				[ 's1' ]
+			],
+			'Simple non-associative add' => [
 				new StatementList(),
-				new Diff( array(
+				new Diff( [
 					's1' => new DiffOpAdd( $statement1 ),
-				), false ),
-				array( 's1' )
-			),
-			'Simple associative remove' => array(
+				], false ),
+				[ 's1' ]
+			],
+			'Simple associative remove' => [
 				new StatementList( $statement1 ),
-				new Diff( array(
+				new Diff( [
 					's1' => new DiffOpRemove( $statement1 ),
-				), true ),
-				array()
-			),
-			'Simple non-associative remove' => array(
+				], true ),
+				[]
+			],
+			'Simple non-associative remove' => [
 				new StatementList( $statement1 ),
-				new Diff( array(
+				new Diff( [
 					's1' => new DiffOpRemove( $statement1 ),
-				), false ),
-				array()
-			),
+				], false ),
+				[]
+			],
 
 			// Change operations
-			'Remove and add' => array(
+			'Remove and add' => [
 				new StatementList( $statement1 ),
-				new Diff( array(
+				new Diff( [
 					's1' => new DiffOpRemove( $statement1 ),
 					's2' => new DiffOpAdd( $statement2 ),
-				) ),
-				array( 's2' )
-			),
-			'Add and remove' => array(
+				] ),
+				[ 's2' ]
+			],
+			'Add and remove' => [
 				new StatementList( $statement1 ),
-				new Diff( array(
+				new Diff( [
 					's2' => new DiffOpAdd( $statement2 ),
 					's1' => new DiffOpRemove( $statement1 ),
-				) ),
-				array( 's2' )
-			),
-			'Simple associative replace' => array(
+				] ),
+				[ 's2' ]
+			],
+			'Simple associative replace' => [
 				new StatementList( $statement1 ),
-				new Diff( array(
+				new Diff( [
 					's1' => new DiffOpChange( $statement1, $statement2 ),
-				), true ),
-				array( 's2' )
-			),
-			'Simple non-associative replace' => array(
+				], true ),
+				[ 's2' ]
+			],
+			'Simple non-associative replace' => [
 				new StatementList( $statement1 ),
-				new Diff( array(
+				new Diff( [
 					's1' => new DiffOpChange( $statement1, $statement2 ),
-				), false ),
-				array( 's2' )
-			),
-			'Replacing first element retains order' => array(
+				], false ),
+				[ 's2' ]
+			],
+			'Replacing first element retains order' => [
 				new StatementList( $statement1, $statement2 ),
-				new Diff( array(
+				new Diff( [
 					's1' => new DiffOpChange( $statement1, $statement3 ),
-				) ),
-				array( 's3', 's2' )
-			),
-			'Replacing last element retains order' => array(
+				] ),
+				[ 's3', 's2' ]
+			],
+			'Replacing last element retains order' => [
 				new StatementList( $statement1, $statement2 ),
-				new Diff( array(
+				new Diff( [
 					's2' => new DiffOpChange( $statement2, $statement3 ),
-				) ),
-				array( 's1', 's3' )
-			),
+				] ),
+				[ 's1', 's3' ]
+			],
 
 			// No-ops
-			'Empty diff' => array(
+			'Empty diff' => [
 				new StatementList( $statement1 ),
 				new Diff(),
-				array( 's1' )
-			),
-			'Adding existing element is no-op' => array(
+				[ 's1' ]
+			],
+			'Adding existing element is no-op' => [
 				new StatementList( $statement1 ),
-				new Diff( array(
+				new Diff( [
 					's1' => new DiffOpAdd( $statement1 ),
-				) ),
-				array( 's1' )
-			),
-			'Removing non-existing element is no-op' => array(
+				] ),
+				[ 's1' ]
+			],
+			'Removing non-existing element is no-op' => [
 				new StatementList( $statement1 ),
-				new Diff( array(
+				new Diff( [
 					's2' => new DiffOpRemove( $statement2 ),
-				) ),
-				array( 's1' )
-			),
-			'Replacing non-existing element is no-op' => array(
+				] ),
+				[ 's1' ]
+			],
+			'Replacing non-existing element is no-op' => [
 				new StatementList( $statement1 ),
-				new Diff( array(
+				new Diff( [
 					's2' => new DiffOpChange( $statement2, $statement3 ),
-				) ),
-				array( 's1' )
-			),
-		);
+				] ),
+				[ 's1' ]
+			],
+		];
 	}
 
 	/**
@@ -227,7 +227,7 @@ class StatementListPatcherTest extends \PHPUnit_Framework_TestCase {
 		$patcher = new StatementListPatcher();
 		$patcher->patchStatementList( $statements, $patch );
 
-		$guids = array();
+		$guids = [];
 		foreach ( $statements->toArray() as $statement ) {
 			$guids[] = $statement->getGuid();
 		}
@@ -263,11 +263,11 @@ class StatementListPatcherTest extends \PHPUnit_Framework_TestCase {
 		$statement3 = new Statement( new PropertyNoValueSnak( 1 ) );
 		$statement3->setGuid( 's3' );
 
-		$patch = new Diff( array(
+		$patch = new Diff( [
 			's0' => new DiffOpRemove( $statement0 ),
 			's2' => new DiffOpAdd( $statement2 ),
 			's3' => new DiffOpAdd( $statement3 )
-		) );
+		] );
 
 		$source = new StatementList();
 		$source->addStatement( $statement0 );

@@ -30,33 +30,33 @@ class EntityDiffTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function newForTypeProvider() {
-		return array(
-			array( 'item', 'Wikibase\DataModel\Services\Diff\ItemDiff' ),
-			array( 'anything', 'Wikibase\DataModel\Services\Diff\EntityDiff' ),
-		);
+		return [
+			[ 'item', 'Wikibase\DataModel\Services\Diff\ItemDiff' ],
+			[ 'anything', 'Wikibase\DataModel\Services\Diff\EntityDiff' ],
+		];
 	}
 
 	public function isEmptyProvider() {
-		$argLists = array();
+		$argLists = [];
 
-		$argLists[] = array( array(), true );
+		$argLists[] = [ [], true ];
 
-		$fields = array( 'aliases', 'label', 'description', 'claim' );
+		$fields = [ 'aliases', 'label', 'description', 'claim' ];
 
 		foreach ( $fields as $field ) {
-			$argLists[] = array( array( $field => new Diff( array() ) ), true );
+			$argLists[] = [ [ $field => new Diff( [] ) ], true ];
 		}
 
-		$diffOps = array();
+		$diffOps = [];
 
 		foreach ( $fields as $field ) {
-			$diffOps[$field] = new Diff( array() );
+			$diffOps[$field] = new Diff( [] );
 		}
 
-		$argLists[] = array( $diffOps, true );
+		$argLists[] = [ $diffOps, true ];
 
 		foreach ( $fields as $field ) {
-			$argLists[] = array( array( $field => new Diff( array( new DiffOpAdd( 42 ) ) ) ), false );
+			$argLists[] = [ [ $field => new Diff( [ new DiffOpAdd( 42 ) ] ) ], false ];
 		}
 
 		return $argLists;
@@ -73,30 +73,30 @@ class EntityDiffTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function diffProvider() {
-		$diffs = array();
+		$diffs = [];
 
-		$diffOps = array(
-			'label' => new Diff( array(
+		$diffOps = [
+			'label' => new Diff( [
 				'en' => new DiffOpAdd( 'foobar' ),
 				'de' => new DiffOpRemove( 'onoez' ),
 				'nl' => new DiffOpChange( 'foo', 'bar' ),
-			), true )
-		);
+			], true )
+		];
 
 		$diffs[] = new EntityDiff( $diffOps );
 
-		$diffOps['description'] = new Diff( array(
+		$diffOps['description'] = new Diff( [
 			'en' => new DiffOpAdd( 'foobar' ),
 			'de' => new DiffOpRemove( 'onoez' ),
 			'nl' => new DiffOpChange( 'foo', 'bar' ),
-		), true );
+		], true );
 
 		$diffs[] = new EntityDiff( $diffOps );
 
-		$diffOps['aliases'] = new Diff( array(
-			'en' => new Diff( array( new DiffOpAdd( 'foobar' ), new DiffOpRemove( 'onoez' ) ), false ),
-			'de' => new Diff( array( new DiffOpRemove( 'foo' ) ), false ),
-		), true );
+		$diffOps['aliases'] = new Diff( [
+			'en' => new Diff( [ new DiffOpAdd( 'foobar' ), new DiffOpRemove( 'onoez' ) ], false ),
+			'de' => new Diff( [ new DiffOpRemove( 'foo' ) ], false ),
+		], true );
 
 		$diffs[] = new EntityDiff( $diffOps );
 
@@ -111,10 +111,10 @@ class EntityDiffTest extends PHPUnit_Framework_TestCase {
 
 		$diffs[] = new EntityDiff( $diffOps );
 
-		$argLists = array();
+		$argLists = [];
 
 		foreach ( $diffs as $diff ) {
-			$argLists[] = array( $diff );
+			$argLists[] = [ $diff ];
 		}
 
 		return $argLists;

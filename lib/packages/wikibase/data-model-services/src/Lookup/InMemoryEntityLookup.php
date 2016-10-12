@@ -23,12 +23,12 @@ class InMemoryEntityLookup implements EntityLookup {
 	/**
 	 * @var EntityDocument[]
 	 */
-	private $entities = array();
+	private $entities = [];
 
 	/**
 	 * @var EntityLookupException[]
 	 */
-	private $exceptions = array();
+	private $exceptions = [];
 
 	/**
 	 * @param EntityDocument $entity

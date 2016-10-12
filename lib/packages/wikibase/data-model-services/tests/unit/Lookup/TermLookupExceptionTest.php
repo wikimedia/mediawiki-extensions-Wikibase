@@ -17,7 +17,7 @@ class TermLookupExceptionTest extends PHPUnit_Framework_TestCase {
 
 	public function testConstructorWithOnlyRequiredArguments() {
 		$entityId = new ItemId( 'Q1' );
-		$exception = new TermLookupException( $entityId, array( 'de', 'en' ) );
+		$exception = new TermLookupException( $entityId, [ 'de', 'en' ] );
 
 		$this->assertSame( $entityId, $exception->getEntityId() );
 		$this->assertSame(
@@ -33,7 +33,7 @@ class TermLookupExceptionTest extends PHPUnit_Framework_TestCase {
 		$previous = new Exception( 'previous' );
 		$exception = new TermLookupException(
 			$entityId,
-			array( 'de', 'en' ),
+			[ 'de', 'en' ],
 			'customMessage',
 			$previous
 		);

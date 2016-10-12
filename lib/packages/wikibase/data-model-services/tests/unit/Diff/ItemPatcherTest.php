@@ -63,21 +63,21 @@ class ItemPatcherTest extends PHPUnit_Framework_TestCase {
 		$item->getFingerprint()->setLabel( 'en', 'foo' );
 		$item->getFingerprint()->setLabel( 'de', 'bar' );
 
-		$patch = new ItemDiff( array(
-			'label' => new Diff( array(
+		$patch = new ItemDiff( [
+			'label' => new Diff( [
 				'en' => new DiffOpChange( 'foo', 'spam' ),
 				'nl' => new DiffOpAdd( 'baz' ),
-			) )
-		) );
+			] )
+		] );
 
 		$patchedItem = $this->getPatchedItem( $item, $patch );
 
 		$this->assertSame(
-			array(
+			[
 				'en' => 'spam',
 				'de' => 'bar',
 				'nl' => 'baz',
-			),
+			],
 			$patchedItem->getFingerprint()->getLabels()->toTextArray()
 		);
 	}
@@ -87,21 +87,21 @@ class ItemPatcherTest extends PHPUnit_Framework_TestCase {
 		$property->setDescription( 'en', 'foo' );
 		$property->setDescription( 'de', 'bar' );
 
-		$patch = new ItemDiff( array(
-			'description' => new Diff( array(
+		$patch = new ItemDiff( [
+			'description' => new Diff( [
 				'en' => new DiffOpChange( 'foo', 'spam' ),
 				'nl' => new DiffOpAdd( 'baz' ),
-			) ),
-		) );
+			] ),
+		] );
 
 		$patcher = new ItemPatcher();
 		$patcher->patchEntity( $property, $patch );
 
-		$this->assertSame( array(
+		$this->assertSame( [
 			'en' => 'spam',
 			'de' => 'bar',
 			'nl' => 'baz',
-		), $property->getFingerprint()->getDescriptions()->toTextArray() );
+		], $property->getFingerprint()->getDescriptions()->toTextArray() );
 	}
 
 	public function testStatementsArePatched() {
@@ -111,12 +111,12 @@ class ItemPatcherTest extends PHPUnit_Framework_TestCase {
 		$item = new Item();
 		$item->getStatements()->addStatement( $removedStatement );
 
-		$patch = new ItemDiff( array(
-			'claim' => new Diff( array(
+		$patch = new ItemDiff( [
+			'claim' => new Diff( [
 				's1' => new DiffOpRemove( $removedStatement ),
 				's2' => new DiffOpAdd( $addedStatement ),
-			) ),
-		) );
+			] ),
+		] );
 
 		$expected = new Item();
 		$expected->getStatements()->addStatement( $addedStatement );
@@ -133,17 +133,17 @@ class ItemPatcherTest extends PHPUnit_Framework_TestCase {
 		$item = new Item();
 		$item->getSiteLinkList()->addSiteLink( $removedSiteLink );
 
-		$patch = new ItemDiff( array(
-			'links' => new Diff( array(
-				'rewiki' => new Diff( array(
+		$patch = new ItemDiff( [
+			'links' => new Diff( [
+				'rewiki' => new Diff( [
 					'name' => new DiffOpRemove( 'Removed' ),
-				) ),
-				'adwiki' => new Diff( array(
+				] ),
+				'adwiki' => new Diff( [
 					'name' => new DiffOpAdd( 'Added' ),
 					'badges' => new Diff(),
-				) ),
-			) ),
-		) );
+				] ),
+			] ),
+		] );
 
 		$expected = new Item();
 		$expected->getSiteLinkList()->addSiteLink( $addedSiteLink );

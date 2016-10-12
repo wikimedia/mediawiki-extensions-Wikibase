@@ -46,23 +46,23 @@ class EntityRetrievingTermLookupTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function getLabelsProvider() {
-		return array(
-			array(
-				array( 'en' => 'New York City', 'es' => 'Nueva York' ),
+		return [
+			[
+				[ 'en' => 'New York City', 'es' => 'Nueva York' ],
 				new ItemId( 'Q116' ),
-				array( 'en', 'es' )
-			),
-			array(
-				array( 'es' => 'Nueva York' ),
+				[ 'en', 'es' ]
+			],
+			[
+				[ 'es' => 'Nueva York' ],
 				new ItemId( 'Q116' ),
-				array( 'es' )
-			),
-			array(
-				array( 'de' => 'Berlin' ),
+				[ 'es' ]
+			],
+			[
+				[ 'de' => 'Berlin' ],
 				new ItemId( 'Q117' ),
-				array( 'de' )
-			)
-		);
+				[ 'de' ]
+			]
+		];
 	}
 
 	/**
@@ -105,28 +105,28 @@ class EntityRetrievingTermLookupTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function getDescriptionsProvider() {
-		return array(
-			array(
-				array(
+		return [
+			[
+				[
 					'de' => 'Metropole an der Ostküste der Vereinigten Staaten',
 					'en' => 'largest city in New York and the United States of America',
-				),
+				],
 				new ItemId( 'Q116' ),
-				array( 'de', 'en' )
-			),
-			array(
-				array(
+				[ 'de', 'en' ]
+			],
+			[
+				[
 					'de' => 'Metropole an der Ostküste der Vereinigten Staaten',
-				),
+				],
 				new ItemId( 'Q116' ),
-				array( 'de', 'fr' )
-			),
-			array(
-				array(),
+				[ 'de', 'fr' ]
+			],
+			[
+				[],
 				new ItemId( 'Q117' ),
-				array()
-			)
-		);
+				[]
+			]
+		];
 	}
 
 	/**

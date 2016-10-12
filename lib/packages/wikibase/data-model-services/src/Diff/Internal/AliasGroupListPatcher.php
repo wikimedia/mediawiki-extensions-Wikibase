@@ -102,7 +102,7 @@ class AliasGroupListPatcher {
 		$hasLang = $groups->hasGroupForLanguage( $lang );
 
 		if ( $hasLang || !$this->containsOperationsOnOldValues( $patch ) ) {
-			$aliases = $hasLang ? $groups->getByLanguage( $lang )->getAliases() : array();
+			$aliases = $hasLang ? $groups->getByLanguage( $lang )->getAliases() : [];
 			$aliases = $this->getPatchedAliases( $aliases, $patch );
 			$groups->setAliasesForLanguage( $lang, $aliases );
 		}
@@ -114,8 +114,8 @@ class AliasGroupListPatcher {
 	 * @return bool
 	 */
 	private function containsOperationsOnOldValues( Diff $diff ) {
-		return $diff->getChanges() !== array()
-			|| $diff->getRemovals() !== array();
+		return $diff->getChanges() !== []
+			|| $diff->getRemovals() !== [];
 	}
 
 	/**

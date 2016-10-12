@@ -27,11 +27,11 @@ class GuidGeneratorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function entityIdProvider() {
-		$argLists = array();
+		$argLists = [];
 
-		$argLists[] = array( new ItemId( 'Q123' ) );
-		$argLists[] = array( new ItemId( 'Q1' ) );
-		$argLists[] = array( new PropertyId( 'P31337' ) );
+		$argLists[] = [ new ItemId( 'Q123' ) ];
+		$argLists[] = [ new ItemId( 'Q1' ) ];
+		$argLists[] = [ new PropertyId( 'P31337' ) ];
 
 		return $argLists;
 	}

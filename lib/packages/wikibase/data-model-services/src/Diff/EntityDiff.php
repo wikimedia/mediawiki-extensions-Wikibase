@@ -22,7 +22,7 @@ class EntityDiff extends Diff {
 	 *
 	 * @return self
 	 */
-	public static function newForType( $entityType, array $operations = array() ) {
+	public static function newForType( $entityType, array $operations = [] ) {
 		if ( $entityType === Item::ENTITY_TYPE ) {
 			return new ItemDiff( $operations );
 		} else {
@@ -33,7 +33,7 @@ class EntityDiff extends Diff {
 	/**
 	 * @param DiffOp[] $operations
 	 */
-	public function __construct( array $operations = array() ) {
+	public function __construct( array $operations = [] ) {
 		$this->fixSubstructureDiff( $operations, 'aliases' );
 		$this->fixSubstructureDiff( $operations, 'label' );
 		$this->fixSubstructureDiff( $operations, 'description' );
@@ -71,7 +71,7 @@ class EntityDiff extends Diff {
 			// actual old behavior of MapDiffer didn't cause that to happen, let's
 			// just use an empty diff, which is what MapDiffer should have returned
 			// in the actual broken case mentioned in bug 51363.
-			$operations[$key] = new Diff( array(), true );
+			$operations[$key] = new Diff( [], true );
 		}
 	}
 
@@ -83,7 +83,7 @@ class EntityDiff extends Diff {
 	 * @return Diff
 	 */
 	public function getAliasesDiff() {
-		return isset( $this['aliases'] ) ? $this['aliases'] : new Diff( array(), true );
+		return isset( $this['aliases'] ) ? $this['aliases'] : new Diff( [], true );
 	}
 
 	/**
@@ -94,7 +94,7 @@ class EntityDiff extends Diff {
 	 * @return Diff
 	 */
 	public function getLabelsDiff() {
-		return isset( $this['label'] ) ? $this['label'] : new Diff( array(), true );
+		return isset( $this['label'] ) ? $this['label'] : new Diff( [], true );
 	}
 
 	/**
@@ -105,7 +105,7 @@ class EntityDiff extends Diff {
 	 * @return Diff
 	 */
 	public function getDescriptionsDiff() {
-		return isset( $this['description'] ) ? $this['description'] : new Diff( array(), true );
+		return isset( $this['description'] ) ? $this['description'] : new Diff( [], true );
 	}
 
 	/**
@@ -116,7 +116,7 @@ class EntityDiff extends Diff {
 	 * @return Diff
 	 */
 	public function getClaimsDiff() {
-		return isset( $this['claim'] ) ? $this['claim'] : new Diff( array(), true );
+		return isset( $this['claim'] ) ? $this['claim'] : new Diff( [], true );
 	}
 
 	/**

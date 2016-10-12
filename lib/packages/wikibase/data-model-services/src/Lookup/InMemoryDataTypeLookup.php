@@ -20,7 +20,7 @@ class InMemoryDataTypeLookup implements PropertyDataTypeLookup {
 	/**
 	 * @var string[]
 	 */
-	private $dataTypeIds = array();
+	private $dataTypeIds = [];
 
 	/**
 	 * @param PropertyId $propertyId

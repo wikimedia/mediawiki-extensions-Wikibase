@@ -73,7 +73,7 @@ class ItemDiffer implements EntityDifferStrategy {
 	}
 
 	private function toDiffArray( Item $item ) {
-		$array = array();
+		$array = [];
 
 		$array['aliases'] = $item->getFingerprint()->getAliasGroups()->toTextArray();
 		$array['label'] = $item->getFingerprint()->getLabels()->toTextArray();
@@ -84,10 +84,10 @@ class ItemDiffer implements EntityDifferStrategy {
 	}
 
 	private function getSiteLinksInDiffFormat( SiteLinkList $siteLinks ) {
-		$linksInDiffFormat = array();
+		$linksInDiffFormat = [];
 
 		foreach ( $siteLinks->toArray() as $siteLink ) {
-			$linksInDiffFormat[$siteLink->getSiteId()] = array(
+			$linksInDiffFormat[$siteLink->getSiteId()] = [
 				'name' => $siteLink->getPageName(),
 				'badges' => array_map(
 					function( ItemId $id ) {
@@ -95,7 +95,7 @@ class ItemDiffer implements EntityDifferStrategy {
 					},
 					$siteLink->getBadges()
 				)
-			);
+			];
 		}
 
 		return $linksInDiffFormat;

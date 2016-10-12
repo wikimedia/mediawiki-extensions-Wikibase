@@ -21,7 +21,7 @@ class ByPropertyIdGrouper {
 	/**
 	 * @var array[]
 	 */
-	private $byPropertyId = array();
+	private $byPropertyId = [];
 
 	/**
 	 * @param PropertyIdProvider[]|Traversable $propertyIdProviders
@@ -62,7 +62,7 @@ class ByPropertyIdGrouper {
 		if ( isset( $this->byPropertyId[$idSerialization] ) ) {
 			$this->byPropertyId[$idSerialization][] = $propertyIdProvider;
 		} else {
-			$this->byPropertyId[$idSerialization] = array( $propertyIdProvider );
+			$this->byPropertyId[$idSerialization] = [ $propertyIdProvider ];
 		}
 	}
 

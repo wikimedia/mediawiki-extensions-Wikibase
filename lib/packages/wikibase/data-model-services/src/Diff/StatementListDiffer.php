@@ -46,7 +46,7 @@ class StatementListDiffer {
 	}
 
 	private function toDiffArray( StatementList $statementList ) {
-		$statementArray = array();
+		$statementArray = [];
 
 		/**
 		 * @var Statement $statement

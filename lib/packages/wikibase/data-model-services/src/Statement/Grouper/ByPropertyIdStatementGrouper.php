@@ -20,7 +20,7 @@ class ByPropertyIdStatementGrouper implements StatementGrouper {
 	 */
 	public function groupStatements( StatementList $statements ) {
 		/** @var StatementList[] $groups */
-		$groups = array();
+		$groups = [];
 
 		foreach ( $statements->toArray() as $statement ) {
 			$id = $statement->getPropertyId()->getSerialization();

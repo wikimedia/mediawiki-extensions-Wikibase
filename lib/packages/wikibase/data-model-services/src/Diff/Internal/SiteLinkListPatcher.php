@@ -72,10 +72,10 @@ class SiteLinkListPatcher {
 	}
 
 	private function getSiteLinksInDiffFormat( SiteLinkList $siteLinks ) {
-		$linksInDiffFormat = array();
+		$linksInDiffFormat = [];
 
 		foreach ( $siteLinks->toArray() as $siteLink ) {
-			$linksInDiffFormat[$siteLink->getSiteId()] = array(
+			$linksInDiffFormat[$siteLink->getSiteId()] = [
 				'name' => $siteLink->getPageName(),
 				'badges' => array_map(
 					function( ItemId $id ) {
@@ -83,7 +83,7 @@ class SiteLinkListPatcher {
 					},
 					$siteLink->getBadges()
 				)
-			);
+			];
 		}
 
 		return $linksInDiffFormat;

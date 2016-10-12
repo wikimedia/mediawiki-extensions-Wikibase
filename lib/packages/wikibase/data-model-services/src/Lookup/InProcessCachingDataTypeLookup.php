@@ -17,7 +17,7 @@ class InProcessCachingDataTypeLookup implements PropertyDataTypeLookup {
 	/**
 	 * @var string[] Indexed by serialized PropertyId
 	 */
-	private $propertyIds = array();
+	private $propertyIds = [];
 
 	private $lookup;
 

@@ -25,15 +25,15 @@ class EntityIdLabelFormatterTest extends PHPUnit_Framework_TestCase {
 	 * @return array
 	 */
 	public function validProvider() {
-		$argLists = array();
+		$argLists = [];
 
-		$argLists[] = array( new ItemId( 'Q42' ), 'es', 'foo' );
+		$argLists[] = [ new ItemId( 'Q42' ), 'es', 'foo' ];
 
-		$argLists[] = array( new ItemId( 'Q9001' ), 'en', 'Q9001' );
+		$argLists[] = [ new ItemId( 'Q9001' ), 'en', 'Q9001' ];
 
-		$argLists[] = array( new PropertyId( 'P9001' ), 'en', 'P9001' );
+		$argLists[] = [ new PropertyId( 'P9001' ), 'en', 'P9001' ];
 
-		$argLists['unresolved-redirect'] = array( new ItemId( 'Q23' ), 'en', 'Q23' );
+		$argLists['unresolved-redirect'] = [ new ItemId( 'Q23' ), 'en', 'Q23' ];
 
 		return $argLists;
 	}

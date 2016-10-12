@@ -47,7 +47,7 @@ class EntityTypeAwareDiffOpFactory extends DiffOpFactory {
 	 * @return DiffOp[] The diff ops
 	 */
 	private function createOperations( array $data ) {
-		$operations = array();
+		$operations = [];
 
 		foreach ( $data as $key => $operation ) {
 			$operations[$key] = $this->newFromArray( $operation );

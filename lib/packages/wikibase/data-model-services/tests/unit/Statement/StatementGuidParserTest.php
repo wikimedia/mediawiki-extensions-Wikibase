@@ -29,13 +29,13 @@ class StatementGuidParserTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function guidProvider() {
-		return array(
-			array( new StatementGuid( new ItemId( 'q42' ), 'D8404CDA-25E4-4334-AF13-A3290BCD9C0N' ) ),
-			array( new StatementGuid( new ItemId( 'Q1234567' ), 'D4FDE516-F20C-4154-ADCE-7C5B609DFDFF' ) ),
-			array( new StatementGuid( new ItemId( 'Q1' ), 'foo' ) ),
-			array( new StatementGuid( new ItemId( 'Q1' ), '$' ) ),
-			array( new StatementGuid( new ItemId( 'Q1' ), '' ) ),
-		);
+		return [
+			[ new StatementGuid( new ItemId( 'q42' ), 'D8404CDA-25E4-4334-AF13-A3290BCD9C0N' ) ],
+			[ new StatementGuid( new ItemId( 'Q1234567' ), 'D4FDE516-F20C-4154-ADCE-7C5B609DFDFF' ) ],
+			[ new StatementGuid( new ItemId( 'Q1' ), 'foo' ) ],
+			[ new StatementGuid( new ItemId( 'Q1' ), '$' ) ],
+			[ new StatementGuid( new ItemId( 'Q1' ), '' ) ],
+		];
 	}
 
 	/**
@@ -47,17 +47,17 @@ class StatementGuidParserTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidIdSerializationProvider() {
-		return array(
-			array( 'FOO' ),
-			array( null ),
-			array( 42 ),
-			array( array() ),
-			array( '' ),
-			array( 'q0' ),
-			array( '1p' ),
-			array( 'Q0$5627445f-43cb-ed6d-3adb-760e85bd17ee' ),
-			array( 'Q1' ),
-		);
+		return [
+			[ 'FOO' ],
+			[ null ],
+			[ 42 ],
+			[ [] ],
+			[ '' ],
+			[ 'q0' ],
+			[ '1p' ],
+			[ 'Q0$5627445f-43cb-ed6d-3adb-760e85bd17ee' ],
+			[ 'Q1' ],
+		];
 	}
 
 }

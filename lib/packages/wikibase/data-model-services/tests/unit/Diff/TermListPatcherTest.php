@@ -23,149 +23,149 @@ class TermListPatcherTest extends PHPUnit_Framework_TestCase {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function providePatchTermList() {
-		return array(
-			'add a term' => array(
+		return [
+			'add a term' => [
 				new TermList(),
-				new Diff( array(
+				new Diff( [
 					'en' => new DiffOpAdd( 'foo' )
-				) ),
-				new TermList( array(
+				] ),
+				new TermList( [
 					new Term( 'en', 'foo' )
-				) )
-			),
-			'change a term' => array(
-				new TermList( array(
+				] )
+			],
+			'change a term' => [
+				new TermList( [
 					new Term( 'en', 'foo' )
-				) ),
-				new Diff( array(
+				] ),
+				new Diff( [
 					'en' => new DiffOpChange( 'foo', 'bar' )
-				) ),
-				new TermList( array(
+				] ),
+				new TermList( [
 					new Term( 'en', 'bar' )
-				) )
-			),
-			'remove a term' => array(
-				new TermList( array(
+				] )
+			],
+			'remove a term' => [
+				new TermList( [
 					new Term( 'en', 'foo' )
-				) ),
-				new Diff( array(
+				] ),
+				new Diff( [
 					'en' => new DiffOpRemove( 'foo' )
-				) ),
+				] ),
 				new TermList()
-			),
-			'add an existing language is no-op' => array(
-				new TermList( array(
+			],
+			'add an existing language is no-op' => [
+				new TermList( [
 					new Term( 'en', 'foo' )
-				) ),
-				new Diff( array(
+				] ),
+				new Diff( [
 					'en' => new DiffOpAdd( 'bar' )
-				) ),
-				new TermList( array(
+				] ),
+				new TermList( [
 					new Term( 'en', 'foo' )
-				) )
-			),
-			'add two terms' => array(
-				new TermList( array(
+				] )
+			],
+			'add two terms' => [
+				new TermList( [
 					new Term( 'en', 'foo' )
-				) ),
-				new Diff( array(
+				] ),
+				new Diff( [
 					'de' => new DiffOpAdd( 'bar' ),
 					'nl' => new DiffOpAdd( 'baz' )
-				) ),
-				new TermList( array(
+				] ),
+				new TermList( [
 					new Term( 'en', 'foo' ),
 					new Term( 'de', 'bar' ),
 					new Term( 'nl', 'baz' )
-				) )
-			),
-			'remove a not existing language is no-op' => array(
-				new TermList( array(
+				] )
+			],
+			'remove a not existing language is no-op' => [
+				new TermList( [
 					new Term( 'en', 'foo' )
-				) ),
-				new Diff( array(
+				] ),
+				new Diff( [
 					'de' => new DiffOpRemove( 'bar' )
-				) ),
-				new TermList( array(
+				] ),
+				new TermList( [
 					new Term( 'en', 'foo' )
-				) )
-			),
-			'change a different value is no-op' => array(
-				new TermList( array(
+				] )
+			],
+			'change a different value is no-op' => [
+				new TermList( [
 					new Term( 'en', 'foo' )
-				) ),
-				new Diff( array(
+				] ),
+				new Diff( [
 					'en' => new DiffOpChange( 'bar', 'baz' )
-				) ),
-				new TermList( array(
+				] ),
+				new TermList( [
 					new Term( 'en', 'foo' )
-				) )
-			),
-			'remove a different value is no-op' => array(
-				new TermList( array(
+				] )
+			],
+			'remove a different value is no-op' => [
+				new TermList( [
 					new Term( 'en', 'foo' )
-				) ),
-				new Diff( array(
+				] ),
+				new Diff( [
 					'en' => new DiffOpRemove( 'bar' )
-				) ),
-				new TermList( array(
+				] ),
+				new TermList( [
 					new Term( 'en', 'foo' )
-				) )
-			),
-			'complex diff (associative)' => array(
-				new TermList( array(
+				] )
+			],
+			'complex diff (associative)' => [
+				new TermList( [
 					new Term( 'en', 'foo' ),
 					new Term( 'de', 'bar' ),
 					new Term( 'nl', 'baz' )
-				) ),
-				new Diff( array(
+				] ),
+				new Diff( [
 					'en' => new DiffOpChange( 'foo', 'bar' ),
 					'de' => new DiffOpRemove( 'bar' ),
 					'nl' => new DiffOpChange( 'bar', 'foo' ),
 					'it' => new DiffOpAdd( 'foo' )
-				), true ),
-				new TermList( array(
+				], true ),
+				new TermList( [
 					new Term( 'en', 'bar' ),
 					new Term( 'nl', 'baz' ),
 					new Term( 'it', 'foo' )
-				) )
-			),
-			'complex diff (non-associative)' => array(
-				new TermList( array(
+				] )
+			],
+			'complex diff (non-associative)' => [
+				new TermList( [
 					new Term( 'en', 'foo' ),
 					new Term( 'de', 'bar' ),
 					new Term( 'nl', 'baz' )
-				) ),
-				new Diff( array(
+				] ),
+				new Diff( [
 					'en' => new DiffOpChange( 'foo', 'bar' ),
 					'de' => new DiffOpRemove( 'bar' ),
 					'nl' => new DiffOpChange( 'bar', 'foo' ),
 					'it' => new DiffOpAdd( 'foo' )
-				), false ),
-				new TermList( array(
+				], false ),
+				new TermList( [
 					new Term( 'en', 'bar' ),
 					new Term( 'nl', 'baz' ),
 					new Term( 'it', 'foo' )
-				) )
-			),
-			'complex diff (auto-detected)' => array(
-				new TermList( array(
+				] )
+			],
+			'complex diff (auto-detected)' => [
+				new TermList( [
 					new Term( 'en', 'foo' ),
 					new Term( 'de', 'bar' ),
 					new Term( 'nl', 'baz' )
-				) ),
-				new Diff( array(
+				] ),
+				new Diff( [
 					'en' => new DiffOpChange( 'foo', 'bar' ),
 					'de' => new DiffOpRemove( 'bar' ),
 					'nl' => new DiffOpChange( 'bar', 'foo' ),
 					'it' => new DiffOpAdd( 'foo' )
-				) ),
-				new TermList( array(
+				] ),
+				new TermList( [
 					new Term( 'en', 'bar' ),
 					new Term( 'nl', 'baz' ),
 					new Term( 'it', 'foo' )
-				) )
-			),
-		);
+				] )
+			],
+		];
 	}
 
 	/**

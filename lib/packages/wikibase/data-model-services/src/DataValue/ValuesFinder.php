@@ -37,7 +37,7 @@ class ValuesFinder {
 	 * @return DataValue[]
 	 */
 	public function findFromSnaks( array $snaks, $dataType ) {
-		$found = array();
+		$found = [];
 
 		foreach ( $snaks as $snak ) {
 			if ( $snak instanceof PropertyValueSnak &&

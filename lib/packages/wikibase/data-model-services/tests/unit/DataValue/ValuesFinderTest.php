@@ -21,70 +21,70 @@ use Wikibase\DataModel\Snak\Snak;
  */
 class ValuesFinderTest extends \PHPUnit_Framework_TestCase {
 
-	private static $propertyDataTypes = array(
+	private static $propertyDataTypes = [
 		'P23' => 'string',
 		'P42' => 'url',
 		'P44' => 'boolean'
-	);
+	];
 
 	public function snaksProvider() {
-		$argLists = array();
+		$argLists = [];
 
 		$p23 = new PropertyId( 'p23' );
 		$p42 = new PropertyId( 'p42' );
 		$p44 = new PropertyId( 'p44' );
 		$p404 = new PropertyId( 'P404' );
 
-		$argLists['empty'] = array(
-			array(),
+		$argLists['empty'] = [
+			[],
 			'url',
-			array() );
+			[] ];
 
-		$argLists['PropertyNoValueSnak'] = array(
-			array( new PropertyNoValueSnak( $p42 ) ),
+		$argLists['PropertyNoValueSnak'] = [
+			[ new PropertyNoValueSnak( $p42 ) ],
 			'url',
-			array() );
+			[] ];
 
-		$argLists['PropertySomeValueSnak'] = array(
-			array( new PropertySomeValueSnak( $p42 ) ),
+		$argLists['PropertySomeValueSnak'] = [
+			[ new PropertySomeValueSnak( $p42 ) ],
 			'url',
-			array() );
+			[] ];
 
-		$argLists['PropertyValueSnak with string value and unknown data type'] = array(
-			array( new PropertyValueSnak( $p404, new StringValue( 'not an url' ) ) ),
+		$argLists['PropertyValueSnak with string value and unknown data type'] = [
+			[ new PropertyValueSnak( $p404, new StringValue( 'not an url' ) ) ],
 			'url',
-			array() );
+			[] ];
 
-		$argLists['PropertyValueSnak with string value and wrong data type'] = array(
-			array( new PropertyValueSnak( $p23, new StringValue( 'not an url' ) ) ),
+		$argLists['PropertyValueSnak with string value and wrong data type'] = [
+			[ new PropertyValueSnak( $p23, new StringValue( 'not an url' ) ) ],
 			'url',
-			array() );
+			[] ];
 
-		$argLists['PropertyValueSnak with string value and correct data type'] = array(
-			array( new PropertyValueSnak( $p42, new StringValue( 'http://acme.com/test' ) ) ),
+		$argLists['PropertyValueSnak with string value and correct data type'] = [
+			[ new PropertyValueSnak( $p42, new StringValue( 'http://acme.com/test' ) ) ],
 			'url',
-			array( 'http://acme.com/test' ) );
+			[ 'http://acme.com/test' ] ];
 
-		$argLists['PropertyValueSnak with boolean value'] = array(
-			array( new PropertyValueSnak( $p42, new BooleanValue( true ) ) ),
+		$argLists['PropertyValueSnak with boolean value'] = [
+			[ new PropertyValueSnak( $p42, new BooleanValue( true ) ) ],
 			'url',
-			array( true ) );
+			[ true ] ];
 
-		$argLists['PropertyValueSnak with string values and correct data type'] = array(
-			array( new PropertyValueSnak( $p42, new StringValue( 'http://acme.com/test' ) ),
-					new PropertyValueSnak( $p42, new StringValue( 'http://foo.bar/' ) ) ),
+		$argLists['PropertyValueSnak with string values and correct data type'] = [
+			[ new PropertyValueSnak( $p42, new StringValue( 'http://acme.com/test' ) ),
+					new PropertyValueSnak( $p42, new StringValue( 'http://foo.bar/' ) ) ],
 			'url',
-			array( 'http://acme.com/test', 'http://foo.bar/' ) );
+			[ 'http://acme.com/test', 'http://foo.bar/' ] ];
 
-		$argLists['PropertyValueSnak with boolean value and correct data type'] = array(
-			array( new PropertyValueSnak( $p44, new BooleanValue( false ) ) ),
+		$argLists['PropertyValueSnak with boolean value and correct data type'] = [
+			[ new PropertyValueSnak( $p44, new BooleanValue( false ) ) ],
 			'boolean',
-			array( false ) );
+			[ false ] ];
 
-		$argLists['PropertyValueSnak with boolean value and wrong data type'] = array(
-			array( new PropertyValueSnak( $p44, new BooleanValue( false ) ) ),
+		$argLists['PropertyValueSnak with boolean value and wrong data type'] = [
+			[ new PropertyValueSnak( $p44, new BooleanValue( false ) ) ],
 			'url',
-			array() );
+			[] ];
 
 		return $argLists;
 	}
@@ -142,8 +142,8 @@ class ValuesFinderTest extends \PHPUnit_Framework_TestCase {
 		}
 
 		call_user_func_array(
-			array( $this, 'assertEquals' ),
-			array_merge( array( $expected, $actual ), array_slice( func_get_args(), 4 ) )
+			[ $this, 'assertEquals' ],
+			array_merge( [ $expected, $actual ], array_slice( func_get_args(), 4 ) )
 		);
 	}
 
