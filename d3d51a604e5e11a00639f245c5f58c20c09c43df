@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e6c1747_6321429a",
+        "filename": "client/tests/phpunit/includes/Specials/SpecialEntityUsageTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-12T17:25:08Z",
+      "side": 1,
+      "message": "I believe you can simply do $this-\u003etablesUsed[] \u003d \u0027…\u0027; Duplicates don\u0027t matter.",
+      "revId": "d3d51a604e5e11a00639f245c5f58c20c09c43df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
