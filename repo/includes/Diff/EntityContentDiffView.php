@@ -227,7 +227,7 @@ class EntityContentDiffView extends DifferenceEngine {
 	protected function getDiffBodyCacheKey() {
 		return wfMemcKey(
 			'diff',
-			'version', MW_DIFF_VERSION,
+			'version', self::DIFF_VERSION,
 			'oldid', $this->getOldid(),
 			'newid', $this->getNewid(),
 			'lang', $this->getLanguage()->getCode()
