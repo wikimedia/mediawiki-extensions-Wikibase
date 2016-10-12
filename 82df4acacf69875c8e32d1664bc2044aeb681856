@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e6f8b3b_6bb743d4",
+        "filename": "repo/includes/Api/GetSubscribers.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-12T14:46:45Z",
+      "side": 1,
+      "message": "… for getting wikis subscribed to changes to given entities.",
+      "range": {
+        "startLine": 16,
+        "startChar": 26,
+        "endLine": 16,
+        "endChar": 37
+      },
+      "revId": "82df4acacf69875c8e32d1664bc2044aeb681856",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
