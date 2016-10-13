@@ -106,23 +106,34 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 		$special->prepareParams( 'Q3' );
 		$res = $special->reallyDoQuery( 50 );
 		$values = [];
+		$expectedUsages = [
+			[ 'L.de' ],
+			[ 'S', 'O' ],
+		];
 
+		$i = 0;
 		foreach ( $res as $row ) {
 			$values[] = [
 				$row->value,
 				$row->namespace,
 				$row->title,
-				$row->aspects,
 				$row->eu_page_id
 			];
+
+			$this->assertUsageAspects( $expectedUsages[$i++], $row->aspects );
 		}
 
 		$expected = [
-			[ '22', '0', 'Berlin', 'L.de', '22' ],
-			[ '11', '0', 'Vienna', 'O|S', '11' ],
+			[ '22', '0', 'Berlin', '22' ],
+			[ '11', '0', 'Vienna', '11' ],
 		];
 
 		$this->assertSame( $expected, $values );
+	}
+
+	private function assertUsageAspects( $expected, $aspectsString ) {
+		// The aspects are not ordered, so don't take this into account when asserting
+		$this->assertArrayEquals( $expected, explode( '|', $aspectsString ), false );
 	}
 
 	private function addReallyDoQueryData() {
