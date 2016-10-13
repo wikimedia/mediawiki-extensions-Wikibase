@@ -23,14 +23,14 @@ class ItemIdSet implements IteratorAggregate, Countable, Comparable {
 	/**
 	 * @var ItemId[]
 	 */
-	private $ids = array();
+	private $ids = [];
 
 	/**
 	 * @param ItemId[] $ids
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( array $ids = array() ) {
+	public function __construct( array $ids = [] ) {
 		foreach ( $ids as $id ) {
 			if ( !( $id instanceof ItemId ) ) {
 				throw new InvalidArgumentException( 'Every element in $ids must be an instance of ItemId' );

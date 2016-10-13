@@ -32,10 +32,10 @@ abstract class HashArrayTest extends \PHPUnit_Framework_TestCase {
 	public function instanceProvider() {
 		$class = $this->getInstanceClass();
 
-		$instances = array();
+		$instances = [];
 
 		foreach ( $this->constructorProvider() as $args ) {
-			$instances[] = array( new $class( array_key_exists( 0, $args ) ? $args[0] : null ) );
+			$instances[] = [ new $class( array_key_exists( 0, $args ) ? $args[0] : null ) ];
 		}
 
 		return $instances;
@@ -113,7 +113,7 @@ abstract class HashArrayTest extends \PHPUnit_Framework_TestCase {
 	protected function arrayWrap( array $elements ) {
 		return array_map(
 			function ( $element ) {
-				return array( $element );
+				return [ $element ];
 			},
 			$elements
 		);

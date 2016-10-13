@@ -27,14 +27,14 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 	/**
 	 * @var SiteLink[]
 	 */
-	private $siteLinks = array();
+	private $siteLinks = [];
 
 	/**
 	 * @param SiteLink[] $siteLinks
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( array $siteLinks = array() ) {
+	public function __construct( array $siteLinks = [] ) {
 		foreach ( $siteLinks as $siteLink ) {
 			if ( !( $siteLink instanceof SiteLink ) ) {
 				throw new InvalidArgumentException( 'Every element of $siteLinks must be an instance of SiteLink' );

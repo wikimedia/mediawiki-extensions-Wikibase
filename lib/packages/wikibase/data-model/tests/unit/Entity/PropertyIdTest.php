@@ -32,18 +32,18 @@ class PropertyIdTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function idSerializationProvider() {
-		return array(
-			array( 'p1', 'P1' ),
-			array( 'p100', 'P100' ),
-			array( 'p1337', 'P1337' ),
-			array( 'p31337', 'P31337' ),
-			array( 'P31337', 'P31337' ),
-			array( 'P42', 'P42' ),
-			array( ':P42', 'P42' ),
-			array( 'foo:P42', 'foo:P42' ),
-			array( 'foo:bar:p42', 'foo:bar:P42' ),
-			array( 'P2147483647', 'P2147483647' ),
-		);
+		return [
+			[ 'p1', 'P1' ],
+			[ 'p100', 'P100' ],
+			[ 'p1337', 'P1337' ],
+			[ 'p31337', 'P31337' ],
+			[ 'P31337', 'P31337' ],
+			[ 'P42', 'P42' ],
+			[ ':P42', 'P42' ],
+			[ 'foo:P42', 'foo:P42' ],
+			[ 'foo:bar:p42', 'foo:bar:P42' ],
+			[ 'P2147483647', 'P2147483647' ],
+		];
 	}
 
 	/**
@@ -55,25 +55,25 @@ class PropertyIdTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidIdSerializationProvider() {
-		return array(
-			array( "P1\n" ),
-			array( 'p' ),
-			array( 'q1' ),
-			array( 'pp1' ),
-			array( '1p' ),
-			array( 'p01' ),
-			array( 'p 1' ),
-			array( ' p1' ),
-			array( 'p1 ' ),
-			array( '1' ),
-			array( ' ' ),
-			array( '' ),
-			array( '0' ),
-			array( 0 ),
-			array( 1 ),
-			array( 'P2147483648' ),
-			array( 'P99999999999' ),
-		);
+		return [
+			[ "P1\n" ],
+			[ 'p' ],
+			[ 'q1' ],
+			[ 'pp1' ],
+			[ '1p' ],
+			[ 'p01' ],
+			[ 'p 1' ],
+			[ ' p1' ],
+			[ 'p1 ' ],
+			[ '1' ],
+			[ ' ' ],
+			[ '' ],
+			[ '0' ],
+			[ 0 ],
+			[ 1 ],
+			[ 'P2147483648' ],
+			[ 'P99999999999' ],
+		];
 	}
 
 	public function testGetNumericId() {
@@ -101,17 +101,17 @@ class PropertyIdTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function serializationProvider() {
-		return array(
-			array( '["property","P2"]', 'P2' ),
+		return [
+			[ '["property","P2"]', 'P2' ],
 
 			// All these cases are kind of an injection vector and allow constructing invalid ids.
-			array( '["string","P2"]', 'P2' ),
-			array( '["","string"]', 'string' ),
-			array( '["",""]', '' ),
-			array( '["",2]', 2 ),
-			array( '["",null]', null ),
-			array( '', null ),
-		);
+			[ '["string","P2"]', 'P2' ],
+			[ '["","string"]', 'string' ],
+			[ '["",""]', '' ],
+			[ '["",2]', 2 ],
+			[ '["",null]', null ],
+			[ '', null ],
+		];
 	}
 
 	/**
@@ -123,14 +123,14 @@ class PropertyIdTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function numericIdProvider() {
-		return array(
-			array( 42 ),
-			array( '42' ),
-			array( 42.0 ),
+		return [
+			[ 42 ],
+			[ '42' ],
+			[ 42.0 ],
 			// Check for 32-bit integer overflow on 32-bit PHP systems.
-			array( 2147483647 ),
-			array( '2147483647' ),
-		);
+			[ 2147483647 ],
+			[ '2147483647' ],
+		];
 	}
 
 	/**
@@ -142,13 +142,13 @@ class PropertyIdTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidNumericIdProvider() {
-		return array(
-			array( 'P1' ),
-			array( '42.1' ),
-			array( 42.1 ),
-			array( 2147483648 ),
-			array( '2147483648' ),
-		);
+		return [
+			[ 'P1' ],
+			[ '42.1' ],
+			[ 42.1 ],
+			[ 2147483648 ],
+			[ '2147483648' ],
+		];
 	}
 
 	public function testGetNumericIdThrowsExceptionOnForeignIds() {

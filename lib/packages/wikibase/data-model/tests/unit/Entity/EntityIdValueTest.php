@@ -35,7 +35,7 @@ class EntityIdValueTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function instanceProvider() {
-		$ids = array(
+		$ids = [
 			new ItemId( 'Q1' ),
 			new ItemId( 'Q42' ),
 			new ItemId( 'Q31337' ),
@@ -43,12 +43,12 @@ class EntityIdValueTest extends PHPUnit_Framework_TestCase {
 			new PropertyId( 'P1' ),
 			new PropertyId( 'P42' ),
 			new PropertyId( 'P31337' ),
-		);
+		];
 
-		$argLists = array();
+		$argLists = [];
 
 		foreach ( $ids as $id ) {
-			$argLists[] = array( new EntityIdValue( $id ) );
+			$argLists[] = [ new EntityIdValue( $id ) ];
 		}
 
 		return $argLists;
@@ -104,11 +104,11 @@ class EntityIdValueTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertSame(
 			// This is the serialization format from when the EntityIdValue was still together with EntityId.
-			array(
+			[
 				'entity-type' => 'item',
 				'numeric-id' => (float)31337,
 				'id' => 'Q31337',
-			),
+			],
 			$id->getArrayValue()
 		);
 	}
@@ -123,17 +123,17 @@ class EntityIdValueTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function validArrayProvider() {
-		return array(
-			'Legacy format' => array( array(
+		return [
+			'Legacy format' => [ [
 				'entity-type' => 'item',
 				'numeric-id' => 31337,
-			) ),
-			'Maximum compatibility' => array( array(
+			] ],
+			'Maximum compatibility' => [ [
 				'entity-type' => 'item',
 				'numeric-id' => 31337,
 				'id' => 'Q31337',
-			) ),
-		);
+			] ],
+		];
 	}
 
 	/**
@@ -146,45 +146,45 @@ class EntityIdValueTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidArrayProvider() {
-		return array(
-			array( null ),
+		return [
+			[ null ],
 
-			array( 'foo' ),
+			[ 'foo' ],
 
-			array( array() ),
+			[ [] ],
 
-			'newFromArray can not deserialize' => array( array(
+			'newFromArray can not deserialize' => [ [
 				'id' => 'Q42',
-			) ),
+			] ],
 
-			array( array(
+			[ [
 				'entity-type' => 'item',
-			) ),
+			] ],
 
-			array( array(
+			[ [
 				'numeric-id' => 42,
-			) ),
+			] ],
 
-			array( array(
+			[ [
 				'entity-type' => 'foo',
 				'numeric-id' => 42,
-			) ),
+			] ],
 
-			array( array(
+			[ [
 				'entity-type' => 42,
 				'numeric-id' => 42,
-			) ),
+			] ],
 
-			array( array(
+			[ [
 				'entity-type' => 'item',
 				'numeric-id' => -1,
-			) ),
+			] ],
 
-			array( array(
+			[ [
 				'entity-type' => 'item',
 				'numeric-id' => 'foo',
-			) ),
-		);
+			] ],
+		];
 	}
 
 }

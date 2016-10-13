@@ -37,7 +37,7 @@ class MapValueHasher {
 			throw new InvalidArgumentException( '$map must be an array or an instance of Traversable' );
 		}
 
-		$hashes = array();
+		$hashes = [];
 
 		/**
 		 * @var Hashable $hashable

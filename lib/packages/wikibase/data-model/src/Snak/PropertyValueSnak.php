@@ -53,7 +53,7 @@ class PropertyValueSnak extends SnakObject {
 	 * @return string
 	 */
 	public function serialize() {
-		return serialize( array( $this->propertyId->getNumericId(), $this->dataValue ) );
+		return serialize( [ $this->propertyId->getNumericId(), $this->dataValue ] );
 	}
 
 	/**

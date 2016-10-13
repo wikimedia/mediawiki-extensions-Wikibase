@@ -41,11 +41,11 @@ class SnakListTest extends HashArrayTest {
 	public function elementInstancesProvider() {
 		$id42 = new PropertyId( 'P42' );
 
-		$argLists = array();
+		$argLists = [];
 
-		$argLists[] = array( array( new PropertyNoValueSnak( $id42 ) ) );
-		$argLists[] = array( array( new PropertyNoValueSnak( new PropertyId( 'P9001' ) ) ) );
-		$argLists[] = array( array( new PropertyValueSnak( $id42, new StringValue( 'a' ) ) ) );
+		$argLists[] = [ [ new PropertyNoValueSnak( $id42 ) ] ];
+		$argLists[] = [ [ new PropertyNoValueSnak( new PropertyId( 'P9001' ) ) ] ];
+		$argLists[] = [ [ new PropertyValueSnak( $id42, new StringValue( 'a' ) ) ] ];
 
 		return $argLists;
 	}
@@ -54,22 +54,22 @@ class SnakListTest extends HashArrayTest {
 		$id42 = new PropertyId( 'P42' );
 		$id9001 = new PropertyId( 'P9001' );
 
-		return array(
-			array(),
-			array( array() ),
-			array( array(
+		return [
+			[],
+			[ [] ],
+			[ [
 				new PropertyNoValueSnak( $id42 )
-			) ),
-			array( array(
+			] ],
+			[ [
 				new PropertyNoValueSnak( $id42 ),
 				new PropertyNoValueSnak( $id9001 ),
-			) ),
-			array( array(
+			] ],
+			[ [
 				new PropertyNoValueSnak( $id42 ),
 				new PropertyNoValueSnak( $id9001 ),
 				new PropertyValueSnak( $id42, new StringValue( 'a' ) ),
-			) ),
-		);
+			] ],
+		];
 	}
 
 	/**
@@ -83,23 +83,23 @@ class SnakListTest extends HashArrayTest {
 	public function invalidConstructorArgumentsProvider() {
 		$id1 = new PropertyId( 'P1' );
 
-		return array(
-			array( false ),
-			array( 1 ),
-			array( 0.1 ),
-			array( 'string' ),
-			array( $id1 ),
-			array( new PropertyNoValueSnak( $id1 ) ),
-			array( new PropertyValueSnak( $id1, new StringValue( 'a' ) ) ),
-			array( array( null ) ),
-			array( array( $id1 ) ),
-			array( array( new SnakList() ) ),
-		);
+		return [
+			[ false ],
+			[ 1 ],
+			[ 0.1 ],
+			[ 'string' ],
+			[ $id1 ],
+			[ new PropertyNoValueSnak( $id1 ) ],
+			[ new PropertyValueSnak( $id1, new StringValue( 'a' ) ) ],
+			[ [ null ] ],
+			[ [ $id1 ] ],
+			[ [ new SnakList() ] ],
+		];
 	}
 
 	public function testGivenAssociativeArray_constructorPreservesArrayKeys() {
-		$snakList = new SnakList( array( 'key' => new PropertyNoValueSnak( 1 ) ) );
-		$this->assertSame( array( 'key' ), array_keys( iterator_to_array( $snakList ) ) );
+		$snakList = new SnakList( [ 'key' => new PropertyNoValueSnak( 1 ) ] );
+		$this->assertSame( [ 'key' ], array_keys( iterator_to_array( $snakList ) ) );
 	}
 
 	/**
@@ -190,82 +190,82 @@ class SnakListTest extends HashArrayTest {
 		 * expected result.
 		 * @var array
 		 */
-		$rawArguments = array(
-			'Default order' => array(
-				array(),
-				array(),
-			),
-			'Unknown id in order' => array(
-				array(),
-				array(),
-				array( 'P1' )
-			),
-			array(
-				array( new PropertyNoValueSnak( $id1 ) ),
-				array( new PropertyNoValueSnak( $id1 ) ),
-			),
-			array(
-				array(
+		$rawArguments = [
+			'Default order' => [
+				[],
+				[],
+			],
+			'Unknown id in order' => [
+				[],
+				[],
+				[ 'P1' ]
+			],
+			[
+				[ new PropertyNoValueSnak( $id1 ) ],
+				[ new PropertyNoValueSnak( $id1 ) ],
+			],
+			[
+				[
 					new PropertyNoValueSnak( $id2 ),
 					new PropertyNoValueSnak( $id1 ),
-				),
-				array(
+				],
+				[
 					new PropertyNoValueSnak( $id2 ),
 					new PropertyNoValueSnak( $id1 ),
-				),
-			),
-			array(
-				array(
+				],
+			],
+			[
+				[
 					new PropertyNoValueSnak( $id1 ),
 					new PropertyNoValueSnak( $id2 ),
 					new PropertyValueSnak( $id1, new StringValue( 'a' ) ),
-				),
-				array(
+				],
+				[
 					new PropertyNoValueSnak( $id1 ),
 					new PropertyValueSnak( $id1, new StringValue( 'a' ) ),
 					new PropertyNoValueSnak( $id2 ),
-				),
-			),
-			'With additional order' => array(
-				array(
+				],
+			],
+			'With additional order' => [
+				[
 					new PropertyNoValueSnak( $id3 ),
 					new PropertyNoValueSnak( $id2 ),
 					new PropertyValueSnak( $id1, new StringValue( 'a' ) ),
-				),
-				array(
+				],
+				[
 					new PropertyNoValueSnak( $id2 ),
 					new PropertyNoValueSnak( $id3 ),
 					new PropertyValueSnak( $id1, new StringValue( 'a' ) ),
-				),
-				array( 'P2' )
-			),
-			array(
-				array(
+				],
+				[ 'P2' ]
+			],
+			[
+				[
 					new PropertyNoValueSnak( $id3 ),
 					new PropertyNoValueSnak( $id2 ),
 					new PropertyNoValueSnak( $id2 ),
-					new PropertyValueSnak( $id1, new StringValue( 'a' ) ),
-					new PropertyNoValueSnak( $id1 ),
-				),
-				array(
 					new PropertyValueSnak( $id1, new StringValue( 'a' ) ),
 					new PropertyNoValueSnak( $id1 ),
+				],
+				[
+					new PropertyValueSnak( $id1, new StringValue( 'a' ) ),
+					new PropertyNoValueSnak( $id1 ),
 					new PropertyNoValueSnak( $id3 ),
 					new PropertyNoValueSnak( $id2 ),
 					new PropertyNoValueSnak( $id2 ),
-				),
-				array( 'P1' )
-			),
-		);
+				],
+				[ 'P1' ]
+			],
+		];
 
-		$arguments = array();
+		$arguments = [];
 
 		foreach ( $rawArguments as $key => $rawArgument ) {
-			$arguments[$key] = array(
+			$arguments[$key] = [
 				new $class( $rawArgument[0] ),
 				new $class( $rawArgument[1] ),
-				array_key_exists( 2, $rawArgument ) ? $rawArgument[2] : array()
-			);
+				array_key_exists( 2, $rawArgument ) ? $rawArgument[2] : []
+			];
 		}
 
 		return $arguments;
@@ -274,7 +274,7 @@ class SnakListTest extends HashArrayTest {
 	/**
 	 * @dataProvider orderByPropertyProvider
 	 */
-	public function testOrderByProperty( SnakList $snakList, SnakList $expected, array $order = array() ) {
+	public function testOrderByProperty( SnakList $snakList, SnakList $expected, array $order = [] ) {
 		$initialSnakList = new SnakList( array_values( iterator_to_array( $snakList ) ) );
 
 		$snakList->orderByProperty( $order );

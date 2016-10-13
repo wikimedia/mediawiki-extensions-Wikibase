@@ -73,14 +73,14 @@ class ByPropertyIdArray extends ArrayObject {
 	 * @since 0.2
 	 */
 	public function buildIndex() {
-		$this->byId = array();
+		$this->byId = [];
 
 		/** @var PropertyIdProvider $object */
 		foreach ( $this as $object ) {
 			$propertyId = $object->getPropertyId()->getSerialization();
 
 			if ( !array_key_exists( $propertyId, $this->byId ) ) {
-				$this->byId[$propertyId] = array();
+				$this->byId[$propertyId] = [];
 			}
 
 			$this->byId[$propertyId][] = $object;
@@ -170,7 +170,7 @@ class ByPropertyIdArray extends ArrayObject {
 	public function toFlatArray() {
 		$this->assertIndexIsBuild();
 
-		$array = array();
+		$array = [];
 		foreach ( $this->byId as $objects ) {
 			$array = array_merge( $array, $objects );
 		}
@@ -188,7 +188,7 @@ class ByPropertyIdArray extends ArrayObject {
 	private function getFlatArrayIndices( PropertyId $propertyId ) {
 		$this->assertIndexIsBuild();
 
-		$propertyIndices = array();
+		$propertyIndices = [];
 		$i = 0;
 
 		foreach ( $this->byId as $serializedPropertyId => $objects ) {
@@ -255,7 +255,7 @@ class ByPropertyIdArray extends ArrayObject {
 
 		$propertyGroup = in_array( $propertyIdSerialization, $this->getPropertyIds() )
 			? $this->getByPropertyId( $propertyId )
-			: array();
+			: [];
 
 		$propertyGroup[] = $object;
 		$this->byId[$propertyIdSerialization] = $propertyGroup;
@@ -286,7 +286,7 @@ class ByPropertyIdArray extends ArrayObject {
 
 		$this->exchangeArray( array_merge(
 			array_slice( $flatArray, 0, $index ),
-			array( $object ),
+			[ $object ],
 			array_slice( $flatArray, $index )
 		) );
 
@@ -326,7 +326,7 @@ class ByPropertyIdArray extends ArrayObject {
 		}
 
 		$serializedPropertyId = $propertyId->getSerialization();
-		$this->byId = array();
+		$this->byId = [];
 
 		foreach ( $byIdClone as $serializedPId => $objects ) {
 			$pId = new PropertyId( $serializedPId );

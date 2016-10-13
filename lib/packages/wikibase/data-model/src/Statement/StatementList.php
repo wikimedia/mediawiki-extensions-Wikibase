@@ -33,7 +33,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	/**
 	 * @var Statement[]
 	 */
-	private $statements = array();
+	private $statements = [];
 
 	/**
 	 * @param Statement[]|Traversable|Statement $statements
@@ -41,7 +41,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $statements = array() /*...*/ ) {
+	public function __construct( $statements = [] /*...*/ ) {
 		if ( $statements instanceof Statement ) {
 			$statements = func_get_args();
 		}
@@ -66,7 +66,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	 * @return PropertyId[] Array indexed by property id serialization.
 	 */
 	public function getPropertyIds() {
-		$propertyIds = array();
+		$propertyIds = [];
 
 		foreach ( $this->statements as $statement ) {
 			$propertyIds[$statement->getPropertyId()->getSerialization()] = $statement->getPropertyId();
@@ -88,7 +88,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 		if ( $index === null ) {
 			$this->statements[] = $statement;
 		} elseif ( is_int( $index ) && $index >= 0 ) {
-			array_splice( $this->statements, $index, 0, array( $statement ) );
+			array_splice( $this->statements, $index, 0, [ $statement ] );
 		} else {
 			throw new InvalidArgumentException( '$index must be a non-negative integer or null' );
 		}
@@ -134,7 +134,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	 * @return self
 	 */
 	public function getWithUniqueMainSnaks() {
-		$statements = array();
+		$statements = [];
 
 		foreach ( $this->statements as $statement ) {
 			$statements[$statement->getMainSnak()->getHash()] = $statement;
@@ -213,7 +213,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	 * @return Snak[] Numerically indexed (non-sparse) array.
 	 */
 	public function getAllSnaks() {
-		$snaks = array();
+		$snaks = [];
 
 		foreach ( $this->statements as $statement ) {
 			foreach ( $statement->getAllSnaks() as $snak ) {
@@ -230,7 +230,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	 * @return Snak[] Numerically indexed (non-sparse) array.
 	 */
 	public function getMainSnaks() {
-		$snaks = array();
+		$snaks = [];
 
 		foreach ( $this->statements as $statement ) {
 			$snaks[] = $statement->getMainSnak();

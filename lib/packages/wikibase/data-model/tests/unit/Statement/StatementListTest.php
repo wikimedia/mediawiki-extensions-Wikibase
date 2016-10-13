@@ -82,7 +82,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenNoStatements_getPropertyIdsReturnsEmptyArray() {
 		$list = new StatementList();
-		$this->assertSame( array(), $list->getPropertyIds() );
+		$this->assertSame( [], $list->getPropertyIds() );
 	}
 
 	public function testGivenStatements_getPropertyIdsReturnsArrayWithoutDuplicates() {
@@ -95,27 +95,27 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$this->assertEquals(
-			array(
+			[
 				'P1' => new PropertyId( 'P1' ),
 				'P3' => new PropertyId( 'P3' ),
 				'P2' => new PropertyId( 'P2' ),
-			),
+			],
 			$list->getPropertyIds()
 		);
 	}
 
 	public function testGivenStatementsWithArrayKeys_toArrayReturnsReindexedArray() {
 		$statement = $this->getStatement( 1, 'guid' );
-		$list = new StatementList( array( 'ignore-me' => $statement ) );
+		$list = new StatementList( [ 'ignore-me' => $statement ] );
 
-		$this->assertSame( array( 0 => $statement ), $list->toArray() );
+		$this->assertSame( [ 0 => $statement ], $list->toArray() );
 	}
 
 	public function testGivenSparseArray_toArrayReturnsReindexedArray() {
 		$statement = $this->getStatement( 1, 'guid' );
-		$list = new StatementList( array( 1 => $statement ) );
+		$list = new StatementList( [ 1 => $statement ] );
 
-		$this->assertSame( array( 0 => $statement ), $list->toArray() );
+		$this->assertSame( [ 0 => $statement ], $list->toArray() );
 	}
 
 	public function testCanIterate() {
@@ -137,12 +137,12 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$this->assertEquals(
-			array(
+			[
 				$this->getStatementWithSnak( 1, 'foo' ),
 				$this->getStatementWithSnak( 2, 'foo' ),
 				$this->getStatementWithSnak( 2, 'bar' ),
 				$this->getStatementWithSnak( 1, 'bar' ),
-			),
+			],
 			array_values( $list->getWithUniqueMainSnaks()->toArray() )
 		);
 	}
@@ -157,13 +157,13 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$this->assertEquals(
-			array(
+			[
 				$this->newSnak( 1, 'foo' ),
 				$this->newSnak( 2, 'foo' ),
 				$this->newSnak( 1, 'foo' ),
 				$this->newSnak( 2, 'bar' ),
 				$this->newSnak( 1, 'bar' ),
-			),
+			],
 			$list->getAllSnaks()
 		);
 	}
@@ -184,18 +184,18 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 		$list->addNewStatement(
 			$this->newSnak( 42, 'foo' ),
-			array(
+			[
 				$this->newSnak( 1, 'bar' )
-			)
+			]
 		);
 
 		$this->assertEquals(
 			new StatementList(
 				new Statement(
 					$this->newSnak( 42, 'foo' ),
-					new SnakList( array(
+					new SnakList( [
 						$this->newSnak( 1, 'bar' )
-					) )
+					] )
 				)
 			),
 			$list
@@ -204,9 +204,9 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testAddStatementWithQualifiersAsSnakList() {
 		$list = new StatementList();
-		$snakList = new SnakList( array(
+		$snakList = new SnakList( [
 			$this->newSnak( 1, 'bar' )
-		) );
+		] );
 
 		$list->addNewStatement(
 			$this->newSnak( 42, 'foo' ),
@@ -269,7 +269,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 		$list->addStatement( $statement2, 1 );
 		$this->assertEquals( new StatementList( $statement1, $statement2, $statement3 ), $list );
-		$this->assertSame( array( 0, 1, 2 ), array_keys( $list->toArray() ), 'array keys' );
+		$this->assertSame( [ 0, 1, 2 ], array_keys( $list->toArray() ), 'array keys' );
 	}
 
 	public function testGivenGuidOfPresentStatement_statementIsRemoved() {
@@ -277,7 +277,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$statement2 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
 		$statement3 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
 
-		$list = new StatementList( array( $statement1, $statement2, $statement3 ) );
+		$list = new StatementList( [ $statement1, $statement2, $statement3 ] );
 		$list->removeStatementsWithGuid( 'foo' );
 
 		$this->assertEquals( new StatementList( $statement2, $statement3 ), $list );
@@ -288,7 +288,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$statement2 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
 		$statement3 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
 
-		$list = new StatementList( array( $statement1, $statement2, $statement3 ) );
+		$list = new StatementList( [ $statement1, $statement2, $statement3 ] );
 		$list->removeStatementsWithGuid( 'bar' );
 
 		$this->assertEquals( new StatementList( $statement1 ), $list );
@@ -299,7 +299,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$statement2 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
 		$statement3 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
 
-		$list = new StatementList( array( $statement1, $statement2, $statement3 ) );
+		$list = new StatementList( [ $statement1, $statement2, $statement3 ] );
 		$list->removeStatementsWithGuid( 'baz' );
 
 		$this->assertEquals( new StatementList( $statement1, $statement2, $statement3 ), $list );
@@ -310,17 +310,17 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$statement2 = new Statement( $this->newSnak( 32, 'bar' ) );
 		$statement3 = new Statement( $this->newSnak( 32, 'bar' ) );
 
-		$list = new StatementList( array( $statement1, $statement2, $statement3 ) );
+		$list = new StatementList( [ $statement1, $statement2, $statement3 ] );
 		$list->removeStatementsWithGuid( null );
 
 		$this->assertEquals( new StatementList( $statement1 ), $list );
 	}
 
 	public function testCanConstructWithTraversableContainingOnlyStatements() {
-		$statementArray = array(
+		$statementArray = [
 			$this->getStatementWithSnak( 1, 'foo' ),
 			$this->getStatementWithSnak( 2, 'bar' ),
-		);
+		];
 
 		$object = new ArrayObject( $statementArray );
 		$list = new StatementList( $object );
@@ -332,11 +332,11 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenTraversableWithNonStatements_constructorThrowsException() {
-		$traversable = new ArrayObject( array(
+		$traversable = new ArrayObject( [
 			$this->getStatementWithSnak( 1, 'foo' ),
 			new \stdClass(),
 			$this->getStatementWithSnak( 2, 'bar' ),
-		) );
+		] );
 
 		$this->setExpectedException( 'InvalidArgumentException' );
 		new StatementList( $traversable );
@@ -351,7 +351,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$statement = new Statement( $this->newSnak( 42, 'foo' ) );
 
 		$this->assertEquals(
-			new StatementList( array( $statement ) ),
+			new StatementList( [ $statement ] ),
 			new StatementList( $statement )
 		);
 	}
@@ -362,7 +362,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$statement2 = new Statement( $this->newSnak( 42, 'baz' ) );
 
 		$this->assertEquals(
-			new StatementList( array( $statement0, $statement1, $statement2 ) ),
+			new StatementList( [ $statement0, $statement1, $statement2 ] ),
 			new StatementList( $statement0, $statement1, $statement2 )
 		);
 	}
@@ -373,7 +373,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$statement2 = new Statement( $this->newSnak( 42, 'baz' ) );
 
 		$this->setExpectedException( 'InvalidArgumentException' );
-		new StatementList( $statement0, $statement1, array(), $statement2 );
+		new StatementList( $statement0, $statement1, [], $statement2 );
 	}
 
 	public function testCountForEmptyList() {
@@ -402,17 +402,17 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function statementArrayProvider() {
-		return array(
-			array( array(
+		return [
+			[ [
 				$this->getStatementWithSnak( 1, 'foo' ),
 				$this->getStatementWithSnak( 2, 'bar' ),
-			) ),
-			array( array(
+			] ],
+			[ [
 				$this->getStatementWithSnak( 1, 'foo' ),
-			) ),
-			array( array(
-			) ),
-		);
+			] ],
+			[ [
+			] ],
+		];
 	}
 
 	public function testGivenDifferentLists_equalsReturnsFalse() {
@@ -501,15 +501,15 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$list = new StatementList();
 
 		$list->addNewStatement( new PropertyNoValueSnak( 42 ) );
-		$list->addNewStatement( new PropertyNoValueSnak( 1337 ), array( new PropertyNoValueSnak( 32202 ) ) );
+		$list->addNewStatement( new PropertyNoValueSnak( 1337 ), [ new PropertyNoValueSnak( 32202 ) ] );
 		$list->addNewStatement( new PropertyNoValueSnak( 9001 ) );
 
 		$this->assertEquals(
-			array(
+			[
 				new PropertyNoValueSnak( 42 ),
 				new PropertyNoValueSnak( 1337 ),
 				new PropertyNoValueSnak( 9001 ),
-			),
+			],
 			$list->getMainSnaks()
 		);
 	}
@@ -565,7 +565,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals(
 			new StatementList( $secondStatement, $thirdStatement ),
-			$list->getByRank( array( Statement::RANK_NORMAL, Statement::RANK_DEPRECATED ) )
+			$list->getByRank( [ Statement::RANK_NORMAL, Statement::RANK_DEPRECATED ] )
 		);
 	}
 
@@ -670,13 +670,13 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$statement3 = new Statement( new PropertyNoValueSnak( 3 ) );
 		$statement4 = new Statement( new PropertyNoValueSnak( 4 ) );
 
-		$statement2->setReferences( new ReferenceList( array(
-			new Reference( array( new PropertyNoValueSnak( 20 ) ) )
-		) ) );
+		$statement2->setReferences( new ReferenceList( [
+			new Reference( [ new PropertyNoValueSnak( 20 ) ] )
+		] ) );
 
-		$statement3->setReferences( new ReferenceList( array(
-			new Reference( array( new PropertyNoValueSnak( 30 ) ) )
-		) ) );
+		$statement3->setReferences( new ReferenceList( [
+			new Reference( [ new PropertyNoValueSnak( 30 ) ] )
+		] ) );
 
 		$statements = new StatementList( $statement1, $statement2, $statement3, $statement4 );
 

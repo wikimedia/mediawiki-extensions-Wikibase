@@ -26,12 +26,12 @@ class MapValueHasherTest extends \PHPUnit_Framework_TestCase {
 	public function testHash() {
 		$hasher = new MapValueHasher();
 
-		$map0 = array(
+		$map0 = [
 			'foo' => new PropertyNoValueSnak( new PropertyId( 'P1' ) ),
 			'bar' => new PropertyNoValueSnak( new PropertyId( 'P2' ) ),
 			42 => new PropertyNoValueSnak( new PropertyId( 'P42' ) ),
 			new PropertyNoValueSnak( new PropertyId( 'P9001' ) ),
-		);
+		];
 
 		$hash = $hasher->hash( $map0 );
 

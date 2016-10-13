@@ -25,19 +25,19 @@ use Wikibase\DataModel\Snak\SnakList;
 class ReferenceListTest extends PHPUnit_Framework_TestCase {
 
 	public function instanceProvider() {
-		return array(
-			array( new ReferenceList( array() ) ),
-			array( new ReferenceList( array(
+		return [
+			[ new ReferenceList( [] ) ],
+			[ new ReferenceList( [
 				new Reference(),
-				new Reference( array( new PropertyNoValueSnak( 2 ) ) ),
-				new Reference( array( new PropertyNoValueSnak( 3 ) ) ),
-			) ) ),
-		);
+				new Reference( [ new PropertyNoValueSnak( 2 ) ] ),
+				new Reference( [ new PropertyNoValueSnak( 3 ) ] ),
+			] ) ],
+		];
 	}
 
 	public function testCanConstructWithReferenceListObject() {
-		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
-		$original = new ReferenceList( array( $reference ) );
+		$reference = new Reference( [ new PropertyNoValueSnak( 1 ) ] );
+		$original = new ReferenceList( [ $reference ] );
 		$copy = new ReferenceList( $original );
 
 		$this->assertSame( 1, $copy->count() );
@@ -45,14 +45,14 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testConstructorIgnoresIdenticalObjects() {
-		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
-		$list = new ReferenceList( array( $reference, $reference ) );
+		$reference = new Reference( [ new PropertyNoValueSnak( 1 ) ] );
+		$list = new ReferenceList( [ $reference, $reference ] );
 		$this->assertCount( 1, $list );
 	}
 
 	public function testConstructorDoesNotIgnoreCopies() {
-		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
-		$list = new ReferenceList( array( $reference, clone $reference ) );
+		$reference = new Reference( [ new PropertyNoValueSnak( 1 ) ] );
+		$list = new ReferenceList( [ $reference, clone $reference ] );
 		$this->assertCount( 2, $list );
 	}
 
@@ -67,20 +67,20 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 	public function invalidConstructorArgumentsProvider() {
 		$id1 = new PropertyId( 'P1' );
 
-		return array(
-			array( null ),
-			array( false ),
-			array( 1 ),
-			array( 0.1 ),
-			array( 'string' ),
-			array( $id1 ),
-			array( new PropertyNoValueSnak( $id1 ) ),
-			array( new Reference() ),
-			array( new SnakList( array( new PropertyNoValueSnak( $id1 ) ) ) ),
-			array( array( new PropertyNoValueSnak( $id1 ) ) ),
-			array( array( new ReferenceList() ) ),
-			array( array( new SnakList() ) ),
-		);
+		return [
+			[ null ],
+			[ false ],
+			[ 1 ],
+			[ 0.1 ],
+			[ 'string' ],
+			[ $id1 ],
+			[ new PropertyNoValueSnak( $id1 ) ],
+			[ new Reference() ],
+			[ new SnakList( [ new PropertyNoValueSnak( $id1 ) ] ) ],
+			[ [ new PropertyNoValueSnak( $id1 ) ] ],
+			[ [ new ReferenceList() ] ],
+			[ [ new SnakList() ] ],
+		];
 	}
 
 	public function testGetIterator_isTraversable() {
@@ -117,7 +117,7 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 	public function testGivenCloneOfReferenceInList_hasReferenceReturnsTrue() {
 		$list = new ReferenceList();
 
-		$reference = new Reference( array( new PropertyNoValueSnak( 42 ) ) );
+		$reference = new Reference( [ new PropertyNoValueSnak( 42 ) ] );
 		$sameReference = unserialize( serialize( $reference ) );
 
 		$list->addReference( $reference );
@@ -148,8 +148,8 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testRemoveReferenceRemovesIdenticalObjects() {
-		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
-		$references = new ReferenceList( array( $reference, $reference ) );
+		$reference = new Reference( [ new PropertyNoValueSnak( 1 ) ] );
+		$references = new ReferenceList( [ $reference, $reference ] );
 
 		$references->removeReference( $reference );
 
@@ -157,8 +157,8 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testRemoveReferenceDoesNotRemoveCopies() {
-		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
-		$references = new ReferenceList( array( $reference, clone $reference ) );
+		$reference = new Reference( [ new PropertyNoValueSnak( 1 ) ] );
+		$references = new ReferenceList( [ $reference, clone $reference ] );
 
 		$references->removeReference( $reference );
 
@@ -168,14 +168,14 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testAddReferenceOnEmptyList() {
-		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
+		$reference = new Reference( [ new PropertyNoValueSnak( 1 ) ] );
 
 		$references = new ReferenceList();
 		$references->addReference( $reference );
 
 		$this->assertCount( 1, $references );
 
-		$expectedList = new ReferenceList( array( $reference ) );
+		$expectedList = new ReferenceList( [ $reference ] );
 		$this->assertSameReferenceOrder( $expectedList, $references );
 	}
 
@@ -187,22 +187,22 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testAddReferenceOnNonEmptyList() {
-		$reference1 = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
-		$reference2 = new Reference( array( new PropertyNoValueSnak( 2 ) ) );
-		$reference3 = new Reference( array( new PropertyNoValueSnak( 3 ) ) );
+		$reference1 = new Reference( [ new PropertyNoValueSnak( 1 ) ] );
+		$reference2 = new Reference( [ new PropertyNoValueSnak( 2 ) ] );
+		$reference3 = new Reference( [ new PropertyNoValueSnak( 3 ) ] );
 
-		$references = new ReferenceList( array( $reference1, $reference2 ) );
+		$references = new ReferenceList( [ $reference1, $reference2 ] );
 		$references->addReference( $reference3 );
 
 		$this->assertCount( 3, $references );
 
-		$expectedList = new ReferenceList( array( $reference1, $reference2, $reference3 ) );
+		$expectedList = new ReferenceList( [ $reference1, $reference2, $reference3 ] );
 		$this->assertSameReferenceOrder( $expectedList, $references );
 	}
 
 	public function testAddReferenceIgnoresIdenticalObjects() {
 		$list = new ReferenceList();
-		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
+		$reference = new Reference( [ new PropertyNoValueSnak( 1 ) ] );
 		$list->addReference( $reference );
 		$list->addReference( $reference );
 		$this->assertCount( 1, $list );
@@ -210,7 +210,7 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 
 	public function testAddReferenceDoesNotIgnoreCopies() {
 		$list = new ReferenceList();
-		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
+		$reference = new Reference( [ new PropertyNoValueSnak( 1 ) ] );
 		$list->addReference( $reference );
 		$list->addReference( clone $reference );
 		$this->assertCount( 2, $list );
@@ -218,7 +218,7 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 
 	public function testAddReferenceAtIndexIgnoresIdenticalObjects() {
 		$list = new ReferenceList();
-		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
+		$reference = new Reference( [ new PropertyNoValueSnak( 1 ) ] );
 		$list->addReference( $reference, 0 );
 		$list->addReference( $reference, 0 );
 		$this->assertCount( 1, $list );
@@ -227,7 +227,7 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 	public function testAddReferenceAtIndexMovesIdenticalObjects() {
 		$list = new ReferenceList();
 		$list->addNewReference( new PropertyNoValueSnak( 1 ) );
-		$reference = new Reference( array( new PropertyNoValueSnak( 2 ) ) );
+		$reference = new Reference( [ new PropertyNoValueSnak( 2 ) ] );
 		$list->addReference( $reference );
 		$this->assertSame( 1, $list->indexOf( $reference ), 'pre condition' );
 
@@ -243,19 +243,19 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testAddReferenceAtIndexZero() {
-		$reference1 = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
-		$reference2 = new Reference( array( new PropertyNoValueSnak( 2 ) ) );
-		$reference3 = new Reference( array( new PropertyNoValueSnak( 3 ) ) );
+		$reference1 = new Reference( [ new PropertyNoValueSnak( 1 ) ] );
+		$reference2 = new Reference( [ new PropertyNoValueSnak( 2 ) ] );
+		$reference3 = new Reference( [ new PropertyNoValueSnak( 3 ) ] );
 
-		$references = new ReferenceList( array( $reference1, $reference2 ) );
+		$references = new ReferenceList( [ $reference1, $reference2 ] );
 		$references->addReference( $reference3, 0 );
 
-		$expectedList = new ReferenceList( array( $reference3, $reference1, $reference2 ) );
+		$expectedList = new ReferenceList( [ $reference3, $reference1, $reference2 ] );
 		$this->assertSameReferenceOrder( $expectedList, $references );
 	}
 
 	public function testAddReferenceAtNegativeIndex() {
-		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
+		$reference = new Reference( [ new PropertyNoValueSnak( 1 ) ] );
 		$referenceList = new ReferenceList();
 
 		$this->setExpectedException( 'InvalidArgumentException' );
@@ -263,26 +263,26 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenEmptyReference_addReferenceDoesNotAdd() {
-		$reference1 = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
-		$reference2 = new Reference( array( new PropertyNoValueSnak( 2 ) ) );
-		$emptyReference = new Reference( array() );
+		$reference1 = new Reference( [ new PropertyNoValueSnak( 1 ) ] );
+		$reference2 = new Reference( [ new PropertyNoValueSnak( 2 ) ] );
+		$emptyReference = new Reference( [] );
 
-		$references = new ReferenceList( array( $reference1, $reference2 ) );
+		$references = new ReferenceList( [ $reference1, $reference2 ] );
 		$references->addReference( $emptyReference );
 
-		$expectedList = new ReferenceList( array( $reference1, $reference2 ) );
+		$expectedList = new ReferenceList( [ $reference1, $reference2 ] );
 		$this->assertSameReferenceOrder( $expectedList, $references );
 	}
 
 	public function testGivenEmptyReferenceAndIndex_addReferenceDoesNotAdd() {
-		$reference1 = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
-		$reference2 = new Reference( array( new PropertyNoValueSnak( 2 ) ) );
-		$emptyReference = new Reference( array() );
+		$reference1 = new Reference( [ new PropertyNoValueSnak( 1 ) ] );
+		$reference2 = new Reference( [ new PropertyNoValueSnak( 2 ) ] );
+		$emptyReference = new Reference( [] );
 
-		$references = new ReferenceList( array( $reference1, $reference2 ) );
+		$references = new ReferenceList( [ $reference1, $reference2 ] );
 		$references->addReference( $emptyReference, 0 );
 
-		$expectedList = new ReferenceList( array( $reference1, $reference2 ) );
+		$expectedList = new ReferenceList( [ $reference1, $reference2 ] );
 		$this->assertSameReferenceOrder( $expectedList, $references );
 	}
 
@@ -299,9 +299,9 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testIndexOf_checksForIdentity() {
-		$reference1 = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
-		$reference2 = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
-		$referenceList = new ReferenceList( array( $reference1 ) );
+		$reference1 = new Reference( [ new PropertyNoValueSnak( 1 ) ] );
+		$reference2 = new Reference( [ new PropertyNoValueSnak( 1 ) ] );
+		$referenceList = new ReferenceList( [ $reference1 ] );
 
 		$this->assertNotSame( $reference1, $reference2, 'post condition' );
 		$this->assertTrue( $reference1->equals( $reference2 ), 'post condition' );
@@ -366,7 +366,7 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 	public function testRemoveReferenceHash( ReferenceList $references ) {
 		$references->removeReferenceHash( '~=[,,_,,]:3' );
 
-		$hashes = array();
+		$hashes = [];
 
 		/**
 		 * @var Reference $reference
@@ -383,8 +383,8 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testRemoveReferenceHashRemovesIdenticalObjects() {
-		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
-		$references = new ReferenceList( array( $reference, $reference ) );
+		$reference = new Reference( [ new PropertyNoValueSnak( 1 ) ] );
+		$references = new ReferenceList( [ $reference, $reference ] );
 
 		$references->removeReferenceHash( $reference->getHash() );
 
@@ -392,8 +392,8 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testRemoveReferenceHashDoesNotRemoveCopies() {
-		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
-		$references = new ReferenceList( array( $reference, clone $reference ) );
+		$reference = new Reference( [ new PropertyNoValueSnak( 1 ) ] );
+		$references = new ReferenceList( [ $reference, clone $reference ] );
 
 		$references->removeReferenceHash( $reference->getHash() );
 
@@ -403,9 +403,9 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testRemoveReferenceHashUpdatesIndexes() {
-		$reference1 = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
-		$reference2 = new Reference( array( new PropertyNoValueSnak( 2 ) ) );
-		$references = new ReferenceList( array( $reference1, $reference2 ) );
+		$reference1 = new Reference( [ new PropertyNoValueSnak( 1 ) ] );
+		$reference2 = new Reference( [ new PropertyNoValueSnak( 2 ) ] );
+		$references = new ReferenceList( [ $reference1, $reference2 ] );
 
 		$references->removeReferenceHash( $reference1->getHash() );
 
@@ -417,7 +417,7 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 		$snak = new PropertyNoValueSnak( 1 );
 
 		$references->addNewReference( $snak );
-		$this->assertTrue( $references->hasReference( new Reference( array( $snak ) ) ) );
+		$this->assertTrue( $references->hasReference( new Reference( [ $snak ] ) ) );
 	}
 
 	public function testGivenMultipleSnaks_addNewReferenceAddsThem() {
@@ -428,17 +428,17 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 
 		$references->addNewReference( $snak1, $snak2, $snak3 );
 
-		$expectedSnaks = array( $snak1, $snak2, $snak3 );
+		$expectedSnaks = [ $snak1, $snak2, $snak3 ];
 		$this->assertTrue( $references->hasReference( new Reference( $expectedSnaks ) ) );
 	}
 
 	public function testGivenAnArrayOfSnaks_addNewReferenceAddsThem() {
 		$references = new ReferenceList();
-		$snaks = array(
+		$snaks = [
 			new PropertyNoValueSnak( 1 ),
 			new PropertyNoValueSnak( 3 ),
 			new PropertyNoValueSnak( 2 )
-		);
+		];
 
 		$references->addNewReference( $snaks );
 		$this->assertTrue( $references->hasReference( new Reference( $snaks ) ) );
@@ -498,7 +498,7 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 
 	public function testUnserializeCreatesNonIdenticalClones() {
 		$original = new ReferenceList();
-		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
+		$reference = new Reference( [ new PropertyNoValueSnak( 1 ) ] );
 		$original->addReference( $reference );
 
 		/** @var ReferenceList $clone */

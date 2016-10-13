@@ -30,11 +30,11 @@ class ItemIdSetTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function serializationsProvider() {
-		return array(
-			array( array(), array() ),
-			array( array( new ItemId( 'Q1' ) ), array( 'Q1' ) ),
-			array( array( new ItemId( 'Q1' ), new ItemId( 'Q2' ) ), array( 'Q1', 'Q2' ) ),
-		);
+		return [
+			[ [], [] ],
+			[ [ new ItemId( 'Q1' ) ], [ 'Q1' ] ],
+			[ [ new ItemId( 'Q1' ), new ItemId( 'Q2' ) ], [ 'Q1', 'Q2' ] ],
+		];
 	}
 
 	public function testGivenEmptySet_countReturnsZero() {
@@ -43,49 +43,49 @@ class ItemIdSetTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenSetWithTwoItems_countReturnsTwo() {
-		$set = new ItemIdSet( array(
+		$set = new ItemIdSet( [
 			new ItemId( 'Q1' ),
 			new ItemId( 'Q2' ),
-		) );
+		] );
 		$this->assertEquals( 2, $set->count() );
 	}
 
 	public function testGivenNotSetId_hasReturnsFalse() {
-		$set = new ItemIdSet( array( new ItemId( 'Q1337' ) ) );
+		$set = new ItemIdSet( [ new ItemId( 'Q1337' ) ] );
 		$this->assertFalse( $set->has( new ItemId( 'Q1' ) ) );
 	}
 
 	public function testGivenSetId_hasReturnsTrue() {
-		$set = new ItemIdSet( array( new ItemId( 'Q1337' ) ) );
+		$set = new ItemIdSet( [ new ItemId( 'Q1337' ) ] );
 		$this->assertTrue( $set->has( new ItemId( 'Q1337' ) ) );
 	}
 
 	public function testCanIterateOverSet() {
-		$array = array(
+		$array = [
 			new ItemId( 'Q1' ),
 			new ItemId( 'Q2' ),
-		);
+		];
 
 		$set = new ItemIdSet( $array );
 		$this->assertEquals( $array, array_values( iterator_to_array( $set ) ) );
 	}
 
 	public function testGivenDuplicates_noLongerPresentInIteration() {
-		$array = array(
+		$array = [
 			new ItemId( 'Q1' ),
 			new ItemId( 'Q1' ),
 			new ItemId( 'Q2' ),
 			new ItemId( 'Q1' ),
 			new ItemId( 'Q2' ),
-		);
+		];
 
 		$set = new ItemIdSet( $array );
 
 		$this->assertEquals(
-			array(
+			[
 				new ItemId( 'Q1' ),
 				new ItemId( 'Q2' ),
-			),
+			],
 			array_values( iterator_to_array( $set ) )
 		);
 	}
@@ -99,25 +99,25 @@ class ItemIdSetTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function itemIdSetProvider() {
-		return array(
-			array(
+		return [
+			[
 				new ItemIdSet(),
-			),
+			],
 
-			array(
-				new ItemIdSet( array(
+			[
+				new ItemIdSet( [
 					new ItemId( 'Q1' ),
-				) ),
-			),
+				] ),
+			],
 
-			array(
-				new ItemIdSet( array(
+			[
+				new ItemIdSet( [
 					new ItemId( 'Q1' ),
 					new ItemId( 'Q2' ),
 					new ItemId( 'Q3' ),
-				) ),
-			),
-		);
+				] ),
+			],
+		];
 	}
 
 	public function testGivenNonItemIdSet_equalsReturnsFalse() {
@@ -127,47 +127,47 @@ class ItemIdSetTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenDifferentSet_equalsReturnsFalse() {
-		$setOne = new ItemIdSet( array(
+		$setOne = new ItemIdSet( [
 			new ItemId( 'Q1337' ),
 			new ItemId( 'Q1' ),
 			new ItemId( 'Q42' ),
-		) );
+		] );
 
-		$setTwo = new ItemIdSet( array(
+		$setTwo = new ItemIdSet( [
 			new ItemId( 'Q1337' ),
 			new ItemId( 'Q2' ),
 			new ItemId( 'Q42' ),
-		) );
+		] );
 
 		$this->assertFalse( $setOne->equals( $setTwo ) );
 	}
 
 	public function testGivenSetWithDifferentOrder_equalsReturnsTrue() {
-		$setOne = new ItemIdSet( array(
+		$setOne = new ItemIdSet( [
 			new ItemId( 'Q1' ),
 			new ItemId( 'Q2' ),
 			new ItemId( 'Q3' ),
-		) );
+		] );
 
-		$setTwo = new ItemIdSet( array(
+		$setTwo = new ItemIdSet( [
 			new ItemId( 'Q2' ),
 			new ItemId( 'Q3' ),
 			new ItemId( 'Q1' ),
-		) );
+		] );
 
 		$this->assertTrue( $setOne->equals( $setTwo ) );
 	}
 
 	public function testGivenDifferentSizedSets_equalsReturnsFalse() {
-		$small = new ItemIdSet( array(
+		$small = new ItemIdSet( [
 			new ItemId( 'Q1' ),
-		) );
+		] );
 
-		$big = new ItemIdSet( array(
+		$big = new ItemIdSet( [
 			new ItemId( 'Q1' ),
 			new ItemId( 'Q2' ),
 			new ItemId( 'Q3' ),
-		) );
+		] );
 
 		$this->assertFalse( $small->equals( $big ) );
 		$this->assertFalse( $big->equals( $small ) );

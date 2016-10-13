@@ -16,7 +16,7 @@ class AliasGroupFallbackTest extends \PHPUnit_Framework_TestCase {
 
 	public function testConstructorSetsValues() {
 		$language = 'en-real';
-		$aliases = array( 'foo', 'bar', 'baz' );
+		$aliases = [ 'foo', 'bar', 'baz' ];
 		$actual = 'en-actual';
 		$source = 'en-source';
 
@@ -30,7 +30,7 @@ class AliasGroupFallbackTest extends \PHPUnit_Framework_TestCase {
 
 	public function testConstructorWithNullForSource() {
 		$language = 'en-real';
-		$aliases = array();
+		$aliases = [];
 		$actual = 'en-actual';
 		$source = null;
 
@@ -44,15 +44,15 @@ class AliasGroupFallbackTest extends \PHPUnit_Framework_TestCase {
 	 * @expectedException InvalidArgumentException
 	 */
 	public function testGivenInvalidActualLanguageCode_constructorThrowsException( $languageCode ) {
-		new AliasGroupFallback( 'en-real', array(), $languageCode, 'en-source' );
+		new AliasGroupFallback( 'en-real', [], $languageCode, 'en-source' );
 	}
 
 	public function invalidLanguageCodeProvider() {
-		return array(
-			array( null ),
-			array( 21 ),
-			array( '' ),
-		);
+		return [
+			[ null ],
+			[ 21 ],
+			[ '' ],
+		];
 	}
 
 	/**
@@ -60,18 +60,18 @@ class AliasGroupFallbackTest extends \PHPUnit_Framework_TestCase {
 	 * @expectedException InvalidArgumentException
 	 */
 	public function testGivenInvalidSourceLanguageCode_constructorThrowsException( $languageCode ) {
-		new AliasGroupFallback( 'en-real', array(), 'en-actual', $languageCode );
+		new AliasGroupFallback( 'en-real', [], 'en-actual', $languageCode );
 	}
 
 	public function invalidSourceLanguageCodeProvider() {
-		return array(
-			array( 21 ),
-			array( '' ),
-		);
+		return [
+			[ 21 ],
+			[ '' ],
+		];
 	}
 
 	public function testGroupEqualsItself() {
-		$group = new AliasGroupFallback( 'en-real', array( 'foo', 'bar' ), 'en-actual', 'en-source' );
+		$group = new AliasGroupFallback( 'en-real', [ 'foo', 'bar' ], 'en-actual', 'en-source' );
 
 		$this->assertTrue( $group->equals( $group ) );
 		$this->assertTrue( $group->equals( clone $group ) );
@@ -81,21 +81,21 @@ class AliasGroupFallbackTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider inequalAliasGroupProvider
 	 */
 	public function testGroupDoesNotEqualOnesWithMoreOrFewerValues( $inequalGroup ) {
-		$group = new AliasGroupFallback( 'en-real', array( 'foo' ), 'en-actual', 'en-source' );
+		$group = new AliasGroupFallback( 'en-real', [ 'foo' ], 'en-actual', 'en-source' );
 
 		$this->assertFalse( $group->equals( $inequalGroup ) );
 	}
 
 	public function inequalAliasGroupProvider() {
-		return array(
-			'aliases' => array( new AliasGroupFallback( 'en-real', array( 'moo' ), 'en-actual', 'en-source' ) ),
-			'language' => array( new AliasGroupFallback( 'en-moo', array( 'foo' ), 'en-actual', 'en-source' ) ),
-			'actualLanguage' => array( new AliasGroupFallback( 'en-real', array( 'foo' ), 'en-moo', 'en-source' ) ),
-			'sourceLanguage' => array( new AliasGroupFallback( 'en-real', array( 'foo' ), 'en-actual', 'en-moo' ) ),
-			'null sourceLanguage' => array( new AliasGroupFallback( 'en-real', array( 'foo', ), 'en-actual', null ) ),
-			'all' => array( new AliasGroupFallback( 'en-moo', array( 'moo' ), 'en-moo', 'en-moo' ) ),
-			'class AliasGroup' => array( new AliasGroup( 'en-real', array( 'foo' ) ) ),
-		);
+		return [
+			'aliases' => [ new AliasGroupFallback( 'en-real', [ 'moo' ], 'en-actual', 'en-source' ) ],
+			'language' => [ new AliasGroupFallback( 'en-moo', [ 'foo' ], 'en-actual', 'en-source' ) ],
+			'actualLanguage' => [ new AliasGroupFallback( 'en-real', [ 'foo' ], 'en-moo', 'en-source' ) ],
+			'sourceLanguage' => [ new AliasGroupFallback( 'en-real', [ 'foo' ], 'en-actual', 'en-moo' ) ],
+			'null sourceLanguage' => [ new AliasGroupFallback( 'en-real', [ 'foo', ], 'en-actual', null ) ],
+			'all' => [ new AliasGroupFallback( 'en-moo', [ 'moo' ], 'en-moo', 'en-moo' ) ],
+			'class AliasGroup' => [ new AliasGroup( 'en-real', [ 'foo' ] ) ],
+		];
 	}
 
 }

@@ -24,9 +24,9 @@ class StatementByGuidMapTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenPresentGuid_hasStatementWithGuidReturnsTrue() {
 
-		$statements = new StatementByGuidMap( array(
+		$statements = new StatementByGuidMap( [
 			$this->newStatement( 1, 'some guid' )
-		) );
+		] );
 
 		$this->assertTrue( $statements->hasStatementWithGuid( 'some guid' ) );
 	}
@@ -48,19 +48,19 @@ class StatementByGuidMapTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function nonStringProvider() {
-		return array(
-			array( null ),
-			array( 42 ),
-			array( 4.2 ),
-			array( array() ),
-			array( (object)array() ),
-		);
+		return [
+			[ null ],
+			[ 42 ],
+			[ 4.2 ],
+			[ [] ],
+			[ (object)[] ],
+		];
 	}
 
 	public function testGivenGuidOfPresentStatement_getStatementByGuidReturnsStatement() {
 		$statement = $this->newStatement( 1, 'some guid' );
 
-		$statements = new StatementByGuidMap( array( $statement ) );
+		$statements = new StatementByGuidMap( [ $statement ] );
 
 		$this->assertEquals( $statement, $statements->getStatementByGuid( 'some guid' ) );
 	}
@@ -83,7 +83,7 @@ class StatementByGuidMapTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenGuidOfPresentStatement_removeStatementWithGuidRemovesTheStatement() {
 		$statement = $this->newStatement( 1, 'some guid' );
-		$statements = new StatementByGuidMap( array( $statement ) );
+		$statements = new StatementByGuidMap( [ $statement ] );
 
 		$statements->removeStatementWithGuid( 'some guid' );
 
@@ -92,7 +92,7 @@ class StatementByGuidMapTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenGuidOfNonPresentStatement_removeStatementWithGuidDoesNoOp() {
 		$statement = $this->newStatement( 1, 'some guid' );
-		$statements = new StatementByGuidMap( array( $statement ) );
+		$statements = new StatementByGuidMap( [ $statement ] );
 
 		$statements->removeStatementWithGuid( '-- different guid --' );
 
@@ -112,15 +112,15 @@ class StatementByGuidMapTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenStatementWithNoGuid_constructorThrowsException() {
 		$this->setExpectedException( 'InvalidArgumentException' );
 
-		new StatementByGuidMap( array(
+		new StatementByGuidMap( [
 			$this->newStatement( 1, null )
-		) );
+		] );
 	}
 
 	public function testCanConstructWithStatementTraversable() {
-		$traversable = new ArrayObject( array(
+		$traversable = new ArrayObject( [
 			$this->newStatement( 1, 'some guid' )
-		) );
+		] );
 
 		$statementMap = new StatementByGuidMap( $traversable );
 
@@ -134,10 +134,10 @@ class StatementByGuidMapTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testMapCanBePassedToCount() {
-		$statements = new StatementByGuidMap( array(
+		$statements = new StatementByGuidMap( [
 			$this->newStatement( 1, 'some guid' ),
 			$this->newStatement( 2, 'other guid' )
-		) );
+		] );
 
 		$this->assertSame( 2, count( $statements ) );
 	}
@@ -146,18 +146,18 @@ class StatementByGuidMapTest extends \PHPUnit_Framework_TestCase {
 		$statement1 = $this->newStatement( 1, 'some guid' );
 		$statement2 = $this->newStatement( 2, 'other guid' );
 
-		$statementMap = new StatementByGuidMap( array( $statement1, $statement2 ) );
+		$statementMap = new StatementByGuidMap( [ $statement1, $statement2 ] );
 
-		$iteratedStatements = array();
+		$iteratedStatements = [];
 
 		foreach ( $statementMap as $guid => $statement ) {
 			$iteratedStatements[$guid] = $statement;
 		}
 
-		$expectedStatements = array(
+		$expectedStatements = [
 			'some guid' => $statement1,
 			'other guid' => $statement2
-		);
+		];
 
 		$this->assertEquals( $expectedStatements, $iteratedStatements );
 	}
@@ -174,7 +174,7 @@ class StatementByGuidMapTest extends \PHPUnit_Framework_TestCase {
 		$statement1 = $this->newStatement( 1, 'some guid' );
 		$statement2 = $this->newStatement( 2, 'some guid' );
 
-		$statements = new StatementByGuidMap( array( $statement1 ) );
+		$statements = new StatementByGuidMap( [ $statement1 ] );
 
 		$statements->addStatement( $statement2 );
 
@@ -185,12 +185,12 @@ class StatementByGuidMapTest extends \PHPUnit_Framework_TestCase {
 		$statement1 = $this->newStatement( 1, 'some guid' );
 		$statement2 = $this->newStatement( 2, 'other guid' );
 
-		$statementMap = new StatementByGuidMap( array( $statement1, $statement2 ) );
+		$statementMap = new StatementByGuidMap( [ $statement1, $statement2 ] );
 
-		$expectedStatements = array(
+		$expectedStatements = [
 			'some guid' => $statement1,
 			'other guid' => $statement2
-		);
+		];
 
 		$this->assertEquals( $expectedStatements, $statementMap->toArray() );
 	}

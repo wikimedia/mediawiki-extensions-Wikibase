@@ -182,7 +182,7 @@ class Statement implements Hashable, Comparable, PropertyIdProvider {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function addNewReference( $snaks = array() /*...*/ ) {
+	public function addNewReference( $snaks = [] /*...*/ ) {
 		if ( $snaks instanceof Snak ) {
 			$snaks = func_get_args();
 		}
@@ -200,7 +200,7 @@ class Statement implements Hashable, Comparable, PropertyIdProvider {
 	 * @throws InvalidArgumentException
 	 */
 	public function setRank( $rank ) {
-		$ranks = array( self::RANK_DEPRECATED, self::RANK_NORMAL, self::RANK_PREFERRED );
+		$ranks = [ self::RANK_DEPRECATED, self::RANK_NORMAL, self::RANK_PREFERRED ];
 
 		if ( !in_array( $rank, $ranks, true ) ) {
 			throw new InvalidArgumentException( 'Invalid rank specified for statement: ' . var_export( $rank, true ) );
@@ -228,11 +228,11 @@ class Statement implements Hashable, Comparable, PropertyIdProvider {
 	public function getHash() {
 		return sha1( implode(
 			'|',
-			array(
+			[
 				sha1( $this->mainSnak->getHash() . $this->qualifiers->getHash() ),
 				$this->rank,
 				$this->references->getValueHash(),
-			)
+			]
 		) );
 	}
 
@@ -260,7 +260,7 @@ class Statement implements Hashable, Comparable, PropertyIdProvider {
 	 * @return Snak[]
 	 */
 	public function getAllSnaks() {
-		$snaks = array( $this->mainSnak );
+		$snaks = [ $this->mainSnak ];
 
 		foreach ( $this->qualifiers as $qualifier ) {
 			$snaks[] = $qualifier;

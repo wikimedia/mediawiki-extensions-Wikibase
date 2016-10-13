@@ -35,11 +35,11 @@ class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function siteIdProvider() {
-		$argLists = array();
+		$argLists = [];
 
-		$argLists[] = array( 'enwiki' );
-		$argLists[] = array( 'nlwiki' );
-		$argLists[] = array( 'Nyan!' );
+		$argLists[] = [ 'enwiki' ];
+		$argLists[] = [ 'nlwiki' ];
+		$argLists[] = [ 'Nyan!' ];
 
 		return $argLists;
 	}
@@ -53,13 +53,13 @@ class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidStringIdentifierProvider() {
-		return array(
-			array( null ),
-			array( true ),
-			array( 42 ),
-			array( '' ),
-			array( array() ),
-		);
+		return [
+			[ null ],
+			[ true ],
+			[ 42 ],
+			[ '' ],
+			[ [] ],
+		];
 	}
 
 	/**
@@ -71,11 +71,11 @@ class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function pageNameProvider() {
-		$argLists = array();
+		$argLists = [];
 
-		$argLists[] = array( 'Wikidata' );
-		$argLists[] = array( 'Nyan_Cat' );
-		$argLists[] = array( 'NYAN DATA ALL ACROSS THE SKY ~=[,,_,,]:3' );
+		$argLists[] = [ 'Wikidata' ];
+		$argLists[] = [ 'Nyan_Cat' ];
+		$argLists[] = [ 'NYAN DATA ALL ACROSS THE SKY ~=[,,_,,]:3' ];
 
 		return $argLists;
 	}
@@ -97,28 +97,28 @@ class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function badgesProvider() {
-		$argLists = array();
+		$argLists = [];
 
-		$argLists[] = array( null, array() );
+		$argLists[] = [ null, [] ];
 
-		$badges = array();
+		$badges = [];
 		$expected = array_values( $badges );
 
-		$argLists[] = array( $badges, $expected );
+		$argLists[] = [ $badges, $expected ];
 
-		$badges = array(
+		$badges = [
 			new ItemId( 'Q149' )
-		);
+		];
 		$expected = array_values( $badges );
 
-		$argLists[] = array( $badges, $expected );
+		$argLists[] = [ $badges, $expected ];
 
 		// removing from the middle of array
-		$badges = array(
+		$badges = [
 			new ItemId( 'Q36' ),
 			new ItemId( 'Q149' ),
 			new ItemId( 'Q7' )
-		);
+		];
 
 		$key = array_search(
 			new ItemId( 'Q149' ),
@@ -128,7 +128,7 @@ class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 		$expected = array_values( $badges );
 
-		$argLists[] = array( $badges, $expected );
+		$argLists[] = [ $badges, $expected ];
 
 		return $argLists;
 	}
@@ -142,18 +142,18 @@ class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidBadgesProvider() {
-		return array(
+		return [
 			// Stuff that's not an array
-			array( true ),
-			array( 42 ),
-			array( 'nyan nyan' ),
+			[ true ],
+			[ 42 ],
+			[ 'nyan nyan' ],
 			// Arrays with stuff that's not even an object
-			array( array( 'nyan', 42 ) ),
-			array( array( 'nyan', array() ) ),
+			[ [ 'nyan', 42 ] ],
+			[ [ 'nyan', [] ] ],
 			// Arrays with Entities that aren't Items
-			array( array( new PropertyId( 'P2' ), new ItemId( 'Q149' ) ) ),
-			array( array( new PropertyId( 'P2' ), new PropertyId( 'P3' ) ) ),
-		);
+			[ [ new PropertyId( 'P2' ), new ItemId( 'Q149' ) ] ],
+			[ [ new PropertyId( 'P2' ), new PropertyId( 'P3' ) ] ],
+		];
 	}
 
 	/**
@@ -168,11 +168,11 @@ class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function linkProvider() {
-		return array(
-			array( new SiteLink( 'foo', 'Bar' ) ),
-			array( new SiteLink( 'foo', 'Bar', array( new ItemId( 'Q42' ), new ItemId( 'Q9001' ) ) ) ),
-			array( new SiteLink( 'foo', 'foo' ) ),
-		);
+		return [
+			[ new SiteLink( 'foo', 'Bar' ) ],
+			[ new SiteLink( 'foo', 'Bar', [ new ItemId( 'Q42' ), new ItemId( 'Q9001' ) ] ) ],
+			[ new SiteLink( 'foo', 'foo' ) ],
+		];
 	}
 
 	/**
@@ -184,31 +184,31 @@ class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function nonEqualityProvider() {
-		return array(
-			array(
+		return [
+			[
 				new SiteLink( 'foo', 'bar' ),
 				new SiteLink( 'foo', 'Bar' ),
-			),
-			array(
+			],
+			[
 				new SiteLink( 'foo', 'bar' ),
 				new SiteLink( 'Foo', 'bar' ),
-			),
-			array(
+			],
+			[
 				new SiteLink( 'foo', 'bar' ),
-				new SiteLink( 'foo', 'bar', array( new ItemId( 'Q42' ) ) ),
-			),
-			array(
-				new SiteLink( 'foo', 'bar', array( new ItemId( 'Q42' ) ) ),
-				new SiteLink( 'foo', 'bar', array( new ItemId( 'Q42' ), new ItemId( 'Q9001' ) ) ),
-			),
-		);
+				new SiteLink( 'foo', 'bar', [ new ItemId( 'Q42' ) ] ),
+			],
+			[
+				new SiteLink( 'foo', 'bar', [ new ItemId( 'Q42' ) ] ),
+				new SiteLink( 'foo', 'bar', [ new ItemId( 'Q42' ), new ItemId( 'Q9001' ) ] ),
+			],
+		];
 	}
 
 	public function testCanConstructWithItemIdSet() {
-		$badgesArray = array(
+		$badgesArray = [
 			new ItemId( 'Q36' ),
 			new ItemId( 'Q149' ),
-		);
+		];
 		$badges = new ItemIdSet( $badgesArray );
 
 		$siteLink = new SiteLink( 'foo', 'bar', $badges );

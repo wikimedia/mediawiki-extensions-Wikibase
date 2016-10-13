@@ -32,7 +32,7 @@ class Reference implements Hashable, Comparable, Immutable, Countable {
 	 * @param Snak[]|SnakList $snaks
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $snaks = array() ) {
+	public function __construct( $snaks = [] ) {
 		if ( is_array( $snaks ) ) {
 			$snaks = new SnakList( $snaks );
 		}
