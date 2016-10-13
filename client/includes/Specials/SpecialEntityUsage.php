@@ -33,7 +33,7 @@ class SpecialEntityUsage extends QueryPage {
 	/**
 	 * @var EntityId|null
 	 */
-	private $entityId = null;
+	public $entityId = null;
 
 	/**
 	 * @see SpecialPage::__construct
