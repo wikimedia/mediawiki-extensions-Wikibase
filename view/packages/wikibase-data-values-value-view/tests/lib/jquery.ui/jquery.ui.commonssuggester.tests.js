@@ -5,11 +5,15 @@
 ( function( $, QUnit ) {
 	'use strict';
 
-	var newTestSuggester = function() {
+	/**
+	 * @param {Object} [options]
+	 * @return {jQuery}
+	 */
+	var newTestSuggester = function( options ) {
 		return $( '<input>' )
 			.addClass( 'test_suggester' )
 			.appendTo( 'body' )
-			.commonssuggester();
+			.commonssuggester( options );
 	};
 
 	QUnit.module( 'jquery.ui.commonssuggester', {
@@ -73,16 +77,38 @@
 				// Do not do anything with invalid URL encoding
 				'1%': '1%',
 				'title=1%.jpg': 'title=1%.jpg'
-			};
+			},
+			numberOfTestCases = Object.keys( testCases ).length;
 
-		assert.expect( Object.keys( testCases ).length );
+		assert.expect( numberOfTestCases );
 
-		for ( var input in testCases ) {
-			var actual = suggester._grepFileTitleFromTerm( input ),
-				expected = testCases[input];
+		$.each( testCases, function( input, expected ) {
+			var actual = suggester._grepFileTitleFromTerm( input );
 
 			assert.strictEqual( actual, expected );
-		}
+		} );
+	} );
+
+	QUnit.test( 'search integration', function( assert ) {
+		assert.expect( 2 );
+		var $suggester = newTestSuggester( { ajax: function( options ) {
+				var response = [ '', [] ];
+
+				response[1]._requestTerm = options.data.search;
+
+				return $.Deferred().resolve( response ).promise();
+			} } ),
+			suggester = $suggester.data( 'commonssuggester' ),
+			input = 'title=Foo/Bar',
+			done = assert.async();
+
+		$suggester.val( input );
+		suggester.search().done( function( suggestions, term ) {
+			assert.strictEqual( suggestions._requestTerm, 'Bar' );
+			assert.strictEqual( term, input );
+
+			done();
+		} );
 	} );
 
 }( jQuery, QUnit ) );
