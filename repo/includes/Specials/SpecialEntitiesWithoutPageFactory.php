@@ -20,7 +20,13 @@ class SpecialEntitiesWithoutPageFactory {
 
 	private static function newFromGlobalState() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$entityTypes = $wikibaseRepo->getSettings()->getSetting( 'supportedEntityTypesForEntitiesWithoutTermListings' );
+		$entityTypes = $wikibaseRepo->getSettings()->getSetting(
+			'supportedEntityTypesForEntitiesWithoutTermListings'
+		);
+
+		if ( $entityTypes === null ) {
+			$entityTypes = $wikibaseRepo->getLocalEntityTypes();
+		}
 
 		return new self(
 			$wikibaseRepo->getStore()->newEntitiesWithoutTermFinder(),
