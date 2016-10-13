@@ -26,10 +26,10 @@ use Wikibase\Lib\SnakFormatter;
  */
 class DataAccessSnakFormatterFactoryTest extends PHPUnit_Framework_TestCase {
 
-	private function getDataAccessSnakFormatterFactory() {
+	private function getDataAccessSnakFormatterFactory( $expectedFormat ) {
 		return new DataAccessSnakFormatterFactory(
 			$this->getLanguageFallbackChainFactory(),
-			$this->getOutputFormatSnakFormatterFactory(),
+			$this->getOutputFormatSnakFormatterFactory( $expectedFormat ),
 			$this->getMock( PropertyDataTypeLookup::class )
 		);
 	}
@@ -53,27 +53,44 @@ class DataAccessSnakFormatterFactoryTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @return OutputFormatSnakFormatterFactory
 	 */
-	private function getOutputFormatSnakFormatterFactory() {
+	private function getOutputFormatSnakFormatterFactory( $expectedFormat ) {
 		$factory = $this->getMockBuilder( OutputFormatSnakFormatterFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
 
+		$snakFormatter = $this->getMock( SnakFormatter::class );
+		$snakFormatter->expects( $this->any() )
+			->method( 'getFormat' )
+			->will( $this->returnValue( $expectedFormat ) );
+
 		$factory->expects( $this->once() )
 			->method( 'getSnakFormatter' )
-			->with( SnakFormatter::FORMAT_PLAIN, $this->isInstanceOf( FormatterOptions::class ) )
-			->will( $this->returnValue( $this->getMock( SnakFormatter::class ) ) );
+			->with( $expectedFormat, $this->isInstanceOf( FormatterOptions::class ) )
+			->will( $this->returnValue( $snakFormatter ) );
 
 		return $factory;
 	}
 
-	public function testNewSnakFormatterForLanguage() {
-		$factory = $this->getDataAccessSnakFormatterFactory();
+	public function testNewEscapedPlainTextSnakFormatter() {
+		$factory = $this->getDataAccessSnakFormatterFactory( SnakFormatter::FORMAT_PLAIN );
 		$snakFormatter = $factory->newEscapedPlainTextSnakFormatter(
 			Language::factory( 'fr' ),
 			$this->getMock( UsageAccumulator::class )
 		);
 
 		$this->assertInstanceOf( SnakFormatter::class, $snakFormatter );
+		$this->assertSame( SnakFormatter::FORMAT_PLAIN, $snakFormatter->getFormat() );
+	}
+
+	public function testNewRichWikitextSnakFormatter() {
+		$factory = $this->getDataAccessSnakFormatterFactory( SnakFormatter::FORMAT_WIKI );
+		$snakFormatter = $factory->newRichWikitextSnakFormatter(
+			Language::factory( 'fr' ),
+			$this->getMock( UsageAccumulator::class )
+		);
+
+		$this->assertInstanceOf( SnakFormatter::class, $snakFormatter );
+		$this->assertSame( SnakFormatter::FORMAT_WIKI, $snakFormatter->getFormat() );
 	}
 
 }

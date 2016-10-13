@@ -86,9 +86,35 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @dataProvider snakProvider
+	 * @dataProvider richWikitextSnakProvider
 	 */
-	public function testOutput( $expected, $snak ) {
+	public function testRichWikitextOutput( $expected, $snak ) {
+		// This is an integration test, use the global factory
+		$factory = WikibaseClient::getDefaultInstance()->getDataAccessSnakFormatterFactory();
+		$formatter = $factory->newRichWikitextSnakFormatter(
+			Language::factory( 'en' ),
+			$this->getMock( UsageAccumulator::class )
+		);
+
+		$this->assertSame( $expected, $formatter->formatSnak( $snak ) );
+	}
+
+	public function richWikitextSnakProvider() {
+		return [
+			'string' => [
+				'<span>A string!</span>',
+				new PropertyValueSnak(
+					new PropertyId( 'P5' ),
+					new StringValue( 'A string!' )
+				)
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider escapedPlainTextSnakProvider
+	 */
+	public function testEscapedPlainTextOutput( $expected, $snak ) {
 		// This is an integration test, use the global factory
 		$factory = WikibaseClient::getDefaultInstance()->getDataAccessSnakFormatterFactory();
 		$formatter = $factory->newEscapedPlainTextSnakFormatter(
@@ -99,7 +125,7 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 		$this->assertSame( $expected, $formatter->formatSnak( $snak ) );
 	}
 
-	public function snakProvider() {
+	public function escapedPlainTextSnakProvider() {
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 		$repoConceptBaseUri = $settings->getSetting( 'repoConceptBaseUri' );
 
