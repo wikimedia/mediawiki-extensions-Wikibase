@@ -25,6 +25,23 @@
     },
     {
       "key": {
+        "uuid": "2e6c1747_7d6f17c1",
+        "filename": "client/tests/phpunit/includes/Specials/SpecialEntityUsageTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-13T10:42:42Z",
+      "side": 1,
+      "message": "Should be if (… \u0026\u0026 $this-\u003eusesTemporaryTables() ). It\u0027s possible to get the MW test case to create actual tables, that should be taken into account here.",
+      "revId": "bb7bf81a9f42b4c82740499fe139f5b58a00bfde",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e6c1747_bd326fed",
         "filename": "client/tests/phpunit/includes/Specials/SpecialEntityUsageTest.php",
         "patchSetId": 15
