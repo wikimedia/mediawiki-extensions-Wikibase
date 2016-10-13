@@ -32,6 +32,8 @@
 		 * @return {Function}
 		 */
 		_initDefaultSource: function() {
+			var self = this;
+
 			return function( term ) {
 				var deferred = $.Deferred();
 
@@ -39,14 +41,14 @@
 					url: 'https://commons.wikimedia.org/w/api.php',
 					dataType: 'jsonp',
 					data: {
-						search: term,
+						search: self._grepFileTitleFromTerm( term ),
 						action: 'opensearch',
 						namespace: 6
 					},
 					timeout: 8000
 				} )
 				.done( function( response ) {
-					deferred.resolve( response[1], response[0] );
+					deferred.resolve( response[1], term );
 				} )
 				.fail( function( jqXHR, textStatus ) {
 					// Since this is a JSONP request, this will always fail with a timeout...
@@ -55,6 +57,25 @@
 
 				return deferred.promise();
 			};
+		},
+
+		/**
+		 * @private
+		 *
+		 * @param {string} term
+		 * @return {string}
+		 */
+		_grepFileTitleFromTerm: function( term ) {
+			try {
+				// Make sure there are always at least 2 characters left
+				return decodeURIComponent( term
+					.replace( /^[^#]*\btitle=([^&#]{2,}).*/, '$1' )
+					.replace( /^[^#]*\/([^/?#]{2,}).*/, '$1' )
+				);
+			} catch ( ex ) {
+				// Revert all replacements when the input was not a (fragment of a) valid URL
+				return term;
+			}
 		},
 
 		/**

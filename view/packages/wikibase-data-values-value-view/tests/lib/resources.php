@@ -84,6 +84,15 @@ return call_user_func( function() {
 		),
 
 
+		'jquery.ui.commonssuggester.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.commonssuggester.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.ui.commonssuggester',
+			),
+		),
+
 		'jquery.ui.inputextender.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.ui/jquery.ui.inputextender.tests.js',
