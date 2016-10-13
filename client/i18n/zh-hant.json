@@ -16,7 +16,8 @@
 			"MoonYaksha",
 			"EagerLin",
 			"一個正常人",
-			"Cwek"
+			"Cwek",
+			"1233thehongkonger"
 		]
 	},
 	"wikibase-client-desc": "Wikibase 擴充套件客戶端",
@@ -73,6 +74,7 @@
 	"wikibase-pageswithbadges-invalid-id": "“$1” 不是一個有效 ID 項目",
 	"wikibase-pageswithbadges-badge": "徽章：",
 	"wikibase-pageswithbadges-submit": "顯示頁面",
+	"wikibase-entityusage-invalid-id": "“$1” 不是一個有效的實體",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} 項目 ID",
 	"wikibase-pageinfo-entity-id-none": "無",
 	"wikibase-property-render-error": "顯示屬性 $1：$2 失敗",
