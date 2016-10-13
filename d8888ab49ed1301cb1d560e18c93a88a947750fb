@@ -40,6 +40,24 @@
       "revId": "d8888ab49ed1301cb1d560e18c93a88a947750fb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_d27abae6",
+        "filename": "client/includes/Specials/SpecialEntityUsage.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-13T09:25:18Z",
+      "side": 1,
+      "message": "bah, how is it possible ctrl+f did not find this for me. Never mind then.\nChanges in public interface only because of tests are always a bit iffy but I don\u0027t have any better suggestion for this, so please ignore my question. This is ok.",
+      "parentUuid": "2e6c1747_728ca600",
+      "revId": "d8888ab49ed1301cb1d560e18c93a88a947750fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
