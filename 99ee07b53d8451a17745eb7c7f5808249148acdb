@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e6c1747_92b20247",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-13T08:08:33Z",
+      "side": 1,
+      "message": "I wanted to stay consistent within this file. Also below.",
+      "parentUuid": "2e6c1747_3769401e",
+      "revId": "99ee07b53d8451a17745eb7c7f5808249148acdb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e6c1747_17644445",
         "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
         "patchSetId": 1
