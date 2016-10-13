@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e6c1747_3775c093",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-13T01:09:54Z",
+      "side": 1,
+      "message": "$key is unused.",
+      "range": {
+        "startLine": 131,
+        "startChar": 23,
+        "endLine": 131,
+        "endChar": 27
+      },
+      "revId": "b01cabf62d6d1371a14b2b73856bdfc9628525b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_d75d4c1c",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-13T01:09:54Z",
+      "side": 1,
+      "message": "$entityUsage \u003d $entityId ? [ new EntityUsage( $entityId, \u0027S\u0027 ) ] : null;",
+      "revId": "b01cabf62d6d1371a14b2b73856bdfc9628525b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
