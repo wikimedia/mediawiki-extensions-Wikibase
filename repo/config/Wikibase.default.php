@@ -195,8 +195,6 @@ return [
 		'wb-claims' => [ 'name' => 'statements', 'type' => 'integer' ],
 	],
 
-	'supportedEntityTypesForEntitiesWithoutTermListings' => [
-		'item',
-		'property'
-	]
+	// List of entity types for Special:EntitiesWithoutLabel and …Description, or null for all.
+	'supportedEntityTypesForEntitiesWithoutTermListings' => null,
 ];
