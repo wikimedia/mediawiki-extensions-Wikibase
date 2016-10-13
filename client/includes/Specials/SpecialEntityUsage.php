@@ -73,6 +73,7 @@ class SpecialEntityUsage extends QueryPage {
 			try {
 				$this->entityId = $this->idParser->parse( $entity );
 			} catch ( EntityIdParsingException $ex ) {
+				var_dump( 'parser is not happy' );
 				$this->getOutput()->addHTML(
 					Html::element(
 						'p',
