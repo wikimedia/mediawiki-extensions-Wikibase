@@ -79,6 +79,24 @@
     },
     {
       "key": {
+        "uuid": "2e6c1747_d7c1cc84",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-13T01:28:46Z",
+      "side": 1,
+      "message": "Yes, from this line. You can just do \"foreach ( $usages as $entityUsage ) {\" which is equivalent to the current code.",
+      "parentUuid": "2e6c1747_97c7549a",
+      "revId": "b01cabf62d6d1371a14b2b73856bdfc9628525b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e6c1747_d75d4c1c",
         "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
         "patchSetId": 17
