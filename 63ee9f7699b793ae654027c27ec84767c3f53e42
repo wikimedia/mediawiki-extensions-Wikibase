@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e6c1747_97d674c7",
+        "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-13T06:32:33Z",
+      "side": 1,
+      "message": "It should be string[]",
+      "revId": "63ee9f7699b793ae654027c27ec84767c3f53e42",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_b7fa903e",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/SqlEntityIdPagerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-13T06:32:33Z",
+      "side": 1,
+      "message": "What about using addDBDataOnce instead of this?",
+      "revId": "63ee9f7699b793ae654027c27ec84767c3f53e42",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_77e9f87a",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/SqlEntityIdPagerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-13T06:32:33Z",
+      "side": 1,
+      "message": "Adding type of parameters in the php doc would be nice",
+      "revId": "63ee9f7699b793ae654027c27ec84767c3f53e42",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
