@@ -189,14 +189,14 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 
 	public function collectTermsProvider() {
 		return array(
-			array(
+			'empty set' => array(
 				array(),
 				null,
 				null,
 				array()
 			),
 
-			array(
+			'all term types' => array(
 				array(
 					new ItemId( 'Q1' ),
 					new PropertyId( 'P3' ),
@@ -229,7 +229,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 				)
 			),
 
-			array(
+			'one term type' => array(
 				array(
 					new ItemId( 'Q1' ),
 					new PropertyId( 'P3' ),
@@ -245,6 +245,34 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 						'labels' => $this->makeLanguageValueRecords( array( 'de' => 'label:P3/de' ) ),
 					),
 					'Q7' => array( 'id' => 'Q7', 'type' => Item::ENTITY_TYPE, 'labels' => array() ),
+				)
+			),
+
+			'two term types' => array(
+				array(
+					new ItemId( 'Q1' ),
+					new PropertyId( 'P3' ),
+					new ItemId( 'Q7' ),
+				),
+				array( 'label', 'description' ),
+				null,
+				array(
+					'Q1' => array( 'id' => 'Q1', 'type' => Item::ENTITY_TYPE,
+						'labels' => $this->makeLanguageValueRecords( array(
+							'en' => 'label:Q1/en', 'de' => 'label:Q1/de' ) ),
+						'descriptions' => $this->makeLanguageValueRecords( array(
+							'en' => 'description:Q1/en', 'de' => 'description:Q1/de' ) )
+					),
+					'P3' => array( 'id' => 'P3', 'type' => Property::ENTITY_TYPE,
+						'labels' => $this->makeLanguageValueRecords( array(
+							'en' => 'label:P3/en', 'de' => 'label:P3/de' ) ),
+						'descriptions' => $this->makeLanguageValueRecords( array(
+							'en' => 'description:P3/en', 'de' => 'description:P3/de' ) )
+					),
+					'Q7' => array( 'id' => 'Q7', 'type' => Item::ENTITY_TYPE,
+						'labels' => array(),
+						'descriptions' => array()
+					),
 				)
 			),
 		);
