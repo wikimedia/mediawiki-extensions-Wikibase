@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "2e6c1747_cc7a23e7",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-13T00:35:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e6c1747_2c757793",
+      "revId": "939f335a5a5b3d2a7482f3d55dcc93fb0f8bb0fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e6c1747_ec5a7f21",
         "filename": "client/includes/Hooks/EditActionHookHandler.php",
         "patchSetId": 16
@@ -48,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "2e6c1747_6c63ef3b",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-13T00:35:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e6c1747_ec5a7f21",
+      "revId": "939f335a5a5b3d2a7482f3d55dcc93fb0f8bb0fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e6c1747_ec90bf9a",
         "filename": "client/includes/Hooks/EditActionHookHandler.php",
         "patchSetId": 16
@@ -59,6 +95,24 @@
       "writtenOn": "2016-10-12T23:56:41Z",
       "side": 1,
       "message": "Empty line before foreach will aid readability.",
+      "revId": "939f335a5a5b3d2a7482f3d55dcc93fb0f8bb0fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_8c574b5c",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-13T00:35:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e6c1747_ec90bf9a",
       "revId": "939f335a5a5b3d2a7482f3d55dcc93fb0f8bb0fd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -88,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "2e6c1747_cc514367",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-13T00:35:49Z",
+      "side": 1,
+      "message": "Yes, but it\u0027s not needed.",
+      "parentUuid": "2e6c1747_acafa7dd",
+      "revId": "939f335a5a5b3d2a7482f3d55dcc93fb0f8bb0fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e6c1747_2cf2d703",
         "filename": "client/includes/Hooks/EditActionHookHandler.php",
         "patchSetId": 16
@@ -99,6 +171,24 @@
       "writtenOn": "2016-10-12T23:56:41Z",
       "side": 1,
       "message": "Empty line before $output \u003d … will aid readability.",
+      "revId": "939f335a5a5b3d2a7482f3d55dcc93fb0f8bb0fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_0cc35b0b",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-13T00:35:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e6c1747_2cf2d703",
       "revId": "939f335a5a5b3d2a7482f3d55dcc93fb0f8bb0fd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -122,6 +212,24 @@
     },
     {
       "key": {
+        "uuid": "2e6c1747_2cc81725",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-13T00:35:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e6c1747_acdde775",
+      "revId": "939f335a5a5b3d2a7482f3d55dcc93fb0f8bb0fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e6c1747_4c5473ca",
         "filename": "client/resources/wikibase.client.action.edit.collapsibleFooter.js",
         "patchSetId": 16
@@ -133,6 +241,24 @@
       "writtenOn": "2016-10-12T23:56:41Z",
       "side": 1,
       "message": "In a better world this would not be needed… but I doubt it\u0027s worth touching the code in MediaWiki.",
+      "revId": "939f335a5a5b3d2a7482f3d55dcc93fb0f8bb0fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_6cd20fd7",
+        "filename": "client/resources/wikibase.client.action.edit.collapsibleFooter.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-13T00:35:49Z",
+      "side": 1,
+      "message": "I don\u0027t think that we can add a hook to inject this js easily.",
+      "parentUuid": "2e6c1747_4c5473ca",
       "revId": "939f335a5a5b3d2a7482f3d55dcc93fb0f8bb0fd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -162,6 +288,24 @@
     },
     {
       "key": {
+        "uuid": "2e6c1747_8cd66bc7",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-13T00:35:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e6c1747_cc5dc31c",
+      "revId": "939f335a5a5b3d2a7482f3d55dcc93fb0f8bb0fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e6c1747_8c6d8b99",
         "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
         "patchSetId": 16
@@ -185,6 +329,24 @@
     },
     {
       "key": {
+        "uuid": "2e6c1747_cce06396",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-13T00:35:49Z",
+      "side": 1,
+      "message": "Note the single quote and doubel quote difference. It would be better for readability",
+      "parentUuid": "2e6c1747_8c6d8b99",
+      "revId": "939f335a5a5b3d2a7482f3d55dcc93fb0f8bb0fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e6c1747_cc6783b3",
         "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
         "patchSetId": 16
@@ -202,6 +364,24 @@
         "endLine": 121,
         "endChar": 42
       },
+      "revId": "939f335a5a5b3d2a7482f3d55dcc93fb0f8bb0fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_4ce473a4",
+        "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-13T00:35:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e6c1747_cc6783b3",
       "revId": "939f335a5a5b3d2a7482f3d55dcc93fb0f8bb0fd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
