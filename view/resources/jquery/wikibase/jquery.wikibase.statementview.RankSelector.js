@@ -208,6 +208,7 @@
 					.append(
 						$( '<a/>' )
 						.text( mw.msg( 'wikibase-statementview-rank-' + rankName ) )
+						.attr( 'title', mw.msg( 'wikibase-statementview-rank-tooltip-' + rankName ) )
 						.on( 'click.' + self.widgetName, function( event ) {
 							event.preventDefault();
 						} )
