@@ -6,7 +6,9 @@ use FakeResultWrapper;
 use RequestContext;
 use SpecialPageFactory;
 use SpecialPageTestBase;
+use Title;
 use Wikibase\Client\Specials\SpecialEntityUsage;
+use WikiPage;
 
 /**
  * @covers Wikibase\Client\Specials\SpecialEntityUsage
@@ -27,10 +29,18 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 				'value' => 11,
 				'namespace' => 0,
 				'title' => 'Tehran',
-				'aspects' => 'S|O|L.fa',
+				'aspects' => 'O|L.fa',
 				'eu_page_id' => 11,
 				'eu_entity_id' => 'Q3',
 			],
+			(object)[
+				'value' => 22,
+				'namespace' => 0,
+				'title' => 'Athena',
+				'aspects' => 'S',
+				'eu_page_id' => 22,
+				'eu_entity_id' => 'Q3',
+			]
 		];
 
 		return new FakeResultWrapper( $rows );
@@ -53,18 +63,25 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 
 	public function testExecuteWithValidParam() {
 		list( $result, ) = $this->executeSpecialPage( 'Q3' );
-		$aspects = [
-			wfMessage( 'wikibase-pageinfo-entity-usage-S' )->parse(),
+		$aspectsTehran = [
 			wfMessage( 'wikibase-pageinfo-entity-usage-O' )->parse(),
 			wfMessage( 'wikibase-pageinfo-entity-usage-L', 'fa' )->parse(),
 		];
-		$aspectList = RequestContext::getMain()->getLanguage()->commaList( $aspects );
+		$aspectsAthena = [
+			wfMessage( 'wikibase-pageinfo-entity-usage-S' )->parse(),
+		];
+
+		$lang = RequestContext::getMain()->getLanguage();
+		$aspectListTehran = $lang->commaList( $aspectsTehran );
+		$aspectListAthena = $lang->commaList( $aspectsAthena );
 
 		$this->assertContains( 'Tehran', $result );
+		$this->assertContains( 'Athena', $result );
 		$this->assertNotContains( '<p class="error"', $result );
 		$expected = SpecialPageFactory::getLocalNameFor( 'EntityUsage', 'Q3' );
 		$this->assertContains( $expected, $result );
-		$this->assertContains( $aspectList, $result );
+		$this->assertContains( ': ' . $aspectListTehran . '</li>', $result );
+		$this->assertContains( ': ' . $aspectListAthena . '</li>', $result );
 	}
 
 	public function testExecuteWithInvalidParam() {
@@ -75,6 +92,90 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 			wfMessage( 'wikibase-entityusage-invalid-id', 'FooBar' )->text(),
 			$result
 		);
+	}
+
+	public function testReallyDoQuery() {
+		if ( wfGetDB( DB_REPLICA )->getType() === 'mysql' ) {
+			$this->markTestSkipped( 'MySQL does not allow selfjoins on temporary tables' );
+		}
+		$this->addReallyDoQueryData();
+
+		$special = new SpecialEntityUsage();
+		$special->prepareParams( 'Q3' );
+		$res = $special->reallyDoQuery( 50 );
+		$values = [];
+
+		foreach ( $res as $row ) {
+			$values[] = [
+				$row->value,
+				$row->namespace,
+				$row->title,
+				$row->aspects,
+				$row->eu_page_id
+			];
+		}
+
+		$expected = [
+			[ '22', '0', 'Berlin', 'L.de', '22' ],
+			[ '11', '0', 'Vienna', 'O|S', '11' ],
+		];
+
+		$this->assertSame( $expected, $values );
+	}
+
+	private function addReallyDoQueryData() {
+		$db = wfGetDB( DB_MASTER );
+		$dump = [
+			'page' => [
+				[
+					'page_title' => 'Vienna',
+					'page_namespace' => 0,
+					'page_id' => 11,
+				],
+				[
+					'page_title' => 'Berlin',
+					'page_namespace' => 0,
+					'page_id' => 22,
+				],
+			],
+			'wbc_entity_usage' => [
+				[
+					'eu_page_id' => 11,
+					'eu_entity_id' => 'Q3',
+					'eu_aspect' => 'S'
+				],
+				[
+					'eu_page_id' => 11,
+					'eu_entity_id' => 'Q3',
+					'eu_aspect' => 'O'
+				],
+				[
+					'eu_page_id' => 11,
+					'eu_entity_id' => 'Q4',
+					'eu_aspect' => 'L.en'
+				],
+				[
+					'eu_page_id' => 22,
+					'eu_entity_id' => 'Q3',
+					'eu_aspect' => 'L.de'
+				],
+			],
+		];
+
+		foreach ( $dump as $table => $rows ) {
+			// Clean everything
+			$db->delete( $table, '*' );
+
+			foreach ( $rows as $row ) {
+				if ( $table === 'page' ) {
+					$title = Title::newFromText( $row['page_title'], $row['page_namespace'] );
+					$page = WikiPage::factory( $title );
+					$page->insertOn( $db, $row['page_id'] );
+				} else {
+					$db->insert( $table, $row );
+				}
+			}
+		}
 	}
 
 }
