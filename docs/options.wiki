@@ -52,7 +52,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;unitStorage: Definition for unit conversion storage. Should be in in the format <code>ObjectFactory</code> understands, example: <code>array( 'class' => 'Wikibase\\Lib\\JsonUnitStorage',  'args' => array( 'myUnits.json' ) )</code>.
 ;foreignRepositories: An associative array mapping foreign repository names to settings relevant to the particular repository. Each repository's settings are an associative array containing the following keys:
 :;'supportedEntityTypes': list of entity types (strings) that the local wiki supports from the foreign repository
-;supportedEntityTypesForEntitiesWithoutTermListings: Array of entity types that are supported on Special:EntitiesWithoutLabel and on Special:EntitiesWithoutDescription. Can contain either "item" or "property" (or both).
+;supportedEntityTypesForEntitiesWithoutTermListings: Array of entity types that are supported on Special:EntitiesWithoutLabel and on Special:EntitiesWithoutDescription, typically <code>'item'</code> and <code>'property'</code>. Defaults to <code>null</code>, which enables all numeric entity types.
 
 == Client Settings ==
 
