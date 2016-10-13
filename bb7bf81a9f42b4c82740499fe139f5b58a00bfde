@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e6c1747_dd2f2b84",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-13T10:35:47Z",
+      "side": 1,
+      "message": "I think you don\u0027t really need to reference the abandoned proof-of-concept never-to-be-merged sketchy patch in commit message.\n\nAlthough it might help in reviewing, I think it could also confuse future git log readers.",
+      "range": {
+        "startLine": 9,
+        "startChar": 17,
+        "endLine": 9,
+        "endChar": 24
+      },
+      "revId": "bb7bf81a9f42b4c82740499fe139f5b58a00bfde",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_bd326fed",
+        "filename": "client/tests/phpunit/includes/Specials/SpecialEntityUsageTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-13T10:35:47Z",
+      "side": 1,
+      "message": "I believe selfjoin is not a right spelling. It should be \"self joins\", I think",
+      "revId": "bb7bf81a9f42b4c82740499fe139f5b58a00bfde",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
