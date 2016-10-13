@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e6c1747_52108aad",
+        "filename": "client/includes/Specials/SpecialEntityUsage.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-13T09:19:11Z",
+      "side": 1,
+      "message": "why did it suddenly become public?",
+      "range": {
+        "startLine": 71,
+        "startChar": 1,
+        "endLine": 71,
+        "endChar": 7
+      },
+      "revId": "d8888ab49ed1301cb1d560e18c93a88a947750fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
