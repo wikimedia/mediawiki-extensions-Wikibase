@@ -323,14 +323,17 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 	},
 
 	/**
-	 * @inheritdoc
+	 * @see jQuery.ui.suggester._createMenuItemFromSuggestion
 	 * @protected
+	 *
+	 * @param {Object} entityStub
+	 * @return {jQuery.wikibase.entityselector.Item}
 	 */
-	_createMenuItemFromSuggestion: function( suggestion ) {
-		var $label = this._createLabelFromSuggestion( suggestion ),
-			value = suggestion.label || suggestion.id;
+	_createMenuItemFromSuggestion: function( entityStub ) {
+		var $label = this._createLabelFromSuggestion( entityStub ),
+			value = entityStub.label || entityStub.id;
 
-		return new $.wikibase.entityselector.Item( $label, value, suggestion );
+		return new $.wikibase.entityselector.Item( $label, value, entityStub );
 	},
 
 	/**

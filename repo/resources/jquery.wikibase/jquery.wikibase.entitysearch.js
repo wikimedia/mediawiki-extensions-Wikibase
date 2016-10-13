@@ -46,13 +46,17 @@ $.widget( 'wikibase.entitysearch', PARENT, {
 	},
 
 	/**
-	 *@see jQuery.wikibase.entityselector._createMenuItemFromSuggestion
+	 * @see jQuery.wikibase.entityselector._createMenuItemFromSuggestion
+	 * @protected
+	 *
+	 * @param {Object} entityStub
+	 * @return {jQuery.wikibase.entityselector.Item}
 	 */
-	_createMenuItemFromSuggestion: function( suggestion ) {
-		var $label = this._createLabelFromSuggestion( suggestion ),
-			value = suggestion.label || suggestion.id;
+	_createMenuItemFromSuggestion: function( entityStub ) {
+		var $label = this._createLabelFromSuggestion( entityStub ),
+			value = entityStub.label || entityStub.id;
 
-		return new PARENT.Item( $label, value, suggestion );
+		return new PARENT.Item( $label, value, entityStub );
 	},
 
 	/**
