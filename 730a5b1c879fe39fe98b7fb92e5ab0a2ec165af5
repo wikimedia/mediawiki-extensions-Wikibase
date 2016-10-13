@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e6c1747_d2bf1aa6",
+        "filename": "client/tests/phpunit/includes/Specials/SpecialEntityUsageTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-13T09:10:57Z",
+      "side": 1,
+      "message": "$this-\u003eonce()?",
+      "range": {
+        "startLine": 57,
+        "startChar": 32,
+        "endLine": 57,
+        "endChar": 35
+      },
+      "revId": "730a5b1c879fe39fe98b7fb92e5ab0a2ec165af5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_3205ce7d",
+        "filename": "client/tests/phpunit/includes/Specials/SpecialEntityUsageTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-13T09:10:57Z",
+      "side": 1,
+      "message": "You can just match \u0027: \u0027 . $aspectListTehran . \u0027\u003c/li\u003e\u0027 here (the \u003c/li\u003e is from QueryPage::outputResults). That will save you the assertNotContains below.",
+      "revId": "730a5b1c879fe39fe98b7fb92e5ab0a2ec165af5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_12b292e4",
+        "filename": "client/tests/phpunit/includes/Specials/SpecialEntityUsageTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-13T09:10:57Z",
+      "side": 1,
+      "message": "DB_REPLICA",
+      "range": {
+        "startLine": 101,
+        "startChar": 16,
+        "endLine": 101,
+        "endChar": 24
+      },
+      "revId": "730a5b1c879fe39fe98b7fb92e5ab0a2ec165af5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
