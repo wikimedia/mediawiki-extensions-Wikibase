@@ -167,6 +167,11 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 
 	/**
 	 * Starts the widget's edit mode.
+	 *
+	 * @return {Object} jQuery.Promise
+	 *         No resolved parameters.
+	 *         Rejected parameters:
+	 *         - {Error}
 	 */
 	_startEditing: function() {
 		return this._listview.startEditing();

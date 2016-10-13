@@ -114,6 +114,10 @@ $.widget( 'wikibase.pagesuggester', $.ui.suggester, {
 
 	/**
 	 * @see jQuery.ui.suggester._createMenuItemFromSuggestion
+	 *
+	 * @param {string} suggestion
+	 * @param {string} requestTerm
+	 * @return {jQuery.ui.ooMenu.Item}
 	 */
 	_createMenuItemFromSuggestion: function( suggestion, requestTerm ) {
 		return new $.ui.ooMenu.Item(

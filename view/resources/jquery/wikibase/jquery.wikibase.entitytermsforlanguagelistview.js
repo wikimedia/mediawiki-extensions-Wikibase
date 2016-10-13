@@ -331,7 +331,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 
 	/**
 	 * @param {jQuery} $this
-	 * @param {int} previousTop
+	 * @param {number} previousTop
 	 * @private
 	 */
 	_scrollUp: function( $this, previousTop ) {

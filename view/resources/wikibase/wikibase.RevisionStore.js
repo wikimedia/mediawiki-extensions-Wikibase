@@ -29,6 +29,8 @@ var SELF = wb.RevisionStore = function WbRevisionStore( baseRev ) {
 $.extend( SELF.prototype, {
 	/**
 	 * Returns the base revision id.
+	 *
+	 * @return {number}
 	 */
 	getBaseRevision: function() {
 		return this._revisions.baseRevision;
@@ -36,6 +38,8 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * Returns the label revision id.
+	 *
+	 * @return {number}
 	 */
 	getLabelRevision: function() {
 		return this._revisions.labelRevision;
@@ -43,6 +47,8 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * Returns the description revision id.
+	 *
+	 * @return {number}
 	 */
 	getDescriptionRevision: function() {
 		return this._revisions.descriptionRevision;
@@ -50,6 +56,8 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * Returns the aliases revision id.
+	 *
+	 * @return {number}
 	 */
 	getAliasesRevision: function() {
 		return this._revisions.aliasesRevision;
@@ -57,6 +65,8 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * Returns the sitelinks revision id.
+	 *
+	 * @return {number}
 	 */
 	getSitelinksRevision: function( lang ) {
 		if ( Object.prototype.hasOwnProperty.call( this._revisions.sitelinksRevision, lang ) ) {
@@ -67,6 +77,8 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * Returns the claim revision id.
+	 *
+	 * @return {number}
 	 */
 	getClaimRevision: function( claimGuid ) {
 		if ( Object.prototype.hasOwnProperty.call( this._revisions.claimRevisions, claimGuid ) ) {
@@ -77,6 +89,8 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * Saves the label revision id.
+	 *
+	 * @param {number} rev
 	 */
 	setLabelRevision: function( rev ) {
 		this._revisions.labelRevision = rev;
@@ -84,6 +98,8 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * Saves the description revision id.
+	 *
+	 * @param {number} rev
 	 */
 	setDescriptionRevision: function( rev ) {
 		this._revisions.descriptionRevision = rev;
@@ -91,6 +107,8 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * Saves the aliases revision id.
+	 *
+	 * @param {number} rev
 	 */
 	setAliasesRevision: function( rev ) {
 		this._revisions.aliasesRevision = rev;
@@ -98,6 +116,9 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * Saves the sitelinks revision id.
+	 *
+	 * @param {number} rev
+	 * @param {string} lang
 	 */
 	setSitelinksRevision: function( rev, lang ) {
 		this._revisions.sitelinksRevision[lang] = rev;
@@ -105,6 +126,9 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * Saves the claim revision id.
+	 *
+	 * @param {number} rev
+	 * @param {string} claimGuid
 	 */
 	setClaimRevision: function( rev, claimGuid ) {
 		this._revisions.claimRevisions[claimGuid] = rev;
