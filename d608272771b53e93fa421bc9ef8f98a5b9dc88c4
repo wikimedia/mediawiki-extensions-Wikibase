@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e6c1747_92284298",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-13T10:12:06Z",
+      "side": 1,
+      "message": "I dislike this a little bit, because the \"null\" looks like it\u0027s a mistake and can be removed, but the loop below actually relies on this dummy array element.",
+      "revId": "d608272771b53e93fa421bc9ef8f98a5b9dc88c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
