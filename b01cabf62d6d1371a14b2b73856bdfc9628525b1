@@ -61,6 +61,24 @@
     },
     {
       "key": {
+        "uuid": "2e6c1747_97c7549a",
+        "filename": "client/includes/Hooks/EditActionHookHandler.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-13T01:27:33Z",
+      "side": 1,
+      "message": "Do you mean from the $usages array? I thought you mean from this line which I\u0027m not sure it would be possible. The reason that it has this unused key is that how usageLookup-\u003egetUsagesForPage returns. Unless we get it and use array_values or something like that but I wanted to make the flow obvious.",
+      "parentUuid": "2e6c1747_f7e7a839",
+      "revId": "b01cabf62d6d1371a14b2b73856bdfc9628525b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e6c1747_d75d4c1c",
         "filename": "client/tests/phpunit/includes/Hooks/EditActionHookHandlerTest.php",
         "patchSetId": 17
