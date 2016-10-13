@@ -34,6 +34,24 @@
       "revId": "90e97ca2631b91ca5be8f66c8219795df5d4e3cb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_ac25e7be",
+        "filename": "client/includes/Specials/SpecialEntityUsage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-13T00:55:34Z",
+      "side": 1,
+      "message": "This at very least needs to also make sure we are referring to the same eu_entity_id, not just the same page id (otherwise all aspects from that page will appear).\n\nUsing page_id from the outer query here will also work (to answer comment #0).",
+      "parentUuid": "2e6c1747_c979352c",
+      "revId": "90e97ca2631b91ca5be8f66c8219795df5d4e3cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
