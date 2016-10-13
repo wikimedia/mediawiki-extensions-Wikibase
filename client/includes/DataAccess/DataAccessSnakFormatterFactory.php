@@ -70,6 +70,36 @@ class DataAccessSnakFormatterFactory {
 		Language $language,
 		UsageAccumulator $usageAccumulator
 	) {
+		return $this->newSnakFormatter( 'escaped-plaintext', $language, $usageAccumulator );
+	}
+
+	/**
+	 * This returns a SnakFormatter that will return "rich" wikitext.
+	 *
+	 * @param Language $language
+	 * @param UsageAccumulator $usageAccumulator
+	 *
+	 * @return SnakFormatter
+	 */
+	public function newRichWikitextSnakFormatter(
+		Language $language,
+		UsageAccumulator $usageAccumulator
+	) {
+		return $this->newSnakFormatter( 'rich-wikitext', $language, $usageAccumulator );
+	}
+
+	/**
+	 * @param string $type
+	 * @param Language $language
+	 * @param UsageAccumulator $usageAccumulator
+	 *
+	 * @return SnakFormatter
+	 */
+	private function newSnakFormatter(
+		$type,
+		Language $language,
+		UsageAccumulator $usageAccumulator
+	) {
 		$fallbackChain = $this->languageFallbackChainFactory->newFromLanguage(
 			$language,
 			LanguageFallbackChainFactory::FALLBACK_ALL
@@ -80,12 +110,38 @@ class DataAccessSnakFormatterFactory {
 			SnakFormatter::OPT_LANG => $language->getCode(),
 		] );
 
-		$snakFormatter = $this->getPlainTextSnakFormatterForOptions( $options );
+		if ( $type === 'rich-wikitext' ) {
+			$snakFormatter = $this->getRichWikitextSnakFormatterForOptions( $options );
+		} else {
+			$snakFormatter = $this->getPlainTextSnakFormatterForOptions( $options );
+		}
 
 		return new UsageTrackingSnakFormatter(
 			$snakFormatter,
 			$usageAccumulator,
 			$fallbackChain->getFetchLanguageCodes()
+		);
+	}
+
+	/**
+	 * Our output format is basically wikitext escaped plain text, except
+	 * for URLs, these are not wikitext escaped.
+	 *
+	 * @param FormatterOptions $options
+	 * @return BinaryOptionDispatchingSnakFormatter
+	 */
+	private function getRichWikitextSnakFormatterForOptions( FormatterOptions $options ) {
+		$snakFormatter = $this->snakFormatterFactory->getSnakFormatter(
+			SnakFormatter::FORMAT_PLAIN,
+			$options
+		);
+
+		return new EscapingSnakFormatter(
+			SnakFormatter::FORMAT_PLAIN,
+			$snakFormatter,
+			function( $str ) {
+				return "<span>$str</span>";
+			}
 		);
 	}
 
