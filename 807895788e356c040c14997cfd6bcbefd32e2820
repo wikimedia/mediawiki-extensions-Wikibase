@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "0e97535f_763398f4",
+        "filename": "repo/tests/phpunit/includes/Api/SubscribersTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-14T14:53:59Z",
+      "side": 1,
+      "message": "Done. Regarding, not deleting, It doesn\u0027t work in addDBData",
+      "parentUuid": "0e97535f_eb3901f1",
+      "revId": "807895788e356c040c14997cfd6bcbefd32e2820",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e97535f_8b10355d",
         "filename": "repo/tests/phpunit/includes/Api/SubscribersTest.php",
         "patchSetId": 4
@@ -47,6 +65,24 @@
       "writtenOn": "2016-10-14T14:32:57Z",
       "side": 1,
       "message": "Just wondering: why doing this instead of assertArrayNotHasKey( \u0027error\u0027, $result )?",
+      "revId": "807895788e356c040c14997cfd6bcbefd32e2820",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e97535f_362d108c",
+        "filename": "repo/tests/phpunit/includes/Api/SubscribersTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-14T14:53:59Z",
+      "side": 1,
+      "message": "It is in most of API tests. I have no preferences.",
+      "parentUuid": "0e97535f_8b10355d",
       "revId": "807895788e356c040c14997cfd6bcbefd32e2820",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
