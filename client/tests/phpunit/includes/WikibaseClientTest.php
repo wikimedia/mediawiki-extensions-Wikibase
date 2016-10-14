@@ -157,6 +157,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 			Language::factory( 'en' ),
 			new DataTypeDefinitions( array() ),
 			new EntityTypeDefinitions( array() ),
+			[],
 			$this->getSiteStore()
 		);
 
@@ -178,6 +179,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 			Language::factory( 'en' ),
 			new DataTypeDefinitions( array() ),
 			new EntityTypeDefinitions( array() ),
+			[],
 			$siteStore
 		);
 
@@ -213,6 +215,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 			Language::factory( 'en' ),
 			new DataTypeDefinitions( array() ),
 			new EntityTypeDefinitions( array() ),
+			[],
 			$siteStore
 		);
 
@@ -386,6 +389,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 			Language::factory( 'en' ),
 			new DataTypeDefinitions( array() ),
 			new EntityTypeDefinitions( array() ),
+			[],
 			new HashSiteStore()
 		);
 	}
