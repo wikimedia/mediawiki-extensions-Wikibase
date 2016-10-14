@@ -336,7 +336,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * before the edit mode has been started.
 	 */
 	cancelEditing: function() {
-		return this.stopEditing( true );
+		this.stopEditing( true );
 	},
 
 	/**
