@@ -1,5 +1,9 @@
 # ValueView release notes
 
+## 0.18.0 (2016-10-14)
+* `jQuery.ui.commonssuggester` now allows pasting full and partial Wikimedia Commons URLs.
+* Added support for `null` precision to `GlobeCoordinateInput`.
+
 ## 0.17.4 (2016-10-05)
 * Handle null upstream values in `jQuery.valueview.ExpertExtender.LanguageSelector::onInitialShow`.
 * Properly forward API error messages in `jquery.ui.unitsuggester`.
