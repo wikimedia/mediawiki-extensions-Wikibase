@@ -16,8 +16,8 @@
 		this._toolbarFactory = toolbarFactory;
 	};
 
-	SELF.prototype.getAdder = function( add, $dom, label ) {
-		var options = { label: label };
+	SELF.prototype.getAdder = function( add, $dom, label, title ) {
+		var options = { label: label, title: title };
 		$dom = this._toolbarFactory.getToolbarContainer( $dom );
 		$dom.on(
 			'addtoolbaradd.addtoolbar',

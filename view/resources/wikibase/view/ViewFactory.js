@@ -306,11 +306,11 @@
 
 	SELF.prototype._getAdderWithStartEditing = function( startEditingCallback ) {
 		var structureEditorFactory = this._structureEditorFactory;
-		return function( doAdd, $dom, label ) {
+		return function( doAdd, $dom, label, title ) {
 			var newDoAdd = function() {
 				return startEditingCallback().then( doAdd );
 			};
-			return structureEditorFactory.getAdder( newDoAdd, $dom, label );
+			return structureEditorFactory.getAdder( newDoAdd, $dom, label, title );
 		};
 	};
 

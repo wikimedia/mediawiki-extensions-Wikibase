@@ -123,7 +123,11 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 			$containerWrapper = mw.wbTemplate( 'wikibase-toolbar-wrapper', '' ).appendTo( this.element );
 		}
 
-		this._statementAdder = this.options.getAdder( this.enterNewItem.bind( this ), $containerWrapper );
+		this._statementAdder = this.options.getAdder( 
+				this.enterNewItem.bind( this ),
+				$containerWrapper,
+				mw.msg( 'wikibase-statementlistview-add' ),
+				mw.msg( 'wikibase-statementlistview-add-tooltip' ) );
 	},
 
 	/**
