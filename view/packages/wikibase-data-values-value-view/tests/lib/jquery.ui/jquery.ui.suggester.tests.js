@@ -17,6 +17,7 @@
 	 * Factory creating a jQuery.ui.suggester widget suitable for testing.
 	 *
 	 * @param {Object} [options]
+	 * @return {jQuery}
 	 */
 	var newTestSuggester = function( options ) {
 		options = $.extend( {

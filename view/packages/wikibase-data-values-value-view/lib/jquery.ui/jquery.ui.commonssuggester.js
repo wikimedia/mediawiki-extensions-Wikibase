@@ -14,6 +14,14 @@
 	 * @constructor
 	 */
 	$.widget( 'ui.commonssuggester', $.ui.suggester, {
+
+		/**
+		 * @see jQuery.ui.suggester.options
+		 */
+		options: {
+			ajax: $.ajax
+		},
+
 		/**
 		 * @inheritdoc
 		 * @protected
@@ -37,7 +45,7 @@
 			return function( term ) {
 				var deferred = $.Deferred();
 
-				$.ajax( {
+				self.options.ajax( {
 					url: 'https://commons.wikimedia.org/w/api.php',
 					dataType: 'jsonp',
 					data: {
