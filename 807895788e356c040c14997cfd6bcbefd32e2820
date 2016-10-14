@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e97535f_85626405",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-14T06:14:27Z",
+      "side": 1,
+      "message": "personally I\u0027d use $db-\u003emakeList( [cond1, cond2], LIST_OR/LIST_AND) to avoid having literal SQL and not having to deal with pairing brackets etc",
+      "revId": "807895788e356c040c14997cfd6bcbefd32e2820",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
