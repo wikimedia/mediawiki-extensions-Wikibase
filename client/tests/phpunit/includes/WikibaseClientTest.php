@@ -157,6 +157,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 			Language::factory( 'en' ),
 			new DataTypeDefinitions( array() ),
 			new EntityTypeDefinitions( array() ),
+			[],
 			$this->getSiteStore()
 		);
 
