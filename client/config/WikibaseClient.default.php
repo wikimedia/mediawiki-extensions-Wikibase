@@ -212,6 +212,8 @@ return call_user_func( function() {
 				'zh-tw', 'zu'
 			],
 		],
+
+		'foreignRepositories' => [],
 	];
 
 	// Some defaults depend on information not available at this time.
