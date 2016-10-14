@@ -154,9 +154,9 @@ final class WikibaseClient {
 	private $languageFallbackChainFactory = null;
 
 	/**
-	 * @var ClientStore|null
+	 * @var ClientStore[]
 	 */
-	private $store = null;
+	private $store = [];
 
 	/**
 	 * @var StringNormalizer|null
@@ -227,6 +227,16 @@ final class WikibaseClient {
 	 * @var PropertyOrderProvider|null
 	 */
 	private $propertyOrderProvider = null;
+
+	/**
+	 * @var SettingsArray[]
+	 */
+	private $foreignRepositorySettings = [];
+
+	/**
+	 * @var RepositorySpecificDispatchingServicesFactory|null
+	 */
+	private $repoSpecificServicesFactory = null;
 
 	/**
 	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
@@ -312,6 +322,7 @@ final class WikibaseClient {
 	 * @param Language $contentLanguage
 	 * @param DataTypeDefinitions $dataTypeDefinitions
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
+	 * @param string[] $foreignRepositorySettings
 	 * @param SiteStore|null $siteStore
 	 */
 	public function __construct(
@@ -319,12 +330,14 @@ final class WikibaseClient {
 		Language $contentLanguage,
 		DataTypeDefinitions $dataTypeDefinitions,
 		EntityTypeDefinitions $entityTypeDefinitions,
+		array $foreignRepositorySettings,
 		SiteStore $siteStore = null
 	) {
 		$this->settings = $settings;
 		$this->contentLanguage = $contentLanguage;
 		$this->dataTypeDefinitions = $dataTypeDefinitions;
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
+		$this->foreignRepositorySettings = $foreignRepositorySettings;
 		$this->siteStore = $siteStore;
 	}
 
@@ -372,10 +385,72 @@ final class WikibaseClient {
 	}
 
 	/**
+	 * @return RepositorySpecificDispatchingServicesFactory
+	 */
+	private function getRepoSpecificServicesFactory() {
+		if ( $this->repoSpecificServicesFactory === null ) {
+			$this->repoSpecificServicesFactory = new RepositorySpecificDispatchingServicesFactory(
+				[
+					'entityLookups' => $this->getRepoSpecificEntityLookups(),
+					'entityRevisionLookups' => $this->getRepoSpecificEntityRevisionLookups(),
+					'termLookups' => $this->getRepoSpecificTermLookups(),
+				],
+				$this->getEntityIdParser()
+			);
+		}
+		return $this->repoSpecificServicesFactory;
+	}
+
+	/**
+	 * @return EntityLookup[]
+	 */
+	private function getRepoSpecificEntityLookups() {
+		$entityLookups = [ '' => $this->getEntityLookupForRepo( '' ) ];
+		$foreignRepoNames = array_keys( $this->foreignRepositorySettings );
+		foreach ( $foreignRepoNames as $repoName ) {
+			$entityLookups[$repoName] = $this->getEntityLookupForRepo( $repoName );
+		}
+		return $entityLookups;
+	}
+
+	/**
+	 * @return EntityLookup[]
+	 */
+	private function getRepoSpecificEntityRevisionLookups() {
+		$lookups = [ '' => $this->getStore( '' )->getEntityRevisionLookup() ];
+		$foreignRepoNames = array_keys( $this->foreignRepositorySettings );
+		foreach ( $foreignRepoNames as $repoName ) {
+			$lookups[$repoName] = $this->getStore( $repoName )->getEntityRevisionLookup();
+		}
+		return $lookups;
+	}
+
+	/**
+	 * @return TermLookup[]
+	 */
+	private function getRepoSpecificTermLookups() {
+		$termLookups = [ '' => $this->getBufferingTermLookupForRepo( '' ) ];
+		$foreignRepoNames = array_keys( $this->foreignRepositorySettings );
+		foreach ( $foreignRepoNames as $repoName ) {
+			$termLookups[$repoName] = $this->getBufferingTermLookupForRepo( $repoName );
+		}
+		return $termLookups;
+	}
+
+	/**
 	 * @return EntityLookup
 	 */
 	private function getEntityLookup() {
-		return $this->getStore()->getEntityLookup();
+		return $this->getRepoSpecificServicesFactory()->getEntityLookup();
+	}
+
+	/**
+	 * @param string $repoName
+	 *
+	 * @return EntityLookup
+	 */
+	private function getEntityLookupForRepo( $repoName ) {
+		return $this->getStore( $repoName )->getEntityLookup();
 	}
 
 	/**
@@ -395,15 +470,23 @@ final class WikibaseClient {
 	/**
 	 * @return BufferingTermLookup
 	 */
-	public function getBufferingTermLookup() {
+	private function getBufferingTermLookup() {
 		if ( !$this->termLookup ) {
-			$this->termLookup = new BufferingTermLookup(
-				$this->getStore()->getTermIndex(),
-				1000 // @todo: configure buffer size
-			);
+			$this->termLookup = $this->getRepoSpecificServicesFactory()->getTermLookup();
 		}
 
 		return $this->termLookup;
+	}
+
+	/**
+	 * @param string $repoName
+	 * @return BufferingTermLookup
+	 */
+	private function getBufferingTermLookupForRepo( $repoName ) {
+		return new BufferingTermLookup(
+			$this->getStore( $repoName )->getTermIndex(),
+			1000 // @todo: configure buffer size
+		);
 	}
 
 	/**
@@ -494,20 +577,24 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * Returns an instance of the default store.
+	 * Returns an instance of the store for the given repository.
 	 *
 	 * @since 0.1
+	 *
+	 * @param string $repoName empty string means return default local store
 	 *
 	 * @throws Exception
 	 * @return ClientStore
 	 */
-	public function getStore() {
-		if ( $this->store === null ) {
+	public function getStore( $repoName = '' ) {
+		if ( !isset( $this->store[$repoName] ) ) {
 			// NOTE: $repoDatabase is null per default, meaning no direct access to the repo's
 			// database. If $repoDatabase is false, the local wiki IS the repository. Otherwise,
 			// $repoDatabase needs to be a logical database name that LBFactory understands.
-			$repoDatabase = $this->settings->getSetting( 'repoDatabase' );
-			$this->store = new DirectSqlStore(
+			$repoDatabase = $repoName === ''
+				? $this->settings->getSetting( 'repoDatabase' )
+				: $this->foreignRepositorySettings[$repoName]->getSetting( 'repoDatabase' );
+			$this->store[$repoName] = new DirectSqlStore(
 				$this->getEntityChangeFactory(),
 				$this->getEntityContentDataCodec(),
 				$this->getEntityIdParser(),
@@ -516,8 +603,7 @@ final class WikibaseClient {
 				$this->contentLanguage->getCode()
 			);
 		}
-
-		return $this->store;
+		return $this->store[$repoName];
 	}
 
 	/**
@@ -534,7 +620,8 @@ final class WikibaseClient {
 			throw new LogicException( 'Overriding the store instance is only supported in test mode' );
 		}
 
-		$this->store = $store;
+		// TODO: make it not only override the local store
+		$this->store[''] = $store;
 	}
 
 	/**
@@ -612,6 +699,11 @@ final class WikibaseClient {
 
 		$settings = new SettingsArray( $wgWBClientSettings );
 
+		$foreignRepoSettings = [];
+		foreach ( $settings->getSetting( 'foreignRepositories' ) as $repoName => $repoSettings ) {
+			$foreignRepoSettings[$repoName] = new SettingsArray( $repoSettings );
+		}
+
 		return new self(
 			$settings,
 			$wgContLang,
@@ -619,7 +711,8 @@ final class WikibaseClient {
 				$dataTypeDefinitions,
 				$settings->getSetting( 'disabledDataTypes' )
 			),
-			new EntityTypeDefinitions( $entityTypeDefinitions )
+			new EntityTypeDefinitions( $entityTypeDefinitions ),
+			$foreignRepoSettings
 		);
 	}
 
@@ -1150,7 +1243,7 @@ final class WikibaseClient {
 	 */
 	private function getChangeRunCoalescer() {
 		return new ChangeRunCoalescer(
-			$this->getStore()->getEntityRevisionLookup(),
+			$this->getRepoSpecificServicesFactory()->getEntityRevisionLookup(),
 			$this->getEntityChangeFactory(),
 			$this->settings->getSetting( 'siteGlobalID' )
 		);
