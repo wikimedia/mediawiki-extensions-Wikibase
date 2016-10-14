@@ -1,4 +1,4 @@
-( function( wb, $ ) {
+( function( mw, wb, $ ) {
 	'use strict';
 
 	var PARENT = $.ui.TemplatedWidget;
@@ -74,7 +74,10 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 
 		this.element.statementgrouplabelscroll();
 
-		this._statementGroupAdder = this.options.getAdder( this.enterNewItem.bind( this ), this.element );
+		this._statementGroupAdder = this.options.getAdder( this.enterNewItem.bind( this ),
+				this.element,
+				mw.msg( 'wikibase-statementgrouplistview-add' ),
+				mw.msg( 'wikibase-statementgrouplistview-add-tooltip' ) );
 	},
 
 	/**
@@ -236,4 +239,4 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 	}
 } );
 
-}( wikibase, jQuery ) );
+}( mediaWiki, wikibase, jQuery ) );
