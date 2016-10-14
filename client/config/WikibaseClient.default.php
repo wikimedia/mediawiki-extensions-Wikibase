@@ -214,6 +214,8 @@ return call_user_func( function() {
 				'zh-tw', 'zu'
 			],
 		],
+
+		'foreignRepositories' => [],
 	];
 
 	// Some defaults depend on information not available at this time.
@@ -328,6 +330,10 @@ return call_user_func( function() {
 		$otherProjectsSitesProvider = WikibaseClient::getDefaultInstance()->getOtherProjectsSitesProvider();
 		return $otherProjectsSitesProvider->getOtherProjectsSiteIds( $settings->getSetting( 'siteLinkGroups' ) );
 	};
+
+	$defaults['repositorySpecificServiceWiringFiles'] = [
+		__DIR__ . '/../includes/RepositorySpecificServiceWiring.php',
+	];
 
 	return $defaults;
 } );

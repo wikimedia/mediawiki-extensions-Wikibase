@@ -14,6 +14,7 @@ use DataValues\UnknownValue;
 use Deserializers\Deserializer;
 use Deserializers\DispatchingDeserializer;
 use Exception;
+use HashConfig;
 use Hooks;
 use Http;
 use JobQueueGroup;
@@ -39,6 +40,7 @@ use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFact
 use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
+use Wikibase\Client\Store\DispatchingServiceStore;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
@@ -154,7 +156,7 @@ final class WikibaseClient {
 	private $languageFallbackChainFactory = null;
 
 	/**
-	 * @var ClientStore|null
+	 * @var ClientStore
 	 */
 	private $store = null;
 
@@ -494,7 +496,7 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * Returns an instance of the default store.
+	 * Returns an instance of the store for the given repository.
 	 *
 	 * @since 0.1
 	 *
@@ -503,22 +505,41 @@ final class WikibaseClient {
 	 */
 	public function getStore() {
 		if ( $this->store === null ) {
-			// NOTE: $repoDatabase is null per default, meaning no direct access to the repo's
-			// database. If $repoDatabase is false, the local wiki IS the repository. Otherwise,
-			// $repoDatabase needs to be a logical database name that LBFactory understands.
-			$repoDatabase = $this->settings->getSetting( 'repoDatabase' );
-			$this->store = new DirectSqlStore(
-				$this->getEntityChangeFactory(),
-				$this->getEntityContentDataCodec(),
-				$this->getEntityIdParser(),
-				$this->getEntityIdComposer(),
-				$this->getEntityNamespaceLookup(),
-				$repoDatabase,
-				$this->contentLanguage->getCode()
+			$this->store = new DispatchingServiceStore(
+				$this->getSettings(),
+				new RepositorySpecificServices(
+					$this,
+					// TODO: TBC
+					new HashConfig( [
+						'ServiceWiringFiles' => $this->settings->getSetting( 'repositorySpecificServiceWiringFiles' ),
+						'ForeignRepositorySettings' => $this->settings->getSetting( 'foreignRepositories' ),
+					] )
+				),
+				$this->getDirectSqlStore()
 			);
 		}
 
 		return $this->store;
+	}
+
+	/**
+	 * DO NOT USE: only to inject to DispatchingServiceStore so it can use not yet implemented services from
+	 * DirestSqlStore (otherwise all explodes)
+	 */
+	private function getDirectSqlStore() {
+		// NOTE: $repoDatabase is null per default, meaning no direct access to the repo's
+		// database. If $repoDatabase is false, the local wiki IS the repository. Otherwise,
+		// $repoDatabase needs to be a logical database name that LBFactory understands.
+		$repoDatabase = $this->settings->getSetting( 'repoDatabase' );
+		return new DirectSqlStore(
+			$this->getEntityChangeFactory(),
+			$this->getEntityContentDataCodec(),
+			$this->getEntityIdParser(),
+			$this->getEntityIdComposer(),
+			$this->getEntityNamespaceLookup(),
+			$repoDatabase,
+			$this->contentLanguage->getCode()
+		);
 	}
 
 	/**

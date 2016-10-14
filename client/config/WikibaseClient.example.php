@@ -126,3 +126,9 @@ if ( false ) {
 	];
 
 }
+
+$wgWBClientSettings['foreignRepositories'] = [
+	/*'foo' => [
+		'repoDatabase' => 'foodb',
+	],*/
+];
