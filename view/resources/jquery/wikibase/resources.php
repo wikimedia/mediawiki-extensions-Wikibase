@@ -71,6 +71,10 @@ return call_user_func( function() {
 				'jquery.wikibase.listview',
 				'wikibase.datamodel.StatementGroupSet',
 			),
+			'messages' => array(
+				'wikibase-statementgrouplistview-add',
+				'wikibase-statementgrouplistview-add-tooltip',
+			),
 		),
 
 		'jquery.wikibase.statementgroupview' => $moduleTemplate + array(
@@ -94,6 +98,10 @@ return call_user_func( function() {
 				'jquery.ui.widget',
 				'jquery.wikibase.listview',
 				'wikibase.datamodel.StatementList',
+			),
+			'messages' => array(
+					'wikibase-statementlistview-add',
+					'wikibase-statementlistview-add-tooltip',
 			),
 		),
 
