@@ -100,6 +100,9 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;otherProjectsLinksByDefault: Whether to show links to other projects per default. If not set, the links can be enabled as a beta feature (see '''otherProjectsLinksBeta''').
 ;otherProjectsLinksBeta: If this is set to true links to other projects will be available as beta feature, enabling every user to turn them on/off if wanted. (Only applies if other project links aren't enabled per default and the BetaFeatures extension is installed)
 ;propertyOrderUrl: URL to use for retrieving the property order used for sorting properties by property ID. Will be ignored if set to null.
+;foreignRepositories: TODO: expand this if/when more settings are added! An associative array mapping foreign repository names to settings relevant to the particular repository. Repository settings is an associative array containing the following keys:
+:;'repoDatabase': value should be a symbolic database name,
+:;'prefixMapping': value should a prefix mapping array, see also: docs/foreign-entity-ids.wiki in the DataModel component.
 
 === Expert Settings ===
 ;injectRecentChanges: Whether changes on the repository should be injected into this wiki's recent changes table, so they show up on watchlists, etc. Requires the <code>dispatchChanges.php</code> script to run, and this wiki to be listed in the <code>localClientDatabases</code> setting on the repository.

@@ -14,8 +14,10 @@ use DataValues\UnknownValue;
 use Deserializers\Deserializer;
 use Deserializers\DispatchingDeserializer;
 use Exception;
+use HashConfig;
 use Hooks;
 use Http;
+use InvalidArgumentException;
 use JobQueueGroup;
 use Language;
 use LogicException;
@@ -154,9 +156,9 @@ final class WikibaseClient {
 	private $languageFallbackChainFactory = null;
 
 	/**
-	 * @var ClientStore|null
+	 * @var ClientStore[]
 	 */
-	private $store = null;
+	private $store = [];
 
 	/**
 	 * @var StringNormalizer|null
@@ -227,6 +229,11 @@ final class WikibaseClient {
 	 * @var PropertyOrderProvider|null
 	 */
 	private $propertyOrderProvider = null;
+
+	/**
+	 * @var RepositorySpecificServices|null
+	 */
+	private $repositorySpecificServices = null;
 
 	/**
 	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
@@ -326,6 +333,15 @@ final class WikibaseClient {
 		$this->dataTypeDefinitions = $dataTypeDefinitions;
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
 		$this->siteStore = $siteStore;
+
+		$this->repositorySpecificServices = new RepositorySpecificServices(
+			$this,
+			// TODO: TBC
+			new HashConfig( [
+				'ServiceWiringFiles' => $this->settings->getSetting( 'repositorySpecificServiceWiringFiles' ),
+				'ForeignRepositorySettings' => $this->settings->getSetting( 'foreignRepositories' ),
+			] )
+		);
 	}
 
 	/**
@@ -375,7 +391,7 @@ final class WikibaseClient {
 	 * @return EntityLookup
 	 */
 	private function getEntityLookup() {
-		return $this->getStore()->getEntityLookup();
+		return $this->repositorySpecificServices->getEntityLookup();
 	}
 
 	/**
@@ -494,20 +510,32 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * Returns an instance of the default store.
+	 * Returns an instance of the store for the given repository.
 	 *
 	 * @since 0.1
+	 *
+	 * @param string $repoName empty string means return default local store
 	 *
 	 * @throws Exception
 	 * @return ClientStore
 	 */
-	public function getStore() {
-		if ( $this->store === null ) {
+	public function getStore( $repoName = '' ) {
+		if ( !isset( $this->store[$repoName] ) ) {
 			// NOTE: $repoDatabase is null per default, meaning no direct access to the repo's
 			// database. If $repoDatabase is false, the local wiki IS the repository. Otherwise,
 			// $repoDatabase needs to be a logical database name that LBFactory understands.
 			$repoDatabase = $this->settings->getSetting( 'repoDatabase' );
-			$this->store = new DirectSqlStore(
+			if ( $repoName !== '' ) {
+				$foreignRepoSettings = $this->settings->getSetting( 'foreignRepositories' );
+				if ( !array_key_exists( $repoName, $foreignRepoSettings ) ) {
+					throw new InvalidArgumentException( 'Unknown foreign repository: ' . $repoName );
+				}
+				if ( !array_key_exists( 'repoDatabase', $foreignRepoSettings[$repoName] ) ) {
+					throw new InvalidArgumentException( 'No database defined for repo: ' . $repoName );
+				}
+				$repoDatabase = $foreignRepoSettings[$repoName]['repoDatabase'];
+			}
+			$this->store[$repoName] = new DirectSqlStore(
 				$this->getEntityChangeFactory(),
 				$this->getEntityContentDataCodec(),
 				$this->getEntityIdParser(),
@@ -516,8 +544,7 @@ final class WikibaseClient {
 				$this->contentLanguage->getCode()
 			);
 		}
-
-		return $this->store;
+		return $this->store[$repoName];
 	}
 
 	/**
@@ -534,7 +561,8 @@ final class WikibaseClient {
 			throw new LogicException( 'Overriding the store instance is only supported in test mode' );
 		}
 
-		$this->store = $store;
+		// TODO: make it not only override the local store
+		$this->store[''] = $store;
 	}
 
 	/**
@@ -1150,7 +1178,7 @@ final class WikibaseClient {
 	 */
 	private function getChangeRunCoalescer() {
 		return new ChangeRunCoalescer(
-			$this->getStore()->getEntityRevisionLookup(),
+			$this->repositorySpecificServices->getEntityRevisionLookup(),
 			$this->getEntityChangeFactory(),
 			$this->settings->getSetting( 'siteGlobalID' )
 		);
