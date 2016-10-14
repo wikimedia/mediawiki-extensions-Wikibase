@@ -319,6 +319,7 @@ class DirectSqlStore implements ClientStore {
 		$rawLookup = new WikiPageEntityRevisionLookup(
 			$this->contentCodec,
 			$metaDataFetcher,
+			$this->entityIdParser,
 			$this->repoWiki
 		);
 

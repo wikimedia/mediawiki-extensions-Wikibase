@@ -80,6 +80,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		return new WikiPageEntityRevisionLookup(
 			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
 			new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup() ),
+			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
 			false
 		);
 	}
@@ -116,6 +117,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		$lookup = new WikiPageEntityRevisionLookup(
 			$entityContentDataCodec,
 			new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup() ),
+			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
 			false
 		);
 
@@ -146,6 +148,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		$lookup = new WikiPageEntityRevisionLookup(
 			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
 			$metaDataLookup,
+			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
 			false
 		);
 

@@ -7,6 +7,7 @@ use MWContentSerializationException;
 use Revision;
 use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\EntityRevision;
@@ -35,13 +36,20 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	private $entityMetaDataAccessor;
 
 	/**
+	 * @var EntityIdParser
+	 */
+	private $idParser;
+
+	/**
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param WikiPageEntityMetaDataAccessor $entityMetaDataAccessor
+	 * @param EntityIdParser $idParser used to create an EntityId with a foreign repository prefix stripped
 	 * @param string|bool $wiki The name of the wiki database to use (use false for the local wiki)
 	 */
 	public function __construct(
 		EntityContentDataCodec $contentCodec,
 		WikiPageEntityMetaDataAccessor $entityMetaDataAccessor,
+		EntityIdParser $idParser,
 		$wiki = false
 	) {
 		parent::__construct( $wiki );
@@ -49,6 +57,8 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		$this->contentCodec = $contentCodec;
 
 		$this->entityMetaDataAccessor = $entityMetaDataAccessor;
+
+		$this->idParser = $idParser;
 	}
 
 	/**
@@ -75,14 +85,19 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': Looking up entity ' . $entityId
 			. " (revision $revisionId)." );
 
+		$entityIdForDbLoad = $entityId;
+		if ( $entityId->isForeign() ) {
+			$entityIdForDbLoad = $this->idParser->parse( $entityId->getLocalPart() );
+		}
+
 		/** @var EntityRevision $entityRevision */
 		$entityRevision = null;
 
 		if ( $revisionId > 0 ) {
-			$row = $this->entityMetaDataAccessor->loadRevisionInformationByRevisionId( $entityId, $revisionId, $mode );
+			$row = $this->entityMetaDataAccessor->loadRevisionInformationByRevisionId( $entityIdForDbLoad, $revisionId, $mode );
 		} else {
-			$rows = $this->entityMetaDataAccessor->loadRevisionInformation( array( $entityId ), $mode );
-			$row = $rows[$entityId->getSerialization()];
+			$rows = $this->entityMetaDataAccessor->loadRevisionInformation( array( $entityIdForDbLoad ), $mode );
+			$row = $rows[$entityIdForDbLoad->getSerialization()];
 		}
 
 		if ( $row ) {
@@ -137,6 +152,10 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * @return int|false
 	 */
 	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_SLAVE ) {
+		if ( $entityId->isForeign() ) {
+			$entityId = $this->idParser->parse( $entityId->getLocalPart() );
+		}
+
 		$rows = $this->entityMetaDataAccessor->loadRevisionInformation( array( $entityId ), $mode );
 		$row = $rows[$entityId->getSerialization()];
 
