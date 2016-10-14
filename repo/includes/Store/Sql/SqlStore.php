@@ -440,6 +440,7 @@ class SqlStore implements Store {
 		$rawLookup = new WikiPageEntityRevisionLookup(
 			$this->contentCodec,
 			$metaDataFetcher,
+			$this->entityIdParser,
 			false
 		);
 
