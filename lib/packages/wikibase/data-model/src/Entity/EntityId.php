@@ -8,7 +8,6 @@ use Serializable;
 
 /**
  * @since 0.5
- * Constructor non-public since 1.0
  * Abstract since 2.0
  *
  * @license GPL-2.0+
