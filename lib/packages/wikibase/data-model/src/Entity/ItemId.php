@@ -9,7 +9,6 @@ use RuntimeException;
  * @since 0.5
  *
  * @license GPL-2.0+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class ItemId extends EntityId implements Int32EntityId {
 

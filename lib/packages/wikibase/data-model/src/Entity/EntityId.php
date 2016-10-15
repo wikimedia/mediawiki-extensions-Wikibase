@@ -12,7 +12,6 @@ use Serializable;
  * Abstract since 2.0
  *
  * @license GPL-2.0+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 abstract class EntityId implements Comparable, Serializable {
 
