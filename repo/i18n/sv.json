@@ -91,6 +91,7 @@
 	"wikibase-claimview-snak-tooltip": "Ange ett värde som motsvarar egenskapen \"$1\". Om egenskapen inte har några angivna värden eller det riktiga värdet är okänt kan du välja ett alternativ för att ange ett anpassat värdestyp genom att klicka på ikonen innan inmatningsfältet.",
 	"wikibase-claimview-snak-new-tooltip": "Efter du har angivit en egenskap kan du ange ett motsvarande värde. Om egenskapen inte har några angivna värden eller det riktiga värdet är okänt kan du välja ett alternativ för att ange ett anpassat värdestyp genom att klicka på ikonen innan inmatningsfältet.",
 	"wikibase-statementview-rank-preferred": "Föredragen rang",
+	"wikibase-statementview-rank-tooltip-preferred": "Giltigt och uppdaterat värde",
 	"wikibase-statementview-rank-normal": "Normal rang",
 	"wikibase-statementview-rank-deprecated": "Orekommenderad rang",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|referens|referenser}}",

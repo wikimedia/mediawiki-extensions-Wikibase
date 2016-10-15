@@ -7,7 +7,8 @@
 			"Marmase",
 			"Mirzali",
 			"Kumkumuk",
-			"Gırd"
+			"Gırd",
+			"1917 Ekim Devrimi"
 		]
 	},
 	"tooltip-t-wikibase": "Dola data de eleqeyın çirs gre",
@@ -46,6 +47,6 @@
 	"wikibase-pageswithbadges-submit": "Pelan bımocne",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} naskerdışê obcey",
 	"wikibase-pageinfo-entity-id-none": "Çıniyo",
-	"wikibase-otherprojects": "Proceyanê binan de",
+	"wikibase-otherprojects": "Zederna Procey",
 	"wikibase-otherprojects-beta-message": "Kıştê proceyanê binan"
 }

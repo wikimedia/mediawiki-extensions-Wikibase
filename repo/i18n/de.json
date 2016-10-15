@@ -108,6 +108,7 @@
 	"wikibase-statementview-rank-normal": "Normaler Rang",
 	"wikibase-statementview-rank-tooltip-normal": "Gültiger Wert, jedoch vermutlich historisch",
 	"wikibase-statementview-rank-deprecated": "Missbilligter Rang",
+	"wikibase-statementview-rank-tooltip-deprecated": "Der Wert ist dafür bekannt, dass er falsch ist, aber er wird für gewöhnlich allgemein anerkannt.",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|Fundstelle|Fundstellen}}",
 	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Ein Beleg wurde|$1 Belege wurden}} noch nicht gespeichert",
 	"wikibase-snakview-property-input-placeholder": "Eigenschaft",
