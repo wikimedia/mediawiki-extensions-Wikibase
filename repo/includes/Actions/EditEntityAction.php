@@ -484,7 +484,7 @@ class EditEntityAction extends ViewEntityAction {
 		$old = $this->msg( 'currentrev' )->parse();
 		$new = $this->msg( 'yourtext' )->parse(); //XXX: better message?
 
-		$this->getOutput()->addHTML( Html::openElement( 'tr', array( 'valign' => 'top' ) ) );
+		$this->getOutput()->addHTML( Html::openElement( 'tr', array( 'style' => 'vertical-align: top;' ) ) );
 		$this->getOutput()->addHTML(
 			Html::rawElement( 'td', array( 'colspan' => '2' ),
 				Html::rawElement( 'div', array( 'id' => 'mw-diff-otitle1' ), $old )
