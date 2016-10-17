@@ -7,6 +7,7 @@
 	},
 	"valueview-expert-advancedadjustments": "configurações avançadas",
 	"valueview-expert-emptyvalue-empty": "vazio",
+	"valueview-expert-globecoordinateinput-nullprecision": "não especificado",
 	"valueview-expert-globecoordinateinput-customprecision": "especial ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregoriano",
 	"valueview-expert-timevalue-calendar-julian": "Juliano",

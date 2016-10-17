@@ -11,6 +11,7 @@
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Zpracování hodnot datového typu „$1“ není dosud podporováno.",
 	"valueview-expert-emptyvalue-empty": "prázdná",
 	"valueview-expert-globecoordinateinput-precision": "Přesnost:",
+	"valueview-expert-globecoordinateinput-nullprecision": "neuvedená",
 	"valueview-expert-globecoordinateinput-customprecision": "speciální ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "gregoriánský",
 	"valueview-expert-timevalue-calendar-julian": "juliánský",

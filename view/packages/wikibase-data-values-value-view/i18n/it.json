@@ -10,6 +10,7 @@
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "La gestione dei valori per il tipo di dati \"$1\" non è ancora supportata.",
 	"valueview-expert-emptyvalue-empty": "vuoto",
 	"valueview-expert-globecoordinateinput-precision": "Precisione:",
+	"valueview-expert-globecoordinateinput-nullprecision": "non specificato",
 	"valueview-expert-globecoordinateinput-customprecision": "speciale ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregoriano",
 	"valueview-expert-timevalue-calendar-julian": "Giuliano",

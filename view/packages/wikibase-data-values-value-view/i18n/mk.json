@@ -10,6 +10,7 @@
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Работата со вредности за податочниот тип „$1“ сè уште не е поддржана.",
 	"valueview-expert-emptyvalue-empty": "празно",
 	"valueview-expert-globecoordinateinput-precision": "Уточнетост:",
+	"valueview-expert-globecoordinateinput-nullprecision": "неукажано",
 	"valueview-expert-globecoordinateinput-customprecision": "посебна ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "грегоријански",
 	"valueview-expert-timevalue-calendar-julian": "јулијански",

@@ -7,6 +7,7 @@
 	"valueview-expert-advancedadjustments": "Erweidert Upassungen",
 	"valueview-expert-emptyvalue-empty": "eidel",
 	"valueview-expert-globecoordinateinput-precision": "Präzisioun:",
+	"valueview-expert-globecoordinateinput-nullprecision": "net uginn",
 	"valueview-expert-globecoordinateinput-customprecision": "Spezial ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregorianesch",
 	"valueview-expert-timevalue-calendar-julian": "Julianesch",

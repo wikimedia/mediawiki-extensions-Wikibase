@@ -11,6 +11,7 @@
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "A manipulación de valores para o tipo de datos \"$1\" aínda non está soportada.",
 	"valueview-expert-emptyvalue-empty": "baleiro",
 	"valueview-expert-globecoordinateinput-precision": "Precisión:",
+	"valueview-expert-globecoordinateinput-nullprecision": "non especificado",
 	"valueview-expert-globecoordinateinput-customprecision": "especial ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregoriano",
 	"valueview-expert-timevalue-calendar-julian": "Xuliano",

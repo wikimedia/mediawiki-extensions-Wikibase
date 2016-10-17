@@ -18,6 +18,7 @@
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "La gestion des valeurs pour le type de données « $1 » n’est pas encore prise en charge.",
 	"valueview-expert-emptyvalue-empty": "vide",
 	"valueview-expert-globecoordinateinput-precision": "Précision :",
+	"valueview-expert-globecoordinateinput-nullprecision": "non spécifié",
 	"valueview-expert-globecoordinateinput-customprecision": "spécial ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "Grégorien",
 	"valueview-expert-timevalue-calendar-julian": "Julien",
