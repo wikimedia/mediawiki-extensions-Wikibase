@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"VASANTH S.N.",
-			"Omshivaprakash"
+			"Omshivaprakash",
+			"Shushruth"
 		]
 	},
 	"wikibase-comment-update": "{{WBREPONAME}} ವಸ್ತು ಬದಲಾಗಿದೆ",
@@ -17,5 +18,5 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ಸಂಪಾದನೆ",
 	"wikibase-unconnectedpages-submit": "ಹೋಗು",
 	"wikibase-pageinfo-entity-id-none": "ಯಾವುದೂ ಇಲ್ಲ",
-	"wikibase-otherprojects": "ಇತರೆ ಯೋಜನೆಗಳು"
+	"wikibase-otherprojects": "ಇತರೆ ಯೋಜನೆಗಳಲ್ಲಿ"
 }

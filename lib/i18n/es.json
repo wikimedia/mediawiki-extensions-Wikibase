@@ -77,7 +77,7 @@
 	"wikibase-validator-bad-value-type": "Tipo de valor incorrecto $1, se esperaba $2",
 	"wikibase-validator-bad-data-type": "Tipo de dato erróneo: $1",
 	"wikibase-validator-bad-url": "Las URL no pueden contener determinados caracteres tales como espacios y corchetes: $1",
-	"wikibase-validator-url-scheme-missing": "A esta URL le falta un esquema como \"https://\": $1",
+	"wikibase-validator-url-scheme-missing": "A este URL le falta un esquema como «https://»: $1",
 	"wikibase-validator-bad-url-scheme": "Esquema de URL no admitido: $1",
 	"wikibase-validator-unknown-unit": "Unidad desconocida: $1",
 	"wikibase-validator-not-allowed": "Valor ilegal: $1",

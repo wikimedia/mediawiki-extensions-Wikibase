@@ -68,6 +68,7 @@
 	"wikibase-validator-bad-value-type": "Dåligt värdetyp $1, förväntade $2",
 	"wikibase-validator-bad-data-type": "Dålig datatyp: $1",
 	"wikibase-validator-bad-url": "Felformaterad URL: $1",
+	"wikibase-validator-url-scheme-missing": "Webbdadressen saknar ett protokoll som \"https://\": $1",
 	"wikibase-validator-bad-url-scheme": "Ej stött URL-schema: $1",
 	"wikibase-validator-unknown-unit": "Okänd enhet: $1",
 	"wikibase-validator-not-allowed": "Otillåtet värde: $1",

@@ -74,7 +74,7 @@
 	"wikibase-validator-bad-value": "Zawartość danych jest uszkodzona: $1",
 	"wikibase-validator-bad-value-type": "Błędny typ wartości $1, oczekiwano $2",
 	"wikibase-validator-bad-data-type": "Zły typ danych: $1",
-	"wikibase-validator-bad-url": "Nieprawidłowy URL: $1",
+	"wikibase-validator-bad-url": "Adresy URL nie mogą zawierać pewne znaków, takich jak spacje i nawiasy kwadratowe: $1",
 	"wikibase-validator-bad-url-scheme": "Nieobsługiwany schemat adresu URL: $1",
 	"wikibase-validator-unknown-unit": "Nieznana jednostka: $1",
 	"wikibase-validator-not-allowed": "Niepoprawna wartość: $1",
