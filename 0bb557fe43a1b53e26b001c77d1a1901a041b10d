@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e97535f_0e91c852",
+        "filename": "repo/includes/Specials/SpecialEntitiesWithoutPageFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-17T12:59:51Z",
+      "side": 1,
+      "message": "This must not contain anything besides \"item\"/ \"property\". Further entity types are not supported, not even numeric ones.",
+      "revId": "0bb557fe43a1b53e26b001c77d1a1901a041b10d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
