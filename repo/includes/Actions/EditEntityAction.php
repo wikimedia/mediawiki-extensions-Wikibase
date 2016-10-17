@@ -46,13 +46,10 @@ class EditEntityAction extends ViewEntityAction {
 	private $entityDiffVisualizer;
 
 	/**
-	 * @var SummaryFormatter
-	 */
-	private $summaryFormatter;
-
-	/**
+	 * @see Action::__construct
+	 *
 	 * @param Page $page
-	 * @param IContextSource $context
+	 * @param IContextSource|null $context
 	 */
 	public function __construct( Page $page, IContextSource $context = null ) {
 		parent::__construct( $page, $context );
@@ -66,9 +63,6 @@ class EditEntityAction extends ViewEntityAction {
 		) );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-		$this->summaryFormatter = $wikibaseRepo->getSummaryFormatter();
-
 		$termLookup = new EntityRetrievingTermLookup( $wikibaseRepo->getEntityLookup() );
 		$labelDescriptionLookup = new LanguageLabelDescriptionLookup( $termLookup, $languageCode );
 		$htmlFormatterFactory = $wikibaseRepo->getEntityIdHtmlLinkFormatterFactory();
@@ -366,50 +360,6 @@ class EditEntityAction extends ViewEntityAction {
 		$meta = $this->getOutput()->getProperty( 'wikibase-meta-tags' );
 
 		return isset( $meta['title'] ) ? $meta['title'] : $this->getTitle()->getPrefixedText();
-	}
-
-	/**
-	 * Returns an edit summary representing a restore-operation defined by the three given revisions.
-	 *
-	 * @since 0.1
-	 *
-	 * @param Revision $olderRevision
-	 * @param string $userSummary User provided summary
-	 *
-	 * @return string
-	 */
-	protected function makeRestoreSummary( Revision $olderRevision, $userSummary = '' ) {
-		$id = $olderRevision->getId();
-		$username = $olderRevision->getUserText();
-
-		$summary = new Summary;
-		$summary->setAction( 'restore' );
-		$summary->addAutoCommentArgs( $id, $username );
-		$summary->setUserSummary( $userSummary );
-
-		return $this->summaryFormatter->formatSummary( $summary );
-	}
-
-	/**
-	 * Returns an edit summary representing an undo-operation defined by the three given revisions.
-	 *
-	 * @since 0.1
-	 *
-	 * @param Revision $newerRevision
-	 * @param string $userSummary User provided summary
-	 *
-	 * @return string
-	 */
-	protected function makeUndoSummary( Revision $newerRevision, $userSummary = '' ) {
-		$id = $newerRevision->getId();
-		$username = $newerRevision->getUserText();
-
-		$summary = new Summary;
-		$summary->setAction( 'undo' );
-		$summary->addAutoCommentArgs( $id, $username );
-		$summary->setUserSummary( $userSummary );
-
-		return $this->summaryFormatter->formatSummary( $summary );
 	}
 
 	/**
