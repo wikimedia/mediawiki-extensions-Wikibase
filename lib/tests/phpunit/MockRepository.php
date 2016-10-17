@@ -8,6 +8,7 @@ use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
+use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -239,6 +240,7 @@ class MockRepository implements
 	 * @param int|string $timestamp
 	 * @param User|string|null $user
 	 *
+	 * @throws StorageException
 	 * @return EntityRevision
 	 */
 	public function putEntity( EntityDocument $entity, $revisionId = 0, $timestamp = 0, $user = null ) {
@@ -299,6 +301,8 @@ class MockRepository implements
 	 * @param EntityRedirect $redirect
 	 * @param int $revisionId
 	 * @param string|int $timestamp
+	 *
+	 * @throws StorageException
 	 */
 	public function putRedirect( EntityRedirect $redirect, $revisionId = 0, $timestamp = 0 ) {
 		$key = $redirect->getEntityId()->getSerialization();
@@ -619,15 +623,17 @@ class MockRepository implements
 		return isset( $this->watchlist[ $user->getName() ][ $entityId->getSerialization() ] );
 	}
 
+	/**
+	 * @param EntityId $id
+	 *
+	 * @throws StorageException
+	 */
 	private function updateMaxNumericId( EntityId $id ) {
-		if ( method_exists( $id, 'getNumericId' ) ) {
-			$numericId = $id->getNumericId();
-		} else {
-			// FIXME: This is a generic implementation of getNumericId for entities without.
-			$numericId = (int)preg_replace( '/^\D+/', '', $id->getSerialization() );
+		if ( !( $id instanceof Int32EntityId ) ) {
+			throw new StorageException( 'This class does not support non-numeric entity types' );
 		}
 
-		$this->maxEntityId = max( $this->maxEntityId, $numericId );
+		$this->maxEntityId = max( $this->maxEntityId, $id->getNumericId() );
 	}
 
 	/**
