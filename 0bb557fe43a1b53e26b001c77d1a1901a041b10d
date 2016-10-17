@@ -16,6 +16,24 @@
       "revId": "0bb557fe43a1b53e26b001c77d1a1901a041b10d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e97535f_aec65c4c",
+        "filename": "repo/includes/Specials/SpecialEntitiesWithoutPageFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-17T13:32:17Z",
+      "side": 1,
+      "message": "Multiple issues with this:\n* For now this is simply the old code as it was before. You can not block this patch with a -1 while your patch was merged. We can also revert the whole chain of patches if you prefer.\n* TermSqlIndex does support all numeric entity types.\n* If there is a configuration somewhere that restricts the wb_terms table to specific entity types, the same configuration must be used here. Please point me to the relevant configuration so I can fix this patch.",
+      "parentUuid": "0e97535f_0e91c852",
+      "revId": "0bb557fe43a1b53e26b001c77d1a1901a041b10d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
