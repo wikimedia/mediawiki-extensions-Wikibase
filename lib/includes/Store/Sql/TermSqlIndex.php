@@ -9,6 +9,7 @@ use MWException;
 use Traversable;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\AliasGroupList;
@@ -173,8 +174,9 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return TermIndexEntry[]
 	 */
 	public function getEntityTerms( EntityDocument $entity ) {
-		// FIXME: Introduce and use an Int32EntityId interface.
-		if ( !method_exists( $entity->getId(), 'getNumericId' ) ) {
+		$id = $entity->getId();
+
+		if ( !( $id instanceof Int32EntityId ) ) {
 			wfWarn( 'Entity type "' . $entity->getType() . '" does not implement getNumericId' );
 			return [];
 		}
@@ -182,7 +184,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$terms = [];
 		$extraFields = [
 			'entityType' => $entity->getType(),
-			'entityId' => $entity->getId()->getNumericId(),
+			'entityId' => $id->getNumericId(),
 		];
 
 		if ( $entity instanceof DescriptionsProvider ) {
