@@ -111,18 +111,8 @@ class SubmitEntityAction extends EditEntityAction {
 		 * @var Revision $latestRevision
 		 */
 		list( $olderRevision, $newerRevision, $latestRevision ) = $revisions->getValue();
-
-		/**
-		 * @var EntityContent $latestContent
-		 * @var EntityContent $olderContent
-		 * @var EntityContent $newerContent
-		 */
-		$olderContent = $olderRevision->getContent();
-		$newerContent = $newerRevision->getContent();
+		$patchedContent = $this->getPatchContent( $olderRevision, $newerRevision, $latestRevision );
 		$latestContent = $latestRevision->getContent();
-
-		$diff = $newerContent->getDiff( $olderContent );
-		$patchedContent = $latestContent->getPatchedCopy( $diff );
 
 		if ( $patchedContent->equals( $latestContent ) ) {
 			$status = Status::newGood();
@@ -145,6 +135,35 @@ class SubmitEntityAction extends EditEntityAction {
 		} else {
 			$this->showUndoErrorPage( $status );
 		}
+	}
+
+	/**
+	 * @param Revision $olderRevision
+	 * @param Revision $newerRevision
+	 * @param Revision $latestRevision
+	 *
+	 * @return EntityContent
+	 */
+	private function getPatchContent(
+		Revision $olderRevision,
+		Revision $newerRevision,
+		Revision $latestRevision
+	) {
+		/**
+		 * @var EntityContent $olderContent
+		 * @var EntityContent $newerContent
+		 * @var EntityContent $latestContent
+		 */
+		$olderContent = $olderRevision->getContent();
+		$newerContent = $newerRevision->getContent();
+		$latestContent = $latestRevision->getContent();
+
+		// Skip diffing and patching when possible for performance reasons
+		if ( $newerRevision->getId() === $latestRevision->getId() ) {
+			return $olderContent;
+		}
+
+		return $latestContent->getPatchedCopy( $newerContent->getDiff( $olderContent ) );
 	}
 
 	/**
