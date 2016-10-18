@@ -120,6 +120,7 @@
 	"wikibase-validator-label-conflict": "Property $3 already has label \"$1\" associated with language code $2.",
 	"wikibase-validator-label-with-description-conflict": "Item $3 already has label \"$1\" associated with language code $2, using the same description text.",
 	"wikibase-validator-label-no-entityid": "The label must not be a valid entity ID.",
+	"wikibase-validator-illegal-file-chars": "File names are not allowed to contain characters like colons or slashes. Only paste the file name after \"File:\", please.",
 	"wikibase-validator-no-such-media": "The file \"$1\" does not exist on [https://commons.wikimedia.org/ Wikimedia Commons].",
 	"wikibase-itemlink": "$1 $2",
 	"wikibase-itemlink-id-wrapper": "($1)",
