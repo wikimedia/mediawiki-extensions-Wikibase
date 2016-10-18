@@ -66,6 +66,7 @@
 	"wikibase-aliases-input-help-message": "हा कलमसंच शोधणे सोपे जावे म्हणून,आपण पर्यायी नावे टाकू शकता.",
 	"wikibase-propertypage-datatype": "कलम प्रकार",
 	"wikibase-statementview-rank-preferred": "आवडलेले पद",
+	"wikibase-statementview-rank-tooltip-preferred": "वैध व अद्यतनित किंमत",
 	"wikibase-statementview-rank-normal": "सामान्य पद",
 	"wikibase-statementview-rank-deprecated": "नापसंत श्रेणी",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|संदर्भ}}",
