@@ -121,6 +121,8 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 
 	/**
 	 * Returns whether the widget is in edit mode.
+	 *
+	 * @return {boolean}
 	 */
 	isInEditMode: function() {
 		return this.element.hasClass( 'wb-edit' );

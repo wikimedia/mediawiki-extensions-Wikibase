@@ -9,6 +9,7 @@
 	 * Factory creating a jQuery.wikibase.pagesuggester widget suitable for testing.
 	 *
 	 * @param {Object} [options]
+	 * @return {jQuery}
 	 */
 	var newTestPageSuggester = function( options ) {
 		return $( '<input />' )
