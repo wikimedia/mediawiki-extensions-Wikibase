@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cea0dbb8_c3a868db",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-18T11:54:16Z",
+      "side": 1,
+      "message": "Per consistency this could be \"subscribers\"",
+      "range": {
+        "startLine": 534,
+        "startChar": 49,
+        "endLine": 534,
+        "endChar": 62
+      },
+      "revId": "dd828dba63c3193a6fe258fd279bb4ce07b25a39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_23ba741f",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-18T11:54:16Z",
+      "side": 1,
+      "message": "This message is not used. api-help-param-continue is used instead",
+      "revId": "dd828dba63c3193a6fe258fd279bb4ce07b25a39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_63975c94",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-18T11:54:16Z",
+      "side": 1,
+      "message": "oh, and this should rather be action\u003dlist\u0026query\u003dwbsubscribers, same in the other example",
+      "range": {
+        "startLine": 257,
+        "startChar": 4,
+        "endLine": 257,
+        "endChar": 24
+      },
+      "revId": "dd828dba63c3193a6fe258fd279bb4ce07b25a39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
