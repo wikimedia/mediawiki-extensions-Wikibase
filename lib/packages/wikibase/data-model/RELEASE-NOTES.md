@@ -1,5 +1,14 @@
 # Wikibase DataModel release notes
 
+## Version 6.2.0 (2016-10-14)
+* Raised minimum PHP version to 5.5
+* Added basic support for foreign EntityIds
+	* Added `isForeign`, `getRepository` and `getLocalPart` to `EntityId`
+	* The constructor of `EntityId` was made public
+	* Added static `EntityId::splitSerialization` and `EntityId::joinSerialization`
+	* `getNumericId` throws an exception for foreign EntityIds
+	* Added documentation for foreign EntityIds
+
 ## Version 6.1.0 (2016-07-15)
 
 * Added optional index parameter to `Statement::addStatement`.
