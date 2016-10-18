@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cea0dbb8_802a56d6",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.siteselector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-18T09:04:07Z",
+      "side": 1,
+      "message": "This is actually a wikibase.Site object",
+      "revId": "6967618096b8d1b10293d3f42bcc35d4882608d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
