@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cea0dbb8_a67572ca",
+        "filename": "repo/includes/Store/Sql/SqlEntitiesWithoutTermFinder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-18T17:02:32Z",
+      "side": 1,
+      "message": "I once suggested an \u0027entity-id-prefix\u0027 setting instead of the current \u0027entity-id-composer\u0027. It would be a string containing the letter \"Q\" for Items, \"P\" for properties and so on. It looks like the big issue with this patch (hard-coding internal knowledge about entity types) would be resolved with this.\n\nWe could even do this programmatically, without a new setting: Iterate all configured entity types. Simply try to call EntityIdComposer::composeEntityId( $entityType, 1 ) for each entity type. If it returns an EntityId, get the serialization and remove the \"1\". Done. What\u0027s left is the prefix you need to strip here.\n\nThis could still be made compatible with the SUBSTR() suggestion from below, assuming using SUBSTR() is possible.",
+      "revId": "36f0c00611ef005eafff47badc709ef65942e126",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_693a9dc2",
+        "filename": "repo/includes/Store/Sql/SqlEntitiesWithoutTermFinder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-18T17:02:32Z",
+      "side": 1,
+      "message": "Is there a special reason for this field alias?",
+      "revId": "36f0c00611ef005eafff47badc709ef65942e126",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_a6433267",
+        "filename": "repo/includes/Store/Sql/SqlEntitiesWithoutTermFinder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-18T17:02:32Z",
+      "side": 1,
+      "message": "Why the double quotes? I believe the do literally nothing, because this is already a string.\n\nThe \"\u0027\u0027\" also looks a bit awkward. This could be replaced with $dbr-\u003eaddQuotes( \u0027\u0027 ).\n\nProbably most importantly: We know the currently configured prefixes are single characters. I believe a SUBSTR(page_title, 2) would be much more trivial and possibly faster. Compatible with both MySQL and SQLite (according to the manuals).\n\nOr the other way around: prepend the prefix to term_entity_id before doing the comparison. Which approach is faster depends, I believe, on factors like the relative size of both tables.",
+      "revId": "36f0c00611ef005eafff47badc709ef65942e126",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_4930f9e5",
+        "filename": "repo/includes/Store/Sql/SqlEntitiesWithoutTermFinder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-18T17:02:32Z",
+      "side": 1,
+      "message": "string[]|null?\n\n@return missing.",
+      "range": {
+        "startLine": 168,
+        "startChar": 11,
+        "endLine": 168,
+        "endChar": 16
+      },
+      "revId": "36f0c00611ef005eafff47badc709ef65942e126",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
