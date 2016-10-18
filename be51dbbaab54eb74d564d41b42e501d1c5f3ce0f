@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cea0dbb8_e068021c",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-18T09:16:18Z",
+      "side": 1,
+      "message": "These screenshots are vastly outdated and hardly relevant anymore. Also \"puts the user interface into edit mode for an additional element of type statement\" might be to technical here… maybe rather say that we\u0027re about to add a new statement with the existing property id?",
+      "revId": "be51dbbaab54eb74d564d41b42e501d1c5f3ce0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_8071360e",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementgrouplistview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-18T09:16:18Z",
+      "side": 1,
+      "message": "Why two additional tabs? We usually use just one AFAIK.",
+      "revId": "be51dbbaab54eb74d564d41b42e501d1c5f3ce0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
