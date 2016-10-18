@@ -207,7 +207,7 @@ class ValidatorBuilders {
 
 		$validators[] = new DataFieldValidator(
 			'language',
-			new MembershipValidator( $this->contentLanguages->getLanguages() )
+			new MembershipValidator( $this->contentLanguages->getLanguages(), 'not-a-language' )
 		);
 
 		$topValidator = new DataValueValidator(

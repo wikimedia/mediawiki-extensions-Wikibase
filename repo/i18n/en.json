@@ -121,6 +121,7 @@
 	"wikibase-validator-label-with-description-conflict": "Item $3 already has label \"$1\" associated with language code $2, using the same description text.",
 	"wikibase-validator-label-no-entityid": "The label must not be a valid entity ID.",
 	"wikibase-validator-no-such-media": "The file \"$1\" does not exist on [https://commons.wikimedia.org/ Wikimedia Commons].",
+	"wikibase-validator-not-a-language": "\"$1\" is not a known language code.",
 	"wikibase-itemlink": "$1 $2",
 	"wikibase-itemlink-id-wrapper": "($1)",
 	"wikibase-itemlink-userlang-wrapper": "&nbsp;($1: $2)",
