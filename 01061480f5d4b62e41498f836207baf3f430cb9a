@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cea0dbb8_6044f21c",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-10-18T06:43:45Z",
+      "side": 1,
+      "message": "suggest to also update the warning message accordingly",
+      "revId": "01061480f5d4b62e41498f836207baf3f430cb9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_204eea3c",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-10-18T06:43:45Z",
+      "side": 1,
+      "message": "should we now document somewhere that StorageException is thrown?",
+      "revId": "01061480f5d4b62e41498f836207baf3f430cb9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
