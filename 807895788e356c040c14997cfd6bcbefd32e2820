@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "cea0dbb8_40856e9e",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-18T10:55:39Z",
+      "side": 1,
+      "message": "Not sure what is the convention in Wikibase but maybe this should be called QuerySubscribers (done like this in core, also per analogy to QuerySearchEntities)",
+      "range": {
+        "startLine": 24,
+        "startChar": 6,
+        "endLine": 24,
+        "endChar": 17
+      },
+      "revId": "807895788e356c040c14997cfd6bcbefd32e2820",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_a01afa7c",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-18T10:55:39Z",
+      "side": 1,
+      "message": "this prefix is used by list\u003dwbsearch (QuerySearchEntites).\nShouldn\u0027t prefixes be unique across API?",
+      "range": {
+        "startLine": 48,
+        "startChar": 82,
+        "endLine": 48,
+        "endChar": 85
+      },
+      "revId": "807895788e356c040c14997cfd6bcbefd32e2820",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e97535f_85626405",
         "filename": "repo/includes/Api/Subscribers.php",
         "patchSetId": 4
@@ -13,6 +59,46 @@
       "writtenOn": "2016-10-14T06:14:27Z",
       "side": 1,
       "message": "personally I\u0027d use $db-\u003emakeList( [cond1, cond2], LIST_OR/LIST_AND) to avoid having literal SQL and not having to deal with pairing brackets etc",
+      "revId": "807895788e356c040c14997cfd6bcbefd32e2820",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_8029369d",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-18T10:55:39Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be wbsentities?",
+      "range": {
+        "startLine": 258,
+        "startChar": 25,
+        "endLine": 258,
+        "endChar": 37
+      },
+      "revId": "807895788e356c040c14997cfd6bcbefd32e2820",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_602632cb",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-18T10:55:39Z",
+      "side": 1,
+      "message": "wbsentities and wbsprops?",
       "revId": "807895788e356c040c14997cfd6bcbefd32e2820",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -54,6 +140,24 @@
     },
     {
       "key": {
+        "uuid": "cea0dbb8_c0473e7b",
+        "filename": "repo/tests/phpunit/includes/Api/SubscribersTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-18T10:55:39Z",
+      "side": 1,
+      "message": "Not sure if we understood each other. When you want to have a table cleaned after each test, you can add it to this-\u003etablesUsed.\nResetting db tables happens after running the test (unless you don\u0027t use temporary tables for tests) but you\u0027d still have a \"clean\" setup for every test case (first test runs on newly created table any way, right?). So by adding wb_changes_subscription you don\u0027t need to run manual deletes below. Just checked it locally and it looks like it works as I said. Did you experience something different?\n\nThat all said: as you apparently want the same contents of wb_changes_subscription for each test, what you could also do is skipping tablesUsed but insert stuff to db in addDBDataOnce (they\u0027ll be added before first test and nothing will be deleted). Or do you want to delete and re-add them before each test?",
+      "parentUuid": "0e97535f_763398f4",
+      "revId": "807895788e356c040c14997cfd6bcbefd32e2820",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e97535f_8b10355d",
         "filename": "repo/tests/phpunit/includes/Api/SubscribersTest.php",
         "patchSetId": 4
@@ -83,6 +187,24 @@
       "side": 1,
       "message": "It is in most of API tests. I have no preferences.",
       "parentUuid": "0e97535f_8b10355d",
+      "revId": "807895788e356c040c14997cfd6bcbefd32e2820",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_6082b2ab",
+        "filename": "repo/tests/phpunit/includes/Api/SubscribersTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-18T10:55:39Z",
+      "side": 1,
+      "message": "I must have been still sleeping. So this is about the unexpected case when API returns an error. So it might be OK to special failure for such case(s).",
+      "parentUuid": "0e97535f_362d108c",
       "revId": "807895788e356c040c14997cfd6bcbefd32e2820",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
