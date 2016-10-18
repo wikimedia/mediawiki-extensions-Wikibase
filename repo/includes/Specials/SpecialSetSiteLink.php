@@ -458,7 +458,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$pageName = $site->normalizePageName( $pageName );
 
 			if ( $pageName === false ) {
-				$status->fatal( 'wikibase-error-ui-no-external-page' );
+				$status->fatal( 'wikibase-error-ui-no-external-page', $siteId, $this->page );
 				return $status;
 			}
 		}
