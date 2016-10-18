@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "cea0dbb8_405c4e4e",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-10-18T10:45:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cea0dbb8_e068021c",
+      "revId": "be51dbbaab54eb74d564d41b42e501d1c5f3ce0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cea0dbb8_8071360e",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementgrouplistview.js",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2016-10-18T09:16:18Z",
       "side": 1,
       "message": "Why two additional tabs? We usually use just one AFAIK.",
+      "revId": "be51dbbaab54eb74d564d41b42e501d1c5f3ce0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_605f5245",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementgrouplistview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-10-18T10:45:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cea0dbb8_8071360e",
       "revId": "be51dbbaab54eb74d564d41b42e501d1c5f3ce0f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
