@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cea0dbb8_95b3ae4c",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-10-19T00:58:02Z",
+      "side": 1,
+      "message": "not in scope of this patch, but it would be nice if the param here in Special:NewItem was $this-\u003esiteId (more clear to be a string identifier and not a Site object, and not to be confused with $site above)",
+      "revId": "339ede3c0f6bac1a8154033c9babfbbcc20d0811",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
