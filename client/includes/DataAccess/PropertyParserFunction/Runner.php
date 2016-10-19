@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
- * Runner for the {{#property}} parser function.
+ * Runner for the {{#property|…}} and {{#statements|…}} parser functions.
  *
  * @since 0.4
  *
@@ -23,6 +23,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @author Daniel Kinzler
  * @author Liangent < liangent@gmail.com >
  * @author Marius Hoch < hoo@online.de >
+ * @author Thiemo Mättig
  */
 class Runner {
 
@@ -84,13 +85,15 @@ class Runner {
 	 * @param Parser $parser
 	 * @param PPFrame $frame
 	 * @param array $args
+	 * @param string $type Either "escaped-plaintext" or "rich-wikitext".
 	 *
-	 * @return array Wikitext
+	 * @return array Wikitext in element 0, flags in named elements
 	 */
 	public function runPropertyParserFunction(
 		Parser $parser,
 		PPFrame $frame,
-		array $args
+		array $args,
+		$type = 'escaped-plaintext'
 	) {
 		$propertyLabelOrId = $frame->expand( $args[0] );
 		unset( $args[0] );
@@ -103,7 +106,7 @@ class Runner {
 			return $this->buildResult( '' );
 		}
 
-		$renderer = $this->rendererFactory->newRendererFromParser( $parser );
+		$renderer = $this->rendererFactory->newRendererFromParser( $parser, $type );
 		$rendered = $renderer->render( $entityId, $propertyLabelOrId );
 		$result = $this->buildResult( $rendered );
 
@@ -163,32 +166,44 @@ class Runner {
 	}
 
 	/**
-	 * @param string $rendered
+	 * @param string $rendered Wikitext
 	 *
-	 * @return array
+	 * @return array Wikitext in element 0, flags in named elements
 	 */
 	private function buildResult( $rendered ) {
-		$result = array(
+		return [
 			$rendered,
 			'noparse' => false, // parse wikitext
 			'nowiki' => false,  // formatters take care of escaping as needed
-		);
-
-		return $result;
+		];
 	}
 
 	/**
-	 * @since 0.4
+	 * @since 0.5
 	 *
 	 * @param Parser $parser
 	 * @param PPFrame $frame
 	 * @param array $args
 	 *
-	 * @return array
+	 * @return array Wikitext in element 0, flags in named elements
 	 */
 	public static function renderEscapedPlainText( Parser $parser, PPFrame $frame, array $args ) {
 		$runner = WikibaseClient::getDefaultInstance()->getPropertyParserFunctionRunner();
 		return $runner->runPropertyParserFunction( $parser, $frame, $args );
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @param Parser $parser
+	 * @param PPFrame $frame
+	 * @param array $args
+	 *
+	 * @return array Wikitext in element 0, flags in named elements
+	 */
+	public static function renderRichWikitext( Parser $parser, PPFrame $frame, array $args ) {
+		$runner = WikibaseClient::getDefaultInstance()->getPropertyParserFunctionRunner();
+		return $runner->runPropertyParserFunction( $parser, $frame, $args, 'rich-wikitext' );
 	}
 
 }
