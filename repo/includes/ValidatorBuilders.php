@@ -168,7 +168,11 @@ class ValidatorBuilders {
 		// Must contain a non-empty file name with no nasty characters (see documentation of
 		// $wgLegalTitleChars as well as $wgIllegalFileChars). File name extensions with digits
 		// (e.g. ".jp2") are possible, as well as two characters (e.g. ".ai").
-		$validators[] = new RegexValidator( '/^[^#\/:[\\\\\]{|}]+\.\w{2,}$/u' );
+		$validators[] = new RegexValidator(
+			'/^[^#\/:[\\\\\]{|}]+\.\w{2,}$/u',
+			false,
+			'illegal-file-chars'
+		);
 
 		if ( $checkExistence === 'checkExistence' ) {
 			$validators[] = new CommonsMediaExistsValidator( $this->mediaFileNameLookup );
