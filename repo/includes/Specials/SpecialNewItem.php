@@ -81,11 +81,11 @@ class SpecialNewItem extends SpecialNewEntity {
 
 			$page = $site->normalizePageName( $this->page );
 			if ( $page === false ) {
-				$status->error( 'wikibase-newitem-no-external-page' );
+				$status->error( 'wikibase-newitem-no-external-page', $this->site, $this->page );
 				return $status;
 			}
 
-			$item->getSiteLinkList()->addNewSiteLink( $site->getGlobalId(), $page );
+			$item->getSiteLinkList()->addNewSiteLink( $this->site, $page );
 		}
 
 		return $status;

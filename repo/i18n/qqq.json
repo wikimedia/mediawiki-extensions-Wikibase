@@ -205,7 +205,7 @@
 	"wikibase-newitem-fieldset": "Title for the fieldset on the CreateItem special page.\n{{Identical|Create new item}}",
 	"wikibase-newitem-site": "Label for the site-textfield holding the site id of the first linked page to add to the new item.",
 	"wikibase-newitem-page": "Label for the page-textfield holding the page name of the first linked page to add to the new item",
-	"wikibase-newitem-no-external-page": "Error message shown when a user tries to add a page that does not exist on the website choosen.",
+	"wikibase-newitem-no-external-page": "Error message shown when a user tries to add a page that does not exist on the site chosen.\n\nParameters:\n* $1 - global site ID, known to be valid\n* $2 - requested page name that could not be found on the site\n{{Identical|wikibase-error-ui-no-external-page}}",
 	"wikibase-newitem-not-recognized-siteid": "Error message shown when a user tries to add a link to a site with an unknown identifier.\n\nSee also:\n* {{msg-mw|Wikibase-api-not-recognized-siteid}}",
 	"wikibase-newitem-not-recognized-language": "Error message shown when a user tries to create an item with an unknown language code.\n\nSee also:\n* {{msg-mw|Wikibase-api-not-recognized-language}}",
 	"wikibase-newentity-language": "Label for the \"lang\" dropdown menu holding the language in which the label, description and aliases of the new item should be typed.\n{{Identical|Language}}",

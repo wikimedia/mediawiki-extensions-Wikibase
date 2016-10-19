@@ -174,7 +174,7 @@
 	"wikibase-newitem-fieldset": "Create a new item",
 	"wikibase-newitem-site": "Site of the first linked page",
 	"wikibase-newitem-page": "Name of the first linked page",
-	"wikibase-newitem-no-external-page": "The specified page could not be found on the corresponding site.",
+	"wikibase-newitem-no-external-page": "A page \"$2\" could not be found on \"$1\".",
 	"wikibase-newitem-not-recognized-siteid": "The provided site identifier was not recognized.",
 	"wikibase-newitem-not-recognized-language": "The supplied language code was not recognized.",
 	"wikibase-newentity-language": "Language:",
