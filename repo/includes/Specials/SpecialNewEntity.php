@@ -227,12 +227,12 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 *
 	 * @since 0.1
 	 *
-	 * @param EntityDocument &$entity
+	 * @param EntityDocument $entity
 	 *
 	 * @throws InvalidArgumentException
 	 * @return Status
 	 */
-	protected function modifyEntity( EntityDocument &$entity ) {
+	protected function modifyEntity( EntityDocument $entity ) {
 		if ( !( $entity instanceof FingerprintProvider ) ) {
 			throw new InvalidArgumentException( '$entity must be a FingerprintProvider' );
 		}
