@@ -31,6 +31,7 @@ class ParserFunctionRegistrantTest extends PHPUnit_Framework_TestCase {
 				[
 					'noexternallanglinks',
 					'property',
+					'statements',
 				]
 			],
 		];
