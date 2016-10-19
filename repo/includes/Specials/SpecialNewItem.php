@@ -20,12 +20,12 @@ class SpecialNewItem extends SpecialNewEntity {
 	/**
 	 * @var string|null
 	 */
-	private $site;
+	private $siteId;
 
 	/**
 	 * @var string|null
 	 */
-	private $page;
+	private $pageName;
 
 	/**
 	 * @since 0.1
@@ -44,8 +44,15 @@ class SpecialNewItem extends SpecialNewEntity {
 	protected function prepareArguments() {
 		parent::prepareArguments();
 
-		$this->site = $this->getRequest()->getVal( 'site' );
-		$this->page = $this->getRequest()->getVal( 'page' );
+		$this->siteId = $this->getRequest()->getVal( 'site' );
+		$this->pageName = $this->getRequest()->getVal( 'page' );
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function isSiteLinkProvided() {
+		return $this->siteId !== null && $this->pageName !== null;
 	}
 
 	/**
@@ -65,27 +72,29 @@ class SpecialNewItem extends SpecialNewEntity {
 	 * @throws InvalidArgumentException
 	 * @return Status
 	 */
-	protected function modifyEntity( EntityDocument &$item ) {
+	protected function modifyEntity( EntityDocument $item ) {
 		$status = parent::modifyEntity( $item );
 
-		if ( $this->site !== null && $this->page !== null ) {
+		if ( $this->isSiteLinkProvided() ) {
 			if ( !( $item instanceof Item ) ) {
 				throw new InvalidArgumentException( 'Unexpected entity type' );
 			}
 
-			$site = $this->siteStore->getSite( $this->site );
+			$site = $this->siteStore->getSite( $this->siteId );
+
 			if ( $site === null ) {
 				$status->error( 'wikibase-newitem-not-recognized-siteid' );
 				return $status;
 			}
 
-			$page = $site->normalizePageName( $this->page );
-			if ( $page === false ) {
-				$status->error( 'wikibase-newitem-no-external-page', $this->site, $this->page );
+			$normalizedPageName = $site->normalizePageName( $this->pageName );
+
+			if ( $normalizedPageName === false ) {
+				$status->error( 'wikibase-newitem-no-external-page', $this->siteId, $this->pageName );
 				return $status;
 			}
 
-			$item->getSiteLinkList()->addNewSiteLink( $this->site, $page );
+			$item->getSiteLinkList()->addNewSiteLink( $this->siteId, $normalizedPageName );
 		}
 
 		return $status;
@@ -94,30 +103,30 @@ class SpecialNewItem extends SpecialNewEntity {
 	/**
 	 * @see SpecialNewEntity::additionalFormElements
 	 *
-	 * @return array
+	 * @return array[]
 	 */
 	protected function additionalFormElements() {
-		if ( $this->site === null || $this->page === null ) {
-			return parent::additionalFormElements();
-		}
-
 		$formDescriptor = parent::additionalFormElements();
-		$formDescriptor['site'] = array(
-			'name' => 'site',
-			'default' => $this->site,
-			'type' => 'text',
-			'id' => 'wb-newitem-site',
-			'readonly' => 'readonly',
-			'label-message' => 'wikibase-newitem-site'
-		);
-		$formDescriptor['page'] = array(
-			'name' => 'page',
-			'default' => $this->page,
-			'type' => 'text',
-			'id' => 'wb-newitem-page',
-			'readonly' => 'readonly',
-			'label-message' => 'wikibase-newitem-page'
-		);
+
+		if ( $this->isSiteLinkProvided() ) {
+			$formDescriptor['site'] = [
+				'name' => 'site',
+				'default' => $this->siteId,
+				'type' => 'text',
+				'id' => 'wb-newitem-site',
+				'readonly' => 'readonly',
+				'label-message' => 'wikibase-newitem-site'
+			];
+
+			$formDescriptor['page'] = [
+				'name' => 'page',
+				'default' => $this->pageName,
+				'type' => 'text',
+				'id' => 'wb-newitem-page',
+				'readonly' => 'readonly',
+				'label-message' => 'wikibase-newitem-page'
+			];
+		}
 
 		return $formDescriptor;
 	}
@@ -134,19 +143,16 @@ class SpecialNewItem extends SpecialNewEntity {
 	/**
 	 * @see SpecialCreateEntity::getWarnings
 	 *
-	 * @return array
+	 * @return string[]
 	 */
 	protected function getWarnings() {
-		$warnings = array();
-
 		if ( $this->getUser()->isAnon() ) {
-			$warnings[] = $this->msg(
-				'wikibase-anonymouseditwarning',
-				$this->msg( 'wikibase-entity-item' )
-			);
+			return [
+				$this->msg( 'wikibase-anonymouseditwarning', $this->msg( 'wikibase-entity-item' ) ),
+			];
 		}
 
-		return $warnings;
+		return [];
 	}
 
 }

@@ -232,7 +232,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 * @throws InvalidArgumentException
 	 * @return Status
 	 */
-	protected function modifyEntity( EntityDocument &$entity ) {
+	protected function modifyEntity( EntityDocument $entity ) {
 		if ( !( $entity instanceof FingerprintProvider ) ) {
 			throw new InvalidArgumentException( '$entity must be a FingerprintProvider' );
 		}

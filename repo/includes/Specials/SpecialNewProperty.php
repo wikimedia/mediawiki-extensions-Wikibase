@@ -70,7 +70,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 	 * @throws InvalidArgumentException
 	 * @return Status
 	 */
-	protected function modifyEntity( EntityDocument &$property ) {
+	protected function modifyEntity( EntityDocument $property ) {
 		$status = parent::modifyEntity( $property );
 
 		if ( $this->dataType !== '' ) {
@@ -88,7 +88,10 @@ class SpecialNewProperty extends SpecialNewEntity {
 		return $status;
 	}
 
-	protected function dataTypeExists() {
+	/**
+	 * @return bool
+	 */
+	private function dataTypeExists() {
 		$dataTypeFactory = WikibaseRepo::getDefaultInstance()->getDataTypeFactory();
 		$ids = $dataTypeFactory->getTypeIds();
 		return in_array( $this->dataType, $ids );
@@ -96,20 +99,22 @@ class SpecialNewProperty extends SpecialNewEntity {
 
 	/**
 	 * @see SpecialNewEntity::additionalFormElements()
+	 *
+	 * @return array[]
 	 */
 	protected function additionalFormElements() {
-		$dataTypeFactory = WikibaseRepo::getDefaultInstance()->getDataTypeFactory();
+		$formDescriptor = parent::additionalFormElements();
 
+		$dataTypeFactory = WikibaseRepo::getDefaultInstance()->getDataTypeFactory();
 		$selector = new DataTypeSelector( $dataTypeFactory->getTypes(), $this->getLanguage()->getCode() );
 
-		$formDescriptor = parent::additionalFormElements();
-		$formDescriptor['datatype'] = array(
+		$formDescriptor['datatype'] = [
 			'name' => 'datatype',
 			'type' => 'select',
 			'options' => array_flip( $selector->getOptionsArray() ),
 			'id' => 'wb-newproperty-datatype',
 			'label-message' => 'wikibase-newproperty-datatype'
-		);
+		];
 
 		return $formDescriptor;
 	}
@@ -122,19 +127,21 @@ class SpecialNewProperty extends SpecialNewEntity {
 	}
 
 	/**
-	 * @see SpecialCreateEntity::getWarnings()
+	 * @see SpecialCreateEntity::getWarnings
+	 *
+	 * @return string[]
 	 */
 	protected function getWarnings() {
-		$warnings = array();
-
 		if ( $this->getUser()->isAnon() ) {
-			$warnings[] = $this->msg(
-				'wikibase-anonymouseditwarning',
-				$this->msg( 'wikibase-entity-property' )
-			);
+			return [
+				$this->msg(
+					'wikibase-anonymouseditwarning',
+					$this->msg( 'wikibase-entity-property' )
+				),
+			];
 		}
 
-		return $warnings;
+		return [];
 	}
 
 }
