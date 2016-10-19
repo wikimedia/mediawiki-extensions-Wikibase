@@ -18,6 +18,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Thiemo Mättig
  */
 class StatementGroupRendererFactory {
 
@@ -74,27 +75,29 @@ class StatementGroupRendererFactory {
 
 	/**
 	 * @param Parser $parser
+	 * @param string $type Either "escaped-plaintext" or "rich-wikitext".
 	 *
 	 * @return StatementGroupRenderer
 	 */
-	public function newRendererFromParser( Parser $parser ) {
+	public function newRendererFromParser( Parser $parser, $type = 'escaped-plaintext' ) {
 		$usageAccumulator = new ParserOutputUsageAccumulator( $parser->getOutput() );
 
 		if ( $this->allowDataAccessInUserLanguage ) {
 			// Use the user's language.
 			// Note: This splits the parser cache.
 			$targetLanguage = $parser->getOptions()->getUserLangObj();
-			return $this->newLanguageAwareRenderer( $targetLanguage, $usageAccumulator );
+			return $this->newLanguageAwareRenderer( $type, $targetLanguage, $usageAccumulator );
 		} elseif ( $this->useVariants( $parser ) ) {
 			$variants = $parser->getConverterLanguage()->getVariants();
-			return $this->newVariantsAwareRenderer( $variants, $usageAccumulator );
+			return $this->newVariantsAwareRenderer( $type, $variants, $usageAccumulator );
 		} else {
 			$targetLanguage = $parser->getTargetLanguage();
-			return $this->newLanguageAwareRenderer( $targetLanguage, $usageAccumulator );
+			return $this->newLanguageAwareRenderer( $type, $targetLanguage, $usageAccumulator );
 		}
 	}
 
 	/**
+	 * @param string $type
 	 * @param Language $language
 	 * @param UsageAccumulator $usageAccumulator
 	 *
@@ -102,13 +105,21 @@ class StatementGroupRendererFactory {
 	 * @throws MWException
 	 */
 	private function newLanguageAwareRenderer(
+		$type,
 		Language $language,
 		UsageAccumulator $usageAccumulator
 	) {
-		$snakFormatter = $this->dataAccessSnakFormatterFactory->newEscapedPlainTextSnakFormatter(
-			$language,
-			$usageAccumulator
-		);
+		if ( $type === 'rich-wikitext' ) {
+			$snakFormatter = $this->dataAccessSnakFormatterFactory->newRichWikitextSnakFormatter(
+				$language,
+				$usageAccumulator
+			);
+		} else {
+			$snakFormatter = $this->dataAccessSnakFormatterFactory->newEscapedPlainTextSnakFormatter(
+				$language,
+				$usageAccumulator
+			);
+		}
 
 		$entityStatementsRenderer = new StatementTransclusionInteractor(
 			$language,
@@ -125,17 +136,20 @@ class StatementGroupRendererFactory {
 	}
 
 	/**
+	 * @param string $type
 	 * @param string $languageCode
 	 * @param UsageAccumulator $usageAccumulator
 	 *
 	 * @return LanguageAwareRenderer
 	 */
 	private function getLanguageAwareRendererFromCode(
+		$type,
 		$languageCode,
 		UsageAccumulator $usageAccumulator
 	) {
 		if ( !isset( $this->languageAwareRenderers[$languageCode] ) ) {
 			$this->languageAwareRenderers[$languageCode] = $this->newLanguageAwareRenderer(
+				$type,
 				Language::factory( $languageCode ),
 				$usageAccumulator
 			);
@@ -145,12 +159,14 @@ class StatementGroupRendererFactory {
 	}
 
 	/**
+	 * @param string $type
 	 * @param string[] $variants
 	 * @param UsageAccumulator $usageAccumulator
 	 *
 	 * @return VariantsAwareRenderer
 	 */
 	private function newVariantsAwareRenderer(
+		$type,
 		array $variants,
 		UsageAccumulator $usageAccumulator
 	) {
@@ -158,6 +174,7 @@ class StatementGroupRendererFactory {
 
 		foreach ( $variants as $variant ) {
 			$languageAwareRenderers[$variant] = $this->getLanguageAwareRendererFromCode(
+				$type,
 				$variant,
 				$usageAccumulator
 			);
