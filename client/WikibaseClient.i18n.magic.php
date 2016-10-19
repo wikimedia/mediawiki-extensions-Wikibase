@@ -14,6 +14,7 @@ $magicWords = array();
 $magicWords['en'] = array(
 	'noexternallanglinks' => array( 0, 'noexternallanglinks' ),
 	'property' => array( 0, 'property' ),
+	'statementvalues' => array( 0, 'statementvalues' ),
 	'wbreponame' => array( 0, 'wbreponame' ),
 );
 

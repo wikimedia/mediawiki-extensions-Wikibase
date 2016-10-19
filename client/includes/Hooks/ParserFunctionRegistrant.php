@@ -11,6 +11,7 @@ use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Thiemo Mättig
  */
 class ParserFunctionRegistrant {
 
@@ -31,7 +32,7 @@ class ParserFunctionRegistrant {
 	 */
 	public function register( Parser $parser ) {
 		$this->registerNoLangLinkHandler( $parser );
-		$this->registerPropertyParserFunction( $parser );
+		$this->registerParserFunctions( $parser );
 	}
 
 	private function registerNoLangLinkHandler( Parser $parser ) {
@@ -42,7 +43,7 @@ class ParserFunctionRegistrant {
 		);
 	}
 
-	private function registerPropertyParserFunction( Parser $parser ) {
+	private function registerParserFunctions( Parser $parser ) {
 		if ( !$this->allowDataTransclusion ) {
 			return;
 		}
@@ -50,7 +51,15 @@ class ParserFunctionRegistrant {
 		$parser->setFunctionHook(
 			'property',
 			function( Parser $parser, PPFrame $frame, array $args ) {
-				return Runner::render( $parser, $frame, $args );
+				return Runner::property( $parser, $frame, $args );
+			},
+			Parser::SFH_OBJECT_ARGS
+		);
+
+		$parser->setFunctionHook(
+			'statementvalues',
+			function( Parser $parser, PPFrame $frame, array $args ) {
+				return Runner::statementvalues( $parser, $frame, $args );
 			},
 			Parser::SFH_OBJECT_ARGS
 		);
