@@ -97,7 +97,7 @@
 	"wikibase-statementview-rank-preferred": "Preferované postavení",
 	"wikibase-statementview-rank-tooltip-preferred": "Platná a aktuální hodnota",
 	"wikibase-statementview-rank-normal": "Normální postavení",
-	"wikibase-statementview-rank-tooltip-normal": "Platná hodnota, třebaže ne aktuální",
+	"wikibase-statementview-rank-tooltip-normal": "Platná hodnota, třebaže nemusí být aktuální",
 	"wikibase-statementview-rank-deprecated": "Zavržené postavení",
 	"wikibase-statementview-rank-tooltip-deprecated": "Je známo, že hodnota není správná, nicméně bývá/byla za ni považována",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|reference|reference|referencí}}",

@@ -9,5 +9,6 @@
 	"wikibase-comment-update": "{{grammar:genitive|{{WBREPONAME}}}} элементини өскертип каан",
 	"wikibase-dataitem": "элемент",
 	"wikibase-editlinks": "Айтыгны эдери",
-	"wikibase-editlinkstitle": "Дылдар аразының шөлүлгелерин эдер"
+	"wikibase-editlinkstitle": "Дылдар аразының шөлүлгелерин эдер",
+	"wikibase-rc-hide-wikidata-hide": "Чажырар"
 }

@@ -25,7 +25,8 @@
 			"Ядерный Трамвай",
 			"Adam-Yourist",
 			"Mailman",
-			"Lockal"
+			"Lockal",
+			"Irus"
 		]
 	},
 	"wikibase-desc": "Хранилище структурированных данных",
@@ -103,8 +104,11 @@
 	"wikibase-claimview-snak-tooltip": "Введите значение, соответствующее свойству «$1». Если свойство не имеет значения или оно неизвестно, Вы можете выбрать альтернативу указав пользовательское значение, нажав на значок рядом с полем ввода.",
 	"wikibase-claimview-snak-new-tooltip": "После указания свойства можно ввести его значение. Если свойство не имеет значения или текущее значение неизвестно, можно выбрать альтернативу, нажав на значок рядом с полем ввода и выбрав вариант ввода собственного значения.",
 	"wikibase-statementview-rank-preferred": "Предпочтительный ранг",
+	"wikibase-statementview-rank-tooltip-preferred": "Действительную и актуальную стоимость",
 	"wikibase-statementview-rank-normal": "Нормальный ранг",
+	"wikibase-statementview-rank-tooltip-normal": "Допустимое значение, хотя, возможно, историческое",
 	"wikibase-statementview-rank-deprecated": "Нерекомендуемый ранг",
+	"wikibase-statementview-rank-tooltip-deprecated": "Известно, что значение не является правильным, однако, является /, она считает",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|источник|источника|источников}}",
 	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|$1 источник ещё не сохранён|$1 источника ещё не сохранены|$1 источников ещё не сохранёны|1=Источник ещё не сохранён}}",
 	"wikibase-snakview-property-input-placeholder": "свойство",
