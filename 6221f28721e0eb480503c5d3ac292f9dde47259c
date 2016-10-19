@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cea0dbb8_95584e8e",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-19T09:28:50Z",
+      "side": 1,
+      "message": "typo in \"query\u0027",
+      "range": {
+        "startLine": 257,
+        "startChar": 11,
+        "endLine": 257,
+        "endChar": 16
+      },
+      "revId": "6221f28721e0eb480503c5d3ac292f9dde47259c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
