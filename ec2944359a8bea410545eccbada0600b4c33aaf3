@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "cea0dbb8_6c5180dd",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T12:10:15Z",
+      "side": 1,
+      "message": "Should also be changed",
+      "range": {
+        "startLine": 230,
+        "startChar": 26,
+        "endLine": 230,
+        "endChar": 27
+      },
+      "revId": "ec2944359a8bea410545eccbada0600b4c33aaf3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cea0dbb8_6cbd0016",
         "filename": "repo/includes/Specials/SpecialNewProperty.php",
         "patchSetId": 1
@@ -13,6 +36,30 @@
       "writtenOn": "2016-10-20T11:21:35Z",
       "side": 1,
       "message": "I am not sure if it is valid to remove that here since $property is manipulated in the method.\n\nBut I am missing the bigger context so just a remark from my side.",
+      "range": {
+        "startLine": 73,
+        "startChar": 49,
+        "endLine": 73,
+        "endChar": 58
+      },
+      "revId": "ec2944359a8bea410545eccbada0600b4c33aaf3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_0c5f94e9",
+        "filename": "repo/includes/Specials/SpecialNewProperty.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T12:10:15Z",
+      "side": 1,
+      "message": "PHP semantics make this almost equivalent (passing objects by reference and \"by value\"). The only difference is that if it\u0027s passed by value you can\u0027t completely replace the object (but still change the members etc.).\nSee also: https://secure.php.net/manual/en/language.oop5.references.php",
+      "parentUuid": "cea0dbb8_6cbd0016",
       "range": {
         "startLine": 73,
         "startChar": 49,
