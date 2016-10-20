@@ -9,7 +9,10 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
- * Represents a mapping from entity IDs to wiki page titles.
+ * Represents an arbitrary mapping from entity IDs to wiki page titles, with no further guarantees
+ * given. The resulting title does not necessarily represent the page that actually stores the
+ * entity contents.
+ *
  * The mapping could be programmatic, or it could be based on database lookups.
  *
  * @since 0.4
@@ -37,17 +40,5 @@ interface EntityTitleLookup {
 	 * @return Title|null
 	 */
 	public function getTitleForId( EntityId $id );
-
-	/**
-	 * Determines what namespace is suitable for the given type of entities.
-	 *
-	 * @since 0.5
-	 *
-	 * @param string $entityType the entity type to look up, as returned by Entity::getType()
-	 *
-	 * @throws OutOfBoundsException
-	 * @return int the namespace ID for this type
-	 */
-	public function getNamespaceForType( $entityType );
 
 }
