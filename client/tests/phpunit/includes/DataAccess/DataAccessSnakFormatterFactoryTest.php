@@ -2,12 +2,16 @@
 
 namespace Wikibase\Client\Tests\DataAccess;
 
+use DataValues\StringValue;
 use Language;
 use PHPUnit_Framework_TestCase;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\Usage\UsageAccumulator;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
@@ -59,6 +63,13 @@ class DataAccessSnakFormatterFactoryTest extends PHPUnit_Framework_TestCase {
 			->getMock();
 
 		$snakFormatter = $this->getMock( SnakFormatter::class );
+
+		$snakFormatter->expects( $this->any() )
+			->method( 'formatSnak' )
+			->will( $this->returnCallback( function( PropertyValueSnak $snak ) {
+				return $snak->getDataValue()->getValue();
+			} ) );
+
 		$snakFormatter->expects( $this->any() )
 			->method( 'getFormat' )
 			->will( $this->returnValue( $expectedFormat ) );
@@ -82,14 +93,26 @@ class DataAccessSnakFormatterFactoryTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame( SnakFormatter::FORMAT_PLAIN, $snakFormatter->getFormat() );
 	}
 
-	public function testNewRichWikitextSnakFormatter() {
+	public function richWikitextSnakFormatterProvider() {
+		$id = new PropertyId( 'P1' );
+
+		return [
+			[ new PropertyValueSnak( $id, new StringValue( '' ) ), '' ],
+			[ new PropertyValueSnak( $id, new StringValue( '<RAW>' ) ), '<span><RAW></span>' ],
+		];
+	}
+
+	/**
+	 * @dataProvider richWikitextSnakFormatterProvider
+	 */
+	public function testRichWikitextSnakFormatter( Snak $snak, $expected ) {
 		$factory = $this->getDataAccessSnakFormatterFactory( SnakFormatter::FORMAT_WIKI );
 		$snakFormatter = $factory->newRichWikitextSnakFormatter(
 			Language::factory( 'fr' ),
 			$this->getMock( UsageAccumulator::class )
 		);
 
-		$this->assertInstanceOf( SnakFormatter::class, $snakFormatter );
+		$this->assertSame( $expected, $snakFormatter->formatSnak( $snak ) );
 		$this->assertSame( SnakFormatter::FORMAT_WIKI, $snakFormatter->getFormat() );
 	}
 

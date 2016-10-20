@@ -137,7 +137,7 @@ class DataAccessSnakFormatterFactory {
 			SnakFormatter::FORMAT_WIKI,
 			$snakFormatter,
 			function( $str ) {
-				return "<span>$str</span>";
+				return $str === '' ? '' : "<span>$str</span>";
 			}
 		);
 	}
