@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "cea0dbb8_ec15904e",
+        "filename": "client/includes/DataAccess/EntityIdSiteLinkFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-20T14:05:17Z",
+      "side": 1,
+      "message": "There is no Formatter directory in client, and I did not felt creating one would be helpful at this point. Can easily be moved later.",
+      "parentUuid": "cea0dbb8_2c00186d",
+      "revId": "00981976409afa9188b36637a9aebea91ba79df2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cea0dbb8_4cd47cec",
         "filename": "client/includes/DataAccess/EntityIdSiteLinkFormatter.php",
         "patchSetId": 1
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "cea0dbb8_0c21d4ac",
+        "filename": "client/includes/DataAccess/EntityIdSiteLinkFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-20T14:05:17Z",
+      "side": 1,
+      "message": "I will not create more tickets we are never going to tackle. This is fine as long as it is encapsulated nicely. The following patch does improve this further.",
+      "parentUuid": "cea0dbb8_2c2ff8f4",
+      "revId": "00981976409afa9188b36637a9aebea91ba79df2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cea0dbb8_accd4864",
         "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
         "patchSetId": 1
@@ -64,6 +100,24 @@
       "writtenOn": "2016-10-20T13:07:49Z",
       "side": 1,
       "message": "Can also be null.",
+      "revId": "00981976409afa9188b36637a9aebea91ba79df2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_8c2604c8",
+        "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-20T14:05:17Z",
+      "side": 1,
+      "message": "Removed in the next patch.",
+      "parentUuid": "cea0dbb8_accd4864",
       "revId": "00981976409afa9188b36637a9aebea91ba79df2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "cea0dbb8_6c33c00b",
+        "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-20T14:05:17Z",
+      "side": 1,
+      "message": "Removed in the next patch.",
+      "parentUuid": "cea0dbb8_8cca8449",
+      "revId": "00981976409afa9188b36637a9aebea91ba79df2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cea0dbb8_6cd740f3",
         "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
         "patchSetId": 1
@@ -98,6 +170,30 @@
       "writtenOn": "2016-10-20T13:07:49Z",
       "side": 1,
       "message": "s/y/a/",
+      "range": {
+        "startLine": 91,
+        "startChar": 54,
+        "endLine": 91,
+        "endChar": 55
+      },
+      "revId": "00981976409afa9188b36637a9aebea91ba79df2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_2c1c987b",
+        "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-20T14:05:17Z",
+      "side": 1,
+      "message": "Removed in the next patch.",
+      "parentUuid": "cea0dbb8_6cd740f3",
       "range": {
         "startLine": 91,
         "startChar": 54,
