@@ -18,7 +18,6 @@ use Wikibase\Formatters\MonolingualHtmlFormatter;
 use Wikibase\Formatters\MonolingualTextFormatter;
 use Wikibase\Lib\Formatters\EntityIdSiteLinkFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * Low level factory for ValueFormatters for well known data types.
@@ -60,16 +59,6 @@ class WikibaseValueFormatterBuilders {
 	private $entityTitleLookup;
 
 	/**
-	 * @var SiteLinkLookup|null
-	 */
-	private $siteLinkLookup;
-
-	/**
-	 * @var string|null
-	 */
-	private $localSiteId;
-
-	/**
 	 * Unit URIs that represent "unitless" or "one".
 	 *
 	 * @todo: make this configurable
@@ -86,26 +75,20 @@ class WikibaseValueFormatterBuilders {
 	 * @param FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param EntityIdParser $repoItemUriParser
-	 * @param EntityTitleLookup|null $entityTitleLookup Only when used on a repo.
-	 * @param SiteLinkLookup|null $siteLinkLookup Only when used on a client.
-	 * @param string|null $localSiteId Only when used on a client.
+	 * @param EntityTitleLookup|null $entityTitleLookup
 	 */
 	public function __construct(
 		Language $defaultLanguage,
 		FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		LanguageNameLookup $languageNameLookup,
 		EntityIdParser $repoItemUriParser,
-		EntityTitleLookup $entityTitleLookup = null,
-		SiteLinkLookup $siteLinkLookup = null,
-		$localSiteId = null
+		EntityTitleLookup $entityTitleLookup = null
 	) {
 		$this->defaultLanguage = $defaultLanguage;
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->repoItemUriParser = $repoItemUriParser;
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->siteLinkLookup = $siteLinkLookup;
-		$this->localSiteId = $localSiteId;
 	}
 
 	private function newPlainEntityIdFormatter( FormatterOptions $options ) {
@@ -181,11 +164,10 @@ class WikibaseValueFormatterBuilders {
 					$this->languageNameLookup
 				)
 			);
-		} elseif ( $format === SnakFormatter::FORMAT_WIKI && $this->siteLinkLookup && $this->localSiteId ) {
+		} elseif ( $format === SnakFormatter::FORMAT_WIKI && $this->entityTitleLookup ) {
 			return new EntityIdValueFormatter(
 				new EntityIdSiteLinkFormatter(
-					$this->siteLinkLookup,
-					$this->localSiteId,
+					$this->entityTitleLookup,
 					$this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options )
 				)
 			);
