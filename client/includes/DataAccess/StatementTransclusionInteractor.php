@@ -113,7 +113,11 @@ class StatementTransclusionInteractor {
 		$formattedValues = array();
 
 		foreach ( $snaks as $snak ) {
-			$formattedValues[] = $this->snakFormatter->formatSnak( $snak );
+			$formattedValue = $this->snakFormatter->formatSnak( $snak );
+
+			if ( $formattedValue !== '' ) {
+				$formattedValues[] = $formattedValue;
+			}
 		}
 
 		return $this->language->commaList( $formattedValues );

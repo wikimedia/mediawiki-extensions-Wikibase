@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
+namespace Wikibase\Client\Tests\DataAccess;
 
 use DataValues\StringValue;
 use Language;
@@ -38,10 +38,11 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 
 	public function testRender() {
 		$propertyId = new PropertyId( 'P1337' );
-		$snaks = array(
+		$snaks = [
 			'Q42$1' => new PropertyValueSnak( $propertyId, new StringValue( 'a kitten!' ) ),
-			'Q42$2' => new PropertyValueSnak( $propertyId, new StringValue( 'two kittens!!' ) )
-		);
+			'Q42$2' => new PropertyValueSnak( $propertyId, new StringValue( 'two kittens!!' ) ),
+			'Q42$3' => new PropertyValueSnak( $propertyId, new StringValue( '' ) ),
+		];
 
 		$renderer = $this->getInteractor(
 			$this->getPropertyIdResolver(),
@@ -52,35 +53,26 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 		$result = $renderer->render( $q42, 'p1337' );
 
 		$expected = 'a kitten!, two kittens!!';
-		$this->assertEquals( $expected, $result );
+		$this->assertSame( $expected, $result );
 	}
 
 	public function testRender_PropertyLabelNotResolvedException() {
-		$renderer = $this->getInteractor(
-			$this->getPropertyIdResolverForPropertyNotFound(),
-			array()
-		);
+		$renderer = $this->getInteractor( $this->getPropertyIdResolverForPropertyNotFound() );
 
 		$this->setExpectedException( PropertyLabelNotResolvedException::class );
 		$renderer->render( new ItemId( 'Q42' ), 'blah' );
 	}
 
 	public function testRender_unresolvedRedirect() {
-		$renderer = $this->getInteractor(
-			$this->getPropertyIdResolver(),
-			array()
-		);
+		$renderer = $this->getInteractor( $this->getPropertyIdResolver() );
 
-		$this->assertEquals( '', $renderer->render( new ItemId( 'Q43' ), 'P1337' ) );
+		$this->assertSame( '', $renderer->render( new ItemId( 'Q43' ), 'P1337' ) );
 	}
 
 	public function testRender_unknownEntity() {
-		$renderer = $this->getInteractor(
-			$this->getPropertyIdResolver(),
-			array()
-		);
+		$renderer = $this->getInteractor( $this->getPropertyIdResolver() );
 
-		$this->assertEquals( '', $renderer->render( new ItemId( 'Q43333' ), 'P1337' ) );
+		$this->assertSame( '', $renderer->render( new ItemId( 'Q43333' ), 'P1337' ) );
 	}
 
 	/**
@@ -91,7 +83,7 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 	 */
 	private function getInteractor(
 		PropertyIdResolver $propertyIdResolver,
-		array $snaks
+		array $snaks = []
 	) {
 		$targetLanguage = Language::factory( 'en' );
 
