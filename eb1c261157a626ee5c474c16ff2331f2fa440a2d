@@ -1,0 +1,267 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cea0dbb8_cc264c63",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T12:42:05Z",
+      "side": 1,
+      "message": "Rather ListSubscribers or something like this? Just Subscribers sounds overly generic to me",
+      "range": {
+        "startLine": 24,
+        "startChar": 6,
+        "endLine": 24,
+        "endChar": 17
+      },
+      "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_8cf284de",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T12:42:05Z",
+      "side": 1,
+      "message": "You should use this to normalize the entity ids… otherwise things like \"q123\" might end up in the query below (and that wont work, I guess).",
+      "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_6cff40a8",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T12:42:05Z",
+      "side": 1,
+      "message": "Can contain more than just strings.",
+      "range": {
+        "startLine": 81,
+        "startChar": 11,
+        "endLine": 81,
+        "endChar": 19
+      },
+      "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_ac1c2819",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T12:42:05Z",
+      "side": 1,
+      "message": "these need to be normalized (see also l68).",
+      "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_ecb7d0f0",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T12:42:05Z",
+      "side": 1,
+      "message": "Do we need to validate this further to prevent foobar in the SQL query below?",
+      "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_ec21104d",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T12:42:05Z",
+      "side": 1,
+      "message": "Directly returning the result (instead of assigning it to $res) would aid readability.",
+      "range": {
+        "startLine": 104,
+        "startChar": 2,
+        "endLine": 104,
+        "endChar": 6
+      },
+      "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_2c281832",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T12:42:05Z",
+      "side": 1,
+      "message": "Superfluous empty line",
+      "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_4cc91c7b",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T12:42:05Z",
+      "side": 1,
+      "message": "Maybe rename this buildNewEntry to make it clearer that this will empty $entry?",
+      "range": {
+        "startLine": 160,
+        "startChar": 11,
+        "endLine": 160,
+        "endChar": 21
+      },
+      "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_0caaf482",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T12:42:05Z",
+      "side": 1,
+      "message": "Should be \u0026$entry here",
+      "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_8ccf2482",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T12:42:05Z",
+      "side": 1,
+      "message": "Missing array type hint",
+      "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_ac80a8fa",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T12:42:05Z",
+      "side": 1,
+      "message": "Should not use fully qualified class name (use stdClass). Also below.",
+      "range": {
+        "startLine": 205,
+        "startChar": 11,
+        "endLine": 205,
+        "endChar": 12
+      },
+      "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_8c7de419",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T12:42:05Z",
+      "side": 1,
+      "message": "This doesn\u0027t add anything, but rather gets or creates something.",
+      "range": {
+        "startLine": 210,
+        "startChar": 18,
+        "endLine": 210,
+        "endChar": 21
+      },
+      "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_ac9f8854",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T12:42:05Z",
+      "side": 1,
+      "message": "this is not an Entity object, but a entity id serialization",
+      "range": {
+        "startLine": 266,
+        "startChar": 18,
+        "endLine": 266,
+        "endChar": 25
+      },
+      "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
