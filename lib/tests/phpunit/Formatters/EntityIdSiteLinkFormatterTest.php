@@ -3,12 +3,13 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use PHPUnit_Framework_TestCase;
+use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Formatters\EntityIdSiteLinkFormatter;
-use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
  * @covers Wikibase\Lib\Formatters\EntityIdSiteLinkFormatter
@@ -57,12 +58,12 @@ class EntityIdSiteLinkFormatterTest extends PHPUnit_Framework_TestCase {
 	public function testFormatEntityId( SiteLink $siteLink = null, Term $label = null, $expected ) {
 		$id = new ItemId( 'Q1' );
 
-		$siteLinkLookup = $this->getMock( SiteLinkLookup::class );
-		$siteLinkLookup->expects( $this->any() )
-			->method( 'getLinks' )
-			->with( [ $id->getNumericId() ], [ 'enwiki' ], [] )
+		$titleLookup = $this->getMock( EntityTitleLookup::class );
+		$titleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->with( $id )
 			->will( $this->returnValue( $siteLink
-				? [ [ null, $siteLink->getPageName() ] ]
+				? Title::newFromText( $siteLink->getPageName() )
 				: null
 			) );
 
@@ -72,11 +73,7 @@ class EntityIdSiteLinkFormatterTest extends PHPUnit_Framework_TestCase {
 			->with( $id )
 			->will( $this->returnValue( $label ) );
 
-		$formatter = new EntityIdSiteLinkFormatter(
-			$siteLinkLookup,
-			'enwiki',
-			$labelLookup
-		);
+		$formatter = new EntityIdSiteLinkFormatter( $titleLookup, $labelLookup );
 
 		$this->assertSame( $expected, $formatter->formatEntityId( $id ) );
 	}
