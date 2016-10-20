@@ -66,6 +66,30 @@
     },
     {
       "key": {
+        "uuid": "cea0dbb8_d236e2e3",
+        "filename": "client/includes/DataAccess/LocalSiteLinkTitleLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T14:16:33Z",
+      "side": 1,
+      "message": "The getNamespaceForType method should then be removed from that interface, I guess (because with this implementation the namespace doesn\u0027t just depend on the type, items for example can link to all namespaces).",
+      "parentUuid": "cea0dbb8_32274eb3",
+      "range": {
+        "startLine": 19,
+        "startChar": 42,
+        "endLine": 19,
+        "endChar": 59
+      },
+      "revId": "ee3c2bb86206f434cdb3e60f342f3c73bf81a622",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cea0dbb8_6ca62052",
         "filename": "client/includes/DataAccess/LocalSiteLinkTitleLookup.php",
         "patchSetId": 1
