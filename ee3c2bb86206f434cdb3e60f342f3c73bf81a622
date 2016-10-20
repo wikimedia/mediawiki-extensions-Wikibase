@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cea0dbb8_2c67f823",
+        "filename": "client/includes/DataAccess/LocalSiteLinkTitleLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T13:51:01Z",
+      "side": 1,
+      "message": "todo",
+      "revId": "ee3c2bb86206f434cdb3e60f342f3c73bf81a622",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_acac2833",
+        "filename": "client/includes/DataAccess/LocalSiteLinkTitleLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T13:51:01Z",
+      "side": 1,
+      "message": "This usually is for getting the Title for the page of the actual entity (where the EntityContent is on the repo). I doubt this is the right interface.",
+      "range": {
+        "startLine": 19,
+        "startChar": 42,
+        "endLine": 19,
+        "endChar": 59
+      },
+      "revId": "ee3c2bb86206f434cdb3e60f342f3c73bf81a622",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_6ca62052",
+        "filename": "client/includes/DataAccess/LocalSiteLinkTitleLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T13:51:01Z",
+      "side": 1,
+      "message": "No, see EntityContentFactory::getNamespaceForType",
+      "revId": "ee3c2bb86206f434cdb3e60f342f3c73bf81a622",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
