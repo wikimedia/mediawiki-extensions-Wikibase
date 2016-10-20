@@ -45,7 +45,9 @@ class ParserFunctionRegistrantTest extends PHPUnit_Framework_TestCase {
 		$registrant = new ParserFunctionRegistrant( $allowDataTransclusion );
 		$registrant->register( $parser );
 
-		$this->assertSame( $expected, $parser->getFunctionHooks() );
+		$actual = $parser->getFunctionHooks();
+
+		$this->assertSame( $expected, $actual );
 	}
 
 }

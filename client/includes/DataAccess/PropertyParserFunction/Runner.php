@@ -87,13 +87,17 @@ class Runner {
 	 *
 	 * @return array Wikitext
 	 */
-	public function runPropertyParserFunction( Parser $parser, PPFrame $frame, array $args ) {
+	public function runPropertyParserFunction(
+		Parser $parser,
+		PPFrame $frame,
+		array $args
+	) {
 		$propertyLabelOrId = $frame->expand( $args[0] );
 		unset( $args[0] );
 
 		// Create a child frame, so that we can access arguments by name.
 		$childFrame = $frame->newChild( $args, $parser->getTitle() );
-		$entityId = $this->getEntityIdForStatementListProvider( $parser, $childFrame, $args );
+		$entityId = $this->getEntityIdForStatementListProvider( $parser, $childFrame );
 
 		if ( $entityId === null ) {
 			return $this->buildResult( '' );
@@ -113,12 +117,12 @@ class Runner {
 	/**
 	 * @param Parser $parser
 	 * @param PPFrame $frame
-	 * @param array $args
 	 *
 	 * @return EntityId|null
 	 */
-	private function getEntityIdForStatementListProvider( Parser $parser, PPFrame $frame, array $args ) {
+	private function getEntityIdForStatementListProvider( Parser $parser, PPFrame $frame ) {
 		$from = $frame->getArgument( 'from' );
+
 		if ( $from && $this->allowArbitraryDataAccess ) {
 			$entityId = $this->getEntityIdFromString( $parser, $from );
 		} else {
@@ -182,7 +186,7 @@ class Runner {
 	 *
 	 * @return array
 	 */
-	public static function render( Parser $parser, PPFrame $frame, array $args ) {
+	public static function renderEscapedPlainText( Parser $parser, PPFrame $frame, array $args ) {
 		$runner = WikibaseClient::getDefaultInstance()->getPropertyParserFunctionRunner();
 		return $runner->runPropertyParserFunction( $parser, $frame, $args );
 	}
