@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cea0dbb8_2c00186d",
+        "filename": "client/includes/DataAccess/EntityIdSiteLinkFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T13:07:49Z",
+      "side": 1,
+      "message": "Should this really be in DataAccess?",
+      "revId": "00981976409afa9188b36637a9aebea91ba79df2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_4cd47cec",
+        "filename": "client/includes/DataAccess/EntityIdSiteLinkFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T13:07:49Z",
+      "side": 1,
+      "message": "Still to do",
+      "revId": "00981976409afa9188b36637a9aebea91ba79df2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_2c2ff8f4",
+        "filename": "client/includes/DataAccess/EntityIdSiteLinkFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T13:07:49Z",
+      "side": 1,
+      "message": "You should rather create a ticket for this, having this here is probably not going to help much.",
+      "revId": "00981976409afa9188b36637a9aebea91ba79df2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_accd4864",
+        "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T13:07:49Z",
+      "side": 1,
+      "message": "Can also be null.",
+      "revId": "00981976409afa9188b36637a9aebea91ba79df2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_8cca8449",
+        "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T13:07:49Z",
+      "side": 1,
+      "message": "Can also be null.",
+      "revId": "00981976409afa9188b36637a9aebea91ba79df2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_6cd740f3",
+        "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T13:07:49Z",
+      "side": 1,
+      "message": "s/y/a/",
+      "range": {
+        "startLine": 91,
+        "startChar": 54,
+        "endLine": 91,
+        "endChar": 55
+      },
+      "revId": "00981976409afa9188b36637a9aebea91ba79df2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
