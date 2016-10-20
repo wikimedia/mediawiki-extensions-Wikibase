@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "cea0dbb8_32274eb3",
+        "filename": "client/includes/DataAccess/LocalSiteLinkTitleLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-20T14:13:24Z",
+      "side": 1,
+      "message": "I understand, but disagree. The interface does not specify *how* entity IDs are mapped to titles. Utilizing the sitelinks in this lookup is not forbidden. I did it. It works perfectly fine. The code looks nice. I really don#t see what\u0027s wrong with this.\n\nIf there is a line of documentation in the interface that does not fit to the two implementations we now have, then let\u0027s change the docs.",
+      "parentUuid": "cea0dbb8_acac2833",
+      "range": {
+        "startLine": 19,
+        "startChar": 42,
+        "endLine": 19,
+        "endChar": 59
+      },
+      "revId": "ee3c2bb86206f434cdb3e60f342f3c73bf81a622",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cea0dbb8_6ca62052",
         "filename": "client/includes/DataAccess/LocalSiteLinkTitleLookup.php",
         "patchSetId": 1
