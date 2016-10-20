@@ -14,8 +14,8 @@ use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
+use Wikibase\Repo\Store\RepoEntityTitleLookup;
 use WikiPage;
 
 /**
@@ -28,7 +28,7 @@ use WikiPage;
 class EditFilterHookRunner {
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var RepoEntityTitleLookup
 	 */
 	private $titleLookup;
 
@@ -43,12 +43,12 @@ class EditFilterHookRunner {
 	private $context;
 
 	/**
-	 * @param EntityTitleLookup $titleLookup
+	 * @param RepoEntityTitleLookup $titleLookup
 	 * @param EntityContentFactory $entityContentFactory
 	 * @param IContextSource $context
 	 */
 	public function __construct(
-		EntityTitleLookup $titleLookup,
+		RepoEntityTitleLookup $titleLookup,
 		EntityContentFactory $entityContentFactory,
 		IContextSource $context
 	) {
