@@ -226,15 +226,18 @@ $.widget( 'ui.unitsuggester', PARENT, {
 	},
 
 	/**
-	 * @inheritdoc
+	 * @see jQuery.ui.suggester._createMenuItemFromSuggestion
 	 * @protected
+	 *
+	 * @param {Object} entityStub
+	 * @return {jQuery.ui.ooMenu.Item}
 	 */
-	_createMenuItemFromSuggestion: function( suggestion ) {
-		var $label = this._createLabelFromSuggestion( suggestion ),
-			value = suggestion.label || suggestion.id;
+	_createMenuItemFromSuggestion: function( entityStub ) {
+		var $label = this._createLabelFromSuggestion( entityStub ),
+			value = entityStub.label || entityStub.id;
 
 		var item = new $.ui.ooMenu.Item( $label, value );
-		item._link = suggestion.concepturi || suggestion.url;
+		item._link = entityStub.concepturi || entityStub.url;
 
 		return item;
 	},
