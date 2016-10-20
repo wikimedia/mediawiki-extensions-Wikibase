@@ -82,7 +82,6 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\UnionContentLanguages;
 use Wikibase\Lib\UnitConverter;
@@ -114,6 +113,7 @@ use Wikibase\Repo\Notifications\HookChangeTransmitter;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\Store\RepoEntityTitleLookup;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
@@ -587,7 +587,7 @@ class WikibaseRepo {
 	/**
 	 * @since 0.5
 	 *
-	 * @return EntityTitleLookup
+	 * @return RepoEntityTitleLookup
 	 */
 	public function getEntityTitleLookup() {
 		return $this->getEntityContentFactory();
