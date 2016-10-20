@@ -34,7 +34,7 @@ class StatementGroupRendererFactory {
 	/**
 	 * @var LanguageAwareRenderer[]
 	 */
-	private $languageAwareRenderers = array();
+	private $languageAwareRenderers = [];
 
 	/**
 	 * @var EntityLookup
@@ -105,11 +105,16 @@ class StatementGroupRendererFactory {
 		Language $language,
 		UsageAccumulator $usageAccumulator
 	) {
+		$snakFormatter = $this->dataAccessSnakFormatterFactory->newEscapedPlainTextSnakFormatter(
+			$language,
+			$usageAccumulator
+		);
+
 		$entityStatementsRenderer = new StatementTransclusionInteractor(
 			$language,
 			$this->propertyIdResolver,
 			$this->snaksFinder,
-			$this->dataAccessSnakFormatterFactory->newEscapedPlainTextSnakFormatter( $language, $usageAccumulator ),
+			$snakFormatter,
 			$this->entityLookup
 		);
 
@@ -125,28 +130,18 @@ class StatementGroupRendererFactory {
 	 *
 	 * @return LanguageAwareRenderer
 	 */
-	private function getLanguageAwareRendererFromCode( $languageCode, UsageAccumulator $usageAccumulator ) {
+	private function getLanguageAwareRendererFromCode(
+		$languageCode,
+		UsageAccumulator $usageAccumulator
+	) {
 		if ( !isset( $this->languageAwareRenderers[$languageCode] ) ) {
-			$languageAwareRenderer = $this->newLanguageAwareRendererFromCode( $languageCode, $usageAccumulator );
-			$this->languageAwareRenderers[$languageCode] = $languageAwareRenderer;
+			$this->languageAwareRenderers[$languageCode] = $this->newLanguageAwareRenderer(
+				Language::factory( $languageCode ),
+				$usageAccumulator
+			);
 		}
 
 		return $this->languageAwareRenderers[$languageCode];
-	}
-
-	/**
-	 * @param string $languageCode
-	 * @param UsageAccumulator $usageAccumulator
-	 *
-	 * @return LanguageAwareRenderer
-	 */
-	private function newLanguageAwareRendererFromCode( $languageCode, UsageAccumulator $usageAccumulator ) {
-		$language = Language::factory( $languageCode );
-
-		return $this->newLanguageAwareRenderer(
-			$language,
-			$usageAccumulator
-		);
 	}
 
 	/**
@@ -155,8 +150,11 @@ class StatementGroupRendererFactory {
 	 *
 	 * @return VariantsAwareRenderer
 	 */
-	private function newVariantsAwareRenderer( array $variants, UsageAccumulator $usageAccumulator ) {
-		$languageAwareRenderers = array();
+	private function newVariantsAwareRenderer(
+		array $variants,
+		UsageAccumulator $usageAccumulator
+	) {
+		$languageAwareRenderers = [];
 
 		foreach ( $variants as $variant ) {
 			$languageAwareRenderers[$variant] = $this->getLanguageAwareRendererFromCode(
@@ -173,22 +171,24 @@ class StatementGroupRendererFactory {
 	 *
 	 * @param Parser $parser
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	private function isParserUsingVariants( Parser $parser ) {
 		$parserOptions = $parser->getOptions();
-		return $parser->OutputType() === Parser::OT_HTML && !$parserOptions->getInterfaceMessage()
+
+		return $parser->OutputType() === Parser::OT_HTML
+			&& !$parserOptions->getInterfaceMessage()
 			&& !$parserOptions->getDisableContentConversion();
 	}
 
 	/**
 	 * @param Parser $parser
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	private function useVariants( Parser $parser ) {
-		$converterLanguageHasVariants = $parser->getConverterLanguage()->hasVariants();
-		return $this->isParserUsingVariants( $parser ) && $converterLanguageHasVariants;
+		return $this->isParserUsingVariants( $parser )
+			&& $parser->getConverterLanguage()->hasVariants();
 	}
 
 }
