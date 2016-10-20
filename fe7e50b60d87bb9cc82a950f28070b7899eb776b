@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cea0dbb8_b297de92",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/Runner.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T14:36:07Z",
+      "side": 1,
+      "message": "this can also contain Objects",
+      "range": {
+        "startLine": 86,
+        "startChar": 11,
+        "endLine": 86,
+        "endChar": 19
+      },
+      "revId": "fe7e50b60d87bb9cc82a950f28070b7899eb776b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
