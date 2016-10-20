@@ -104,14 +104,12 @@ $.widget( 'ui.preview', {
 			return;
 		}
 
+		this.$value.toggleClass( this.widgetBaseClass + '-novalue', value === null );
+
 		if ( value === null ) {
-			this.$value
-			.addClass( this.widgetBaseClass + '-novalue' )
-			.text( this._messageProvider.getMessage( 'novalue' ) );
+			this.$value.text( this._messageProvider.getMessage( 'novalue' ) );
 		} else {
-			this.$value
-			.removeClass( this.widgetBaseClass + '-novalue' )
-			.html( value );
+			this.$value.html( value );
 		}
 	},
 

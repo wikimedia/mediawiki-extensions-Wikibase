@@ -227,9 +227,7 @@ $.widget( 'ui.suggester', {
 			$( window ).off( '.' + this.widgetBaseClass );
 		}
 
-		this.element.removeClass( 'ui-suggester-input' );
-		this.element.removeClass( 'ui-suggester-loading' );
-		this.element.removeClass( 'ui-suggester-error' );
+		this.element.removeClass( 'ui-suggester-input ui-suggester-loading ui-suggester-error' );
 
 		$.Widget.prototype.destroy.call( this );
 	},

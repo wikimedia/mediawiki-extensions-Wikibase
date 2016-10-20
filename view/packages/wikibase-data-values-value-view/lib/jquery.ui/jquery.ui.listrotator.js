@@ -373,10 +373,7 @@ $.widget( 'ui.listrotator', {
 		// Alter menu item states:
 		this.$menu.children( 'li' ).each( function( i, li ) {
 			var $li = $( li );
-			$li.removeClass( 'ui-state-active' );
-			if ( $li.data( 'value' ) === value ) {
-				$li.addClass( 'ui-state-active' );
-			}
+			$li.toggleClass( 'ui-state-active', value === $li.data( 'value' ) );
 		} );
 
 		return value;

@@ -65,10 +65,7 @@ $.widget( 'ui.ooMenu', {
 	 * @protected
 	 */
 	_create: function() {
-		this.element
-		.addClass( 'ui-ooMenu' )
-		.addClass( 'ui-widget' )
-		.addClass( 'ui-widget-content' );
+		this.element.addClass( 'ui-ooMenu ui-widget ui-widget-content' );
 
 		this._refresh();
 	},
@@ -78,11 +75,8 @@ $.widget( 'ui.ooMenu', {
 	 */
 	destroy: function() {
 		this.element
-		.removeClass( 'ui-ooMenu' )
-		.removeClass( 'ui-widget' )
-		.removeClass( 'ui-widget-content' );
-
-		this.element.empty();
+		.removeClass( 'ui-ooMenu ui-widget ui-widget-content' )
+		.empty();
 
 		$.Widget.prototype.destroy.call( this );
 	},
