@@ -19,7 +19,7 @@
 	"wikibase-error-save-connection": "Ett anslutningsfel uppstod under sparandet. Dina ändringar kunde inte genomföras. Kontrollera din internetanslutning.",
 	"wikibase-error-remove-connection": "Ett anslutningsfel uppstod vid borttagningsförsöket. Dina ändringar kunde inte genomföras. Kontrollera din internetanslutning.",
 	"wikibase-error-save-timeout": "Vi har tekniska problem. Ditt \"spara\" kunde inte genomföras.",
-	"wikibase-error-remove-timeout": "Vi har tekniska problem. Ditt \"ta bort\" kunde inte genomföras.",
+	"wikibase-error-remove-timeout": "Vi har tekniska problem. Var god försök igen.",
 	"wikibase-error-autocomplete-connection": "Kunde inte fråga webbplatsens API. Försök igen senare.",
 	"wikibase-error-autocomplete-response": "Servern svarade: $1",
 	"wikibase-error-ui-no-external-page": "Den angivna artikeln kunde inte hittas på den motsvarande webbplatsen.",

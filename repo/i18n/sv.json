@@ -118,6 +118,7 @@
 	"wikibase-validator-label-with-description-conflict": "Objekt $3 har redan etikett \"$1\" associerad med språkkod $2, med samma beskrivningstext.",
 	"wikibase-validator-label-no-entityid": "Etiketten behöver inte vara ett giltigt entitets-ID.",
 	"wikibase-validator-no-such-media": "Filen \"$1\" finns inte på [https://commons.wikimedia.org/ Wikimedia Commons].",
+	"wikibase-validator-not-a-language": "\"$1\" är inte en känd språkkod.",
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" är inte ett giltigt objekt-ID.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Språkkoden \"$1\" är okänd. Var god använd en språkkod som känns igen av systemet, t.ex. \"en\".",
 	"wikibase-wikibaserepopage-invalid-id": "ID:et \"$1\" är okänt för systemet. Var god använd ett giltigt entitets-ID.",
