@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
-use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
  * TODO: Docs
@@ -20,14 +20,9 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 class EntityIdSiteLinkFormatter implements EntityIdFormatter {
 
 	/**
-	 * @var SiteLinkLookup
+	 * @var EntityTitleLookup
 	 */
-	private $siteLinkLookup;
-
-	/**
-	 * @var string
-	 */
-	private $localSiteId;
+	private $entityTitleLookup;
 
 	/**
 	 * @var LabelDescriptionLookup
@@ -35,19 +30,14 @@ class EntityIdSiteLinkFormatter implements EntityIdFormatter {
 	private $labelDescriptionLookup;
 
 	/**
-	 * EntityIdSiteLinkFormatter constructor.
-	 *
-	 * @param SiteLinkLookup $siteLinkLookup
-	 * @param string $localSiteId
+	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 */
 	public function __construct(
-		SiteLinkLookup $siteLinkLookup,
-		$localSiteId,
+		EntityTitleLookup $entityTitleLookup,
 		LabelDescriptionLookup $labelDescriptionLookup
 	) {
-		$this->siteLinkLookup = $siteLinkLookup;
-		$this->localSiteId = $localSiteId;
+		$this->entityTitleLookup = $entityTitleLookup;
 		$this->labelDescriptionLookup = $labelDescriptionLookup;
 	}
 
@@ -70,9 +60,10 @@ class EntityIdSiteLinkFormatter implements EntityIdFormatter {
 		$label = $term ? wfEscapeWikiText( $term->getText() ) : '';
 
 		if ( $entityId instanceof ItemId ) {
-			$pageName = $this->getPageName( $entityId );
+			$title = $this->entityTitleLookup->getTitleForId( $entityId );
 
-			if ( $pageName !== null ) {
+			if ( $title !== null ) {
+				$pageName = $title->getFullText();
 				$optionalLabel = $label === '' ? '' : '|' . $label;
 
 				return '[[' . $pageName . $optionalLabel . ']]';
@@ -80,21 +71,6 @@ class EntityIdSiteLinkFormatter implements EntityIdFormatter {
 		}
 
 		return $label;
-	}
-
-	/**
-	 * @param ItemId $itemId
-	 *
-	 * @return string|null
-	 */
-	private function getPageName( ItemId $itemId ) {
-		// TODO: Bad, bad interface
-		$siteLinkData = $this->siteLinkLookup->getLinks(
-			[ $itemId->getNumericId() ],
-			[ $this->localSiteId ]
-		);
-
-		return isset( $siteLinkData[0] ) ? $siteLinkData[0][1] : null;
 	}
 
 }
