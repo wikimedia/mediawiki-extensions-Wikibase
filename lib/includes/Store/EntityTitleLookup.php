@@ -41,13 +41,15 @@ interface EntityTitleLookup {
 	/**
 	 * Determines what namespace is suitable for the given type of entities.
 	 *
+	 * @todo Remove from this interface. Does not make sense when used in a client context.
+	 *
 	 * @since 0.5
 	 *
-	 * @param string $type the entity type to look up, as returned by Entity::getType()
+	 * @param string $entityType the entity type to look up, as returned by Entity::getType()
 	 *
 	 * @throws OutOfBoundsException
 	 * @return int the namespace ID for this type
 	 */
-	public function getNamespaceForType( $type );
+	public function getNamespaceForType( $entityType );
 
 }
