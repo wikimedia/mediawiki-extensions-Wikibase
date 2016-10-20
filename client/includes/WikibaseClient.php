@@ -261,7 +261,10 @@ final class WikibaseClient {
 			$this->contentLanguage,
 			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
 			new LanguageNameLookup( $wgLang->getCode() ),
-			$this->getRepoItemUriParser()
+			$this->getRepoItemUriParser(),
+			null,
+			$this->getStore()->getSiteLinkLookup(),
+			$this->getSettings()->getSetting( 'siteGlobalID' )
 		);
 	}
 
