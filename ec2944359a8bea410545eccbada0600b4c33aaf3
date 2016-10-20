@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cea0dbb8_6cbd0016",
+        "filename": "repo/includes/Specials/SpecialNewProperty.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1883
+      },
+      "writtenOn": "2016-10-20T11:21:35Z",
+      "side": 1,
+      "message": "I am not sure if it is valid to remove that here since $property is manipulated in the method.\n\nBut I am missing the bigger context so just a remark from my side.",
+      "range": {
+        "startLine": 73,
+        "startChar": 49,
+        "endLine": 73,
+        "endChar": 58
+      },
+      "revId": "ec2944359a8bea410545eccbada0600b4c33aaf3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
