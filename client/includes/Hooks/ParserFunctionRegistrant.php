@@ -31,7 +31,7 @@ class ParserFunctionRegistrant {
 	 */
 	public function register( Parser $parser ) {
 		$this->registerNoLangLinkHandler( $parser );
-		$this->registerPropertyParserFunction( $parser );
+		$this->registerParserFunctions( $parser );
 	}
 
 	private function registerNoLangLinkHandler( Parser $parser ) {
@@ -42,7 +42,7 @@ class ParserFunctionRegistrant {
 		);
 	}
 
-	private function registerPropertyParserFunction( Parser $parser ) {
+	private function registerParserFunctions( Parser $parser ) {
 		if ( !$this->allowDataTransclusion ) {
 			return;
 		}
@@ -50,7 +50,7 @@ class ParserFunctionRegistrant {
 		$parser->setFunctionHook(
 			'property',
 			function( Parser $parser, PPFrame $frame, array $args ) {
-				return Runner::render( $parser, $frame, $args );
+				return Runner::renderEscapedPlainText( $parser, $frame, $args );
 			},
 			Parser::SFH_OBJECT_ARGS
 		);
