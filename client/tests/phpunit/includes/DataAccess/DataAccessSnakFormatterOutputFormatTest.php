@@ -11,6 +11,8 @@ use DataValues\MonolingualTextValue;
 use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
+use Wikibase\Client\WikibaseClient;
+use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Item;
@@ -20,8 +22,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
-use Wikibase\Client\WikibaseClient;
-use Wikibase\Client\Usage\UsageAccumulator;
+use Wikibase\PropertyInfoStore;
 use Wikibase\Test\MockClientStore;
 
 /**
@@ -57,23 +58,36 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 	private function setUpDummyData( MockClientStore $store ) {
 		$mockRepository = $store->getEntityRevisionLookup();
 		$dataTypeIds = [
-			'commonsMedia' => 'P1',
-			'globe-coordinate' => 'P2',
-			'monolingualtext' => 'P3',
-			'quantity' => 'P4',
-			'string' => 'P5',
-			'time' => 'P6',
-			'url' => 'P7',
-			'external-id' => 'P8',
-			'wikibase-item' => 'P9',
+			'P1' => 'commonsMedia',
+			'P2' => 'globe-coordinate',
+			'P3' => 'monolingualtext',
+			'P4' => 'quantity',
+			'P5' => 'string',
+			'P6' => 'time',
+			'P7' => 'url',
+			'P8' => 'external-id',
+			'P9' => 'wikibase-item',
+			'P10' => 'external-id', // with formatter
 		];
 
-		foreach ( $dataTypeIds as $dataTypeId => $id ) {
+		foreach ( $dataTypeIds as $id => $dataTypeId ) {
 			$property = Property::newFromType( $dataTypeId );
 			$property->setId( new PropertyId( $id ) );
 
 			$mockRepository->putEntity( $property );
 		}
+
+		// Add a formatter URL for P10
+		$p10 = new PropertyId( 'P10' );
+		$propertyInfo = [
+			PropertyInfoStore::KEY_DATA_TYPE => 'external-id',
+			PropertyInfoStore::KEY_FORMATTER_URL => 'https://dataAccessSnakFormatterOutputFormatTest/P10/$1'
+		];
+		$propertyInfoStore = $store->getPropertyInfoStore();
+		$propertyInfoStore->setPropertyInfo(
+			$p10,
+			$propertyInfo
+		);
 
 		$item = new Item( new ItemId( 'Q12' ) );
 		$item->setLabel( 'en', 'label [[with]] wikitext' );
@@ -106,6 +120,20 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 				new PropertyValueSnak(
 					new PropertyId( 'P5' ),
 					new StringValue( 'A string!' )
+				)
+			],
+			'external-id' => [
+				'<span>An identifier</span>',
+				new PropertyValueSnak(
+					new PropertyId( 'P8' ),
+					new StringValue( 'An identifier' )
+				)
+			],
+			'external-id with formatter url' => [
+				'<span>[https://dataAccessSnakFormatterOutputFormatTest/P10/a+b+c a b c]</span>',
+				new PropertyValueSnak(
+					new PropertyId( 'P10' ),
+					new StringValue( 'a b c' )
 				)
 			]
 		];
@@ -216,6 +244,13 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 				new PropertyValueSnak(
 					new PropertyId( 'P8' ),
 					new StringValue( 'a [[b]] c' )
+				)
+			],
+			'external-id with formatter URL' => [
+				'a b c',
+				new PropertyValueSnak(
+					new PropertyId( 'P10' ),
+					new StringValue( 'a b c' )
 				)
 			],
 			'wikibase-item (wikibase-entityid)' => [
