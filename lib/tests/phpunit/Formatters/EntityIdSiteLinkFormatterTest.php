@@ -3,12 +3,13 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use PHPUnit_Framework_TestCase;
+use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Formatters\EntityIdSiteLinkFormatter;
-use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
  * @covers Wikibase\Lib\Formatters\EntityIdSiteLinkFormatter
@@ -24,24 +25,24 @@ class EntityIdSiteLinkFormatterTest extends PHPUnit_Framework_TestCase {
 	public function formatEntityIdProvider() {
 		return [
 			[
-				new SiteLink( 'enwiki', '<PAGE>' ),
-				new Term( 'en', '<LABEL>' ),
-				'[[<PAGE>|&#60;LABEL&#62;]]'
+				new SiteLink( 'enwiki', "'PAGE'" ),
+				new Term( 'en', "'LABEL'" ),
+				"[['PAGE'|&#39;LABEL&#39;]]"
 			],
 			[
-				new SiteLink( 'enwiki', '<PAGE>' ),
+				new SiteLink( 'enwiki', "'PAGE'" ),
 				new Term( 'en', '' ),
-				'[[<PAGE>]]'
+				"[['PAGE']]"
 			],
 			[
-				new SiteLink( 'enwiki', '<PAGE>' ),
+				new SiteLink( 'enwiki', "'PAGE'" ),
 				null,
-				'[[<PAGE>]]'
+				"[['PAGE']]"
 			],
 			[
 				null,
-				new Term( 'en', '<LABEL>' ),
-				'&#60;LABEL&#62;'
+				new Term( 'en', "'LABEL'" ),
+				'&#39;LABEL&#39;'
 			],
 			[
 				null,
@@ -57,26 +58,22 @@ class EntityIdSiteLinkFormatterTest extends PHPUnit_Framework_TestCase {
 	public function testFormatEntityId( SiteLink $siteLink = null, Term $label = null, $expected ) {
 		$id = new ItemId( 'Q1' );
 
-		$siteLinkLookup = $this->getMock( SiteLinkLookup::class );
-		$siteLinkLookup->expects( $this->any() )
-			->method( 'getLinks' )
-			->with( [ $id->getNumericId() ], [ 'enwiki' ], [] )
+		$titleLookup = $this->getMock( EntityTitleLookup::class );
+		$titleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->with( $id )
 			->will( $this->returnValue( $siteLink
-				? [ [ null, $siteLink->getPageName() ] ]
+				? Title::newFromText( $siteLink->getPageName() )
 				: null
 			) );
 
-		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
-		$labelDescriptionLookup->expects( $this->any() )
+		$labelLookup = $this->getMock( LabelDescriptionLookup::class );
+		$labelLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->with( $id )
 			->will( $this->returnValue( $label ) );
 
-		$formatter = new EntityIdSiteLinkFormatter(
-			$siteLinkLookup,
-			'enwiki',
-			$labelDescriptionLookup
-		);
+		$formatter = new EntityIdSiteLinkFormatter( $titleLookup, $labelLookup );
 
 		$this->assertSame( $expected, $formatter->formatEntityId( $id ) );
 	}
