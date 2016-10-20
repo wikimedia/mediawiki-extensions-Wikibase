@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cea0dbb8_55eabc74",
+        "filename": "client/includes/DataAccess/DataAccessSnakFormatterFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-20T18:56:53Z",
+      "side": 1,
+      "message": "hm… should we really do this? If we want to assign semantic information to the \u003cspan\u003e, omitting them sometimes sounds problematic to me.",
+      "revId": "112a8b98183d88fe42d463d779c6ccd3f70f22a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
