@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\Hooks;
 
 use Parser;
+use PHPUnit_Framework_TestCase;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
 
 /**
@@ -13,34 +14,38 @@ use Wikibase\Client\Hooks\ParserFunctionRegistrant;
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Thiemo Mättig
  */
-class ParserFunctionRegistrantTest extends \PHPUnit_Framework_TestCase {
+class ParserFunctionRegistrantTest extends PHPUnit_Framework_TestCase {
 
-	public function testRegisterPropertyParserFunctions() {
-		$parser = $this->newParser();
-
-		$registrant = new ParserFunctionRegistrant( true );
-		$registrant->register( $parser );
-
-		$functionHooks = $parser->getFunctionHooks();
-
-		$this->assertEquals( array( 'noexternallanglinks', 'property' ), $functionHooks );
+	public function parserFunctionsProvider() {
+		return [
+			[
+				false,
+				[
+					'noexternallanglinks',
+				]
+			],
+			[
+				true,
+				[
+					'noexternallanglinks',
+					'property',
+				]
+			],
+		];
 	}
 
-	public function testRegisterOnlyNoExternalLangLinksFuntion() {
-		$parser = $this->newParser();
+	/**
+	 * @dataProvider parserFunctionsProvider
+	 */
+	public function testRegisterParserFunctions( $allowDataTransclusion, array $expected ) {
+		$parser = new Parser( [ 'class' => 'Parser' ] );
 
-		$registrant = new ParserFunctionRegistrant( false );
+		$registrant = new ParserFunctionRegistrant( $allowDataTransclusion );
 		$registrant->register( $parser );
 
-		$functionHooks = $parser->getFunctionHooks();
-
-		$this->assertEquals( array( 'noexternallanglinks' ), $functionHooks );
-	}
-
-	private function newParser() {
-		$parserConfig = array( 'class' => 'Parser' );
-		return new Parser( $parserConfig );
+		$this->assertSame( $expected, $parser->getFunctionHooks() );
 	}
 
 }
