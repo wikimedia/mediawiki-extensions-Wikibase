@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\DataAccess;
 
-use BadMethodCallException;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -75,18 +74,6 @@ class ClientSiteLinkTitleLookup implements EntityTitleLookup {
 		}
 
 		return $siteLinkData[0][1];
-	}
-
-	/**
-	 * @see EntityTitleLookup::getNamespaceForType
-	 *
-	 * @param string $entityType
-	 *
-	 * @throws BadMethodCallException
-	 * @return int
-	 */
-	public function getNamespaceForType( $entityType ) {
-		throw new BadMethodCallException( 'Undefined in this implementation' );
 	}
 
 }
