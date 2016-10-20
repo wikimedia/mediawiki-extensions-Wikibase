@@ -12,11 +12,13 @@ use ValueFormatters\QuantityFormatter;
 use ValueFormatters\QuantityHtmlFormatter;
 use ValueFormatters\StringFormatter;
 use ValueFormatters\ValueFormatter;
+use Wikibase\Client\DataAccess\EntityIdSiteLinkFormatter;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
 use Wikibase\Formatters\MonolingualHtmlFormatter;
 use Wikibase\Formatters\MonolingualTextFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * Low level factory for ValueFormatters for well known data types.
@@ -58,6 +60,16 @@ class WikibaseValueFormatterBuilders {
 	private $entityTitleLookup;
 
 	/**
+	 * @var SiteLinkLookup
+	 */
+	private $siteLinkLookup;
+
+	/**
+	 * @var string
+	 */
+	private $localSiteId;
+
+	/**
 	 * Unit URIs that represent "unitless" or "one".
 	 *
 	 * @todo: make this configurable
@@ -74,20 +86,26 @@ class WikibaseValueFormatterBuilders {
 	 * @param FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param EntityIdParser $repoItemUriParser
-	 * @param EntityTitleLookup|null $entityTitleLookup
+	 * @param EntityTitleLookup|null $entityTitleLookup Only when used on a repo.
+	 * @param SiteLinkLookup|null $siteLinkLookup Only when used on a client.
+	 * @param string|null $localSiteId Only when used on y client.
 	 */
 	public function __construct(
 		Language $defaultLanguage,
 		FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		LanguageNameLookup $languageNameLookup,
 		EntityIdParser $repoItemUriParser,
-		EntityTitleLookup $entityTitleLookup = null
+		EntityTitleLookup $entityTitleLookup = null,
+		SiteLinkLookup $siteLinkLookup = null,
+		$localSiteId = null
 	) {
 		$this->defaultLanguage = $defaultLanguage;
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->repoItemUriParser = $repoItemUriParser;
 		$this->entityTitleLookup = $entityTitleLookup;
+		$this->siteLinkLookup = $siteLinkLookup;
+		$this->localSiteId = $localSiteId;
 	}
 
 	private function newPlainEntityIdFormatter( FormatterOptions $options ) {
@@ -161,6 +179,14 @@ class WikibaseValueFormatterBuilders {
 					$labelDescriptionLookup,
 					$this->entityTitleLookup,
 					$this->languageNameLookup
+				)
+			);
+		} elseif ( $format === SnakFormatter::FORMAT_WIKI && $this->siteLinkLookup && $this->localSiteId ) {
+			return new EntityIdValueFormatter(
+				new EntityIdSiteLinkFormatter(
+					$this->siteLinkLookup,
+					$this->localSiteId,
+					$this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options )
 				)
 			);
 		}
