@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "cea0dbb8_6cf299cf",
+        "filename": "client/includes/DataAccess/StatementTransclusionInteractor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-21T11:41:35Z",
+      "side": 1,
+      "message": "empty() should be avoided because it has multiple side effects. It does not tell you when you have a typo in the variable name, because undeclared variables are also empty. And I believe it thinks the strings \"0\" and \"0.0\" are empty.",
+      "parentUuid": "cea0dbb8_ccf525c9",
+      "revId": "96a71dfb4db8bd2bea10d777d27f3cd2b68b2e63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cea0dbb8_8cff1da7",
         "filename": "client/includes/DataAccess/StatementTransclusionInteractor.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2016-10-21T11:38:00Z",
       "side": 1,
       "message": "I think I would extract this or the above to it\u0027s own method.",
+      "revId": "96a71dfb4db8bd2bea10d777d27f3cd2b68b2e63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_2cc37163",
+        "filename": "client/includes/DataAccess/StatementTransclusionInteractor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-21T11:41:35Z",
+      "side": 1,
+      "message": "Sure. I wanted to have this patch as small as possible. We will continue working on this code anyway.",
+      "parentUuid": "cea0dbb8_8cff1da7",
       "revId": "96a71dfb4db8bd2bea10d777d27f3cd2b68b2e63",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
