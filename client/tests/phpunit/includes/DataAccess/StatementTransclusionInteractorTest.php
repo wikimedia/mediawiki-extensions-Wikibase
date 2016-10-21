@@ -36,7 +36,20 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
  */
 class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 
-	public function testRender() {
+	public function formatProvider() {
+		return [
+			[ SnakFormatter::FORMAT_PLAIN, 'a kitten!, two kittens!!' ],
+			[ SnakFormatter::FORMAT_WIKI, '<span>a kitten!, two kittens!!</span>' ],
+			[ SnakFormatter::FORMAT_HTML, '<span>a kitten!, two kittens!!</span>' ],
+			[ SnakFormatter::FORMAT_HTML_WIDGET, '<span>a kitten!, two kittens!!</span>' ],
+			[ SnakFormatter::FORMAT_HTML_DIFF, '<span>a kitten!, two kittens!!</span>' ],
+		];
+	}
+
+	/**
+	 * @dataProvider formatProvider
+	 */
+	public function testRender( $format, $expected ) {
 		$propertyId = new PropertyId( 'P1337' );
 		$snaks = [
 			'Q42$1' => new PropertyValueSnak( $propertyId, new StringValue( 'a kitten!' ) ),
@@ -44,15 +57,9 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 			'Q42$3' => new PropertyValueSnak( $propertyId, new StringValue( '' ) ),
 		];
 
-		$renderer = $this->getInteractor(
-			$this->getPropertyIdResolver(),
-			$snaks
-		);
+		$renderer = $this->getInteractor( $this->getPropertyIdResolver(), $snaks, $format );
+		$result = $renderer->render( new ItemId( 'Q42' ), 'p1337' );
 
-		$q42 = new ItemId( 'Q42' );
-		$result = $renderer->render( $q42, 'p1337' );
-
-		$expected = 'a kitten!, two kittens!!';
 		$this->assertSame( $expected, $result );
 	}
 
@@ -61,6 +68,14 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 
 		$this->setExpectedException( PropertyLabelNotResolvedException::class );
 		$renderer->render( new ItemId( 'Q42' ), 'blah' );
+	}
+
+	/**
+	 * @dataProvider formatProvider
+	 */
+	public function testRender_empty( $format ) {
+		$renderer = $this->getInteractor( $this->getPropertyIdResolver(), [], $format );
+		$this->assertSame( '', $renderer->render( new ItemId( 'Q42' ), 'P1337' ) );
 	}
 
 	public function testRender_unresolvedRedirect() {
@@ -78,12 +93,14 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @param PropertyIdResolver $propertyIdResolver
 	 * @param Snak[] $snaks
+	 * @param string $format One of the SnakFormatter::FORMAT_… constants
 	 *
 	 * @return StatementTransclusionInteractor
 	 */
 	private function getInteractor(
 		PropertyIdResolver $propertyIdResolver,
-		array $snaks = []
+		array $snaks = [],
+		$format = SnakFormatter::FORMAT_PLAIN
 	) {
 		$targetLanguage = Language::factory( 'en' );
 
@@ -91,7 +108,7 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 			$targetLanguage,
 			$propertyIdResolver,
 			$this->getSnaksFinder( $snaks ),
-			$this->getSnakFormatter(),
+			$this->getSnakFormatter( $format ),
 			$this->getEntityLookup()
 		);
 	}
@@ -179,9 +196,11 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @param string $format One of the SnakFormatter::FORMAT_… constants
+	 *
 	 * @return SnakFormatter
 	 */
-	private function getSnakFormatter() {
+	private function getSnakFormatter( $format ) {
 		$snakFormatter = $this->getMock( SnakFormatter::class );
 
 		$snakFormatter->expects( $this->any() )
@@ -202,6 +221,10 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 					}
 				}
 			) );
+
+		$snakFormatter->expects( $this->any() )
+			->method( 'getFormat' )
+			->will( $this->returnValue( $format ) );
 
 		return $snakFormatter;
 	}
