@@ -180,7 +180,7 @@
 	"wikibase-newitem-fieldset": "Создать новый элемент",
 	"wikibase-newitem-site": "Сайт первой связанной страницы",
 	"wikibase-newitem-page": "Имя первой связанной страницы",
-	"wikibase-newitem-no-external-page": "Не удалось найти указанную страницу на соответствующем сайте.",
+	"wikibase-newitem-no-external-page": "Не удалось найти страницу «$2» на сайте «$1».",
 	"wikibase-newitem-not-recognized-siteid": "Предоставленный идентификатор сайта не распознан.",
 	"wikibase-newentity-language": "Язык:",
 	"wikibase-newentity-label": "Название (метка):",

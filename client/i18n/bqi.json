@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mogoeilor"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}} قلم",
+	"wikibase-editlinks": "ویرایشت هوم پیوندا",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-show": "نشون دائن",
+	"wikibase-rc-wikibase-edit-letter": "د",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ویرایشت"
+}
