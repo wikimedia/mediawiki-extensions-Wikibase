@@ -214,6 +214,10 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 				}
 			) );
 
+		$snakFormatter->expects( $this->any() )
+			->method( 'getFormat' )
+			->will( $this->returnValue( SnakFormatter::FORMAT_PLAIN ) );
+
 		return $snakFormatter;
 	}
 
