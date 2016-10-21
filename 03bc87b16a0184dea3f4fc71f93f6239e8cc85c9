@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cea0dbb8_cf9cf461",
+        "filename": "client/includes/DataAccess/StatementTransclusionInteractor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-21T21:28:57Z",
+      "side": 1,
+      "message": "$commanList may be the the empty string here. we should not wrap it in that case.",
+      "revId": "03bc87b16a0184dea3f4fc71f93f6239e8cc85c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
