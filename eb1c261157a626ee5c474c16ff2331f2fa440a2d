@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "cea0dbb8_010bd6da",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-21T07:01:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cea0dbb8_cc264c63",
+      "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cea0dbb8_8cf284de",
         "filename": "repo/includes/Api/Subscribers.php",
         "patchSetId": 10
@@ -36,6 +54,24 @@
       "writtenOn": "2016-10-20T12:42:05Z",
       "side": 1,
       "message": "You should use this to normalize the entity ids… otherwise things like \"q123\" might end up in the query below (and that wont work, I guess).",
+      "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_81ffe6a6",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-21T07:01:35Z",
+      "side": 1,
+      "message": "I thought this way I would avoid having duplicates but you\u0027re right. Let me fix it.",
+      "parentUuid": "cea0dbb8_8cf284de",
       "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -65,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "cea0dbb8_e126b262",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-21T07:01:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cea0dbb8_6cff40a8",
+      "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cea0dbb8_ac1c2819",
         "filename": "repo/includes/Api/Subscribers.php",
         "patchSetId": 10
@@ -82,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "cea0dbb8_c11cce1a",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-21T07:01:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cea0dbb8_ac1c2819",
+      "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cea0dbb8_ecb7d0f0",
         "filename": "repo/includes/Api/Subscribers.php",
         "patchSetId": 10
@@ -93,6 +165,24 @@
       "writtenOn": "2016-10-20T12:42:05Z",
       "side": 1,
       "message": "Do we need to validate this further to prevent foobar in the SQL query below?",
+      "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_a119ca29",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-21T07:01:35Z",
+      "side": 1,
+      "message": "I don\u0027t get it.",
+      "parentUuid": "cea0dbb8_ecb7d0f0",
       "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -122,6 +212,24 @@
     },
     {
       "key": {
+        "uuid": "cea0dbb8_8116c6f4",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-21T07:01:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cea0dbb8_ec21104d",
+      "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cea0dbb8_2c281832",
         "filename": "repo/includes/Api/Subscribers.php",
         "patchSetId": 10
@@ -133,6 +241,24 @@
       "writtenOn": "2016-10-20T12:42:05Z",
       "side": 1,
       "message": "Superfluous empty line",
+      "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_6113c206",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-21T07:01:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cea0dbb8_2c281832",
       "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -162,6 +288,24 @@
     },
     {
       "key": {
+        "uuid": "cea0dbb8_41d79e28",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-21T07:01:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cea0dbb8_4cc91c7b",
+      "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cea0dbb8_0caaf482",
         "filename": "repo/includes/Api/Subscribers.php",
         "patchSetId": 10
@@ -179,6 +323,24 @@
     },
     {
       "key": {
+        "uuid": "cea0dbb8_21dc9a4a",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-21T07:01:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cea0dbb8_0caaf482",
+      "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cea0dbb8_8ccf2482",
         "filename": "repo/includes/Api/Subscribers.php",
         "patchSetId": 10
@@ -190,6 +352,24 @@
       "writtenOn": "2016-10-20T12:42:05Z",
       "side": 1,
       "message": "Missing array type hint",
+      "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_01e196fb",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-21T07:01:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cea0dbb8_8ccf2482",
       "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -219,6 +399,24 @@
     },
     {
       "key": {
+        "uuid": "cea0dbb8_e1e59207",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-21T07:01:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cea0dbb8_ac80a8fa",
+      "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cea0dbb8_8c7de419",
         "filename": "repo/includes/Api/Subscribers.php",
         "patchSetId": 10
@@ -242,6 +440,24 @@
     },
     {
       "key": {
+        "uuid": "cea0dbb8_c1ebaeda",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-21T07:01:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cea0dbb8_8c7de419",
+      "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cea0dbb8_ac9f8854",
         "filename": "repo/includes/Api/Subscribers.php",
         "patchSetId": 10
@@ -259,6 +475,24 @@
         "endLine": 266,
         "endChar": 25
       },
+      "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_a1e8aade",
+        "filename": "repo/includes/Api/Subscribers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-21T07:01:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cea0dbb8_ac9f8854",
       "revId": "eb1c261157a626ee5c474c16ff2331f2fa440a2d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
