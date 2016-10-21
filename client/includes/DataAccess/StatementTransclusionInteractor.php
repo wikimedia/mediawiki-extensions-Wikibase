@@ -120,7 +120,15 @@ class StatementTransclusionInteractor {
 			}
 		}
 
-		return $this->language->commaList( $formattedValues );
+		$commaList = $this->language->commaList( $formattedValues );
+
+		if ( count( $formattedValues ) < 2
+			|| $this->snakFormatter->getFormat() === SnakFormatter::FORMAT_PLAIN
+		) {
+			return $commaList;
+		}
+
+		return "<span>$commaList</span>";
 	}
 
 }
