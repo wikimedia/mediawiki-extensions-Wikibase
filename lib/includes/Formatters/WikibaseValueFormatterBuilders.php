@@ -17,6 +17,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
 use Wikibase\Formatters\MonolingualHtmlFormatter;
 use Wikibase\Formatters\MonolingualTextFormatter;
 use Wikibase\Lib\Formatters\EntityIdSiteLinkFormatter;
+use Wikibase\Lib\Formatters\CommonsThumbnailFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
@@ -229,7 +230,7 @@ class WikibaseValueFormatterBuilders {
 				// Use the string formatter without escaping!
 				return new StringFormatter( $options );
 			default:
-				return $this->escapeValueFormatter( $format, new StringFormatter( $options ) );
+				return $this->newStringFormatter( $format, $options );
 		}
 	}
 
@@ -240,11 +241,13 @@ class WikibaseValueFormatterBuilders {
 	 * @return ValueFormatter
 	 */
 	public function newCommonsMediaFormatter( $format, FormatterOptions $options ) {
-		//TODO: for FORMAT_WIKI, wikitext image link (inline? thumbnail? caption?...)
-		if ( $this->isHtmlFormat( $format ) ) {
-			return new CommonsLinkFormatter( $options );
-		} else {
-			return $this->newStringFormatter( $format, $options );
+		switch ( $this->getBaseFormat( $format ) ) {
+			case SnakFormatter::FORMAT_HTML:
+				return new CommonsLinkFormatter( $options );
+			case SnakFormatter::FORMAT_WIKI:
+				return new CommonsThumbnailFormatter();
+			default:
+				return $this->newStringFormatter( $format, $options );
 		}
 	}
 
@@ -255,6 +258,7 @@ class WikibaseValueFormatterBuilders {
 	 * @return ValueFormatter
 	 */
 	public function newTimeFormatter( $format, FormatterOptions $options ) {
+		// TODO: Add a wikitext formatter that shows the calendar model
 		if ( $format === SnakFormatter::FORMAT_HTML_DIFF ) {
 			return new TimeDetailsFormatter(
 				$options,
@@ -316,6 +320,8 @@ class WikibaseValueFormatterBuilders {
 	 * @return GlobeCoordinateFormatter
 	 */
 	public function newGlobeCoordinateFormatter( $format, FormatterOptions $options ) {
+		// TODO: Add a wikitext formatter that links to the geohack or it's proposed replacement,
+		// see https://phabricator.wikimedia.org/T102960
 		if ( $format === SnakFormatter::FORMAT_HTML_DIFF ) {
 			return new GlobeCoordinateDetailsFormatter(
 				$this->getVocabularyUriFormatter( $options ),
@@ -340,6 +346,7 @@ class WikibaseValueFormatterBuilders {
 	 * @return MonolingualHtmlFormatter
 	 */
 	public function newMonolingualFormatter( $format, FormatterOptions $options ) {
+		// TODO: Add a wikitext formatter that shows the language name
 		if ( $this->isHtmlFormat( $format ) ) {
 			return new MonolingualHtmlFormatter( $options, $this->languageNameLookup );
 		} else {
