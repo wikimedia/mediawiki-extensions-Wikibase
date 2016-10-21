@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cea0dbb8_ef99f881",
+        "filename": "client/includes/DataAccess/LocalSiteLinkTitleLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-21T21:16:14Z",
+      "side": 1,
+      "message": "Looking at this from the outside, this resolves en EntityId to the corresponding Title on the local wiki. The caller doesn\u0027t need to think or know about SiteLinks.",
+      "revId": "150c69bc02f423b9e57d24b3b54261c6c4eefada",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_2f86c018",
+        "filename": "client/includes/DataAccess/LocalSiteLinkTitleLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-21T21:16:14Z",
+      "side": 1,
+      "message": "This isn\u0027t a EntityTitleLookup! The contract of EntityTitleLookup is that it provides the title of the entity page! A caller may assume that the content of that page is an entity. This is not the case here.\n\nI agree that this contract is not very explicit in the documentation of EntityTitleLookup. BUt the intention is not that it may provide *any* Title associated with the entity. That would break current callers. The de-facto contract is defined by how the interface is used.",
+      "revId": "150c69bc02f423b9e57d24b3b54261c6c4eefada",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
