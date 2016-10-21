@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cea0dbb8_ccf525c9",
+        "filename": "client/includes/DataAccess/StatementTransclusionInteractor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-10-21T11:38:00Z",
+      "side": 1,
+      "message": "empty()?",
+      "revId": "96a71dfb4db8bd2bea10d777d27f3cd2b68b2e63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_8cff1da7",
+        "filename": "client/includes/DataAccess/StatementTransclusionInteractor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-10-21T11:38:00Z",
+      "side": 1,
+      "message": "I think I would extract this or the above to it\u0027s own method.",
+      "revId": "96a71dfb4db8bd2bea10d777d27f3cd2b68b2e63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
