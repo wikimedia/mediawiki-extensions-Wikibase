@@ -85,7 +85,7 @@
 	"wikibase-rc-show-wikidata-pref": "Mostrar as edições {{WBREPONAME}} nas mudanças recentes",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Edição {{WBREPONAME}}",
-	"wikibase-replicationnote": "Por favor, note que pode levar vários minutos até que as mudanças são visíveis em todos as wikis.",
+	"wikibase-replicationnote": "Note que pode demorar vários minutos até que as mudanças sejam visíveis em todas as wikis.",
 	"wikibase-watchlist-show-changes-pref": "Mostrar as edições {{WBREPONAME}} na sua lista de páginas vigiadas",
 	"wikibase-error-deserialize-error": "Não foi possível anular a seriação dos dados.",
 	"wikibase-error-serialize-error": "Não foi possível seriar os dados.",

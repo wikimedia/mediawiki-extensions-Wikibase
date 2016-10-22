@@ -10,7 +10,8 @@
 			"Mavrikant",
 			"KorkmazO",
 			"HakanIST",
-			"Alpkant"
+			"Alpkant",
+			"Incelemeelemani"
 		]
 	},
 	"tooltip-t-wikibase": "Veri havuzundaki ilgili ögeye bağlantı",
@@ -42,8 +43,14 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} değişikliği",
 	"wikibase-watchlist-show-changes-pref": "İzleme listemde {{WBREPONAME}} değişikliklerini göster",
 	"unconnectedpages": "Öğelerine bağlanmamış sayfalar",
-	"wikibase-unconnectedpages-submit": "Git",
+	"wikibase-unconnectedpages-submit": "Sayfaları göster",
+	"pageswithbadges": "Rozetli sayfalar",
+	"pageswithbadges-summary": "Burada rozetli sayfalar (kaliteli veya seçkin maddeler gibi...) listelenebilir. Yeni sayfalar başta olmak üzere azalan sırada sayfalar listelenmektedir.",
+	"wikibase-pageswithbadges-legend": "Belirtilen rozete göre sayfaların listesi",
+	"wikibase-pageswithbadges-badge": "Rozet:",
 	"wikibase-pageswithbadges-submit": "Sayfaları göster",
+	"wikibase-pageinfo-entity-usage-L": "Etiket: $1",
+	"wikibase-pageinfo-entity-usage-T": "Başlık",
 	"wikibase-otherprojects": "Diğer projelerde",
 	"wikibase-otherprojects-beta-message": "Diğer projeler kenar çubuğu",
 	"wikibase-otherprojects-beta-description": "Kenar çubuğuna, {{WBREPONAME}} bilgilerine dayalı olarak diğer Wikimedia projelerine bağlantı veren bir \"{{int:wikibase-otherprojects}}\" ekler."
