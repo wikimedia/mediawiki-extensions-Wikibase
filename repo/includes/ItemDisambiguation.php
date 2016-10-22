@@ -19,7 +19,7 @@ use Wikibase\Lib\Interactors\TermSearchResult;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
- * @authro Adam Shorland
+ * @author Addshore
  */
 class ItemDisambiguation {
 
