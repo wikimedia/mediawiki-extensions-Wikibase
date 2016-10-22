@@ -52,10 +52,11 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 			new EntityRetrievingTermLookup( $store->getEntityLookup() )
 		);
 
-		$this->setUpDummyData( $store );
+		$siteId = $wikibaseClient->getSettings()->getSetting( 'siteGlobalID' );
+		$this->setUpDummyData( $store, $siteId );
 	}
 
-	private function setUpDummyData( MockClientStore $store ) {
+	private function setUpDummyData( MockClientStore $store, $siteId ) {
 		$mockRepository = $store->getEntityRevisionLookup();
 		$dataTypeIds = [
 			'P1' => 'commonsMedia',
@@ -91,6 +92,12 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 
 		$item = new Item( new ItemId( 'Q12' ) );
 		$item->setLabel( 'en', 'label [[with]] wikitext' );
+
+		$mockRepository->putEntity( $item );
+
+		$item = new Item( new ItemId( 'Q13' ) );
+		$item->setLabel( 'en', 'This item has a sitelink' );
+		$item->getSiteLinkList()->addNewSiteLink( $siteId, 'Linked page' );
 
 		$mockRepository->putEntity( $item );
 	}
@@ -135,7 +142,21 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 					new PropertyId( 'P10' ),
 					new StringValue( 'a b c' )
 				)
-			]
+			],
+			'wikibase-item label (wikibase-entityid)' => [
+				'<span>' . wfEscapeWikiText( 'label [[with]] wikitext' ) . '</span>',
+				new PropertyValueSnak(
+					new PropertyId( 'P9' ),
+					new EntityIdValue( new ItemId( 'Q12' ) )
+				)
+			],
+			'wikibase-item link (wikibase-entityid)' => [
+				'<span>[[Linked page|This item has a sitelink]]</span>',
+				new PropertyValueSnak(
+					new PropertyId( 'P9' ),
+					new EntityIdValue( new ItemId( 'Q13' ) )
+				)
+			],
 		];
 	}
 
