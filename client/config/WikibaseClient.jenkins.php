@@ -15,3 +15,6 @@
 // group in the sites table during testing.
 // NOTE: This can be removed once T126596 is implemented.
 $wgWBClientSettings['siteGroup'] = "mywikigroup";
+
+// TODO: Remove the feature flag when not needed any more!
+$wgWBClientSettings['enableStatementsParserFunction'] = true;
