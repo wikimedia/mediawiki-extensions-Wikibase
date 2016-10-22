@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cea0dbb8_2d3fe8d4",
+        "filename": "repo/tests/phpunit/includes/Api/SubscribersTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-22T21:20:49Z",
+      "side": 1,
+      "message": "I don\u0027t think we usually (or even in some cases) prefix these classes with \"API\".",
+      "range": {
+        "startLine": 24,
+        "startChar": 6,
+        "endLine": 24,
+        "endChar": 9
+      },
+      "revId": "07266c7aab819d27759857be57168ee93f8b19f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
