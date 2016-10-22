@@ -115,6 +115,8 @@ class WikibaseDataAccessTestItemSetUpHelper {
 
 		$this->createTestItem( new ItemId( 'Q32488' ), array(), array( $statement1, $statement3 ), array() );
 
+		$this->createTestItem( new ItemId( 'Q32489' ), array(), array( $statement1, $statement1 ), array() );
+
 		// Create another test item to test arbitrary access
 		$this->createTestItem( new ItemId( 'Q199024' ), array( 'de' => 'Arbitrary access \o/' ) );
 

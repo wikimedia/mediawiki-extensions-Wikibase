@@ -13,7 +13,7 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\Test\MockClientStore;
 
 /**
- * Simple integration test for the {{#property:…}} parser function.
+ * Simple integration test for the {{#statements:…}} parser function.
  *
  * @group Wikibase
  * @group WikibaseClient
@@ -24,7 +24,7 @@ use Wikibase\Test\MockClientStore;
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */
-class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
+class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 	protected function setUp() {
 		parent::setUp();
@@ -67,38 +67,38 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 		$settings->setSetting( 'allowDataAccessInUserLanguage', $value );
 	}
 
-	public function testPropertyParserFunction_byPropertyLabel() {
-		$result = $this->parseWikitextToHtml( '{{#property:LuaTestStringProperty}}' );
+	public function testStatementsParserFunction_byPropertyLabel() {
+		$result = $this->parseWikitextToHtml( '{{#statements:LuaTestStringProperty}}' );
 
-		$this->assertSame( "<p>Lua&#160;:)\n</p>", $result );
+		$this->assertSame( "<p><span>Lua&#160;:)</span>\n</p>", $result );
 	}
 
-	public function testPropertyParserFunction_byPropertyId() {
-		$result = $this->parseWikitextToHtml( '{{#property:P342}}' );
+	public function testStatementsParserFunction_byPropertyId() {
+		$result = $this->parseWikitextToHtml( '{{#statements:P342}}' );
 
-		$this->assertSame( "<p>Lua&#160;:)\n</p>", $result );
+		$this->assertSame( "<p><span>Lua&#160;:)</span>\n</p>", $result );
 	}
 
-	public function testPropertyParserFunction_arbitraryAccess() {
-		$result = $this->parseWikitextToHtml( '{{#property:P342|from=Q32488}}' );
+	public function testStatementsParserFunction_arbitraryAccess() {
+		$result = $this->parseWikitextToHtml( '{{#statements:P342|from=Q32488}}' );
 
-		$this->assertSame( "<p>Lua&#160;:)\n</p>", $result );
+		$this->assertSame( "<p><span>Lua&#160;:)</span>\n</p>", $result );
 	}
 
-	public function testPropertyParserFunction_multipleValues() {
-		$result = $this->parseWikitextToHtml( '{{#property:P342|from=Q32489}}' );
+	public function testStatementsParserFunction_multipleValues() {
+		$result = $this->parseWikitextToHtml( '{{#statements:P342|from=Q32489}}' );
 
-		$this->assertSame( "<p>Lua&#160;:), Lua&#160;:)\n</p>", $result );
+		$this->assertSame( "<p><span>Lua&#160;:)</span>, <span>Lua&#160;:)</span>\n</p>", $result );
 	}
 
-	public function testPropertyParserFunction_arbitraryAccessNotFound() {
-		$result = $this->parseWikitextToHtml( '{{#property:P342|from=Q1234567}}' );
+	public function testStatementsParserFunction_arbitraryAccessNotFound() {
+		$result = $this->parseWikitextToHtml( '{{#statements:P342|from=Q1234567}}' );
 
 		$this->assertSame( '', $result );
 	}
 
-	public function testPropertyParserFunction_byNonExistent() {
-		$result = $this->parseWikitextToHtml( '{{#property:P2147483647}}' );
+	public function testStatementsParserFunction_byNonExistent() {
+		$result = $this->parseWikitextToHtml( '{{#statements:P2147483647}}' );
 
 		$this->assertRegExp(
 			'/<p.*class=".*wikibase-error.*">.*P2147483647.*<\/p>/',
@@ -106,9 +106,9 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 		);
 	}
 
-	public function testPropertyParserFunction_pageNotConnected() {
+	public function testStatementsParserFunction_pageNotConnected() {
 		$result = $this->parseWikitextToHtml(
-			'{{#property:P342}}',
+			'{{#statements:P342}}',
 			'A page not connected to an item'
 		);
 
@@ -122,12 +122,17 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 	 * @return string HTML
 	 */
 	private function parseWikitextToHtml( $wikiText, $title = 'WikibaseClientDataAccessTest' ) {
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		$enabled = $settings->getSetting( 'enableStatementsParserFunction' );
+		$settings->setSetting( 'enableStatementsParserFunction', true );
+
 		$parserConfig = array( 'class' => 'Parser' );
 		$popt = new ParserOptions( User::newFromId( 0 ), Language::factory( 'en' ) );
 
 		$parser = new Parser( $parserConfig );
 		$pout = $parser->parse( $wikiText, Title::newFromText( $title ), $popt, Parser::OT_HTML );
 
+		$settings->setSetting( 'enableStatementsParserFunction', $enabled );
 		return $pout->getText();
 	}
 

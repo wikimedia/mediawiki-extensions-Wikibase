@@ -41,11 +41,20 @@ use Wikibase\Lib\SnakFormatter;
  */
 class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 
-	public function testNewRendererForInterfaceMessage() {
+	public function testNewRenderer_forInterfaceMessage() {
 		$parser = $this->getParser( 'zh', 'es', true );
 
 		$rendererFactory = $this->getStatementGroupRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
+
+		$this->assertInstanceOf( LanguageAwareRenderer::class, $renderer );
+	}
+
+	public function testNewRender_richWikitext() {
+		$parser = $this->getParser( 'zh', 'es', true );
+
+		$rendererFactory = $this->getStatementGroupRendererFactory();
+		$renderer = $rendererFactory->newRendererFromParser( $parser, 'rich-wikitext' );
 
 		$this->assertInstanceOf( LanguageAwareRenderer::class, $renderer );
 	}
