@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cea0dbb8_68b27ee6",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/StatementGroupRendererFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-23T13:30:38Z",
+      "side": 1,
+      "message": "* The tested method is called \"newRendererFromParser\".\n* To what does \"forInterfaceMessage\" refer to?\n* Why not merge the two identical tests and use a \"typeProvider\"?",
+      "range": {
+        "startLine": 44,
+        "startChar": 21,
+        "endLine": 44,
+        "endChar": 52
+      },
+      "revId": "a6a652718b3036ac7113cceeeca7d886d1bf29e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_08b1b2dc",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/StatementsParserFunctionIntegrationTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-23T13:30:38Z",
+      "side": 1,
+      "message": "Pop\u0027t! ;-)",
+      "range": {
+        "startLine": 130,
+        "startChar": 3,
+        "endLine": 130,
+        "endChar": 7
+      },
+      "revId": "a6a652718b3036ac7113cceeeca7d886d1bf29e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_28ac7683",
+        "filename": "client/tests/phpunit/includes/Hooks/ParserFunctionRegistrantTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-23T13:30:38Z",
+      "side": 1,
+      "message": "The name of the setting does not contain a dollar sign. I find this confusing (like it\u0027s a mistake wrapping this in single quotes). Please remove all these dollar signs.",
+      "range": {
+        "startLine": 26,
+        "startChar": 5,
+        "endLine": 26,
+        "endChar": 6
+      },
+      "revId": "a6a652718b3036ac7113cceeeca7d886d1bf29e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
