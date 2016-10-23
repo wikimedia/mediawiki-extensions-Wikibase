@@ -263,7 +263,7 @@ class EditEntity extends ModifyEntity {
 	 */
 	private function getSummary( array $params ) {
 		//TODO: Construct a nice and meaningful summary from the changes that get applied!
-		//      Perhaps that could be based on the resulting diff?]
+		//      Perhaps that could be based on the resulting diff?
 		$summary = $this->createSummary( $params );
 		if ( isset( $params['id'] ) xor ( isset( $params['site'] ) && isset( $params['title'] ) ) ) {
 			$summary->setAction( $params['clear'] === false ? 'update' : 'override' );
