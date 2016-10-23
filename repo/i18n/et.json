@@ -149,7 +149,7 @@
 	"wikibase-newitem-fieldset": "Uue üksuse loomine",
 	"wikibase-newitem-site": "Esimese lingitud lehekülje võrgukoht",
 	"wikibase-newitem-page": "Esimese lingitud lehekülje pealkiri",
-	"wikibase-newitem-no-external-page": "Vastavast võrgukohast ei leitud määratud lehekülge.",
+	"wikibase-newitem-no-external-page": "Võrgukohast \"$1\" ei leitud lehekülge \"$2\".",
 	"wikibase-newitem-not-recognized-siteid": "Ette antud võrgukohaidentifikaatorit ei tuntud ära.",
 	"wikibase-newentity-language": "Keel:",
 	"wikibase-newentity-label": "Silt:",

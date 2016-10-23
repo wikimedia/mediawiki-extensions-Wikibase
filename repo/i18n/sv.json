@@ -166,7 +166,7 @@
 	"wikibase-newitem-fieldset": "Skapa ett nytt objekt",
 	"wikibase-newitem-site": "Webbplatsen till den första länkade sidan",
 	"wikibase-newitem-page": "Namnet på den första länkade sidan",
-	"wikibase-newitem-no-external-page": "Den angivna sidan kunde inte hittas på motsvarande webbplats.",
+	"wikibase-newitem-no-external-page": "En sida \"$2\" kunde inte hittas på \"$1\".",
 	"wikibase-newitem-not-recognized-siteid": "Den angivna webbplatsidentifieraren känns inte igen.",
 	"wikibase-newitem-not-recognized-language": "Den angivna språkkoden kändes inte igen.",
 	"wikibase-newentity-language": "Språk:",
