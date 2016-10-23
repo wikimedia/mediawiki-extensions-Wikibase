@@ -16,6 +16,24 @@
       "revId": "2bb96fc49feead51eea2ee67806f85e1ecfb5d2e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_c89cea61",
+        "filename": "client/tests/phpunit/includes/DataAccess/DataAccessSnakFormatterFactoryTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-23T13:18:49Z",
+      "side": 1,
+      "message": "This was on purpose, but I don\u0027t care much. Both works. This tests calls methods on the \"rich wikitext snak formatter\" and is therefore testing more than the method \"newRichWikitextSnakFormatter\".",
+      "parentUuid": "cea0dbb8_cd199c29",
+      "revId": "2bb96fc49feead51eea2ee67806f85e1ecfb5d2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
