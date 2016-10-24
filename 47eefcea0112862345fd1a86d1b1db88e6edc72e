@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cea0dbb8_038cf3fd",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-10-24T01:23:54Z",
+      "side": 1,
+      "message": "I don\u0027t think we need \"\\n\" at the end of these messages.",
+      "revId": "47eefcea0112862345fd1a86d1b1db88e6edc72e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
