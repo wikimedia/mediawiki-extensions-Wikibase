@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "aea567c8_bff697f4",
+        "filename": "client/includes/DataAccess/LocalSiteLinkTitleLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-24T10:26:59Z",
+      "side": 1,
+      "message": "I disagree. I believe you are confusing something here. This is not the interface, this is a specific implementation. There is a SiteLinkLookup in the constructor.",
+      "parentUuid": "cea0dbb8_ef99f881",
+      "revId": "150c69bc02f423b9e57d24b3b54261c6c4eefada",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cea0dbb8_2f86c018",
         "filename": "client/includes/DataAccess/LocalSiteLinkTitleLookup.php",
         "patchSetId": 5
