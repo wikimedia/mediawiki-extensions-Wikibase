@@ -36,11 +36,14 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  */
 class RunnerTest extends PHPUnit_Framework_TestCase {
 
-	public function testRunPropertyParserFunction() {
+	/**
+	 * @dataProvider typeProvider
+	 */
+	public function testRunPropertyParserFunction( $type ) {
 		$itemId = new ItemId( 'Q3' );
 
 		$runner = new Runner(
-			$this->getStatementGroupRendererFactory( $itemId, 'Cat' ),
+			$this->getStatementGroupRendererFactory( $itemId, 'Cat', $type ),
 			$this->getSiteLinkLookup( $itemId ),
 			new BasicEntityIdParser(),
 			$this->getRestrictedEntityLookup(),
@@ -50,7 +53,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 
 		$parser = $this->getParser();
 		$frame = new PPFrame_Hash( new Preprocessor_Hash( $parser ) );
-		$result = $runner->runPropertyParserFunction( $parser, $frame, array( 'Cat' ) );
+		$result = $runner->runPropertyParserFunction( $parser, $frame, array( 'Cat' ), $type );
 
 		$expected = array(
 			'meow!',
@@ -63,11 +66,22 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame( 0, $parser->mExpensiveFunctionCount );
 	}
 
+	public function typeProvider() {
+		return [
+			[
+				'escaped-plaintext'
+			],
+			[
+				'rich-wikitext'
+			]
+		];
+	}
+
 	public function testRunPropertyParserFunction_arbitraryAccess() {
 		$itemId = new ItemId( 'Q42' );
 
 		$runner = new Runner(
-			$this->getStatementGroupRendererFactory( $itemId, 'Cat' ),
+			$this->getStatementGroupRendererFactory( $itemId, 'Cat', 'escaped-plaintext' ),
 			$this->getMock( SiteLinkLookup::class ),
 			new BasicEntityIdParser(),
 			$this->getRestrictedEntityLookup(),
@@ -103,7 +117,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 		$restrictedEntityLookup->getEntity( $itemId );
 
 		$runner = new Runner(
-			$this->getStatementGroupRendererFactory( $itemId, 'Cat' ),
+			$this->getStatementGroupRendererFactory( $itemId, 'Cat', 'escaped-plaintext' ),
 			$this->getMock( SiteLinkLookup::class ),
 			new BasicEntityIdParser(),
 			$restrictedEntityLookup,
@@ -127,7 +141,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 		$itemId = new ItemId( 'Q42' );
 
 		$runner = new Runner(
-			$this->getStatementGroupRendererFactory( $itemId, 'Cat' ),
+			$this->getStatementGroupRendererFactory( $itemId, 'Cat', 'escaped-plaintext' ),
 			$this->getMock( SiteLinkLookup::class ),
 			new BasicEntityIdParser(),
 			$this->getRestrictedEntityLookup(),
@@ -257,11 +271,12 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @param EntityId $entityId
 	 * @param string $propertyLabelOrId
+	 * @param string $type
 	 *
 	 * @return StatementGroupRendererFactory
 	 */
-	private function getStatementGroupRendererFactory( EntityId $entityId, $propertyLabelOrId ) {
-		$renderer = $this->getRenderer( $entityId, $propertyLabelOrId );
+	private function getStatementGroupRendererFactory( EntityId $entityId, $propertyLabelOrId, $type ) {
+		$renderer = $this->getRenderer( $entityId, $propertyLabelOrId, $type );
 
 		$rendererFactory = $this->getMockBuilder( StatementGroupRendererFactory::class )
 			->disableOriginalConstructor()
@@ -269,6 +284,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 
 		$rendererFactory->expects( $this->any() )
 			->method( 'newRendererFromParser' )
+			->with( $this->isInstanceOf( Parser::class ), $type )
 			->will( $this->returnValue( $renderer ) );
 
 		return $rendererFactory;

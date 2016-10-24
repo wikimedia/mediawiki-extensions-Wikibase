@@ -22,17 +22,27 @@ class ParserFunctionRegistrantTest extends PHPUnit_Framework_TestCase {
 	public function parserFunctionsProvider() {
 		return [
 			[
-				false,
+				'$allowDataTransclusion' => false,
+				'$enableStatementsParserFunction' => true,
 				[
 					'noexternallanglinks',
 				]
 			],
 			[
-				true,
+				'$allowDataTransclusion' => true,
+				'$enableStatementsParserFunction' => true,
 				[
 					'noexternallanglinks',
 					'property',
 					'statements',
+				]
+			],
+			[
+				'$allowDataTransclusion' => true,
+				'$enableStatementsParserFunction' => false,
+				[
+					'noexternallanglinks',
+					'property'
 				]
 			],
 		];
@@ -41,13 +51,20 @@ class ParserFunctionRegistrantTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider parserFunctionsProvider
 	 */
-	public function testRegisterParserFunctions( $allowDataTransclusion, array $expected ) {
+	public function testRegisterParserFunctions(
+		$allowDataTransclusion,
+		$enableStatementsParserFunction,
+		array $expected
+	) {
 		$parser = new Parser( [ 'class' => 'Parser' ] );
 
 		// TODO: Remove the feature flag when not needed any more!
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 		$enabled = $settings->getSetting( 'enableStatementsParserFunction' );
-		$settings->setSetting( 'enableStatementsParserFunction', true );
+		$settings->setSetting(
+			'enableStatementsParserFunction',
+			$enableStatementsParserFunction
+		);
 
 		$registrant = new ParserFunctionRegistrant( $allowDataTransclusion );
 		$registrant->register( $parser );
