@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aea567c8_2e7817ed",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-24T20:10:46Z",
+      "side": 1,
+      "message": "Uh… why not use something more readable here? In other API modules we call this just \"site\".",
+      "range": {
+        "startLine": 222,
+        "startChar": 14,
+        "endLine": 222,
+        "endChar": 15
+      },
+      "revId": "3b705f475dc8f8d0f1bda66ae2b5d9cd4c2ca457",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aea567c8_aefe6764",
+        "filename": "repo/tests/phpunit/includes/Api/SubscribersTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-24T20:10:46Z",
+      "side": 1,
+      "message": "File name doesn\u0027t match class name",
+      "revId": "3b705f475dc8f8d0f1bda66ae2b5d9cd4c2ca457",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
