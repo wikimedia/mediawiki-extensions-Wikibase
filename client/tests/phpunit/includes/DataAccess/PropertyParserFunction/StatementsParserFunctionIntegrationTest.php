@@ -126,10 +126,9 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 		$enabled = $settings->getSetting( 'enableStatementsParserFunction' );
 		$settings->setSetting( 'enableStatementsParserFunction', true );
 
-		$parserConfig = array( 'class' => 'Parser' );
 		$popt = new ParserOptions( User::newFromId( 0 ), Language::factory( 'en' ) );
 
-		$parser = new Parser( $parserConfig );
+		$parser = new Parser( [ 'class' => 'Parser' ] );
 		$pout = $parser->parse( $wikiText, Title::newFromText( $title ), $popt, Parser::OT_HTML );
 
 		$settings->setSetting( 'enableStatementsParserFunction', $enabled );
