@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cea0dbb8_beb0bc3f",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/StatementGroupRendererFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-10-24T07:16:38Z",
+      "side": 1,
+      "message": "Yes, they seem to be very similar.",
+      "parentUuid": "cea0dbb8_68b27ee6",
+      "range": {
+        "startLine": 44,
+        "startChar": 21,
+        "endLine": 44,
+        "endChar": 52
+      },
+      "revId": "a6a652718b3036ac7113cceeeca7d886d1bf29e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cea0dbb8_08b1b2dc",
         "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/StatementsParserFunctionIntegrationTest.php",
         "patchSetId": 1
