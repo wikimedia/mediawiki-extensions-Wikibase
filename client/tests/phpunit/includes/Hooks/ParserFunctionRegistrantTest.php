@@ -22,15 +22,15 @@ class ParserFunctionRegistrantTest extends PHPUnit_Framework_TestCase {
 	public function parserFunctionsProvider() {
 		return [
 			[
-				'$allowDataTransclusion' => false,
-				'$enableStatementsParserFunction' => true,
+				'allowDataTransclusion' => false,
+				'enableStatementsParserFunction' => true,
 				[
 					'noexternallanglinks',
 				]
 			],
 			[
-				'$allowDataTransclusion' => true,
-				'$enableStatementsParserFunction' => true,
+				'allowDataTransclusion' => true,
+				'enableStatementsParserFunction' => true,
 				[
 					'noexternallanglinks',
 					'property',
@@ -38,8 +38,8 @@ class ParserFunctionRegistrantTest extends PHPUnit_Framework_TestCase {
 				]
 			],
 			[
-				'$allowDataTransclusion' => true,
-				'$enableStatementsParserFunction' => false,
+				'allowDataTransclusion' => true,
+				'enableStatementsParserFunction' => false,
 				[
 					'noexternallanglinks',
 					'property'
