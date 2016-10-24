@@ -16,6 +16,24 @@
       "revId": "ec4032fc859e2548c4998504ff688b20e6dc2a04",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aea567c8_5f6b0b83",
+        "filename": "repo/includes/Store/RepoEntityTitleLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-24T10:33:08Z",
+      "side": 1,
+      "message": "I\u0027m not sure if you fully understood what\u0027s going on here. It\u0027s not me \"tying the namespace lookup to an EntityTitleLookup\". Actually it was you doing this in Ieb3be71, see https://gerrit.wikimedia.org/r/#/c/112934/16/lib/includes/store/EntityTitleLookup.php. All I do in this patch is undoing this addition, to free the generic EntityTitleLookup from something it can\u0027t know when used in a client context.",
+      "parentUuid": "cea0dbb8_6fbe08d3",
+      "revId": "ec4032fc859e2548c4998504ff688b20e6dc2a04",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
