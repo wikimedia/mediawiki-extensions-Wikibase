@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aea567c8_285b6f28",
+        "filename": "client/includes/DataAccess/StatementTransclusionInteractor.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-24T15:46:40Z",
+      "side": 1,
+      "message": "Rather use count( $formattedValues ) \u003c 2",
+      "revId": "6f1e006cb023aae64086caa3bcab915e9b9534c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
