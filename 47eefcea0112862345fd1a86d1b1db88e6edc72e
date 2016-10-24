@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "cea0dbb8_0363d33c",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-10-24T01:58:35Z",
+      "side": 1,
+      "message": "I don\u0027t think this needs the period at the end (especially in the context it\u0027s used as a tooltip)",
+      "revId": "47eefcea0112862345fd1a86d1b1db88e6edc72e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_e358ef8e",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-10-24T01:58:35Z",
+      "side": 1,
+      "message": "suggest to remove the period",
+      "revId": "47eefcea0112862345fd1a86d1b1db88e6edc72e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cea0dbb8_038cf3fd",
         "filename": "repo/i18n/qqq.json",
         "patchSetId": 6
