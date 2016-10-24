@@ -143,14 +143,14 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 					new StringValue( 'a b c' )
 				)
 			],
-			'wikibase-item label (wikibase-entityid)' => [
-				'<span>' . wfEscapeWikiText( 'label [[with]] wikitext' ) . '</span>',
+			'wikibase-entityid without sitelink' => [
+				'<span>label &#91;&#91;with&#93;&#93; wikitext</span>',
 				new PropertyValueSnak(
 					new PropertyId( 'P9' ),
 					new EntityIdValue( new ItemId( 'Q12' ) )
 				)
 			],
-			'linked wikibase-item (wikibase-entityid)' => [
+			'wikibase-entityid with sitelink' => [
 				'<span>[[Linked page|This item has a sitelink]]</span>',
 				new PropertyValueSnak(
 					new PropertyId( 'P9' ),
@@ -190,21 +190,21 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 				)
 			],
 			'globecoordinate' => [
-				wfEscapeWikiText( '12°0\'0"N, 34°0\'0"E' ),
+				'12°0&#39;0&#34;N, 34°0&#39;0&#34;E',
 				new PropertyValueSnak(
 					new PropertyId( 'P2' ),
 					new GlobeCoordinateValue( new LatLongValue( 12, 34 ), null )
 				)
 			],
 			'monolingualtext' => [
-				wfEscapeWikiText( 'a [[b]] c' ),
+				'a &#91;&#91;b&#93;&#93; c',
 				new PropertyValueSnak(
 					new PropertyId( 'P3' ),
 					new MonolingualTextValue( 'es', 'a [[b]] c' )
 				)
 			],
 			'quantity' => [
-				wfEscapeWikiText( '42 a [[b]] c' ),
+				'42 a &#91;&#91;b&#93;&#93; c',
 				new PropertyValueSnak(
 					$p4,
 					new QuantityValue(
@@ -216,7 +216,7 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 				)
 			],
 			'quantity with unit' => [
-				wfEscapeWikiText( '42 label [[with]] wikitext' ),
+				'42 label &#91;&#91;with&#93;&#93; wikitext',
 				new PropertyValueSnak(
 					$p4,
 					new QuantityValue(
@@ -228,7 +228,7 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 				)
 			],
 			'string including wikitext' => [
-				wfEscapeWikiText( 'a [[b]] c' ),
+				'a &#91;&#91;b&#93;&#93; c',
 				new PropertyValueSnak(
 					new PropertyId( 'P5' ),
 					new StringValue( 'a [[b]] c' )
@@ -261,7 +261,7 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 				)
 			],
 			'external-id including wikitext' => [
-				wfEscapeWikiText( 'a [[b]] c' ),
+				'a &#91;&#91;b&#93;&#93; c',
 				new PropertyValueSnak(
 					new PropertyId( 'P8' ),
 					new StringValue( 'a [[b]] c' )
@@ -274,14 +274,14 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 					new StringValue( 'a b c' )
 				)
 			],
-			'wikibase-item label (wikibase-entityid)' => [
-				wfEscapeWikiText( 'label [[with]] wikitext' ),
+			'wikibase-entityid without sitelink' => [
+				'label &#91;&#91;with&#93;&#93; wikitext',
 				new PropertyValueSnak(
 					new PropertyId( 'P9' ),
 					new EntityIdValue( new ItemId( 'Q12' ) )
 				)
 			],
-			'linked wikibase-item (wikibase-entityid)' => [
+			'wikibase-entityid with sitelink' => [
 				'This item has a sitelink',
 				new PropertyValueSnak(
 					new PropertyId( 'P9' ),
