@@ -24,24 +24,24 @@ class EntityIdSiteLinkFormatterTest extends PHPUnit_Framework_TestCase {
 	public function formatEntityIdProvider() {
 		return [
 			[
-				new SiteLink( 'enwiki', '<PAGE>' ),
-				new Term( 'en', '<LABEL>' ),
-				'[[<PAGE>|&#60;LABEL&#62;]]'
+				new SiteLink( 'enwiki', "'PAGE'" ),
+				new Term( 'en', "'LABEL'" ),
+				"[['PAGE'|&#39;LABEL&#39;]]"
 			],
 			[
-				new SiteLink( 'enwiki', '<PAGE>' ),
+				new SiteLink( 'enwiki', "'PAGE'" ),
 				new Term( 'en', '' ),
-				'[[<PAGE>]]'
+				"[['PAGE']]"
 			],
 			[
-				new SiteLink( 'enwiki', '<PAGE>' ),
+				new SiteLink( 'enwiki', "'PAGE'" ),
 				null,
-				'[[<PAGE>]]'
+				"[['PAGE']]"
 			],
 			[
 				null,
-				new Term( 'en', '<LABEL>' ),
-				'&#60;LABEL&#62;'
+				new Term( 'en', "'LABEL'" ),
+				'&#39;LABEL&#39;'
 			],
 			[
 				null,
@@ -66,8 +66,8 @@ class EntityIdSiteLinkFormatterTest extends PHPUnit_Framework_TestCase {
 				: null
 			) );
 
-		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
-		$labelDescriptionLookup->expects( $this->any() )
+		$labelLookup = $this->getMock( LabelDescriptionLookup::class );
+		$labelLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->with( $id )
 			->will( $this->returnValue( $label ) );
@@ -75,7 +75,7 @@ class EntityIdSiteLinkFormatterTest extends PHPUnit_Framework_TestCase {
 		$formatter = new EntityIdSiteLinkFormatter(
 			$siteLinkLookup,
 			'enwiki',
-			$labelDescriptionLookup
+			$labelLookup
 		);
 
 		$this->assertSame( $expected, $formatter->formatEntityId( $id ) );

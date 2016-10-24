@@ -43,11 +43,11 @@ interface EntityTitleLookup {
 	 *
 	 * @since 0.5
 	 *
-	 * @param string $type the entity type to look up, as returned by Entity::getType()
+	 * @param string $entityType the entity type to look up, as returned by Entity::getType()
 	 *
 	 * @throws OutOfBoundsException
 	 * @return int the namespace ID for this type
 	 */
-	public function getNamespaceForType( $type );
+	public function getNamespaceForType( $entityType );
 
 }

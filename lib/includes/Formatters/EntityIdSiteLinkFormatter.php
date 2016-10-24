@@ -34,21 +34,21 @@ class EntityIdSiteLinkFormatter implements EntityIdFormatter {
 	/**
 	 * @var LabelDescriptionLookup
 	 */
-	private $labelDescriptionLookup;
+	private $labelLookup;
 
 	/**
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param string $localSiteId
-	 * @param LabelDescriptionLookup $labelDescriptionLookup
+	 * @param LabelDescriptionLookup $labelLookup
 	 */
 	public function __construct(
 		SiteLinkLookup $siteLinkLookup,
 		$localSiteId,
-		LabelDescriptionLookup $labelDescriptionLookup
+		LabelDescriptionLookup $labelLookup
 	) {
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->localSiteId = $localSiteId;
-		$this->labelDescriptionLookup = $labelDescriptionLookup;
+		$this->labelLookup = $labelLookup;
 	}
 
 	/**
@@ -62,7 +62,7 @@ class EntityIdSiteLinkFormatter implements EntityIdFormatter {
 		$term = null;
 
 		try {
-			$term = $this->labelDescriptionLookup->getLabel( $entityId );
+			$term = $this->labelLookup->getLabel( $entityId );
 		} catch ( LabelDescriptionLookupException $ex ) {
 		}
 
@@ -83,14 +83,14 @@ class EntityIdSiteLinkFormatter implements EntityIdFormatter {
 	}
 
 	/**
-	 * @param ItemId $itemId
+	 * @param ItemId $id
 	 *
 	 * @return string|null
 	 */
-	private function getPageName( ItemId $itemId ) {
+	private function getPageName( ItemId $id ) {
 		// TODO: Bad, bad interface
 		$siteLinkData = $this->siteLinkLookup->getLinks(
-			[ $itemId->getNumericId() ],
+			[ $id->getNumericId() ],
 			[ $this->localSiteId ]
 		);
 
