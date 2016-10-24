@@ -93,13 +93,18 @@ class SnakSerializationRenderer {
 	/**
 	 * @param Snak[] $snaks
 	 *
-	 * @return string
+	 * @return string Wikitext
 	 */
 	private function formatSnakList( array $snaks ) {
-		$formattedValues = array_map(
-			array( $this->snakFormatter, 'formatSnak' ),
-			$snaks
-		);
+		$formattedValues = [];
+
+		foreach ( $snaks as $snak ) {
+			$formattedValue = $this->snakFormatter->formatSnak( $snak );
+
+			if ( $formattedValue !== '' ) {
+				$formattedValues[] = $formattedValue;
+			}
+		}
 
 		return $this->language->commaList( $formattedValues );
 	}
