@@ -281,6 +281,30 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$this->assertSame( $allowDataAccessInUserLanguage, $cacheSplit );
 	}
 
+	public function testRenderSnak_languageFallback() {
+		$this->setAllowDataAccessInUserLanguage( true );
+		$cacheSplit = false;
+		$lang = Language::factory( 'ku' );
+
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit, $lang );
+		$entityArr = $luaWikibaseLibrary->getEntity( 'Q32488' );
+
+		$snak = $entityArr[0]['claims']['P456'][1]['mainsnak'];
+		$this->assertSame(
+			[ 'Pisîk' ],
+			$luaWikibaseLibrary->renderSnak( $snak )
+		);
+
+		// All languages in the fallback chain for 'ku-arab' count as "used".
+		$usage = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();
+		$this->assertArrayHasKey( 'Q885588#L.ku', $usage );
+		$this->assertArrayHasKey( 'Q885588#L.ku-arab', $usage );
+		$this->assertArrayHasKey( 'Q885588#L.ku-latn', $usage );
+		$this->assertArrayHasKey( 'Q885588#T', $usage );
+
+		$this->assertSame( true, $cacheSplit );
+	}
+
 	public function testRenderSnak_invalidSerialization() {
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 
