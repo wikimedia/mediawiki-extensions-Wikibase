@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6ea7efd1_03a532b1",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-25T23:27:06Z",
+      "side": 1,
+      "message": "on the second thought, we can\u0027t since there\u0027s no config defining the JSON file - there\u0027s only a config defining the unit storage object, which can be anything. JSON file is sent to it as a parameter.",
+      "parentUuid": "6ea7efd1_203024fc",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aea567c8_32fbd113",
         "filename": "repo/maintenance/addUnitConversions.php",
         "patchSetId": 6
@@ -89,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "6ea7efd1_83e1422c",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-25T23:27:06Z",
+      "side": 1,
+      "message": "You mean to call it each time SPARQL client is needed? I\u0027m not sure why, it\u0027s always the same and we need to initalize it once. I can make a method for it, but frankly since it\u0027s one like calling new, I don\u0027t see a point of making method out of it.",
+      "parentUuid": "aea567c8_5707671f",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aea567c8_b7cd9364",
         "filename": "repo/maintenance/addUnitConversions.php",
         "patchSetId": 6
@@ -118,6 +154,24 @@
       "side": 1,
       "message": "sparql endpoint right now doesn\u0027t support it. We could implement it manually but I\u0027m not sure it worth it. I\u0027d suggest to cross that bridge when we come to it - that would probably require implementing paging in SPARQL client.",
       "parentUuid": "aea567c8_b7cd9364",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ea7efd1_639cf65f",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-25T23:27:06Z",
+      "side": 1,
+      "message": "btw, most popular unit now has 70825 usages. See units usage query in previous patch https://gerrit.wikimedia.org/r/#/c/298407/ I think we can handle this without paging results. We do page unit queries since querying 70k values in one query may be too much.",
+      "parentUuid": "6ea7efd1_03fbf212",
       "revId": "f75dc3c325800e26aedaa46d72371495333af403",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -211,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "6ea7efd1_23a6eea7",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-25T23:27:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aea567c8_5721a7f5",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aea567c8_574ac7c9",
         "filename": "repo/maintenance/addUnitConversions.php",
         "patchSetId": 6
@@ -257,6 +329,24 @@
       "writtenOn": "2016-10-25T17:29:27Z",
       "side": 1,
       "message": "\"Process\" to do what?",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ea7efd1_43169af7",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-25T23:27:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aea567c8_97272f0d",
       "revId": "f75dc3c325800e26aedaa46d72371495333af403",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -315,6 +405,24 @@
     },
     {
       "key": {
+        "uuid": "6ea7efd1_63963651",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-25T23:27:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aea567c8_1782ffcd",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aea567c8_b236c1e2",
         "filename": "repo/maintenance/addUnitConversions.php",
         "patchSetId": 6
@@ -332,6 +440,24 @@
     },
     {
       "key": {
+        "uuid": "6ea7efd1_c3abca6c",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-25T23:27:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aea567c8_b236c1e2",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aea567c8_12a44d03",
         "filename": "repo/maintenance/addUnitConversions.php",
         "patchSetId": 6
@@ -343,6 +469,24 @@
       "writtenOn": "2016-10-25T17:29:27Z",
       "side": 1,
       "message": "should either not take parameters, or be called newRdfVocabulary. It\u0027s a factory, not a getter",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ea7efd1_03d9b22c",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-25T23:27:06Z",
+      "side": 1,
+      "message": "Done.\n\nNote that RdfWriterFactory has getWriter() which does receive parameters and create writers :)",
+      "parentUuid": "aea567c8_12a44d03",
       "revId": "f75dc3c325800e26aedaa46d72371495333af403",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
