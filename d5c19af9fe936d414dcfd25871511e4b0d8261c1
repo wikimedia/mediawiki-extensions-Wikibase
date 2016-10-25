@@ -22,6 +22,30 @@
       "revId": "d5c19af9fe936d414dcfd25871511e4b0d8261c1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aea567c8_3e16004e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-25T08:13:23Z",
+      "side": 1,
+      "message": "It used FORMAT_WIKI which we are currently heavily changing. In order to keep the old FORMAT_WIKI behavior, I also needed to change it to use the escaped plain text we use in other places.",
+      "parentUuid": "aea567c8_feff78fa",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "d5c19af9fe936d414dcfd25871511e4b0d8261c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
