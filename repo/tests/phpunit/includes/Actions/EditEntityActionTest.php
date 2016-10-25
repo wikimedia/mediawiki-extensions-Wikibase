@@ -879,6 +879,9 @@ class EditEntityActionTest extends ActionTestCase {
 		self::resetTestItem( $handle );
 	}
 
+	/**
+	 * @return int
+	 */
 	private function getItemNamespace() {
 		 $entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 		 return $entityNamespaceLookup->getEntityNamespace( 'item' );

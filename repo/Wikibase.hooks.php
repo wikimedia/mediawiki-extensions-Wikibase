@@ -576,7 +576,7 @@ final class RepoHooks {
 				/** @var EntityHandler $handler */
 				$handler = ContentHandler::getForModelID( $contentModel );
 
-				if ( $handler->getEntityNamespace() == $namespace ) {
+				if ( $handler->getEntityNamespace() === $namespace ) {
 					// trying to use ApiEditPage on an entity namespace
 					$params = $module->extractRequestParams();
 
