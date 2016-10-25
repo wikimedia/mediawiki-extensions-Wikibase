@@ -2,10 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Kaganer",
-			"AlnashPiyash2"
+			"AlnashPiyash2",
+			"Wadorgurt"
 		]
 	},
+	"tooltip-t-wikibase": "Даннойёслэн репозиториысьтызы герӟаськем элементэ чӧлскон",
+	"wikibase-dataitem": "{{WBREPONAME}}ысь элемент",
 	"wikibase-editlinks": "Чӧлсконъёсыз тупатыны",
+	"wikibase-editlinkstitle": "Кылъёс куспын чӧлсконъёсыз тупатыны",
 	"wikibase-rc-hide-wikidata-show": "Возьматыны",
 	"wikibase-rc-wikibase-edit-letter": "д",
 	"wikibase-rc-wikibase-edit-title": "{{grammar:genitive|{{WBREPONAME}}}} тупатон",

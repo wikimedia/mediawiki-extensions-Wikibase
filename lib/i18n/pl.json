@@ -88,6 +88,7 @@
 	"wikibase-time-precision-Mannum": "$1 mln lat p.n.e.",
 	"wikibase-time-precision-millennium": "$1. tysiąclecie",
 	"wikibase-time-precision-century": "$1. wiek",
+	"wikibase-time-precision-10annum": "lata $1-te",
 	"wikibase-time-precision-BCE-Gannum": "$1 {{PLURAL:$1|miliard|miliardy|miliardów}} lat p.n.e.",
 	"wikibase-time-precision-BCE-Mannum": "$1 {{PLURAL:$1|milion|miliony|milionów}} lat p.n.e.",
 	"wikibase-time-precision-BCE-annum": "{{PLURAL:$1|$1 rok|$1 lata|$1 lat}} p.n.e.",
