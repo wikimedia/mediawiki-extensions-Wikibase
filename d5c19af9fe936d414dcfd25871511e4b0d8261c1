@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aea567c8_feff78fa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-25T08:11:32Z",
+      "side": 1,
+      "message": "What is a \"b/c\"? \"Because\"? \"Backwards compatible\"? What was not backwards compatible with what?\n\nPlease try to be more specific in commit messages. Thank you.",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "d5c19af9fe936d414dcfd25871511e4b0d8261c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
