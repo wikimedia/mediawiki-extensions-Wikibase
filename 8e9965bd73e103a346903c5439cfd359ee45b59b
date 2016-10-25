@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "aea567c8_d7fed765",
+        "filename": "lib/includes/Formatters/CommonsThumbnailFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-25T16:12:29Z",
+      "side": 1,
+      "message": "This formatter can not access anything but the StringValue. It can not access the property, rank, qualifiers and references. At least the PropertyId is required to be able to label the image of a gravestone with \"image of a gravestone\".",
+      "parentUuid": "aea567c8_b747d321",
+      "revId": "8e9965bd73e103a346903c5439cfd359ee45b59b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aea567c8_77682b85",
         "filename": "lib/includes/Formatters/CommonsThumbnailFormatter.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2016-10-25T16:04:41Z",
       "side": 1,
       "message": "That actually breaks various assumption about formatting we have right now… still it sounds like a worthwhile feature, just noting.",
+      "revId": "8e9965bd73e103a346903c5439cfd359ee45b59b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aea567c8_57ebe7a0",
+        "filename": "lib/includes/Formatters/CommonsThumbnailFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-25T16:12:29Z",
+      "side": 1,
+      "message": "What assumptions? The only assumption I know about is that the {{#statement:…}} parser function outputs wikitext. And we discussed an \"always a single DOM element\" guarantee, which still holds when outputting a \u003cgallery\u003e. That\u0027s all I know.",
+      "parentUuid": "aea567c8_77682b85",
       "revId": "8e9965bd73e103a346903c5439cfd359ee45b59b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
