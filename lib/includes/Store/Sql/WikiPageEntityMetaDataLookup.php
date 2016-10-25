@@ -239,7 +239,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 				$entityId->getEntityType()
 			);
 
-			if ( $namespace === false ) {
+			if ( !is_int( $namespace ) ) {
 				// If we don't know a namespace, there is no chance we'll find a page.
 				wfWarn(
 					__METHOD__ . ': no namespace defined for entity type '
