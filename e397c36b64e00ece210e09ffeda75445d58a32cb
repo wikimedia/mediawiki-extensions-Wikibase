@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aea567c8_bee7b0de",
+        "filename": "lib/includes/Formatters/CommonsThumbnailFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-25T09:22:50Z",
+      "side": 1,
+      "message": "This is not database key form, like Title::makeTitleSafe asks for. That leads to Title::mDbkeyform not actually being in a DB key form.\n\nI guess this doesn\u0027t matter much here, but it still seems wrong. We should probably rather just get the namespace name and then do \"$ns:$fileName\"? Maybe wikitext escape these?",
+      "range": {
+        "startLine": 42,
+        "startChar": 42,
+        "endLine": 42,
+        "endChar": 51
+      },
+      "revId": "e397c36b64e00ece210e09ffeda75445d58a32cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
