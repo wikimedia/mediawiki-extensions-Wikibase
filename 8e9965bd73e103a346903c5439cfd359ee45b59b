@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aea567c8_b747d321",
+        "filename": "lib/includes/Formatters/CommonsThumbnailFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-25T16:04:41Z",
+      "side": 1,
+      "message": "huh? What do you mean?",
+      "revId": "8e9965bd73e103a346903c5439cfd359ee45b59b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aea567c8_77682b85",
+        "filename": "lib/includes/Formatters/CommonsThumbnailFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-25T16:04:41Z",
+      "side": 1,
+      "message": "That actually breaks various assumption about formatting we have right now… still it sounds like a worthwhile feature, just noting.",
+      "revId": "8e9965bd73e103a346903c5439cfd359ee45b59b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
