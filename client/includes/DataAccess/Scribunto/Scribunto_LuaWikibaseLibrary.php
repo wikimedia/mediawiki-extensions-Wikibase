@@ -7,12 +7,10 @@ use Exception;
 use Language;
 use Scribunto_LuaLibraryBase;
 use ScribuntoException;
-use ValueFormatters\FormatterOptions;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
-use Wikibase\Client\Usage\UsageTrackingSnakFormatter;
 use Wikibase\Client\Usage\UsageTrackingTermLookup;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -20,7 +18,6 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\EntityAccessLimitException;
 use Wikibase\LanguageFallbackChain;
-use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 
@@ -223,16 +220,10 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	private function newSnakSerializationRenderer() {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
-		$formatterOptions = new FormatterOptions( array(
-			SnakFormatter::OPT_LANG => $this->getLanguage()->getCode()
-		) );
-
-		$snakFormatter = new UsageTrackingSnakFormatter(
-			$wikibaseClient->getSnakFormatterFactory()->getSnakFormatter(
-				SnakFormatter::FORMAT_WIKI, $formatterOptions
-			),
-			$this->getUsageAccumulator(),
-			$this->getLanguageFallbackChain()->getFetchLanguageCodes()
+		$snakFormatterFactory = $wikibaseClient->getDataAccessSnakFormatterFactory();
+		$snakFormatter = $snakFormatterFactory->newEscapedPlainTextSnakFormatter(
+			$this->getLanguage(),
+			$this->getUsageAccumulator()
 		);
 
 		$snakDeserializer = $wikibaseClient->getExternalFormatDeserializerFactory()->newSnakDeserializer();
