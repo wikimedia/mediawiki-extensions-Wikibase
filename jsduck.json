@@ -5,7 +5,7 @@
   "--warnings-exit-nonzero": true,
   "--builtin-classes": true,
   "--external": "HTMLDocument,Window,MouseEvent,KeyboardEvent,File,jQuery,jQuery.Promise,jQuery.Event",
-  "--warnings": ["-nodoc(class,public)", "-tag(license)"],
+  "--warnings": ["-all"],
   "--": [
     "view/"
   ]
