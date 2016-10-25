@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aea567c8_5291b59b",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-25T17:29:27Z",
+      "side": 1,
+      "message": "Why not use the one from the settings?",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aea567c8_32fbd113",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-25T17:29:27Z",
+      "side": 1,
+      "message": "Should abort with a meaningfull error message if $endPoint is null here.\nAlso, it would be nice if this could be overwritten by a command line option. At least for testing.",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aea567c8_5707671f",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-25T17:29:27Z",
+      "side": 1,
+      "message": "would be nicer to have a private getter for this with lazy initialization",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aea567c8_b7cd9364",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-25T17:29:27Z",
+      "side": 1,
+      "message": "There may be millions of usages of that unit. What should be the hard limit? Can we support batching/paging?",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aea567c8_12d9ed83",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-25T17:29:27Z",
+      "side": 1,
+      "message": "Seems like $values can be null/false on error. This needs checking. Ideally, SprqlClient would check and throw an exception. It would in any case be cood to get some kind of hint as to why the query is failing.",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aea567c8_77eeebb2",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-25T17:29:27Z",
+      "side": 1,
+      "message": "the structure of $value is obscure here. is it documented somewhere? Can we link to that doc here?",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aea567c8_5721a7f5",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-25T17:29:27Z",
+      "side": 1,
+      "message": "$value should have an array type hint",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aea567c8_574ac7c9",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-25T17:29:27Z",
+      "side": 1,
+      "message": "I\u0027d suggest to make a public method in QuantityRdfBuilder that does what you need, and call it form here.",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aea567c8_97272f0d",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-25T17:29:27Z",
+      "side": 1,
+      "message": "\"Process\" to do what?",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8eaa6398_9e099d32",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-25T17:29:27Z",
+      "side": 1,
+      "message": "$data appears to be null or false sometimes. Please implement proper error handling in SparqlClient.",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aea567c8_1782ffcd",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-25T17:29:27Z",
+      "side": 1,
+      "message": "can you add a quick note what this string juggling is intended to do?",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aea567c8_b236c1e2",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-25T17:29:27Z",
+      "side": 1,
+      "message": "no error handling?",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aea567c8_12a44d03",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-25T17:29:27Z",
+      "side": 1,
+      "message": "should either not take parameters, or be called newRdfVocabulary. It\u0027s a factory, not a getter",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
