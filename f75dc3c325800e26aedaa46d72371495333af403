@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ea7efd1_203024fc",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-25T22:38:15Z",
+      "side": 1,
+      "message": "I guess yes, we could use it at least as a default.",
+      "parentUuid": "aea567c8_5291b59b",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aea567c8_32fbd113",
         "filename": "repo/maintenance/addUnitConversions.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2016-10-25T17:29:27Z",
       "side": 1,
       "message": "Should abort with a meaningfull error message if $endPoint is null here.\nAlso, it would be nice if this could be overwritten by a command line option. At least for testing.",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ea7efd1_c015004f",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-25T22:38:15Z",
+      "side": 1,
+      "message": "makes sense, will add.",
+      "parentUuid": "aea567c8_32fbd113",
       "revId": "f75dc3c325800e26aedaa46d72371495333af403",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "6ea7efd1_03fbf212",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-25T22:38:15Z",
+      "side": 1,
+      "message": "sparql endpoint right now doesn\u0027t support it. We could implement it manually but I\u0027m not sure it worth it. I\u0027d suggest to cross that bridge when we come to it - that would probably require implementing paging in SPARQL client.",
+      "parentUuid": "aea567c8_b7cd9364",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aea567c8_12d9ed83",
         "filename": "repo/maintenance/addUnitConversions.php",
         "patchSetId": 6
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "6ea7efd1_a309de31",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-25T22:38:15Z",
+      "side": 1,
+      "message": "In many cases it\u0027s hard to know why unless you read the error message itself.",
+      "parentUuid": "aea567c8_12d9ed83",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aea567c8_77eeebb2",
         "filename": "repo/maintenance/addUnitConversions.php",
         "patchSetId": 6
@@ -98,6 +170,24 @@
       "writtenOn": "2016-10-25T17:29:27Z",
       "side": 1,
       "message": "the structure of $value is obscure here. is it documented somewhere? Can we link to that doc here?",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ea7efd1_0322d2a2",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-25T22:38:15Z",
+      "side": 1,
+      "message": "the structure of value is the fields from the query projection.",
+      "parentUuid": "aea567c8_77eeebb2",
       "revId": "f75dc3c325800e26aedaa46d72371495333af403",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -138,6 +228,24 @@
     },
     {
       "key": {
+        "uuid": "6ea7efd1_c352aa16",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-25T22:38:15Z",
+      "side": 1,
+      "message": "Instantiating  QuantityRdfBuilder requires array of dependencies that I definitely don\u0027t want to deal with in a maintenance script we\u0027d run once a couple of months. I tried to make it work with  QuantityRdfBuilder but it\u0027s just too much work for implementing a simple function.",
+      "parentUuid": "aea567c8_574ac7c9",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aea567c8_97272f0d",
         "filename": "repo/maintenance/addUnitConversions.php",
         "patchSetId": 6
@@ -166,6 +274,24 @@
       "writtenOn": "2016-10-25T17:29:27Z",
       "side": 1,
       "message": "$data appears to be null or false sometimes. Please implement proper error handling in SparqlClient.",
+      "revId": "f75dc3c325800e26aedaa46d72371495333af403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ea7efd1_633ab6c2",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-25T22:38:15Z",
+      "side": 1,
+      "message": "it should never be false or null here. Could you elaborate when it happens for you?",
+      "parentUuid": "8eaa6398_9e099d32",
       "revId": "f75dc3c325800e26aedaa46d72371495333af403",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
