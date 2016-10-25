@@ -33,11 +33,10 @@ class ViewEntityAction extends ViewAction {
 		$contentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 		$ns = $article->getTitle()->getNamespace();
+		$entityType = $namespaceLookup->getEntityType( $ns );
 		$oldid = $article->getOldID();
-		if ( $namespaceLookup->isEntityNamespace( $ns ) && !$oldid ) {
-			$typeMap = array_flip( $namespaceLookup->getEntityNamespaces() );
-			$entityType = $typeMap[ $ns ]; // isEntityNamespace() guarantees that this is set.
 
+		if ( $entityType !== null && !$oldid ) {
 			$handler = $contentFactory->getContentHandlerForType( $entityType );
 			$handler->showMissingEntity( $article->getTitle(), $article->getContext() );
 
