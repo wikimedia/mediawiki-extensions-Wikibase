@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ea7efd1_91850cb4",
+        "filename": "client/includes/RepositorySpecificDispatchingServicesFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-26T12:46:43Z",
+      "side": 1,
+      "message": "I would suggest to extend ServiceContainer here.",
+      "revId": "4f17da4521a87496d5f2436c8d335a9e04e707f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ea7efd1_718280ab",
+        "filename": "client/includes/RepositorySpecificDispatchingServicesFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-26T12:46:43Z",
+      "side": 1,
+      "message": "The constructor should take the \"parent\" WikibaseClient object for access to non-repo-specific services. And it should take a Config or Settings object (not sure which is better) that has the repo-specific configuration.",
+      "revId": "4f17da4521a87496d5f2436c8d335a9e04e707f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ea7efd1_318cf8da",
+        "filename": "client/includes/RepositorySpecificDispatchingServicesFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-26T12:46:43Z",
+      "side": 1,
+      "message": "If you extend ServiceContainer, the actual instantiator logic would be moved to a wiring file, like the one we now have in core.\n\nThe repo-independent services could also use a ServiceContainer and a wiring file, but a different one.",
+      "revId": "4f17da4521a87496d5f2436c8d335a9e04e707f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
