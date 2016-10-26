@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Store;
 
-use DatabaseBase;
+use Database;
 use Wikibase\DataModel\Entity\Item;
 
 /**
@@ -27,7 +27,7 @@ interface SiteLinkConflictLookup {
 	 * @since 0.1
 	 *
 	 * @param Item          $item
-	 * @param DatabaseBase|null $db The database object to use (optional).
+	 * @param Database|null $db The database object to use (optional).
 	 *        If conflict checking is performed as part of a save operation,
 	 *        this should be used to provide the master DB connection that will
 	 *        also be used for saving. This will preserve transactional integrity
@@ -35,6 +35,6 @@ interface SiteLinkConflictLookup {
 	 *
 	 * @return array[]
 	 */
-	public function getConflictsForItem( Item $item, DatabaseBase $db = null );
+	public function getConflictsForItem( Item $item, Database $db = null );
 
 }

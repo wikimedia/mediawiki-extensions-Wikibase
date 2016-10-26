@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
-use DatabaseBase;
+use Database;
 use FakeResultWrapper;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\Item;
@@ -101,8 +101,8 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	/**
 	 * Gets a "lagged" database connection: We always leave out the first row on select.
 	 */
-	private function getLaggedDatabase( DatabaseBase $realDB, $selectCount, $selectRowCount ) {
-		$db = $this->getMockBuilder( DatabaseBase::class )
+	private function getLaggedDatabase( Database $realDB, $selectCount, $selectRowCount ) {
+		$db = $this->getMockBuilder( Database::class )
 			->disableOriginalConstructor()
 			->setMethods( array( 'select', 'selectRow' ) )
 			->setProxyTarget( $realDB )

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use DatabaseBase;
+use Database;
 use Title;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\DataModel\Entity\EntityId;
@@ -34,7 +34,7 @@ class PagePropsEntityIdLookupTest extends \MediaWikiTestCase {
 		return $title;
 	}
 
-	private function insertPageProps( DatabaseBase $db, $pageId, EntityId $entityId ) {
+	private function insertPageProps( Database $db, $pageId, EntityId $entityId ) {
 		$db->insert(
 			'page_props',
 			array(

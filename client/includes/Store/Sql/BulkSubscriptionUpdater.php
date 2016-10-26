@@ -212,7 +212,7 @@ class BulkSubscriptionUpdater {
 	}
 
 	/**
-	 * Returns a list of rows for insertion, using DatabaseBase's multi-row insert mechanism.
+	 * Returns a list of rows for insertion, using Database's multi-row insert mechanism.
 	 * Each row is represented as array( $entityId, $subscriber ).
 	 *
 	 * @param string[] $entities entity id strings

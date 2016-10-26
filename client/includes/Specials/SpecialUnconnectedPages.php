@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Specials;
 
-use DatabaseBase;
+use Database;
 use FakeResultWrapper;
 use Html;
 use Linker;
@@ -95,13 +95,13 @@ class SpecialUnconnectedPages extends QueryPage {
 	 *
 	 * @since 0.4
 	 *
-	 * @param DatabaseBase $dbr
+	 * @param Database $dbr
 	 * @param Title|null $title
 	 * @param NamespaceChecker|null $checker
 	 *
 	 * @return string[]
 	 */
-	public function buildConditionals( DatabaseBase $dbr, Title $title = null, NamespaceChecker $checker = null ) {
+	public function buildConditionals( Database $dbr, Title $title = null, NamespaceChecker $checker = null ) {
 		$conds = array();
 
 		if ( $checker === null ) {

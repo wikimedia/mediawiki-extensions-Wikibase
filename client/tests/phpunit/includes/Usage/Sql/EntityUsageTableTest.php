@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Tests\Usage\Sql;
 
-use DatabaseBase;
+use Database;
 use InvalidArgumentException;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
@@ -342,12 +342,12 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param DatabaseBase $db
+	 * @param Database $db
 	 * @param array $conditions
 	 *
 	 * @return bool
 	 */
-	private function rowExists( DatabaseBase $db, array $conditions ) {
+	private function rowExists( Database $db, array $conditions ) {
 		$count = $db->selectRowCount( EntityUsageTable::DEFAULT_TABLE_NAME, '*', $conditions );
 		return $count > 0;
 	}

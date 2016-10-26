@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
-use DatabaseBase;
+use Database;
 use DBAccessBase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
@@ -22,11 +22,11 @@ class SqlSiteLinkConflictLookup extends DBAccessBase implements SiteLinkConflict
 	 * @see SiteLinkConflictLookup::getConflictsForItem
 	 *
 	 * @param Item $item
-	 * @param DatabaseBase|null $db
+	 * @param Database|null $db
 	 *
 	 * @return array[]
 	 */
-	public function getConflictsForItem( Item $item, DatabaseBase $db = null ) {
+	public function getConflictsForItem( Item $item, Database $db = null ) {
 		$siteLinks = $item->getSiteLinkList();
 
 		if ( $siteLinks->isEmpty() ) {

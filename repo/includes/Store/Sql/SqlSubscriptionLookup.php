@@ -2,7 +2,7 @@
 
 namespace Wikibase\Store\Sql;
 
-use DatabaseBase;
+use Database;
 use LoadBalancer;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Store\SubscriptionLookup;
@@ -88,13 +88,13 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 	/**
 	 * For a set of potential subscriptions, returns the existing subscriptions.
 	 *
-	 * @param DatabaseBase $db
+	 * @param Database $db
 	 * @param string $subscriber
 	 * @param string[]|null $idsToCheck Id strings to check
 	 *
 	 * @return string[] Entity ID strings from $subscriptions which $subscriber is subscribed to.
 	 */
-	private function querySubscriptions( DatabaseBase $db, $subscriber, array $idsToCheck = null ) {
+	private function querySubscriptions( Database $db, $subscriber, array $idsToCheck = null ) {
 		$where = array(
 			'cs_subscriber_id' => $subscriber,
 		);

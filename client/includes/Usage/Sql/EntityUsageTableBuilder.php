@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Usage\Sql;
 
-use DatabaseBase;
+use Database;
 use Exception;
 use InvalidArgumentException;
 use LoadBalancer;
@@ -146,12 +146,12 @@ class EntityUsageTableBuilder {
 	}
 
 	/**
-	 * @param DatabaseBase $db
+	 * @param Database $db
 	 * @param EntityId[] $entityPerPage
 	 *
 	 * @return int The number of rows inserted.
 	 */
-	private function insertUsageBatch( DatabaseBase $db, array $entityPerPage ) {
+	private function insertUsageBatch( Database $db, array $entityPerPage ) {
 		$db->startAtomic( __METHOD__ );
 
 		$c = 0;
@@ -177,12 +177,12 @@ class EntityUsageTableBuilder {
 	}
 
 	/**
-	 * @param DatabaseBase $db
+	 * @param Database $db
 	 * @param int $fromPageId
 	 *
 	 * @return EntityId[] An associative array mapping page IDs to Entity IDs.
 	 */
-	private function getUsageBatch( DatabaseBase $db, $fromPageId = 0 ) {
+	private function getUsageBatch( Database $db, $fromPageId = 0 ) {
 		$res = $db->select(
 			'page_props',
 			array( 'pp_page', 'pp_value' ),

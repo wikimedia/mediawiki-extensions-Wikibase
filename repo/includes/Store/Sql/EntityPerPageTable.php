@@ -165,7 +165,7 @@ class EntityPerPageTable implements EntityPerPage {
 
 	/**
 	 * Returns a list of unique indexes, each index being described by a list of fields.
-	 * This is intended for use with DatabaseBase::replace().
+	 * This is intended for use with Database::replace().
 	 *
 	 * @return array[]
 	 */

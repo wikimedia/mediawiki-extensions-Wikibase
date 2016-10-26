@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Store;
 
-use DatabaseBase;
+use Database;
 use DBAccessBase;
 use MWException;
 use Wikibase\DataModel\Entity\Item;
@@ -127,11 +127,11 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 	/**
 	 * @param Item $item
 	 * @param SiteLink[] $links
-	 * @param DatabaseBase $dbw
+	 * @param Database $dbw
 	 *
 	 * @return bool Success indicator
 	 */
-	private function insertLinks( Item $item, array $links, DatabaseBase $dbw ) {
+	private function insertLinks( Item $item, array $links, Database $dbw ) {
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': inserting links for ' . $item->getId()->getSerialization() );
 
 		$insert = array();
@@ -156,11 +156,11 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 	/**
 	 * @param Item $item
 	 * @param SiteLink[] $links
-	 * @param DatabaseBase $dbw
+	 * @param Database $dbw
 	 *
 	 * @return bool Success indicator
 	 */
-	private function deleteLinks( Item $item, array $links, DatabaseBase $dbw ) {
+	private function deleteLinks( Item $item, array $links, Database $dbw ) {
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': deleting links for ' . $item->getId()->getSerialization() );
 
 		$siteIds = array();

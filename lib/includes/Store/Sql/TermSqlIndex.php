@@ -2,7 +2,7 @@
 
 namespace Wikibase;
 
-use DatabaseBase;
+use Database;
 use DBAccessBase;
 use InvalidArgumentException;
 use MWException;
@@ -134,11 +134,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	/**
 	 * @param EntityDocument $entity
 	 * @param TermIndexEntry[] $terms
-	 * @param DatabaseBase $dbw
+	 * @param Database $dbw
 	 *
 	 * @return bool Success indicator
 	 */
-	private function insertTerms( EntityDocument $entity, array $terms, DatabaseBase $dbw ) {
+	private function insertTerms( EntityDocument $entity, array $terms, Database $dbw ) {
 		$entityIdentifiers = array(
 			// FIXME: this will fail for IDs that do not have a numeric form
 			'term_entity_id' => $entity->getId()->getNumericId(),
@@ -265,11 +265,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	/**
 	 * @param EntityId $entityId
 	 * @param TermIndexEntry[] $terms
-	 * @param DatabaseBase $dbw
+	 * @param Database $dbw
 	 *
 	 * @return bool Success indicator
 	 */
-	private function deleteTerms( EntityId $entityId, array $terms, DatabaseBase $dbw ) {
+	private function deleteTerms( EntityId $entityId, array $terms, Database $dbw ) {
 		//TODO: Make getTermsOfEntity() collect term_row_id values, so we can use them here.
 		//      That would allow us to do the deletion in a single query, based on a set of ids.
 
@@ -490,7 +490,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @since 0.1
 	 *
-	 * @return DatabaseBase
+	 * @return Database
 	 */
 	public function getReadDb() {
 		return $this->getConnection( DB_SLAVE );
@@ -501,7 +501,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @since 0.4
 	 *
-	 * @return DatabaseBase
+	 * @return Database
 	 */
 	public function getWriteDb() {
 		return $this->getConnection( DB_MASTER );
@@ -653,7 +653,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	}
 
 	/**
-	 * @param DatabaseBase $db
+	 * @param Database $db
 	 * @param TermIndexEntry[] $terms
 	 * @param string|string[]|null $termType
 	 * @param string|string[]|null $entityType
@@ -662,7 +662,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return string[]
 	 */
 	private function termsToConditions(
-		DatabaseBase $db,
+		Database $db,
 		array $terms,
 		$termType = null,
 		$entityType = null,
@@ -679,7 +679,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	}
 
 	/**
-	 * @param DatabaseBase $db
+	 * @param Database $db
 	 * @param TermIndexEntry $term
 	 * @param string|string[]|null $termType
 	 * @param string|string[]|null $entityType
@@ -688,7 +688,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return array
 	 */
 	private function termMatchConditions(
-		DatabaseBase $db,
+		Database $db,
 		TermIndexEntry $term,
 		$termType = null,
 		$entityType = null,

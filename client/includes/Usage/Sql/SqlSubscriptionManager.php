@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Usage\Sql;
 
-use DatabaseBase;
+use Database;
 use DBError;
 use Exception;
 use InvalidArgumentException;
@@ -117,13 +117,13 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	/**
 	 * For a set of potential subscriptions, returns the existing subscriptions.
 	 *
-	 * @param DatabaseBase $db
+	 * @param Database $db
 	 * @param string $subscriber
 	 * @param string[] $subscriptions
 	 *
 	 * @return string[] Entity ID strings from $subscriptions which $subscriber is already subscribed to.
 	 */
-	private function querySubscriptions( DatabaseBase $db, $subscriber, array $subscriptions ) {
+	private function querySubscriptions( Database $db, $subscriber, array $subscriptions ) {
 		if ( $subscriptions ) {
 			$subscriptions = $db->selectFieldValues(
 				'wb_changes_subscription',
@@ -142,11 +142,11 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	/**
 	 * Inserts a set of subscriptions.
 	 *
-	 * @param DatabaseBase $db
+	 * @param Database $db
 	 * @param string $subscriber
 	 * @param string[] $subscriptions
 	 */
-	private function insertSubscriptions( DatabaseBase $db, $subscriber, array $subscriptions ) {
+	private function insertSubscriptions( Database $db, $subscriber, array $subscriptions ) {
 		$rows = $this->makeSubscriptionRows( $subscriber, $subscriptions );
 
 		$db->insert(
@@ -160,11 +160,11 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	/**
 	 * Inserts a set of subscriptions.
 	 *
-	 * @param DatabaseBase $db
+	 * @param Database $db
 	 * @param string $subscriber
 	 * @param string[] $subscriptions
 	 */
-	private function deleteSubscriptions( DatabaseBase $db, $subscriber, array $subscriptions ) {
+	private function deleteSubscriptions( Database $db, $subscriber, array $subscriptions ) {
 		if ( $subscriptions ) {
 			$db->delete(
 				'wb_changes_subscription',
@@ -178,7 +178,7 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	}
 
 	/**
-	 * Returns a list of rows for insertion, using DatabaseBase's multi-row insert mechanism.
+	 * Returns a list of rows for insertion, using Database's multi-row insert mechanism.
 	 * Each row is represented as array( $subscriber, $entityId ).
 	 *
 	 * @param string $subscriber
