@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_c3098531",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-27T13:40:12Z",
+      "side": 1,
+      "message": "getEntityUsageUrl would be more appropriate",
+      "range": {
+        "startLine": 280,
+        "startChar": 18,
+        "endLine": 280,
+        "endChar": 34
+      },
+      "revId": "931964153ca1e42776ae8c547814ce10cbc4f082",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
