@@ -177,15 +177,14 @@ end
 
 -- Get the formatted value of the claims with the given property id
 --
+-- @param {table} entity
+-- @param {string} phpFormatterFunction
 -- @param {string} propertyLabelOrId
 -- @param {table} [acceptableRanks]
-methodtable.formatPropertyValues = function( entity, propertyLabelOrId, acceptableRanks )
-	checkType( 'formatPropertyValues', 1, propertyLabelOrId, 'string' )
-	checkTypeMulti( 'formatPropertyValues', 2, acceptableRanks, { 'table', 'nil' } )
-
+local formatValuesByPropertyId = function( entity, phpFormatterFunction, propertyLabelOrId, acceptableRanks )
 	acceptableRanks = acceptableRanks or nil
 
-	local formatted = php.formatPropertyValues(
+	local formatted = php[phpFormatterFunction](
 		entity.id,
 		propertyLabelOrId,
 		acceptableRanks
@@ -205,6 +204,45 @@ methodtable.formatPropertyValues = function( entity, propertyLabelOrId, acceptab
 		value = formatted,
 		label = label
 	}
+end
+
+-- Format the main Snaks belonging to a Statement (which is identified by a PropertyId
+-- or the label of a Property) as escaped plain text.
+--
+-- @param {string} propertyLabelOrId
+-- @param {table} [acceptableRanks]
+methodtable.formatPropertyValues = function( entity, propertyLabelOrId, acceptableRanks )
+	checkType( 'formatPropertyValues', 1, propertyLabelOrId, 'string' )
+	checkTypeMulti( 'formatPropertyValues', 2, acceptableRanks, { 'table', 'nil' } )
+
+	return formatValuesByPropertyId(
+		entity,
+		'formatPropertyValues',
+		propertyLabelOrId,
+		acceptableRanks
+	);
+end
+
+-- Format the main Snaks belonging to a Statement (which is identified by a PropertyId
+-- or the label of a Property) as rich wikitext.
+--
+-- @param {string} propertyLabelOrId
+-- @param {table} [acceptableRanks]
+methodtable.formatStatements = function( entity, propertyLabelOrId, acceptableRanks )
+	checkType( 'formatStatements', 1, propertyLabelOrId, 'string' )
+	checkTypeMulti( 'formatStatements', 2, acceptableRanks, { 'table', 'nil' } )
+
+	-- TODO: Remove the feature flag when not needed anymore!
+	if php.isFormatStatementsEnabled() ~= true then
+		error( 'mw.wikibase.entity:formatStatements() has been disabled on this wiki.', 2 )
+	end
+
+	return formatValuesByPropertyId(
+		entity,
+		'formatStatements',
+		propertyLabelOrId,
+		acceptableRanks
+	);
 end
 
 mw.wikibase.entity = entity

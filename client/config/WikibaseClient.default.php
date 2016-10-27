@@ -51,6 +51,7 @@ return call_user_func( function() {
 		// Allows users to split the ParserCache by user language.
 		'allowDataAccessInUserLanguage' => false,
 		'enableStatementsParserFunction' => false,
+		'enableLuaEntityFormatStatements' => false,
 
 		/**
 		 * Prefix to use for cache keys that should be shared among a Wikibase Repo instance and all

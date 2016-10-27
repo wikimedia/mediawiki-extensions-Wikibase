@@ -27,18 +27,27 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 	 */
 	private $oldAllowDataAccessInUserLanguage;
 
+	/**
+	 * @var bool
+	 */
+	private $oldEnableLuaEntityFormatStatements;
+
 	protected static $moduleName = 'LuaWikibaseEntityLibraryTests';
 
 	protected function getTestModules() {
-		return parent::getTestModules() + array(
+		return parent::getTestModules() + [
 			'LuaWikibaseEntityLibraryTests' => __DIR__ . '/LuaWikibaseEntityLibraryTests.lua',
-		);
+		];
 	}
 
 	protected function setUp() {
 		parent::setUp();
 
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+
+		$this->oldEnableLuaEntityFormatStatements = $settings->getSetting( 'enableLuaEntityFormatStatements' );
+		$settings->setSetting( 'enableLuaEntityFormatStatements', true );
+
 		$this->oldAllowDataAccessInUserLanguage = $settings->getSetting( 'allowDataAccessInUserLanguage' );
 		$this->setAllowDataAccessInUserLanguage( false );
 	}
@@ -47,13 +56,19 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		parent::tearDown();
 
 		$this->setAllowDataAccessInUserLanguage( $this->oldAllowDataAccessInUserLanguage );
+
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		$settings->setSetting(
+			'enableLuaEntityFormatStatements',
+			$this->oldEnableLuaEntityFormatStatements
+		);
 	}
 
 	public function allowDataAccessInUserLanguageProvider() {
-		return array(
-			array( true ),
-			array( false ),
-		);
+		return [
+			[ true ],
+			[ false ],
+		];
 	}
 
 	public function testConstructor() {
@@ -100,8 +115,8 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit );
 
 		$this->assertSame(
-			array( '' ),
-			$luaWikibaseLibrary->formatPropertyValues( 'Q1', 'P65536', array() )
+			[ '' ],
+			$luaWikibaseLibrary->formatPropertyValues( 'Q1', 'P65536', [] )
 		);
 
 		$this->assertSame( $allowDataAccessInUserLanguage, $cacheSplit );
@@ -111,8 +126,8 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 
 		$this->assertSame(
-			array( '' ),
-			$luaWikibaseLibrary->formatPropertyValues( 'Q1', 'father', array() )
+			[ '' ],
+			$luaWikibaseLibrary->formatPropertyValues( 'Q1', 'father', [] )
 		);
 	}
 
@@ -127,8 +142,61 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit, $lang );
 
 		$this->assertSame(
-			array( 'Q885588' ),
+			[ 'Q885588' ],
 			$luaWikibaseLibrary->formatPropertyValues( 'Q32488', 'P456', null )
+		);
+
+		$usages = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();
+		$this->assertArrayHasKey( 'Q885588#T', $usages );
+
+		if ( $allowDataAccessInUserLanguage ) {
+			$this->assertArrayHasKey( 'Q885588#L.' . $lang->getCode(), $usages );
+		} else {
+			$this->assertArrayHasKey( 'Q885588#L.de', $usages );
+		}
+
+		$this->assertSame( $allowDataAccessInUserLanguage, $cacheSplit );
+	}
+
+	/**
+	 * @dataProvider allowDataAccessInUserLanguageProvider
+	 */
+	public function testFormatStatements( $allowDataAccessInUserLanguage ) {
+		$cacheSplit = false;
+		$this->setAllowDataAccessInUserLanguage( $allowDataAccessInUserLanguage );
+
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit );
+
+		$this->assertSame(
+			[ '' ],
+			$luaWikibaseLibrary->formatStatements( 'Q1', 'P65536', [] )
+		);
+
+		$this->assertSame( $allowDataAccessInUserLanguage, $cacheSplit );
+	}
+
+	public function testFormatStatements_noPropertyId() {
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+
+		$this->assertSame(
+			[ '' ],
+			$luaWikibaseLibrary->formatStatements( 'Q1', 'father', [] )
+		);
+	}
+
+	/**
+	 * @dataProvider allowDataAccessInUserLanguageProvider
+	 */
+	public function testFormatStatements_usage( $allowDataAccessInUserLanguage ) {
+		$cacheSplit = false;
+		$this->setAllowDataAccessInUserLanguage( $allowDataAccessInUserLanguage );
+
+		$lang = Language::factory( 'es' );
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit, $lang );
+
+		$this->assertSame(
+			[ '<span><span>Q885588</span></span>' ],
+			$luaWikibaseLibrary->formatStatements( 'Q32488', 'P456', null )
 		);
 
 		$usages = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();

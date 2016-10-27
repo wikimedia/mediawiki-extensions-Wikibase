@@ -107,3 +107,4 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;sendEchoNotification: If true, allows users on the client wiki to get a notification when a page they created is connected to a repo item. This requires the Echo extension.
 ;repoIcon: If <code>sendEchoNotification</code> is set to <code>true</code>, you can also provide what icon the user will see. The correct syntax is <code>array( 'url' => '...' )</code> or <code>array( 'path' => '...' )</code> where <code>path</code> is relative to <code>$wgExtensionAssetsPath</code>. Defaults to <code>false</code> which means that there will be the default Echo icon.
 ;enableStatementsParserFunction: Feature flag for the <code><nowiki>{{#statements|…}}</nowiki></code> parser function.
+;enableLuaEntityFormatStatements: Feature flag for <code>mw.wikibase.entity:formatStatements()</code> Lua function.

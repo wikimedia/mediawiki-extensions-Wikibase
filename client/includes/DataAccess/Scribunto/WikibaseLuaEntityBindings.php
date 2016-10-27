@@ -18,7 +18,12 @@ class WikibaseLuaEntityBindings {
 	/**
 	 * @var StatementTransclusionInteractor
 	 */
-	private $statementTransclusionInteractor;
+	private $plainTextTransclusionInteractor;
+
+	/**
+	 * @var StatementTransclusionInteractor
+	 */
+	private $richWikitextTransclusionInteractor;
 
 	/**
 	 * @var EntityIdParser
@@ -31,23 +36,26 @@ class WikibaseLuaEntityBindings {
 	private $siteId;
 
 	/**
-	 * @param StatementTransclusionInteractor $statementTransclusionInteractor
+	 * @param StatementTransclusionInteractor $plainTextTransclusionInteractor
+	 * @param StatementTransclusionInteractor $richWikitextTransclusionInteractor
 	 * @param EntityIdParser $entityIdParser
 	 * @param string $siteId
 	 */
 	public function __construct(
-		StatementTransclusionInteractor $statementTransclusionInteractor,
+		StatementTransclusionInteractor $plainTextTransclusionInteractor,
+		StatementTransclusionInteractor $richWikitextTransclusionInteractor,
 		EntityIdParser $entityIdParser,
 		$siteId
 	) {
-		$this->statementTransclusionInteractor = $statementTransclusionInteractor;
+		$this->plainTextTransclusionInteractor = $plainTextTransclusionInteractor;
+		$this->richWikitextTransclusionInteractor = $richWikitextTransclusionInteractor;
 		$this->entityIdParser = $entityIdParser;
 		$this->siteId = $siteId;
 	}
 
 	/**
-	 * Render the main Snaks belonging to a Statement (which is identified by a PropertyId
-	 * or the label of a Property).
+	 * Format the main Snaks belonging to a Statement (which is identified by a PropertyId
+	 * or the label of a Property) as escaped plain text.
 	 *
 	 * @since 0.5
 	 *
@@ -55,12 +63,34 @@ class WikibaseLuaEntityBindings {
 	 * @param string $propertyLabelOrId
 	 * @param int[]|null $acceptableRanks
 	 *
-	 * @return string
+	 * @return string Wikitext
 	 */
 	public function formatPropertyValues( $entityId, $propertyLabelOrId, array $acceptableRanks = null ) {
 		$entityId = $this->entityIdParser->parse( $entityId );
 
-		return $this->statementTransclusionInteractor->render(
+		return $this->plainTextTransclusionInteractor->render(
+			$entityId,
+			$propertyLabelOrId,
+			$acceptableRanks
+		);
+	}
+
+	/**
+	 * Format the main Snaks belonging to a Statement (which is identified by a PropertyId
+	 * or the label of a Property) as rich wikitext.
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $entityId
+	 * @param string $propertyLabelOrId
+	 * @param int[]|null $acceptableRanks
+	 *
+	 * @return string Wikitext
+	 */
+	public function formatStatements( $entityId, $propertyLabelOrId, array $acceptableRanks = null ) {
+		$entityId = $this->entityIdParser->parse( $entityId );
+
+		return $this->richWikitextTransclusionInteractor->render(
 			$entityId,
 			$propertyLabelOrId,
 			$acceptableRanks
