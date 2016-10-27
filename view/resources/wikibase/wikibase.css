@@ -14,7 +14,7 @@ are also triggered down the document */
 }
 
 h1 .wikibase-title .wikibase-title-id {
-	color: grey;
+	color: gray;
 	font-size: 0.6em;
 	margin-left: 0.4em;
 	unicode-bidi: embed;
@@ -484,6 +484,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 /***** REFERENCES *****/
 
 .wikibase-statementview-references-heading {
+	color: gray;
 	margin-top: 0.5em;
 }
 
