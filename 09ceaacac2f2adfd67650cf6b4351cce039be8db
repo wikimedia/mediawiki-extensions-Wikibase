@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_032d2d41",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T14:45:49Z",
+      "side": 1,
+      "message": "eek!",
+      "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_c3262563",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T14:45:49Z",
+      "side": 1,
+      "message": "mixed indent",
+      "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_635191dd",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T14:45:49Z",
+      "side": 1,
+      "message": "This is pretty brittle. If the prefix doesn\u0027t match, nothing is stripped, and you end up looking for bad IDs. Shouldn\u0027t happen, but will...",
+      "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_631631f8",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T14:45:49Z",
+      "side": 1,
+      "message": "That\u0027s meted and published, right? So why not use it?",
+      "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_c3e50508",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T14:45:49Z",
+      "side": 1,
+      "message": "Just use QuantityRdfBuilder, you already have all the dependencies!\n\n  new QuantityRdfBuilder(\n    new ComplexValueBuilder(\n      $this-\u003erdfVocabulary,\n      $this-\u003ewriter\n    ),\n    $this-\u003eunitConverter );",
+      "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_83cffd81",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T14:45:49Z",
+      "side": 1,
+      "message": "would be nice to have a test case for this.",
+      "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_a399d982",
+        "filename": "repo/tests/phpunit/maintenance/AddUnitsTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T14:45:49Z",
+      "side": 1,
+      "message": "\u0027generate self-references for base units\u0027, perhaps?",
+      "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_238b891d",
+        "filename": "repo/tests/phpunit/maintenance/AddUnitsTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T14:45:49Z",
+      "side": 1,
+      "message": "this is the ID of a value, right? why is the value called testunit? It\u0027s not a unit...",
+      "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_434e953d",
+        "filename": "repo/tests/phpunit/maintenance/AddUnitsTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T14:45:49Z",
+      "side": 1,
+      "message": "Please put the full path to the data file, that would make it much clearer what is going on here.",
+      "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_837dbd19",
+        "filename": "repo/tests/phpunit/maintenance/AddUnitsTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T14:45:49Z",
+      "side": 1,
+      "message": "why is this called \"unit\"? It\u0027s a list of values, right?",
+      "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_51f89e46",
+        "filename": "repo/tests/phpunit/maintenance/AddUnitsTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T14:45:49Z",
+      "side": 1,
+      "message": "Why use TTL here? wouldn\u0027t it be simpler to verify ntriples?",
+      "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_63ff51a8",
+        "filename": "repo/tests/phpunit/maintenance/AddUnitsTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T14:45:49Z",
+      "side": 1,
+      "message": "just use ntriples...",
+      "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
