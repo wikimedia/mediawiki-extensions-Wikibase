@@ -28,6 +28,8 @@
 	"wikibase-addreference": "각주 추가",
 	"wikibase-save-inprogress": "저장 중…",
 	"wikibase-remove-inprogress": "삭제 중…",
+	"wikibase-statementlistview-add": "추가",
+	"wikibase-statementgrouplistview-add": "추가",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "다른 언어",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "설정",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "문서를 불러올 때 내 모든 언어의 레이블, 별칭, 설명 보이기",

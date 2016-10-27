@@ -31,6 +31,7 @@
 	"wikibase-statementlistview-add": "lägg till",
 	"wikibase-statementlistview-add-tooltip": "Lägg till ett nytt värde",
 	"wikibase-statementgrouplistview-add": "lägg till",
+	"wikibase-statementgrouplistview-add-tooltip": "Lägg till ett nytt uttalande",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Fler språk",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Konfigurera",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Visa etiketter, alias och beskrivningar på alla mina språk vid sidladdning",
