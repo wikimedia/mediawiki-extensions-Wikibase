@@ -94,6 +94,10 @@ local function testFormatPropertyValues( propertyId, acceptableRanks )
 	return getNewTestItem():formatPropertyValues( propertyId, acceptableRanks )
 end
 
+local function testFormatStatements( propertyId, acceptableRanks )
+	return getNewTestItem():formatStatements( propertyId, acceptableRanks )
+end
+
 local function getClaimRank()
 	return mw.wikibase.entity.claimRanks.RANK_PREFERRED
 end
@@ -159,6 +163,31 @@ local function integrationTestFormatPropertyValuesProperty()
 	local entity = mw.wikibase.getEntityObject( 'P342' )
 
 	return entity:formatPropertyValues( 'P342', mw.wikibase.entity.claimRanks )
+end
+
+local function integrationTestFormatStatements( ranks )
+	local entity = mw.wikibase.getEntityObject()
+	local propertyId = entity:getProperties()[1]
+
+	return entity:formatStatements( propertyId, ranks )
+end
+
+local function integrationTestFormatStatementsByLabel( label )
+	local entity = mw.wikibase.getEntityObject()
+
+	return entity:formatStatements( label )
+end
+
+local function integrationTestFormatStatementsNoSuchProperty( propertyIdOrLabel )
+	local entity = mw.wikibase.getEntityObject( 'Q199024' )
+
+	return entity:formatStatements( propertyIdOrLabel )
+end
+
+local function integrationTestFormatStatementsProperty()
+	local entity = mw.wikibase.getEntityObject( 'P342' )
+
+	return entity:formatStatements( 'P342', mw.wikibase.entity.claimRanks )
 end
 
 local tests = {
@@ -284,6 +313,14 @@ local tests = {
 	  args = { 'Q123', function() end },
 	  expect = "bad argument #2 to 'formatPropertyValues' (table or nil expected, got function)"
 	},
+	{ name = 'mw.wikibase.entity.formatStatements bad param 1', func = testFormatStatements,
+	  args = { function() end },
+	  expect = "bad argument #1 to 'formatStatements' (string expected, got function)"
+	},
+	{ name = 'mw.wikibase.entity.formatStatements bad param 2', func = testFormatStatements,
+	  args = { 'Q123', function() end },
+	  expect = "bad argument #2 to 'formatStatements' (table or nil expected, got function)"
+	},
 	{ name = 'mw.wikibase.entity.claimRanks', func = getClaimRank,
 	  expect = { 2 }
 	},
@@ -361,6 +398,40 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.entity.formatPropertyValues integration property', func = integrationTestFormatPropertyValuesProperty,
 	  expect = { { label = 'LuaTestStringProperty', value = 'Lua :)' } }
+	},
+	{ name = 'mw.wikibase.entity.formatStatements integration 1', func = integrationTestFormatStatements,
+	  expect = { { label = 'LuaTestStringProperty', value = '<span><span>Lua :)</span></span>' } }
+	},
+	{ name = 'mw.wikibase.entity.formatStatements integration 2', func = integrationTestFormatStatements,
+	  args = { { mw.wikibase.entity.claimRanks.RANK_PREFERRED, mw.wikibase.entity.claimRanks.RANK_NORMAL } },
+	  expect = { { label = 'LuaTestStringProperty', value = '<span><span>Lua :)</span>, <span>Lua is clearly superior to the parser function</span></span>' } }
+	},
+	{ name = 'mw.wikibase.entity.formatStatements integration 3', func = integrationTestFormatStatements,
+	  args = { { mw.wikibase.entity.claimRanks.RANK_TRUTH } },
+	  expect = { { label = 'LuaTestStringProperty', value = '' } }
+	},
+	{ name = 'mw.wikibase.entity.formatStatements integration (by label)', func = integrationTestFormatStatementsByLabel,
+	  args = { 'LuaTestStringProperty' },
+	  expect = { { label = 'LuaTestStringProperty', value = '<span><span>Lua :)</span></span>' } }
+	},
+	{ name = 'mw.wikibase.entity.formatStatements by non-existing label', func = integrationTestFormatStatementsByLabel,
+	  args = { 'A label that doesn\'t exist' },
+	  expect = { { label = 'A label that doesn\'t exist', value = nil } }
+	},
+	{ name = 'mw.wikibase.entity.formatStatements by non-existing property', func = integrationTestFormatStatementsByLabel,
+	  args = { 'P123456789' },
+	  expect = { { label = 'P123456789', value = nil } }
+	},
+	{ name = 'mw.wikibase.entity.formatStatements no such property', func = integrationTestFormatStatementsNoSuchProperty,
+	  args = { 'P342' },
+	  expect = { { label = 'LuaTestStringProperty', value = '' } }
+	},
+	{ name = 'mw.wikibase.entity.formatStatements no such property (by label)', func = integrationTestFormatStatementsNoSuchProperty,
+	  args = { 'LuaTestStringProperty' },
+	  expect = { { label = 'LuaTestStringProperty', value = '' } }
+	},
+	{ name = 'mw.wikibase.entity.formatStatements integration property', func = integrationTestFormatStatementsProperty,
+	  expect = { { label = 'LuaTestStringProperty', value = '<span><span>Lua :)</span></span>' } }
 	},
 }
 

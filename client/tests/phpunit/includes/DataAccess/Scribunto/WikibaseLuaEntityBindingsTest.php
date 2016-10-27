@@ -24,17 +24,27 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 	 * @return WikibaseLuaEntityBindings
 	 */
 	private function getWikibaseLuaEntityBindings() {
-		$entityStatementsRenderer = $this->getMockBuilder( StatementTransclusionInteractor::class )
+		$plainTextTransclusionInteractor = $this->getMockBuilder( StatementTransclusionInteractor::class )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$entityStatementsRenderer->expects( $this->any() )
+		$plainTextTransclusionInteractor->expects( $this->any() )
 				->method( 'render' )
-				->with( new ItemId( 'Q12' ), 'some label', array( Statement::RANK_DEPRECATED ) )
+				->with( new ItemId( 'Q12' ), 'some label', [ Statement::RANK_DEPRECATED ] )
 				->will( $this->returnValue( 'Kittens > Cats' ) );
 
+		$richWikitextTransclusionInteractor = $this->getMockBuilder( StatementTransclusionInteractor::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$richWikitextTransclusionInteractor->expects( $this->any() )
+				->method( 'render' )
+				->with( new ItemId( 'Q12' ), 'some label', [ Statement::RANK_DEPRECATED ] )
+				->will( $this->returnValue( '<span>Kittens > Cats</span>' ) );
+
 		return new WikibaseLuaEntityBindings(
-			$entityStatementsRenderer,
+			$plainTextTransclusionInteractor,
+			$richWikitextTransclusionInteractor,
 			new BasicEntityIdParser(),
 			'enwiki'
 		);
@@ -43,12 +53,25 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 	public function testFormatPropertyValues() {
 		$wikibaseLuaEntityBindings = $this->getWikibaseLuaEntityBindings();
 
-		$this->assertEquals(
+		$this->assertSame(
 			'Kittens > Cats',
 			$wikibaseLuaEntityBindings->formatPropertyValues(
 				'Q12',
 				'some label',
-				array( Statement::RANK_DEPRECATED )
+				[ Statement::RANK_DEPRECATED ]
+			)
+		);
+	}
+
+	public function testFormatStatements() {
+		$wikibaseLuaEntityBindings = $this->getWikibaseLuaEntityBindings();
+
+		$this->assertSame(
+			'<span>Kittens > Cats</span>',
+			$wikibaseLuaEntityBindings->formatStatements(
+				'Q12',
+				'some label',
+				[ Statement::RANK_DEPRECATED ]
 			)
 		);
 	}
