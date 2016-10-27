@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_435b3527",
+        "filename": "repo/maintenance/SPARQLClient.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T16:30:53Z",
+      "side": 1,
+      "message": "Please use\n\n  $req \u003d MWHttpRequest::factory( $url, $options, $caller ); \n  $status \u003d $req-\u003eexecute();\n\nThat way, you can get the actual error from $status, and throw an exception",
+      "revId": "6869c8d2da2a58f366df2f804f2f0ce2c2a1c22c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_a3b3194c",
+        "filename": "repo/maintenance/SPARQLClient.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T16:30:53Z",
+      "side": 1,
+      "message": "Please use a more specific exception class.",
+      "revId": "6869c8d2da2a58f366df2f804f2f0ce2c2a1c22c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
