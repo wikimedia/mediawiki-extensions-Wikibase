@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_66d75ff3",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-27T16:47:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb4ebfb_26d9572d",
+      "range": {
+        "startLine": 161,
+        "startChar": 12,
+        "endLine": 161,
+        "endChar": 18
+      },
+      "revId": "287cde00dc0d3fbcae9bb9ebc6a416ea13bf3849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_e6ab6f6c",
         "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
         "patchSetId": 1
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_e6f92f80",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-27T16:47:42Z",
+      "side": 1,
+      "message": "We leave these out by convention: The first parameter for functions on the methodtable is always the table (\u003d \"object\" in other language) that they have been called on. That\u0027s very similar to Python.",
+      "parentUuid": "4eb4ebfb_e6ab6f6c",
+      "revId": "287cde00dc0d3fbcae9bb9ebc6a416ea13bf3849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_a6c6874c",
         "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
         "patchSetId": 1
@@ -53,6 +95,24 @@
       "writtenOn": "2016-10-27T16:42:14Z",
       "side": 1,
       "message": "\"@param entity\" missing.",
+      "revId": "287cde00dc0d3fbcae9bb9ebc6a416ea13bf3849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_2600376d",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-27T16:47:42Z",
+      "side": 1,
+      "message": "As above.",
+      "parentUuid": "4eb4ebfb_a6c6874c",
       "revId": "287cde00dc0d3fbcae9bb9ebc6a416ea13bf3849",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -82,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_46d463ec",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-27T16:47:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb4ebfb_86c38b3d",
+      "range": {
+        "startLine": 237,
+        "startChar": 48,
+        "endLine": 237,
+        "endChar": 65
+      },
+      "revId": "287cde00dc0d3fbcae9bb9ebc6a416ea13bf3849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_268cb739",
         "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/WikibaseLuaEntityBindingsTest.php",
         "patchSetId": 1
@@ -93,6 +177,30 @@
       "writtenOn": "2016-10-27T16:42:14Z",
       "side": 1,
       "message": "Not critical in this case, but please prefer assertSame whenever possible. From experience this can be very relevant in formatter and parser contexts.",
+      "range": {
+        "startLine": 69,
+        "startChar": 9,
+        "endLine": 69,
+        "endChar": 21
+      },
+      "revId": "287cde00dc0d3fbcae9bb9ebc6a416ea13bf3849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_c6fe3366",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/WikibaseLuaEntityBindingsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-27T16:47:42Z",
+      "side": 1,
+      "message": "Done. Indeed… we should always use assertSame, there are very few (if any) cases were assertEquals is the better choice.",
+      "parentUuid": "4eb4ebfb_268cb739",
       "range": {
         "startLine": 69,
         "startChar": 9,
