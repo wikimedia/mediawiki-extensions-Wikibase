@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\DataAccess;
 
 use Language;
-use PHPUnit_Framework_TestCase;
 use DataValues\DecimalValue;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\Geo\Values\LatLongValue;
@@ -11,6 +10,8 @@ use DataValues\MonolingualTextValue;
 use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
+use PHPUnit_Framework_TestCase;
+use Title;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -121,7 +122,16 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function richWikitextSnakProvider() {
+		$namespacedFileName = Title::newFromText( 'A_file name.jpg', NS_FILE )->getPrefixedText();
+
 		return [
+			'commonsMedia' => [
+				'<span>[[' . $namespacedFileName . '|frameless]]</span>',
+				new PropertyValueSnak(
+					new PropertyId( 'P1' ),
+					new StringValue( 'A_file name.jpg' )
+				)
+			],
 			'string' => [
 				'<span>A string!</span>',
 				new PropertyValueSnak(
