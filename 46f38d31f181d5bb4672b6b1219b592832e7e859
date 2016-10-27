@@ -1,0 +1,259 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_66199f7e",
+        "filename": "repo/maintenance/SPARQLClient.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T16:30:53Z",
+      "side": 1,
+      "message": "unused",
+      "revId": "46f38d31f181d5bb4672b6b1219b592832e7e859",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_4616a34e",
+        "filename": "repo/maintenance/SPARQLClient.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T16:30:53Z",
+      "side": 1,
+      "message": "Should never return false. On error, throw an exception, please.",
+      "revId": "46f38d31f181d5bb4672b6b1219b592832e7e859",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_0321adac",
+        "filename": "repo/maintenance/SPARQLClient.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T16:30:53Z",
+      "side": 1,
+      "message": "To get a meaningful error message, please use:\n\n  $req \u003d MWHttpRequest::factory( $url, $options, $caller );\n  $status \u003d $req-\u003eexecute();\n\nHave a look at Http::request for details.",
+      "revId": "46f38d31f181d5bb4672b6b1219b592832e7e859",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_860cab3e",
+        "filename": "repo/maintenance/SPARQLClient.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T16:30:53Z",
+      "side": 1,
+      "message": "This should return EntityIds. You can use a SuffixEntityIdParser to generate them.\n\nOr yxou return full URIs as strings.",
+      "revId": "46f38d31f181d5bb4672b6b1219b592832e7e859",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_065f7be9",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T16:30:53Z",
+      "side": 1,
+      "message": "I\u0027d prefer to have the convertible units in a local variable, for debugging.",
+      "revId": "46f38d31f181d5bb4672b6b1219b592832e7e859",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_260157ba",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T16:30:53Z",
+      "side": 1,
+      "message": "Should indicate that this is a reference param, used to collect units for later processing.",
+      "revId": "46f38d31f181d5bb4672b6b1219b592832e7e859",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_06389b9a",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T16:30:53Z",
+      "side": 1,
+      "message": "Just don\u0027t output a label if we don\u0027t have one.",
+      "revId": "46f38d31f181d5bb4672b6b1219b592832e7e859",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_a6f567c9",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T16:30:53Z",
+      "side": 1,
+      "message": "wouldn\u0027t it be nicer to use the same keys in $unit?",
+      "revId": "46f38d31f181d5bb4672b6b1219b592832e7e859",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_46e8e30b",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T16:30:53Z",
+      "side": 1,
+      "message": "\"...that are used at least $min times\".",
+      "revId": "46f38d31f181d5bb4672b6b1219b592832e7e859",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_a6c8c7ab",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T16:30:53Z",
+      "side": 1,
+      "message": "The \\ is wrong, this is not a class name.\nAlso, please indicate what keys are used, if this is relevant.",
+      "revId": "46f38d31f181d5bb4672b6b1219b592832e7e859",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_263397c2",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T16:30:53Z",
+      "side": 1,
+      "message": "double space.\nAlso, this is an injection vector. A bit more validation would be nice.",
+      "revId": "46f38d31f181d5bb4672b6b1219b592832e7e859",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_66ebdf0a",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T16:30:53Z",
+      "side": 1,
+      "message": "eek!",
+      "revId": "46f38d31f181d5bb4672b6b1219b592832e7e859",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_e6f6cff5",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T16:30:53Z",
+      "side": 1,
+      "message": "eek!",
+      "revId": "46f38d31f181d5bb4672b6b1219b592832e7e859",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_c6fbd3dd",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T16:30:53Z",
+      "side": 1,
+      "message": "eek!",
+      "revId": "46f38d31f181d5bb4672b6b1219b592832e7e859",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_06f2db03",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-27T16:30:53Z",
+      "side": 1,
+      "message": "should be available now",
+      "revId": "46f38d31f181d5bb4672b6b1219b592832e7e859",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
