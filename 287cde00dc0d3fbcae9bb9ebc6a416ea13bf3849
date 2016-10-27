@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_26d9572d",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-27T16:42:14Z",
+      "side": 1,
+      "message": "I believe this is a bool[].",
+      "range": {
+        "startLine": 161,
+        "startChar": 12,
+        "endLine": 161,
+        "endChar": 18
+      },
+      "revId": "287cde00dc0d3fbcae9bb9ebc6a416ea13bf3849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_e6ab6f6c",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-27T16:42:14Z",
+      "side": 1,
+      "message": "\"@param entity\" missing.",
+      "revId": "287cde00dc0d3fbcae9bb9ebc6a416ea13bf3849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_a6c6874c",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-27T16:42:14Z",
+      "side": 1,
+      "message": "\"@param entity\" missing.",
+      "revId": "287cde00dc0d3fbcae9bb9ebc6a416ea13bf3849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_86c38b3d",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-27T16:42:14Z",
+      "side": 1,
+      "message": "\"is not enabled\"",
+      "range": {
+        "startLine": 237,
+        "startChar": 48,
+        "endLine": 237,
+        "endChar": 65
+      },
+      "revId": "287cde00dc0d3fbcae9bb9ebc6a416ea13bf3849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_268cb739",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/WikibaseLuaEntityBindingsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-27T16:42:14Z",
+      "side": 1,
+      "message": "Not critical in this case, but please prefer assertSame whenever possible. From experience this can be very relevant in formatter and parser contexts.",
+      "range": {
+        "startLine": 69,
+        "startChar": 9,
+        "endLine": 69,
+        "endChar": 21
+      },
+      "revId": "287cde00dc0d3fbcae9bb9ebc6a416ea13bf3849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
