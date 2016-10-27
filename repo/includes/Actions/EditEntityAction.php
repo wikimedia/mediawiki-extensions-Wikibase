@@ -368,13 +368,10 @@ class EditEntityAction extends ViewEntityAction {
 	 * @return string
 	 */
 	private function getCancelLink() {
-		$cancelParams = array();
-
 		return Linker::linkKnown(
 			$this->getContext()->getTitle(),
 			$this->msg( 'cancel' )->parse(),
-			array( 'id' => 'mw-editform-cancel' ),
-			$cancelParams
+			array( 'id' => 'mw-editform-cancel' )
 		);
 	}
 
@@ -514,11 +511,8 @@ class EditEntityAction extends ViewEntityAction {
 		$this->getOutput()->addHTML( "<p class='editButtons'>\n" );
 		$this->getOutput()->addHTML( $this->getEditButton() . "\n" );
 
-		$cancel = $this->getCancelLink();
-		if ( $cancel !== '' ) {
-			$this->getOutput()->addHTML( $this->msg( 'pipe-separator' )->escaped() );
-			$this->getOutput()->addHTML( $cancel );
-		}
+		$this->getOutput()->addHTML( $this->msg( 'pipe-separator' )->escaped() );
+		$this->getOutput()->addHTML( $this->getCancelLink() );
 
 		$this->getOutput()->addHTML( "</p><!-- editButtons -->\n</p><!-- editOptions -->\n" );
 
