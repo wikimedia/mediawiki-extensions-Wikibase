@@ -210,6 +210,30 @@
       "revId": "287cde00dc0d3fbcae9bb9ebc6a416ea13bf3849",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_a64327b6",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/WikibaseLuaEntityBindingsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-27T16:53:17Z",
+      "side": 1,
+      "message": "assertEquals is useful when you are intentionally comparing two objects that don\u0027t have an equals() method. Or if you want to compare two objects without binding to implementation details you don\u0027t want to test (the equals() implementation).",
+      "parentUuid": "4eb4ebfb_c6fe3366",
+      "range": {
+        "startLine": 69,
+        "startChar": 9,
+        "endLine": 69,
+        "endChar": 21
+      },
+      "revId": "287cde00dc0d3fbcae9bb9ebc6a416ea13bf3849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
