@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_5433e2c0",
+        "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-28T17:24:07Z",
+      "side": 1,
+      "message": "For paging/continuations, we would need a getter and a setter for this.",
+      "revId": "d9c8988c8f7274fb1c62bdd3a555d8f5a4af21e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_14ce7ab9",
+        "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-28T17:24:07Z",
+      "side": 1,
+      "message": "This is a surprising side-effect for what looks like a pure function for transforming the result set. \n\nI\u0027d rather have this function return a tuple ( $entityIds, $position ), so the caller can set the ember variable.\n\nBut maybe it would also be sufficient to rename the method, to make it clear that it updates the \"cursor\".",
+      "revId": "d9c8988c8f7274fb1c62bdd3a555d8f5a4af21e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_94516ae0",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/SqlEntityIdPagerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-28T17:24:07Z",
+      "side": 1,
+      "message": "that comment is probably no longer true.",
+      "revId": "d9c8988c8f7274fb1c62bdd3a555d8f5a4af21e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
