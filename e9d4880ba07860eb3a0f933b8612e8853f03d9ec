@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_511c147c",
+        "filename": "lib/includes/Store/DispatchingEntityRevisionLookup.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-28T16:38:55Z",
+      "side": 1,
+      "message": "I see no reason for this class to know about the special meaning of empty prefixes. It should just treat all prefixes the same.\n\nThe knowledge if and when a service for handling local ids should be defined belongs to the bootstrap code that instantiates the DispatchingEntityRevisionLookup.",
+      "revId": "e9d4880ba07860eb3a0f933b8612e8853f03d9ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_312188ad",
+        "filename": "lib/includes/Store/DispatchingEntityRevisionLookup.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-28T16:38:55Z",
+      "side": 1,
+      "message": "This should probably be in a helper class somewhere",
+      "revId": "e9d4880ba07860eb3a0f933b8612e8853f03d9ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_b10d9843",
+        "filename": "lib/tests/phpunit/Store/DispatchingEntityRevisionLookupTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-28T16:38:55Z",
+      "side": 1,
+      "message": "long line",
+      "revId": "e9d4880ba07860eb3a0f933b8612e8853f03d9ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_910a9c28",
+        "filename": "lib/tests/phpunit/Store/DispatchingEntityRevisionLookupTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-28T16:38:55Z",
+      "side": 1,
+      "message": "This comparison should use our own Entity::equals() method.\nSince that doesn\u0027t check the ID in all cases, please assert the ID separately.",
+      "revId": "e9d4880ba07860eb3a0f933b8612e8853f03d9ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
