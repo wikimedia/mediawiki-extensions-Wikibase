@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_313aa8e5",
+        "filename": "repo/includes/Store/Sql/SqlEntitiesWithoutTermFinder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-28T16:31:10Z",
+      "side": 1,
+      "message": "I agree: if possible without too much pain, we should avoid hardcoding entity types here. So far, we have no replacement for the terms table to use with MediaInfo and Lexemes, and both support numeric IDs.",
+      "parentUuid": "cea0dbb8_a67572ca",
+      "revId": "36f0c00611ef005eafff47badc709ef65942e126",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cea0dbb8_693a9dc2",
         "filename": "repo/includes/Store/Sql/SqlEntitiesWithoutTermFinder.php",
         "patchSetId": 2
@@ -47,6 +65,24 @@
       "writtenOn": "2016-10-18T17:02:32Z",
       "side": 1,
       "message": "Why the double quotes? I believe the do literally nothing, because this is already a string.\n\nThe \"\u0027\u0027\" also looks a bit awkward. This could be replaced with $dbr-\u003eaddQuotes( \u0027\u0027 ).\n\nProbably most importantly: We know the currently configured prefixes are single characters. I believe a SUBSTR(page_title, 2) would be much more trivial and possibly faster. Compatible with both MySQL and SQLite (according to the manuals).\n\nOr the other way around: prepend the prefix to term_entity_id before doing the comparison. Which approach is faster depends, I believe, on factors like the relative size of both tables.",
+      "revId": "36f0c00611ef005eafff47badc709ef65942e126",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_513534f2",
+        "filename": "repo/includes/Store/Sql/SqlEntitiesWithoutTermFinder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-28T16:31:10Z",
+      "side": 1,
+      "message": "What\u0027s the performance implications of having a computed value in the join conditions here? Does MySQL still use the index on ( term_entity_type, term_entity_id ) ?",
+      "parentUuid": "cea0dbb8_a6433267",
       "revId": "36f0c00611ef005eafff47badc709ef65942e126",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
