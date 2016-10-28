@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Store;
 
+use InvalidArgumentException;
 use MWException;
 use Revision;
 use Status;
@@ -63,6 +64,17 @@ class WikiPageEntityStore implements EntityStore {
 	}
 
 	/**
+	 * @param EntityId $id
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	private function assertLocalEntityId( EntityId $id ) {
+		if ( $id->isForeign() ) {
+			throw new InvalidArgumentException( 'The entity must not be foreign' );
+		}
+	}
+
+	/**
 	 * @see EntityStore::assignFreshId()
 	 *
 	 * @param EntityDocument $entity
@@ -98,6 +110,10 @@ class WikiPageEntityStore implements EntityStore {
 	 * @return bool
 	 */
 	public function canCreateWithCustomId( EntityId $id ) {
+		if ( $id->isForeign() ) {
+			return false;
+		}
+
 		$type = $id->getEntityType();
 		$handler = $this->contentFactory->getContentHandlerForType( $type );
 
@@ -121,12 +137,14 @@ class WikiPageEntityStore implements EntityStore {
 	 *
 	 * @param EntityId $entityId
 	 *
+	 * @throws InvalidArgumentException
 	 * @throws StorageException
 	 * @return WikiPage
 	 */
 	public function getWikiPageForEntity( EntityId $entityId ) {
-		$title = $this->getTitleForEntity( $entityId );
+		$this->assertLocalEntityId( $entityId );
 
+		$title = $this->getTitleForEntity( $entityId );
 		if ( !$title ) {
 			throw new StorageException( 'Entity could not be mapped to a page title!' );
 		}
@@ -144,6 +162,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @param int $flags
 	 * @param int|bool $baseRevId
 	 *
+	 * @throws InvalidArgumentException
 	 * @throws StorageException
 	 * @return EntityRevision
 	 */
@@ -161,6 +180,8 @@ class WikiPageEntityStore implements EntityStore {
 
 			$this->assignFreshId( $entity );
 		}
+
+		$this->assertLocalEntityId( $entity->getId() );
 
 		$content = $this->contentFactory->newFromEntity( $entity );
 		$revision = $this->saveEntityContent( $content, $summary, $user, $flags, $baseRevId );
@@ -186,6 +207,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @param int $flags
 	 * @param int|bool $baseRevId
 	 *
+	 * @throws InvalidArgumentException
 	 * @throws StorageException
 	 * @return int The new revision ID
 	 */
@@ -196,8 +218,10 @@ class WikiPageEntityStore implements EntityStore {
 		$flags = 0,
 		$baseRevId = false
 	) {
-		$content = $this->contentFactory->newFromRedirect( $redirect );
+		$this->assertLocalEntityId( $redirect->getEntityId() );
+		$this->assertLocalEntityId( $redirect->getTargetId() );
 
+		$content = $this->contentFactory->newFromRedirect( $redirect );
 		if ( !$content ) {
 			throw new StorageException( 'Failed to create redirect' .
 				' from ' . $redirect->getEntityId()->getSerialization() .
@@ -301,9 +325,11 @@ class WikiPageEntityStore implements EntityStore {
 	 * @param string $reason the reason for deletion
 	 * @param User $user
 	 *
+	 * @throws InvalidArgumentException
 	 * @throws StorageException
 	 */
 	public function deleteEntity( EntityId $entityId, $reason, User $user ) {
+		$this->assertLocalEntityId( $entityId );
 		$page = $this->getWikiPageForEntity( $entityId );
 		$ok = $page->doDeleteArticle( $reason, false, 0, true, $error, $user );
 
@@ -326,9 +352,11 @@ class WikiPageEntityStore implements EntityStore {
 	 * @param EntityId $id the entity to check (ignored by this implementation)
 	 * @param int $lastRevId the revision the user supplied
 	 *
+	 * @throws InvalidArgumentException
 	 * @return bool
 	 */
 	public function userWasLastToEdit( User $user, EntityId $id, $lastRevId ) {
+		$this->assertLocalEntityId( $id );
 		$revision = Revision::newFromId( $lastRevId );
 		if ( !$revision ) {
 			return false;
@@ -359,11 +387,14 @@ class WikiPageEntityStore implements EntityStore {
 	 * @param EntityId $id the entity to watch
 	 * @param bool $watch whether to watch or unwatch the page.
 	 *
+	 * @throws InvalidArgumentException
 	 * @throws MWException
 	 *
 	 * @note keep in sync with logic in EditPage
 	 */
 	public function updateWatchlist( User $user, EntityId $id, $watch ) {
+		$this->assertLocalEntityId( $id );
+
 		$title = $this->getTitleForEntity( $id );
 
 		if ( $user->isLoggedIn() && $title && ( $watch != $user->isWatched( $title ) ) ) {
@@ -391,9 +422,12 @@ class WikiPageEntityStore implements EntityStore {
 	 * @param User $user
 	 * @param EntityId $id the entity to watch
 	 *
+	 * @throws InvalidArgumentException for foreign EntityIds as watching foreign entities is not yet supported
 	 * @return bool
 	 */
 	public function isWatching( User $user, EntityId $id ) {
+		$this->assertLocalEntityId( $id );
+
 		$title = $this->getTitleForEntity( $id );
 		return ( $title && $user->isWatched( $title ) );
 	}
