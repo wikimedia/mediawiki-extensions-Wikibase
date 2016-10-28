@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_88c3943d",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-28T10:34:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb4ebfb_c3b3c5fc",
+      "revId": "931964153ca1e42776ae8c547814ce10cbc4f082",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_63a99178",
         "filename": "repo/includes/Api/ListSubscribers.php",
         "patchSetId": 14
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_c80f5ce3",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-28T10:34:36Z",
+      "side": 1,
+      "message": "The error reporter is an upstream function in Wikibase. I\u0027m not sure why it got created but it seems standard in Wikibase.",
+      "parentUuid": "4eb4ebfb_63c07130",
+      "revId": "931964153ca1e42776ae8c547814ce10cbc4f082",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_a371d90d",
         "filename": "repo/includes/Api/ListSubscribers.php",
         "patchSetId": 14
@@ -64,6 +100,24 @@
       "writtenOn": "2016-10-27T15:25:06Z",
       "side": 1,
       "message": "Say there are five rows in $res, as these (cs_entity_id,cs_subscriber_id) pairs:\n\n (123,8001)\n (123,8002)\n (123,8003)\n (123,8004)\n (123,8005)\n\nThis code builds up a $entry array that contains data for all five rows. But if formatPageData() returns false, the continuation will be \"123|8005\" meaning the data for 8001–8004 will never be returned.\n\nProbably the best solution would be to do like what ApiQueryAllRevisions does:[1] add the whole entry for the first row for a cs_entity_id, then add just the additional subscriber for each subsequent row for that same cs_entity_id.\n\n[1]: https://phabricator.wikimedia.org/diffusion/MW/browse/master/includes/api/ApiQueryAllRevisions.php;9e8cdbbb66dbb607daec04b63327b61448fe43e9$204-220",
+      "revId": "931964153ca1e42776ae8c547814ce10cbc4f082",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_680a882b",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-28T10:34:36Z",
+      "side": 1,
+      "message": "Even though I agree it\u0027s not a good design but squeezing multiple rows into one is not easy. The error you\u0027re implying can\u0027t happen because we have LIMIT in query so nothing goes lost.",
+      "parentUuid": "4eb4ebfb_a371d90d",
       "revId": "931964153ca1e42776ae8c547814ce10cbc4f082",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_c81abc7e",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-28T10:34:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb4ebfb_a3f43984",
+      "revId": "931964153ca1e42776ae8c547814ce10cbc4f082",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_23ea6974",
         "filename": "repo/includes/Api/ListSubscribers.php",
         "patchSetId": 14
@@ -98,6 +170,24 @@
       "writtenOn": "2016-10-27T15:25:06Z",
       "side": 1,
       "message": "This is probably not what you intended to do.\n\n  \u003cquery\u003e\n    \u003csubscribers\u003e\n      \u003c_v _idx\u003d\"123\"\u003e\n        \u003c_v id\u003d\"subscribers\"\u003e\n          \u003csubscriber site\u003d\"site1\" url\u003d\"http://example.com/\" /\u003e\n          \u003csubscriber site\u003d\"site2\" url\u003d\"http://example.org/\" /\u003e\n        \u003c/_v\u003e\n      \u003c/_v\u003e\n      \u003c_v _idx\u003d\"456\"\u003e\n        \u003c_v id\u003d\"subscribers\"\u003e\n          \u003csubscriber site\u003d\"site1\" url\u003d\"http://example.com/\" /\u003e\n          \u003csubscriber site\u003d\"site2\" url\u003d\"http://example.org/\" /\u003e\n        \u003c/_v\u003e\n      \u003c/_v\u003e\n    \u003c/subscribers\u003e\n  \u003c/query\u003e\n\nWhat you want is to remove line 190 and put these two lines somewhere in formatResult() instead:\n\n  $result-\u003eaddIndexedTagName( [ \u0027query\u0027, \u0027subscribers\u0027 ], \u0027entity\u0027 );\n  $result-\u003eaddArrayType( [ \u0027query\u0027, \u0027subscribers\u0027 ], \u0027kvp\u0027, \u0027id\u0027 );\n\nwhich will give\n\n  \u003cquery\u003e\n    \u003csubscribers\u003e\n      \u003centity id\u003d\"123\"\u003e\n        \u003csubscribers\u003e\n          \u003csubscriber site\u003d\"site1\" url\u003d\"http://example.com/\" /\u003e\n          \u003csubscriber site\u003d\"site2\" url\u003d\"http://example.org/\" /\u003e\n        \u003c/subscribers\u003e\n      \u003c/entity\u003e\n      \u003centity id\u003d\"456\"\u003e\n        \u003csubscribers\u003e\n          \u003csubscriber site\u003d\"site1\" url\u003d\"http://example.com/\" /\u003e\n          \u003csubscriber site\u003d\"site2\" url\u003d\"http://example.org/\" /\u003e\n        \u003c/subscribers\u003e\n      \u003c/entity\u003e\n    \u003c/subscribers\u003e\n  \u003c/query\u003e",
+      "revId": "931964153ca1e42776ae8c547814ce10cbc4f082",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_28bec0d1",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-28T10:34:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb4ebfb_23ea6974",
       "revId": "931964153ca1e42776ae8c547814ce10cbc4f082",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -127,6 +217,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_68f5e8b4",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-28T10:34:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb4ebfb_e3e3619b",
+      "revId": "931964153ca1e42776ae8c547814ce10cbc4f082",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_438c55db",
         "filename": "repo/includes/Api/ListSubscribers.php",
         "patchSetId": 14
@@ -144,6 +252,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_e821f84c",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-28T10:34:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb4ebfb_438c55db",
+      "revId": "931964153ca1e42776ae8c547814ce10cbc4f082",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_a3fe7933",
         "filename": "repo/includes/Api/ListSubscribers.php",
         "patchSetId": 14
@@ -155,6 +281,24 @@
       "writtenOn": "2016-10-27T15:25:06Z",
       "side": 1,
       "message": "Core modules use \u0027prop\u0027 rather than \u0027props\u0027 for the parameter serving this purpose.",
+      "revId": "931964153ca1e42776ae8c547814ce10cbc4f082",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_c8263c63",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-28T10:34:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb4ebfb_a3fe7933",
       "revId": "931964153ca1e42776ae8c547814ce10cbc4f082",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -195,6 +339,24 @@
         "endLine": 280,
         "endChar": 34
       },
+      "revId": "931964153ca1e42776ae8c547814ce10cbc4f082",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_e8e0d8f9",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-28T10:34:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb4ebfb_c3098531",
       "revId": "931964153ca1e42776ae8c547814ce10cbc4f082",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
