@@ -71,7 +71,7 @@
 	"wikibase-linkitem-title": "Ligação com página",
 	"wikibase-linkitem-linkpage": "Ligar à página",
 	"wikibase-linkitem-selectlink": "Por favor, selecione um sítio e página que deseje ligar a esta página.",
-	"wikibase-linkitem-input-site": "Idioma:",
+	"wikibase-linkitem-input-site": "Língua:",
 	"wikibase-linkitem-input-page": "Página:",
 	"wikibase-linkitem-confirmitem-text": "A página que escolheu já está associada a um [$1 elemento no nosso repositório central de dados]. Por favor, confirme que {{PLURAL:$2|a página mostrada|as páginas mostradas}} abaixo {{PLURAL:$2|é a|são as}} que deseja ligar a esta.",
 	"wikibase-linkitem-confirmitem-button": "Confirmar",
