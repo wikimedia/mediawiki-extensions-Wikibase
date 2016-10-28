@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_6e65f1a9",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-28T11:59:36Z",
+      "side": 1,
+      "message": "The ErrorReporter mainly exists to provide localized error messages, and additional information, to the UI. A malformed continuation is a programming error, and should not happen during normal operation. Using $this-\u003edieContinueUsageIf() would be ok here. I don\u0027t care much either way, though.",
+      "parentUuid": "4eb4ebfb_c80f5ce3",
+      "revId": "931964153ca1e42776ae8c547814ce10cbc4f082",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_a371d90d",
         "filename": "repo/includes/Api/ListSubscribers.php",
         "patchSetId": 14
@@ -357,6 +375,23 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "4eb4ebfb_c3098531",
+      "revId": "931964153ca1e42776ae8c547814ce10cbc4f082",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_02c3ee0b",
+        "filename": "repo/tests/phpunit/includes/Api/ListSubscribers.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-28T11:59:36Z",
+      "side": 1,
+      "message": "wrong file name, should be ListSubscribersTest",
       "revId": "931964153ca1e42776ae8c547814ce10cbc4f082",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
