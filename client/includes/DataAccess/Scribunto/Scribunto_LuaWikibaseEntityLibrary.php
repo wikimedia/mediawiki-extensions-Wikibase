@@ -41,7 +41,11 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$snakFormatterFactory = $wikibaseClient->getDataAccessSnakFormatterFactory();
-		$snakFormatter = $snakFormatterFactory->newEscapedPlainTextSnakFormatter(
+		$plainTextSnakFormatter = $snakFormatterFactory->newEscapedPlainTextSnakFormatter(
+			$lang,
+			$this->getUsageAccumulator()
+		);
+		$richWikitextSnakFormatter = $snakFormatterFactory->newRichWikitextSnakFormatter(
 			$lang,
 			$this->getUsageAccumulator()
 		);
@@ -53,16 +57,24 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 			$wikibaseClient->getStore()->getPropertyLabelResolver()
 		);
 
-		$entityStatementsRenderer = new StatementTransclusionInteractor(
+		$plainTextTransclusionInteractor = new StatementTransclusionInteractor(
 			$lang,
 			$propertyIdResolver,
 			new SnaksFinder(),
-			$snakFormatter,
+			$plainTextSnakFormatter,
+			$entityLookup
+		);
+		$richWikitextTransclusionInteractor = new StatementTransclusionInteractor(
+			$lang,
+			$propertyIdResolver,
+			new SnaksFinder(),
+			$richWikitextSnakFormatter,
 			$entityLookup
 		);
 
 		return new WikibaseLuaEntityBindings(
-			$entityStatementsRenderer,
+			$plainTextTransclusionInteractor,
+			$richWikitextTransclusionInteractor,
 			$wikibaseClient->getEntityIdParser(),
 			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
 		);
@@ -108,7 +120,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * Register mw.wikibase.lua library
+	 * Register mw.wikibase.entity.lua library
 	 *
 	 * @since 0.5
 	 *
@@ -118,13 +130,15 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		// These functions will be exposed to the Lua module.
 		// They are member functions on a Lua table which is private to the module, thus
 		// these can't be called from user code, unless explicitly exposed in Lua.
-		$lib = array(
-			'getGlobalSiteId' => array( $this, 'getGlobalSiteId' ),
-			'formatPropertyValues' => array( $this, 'formatPropertyValues' ),
-		);
+		$lib = [
+			'getGlobalSiteId' => [ $this, 'getGlobalSiteId' ],
+			'formatStatements' => [ $this, 'formatStatements' ],
+			'formatPropertyValues' => [ $this, 'formatPropertyValues' ],
+			'isFormatStatementsEnabled' => [ $this, 'isFormatStatementsEnabled' ],
+		];
 
 		return $this->getEngine()->registerInterface(
-			__DIR__ . '/mw.wikibase.entity.lua', $lib, array()
+			__DIR__ . '/mw.wikibase.entity.lua', $lib, []
 		);
 	}
 
@@ -136,12 +150,28 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 * @return string[]
 	 */
 	public function getGlobalSiteId() {
-		return array( $this->getImplementation()->getGlobalSiteId() );
+		return [ $this->getImplementation()->getGlobalSiteId() ];
 	}
 
 	/**
-	 * Render the main Snaks belonging to a Statement (which is identified by a PropertyId
-	 * or the label of a Property).
+	 * Returns the value of the "enableLuaEntityFormatStatements" setting.
+	 *
+	 * @since 0.5
+	 *
+	 * @return bool[]
+	 */
+	public function isFormatStatementsEnabled() {
+		// TODO: Remove this once the feature flag is not needed anymore!
+		$value = WikibaseClient::getDefaultInstance()->getSettings()->getSetting(
+			'enableLuaEntityFormatStatements'
+		);
+
+		return [ $value ];
+	}
+
+	/**
+	 * Format the main Snaks belonging to a Statement (which is identified by a PropertyId
+	 * or the label of a Property) as escaped plain text.
 	 *
 	 * @since 0.5
 	 *
@@ -160,17 +190,52 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		$this->checkType( 'formatPropertyValues', 1, $propertyLabelOrId, 'string' );
 		$this->checkTypeOptional( 'formatPropertyValues', 2, $acceptableRanks, 'table', null );
 		try {
-			return array(
+			return [
 				$this->getImplementation()->formatPropertyValues(
 					$entityId,
 					$propertyLabelOrId,
 					$acceptableRanks
 				)
-			);
+			];
 		} catch ( InvalidArgumentException $e ) {
 			throw new ScribuntoException( 'wikibase-error-invalid-entity-id' );
 		} catch ( PropertyLabelNotResolvedException $e ) {
-			return array( null );
+			return [ null ];
+		}
+	}
+
+	/**
+	 * Format the main Snaks belonging to a Statement (which is identified by a PropertyId
+	 * or the label of a Property) as rich wikitext.
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $entityId
+	 * @param string $propertyLabelOrId
+	 * @param int[]|null $acceptableRanks
+	 *
+	 * @throws ScribuntoException
+	 * @return string[]|null[]
+	 */
+	public function formatStatements( $entityId, $propertyLabelOrId, array $acceptableRanks = null ) {
+		$this->checkType( 'formatStatements', 0, $entityId, 'string' );
+		// Use 1 as index for the property id, as the first parameter comes from
+		// internals of mw.wikibase.entity (an index of 2 might confuse users
+		// as they only gave one parameter themselves)
+		$this->checkType( 'formatStatements', 1, $propertyLabelOrId, 'string' );
+		$this->checkTypeOptional( 'formatStatements', 2, $acceptableRanks, 'table', null );
+		try {
+			return [
+				$this->getImplementation()->formatStatements(
+					$entityId,
+					$propertyLabelOrId,
+					$acceptableRanks
+				)
+			];
+		} catch ( InvalidArgumentException $e ) {
+			throw new ScribuntoException( 'wikibase-error-invalid-entity-id' );
+		} catch ( PropertyLabelNotResolvedException $e ) {
+			return [ null ];
 		}
 	}
 
