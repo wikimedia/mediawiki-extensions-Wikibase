@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_0e22ed50",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-28T11:59:36Z",
+      "side": 1,
+      "message": "$entitiyIds, or just $ids.",
+      "revId": "363de93865e4a32388e589b024e134cb4966e2b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_ce1c051b",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-28T11:59:36Z",
+      "side": 1,
+      "message": "isn\u0027t prop always set in the $params array?",
+      "revId": "363de93865e4a32388e589b024e134cb4966e2b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_2edc894a",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-28T11:59:36Z",
+      "side": 1,
+      "message": "It would be nicer to pass continue and limit separately, instead of passing $params.",
+      "revId": "363de93865e4a32388e589b024e134cb4966e2b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_0ee1cdfb",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-28T11:59:36Z",
+      "side": 1,
+      "message": "why is this public? testing?",
+      "revId": "363de93865e4a32388e589b024e134cb4966e2b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_4ebeb5d2",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-28T11:59:36Z",
+      "side": 1,
+      "message": "hidden information flow, see comment below.",
+      "revId": "363de93865e4a32388e589b024e134cb4966e2b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_6ef291cf",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-28T11:59:36Z",
+      "side": 1,
+      "message": "why use a ref param here? just return the new entry array. ref params should be avoided, since they make information flow non-obvious.",
+      "revId": "363de93865e4a32388e589b024e134cb4966e2b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_ced2c52c",
+        "filename": "repo/tests/phpunit/includes/Api/ListSubscribers.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-28T11:59:36Z",
+      "side": 1,
+      "message": "wrong file name! Should be ListSubscribersTest.php",
+      "revId": "363de93865e4a32388e589b024e134cb4966e2b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
