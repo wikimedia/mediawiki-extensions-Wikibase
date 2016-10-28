@@ -142,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_51a534b0",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-10-28T15:01:39Z",
+      "side": 1,
+      "message": "You seem to have misunderstood how things work, the LIMIT isn\u0027t at issue here. If someone happens to make a query like api.php?action\u003dquery\u0026list\u003dwbsubscribers\u0026prop\u003dimageinfo\u0026iiprop\u003dextmetadata and the imageinfo metadata fills up the result almost to $wgAPIMaxResultSize, there might not be room for all your data. That\u0027s why there\u0027s the $fit return value from addValue() and why it\u0027s usually named \"$fit\".\n\nThe solution is also not as complicated as you seem to think. When you\u0027re processing a row for a cs_entity_id that you haven\u0027t seen before, do\n\n $fit \u003d $result-\u003eaddValue( [ \u0027query\u0027, \u0027subscribers\u0027 ], $entityId, $entry );\n\nlike you are already. When you have an additional row for an existing cs_entity_id, just do\n\n $fit \u003d $result-\u003eaddValue( [ \u0027query\u0027, \u0027subscribers\u0027, $entityId, \u0027subscribers\u0027 ], null, $subscriber );\n\ninstead to put the new subscriber into the existing array in the result.",
+      "parentUuid": "4eb4ebfb_680a882b",
+      "revId": "931964153ca1e42776ae8c547814ce10cbc4f082",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_a3f43984",
         "filename": "repo/includes/Api/ListSubscribers.php",
         "patchSetId": 14
