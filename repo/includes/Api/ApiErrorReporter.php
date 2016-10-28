@@ -282,7 +282,7 @@ class ApiErrorReporter {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function addMessageToResult( Message $message, &$data ) {
+	private function addMessageToResult( Message $message, &$data ) {
 		if ( $data === null ) {
 			$data = array();
 		}
