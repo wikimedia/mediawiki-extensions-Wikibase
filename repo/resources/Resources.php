@@ -133,6 +133,12 @@ return call_user_func( function() {
 
 		/* Wikibase special pages */
 
+		'wikibase.special.newEntity' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.special/wikibase.special.newEntity.js',
+			)
+		),
+
 		'wikibase.special' => $moduleTemplate + array(
 			'position' => 'top',
 			'styles' => array(
