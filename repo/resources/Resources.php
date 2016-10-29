@@ -139,6 +139,12 @@ return call_user_func( function() {
 			)
 		),
 
+		'wikibase.special.mergeItems' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.special/wikibase.special.mergeItems.js',
+			)
+		),
+
 		'wikibase.special' => $moduleTemplate + array(
 			'position' => 'top',
 			'styles' => array(

@@ -197,6 +197,8 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	protected function createForm() {
 		$this->getOutput()->addModuleStyles( array( 'wikibase.special' ) );
 
+		$this->getOutput()->addModules( 'wikibase.special.mergeItems' );
+
 		$pre = '';
 		if ( $this->getUser()->isAnon() ) {
 			$pre = Html::rawElement(
