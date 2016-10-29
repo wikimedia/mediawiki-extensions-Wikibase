@@ -31,7 +31,7 @@
 	"wikibase-error-remove-timeout": "Estamos a ter dificuldades técnicas. Tente novamente por favor.",
 	"wikibase-error-autocomplete-connection": "Não foi possível consultar a API do sítio. Por favor, tente novamente mais tarde.",
 	"wikibase-error-autocomplete-response": "O servidor respondeu: $1",
-	"wikibase-error-ui-no-external-page": "O artigo especificado não pôde ser encontrado no respectivo sítio",
+	"wikibase-error-ui-no-external-page": "Não foi possível encontrar o artigo especificado no respetivo sítio.",
 	"wikibase-error-ui-edit-conflict": "Conflito de edição. Por favor, grave as suas alterações localmente, recarregue a página e guarde novamente os dados.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (transliterado)",
 	"wikibase-quantitydetails-amount": "Quantia",

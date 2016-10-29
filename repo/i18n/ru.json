@@ -42,6 +42,8 @@
 	"wikibase-addreference": "добавить сноску",
 	"wikibase-save-inprogress": "Сохранение…",
 	"wikibase-remove-inprogress": "Удаление…",
+	"wikibase-statementlistview-add": "добавить",
+	"wikibase-statementgrouplistview-add": "добавить",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "На других языках",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Настроить",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Показывать метки, псевдонимы и описания сразу на всех моих языках",
