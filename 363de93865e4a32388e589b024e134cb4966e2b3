@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_a8cac948",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-29T16:52:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb4ebfb_0e22ed50",
+      "revId": "363de93865e4a32388e589b024e134cb4966e2b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_ce1c051b",
         "filename": "repo/includes/Api/ListSubscribers.php",
         "patchSetId": 16
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_08fadd73",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-29T16:52:28Z",
+      "side": 1,
+      "message": "Default added",
+      "parentUuid": "4eb4ebfb_11868c18",
+      "revId": "363de93865e4a32388e589b024e134cb4966e2b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_2edc894a",
         "filename": "repo/includes/Api/ListSubscribers.php",
         "patchSetId": 16
@@ -65,6 +101,24 @@
       "writtenOn": "2016-10-28T11:59:36Z",
       "side": 1,
       "message": "It would be nicer to pass continue and limit separately, instead of passing $params.",
+      "revId": "363de93865e4a32388e589b024e134cb4966e2b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_a8f1a994",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-29T16:52:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb4ebfb_2edc894a",
       "revId": "363de93865e4a32388e589b024e134cb4966e2b3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -88,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_372df841",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-29T16:52:28Z",
+      "side": 1,
+      "message": "Yes",
+      "parentUuid": "4eb4ebfb_0ee1cdfb",
+      "revId": "363de93865e4a32388e589b024e134cb4966e2b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_4ebeb5d2",
         "filename": "repo/includes/Api/ListSubscribers.php",
         "patchSetId": 16
@@ -99,6 +171,24 @@
       "writtenOn": "2016-10-28T11:59:36Z",
       "side": 1,
       "message": "hidden information flow, see comment below.",
+      "revId": "363de93865e4a32388e589b024e134cb4966e2b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_88eeedaf",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-29T16:52:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb4ebfb_4ebeb5d2",
       "revId": "363de93865e4a32388e589b024e134cb4966e2b3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -122,6 +212,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_68eba1a1",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-29T16:52:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb4ebfb_6ef291cf",
+      "revId": "363de93865e4a32388e589b024e134cb4966e2b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_d18024fc",
         "filename": "repo/includes/Api/ListSubscribers.php",
         "patchSetId": 16
@@ -133,6 +241,24 @@
       "writtenOn": "2016-10-28T15:01:39Z",
       "side": 1,
       "message": "Don\u0027t use \u0027*\u0027. If you want the effect that \u0027*\u0027 gives by default in the XML format, use ApiResult::setContentValue().\n\n ApiResult::setContentValue( $entry, \u0027site\u0027, $row-\u003ecs_subscriber_id );\n\nOr, I suppose, you could do it in the assignment instead of using a method call.\n\n $entry \u003d [\n     \u0027site\u0027 \u003d\u003e $row-\u003ecs_subscriber_id,\n     ApiResult::META_CONTENT \u003d\u003e \u0027site\u0027,\n ];",
+      "revId": "363de93865e4a32388e589b024e134cb4966e2b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_482fc5f3",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-10-29T16:52:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb4ebfb_d18024fc",
       "revId": "363de93865e4a32388e589b024e134cb4966e2b3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
