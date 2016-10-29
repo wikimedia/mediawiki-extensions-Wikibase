@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_28c35963",
+        "filename": "repo/resources/wikibase.special/wikibase.special.mergeItems.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-10-29T15:09:10Z",
+      "side": 1,
+      "message": "\" are not allowed",
+      "revId": "112c085ee9d9cbb7a2f1c2611873636eb56434e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
