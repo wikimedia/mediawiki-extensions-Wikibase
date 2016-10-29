@@ -332,6 +332,8 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	private function createForm( $legend = null, array $additionalFormElements ) {
 		$this->addCopyrightText();
 
+		$this->getOutput()->addModules( 'wikibase.special.newEntity' );
+
 		HTMLForm::factory( 'ooui', $additionalFormElements, $this->getContext() )
 			->setId( 'mw-newentity-form1' )
 			->setSubmitID( 'wb-newentity-submit' )
