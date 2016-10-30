@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_d833a0f2",
+        "filename": "repo/maintenance/SPARQLClient.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-30T16:51:13Z",
+      "side": 1,
+      "message": "getErrorsByType returns an array. We\u0027ll need to use implode(), using it in a string directly will just say \"array\"....",
+      "revId": "8bae3db776ecaa3554a7d6f7c3084cbe83b1df5e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
