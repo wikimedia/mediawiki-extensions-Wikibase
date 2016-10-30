@@ -142,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_9844f84b",
+        "filename": "repo/maintenance/SPARQLClient.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-30T16:51:13Z",
+      "side": 1,
+      "message": "The point of using EntityId objects instead of plain strings is type safety. Of course I can use a string instead of an EntityId object pretty much anywhere, but if it\u0027s a string, I cannot be sure it\u0027s a valid ID. If it\u0027s an EntityIds, I have this guarantee. So my recommendation is to *always* pass EntityIds, even if you end up just using the strings.",
+      "parentUuid": "4eb4ebfb_3d8cb939",
+      "revId": "46f38d31f181d5bb4672b6b1219b592832e7e859",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_065f7be9",
         "filename": "repo/maintenance/updateUnits.php",
         "patchSetId": 21
@@ -241,6 +259,24 @@
       "side": 1,
       "message": "If we don\u0027t have English label that probably means it\u0027s not a unit we want to deal with now, it\u0027s probably something very exotic with no usage on real data. At least all units that didn\u0027t have English labels so far were so. When we decide it\u0027s ok to support exotic units, we\u0027ll remove this, for now it\u0027s a filter to limit ourselves to more mainstream ones.",
       "parentUuid": "4eb4ebfb_06389b9a",
+      "revId": "46f38d31f181d5bb4672b6b1219b592832e7e859",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_386a84b2",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-30T16:51:13Z",
+      "side": 1,
+      "message": "I see your point, but I dislike ignoring them silently. Can we log a warning in this case?",
+      "parentUuid": "4eb4ebfb_dd995573",
       "revId": "46f38d31f181d5bb4672b6b1219b592832e7e859",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -422,6 +458,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_f8641ce3",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-30T16:51:13Z",
+      "side": 1,
+      "message": "Gerrit complains about trailing whitespace. I think the code sniffer ignores it inside string literals, but it still feels dirty.",
+      "parentUuid": "4eb4ebfb_3db279e5",
+      "revId": "46f38d31f181d5bb4672b6b1219b592832e7e859",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_e6f6cff5",
         "filename": "repo/maintenance/updateUnits.php",
         "patchSetId": 21
@@ -457,6 +511,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_d86160d2",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-30T16:51:13Z",
+      "side": 1,
+      "message": "please remove trailing whitespace, see above.",
+      "parentUuid": "4eb4ebfb_1db7bdd4",
+      "revId": "46f38d31f181d5bb4672b6b1219b592832e7e859",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_c6fbd3dd",
         "filename": "repo/maintenance/updateUnits.php",
         "patchSetId": 21
@@ -468,6 +540,24 @@
       "writtenOn": "2016-10-27T16:30:53Z",
       "side": 1,
       "message": "eek!",
+      "revId": "46f38d31f181d5bb4672b6b1219b592832e7e859",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_b85e9415",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-30T16:51:13Z",
+      "side": 1,
+      "message": "trailing whitespace, see above.",
+      "parentUuid": "4eb4ebfb_c6fbd3dd",
       "revId": "46f38d31f181d5bb4672b6b1219b592832e7e859",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
