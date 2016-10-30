@@ -46,13 +46,13 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 				'p' => array( 'language' => 'en', 'value' => 'Different Value' ),
 				'e' => array( 'value' => array( 'en' => 'Different Value' ) ) ),
 			array( //5
-				'p' => array( 'language' => 'bat-smg', 'value' => 'V?sata' ),
-				'e' => array( 'value' => array( 'bat-smg' => 'V?sata','en' => 'Different Value' ) ) ),
+				'p' => array( 'language' => 'sgs', 'value' => 'V?sata' ),
+				'e' => array( 'value' => array( 'sgs' => 'V?sata','en' => 'Different Value' ) ) ),
 			array( //6
 				'p' => array( 'language' => 'en', 'value' => '' ),
-				'e' => array( 'value' => array( 'bat-smg' => 'V?sata' ) ) ),
+				'e' => array( 'value' => array( 'sgs' => 'V?sata' ) ) ),
 			array( //7
-				'p' => array( 'language' => 'bat-smg', 'value' => '' ),
+				'p' => array( 'language' => 'sgs', 'value' => '' ),
 				'e' => array() ),
 			array( //8
 				'p' => array( 'language' => 'en', 'value' => "  x\nx  " ),
