@@ -18,7 +18,8 @@
 			"Macofe",
 			"Yasten",
 			"Dcausse",
-			"Wladek92"
+			"Wladek92",
+			"Pymouss"
 		]
 	},
 	"wikibase-client-desc": "Client pour l’extension Wikibase",
@@ -110,7 +111,7 @@
 	"wikibase-entityusage-submit": "Afficher les pages",
 	"wikibase-pageinfo-entity-id": "ID de l’élément {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Aucun",
-	"wikibase-pageinfo-entity-usage": "{{WBREPONAME}} entités utilisées sur cette page",
+	"wikibase-pageinfo-entity-usage": "Entités {{WBREPONAME}} utilisées sur cette page",
 	"wikibase-pageinfo-entity-usage-S": "Sitelink",
 	"wikibase-pageinfo-entity-usage-L": "Étiquette: $1",
 	"wikibase-pageinfo-entity-usage-T": "Titre",

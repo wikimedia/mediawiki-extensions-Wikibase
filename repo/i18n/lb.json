@@ -165,7 +165,7 @@
 	"wikibase-mergeitems-submit": "Elementer zesummeleeën",
 	"wikibase-mergeitems-success": "$1 gouf mat $3 zesummegeluecht a virugeleet.",
 	"wikibase-itemmerge-failed-save": "D'Element konnt net gespäichert ginn.",
-	"wikibase-itemmerge-permissiondenied": "Erlaabnes refuséiert",
+	"wikibase-itemmerge-permissiondenied": "Autorisatioun refuséiert",
 	"wikibase-itemmerge-no-such-entity": "Element gouf net fonnt.",
 	"wikibase-itemmerge-cant-load-entity-content": "D'Element konnt net geluede ginn.",
 	"wikibase-itemmerge-cant-merge-self": "En Element kann net mat sech selwer zesummegeluecht ginn.",

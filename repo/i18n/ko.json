@@ -30,6 +30,7 @@
 	"wikibase-save-inprogress": "저장 중…",
 	"wikibase-remove-inprogress": "삭제 중…",
 	"wikibase-statementlistview-add": "추가",
+	"wikibase-statementlistview-add-tooltip": "새 값을 추가",
 	"wikibase-statementgrouplistview-add": "추가",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "다른 언어",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "설정",

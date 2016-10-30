@@ -15,7 +15,8 @@
 			"Macofe",
 			"TheEduGobi",
 			"Almondega",
-			"Peter Fernando"
+			"Peter Fernando",
+			"Hamilton Abreu"
 		]
 	},
 	"wikibase-desc": "Repositório de dados estruturados",
@@ -234,5 +235,6 @@
 	"right-property-term": "Alterar termos de propriedade (rótulos, descrições, nomes alternativos)",
 	"right-property-create": "criar propriedades",
 	"action-item-merge": "fundir itens",
-	"action-property-create": "criar propriedades"
+	"action-property-create": "criar propriedades",
+	"apihelp-wbeditentity-param-new": "Se definido, uma nova entidade será criada.\nDefinir o tipo de entidade que você deseja criar.\nNão é permitido ter isso definido quando o <var>id</var> é também definido."
 }

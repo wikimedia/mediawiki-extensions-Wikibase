@@ -7,7 +7,8 @@
 			"KuboF",
 			"Yekrats",
 			"Macofe",
-			"Robin van der Vliet"
+			"Robin van der Vliet",
+			"AVRS"
 		]
 	},
 	"wikibase-desc": "Deponejo por strukturitaj datumoj",
@@ -22,6 +23,7 @@
 	"wikibase-addreference": "aldoni referencon",
 	"wikibase-save-inprogress": "Konservado...",
 	"wikibase-remove-inprogress": "Forigado...",
+	"wikibase-statementlistview-add": "aldoni",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "En pluraj lingvoj",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Konata ankaŭ kiel",
 	"wikibase-entitytermsforlanguagelistview-description": "Priskribo",

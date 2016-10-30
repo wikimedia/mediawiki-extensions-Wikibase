@@ -255,7 +255,7 @@
 	"wikibase-redirectentity-success": "$1 foi redirecionado para $2.",
 	"wikibase-redirectentity-submit": "Redirecionar",
 	"wikibase-api-unresolved-redirect": "O identificador (ID) fornecido refere-se a um redirecionamento, o que não é suportado neste contexto.",
-	"wikibase-api-no-such-sitelink": "Não foi possível encontrar uma ligação de sítio para '$1' ao tentar editar os emblemas.",
+	"wikibase-api-no-such-sitelink": "Não foi possível encontrar uma ligação de sítio para \"$1\" ao tentar editar os emblemas.",
 	"wikibase-conflict-patched": "A sua edição foi adicionada à versão mais recente.",
 	"wikibase-restoreold": "restaurar",
 	"wikibase-entity-summary-restore": "Restaurar revisão $3 por [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
@@ -288,7 +288,7 @@
 	"wikibase-pageinfo-subscription": "Wikis subscritas a esta entidade",
 	"wikibase-pageinfo-subscription-none": "Nenhuma",
 	"apihelp-wbcreateclaim-description": "Cria alegações do Wikidata.",
-	"apihelp-wbeditentity-param-new": "Se definido, uma nova entidade será criada.\nDefinir o tipo de entidade que você deseja criar.\nNão é permitido ter isso definido quando o <var>id</var> é também definido.",
+	"apihelp-wbeditentity-param-new": "Se definido, será criada uma nova entidade.\nDefina aqui o tipo de entidade a ser criada.\nNão é permitido ter isto definido quando o <var>id</var> também está definido.",
 	"apihelp-wbmergeitems-description": "Faz a fusão de vários itens.",
 	"apihelp-wbremoveclaims-description": "Remove alegações do Wikidata.",
 	"apihelp-wbsetdescription-param-language": "Idioma da descrição"
