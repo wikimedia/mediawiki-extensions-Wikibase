@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_dad710c3",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-31T21:27:41Z",
+      "side": 1,
+      "message": "typo - unnormalized",
+      "revId": "9a57ae34e8863e88a62ad9b10f136c8bf37ed574",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
