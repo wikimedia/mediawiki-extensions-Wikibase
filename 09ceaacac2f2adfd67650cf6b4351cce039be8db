@@ -281,6 +281,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_c95f5443",
+        "filename": "repo/tests/phpunit/maintenance/AddUnitsTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-31T14:33:58Z",
+      "side": 1,
+      "message": "Well, it\u0027s __DIR__ . \"/../data/maintenance/$name.ttl\". \nFrom the way the code is written now, it\u0027s completely unclear what \u0027base\u0027 is here, since it\u0027s clearly to ttl. \u0027base.ttl\u0027 would already indicate that it\u0027s a file name. Moving the construction of the path here would conform with the idea of having as little magic as possible in test cases.\n\nThis isn\u0027t a blocker, just letting you know that I wasted 5 minutes trying to understand what\u0027s happening here.",
+      "parentUuid": "4eb4ebfb_8e2dd28d",
+      "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_837dbd19",
         "filename": "repo/tests/phpunit/maintenance/AddUnitsTest.php",
         "patchSetId": 11
@@ -345,6 +363,24 @@
       "side": 1,
       "message": "About the same. I\u0027ll probably generate TTL, since it\u0027s easier to verify by looking, so I test TTLs too.",
       "parentUuid": "4eb4ebfb_51f89e46",
+      "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_6935e0f2",
+        "filename": "repo/tests/phpunit/maintenance/AddUnitsTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-31T14:33:58Z",
+      "side": 1,
+      "message": "Well, TTL is brittle - a slight change to the serializer will break the test case, even though the RDF didn\u0027t change. ntriples is much more robust, which is why we use it for most RDF tests. But that\u0027s just a thought, not a blocker.",
+      "parentUuid": "4eb4ebfb_0e58a234",
       "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
