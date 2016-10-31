@@ -22,10 +22,10 @@ class ByPropertyIdStatementGrouperTest extends PHPUnit_Framework_TestCase {
 		$statement3 = new Statement( new PropertyNoValueSnak( 1 ) );
 		$statements = new StatementList( $statement1, $statement2, $statement3 );
 
-		$expected = array(
+		$expected = [
 			'P1' => new StatementList( $statement1, $statement3 ),
 			'P2' => new StatementList( $statement2 ),
-		);
+		];
 
 		$grouper = new ByPropertyIdStatementGrouper();
 		$this->assertEquals( $expected, $grouper->groupStatements( $statements ) );

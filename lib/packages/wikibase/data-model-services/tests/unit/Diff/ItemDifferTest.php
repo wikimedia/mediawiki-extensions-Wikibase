@@ -31,7 +31,7 @@ class ItemDifferTest extends \PHPUnit_Framework_TestCase {
 	public function testFingerprintIsDiffed() {
 		$firstItem = new Item();
 		$firstItem->getFingerprint()->setLabel( 'en', 'kittens' );
-		$firstItem->getFingerprint()->setAliasGroup( 'en', array( 'cats' ) );
+		$firstItem->getFingerprint()->setAliasGroup( 'en', [ 'cats' ] );
 
 		$secondItem = new Item();
 		$secondItem->getFingerprint()->setLabel( 'en', 'nyan' );
@@ -41,17 +41,17 @@ class ItemDifferTest extends \PHPUnit_Framework_TestCase {
 		$diff = $differ->diffItems( $firstItem, $secondItem );
 
 		$this->assertEquals(
-			new Diff( array( 'en' => new DiffOpChange( 'kittens', 'nyan' ) ) ),
+			new Diff( [ 'en' => new DiffOpChange( 'kittens', 'nyan' ) ] ),
 			$diff->getLabelsDiff()
 		);
 
 		$this->assertEquals(
-			new Diff( array( 'en' => new DiffOpAdd( 'foo bar baz' ) ) ),
+			new Diff( [ 'en' => new DiffOpAdd( 'foo bar baz' ) ] ),
 			$diff->getDescriptionsDiff()
 		);
 
 		$this->assertEquals(
-			new Diff( array( 'en' => new Diff( array( new DiffOpRemove( 'cats' ) ) ) ) ),
+			new Diff( [ 'en' => new Diff( [ new DiffOpRemove( 'cats' ) ] ) ] ),
 			$diff->getAliasesDiff()
 		);
 	}
@@ -87,12 +87,12 @@ class ItemDifferTest extends \PHPUnit_Framework_TestCase {
 		$diff = $differ->getConstructionDiff( $item );
 
 		$this->assertEquals(
-			new Diff( array( 'en' => new DiffOpAdd( 'foo' ) ) ),
+			new Diff( [ 'en' => new DiffOpAdd( 'foo' ) ] ),
 			$diff->getLabelsDiff()
 		);
 
 		$this->assertEquals(
-			new Diff( array( 'bar' => new Diff( array( 'name' => new DiffOpAdd( 'baz' ) ) ) ) ),
+			new Diff( [ 'bar' => new Diff( [ 'name' => new DiffOpAdd( 'baz' ) ] ) ] ),
 			$diff->getSiteLinkDiff()
 		);
 	}

@@ -88,7 +88,7 @@ class PropertyDiffer implements EntityDifferStrategy {
 	 * @return array[]
 	 */
 	private function toDiffArray( Property $property ) {
-		$array = array();
+		$array = [];
 
 		$array['aliases'] = $property->getFingerprint()->getAliasGroups()->toTextArray();
 		$array['label'] = $property->getFingerprint()->getLabels()->toTextArray();
@@ -107,7 +107,7 @@ class PropertyDiffer implements EntityDifferStrategy {
 		$this->assertIsProperty( $entity );
 
 		/** @var Property $entity */
-		$diffOps = $this->diffPropertyArrays( array(), $this->toDiffArray( $entity ) );
+		$diffOps = $this->diffPropertyArrays( [], $this->toDiffArray( $entity ) );
 		$diffOps['claim'] = $this->statementListDiffer->getDiff( new StatementList(), $entity->getStatements() );
 
 		return new EntityDiff( $diffOps );
@@ -123,7 +123,7 @@ class PropertyDiffer implements EntityDifferStrategy {
 		$this->assertIsProperty( $entity );
 
 		/** @var Property $entity */
-		$diffOps = $this->diffPropertyArrays( $this->toDiffArray( $entity ), array() );
+		$diffOps = $this->diffPropertyArrays( $this->toDiffArray( $entity ), [] );
 		$diffOps['claim'] = $this->statementListDiffer->getDiff( $entity->getStatements(), new StatementList() );
 
 		return new EntityDiff( $diffOps );

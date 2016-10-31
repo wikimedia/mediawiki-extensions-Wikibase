@@ -28,70 +28,70 @@ class ItemDiffTest extends EntityDiffOldTest {
 
 	public function provideApplyData() {
 		$originalTests = $this->generateApplyData( Item::ENTITY_TYPE );
-		$tests = array();
+		$tests = [];
 
 		// add link ------------------------------
 		$a = new Item();
 		$a->getSiteLinkList()->addNewSiteLink(
 			'enwiki',
 			'Test',
-			array(
+			[
 				new ItemId( 'Q42' ),
 				new ItemId( 'Q3' )
-			)
+			]
 		);
 
 		$b = $a->copy();
 		$b->getSiteLinkList()->addNewSiteLink(
 			'dewiki',
 			'Test',
-			array(
+			[
 				new ItemId( 'Q42' )
-			)
+			]
 		);
 
-		$tests[] = array( $a, $b );
+		$tests[] = [ $a, $b ];
 
 		// add badges
 		$a = new Item();
 		$a->getSiteLinkList()->addNewSiteLink(
 			'enwiki',
 			'Test',
-			array(
+			[
 				new ItemId( 'Q42' ),
-			)
+			]
 		);
 
 		$b = new Item();
 		$b->getSiteLinkList()->addNewSiteLink(
 			'enwiki',
 			'Test',
-			array(
+			[
 				new ItemId( 'Q42' ),
 				new ItemId( 'Q3' )
-			)
+			]
 		);
 
-		$tests[] = array( $a, $b );
+		$tests[] = [ $a, $b ];
 
 		// remove badges
 		$a = new Item();
 		$a->getSiteLinkList()->addNewSiteLink(
 			'enwiki',
 			'Test',
-			array(
+			[
 				new ItemId( 'Q42' ),
 				new ItemId( 'Q3' )
-			)
+			]
 		);
 
 		$b = new Item();
 		$b->getSiteLinkList()->addNewSiteLink(
 			'enwiki',
 			'Test',
-			array(
+			[
 				new ItemId( 'Q42' )
-			)
+			]
 		);
 
 		// modify badges
@@ -99,68 +99,68 @@ class ItemDiffTest extends EntityDiffOldTest {
 		$a->getSiteLinkList()->addNewSiteLink(
 			'enwiki',
 			'Test',
-			array(
+			[
 				new ItemId( 'Q41' ),
 				new ItemId( 'Q3' )
-			)
+			]
 		);
 
 		$b = new Item();
 		$b->getSiteLinkList()->addNewSiteLink(
 			'enwiki',
 			'Test',
-			array(
+			[
 				new ItemId( 'Q42' ),
 				new ItemId( 'Q3' )
-			)
+			]
 		);
 
-		$tests[] = array( $a, $b );
+		$tests[] = [ $a, $b ];
 
 		// remove link
 		$a = new Item();
 		$a->getSiteLinkList()->addNewSiteLink(
 			'enwiki',
 			'Test',
-			array(
+			[
 				new ItemId( 'Q42' )
-			)
+			]
 		);
 		$a->getSiteLinkList()->addNewSiteLink(
 			'dewiki',
 			'Test',
-			array(
+			[
 				new ItemId( 'Q3' )
-			)
+			]
 		);
 
 		$b = $a->copy();
 		$b->getSiteLinkList()->removeLinkWithSiteId( 'enwiki' );
 
-		$tests[] = array( $a, $b );
+		$tests[] = [ $a, $b ];
 
 		// change link
 		$a = new Item();
 		$a->getSiteLinkList()->addNewSiteLink(
 			'enwiki',
 			'Test',
-			array(
+			[
 				new ItemId( 'Q42' ),
 				new ItemId( 'Q3' )
-			)
+			]
 		);
 
 		$b = new Item();
 		$b->getSiteLinkList()->addNewSiteLink(
 			'enwiki',
 			'Test!!!',
-			array(
+			[
 				new ItemId( 'Q42' ),
 				new ItemId( 'Q3' )
-			)
+			]
 		);
 
-		$tests[] = array( $a, $b );
+		$tests[] = [ $a, $b ];
 
 		return array_merge( $originalTests, $tests );
 	}
@@ -194,24 +194,24 @@ class ItemDiffTest extends EntityDiffOldTest {
 	}
 
 	public function isEmptyProvider() {
-		$argLists = array();
+		$argLists = [];
 
-		$argLists['no ops'] = array( array(), true );
+		$argLists['no ops'] = [ [], true ];
 
-		$argLists['label changed'] = array(
-			array( 'label' => new Diff( array( 'x' => new DiffOpAdd( 'foo' ) ) ) ),
+		$argLists['label changed'] = [
+			[ 'label' => new Diff( [ 'x' => new DiffOpAdd( 'foo' ) ] ) ],
 			false
-		);
+		];
 
-		$argLists['empty links diff'] = array(
-			array( 'links' => new Diff( array(), true ) ),
+		$argLists['empty links diff'] = [
+			[ 'links' => new Diff( [], true ) ],
 			true
-		);
+		];
 
-		$argLists['non-empty links diff'] = array(
-			array( 'links' => new Diff( array( new DiffOpAdd( 'foo' ) ), true ) ),
+		$argLists['non-empty links diff'] = [
+			[ 'links' => new Diff( [ new DiffOpAdd( 'foo' ) ], true ) ],
 			false
-		);
+		];
 
 		return $argLists;
 	}
@@ -234,17 +234,17 @@ class ItemDiffTest extends EntityDiffOldTest {
 		$oldErrorLevel = error_reporting( E_USER_ERROR );
 
 		$atomicListDiff = new DiffOpChange(
-			array( 'a' => 'A', 'b' => 'B' ),
-			array( 'b' => 'B', 'a' => 'A' )
+			[ 'a' => 'A', 'b' => 'B' ],
+			[ 'b' => 'B', 'a' => 'A' ]
 		);
 
-		$diff = new ItemDiff( array(
+		$diff = new ItemDiff( [
 			'aliases' => $atomicListDiff,
 			'label' => $atomicListDiff,
 			'description' => $atomicListDiff,
 			'claim' => $atomicListDiff,
 			'links' => $atomicListDiff,
-		) );
+		] );
 
 		$this->assertInstanceOf( 'Diff\DiffOp\Diff\Diff', $diff->getAliasesDiff() );
 		$this->assertInstanceOf( 'Diff\DiffOp\Diff\Diff', $diff->getLabelsDiff() );

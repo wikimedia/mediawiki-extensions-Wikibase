@@ -22,7 +22,7 @@ class NullStatementGrouper implements StatementGrouper {
 	 *  "statements" to the unmodified StatementList object.
 	 */
 	public function groupStatements( StatementList $statements ) {
-		return array( 'statements' => $statements );
+		return [ 'statements' => $statements ];
 	}
 
 }

@@ -30,7 +30,7 @@ class FingerprintPatcherTest extends \PHPUnit_Framework_TestCase {
 
 		$fingerprint->setLabel( 'en', 'foo' );
 		$fingerprint->setDescription( 'de', 'bar' );
-		$fingerprint->setAliasGroup( 'nl', array( 'baz' ) );
+		$fingerprint->setAliasGroup( 'nl', [ 'baz' ] );
 
 		return $fingerprint;
 	}
@@ -51,12 +51,12 @@ class FingerprintPatcherTest extends \PHPUnit_Framework_TestCase {
 	public function testLabelDiffOnlyAffectsLabels() {
 		$fingerprint = $this->newSimpleFingerprint();
 
-		$patch = new EntityDiff( array(
-			'label' => new Diff( array(
+		$patch = new EntityDiff( [
+			'label' => new Diff( [
 				'en' => new DiffOpChange( 'foo', 'bar' ),
 				'de' => new DiffOpAdd( 'baz' ),
-			), true )
-		) );
+			], true )
+		] );
 
 		$expectedFingerprint = $this->newSimpleFingerprint();
 		$expectedFingerprint->setLabel( 'en', 'bar' );
@@ -68,12 +68,12 @@ class FingerprintPatcherTest extends \PHPUnit_Framework_TestCase {
 	public function testDescriptionDiffOnlyAffectsDescriptions() {
 		$fingerprint = $this->newSimpleFingerprint();
 
-		$patch = new EntityDiff( array(
-			'description' => new Diff( array(
+		$patch = new EntityDiff( [
+			'description' => new Diff( [
 				'de' => new DiffOpChange( 'bar', 'foo' ),
 				'en' => new DiffOpAdd( 'baz' ),
-			), true )
-		) );
+			], true )
+		] );
 
 		$expectedFingerprint = $this->newSimpleFingerprint();
 		$expectedFingerprint->setDescription( 'de', 'foo' );
@@ -83,33 +83,33 @@ class FingerprintPatcherTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function aliasDiffProvider() {
-		return array(
-			'diffs containing add/remove ops (default)' => array( array(
-				'de' => new Diff( array( new DiffOpAdd( 'foo' ) ), false ),
-				'en' => new Diff( array( new DiffOpRemove( 'en-old' ), new DiffOpAdd( 'en-new' ) ), false ),
-				'fa' => new Diff( array( new DiffOpRemove( 'fa-old' ) ), false ),
-			) ),
-			'associative diffs containing atomic ops' => array( array(
-				'de' => new Diff( array( new DiffOpAdd( 'foo' ) ), true ),
-				'en' => new Diff( array( new DiffOpChange( 'en-old', 'en-new' ) ), true ),
-				'fa' => new Diff( array( new DiffOpRemove( 'fa-old' ) ), true ),
-			) ),
-			'non-associative diffs containing atomic ops' => array( array(
-				'de' => new Diff( array( new DiffOpAdd( 'foo' ) ), true ),
-				'en' => new Diff( array( new DiffOpChange( 'en-old', 'en-new' ) ), false ),
-				'fa' => new Diff( array( new DiffOpRemove( 'fa-old' ) ), true ),
-			) ),
-			'partly associative diffs (auto-detected) containing atomic ops' => array( array(
-				'de' => new Diff( array( new DiffOpAdd( 'foo' ) ) ),
-				'en' => new Diff( array( new DiffOpChange( 'en-old', 'en-new' ) ) ),
-				'fa' => new Diff( array( new DiffOpRemove( 'fa-old' ) ) ),
-			) ),
-			'atomic diff ops' => array( array(
-				'de' => new DiffOpAdd( array( 'foo' ) ),
-				'en' => new DiffOpChange( array( 'en-old' ), array( 'en-new' ) ),
-				'fa' => new DiffOpRemove( array( 'fa-old' ) ),
-			) ),
-		);
+		return [
+			'diffs containing add/remove ops (default)' => [ [
+				'de' => new Diff( [ new DiffOpAdd( 'foo' ) ], false ),
+				'en' => new Diff( [ new DiffOpRemove( 'en-old' ), new DiffOpAdd( 'en-new' ) ], false ),
+				'fa' => new Diff( [ new DiffOpRemove( 'fa-old' ) ], false ),
+			] ],
+			'associative diffs containing atomic ops' => [ [
+				'de' => new Diff( [ new DiffOpAdd( 'foo' ) ], true ),
+				'en' => new Diff( [ new DiffOpChange( 'en-old', 'en-new' ) ], true ),
+				'fa' => new Diff( [ new DiffOpRemove( 'fa-old' ) ], true ),
+			] ],
+			'non-associative diffs containing atomic ops' => [ [
+				'de' => new Diff( [ new DiffOpAdd( 'foo' ) ], true ),
+				'en' => new Diff( [ new DiffOpChange( 'en-old', 'en-new' ) ], false ),
+				'fa' => new Diff( [ new DiffOpRemove( 'fa-old' ) ], true ),
+			] ],
+			'partly associative diffs (auto-detected) containing atomic ops' => [ [
+				'de' => new Diff( [ new DiffOpAdd( 'foo' ) ] ),
+				'en' => new Diff( [ new DiffOpChange( 'en-old', 'en-new' ) ] ),
+				'fa' => new Diff( [ new DiffOpRemove( 'fa-old' ) ] ),
+			] ],
+			'atomic diff ops' => [ [
+				'de' => new DiffOpAdd( [ 'foo' ] ),
+				'en' => new DiffOpChange( [ 'en-old' ], [ 'en-new' ] ),
+				'fa' => new DiffOpRemove( [ 'fa-old' ] ),
+			] ],
+		];
 	}
 
 	/**
@@ -117,109 +117,109 @@ class FingerprintPatcherTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testAliasDiffOnlyAffectsAliases( array $diffOps ) {
 		$fingerprint = $this->newSimpleFingerprint();
-		$fingerprint->setAliasGroup( 'en', array( 'en-old' ) );
-		$fingerprint->setAliasGroup( 'fa', array( 'fa-old' ) );
+		$fingerprint->setAliasGroup( 'en', [ 'en-old' ] );
+		$fingerprint->setAliasGroup( 'fa', [ 'fa-old' ] );
 
-		$patch = new EntityDiff( array(
+		$patch = new EntityDiff( [
 			'aliases' => new Diff( $diffOps, true ),
-		) );
+		] );
 
 		$expectedFingerprint = $this->newSimpleFingerprint();
-		$expectedFingerprint->setAliasGroup( 'de', array( 'foo' ) );
-		$expectedFingerprint->setAliasGroup( 'en', array( 'en-new' ) );
+		$expectedFingerprint->setAliasGroup( 'de', [ 'foo' ] );
+		$expectedFingerprint->setAliasGroup( 'en', [ 'en-new' ] );
 
 		$this->assertFingerprintResultsFromPatch( $expectedFingerprint, $fingerprint, $patch );
 	}
 
 	public function conflictingEditProvider() {
-		return array(
-			'does not add existing label language' => array( array(
-				'label' => new Diff( array(
+		return [
+			'does not add existing label language' => [ [
+				'label' => new Diff( [
 					'en' => new DiffOpAdd( 'added' ),
-				), true ),
-			) ),
-			'does not change modified label' => array( array(
-				'label' => new Diff( array(
+				], true ),
+			] ],
+			'does not change modified label' => [ [
+				'label' => new Diff( [
 					'en' => new DiffOpChange( 'original', 'changed' ),
-				), true ),
-			) ),
-			'does not change missing label' => array( array(
-				'label' => new Diff( array(
+				], true ),
+			] ],
+			'does not change missing label' => [ [
+				'label' => new Diff( [
 					'de' => new DiffOpChange( 'original', 'changed' ),
-				), true ),
-			) ),
-			'does not remove modified label' => array( array(
-				'label' => new Diff( array(
+				], true ),
+			] ],
+			'does not remove modified label' => [ [
+				'label' => new Diff( [
 					'en' => new DiffOpRemove( 'original' ),
-				), true ),
-			) ),
-			'removing missing label is no-op' => array( array(
-				'label' => new Diff( array(
+				], true ),
+			] ],
+			'removing missing label is no-op' => [ [
+				'label' => new Diff( [
 					'de' => new DiffOpRemove( 'original' ),
-				), true ),
-			) ),
+				], true ),
+			] ],
 
-			'does not add existing description language' => array( array(
-				'description' => new Diff( array(
+			'does not add existing description language' => [ [
+				'description' => new Diff( [
 					'en' => new DiffOpAdd( 'added' ),
-				), true ),
-			) ),
-			'does not change modified description' => array( array(
-				'description' => new Diff( array(
+				], true ),
+			] ],
+			'does not change modified description' => [ [
+				'description' => new Diff( [
 					'en' => new DiffOpChange( 'original', 'changed' ),
-				), true ),
-			) ),
-			'changing missing description is no-op' => array( array(
-				'description' => new Diff( array(
+				], true ),
+			] ],
+			'changing missing description is no-op' => [ [
+				'description' => new Diff( [
 					'de' => new DiffOpChange( 'original', 'changed' ),
-				), true ),
-			) ),
-			'does not remove modified description' => array( array(
-				'description' => new Diff( array(
+				], true ),
+			] ],
+			'does not remove modified description' => [ [
+				'description' => new Diff( [
 					'en' => new DiffOpRemove( 'original' ),
-				), true ),
-			) ),
-			'removing missing description is no-op' => array( array(
-				'description' => new Diff( array(
+				], true ),
+			] ],
+			'removing missing description is no-op' => [ [
+				'description' => new Diff( [
 					'de' => new DiffOpRemove( 'original' ),
-				), true ),
-			) ),
+				], true ),
+			] ],
 
-			'does not add existing aliases language' => array( array(
-				'aliases' => new Diff( array(
-					'en' => new DiffOpAdd( array( 'added' ) ),
-				), true ),
-			) ),
-			'does not change missing aliases language' => array( array(
-				'aliases' => new Diff( array(
-					'de' => new Diff( array( new DiffOpRemove( 'original' ), new DiffOpAdd( 'changed' ) ) ),
-				), true ),
-			) ),
-			'changing missing aliases is no-op' => array( array(
-				'aliases' => new Diff( array(
-					'de' => new Diff( array( new DiffOpChange( 'original', 'changed' ) ), true ),
-					'en' => new Diff( array( new DiffOpChange( 'original', 'changed' ) ), true ),
-				), true ),
-			) ),
-			'changing missing aliases is no-op (atomic)' => array( array(
-				'aliases' => new Diff( array(
-					'de' => new DiffOpChange( array( 'original' ), array( 'changed' ) ),
-					'en' => new DiffOpChange( array( 'original' ), array( 'changed' ) ),
-				), true ),
-			) ),
-			'removing missing aliases is no-op' => array( array(
-				'aliases' => new Diff( array(
-					'de' => new Diff( array( new DiffOpRemove( 'original' ) ) ),
-					'en' => new Diff( array( new DiffOpRemove( 'original' ) ) ),
-				), true ),
-			) ),
-			'removing missing aliases is no-op (atomic)' => array( array(
-				'aliases' => new Diff( array(
-					'de' => new DiffOpRemove( array( 'original' ) ),
-					'en' => new DiffOpRemove( array( 'original' ) ),
-				), true ),
-			) ),
-		);
+			'does not add existing aliases language' => [ [
+				'aliases' => new Diff( [
+					'en' => new DiffOpAdd( [ 'added' ] ),
+				], true ),
+			] ],
+			'does not change missing aliases language' => [ [
+				'aliases' => new Diff( [
+					'de' => new Diff( [ new DiffOpRemove( 'original' ), new DiffOpAdd( 'changed' ) ] ),
+				], true ),
+			] ],
+			'changing missing aliases is no-op' => [ [
+				'aliases' => new Diff( [
+					'de' => new Diff( [ new DiffOpChange( 'original', 'changed' ) ], true ),
+					'en' => new Diff( [ new DiffOpChange( 'original', 'changed' ) ], true ),
+				], true ),
+			] ],
+			'changing missing aliases is no-op (atomic)' => [ [
+				'aliases' => new Diff( [
+					'de' => new DiffOpChange( [ 'original' ], [ 'changed' ] ),
+					'en' => new DiffOpChange( [ 'original' ], [ 'changed' ] ),
+				], true ),
+			] ],
+			'removing missing aliases is no-op' => [ [
+				'aliases' => new Diff( [
+					'de' => new Diff( [ new DiffOpRemove( 'original' ) ] ),
+					'en' => new Diff( [ new DiffOpRemove( 'original' ) ] ),
+				], true ),
+			] ],
+			'removing missing aliases is no-op (atomic)' => [ [
+				'aliases' => new Diff( [
+					'de' => new DiffOpRemove( [ 'original' ] ),
+					'en' => new DiffOpRemove( [ 'original' ] ),
+				], true ),
+			] ],
+		];
 	}
 
 	/**
@@ -229,7 +229,7 @@ class FingerprintPatcherTest extends \PHPUnit_Framework_TestCase {
 		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', 'conflict' );
 		$fingerprint->setDescription( 'en', 'conflict' );
-		$fingerprint->setAliasGroup( 'en', array( 'conflict' ) );
+		$fingerprint->setAliasGroup( 'en', [ 'conflict' ] );
 
 		$patch = new EntityDiff( $diffOps );
 

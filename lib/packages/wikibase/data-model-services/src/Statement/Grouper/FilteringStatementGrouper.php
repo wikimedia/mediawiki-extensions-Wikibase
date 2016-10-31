@@ -18,12 +18,12 @@ class FilteringStatementGrouper implements StatementGrouper {
 	/**
 	 * @var StatementFilter[] An associative array, mapping statement group identifiers to filters.
 	 */
-	private $filters = array();
+	private $filters = [];
 
 	/**
 	 * @var string[]
 	 */
-	private $groupIdentifiers = array();
+	private $groupIdentifiers = [];
 
 	/**
 	 * @var string
@@ -103,7 +103,7 @@ class FilteringStatementGrouper implements StatementGrouper {
 	 * @return StatementList[]
 	 */
 	private function getEmptyGroups() {
-		$groups = array();
+		$groups = [];
 
 		foreach ( $this->groupIdentifiers as $key ) {
 			$groups[$key] = new StatementList();

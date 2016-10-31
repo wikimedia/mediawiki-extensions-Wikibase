@@ -54,18 +54,18 @@ class DataTypeStatementFilterTest extends PHPUnit_Framework_TestCase {
 		$string = new Statement( new PropertyNoValueSnak( 2 ) );
 		$deleted = new Statement( new PropertyNoValueSnak( 3 ) );
 
-		return array(
-			array( $identifier, null, false ),
-			array( $identifier, array(), false ),
-			array( $identifier, 'identifier', true ),
-			array( $identifier, 'identifiers', false ),
-			array( $deleted, 'identifier', false ),
-			array( $string, 'identifier', false ),
-			array( $string, 'string', true ),
-			array( $identifier, 'string', false ),
-			array( $identifier, array( 'identifier' ), true ),
-			array( $identifier, array( 'string', 'identifier' ), true ),
-		);
+		return [
+			[ $identifier, null, false ],
+			[ $identifier, [], false ],
+			[ $identifier, 'identifier', true ],
+			[ $identifier, 'identifiers', false ],
+			[ $deleted, 'identifier', false ],
+			[ $string, 'identifier', false ],
+			[ $string, 'string', true ],
+			[ $identifier, 'string', false ],
+			[ $identifier, [ 'identifier' ], true ],
+			[ $identifier, [ 'string', 'identifier' ], true ],
+		];
 	}
 
 }

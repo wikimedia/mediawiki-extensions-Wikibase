@@ -29,14 +29,14 @@ class StatementGuidValidatorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function validateProvider() {
-		return array(
-			array( 'q60$5083E43C-228B-4E3E-B82A-4CB20A22A3FB' ),
-			array( 'q604192$5672A3B1-7693-4DF9-ADE8-8FC13E095604' ),
-			array( 'q37$a212184b-434c-7e90-dd26-29eda5ee2580' ),
-			array( 'Q60$5083E43C-228B-4E3E-B82A-4CB20A22A3FA' ),
-			array( 'Q604192$5672A3B1-7693-4DF9-ADE8-8FC13E095603' ),
-			array( 'Q37$a212184b-434c-7e90-dd26-29eda5ee2581' )
-		);
+		return [
+			[ 'q60$5083E43C-228B-4E3E-B82A-4CB20A22A3FB' ],
+			[ 'q604192$5672A3B1-7693-4DF9-ADE8-8FC13E095604' ],
+			[ 'q37$a212184b-434c-7e90-dd26-29eda5ee2580' ],
+			[ 'Q60$5083E43C-228B-4E3E-B82A-4CB20A22A3FA' ],
+			[ 'Q604192$5672A3B1-7693-4DF9-ADE8-8FC13E095603' ],
+			[ 'Q37$a212184b-434c-7e90-dd26-29eda5ee2581' ]
+		];
 	}
 
 	/**
@@ -50,22 +50,22 @@ class StatementGuidValidatorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function validateInvalidProvider() {
-		return array(
-			array( "Q1$00000000-0000-0000-0000-000000000000\n" ),
-			array( 'q60$5083E43C-228B-4E3E-B82A-4CB20A22A3F' ),
-			array( 'q60$5083E43C-228B-4E3E-B82A-$4CB20A22A3FB' ),
-			array( '$q60$5083E43C-228B-4E3E-B82A-4CB20A22A3FB' ),
-			array( '5083E43C-228B-4E3E-B82A-4CB20A22A3FB' ),
-			array( 9000 ),
-			array( 'q604192$56723B1-7693-4DF9-ADE8-8FC13E095604' ),
-			array( 'q604192$5672w3B1-693-4DF9-ADE8-8FC13E095604' ),
-			array( 'q604192$5672w3B1-6935-4F9-ADE8-8FC13E095604' ),
-			array( 'q604192$5672w3B1-6935-4DF9-AD8-8FC13E095604' ),
-			array( 'q604192$5672w3B1-6935-4DF9-ADE8-8FC13E09604' ),
-			array( 'q604192$5672A3B1--7693-4DF9-ADE8-8FC13E095604' ),
-			array( 'foo' ),
-			array( 'q12345' )
-		);
+		return [
+			[ "Q1$00000000-0000-0000-0000-000000000000\n" ],
+			[ 'q60$5083E43C-228B-4E3E-B82A-4CB20A22A3F' ],
+			[ 'q60$5083E43C-228B-4E3E-B82A-$4CB20A22A3FB' ],
+			[ '$q60$5083E43C-228B-4E3E-B82A-4CB20A22A3FB' ],
+			[ '5083E43C-228B-4E3E-B82A-4CB20A22A3FB' ],
+			[ 9000 ],
+			[ 'q604192$56723B1-7693-4DF9-ADE8-8FC13E095604' ],
+			[ 'q604192$5672w3B1-693-4DF9-ADE8-8FC13E095604' ],
+			[ 'q604192$5672w3B1-6935-4F9-ADE8-8FC13E095604' ],
+			[ 'q604192$5672w3B1-6935-4DF9-AD8-8FC13E095604' ],
+			[ 'q604192$5672w3B1-6935-4DF9-ADE8-8FC13E09604' ],
+			[ 'q604192$5672A3B1--7693-4DF9-ADE8-8FC13E095604' ],
+			[ 'foo' ],
+			[ 'q12345' ]
+		];
 	}
 
 	/**
@@ -89,11 +89,11 @@ class StatementGuidValidatorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidFormatProvider() {
-		return array(
-			array( 'q12345' ),
-			array( 'q$1$2$3' ),
-			array( '$q60$5083E43C-228B-4E3E-B82A-4CB20A22A3FB' )
-		);
+		return [
+			[ 'q12345' ],
+			[ 'q$1$2$3' ],
+			[ '$q60$5083E43C-228B-4E3E-B82A-4CB20A22A3FB' ]
+		];
 	}
 
 	/**
@@ -108,10 +108,10 @@ class StatementGuidValidatorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function validateInvalidPrefixedIdProvider() {
-		return array(
-			array( '060$5083E43C-228B-4E3E-B82A-4CB20A22A3FB' ),
-			array( 'a060$5083E43C-228B-4E3E-B82A-4CB20A22A3FB' )
-		);
+		return [
+			[ '060$5083E43C-228B-4E3E-B82A-4CB20A22A3FB' ],
+			[ 'a060$5083E43C-228B-4E3E-B82A-4CB20A22A3FB' ]
+		];
 	}
 
 }

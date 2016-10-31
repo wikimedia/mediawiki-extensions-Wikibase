@@ -27,17 +27,17 @@ class PropertySetStatementFilterTest extends PHPUnit_Framework_TestCase {
 		$p1 = new Statement( new PropertyNoValueSnak( 1 ) );
 		$p2 = new Statement( new PropertyNoValueSnak( 2 ) );
 
-		return array(
-			array( $p1, null, false ),
-			array( $p1, array(), false ),
-			array( $p1, 'P1', true ),
-			array( $p1, 'P11', false ),
-			array( $p2, 'P1', false ),
-			array( $p2, 'P2', true ),
-			array( $p1, 'P2', false ),
-			array( $p1, array( 'P1' ), true ),
-			array( $p1, array( 'P2', 'P1' ), true ),
-		);
+		return [
+			[ $p1, null, false ],
+			[ $p1, [], false ],
+			[ $p1, 'P1', true ],
+			[ $p1, 'P11', false ],
+			[ $p2, 'P1', false ],
+			[ $p2, 'P2', true ],
+			[ $p1, 'P2', false ],
+			[ $p1, [ 'P1' ], true ],
+			[ $p1, [ 'P2', 'P1' ], true ],
+		];
 	}
 
 }

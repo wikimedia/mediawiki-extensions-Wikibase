@@ -31,12 +31,12 @@ class EntityPatcherTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function itemProvider() {
-		$argLists = array();
+		$argLists = [];
 
 		$nonEmptyItem = new Item( new ItemId( 'Q2' ) );
 
-		$argLists[] = array( new Item() );
-		$argLists[] = array( $nonEmptyItem );
+		$argLists[] = [ new Item() ];
+		$argLists[] = [ $nonEmptyItem ];
 
 		return $argLists;
 	}

@@ -24,15 +24,15 @@ class PlainEntityIdFormatterTest extends PHPUnit_Framework_TestCase {
 	 * @return array
 	 */
 	public function validProvider() {
-		$argLists = array();
+		$argLists = [];
 
-		$argLists[] = array( new ItemId( 'q42' ), 'Q42' );
-		$argLists[] = array( new ItemId( 'q9001' ), 'Q9001' );
-		$argLists[] = array( new ItemId( 'q1' ), 'Q1' );
+		$argLists[] = [ new ItemId( 'q42' ), 'Q42' ];
+		$argLists[] = [ new ItemId( 'q9001' ), 'Q9001' ];
+		$argLists[] = [ new ItemId( 'q1' ), 'Q1' ];
 
-		$argLists[] = array( new PropertyId( 'p42' ), 'P42' );
-		$argLists[] = array( new PropertyId( 'p9001' ), 'P9001' );
-		$argLists[] = array( new PropertyId( 'p1' ), 'P1' );
+		$argLists[] = [ new PropertyId( 'p42' ), 'P42' ];
+		$argLists[] = [ new PropertyId( 'p9001' ), 'P9001' ];
+		$argLists[] = [ new PropertyId( 'p1' ), 'P1' ];
 
 		return $argLists;
 	}

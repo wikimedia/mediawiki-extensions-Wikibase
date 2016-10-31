@@ -70,13 +70,13 @@ class StatementListPatcher {
 	 * @param Statement $newStatement
 	 */
 	private function changeStatement( StatementList $statements, $oldGuid, Statement $newStatement ) {
-		$replacements = array();
+		$replacements = [];
 
 		foreach ( $statements->toArray() as $statement ) {
 			$guid = $statement->getGuid();
 
 			// Collect all elements starting from the first with the same GUID
-			if ( $replacements !== array() ) {
+			if ( $replacements !== [] ) {
 				$guid === null
 					? $replacements[] = $statement
 					: $replacements[$guid] = $statement;

@@ -30,7 +30,7 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	protected function generateApplyData( $entityType ) {
-		$tests = array();
+		$tests = [];
 
 		// #0: add label
 		$a = self::newEntity( $entityType );
@@ -40,7 +40,7 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 		$b->setLabel( 'en', 'Test' );
 		$b->setLabel( 'de', 'Test' );
 
-		$tests[] = array( $a, $b );
+		$tests[] = [ $a, $b ];
 
 		// #1: remove label
 		$a = self::newEntity( $entityType );
@@ -50,7 +50,7 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 		$b = self::newEntity( $entityType );
 		$b->setLabel( 'de', 'Test' );
 
-		$tests[] = array( $a, $b );
+		$tests[] = [ $a, $b ];
 
 		// #2: change label
 		$a = self::newEntity( $entityType );
@@ -67,7 +67,7 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 		$b->setDescription( 'en', 'Test' );
 		$b->setDescription( 'de', 'Test' );
 
-		$tests[] = array( $a, $b );
+		$tests[] = [ $a, $b ];
 
 		// #4: remove description
 		$a = self::newEntity( $entityType );
@@ -77,7 +77,7 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 		$b = self::newEntity( $entityType );
 		$b->setDescription( 'de', 'Test' );
 
-		$tests[] = array( $a, $b );
+		$tests[] = [ $a, $b ];
 
 		// #5: change description
 		$a = self::newEntity( $entityType );
@@ -86,48 +86,48 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 		$b = self::newEntity( $entityType );
 		$b->setDescription( 'en', 'Test!!!' );
 
-		$tests[] = array( $a, $b );
+		$tests[] = [ $a, $b ];
 
 		// #6: add alias ------------------------------
 		$a = self::newEntity( $entityType );
-		$a->setAliases( 'en', array( 'Foo', 'Bar' ) );
+		$a->setAliases( 'en', [ 'Foo', 'Bar' ] );
 
 		$b = self::newEntity( $entityType );
-		$b->setAliases( 'en', array( 'Foo', 'Bar', 'Quux' ) );
+		$b->setAliases( 'en', [ 'Foo', 'Bar', 'Quux' ] );
 
-		$tests[] = array( $a, $b );
+		$tests[] = [ $a, $b ];
 
 		// #7: add alias language
 		$a = self::newEntity( $entityType );
-		$a->setAliases( 'en', array( 'Foo', 'Bar' ) );
+		$a->setAliases( 'en', [ 'Foo', 'Bar' ] );
 
 		$b = self::newEntity( $entityType );
-		$b->setAliases( 'en', array( 'Foo', 'Bar' ) );
-		$b->setAliases( 'de', array( 'Quux' ) );
+		$b->setAliases( 'en', [ 'Foo', 'Bar' ] );
+		$b->setAliases( 'de', [ 'Quux' ] );
 
-		$tests[] = array( $a, $b );
+		$tests[] = [ $a, $b ];
 
 		// #8: remove alias
 		$a = self::newEntity( $entityType );
-		$a->setAliases( 'en', array( 'Foo', 'Bar' ) );
+		$a->setAliases( 'en', [ 'Foo', 'Bar' ] );
 
 		$b = self::newEntity( $entityType );
-		$b->setAliases( 'en', array( 'Bar' ) );
+		$b->setAliases( 'en', [ 'Bar' ] );
 
-		$tests[] = array( $a, $b );
+		$tests[] = [ $a, $b ];
 
 		// #9: remove alias language
 		$a = self::newEntity( $entityType );
-		$a->setAliases( 'en', array( 'Foo', 'Bar' ) );
+		$a->setAliases( 'en', [ 'Foo', 'Bar' ] );
 
 		$b = self::newEntity( $entityType );
 
-		$tests[] = array( $a, $b );
+		$tests[] = [ $a, $b ];
 		return $tests;
 	}
 
 	public function provideConflictDetection() {
-		$cases = array();
+		$cases = [];
 
 		// #0: adding a label where there was none before
 		$base = self::newEntity( Item::ENTITY_TYPE );
@@ -136,56 +136,56 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 		$new = unserialize( serialize( $base ) );
 		$new->setLabel( 'en', 'TEST' );
 
-		$cases[] = array(
+		$cases[] = [
 			$base,
 			$current,
 			$new,
 			0 // there should eb no conflicts.
-		);
+		];
 
 		// #1: adding an alias where there was none before
 		$base = self::newEntity( Item::ENTITY_TYPE );
 		$current = $base;
 
 		$new = unserialize( serialize( $base ) );
-		$new->setAliases( 'en', array( 'TEST' ) );
+		$new->setAliases( 'en', [ 'TEST' ] );
 
-		$cases[] = array(
+		$cases[] = [
 			$base,
 			$current,
 			$new,
 			0 // there should eb no conflicts.
-		);
+		];
 
 		// #2: adding an alias where there already was one before
 		$base = self::newEntity( Item::ENTITY_TYPE );
-		$base->setAliases( 'en', array( 'Foo' ) );
+		$base->setAliases( 'en', [ 'Foo' ] );
 		$current = $base;
 
 		$new = unserialize( serialize( $base ) );
-		$new->setAliases( 'en', array( 'Bar' ) );
+		$new->setAliases( 'en', [ 'Bar' ] );
 
-		$cases[] = array(
+		$cases[] = [
 			$base,
 			$current,
 			$new,
 			0 // there should be no conflicts.
-		);
+		];
 
 		// #3: adding an alias where there already was one in another language
 		$base = self::newEntity( Item::ENTITY_TYPE );
-		$base->setAliases( 'en', array( 'Foo' ) );
+		$base->setAliases( 'en', [ 'Foo' ] );
 		$current = $base;
 
 		$new = unserialize( serialize( $base ) );
-		$new->setAliases( 'de', array( 'Bar' ) );
+		$new->setAliases( 'de', [ 'Bar' ] );
 
-		$cases[] = array(
+		$cases[] = [
 			$base,
 			$current,
 			$new,
 			0 // there should be no conflicts.
-		);
+		];
 
 		return $cases;
 	}

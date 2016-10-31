@@ -62,21 +62,21 @@ class PropertyPatcherTest extends PHPUnit_Framework_TestCase {
 		$property->setLabel( 'en', 'foo' );
 		$property->setLabel( 'de', 'bar' );
 
-		$patch = new EntityDiff( array(
-			'label' => new Diff( array(
+		$patch = new EntityDiff( [
+			'label' => new Diff( [
 				'en' => new DiffOpChange( 'foo', 'spam' ),
 				'nl' => new DiffOpAdd( 'baz' ),
-			) ),
-		) );
+			] ),
+		] );
 
 		$patcher = new PropertyPatcher();
 		$patcher->patchEntity( $property, $patch );
 
-		$this->assertSame( array(
+		$this->assertSame( [
 			'en' => 'spam',
 			'de' => 'bar',
 			'nl' => 'baz',
-		), $property->getFingerprint()->getLabels()->toTextArray() );
+		], $property->getFingerprint()->getLabels()->toTextArray() );
 	}
 
 	public function testDescriptionsArePatched() {
@@ -84,21 +84,21 @@ class PropertyPatcherTest extends PHPUnit_Framework_TestCase {
 		$property->setDescription( 'en', 'foo' );
 		$property->setDescription( 'de', 'bar' );
 
-		$patch = new EntityDiff( array(
-			'description' => new Diff( array(
+		$patch = new EntityDiff( [
+			'description' => new Diff( [
 				'en' => new DiffOpChange( 'foo', 'spam' ),
 				'nl' => new DiffOpAdd( 'baz' ),
-			) ),
-		) );
+			] ),
+		] );
 
 		$patcher = new PropertyPatcher();
 		$patcher->patchEntity( $property, $patch );
 
-		$this->assertSame( array(
+		$this->assertSame( [
 			'en' => 'spam',
 			'de' => 'bar',
 			'nl' => 'baz',
-		), $property->getFingerprint()->getDescriptions()->toTextArray() );
+		], $property->getFingerprint()->getDescriptions()->toTextArray() );
 	}
 
 	public function testStatementsArePatched() {
@@ -111,12 +111,12 @@ class PropertyPatcherTest extends PHPUnit_Framework_TestCase {
 		$s42 = new Statement( new PropertyNoValueSnak( 42 ) );
 		$s42->setGuid( 's42' );
 
-		$patch = new EntityDiff( array(
-				'claim' => new Diff( array(
+		$patch = new EntityDiff( [
+				'claim' => new Diff( [
 					's42' => new DiffOpRemove( $s42 ),
 					's23' => new DiffOpAdd( $s23 ),
-				) )
-		) );
+				] )
+		] );
 
 		$property = Property::newFromType( 'kittens' );
 		$property->getStatements()->addStatement( $s1337 );

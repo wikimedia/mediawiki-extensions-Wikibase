@@ -36,44 +36,44 @@ class SiteLinkListPatcherTest extends \PHPUnit_Framework_TestCase {
 	public function testPatchesMultipleSiteLinks() {
 		$links = new SiteLinkList();
 		$links->addNewSiteLink( 'dewiki', 'bar' );
-		$links->addNewSiteLink( 'nlwiki', 'baz', array( new ItemId( 'Q42' ) ) );
+		$links->addNewSiteLink( 'nlwiki', 'baz', [ new ItemId( 'Q42' ) ] );
 
-		$patch = new Diff( array(
-			'nlwiki' => new Diff( array(
+		$patch = new Diff( [
+			'nlwiki' => new Diff( [
 				'name'   => new DiffOpChange( 'baz', 'kittens' ),
 				'badges' => new Diff(
-					array(
+					[
 						new DiffOpRemove( 'Q42' ),
-					),
+					],
 					false
 				)
-			) ),
-			'frwiki' => new Diff( array(
+			] ),
+			'frwiki' => new Diff( [
 				'name'   => new DiffOpAdd( 'Berlin' ),
 				'badges' => new Diff(
-					array(
+					[
 						new DiffOpAdd( 'Q42' ),
-					),
+					],
 					false
 				)
-			) )
-		) );
+			] )
+		] );
 
 		$expectedLinks = new SiteLinkList();
 		$expectedLinks->addNewSiteLink( 'dewiki', 'bar' );
 		$expectedLinks->addNewSiteLink( 'nlwiki', 'kittens' );
-		$expectedLinks->addNewSiteLink( 'frwiki', 'Berlin', array( new ItemId( 'Q42' ) ) );
+		$expectedLinks->addNewSiteLink( 'frwiki', 'Berlin', [ new ItemId( 'Q42' ) ] );
 
 		$this->assertLinksResultsFromPatch( $expectedLinks, $links, $patch );
 	}
 
 	public function testGivenNoBadges_doesNotWarn() {
 		$patcher = new SiteLinkListPatcher();
-		$patch = new Diff( array(
-			'dewiki' => new Diff( array(
+		$patch = new Diff( [
+			'dewiki' => new Diff( [
 				'name' => new DiffOpAdd( 'Berlin' )
-			), true )
-		) );
+			], true )
+		] );
 		$siteLinks = $patcher->getPatchedSiteLinkList( new SiteLinkList(), $patch );
 
 		$this->assertCount( 1, $siteLinks );

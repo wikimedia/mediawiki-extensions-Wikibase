@@ -33,7 +33,7 @@ class RestrictedEntityLookup implements EntityLookup {
 	/**
 	 * @var bool[] Entity id serialization => bool
 	 */
-	private $entitiesAccessed = array();
+	private $entitiesAccessed = [];
 
 	/**
 	 * @var int
@@ -111,7 +111,7 @@ class RestrictedEntityLookup implements EntityLookup {
 	 */
 	public function reset() {
 		$this->entityAccessCount = 0;
-		$this->entitiesAccessed = array();
+		$this->entitiesAccessed = [];
 	}
 
 	/**

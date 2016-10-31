@@ -18,7 +18,7 @@ class ItemDiff extends EntityDiff {
 	/**
 	 * @param DiffOp[] $operations
 	 */
-	public function __construct( array $operations = array() ) {
+	public function __construct( array $operations = [] ) {
 		$this->fixSubstructureDiff( $operations, 'links' );
 
 		parent::__construct( $operations );
@@ -30,7 +30,7 @@ class ItemDiff extends EntityDiff {
 	 * @return Diff
 	 */
 	public function getSiteLinkDiff() {
-		return isset( $this['links'] ) ? $this['links'] : new Diff( array(), true );
+		return isset( $this['links'] ) ? $this['links'] : new Diff( [], true );
 	}
 
 	/**

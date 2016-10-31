@@ -19,7 +19,7 @@ class NullStatementGrouperTest extends PHPUnit_Framework_TestCase {
 		$statements = new StatementList();
 		$statements->addNewStatement( new PropertyNoValueSnak( 1 ) );
 
-		$expected = array( 'statements' => $statements );
+		$expected = [ 'statements' => $statements ];
 
 		$grouper = new NullStatementGrouper();
 		$this->assertSame( $expected, $grouper->groupStatements( $statements ) );

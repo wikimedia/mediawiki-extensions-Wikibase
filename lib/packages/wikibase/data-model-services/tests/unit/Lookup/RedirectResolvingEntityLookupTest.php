@@ -60,20 +60,20 @@ class RedirectResolvingEntityLookupTest extends \PHPUnit_Framework_TestCase {
 
 		$mock->expects( $this->any() )
 			->method( 'getEntity' )
-			->will( $this->returnCallback( array( $this, 'getEntity' ) ) );
+			->will( $this->returnCallback( [ $this, 'getEntity' ] ) );
 
 		$mock->expects( $this->any() )
 			->method( 'hasEntity' )
-			->will( $this->returnCallback( array( $this, 'hasEntity' ) ) );
+			->will( $this->returnCallback( [ $this, 'hasEntity' ] ) );
 
 		return $mock;
 	}
 
 	public function getEntityProvider() {
-		return array(
-			'no redirect' => array( new ItemId( 'Q10' ), new ItemId( 'Q10' ) ),
-			'one redirect' => array( new ItemId( 'Q11' ), new ItemId( 'Q10' ) ),
-		);
+		return [
+			'no redirect' => [ new ItemId( 'Q10' ), new ItemId( 'Q10' ) ],
+			'one redirect' => [ new ItemId( 'Q11' ), new ItemId( 'Q10' ) ],
+		];
 	}
 
 	/**
@@ -115,12 +115,12 @@ class RedirectResolvingEntityLookupTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function hasEntityProvider() {
-		return array(
-			'unknown entity' => array( new ItemId( 'Q7' ), false ),
-			'no redirect' => array( new ItemId( 'Q10' ), true ),
-			'one redirect' => array( new ItemId( 'Q11' ), true ),
-			'broken redirect' => array( new ItemId( 'Q21' ), false ),
-		);
+		return [
+			'unknown entity' => [ new ItemId( 'Q7' ), false ],
+			'no redirect' => [ new ItemId( 'Q10' ), true ],
+			'one redirect' => [ new ItemId( 'Q11' ), true ],
+			'broken redirect' => [ new ItemId( 'Q21' ), false ],
+		];
 	}
 
 	/**

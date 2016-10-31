@@ -19,12 +19,12 @@ class EntityRetrievingDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @var string[]
 	 */
-	private $propertiesAndTypes = array(
+	private $propertiesAndTypes = [
 		'P1' => 'NyanData all the way across the sky',
 		'P42' => 'string',
 		'P1337' => 'percentage',
 		'P9001' => 'positive whole number',
-	);
+	];
 
 	/**
 	 * @return EntityLookup
@@ -43,13 +43,13 @@ class EntityRetrievingDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function getDataTypeForPropertyProvider() {
-		$argLists = array();
+		$argLists = [];
 
 		foreach ( $this->propertiesAndTypes as $propertyId => $dataTypeId ) {
-			$argLists[] = array(
+			$argLists[] = [
 				new PropertyId( $propertyId ),
 				$dataTypeId
-			);
+			];
 		}
 
 		return $argLists;

@@ -59,9 +59,9 @@ class StatementListDifferTest extends \PHPUnit_Framework_TestCase {
 			$this->getNewStatement( 'one', 'second' )
 		);
 
-		$diff = new Diff( array(
+		$diff = new Diff( [
 			'two' => new DiffOpAdd( $this->getNewStatement( 'two', 'third' ) ),
-		) );
+		] );
 
 		$this->assertResultsInDiff( $fromStatements, $toStatements, $diff );
 	}
@@ -77,10 +77,10 @@ class StatementListDifferTest extends \PHPUnit_Framework_TestCase {
 			$this->getNewStatement( 'one', 'second' )
 		);
 
-		$diff = new Diff( array(
+		$diff = new Diff( [
 			'zero' => new DiffOpRemove( $this->getNewStatement( 'zero', 'first' ) ),
 			'two' => new DiffOpRemove( $this->getNewStatement( 'two', 'third' ) ),
-		) );
+		] );
 
 		$this->assertResultsInDiff( $fromStatements, $toStatements, $diff );
 	}
@@ -98,7 +98,7 @@ class StatementListDifferTest extends \PHPUnit_Framework_TestCase {
 			$this->getNewStatement( 'two', 'THIRD' )
 		);
 
-		$diff = new Diff( array(
+		$diff = new Diff( [
 			'zero' => new DiffOpChange(
 					$this->getNewStatement( 'zero', 'first' ),
 					$this->getNewStatement( 'zero', 'FIRST' )
@@ -107,7 +107,7 @@ class StatementListDifferTest extends \PHPUnit_Framework_TestCase {
 					$this->getNewStatement( 'two', 'third' ),
 					$this->getNewStatement( 'two', 'THIRD' )
 				),
-		) );
+		] );
 
 		$this->assertResultsInDiff( $fromStatements, $toStatements, $diff );
 	}

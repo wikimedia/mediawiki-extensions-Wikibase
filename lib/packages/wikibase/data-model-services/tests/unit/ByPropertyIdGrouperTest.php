@@ -28,12 +28,12 @@ class ByPropertyIdGrouperTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function validConstructorArgumentProvider() {
-		return array(
-			array( array() ),
-			array( array( $this->getPropertyIdProviderMock( 'P1' ) ) ),
-			array( new ArrayObject() ),
-			array( new ArrayObject( array( $this->getPropertyIdProviderMock( 'P1' ) ) ) ),
-		);
+		return [
+			[ [] ],
+			[ [ $this->getPropertyIdProviderMock( 'P1' ) ] ],
+			[ new ArrayObject() ],
+			[ new ArrayObject( [ $this->getPropertyIdProviderMock( 'P1' ) ] ) ],
+		];
 	}
 
 	/**
@@ -45,44 +45,44 @@ class ByPropertyIdGrouperTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidConstructorArgumentProvider() {
-		return array(
-			array( null ),
-			array( 'notAnObject' ),
-			array( array( null ) ),
-			array( array( 'notAnObject' ) ),
-			array( new ArrayObject( array( null ) ) ),
-			array( new ArrayObject( array( 'notAnObject' ) ) ),
-		);
+		return [
+			[ null ],
+			[ 'notAnObject' ],
+			[ [ null ] ],
+			[ [ 'notAnObject' ] ],
+			[ new ArrayObject( [ null ] ) ],
+			[ new ArrayObject( [ 'notAnObject' ] ) ],
+		];
 	}
 
 	public function provideGetPropertyIds() {
-		$cases = array();
+		$cases = [];
 
-		$cases['empty list'] = array(
-			array(),
-			array()
-		);
+		$cases['empty list'] = [
+			[],
+			[]
+		];
 
-		$cases['some property ids'] = array(
-			array(
+		$cases['some property ids'] = [
+			[
 				$this->getPropertyIdProviderMock( 'P42' ),
 				$this->getPropertyIdProviderMock( 'P23' )
-			),
-			array(
+			],
+			[
 				new PropertyId( 'P42' ),
 				new PropertyId( 'P23' )
-			)
-		);
+			]
+		];
 
-		$cases['duplicate property ids'] = array(
+		$cases['duplicate property ids'] = [
 			$this->getPropertyIdProviders(),
-			array(
+			[
 				new PropertyId( 'P42' ),
 				new PropertyId( 'P23' ),
 				new PropertyId( 'P15' ),
 				new PropertyId( 'P10' )
-			)
-		);
+			]
+		];
 
 		return $cases;
 	}
@@ -99,19 +99,19 @@ class ByPropertyIdGrouperTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function provideGetByPropertyId() {
-		$cases = array();
+		$cases = [];
 
-		$cases[] = array(
+		$cases[] = [
 			$this->getPropertyIdProviders(),
 			'P42',
-			array( 'abc', 'jkl' )
-		);
+			[ 'abc', 'jkl' ]
+		];
 
-		$cases[] = array(
+		$cases[] = [
 			$this->getPropertyIdProviders(),
 			'P23',
-			array( 'def' )
-		);
+			[ 'def' ]
+		];
 
 		return $cases;
 	}
@@ -137,13 +137,13 @@ class ByPropertyIdGrouperTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function provideHasPropertyId() {
-		$cases = array();
+		$cases = [];
 
-		$cases[] = array( $this->getPropertyIdProviders(), 'P42', true );
-		$cases[] = array( $this->getPropertyIdProviders(), 'P23', true );
-		$cases[] = array( $this->getPropertyIdProviders(), 'P15', true );
-		$cases[] = array( $this->getPropertyIdProviders(), 'P10', true );
-		$cases[] = array( $this->getPropertyIdProviders(), 'P11', false );
+		$cases[] = [ $this->getPropertyIdProviders(), 'P42', true ];
+		$cases[] = [ $this->getPropertyIdProviders(), 'P23', true ];
+		$cases[] = [ $this->getPropertyIdProviders(), 'P15', true ];
+		$cases[] = [ $this->getPropertyIdProviders(), 'P10', true ];
+		$cases[] = [ $this->getPropertyIdProviders(), 'P11', false ];
 
 		return $cases;
 	}
@@ -160,13 +160,13 @@ class ByPropertyIdGrouperTest extends PHPUnit_Framework_TestCase {
 	 * @return PropertyIdProvider[]
 	 */
 	private function getPropertyIdProviders() {
-		return array(
+		return [
 			$this->getPropertyIdProviderMock( 'P42', 'abc' ),
 			$this->getPropertyIdProviderMock( 'P23', 'def' ),
 			$this->getPropertyIdProviderMock( 'P15', 'ghi' ),
 			$this->getPropertyIdProviderMock( 'P42', 'jkl' ),
 			$this->getPropertyIdProviderMock( 'P10', 'mno' )
-		);
+		];
 	}
 
 	/**

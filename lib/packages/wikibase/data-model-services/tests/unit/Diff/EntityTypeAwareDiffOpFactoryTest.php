@@ -26,13 +26,13 @@ class EntityTypeAwareDiffOpFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenInvalidDiffOp_exceptionIsThrown() {
 		$factory = new EntityTypeAwareDiffOpFactory();
 		$this->setExpectedException( 'InvalidArgumentException' );
-		$factory->newFromArray( array( 'wee' ) );
+		$factory->newFromArray( [ 'wee' ] );
 	}
 
 	public function testGivenEntityDiffOpArray_entityDiffOpisReturned() {
 		$factory = new EntityTypeAwareDiffOpFactory();
 
-		$diffOp = new ItemDiff( array() );
+		$diffOp = new ItemDiff( [] );
 		$newDiffOp = $factory->newFromArray( $diffOp->toArray() );
 
 		$this->assertEquals( $diffOp, $newDiffOp );
