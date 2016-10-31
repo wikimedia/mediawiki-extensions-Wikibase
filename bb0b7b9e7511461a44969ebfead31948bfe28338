@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_a933e809",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-31T14:33:58Z",
+      "side": 1,
+      "message": "new public method needs a unit test",
+      "revId": "bb0b7b9e7511461a44969ebfead31948bfe28338",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_297118de",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-31T14:33:58Z",
+      "side": 1,
+      "message": "\"Invalid\"",
+      "revId": "bb0b7b9e7511461a44969ebfead31948bfe28338",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_09765cd5",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-31T14:33:58Z",
+      "side": 1,
+      "message": "writeQuantityValue() doesn\u0027t set the subject of the triples it outputs. The subject needs to be set before calling it, using RdfWriter::about().\n\nIn QuantityRdfGenerator, that is done by the ComplexValueHelper::attachValueNode. But I don\u0027t see this happening here.",
+      "revId": "bb0b7b9e7511461a44969ebfead31948bfe28338",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
