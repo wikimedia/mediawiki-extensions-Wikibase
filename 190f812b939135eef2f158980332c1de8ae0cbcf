@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_64fbc512",
+        "filename": "repo/maintenance/SPARQLClient.php",
+        "patchSetId": 28
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-31T14:40:48Z",
+      "side": 1,
+      "message": "Oops, sorry, this isn\u0027t it either. The Status object is really a mess. Apparently, getErrorsByType() will return a list of associative arrays, each of which has a message key, parameters, type, etc.\n\nThe simplest way is probably $status-\u003egetWikiText(). That gives you a single string.",
+      "revId": "190f812b939135eef2f158980332c1de8ae0cbcf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
