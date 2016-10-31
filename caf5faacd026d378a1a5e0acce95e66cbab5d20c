@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_299b581d",
+        "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-31T14:18:52Z",
+      "side": 1,
+      "message": "I think it should also set the position if it is null. Why not? When does that happen anyway?",
+      "revId": "caf5faacd026d378a1a5e0acce95e66cbab5d20c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_89f5cc4e",
+        "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-31T14:18:52Z",
+      "side": 1,
+      "message": "Wait, now this updates the member *and* it returns the position? That\u0027s even more confusing... it should do one or the other, and the name should make it clear what to expect.",
+      "revId": "caf5faacd026d378a1a5e0acce95e66cbab5d20c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
