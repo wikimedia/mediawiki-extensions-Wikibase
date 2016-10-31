@@ -16,6 +16,57 @@
       "revId": "9a57ae34e8863e88a62ad9b10f136c8bf37ed574",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_9a5ce84f",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-31T21:42:19Z",
+      "side": 1,
+      "message": "should be public in ComplexValueHelper",
+      "revId": "9a57ae34e8863e88a62ad9b10f136c8bf37ed574",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_1a48d88b",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-31T21:42:19Z",
+      "side": 1,
+      "message": "should use $this-\u003ebuilder-\u003elinkNOrmalizedValue",
+      "revId": "9a57ae34e8863e88a62ad9b10f136c8bf37ed574",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_fa4c0ca1",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-31T21:42:19Z",
+      "side": 1,
+      "message": "Should use a utility method in ComplexValueHelper, to ensure we are using the right writer in the correct state.",
+      "revId": "9a57ae34e8863e88a62ad9b10f136c8bf37ed574",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
