@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_6e2286a4",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-31T06:28:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb4ebfb_032d2d41",
+      "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_c3262563",
         "filename": "repo/maintenance/addUnitConversions.php",
         "patchSetId": 11
@@ -30,6 +48,24 @@
       "writtenOn": "2016-10-27T14:45:49Z",
       "side": 1,
       "message": "mixed indent",
+      "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_2e1c7e69",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-31T06:28:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb4ebfb_c3262563",
       "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_ee3696e3",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-31T06:28:54Z",
+      "side": 1,
+      "message": "That would mean I have values in my DB that do not match value URL. That would mean something is very seriously messed up. I can add a check though.",
+      "parentUuid": "4eb4ebfb_635191dd",
+      "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_631631f8",
         "filename": "repo/maintenance/addUnitConversions.php",
         "patchSetId": 11
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_ce33daf2",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-31T06:28:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb4ebfb_631631f8",
+      "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_c3e50508",
         "filename": "repo/maintenance/addUnitConversions.php",
         "patchSetId": 11
@@ -81,6 +153,24 @@
       "writtenOn": "2016-10-27T14:45:49Z",
       "side": 1,
       "message": "Just use QuantityRdfBuilder, you already have all the dependencies!\n\n  new QuantityRdfBuilder(\n    new ComplexValueBuilder(\n      $this-\u003erdfVocabulary,\n      $this-\u003ewriter\n    ),\n    $this-\u003eunitConverter );",
+      "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_ee3d76b9",
+        "filename": "repo/maintenance/addUnitConversions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-31T06:28:54Z",
+      "side": 1,
+      "message": "It doesn\u0027t have code that I need to produce this. I\u0027ll try to see if I can extract it. I tried before and it didn\u0027t work well but maybe I didn\u0027t approach it right.",
+      "parentUuid": "4eb4ebfb_c3e50508",
       "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -138,6 +228,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_ae308ee6",
+        "filename": "repo/tests/phpunit/maintenance/AddUnitsTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-31T06:28:54Z",
+      "side": 1,
+      "message": "it\u0027s for testing units :) value IDs don\u0027t really matter here, they are just alphanum strings",
+      "parentUuid": "4eb4ebfb_238b891d",
+      "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_434e953d",
         "filename": "repo/tests/phpunit/maintenance/AddUnitsTest.php",
         "patchSetId": 11
@@ -149,6 +257,24 @@
       "writtenOn": "2016-10-27T14:45:49Z",
       "side": 1,
       "message": "Please put the full path to the data file, that would make it much clearer what is going on here.",
+      "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_8e2dd28d",
+        "filename": "repo/tests/phpunit/maintenance/AddUnitsTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-31T06:28:54Z",
+      "side": 1,
+      "message": "What you mean by full path? I don\u0027t know the full path, it\u0027s system-dependent. And why I would have it here - there\u0027s a function that deals with it?",
+      "parentUuid": "4eb4ebfb_434e953d",
       "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -172,6 +298,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_2e535e1c",
+        "filename": "repo/tests/phpunit/maintenance/AddUnitsTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-31T06:28:54Z",
+      "side": 1,
+      "message": "No idea. You are right, it\u0027s values. I probably have some different ideas when I named it. Will rename.",
+      "parentUuid": "4eb4ebfb_837dbd19",
+      "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_51f89e46",
         "filename": "repo/tests/phpunit/maintenance/AddUnitsTest.php",
         "patchSetId": 11
@@ -183,6 +327,24 @@
       "writtenOn": "2016-10-27T14:45:49Z",
       "side": 1,
       "message": "Why use TTL here? wouldn\u0027t it be simpler to verify ntriples?",
+      "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_0e58a234",
+        "filename": "repo/tests/phpunit/maintenance/AddUnitsTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-31T06:28:54Z",
+      "side": 1,
+      "message": "About the same. I\u0027ll probably generate TTL, since it\u0027s easier to verify by looking, so I test TTLs too.",
+      "parentUuid": "4eb4ebfb_51f89e46",
       "revId": "09ceaacac2f2adfd67650cf6b4351cce039be8db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
