@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4eb4ebfb_5f1c127c",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-10-31T19:28:53Z",
+      "side": 1,
+      "message": "This writes a quantity value, not a unit. And it expects that the writer is already \"in\" the target node as a subject.",
+      "revId": "bb0b7b9e7511461a44969ebfead31948bfe28338",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_a933e809",
         "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
         "patchSetId": 12
