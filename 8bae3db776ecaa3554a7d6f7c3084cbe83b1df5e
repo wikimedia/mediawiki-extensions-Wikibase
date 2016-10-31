@@ -16,6 +16,24 @@
       "revId": "8bae3db776ecaa3554a7d6f7c3084cbe83b1df5e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_2b16b05a",
+        "filename": "repo/maintenance/SPARQLClient.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-31T06:13:35Z",
+      "side": 1,
+      "message": "execute() function doesn\u0027t have return type so I had no idea...",
+      "parentUuid": "4eb4ebfb_d833a0f2",
+      "revId": "8bae3db776ecaa3554a7d6f7c3084cbe83b1df5e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
