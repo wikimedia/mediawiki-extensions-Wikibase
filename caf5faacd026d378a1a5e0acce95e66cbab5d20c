@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_845b7126",
+        "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-31T14:54:23Z",
+      "side": 1,
+      "message": "Well, if we don\u0027t traverse anything (because $rows is empty), what should $position be? I guess we can also set it to $this-\u003eposition initially… but that again mixes responsibilities in the processRows function :/",
+      "parentUuid": "4eb4ebfb_299b581d",
+      "revId": "caf5faacd026d378a1a5e0acce95e66cbab5d20c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_89f5cc4e",
         "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2016-10-31T14:18:52Z",
       "side": 1,
       "message": "Wait, now this updates the member *and* it returns the position? That\u0027s even more confusing... it should do one or the other, and the name should make it clear what to expect.",
+      "revId": "caf5faacd026d378a1a5e0acce95e66cbab5d20c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_c46179d2",
+        "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-31T14:54:23Z",
+      "side": 1,
+      "message": "Whoops, apparently I forgot to update this.",
+      "parentUuid": "4eb4ebfb_89f5cc4e",
       "revId": "caf5faacd026d378a1a5e0acce95e66cbab5d20c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
