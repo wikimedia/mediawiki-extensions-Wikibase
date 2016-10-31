@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_4ed90a83",
+        "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-31T08:39:42Z",
+      "side": 1,
+      "message": "True, but that\u0027s for another change.",
+      "parentUuid": "4eb4ebfb_5433e2c0",
+      "revId": "d9c8988c8f7274fb1c62bdd3a555d8f5a4af21e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_14ce7ab9",
         "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_eec8d6ac",
+        "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-31T08:39:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb4ebfb_14ce7ab9",
+      "revId": "d9c8988c8f7274fb1c62bdd3a555d8f5a4af21e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_94516ae0",
         "filename": "repo/tests/phpunit/includes/Store/Sql/SqlEntityIdPagerTest.php",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2016-10-28T17:24:07Z",
       "side": 1,
       "message": "that comment is probably no longer true.",
+      "revId": "d9c8988c8f7274fb1c62bdd3a555d8f5a4af21e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_2e547ec8",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/SqlEntityIdPagerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-10-31T08:39:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb4ebfb_94516ae0",
       "revId": "d9c8988c8f7274fb1c62bdd3a555d8f5a4af21e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
