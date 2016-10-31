@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_9fa61a4f",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-10-31T19:14:36Z",
+      "side": 1,
+      "message": "it\u0027s the same code, same tests will cover it. Testing is separately makes little sense as it is context-dependent. That\u0027s why btw I didn\u0027t want to get into messing with QuantityRdfBuilder - now instead of simple code I need to spend days on figuring out how to test this even though it\u0027s already covered by several other tests?",
+      "parentUuid": "4eb4ebfb_a933e809",
+      "revId": "bb0b7b9e7511461a44969ebfead31948bfe28338",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_297118de",
         "filename": "repo/maintenance/addUnitConversions.php",
         "patchSetId": 12
