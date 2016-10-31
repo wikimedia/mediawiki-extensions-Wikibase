@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_2987d8dd",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-10-31T14:08:17Z",
+      "side": 1,
+      "message": "I still don\u0027t like the dying here (see PS14 comment).",
+      "revId": "a4d4c495202af20c9467e33584a3d09021dfc988",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_491b44d5",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-10-31T14:08:17Z",
+      "side": 1,
+      "message": "You\u0027ll probably still want an indexed tag name on the subarray here. Something like\n\n ApiResult::setIndexedTagName( $entry[\u0027subscribers\u0027], \u0027subscriber\u0027 );",
+      "revId": "a4d4c495202af20c9467e33584a3d09021dfc988",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
