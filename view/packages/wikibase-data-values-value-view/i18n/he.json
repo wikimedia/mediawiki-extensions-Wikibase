@@ -13,6 +13,7 @@
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "טיפול בערכים מסוג נתונים \"$1\" אינו נתמך עדיין.",
 	"valueview-expert-emptyvalue-empty": "ריק",
 	"valueview-expert-globecoordinateinput-precision": "דיוק:",
+	"valueview-expert-globecoordinateinput-nullprecision": "לא צוין",
 	"valueview-expert-globecoordinateinput-customprecision": "מיוחד ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "גרגוריאני:",
 	"valueview-expert-timevalue-calendar-julian": "יוליאני",

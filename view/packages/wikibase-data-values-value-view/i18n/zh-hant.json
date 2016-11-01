@@ -14,6 +14,7 @@
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "尚未支援「$1」數據值的操作。",
 	"valueview-expert-emptyvalue-empty": "空",
 	"valueview-expert-globecoordinateinput-precision": "精度：",
+	"valueview-expert-globecoordinateinput-nullprecision": "未指定",
 	"valueview-expert-globecoordinateinput-customprecision": "特殊 ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "格里曆",
 	"valueview-expert-timevalue-calendar-julian": "儒略曆",

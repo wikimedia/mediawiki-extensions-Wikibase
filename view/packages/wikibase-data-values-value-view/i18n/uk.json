@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Ата",
-			"Mykola Swarnyk"
+			"Mykola Swarnyk",
+			"Piramidion"
 		]
 	},
 	"valueview-desc": "Компоненти користувацького інтерфейсу для відображення і редагування значень даних",
@@ -11,6 +12,7 @@
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Обробка значень типу даних «$1» ще не підтримується.",
 	"valueview-expert-emptyvalue-empty": "пусто",
 	"valueview-expert-globecoordinateinput-precision": "Точність:",
+	"valueview-expert-globecoordinateinput-nullprecision": "не визначено",
 	"valueview-expert-globecoordinateinput-customprecision": "спеціальні ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "Григоріанський",
 	"valueview-expert-timevalue-calendar-julian": "Юліанський",

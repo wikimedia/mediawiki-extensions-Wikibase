@@ -4,7 +4,8 @@
 			"Fitoschido",
 			"Invadinado",
 			"Luis Felipe Schenone",
-			"Macofe"
+			"Macofe",
+			"Sophivorus"
 		]
 	},
 	"valueview-desc": "Componentes de la interfaz de usuario para mostrar y editar los datos",
@@ -13,6 +14,7 @@
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Todavía no se admite la manipulación de valores para el tipo de datos \"$1\"",
 	"valueview-expert-emptyvalue-empty": "vacío",
 	"valueview-expert-globecoordinateinput-precision": "Precisión:",
+	"valueview-expert-globecoordinateinput-nullprecision": "sin especificar",
 	"valueview-expert-globecoordinateinput-customprecision": "especial ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregoriano",
 	"valueview-expert-timevalue-calendar-julian": "Juliano",

@@ -12,6 +12,7 @@
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "\"$1\" উপাত্তের ধরনের জন্য মান পরিচালনা এখনো সমর্থিত নয়।",
 	"valueview-expert-emptyvalue-empty": "খালি",
 	"valueview-expert-globecoordinateinput-precision": "স্পষ্টতা:",
+	"valueview-expert-globecoordinateinput-nullprecision": "অনির্দিষ্ট",
 	"valueview-expert-globecoordinateinput-customprecision": "বিশেষ ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "গ্রেগরীয়",
 	"valueview-expert-timevalue-calendar-julian": "জুলীয়",

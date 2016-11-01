@@ -10,6 +10,7 @@
 	"valueview-expert-advancedadjustments": "ustawienia zaawansowane",
 	"valueview-expert-emptyvalue-empty": "pusty",
 	"valueview-expert-globecoordinateinput-precision": "Precyzja:",
+	"valueview-expert-globecoordinateinput-nullprecision": "nie określono",
 	"valueview-expert-timevalue-calendar-gregorian": "gregoriański",
 	"valueview-expert-timevalue-calendar-julian": "juliański",
 	"valueview-expert-timeinput-precision": "Precyzja:",

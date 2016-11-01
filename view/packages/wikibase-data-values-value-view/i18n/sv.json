@@ -12,6 +12,7 @@
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Hantering av värden för \"$1\"-datatyper stöds ännu inte.",
 	"valueview-expert-emptyvalue-empty": "tom",
 	"valueview-expert-globecoordinateinput-precision": "Precision:",
+	"valueview-expert-globecoordinateinput-nullprecision": "ospecificerad",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregoriansk",
 	"valueview-expert-timevalue-calendar-julian": "Juliansk",
 	"valueview-expert-timeinput-precision": "Precision:",

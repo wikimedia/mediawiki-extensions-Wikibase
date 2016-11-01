@@ -6,6 +6,7 @@
 	},
 	"valueview-expert-emptyvalue-empty": "रिकामे",
 	"valueview-expert-globecoordinateinput-precision": "अचूकता:",
+	"valueview-expert-globecoordinateinput-nullprecision": "नमूद केले नाही",
 	"valueview-expert-globecoordinateinput-customprecision": "विशेष ($1)",
 	"valueview-expert-timeinput-precision": "अचूकता:",
 	"valueview-expert-timeinput-calendar": "दिनदर्शिका:",
