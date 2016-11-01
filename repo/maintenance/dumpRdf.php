@@ -105,7 +105,10 @@ class DumpRdf extends DumpScript {
 	public function execute() {
 		if ( !$this->hasHadServicesSet ) {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory( $wikibaseRepo->getEntityIdComposer() );
+			$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
+				$wikibaseRepo->getEntityNamespaceLookup(),
+				$wikibaseRepo->getEntityIdParser()
+			);
 
 			$this->setServices(
 				$sqlEntityIdPagerFactory,

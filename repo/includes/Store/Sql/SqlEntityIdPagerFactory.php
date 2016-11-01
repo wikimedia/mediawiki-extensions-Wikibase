@@ -2,7 +2,8 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
-use Wikibase\Lib\EntityIdComposer;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Store\EntityIdPager;
 
 /**
@@ -14,15 +15,25 @@ use Wikibase\Repo\Store\EntityIdPager;
 class SqlEntityIdPagerFactory {
 
 	/**
-	 * @var EntityIdComposer
+	 * @var EntityNamespaceLookup
 	 */
-	private $entityIdComposer;
+	private $entityNamespaceLookup;
 
 	/**
-	 * @param EntityIdComposer $entityIdComposer
+	 * @var EntityIdParser
 	 */
-	public function __construct( EntityIdComposer $entityIdComposer ) {
-		$this->entityIdComposer = $entityIdComposer;
+	private $entityIdParser;
+
+	/**
+	 * @param EntityNamespaceLookup $entityNamespaceLookup
+	 * @param EntityIdParser $entityIdParser
+	 */
+	public function __construct(
+		EntityNamespaceLookup $entityNamespaceLookup,
+		EntityIdParser $entityIdParser
+	) {
+		$this->entityNamespaceLookup = $entityNamespaceLookup;
+		$this->entityIdParser = $entityIdParser;
 	}
 
 	/**
@@ -33,7 +44,8 @@ class SqlEntityIdPagerFactory {
 	 */
 	public function newSqlEntityIdPager( $entityType = null, $redirectMode = EntityIdPager::NO_REDIRECTS ) {
 		return new SqlEntityIdPager(
-			$this->entityIdComposer,
+			$this->entityNamespaceLookup,
+			$this->entityIdParser,
 			$entityType,
 			$redirectMode
 		);

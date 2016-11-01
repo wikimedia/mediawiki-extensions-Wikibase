@@ -2,8 +2,9 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
-use MediaWikiTestCase;
-use Wikibase\Lib\EntityIdComposer;
+use PHPUnit_Framework_TestCase;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 
@@ -17,10 +18,13 @@ use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
  * @license GPL-2.0+
  * @author Marius Hoch
  */
-class SqlEntityIdPagerFactoryTest extends MediaWikiTestCase {
+class SqlEntityIdPagerFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function testNewSqlEntityIdPager() {
-		$factory = new SqlEntityIdPagerFactory( new EntityIdComposer( [] ) );
+		$factory = new SqlEntityIdPagerFactory(
+			new EntityNamespaceLookup( [] ),
+			$this->getMock( EntityIdParser::class )
+		);
 		$pager = $factory->newSqlEntityIdPager();
 
 		$this->assertInstanceOf( SqlEntityIdPager::class, $pager );

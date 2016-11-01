@@ -3,18 +3,16 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use MediaWikiTestCase;
-use MediaWiki\MediaWikiServices;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Repo\Store\EntityIdPager;
-use Wikibase\Repo\Store\Sql\EntityPerPageTable;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\Store\Sql\SqlEntityIdPager
@@ -33,26 +31,50 @@ use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
  */
 class SqlEntityIdPagerTest extends MediaWikiTestCase {
 
+	public function setUp() {
+		parent::setUp();
+		$this->tablesUsed[] = 'page';
+	}
+
+	public function addDBDataOnce() {
+		// We need to initially empty the table
+		wfGetDB( DB_MASTER )->delete( 'page', '*', __METHOD__ );
+	}
+
 	/**
 	 * @param EntityDocument[] $entities
 	 * @param EntityRedirect[] $redirects
 	 */
-	private function fillEntityPerPageTable( array $entities = [], array $redirects = [] ) {
-		$table = new EntityPerPageTable(
-			MediaWikiServices::getInstance()->getDBLoadBalancer(),
-			new BasicEntityIdParser()
-		);
-		$table->clear();
-
+	private function insertEntities( array $entities = [], array $redirects = [] ) {
+		$pages = [];
 		foreach ( $entities as $entity ) {
-			$pageId = $entity->getId()->getNumericId();
-			$table->addEntityPage( $entity->getId(), $pageId );
+			$pages[] = $this->getPageRow( $entity->getId(), false );
 		}
 
 		foreach ( $redirects as $redirect ) {
-			$pageId = $redirect->getEntityId()->getNumericId();
-			$table->addRedirectPage( $redirect->getEntityId(), $pageId, $redirect->getTargetId() );
+			$pages[] = $this->getPageRow( $redirect->getEntityId(), true );
 		}
+
+		$dbw = wfGetDB( DB_MASTER );
+		$dbw->insert(
+			'page',
+			$pages,
+			__METHOD__
+		);
+	}
+
+	private function getPageRow( EntityId $entityId, $isRedirect ) {
+		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+
+		return [
+			'page_namespace' => $entityNamespaceLookup->getEntityNamespace( $entityId->getEntityType() ),
+			'page_title' => $entityId->getSerialization(),
+			'page_restrictions' => '',
+			'page_random' => 0,
+			'page_latest' => 0,
+			'page_len' => 1,
+			'page_is_redirect' => $isRedirect ? 1 : 0
+		];
 	}
 
 	private function getIdStrings( array $entities ) {
@@ -73,17 +95,36 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 		$expectedIds = $this->getIdStrings( $expected );
 		$actualIds = $this->getIdStrings( $actual );
 
-		$this->assertArrayEquals( $expectedIds, $actualIds, $msg );
+		$this->assertArrayEquals( $expectedIds, $actualIds, true );
 	}
 
 	/**
 	 * @dataProvider listEntitiesProvider
+	 *
+	 * @param string|null $entityType
+	 * @param int $limit
+	 * @param int $calls
+	 * @param string $redirectMode
+	 * @param array[] $expectedChunks
+	 * @param EntityDocument[] $entitiesToInsert
+	 * @param EntityRedirect[] $redirectsToInsert
 	 */
-	public function testFetchIds( array $entities, array $redirects, $type, $limit, $calls, $redirectMode, array $expectedChunks ) {
-		$this->fillEntityPerPageTable( $entities, $redirects );
+	public function testFetchIds(
+		$entityType,
+		$limit,
+		$calls,
+		$redirectMode,
+		array $expectedChunks,
+		array $entitiesToInsert = [],
+		array $redirectsToInsert = []
+	) {
+		$this->insertEntities( $entitiesToInsert, $redirectsToInsert );
+
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$pager = new SqlEntityIdPager(
-			new EntityIdComposer( [] ),
-			$type,
+			$wikibaseRepo->getEntityNamespaceLookup(),
+			$wikibaseRepo->getEntityIdParser(),
+			$entityType,
 			$redirectMode
 		);
 
@@ -100,95 +141,93 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 
 		return [
 			'empty' => [
-				[],
-				[],
 				null,
 				100,
 				1,
 				EntityIdPager::NO_REDIRECTS,
 				[ [] ]
 			],
-			'some entities' => [
-				[ $item, $property ],
-				[ $redirect ],
-				null,
-				100,
-				1,
-				EntityIdPager::NO_REDIRECTS,
-				[ [ $property, $item ] ]
-			],
-			'two chunks' => [
-				[ $item, $property ],
-				[ $redirect ],
-				null,
-				1,
-				2,
-				EntityIdPager::NO_REDIRECTS,
-				[ [ $property ], [ $item ] ]
-			],
-			'chunks with limit > 1' => [
-				[ $item, $property ],
-				[ $redirect ],
-				null,
-				2,
-				3,
-				EntityIdPager::INCLUDE_REDIRECTS,
-				[ [ $property, $item ], [ $redirect ], [] ]
-			],
-			'four chunks (two empty)' => [
-				[ $item, $property ],
-				[ $redirect ],
-				null,
-				1,
-				4,
-				EntityIdPager::NO_REDIRECTS,
-				[ [ $property ], [ $item ], [], [] ]
-			],
-			'include redirects' => [
-				[ $item, $property ],
-				[ $redirect ],
-				null,
-				100,
-				1,
-				EntityIdPager::INCLUDE_REDIRECTS,
-				[ [ $property, $item, $redirect ] ]
-			],
-			'only redirects' => [
-				[ $item, $property ],
-				[ $redirect ],
-				null,
-				100,
-				1,
-				EntityIdPager::ONLY_REDIRECTS,
-				[ [ $redirect ] ]
-			],
-			'just properties' => [
-				[ $item, $property ],
-				[ $redirect ],
-				Property::ENTITY_TYPE,
-				100,
-				1,
-				EntityIdPager::NO_REDIRECTS,
-				[ [ $property ] ]
-			],
-			'limit' => [
-				[ $item, $property ],
-				[ $redirect ],
-				Property::ENTITY_TYPE,
-				1,
-				1,
-				EntityIdPager::NO_REDIRECTS,
-				[ [ $property ] ] // current sort order is by numeric id, then type.
-			],
 			'no matches' => [
-				[ $property ],
-				[ $redirect ],
 				Item::ENTITY_TYPE,
 				100,
 				1,
 				EntityIdPager::NO_REDIRECTS,
-				[ [] ]
+				[ [] ],
+				[ $property ],
+				[ $redirect ]
 			],
+			'some entities' => [
+				null,
+				100,
+				1,
+				EntityIdPager::NO_REDIRECTS,
+				[ [ $property, $item ] ],
+				[ $property, $item ],
+				[ $redirect ]
+			],
+			'two chunks' => [
+				null,
+				1,
+				2,
+				EntityIdPager::NO_REDIRECTS,
+				[ [ $property ], [ $item ] ],
+				[ $property, $item ],
+				[ $redirect ]
+			],
+			'chunks with limit > 1' => [
+				null,
+				2,
+				3,
+				EntityIdPager::INCLUDE_REDIRECTS,
+				[ [ $property, $item ], [ $redirect ], [] ],
+				[ $property, $item ],
+				[ $redirect ]
+			],
+			'four chunks (two empty)' => [
+				null,
+				1,
+				4,
+				EntityIdPager::NO_REDIRECTS,
+				[ [ $property ], [ $item ], [], [] ],
+				[ $property, $item ],
+				[ $redirect ]
+			],
+			'include redirects' => [
+				null,
+				100,
+				1,
+				EntityIdPager::INCLUDE_REDIRECTS,
+				[ [ $property, $item, $redirect ] ],
+				[ $property, $item ],
+				[ $redirect ]
+			],
+			'only redirects' => [
+				null,
+				100,
+				1,
+				EntityIdPager::ONLY_REDIRECTS,
+				[ [ $redirect ] ],
+				[ $property, $item ],
+				[ $redirect ]
+			],
+			'just properties' => [
+				Property::ENTITY_TYPE,
+				100,
+				1,
+				EntityIdPager::NO_REDIRECTS,
+				[ [ $property ] ],
+				[ $property, $item ],
+				[ $redirect ]
+			],
+			'limit' => [
+				Property::ENTITY_TYPE,
+				1,
+				1,
+				EntityIdPager::NO_REDIRECTS,
+				[ [ $property ] ],
+				[ $property, $item ],
+				[ $redirect ]
+			]
 		];
 	}
 
