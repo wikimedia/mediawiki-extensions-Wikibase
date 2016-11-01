@@ -4,28 +4,24 @@ namespace Wikibase\DataModel\Services\EntityId;
 
 use Wikimedia\Assert\Assert;
 use Wikimedia\Assert\ParameterAssertionException;
-use Wikimedia\Assert\ParameterTypeException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 
 /**
- * EntityIdParser that adds a fixed prefix, maps a prefix of id serialization
- * to a local prefix according to the prefix mapping
- * and parses resulting string as an EntityId.
+ * EntityIdParser that maps a prefix of id serialization to a local prefix
+ * according to the prefix mapping, or adds a fixed prefix to the id serialization
+ * not containing a mapped prefix, and parses resulting string as an EntityId.
  * This can be used to prefix IDs of entities coming from a foreign repository
  * with the repository name to avoid clashes with IDs of local entities.
+ *
+ * @see docs/foreign-entity-ids.wiki in the DataModel module
  *
  * @since 3.7
  *
  * @license GPL-2.0+
  */
 class PrefixMappingEntityIdParser implements EntityIdParser {
-
-	/**
-	 * @var string
-	 */
-	private $prefix;
 
 	/**
 	 * @var string[]
@@ -38,26 +34,36 @@ class PrefixMappingEntityIdParser implements EntityIdParser {
 	private $idParser;
 
 	/**
-	 * @param string $prefix Prefix to be added. It should not contain a colon, in particular at the end of the prefix
-	 * @param string[] $prefixMapping
+	 * @param string[] $prefixMapping Must contain an empty-string key defining prefix added to id serializations
+	 *        that do not contain any of prefixed defined in $prefixMapping. Values should not contain colons,
+	 *        in particular at the end of the string
 	 * @param EntityIdParser $idParser
 	 *
-	 * @throws ParameterTypeException
 	 * @throws ParameterAssertionException
 	 */
-	public function __construct( $prefix, array $prefixMapping, EntityIdParser $idParser ) {
-		Assert::parameterType( 'string', $prefix, '$prefix' );
-		Assert::parameter( strpos( $prefix, ':' ) === false, '$prefix', 'must not contain a colon' );
+	public function __construct( array $prefixMapping, EntityIdParser $idParser ) {
 		Assert::parameterElementType( 'string', $prefixMapping, '$prefixMapping' );
 		Assert::parameterElementType( 'string', array_keys( $prefixMapping ), 'array_keys( $prefixMapping )' );
-		$this->prefix = $prefix;
+		Assert::parameter( isset( $prefixMapping[''] ), '$prefixMapping', 'must contain an empty-string key' );
+		foreach ( $prefixMapping as $value ) {
+			Assert::parameter(
+				strpos( $value, ':') === false,
+				'$prefixMapping',
+				'must not contain strings containing colons'
+			);
+		}
+
+		//$this->prefix = $prefix;
 		$this->prefixMapping = $prefixMapping;
 		$this->idParser = $idParser;
 	}
 
 	/**
-	 * Adds a fixed prefix to the serialization id and maps it according to the prefix mapping definition.
+	 * Maps prefix(es) of the id serialization according to the prefix mapping definition, or adds a fixed prefix
+	 * to the id serialization if there is no relevant prefix mapping,
 	 * Resulting id serialization is parsed as an EntityId.
+	 *
+	 * @see docs/foreign-entity-ids.wiki in the DataModel module
 	 *
 	 * @param string $idSerialization
 	 *
@@ -65,13 +71,14 @@ class PrefixMappingEntityIdParser implements EntityIdParser {
 	 * @throws EntityIdParsingException
 	 */
 	public function parse( $idSerialization ) {
+		$defaultPrefix = $this->prefixMapping[''];
 		list( $repoName, $extraPrefixes, $relativeId ) = EntityId::splitSerialization( $idSerialization );
-		if ( isset( $this->prefixMapping[$repoName] ) ) {
+		if ( $repoName !== '' && isset( $this->prefixMapping[$repoName] ) ) {
 			$prefixedIdSerialization = EntityId::joinSerialization( [
 				$this->prefixMapping[$repoName], $extraPrefixes, $relativeId
 			] );
 		} else {
-			$prefixedIdSerialization = EntityId::joinSerialization( [ $this->prefix, '', $idSerialization ] );
+			$prefixedIdSerialization = EntityId::joinSerialization( [ $defaultPrefix, '', $idSerialization ] );
 		}
 		return $this->idParser->parse( $prefixedIdSerialization );
 	}
