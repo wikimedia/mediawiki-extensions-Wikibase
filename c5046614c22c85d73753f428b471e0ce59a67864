@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_9406f8cf",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/SqlEntityIdPagerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-01T17:44:10Z",
+      "side": 0,
+      "message": "Moving the test cases around makes the diff hard to read. In a change like this, I really want to see that the test case *didn\u0027t* need to change much.",
+      "revId": "c5046614c22c85d73753f428b471e0ce59a67864",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
