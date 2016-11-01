@@ -74,6 +74,7 @@
 	"wikibase-entityusage-submit": "Pagina's weergeven",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} item-ID",
 	"wikibase-pageinfo-entity-id-none": "Geen",
+	"wikibase-pageinfo-entity-usage": "{{WBREPONAME}}-entiteiten in gebruik op deze pagina",
 	"wikibase-pageinfo-entity-usage-S": "Sitekoppeling",
 	"wikibase-pageinfo-entity-usage-L": "Label: $1",
 	"wikibase-pageinfo-entity-usage-T": "Titel",

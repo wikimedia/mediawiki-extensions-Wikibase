@@ -328,6 +328,7 @@
 	"right-property-create": "Eigenschappen aanmaken",
 	"action-item-merge": "items samenvoegen",
 	"action-property-create": "eigenschappen aanmaken",
+	"wikibase-pageinfo-subscription-none": "Geen",
 	"apihelp-wbcreateclaim-description": "Maakt Wikibase-claims aan.",
 	"apihelp-wbcreateredirect-param-bot": "Deze bewerking zo markeren dat deze door een bot is gedaan. Deze optie wordt alleen gebruikt indien de gebruiker lid is van de botgebruikersgroep.",
 	"apihelp-wbcreateredirect-example-1": "Zet Q11 om in een doorverwijzing naar Q12",

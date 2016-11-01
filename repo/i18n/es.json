@@ -330,6 +330,7 @@
 	"wikibase-listdatatypes-url-body": "Literal campo de datos de una URL. Direcciones url están restringidos a los protocolos también se admite para los enlaces externos en wikitext.",
 	"wikibase-listdatatypes-external-id-head": "Identificador externo",
 	"wikibase-listdatatypes-external-id-body": "Literal de los datos de campo para un identificador externo. Externo identificadores de forma automática puede ser conectado a una fuente autorizada para la visualización.",
+	"wikibase-concept-uri": "URI de concepto",
 	"wikibase-concept-uri-tooltip": "URI que identifica el concepto descrito por este artículo",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Elemento de Wikibase",

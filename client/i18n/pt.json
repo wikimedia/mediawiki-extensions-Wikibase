@@ -118,7 +118,7 @@
 	"wikibase-property-render-error": "Erro ao processar a propriedade $1: $2",
 	"wikibase-otherprojects": "Noutros projetos",
 	"wikibase-otherprojects-beta-message": "Barra lateral de outros projetos",
-	"wikibase-otherprojects-beta-description": "Adiciona uma seção \"{{int:wikibase-otherprojects}}\" à barra lateral que fornece ligações para outros projetos Wikimedia baseados em dados {{WBREPONAME}}.",
+	"wikibase-otherprojects-beta-description": "Adiciona uma secção \"{{int:wikibase-otherprojects}}\" à barra lateral que fornece ligações para outros projetos Wikimedia baseados em dados {{WBREPONAME}}.",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Ligação|Ligações}} com {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Notifique-me quando alguém ligar uma página que {{GENDER:|eu tenha criado}} a um elemento {{WBREPONAME}}.",
 	"notification-header-page-connection": "A página <strong>$3</strong> foi {{GENDER:$2|ligada}} a um elemento {{WBREPONAME}}.",
