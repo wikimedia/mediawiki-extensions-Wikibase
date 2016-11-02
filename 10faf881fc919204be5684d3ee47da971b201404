@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_208b5b22",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-11-02T15:20:53Z",
+      "side": 1,
+      "message": "Can we be sure this is a database name?",
+      "range": {
+        "startLine": 161,
+        "startChar": 35,
+        "endLine": 161,
+        "endChar": 52
+      },
+      "revId": "10faf881fc919204be5684d3ee47da971b201404",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
