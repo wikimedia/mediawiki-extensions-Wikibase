@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Store;
 
 use DBAccessBase;
+use InvalidArgumentException;
 use MWContentSerializationException;
 use Revision;
 use stdClass;
@@ -35,20 +36,29 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	private $entityMetaDataAccessor;
 
 	/**
+	 * @var string
+	 */
+	private $repositoryName;
+
+	/**
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param WikiPageEntityMetaDataAccessor $entityMetaDataAccessor
 	 * @param string|bool $wiki The name of the wiki database to use (use false for the local wiki)
+	 * @param string $repositoryName The name of the repository to lookups from (use an empty string for local repository)
 	 */
 	public function __construct(
 		EntityContentDataCodec $contentCodec,
 		WikiPageEntityMetaDataAccessor $entityMetaDataAccessor,
-		$wiki = false
+		$wiki = false,
+		$repositoryName = ''
 	) {
 		parent::__construct( $wiki );
 
 		$this->contentCodec = $contentCodec;
 
 		$this->entityMetaDataAccessor = $entityMetaDataAccessor;
+
+		$this->repositoryName = $repositoryName;
 	}
 
 	/**
@@ -74,6 +84,8 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': Looking up entity ' . $entityId
 			. " (revision $revisionId)." );
+
+		$this->assertEntityIdFromRightRepository( $entityId );
 
 		/** @var EntityRevision $entityRevision */
 		$entityRevision = null;
@@ -137,6 +149,8 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * @return int|false
 	 */
 	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_SLAVE ) {
+		$this->assertEntityIdFromRightRepository( $entityId );
+
 		$rows = $this->entityMetaDataAccessor->loadRevisionInformation( array( $entityId ), $mode );
 		$row = $rows[$entityId->getSerialization()];
 
@@ -145,6 +159,19 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		}
 
 		return false;
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	private function assertEntityIdFromRightRepository( EntityId $entityId ) {
+		$entityIdRepository = $entityId->getRepositoryName();
+
+		if ( $entityIdRepository !== $this->repositoryName ) {
+			throw new InvalidArgumentException( 'Cannot load data from database of repository: ' . $entityIdRepository );
+		}
 	}
 
 	/**

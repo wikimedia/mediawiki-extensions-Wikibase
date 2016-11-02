@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\ItemId;
@@ -152,6 +153,60 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		$entityRevision = $lookup->getEntityRevision( $entityId, $revisionId, 'load-mode' );
 
 		$this->assertSame( $revisionId, $entityRevision->getRevisionId() );
+	}
+
+	public function testGivenEntityFromForeignRepository_getEntityRevisionOfLocalLookupThrowsException() {
+		$foreignEntityId = new ItemId( 'foo:Q123' );
+
+		$lookup = new WikiPageEntityRevisionLookup(
+			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
+			new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup() ),
+			false
+		);
+
+		$this->setExpectedException( InvalidArgumentException::class );
+		$lookup->getEntityRevision( $foreignEntityId );
+	}
+
+	public function testGivenEntityFromAnotherRepository_getEntityRevisionOfForeignLookupThrowsException() {
+		$foreignEntityId = new ItemId( 'bar:Q123' );
+
+		$lookup = new WikiPageEntityRevisionLookup(
+			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
+			new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup() ),
+			'foodb',
+			'foo'
+		);
+
+		$this->setExpectedException( InvalidArgumentException::class );
+		$lookup->getEntityRevision( $foreignEntityId );
+	}
+
+	public function testGivenEntityFromForeignRepository_getLatestRevisionIdOfLocalLookupThrowsException() {
+		$foreignEntityId = new ItemId( 'foo:Q123' );
+
+		$lookup = new WikiPageEntityRevisionLookup(
+			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
+			new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup() ),
+			false
+		);
+
+		$this->setExpectedException( InvalidArgumentException::class );
+		$lookup->getEntityRevision( $foreignEntityId );
+	}
+
+	public function testGivenEntityFromAnotherRepository_getLatestRevisionIdOfForeignLookupThrowsException() {
+		$foreignEntityId = new ItemId( 'bar:Q123' );
+
+		$lookup = new WikiPageEntityRevisionLookup(
+			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
+			new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup() ),
+			'foodb',
+			'foo'
+		);
+
+		$this->setExpectedException( InvalidArgumentException::class );
+		$lookup->getEntityRevision( $foreignEntityId );
 	}
 
 }
