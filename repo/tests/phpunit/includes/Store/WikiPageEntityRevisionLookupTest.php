@@ -154,4 +154,54 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		$this->assertSame( $revisionId, $entityRevision->getRevisionId() );
 	}
 
+	public function testGivenEntityFromForeignRepository_getEntityRevisionOfLocalLookupReturnsNull() {
+		$foreignEntityId = new ItemId( 'foo:Q123' );
+
+		$lookup = new WikiPageEntityRevisionLookup(
+			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
+			new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup() ),
+			false
+		);
+
+		$this->assertNull( $lookup->getEntityRevision( $foreignEntityId ) );
+	}
+
+	public function testGivenEntityFromAnotherRepository_getEntityRevisionOfForeignLookupReturnsNull() {
+		$foreignEntityId = new ItemId( 'bar:Q123' );
+
+		$lookup = new WikiPageEntityRevisionLookup(
+			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
+			new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup() ),
+			'foodb',
+			'foo'
+		);
+
+		$this->assertNull( $lookup->getEntityRevision( $foreignEntityId ) );
+	}
+
+	public function testGivenEntityFromForeignRepository_getLatestRevisionIdOfLocalLookupReturnsFalse() {
+		$foreignEntityId = new ItemId( 'foo:Q123' );
+
+		$lookup = new WikiPageEntityRevisionLookup(
+			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
+			new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup() ),
+			false
+		);
+
+		$this->assertFalse( $lookup->getLatestRevisionId( $foreignEntityId ) );
+	}
+
+	public function testGivenEntityFromAnotherRepository_getLatestRevisionIdOfForeignLookupReturnsFalse() {
+		$foreignEntityId = new ItemId( 'bar:Q123' );
+
+		$lookup = new WikiPageEntityRevisionLookup(
+			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
+			new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup() ),
+			'foodb',
+			'foo'
+		);
+
+		$this->assertFalse( $lookup->getLatestRevisionId( $foreignEntityId ) );
+	}
+
 }

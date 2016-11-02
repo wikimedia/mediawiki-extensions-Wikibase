@@ -35,20 +35,29 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	private $entityMetaDataAccessor;
 
 	/**
+	 * @var string
+	 */
+	private $repositoryName;
+
+	/**
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param WikiPageEntityMetaDataAccessor $entityMetaDataAccessor
 	 * @param string|bool $wiki The name of the wiki database to use (use false for the local wiki)
+	 * @param string $repositoryName The name of the repository to lookups from (use an empty string for local repository)
 	 */
 	public function __construct(
 		EntityContentDataCodec $contentCodec,
 		WikiPageEntityMetaDataAccessor $entityMetaDataAccessor,
-		$wiki = false
+		$wiki = false,
+		$repositoryName = ''
 	) {
 		parent::__construct( $wiki );
 
 		$this->contentCodec = $contentCodec;
 
 		$this->entityMetaDataAccessor = $entityMetaDataAccessor;
+
+		$this->repositoryName = $repositoryName;
 	}
 
 	/**
@@ -74,6 +83,10 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': Looking up entity ' . $entityId
 			. " (revision $revisionId)." );
+
+		if ( !$this->isEntityIdFromRightRepository( $entityId ) ) {
+			return null;
+		}
 
 		/** @var EntityRevision $entityRevision */
 		$entityRevision = null;
@@ -137,6 +150,10 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * @return int|false
 	 */
 	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_SLAVE ) {
+		if ( !$this->isEntityIdFromRightRepository( $entityId ) ) {
+			return false;
+		}
+
 		$rows = $this->entityMetaDataAccessor->loadRevisionInformation( array( $entityId ), $mode );
 		$row = $rows[$entityId->getSerialization()];
 
@@ -145,6 +162,15 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		}
 
 		return false;
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 *
+	 * @return bool
+	 */
+	private function isEntityIdFromRightRepository( EntityId $entityId ) {
+		return $entityId->getRepositoryName() === $this->repositoryName;
 	}
 
 	/**
