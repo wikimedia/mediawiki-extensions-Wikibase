@@ -26,7 +26,8 @@
 			"Adam-Yourist",
 			"Mailman",
 			"Lockal",
-			"Irus"
+			"Irus",
+			"Kareyac"
 		]
 	},
 	"wikibase-desc": "Хранилище структурированных данных",
@@ -43,6 +44,7 @@
 	"wikibase-save-inprogress": "Сохранение…",
 	"wikibase-remove-inprogress": "Удаление…",
 	"wikibase-statementlistview-add": "добавить",
+	"wikibase-statementlistview-add-tooltip": "Добавить новое значение",
 	"wikibase-statementgrouplistview-add": "добавить",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "На других языках",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Настроить",
@@ -372,6 +374,7 @@
 	"apihelp-query+wbsearch-param-search": "Искать данный текст.",
 	"apihelp-query+wbsearch-param-language": "Искать на этом языке.",
 	"apihelp-query+wbsearch-param-limit": "Максимальное количество результатов",
+	"apihelp-query+wbsubscribers-param-limit": "Максимальное количество результатов",
 	"apihelp-wbsetaliases-example-1": "Установить Foo и Bar в качестве синонимов на английском языке для сущности с ID Q1",
 	"apihelp-wbsetaliases-example-2": "Добавить Foo и Bar в список синонимов на английском языке для сущности с ID Q1",
 	"apihelp-wbsetaliases-example-3": "Удалить Foo и Bar из списка синонимов на английском языке для сущности с ID Q1",

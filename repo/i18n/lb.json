@@ -253,6 +253,7 @@
 	"apihelp-query+wbsearch-param-search": "No dësem Text sichen.",
 	"apihelp-query+wbsearch-param-language": "An dëser Sprooch sichen.",
 	"apihelp-query+wbsearch-param-limit": "Maximal Zuel vu Resultater",
+	"apihelp-query+wbsubscribers-param-limit": "Maximal Zuel vu Resultater",
 	"apihelp-wbsetaliases-param-summary": "Resumé fir d'Ännerung.\nEng automatesch generéiert Bemierkung gëtt virdru gesat. D'Limite vun der Längt vun der automatescher Bemierkung zesumme mam Resumé ass 260 Zeechen. Denkt drun datt alles wat iwwer déi Limite erausgeet automatesch ofgeschnidde gëtt.",
 	"apihelp-wbsetaliases-param-bot": "Dës Ännerung als Bot markéieren. Dës URL-Markéierung gëtt nëmme respektéiert wann de Benotzer zu der Grupp \"Bot\" gehéiert.",
 	"apihelp-wbsetclaim-param-bot": "Dës Ännerung als Bot markéieren. Dës URL-Markéierung gëtt nëmme respektéiert wann de Benotzer zu der Grupp \"Bot\" gehéiert.",

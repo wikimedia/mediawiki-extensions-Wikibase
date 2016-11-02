@@ -7,11 +7,14 @@
 			"Xelgen",
 			"Դավիթ Սարոյան",
 			"Սահակ",
-			"Vahe Gharakhanyan"
+			"Vahe Gharakhanyan",
+			"Kareyac"
 		]
 	},
 	"wikibase-edit": "խմբագրել",
 	"wikibase-add": "ավելացնել",
+	"wikibase-statementlistview-add": "ավելացնել",
+	"wikibase-statementgrouplistview-add": "ավելացնել",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Այլ լեզուներով",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Կարգավորել",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Նաև հայտնի որպես",
@@ -23,7 +26,6 @@
 	"wikibase-diffview-label": "պիտակ",
 	"wikibase-statementsection-statements": "Պնդումներ",
 	"wikibase-sitelinks-special": "Այլ կայքեր",
-	"wikibase-aliases-empty": "Այլ անվանումներ (հոմանիշներ) նշված չեն",
 	"wikibase-statementview-rank-normal": "Նորմալ աստիճան",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|աղբյուր|աղբյուրներ}}",
 	"wikibase-entityselector-more": "Ավելին"

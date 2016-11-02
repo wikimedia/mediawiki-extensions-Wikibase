@@ -288,7 +288,7 @@
 	"wikibase-mylanguagefallbackchain-babel": "<nowiki>{{#babel: }}</nowiki> を{{GENDER:$1|自分の}}[[Special:MyPage|利用者ページ]]に置くことで編集できます。",
 	"wikibase-mylanguagefallbackchain-verbatim-item": "$1 - $2",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2、変換元 $3 - $4",
-	"wikibase-api-unresolved-redirect": "指定されたエンティティIDはリダイレクトを参照しており、この文脈ではサポートされません。",
+	"wikibase-api-unresolved-redirect": "指定された実体IDはリダイレクトを参照しており、この文脈ではサポートされません。",
 	"wikibase-api-no-such-sitelink": "バッジを編集しようとしましたが「$1」へのサイトリンクが見つかりませんでした。",
 	"wikibase-api-target-not-empty": "リダイレクトは空、または削除された実体の上にしか作ることができません。",
 	"wikibase-api-target-is-redirect": "リダイレクト先もリダイレクトであってはなりません。",

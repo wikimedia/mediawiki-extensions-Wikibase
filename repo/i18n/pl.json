@@ -345,6 +345,7 @@
 	"apihelp-wbsearchentities-param-limit": "Maksymalna liczba wyników",
 	"apihelp-query+wbsearch-param-language": "Wyszukaj w tym języku.",
 	"apihelp-query+wbsearch-param-limit": "Maksymalna liczba wyników",
+	"apihelp-query+wbsubscribers-param-limit": "Maksymalna liczba wyników",
 	"apihelp-wbsetaliases-param-bot": "Oznacz tę zmianę jako wykonaną przez bota. Ten znacznik adresu URL będzie brany pod uwagę tylko, jeśli użytkownik należy do grupy „bot”.",
 	"apihelp-wbsetaliases-param-language": "Język, w którym ustawić aliasy",
 	"apihelp-wbsetclaim-param-bot": "Oznacz tę zmianę jako wykonaną przez bota. Ten znacznik adresu URL będzie brany pod uwagę tylko, jeśli użytkownik należy do grupy „bot”.",

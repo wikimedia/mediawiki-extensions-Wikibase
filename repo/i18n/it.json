@@ -414,6 +414,8 @@
 	"apihelp-query+wbsearch-param-limit": "Numero massimo di risultati",
 	"apihelp-query+wbsearch-example-1": "Ricerca di \"abc\" in lingua inglese, con valori predefiniti per il tipo e limite",
 	"apihelp-query+wbsearch-example-2": "Ricerca di \"abc\" in lingua inglese con un limite di 50",
+	"apihelp-query+wbsubscribers-param-prop": "Proprietà da aggiungere al risultato",
+	"apihelp-query+wbsubscribers-param-limit": "Numero massimo di risultati",
 	"apihelp-wbsetaliases-description": "Imposta gli alias per un'entità Wikibase.",
 	"apihelp-wbsetaliases-param-id": "L'identificatore dell'entità, incluso il prefisso.\nUtilizza <var>id</var> oppure <var>site</var> e <var>title</var> insieme.",
 	"apihelp-wbsetaliases-param-new": "Se impostato, verrà creata una nuova entità.\nImpostalo al tipo di entità che vuoi creare.",

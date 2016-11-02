@@ -40,7 +40,6 @@
 	"wikibase-remove": "live",
 	"wikibase-undo-revision-error": "Annullamende fallite",
 	"wikibase-disambiguation-title": "Disambbiguazzione pe \"$1\"",
-	"wikibase-aliases-empty": "Nisciune alias angore definite",
 	"wikibase-propertypage-datatype": "Tipe de date",
 	"wikibase-statementview-rank-normal": "Posizione normale",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|referimende|refèreminde}}",
@@ -65,5 +64,6 @@
 	"special-setlabel": "'Mboste 'n'etichette",
 	"wikibase-setlabel-label": "Etichette:",
 	"wikibase-setlabel-submit": "'Mboste l'etichette",
-	"special-setdescription": "'Mboste 'na descrizione"
+	"special-setdescription": "'Mboste 'na descrizione",
+	"apihelp-query+wbsubscribers-param-prop": "Probbietà da aggiungere a 'u resultate"
 }
