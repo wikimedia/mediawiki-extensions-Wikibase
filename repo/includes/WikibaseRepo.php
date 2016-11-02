@@ -1688,6 +1688,9 @@ class WikibaseRepo {
 
 						// T137809
 						'otk',
+
+						// T98314
+						'tzl',
 					) )
 				),
 
