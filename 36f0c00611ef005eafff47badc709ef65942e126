@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_00c97fae",
+        "filename": "repo/includes/Store/Sql/SqlEntitiesWithoutTermFinder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-11-02T15:05:28Z",
+      "side": 1,
+      "message": "Yes, I checked the query on a production slave.",
+      "parentUuid": "4eb4ebfb_513534f2",
+      "revId": "36f0c00611ef005eafff47badc709ef65942e126",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cea0dbb8_4930f9e5",
         "filename": "repo/includes/Store/Sql/SqlEntitiesWithoutTermFinder.php",
         "patchSetId": 2
@@ -100,6 +118,30 @@
       "writtenOn": "2016-10-18T17:02:32Z",
       "side": 1,
       "message": "string[]|null?\n\n@return missing.",
+      "range": {
+        "startLine": 168,
+        "startChar": 11,
+        "endLine": 168,
+        "endChar": 16
+      },
+      "revId": "36f0c00611ef005eafff47badc709ef65942e126",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_5dbd3062",
+        "filename": "repo/includes/Store/Sql/SqlEntitiesWithoutTermFinder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-11-02T15:05:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cea0dbb8_4930f9e5",
       "range": {
         "startLine": 168,
         "startChar": 11,
