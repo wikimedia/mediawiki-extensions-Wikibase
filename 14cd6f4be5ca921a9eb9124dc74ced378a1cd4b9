@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_fdc63c4d",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-02T13:33:59Z",
+      "side": 1,
+      "message": "plz inject",
+      "revId": "14cd6f4be5ca921a9eb9124dc74ced378a1cd4b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_b0bef4cf",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-02T13:33:59Z",
+      "side": 1,
+      "message": "we probably don\u0027t want this in production code...",
+      "revId": "14cd6f4be5ca921a9eb9124dc74ced378a1cd4b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_ddc3803c",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-02T13:33:59Z",
+      "side": 1,
+      "message": "please inject",
+      "revId": "14cd6f4be5ca921a9eb9124dc74ced378a1cd4b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_bdc0b430",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-02T13:33:59Z",
+      "side": 1,
+      "message": "echo... use a logger?",
+      "revId": "14cd6f4be5ca921a9eb9124dc74ced378a1cd4b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_5dde5015",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-02T13:33:59Z",
+      "side": 1,
+      "message": "why is that a problem? can\u0027t we just set them?",
+      "revId": "14cd6f4be5ca921a9eb9124dc74ced378a1cd4b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_9dbdf8af",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-02T13:33:59Z",
+      "side": 1,
+      "message": "...or a debugger?",
+      "revId": "14cd6f4be5ca921a9eb9124dc74ced378a1cd4b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_ddca604a",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-02T13:33:59Z",
+      "side": 1,
+      "message": "This calls $parserOutput-\u003eaddLanguageLinks, it does not set extensionData. Should it?",
+      "revId": "14cd6f4be5ca921a9eb9124dc74ced378a1cd4b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_5d05307b",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-02T13:33:59Z",
+      "side": 1,
+      "message": "That purges the web caches, right? And any older parser cache entries?",
+      "revId": "14cd6f4be5ca921a9eb9124dc74ced378a1cd4b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
