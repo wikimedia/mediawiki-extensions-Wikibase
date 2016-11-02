@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 use DatabaseBase;
 use FakeResultWrapper;
 use MediaWikiTestCase;
+use stdClass;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
@@ -271,6 +272,29 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		);
 
 		$this->assertRevisionInformation( $entityIds, $result );
+	}
+
+	public function testGivenEntityFromOtherRepository_loadRevisionInformationSkipsIt() {
+		$lookup = new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup(), false, '' );
+
+		$result = $lookup->loadRevisionInformation(
+			[ $this->data[0]->getEntity()->getId(), new ItemId( 'foo:Q123' ) ],
+			EntityRevisionLookup::LATEST_FROM_SLAVE
+		);
+
+		$this->assertCount( 2, $result );
+		$this->assertInstanceOf( stdClass::class, $result[$this->data[0]->getEntity()->getId()->getSerialization()] );
+		$this->assertFalse( $result['foo:Q123'] );
+	}
+
+	public function testGivenEntityFromOtherRepository_loadRevisionInformationByRevisionIdReturnsFalse() {
+		$lookup = new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup(), false, '' );
+
+		$this->assertFalse( $lookup->loadRevisionInformationByRevisionId(
+			new ItemId( 'foo:Q123' ),
+			1,
+			EntityRevisionLookup::LATEST_FROM_SLAVE
+		) );
 	}
 
 }

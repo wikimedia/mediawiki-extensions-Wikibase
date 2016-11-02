@@ -30,15 +30,23 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	private $entityNamespaceLookup;
 
 	/**
+	 * @var string
+	 */
+	private $repositoryName;
+
+	/**
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param string|bool $wiki The name of the wiki database to use (use false for the local wiki)
+	 * @param string $repositoryName The name of the repository to lookup from (use an empty string for the local repository)
 	 */
 	public function __construct(
 		EntityNamespaceLookup $entityNamespaceLookup,
-		$wiki = false
+		$wiki = false,
+		$repositoryName = ''
 	) {
 		parent::__construct( $wiki );
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
+		$this->repositoryName = $repositoryName;
 	}
 
 	/**
@@ -48,22 +56,31 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 *     EntityRevisionLookup::LATEST_FROM_MASTER)
 	 *
 	 * @throws DBQueryError
-	 * @return stdClass[] Array of entity id serialization => object.
+	 * @return array Array of entity id serialization => object or false if entity id is not found.
 	 */
 	public function loadRevisionInformation(
 		array $entityIds,
 		$mode
 	) {
 		$rows = array();
+		$entityIdsToLoad = [];
+		foreach ( $entityIds as $entityId ) {
+			if ( $this->isEntityIdFromRightRepository( $entityId ) ) {
+				$entityIdsToLoad[] = $entityId;
+			} else {
+				$rows[$entityId->getSerialization()] = false;
+			}
+		}
 
 		if ( $mode !== EntityRevisionLookup::LATEST_FROM_MASTER ) {
-			$rows = $this->selectRevisionInformationMultiple( $entityIds, DB_SLAVE );
+			$rows = array_merge( $rows, $this->selectRevisionInformationMultiple( $entityIdsToLoad, DB_SLAVE ) );
 		}
 
 		if ( $mode !== EntityRevisionLookup::LATEST_FROM_SLAVE ) {
 			// Attempt to load (missing) rows from master if the caller asked for that.
 			$loadFromMaster = array();
-			foreach ( $entityIds as $entityId ) {
+			/** @var EntityId $entityId */
+			foreach ( $entityIdsToLoad as $entityId ) {
 				if ( !isset( $rows[$entityId->getSerialization()] ) || !$rows[$entityId->getSerialization()] ) {
 					$loadFromMaster[] = $entityId;
 				}
@@ -95,6 +112,10 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 		$revisionId,
 		$mode = EntityRevisionLookup::LATEST_FROM_MASTER
 	) {
+		if ( !$this->isEntityIdFromRightRepository( $entityId ) ) {
+			return false;
+		}
+
 		$row = $this->selectRevisionInformationById( $entityId, $revisionId, DB_SLAVE );
 
 		if ( !$row && $mode !== EntityRevisionLookup::LATEST_FROM_SLAVE ) {
@@ -106,6 +127,15 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 		}
 
 		return $row;
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 *
+	 * @return bool
+	 */
+	private function isEntityIdFromRightRepository( EntityId $entityId ) {
+		return $entityId->getRepositoryName() === $this->repositoryName;
 	}
 
 	/**
@@ -169,9 +199,13 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @param int $connType DB_SLAVE or DB_MASTER
 	 *
 	 * @throws DBQueryError If the query fails.
-	 * @return stdClass[] Array of entity id serialization => object.
+	 * @return array Array of entity id serialization => object or false (if not found).
 	 */
 	private function selectRevisionInformationMultiple( array $entityIds, $connType ) {
+		if ( empty( $entityIds ) ) {
+			return [];
+		}
+
 		$db = $this->getConnection( $connType );
 
 		$join = [];
@@ -201,7 +235,8 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @param EntityId[] $entityIds
 	 * @param ResultWrapper $res
 	 *
-	 * @return stdClass[] Array of entity id serialization => object.
+	 * @return array Array of entity id serialization => object or false if entity id
+	 *               serialization is not present in $res.
 	 */
 	private function indexResultByEntityId( array $entityIds, ResultWrapper $res ) {
 		$rows = [];

@@ -42,7 +42,8 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	public function __construct(
 		EntityContentDataCodec $contentCodec,
 		WikiPageEntityMetaDataAccessor $entityMetaDataAccessor,
-		$wiki = false
+		$wiki = false,
+		$repositoryName = ''
 	) {
 		parent::__construct( $wiki );
 
