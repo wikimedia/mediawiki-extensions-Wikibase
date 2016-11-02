@@ -22,6 +22,30 @@
       "revId": "10faf881fc919204be5684d3ee47da971b201404",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_a0bd2baf",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-02T15:34:34Z",
+      "side": 1,
+      "message": "Oh, sorry. Gerrit seems to be lagging for me today. I didn\u0027t notice my own comment on this check here has not been sent.\n\nSo the answer to your question is: no, we cannot be sure about that. Per what Daniel wrote in T149581 we could probably assume this is equal to the global ID of the site. Which not necessarily is the database name.\n\nNow my question would be: what would be the most reasonable way of getting a DB name for a site if I have its global id? I had a rather quick look at those Site/Interwiki things and core and couldn\u0027t figure it out really (but maybe it is just me being tired, and the answer is somewhere over there).",
+      "parentUuid": "4eb4ebfb_208b5b22",
+      "range": {
+        "startLine": 161,
+        "startChar": 35,
+        "endLine": 161,
+        "endChar": 52
+      },
+      "revId": "10faf881fc919204be5684d3ee47da971b201404",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
