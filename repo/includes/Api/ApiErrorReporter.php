@@ -17,6 +17,9 @@ use Wikibase\Repo\Localizer\ExceptionLocalizer;
  * ApiErrorReporter is a component for API modules that handles
  * error reporting. It supports localization of error messages.
  *
+ * @todo Rewrite this to use core's error i18n, at least when
+ * !( $apiModule->getErrorFormatter() instanceof \ApiErrorFormatter_BackCompat )
+ *
  * @since 0.5
  *
  * @license GPL-2.0+
@@ -58,6 +61,8 @@ class ApiErrorReporter {
 	 * Reports any warnings in the Status object on the warnings section
 	 * of the result.
 	 *
+	 * @todo This could probably just call
+	 *  $this->apiModule->addMessagesFromStatus( $status, [ 'warning' ] )
 	 * @param Status $status
 	 */
 	public function reportStatusWarnings( Status $status ) {
@@ -97,6 +102,8 @@ class ApiErrorReporter {
 	 * constructor. If that fails, dieUsage() is called, which in turn
 	 * attempts localization based on the error code.
 	 *
+	 * @todo Ideally you could just call $apiModule->dieStatus() here.
+	 *
 	 * @see ApiBase::dieUsage()
 	 *
 	 * @param Status $status The status to report. $status->getMessage() will be used
@@ -133,6 +140,8 @@ class ApiErrorReporter {
 	 * constructor. If that fails, dieUsage() is called, which in turn
 	 * attempts localization based on the error code.
 	 *
+	 * @todo This'll probably remain as-is.
+	 *
 	 * @see ApiBase::dieUsage()
 	 *
 	 * @param Exception $ex The exception to report. $ex->getMessage() will be used as the error's
@@ -164,6 +173,8 @@ class ApiErrorReporter {
 	/**
 	 * Aborts the request with an error message derived from the error code.
 	 *
+	 * @todo This'll probably remain as-is.
+	 *
 	 * @param string $errorCode A code identifying the error.
 	 * @param string [$param,...] Parameters for the Message.
 	 *
@@ -189,6 +200,8 @@ class ApiErrorReporter {
 	/**
 	 * Aborts the request with an error message. The given message is included in
 	 * the error's extra data.
+	 *
+	 * @todo This should be able to just call $apiModule->dieWithError().
 	 *
 	 * @see ApiBase::dieUsage()
 	 *
@@ -220,6 +233,10 @@ class ApiErrorReporter {
 	 * Localization of the error code is attempted by looking up a message key
 	 * constructed using the given code in "wikibase-api-$errorCode". If such a message
 	 * exists, it is included in the error's extra data.
+	 *
+	 * @todo In the $message->exists() branch, you could just call
+	 *  $apiModule->dieWithError(). Lacking that, probably just use
+	 *  ApiMessage::create( [ 'rawmessage', $description ], $errorCode, $extradata )
 	 *
 	 * @see ApiBase::dieUsage()
 	 *
@@ -303,6 +320,9 @@ class ApiErrorReporter {
 	/**
 	 * Add the messages from the given Status object to the $data array,
 	 * for use in an error report.
+	 *
+	 * @todo The new version would ideally use
+	 *  $apiModule->getErrorFormatter()->arrayFromStatus()
 	 *
 	 * @param Status $status
 	 * @param array|null &$data
