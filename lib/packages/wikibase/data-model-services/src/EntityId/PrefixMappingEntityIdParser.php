@@ -34,6 +34,8 @@ class PrefixMappingEntityIdParser implements EntityIdParser {
 	private $idParser;
 
 	/**
+	 * @since 3.7
+	 *
 	 * @param string[] $prefixMapping Must contain an empty-string key defining prefix added to id serializations
 	 *        that do not contain any of prefixed defined in $prefixMapping. Values should not contain colons,
 	 *        in particular at the end of the string
@@ -62,6 +64,8 @@ class PrefixMappingEntityIdParser implements EntityIdParser {
 	 * Maps prefix(es) of the id serialization according to the prefix mapping definition, or adds a fixed prefix
 	 * to the id serialization if there is no relevant prefix mapping,
 	 * Resulting id serialization is parsed as an EntityId.
+	 *
+	 * @since 3.7
 	 *
 	 * @see docs/foreign-entity-ids.wiki in the DataModel module
 	 *
