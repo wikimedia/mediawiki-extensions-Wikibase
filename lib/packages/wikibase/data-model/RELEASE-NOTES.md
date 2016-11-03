@@ -1,5 +1,9 @@
 # Wikibase DataModel release notes
 
+## Version 6.3.0 (2016-11-03)
+
+* Added `RepositoryNameAssert` class
+
 ## Version 6.2.0 (2016-10-14)
 * Raised minimum PHP version to 5.5
 * Added basic support for foreign EntityIds
