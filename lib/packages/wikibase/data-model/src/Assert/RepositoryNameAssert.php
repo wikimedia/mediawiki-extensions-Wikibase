@@ -19,6 +19,8 @@ use Wikimedia\Assert\ParameterAssertionException;
 class RepositoryNameAssert {
 
 	/**
+	 * @since 6.3
+	 *
 	 * @param string $value The actual value of the parameter
 	 * @param string $name The name of the parameter being checked
 	 *
@@ -31,6 +33,8 @@ class RepositoryNameAssert {
 	}
 
 	/**
+	 * @since 6.3
+	 *
 	 * @param array $values The actual value of the parameter. If this is not an array,
 	 *        a ParameterTypeException is thrown.
 	 * @param string $name The name of the parameter being checked
