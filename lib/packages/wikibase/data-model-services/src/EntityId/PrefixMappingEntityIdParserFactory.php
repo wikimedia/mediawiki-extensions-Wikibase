@@ -24,6 +24,8 @@ class PrefixMappingEntityIdParserFactory {
 	private $parser;
 
 	/**
+	 * @since 3.7
+	 *
 	 * @param EntityIdParser $parser
 	 * @param array $idPrefixMapping An associative array mapping repository names (strings) to id serialization
 	 *        prefix mappings specific to the particular repository (@see PrefixMappingEntityIdParser).
@@ -61,6 +63,8 @@ class PrefixMappingEntityIdParserFactory {
 	/**
 	 * Create a PrefixMappingEntityIdParser for the particular repository using id prefix mappings
 	 * defined in the constructor.
+	 *
+	 * @since 3.7
 	 *
 	 * @param string $repository
 	 *
