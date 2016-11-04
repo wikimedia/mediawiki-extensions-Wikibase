@@ -1,5 +1,9 @@
 # Wikibase DataModel release notes
 
+## Version 7.0.0
+
+* Removed `FingerprintHolder`.
+
 ## Version 6.3.0 (2016-11-03)
 
 * Added `RepositoryNameAssert` class
