@@ -281,7 +281,7 @@
 	"content-model-wikibase-query": "Consulta Wikibase",
 	"right-item-term": "Alterar termos de item (rótulos, descrições, nomes alternativos)",
 	"right-item-merge": "Fundir itens",
-	"right-property-term": "Altere termos de propriedade (rótulos, descrições, nomes alternativos)",
+	"right-property-term": "Alterar termos de propriedade (rótulos, descrições, nomes alternativos)",
 	"right-property-create": "Criar propriedades",
 	"action-item-merge": "fundir itens",
 	"action-property-create": "criar propriedades",

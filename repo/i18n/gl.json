@@ -498,6 +498,7 @@
 	"apihelp-query+wbsubscribers-param-prop": "Propiedades a engadir ó resultado",
 	"apihelp-query+wbsubscribers-param-limit": "Número máximo de resultados",
 	"apihelp-query+wbsubscribers-example-1": "Obter os subscritores á entidade Q42",
+	"apihelp-query+wbsubscribers-example-2": "Obter os subscritores á entidade Q42 coa URL a Special:EntityUsage incluída",
 	"apihelp-wbsetaliases-description": "Fixa os alias para unha entidade de Wikibase.",
 	"apihelp-wbsetaliases-param-id": "Identificador da entidade, incluíndo o prefixo. \nUse <var>id</var> ou <var>site</var> e <var>title</var> xuntos.",
 	"apihelp-wbsetaliases-param-new": "Si se establece, se creará una entidad nueva.\nEstablece esto al tipo de entidad que quieres crear.",

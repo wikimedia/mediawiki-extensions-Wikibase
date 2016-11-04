@@ -101,7 +101,7 @@
 	"wikibase-pageswithbadges-legend": "Lista de páginas com um determinado emblema",
 	"wikibase-pageswithbadges-badge": "Emblema:",
 	"wikibase-pageswithbadges-submit": "Mostrar páginas",
-	"entityusage": "Utilização da Entidade",
+	"entityusage": "Páginas que usam uma entidade",
 	"entityusage-summary": "Esta página lista as páginas que usam a entidade especificada (exemplo: Q42). A lista é apresentada por ordem decrescente do identificador da página, portanto as páginas mais recentes são mostradas primeiro.",
 	"wikibase-entityusage-invalid-id": "$1 não é um identificador de entidade válido.",
 	"wikibase-entityusage-legend": "Lista de páginas que usam uma determinada entidade",
