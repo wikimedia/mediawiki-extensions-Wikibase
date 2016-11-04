@@ -4,6 +4,7 @@ namespace Wikibase\Test\Rdf;
 
 use DataValues\QuantityValue;
 use Wikibase\DataModel\Entity\ItemId;
+use DataValues\UnboundedQuantityValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\UnitConverter;
 use Wikibase\Lib\UnitStorage;
@@ -40,6 +41,8 @@ class QuantityRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideAddValue() {
+		$unboundedValue = UnboundedQuantityValue::newFromNumber( '+23.5', '1' );
+		$unboundedSnak = new PropertyValueSnak( new PropertyId( 'P7' ), $unboundedValue );
 		$value = QuantityValue::newFromNumber( '+23.5', '1', '+23.6', '+23.4' );
 		$snak = new PropertyValueSnak( new PropertyId( 'P7' ), $value );
 
@@ -48,11 +51,43 @@ class QuantityRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$snak2 = new PropertyValueSnak( new PropertyId( 'P7' ), $value );
 
 		return array(
+			'simple unbounded' => array(
+				$unboundedSnak,
+				false,
+				array(
+					'<http://www/Q1>'
+					. ' <http://acme/statement/P7> '
+					. '"+23.5"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+				)
+			),
 			'simple' => array(
 				$snak,
 				false,
 				array(
-					'<http://www/Q1> <http://acme/statement/P7> "+23.5"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+					'<http://www/Q1> '
+					. '<http://acme/statement/P7> '
+					. '"+23.5"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+				)
+			),
+			'complex unbounded' => array(
+				$unboundedSnak,
+				true,
+				array(
+					'<http://www/Q1> '
+					. '<http://acme/statement/P7> '
+					. '"+23.5"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+					'<http://www/Q1> '
+					. '<http://acme/statement/value/P7> '
+					. '<http://acme/value/d0488ea37befd2940d39a1dbf47eebc0> .',
+					'<http://acme/value/d0488ea37befd2940d39a1dbf47eebc0> '
+					. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
+					. '<http://acme/onto/QuantityValue> .',
+					'<http://acme/value/d0488ea37befd2940d39a1dbf47eebc0> '
+					. '<http://acme/onto/quantityAmount> '
+					. '"+23.5"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+					'<http://acme/value/d0488ea37befd2940d39a1dbf47eebc0> '
+					. '<http://acme/onto/quantityUnit> '
+					. '<http://www.wikidata.org/entity/Q199> .',
 				)
 			),
 			'complex' => array(

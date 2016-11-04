@@ -9,6 +9,7 @@ use DataValues\NumberValue;
 use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
+use DataValues\UnboundedQuantityValue;
 use PHPUnit_Framework_TestCase;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
@@ -273,6 +274,7 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			array( 'url', new StringValue( 'http://acme.com ' ), false, 'URL with trailing space' ),
 
 			//quantity
+			array( 'quantity', UnboundedQuantityValue::newFromNumber( 5 ), true, 'Unbounded' ),
 			array( 'quantity', QuantityValue::newFromNumber( 5 ), true, 'Simple integer' ),
 			array( 'quantity', QuantityValue::newFromNumber( 5, 'http://qudt.org/vocab/unit#Meter' ), true, 'Vocabulary URI' ),
 			array( 'quantity', QuantityValue::newFromNumber( 5, $wikidataUri . 'Q11573' ), false, 'Wikidata URI' ),

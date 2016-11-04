@@ -3,8 +3,8 @@
 namespace Wikibase\Repo;
 
 use DataValues\DataValue;
-use DataValues\QuantityValue;
 use DataValues\TimeValue;
+use DataValues\UnboundedQuantityValue;
 use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
@@ -344,8 +344,8 @@ class ValidatorBuilders {
 		$validators = array();
 		$validators[] = new TypeValidator( 'array' );
 
-		// the 'amount' field is already validated by QuantityValue's constructor
-		// the 'digits' field is already validated by QuantityValue's constructor
+		// The "amount", "upperBound" and "lowerBound" fields are already validated by the
+		// UnboundedQuantityValue/QuantityValue constructors.
 
 		$unitValidators = new AlternativeValidator( array(
 			// NOTE: "1" is always considered legal for historical reasons,
@@ -360,7 +360,7 @@ class ValidatorBuilders {
 			new CompositeValidator( $validators ) //Note: each validator is fatal
 		);
 
-		return array( new TypeValidator( QuantityValue::class ), $topValidator );
+		return array( new TypeValidator( UnboundedQuantityValue::class ), $topValidator );
 	}
 
 }
