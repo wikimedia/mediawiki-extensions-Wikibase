@@ -36,7 +36,9 @@ define( [
 			return [
 				[new dv.DecimalValue( 0 ), 'some unit', new dv.DecimalValue( 0 ), new dv.DecimalValue( 0 )],
 				[new dv.DecimalValue( 0 ), 'some unit', new dv.DecimalValue( -1 ), new dv.DecimalValue( 1 )],
-				[new dv.DecimalValue( 5 ), 'some unit', new dv.DecimalValue( 4 ), new dv.DecimalValue( 6 )]
+				[new dv.DecimalValue( 5 ), 'some unit', new dv.DecimalValue( 4 ), new dv.DecimalValue( 6 )],
+				[new dv.DecimalValue( 6 ), 'some unit', null, null],
+				[new dv.DecimalValue( 7 ), 'some unit']
 			];
 		}
 
