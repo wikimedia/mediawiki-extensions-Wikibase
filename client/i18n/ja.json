@@ -15,7 +15,7 @@
 	"tooltip-t-wikibase": "関連付けられたデータリポジトリ項目へのリンク",
 	"wikibase-after-page-move": "移動されたページにある言語リンクを維持するために、関連付けられた{{WBREPONAME}}項目を[$1 更新]することもできます。",
 	"wikibase-after-page-move-queued": "このページに関連付けられた[$1 {{WBREPONAME}}項目]は、まもなく自動的に更新されます。これは瞬時には起きない場合があるので、気をつけてください。",
-	"wikibase-after-page-delete": "この操作によって[{{WBREPONAME}} 項目 $1]からこのページへのリンクも取り除かれました。",
+	"wikibase-after-page-delete": "言語間リンクの整合性を保つため、[$1 関連付けられた{{WBREPONAME}}の項目]からこのページへのリンクが取り除かれます。",
 	"wikibase-after-page-delete-queued": "このページに関連付けられた[$1 {{WBREPONAME}}項目]は、自動的に更新されます。瞬時には更新されないかもしれないので、気をつけてください。",
 	"wikibase-comment-add": "{{WBREPONAME}}項目を作成しました。",
 	"wikibase-comment-remove": "関連付けられた{{WBREPONAME}}項目を削除しました。言語リンクを除去しました。",

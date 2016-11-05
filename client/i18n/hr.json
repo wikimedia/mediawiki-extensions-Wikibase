@@ -38,7 +38,7 @@
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "sakrij",
 	"wikibase-rc-hide-wikidata-show": "prikaži",
-	"wikibase-rc-show-wikidata-pref": "Prikaži {{WBREPONAME}} promjene na popisu nedavnih promjena",
+	"wikibase-rc-show-wikidata-pref": "Prikaži promjene projekta {{WBREPONAME}} na popisu nedavnih promjena",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} uređivanje",
 	"wikibase-replicationnote": "Molimo Vas, vodite računa da može proći nekoliko minuta dok izmjene ne budu vidljive na svim wikijima.",

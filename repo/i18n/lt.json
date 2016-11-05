@@ -484,6 +484,8 @@
 	"apihelp-query+wbsearch-example-1": "Ieškoti \"abc\" anglų kalba, su numatytosiomis tipo ir limito reikšmėmis",
 	"apihelp-query+wbsearch-example-2": "Ieškoti \"abc\" anglų kalba su limitu 50",
 	"apihelp-query+wbsearch-example-3": "Ieškoti savybės tipo \"alphabet\" anglų kalba",
+	"apihelp-query+wbsubscribers-param-prop": "Savybės, kurias pridėti prie rezultato",
+	"apihelp-query+wbsubscribers-param-limit": "Maksimalus rezultatų skaičius",
 	"apihelp-wbsetaliases-description": "Nustato Wikibase esybės alternatyvius vardus.",
 	"apihelp-wbsetaliases-param-id": "Esybės identifikatorius, įskaitant prefiksą.\nNaudoti kartu su 'id' arba kartu su abiem 'site' ir 'title'.",
 	"apihelp-wbsetaliases-param-site": "Identifikatorius tinklapio, kuriame yra puslapis. Naudokite kartu su 'title', kad tai būtų išbaigta tinklapio nuoroda.",
