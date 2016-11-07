@@ -38,7 +38,7 @@
 	},
 	"scripts": {
 		"phpcs": [
-			"vendor/bin/phpcs src/* --standard=phpcs.xml -sp"
+			"vendor/bin/phpcs lib/* src/* --standard=phpcs.xml -sp"
 		]
 	}
 }
