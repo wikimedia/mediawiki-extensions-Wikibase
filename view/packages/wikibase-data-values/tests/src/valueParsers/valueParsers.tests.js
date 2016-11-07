@@ -67,7 +67,7 @@
 		 *
 		 * @since 0.1
 		 *
-		 * @param {String} moduleName
+		 * @param {string} moduleName
 		 */
 		runTests: function( moduleName ) {
 			QUnit.module( moduleName );

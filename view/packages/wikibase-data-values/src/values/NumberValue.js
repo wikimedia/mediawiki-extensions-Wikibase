@@ -13,7 +13,7 @@ var PARENT = dv.DataValue;
  *
  * @constructor
  *
- * @param {Number} value
+ * @param {number} value
  */
 var SELF = dv.NumberValue = util.inherit( 'DvNumberValue', PARENT, function( value ) {
 	// TODO: validate
