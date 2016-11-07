@@ -5,5 +5,34 @@
 		<exclude name="Generic.Arrays.DisallowLongArraySyntax" />
 	</rule>
 
+	<rule ref="Generic.ControlStructures" />
+	<rule ref="Generic.Files.LineLength">
+		<properties>
+			<property name="lineLimit" value="124" />
+		</properties>
+	</rule>
+	<rule ref="Generic.PHP.CharacterBeforePHPOpeningTag" />
+
+	<rule ref="PSR1" />
+	<rule ref="PSR1.Methods.CamelCapsMethodName.NotCamelCaps">
+		<!-- Exclude test methods like "testGivenInvalidInput_methodThrowsException". -->
+		<exclude-pattern>tests*Test*\.php</exclude-pattern>
+	</rule>
+
+	<rule ref="PSR2.Files" />
+
+	<rule ref="Squiz.Classes.DuplicateProperty" />
+	<rule ref="Squiz.Classes.SelfMemberReference" />
+	<rule ref="Squiz.ControlStructures.ControlSignature" />
+	<rule ref="Squiz.Functions.FunctionDuplicateArgument" />
+	<rule ref="Squiz.Functions.GlobalFunction" />
+	<rule ref="Squiz.Scope" />
+	<rule ref="Squiz.WhiteSpace.FunctionSpacing">
+		<properties>
+			<property name="spacing" value="1" />
+		</properties>
+	</rule>
+
 	<arg name="extensions" value="php" />
+	<arg name="ignore" value="*\.js" />
 </ruleset>
