@@ -29,7 +29,7 @@
 	"wikibase-error-remove-timeout": "Error message for an error happening during a remove operation. The error was caused by a request time out.",
 	"wikibase-error-autocomplete-connection": "Error message for page auto-complete input box; displayed when API could not be reached.",
 	"wikibase-error-autocomplete-response": "When querying the API for auto-completion fails, this message contains more detailed information about the error. $1 is the actual server error response or jQuery error code (e.g. when the server did not respond).",
-	"wikibase-error-ui-no-external-page": "This is a human readable version of the API error \"wikibase-api-no-external-page\" which is shown in the UI.",
+	"wikibase-error-ui-no-external-page": "This is a human readable version of the API error \"wikibase-api-no-external-page\" which is shown in the UI.\n\nParameters:\n* $1 - global site ID, known to be valid\n* $2 - requested page name that could not be found on the site\n{{Identical|wikibase-newitem-no-external-page}}",
 	"wikibase-error-ui-edit-conflict": "This is a human readable version of the API error \"edit-conflict\" which is shown in the UI.\nNote that the default message says the user shall \"reload and save\", but after a reload the content that should be saved will be lost.",
 	"wikibase-language-fallback-transliteration-hint": "Message shown instead of a language name to indicate that a language fallback involved transliteration.\n* $1 - the name of the source language\n* $2 - the name of the resulting language",
 	"wikibase-quantitydetails-amount": "Label used for the \"amount\" field of a quantity value when showing a detailed representation of the quantity, e.g. in a diff.\n{{Identical|Amount}}",
