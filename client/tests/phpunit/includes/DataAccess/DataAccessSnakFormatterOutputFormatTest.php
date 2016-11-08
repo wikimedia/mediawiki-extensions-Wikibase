@@ -244,7 +244,7 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 					new StringValue( 'a [[b]] c' )
 				)
 			],
-			'time' => [
+			'time with PRECISION_SECOND' => [
 				'+2013-01-01T00:00:00Z',
 				new PropertyValueSnak(
 					new PropertyId( 'P6' ),
@@ -252,6 +252,18 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 						'+2013-01-01T00:00:00Z',
 						0, 0, 0,
 						TimeValue::PRECISION_SECOND,
+						TimeValue::CALENDAR_GREGORIAN
+					)
+				)
+			],
+			'time with PRECISION DAY' => [
+				'1 January 2013',
+				new PropertyValueSnak(
+					new PropertyId( 'P6' ),
+					new TimeValue(
+						'+2013-01-01T00:00:00Z',
+						0, 0, 0,
+						TimeValue::PRECISION_DAY,
 						TimeValue::CALENDAR_GREGORIAN
 					)
 				)
