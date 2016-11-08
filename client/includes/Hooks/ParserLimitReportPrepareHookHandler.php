@@ -68,8 +68,8 @@ class ParserLimitReportPrepareHookHandler {
 		$output->setLimitReportData(
 			'limitreport-entityaccesscount',
 			[
-				'value' => $this->restrictedEntityLookup->getEntityAccessCount(),
-				'limit' => $this->entityAccessLimit
+				$this->restrictedEntityLookup->getEntityAccessCount(),
+				$this->entityAccessLimit
 			]
 		);
 
