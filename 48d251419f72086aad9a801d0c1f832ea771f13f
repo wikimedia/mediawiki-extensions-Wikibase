@@ -25,6 +25,23 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_60da5f23",
+        "filename": "lib/includes/Store/DispatchingTermBuffer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-08T12:24:34Z",
+      "side": 1,
+      "message": "getPrefetchedTerm can also return false or null (when?) - we probably want to filter those.",
+      "revId": "48d251419f72086aad9a801d0c1f832ea771f13f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_408f6326",
         "filename": "lib/includes/Store/DispatchingTermBuffer.php",
         "patchSetId": 2
