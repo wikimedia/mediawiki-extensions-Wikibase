@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_a0aaa76b",
+        "filename": "lib/includes/Store/DispatchingTermBuffer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-08T12:19:59Z",
+      "side": 1,
+      "message": "namespaces of classes in the lib component seem a bit of a freestyle but I\u0027d vote for Wikibase\\Lib\\Store here!",
+      "range": {
+        "startLine": 3,
+        "startChar": 10,
+        "endLine": 3,
+        "endChar": 23
+      },
+      "revId": "48d251419f72086aad9a801d0c1f832ea771f13f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_408f6326",
+        "filename": "lib/includes/Store/DispatchingTermBuffer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-08T12:19:59Z",
+      "side": 1,
+      "message": "@see link for this method too would be nice (as at least false|null|string as possible return values deserves some explanation)",
+      "revId": "48d251419f72086aad9a801d0c1f832ea771f13f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
