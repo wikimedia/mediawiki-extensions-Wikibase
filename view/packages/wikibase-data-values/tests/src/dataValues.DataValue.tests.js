@@ -81,7 +81,7 @@ define( [
 		 *
 		 * @since 0.1
 		 *
-		 * @param {String} moduleName
+		 * @param {string} moduleName
 		 */
 		runTests: function( moduleName ) {
 			QUnit.module( moduleName );
@@ -272,8 +272,8 @@ define( [
 	 *
 	 * @since 0.1
 	 *
-	 * @param {Number} argNumber
-	 * @param {String} functionName
+	 * @param {number} argNumber
+	 * @param {string} functionName
 	 *
 	 * @return {Function}
 	 */

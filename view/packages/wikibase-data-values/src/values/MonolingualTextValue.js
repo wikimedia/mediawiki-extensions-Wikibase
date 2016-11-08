@@ -15,8 +15,8 @@ var PARENT = dv.DataValue;
  *
  * @constructor
  *
- * @param {String} languageCode
- * @param {String} value
+ * @param {string} languageCode
+ * @param {string} text
  */
 var SELF
 	= dv.MonolingualTextValue
