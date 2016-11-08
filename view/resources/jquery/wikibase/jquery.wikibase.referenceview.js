@@ -88,8 +88,6 @@ $.widget( 'wikibase.referenceview', PARENT, {
 		listview = this.$listview.data( 'listview' );
 
 		this._updateReferenceHashClass( this.value() );
-
-		this._referenceRemover = this.options.getReferenceRemover( this.$heading );
 	},
 
 	/**
@@ -193,6 +191,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	_startEditing: function() {
 		this._attachEditModeEventHandlers();
 
+		this._referenceRemover = this.options.getReferenceRemover( this.$heading );
 		this._snakListAdder = this.options.getAdder( this.enterNewItem.bind( this ), this.element );
 
 		return this.$listview.data( 'listview' ).startEditing();
@@ -206,6 +205,8 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	_stopEditing: function() {
 		this._detachEditModeEventHandlers();
 
+		this._referenceRemover.destroy();
+		this._referenceRemover = null;
 		this._snakListAdder.destroy();
 		this._snakListAdder = null;
 
@@ -271,7 +272,9 @@ $.widget( 'wikibase.referenceview', PARENT, {
 
 		if ( key === 'disabled' ) {
 			this.$listview.data( 'listview' ).option( key, value );
-			this._referenceRemover[ value ? 'disable' : 'enable' ]();
+			if ( this._referenceRemover ) {
+				this._referenceRemover[ value ? 'disable' : 'enable' ]();
+			}
 			if ( this._snakListAdder ) {
 				this._snakListAdder[ value ? 'disable' : 'enable' ]();
 			}
