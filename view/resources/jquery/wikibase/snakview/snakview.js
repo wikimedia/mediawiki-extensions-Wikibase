@@ -199,6 +199,10 @@ $.widget( 'wikibase.snakview', PARENT, {
 				snakTypeSelector.option( 'disabled', key );
 			}
 
+			if ( this._snakRemover ) {
+				this._snakRemover[value ? 'disable' : 'enable']();
+			}
+
 			if ( this._variation ) {
 				this._variation[value ? 'disable' : 'enable']();
 			}
