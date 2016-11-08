@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_26fb50bc",
+        "filename": "lib/includes/Store/DispatchingEntityRevisionLookup.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1883
+      },
+      "writtenOn": "2016-11-08T14:07:29Z",
+      "side": 1,
+      "message": "must must :-)",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 8
+      },
+      "revId": "7dd8babe84df0e5a7ab231479cbce50612edb793",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_0634d4a5",
+        "filename": "lib/includes/Store/DispatchingEntityRevisionLookup.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1883
+      },
+      "writtenOn": "2016-11-08T14:07:29Z",
+      "side": 1,
+      "message": "You could add the possible options like above.",
+      "range": {
+        "startLine": 68,
+        "startChar": 18,
+        "endLine": 68,
+        "endChar": 23
+      },
+      "revId": "7dd8babe84df0e5a7ab231479cbce50612edb793",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
