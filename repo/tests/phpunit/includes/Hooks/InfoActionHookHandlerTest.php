@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Hooks;
 
+use Html;
 use IContextSource;
-use MediaWiki\Linker\LinkRenderer;
 use RequestContext;
 use FileBasedSiteLookup;
 use Site;
@@ -13,7 +13,6 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\Sql\SqlSubscriptionLookup;
 
 /**
@@ -39,11 +38,10 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function handleProvider() {
-		global $wgArticlePath, $wgServer;
-
-		$url = $wgServer . $wgArticlePath;
-		$url = str_replace( '$1', 'en:Special:EntityUsage/', $url );
-
+		$url = 'https://en.wikipedia.org/wiki/Special%3AEntityUsage%2F';
+		$elementDewiki = Html::element('a', [ 'href' => $url ], 'dewiki' );
+		$elementEnwiki = Html::element('a', [ 'href' => $url ], 'enwiki' );
+		$elementElwiki = Html::element('a', [ 'href' => $url ], 'elwiki' );
 		$context = $this->getContext();
 
 		$cases = [];
@@ -53,7 +51,7 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 				'header-properties' => [
 					[
 						$context->msg( 'wikibase-pageinfo-subscription' )->escaped(),
-						"<ul><li>$url dewiki</li><li>$url enwiki</li></ul>",
+						"<ul><li>$elementDewiki</li><li>$elementEnwiki</li></ul>",
 					],
 				]
 			],
@@ -65,7 +63,7 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 			[ 'header-properties' => [
 					[
 						$context->msg( 'wikibase-pageinfo-subscription' )->escaped(),
-						"<ul><li>$url elwiki</li></ul>",
+						"<ul><li>$elementElwiki</li></ul>",
 					],
 				]
 			],
@@ -131,21 +129,11 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getEntityIdForTitle' )
 			->will( $this->returnValue( false ) );
 
-		$linkRenderer = $this->getMockBuilder( LinkRenderer::class )
-			->disableOriginalConstructor()
-			->setMethods( [ 'makeLink' ] )
-			->getMock();
-
-		$linkRenderer->expects( $this->any() )
-			->method( 'makeLink' )
-			->will( $this->returnCallback( [ $this, 'makeLink' ] ) );
-
 		$hookHandler = new InfoActionHookHandler(
 			$namespaceLookup,
 			$subLookup,
 			$siteLookup,
 			$entityIdLookup,
-			$linkRenderer,
 			$context
 		);
 
@@ -186,17 +174,8 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 	public function getSite() {
 		$site = new Site();
 		$site->addInterwikiId( 'en' );
+		$site->setLinkPath( 'https://en.wikipedia.org/wiki/$1' );
 		return $site;
-	}
-
-	/**
-	 * @param Title $title
-	 * @param string $text
-	 *
-	 * @return string HTML
-	 */
-	public function makeLink( Title $title, $text ) {
-		return $title->getFullURL() . ' ' . $text;
 	}
 
 }
