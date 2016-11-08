@@ -72,13 +72,14 @@ class DispatchingEntityLookupTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param Exception $exception
-	 * @return \PHPUnit_Framework_MockObject_MockObject|EntityLookup
+	 *
+	 * @return EntityLookup
 	 */
 	private function getExceptionThrowingLookup( Exception $exception ) {
 		$lookup = $this->getMock( EntityLookup::class );
 		$lookup->expects( $this->any() )
 			->method( $this->anything() )
-			->willThrowException( $exception );
+			->will( $this->throwException( $exception ) );
 		return $lookup;
 	}
 
