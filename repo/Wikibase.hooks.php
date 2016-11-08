@@ -1170,14 +1170,12 @@ final class RepoHooks {
 		$entityIdLookup = $wikibaseRepo->getEntityIdLookup();
 
 		$siteLookup = $mediaWikiServices->getSiteLookup();
-		$linkRender = $mediaWikiServices->getLinkRenderer();
 
 		$infoActionHookHandler = new InfoActionHookHandler(
 			$namespaceChecker,
 			$subscriptionLookup,
 			$siteLookup,
 			$entityIdLookup,
-			$linkRender,
 			$context
 		);
 

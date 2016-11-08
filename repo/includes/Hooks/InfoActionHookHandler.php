@@ -4,8 +4,6 @@ namespace Wikibase\Repo\Hooks;
 
 use Html;
 use IContextSource;
-use Linker;
-use MediaWiki\Linker\LinkRenderer;
 use SiteLookup;
 use Title;
 use Wikibase\Store\Sql\SqlSubscriptionLookup;
@@ -41,11 +39,6 @@ class InfoActionHookHandler {
 	private $entityIdLookup;
 
 	/**
-	 * @var LinkRenderer
-	 */
-	private $linkRenderer;
-
-	/**
 	 * @var IContextSource
 	 */
 	private $context;
@@ -55,14 +48,12 @@ class InfoActionHookHandler {
 		SqlSubscriptionLookup $subscriptionLookup,
 		SiteLookup $siteLookup,
 		EntityIdLookup $entityIdLookup,
-		LinkRenderer $linkRenderer,
 		IContextSource $context
 	) {
 		$this->namespaceChecker = $namespaceChecker;
 		$this->subscriptionLookup = $subscriptionLookup;
 		$this->siteLookup = $siteLookup;
 		$this->entityIdLookup = $entityIdLookup;
-		$this->linkRenderer = $linkRenderer;
 		$this->context = $context;
 	}
 
@@ -99,7 +90,7 @@ class InfoActionHookHandler {
 	}
 
 	/**
-	 * @param array $usage
+	 * @param string[] $subscriptions
 	 * @param Title $title
 	 *
 	 * @return string HTML[]
@@ -137,12 +128,16 @@ class InfoActionHookHandler {
 		if ( !$site ) {
 			return $subscription;
 		}
-		if ( !$site->getInterwikiIds() ) {
+
+		$url = $site->getPageUrl( 'Special:EntityUsage/' . $title->getText() );
+		if ( !$url ) {
 			return $subscription;
 		}
-
-		$title = Title::makeTitle( NS_SPECIAL, 'EntityUsage/' . $title->getText(), '', $site->getInterwikiIds()[0] );
-		return $this->linkRenderer->makeLink( $title, $subscription );
+		$element = Html::element( 'a',
+			[ 'href' => $url ],
+			$subscription
+		);
+		return $element;
 	}
 
 }
