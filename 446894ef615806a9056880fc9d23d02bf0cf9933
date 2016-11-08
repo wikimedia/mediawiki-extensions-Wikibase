@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_45a9b58c",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-11-08T10:06:09Z",
+      "side": 1,
+      "message": "We could also use Linker::makeExternalLink here, but that might set attributes on the link we don\u0027t want.",
+      "range": {
+        "startLine": 136,
+        "startChar": 13,
+        "endLine": 136,
+        "endChar": 26
+      },
+      "revId": "446894ef615806a9056880fc9d23d02bf0cf9933",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
