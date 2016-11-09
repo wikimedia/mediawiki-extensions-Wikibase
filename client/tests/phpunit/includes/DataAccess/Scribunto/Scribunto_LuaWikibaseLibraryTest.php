@@ -55,6 +55,9 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 		$this->oldAllowDataAccessInUserLanguage = $settings->getSetting( 'allowDataAccessInUserLanguage' );
 		$this->setAllowDataAccessInUserLanguage( false );
+
+		// TODO: Remove the feature flag when not needed any more!
+		$settings->setSetting( 'enableLuaEntityFormatStatements', true );
 	}
 
 	protected function tearDown() {
@@ -312,6 +315,16 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$luaWikibaseLibrary->renderSnak( array( 'a' => 'b' ) );
 	}
 
+	public function testFormatValue() {
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$entityArr = $luaWikibaseLibrary->getEntity( 'Q32488' );
+		$snak = $entityArr[0]['claims']['P456'][1]['mainsnak'];
+		$this->assertSame(
+			[ '<span>Q885588</span>' ],
+			$luaWikibaseLibrary->formatValue( $snak )
+		);
+	}
+
 	/**
 	 * @dataProvider allowDataAccessInUserLanguageProvider
 	 */
@@ -340,6 +353,16 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 
 		$this->setExpectedException( ScribuntoException::class );
 		$luaWikibaseLibrary->renderSnaks( array( 'a' => 'b' ) );
+	}
+
+	public function testFormatValues() {
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$entityArr = $luaWikibaseLibrary->getEntity( 'Q32487' );
+		$snaks = $entityArr[0]['claims']['P342'][1]['qualifiers'];
+		$this->assertSame(
+			[ '<span><span>A qualifier Snak</span>, <span>Moar qualifiers</span></span>' ],
+			$luaWikibaseLibrary->formatValues( $snaks )
+		);
 	}
 
 	public function testResolvePropertyId() {

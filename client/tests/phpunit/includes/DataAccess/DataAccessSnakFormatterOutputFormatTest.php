@@ -108,7 +108,7 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Snaks which are formatted the same in the escaped plain text
+	 * Snaks which are formatted the same in the wikitext escaped plain text
 	 * and in the rich wikitext formatting.
 	 *
 	 * @return array[]
