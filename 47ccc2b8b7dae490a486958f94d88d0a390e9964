@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_3017fba9",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-09T17:15:16Z",
+      "side": 1,
+      "message": "Per T150328 in case entity from some other repository has been request this service should probably return null/false (and possibly log warning) instead of failing with an exception here.",
+      "revId": "47ccc2b8b7dae490a486958f94d88d0a390e9964",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
