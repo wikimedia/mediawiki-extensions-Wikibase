@@ -208,7 +208,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 					'span',
 					array(
 						'class' => 'wb-itemlink-label',
-						'lang' => $labelTerm ? $labelTerm->getLanguageCode() : '',
+						'lang' => $labelTerm ? $labelTerm->getActualLanguageCode() : '',
 					),
 					$labelTerm ? $labelTerm->getText() : ''
 				) .
