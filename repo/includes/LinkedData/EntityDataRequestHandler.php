@@ -182,6 +182,9 @@ class EntityDataRequestHandler {
 	 * @throws HttpError
 	 */
 	public function handleRequest( $doc, WebRequest $request, OutputPage $output ) {
+		// No matter what: The response is always public
+		$output->getRequest()->response()->header( 'Access-Control-Allow-Origin: *' );
+
 		$revision = 0;
 
 		list( $id, $format ) = $this->uriManager->parseDocName( $doc );
@@ -477,7 +480,6 @@ class EntityDataRequestHandler {
 		$sMaxAge = max( self::MINIMUM_MAX_AGE, min( self::MAXIMUM_MAX_AGE, $sMaxAge ) );
 
 		$response->header( 'Content-Type: ' . $contentType . '; charset=UTF-8' );
-		$response->header( 'Access-Control-Allow-Origin: *' );
 
 		if ( $lastModified ) {
 			$response->header( 'Last-Modified: ' . wfTimestamp( TS_RFC2822, $lastModified ) );
