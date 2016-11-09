@@ -214,7 +214,7 @@ local formatValuesByPropertyId = function( entity, phpFormatterFunction, propert
 end
 
 -- Format the main Snaks belonging to a Statement (which is identified by a PropertyId
--- or the label of a Property) as escaped plain text.
+-- or the label of a Property) as wikitext escaped plain text.
 --
 -- @param {string} propertyLabelOrId
 -- @param {table} [acceptableRanks]

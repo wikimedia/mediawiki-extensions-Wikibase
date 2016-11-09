@@ -96,26 +96,50 @@ local description, lang = mw.wikibase.getDescriptionWithLang( 'Q42' ) -- descrip
 
 === mw.wikibase.renderSnak ===
 <code>wikibase.renderSnak( snakSerialization )</code><br>
-Renders a serialized Snak to text. This is useful for displaying References or Qualifiers.
+Renders a serialized Snak value to wikitext escaped plain text. This is useful for displaying References or Qualifiers.
 
 An example call might look like this:
 <source lang="lua">
 local entity = mw.wikibase.getEntityObject()
 local snak = entity['claims']['P342'][1]['qualifiers']['P342'][1]
 
-mw.wikibase.renderSnak( snak ) -- Returns the given Snak formatted as wiki text.
+mw.wikibase.renderSnak( snak ) -- Returns the given Snak value formatted as wikitext escaped plain text.
+</source>
+
+=== mw.wikibase.formatValue ===
+<code>wikibase.formatValue( snakSerialization )</code><br>
+Renders a serialized Snak value to rich wikitext. This is useful for displaying References or Qualifiers.
+
+An example call might look like this:
+<source lang="lua">
+local entity = mw.wikibase.getEntityObject()
+local snak = entity['claims']['P342'][1]['qualifiers']['P342'][1]
+
+mw.wikibase.formatValue( snak ) -- Returns the given Snak value formatted as rich wikitext.
 </source>
 
 === mw.wikibase.renderSnaks ===
 <code>wikibase.renderSnaks( snaksSerialization )</code><br>
-Renders a list of serialized Snaks to text. This is useful for displaying References or Qualifiers.
+Renders a list of serialized Snak values to wikitext escaped plain text. This is useful for displaying References or Qualifiers.
 
 An example call might look like this:
 <source lang="lua">
 local entity = mw.wikibase.getEntityObject()
 local snaks = entity['claims']['P342'][1]['qualifiers']
 
-mw.wikibase.renderSnaks( snaks ) -- Returns the given Snaks formatted as wiki text.
+mw.wikibase.renderSnaks( snaks ) -- Returns the given Snak values formatted as wikitext escaped plain text.
+</source>
+
+=== mw.wikibase.formatValues ===
+<code>wikibase.formatValues( snaksSerialization )</code><br>
+Renders a list of serialized Snak values to rich wikitext. This is useful for displaying References or Qualifiers.
+
+An example call might look like this:
+<source lang="lua">
+local entity = mw.wikibase.getEntityObject()
+local snaks = entity['claims']['P342'][1]['qualifiers']
+
+mw.wikibase.formatValues( snaks ) -- Returns the given Snak values formatted as rich wikitext.
 </source>
 
 === mw.wikibase.resolvePropertyId ===
@@ -246,7 +270,7 @@ entity:formatPropertyValues( 'P42', { mw.wikibase.entity.claimRanks.RANK_NORMAL 
 <code>entity:formatStatements( propertyLabelOrId )</code><br>
 <code>entity:formatStatements( propertyLabelOrId, acceptableRanks )</code><br>
 
-Like [[#mw.wikibase.entity:formatPropertyValues|<code>mw.wikibase.entity:formatPropertyValues</code>]], but the returned values will be formatted as rich wikitext, rather than just escaped plain text.
+Like [[#mw.wikibase.entity:formatPropertyValues|<code>mw.wikibase.entity:formatPropertyValues</code>]], but the returned values will be formatted as rich wikitext, rather than just wikitext escaped plain text.
 
 === mw.wikibase.entity.claimRanks ===
 The <code>mw.wikibase.entity.claimRanks</code> table contains a map of all available claim ranks.

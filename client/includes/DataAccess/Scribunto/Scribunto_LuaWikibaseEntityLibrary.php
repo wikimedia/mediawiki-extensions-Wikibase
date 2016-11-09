@@ -185,7 +185,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 
 	/**
 	 * Format the main Snaks belonging to a Statement (which is identified by a PropertyId
-	 * or the label of a Property) as escaped plain text.
+	 * or the label of a Property) as wikitext escaped plain text.
 	 *
 	 * @since 0.5
 	 *
