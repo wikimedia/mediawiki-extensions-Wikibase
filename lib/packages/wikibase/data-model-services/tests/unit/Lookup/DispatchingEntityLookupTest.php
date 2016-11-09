@@ -10,7 +10,6 @@ use Wikibase\DataModel\Services\Lookup\DispatchingEntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
-use Wikibase\DataModel\Services\Lookup\UnknownForeignRepositoryException;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
@@ -70,6 +69,12 @@ class DispatchingEntityLookupTest extends \PHPUnit_Framework_TestCase {
 		$this->assertNull( $dispatchingLookup->getEntity( new ItemId( 'foo:Q19' ) ) );
 	}
 
+	public function testGivenEntityIdFromUnknownRepository_getEntityReturnsNull() {
+		$dispatchingLookup = new DispatchingEntityLookup( [ '' => new InMemoryEntityLookup(), ] );
+
+		$this->assertNull( $dispatchingLookup->getEntity( new ItemId( 'foo:Q1' ) ) );
+	}
+
 	/**
 	 * @param Exception $exception
 	 *
@@ -92,14 +97,6 @@ class DispatchingEntityLookupTest extends \PHPUnit_Framework_TestCase {
 		$dispatchingLookup->getEntity( new ItemId( 'Q321' ) );
 	}
 
-	public function testGivenEntityIdFromUnknownRepository_getEntityThrowsException() {
-		$dispatchingLookup = new DispatchingEntityLookup( [ '' => $this->getMock( EntityLookup::class ), ] );
-
-		$this->setExpectedException( UnknownForeignRepositoryException::class );
-
-		$dispatchingLookup->getEntity( new ItemId( 'foo:Q1' ) );
-	}
-
 	public function testGivenExistingEntityId_hasEntityReturnsTrue() {
 		$localLookup = new InMemoryEntityLookup();
 		$localLookup->addEntity( new FakeEntityDocument( new ItemId( 'Q1' ) ) );
@@ -112,7 +109,7 @@ class DispatchingEntityLookupTest extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue( $dispatchingLookup->hasEntity( new PropertyId( 'foo:P11' ) ) );
 	}
 
-	public function testGivenNotExistingEntityIdFromKnownRepository_getEntityReturnsFalse() {
+	public function testGivenNotExistingEntityIdFromKnownRepository_hasEntityReturnsFalse() {
 		$localLookup = new InMemoryEntityLookup();
 		$fooLookup = new InMemoryEntityLookup();
 
@@ -122,6 +119,12 @@ class DispatchingEntityLookupTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse( $dispatchingLookup->hasEntity( new ItemId( 'foo:Q19' ) ) );
 	}
 
+	public function testGivenEntityIdFromUnknownRepository_hasEntityReturnsFalse() {
+		$dispatchingLookup = new DispatchingEntityLookup( [ '' => $this->getMock( EntityLookup::class ), ] );
+
+		$this->assertFalse( $dispatchingLookup->hasEntity( new ItemId( 'foo:Q1' ) ) );
+	}
+
 	public function testLookupExceptionsAreNotCaughtInHasEntity() {
 		$lookup = $this->getExceptionThrowingLookup( new EntityLookupException( new ItemId( 'Q321' ) ) );
 
@@ -129,14 +132,6 @@ class DispatchingEntityLookupTest extends \PHPUnit_Framework_TestCase {
 
 		$this->setExpectedException( EntityLookupException::class );
 		$dispatchingLookup->hasEntity( new ItemId( 'Q321' ) );
-	}
-
-	public function testGivenEntityIdFromUnknownRepository_hasEntityThrowsException() {
-		$dispatchingLookup = new DispatchingEntityLookup( [ '' => $this->getMock( EntityLookup::class ), ] );
-
-		$this->setExpectedException( UnknownForeignRepositoryException::class );
-
-		$dispatchingLookup->hasEntity( new ItemId( 'foo:Q1' ) );
 	}
 
 }

@@ -37,7 +37,7 @@ class DispatchingEntityLookup implements EntityLookup {
 		Assert::parameter(
 			!empty( $lookups ),
 			'$lookups',
-			'must must not be empty'
+			'must not be empty'
 		);
 		Assert::parameterElementType( EntityLookup::class, $lookups, '$lookups' );
 		RepositoryNameAssert::assertParameterKeysAreValidRepositoryNames( $lookups, '$lookups' );
@@ -53,11 +53,10 @@ class DispatchingEntityLookup implements EntityLookup {
 	 *
 	 * @return null|EntityDocument
 	 * @throws EntityLookupException
-	 * @throws UnknownForeignRepositoryException
 	 */
 	public function getEntity( EntityId $entityId ) {
 		$lookup = $this->getLookupForEntityId( $entityId );
-		return $lookup->getEntity( $entityId );
+		return $lookup !== null ? $lookup->getEntity( $entityId ) : null;
 	}
 
 	/**
@@ -69,25 +68,20 @@ class DispatchingEntityLookup implements EntityLookup {
 	 *
 	 * @return bool
 	 * @throws EntityLookupException
-	 * @throws UnknownForeignRepositoryException
 	 */
 	public function hasEntity( EntityId $entityId ) {
 		$lookup = $this->getLookupForEntityId( $entityId );
-		return $lookup->hasEntity( $entityId );
+		return $lookup !== null ? $lookup->hasEntity( $entityId ) : false;
 	}
 
 	/**
 	 * @param EntityId $entityId
 	 *
-	 * @return EntityLookup
-	 * @throws UnknownForeignRepositoryException
+	 * @return EntityLookup|null
 	 */
 	private function getLookupForEntityId( EntityId $entityId ) {
 		$repo = $entityId->getRepositoryName();
-		if ( !isset( $this->lookups[$repo] ) ) {
-			throw new UnknownForeignRepositoryException( $entityId->getRepositoryName() );
-		}
-		return $this->lookups[$repo];
+		return isset( $this->lookups[$repo] ) ? $this->lookups[$repo] : null;
 	}
 
 }
