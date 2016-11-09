@@ -3,11 +3,11 @@
 namespace Wikibase\DataModel\Entity;
 
 /**
- * Interface for EntityIds that can be converted to a unique, positive, signed 32 bit integer in the
- * range [1..2147483647], and back from the entity type and the number. When an ID can not be
- * represented as an unique integer, an InvalidArgumentException must be thrown on construction
- * time. For example, when "Q1" and "Q01" have the same integer representation, only one should be
- * allowed.
+ * Interface for EntityIds that can be converted to a positive, signed 32 bit integer in the range
+ * [1..2147483647], and back from the entity type and the number. The number must be distinct for
+ * different IDs. When an ID can not be represented as a distinct integer, an
+ * InvalidArgumentException must be thrown on construction time. For example, when "Q1" and "Q01"
+ * have the same integer representation, only one should be allowed.
  *
  * Entity types that do not meet this criteria should not implement this interface.
  *
@@ -26,7 +26,7 @@ interface Int32EntityId {
 	/**
 	 * @since 6.1
 	 *
-	 * @return int Guaranteed to be a unique integer in the range [1..2147483647].
+	 * @return int Guaranteed to be a distinct integer in the range [1..2147483647].
 	 */
 	public function getNumericId();
 
