@@ -113,7 +113,8 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 	public function testRichWikitextOutput( $expected, $snak ) {
 		// This is an integration test, use the global factory
 		$factory = WikibaseClient::getDefaultInstance()->getDataAccessSnakFormatterFactory();
-		$formatter = $factory->newRichWikitextSnakFormatter(
+		$formatter = $factory->newSnakFormatter(
+			'rich-wikitext',
 			Language::factory( 'en' ),
 			$this->getMock( UsageAccumulator::class )
 		);
@@ -176,7 +177,8 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 	public function testEscapedPlainTextOutput( $expected, $snak ) {
 		// This is an integration test, use the global factory
 		$factory = WikibaseClient::getDefaultInstance()->getDataAccessSnakFormatterFactory();
-		$formatter = $factory->newEscapedPlainTextSnakFormatter(
+		$formatter = $factory->newSnakFormatter(
+			'plain-text',
 			Language::factory( 'en' ),
 			$this->getMock( UsageAccumulator::class )
 		);

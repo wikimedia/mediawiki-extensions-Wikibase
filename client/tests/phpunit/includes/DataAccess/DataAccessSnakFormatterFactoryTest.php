@@ -84,7 +84,8 @@ class DataAccessSnakFormatterFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function testNewEscapedPlainTextSnakFormatter() {
 		$factory = $this->getDataAccessSnakFormatterFactory( SnakFormatter::FORMAT_PLAIN );
-		$snakFormatter = $factory->newEscapedPlainTextSnakFormatter(
+		$snakFormatter = $factory->newSnakFormatter(
+			'plain-text',
 			Language::factory( 'fr' ),
 			$this->getMock( UsageAccumulator::class )
 		);
@@ -107,7 +108,8 @@ class DataAccessSnakFormatterFactoryTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testRichWikitextSnakFormatter( Snak $snak, $expected ) {
 		$factory = $this->getDataAccessSnakFormatterFactory( SnakFormatter::FORMAT_WIKI );
-		$snakFormatter = $factory->newRichWikitextSnakFormatter(
+		$snakFormatter = $factory->newSnakFormatter(
+			'rich-wikitext',
 			Language::factory( 'fr' ),
 			$this->getMock( UsageAccumulator::class )
 		);

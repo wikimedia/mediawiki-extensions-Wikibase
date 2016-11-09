@@ -57,45 +57,13 @@ class DataAccessSnakFormatterFactory {
 	}
 
 	/**
-	 * This returns a SnakFormatter that will return wikitext escaped plain text.
-	 * The only exception are URLs, these are plain text, but not escaped in any
-	 * way.
-	 *
+	 * @param string $type Either "escaped-plaintext" or "rich-wikitext".
 	 * @param Language $language
 	 * @param UsageAccumulator $usageAccumulator
 	 *
 	 * @return SnakFormatter
 	 */
-	public function newEscapedPlainTextSnakFormatter(
-		Language $language,
-		UsageAccumulator $usageAccumulator
-	) {
-		return $this->newSnakFormatter( 'escaped-plaintext', $language, $usageAccumulator );
-	}
-
-	/**
-	 * This returns a SnakFormatter that will return "rich" wikitext.
-	 *
-	 * @param Language $language
-	 * @param UsageAccumulator $usageAccumulator
-	 *
-	 * @return SnakFormatter
-	 */
-	public function newRichWikitextSnakFormatter(
-		Language $language,
-		UsageAccumulator $usageAccumulator
-	) {
-		return $this->newSnakFormatter( 'rich-wikitext', $language, $usageAccumulator );
-	}
-
-	/**
-	 * @param string $type
-	 * @param Language $language
-	 * @param UsageAccumulator $usageAccumulator
-	 *
-	 * @return SnakFormatter
-	 */
-	private function newSnakFormatter(
+	public function newSnakFormatter(
 		$type,
 		Language $language,
 		UsageAccumulator $usageAccumulator
