@@ -112,7 +112,7 @@
 	"wikibase-entityusage-submit": "Afficher les pages",
 	"wikibase-pageinfo-entity-id": "ID de l’élément {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Aucun",
-	"wikibase-pageinfo-entity-usage": "Éléments {{WBREPONAME}} utilisées sur cette page",
+	"wikibase-pageinfo-entity-usage": "Éléments {{WBREPONAME}} utilisés sur cette page",
 	"wikibase-pageinfo-entity-usage-S": "Sitelink",
 	"wikibase-pageinfo-entity-usage-L": "Libellé : $1",
 	"wikibase-pageinfo-entity-usage-T": "Titre",

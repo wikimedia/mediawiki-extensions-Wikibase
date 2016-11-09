@@ -378,6 +378,7 @@
 	"apihelp-wbeditentity-param-new": "Se impostato, verrà creata una nuova entità.\nImpostalo al tipo di entità da creare.\nNon è consentito impostarlo quando anche <var>id</var> è valorizzato.",
 	"apihelp-wbeditentity-example-11": "Aggiunge un'etichetta senza sovrascrivere se già presente",
 	"apihelp-wbeditentity-example-12": "Rimuovi un'etichetta",
+	"apihelp-wbformatvalue-description": "Formati DataValues.",
 	"apihelp-wbformatvalue-param-property": "ID proprietà a cui appartiene il valore dei dati, dovrebbe essere usato al posto del parametro tipo di dati.",
 	"apihelp-wbgetclaims-description": "Ottiene asserzioni Wikibase.",
 	"apihelp-wbgetclaims-example-1": "Ottieni asserzioni per l'elemento con ID Q42",

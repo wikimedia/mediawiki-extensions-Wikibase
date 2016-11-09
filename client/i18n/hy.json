@@ -3,7 +3,8 @@
 		"authors": [
 			"Vadgt",
 			"Xelgen",
-			"Դավիթ Սարոյան"
+			"Դավիթ Սարոյան",
+			"Irus"
 		]
 	},
 	"tooltip-t-wikibase": "Հղում տվյալների աղբյուրի համապատասխան գրառմանը",
@@ -29,5 +30,5 @@
 	"wikibase-rc-show-wikidata-pref": "Վերջին փոփոխություններում ցույց տալ {{grammar:genitive|{{WBREPONAME}}}} խմբագրումները",
 	"wikibase-rc-wikibase-edit-letter": "Դ",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}ի խմբագրում",
-	"wikibase-otherprojects": "Քույր նախագծերում"
+	"wikibase-otherprojects": "Այլ նախագծերում"
 }

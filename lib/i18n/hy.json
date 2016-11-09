@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Xelgen"
+			"Xelgen",
+			"Kareyac"
 		]
 	},
+	"wikibase-error-ui-no-external-page": "\"$2\" էջը չի հաջողվել գտնել \"$1\"-ում",
 	"wikibase-sitelinks-wikipedia": "Վիքիպեդիա",
 	"datatypes-type-commonsMedia": "Տեսաձայնային նիշք Վիքիպահեստում"
 }
