@@ -32,6 +32,7 @@ use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\EntitiesWithoutTermFinder;
+use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Store\Sql\EntityPerPageTable;
 use Wikibase\Repo\Store\Sql\SqlEntitiesWithoutTermFinder;
@@ -301,7 +302,7 @@ class SqlStore implements Store {
 	}
 
 	/**
-	 * @see Store::newEntitiesWithoutTerm
+	 * @see Store::newEntitiesWithoutTermFinder
 	 *
 	 * @since 0.5
 	 *
@@ -312,11 +313,11 @@ class SqlStore implements Store {
 	}
 
 	/**
-	 * @see Store::newItemsWithoutSitelinks
+	 * @see Store::newItemsWithoutSitelinksFinder
 	 *
 	 * @since 0.5
 	 *
-	 * @return ItemsWithoutSitelinks
+	 * @return ItemsWithoutSitelinksFinder
 	 */
 	public function newItemsWithoutSitelinksFinder() {
 		return new SqlItemsWithoutSitelinksFinder(
