@@ -205,7 +205,7 @@ function wikibase.setupInterface()
 	end
 
 
-	-- Render a Snak from its serialization
+	-- Render a Snak from its serialization as escaped plain text.
 	--
 	-- @param {table} snakSerialization
 	wikibase.renderSnak = function( snakSerialization )
@@ -214,13 +214,31 @@ function wikibase.setupInterface()
 		return php.renderSnak( snakSerialization )
 	end
 
-	-- Render a list of Snaks from their serialization
+	-- Render a Snak from its serialization as rich wikitext.
+	--
+	-- @param {table} snakSerialization
+	wikibase.formatValue = function( snakSerialization )
+		checkType( 'formatValue', 1, snakSerialization, 'table' )
+
+		return php.formatValue( snakSerialization )
+	end
+
+	-- Render a list of Snaks from their serialization as escaped plain text.
 	--
 	-- @param {table} snaksSerialization
 	wikibase.renderSnaks = function( snaksSerialization )
 		checkType( 'renderSnaks', 1, snaksSerialization, 'table' )
 
 		return php.renderSnaks( snaksSerialization )
+	end
+
+	-- Render a list of Snaks from their serialization as rich wikitext.
+	--
+	-- @param {table} snaksSerialization
+	wikibase.formatValues = function( snaksSerialization )
+		checkType( 'formatValues', 1, snaksSerialization, 'table' )
+
+		return php.formatValues( snaksSerialization )
 	end
 
 	-- Returns a property id for the given label or id
