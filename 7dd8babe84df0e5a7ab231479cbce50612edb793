@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_50d3a705",
+        "filename": "lib/includes/Store/DispatchingEntityRevisionLookup.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-09T17:15:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb4ebfb_26fb50bc",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 8
+      },
+      "revId": "7dd8babe84df0e5a7ab231479cbce50612edb793",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_06a614be",
         "filename": "lib/includes/Store/DispatchingEntityRevisionLookup.php",
         "patchSetId": 9
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_70d8e322",
+        "filename": "lib/includes/Store/DispatchingEntityRevisionLookup.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-09T17:15:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb4ebfb_06a614be",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 43,
+        "endChar": 11
+      },
+      "revId": "7dd8babe84df0e5a7ab231479cbce50612edb793",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_0634d4a5",
         "filename": "lib/includes/Store/DispatchingEntityRevisionLookup.php",
         "patchSetId": 9
@@ -59,6 +107,30 @@
       "writtenOn": "2016-11-08T14:07:29Z",
       "side": 1,
       "message": "You could add the possible options like above.",
+      "range": {
+        "startLine": 68,
+        "startChar": 18,
+        "endLine": 68,
+        "endChar": 23
+      },
+      "revId": "7dd8babe84df0e5a7ab231479cbce50612edb793",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_909b6f68",
+        "filename": "lib/includes/Store/DispatchingEntityRevisionLookup.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-09T17:15:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb4ebfb_0634d4a5",
       "range": {
         "startLine": 68,
         "startChar": 18,
