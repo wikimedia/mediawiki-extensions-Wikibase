@@ -108,83 +108,12 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @dataProvider richWikitextSnakProvider
+	 * Snaks which are formatted the same in the escaped plain text
+	 * and in the rich wikitext formatting.
+	 *
+	 * @return array[]
 	 */
-	public function testRichWikitextOutput( $expected, $snak ) {
-		// This is an integration test, use the global factory
-		$factory = WikibaseClient::getDefaultInstance()->getDataAccessSnakFormatterFactory();
-		$formatter = $factory->newRichWikitextSnakFormatter(
-			Language::factory( 'en' ),
-			$this->getMock( UsageAccumulator::class )
-		);
-
-		$this->assertSame( $expected, $formatter->formatSnak( $snak ) );
-	}
-
-	public function richWikitextSnakProvider() {
-		$namespacedFileName = Title::newFromText( 'A_file name.jpg', NS_FILE )->getPrefixedText();
-
-		return [
-			'commonsMedia' => [
-				'<span>[[' . $namespacedFileName . '|frameless]]</span>',
-				new PropertyValueSnak(
-					new PropertyId( 'P1' ),
-					new StringValue( 'A_file name.jpg' )
-				)
-			],
-			'string' => [
-				'<span>A string!</span>',
-				new PropertyValueSnak(
-					new PropertyId( 'P5' ),
-					new StringValue( 'A string!' )
-				)
-			],
-			'external-id' => [
-				'<span>An identifier</span>',
-				new PropertyValueSnak(
-					new PropertyId( 'P8' ),
-					new StringValue( 'An identifier' )
-				)
-			],
-			'external-id with formatter url' => [
-				'<span>[https://dataAccessSnakFormatterOutputFormatTest/P10/a+b+c a b c]</span>',
-				new PropertyValueSnak(
-					new PropertyId( 'P10' ),
-					new StringValue( 'a b c' )
-				)
-			],
-			'wikibase-entityid without sitelink' => [
-				'<span>label &#91;&#91;with&#93;&#93; wikitext</span>',
-				new PropertyValueSnak(
-					new PropertyId( 'P9' ),
-					new EntityIdValue( new ItemId( 'Q12' ) )
-				)
-			],
-			'wikibase-entityid with sitelink' => [
-				'<span>[[Linked page|This item has a sitelink]]</span>',
-				new PropertyValueSnak(
-					new PropertyId( 'P9' ),
-					new EntityIdValue( new ItemId( 'Q13' ) )
-				)
-			],
-		];
-	}
-
-	/**
-	 * @dataProvider escapedPlainTextSnakProvider
-	 */
-	public function testEscapedPlainTextOutput( $expected, $snak ) {
-		// This is an integration test, use the global factory
-		$factory = WikibaseClient::getDefaultInstance()->getDataAccessSnakFormatterFactory();
-		$formatter = $factory->newEscapedPlainTextSnakFormatter(
-			Language::factory( 'en' ),
-			$this->getMock( UsageAccumulator::class )
-		);
-
-		$this->assertSame( $expected, $formatter->formatSnak( $snak ) );
-	}
-
-	public function escapedPlainTextSnakProvider() {
+	private function getGenericSnaks() {
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 		$repoConceptBaseUri = $settings->getSetting( 'repoConceptBaseUri' );
 
@@ -192,13 +121,6 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 		$sampleUrl = 'https://www.wikidata.org/w/index.php?title=Q2013&action=history';
 
 		return [
-			'commonsMedia' => [
-				'A_file name.jpg',
-				new PropertyValueSnak(
-					new PropertyId( 'P1' ),
-					new StringValue( 'A_file name.jpg' )
-				)
-			],
 			'globecoordinate' => [
 				'12°0&#39;0&#34;N, 34°0&#39;0&#34;E',
 				new PropertyValueSnak(
@@ -289,25 +211,11 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 					new StringValue( 'a [[b]] c' )
 				)
 			],
-			'external-id with formatter URL' => [
-				'a b c',
-				new PropertyValueSnak(
-					new PropertyId( 'P10' ),
-					new StringValue( 'a b c' )
-				)
-			],
 			'wikibase-entityid without sitelink' => [
 				'label &#91;&#91;with&#93;&#93; wikitext',
 				new PropertyValueSnak(
 					new PropertyId( 'P9' ),
 					new EntityIdValue( new ItemId( 'Q12' ) )
-				)
-			],
-			'wikibase-entityid with sitelink' => [
-				'This item has a sitelink',
-				new PropertyValueSnak(
-					new PropertyId( 'P9' ),
-					new EntityIdValue( new ItemId( 'Q13' ) )
 				)
 			],
 			'novalue' => [
@@ -319,6 +227,99 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 				new PropertySomeValueSnak( $p4 )
 			],
 		];
+	}
+
+	/**
+	 * @dataProvider richWikitextSnakProvider
+	 */
+	public function testRichWikitextOutput( $expected, $snak ) {
+		// This is an integration test, use the global factory
+		$factory = WikibaseClient::getDefaultInstance()->getDataAccessSnakFormatterFactory();
+		$formatter = $factory->newRichWikitextSnakFormatter(
+			Language::factory( 'en' ),
+			$this->getMock( UsageAccumulator::class )
+		);
+
+		$this->assertSame( $expected, $formatter->formatSnak( $snak ) );
+	}
+
+	public function richWikitextSnakProvider() {
+		$genericSnaks = $this->getGenericSnaks();
+		$namespacedFileName = Title::newFromText( 'A_file name.jpg', NS_FILE )->getPrefixedText();
+
+		$cases = [
+			'commonsMedia' => [
+				'<span>[[' . $namespacedFileName . '|frameless]]</span>',
+				new PropertyValueSnak(
+					new PropertyId( 'P1' ),
+					new StringValue( 'A_file name.jpg' )
+				)
+			],
+			'external-id with formatter url' => [
+				'<span>[https://dataAccessSnakFormatterOutputFormatTest/P10/a+b+c a b c]</span>',
+				new PropertyValueSnak(
+					new PropertyId( 'P10' ),
+					new StringValue( 'a b c' )
+				)
+			],
+			'wikibase-entityid with sitelink' => [
+				'<span>[[Linked page|This item has a sitelink]]</span>',
+				new PropertyValueSnak(
+					new PropertyId( 'P9' ),
+					new EntityIdValue( new ItemId( 'Q13' ) )
+				)
+			],
+		];
+
+		foreach ( $genericSnaks as $testName => $case ) {
+			// This output is always wrapped in spans.
+			$case[0] = '<span>' . $case[0] . '</span>';
+			$cases[$testName] = $case;
+		}
+
+		return $cases;
+	}
+
+	/**
+	 * @dataProvider escapedPlainTextSnakProvider
+	 */
+	public function testEscapedPlainTextOutput( $expected, $snak ) {
+		// This is an integration test, use the global factory
+		$factory = WikibaseClient::getDefaultInstance()->getDataAccessSnakFormatterFactory();
+		$formatter = $factory->newEscapedPlainTextSnakFormatter(
+			Language::factory( 'en' ),
+			$this->getMock( UsageAccumulator::class )
+		);
+
+		$this->assertSame( $expected, $formatter->formatSnak( $snak ) );
+	}
+
+	public function escapedPlainTextSnakProvider() {
+		$cases = [
+			'commonsMedia' => [
+				'A_file name.jpg',
+				new PropertyValueSnak(
+					new PropertyId( 'P1' ),
+					new StringValue( 'A_file name.jpg' )
+				)
+			],
+			'external-id with formatter URL' => [
+				'a b c',
+				new PropertyValueSnak(
+					new PropertyId( 'P10' ),
+					new StringValue( 'a b c' )
+				)
+			],
+			'wikibase-entityid with sitelink' => [
+				'This item has a sitelink',
+				new PropertyValueSnak(
+					new PropertyId( 'P9' ),
+					new EntityIdValue( new ItemId( 'Q13' ) )
+				)
+			],
+		];
+
+		return $cases + $this->getGenericSnaks();
 	}
 
 }
