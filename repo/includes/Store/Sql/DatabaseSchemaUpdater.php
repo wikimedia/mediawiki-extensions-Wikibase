@@ -201,6 +201,7 @@ class DatabaseSchemaUpdater {
 		$wikiPageEntityLookup = new WikiPageEntityRevisionLookup(
 			$contentCodec,
 			new WikiPageEntityMetaDataLookup( $wikibaseRepo->getEntityNamespaceLookup() ),
+			$wikibaseRepo->getEntityIdParser(),
 			false
 		);
 
