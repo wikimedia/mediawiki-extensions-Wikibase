@@ -50,9 +50,9 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	private $entityAccessor = null;
 
 	/**
-	 * @var SnakSerializationRenderer|null
+	 * @var SnakSerializationRenderer[]
 	 */
-	private $snakSerializationRenderer = null;
+	private $snakSerializationRenderer = [];
 
 	/**
 	 * @var LanguageFallbackChain|null
@@ -120,12 +120,12 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	/**
 	 * @return SnakSerializationRenderer
 	 */
-	private function getSnakSerializationRenderer() {
-		if ( $this->snakSerializationRenderer === null ) {
-			$this->snakSerializationRenderer = $this->newSnakSerializationRenderer();
+	private function getSnakSerializationRenderer( $type = 'plain-text' ) {
+		if ( !array_key_exists($type, $this->snakSerializationRenderer)) {
+			$this->snakSerializationRenderer[$type] = $this->newSnakSerializationRenderer( $type );
 		}
 
-		return $this->snakSerializationRenderer;
+		return $this->snakSerializationRenderer[$type];
 	}
 
 	/**
@@ -217,11 +217,14 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		);
 	}
 
-	private function newSnakSerializationRenderer() {
+	private function newSnakSerializationRenderer( $type ) {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		$snakFormatterFactory = $wikibaseClient->getDataAccessSnakFormatterFactory();
-		$snakFormatter = $snakFormatterFactory->newEscapedPlainTextSnakFormatter(
+		$snakFormatter = $type === 'rich-wikitext' ? $snakFormatterFactory->newRichWikitextSnakFormatter(
+			$this->getLanguage(),
+			$this->getUsageAccumulator()
+		) : $snakFormatterFactory->newEscapedPlainTextSnakFormatter(
 			$this->getLanguage(),
 			$this->getUsageAccumulator()
 		);
@@ -295,7 +298,9 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			'getSetting' => array( $this, 'getSetting' ),
 			'getEntityUrl' => array( $this, 'getEntityUrl' ),
 			'renderSnak' => array( $this, 'renderSnak' ),
+			'renderRichSnak' => array( $this, 'renderRichSnak' ),
 			'renderSnaks' => array( $this, 'renderSnaks' ),
+			'renderRichSnaks' => array( $this, 'renderRichSnaks' ),
 			'getEntityId' => array( $this, 'getEntityId' ),
 			'getUserLang' => array( $this, 'getUserLang' ),
 			'getDescription' => array( $this, 'getDescription' ),
@@ -465,6 +470,16 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			throw new ScribuntoException( 'wikibase-error-deserialize-error' );
 		}
 	}
+	public function renderRichSnak( $snakSerialization ) {
+		$this->checkType( 'renderRichSnak', 1, $snakSerialization, 'table' );
+
+		try {
+			$ret = array( $this->getSnakSerializationRenderer( 'rich-wikitext' )->renderSnak( $snakSerialization ) );
+			return $ret;
+		} catch ( DeserializationException $e ) {
+			throw new ScribuntoException( 'wikibase-error-deserialize-error' );
+		}
+	}
 
 	/**
 	 * Wrapper for renderSnaks in SnakRenderer
@@ -481,6 +496,16 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 		try {
 			$ret = array( $this->getSnakSerializationRenderer()->renderSnaks( $snaksSerialization ) );
+			return $ret;
+		} catch ( DeserializationException $e ) {
+			throw new ScribuntoException( 'wikibase-error-deserialize-error' );
+		}
+	}
+	public function renderRichSnaks( $snaksSerialization ) {
+		$this->checkType( 'renderRichSnaks', 1, $snaksSerialization, 'table' );
+
+		try {
+			$ret = array( $this->getSnakSerializationRenderer( 'rich-wikitext' )->renderSnaks( $snaksSerialization ) );
 			return $ret;
 		} catch ( DeserializationException $e ) {
 			throw new ScribuntoException( 'wikibase-error-deserialize-error' );

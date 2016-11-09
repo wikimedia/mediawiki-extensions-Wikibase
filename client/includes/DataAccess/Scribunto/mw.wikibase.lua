@@ -214,6 +214,13 @@ function wikibase.setupInterface()
 		return php.renderSnak( snakSerialization )
 	end
 
+	-- TODO
+	wikibase.renderRichSnak = function( snakSerialization )
+		checkType( 'renderRichSnak', 1, snakSerialization, 'table' )
+
+		return php.renderRichSnak( snakSerialization )
+	end
+
 	-- Render a list of Snaks from their serialization
 	--
 	-- @param {table} snaksSerialization
@@ -221,6 +228,15 @@ function wikibase.setupInterface()
 		checkType( 'renderSnaks', 1, snaksSerialization, 'table' )
 
 		return php.renderSnaks( snaksSerialization )
+	end
+
+	-- TODO
+	--
+	-- @param {table} snaksSerialization
+	wikibase.renderRichSnaks = function( snaksSerialization )
+		checkType( 'renderRichSnaks', 1, snaksSerialization, 'table' )
+
+		return php.renderRichSnaks( snaksSerialization )
 	end
 
 	-- Returns a property id for the given label or id
