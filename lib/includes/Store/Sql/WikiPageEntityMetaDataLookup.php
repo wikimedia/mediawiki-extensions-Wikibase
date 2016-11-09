@@ -285,9 +285,14 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 				continue;
 			}
 
+			$idSerialization = $entityId->getSerialization();
+			if ( $entityId->isForeign() ) {
+				$idSerialization = $entityId->getLocalPart();
+			}
+
 			$where[] = $db->makeList(
 				[
-					$db->addQuotes( $entityId->getSerialization() ) . '=page_title',
+					$db->addQuotes( $idSerialization ) . '=page_title',
 					$namespace . '=page_namespace'
 				],
 				LIST_AND
