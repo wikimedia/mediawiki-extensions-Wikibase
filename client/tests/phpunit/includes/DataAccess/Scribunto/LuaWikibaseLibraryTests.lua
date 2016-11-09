@@ -44,11 +44,25 @@ local function testRenderSnak()
 	return mw.wikibase.renderSnak( snak )
 end
 
+local function testFormatValue()
+	local entity = mw.wikibase.getEntityObject( 'Q32487' )
+	local snak = entity['claims']['P342'][1]['qualifiers']['P342'][1]
+
+	return mw.wikibase.formatValue( snak )
+end
+
 local function testRenderSnaks()
 	local entity = mw.wikibase.getEntityObject( 'Q32487' )
 	local snaks = entity['claims']['P342'][1]['qualifiers']
 
 	return mw.wikibase.renderSnaks( snaks )
+end
+
+local function testFormatValues()
+	local entity = mw.wikibase.getEntityObject( 'Q32487' )
+	local snaks = entity['claims']['P342'][1]['qualifiers']
+
+	return mw.wikibase.formatValues( snaks )
 end
 
 local tests = {
@@ -162,12 +176,26 @@ local tests = {
 	  args = { 'meep' },
 	  expect = "bad argument #1 to 'renderSnak' (table expected, got string)"
 	},
+	{ name = 'mw.wikibase.formatValue', func = testFormatValue, type='ToString',
+	  expect = { '<span>A qualifier Snak</span>' }
+	},
+	{ name = 'mw.wikibase.formatValue (must be table)', func = mw.wikibase.formatValue,
+	  args = { 'meep' },
+	  expect = "bad argument #1 to 'formatValue' (table expected, got string)"
+	},
 	{ name = 'mw.wikibase.renderSnaks', func = testRenderSnaks, type='ToString',
 	  expect = { 'A qualifier Snak, Moar qualifiers' }
 	},
 	{ name = 'mw.wikibase.renderSnaks (must be table)', func = mw.wikibase.renderSnaks,
 	  args = { 'meep' },
 	  expect = "bad argument #1 to 'renderSnaks' (table expected, got string)"
+	},
+	{ name = 'mw.wikibase.formatValues', func = testFormatValues, type='ToString',
+	  expect = { '<span><span>A qualifier Snak</span>, <span>Moar qualifiers</span></span>' }
+	},
+	{ name = 'mw.wikibase.formatValues (must be table)', func = mw.wikibase.formatValues,
+	  args = { 'meep' },
+	  expect = "bad argument #1 to 'formatValues' (table expected, got string)"
 	},
 	{ name = 'mw.wikibase.resolvePropertyId', func = mw.wikibase.resolvePropertyId,
 	  args = { 'LuaTestStringProperty' },
