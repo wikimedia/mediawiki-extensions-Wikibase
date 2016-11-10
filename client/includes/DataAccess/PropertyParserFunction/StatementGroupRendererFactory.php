@@ -109,17 +109,11 @@ class StatementGroupRendererFactory {
 		Language $language,
 		UsageAccumulator $usageAccumulator
 	) {
-		if ( $type === 'rich-wikitext' ) {
-			$snakFormatter = $this->dataAccessSnakFormatterFactory->newRichWikitextSnakFormatter(
-				$language,
-				$usageAccumulator
-			);
-		} else {
-			$snakFormatter = $this->dataAccessSnakFormatterFactory->newEscapedPlainTextSnakFormatter(
-				$language,
-				$usageAccumulator
-			);
-		}
+		$snakFormatter = $this->dataAccessSnakFormatterFactory->newSnakFormatter(
+			$language,
+			$usageAccumulator,
+			$type
+		);
 
 		$entityStatementsRenderer = new StatementTransclusionInteractor(
 			$language,
