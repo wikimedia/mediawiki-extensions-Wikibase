@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_3e78e5be",
+        "filename": "lib/includes/Store/DispatchingEntityRevisionLookup.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-10T20:50:35Z",
+      "side": 1,
+      "message": "This should document how IDs from unknown repos are handled.",
+      "revId": "7ea8dc04ea3f26f42f504ea846c985ec1fa26e3d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
