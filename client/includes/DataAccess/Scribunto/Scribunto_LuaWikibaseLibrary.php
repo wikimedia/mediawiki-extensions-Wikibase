@@ -221,7 +221,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		$snakFormatterFactory = $wikibaseClient->getDataAccessSnakFormatterFactory();
-		$snakFormatter = $snakFormatterFactory->newEscapedPlainTextSnakFormatter(
+		$snakFormatter = $snakFormatterFactory->newWikitextSnakFormatter(
 			$this->getLanguage(),
 			$this->getUsageAccumulator()
 		);
