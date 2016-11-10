@@ -14,7 +14,8 @@
 			"Gustronico",
 			"Littledogboy",
 			"YoViajo",
-			"Dgstranz"
+			"Dgstranz",
+			"Igv"
 		]
 	},
 	"wikibase-lib-desc": "Contiene una funcionalidad común para las extensiones Wikibase y cliente de Wikibase.",
@@ -31,8 +32,8 @@
 	"wikibase-error-remove-timeout": "Estamos experimentando dificultades técnicas. No se pudo completar tu eliminación.",
 	"wikibase-error-autocomplete-connection": "No se pudo consultar la API del sitio. Inténtalo de nuevo más tarde.",
 	"wikibase-error-autocomplete-response": "El servidor respondió: $1",
-	"wikibase-error-ui-no-external-page": "No se encontró el artículo especificado en el sitio correspondiente.",
-	"wikibase-error-ui-edit-conflict": "Hay un conflicto de edición. Guarda los cambios localmente, vuelve a cargar esta página y guárdalos de nuevo.",
+	"wikibase-error-ui-no-external-page": "Una página \"$2\" no ha podido ser encontrada en \"$1\"",
+	"wikibase-error-ui-edit-conflict": "El mismo valor ha sido editado en el intermedio, causando un conflicto de edición. Por favor, recargue la página",
 	"wikibase-language-fallback-transliteration-hint": "$1 (transliterado)",
 	"wikibase-quantitydetails-amount": "Cantidad",
 	"wikibase-quantitydetails-upperbound": "Límite superior",

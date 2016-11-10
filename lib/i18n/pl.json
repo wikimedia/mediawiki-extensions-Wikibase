@@ -30,7 +30,7 @@
 	"wikibase-error-autocomplete-connection": "Nie można połączyć się z API witryny. Spróbuj ponownie później.",
 	"wikibase-error-autocomplete-response": "Serwer odpowiedział: $1",
 	"wikibase-error-ui-no-external-page": "Nie można odnaleźć artykułu na odpowiadającej witrynie.",
-	"wikibase-error-ui-edit-conflict": "Wystąpił konflikt edycji. Zapisz swoje zmiany lokalnie, przeładuj stronę i zapisz je ponownie.",
+	"wikibase-error-ui-edit-conflict": "Ta sama wartość była edytowana w tym samym czasie, co spowodowało konflikt edycji. Proszę przeładować stronę.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (transliterowane)",
 	"wikibase-quantitydetails-amount": "Liczność",
 	"wikibase-quantitydetails-upperbound": "Górna granica",

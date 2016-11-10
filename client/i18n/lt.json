@@ -12,10 +12,15 @@
 	},
 	"wikibase-client-desc": "Wikibase išplėtimo klientas",
 	"tooltip-t-wikibase": "Nuoroda į susietą duomenų saugyklos įrašą",
+	"apihelp-query+wbentityusage-param-prop": "Savybės, kurias pridėti prie rezultato.",
+	"apihelp-query+wbentityusage-paramvalue-prop-url": "Jei įjungta, subjekto url bus pridėtas",
 	"apihelp-query+wbentityusage-param-entities": "Gražinti tik puslapį, kuris naudoja šiuos objektus.",
 	"apihelp-query+wbentityusage-param-limit": "Kiek objektų panaudojimų gražinti.",
+	"apihelp-query+wbentityusage-example-simple": "Gauti subjektus, panaudotus puslapyje <kbd>Main Page</kbd>.",
 	"apihelp-query+wblistentityusage-description": "Gražina visus puslapius, kurie naudoja pateiktus objektų ID.",
+	"apihelp-query+wblistentityusage-param-prop": "Savybės, kurias pridėti prie rezultato.",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "jei įjungta, objekto url bus pridėtas prie rezultato.",
+	"apihelp-query+wblistentityusage-param-aspect": "Gražinti tik subjekto ID, kurie naudoja šį aspektą.",
 	"apihelp-query+wblistentityusage-param-entities": "Objektai, kurie buvo panaudoti.",
 	"apihelp-query+wblistentityusage-param-limit": "Kiek objekto naudojimų gražinti.",
 	"apihelp-query+wblistentityusage-example-simple": "Gauti puslapius, kurie naudoją objektą <kbd>Q2</kbd>.",
@@ -94,9 +99,11 @@
 	"wikibase-pageinfo-entity-usage-S": "Svetainės nuoroda",
 	"wikibase-pageinfo-entity-usage-L": "Etiketė: $1",
 	"wikibase-pageinfo-entity-usage-T": "Pavadinimas",
+	"wikibase-pageinfo-entity-usage-X": "Visi subjekto duomenys",
 	"wikibase-pageinfo-entity-usage-O": "Kita (Pareiškimai)",
 	"wikibase-property-render-error": "Nepavyko pavaizduoti savybės $1: $2",
 	"wikibase-otherprojects": "Kituose projektuose",
 	"wikibase-otherprojects-beta-message": "Kitų projektų šoninė juosta",
-	"wikibase-otherprojects-beta-description": "Prie šoninės juostos prideda \"{{int:wikibase-otherprojects}}\" sekciją, pateikiančią nuorodas į kitus Wikimedia projektus, pagrįstus {{WBREPONAME}} duomenimis."
+	"wikibase-otherprojects-beta-description": "Prie šoninės juostos prideda \"{{int:wikibase-otherprojects}}\" sekciją, pateikiančią nuorodas į kitus Wikimedia projektus, pagrįstus {{WBREPONAME}} duomenimis.",
+	"notification-link-text-view-item": "{{GENDER:$1|Žiūrėti}} elementą"
 }

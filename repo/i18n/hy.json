@@ -14,6 +14,7 @@
 	"wikibase-edit": "խմբագրել",
 	"wikibase-add": "ավելացնել",
 	"wikibase-statementlistview-add": "ավելացնել",
+	"wikibase-statementlistview-add-tooltip": "Ավելացնել նոր նշանակություն",
 	"wikibase-statementgrouplistview-add": "ավելացնել",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Այլ լեզուներով",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Կարգավորել",
