@@ -41,13 +41,14 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$snakFormatterFactory = $wikibaseClient->getDataAccessSnakFormatterFactory();
-		$plainTextSnakFormatter = $snakFormatterFactory->newEscapedPlainTextSnakFormatter(
+		$plainTextSnakFormatter = $snakFormatterFactory->newWikitextSnakFormatter(
 			$lang,
 			$this->getUsageAccumulator()
 		);
-		$richWikitextSnakFormatter = $snakFormatterFactory->newRichWikitextSnakFormatter(
+		$richWikitextSnakFormatter = $snakFormatterFactory->newWikitextSnakFormatter(
 			$lang,
-			$this->getUsageAccumulator()
+			$this->getUsageAccumulator(),
+			'rich-wikitext'
 		);
 
 		$entityLookup = $wikibaseClient->getRestrictedEntityLookup();
