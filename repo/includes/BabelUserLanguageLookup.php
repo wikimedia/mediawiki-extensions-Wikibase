@@ -28,6 +28,21 @@ class BabelUserLanguageLookup implements UserLanguageLookup {
 	private $babelLanguages = array();
 
 	/**
+	 * @param User $user
+	 *
+	 * @return string[]
+	 */
+	private function getTranslateLanguages( User $user ) {
+		$languages = explode( ',', $user->getOption( 'translate-editlangs', '' ) );
+		$languages = array_map( 'trim', $languages );
+		$languages = array_filter( $languages, function( $language ) {
+			return $language && strtolower( $language ) !== 'default';
+		} );
+
+		return $languages;
+	}
+
+	/**
 	 * @param User $user The current user.
 	 *
 	 * @return string[] List of language codes in the users Babel box.
@@ -60,7 +75,10 @@ class BabelUserLanguageLookup implements UserLanguageLookup {
 		// TODO: If Universal Language Selector (ULS) supports setting additional/alternative
 		// languages, these should be used in addition or instead of Babel (also needs API support).
 
-		$languages = $this->getBabelLanguages( $user );
+		$languages = array_unique( array_merge(
+			$this->getTranslateLanguages( $user ),
+			$this->getBabelLanguages( $user )
+		) );
 
 		// All languages in MediaWiki are lower-cased, while Babel doesn't enforce
 		// that for regions.
