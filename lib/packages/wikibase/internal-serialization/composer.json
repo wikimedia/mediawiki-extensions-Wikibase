@@ -33,7 +33,7 @@
 		"phpmd/phpmd": "~2.3",
 		"data-values/common": "~0.3.0|~0.2.0",
 		"data-values/geo": "~1.1",
-		"data-values/number": "~0.5.0",
+		"data-values/number": ">=0.1 <0.9",
 		"data-values/time": "~0.7.0"
 	},
 	"autoload": {
