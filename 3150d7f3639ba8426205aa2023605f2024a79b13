@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_3c9fd463",
+        "filename": "lib/includes/Store/DispatchingTermBuffer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-10T08:33:51Z",
+      "side": 1,
+      "message": "Per what\u0027s said in T150328 this should rather not fail when some of $entityIds are coming from unknown (ie. not configured) repository but rather be skipped etc instead.\n\nThis probably also applies to getPrefetchedTerm",
+      "revId": "3150d7f3639ba8426205aa2023605f2024a79b13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
