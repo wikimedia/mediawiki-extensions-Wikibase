@@ -88,6 +88,30 @@
     },
     {
       "key": {
+        "uuid": "4eb4ebfb_dbb353e7",
+        "filename": "lib/includes/Store/DispatchingTermBuffer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-10T18:26:57Z",
+      "side": 1,
+      "message": "just drop the array_values(), the keys should be ignored anyway.",
+      "parentUuid": "4eb4ebfb_18d9c126",
+      "range": {
+        "startLine": 80,
+        "startChar": 4,
+        "endLine": 80,
+        "endChar": 16
+      },
+      "revId": "3150d7f3639ba8426205aa2023605f2024a79b13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_38c35d3f",
         "filename": "lib/includes/Store/DispatchingTermBuffer.php",
         "patchSetId": 3
@@ -99,6 +123,30 @@
       "writtenOn": "2016-11-10T16:40:22Z",
       "side": 1,
       "message": "This could strip the foreign repository name from the serialization, couldn\u0027t it?",
+      "range": {
+        "startLine": 113,
+        "startChar": 15,
+        "endLine": 113,
+        "endChar": 31
+      },
+      "revId": "3150d7f3639ba8426205aa2023605f2024a79b13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_9be4abdc",
+        "filename": "lib/includes/Store/DispatchingTermBuffer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-10T18:26:57Z",
+      "side": 1,
+      "message": "it could, but why bother?",
+      "parentUuid": "4eb4ebfb_38c35d3f",
       "range": {
         "startLine": 113,
         "startChar": 15,
@@ -128,6 +176,47 @@
         "endLine": 115,
         "endChar": 31
       },
+      "revId": "3150d7f3639ba8426205aa2023605f2024a79b13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_1bd9bb26",
+        "filename": "lib/includes/Store/DispatchingTermBuffer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-10T18:26:57Z",
+      "side": 1,
+      "message": "It doesn\u0027t do any harm, but as you say, it\u0027s not really needed. TermBuffer implementations shouldn\u0027t expect the list of IDs to be unique. So this can be dropped in the name of simplicity. I don\u0027t consider that a blocker, though.",
+      "parentUuid": "4eb4ebfb_98e4b1dc",
+      "range": {
+        "startLine": 115,
+        "startChar": 27,
+        "endLine": 115,
+        "endChar": 31
+      },
+      "revId": "3150d7f3639ba8426205aa2023605f2024a79b13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_7bfe7f67",
+        "filename": "lib/includes/Store/DispatchingTermBuffer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-10T18:26:57Z",
+      "side": 1,
+      "message": "just return null here, as per T150328.",
       "revId": "3150d7f3639ba8426205aa2023605f2024a79b13",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
