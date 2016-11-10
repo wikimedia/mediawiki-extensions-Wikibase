@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_9e96d940",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-10T19:50:06Z",
+      "side": 1,
+      "message": "As Thiemo pointed out on a follow-up of this change, perhaps it would make more sense to push the logic for stripping and checking the prefix into EntityMetaDataAccessor, instead of feeding it fakes from here.\n\nI think we can even avoid constructing local EntityId objects - it should be enough to have the local part as a string. \n\nIdeally, things that get an actual EntityId object should either be prepared to handle any repo, or check the repo and then use the local part as a string.",
+      "revId": "affb3e1758fc76267ef50f1e5050683436a46ead",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
