@@ -68,8 +68,8 @@ interface EntityRevisionLookup {
 	 * Implementations of this method must not silently resolve redirects.
 	 *
 	 * @param EntityId $entityId
-	 * @param string $mode LATEST_FROM_SLAVE or LATEST_FROM_MASTER. LATEST_FROM_MASTER would force the
-	 *        revision to be determined from the canonical master database.
+	 * @param string $mode LATEST_FROM_SLAVE, LATEST_FROM_SLAVE_WITH_FALLBACK or LATEST_FROM_MASTER.
+	 *        LATEST_FROM_MASTER would force the revision to be determined from the canonical master database.
 	 *
 	 * @return int|false Returns false in case the entity doesn't exist (this includes redirects).
 	 */
