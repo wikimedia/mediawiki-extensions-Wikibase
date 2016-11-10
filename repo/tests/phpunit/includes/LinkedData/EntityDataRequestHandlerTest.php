@@ -250,6 +250,9 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			$this->assertEquals( $expectedStatusCode, $e->getStatusCode(), 'status code' );
 			$this->assertRegExp( $expectedOutput, $e->getHTML(), 'error output' );
 		}
+
+		// We always set "Access-Control-Allow-Origin: *"
+		$this->assertSame( '*', $response->getHeader( 'Access-Control-Allow-Origin' ) );
 	}
 
 	public function provideHttpContentNegotiation() {
