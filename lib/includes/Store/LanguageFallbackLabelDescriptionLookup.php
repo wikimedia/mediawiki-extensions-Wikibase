@@ -7,7 +7,6 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
-use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\LanguageFallbackChain;
 
@@ -46,7 +45,7 @@ class LanguageFallbackLabelDescriptionLookup implements LabelDescriptionLookup {
 	 * @param EntityId $entityId
 	 *
 	 * @throws LabelDescriptionLookupException
-	 * @return Term|null
+	 * @return TermFallback|null
 	 */
 	public function getLabel( EntityId $entityId ) {
 		$fetchLanguages = $this->languageFallbackChain->getFetchLanguageCodes();
@@ -64,7 +63,7 @@ class LanguageFallbackLabelDescriptionLookup implements LabelDescriptionLookup {
 	 * @param EntityId $entityId
 	 *
 	 * @throws LabelDescriptionLookupException
-	 * @return Term|null
+	 * @return TermFallback|null
 	 */
 	public function getDescription( EntityId $entityId ) {
 		$fetchLanguages = $this->languageFallbackChain->getFetchLanguageCodes();
