@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2eb1770d_613ab2c2",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-11T17:10:01Z",
+      "side": 1,
+      "message": "you could move that check into isEntityIdFromRightRepository and rename that to checkEntityIdFromRightRepository or something. But meh.",
+      "revId": "26272f457f8f4cdd6d42bf7bf565493f94d6669f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
