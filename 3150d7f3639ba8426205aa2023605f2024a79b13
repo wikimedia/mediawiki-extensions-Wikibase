@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "2eb1770d_fb666f25",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-11T10:39:15Z",
+      "side": 1,
+      "message": "DM bump to 6.3 has been just done in Idd3efea6ec1fbd2df3c13a91db8e11ced12097ae\nBut true, we should have started with making this dependency version change as a separate patch from the beginning, to avoid confusion.",
+      "parentUuid": "2eb1770d_3b8f37d3",
+      "range": {
+        "startLine": 9,
+        "startChar": 24,
+        "endLine": 9,
+        "endChar": 32
+      },
+      "revId": "3150d7f3639ba8426205aa2023605f2024a79b13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_9896f140",
         "filename": "lib/includes/Store/DispatchingTermBuffer.php",
         "patchSetId": 3
