@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2eb1770d_3b8f37d3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-11T10:33:05Z",
+      "side": 1,
+      "message": "I believe Jakob did not change the requirement for DataModel Services yet as the release 3.7 does not exist yet (thus WIP \"tag\" in the commit message).\nDataModel version bump in turn is because it introduces foreign entity stuff which is also needed here. This (DM req bump to 6.3) should most likely happen in a separate patch. I\u0027ll make a patch for it and put it below all related patches.",
+      "parentUuid": "4eb4ebfb_d88c7934",
+      "range": {
+        "startLine": 9,
+        "startChar": 24,
+        "endLine": 9,
+        "endChar": 32
+      },
+      "revId": "3150d7f3639ba8426205aa2023605f2024a79b13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_9896f140",
         "filename": "lib/includes/Store/DispatchingTermBuffer.php",
         "patchSetId": 3
