@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2eb1770d_7ed7edc4",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-11T16:49:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2eb1770d_3eee05b2",
+      "revId": "96840c0766d2465377c04455156a1ffe48ce61d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2eb1770d_5e40b1a8",
         "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2016-11-11T15:52:43Z",
       "side": 1,
       "message": "This breaks assumptions of existing callers, right? I\u0027d rather not do that.",
+      "revId": "96840c0766d2465377c04455156a1ffe48ce61d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2eb1770d_5ed431be",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-11T16:49:42Z",
+      "side": 1,
+      "message": "Not really. I changed the @return doc of this method (same as for all other @return changes in this patch) to be more accurate, I haven\u0027t changed what it actually returns.\n\nSo this method return an array containing either objects or \"false\" values, both could be mixed. So it should be something like (stdClass|false)[] I guess. This doesn\u0027t look too nice, so I changed it to array and expanded the description.",
+      "parentUuid": "2eb1770d_5e40b1a8",
       "revId": "96840c0766d2465377c04455156a1ffe48ce61d0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "2eb1770d_1edea9de",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-11T16:49:42Z",
+      "side": 1,
+      "message": "Agreed. They\u0027re already mixed throughout this class.\nI thought I\u0027d run phpcbf to switch the whole code in this git repo to use short array syntax, to avoid such confusion.\nBut still had to choose the syntax for the new array - would using the long syntax be better? :)",
+      "parentUuid": "2eb1770d_7e436db7",
+      "revId": "96840c0766d2465377c04455156a1ffe48ce61d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2eb1770d_de33a15e",
         "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
         "patchSetId": 6
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "2eb1770d_7eac8d32",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-11T16:49:42Z",
+      "side": 1,
+      "message": "I think you\u0027re right. Trying to load data for wrong ids here means something went bad on higher level, so I agree throwing an exception here makes sense.\nChanged to throw the exception then.",
+      "parentUuid": "2eb1770d_de33a15e",
+      "revId": "96840c0766d2465377c04455156a1ffe48ce61d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2eb1770d_9e3d192c",
         "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
         "patchSetId": 6
@@ -81,6 +153,24 @@
       "writtenOn": "2016-11-11T15:52:43Z",
       "side": 1,
       "message": "We could to the check here, avoiding the additional loop.",
+      "revId": "96840c0766d2465377c04455156a1ffe48ce61d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2eb1770d_de6ba1ed",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-11T16:49:42Z",
+      "side": 1,
+      "message": "As selectRevisionInformationMultiple reading from the database is also called above (line 76) I believe those checks must be done at the beginning of the method.",
+      "parentUuid": "2eb1770d_9e3d192c",
       "revId": "96840c0766d2465377c04455156a1ffe48ce61d0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -115,6 +205,24 @@
       "writtenOn": "2016-11-11T15:52:43Z",
       "side": 1,
       "message": "unrelated, but ok",
+      "revId": "96840c0766d2465377c04455156a1ffe48ce61d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2eb1770d_7e7b6dbe",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-11T16:49:42Z",
+      "side": 1,
+      "message": "As this patch is no longer filtering the input the possibility of getting an empty array is lower, so I removed this check from this patch.\n\nIt is still possible to pass empty array to loadRevisionInformation which leads to not needed DB query, so such checks is sane. I\u0027ll submit it separately (after cleaning the array syntax in this class).",
+      "parentUuid": "2eb1770d_3e4de5e0",
       "revId": "96840c0766d2465377c04455156a1ffe48ce61d0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
