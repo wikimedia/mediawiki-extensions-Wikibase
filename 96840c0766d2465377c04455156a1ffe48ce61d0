@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2eb1770d_3eee05b2",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-11T15:52:43Z",
+      "side": 1,
+      "message": "would be nice to check that this is a valid repo name.",
+      "revId": "96840c0766d2465377c04455156a1ffe48ce61d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2eb1770d_5e40b1a8",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-11T15:52:43Z",
+      "side": 1,
+      "message": "This breaks assumptions of existing callers, right? I\u0027d rather not do that.",
+      "revId": "96840c0766d2465377c04455156a1ffe48ce61d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2eb1770d_7e436db7",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-11T15:52:43Z",
+      "side": 1,
+      "message": "mixing old and new array syntax makes my head hurt...",
+      "revId": "96840c0766d2465377c04455156a1ffe48ce61d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2eb1770d_de33a15e",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-11T15:52:43Z",
+      "side": 1,
+      "message": "In this case, I think we should actually throw an exception.\n\nThe *dispatcher* should be lenient, to avoid breakage. But an WikiPageEntityMetaDataLookup is bound to a specific wiki. When it receives a \"wrong\" EntityId, something is seriously wrong with the configuration, and we should fail hard.\n\nOr am I missing something? Is it possible to get a \"wrong\" EntityId fed to a WikiPageEntityMetaDataLookup, simply by supplying \"bad\" data?",
+      "revId": "96840c0766d2465377c04455156a1ffe48ce61d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2eb1770d_9e3d192c",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-11T15:52:43Z",
+      "side": 1,
+      "message": "We could to the check here, avoiding the additional loop.",
+      "revId": "96840c0766d2465377c04455156a1ffe48ce61d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2eb1770d_1e4a29c9",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-11T15:52:43Z",
+      "side": 1,
+      "message": "why not stdClass[]? or object[]?",
+      "revId": "96840c0766d2465377c04455156a1ffe48ce61d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2eb1770d_3e4de5e0",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-11T15:52:43Z",
+      "side": 1,
+      "message": "unrelated, but ok",
+      "revId": "96840c0766d2465377c04455156a1ffe48ce61d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2eb1770d_fe153da0",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-11T15:52:43Z",
+      "side": 1,
+      "message": "why not stdClass[]? or object[]?",
+      "revId": "96840c0766d2465377c04455156a1ffe48ce61d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
