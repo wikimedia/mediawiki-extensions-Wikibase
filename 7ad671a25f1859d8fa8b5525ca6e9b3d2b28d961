@@ -16,6 +16,24 @@
       "revId": "7ad671a25f1859d8fa8b5525ca6e9b3d2b28d961",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2eb1770d_1ba6bba7",
+        "filename": "client/includes/DataAccess/DataAccessSnakFormatterFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-11-11T08:40:06Z",
+      "side": 1,
+      "message": "Mostly for convenience, to make the patches smaller. I plan to remove this default later when it turns out it is not used.",
+      "parentUuid": "4eb4ebfb_a71d0868",
+      "revId": "7ad671a25f1859d8fa8b5525ca6e9b3d2b28d961",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
