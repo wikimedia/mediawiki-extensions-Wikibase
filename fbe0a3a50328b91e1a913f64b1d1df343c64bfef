@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2eb1770d_fb4d4f9f",
+        "filename": "lib/includes/Store/ForeignEntityRevisionLookupFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-11T10:55:25Z",
+      "side": 1,
+      "message": "We should consider returning singletons for each repo name. Creating a fresh instance for every call seems wasteful. \nDoesn\u0027t have to be in this patch, but i\u0027d like to have a follow up or at least a ticket before this is merged.",
+      "revId": "fbe0a3a50328b91e1a913f64b1d1df343c64bfef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
