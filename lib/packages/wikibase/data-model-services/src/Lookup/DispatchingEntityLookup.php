@@ -52,6 +52,8 @@ class DispatchingEntityLookup implements EntityLookup {
 	 * @param EntityId $entityId
 	 *
 	 * @return null|EntityDocument
+	 * Returns null also when $entityId does not belong to the repository with the configured lookup.
+	 *
 	 * @throws EntityLookupException
 	 */
 	public function getEntity( EntityId $entityId ) {
@@ -67,6 +69,8 @@ class DispatchingEntityLookup implements EntityLookup {
 	 * @param EntityId $entityId
 	 *
 	 * @return bool
+	 * Returns false also when $entityId does not belong to the repository with the configured lookup.
+	 *
 	 * @throws EntityLookupException
 	 */
 	public function hasEntity( EntityId $entityId ) {
