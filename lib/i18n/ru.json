@@ -10,7 +10,8 @@
 			"Александр Сигачёв",
 			"Macofe",
 			"Mailman",
-			"Irus"
+			"Irus",
+			"Kareyac"
 		]
 	},
 	"wikibase-lib-desc": "Общие функции расширений Wikibase и Wikibase Client",
@@ -86,7 +87,7 @@
 	"wikibase-time-precision-Mannum": "$1 миллион{{PLURAL:$1||а|ов}} лет н.э.",
 	"wikibase-time-precision-annum": "$1 {{PLURAL:$1|год|лет|года}} н.э.",
 	"wikibase-time-precision-millennium": "в $1 тысячелети{{PLURAL:$1|е|я|й}}",
-	"wikibase-time-precision-century": "в $1 веке",
+	"wikibase-time-precision-century": "$1 век",
 	"wikibase-time-precision-10annum": "в $1 десятилети{{PLURAL:$1|е|й|я}}",
 	"wikibase-time-precision-BCE-Gannum": "$1 миллиард{{PLURAL:$1||а|ов}} лет до н.э.",
 	"wikibase-time-precision-BCE-Mannum": "$1 миллион{{PLURAL:$1||ов|а}} лет до н.э.",

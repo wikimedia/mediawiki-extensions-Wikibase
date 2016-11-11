@@ -23,7 +23,7 @@
 	"wikibase-error-autocomplete-connection": "לא ניתן לבצע שאילתה מתוך ה־API של האתר. נא לנסות שוב מאוחר יותר.",
 	"wikibase-error-autocomplete-response": "השרת ענה: $1",
 	"wikibase-error-ui-no-external-page": "הדף \"$2\" לא נמצא ב־\"$1\".",
-	"wikibase-error-ui-edit-conflict": "אירעה התנגשות עריכה. נא לשמור את השינויים שלך מקומית, לרענן את הדף ולשמור אותם מחדש.",
+	"wikibase-error-ui-edit-conflict": "אותו הערך נערך בינתיים, וזה גרם להתנגשות עריכה. נא לרענן את הדף.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (מתועתק)",
 	"wikibase-quantitydetails-amount": "כמות",
 	"wikibase-quantitydetails-upperbound": "גבול עליון",

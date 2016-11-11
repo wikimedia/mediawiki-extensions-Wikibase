@@ -20,6 +20,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}}-item",
 	"wikibase-editlinks": "Wysig skakels",
 	"wikibase-editlinkstitle": "Wysig skakels tussen tale",
+	"wikibase-addlinkstitle": "Voeg taalskakels by",
 	"wikibase-linkitem-addlinks": "Voeg skakels by",
 	"wikibase-linkitem-alreadylinked": "Die bladsy waarheen u wil skakel is reeds aan 'n [$1 item] in die sentrale data-resevoir gekoppel, wat skakel na $2 op hierdie webwerf. Items kan slegs na één bladsy per webwerf verwys. Kies 'n ander bladsy om na te skakel.",
 	"wikibase-linkitem-close": "Sluit venster en herlaai die bladsy",
@@ -48,5 +49,18 @@
 	"wikibase-unconnectedpages-format-row": "($1 taalskakel{{PLURAL:$1||s}} op die bladsy)",
 	"wikibase-unconnectedpages-submit": "OK",
 	"pageswithbadges": "\nBladsye met balkies",
-	"wikibase-otherprojects": "Ander projekte"
+	"wikibase-pageswithbadges-badge": "Balkie:",
+	"wikibase-pageswithbadges-submit": "Wys bladsye",
+	"entityusage": "Entiteitsgebruik",
+	"wikibase-entityusage-legend": "Lys bladsye wat 'n gegewe entiteit gebruik",
+	"wikibase-entityusage-entity": "Entiteit:",
+	"wikibase-entityusage-submit": "Wys bladsye",
+	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} item-ID",
+	"wikibase-pageinfo-entity-id-none": "Geen",
+	"wikibase-pageinfo-entity-usage": "{{WBREPONAME}}-entiteite op hierdie bladsy",
+	"wikibase-pageinfo-entity-usage-S": "Koppeling",
+	"wikibase-pageinfo-entity-usage-T": "Titel",
+	"wikibase-pageinfo-entity-usage-X": "Alle entiteitsdata",
+	"wikibase-otherprojects": "Ander projekte",
+	"notification-link-text-view-item": "{{GENDER:$1|Wys}} item"
 }

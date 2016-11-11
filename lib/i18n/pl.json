@@ -75,6 +75,7 @@
 	"wikibase-validator-bad-value-type": "Błędny typ wartości $1, oczekiwano $2",
 	"wikibase-validator-bad-data-type": "Zły typ danych: $1",
 	"wikibase-validator-bad-url": "Adresy URL nie mogą zawierać pewne znaków, takich jak spacje lub nawiasy kwadratowe: $1",
+	"wikibase-validator-url-scheme-missing": "Temu adresowi URL brakuje zapisu typu „https://”: $1",
 	"wikibase-validator-bad-url-scheme": "Schemat adresu URL „$1” nie jest obsługiwany.",
 	"wikibase-validator-unknown-unit": "Nieznana jednostka: $1",
 	"wikibase-validator-not-allowed": "Niepoprawna wartość: $1",

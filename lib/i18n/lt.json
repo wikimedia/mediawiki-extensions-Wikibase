@@ -22,7 +22,7 @@
 	"wikibase-error-remove-timeout": "Mes susidūrėme su techninėmis problemomis. Prašome bandyti dar kartą.",
 	"wikibase-error-autocomplete-connection": "Užklausa į puslapio API nepavyko. Prašome pabandyti vėliau.",
 	"wikibase-error-autocomplete-response": "Serverio atsakas: $1",
-	"wikibase-error-ui-no-external-page": "Nepavyko rasti puslapio „$2“ „$1“.",
+	"wikibase-error-ui-no-external-page": "Nepavyko rasti puslapio „$2“ svetainėje „$1“.",
 	"wikibase-error-ui-edit-conflict": "Ta pati reikšmė buvo redaguota tuo pat metu ir tai sukėlė keitimų konfliktą. Prašome įkelti puslapį iš naujo.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (transliteruota)",
 	"wikibase-quantitydetails-amount": "Kiekis",

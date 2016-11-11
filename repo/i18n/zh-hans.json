@@ -251,7 +251,7 @@
 	"wikibase-tokencheck-mustposttoken": "只可使用POST请求编辑。",
 	"wikibase-tokencheck-badtoken": "错误的编辑令牌（您的会话可能已过期）。",
 	"special-dispatchstats": "更改发送统计",
-	"wikibase-dispatchstats-intro": "本页面提供关于发送至客户的更改的统计。当{{SITENAME}}上的更改已经发送至客户端wiki并已被客户端wiki的工作队列处理，客户端wiki即知晓该更改。\n* {{int:wikibase-dispatchstats-changes}}显示目前在队列中的最早和最新的项的编号和日期。\n* {{int:wikibase-dispatchstats-stats}}提供关于最滞后、最不滞后和中等滞后客户端wiki的信息。每个wiki会提供以下信息：\n** “{{int:wikibase-dispatchstats-site-id}}”是客户端wiki的内部ID。\n** “{{int:wikibase-dispatchstats-pos}}”是发送至客户端wiki的最后更改的ID。\n** “{{int:wikibase-dispatchstats-lag-num}}”是尚未发送至客户端wiki的更改的数目。\n** “{{int:wikibase-dispatchstats-lag-time}}”是最后发送至客户端wiki的更改和{{SITENAME}}上的最后更改之间的时间。\n** “{{int:wikibase-dispatchstats-touched}}”是发送至客户端wiki的最后一批更改的发送时间。",
+	"wikibase-dispatchstats-intro": "本页面提供关于发送至客户的更改的统计。当{{SITENAME}}上的更改已经发送至客户端wiki并已被客户端wiki的工作队列处理，客户端wiki即知晓该更改。\n* {{int:wikibase-dispatchstats-changes}}显示目前在队列中的最早和最新的项的编号和日期。\n* {{int:wikibase-dispatchstats-stats}}提供关于延迟最大、最小和中等客户端wiki的信息。每个wiki会提供以下信息：\n** “{{int:wikibase-dispatchstats-site-id}}”是客户端wiki的内部ID。\n** “{{int:wikibase-dispatchstats-pos}}”是发送至客户端wiki的最后更改的ID。\n** “{{int:wikibase-dispatchstats-lag-num}}”是尚未发送至客户端wiki的更改的数目。\n** “{{int:wikibase-dispatchstats-lag-time}}”是最后发送至客户端wiki的更改和{{SITENAME}}上的最后更改之间的时间。\n** “{{int:wikibase-dispatchstats-touched}}”是发送至客户端wiki的最后一批更改的发送时间。",
 	"wikibase-dispatchstats-no-stats": "目前没有统计数据。",
 	"wikibase-dispatchstats-changes": "更改日志统计",
 	"wikibase-dispatchstats-stats": "发送统计",

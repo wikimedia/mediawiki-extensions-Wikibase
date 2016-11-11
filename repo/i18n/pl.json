@@ -304,6 +304,8 @@
 	"wikibase-listdatatypes-url-head": "URL",
 	"wikibase-listdatatypes-external-id-head": "Identyfikator zewnętrzny",
 	"wikibase-concept-uri": "Koncept URI",
+	"wikibase-concept-uri-tooltip": "URI, który określa koncept opisany tym elementem",
+	"wikibase-pageimage-helptext": "Ta grafika pochodzi z deklaracji tego elementu. Możesz dostosować grafikę zmieniające deklarację.",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Element Wikibase",
 	"content-model-wikibase-property": "właściwość Wikibase",
