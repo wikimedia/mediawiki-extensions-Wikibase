@@ -4,7 +4,8 @@
 			"Renessaince",
 			"Wizardist",
 			"Red Winged Duck",
-			"Macofe"
+			"Macofe",
+			"Kareyac"
 		]
 	},
 	"wikibase-desc": "Сховішча структураваных зьвестак",
@@ -20,6 +21,8 @@
 	"wikibase-addreference": "дадаць зноску",
 	"wikibase-save-inprogress": "Захаваньне…",
 	"wikibase-remove-inprogress": "Выдаленьне…",
+	"wikibase-statementlistview-add": "дадаць",
+	"wikibase-statementgrouplistview-add": "дадаць",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "На іншых мовах",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Наладзіць",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Паказваць меткі, сынонімы і апісаньні на ўсіх маіх мовах пры загрузцы старонкі",
