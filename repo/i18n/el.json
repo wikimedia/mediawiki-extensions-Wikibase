@@ -39,6 +39,7 @@
 	"wikibase-entitytermsforlanguagelistview-label": "Ετικέτα",
 	"wikibase-entitytermsforlanguagelistview-language": "Γλώσσα",
 	"wikibase-entitytermsforlanguagelistview-more": "Όλες οι εισαχθείσες γλώσσες",
+	"wikibase-entitytermsforlanguagelistview-less": "Λιγότερες γλώσσες",
 	"wikibase-label-empty": "Δεν έχει ορισθεί ετικέτα",
 	"wikibase-label-edit-placeholder": "προσθέστε ετικέτα",
 	"wikibase-label-edit-placeholder-language-aware": "Εισαγάγετε ετικέτα στο $1",

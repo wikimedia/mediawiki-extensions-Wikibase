@@ -11,7 +11,8 @@
 			"Macofe",
 			"Mailman",
 			"Irus",
-			"Kareyac"
+			"Kareyac",
+			"MaxBioHazard"
 		]
 	},
 	"wikibase-lib-desc": "Общие функции расширений Wikibase и Wikibase Client",
@@ -29,7 +30,7 @@
 	"wikibase-error-autocomplete-connection": "Не удалось запросить API сайта. Пожалуйста, повторите попытку позднее.",
 	"wikibase-error-autocomplete-response": "Сервер ответил: $1",
 	"wikibase-error-ui-no-external-page": "Не удалось найти страницу «$2» на сайте «$1».",
-	"wikibase-error-ui-edit-conflict": "Такое же значение было отредактировано в то же время, вызывая изменение конфликта. Пожалуйста, перезагрузите страницу.",
+	"wikibase-error-ui-edit-conflict": "Возник конфликт редактирования. Пожалуйста, сохраните локально внесённые вами изменения, прегрузите страницу и сохраните её снова.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (транслитерировано)",
 	"wikibase-quantitydetails-amount": "Сумма",
 	"wikibase-quantitydetails-upperbound": "Верхняя граница",

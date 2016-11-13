@@ -124,5 +124,5 @@
 	"notification-header-page-connection": "A página <strong>$3</strong> foi {{GENDER:$2|ligada}} a um elemento {{WBREPONAME}}.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> e {{PLURAL:$4|outra página|outras $4 páginas|100=mais de 99 páginas}} foram {{GENDER:$2|ligadas}} a elementos {{WBREPONAME}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|Ver}} elemento",
-	"notification-subject-page-connection": "A página que {{GENDER:$3|criou}} em {{SITENAME}} foi {{GENDER:$2|ligada}} a um elemento {{WBREPONAME}}"
+	"notification-subject-page-connection": "A página que {{GENDER:$3|criou}} na wiki {{SITENAME}} foi {{GENDER:$2|ligada}} a um elemento {{WBREPONAME}}"
 }
