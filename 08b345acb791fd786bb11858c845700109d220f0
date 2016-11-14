@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2eb1770d_fa90a050",
+        "filename": "lib/includes/Store/DispatchingTermBuffer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-14T13:38:08Z",
+      "side": 1,
+      "message": "Even though it\u0027s commons practice, I personally dislike veriable names that only differ by a final \"s\". It\u0027s too hard to miss. For purely local things like loop variables, I prefer short names like $lang or $id or $key or even $i. The smaller the scope, the shorter the name may be.",
+      "revId": "08b345acb791fd786bb11858c845700109d220f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2eb1770d_9a999c83",
+        "filename": "lib/includes/Store/DispatchingTermBuffer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-14T13:38:08Z",
+      "side": 1,
+      "message": "We could do:\n\n  if ( $termBuffer \u003d\u003d\u003d null ) {\n    wfDebugLog( __CLASS__, __FUNCTION__ . \u0027: unknown repository: \u0027 . $repository ); \n    continue;\n  }",
+      "revId": "08b345acb791fd786bb11858c845700109d220f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2eb1770d_da85e40c",
+        "filename": "lib/includes/Store/DispatchingTermBuffer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-14T13:38:08Z",
+      "side": 1,
+      "message": "you are using old array syntax here, but new syntax in line 45. Please use new syntax for new code.",
+      "revId": "08b345acb791fd786bb11858c845700109d220f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2eb1770d_da94c43b",
+        "filename": "lib/tests/phpunit/Store/DispatchingTermBufferTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-14T13:38:08Z",
+      "side": 1,
+      "message": "The contract of getPrefetchedTerm() does not require this to return anything before prefetchTerms() was called. Since we control the implementation here, that\u0027s perhaps ok. But keep in mind that getPrefetchedTerm() may change in a way that would not violate the contract, but would still break the test.",
+      "revId": "08b345acb791fd786bb11858c845700109d220f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
