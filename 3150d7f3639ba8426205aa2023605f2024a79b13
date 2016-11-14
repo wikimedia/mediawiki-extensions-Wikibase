@@ -173,6 +173,24 @@
     },
     {
       "key": {
+        "uuid": "2eb1770d_7aca504c",
+        "filename": "lib/includes/Store/DispatchingTermBuffer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-11-14T14:14:56Z",
+      "side": 1,
+      "message": "What bothered me was that there would be no distinction between \"prefetching should have worked but the repo is down at the moment\" which might work at some other time and \"unknown repo\" which will never work. I guess it\u0027s a very unlikely scenario and having the debug message you mentioned in the other comment makes it less scary.",
+      "parentUuid": "2eb1770d_daae0495",
+      "revId": "3150d7f3639ba8426205aa2023605f2024a79b13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_18d9c126",
         "filename": "lib/includes/Store/DispatchingTermBuffer.php",
         "patchSetId": 3
