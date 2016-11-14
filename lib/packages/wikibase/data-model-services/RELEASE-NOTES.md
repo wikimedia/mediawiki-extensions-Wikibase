@@ -1,6 +1,6 @@
 # Wikibase DataModel Services release notes
 
-## Version 3.7.0 (2016-11-08)
+## Version 3.7.0 (2016-11-14)
 
 * Raised minimum PHP version to 5.5.
 * Compatible with Wikibase DataModel 6.3
