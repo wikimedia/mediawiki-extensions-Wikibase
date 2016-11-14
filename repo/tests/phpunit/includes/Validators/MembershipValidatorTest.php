@@ -23,25 +23,25 @@ class MembershipValidatorTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testInvalidConstructorArgument( $errorCode, $normalizer ) {
 		$this->setExpectedException( InvalidArgumentException::class );
-		new MembershipValidator( array(), $errorCode, $normalizer );
+		new MembershipValidator( [], $errorCode, $normalizer );
 	}
 
 	public function invalidConstructorArgumentsProvider() {
-		return array(
-			array( null, null ),
-			array( 1, null ),
-			array( '', true ),
-			array( '', '' ),
-		);
+		return [
+			[ null, null ],
+			[ 1, null ],
+			[ '', true ],
+			[ '', '' ],
+		];
 	}
 
 	public function provideValidate() {
-		return array(
-			'contained' => array( array( 'apple', 'pear' ), null, 'apple', true ),
-			'not contained' => array( array( 'apple', 'pear' ), null, 'nuts', false ),
-			'case sensitive' => array( array( 'apple', 'pear' ), null, 'Apple', false ),
-			'case insitive' => array( array( 'apple', 'pear' ), 'strtolower', 'Apple', true ),
-		);
+		return [
+			'contained' => [ [ 'apple', 'pear' ], null, 'apple', true ],
+			'not contained' => [ [ 'apple', 'pear' ], null, 'nuts', false ],
+			'case sensitive' => [ [ 'apple', 'pear' ], null, 'Apple', false ],
+			'case insitive' => [ [ 'apple', 'pear' ], 'strtolower', 'Apple', true ],
+		];
 	}
 
 	/**
@@ -56,7 +56,7 @@ class MembershipValidatorTest extends \PHPUnit_Framework_TestCase {
 		if ( !$expected ) {
 			$errors = $result->getErrors();
 			$this->assertCount( 1, $errors );
-			$this->assertTrue( in_array( $errors[0]->getCode(), array( 'not-allowed' ) ), $errors[0]->getCode() );
+			$this->assertTrue( in_array( $errors[0]->getCode(), [ 'not-allowed' ] ), $errors[0]->getCode() );
 
 			$localizer = new ValidatorErrorLocalizer();
 			$msg = $localizer->getErrorMessage( $errors[0] );

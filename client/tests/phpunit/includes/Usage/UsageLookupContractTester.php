@@ -55,7 +55,7 @@ class UsageLookupContractTester {
 		$u3l = new EntityUsage( $q3, EntityUsage::LABEL_USAGE, 'de' );
 		$u4l = new EntityUsage( $q4, EntityUsage::LABEL_USAGE, 'de' );
 
-		$usages = array( $u3i, $u3l, $u4l );
+		$usages = [ $u3i, $u3l, $u4l ];
 
 		$this->putUsages( 23, $usages );
 
@@ -68,7 +68,7 @@ class UsageLookupContractTester {
 		$expectedUsageStrings = $this->getUsageStrings( $usages );
 		Assert::assertEquals( $expectedUsageStrings, $actualUsageStrings );
 
-		$this->putUsages( 23, array() );
+		$this->putUsages( 23, [] );
 	}
 
 	public function testGetPagesUsing() {
@@ -81,41 +81,41 @@ class UsageLookupContractTester {
 		$u4l = new EntityUsage( $q4, EntityUsage::LABEL_USAGE, 'de' );
 		$u4t = new EntityUsage( $q4, EntityUsage::TITLE_USAGE );
 
-		$this->putUsages( 23, array( $u3s, $u3l, $u4l ) );
-		$this->putUsages( 42, array( $u4l, $u4t ) );
+		$this->putUsages( 23, [ $u3s, $u3l, $u4l ] );
+		$this->putUsages( 42, [ $u4l, $u4t ] );
 
-		$pages = $this->lookup->getPagesUsing( array( $q6 ) );
+		$pages = $this->lookup->getPagesUsing( [ $q6 ] );
 		Assert::assertEmpty( iterator_to_array( $pages ) );
 
-		$pages = $this->lookup->getPagesUsing( array( $q3 ) );
+		$pages = $this->lookup->getPagesUsing( [ $q3 ] );
 		$this->assertSamePageEntityUsages(
-			array( 23 => new PageEntityUsages( 23, array( $u3s, $u3l ) ) ),
+			[ 23 => new PageEntityUsages( 23, [ $u3s, $u3l ] ) ],
 			iterator_to_array( $pages ),
 			'Pages using Q3'
 		);
 
 		$pages = $this->lookup->getPagesUsing(
-			array( $q4, $q3 ),
-			array( EntityUsage::makeAspectKey( EntityUsage::LABEL_USAGE, 'de' ) )
+			[ $q4, $q3 ],
+			[ EntityUsage::makeAspectKey( EntityUsage::LABEL_USAGE, 'de' ) ]
 		);
 		$this->assertSamePageEntityUsages(
-			array(
-				23 => new PageEntityUsages( 23, array( $u3l, $u4l ) ),
-				42 => new PageEntityUsages( 42, array( $u4l ) ),
-			),
+			[
+				23 => new PageEntityUsages( 23, [ $u3l, $u4l ] ),
+				42 => new PageEntityUsages( 42, [ $u4l ] ),
+			],
 			iterator_to_array( $pages ),
 			'Pages using "label" on Q4 or Q3'
 		);
 
-		$pages = $this->lookup->getPagesUsing( array( $q3 ), array( EntityUsage::ALL_USAGE ) );
+		$pages = $this->lookup->getPagesUsing( [ $q3 ], [ EntityUsage::ALL_USAGE ] );
 		Assert::assertEmpty( iterator_to_array( $pages ), 'Pages using "all" on Q3' );
 
-		$pages = $this->lookup->getPagesUsing( array( $q4 ), array( EntityUsage::SITELINK_USAGE ) );
+		$pages = $this->lookup->getPagesUsing( [ $q4 ], [ EntityUsage::SITELINK_USAGE ] );
 		Assert::assertEmpty( iterator_to_array( $pages ), 'Pages using "sitelinks" on Q4' );
 
 		$pages = $this->lookup->getPagesUsing(
-			array( $q3, $q4 ),
-			array( EntityUsage::TITLE_USAGE, EntityUsage::SITELINK_USAGE )
+			[ $q3, $q4 ],
+			[ EntityUsage::TITLE_USAGE, EntityUsage::SITELINK_USAGE ]
 		);
 		Assert::assertCount(
 			2,
@@ -123,7 +123,7 @@ class UsageLookupContractTester {
 			'Pages using "title" or "sitelinks" on Q3 or Q4'
 		);
 
-		$this->putUsages( 23, array() );
+		$this->putUsages( 23, [] );
 	}
 
 	/**
@@ -164,18 +164,18 @@ class UsageLookupContractTester {
 		$u3l = new EntityUsage( $q3, EntityUsage::LABEL_USAGE, 'de' );
 		$u4l = new EntityUsage( $q4, EntityUsage::LABEL_USAGE, 'de' );
 
-		$usages = array( $u3i, $u3l, $u4l );
+		$usages = [ $u3i, $u3l, $u4l ];
 
 		$this->putUsages( 23, $usages );
 
-		Assert::assertEmpty( $this->lookup->getUnusedEntities( array( $q4 ) ), 'Q4 should not be unused' );
+		Assert::assertEmpty( $this->lookup->getUnusedEntities( [ $q4 ] ), 'Q4 should not be unused' );
 
-		$entityIds = array( $q4, $q6 );
+		$entityIds = [ $q4, $q6 ];
 		if ( wfGetDB( DB_SLAVE )->getType() === 'mysql' ) {
 			// On MySQL we use UNIONs on the table… as the table is temporary that
 			// doesn't work in unit tests.
 			// https://dev.mysql.com/doc/refman/5.7/en/temporary-table-problems.html
-			$entityIds = array( $q6 );
+			$entityIds = [ $q6 ];
 		}
 
 		$unused = $this->lookup->getUnusedEntities( $entityIds );

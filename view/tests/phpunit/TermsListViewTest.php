@@ -66,7 +66,7 @@ class TermsListViewTest extends PHPUnit_Framework_TestCase {
 		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( $languageCode, '<LABEL>' );
 		$fingerprint->setDescription( $languageCode, '<DESCRIPTION>' );
-		$fingerprint->setAliasGroup( $languageCode, array( '<ALIAS1>', '<ALIAS2>' ) );
+		$fingerprint->setAliasGroup( $languageCode, [ '<ALIAS1>', '<ALIAS2>' ] );
 		return $fingerprint;
 	}
 
@@ -182,7 +182,7 @@ class TermsListViewTest extends PHPUnit_Framework_TestCase {
 			$this->getFingerprint()
 		);
 		$view = $this->getTermsListView( 1 );
-		$html = $view->getHtml( $item, $item, null, array( 'en' ) );
+		$html = $view->getHtml( $item, $item, null, [ 'en' ] );
 
 		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-language)', $html );
 		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-label)', $html );

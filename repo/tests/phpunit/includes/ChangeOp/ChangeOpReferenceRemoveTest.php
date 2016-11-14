@@ -24,10 +24,10 @@ use Wikibase\DataModel\Snak\Snak;
 class ChangeOpReferenceRemoveTest extends \PHPUnit_Framework_TestCase {
 
 	public function invalidConstructorProvider() {
-		$args = array();
-		$args[] = array( '', '' );
-		$args[] = array( '', 'foo' );
-		$args[] = array( 'foo', '' );
+		$args = [];
+		$args[] = [ '', '' ];
+		$args[] = [ '', 'foo' ];
+		$args[] = [ 'foo', '' ];
 		return $args;
 	}
 
@@ -42,7 +42,7 @@ class ChangeOpReferenceRemoveTest extends \PHPUnit_Framework_TestCase {
 	public function testApplyRemovesReference() {
 		$mainSnak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 		$referenceSnak = new PropertyValueSnak( 78462378, new StringValue( 'newReference' ) );
-		$reference = new Reference( array( $referenceSnak ) );
+		$reference = new Reference( [ $referenceSnak ] );
 
 		$item = $this->newItemWithClaim( 'q345', $mainSnak );
 		$statement = $item->getStatements()->toArray()[0];
@@ -58,7 +58,7 @@ class ChangeOpReferenceRemoveTest extends \PHPUnit_Framework_TestCase {
 	public function testApplyWithDuplicateReferencePreservesOne() {
 		$mainSnak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 		$referenceSnak = new PropertyValueSnak( 78462378, new StringValue( 'newReference' ) );
-		$reference = new Reference( array( $referenceSnak ) );
+		$reference = new Reference( [ $referenceSnak ] );
 		$referenceHash = $reference->getHash();
 
 		$item = $this->newItemWithClaim( 'q345', $mainSnak );

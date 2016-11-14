@@ -105,7 +105,7 @@ class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiTestCase {
 			->method( 'extractPreferredValue' )
 			->will( $this->returnCallback( function( array $fallbackData ) use ( $languageCode ) {
 				if ( $languageCode === 'zh' && array_key_exists( 'zh-cn', $fallbackData ) ) {
-					return array( 'value' => 'fallbackterm', 'language' => 'zh-cn', 'source' => 'zh-xy' );
+					return [ 'value' => 'fallbackterm', 'language' => 'zh-cn', 'source' => 'zh-xy' ];
 				} else {
 					return null;
 				}
@@ -115,9 +115,9 @@ class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiTestCase {
 			->method( 'getFetchLanguageCodes' )
 			->will( $this->returnCallback( function() use ( $languageCode ) {
 				if ( $languageCode === 'zh' ) {
-					return array( 'zh', 'zh-cn', 'zh-xy' );
+					return [ 'zh', 'zh-cn', 'zh-xy' ];
 				} else {
-					return array( $languageCode );
+					return [ $languageCode ];
 				}
 			} ) );
 
@@ -129,50 +129,50 @@ class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiTestCase {
 	}
 
 	private function getTermIndex() {
-		$terms = array(
-			new TermIndexEntry( array(
+		$terms = [
+			new TermIndexEntry( [
 				'entityId' => 116,
 				'entityType' => 'item',
 				'termType' => 'label',
 				'termLanguage' => 'en',
 				'termText' => 'New York City'
-			) ),
-			new TermIndexEntry( array(
+			] ),
+			new TermIndexEntry( [
 				'entityId' => 116,
 				'entityType' => 'item',
 				'termType' => 'label',
 				'termLanguage' => 'es',
 				'termText' => 'New York City'
-			) ),
-			new TermIndexEntry( array(
+			] ),
+			new TermIndexEntry( [
 				'entityId' => 116,
 				'entityType' => 'item',
 				'termType' => 'description',
 				'termLanguage' => 'en',
 				'termText' => 'Big Apple'
-			) ),
-			new TermIndexEntry( array(
+			] ),
+			new TermIndexEntry( [
 				'entityId' => 117,
 				'entityType' => 'item',
 				'termType' => 'label',
 				'termLanguage' => 'en',
 				'termText' => 'Berlin'
-			) ),
-			new TermIndexEntry( array(
+			] ),
+			new TermIndexEntry( [
 				'entityId' => 118,
 				'entityType' => 'item',
 				'termType' => 'label',
 				'termLanguage' => 'zh-cn',
 				'termText' => '测试'
-			) ),
-			new TermIndexEntry( array(
+			] ),
+			new TermIndexEntry( [
 				'entityId' => 118,
 				'entityType' => 'item',
 				'termType' => 'description',
 				'termLanguage' => 'zh-cn',
 				'termText' => 'zh-cn description'
-			) ),
-		);
+			] ),
+		];
 
 		return new MockTermIndex( $terms );
 	}

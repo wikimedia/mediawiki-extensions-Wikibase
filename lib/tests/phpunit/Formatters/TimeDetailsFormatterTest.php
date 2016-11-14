@@ -102,11 +102,11 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 		$julian = 'http://www.wikidata.org/entity/Q1985786';
 		$day = TimeValue::PRECISION_DAY;
 
-		return array(
-			'Basic test' => array(
+		return [
+			'Basic test' => [
 				new TimeValue( '+2001-01-01T00:00:00Z', 60, 0, 1, TimeValue::PRECISION_MONTH, $gregorian ),
 				'@' . implode( '.*',
-					array(
+					[
 						'<h4[^<>]*><a>HTML</a></h4>',
 						'<td[^<>]*>\+0*2001-01-01T00:00:00Z</td>',
 						'<td[^<>]*>\+01:00</td>',
@@ -114,70 +114,70 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 						'<td[^<>]*>\(months: 1\)</td>',
 						'<td[^<>]*>0</td>',
 						'<td[^<>]*>\(months: 1\)</td>',
-					)
+					]
 				) . '@s'
-			),
-			'3 digit year' => array(
+			],
+			'3 digit year' => [
 				new TimeValue( '+999-01-01T00:00:00Z', 0, 0, 0, $day, $gregorian ),
 				'@.*<td[^<>]*isotime">\+0999-01-01T00:00:00Z</td>.*@s'
-			),
-			'Negative, padded year' => array(
+			],
+			'Negative, padded year' => [
 				new TimeValue( '-099999-01-01T00:00:00Z', 0, 0, 0, $day, $gregorian ),
 				'@.*<td[^<>]*isotime">\xE2\x88\x9299999-01-01T00:00:00Z</td>.*@s'
-			),
-			'Optional Z' => array(
+			],
+			'Optional Z' => [
 				$this->getTimeValue( '-099999-01-01T00:00:00' ),
 				'@.*<td[^<>]*isotime">\xE2\x88\x9299999-01-01T00:00:00</td>.*@s'
-			),
-			'Optional sign' => array(
+			],
+			'Optional sign' => [
 				$this->getTimeValue( '099999-01-01T00:00:00Z' ),
 				'@.*<td[^<>]*isotime">\+99999-01-01T00:00:00Z</td>.*@s'
-			),
-			'Julian' => array(
+			],
+			'Julian' => [
 				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, $day, $julian ),
 				'@.*<td[^<>]*calendar">\(valueview-expert-timevalue-calendar-julian\)</td>.*@s'
-			),
-			'Non-standard calendar model' => array(
+			],
+			'Non-standard calendar model' => [
 				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, $day, 'Stardate' ),
 				'@.*<td[^<>]*calendar">Stardate</td>.*@s'
-			),
-			'Negative time zone' => array(
+			],
+			'Negative time zone' => [
 				new TimeValue( '+2001-01-01T00:00:00Z', -179, 0, 0, $day, $gregorian ),
 				'@.*<td[^<>]*timezone">\xE2\x88\x9202:59</td>.*@s'
-			),
-			'Seconds precision' => array(
+			],
+			'Seconds precision' => [
 				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_SECOND, $gregorian ),
 				'@.*<td[^<>]*precision">\(seconds: 1\)</td>.*@s'
-			),
-			'10 years precision' => array(
+			],
+			'10 years precision' => [
 				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR10, $gregorian ),
 				'@.*<td[^<>]*precision">\(years: 10\)</td>.*@s'
-			),
-			'Max. precision' => array(
+			],
+			'Max. precision' => [
 				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR1G, $gregorian ),
 				'@.*<td[^<>]*precision">\(years: 1000000000\)</td>.*@s'
-			),
-			'Before' => array(
+			],
+			'Before' => [
 				new TimeValue( '+2001-01-01T00:00:00Z', 0, 2, 0, TimeValue::PRECISION_YEAR, $gregorian ),
 				'@.*<td[^<>]*before">\(years: 2\)</td>.*@s'
-			),
-			'After in years' => array(
+			],
+			'After in years' => [
 				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 5, TimeValue::PRECISION_YEAR10, $gregorian ),
 				'@.*<td[^<>]*after">\(years: 50\)</td>.*@s'
-			),
-			'After in days' => array(
+			],
+			'After in days' => [
 				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 125, $day, $gregorian ),
 				'@.*<td[^<>]*after">\(days: 125\)</td>.*@s'
-			),
-			'Extreme range' => array(
+			],
+			'Extreme range' => [
 				new TimeValue( '+2001-01-01T00:00:00Z', 0, 1000000, 1000000, $day, $gregorian ),
 				'@<td[^<>]*before">\(days: 1000000\)</td>.*<td[^<>]*after">\(days: 1000000\)</td>@s'
-			),
-			'Zero range' => array(
+			],
+			'Zero range' => [
 				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, $day, $gregorian ),
 				'@<td[^<>]*before">0</td>.*<td[^<>]*after">0</td>@s'
-			),
-		);
+			],
+		];
 	}
 
 	public function testFormatError() {

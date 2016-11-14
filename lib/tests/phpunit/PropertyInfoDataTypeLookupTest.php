@@ -23,15 +23,15 @@ use Wikibase\Lib\Tests\Store\MockPropertyInfoStore;
  */
 class PropertyInfoDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 
-	private $propertiesAndTypes = array(
+	private $propertiesAndTypes = [
 		'P1' => 'NyanData all the way across the sky',
 		'P42' => 'string',
 		'P1337' => 'percentage',
 		'P9001' => 'positive whole number',
-	);
+	];
 
 	public function getDataTypeForPropertyProvider() {
-		$argLists = array();
+		$argLists = [];
 
 		$emptyInfoStore = new MockPropertyInfoStore();
 		$mockInfoStore = new MockPropertyInfoStore();
@@ -45,7 +45,7 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 			// register property info
 			$mockInfoStore->setPropertyInfo(
 				$id,
-				array( PropertyInfoStore::KEY_DATA_TYPE => $dataTypeId )
+				[ PropertyInfoStore::KEY_DATA_TYPE => $dataTypeId ]
 			);
 
 			// register property as an entity, for the fallback
@@ -54,40 +54,40 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 			$entityLookup->putEntity( $property );
 
 			// try with a working info store
-			$argLists[] = array(
+			$argLists[] = [
 				$mockInfoStore,
 				null,
 				$id,
 				$dataTypeId
-			);
+			];
 
 			// try with via fallback
-			$argLists[] = array(
+			$argLists[] = [
 				$emptyInfoStore,
 				$propertyDataTypeLookup,
 				$id,
 				$dataTypeId
-			);
+			];
 		}
 
 		// try unknown property
 		$id = new PropertyId( 'P23' );
 
 		// try with a working info store
-		$argLists[] = array(
+		$argLists[] = [
 			$mockInfoStore,
 			null,
 			$id,
 			false
-		);
+		];
 
 		// try with via fallback
-		$argLists[] = array(
+		$argLists[] = [
 			$emptyInfoStore,
 			$propertyDataTypeLookup,
 			$id,
 			false
-		);
+		];
 
 		return $argLists;
 	}

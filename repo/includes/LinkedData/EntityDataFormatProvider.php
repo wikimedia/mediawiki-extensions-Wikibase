@@ -173,8 +173,8 @@ class EntityDataFormatProvider {
 			return;
 		}
 
-		$this->mimeTypes = array();
-		$this->fileExtensions = array();
+		$this->mimeTypes = [];
+		$this->fileExtensions = [];
 
 		$api = $this->newApiMain( "dummy" );
 		$formatNames = $api->getModuleManager()->getNames( 'format' );
@@ -258,16 +258,16 @@ class EntityDataFormatProvider {
 
 		switch ( $format ) {
 			case 'php':
-				return array( 'application/vnd.php.serialized' );
+				return [ 'application/vnd.php.serialized' ];
 
 			case 'txt':
-				return array( "text/text", "text/plain" );
+				return [ "text/text", "text/plain" ];
 
 			case 'javascript':
-				return array( "text/javascript" );
+				return [ "text/javascript" ];
 
 			default:
-				return array( "application/$format" );
+				return [ "application/$format" ];
 		}
 	}
 
@@ -281,9 +281,9 @@ class EntityDataFormatProvider {
 	private function newApiMain( $format ) {
 		// Fake request params to ApiMain, with forced format parameters.
 		// We can override additional parameters here, as needed.
-		$params = array(
+		$params = [
 			'format' => $format,
-		);
+		];
 
 		$context = new DerivativeContext( RequestContext::getMain() ); //XXX: ugly
 

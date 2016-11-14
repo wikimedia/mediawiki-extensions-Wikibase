@@ -21,17 +21,17 @@ class MessageExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
 	public function provideGetExceptionMessage() {
 		$exception = new MessageException(
 			'wikibase-error-autocomplete-response',
-			array( 'cannot autocomplete' ),
+			[ 'cannot autocomplete' ],
 			'autocomplete error'
 		);
 
-		return array(
-			'MessageException' => array(
+		return [
+			'MessageException' => [
 				$exception,
 				'wikibase-error-autocomplete-response',
-				array( 'cannot autocomplete' )
-			)
-		);
+				[ 'cannot autocomplete' ]
+			]
+		];
 	}
 
 	/**

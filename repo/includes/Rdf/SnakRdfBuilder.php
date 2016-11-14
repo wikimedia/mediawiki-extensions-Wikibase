@@ -43,7 +43,7 @@ class SnakRdfBuilder {
 	/**
 	 * @var string[] local data type cache per property id
 	 */
-	private $propertyTypes = array();
+	private $propertyTypes = [];
 
 	/**
 	 * @param RdfVocabulary $vocabulary

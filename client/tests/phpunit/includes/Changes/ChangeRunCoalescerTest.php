@@ -49,7 +49,7 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 	private function getEntityRevisionLookup() {
 		$repo = new MockRepository();
 
-		$offsets = array( 'Q1' => 1100, 'Q2' => 1200 );
+		$offsets = [ 'Q1' => 1100, 'Q2' => 1200 ];
 		foreach ( $offsets as $qid => $offset ) {
 			// entity 1, revision 1111
 			$entity1 = new Item( new ItemId( $qid ) );
@@ -70,11 +70,11 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 			$repo->putEntity( $entity1, $offset + 14 );
 
 			// entity 1, revision 1117
-			$entity1->getSiteLinkList()->setSiteLink( new SiteLink( 'enwiki', 'Spam', array( new ItemId( 'Q12345' ) ) ) );
+			$entity1->getSiteLinkList()->setSiteLink( new SiteLink( 'enwiki', 'Spam', [ new ItemId( 'Q12345' ) ] ) );
 			$repo->putEntity( $entity1, $offset + 17 );
 
 			// entity 1, revision 1118
-			$entity1->getSiteLinkList()->setSiteLink( new SiteLink( 'enwiki', 'Spam', array( new ItemId( 'Q54321' ) ) ) );
+			$entity1->getSiteLinkList()->setSiteLink( new SiteLink( 'enwiki', 'Spam', [ new ItemId( 'Q54321' ) ] ) );
 			$repo->putEntity( $entity1, $offset + 18 );
 		}
 
@@ -88,11 +88,11 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 	 */
 	private function makeChange( array $values ) {
 		if ( !isset( $values['info'] ) ) {
-			$values['info'] = array();
+			$values['info'] = [];
 		}
 
 		if ( !isset( $values['info']['metadata'] ) ) {
-			$values['info']['metadata'] = array();
+			$values['info']['metadata'] = [];
 		}
 
 		if ( !isset( $values['info']['metadata']['rev_id'] ) && isset( $values['revision_id'] ) ) {
@@ -138,21 +138,21 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 		$firstmeta = $first->getMetadata();
 		$lastmeta = $last->getMetadata();
 
-		return $this->makeChange( array(
+		return $this->makeChange( [
 			'id' => null,
 			'type' => $first->getField( 'type' ), // because the first change has no parent
 			'time' => $last->getField( 'time' ), // last change's timestamp
 			'object_id' => $last->getField( 'object_id' ),
 			'revision_id' => $last->getField( 'revision_id' ), // last changes rev id
 			'user_id' => $last->getField( 'user_id' ),
-			'info' => array(
-				'metadata' => array(
+			'info' => [
+				'metadata' => [
 					'bot' => 0,
 					'comment' => $lastmeta['comment'],
 					'parent_id' => $firstmeta['parent_id'],
-				)
-			)
-		) );
+				]
+			]
+		] );
 	}
 
 	private function makeDiff( $objectId, $revA, $revB ) {
@@ -210,24 +210,24 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 		}
 
 		$extraKeys = array_diff( array_keys( $actual ), array_keys( $expected ) );
-		$this->assertEquals( array(), $extraKeys, $path . " extra keys" );
+		$this->assertEquals( [], $extraKeys, $path . " extra keys" );
 	}
 
 	public function provideCoalesceChanges() {
 		$id = 0;
 
 		// create with a label and site link set
-		$create11 = $this->makeChange( array(
+		$create11 = $this->makeChange( [
 			'id' => ++$id,
 			'type' => 'wikibase-item~add',
 			'time' => '20130101010101',
 			'object_id' => 'Q1',
 			'revision_id' => 1111,
 			'user_id' => 1,
-		) );
+		] );
 
 		// set a label
-		$update11 = $this->makeChange( array(
+		$update11 = $this->makeChange( [
 			'id' => ++$id,
 			'type' => 'wikibase-item~update',
 			'time' => '20130102020202',
@@ -235,10 +235,10 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 			'revision_id' => 1112,
 			'user_id' => 1,
 			'parent_id' => 1111,
-		) );
+		] );
 
 		// set another label
-		$anotherUpdate11 = $this->makeChange( array(
+		$anotherUpdate11 = $this->makeChange( [
 			'id' => ++$id,
 			'type' => 'wikibase-item~update',
 			'time' => '20130102020203',
@@ -246,10 +246,10 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 			'revision_id' => 1113,
 			'user_id' => 1,
 			'parent_id' => 1112,
-		) );
+		] );
 
 		// set another label, by another user
-		$anotherUpdate21 = $this->makeChange( array(
+		$anotherUpdate21 = $this->makeChange( [
 			'id' => ++$id,
 			'type' => 'wikibase-item~update',
 			'time' => '20130102020203',
@@ -257,10 +257,10 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 			'revision_id' => 1113,
 			'user_id' => 2,
 			'parent_id' => 1112,
-		) );
+		] );
 
 		// change link to other wiki
-		$update11XLink = $this->makeChange( array(
+		$update11XLink = $this->makeChange( [
 			'id' => ++$id,
 			'type' => 'wikibase-item~update',
 			'time' => '20130101020304',
@@ -268,10 +268,10 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 			'revision_id' => 1114,
 			'user_id' => 1,
 			'parent_id' => 1113,
-		) );
+		] );
 
 		// change link to local wiki
-		$update11Link = $this->makeChange( array(
+		$update11Link = $this->makeChange( [
 			'id' => ++$id,
 			'type' => 'wikibase-item~update',
 			'time' => '20130102030407',
@@ -279,10 +279,10 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 			'revision_id' => 1117,
 			'user_id' => 1,
 			'parent_id' => 1114,
-		) );
+		] );
 
 		// delete
-		$delete11 = $this->makeChange( array(
+		$delete11 = $this->makeChange( [
 			'id' => ++$id,
 			'type' => 'wikibase-item~remove',
 			'time' => '20130102030409',
@@ -290,10 +290,10 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 			'revision_id' => 0,
 			'user_id' => 1,
 			'parent_id' => 1118,
-		) );
+		] );
 
 		// set a label
-		$update12 = $this->makeChange( array(
+		$update12 = $this->makeChange( [
 			'id' => ++$id,
 			'type' => 'wikibase-item~update',
 			'time' => '20130102020102',
@@ -301,10 +301,10 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 			'revision_id' => 1212,
 			'user_id' => 1,
 			'parent_id' => 1211,
-		) );
+		] );
 
 		// set another label
-		$anotherUpdate12 = $this->makeChange( array(
+		$anotherUpdate12 = $this->makeChange( [
 			'id' => ++$id,
 			'type' => 'wikibase-item~update',
 			'time' => '20130102020303',
@@ -312,67 +312,67 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 			'revision_id' => 1213,
 			'user_id' => 1,
 			'parent_id' => 1213,
-		) );
+		] );
 
-		return array(
-			'empty' => array(
-				array(), // $changes
-				array(), // $expected
-			),
+		return [
+			'empty' => [
+				[], // $changes
+				[], // $expected
+			],
 
-			'single' => array(
-				array( $create11 ), // $changes
-				array( $create11 ), // $expected
-			),
+			'single' => [
+				[ $create11 ], // $changes
+				[ $create11 ], // $expected
+			],
 
-			'simple run' => array(
-				array( $update11, $anotherUpdate11 ), // $changes
-				array( $this->combineChanges( $update11, $anotherUpdate11 ) ), // $expected
-			),
+			'simple run' => [
+				[ $update11, $anotherUpdate11 ], // $changes
+				[ $this->combineChanges( $update11, $anotherUpdate11 ) ], // $expected
+			],
 
-			'long run' => array( // create counts as update, delete doesn't
-				array( $create11, $update11, $anotherUpdate11 ), // $changes
-				array( $this->combineChanges( $create11, $anotherUpdate11 ) ), // $expected
-			),
+			'long run' => [ // create counts as update, delete doesn't
+				[ $create11, $update11, $anotherUpdate11 ], // $changes
+				[ $this->combineChanges( $create11, $anotherUpdate11 ) ], // $expected
+			],
 
-			'different items' => array(
-				array( $update11, $anotherUpdate12 ), // $changes
-				array( $update11, $anotherUpdate12 ), // $changes
-			),
+			'different items' => [
+				[ $update11, $anotherUpdate12 ], // $changes
+				[ $update11, $anotherUpdate12 ], // $changes
+			],
 
-			'different users' => array(
-				array( $update11, $anotherUpdate21 ), // $changes
-				array( $update11, $anotherUpdate21 ), // $changes
-			),
+			'different users' => [
+				[ $update11, $anotherUpdate21 ], // $changes
+				[ $update11, $anotherUpdate21 ], // $changes
+			],
 
-			'reversed' => array( // result is sorted by timestamp
-				array( $update12, $create11 ), // $changes
-				array( $create11, $update12 ), // $expected
-			),
+			'reversed' => [ // result is sorted by timestamp
+				[ $update12, $create11 ], // $changes
+				[ $create11, $update12 ], // $expected
+			],
 
-			'mingled' => array(
-				array( $update12, $update11, $anotherUpdate11, $anotherUpdate12 ), // $changes
-				array( // result is sorted by timestamp
+			'mingled' => [
+				[ $update12, $update11, $anotherUpdate11, $anotherUpdate12 ], // $changes
+				[ // result is sorted by timestamp
 					$this->combineChanges( $update11, $anotherUpdate11 ),
 					$this->combineChanges( $update12, $anotherUpdate12 ),
-				), // $expected
-			),
+				], // $expected
+			],
 
-			'different action' => array( // create counts as update, delete doesn't
-				array( $update11, $delete11 ), // $changes
-				array( $update11, $delete11 ), // $expected
-			),
+			'different action' => [ // create counts as update, delete doesn't
+				[ $update11, $delete11 ], // $changes
+				[ $update11, $delete11 ], // $expected
+			],
 
-			'local link breaks' => array(
-				array( $update11, $update11Link ), // $changes
-				array( $update11, $update11Link ), // $expected
-			),
+			'local link breaks' => [
+				[ $update11, $update11Link ], // $changes
+				[ $update11, $update11Link ], // $expected
+			],
 
-			'other link merges' => array(
-				array( $update11, $update11XLink ), // $changes
-				array( $this->combineChanges( $update11, $update11XLink ) ), // $expected
-			),
-		);
+			'other link merges' => [
+				[ $update11, $update11XLink ], // $changes
+				[ $this->combineChanges( $update11, $update11XLink ) ], // $expected
+			],
+		];
 	}
 
 	/**

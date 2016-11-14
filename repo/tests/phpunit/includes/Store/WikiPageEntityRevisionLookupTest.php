@@ -33,7 +33,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 	/**
 	 * @var EntityRevision[]
 	 */
-	private static $testEntities = array();
+	private static $testEntities = [];
 
 	protected static function storeTestEntity( EntityDocument $entity ) {
 		global $wgUser;
@@ -111,7 +111,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 			->will( $this->throwException( new MWContentSerializationException() ) );
 
 		// Needed to fill the database.
-		$this->newEntityRevisionLookup( $this->getTestRevisions(), array() );
+		$this->newEntityRevisionLookup( $this->getTestRevisions(), [] );
 
 		$lookup = new WikiPageEntityRevisionLookup(
 			$entityContentDataCodec,

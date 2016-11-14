@@ -10,15 +10,15 @@ return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	return array(
-		'wikibase.parsers.getStore' => array(
+	return [
+		'wikibase.parsers.getStore' => [
 			'localBasePath' => __DIR__,
 			'remoteExtPath' => '..' . $remoteExtPath[0],
-			'scripts' => array(
+			'scripts' => [
 				'getApiBasedValueParserConstructor.js',
 				'getStore.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'dataValues',
 				'dataValues.values',
 				'util.inherit',
@@ -28,8 +28,8 @@ return call_user_func( function() {
 				'wikibase',
 				'wikibase.api.ParseValueCaller',
 				'wikibase.datamodel',
-			),
-		),
-	);
+			],
+		],
+	];
 
 } );

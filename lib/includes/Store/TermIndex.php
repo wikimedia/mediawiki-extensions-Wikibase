@@ -107,7 +107,7 @@ interface TermIndex {
 		array $terms,
 		$termType = null,
 		$entityType = null,
-		array $options = array()
+		array $options = []
 	);
 
 	/**
@@ -140,7 +140,7 @@ interface TermIndex {
 		array $terms,
 		$termType = null,
 		$entityType = null,
-		array $options = array()
+		array $options = []
 	);
 
 	/**

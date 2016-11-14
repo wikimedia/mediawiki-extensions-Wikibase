@@ -56,7 +56,7 @@ class SqlChangeStore implements ChangeStore {
 		$dbw->update(
 			'wb_changes',
 			$values,
-			array( 'change_id' => $change->getId() ),
+			[ 'change_id' => $change->getId() ],
 			__METHOD__
 		);
 
@@ -82,14 +82,14 @@ class SqlChangeStore implements ChangeStore {
 	private function getValues( ChangeRow $change ) {
 		$fields = $change->getFields();
 
-		return array(
+		return [
 			'change_type' => $fields['type'],
 			'change_time' => isset( $fields['time'] ) ? $fields['time'] : wfTimestampNow(),
 			'change_object_id' => isset( $fields['object_id'] ) ? $fields['object_id'] : '',
 			'change_revision_id' => isset( $fields['revision_id'] ) ? $fields['revision_id'] : '0',
 			'change_user_id' => isset( $fields['user_id'] ) ? $fields['user_id'] : '0',
 			'change_info' => $change->serializeInfo( $fields['info'] )
-		);
+		];
 	}
 
 }

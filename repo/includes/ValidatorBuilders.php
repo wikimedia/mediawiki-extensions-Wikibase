@@ -145,7 +145,7 @@ class ValidatorBuilders {
 	 * @return ValueValidator[]
 	 */
 	private function getCommonStringValidators( $maxLength = 400 ) {
-		$validators = array();
+		$validators = [];
 
 		$validators[] = new TypeValidator( 'string' );
 		//TODO: validate UTF8 (here and elsewhere)
@@ -182,7 +182,7 @@ class ValidatorBuilders {
 			new CompositeValidator( $validators ) //Note: each validator is fatal
 		);
 
-		return array( new TypeValidator( DataValue::class ), $topValidator );
+		return [ new TypeValidator( DataValue::class ), $topValidator ];
 	}
 
 	/**
@@ -195,14 +195,14 @@ class ValidatorBuilders {
 			new CompositeValidator( $validators ) //Note: each validator is fatal
 		);
 
-		return array( new TypeValidator( DataValue::class ), $topValidator );
+		return [ new TypeValidator( DataValue::class ), $topValidator ];
 	}
 
 	/**
 	 * @return ValueValidator[]
 	 */
 	public function buildMonolingualTextValidators() {
-		$validators = array();
+		$validators = [];
 
 		$validators[] = new DataFieldValidator(
 			'text',
@@ -218,24 +218,24 @@ class ValidatorBuilders {
 			new CompositeValidator( $validators ) //Note: each validator is fatal
 		);
 
-		return array( new TypeValidator( DataValue::class ), $topValidator );
+		return [ new TypeValidator( DataValue::class ), $topValidator ];
 	}
 
 	/**
 	 * @return ValueValidator[]
 	 */
 	public function buildTimeValidators() {
-		$validators = array();
+		$validators = [];
 		$validators[] = new TypeValidator( 'array' );
 
 		// Expected to be a short IRI, see TimeFormatter and TimeParser.
-		$urlValidator = $this->getUrlValidator( array( 'http', 'https' ), $this->wikidataBaseUri, 255 );
+		$urlValidator = $this->getUrlValidator( [ 'http', 'https' ], $this->wikidataBaseUri, 255 );
 		//TODO: enforce well known calendar models from config
 
 		$validators[] = new DataFieldValidator( 'calendarmodel', $urlValidator );
 
 		// time string field
-		$timeStringValidators = array();
+		$timeStringValidators = [];
 		$timeStringValidators[] = new TypeValidator( 'string' );
 
 		// down to the day
@@ -249,7 +249,7 @@ class ValidatorBuilders {
 			new CompositeValidator( $timeStringValidators ) //Note: each validator is fatal
 		);
 
-		$precisionValidators = array();
+		$precisionValidators = [];
 		$precisionValidators[] = new TypeValidator( 'integer' );
 		$precisionValidators[] = new NumberRangeValidator( TimeValue::PRECISION_YEAR1G, $maxPrecision );
 
@@ -262,18 +262,18 @@ class ValidatorBuilders {
 			new CompositeValidator( $validators ) //Note: each validator is fatal
 		);
 
-		return array( new TypeValidator( DataValue::class ), $topValidator );
+		return [ new TypeValidator( DataValue::class ), $topValidator ];
 	}
 
 	/**
 	 * @return ValueValidator[]
 	 */
 	public function buildCoordinateValidators() {
-		$validators = array();
+		$validators = [];
 		$validators[] = new TypeValidator( 'array' );
 
 		// Expected to be a short IRI, see GlobeCoordinateValue and GlobeCoordinateParser.
-		$urlValidator = $this->getUrlValidator( array( 'http', 'https' ), $this->wikidataBaseUri, 255 );
+		$urlValidator = $this->getUrlValidator( [ 'http', 'https' ], $this->wikidataBaseUri, 255 );
 		//TODO: enforce well known reference globes from config
 
 		$validators[] = new DataFieldValidator( 'precision', new NumberValidator() );
@@ -284,7 +284,7 @@ class ValidatorBuilders {
 			new CompositeValidator( $validators ) //Note: each validator is fatal
 		);
 
-		return array( new TypeValidator( DataValue::class ), $topValidator );
+		return [ new TypeValidator( DataValue::class ), $topValidator ];
 	}
 
 	/**
@@ -297,7 +297,7 @@ class ValidatorBuilders {
 	 * @return CompositeValidator
 	 */
 	private function getUrlValidator( array $urlSchemes, $prefix = null, $maxLength = 500 ) {
-		$validators = array();
+		$validators = [];
 		$validators[] = new TypeValidator( 'string' );
 		$validators[] = new StringLengthValidator( 2, $maxLength );
 
@@ -334,33 +334,33 @@ class ValidatorBuilders {
 			$urlValidator
 		);
 
-		return array( new TypeValidator( DataValue::class ), $topValidator );
+		return [ new TypeValidator( DataValue::class ), $topValidator ];
 	}
 
 	/**
 	 * @return ValueValidator[]
 	 */
 	public function buildQuantityValidators() {
-		$validators = array();
+		$validators = [];
 		$validators[] = new TypeValidator( 'array' );
 
 		// The "amount", "upperBound" and "lowerBound" fields are already validated by the
 		// UnboundedQuantityValue/QuantityValue constructors.
 
-		$unitValidators = new AlternativeValidator( array(
+		$unitValidators = new AlternativeValidator( [
 			// NOTE: "1" is always considered legal for historical reasons,
 			// since we use it to represent "unitless" quantities. We could also use
 			// http://qudt.org/vocab/unit#Unitless or http://www.wikidata.org/entity/Q199
-			new MembershipValidator( array( '1' ) ),
-			$this->getUrlValidator( array( 'http', 'https' ), $this->vocabularyBaseUri, 255 ),
-		) );
+			new MembershipValidator( [ '1' ] ),
+			$this->getUrlValidator( [ 'http', 'https' ], $this->vocabularyBaseUri, 255 ),
+		] );
 		$validators[] = new DataFieldValidator( 'unit', $unitValidators );
 
 		$topValidator = new DataValueValidator(
 			new CompositeValidator( $validators ) //Note: each validator is fatal
 		);
 
-		return array( new TypeValidator( UnboundedQuantityValue::class ), $topValidator );
+		return [ new TypeValidator( UnboundedQuantityValue::class ), $topValidator ];
 	}
 
 }

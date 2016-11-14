@@ -47,12 +47,12 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 		}
 
 		/** @var Statement[] $statements */
-		$statements = array(
+		$statements = [
 			new Statement( new PropertyNoValueSnak( self::$propertyId ) ),
 			new Statement( new PropertyNoValueSnak( self::$propertyId ) ),
 			new Statement( new PropertySomeValueSnak( self::$propertyId ) ),
 			new Statement( new PropertyValueSnak( self::$propertyId, new StringValue( 'o_O' ) ) ),
-		);
+		];
 
 		foreach ( $statements as $statement ) {
 			$guidGenerator = new GuidGenerator();
@@ -75,10 +75,10 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 		$nonEmptyItem = new Item();
 		$nonEmptyItem->setFingerprint( $fingerprint );
 
-		return array(
+		return [
 			$this->addStatementsAndSave( new Item() ),
 			$this->addStatementsAndSave( $nonEmptyItem ),
-		);
+		];
 	}
 
 	public function testValidRequests() {
@@ -104,7 +104,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 				break;
 			}
 
-			$this->makeTheRequest( array( $statement->getGuid() ) );
+			$this->makeTheRequest( [ $statement->getGuid() ] );
 
 			/** @var Item $obtainedItem */
 			$obtainedItem = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $item->getId() );
@@ -124,7 +124,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 	 * @param Item $item
 	 */
 	public function doTestValidRequestMultiple( Item $item ) {
-		$guids = array();
+		$guids = [];
 
 		/** @var Statement $statement */
 		foreach ( $item->getStatements() as $statement ) {
@@ -140,10 +140,10 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 	}
 
 	private function makeTheRequest( array $claimGuids ) {
-		$params = array(
+		$params = [
 			'action' => 'wbremoveclaims',
 			'claim' => implode( '|', $claimGuids ),
-		);
+		];
 
 		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
 
@@ -164,19 +164,19 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 	 * @dataProvider invalidClaimProvider
 	 */
 	public function testRemoveInvalidClaims( $claimGuids ) {
-		$params = array(
+		$params = [
 			'action' => 'wbremoveclaims',
 			'claim' => is_array( $claimGuids ) ? implode( '|', $claimGuids ) : $claimGuids,
-		);
+		];
 
 		$this->doApiRequestWithToken( $params );
 	}
 
 	public function invalidClaimProvider() {
-		return array(
-			array( 'xyz' ), //wrong guid
-			array( 'x$y$z' ), //wrong guid
-		);
+		return [
+			[ 'xyz' ], //wrong guid
+			[ 'x$y$z' ], //wrong guid
+		];
 	}
 
 	/**

@@ -18,13 +18,13 @@ use Wikibase\Repo\Localizer\GenericExceptionLocalizer;
 class GenericExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideGetExceptionMessage() {
-		return array(
-			'RuntimeException' => array(
+		return [
+			'RuntimeException' => [
 				new RuntimeException( 'Oops!' ),
 				'wikibase-error-unexpected',
-				array( 'Oops!' )
-			)
-		);
+				[ 'Oops!' ]
+			]
+		];
 	}
 
 	/**

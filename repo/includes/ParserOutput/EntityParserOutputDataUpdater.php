@@ -34,12 +34,12 @@ class EntityParserOutputDataUpdater {
 	/**
 	 * @var StatementDataUpdater[]
 	 */
-	private $statementDataUpdaters = array();
+	private $statementDataUpdaters = [];
 
 	/**
 	 * @var SiteLinkDataUpdater[]
 	 */
-	private $siteLinkDataUpdaters = array();
+	private $siteLinkDataUpdaters = [];
 
 	/**
 	 * @param ParserOutput $parserOutput

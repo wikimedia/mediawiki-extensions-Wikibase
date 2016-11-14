@@ -17,7 +17,7 @@ class RepoSpecialPageLinker implements SpecialPageLinker {
 	 * @param string[] $subPageParams Parameters to be added as slash-separated sub pages
 	 * @return string
 	 */
-	public function getLink( $pageName, array $subPageParams = array() ) {
+	public function getLink( $pageName, array $subPageParams = [] ) {
 		$subPage = implode( '/', array_map( 'wfUrlencode', $subPageParams ) );
 		$specialPageTitle = SpecialPage::getTitleFor( $pageName, $subPage );
 

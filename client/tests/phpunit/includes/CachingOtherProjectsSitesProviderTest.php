@@ -28,7 +28,7 @@ class CachingOtherProjectsSitesProviderTest extends \PHPUnit_Framework_TestCase 
 
 		$otherProjectsSitesProvider->expects( $this->once() )
 			->method( 'getOtherProjectsSiteIds' )
-			->will( $this->returnValue( array( 'dewikivoyage', 'commons' ) ) );
+			->will( $this->returnValue( [ 'dewikivoyage', 'commons' ] ) );
 
 		return $otherProjectsSitesProvider;
 	}
@@ -41,15 +41,15 @@ class CachingOtherProjectsSitesProviderTest extends \PHPUnit_Framework_TestCase 
 		);
 
 		$this->assertEquals(
-			array( 'dewikivoyage', 'commons' ),
-			$cachingOtherProjectsSitesProvider->getOtherProjectsSiteIds( array( 'wikivoyage', 'commons' ) )
+			[ 'dewikivoyage', 'commons' ],
+			$cachingOtherProjectsSitesProvider->getOtherProjectsSiteIds( [ 'wikivoyage', 'commons' ] )
 		);
 
 		// Call this again... self::getOtherProjectsSitesProvider makes sure we only compute
 		// the value once.
 		$this->assertEquals(
-			array( 'dewikivoyage', 'commons' ),
-			$cachingOtherProjectsSitesProvider->getOtherProjectsSiteIds( array( 'wikivoyage', 'commons' ) )
+			[ 'dewikivoyage', 'commons' ],
+			$cachingOtherProjectsSitesProvider->getOtherProjectsSiteIds( [ 'wikivoyage', 'commons' ] )
 		);
 	}
 

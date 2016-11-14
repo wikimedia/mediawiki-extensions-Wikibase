@@ -69,17 +69,17 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 
 		$this->mockRepository = $this->entityModificationTestHelper->getMockRepository();
 
-		$this->entityModificationTestHelper->putEntities( array(
-			'Q1' => array(),
-			'Q2' => array(),
-			'P1' => array( 'datatype' => 'string' ),
-			'P2' => array( 'datatype' => 'string' ),
-		) );
+		$this->entityModificationTestHelper->putEntities( [
+			'Q1' => [],
+			'Q2' => [],
+			'P1' => [ 'datatype' => 'string' ],
+			'P2' => [ 'datatype' => 'string' ],
+		] );
 
-		$this->entityModificationTestHelper->putRedirects( array(
+		$this->entityModificationTestHelper->putRedirects( [
 			'Q11' => 'Q1',
 			'Q12' => 'Q2',
-		) );
+		] );
 	}
 
 	protected function newSpecialPage() {
@@ -203,7 +203,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	private function executeSpecialMergeItems( $params, User $user = null ) {
 		if ( !$user ) {
 			$user = $GLOBALS['wgUser'];
-			$this->setMwGlobals( 'wgGroupPermissions', array( '*' => array( 'item-merge' => true, 'edit' => true ) ) );
+			$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [ 'item-merge' => true, 'edit' => true ] ] );
 		}
 
 		// HACK: we need this in newSpecialPage, but executeSpecialPage doesn't pass the context on.
@@ -219,42 +219,42 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	}
 
 	public function testForm() {
-		$matchers['fromid'] = array(
+		$matchers['fromid'] = [
 			'tag' => 'div',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-mergeitems-fromid',
-			),
-			'child' => array(
+			],
+			'child' => [
 				'tag' => 'input',
-				'attributes' => array(
+				'attributes' => [
 					'name' => 'fromid',
-				)
-			) );
-		$matchers['toid'] = array(
+				]
+			] ];
+		$matchers['toid'] = [
 			'tag' => 'div',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-mergeitems-toid',
-			),
-			'child' => array(
+			],
+			'child' => [
 				'tag' => 'input',
-				'attributes' => array(
+				'attributes' => [
 					'name' => 'toid',
-				)
-			) );
-		$matchers['submit'] = array(
+				]
+			] ];
+		$matchers['submit'] = [
 			'tag' => 'div',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-mergeitems-submit',
-			),
-			'child' => array(
+			],
+			'child' => [
 				'tag' => 'button',
-				'attributes' => array(
+				'attributes' => [
 					'type' => 'submit',
 					'name' => 'wikibase-mergeitems-submit',
-				)
-			) );
+				]
+			] ];
 
-		$output = $this->executeSpecialMergeItems( array() );
+		$output = $this->executeSpecialMergeItems( [] );
 
 		$this->assertNoError( $output );
 
@@ -298,55 +298,55 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	}
 
 	public function mergeRequestProvider() {
-		$testCases = array();
-		$testCases['labelMerge'] = array(
-			array( 'labels' => array(
-				'en' => array( 'language' => 'en', 'value' => 'foo' )
-			) ),
-			array(),
-			array(),
-			array( 'labels' => array(
-				'en' => array( 'language' => 'en', 'value' => 'foo' )
-			) ),
-		);
-		$testCases['IgnoreConflictSitelinksMerge'] = array(
-			array( 'sitelinks' => array(
-				'dewiki' => array( 'site' => 'dewiki', 'title' => 'RemainFrom' ),
-				'enwiki' => array( 'site' => 'enwiki', 'title' => 'PlFrom' ),
-			) ),
-			array( 'sitelinks' => array(
-				'dewiki' => array( 'site' => 'dewiki', 'title' => 'RemainTo' )
-			) ),
-			array( 'sitelinks' => array(
-				'dewiki' => array( 'site' => 'dewiki', 'title' => 'RemainFrom' )
-			) ),
-			array( 'sitelinks' => array(
-				'dewiki' => array( 'site' => 'dewiki', 'title' => 'RemainTo' ),
-				'enwiki' => array( 'site' => 'enwiki', 'title' => 'PlFrom' ),
-			) ),
+		$testCases = [];
+		$testCases['labelMerge'] = [
+			[ 'labels' => [
+				'en' => [ 'language' => 'en', 'value' => 'foo' ]
+			] ],
+			[],
+			[],
+			[ 'labels' => [
+				'en' => [ 'language' => 'en', 'value' => 'foo' ]
+			] ],
+		];
+		$testCases['IgnoreConflictSitelinksMerge'] = [
+			[ 'sitelinks' => [
+				'dewiki' => [ 'site' => 'dewiki', 'title' => 'RemainFrom' ],
+				'enwiki' => [ 'site' => 'enwiki', 'title' => 'PlFrom' ],
+			] ],
+			[ 'sitelinks' => [
+				'dewiki' => [ 'site' => 'dewiki', 'title' => 'RemainTo' ]
+			] ],
+			[ 'sitelinks' => [
+				'dewiki' => [ 'site' => 'dewiki', 'title' => 'RemainFrom' ]
+			] ],
+			[ 'sitelinks' => [
+				'dewiki' => [ 'site' => 'dewiki', 'title' => 'RemainTo' ],
+				'enwiki' => [ 'site' => 'enwiki', 'title' => 'PlFrom' ],
+			] ],
 			'sitelink|foo'
-		);
+		];
 
-		$statement = array(
-			'mainsnak' => array(
+		$statement = [
+			'mainsnak' => [
 				'snaktype' => 'value',
 				'property' => 'P1',
-				'datavalue' => array( 'value' => 'imastring', 'type' => 'string' )
-			),
+				'datavalue' => [ 'value' => 'imastring', 'type' => 'string' ]
+			],
 			'type' => 'statement',
 			'rank' => 'normal',
 			'id' => 'deadbeefdeadbeefdeadbeefdeadbeef'
-		);
+		];
 
 		$statementWithoutId = $statement;
 		unset( $statementWithoutId['id'] );
 
-		$testCases['claimMerge'] = array(
-			array( 'claims' => array( 'P1' => array( $statement ) ) ),
-			array(),
-			array(),
-			array( 'claims' => array( 'P1' => array( $statementWithoutId ) ) ),
-		);
+		$testCases['claimMerge'] = [
+			[ 'claims' => [ 'P1' => [ $statement ] ] ],
+			[],
+			[],
+			[ 'claims' => [ 'P1' => [ $statementWithoutId ] ] ],
+		];
 
 		return $testCases;
 	}
@@ -357,12 +357,12 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	public function testMergeRequest( $fromBefore, $toBefore, $fromAfter, $toAfter, $ignoreConflicts = '' ) {
 
 		// -- set up params ---------------------------------
-		$params = array(
+		$params = [
 			'fromid' => 'Q1',
 			'toid' => 'Q2',
 			'summary' => 'CustomSummary!',
 			'ignoreconflicts' => $ignoreConflicts,
-		);
+		];
 
 		// -- prefill the entities --------------------------------------------
 		$this->entityModificationTestHelper->putEntity( $fromBefore, 'Q1' );
@@ -384,26 +384,26 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	}
 
 	public function provideExceptionParamsData() {
-		return array(
-			array( //3 toid bad
-				'p' => array( 'fromid' => 'Q1', 'toid' => 'ABCDE' ),
-				'e' => 'Wikibase\Lib\UserInputException:wikibase-wikibaserepopage-invalid-id' ),
-			array( //4 fromid bad
-				'p' => array( 'fromid' => 'ABCDE', 'toid' => 'Q1' ),
-				'e' => 'Wikibase\Lib\UserInputException:wikibase-wikibaserepopage-invalid-id' ),
-			array( //5 both same id
-				'p' => array( 'fromid' => 'Q1', 'toid' => 'Q1' ),
-				'e' => 'Wikibase\Repo\Interactors\ItemMergeException:wikibase-itemmerge-cant-merge-self' ),
-			array( //6 from id is property
-				'p' => array( 'fromid' => 'P1', 'toid' => 'Q1' ),
-				'e' => 'Wikibase\Lib\UserInputException:wikibase-itemmerge-not-item' ),
-			array( //7 to id is property
-				'p' => array( 'fromid' => 'Q1', 'toid' => 'P1' ),
-				'e' => 'Wikibase\Lib\UserInputException:wikibase-itemmerge-not-item' ),
-			array( //10 bad token
-				'p' => array( 'fromid' => 'Q1', 'toid' => 'Q2', 'wpEditToken' => 'BAD' ),
-				'e' => 'Wikibase\Repo\Interactors\TokenCheckException:wikibase-tokencheck-badtoken' ),
-		);
+		return [
+			[ //3 toid bad
+				'p' => [ 'fromid' => 'Q1', 'toid' => 'ABCDE' ],
+				'e' => 'Wikibase\Lib\UserInputException:wikibase-wikibaserepopage-invalid-id' ],
+			[ //4 fromid bad
+				'p' => [ 'fromid' => 'ABCDE', 'toid' => 'Q1' ],
+				'e' => 'Wikibase\Lib\UserInputException:wikibase-wikibaserepopage-invalid-id' ],
+			[ //5 both same id
+				'p' => [ 'fromid' => 'Q1', 'toid' => 'Q1' ],
+				'e' => 'Wikibase\Repo\Interactors\ItemMergeException:wikibase-itemmerge-cant-merge-self' ],
+			[ //6 from id is property
+				'p' => [ 'fromid' => 'P1', 'toid' => 'Q1' ],
+				'e' => 'Wikibase\Lib\UserInputException:wikibase-itemmerge-not-item' ],
+			[ //7 to id is property
+				'p' => [ 'fromid' => 'Q1', 'toid' => 'P1' ],
+				'e' => 'Wikibase\Lib\UserInputException:wikibase-itemmerge-not-item' ],
+			[ //10 bad token
+				'p' => [ 'fromid' => 'Q1', 'toid' => 'Q2', 'wpEditToken' => 'BAD' ],
+				'e' => 'Wikibase\Repo\Interactors\TokenCheckException:wikibase-tokencheck-badtoken' ],
+		];
 	}
 
 	/**
@@ -415,16 +415,16 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	}
 
 	public function provideExceptionConflictsData() {
-		return array(
-			array(
-				array( 'descriptions' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-				array( 'descriptions' => array( 'en' => array( 'language' => 'en', 'value' => 'foo2' ) ) ),
-			),
-			array(
-				array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'Foo' ) ) ),
-				array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'Foo2' ) ) ),
-			),
-		);
+		return [
+			[
+				[ 'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ],
+				[ 'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'foo2' ] ] ],
+			],
+			[
+				[ 'sitelinks' => [ 'dewiki' => [ 'site' => 'dewiki', 'title' => 'Foo' ] ] ],
+				[ 'sitelinks' => [ 'dewiki' => [ 'site' => 'dewiki', 'title' => 'Foo2' ] ] ],
+			],
+		];
 	}
 
 	/**
@@ -435,10 +435,10 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		$this->entityModificationTestHelper->putEntity( $pre1, 'Q1' );
 		$this->entityModificationTestHelper->putEntity( $pre2, 'Q2' );
 
-		$params = array(
+		$params = [
 			'fromid' => 'Q1',
 			'toid' => 'Q2',
-		);
+		];
 
 		// -- do the request --------------------------------------------
 		$html = $this->executeSpecialMergeItems( $params );
@@ -446,34 +446,34 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	}
 
 	public function testMergeNonExistingItem() {
-		$params = array(
+		$params = [
 			'fromid' => 'Q60457977',
 			'toid' => 'Q60457978'
-		);
+		];
 
 		$html = $this->executeSpecialMergeItems( $params );
 		$this->assertError( 'Wikibase\Repo\Interactors\ItemMergeException:wikibase-itemmerge-no-such-entity', $html );
 	}
 
 	public function permissionProvider() {
-		return array(
-			'edit' => array( 'edit' ),
-			'item-merge' => array( 'item-merge' ),
-		);
+		return [
+			'edit' => [ 'edit' ],
+			'item-merge' => [ 'item-merge' ],
+		];
 	}
 
 	/**
 	 * @dataProvider permissionProvider
 	 */
 	public function testNoPermission( $permission ) {
-		$params = array(
+		$params = [
 			'fromid' => 'Q1',
 			'toid' => 'Q2'
-		);
-		$this->setMwGlobals( 'wgGroupPermissions', array( '*' => array(
+		];
+		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [
 			'item-merge' => $permission !== 'item-merge',
 			'edit' => $permission !== 'edit'
-		) ) );
+		] ] );
 
 		$user = User::newFromName( 'UserWithoutPermission-' . $permission );
 

@@ -36,7 +36,7 @@ class VariantsAwareRendererTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getLanguageAwareRendererFromCode' )
 			->will( $this->returnValue( $languageRenderer ) );
 
-		$languageRenderers = array();
+		$languageRenderers = [];
 
 		foreach ( $variants as $variant ) {
 			$languageRenderers[$variant] = $languageRenderer;
@@ -55,22 +55,22 @@ class VariantsAwareRendererTest extends \PHPUnit_Framework_TestCase {
 	public function renderProvider() {
 		$itemId = new ItemId( 'Q3' );
 
-		return array(
-			array(
+		return [
+			[
 				'-{zh:mooooo;zh-hans:mooooo;zh-hant:mooooo;zh-cn:mooooo;zh-hk:mooooo;}-',
 				$itemId,
-				array( 'zh', 'zh-hans', 'zh-hant', 'zh-cn', 'zh-hk' ),
+				[ 'zh', 'zh-hans', 'zh-hant', 'zh-cn', 'zh-hk' ],
 				'cat'
-			),
+			],
 			// Don't create "-{}-" for empty input,
 			// to keep the ability to check a missing property with {{#if: }}.
-			array(
+			[
 				'',
 				$itemId,
-				array(),
+				[],
 				'cat'
-			)
-		);
+			]
+		];
 	}
 
 	/**

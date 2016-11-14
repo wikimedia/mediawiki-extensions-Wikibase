@@ -21,9 +21,9 @@ class SummaryTest extends \MediaWikiTestCase {
 		$summary = new Summary( 'summarytest' );
 		$summary->addAutoCommentArgs( "one" );
 		$summary->addAutoCommentArgs( 2, new ItemId( 'Q3' ) );
-		$summary->addAutoCommentArgs( array( "four", "five" ) );
+		$summary->addAutoCommentArgs( [ "four", "five" ] );
 
-		$expected = array( 'one', 2, new ItemId( 'Q3' ), 'four', 'five' );
+		$expected = [ 'one', 2, new ItemId( 'Q3' ), 'four', 'five' ];
 		$this->assertEquals( $expected, $summary->getCommentArgs() );
 	}
 
@@ -45,9 +45,9 @@ class SummaryTest extends \MediaWikiTestCase {
 		$summary = new Summary( 'summarytest' );
 		$summary->addAutoSummaryArgs( "one" );
 		$summary->addAutoSummaryArgs( 2, new ItemId( 'Q3' ) );
-		$summary->addAutoSummaryArgs( array( "four", "five" ) );
+		$summary->addAutoSummaryArgs( [ "four", "five" ] );
 
-		$expected = array( 'one', 2, new ItemId( 'Q3' ), 'four', 'five' );
+		$expected = [ 'one', 2, new ItemId( 'Q3' ), 'four', 'five' ];
 		$this->assertEquals( $expected, $summary->getAutoSummaryArgs() );
 	}
 

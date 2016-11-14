@@ -32,18 +32,18 @@ class MonolingualTextFormatterTest extends \PHPUnit_Framework_TestCase {
 	public function monolingualTextFormatProvider() {
 		$options = new FormatterOptions();
 
-		return array(
-			array(
+		return [
+			[
 				new MonolingualTextValue( 'de', 'Hallo Welt' ),
 				$options,
 				'@^Hallo Welt$@'
-			),
-			array(
+			],
+			[
 				new MonolingualTextValue( 'de', 'Hallo&Welt' ),
 				$options,
 				'@^Hallo&Welt$@'
-			),
-		);
+			],
+		];
 	}
 
 }

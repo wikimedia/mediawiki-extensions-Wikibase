@@ -84,47 +84,47 @@ class ErrorHandlingSnakFormatterTest extends \MediaWikiTestCase {
 
 		$valueFormatter = $this->getValueFormatter();
 
-		return array(
-			'MismatchingDataValueTypeException' => array(
+		return [
+			'MismatchingDataValueTypeException' => [
 				'<span class="error wb-format-error">(wikibase-snakformatter-valuetype-mismatch: string, number)</span>',
 				new PropertyValueSnak( $p1, new StringValue( 'foo' ) ),
 				new MismatchingDataValueTypeException( 'number', 'string' ),
-			),
-			'MismatchingDataValueTypeException+fallback' => array(
+			],
+			'MismatchingDataValueTypeException+fallback' => [
 				'VALUE <span class="error wb-format-error">(wikibase-snakformatter-valuetype-mismatch: string, number)</span>',
 				new PropertyValueSnak( $p1, new StringValue( 'foo' ) ),
 				new MismatchingDataValueTypeException( 'number', 'string' ),
 				$valueFormatter
-			),
-			'MismatchingDataValueTypeException+UnDeserializableValue' => array(
+			],
+			'MismatchingDataValueTypeException+UnDeserializableValue' => [
 				'<span class="error wb-format-error">(wikibase-undeserializable-value)</span>',
 				new PropertyValueSnak( $p1, new UnDeserializableValue( 'string', 'XYZ', 'test' ) ),
 				new MismatchingDataValueTypeException( 'number', UnDeserializableValue::getType() ),
-			),
-			'MismatchingDataValueTypeException+UnDeserializableValue+fallback' => array(
+			],
+			'MismatchingDataValueTypeException+UnDeserializableValue+fallback' => [
 				'VALUE <span class="error wb-format-error">(wikibase-undeserializable-value)</span>',
 				new PropertyValueSnak( $p1, new UnDeserializableValue( 'string', 'XYZ', 'test' ) ),
 				new MismatchingDataValueTypeException( 'number', UnDeserializableValue::getType() ),
 				$valueFormatter
-			),
-			'PropertyDataTypeLookupException' => array(
+			],
+			'PropertyDataTypeLookupException' => [
 				'<span class="error wb-format-error">(wikibase-snakformatter-property-not-found: P1)</span>',
 				new PropertyValueSnak( $p1, new StringValue( 'foo' ) ),
 				new PropertyDataTypeLookupException( new PropertyId( 'P1' ) ),
 
-			),
-			'PropertyDataTypeLookupException+fallback' => array(
+			],
+			'PropertyDataTypeLookupException+fallback' => [
 				'VALUE <span class="error wb-format-error">(wikibase-snakformatter-property-not-found: P1)</span>',
 				new PropertyValueSnak( $p1, new StringValue( 'foo' ) ),
 				new PropertyDataTypeLookupException( new PropertyId( 'P1' ) ),
 				$valueFormatter
-			),
-			'FormattingException' => array(
+			],
+			'FormattingException' => [
 				'<span class="error wb-format-error">(wikibase-snakformatter-formatting-exception: TEST)</span>',
 				new PropertyValueSnak( $p1, new StringValue( 'foo' ) ),
 				new FormattingException( 'TEST' ),
-			),
-		);
+			],
+		];
 	}
 
 	/**

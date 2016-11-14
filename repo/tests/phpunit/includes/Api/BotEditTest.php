@@ -38,78 +38,78 @@ class BotEditTest extends WikibaseApiTestCase {
 			'Apitestbot',
 			'Api Test Bot',
 			'api_test_bot@example.com',
-			array( 'bot' )
+			[ 'bot' ]
 		);
-		$this->mergeMwGlobalArrayValue( 'wgGroupPermissions', array(
-			'user' => array( 'item-merge' => true, 'item-redirect' => true ),
-		) );
+		$this->mergeMwGlobalArrayValue( 'wgGroupPermissions', [
+			'user' => [ 'item-merge' => true, 'item-redirect' => true ],
+		] );
 
 		if ( !isset( self::$hasSetup ) ) {
-			$this->initTestEntities( array( 'Empty', 'Leipzig', 'Osaka' ) );
+			$this->initTestEntities( [ 'Empty', 'Leipzig', 'Osaka' ] );
 		}
 
 		self::$hasSetup = true;
 	}
 
 	public function provideData() {
-		return array(
-			array( //0
-				'p' => array( 'handle' => 'Empty', 'bot' => '', 'action' => 'wbsetlabel',
-					'language' => 'en', 'value' => 'ALabel' ),
-				'e' => array( 'bot' => true, 'new' => false ) ),
-			array( //1
-				'p' => array( 'handle' => 'Empty', 'action' => 'wbsetlabel', 'language' => 'en',
-					'value' => 'ALabel2' ),
-				'e' => array( 'bot' => false, 'new' => false ) ),
-			array( //2
-				'p' => array( 'handle' => 'Empty', 'bot' => '', 'action' => 'wbsetdescription',
-					'language' => 'de', 'value' => 'ADesc' ),
-				'e' => array( 'bot' => true, 'new' => false ) ),
-			array( //3
-				'p' => array( 'handle' => 'Empty', 'action' => 'wbsetdescription',
-					'language' => 'de', 'value' => 'ADesc2' ),
-				'e' => array( 'bot' => false, 'new' => false ) ),
-			array( //4
-				'p' => array( 'handle' => 'Empty', 'bot' => '', 'action' => 'wbsetaliases',
-					'language' => 'de', 'set' => 'ali1' ),
-				'e' => array( 'bot' => true, 'new' => false ) ),
-			array( //5
-				'p' => array( 'handle' => 'Empty', 'action' => 'wbsetaliases', 'language' => 'de',
-					'set' => 'ali2' ),
-				'e' => array( 'bot' => false, 'new' => false ) ),
-			array( //6
-				'p' => array( 'handle' => 'Empty', 'bot' => '', 'action' => 'wbsetsitelink',
-					'linksite' => 'enwiki', 'linktitle' => 'PageEn' ),
-				'e' => array( 'bot' => true, 'new' => false ) ),
-			array( //7
-				'p' => array( 'handle' => 'Empty', 'action' => 'wbsetsitelink',
-					'linksite' => 'dewiki', 'linktitle' => 'PageDe' ),
-				'e' => array( 'bot' => false, 'new' => false ) ),
-			array( //8
-				'p' => array( 'bot' => '', 'action' => 'wblinktitles', 'tosite' => 'enwiki',
-					'totitle' => 'PageEn', 'fromsite' => 'svwiki', 'fromtitle' => 'SvPage' ),
-				'e' => array( 'bot' => true, 'new' => false ) ),
-			array( //9
-				'p' => array( 'action' => 'wblinktitles', 'tosite' => 'dewiki',
-					'totitle' => 'PageDe', 'fromsite' => 'nowiki', 'fromtitle' => 'NoPage' ),
-				'e' => array( 'bot' => false, 'new' => false ) ),
-			array( //10
-				'p' => array( 'bot' => '', 'action' => 'wbeditentity', 'new' => 'item',
-					'data' => '{}' ),
-				'e' => array( 'bot' => true, 'new' => true ) ),
-			array( //11
-				'p' => array( 'action' => 'wbeditentity', 'new' => 'item', 'data' => '{}' ),
-				'e' => array( 'bot' => false, 'new' => true ) ),
-			array( //12
-				'p' => array( 'action' => 'wbmergeitems', 'fromid' => 'Osaka', 'toid' => 'Empty',
-					'bot' => '' ),
-				'e' => array( 'bot' => true, 'new' => false ) ),
-			array( //13
-				'p' => array( 'action' => 'wbmergeitems', 'fromid' => 'Leipzig', 'toid' => 'Empty',
-					'ignoreconflicts' => 'description' ),
-				'e' => array( 'bot' => false, 'new' => false ) ),
+		return [
+			[ //0
+				'p' => [ 'handle' => 'Empty', 'bot' => '', 'action' => 'wbsetlabel',
+					'language' => 'en', 'value' => 'ALabel' ],
+				'e' => [ 'bot' => true, 'new' => false ] ],
+			[ //1
+				'p' => [ 'handle' => 'Empty', 'action' => 'wbsetlabel', 'language' => 'en',
+					'value' => 'ALabel2' ],
+				'e' => [ 'bot' => false, 'new' => false ] ],
+			[ //2
+				'p' => [ 'handle' => 'Empty', 'bot' => '', 'action' => 'wbsetdescription',
+					'language' => 'de', 'value' => 'ADesc' ],
+				'e' => [ 'bot' => true, 'new' => false ] ],
+			[ //3
+				'p' => [ 'handle' => 'Empty', 'action' => 'wbsetdescription',
+					'language' => 'de', 'value' => 'ADesc2' ],
+				'e' => [ 'bot' => false, 'new' => false ] ],
+			[ //4
+				'p' => [ 'handle' => 'Empty', 'bot' => '', 'action' => 'wbsetaliases',
+					'language' => 'de', 'set' => 'ali1' ],
+				'e' => [ 'bot' => true, 'new' => false ] ],
+			[ //5
+				'p' => [ 'handle' => 'Empty', 'action' => 'wbsetaliases', 'language' => 'de',
+					'set' => 'ali2' ],
+				'e' => [ 'bot' => false, 'new' => false ] ],
+			[ //6
+				'p' => [ 'handle' => 'Empty', 'bot' => '', 'action' => 'wbsetsitelink',
+					'linksite' => 'enwiki', 'linktitle' => 'PageEn' ],
+				'e' => [ 'bot' => true, 'new' => false ] ],
+			[ //7
+				'p' => [ 'handle' => 'Empty', 'action' => 'wbsetsitelink',
+					'linksite' => 'dewiki', 'linktitle' => 'PageDe' ],
+				'e' => [ 'bot' => false, 'new' => false ] ],
+			[ //8
+				'p' => [ 'bot' => '', 'action' => 'wblinktitles', 'tosite' => 'enwiki',
+					'totitle' => 'PageEn', 'fromsite' => 'svwiki', 'fromtitle' => 'SvPage' ],
+				'e' => [ 'bot' => true, 'new' => false ] ],
+			[ //9
+				'p' => [ 'action' => 'wblinktitles', 'tosite' => 'dewiki',
+					'totitle' => 'PageDe', 'fromsite' => 'nowiki', 'fromtitle' => 'NoPage' ],
+				'e' => [ 'bot' => false, 'new' => false ] ],
+			[ //10
+				'p' => [ 'bot' => '', 'action' => 'wbeditentity', 'new' => 'item',
+					'data' => '{}' ],
+				'e' => [ 'bot' => true, 'new' => true ] ],
+			[ //11
+				'p' => [ 'action' => 'wbeditentity', 'new' => 'item', 'data' => '{}' ],
+				'e' => [ 'bot' => false, 'new' => true ] ],
+			[ //12
+				'p' => [ 'action' => 'wbmergeitems', 'fromid' => 'Osaka', 'toid' => 'Empty',
+					'bot' => '' ],
+				'e' => [ 'bot' => true, 'new' => false ] ],
+			[ //13
+				'p' => [ 'action' => 'wbmergeitems', 'fromid' => 'Leipzig', 'toid' => 'Empty',
+					'ignoreconflicts' => 'description' ],
+				'e' => [ 'bot' => false, 'new' => false ] ],
 			// TODO: Claims, references, qualifiers.
-		);
+		];
 	}
 
 	/**
@@ -144,13 +144,13 @@ class BotEditTest extends WikibaseApiTestCase {
 		}
 
 		// -- get the recentchanges -------------------------------------------
-		$rcRequest = array(
+		$rcRequest = [
 			'action' => 'query',
 			'list' => 'recentchanges',
 			'rcprop' => 'title|flags',
 			'rctoponly' => '1',
 			'rclimit' => 5, // hope that no more than 50 edits where made in the last second
-		);
+		];
 
 		//@todo this really makes this test slow, is there a better way?
 		$rcResult = $this->doApiRequest( $rcRequest, null, false, self::$users['wbbot']->getUser() );

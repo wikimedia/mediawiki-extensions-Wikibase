@@ -102,9 +102,9 @@ class ItemContentTest extends EntityContentTest {
 		$itemContent->getEntity()->setLabel( 'en', "cake" );
 		$itemContent->getEntity()->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Berlin' );
 
-		return array(
-			array( $itemContent, "cake\nBerlin" ),
-		);
+		return [
+			[ $itemContent, "cake\nBerlin" ],
+		];
 	}
 
 	public function providePageProperties() {
@@ -113,10 +113,10 @@ class ItemContentTest extends EntityContentTest {
 		$contentLinkStub = $this->newEmpty( $this->getDummyId() );
 		$contentLinkStub->getEntity()->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
 
-		$cases['sitelinks'] = array(
+		$cases['sitelinks'] = [
 			$contentLinkStub,
-			array( 'wb-claims' => 0, 'wb-sitelinks' => 1 )
-		);
+			[ 'wb-claims' => 0, 'wb-sitelinks' => 1 ]
+		];
 
 		// @todo this is needed in PropertyContentTest as well
 		//       once we have statements in properties
@@ -125,10 +125,10 @@ class ItemContentTest extends EntityContentTest {
 		$guid = '$testing$';
 		$contentWithClaim->getEntity()->getStatements()->addNewStatement( $snak, null, null, $guid );
 
-		$cases['claims'] = array(
+		$cases['claims'] = [
 			$contentWithClaim,
-			array( 'wb-claims' => 1 )
-		);
+			[ 'wb-claims' => 1 ]
+		];
 
 		return $cases;
 	}
@@ -139,18 +139,18 @@ class ItemContentTest extends EntityContentTest {
 		$contentLinkStub = ItemContent::newEmpty();
 		$contentLinkStub->getEntity()->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
 
-		$cases['linkstub'] = array(
+		$cases['linkstub'] = [
 			$contentLinkStub,
 			ItemContent::STATUS_LINKSTUB
-		);
+		];
 
 		$linksAndTerms = $contentLinkStub->copy();
 		$linksAndTerms->getEntity()->setLabel( 'en', 'foo' );
 
-		$cases['linkstub with terms'] = array(
+		$cases['linkstub with terms'] = [
 			$linksAndTerms,
 			ItemContent::STATUS_LINKSTUB
-		);
+		];
 
 		// @todo this is needed in PropertyContentTest as well
 		//       once we have statements in properties
@@ -159,18 +159,18 @@ class ItemContentTest extends EntityContentTest {
 		$guid = '$testing$';
 		$contentWithClaim->getEntity()->getStatements()->addNewStatement( $snak, null, null, $guid );
 
-		$cases['claims'] = array(
+		$cases['claims'] = [
 			$contentWithClaim,
 			EntityContent::STATUS_NONE
-		);
+		];
 
 		$contentWithClaimAndLink = $contentWithClaim->copy();
 		$contentWithClaimAndLink->getEntity()->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
 
-		$cases['statements and links'] = array(
+		$cases['statements and links'] = [
 			$contentWithClaimAndLink,
 			EntityContent::STATUS_NONE
-		);
+		];
 
 		return $cases;
 	}
@@ -199,9 +199,9 @@ class ItemContentTest extends EntityContentTest {
 		$itemContent = $this->newEmpty();
 		$item = $itemContent->getItem();
 
-		$item->setSiteLinkList( new SiteLinkList( array(
+		$item->setSiteLinkList( new SiteLinkList( [
 			new SiteLink( 'enwiki', 'Foo' )
-		) ) );
+		] ) );
 
 		return $itemContent;
 	}
@@ -214,30 +214,30 @@ class ItemContentTest extends EntityContentTest {
 			$case[1]['wb-sitelinks'] = 0;
 		}
 
-		$cases['redirect'] = array(
+		$cases['redirect'] = [
 			ItemContent::newFromRedirect(
 				new EntityRedirect( new ItemId( 'Q1' ), new ItemId( 'Q2' ) ),
 				$this->getMock( Title::class )
 			),
-			array()
-		);
+			[]
+		];
 
-		$cases['claims'] = array(
+		$cases['claims'] = [
 			$this->getItemContentWithClaim(),
-			array(
+			[
 				'wb-claims' => 1,
 				'wb-sitelinks' => 0,
-			)
-		);
+			]
+		];
 
-		$cases['sitelinks'] = array(
+		$cases['sitelinks'] = [
 			$this->getItemContentWithSiteLink(),
-			array(
+			[
 				'wb-claims' => 0,
 				'wb-sitelinks' => 1,
 				'wb-status' => ItemContent::STATUS_LINKSTUB,
-			)
-		);
+			]
+		];
 
 		return $cases;
 	}
@@ -255,41 +255,41 @@ class ItemContentTest extends EntityContentTest {
 		$redirTarget = 'Q17';
 
 		$emptyToRedirDiff = new EntityContentDiff(
-			new EntityDiff( array() ),
-			new Diff( array(
+			new EntityDiff( [] ),
+			new Diff( [
 				'redirect' => new DiffOpAdd( $redirTarget ),
-			), true )
+			], true )
 		);
 
 		$spamToRedirDiff = new EntityContentDiff(
-			new EntityDiff( array(
+			new EntityDiff( [
 				'label' => new Diff(
-						array( 'en' => new DiffOpRemove( 'Spam' ) )
+						[ 'en' => new DiffOpRemove( 'Spam' ) ]
 					),
-			) ),
-			new Diff( array(
+			] ),
+			new Diff( [
 				'redirect' => new DiffOpAdd( $redirTarget ),
-			), true )
+			], true )
 		);
 
 		$redirToSpamDiff = new EntityContentDiff(
-			new EntityDiff( array(
+			new EntityDiff( [
 				'label' => new Diff(
-						array( 'en' => new DiffOpAdd( 'Spam' ) )
+						[ 'en' => new DiffOpAdd( 'Spam' ) ]
 					),
-			) ),
-			new Diff( array(
+			] ),
+			new Diff( [
 				'redirect' => new DiffOpRemove( $redirTarget ),
-			), true )
+			], true )
 		);
 
-		$cases['same redir'] = array( $redir, $redir, new EntityContentDiff(
+		$cases['same redir'] = [ $redir, $redir, new EntityContentDiff(
 			new EntityDiff(),
 			new Diff()
-		) );
-		$cases['empty to redir'] = array( $empty, $redir, $emptyToRedirDiff );
-		$cases['entity to redir'] = array( $spam, $redir, $spamToRedirDiff );
-		$cases['redir to entity'] = array( $redir, $spam, $redirToSpamDiff );
+		) ];
+		$cases['empty to redir'] = [ $empty, $redir, $emptyToRedirDiff ];
+		$cases['entity to redir'] = [ $spam, $redir, $spamToRedirDiff ];
+		$cases['redir to entity'] = [ $redir, $spam, $redirToSpamDiff ];
 
 		return $cases;
 	}
@@ -307,38 +307,38 @@ class ItemContentTest extends EntityContentTest {
 		$redir = $this->newRedirect( $q10, new ItemId( $redirTarget ) );
 
 		$emptyToRedirDiff = new EntityContentDiff(
-			new EntityDiff( array() ),
-			new Diff( array(
+			new EntityDiff( [] ),
+			new Diff( [
 				'redirect' => new DiffOpAdd( $redirTarget ),
-			), true )
+			], true )
 		);
 
 		$spamToRedirDiff = new EntityContentDiff(
-			new EntityDiff( array(
+			new EntityDiff( [
 				'label' => new Diff(
-						array( 'en' => new DiffOpRemove( 'Spam' ) )
+						[ 'en' => new DiffOpRemove( 'Spam' ) ]
 					),
-			) ),
-			new Diff( array(
+			] ),
+			new Diff( [
 				'redirect' => new DiffOpAdd( $redirTarget ),
-			), true )
+			], true )
 		);
 
 		$redirToSpamDiff = new EntityContentDiff(
-			new EntityDiff( array(
+			new EntityDiff( [
 				'label' => new Diff(
-						array( 'en' => new DiffOpAdd( 'Spam' ) )
+						[ 'en' => new DiffOpAdd( 'Spam' ) ]
 					),
-			) ),
-			new Diff( array(
+			] ),
+			new Diff( [
 				'redirect' => new DiffOpRemove( $redirTarget ),
-			), true )
+			], true )
 		);
 
-		$cases['empty to redir'] = array( $empty, $emptyToRedirDiff, $redir );
-		$cases['entity to redir'] = array( $spam, $spamToRedirDiff, $redir );
-		$cases['redir to entity'] = array( $redir, $redirToSpamDiff, $spam );
-		$cases['redir with entity clash'] = array( $spam, $emptyToRedirDiff, null );
+		$cases['empty to redir'] = [ $empty, $emptyToRedirDiff, $redir ];
+		$cases['entity to redir'] = [ $spam, $spamToRedirDiff, $redir ];
+		$cases['redir to entity'] = [ $redir, $redirToSpamDiff, $spam ];
+		$cases['redir with entity clash'] = [ $spam, $emptyToRedirDiff, null ];
 
 		return $cases;
 	}
@@ -348,7 +348,7 @@ class ItemContentTest extends EntityContentTest {
 
 		$redir = $this->newRedirect( new ItemId( 'Q5' ), new ItemId( 'Q7' ) );
 
-		$cases['redirect'] = array( $redir );
+		$cases['redirect'] = [ $redir ];
 
 		return $cases;
 	}
@@ -361,9 +361,9 @@ class ItemContentTest extends EntityContentTest {
 		$labels1 = $this->newEmpty();
 		$labels1->getEntity()->setLabel( 'en', 'Foo' );
 
-		$cases['same redirect'] = array( $redir, $redir, true );
-		$cases['redirect vs labels'] = array( $redir, $labels1, false );
-		$cases['labels vs redirect'] = array( $labels1, $redir, false );
+		$cases['same redirect'] = [ $redir, $redir, true ];
+		$cases['redirect vs labels'] = [ $redir, $labels1, false ];
+		$cases['labels vs redirect'] = [ $labels1, $redir, false ];
 
 		return $cases;
 	}
@@ -385,9 +385,9 @@ class ItemContentTest extends EntityContentTest {
 		$q11 = new ItemId( 'Q11' );
 		$q12 = new ItemId( 'Q12' );
 
-		$cases = array();
-		$cases['entity id'] = array( $this->newEmpty( $q11 ), $q11 );
-		$cases['redirect id'] = array( $this->newRedirect( $q11, $q12 ), $q11 );
+		$cases = [];
+		$cases['entity id'] = [ $this->newEmpty( $q11 ), $q11 ];
+		$cases['redirect id'] = [ $this->newRedirect( $q11, $q12 ), $q11 ];
 
 		return $cases;
 	}
@@ -395,10 +395,10 @@ class ItemContentTest extends EntityContentTest {
 	public function entityRedirectProvider() {
 		$cases = parent::entityRedirectProvider();
 
-		$cases['redirect'] = array(
+		$cases['redirect'] = [
 			$this->newRedirect( new ItemId( 'Q11' ), new ItemId( 'Q12' ) ),
 			new EntityRedirect( new ItemId( 'Q11' ), new ItemId( 'Q12' ) )
-		);
+		];
 
 		return $cases;
 	}

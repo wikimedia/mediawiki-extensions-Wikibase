@@ -30,7 +30,7 @@ class ViewEntityActionTest extends ActionTestCase {
 		$this->setUserLang( 'de' );
 
 		// Remove handlers for the "OutputPageParserOutput" hook
-		$this->mergeMwGlobalArrayValue( 'wgHooks', array( 'OutputPageParserOutput' => array() ) );
+		$this->mergeMwGlobalArrayValue( 'wgHooks', [ 'OutputPageParserOutput' => [] ] );
 	}
 
 	public function testActionForPage() {
@@ -52,7 +52,7 @@ class ViewEntityActionTest extends ActionTestCase {
 	 */
 	public function testShow( $handle, $regex ) {
 		$page = $this->getTestItemPage( $handle );
-		$html = $this->executeViewAction( $page, array() );
+		$html = $this->executeViewAction( $page, [] );
 
 		$this->assertRegExp( $regex, $html );
 	}
@@ -63,10 +63,10 @@ class ViewEntityActionTest extends ActionTestCase {
 		$latest = $page->getRevision();
 		$previous = $latest->getPrevious();
 
-		$params = array(
+		$params = [
 			'diff' => $latest->getId(),
 			'oldid' => $previous->getId()
-		);
+		];
 
 		$html = $this->executeViewAction( $page, $params );
 
@@ -80,9 +80,9 @@ class ViewEntityActionTest extends ActionTestCase {
 		$latest = $page->getRevision();
 		$previous = $latest->getPrevious();
 
-		$params = array(
+		$params = [
 			'oldid' => $previous->getId()
-		);
+		];
 
 		$html = $this->executeViewAction( $page, $params );
 
@@ -91,7 +91,7 @@ class ViewEntityActionTest extends ActionTestCase {
 
 	public function testShowNonExistingRevision() {
 		$page = $this->getTestItemPage( 'Berlin' );
-		$params = array( 'oldid' => 2147483647 );
+		$params = [ 'oldid' => 2147483647 ];
 
 		$html = $this->executeViewAction( $page, $params );
 		$this->assertContains( 'Die Version 2147483647', $html, 'non-existing revision' );

@@ -43,7 +43,7 @@ class PageTermsTest extends MediaWikiLangTestCase {
 		$main = new ApiMain( $context );
 
 		$pageSet = $this->getMockBuilder( ApiPageSet::class )
-			->setConstructorArgs( array( $main ) )
+			->setConstructorArgs( [ $main ] )
 			->getMock();
 
 		$pageSet->expects( $this->any() )
@@ -51,8 +51,8 @@ class PageTermsTest extends MediaWikiLangTestCase {
 			->will( $this->returnValue( $titles ) );
 
 		$query = $this->getMockBuilder( ApiQuery::class )
-			->setConstructorArgs( array( $main, $params['action'] ) )
-			->setMethods( array( 'getPageSet' ) )
+			->setConstructorArgs( [ $main, $params['action'] ] )
+			->setMethods( [ 'getPageSet' ] )
 			->getMock();
 
 		$query->expects( $this->any() )
@@ -68,7 +68,7 @@ class PageTermsTest extends MediaWikiLangTestCase {
 	 * @return Title[]
 	 */
 	private function makeTitles( array $names ) {
-		$titles = array();
+		$titles = [];
 
 		foreach ( $names as $name ) {
 			if ( !preg_match( '/^\D+/', $name ) ) {
@@ -92,7 +92,7 @@ class PageTermsTest extends MediaWikiLangTestCase {
 	 * @return EntityId[]
 	 */
 	private function makeEntityIds( array $pageIds ) {
-		$entityIds = array();
+		$entityIds = [];
 
 		foreach ( $pageIds as $pid ) {
 			$entityIds[$pid] = $this->newEntityId( $pid );
@@ -107,7 +107,7 @@ class PageTermsTest extends MediaWikiLangTestCase {
 	 * @return TermIndex
 	 */
 	private function getTermIndex( array $terms ) {
-		$termObjectsByEntityId = array();
+		$termObjectsByEntityId = [];
 
 		foreach ( $terms as $pid => $termGroups ) {
 			$entityId = $this->newEntityId( $pid );
@@ -144,7 +144,7 @@ class PageTermsTest extends MediaWikiLangTestCase {
 		array $termTypes = null,
 		array $languageCodes = null
 	) {
-		$result = array();
+		$result = [];
 
 		foreach ( $entityIds as $id ) {
 			$key = $id->getSerialization();
@@ -175,17 +175,17 @@ class PageTermsTest extends MediaWikiLangTestCase {
 	 * @return TermIndexEntry[]
 	 */
 	private function makeTermsFromGroups( EntityId $entityId, array $termGroups ) {
-		$terms = array();
+		$terms = [];
 
 		foreach ( $termGroups as $type => $group ) {
 			foreach ( $group as $lang => $text ) {
-				$terms[] = new TermIndexEntry( array(
+				$terms[] = new TermIndexEntry( [
 					'termType' => $type,
 					'termLanguage' => $lang,
 					'termText' => $text,
 					'entityType' => $entityId->getEntityType(),
 					'entityId' => $entityId->getNumericId()
-				) );
+				] );
 			}
 		}
 
@@ -234,155 +234,155 @@ class PageTermsTest extends MediaWikiLangTestCase {
 		$module->execute();
 
 		$result = $module->getResult();
-		$data = $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
+		$data = $result->getResultData( null, [
+			'BC' => [],
+			'Types' => [],
 			'Strip' => 'all',
-		) );
+		] );
 		return $data;
 	}
 
 	public function pageTermsProvider() {
-		$terms = array(
-			11 => array(
-				'label' => array(
+		$terms = [
+			11 => [
+				'label' => [
 					'en' => 'Vienna',
 					'de' => 'Wien',
-				),
-				'description' => array(
+				],
+				'description' => [
 					'en' => 'Capitol city of Austria',
 					'de' => 'Hauptstadt Österreichs',
-				),
-			),
-			22 => array(
-				'label' => array(
+				],
+			],
+			22 => [
+				'label' => [
 					'en' => 'Moscow',
 					'de' => 'Moskau',
-				),
-				'description' => array(
+				],
+				'description' => [
 					'en' => 'Capitol city of Russia',
 					'de' => 'Hauptstadt Russlands',
-				),
-			),
-			3333 => array(
-				'label' => array(
+				],
+			],
+			3333 => [
+				'label' => [
 					'en' => 'Population',
 					'de' => 'Einwohnerzahl',
-				),
-				'description' => array(
+				],
+				'description' => [
 					'en' => 'number of inhabitants',
 					'de' => 'Anzahl der Bewohner',
-				),
-			),
-		);
+				],
+			],
+		];
 
-		return array(
-			'by title' => array(
-				array(
+		return [
+			'by title' => [
+				[
 					'action' => 'query',
 					'query' => 'pageterms',
 					'titles' => 'No11|No22|No3333',
-				),
+				],
 				$terms,
-				array(
-					11 => array(
-						'terms' => array(
-							'label' => array( 'Vienna' ),
-							'description' => array( 'Capitol city of Austria' ),
-						)
-					),
-					22 => array(
-						'terms' => array(
-							'label' => array( 'Moscow' ),
-							'description' => array( 'Capitol city of Russia' ),
-						)
-					),
-					3333 => array(
-						'terms' => array(
-							'label' => array( 'Population' ),
-							'description' => array( 'number of inhabitants' ),
-						)
-					),
-				)
-			),
-			'descriptions only' => array(
-				array(
+				[
+					11 => [
+						'terms' => [
+							'label' => [ 'Vienna' ],
+							'description' => [ 'Capitol city of Austria' ],
+						]
+					],
+					22 => [
+						'terms' => [
+							'label' => [ 'Moscow' ],
+							'description' => [ 'Capitol city of Russia' ],
+						]
+					],
+					3333 => [
+						'terms' => [
+							'label' => [ 'Population' ],
+							'description' => [ 'number of inhabitants' ],
+						]
+					],
+				]
+			],
+			'descriptions only' => [
+				[
 					'action' => 'query',
 					'query' => 'pageterms',
 					'titles' => 'No11|No22',
 					'wbptterms' => 'description',
-				),
+				],
 				$terms,
-				array(
-					11 => array(
-						'terms' => array(
-							'description' => array( 'Capitol city of Austria' ),
-						)
-					),
-					22 => array(
-						'terms' => array(
-							'description' => array( 'Capitol city of Russia' ),
-						)
-					),
-				)
-			),
-			'with uselang' => array(
-				array(
+				[
+					11 => [
+						'terms' => [
+							'description' => [ 'Capitol city of Austria' ],
+						]
+					],
+					22 => [
+						'terms' => [
+							'description' => [ 'Capitol city of Russia' ],
+						]
+					],
+				]
+			],
+			'with uselang' => [
+				[
 					'action' => 'query',
 					'query' => 'pageterms',
 					'titles' => 'No11|No22',
 					'uselang' => 'de',
-				),
+				],
 				$terms,
-				array(
-					11 => array(
-						'terms' => array(
-							'label' => array( 'Wien' ),
-							'description' => array( 'Hauptstadt Österreichs' ),
-						)
-					),
-					22 => array(
-						'terms' => array(
-							'label' => array( 'Moskau' ),
-							'description' => array( 'Hauptstadt Russlands' ),
-						)
-					),
-				)
-			),
-			'title without entity' => array(
-				array(
+				[
+					11 => [
+						'terms' => [
+							'label' => [ 'Wien' ],
+							'description' => [ 'Hauptstadt Österreichs' ],
+						]
+					],
+					22 => [
+						'terms' => [
+							'label' => [ 'Moskau' ],
+							'description' => [ 'Hauptstadt Russlands' ],
+						]
+					],
+				]
+			],
+			'title without entity' => [
+				[
 					'action' => 'query',
 					'query' => 'pageterms',
 					'titles' => 'No11|SomeTitleWithoutEntity',
-				),
+				],
 				$terms,
-				array(
-					11 => array(
-						'terms' => array(
-							'label' => array( 'Vienna' ),
-							'description' => array( 'Capitol city of Austria' ),
-						)
-					),
-				)
-			),
-			'continue' => array(
-				array(
+				[
+					11 => [
+						'terms' => [
+							'label' => [ 'Vienna' ],
+							'description' => [ 'Capitol city of Austria' ],
+						]
+					],
+				]
+			],
+			'continue' => [
+				[
 					'action' => 'query',
 					'query' => 'pageterms',
 					'titles' => 'No11|No22',
 					'wbptcontinue' => '20',
-				),
+				],
 				$terms,
-				array(
-					22 => array(
-						'terms' => array(
-							'label' => array( 'Moscow' ),
-							'description' => array( 'Capitol city of Russia' ),
-						)
-					),
-				)
-			),
-		);
+				[
+					22 => [
+						'terms' => [
+							'label' => [ 'Moscow' ],
+							'description' => [ 'Capitol city of Russia' ],
+						]
+					],
+				]
+			],
+		];
 	}
 
 	/**

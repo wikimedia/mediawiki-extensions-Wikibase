@@ -29,14 +29,14 @@ class UrlValidatorTest extends \MediaWikiTestCase {
 	}
 
 	public function invalidConstructorArgumentProvider() {
-		return array(
-			array( array( new RegexValidator( '/.*/' ) ) ),
-			array( array( 'scheme' => '/.*/' ) ),
-		);
+		return [
+			[ [ new RegexValidator( '/.*/' ) ] ],
+			[ [ 'scheme' => '/.*/' ] ],
+		];
 	}
 
 	public function testGivenNonString_validateFails() {
-		$validator = new UrlValidator( array() );
+		$validator = new UrlValidator( [] );
 		$this->setExpectedException( InvalidArgumentException::class );
 		$validator->validate( null );
 	}
@@ -45,13 +45,13 @@ class UrlValidatorTest extends \MediaWikiTestCase {
 		$yes = new RegexValidator( '/.*/', false, 'oops' );
 		$no  = new RegexValidator( '/.*/', true, 'bad-url' );
 
-		return array(
-			'no scheme' => array( array(), '', 'url-scheme-missing' ),
-			'empty' => array( array(), 'http://acme.com', 'bad-url-scheme' ),
-			'valid' => array( array( 'http' => $yes ), 'http://acme.com', null ),
-			'invalid' => array( array( 'http' => $no ), 'http://acme.com', 'bad-url' ),
-			'wildcard' => array( array( '*' => $yes ), 'http://acme.com', null ),
-		);
+		return [
+			'no scheme' => [ [], '', 'url-scheme-missing' ],
+			'empty' => [ [], 'http://acme.com', 'bad-url-scheme' ],
+			'valid' => [ [ 'http' => $yes ], 'http://acme.com', null ],
+			'invalid' => [ [ 'http' => $no ], 'http://acme.com', 'bad-url' ],
+			'wildcard' => [ [ '*' => $yes ], 'http://acme.com', null ],
+		];
 	}
 
 	/**

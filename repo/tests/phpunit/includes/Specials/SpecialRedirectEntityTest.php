@@ -63,11 +63,11 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 
 		$this->mockRepository = $this->entityModificationTestHelper->getMockRepository();
 
-		$this->entityModificationTestHelper->putEntities( array(
-			'Q1' => array(),
-			'Q2' => array(),
-			'P1' => array( 'datatype' => 'string' ),
-		) );
+		$this->entityModificationTestHelper->putEntities( [
+			'Q1' => [],
+			'Q2' => [],
+			'P1' => [ 'datatype' => 'string' ],
+		] );
 	}
 
 	protected function newSpecialPage() {
@@ -82,7 +82,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 	 */
 	public function getMockEditFilterHookRunner() {
 		$mock = $this->getMockBuilder( EditFilterHookRunner::class )
-			->setMethods( array( 'run' ) )
+			->setMethods( [ 'run' ] )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->any() )
@@ -162,7 +162,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 			$user = $GLOBALS['wgUser'];
 			$this->setMwGlobals(
 				'wgGroupPermissions',
-				array( '*' => array( 'item-redirect' => true, 'edit' => true ) )
+				[ '*' => [ 'item-redirect' => true, 'edit' => true ] ]
 			);
 		}
 
@@ -179,42 +179,42 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 	}
 
 	public function testForm() {
-		$matchers['fromid'] = array(
+		$matchers['fromid'] = [
 			'tag' => 'div',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-redirectentity-fromid',
-			),
-			'child' => array(
+			],
+			'child' => [
 				'tag' => 'input',
-				'attributes' => array(
+				'attributes' => [
 					'name' => 'fromid',
-				)
-			) );
-		$matchers['toid'] = array(
+				]
+			] ];
+		$matchers['toid'] = [
 			'tag' => 'div',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-redirectentity-toid',
-			),
-			'child' => array(
+			],
+			'child' => [
 				'tag' => 'input',
-				'attributes' => array(
+				'attributes' => [
 					'name' => 'toid',
-				)
-			) );
-		$matchers['submit'] = array(
+				]
+			] ];
+		$matchers['submit'] = [
 			'tag' => 'div',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-redirectentity-submit',
-			),
-			'child' => array(
+			],
+			'child' => [
 				'tag' => 'button',
-				'attributes' => array(
+				'attributes' => [
 					'type' => 'submit',
 					'name' => 'wikibase-redirectentity-submit',
-				)
-			) );
+				]
+			] ];
 
-		$output = $this->executeSpecialEntityRedirect( array() );
+		$output = $this->executeSpecialEntityRedirect( [] );
 
 		$this->assertNoError( $output );
 
@@ -258,17 +258,17 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 	}
 
 	public function testRedirectRequest() {
-		$params = array(
+		$params = [
 			'fromid' => 'Q1',
 			'toid' => 'Q2',
-		);
+		];
 
-		$targetItemContent = array( 'labels' => array(
-			'en' => array( 'language' => 'en', 'value' => 'Item 2' )
-		) );
+		$targetItemContent = [ 'labels' => [
+			'en' => [ 'language' => 'en', 'value' => 'Item 2' ]
+		] ];
 
 		// -- prefill the entities --------------------------------------------
-		$this->entityModificationTestHelper->putEntity( array(), 'Q1' );
+		$this->entityModificationTestHelper->putEntity( [], 'Q1' );
 		$this->entityModificationTestHelper->putEntity( $targetItemContent, 'Q2' );
 
 		// -- do the request --------------------------------------------
@@ -287,23 +287,23 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 	}
 
 	public function provideExceptionParamsData() {
-		return array(
-			array( //toid bad
-				'p' => array( 'fromid' => 'Q1', 'toid' => 'ABCDE' ),
-				'e' => 'Wikibase\Lib\UserInputException:wikibase-wikibaserepopage-invalid-id' ),
-			array( //fromid bad
-				'p' => array( 'fromid' => 'ABCDE', 'toid' => 'Q1' ),
-				'e' => 'Wikibase\Lib\UserInputException:wikibase-wikibaserepopage-invalid-id' ),
-			array( //from id is property
-				'p' => array( 'fromid' => 'P1', 'toid' => 'Q1' ),
-				'e' => 'Wikibase\Repo\Interactors\RedirectCreationException:target-is-incompatible' ),
-			array( //to id is property
-				'p' => array( 'fromid' => 'Q1', 'toid' => 'P1' ),
-				'e' => 'Wikibase\Repo\Interactors\RedirectCreationException:target-is-incompatible' ),
-			array( //bad token
-				'p' => array( 'fromid' => 'Q1', 'toid' => 'Q2', 'wpEditToken' => 'BAD' ),
-				'e' => 'Wikibase\Repo\Interactors\TokenCheckException:wikibase-tokencheck-badtoken' ),
-		);
+		return [
+			[ //toid bad
+				'p' => [ 'fromid' => 'Q1', 'toid' => 'ABCDE' ],
+				'e' => 'Wikibase\Lib\UserInputException:wikibase-wikibaserepopage-invalid-id' ],
+			[ //fromid bad
+				'p' => [ 'fromid' => 'ABCDE', 'toid' => 'Q1' ],
+				'e' => 'Wikibase\Lib\UserInputException:wikibase-wikibaserepopage-invalid-id' ],
+			[ //from id is property
+				'p' => [ 'fromid' => 'P1', 'toid' => 'Q1' ],
+				'e' => 'Wikibase\Repo\Interactors\RedirectCreationException:target-is-incompatible' ],
+			[ //to id is property
+				'p' => [ 'fromid' => 'Q1', 'toid' => 'P1' ],
+				'e' => 'Wikibase\Repo\Interactors\RedirectCreationException:target-is-incompatible' ],
+			[ //bad token
+				'p' => [ 'fromid' => 'Q1', 'toid' => 'Q2', 'wpEditToken' => 'BAD' ],
+				'e' => 'Wikibase\Repo\Interactors\TokenCheckException:wikibase-tokencheck-badtoken' ],
+		];
 	}
 
 	/**
@@ -315,34 +315,34 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 	}
 
 	public function testEntityRedirectNonExistingEntities() {
-		$params = array(
+		$params = [
 			'fromid' => 'Q60457977',
 			'toid' => 'Q60457978'
-		);
+		];
 
 		$html = $this->executeSpecialEntityRedirect( $params );
 		$this->assertError( 'Wikibase\Repo\Interactors\RedirectCreationException:no-such-entity', $html );
 	}
 
 	public function permissionProvider() {
-		return array(
-			'edit' => array( 'edit' ),
-			'item-redirect' => array( 'item-redirect' ),
-		);
+		return [
+			'edit' => [ 'edit' ],
+			'item-redirect' => [ 'item-redirect' ],
+		];
 	}
 
 	/**
 	 * @dataProvider permissionProvider
 	 */
 	public function testNoPermission( $permission ) {
-		$params = array(
+		$params = [
 			'fromid' => 'Q1',
 			'toid' => 'Q2'
-		);
-		$this->setMwGlobals( 'wgGroupPermissions', array( '*' => array(
+		];
+		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [
 			'item-redirect' => $permission !== 'item-redirect',
 			'edit' => $permission !== 'edit'
-		) ) );
+		] ] );
 
 		$user = User::newFromName( 'UserWithoutPermission-' . $permission );
 

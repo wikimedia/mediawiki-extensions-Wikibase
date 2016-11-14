@@ -23,7 +23,7 @@ class CompositeEntityValidatorTest extends \PHPUnit_Framework_TestCase {
 
 	public function validEntityProvider() {
 		$success = Result::newSuccess();
-		$failure = Result::newError( array( Error::newError( 'Foo!' ) ) );
+		$failure = Result::newError( [ Error::newError( 'Foo!' ) ] );
 
 		$good = $this->getMock( EntityValidator::class );
 		$good->expects( $this->any() )
@@ -35,12 +35,12 @@ class CompositeEntityValidatorTest extends \PHPUnit_Framework_TestCase {
 			->method( 'validateEntity' )
 			->will( $this->returnValue( $failure ) );
 
-		return array(
-			array( array( $good, $bad ), false ),
-			array( array( $bad, $good ), false ),
-			array( array( $good, $good ), true ),
-			array( array(), true ),
-		);
+		return [
+			[ [ $good, $bad ], false ],
+			[ [ $bad, $good ], false ],
+			[ [ $good, $good ], true ],
+			[ [], true ],
+		];
 	}
 
 	/**

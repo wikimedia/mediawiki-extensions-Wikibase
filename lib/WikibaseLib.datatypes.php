@@ -15,15 +15,15 @@
  * @author Daniel Kinzler
  */
 
-return array(
-	'PT:commonsMedia'      => array( 'value-type' => 'string' ),
-	'PT:globe-coordinate'  => array( 'value-type' => 'globecoordinate' ),
-	'PT:monolingualtext'   => array( 'value-type' => 'monolingualtext' ),
-	'PT:quantity'          => array( 'value-type' => 'quantity' ),
-	'PT:string'            => array( 'value-type' => 'string' ),
-	'PT:time'              => array( 'value-type' => 'time' ),
-	'PT:url'               => array( 'value-type' => 'string' ),
-	'PT:external-id'       => array( 'value-type' => 'string' ),
-	'PT:wikibase-item'     => array( 'value-type' => 'wikibase-entityid' ),
-	'PT:wikibase-property' => array( 'value-type' => 'wikibase-entityid' ),
-);
+return [
+	'PT:commonsMedia'      => [ 'value-type' => 'string' ],
+	'PT:globe-coordinate'  => [ 'value-type' => 'globecoordinate' ],
+	'PT:monolingualtext'   => [ 'value-type' => 'monolingualtext' ],
+	'PT:quantity'          => [ 'value-type' => 'quantity' ],
+	'PT:string'            => [ 'value-type' => 'string' ],
+	'PT:time'              => [ 'value-type' => 'time' ],
+	'PT:url'               => [ 'value-type' => 'string' ],
+	'PT:external-id'       => [ 'value-type' => 'string' ],
+	'PT:wikibase-item'     => [ 'value-type' => 'wikibase-entityid' ],
+	'PT:wikibase-property' => [ 'value-type' => 'wikibase-entityid' ],
+];

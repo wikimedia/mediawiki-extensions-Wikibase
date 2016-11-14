@@ -38,9 +38,9 @@ class TestValidator implements ValueValidator {
 		if ( preg_match( $this->regex, $value ) ) {
 			return Result::newSuccess();
 		} else {
-			return Result::newError( array(
+			return Result::newError( [
 				Error::newError( "doesn't match " . $this->regex )
-			) );
+			] );
 		}
 	}
 

@@ -72,7 +72,7 @@ class OtherProjectsSidebarGenerator {
 		);
 
 		if ( !$itemId ) {
-			return array();
+			return [];
 		}
 
 		return $this->buildProjectLinkSidebarFromItemId( $itemId );
@@ -100,7 +100,7 @@ class OtherProjectsSidebarGenerator {
 	private function runHook( ItemId $itemId, array $sidebar ) {
 		$newSidebar = $sidebar;
 
-		Hooks::run( 'WikibaseClientOtherProjectsSidebar', array( $itemId, &$newSidebar ) );
+		Hooks::run( 'WikibaseClientOtherProjectsSidebar', [ $itemId, &$newSidebar ] );
 
 		if ( $newSidebar === $sidebar ) {
 			return $sidebar;
@@ -148,7 +148,7 @@ class OtherProjectsSidebarGenerator {
 	 * @return array[] Arrays of link attributes indexed by site group and by global site id.
 	 */
 	private function buildPreliminarySidebarFromSiteLinks( array $siteLinks ) {
-		$linksByGroup = array();
+		$linksByGroup = [];
 
 		foreach ( $siteLinks as $siteLink ) {
 			if ( !in_array( $siteLink->getSiteId(), $this->siteIdsToOutput ) ) {
@@ -178,7 +178,7 @@ class OtherProjectsSidebarGenerator {
 	 * group and global ids.
 	 */
 	private function sortAndFlattenSidebar( array $linksByGroup ) {
-		$result = array();
+		$result = [];
 
 		ksort( $linksByGroup ); // Sort by group id
 
@@ -215,11 +215,11 @@ class OtherProjectsSidebarGenerator {
 		// wikibase-otherprojects-wikiquote
 		// wikibase-otherprojects-wikisource
 		// wikibase-otherprojects-wikivoyage
-		$attributes = array(
+		$attributes = [
 			'msg' => 'wikibase-otherprojects-' . $site->getGroup(),
 			'class' => 'wb-otherproject-link wb-otherproject-' . $site->getGroup(),
 			'href' => $site->getPageUrl( $siteLink->getPageName() )
-		);
+		];
 
 		$siteLanguageCode = $site->getLanguageCode();
 		if ( $siteLanguageCode !== null ) {

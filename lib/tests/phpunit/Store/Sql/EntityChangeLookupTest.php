@@ -44,26 +44,26 @@ class EntityChangeLookupTest extends \MediaWikiTestCase {
 	public function loadChunkProvider() {
 		list( $changeOne, $changeTwo, $changeThree ) = $this->getEntityChanges();
 
-		return array(
-			'Get one change' => array(
-				array( $changeOne ),
-				array( $changeThree, $changeTwo, $changeOne ),
+		return [
+			'Get one change' => [
+				[ $changeOne ],
+				[ $changeThree, $changeTwo, $changeOne ],
 				3,
 				1
-			),
-			'Get two changes, with offset' => array(
-				array( $changeOne, $changeTwo ),
-				array( $changeTwo, $changeTwo, $changeTwo ),
+			],
+			'Get two changes, with offset' => [
+				[ $changeOne, $changeTwo ],
+				[ $changeTwo, $changeTwo, $changeTwo ],
 				3,
 				2
-			),
-			'Ask for six changes (get two), with offset' => array(
-				array( $changeTwo, $changeThree ),
-				array( $changeThree ),
+			],
+			'Ask for six changes (get two), with offset' => [
+				[ $changeTwo, $changeThree ],
+				[ $changeThree ],
 				6,
 				100
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -100,9 +100,9 @@ class EntityChangeLookupTest extends \MediaWikiTestCase {
 		list( $changeOne, $changeTwo, $changeThree ) = $this->getEntityChanges();
 
 		$this->assertChangesEqual(
-			array(
+			[
 				$changeOne, $changeTwo, $changeThree
-			),
+			],
 			$changes,
 			$start
 		);
@@ -167,7 +167,7 @@ class EntityChangeLookupTest extends \MediaWikiTestCase {
 			'wb_changes',
 			'MIN( change_id )',
 			// First change inserted by this test
-			array( 'change_time' => '20141008161232' ),
+			[ 'change_time' => '20141008161232' ],
 			__METHOD__
 		);
 
@@ -179,25 +179,25 @@ class EntityChangeLookupTest extends \MediaWikiTestCase {
 	}
 
 	private function getEntityChanges() {
-		$changeOne = array(
+		$changeOne = [
 			'type' => 'wikibase-item~remove',
 			'time' => '20121026200049',
 			'object_id' => 'q42',
 			'revision_id' => '0',
 			'user_id' => '0',
 			'info' => '{"diff":{"type":"diff","isassoc":null,"operations":[]}}',
-		);
+		];
 
-		$changeTwo = array(
+		$changeTwo = [
 			'type' => 'wikibase-item~remove',
 			'time' => '20151008161232',
 			'object_id' => 'q4662',
 			'revision_id' => '0',
 			'user_id' => '0',
 			'info' => '{"diff":{"type":"diff","isassoc":null,"operations":[]}}',
-		);
+		];
 
-		$changeThree = array(
+		$changeThree = [
 			'type' => 'wikibase-item~remove',
 			'time' => '20141008161232',
 			'object_id' => 'q123',
@@ -205,13 +205,13 @@ class EntityChangeLookupTest extends \MediaWikiTestCase {
 			'user_id' => '34',
 			'info' => '{"metadata":{"user_text":"BlackMagicIsEvil","bot":0,"page_id":2354,"rev_id":343,' .
 				'"parent_id":897,"comment":"Fake data!"}}',
-		);
+		];
 
 		$changeOne = new EntityChange( $changeOne );
 		$changeTwo = new EntityChange( $changeTwo );
 		$changeThree = new EntityChange( $changeThree );
 
-		return array( $changeOne, $changeTwo, $changeThree );
+		return [ $changeOne, $changeTwo, $changeThree ];
 	}
 
 }

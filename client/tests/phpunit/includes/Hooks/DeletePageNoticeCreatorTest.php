@@ -30,10 +30,10 @@ class DeletePageNoticeCreatorTest extends \MediaWikiTestCase {
 		$baseUrl = 'http://www.example.com';
 		$articlePath = '/wiki/$1';
 		$scriptPath = '';
-		$repoNamespaces = array(
+		$repoNamespaces = [
 			'item' => '',
 			'property' => 'Property:'
-		);
+		];
 
 		return new RepoLinker( $baseUrl, $articlePath, $scriptPath, $repoNamespaces );
 	}
@@ -69,10 +69,10 @@ class DeletePageNoticeCreatorTest extends \MediaWikiTestCase {
 		$title2->wikibasePushedDeleteToRepo = true;
 		$expected2 = $this->getParsedMessage( 'wikibase-after-page-delete-queued' );
 
-		return array(
-			array( $expected, $title, 'after page delete' ),
-			array( $expected2, $title2, 'page delete queued' )
-		);
+		return [
+			[ $expected, $title, 'after page delete' ],
+			[ $expected2, $title2, 'page delete queued' ]
+		];
 	}
 
 	protected function getParsedMessage( $messageKey ) {

@@ -150,7 +150,7 @@ class RemoveClaims extends ApiBase {
 	 * @param string[] $requiredGuids
 	 */
 	private function assertStatementListContainsGuids( StatementList $statements, array $requiredGuids ) {
-		$existingGuids = array();
+		$existingGuids = [];
 
 		/** @var Statement $statement */
 		foreach ( $statements as $statement ) {
@@ -176,7 +176,7 @@ class RemoveClaims extends ApiBase {
 	 * @return ChangeOp[]
 	 */
 	private function getChangeOps( array $params ) {
-		$changeOps = array();
+		$changeOps = [];
 
 		foreach ( $params['claim'] as $guid ) {
 			$changeOps[] = $this->statementChangeOpFactory->newRemoveStatementOp( $guid );
@@ -206,21 +206,21 @@ class RemoveClaims extends ApiBase {
 	 */
 	protected function getAllowedParams() {
 		return array_merge(
-			array(
-				'claim' => array(
+			[
+				'claim' => [
 					self::PARAM_TYPE => 'string',
 					self::PARAM_ISMULTI => true,
 					self::PARAM_REQUIRED => true,
-				),
-				'summary' => array(
+				],
+				'summary' => [
 					self::PARAM_TYPE => 'string',
-				),
+				],
 				'token' => null,
-				'baserevid' => array(
+				'baserevid' => [
 					self::PARAM_TYPE => 'integer',
-				),
+				],
 				'bot' => false,
-			),
+			],
 			parent::getAllowedParams()
 		);
 	}
@@ -229,11 +229,11 @@ class RemoveClaims extends ApiBase {
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
-		return array(
+		return [
 			'action=wbremoveclaims&claim=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0N&token=foobar'
 				. '&baserevid=7201010'
 				=> 'apihelp-wbremoveclaims-example-1',
-		);
+		];
 	}
 
 }

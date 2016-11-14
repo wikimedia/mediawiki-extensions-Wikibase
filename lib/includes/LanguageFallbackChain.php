@@ -46,7 +46,7 @@ class LanguageFallbackChain {
 	 * @return string[]
 	 */
 	public function getFetchLanguageCodes() {
-		$codes = array();
+		$codes = [];
 
 		foreach ( $this->chain as $language ) {
 			$codes[] = $language->getFetchLanguageCode();
@@ -133,11 +133,11 @@ class LanguageFallbackChain {
 	private function getValueArray( $value, $languageCode, $sourceLanguageCode = null ) {
 		// Data from an EntityInfoBuilder is already made of pre-build arrays
 		if ( !is_array( $value ) ) {
-			$value = array(
+			$value = [
 				'value' => $value,
 				'language' => $languageCode,
 				'source' => $sourceLanguageCode,
-			);
+			];
 		}
 
 		return $value;

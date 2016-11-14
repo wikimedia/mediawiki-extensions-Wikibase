@@ -14,7 +14,7 @@ class HashUsageAccumulator extends UsageAccumulator {
 	/**
 	 * @var EntityUsage[]
 	 */
-	private $usages = array();
+	private $usages = [];
 
 	/**
 	 * @see UsageAccumulator::addUsage

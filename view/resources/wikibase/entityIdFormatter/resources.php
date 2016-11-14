@@ -10,79 +10,79 @@ return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	$moduleTemplate = array(
+	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0]
-	);
+	];
 
-	$modules = array(
-		'wikibase.entityIdFormatter.__namespace' => $moduleTemplate + array(
-			'scripts' => array(
+	$modules = [
+		'wikibase.entityIdFormatter.__namespace' => $moduleTemplate + [
+			'scripts' => [
 				'namespace.js'
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.view.__namespace',
-			)
-		),
-		'wikibase.entityIdFormatter.CachingEntityIdHtmlFormatter' => $moduleTemplate + array(
-			'scripts' => array(
+			]
+		],
+		'wikibase.entityIdFormatter.CachingEntityIdHtmlFormatter' => $moduleTemplate + [
+			'scripts' => [
 				'CachingEntityIdHtmlFormatter.js'
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'util.inherit',
 				'wikibase.entityIdFormatter.__namespace',
 				'wikibase.entityIdFormatter.EntityIdHtmlFormatter',
-			)
-		),
-		'wikibase.entityIdFormatter.CachingEntityIdPlainFormatter' => $moduleTemplate + array(
-			'scripts' => array(
+			]
+		],
+		'wikibase.entityIdFormatter.CachingEntityIdPlainFormatter' => $moduleTemplate + [
+			'scripts' => [
 				'CachingEntityIdPlainFormatter.js'
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'util.inherit',
 				'wikibase.entityIdFormatter.__namespace',
 				'wikibase.entityIdFormatter.EntityIdPlainFormatter',
-			)
-		),
-		'wikibase.entityIdFormatter.DataValueBasedEntityIdHtmlFormatter' => $moduleTemplate + array(
-			'scripts' => array(
+			]
+		],
+		'wikibase.entityIdFormatter.DataValueBasedEntityIdHtmlFormatter' => $moduleTemplate + [
+			'scripts' => [
 				'DataValueBasedEntityIdHtmlFormatter.js'
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'util.inherit',
 				'wikibase.entityIdFormatter.__namespace',
 				'wikibase.entityIdFormatter.EntityIdHtmlFormatter',
-			)
-		),
-		'wikibase.entityIdFormatter.DataValueBasedEntityIdPlainFormatter' => $moduleTemplate + array(
-			'scripts' => array(
+			]
+		],
+		'wikibase.entityIdFormatter.DataValueBasedEntityIdPlainFormatter' => $moduleTemplate + [
+			'scripts' => [
 				'DataValueBasedEntityIdPlainFormatter.js'
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'util.inherit',
 				'wikibase.entityIdFormatter.__namespace',
 				'wikibase.entityIdFormatter.EntityIdPlainFormatter',
-			)
-		),
-		'wikibase.entityIdFormatter.EntityIdHtmlFormatter' => $moduleTemplate + array(
-			'scripts' => array(
+			]
+		],
+		'wikibase.entityIdFormatter.EntityIdHtmlFormatter' => $moduleTemplate + [
+			'scripts' => [
 				'EntityIdHtmlFormatter.js'
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'util.inherit',
 				'wikibase.entityIdFormatter.__namespace',
-			)
-		),
-		'wikibase.entityIdFormatter.EntityIdPlainFormatter' => $moduleTemplate + array(
-			'scripts' => array(
+			]
+		],
+		'wikibase.entityIdFormatter.EntityIdPlainFormatter' => $moduleTemplate + [
+			'scripts' => [
 				'EntityIdPlainFormatter.js'
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'util.inherit',
 				'wikibase.entityIdFormatter.__namespace',
-			)
-		),
-	);
+			]
+		],
+	];
 
 	return $modules;
 } );

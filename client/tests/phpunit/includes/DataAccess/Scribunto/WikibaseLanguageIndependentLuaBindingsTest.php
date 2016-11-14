@@ -109,10 +109,10 @@ class WikibaseLanguageIndependentLuaBindingsTest extends PHPUnit_Framework_TestC
 	}
 
 	public function getSiteLinkPageNameProvider() {
-		return array(
-			array( 'Beer', 'Q666' ),
-			array( null, 'DoesntExist' )
-		);
+		return [
+			[ 'Beer', 'Q666' ],
+			[ null, 'DoesntExist' ]
+		];
 	}
 
 	/**

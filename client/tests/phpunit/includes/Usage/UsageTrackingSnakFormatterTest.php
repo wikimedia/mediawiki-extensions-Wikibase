@@ -47,7 +47,7 @@ class UsageTrackingSnakFormatterTest extends \MediaWikiTestCase {
 
 		$mockFormatter = $this->getMockSnakFormatter( 'formatSnak', 'test' );
 		$acc = new HashUsageAccumulator();
-		$formatter = new UsageTrackingSnakFormatter( $mockFormatter, $acc, array( 'ru', 'en' ) );
+		$formatter = new UsageTrackingSnakFormatter( $mockFormatter, $acc, [ 'ru', 'en' ] );
 
 		$formatter->formatSnak( $itemSnak );
 
@@ -63,7 +63,7 @@ class UsageTrackingSnakFormatterTest extends \MediaWikiTestCase {
 
 		$mockFormatter = $this->getMockSnakFormatter( 'formatSnak', 'test' );
 		$acc = new HashUsageAccumulator();
-		$formatter = new UsageTrackingSnakFormatter( $mockFormatter, $acc, array( 'ru', 'en' ) );
+		$formatter = new UsageTrackingSnakFormatter( $mockFormatter, $acc, [ 'ru', 'en' ] );
 
 		$formatter->formatSnak( $novalueSnak );
 		$this->assertEmpty( $acc->getUsages(), 'novalue' );
@@ -75,7 +75,7 @@ class UsageTrackingSnakFormatterTest extends \MediaWikiTestCase {
 
 		$mockFormatter = $this->getMockSnakFormatter( 'formatSnak', 'test' );
 		$acc = new HashUsageAccumulator();
-		$formatter = new UsageTrackingSnakFormatter( $mockFormatter, $acc, array( 'ru', 'en' ) );
+		$formatter = new UsageTrackingSnakFormatter( $mockFormatter, $acc, [ 'ru', 'en' ] );
 
 		$formatter->formatSnak( $stringSnak );
 		$this->assertEmpty( $acc->getUsages(), 'string value' );
@@ -86,7 +86,7 @@ class UsageTrackingSnakFormatterTest extends \MediaWikiTestCase {
 
 		$acc = new HashUsageAccumulator();
 
-		$formatter = new UsageTrackingSnakFormatter( $mockFormatter, $acc, array( 'ru', 'en' ) );
+		$formatter = new UsageTrackingSnakFormatter( $mockFormatter, $acc, [ 'ru', 'en' ] );
 
 		$this->assertEquals( 'TEST', $formatter->getFormat(), 'getFormat' );
 		$this->assertCount( 0, $acc->getUsages() );

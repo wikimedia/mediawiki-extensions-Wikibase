@@ -26,10 +26,10 @@ use ValueFormatters\ValueFormatterBase;
  */
 class HtmlTimeFormatter extends ValueFormatterBase {
 
-	private static $calendarKeys = array(
+	private static $calendarKeys = [
 		TimeValue::CALENDAR_GREGORIAN => 'valueview-expert-timevalue-calendar-gregorian',
 		TimeValue::CALENDAR_JULIAN => 'valueview-expert-timevalue-calendar-julian',
-	);
+	];
 
 	/**
 	 * @var ValueFormatter

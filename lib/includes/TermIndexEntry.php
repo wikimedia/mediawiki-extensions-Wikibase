@@ -34,16 +34,16 @@ class TermIndexEntry {
 	/**
 	 * @var array
 	 */
-	private $fields = array();
+	private $fields = [];
 
-	private static $fieldNames = array(
+	private static $fieldNames = [
 		'entityType',
 		'entityId',
 		'termType',
 		'termLanguage',
 		'termText',
 		'termWeight',
-	);
+	];
 
 	/**
 	 * @since 0.2
@@ -52,7 +52,7 @@ class TermIndexEntry {
 	 *
 	 * @throws MWException
 	 */
-	public function __construct( array $fields = array() ) {
+	public function __construct( array $fields = [] ) {
 		foreach ( $fields as $name => $value ) {
 			switch ( $name ) {
 				case 'termType':
@@ -87,7 +87,7 @@ class TermIndexEntry {
 	 * @throws MWException
 	 */
 	public function setType( $termType ) {
-		if ( !in_array( $termType, array( self::TYPE_ALIAS, self::TYPE_LABEL, self::TYPE_DESCRIPTION ), true ) ) {
+		if ( !in_array( $termType, [ self::TYPE_ALIAS, self::TYPE_LABEL, self::TYPE_DESCRIPTION ], true ) ) {
 			throw new MWException( 'Invalid term type provided' );
 		}
 

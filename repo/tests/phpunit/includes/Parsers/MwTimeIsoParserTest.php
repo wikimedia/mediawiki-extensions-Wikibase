@@ -116,7 +116,7 @@ class MwTimeIsoParserTest extends StringValueParserTest {
 		$gregorian = 'http://www.wikidata.org/entity/Q1985727';
 		$julian = 'http://www.wikidata.org/entity/Q1985786';
 
-		$argLists = array();
+		$argLists = [];
 
 		$valid = [
 			// + dates

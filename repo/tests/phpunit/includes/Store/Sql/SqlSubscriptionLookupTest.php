@@ -35,23 +35,23 @@ class SqlSubscriptionLookupTest extends MediaWikiTestCase {
 	}
 
 	public function testGetSubscriptions() {
-		$subscriptions = array(
-			array( 'cs_subscriber_id' => 'enwiki', 'cs_entity_id' => 'P1' ),
-			array( 'cs_subscriber_id' => 'enwiki', 'cs_entity_id' => 'Q3' ),
-			array( 'cs_subscriber_id' => 'enwiki', 'cs_entity_id' => 'Q7' ),
-			array( 'cs_subscriber_id' => 'dewiki', 'cs_entity_id' => 'Q2' ),
-		);
+		$subscriptions = [
+			[ 'cs_subscriber_id' => 'enwiki', 'cs_entity_id' => 'P1' ],
+			[ 'cs_subscriber_id' => 'enwiki', 'cs_entity_id' => 'Q3' ],
+			[ 'cs_subscriber_id' => 'enwiki', 'cs_entity_id' => 'Q7' ],
+			[ 'cs_subscriber_id' => 'dewiki', 'cs_entity_id' => 'Q2' ],
+		];
 
 		$this->insertSubscriptions( $subscriptions );
 
 		$lookup = new SqlSubscriptionLookup( wfGetLB() );
 
-		$subscriptions = $lookup->getSubscriptions( 'enwiki', array(
+		$subscriptions = $lookup->getSubscriptions( 'enwiki', [
 			new PropertyId( 'P1' ),
 			new ItemId( 'Q2' ),
 			new ItemId( 'Q7' ),
 			new PropertyId( 'P3' ),
-		) );
+		] );
 
 		$actual = array_map( function ( EntityId $id ) {
 			return $id->getSerialization();
@@ -59,7 +59,7 @@ class SqlSubscriptionLookupTest extends MediaWikiTestCase {
 
 		sort( $actual );
 
-		$expected = array( 'P1', 'Q7' );
+		$expected = [ 'P1', 'Q7' ];
 
 		$this->assertEquals( $expected, $actual );
 	}

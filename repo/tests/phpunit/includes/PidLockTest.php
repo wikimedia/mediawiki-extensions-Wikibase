@@ -36,10 +36,10 @@ class PidLockTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function wikiIdProvider() {
-		return array(
-			array( wfWikiID() ),
-			array( null )
-		);
+		return [
+			[ wfWikiID() ],
+			[ null ]
+		];
 	}
 
 }

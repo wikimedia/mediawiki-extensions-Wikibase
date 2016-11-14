@@ -36,20 +36,20 @@ class DispatchingValueFormatterTest extends \PHPUnit_Framework_TestCase {
 	public function constructorErrorsProvider() {
 		$stringFormatter = new StringFormatter( new FormatterOptions() );
 
-		return array(
-			'keys must be strings' => array(
-				array( 17 => $stringFormatter ),
+		return [
+			'keys must be strings' => [
+				[ 17 => $stringFormatter ],
 				InvalidArgumentException::class
-			),
-			'keys must have prefix' => array(
-				array( 'foo' => $stringFormatter ),
+			],
+			'keys must have prefix' => [
+				[ 'foo' => $stringFormatter ],
 				InvalidArgumentException::class
-			),
-			'formatters must be instances of ValueFormatter' => array(
-				array( 'novalue' => 17 ),
+			],
+			'formatters must be instances of ValueFormatter' => [
+				[ 'novalue' => 17 ],
 				InvalidArgumentException::class
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -74,24 +74,24 @@ class DispatchingValueFormatterTest extends \PHPUnit_Framework_TestCase {
 			->method( 'format' )
 			->will( $this->returnValue( 'VT:wikibase-entityid' ) );
 
-		$formatters = array(
+		$formatters = [
 			'VT:string' => $stringFormatter,
 			'VT:wikibase-entityid' => $mediaFormatter,
-		);
+		];
 
-		return array(
-			'match PT' => array(
+		return [
+			'match PT' => [
 				new EntityIdValue( new ItemId( 'Q13' ) ),
 				$formatters,
 				'VT:wikibase-entityid'
-			),
+			],
 
-			'match VT' => array(
+			'match VT' => [
 				new StringValue( 'something' ),
 				$formatters,
 				'VT:string'
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -116,26 +116,26 @@ class DispatchingValueFormatterTest extends \PHPUnit_Framework_TestCase {
 			->method( 'format' )
 			->will( $this->returnValue( 'PT:commonsMedia' ) );
 
-		$formatters = array(
+		$formatters = [
 			'VT:string' => $stringFormatter,
 			'PT:commonsMedia' => $mediaFormatter,
-		);
+		];
 
-		return array(
-			'match PT' => array(
+		return [
+			'match PT' => [
 				new StringValue( 'Foo.jpg' ),
 				'commonsMedia',
 				$formatters,
 				'PT:commonsMedia'
-			),
+			],
 
-			'match VT' => array(
+			'match VT' => [
 				new StringValue( 'something' ),
 				'someStuff',
 				$formatters,
 				'VT:string'
-			),
-		);
+			],
+		];
 	}
 
 }

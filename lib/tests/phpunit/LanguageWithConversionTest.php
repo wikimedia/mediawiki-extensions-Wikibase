@@ -67,15 +67,15 @@ class LanguageWithConversionTest extends \MediaWikiTestCase {
 	}
 
 	public function provideFactory() {
-		return array(
-			array( 'en', null, 'en', null, 'en' ),
-			array( 'zh', null, 'zh', null, 'zh' ),
-			array( 'zh-classical', null, 'lzh', null, 'lzh' ),
-			array( 'zh-cn', null, 'zh-cn', null, 'zh-cn' ),
-			array( 'zh', 'zh-cn', 'zh', 'zh-cn', 'zh-cn' ),
-			array( 'zh-cn', 'zh', 'zh-cn', 'zh', 'zh' ),
-			array( 'zh-cn', 'zh-tw', 'zh-cn', 'zh-tw', 'zh-tw' ),
-		);
+		return [
+			[ 'en', null, 'en', null, 'en' ],
+			[ 'zh', null, 'zh', null, 'zh' ],
+			[ 'zh-classical', null, 'lzh', null, 'lzh' ],
+			[ 'zh-cn', null, 'zh-cn', null, 'zh-cn' ],
+			[ 'zh', 'zh-cn', 'zh', 'zh-cn', 'zh-cn' ],
+			[ 'zh-cn', 'zh', 'zh-cn', 'zh', 'zh' ],
+			[ 'zh-cn', 'zh-tw', 'zh-cn', 'zh-tw', 'zh-tw' ],
+		];
 	}
 
 	/**
@@ -96,21 +96,21 @@ class LanguageWithConversionTest extends \MediaWikiTestCase {
 	}
 
 	public function provideFactoryException() {
-		return array(
-			array( ':', null ),
-			array( '/', null ),
-			array( '/', ':' ),
-			array( 'en', '/' ),
-			array( 'en', 'de' ),
-			array( 'en', 'en-gb' ),
-			array( 'en-gb', 'en' ),
-			array( 'de', 'de-formal' ),
-			array( 'zh', 'en' ),
-			array( 'zh-cn', 'zh-classical' ),
-			array( 'zh', 'sr' ),
-			array( 'zh-cn', 'en-gb' ),
-			array( 'zh-tw', 'sr-ec' ),
-		);
+		return [
+			[ ':', null ],
+			[ '/', null ],
+			[ '/', ':' ],
+			[ 'en', '/' ],
+			[ 'en', 'de' ],
+			[ 'en', 'en-gb' ],
+			[ 'en-gb', 'en' ],
+			[ 'de', 'de-formal' ],
+			[ 'zh', 'en' ],
+			[ 'zh-cn', 'zh-classical' ],
+			[ 'zh', 'sr' ],
+			[ 'zh-cn', 'en-gb' ],
+			[ 'zh-tw', 'sr-ec' ],
+		];
 	}
 
 	/**
@@ -134,37 +134,37 @@ class LanguageWithConversionTest extends \MediaWikiTestCase {
 	}
 
 	public function provideTranslate() {
-		return array(
-			array( 'de', null, array(
+		return [
+			[ 'de', null, [
 				'foo' => 'foo',
 				'bar' => 'bar',
-			) ),
-			array( 'zh', null, array(
+			] ],
+			[ 'zh', null, [
 				'測試' => '測試',
 				'测试' => '测试',
-			) ),
-			array( 'zh-cn', null, array(
+			] ],
+			[ 'zh-cn', null, [
 				'測試' => '測試',
 				'测试' => '测试',
-			) ),
-			array( 'zh-cn', 'zh-tw', array(
+			] ],
+			[ 'zh-cn', 'zh-tw', [
 				'測試' => '测试',
-			) ),
-			array( 'zh-tw', 'zh-cn', array(
+			] ],
+			[ 'zh-tw', 'zh-cn', [
 				'測試' => '測試',
 				'测试' => '測試',
 				'測-{}-試' => '測-{}-試',
 				'-{测试}-' => '-{測試}-',
 				'测-{1}-试' => '測-{1}-試',
-			) ),
-			array( 'zh', 'zh', array(
+			] ],
+			[ 'zh', 'zh', [
 				'測試' => '測試',
 				'测试' => '测试',
 				'測-{}-試' => '測-{}-試',
 				'-{测试}-' => '-{测试}-',
 				'测-{1}-试' => '测-{1}-试',
-			) ),
-		);
+			] ],
+		];
 	}
 
 }

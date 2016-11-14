@@ -19,35 +19,35 @@ return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	$moduleTemplate = array(
+	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0],
 		'position' => 'top' // reducing the time between DOM construction and JS initialisation
-	);
+	];
 
-	$modules = array(
+	$modules = [
 
-		'jquery.wikibase.entitysearch' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.entitysearch' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase/jquery.wikibase.entitysearch.js',
-			),
-			'styles' => array(
+			],
+			'styles' => [
 				'jquery.wikibase/themes/default/jquery.wikibase.entitysearch.css',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.event.special.eachchange',
 				'jquery.ui.ooMenu',
 				'jquery.wikibase.entityselector',
-			),
-		),
+			],
+		],
 
-		'mw.config.values.wbDataTypes' => $moduleTemplate + array(
+		'mw.config.values.wbDataTypes' => $moduleTemplate + [
 			'class' => DataTypesModule::class,
 			'datatypefactory' => function() {
 				return WikibaseRepo::getDefaultInstance()->getDataTypeFactory();
 			},
 			'datatypesconfigvarname' => 'wbDataTypes',
-		),
+		],
 
 		'mw.config.values.wbEntityTypes' => $moduleTemplate + [
 			'class' => MediaWikiConfigModule::class,
@@ -56,24 +56,24 @@ return call_user_func( function() {
 			}
 		],
 
-		'wikibase.dataTypeStore' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.dataTypeStore' => $moduleTemplate + [
+			'scripts' => [
 				'dataTypes/wikibase.dataTypeStore.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'dataTypes.DataType',
 				'dataTypes.DataTypeStore',
 				'mw.config.values.wbDataTypes',
 				'wikibase',
-			),
-		),
+			],
+		],
 
-		'wikibase.ui.entityViewInit' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.ui.entityViewInit' => $moduleTemplate + [
+			'scripts' => [
 				'wikibase.EntityInitializer.js',
 				'wikibase.ui.entityViewInit.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'mediawiki.page.watch.ajax',
 				'mediawiki.user',
 				'mw.config.values.wbEntityTypes',
@@ -105,54 +105,54 @@ return call_user_func( function() {
 				'wikibase.view.StructureEditorFactory',
 				'wikibase.view.ToolbarFactory',
 				'wikibase.WikibaseContentLanguages'
-			),
-			'messages' => array(
+			],
+			'messages' => [
 				'pagetitle',
 				'wikibase-copyrighttooltip-acknowledge',
 				'wikibase-anonymouseditwarning',
 				'wikibase-entity-item',
 				'wikibase-entity-property',
-			)
-		),
+			]
+		],
 
-		'wikibase.ui.entitysearch' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.ui.entitysearch' => $moduleTemplate + [
+			'scripts' => [
 				'wikibase.ui.entitysearch.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.event.special.eachchange',
 				'jquery.spinner',
 				'jquery.ui.ooMenu',
 				'jquery.wikibase.entitysearch',
 				'jquery.wikibase.entityselector',
-			),
-			'messages' => array(
+			],
+			'messages' => [
 				'searchsuggest-containing',
-			)
-		),
+			]
+		],
 
 		/* Wikibase special pages */
 
-		'wikibase.special.newEntity' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.special.newEntity' => $moduleTemplate + [
+			'scripts' => [
 				'wikibase.special/wikibase.special.newEntity.js',
-			)
-		),
+			]
+		],
 
-		'wikibase.special.mergeItems' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.special.mergeItems' => $moduleTemplate + [
+			'scripts' => [
 				'wikibase.special/wikibase.special.mergeItems.js',
-			)
-		),
+			]
+		],
 
-		'wikibase.special' => $moduleTemplate + array(
+		'wikibase.special' => $moduleTemplate + [
 			'position' => 'top',
-			'styles' => array(
+			'styles' => [
 				'wikibase.special/wikibase.special.css'
-			),
-		),
+			],
+		],
 
-	);
+	];
 
 	return array_merge(
 		$modules,

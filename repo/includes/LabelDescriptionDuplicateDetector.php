@@ -145,18 +145,18 @@ class LabelDescriptionDuplicateDetector {
 	 * @return UniquenessViolation[]
 	 */
 	private function termsToErrors( $message, $errorCode, array $terms ) {
-		$errors = array();
+		$errors = [];
 
 		foreach ( $terms as $term ) {
 			$errors[] = new UniquenessViolation(
 				$term->getEntityId(),
 				$message,
 				$errorCode,
-				array(
+				[
 					$term->getText(),
 					$term->getLanguage(),
 					$term->getEntityId(),
-				)
+				]
 			);
 		}
 

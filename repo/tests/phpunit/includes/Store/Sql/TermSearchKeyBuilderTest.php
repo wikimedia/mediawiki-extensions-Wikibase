@@ -25,13 +25,13 @@ use Wikibase\TermSqlIndex;
 class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 
 	public function termProvider() {
-		$argLists = array();
+		$argLists = [];
 
-		$argLists[] = array( 'en', 'FoO', 'fOo', true );
-		$argLists[] = array( 'ru', 'Берлин', '  берлин  ', true );
+		$argLists[] = [ 'en', 'FoO', 'fOo', true ];
+		$argLists[] = [ 'ru', 'Берлин', '  берлин  ', true ];
 
-		$argLists[] = array( 'en', 'FoO', 'bar', false );
-		$argLists[] = array( 'ru', 'Берлин', 'бе55585рлин', false );
+		$argLists[] = [ 'en', 'FoO', 'bar', false ];
+		$argLists[] = [ 'ru', 'Берлин', 'бе55585рлин', false ];
 
 		return $argLists;
 	}
@@ -53,7 +53,7 @@ class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 
 		// remove search key
 		$dbw = wfGetDB( DB_MASTER );
-		$dbw->update( $termCache->getTableName(), array( 'term_search_key' => '' ), array(), __METHOD__ );
+		$dbw->update( $termCache->getTableName(), [ 'term_search_key' => '' ], [], __METHOD__ );
 
 		// rebuild search key
 		$builder = new TermSearchKeyBuilder( $termCache );
@@ -65,11 +65,11 @@ class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 		$term->setLanguage( $languageCode );
 		$term->setText( $searchText );
 
-		$options = array(
+		$options = [
 			'caseSensitive' => false,
-		);
+		];
 
-		$obtainedTerms = $termCache->getMatchingTerms( array( $term ), TermIndexEntry::TYPE_LABEL, Item::ENTITY_TYPE, $options );
+		$obtainedTerms = $termCache->getMatchingTerms( [ $term ], TermIndexEntry::TYPE_LABEL, Item::ENTITY_TYPE, $options );
 
 		$this->assertEquals( $matches ? 1 : 0, count( $obtainedTerms ) );
 

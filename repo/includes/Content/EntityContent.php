@@ -344,7 +344,7 @@ abstract class EntityContent extends AbstractContent {
 			$text = $searchTextGenerator->generate( $entity->getFingerprint() );
 		}
 
-		if ( !Hooks::run( 'WikibaseTextForSearchIndex', array( $this, &$text ) ) ) {
+		if ( !Hooks::run( 'WikibaseTextForSearchIndex', [ $this, &$text ] ) ) {
 			return '';
 		}
 
@@ -374,11 +374,11 @@ abstract class EntityContent extends AbstractContent {
 
 		//XXX: $ignore contains knowledge about the Entity's internal representation.
 		//     This list should therefore rather be maintained in the Entity class.
-		static $ignore = array(
+		static $ignore = [
 			'language',
 			'site',
 			'type',
-		);
+		];
 
 		// @todo this text for filters stuff should be it's own class with test coverage!
 		$codec = WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec();
@@ -399,8 +399,8 @@ abstract class EntityContent extends AbstractContent {
 	 * @return array The values found in the array structure.
 	 * @todo needs unit test
 	 */
-	protected static function collectValues( array $data, array $ignore = array() ) {
-		$values = array();
+	protected static function collectValues( array $data, array $ignore = [] ) {
+		$values = [];
 
 		$erongi = array_flip( $ignore );
 		foreach ( $data as $key => $value ) {
@@ -463,9 +463,9 @@ abstract class EntityContent extends AbstractContent {
 	 */
 	private function getRedirectData() {
 		// NOTE: keep in sync with getPatchedRedirect
-		$data = array(
+		$data = [
 			'entity' => $this->getEntityId()->getSerialization(),
-		);
+		];
 
 		if ( $this->isRedirect() ) {
 			$data['redirect'] = $this->getEntityRedirect()->getTargetId()->getSerialization();
@@ -760,7 +760,7 @@ abstract class EntityContent extends AbstractContent {
 	 * @return array A map from property names to property values.
 	 */
 	public function getEntityPageProperties() {
-		$properties = array();
+		$properties = [];
 
 		$status = $this->getEntityStatus();
 		if ( $status !== self::STATUS_NONE ) {

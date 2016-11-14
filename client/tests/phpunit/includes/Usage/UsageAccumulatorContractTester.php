@@ -40,13 +40,13 @@ class UsageAccumulatorContractTester {
 
 		$q2 = new ItemId( 'Q2' );
 		$q3 = new ItemId( 'Q3' );
-		$expected = array(
+		$expected = [
 			new EntityUsage( $q2, EntityUsage::LABEL_USAGE, 'xx' ),
 			new EntityUsage( $q2, EntityUsage::TITLE_USAGE ),
 			new EntityUsage( $q2, EntityUsage::SITELINK_USAGE ),
 			new EntityUsage( $q2, EntityUsage::OTHER_USAGE ),
 			new EntityUsage( $q3, EntityUsage::ALL_USAGE ),
-		);
+		];
 
 		$usages = $this->usageAccumulator->getUsages();
 		$this->assertSameUsages( $expected, $usages );

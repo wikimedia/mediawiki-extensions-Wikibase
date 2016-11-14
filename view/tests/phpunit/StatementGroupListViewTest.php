@@ -59,7 +59,7 @@ class StatementGroupListViewTest extends PHPUnit_Framework_TestCase {
 	 * @return Statement[]
 	 */
 	private function makeStatements( PropertyId $propertyId ) {
-		return array(
+		return [
 			$this->makeStatement( new PropertyNoValueSnak(
 				$propertyId
 			) ),
@@ -82,7 +82,7 @@ class StatementGroupListViewTest extends PHPUnit_Framework_TestCase {
 				$propertyId,
 				new EntityIdValue( new ItemId( 'Q555' ) )
 			) ),
-		);
+		];
 	}
 
 	/**
@@ -107,12 +107,12 @@ class StatementGroupListViewTest extends PHPUnit_Framework_TestCase {
 	 * @return StatementGroupListView
 	 */
 	private function newStatementGroupListView( EntityIdFormatter $propertyIdFormatter ) {
-		$templateFactory = new TemplateFactory( new TemplateRegistry( array(
+		$templateFactory = new TemplateFactory( new TemplateRegistry( [
 			'wikibase-statementgrouplistview' => '<SGLIST>$1</SGLIST>',
 			'wikibase-listview' => '<LIST>$1</LIST>',
 			'wikibase-statementgroupview' => '<SGROUP id="$3"><PROPERTY>$1</PROPERTY>$2</SGROUP>',
 			'wikibase-statementlistview' => '<SLIST>$1<TOOLBAR>$2</TOOLBAR></SLIST>',
-		) ) );
+		] ) );
 
 		return new StatementGroupListView(
 			$templateFactory,

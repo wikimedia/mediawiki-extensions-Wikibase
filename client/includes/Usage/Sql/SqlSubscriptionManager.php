@@ -128,10 +128,10 @@ class SqlSubscriptionManager implements SubscriptionManager {
 			$subscriptions = $db->selectFieldValues(
 				'wb_changes_subscription',
 				'cs_entity_id',
-				array(
+				[
 					'cs_subscriber_id' => $subscriber,
 					'cs_entity_id' => $subscriptions,
-				),
+				],
 				__METHOD__
 			);
 		}
@@ -153,7 +153,7 @@ class SqlSubscriptionManager implements SubscriptionManager {
 			'wb_changes_subscription',
 			$rows,
 			__METHOD__,
-			array( 'IGNORE' )
+			[ 'IGNORE' ]
 		);
 	}
 
@@ -168,10 +168,10 @@ class SqlSubscriptionManager implements SubscriptionManager {
 		if ( $subscriptions ) {
 			$db->delete(
 				'wb_changes_subscription',
-				array(
+				[
 					'cs_subscriber_id' => $subscriber,
 					'cs_entity_id' => $subscriptions,
-				),
+				],
 				__METHOD__
 			);
 		}
@@ -187,13 +187,13 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	 * @return array[] rows
 	 */
 	private function makeSubscriptionRows( $subscriber, array $subscriptions ) {
-		$rows = array();
+		$rows = [];
 
 		foreach ( $subscriptions as $entityId ) {
-			$rows[] = array(
+			$rows[] = [
 				'cs_entity_id' => $entityId,
 				'cs_subscriber_id' => $subscriber
-			);
+			];
 		}
 
 		return $rows;

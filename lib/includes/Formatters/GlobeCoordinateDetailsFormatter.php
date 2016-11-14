@@ -68,12 +68,12 @@ class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
 
 		$html = '';
 		$html .= Html::element( 'h4',
-			array( 'class' => 'wb-details wb-globe-details wb-globe-rendered' ),
+			[ 'class' => 'wb-details wb-globe-details wb-globe-rendered' ],
 			$this->coordinateFormatter->format( $value )
 		);
 
 		$html .= Html::openElement( 'table',
-			array( 'class' => 'wb-details wb-globe-details' ) );
+			[ 'class' => 'wb-details wb-globe-details' ] );
 
 		//TODO: nicer formatting and localization of numbers.
 		$html .= $this->renderLabelValuePair( 'latitude',
@@ -102,7 +102,7 @@ class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
 			return htmlspecialchars( $globe );
 		}
 
-		return Html::element( 'a', array( 'href' => $globe ), $formattedGlobe );
+		return Html::element( 'a', [ 'href' => $globe ], $formattedGlobe );
 	}
 
 	/**
@@ -114,9 +114,9 @@ class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
 	protected function renderLabelValuePair( $fieldName, $valueHtml ) {
 		$html = Html::openElement( 'tr' );
 
-		$html .= Html::element( 'th', array( 'class' => 'wb-globe-' . $fieldName ),
+		$html .= Html::element( 'th', [ 'class' => 'wb-globe-' . $fieldName ],
 			$this->getFieldLabel( $fieldName )->text() );
-		$html .= Html::rawElement( 'td', array( 'class' => 'wb-globe-' . $fieldName ),
+		$html .= Html::rawElement( 'td', [ 'class' => 'wb-globe-' . $fieldName ],
 			$valueHtml );
 
 		$html .= Html::closeElement( 'tr' );

@@ -23,12 +23,12 @@ class ItemSearchTextGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$item->setLabel( 'en', 'Test' );
 		$item->setLabel( 'de', 'Testen' );
 		$item->setDescription( 'en', 'city in Spain' );
-		$item->setAliases( 'en', array( 'abc', 'cde' ) );
-		$item->setAliases( 'de', array( 'xyz', 'uvw' ) );
+		$item->setAliases( 'en', [ 'abc', 'cde' ] );
+		$item->setAliases( 'de', [ 'xyz', 'uvw' ] );
 		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Berlin' );
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Rome' );
 
-		$patterns = array(
+		$patterns = [
 			'/^Test$/',
 			'/^Testen$/',
 			'/^city in Spain$/',
@@ -39,11 +39,11 @@ class ItemSearchTextGeneratorTest extends \PHPUnit_Framework_TestCase {
 			'/^(?!abcde).*$/',
 			'/^Berlin$/',
 			'/^Rome$/'
-		);
+		];
 
-		return array(
-			array( $item, $patterns )
-		);
+		return [
+			[ $item, $patterns ]
+		];
 	}
 
 	/**

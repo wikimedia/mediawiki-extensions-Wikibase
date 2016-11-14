@@ -24,10 +24,10 @@ class MockPropertyInfoStoreTest extends \MediaWikiTestCase {
 	 */
 	private $helper;
 
-	public function __construct( $name = null, $data = array(), $dataName = '' ) {
+	public function __construct( $name = null, $data = [], $dataName = '' ) {
 		parent::__construct( $name, $data, $dataName );
 
-		$this->helper = new PropertyInfoStoreTestHelper( $this, array( $this, 'newMockPropertyInfoStore' ) );
+		$this->helper = new PropertyInfoStoreTestHelper( $this, [ $this, 'newMockPropertyInfoStore' ] );
 	}
 
 	public function newMockPropertyInfoStore() {

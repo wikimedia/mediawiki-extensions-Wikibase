@@ -160,7 +160,7 @@ abstract class DumpScript extends Maintenance {
 		$dumper->setLimit( $limit );
 
 		$progressReporter = new ObservableMessageReporter();
-		$progressReporter->registerReporterCallback( array( $this, 'logMessage' ) );
+		$progressReporter->registerReporterCallback( [ $this, 'logMessage' ] );
 		$dumper->setProgressReporter( $progressReporter );
 
 		$exceptionReporter = new ReportingExceptionHandler( $progressReporter );

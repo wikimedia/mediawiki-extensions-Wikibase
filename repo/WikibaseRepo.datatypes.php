@@ -78,14 +78,14 @@ return call_user_func( function() {
 		return new StringParser( $normalizer );
 	};
 
-	return array(
-		'VT:bad' => array(
+	return [
+		'VT:bad' => [
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
 				return $factory->newUnDeserializableValueFormatter( $format, $options );
 			}
-		),
-		'PT:commonsMedia' => array(
+		],
+		'PT:commonsMedia' => [
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				// Don't go for commons during unit tests.
@@ -107,8 +107,8 @@ return call_user_func( function() {
 			) {
 				return new CommonsMediaRdfBuilder( $vocab );
 			},
-		),
-		'VT:globecoordinate' => array(
+		],
+		'VT:globecoordinate' => [
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildCoordinateValidators();
@@ -131,8 +131,8 @@ return call_user_func( function() {
 					new ComplexValueRdfHelper( $vocab, $writer->sub(), $dedupe ) : null;
 				return new GlobeCoordinateRdfBuilder( $complexValueHelper );
 			},
-		),
-		'VT:monolingualtext' => array(
+		],
+		'VT:monolingualtext' => [
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildMonolingualTextValidators();
@@ -153,8 +153,8 @@ return call_user_func( function() {
 			) {
 				return new MonolingualTextRdfBuilder();
 			},
-		),
-		'VT:quantity' => array(
+		],
+		'VT:quantity' => [
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildQuantityValidators();
@@ -181,8 +181,8 @@ return call_user_func( function() {
 					WikibaseRepo::getDefaultInstance()->getUnitConverter() : null;
 				return new QuantityRdfBuilder( $complexValueHelper, $unitConverter );
 			},
-		),
-		'VT:string' => array(
+		],
+		'VT:string' => [
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildStringValidators();
@@ -201,8 +201,8 @@ return call_user_func( function() {
 			) {
 				return new LiteralValueRdfBuilder( null, null );
 			},
-		),
-		'VT:time' => array(
+		],
+		'VT:time' => [
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildTimeValidators();
@@ -228,8 +228,8 @@ return call_user_func( function() {
 					new ComplexValueRdfHelper( $vocab, $writer->sub(), $dedupe ) : null;
 				return new TimeRdfBuilder( $dateCleaner, $complexValueHelper );
 			},
-		),
-		'PT:url' => array(
+		],
+		'PT:url' => [
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildUrlValidators();
@@ -248,8 +248,8 @@ return call_user_func( function() {
 			) {
 				return new ObjectUriRdfBuilder();
 			},
-		),
-		'PT:external-id' => array(
+		],
+		'PT:external-id' => [
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildStringValidators();
@@ -261,8 +261,8 @@ return call_user_func( function() {
 				return $factory->newExternalIdentifierFormatter( $format, $options );
 			},
 			// TODO: RDF mapping using canonical URI patterns
-		),
-		'VT:wikibase-entityid' => array(
+		],
+		'VT:wikibase-entityid' => [
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildEntityValidators();
@@ -281,19 +281,19 @@ return call_user_func( function() {
 			) {
 				return new EntityIdRdfBuilder( $vocab, $tracker );
 			},
-		),
-		'PT:wikibase-item' => array(
+		],
+		'PT:wikibase-item' => [
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildItemValidators();
 			},
-		),
-		'PT:wikibase-property' => array(
+		],
+		'PT:wikibase-property' => [
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildPropertyValidators();
 			},
-		)
-	);
+		]
+	];
 
 } );

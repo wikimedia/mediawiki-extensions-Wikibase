@@ -25,16 +25,16 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 class EntityIdLinkFormatterTest extends PHPUnit_Framework_TestCase {
 
 	public function formatEntityIdProvider() {
-		return array(
-			'ItemId' => array(
+		return [
+			'ItemId' => [
 				new ItemId( 'Q23' ),
 				'[[ITEM-TEST--Q23|Q23]]'
-			),
-			'PropertyId' => array(
+			],
+			'PropertyId' => [
 				new PropertyId( 'P23' ),
 				'[[PROPERTY-TEST--P23|P23]]'
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -61,7 +61,7 @@ class EntityIdLinkFormatterTest extends PHPUnit_Framework_TestCase {
 	private function newEntityIdLinkFormatter() {
 		$titleLookup = $this->getMock( EntityTitleLookup::class );
 		$titleLookup->expects( $this->any() )->method( 'getTitleForId' )
-			->will( $this->returnCallback( array( $this, 'getTitleForId' ) ) );
+			->will( $this->returnCallback( [ $this, 'getTitleForId' ] ) );
 
 		$formatter = new EntityIdLinkFormatter( $titleLookup );
 		return $formatter;

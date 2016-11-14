@@ -29,7 +29,7 @@ abstract class IndependentWikibaseApiTestCase extends \MediaWikiTestCase {
 			'Apitesteditor',
 			'Api Test Editor',
 			'api_test_editor@example.com',
-			array( 'wbeditor' )
+			[ 'wbeditor' ]
 		);
 
 		$this->setMwGlobals( 'wgUser', self::$users['wbeditor']->getUser() );
@@ -54,11 +54,11 @@ abstract class IndependentWikibaseApiTestCase extends \MediaWikiTestCase {
 		$module = $this->getModule( $params );
 		$module->execute();
 
-		$data = $module->getResult()->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
+		$data = $module->getResult()->getResultData( null, [
+			'BC' => [],
+			'Types' => [],
 			'Strip' => 'all',
-		) );
+		] );
 		return $data;
 	}
 

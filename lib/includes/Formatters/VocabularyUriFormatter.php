@@ -44,7 +44,7 @@ class VocabularyUriFormatter implements ValueFormatter {
 	public function __construct(
 		EntityIdParser $externalEntityIdParser,
 		LabelDescriptionLookup $labelLookup,
-		array $unitlessUnitIds = array()
+		array $unitlessUnitIds = []
 	) {
 		$this->externalEntityIdParser = $externalEntityIdParser;
 		$this->labelLookup = $labelLookup;

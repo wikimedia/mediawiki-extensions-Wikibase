@@ -85,8 +85,8 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 			new StringNormalizer()
 		);
 
-		$sites = array( 'FooSite' );
-		$titles = array( 'Berlin', 'London' );
+		$sites = [ 'FooSite' ];
+		$titles = [ 'Berlin', 'London' ];
 
 		list( $entityIds, ) = $itemByTitleHelper->getItemIds( $sites, $titles, false );
 
@@ -107,13 +107,13 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 			new StringNormalizer()
 		);
 
-		$sites = array( 'FooSite' );
-		$titles = array( 'berlin_germany' );
+		$sites = [ 'FooSite' ];
+		$titles = [ 'berlin_germany' ];
 
 		list( $entityIds, ) = $itemByTitleHelper->getItemIds( $sites, $titles, true );
 
 		// Still nothing could be found
-		$this->assertEquals( array(), $entityIds );
+		$this->assertEquals( [], $entityIds );
 	}
 
 	/**
@@ -129,8 +129,8 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 			new StringNormalizer()
 		);
 
-		$sites = array( 'FooSite' );
-		$titles = array( 'Berlin', 'London' );
+		$sites = [ 'FooSite' ];
+		$titles = [ 'Berlin', 'London' ];
 
 		$itemByTitleHelper->getItemIds( $sites, $titles, false );
 	}
@@ -148,27 +148,27 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 			new StringNormalizer()
 		);
 
-		$sites = array( 'FooSite' );
-		$titles = array( 'Berlin', 'London' );
+		$sites = [ 'FooSite' ];
+		$titles = [ 'Berlin', 'London' ];
 
 		$itemByTitleHelper->getItemIds( $sites, $titles, true );
 	}
 
 	public function normalizeTitleProvider() {
-		return array(
-			array(
+		return [
+			[
 				'foo_bar',
 				123,
 				// The normalization should be noted
 				1
-			),
-			array(
+			],
+			[
 				'Bar',
 				false,
 				// Already normalized
 				0
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -192,20 +192,20 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function notEnoughInputProvider() {
-		return array(
-			array(
+		return [
+			[
 				// Request with no sites
-				array(),
-				array( 'barfoo' ),
+				[],
+				[ 'barfoo' ],
 				false
-			),
-			array(
+			],
+			[
 				// Request with no titles
-				array( 'enwiki' ),
-				array(),
+				[ 'enwiki' ],
+				[],
 				false
-			),
-		);
+			],
+		];
 	}
 
 	/**

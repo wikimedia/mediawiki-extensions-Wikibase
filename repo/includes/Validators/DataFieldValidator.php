@@ -61,14 +61,14 @@ class DataFieldValidator implements ValueValidator {
 		}
 
 		if ( !isset( $data[$this->field] ) ) {
-			return Result::newError( array(
+			return Result::newError( [
 				Error::newError(
 					'Required field ' . $this->field . ' not set',
 					$this->field,
 					'missing-field',
-					array( $this->field )
+					[ $this->field ]
 				),
-			) );
+			] );
 		}
 
 		$fieldValue = $data[$this->field];

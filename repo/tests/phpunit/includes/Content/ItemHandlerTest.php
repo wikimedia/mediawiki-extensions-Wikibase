@@ -55,15 +55,15 @@ class ItemHandlerTest extends EntityHandlerTest {
 
 		/** @var ItemContent $content */
 		$content = $this->newEntityContent();
-		$content->getEntity()->setAliases( 'en', array( 'foo' ) );
+		$content->getEntity()->setAliases( 'en', [ 'foo' ] );
 		$content->getEntity()->setDescription( 'de', 'foobar' );
 		$content->getEntity()->setDescription( 'en', 'baz' );
 		$content->getEntity()->setLabel( 'nl', 'o_O' );
-		$contents[] = array( $content );
+		$contents[] = [ $content ];
 
 		$content = $content->copy();
 		$content->getItem()->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foobar' );
-		$contents[] = array( $content );
+		$contents[] = [ $content ];
 
 		return $contents;
 	}
@@ -85,10 +85,10 @@ class ItemHandlerTest extends EntityHandlerTest {
 		$e4->setLabel( 'en', 'Bar' );
 		$r4 = $this->fakeRevision( $this->newEntityContent( $e4 ), 14 );
 
-		$cases[] = array( $r2, $r2, $r1, $this->newEntityContent( $e1 ), "undo redirect" );
-		$cases[] = array( $r3, $r3, $r2, $e2, "undo redirect change" );
-		$cases[] = array( $r3, $r2, $r1, null, "undo redirect conflict" );
-		$cases[] = array( $r4, $r4, $r3, $e3, "redo redirect" );
+		$cases[] = [ $r2, $r2, $r1, $this->newEntityContent( $e1 ), "undo redirect" ];
+		$cases[] = [ $r3, $r3, $r2, $e2, "undo redirect change" ];
+		$cases[] = [ $r3, $r2, $r1, null, "undo redirect conflict" ];
+		$cases[] = [ $r4, $r4, $r3, $e3, "redo redirect" ];
 
 		return $cases;
 	}
@@ -124,9 +124,9 @@ class ItemHandlerTest extends EntityHandlerTest {
 	}
 
 	public function entityIdProvider() {
-		return array(
-			array( 'Q7' ),
-		);
+		return [
+			[ 'Q7' ],
+		];
 	}
 
 	protected function newEntity( EntityId $id = null ) {

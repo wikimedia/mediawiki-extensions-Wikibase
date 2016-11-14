@@ -24,9 +24,9 @@ use Wikibase\DataModel\Statement\Statement;
 class ChangeOpRemoveStatementTest extends \PHPUnit_Framework_TestCase {
 
 	public function invalidConstructorProvider() {
-		$args = array();
-		$args[] = array( array( 'foo' ) );
-		$args[] = array( '' );
+		$args = [];
+		$args[] = [ [ 'foo' ] ];
+		$args[] = [ '' ];
 		return $args;
 	}
 
@@ -46,7 +46,7 @@ class ChangeOpRemoveStatementTest extends \PHPUnit_Framework_TestCase {
 
 	public function changeOpProvider() {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
-		$args = array();
+		$args = [];
 
 		$item = $this->newItemWithClaim( 'q345', $snak );
 		$statements = $item->getStatements()->toArray();
@@ -55,7 +55,7 @@ class ChangeOpRemoveStatementTest extends \PHPUnit_Framework_TestCase {
 		$guid = $statement->getGuid();
 		$changeOp = new ChangeOpRemoveStatement( $guid );
 		$expected = null;
-		$args[] = array( $item, $changeOp, $expected );
+		$args[] = [ $item, $changeOp, $expected ];
 
 		return $args;
 	}

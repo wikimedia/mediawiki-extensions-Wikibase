@@ -53,7 +53,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 			$store->saveEntity( $prop, 'EditEntityTestP72', $GLOBALS['wgUser'], EDIT_NEW );
 			self::$idMap['%P72%'] = $prop->getId()->getSerialization();
 
-			$this->initTestEntities( array( 'Berlin' ), self::$idMap );
+			$this->initTestEntities( [ 'Berlin' ], self::$idMap );
 			self::$idMap['%Berlin%'] = EntityTestHelper::getId( 'Berlin' );
 
 			$p56 = self::$idMap['%P56%'];
@@ -72,11 +72,11 @@ class EditEntityTest extends WikibaseApiTestCase {
 			$store->saveEntity( $badge, 'EditEntityTestQ32', $GLOBALS['wgUser'], EDIT_NEW );
 			self::$idMap['%Q32%'] = $badge->getId()->getSerialization();
 
-			$wikibaseRepo->getSettings()->setSetting( 'badgeItems', array(
+			$wikibaseRepo->getSettings()->setSetting( 'badgeItems', [
 				self::$idMap['%Q42%'] => '',
 				self::$idMap['%Q149%'] => '',
 				'Q99999' => '', // Just in case we have a wrong config
-			) );
+			] );
 
 			// Create a file page for which we can later create a MediaInfo entity.
 			// XXX It's ugly to have knowledge about MediaInfo here. But since we currently can't
@@ -93,280 +93,280 @@ class EditEntityTest extends WikibaseApiTestCase {
 	 * Provide data for a sequence of requests that will work when run in order
 	 */
 	public function provideData() {
-		return array(
-			'new item' => array(
-				'p' => array( 'new' => 'item', 'data' => '{}' ),
-				'e' => array( 'type' => 'item' ) ),
-			'new property' => array( // make sure if we pass in a valid type it is accepted
-				'p' => array( 'new' => 'property', 'data' => '{"datatype":"string"}' ),
-				'e' => array( 'type' => 'property' ) ),
-			'new property with data' => array( // this is our current example in the api doc
-				'p' => array(
+		return [
+			'new item' => [
+				'p' => [ 'new' => 'item', 'data' => '{}' ],
+				'e' => [ 'type' => 'item' ] ],
+			'new property' => [ // make sure if we pass in a valid type it is accepted
+				'p' => [ 'new' => 'property', 'data' => '{"datatype":"string"}' ],
+				'e' => [ 'type' => 'property' ] ],
+			'new property with data' => [ // this is our current example in the api doc
+				'p' => [
 					'new' => 'property',
 					'data' => '{"labels":{"en-gb":{"language":"en-gb","value":"Propertylabel"}},'
 						. '"descriptions":{"en-gb":{"language":"en-gb","value":"Propertydescription"}},'
 						. '"datatype":"string"}'
-				),
-				'e' => array( 'type' => 'property' ) ),
-			'new mediainfo from id' => array(
-				'p' => array( 'id' => '%M11%', 'data' => '{}' ),
-				'e' => array( 'type' => 'mediainfo' ),
+				],
+				'e' => [ 'type' => 'property' ] ],
+			'new mediainfo from id' => [
+				'p' => [ 'id' => '%M11%', 'data' => '{}' ],
+				'e' => [ 'type' => 'mediainfo' ],
 				'requires' => 'mediainfo', // skip if MediaInfo is not configured
-			),
-			'add a sitelink..' => array( // make sure if we pass in a valid id it is accepted
-				'p' => array(
+			],
+			'add a sitelink..' => [ // make sure if we pass in a valid id it is accepted
+				'p' => [
 					'data' => '{"sitelinks":{"dewiki":{"site":"dewiki",'
 						. '"title":"TestPage!","badges":["%Q42%","%Q149%"]}}}'
-				),
-				'e' => array(
-					'sitelinks' => array(
-						array(
+				],
+				'e' => [
+					'sitelinks' => [
+						[
 							'site' => 'dewiki',
 							'title' => 'TestPage!',
-							'badges' => array( '%Q42%', '%Q149%' )
-						)
-					)
-				)
-			),
-			'add a label, (making sure some data fields are ignored)' => array(
-				'p' => array(
-					'data' => array(
-						'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'A Label' ) ),
+							'badges' => [ '%Q42%', '%Q149%' ]
+						]
+					]
+				]
+			],
+			'add a label, (making sure some data fields are ignored)' => [
+				'p' => [
+					'data' => [
+						'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'A Label' ] ],
 						'length' => 'ignoreme!',
 						'count' => 'ignoreme!',
 						'touched' => 'ignoreme!',
 						'modified' => 'ignoreme!',
-					),
-				),
-				'e' => array(
-					'sitelinks' => array(
-						array(
+					],
+				],
+				'e' => [
+					'sitelinks' => [
+						[
 							'site' => 'dewiki',
 							'title' => 'TestPage!',
-							'badges' => array( '%Q42%', '%Q149%' )
-						)
-					),
-					'labels' => array( 'en' => 'A Label' )
-				)
-			),
-			'add a description..' => array(
-				'p' => array( 'data' => '{"descriptions":{"en":{"language":"en","value":"DESC"}}}' ),
-				'e' => array(
-					'sitelinks' => array(
-						array(
+							'badges' => [ '%Q42%', '%Q149%' ]
+						]
+					],
+					'labels' => [ 'en' => 'A Label' ]
+				]
+			],
+			'add a description..' => [
+				'p' => [ 'data' => '{"descriptions":{"en":{"language":"en","value":"DESC"}}}' ],
+				'e' => [
+					'sitelinks' => [
+						[
 							'site' => 'dewiki',
 							'title' => 'TestPage!',
-							'badges' => array( '%Q42%', '%Q149%' )
-						)
-					),
-					'labels' => array( 'en' => 'A Label' ),
-					'descriptions' => array( 'en' => 'DESC' )
-				)
-			),
-			'remove a sitelink..' => array(
-				'p' => array( 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":""}}}' ),
-				'e' => array(
-					'labels' => array( 'en' => 'A Label' ),
-					'descriptions' => array( 'en' => 'DESC' ) )
-				),
-			'remove a label..' => array(
-				'p' => array( 'data' => '{"labels":{"en":{"language":"en","value":""}}}' ),
-				'e' => array( 'descriptions' => array( 'en' => 'DESC' ) ) ),
-			'remove a description..' => array(
-				'p' => array( 'data' => '{"descriptions":{"en":{"language":"en","value":""}}}' ),
-				'e' => array( 'type' => 'item' ) ),
-			'clear an item with some new value' => array(
-				'p' => array(
+							'badges' => [ '%Q42%', '%Q149%' ]
+						]
+					],
+					'labels' => [ 'en' => 'A Label' ],
+					'descriptions' => [ 'en' => 'DESC' ]
+				]
+			],
+			'remove a sitelink..' => [
+				'p' => [ 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":""}}}' ],
+				'e' => [
+					'labels' => [ 'en' => 'A Label' ],
+					'descriptions' => [ 'en' => 'DESC' ] ]
+				],
+			'remove a label..' => [
+				'p' => [ 'data' => '{"labels":{"en":{"language":"en","value":""}}}' ],
+				'e' => [ 'descriptions' => [ 'en' => 'DESC' ] ] ],
+			'remove a description..' => [
+				'p' => [ 'data' => '{"descriptions":{"en":{"language":"en","value":""}}}' ],
+				'e' => [ 'type' => 'item' ] ],
+			'clear an item with some new value' => [
+				'p' => [
 					'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"page"}}}',
 					'clear' => ''
-				),
-				'e' => array(
+				],
+				'e' => [
 					'type' => 'item',
-					'sitelinks' => array(
-						array(
+					'sitelinks' => [
+						[
 							'site' => 'dewiki',
 							'title' => 'Page',
-							'badges' => array()
-						)
-					)
-				)
-			),
-			'clear an item with no value' => array(
-				'p' => array( 'data' => '{}', 'clear' => '' ),
-				'e' => array( 'type' => 'item' ) ),
-			'add 2 labels' => array(
-				'p' => array( 'data' => '{"labels":{"en":{"language":"en","value":"A Label"},'
-					. '"sv":{"language":"sv","value":"SVLabel"}}}' ),
-				'e' => array( 'labels' => array( 'en' => 'A Label', 'sv' => 'SVLabel' ) ) ),
-			'remove a label with remove' => array(
-				'p' => array( 'data' => '{"labels":{"en":{"language":"en","remove":true}}}' ),
-				'e' => array( 'labels' => array( 'sv' => 'SVLabel' ) ) ),
-			'override and add 2 descriptions' => array(
-				'p' => array( 'clear' => '', 'data' => '{"descriptions":{'
+							'badges' => []
+						]
+					]
+				]
+			],
+			'clear an item with no value' => [
+				'p' => [ 'data' => '{}', 'clear' => '' ],
+				'e' => [ 'type' => 'item' ] ],
+			'add 2 labels' => [
+				'p' => [ 'data' => '{"labels":{"en":{"language":"en","value":"A Label"},'
+					. '"sv":{"language":"sv","value":"SVLabel"}}}' ],
+				'e' => [ 'labels' => [ 'en' => 'A Label', 'sv' => 'SVLabel' ] ] ],
+			'remove a label with remove' => [
+				'p' => [ 'data' => '{"labels":{"en":{"language":"en","remove":true}}}' ],
+				'e' => [ 'labels' => [ 'sv' => 'SVLabel' ] ] ],
+			'override and add 2 descriptions' => [
+				'p' => [ 'clear' => '', 'data' => '{"descriptions":{'
 					. '"en":{"language":"en","value":"DESC1"},'
-					. '"de":{"language":"de","value":"DESC2"}}}' ),
-				'e' => array( 'descriptions' => array( 'en' => 'DESC1', 'de' => 'DESC2' ) ) ),
-			'remove a description with remove' => array(
-				'p' => array( 'data' => '{"descriptions":{"en":{"language":"en","remove":true}}}' ),
-				'e' => array( 'descriptions' => array( 'de' => 'DESC2' ) ) ),
-			'override and add 2 sitelinks..' => array(
-				'p' => array( 'data' => '{"sitelinks":{'
+					. '"de":{"language":"de","value":"DESC2"}}}' ],
+				'e' => [ 'descriptions' => [ 'en' => 'DESC1', 'de' => 'DESC2' ] ] ],
+			'remove a description with remove' => [
+				'p' => [ 'data' => '{"descriptions":{"en":{"language":"en","remove":true}}}' ],
+				'e' => [ 'descriptions' => [ 'de' => 'DESC2' ] ] ],
+			'override and add 2 sitelinks..' => [
+				'p' => [ 'data' => '{"sitelinks":{'
 					. '"dewiki":{"site":"dewiki","title":"BAA"},'
-					. '"svwiki":{"site":"svwiki","title":"FOO"}}}' ),
-				'e' => array(
+					. '"svwiki":{"site":"svwiki","title":"FOO"}}}' ],
+				'e' => [
 					'type' => 'item',
-					'sitelinks' => array(
-						array(
+					'sitelinks' => [
+						[
 							'site' => 'dewiki',
 							'title' => 'BAA',
-							'badges' => array()
-						),
-						array(
+							'badges' => []
+						],
+						[
 							'site' => 'svwiki',
 							'title' => 'FOO',
-							'badges' => array()
-						)
-					)
-				)
-			),
-			'unset a sitelink using the other sitelink' => array(
-				'p' => array(
+							'badges' => []
+						]
+					]
+				]
+			],
+			'unset a sitelink using the other sitelink' => [
+				'p' => [
 					'site' => 'svwiki',
 					'title' => 'FOO',
 					'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":""}}}'
-				),
-				'e' => array(
+				],
+				'e' => [
 					'type' => 'item',
-					'sitelinks' => array(
-						array(
+					'sitelinks' => [
+						[
 							'site' => 'svwiki',
 							'title' => 'FOO',
-							'badges' => array()
-						)
-					)
-				)
-			),
-			'set badges for a existing sitelink, title intact' => array(
-				'p' => array(
+							'badges' => []
+						]
+					]
+				]
+			],
+			'set badges for a existing sitelink, title intact' => [
+				'p' => [
 					'data' => '{"sitelinks":{"svwiki":{"site":"svwiki","badges":["%Q149%","%Q42%"]}}}'
-				),
-				'e' => array(
+				],
+				'e' => [
 					'type' => 'item',
-					'sitelinks' => array(
-						array(
+					'sitelinks' => [
+						[
 							'site' => 'svwiki',
 							'title' => 'FOO',
-							'badges' => array( "%Q149%", "%Q42%" )
-						)
-					)
-				)
-			),
-			'set title for a existing sitelink, badges intact' => array(
-				'p' => array( 'data' => '{"sitelinks":{"svwiki":{"site":"svwiki","title":"FOO2"}}}' ),
-				'e' => array(
+							'badges' => [ "%Q149%", "%Q42%" ]
+						]
+					]
+				]
+			],
+			'set title for a existing sitelink, badges intact' => [
+				'p' => [ 'data' => '{"sitelinks":{"svwiki":{"site":"svwiki","title":"FOO2"}}}' ],
+				'e' => [
 					'type' => 'item',
-					'sitelinks' => array(
-						array(
+					'sitelinks' => [
+						[
 							'site' => 'svwiki',
 							'title' => 'FOO2',
-							'badges' => array( "%Q149%", "%Q42%" )
-						)
-					)
-				)
-			),
-			'delete sitelink by providing neither title nor badges' => array(
-				'p' => array( 'data' => '{"sitelinks":{"svwiki":{"site":"svwiki"}}}' ),
-				'e' => array(
+							'badges' => [ "%Q149%", "%Q42%" ]
+						]
+					]
+				]
+			],
+			'delete sitelink by providing neither title nor badges' => [
+				'p' => [ 'data' => '{"sitelinks":{"svwiki":{"site":"svwiki"}}}' ],
+				'e' => [
 					'type' => 'item',
-				)
-			),
-			'add a claim' => array(
-				'p' => array( 'data' => '{"claims":[{"mainsnak":{"snaktype":"value",'
+				]
+			],
+			'add a claim' => [
+				'p' => [ 'data' => '{"claims":[{"mainsnak":{"snaktype":"value",'
 					. '"property":"%P56%","datavalue":{"value":"imastring","type":"string"}},'
-					. '"type":"statement","rank":"normal"}]}' ),
-				'e' => array( 'claims' => array(
-					'%P56%' => array(
-						'mainsnak' => array(
+					. '"type":"statement","rank":"normal"}]}' ],
+				'e' => [ 'claims' => [
+					'%P56%' => [
+						'mainsnak' => [
 							'snaktype' => 'value',
 							'property' => '%P56%',
-							'datavalue' => array( 'value' => 'imastring', 'type' => 'string' )
-						),
+							'datavalue' => [ 'value' => 'imastring', 'type' => 'string' ]
+						],
 						'type' => 'statement',
 						'rank' => 'normal'
-					)
-				) )
-			),
-			'change the claim' => array(
-				'p' => array( 'data' => array(
-					'claims' => array(
-							array(
+					]
+				] ]
+			],
+			'change the claim' => [
+				'p' => [ 'data' => [
+					'claims' => [
+							[
 								'id' => '%lastClaimId%',
-								'mainsnak' => array(
+								'mainsnak' => [
 									'snaktype' => 'value',
 									'property' => '%P56%',
-									'datavalue' => array(
+									'datavalue' => [
 										'value' => 'diffstring',
 										'type' => 'string'
-									),
-								),
+									],
+								],
 								'type' => 'statement',
 								'rank' => 'normal',
-							),
-						),
-					) ),
-				'e' => array( 'claims' => array(
-					'%P56%' => array(
-						'mainsnak' => array( 'snaktype' => 'value', 'property' => '%P56%',
-							'datavalue' => array(
+							],
+						],
+					] ],
+				'e' => [ 'claims' => [
+					'%P56%' => [
+						'mainsnak' => [ 'snaktype' => 'value', 'property' => '%P56%',
+							'datavalue' => [
 								'value' => 'diffstring',
-								'type' => 'string' ) ),
+								'type' => 'string' ] ],
 						'type' => 'statement',
 						'rank' => 'normal'
-					)
-				) )
-			),
-			'remove the claim' => array(
-				'p' => array( 'data' => '{"claims":[{"id":"%lastClaimId%","remove":""}]}' ),
-				'e' => array( 'claims' => array() )
-			),
-			'add multiple claims' => array(
-				'p' => array( 'data' => '{"claims":['
+					]
+				] ]
+			],
+			'remove the claim' => [
+				'p' => [ 'data' => '{"claims":[{"id":"%lastClaimId%","remove":""}]}' ],
+				'e' => [ 'claims' => [] ]
+			],
+			'add multiple claims' => [
+				'p' => [ 'data' => '{"claims":['
 					. '{"mainsnak":{"snaktype":"value","property":"%P56%","datavalue":'
 					. '{"value":"imastring1","type":"string"}},"type":"statement","rank":"normal"},'
 					. '{"mainsnak":{"snaktype":"value","property":"%P56%","datavalue":'
 					. '{"value":"imastring2","type":"string"}},"type":"statement","rank":"normal"}'
-					. ']}' ),
-				'e' => array( 'claims' => array(
-					array(
-						'mainsnak' => array(
+					. ']}' ],
+				'e' => [ 'claims' => [
+					[
+						'mainsnak' => [
 							'snaktype' => 'value', 'property' => '%P56%',
-							'datavalue' => array(
+							'datavalue' => [
 								'value' => 'imastring1',
-								'type' => 'string' ) ),
+								'type' => 'string' ] ],
 						'type' => 'statement',
-						'rank' => 'normal' ),
-					array(
-						'mainsnak' => array(
+						'rank' => 'normal' ],
+					[
+						'mainsnak' => [
 							'snaktype' => 'value', 'property' => '%P56%',
-							'datavalue' => array(
+							'datavalue' => [
 								'value' => 'imastring2',
-								'type' => 'string' ) ),
+								'type' => 'string' ] ],
 						'type' => 'statement',
-						'rank' => 'normal' )
-				) ),
-			),
-			'remove all stuff' => array(
-				'p' => array( 'clear' => '', 'data' => '{}' ),
-				'e' => array(
-					'labels' => array(),
-					'descriptions' => array(),
-					'aliases' => array(),
-					'sitelinks' => array(),
-					'claims' => array()
-				)
-			),
-			'add lots of data again' => array(
-				'p' => array( 'data' => '{"claims":['
+						'rank' => 'normal' ]
+				] ],
+			],
+			'remove all stuff' => [
+				'p' => [ 'clear' => '', 'data' => '{}' ],
+				'e' => [
+					'labels' => [],
+					'descriptions' => [],
+					'aliases' => [],
+					'sitelinks' => [],
+					'claims' => []
+				]
+			],
+			'add lots of data again' => [
+				'p' => [ 'data' => '{"claims":['
 					. '{"mainsnak":{"snaktype":"value","property":"%P56%","datavalue":'
 					. '{"value":"imastring1","type":"string"}},"type":"statement","rank":"normal"},'
 					. '{"mainsnak":{"snaktype":"value","property":"%P56%","datavalue":'
@@ -374,24 +374,24 @@ class EditEntityTest extends WikibaseApiTestCase {
 					. '],'
 					. '"sitelinks":{"dewiki":{"site":"dewiki","title":"page"}},'
 					. '"labels":{"en":{"language":"en","value":"A Label"}},'
-					. '"descriptions":{"en":{"language":"en","value":"A description"}}}' ),
-				'e' => array( 'type' => 'item' )
-			),
-			'make a null edit' => array(
-				'p' => array( 'data' => '{}' ),
-				'e' => array( 'nochange' => '' )
-			),
-			'remove all stuff in another way' => array(
-				'p' => array( 'clear' => true, 'data' => '{}' ),
-				'e' => array(
-					'labels' => array(),
-					'descriptions' => array(),
-					'aliases' => array(),
-					'sitelinks' => array(),
-					'claims' => array()
-				)
-			),
-		);
+					. '"descriptions":{"en":{"language":"en","value":"A description"}}}' ],
+				'e' => [ 'type' => 'item' ]
+			],
+			'make a null edit' => [
+				'p' => [ 'data' => '{}' ],
+				'e' => [ 'nochange' => '' ]
+			],
+			'remove all stuff in another way' => [
+				'p' => [ 'clear' => true, 'data' => '{}' ],
+				'e' => [
+					'labels' => [],
+					'descriptions' => [],
+					'aliases' => [],
+					'sitelinks' => [],
+					'claims' => []
+				]
+			],
+		];
 	}
 
 	/**
@@ -489,7 +489,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 			|| $expected['warning'] != 'edit-no-change'
 		) {
 			$this->assertRevisionSummary(
-				array( 'wbeditentity' ),
+				[ 'wbeditentity' ],
 				$result['entity']['lastrevid']
 			);
 
@@ -506,204 +506,204 @@ class EditEntityTest extends WikibaseApiTestCase {
 	 * Provide data for requests that will fail with a set exception, code and message
 	 */
 	public function provideExceptionData() {
-		return array(
-			'empty entity id given' => array(
-				'p' => array( 'id' => '', 'data' => '{}' ),
-				'e' => array( 'exception' => array(
+		return [
+			'empty entity id given' => [
+				'p' => [ 'id' => '', 'data' => '{}' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'invalid-entity-id'
-				) ) ),
-			'invalid id' => array(
-				'p' => array( 'id' => 'abcde', 'data' => '{}' ),
-				'e' => array( 'exception' => array(
+				] ] ],
+			'invalid id' => [
+				'p' => [ 'id' => 'abcde', 'data' => '{}' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'invalid-entity-id'
-				) ) ),
-			'unknown id' => array(
-				'p' => array( 'id' => 'Q1234567', 'data' => '{}' ),
-				'e' => array( 'exception' => array(
+				] ] ],
+			'unknown id' => [
+				'p' => [ 'id' => 'Q1234567', 'data' => '{}' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'no-such-entity'
-				) ) ),
-			'invalid explicit id' => array(
-				'p' => array( 'id' => '1234', 'data' => '{}' ),
-				'e' => array( 'exception' => array(
+				] ] ],
+			'invalid explicit id' => [
+				'p' => [ 'id' => '1234', 'data' => '{}' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'invalid-entity-id'
-				) ) ),
-			'non existent sitelink' => array(
-				'p' => array( 'site' => 'dewiki','title' => 'NonExistent', 'data' => '{}' ),
-				'e' => array( 'exception' => array(
+				] ] ],
+			'non existent sitelink' => [
+				'p' => [ 'site' => 'dewiki','title' => 'NonExistent', 'data' => '{}' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'no-such-entity-link'
-				) ) ),
-			'missing site (also bad title)' => array(
-				'p' => array( 'title' => 'abcde', 'data' => '{}' ),
-				'e' => array( 'exception' => array(
+				] ] ],
+			'missing site (also bad title)' => [
+				'p' => [ 'title' => 'abcde', 'data' => '{}' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'param-missing'
-				) ) ),
-			'cant have id and new' => array(
-				'p' => array( 'id' => 'q666', 'new' => 'item', 'data' => '{}' ),
-				'e' => array( 'exception' => array(
+				] ] ],
+			'cant have id and new' => [
+				'p' => [ 'id' => 'q666', 'new' => 'item', 'data' => '{}' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'param-missing'
-				) ) ),
-			'when clearing must also have data!' => array(
-				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'clear' => '' ),
-				'e' => array( 'exception' => array(
+				] ] ],
+			'when clearing must also have data!' => [
+				'p' => [ 'site' => 'enwiki', 'title' => 'Berlin', 'clear' => '' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'nodata'
-				) ) ),
-			'bad site' => array(
-				'p' => array( 'site' => 'abcde', 'data' => '{}' ),
-				'e' => array( 'exception' => array(
+				] ] ],
+			'bad site' => [
+				'p' => [ 'site' => 'abcde', 'data' => '{}' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'unknown_site'
-				) ) ),
-			'no data provided' => array(
-				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' ),
-				'e' => array( 'exception' => array(
+				] ] ],
+			'no data provided' => [
+				'p' => [ 'site' => 'enwiki', 'title' => 'Berlin' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'nodata' // see 'no$1' in ApiBase::$messageMap
-				) )
-			),
-			'malformed json' => array(
-				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '{{{}' ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			'malformed json' => [
+				'p' => [ 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '{{{}' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'invalid-json'
-				) ) ),
-			'must be a json object (json_decode s this an an int)' => array(
-				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '1234' ),
-				'e' => array( 'exception' => array(
+				] ] ],
+			'must be a json object (json_decode s this an an int)' => [
+				'p' => [ 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '1234' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'not-recognized-array'
-				) ) ),
-			'must be a json object (json_decode s this an an indexed array)' => array(
-				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '[ "xyz" ]' ),
-				'e' => array( 'exception' => array(
+				] ] ],
+			'must be a json object (json_decode s this an an indexed array)' => [
+				'p' => [ 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '[ "xyz" ]' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'not-recognized-string'
-					) ) ),
-			'must be a json object (json_decode s this an a string)' => array(
-				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '"string"' ),
-				'e' => array( 'exception' => array(
+					] ] ],
+			'must be a json object (json_decode s this an a string)' => [
+				'p' => [ 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '"string"' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'not-recognized-array'
-				) ) ),
-			'inconsistent site in json' => array(
-				'p' => array(
+				] ] ],
+			'inconsistent site in json' => [
+				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'data' => '{"sitelinks":{"ptwiki":{"site":"svwiki","title":"TestPage!"}}}'
-				),
-				'e' => array( 'exception' => array(
+				],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'inconsistent-site'
-				) ) ),
-			'inconsistent lang in json' => array(
-				'p' => array(
+				] ] ],
+			'inconsistent lang in json' => [
+				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'data' => '{"labels":{"de":{"language":"pt","value":"TestPage!"}}}'
-				),
-				'e' => array( 'exception' => array(
+				],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'inconsistent-language'
-				) ) ),
-			'inconsistent unknown site in json' => array(
-				'p' => array(
+				] ] ],
+			'inconsistent unknown site in json' => [
+				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'data' => '{"sitelinks":{"BLUB":{"site":"BLUB","title":"TestPage!"}}}'
-				),
-				'e' => array( 'exception' => array(
+				],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'not-recognized-site'
-				) ) ),
-			'inconsistent unknown languages' => array(
-				'p' => array(
+				] ] ],
+			'inconsistent unknown languages' => [
+				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'data' => '{"labels":{"BLUB":{"language":"BLUB","value":"ImaLabel"}}}'
-				),
-				'e' => array( 'exception' => array(
+				],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'not-recognized-language'
-				) ) ),
+				] ] ],
 			// @todo the error codes in the overly long string tests make no sense
 			// and should be corrected...
-			'overly long label' => array(
-				'p' => array(
+			'overly long label' => [
+				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'data' => '{"labels":{"en":{"language":"en","value":"'
 						. TermTestHelper::makeOverlyLongString() . '"}}}'
-				),
-				'e' => array( 'exception' => array( 'type' => UsageException::class ) ) ),
-			'overly long description' => array(
-				'p' => array(
+				],
+				'e' => [ 'exception' => [ 'type' => UsageException::class ] ] ],
+			'overly long description' => [
+				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'data' => '{"descriptions":{"en":{"language":"en","value":"'
 						. TermTestHelper::makeOverlyLongString() . '"}}}'
-				),
-				'e' => array( 'exception' => array( 'type' => UsageException::class ) ) ),
-			'missing language in labels (T54731)' => array(
-				'p' => array(
+				],
+				'e' => [ 'exception' => [ 'type' => UsageException::class ] ] ],
+			'missing language in labels (T54731)' => [
+				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'data' => '{"labels":{"de":{"site":"pt","title":"TestString"}}}'
-				),
-				'e' => array( 'exception' => array(
+				],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'missing-language',
 					'message' => '\'language\' was not found in the label or description json for de'
-				) )
-			),
-			'removing invalid claim fails' => array(
-				'p' => array(
+				] ]
+			],
+			'removing invalid claim fails' => [
+				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'data' => '{"claims":[{"remove":""}]}'
-				),
-				'e' => array( 'exception' => array(
+				],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'invalid-claim',
 					'message' => 'Cannot remove a claim with no GUID'
-				) )
-			),
-			'invalid entity ID in data value' => array(
-				'p' => array(
+				] ]
+			],
+			'invalid entity ID in data value' => [
+				'p' => [
 					'id' => '%Berlin%',
 					'data' => '{ "claims": [ {
 						"mainsnak": { "snaktype": "novalue", "property": "P0" },
 						"type": "statement"
 					} ] }'
-				),
-				'e' => array( 'exception' => array(
+				],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'invalid-claim',
 					'message' => '\'P0\' is not a valid entity ID'
-				) )
-			),
-			'invalid statement GUID' => array(
-				'p' => array(
+				] ]
+			],
+			'invalid statement GUID' => [
+				'p' => [
 					'id' => '%Berlin%',
 					'data' => '{ "claims": [ {
 						"id": "Q0$GUID",
 						"mainsnak": { "snaktype": "novalue", "property": "%P56%" },
 						"type": "statement"
 					} ] }'
-				),
-				'e' => array( 'exception' => array(
+				],
+				'e' => [ 'exception' => [
 					// FIXME: Does this also need fixing?
 					'type' => StatementGuidParsingException::class
-				) )
-			),
-			'removing valid claim with no guid fails' => array(
-				'p' => array(
+				] ]
+			],
+			'removing valid claim with no guid fails' => [
+				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'data' => '{
@@ -718,165 +718,165 @@ class EditEntityTest extends WikibaseApiTestCase {
 							"rank": "normal"
 						} ]
 					}'
-				),
-				'e' => array( 'exception' => array(
+				],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'not-recognized',
-					'message' => 'Unknown key in json: remove' )
-				)
-			),
-			'bad badge id' => array(
-				'p' => array(
+					'message' => 'Unknown key in json: remove' ]
+				]
+			],
+			'bad badge id' => [
+				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!",'
 						. '"badges":["abc","%Q149%"]}}}'
-				),
-				'e' => array( 'exception' => array(
+				],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'invalid-entity-id'
-				) )
-			),
-			'badge id is not an item id' => array(
-				'p' => array(
+				] ]
+			],
+			'badge id is not an item id' => [
+				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!",'
 						. '"badges":["P2","%Q149%"]}}}'
-				),
-				'e' => array( 'exception' => array(
+				],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'invalid-entity-id'
-				) )
-			),
-			'badge id is not specified' => array(
-				'p' => array(
+				] ]
+			],
+			'badge id is not specified' => [
+				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!",'
 						. '"badges":["%Q149%","%Q32%"]}}}'
-				),
-				'e' => array( 'exception' => array(
+				],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'not-badge'
-				) )
-			),
-			'badge item does not exist' => array(
-				'p' => array(
+				] ]
+			],
+			'badge item does not exist' => [
+				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!",'
 						. '"badges":["Q99999","%Q149%"]}}}'
-				),
-				'e' => array( 'exception' => array(
+				],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'no-such-entity'
-				) )
-			),
-			'no sitelink - cannot change badges' => array(
-				'p' => array(
+				] ]
+			],
+			'no sitelink - cannot change badges' => [
+				'p' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'data' => '{"sitelinks":{"svwiki":{"site":"svwiki",'
 						. '"badges":["%Q42%","%Q149%"]}}}'
-				),
-				'e' => array( 'exception' => array(
+				],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'no-such-sitelink'
-				) )
-			),
-			'bad id in serialization' => array(
-				'p' => array( 'id' => '%Berlin%', 'data' => '{"id":"Q13244"}' ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			'bad id in serialization' => [
+				'p' => [ 'id' => '%Berlin%', 'data' => '{"id":"Q13244"}' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'param-invalid',
 					'message' => 'Invalid field used in call: "id", must match id parameter'
-				) )
-			),
-			'bad type in serialization' => array(
-				'p' => array( 'id' => '%Berlin%', 'data' => '{"id":"%Berlin%","type":"foobar"}' ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			'bad type in serialization' => [
+				'p' => [ 'id' => '%Berlin%', 'data' => '{"id":"%Berlin%","type":"foobar"}' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'param-invalid',
 					'message' => 'Invalid field used in call: "type", '
 						. 'must match type associated with id'
-				) )
-			),
-			'bad main snak replacement' => array(
-				'p' => array( 'id' => '%Berlin%', 'data' => json_encode( array(
-						'claims' => array(
-							array(
+				] ]
+			],
+			'bad main snak replacement' => [
+				'p' => [ 'id' => '%Berlin%', 'data' => json_encode( [
+						'claims' => [
+							[
 								'id' => '%BerlinP56%',
-								'mainsnak' => array(
+								'mainsnak' => [
 									'snaktype' => 'value',
 									'property' => '%P72%',
-									'datavalue' => array(
+									'datavalue' => [
 										'value' => 'anotherstring',
 										'type' => 'string'
-									),
-								),
+									],
+								],
 								'type' => 'statement',
-								'rank' => 'normal' ),
-						),
-					) ) ),
-				'e' => array( 'exception' => array(
+								'rank' => 'normal' ],
+						],
+					] ) ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'modification-failed',
-					'message' => 'uses property %P56%, can\'t change to %P72%' ) ) ),
-			'invalid main snak' => array(
-				'p' => array( 'id' => '%Berlin%', 'data' => json_encode( array(
-					'claims' => array(
-						array(
+					'message' => 'uses property %P56%, can\'t change to %P72%' ] ] ],
+			'invalid main snak' => [
+				'p' => [ 'id' => '%Berlin%', 'data' => json_encode( [
+					'claims' => [
+						[
 							'id' => '%BerlinP56%',
-							'mainsnak' => array(
+							'mainsnak' => [
 								'snaktype' => 'value',
 								'property' => '%P56%',
-								'datavalue' => array( 'value' => '   ', 'type' => 'string' ),
-							),
+								'datavalue' => [ 'value' => '   ', 'type' => 'string' ],
+							],
 							'type' => 'statement',
-							'rank' => 'normal' ),
-					),
-				) ) ),
-				'e' => array( 'exception' => array(
+							'rank' => 'normal' ],
+					],
+				] ) ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
-					'code' => 'modification-failed' ) ) ),
-			'properties cannot have sitelinks' => array(
-				'p' => array(
+					'code' => 'modification-failed' ] ] ],
+			'properties cannot have sitelinks' => [
+				'p' => [
 					'id' => '%P56%',
 					'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!"}}}',
-				),
-				'e' => array( 'exception' => array(
+				],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'not-supported',
 					'message' => 'Non Items cannot have sitelinks'
-				) ) ),
-			'create mediainfo with automatic id' => array(
-				'p' => array( 'new' => 'mediainfo', 'data' => '{}' ),
-				'e' => array( 'exception' => array(
+				] ] ],
+			'create mediainfo with automatic id' => [
+				'p' => [ 'new' => 'mediainfo', 'data' => '{}' ],
+				'e' => [ 'exception' => [
 					'type' => StorageException::class,
 					'message' => 'mediainfo entities do not support automatic IDs'
-				) ),
+				] ],
 				'requires' => 'mediainfo' // skip if MediaInfo is not configured
-			),
-			'create mediainfo with malformed id' => array(
-				'p' => array( 'id' => 'M123X', 'data' => '{}' ),
-				'e' => array( 'exception' => array(
+			],
+			'create mediainfo with malformed id' => [
+				'p' => [ 'id' => 'M123X', 'data' => '{}' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'invalid-entity-id',
 					'message' => 'Invalid entity ID.'
-				) ),
+				] ],
 				'requires' => 'mediainfo' // skip if MediaInfo is not configured
-			),
-			'create mediainfo with bad id' => array(
-				'p' => array( 'id' => 'M12734569', 'data' => '{}' ),
-				'e' => array( 'exception' => array(
+			],
+			'create mediainfo with bad id' => [
+				'p' => [ 'id' => 'M12734569', 'data' => '{}' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'no-such-entity',
 					'message' => 'Could not find such an entity'
-				) ),
+				] ],
 				'requires' => 'mediainfo' // skip if MediaInfo is not configured
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -894,30 +894,30 @@ class EditEntityTest extends WikibaseApiTestCase {
 	}
 
 	public function testPropertyLabelConflict() {
-		$params = array(
+		$params = [
 			'action' => 'wbeditentity',
 			'data' => '{
 				"datatype": "string",
 				"labels": { "de": { "language": "de", "value": "LabelConflict" } }
 			}',
 			'new' => 'property',
-		);
+		];
 		$this->doApiRequestWithToken( $params );
 
-		$expectedException = array(
+		$expectedException = [
 			'type' => UsageException::class,
 			'code' => 'failed-save',
-		);
+		];
 		// Repeating the same request with the same label should fail.
 		$this->doTestQueryExceptions( $params, $expectedException );
 	}
 
 	public function testItemLabelWithoutDescriptionNotConflicting() {
-		$params = array(
+		$params = [
 			'action' => 'wbeditentity',
 			'data' => '{ "labels": { "de": { "language": "de", "value": "NotConflicting" } } }',
 			'new' => 'item',
-		);
+		];
 		$this->doApiRequestWithToken( $params );
 
 		// Repeating the same request with the same label should not fail.
@@ -928,46 +928,46 @@ class EditEntityTest extends WikibaseApiTestCase {
 	public function testItemLabelDescriptionConflict() {
 		$this->markTestSkippedOnMySql();
 
-		$params = array(
+		$params = [
 			'action' => 'wbeditentity',
 			'new' => 'item',
 			'data' => '{
 				"labels": { "de": { "language": "de", "value": "LabelDescriptionConflict" } },
 				"descriptions": { "de": { "language": "de", "value": "LabelDescriptionConflict" } }
 			}',
-		);
+		];
 		$this->doApiRequestWithToken( $params );
 
-		$expectedException = array(
+		$expectedException = [
 			'type' => UsageException::class,
 			'code' => 'modification-failed',
-		);
+		];
 		// Repeating the same request with the same label and description should fail.
 		$this->doTestQueryExceptions( $params, $expectedException );
 	}
 
 	public function testClearFromBadRevId() {
-		$params = array(
+		$params = [
 			'action' => 'wbeditentity',
 			'id' => '%Berlin%',
 			'data' => '{}',
 			// 'baserevid' => '', // baserevid is set below
-			'clear' => '' );
+			'clear' => '' ];
 		$this->injectIds( $params );
 
-		$setupParams = array(
+		$setupParams = [
 			'action' => 'wbeditentity',
 			'id' => $params['id'],
 			'clear' => '',
 			'data' => '{"descriptions":{"en":{"language":"en","value":"ClearFromBadRevidDesc1"}}}',
-		);
+		];
 
 		list( $result, , ) = $this->doApiRequestWithToken( $setupParams );
 		$params['baserevid'] = $result['entity']['lastrevid'];
 		$setupParams['data'] = '{"descriptions":{"en":{"language":"en","value":"ClearFromBadRevidDesc2"}}}';
 		$this->doApiRequestWithToken( $setupParams );
 
-		$expectedException = array( 'type' => UsageException::class, 'code' => 'editconflict' );
+		$expectedException = [ 'type' => UsageException::class, 'code' => 'editconflict' ];
 		$this->doTestQueryExceptions( $params, $expectedException );
 	}
 

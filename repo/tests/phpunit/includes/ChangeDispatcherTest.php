@@ -56,7 +56,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @return ChangeDispatcher
 	 */
-	private function getChangeDispatcher( ChangeDispatchCoordinator $coordinator, array &$notifications = array() ) {
+	private function getChangeDispatcher( ChangeDispatchCoordinator $coordinator, array &$notifications = [] ) {
 		$dispatcher = new ChangeDispatcher(
 			$coordinator,
 			$this->getNotificationSender( $notifications ),
@@ -73,13 +73,13 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @return ChangeNotificationSender
 	 */
-	private function getNotificationSender( array &$notifications = array() ) {
+	private function getNotificationSender( array &$notifications = [] ) {
 		$sender = $this->getMock( ChangeNotificationSender::class );
 
 		$sender->expects( $this->any() )
 			->method( 'sendNotification' )
 			->will( $this->returnCallback( function ( $siteID, array $changes ) use ( &$notifications ) {
-				$notifications[] = array( $siteID, $changes );
+				$notifications[] = [ $siteID, $changes ];
 			} ) );
 
 		return $sender;
@@ -93,7 +93,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 
 		$chunkedAccess->expects( $this->any() )
 			->method( 'loadChunk' )
-			->will( $this->returnCallback( array( $this, 'getChanges' ) ) );
+			->will( $this->returnCallback( [ $this, 'getChanges' ] ) );
 
 		$chunkedAccess->expects( $this->any() )
 			->method( 'getRecordId' )
@@ -112,7 +112,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 
 		$lookup->expects( $this->any() )
 			->method( 'getSubscriptions' )
-			->will( $this->returnCallback( array( $this, 'getSubscriptions' ) ) );
+			->will( $this->returnCallback( [ $this, 'getSubscriptions' ] ) );
 
 		return $lookup;
 	}
@@ -123,7 +123,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 
 	public function getSubscriptions( $siteId, array $entityIds ) {
 		if ( !isset( $this->subscriptions[$siteId] ) ) {
-			return array();
+			return [];
 		}
 
 		return array_intersect( $this->subscriptions[$siteId], $entityIds );
@@ -135,13 +135,13 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 	private function getAllChanges() {
 		$changeId = 0;
 
-		$addEn = new MapDiff( array( 'enwiki' => new DiffOpAdd( 'Foo' ) ) );
-		$changeEn = new MapDiff( array( 'enwiki' => new DiffOpChange( 'Foo', 'Bar' ) ) );
+		$addEn = new MapDiff( [ 'enwiki' => new DiffOpAdd( 'Foo' ) ] );
+		$changeEn = new MapDiff( [ 'enwiki' => new DiffOpChange( 'Foo', 'Bar' ) ] );
 
-		$addDe = new MapDiff( array( 'dewiki' => new DiffOpAdd( 'Fuh' ) ) );
-		$removeDe = new MapDiff( array( 'dewiki' => new DiffOpRemove( 'Fuh' ) ) );
+		$addDe = new MapDiff( [ 'dewiki' => new DiffOpAdd( 'Fuh' ) ] );
+		$removeDe = new MapDiff( [ 'dewiki' => new DiffOpRemove( 'Fuh' ) ] );
 
-		return array(
+		return [
 			// index 0 is ignored, or used as the base change.
 			$this->newChange( 0, new ItemId( 'Q99999' ), sprintf( '201403030100', 0 ) ),
 			$this->newChange( ++$changeId, new PropertyId( 'P11' ), sprintf( '2014030301%02d', $changeId ) ),
@@ -152,20 +152,20 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 			$this->newChange( ++$changeId, new ItemId( 'Q33' ), sprintf( '2014030301%02d', $changeId ), $changeEn ),
 			$this->newChange( ++$changeId, new ItemId( 'Q44' ), sprintf( '2014030301%02d', $changeId ), $addDe ),
 			$this->newChange( ++$changeId, new ItemId( 'Q44' ), sprintf( '2014030301%02d', $changeId ), $removeDe ),
-		);
+		];
 	}
 
 	protected function setUp() {
-		$this->subscriptions['enwiki'] = array(
+		$this->subscriptions['enwiki'] = [
 			new PropertyId( 'P11' ),
 			new ItemId( 'Q22' ),
 			// changes to Q33 are relevant because they affect enwiki
-		);
+		];
 
-		$this->subscriptions['dewiki'] = array(
+		$this->subscriptions['dewiki'] = [
 			new ItemId( 'Q22' ),
 			// changes to Q22 are relevant because they affect dewiki
-		);
+		];
 
 		$this->changes = $this->getAllChanges();
 	}
@@ -270,13 +270,13 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 	public function testSelectClient() {
 		$siteId = 'testwiki';
 
-		$expectedClientState = array(
+		$expectedClientState = [
 			'chd_site' => $siteId,
 			'chd_db' => $siteId,
 			'chd_seen' => 0,
 			'chd_touched' => '20140303000000',
 			'chd_lock' => null
-		);
+		];
 
 		$coordinator = $this->getMock( ChangeDispatchCoordinator::class );
 
@@ -297,28 +297,28 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 	public function provideGetPendingChanges() {
 		$changes = $this->getAllChanges();
 
-		return array(
+		return [
 			'enwiki: one two three'
-				=> array( 'enwiki', 0, 3, 1, array( $changes[1], $changes[2], $changes[3] ), 3 ),
+				=> [ 'enwiki', 0, 3, 1, [ $changes[1], $changes[2], $changes[3] ], 3 ],
 
 			'enwiki: four five, chunkFactor=1'
-				=> array( 'enwiki', 3, 2, 1, array( $changes[4], $changes[5] ), 5 ),
+				=> [ 'enwiki', 3, 2, 1, [ $changes[4], $changes[5] ], 5 ],
 
 			'enwiki: five six, chunkFactor=2, scan to end'
-				=> array( 'enwiki', 4, 3, 2, array( $changes[5], $changes[6] ), 8 ),
+				=> [ 'enwiki', 4, 3, 2, [ $changes[5], $changes[6] ], 8 ],
 
 			'enwiki: five six, chunkFactor=1, scan to end'
-				=> array( 'enwiki', 4, 3, 1, array( $changes[5], $changes[6] ), 8 ),
+				=> [ 'enwiki', 4, 3, 1, [ $changes[5], $changes[6] ], 8 ],
 
 			'dewiki: three four seven, chunkFactor=1'
-				=> array( 'dewiki', 2, 3, 1, array( $changes[3], $changes[4], $changes[7] ), 7 ),
+				=> [ 'dewiki', 2, 3, 1, [ $changes[3], $changes[4], $changes[7] ], 7 ],
 
 			'dewiki: three four seven, chunkFactor=2'
-				=> array( 'dewiki', 2, 3, 1, array( $changes[3], $changes[4], $changes[7] ), 7 ),
+				=> [ 'dewiki', 2, 3, 1, [ $changes[3], $changes[4], $changes[7] ], 7 ],
 
 			'dewiki: seven eight'
-				=> array( 'dewiki', 4, 3, 2, array( $changes[7], $changes[8] ), 8 ),
-		);
+				=> [ 'dewiki', 4, 3, 2, [ $changes[7], $changes[8] ], 8 ],
+		];
 	}
 
 	/**
@@ -349,7 +349,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 
 		$chunkAccess->expects( $this->exactly( 1 ) )
 			->method( 'loadChunk' )
-			->will( $this->returnCallback( array( $this, 'getChanges' ) ) );
+			->will( $this->returnCallback( [ $this, 'getChanges' ] ) );
 
 		$chunkAccess->expects( $this->any() )
 			->method( 'getRecordId' )
@@ -377,71 +377,71 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 	public function provideDispatchTo() {
 		$changes = $this->getAllChanges();
 
-		return array(
-			'enwiki: from the beginning' => array(
+		return [
+			'enwiki: from the beginning' => [
 				3,
-				array(
+				[
 					'chd_site' => 'enwiki',
 					'chd_db' => 'enwikidb',
 					'chd_seen' => 0,
 					'chd_touched' => '00000000000000',
 					'chd_lock' => null
-				),
+				],
 				3,
-				array(
-					array( 'enwiki', array( 1, 2, 3 ) )
-				)
-			),
-			'enwiki: scan to end' => array(
+				[
+					[ 'enwiki', [ 1, 2, 3 ] ]
+				]
+			],
+			'enwiki: scan to end' => [
 				3,
-				array(
+				[
 					'chd_site' => 'enwiki',
 					'chd_db' => 'enwikidb',
 					'chd_seen' => 4,
 					'chd_touched' => $changes[4]->getTime(),
 					'chd_lock' => null
-				),
+				],
 				8,
-				array(
-					array( 'enwiki', array( 5, 6 ) )
-				)
-			),
-			'dewiki: from the beginning' => array(
+				[
+					[ 'enwiki', [ 5, 6 ] ]
+				]
+			],
+			'dewiki: from the beginning' => [
 				3,
-				array(
+				[
 					'chd_site' => 'dewiki',
 					'chd_db' => 'dewikidb',
 					'chd_seen' => 0,
 					'chd_touched' => '00000000000000',
 					'chd_lock' => null
-				),
+				],
 				7,
-				array(
-					array( 'dewiki', array( 3, 4, 7 ) )
-				)
-			),
-			'dewiki: offset' => array(
+				[
+					[ 'dewiki', [ 3, 4, 7 ] ]
+				]
+			],
+			'dewiki: offset' => [
 				2,
-				array(
+				[
 					'chd_site' => 'dewiki',
 					'chd_db' => 'dewikidb',
 					'chd_seen' => 3,
 					'chd_touched' => $changes[4]->getTime(),
 					'chd_lock' => null
-				),
+				],
 				7,
-				array(
-					array( 'dewiki', array( 4, 7 ) )
-				)
-			),
-		);
+				[
+					[ 'dewiki', [ 4, 7 ] ]
+				]
+			],
+		];
 	}
 
 	/**
 	 * @dataProvider provideDispatchTo
 	 */
 	public function testDispatchTo( $batchSize, array $wikiState, $expectedFinalSeen, array $expectedNotifications ) {
-		$expectedFinalState = array_merge( $wikiState, array( 'chd_seen' => $expectedFinalSeen ) );
+		$expectedFinalState = array_merge( $wikiState, [ 'chd_seen' => $expectedFinalSeen ] );
 
 		$coordinator = $this->getMock( ChangeDispatchCoordinator::class );
 
@@ -452,7 +452,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 			->method( 'releaseClient' )
 			->with( $expectedFinalState );
 
-		$notifications = array();
+		$notifications = [];
 		$dispatcher = $this->getChangeDispatcher( $coordinator, $notifications );
 		$dispatcher->setBatchSize( $batchSize );
 		$dispatcher->dispatchTo( $wikiState );

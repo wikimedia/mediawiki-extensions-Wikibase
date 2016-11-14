@@ -38,16 +38,16 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	}
 
 	public function itemProvider() {
-		$items = array();
+		$items = [];
 
 		$item = new Item( new ItemId( 'Q1' ) );
 		$item->setLabel( 'en', 'Beer' );
 
-		$siteLinks = array(
+		$siteLinks = [
 			'cswiki' => 'Pivo',
 			'enwiki' => 'Beer',
 			'jawiki' => 'ビール'
-		);
+		];
 
 		foreach ( $siteLinks as $siteId => $pageName ) {
 			$item->getSiteLinkList()->addNewSiteLink( $siteId, $pageName );
@@ -55,7 +55,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 
 		$items[] = $item;
 
-		return array( $items );
+		return [ $items ];
 	}
 
 	/**

@@ -30,7 +30,7 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 
 	private function getMockTermIndex() {
 		return new MockTermIndex(
-			array(
+			[
 				//Q111 - Has label, description and alias all the same
 				$this->getTermIndexEntry( 'Foo', 'en', TermIndexEntry::TYPE_LABEL, new ItemId( 'Q111' ) ),
 				$this->getTermIndexEntry( 'Foo', 'en', TermIndexEntry::TYPE_DESCRIPTION, new ItemId( 'Q111' ) ),
@@ -49,7 +49,7 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 				//P44
 				$this->getTermIndexEntry( 'Lama', 'en', TermIndexEntry::TYPE_LABEL, new PropertyId( 'P44' ) ),
 				$this->getTermIndexEntry( 'Lama-de-desc', 'de', TermIndexEntry::TYPE_DESCRIPTION, new PropertyId( 'P44' ) ),
-			)
+			]
 		);
 	}
 
@@ -62,13 +62,13 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 	 * @return TermIndexEntry
 	 */
 	private function getTermIndexEntry( $text, $languageCode, $termType, EntityId $entityId ) {
-		return new TermIndexEntry( array(
+		return new TermIndexEntry( [
 			'termText' => $text,
 			'termLanguage' => $languageCode,
 			'termType' => $termType,
 			'entityId' => $entityId->getNumericId(),
 			'entityType' => $entityId->getEntityType(),
-		) );
+		] );
 	}
 
 	/**
@@ -85,7 +85,7 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 		$mock->expects( $this->any() )
 			->method( 'getLabels' )
 			->will( $this->returnCallback( function( EntityId $entityId, $languageCodes ) {
-				$labels = array();
+				$labels = [];
 				foreach ( $languageCodes as $languageCode ) {
 					$labels[$languageCode] = 'label-' . $languageCode . '-' . $entityId->getSerialization();
 				}
@@ -95,7 +95,7 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 		$mock->expects( $this->any() )
 			->method( 'getDescriptions' )
 			->will( $this->returnCallback( function( EntityId $entityId, $languageCodes ) {
-				$descriptions = array();
+				$descriptions = [];
 				foreach ( $languageCodes as $languageCode ) {
 					$descriptions[$languageCode] =
 						'description-' . $languageCode . '-' . $entityId->getSerialization();
@@ -138,19 +138,19 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 			->method( 'getFetchLanguageCodes' )
 			->will( $this->returnCallback( function () use( $langCode ) {
 				if ( $langCode === 'en-gb' || $langCode === 'en-ca' ) {
-					return array( $langCode, 'en' );
+					return [ $langCode, 'en' ];
 				}
-				return array( $langCode ); // no fallback for everything else...
+				return [ $langCode ]; // no fallback for everything else...
 			} ) );
 		$mockFallbackChain->expects( $this->any() )
 			->method( 'extractPreferredValue' )
 			->will( $this->returnCallback( function( $data ) {
 				foreach ( $data as $languageCode => $value ) {
-					return array(
+					return [
 						'value' => $value,
 						'language' => $languageCode,
 						'source' => $languageCode,
-					);
+					];
 				}
 				return null;
 			} ) );
@@ -189,135 +189,135 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function provideSearchForEntitiesTest() {
-		$allTermTypes = array(
+		$allTermTypes = [
 			TermIndexEntry::TYPE_LABEL,
 			TermIndexEntry::TYPE_DESCRIPTION,
 			TermIndexEntry::TYPE_ALIAS
-		);
+		];
 
-		return array(
-			'No Results' => array(
+		return [
+			'No Results' => [
 				'caseSensitive' => false,
 				'prefixSearch' => false,
 				'limit' => 5000,
-				array( 'ABCDEFGHI123', 'br', 'item', $allTermTypes ),
-				array(),
-			),
-			'Q111 Foo en Label match exactly' => array(
+				[ 'ABCDEFGHI123', 'br', 'item', $allTermTypes ],
+				[],
+			],
+			'Q111 Foo en Label match exactly' => [
 				'caseSensitive' => false,
 				'prefixSearch' => false,
 				'limit' => 5000,
-				array( 'Foo', 'en', 'item', array( TermIndexEntry::TYPE_LABEL ) ),
-				array(
-					array(
+				[ 'Foo', 'en', 'item', [ TermIndexEntry::TYPE_LABEL ] ],
+				[
+					[
 						'entityId' => new ItemId( 'Q111' ),
 						'term' => new Term( 'en', 'Foo' ),
 						'termtype' => 'label',
-					),
-				),
-			),
-			'Q111&Q333 Foo en Label match prefix search' => array(
+					],
+				],
+			],
+			'Q111&Q333 Foo en Label match prefix search' => [
 				'caseSensitive' => false,
 				'prefixSearch' => true,
 				'limit' => 5000,
-				array( 'Foo', 'en', 'item', array( TermIndexEntry::TYPE_LABEL ) ),
-				array(
-					array(
+				[ 'Foo', 'en', 'item', [ TermIndexEntry::TYPE_LABEL ] ],
+				[
+					[
 						'entityId' => new ItemId( 'Q111' ),
 						'term' => new Term( 'en', 'Foo' ),
 						'termtype' => 'label',
-					),
-					array(
+					],
+					[
 						'entityId' => new ItemId( 'Q333' ),
 						'term' => new Term( 'en', 'Food is great' ),
 						'termtype' => 'label',
-					),
-				),
-			),
-			'Q111&Q333 Foo en Label match prefix search LIMIT 1' => array(
+					],
+				],
+			],
+			'Q111&Q333 Foo en Label match prefix search LIMIT 1' => [
 				'caseSensitive' => false,
 				'prefixSearch' => true,
 				'limit' => 1,
-				array( 'Foo', 'en', 'item', array( TermIndexEntry::TYPE_LABEL ) ),
-				array(
-					array(
+				[ 'Foo', 'en', 'item', [ TermIndexEntry::TYPE_LABEL ] ],
+				[
+					[
 						'entityId' => new ItemId( 'Q111' ),
 						'term' => new Term( 'en', 'Foo' ),
 						'termtype' => 'label',
-					),
-				),
-			),
-			'Q111 Foo en-ca Label fallback to en' => array(
+					],
+				],
+			],
+			'Q111 Foo en-ca Label fallback to en' => [
 				'caseSensitive' => false,
 				'prefixSearch' => false,
 				'limit' => 5000,
-				array( 'Foo', 'en-ca', 'item', array( TermIndexEntry::TYPE_LABEL ) ),
-				array(
-					array(
+				[ 'Foo', 'en-ca', 'item', [ TermIndexEntry::TYPE_LABEL ] ],
+				[
+					[
 						'entityId' => new ItemId( 'Q111' ),
 						'term' => new Term( 'en', 'Foo' ),
 						'termtype' => 'label',
-					),
-				),
-			),
-			'Q111 Foo en all term types match case insensitive' => array(
+					],
+				],
+			],
+			'Q111 Foo en all term types match case insensitive' => [
 				'caseSensitive' => false,
 				'prefixSearch' => false,
 				'limit' => 5000,
-				array( 'Foo', 'en', 'item', $allTermTypes ),
-				array(
-					array(
+				[ 'Foo', 'en', 'item', $allTermTypes ],
+				[
+					[
 						'entityId' => new ItemId( 'Q111' ),
 						'term' => new Term( 'en', 'Foo' ),
 						'termtype' => 'label',
-					),
-				),
-			),
-			'Q111 Foo en aliases match case sensitive' => array(
+					],
+				],
+			],
+			'Q111 Foo en aliases match case sensitive' => [
 				'caseSensitive' => true,
 				'prefixSearch' => false,
 				'limit' => 5000,
-				array( 'Foo', 'en', 'item', $allTermTypes ),
-				array(
-					array(
+				[ 'Foo', 'en', 'item', $allTermTypes ],
+				[
+					[
 						'entityId' => new ItemId( 'Q111' ),
 						'term' => new Term( 'en', 'Foo' ),
 						'termtype' => 'label',
-					),
-				),
-			),
-			'Q555 Ta en-ca with fallback aliases only' => array(
+					],
+				],
+			],
+			'Q555 Ta en-ca with fallback aliases only' => [
 				'caseSensitive' => false,
 				'prefixSearch' => true,
 				'limit' => 5000,
-				array( 'Ta', 'en-ca', 'item', $allTermTypes ),
-				array(
-					array(
+				[ 'Ta', 'en-ca', 'item', $allTermTypes ],
+				[
+					[
 						'entityId' => new ItemId( 'Q555' ),
 						'term' => new Term( 'en-ca', 'TAAA' ),
 						'termtype' => 'alias',
-					),
-				),
-			),
-			'P22&P44 La en-ca with fallback all terms' => array(
+					],
+				],
+			],
+			'P22&P44 La en-ca with fallback all terms' => [
 				'caseSensitive' => true,
 				'prefixSearch' => true,
 				'limit' => 5000,
-				array( 'La', 'en-ca', 'property', $allTermTypes ),
-				array(
-					array(
+				[ 'La', 'en-ca', 'property', $allTermTypes ],
+				[
+					[
 						'entityId' => new PropertyId( 'P22' ),
 						'term' => new Term( 'en-ca', 'Lama' ),
 						'termtype' => 'label',
-					),
-					array(
+					],
+					[
 						'entityId' => new PropertyId( 'P44' ),
 						'term' => new Term( 'en', 'Lama' ),
 						'termtype' => 'label' ,
-					),
-				),
-			),
-		);
+					],
+				],
+			],
+		];
 	}
 
 	/**
@@ -339,7 +339,7 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 		$interactor = $this->newTermSearchInteractor( $caseSensitive, $prefixSearch, $limit );
 
 		// $interactor->searchForEntities() call
-		$results = call_user_func_array( array( $interactor, 'searchForEntities' ), $params );
+		$results = call_user_func_array( [ $interactor, 'searchForEntities' ], $params );
 
 		$this->assertCount(
 			count( $expectedTermsDetails ),

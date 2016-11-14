@@ -57,7 +57,7 @@ class PopulateChangesSubscription extends LoggedUpdateMaintenance {
 
 		$reporter = new ObservableMessageReporter();
 		$reporter->registerReporterCallback(
-			array( $this, 'report' )
+			[ $this, 'report' ]
 		);
 
 		$builder = new ChangesSubscriptionTableBuilder(

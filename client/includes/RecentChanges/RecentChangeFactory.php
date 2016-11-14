@@ -67,7 +67,7 @@ class RecentChangeFactory {
 		$targetSpecificAttributes = $this->buildTargetSpecificAttributes( $change, $target );
 		$attribs = array_merge( $preparedAttribs, $targetSpecificAttributes );
 		$rc = RecentChange::newFromRow( (object)$attribs );
-		$rc->setExtra( array( 'pageStatus' => 'changed' ) );
+		$rc->setExtra( [ 'pageStatus' => 'changed' ] );
 
 		return $rc;
 	}
@@ -91,7 +91,7 @@ class RecentChangeFactory {
 		if ( isset( $fields['info']['changes'] ) ) {
 			$changesForComment = $fields['info']['changes'];
 		} else {
-			$changesForComment = array( $change );
+			$changesForComment = [ $change ];
 		}
 
 		$comment = $this->getEditCommentMulti( $changesForComment );
@@ -115,11 +115,11 @@ class RecentChangeFactory {
 
 		$time = isset( $metadata['time'] ) ? $metadata['time'] : wfTimestamp( TS_MW );
 
-		$params = array(
+		$params = [
 			'wikibase-repo-change' => $metadata,
-		);
+		];
 
-		return array(
+		return [
 			'rc_user' => 0,
 			'rc_user_text' => $userText,
 			'rc_comment' => $comment,
@@ -134,7 +134,7 @@ class RecentChangeFactory {
 			'rc_source' => self::SRC_WIKIBASE,
 			'rc_deleted' => false,
 			'rc_new' => false,
-		);
+		];
 	}
 
 	/**
@@ -146,7 +146,7 @@ class RecentChangeFactory {
 	 * @return array
 	 */
 	private function buildTargetSpecificAttributes( EntityChange $change, Title $target ) {
-		$attribs = array(
+		$attribs = [
 			'rc_namespace' => $target->getNamespace(),
 			'rc_title' => $target->getDBkey(),
 			'rc_old_len' => $target->getLength(),
@@ -154,7 +154,7 @@ class RecentChangeFactory {
 			'rc_this_oldid' => $target->getLatestRevID(),
 			'rc_last_oldid' => $target->getLatestRevID(),
 			'rc_cur_id' => $target->getArticleID(),
-		);
+		];
 
 		$comment = $this->buildTargetSpecificComment( $change, $target );
 		if ( $comment !== null ) {
@@ -188,7 +188,7 @@ class RecentChangeFactory {
 		if ( isset( $fields['info']['changes'] ) ) {
 			$changesForComment = $fields['info']['changes'];
 		} else {
-			$changesForComment = array( $change );
+			$changesForComment = [ $change ];
 		}
 
 		return $this->getEditCommentMulti( $changesForComment, $target );
@@ -205,7 +205,7 @@ class RecentChangeFactory {
 	 * @return string
 	 */
 	private function getEditCommentMulti( array $changes, Title $target = null ) {
-		$comments = array();
+		$comments = [];
 		$c = 0;
 
 		foreach ( $changes as $change ) {

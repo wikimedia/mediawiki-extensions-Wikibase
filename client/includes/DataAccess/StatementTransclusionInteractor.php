@@ -110,7 +110,7 @@ class StatementTransclusionInteractor {
 	 * @return string wikitext
 	 */
 	private function formatSnaks( array $snaks ) {
-		$formattedValues = array();
+		$formattedValues = [];
 
 		foreach ( $snaks as $snak ) {
 			$formattedValue = $this->snakFormatter->formatSnak( $snak );

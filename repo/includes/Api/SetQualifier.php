@@ -199,36 +199,36 @@ class SetQualifier extends ApiBase {
 	 */
 	protected function getAllowedParams() {
 		return array_merge(
-			array(
-				'claim' => array(
+			[
+				'claim' => [
 					self::PARAM_TYPE => 'string',
 					self::PARAM_REQUIRED => true,
-				),
-				'property' => array(
+				],
+				'property' => [
 					self::PARAM_TYPE => 'string',
 					self::PARAM_REQUIRED => false,
-				),
-				'value' => array(
+				],
+				'value' => [
 					self::PARAM_TYPE => 'text',
 					self::PARAM_REQUIRED => false,
-				),
-				'snaktype' => array(
-					self::PARAM_TYPE => array( 'value', 'novalue', 'somevalue' ),
+				],
+				'snaktype' => [
+					self::PARAM_TYPE => [ 'value', 'novalue', 'somevalue' ],
 					self::PARAM_REQUIRED => false,
-				),
-				'snakhash' => array(
+				],
+				'snakhash' => [
 					self::PARAM_TYPE => 'string',
 					self::PARAM_REQUIRED => false,
-				),
-				'summary' => array(
+				],
+				'summary' => [
 					self::PARAM_TYPE => 'string',
-				),
+				],
 				'token' => null,
-				'baserevid' => array(
+				'baserevid' => [
 					self::PARAM_TYPE => 'integer',
-				),
+				],
 				'bot' => false,
-			),
+			],
 			parent::getAllowedParams()
 		);
 	}
@@ -237,11 +237,11 @@ class SetQualifier extends ApiBase {
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
-		return array(
+		return [
 			'action=wbsetqualifier&claim=Q2$4554c0f4-47b2-1cd9-2db9-aa270064c9f3&property=P1'
 				. '&value="GdyjxP8I6XB3"&snaktype=value&token=foobar'
 				=> 'apihelp-wbsetqualifier-example-1',
-		);
+		];
 	}
 
 }

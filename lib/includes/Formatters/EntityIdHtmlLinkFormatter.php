@@ -65,10 +65,10 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 			return $this->getHtmlForNonExistent( $entityId );
 		}
 
-		$attributes = array(
+		$attributes = [
 			'title' => $title->getPrefixedText(),
 			'href' => $title->getLocalURL()
-		);
+		];
 
 		$html = Html::element( 'a', $attributes, $entityId->getSerialization() );
 
@@ -85,10 +85,10 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	private function getHtmlForTerm( $targetUrl, Term $term, $titleText = '' ) {
 		$fallbackIndicatorHtml = '';
 
-		$attributes = array(
+		$attributes = [
 			'title' => $titleText,
 			'href' => $targetUrl
-		);
+		];
 
 		if ( $term instanceof TermFallback ) {
 			$fallbackIndicatorHtml = $this->languageFallbackIndicator->getHtml( $term );
@@ -110,7 +110,7 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	 * @return string HTML
 	 */
 	private function getHtmlForNonExistent( EntityId $entityId ) {
-		$attributes = array( 'class' => 'wb-entity-undefinedinfo' );
+		$attributes = [ 'class' => 'wb-entity-undefinedinfo' ];
 
 		$message = wfMessage( 'parentheses',
 			wfMessage( 'wikibase-deletedentity-' . $entityId->getEntityType() )->text()

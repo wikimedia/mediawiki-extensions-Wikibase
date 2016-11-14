@@ -42,11 +42,11 @@ class WikibaseHtmlSnakFormatterFactory implements HtmlSnakFormatterFactory {
 		LanguageFallbackChain $languageFallbackChain,
 		LabelDescriptionLookup $labelDescriptionLookup
 	) {
-		$formatterOptions = new FormatterOptions( array(
+		$formatterOptions = new FormatterOptions( [
 			ValueFormatter::OPT_LANG => $languageCode,
 			FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $languageFallbackChain,
 			FormatterLabelDescriptionLookupFactory::OPT_LABEL_DESCRIPTION_LOOKUP => $labelDescriptionLookup,
-		) );
+		] );
 		return $formatterOptions;
 	}
 

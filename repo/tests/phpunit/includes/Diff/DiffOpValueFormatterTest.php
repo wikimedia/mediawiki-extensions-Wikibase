@@ -27,27 +27,27 @@ class DiffOpValueFormatterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideGenerateHtml() {
-		return array(
-			array( 'null', null, null, '@<tr>.*</tr>@' ),
-			array( 'empty strings', '', '', '@<tr>.*</tr>@' ),
-			array( 'empty array', array(), array(), '@<tr>.*</tr>@' ),
+		return [
+			[ 'null', null, null, '@<tr>.*</tr>@' ],
+			[ 'empty strings', '', '', '@<tr>.*</tr>@' ],
+			[ 'empty array', [], [], '@<tr>.*</tr>@' ],
 
-			array( 'old string', '<i>old</i>', null,
-				'@<i>old</i>@' ),
-			array( 'new string', null, '<i>new</i>',
-				'@<i>new</i>@' ),
-			array( 'old and new string', '<i>old</i>', '<i>new</i>',
-				'@<i>old</i>.*<i>new</i>@' ),
+			[ 'old string', '<i>old</i>', null,
+				'@<i>old</i>@' ],
+			[ 'new string', null, '<i>new</i>',
+				'@<i>new</i>@' ],
+			[ 'old and new string', '<i>old</i>', '<i>new</i>',
+				'@<i>old</i>.*<i>new</i>@' ],
 
-			array( 'old array', array( '<i>old 1</i>', '<i>old 2</i>' ), null,
-				'@<i>old 1</i>.*<i>old 2</i>@' ),
-			array( 'new array', null, array( '<i>new 1</i>', '<i>new 2</i>' ),
-				'@<i>new 1</i>.*<i>new 2</i>@' ),
-			array( 'old and new array',
-				array( '<i>old 1</i>', '<i>old 2</i>' ),
-				array( '<i>new 1</i>', '<i>new 2</i>' ),
-				'@<i>old 1</i>.*<i>old 2</i>.*<i>new 1</i>.*<i>new 2</i>@' ),
-		);
+			[ 'old array', [ '<i>old 1</i>', '<i>old 2</i>' ], null,
+				'@<i>old 1</i>.*<i>old 2</i>@' ],
+			[ 'new array', null, [ '<i>new 1</i>', '<i>new 2</i>' ],
+				'@<i>new 1</i>.*<i>new 2</i>@' ],
+			[ 'old and new array',
+				[ '<i>old 1</i>', '<i>old 2</i>' ],
+				[ '<i>new 1</i>', '<i>new 2</i>' ],
+				'@<i>old 1</i>.*<i>old 2</i>.*<i>new 1</i>.*<i>new 2</i>@' ],
+		];
 	}
 
 }

@@ -164,32 +164,32 @@ class CreateClaim extends ApiBase {
 	 */
 	protected function getAllowedParams() {
 		return array_merge(
-			array(
-				'entity' => array(
+			[
+				'entity' => [
 					self::PARAM_TYPE => 'string',
 					self::PARAM_REQUIRED => true,
-				),
-				'snaktype' => array(
-					self::PARAM_TYPE => array( 'value', 'novalue', 'somevalue' ),
+				],
+				'snaktype' => [
+					self::PARAM_TYPE => [ 'value', 'novalue', 'somevalue' ],
 					self::PARAM_REQUIRED => true,
-				),
-				'property' => array(
+				],
+				'property' => [
 					self::PARAM_TYPE => 'string',
 					self::PARAM_REQUIRED => false,
-				),
-				'value' => array(
+				],
+				'value' => [
 					self::PARAM_TYPE => 'text',
 					self::PARAM_REQUIRED => false,
-				),
-				'summary' => array(
+				],
+				'summary' => [
 					self::PARAM_TYPE => 'string',
-				),
+				],
 				'token' => null,
-				'baserevid' => array(
+				'baserevid' => [
 					self::PARAM_TYPE => 'integer',
-				),
+				],
 				'bot' => false,
-			),
+			],
 			parent::getAllowedParams()
 		);
 	}
@@ -198,7 +198,7 @@ class CreateClaim extends ApiBase {
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
-		return array(
+		return [
 			'action=wbcreateclaim&entity=Q42&property=P9001&snaktype=novalue'
 				=> 'apihelp-wbcreateclaim-example-1',
 			'action=wbcreateclaim&entity=Q42&property=P9002&snaktype=value&value="itsastring"'
@@ -210,7 +210,7 @@ class CreateClaim extends ApiBase {
 				. '{"latitude":40.748433,"longitude":-73.985656,'
 				. '"globe":"http://www.wikidata.org/entity/Q2","precision":0.000001}'
 				=> 'apihelp-wbcreateclaim-example-4',
-		);
+		];
 	}
 
 }

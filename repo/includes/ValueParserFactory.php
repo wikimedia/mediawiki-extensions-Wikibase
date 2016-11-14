@@ -22,7 +22,7 @@ class ValueParserFactory {
 	 *
 	 * @var callable[]
 	 */
-	private $parsers = array();
+	private $parsers = [];
 
 	/**
 	 * @since 0.5

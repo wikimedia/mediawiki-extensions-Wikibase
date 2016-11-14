@@ -43,9 +43,9 @@ class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
 		// "INVALID" is invalid
 		$validatorFactory = $this->getTermValidatorFactory();
 
-		$args = array();
-		$args['update'] = array( new ChangeOpDescription( 'en', 'myNew', $validatorFactory ), 'myNew' );
-		$args['set to null'] = array( new ChangeOpDescription( 'en', null, $validatorFactory ), '' );
+		$args = [];
+		$args['update'] = [ new ChangeOpDescription( 'en', 'myNew', $validatorFactory ), 'myNew' ];
+		$args['set to null'] = [ new ChangeOpDescription( 'en', null, $validatorFactory ), '' ];
 
 		return $args;
 	}
@@ -73,12 +73,12 @@ class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
 		// "INVALID" is invalid
 		$validatorFactory = $this->getTermValidatorFactory();
 
-		$args = array();
-		$args['valid description'] = array( new ChangeOpDescription( 'fr', 'valid', $validatorFactory ), true );
-		$args['invalid description'] = array( new ChangeOpDescription( 'fr', 'INVALID', $validatorFactory ), false );
-		$args['duplicate description'] = array( new ChangeOpDescription( 'fr', 'DUPE', $validatorFactory ), false );
-		$args['invalid language'] = array( new ChangeOpDescription( 'INVALID', 'valid', $validatorFactory ), false );
-		$args['set bad language to null'] = array( new ChangeOpDescription( 'INVALID', null, $validatorFactory ), false );
+		$args = [];
+		$args['valid description'] = [ new ChangeOpDescription( 'fr', 'valid', $validatorFactory ), true ];
+		$args['invalid description'] = [ new ChangeOpDescription( 'fr', 'INVALID', $validatorFactory ), false ];
+		$args['duplicate description'] = [ new ChangeOpDescription( 'fr', 'DUPE', $validatorFactory ), false ];
+		$args['invalid language'] = [ new ChangeOpDescription( 'INVALID', 'valid', $validatorFactory ), false ];
+		$args['set bad language to null'] = [ new ChangeOpDescription( 'INVALID', null, $validatorFactory ), false ];
 
 		return $args;
 	}
@@ -117,18 +117,18 @@ class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
 		// "INVALID" is invalid
 		$validatorFactory = $this->getTermValidatorFactory();
 
-		$args = array();
+		$args = [];
 
 		$entity = $this->provideNewEntity();
 		$entity->getFingerprint()->setDescription( 'de', 'Test' );
-		$args[] = array( $entity, new ChangeOpDescription( 'de', 'Zusammenfassung', $validatorFactory ), 'set', 'de' );
+		$args[] = [ $entity, new ChangeOpDescription( 'de', 'Zusammenfassung', $validatorFactory ), 'set', 'de' ];
 
 		$entity = $this->provideNewEntity();
 		$entity->getFingerprint()->setDescription( 'de', 'Test' );
-		$args[] = array( $entity, new ChangeOpDescription( 'de', null, $validatorFactory ), 'remove', 'de' );
+		$args[] = [ $entity, new ChangeOpDescription( 'de', null, $validatorFactory ), 'remove', 'de' ];
 
 		$entity = $this->provideNewEntity();
-		$args[] = array( $entity, new ChangeOpDescription( 'de', 'Zusammenfassung', $validatorFactory ), 'add', 'de' );
+		$args[] = [ $entity, new ChangeOpDescription( 'de', 'Zusammenfassung', $validatorFactory ), 'add', 'de' ];
 
 		return $args;
 	}

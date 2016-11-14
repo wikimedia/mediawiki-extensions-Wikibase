@@ -260,7 +260,7 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	 * @see TermSearchInteractor interface for return format
 	 */
 	private function getSearchResults( array $termIndexEntries ) {
-		$searchResults = array();
+		$searchResults = [];
 		foreach ( $termIndexEntries as $termIndexEntry ) {
 			$searchResults[] = $this->convertToSearchResult( $termIndexEntry );
 		}
@@ -273,8 +273,8 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	private function preFetchLabelsAndDescriptionsForDisplay( array $entityIds ) {
 		$this->bufferingTermLookup->prefetchTerms(
 			$entityIds,
-			array( TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_DESCRIPTION ),
-			$this->addFallbackLanguageCodes( array( $this->displayLanguageCode ) )
+			[ TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_DESCRIPTION ],
+			$this->addFallbackLanguageCodes( [ $this->displayLanguageCode ] )
 		);
 	}
 
@@ -284,7 +284,7 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	 * @return EntityId[]
 	 */
 	private function getEntityIdsForTermIndexEntries( array $termsIndexEntries ) {
-		$entityIds = array();
+		$entityIds = [];
 		foreach ( $termsIndexEntries as $termIndexEntry ) {
 			$entityId = $termIndexEntry->getEntityId();
 			// We would hope that this would never happen, but is possible
@@ -313,11 +313,11 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	}
 
 	private function getTermIndexOptions() {
-		return array(
+		return [
 			'caseSensitive' => $this->termSearchOptions->getIsCaseSensitive(),
 			'prefixSearch' => $this->termSearchOptions->getIsPrefixSearch(),
 			'LIMIT' => $this->termSearchOptions->getLimit(),
-		);
+		];
 	}
 
 	/**
@@ -326,7 +326,7 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	 * @return string[]
 	 */
 	private function addFallbackLanguageCodes( array $languageCodes ) {
-		$languageCodesWithFallback = array();
+		$languageCodesWithFallback = [];
 		foreach ( $languageCodes as $languageCode ) {
 			$fallbackChain = $this->languageFallbackChainFactory->newFromLanguageCode( $languageCode );
 			$languageCodesWithFallback = array_merge(
@@ -364,14 +364,14 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	 * @return TermIndexEntry[]
 	 */
 	private function makeTermIndexEntryTemplates( $text, array $languageCodes, array $termTypes ) {
-		$terms = array();
+		$terms = [];
 		foreach ( $languageCodes as $languageCode ) {
 			foreach ( $termTypes as $termType ) {
-				$terms[] = new TermIndexEntry( array(
+				$terms[] = new TermIndexEntry( [
 					'termText' => $text,
 					'termLanguage' => $languageCode,
 					'termType' => $termType,
-				) );
+				] );
 			}
 		}
 		return $terms;

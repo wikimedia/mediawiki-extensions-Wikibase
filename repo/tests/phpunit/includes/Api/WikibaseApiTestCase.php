@@ -53,14 +53,14 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 				'Apitesteditor',
 				'Api Test Editor',
 				'api_test_editor@example.com',
-				array( 'wbeditor' )
+				[ 'wbeditor' ]
 			);
 		}
 
 		ApiTestCase::$users['wbeditor'] = self::$wbTestUser;
 
 		$this->setMwGlobals( 'wgUser', self::$users['wbeditor']->getUser() );
-		$this->setMwGlobals( 'wgGroupPermissions', array( '*' => array(
+		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [
 			'property-create' => true,
 			'createpage' => true,
 			'bot' => true,
@@ -69,7 +69,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			'read' => true,
 			'edit' => true,
 			'writeapi' => true
-		) ) );
+		] ] );
 	}
 
 	/**
@@ -97,7 +97,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * @param string[] $handles
 	 * @param string[] $idMap
 	 */
-	protected function initTestEntities( array $handles, array $idMap = array() ) {
+	protected function initTestEntities( array $handles, array $idMap = [] ) {
 		$activeHandles = EntityTestHelper::getActiveHandles();
 
 		foreach ( $activeHandles as $handle => $id ) {
@@ -149,10 +149,10 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 */
 	protected function loadEntity( $id ) {
 		list( $res, , ) = $this->doApiRequest(
-			array(
+			[
 				'action' => 'wbgetentities',
 				'format' => 'json', // make sure IDs are used as keys.
-				'ids' => $id )
+				'ids' => $id ]
 		);
 
 		return $res['entities'][$id];
@@ -217,7 +217,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 *
 	 * @return array The flat version of $data.
 	 */
-	protected function flattenArray( array $data, $keyField, $valueField, $multiValue = false, array &$into = array() ) {
+	protected function flattenArray( array $data, $keyField, $valueField, $multiValue = false, array &$into = [] ) {
 		foreach ( $data as $index => $value ) {
 			if ( is_array( $value ) ) {
 				if ( isset( $value[$keyField] ) && isset( $value[$valueField] ) ) {
@@ -273,7 +273,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		}
 
 		if ( isset( $expected['labels'] ) ) {
-			if ( !( $expectEmptyArrays === false && $expected['labels'] === array() ) ) {
+			if ( !( $expectEmptyArrays === false && $expected['labels'] === [] ) ) {
 				$data = $this->flattenArray( $actual['labels'], 'language', 'value' );
 				$exp = $this->flattenArray( $expected['labels'], 'language', 'value' );
 
@@ -283,7 +283,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		}
 
 		if ( isset( $expected['descriptions'] ) ) {
-			if ( !( $expectEmptyArrays === false && $expected['descriptions'] === array() ) ) {
+			if ( !( $expectEmptyArrays === false && $expected['descriptions'] === [] ) ) {
 				$data = $this->flattenArray( $actual['descriptions'], 'language', 'value' );
 				$exp = $this->flattenArray( $expected['descriptions'], 'language', 'value' );
 
@@ -293,8 +293,8 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		}
 
 		if ( isset( $expected['sitelinks'] ) ) {
-			if ( !( $expectEmptyArrays === false && $expected['sitelinks'] === array() ) ) {
-				$data = $this->flattenArray( isset( $actual['sitelinks'] ) ? $actual['sitelinks'] : array(), 'site', 'title' );
+			if ( !( $expectEmptyArrays === false && $expected['sitelinks'] === [] ) ) {
+				$data = $this->flattenArray( isset( $actual['sitelinks'] ) ? $actual['sitelinks'] : [], 'site', 'title' );
 				$exp = $this->flattenArray( $expected['sitelinks'], 'site', 'title' );
 
 				// keys are significant in flat form
@@ -303,7 +303,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		}
 
 		if ( isset( $expected['aliases'] ) ) {
-			if ( !( $expectEmptyArrays === false && $expected['aliases'] === array() ) ) {
+			if ( !( $expectEmptyArrays === false && $expected['aliases'] === [] ) ) {
 				$data = $this->flattenArray( $actual['aliases'], 'language', 'value', true );
 				$exp = $this->flattenArray( $expected['aliases'], 'language', 'value', true );
 
@@ -313,7 +313,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		}
 
 		if ( isset( $expected['claims'] ) ) {
-			if ( !( $expectEmptyArrays === false && $expected['claims'] === array() ) ) {
+			if ( !( $expectEmptyArrays === false && $expected['claims'] === [] ) ) {
 				$data = $this->flattenArray( $actual['claims'], 'mainsnak', 'value', true );
 				$exp = $this->flattenArray( $expected['claims'], 'language', 'value', true );
 				$count = count( $expected['claims'] );

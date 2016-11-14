@@ -41,24 +41,24 @@ class BeforePageDisplayHandlerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function wikibaseForNamespaceProvider() {
-		return array(
-			array(
-				array(),
-				array(),
+		return [
+			[
+				[],
+				[],
 				false, // wikibase not enabled for namespace
-				array( 'de:Rom' ), // local site link
+				[ 'de:Rom' ], // local site link
 				null, // not connected item, no prefixed id
 				true // user logged in
-			),
-			array(
-				array(),
-				array( 'wikibase.client.init' ),
+			],
+			[
+				[],
+				[ 'wikibase.client.init' ],
 				true, // wikibase enabled for namespace
-				array( 'de:Rom' ),
+				[ 'de:Rom' ],
 				'Q4', // has connected item
 				true // user logged in
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -80,30 +80,30 @@ class BeforePageDisplayHandlerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function pageConnectedToWikibaseProvider() {
-		return array(
-			array(
-				array(),
-				array( 'wikibase.client.init' ),
+		return [
+			[
+				[],
+				[ 'wikibase.client.init' ],
 				true, // wikibase enabled for namespace
-				array( 'de:Rom' ),
+				[ 'de:Rom' ],
 				'Q4', // has connected item
 				true // user logged in
-			)
-		);
+			]
+		];
 	}
 
 	public function testHandlePageConnectedToWikibase_noexternallinklinks() {
 		$skin = $this->getSkin( true, true ); // user logged in
 
 		// page connected, has links and noexternallanglinks
-		$output = $this->getOutputPage( $skin, array( 'de:Rom' ), 'Q4', array( '*' ) );
+		$output = $this->getOutputPage( $skin, [ 'de:Rom' ], 'Q4', [ '*' ] );
 		$namespaceChecker = $this->getNamespaceChecker( true );
 
 		$handler = new BeforePageDisplayHandler( $namespaceChecker );
 		$handler->addModules( $output, 'view' );
 
-		$this->assertEquals( array(), $output->getModules(), 'js modules' );
-		$this->assertEquals( array(), $output->getModuleStyles(), 'css modules' );
+		$this->assertEquals( [], $output->getModules(), 'js modules' );
+		$this->assertEquals( [], $output->getModuleStyles(), 'css modules' );
 	}
 
 	/**
@@ -125,16 +125,16 @@ class BeforePageDisplayHandlerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function pageNotConnectedToWikibaseProvider() {
-		return array(
-			array(
-				array( 'wikibase.client.linkitem.init' ),
-				array( 'wikibase.client.init' ),
+		return [
+			[
+				[ 'wikibase.client.linkitem.init' ],
+				[ 'wikibase.client.init' ],
 				true, // wikibase enabled for namespace
-				array(), // no lang links
+				[], // no lang links
 				null, // no prefixed id
 				true // user logged in
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -156,16 +156,16 @@ class BeforePageDisplayHandlerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function handleUserLoggedOutWithEmptyLangLinksProvider() {
-		return array(
-			array(
-				array(),
-				array( 'wikibase.client.init' ),
+		return [
+			[
+				[],
+				[ 'wikibase.client.init' ],
 				true, // wikibase enabled for namespace
-				array(), // no lang links
+				[], // no lang links
 				null, // no prefixed id
 				false // user logged out
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -187,16 +187,16 @@ class BeforePageDisplayHandlerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function handleTitleNotExist_NoWikibaseLinksProvider() {
-		return array(
-			array(
-				array(),
-				array(),
+		return [
+			[
+				[],
+				[],
 				true, // wikibase enabled for namespace
-				array(), // no lang links
+				[], // no lang links
 				null, // no prefixed id
 				true // user logged in
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -218,16 +218,16 @@ class BeforePageDisplayHandlerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function handleHistoryActionWithEmptyLangLinksProvider() {
-		return array(
-			array(
-				array(),
-				array(),
+		return [
+			[
+				[],
+				[],
 				true, // wikibase enabled for namespace
-				array(), // no lang links
+				[], // no lang links
 				null, // no prefixed id
 				true // user logged in
-			)
-		);
+			]
+		];
 	}
 
 	private function getContext( $loggedIn, $titleExists ) {

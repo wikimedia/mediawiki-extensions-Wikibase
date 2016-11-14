@@ -27,9 +27,9 @@ class SpecialItemsWithoutSitelinksTest extends SpecialPageTestBase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->setMwGlobals( array(
+		$this->setMwGlobals( [
 			'wgContLang' => Language::factory( 'qqx' )
-		) );
+		] );
 	}
 
 	protected function newSpecialPage() {

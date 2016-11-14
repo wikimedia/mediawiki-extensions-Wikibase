@@ -366,15 +366,15 @@ class WikiPageEntityStore implements EntityStore {
 		$dbw = wfGetDB( DB_MASTER );
 		$res = $dbw->select( 'revision',
 			'rev_user',
-			array(
+			[
 				'rev_page' => $revision->getPage(),
 				'rev_id > ' . (int)$lastRevId
 				. ' OR rev_timestamp > ' . $dbw->addQuotes( $revision->getTimestamp() ),
 				'rev_user != ' . (int)$user->getId()
 				. ' OR rev_user_text != ' . $dbw->addQuotes( $user->getName() ),
-			),
+			],
 			__METHOD__,
-			array( 'ORDER BY' => 'rev_timestamp ASC', 'LIMIT' => 1 )
+			[ 'ORDER BY' => 'rev_timestamp ASC', 'LIMIT' => 1 ]
 		);
 
 		return $res->current() === false; // return true if query had no match

@@ -53,7 +53,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	private function getPropertyIds() {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-		$propertyIds = array();
+		$propertyIds = [];
 
 		for ( $i = 0; $i < 4; $i++ ) {
 			$property = Property::newFromType( 'string' );
@@ -70,7 +70,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	 * @return Snak[]
 	 */
 	private function getSnaks() {
-		$snaks = array();
+		$snaks = [];
 
 		$snaks[] = new PropertyNoValueSnak( self::$propertyIds[0] );
 		$snaks[] = new PropertySomeValueSnak( self::$propertyIds[1] );
@@ -83,13 +83,13 @@ class SetClaimTest extends WikibaseApiTestCase {
 	 * @return Statement[]
 	 */
 	private function getStatements() {
-		$statements = array();
+		$statements = [];
 
-		$ranks = array(
+		$ranks = [
 			Statement::RANK_DEPRECATED,
 			Statement::RANK_NORMAL,
 			Statement::RANK_PREFERRED
-		);
+		];
 
 		$snaks = $this->getSnaks();
 		$snakList = new SnakList( $snaks );
@@ -100,7 +100,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 		foreach ( $snaks as $snak ) {
 			$statement = unserialize( serialize( $statement ) );
-			$statement->getReferences()->addReference( new Reference( new SnakList( array( $snak ) ) ) );
+			$statement->getReferences()->addReference( new Reference( new SnakList( [ $snak ] ) ) );
 			$statement->setRank( $ranks[array_rand( $ranks )] );
 			$statements[] = $statement;
 		}
@@ -188,49 +188,49 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 		$guidGenerator = new GuidGenerator();
 
-		$cases = array();
+		$cases = [];
 
 		$statement = new Statement( $badSnak );
 		$statement->setGuid( $guidGenerator->newGuid( $q17 ) );
-		$cases['invalid value in main snak'] = array( $q17, $statement, 'modification-failed' );
+		$cases['invalid value in main snak'] = [ $q17, $statement, 'modification-failed' ];
 
 		$statement = new Statement( $brokenSnak );
 		$statement->setGuid( $guidGenerator->newGuid( $q17 ) );
-		$cases['mismatching value in main snak'] = array( $q17, $statement, 'modification-failed' );
+		$cases['mismatching value in main snak'] = [ $q17, $statement, 'modification-failed' ];
 
 		$statement = new Statement( $obsoleteSnak );
 		$statement->setGuid( $guidGenerator->newGuid( $q17 ) );
-		$cases['obsolete snak using deleted property'] = array( $q17, $statement, 'modification-failed' );
+		$cases['obsolete snak using deleted property'] = [ $q17, $statement, 'modification-failed' ];
 
 		$statement = new Statement( $goodSnak );
 		$statement->setGuid( $guidGenerator->newGuid( $qx ) );
-		$cases['good claim for deleted item'] = array( $qx, $statement, 'no-such-entity' );
+		$cases['good claim for deleted item'] = [ $qx, $statement, 'no-such-entity' ];
 
 		$statement = new Statement( $goodSnak );
 		$statement->setGuid( $guidGenerator->newGuid( $q17 ) );
-		$statement->setQualifiers( new SnakList( array( $badSnak ) ) );
-		$cases['bad snak in qualifiers'] = array( $q17, $statement, 'modification-failed' );
+		$statement->setQualifiers( new SnakList( [ $badSnak ] ) );
+		$cases['bad snak in qualifiers'] = [ $q17, $statement, 'modification-failed' ];
 
 		$statement = new Statement( $goodSnak );
 		$statement->setGuid( $guidGenerator->newGuid( $q17 ) );
-		$statement->setQualifiers( new SnakList( array( $brokenSnak ) ) );
-		$cases['mismatching value in qualifier'] = array( $q17, $statement, 'modification-failed' );
+		$statement->setQualifiers( new SnakList( [ $brokenSnak ] ) );
+		$cases['mismatching value in qualifier'] = [ $q17, $statement, 'modification-failed' ];
 
 		$statement = new Statement( $goodSnak );
-		$reference = new Reference( new SnakList( array( $badSnak ) ) );
+		$reference = new Reference( new SnakList( [ $badSnak ] ) );
 		$statement->setGuid( $guidGenerator->newGuid( $q17 ) );
-		$statement->setReferences( new ReferenceList( array( $reference ) ) );
-		$cases['bad snak in reference'] = array( $q17, $statement, 'modification-failed' );
+		$statement->setReferences( new ReferenceList( [ $reference ] ) );
+		$cases['bad snak in reference'] = [ $q17, $statement, 'modification-failed' ];
 
 		$statement = new Statement( $goodSnak );
-		$reference = new Reference( new SnakList( array( $badSnak ) ) );
+		$reference = new Reference( new SnakList( [ $badSnak ] ) );
 		$statement->setGuid( $guidGenerator->newGuid( $q17 ) );
-		$statement->setReferences( new ReferenceList( array( $reference ) ) );
-		$cases['mismatching value in reference'] = array( $q17, $statement, 'modification-failed' );
+		$statement->setReferences( new ReferenceList( [ $reference ] ) );
+		$cases['mismatching value in reference'] = [ $q17, $statement, 'modification-failed' ];
 
 		$statement = new Statement( $goodSnak );
 		$statement->setGuid( 'XXXX' );
-		$cases['invalid GUID'] = array( $qx, $statement, 'invalid-claim' );
+		$cases['invalid GUID'] = [ $qx, $statement, 'invalid-claim' ];
 
 		return $cases;
 	}
@@ -304,10 +304,10 @@ class SetClaimTest extends WikibaseApiTestCase {
 			$statement = $statementDeserializer->deserialize( $serialized );
 		}
 
-		$params = array(
+		$params = [
 			'action' => 'wbsetclaim',
 			'claim' => FormatJson::encode( $serialized ),
-		);
+		];
 
 		if ( !is_null( $index ) ) {
 			$params['index'] = $index;
@@ -439,20 +439,20 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$badProperty = Property::newFromType( 'string' );
 		$badProperty = $store->saveEntity( $badProperty, '', $GLOBALS['wgUser'], EDIT_NEW )->getEntity();
 
-		$badSerialization = array(
+		$badSerialization = [
 			'id' => $statement->getGuid(),
-			'mainsnak' => array(
+			'mainsnak' => [
 				'snaktype' => 'novalue',
 				'property' => $badProperty->getId()->getSerialization(),
-			),
+			],
 			'type' => 'statement',
 			'rank' => 'normal',
-		);
+		];
 
-		$params = array(
+		$params = [
 			'action' => 'wbsetclaim',
 			'claim' => FormatJson::encode( $badSerialization ),
-		);
+		];
 
 		try {
 			$this->doApiRequestWithToken( $params );

@@ -65,11 +65,11 @@ class DataTypeSelector {
 
 		$html = Html::rawElement(
 			'select',
-			array(
+			[
 				'name' => $name,
 				'id' => $id,
 				'class' => 'wb-select'
-			),
+			],
 			$options
 		);
 
@@ -82,7 +82,7 @@ class DataTypeSelector {
 	 * @return array
 	 */
 	public function getOptionsArray() {
-		$dataTypes = array();
+		$dataTypes = [];
 
 		foreach ( $this->dataTypes as $dataType ) {
 			$dataTypes[$dataType->getId()] = $dataType->getLabel( $this->languageCode );
@@ -110,10 +110,10 @@ class DataTypeSelector {
 		foreach ( $dataTypes as $typeId => $typeLabel ) {
 			$html .= Html::element(
 				'option',
-				array(
+				[
 					'value' => $typeId,
 					'selected' => $typeId === $selectedTypeId
-				),
+				],
 				$typeLabel
 			);
 		}

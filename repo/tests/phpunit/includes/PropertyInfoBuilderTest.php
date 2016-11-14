@@ -24,26 +24,26 @@ class PropertyInfoBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideBuildPropertyInfo() {
-		$cases = array();
+		$cases = [];
 
-		$cases[] = array(
+		$cases[] = [
 			Property::newFromType( 'foo' ),
-			array(
+			[
 				'type' => 'foo'
-			)
-		);
+			]
+		];
 
 		$property = Property::newFromType( 'foo' );
 		$snak = new PropertyValueSnak( new PropertyId( 'P42' ), new StringValue( 'test' ) );
 		$property->getStatements()->addNewStatement( $snak );
 
-		$cases[] = array(
+		$cases[] = [
 			$property,
-			array(
+			[
 				'type' => 'foo',
 				'formatterURL' => 'test'
-			)
-		);
+			]
+		];
 
 		return $cases;
 	}

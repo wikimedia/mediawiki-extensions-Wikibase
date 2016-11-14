@@ -108,7 +108,7 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 	 * @return RdfDumpGenerator
 	 * @throws MWException
 	 */
-	protected function newDumpGenerator( array $entities = array(), array $redirects = array() ) {
+	protected function newDumpGenerator( array $entities = [], array $redirects = [] ) {
 		$out = fopen( 'php://output', 'w' );
 
 		$entityLookup = $this->getMock( EntityLookup::class );
@@ -158,7 +158,7 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 			new RdfVocabulary(
 				self::URI_BASE,
 				self::URI_DATA,
-				array( 'test' => 'en-x-test' )
+				[ 'test' => 'en-x-test' ]
 			),
 			$this->getEntityTitleLookup()
 		);
@@ -170,11 +170,11 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 		$q40 = new ItemId( 'Q40' );
 		$q4242 = new ItemId( 'Q4242' ); // hardcoded to be a redirect
 
-		return array(
-			'empty' => array( array(), 'empty' ),
-			'some entities' => array( array( $p10, $q30, $q40 ), 'entities' ),
-			'redirect' => array( array( $p10, $q4242 ), 'redirect' ),
-		);
+		return [
+			'empty' => [ [], 'empty' ],
+			'some entities' => [ [ $p10, $q30, $q40 ], 'entities' ],
+			'redirect' => [ [ $p10, $q4242 ], 'redirect' ],
+		];
 	}
 
 	/**
@@ -183,7 +183,7 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 	public function testGenerateDump( array $ids, $dumpname ) {
 		$jsonTest = new JsonDumpGeneratorTest();
 		$entities = $jsonTest->makeEntities( $ids );
-		$redirects = array( 'Q4242' => new ItemId( 'Q42' ) );
+		$redirects = [ 'Q4242' => new ItemId( 'Q42' ) ];
 		$dumper = $this->newDumpGenerator( $entities, $redirects );
 		$dumper->setTimestamp( 1000000 );
 		$jsonTest = new JsonDumpGeneratorTest();
@@ -197,9 +197,9 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 	}
 
 	public function loadDataProvider() {
-		return array(
-			'references' => array( array( new ItemId( 'Q7' ), new ItemId( 'Q9' ) ), 'refs' ),
-		);
+		return [
+			'references' => [ [ new ItemId( 'Q7' ), new ItemId( 'Q9' ) ], 'refs' ],
+		];
 	}
 
 	/**
@@ -208,7 +208,7 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 	 * @param string $dumpname
 	 */
 	public function testReferenceDedup( array $ids, $dumpname ) {
-		$entities = array();
+		$entities = [];
 		$rdfTest = new RdfBuilderTest();
 
 		foreach ( $ids as $id ) {

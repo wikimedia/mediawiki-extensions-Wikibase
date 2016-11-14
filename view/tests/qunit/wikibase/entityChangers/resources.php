@@ -10,86 +10,86 @@ return call_user_func( function() {
 	$remoteExtPathParts = explode(
 		DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR, __DIR__, 2
 	);
-	$moduleBase = array(
+	$moduleBase = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => $remoteExtPathParts[1],
-	);
+	];
 
-	$modules = array(
+	$modules = [
 
-		'wikibase.entityChangers.AliasesChanger.tests' => $moduleBase + array(
-			'scripts' => array(
+		'wikibase.entityChangers.AliasesChanger.tests' => $moduleBase + [
+			'scripts' => [
 				'AliasesChanger.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.datamodel',
 				'wikibase.entityChangers.AliasesChanger',
-			),
-		),
+			],
+		],
 
-		'wikibase.entityChangers.StatementsChanger.tests' => $moduleBase + array(
-			'scripts' => array(
+		'wikibase.entityChangers.StatementsChanger.tests' => $moduleBase + [
+			'scripts' => [
 				'StatementsChanger.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.datamodel',
 				'wikibase.entityChangers.StatementsChanger',
 				'wikibase.serialization.StatementDeserializer',
 				'wikibase.serialization.StatementSerializer',
-			),
-		),
+			],
+		],
 
-		'wikibase.entityChangers.DescriptionsChanger.tests' => $moduleBase + array(
-			'scripts' => array(
+		'wikibase.entityChangers.DescriptionsChanger.tests' => $moduleBase + [
+			'scripts' => [
 				'DescriptionsChanger.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.datamodel',
 				'wikibase.entityChangers.DescriptionsChanger'
-			),
-		),
+			],
+		],
 
-		'wikibase.entityChangers.EntityTermsChanger.tests' => $moduleBase + array(
-			'scripts' => array(
+		'wikibase.entityChangers.EntityTermsChanger.tests' => $moduleBase + [
+			'scripts' => [
 				'EntityTermsChanger.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.datamodel',
 				'wikibase.entityChangers.EntityTermsChanger'
-			),
-		),
+			],
+		],
 
-		'wikibase.entityChangers.LabelsChanger.tests' => $moduleBase + array(
-			'scripts' => array(
+		'wikibase.entityChangers.LabelsChanger.tests' => $moduleBase + [
+			'scripts' => [
 				'LabelsChanger.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.datamodel',
 				'wikibase.entityChangers.LabelsChanger'
-			),
-		),
+			],
+		],
 
-		'wikibase.entityChangers.SiteLinksChanger.tests' => $moduleBase + array(
-			'scripts' => array(
+		'wikibase.entityChangers.SiteLinksChanger.tests' => $moduleBase + [
+			'scripts' => [
 				'SiteLinksChanger.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.datamodel',
 				'wikibase.entityChangers.SiteLinksChanger'
-			),
-		),
+			],
+		],
 
-		'wikibase.entityChangers.SiteLinkSetsChanger.tests' => $moduleBase + array(
-			'scripts' => array(
+		'wikibase.entityChangers.SiteLinkSetsChanger.tests' => $moduleBase + [
+			'scripts' => [
 				'SiteLinkSetsChanger.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.datamodel',
 				'wikibase.entityChangers.SiteLinkSetsChanger'
-			),
-		),
+			],
+		],
 
-	);
+	];
 
 	return $modules;
 } );

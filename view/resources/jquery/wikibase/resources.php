@@ -9,164 +9,164 @@ return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	$moduleTemplate = array(
+	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0],
-	);
+	];
 
-	$modules = array(
+	$modules = [
 
-		'jquery.wikibase.aliasesview' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.aliasesview' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.aliasesview.js',
-			),
-			'styles' => array(
+			],
+			'styles' => [
 				'themes/default/jquery.wikibase.aliasesview.css',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.inputautoexpand',
 				'jquery.ui.tagadata',
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.util.getDirectionality',
 				'wikibase.datamodel.MultiTerm',
-			),
-			'messages' => array(
+			],
+			'messages' => [
 				'wikibase-aliases-input-help-message',
 				'wikibase-alias-edit-placeholder',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.badgeselector' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.badgeselector' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.badgeselector.js',
-			),
-			'styles' => array(
+			],
+			'styles' => [
 				'themes/default/jquery.wikibase.badgeselector.css',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.ui.menu',
 				'jquery.ui.EditableTemplatedWidget',
 				'wikibase.templates',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.statementgrouplabelscroll' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.statementgrouplabelscroll' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.statementgrouplabelscroll.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.ui.position',
 				'jquery.ui.widget',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.statementgrouplistview' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.statementgrouplistview' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.statementgrouplistview.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.ui.TemplatedWidget',
 				'jquery.ui.widget',
 				'jquery.wikibase.statementgrouplabelscroll',
 				'jquery.wikibase.listview',
 				'wikibase.datamodel.StatementGroupSet',
-			),
-			'messages' => array(
+			],
+			'messages' => [
 				'wikibase-statementgrouplistview-add',
 				'wikibase-statementgrouplistview-add-tooltip',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.statementgroupview' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.statementgroupview' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.statementgroupview.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.ui.TemplatedWidget',
 				'jquery.ui.widget',
 				'wikibase.datamodel.StatementGroup',
 				'wikibase.datamodel.StatementList',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.statementlistview' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.statementlistview' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.statementlistview.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.ui.TemplatedWidget',
 				'jquery.ui.widget',
 				'jquery.wikibase.listview',
 				'wikibase.datamodel.StatementList',
-			),
-			'messages' => array(
+			],
+			'messages' => [
 					'wikibase-statementlistview-add',
 					'wikibase-statementlistview-add-tooltip',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.descriptionview' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.descriptionview' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.descriptionview.js',
-			),
-			'styles' => array(
+			],
+			'styles' => [
 				'themes/default/jquery.wikibase.descriptionview.css',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.inputautoexpand',
 				'jquery.ui.core',
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.util.getDirectionality',
 				'wikibase.datamodel.Term',
 				'wikibase.getLanguageNameByCode',
-			),
-			'messages' => array(
+			],
+			'messages' => [
 				'wikibase-description-edit-placeholder',
 				'wikibase-description-edit-placeholder-language-aware',
 				'wikibase-description-empty',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.entityselector' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.entityselector' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.entityselector.js',
-			),
-			'styles' => array(
+			],
+			'styles' => [
 				'themes/default/jquery.wikibase.entityselector.css',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.event.special.eachchange',
 				'jquery.throttle-debounce',
 				'jquery.ui.suggester',
 				'jquery.ui.ooMenu',
 				'jquery.ui.widget',
-			),
-			'messages' => array(
+			],
+			'messages' => [
 				'wikibase-entityselector-more',
 				'wikibase-entityselector-notfound',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.entityview' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.entityview' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.entityview.js',
-			),
-			'styles' => array(
+			],
+			'styles' => [
 				'themes/default/jquery.wikibase.entityview.css',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.ui.TemplatedWidget',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.entitytermsview' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.entitytermsview' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.entitytermsview.js',
-			),
-			'styles' => array(
+			],
+			'styles' => [
 				'themes/default/jquery.wikibase.entitytermsview.css',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.cookie',
 				'jquery.ui.closeable',
 				'jquery.ui.EditableTemplatedWidget',
@@ -174,154 +174,154 @@ return call_user_func( function() {
 				'jquery.wikibase.entitytermsforlanguagelistview',
 				'mediawiki.api',
 				'mediawiki.user',
-			),
-			'messages' => array(
+			],
+			'messages' => [
 				'wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link',
 				'wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label',
 				'wikibase-entitytermsview-entitytermsforlanguagelistview-toggler',
 				'wikibase-description-empty',
 				'wikibase-label-empty',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.entitytermsforlanguagelistview' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.entitytermsforlanguagelistview' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.entitytermsforlanguagelistview.js',
-			),
-			'styles' => array(
+			],
+			'styles' => [
 				'themes/default/jquery.wikibase.entitytermsforlanguagelistview.css',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.wikibase.entitytermsforlanguageview',
 				'wikibase.getLanguageNameByCode',
-			),
-			'messages' => array(
+			],
+			'messages' => [
 				'wikibase-entitytermsforlanguagelistview-aliases',
 				'wikibase-entitytermsforlanguagelistview-description',
 				'wikibase-entitytermsforlanguagelistview-label',
 				'wikibase-entitytermsforlanguagelistview-language',
 				'wikibase-entitytermsforlanguagelistview-less',
 				'wikibase-entitytermsforlanguagelistview-more',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.entitytermsforlanguageview' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.entitytermsforlanguageview' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.entitytermsforlanguageview.js',
-			),
-			'styles' => array(
+			],
+			'styles' => [
 				'themes/default/jquery.wikibase.entitytermsforlanguageview.css',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.wikibase.aliasesview',
 				'jquery.wikibase.descriptionview',
 				'jquery.wikibase.labelview',
 				'wikibase.getLanguageNameByCode',
 				'wikibase.templates',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.itemview' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.itemview' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.itemview.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.wikibase.entityview',
 				'jquery.wikibase.sitelinkgrouplistview',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.labelview' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.labelview' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.labelview.js'
-			),
-			'styles' => array(
+			],
+			'styles' => [
 				'themes/default/jquery.wikibase.labelview.css',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.util.getDirectionality',
 				'wikibase.datamodel.Term',
 				'wikibase.getLanguageNameByCode',
-			),
-			'messages' => array(
+			],
+			'messages' => [
 				'parentheses',
 				'wikibase-label-edit-placeholder',
 				'wikibase-label-edit-placeholder-language-aware',
 				'wikibase-label-empty',
 				'wikibase-label-input-help-message',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.listview' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.listview' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.listview.js',
 				'jquery.wikibase.listview.ListItemAdapter.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.ui.TemplatedWidget',
 				'jquery.ui.widget',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.pagesuggester' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.pagesuggester' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.pagesuggester.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.ui.ooMenu',
 				'jquery.ui.suggester',
 				'util.highlightSubstring',
 				'wikibase.sites',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.propertyview' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.propertyview' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.propertyview.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.wikibase.entityview',
 				'wikibase.templates',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.referenceview' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.referenceview' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.referenceview.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.removeClassByRegex',
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.wikibase.listview',
 				'wikibase.datamodel',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.sitelinkgrouplistview' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.sitelinkgrouplistview' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.sitelinkgrouplistview.js'
-			),
-			'styles' => array(
+			],
+			'styles' => [
 				'themes/default/jquery.wikibase.sitelinkgrouplistview.css',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.ui.TemplatedWidget',
 				'jquery.wikibase.listview',
 				'wikibase.sites',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.sitelinkgroupview' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.sitelinkgroupview' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.sitelinkgroupview.js'
-			),
-			'styles' => array(
+			],
+			'styles' => [
 				'themes/default/jquery.wikibase.sitelinkgroupview.css',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.makeCollapsible',
 				'jquery.sticknode',
 				'jquery.ui.EditableTemplatedWidget',
@@ -329,20 +329,20 @@ return call_user_func( function() {
 				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
 				'wikibase.buildErrorOutput',
 				'wikibase.sites',
-			),
-			'messages' => array(
+			],
+			'messages' => [
 				'wikibase-sitelinkgroupview-input-help-message',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.sitelinklistview' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.sitelinklistview' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.sitelinklistview.js',
-			),
-			'styles' => array(
+			],
+			'styles' => [
 				'themes/default/jquery.wikibase.sitelinklistview.css',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.event.special.eachchange',
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.util.EventSingletonManager',
@@ -351,22 +351,22 @@ return call_user_func( function() {
 				'wikibase.datamodel.SiteLink',
 				'wikibase.sites',
 				'wikibase.utilities', // wikibase.utilities.ui
-			),
-			'messages' => array(
+			],
+			'messages' => [
 				'parentheses',
 				'wikibase-sitelinks-counter',
 				'wikibase-propertyedittool-counter-pending-tooltip',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.sitelinkview' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.sitelinkview' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.sitelinkview.js',
-			),
-			'styles' => array(
+			],
+			'styles' => [
 				'themes/default/jquery.wikibase.sitelinkview.css',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.util.EventSingletonManager',
 				'jquery.wikibase.badgeselector',
@@ -377,33 +377,33 @@ return call_user_func( function() {
 				'wikibase.datamodel.SiteLink',
 				'wikibase.sites',
 				'wikibase.templates',
-			),
-			'messages' => array(
+			],
+			'messages' => [
 				'wikibase-badgeselector-badge-placeholder-title',
 				'wikibase-remove',
 				'wikibase-sitelink-site-edit-placeholder',
 				'wikibase-sitelink-page-edit-placeholder',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.snaklistview' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.snaklistview' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.snaklistview.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.wikibase.listview',
 				'wikibase.datamodel.Snak',
 				'wikibase.datamodel.SnakList',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.statementview' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.statementview' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.statementview.js',
 				'jquery.wikibase.statementview.RankSelector.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.ui.menu',
 				'jquery.ui.position',
@@ -419,8 +419,8 @@ return call_user_func( function() {
 				'wikibase.datamodel.SnakList',
 				'wikibase.datamodel.Statement',
 				'wikibase.utilities',
-			),
-			'messages' => array(
+			],
+			'messages' => [
 				'wikibase-addqualifier',
 				'wikibase-addreference',
 				'wikibase-claimview-snak-tooltip',
@@ -433,18 +433,18 @@ return call_user_func( function() {
 				'wikibase-statementview-rank-tooltip-deprecated',
 				'wikibase-statementview-references-counter',
 				'wikibase-statementview-referencesheading-pendingcountertooltip',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.statementview.RankSelector.styles' => $moduleTemplate + array(
+		'jquery.wikibase.statementview.RankSelector.styles' => $moduleTemplate + [
 			'position' => 'top',
-			'styles' => array(
+			'styles' => [
 				'themes/default/jquery.wikibase.statementview.RankSelector.css',
-			),
-			'targets' => array( 'desktop', 'mobile' ),
-		),
+			],
+			'targets' => [ 'desktop', 'mobile' ],
+		],
 
-	);
+	];
 
 	return array_merge(
 		$modules,

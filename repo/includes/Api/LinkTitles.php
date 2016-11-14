@@ -182,7 +182,7 @@ class LinkTitles extends ApiBase {
 		if ( $page === false ) {
 			$this->errorReporter->dieMessage( 'no-external-page', $site, $pageTitle );
 		}
-		return array( $siteObj, $page );
+		return [ $siteObj, $page ];
 	}
 
 	/**
@@ -245,32 +245,32 @@ class LinkTitles extends ApiBase {
 	protected function getAllowedParams() {
 		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 
-		return array_merge( parent::getAllowedParams(), array(
-			'tosite' => array(
+		return array_merge( parent::getAllowedParams(), [
+			'tosite' => [
 				self::PARAM_TYPE => $sites->getGlobalIdentifiers(),
-			),
-			'totitle' => array(
+			],
+			'totitle' => [
 				self::PARAM_TYPE => 'string',
-			),
-			'fromsite' => array(
+			],
+			'fromsite' => [
 				self::PARAM_TYPE => $sites->getGlobalIdentifiers(),
-			),
-			'fromtitle' => array(
+			],
+			'fromtitle' => [
 				self::PARAM_TYPE => 'string',
-			),
+			],
 			'token' => null,
 			'bot' => false,
-		) );
+		] );
 	}
 
 	/**
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
-		return array(
+		return [
 			'action=wblinktitles&fromsite=enwiki&fromtitle=Hydrogen&tosite=dewiki&totitle=Wasserstoff'
 			=> 'apihelp-wblinktitles-example-1',
-		);
+		];
 	}
 
 }

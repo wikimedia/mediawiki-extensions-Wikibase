@@ -84,10 +84,10 @@ class SiteLinksRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideAddEntity() {
-		return array(
-			array( 'Q3', 'Q3_sitelinks' ),
-			array( 'Q3', 'Q3_sitelinks_ruwiki', array( 'ruwiki' ) ),
-		);
+		return [
+			[ 'Q3', 'Q3_sitelinks' ],
+			[ 'Q3', 'Q3_sitelinks_ruwiki', [ 'ruwiki' ] ],
+		];
 	}
 
 	/**

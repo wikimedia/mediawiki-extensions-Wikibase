@@ -28,26 +28,26 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 		parent::setUp();
 
 		if ( !isset( self::$hasSetup ) ) {
-			$this->initTestEntities( array( 'StringProp', 'Oslo', 'Berlin' ) );
+			$this->initTestEntities( [ 'StringProp', 'Oslo', 'Berlin' ] );
 		}
 		self::$hasSetup = true;
 	}
 
 	public function provideLinkTitles() {
-		return array(
-			array( //0 add nowiki as fromsite
-				'p' => array( 'tosite' => 'nnwiki', 'totitle' => 'Oslo', 'fromsite' => 'nowiki', 'fromtitle' => 'Oslo' ),
-				'e' => array( 'inresult' => 1 ) ),
-			array( //1 add svwiki as tosite
-				'p' => array( 'tosite' => 'svwiki', 'totitle' => 'Oslo', 'fromsite' => 'nowiki', 'fromtitle' => 'Oslo' ),
-				'e' => array( 'inresult' => 1 ) ),
-			array( //2 Create a link between 2 new pages
-				'p' => array( 'tosite' => 'svwiki', 'totitle' => 'NewTitle', 'fromsite' => 'nowiki', 'fromtitle' => 'NewTitle' ),
-				'e' => array( 'inresult' => 2 ) ),
-			array( //4 Create a link between 2 new pages
-				'p' => array( 'tosite' => 'svwiki', 'totitle' => 'ATitle', 'fromsite' => 'nowiki', 'fromtitle' => 'ATitle' ),
-				'e' => array( 'inresult' => 2 ) ),
-		);
+		return [
+			[ //0 add nowiki as fromsite
+				'p' => [ 'tosite' => 'nnwiki', 'totitle' => 'Oslo', 'fromsite' => 'nowiki', 'fromtitle' => 'Oslo' ],
+				'e' => [ 'inresult' => 1 ] ],
+			[ //1 add svwiki as tosite
+				'p' => [ 'tosite' => 'svwiki', 'totitle' => 'Oslo', 'fromsite' => 'nowiki', 'fromtitle' => 'Oslo' ],
+				'e' => [ 'inresult' => 1 ] ],
+			[ //2 Create a link between 2 new pages
+				'p' => [ 'tosite' => 'svwiki', 'totitle' => 'NewTitle', 'fromsite' => 'nowiki', 'fromtitle' => 'NewTitle' ],
+				'e' => [ 'inresult' => 2 ] ],
+			[ //4 Create a link between 2 new pages
+				'p' => [ 'tosite' => 'svwiki', 'totitle' => 'ATitle', 'fromsite' => 'nowiki', 'fromtitle' => 'ATitle' ],
+				'e' => [ 'inresult' => 2 ] ],
+		];
 	}
 
 	/**
@@ -87,119 +87,119 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 	}
 
 	public function provideLinkTitleExceptions() {
-		return array(
-			'notoken' => array(
-				'p' => array(
+		return [
+			'notoken' => [
+				'p' => [
 					'tosite' => 'nnwiki',
 					'totitle' => 'Oslo',
 					'fromsite' => 'nowiki',
 					'fromtitle' => 'AnotherPage'
-				),
-				'e' => array( 'exception' => array(
+				],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'notoken',
 					'message' => 'The token parameter must be set'
-				) )
-			),
-			'badtoken' => array(
-				'p' => array(
+				] ]
+			],
+			'badtoken' => [
+				'p' => [
 					'tosite' => 'nnwiki',
 					'totitle' => 'Oslo',
 					'fromsite' => 'nowiki',
 					'fromtitle' => 'AnotherPage',
 					'token' => '88888888888888888888888888888888+\\'
-				),
-				'e' => array( 'exception' => array(
+				],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'badtoken',
 					'message' => 'Invalid token'
-				) )
-			),
-			'add two links already exist together' => array(
-				'p' => array(
+				] ]
+			],
+			'add two links already exist together' => [
+				'p' => [
 					'tosite' => 'nnwiki',
 					'totitle' => 'Oslo',
 					'fromsite' => 'nowiki',
 					'fromtitle' => 'Oslo'
-				),
-				'e' => array( 'exception' => array(
+				],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'common-item'
-				) )
-			),
-			'no common item' => array(
-				'p' => array(
+				] ]
+			],
+			'no common item' => [
+				'p' => [
 					'tosite' => 'dewiki',
 					'totitle' => 'Berlin',
 					'fromsite' => 'nlwiki',
 					'fromtitle' => 'Oslo'
-				),
-				'e' => array( 'exception' => array(
+				],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'no-common-item'
-				) )
-			),
-			'add two links from the same site' => array(
-				'p' => array(
+				] ]
+			],
+			'add two links from the same site' => [
+				'p' => [
 					'tosite' => 'nnwiki',
 					'totitle' => 'Hammerfest',
 					'fromsite' => 'nnwiki',
 					'fromtitle' => 'Hammerfest'
-				),
-				'e' => array( 'exception' => array(
+				],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'param-illegal'
-				) )
-			),
-			'missing title' => array(
-				'p' => array(
+				] ]
+			],
+			'missing title' => [
+				'p' => [
 					'tosite' => 'nnwiki',
 					'totitle' => '',
 					'fromsite' => 'dewiki',
 					'fromtitle' => 'Hammerfest'
-				),
-				'e' => array( 'exception' => array(
+				],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'param-illegal'
-				) )
-			),
-			'bad tosite' => array(
-				'p' => array(
+				] ]
+			],
+			'bad tosite' => [
+				'p' => [
 					'tosite' => 'qwerty',
 					'totitle' => 'Hammerfest',
 					'fromsite' => 'nnwiki',
 					'fromtitle' => 'Hammerfest'
-				),
-				'e' => array( 'exception' => array(
+				],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'unknown_tosite'
-				) )
-			),
-			'bad fromsite' => array(
-				'p' => array(
+				] ]
+			],
+			'bad fromsite' => [
+				'p' => [
 					'tosite' => 'nnwiki',
 					'totitle' => 'Hammerfest',
 					'fromsite' => 'qwerty',
 					'fromtitle' => 'Hammerfest'
-				),
-				'e' => array( 'exception' => array(
+				],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'unknown_fromsite'
-				) )
-			),
-			'missing site' => array(
-				'p' => array(
+				] ]
+			],
+			'missing site' => [
+				'p' => [
 					'tosite' => 'nnwiki',
 					'totitle' => 'APage',
 					'fromsite' => '',
 					'fromtitle' => 'Hammerfest'
-				),
-				'e' => array( 'exception' => array(
+				],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'unknown_fromsite'
-				) )
-			),
-		);
+				] ]
+			],
+		];
 	}
 
 	/**

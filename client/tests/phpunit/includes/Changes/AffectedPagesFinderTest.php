@@ -69,7 +69,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		return $titleFactory;
 	}
 
-	private function getAffectedPagesFinder( array $usage, array $expectedAspects = array() ) {
+	private function getAffectedPagesFinder( array $usage, array $expectedAspects = [] ) {
 		$usageLookup = $this->getMock( UsageLookup::class );
 
 		$usageLookup->expects( $this->any() )
@@ -90,104 +90,104 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 
 	public function getChangedAspectsProvider() {
 		$changeFactory = TestChanges::getEntityChangeFactory();
-		$cases = array();
+		$cases = [];
 
 		$q1 = new ItemId( 'Q1' );
 		$q2 = new ItemId( 'Q2' );
 
-		$cases['create linked item Q1'] = array(
-			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
+		$cases['create linked item Q1'] = [
+			[ EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ],
 			$changeFactory->newFromUpdate(
 				EntityChange::ADD,
 				null,
-				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ) )
+				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] )
 			)
-		);
+		];
 
-		$cases['unlink item Q1'] = array(
-			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
+		$cases['unlink item Q1'] = [
+			[ EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
-				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ) ),
+				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
 				new Item( $q1 )
 			)
-		);
+		];
 
-		$cases['link item Q2'] = array(
-			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
+		$cases['link item Q2'] = [
+			[ EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q2 ),
-				$this->getItemWithSiteLinks( $q2, array( 'enwiki' => '2' ) )
+				$this->getItemWithSiteLinks( $q2, [ 'enwiki' => '2' ] )
 			)
-		);
+		];
 
-		$cases['change link of Q1'] = array(
-			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
+		$cases['change link of Q1'] = [
+			[ EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
-				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ) ),
-				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '2' ) )
+				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
+				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '2' ] )
 			)
-		);
+		];
 
-		$cases['delete linked item Q2'] = array(
-			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
+		$cases['delete linked item Q2'] = [
+			[ EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ],
 			$changeFactory->newFromUpdate(
 				EntityChange::REMOVE,
-				$this->getItemWithSiteLinks( $q2, array( 'enwiki' => '2' ) ),
+				$this->getItemWithSiteLinks( $q2, [ 'enwiki' => '2' ] ),
 				null
 			),
 			'item connected to client was deleted'
-		);
+		];
 
-		$cases['add another sitelink to Q2'] = array(
-			array( EntityUsage::SITELINK_USAGE ),
+		$cases['add another sitelink to Q2'] = [
+			[ EntityUsage::SITELINK_USAGE ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
-				$this->getItemWithSiteLinks( $q2, array( 'enwiki' => '2' ) ),
-				$this->getItemWithSiteLinks( $q2, array(
+				$this->getItemWithSiteLinks( $q2, [ 'enwiki' => '2' ] ),
+				$this->getItemWithSiteLinks( $q2, [
 					'enwiki' => '2',
 					'itwiki' => 'DUE',
-				) )
+				] )
 			)
-		);
+		];
 
-		$cases['alias change on Q1'] = array(
-			array( EntityUsage::OTHER_USAGE ),
+		$cases['alias change on Q1'] = [
+			[ EntityUsage::OTHER_USAGE ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q1 ),
-				$this->getItemWithAliases( $q1, 'de', array( 'EINS' ) )
+				$this->getItemWithAliases( $q1, 'de', [ 'EINS' ] )
 			)
-		);
+		];
 
-		$cases['local label change on Q1 (used by Q2)'] = array(
-			array( EntityUsage::makeAspectKey( EntityUsage::LABEL_USAGE, 'en' ) ),
+		$cases['local label change on Q1 (used by Q2)'] = [
+			[ EntityUsage::makeAspectKey( EntityUsage::LABEL_USAGE, 'en' ) ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q1 ),
 				$this->getItemWithLabel( $q1, 'en', 'ONE' )
 			)
-		);
+		];
 
-		$badges = array( new ItemId( 'Q34' ) );
-		$cases['badge only change on Q1'] = array(
-			array( EntityUsage::SITELINK_USAGE ),
+		$badges = [ new ItemId( 'Q34' ) ];
+		$cases['badge only change on Q1'] = [
+			[ EntityUsage::SITELINK_USAGE ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
-				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ) ),
-				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ), $badges ) )
-		);
+				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
+				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ], $badges ) )
+		];
 
-		$cases['statement change on Q1'] = array(
-			array( EntityUsage::OTHER_USAGE ),
+		$cases['statement change on Q1'] = [
+			[ EntityUsage::OTHER_USAGE ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q1 ),
 				$this->getItemWithStatement( $q1, new PropertyId( 'P5' ), new StringValue( 'Hello' ) )
 			)
-		);
+		];
 
 		return $cases;
 	}
@@ -196,7 +196,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	 * @dataProvider getChangedAspectsProvider
 	 */
 	public function testGetChangedAspects( array $expected, EntityChange $change ) {
-		$referencedPagesFinder = $this->getAffectedPagesFinder( array() );
+		$referencedPagesFinder = $this->getAffectedPagesFinder( [] );
 
 		$actual = $referencedPagesFinder->getChangedAspects( $change );
 
@@ -228,26 +228,26 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		$q2TitleUsage = new EntityUsage( $q2, EntityUsage::TITLE_USAGE );
 
 		// Page 1 is linked to Q1
-		$page1Q1Usages = new PageEntityUsages( 1, array(
+		$page1Q1Usages = new PageEntityUsages( 1, [
 			$q1SitelinkUsage,
-		) );
+		] );
 
 		// Page 2 uses label and title to link to Q1
-		$page2Q1Usages = new PageEntityUsages( 2, array(
+		$page2Q1Usages = new PageEntityUsages( 2, [
 			$q1LabelUsage_en,
 			$q1TitleUsage,
-		) );
+		] );
 
 		// Page 1 uses label and title to link to Q2, and shows the German label too.
-		$page1Q2Usages = new PageEntityUsages( 1, array(
+		$page1Q2Usages = new PageEntityUsages( 1, [
 			$q2LabelUsage, // "all languages" usage
 			$q2TitleUsage,
-		) );
+		] );
 
 		// Page 2 uses Q2 to render an infobox
-		$page2Q2Usages = new PageEntityUsages( 2, array(
+		$page2Q2Usages = new PageEntityUsages( 2, [
 			$q2AllUsage,
-		) );
+		] );
 
 		// Cases
 		// item with link created
@@ -260,185 +260,185 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		// all matches any
 		// any matches all
 
-		$cases = array();
+		$cases = [];
 
-		$cases['create linked item Q1'] = array(
-			array(
-				new PageEntityUsages( 1, array( $q1SitelinkUsage ) ),
-			),
-			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
-			array(), // No usages recorded yet
+		$cases['create linked item Q1'] = [
+			[
+				new PageEntityUsages( 1, [ $q1SitelinkUsage ] ),
+			],
+			[ EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ],
+			[], // No usages recorded yet
 			$changeFactory->newFromUpdate(
 				EntityChange::ADD,
 				null,
-				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ) )
+				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] )
 			)
-		);
+		];
 
-		$cases['unlink item Q1'] = array(
-			array(
-				new PageEntityUsages( 1, array( $q1SitelinkUsage ) ),
-				new PageEntityUsages( 2, array( $q1TitleUsage ) ),
-			),
-			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
-			array( $page1Q1Usages, $page2Q1Usages ), // "1" was recorded to be linked to Q1 and the local title used on page "2"
+		$cases['unlink item Q1'] = [
+			[
+				new PageEntityUsages( 1, [ $q1SitelinkUsage ] ),
+				new PageEntityUsages( 2, [ $q1TitleUsage ] ),
+			],
+			[ EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ],
+			[ $page1Q1Usages, $page2Q1Usages ], // "1" was recorded to be linked to Q1 and the local title used on page "2"
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
-				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ) ),
+				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
 				new Item( $q1 )
 			)
-		);
+		];
 
-		$cases['link item Q2'] = array(
-			array(
-				new PageEntityUsages( 1, array( $q2TitleUsage ) ),
-				new PageEntityUsages( 2, array( $q2TitleUsage, $q2SitelinkUsage ) ),
-			),
-			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
-			array( $page1Q2Usages, $page2Q2Usages ),
+		$cases['link item Q2'] = [
+			[
+				new PageEntityUsages( 1, [ $q2TitleUsage ] ),
+				new PageEntityUsages( 2, [ $q2TitleUsage, $q2SitelinkUsage ] ),
+			],
+			[ EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ],
+			[ $page1Q2Usages, $page2Q2Usages ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q2 ),
-				$this->getItemWithSiteLinks( $q2, array( 'enwiki' => '2' ) )
+				$this->getItemWithSiteLinks( $q2, [ 'enwiki' => '2' ] )
 			)
-		);
+		];
 
-		$cases['change link of Q1, with NO prior record'] = array(
-			array(
-				new PageEntityUsages( 1, array( $q1SitelinkUsage ) ),
-				new PageEntityUsages( 2, array( $q1SitelinkUsage ) ),
-			),
-			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
-			array(),
+		$cases['change link of Q1, with NO prior record'] = [
+			[
+				new PageEntityUsages( 1, [ $q1SitelinkUsage ] ),
+				new PageEntityUsages( 2, [ $q1SitelinkUsage ] ),
+			],
+			[ EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ],
+			[],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
-				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ) ),
-				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '2' ) )
+				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
+				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '2' ] )
 			)
-		);
+		];
 
-		$cases['change link of Q1, with prior record'] = array(
-			array(
-				new PageEntityUsages( 1, array( $q1SitelinkUsage ) ),
-				new PageEntityUsages( 2, array( $q1SitelinkUsage, $q1TitleUsage ) ),
-			),
-			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
-			array( $page1Q1Usages, $page2Q1Usages ),
+		$cases['change link of Q1, with prior record'] = [
+			[
+				new PageEntityUsages( 1, [ $q1SitelinkUsage ] ),
+				new PageEntityUsages( 2, [ $q1SitelinkUsage, $q1TitleUsage ] ),
+			],
+			[ EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ],
+			[ $page1Q1Usages, $page2Q1Usages ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
-				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ) ),
-				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '2' ) )
+				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
+				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '2' ] )
 			)
-		);
+		];
 
-		$badges = array( new ItemId( 'Q34' ) );
-		$cases['badge only change on Q1'] = array(
-			array(
-				new PageEntityUsages( 1, array( $q1SitelinkUsage ) ),
-			),
-			array( EntityUsage::SITELINK_USAGE ),
-			array( $page1Q1Usages, $page2Q1Usages ),
+		$badges = [ new ItemId( 'Q34' ) ];
+		$cases['badge only change on Q1'] = [
+			[
+				new PageEntityUsages( 1, [ $q1SitelinkUsage ] ),
+			],
+			[ EntityUsage::SITELINK_USAGE ],
+			[ $page1Q1Usages, $page2Q1Usages ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
-				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ) ),
-				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ), $badges ) )
-		);
+				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
+				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ], $badges ) )
+		];
 
-		$cases['delete linked item Q2'] = array(
-			array(
-				new PageEntityUsages( 1, array( $q2TitleUsage ) ),
-				new PageEntityUsages( 2, array( $q2TitleUsage, $q2SitelinkUsage ) ),
-			),
-			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
-			array( $page1Q2Usages, $page2Q2Usages ),
+		$cases['delete linked item Q2'] = [
+			[
+				new PageEntityUsages( 1, [ $q2TitleUsage ] ),
+				new PageEntityUsages( 2, [ $q2TitleUsage, $q2SitelinkUsage ] ),
+			],
+			[ EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ],
+			[ $page1Q2Usages, $page2Q2Usages ],
 			$changeFactory->newFromUpdate(
 				EntityChange::REMOVE,
-				$this->getItemWithSiteLinks( $q2, array( 'enwiki' => '2' ) ),
+				$this->getItemWithSiteLinks( $q2, [ 'enwiki' => '2' ] ),
 				null
 			),
 			'item connected to client was deleted'
-		);
+		];
 
-		$cases['add another sitelink to Q2'] = array(
-			array(
-				new PageEntityUsages( 2, array( $q2SitelinkUsage ) ),
-			),
-			array( EntityUsage::SITELINK_USAGE ),
-			array( $page2Q2Usages ),
+		$cases['add another sitelink to Q2'] = [
+			[
+				new PageEntityUsages( 2, [ $q2SitelinkUsage ] ),
+			],
+			[ EntityUsage::SITELINK_USAGE ],
+			[ $page2Q2Usages ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
-				$this->getItemWithSiteLinks( $q2, array( 'enwiki' => '2' ) ),
-				$this->getItemWithSiteLinks( $q2, array(
+				$this->getItemWithSiteLinks( $q2, [ 'enwiki' => '2' ] ),
+				$this->getItemWithSiteLinks( $q2, [
 					'enwiki' => '2',
 					'itwiki' => 'DUE',
-				) )
+				] )
 			)
-		);
+		];
 
-		$cases['other language label change on Q1 (not used on any page)'] = array(
-			array(),
-			array( $labelUsageDe ),
-			array( $page1Q1Usages, $page2Q1Usages ),
+		$cases['other language label change on Q1 (not used on any page)'] = [
+			[],
+			[ $labelUsageDe ],
+			[ $page1Q1Usages, $page2Q1Usages ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q1 ),
 				$this->getItemWithLabel( $q1, 'de', 'EINS' )
 			)
-		);
+		];
 
-		$cases['other change on Q2 (used on page 2)'] = array(
-			array(
-				new PageEntityUsages( 2, array( $q2OtherUsage ) ),
-			),
-			array( EntityUsage::OTHER_USAGE ),
-			array( $page1Q2Usages, $page2Q2Usages ),
+		$cases['other change on Q2 (used on page 2)'] = [
+			[
+				new PageEntityUsages( 2, [ $q2OtherUsage ] ),
+			],
+			[ EntityUsage::OTHER_USAGE ],
+			[ $page1Q2Usages, $page2Q2Usages ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q2 ),
-				$this->getItemWithAliases( $q2, 'fr', array( 'X', 'Y' ) )
+				$this->getItemWithAliases( $q2, 'fr', [ 'X', 'Y' ] )
 			)
-		);
+		];
 
-		$cases['other language label change on Q2 (used on page 1 and 2)'] = array(
-			array(
-				new PageEntityUsages( 1, array( $q2LabelUsage_de ) ),
-				new PageEntityUsages( 2, array( $q2LabelUsage_de ) ),
-			),
-			array( $labelUsageDe ),
-			array( $page1Q2Usages, $page2Q2Usages ),
+		$cases['other language label change on Q2 (used on page 1 and 2)'] = [
+			[
+				new PageEntityUsages( 1, [ $q2LabelUsage_de ] ),
+				new PageEntityUsages( 2, [ $q2LabelUsage_de ] ),
+			],
+			[ $labelUsageDe ],
+			[ $page1Q2Usages, $page2Q2Usages ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q2 ),
 				$this->getItemWithLabel( $q2, 'de', 'EINS' )
 			)
-		);
+		];
 
-		$cases['local label change on Q1 (used by page 2)'] = array(
-			array(
-				new PageEntityUsages( 2, array( $q1LabelUsage_en ) ),
-			),
-			array( $labelUsageEn ),
-			array( $page1Q1Usages, $page2Q1Usages ),
+		$cases['local label change on Q1 (used by page 2)'] = [
+			[
+				new PageEntityUsages( 2, [ $q1LabelUsage_en ] ),
+			],
+			[ $labelUsageEn ],
+			[ $page1Q1Usages, $page2Q1Usages ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q1 ),
 				$this->getItemWithLabel( $q1, 'en', 'ONE' )
 			)
-		);
+		];
 
-		$cases['local label change on Q2 (used by page 1 and page 2)'] = array(
-			array(
-				new PageEntityUsages( 1, array( $q2LabelUsage_en ) ),
-				new PageEntityUsages( 2, array( $q2LabelUsage_en ) ),
-			),
-			array( $labelUsageEn ),
-			array( $page1Q2Usages, $page2Q2Usages ),
+		$cases['local label change on Q2 (used by page 1 and page 2)'] = [
+			[
+				new PageEntityUsages( 1, [ $q2LabelUsage_en ] ),
+				new PageEntityUsages( 2, [ $q2LabelUsage_en ] ),
+			],
+			[ $labelUsageEn ],
+			[ $page1Q2Usages, $page2Q2Usages ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q2 ),
 				$this->getItemWithLabel( $q2, 'en', 'TWO' )
 			)
-		);
+		];
 
 		return $cases;
 	}
@@ -448,7 +448,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	 */
 	public function testGetAffectedUsagesByPage( array $expected, array $expectedAspects, array $usage, EntityChange $change ) {
 		// Everything will affect pages with ALL_USAGE.
-		$expectedAspects = array_merge( $expectedAspects, array( EntityUsage::ALL_USAGE ) );
+		$expectedAspects = array_merge( $expectedAspects, [ EntityUsage::ALL_USAGE ] );
 
 		$referencedPagesFinder = $this->getAffectedPagesFinder( $usage, $expectedAspects );
 
@@ -474,7 +474,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 
 		$change = $changeFactory->newFromUpdate(
 			EntityChange::UPDATE,
-			$this->getItemWithSiteLinks( $itemId, array( 'enwiki' => $pageTitle ) ),
+			$this->getItemWithSiteLinks( $itemId, [ 'enwiki' => $pageTitle ] ),
 			new Item( $itemId )
 		);
 
@@ -492,9 +492,9 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 
 		$siteLinkLookup->expects( $this->any() )
 			->method( 'getLinks' )
-			->will( $this->returnValue( array(
-				array( 'enwiki', $pageTitle, 1 )
-			) ) );
+			->will( $this->returnValue( [
+				[ 'enwiki', $pageTitle, 1 ]
+			] ) );
 
 		$titleFactory = new TitleFactory();
 
@@ -508,7 +508,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	 *
 	 * @return Item
 	 */
-	private function getItemWithSiteLinks( ItemId $id, array $links, array $badges = array() ) {
+	private function getItemWithSiteLinks( ItemId $id, array $links, array $badges = [] ) {
 		$item = new Item( $id );
 
 		foreach ( $links as $siteId => $page ) {
@@ -569,7 +569,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	 * @return PageEntityUsages[]
 	 */
 	private function getPageEntityUsageStrings( $usagesPerPage ) {
-		$strings = array();
+		$strings = [];
 
 		foreach ( $usagesPerPage as $pageUsages ) {
 			$strings[] = "$pageUsages";

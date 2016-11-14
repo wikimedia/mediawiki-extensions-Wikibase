@@ -49,11 +49,11 @@ class EntityContentDataCodecTest extends MediaWikiTestCase {
 		$p1 = new PropertyId( 'P1' );
 		$q11 = new ItemId( 'Q11' );
 
-		return array(
-			'PropertyId' => array( '{ "entity": "P1", "datatype": "string" }', $p1 ),
-			'new style' => array( '{ "entity": "Q11" }', $q11 ),
-			'old style' => array( '{ "entity": ["item", 11] }', $q11 ),
-		);
+		return [
+			'PropertyId' => [ '{ "entity": "P1", "datatype": "string" }', $p1 ],
+			'new style' => [ '{ "entity": "Q11" }', $q11 ],
+			'old style' => [ '{ "entity": ["item", 11] }', $q11 ],
+		];
 	}
 
 	/**
@@ -70,16 +70,16 @@ class EntityContentDataCodecTest extends MediaWikiTestCase {
 		$simple = new Item( new ItemId( 'Q1' ) );
 		$simple->setLabel( 'en', 'Test' );
 
-		return array(
-			'Property' => array( Property::newFromType( 'string' ), null ),
+		return [
+			'Property' => [ Property::newFromType( 'string' ), null ],
 
-			'empty' => array( $empty, null ),
-			'empty json' => array( $empty, CONTENT_FORMAT_JSON ),
+			'empty' => [ $empty, null ],
+			'empty json' => [ $empty, CONTENT_FORMAT_JSON ],
 
-			'simple' => array( $simple, null ),
-			'simple json' => array( $simple, CONTENT_FORMAT_JSON ),
-			'simple php' => array( $simple, CONTENT_FORMAT_SERIALIZED ),
-		);
+			'simple' => [ $simple, null ],
+			'simple json' => [ $simple, CONTENT_FORMAT_JSON ],
+			'simple php' => [ $simple, CONTENT_FORMAT_SERIALIZED ],
+		];
 	}
 
 	/**
@@ -115,10 +115,10 @@ class EntityContentDataCodecTest extends MediaWikiTestCase {
 
 		$redirect = new EntityRedirect( $q6, $q8 );
 
-		return array(
-			'redirect' => array( $redirect, null ),
-			'empty json' => array( $redirect, CONTENT_FORMAT_JSON ),
-		);
+		return [
+			'redirect' => [ $redirect, null ],
+			'empty json' => [ $redirect, CONTENT_FORMAT_JSON ],
+		];
 	}
 
 	/**

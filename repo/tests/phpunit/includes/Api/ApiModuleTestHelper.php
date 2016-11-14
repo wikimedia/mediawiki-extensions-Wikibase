@@ -67,7 +67,7 @@ class ApiModuleTestHelper {
 		/** @var UsageException $ex */
 
 		if ( is_string( $expected ) ) {
-			$expected = array( 'code' => $expected );
+			$expected = [ 'code' => $expected ];
 		}
 
 		if ( isset( $expected['code'] ) ) {

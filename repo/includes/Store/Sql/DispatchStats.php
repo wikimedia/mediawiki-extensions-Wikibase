@@ -44,39 +44,39 @@ class DispatchStats {
 
 		$this->changeStats = $db->selectRow(
 			'wb_changes',
-			array(
+			[
 				'min( change_id ) as min_id',
 				'max( change_id ) as max_id',
 				'min( change_time ) as min_time',
 				'max( change_time ) as max_time',
-			),
+			],
 			'',
 			__METHOD__
 		);
 
 		$res = $db->select(
-			array(
+			[
 				'wb_changes_dispatch',
 				'wb_changes'
-			),
-			array( 'chd_site',
+			],
+			[ 'chd_site',
 					'chd_db',
 					'chd_seen',
 					'chd_touched',
 					'chd_lock',
 					'chd_disabled',
 					'change_time',
-			),
-			array(
+			],
+			[
 				'chd_disabled' => 0
-			),
+			],
 			__METHOD__,
-			array(
+			[
 				'ORDER BY' => 'chd_seen ASC'
-			),
-			array(
-				'wb_changes' => array( 'LEFT JOIN', 'chd_seen = change_id' )
-			)
+			],
+			[
+				'wb_changes' => [ 'LEFT JOIN', 'chd_seen = change_id' ]
+			]
 		);
 
 		$this->average = new \stdClass();
@@ -84,7 +84,7 @@ class DispatchStats {
 		$this->average->chd_pending = 0;
 		$this->average->chd_lag = 0;
 
-		$this->clientStates = array();
+		$this->clientStates = [];
 
 		foreach ( $res as $row ) {
 			if ( $this->changeStats ) {

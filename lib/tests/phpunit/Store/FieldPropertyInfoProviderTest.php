@@ -36,11 +36,11 @@ class FieldPropertyInfoProviderTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function provideGetPropertyInfo() {
-		return array(
-			'no info array' => array( null, 'foo', null ),
-			'empty info array' => array( array(), 'foo', null ),
-			'found info field' => array( array( 'hrmf' => 'Mitten', 'foo' => 'Kitten' ), 'foo', 'Kitten' ),
-		);
+		return [
+			'no info array' => [ null, 'foo', null ],
+			'empty info array' => [ [], 'foo', null ],
+			'found info field' => [ [ 'hrmf' => 'Mitten', 'foo' => 'Kitten' ], 'foo', 'Kitten' ],
+		];
 	}
 
 }

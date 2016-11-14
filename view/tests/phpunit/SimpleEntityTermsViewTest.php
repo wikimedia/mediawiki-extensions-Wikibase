@@ -97,11 +97,11 @@ class SimpleEntityTermsViewTest extends PHPUnit_Framework_TestCase {
 	public function entityFingerprintProvider() {
 		$fingerprint = $this->getFingerprint();
 
-		return array(
-			'empty' => array( new Fingerprint(), new ItemId( 'Q42' ), 'en' ),
-			'other language' => array( $fingerprint, new ItemId( 'Q42' ), 'de' ),
-			'other id' => array( $fingerprint, new ItemId( 'Q12' ), 'en' ),
-		);
+		return [
+			'empty' => [ new Fingerprint(), new ItemId( 'Q42' ), 'en' ],
+			'other language' => [ $fingerprint, new ItemId( 'Q42' ), 'de' ],
+			'other id' => [ $fingerprint, new ItemId( 'Q12' ), 'en' ],
+		];
 	}
 
 	/**
@@ -117,7 +117,7 @@ class SimpleEntityTermsViewTest extends PHPUnit_Framework_TestCase {
 	public function testGetHtml_valuesAreEscaped() {
 		$fingerprint = new Fingerprint();
 		$fingerprint->setDescription( 'en', '<script>alert( "xss" );</script>' );
-		$fingerprint->setAliasGroup( 'en', array( '<a href="#">evil html</a>', '<b>bold</b>', '<i>italic</i>' ) );
+		$fingerprint->setAliasGroup( 'en', [ '<a href="#">evil html</a>', '<b>bold</b>', '<i>italic</i>' ] );
 
 		$view = $this->getEntityTermsView( 1 );
 		$html = $view->getHtml( 'en', $fingerprint, $fingerprint, $fingerprint, null );

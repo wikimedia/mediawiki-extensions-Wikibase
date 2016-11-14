@@ -28,7 +28,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 		// add data and check if it is shown in the form
 		$item->setLabel( 'de', 'foo' );
 		$item->setDescription( 'de', 'foo' );
-		$item->setAliases( 'de', array( 'foo' ) );
+		$item->setAliases( 'de', [ 'foo' ] );
 
 		// save the item
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
@@ -41,40 +41,40 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 	public function testExecute() {
 		$id = $this->createNewItem();
 
-		$this->setMwGlobals( 'wgGroupPermissions', array( '*' => array( 'edit' => true, 'item-term' => true ) ) );
+		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [ 'edit' => true, 'item-term' => true ] ] );
 
 		$page = $this->newSpecialPage();
 
-		$matchers['id'] = array(
+		$matchers['id'] = [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-modifyentity-id',
 				'class' => 'wb-input',
 				'name' => 'id',
-			) );
-		$matchers['language'] = array(
+			] ];
+		$matchers['language'] = [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-modifyterm-language',
 				'class' => 'wb-input',
 				'name' => 'language',
 				'value' => 'en',
-			) );
-		$matchers['value'] = array(
+			] ];
+		$matchers['value'] = [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-modifyterm-value',
 				'class' => 'wb-input',
 				'name' => 'value',
-			) );
-		$matchers['submit'] = array(
+			] ];
+		$matchers['submit'] = [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-' . strtolower( $page->getName() ) . '-submit',
 				'class' => 'wb-button',
 				'type' => 'submit',
 				'name' => 'wikibase-' . strtolower( $page->getName() ) . '-submit',
-			) );
+			] ];
 
 		// execute with no subpage value
 		list( $output, ) = $this->executeSpecialPage( '', null, 'en' );
@@ -84,23 +84,23 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 
 		// execute with one subpage value
 		list( $output, ) = $this->executeSpecialPage( $id, null, 'en' );
-		$matchers['id']['attributes'] = array(
+		$matchers['id']['attributes'] = [
 				'type' => 'hidden',
 				'name' => 'id',
 				'value' => $id,
-			);
-		$matchers['language']['attributes'] = array(
+			];
+		$matchers['language']['attributes'] = [
 				'type' => 'hidden',
 				'name' => 'language',
 				'value' => 'en',
-			);
-		$matchers['remove'] = array(
+			];
+		$matchers['remove'] = [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'type' => 'hidden',
 				'name' => 'remove',
 				'value' => 'remove',
-			) );
+			] ];
 
 		foreach ( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}' passing one subpage value" );
@@ -119,21 +119,21 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 	public function testValuePreservesWhenNothingEntered() {
 		$id = $this->createNewItem();
 
-		$this->setMwGlobals( 'wgGroupPermissions', array( '*' => array( 'edit' => true, 'item-term' => true ) ) );
+		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [ 'edit' => true, 'item-term' => true ] ] );
 
-		$request = new FauxRequest( array( 'id' => $id, 'language' => 'de', 'value' => '' ), true );
+		$request = new FauxRequest( [ 'id' => $id, 'language' => 'de', 'value' => '' ], true );
 
 		list( $output, ) = $this->executeSpecialPage( '', $request );
 
-		$this->assertTag( array(
+		$this->assertTag( [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-modifyterm-value',
 				'class' => 'wb-input',
 				'name' => 'value',
 				'value' => 'foo',
-			)
-		), $output, 'Value still preserves when no value was entered in the big form' );
+			]
+		], $output, 'Value still preserves when no value was entered in the big form' );
 	}
 
 }

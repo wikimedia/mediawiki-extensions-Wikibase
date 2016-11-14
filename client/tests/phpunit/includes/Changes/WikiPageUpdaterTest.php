@@ -47,7 +47,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 
 		$rcFactory->expects( $this->any() )
 			->method( 'prepareChangeAttributes' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
 		return $rcFactory;
 	}
@@ -122,9 +122,9 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		$title->expects( $this->once() )
 			->method( 'invalidateCache' );
 
-		$updater->purgeParserCache( array(
+		$updater->purgeParserCache( [
 			$title
-		) );
+		] );
 	}
 
 	public function testPurgeWebCache() {
@@ -138,9 +138,9 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		$title->expects( $this->once() )
 			->method( 'purgeSquid' );
 
-		$updater->purgeWebCache( array(
+		$updater->purgeWebCache( [
 			$title
-		) );
+		] );
 	}
 
 	public function testScheduleRefreshLinks() {
@@ -175,9 +175,9 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 			$this->getRCDupeDetectorMock()
 		);
 
-		$updater->scheduleRefreshLinks( array(
+		$updater->scheduleRefreshLinks( [
 			$title
-		) );
+		] );
 	}
 
 	public function testInjectRCRecords() {
@@ -189,7 +189,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 
 		$rcFactory->expects( $this->once() )
 			->method( 'newRecentChange' )
-			->with( $change, $title, array() )
+			->with( $change, $title, [] )
 			->will( $this->returnValue( $rc ) );
 
 		$rcDupeDetector = $this->getRCDupeDetectorMock();
@@ -204,9 +204,9 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 			$rcDupeDetector
 		);
 
-		$updater->injectRCRecords( array(
+		$updater->injectRCRecords( [
 			$title
-		), $change );
+		], $change );
 	}
 
 }

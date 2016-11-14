@@ -114,7 +114,7 @@ class SetSiteLink extends ModifyEntity {
 				$changeOp = $this->getChangeOp( $params );
 				$siteLink = $item->getSiteLinkList()->getBySiteId( $linksite );
 				$this->applyChangeOp( $changeOp, $entity, $summary );
-				$resultBuilder->addRemovedSiteLinks( new SiteLinkList( array( $siteLink ) ), 'entity' );
+				$resultBuilder->addRemovedSiteLinks( new SiteLinkList( [ $siteLink ] ), 'entity' );
 			}
 		} else {
 			if ( isset( $params['linktitle'] ) || $hasLinkWithSiteId ) {
@@ -123,7 +123,7 @@ class SetSiteLink extends ModifyEntity {
 
 				$link = $item->getSiteLinkList()->getBySiteId( $linksite );
 				$resultBuilder->addSiteLinkList(
-					new SiteLinkList( array( $link ) ),
+					new SiteLinkList( [ $link ] ),
 					'entity',
 					true // always add the URL
 				);
@@ -182,19 +182,19 @@ class SetSiteLink extends ModifyEntity {
 
 		return array_merge(
 			parent::getAllowedParams(),
-			array(
-				'linksite' => array(
+			[
+				'linksite' => [
 					self::PARAM_TYPE => $sites->getGlobalIdentifiers(),
 					self::PARAM_REQUIRED => true,
-				),
-				'linktitle' => array(
+				],
+				'linktitle' => [
 					self::PARAM_TYPE => 'string',
-				),
-				'badges' => array(
+				],
+				'badges' => [
 					self::PARAM_TYPE => array_keys( $this->badgeItems ),
 					self::PARAM_ISMULTI => true,
-				),
-			)
+				],
+			]
 		);
 	}
 
@@ -202,7 +202,7 @@ class SetSiteLink extends ModifyEntity {
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
-		return array(
+		return [
 			'action=wbsetsitelink&id=Q42&linksite=enwiki&linktitle=Hydrogen'
 			=> 'apihelp-wbsetsitelink-example-1',
 			'action=wbsetsitelink&id=Q42&linksite=enwiki&linktitle=Hydrogen&summary=Loves%20Oxygen'
@@ -219,7 +219,7 @@ class SetSiteLink extends ModifyEntity {
 			=> 'apihelp-wbsetsitelink-example-7',
 			'action=wbsetsitelink&id=Q42&linksite=plwiki&linktitle=Wodór&badges='
 			=> 'apihelp-wbsetsitelink-example-8',
-		);
+		];
 	}
 
 }

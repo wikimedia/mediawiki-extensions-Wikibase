@@ -43,7 +43,7 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 
 		$reporter = new ObservableMessageReporter();
 		$reporter->registerReporterCallback(
-			array( $this, 'report' )
+			[ $this, 'report' ]
 		);
 
 		$table = new PropertyInfoTable( false );

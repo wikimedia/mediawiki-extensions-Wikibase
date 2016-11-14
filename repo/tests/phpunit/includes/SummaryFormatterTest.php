@@ -86,17 +86,17 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 	private function newFormatter() {
 		$idFormatter = $this->getMock( EntityIdFormatter::class );
 		$idFormatter->expects( $this->any() )->method( 'formatEntityId' )
-			->will( $this->returnCallback( array( $this, 'formatId' ) ) );
+			->will( $this->returnCallback( [ $this, 'formatId' ] ) );
 
 		$valueFormatter = $this->getMock( ValueFormatter::class );
 		$valueFormatter->expects( $this->any() )->method( 'format' )
-			->will( $this->returnCallback( array( $this, 'formatValue' ) ) );
+			->will( $this->returnCallback( [ $this, 'formatValue' ] ) );
 		$valueFormatter->expects( $this->any() )->method( 'getFormat' )
 			->will( $this->returnValue( SnakFormatter::FORMAT_PLAIN ) );
 
 		$snakFormatter = $this->getMock( SnakFormatter::class );
 		$snakFormatter->expects( $this->any() )->method( 'formatSnak' )
-			->will( $this->returnCallback( array( $this, 'formatSnak' ) ) );
+			->will( $this->returnCallback( [ $this, 'formatSnak' ] ) );
 		$snakFormatter->expects( $this->any() )->method( 'getFormat' )
 			->will( $this->returnValue( SnakFormatter::FORMAT_PLAIN ) );
 
@@ -123,7 +123,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 		$summary->setLanguage( $language );
 
 		if ( !empty( $parts ) ) {
-			call_user_func_array( array( $summary, 'addAutoCommentArgs' ), $parts );
+			call_user_func_array( [ $summary, 'addAutoCommentArgs' ], $parts );
 		}
 
 		$formatter = $this->newFormatter();
@@ -137,68 +137,68 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 		$q5Value = new EntityIdValue( $q5 );
 		$p20q5Snak = new PropertyValueSnak( $p20, $q5Value );
 
-		return array(
-			'empty' => array(
+		return [
+			'empty' => [
 				'', '', '',
-				array(),
+				[],
 				':0|'
-			),
-			'no args' => array(
+			],
+			'no args' => [
 				'foo', 'testing', 'en',
-				array(),
+				[],
 				'foo-testing:0|en'
-			),
-			'one arg' => array(
+			],
+			'one arg' => [
 				'foo', 'testing', 'en',
-				array( 'one' ),
+				[ 'one' ],
 				'foo-testing:0|en|one'
-			),
-			'two args (no action)' => array(
+			],
+			'two args (no action)' => [
 				'foo', '', 'en',
-				array( 'one', 'two' ),
+				[ 'one', 'two' ],
 				'foo:0|en|one|two'
-			),
-			'args contains array (no module)' => array(
+			],
+			'args contains array (no module)' => [
 				'', 'testing', 'en',
-				array( array( 'one', 'two' ) ),
+				[ [ 'one', 'two' ] ],
 				'testing:0|en|one|two'
-			),
-			'args contains map (no module)' => array(
+			],
+			'args contains map (no module)' => [
 				'', 'testing', 'en',
-				array( array( array( 'one' => 1, 'two' => 2 ) ) ),
+				[ [ [ 'one' => 1, 'two' => 2 ] ] ],
 				'testing:0|en|one: 1, two: 2'
-			),
-			'empty arg' => array(
+			],
+			'empty arg' => [
 				'foo', 'testing', 'en',
-				array( 'one', '', 'three' ),
+				[ 'one', '', 'three' ],
 				'foo-testing:0|en|one||three'
-			),
-			'number' => array(
+			],
+			'number' => [
 				'foo', 'testing', 'en',
-				array( 23 ),
+				[ 23 ],
 				'foo-testing:0|en|23'
-			),
-			'EntityId' => array(
+			],
+			'EntityId' => [
 				'foo', 'testing', 'en',
-				array( $q5 ),
+				[ $q5 ],
 				'foo-testing:0|en|[[item:Q5]]'
-			),
-			'DataValue' => array(
+			],
+			'DataValue' => [
 				'foo', 'testing', 'en',
-				array( $q5Value ),
+				[ $q5Value ],
 				'foo-testing:0|en|[[item:Q5]]'
-			),
-			'Snak' => array(
+			],
+			'Snak' => [
 				'foo', 'testing', 'en',
-				array( $p20q5Snak ),
+				[ $p20q5Snak ],
 				'foo-testing:0|en|[[item:Q5]]'
-			),
-			'property-item-map' => array(
+			],
+			'property-item-map' => [
 				'', 'testing', 'en',
-				array( array( array( 'P17' => new ItemId( "Q2" ) ) ) ),
+				[ [ [ 'P17' => new ItemId( "Q2" ) ] ] ],
 				'testing:0|en|[[property:P17]]: [[item:Q2]]'
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -219,20 +219,20 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 		$q5Value = new EntityIdValue( $q5 );
 		$p20q5Snak = new PropertyValueSnak( $p20, $q5Value );
 
-		return array(
-			'empty' => array( array(), '' ),
-			'no args' => array( array(), '' ),
-			'one arg' => array( array( 'one' ), 'one' ),
-			'two args' => array( array( 'one', 'two' ), 'one, two' ),
-			'args contains array' => array( array( array( 'one', 'two' ) ), 'one, two' ),
-			'args contains map' => array( array( array( array( 'one' => 1, 'two' => 2 ) ) ), 'one: 1, two: 2' ),
-			'empty arg' => array( array( 'one', '' ), 'one' ),
-			'number' => array( array( 23 ), '23' ),
-			'EntityId' => array( array( $q5 ), '[[item:Q5]]' ),
-			'DataValue' => array( array( $q5Value ), '[[item:Q5]]' ),
-			'Snak' => array( array( $p20q5Snak ), '[[item:Q5]]' ),
-			'property-item-map' => array( array( array( array( 'P17' => new ItemId( "Q2" ) ) ) ), '[[property:P17]]: [[item:Q2]]' ),
-		);
+		return [
+			'empty' => [ [], '' ],
+			'no args' => [ [], '' ],
+			'one arg' => [ [ 'one' ], 'one' ],
+			'two args' => [ [ 'one', 'two' ], 'one, two' ],
+			'args contains array' => [ [ [ 'one', 'two' ] ], 'one, two' ],
+			'args contains map' => [ [ [ [ 'one' => 1, 'two' => 2 ] ] ], 'one: 1, two: 2' ],
+			'empty arg' => [ [ 'one', '' ], 'one' ],
+			'number' => [ [ 23 ], '23' ],
+			'EntityId' => [ [ $q5 ], '[[item:Q5]]' ],
+			'DataValue' => [ [ $q5Value ], '[[item:Q5]]' ],
+			'Snak' => [ [ $p20q5Snak ], '[[item:Q5]]' ],
+			'property-item-map' => [ [ [ [ 'P17' => new ItemId( "Q2" ) ] ] ], '[[property:P17]]: [[item:Q2]]' ],
+		];
 	}
 
 	/**
@@ -248,53 +248,53 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 	}
 
 	public function provideToStringArgs() {
-		return array(
-			array(
-				array(),
-				array(),
+		return [
+			[
+				[],
+				[],
 				'/* foobar:0| */'
-			),
-			array(
-				array( '' ),
-				array( 'This is a test…' ),
+			],
+			[
+				[ '' ],
+				[ 'This is a test…' ],
 				'/* foobar:1|| */ This is a test…'
-			),
-			array(
-				array( 'one' ),
-				array( 'This is a test…' ),
+			],
+			[
+				[ 'one' ],
+				[ 'This is a test…' ],
 				'/* foobar:1||one */ This is a test…'
-			),
-			array(
-				array( 'one', 'two' ),
-				array( 'This is a test…' ),
+			],
+			[
+				[ 'one', 'two' ],
+				[ 'This is a test…' ],
 				'/* foobar:1||one|two */ This is a test…'
-			),
-			array(
-				array( 'one', 'two', 'three' ),
-				array( 'This is a test…' ),
+			],
+			[
+				[ 'one', 'two', 'three' ],
+				[ 'This is a test…' ],
 				'/* foobar:1||one|two|three */ This is a test…'
-			),
-			array(
-				array( 'one', 'two', 'three', '…' ),
-				array( 'This is a test…' ),
+			],
+			[
+				[ 'one', 'two', 'three', '…' ],
+				[ 'This is a test…' ],
 				'/* foobar:1||one|two|three|… */ This is a test…'
-			),
-			array(
-				array( 'one', 'two', 'three', '<>' ),
-				array( 'This is a test…' ),
+			],
+			[
+				[ 'one', 'two', 'three', '<>' ],
+				[ 'This is a test…' ],
 				'/* foobar:1||one|two|three|<> */ This is a test…'
-			),
-			array(
-				array( 'one', 'two', 'three', '&lt;&gt;' ),
-				array( 'This is a test…' ),
+			],
+			[
+				[ 'one', 'two', 'three', '&lt;&gt;' ],
+				[ 'This is a test…' ],
 				'/* foobar:1||one|two|three|&lt;&gt; */ This is a test…'
-			),
-			array(
-				array(),
-				array( str_repeat( 'a', 2 * SUMMARY_MAX_LENGTH ) ),
+			],
+			[
+				[],
+				[ str_repeat( 'a', 2 * SUMMARY_MAX_LENGTH ) ],
 				'/* foobar:1| */ ' . str_repeat( 'a', SUMMARY_MAX_LENGTH - 19 ) . '...'
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -312,11 +312,11 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 		}
 
 		if ( $commentArgs ) {
-			call_user_func_array( array( $summary, 'addAutoCommentArgs' ), $commentArgs );
+			call_user_func_array( [ $summary, 'addAutoCommentArgs' ], $commentArgs );
 		}
 
 		if ( $summaryArgs ) {
-			call_user_func_array( array( $summary, 'addAutoSummaryArgs' ), $summaryArgs );
+			call_user_func_array( [ $summary, 'addAutoSummaryArgs' ], $summaryArgs );
 		}
 
 		if ( $userSummary !== null ) {
@@ -328,8 +328,8 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 	}
 
 	public function provideFormatSummary() {
-		return array(
-			array( // #0
+		return [
+			[ // #0
 				'summarytest',
 				null,
 				null,
@@ -337,8 +337,8 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				null,
 				null,
 				'/* summarytest:0| */'
-			),
-			array( // #1
+			],
+			[ // #1
 				'summarytest',
 				'testing',
 				'nl',
@@ -346,53 +346,53 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				null,
 				null,
 				'/* summarytest-testing:0|nl */'
-			),
-			array( // #2
+			],
+			[ // #2
 				'summarytest',
 				null,
 				null,
-				array( 'x' ),
+				[ 'x' ],
 				null,
 				null,
 				'/* summarytest:0||x */'
-			),
-			array( // #3
+			],
+			[ // #3
 				'summarytest',
 				'testing',
 				'nl',
-				array( 'x', 'y' ),
-				array( 'A', 'B' ),
+				[ 'x', 'y' ],
+				[ 'A', 'B' ],
 				null,
 				'/* summarytest-testing:2|nl|x|y */ A, B'
-			),
-			array( // #4
+			],
+			[ // #4
 				'summarytest',
 				null,
 				null,
 				null,
-				array( 'A', 'B' ),
+				[ 'A', 'B' ],
 				null,
 				'/* summarytest:2| */ A, B'
-			),
-			'User summary overrides arguments' => array(
+			],
+			'User summary overrides arguments' => [
 				'summarytest',
 				'testing',
 				'nl',
-				array( 'x', 'y' ),
-				array( 'A', 'B' ),
+				[ 'x', 'y' ],
+				[ 'A', 'B' ],
 				'can I haz world domination?',
 				'/* summarytest-testing:2|nl|x|y */ A, B, can I haz world domination?'
-			),
-			'Trimming' => array(
+			],
+			'Trimming' => [
 				'summarytest',
 				'testing',
 				'de',
-				array( ' autoArg0 ', ' autoArg1 ' ),
-				array( ' userArg0 ', ' userArg1 ' ),
+				[ ' autoArg0 ', ' autoArg1 ' ],
+				[ ' userArg0 ', ' userArg1 ' ],
 				' userSummary ',
 				'/* summarytest-testing:2|de| autoArg0 | autoArg1 */ userArg0 ,  userArg1, userSummary'
-			),
-			'User summary only' => array(
+			],
+			'User summary only' => [
 				'summarytest',
 				null,
 				null,
@@ -400,44 +400,44 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				null,
 				'can I haz world domination?',
 				'/* summarytest:0| */ can I haz world domination?'
-			),
-			'User summary w/o arguments' => array(
+			],
+			'User summary w/o arguments' => [
 				'summarytest',
 				'testing',
 				'de',
-				array( 'autoArg0', 'autoArg1' ),
+				[ 'autoArg0', 'autoArg1' ],
 				null,
 				'userSummary',
 				'/* summarytest-testing:0|de|autoArg0|autoArg1 */ userSummary'
-			),
-			'User summary w/o auto comment arguments' => array(
+			],
+			'User summary w/o auto comment arguments' => [
 				'summarytest',
 				'testing',
 				'de',
 				null,
-				array( 'userArg0', 'userArg1' ),
+				[ 'userArg0', 'userArg1' ],
 				'userSummary',
 				'/* summarytest-testing:2|de */ userArg0, userArg1, userSummary'
-			),
-			'Array arguments' => array(
+			],
+			'Array arguments' => [
 				'summarytest',
 				'testing',
 				'nl',
-				array( 'x', array( 1, 2, 3 ) ),
-				array( 'A', array( 1, 2, 3 ) ),
+				[ 'x', [ 1, 2, 3 ] ],
+				[ 'A', [ 1, 2, 3 ] ],
 				null,
 				'/* summarytest-testing:2|nl|x|1, 2, 3 */ A, 1, 2, 3'
-			),
-			'Associative arguments' => array(
+			],
+			'Associative arguments' => [
 				'summarytest',
 				'testing',
 				'nl',
-				array( 'x', array( "foo" => 1, "bar" => 2 ) ),
-				array( 'A', array( "foo" => 1, "bar" => 2 ) ),
+				[ 'x', [ "foo" => 1, "bar" => 2 ] ],
+				[ 'A', [ "foo" => 1, "bar" => 2 ] ],
 				null,
 				'/* summarytest-testing:2|nl|x|foo: 1, bar: 2 */ A, foo: 1, bar: 2'
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -465,72 +465,72 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 	}
 
 	public function providerOnFormat() {
-		return array( //@todo: test other types of entities too!
-			array(
+		return [ //@todo: test other types of entities too!
+			[
 				'item',
 				"wikibase-item",
 				false, '', false,
 				'Title',
 				false,
 				null
-			),
-			array(
+			],
+			[
 				'item',
 				"wikibase-item",
 				false, '', false,
 				'Title',
 				false,
 				null
-			),
-			array(
+			],
+			[
 				'item',
 				"wikibase-item",
 				true, 'wbeditentity', true,
 				'Title',
 				false,
 				'!<span dir="auto"><span class="autocomment">.*?: </span></span>!'
-			),
-			array(
+			],
+			[
 				'item',
 				"wikibase-item",
 				true, 'wbsetlabel-set:1|en', true,
 				'Title',
 				false,
 				'!<span dir="auto"><span class="autocomment">.*?\[en\].*?: </span></span>!'
-			),
-			array(
+			],
+			[
 				'item',
 				"wikibase-item",
 				false, 'wbsetlabel-set:1|<>', false,
 				'Title',
 				false,
 				'!<span dir="auto"><span class="autocomment">.*?\[&lt;&gt;\].*?</span></span>!'
-			),
-			array(
+			],
+			[
 				'item',
 				"wikibase-item",
 				false, 'wbsetlabel-set:1|&lt;&gt;', false,
 				'Title',
 				false,
 				'!<span dir="auto"><span class="autocomment">.*?\[&lt;&gt;\].*?</span></span>!'
-			),
-			array(
+			],
+			[
 				'item',
 				"wikibase-item",
 				false, 'wbsetlabel-set:1|&', false,
 				'Title',
 				false,
 				'!<span dir="auto"><span class="autocomment">.*?\[&amp;\].*?</span></span>!'
-			),
-			array(
+			],
+			[
 				'item',
 				"wikibase-item",
 				false, 'wbsetlabel-set:1|…', false,
 				'Title',
 				false,
 				'!<span dir="auto"><span class="autocomment">.*?\[…\].*?</span></span>!'
-			)
-		);
+			]
+		];
 	}
 
 }

@@ -48,7 +48,7 @@ class ValueSnakRdfBuilderFactoryTest extends PHPUnit_Framework_TestCase {
 			$flags, $vocab, $writer, $tracker, $dedupe, $called
 		);
 
-		$factory = new ValueSnakRdfBuilderFactory( array( 'PT:test' => $constructor ) );
+		$factory = new ValueSnakRdfBuilderFactory( [ 'PT:test' => $constructor ] );
 		$factory->getValueSnakRdfBuilder( $flags, $vocab, $writer, $tracker, $dedupe );
 		$this->assertTrue( $called );
 	}

@@ -45,44 +45,44 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	}
 
 	public function projectLinkSidebarProvider() {
-		$wiktionaryLink = array(
+		$wiktionaryLink = [
 			'msg' => 'wikibase-otherprojects-wiktionary',
 			'class' => 'wb-otherproject-link wb-otherproject-wiktionary',
 			'href' => 'https://en.wiktionary.org/wiki/Nyan_Cat',
 			'hreflang' => 'en'
-		);
-		$wikiquoteLink = array(
+		];
+		$wikiquoteLink = [
 			'msg' => 'wikibase-otherprojects-wikiquote',
 			'class' => 'wb-otherproject-link wb-otherproject-wikiquote',
 			'href' => 'https://en.wikiquote.org/wiki/Nyan_Cat',
 			'hreflang' => 'en'
-		);
-		$wikipediaLink = array(
+		];
+		$wikipediaLink = [
 			'msg' => 'wikibase-otherprojects-wikipedia',
 			'class' => 'wb-otherproject-link wb-otherproject-wikipedia',
 			'href' => 'https://en.wikipedia.org/wiki/Nyan_Cat',
 			'hreflang' => 'en'
-		);
+		];
 
-		return array(
-			array(
-				array(),
-				array()
-			),
-			array(
-				array( 'spam', 'spam2' ),
-				array()
-			),
-			array(
-				array( 'enwiktionary' ),
-				array( $wiktionaryLink )
-			),
-			array(
+		return [
+			[
+				[],
+				[]
+			],
+			[
+				[ 'spam', 'spam2' ],
+				[]
+			],
+			[
+				[ 'enwiktionary' ],
+				[ $wiktionaryLink ]
+			],
+			[
 				// Make sure results are sorted alphabetically by their group names
-				array( 'enwiktionary', 'enwiki', 'enwikiquote' ),
-				array( $wikipediaLink, $wikiquoteLink, $wiktionaryLink )
-			)
-		);
+				[ 'enwiktionary', 'enwiki', 'enwikiquote' ],
+				[ $wikipediaLink, $wikiquoteLink, $wiktionaryLink ]
+			]
+		];
 	}
 
 	/**
@@ -111,9 +111,9 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 		array $result,
 		$suppressErrors = false
 	) {
-		$this->mergeMwGlobalArrayValue( 'wgHooks', array(
-			'WikibaseClientOtherProjectsSidebar' => array( $handler ),
-		) );
+		$this->mergeMwGlobalArrayValue( 'wgHooks', [
+			'WikibaseClientOtherProjectsSidebar' => [ $handler ],
+		] );
 
 		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
 			'enwiki',
@@ -136,55 +136,55 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	}
 
 	public function projectLinkSidebarHookProvider() {
-		$wiktionaryLink = array(
+		$wiktionaryLink = [
 			'msg' => 'wikibase-otherprojects-wiktionary',
 			'class' => 'wb-otherproject-link wb-otherproject-wiktionary',
 			'href' => 'https://en.wiktionary.org/wiki/Nyan_Cat',
 			'hreflang' => 'en'
-		);
-		$wikiquoteLink = array(
+		];
+		$wikiquoteLink = [
 			'msg' => 'wikibase-otherprojects-wikiquote',
 			'class' => 'wb-otherproject-link wb-otherproject-wikiquote',
 			'href' => 'https://en.wikiquote.org/wiki/Nyan_Cat',
 			'hreflang' => 'en'
-		);
-		$wikipediaLink = array(
+		];
+		$wikipediaLink = [
 			'msg' => 'wikibase-otherprojects-wikipedia',
 			'class' => 'wb-otherproject-link wb-otherproject-wikipedia',
 			'href' => 'https://en.wikipedia.org/wiki/Nyan_Cat',
 			'hreflang' => 'en'
-		);
-		$changedWikipedaLink = array(
+		];
+		$changedWikipedaLink = [
 			'msg' => 'wikibase-otherprojects-wikipedia',
 			'class' => 'wb-otherproject-link wb-otherproject-wikipedia',
 			'href' => 'https://en.wikipedia.org/wiki/Cat',
 			'hreflang' => 'en'
-		);
+		];
 
-		return array(
-			'Noop hook, gets the right data' => array(
+		return [
+			'Noop hook, gets the right data' => [
 				function( ItemId $itemId, array &$sidebar ) use ( $wikipediaLink, $wikiquoteLink, $wiktionaryLink ) {
 					$this->assertSame(
-						array(
-							'wikiquote' => array( 'enwikiquote' => $wikiquoteLink ),
-							'wikipedia' => array( 'enwiki' => $wikipediaLink ),
-							'wiktionary' => array( 'enwiktionary' => $wiktionaryLink )
-						),
+						[
+							'wikiquote' => [ 'enwikiquote' => $wikiquoteLink ],
+							'wikipedia' => [ 'enwiki' => $wikipediaLink ],
+							'wiktionary' => [ 'enwiktionary' => $wiktionaryLink ]
+						],
 						$sidebar
 					);
 					$this->assertSame( 'Q123', $itemId->getSerialization() );
 				},
-				array( 'enwiktionary', 'enwiki', 'enwikiquote' ),
-				array( $wikipediaLink, $wikiquoteLink, $wiktionaryLink )
-			),
-			'Hook changes enwiki link' => array(
+				[ 'enwiktionary', 'enwiki', 'enwikiquote' ],
+				[ $wikipediaLink, $wikiquoteLink, $wiktionaryLink ]
+			],
+			'Hook changes enwiki link' => [
 				function( ItemId $itemId, array &$sidebar ) use ( $changedWikipedaLink ) {
 					$sidebar['wikipedia']['enwiki']['href'] = $changedWikipedaLink['href'];
 				},
-				array( 'enwiktionary', 'enwiki', 'enwikiquote' ),
-				array( $changedWikipedaLink, $wikiquoteLink, $wiktionaryLink )
-			),
-			'Hook inserts enwiki link' => array(
+				[ 'enwiktionary', 'enwiki', 'enwikiquote' ],
+				[ $changedWikipedaLink, $wikiquoteLink, $wiktionaryLink ]
+			],
+			'Hook inserts enwiki link' => [
 				function( ItemId $itemId, array &$sidebar ) use ( $changedWikipedaLink ) {
 					$this->assertFalse(
 						isset( $sidebar['wikipedia'] ),
@@ -193,52 +193,52 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 
 					$sidebar['wikipedia']['enwiki'] = $changedWikipedaLink;
 				},
-				array( 'enwiktionary', 'enwikiquote' ),
-				array( $changedWikipedaLink, $wikiquoteLink, $wiktionaryLink )
-			),
-			'Invalid hook #1, original data is being used' => array(
+				[ 'enwiktionary', 'enwikiquote' ],
+				[ $changedWikipedaLink, $wikiquoteLink, $wiktionaryLink ]
+			],
+			'Invalid hook #1, original data is being used' => [
 				function( ItemId $itemId, array &$sidebar ) {
 					$sidebar = null;
 				},
-				array( 'enwiktionary', 'enwiki', 'enwikiquote' ),
-				array( $wikipediaLink, $wikiquoteLink, $wiktionaryLink ),
+				[ 'enwiktionary', 'enwiki', 'enwikiquote' ],
+				[ $wikipediaLink, $wikiquoteLink, $wiktionaryLink ],
 				true
-			),
-			'Invalid hook #2, original data is being used' => array(
+			],
+			'Invalid hook #2, original data is being used' => [
 				function( ItemId $itemId, array &$sidebar ) {
-					$sidebar[0]['msg'] = array();
+					$sidebar[0]['msg'] = [];
 				},
-				array( 'enwiktionary', 'enwiki', 'enwikiquote' ),
-				array( $wikipediaLink, $wikiquoteLink, $wiktionaryLink ),
+				[ 'enwiktionary', 'enwiki', 'enwikiquote' ],
+				[ $wikipediaLink, $wikiquoteLink, $wiktionaryLink ],
 				true
-			),
-			'Invalid hook #3, original data is being used' => array(
+			],
+			'Invalid hook #3, original data is being used' => [
 				function( ItemId $itemId, array &$sidebar ) use ( $changedWikipedaLink ) {
 					$sidebar['wikipedia']['enwiki']['href'] = 1.2;
 				},
-				array( 'enwiktionary', 'enwiki', 'enwikiquote' ),
-				array( $wikipediaLink, $wikiquoteLink, $wiktionaryLink ),
+				[ 'enwiktionary', 'enwiki', 'enwikiquote' ],
+				[ $wikipediaLink, $wikiquoteLink, $wiktionaryLink ],
 				true
-			),
-			'Invalid hook #4, original data is being used' => array(
+			],
+			'Invalid hook #4, original data is being used' => [
 				function( ItemId $itemId, array &$sidebar ) use ( $changedWikipedaLink ) {
 					$sidebar['wikipedia'][] = $changedWikipedaLink;
 				},
-				array( 'enwiktionary', 'enwiki', 'enwikiquote' ),
-				array( $wikipediaLink, $wikiquoteLink, $wiktionaryLink ),
+				[ 'enwiktionary', 'enwiki', 'enwikiquote' ],
+				[ $wikipediaLink, $wikiquoteLink, $wiktionaryLink ],
 				true
-			),
-		);
+			],
+		];
 	}
 
 	public function testBuildProjectLinkSidebar_hookNotCalledIfPageNotConnected() {
-		$this->mergeMwGlobalArrayValue( 'wgHooks', array(
-			'WikibaseClientOtherProjectsSidebar' => array(
+		$this->mergeMwGlobalArrayValue( 'wgHooks', [
+			'WikibaseClientOtherProjectsSidebar' => [
 				function () {
 					$this->fail( 'Should not get called.' );
 				},
-			),
-		) );
+			],
+		] );
 
 		$lookup = $this->getMock( SiteLinkLookup::class );
 		$lookup->expects( $this->any() )
@@ -249,11 +249,11 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			'enwiki',
 			$lookup,
 			$this->getSiteStore(),
-			array( 'enwiki' )
+			[ 'enwiki' ]
 		);
 
 		$this->assertSame(
-			array(),
+			[],
 			$otherProjectSidebarGenerator->buildProjectLinkSidebar( Title::makeTitle( NS_MAIN, 'Nyan Cat' ) )
 		);
 	}
@@ -261,25 +261,25 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	public function testBuildProjectLinkSidebar_hookCalledWithEmptySidebar() {
 		$called = false;
 
-		$this->mergeMwGlobalArrayValue( 'wgHooks', array(
-			'WikibaseClientOtherProjectsSidebar' => array(
+		$this->mergeMwGlobalArrayValue( 'wgHooks', [
+			'WikibaseClientOtherProjectsSidebar' => [
 				function ( ItemId $itemId, $sidebar ) use ( &$called ) {
 					$this->assertSame( 'Q123', $itemId->getSerialization() );
-					$this->assertSame( array(), $sidebar );
+					$this->assertSame( [], $sidebar );
 					$called = true;
 				},
-			),
-		) );
+			],
+		] );
 
 		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
 			'enwiki',
 			$this->getSiteLinkLookup(),
 			$this->getSiteStore(),
-			array( 'unknown-site' )
+			[ 'unknown-site' ]
 		);
 
 		$this->assertSame(
-			array(),
+			[],
 			$otherProjectSidebarGenerator->buildProjectLinkSidebar( Title::makeTitle( NS_MAIN, 'Nyan Cat' ) )
 		);
 		$this->assertTrue( $called, 'Hook needs to be called' );
@@ -315,11 +315,11 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 		$lookup->expects( $this->any() )
 			->method( 'getSiteLinksForItem' )
 			->with( $Q123 )
-			->will( $this->returnValue( array(
+			->will( $this->returnValue( [
 				new SiteLink( 'enwikiquote', 'Nyan Cat' ),
 				new SiteLink( 'enwiki', 'Nyan Cat' ),
 				new SiteLink( 'enwiktionary', 'Nyan Cat' )
-			) ) );
+			] ) );
 
 		return $lookup;
 	}

@@ -28,16 +28,16 @@ use Wikibase\Repo\WikibaseRepo;
 class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 
 	private function initProperties() {
-		$infos = array(
-			array( PropertyInfoStore::KEY_DATA_TYPE => 'string', 'test' => 'one' ),
-			array( PropertyInfoStore::KEY_DATA_TYPE => 'string', 'test' => 'two', PropertyInfoStore::KEY_FORMATTER_URL => 'foo' ),
-			array( PropertyInfoStore::KEY_DATA_TYPE => 'time', 'test' => 'three' ),
-			array( PropertyInfoStore::KEY_DATA_TYPE => 'time', 'test' => 'four' ),
-			array( PropertyInfoStore::KEY_DATA_TYPE => 'string', 'test' => 'five', PropertyInfoStore::KEY_FORMATTER_URL => 'bar' ),
-		);
+		$infos = [
+			[ PropertyInfoStore::KEY_DATA_TYPE => 'string', 'test' => 'one' ],
+			[ PropertyInfoStore::KEY_DATA_TYPE => 'string', 'test' => 'two', PropertyInfoStore::KEY_FORMATTER_URL => 'foo' ],
+			[ PropertyInfoStore::KEY_DATA_TYPE => 'time', 'test' => 'three' ],
+			[ PropertyInfoStore::KEY_DATA_TYPE => 'time', 'test' => 'four' ],
+			[ PropertyInfoStore::KEY_DATA_TYPE => 'string', 'test' => 'five', PropertyInfoStore::KEY_FORMATTER_URL => 'bar' ],
+		];
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$properties = array();
+		$properties = [];
 
 		foreach ( $infos as $info ) {
 			$property = Property::newFromType( $info[PropertyInfoStore::KEY_DATA_TYPE] );

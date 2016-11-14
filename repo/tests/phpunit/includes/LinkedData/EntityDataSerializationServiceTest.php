@@ -130,77 +130,77 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 		$q2233 = new ItemId( 'Q2233' );
 		$q222333 = new ItemId( 'Q222333' );
 
-		return array(
-			'Q42.json' => array(
+		return [
+			'Q42.json' => [
 				'json', // format
 				$entityRevQ42, // entityRev
 				null, // redirect
-				array(), // incoming
+				[], // incoming
 				null, // flavor
-				array( // output regex
+				[ // output regex
 					'start' => '!^\s*\{!s',
 					'end' => '!\}\s*$!s',
 					'label' => '!"value"\s*:\s*"Label42"!s',
 					'item-ref' => '!"numeric-id":2233!s',
-				),
-				array(),
+				],
+				[],
 				'application/json', // expected mime
-			),
+			],
 
-			'Q42.rdf' => array(
+			'Q42.rdf' => [
 				'rdfxml', // format
 				$entityRevQ42, // entityRev
 				null, // redirect
-				array(), // incoming
+				[], // incoming
 				null, // flavor
-				array( // output regex
+				[ // output regex
 					'start' => '!^<\?xml!s',
 					'end' => '!</rdf:RDF>\s*$!s',
 					'about' => '!rdf:about="http://acme.test/Q42"!s',
 					'label' => '!>Label42<!s',
-				),
-				array(),
+				],
+				[],
 				'application/rdf+xml', // expected mime
-			),
+			],
 
-			'Q42.ttl' => array(
+			'Q42.ttl' => [
 				'turtle', // format
 				$entityRevQ42, // entityRev
 				null, // redirect
-				array(), // incoming
+				[], // incoming
 				null, // flavor
-				array( // output regex
+				[ // output regex
 					'start' => '!^\s*@prefix !s',
 					'end' => '!\.\s*$!s',
 					'label' => '!"Label42"@en!s',
-				),
-				array(),
+				],
+				[],
 				'text/turtle', // expected mime
-			),
+			],
 
-			'Q42.nt' => array(
+			'Q42.nt' => [
 				'ntriples', // format
 				$entityRevQ42, // entityRev
 				null, // redirect
-				array(), // incoming
+				[], // incoming
 				null, // flavor
-				array( // output regex
+				[ // output regex
 					'data about' => '!<http://data\.acme\.test/Q42> *<http://schema\.org/about> '
 						. '*<http://acme\.test/Q42> *\.!s',
 					'label' => '!<http://acme\.test/Q42> '
 						. '*<http://www\.w3\.org/2000/01/rdf-schema#label> *"Label42"@en *\.!s',
-				),
-				array(),
+				],
+				[],
 				'application/n-triples', // expected mime
-			),
+			],
 
-			'Q42.nt?flavor=full' => array(
+			'Q42.nt?flavor=full' => [
 				'ntriples', // format
 				$entityRevQ42, // entityRev
 				null, // redirect
-				array(), // incoming
+				[], // incoming
 				'full', // flavor
-				array( // output regex
+				[ // output regex
 					'data about' => '!<http://data\.acme\.test/Q42> *<http://schema\.org/about> '
 						. '*<http://acme\.test/Q42> *\.!s',
 					'label Q42' => '!<http://acme\.test/Q42> '
@@ -214,22 +214,22 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 					'redirect Q2233' => '!<http://acme\.test/Q2233> '
 						. '*<http://www\.w3\.org/2002/07/owl#sameAs> '
 						. '*<http://acme\.test/Q23> *\.!s',
-				),
-				array(
+				],
+				[
 					'redirect Q222333' => '!<http://acme\.test/Q222333> '
 						. '*<http://www\.w3\.org/2002/07/owl#sameAs> '
 						. '*<http://acme\.test/Q23> *\.!s',
-				),
+				],
 				'application/n-triples', // expected mime
-			),
+			],
 
-			'Q2233.nt' => array(
+			'Q2233.nt' => [
 				'ntriples', // format
 				$entityRevQ23, // entityRev
 				$entityRedirQ2233, // redirect
-				array( $q2233, $q222333 ), // incoming
+				[ $q2233, $q222333 ], // incoming
 				null, // flavor
-				array( // output regex
+				[ // output regex
 					'data about' => '!<http://data\.acme\.test/Q23> *<http://schema\.org/about> '
 						. '*<http://acme\.test/Q23> *\.!s',
 					'label Q23' => '!<http://acme\.test/Q23> '
@@ -240,23 +240,23 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 					'redirect Q222333' => '!<http://acme\.test/Q222333> '
 						. '*<http://www\.w3\.org/2002/07/owl#sameAs> '
 						. '*<http://acme\.test/Q23> *\.!s',
-				),
-				array(),
+				],
+				[],
 				'application/n-triples', // expected mime
-			),
+			],
 
-			'Q2233.nt?flavor=dump' => array(
+			'Q2233.nt?flavor=dump' => [
 				'ntriples', // format
 				$entityRevQ23, // entityRev
 				$entityRedirQ2233, // redirect
-				array( $q2233, $q222333 ), // incoming
+				[ $q2233, $q222333 ], // incoming
 				'dump', // flavor
-				array( // output regex
+				[ // output regex
 					'redirect Q2233' => '!<http://acme\.test/Q2233> '
 						. '*<http://www\.w3\.org/2002/07/owl#sameAs> '
 						. '*<http://acme\.test/Q23> *\.!s',
-				),
-				array(
+				],
+				[
 					'data about' => '!<http://data\.acme\.test/Q23> *<http://schema\.org/about> '
 						. '*<http://acme\.test/Q23> *\.!s',
 					'label Q23' => '!<http://acme\.test/Q23> '
@@ -264,17 +264,17 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 					'redirect Q222333' => '!<http://acme\.test/Q222333> '
 						. '*<http://www\.w3\.org/2002/07/owl#sameAs> '
 						. '*<http://acme\.test/Q23> *\.!s',
-				),
+				],
 				'application/n-triples', // expected mime
-			),
+			],
 
-			'Q23.nt' => array(
+			'Q23.nt' => [
 				'ntriples', // format
 				$entityRevQ23, // entityRev
 				null, // redirect
-				array( $q2233, $q222333 ), // incoming
+				[ $q2233, $q222333 ], // incoming
 				null, // flavor
-				array( // output regex
+				[ // output regex
 					'data about' => '!<http://data\.acme\.test/Q23> *<http://schema\.org/about> '
 						. '*<http://acme\.test/Q23> *\.!s',
 					'label Q23' => '!<http://acme\.test/Q23> '
@@ -285,35 +285,35 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 					'redirect Q222333' => '!<http://acme\.test/Q222333> '
 						. '*<http://www\.w3\.org/2002/07/owl#sameAs> '
 						. '*<http://acme\.test/Q23> *\.!s',
-				),
-				array(
-				),
+				],
+				[
+				],
 				'application/n-triples', // expected mime
-			),
+			],
 
-			'Q23.nt?flavor=dump' => array(
+			'Q23.nt?flavor=dump' => [
 				'ntriples', // format
 				$entityRevQ23, // entityRev
 				null, // redirect
-				array( $q2233, $q222333 ), // incoming
+				[ $q2233, $q222333 ], // incoming
 				'dump', // flavor
-				array( // output regex
+				[ // output regex
 					'data about' => '!<http://data\.acme\.test/Q23> *<http://schema\.org/about> '
 						. '*<http://acme\.test/Q23> *\.!s',
 					'label Q23' => '!<http://acme\.test/Q23> '
 						. '*<http://www\.w3\.org/2000/01/rdf-schema#label> *"Label23"@en *\.!s',
-				),
-				array(
+				],
+				[
 					'redirect Q2233' => '!<http://acme\.test/Q2233> '
 						. '*<http://www\.w3\.org/2002/07/owl#sameAs> '
 						. '*<http://acme\.test/Q23> *\.!s',
 					'redirect Q222333' => '!<http://acme\.test/Q222333> '
 						. '*<http://www\.w3\.org/2002/07/owl#sameAs> '
 						. '*<http://acme\.test/Q23> *\.!s',
-				),
+				],
 				'application/n-triples', // expected mime
-			),
-		);
+			],
+		];
 	}
 
 	/**

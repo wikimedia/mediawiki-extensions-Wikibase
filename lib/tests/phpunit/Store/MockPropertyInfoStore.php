@@ -22,7 +22,7 @@ class MockPropertyInfoStore implements PropertyInfoStore {
 	 *
 	 * @var array[]
 	 */
-	protected $propertyInfo = array();
+	protected $propertyInfo = [];
 
 	/**
 	 * @see PropertyInfoStore::getPropertyInfo
@@ -56,7 +56,7 @@ class MockPropertyInfoStore implements PropertyInfoStore {
 	 */
 	public function getPropertyInfoForDataType( $dataType ) {
 		$propertyInfo = $this->getAllPropertyInfo();
-		$propertyInfoForDataType = array();
+		$propertyInfoForDataType = [];
 
 		foreach ( $propertyInfo as $id => $info ) {
 			if ( $info[PropertyInfoStore::KEY_DATA_TYPE] === $dataType ) {

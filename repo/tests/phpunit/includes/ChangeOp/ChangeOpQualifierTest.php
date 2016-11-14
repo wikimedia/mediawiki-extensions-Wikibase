@@ -41,7 +41,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 	 * @param array $data
 	 * @param string $dataName
 	 */
-	public function __construct( $name = null, array $data = array(), $dataName = '' ) {
+	public function __construct( $name = null, array $data = [], $dataName = '' ) {
 		parent::__construct( $name, $data, $dataName );
 
 		$this->mockProvider = new ChangeOpTestMockProvider( $this );
@@ -173,7 +173,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		$oldSnak = new PropertyValueSnak( $p11, new StringValue( "old qualifier" ) );
 
 		$snak = new PropertyNoValueSnak( $p11 );
-		$qualifiers = new SnakList( array( $oldSnak ) );
+		$qualifiers = new SnakList( [ $oldSnak ] );
 		$item->getStatements()->addNewStatement( $snak, $qualifiers, null, $goodGuid );
 
 		//NOTE: the mock validator will consider the string "INVALID" to be invalid.
@@ -219,7 +219,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		$oldSnak = new PropertyValueSnak( $p11, new StringValue( "old qualifier" ) );
 
 		$snak = new PropertyNoValueSnak( $p11 );
-		$qualifiers = new SnakList( array( $oldSnak ) );
+		$qualifiers = new SnakList( [ $oldSnak ] );
 		$item->getStatements()->addNewStatement( $snak, $qualifiers, null, $guid );
 
 		//NOTE: the mock validator will consider the string "INVALID" to be invalid.

@@ -46,27 +46,27 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit_Framework_TestCase 
 	public function constructorErrorsProvider() {
 		$stringFormatter = new StringFormatter( new FormatterOptions() );
 
-		return array(
-			'keys must be strings' => array(
-				array( 17 => $stringFormatter ),
+		return [
+			'keys must be strings' => [
+				[ 17 => $stringFormatter ],
 				InvalidArgumentException::class
-			),
-			'builder must be callable' => array(
-				array( 'foo' => 17 ),
+			],
+			'builder must be callable' => [
+				[ 'foo' => 17 ],
 				InvalidArgumentException::class
-			),
-		);
+			],
+		];
 	}
 
 	private function newOutputFormatValueFormatterFactory() {
-		$factoryCallbacks = array(
+		$factoryCallbacks = [
 			'VT:string' => function( $format, FormatterOptions $options ) {
 				return new StringFormatter();
 			},
 			'PT:url' => function( $format, FormatterOptions $options ) {
 				return new StringFormatter();
 			},
-		);
+		];
 
 		return new OutputFormatValueFormatterFactory(
 			$factoryCallbacks,
@@ -90,20 +90,20 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit_Framework_TestCase 
 	}
 
 	public function provideGetValueFormatter() {
-		return array(
-			'plain string' => array(
+		return [
+			'plain string' => [
 				SnakFormatter::FORMAT_PLAIN,
 				new StringValue( '{foo&bar}' ),
 				null,
 				'/^{foo&bar}$/'
-			),
-			'wikitext url' => array(
+			],
+			'wikitext url' => [
 				SnakFormatter::FORMAT_WIKI,
 				new StringValue( 'http://acme.com/?foo&bar' ),
 				'url',
 				'!^http://acme.com/\?foo&bar$!'
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -133,33 +133,33 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit_Framework_TestCase 
 		$languageFallbackFactory = new LanguageFallbackChainFactory();
 		$languageFallback = $languageFallbackFactory->newFromLanguage( Language::factory( 'fr' ) );
 
-		return array(
-			'empty' => array(
-				new FormatterOptions( array() ),
+		return [
+			'empty' => [
+				new FormatterOptions( [] ),
 				'en', // determined in OutputFormatValueFormatterFactoryTest::newBuilder()
 				'en'  // derived from language code
-			),
-			'language code set' => array(
-				new FormatterOptions( array( ValueFormatter::OPT_LANG => 'de' ) ),
+			],
+			'language code set' => [
+				new FormatterOptions( [ ValueFormatter::OPT_LANG => 'de' ] ),
 				'de', // as given
 				'de'  // derived from language code
-			),
-			'language fallback set' => array(
-				new FormatterOptions( array(
+			],
+			'language fallback set' => [
+				new FormatterOptions( [
 					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $languageFallback
-				) ),
+				] ),
 				'en', // default code is taken from the constructor, not the fallback chain
 				'fr'  // as given
-			),
-			'language code and fallback set' => array(
-				new FormatterOptions( array(
+			],
+			'language code and fallback set' => [
+				new FormatterOptions( [
 					ValueFormatter::OPT_LANG => 'de',
 					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $languageFallback
-				) ),
+				] ),
 				'de', // as given
 				'fr'  // as given
-			),
-		);
+			],
+		];
 	}
 
 	public function testSetFormatterFactoryCallback() {

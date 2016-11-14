@@ -304,9 +304,9 @@ class EntityDataRequestHandler {
 			$accept = $parser->parseWeights( $headers['ACCEPT'] );
 		} else {
 			// anything goes
-			$accept = array(
+			$accept = [
 				'*' => 0.1 // just to make extra sure
-			);
+			];
 
 			$defaultFormat = $this->entityDataFormatProvider->getFormatName( $this->defaultFormat );
 			$defaultMime = $this->entityDataFormatProvider->getMimeType( $defaultFormat );
@@ -382,7 +382,7 @@ class EntityDataRequestHandler {
 			throw new HttpError( 500, $msg );
 		}
 
-		return array( $entityRevision, $redirectRevision );
+		return [ $entityRevision, $redirectRevision ];
 	}
 
 	/**
@@ -399,7 +399,7 @@ class EntityDataRequestHandler {
 		} catch ( EntityRedirectLookupException $ex ) {
 			$prefixedId = $id->getSerialization();
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": failed to load incoming redirects of $prefixedId: $ex" );
-			return array();
+			return [];
 		}
 	}
 
@@ -436,7 +436,7 @@ class EntityDataRequestHandler {
 
 		if ( $flavor === 'dump' || $revision > 0 ) {
 			// In dump mode and when fetching a specific revision, don't include incoming redirects.
-			$incomingRedirects = array();
+			$incomingRedirects = [];
 		} else {
 			// Get the incoming redirects of the entity (if we followed a redirect, use the target id).
 			$incomingRedirects = $this->getIncomingRedirects( $entityRevision->getEntity()->getId() );

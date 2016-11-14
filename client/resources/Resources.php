@@ -6,71 +6,71 @@ return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	$moduleTemplate = array(
+	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0],
-	);
+	];
 
-	return array(
-		'wikibase.client.getMwApiForRepo' => $moduleTemplate + array(
-			'scripts' => array(
+	return [
+		'wikibase.client.getMwApiForRepo' => $moduleTemplate + [
+			'scripts' => [
 				'wikibase.client.getMwApiForRepo.js'
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'mw.config.values.wbRepo',
 				'wikibase.api.getLocationAgnosticMwApi',
-			)
-		),
-		'wikibase.client.init' => $moduleTemplate + array(
+			]
+		],
+		'wikibase.client.init' => $moduleTemplate + [
 			'position' => 'top',
-			'skinStyles' => array(
+			'skinStyles' => [
 				'modern' => 'wikibase.client.css',
 				'monobook' => 'wikibase.client.css',
-				'vector' => array(
+				'vector' => [
 					'wikibase.client.css',
 					'wikibase.client.vector.css'
-				)
-			),
-		),
-		'wikibase.client.currentSite' => $moduleTemplate + array(
+				]
+			],
+		],
+		'wikibase.client.currentSite' => $moduleTemplate + [
 			'class' => SiteModule::class
-		),
-		'wikibase.client.page-move' => $moduleTemplate + array(
+		],
+		'wikibase.client.page-move' => $moduleTemplate + [
 			'position' => 'top',
 			'styles' => 'wikibase.client.page-move.css'
-		),
-		'wikibase.client.changeslist.css' => $moduleTemplate + array(
+		],
+		'wikibase.client.changeslist.css' => $moduleTemplate + [
 			'position' => 'top',
 			'styles' => 'wikibase.client.changeslist.css'
-		),
-		'wikibase.client.linkitem.init' => $moduleTemplate + array(
-			'scripts' => array(
+		],
+		'wikibase.client.linkitem.init' => $moduleTemplate + [
+			'scripts' => [
 				'wikibase.client.linkitem.init.js'
-			),
-			'messages' => array(
+			],
+			'messages' => [
 				'unknown-error'
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.spinner',
 				'mediawiki.notify'
-			),
-		),
-		'wikibase.client.PageConnector' => $moduleTemplate + array(
-			'scripts' => array(
+			],
+		],
+		'wikibase.client.PageConnector' => $moduleTemplate + [
+			'scripts' => [
 				'wikibase.client.PageConnector.js'
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.sites'
-			),
-		),
-		'jquery.wikibase.linkitem' => $moduleTemplate + array(
-			'scripts' => array(
+			],
+		],
+		'jquery.wikibase.linkitem' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase/jquery.wikibase.linkitem.js'
-			),
-			'styles' => array(
+			],
+			'styles' => [
 				'jquery.wikibase/jquery.wikibase.linkitem.css'
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.spinner',
 				'jquery.ui.dialog',
 				'jquery.ui.suggester',
@@ -85,8 +85,8 @@ return call_user_func( function() {
 				'wikibase.api.RepoApi',
 				'wikibase.api.RepoApiError',
 				'wikibase.client.PageConnector'
-			),
-			'messages' => array(
+			],
+			'messages' => [
 				'wikibase-error-unexpected',
 				'wikibase-linkitem-alreadylinked',
 				'wikibase-linkitem-title',
@@ -104,8 +104,8 @@ return call_user_func( function() {
 				'wikibase-replicationnote',
 				'wikibase-sitelinks-sitename-columnheading',
 				'wikibase-sitelinks-link-columnheading'
-			),
-		),
+			],
+		],
 		'wikibase.client.action.edit.collapsibleFooter' => $moduleTemplate + [
 			'scripts' => 'wikibase.client.action.edit.collapsibleFooter.js',
 			'dependencies' => [
@@ -114,6 +114,6 @@ return call_user_func( function() {
 				'mediawiki.icon',
 			],
 		]
-	);
+	];
 
 } );

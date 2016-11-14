@@ -71,10 +71,10 @@ class EntityContentDiffView extends DifferenceEngine {
 		$langCode = $this->getLanguage()->getCode();
 
 		//TODO: proper injection
-		$options = new FormatterOptions( array(
+		$options = new FormatterOptions( [
 			//TODO: fallback chain
 			ValueFormatter::OPT_LANG => $langCode
-		) );
+		] );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
@@ -85,7 +85,7 @@ class EntityContentDiffView extends DifferenceEngine {
 		);
 		$labelDescriptionLookup = $labelDescriptionLookupFactory->newLabelDescriptionLookup(
 			$this->getLanguage(),
-			array() // TODO: populate ids of entities to prefetch
+			[] // TODO: populate ids of entities to prefetch
 		);
 
 		$htmlFormatterFactory = $wikibaseRepo->getEntityIdHtmlLinkFormatterFactory();
@@ -157,26 +157,26 @@ class EntityContentDiffView extends DifferenceEngine {
 
 		$title = $rev->getTitle();
 
-		$header = Linker::linkKnown( $title, $header, array(),
-			array( 'oldid' => $rev->getID() ) );
+		$header = Linker::linkKnown( $title, $header, [],
+			[ 'oldid' => $rev->getID() ] );
 
 		if ( $rev->userCan( Revision::DELETED_TEXT, $user ) ) {
 			if ( $title->quickUserCan( 'edit', $user ) && !$rev->isCurrent() ) {
-				$editQuery = array(
+				$editQuery = [
 					'action' => 'edit',
 					'restore' => $rev->getID()
-				);
+				];
 				$msg = $this->msg( 'wikibase-restoreold' )->escaped();
 				$header .= ' ' . $this->msg( 'parentheses' )->rawParams(
-					Linker::linkKnown( $title, $msg, array(), $editQuery )
+					Linker::linkKnown( $title, $msg, [], $editQuery )
 				)->escaped();
 			}
 
 			if ( $rev->isDeleted( Revision::DELETED_TEXT ) ) {
-				$header = Html::rawElement( 'span', array( 'class' => 'history-deleted' ), $header );
+				$header = Html::rawElement( 'span', [ 'class' => 'history-deleted' ], $header );
 			}
 		} else {
-			$header = Html::rawElement( 'span', array( 'class' => 'history-deleted' ), $header );
+			$header = Html::rawElement( 'span', [ 'class' => 'history-deleted' ], $header );
 		}
 
 		return $header;

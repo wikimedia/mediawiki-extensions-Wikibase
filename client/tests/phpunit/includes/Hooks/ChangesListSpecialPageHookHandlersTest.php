@@ -24,37 +24,37 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 
 	public function testOnChangesListSpecialPageFilters() {
 		$user = $this->getUser(
-			array(
-				array( 'usernewrc' => 0 )
-			)
+			[
+				[ 'usernewrc' => 0 ]
+			]
 		);
 
 		$specialPage = SpecialPageFactory::getPage( 'Recentchanges' );
 		$specialPage->getContext()->setUser( $user );
 
-		$filters = array();
+		$filters = [];
 
 		ChangesListSpecialPageHookHandlers::onChangesListSpecialPageFilters(
 			$specialPage,
 			$filters
 		);
 
-		$expected = array(
-			'hideWikibase' => array(
+		$expected = [
+			'hideWikibase' => [
 				'msg' => 'wikibase-rc-hide-wikidata',
 				'default' => true
-			)
-		);
+			]
+		];
 
 		$this->assertSame( $expected, $filters );
 	}
 
 	public function testOnChangesListSpecialPageQuery() {
-		$tables = array( 'recentchanges' );
-		$fields = array( 'rc_id' );
-		$conds = array();
-		$query_options = array();
-		$join_conds = array();
+		$tables = [ 'recentchanges' ];
+		$fields = [ 'rc_id' ];
+		$conds = [];
+		$query_options = [];
+		$join_conds = [];
 
 		$opts = new FormOptions();
 
@@ -81,7 +81,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 		$optionDefault
 	) {
 		$hookHandler = new ChangesListSpecialPageHookHandlers(
-			$this->getRequest( array() ),
+			$this->getRequest( [] ),
 			$this->getUser( $userOptions ),
 			$this->getLoadBalancer(),
 			'Watchlist',
@@ -91,31 +91,31 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 		$opts = new FormOptions();
 		$opts->add( 'hideWikibase', $optionDefault );
 
-		$conds = array();
+		$conds = [];
 		$hookHandler->addWikibaseConditions( $conds, $opts );
 
 		$this->assertEquals( $expected, $conds );
 	}
 
 	public function addWikibaseConditionsProvider() {
-		return array(
-			array(
-				array(),
-				array( 'usenewrc' => 0, 'wlshowwikibase' => 1 ),
+		return [
+			[
+				[],
+				[ 'usenewrc' => 0, 'wlshowwikibase' => 1 ],
 				false
-			),
-			array(
-				array( "rc_source != 'wb'" ),
-				array( 'usenewrc' => 0 ),
+			],
+			[
+				[ "rc_source != 'wb'" ],
+				[ 'usenewrc' => 0 ],
 				true
-			)
-		);
+			]
+		];
 	}
 
 	public function testAddWikibaseConditions_wikibaseChangesDisabled() {
 		$hookHandler = new ChangesListSpecialPageHookHandlers(
-			$this->getRequest( array() ),
-			$this->getUser( array( 'usenewrc' => 1 ) ),
+			$this->getRequest( [] ),
+			$this->getUser( [ 'usenewrc' => 1 ] ),
 			$this->getLoadBalancer(),
 			'Watchlist',
 			true
@@ -123,10 +123,10 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 
 		$opts = new FormOptions();
 
-		$conds = array();
+		$conds = [];
 		$hookHandler->addWikibaseConditions( $conds, $opts );
 
-		$this->assertEquals( array( "rc_source != 'wb'" ), $conds );
+		$this->assertEquals( [ "rc_source != 'wb'" ], $conds );
 	}
 
 	/**
@@ -146,51 +146,51 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 			true
 		);
 
-		$filters = array();
+		$filters = [];
 		$hookHandler->addFilterIfEnabled( $filters );
 
-		$this->assertSame( array(), $filters, $message );
+		$this->assertSame( [], $filters, $message );
 	}
 
 	public function filterNotAddedWhenUsingEnhancedChangesProvider() {
-		return array(
-			array(
-				array(),
-				array( 'usenewrc' => 1 ),
+		return [
+			[
+				[],
+				[ 'usenewrc' => 1 ],
 				'Watchlist',
 				'enhanced default pref for Watchlist'
-			),
-			array(
-				array(),
-				array( 'usenewrc' => 1 ),
+			],
+			[
+				[],
+				[ 'usenewrc' => 1 ],
 				'RecentChanges',
 				'enhanced default pref for RecentChanges'
-			),
-			array(
-				array( 'enhanced' => 1 ),
-				array( 'usenewrc' => 0 ),
+			],
+			[
+				[ 'enhanced' => 1 ],
+				[ 'usenewrc' => 0 ],
 				'Watchlist',
 				'enhanced not default but has enhanced=1 req param'
-			),
-			array(
-				array( 'enhanced' => 1 ),
-				array( 'usenewrc' => 0 ),
+			],
+			[
+				[ 'enhanced' => 1 ],
+				[ 'usenewrc' => 0 ],
 				'RecentChanges',
 				'enhanced not default but has enhanced=1 req param'
-			),
-			array(
-				array( 'enhanced' => 1 ),
-				array( 'usenewrc' => 1 ),
+			],
+			[
+				[ 'enhanced' => 1 ],
+				[ 'usenewrc' => 1 ],
 				'Watchlist',
 				'enhanced default and has enhanced=1 req param'
-			),
-			array(
-				array( 'enhanced' => 1 ),
-				array( 'usenewrc' => 1 ),
+			],
+			[
+				[ 'enhanced' => 1 ],
+				[ 'usenewrc' => 1 ],
 				'RecentChangesLinked',
 				'enhanced default and has enhanced=1 req param'
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -211,64 +211,64 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 			true
 		);
 
-		$filters = array();
+		$filters = [];
 		$hookHandler->addFilterIfEnabled( $filters );
 
-		$expected = array(
-			$expectedFilterName => array(
+		$expected = [
+			$expectedFilterName => [
 				'msg' => 'wikibase-rc-hide-wikidata',
 				'default' => $expectedToggleDefault
-			)
-		);
+			]
+		];
 
 		$this->assertSame( $expected, $filters );
 	}
 
 	public function filter_withoutShowWikibaseEditsByDefaultPreference() {
-		return array(
-			array(
-				array(),
-				array( 'usenewrc' => 0 ),
+		return [
+			[
+				[],
+				[ 'usenewrc' => 0 ],
 				'hideWikibase',
 				true,
 				'Watchlist'
-			),
-			array(
-				array( 'enhanced' => 0 ),
-				array( 'usenewrc' => 1 ),
+			],
+			[
+				[ 'enhanced' => 0 ],
+				[ 'usenewrc' => 1 ],
 				'hideWikibase',
 				true,
 				'RecentChanges'
-			),
-			array(
-				array(),
-				array( 'usenewrc' => 0 ),
+			],
+			[
+				[],
+				[ 'usenewrc' => 0 ],
 				'hideWikibase',
 				true,
 				'RecentChangesLinked'
-			),
-			array(
-				array( 'action' => 'submit', 'hideWikibase' => 0 ),
-				array( 'usenewrc' => 0 ),
+			],
+			[
+				[ 'action' => 'submit', 'hideWikibase' => 0 ],
+				[ 'usenewrc' => 0 ],
 				'hideWikibase',
 				false,
 				'Watchlist'
-			),
-			array(
-				array( 'action' => 'submit', 'hideWikibase' => 1 ),
-				array( 'usenewrc' => 0 ),
+			],
+			[
+				[ 'action' => 'submit', 'hideWikibase' => 1 ],
+				[ 'usenewrc' => 0 ],
 				'hideWikibase',
 				true,
 				'Watchlist'
-			),
-			array(
-				array( 'action' => 'submit' ),
-				array( 'usenewrc' => 0 ),
+			],
+			[
+				[ 'action' => 'submit' ],
+				[ 'usenewrc' => 0 ],
 				'hideWikibase',
 				false,
 				'Watchlist'
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -289,57 +289,57 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 			true
 		);
 
-		$filters = array();
+		$filters = [];
 		$hookHandler->addFilterIfEnabled( $filters );
 
-		$expected = array(
-			$expectedFilterName => array(
+		$expected = [
+			$expectedFilterName => [
 				'msg' => 'wikibase-rc-hide-wikidata',
 				'default' => $expectedToggleDefault
-			)
-		);
+			]
+		];
 
 		$this->assertSame( $expected, $filters );
 	}
 
 	public function filter_withShowWikibaseEditsByDefaultPreference() {
-		return array(
-			array(
-				array(),
-				array( 'wlshowwikibase' => 1, 'usenewrc' => 0 ),
+		return [
+			[
+				[],
+				[ 'wlshowwikibase' => 1, 'usenewrc' => 0 ],
 				'hideWikibase',
 				false,
 				'Watchlist'
-			),
-			array(
-				array( 'enhanced' => 0 ),
-				array( 'rcshowwikidata' => 1, 'usenewrc' => 1 ),
+			],
+			[
+				[ 'enhanced' => 0 ],
+				[ 'rcshowwikidata' => 1, 'usenewrc' => 1 ],
 				'hideWikibase',
 				false,
 				'RecentChanges'
-			),
-			array(
-				array(),
-				array( 'rcshowwikidata' => 1, 'usenewrc' => 0 ),
+			],
+			[
+				[],
+				[ 'rcshowwikidata' => 1, 'usenewrc' => 0 ],
 				'hideWikibase',
 				false,
 				'RecentChangesLinked'
-			),
-			array(
-				array( 'action' => 'submit', 'hideWikibase' => 0 ),
-				array( 'wlshowwikibase' => 1, 'usenewrc' => 0 ),
+			],
+			[
+				[ 'action' => 'submit', 'hideWikibase' => 0 ],
+				[ 'wlshowwikibase' => 1, 'usenewrc' => 0 ],
 				'hideWikibase',
 				false,
 				'Watchlist'
-			),
-			array(
-				array( 'action' => 'submit' ),
-				array( 'wlshowwikibase' => 1, 'usenewrc' => 0 ),
+			],
+			[
+				[ 'action' => 'submit' ],
+				[ 'wlshowwikibase' => 1, 'usenewrc' => 0 ],
 				'hideWikibase',
 				false,
 				'Watchlist'
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -347,25 +347,25 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testFilterNotAddedWhenExternalRecentChangesDisabled( $specialPageName ) {
 		$hookHandler = new ChangesListSpecialPageHookHandlers(
-			$this->getRequest( array() ),
-			$this->getUser( array( 'usenewrc' => 0 ) ),
+			$this->getRequest( [] ),
+			$this->getUser( [ 'usenewrc' => 0 ] ),
 			$this->getLoadBalancer(),
 			$specialPageName,
 			false
 		);
 
-		$filters = array();
+		$filters = [];
 		$hookHandler->addFilterIfEnabled( $filters );
 
-		$this->assertSame( array(), $filters );
+		$this->assertSame( [], $filters );
 	}
 
 	public function filterNotAddedWhenExternalRecentChangesDisabledProvider() {
-		return array(
-			array( 'Watchlist' ),
-			array( 'RecentChanges' ),
-			array( 'RecentChangesLinked' )
-		);
+		return [
+			[ 'Watchlist' ],
+			[ 'RecentChanges' ],
+			[ 'RecentChangesLinked' ]
+		];
 	}
 
 	private function getRequest( array $requestParams ) {

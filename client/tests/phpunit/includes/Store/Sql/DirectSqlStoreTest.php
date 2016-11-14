@@ -75,20 +75,20 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetters() {
-		return array(
-			array( 'getSiteLinkLookup', SiteLinkLookup::class ),
-			array( 'getEntityLookup', EntityLookup::class ),
-			array( 'getTermIndex', TermIndex::class ),
-			array( 'getPropertyLabelResolver', PropertyLabelResolver::class ),
-			array( 'getPropertyInfoStore', PropertyInfoStore::class ),
-			array( 'getUsageTracker', UsageTracker::class ),
-			array( 'getUsageLookup', UsageLookup::class ),
-			array( 'getSubscriptionManager', SubscriptionManager::class, true ),
-			array( 'getEntityIdLookup', EntityIdLookup::class ),
-			array( 'getEntityPrefetcher', EntityPrefetcher::class ),
-			array( 'getEntityChangeLookup', EntityChangeLookup::class ),
-			array( 'getRecentChangesDuplicateDetector', RecentChangesDuplicateDetector::class ),
-		);
+		return [
+			[ 'getSiteLinkLookup', SiteLinkLookup::class ],
+			[ 'getEntityLookup', EntityLookup::class ],
+			[ 'getTermIndex', TermIndex::class ],
+			[ 'getPropertyLabelResolver', PropertyLabelResolver::class ],
+			[ 'getPropertyInfoStore', PropertyInfoStore::class ],
+			[ 'getUsageTracker', UsageTracker::class ],
+			[ 'getUsageLookup', UsageLookup::class ],
+			[ 'getSubscriptionManager', SubscriptionManager::class, true ],
+			[ 'getEntityIdLookup', EntityIdLookup::class ],
+			[ 'getEntityPrefetcher', EntityPrefetcher::class ],
+			[ 'getEntityChangeLookup', EntityChangeLookup::class ],
+			[ 'getRecentChangesDuplicateDetector', RecentChangesDuplicateDetector::class ],
+		];
 	}
 
 }

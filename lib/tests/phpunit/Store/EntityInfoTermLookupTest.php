@@ -41,23 +41,23 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 	}
 
 	public function getLabelsProvider() {
-		return array(
-			array(
-				array( 'en' => 'New York City', 'es' => 'Nueva York' ),
+		return [
+			[
+				[ 'en' => 'New York City', 'es' => 'Nueva York' ],
 				new ItemId( 'Q116' ),
-				array( 'en', 'es' )
-			),
-			array(
-				array( 'es' => 'Nueva York' ),
+				[ 'en', 'es' ]
+			],
+			[
+				[ 'es' => 'Nueva York' ],
 				new ItemId( 'Q116' ),
-				array( 'es' )
-			),
-			array(
-				array( 'de' => 'Berlin' ),
+				[ 'es' ]
+			],
+			[
+				[ 'de' => 'Berlin' ],
 				new ItemId( 'Q117' ),
-				array( 'de' )
-			)
-		);
+				[ 'de' ]
+			]
+		];
 	}
 
 	/**
@@ -74,7 +74,7 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 		$termLookup = $this->getEntityInfoTermLookup();
 
 		$this->setExpectedException( TermLookupException::class );
-		$termLookup->getLabels( new ItemId( 'Q90000' ), array( 'x' ) );
+		$termLookup->getLabels( new ItemId( 'Q90000' ), [ 'x' ] );
 	}
 
 	public function testGetDescription() {
@@ -99,28 +99,28 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 	}
 
 	public function getDescriptionsProvider() {
-		return array(
-			array(
-				array(
+		return [
+			[
+				[
 					'de' => 'Metropole an der Ostküste der Vereinigten Staaten',
 					'en' => 'largest city in New York and the United States of America',
-				),
+				],
 				new ItemId( 'Q116' ),
-				array( 'de', 'en' )
-			),
-			array(
-				array(
+				[ 'de', 'en' ]
+			],
+			[
+				[
 					'de' => 'Metropole an der Ostküste der Vereinigten Staaten',
-				),
+				],
 				new ItemId( 'Q116' ),
-				array( 'de', 'fr' )
-			),
-			array(
-				array(),
+				[ 'de', 'fr' ]
+			],
+			[
+				[],
 				new ItemId( 'Q117' ),
-				array()
-			)
-		);
+				[]
+			]
+		];
 	}
 
 	/**
@@ -137,7 +137,7 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 		$termLookup = $this->getEntityInfoTermLookup();
 
 		$this->setExpectedException( TermLookupException::class );
-		$termLookup->getDescriptions( new ItemId( 'Q90000' ), array( 'x' ) );
+		$termLookup->getDescriptions( new ItemId( 'Q90000' ), [ 'x' ] );
 	}
 
 	private function getEntityInfoTermLookup() {
@@ -146,25 +146,25 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 	}
 
 	private function makeEntityInfo() {
-		$entityInfo = array(
-			'Q116' => array(
-				'labels' => array(
-					'en' => array( 'language' => 'en', 'value' => 'New York City' ),
-					'es' => array( 'language' => 'es', 'value' => 'Nueva York' ),
-				),
-				'descriptions' => array(
-					'en' => array( 'language' => 'en', 'value' => 'largest city in New York and the United States of America' ),
-					'de' => array( 'language' => 'de', 'value' => 'Metropole an der Ostküste der Vereinigten Staaten' ),
-				),
-			),
+		$entityInfo = [
+			'Q116' => [
+				'labels' => [
+					'en' => [ 'language' => 'en', 'value' => 'New York City' ],
+					'es' => [ 'language' => 'es', 'value' => 'Nueva York' ],
+				],
+				'descriptions' => [
+					'en' => [ 'language' => 'en', 'value' => 'largest city in New York and the United States of America' ],
+					'de' => [ 'language' => 'de', 'value' => 'Metropole an der Ostküste der Vereinigten Staaten' ],
+				],
+			],
 
-			'Q117' => array(
-				'labels' => array(
-					'de' => array( 'language' => 'de', 'value' => 'Berlin' ),
-				),
-				'descriptions' => array()
-			),
-		);
+			'Q117' => [
+				'labels' => [
+					'de' => [ 'language' => 'de', 'value' => 'Berlin' ],
+				],
+				'descriptions' => []
+			],
+		];
 
 		return new EntityInfo( $entityInfo );
 	}

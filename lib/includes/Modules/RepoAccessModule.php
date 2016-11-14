@@ -35,21 +35,21 @@ class RepoAccessModule extends ResourceLoaderModule {
 
 		if ( $settings->hasSetting( 'repoUrl' ) ) {
 			// We're on a client (or at least the client configuration is available)
-			$wbRepo = array(
+			$wbRepo = [
 				'url' => $settings->getSetting( 'repoUrl' ),
 				'scriptPath' => $settings->getSetting( 'repoScriptPath' ),
 				'articlePath' => $settings->getSetting( 'repoArticlePath' )
-			);
+			];
 		} else {
 			// Client configuration isn't available... just assume we're the repo
-			$wbRepo = array(
+			$wbRepo = [
 				'url' => $wgServer,
 				'scriptPath' => $wgScriptPath,
 				'articlePath' => $wgArticlePath
-			);
+			];
 		}
 
-		return Xml::encodeJsCall( 'mediaWiki.config.set', array( 'wbRepo', $wbRepo ) );
+		return Xml::encodeJsCall( 'mediaWiki.config.set', [ 'wbRepo', $wbRepo ] );
 	}
 
 }

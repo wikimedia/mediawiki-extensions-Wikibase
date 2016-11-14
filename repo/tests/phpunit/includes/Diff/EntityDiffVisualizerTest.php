@@ -32,53 +32,53 @@ class EntityDiffVisualizerTest extends MediaWikiTestCase {
 		$emptyDiff = new EntityContentDiff( new EntityDiff(), new Diff() );
 
 		$fingerprintDiff = new EntityContentDiff(
-			new EntityDiff( array(
-				'label' => new Diff( array(
+			new EntityDiff( [
+				'label' => new Diff( [
 					'en' => new DiffOpAdd( 'O_o' ),
-				), true ),
+				], true ),
 
-				'description' => new Diff( array(
+				'description' => new Diff( [
 					'en' => new DiffOpRemove( 'ohi there' ),
-				), true ),
+				], true ),
 
-				'aliases' => new Diff( array(
-					'nl' => new Diff( array(
+				'aliases' => new Diff( [
+					'nl' => new Diff( [
 							new DiffOpAdd( 'daaaah' ),
 							new DiffOpRemove( 'foo' ),
 							new DiffOpRemove( 'bar' ),
-						) )
-				), true ),
-			) ),
+						] )
+				], true ),
+			] ),
 			new Diff()
 		);
 
-		$fingerprintTags = array(
-			'has <td>label / en</td>' => array( 'tag' => 'td', 'content' => 'label / en' ),
-			'has <ins>O_o</ins>' => array( 'tag' => 'ins', 'content' => 'O_o' ),
-			'has <td>aliases / nl / 0</td>' => array( 'tag' => 'td', 'content' => 'aliases / nl / 0' ),
-			'has <ins>daaaah</ins>' => array( 'tag' => 'ins', 'content' => 'daaaah' ),
-			'has <td>aliases / nl / 1</td>' => array( 'tag' => 'td', 'content' => 'aliases / nl / 1' ),
-			'has <del>foo</del>' => array( 'tag' => 'del', 'content' => 'foo' ),
-			'has <td>aliases / nl / 2</td>' => array( 'tag' => 'td', 'content' => 'aliases / nl / 2' ),
-			'has <del>bar</del>' => array( 'tag' => 'del', 'content' => 'bar' ),
-			'has <td>description / en</td>' => array( 'tag' => 'td', 'content' => 'description / en' ),
-			'has <del>ohi there</del>' => array( 'tag' => 'del', 'content' => 'ohi there' ),
-		);
+		$fingerprintTags = [
+			'has <td>label / en</td>' => [ 'tag' => 'td', 'content' => 'label / en' ],
+			'has <ins>O_o</ins>' => [ 'tag' => 'ins', 'content' => 'O_o' ],
+			'has <td>aliases / nl / 0</td>' => [ 'tag' => 'td', 'content' => 'aliases / nl / 0' ],
+			'has <ins>daaaah</ins>' => [ 'tag' => 'ins', 'content' => 'daaaah' ],
+			'has <td>aliases / nl / 1</td>' => [ 'tag' => 'td', 'content' => 'aliases / nl / 1' ],
+			'has <del>foo</del>' => [ 'tag' => 'del', 'content' => 'foo' ],
+			'has <td>aliases / nl / 2</td>' => [ 'tag' => 'td', 'content' => 'aliases / nl / 2' ],
+			'has <del>bar</del>' => [ 'tag' => 'del', 'content' => 'bar' ],
+			'has <td>description / en</td>' => [ 'tag' => 'td', 'content' => 'description / en' ],
+			'has <del>ohi there</del>' => [ 'tag' => 'del', 'content' => 'ohi there' ],
+		];
 
-		$redirectDiff = new EntityContentDiff( new EntityDiff(), new Diff( array(
+		$redirectDiff = new EntityContentDiff( new EntityDiff(), new Diff( [
 			'redirect' => new DiffOpAdd( 'Q1234' )
-		), true ) );
+		], true ) );
 
-		$redirectTags = array(
-			'has <td>redirect</td>' => array( 'tag' => 'td', 'content' => 'redirect' ),
-			'has <ins>Q1234</ins>' => array( 'tag' => 'ins', 'content' => 'Q1234' ),
-		);
+		$redirectTags = [
+			'has <td>redirect</td>' => [ 'tag' => 'td', 'content' => 'redirect' ],
+			'has <ins>Q1234</ins>' => [ 'tag' => 'ins', 'content' => 'Q1234' ],
+		];
 
-		return array(
-			'empty' => array( $emptyDiff, array( 'empty' => '/^$/', ) ),
-			'fingerprint changed' => array( $fingerprintDiff, $fingerprintTags ),
-			'redirect changed' => array( $redirectDiff, $redirectTags ),
-		);
+		return [
+			'empty' => [ $emptyDiff, [ 'empty' => '/^$/', ] ],
+			'fingerprint changed' => [ $fingerprintDiff, $fingerprintTags ],
+			'redirect changed' => [ $redirectDiff, $redirectTags ],
+		];
 	}
 
 	/**
@@ -126,7 +126,7 @@ class EntityDiffVisualizerTest extends MediaWikiTestCase {
 			$this->getMockContext(),
 			$this->getMockClaimDiffer(),
 			$this->getMockClaimDiffVisualizer(),
-			new HashSiteStore( array( $enwiki ) ),
+			new HashSiteStore( [ $enwiki ] ),
 			$this->getMock( EntityIdFormatter::class )
 		);
 	}

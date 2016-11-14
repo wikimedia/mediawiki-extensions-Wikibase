@@ -75,7 +75,7 @@ class SnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$propertyValueLName,
 		$dataType,
 		Snak $snak = null,
-		array &$mentioned = array()
+		array &$mentioned = []
 	) {
 		$mentionTracker = $this->getMock( EntityMentionListener::class );
 		$mentionTracker->expects( $this->any() )
@@ -107,22 +107,22 @@ class SnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function provideAddSnakValue() {
 		// NOTE: data types must match $this->getTestData()->getMockRepository();
 
-		return array(
-			'value snak' => array(
+		return [
+			'value snak' => [
 				new PropertyValueSnak(
 					new PropertyId( 'P2' ),
 					new EntityIdValue( new ItemId( 'Q42' ) )
 				),
 				'wikibase-item',
-			),
-			'value snak with data type' => array(
+			],
+			'value snak with data type' => [
 				new PropertyValueSnak(
 					new PropertyId( 'P9' ),
 					new StringValue( 'http://acme.com' )
 				),
 				'url'
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -159,9 +159,9 @@ class SnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			'wikibase-item'
 		);
 
-		$expectedTriples = array(
+		$expectedTriples = [
 			'<http://acme.test/Q11> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://acme.test/prop/novalue/P2> .',
-		);
+		];
 
 		$builder->addSnak( $writer, $snak, RdfVocabulary::NSP_DIRECT_CLAIM );
 
@@ -176,7 +176,7 @@ class SnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$writer = $this->getTestData()->getNTriplesWriter();
 		$writer->about( RdfVocabulary::NS_ENTITY, 'Q11' );
 
-		$mentioned = array();
+		$mentioned = [];
 		$builder = $this->newBuilder(
 			RdfVocabulary::NSP_DIRECT_CLAIM,
 			$propertyId->getSerialization(),
@@ -186,7 +186,7 @@ class SnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$builder->addSnak( $writer, $snak, RdfVocabulary::NSP_DIRECT_CLAIM );
-		$this->assertEquals( array( 'P2' ), array_keys( $mentioned ) );
+		$this->assertEquals( [ 'P2' ], array_keys( $mentioned ) );
 	}
 
 }

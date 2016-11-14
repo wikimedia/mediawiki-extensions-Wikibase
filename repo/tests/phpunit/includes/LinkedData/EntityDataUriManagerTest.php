@@ -45,10 +45,10 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 
 		$title = Title::newFromText( "Special:EntityDataUriManagerTest" );
 
-		$extensions = array(
+		$extensions = [
 			'text' => 'txt',
 			'rdfxml' => 'rdf',
-		);
+		];
 
 		$uriManager = new EntityDataUriManager(
 			$title,
@@ -60,12 +60,12 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetExtension() {
-		return array(
-			array( 'text', 'txt' ),
-			array( 'rdfxml', 'rdf' ),
-			array( 'txt', null ),
-			array( 'TEXT', null ),
-		);
+		return [
+			[ 'text', 'txt' ],
+			[ 'rdfxml', 'rdf' ],
+			[ 'txt', null ],
+			[ 'TEXT', null ],
+		];
 	}
 
 	/**
@@ -79,13 +79,13 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetFormatName() {
-		return array(
-			array( 'txt', 'text' ),
-			array( 'text', 'text' ),
-			array( 'TEXT', 'text' ),
-			array( 'TXT', 'text' ),
-			array( 'xyz', null ),
-		);
+		return [
+			[ 'txt', 'text' ],
+			[ 'text', 'text' ],
+			[ 'TEXT', 'text' ],
+			[ 'TXT', 'text' ],
+			[ 'xyz', null ],
+		];
 	}
 
 	/**
@@ -99,13 +99,13 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 	}
 
 	public function provideParseDocName() {
-		return array(
-			array( '', array( '', '' ) ),
-			array( 'foo', array( 'foo', '' ) ),
-			array( 'foo.bar', array( 'foo', 'bar' ) ),
-			array( "foo.bar\n", array( "foo\n", 'bar' ) ),
-			array( ' foo.bar ', array( ' foo.bar ', '' ) ),
-		);
+		return [
+			[ '', [ '', '' ] ],
+			[ 'foo', [ 'foo', '' ] ],
+			[ 'foo.bar', [ 'foo', 'bar' ] ],
+			[ "foo.bar\n", [ "foo\n", 'bar' ] ],
+			[ ' foo.bar ', [ ' foo.bar ', '' ] ],
+		];
 	}
 
 	/**
@@ -119,11 +119,11 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetDocName() {
-		return array(
-			array( 'Q12', '', 'Q12' ),
-			array( 'q12', null, 'Q12' ),
-			array( 'Q12', 'text', 'Q12.txt' ),
-		);
+		return [
+			[ 'Q12', '', 'Q12' ],
+			[ 'q12', null, 'Q12' ],
+			[ 'Q12', 'text', 'Q12.txt' ],
+		];
 	}
 
 	/**
@@ -142,11 +142,11 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 		$title = Title::newFromText( "Special:EntityDataUriManagerTest" );
 		$base = $title->getPrefixedText();
 
-		return array(
-			array( 'Q12', '', "$base/Q12" ),
-			array( 'q12', null, "$base/Q12" ),
-			array( 'Q12', 'text', "$base/Q12.txt" ),
-		);
+		return [
+			[ 'Q12', '', "$base/Q12" ],
+			[ 'q12', null, "$base/Q12" ],
+			[ 'Q12', 'text', "$base/Q12.txt" ],
+		];
 	}
 
 	/**
@@ -162,13 +162,13 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetDocUrl() {
-		return array(
-			array( 'Q12', '', 0, '!Q12$!' ),
-			array( 'q12', null, 0, '!Q12$!' ),
-			array( 'q12', null, 2, '!Q12.*oldid=2$!' ),
-			array( 'Q12', 'text', 0, '!Q12\.txt$!' ),
-			array( 'Q12', 'text', 2, '!Q12\.txt.*oldid=2$!' ),
-		);
+		return [
+			[ 'Q12', '', 0, '!Q12$!' ],
+			[ 'q12', null, 0, '!Q12$!' ],
+			[ 'q12', null, 2, '!Q12.*oldid=2$!' ],
+			[ 'Q12', 'text', 0, '!Q12\.txt$!' ],
+			[ 'Q12', 'text', 2, '!Q12\.txt.*oldid=2$!' ],
+		];
 	}
 
 	/**
@@ -187,12 +187,12 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 		$title = Title::newFromText( "Special:EntityDataUriManagerTest" );
 		$base = $title->getInternalURL();
 
-		return array(
-			array( 'Q12', array(
+		return [
+			[ 'Q12', [
 				"$base/Q12.txt",
 				"$base/Q12.rdf",
-			) ),
-		);
+			] ],
+		];
 	}
 
 	/**

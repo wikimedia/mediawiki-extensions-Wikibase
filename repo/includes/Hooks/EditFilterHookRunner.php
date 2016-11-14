@@ -104,7 +104,7 @@ class EditFilterHookRunner {
 
 		if ( !Hooks::run(
 			'EditFilterMergedContent',
-			array( $context, $entityContent, &$filterStatus, $summary, $user, false )
+			[ $context, $entityContent, &$filterStatus, $summary, $user, false ]
 		) ) {
 			// Error messages etc. were handled inside the hook.
 			$filterStatus->setResult( false, $filterStatus->getValue() );

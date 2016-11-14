@@ -79,10 +79,10 @@ class EntityContentDataCodec {
 	 * @return string[]
 	 */
 	public function getSupportedFormats() {
-		return array(
+		return [
 			CONTENT_FORMAT_JSON,
 			CONTENT_FORMAT_SERIALIZED,
-		);
+		];
 	}
 
 	/**
@@ -179,10 +179,10 @@ class EntityContentDataCodec {
 	 */
 	public function encodeRedirect( EntityRedirect $redirect, $format ) {
 		// TODO: Use proper Serializer
-		$data = array(
+		$data = [
 			'entity' => $redirect->getEntityId()->getSerialization(),
 			'redirect' => $redirect->getTargetId()->getSerialization(),
-		);
+		];
 
 		return $this->encodeEntityContentData( $data, $format );
 	}

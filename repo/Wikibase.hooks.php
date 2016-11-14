@@ -356,17 +356,17 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onGetPreferences( User $user, array &$preferences ) {
-		$preferences['wb-acknowledgedcopyrightversion'] = array(
+		$preferences['wb-acknowledgedcopyrightversion'] = [
 			'type' => 'api'
-		);
+		];
 
-		$preferences['wikibase-entitytermsview-showEntitytermslistview'] = array(
+		$preferences['wikibase-entitytermsview-showEntitytermslistview'] = [
 			'type' => 'toggle',
 			'label-message' => 'wikibase-setting-entitytermsview-showEntitytermslistview',
 			'help-message' => 'wikibase-setting-entitytermsview-showEntitytermslistview-help',
 			'section' => 'rendering/advancedrendering',
 			'default' => '1',
-		);
+		];
 
 		return true;
 	}
@@ -415,11 +415,11 @@ final class RepoHooks {
 			$link = Linker::linkKnown(
 				$rev->getTitle(),
 				$history->msg( 'wikibase-restoreold' )->escaped(),
-				array(),
-				array(
+				[],
+				[
 					'action' => 'edit',
 					'restore' => $rev->getId()
-				)
+				]
 			);
 
 			$s .= ' ' . $history->msg( 'parentheses' )->rawParams( $link )->escaped();
@@ -501,7 +501,7 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onSpecialPageReorderPages( &$groups, &$moveOther ) {
-		$groups = array_merge( array( 'wikibaserepo' => null ), $groups );
+		$groups = array_merge( [ 'wikibaserepo' => null ], $groups );
 		return true;
 	}
 
@@ -586,10 +586,10 @@ final class RepoHooks {
 					}
 
 					// fail
-					$message = array(
+					$message = [
 						'wikibase-no-direct-editing',
 						$pageObj->getTitle()->getNsText()
-					);
+					];
 
 					return false;
 				}
@@ -640,7 +640,7 @@ final class RepoHooks {
 					$entity->getDescriptions()->hasTermForLanguage( $languageCode )
 				) {
 					$description = $entity->getDescriptions()->getByLanguage( $languageCode )->getText();
-					$attr = array( 'class' => 'wb-itemlink-description' );
+					$attr = [ 'class' => 'wb-itemlink-description' ];
 					$link .= wfMessage( 'colon-separator' )->text();
 					$link .= Html::element( 'span', $attr, $description );
 				}
@@ -695,7 +695,7 @@ final class RepoHooks {
 
 		if ( $namespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
 			// Remove create and move protection for Wikibase namespaces
-			$types = array_diff( $types, array( 'create', 'move' ) );
+			$types = array_diff( $types, [ 'create', 'move' ] );
 		}
 
 		return true;
@@ -731,7 +731,7 @@ final class RepoHooks {
 
 			if ( $namespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
 				// Do not allow normal creation of pages in Wikibase namespaces
-				$errors[] = array( 'wikibase-no-direct-editing', $title->getNsText() );
+				$errors[] = [ 'wikibase-no-direct-editing', $title->getNsText() ];
 
 				return false;
 			}
@@ -921,10 +921,10 @@ final class RepoHooks {
 	public static function onAPIQuerySiteInfoGeneralInfo( ApiQuerySiteinfo $api, array &$data ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$dataTypes = $wikibaseRepo->getDataTypeFactory()->getTypes();
-		$propertyTypes = array();
+		$propertyTypes = [];
 
 		foreach ( $dataTypes as $id => $type ) {
-			$propertyTypes[$id] = array( 'valuetype' => $type->getDataValueType() );
+			$propertyTypes[$id] = [ 'valuetype' => $type->getDataValueType() ];
 		}
 
 		$data['wikibase-propertytypes'] = $propertyTypes;
@@ -944,10 +944,10 @@ final class RepoHooks {
 	 * @return array
 	 */
 	private static function formatDispatchRow( $row ) {
-		$data = array(
+		$data = [
 			'pending' => $row->chd_pending,
 			'lag' => $row->chd_lag,
-		);
+		];
 		if ( isset( $row->chd_site ) ) {
 			$data['site'] = $row->chd_site;
 		}
@@ -970,20 +970,20 @@ final class RepoHooks {
 		$stats = new DispatchStats();
 		$stats->load();
 		if ( $stats->hasStats() ) {
-			$data['dispatch'] = array(
-				'oldest' => array(
+			$data['dispatch'] = [
+				'oldest' => [
 					'id' => $stats->getMinChangeId(),
 					'timestamp' => $stats->getMinChangeTimestamp(),
-				),
-				'newest' => array(
+				],
+				'newest' => [
 					'id' => $stats->getMaxChangeId(),
 					'timestamp' => $stats->getMaxChangeTimestamp(),
-				),
+				],
 				'freshest' => self::formatDispatchRow( $stats->getFreshest() ),
 				'median' => self::formatDispatchRow( $stats->getMedian() ),
 				'stalest' => self::formatDispatchRow( $stats->getStalest() ),
 				'average' => self::formatDispatchRow( $stats->getAverage() ),
-			);
+			];
 		}
 
 		return true;
@@ -1039,11 +1039,11 @@ final class RepoHooks {
 		}
 
 		$baseUri = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'conceptBaseUri' );
-		$navigationUrls['wb-concept-uri'] = array(
+		$navigationUrls['wb-concept-uri'] = [
 			'text' => $skinTemplate->msg( 'wikibase-concept-uri' ),
 			'href' => $baseUri . $title->getDBKey(),
 			'title' => $skinTemplate->msg( 'wikibase-concept-uri-tooltip' )
-		);
+		];
 
 		return true;
 	}
@@ -1099,40 +1099,40 @@ final class RepoHooks {
 		preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 			. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-		$moduleTemplate = array(
+		$moduleTemplate = [
 			'localBasePath' => __DIR__,
 			'remoteExtPath' => '..' . $remoteExtPath[0],
 			'position' => 'top' // reducing the time between DOM construction and JS initialisation
-		);
+		];
 
-		$modules = array(
-			'wikibase.WikibaseContentLanguages' => $moduleTemplate + array(
-				'scripts' => array(
+		$modules = [
+			'wikibase.WikibaseContentLanguages' => $moduleTemplate + [
+				'scripts' => [
 					'resources/wikibase.WikibaseContentLanguages.js',
-				),
-				'dependencies' => array(
+				],
+				'dependencies' => [
 					'util.ContentLanguages',
 					'util.inherit',
 					'wikibase',
-				),
-			),
-			'wikibase.special.languageLabelDescriptionAliases' => $moduleTemplate + array(
-				'scripts' => array(
+				],
+			],
+			'wikibase.special.languageLabelDescriptionAliases' => $moduleTemplate + [
+				'scripts' => [
 					'resources/wikibase.special/wikibase.special.languageLabelDescriptionAliases.js',
-				),
-				'dependencies' => array(
+				],
+				'dependencies' => [
 					'oojs-ui',
-				),
-				'messages' => array(
+				],
+				'messages' => [
 					'wikibase-label-edit-placeholder',
 					'wikibase-label-edit-placeholder-language-aware',
 					'wikibase-description-edit-placeholder',
 					'wikibase-description-edit-placeholder-language-aware',
 					'wikibase-aliases-edit-placeholder',
 					'wikibase-aliases-edit-placeholder-language-aware',
-				),
-			),
-		);
+				],
+			],
+		];
 
 		$isUlsLoaded = ExtensionRegistry::getInstance()->isLoaded( 'UniversalLanguageSelector' );
 		if ( $isUlsLoaded ) {

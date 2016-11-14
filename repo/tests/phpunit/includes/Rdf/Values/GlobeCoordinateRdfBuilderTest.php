@@ -55,20 +55,20 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$snak_moon = new PropertyValueSnak( new PropertyId( 'P7' ), $value_moon );
 
-		$data = array(
-			'simple' => array(
+		$data = [
+			'simple' => [
 				$snak,
 				false,
-				array(
+				[
 					'<http://www/Q1> '
 						. '<http://acme/statement/P7> '
 						. '"Point(-45.5 12.25)"^^<http://acme/geo/wktLiteral> .',
-				)
-			),
-			'complex' => array(
+				]
+			],
+			'complex' => [
 				$snak,
 				true,
-				array(
+				[
 					'<http://www/Q1> '
 						. '<http://acme/statement/P7> '
 						. '"Point(-45.5 12.25)"^^<http://acme/geo/wktLiteral> .',
@@ -90,19 +90,19 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 					'<http://acme/value/d396dfb27235918ab6969509c5e87a48> '
 						. '<http://acme/onto/geoGlobe> '
 						. '<http://www.wikidata.org/entity/Q2> .',
-				)
-			),
-			'moon' => array(
+				]
+			],
+			'moon' => [
 				$snak_moon,
 				false,
-				array(
+				[
 					'<http://www/Q1> '
 						. '<http://acme/statement/P7> '
 						. '"<http://www.wikidata.org/entity/Q405> Point(31.4 8.5)"'
 						. '^^<http://acme/geo/wktLiteral> .',
-				)
-			),
-		);
+				]
+			],
+		];
 
 		$value2 = new GlobeCoordinateValue(
 			new LatLongValue( 12.25, -45.5 ),
@@ -112,10 +112,10 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$snak2 = new PropertyValueSnak( new PropertyId( 'P7' ), $value2 );
 
-		$data["complex2"] = array(
+		$data["complex2"] = [
 				$snak2,
 				true,
-				array(
+				[
 					'<http://www/Q1> '
 						. '<http://acme/statement/P7> '
 						. '"Point(-45.5 12.25)"^^<http://acme/geo/wktLiteral> .',
@@ -140,8 +140,8 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 					'<http://acme/value/79451c61ee7a21407115df912637c022> '
 						. '<http://acme/onto/geoGlobe> '
 						. '<http://www.wikidata.org/entity/Q2> .',
-				)
-		);
+				]
+		];
 
 		return $data;
 	}

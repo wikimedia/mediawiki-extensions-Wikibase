@@ -39,7 +39,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 	/**
 	 * @var ItemId[]
 	 */
-	private $redirectItemIds = array();
+	private $redirectItemIds = [];
 
 	protected function setUp() {
 		parent::setUp();
@@ -69,7 +69,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 		$entityStore->saveRedirect( $redirect, "WikiPageEntityRedirectLookupTest", $wgUser, EDIT_NEW );
 
 		$this->itemId = $item->getId();
-		$this->redirectItemIds = array( $redirectItem1->getId(), $redirectItem2->getId() );
+		$this->redirectItemIds = [ $redirectItem1->getId(), $redirectItem2->getId() ];
 	}
 
 	/**
@@ -112,11 +112,11 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 	}
 
 	public function testGetRedirectForEntityId_itemsInMainNamespace() {
-		$row = array(
+		$row = [
 			'page_id' => 10,
 			'rd_namespace' => NS_MAIN,
 			'rd_title' => 'Q10'
-		);
+		];
 
 		$entityRedirectLookup = new WikiPageEntityRedirectLookup(
 			$this->getMockEntityTitleLookup(),
@@ -204,7 +204,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 	public function testGetRedirectIds_entityDoesNotExist() {
 		$res = $this->getWikiPageEntityRedirectLookup()->getRedirectIds( new ItemId( 'Q48758903' ) );
 
-		$this->assertSame( array(), $res );
+		$this->assertSame( [], $res );
 	}
 
 	private function getWikiPageEntityRedirectLookup() {

@@ -99,18 +99,18 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$change = $notifier->notifyOnPageDeleted( $content, $user, $timestamp );
 
 		$this->assertFields(
-			array(
+			[
 				'object_id' => strtolower( $content->getEntityId()->getSerialization() ),
 				'user_id' => $user->getId(),
 				'time' => $timestamp,
 				'type' => 'wikibase-item~remove',
-				'info' => array(
-					'metadata' => array(
+				'info' => [
+					'metadata' => [
 						'user_text' => $user->getName(),
 						'comment' => 'wikibase-comment-remove',
-					)
-				)
-			),
+					]
+				]
+			],
 			$change->getFields()
 		);
 	}
@@ -141,18 +141,18 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$fields = $change->getFields();
 
 		$this->assertFields(
-			array(
+			[
 				'object_id' => strtolower( $content->getEntityId()->getSerialization() ),
 				'user_id' => $user->getId(),
 				'revision_id' => $revisionId,
 				'type' => 'wikibase-item~restore',
-				'info' => array(
-					'metadata' => array(
+				'info' => [
+					'metadata' => [
 						'user_text' => $user->getName(),
 						'comment' => 'wikibase-comment-restore',
-					)
-				)
-			),
+					]
+				]
+			],
 			$fields
 		);
 
@@ -190,13 +190,13 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$change = $notifier->notifyOnPageCreated( $revision );
 
 		$this->assertFields(
-			array(
+			[
 				'object_id' => strtolower( $content->getEntityId()->getSerialization() ),
 				'user_id' => $user->getId(),
 				'revision_id' => $revisionId,
 				'time' => $timestamp,
 				'type' => 'wikibase-item~add',
-			),
+			],
 			$change->getFields()
 		);
 	}
@@ -233,13 +233,13 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$change = $notifier->notifyOnPageModified( $revision, $parent );
 
 		$this->assertFields(
-			array(
+			[
 				'object_id' => strtolower( $content->getEntityId()->getSerialization() ),
 				'user_id' => $user->getId(),
 				'revision_id' => $revisionId,
 				'time' => $timestamp,
 				'type' => 'wikibase-item~update',
-			),
+			],
 			$change->getFields()
 		);
 	}
@@ -276,13 +276,13 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$change = $notifier->notifyOnPageModified( $revision, $parent );
 
 		$this->assertFields(
-			array(
+			[
 				'object_id' => strtolower( $content->getEntityId()->getSerialization() ),
 				'user_id' => $user->getId(),
 				'revision_id' => $revisionId,
 				'time' => $timestamp,
 				'type' => 'wikibase-item~restore',
-			),
+			],
 			$change->getFields()
 		);
 	}
@@ -302,13 +302,13 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$change = $notifier->notifyOnPageModified( $revision, $parent );
 
 		$this->assertFields(
-			array(
+			[
 				'object_id' => strtolower( $content->getEntityId()->getSerialization() ),
 				'user_id' => $user->getId(),
 				'revision_id' => $revisionId,
 				'time' => $timestamp,
 				'type' => 'wikibase-item~remove',
-			),
+			],
 			$change->getFields()
 		);
 	}

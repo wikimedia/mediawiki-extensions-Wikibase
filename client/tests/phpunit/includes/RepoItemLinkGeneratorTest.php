@@ -27,16 +27,16 @@ class RepoItemLinkGeneratorTest extends PHPUnit_Framework_TestCase {
 		$baseUrl = 'http://www.example.com';
 		$articlePath = '/wiki/$1';
 		$scriptPath = '';
-		$repoNamespaces = array(
+		$repoNamespaces = [
 			'item' => '',
 			'property' => 'Property:'
-		);
+		];
 
 		return new RepoLinker( $baseUrl, $articlePath, $scriptPath, $repoNamespaces );
 	}
 
 	protected function getNamespaceChecker() {
-		return new NamespaceChecker( array() );
+		return new NamespaceChecker( [] );
 	}
 
 	protected function getEntityIdParser() {
@@ -65,70 +65,70 @@ class RepoItemLinkGeneratorTest extends PHPUnit_Framework_TestCase {
 
 		$title->resetArticleID( 9638 ); // Needed so that Title::exists() -> true
 
-		$data = array();
+		$data = [];
 
-		$data['has edit link'] = array(
+		$data['has edit link'] = [
 			'expected' => $editLinksLinkRegex,
 			'title' => $title,
 			'action' => 'view',
 			'noExternalLangLinks' => null,
 			'prefixedId' => $prefixedId,
 			'hasLangLinks' => true
-		);
+		];
 
-		$data['add link: not linked to an entity'] = array(
+		$data['add link: not linked to an entity'] = [
 			'expected' => $addLinksRegexNewItem,
 			'title' => $title,
 			'action' => 'view',
 			'noExternalLangLinks' => null,
 			'prefixedId' => null,
 			'hasLangLinks' => false
-		);
+		];
 
-		$data['add link: no language links'] = array(
+		$data['add link: no language links'] = [
 			'expected' => $addLinksRegexItemExists,
 			'title' => $title,
 			'action' => 'view',
 			'noExternalLangLinks' => null,
 			'prefixedId' => $prefixedId,
 			'hasLangLinks' => false
-		);
+		];
 
-		$data['no edit link on action=history'] = array(
+		$data['no edit link on action=history'] = [
 			'expected' => null,
 			'title' => $title,
 			'action' => 'history',
 			'noExternalLangLinks' => null,
 			'prefixedId' => $prefixedId,
 			'hasLangLinks' => true
-		);
+		];
 
-		$data['no edit link if noExternalLangLinks'] = array(
+		$data['no edit link if noExternalLangLinks'] = [
 			'expected' => null,
 			'title' => $title,
 			'action' => 'view',
-			'noExternalLangLinks' => array( '*' ),
+			'noExternalLangLinks' => [ '*' ],
 			'prefixedId' => $prefixedId,
 			'hasLangLinks' => true
-		);
+		];
 
-		$data['edit link when had links and suppressing one link'] = array(
+		$data['edit link when had links and suppressing one link'] = [
 			'expected' => $editLinksLinkRegex,
 			'title' => $title,
 			'action' => 'view',
-			'noExternalLangLinks' => array( 'fr' ),
+			'noExternalLangLinks' => [ 'fr' ],
 			'prefixedId' => $prefixedId,
 			'hasLangLinks' => true
-		);
+		];
 
-		$data['title does not exist'] = array(
+		$data['title does not exist'] = [
 			'expected' => null,
 			'title' => $nonExistingTitle,
 			'action' => 'view',
 			'noExternalLangLinks' => null,
 			'prefixedId' => null,
 			'hasLangLinks' => null
-		);
+		];
 
 		return $data;
 

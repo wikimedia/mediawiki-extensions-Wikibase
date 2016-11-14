@@ -111,7 +111,7 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onOldChangesListRecentChangesLine( ChangesList &$changesList, &$s,
-		RecentChange $rc, &$classes = array() ) {
+		RecentChange $rc, &$classes = [] ) {
 
 		$type = $rc->getAttribute( 'rc_type' );
 
@@ -139,7 +139,7 @@ final class ClientHooks {
 				$wikibaseClient->newRepoLinker()
 			);
 
-			$flag = $changesList->recentChangesFlags( array( 'wikibase-edit' => true ), '' );
+			$flag = $changesList->recentChangesFlags( [ 'wikibase-edit' => true ], '' );
 			$line = $formatter->format( $externalChange, $rc->getTitle(), $rc->counter, $flag );
 
 			$classes[] = 'wikibase-edit';
@@ -182,7 +182,7 @@ final class ClientHooks {
 
 		StubObject::unstub( $wgContLang );
 
-		$formatter = new AutoCommentFormatter( $wgContLang, array( 'wikibase-entity' ) );
+		$formatter = new AutoCommentFormatter( $wgContLang, [ 'wikibase-entity' ] );
 		$formattedComment = $formatter->formatAutoComment( $auto );
 
 		if ( is_string( $formattedComment ) ) {
@@ -218,11 +218,11 @@ final class ClientHooks {
 
 		if ( $entityId !== null ) {
 			$repoLinker = $wikibaseClient->newRepoLinker();
-			$toolbox['wikibase'] = array(
+			$toolbox['wikibase'] = [
 				'text' => $baseTemplate->getMsg( 'wikibase-dataitem' )->text(),
 				'href' => $repoLinker->getEntityUrl( $entityId ),
 				'id' => 't-wikibase'
-			);
+			];
 		}
 
 		return true;
@@ -307,16 +307,16 @@ final class ClientHooks {
 			return true;
 		}
 
-		$betaPreferences['wikibase-otherprojects'] = array(
+		$betaPreferences['wikibase-otherprojects'] = [
 			'label-message' => 'wikibase-otherprojects-beta-message',
 			'desc-message' => 'wikibase-otherprojects-beta-description',
-			'screenshot' => array(
+			'screenshot' => [
 				'ltr' => $assetsPath . '/resources/images/wb-otherprojects-beta-ltr.svg',
 				'rtl' => $assetsPath . '/resources/images/wb-otherprojects-beta-rtl.svg'
-			),
+			],
 			'info-link' => 'https://www.mediawiki.org/wiki/Wikibase/Beta_Features/Other_projects_sidebar',
 			'discussion-link' => 'https://www.mediawiki.org/wiki/Talk:Wikibase/Beta_Features/Other_projects_sidebar'
-		);
+		];
 
 		return true;
 	}
@@ -336,17 +336,17 @@ final class ClientHooks {
 			return true;
 		}
 
-		$prefs['rcshowwikidata'] = array(
+		$prefs['rcshowwikidata'] = [
 			'type' => 'toggle',
 			'label-message' => 'wikibase-rc-show-wikidata-pref',
 			'section' => 'rc/advancedrc',
-		);
+		];
 
-		$prefs['wlshowwikibase'] = array(
+		$prefs['wlshowwikibase'] = [
 			'type' => 'toggle',
 			'label-message' => 'wikibase-watchlist-show-changes-pref',
 			'section' => 'watchlist/advancedwatchlist',
-		);
+		];
 
 		return true;
 	}
@@ -507,9 +507,9 @@ final class ClientHooks {
 	}
 
 	public static function onwgQueryPages( &$queryPages ) {
-		$queryPages[] = array( SpecialUnconnectedPages::class, 'UnconnectedPages' );
-		$queryPages[] = array( SpecialPagesWithBadges::class, 'PagesWithBadges' );
-		$queryPages[] = array( SpecialEntityUsage::class, 'EntityUsage' );
+		$queryPages[] = [ SpecialUnconnectedPages::class, 'UnconnectedPages' ];
+		$queryPages[] = [ SpecialPagesWithBadges::class, 'PagesWithBadges' ];
+		$queryPages[] = [ SpecialEntityUsage::class, 'EntityUsage' ];
 		return true;
 	}
 

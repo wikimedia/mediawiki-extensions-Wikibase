@@ -154,7 +154,7 @@ abstract class ModifyEntity extends ApiBase {
 	 * @return ItemId[]
 	 */
 	protected function parseSiteLinkBadges( array $badgesParams ) {
-		$badges = array();
+		$badges = [];
 
 		foreach ( $badgesParams as $badgeSerialization ) {
 			try {
@@ -334,7 +334,7 @@ abstract class ModifyEntity extends ApiBase {
 	 * @return string[]
 	 */
 	protected function getRequiredPermissions( EntityDocument $entity ) {
-		return $this->isWriteMode() ? array( 'read', 'edit' ) : array( 'read' );
+		return $this->isWriteMode() ? [ 'read', 'edit' ] : [ 'read' ];
 	}
 
 	private function addToOutput( EntityDocument $entity, Status $status, $oldRevId = null ) {
@@ -372,14 +372,14 @@ abstract class ModifyEntity extends ApiBase {
 	 * @return array[]
 	 */
 	private function getAllowedParamsForId() {
-		return array(
-			'id' => array(
+		return [
+			'id' => [
 				self::PARAM_TYPE => 'string',
-			),
-			'new' => array(
+			],
+			'new' => [
 				self::PARAM_TYPE => $this->enabledEntityTypes,
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -391,14 +391,14 @@ abstract class ModifyEntity extends ApiBase {
 	private function getAllowedParamsForSiteLink() {
 		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 
-		return array(
-			'site' => array(
+		return [
+			'site' => [
 				self::PARAM_TYPE => $sites->getGlobalIdentifiers(),
-			),
-			'title' => array(
+			],
+			'title' => [
 				self::PARAM_TYPE => 'string',
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -407,16 +407,16 @@ abstract class ModifyEntity extends ApiBase {
 	 * @return array
 	 */
 	private function getAllowedParamsForEntity() {
-		return array(
-			'baserevid' => array(
+		return [
+			'baserevid' => [
 				self::PARAM_TYPE => 'integer',
-			),
-			'summary' => array(
+			],
+			'summary' => [
 				self::PARAM_TYPE => 'string',
-			),
+			],
 			'token' => null,
 			'bot' => false,
-		);
+		];
 	}
 
 }

@@ -128,7 +128,7 @@ class RemoveQualifiers extends ApiBase {
 	 * @return ChangeOp[]
 	 */
 	private function getChangeOps( $statementGuid, array $qualifierHashes ) {
-		$changeOps = array();
+		$changeOps = [];
 
 		foreach ( $qualifierHashes as $hash ) {
 			$changeOps[] = $this->statementChangeOpFactory->newRemoveQualifierOp(
@@ -148,7 +148,7 @@ class RemoveQualifiers extends ApiBase {
 	 */
 	private function getQualifierHashesFromParams( array $params, Statement $statement ) {
 		$qualifiers = $statement->getQualifiers();
-		$hashes = array();
+		$hashes = [];
 
 		foreach ( array_unique( $params['qualifiers'] ) as $qualifierHash ) {
 			if ( !$qualifiers->hasSnakHash( $qualifierHash ) ) {
@@ -182,25 +182,25 @@ class RemoveQualifiers extends ApiBase {
 	 */
 	protected function getAllowedParams() {
 		return array_merge(
-			array(
-				'claim' => array(
+			[
+				'claim' => [
 					self::PARAM_TYPE => 'string',
 					self::PARAM_REQUIRED => true,
-				),
-				'qualifiers' => array(
+				],
+				'qualifiers' => [
 					self::PARAM_TYPE => 'string',
 					self::PARAM_REQUIRED => true,
 					self::PARAM_ISMULTI => true,
-				),
-				'summary' => array(
+				],
+				'summary' => [
 					self::PARAM_TYPE => 'string',
-				),
+				],
 				'token' => null,
-				'baserevid' => array(
+				'baserevid' => [
 					self::PARAM_TYPE => 'integer',
-				),
+				],
 				'bot' => false,
-			),
+			],
 			parent::getAllowedParams()
 		);
 	}
@@ -209,12 +209,12 @@ class RemoveQualifiers extends ApiBase {
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
-		return array(
+		return [
 			'action=wbremovequalifiers&statement=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F'
 				. '&references=1eb8793c002b1d9820c833d234a1b54c8e94187e&token=foobar'
 				. '&baserevid=7201010'
 				=> 'apihelp-wbremovequalifiers-example-1',
-		);
+		];
 	}
 
 }

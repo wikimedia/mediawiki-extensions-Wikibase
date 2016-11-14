@@ -102,11 +102,11 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	 */
 	protected function getArguments( $subPage ) {
 		$request = $this->getRequest();
-		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
+		$parts = ( $subPage === '' ) ? [] : explode( '/', $subPage, 2 );
 		$site = trim( $request->getVal( 'site', isset( $parts[0] ) ? $parts[0] : '' ) );
 		$itemString = trim( $request->getVal( 'itemid', isset( $parts[1] ) ? $parts[1] : 0 ) );
 
-		return array( $site, $itemString );
+		return [ $site, $itemString ];
 	}
 
 	/**
@@ -181,7 +181,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	 * @return array[]
 	 */
 	private function loadLinks( $site, ItemId $itemId ) {
-		$links = $this->siteLinkLookup->getLinks( array( $itemId->getNumericId() ), array( $site ) );
+		$links = $this->siteLinkLookup->getLinks( [ $itemId->getNumericId() ], [ $site ] );
 		if ( isset( $links[0] ) ) {
 			return $links;
 		}
@@ -191,10 +191,10 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 		$redirectTarget = $this->redirectLookup->getRedirectForEntityId( $itemId );
 
 		if ( $redirectTarget instanceof ItemId ) {
-			return $this->siteLinkLookup->getLinks( array( $redirectTarget->getNumericId() ), array( $site ) );
+			return $this->siteLinkLookup->getLinks( [ $redirectTarget->getNumericId() ], [ $site ] );
 		}
 
-		return array();
+		return [];
 	}
 
 	/**
@@ -226,24 +226,24 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	 * @param string $itemString
 	 */
 	protected function outputForm( $site, $itemString ) {
-		$formDescriptor = array(
-			'site' => array(
+		$formDescriptor = [
+			'site' => [
 				'name' => 'site',
 				'default' => $site ?: '',
 				'type' => 'text',
 				'id' => 'wb-gotolinkedpage-sitename',
 				'size' => 12,
 				'label-message' => 'wikibase-gotolinkedpage-lookup-site'
-			),
-			'itemid' => array(
+			],
+			'itemid' => [
 				'name' => 'itemid',
 				'default' => $itemString ?: '',
 				'type' => 'text',
 				'id' => 'wb-gotolinkedpage-itemid',
 				'size' => 36,
 				'label-message' => 'wikibase-gotolinkedpage-lookup-item'
-			)
-		);
+			]
+		];
 
 		HTMLForm::factory( 'inline', $formDescriptor, $this->getContext() )
 			->setId( 'wb-gotolinkedpage-form1' )

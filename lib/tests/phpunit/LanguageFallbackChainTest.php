@@ -32,103 +32,103 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 	}
 
 	public function provideExtractPreferredValue() {
-		$data = array(
+		$data = [
 			'en' => 'foo',
 			'nl' => 'bar',
 			'zh-cn' => '测试',
 			'lzh' => '試',
 			'zh-classical' => '驗',
-		);
-		$entityInfoBuilderArray = array(
-			'de' => array(
+		];
+		$entityInfoBuilderArray = [
+			'de' => [
 				'language' => 'de',
 				'value' => 'Beispiel'
-			),
-			'zh-cn' => array(
+			],
+			'zh-cn' => [
 				'language' => 'zh-cn',
 				'value' => '测试'
-			)
-		);
+			]
+		];
 
-		return array(
-			array( 'en', LanguageFallbackChainFactory::FALLBACK_ALL, $data, array(
+		return [
+			[ 'en', LanguageFallbackChainFactory::FALLBACK_ALL, $data, [
 				'value' => 'foo',
 				'language' => 'en',
 				'source' => null,
-			) ),
-			array( 'zh-classical', LanguageFallbackChainFactory::FALLBACK_ALL, $data, array(
+			] ],
+			[ 'zh-classical', LanguageFallbackChainFactory::FALLBACK_ALL, $data, [
 				'value' => '試',
 				'language' => 'lzh',
 				'source' => null,
-			) ),
-			array( 'nl', LanguageFallbackChainFactory::FALLBACK_ALL, $data, array(
+			] ],
+			[ 'nl', LanguageFallbackChainFactory::FALLBACK_ALL, $data, [
 				'value' => 'bar',
 				'language' => 'nl',
 				'source' => null,
-			) ),
-			array( 'de', LanguageFallbackChainFactory::FALLBACK_SELF, $data, null ),
-			array( 'de', LanguageFallbackChainFactory::FALLBACK_ALL, $data, array(
+			] ],
+			[ 'de', LanguageFallbackChainFactory::FALLBACK_SELF, $data, null ],
+			[ 'de', LanguageFallbackChainFactory::FALLBACK_ALL, $data, [
 				'value' => 'foo',
 				'language' => 'en',
 				'source' => null,
-			) ),
-			array( 'zh', LanguageFallbackChainFactory::FALLBACK_ALL, $data, array(
+			] ],
+			[ 'zh', LanguageFallbackChainFactory::FALLBACK_ALL, $data, [
 				'value' => '测试',
 				'language' => 'zh',
 				'source' => 'zh-cn',
-			) ),
-			array( 'zh-tw', LanguageFallbackChainFactory::FALLBACK_SELF, $data, null ),
-			array( 'zh-tw', LanguageFallbackChainFactory::FALLBACK_ALL, $data, array(
+			] ],
+			[ 'zh-tw', LanguageFallbackChainFactory::FALLBACK_SELF, $data, null ],
+			[ 'zh-tw', LanguageFallbackChainFactory::FALLBACK_ALL, $data, [
 				'value' => '測試',
 				'language' => 'zh-tw',
 				'source' => 'zh-cn',
-			) ),
-			array(
+			] ],
+			[
 				'zh-tw',
 				LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS,
 				$data,
-				array(
+				[
 					'value' => '測試',
 					'language' => 'zh-tw',
 					'source' => 'zh-cn',
-				),
-			),
-			array(
+				],
+			],
+			[
 				'sr-ec',
 				LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS,
 				$data,
 				null,
-			),
-			array( 'sr-ec', LanguageFallbackChainFactory::FALLBACK_ALL, $data, array(
+			],
+			[ 'sr-ec', LanguageFallbackChainFactory::FALLBACK_ALL, $data, [
 				// Shouldn't be converted to Cyrillic ('фоо') as this specific
 				// value ('foo') is taken from the English label.
 				'value' => 'foo',
 				'language' => 'en',
 				'source' => null,
-			) ),
-			array(
+			] ],
+			[
 				'gan-hant',
 				LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS,
 				$data,
 				null,
-			),
-			array( 'gan-hant', LanguageFallbackChainFactory::FALLBACK_ALL, $data, array(
+			],
+			[ 'gan-hant', LanguageFallbackChainFactory::FALLBACK_ALL, $data, [
 				'value' => '測試',
 				'language' => 'zh-hant',
 				'source' => 'zh-cn',
-			) ),
+			] ],
 
-			array( 'de', LanguageFallbackChainFactory::FALLBACK_SELF, $entityInfoBuilderArray, array(
+			[ 'de', LanguageFallbackChainFactory::FALLBACK_SELF, $entityInfoBuilderArray, [
 				'value' => 'Beispiel',
 				'language' => 'de',
 				'source' => null,
-			) ),
-			array( 'gan-hant', LanguageFallbackChainFactory::FALLBACK_ALL, $entityInfoBuilderArray, array(
+			] ],
+			[ 'gan-hant', LanguageFallbackChainFactory::FALLBACK_ALL, $entityInfoBuilderArray, [
 				'value' => '測試',
 				'language' => 'zh-hant',
 				'source' => 'zh-cn',
-			) ),
-		);
+			] ],
+		];
 	}
 
 	/**
@@ -144,76 +144,76 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 	}
 
 	public function provideExtractPreferredValueOrAny() {
-		$data = array(
+		$data = [
 			'en' => 'foo',
 			'nl' => 'bar',
 			'zh-cn' => '测试',
-		);
-		$entityInfoBuilderArray = array(
-			'en' => array(
+		];
+		$entityInfoBuilderArray = [
+			'en' => [
 				'language' => 'en',
 				'value' => 'Example'
-			),
-		);
+			],
+		];
 
-		return array(
-			array( 'en', LanguageFallbackChainFactory::FALLBACK_ALL, $data, array(
+		return [
+			[ 'en', LanguageFallbackChainFactory::FALLBACK_ALL, $data, [
 				'value' => 'foo',
 				'language' => 'en',
 				'source' => null,
-			) ),
-			array( 'nl', LanguageFallbackChainFactory::FALLBACK_ALL, $data, array(
+			] ],
+			[ 'nl', LanguageFallbackChainFactory::FALLBACK_ALL, $data, [
 				'value' => 'bar',
 				'language' => 'nl',
 				'source' => null,
-			) ),
-			array( 'de', LanguageFallbackChainFactory::FALLBACK_SELF, $data, array(
+			] ],
+			[ 'de', LanguageFallbackChainFactory::FALLBACK_SELF, $data, [
 				'value' => 'foo',
 				'language' => 'en',
 				'source' => null,
-			) ),
+			] ],
 
-			array( 'fr', LanguageFallbackChainFactory::FALLBACK_SELF, array(
+			[ 'fr', LanguageFallbackChainFactory::FALLBACK_SELF, [
 				'kk' => 'baz',
-			), array(
+			], [
 				'value' => 'baz',
 				'language' => 'kk',
 				'source' => null,
-			) ),
-			array( 'it', LanguageFallbackChainFactory::FALLBACK_SELF, array(
+			] ],
+			[ 'it', LanguageFallbackChainFactory::FALLBACK_SELF, [
 				':' => 'qux',
 				'kk' => 'baz',
-			), array(
+			], [
 				'value' => 'baz',
 				'language' => 'kk',
 				'source' => null,
-			) ),
-			array( 'sr', LanguageFallbackChainFactory::FALLBACK_SELF, array(
+			] ],
+			[ 'sr', LanguageFallbackChainFactory::FALLBACK_SELF, [
 				':' => 'qux',
-			), null ),
-			array( 'en', LanguageFallbackChainFactory::FALLBACK_ALL, array(), null ),
-			array( 'ar', LanguageFallbackChainFactory::FALLBACK_SELF, array(), null ),
+			], null ],
+			[ 'en', LanguageFallbackChainFactory::FALLBACK_ALL, [], null ],
+			[ 'ar', LanguageFallbackChainFactory::FALLBACK_SELF, [], null ],
 
-			array( 'de', LanguageFallbackChainFactory::FALLBACK_SELF, $entityInfoBuilderArray, array(
+			[ 'de', LanguageFallbackChainFactory::FALLBACK_SELF, $entityInfoBuilderArray, [
 				'value' => 'Example',
 				'language' => 'en',
-			) ),
-		);
+			] ],
+		];
 	}
 
 	public function provideFetchLanguageCodes() {
-		return array(
-			'empty' => array( array() ),
-			'de-ch' => array( array( 'de-ch', 'de', 'en' ) ),
-			'zh' => array( array( 'zh-hans', 'zh-hant', 'zh-cn', 'zh-tw', 'zh-hk', 'zh-sg', 'zh-mo', 'zh-my', 'en' ) ),
-		);
+		return [
+			'empty' => [ [] ],
+			'de-ch' => [ [ 'de-ch', 'de', 'en' ] ],
+			'zh' => [ [ 'zh-hans', 'zh-hant', 'zh-cn', 'zh-tw', 'zh-hk', 'zh-sg', 'zh-mo', 'zh-my', 'en' ] ],
+		];
 	}
 
 	/**
 	 * @dataProvider provideFetchLanguageCodes
 	 */
 	public function testGetFetchLanguageCodes( array $languages ) {
-		$languagesWithConversion = array();
+		$languagesWithConversion = [];
 
 		foreach ( $languages as $language ) {
 			$languagesWithConversion[] = LanguageWithConversion::factory( $language );

@@ -24,9 +24,9 @@ class SpecialListDatatypesTest extends SpecialPageTestBase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->setMwGlobals( array(
+		$this->setMwGlobals( [
 			'wgContLang' => Language::factory( 'qqx' )
-		) );
+		] );
 		$services = MediaWikiServices::getInstance();
 		$services->resetServiceForTesting( 'TitleFormatter' );
 		$services->resetServiceForTesting( 'TitleParser' );

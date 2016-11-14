@@ -37,14 +37,14 @@ class EntityUsageTableBuilderTest extends \MediaWikiTestCase {
 	}
 
 	public function testFillUsageTable() {
-		$this->putWikidataItemPageProps( array(
+		$this->putWikidataItemPageProps( [
 			11 => 'Q11',
 			22 => 'Q22',
 			33 => 'Q33',
 			44 => 'Q44',
 			88 => '',
 			99 => '--broken--',
-		) );
+		] );
 
 		$primer = $this->getEntityUsageTableBuilder( 2 );
 		$primer->setProgressReporter( $this->getMessageReporter( $this->exactly( 3 ) ) );
@@ -55,12 +55,12 @@ class EntityUsageTableBuilderTest extends \MediaWikiTestCase {
 		$actual = $this->fetchAllUsageStrings();
 		ksort( $actual );
 
-		$expected = array(
+		$expected = [
 			11 => 'Q11#X',
 			22 => 'Q22#X',
 			33 => 'Q33#X',
 			44 => 'Q44#X',
-		);
+		];
 
 		$this->assertEquals( $expected, $actual );
 	}
@@ -71,11 +71,11 @@ class EntityUsageTableBuilderTest extends \MediaWikiTestCase {
 		$db->startAtomic( __METHOD__ );
 
 		foreach ( $entries as $pageId => $entityId ) {
-			$db->insert( 'page_props', array(
+			$db->insert( 'page_props', [
 				'pp_page' => (int)$pageId,
 				'pp_propname' => 'wikibase_item',
 				'pp_value' => (string)$entityId
-			), __METHOD__ );
+			], __METHOD__ );
 		}
 
 		$db->endAtomic( __METHOD__ );
@@ -86,7 +86,7 @@ class EntityUsageTableBuilderTest extends \MediaWikiTestCase {
 
 		$res = $db->select( EntityUsageTable::DEFAULT_TABLE_NAME, '*', '', __METHOD__ );
 
-		$usages = array();
+		$usages = [];
 		foreach ( $res as $row ) {
 			$key = (int)$row->eu_page_id;
 

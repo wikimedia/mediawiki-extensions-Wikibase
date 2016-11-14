@@ -133,7 +133,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 
 		// Setup
 		$request = $this->getRequest();
-		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
+		$parts = ( $subPage === '' ) ? [] : explode( '/', $subPage, 2 );
 		$site = trim( $request->getVal( 'site', isset( $parts[0] ) ? $parts[0] : '' ) );
 		$page = trim( $request->getVal( 'page', isset( $parts[1] ) ? $parts[1] : '' ) );
 
@@ -191,7 +191,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 	 * @return array
 	 */
 	private function getSiteOptions() {
-		$options = array();
+		$options = [];
 		foreach ( $this->siteLinkTargetProvider->getSiteList( $this->groups ) as $site ) {
 			$siteId = $site->getGlobalId();
 			$languageName = $this->languageNameLookup->getName( $site->getLanguageCode() );
@@ -212,8 +212,8 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": Site $siteId exists: " . var_export( $siteExists, true ) );
 
-		$formDescriptor = array(
-			'site' => array(
+		$formDescriptor = [
+			'site' => [
 				'name' => 'site',
 				'default' => $siteId,
 				'type' => 'combobox',
@@ -221,16 +221,16 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 				'id' => 'wb-itembytitle-sitename',
 				'size' => 12,
 				'label-message' => 'wikibase-itembytitle-lookup-site'
-			),
-			'page' => array(
+			],
+			'page' => [
 				'name' => 'page',
 				'default' => $page ?: '',
 				'type' => 'text',
 				'id' => 'pagename',
 				'size' => 36,
 				'label-message' => 'wikibase-itembytitle-lookup-page'
-			)
-		);
+			]
+		];
 
 		HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext() )
 			->setId( 'wb-itembytitle-form1' )
@@ -251,7 +251,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 				Html::openElement( 'div' )
 				. $this->msg(
 					'wikibase-itembytitle-create',
-					$createLink->getFullURL( array( 'site' => $siteId, 'page' => $page ) )
+					$createLink->getFullURL( [ 'site' => $siteId, 'page' => $page ] )
 				)->parse()
 				. Html::closeElement( 'div' )
 			);

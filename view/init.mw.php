@@ -4,17 +4,17 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
 
-$GLOBALS['wgExtensionCredits']['wikibase'][] = array(
+$GLOBALS['wgExtensionCredits']['wikibase'][] = [
 	'path' => __FILE__,
 	'name' => 'Wikibase View',
 	'version' => WIKIBASE_VIEW_VERSION,
-	'author' => array(
+	'author' => [
 		'[http://www.snater.com H. Snater]',
-	),
+	],
 	'url' => 'https://phabricator.wikimedia.org/diffusion/EWBV/',
 	'description' => 'Wikibase View',
 	'license-name' => 'GPL-2.0+'
-);
+];
 
 include __DIR__ . '/resources.php';
 include __DIR__ . '/resources.test.php';
@@ -34,27 +34,27 @@ $GLOBALS['wgHooks']['ResourceLoaderRegisterModules'][] = function( ResourceLoade
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	$moduleTemplate = array(
+	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0],
 		'position' => 'top' // reducing the time between DOM construction and JS initialisation
-	);
+	];
 
-	$modules = array(
-		'jquery.util.getDirectionality' => $moduleTemplate + array(
-			'scripts' => array(
+	$modules = [
+		'jquery.util.getDirectionality' => $moduleTemplate + [
+			'scripts' => [
 				'resources/jquery/jquery.util.getDirectionality.js',
-			),
-		),
-		'wikibase.getLanguageNameByCode' => $moduleTemplate + array(
-			'scripts' => array(
+			],
+		],
+		'wikibase.getLanguageNameByCode' => $moduleTemplate + [
+			'scripts' => [
 				'resources/wikibase/wikibase.getLanguageNameByCode.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase',
-			),
-		),
-	);
+			],
+		],
+	];
 
 	$isUlsLoaded = ExtensionRegistry::getInstance()->isLoaded( 'UniversalLanguageSelector' );
 	if ( $isUlsLoaded ) {

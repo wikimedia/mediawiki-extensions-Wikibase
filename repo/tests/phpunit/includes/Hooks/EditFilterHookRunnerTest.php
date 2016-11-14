@@ -69,7 +69,7 @@ class EditFilterHookRunnerTest extends \MediaWikiTestCase {
 	}
 
 	public function testRun_noHooksRegisteredGoodStatus() {
-		$this->mergeMwGlobalArrayValue( 'wgHooks', array( 'EditFilterMergedContent' => array() ) );
+		$this->mergeMwGlobalArrayValue( 'wgHooks', [ 'EditFilterMergedContent' => [] ] );
 
 		$runner = $this->getEditFilterHookRunner();
 		$status = $runner->run(
@@ -81,62 +81,62 @@ class EditFilterHookRunnerTest extends \MediaWikiTestCase {
 	}
 
 	public function runData() {
-		return array(
-			'good existing item' => array(
+		return [
+			'good existing item' => [
 				Status::newGood(),
 				new Item( new ItemId( 'Q444' ) ),
-				array(
+				[
 					'status' => Status::newGood(),
 					'title' => 'Q444',
 					'namespace' => NS_MAIN,
-				)
-			),
-			'fatal existing item' => array(
+				]
+			],
+			'fatal existing item' => [
 				Status::newFatal( 'foo' ),
 				new Item( new ItemId( 'Q444' ) ),
-				array(
+				[
 					'status' => Status::newFatal( 'foo' ),
 					'title' => 'Q444',
 					'namespace' => NS_MAIN,
-				)
-			),
-			'good new item' => array(
+				]
+			],
+			'good new item' => [
 				Status::newGood(),
 				new Item(),
-				array(
+				[
 					'status' => Status::newGood(),
 					'title' => 'NewItem',
 					'namespace' => NS_MAIN,
-				)
-			),
-			'fatal new item' => array(
+				]
+			],
+			'fatal new item' => [
 				Status::newFatal( 'bar' ),
 				new Item(),
-				array(
+				[
 					'status' => Status::newFatal( 'bar' ),
 					'title' => 'NewItem',
 					'namespace' => NS_MAIN,
-				)
-			),
-			'good existing entityredirect' => array(
+				]
+			],
+			'good existing entityredirect' => [
 				Status::newGood(),
 				new EntityRedirect( new ItemId( 'Q12' ), new ItemId( 'Q13' ) ),
-				array(
+				[
 					'status' => Status::newGood(),
 					'title' => 'Q12',
 					'namespace' => NS_MAIN,
-				)
-			),
-			'fatal existing entityredirect' => array(
+				]
+			],
+			'fatal existing entityredirect' => [
 				Status::newFatal( 'baz' ),
 				new EntityRedirect( new ItemId( 'Q12' ), new ItemId( 'Q13' ) ),
-				array(
+				[
 					'status' => Status::newFatal( 'baz' ),
 					'title' => 'Q12',
 					'namespace' => NS_MAIN,
-				)
-			),
-		);
+				]
+			],
+		];
 	}
 
 	/**
@@ -149,7 +149,7 @@ class EditFilterHookRunnerTest extends \MediaWikiTestCase {
 	public function testRun_hooksAreCalled( Status $inputStatus, $new, array $expected ) {
 		$hooks = array_merge(
 			$GLOBALS['wgHooks'],
-			array( 'EditFilterMergedContent' => array() )
+			[ 'EditFilterMergedContent' => [] ]
 		);
 
 		$hooks['EditFilterMergedContent'][] =
@@ -175,9 +175,9 @@ class EditFilterHookRunnerTest extends \MediaWikiTestCase {
 				$status->merge( $inputStatus );
 			};
 
-		$this->setMwGlobals( array(
+		$this->setMwGlobals( [
 			'wgHooks' => $hooks
-		) );
+		] );
 
 		$runner = $this->getEditFilterHookRunner();
 		$status = $runner->run(

@@ -29,7 +29,7 @@ class DispatchingEntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testInvalidConstructorArgument() {
 		new DispatchingEntityViewFactory(
-			array( 'invalid' )
+			[ 'invalid' ]
 		);
 	}
 
@@ -38,7 +38,7 @@ class DispatchingEntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testUnknownEntityType() {
 		$factory = new DispatchingEntityViewFactory(
-			array()
+			[]
 		);
 		$entityTermsView = $this->getMock( EntityTermsView::class );
 
@@ -46,7 +46,7 @@ class DispatchingEntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 			'unknown',
 			'en',
 			$this->getMock( LabelDescriptionLookup::class ),
-			new LanguageFallbackChain( array() ),
+			new LanguageFallbackChain( [] ),
 			$this->getMock( EditSectionGenerator::class ),
 			$entityTermsView
 		);
@@ -57,11 +57,11 @@ class DispatchingEntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testNoEntityViewReturned() {
 		$factory = new DispatchingEntityViewFactory(
-			array(
+			[
 				'foo' => function() {
 					return null;
 				}
-			)
+			]
 		);
 		$entityTermsView = $this->getMock( EntityTermsView::class );
 
@@ -69,7 +69,7 @@ class DispatchingEntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 			'foo',
 			'en',
 			$this->getMock( LabelDescriptionLookup::class ),
-			new LanguageFallbackChain( array() ),
+			new LanguageFallbackChain( [] ),
 			$this->getMock( EditSectionGenerator::class ),
 			$entityTermsView
 		);
@@ -77,7 +77,7 @@ class DispatchingEntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function testNewEntityView() {
 		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
-		$languageFallbackChain = new LanguageFallbackChain( array() );
+		$languageFallbackChain = new LanguageFallbackChain( [] );
 		$editSectionGenerator = $this->getMock( EditSectionGenerator::class );
 		$entityTermsView = $this->getMock( EntityTermsView::class );
 		$entityView = $this->getMockBuilder( EntityView::class )
@@ -85,7 +85,7 @@ class DispatchingEntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 			->getMockForAbstractClass();
 
 		$factory = new DispatchingEntityViewFactory(
-			array(
+			[
 				'foo' => function(
 					$languageCodeParam,
 					LabelDescriptionLookup $labelDescriptionLookupParam,
@@ -107,7 +107,7 @@ class DispatchingEntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 
 					return $entityView;
 				}
-			)
+			]
 		);
 
 		$newEntityView = $factory->newEntityView(

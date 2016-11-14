@@ -37,7 +37,7 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 		$changeWithDiff->setDiff( new Diff() );
 
 		$rc = new RecentChange();
-		$rc->setAttribs( array(
+		$rc->setAttribs( [
 			'rc_user' => 34,
 			'rc_user_text' => 'BlackMagicIsEvil',
 			'rc_timestamp' => $time,
@@ -46,36 +46,36 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 			'rc_this_oldid' => 343,
 			'rc_last_oldid' => 897,
 			'rc_comment' => 'Fake data!'
-		) );
+		] );
 
 		$changeWithDataFromRC = $factory->newForEntity( EntityChange::REMOVE, new ItemId( 'Q123' ) );
 		$changeWithDataFromRC->setMetadataFromRC( $rc );
 
-		return array(
-			'Simple change' => array(
-				array(
+		return [
+			'Simple change' => [
+				[
 					'change_type' => 'wikibase-item~add',
 					'change_time' => $time,
 					'change_object_id' => 'q21389475',
 					'change_revision_id' => '0',
 					'change_user_id' => '0',
 					'change_info' => '[]',
-				),
+				],
 				$simpleChange
-			),
-			'Change with a diff' => array(
-				array(
+			],
+			'Change with a diff' => [
+				[
 					'change_type' => 'wikibase-item~remove',
 					'change_time' => $time,
 					'change_object_id' => 'q42',
 					'change_revision_id' => '0',
 					'change_user_id' => '0',
 					'change_info' => '{"diff":{"type":"diff","isassoc":null,"operations":[]}}',
-				),
+				],
 				$changeWithDiff
-			),
-			'Change with data from RC' => array(
-				array(
+			],
+			'Change with data from RC' => [
+				[
 					'change_type' => 'wikibase-item~remove',
 					'change_time' => $time,
 					'change_object_id' => 'q123',
@@ -83,10 +83,10 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 					'change_user_id' => '34',
 					'change_info' => '{"metadata":{"user_text":"BlackMagicIsEvil","bot":0,"page_id":2354,"rev_id":343,' .
 						'"parent_id":897,"comment":"Fake data!"}}',
-				),
+				],
 				$changeWithDataFromRC
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -101,7 +101,7 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 		$store = new SqlChangeStore( wfGetLB() );
 		$store->saveChange( $change );
 
-		$res = $db->select( 'wb_changes', '*', array(), __METHOD__ );
+		$res = $db->select( 'wb_changes', '*', [], __METHOD__ );
 
 		$this->assertEquals( 1, $res->numRows(), 'row count' );
 
@@ -139,7 +139,7 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 
 		$store = new SqlChangeStore( wfGetLB() );
 		$store->saveChange( $change );
-		$expected = array(
+		$expected = [
 			'change_id' => (string)$change->getId(),
 			'change_type' => 'wikibase-item~add',
 			'change_time' => '20121026200049',
@@ -147,12 +147,12 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 			'change_revision_id' => '0',
 			'change_user_id' => '0',
 			'change_info' => '[]',
-		);
+		];
 
 		$change->setField( 'time', '20121026200049' );
 		$store->saveChange( $change );
 
-		$res = $db->select( 'wb_changes', '*', array(), __METHOD__ );
+		$res = $db->select( 'wb_changes', '*', [], __METHOD__ );
 
 		$this->assertEquals( 1, $res->numRows(), 'row count' );
 

@@ -68,7 +68,7 @@ class ChangeOpsMerge {
 	 */
 	private $siteLookup;
 
-	public static $conflictTypes = array( 'description', 'sitelink', 'statement' );
+	public static $conflictTypes = [ 'description', 'sitelink', 'statement' ];
 
 	/**
 	 * @param Item $fromItem
@@ -171,7 +171,7 @@ class ChangeOpsMerge {
 				$this->toChangeOps->add( $this->getFingerprintChangeOpFactory()->newSetLabelOp( $langCode, $label ) );
 			} else {
 				$this->fromChangeOps->add( $this->getFingerprintChangeOpFactory()->newRemoveLabelOp( $langCode ) );
-				$this->toChangeOps->add( $this->getFingerprintChangeOpFactory()->newAddAliasesOp( $langCode, array( $label ) ) );
+				$this->toChangeOps->add( $this->getFingerprintChangeOpFactory()->newAddAliasesOp( $langCode, [ $label ] ) );
 			}
 		}
 	}
@@ -388,7 +388,7 @@ class ChangeOpsMerge {
 	 * @return Error[]
 	 */
 	private function removeConflictsWithEntity( array $errors, EntityId $fromId ) {
-		$filtered = array();
+		$filtered = [];
 
 		foreach ( $errors as $error ) {
 			if ( $error instanceof UniquenessViolation

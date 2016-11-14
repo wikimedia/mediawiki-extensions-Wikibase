@@ -78,8 +78,8 @@ class LanguageFallbackLabelDescriptionLookupFactory {
 	 */
 	public function newLabelDescriptionLookup(
 		Language $language,
-		array $entityIds = array(),
-		array $termTypes = array( 'label' )
+		array $entityIds = [],
+		array $termTypes = [ 'label' ]
 	) {
 		$languageFallbackChain = $this->languageFallbackChainFactory->newFromLanguage(
 			$language,

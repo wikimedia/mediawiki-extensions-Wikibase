@@ -46,11 +46,11 @@ class EditPageTest extends WikibaseApiTestCase {
 		// try to update the item with valid data via the edit action
 		$this->setExpectedException( UsageException::class );
 		$this->doApiRequestWithToken(
-			array(
+			[
 				'action' => 'edit',
 				'pageid' => $title->getArticleID(),
 				'text' => $text,
-			)
+			]
 		);
 	}
 
@@ -69,12 +69,12 @@ class EditPageTest extends WikibaseApiTestCase {
 		// try to update the item with valid data via the edit action
 		try {
 			$this->doApiRequestWithToken(
-				array(
+				[
 					'action' => 'edit',
 					'title' => $page->getTitle()->getPrefixedText(),
 					'contentmodel' => CONTENT_MODEL_WIKITEXT,
 					'text' => $text,
-				)
+				]
 			);
 
 			$this->fail( "Saving wikitext to the item namespace should not be possible." );

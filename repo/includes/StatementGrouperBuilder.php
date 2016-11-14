@@ -76,7 +76,7 @@ class StatementGrouperBuilder {
 	 * @return StatementGrouper
 	 */
 	public function getStatementGrouper() {
-		$groupers = array();
+		$groupers = [];
 
 		foreach ( $this->specifications as $entityType => $filterSpecs ) {
 			$groupers[$entityType] = $filterSpecs === null
@@ -94,7 +94,7 @@ class StatementGrouperBuilder {
 	 * @return FilteringStatementGrouper
 	 */
 	private function newFilteringStatementGrouper( array $filterSpecs ) {
-		$filters = array();
+		$filters = [];
 
 		foreach ( $filterSpecs as $groupIdentifier => $spec ) {
 			$filters[$groupIdentifier] = $spec === null

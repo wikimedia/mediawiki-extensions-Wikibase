@@ -72,10 +72,10 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 		$termLookup->expects( $this->any() )
 			->method( 'getLabels' )
 			->will( $this->returnCallback( function( EntityId $id ) {
-				return array(
+				return [
 					'de' => 'Name für ' . $id->getSerialization(),
 					'en' => 'Label for ' . $id->getSerialization(),
-				);
+				];
 			} ) );
 
 		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
@@ -97,10 +97,10 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 		$fallbackChainFactory = new LanguageFallbackChainFactory();
 		$fallbackChain = $fallbackChainFactory->newFromLanguageCode( $lang, $fallbackMode );
 
-		return new FormatterOptions( array(
+		return new FormatterOptions( [
 			ValueFormatter::OPT_LANG => $lang,
 			FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $fallbackChain,
-		) );
+		] );
 	}
 
 	/**
@@ -132,7 +132,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			$this->getTitleLookup()
 		);
 
-		$factory = array( $builders, $functionName );
+		$factory = [ $builders, $functionName ];
 		$formatter = call_user_func( $factory, $format, $options );
 
 		$this->assertInstanceOf( ValueFormatter::class, $formatter );
@@ -140,15 +140,15 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	}
 
 	public function testNewFormatter_formats() {
-		$formats = array(
+		$formats = [
 			SnakFormatter::FORMAT_PLAIN,
 			SnakFormatter::FORMAT_WIKI,
 			SnakFormatter::FORMAT_HTML,
 			SnakFormatter::FORMAT_HTML_DIFF,
 			SnakFormatter::FORMAT_HTML_WIDGET
-		);
+		];
 
-		$functionNames = array(
+		$functionNames = [
 			'newStringFormatter',
 			'newUrlFormatter',
 			'newCommonsMediaFormatter',
@@ -157,7 +157,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			'newTimeFormatter',
 			'newGlobeCoordinateFormatter',
 			'newQuantityFormatter',
-		);
+		];
 
 		$options = new FormatterOptions();
 
@@ -187,138 +187,138 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	}
 
 	public function provideNewFormatter() {
-		return array(
+		return [
 			// String
-			'plain string' => array(
+			'plain string' => [
 				'String',
 				SnakFormatter::FORMAT_PLAIN,
 				$this->newFormatterOptions(),
 				new StringValue( 'foo bar' ),
 				'@^foo bar$@'
-			),
-			'wikitext string' => array(
+			],
+			'wikitext string' => [
 				'String',
 				SnakFormatter::FORMAT_WIKI,
 				$this->newFormatterOptions(),
 				new StringValue( 'foo[bar]' ),
 				'@^foo&#91;bar&#93;$@'
-			),
-			'html string' => array(
+			],
+			'html string' => [
 				'String',
 				SnakFormatter::FORMAT_HTML,
 				$this->newFormatterOptions(),
 				new StringValue( 'foo<bar>' ),
 				'@^foo&lt;bar&gt;$@'
-			),
+			],
 
 			// UnDeserializableValue
-			'plain bad value' => array(
+			'plain bad value' => [
 				'UnDeserializableValue',
 				SnakFormatter::FORMAT_PLAIN,
 				$this->newFormatterOptions(),
 				new UnDeserializableValue( 'foo bar', 'xyzzy', 'broken' ),
 				'@invalid@'
-			),
+			],
 
 			// Url
-			'plain url' => array(
+			'plain url' => [
 				'Url',
 				SnakFormatter::FORMAT_PLAIN,
 				$this->newFormatterOptions(),
 				new StringValue( 'http://acme.com/' ),
 				'@^http://acme\\.com/$@'
-			),
-			'wikitext url' => array(
+			],
+			'wikitext url' => [
 				'Url',
 				SnakFormatter::FORMAT_WIKI,
 				$this->newFormatterOptions(),
 				new StringValue( 'http://acme.com/' ),
 				'@^http://acme\\.com/$@'
-			),
-			'html url' => array(
+			],
+			'html url' => [
 				'Url',
 				SnakFormatter::FORMAT_HTML,
 				$this->newFormatterOptions(),
 				new StringValue( 'http://acme.com/' ),
 				'@^.*href="http://acme.com/".*$@'
-			),
+			],
 
 			// EntityId
-			'plain item label (with language fallback)' => array(
+			'plain item label (with language fallback)' => [
 				'EntityId',
 				SnakFormatter::FORMAT_PLAIN,
 				$this->newFormatterOptions( 'de-ch' ), // should fall back to 'de'
 				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'@^Name für Q5$@' // compare mock object created in newBuilders()
-			),
-			'item link (with entity lookup)' => array(
+			],
+			'item link (with entity lookup)' => [
 				'EntityId',
 				SnakFormatter::FORMAT_HTML,
 				$this->newFormatterOptions(),
 				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'/^<a\b[^>]* href="[^"]*\bQ5">Label for Q5<\/a>.*$/', // compare mock object created in newBuilders()
 				'wikibase-item'
-			),
-			'property link (with entity lookup)' => array(
+			],
+			'property link (with entity lookup)' => [
 				'EntityId',
 				SnakFormatter::FORMAT_HTML,
 				$this->newFormatterOptions(),
 				new EntityIdValue( new PropertyId( 'P5' ) ),
 				'/^<a\b[^>]* href="[^"]*\bP5">Label for P5<\/a>.*$/',
 				'wikibase-property'
-			),
+			],
 
 			// CommonsMedia
-			'plain commons media' => array(
+			'plain commons media' => [
 				'CommonsMedia',
 				SnakFormatter::FORMAT_PLAIN,
 				$this->newFormatterOptions(),
 				new StringValue( 'Example.jpg' ),
 				'@^Example.jpg$@',
-			),
-			'html commons link' => array(
+			],
+			'html commons link' => [
 				'CommonsMedia',
 				SnakFormatter::FORMAT_HTML,
 				$this->newFormatterOptions(),
 				new StringValue( 'Example.jpg' ),
 				'@^<a class="extiw" href="//commons\\.wikimedia\\.org/wiki/File:Example\\.jpg">Example\\.jpg</a>$@',
 				'commonsMedia'
-			),
+			],
 
 			// GlobeCoordinate
-			'plain coordinate' => array(
+			'plain coordinate' => [
 				'GlobeCoordinate',
 				SnakFormatter::FORMAT_PLAIN,
 				$this->newFormatterOptions(),
 				new GlobeCoordinateValue( new LatLongValue( -55.755786, 37.25633 ), 0.25 ),
 				'@^55°45\'S, 37°15\'E$@'
-			),
-			'coordinate details' => array(
+			],
+			'coordinate details' => [
 				'GlobeCoordinate',
 				SnakFormatter::FORMAT_HTML_DIFF,
 				$this->newFormatterOptions( 'de' ),
 				new GlobeCoordinateValue( new LatLongValue( -55.755786, 37.25633 ), 0.25 ),
 				'@^.*55° 45\', 37° 15\'.*$@'
-			),
+			],
 
 			// Quantity
-			'localized quantity' => array(
+			'localized quantity' => [
 				'Quantity',
 				SnakFormatter::FORMAT_PLAIN,
 				$this->newFormatterOptions( 'de' ),
 				QuantityValue::newFromNumber( '+123456.789' ),
 				'@^123\\.456,789$@'
-			),
-			'quantity details' => array(
+			],
+			'quantity details' => [
 				'Quantity',
 				SnakFormatter::FORMAT_HTML_DIFF,
 				$this->newFormatterOptions( 'de' ),
 				QuantityValue::newFromNumber( '+123456.789' ),
 				'@^.*123\\.456,789.*$@'
-			),
+			],
 
 			// Time
-			'a month in 1980' => array(
+			'a month in 1980' => [
 				'Time',
 				SnakFormatter::FORMAT_PLAIN,
 				$this->newFormatterOptions(),
@@ -329,8 +329,8 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 					'http://www.wikidata.org/entity/Q1985727'
 				),
 				'/^May 1980$/'
-			),
-			'a gregorian day in 1520' => array(
+			],
+			'a gregorian day in 1520' => [
 				'Time',
 				SnakFormatter::FORMAT_HTML,
 				$this->newFormatterOptions(),
@@ -341,8 +341,8 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 					'http://www.wikidata.org/entity/Q1985727'
 				),
 				'/^1 May 1520<sup class="wb-calendar-name">Gregorian<\/sup>$/'
-			),
-			'a julian day in 1980' => array(
+			],
+			'a julian day in 1980' => [
 				'Time',
 				SnakFormatter::FORMAT_HTML_DIFF,
 				$this->newFormatterOptions(),
@@ -353,24 +353,24 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 					'http://www.wikidata.org/entity/Q1985786'
 				),
 				'/^.*>1 May 1980<sup class="wb-calendar-name">Julian<\/sup>.*$/'
-			),
+			],
 
 			// Monolingual
-			'text in english' => array(
+			'text in english' => [
 				'Monolingual',
 				SnakFormatter::FORMAT_PLAIN,
 				$this->newFormatterOptions( 'en' ),
 				new MonolingualTextValue( 'en', 'Hello World' ),
 				'/^Hello World$/'
-			),
-			'text in german' => array(
+			],
+			'text in german' => [
 				'Monolingual',
 				SnakFormatter::FORMAT_HTML,
 				$this->newFormatterOptions( 'en' ),
 				new MonolingualTextValue( 'de', 'Hallo Welt' ),
 				'/^.*lang="de".*?>Hallo Welt<.*Deutsch.*$/'
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -393,22 +393,22 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	}
 
 	public function provideNewFormatter_noTitleLookup() {
-		return array(
-			'plain item label' => array(
+		return [
+			'plain item label' => [
 				'newEntityIdFormatter',
 				SnakFormatter::FORMAT_PLAIN,
 				$this->newFormatterOptions(),
 				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'@^Label for Q5$@'
-			),
-			'item link' => array(
+			],
+			'item link' => [
 				'newEntityIdFormatter',
 				SnakFormatter::FORMAT_HTML,
 				$this->newFormatterOptions(),
 				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'/^.*Label for Q5.*$/'
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -435,32 +435,32 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 		$fallbackFactory = new LanguageFallbackChainFactory();
 		$fallbackChain = $fallbackFactory->newFromLanguage( Language::factory( 'de-ch' ) );
 
-		return array(
-			'language option' => array(
+		return [
+			'language option' => [
 				'newEntityIdFormatter',
-				new FormatterOptions( array(
+				new FormatterOptions( [
 					ValueFormatter::OPT_LANG => 'de',
-				) ),
+				] ),
 				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'@>Name für Q5<@'
-			),
-			'fallback option' => array(
+			],
+			'fallback option' => [
 				'newEntityIdFormatter',
-				new FormatterOptions( array(
+				new FormatterOptions( [
 					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $fallbackChain,
-				) ),
+				] ),
 				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'@>Name für Q5<@'
-			),
-			'LabelDescriptionLookup option' => array(
+			],
+			'LabelDescriptionLookup option' => [
 				'newEntityIdFormatter',
-				new FormatterOptions( array(
+				new FormatterOptions( [
 					FormatterLabelDescriptionLookupFactory::OPT_LABEL_DESCRIPTION_LOOKUP => $labelDescriptionLookup,
-				) ),
+				] ),
 				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'@>Custom LabelDescriptionLookup<@'
-			),
-		);
+			],
+		];
 	}
 
 }

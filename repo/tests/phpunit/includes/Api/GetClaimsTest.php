@@ -100,10 +100,10 @@ class GetClaimsTest extends ApiTestCase {
 		$this->addStatements( $item, $propertyId );
 		$this->save( $item );
 
-		return array(
+		return [
 			$property,
 			$item,
-		);
+		];
 	}
 
 	/**
@@ -112,38 +112,38 @@ class GetClaimsTest extends ApiTestCase {
 	public function validRequestProvider() {
 		$entities = $this->getNewEntities();
 
-		$argLists = array();
+		$argLists = [];
 
 		foreach ( $entities as $entity ) {
 			$idSerialization = $entity->getId()->getSerialization();
 			/** @var StatementListProvider $entity */
 			$statements = $entity->getStatements();
 
-			$params = array(
+			$params = [
 				'action' => 'wbgetclaims',
 				'entity' => $idSerialization,
-			);
+			];
 
-			$argLists[] = array( $params, $statements->toArray() );
+			$argLists[] = [ $params, $statements->toArray() ];
 
 			foreach ( $statements->toArray() as $statement ) {
-				$params = array(
+				$params = [
 					'action' => 'wbgetclaims',
 					'claim' => $statement->getGuid(),
-				);
-				$argLists[] = array( $params, array( $statement ) );
+				];
+				$argLists[] = [ $params, [ $statement ] ];
 			}
 
-			foreach ( array( Statement::RANK_DEPRECATED, Statement::RANK_NORMAL, Statement::RANK_PREFERRED ) as $rank ) {
+			foreach ( [ Statement::RANK_DEPRECATED, Statement::RANK_NORMAL, Statement::RANK_PREFERRED ] as $rank ) {
 				$statementRankSerializer = new StatementRankSerializer();
-				$params = array(
+				$params = [
 					'action' => 'wbgetclaims',
 					'entity' => $idSerialization,
 					'rank' => $statementRankSerializer->serialize( $rank ),
-				);
+				];
 
 				$statementsByRank = $statements->getByRank( $rank )->toArray();
-				$argLists[] = array( $params, $statementsByRank );
+				$argLists[] = [ $params, $statementsByRank ];
 			}
 		}
 
@@ -188,10 +188,10 @@ class GetClaimsTest extends ApiTestCase {
 	 * @dataProvider invalidClaimProvider
 	 */
 	public function testGetInvalidClaims( $guid ) {
-		$params = array(
+		$params = [
 			'action' => 'wbgetclaims',
 			'claim' => $guid
-		);
+		];
 
 		try {
 			$this->doApiRequest( $params );
@@ -202,10 +202,10 @@ class GetClaimsTest extends ApiTestCase {
 	}
 
 	public function invalidClaimProvider() {
-		return array(
-			array( 'xyz' ),
-			array( 'x$y$z' )
-		);
+		return [
+			[ 'xyz' ],
+			[ 'x$y$z' ]
+		];
 	}
 
 	/**
@@ -220,11 +220,11 @@ class GetClaimsTest extends ApiTestCase {
 			$entity = $item->getId()->getSerialization();
 		}
 
-		$params = array(
+		$params = [
 			'action' => 'wbgetclaims',
 			'entity' => $entity,
 			'property' => $property,
-		);
+		];
 
 		try {
 			$this->doApiRequest( $params );
@@ -235,10 +235,10 @@ class GetClaimsTest extends ApiTestCase {
 	}
 
 	public function getInvalidIdsProvider() {
-		return array(
-			array( null, 'nopeNopeNope' ),
-			array( 'whatTheFuck', 'P42' ),
-		);
+		return [
+			[ null, 'nopeNopeNope' ],
+			[ 'whatTheFuck', 'P42' ],
+		];
 	}
 
 }

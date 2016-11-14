@@ -44,7 +44,7 @@ use Wikibase\Repo\Validators\UniquenessViolation;
  */
 class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestBase {
 
-	private static $languageCodes = array( 'en', 'de', 'de-ch', 'ii', 'zh' );
+	private static $languageCodes = [ 'en', 'de', 'de-ch', 'ii', 'zh' ];
 
 	/**
 	 * @see SpecialPageTestBase::newSpecialPage()
@@ -80,7 +80,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	 */
 	private function getMockEditFitlerHookRunner() {
 		$runner = $this->getMockBuilder( EditFilterHookRunner::class )
-			->setMethods( array( 'run' ) )
+			->setMethods( [ 'run' ] )
 			->disableOriginalConstructor()
 			->getMock();
 		$runner->expects( $this->any() )
@@ -121,7 +121,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				array $descriptions,
 				EntityId $ignoreEntityId = null
 			) {
-				$errors = array();
+				$errors = [];
 
 				$errors = array_merge( $errors, $this->detectDupes( $labels ) );
 				$errors = array_merge( $errors, $this->detectDupes( $descriptions ) );
@@ -141,7 +141,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	 * @return UniquenessViolation[]
 	 */
 	public function detectDupes( array $terms ) {
-		$errors = array();
+		$errors = [];
 
 		foreach ( $terms as $languageCode => $term ) {
 			if ( $term === 'DUPE' ) {
@@ -151,11 +151,11 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 					$q666,
 					'found conflicting terms',
 					'test-conflict',
-					array(
+					[
 						$term,
 						$languageCode,
 						$q666,
-					)
+					]
 				);
 			}
 		}
@@ -171,9 +171,9 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	 * @return Fingerprint
 	 */
 	private function makeFingerprint(
-		array $labels = array(),
-		array $descriptions = array(),
-		array $aliases = array()
+		array $labels = [],
+		array $descriptions = [],
+		array $aliases = []
 	) {
 		$fingerprint = new Fingerprint();
 
@@ -195,160 +195,160 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	public function executeProvider() {
 		global $wgLang;
 
-		$formMatchers['id'] = array(
+		$formMatchers['id'] = [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-modifyentity-id',
 				'class' => 'wb-input',
 				'name' => 'id',
-			),
-		);
-		$formMatchers['language'] = array(
+			],
+		];
+		$formMatchers['language'] = [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wikibase-setlabeldescriptionaliases-language',
 				'class' => 'wb-input',
 				'name' => 'language',
 				'value' => $wgLang->getCode(), // Default user language
-			),
-		);
-		$formMatchers['submit'] = array(
+			],
+		];
+		$formMatchers['submit'] = [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-setlabeldescriptionaliases-submit',
 				'class' => 'wb-button',
 				'type' => 'submit',
 				'name' => 'wikibase-setlabeldescriptionaliases-submit',
-			),
-		);
+			],
+		];
 
 		$withIdMatchers = $formMatchers;
-		$withIdMatchers['id']['attributes'] = array(
+		$withIdMatchers['id']['attributes'] = [
 			'type' => 'hidden',
 			'name' => 'id',
 			'value' => 'regexp:/Q\d+/',
-		);
-		$withIdMatchers['language']['attributes'] = array(
+		];
+		$withIdMatchers['language']['attributes'] = [
 			'type' => 'hidden',
 			'name' => 'language',
 			'value' => $wgLang->getCode(), // Default user language
-		);
-		$withIdMatchers['label'] = array(
+		];
+		$withIdMatchers['label'] = [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wikibase-setlabeldescriptionaliases-label',
 				'class' => 'wb-input',
 				'name' => 'label',
-			),
-		);
-		$withIdMatchers['description'] = array(
+			],
+		];
+		$withIdMatchers['description'] = [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wikibase-setlabeldescriptionaliases-description',
 				'class' => 'wb-input',
 				'name' => 'description',
-			),
-		);
-		$withIdMatchers['aliases'] = array(
+			],
+		];
+		$withIdMatchers['aliases'] = [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wikibase-setlabeldescriptionaliases-aliases',
 				'class' => 'wb-input',
 				'name' => 'aliases',
-			),
-		);
+			],
+		];
 
 		$withLanguageMatchers = $withIdMatchers;
 		$withLanguageMatchers['language']['attributes']['value'] = 'de';
 		$withLanguageMatchers['label']['attributes']['value'] = 'foo';
 
 		$fooFingerprint = $this->makeFingerprint(
-			array( 'de' => 'foo' )
+			[ 'de' => 'foo' ]
 		);
 
-		return array(
-			'no input' => array(
+		return [
+			'no input' => [
 				$fooFingerprint,
 				'',
 				null,
 				$formMatchers,
 				null
-			),
+			],
 
-			'with id but no language' => array(
+			'with id but no language' => [
 				$fooFingerprint,
 				'$id',
 				null,
 				$withIdMatchers,
 				null
-			),
+			],
 
-			'with id and language' => array(
+			'with id and language' => [
 				$fooFingerprint,
 				'$id/de',
 				null,
 				$withLanguageMatchers,
 				null
-			),
+			],
 
-			'with id and language attribute' => array(
+			'with id and language attribute' => [
 				$fooFingerprint,
 				'$id',
-				new FauxRequest( array( 'language' => 'de' ) ),
+				new FauxRequest( [ 'language' => 'de' ] ),
 				$withLanguageMatchers,
 				null
-			),
+			],
 
-			'add label' => array(
+			'add label' => [
 				$fooFingerprint,
 				'$id',
-				new FauxRequest( array(
+				new FauxRequest( [
 					'language' => 'en',
 					'label' => "FOO\xE2\x80\x82",
 					'aliases' => "\xE2\x80\x82",
-				), true ),
-				array(),
+				], true ),
+				[],
 				$this->makeFingerprint(
-					array( 'de' => 'foo', 'en' => 'FOO' )
+					[ 'de' => 'foo', 'en' => 'FOO' ]
 				),
-			),
+			],
 
-			'replace label' => array(
+			'replace label' => [
 				$fooFingerprint,
 				'$id',
-				new FauxRequest( array( 'language' => 'de', 'label' => 'FOO' ), true ),
-				array(),
+				new FauxRequest( [ 'language' => 'de', 'label' => 'FOO' ], true ),
+				[],
 				$this->makeFingerprint(
-					array( 'de' => 'FOO' )
+					[ 'de' => 'FOO' ]
 				),
-			),
+			],
 
-			'add description, keep label' => array(
+			'add description, keep label' => [
 				$fooFingerprint,
 				'$id',
-				new FauxRequest( array( 'language' => 'de', 'description' => 'Lorem Ipsum' ), true ),
-				array(),
+				new FauxRequest( [ 'language' => 'de', 'description' => 'Lorem Ipsum' ], true ),
+				[],
 				$this->makeFingerprint(
-					array( 'de' => 'foo' ),
-					array( 'de' => 'Lorem Ipsum' )
+					[ 'de' => 'foo' ],
+					[ 'de' => 'Lorem Ipsum' ]
 				),
-			),
+			],
 
-			'set aliases' => array(
+			'set aliases' => [
 				$fooFingerprint,
 				'$id',
-				new FauxRequest( array(
+				new FauxRequest( [
 					'language' => 'de',
 					'aliases' => "foo\xE2\x80\x82|bar",
-				), true ),
-				array(),
+				], true ),
+				[],
 				$this->makeFingerprint(
-					array( 'de' => 'foo' ),
-					array(),
-					array( 'de' => array( 'foo', 'bar' ) )
+					[ 'de' => 'foo' ],
+					[],
+					[ 'de' => [ 'foo', 'bar' ] ]
 				),
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -389,7 +389,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	}
 
 	public function testLanguageCodeEscaping() {
-		$request = new FauxRequest( array( 'language' => '<sup>' ), true );
+		$request = new FauxRequest( [ 'language' => '<sup>' ], true );
 		list( $output, ) = $this->executeSpecialPage( null, $request );
 
 		$this->assertContains( '<p class="error">', $output );

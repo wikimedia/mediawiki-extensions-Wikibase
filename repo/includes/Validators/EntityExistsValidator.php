@@ -56,14 +56,14 @@ class EntityExistsValidator implements ValueValidator {
 
 		$actualType = $value->getEntityType();
 
-		$errors = array();
+		$errors = [];
 
 		if ( $this->entityType !== null && $actualType !== $this->entityType ) {
 			$errors[] = Error::newError(
 				"Wrong entity type: " . $actualType,
 				null,
 				'bad-entity-type',
-				array( $actualType )
+				[ $actualType ]
 			);
 		}
 
@@ -72,7 +72,7 @@ class EntityExistsValidator implements ValueValidator {
 				"Entity not found: " . $value,
 				null,
 				'no-such-entity',
-				array( $value )
+				[ $value ]
 			);
 		}
 

@@ -38,35 +38,35 @@ class LabelUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 	public function validFingerprintProvider() {
 		$p99 = new PropertyId( 'P99' );
 
-		return array(
-			'no conflict' => array(
+		return [
+			'no conflict' => [
 				new Fingerprint(
-					new TermList( array( new Term( 'de', 'Foo' ) ) ),
+					new TermList( [ new Term( 'de', 'Foo' ) ] ),
 					new TermList(),
 					new AliasGroupList()
 				),
 				$p99
-			),
-			'self conflict' => array(
+			],
+			'self conflict' => [
 				// the mock considers "DUPE" a dupe with P666
 				new Fingerprint(
-					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
+					new TermList( [ new Term( 'de', 'DUPE' ) ] ),
 					new TermList(),
 					new AliasGroupList()
 				),
 				new PropertyId( 'P666' ) // ignore conflicts with P666
-			),
-			'ignored conflict' => array(
+			],
+			'ignored conflict' => [
 				// the mock considers "DUPE" a dupe with P666
 				new Fingerprint(
-					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
+					new TermList( [ new Term( 'de', 'DUPE' ) ] ),
 					new TermList(),
 					new AliasGroupList()
 				),
 				$p99,
-				array( 'en' ) // only consider conflicts in english
-			),
-		);
+				[ 'en' ] // only consider conflicts in english
+			],
+		];
 	}
 
 	private function fingerprintCaseToEntityCase( $fingerprintCase, $id ) {
@@ -83,7 +83,7 @@ class LabelUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function validEntityProvider() {
-		$cases = array();
+		$cases = [];
 
 		foreach ( $this->validFingerprintProvider() as $name => $fingerprintCase ) {
 			// if the case has a non-null languageCodes or a strange entityId param, skip it
@@ -96,16 +96,16 @@ class LabelUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 		}
 
 		// check validation without entity id
-		$cases["no id"] = array(
+		$cases["no id"] = [
 			Property::newFromType( 'string' ),
-		);
+		];
 
 		return $cases;
 	}
 
 	public function invalidFingerprintProvider() {
 		$dupeLabelFingerprint = new Fingerprint(
-			new TermList( array( new Term( 'de', 'DUPE' ) ) ),
+			new TermList( [ new Term( 'de', 'DUPE' ) ] ),
 			new TermList(),
 			new AliasGroupList()
 		);
@@ -116,15 +116,15 @@ class LabelUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 //			new AliasGroupList( array( new AliasGroup( 'de', array( 'DUPE' ) ) ) )
 //		);
 
-		return array(
-			'conflicting label' => array( $dupeLabelFingerprint, 'label-conflict' ),
+		return [
+			'conflicting label' => [ $dupeLabelFingerprint, 'label-conflict' ],
 			// insert again when T104393 is resolved
 			// 'conflicting alias' => array( $dupeAliasFingerprint, 'label-conflict' ),
-		);
+		];
 	}
 
 	public function invalidEntityProvider() {
-		$cases = array();
+		$cases = [];
 
 		$i = 1;
 		foreach ( $this->invalidFingerprintProvider() as $name => $fingerprintCase ) {

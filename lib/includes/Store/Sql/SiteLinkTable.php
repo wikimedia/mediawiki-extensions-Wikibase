@@ -134,20 +134,20 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 	private function insertLinks( Item $item, array $links, DatabaseBase $dbw ) {
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': inserting links for ' . $item->getId()->getSerialization() );
 
-		$insert = array();
+		$insert = [];
 		foreach ( $links as $siteLink ) {
-			$insert[] = array(
+			$insert[] = [
 				'ips_item_id' => $item->getId()->getNumericId(),
 				'ips_site_id' => $siteLink->getSiteId(),
 				'ips_site_page' => $siteLink->getPageName()
-			);
+			];
 		}
 
 		$success = $dbw->insert(
 			$this->table,
 			$insert,
 			__METHOD__,
-			array( 'IGNORE' )
+			[ 'IGNORE' ]
 		);
 
 		return $success && $dbw->affectedRows();
@@ -163,17 +163,17 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 	private function deleteLinks( Item $item, array $links, DatabaseBase $dbw ) {
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': deleting links for ' . $item->getId()->getSerialization() );
 
-		$siteIds = array();
+		$siteIds = [];
 		foreach ( $links as $siteLink ) {
 			$siteIds[] = $siteLink->getSiteId();
 		}
 
 		$success = $dbw->delete(
 			$this->table,
-			array(
+			[
 				'ips_item_id' => $item->getId()->getNumericId(),
 				'ips_site_id' => $siteIds
-			),
+			],
 			__METHOD__
 		);
 
@@ -199,7 +199,7 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 
 		$ok = $dbw->delete(
 			$this->table,
-			array( 'ips_item_id' => $itemId->getNumericId() ),
+			[ 'ips_item_id' => $itemId->getNumericId() ],
 			__METHOD__
 		);
 
@@ -226,11 +226,11 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 
 		$result = $db->selectRow(
 			$this->table,
-			array( 'ips_item_id' ),
-			array(
+			[ 'ips_item_id' ],
+			[
 				'ips_site_id' => $globalSiteId,
 				'ips_site_page' => $pageTitle,
-			)
+			]
 		);
 
 		$this->releaseConnection( $db );
@@ -279,42 +279,42 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 	 * @return array[]
 	 * @note The arrays returned by this method do not contain badges!
 	 */
-	public function getLinks( array $numericIds = array(), array $siteIds = array(), array $pageNames = array() ) {
+	public function getLinks( array $numericIds = [], array $siteIds = [], array $pageNames = [] ) {
 		$dbr = $this->getConnection( DB_SLAVE );
 
-		$conditions = array();
+		$conditions = [];
 
-		if ( $numericIds !== array() ) {
+		if ( $numericIds !== [] ) {
 			$conditions['ips_item_id'] = $numericIds;
 		}
 
-		if ( $siteIds !== array() ) {
+		if ( $siteIds !== [] ) {
 			$conditions['ips_site_id'] = $siteIds;
 		}
 
-		if ( $pageNames !== array() ) {
+		if ( $pageNames !== [] ) {
 			$conditions['ips_site_page'] = $pageNames;
 		}
 
 		$links = $dbr->select(
 			$this->table,
-			array(
+			[
 				'ips_site_id',
 				'ips_site_page',
 				'ips_item_id',
-			),
+			],
 			$conditions,
 			__METHOD__
 		);
 
-		$siteLinks = array();
+		$siteLinks = [];
 
 		foreach ( $links as $link ) {
-			$siteLinks[] = array(
+			$siteLinks[] = [
 				$link->ips_site_id,
 				$link->ips_site_page,
 				$link->ips_item_id,
-			);
+			];
 		}
 
 		$this->releaseConnection( $dbr );
@@ -336,16 +336,16 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 
 		$rows = $dbr->select(
 			$this->table,
-			array(
+			[
 				'ips_site_id', 'ips_site_page'
-			),
-			array(
+			],
+			[
 				'ips_item_id' => $numericId
-			),
+			],
 			__METHOD__
 		);
 
-		$siteLinks = array();
+		$siteLinks = [];
 
 		foreach ( $rows as $row ) {
 			$siteLinks[] = new SiteLink( $row->ips_site_id, $row->ips_site_page );

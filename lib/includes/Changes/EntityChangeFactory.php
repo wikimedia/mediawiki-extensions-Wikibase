@@ -42,7 +42,7 @@ class EntityChangeFactory {
 	 */
 	public function __construct(
 		EntityDiffer $entityDiffer,
-		array $changeClasses = array()
+		array $changeClasses = []
 	) {
 		$this->entityDiffer = $entityDiffer;
 		$this->changeClasses = $changeClasses;
@@ -57,7 +57,7 @@ class EntityChangeFactory {
 	 *
 	 * @return EntityChange
 	 */
-	public function newForEntity( $action, EntityId $entityId, array $fields = array() ) {
+	public function newForEntity( $action, EntityId $entityId, array $fields = [] ) {
 		$entityType = $entityId->getEntityType();
 
 		if ( isset( $this->changeClasses[ $entityType ] ) ) {
@@ -114,7 +114,7 @@ class EntityChangeFactory {
 		$action,
 		EntityDocument $oldEntity = null,
 		EntityDocument $newEntity = null,
-		array $fields = array()
+		array $fields = []
 	) {
 		if ( $oldEntity === null && $newEntity === null ) {
 			throw new MWException( 'Either $oldEntity or $newEntity must be given' );

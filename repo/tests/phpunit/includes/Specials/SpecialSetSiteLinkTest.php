@@ -35,37 +35,37 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	/**
 	 * @var array
 	 */
-	private static $matchers = array(
-		'id' => array(
+	private static $matchers = [
+		'id' => [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-modifyentity-id',
 				'class' => 'wb-input',
 				'name' => 'id',
-			) ),
-		'site' => array(
+			] ],
+		'site' => [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-setsitelink-site',
 				'class' => 'wb-input',
 				'name' => 'site',
-			) ),
-		'page' => array(
+			] ],
+		'page' => [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-setsitelink-page',
 				'class' => 'wb-input',
 				'name' => 'page',
-			) ),
-		'submit' => array(
+			] ],
+		'submit' => [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-setsitelink-submit',
 				'class' => 'wb-button',
 				'type' => 'submit',
 				'name' => 'wikibase-setsitelink-submit',
-			) )
-	);
+			] ]
+	];
 
 	/**
 	 * @var string|null
@@ -94,7 +94,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->setMwGlobals( 'wgGroupPermissions', array( '*' => array( 'edit' => true ) ) );
+		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [ 'edit' => true ] ] );
 
 		if ( !self::$badgeId ) {
 			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
@@ -107,7 +107,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
 		self::$oldBadgeItemsSetting = $settings->getSetting( 'badgeItems' );
-		$settings->setSetting( 'badgeItems', array( self::$badgeId => '' ) );
+		$settings->setSetting( 'badgeItems', [ self::$badgeId => '' ] );
 	}
 
 	protected function tearDown() {
@@ -125,7 +125,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		$store->saveEntity( $badge, "testing", $GLOBALS['wgUser'], EDIT_NEW );
 
 		$item = new Item();
-		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Wikidata', array( $badge->getId() ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Wikidata', [ $badge->getId() ] );
 		$store->saveEntity( $item, "testing", $GLOBALS['wgUser'], EDIT_NEW );
 
 		$redirect = new EntityRedirect( new ItemId( 'Q12345678' ), $item->getId() );
@@ -138,21 +138,21 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 	private function addBadgeMatcher() {
 		$name = 'badge-' . self::$badgeId;
-		self::$matchers['badgeinput'] = array(
+		self::$matchers['badgeinput'] = [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'name' => $name,
 				'id' => $name,
 				'type' => 'checkbox'
-			) );
+			] ];
 
-		self::$matchers['badgelabel'] = array(
+		self::$matchers['badgelabel'] = [
 			'tag' => 'label',
-			'attributes' => array(
+			'attributes' => [
 				'for' => $name
-			),
+			],
 			'content' => 'Guter Artikel'
-		);
+		];
 	}
 
 	public function testExecuteEmptyForm() {
@@ -188,29 +188,29 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		// Note: use language fallback de-ch => de
 		list( $output, ) = $this->executeSpecialPage( self::$itemId . '/dewiki', null, 'de-ch' );
 
-		$matchers['id'] = array(
+		$matchers['id'] = [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'type' => 'hidden',
 				'name' => 'id',
 				'value' => self::$itemId,
-		) );
+		] ];
 
-		$matchers['site'] = array(
+		$matchers['site'] = [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'type' => 'hidden',
 				'name' => 'site',
 				'value' => 'dewiki',
-		) );
+		] ];
 
-		$matchers['remove'] = array(
+		$matchers['remove'] = [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'type' => 'hidden',
 				'name' => 'remove',
 				'value' => 'remove',
-			) );
+			] ];
 
 		$matchers['value']['attributes']['value'] = 'Wikidata';
 
@@ -260,32 +260,32 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	}
 
 	public function testExecutePostPreserveSiteLinkWhenNothingEntered() {
-		$request = new FauxRequest( array(
+		$request = new FauxRequest( [
 			'id' => self::$itemId,
 			'site' => 'dewiki',
 			'page' => '',
-		), true );
+		], true );
 
 		list( $output, ) = $this->executeSpecialPage( '', $request );
 
-		$this->assertTag( array(
+		$this->assertTag( [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-setsitelink-page',
 				'class' => 'wb-input',
 				'name' => 'page',
 				'value' => 'Wikidata',
-			)
-		), $output, 'Value still preserves when no value was entered in the big form' );
+			]
+		], $output, 'Value still preserves when no value was entered in the big form' );
 	}
 
 	public function testExecutePostModifySiteLink() {
 		$lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
-		$request = new FauxRequest( array(
+		$request = new FauxRequest( [
 			'id' => self::$itemId,
 			'site' => 'dewiki',
 			'page' => 'Wikipedia',
-		), true );
+		], true );
 
 		list( , $response ) = $this->executeSpecialPage( '', $request );
 		$redirect = $response instanceof FauxResponse ? $response->getHeader( 'Location' ) : null;
@@ -304,12 +304,12 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 	public function testExecutePostRemoveSiteLink() {
 		$lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
-		$request = new FauxRequest( array(
+		$request = new FauxRequest( [
 			'id' => self::$itemId,
 			'site' => 'dewiki',
 			'page' => '',
 			'remove' => true,
-		), true );
+		], true );
 
 		list( , $response ) = $this->executeSpecialPage( '', $request );
 		$redirect = $response instanceof FauxResponse ? $response->getHeader( 'Location' ) : null;

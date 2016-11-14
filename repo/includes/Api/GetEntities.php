@@ -155,14 +155,14 @@ class GetEntities extends ApiBase {
 	 * @return EntityId[]
 	 */
 	private function getEntityIdsFromIdParam( array $params ) {
-		$ids = array();
+		$ids = [];
 		if ( isset( $params['ids'] ) ) {
 			foreach ( $params['ids'] as $id ) {
 				try {
 					$ids[] = $this->idParser->parse( $id );
 				} catch ( EntityIdParsingException $e ) {
 					$this->errorReporter->dieError(
-						"Invalid id: $id", 'no-such-entity', 0, array( 'id' => $id ) );
+						"Invalid id: $id", 'no-such-entity', 0, [ 'id' => $id ] );
 				}
 			}
 		}
@@ -174,7 +174,7 @@ class GetEntities extends ApiBase {
 	 * @return EntityId[]
 	 */
 	private function getItemIdsFromSiteTitleParams( array $params ) {
-		$ids = array();
+		$ids = [];
 		if ( !empty( $params['sites'] ) && !empty( $params['titles'] ) ) {
 			$itemByTitleHelper = $this->getItemByTitleHelper();
 			list( $ids, $missingItems ) = $itemByTitleHelper->getItemIds( $params['sites'], $params['titles'], $params['normalize'] );
@@ -228,7 +228,7 @@ class GetEntities extends ApiBase {
 	 * @return EntityRevision[]
 	 */
 	private function getEntityRevisionsFromEntityIds( array $entityIds, $resolveRedirects = false ) {
-		$revisionArray = array();
+		$revisionArray = [];
 
 		$this->entityPrefetcher->prefetch( $entityIds );
 
@@ -273,10 +273,10 @@ class GetEntities extends ApiBase {
 	private function handleEntity(
 		$sourceEntityId,
 		EntityRevision $entityRevision = null,
-		array $params = array()
+		array $params = []
 	) {
 		if ( $entityRevision === null ) {
-			$this->resultBuilder->addMissingEntity( $sourceEntityId, array( 'id' => $sourceEntityId ) );
+			$this->resultBuilder->addMissingEntity( $sourceEntityId, [ 'id' => $sourceEntityId ] );
 		} else {
 			list( $languageCodeFilter, $fallbackChains ) = $this->getLanguageCodesAndFallback( $params );
 			$this->resultBuilder->addEntityRevision(
@@ -298,8 +298,8 @@ class GetEntities extends ApiBase {
 	 *     1 => LanguageFallbackChain[] Keys are requested lang codes
 	 */
 	private function getLanguageCodesAndFallback( array $params ) {
-		$languageCodes = ( is_array( $params['languages'] ) ? $params['languages'] : array() );
-		$fallbackChains = array();
+		$languageCodes = ( is_array( $params['languages'] ) ? $params['languages'] : [] );
+		$fallbackChains = [];
 
 		if ( $params['languagefallback'] ) {
 			$fallbackMode = LanguageFallbackChainFactory::FALLBACK_ALL;
@@ -309,7 +309,7 @@ class GetEntities extends ApiBase {
 			}
 		}
 
-		return array( array_unique( $languageCodes ), $fallbackChains );
+		return [ array_unique( $languageCodes ), $fallbackChains ];
 	}
 
 	/**
@@ -318,56 +318,56 @@ class GetEntities extends ApiBase {
 	protected function getAllowedParams() {
 		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 
-		return array_merge( parent::getAllowedParams(), array(
-			'ids' => array(
+		return array_merge( parent::getAllowedParams(), [
+			'ids' => [
 				self::PARAM_TYPE => 'string',
 				self::PARAM_ISMULTI => true,
-			),
-			'sites' => array(
+			],
+			'sites' => [
 				self::PARAM_TYPE => $sites->getGlobalIdentifiers(),
 				self::PARAM_ISMULTI => true,
 				self::PARAM_ALLOW_DUPLICATES => true
-			),
-			'titles' => array(
+			],
+			'titles' => [
 				self::PARAM_TYPE => 'string',
 				self::PARAM_ISMULTI => true,
 				self::PARAM_ALLOW_DUPLICATES => true
-			),
-			'redirects' => array(
-				self::PARAM_TYPE => array( 'yes', 'no' ),
+			],
+			'redirects' => [
+				self::PARAM_TYPE => [ 'yes', 'no' ],
 				self::PARAM_DFLT => 'yes',
-			),
-			'props' => array(
-				self::PARAM_TYPE => array( 'info', 'sitelinks', 'sitelinks/urls', 'aliases', 'labels',
-					'descriptions', 'claims', 'datatype' ),
+			],
+			'props' => [
+				self::PARAM_TYPE => [ 'info', 'sitelinks', 'sitelinks/urls', 'aliases', 'labels',
+					'descriptions', 'claims', 'datatype' ],
 				self::PARAM_DFLT => 'info|sitelinks|aliases|labels|descriptions|claims|datatype',
 				self::PARAM_ISMULTI => true,
-			),
-			'languages' => array(
+			],
+			'languages' => [
 				self::PARAM_TYPE => WikibaseRepo::getDefaultInstance()->getTermsLanguages()->getLanguages(),
 				self::PARAM_ISMULTI => true,
-			),
-			'languagefallback' => array(
+			],
+			'languagefallback' => [
 				self::PARAM_TYPE => 'boolean',
 				self::PARAM_DFLT => false
-			),
-			'normalize' => array(
+			],
+			'normalize' => [
 				self::PARAM_TYPE => 'boolean',
 				self::PARAM_DFLT => false
-			),
-			'sitefilter' => array(
+			],
+			'sitefilter' => [
 				self::PARAM_TYPE => $sites->getGlobalIdentifiers(),
 				self::PARAM_ISMULTI => true,
 				self::PARAM_ALLOW_DUPLICATES => true
-			),
-		) );
+			],
+		] );
 	}
 
 	/**
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
-		return array(
+		return [
 			"action=wbgetentities&ids=Q42"
 			=> "apihelp-wbgetentities-example-1",
 			"action=wbgetentities&ids=P17"
@@ -394,7 +394,7 @@ class GetEntities extends ApiBase {
 			=> 'apihelp-wbgetentities-example-12',
 			'action=wbgetentities&ids=Q42&sitefilter=enwiki'
 			=> 'apihelp-wbgetentities-example-13'
-		);
+		];
 	}
 
 }

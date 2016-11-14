@@ -16,20 +16,20 @@ use Wikibase\InterwikiSorter;
 class InterwikiSorterTest extends \PHPUnit_Framework_TestCase {
 
 	public function sortOrdersProvider() {
-		return array(
-			'alphabetic' => array( 'ar', 'de', 'en', 'fr', 'ks', 'rn', 'ky', 'hu', 'ja', 'pt' ),
-			'alphabetic_revised' => array( 'ar', 'de', 'en', 'fr', 'ks', 'ky', 'rn', 'hu', 'ja', 'pt' ),
-			'alphabetic_sr' => array( 'ar', 'de', 'en', 'fr', 'ky', 'rn', 'ks', 'ja', 'hu', 'pt' ),
-			'mycustomorder' => array( 'de', 'ja', 'pt', 'hu', 'en' ),
-		);
+		return [
+			'alphabetic' => [ 'ar', 'de', 'en', 'fr', 'ks', 'rn', 'ky', 'hu', 'ja', 'pt' ],
+			'alphabetic_revised' => [ 'ar', 'de', 'en', 'fr', 'ks', 'ky', 'rn', 'hu', 'ja', 'pt' ],
+			'alphabetic_sr' => [ 'ar', 'de', 'en', 'fr', 'ky', 'rn', 'ks', 'ja', 'hu', 'pt' ],
+			'mycustomorder' => [ 'de', 'ja', 'pt', 'hu', 'en' ],
+		];
 	}
 
 	public function constructorProvider() {
 		$sortOrders = $this->sortOrdersProvider();
-		return array(
-			array( 'code', $sortOrders, array() ),
-			array( 'code', $sortOrders, array( 'en' ) )
-		);
+		return [
+			[ 'code', $sortOrders, [] ],
+			[ 'code', $sortOrders, [ 'en' ] ]
+		];
 	}
 
 	/**
@@ -42,87 +42,87 @@ class InterwikiSorterTest extends \PHPUnit_Framework_TestCase {
 
 	public function sortLinksProvider() {
 		$sortOrders = $this->sortOrdersProvider();
-		$links = array( 'fr', 'ky', 'hu', 'ar', 'ks', 'ja', 'de', 'en', 'pt', 'rn' );
+		$links = [ 'fr', 'ky', 'hu', 'ar', 'ks', 'ja', 'de', 'en', 'pt', 'rn' ];
 
-		return array(
-			array(
-				$links, 'code', $sortOrders, array(),
-				array( 'ar', 'de', 'en', 'fr', 'hu', 'ja', 'ks', 'ky', 'pt', 'rn' )
-			),
-			array(
-				$links, 'code', $sortOrders, array( 'en' ),
-				array( 'en', 'ar', 'de', 'fr', 'hu', 'ja', 'ks', 'ky', 'pt', 'rn' )
-			),
-			array(
-				$links, 'alphabetic', $sortOrders, array(),
+		return [
+			[
+				$links, 'code', $sortOrders, [],
+				[ 'ar', 'de', 'en', 'fr', 'hu', 'ja', 'ks', 'ky', 'pt', 'rn' ]
+			],
+			[
+				$links, 'code', $sortOrders, [ 'en' ],
+				[ 'en', 'ar', 'de', 'fr', 'hu', 'ja', 'ks', 'ky', 'pt', 'rn' ]
+			],
+			[
+				$links, 'alphabetic', $sortOrders, [],
 				$sortOrders['alphabetic']
-			),
-			array(
-				$links, 'alphabetic', $sortOrders, array( 'en', 'ja' ),
-				array( 'en', 'ja', 'ar', 'de','fr', 'ks', 'rn', 'ky', 'hu', 'pt' )
-			),
-			array(
-				$links, 'alphabetic_revised', $sortOrders, array(),
+			],
+			[
+				$links, 'alphabetic', $sortOrders, [ 'en', 'ja' ],
+				[ 'en', 'ja', 'ar', 'de','fr', 'ks', 'rn', 'ky', 'hu', 'pt' ]
+			],
+			[
+				$links, 'alphabetic_revised', $sortOrders, [],
 				$sortOrders['alphabetic_revised']
-			),
-			array(
-				$links, 'alphabetic_revised', $sortOrders, array( 'hu' ),
-				array( 'hu', 'ar', 'de', 'en', 'fr', 'ks', 'ky', 'rn', 'ja', 'pt' )
-			),
-			array(
-				array( 'ja', 'de', 'pt', 'en', 'hu' ), 'mycustomorder', $sortOrders, array(),
+			],
+			[
+				$links, 'alphabetic_revised', $sortOrders, [ 'hu' ],
+				[ 'hu', 'ar', 'de', 'en', 'fr', 'ks', 'ky', 'rn', 'ja', 'pt' ]
+			],
+			[
+				[ 'ja', 'de', 'pt', 'en', 'hu' ], 'mycustomorder', $sortOrders, [],
 				$sortOrders['mycustomorder']
-			),
-			array(
-				array( 'x2', 'x1', 'x3' ),
+			],
+			[
+				[ 'x2', 'x1', 'x3' ],
 				'alphabetic',
-				array( 'alphabetic' => array() ),
-				array(),
-				array( 'x1', 'x2', 'x3' )
-			),
-			array(
-				array( 'x2', 'x1', 'en', 'de', 'a2', 'a1' ),
+				[ 'alphabetic' => [] ],
+				[],
+				[ 'x1', 'x2', 'x3' ]
+			],
+			[
+				[ 'x2', 'x1', 'en', 'de', 'a2', 'a1' ],
 				'alphabetic',
 				$sortOrders,
-				array(),
-				array( 'de', 'en', 'a1', 'a2', 'x1', 'x2' )
-			),
-			array(
-				array( 'f', 'd', 'b', 'a', 'c', 'e' ),
+				[],
+				[ 'de', 'en', 'a1', 'a2', 'x1', 'x2' ]
+			],
+			[
+				[ 'f', 'd', 'b', 'a', 'c', 'e' ],
 				'alphabetic',
-				array( 'alphabetic' => array( 'c', 'a' ) ),
-				array( 'e' ),
-				array( 'e', 'c', 'a', 'b', 'd', 'f' )
-			),
-			'Strict code order' => array(
-				array( 'f', 'd', 'b', 'a', 'c', 'e' ),
+				[ 'alphabetic' => [ 'c', 'a' ] ],
+				[ 'e' ],
+				[ 'e', 'c', 'a', 'b', 'd', 'f' ]
+			],
+			'Strict code order' => [
+				[ 'f', 'd', 'b', 'a', 'c', 'e' ],
 				'code',
-				array( 'alphabetic' => array( 'c', 'a' ) ), // this should be ignored
-				array( 'e' ), // prepend
-				array( 'e', 'a', 'b', 'c', 'd', 'f' )
-			),
-			'Code w/o alphabetic' => array(
-				array( 'c', 'b', 'a' ),
+				[ 'alphabetic' => [ 'c', 'a' ] ], // this should be ignored
+				[ 'e' ], // prepend
+				[ 'e', 'a', 'b', 'c', 'd', 'f' ]
+			],
+			'Code w/o alphabetic' => [
+				[ 'c', 'b', 'a' ],
 				'code',
-				array(),
-				array(),
-				array( 'a', 'b', 'c' )
-			),
-			array(
-				array( 'a', 'b', 'k', 'x' ),
+				[],
+				[],
+				[ 'a', 'b', 'c' ]
+			],
+			[
+				[ 'a', 'b', 'k', 'x' ],
 				'alphabetic',
-				array( 'alphabetic' => array( 'x', 'k', 'a' ) ),
-				array(),
-				array( 'x', 'k', 'a', 'b' )
-			),
-			'Fall back to code order' => array(
-				array( 'b', 'a' ),
+				[ 'alphabetic' => [ 'x', 'k', 'a' ] ],
+				[],
+				[ 'x', 'k', 'a', 'b' ]
+			],
+			'Fall back to code order' => [
+				[ 'b', 'a' ],
 				'invalid',
-				array(),
-				array(),
-				array( 'a', 'b' )
-			)
-		);
+				[],
+				[],
+				[ 'a', 'b' ]
+			]
+		];
 	}
 
 	/**

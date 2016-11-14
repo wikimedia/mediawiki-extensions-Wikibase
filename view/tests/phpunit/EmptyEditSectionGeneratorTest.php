@@ -32,9 +32,9 @@ class EmptyEditSectionGeneratorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function getAddStatementToGroupSectionProvider() {
-		return array(
-			array( new PropertyId( 'P1' ), null )
-		);
+		return [
+			[ new PropertyId( 'P1' ), null ]
+		];
 	}
 
 	/**
@@ -50,9 +50,9 @@ class EmptyEditSectionGeneratorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function getLabelDescriptionAliasesEditSectionProvider() {
-		return array(
-			array( 'en', new PropertyId( 'P1' ) )
-		);
+		return [
+			[ 'en', new PropertyId( 'P1' ) ]
+		];
 	}
 
 	/**
@@ -69,9 +69,9 @@ class EmptyEditSectionGeneratorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function getSiteLinksEditSectionProvider() {
-		return array(
-			array( new PropertyId( 'P1' ) )
-		);
+		return [
+			[ new PropertyId( 'P1' ) ]
+		];
 	}
 
 	/**
@@ -88,9 +88,9 @@ class EmptyEditSectionGeneratorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function getStatementEditSection() {
-		return array(
-			array( new Statement( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) ) )
-		);
+		return [
+			[ new Statement( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) ) ]
+		];
 	}
 
 	private function newEmptyEditSectionGenerator() {

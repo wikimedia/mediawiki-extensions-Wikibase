@@ -168,7 +168,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 * @param string $subPage
 	 */
 	protected function prepareArguments( $subPage ) {
-		$parts = $subPage === '' ? array() : explode( '/', $subPage, 2 );
+		$parts = $subPage === '' ? [] : explode( '/', $subPage, 2 );
 
 		$idString = $this->getRequest()->getVal( 'id', isset( $parts[0] ) ? $parts[0] : null );
 
@@ -199,20 +199,20 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 			if ( $entity === null ) {
 				throw new UserInputException(
 					'wikibase-wikibaserepopage-invalid-id',
-					array( $id->getSerialization() ),
+					[ $id->getSerialization() ],
 					'Entity id is unknown'
 				);
 			}
 		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			throw new UserInputException(
 				'wikibase-wikibaserepopage-unresolved-redirect',
-				array( $id->getSerialization() ),
+				[ $id->getSerialization() ],
 				'Entity id refers to a redirect'
 			);
 		} catch ( StorageException $ex ) {
 			throw new MessageException(
 				'wikibase-wikibaserepopage-storage-exception',
-				array( $id->getSerialization(), $ex->getMessage() ),
+				[ $id->getSerialization(), $ex->getMessage() ],
 				'Entity could not be loaded'
 			);
 		}
@@ -243,7 +243,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	private function setForm( EntityDocument $entity = null ) {
 		$this->addCopyrightText();
 
-		$this->getOutput()->addModuleStyles( array( 'wikibase.special' ) );
+		$this->getOutput()->addModuleStyles( [ 'wikibase.special' ] );
 
 		if ( $this->getUser()->isAnon() ) {
 			$this->showErrorHTML(
@@ -259,21 +259,21 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 		$this->getOutput()->addHTML(
 			Html::openElement(
 				'form',
-				array(
+				[
 					'method' => 'post',
 					'action' => $this->getPageTitle()->getLocalURL(),
 					'name' => strtolower( $this->getName() ),
 					'id' => 'wb-' . strtolower( $this->getName() ) . '-form1',
 					'class' => 'wb-form'
-				)
+				]
 			)
 			. Html::openElement(
 				'fieldset',
-				array( 'class' => 'wb-fieldset' )
+				[ 'class' => 'wb-fieldset' ]
 			)
 			. Html::element(
 				'legend',
-				array( 'class' => 'wb-legend' ),
+				[ 'class' => 'wb-legend' ],
 				$this->msg( 'special-' . strtolower( $this->getName() ) )->text()
 			)
 		);
@@ -291,10 +291,10 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 				$submitKey,
 				$this->msg( $submitKey )->text(),
 				'submit',
-				array(
+				[
 					'id' => 'wb-' . strtolower( $this->getName() ) . '-submit',
 					'class' => 'wb-button'
-				)
+				]
 			)
 			. Html::input(
 				'wpEditToken',
@@ -321,16 +321,16 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 		return Html::label(
 			$this->msg( 'wikibase-modifyentity-id' )->text(),
 			$id,
-			array( 'class' => 'wb-label' )
+			[ 'class' => 'wb-label' ]
 		)
 		. Html::input(
 			'id',
 			$entity === null ? '' : $entity->getId(),
 			'text',
-			array(
+			[
 				'class' => 'wb-input',
 				'id' => $id
-			)
+			]
 		);
 	}
 

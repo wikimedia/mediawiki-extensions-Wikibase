@@ -83,10 +83,10 @@ class TermsRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideAddEntity() {
-		return array(
-			array( 'Q2', 'Q2_terms' ),
-			array( 'Q2', 'Q2_terms_ru', array( 'ru' ) ),
-		);
+		return [
+			[ 'Q2', 'Q2_terms' ],
+			[ 'Q2', 'Q2_terms_ru', [ 'ru' ] ],
+		];
 	}
 
 	/**
@@ -102,10 +102,10 @@ class TermsRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideAddLabels() {
-		return array(
-			array( 'Q2', 'Q2_terms_labels' ),
-			array( 'Q2', 'Q2_terms_labels_ru', array( 'ru' ) ),
-		);
+		return [
+			[ 'Q2', 'Q2_terms_labels' ],
+			[ 'Q2', 'Q2_terms_labels_ru', [ 'ru' ] ],
+		];
 	}
 
 	/**
@@ -122,10 +122,10 @@ class TermsRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideAddDescriptions() {
-		return array(
-			array( 'Q2', 'Q2_terms_descriptions' ),
-			array( 'Q2', 'Q2_terms_descriptions_ru', array( 'ru' ) ),
-		);
+		return [
+			[ 'Q2', 'Q2_terms_descriptions' ],
+			[ 'Q2', 'Q2_terms_descriptions_ru', [ 'ru' ] ],
+		];
 	}
 
 	/**
@@ -142,10 +142,10 @@ class TermsRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideAddAliases() {
-		return array(
-			array( 'Q2', 'Q2_terms_aliases' ),
-			array( 'Q2', 'Q2_terms_aliases_ru', array( 'ru' ) ),
-		);
+		return [
+			[ 'Q2', 'Q2_terms_aliases' ],
+			[ 'Q2', 'Q2_terms_aliases_ru', [ 'ru' ] ],
+		];
 	}
 
 	/**

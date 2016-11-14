@@ -177,9 +177,9 @@ class ChangeOpTestMockProvider {
 	public function getMockDataTypeFactory() {
 		$stringType = new DataType( 'string', 'string' );
 
-		$types = array(
+		$types = [
 			'string' => $stringType
-		);
+		];
 
 		$mock = $this->getMockBuilder( DataTypeFactory::class )
 			->disableOriginalConstructor()
@@ -206,13 +206,13 @@ class ChangeOpTestMockProvider {
 	public function getMockDataTypeValidatorFactory() {
 		// consider "INVALID" to be invalid
 		$topValidator = new DataValueValidator(
-			new CompositeValidator( array(
+			new CompositeValidator( [
 				new TypeValidator( 'string' ),
 				new RegexValidator( '/INVALID/', true ),
-			), true )
+			], true )
 		);
 
-		$validators = array( new TypeValidator( DataValue::class ), $topValidator );
+		$validators = [ new TypeValidator( DataValue::class ), $topValidator ];
 
 		$mock = $this->getMock( DataTypeValidatorFactory::class );
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
@@ -237,7 +237,7 @@ class ChangeOpTestMockProvider {
 			->will( PHPUnit_Framework_TestCase::returnCallback( function( $text ) {
 				if ( $text === 'INVALID' ) {
 					$error = Error::newError( 'Invalid', '', 'test-invalid' );
-					return Result::newError( array( $error ) );
+					return Result::newError( [ $error ] );
 				} else {
 					return Result::newSuccess();
 				}
@@ -277,19 +277,19 @@ class ChangeOpTestMockProvider {
 	public function detectLabelConflictsForEntity( FingerprintProvider $entity ) {
 		foreach ( $entity->getFingerprint()->getLabels()->toTextArray() as $lang => $label ) {
 			if ( $label === 'DUPE' ) {
-				return Result::newError( array(
+				return Result::newError( [
 					Error::newError(
 						'found conflicting terms',
 						'label',
 						'label-conflict',
-						array(
+						[
 							'label',
 							$lang,
 							$label,
 							'P666'
-						)
+						]
 					)
-				) );
+				] );
 			}
 		}
 
@@ -305,19 +305,19 @@ class ChangeOpTestMockProvider {
 			$description = $entity->getFingerprint()->getDescription( $lang )->getText();
 
 			if ( $label === 'DUPE' && $description === 'DUPE' ) {
-				return Result::newError( array(
+				return Result::newError( [
 					Error::newError(
 						'found conflicting terms',
 						'label',
 						'label-with-description-conflict',
-						array(
+						[
 							'label',
 							$lang,
 							$label,
 							'Q666'
-						)
+						]
 					)
-				) );
+				] );
 			}
 		}
 
@@ -333,24 +333,24 @@ class ChangeOpTestMockProvider {
 		if ( $entityId && $entityId->getSerialization() === 'P666' ) {
 			// simulated conflicts always conflict with P666, so if these are
 			// ignored as self-conflicts, we don't need to check any labels.
-			$labels = array();
+			$labels = [];
 		}
 
 		foreach ( $labels as $lang => $text ) {
 			if ( $text === 'DUPE' ) {
-				return Result::newError( array(
+				return Result::newError( [
 					Error::newError(
 						'found conflicting terms',
 						'label',
 						'label-conflict',
-						array(
+						[
 							'label',
 							$lang,
 							$text,
 							'P666'
-						)
+						]
 					)
-				) );
+				] );
 			}
 		}
 
@@ -360,19 +360,19 @@ class ChangeOpTestMockProvider {
 
 		foreach ( $aliases as $lang => $texts ) {
 			if ( in_array( 'DUPE', $texts ) ) {
-				return Result::newError( array(
+				return Result::newError( [
 					Error::newError(
 						'found conflicting terms',
 						'alias',
 						'label-conflict',
-						array(
+						[
 							'alias',
 							$lang,
 							'DUPE',
 							'P666'
-						)
+						]
 					)
-				) );
+				] );
 			}
 		}
 
@@ -388,7 +388,7 @@ class ChangeOpTestMockProvider {
 		if ( $entityId && $entityId->getSerialization() === 'P666' ) {
 			// simulated conflicts always conflict with P666, so if these are
 			// ignored as self-conflicts, we don't need to check any labels.
-			$labels = array();
+			$labels = [];
 		}
 
 		foreach ( $labels as $lang => $text ) {
@@ -399,19 +399,19 @@ class ChangeOpTestMockProvider {
 			}
 
 			if ( $text === 'DUPE' ) {
-				return Result::newError( array(
+				return Result::newError( [
 					Error::newError(
 						'found conflicting terms',
 						'label',
 						'label-with-description-conflict',
-						array(
+						[
 							'label',
 							$lang,
 							$text,
 							'P666'
-						)
+						]
 					)
-				) );
+				] );
 			}
 		}
 
@@ -441,8 +441,8 @@ class ChangeOpTestMockProvider {
 				return $returnValue;
 			};
 		} else {
-			$detectLabelConflicts = array( $this, 'detectLabelConflicts' );
-			$detectLabelDescriptionConflicts = array( $this, 'detectLabelDescriptionConflicts' );
+			$detectLabelConflicts = [ $this, 'detectLabelConflicts' ];
+			$detectLabelDescriptionConflicts = [ $this, 'detectLabelDescriptionConflicts' ];
 		}
 
 		$dupeDetector = $this->getMockBuilder( LabelDescriptionDuplicateDetector::class )
@@ -473,7 +473,7 @@ class ChangeOpTestMockProvider {
 	 * @return array
 	 */
 	public function getSiteLinkConflictsForItem( Item $item ) {
-		$conflicts = array();
+		$conflicts = [];
 
 		foreach ( $item->getSiteLinkList()->toArray() as $link ) {
 			$page = $link->getPageName();
@@ -481,11 +481,11 @@ class ChangeOpTestMockProvider {
 
 			if ( $page === 'DUPE' ) {
 				//NOTE: some tests may rely on these exact values!
-				$conflicts[] = array(
+				$conflicts[] = [
 					'itemId' => 666,
 					'siteId' => $site,
 					'sitePage' => $page
-				);
+				];
 			}
 		}
 
@@ -503,7 +503,7 @@ class ChangeOpTestMockProvider {
 				return $returnValue;
 			};
 		} else {
-			$getConflictsForItem = array( $this, 'getSiteLinkConflictsForItem' );
+			$getConflictsForItem = [ $this, 'getSiteLinkConflictsForItem' ];
 		}
 
 		$mock = $this->getMock( SiteLinkConflictLookup::class );
@@ -539,7 +539,7 @@ class ChangeOpTestMockProvider {
 				return new LabelDescriptionUniquenessValidator( $this->getMockLabelDescriptionDuplicateDetector() );
 
 			default:
-				return new CompositeFingerprintValidator( array() );
+				return new CompositeFingerprintValidator( [] );
 		}
 	}
 
@@ -560,31 +560,31 @@ class ChangeOpTestMockProvider {
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'getFingerprintValidator' )
 			->will( PHPUnit_Framework_TestCase::returnCallback(
-				array( $this, 'getMockFingerprintValidator' )
+				[ $this, 'getMockFingerprintValidator' ]
 			) );
 
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'getLanguageValidator' )
 			->will( PHPUnit_Framework_TestCase::returnCallback(
-				array( $this, 'getMockTermValidator' )
+				[ $this, 'getMockTermValidator' ]
 			) );
 
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'getLabelValidator' )
 			->will( PHPUnit_Framework_TestCase::returnCallback(
-				array( $this, 'getMockTermValidator' )
+				[ $this, 'getMockTermValidator' ]
 			) );
 
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'getDescriptionValidator' )
 			->will( PHPUnit_Framework_TestCase::returnCallback(
-				array( $this, 'getMockTermValidator' )
+				[ $this, 'getMockTermValidator' ]
 			) );
 
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'getAliasValidator' )
 			->will( PHPUnit_Framework_TestCase::returnCallback(
-				array( $this, 'getMockTermValidator' )
+				[ $this, 'getMockTermValidator' ]
 			) );
 
 		return $mock;

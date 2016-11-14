@@ -29,9 +29,9 @@ class OutputPageJsConfigHookHandlerTest extends MediaWikiTestCase {
 	 * @dataProvider doOutputPageBeforeHtmlRegisterConfigProvider
 	 */
 	public function testDoOutputPageBeforeHtmlRegisterConfig( array $expected, Title $title, $message ) {
-		$entityNamespaceLookup = new EntityNamespaceLookup( array( $title->getNamespace() ) );
+		$entityNamespaceLookup = new EntityNamespaceLookup( [ $title->getNamespace() ] );
 
-		$hookHandler = new OutputPageJsConfigHookHandler( $entityNamespaceLookup, 'https://creativecommons.org', 'CC-0', array() );
+		$hookHandler = new OutputPageJsConfigHookHandler( $entityNamespaceLookup, 'https://creativecommons.org', 'CC-0', [] );
 
 		$context = new RequestContext();
 		$context->setTitle( $title );
@@ -46,19 +46,19 @@ class OutputPageJsConfigHookHandlerTest extends MediaWikiTestCase {
 	}
 
 	public function doOutputPageBeforeHtmlRegisterConfigProvider() {
-		$expected = array(
+		$expected = [
 			'wbUserIsBlocked',
 			'wbUserCanEdit',
 			'wbCopyright',
 			'wbBadgeItems'
-		);
+		];
 
 		$entityId = new ItemId( 'Q4' );
 		$title = $this->getTitleForId( $entityId );
 
-		return array(
-			array( $expected, $title, true, 'config vars added to OutputPage' )
-		);
+		return [
+			[ $expected, $title, true, 'config vars added to OutputPage' ]
+		];
 	}
 
 	/**

@@ -54,14 +54,14 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 		$customSummary = 'I did it!';
 
 		$summary = $helper->createSummary(
-			array( 'summary' => $customSummary ),
+			[ 'summary' => $customSummary ],
 			new CreateClaim( $apiMain, 'wbcreateclaim' )
 		);
 		$this->assertEquals( 'wbcreateclaim', $summary->getModuleName() );
 		$this->assertEquals( $customSummary, $summary->getUserSummary() );
 
 		$summary = $helper->createSummary(
-			array(),
+			[],
 			new CreateClaim( $apiMain, 'wbcreateclaim' )
 		);
 		$this->assertEquals( 'wbcreateclaim', $summary->getModuleName() );
@@ -90,7 +90,7 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 
 		$errorReporter = new ApiErrorReporter(
 			$api,
-			new DispatchingExceptionLocalizer( array() ),
+			new DispatchingExceptionLocalizer( [] ),
 			$api->getLanguage()
 		);
 

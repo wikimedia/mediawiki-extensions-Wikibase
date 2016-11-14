@@ -54,11 +54,11 @@ class EntityParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 		$siteLinkAndStatementDataUpdater->expects( $this->once() )
 			->method( 'updateParserOutput' );
 
-		$instance = new EntityParserOutputDataUpdater( new ParserOutput(), array(
+		$instance = new EntityParserOutputDataUpdater( new ParserOutput(), [
 			$statementDataUpdater,
 			$siteLinkDataUpdater,
 			$siteLinkAndStatementDataUpdater
-		) );
+		] );
 
 		foreach ( $entities as $entity ) {
 			$instance->processEntity( $entity );
@@ -76,12 +76,12 @@ class EntityParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 		$siteLinks->addNewSiteLink( 'enwiki', 'Title' );
 		$q2 = new Item( null, null, $siteLinks );
 
-		return array(
-			array( array(), 0, 0 ),
-			array( array( $q1 ), 1, 0 ),
-			array( array( $q2 ), 0, 1 ),
-			array( array( $q1, $q2 ), 1, 1 ),
-		);
+		return [
+			[ [], 0, 0 ],
+			[ [ $q1 ], 1, 0 ],
+			[ [ $q2 ], 0, 1 ],
+			[ [ $q1, $q2 ], 1, 1 ],
+		];
 	}
 
 	/**
@@ -93,18 +93,18 @@ class EntityParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidConstructorArgumentProvider() {
-		return array(
-			array( array( null ) ),
-			array( array( 'notAnObject' ) ),
-			array( array( $this->getMock( ParserOutputDataUpdater::class ) ) ),
-		);
+		return [
+			[ [ null ] ],
+			[ [ 'notAnObject' ] ],
+			[ [ $this->getMock( ParserOutputDataUpdater::class ) ] ],
+		];
 	}
 
 	public function testProcessEntityDoesNotTriggerGetters() {
 		$entity = $this->getMock( Item::class );
 		$entity->expects( $this->never() )->method( 'getStatements' );
 		$entity->expects( $this->never() )->method( 'getSiteLinkList' );
-		$instance = new EntityParserOutputDataUpdater( new ParserOutput(), array() );
+		$instance = new EntityParserOutputDataUpdater( new ParserOutput(), [] );
 		$instance->processEntity( $entity );
 	}
 

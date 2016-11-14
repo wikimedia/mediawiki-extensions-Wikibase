@@ -63,12 +63,12 @@ class PageImagesDataUpdaterTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function constructorArgumentsProvider() {
-		return array(
-			'Empty' => array( array() ),
-			'Property ids' => array( array( 'P1', 'P9999' ) ),
-			'Non-property ids' => array( array( 'Q1' ) ),
-			'Invalid ids' => array( array( 'invalid' ) ),
-		);
+		return [
+			'Empty' => [ [] ],
+			'Property ids' => [ [ 'P1', 'P9999' ] ],
+			'Non-property ids' => [ [ 'Q1' ] ],
+			'Invalid ids' => [ [ 'invalid' ] ],
+		];
 	}
 
 	/**
@@ -126,32 +126,32 @@ class PageImagesDataUpdaterTest extends PHPUnit_Framework_TestCase {
 		$this->addStatement( $statements, 5, '5d.jpg' );
 		$this->addStatement( $statements, 5, '5e.jpg', Statement::RANK_PREFERRED );
 
-		return array(
+		return [
 			// Find nothing for various reasons.
-			'Ignore non-strings' => array( $statements, array( 'P2' ), null ),
-			'Property not found' => array( $statements, array( 'P9999' ), null ),
-			'Not a property id' => array( $statements, array( 'Q1' ), null ),
-			'Invalid id' => array( $statements, array( 'invalid' ), null ),
+			'Ignore non-strings' => [ $statements, [ 'P2' ], null ],
+			'Property not found' => [ $statements, [ 'P9999' ], null ],
+			'Not a property id' => [ $statements, [ 'Q1' ], null ],
+			'Invalid id' => [ $statements, [ 'invalid' ], null ],
 
 			// Configuration
-			'Ignore misconfiguration' => array( $statements, array( 'P1', 'P2', 'P1' ), '1.jpg' ),
-			'Ignore keys' => array( $statements, array( 2 => 'P1', 1 => 'P2' ), '1.jpg' ),
+			'Ignore misconfiguration' => [ $statements, [ 'P1', 'P2', 'P1' ], '1.jpg' ],
+			'Ignore keys' => [ $statements, [ 2 => 'P1', 1 => 'P2' ], '1.jpg' ],
 
 			// Simple searches.
-			'Find 1' => array( $statements, array( 'P1' ), '1.jpg' ),
-			'Skip non-strings' => array( $statements, array( 'P3' ), '3a.jpg' ),
-			'Skip missing ids' => array( $statements, array( 'P9999', 'P1' ), '1.jpg' ),
-			'Skip item ids' => array( $statements, array( 'Q1', 'P1' ), '1.jpg' ),
-			'Skip invalid ids' => array( $statements, array( 'invalid', 'P1' ), '1.jpg' ),
+			'Find 1' => [ $statements, [ 'P1' ], '1.jpg' ],
+			'Skip non-strings' => [ $statements, [ 'P3' ], '3a.jpg' ],
+			'Skip missing ids' => [ $statements, [ 'P9999', 'P1' ], '1.jpg' ],
+			'Skip item ids' => [ $statements, [ 'Q1', 'P1' ], '1.jpg' ],
+			'Skip invalid ids' => [ $statements, [ 'invalid', 'P1' ], '1.jpg' ],
 
-			'Increasing order' => array( $statements, array( 'P1', 'P2', 'P3' ), '1.jpg' ),
-			'Decreasing order' => array( $statements, array( 'P3', 'P2', 'P1' ), '3a.jpg' ),
+			'Increasing order' => [ $statements, [ 'P1', 'P2', 'P3' ], '1.jpg' ],
+			'Decreasing order' => [ $statements, [ 'P3', 'P2', 'P1' ], '3a.jpg' ],
 
 			// Ranks
-			'Skip deprecated' => array( $statements, array( 'P4' ), 'Four_2.jpg' ),
-			'Prefer preferred' => array( $statements, array( 'P5' ), '5c.jpg' ),
-			'Rank does not overrule priority' => array( $statements, array( 'P1', 'P5' ), '1.jpg' ),
-		);
+			'Skip deprecated' => [ $statements, [ 'P4' ], 'Four_2.jpg' ],
+			'Prefer preferred' => [ $statements, [ 'P5' ], '5c.jpg' ],
+			'Rank does not overrule priority' => [ $statements, [ 'P1', 'P5' ], '1.jpg' ],
+		];
 	}
 
 }

@@ -49,15 +49,15 @@ class PropertyHandlerTest extends EntityHandlerTest {
 
 		/** @var PropertyContent $content */
 		$content = $this->newEntityContent();
-		$content->getEntity()->setAliases( 'en', array( 'foo' ) );
+		$content->getEntity()->setAliases( 'en', [ 'foo' ] );
 		$content->getEntity()->setDescription( 'de', 'foobar' );
 		$content->getEntity()->setDescription( 'en', 'baz' );
 		$content->getEntity()->setLabel( 'nl', 'o_O' );
-		$contents[] = array( $content );
+		$contents[] = [ $content ];
 
 		$content = clone $contents[1][0];
 		// TODO: add some prop-specific stuff: $content->getProperty()->;
-		$contents[] = array( $content );
+		$contents[] = [ $content ];
 
 		return $contents;
 	}
@@ -89,9 +89,9 @@ class PropertyHandlerTest extends EntityHandlerTest {
 	}
 
 	public function entityIdProvider() {
-		return array(
-			array( 'P7' )
-		);
+		return [
+			[ 'P7' ]
+		];
 	}
 
 	/**

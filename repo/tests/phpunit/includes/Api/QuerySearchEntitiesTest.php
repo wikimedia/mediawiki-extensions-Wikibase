@@ -60,7 +60,7 @@ class QuerySearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 	 */
 	private function getContentLanguages() {
 		return new StaticContentLanguages(
-			array( 'de', 'de-ch', 'en', 'ii', 'nn', 'ru', 'zh-cn' )
+			[ 'de', 'de-ch', 'en', 'ii', 'nn', 'ru', 'zh-cn' ]
 		);
 	}
 
@@ -124,7 +124,7 @@ class QuerySearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 				->method( 'setGeneratorData' )
 				->with(
 					$this->equalTo( $this->getMockTitle() ),
-					$this->equalTo( array( 'displaytext' => $entry['displaytext'] ) )
+					$this->equalTo( [ 'displaytext' => $entry['displaytext'] ] )
 				);
 		}
 
@@ -136,25 +136,25 @@ class QuerySearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 
 	private function callApi( array $params, array $matches, ApiPageSet $resultPageSet = null ) {
 		// defaults from SearchEntities
-		$params = array_merge( array(
+		$params = array_merge( [
 			'wbstype' => 'item',
 			'wbslimit' => 7,
 			'wbslanguage' => 'en'
-		), $params );
+		], $params );
 
 		$api = new QuerySearchEntities(
 			$this->getApiQuery( $params ),
 			'wbsearch'
 		);
 
-		$continuationManager = new ApiContinuationManager( $api, array( $api ) );
+		$continuationManager = new ApiContinuationManager( $api, [ $api ] );
 
 		$api->setContinuationManager( $continuationManager );
 		$api->setServices(
 			$this->getMockEntitySearchHelper( $params, $matches ),
 			$this->getMockTitleLookup(),
 			$this->getContentLanguages(),
-			array( 'item', 'property' )
+			[ 'item', 'property' ]
 		);
 
 		if ( $resultPageSet !== null ) {
@@ -166,11 +166,11 @@ class QuerySearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 
 		$result = $api->getResult();
 		$continuationManager->setContinuationIntoResult( $result );
-		return $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
+		return $result->getResultData( null, [
+			'BC' => [],
+			'Types' => [],
 			'Strip' => 'all',
-		) );
+		] );
 	}
 
 	public function provideTestQuerySearchEntities() {
@@ -192,49 +192,49 @@ class QuerySearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 			new ItemId( 'Q333' )
 		);
 
-		$q111Result = array(
+		$q111Result = [
 			'ns' => 0,
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
 			'displaytext' => 'Q111'
-		);
+		];
 
-		$q222Result = array(
+		$q222Result = [
 			'ns' => 0,
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
 			'displaytext' => 'Fooooo'
-		);
+		];
 
-		$q333Result = array(
+		$q333Result = [
 			'ns' => 0,
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
 			'displaytext' => 'AMatchedTerm'
-		);
+		];
 
-		return array(
-			'No match' => array(
-				array( 'wbssearch' => 'Foo' ),
-				array(),
-				array(),
-			),
-			'Exact EntityId match' => array(
-				array( 'wbssearch' => 'Q111' ),
-				array( $q111Match ),
-				array( $q111Result ),
-			),
-			'Multiple Results' => array(
-				array( 'wbssearch' => 'Foo' ),
-				array( $q222Match, $q333Match ),
-				array( $q222Result, $q333Result ),
-			),
-			'Multiple Results (limited)' => array(
-				array( 'wbssearch' => 'Foo', 'wbslimit' => 1 ),
-				array( $q222Match ),
-				array( $q222Result ),
-			),
-		);
+		return [
+			'No match' => [
+				[ 'wbssearch' => 'Foo' ],
+				[],
+				[],
+			],
+			'Exact EntityId match' => [
+				[ 'wbssearch' => 'Q111' ],
+				[ $q111Match ],
+				[ $q111Result ],
+			],
+			'Multiple Results' => [
+				[ 'wbssearch' => 'Foo' ],
+				[ $q222Match, $q333Match ],
+				[ $q222Result, $q333Result ],
+			],
+			'Multiple Results (limited)' => [
+				[ 'wbssearch' => 'Foo', 'wbslimit' => 1 ],
+				[ $q222Match ],
+				[ $q222Result ],
+			],
+		];
 	}
 
 	/**

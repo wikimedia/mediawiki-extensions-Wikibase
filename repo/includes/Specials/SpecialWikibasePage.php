@@ -110,7 +110,7 @@ abstract class SpecialWikibasePage extends SpecialPage {
 		$this->getOutput()->addHTML(
 			Html::rawElement(
 				'p',
-				array( 'class' => $class ),
+				[ 'class' => $class ],
 				$error
 			)
 		);

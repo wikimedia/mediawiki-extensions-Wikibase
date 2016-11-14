@@ -72,9 +72,9 @@ class NotEntityIdValidator implements ValueValidator {
 					'Looks like an Entity ID: ' . $value,
 					null,
 					$this->errorCode,
-					array( $value )
+					[ $value ]
 				);
-				$result = Result::newError( array( $error ) );
+				$result = Result::newError( [ $error ] );
 			}
 		} catch ( EntityIdParsingException $parseException ) {
 			// All fine, the parsing did not work, so there is no entity id :)

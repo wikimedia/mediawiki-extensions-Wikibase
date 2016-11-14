@@ -27,12 +27,12 @@ class UpdateRepoOnDelete extends UpdateRepo {
 	 * @return array
 	 */
 	protected function getJobParameters() {
-		return array(
+		return [
 			'siteId' => $this->siteId,
 			'entityId' => $this->getEntityId()->getSerialization(),
 			'title' => $this->title->getPrefixedText(),
 			'user' => $this->user->getName()
-		);
+		];
 	}
 
 }

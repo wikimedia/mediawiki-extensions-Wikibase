@@ -136,10 +136,10 @@ class RedirectCreationInteractor {
 	 * @throws RedirectCreationException if a permission check fails
 	 */
 	private function checkPermissions( EntityId $entityId ) {
-		$permissions = array(
+		$permissions = [
 			'edit',
 			$entityId->getEntityType() . '-redirect'
-		);
+		];
 
 		foreach ( $permissions as $permission ) {
 			$this->checkPermission( $entityId, $permission );

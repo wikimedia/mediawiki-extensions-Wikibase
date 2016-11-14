@@ -37,7 +37,7 @@ class HookChangeTransmitter implements ChangeTransmitter {
 	 * @param Change $change
 	 */
 	public function transmitChange( Change $change ) {
-		Hooks::run( $this->hookName, array( $change ) );
+		Hooks::run( $this->hookName, [ $change ] );
 	}
 
 }

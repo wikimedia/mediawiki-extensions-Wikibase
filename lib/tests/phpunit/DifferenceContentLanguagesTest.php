@@ -31,19 +31,19 @@ class DifferenceContentLanguagesTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function provideTestGetLanguages() {
-		$empty = new StaticContentLanguages( array() );
-		$one = new StaticContentLanguages( array( 'one' ) );
-		$two = new StaticContentLanguages( array( 'one', 'two' ) );
-		$otherTwo = new StaticContentLanguages( array( 'three', 'four' ) );
+		$empty = new StaticContentLanguages( [] );
+		$one = new StaticContentLanguages( [ 'one' ] );
+		$two = new StaticContentLanguages( [ 'one', 'two' ] );
+		$otherTwo = new StaticContentLanguages( [ 'three', 'four' ] );
 
-		return array(
-			array( $empty, $empty, array() ),
-			array( $empty, $one, array() ),
-			array( $one, $empty, array( 'one' ) ),
-			array( $one, $two, array() ),
-			array( $two, $one, array( 'two' ) ),
-			array( $two, $otherTwo, array( 'one', 'two' ) ),
-		);
+		return [
+			[ $empty, $empty, [] ],
+			[ $empty, $one, [] ],
+			[ $one, $empty, [ 'one' ] ],
+			[ $one, $two, [] ],
+			[ $two, $one, [ 'two' ] ],
+			[ $two, $otherTwo, [ 'one', 'two' ] ],
+		];
 	}
 
 	/**
@@ -57,23 +57,23 @@ class DifferenceContentLanguagesTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function provideTestHasLanguage() {
-		$empty = new StaticContentLanguages( array() );
-		$one = new StaticContentLanguages( array( 'one' ) );
-		$two = new StaticContentLanguages( array( 'one', 'two' ) );
-		$otherTwo = new StaticContentLanguages( array( 'three', 'four' ) );
+		$empty = new StaticContentLanguages( [] );
+		$one = new StaticContentLanguages( [ 'one' ] );
+		$two = new StaticContentLanguages( [ 'one', 'two' ] );
+		$otherTwo = new StaticContentLanguages( [ 'three', 'four' ] );
 
-		return array(
-			array( $empty, $empty, 'one', false ),
-			array( $empty, $one, 'one', false ),
-			array( $empty, $one, 'two', false ),
-			array( $two, $one, 'one', false ),
-			array( $two, $one, 'two', true ),
-			array( $two, $one, 'three', false ),
-			array( $two, $otherTwo, 'one', true ),
-			array( $two, $otherTwo, 'two', true ),
-			array( $two, $otherTwo, 'three', false ),
-			array( $two, $otherTwo, 'four', false ),
-		);
+		return [
+			[ $empty, $empty, 'one', false ],
+			[ $empty, $one, 'one', false ],
+			[ $empty, $one, 'two', false ],
+			[ $two, $one, 'one', false ],
+			[ $two, $one, 'two', true ],
+			[ $two, $one, 'three', false ],
+			[ $two, $otherTwo, 'one', true ],
+			[ $two, $otherTwo, 'two', true ],
+			[ $two, $otherTwo, 'three', false ],
+			[ $two, $otherTwo, 'four', false ],
+		];
 	}
 
 }

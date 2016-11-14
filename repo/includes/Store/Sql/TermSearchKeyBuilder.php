@@ -114,21 +114,21 @@ class TermSearchKeyBuilder {
 
 			$terms = $dbw->select(
 				$this->table->getTableName(),
-				array(
+				[
 					'term_row_id',
 					'term_language',
 					'term_text',
-				),
-				array(
+				],
+				[
 					'term_row_id > ' . (int) $rowId,
 					$this->all ? '1' : 'term_search_key = \'\'', // if not $all, only set missing keys
-				),
+				],
 				__METHOD__,
-				array(
+				[
 					'LIMIT' => $this->batchSize,
 					'ORDER BY' => 'term_row_id ASC',
 					'FOR UPDATE'
-				)
+				]
 			);
 
 			$c = 0;
@@ -185,12 +185,12 @@ class TermSearchKeyBuilder {
 
 		$dbw->update(
 			$this->table->getTableName(),
-			array(
+			[
 				'term_search_key' => $key,
-			),
-			array(
+			],
+			[
 				'term_row_id' => $rowId,
-			),
+			],
 			__METHOD__
 		);
 

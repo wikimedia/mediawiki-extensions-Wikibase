@@ -34,7 +34,7 @@ class ClientEntitySerializerTest extends PHPUnit_Framework_TestCase {
 			->getMock();
 		$fallbackChain->expects( $this->any() )
 			->method( 'extractPreferredValue' )
-			->will( $this->returnValue( array( 'source' => '<SOURCE>' ) ) );
+			->will( $this->returnValue( [ 'source' => '<SOURCE>' ] ) );
 
 		$dataTypeLookup = $this->getMock( PropertyDataTypeLookup::class );
 		$dataTypeLookup->expects( $this->any() )
@@ -44,8 +44,8 @@ class ClientEntitySerializerTest extends PHPUnit_Framework_TestCase {
 		return new ClientEntitySerializer(
 			$serializerFactory->newItemSerializer(),
 			$dataTypeLookup,
-			array( 'en' ),
-			array( 'en' => $fallbackChain )
+			[ 'en' ],
+			[ 'en' => $fallbackChain ]
 		);
 	}
 
@@ -53,36 +53,36 @@ class ClientEntitySerializerTest extends PHPUnit_Framework_TestCase {
 		$item = new Item();
 		$item->setLabel( 'de', 'German' );
 		$item->setDescription( 'de', 'German' );
-		$item->setAliases( 'de', array( 'German' ) );
-		$item->setAliases( 'en', array( 'English' ) );
+		$item->setAliases( 'de', [ 'German' ] );
+		$item->setAliases( 'en', [ 'English' ] );
 		$item->getStatements()->addNewStatement( new PropertyNoValueSnak( 1 ) );
 
 		$instance = $this->newInstance();
 		$serialization = $instance->serialize( $item );
 
-		$expected = array(
+		$expected = [
 			'type' => 'item',
-			'labels' => array(
-				'en' => array( 'source-language' => '<SOURCE>' ),
-			),
-			'descriptions' => array(
-				'en' => array( 'source-language' => '<SOURCE>' ),
-			),
-			'aliases' => array(
-				'en' => array( array( 'language' => 'en', 'value' => 'English' ) ),
-			),
-			'claims' => array(
-				'P1' => array( array(
-					'mainsnak' => array(
+			'labels' => [
+				'en' => [ 'source-language' => '<SOURCE>' ],
+			],
+			'descriptions' => [
+				'en' => [ 'source-language' => '<SOURCE>' ],
+			],
+			'aliases' => [
+				'en' => [ [ 'language' => 'en', 'value' => 'English' ] ],
+			],
+			'claims' => [
+				'P1' => [ [
+					'mainsnak' => [
 						'snaktype' => 'novalue',
 						'property' => 'P1',
 						'datatype' => '<DATATYPE>',
-					),
+					],
 					'type' => 'statement',
 					'rank' => 'normal'
-				) ),
-			),
-		);
+				] ],
+			],
+		];
 		$this->assertSame( $expected, $serialization );
 	}
 

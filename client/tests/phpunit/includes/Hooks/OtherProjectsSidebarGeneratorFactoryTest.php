@@ -23,10 +23,10 @@ use Wikibase\Lib\Tests\MockRepository;
 class OtherProjectsSidebarGeneratorFactoryTest extends \MediaWikiTestCase {
 
 	public function testGetOtherProjectsSidebarGenerator() {
-		$settings = new SettingsArray( array(
+		$settings = new SettingsArray( [
 			'siteGlobalID' => 'enwiki',
-			'otherProjectsLinks' => array( 'enwiktionary' )
-		) );
+			'otherProjectsLinks' => [ 'enwiktionary' ]
+		] );
 
 		$siteLinkLookup = new MockRepository();
 		$siteStore = new HashSiteStore( TestSites::getSites() );

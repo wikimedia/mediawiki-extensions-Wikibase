@@ -51,10 +51,10 @@ class DispatchingEntityTypeStatementGrouperTest extends PHPUnit_Framework_TestCa
 	}
 
 	public function invalidConstructorArgumentProvider() {
-		return array(
-			array( array( $this->newGrouper( 0 ) ) ),
-			array( array( 'item' => 'invalid' ) ),
-		);
+		return [
+			[ [ $this->newGrouper( 0 ) ] ],
+			[ [ 'item' => 'invalid' ] ],
+		];
 	}
 
 	public function testFallsBackToNullGrouper() {
@@ -67,7 +67,7 @@ class DispatchingEntityTypeStatementGrouperTest extends PHPUnit_Framework_TestCa
 		);
 		$groups = $grouper->groupStatements( $statements );
 
-		$this->assertSame( array( 'statements' => $statements ), $groups );
+		$this->assertSame( [ 'statements' => $statements ], $groups );
 	}
 
 	public function testUsesFirstStatementsGuid() {

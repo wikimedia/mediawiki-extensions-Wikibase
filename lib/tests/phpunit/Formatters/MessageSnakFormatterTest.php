@@ -37,10 +37,10 @@ class MessageSnakFormatterTest extends \MediaWikiTestCase {
 	 */
 	private function getFormatter( $snakType, $format ) {
 		$message = $this->getMockBuilder( Message::class )
-			->setConstructorArgs( array( 'message' ) )
+			->setConstructorArgs( [ 'message' ] )
 			->getMock();
 
-		foreach ( array( 'parse', 'text', 'plain' ) as $method ) {
+		foreach ( [ 'parse', 'text', 'plain' ] as $method ) {
 			$message->expects( $this->any() )
 				->method( $method )
 				->will( $this->returnValue( $method ) );
@@ -67,20 +67,20 @@ class MessageSnakFormatterTest extends \MediaWikiTestCase {
 	public function snakProvider() {
 		$id = new PropertyId( 'P1' );
 
-		return array(
-			array(
+		return [
+			[
 				new PropertyValueSnak( $id, new StringValue( 'string' ) ),
 				'parse'
-			),
-			array(
+			],
+			[
 				new PropertySomeValueSnak( $id ),
 				'<span class="wikibase-snakview-variation-somevaluesnak">parse</span>'
-			),
-			array(
+			],
+			[
 				new PropertyNoValueSnak( $id ),
 				'<span class="wikibase-snakview-variation-novaluesnak">parse</span>'
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -94,13 +94,13 @@ class MessageSnakFormatterTest extends \MediaWikiTestCase {
 	}
 
 	public function formatProvider() {
-		return array(
-			array( SnakFormatter::FORMAT_PLAIN, 'plain' ),
-			array( SnakFormatter::FORMAT_WIKI, 'text' ),
-			array( SnakFormatter::FORMAT_HTML, 'parse' ),
-			array( SnakFormatter::FORMAT_HTML_WIDGET, 'parse' ),
-			array( SnakFormatter::FORMAT_HTML_DIFF, 'parse' ),
-		);
+		return [
+			[ SnakFormatter::FORMAT_PLAIN, 'plain' ],
+			[ SnakFormatter::FORMAT_WIKI, 'text' ],
+			[ SnakFormatter::FORMAT_HTML, 'parse' ],
+			[ SnakFormatter::FORMAT_HTML_WIDGET, 'parse' ],
+			[ SnakFormatter::FORMAT_HTML_DIFF, 'parse' ],
+		];
 	}
 
 }

@@ -37,23 +37,23 @@ class LiteralValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$stringSnak = new PropertyValueSnak( $p11, new StringValue( 'Hello World' ) );
 		$numberSnak = new PropertyValueSnak( $p11, new StringValue( '15' ) );
 
-		return array(
-			'plain string' => array(
+		return [
+			'plain string' => [
 				null, null,
 				$stringSnak,
 				'<http://www/Q1> <http://acme/testing> "Hello World" .'
-			),
-			'xsd decimal' => array(
+			],
+			'xsd decimal' => [
 				null, 'decimal',
 				$numberSnak,
 				'<http://www/Q1> <http://acme/testing> "15"^^<http://www.w3.org/2001/XMLSchema#decimal> .'
-			),
-			'wd id' => array(
+			],
+			'wd id' => [
 				'xx', 'id',
 				$stringSnak,
 				'<http://www/Q1> <http://acme/testing> "Hello World"^^<http://xx/id> .'
-			),
-		);
+			],
+		];
 	}
 
 	/**

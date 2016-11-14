@@ -57,7 +57,7 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 		EntityIdFormatterFactory $htmlFactory = null,
 		EntityIdFormatterFactory $plainFactory = null
 	) {
-		$templateFactory = new TemplateFactory( new TemplateRegistry( array() ) );
+		$templateFactory = new TemplateFactory( new TemplateRegistry( [] ) );
 
 		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->never() )
@@ -69,14 +69,14 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 			$this->getSnakFormatterFactory(),
 			new NullStatementGrouper(),
 			new HashSiteStore(),
-			new DataTypeFactory( array() ),
+			new DataTypeFactory( [] ),
 			$templateFactory,
 			$languageNameLookup,
 			$this->getMock( LanguageDirectionalityLookup::class ),
 			new BasicNumberLocalizer(),
-			array(),
-			array(),
-			array(),
+			[],
+			[],
+			[],
 			$this->getMock( LocalizedTextProvider::class )
 		);
 	}
@@ -97,10 +97,10 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 		$plainFactory = $this->getEntityIdFormatterFactory( SnakFormatter::FORMAT_PLAIN );
 		$wikiFactory = $this->getEntityIdFormatterFactory( SnakFormatter::FORMAT_WIKI );
 
-		return array(
-			array( $wikiFactory, $plainFactory ),
-			array( $htmlFactory, $wikiFactory ),
-		);
+		return [
+			[ $wikiFactory, $plainFactory ],
+			[ $htmlFactory, $wikiFactory ],
+		];
 	}
 
 	public function testNewItemView() {
@@ -109,7 +109,7 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 		$itemView = $factory->newItemView(
 			'de',
 			$this->getMock( LabelDescriptionLookup::class ),
-			new LanguageFallbackChain( array() ),
+			new LanguageFallbackChain( [] ),
 			$editSectionGenerator,
 			$this->getMock( EntityTermsView::class )
 		);
@@ -123,7 +123,7 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 		$propertyView = $factory->newPropertyView(
 			'de',
 			$this->getMock( LabelDescriptionLookup::class ),
-			new LanguageFallbackChain( array() ),
+			new LanguageFallbackChain( [] ),
 			$editSectionGenerator,
 			$this->getMock( EntityTermsView::class )
 		);
@@ -135,7 +135,7 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 		$statementSectionsView = $this->newViewFactory()->newStatementSectionsView(
 			'de',
 			$this->getMock( LabelDescriptionLookup::class ),
-			new LanguageFallbackChain( array() ),
+			new LanguageFallbackChain( [] ),
 			$this->getMock( EditSectionGenerator::class )
 		);
 

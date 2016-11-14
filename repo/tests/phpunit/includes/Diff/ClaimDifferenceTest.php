@@ -24,9 +24,9 @@ use Wikibase\Repo\Diff\ClaimDifference;
 class ClaimDifferenceTest extends \MediaWikiTestCase {
 
 	public function testGetReferenceChanges() {
-		$expected = new Diff( array(
+		$expected = new Diff( [
 			new DiffOpAdd( new Reference() )
-		), false );
+		], false );
 
 		$difference = new ClaimDifference( null, null, $expected );
 
@@ -37,9 +37,9 @@ class ClaimDifferenceTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetQualifierChanges() {
-		$expected = new Diff( array(
+		$expected = new Diff( [
 			new DiffOpAdd( new PropertyNoValueSnak( 42 ) )
-		), false );
+		], false );
 
 		$difference = new ClaimDifference( null, $expected );
 
@@ -79,36 +79,36 @@ class ClaimDifferenceTest extends \MediaWikiTestCase {
 
 	public function atomicClaimDifferenceProvider() {
 		$changeOp = new DiffOpChange( "old", "new" );
-		$diff = new Diff( array( $changeOp ) );
+		$diff = new Diff( [ $changeOp ] );
 
-		return array(
-			array( new ClaimDifference( $changeOp ) ),
-			array( new ClaimDifference( null, $diff ) ),
-			array( new ClaimDifference( null, null, $diff ) ),
-			array( new ClaimDifference( null, null, null, $changeOp ) ),
-		);
+		return [
+			[ new ClaimDifference( $changeOp ) ],
+			[ new ClaimDifference( null, $diff ) ],
+			[ new ClaimDifference( null, null, $diff ) ],
+			[ new ClaimDifference( null, null, null, $changeOp ) ],
+		];
 	}
 
 	public function nonAtomicClaimDifferenceProvider() {
 		$changeOp = new DiffOpChange( "old", "new" );
-		$diff = new Diff( array( $changeOp ) );
+		$diff = new Diff( [ $changeOp ] );
 
-		return array(
-			array( new ClaimDifference() ),
-			array( new ClaimDifference( $changeOp, $diff, null, null ) ),
-			array( new ClaimDifference( $changeOp, null, $diff, null ) ),
-			array( new ClaimDifference( $changeOp, null, null, $changeOp ) ),
-			array( new ClaimDifference( $changeOp, $diff, $diff, null ) ),
-			array( new ClaimDifference( $changeOp, $diff, null, $changeOp ) ),
-			array( new ClaimDifference( $changeOp, null, $diff, $changeOp ) ),
-			array( new ClaimDifference( $changeOp, $diff, $diff, $changeOp ) ),
-			array( new ClaimDifference( null, null, $diff, $changeOp ) ),
-			array( new ClaimDifference( null, $diff, null, $changeOp ) ),
-			array( new ClaimDifference( null, $diff, $diff, null ) ),
-			array( new ClaimDifference( null, $diff, $diff, $changeOp ) ),
-			array( new ClaimDifference( null, new Diff(), null, null ) ),
-			array( new ClaimDifference( null, new Diff(), null, null ) ),
-		);
+		return [
+			[ new ClaimDifference() ],
+			[ new ClaimDifference( $changeOp, $diff, null, null ) ],
+			[ new ClaimDifference( $changeOp, null, $diff, null ) ],
+			[ new ClaimDifference( $changeOp, null, null, $changeOp ) ],
+			[ new ClaimDifference( $changeOp, $diff, $diff, null ) ],
+			[ new ClaimDifference( $changeOp, $diff, null, $changeOp ) ],
+			[ new ClaimDifference( $changeOp, null, $diff, $changeOp ) ],
+			[ new ClaimDifference( $changeOp, $diff, $diff, $changeOp ) ],
+			[ new ClaimDifference( null, null, $diff, $changeOp ) ],
+			[ new ClaimDifference( null, $diff, null, $changeOp ) ],
+			[ new ClaimDifference( null, $diff, $diff, null ) ],
+			[ new ClaimDifference( null, $diff, $diff, $changeOp ) ],
+			[ new ClaimDifference( null, new Diff(), null, null ) ],
+			[ new ClaimDifference( null, new Diff(), null, null ) ],
+		];
 	}
 
 	/**

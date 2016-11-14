@@ -20,7 +20,7 @@ class ExternalChangeTest extends PHPUnit_Framework_TestCase {
 
 	public function testValueObject() {
 		$entityId = new ItemId( 'Q1' );
-		$revisionData = new RevisionData( '', '', '', null, '<SITE>', array() );
+		$revisionData = new RevisionData( '', '', '', null, '<SITE>', [] );
 		$instance = new ExternalChange( $entityId, $revisionData, '<TYPE>' );
 		$this->assertSame( $entityId, $instance->getEntityId() );
 		$this->assertSame( $revisionData, $instance->getRev() );

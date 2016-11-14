@@ -9,38 +9,38 @@ return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	$moduleTemplate = array(
+	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0],
-	);
+	];
 
-	$modules = array(
+	$modules = [
 
-		'jquery.removeClassByRegex' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.removeClassByRegex' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.removeClassByRegex.js',
-			),
-		),
+			],
+		],
 
-		'jquery.sticknode' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.sticknode' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.sticknode.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.util.EventSingletonManager',
-			),
-		),
+			],
+		],
 
-		'jquery.util.EventSingletonManager' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.util.EventSingletonManager' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.util.EventSingletonManager.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.throttle-debounce',
-			),
-		),
+			],
+		],
 
-	);
+	];
 
 	return $modules;
 } );

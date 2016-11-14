@@ -87,7 +87,7 @@ class SpecialPageCopyrightView {
 	 * @return string
 	 */
 	private function wrapMessage( $renderedMessage ) {
-		return Html::rawElement( 'div', array(), $renderedMessage );
+		return Html::rawElement( 'div', [], $renderedMessage );
 	}
 
 }

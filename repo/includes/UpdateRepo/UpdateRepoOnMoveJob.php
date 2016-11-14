@@ -110,10 +110,10 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 			'clientsitelink',
 			'update',
 			$siteId,
-			array(
+			[
 				$siteId . ":$oldPage",
 				$siteId . ":$newPage",
-			)
+			]
 		);
 	}
 

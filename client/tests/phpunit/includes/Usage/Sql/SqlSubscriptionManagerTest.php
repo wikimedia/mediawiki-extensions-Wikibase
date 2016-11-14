@@ -47,29 +47,29 @@ class SqlSubscriptionManagerTest extends \MediaWikiTestCase {
 		$q22 = new ItemId( 'Q22' );
 		$p11 = new PropertyId( 'P11' );
 
-		$manager->subscribe( 'enwiki', array( $q11, $p11 ) );
-		$manager->subscribe( 'dewiki', array( $q22 ) );
-		$manager->subscribe( 'dewiki', array( $q22, $q11 ) );
+		$manager->subscribe( 'enwiki', [ $q11, $p11 ] );
+		$manager->subscribe( 'dewiki', [ $q22 ] );
+		$manager->subscribe( 'dewiki', [ $q22, $q11 ] );
 
 		$this->assertEquals(
-			array(
+			[
 				'dewiki@Q11',
 				'dewiki@Q22',
 				'enwiki@P11',
 				'enwiki@Q11',
-			),
+			],
 			$this->fetchAllSubscriptions()
 		);
 
-		$manager->unsubscribe( 'enwiki', array( $q11, $q22 ) );
-		$manager->unsubscribe( 'dewiki', array( $q22 ) );
-		$manager->unsubscribe( 'dewiki', array() );
+		$manager->unsubscribe( 'enwiki', [ $q11, $q22 ] );
+		$manager->unsubscribe( 'dewiki', [ $q22 ] );
+		$manager->unsubscribe( 'dewiki', [] );
 
 		$this->assertEquals(
-			array(
+			[
 				'dewiki@Q11',
 				'enwiki@P11',
-			),
+			],
 			$this->fetchAllSubscriptions()
 		);
 	}
@@ -79,7 +79,7 @@ class SqlSubscriptionManagerTest extends \MediaWikiTestCase {
 
 		$res = $db->select( 'wb_changes_subscription', "*", '', __METHOD__ );
 
-		$subscriptions = array();
+		$subscriptions = [];
 		foreach ( $res as $row ) {
 			$subscriptions[] = $row->cs_subscriber_id . '@' . $row->cs_entity_id;
 		}

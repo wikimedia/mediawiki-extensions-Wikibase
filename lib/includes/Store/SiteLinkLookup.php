@@ -46,7 +46,7 @@ interface SiteLinkLookup {
 	 *
 	 * @return array[]
 	 */
-	public function getLinks( array $numericIds = array(), array $siteIds = array(), array $pageNames = array() );
+	public function getLinks( array $numericIds = [], array $siteIds = [], array $pageNames = [] );
 
 	/**
 	 * Returns an array of SiteLink objects for an item. If the item isn't known or not an Item,

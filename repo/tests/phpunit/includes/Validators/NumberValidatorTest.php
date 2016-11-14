@@ -18,12 +18,12 @@ use Wikibase\Repo\Validators\NumberValidator;
 class NumberValidatorTest extends \PHPUnit_Framework_TestCase {
 
 	public function validValueProvider() {
-		$data = array(
-			'int' => array( 2 ),
-			'float' => array( 3.5 ),
-			'zero' => array( 0 ),
-			'negative' => array( -20.2 ),
-		);
+		$data = [
+			'int' => [ 2 ],
+			'float' => [ 3.5 ],
+			'zero' => [ 0 ],
+			'negative' => [ -20.2 ],
+		];
 
 		return $data;
 	}
@@ -39,11 +39,11 @@ class NumberValidatorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidValueProvider() {
-		$data = array(
-			'numeric string' => array( '3.4', 'bad-type', array( 'number', 'string' ) ),
-			'boolean' => array( false, 'bad-type', array( 'number', 'boolean' ) ),
-			'null' => array( null, 'bad-type', array( 'number', 'NULL' ) )
-		);
+		$data = [
+			'numeric string' => [ '3.4', 'bad-type', [ 'number', 'string' ] ],
+			'boolean' => [ false, 'bad-type', [ 'number', 'boolean' ] ],
+			'null' => [ null, 'bad-type', [ 'number', 'NULL' ] ]
+		];
 
 		return $data;
 	}
@@ -51,7 +51,7 @@ class NumberValidatorTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider invalidValueProvider
 	 */
-	public function testValidateInvalidValue( $value, $code, array $params = array() ) {
+	public function testValidateInvalidValue( $value, $code, array $params = [] ) {
 		$validator = new NumberValidator();
 		$result = $validator->validate( $value );
 

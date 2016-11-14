@@ -23,11 +23,11 @@ class DataValueValidatorTest extends \PHPUnit_Framework_TestCase {
 	public function provideValidate() {
 		$validator = new StringLengthValidator( 1, 10 );
 
-		return array(
-			array( $validator, new StringValue( '' ), false, null, "mismatch" ),
-			array( $validator, new StringValue( 'foo' ), true, null, "match" ),
-			array( $validator, 'xyz', false, InvalidArgumentException::class, 'not a DataValue' ),
-		);
+		return [
+			[ $validator, new StringValue( '' ), false, null, "mismatch" ],
+			[ $validator, new StringValue( 'foo' ), true, null, "match" ],
+			[ $validator, 'xyz', false, InvalidArgumentException::class, 'not a DataValue' ],
+		];
 	}
 
 	/**

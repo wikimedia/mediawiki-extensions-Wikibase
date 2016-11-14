@@ -104,7 +104,7 @@ class CachingSiteLinkLookupTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetSiteLinksForItem_cacheHit() {
-		$siteLinks = array( new SiteLink( 'foowiki', 'bar' ) );
+		$siteLinks = [ new SiteLink( 'foowiki', 'bar' ) ];
 
 		$cache = new HashBagOStuff();
 		$cache->set( 'wikibase:sitelinks:Q42', $siteLinks );
@@ -121,7 +121,7 @@ class CachingSiteLinkLookupTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetSiteLinksForItem_cacheMiss() {
-		$siteLinks = array( new SiteLink( 'foowiki', 'bar' ) );
+		$siteLinks = [ new SiteLink( 'foowiki', 'bar' ) ];
 		$q42 = new ItemId( 'Q42' );
 
 		$cache = new HashBagOStuff();
@@ -147,14 +147,14 @@ class CachingSiteLinkLookupTest extends PHPUnit_Framework_TestCase {
 		$lookup = $this->getMock( SiteLinkLookup::class );
 		$lookup->expects( $this->once() )
 			->method( 'getLinks' )
-			->with( array( 1 ), array( 'a' ), array( 'b' ) )
+			->with( [ 1 ], [ 'a' ], [ 'b' ] )
 			->will( $this->returnValue( 'bar' ) );
 
 		$cachingSiteLinkLookup = new CachingSiteLinkLookup( $lookup, new HashBagOStuff() );
 
 		$this->assertSame(
 			'bar',
-			$cachingSiteLinkLookup->getLinks( array( 1 ), array( 'a' ), array( 'b' ) )
+			$cachingSiteLinkLookup->getLinks( [ 1 ], [ 'a' ], [ 'b' ] )
 		);
 	}
 

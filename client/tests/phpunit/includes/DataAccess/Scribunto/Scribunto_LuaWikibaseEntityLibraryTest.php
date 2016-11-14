@@ -98,9 +98,9 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 	public function testGetGlobalSiteId() {
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 
-		$expected = array(
+		$expected = [
 			WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'siteGlobalID' )
-		);
+		];
 
 		$this->assertSame( $expected, $luaWikibaseLibrary->getGlobalSiteId() );
 	}

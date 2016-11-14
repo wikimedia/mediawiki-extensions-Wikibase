@@ -53,23 +53,23 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 			Language::factory( 'qqq' )
 		);
 
-		$dataTypeFactory = new DataTypeFactory( array(
+		$dataTypeFactory = new DataTypeFactory( [
 			'string' => 'string',
 			'url' => 'string',
 			'globe-coordinate' => 'globecoordinate',
-		) );
+		] );
 
-		$valueParserFactory = new ValueParserFactory( array(
-			'null' => array( $this, 'newNullParser' ),
-			'string' => array( $this, 'newNullParser' ),
-			'url' => array( $this, 'newNullParser' ),
-			'globe-coordinate' => array( $this, 'newGlobeCoordinateParser' ),
-		) );
+		$valueParserFactory = new ValueParserFactory( [
+			'null' => [ $this, 'newNullParser' ],
+			'string' => [ $this, 'newNullParser' ],
+			'url' => [ $this, 'newNullParser' ],
+			'globe-coordinate' => [ $this, 'newGlobeCoordinateParser' ],
+		] );
 
-		$validatorFactory = new BuilderBasedDataTypeValidatorFactory( array(
-			'string' => array( $this, 'newArrayWithStringValidator' ),
-			'url' => array( $this, 'newArrayWithStringValidator' ),
-		) );
+		$validatorFactory = new BuilderBasedDataTypeValidatorFactory( [
+			'string' => [ $this, 'newArrayWithStringValidator' ],
+			'url' => [ $this, 'newArrayWithStringValidator' ],
+		] );
 
 		$module->setServices(
 			$dataTypeFactory,
@@ -84,10 +84,10 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function newArrayWithStringValidator() {
-		return array(
+		return [
 			new DataValueValidator(
 				new RegexValidator( '/INVALID/', true, 'no-kittens' )
-			) );
+			) ];
 	}
 
 	public function newNullParser() {
@@ -104,11 +104,11 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 		$module->execute();
 		$result = $module->getResult();
 
-		$data = $result->getResultData( null, array(
-			'BC' => array( 'nobool' ),
-			'Types' => array(),
+		$data = $result->getResultData( null, [
+			'BC' => [ 'nobool' ],
+			'Types' => [],
 			'Strip' => 'all',
-		) );
+		] );
 		return $data;
 	}
 
@@ -116,88 +116,88 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 	 * @return array[]
 	 */
 	public function provideValid() {
-		return array(
-			'datatype=string' => array(
-				array(
+		return [
+			'datatype=string' => [
+				[
 					'values' => 'foo',
 					'datatype' => 'string',
-				),
-				array(
+				],
+				[
 					'0/raw' => 'foo',
 					'0/type' => 'unknown',
 					'0/value' => 'foo',
-				),
-			),
+				],
+			],
 
-			'datatype=url' => array(
-				array(
+			'datatype=url' => [
+				[
 					'values' => 'foo',
 					'datatype' => 'string',
-				),
-				array(
+				],
+				[
 					'0/raw' => 'foo',
 					'0/type' => 'unknown',
 					'0/value' => 'foo',
-				),
-			),
+				],
+			],
 
-			'validation' => array(
-				array(
+			'validation' => [
+				[
 					'values' => 'VALID',
 					'datatype' => 'string',
 					'validate' => ''
-				),
-				array(
+				],
+				[
 					'0/raw' => 'VALID',
 					'0/valid' => true,
-				),
-			),
+				],
+			],
 
-			'bad value, validation failure' => array(
-				array(
+			'bad value, validation failure' => [
+				[
 					'values' => 'INVALID',
 					'datatype' => 'string',
 					'validate' => ''
-				),
-				array(
+				],
+				[
 					'0/raw' => 'INVALID',
 					'0/valid' => false,
 					'0/error' => 'ValidationError',
 					'0/messages/0/name' => 'wikibase-validator-no-kittens',
 					'0/messages/0/html/*' => '/.+/',
 					'0/validation-errors/0' => 'no-kittens',
-				),
-			),
+				],
+			],
 
-			'bad value, no validation' => array(
-				array(
+			'bad value, no validation' => [
+				[
 					'values' => 'INVALID',
 					'datatype' => 'string',
-				),
-				array(
+				],
+				[
 					'0/raw' => 'INVALID',
 					'0/type' => 'unknown',
-				),
-			),
+				],
+			],
 
-			'parser=string (deprecated param)' => array(
-				array(
+			'parser=string (deprecated param)' => [
+				[
 					'values' => 'foo',
 					'parser' => 'string',
-				),
-				array(
+				],
+				[
 					'0/raw' => 'foo',
 					'0/type' => 'unknown',
 					'0/value' => 'foo',
-				),
-			),
+				],
+			],
 
-			'values=foo|bar' => array(
-				array(
+			'values=foo|bar' => [
+				[
 					'values' => 'foo|bar',
 					'datatype' => 'string',
-				),
-				array(
+				],
+				[
 					'0/raw' => 'foo',
 					'0/type' => 'unknown',
 					'0/value' => 'foo',
@@ -205,45 +205,45 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 					'1/raw' => 'bar',
 					'1/type' => 'unknown',
 					'1/value' => 'bar',
-				),
-			),
+				],
+			],
 
-			'datatype=globe-coordinate' => array(
-				array(
+			'datatype=globe-coordinate' => [
+				[
 					'values' => '5.5S,37W',
 					'datatype' => 'globe-coordinate',
-				),
-				array(
+				],
+				[
 					'0/raw' => '5.5S,37W',
 					'0/type' => 'globecoordinate',
-				),
-			),
+				],
+			],
 
-			'malformed coordinate' => array(
-				array(
+			'malformed coordinate' => [
+				[
 					'values' => 'XYZ',
 					'datatype' => 'globe-coordinate',
-				),
-				array(
+				],
+				[
 					'0/raw' => 'XYZ',
 					'0/error' => ParseException::class,
 					'0/error-info' => '/^.+$/',
 					'0/messages/0/html/*' => '/^.+$/',
-				),
-			),
+				],
+			],
 
-			'good and bad' => array(
-				array(
+			'good and bad' => [
+				[
 					'values' => 'XYZ|5.5S,37W',
 					'datatype' => 'globe-coordinate',
-				),
-				array(
+				],
+				[
 					'0/error' => ParseException::class,
 					'1/type' => 'globecoordinate',
-				),
-			),
+				],
+			],
 
-		);
+		];
 	}
 
 	protected function assertValueAtPath( $expected, $path, $data ) {
@@ -282,25 +282,25 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 	 * @return array[]
 	 */
 	public function provideInvalid() {
-		return array(
-			'no datatype' => array(
-				array(
+		return [
+			'no datatype' => [
+				[
 					'values' => 'foo',
-				)
-			),
-			'bad datatype (valid parser name)' => array(
-				array(
+				]
+			],
+			'bad datatype (valid parser name)' => [
+				[
 					'values' => 'foo',
 					'datatype' => 'null',
-				)
-			),
-			'bad parser' => array(
-				array(
+				]
+			],
+			'bad parser' => [
+				[
 					'values' => 'foo',
 					'parser' => 'foo',
-				)
-			),
-		);
+				]
+			],
+		];
 	}
 
 	/**

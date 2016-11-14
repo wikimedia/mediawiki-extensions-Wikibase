@@ -23,9 +23,9 @@ class SiteLinkCountFieldTest extends PHPUnit_Framework_TestCase {
 	public function testGetMapping() {
 		$siteLinkCountField = new SiteLinkCountField();
 
-		$expected = array(
+		$expected = [
 			'type' => 'integer'
-		);
+		];
 
 		$this->assertSame( $expected, $siteLinkCountField->getMapping() );
 	}
@@ -44,10 +44,10 @@ class SiteLinkCountFieldTest extends PHPUnit_Framework_TestCase {
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Kitten' );
 		$item->getSiteLinkList()->addNewSiteLink( 'eswiki', 'Gato' );
 
-		return array(
-			array( 2, $item ),
-			array( 0, Property::newFromType( 'string' ) )
-		);
+		return [
+			[ 2, $item ],
+			[ 0, Property::newFromType( 'string' ) ]
+		];
 	}
 
 }

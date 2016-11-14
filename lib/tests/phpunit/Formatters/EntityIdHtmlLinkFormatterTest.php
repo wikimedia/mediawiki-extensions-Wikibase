@@ -79,22 +79,22 @@ class EntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 	public function formatProvider() {
 		$escapedItemUrl = preg_quote( Title::newFromText( 'Q42' )->getLocalURL(), '/' );
 
-		return array(
-			'has a label' => array(
+		return [
+			'has a label' => [
 				'expectedRegex' => '/' . $escapedItemUrl . '.*>A label</',
-			),
-			"has no label" => array(
+			],
+			"has no label" => [
 				'expectedRegex' => '/' . $escapedItemUrl . '.*>Q42</',
 				'hasLabel' => false
-			),
-			"doesn't exist, lookup labels" => array(
+			],
+			"doesn't exist, lookup labels" => [
 				'expectedRegex' => '/^Q42' . preg_quote( wfMessage( 'word-separator' )->text(), '/' ) . '.*>' .
 					preg_quote( wfMessage( 'parentheses', wfMessage( 'wikibase-deletedentity-item' )->text() )->text(), '/' ) .
 					'</',
 				'hasLabel' => false,
 				'exists' => false
-			),
-		);
+			],
+		];
 	}
 
 	private function getFormatter( $hasLabel, $exists, Term $term = null ) {
@@ -110,13 +110,13 @@ class EntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 		$languageNameLookup->expects( $this->any() )
 			->method( 'getName' )
 			->will( $this->returnCallback( function( $languageCode ) {
-				$names = array(
+				$names = [
 						'de' => 'Deutsch',
 						'de-at' => 'Österreichisches Deutsch',
 						'de-ch' => 'Schweizer Hochdeutsch',
 						'en' => 'english in german',
 						'en-ca' => 'Canadian English'
-				);
+				];
 				return $names[ $languageCode ];
 			} ) );
 
@@ -151,46 +151,46 @@ class EntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 		$translitDeCh = wfMessage( 'wikibase-language-fallback-transliteration-hint', 'Deutsch', 'Schweizer Hochdeutsch' )->text();
 		$translitEnCa = wfMessage( 'wikibase-language-fallback-transliteration-hint', 'Canadian English', 'English' )->text();
 
-		return array(
-			'plain term' => array(
+		return [
+			'plain term' => [
 				'expectedRegex' => '@>Kätzchen<@',
 				'term' => $deTerm,
-			),
-			'plain fallabck term' => array(
+			],
+			'plain fallabck term' => [
 				'expectedRegex' => '@>Kätzchen<@',
 				'term' => $deTermFallback,
-			),
-			'fallback to base' => array(
+			],
+			'fallback to base' => [
 				'expectedRegex' => '@ lang="de">Kätzchen</a><sup class="wb-language-fallback-'
 					. 'indicator wb-language-fallback-variant">Deutsch</sup>@',
 				'term' => $deAtTerm,
-			),
-			'fallback to variant' => array(
+			],
+			'fallback to variant' => [
 				'expectedRegex' => '@ lang="de-at">Kätzchen</a><sup class="wb-language-fallback-'
 					. 'indicator wb-language-fallback-variant">Österreichisches Deutsch</sup>@',
 				'term' => $atDeTerm,
-			),
-			'transliteration to requested language' => array(
+			],
+			'transliteration to requested language' => [
 				'expectedRegex' => '@>Frass</a><sup class="wb-language-fallback-'
 					. 'indicator wb-language-fallback-transliteration">'
 					. preg_quote( $translitDeCh, '@' )
 					. '</sup>@',
 				'term' => $deChTerm,
-			),
-			'transliteration to other variant' => array(
+			],
+			'transliteration to other variant' => [
 				'expectedRegex' => '@ lang="en">Kitten</a><sup class="wb-language-fallback-'
 					. 'indicator wb-language-fallback-transliteration wb-language-fallback-'
 					. 'variant">'
 					. preg_quote( $translitEnCa, '@' )
 					. '</sup>@',
 				'term' => $enGbEnCaTerm,
-			),
-			'fallback to alternative language' => array(
+			],
+			'fallback to alternative language' => [
 				'expectedRegex' => '@ lang="en">Kitten</a><sup class="wb-language-fallback-'
 					. 'indicator">english in german</sup>@',
 				'term' => $deEnTerm,
-			),
-		);
+			],
+		];
 	}
 
 	/**

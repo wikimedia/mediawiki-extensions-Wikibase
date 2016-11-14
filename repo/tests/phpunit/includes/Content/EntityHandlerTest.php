@@ -51,9 +51,9 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	 * @return array
 	 */
 	public function instanceProvider() {
-		return array(
-			array( $this->getHandler() ),
-		);
+		return [
+			[ $this->getHandler() ],
+		];
 	}
 
 	/**
@@ -70,7 +70,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 
 		return new WikibaseRepo(
 			new SettingsArray( $repoSettings ),
-			new DataTypeDefinitions( array() ),
+			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( require __DIR__ . '/../../../../../lib/WikibaseLib.entitytypes.php' ),
 			Language::factory( 'qqq' )
 		);
@@ -121,9 +121,9 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	 * @return array[]
 	 */
 	public function contentProvider() {
-		return array(
-			array( $this->newEntityContent() ),
-		);
+		return [
+			[ $this->newEntityContent() ],
+		];
 	}
 
 	/**
@@ -159,7 +159,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	public function testSerialization( EntityContent $content ) {
 		$handler = $this->getHandler();
 
-		foreach ( array( CONTENT_FORMAT_JSON,  CONTENT_FORMAT_SERIALIZED ) as $format ) {
+		foreach ( [ CONTENT_FORMAT_JSON,  CONTENT_FORMAT_SERIALIZED ] as $format ) {
 			$this->assertTrue( $content->equals(
 				$handler->unserializeContent( $handler->serializeContent( $content, $format ), $format )
 			) );
@@ -237,11 +237,11 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	}
 
 	protected function fakeRevision( EntityContent $content, $id = 0 ) {
-		$revision = new Revision( array(
+		$revision = new Revision( [
 			'id' => $id,
 			'page' => $id,
 			'content' => $content,
-		) );
+		] );
 
 		return $revision;
 	}
@@ -286,16 +286,16 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$e5u4u3 = $this->newEntity();
 		$e5u4u3->getFingerprint()->setLabel( 'en', 'F00' );
 
-		return array(
-			array( $r5, $r5, $r4, $this->newEntityContent( $e4 ), "undo last edit" ),
-			array( $r5, $r4, $r3, $this->newEntityContent( $e5u4 ), "undo previous edit" ),
+		return [
+			[ $r5, $r5, $r4, $this->newEntityContent( $e4 ), "undo last edit" ],
+			[ $r5, $r4, $r3, $this->newEntityContent( $e5u4 ), "undo previous edit" ],
 
-			array( $r5, $r5, $r3, $this->newEntityContent( $e3 ), "undo last two edits" ),
-			array( $r5, $r4, $r2, $this->newEntityContent( $e5u4u3 ), "undo past two edits" ),
+			[ $r5, $r5, $r3, $this->newEntityContent( $e3 ), "undo last two edits" ],
+			[ $r5, $r4, $r2, $this->newEntityContent( $e5u4u3 ), "undo past two edits" ],
 
-			array( $r5, $r2, $r1, null, "undo conflicting edit" ),
-			array( $r5, $r3, $r1, null, "undo two edits with conflict" ),
-		);
+			[ $r5, $r2, $r1, null, "undo conflicting edit" ],
+			[ $r5, $r3, $r1, null, "undo two edits with conflict" ],
+		];
 	}
 
 	/**
@@ -412,12 +412,12 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$newSerializer = $newSerializerFactory->newEntitySerializer();
 		$newBlob = json_encode( $newSerializer->serialize( $entity ) );
 
-		return array(
-			'old serialization / ancient id format' => array( $veryVeryOldBlob, $newBlob ),
-			'old serialization / new silly id format' => array( $veryOldBlob, $newBlob ),
-			'old serialization / old serializer format' => array( $oldBlob, $newBlob ),
-			'new serialization format, keep as is' => array( $newBlob, $newBlob ),
-		);
+		return [
+			'old serialization / ancient id format' => [ $veryVeryOldBlob, $newBlob ],
+			'old serialization / new silly id format' => [ $veryOldBlob, $newBlob ],
+			'old serialization / old serializer format' => [ $oldBlob, $newBlob ],
+			'new serialization format, keep as is' => [ $newBlob, $newBlob ],
+		];
 	}
 
 	/**
@@ -453,10 +453,10 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public function forCreationParamProvider() {
-		return array(
-			array( true ),
-			array( false ),
-		);
+		return [
+			[ true ],
+			[ false ],
+		];
 	}
 
 	/**
@@ -483,7 +483,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$handler = $this->getHandler();
 
 		$options = $handler->makeParserOptions( 'canonical' );
-		$hash = $options->optionsHash( array( 'userlang' ) );
+		$hash = $options->optionsHash( [ 'userlang' ] );
 
 		$this->assertRegExp( '/wb\d+/', $hash, 'contains Wikibase version' );
 	}

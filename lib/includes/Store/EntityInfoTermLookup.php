@@ -48,7 +48,7 @@ class EntityInfoTermLookup implements TermLookup {
 		} catch ( OutOfBoundsException $ex ) {
 			throw new TermLookupException(
 				$entityId,
-				array( $languageCode ),
+				[ $languageCode ],
 				$ex->getMessage(),
 				$ex
 			);
@@ -87,7 +87,7 @@ class EntityInfoTermLookup implements TermLookup {
 		} catch ( OutOfBoundsException $ex ) {
 			throw new TermLookupException(
 				$entityId,
-				array( $languageCode ),
+				[ $languageCode ],
 				$ex->getMessage(),
 				$ex
 			);

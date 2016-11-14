@@ -237,34 +237,34 @@ class FormatSnakValue extends ApiBase {
 	 * @see ApiBase::getAllowedParams
 	 */
 	protected function getAllowedParams() {
-		return array(
-			'generate' => array(
-				self::PARAM_TYPE => array(
+		return [
+			'generate' => [
+				self::PARAM_TYPE => [
 					SnakFormatter::FORMAT_PLAIN,
 					SnakFormatter::FORMAT_WIKI,
 					SnakFormatter::FORMAT_HTML,
 					SnakFormatter::FORMAT_HTML_WIDGET,
-				),
+				],
 				self::PARAM_DFLT => SnakFormatter::FORMAT_WIKI,
 				self::PARAM_REQUIRED => false,
-			),
-			'datavalue' => array(
+			],
+			'datavalue' => [
 				self::PARAM_TYPE => 'text',
 				self::PARAM_REQUIRED => true,
-			),
-			'datatype' => array(
+			],
+			'datatype' => [
 				self::PARAM_TYPE => WikibaseRepo::getDefaultInstance()->getDataTypeFactory()->getTypeIds(),
 				self::PARAM_REQUIRED => false,
-			),
-			'property' => array(
+			],
+			'property' => [
 				self::PARAM_TYPE => 'text',
 				self::PARAM_REQUIRED => false,
-			),
-			'options' => array(
+			],
+			'options' => [
 				self::PARAM_TYPE => 'text',
 				self::PARAM_REQUIRED => false,
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -275,19 +275,19 @@ class FormatSnakValue extends ApiBase {
 		$hello = new StringValue( 'hello' );
 		$acme = new StringValue( 'http://acme.org' );
 
-		return array(
-			$query . '&' . wfArrayToCgi( array(
+		return [
+			$query . '&' . wfArrayToCgi( [
 				'datavalue' => json_encode( $hello->toArray() ),
-			) ) => 'apihelp-wbformatvalue-example-1',
+			] ) => 'apihelp-wbformatvalue-example-1',
 
-			$query . '&' . wfArrayToCgi( array(
+			$query . '&' . wfArrayToCgi( [
 				'datavalue' => json_encode( $acme->toArray() ),
 				'datatype' => 'url',
 				'generate' => 'text/html',
-			) ) => 'apihelp-wbformatvalue-example-2',
+			] ) => 'apihelp-wbformatvalue-example-2',
 
 			//TODO: example for the options parameter, once we have something sensible to show there.
-		);
+		];
 	}
 
 }

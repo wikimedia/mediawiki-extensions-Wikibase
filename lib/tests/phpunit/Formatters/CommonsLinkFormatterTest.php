@@ -23,40 +23,40 @@ use Wikibase\Lib\CommonsLinkFormatter;
 class CommonsLinkFormatterTest extends \MediaWikiTestCase {
 
 	public function commonsLinkFormatProvider() {
-		return array(
-			array(
+		return [
+			[
 				new StringValue( 'example.jpg' ), // Lower-case file name
 				'@<a .*href="//commons.wikimedia.org/wiki/File:Example.jpg".*>.*Example.jpg.*</a>@'
-			),
-			array(
+			],
+			[
 				new StringValue( 'Example.jpg' ),
 				'@<a .*href="//commons.wikimedia.org/wiki/File:Example.jpg".*>.*Example.jpg.*</a>@'
-			),
-			array(
+			],
+			[
 				new StringValue( 'Example space.jpg' ),
 				'@<a .*href="//commons.wikimedia.org/wiki/File:Example_space.jpg".*>.*Example space.jpg.*</a>@'
-			),
-			array(
+			],
+			[
 				new StringValue( 'Example_underscore.jpg' ),
 				'@<a .*href="//commons.wikimedia.org/wiki/File:Example_underscore.jpg".*>.*Example underscore.jpg.*</a>@'
-			),
-			array(
+			],
+			[
 				new StringValue( 'Example+plus.jpg' ),
 				'@<a .*href="//commons.wikimedia.org/wiki/File:Example%2Bplus.jpg".*>.*Example\+plus.jpg.*</a>@'
-			),
-			array(
+			],
+			[
 				new StringValue( '[[File:Invalid_title.mid]]' ),
 				'@^\[\[File:Invalid_title.mid\]\]$@'
-			),
-			array(
+			],
+			[
 				new StringValue( '<a onmouseover=alert(0xF000)>ouch</a>' ),
 				'@^&lt;a onmouseover=alert\(0xF000\)&gt;ouch&lt;/a&gt;$@'
-			),
-			array(
+			],
+			[
 				new StringValue( '' ),
 				'@^$@'
-			),
-		);
+			],
+		];
 	}
 
 	/**

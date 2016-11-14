@@ -46,27 +46,27 @@ class DataValueFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function testGivenNoType_newFromArrayFails() {
 		$this->setExpectedException( IllegalValueException::class );
-		$this->newInstance()->newFromArray( array() );
+		$this->newInstance()->newFromArray( [] );
 	}
 
 	public function testGivenNoValue_newFromArrayFails() {
 		$this->setExpectedException( IllegalValueException::class );
-		$this->newInstance()->newFromArray( array( 'type' => 'unknown' ) );
+		$this->newInstance()->newFromArray( [ 'type' => 'unknown' ] );
 	}
 
 	public function testGivenUnknownType_newFromArrayFails() {
 		$this->setExpectedException( InvalidArgumentException::class );
-		$this->newInstance()->newFromArray( array(
+		$this->newInstance()->newFromArray( [
 			'type' => 'unknown',
 			'value' => '',
-		) );
+		] );
 	}
 
 	public function testGivenKnownType_newFromArraySucceeds() {
-		$value = $this->newInstance()->newFromArray( array(
+		$value = $this->newInstance()->newFromArray( [
 			'type' => 'string',
 			'value' => '',
-		) );
+		] );
 		$this->assertSame( 'success', $value );
 	}
 

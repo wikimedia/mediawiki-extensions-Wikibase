@@ -103,8 +103,8 @@ abstract class ApiFormatTestCase extends \MediaWikiTestCase {
 		$item->setLabel( 'de', 'de-label' );
 		$item->setDescription( 'de', 'de-desc' );
 		$item->setDescription( 'es', 'es-desc' );
-		$item->setAliases( 'pt', array( 'AA', 'BB' ) );
-		$item->setAliases( 'en', array( 'AA-en', 'BB-en' ) );
+		$item->setAliases( 'pt', [ 'AA', 'BB' ] );
+		$item->setAliases( 'en', [ 'AA-en', 'BB-en' ] );
 
 		$entityRevision = $store->saveEntity( $item, 'testing more!', $wgUser );
 

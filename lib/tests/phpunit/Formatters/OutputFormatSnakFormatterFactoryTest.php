@@ -34,17 +34,17 @@ use Wikibase\Lib\SnakFormatter;
 class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	private function newOutputFormatSnakFormatterFactory( $dataType = 'string' ) {
-		$snakFormatterCallbacks = array(
+		$snakFormatterCallbacks = [
 			'PT:commonsMedia' => function( $format, FormatterOptions $options ) {
 				return $this->makeMockSnakFormatter( $format );
 			},
-		);
+		];
 
-		$valueFormatterCallbacks = array(
+		$valueFormatterCallbacks = [
 			'VT:string' => function( $format, FormatterOptions $options ) {
 				return $this->makeMockValueFormatter( $format );
 			},
-		);
+		];
 		$valueFormatterFactory = new OutputFormatValueFormatterFactory(
 			$valueFormatterCallbacks,
 			Language::factory( 'en' ),
@@ -60,7 +60,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 			$snakFormatterCallbacks,
 			$valueFormatterFactory,
 			$dataTypeLookup,
-			new DataTypeFactory( array( 'string' => 'string', 'commonsMedia' => 'string' ) )
+			new DataTypeFactory( [ 'string' => 'string', 'commonsMedia' => 'string' ] )
 		);
 	}
 
@@ -113,32 +113,32 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function getSnakFormatterProvider() {
-		return array(
-			'plain value' => array(
+		return [
+			'plain value' => [
 				SnakFormatter::FORMAT_PLAIN,
 				'string',
 				new StringValue( 'foo' ),
 				'foo (text/plain)',
-			),
-			'html value' => array(
+			],
+			'html value' => [
 				SnakFormatter::FORMAT_HTML,
 				'string',
 				new StringValue( 'foo' ),
 				'foo (text/html)',
-			),
-			'plain snak' => array(
+			],
+			'plain snak' => [
 				SnakFormatter::FORMAT_PLAIN,
 				'commonsMedia', // the mock has a SnakFormatter for commonsMedia
 				new StringValue( 'foo.jpg' ),
 				'value/P5=foo.jpg (text/plain)',
-			),
-			'html snak' => array(
+			],
+			'html snak' => [
 				SnakFormatter::FORMAT_HTML,
 				'commonsMedia', // the mock has a SnakFormatter for commonsMedia
 				new StringValue( 'foo.jpg' ),
 				'value/P5=foo.jpg (text/html)',
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -156,20 +156,20 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function getSnakFormatterProvider_options() {
-		return array(
-			'default' => array(
-				array(),
+		return [
+			'default' => [
+				[],
 				ErrorHandlingSnakFormatter::class
-			),
-			'OPT_ON_ERROR => ON_ERROR_WARN' => array(
-				array( SnakFormatter::OPT_ON_ERROR => SnakFormatter::ON_ERROR_WARN ),
+			],
+			'OPT_ON_ERROR => ON_ERROR_WARN' => [
+				[ SnakFormatter::OPT_ON_ERROR => SnakFormatter::ON_ERROR_WARN ],
 				ErrorHandlingSnakFormatter::class
-			),
-			'OPT_ON_ERROR => ON_ERROR_FAIL' => array(
-				array( SnakFormatter::OPT_ON_ERROR => SnakFormatter::ON_ERROR_FAIL ),
+			],
+			'OPT_ON_ERROR => ON_ERROR_FAIL' => [
+				[ SnakFormatter::OPT_ON_ERROR => SnakFormatter::ON_ERROR_FAIL ],
 				DispatchingSnakFormatter::class
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -186,12 +186,12 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetSnakFormatter_languageOption() {
-		$callbacks = array(
+		$callbacks = [
 			'VT:string' => function( $format, FormatterOptions $options ) {
 				$this->assertSame( 'de', $options->getOption( ValueFormatter::OPT_LANG ) );
 				return new StringFormatter( $options );
 			},
-		);
+		];
 		$valueFormatterFactory = new OutputFormatValueFormatterFactory(
 			$callbacks,
 			Language::factory( 'de' ),
@@ -199,10 +199,10 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$factory = new OutputFormatSnakFormatterFactory(
-			array(),
+			[],
 			$valueFormatterFactory,
 			$this->getMock( PropertyDataTypeLookup::class ),
-			new DataTypeFactory( array() )
+			new DataTypeFactory( [] )
 		);
 		$factory->getSnakFormatter( SnakFormatter::FORMAT_PLAIN, new FormatterOptions() );
 	}

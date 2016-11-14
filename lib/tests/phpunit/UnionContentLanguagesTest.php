@@ -29,19 +29,19 @@ class UnionContentLanguagesTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function provideTestGetLanguages() {
-		$empty = new StaticContentLanguages( array() );
-		$one = new StaticContentLanguages( array( 'one' ) );
-		$two = new StaticContentLanguages( array( 'one', 'two' ) );
-		$otherTwo = new StaticContentLanguages( array( 'three', 'four' ) );
+		$empty = new StaticContentLanguages( [] );
+		$one = new StaticContentLanguages( [ 'one' ] );
+		$two = new StaticContentLanguages( [ 'one', 'two' ] );
+		$otherTwo = new StaticContentLanguages( [ 'three', 'four' ] );
 
-		return array(
-			array( $empty, $empty, array() ),
-			array( $empty, $one, array( 'one' ) ),
-			array( $one, $empty, array( 'one' ) ),
-			array( $one, $two, array( 'one', 'two' ) ),
-			array( $two, $one, array( 'one', 'two' ) ),
-			array( $two, $otherTwo, array( 'one', 'two', 'three', 'four' ) ),
-		);
+		return [
+			[ $empty, $empty, [] ],
+			[ $empty, $one, [ 'one' ] ],
+			[ $one, $empty, [ 'one' ] ],
+			[ $one, $two, [ 'one', 'two' ] ],
+			[ $two, $one, [ 'one', 'two' ] ],
+			[ $two, $otherTwo, [ 'one', 'two', 'three', 'four' ] ],
+		];
 	}
 
 	/**
@@ -55,23 +55,23 @@ class UnionContentLanguagesTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function provideTestHasLanguage() {
-		$empty = new StaticContentLanguages( array() );
-		$one = new StaticContentLanguages( array( 'one' ) );
-		$two = new StaticContentLanguages( array( 'one', 'two' ) );
-		$otherTwo = new StaticContentLanguages( array( 'three', 'four' ) );
+		$empty = new StaticContentLanguages( [] );
+		$one = new StaticContentLanguages( [ 'one' ] );
+		$two = new StaticContentLanguages( [ 'one', 'two' ] );
+		$otherTwo = new StaticContentLanguages( [ 'three', 'four' ] );
 
-		return array(
-			array( $empty, $empty, 'one', false ),
-			array( $empty, $one, 'one', true ),
-			array( $empty, $one, 'two', false ),
-			array( $two, $one, 'one', true ),
-			array( $two, $one, 'two', true ),
-			array( $two, $one, 'three', false ),
-			array( $two, $otherTwo, 'one', true ),
-			array( $two, $otherTwo, 'two', true ),
-			array( $two, $otherTwo, 'three', true ),
-			array( $two, $otherTwo, 'four', true ),
-		);
+		return [
+			[ $empty, $empty, 'one', false ],
+			[ $empty, $one, 'one', true ],
+			[ $empty, $one, 'two', false ],
+			[ $two, $one, 'one', true ],
+			[ $two, $one, 'two', true ],
+			[ $two, $one, 'three', false ],
+			[ $two, $otherTwo, 'one', true ],
+			[ $two, $otherTwo, 'two', true ],
+			[ $two, $otherTwo, 'three', true ],
+			[ $two, $otherTwo, 'four', true ],
+		];
 	}
 
 }

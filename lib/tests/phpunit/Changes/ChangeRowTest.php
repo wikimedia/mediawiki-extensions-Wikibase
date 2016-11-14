@@ -22,7 +22,7 @@ use Wikibase\ChangeRow;
 class ChangeRowTest extends MediaWikiTestCase {
 
 	public function testAgeCalculation() {
-		$change = new ChangeRow( array( 'time' => date( 'YmdHis' ) ) );
+		$change = new ChangeRow( [ 'time' => date( 'YmdHis' ) ] );
 		$age = $change->getAge();
 		$this->assertInternalType( 'int', $age );
 		$this->assertGreaterThanOrEqual( 0, $age );
@@ -35,7 +35,7 @@ class ChangeRowTest extends MediaWikiTestCase {
 	}
 
 	public function testReturnsTime() {
-		$change = new ChangeRow( array( 'time' => '20130101000000' ) );
+		$change = new ChangeRow( [ 'time' => '20130101000000' ] );
 		$this->assertSame( '20130101000000', $change->getTime() );
 	}
 
@@ -51,7 +51,7 @@ class ChangeRowTest extends MediaWikiTestCase {
 	}
 
 	public function testReturnsObjectId() {
-		$change = new ChangeRow( array( 'object_id' => 'Q1' ) );
+		$change = new ChangeRow( [ 'object_id' => 'Q1' ] );
 		$this->assertSame( 'Q1', $change->getObjectId() );
 	}
 
@@ -62,7 +62,7 @@ class ChangeRowTest extends MediaWikiTestCase {
 	}
 
 	public function testReturnsExistingField() {
-		$change = new ChangeRow( array( 'field' => 'value' ) );
+		$change = new ChangeRow( [ 'field' => 'value' ] );
 		$this->assertSame( 'value', $change->getField( 'field' ) );
 	}
 
@@ -74,32 +74,32 @@ class ChangeRowTest extends MediaWikiTestCase {
 
 	public function testGetFieldUnserializesInfo() {
 		$json = '{"field":"value"}';
-		$expected = array( 'field' => 'value' );
-		$change = new ChangeRow( array( 'info' => $json ) );
+		$expected = [ 'field' => 'value' ];
+		$change = new ChangeRow( [ 'info' => $json ] );
 		$this->assertSame( $expected, $change->getField( 'info' ) );
 	}
 
 	public function testReturnsFields() {
-		$change = new ChangeRow( array( 'field' => 'value' ) );
-		$this->assertSame( array( 'id' => null, 'field' => 'value' ), $change->getFields() );
+		$change = new ChangeRow( [ 'field' => 'value' ] );
+		$this->assertSame( [ 'id' => null, 'field' => 'value' ], $change->getFields() );
 	}
 
 	public function testGetFieldsUnserializesInfo() {
 		$json = '{"field":"value"}';
-		$expected = array( 'field' => 'value' );
-		$change = new ChangeRow( array( 'info' => $json ) );
-		$this->assertSame( array( 'id' => null, 'info' => $expected ), $change->getFields() );
+		$expected = [ 'field' => 'value' ];
+		$change = new ChangeRow( [ 'info' => $json ] );
+		$this->assertSame( [ 'id' => null, 'info' => $expected ], $change->getFields() );
 	}
 
 	public function testSerializes() {
-		$info = array( 'field' => 'value' );
+		$info = [ 'field' => 'value' ];
 		$expected = '{"field":"value"}';
 		$change = new ChangeRow();
 		$this->assertSame( $expected, $change->serializeInfo( $info ) );
 	}
 
 	public function testDoesNotSerializeObjects() {
-		$info = array( 'array' => array( 'object' => new ChangeRow() ) );
+		$info = [ 'array' => [ 'object' => new ChangeRow() ] ];
 		$change = new ChangeRow();
 		$this->setExpectedException( MWException::class );
 		$change->serializeInfo( $info );
@@ -107,14 +107,14 @@ class ChangeRowTest extends MediaWikiTestCase {
 
 	public function testUnserializesJson() {
 		$json = '{"field":"value"}';
-		$expected = array( 'field' => 'value' );
+		$expected = [ 'field' => 'value' ];
 		$change = new ChangeRow();
 		$this->assertSame( $expected, $change->unserializeInfo( $json ) );
 	}
 
 	public function testUnserializesPhpSerializations() {
 		$serialization = 'a:1:{s:5:"field";s:5:"value";}';
-		$expected = array( 'field' => 'value' );
+		$expected = [ 'field' => 'value' ];
 		$change = new ChangeRow();
 		$this->assertSame( $expected, $change->unserializeInfo( $serialization ) );
 	}
@@ -126,13 +126,13 @@ class ChangeRowTest extends MediaWikiTestCase {
 	}
 
 	public function testCanNotUnserializeNonArrays() {
-		$change = new ChangeRow( array( 'object_id' => 'Q1' ) );
+		$change = new ChangeRow( [ 'object_id' => 'Q1' ] );
 
 		\MediaWiki\suppressWarnings();
 		$info = $change->unserializeInfo( 's:5:"value";' );
 		\MediaWiki\restoreWarnings();
 
-		$this->assertSame( array(), $info );
+		$this->assertSame( [], $info );
 	}
 
 	public function testSetsField() {
@@ -143,18 +143,18 @@ class ChangeRowTest extends MediaWikiTestCase {
 
 	public function testSetsFields() {
 		$change = new ChangeRow();
-		$change->setFields( array( 'field' => 'value' ) );
+		$change->setFields( [ 'field' => 'value' ] );
 		$this->assertSame( 'value', $change->getField( 'field' ) );
 	}
 
 	public function testOverridesFieldsByDefault() {
-		$change = new ChangeRow( array( 'field' => 'old' ) );
-		$change->setFields( array( 'field' => 'new' ) );
+		$change = new ChangeRow( [ 'field' => 'old' ] );
+		$change->setFields( [ 'field' => 'new' ] );
 		$this->assertSame( 'new', $change->getField( 'field' ) );
 	}
 
 	public function testReturnsId() {
-		$change = new ChangeRow( array( 'id' => 1 ) );
+		$change = new ChangeRow( [ 'id' => 1 ] );
 		$this->assertSame( 1, $change->getId() );
 	}
 
@@ -164,7 +164,7 @@ class ChangeRowTest extends MediaWikiTestCase {
 	}
 
 	public function testHasKnownField() {
-		$change = new ChangeRow( array( 'key' => 'value' ) );
+		$change = new ChangeRow( [ 'key' => 'value' ] );
 		$this->assertTrue( $change->hasField( 'key' ) );
 	}
 

@@ -44,11 +44,11 @@ class EntityExistsValidatorTest extends \PHPUnit_Framework_TestCase {
 	public function provideValidate() {
 		$itemId = new ItemId( 'Q8' );
 
-		return array(
-			'existing entity' => array( new EntityIdValue( $itemId ), null ),
-			'is an item' => array( $itemId, Item::ENTITY_TYPE ),
-			'is a property' => array( new PropertyId( 'P8' ), Property::ENTITY_TYPE ),
-		);
+		return [
+			'existing entity' => [ new EntityIdValue( $itemId ), null ],
+			'is an item' => [ $itemId, Item::ENTITY_TYPE ],
+			'is a property' => [ new PropertyId( 'P8' ), Property::ENTITY_TYPE ],
+		];
 	}
 
 	/**
@@ -62,11 +62,11 @@ class EntityExistsValidatorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideValidate_failure() {
-		return array(
-			"missing entity" => array( new ItemId( 'Q3' ), null, 'no-such-entity' ),
-			"not an item" => array( new PropertyId( 'P8' ), Item::ENTITY_TYPE, 'bad-entity-type' ),
-			"not a property" => array( new ItemId( 'Q8' ), Property::ENTITY_TYPE, 'bad-entity-type' ),
-		);
+		return [
+			"missing entity" => [ new ItemId( 'Q3' ), null, 'no-such-entity' ],
+			"not an item" => [ new PropertyId( 'P8' ), Item::ENTITY_TYPE, 'bad-entity-type' ],
+			"not a property" => [ new ItemId( 'Q8' ), Property::ENTITY_TYPE, 'bad-entity-type' ],
+		];
 	}
 
 	/**
@@ -88,10 +88,10 @@ class EntityExistsValidatorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideValidate_exception() {
-		return array(
-			"Not an EntityId" => array( 'Q3', null ),
-			"Type is not a string" => array( new ItemId( 'Q8' ), array( 'foo' ) ),
-		);
+		return [
+			"Not an EntityId" => [ 'Q3', null ],
+			"Type is not a string" => [ new ItemId( 'Q8' ), [ 'foo' ] ],
+		];
 	}
 
 	/**

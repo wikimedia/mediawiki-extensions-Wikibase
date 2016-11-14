@@ -159,10 +159,10 @@ class ChangeLineFormatter {
 	private function formatRegisteredUserLinks( array $links ) {
 		$userlinks = $links['user'];
 
-		$usertools = array(
+		$usertools = [
 			$links['usertalk'],
 			$links['contribs']
-		);
+		];
 
 		$userlinks .= wfMessage( 'word-separator' )->plain()
 			. '<span class="mw-usertoollinks">'
@@ -210,7 +210,7 @@ class ChangeLineFormatter {
 		$historyLink = $this->buildHistoryLink( $entityId, $rev );
 
 		return wfMessage( 'parentheses' )->rawParams(
-			$this->lang->pipeList( array( $diffLink, $historyLink ) )
+			$this->lang->pipeList( [ $diffLink, $historyLink ] )
 		)->text();
 	}
 
@@ -222,21 +222,21 @@ class ChangeLineFormatter {
 	 * @return string HTML
 	 */
 	private function buildDiffLink( EntityId $entityId, RevisionData $rev, $count ) {
-		$params = array(
+		$params = [
 			'title' => $this->repoLinker->getEntityTitle( $entityId ),
 			'curid' => $rev->getPageId(),
 			'diff' => $rev->getRevId(),
 			'oldid' => $rev->getParentId()
-		);
+		];
 
 		$url = $this->repoLinker->addQueryParams( $this->repoLinker->getIndexUrl(), $params );
 
 		return $this->repoLinker->formatLink(
 			$url,
 			wfMessage( 'diff' )->text(),
-			array(
+			[
 				'tabindex' => $count
-			)
+			]
 		);
 	}
 
@@ -249,11 +249,11 @@ class ChangeLineFormatter {
 	private function buildHistoryLink( EntityId $entityId, RevisionData $rev ) {
 		$titleText = $this->repoLinker->getEntityTitle( $entityId );
 
-		$params = array(
+		$params = [
 			'title' => $titleText,
 			'curid' => $rev->getPageId(),
 			'action' => 'history'
-		);
+		];
 
 		$url = $this->repoLinker->addQueryParams( $this->repoLinker->getIndexUrl(), $params );
 
@@ -273,9 +273,9 @@ class ChangeLineFormatter {
 			// @todo: localise this once namespaces are localised on the repo
 			$this->repoLinker->getPageUrl( "User:$userName" ),
 			$userName,
-			array(
+			[
 				'class' => 'mw-userlink'
-			)
+			]
 		);
 	}
 
@@ -316,7 +316,7 @@ class ChangeLineFormatter {
 	 * @return string[] List of HTML links
 	 */
 	private function buildUserLinks( $userName ) {
-		$links = array();
+		$links = [];
 
 		$links['usertalk'] = $this->buildUserTalkLink( $userName );
 

@@ -14,11 +14,11 @@ class WikibaseFieldDefinitions {
 	 * @return SearchIndexField[] Array key is field name.
 	 */
 	public function getFields() {
-		$fields = array(
+		$fields = [
 			'label_count' => new LabelCountField(),
 			'sitelink_count' => new SiteLinkCountField(),
 			'statement_count' => new StatementCountField()
-		);
+		];
 
 		return $fields;
 	}

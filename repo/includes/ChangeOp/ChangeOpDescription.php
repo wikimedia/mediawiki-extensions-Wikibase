@@ -138,7 +138,7 @@ class ChangeOpDescription extends ChangeOpBase {
 			$result = $fingerprintValidator->validateFingerprint(
 				$fingerprint,
 				$entity->getId(),
-				array( $this->languageCode )
+				[ $this->languageCode ]
 			);
 		}
 

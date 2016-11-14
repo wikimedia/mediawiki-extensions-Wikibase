@@ -115,7 +115,7 @@ class ErrorHandlingSnakFormatter implements SnakFormatter {
 			$warning->inLanguage( $this->language );
 		}
 
-		$attributes = array( 'class' => 'error wb-format-error' );
+		$attributes = [ 'class' => 'error wb-format-error' ];
 
 		$format = $this->getFormat();
 

@@ -81,7 +81,7 @@ class ConsistentReadConnectionManager {
 	 */
 	public function getReadConnection() {
 		$dbIndex = $this->forceMaster ? DB_MASTER : DB_SLAVE;
-		return $this->loadBalancer->getConnection( $dbIndex, array(), $this->dbName );
+		return $this->loadBalancer->getConnection( $dbIndex, [], $this->dbName );
 	}
 
 	/**
@@ -91,7 +91,7 @@ class ConsistentReadConnectionManager {
 	 * @return DatabaseBase
 	 */
 	public function getWriteConnection() {
-		return $this->loadBalancer->getConnection( DB_MASTER, array(), $this->dbName );
+		return $this->loadBalancer->getConnection( DB_MASTER, [], $this->dbName );
 	}
 
 	/**

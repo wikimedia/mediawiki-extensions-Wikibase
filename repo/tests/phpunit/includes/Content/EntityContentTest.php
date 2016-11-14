@@ -100,17 +100,17 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$entityContent = $this->newEmpty();
 		$this->setLabel( $entityContent->getEntity(), 'en', "cake" );
 
-		return array(
-			array( $entityContent, 'cake' )
-		);
+		return [
+			[ $entityContent, 'cake' ]
+		];
 	}
 
 	public function testWikibaseTextForSearchIndex() {
 		$entityContent = $this->newEmpty();
 		$this->setLabel( $entityContent->getEntity(), 'en', "cake" );
 
-		$this->mergeMwGlobalArrayValue( 'wgHooks', array(
-			'WikibaseTextForSearchIndex' => array(
+		$this->mergeMwGlobalArrayValue( 'wgHooks', [
+			'WikibaseTextForSearchIndex' => [
 				function ( $actualEntityContent, &$text ) use ( $entityContent ) {
 					$this->assertSame( $entityContent, $actualEntityContent );
 					$this->assertSame( 'cake', $text );
@@ -118,8 +118,8 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 					$text .= "\nHOOK";
 					return true;
 				},
-			),
-		) );
+			],
+		] );
 
 		$text = $entityContent->getTextForSearchIndex();
 		$this->assertSame( "cake\nHOOK", $text, 'Text for search index should be updated by the hook' );
@@ -129,13 +129,13 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$entityContent = $this->newEmpty();
 		$this->setLabel( $entityContent->getEntity(), 'en', "cake" );
 
-		$this->mergeMwGlobalArrayValue( 'wgHooks', array(
-			'WikibaseTextForSearchIndex' => array(
+		$this->mergeMwGlobalArrayValue( 'wgHooks', [
+			'WikibaseTextForSearchIndex' => [
 				function () {
 					return false;
 				},
-			),
-		) );
+			],
+		] );
 
 		$text = $entityContent->getTextForSearchIndex();
 		$this->assertSame( '', $text, 'Text for search index should be empty if the hook returned false' );
@@ -151,7 +151,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$title = Title::newFromText( 'Foo' );
 		$parserOutput = $content->getParserOutput( $title );
 
-		$expectedUsedOptions = array( 'userlang', 'editsection' );
+		$expectedUsedOptions = [ 'userlang', 'editsection' ];
 		$actualOptions = $parserOutput->getUsedOptions();
 		$this->assertEquals(
 			$expectedUsedOptions,
@@ -167,21 +167,21 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	public function providePageProperties() {
-		$cases = array();
+		$cases = [];
 		$emptyContent = $this->newEmpty( $this->getDummyId() );
 
-		$cases['empty'] = array(
+		$cases['empty'] = [
 			$emptyContent,
-			array( 'wb-status' => EntityContent::STATUS_EMPTY, 'wb-claims' => 0 )
-		);
+			[ 'wb-status' => EntityContent::STATUS_EMPTY, 'wb-claims' => 0 ]
+		];
 
 		$contentWithLabel = $this->newEmpty( $this->getDummyId() );
 		$this->setLabel( $contentWithLabel->getEntity(), 'en', 'Foo' );
 
-		$cases['labels'] = array(
+		$cases['labels'] = [
 			$contentWithLabel,
-			array( 'wb-status' => EntityContent::STATUS_STUB, 'wb-claims' => 0 )
-		);
+			[ 'wb-status' => EntityContent::STATUS_STUB, 'wb-claims' => 0 ]
+		];
 
 		return $cases;
 	}
@@ -203,16 +203,16 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$contentWithLabel = $this->newEmpty();
 		$this->setLabel( $contentWithLabel->getEntity(), 'de', 'xyz' );
 
-		return array(
-			'empty' => array(
+		return [
+			'empty' => [
 				$this->newEmpty(),
 				EntityContent::STATUS_EMPTY
-			),
-			'labels' => array(
+			],
+			'labels' => [
 				$contentWithLabel,
 				EntityContent::STATUS_STUB
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -239,22 +239,22 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$labeledEntityContent = $this->newEmpty();
 		$this->setLabel( $labeledEntityContent->getEntity(), 'de', 'xyz' );
 
-		return array(
-			'empty' => array(
+		return [
+			'empty' => [
 				$empty,
-				array(
+				[
 					'wb-status' => EntityContent::STATUS_EMPTY,
 					'wb-claims' => 0,
-				)
-			),
-			'labels' => array(
+				]
+			],
+			'labels' => [
 				$labeledEntityContent,
-				array(
+				[
 					'wb-status' => EntityContent::STATUS_STUB,
 					'wb-claims' => 0,
-				)
-			),
-		);
+				]
+			],
+		];
 	}
 
 	/**
@@ -281,15 +281,15 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$this->setLabel( $ham->getEntity(), 'en', 'Ham' );
 
 		$spamToHam = new DiffOpChange( 'Spam', 'Ham' );
-		$spamToHamDiff = new EntityDiff( array(
-			'label' => new Diff( array( 'en' => $spamToHam ) ),
-		) );
+		$spamToHamDiff = new EntityDiff( [
+			'label' => new Diff( [ 'en' => $spamToHam ] ),
+		] );
 
-		return array(
-			'empty' => array( $empty, $empty, new EntityContentDiff( new EntityDiff(), new Diff() ) ),
-			'same' => array( $ham, $ham, new EntityContentDiff( new EntityDiff(), new Diff() ) ),
-			'spam to ham' => array( $spam, $ham, new EntityContentDiff( $spamToHamDiff, new Diff() ) ),
-		);
+		return [
+			'empty' => [ $empty, $empty, new EntityContentDiff( new EntityDiff(), new Diff() ) ],
+			'same' => [ $ham, $ham, new EntityContentDiff( new EntityDiff(), new Diff() ) ],
+			'spam to ham' => [ $spam, $ham, new EntityContentDiff( $spamToHamDiff, new Diff() ) ],
+		];
 	}
 
 	/**
@@ -324,14 +324,14 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$this->setLabel( $ham->getEntity(), 'en', 'Ham' );
 
 		$spamToHam = new DiffOpChange( 'Spam', 'Ham' );
-		$spamToHamDiff = new EntityDiff( array(
-			'label' => new Diff( array( 'en' => $spamToHam ) ),
-		) );
+		$spamToHamDiff = new EntityDiff( [
+			'label' => new Diff( [ 'en' => $spamToHam ] ),
+		] );
 
-		return array(
-			'empty' => array( $spam, new EntityContentDiff( new EntityDiff(), new Diff() ), $spam ),
-			'spam to ham' => array( $spam, new EntityContentDiff( $spamToHamDiff, new Diff() ), $ham ),
-		);
+		return [
+			'empty' => [ $spam, new EntityContentDiff( new EntityDiff(), new Diff() ), $spam ],
+			'spam to ham' => [ $spam, new EntityContentDiff( $spamToHamDiff, new Diff() ), $ham ],
+		];
 	}
 
 	/**
@@ -355,10 +355,10 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 		$this->setLabel( $labels->getEntity(), 'en', 'Foo' );
 
-		return array(
-			'empty' => array( $empty ),
-			'labels' => array( $labels ),
-		);
+		return [
+			'empty' => [ $empty ],
+			'labels' => [ $labels ],
+		];
 	}
 
 	/**
@@ -381,11 +381,11 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$labels2 = $this->newEmpty();
 		$this->setLabel( $labels2->getEntity(), 'de', 'Foo' );
 
-		return array(
-			'empty' => array( $empty, $empty, true ),
-			'same labels' => array( $labels1, $labels1, true ),
-			'different labels' => array( $labels1, $labels2, false ),
-		);
+		return [
+			'empty' => [ $empty, $empty, true ],
+			'same labels' => [ $labels1, $labels1, true ],
+			'different labels' => [ $labels1, $labels2, false ],
+		];
 	}
 
 	/**
@@ -441,9 +441,9 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	public function entityRedirectProvider() {
-		return array(
-			'empty' => array( $this->newEmpty(), null ),
-		);
+		return [
+			'empty' => [ $this->newEmpty(), null ],
+		];
 	}
 
 	/**

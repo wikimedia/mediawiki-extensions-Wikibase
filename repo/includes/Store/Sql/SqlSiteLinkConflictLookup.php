@@ -30,7 +30,7 @@ class SqlSiteLinkConflictLookup extends DBAccessBase implements SiteLinkConflict
 		$siteLinks = $item->getSiteLinkList();
 
 		if ( $siteLinks->isEmpty() ) {
-			return array();
+			return [];
 		}
 
 		if ( $db ) {
@@ -60,23 +60,23 @@ class SqlSiteLinkConflictLookup extends DBAccessBase implements SiteLinkConflict
 
 		$conflictingLinks = $dbr->select(
 			'wb_items_per_site',
-			array(
+			[
 				'ips_site_id',
 				'ips_site_page',
 				'ips_item_id',
-			),
+			],
 			"($anyOfTheLinks) AND ips_item_id != " . (int)$item->getId()->getNumericId(),
 			__METHOD__
 		);
 
-		$conflicts = array();
+		$conflicts = [];
 
 		foreach ( $conflictingLinks as $link ) {
-			$conflicts[] = array(
+			$conflicts[] = [
 				'siteId' => $link->ips_site_id,
 				'itemId' => (int)$link->ips_item_id,
 				'sitePage' => $link->ips_site_page,
-			);
+			];
 		}
 
 		if ( !$db ) {

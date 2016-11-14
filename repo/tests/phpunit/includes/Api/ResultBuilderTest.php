@@ -133,22 +133,22 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$data = $result->getResultData();
 
 		$this->assertEquals(
-			array(
+			[
 				'success' => $expected,
 				'_type' => 'assoc',
-			),
+			],
 			$data
 		);
 	}
 
 	public function provideMarkResultSuccess() {
-		return array(
-			array( true, 1 ),
-			array( 1, 1 ),
-			array( false, 0 ),
-			array( 0, 0 ),
-			array( null, 0 ),
-		);
+		return [
+			[ true, 1 ],
+			[ 1, 1 ],
+			[ false, 0 ],
+			[ 0, 0 ],
+			[ null, 0 ],
+		];
 	}
 
 	/**
@@ -162,13 +162,13 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideMarkResultSuccessExceptions() {
-		return array( array( 3 ), array( -1 ) );
+		return [ [ 3 ], [ -1 ] ];
 	}
 
 	public function provideTestAddEntityRevision() {
-		$expected = array(
-			'entities' => array(
-				'Q1230000' => array(
+		$expected = [
+			'entities' => [
+				'Q1230000' => [
 					'pageid' => 123, //mocked
 					'ns' => 456, //mocked
 					'title' => 'MockPrefixedText', //mocked
@@ -176,182 +176,182 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 					'type' => 'item',
 					'lastrevid' => 33,
 					'modified' => '2013-11-26T20:29:23Z',
-					'redirects' => array(
+					'redirects' => [
 						'from' => 'Q1230000',
 						'to' => 'Q123098',
-					),
-					'aliases' => array(
-						'en' => array(
-							array(
+					],
+					'aliases' => [
+						'en' => [
+							[
 								'language' => 'en',
 								'value' => 'bar',
-							),
-							array(
+							],
+							[
 								'language' => 'en',
 								'value' => 'baz',
-							),
+							],
 							'_element' => 'alias',
-						),
-						'zh' => array(
-							array(
+						],
+						'zh' => [
+							[
 								'language' => 'zh',
 								'value' => '????????',
-							),
+							],
 							'_element' => 'alias',
-						),
+						],
 						'_element' => 'language',
 						'_type' => 'kvp',
 						'_kvpkeyname' => 'id',
-					),
-					'descriptions' => array(
-						'pt' => array(
+					],
+					'descriptions' => [
+						'pt' => [
 							'language' => 'pt',
 							'value' => 'ptDesc'
-						),
-						'pl' => array(
+						],
+						'pl' => [
 							'language' => 'pl',
 							'value' => 'Longer Description For An Item'
-						),
+						],
 						'_element' => 'description',
 						'_type' => 'kvp',
 						'_kvpkeyname' => 'language',
 						'_kvpmerge' => true,
 
-					),
-					'labels' => array(
-						'de' => array(
+					],
+					'labels' => [
+						'de' => [
 							'language' => 'de',
 							'value' => 'foo'
-						),
-						'zh_classical' => array(
+						],
+						'zh_classical' => [
 							'language' => 'zh_classical',
 							'value' => 'Longer Label'
-						),
+						],
 						'_element' => 'label',
 						'_type' => 'kvp',
 						'_kvpkeyname' => 'language',
 						'_kvpmerge' => true,
-					),
-					'claims' => array(
-						'P65' => array(
-							array(
+					],
+					'claims' => [
+						'P65' => [
+							[
 								'id' => 'imaguid',
-								'mainsnak' => array(
+								'mainsnak' => [
 									'snaktype' => 'value',
 									'property' => 'P65',
-									'datavalue' => array(
+									'datavalue' => [
 										'value' => 'snakStringValue',
 										'type' => 'string',
-									),
+									],
 									'datatype' => 'DtIdFor_P65',
-								),
+								],
 								'type' => 'statement',
-								'qualifiers' => array(
-									'P65' => array(
-										array(
+								'qualifiers' => [
+									'P65' => [
+										[
 											'hash' => 'e95e866e7fa1c18bd06dae9b712cb99545107eb8',
 											'snaktype' => 'value',
 											'property' => 'P65',
-											'datavalue' => array(
+											'datavalue' => [
 												'value' => 'string!',
 												'type' => 'string',
-											),
+											],
 											'datatype' => 'DtIdFor_P65',
-										),
-										array(
+										],
+										[
 											'hash' => '210b00274bf03247a89de918f15b12142ebf9e56',
 											'snaktype' => 'somevalue',
 											'property' => 'P65',
 											'datatype' => 'DtIdFor_P65',
-										),
+										],
 										'_element' => 'qualifiers',
-									),
+									],
 									'_element' => 'property',
 									'_type' => 'kvp',
 									'_kvpkeyname' => 'id',
-								),
+								],
 								'rank' => 'normal',
-								'qualifiers-order' => array(
+								'qualifiers-order' => [
 									'P65',
 									'_element' => 'property',
-								),
-								'references' => array(
-									array(
+								],
+								'references' => [
+									[
 										'hash' => 'bdc5f7185904d6d3219e13b7443571dda8c4bee8',
-										'snaks' => array(
-											'P65' => array(
-												array(
+										'snaks' => [
+											'P65' => [
+												[
 													'snaktype' => 'somevalue',
 													'property' => 'P65',
 													'datatype' => 'DtIdFor_P65',
-												),
+												],
 												'_element' => 'snak',
-											),
-											'P68' => array(
-												array(
+											],
+											'P68' => [
+												[
 													'snaktype' => 'somevalue',
 													'property' => 'P68',
 													'datatype' => 'DtIdFor_P68',
-												),
+												],
 												'_element' => 'snak',
-											),
+											],
 											'_element' => 'property',
 											'_type' => 'kvp',
 											'_kvpkeyname' => 'id',
-										),
-										'snaks-order' => array(
+										],
+										'snaks-order' => [
 											'P65',
 											'P68',
 											'_element' => 'property',
-										)
-									),
+										]
+									],
 									'_element' => 'reference',
-								),
-							),
+								],
+							],
 							'_element' => 'claim',
-						),
+						],
 						'_element' => 'property',
 						'_type' => 'kvp',
 						'_kvpkeyname' => 'id',
-					),
-					'sitelinks' => array(
-						'enwiki' => array(
+					],
+					'sitelinks' => [
+						'enwiki' => [
 							'site' => 'enwiki',
 							'title' => 'Berlin',
-							'badges' => array(
+							'badges' => [
 								'Q333',
 								'_element' => 'badge',
-							)
-						),
-						'zh_classicalwiki' => array(
+							]
+						],
+						'zh_classicalwiki' => [
 							'site' => 'zh_classicalwiki',
 							'title' => 'User:Addshore',
-							'badges' => array(
+							'badges' => [
 								'_element' => 'badge',
-							)
-						),
+							]
+						],
 						'_element' => 'sitelink',
 						'_type' => 'kvp',
 						'_kvpkeyname' => 'site',
 						'_kvpmerge' => true,
-					),
-				),
+					],
+				],
 				'_element' => 'entity',
 				'_type' => 'kvp',
 				'_kvpkeyname' => 'id',
 				'_kvpmerge' => true,
-			),
+			],
 			'_type' => 'assoc',
-		);
+		];
 
 		$expectedNoMetaData = $this->removeMetaData( $expected );
 		// The api always starts with this
 		$expectedNoMetaData['_type'] = 'assoc';
 
-		return array(
-			array( false, $expectedNoMetaData ),
-			array( true, $expected ),
-		);
+		return [
+			[ false, $expectedNoMetaData ],
+			[ true, $expected ],
+		];
 	}
 
 	/**
@@ -364,12 +364,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		//Basic
 		$item->setLabel( 'de', 'foo' );
 		$item->setLabel( 'zh_classical', 'Longer Label' );
-		$item->setAliases( 'en', array( 'bar', 'baz' ) );
-		$item->setAliases( 'zh', array( '????????' ) );
+		$item->setAliases( 'en', [ 'bar', 'baz' ] );
+		$item->setAliases( 'zh', [ '????????' ] );
 		$item->setDescription( 'pt', 'ptDesc' );
 		$item->setDescription( 'pl', 'Longer Description For An Item' );
-		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q333' ) ) );
-		$item->getSiteLinkList()->addNewSiteLink( 'zh_classicalwiki', 'User:Addshore', array() );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Berlin', [ new ItemId( 'Q333' ) ] );
+		$item->getSiteLinkList()->addNewSiteLink( 'zh_classicalwiki', 'User:Addshore', [] );
 
 		$snak = new PropertyValueSnak( new PropertyId( 'P65' ), new StringValue( 'snakStringValue' ) );
 
@@ -401,7 +401,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$entityRevision = new EntityRevision( $item, 33, '20131126202923' );
 
-		$props = array();
+		$props = [];
 		$result = $this->getDefaultResult();
 		$resultBuilder = $this->getResultBuilder( $result );
 
@@ -419,74 +419,74 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideTestAddEntityRevisionFallback() {
-		$expected = array(
-			'entities' => array(
-				'Q123101' => array(
+		$expected = [
+			'entities' => [
+				'Q123101' => [
 					'id' => 'Q123101',
 					'type' => 'item',
-					'labels' => array(
-						'de-formal' => array(
+					'labels' => [
+						'de-formal' => [
 							'language' => 'de',
 							'value' => 'Oslo-de',
 							'for-language' => 'de-formal'
-						),
-						'es' => array(
+						],
+						'es' => [
 							'language' => 'en',
 							'value' => 'Oslo-en',
 							'for-language' => 'es',
-						),
-						'qug' => array(
+						],
+						'qug' => [
 							'language' => 'en',
 							'value' => 'Oslo-en',
 							'for-language' => 'qug'
-						),
-						'zh-my' => array(
+						],
+						'zh-my' => [
 							'language' => 'en',
 							'value' => 'Oslo-en',
 							'for-language' => 'zh-my'
-						),
+						],
 						'_element' => 'label',
 						'_type' => 'kvp',
 						'_kvpkeyname' => 'language',
 						'_kvpmerge' => true,
-					),
-					'descriptions' => array(
-						'es' => array(
+					],
+					'descriptions' => [
+						'es' => [
 							'language' => 'es',
 							'value' => 'desc-es',
-						),
-						'qug' => array(
+						],
+						'qug' => [
 							'language' => 'es',
 							'value' => 'desc-es',
 							'for-language' => 'qug'
-						),
-						'zh-my' => array(
+						],
+						'zh-my' => [
 							'language' => 'zh-my',
 							'value' => 'desc-zh-sg',
 							'source-language' => 'zh-sg',
-						),
+						],
 						'_element' => 'description',
 						'_type' => 'kvp',
 						'_kvpkeyname' => 'language',
 						'_kvpmerge' => true,
-					),
-				),
+					],
+				],
 				'_element' => 'entity',
 				'_type' => 'kvp',
 				'_kvpkeyname' => 'id',
 				'_kvpmerge' => true,
-			),
+			],
 			'_type' => 'assoc',
-		);
+		];
 
 		$expectedNoMetaData = $this->removeMetaData( $expected );
 		// The api always starts with this
 		$expectedNoMetaData['_type'] = 'assoc';
 
-		return array(
-			array( false, $expectedNoMetaData ),
-			array( true, $expected ),
-		);
+		return [
+			[ false, $expectedNoMetaData ],
+			[ true, $expected ],
+		];
 	}
 
 	/**
@@ -502,12 +502,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$fallbackChainFactory = new LanguageFallbackChainFactory();
 		$fallbackMode = LanguageFallbackChainFactory::FALLBACK_ALL;
-		$fallbackChains = array(
+		$fallbackChains = [
 			'de-formal' => $fallbackChainFactory->newFromLanguageCode( 'de-formal', $fallbackMode ),
 			'es' => $fallbackChainFactory->newFromLanguageCode( 'es', $fallbackMode ),
 			'qug' => $fallbackChainFactory->newFromLanguageCode( 'qug', $fallbackMode ),
 			'zh-my' => $fallbackChainFactory->newFromLanguageCode( 'zh-my', $fallbackMode ),
-		);
+		];
 		$filterLangCodes = array_keys( $fallbackChains );
 
 		$result = $this->getDefaultResult();
@@ -515,8 +515,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$resultBuilder->addEntityRevision(
 			null,
 			$entityRevision,
-			array( 'labels', 'descriptions' ),
-			array(),
+			[ 'labels', 'descriptions' ],
+			[],
 			$filterLangCodes,
 			$fallbackChains
 		);
@@ -532,8 +532,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$item->getFingerprint()->setLabel( 'de', 'text' );
 		$item->getFingerprint()->setDescription( 'en', 'text' );
 		$item->getFingerprint()->setDescription( 'de', 'text' );
-		$item->getFingerprint()->setAliasGroup( 'en', array( 'text' ) );
-		$item->getFingerprint()->setAliasGroup( 'de', array( 'text' ) );
+		$item->getFingerprint()->setAliasGroup( 'en', [ 'text' ] );
+		$item->getFingerprint()->setAliasGroup( 'de', [ 'text' ] );
 		$entityRevision = new EntityRevision( $item );
 
 		$result = $this->getDefaultResult();
@@ -541,41 +541,41 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$resultBuilder->addEntityRevision(
 			null,
 			$entityRevision,
-			array( 'labels', 'descriptions', 'aliases' ),
-			array(),
-			array( 'de' )
+			[ 'labels', 'descriptions', 'aliases' ],
+			[],
+			[ 'de' ]
 		);
 
-		$expected = array(
-			'entities' => array(
-				'Q123099' => array(
+		$expected = [
+			'entities' => [
+				'Q123099' => [
 					'id' => 'Q123099',
 					'type' => 'item',
-					'labels' => array(
-						'de' => array(
+					'labels' => [
+						'de' => [
 							'language' => 'de',
 							'value' => 'text',
-						),
-					),
-					'descriptions' => array(
-						'de' => array(
+						],
+					],
+					'descriptions' => [
+						'de' => [
 							'language' => 'de',
 							'value' => 'text',
-						),
-					),
-					'aliases' => array(
-						'de' => array(
-							array(
+						],
+					],
+					'aliases' => [
+						'de' => [
+							[
 								'language' => 'de',
 								'value' => 'text',
-							),
-						),
-					),
-				),
-			),
+							],
+						],
+					],
+				],
+			],
 			// This meta data element is always present in ApiResult
 			'_type' => 'assoc',
-		);
+		];
 
 		$data = $result->getResultData();
 
@@ -588,30 +588,30 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Berlin' );
 		$entityRevision = new EntityRevision( $item );
 
-		$props = array( 'sitelinks' );
-		$siteIds = array( 'enwiki' );
+		$props = [ 'sitelinks' ];
+		$siteIds = [ 'enwiki' ];
 
 		$result = $this->getDefaultResult();
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addEntityRevision( null, $entityRevision, $props, $siteIds );
 
-		$expected = array(
-			'entities' => array(
-				'Q123099' => array(
+		$expected = [
+			'entities' => [
+				'Q123099' => [
 					'id' => 'Q123099',
 					'type' => 'item',
-					'sitelinks' => array(
-						'enwiki' => array(
+					'sitelinks' => [
+						'enwiki' => [
 							'site' => 'enwiki',
 							'title' => 'Berlin',
-							'badges' => array(),
-						),
-					),
-				),
-			),
+							'badges' => [],
+						],
+					],
+				],
+			],
 			// This meta data element is always present in ApiResult
 			'_type' => 'assoc',
-		);
+		];
 
 		$data = $result->getResultData();
 
@@ -627,39 +627,39 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Berlin' );
 		$entityRevision = new EntityRevision( $item );
 
-		$props = array( 'sitelinks' );
-		$siteIds = array( 'enwiki' );
+		$props = [ 'sitelinks' ];
+		$siteIds = [ 'enwiki' ];
 
 		$result = $this->getDefaultResult();
 		$resultBuilder = $this->getResultBuilder( $result, true );
 		$resultBuilder->addEntityRevision( null, $entityRevision, $props, $siteIds );
 
-		$expected = array(
-			'entities' => array(
-				'Q123100' => array(
+		$expected = [
+			'entities' => [
+				'Q123100' => [
 					'id' => 'Q123100',
 					'type' => 'item',
-					'sitelinks' => array(
-						'enwiki' => array(
+					'sitelinks' => [
+						'enwiki' => [
 							'site' => 'enwiki',
 							'title' => 'Berlin',
-							'badges' => array(
+							'badges' => [
 								'_element' => 'badge',
-							),
-						),
+							],
+						],
 						'_element' => 'sitelink',
 						'_type' => 'kvp',
 						'_kvpkeyname' => 'site',
 						'_kvpmerge' => true,
-					),
-				),
+					],
+				],
 				'_element' => 'entity',
 				'_type' => 'kvp',
 				'_kvpkeyname' => 'id',
 				'_kvpmerge' => true,
-			),
+			],
 			'_type' => 'assoc',
-		);
+		];
 
 		$data = $result->getResultData();
 
@@ -669,13 +669,13 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function testAddBasicEntityInformation() {
 		$result = $this->getDefaultResult();
 		$entityId = new ItemId( 'Q67' );
-		$expected = array(
-			'entity' => array(
+		$expected = [
+			'entity' => [
 				'id' => 'Q67',
 				'type' => 'item',
-			),
+			],
 			'_type' => 'assoc',
-		);
+		];
 
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addBasicEntityInformation( $entityId, 'entity' );
@@ -687,28 +687,28 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	public function testAddLabels() {
 		$result = $this->getDefaultResult();
-		$labels = new TermList( array(
+		$labels = new TermList( [
 			new Term( 'en', 'foo' ),
 			new Term( 'de', 'bar' ),
-		) );
-		$path = array( 'entities', 'Q1' );
-		$expected = array(
-			'entities' => array(
-				'Q1' => array(
-					'labels' => array(
-						'en' => array(
+		] );
+		$path = [ 'entities', 'Q1' ];
+		$expected = [
+			'entities' => [
+				'Q1' => [
+					'labels' => [
+						'en' => [
 							'language' => 'en',
 							'value' => 'foo',
-						),
-						'de' => array(
+						],
+						'de' => [
 							'language' => 'de',
 							'value' => 'bar',
-						),
-					),
-				),
-			),
+						],
+					],
+				],
+			],
 			'_type' => 'assoc',
-		);
+		];
 
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addLabels( $labels, $path );
@@ -720,20 +720,20 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	public function testAddRemovedLabel() {
 		$result = $this->getDefaultResult();
-		$path = array( 'entities', 'Q1' );
-		$expected = array(
-			'entities' => array(
-				'Q1' => array(
-					'labels' => array(
-						'en' => array(
+		$path = [ 'entities', 'Q1' ];
+		$expected = [
+			'entities' => [
+				'Q1' => [
+					'labels' => [
+						'en' => [
 							'language' => 'en',
 							'removed' => '',
-						),
-					),
-				),
-			),
+						],
+					],
+				],
+			],
 			'_type' => 'assoc',
-		);
+		];
 
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addRemovedLabel( 'en', $path );
@@ -745,28 +745,28 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	public function testAddDescriptions() {
 		$result = $this->getDefaultResult();
-		$descriptions = new TermList( array(
+		$descriptions = new TermList( [
 			new Term( 'en', 'foo' ),
 			new Term( 'de', 'bar' ),
-		) );
-		$path = array( 'entities', 'Q1' );
-		$expected = array(
-			'entities' => array(
-				'Q1' => array(
-					'descriptions' => array(
-						'en' => array(
+		] );
+		$path = [ 'entities', 'Q1' ];
+		$expected = [
+			'entities' => [
+				'Q1' => [
+					'descriptions' => [
+						'en' => [
 							'language' => 'en',
 							'value' => 'foo',
-						),
-						'de' => array(
+						],
+						'de' => [
 							'language' => 'de',
 							'value' => 'bar',
-						),
-					),
-				),
-			),
+						],
+					],
+				],
+			],
 			'_type' => 'assoc',
-		);
+		];
 
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addDescriptions( $descriptions, $path );
@@ -778,20 +778,20 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	public function testAddRemovedDescription() {
 		$result = $this->getDefaultResult();
-		$path = array( 'entities', 'Q1' );
-		$expected = array(
-			'entities' => array(
-				'Q1' => array(
-					'descriptions' => array(
-						'en' => array(
+		$path = [ 'entities', 'Q1' ];
+		$expected = [
+			'entities' => [
+				'Q1' => [
+					'descriptions' => [
+						'en' => [
 							'language' => 'en',
 							'removed' => '',
-						),
-					),
-				),
-			),
+						],
+					],
+				],
+			],
 			'_type' => 'assoc',
-		);
+		];
 
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addRemovedDescription( 'en', $path );
@@ -802,49 +802,49 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideAddAliasGroupList() {
-		$expected = array(
-			'entities' => array(
-				'Q1' => array(
-					'aliases' => array(
-						'en' => array(
-							array(
+		$expected = [
+			'entities' => [
+				'Q1' => [
+					'aliases' => [
+						'en' => [
+							[
 								'language' => 'en',
 								'value' => 'boo',
-							),
-							array(
+							],
+							[
 								'language' => 'en',
 								'value' => 'hoo',
-							),
+							],
 							'_element' => 'alias',
-						),
-						'de' => array(
-							array(
+						],
+						'de' => [
+							[
 								'language' => 'de',
 								'value' => 'ham',
-							),
-							array(
+							],
+							[
 								'language' => 'de',
 								'value' => 'cheese',
-							),
+							],
 							'_element' => 'alias',
-						),
+						],
 						'_element' => 'language',
 						'_type' => 'kvp',
 						'_kvpkeyname' => 'id',
-					),
-				),
-			),
+					],
+				],
+			],
 			'_type' => 'assoc',
-		);
+		];
 
 		$expectedNoMetaData = $this->removeMetaData( $expected );
 		// The api always starts with this
 		$expectedNoMetaData['_type'] = 'assoc';
 
-		return array(
-			array( false, $expectedNoMetaData ),
-			array( true, $expected ),
-		);
+		return [
+			[ false, $expectedNoMetaData ],
+			[ true, $expected ],
+		];
 	}
 
 	/**
@@ -853,12 +853,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function testAddAliasGroupList( $metaData, array $expected ) {
 		$result = $this->getDefaultResult();
 		$aliasGroupList = new AliasGroupList(
-			array(
-				new AliasGroup( 'en', array( 'boo', 'hoo' ) ),
-				new AliasGroup( 'de', array( 'ham', 'cheese' ) ),
-			)
+			[
+				new AliasGroup( 'en', [ 'boo', 'hoo' ] ),
+				new AliasGroup( 'de', [ 'ham', 'cheese' ] ),
+			]
 		);
-		$path = array( 'entities', 'Q1' );
+		$path = [ 'entities', 'Q1' ];
 
 		$resultBuilder = $this->getResultBuilder( $result, $metaData );
 		$resultBuilder->addAliasGroupList( $aliasGroupList, $path );
@@ -869,38 +869,38 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideAddSiteLinkList() {
-		$expected = array(
-			'entities' => array(
-				'Q1' => array(
-					'sitelinks' => array(
-						'enwiki' => array(
+		$expected = [
+			'entities' => [
+				'Q1' => [
+					'sitelinks' => [
+						'enwiki' => [
 							'site' => 'enwiki',
 							'title' => 'User:Addshore',
-							'badges' => array( '_element' => 'badge' ),
-						),
-						'dewikivoyage' => array(
+							'badges' => [ '_element' => 'badge' ],
+						],
+						'dewikivoyage' => [
 							'site' => 'dewikivoyage',
 							'title' => 'Berlin',
-							'badges' => array( '_element' => 'badge' ),
-						),
+							'badges' => [ '_element' => 'badge' ],
+						],
 						'_element' => 'sitelink',
 						'_type' => 'kvp',
 						'_kvpkeyname' => 'site',
 						'_kvpmerge' => true,
-					),
-				),
-			),
+					],
+				],
+			],
 			'_type' => 'assoc',
-		);
+		];
 
 		$expectedNoMetaData = $this->removeMetaData( $expected );
 		// The api always starts with this
 		$expectedNoMetaData['_type'] = 'assoc';
 
-		return array(
-			array( false, $expectedNoMetaData ),
-			array( true, $expected ),
-		);
+		return [
+			[ false, $expectedNoMetaData ],
+			[ true, $expected ],
+		];
 	}
 
 	/**
@@ -909,12 +909,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function testAddSiteLinkList( $addMetaData, array $expected ) {
 		$result = $this->getDefaultResult();
 		$siteLinkList = new SiteLinkList(
-			array(
+			[
 				new SiteLink( 'enwiki', 'User:Addshore' ),
 				new SiteLink( 'dewikivoyage', 'Berlin' ),
-			)
+			]
 		);
-		$path = array( 'entities', 'Q1' );
+		$path = [ 'entities', 'Q1' ];
 
 		$resultBuilder = $this->getResultBuilder( $result, $addMetaData );
 		$resultBuilder->addSiteLinkList( $siteLinkList, $path );
@@ -927,32 +927,32 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function testAddRemovedSiteLinks() {
 		//TODO test with metadata....
 		$result = $this->getDefaultResult();
-		$siteLinkList = new SiteLinkList( array(
+		$siteLinkList = new SiteLinkList( [
 			new SiteLink( 'enwiki', 'User:Addshore' ),
 			new SiteLink( 'dewikivoyage', 'Berlin' ),
-		) );
-		$path = array( 'entities', 'Q1' );
-		$expected = array(
-			'entities' => array(
-				'Q1' => array(
-					'sitelinks' => array(
-						'enwiki' => array(
+		] );
+		$path = [ 'entities', 'Q1' ];
+		$expected = [
+			'entities' => [
+				'Q1' => [
+					'sitelinks' => [
+						'enwiki' => [
 							'site' => 'enwiki',
 							'title' => 'User:Addshore',
 							'removed' => '',
-							'badges' => array(),
-						),
-						'dewikivoyage' => array(
+							'badges' => [],
+						],
+						'dewikivoyage' => [
 							'site' => 'dewikivoyage',
 							'title' => 'Berlin',
 							'removed' => '',
-							'badges' => array(),
-						),
-					),
-				),
-			),
+							'badges' => [],
+						],
+					],
+				],
+			],
 			'_type' => 'assoc',
-		);
+		];
 
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addRemovedSiteLinks( $siteLinkList, $path );
@@ -965,47 +965,47 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function testAddAndRemoveSiteLinks() {
 		$result = $this->getDefaultResult();
 		$siteLinkListAdd = new SiteLinkList(
-			array(
+			[
 				new SiteLink( 'enwiki', 'User:Addshore' ),
 				new SiteLink( 'dewikivoyage', 'Berlin' ),
-			)
+			]
 		);
-		$siteLinkListRemove = new SiteLinkList( array(
+		$siteLinkListRemove = new SiteLinkList( [
 			new SiteLink( 'ptwiki', 'Port' ),
 			new SiteLink( 'dewiki', 'Gin' ),
-		) );
-		$path = array( 'entities', 'Q1' );
-		$expected = array(
-			'entities' => array(
-				'Q1' => array(
-					'sitelinks' => array(
-						'enwiki' => array(
+		] );
+		$path = [ 'entities', 'Q1' ];
+		$expected = [
+			'entities' => [
+				'Q1' => [
+					'sitelinks' => [
+						'enwiki' => [
 							'site' => 'enwiki',
 							'title' => 'User:Addshore',
-							'badges' => array(),
-						),
-						'dewikivoyage' => array(
+							'badges' => [],
+						],
+						'dewikivoyage' => [
 							'site' => 'dewikivoyage',
 							'title' => 'Berlin',
-							'badges' => array(),
-						),
-						'ptwiki' => array(
+							'badges' => [],
+						],
+						'ptwiki' => [
 							'site' => 'ptwiki',
 							'title' => 'Port',
 							'removed' => '',
-							'badges' => array(),
-						),
-						'dewiki' => array(
+							'badges' => [],
+						],
+						'dewiki' => [
 							'site' => 'dewiki',
 							'title' => 'Gin',
 							'removed' => '',
-							'badges' => array(),
-						),
-					),
-				),
-			),
+							'badges' => [],
+						],
+					],
+				],
+			],
 			'_type' => 'assoc',
-		);
+		];
 
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addSiteLinkList( $siteLinkListAdd, $path );
@@ -1021,24 +1021,24 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testAddStatements( Statement $statement, $addMetaData, array $statementSerialization ) {
 		$result = $this->getDefaultResult();
-		$path = array( 'entities', 'Q1' );
+		$path = [ 'entities', 'Q1' ];
 
-		$expected = array(
-			'entities' => array(
-				'Q1' => array(
-					'claims' => array(
-						'P12' => array(
+		$expected = [
+			'entities' => [
+				'Q1' => [
+					'claims' => [
+						'P12' => [
 							$statementSerialization,
 							'_element' => 'claim',
-						),
+						],
 						'_element' => 'property',
 						'_type' => 'kvp',
 						'_kvpkeyname' => 'id',
-					),
-				),
-			),
+					],
+				],
+			],
 			'_type' => 'assoc',
-		);
+		];
 
 		if ( !$addMetaData ) {
 			$expected = $this->removeMetaData( $expected );
@@ -1055,42 +1055,42 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	public function testAddStatementsNoProps() {
 		$result = $this->getDefaultResult();
-		$path = array( 'entities', 'Q1' );
+		$path = [ 'entities', 'Q1' ];
 
 		$statement = new Statement(
 			new PropertySomeValueSnak( new PropertyId( 'P12' ) ),
 			null,
-			new Referencelist( array(
-				new Reference( array(
+			new Referencelist( [
+				new Reference( [
 					new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'refSnakVal' ) ),
-				) ),
-			) ),
+				] ),
+			] ),
 			'fooguidbar'
 		);
 
-		$expected = array(
-			'entities' => array(
-				'Q1' => array(
-					'claims' => array(
-						'P12' => array(
-							array(
+		$expected = [
+			'entities' => [
+				'Q1' => [
+					'claims' => [
+						'P12' => [
+							[
 								'id' => 'fooguidbar',
-								'mainsnak' => array(
+								'mainsnak' => [
 									'snaktype' => 'somevalue',
 									'property' => 'P12',
 									'datatype' => 'DtIdFor_P12',
-								),
+								],
 								'type' => 'statement',
 								'rank' => 'normal',
-							),
-						),
-					),
-				),
-			),
+							],
+						],
+					],
+				],
+			],
 			'_type' => 'assoc',
-		);
+		];
 
-		$props = array();
+		$props = [];
 
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addStatements( new StatementList( $statement ), $path, $props );
@@ -1105,10 +1105,10 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testAddStatement( Statement $statement, $addMetaData, array $statementSerialization ) {
 		$result = $this->getDefaultResult();
-		$expected = array(
+		$expected = [
 			'claim' => $statementSerialization,
 			'_type' => 'assoc',
-		);
+		];
 
 		$resultBuilder = $this->getResultBuilder( $result, $addMetaData );
 		$resultBuilder->addStatement( $statement );
@@ -1121,126 +1121,126 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function statementSerializationProvider() {
 		$statement = new Statement(
 			new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) ),
-			new SnakList( array(
+			new SnakList( [
 				new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'qualiferVal' ) ),
-			) ),
-			new Referencelist( array(
-				new Reference( array(
+			] ),
+			new Referencelist( [
+				new Reference( [
 					new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'refSnakVal' ) ),
-				) ),
-			) ),
+				] ),
+			] ),
 			'fooguidbar'
 		);
 
-		$expected = array(
+		$expected = [
 			'id' => 'fooguidbar',
-			'mainsnak' => array(
+			'mainsnak' => [
 				'snaktype' => 'value',
 				'property' => 'P12',
-				'datavalue' => array(
+				'datavalue' => [
 					'value' => 'stringVal',
 					'type' => 'string',
-				),
+				],
 				'datatype' => 'DtIdFor_P12',
-			),
+			],
 			'type' => 'statement',
 			'rank' => 'normal',
-			'qualifiers-order' => array(
+			'qualifiers-order' => [
 				'P12',
 				'_element' => 'property',
-			),
-			'references' => array(
-				array(
+			],
+			'references' => [
+				[
 					'hash' => '2f543336756784850a310cbc52a9307e467c7c42',
-					'snaks' => array(
-						'P12' => array(
-							array(
+					'snaks' => [
+						'P12' => [
+							[
 								'snaktype' => 'value',
 								'property' => 'P12',
 								'datatype' => 'DtIdFor_P12',
-								'datavalue' => array(
+								'datavalue' => [
 									'value' => 'refSnakVal',
 									'type' => 'string',
-								),
-							),
+								],
+							],
 							'_element' => 'snak',
-						),
+						],
 						'_element' => 'property',
 						'_type' => 'kvp',
 						'_kvpkeyname' => 'id',
-					),
-					'snaks-order' => array(
+					],
+					'snaks-order' => [
 						'P12',
 						'_element' => 'property',
-					),
-				),
+					],
+				],
 				'_element' => 'reference',
-			),
-			'qualifiers' => array(
-				'P12' => array(
-					array(
+			],
+			'qualifiers' => [
+				'P12' => [
+					[
 						'snaktype' => 'value',
 						'property' => 'P12',
 						'datatype' => 'DtIdFor_P12',
-						'datavalue' => array(
+						'datavalue' => [
 							'value' => 'qualiferVal',
 							'type' => 'string',
-						),
+						],
 						'hash' => '67423e8a140238decaa9156be1e3ba23513b3b19',
-					),
+					],
 					'_element' => 'qualifiers',
-				),
+				],
 				'_element' => 'property',
 				'_type' => 'kvp',
 				'_kvpkeyname' => 'id',
-			),
-		);
+			],
+		];
 
 		$expectedNoMetaData = $this->removeMetaData( $expected );
 
-		return array(
-			array( $statement, false, $expectedNoMetaData ),
-			array( $statement, true, $expected ),
-		);
+		return [
+			[ $statement, false, $expectedNoMetaData ],
+			[ $statement, true, $expected ],
+		];
 	}
 
 	public function provideAddReference() {
-		$expected = array(
-			'reference' => array(
+		$expected = [
+			'reference' => [
 				'hash' => 'de52176deca6dd967b2a4122c96766089c1f793a',
-				'snaks' => array(
-					'P12' => array(
-						array(
+				'snaks' => [
+					'P12' => [
+						[
 							'snaktype' => 'value',
 							'property' => 'P12',
-							'datavalue' => array(
+							'datavalue' => [
 								'value' => 'stringVal',
 								'type' => 'string',
-							),
+							],
 							'datatype' => 'DtIdFor_P12',
-						),
+						],
 						'_element' => 'snak',
-					),
+					],
 					'_element' => 'property',
 					'_type' => 'kvp',
 					'_kvpkeyname' => 'id',
-				),
-				'snaks-order' => array(
+				],
+				'snaks-order' => [
 					'P12',
 					'_element' => 'property',
-				),
-			),
+				],
+			],
 			'_type' => 'assoc',
-		);
+		];
 
 		$expectedNoMetaData = $this->removeMetaData( $expected );
 		// The api always starts with this
 		$expectedNoMetaData['_type'] = 'assoc';
 
-		return array(
-			array( false, $expectedNoMetaData ),
-			array( true, $expected ),
-		);
+		return [
+			[ false, $expectedNoMetaData ],
+			[ true, $expected ],
+		];
 	}
 
 	/**
@@ -1249,9 +1249,9 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function testAddReference( $addMetaData, array $expected ) {
 		$result = $this->getDefaultResult();
 		$reference = new Reference(
-			new SnakList( array(
+			new SnakList( [
 				new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) )
-			) )
+			] )
 		);
 
 		$resultBuilder = $this->getResultBuilder( $result, $addMetaData );
@@ -1284,103 +1284,103 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideMissingEntity() {
-		return array(
-			array(
-				array(
-					array( 'site' => 'enwiki', 'title' => 'Berlin' ),
-				),
-				array(
-					'entities' => array(
-						'-1' => array(
+		return [
+			[
+				[
+					[ 'site' => 'enwiki', 'title' => 'Berlin' ],
+				],
+				[
+					'entities' => [
+						'-1' => [
 							'site' => 'enwiki',
 							'title' => 'Berlin',
 							'missing' => '',
-						),
+						],
 						'_element' => 'entity',
 						'_type' => 'kvp',
 						'_kvpkeyname' => 'id',
 						'_kvpmerge' => true,
-					),
+					],
 					'_type' => 'assoc',
-				)
-			),
-			array(
-				array(
-					array( 'id' => 'Q77' ),
-				),
-				array(
-					'entities' => array(
-						'Q77' => array(
+				]
+			],
+			[
+				[
+					[ 'id' => 'Q77' ],
+				],
+				[
+					'entities' => [
+						'Q77' => [
 							'id' => 'Q77',
 							'missing' => '',
-						),
+						],
 						'_element' => 'entity',
 						'_type' => 'kvp',
 						'_kvpkeyname' => 'id',
 						'_kvpmerge' => true,
-					),
+					],
 					'_type' => 'assoc',
-				)
-			),
-			array(
-				array(
-					'Q77' => array( 'foo' => 'bar' ),
-				),
-				array(
-					'entities' => array(
-						'Q77' => array(
+				]
+			],
+			[
+				[
+					'Q77' => [ 'foo' => 'bar' ],
+				],
+				[
+					'entities' => [
+						'Q77' => [
 							'foo' => 'bar',
 							'missing' => '',
-						),
+						],
 						'_element' => 'entity',
 						'_type' => 'kvp',
 						'_kvpkeyname' => 'id',
 						'_kvpmerge' => true,
-					),
+					],
 					'_type' => 'assoc',
-				)
-			),
-			array(
-				array(
-					array( 'site' => 'enwiki', 'title' => 'Berlin' ),
-					array( 'site' => 'dewiki', 'title' => 'Foo' ),
-				),
-				array(
-					'entities' => array(
-						'-1' => array(
+				]
+			],
+			[
+				[
+					[ 'site' => 'enwiki', 'title' => 'Berlin' ],
+					[ 'site' => 'dewiki', 'title' => 'Foo' ],
+				],
+				[
+					'entities' => [
+						'-1' => [
 							'site' => 'enwiki',
 							'title' => 'Berlin',
 							'missing' => '',
-						),
-						'-2' => array(
+						],
+						'-2' => [
 							'site' => 'dewiki',
 							'title' => 'Foo',
 							'missing' => '',
-						),
+						],
 						'_element' => 'entity',
 						'_type' => 'kvp',
 						'_kvpkeyname' => 'id',
 						'_kvpmerge' => true,
-					),
+					],
 					'_type' => 'assoc',
-				)
-			),
-		);
+				]
+			],
+		];
 	}
 
 	public function testAddNormalizedTitle() {
 		$result = $this->getDefaultResult();
 		$from = 'berlin';
 		$to = 'Berlin';
-		$expected = array(
-			'normalized' => array(
-				'n' => array(
+		$expected = [
+			'normalized' => [
+				'n' => [
 					'from' => 'berlin',
 					'to' => 'Berlin'
-				),
-			),
+				],
+			],
 			'_type' => 'assoc',
-		);
+		];
 
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addNormalizedTitle( $from, $to );
@@ -1401,11 +1401,11 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$mockStatus = $this->getMock( Status::class );
 		$mockStatus->expects( $this->once() )
 			->method( 'getValue' )
-			->will( $this->returnValue( array( 'revision' => $mockRevision ) ) );
-		$expected = array(
-			'entity' => array( 'lastrevid' => '123' ),
+			->will( $this->returnValue( [ 'revision' => $mockRevision ] ) );
+		$expected = [
+			'entity' => [ 'lastrevid' => '123' ],
 			'_type' => 'assoc',
-		);
+		];
 
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addRevisionIdFromStatusToResult( $mockStatus, 'entity' );
@@ -1416,50 +1416,50 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideSetList() {
-		return array(
-			'null path' => array( null, 'foo', array(), 'letter', false,
-				array( 'foo' => array(), '_type' => 'assoc' )
-			),
-			'empty path' => array( array(), 'foo', array( 'x', 'y' ), 'letter', false,
-				array(
-					'foo' => array( 'x', 'y' ), '_type' => 'assoc'
-				)
-			),
-			'string path' => array( 'ROOT', 'foo', array( 'x', 'y' ), 'letter', false,
-				array(
-					'ROOT' => array(
-						'foo' => array( 'x', 'y' )
-					),
+		return [
+			'null path' => [ null, 'foo', [], 'letter', false,
+				[ 'foo' => [], '_type' => 'assoc' ]
+			],
+			'empty path' => [ [], 'foo', [ 'x', 'y' ], 'letter', false,
+				[
+					'foo' => [ 'x', 'y' ], '_type' => 'assoc'
+				]
+			],
+			'string path' => [ 'ROOT', 'foo', [ 'x', 'y' ], 'letter', false,
+				[
+					'ROOT' => [
+						'foo' => [ 'x', 'y' ]
+					],
 					'_type' => 'assoc',
-				)
-			),
-			'actual path' => array( array( 'one', 'two' ), 'foo', array( 'X' => 'x', 'Y' => 'y' ), 'letter', false,
-				array(
-					'one' => array(
-						'two' => array(
-							'foo' => array( 'X' => 'x', 'Y' => 'y' )
-						)
-					),
+				]
+			],
+			'actual path' => [ [ 'one', 'two' ], 'foo', [ 'X' => 'x', 'Y' => 'y' ], 'letter', false,
+				[
+					'one' => [
+						'two' => [
+							'foo' => [ 'X' => 'x', 'Y' => 'y' ]
+						]
+					],
 					'_type' => 'assoc',
-				)
-			),
-			'indexed' => array( 'ROOT', 'foo', array( 'X' => 'x', 'Y' => 'y' ), 'letter', true,
-				array(
-					'ROOT' => array(
-						'foo' => array( 'X' => 'x', 'Y' => 'y', '_element' => 'letter', '_type' => 'array' ),
-					),
+				]
+			],
+			'indexed' => [ 'ROOT', 'foo', [ 'X' => 'x', 'Y' => 'y' ], 'letter', true,
+				[
+					'ROOT' => [
+						'foo' => [ 'X' => 'x', 'Y' => 'y', '_element' => 'letter', '_type' => 'array' ],
+					],
 					'_type' => 'assoc',
-				),
-			),
-			'pre-set element name' => array( 'ROOT', 'foo', array( 'x', 'y', '_element' => '_thingy' ), 'letter', true,
-				array(
-					'ROOT' => array(
-						'foo' => array( 'x', 'y', '_element' => '_thingy', '_type' => 'array' )
-					),
+				],
+			],
+			'pre-set element name' => [ 'ROOT', 'foo', [ 'x', 'y', '_element' => '_thingy' ], 'letter', true,
+				[
+					'ROOT' => [
+						'foo' => [ 'x', 'y', '_element' => '_thingy', '_type' => 'array' ]
+					],
 					'_type' => 'assoc',
-				)
-			),
-		);
+				]
+			],
+		];
 	}
 
 	/**
@@ -1476,15 +1476,15 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideSetList_InvalidArgument() {
-		return array(
-			'null name' => array( 'ROOT', null, array( 10, 20 ), 'Q' ),
-			'int name' => array( 'ROOT', 6, array( 10, 20 ), 'Q' ),
-			'array name' => array( 'ROOT', array( 'x' ), array( 10, 20 ), 'Q' ),
+		return [
+			'null name' => [ 'ROOT', null, [ 10, 20 ], 'Q' ],
+			'int name' => [ 'ROOT', 6, [ 10, 20 ], 'Q' ],
+			'array name' => [ 'ROOT', [ 'x' ], [ 10, 20 ], 'Q' ],
 
-			'null tag' => array( 'ROOT', 'foo', array( 10, 20 ), null ),
-			'int tag' => array( 'ROOT', 'foo', array( 10, 20 ), 6 ),
-			'array tag' => array( 'ROOT', 'foo', array( 10, 20 ), array( 'x' ) ),
-		);
+			'null tag' => [ 'ROOT', 'foo', [ 10, 20 ], null ],
+			'int tag' => [ 'ROOT', 'foo', [ 10, 20 ], 6 ],
+			'array tag' => [ 'ROOT', 'foo', [ 10, 20 ], [ 'x' ] ],
+		];
 	}
 
 	/**
@@ -1499,37 +1499,37 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideSetValue() {
-		return array(
-			'null path' => array( null, 'foo', 'value', false, array( 'foo' => 'value', '_type' => 'assoc' ) ),
-			'empty path' => array( array(), 'foo', 'value', false,
-				array(
+		return [
+			'null path' => [ null, 'foo', 'value', false, [ 'foo' => 'value', '_type' => 'assoc' ] ],
+			'empty path' => [ [], 'foo', 'value', false,
+				[
 					'foo' => 'value',
 					'_type' => 'assoc',
-				)
-			),
-			'string path' => array( 'ROOT', 'foo', 'value', false,
-				array(
-					'ROOT' => array( 'foo' => 'value' ),
+				]
+			],
+			'string path' => [ 'ROOT', 'foo', 'value', false,
+				[
+					'ROOT' => [ 'foo' => 'value' ],
 					'_type' => 'assoc'
-				)
-			),
-			'actual path' => array( array( 'one', 'two' ), 'foo', array( 'X' => 'x', 'Y' => 'y' ), true,
-				array(
-					'one' => array(
-						'two' => array(
-							'foo' => array( 'X' => 'x', 'Y' => 'y' )
-						)
-					),
+				]
+			],
+			'actual path' => [ [ 'one', 'two' ], 'foo', [ 'X' => 'x', 'Y' => 'y' ], true,
+				[
+					'one' => [
+						'two' => [
+							'foo' => [ 'X' => 'x', 'Y' => 'y' ]
+						]
+					],
 					'_type' => 'assoc'
-				)
-			),
-			'indexed' => array( 'ROOT', 'foo', 'value', true,
-				array(
-					'ROOT' => array( 'foo' => 'value' ),
+				]
+			],
+			'indexed' => [ 'ROOT', 'foo', 'value', true,
+				[
+					'ROOT' => [ 'foo' => 'value' ],
 					'_type' => 'assoc'
-				)
-			),
-		);
+				]
+			],
+		];
 	}
 
 	/**
@@ -1546,13 +1546,13 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideSetValue_InvalidArgument() {
-		return array(
-			'null name' => array( 'ROOT', null, 'X' ),
-			'int name' => array( 'ROOT', 6, 'X' ),
-			'array name' => array( 'ROOT', array( 'x' ), 'X' ),
+		return [
+			'null name' => [ 'ROOT', null, 'X' ],
+			'int name' => [ 'ROOT', 6, 'X' ],
+			'array name' => [ 'ROOT', [ 'x' ], 'X' ],
 
-			'list value' => array( 'ROOT', 'foo', array( 10, 20 ) ),
-		);
+			'list value' => [ 'ROOT', 'foo', [ 10, 20 ] ],
+		];
 	}
 
 	/**
@@ -1567,58 +1567,58 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideAppendValue() {
-		return array(
-			'null path' => array( null, null, 'value', 'letter', false,
-				array( 'value', '_type' => 'assoc' ),
-			),
-			'empty path' => array( array(), null, 'value', 'letter', false,
-				array( 'value', '_type' => 'assoc' )
-			),
-			'string path' => array( 'ROOT', null, 'value', 'letter', false,
-				array(
-					'ROOT' => array( 'value' ),
+		return [
+			'null path' => [ null, null, 'value', 'letter', false,
+				[ 'value', '_type' => 'assoc' ],
+			],
+			'empty path' => [ [], null, 'value', 'letter', false,
+				[ 'value', '_type' => 'assoc' ]
+			],
+			'string path' => [ 'ROOT', null, 'value', 'letter', false,
+				[
+					'ROOT' => [ 'value' ],
 					'_type' => 'assoc'
-				)
-			),
-			'actual path' => array( array( 'one', 'two' ), null, array( 'X' => 'x', 'Y' => 'y' ), 'letter', false,
-				array(
-					'one' => array(
-						'two' => array( array( 'X' => 'x', 'Y' => 'y' ) ),
-					),
+				]
+			],
+			'actual path' => [ [ 'one', 'two' ], null, [ 'X' => 'x', 'Y' => 'y' ], 'letter', false,
+				[
+					'one' => [
+						'two' => [ [ 'X' => 'x', 'Y' => 'y' ] ],
+					],
 					'_type' => 'assoc'
-				)
-			),
-			'int key' => array( 'ROOT', -2, 'value', 'letter', false,
-				array(
-					'ROOT' => array( -2 => 'value' ),
+				]
+			],
+			'int key' => [ 'ROOT', -2, 'value', 'letter', false,
+				[
+					'ROOT' => [ -2 => 'value' ],
 					'_type' => 'assoc',
-				)
-			),
-			'string key' => array( 'ROOT', 'Q7', 'value', 'letter', false,
-				array(
-					'ROOT' => array( 'Q7' => 'value' ),
+				]
+			],
+			'string key' => [ 'ROOT', 'Q7', 'value', 'letter', false,
+				[
+					'ROOT' => [ 'Q7' => 'value' ],
 					'_type' => 'assoc',
-				)
-			),
-			'null key indexed' => array( 'ROOT', null, 'value', 'letter', true,
-				array(
-					'ROOT' => array( 'value', '_element' => 'letter' ),
+				]
+			],
+			'null key indexed' => [ 'ROOT', null, 'value', 'letter', true,
+				[
+					'ROOT' => [ 'value', '_element' => 'letter' ],
 					'_type' => 'assoc',
-				)
-			),
-			'int key indexed' => array( 'ROOT', -2, 'value', 'letter', true,
-				array(
-					'ROOT' => array( -2 => 'value', '_element' => 'letter' ),
+				]
+			],
+			'int key indexed' => [ 'ROOT', -2, 'value', 'letter', true,
+				[
+					'ROOT' => [ -2 => 'value', '_element' => 'letter' ],
 					'_type' => 'assoc',
-				)
-			),
-			'string key indexed' => array( 'ROOT', 'Q7', 'value', 'letter', true,
-				array(
-					'ROOT' => array( 'Q7' => 'value', '_element' => 'letter' ),
+				]
+			],
+			'string key indexed' => [ 'ROOT', 'Q7', 'value', 'letter', true,
+				[
+					'ROOT' => [ 'Q7' => 'value', '_element' => 'letter' ],
 					'_type' => 'assoc',
-				)
-			),
-		);
+				]
+			],
+		];
 	}
 
 	/**
@@ -1635,14 +1635,14 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideAppendValue_InvalidArgument() {
-		return array(
-			'list value' => array( 'ROOT', null, array( 1, 2, 3 ), 'Q' ),
-			'array key' => array( 'ROOT', array( 'x' ), 'value', 'Q' ),
+		return [
+			'list value' => [ 'ROOT', null, [ 1, 2, 3 ], 'Q' ],
+			'array key' => [ 'ROOT', [ 'x' ], 'value', 'Q' ],
 
-			'null tag' => array( 'ROOT', 'foo', 'value', null ),
-			'int tag' => array( 'ROOT', 'foo', 'value', 6 ),
-			'array tag' => array( 'ROOT', 'foo', 'value', array( 'x' ) ),
-		);
+			'null tag' => [ 'ROOT', 'foo', 'value', null ],
+			'int tag' => [ 'ROOT', 'foo', 'value', 6 ],
+			'array tag' => [ 'ROOT', 'foo', 'value', [ 'x' ] ],
+		];
 	}
 
 	/**

@@ -103,12 +103,12 @@ class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 
 	public function provideGetPropertyAndDetailedValue() {
 		$expected = '<a>PID</a>: <i>DETAILED SNAK</i>';
-		return array(
-			array( new PropertySomeValueSnak( new PropertyId( 'P1' ) ), $expected ),
-			array( new PropertyNoValueSnak( new PropertyId( 'P1' ) ), $expected ),
-			array( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( '' ) ), $expected ),
+		return [
+			[ new PropertySomeValueSnak( new PropertyId( 'P1' ) ), $expected ],
+			[ new PropertyNoValueSnak( new PropertyId( 'P1' ) ), $expected ],
+			[ new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( '' ) ), $expected ],
 			//array( null, '' ),
-		);
+		];
 	}
 
 	/**
@@ -122,12 +122,12 @@ class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 
 	public function provideGetDetailedValue() {
 		$expected = '<i>DETAILED SNAK</i>';
-		return array(
-			array( new PropertySomeValueSnak( new PropertyId( 'P1' ) ), $expected ),
-			array( new PropertyNoValueSnak( new PropertyId( 'P1' ) ), $expected ),
-			array( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( '' ) ), $expected ),
-			array( null, '' ),
-		);
+		return [
+			[ new PropertySomeValueSnak( new PropertyId( 'P1' ) ), $expected ],
+			[ new PropertyNoValueSnak( new PropertyId( 'P1' ) ), $expected ],
+			[ new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( '' ) ), $expected ],
+			[ null, '' ],
+		];
 	}
 
 	/**
@@ -141,12 +141,12 @@ class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 
 	public function provideGetPropertyAndValueHeader() {
 		$expected = 'property / <a>PID</a>: <i>SNAK</i>';
-		return array(
-			array( new PropertySomeValueSnak( new PropertyId( 'P1' ) ), $expected ),
-			array( new PropertyNoValueSnak( new PropertyId( 'P1' ) ), $expected ),
-			array( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( '' ) ), $expected ),
+		return [
+			[ new PropertySomeValueSnak( new PropertyId( 'P1' ) ), $expected ],
+			[ new PropertyNoValueSnak( new PropertyId( 'P1' ) ), $expected ],
+			[ new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( '' ) ), $expected ],
 			//array( null, '' ),
-		);
+		];
 	}
 
 	/**
@@ -160,12 +160,12 @@ class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 
 	public function provideGetPropertyHeader() {
 		$expected = 'property / <a>PID</a>';
-		return array(
-			array( new PropertySomeValueSnak( new PropertyId( 'P1' ) ), $expected ),
-			array( new PropertyNoValueSnak( new PropertyId( 'P1' ) ), $expected ),
-			array( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( '' ) ), $expected ),
-			array( null, 'property' ),
-		);
+		return [
+			[ new PropertySomeValueSnak( new PropertyId( 'P1' ) ), $expected ],
+			[ new PropertyNoValueSnak( new PropertyId( 'P1' ) ), $expected ],
+			[ new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( '' ) ), $expected ],
+			[ null, 'property' ],
+		];
 	}
 
 }

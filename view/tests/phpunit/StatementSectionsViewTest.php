@@ -28,10 +28,10 @@ use Wikibase\View\Template\TemplateRegistry;
  */
 class StatementSectionsViewTest extends PHPUnit_Framework_TestCase {
 
-	private function newInstance( array $statementLists = array() ) {
-		$templateFactory = new TemplateFactory( new TemplateRegistry( array(
+	private function newInstance( array $statementLists = [] ) {
+		$templateFactory = new TemplateFactory( new TemplateRegistry( [
 			'wb-section-heading' => '<HEADING id="$2" class="$3">$1</HEADING>',
-		) ) );
+		] ) );
 
 		$statementGrouper = $this->getMock( StatementGrouper::class );
 		$statementGrouper->expects( $this->any() )
@@ -67,30 +67,30 @@ class StatementSectionsViewTest extends PHPUnit_Framework_TestCase {
 		$statements = new StatementList();
 		$statements->addNewStatement( new PropertyNoValueSnak( 1 ) );
 
-		return array(
-			array(
-				array(),
+		return [
+			[
+				[],
 				''
-			),
-			array(
-				array( 'statements' => $empty ),
+			],
+			[
+				[ 'statements' => $empty ],
 				'<HEADING id="claims" class="wikibase-statements">'
 				. '(wikibase-statementsection-statements)</HEADING><LIST>'
-			),
-			array(
-				array( 'statements' => $empty, 'identifiers' => $empty ),
+			],
+			[
+				[ 'statements' => $empty, 'identifiers' => $empty ],
 				'<HEADING id="claims" class="wikibase-statements">'
 				. '(wikibase-statementsection-statements)</HEADING><LIST>'
-			),
-			array(
-				array( 'statements' => $empty, 'P1' => $statements ),
+			],
+			[
+				[ 'statements' => $empty, 'P1' => $statements ],
 				'<HEADING id="claims" class="wikibase-statements">'
 				. '(wikibase-statementsection-statements)</HEADING><LIST>'
 				. '<HEADING id="P1" class="wikibase-statements'
 				. ' wikibase-statements-P1">'
 				. '(wikibase-statementsection-p1)</HEADING><LIST>'
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -103,11 +103,11 @@ class StatementSectionsViewTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidArrayProvider() {
-		return array(
-			array( array( 'statements' => array() ) ),
-			array( array( array() ) ),
-			array( array( new StatementList() ) ),
-		);
+		return [
+			[ [ 'statements' => [] ] ],
+			[ [ [] ] ],
+			[ [ new StatementList() ] ],
+		];
 	}
 
 }

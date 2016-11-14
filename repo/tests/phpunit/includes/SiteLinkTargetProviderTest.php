@@ -32,7 +32,7 @@ class SiteLinkTargetProviderTest extends PHPUnit_Framework_TestCase {
 		$provider = new SiteLinkTargetProvider( $this->getSiteStore(), $specialGroups );
 		$siteList = $provider->getSiteList( $groups );
 
-		$globalIds = array();
+		$globalIds = [];
 		/** @var Site $site */
 		foreach ( $siteList as $site ) {
 			$globalIds[] = $site->getGlobalId();
@@ -41,72 +41,72 @@ class SiteLinkTargetProviderTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function getSiteListProvider() {
-		return array(
-			array(
-				array( 'wikipedia' ),
-				array(),
-				array( 'dawiki', 'eswiki' )
-			),
-			array(
-				array( 'species' ), array(), array( 'specieswiki' ) ),
-			array(
-				array( 'wikiquote' ),
-				array(),
-				array( 'eswikiquote' )
-			),
-			array(
-				array( 'qwerty' ),
-				array(),
-				array()
-			),
-			array(
-				array( 'wikipedia', 'species' ),
-				array(),
-				array( 'dawiki', 'eswiki', 'specieswiki' )
-			),
-			array(
-				array( 'wikipedia', 'wikiquote' ),
-				array(),
-				array( 'dawiki', 'eswiki', 'eswikiquote' )
-			),
-			array(
-				array( 'special' ),
-				array( 'species' ),
-				array( 'specieswiki' )
-			),
-			array(
-				array( 'wikipedia' ),
-				array( 'species' ),
-				array( 'dawiki', 'eswiki' )
-			),
-			array(
-				array( 'special', 'wikipedia' ),
-				array( 'species', 'wikiquote' ),
-				array( 'dawiki', 'eswiki', 'eswikiquote', 'specieswiki' )
-			),
-			array(
-				array(),
-				array( 'wikipedia' ),
-				array()
-			),
-			array(
-				array(),
-				array(),
-				array()
-			),
-		);
+		return [
+			[
+				[ 'wikipedia' ],
+				[],
+				[ 'dawiki', 'eswiki' ]
+			],
+			[
+				[ 'species' ], [], [ 'specieswiki' ] ],
+			[
+				[ 'wikiquote' ],
+				[],
+				[ 'eswikiquote' ]
+			],
+			[
+				[ 'qwerty' ],
+				[],
+				[]
+			],
+			[
+				[ 'wikipedia', 'species' ],
+				[],
+				[ 'dawiki', 'eswiki', 'specieswiki' ]
+			],
+			[
+				[ 'wikipedia', 'wikiquote' ],
+				[],
+				[ 'dawiki', 'eswiki', 'eswikiquote' ]
+			],
+			[
+				[ 'special' ],
+				[ 'species' ],
+				[ 'specieswiki' ]
+			],
+			[
+				[ 'wikipedia' ],
+				[ 'species' ],
+				[ 'dawiki', 'eswiki' ]
+			],
+			[
+				[ 'special', 'wikipedia' ],
+				[ 'species', 'wikiquote' ],
+				[ 'dawiki', 'eswiki', 'eswikiquote', 'specieswiki' ]
+			],
+			[
+				[],
+				[ 'wikipedia' ],
+				[]
+			],
+			[
+				[],
+				[],
+				[]
+			],
+		];
 	}
 
 	/**
 	 * @return SiteStore
 	 */
 	private function getSiteStore() {
-		return new HashSiteStore( array(
+		return new HashSiteStore( [
 			$this->newSite( 'dawiki', 'wikipedia' ),
 			$this->newSite( 'eswiki', 'wikipedia' ),
 			$this->newSite( 'eswikiquote', 'wikiquote' ),
 			$this->newSite( 'specieswiki', 'species' ),
-		) );
+		] );
 	}
 
 	private function newSite( $globalId, $group ) {

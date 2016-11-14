@@ -65,10 +65,10 @@ class ComplexValueRdfHelperTest extends \PHPUnit_Framework_TestCase {
 		$this->assertNull( $lvalue, 'lvalue produced by adding a value a second time should be null' );
 
 		// check the triples written to the snak writer
-		$expected = array(
+		$expected = [
 			'<http://www/Q1> <http://acme/statement/value/testing> <http://acme/value/e93b68fef814eb52e813bb72e6867432> .',
 			'<http://www/Q2> <http://acme/statement/value/testing> <http://acme/value/e93b68fef814eb52e813bb72e6867432> .'
-		);
+		];
 
 		$this->helper->assertNTriplesEquals( $expected, $snakWriter->drain() );
 

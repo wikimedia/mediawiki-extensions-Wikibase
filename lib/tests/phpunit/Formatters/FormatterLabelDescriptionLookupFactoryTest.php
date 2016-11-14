@@ -56,45 +56,45 @@ class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit_Framework_Test
 
 		$termLookup->expects( $this->any() )
 			->method( 'getLabels' )
-			->will( $this->returnValue( array( 'de' => 'Kätzchen' ) ) );
+			->will( $this->returnValue( [ 'de' => 'Kätzchen' ] ) );
 
 		$labelDescriptionLookup = new LanguageLabelDescriptionLookup( $termLookup, 'de' );
 
-		$deChChain = new LanguageFallbackChain( array(
+		$deChChain = new LanguageFallbackChain( [
 			LanguageWithConversion::factory( 'de-ch' ),
 			LanguageWithConversion::factory( 'de' ),
-		) );
+		] );
 
-		$frChain = new LanguageFallbackChain( array(
+		$frChain = new LanguageFallbackChain( [
 			LanguageWithConversion::factory( 'fr' ),
-		) );
+		] );
 
-		return array(
-			'language' => array(
+		return [
+			'language' => [
 				$termLookup,
-				new FormatterOptions( array(
+				new FormatterOptions( [
 					ValueFormatter::OPT_LANG => 'de',
-				) ),
+				] ),
 				'Kätzchen'
-			),
-			'language and fallback chain' => array(
+			],
+			'language and fallback chain' => [
 				$termLookup,
-				new FormatterOptions( array(
+				new FormatterOptions( [
 					ValueFormatter::OPT_LANG => 'fr',
 					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $deChChain,
-				) ),
+				] ),
 				'Kätzchen'
-			),
-			'language and fallback chain and LabelDescriptionLookup' => array(
+			],
+			'language and fallback chain and LabelDescriptionLookup' => [
 				$termLookup,
-				new FormatterOptions( array(
+				new FormatterOptions( [
 					ValueFormatter::OPT_LANG => 'fr',
 					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $frChain,
 					FormatterLabelDescriptionLookupFactory::OPT_LABEL_DESCRIPTION_LOOKUP => $labelDescriptionLookup
-				) ),
+				] ),
 				'Kätzchen'
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -109,26 +109,26 @@ class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit_Framework_Test
 	}
 
 	public function provideGetLabelDescriptionLookup_failure() {
-		return array(
-			'bad language' => array(
-				new FormatterOptions( array(
+		return [
+			'bad language' => [
+				new FormatterOptions( [
 					ValueFormatter::OPT_LANG => Language::factory( 'en' ),
-				) ),
-			),
-			'bad fallback chain' => array(
-				new FormatterOptions( array(
-					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => array( 'x', 'y', 'z' ),
-				) ),
-			),
-			'bad LabelDescriptionLookup' => array(
-				new FormatterOptions( array(
-					FormatterLabelDescriptionLookupFactory::OPT_LABEL_DESCRIPTION_LOOKUP => new LanguageFallbackChain( array() )
-				) ),
-			),
-			'no options' => array(
-				new FormatterOptions( array() ),
-			),
-		);
+				] ),
+			],
+			'bad fallback chain' => [
+				new FormatterOptions( [
+					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => [ 'x', 'y', 'z' ],
+				] ),
+			],
+			'bad LabelDescriptionLookup' => [
+				new FormatterOptions( [
+					FormatterLabelDescriptionLookupFactory::OPT_LABEL_DESCRIPTION_LOOKUP => new LanguageFallbackChain( [] )
+				] ),
+			],
+			'no options' => [
+				new FormatterOptions( [] ),
+			],
+		];
 	}
 
 }

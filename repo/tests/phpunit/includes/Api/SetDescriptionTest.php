@@ -29,7 +29,7 @@ class SetDescriptionTest extends ModifyTermTestCase {
 		self::$testAction = 'wbsetdescription';
 
 		if ( !isset( self::$hasSetup ) ) {
-			$this->initTestEntities( array( 'Empty' ) );
+			$this->initTestEntities( [ 'Empty' ] );
 		}
 		self::$hasSetup = true;
 	}
