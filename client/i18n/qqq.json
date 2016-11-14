@@ -111,7 +111,7 @@
 	"wikibase-pageinfo-entity-id": "A link to the corresponding Wikibase Item",
 	"wikibase-pageinfo-entity-id-none": "The page is not linked with a wikibase item.\n{{Identical|None}}",
 	"wikibase-pageinfo-entity-usage": "Desciption in action=info and action=edit about entities used in the page",
-	"wikibase-pageinfo-entity-usage-S": "Name for ''sitelink'' entity usage",
+	"wikibase-pageinfo-entity-usage-S": "Name for ''sitelink'' entity usage\n{{Identical|Sitelink}}",
 	"wikibase-pageinfo-entity-usage-L": "Name for ''label'' entity usage\n{{Identical|Label}}",
 	"wikibase-pageinfo-entity-usage-T": "Name for ''title'' entity usage\n{{Identical|Title}}",
 	"wikibase-pageinfo-entity-usage-X": "Name for ''all'' entity usage",
