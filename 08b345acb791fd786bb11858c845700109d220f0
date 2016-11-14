@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2eb1770d_5ad794f2",
+        "filename": "lib/includes/Store/DispatchingTermBuffer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-11-14T14:14:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2eb1770d_fa90a050",
+      "revId": "08b345acb791fd786bb11858c845700109d220f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2eb1770d_9a999c83",
         "filename": "lib/includes/Store/DispatchingTermBuffer.php",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "2eb1770d_3ad4c8eb",
+        "filename": "lib/includes/Store/DispatchingTermBuffer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-11-14T14:14:56Z",
+      "side": 1,
+      "message": "I like that. Done.",
+      "parentUuid": "2eb1770d_9a999c83",
+      "revId": "08b345acb791fd786bb11858c845700109d220f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2eb1770d_da85e40c",
         "filename": "lib/includes/Store/DispatchingTermBuffer.php",
         "patchSetId": 4
@@ -47,6 +83,24 @@
       "writtenOn": "2016-11-14T13:38:08Z",
       "side": 1,
       "message": "you are using old array syntax here, but new syntax in line 45. Please use new syntax for new code.",
+      "revId": "08b345acb791fd786bb11858c845700109d220f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2eb1770d_1a00ec6c",
+        "filename": "lib/includes/Store/DispatchingTermBuffer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-11-14T14:14:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2eb1770d_da85e40c",
       "revId": "08b345acb791fd786bb11858c845700109d220f0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
