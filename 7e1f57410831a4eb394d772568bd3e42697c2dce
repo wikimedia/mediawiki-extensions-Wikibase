@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2eb1770d_da0f248c",
+        "filename": "lib/tests/phpunit/Store/DispatchingTermBufferTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-11-14T14:14:56Z",
+      "side": 1,
+      "message": "Oops. Done",
+      "parentUuid": "2eb1770d_1ab22ce5",
+      "range": {
+        "startLine": 33,
+        "startChar": 7,
+        "endLine": 33,
+        "endChar": 14
+      },
+      "revId": "7e1f57410831a4eb394d772568bd3e42697c2dce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2eb1770d_3aa608a8",
         "filename": "lib/tests/phpunit/Store/DispatchingTermBufferTest.php",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2016-11-14T14:07:34Z",
       "side": 1,
       "message": "TermBuffer you mean",
+      "range": {
+        "startLine": 34,
+        "startChar": 29,
+        "endLine": 34,
+        "endChar": 39
+      },
+      "revId": "7e1f57410831a4eb394d772568bd3e42697c2dce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2eb1770d_ba1458a1",
+        "filename": "lib/tests/phpunit/Store/DispatchingTermBufferTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-11-14T14:14:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2eb1770d_3aa608a8",
       "range": {
         "startLine": 34,
         "startChar": 29,
