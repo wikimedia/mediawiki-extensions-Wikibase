@@ -253,12 +253,15 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 
 		$result = [];
 		foreach ( $entityIds as $entityId ) {
-			$entityId = $entityId->getSerialization();
+			// $rows is indexed by page titles without repository prefix but we want to keep prefixes
+			// in the results returned by the lookup to match the input $entityIds
+			$serializedId = $entityId->getSerialization();
+			$idLocalPart = $entityId->getLocalPart();
 
-			$result[$entityId] = false;
+			$result[$serializedId] = false;
 
-			if ( isset( $rows[$entityId] ) ) {
-				$result[$entityId] = $rows[$entityId];
+			if ( isset( $rows[$idLocalPart] ) ) {
+				$result[$serializedId] = $rows[$idLocalPart];
 			}
 		}
 
@@ -292,7 +295,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 
 			$where[] = $db->makeList(
 				[
-					$db->addQuotes( $entityId->getSerialization() ) . '=page_title',
+					$db->addQuotes( $entityId->getLocalPart() ) . '=page_title',
 					$namespace . '=page_namespace'
 				],
 				LIST_AND

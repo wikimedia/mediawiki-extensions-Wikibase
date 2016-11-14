@@ -6,6 +6,7 @@ use DatabaseBase;
 use FakeResultWrapper;
 use InvalidArgumentException;
 use MediaWikiTestCase;
+use stdClass;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
@@ -295,6 +296,46 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 			1,
 			EntityRevisionLookup::LATEST_FROM_SLAVE
 		);
+	}
+
+	public function testGivenEntityIdWithRepositoryPrefix_loadRevisionInformationStripsPrefix() {
+		$revision = $this->data[0];
+		$unprefixedId = $revision->getEntity()->getId()->getSerialization();
+
+		$lookup = new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup(), false, 'foo' );
+
+		$prefixedId = 'foo:' . $unprefixedId;
+
+		$result = $lookup->loadRevisionInformation( [ new ItemId( $prefixedId ) ], EntityRevisionLookup::LATEST_FROM_SLAVE );
+
+		$this->assertCount( 1, $result );
+		$this->assertArrayHasKey( $prefixedId, $result );
+		$this->assertEquals(
+			$unprefixedId,
+			$result[$prefixedId]->page_title
+		);
+		$this->assertEquals(
+			$revision->getRevisionId(),
+			$result[$prefixedId]->rev_id
+		);
+	}
+
+	public function testGivenEntityIdWithRepositoryPrefix_loadRevisionInformationByIdStripsPrefix() {
+		$revision = $this->data[0];
+		$unprefixedId = $revision->getEntity()->getId()->getSerialization();
+
+		$lookup = new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup(), false, 'foo' );
+
+		$prefixedId = 'foo:' . $unprefixedId;
+
+		$result = $lookup->loadRevisionInformationByRevisionId(
+			new ItemId( $prefixedId ),
+			$revision->getRevisionId(),
+			EntityRevisionLookup::LATEST_FROM_SLAVE
+		);
+
+		$this->assertInstanceOf( stdClass::class, $result );
+		$this->assertEquals( $revision->getRevisionId(), $result->rev_id );
 	}
 
 }
