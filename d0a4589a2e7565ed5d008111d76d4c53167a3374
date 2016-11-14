@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2eb1770d_5dc2ee89",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-14T15:54:21Z",
+      "side": 1,
+      "message": "Should be $stores if it\u0027s a list.\nOr make the ClientStore part of the RepoSpecificServices. Or replace ClientStore by RepoSpecificServices.",
+      "revId": "d0a4589a2e7565ed5d008111d76d4c53167a3374",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2eb1770d_9d475622",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-14T15:54:21Z",
+      "side": 1,
+      "message": "Perhaps ClientStore can be entirely replaced by RepoSpecificServices?...",
+      "revId": "d0a4589a2e7565ed5d008111d76d4c53167a3374",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2eb1770d_7d448a1c",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-14T15:54:21Z",
+      "side": 1,
+      "message": "This HAS to be per repo, since it needs to be using the correct EntityIdParser.",
+      "revId": "d0a4589a2e7565ed5d008111d76d4c53167a3374",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2eb1770d_1d5a26fa",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-14T15:54:21Z",
+      "side": 1,
+      "message": "This has to use the per-repo EntityIdParser.",
+      "revId": "d0a4589a2e7565ed5d008111d76d4c53167a3374",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
