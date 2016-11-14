@@ -31,7 +31,7 @@ class SqlIdGenerator implements IdGenerator {
 	 * @param LoadBalancer $loadBalancer
 	 * @param int[] $idBlacklist
 	 */
-	public function __construct( LoadBalancer $loadBalancer, array $idBlacklist = array() ) {
+	public function __construct( LoadBalancer $loadBalancer, array $idBlacklist = [] ) {
 		$this->loadBalancer = $loadBalancer;
 		$this->idBlacklist = $idBlacklist;
 	}
@@ -67,27 +67,27 @@ class SqlIdGenerator implements IdGenerator {
 		$currentId = $database->selectRow(
 			'wb_id_counters',
 			'id_value',
-			array( 'id_type' => $type ),
+			[ 'id_type' => $type ],
 			__METHOD__,
-			array( 'FOR UPDATE' )
+			[ 'FOR UPDATE' ]
 		);
 
 		if ( is_object( $currentId ) ) {
 			$id = $currentId->id_value + 1;
 			$success = $database->update(
 				'wb_id_counters',
-				array( 'id_value' => $id ),
-				array( 'id_type' => $type )
+				[ 'id_value' => $id ],
+				[ 'id_type' => $type ]
 			);
 		} else {
 			$id = 1;
 
 			$success = $database->insert(
 				'wb_id_counters',
-				array(
+				[
 					'id_value' => $id,
 					'id_type' => $type,
-				)
+				]
 			);
 
 			// Retry once, since a race condition on initial insert can cause one to fail.

@@ -97,7 +97,7 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 	 */
 	public function getMockEditFilterHookRunner() {
 		$mock = $this->getMockBuilder( EditFilterHookRunner::class )
-			->setMethods( array( 'run' ) )
+			->setMethods( [ 'run' ] )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->any() )
@@ -182,11 +182,11 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 		$module->execute();
 		$result = $module->getResult();
 
-		$data = $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
+		$data = $result->getResultData( null, [
+			'BC' => [],
+			'Types' => [],
 			'Strip' => 'all',
-		) );
+		] );
 		return $data;
 	}
 
@@ -196,42 +196,42 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 	}
 
 	public function setRedirectProvider_success() {
-		return array(
-			'redirect empty entity' => array( 'Q11', 'Q12' ),
-			'update redirect' => array( 'Q22', 'Q11' ),
-		);
+		return [
+			'redirect empty entity' => [ 'Q11', 'Q12' ],
+			'update redirect' => [ 'Q22', 'Q11' ],
+		];
 	}
 
 	/**
 	 * @dataProvider setRedirectProvider_success
 	 */
 	public function testSetRedirect_success( $from, $to ) {
-		$params = array( 'from' => $from, 'to' => $to );
+		$params = [ 'from' => $from, 'to' => $to ];
 		$result = $this->callApiModule( $params );
 
 		$this->assertSuccess( $result );
 	}
 
 	public function setRedirectProvider_failure() {
-		return array(
-			'bad source id' => array( 'xyz', 'Q12', 'invalid-entity-id' ),
-			'bad target id' => array( 'Q11', 'xyz', 'invalid-entity-id' ),
+		return [
+			'bad source id' => [ 'xyz', 'Q12', 'invalid-entity-id' ],
+			'bad target id' => [ 'Q11', 'xyz', 'invalid-entity-id' ],
 
-			'source not found' => array( 'Q77', 'Q12', 'no-such-entity' ),
-			'target not found' => array( 'Q11', 'Q77', 'no-such-entity' ),
-			'target is a redirect' => array( 'Q11', 'Q22', 'target-is-redirect' ),
-			'target is incompatible' => array( 'Q11', 'P11', 'target-is-incompatible' ),
+			'source not found' => [ 'Q77', 'Q12', 'no-such-entity' ],
+			'target not found' => [ 'Q11', 'Q77', 'no-such-entity' ],
+			'target is a redirect' => [ 'Q11', 'Q22', 'target-is-redirect' ],
+			'target is incompatible' => [ 'Q11', 'P11', 'target-is-incompatible' ],
 
-			'source not empty' => array( 'Q12', 'Q11', 'origin-not-empty' ),
-			'can\'t redirect' => array( 'P11', 'P12', 'cant-redirect' ),
-		);
+			'source not empty' => [ 'Q12', 'Q11', 'origin-not-empty' ],
+			'can\'t redirect' => [ 'P11', 'P12', 'cant-redirect' ],
+		];
 	}
 
 	/**
 	 * @dataProvider setRedirectProvider_failure
 	 */
 	public function testSetRedirect_failure( $from, $to, $expectedCode ) {
-		$params = array( 'from' => $from, 'to' => $to );
+		$params = [ 'from' => $from, 'to' => $to ];
 
 		try {
 			$this->callApiModule( $params );
@@ -246,12 +246,12 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 
 		$user = User::newFromName( 'UserWithoutPermission' );
 
-		$params = array( 'from' => 'Q11', 'to' => 'Q12' );
+		$params = [ 'from' => 'Q11', 'to' => 'Q12' ];
 		$this->callApiModule( $params, $user );
 	}
 
 	public function testModuleFlags() {
-		$module = $this->newApiModule( array() );
+		$module = $this->newApiModule( [] );
 
 		$this->assertTrue( $module->mustBePosted(), 'mustBePosted' );
 		$this->assertTrue( $module->isWriteMode(), 'isWriteMode' );

@@ -61,7 +61,7 @@ class OutputPageJsConfigBuilder {
 	 * @return array
 	 */
 	private function getUserConfigVars( Title $title, User $user ) {
-		$configVars = array();
+		$configVars = [];
 
 		/**
 		 * This is used in wikibase.ui.entityViewInit.js to double check if a user can edit, and if
@@ -101,12 +101,12 @@ class OutputPageJsConfigBuilder {
 		// non-translated message
 		$versionMessage = new Message( 'wikibase-shortcopyrightwarning-version' );
 
-		return array(
-			'wbCopyright' => array(
+		return [
+			'wbCopyright' => [
 				'version' => $versionMessage->parse(),
 				'messageHtml' => $copyrightMessage->inLanguage( $language )->parse()
-			)
-		);
+			]
+		];
 	}
 
 	/**

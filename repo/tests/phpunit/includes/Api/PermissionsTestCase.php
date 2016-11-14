@@ -25,7 +25,7 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 		parent::setUp();
 
 		if ( !isset( self::$hasSetup ) ) {
-			$this->initTestEntities( array( 'Oslo', 'Empty' ) );
+			$this->initTestEntities( [ 'Oslo', 'Empty' ] );
 		}
 		self::$hasSetup = true;
 

@@ -22,32 +22,32 @@ use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
 class ChangeOpValidationExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideGetExceptionMessage() {
-		$result0 = Result::newError( array() );
-		$result1 = Result::newError( array(
-			Error::newError( 'Eeek!', null, 'too-long', array( 8 ) ),
-		) );
-		$result2 = Result::newError( array(
-			Error::newError( 'Eeek!', null, 'too-long', array( array( 'eekwiki', 'Eek' ) ) ),
-			Error::newError( 'Foo!', null, 'too-short', array( array( 'foowiki', 'Foo' ) ) ),
-		) );
+		$result0 = Result::newError( [] );
+		$result1 = Result::newError( [
+			Error::newError( 'Eeek!', null, 'too-long', [ 8 ] ),
+		] );
+		$result2 = Result::newError( [
+			Error::newError( 'Eeek!', null, 'too-long', [ [ 'eekwiki', 'Eek' ] ] ),
+			Error::newError( 'Foo!', null, 'too-short', [ [ 'foowiki', 'Foo' ] ] ),
+		] );
 
-		return array(
-			'ChangeOpValidationException(0)' => array(
+		return [
+			'ChangeOpValidationException(0)' => [
 				new ChangeOpValidationException( $result0 ),
 				'wikibase-validator-invalid',
-				array()
-			),
-			'ChangeOpValidationException(1)' => array(
+				[]
+			],
+			'ChangeOpValidationException(1)' => [
 				new ChangeOpValidationException( $result1 ),
 				'wikibase-validator-too-long',
-				array( '8' )
-			),
-			'ChangeOpValidationException(2)' => array(
+				[ '8' ]
+			],
+			'ChangeOpValidationException(2)' => [
 				new ChangeOpValidationException( $result2 ),
 				'wikibase-validator-too-long',
-				array( 'eekwiki|Eek' )
-			),
-		);
+				[ 'eekwiki|Eek' ]
+			],
+		];
 	}
 
 	/**

@@ -43,7 +43,7 @@ class RebuildTermsSearchKey extends LoggedUpdateMaintenance {
 
 		$reporter = new ObservableMessageReporter();
 		$reporter->registerReporterCallback(
-			array( $this, 'report' )
+			[ $this, 'report' ]
 		);
 
 		$table = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();

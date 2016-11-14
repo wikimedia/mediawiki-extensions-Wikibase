@@ -116,7 +116,7 @@ class PropertyHandler extends EntityHandler {
 	 * @return string[]
 	 */
 	public function getActionOverrides() {
-		return array(
+		return [
 			'history' => function( Page $page, IContextSource $context = null ) {
 				return new HistoryEntityAction(
 					$page,
@@ -128,7 +128,7 @@ class PropertyHandler extends EntityHandler {
 			'view' => ViewEntityAction::class,
 			'edit' => EditEntityAction::class,
 			'submit' => SubmitEntityAction::class,
-		);
+		];
 	}
 
 	/**
@@ -163,10 +163,10 @@ class PropertyHandler extends EntityHandler {
 	 * @return DataUpdate[]
 	 */
 	public function getEntityDeletionUpdates( EntityContent $content, Title $title ) {
-		$updates = array();
+		$updates = [];
 
 		$updates[] = new DataUpdateAdapter(
-			array( $this->infoStore, 'removePropertyInfo' ),
+			[ $this->infoStore, 'removePropertyInfo' ],
 			$content->getEntity()->getId()
 		);
 
@@ -190,12 +190,12 @@ class PropertyHandler extends EntityHandler {
 	 */
 	public function getEntityModificationUpdates( EntityContent $content, Title $title ) {
 		/** @var PropertyContent $content */
-		$updates = array();
+		$updates = [];
 
 		$info = $this->propertyInfoBuilder->buildPropertyInfo( $content->getProperty() );
 
 		$updates[] = new DataUpdateAdapter(
-			array( $this->infoStore, 'setPropertyInfo' ),
+			[ $this->infoStore, 'setPropertyInfo' ],
 			$content->getEntity()->getId(),
 			$info
 		);

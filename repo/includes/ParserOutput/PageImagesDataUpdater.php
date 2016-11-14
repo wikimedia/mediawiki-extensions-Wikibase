@@ -24,7 +24,7 @@ class PageImagesDataUpdater implements StatementDataUpdater {
 	 * @var int[] Hash table of image property id strings pointing to priorities (smaller numbers
 	 * are better).
 	 */
-	private $propertyPriorities = array();
+	private $propertyPriorities = [];
 
 	/**
 	 * @var string

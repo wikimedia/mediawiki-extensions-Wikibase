@@ -22,14 +22,14 @@ use ReflectionMethod;
 class ApiConventionsTest extends \MediaWikiTestCase {
 
 	public function wikibaseApiModuleProvider() {
-		$argList = array();
+		$argList = [];
 
 		foreach ( $GLOBALS['wgAPIModules'] as $moduleClass ) {
 			// Make sure to only test Wikibase Api modules
 			// This works as long as Wikibase modules are always defined as a class name string.
 			// @todo adjust this if we ever define our api modules differently.
 			if ( is_string( $moduleClass ) && strpos( $moduleClass, 'Wikibase' ) !== false ) {
-				$argList[] = array( $moduleClass );
+				$argList[] = [ $moduleClass ];
 			}
 		}
 
@@ -42,7 +42,7 @@ class ApiConventionsTest extends \MediaWikiTestCase {
 	 * @dataProvider wikibaseApiModuleProvider
 	*/
 	public function testApiConventions( $moduleClass ) {
-		$params = array();
+		$params = [];
 		$user = $GLOBALS['wgUser'];
 
 		$request = new FauxRequest( $params, true );

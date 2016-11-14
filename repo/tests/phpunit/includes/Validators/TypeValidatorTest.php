@@ -20,15 +20,15 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 class TypeValidatorTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideValidate() {
-		return array(
-			array( 'integer', 1, true, "integer" ),
-			array( 'integer', 1.1, false, "not an integer" ),
-			array( 'object', new StringValue( "foo" ), true, "object" ),
-			array( 'object', "foo", false, "not an object" ),
-			array( StringValue::class, new StringValue( "foo" ), true, "StringValue" ),
-			array( StringValue::class, new NumberValue( 7 ), false, "not a StringValue" ),
-			array( StringValue::class, 33, false, "definitly not a StringValue" ),
-		);
+		return [
+			[ 'integer', 1, true, "integer" ],
+			[ 'integer', 1.1, false, "not an integer" ],
+			[ 'object', new StringValue( "foo" ), true, "object" ],
+			[ 'object', "foo", false, "not an object" ],
+			[ StringValue::class, new StringValue( "foo" ), true, "StringValue" ],
+			[ StringValue::class, new NumberValue( 7 ), false, "not a StringValue" ],
+			[ StringValue::class, 33, false, "definitly not a StringValue" ],
+		];
 	}
 
 	/**

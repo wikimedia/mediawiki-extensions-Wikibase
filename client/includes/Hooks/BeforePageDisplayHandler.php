@@ -67,7 +67,7 @@ class BeforePageDisplayHandler {
 
 	private function hasEditOrAddLinks( OutputPage $out, Title $title, $actionName ) {
 		if (
-			!in_array( $actionName, array( 'view', 'submit' ) ) ||
+			!in_array( $actionName, [ 'view', 'submit' ] ) ||
 			$this->allLinksAreSuppressed( $out ) ||
 			!$title->exists()
 		) {
@@ -89,7 +89,7 @@ class BeforePageDisplayHandler {
 
 	private function hasLinkItemWidget( User $user, OutputPage $out, Title $title, $actionName ) {
 		if (
-			$out->getLanguageLinks() !== array() || !$user->isLoggedIn()
+			$out->getLanguageLinks() !== [] || !$user->isLoggedIn()
 			|| !$this->hasEditOrAddLinks( $out, $title, $actionName )
 		) {
 			return false;

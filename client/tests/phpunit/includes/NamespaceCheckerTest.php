@@ -19,10 +19,10 @@ use Wikibase\NamespaceChecker;
 class NamespaceCheckerTest extends \MediaWikiTestCase {
 
 	public function constructorProvider() {
-		return array(
-			array( array(), array( NS_MAIN ) ),
-			array( array( NS_USER_TALK ), array() )
-		);
+		return [
+			[ [], [ NS_MAIN ] ],
+			[ [ NS_USER_TALK ], [] ]
+		];
 	}
 
 	/**
@@ -42,15 +42,15 @@ class NamespaceCheckerTest extends \MediaWikiTestCase {
 		//   accepted if and only if the include array is empty.
 		// * if the ns is in both, include and exclude, then it is excluded.
 
-		return array(
-			array( NS_USER_TALK, array(), array(), true ), // #0
-			array( NS_USER_TALK, array(), array( NS_MAIN ), false ), // #1
-			array( NS_USER_TALK, array( NS_USER_TALK ), array(), false ), // #2
-			array( NS_USER_TALK, array( NS_CATEGORY ), array( NS_USER_TALK ), true ), // #3
-			array( NS_CATEGORY, array( NS_USER_TALK ), array( NS_MAIN ), false ), // #4
-			array( NS_CATEGORY, array( NS_USER_TALK ), array(), true ), // #5
-			array( NS_USER_TALK, array( NS_USER_TALK ), array( NS_USER_TALK ), false ) // #6
-		);
+		return [
+			[ NS_USER_TALK, [], [], true ], // #0
+			[ NS_USER_TALK, [], [ NS_MAIN ], false ], // #1
+			[ NS_USER_TALK, [ NS_USER_TALK ], [], false ], // #2
+			[ NS_USER_TALK, [ NS_CATEGORY ], [ NS_USER_TALK ], true ], // #3
+			[ NS_CATEGORY, [ NS_USER_TALK ], [ NS_MAIN ], false ], // #4
+			[ NS_CATEGORY, [ NS_USER_TALK ], [], true ], // #5
+			[ NS_USER_TALK, [ NS_USER_TALK ], [ NS_USER_TALK ], false ] // #6
+		];
 	}
 
 	/**
@@ -72,9 +72,9 @@ class NamespaceCheckerTest extends \MediaWikiTestCase {
 	}
 
 	public function enabledInvalidProvider() {
-		return array(
-			array( 'Item', array(), array() )
-		);
+		return [
+			[ 'Item', [], [] ]
+		];
 	}
 
 	public function wikibaseNamespacesProvider() {
@@ -87,13 +87,13 @@ class NamespaceCheckerTest extends \MediaWikiTestCase {
 
 		$all = MWNamespace::getValidNamespaces();
 
-		return array(
-			array( array(), array(), $all ), // #0
-			array( array(), array( NS_MAIN ), array( NS_MAIN ) ), // #1
-			array( array( NS_USER_TALK ), array(), array_diff( $all, array( NS_USER_TALK ) ) ), // #2
-			array( array( NS_CATEGORY ), array( NS_USER_TALK ), array( NS_USER_TALK ) ), // #3
-			array( array( NS_USER_TALK ), array( NS_USER_TALK ), array() ) // #4
-		);
+		return [
+			[ [], [], $all ], // #0
+			[ [], [ NS_MAIN ], [ NS_MAIN ] ], // #1
+			[ [ NS_USER_TALK ], [], array_diff( $all, [ NS_USER_TALK ] ) ], // #2
+			[ [ NS_CATEGORY ], [ NS_USER_TALK ], [ NS_USER_TALK ] ], // #3
+			[ [ NS_USER_TALK ], [ NS_USER_TALK ], [] ] // #4
+		];
 	}
 
 	/**

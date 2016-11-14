@@ -139,10 +139,10 @@ class MovePageNotice {
 
 		$html = Html::rawElement(
 			'div',
-			array(
+			[
 				'id' => 'wbc-after-page-move',
 				'class' => 'plainlinks'
-			),
+			],
 			wfMessage( $msg, $itemLink )->parse()
 		);
 

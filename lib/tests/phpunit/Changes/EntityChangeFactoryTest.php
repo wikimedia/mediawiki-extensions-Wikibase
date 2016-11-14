@@ -38,9 +38,9 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityChangeFactory
 	 */
 	public function getEntityChangeFactory() {
-		$changeClasses = array(
+		$changeClasses = [
 			Item::ENTITY_TYPE => ItemChange::class,
-		);
+		];
 
 		$factory = new EntityChangeFactory(
 			new EntityDiffer(),
@@ -51,10 +51,10 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function newForEntityProvider() {
-		return array(
-			'add item' => array( EntityChange::ADD, new ItemId( 'Q17' ), ItemChange::class ),
-			'remove property' => array( EntityChange::REMOVE, new PropertyId( 'P17' ), EntityChange::class ),
-		);
+		return [
+			'add item' => [ EntityChange::ADD, new ItemId( 'Q17' ), ItemChange::class ],
+			'remove property' => [ EntityChange::REMOVE, new PropertyId( 'P17' ), EntityChange::class ],
+		];
 	}
 
 	/**
@@ -110,7 +110,7 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'wikibase-item~update', $change->getType(), 'type' );
 
 		$this->assertEquals(
-			new Diff( array( 'es' => new DiffOpAdd( 'gato' ) ) ),
+			new Diff( [ 'es' => new DiffOpAdd( 'gato' ) ] ),
 			$change->getDiff()->getLabelsDiff(),
 			'diff'
 		);
@@ -130,7 +130,7 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'wikibase-item~add', $change->getType(), 'type' );
 
 		$this->assertEquals(
-			new Diff( array( 'en' => new DiffOpAdd( 'kitten' ) ) ),
+			new Diff( [ 'en' => new DiffOpAdd( 'kitten' ) ] ),
 			$change->getDiff()->getLabelsDiff(),
 			'diff'
 		);
@@ -150,7 +150,7 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'wikibase-property~remove', $change->getType(), 'type' );
 
 		$this->assertEquals(
-			new Diff( array( 'de' => new DiffOpRemove( 'Katze' ) ) ),
+			new Diff( [ 'de' => new DiffOpRemove( 'Katze' ) ] ),
 			$change->getDiff()->getLabelsDiff(),
 			'diff'
 		);
@@ -170,11 +170,11 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'wikibase-item~restore', $change->getType(), 'type' );
 
 		$this->assertEquals(
-			new Diff( array(
-				'enwiki' => new Diff( array(
+			new Diff( [
+				'enwiki' => new Diff( [
 					'name' => new DiffOpAdd( 'Kitten' )
-				) )
-			) ),
+				] )
+			] ),
 			$change->getDiff()->getSiteLinkDiff(),
 			'diff'
 		);
@@ -184,16 +184,16 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$factory = $this->getEntityChangeFactory();
 
 		$item = new Item( new ItemId( 'Q3' ) );
-		$statementList = new StatementList( array(
+		$statementList = new StatementList( [
 			new Statement( new PropertyNoValueSnak( 9000 ) )
-		) );
+		] );
 
 		$item->setStatements( $statementList );
 
 		$updatedItem = new Item( new ItemId( 'Q3' ) );
-		$statementList = new StatementList( array(
+		$statementList = new StatementList( [
 			new Statement( new PropertyNoValueSnak( 10 ) )
-		) );
+		] );
 
 		$updatedItem->setStatements( $statementList );
 

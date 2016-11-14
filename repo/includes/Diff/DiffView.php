@@ -120,7 +120,7 @@ class DiffView extends ContextSource {
 			$html = '';
 			foreach ( $op as $key => $subOp ) {
 				$html .= $this->generateOpHtml(
-					array_merge( $path, array( $key ) ),
+					array_merge( $path, [ $key ] ),
 					$subOp
 				);
 			}
@@ -142,17 +142,17 @@ class DiffView extends ContextSource {
 		//TODO: use WordLevelDiff!
 		$html = Html::openElement( 'tr' );
 		if ( $oldValue !== null ) {
-			$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '-' );
-			$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
-				Html::rawElement( 'div', array(), $this->getDeletedLine( $oldValue, $path ) ) );
+			$html .= Html::rawElement( 'td', [ 'class' => 'diff-marker' ], '-' );
+			$html .= Html::rawElement( 'td', [ 'class' => 'diff-deletedline' ],
+				Html::rawElement( 'div', [], $this->getDeletedLine( $oldValue, $path ) ) );
 		}
 		if ( $newValue !== null ) {
 			if ( $oldValue === null ) {
-				$html .= Html::rawElement( 'td', array( 'colspan' => '2' ), '&nbsp;' );
+				$html .= Html::rawElement( 'td', [ 'colspan' => '2' ], '&nbsp;' );
 			}
-			$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '+' );
-			$html .= Html::rawElement( 'td', array( 'class' => 'diff-addedline' ),
-				Html::rawElement( 'div', array(), $this->getAddedLine( $newValue, $path ) ) );
+			$html .= Html::rawElement( 'td', [ 'class' => 'diff-marker' ], '+' );
+			$html .= Html::rawElement( 'td', [ 'class' => 'diff-addedline' ],
+				Html::rawElement( 'div', [], $this->getAddedLine( $newValue, $path ) ) );
 		}
 		$html .= Html::closeElement( 'tr' );
 
@@ -194,9 +194,9 @@ class DiffView extends ContextSource {
 			} else {
 				$value = $this->getSiteLinkElement( $path[1], $value );
 			}
-			return Html::rawElement( $tag, array( 'class' => 'diffchange diffchange-inline' ), $value );
+			return Html::rawElement( $tag, [ 'class' => 'diffchange diffchange-inline' ], $value );
 		}
-		return Html::element( $tag, array( 'class' => 'diffchange diffchange-inline' ), $value );
+		return Html::element( $tag, [ 'class' => 'diffchange diffchange-inline' ], $value );
 	}
 
 	/**
@@ -209,9 +209,9 @@ class DiffView extends ContextSource {
 		$site = $this->siteStore->getSite( $siteId );
 
 		$tagName = 'span';
-		$attrs = array(
+		$attrs = [
 			'dir' => 'auto',
-		);
+		];
 
 		if ( $site instanceof Site ) {
 			// Otherwise it may have been deleted from the sites table
@@ -247,8 +247,8 @@ class DiffView extends ContextSource {
 	 */
 	private function generateDiffHeaderHtml( $name ) {
 		$html = Html::openElement( 'tr' );
-		$html .= Html::element( 'td', array( 'colspan' => '2', 'class' => 'diff-lineno' ), $name );
-		$html .= Html::element( 'td', array( 'colspan' => '2', 'class' => 'diff-lineno' ), $name );
+		$html .= Html::element( 'td', [ 'colspan' => '2', 'class' => 'diff-lineno' ], $name );
+		$html .= Html::element( 'td', [ 'colspan' => '2', 'class' => 'diff-lineno' ], $name );
 		$html .= Html::closeElement( 'tr' );
 
 		return $html;

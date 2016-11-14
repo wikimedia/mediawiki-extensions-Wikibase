@@ -63,10 +63,10 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 		);
 
 		$this->numberFormatter = new QuantityFormatter(
-			new FormatterOptions( array(
+			new FormatterOptions( [
 				QuantityFormatter::OPT_SHOW_UNCERTAINTY_MARGIN => false,
 				QuantityFormatter::OPT_APPLY_ROUNDING => false,
-			) ),
+			] ),
 			$decimalFormatter,
 			$this->vocabularyUriFormatter
 		);
@@ -90,12 +90,12 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 
 		$html = '';
 		$html .= Html::element( 'h4',
-			array( 'class' => 'wb-details wb-quantity-details wb-quantity-rendered' ),
+			[ 'class' => 'wb-details wb-quantity-details wb-quantity-rendered' ],
 			$this->quantityFormatter->format( $value )
 		);
 
 		$html .= Html::openElement( 'table',
-			array( 'class' => 'wb-details wb-quantity-details' ) );
+			[ 'class' => 'wb-details wb-quantity-details' ] );
 
 		$html .= $this->renderLabelValuePair( 'amount',
 			$this->formatNumber( $value->getAmount(), $value->getUnit() ) );
@@ -142,7 +142,7 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 			return htmlspecialchars( $unit );
 		}
 
-		return Html::element( 'a', array( 'href' => $unit ), $formattedUnit );
+		return Html::element( 'a', [ 'href' => $unit ], $formattedUnit );
 	}
 
 	/**
@@ -154,9 +154,9 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	private function renderLabelValuePair( $fieldName, $valueHtml ) {
 		$html = Html::openElement( 'tr' );
 
-		$html .= Html::element( 'th', array( 'class' => 'wb-quantity-' . $fieldName ),
+		$html .= Html::element( 'th', [ 'class' => 'wb-quantity-' . $fieldName ],
 			$this->getFieldLabel( $fieldName )->text() );
-		$html .= Html::rawElement( 'td', array( 'class' => 'wb-quantity-' . $fieldName ),
+		$html .= Html::rawElement( 'td', [ 'class' => 'wb-quantity-' . $fieldName ],
 			$valueHtml );
 
 		$html .= Html::closeElement( 'tr' );

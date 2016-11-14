@@ -64,10 +64,10 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 
 	public function testRender() {
 		$propertyId = new PropertyId( 'P1337' );
-		$snaks = array(
+		$snaks = [
 			'Q42$1' => new PropertyValueSnak( $propertyId, new StringValue( 'a kitten!' ) ),
 			'Q42$2' => new PropertyValueSnak( $propertyId, new StringValue( 'two kittens!!' ) )
-		);
+		];
 
 		$renderer = $this->getRenderer(
 			$this->getPropertyIdResolver(),
@@ -86,7 +86,7 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 	public function testRenderForPropertyNotFound() {
 		$renderer = $this->getRenderer(
 			$this->getPropertyIdResolverForPropertyNotFound(),
-			$this->getSnaksFinder( array() ),
+			$this->getSnaksFinder( [] ),
 			$this->getEntityLookup( 100 ),
 			'qqx'
 		);
@@ -106,7 +106,7 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 	public function testRender_exceededEntityAccessLimit() {
 		$renderer = $this->getRenderer(
 			$this->getPropertyIdResolver(),
-			$this->getSnaksFinder( array() ),
+			$this->getSnaksFinder( [] ),
 			$this->getEntityLookup( 1 ),
 			'qqx'
 		);

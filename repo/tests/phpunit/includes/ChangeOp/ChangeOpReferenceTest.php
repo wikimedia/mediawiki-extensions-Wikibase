@@ -42,7 +42,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 	 * @param array $data
 	 * @param string $dataName
 	 */
-	public function __construct( $name = null, array $data = array(), $dataName = '' ) {
+	public function __construct( $name = null, array $data = [], $dataName = '' ) {
 		parent::__construct( $name, $data, $dataName );
 
 		$this->mockProvider = new ChangeOpTestMockProvider( $this );
@@ -127,23 +127,23 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 
 	public function changeOpAddProviderWithIndex() {
 		$snak = new PropertyNoValueSnak( 1 );
-		$args = array();
+		$args = [];
 
 		$item = $this->newItem( $snak );
 		$statements = $item->getStatements()->toArray();
 		/** @var Statement $statement */
 		$statement = reset( $statements );
 
-		$references = array(
-			new Reference( new SnakList( array( new PropertyNoValueSnak( 1 ) ) ) ),
-			new Reference( new SnakList( array( new PropertyNoValueSnak( 2 ) ) ) ),
-		);
+		$references = [
+			new Reference( new SnakList( [ new PropertyNoValueSnak( 1 ) ] ) ),
+			new Reference( new SnakList( [ new PropertyNoValueSnak( 2 ) ] ) ),
+		];
 
 		$referenceList = $statement->getReferences();
 		$referenceList->addReference( $references[0] );
 		$referenceList->addReference( $references[1] );
 
-		$newReference = new Reference( new SnakList( array( new PropertyNoValueSnak( 3 ) ) ) );
+		$newReference = new Reference( new SnakList( [ new PropertyNoValueSnak( 3 ) ] ) );
 		$newReferenceIndex = 1;
 
 		$changeOp = new ChangeOpReference(
@@ -154,7 +154,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 			$newReferenceIndex
 		);
 
-		$args[] = array( $item, $changeOp, $newReference, $newReferenceIndex );
+		$args[] = [ $item, $changeOp, $newReference, $newReferenceIndex ];
 
 		return $args;
 	}
@@ -178,7 +178,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 
 	public function changeOpSetProvider() {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
-		$args = array();
+		$args = [];
 
 		$item = $this->newItem( $snak );
 		$statements = $item->getStatements()->toArray();
@@ -198,7 +198,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 			$referenceHash,
 			$this->mockProvider->getMockSnakValidator()
 		);
-		$args[] = array( $item, $changeOp, $changedReference->getHash() );
+		$args[] = [ $item, $changeOp, $changedReference->getHash() ];
 
 		// Just change a reference's index:
 		$item = $this->newItem( $snak );
@@ -207,10 +207,10 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$statement = reset( $statements );
 
 		/** @var Reference[] $references */
-		$references = array(
-			new Reference( new SnakList( array( new PropertyNoValueSnak( 1 ) ) ) ),
-			new Reference( new SnakList( array( new PropertyNoValueSnak( 2 ) ) ) ),
-		);
+		$references = [
+			new Reference( new SnakList( [ new PropertyNoValueSnak( 1 ) ] ) ),
+			new Reference( new SnakList( [ new PropertyNoValueSnak( 2 ) ] ) ),
+		];
 
 		$referenceList = $statement->getReferences();
 		$referenceList->addReference( $references[0] );
@@ -223,7 +223,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 			$this->mockProvider->getMockSnakValidator(),
 			0
 		);
-		$args[] = array( $item, $changeOp, $references[1]->getHash() );
+		$args[] = [ $item, $changeOp, $references[1]->getHash() ];
 
 		return $args;
 	}
@@ -271,15 +271,15 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$badGuid = $this->mockProvider->getGuidGenerator()->newGuid( $q17 );
 
 		$oldSnak = new PropertyValueSnak( $p11, new StringValue( "old reference" ) );
-		$oldReference = new Reference( new SnakList( array( $oldSnak ) ) );
+		$oldReference = new Reference( new SnakList( [ $oldSnak ] ) );
 
 		$snak = new PropertyNoValueSnak( $p11 );
-		$qualifiers = new SnakList( array( $oldSnak ) );
+		$qualifiers = new SnakList( [ $oldSnak ] );
 		$item->getStatements()->addNewStatement( $snak, $qualifiers, null, $goodGuid );
 
 		$goodSnak = new PropertyValueSnak( $p11, new StringValue( 'good' ) );
 
-		$goodReference = new Reference( new SnakList( array( $goodSnak ) ) );
+		$goodReference = new Reference( new SnakList( [ $goodSnak ] ) );
 
 		$refHash = $oldReference->getHash();
 		$badRefHash = sha1( 'baosdfhasdfj' );
@@ -320,18 +320,18 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$guid = $this->mockProvider->getGuidGenerator()->newGuid( $q17 );
 
 		$oldSnak = new PropertyValueSnak( $p11, new StringValue( "old reference" ) );
-		$oldReference = new Reference( new SnakList( array( $oldSnak ) ) );
+		$oldReference = new Reference( new SnakList( [ $oldSnak ] ) );
 
 		$snak = new PropertyNoValueSnak( $p11 );
-		$qualifiers = new SnakList( array( $oldSnak ) );
+		$qualifiers = new SnakList( [ $oldSnak ] );
 		$item->getStatements()->addNewStatement( $snak, $qualifiers, null, $guid );
 
 		//NOTE: the mock validator will consider the string "INVALID" to be invalid.
 		$badSnak = new PropertyValueSnak( $p11, new StringValue( 'INVALID' ) );
 		$brokenSnak = new PropertyValueSnak( $p11, new NumberValue( 23 ) );
 
-		$badReference = new Reference( new SnakList( array( $badSnak ) ) );
-		$brokenReference = new Reference( new SnakList( array( $brokenSnak ) ) );
+		$badReference = new Reference( new SnakList( [ $badSnak ] ) );
+		$brokenReference = new Reference( new SnakList( [ $brokenSnak ] ) );
 
 		$refHash = $oldReference->getHash();
 

@@ -33,17 +33,17 @@ class RedirectRevisionTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidConstructorArgumentsProvider() {
-		return array(
-			array( null, '' ),
-			array( true, '' ),
-			array( -1, '' ),
-			array( 0, null ),
-			array( 0, true ),
-			array( 0, 1 ),
-			array( 0, '20141231' ),
-			array( 0, "20141231000000\n" ),
-			array( 0, '2014-12-31T00:00:00' ),
-		);
+		return [
+			[ null, '' ],
+			[ true, '' ],
+			[ -1, '' ],
+			[ 0, null ],
+			[ 0, true ],
+			[ 0, 1 ],
+			[ 0, '20141231' ],
+			[ 0, "20141231000000\n" ],
+			[ 0, '2014-12-31T00:00:00' ],
+		];
 	}
 
 	public function testGetRedirect() {

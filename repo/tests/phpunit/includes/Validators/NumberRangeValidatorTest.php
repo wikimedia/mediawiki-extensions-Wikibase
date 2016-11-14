@@ -18,14 +18,14 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 class NumberRangeValidatorTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideValidate() {
-		return array(
-			array( 1, 10, 3, true, "normal fit" ),
-			array( 0, 10, 0, true, "0 ok" ),
-			array( 1, 10, 0, false, "0 not allowed" ),
-			array( -2, 1, -2, true, "negative match" ),
-			array( 1, 2, 3, false, "too high" ),
-			array( -1, 0, -3, false, "too low" ),
-		);
+		return [
+			[ 1, 10, 3, true, "normal fit" ],
+			[ 0, 10, 0, true, "0 ok" ],
+			[ 1, 10, 0, false, "0 not allowed" ],
+			[ -2, 1, -2, true, "negative match" ],
+			[ 1, 2, 3, false, "too high" ],
+			[ -1, 0, -3, false, "too low" ],
+		];
 	}
 
 	/**
@@ -41,7 +41,7 @@ class NumberRangeValidatorTest extends \PHPUnit_Framework_TestCase {
 			$errors = $result->getErrors();
 			$this->assertCount( 1, $errors, $message );
 			$this->assertTrue(
-				in_array( $errors[0]->getCode(), array( 'too-low', 'too-high' ) ),
+				in_array( $errors[0]->getCode(), [ 'too-low', 'too-high' ] ),
 				$message . "\n" . $errors[0]->getCode()
 			);
 

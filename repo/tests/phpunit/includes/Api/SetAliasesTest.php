@@ -29,18 +29,18 @@ class SetAliasesTest extends ModifyTermTestCase {
 		parent::setUp();
 
 		if ( !isset( self::$hasSetup ) ) {
-			$this->initTestEntities( array( 'Empty' ) );
+			$this->initTestEntities( [ 'Empty' ] );
 		}
 		self::$hasSetup = true;
 	}
 
 	public function testSetAliases_create() {
-		$params = array(
+		$params = [
 			'action' => self::$testAction,
 			'new' => 'property',
 			'language' => 'en',
 			'set' => 'Foo',
-		);
+		];
 
 		// -- do the request --------------------------------------------------
 		list( $result, , ) = $this->doApiRequestWithToken( $params );
@@ -56,53 +56,53 @@ class SetAliasesTest extends ModifyTermTestCase {
 	}
 
 	public function provideData() {
-		return array(
+		return [
 			// p => params, e => expected
 
 			// -- Test valid sequence -----------------------------
-			array( //0
-				'p' => array( 'language' => 'en', 'set' => '' ),
-				'e' => array( 'edit-no-change'  => true ) ),
-			array( //1
-				'p' => array( 'language' => 'en', 'set' => 'Foo' ),
-				'e' => array( 'value' => array( 'en' => array( 'Foo' ) ) ) ),
-			array( //2
-				'p' => array( 'language' => 'en', 'add' => 'Foo|Bax' ),
-				'e' => array( 'value' => array( 'en' => array( 'Foo', 'Bax' ) ) ) ),
-			array( //3
-				'p' => array( 'language' => 'en', 'set' => 'Foo|Bar|Baz' ),
-				'e' => array( 'value' => array( 'en' => array( 'Foo', 'Bar', 'Baz' ) ) ) ),
-			array( //4
-				'p' => array( 'language' => 'en', 'set' => 'Foo|Bar|Baz' ),
-				'e' => array( 'value' => array( 'en' => array( 'Foo', 'Bar', 'Baz' ) ), 'edit-no-change'  => true ) ),
-			array( //5
-				'p' => array( 'language' => 'en', 'add' => 'Foo|Spam' ),
-				'e' => array( 'value' => array( 'en' => array( 'Foo', 'Bar', 'Baz', 'Spam' ) ) ) ),
-			array( //6
-				'p' => array( 'language' => 'en', 'add' => 'ohi' ),
-				'e' => array( 'value' => array( 'en' => array( 'Foo', 'Bar', 'Baz', 'Spam', 'ohi' ) ) ) ),
-			array( //7
-				'p' => array( 'language' => 'en', 'set' => 'ohi' ),
-				'e' => array( 'value' => array( 'en' => array( 'ohi' ) ) ) ),
-			array( //8
-				'p' => array( 'language' => 'de', 'set' => '' ),
-				'e' => array( 'value' => array( 'en' => array( 'ohi' ) ), 'edit-no-change'  => true ) ),
-			array( //9
-				'p' => array( 'language' => 'de', 'set' => 'hiya' ),
-				'e' => array( 'value' => array( 'en' => array( 'ohi' ), 'de' => array( 'hiya' ) ) ) ),
-			array( //10
-				'p' => array( 'language' => 'de', 'add' => '||||||opps||||opps||||' ),
-				'e' => array( 'value' => array( 'en' => array( 'ohi' ), 'de' => array( 'hiya', 'opps' ) ) ) ),
-			array( //11
-				'p' => array( 'language' => 'de', 'remove' => 'opps|hiya' ),
-				'e' => array( 'value' => array( 'en' => array( 'ohi' ) ) ) ),
-			array( //12
-				'p' => array( 'language' => 'en', 'remove' => 'ohi' ),
-				'e' => array() ),
-			array( //13
-				'p' => array( 'language' => 'en', 'set' => "  Foo\nBar  " ),
-				'e' => array( 'value' => array( 'en' => array( 'Foo Bar' ) ) ) ),
-		);
+			[ //0
+				'p' => [ 'language' => 'en', 'set' => '' ],
+				'e' => [ 'edit-no-change'  => true ] ],
+			[ //1
+				'p' => [ 'language' => 'en', 'set' => 'Foo' ],
+				'e' => [ 'value' => [ 'en' => [ 'Foo' ] ] ] ],
+			[ //2
+				'p' => [ 'language' => 'en', 'add' => 'Foo|Bax' ],
+				'e' => [ 'value' => [ 'en' => [ 'Foo', 'Bax' ] ] ] ],
+			[ //3
+				'p' => [ 'language' => 'en', 'set' => 'Foo|Bar|Baz' ],
+				'e' => [ 'value' => [ 'en' => [ 'Foo', 'Bar', 'Baz' ] ] ] ],
+			[ //4
+				'p' => [ 'language' => 'en', 'set' => 'Foo|Bar|Baz' ],
+				'e' => [ 'value' => [ 'en' => [ 'Foo', 'Bar', 'Baz' ] ], 'edit-no-change'  => true ] ],
+			[ //5
+				'p' => [ 'language' => 'en', 'add' => 'Foo|Spam' ],
+				'e' => [ 'value' => [ 'en' => [ 'Foo', 'Bar', 'Baz', 'Spam' ] ] ] ],
+			[ //6
+				'p' => [ 'language' => 'en', 'add' => 'ohi' ],
+				'e' => [ 'value' => [ 'en' => [ 'Foo', 'Bar', 'Baz', 'Spam', 'ohi' ] ] ] ],
+			[ //7
+				'p' => [ 'language' => 'en', 'set' => 'ohi' ],
+				'e' => [ 'value' => [ 'en' => [ 'ohi' ] ] ] ],
+			[ //8
+				'p' => [ 'language' => 'de', 'set' => '' ],
+				'e' => [ 'value' => [ 'en' => [ 'ohi' ] ], 'edit-no-change'  => true ] ],
+			[ //9
+				'p' => [ 'language' => 'de', 'set' => 'hiya' ],
+				'e' => [ 'value' => [ 'en' => [ 'ohi' ], 'de' => [ 'hiya' ] ] ] ],
+			[ //10
+				'p' => [ 'language' => 'de', 'add' => '||||||opps||||opps||||' ],
+				'e' => [ 'value' => [ 'en' => [ 'ohi' ], 'de' => [ 'hiya', 'opps' ] ] ] ],
+			[ //11
+				'p' => [ 'language' => 'de', 'remove' => 'opps|hiya' ],
+				'e' => [ 'value' => [ 'en' => [ 'ohi' ] ] ] ],
+			[ //12
+				'p' => [ 'language' => 'en', 'remove' => 'ohi' ],
+				'e' => [] ],
+			[ //13
+				'p' => [ 'language' => 'en', 'set' => "  Foo\nBar  " ],
+				'e' => [ 'value' => [ 'en' => [ 'Foo Bar' ] ] ] ],
+		];
 	}
 
 	/**
@@ -115,7 +115,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 			$params['id'] = EntityTestHelper::getId( 'Empty' );
 		}
 		if ( !array_key_exists( 'value', $expected ) ) {
-			$expected['value'] = array();
+			$expected['value'] = [];
 		}
 
 		// -- do the request --------------------------------------------------
@@ -149,7 +149,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 
 		// -- check the edit summary --------------------------------------------
 		if ( empty( $expected['edit-no-change'] ) ) {
-			$this->assertRevisionSummary( array( self::$testAction, $params['language'] ), $result['entity']['lastrevid'] );
+			$this->assertRevisionSummary( [ self::$testAction, $params['language'] ], $result['entity']['lastrevid'] );
 			if ( array_key_exists( 'summary', $params ) ) {
 				$this->assertRevisionSummary( '/' . $params['summary']. '/', $result['entity']['lastrevid'] );
 			}
@@ -157,80 +157,80 @@ class SetAliasesTest extends ModifyTermTestCase {
 	}
 
 	public function provideExceptionData() {
-		return array(
+		return [
 			// p => params, e => expected
 
 			// -- Test Exceptions -----------------------------
-			array( //0
-				'p' => array( 'language' => 'xx', 'add' => 'Foo' ),
-				'e' => array( 'exception' => array(
+			[ //0
+				'p' => [ 'language' => 'xx', 'add' => 'Foo' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'unknown_language'
-				) )
-			),
-			array( //1
-				'p' => array( 'language' => 'nl', 'set' => TermTestHelper::makeOverlyLongString() ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			[ //1
+				'p' => [ 'language' => 'nl', 'set' => TermTestHelper::makeOverlyLongString() ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'modification-failed'
-				) )
-			),
-			array( //2
-				'p' => array( 'language' => 'pt', 'remove' => 'normalValue' ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			[ //2
+				'p' => [ 'language' => 'pt', 'remove' => 'normalValue' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'notoken',
 					'message' => 'The token parameter must be set'
-				) )
-			),
-			array( //3
-				'p' => array( 'language' => 'pt', 'value' => 'normalValue', 'token' => '88888888888888888888888888888888+\\' ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			[ //3
+				'p' => [ 'language' => 'pt', 'value' => 'normalValue', 'token' => '88888888888888888888888888888888+\\' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'badtoken',
 					'message' => 'Invalid token'
-				) )
-			),
-			array( //4
-				'p' => array( 'id' => 'noANid', 'language' => 'fr', 'add' => 'normalValue' ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			[ //4
+				'p' => [ 'id' => 'noANid', 'language' => 'fr', 'add' => 'normalValue' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'invalid-entity-id',
 					'message' => 'Invalid entity ID.'
-				) )
-			),
-			array( //5
-				'p' => array( 'site' => 'qwerty', 'language' => 'pl', 'set' => 'normalValue' ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			[ //5
+				'p' => [ 'site' => 'qwerty', 'language' => 'pl', 'set' => 'normalValue' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'unknown_site',
 					'message' => "Unrecognized value for parameter 'site'"
-				) )
-			),
-			array( //6
-				'p' => array( 'site' => 'enwiki', 'title' => 'GhskiDYiu2nUd', 'language' => 'en', 'remove' => 'normalValue' ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			[ //6
+				'p' => [ 'site' => 'enwiki', 'title' => 'GhskiDYiu2nUd', 'language' => 'en', 'remove' => 'normalValue' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'no-such-entity-link',
 					'message' => 'No entity found matching site link'
-				) )
-			),
-			array( //7
-				'p' => array( 'title' => 'Blub', 'language' => 'en', 'add' => 'normalValue' ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			[ //7
+				'p' => [ 'title' => 'Blub', 'language' => 'en', 'add' => 'normalValue' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'param-illegal',
 					'message' => 'Either provide the item "id" or pairs'
-				) )
-			),
-			array( //8
-				'p' => array( 'site' => 'enwiki', 'language' => 'en', 'set' => 'normalValue' ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			[ //8
+				'p' => [ 'site' => 'enwiki', 'language' => 'en', 'set' => 'normalValue' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'param-illegal'
-				) )
-			),
-		);
+				] ]
+			],
+		];
 	}
 
 	/**

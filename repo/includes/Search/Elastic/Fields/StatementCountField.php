@@ -19,9 +19,9 @@ class StatementCountField implements SearchIndexField {
 	 * @return array
 	 */
 	public function getMapping() {
-		return array(
+		return [
 			'type' => 'integer'
-		);
+		];
 	}
 
 	/**

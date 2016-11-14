@@ -45,9 +45,9 @@ class SqlEntitiesWithoutTermFinder implements EntitiesWithoutTermFinder {
 	 */
 	public function getEntitiesWithoutTerm( $termType, $language = null, $entityType = null, $limit = 50, $offset = 0 ) {
 		$dbr = wfGetDB( DB_REPLICA );
-		$conditions = array(
+		$conditions = [
 			'term_entity_type IS NULL'
-		);
+		];
 
 		$joinConditions = 'term_entity_id = epp_entity_id' .
 			' AND term_entity_type = epp_entity_type' .
@@ -63,26 +63,26 @@ class SqlEntitiesWithoutTermFinder implements EntitiesWithoutTermFinder {
 		}
 
 		$rows = $dbr->select(
-			array( 'wb_entity_per_page', 'wb_terms' ),
-			array(
+			[ 'wb_entity_per_page', 'wb_terms' ],
+			[
 				'entity_id' => 'epp_entity_id',
 				'entity_type' => 'epp_entity_type',
-			),
+			],
 			$conditions,
 			__METHOD__,
-			array(
+			[
 				'OFFSET' => $offset,
 				'LIMIT' => $limit,
 				'ORDER BY' => 'epp_page_id DESC'
-			),
-			array( 'wb_terms' => array( 'LEFT JOIN', $joinConditions ) )
+			],
+			[ 'wb_terms' => [ 'LEFT JOIN', $joinConditions ] ]
 		);
 
 		return $this->getEntityIdsFromRows( $rows );
 	}
 
 	private function getEntityIdsFromRows( $rows ) {
-		$entities = array();
+		$entities = [];
 
 		foreach ( $rows as $row ) {
 			try {

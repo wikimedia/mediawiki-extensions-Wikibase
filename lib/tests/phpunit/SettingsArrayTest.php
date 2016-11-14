@@ -30,28 +30,28 @@ class SettingsArrayTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function settingProvider() {
-		$argLists = array();
+		$argLists = [];
 
-		$argLists[] = array( array() );
+		$argLists[] = [ [] ];
 
-		$argLists[] = array( array(
+		$argLists[] = [ [
 			'foo' => 'bar'
-		) );
+		] ];
 
-		$argLists[] = array( array(
+		$argLists[] = [ [
 			'foo' => 'bar',
 			'baz' => 'bah',
-		) );
+		] ];
 
-		$argLists[] = array( array(
+		$argLists[] = [ [
 			'foo' => 'bar',
 			'baz' => 'bah',
 			'blah' => 'bah',
 			'nyan' => 1337,
-			'onoez' => array( 1, 2, 3 ),
+			'onoez' => [ 1, 2, 3 ],
 			'spam' => false,
 			'hax' => null,
-		) );
+		] ];
 
 		return $argLists;
 	}

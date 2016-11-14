@@ -125,13 +125,13 @@ class InfoActionHookHandler {
 	private function getItemPageInfo( IContextSource $context, ItemId $itemId ) {
 		$itemLink = $this->repoLinker->buildEntityLink(
 			$itemId,
-			array( 'external' )
+			[ 'external' ]
 		);
 
-		return array(
+		return [
 			$context->msg( 'wikibase-pageinfo-entity-id' ),
 			$itemLink
-		);
+		];
 	}
 
 	/**
@@ -140,10 +140,10 @@ class InfoActionHookHandler {
 	 * @return string[]
 	 */
 	private function getUnconnectedItemPageInfo( IContextSource $context ) {
-		return array(
+		return [
 			$context->msg( 'wikibase-pageinfo-entity-id' ),
 			$context->msg( 'wikibase-pageinfo-entity-id-none' )
-		);
+		];
 	}
 
 	private function formatAspects( array $aspects, IContextSource $context ) {
@@ -212,7 +212,7 @@ class InfoActionHookHandler {
 			$output .= Html::rawElement( 'ul', [], $aspectContent );
 		}
 		$output = Html::rawElement( 'ul', [], $output );
-		return array( $context->msg( 'wikibase-pageinfo-entity-usage' ), $output );
+		return [ $context->msg( 'wikibase-pageinfo-entity-usage' ), $output ];
 	}
 
 }

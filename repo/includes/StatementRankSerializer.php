@@ -24,11 +24,11 @@ class StatementRankSerializer implements Serializer, Deserializer {
 	/**
 	 * @var string[]
 	 */
-	private static $rankMap = array(
+	private static $rankMap = [
 		Statement::RANK_DEPRECATED => 'deprecated',
 		Statement::RANK_NORMAL => 'normal',
 		Statement::RANK_PREFERRED => 'preferred',
-	);
+	];
 
 	/**
 	 * Returns the available ranks in serialized form.

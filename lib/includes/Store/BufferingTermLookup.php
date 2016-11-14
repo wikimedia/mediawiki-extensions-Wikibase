@@ -61,7 +61,7 @@ class BufferingTermLookup extends EntityTermLookupBase implements TermBuffer {
 	 * @return string[] the buffer keys
 	 */
 	private function getBufferKeys( array $entityIds, array $termTypes, array $languageCodes ) {
-		$keys = array();
+		$keys = [];
 
 		foreach ( $entityIds as $entityId ) {
 			foreach ( $termTypes as $termType ) {
@@ -86,15 +86,15 @@ class BufferingTermLookup extends EntityTermLookupBase implements TermBuffer {
 
 		$languageCodes = array_diff( $languageCodes, array_keys( $terms ) );
 		if ( !empty( $languageCodes ) ) {
-			$bufferedKeys = $this->getBufferKeys( array( $entityId ), array( $termType ), array_keys( $terms ) );
+			$bufferedKeys = $this->getBufferKeys( [ $entityId ], [ $termType ], array_keys( $terms ) );
 
-			$fetchedTerms = $this->termIndex->getTermsOfEntity( $entityId, array( $termType ), $languageCodes );
+			$fetchedTerms = $this->termIndex->getTermsOfEntity( $entityId, [ $termType ], $languageCodes );
 			$fetchedKeys = $this->setBufferedTermObjects( $fetchedTerms );
 
 			$terms = array_merge( $terms, $this->convertTermsToMap( $fetchedTerms ) );
 			$bufferedKeys = array_merge( $bufferedKeys, $fetchedKeys );
 
-			$this->setUndefinedTerms( array( $entityId ), array( $termType ), $languageCodes, $bufferedKeys );
+			$this->setUndefinedTerms( [ $entityId ], [ $termType ], $languageCodes, $bufferedKeys );
 		}
 
 		$terms = $this->stripUndefinedTerms( $terms );
@@ -122,7 +122,7 @@ class BufferingTermLookup extends EntityTermLookupBase implements TermBuffer {
 		// before any call to getTermsOfType().
 
 		$entityIdsByType = $this->groupEntityIds( $entityIds );
-		$terms = array();
+		$terms = [];
 
 		foreach ( $entityIdsByType as $entityIdGroup ) {
 			$terms = array_merge(
@@ -163,7 +163,7 @@ class BufferingTermLookup extends EntityTermLookupBase implements TermBuffer {
 	 */
 	private function getBufferedTerms( EntityId $entityId, $termType, array $languageCodes ) {
 
-		$terms = array();
+		$terms = [];
 		foreach ( $languageCodes as $lang ) {
 			$term = $this->getPrefetchedTerm( $entityId, $termType, $lang );
 
@@ -181,7 +181,7 @@ class BufferingTermLookup extends EntityTermLookupBase implements TermBuffer {
 	 * @return string[] The buffer keys to which the terms were assigned.
 	 */
 	private function setBufferedTermObjects( array $terms ) {
-		$keys = array();
+		$keys = [];
 
 		foreach ( $terms as $term ) {
 			$id = $term->getEntityId();
@@ -236,7 +236,7 @@ class BufferingTermLookup extends EntityTermLookupBase implements TermBuffer {
 	 * @return array[]
 	 */
 	private function groupEntityIds( array $entityIds ) {
-		$entityIdsByType = array();
+		$entityIdsByType = [];
 
 		foreach ( $entityIds as $id ) {
 			$type = $id->getEntityType();

@@ -10,21 +10,21 @@ return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	$moduleTemplate = array(
+	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0],
-	);
+	];
 
-	return array(
-		'jquery.wikibase.snakview' => $moduleTemplate + array(
-			'scripts' => array(
+	return [
+		'jquery.wikibase.snakview' => $moduleTemplate + [
+			'scripts' => [
 				'snakview.js',
 				'snakview.SnakTypeSelector.js',
-			),
-			'styles' => array(
+			],
+			'styles' => [
 				'themes/default/snakview.SnakTypeSelector.css',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'dataValues.DataValue',
 				'jquery.event.special.eachchange',
 				'jquery.ui.EditableTemplatedWidget',
@@ -37,42 +37,42 @@ return call_user_func( function() {
 				'wikibase.datamodel',
 				'wikibase.serialization.SnakDeserializer',
 				'wikibase.serialization.SnakSerializer',
-			),
-			'messages' => array(
+			],
+			'messages' => [
 				'wikibase-snakview-property-input-placeholder',
 				'wikibase-snakview-choosesnaktype',
 				'wikibase-snakview-snaktypeselector-value',
 				'wikibase-snakview-snaktypeselector-somevalue',
 				'wikibase-snakview-snaktypeselector-novalue'
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.snakview.variations' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.snakview.variations' => $moduleTemplate + [
+			'scripts' => [
 				'snakview.variations.js',
 				'snakview.variations.Variation.js',
 				'snakview.variations.NoValue.js',
 				'snakview.variations.SomeValue.js',
 				'snakview.variations.Value.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'dataValues',
 				'util.inherit',
 				'wikibase.datamodel',
-			),
-			'messages' => array(
+			],
+			'messages' => [
 				'wikibase-snakview-variation-datavaluetypemismatch',
 				'wikibase-snakview-variation-datavaluetypemismatch-details',
 				'wikibase-snakview-variation-nonewvaluefordeletedproperty',
 				'wikibase-snakview-variations-novalue-label',
 				'wikibase-snakview-variations-somevalue-label',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.snakview.ViewState' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.snakview.ViewState' => $moduleTemplate + [
+			'scripts' => [
 				'snakview.ViewState.js',
-			),
-		),
-	);
+			],
+		],
+	];
 } );

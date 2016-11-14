@@ -114,7 +114,7 @@ class AffectedPagesFinder {
 	 * @return string[]
 	 */
 	public function getChangedAspects( EntityChange $change ) {
-		$aspects = array();
+		$aspects = [];
 
 		$diff = $change->getDiff();
 		$remainingDiffOps = count( $diff ); // this is a "deep" count!
@@ -165,7 +165,7 @@ class AffectedPagesFinder {
 	 * @return string[]
 	 */
 	private function getChangedLabelAspects( Diff $labelsDiff ) {
-		$aspects = array();
+		$aspects = [];
 
 		foreach ( $labelsDiff as $lang => $diffOp ) {
 			$aspects[] = EntityUsage::makeAspectKey( EntityUsage::LABEL_USAGE, $lang );
@@ -187,9 +187,9 @@ class AffectedPagesFinder {
 
 		$usages = $this->usageLookup->getPagesUsing(
 			// @todo: more than one entity at once!
-			array( $entityId ),
+			[ $entityId ],
 			// Look up pages that are marked as either using one of the changed or all aspects
-			array_merge( $changedAspects, array( EntityUsage::ALL_USAGE ) )
+			array_merge( $changedAspects, [ EntityUsage::ALL_USAGE ] )
 		);
 
 		// @todo: use iterators throughout!
@@ -201,12 +201,12 @@ class AffectedPagesFinder {
 			$siteLinkDiff = $change->getSiteLinkDiff();
 			$namesFromDiff = $this->getPagesReferencedInDiff( $siteLinkDiff );
 			$titlesFromDiff = $this->getTitlesFromTexts( $namesFromDiff );
-			$usagesFromDiff = $this->makeVirtualUsages( $titlesFromDiff, $entityId, array( EntityUsage::SITELINK_USAGE ) );
+			$usagesFromDiff = $this->makeVirtualUsages( $titlesFromDiff, $entityId, [ EntityUsage::SITELINK_USAGE ] );
 
 			//FIXME: we can't really merge if $usages is an iterator, not an array.
 			//TODO: Inject $usagesFromDiff "on the fly" while streaming other usages.
 			//NOTE: $usages must pass through mergeUsagesInto for re-indexing
-			$mergedUsages = array();
+			$mergedUsages = [];
 			$this->mergeUsagesInto( $usages, $mergedUsages );
 			$this->mergeUsagesInto( $usagesFromDiff, $mergedUsages );
 			$usages = $mergedUsages;
@@ -238,7 +238,7 @@ class AffectedPagesFinder {
 	 * @return string[]
 	 */
 	private function getPagesReferencedInDiff( Diff $siteLinkDiff ) {
-		$pagesToUpdate = array();
+		$pagesToUpdate = [];
 
 		// $siteLinkDiff changed from containing atomic diffs to
 		// containing map diffs. For B/C, handle both cases.
@@ -282,7 +282,7 @@ class AffectedPagesFinder {
 	 * @return ArrayIterator of PageEntityUsages
 	 */
 	private function filterUpdates( Traversable $usages ) {
-		$titlesToUpdate = array();
+		$titlesToUpdate = [];
 
 		/** @var PageEntityUsages $pageEntityUsages */
 		foreach ( $usages as $pageEntityUsages ) {
@@ -310,7 +310,7 @@ class AffectedPagesFinder {
 	 * @return Title[]
 	 */
 	private function getTitlesFromTexts( array $names ) {
-		$titles = array();
+		$titles = [];
 
 		foreach ( $names as $name ) {
 			try {
@@ -331,13 +331,13 @@ class AffectedPagesFinder {
 	 * @return PageEntityUsages[]
 	 */
 	private function makeVirtualUsages( array $titles, EntityId $entityId, array $aspects ) {
-		$usagesForItem = array();
+		$usagesForItem = [];
 		foreach ( $aspects as $aspect ) {
 			list( $aspect, $modifier ) = EntityUsage::splitAspectKey( $aspect );
 			$usagesForItem[] = new EntityUsage( $entityId, $aspect, $modifier );
 		}
 
-		$usagesPerPage = array();
+		$usagesPerPage = [];
 		foreach ( $titles as $title ) {
 			$pageId = $title->getArticleID();
 
@@ -365,7 +365,7 @@ class AffectedPagesFinder {
 		$aspectTransformer = new UsageAspectTransformer();
 		$aspectTransformer->setRelevantAspects( $entityId, $changedAspects );
 
-		$transformed = array();
+		$transformed = [];
 
 		foreach ( $usages as $key => $usagesOnPage ) {
 			$transformedUsagesOnPage = $aspectTransformer->transformPageEntityUsages( $usagesOnPage );

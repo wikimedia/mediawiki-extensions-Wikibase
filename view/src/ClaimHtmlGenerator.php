@@ -51,12 +51,12 @@ class ClaimHtmlGenerator {
 	/**
 	 * @var string[]
 	 */
-	private $referenceHeadings = array();
+	private $referenceHeadings = [];
 
 	/**
 	 * @var string[]
 	 */
-	private $statementRankSelector = array();
+	private $statementRankSelector = [];
 
 	/**
 	 * @var LocalizedTextProvider

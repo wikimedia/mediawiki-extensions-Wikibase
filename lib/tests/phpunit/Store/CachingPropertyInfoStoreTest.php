@@ -25,10 +25,10 @@ class CachingPropertyInfoStoreTest extends \MediaWikiTestCase {
 	 */
 	private $helper;
 
-	public function __construct( $name = null, $data = array(), $dataName = '' ) {
+	public function __construct( $name = null, $data = [], $dataName = '' ) {
 		parent::__construct( $name, $data, $dataName );
 
-		$this->helper = new PropertyInfoStoreTestHelper( $this, array( $this, 'newCachingPropertyInfoStore' ) );
+		$this->helper = new PropertyInfoStoreTestHelper( $this, [ $this, 'newCachingPropertyInfoStore' ] );
 	}
 
 	public function newCachingPropertyInfoStore() {
@@ -63,8 +63,8 @@ class CachingPropertyInfoStoreTest extends \MediaWikiTestCase {
 	public function testPropertyInfoWriteThrough() {
 		$p23 = new PropertyId( 'P23' );
 		$p42 = new PropertyId( 'P42' );
-		$info23 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string' );
-		$info42 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string', 'foo' => 'bar' );
+		$info23 = [ PropertyInfoStore::KEY_DATA_TYPE => 'string' ];
+		$info42 = [ PropertyInfoStore::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ];
 
 		$mock = new MockPropertyInfoStore();
 		$cache = new HashBagOStuff();

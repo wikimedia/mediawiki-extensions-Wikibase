@@ -163,9 +163,9 @@ class SnakValidator implements ValueValidator {
 				$result = Result::newSuccess();
 			}
 		} catch ( PropertyDataTypeLookupException $ex ) {
-			$result = Result::newError( array(
-				Error::newError( "Property $propertyId not found!", null, 'no-such-property', array( $propertyId ) )
-			) );
+			$result = Result::newError( [
+				Error::newError( "Property $propertyId not found!", null, 'no-such-property', [ $propertyId ] )
+			] );
 		}
 
 		return $result;
@@ -183,34 +183,34 @@ class SnakValidator implements ValueValidator {
 		try {
 			$dataValueType = $this->dataTypeFactory->getType( $dataTypeId )->getDataValueType();
 		} catch ( OutOfBoundsException $ex ) {
-			return Result::newError( array(
+			return Result::newError( [
 				Error::newError(
 					'Bad data type: ' . $dataTypeId,
 					null,
 					'bad-data-type',
-					array( $dataTypeId )
+					[ $dataTypeId ]
 				),
-			) );
+			] );
 		}
 
 		if ( $dataValue instanceof UnDeserializableValue ) {
-			return Result::newError( array(
+			return Result::newError( [
 				Error::newError(
 					'Bad snak value: ' . $dataValue->getReason(),
 					null,
 					'bad-value',
-					array( $dataValue->getReason() )
+					[ $dataValue->getReason() ]
 				),
-			) );
+			] );
 		} elseif ( $dataValueType != $dataValue->getType() ) {
-			return Result::newError( array(
+			return Result::newError( [
 				Error::newError(
 					'Bad value type: ' . $dataValue->getType() . ', expected ' . $dataValueType,
 					null,
 					'bad-value-type',
-					array( $dataValue->getType(), $dataValueType )
+					[ $dataValue->getType(), $dataValueType ]
 				),
-			) );
+			] );
 		}
 
 		$result = Result::newSuccess();

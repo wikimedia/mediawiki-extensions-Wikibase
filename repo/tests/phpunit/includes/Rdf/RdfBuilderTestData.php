@@ -181,16 +181,16 @@ class RdfBuilderTestData {
 	 * @return array
 	 */
 	private static function getTestProperties() {
-		return array(
-			array( 2, 'wikibase-item' ),
-			array( 3, 'commonsMedia' ),
-			array( 4, 'globe-coordinate' ),
-			array( 5, 'monolingualtext' ),
-			array( 6, 'quantity' ),
-			array( 7, 'string' ),
-			array( 8, 'time' ),
-			array( 9, 'url' ),
-		);
+		return [
+			[ 2, 'wikibase-item' ],
+			[ 3, 'commonsMedia' ],
+			[ 4, 'globe-coordinate' ],
+			[ 5, 'monolingualtext' ],
+			[ 6, 'quantity' ],
+			[ 7, 'string' ],
+			[ 8, 'time' ],
+			[ 9, 'url' ],
+		];
 	}
 
 	/**

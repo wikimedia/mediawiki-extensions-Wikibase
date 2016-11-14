@@ -34,7 +34,7 @@ class HashSiteLinkStoreTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideGetLinks() {
-		$cases = array();
+		$cases = [];
 
 		$item1 = new Item( new ItemId( 'Q1' ) );
 		$item1->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
@@ -44,77 +44,77 @@ class HashSiteLinkStoreTest extends \PHPUnit_Framework_TestCase {
 		$item2->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Bar' );
 		$item2->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Xoo' );
 
-		$items = array( $item1, $item2 );
+		$items = [ $item1, $item2 ];
 
 		// #0: all ---------
-		$cases[] = array(
+		$cases[] = [
 			$items,
-			array(), // items
-			array(), // sites
-			array(), // pages
-			array( // expected
-				array( 'enwiki', 'Foo', 1 ),
-				array( 'dewiki', 'Bar', 1 ),
-				array( 'enwiki', 'Bar', 2 ),
-				array( 'dewiki', 'Xoo', 2 ),
-			)
-		);
+			[], // items
+			[], // sites
+			[], // pages
+			[ // expected
+				[ 'enwiki', 'Foo', 1 ],
+				[ 'dewiki', 'Bar', 1 ],
+				[ 'enwiki', 'Bar', 2 ],
+				[ 'dewiki', 'Xoo', 2 ],
+			]
+		];
 
 		// #1: mismatch ---------
-		$cases[] = array(
+		$cases[] = [
 			$items,
-			array(), // items
-			array( 'enwiki' ), // sites
-			array( 'Xoo' ), // pages
-			array() // expected
-		);
+			[], // items
+			[ 'enwiki' ], // sites
+			[ 'Xoo' ], // pages
+			[] // expected
+		];
 
 		// #2: by item ---------
-		$cases[] = array(
+		$cases[] = [
 			$items,
-			array( 1 ), // items
-			array(), // sites
-			array(), // pages
-			array( // expected
-				array( 'enwiki', 'Foo', 1 ),
-				array( 'dewiki', 'Bar', 1 ),
-			)
-		);
+			[ 1 ], // items
+			[], // sites
+			[], // pages
+			[ // expected
+				[ 'enwiki', 'Foo', 1 ],
+				[ 'dewiki', 'Bar', 1 ],
+			]
+		];
 
 		// #3: by site ---------
-		$cases[] = array(
+		$cases[] = [
 			$items,
-			array(), // items
-			array( 'enwiki' ), // sites
-			array(), // pages
-			array( // expected
-				array( 'enwiki', 'Foo', 1 ),
-				array( 'enwiki', 'Bar', 2 ),
-			)
-		);
+			[], // items
+			[ 'enwiki' ], // sites
+			[], // pages
+			[ // expected
+				[ 'enwiki', 'Foo', 1 ],
+				[ 'enwiki', 'Bar', 2 ],
+			]
+		];
 
 		// #4: by page ---------
-		$cases[] = array(
+		$cases[] = [
 			$items,
-			array(), // items
-			array(), // sites
-			array( 'Bar' ), // pages
-			array( // expected
-				array( 'dewiki', 'Bar', 1 ),
-				array( 'enwiki', 'Bar', 2 ),
-			)
-		);
+			[], // items
+			[], // sites
+			[ 'Bar' ], // pages
+			[ // expected
+				[ 'dewiki', 'Bar', 1 ],
+				[ 'enwiki', 'Bar', 2 ],
+			]
+		];
 
 		// #5: by site and page ---------
-		$cases[] = array(
+		$cases[] = [
 			$items,
-			array(), // items
-			array( 'dewiki' ), // sites
-			array( 'Bar' ), // pages
-			array( // expected
-				array( 'dewiki', 'Bar', 1 ),
-			)
-		);
+			[], // items
+			[ 'dewiki' ], // sites
+			[ 'Bar' ], // pages
+			[ // expected
+				[ 'dewiki', 'Bar', 1 ],
+			]
+		];
 
 		return $cases;
 	}
@@ -143,10 +143,10 @@ class HashSiteLinkStoreTest extends \PHPUnit_Framework_TestCase {
 
 		// check link retrieval
 		$this->assertEquals(
-			array(
+			[
 				new SiteLink( 'dewiki', 'Xoo' ),
 				new SiteLink( 'enwiki', 'Foo' ),
-			),
+			],
 			$siteLinkStore->getSiteLinksForItem( $item->getId() )
 		);
 

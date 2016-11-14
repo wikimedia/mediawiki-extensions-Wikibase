@@ -56,7 +56,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		static $hasEntities = false;
 
 		if ( !$hasEntities ) {
-			$this->initTestEntities( array( 'StringProp', 'Berlin' ) );
+			$this->initTestEntities( [ 'StringProp', 'Berlin' ] );
 			$hasEntities = true;
 		}
 	}
@@ -88,13 +88,13 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	protected function getItems( PropertyId $propertyId ) {
 		$item = new Item();
 
-		return array(
+		return [
 			$this->addStatementsAndSave( $item, $propertyId ),
-		);
+		];
 	}
 
 	public function testValidRequests() {
-		$argLists = array();
+		$argLists = [];
 
 		$property = Property::newFromType( 'commonsMedia' );
 
@@ -104,17 +104,17 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		foreach ( $this->getItems( $property->getId() ) as $item ) {
 			foreach ( $item->getStatements()->toArray() as $statement ) {
 				$value = new StringValue( 'Kittens.png' );
-				$argLists[] = array(
+				$argLists[] = [
 					'itemId' => $item->getId(),
 					'guid' => $statement->getGuid(),
 					'value' => $value->getArrayValue(),
 					'expectedSummary' => $this->getExpectedSummary( $statement, $value )
-				);
+				];
 			}
 		}
 
 		foreach ( $argLists as $argList ) {
-			call_user_func_array( array( $this, 'doTestValidRequest' ), $argList );
+			call_user_func_array( [ $this, 'doTestValidRequest' ], $argList );
 		}
 	}
 
@@ -125,12 +125,12 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		$obtainedEntity = $entityLookup->getEntity( $itemId );
 		$statementCount = $obtainedEntity->getStatements()->count();
 
-		$params = array(
+		$params = [
 			'action' => 'wbsetclaimvalue',
 			'claim' => $guid,
 			'value' => FormatJson::encode( $value ),
 			'snaktype' => 'value',
-		);
+		];
 
 		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
 
@@ -185,12 +185,12 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 			$value = json_encode( $value );
 		}
 
-		$params = array(
+		$params = [
 			'action' => 'wbsetclaimvalue',
 			'claim' => $guid,
 			'snaktype' => $snakType,
 			'value' => $value,
-		);
+		];
 
 		try {
 			$this->doApiRequestWithToken( $params );
@@ -201,13 +201,13 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	}
 
 	public function invalidRequestProvider() {
-		return array(
-			'bad guid 1' => array( 'Berlin', 'xyz', 'value', 'abc', 'invalid-guid' ),
-			'bad guid 2' => array( 'Berlin', 'x$y$z', 'value', 'abc', 'invalid-guid' ),
-			'bad guid 3' => array( 'Berlin', 'i1813$358fa2a0-4345-82b6-12a4-7b0fee494a5f', 'value', 'abc', 'invalid-guid' ),
-			'bad snak type' => array( 'Berlin', null, 'alksdjf', 'abc', 'unknown_snaktype' ),
-			'bad snak value' => array( 'Berlin', null, 'value', '    ', 'invalid-snak' ),
-		);
+		return [
+			'bad guid 1' => [ 'Berlin', 'xyz', 'value', 'abc', 'invalid-guid' ],
+			'bad guid 2' => [ 'Berlin', 'x$y$z', 'value', 'abc', 'invalid-guid' ],
+			'bad guid 3' => [ 'Berlin', 'i1813$358fa2a0-4345-82b6-12a4-7b0fee494a5f', 'value', 'abc', 'invalid-guid' ],
+			'bad snak type' => [ 'Berlin', null, 'alksdjf', 'abc', 'unknown_snaktype' ],
+			'bad snak value' => [ 'Berlin', null, 'value', '    ', 'invalid-snak' ],
+		];
 	}
 
 	private function getExpectedSummary( Statement $oldStatement, StringValue $value ) {
@@ -244,11 +244,11 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 			$idFormatter = $this->getEntityIdFormatter();
 
 			$options = new FormatterOptions();
-			$options->setOption( 'formatter-builders-text/plain', array(
+			$options->setOption( 'formatter-builders-text/plain', [
 				'VT:wikibase-entityid' => function() use ( $idFormatter ) {
 					return new EntityIdValueFormatter( $idFormatter );
 				}
-			) );
+			] );
 
 			$factory = WikibaseRepo::getDefaultInstance()->getValueFormatterFactory();
 			$this->propertyValueFormatter = $factory->getValueFormatter( SnakFormatter::FORMAT_PLAIN, $options );

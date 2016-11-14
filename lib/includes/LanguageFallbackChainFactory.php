@@ -106,7 +106,7 @@ class LanguageFallbackChainFactory {
 	 * @throws InvalidArgumentException
 	 * @return LanguageWithConversion[]
 	 */
-	private function buildFromLanguage( $language, $mode, array &$chain = array(), array &$fetched = array() ) {
+	private function buildFromLanguage( $language, $mode, array &$chain = [], array &$fetched = [] ) {
 		if ( !is_int( $mode ) ) {
 			throw new InvalidArgumentException( '$mode must be an integer' );
 		}
@@ -230,18 +230,18 @@ class LanguageFallbackChainFactory {
 	}
 
 	private function getBabel( $languageCode, $user ) {
-		$babel = array();
+		$babel = [];
 
 		$babelCategoryNames = $this->getBabelCategoryNames();
 
 		if ( count( $babelCategoryNames ) ) {
 			// A little redundant but it's the only way to get required information with current Babel API.
-			$previousLevelBabel = array();
+			$previousLevelBabel = [];
 
 			foreach ( $babelCategoryNames as $level => $_ ) {
 				// Make the current language at the top of the chain.
 				$levelBabel = array_unique( array_merge(
-					array( $languageCode ),
+					[ $languageCode ],
 					Babel::getUserLanguages( $user, $level )
 				) );
 
@@ -249,7 +249,7 @@ class LanguageFallbackChainFactory {
 				$previousLevelBabel = $levelBabel;
 			}
 		} else {
-			$babel['N'] = array( $languageCode );
+			$babel['N'] = [ $languageCode ];
 		}
 
 		return $babel;
@@ -278,12 +278,12 @@ class LanguageFallbackChainFactory {
 	 * @return LanguageWithConversion[]
 	 */
 	public function buildFromBabel( array $babel ) {
-		$chain = array();
-		$fetched = array();
+		$chain = [];
+		$fetched = [];
 
 		// First pass to get "compatible" languages (self and variants)
 		foreach ( $babel as $languageCodes ) { // Already sorted when added
-			foreach ( array( self::FALLBACK_SELF, self::FALLBACK_VARIANTS ) as $mode ) {
+			foreach ( [ self::FALLBACK_SELF, self::FALLBACK_VARIANTS ] as $mode ) {
 				foreach ( $languageCodes as $languageCode ) {
 					try {
 						$languageCode = LanguageWithConversion::validateLanguageCode( $languageCode );

@@ -53,7 +53,7 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 	 * @param array $data
 	 * @param string $dataName
 	 */
-	public function __construct( $name = null, array $data = array(), $dataName = '' ) {
+	public function __construct( $name = null, array $data = [], $dataName = '' ) {
 		parent::__construct( $name, $data, $dataName );
 
 		$this->mockProvider = new ChangeOpTestMockProvider( $this );
@@ -134,85 +134,85 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 		$statements[13] = clone $statements[12];
 		$statements[13]->setGuid( 'Q666$D8404CDA-25E4-4334-AF13-A3290BC66613' );
 
-		$args = array();
+		$args = [];
 
 		// test adding the same statements with a null guid (a guid should be created)
-		$args[] = array(
+		$args[] = [
 			$item777,
 			$statements[7770],
-			array( $statements[777], $statements[7770] )
-		);
+			[ $statements[777], $statements[7770] ]
+		];
 
-		$args[] = array(
+		$args[] = [
 			$item666,
 			$statements[6660],
-			array( $statements[666], $statements[6660] )
-		);
+			[ $statements[666], $statements[6660] ]
+		];
 
 		// test adding the same statements with a correct but different guid (these should be added)
-		$args[] = array(
+		$args[] = [
 			$item777,
 			$statements[7777],
-			array( $statements[777], $statements[7770], $statements[7777] )
-		);
+			[ $statements[777], $statements[7770], $statements[7777] ]
+		];
 
-		$args[] = array(
+		$args[] = [
 			$item666,
 			$statements[6666],
-			array( $statements[666], $statements[6660], $statements[6666] )
-		);
+			[ $statements[666], $statements[6660], $statements[6666] ]
+		];
 
 		// test adding the same statements with and id that already exists (these shouldn't be added)
-		$args[] = array(
+		$args[] = [
 			$item777,
 			$statements[7777],
-			array( $statements[777], $statements[7770], $statements[7777] )
-		);
+			[ $statements[777], $statements[7770], $statements[7777] ]
+		];
 
-		$args[] = array(
+		$args[] = [
 			$item666,
 			$statements[6666],
-			array( $statements[666], $statements[6660], $statements[6666] )
-		);
+			[ $statements[666], $statements[6660], $statements[6666] ]
+		];
 
 		// test adding a statement at a specific index
-		$args[] = array(
+		$args[] = [
 			$item777,
 			$statements[0],
-			array( $statements[0], $statements[777], $statements[7770], $statements[7777] ),
+			[ $statements[0], $statements[777], $statements[7770], $statements[7777] ],
 			0
-		);
+		];
 
 		// test moving a statement
-		$args[] = array(
+		$args[] = [
 			$item666,
 			$statements[6666],
-			array( $statements[666], $statements[6666], $statements[6660] ),
+			[ $statements[666], $statements[6666], $statements[6660] ],
 			1
-		);
+		];
 
 		// test adding a statement featuring another property id within the boundaries of statements the
 		// same property
-		$args[] = array(
+		$args[] = [
 			$item666,
 			$statements[11],
-			array( $statements[666], $statements[6666], $statements[6660], $statements[11] ),
+			[ $statements[666], $statements[6666], $statements[6660], $statements[11] ],
 			1
-		);
+		];
 
 		// test moving a subset of statements featuring the same property
-		$args[] = array(
+		$args[] = [
 			$item666,
 			$statements[12],
-			array(
+			[
 				$statements[12],
 				$statements[11],
 				$statements[666],
 				$statements[6666],
 				$statements[6660]
-			),
+			],
 			0
-		);
+		];
 
 		$args['StatementListProvider support'] = [
 			new StatementListProviderDummy( 'Q777' ),
@@ -228,7 +228,7 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 		$property->setId( new PropertyId( 'P73923' ) );
 
 		$statement = new Statement( new PropertyNoValueSnak( 45 ) );
-		$expected = new StatementList( array( $statement ) );
+		$expected = new StatementList( [ $statement ] );
 
 		$changeOpStatement = $this->newChangeOpStatement( $statement );
 		$changeOpStatement->apply( $property );
@@ -266,12 +266,12 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 		$statements[666] = clone $statement666;
 
 		// test adding statements with guids from other items (these shouldn't be added)
-		return array(
-			array( $itemEmpty, $statements[666] ),
-			array( $itemEmpty, $statements[777] ),
-			array( $item666, $statements[777] ),
-			array( $item777, $statements[666] ),
-		);
+		return [
+			[ $itemEmpty, $statements[666] ],
+			[ $itemEmpty, $statements[777] ],
+			[ $item666, $statements[777] ],
+			[ $item777, $statements[666] ],
+		];
 	}
 
 	/**
@@ -307,7 +307,7 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 
 		// apply change to the wrong item
 		$wrongItem = new Item( new ItemId( 'Q888' ) );
-		$args['wrong entity'] = array( $wrongItem, $this->newChangeOpStatement( $newStatement ) );
+		$args['wrong entity'] = [ $wrongItem, $this->newChangeOpStatement( $newStatement ) ];
 
 		// update an existing statement with wrong main snak property
 		$newSnak = new PropertyNoValueSnak( 23452345 );
@@ -315,7 +315,7 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 
 		$changeOp = $this->newChangeOpStatement( $newStatement );
 
-		$args['wrong main snak property'] = array( $item, $changeOp );
+		$args['wrong main snak property'] = [ $item, $changeOp ];
 
 		$statementListProvider = new StatementListProviderDummy( 'Q777' );
 		$changeOp = $this->newChangeOpStatement( $newStatement, 0 );
@@ -362,37 +362,37 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 
 		$guidGenerator = new GuidGenerator();
 
-		$cases = array();
+		$cases = [];
 
 		$statement = new Statement( $badSnak );
 		$statement->setGuid( $guidGenerator->newGuid( $q17 ) );
-		$cases['invalid value in main snak'] = array( $q17, $statement );
+		$cases['invalid value in main snak'] = [ $q17, $statement ];
 
 		$statement = new Statement( $brokenSnak );
 		$statement->setGuid( $guidGenerator->newGuid( $q17 ) );
-		$cases['mismatching value in main snak'] = array( $q17, $statement );
+		$cases['mismatching value in main snak'] = [ $q17, $statement ];
 
 		$statement = new Statement( $goodSnak );
 		$statement->setGuid( $guidGenerator->newGuid( $q17 ) );
-		$statement->setQualifiers( new SnakList( array( $badSnak ) ) );
-		$cases['bad snak in qualifiers'] = array( $q17, $statement );
+		$statement->setQualifiers( new SnakList( [ $badSnak ] ) );
+		$cases['bad snak in qualifiers'] = [ $q17, $statement ];
 
 		$statement = new Statement( $goodSnak );
 		$statement->setGuid( $guidGenerator->newGuid( $q17 ) );
-		$statement->setQualifiers( new SnakList( array( $brokenSnak ) ) );
-		$cases['mismatching value in qualifier'] = array( $q17, $statement );
+		$statement->setQualifiers( new SnakList( [ $brokenSnak ] ) );
+		$cases['mismatching value in qualifier'] = [ $q17, $statement ];
 
 		$statement = new Statement( $goodSnak );
-		$reference = new Reference( new SnakList( array( $badSnak ) ) );
+		$reference = new Reference( new SnakList( [ $badSnak ] ) );
 		$statement->setGuid( $guidGenerator->newGuid( $q17 ) );
-		$statement->setReferences( new ReferenceList( array( $reference ) ) );
-		$cases['bad snak in reference'] = array( $q17, $statement );
+		$statement->setReferences( new ReferenceList( [ $reference ] ) );
+		$cases['bad snak in reference'] = [ $q17, $statement ];
 
 		$statement = new Statement( $goodSnak );
-		$reference = new Reference( new SnakList( array( $badSnak ) ) );
+		$reference = new Reference( new SnakList( [ $badSnak ] ) );
 		$statement->setGuid( $guidGenerator->newGuid( $q17 ) );
-		$statement->setReferences( new ReferenceList( array( $reference ) ) );
-		$cases['mismatching value in reference'] = array( $q17, $statement );
+		$statement->setReferences( new ReferenceList( [ $reference ] ) );
+		$cases['mismatching value in reference'] = [ $q17, $statement ];
 
 		return $cases;
 	}

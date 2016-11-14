@@ -50,17 +50,17 @@ class CommonsMediaExistsValidatorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideValidate() {
-		return array(
-			"Valid, plain string" => array(
+		return [
+			"Valid, plain string" => [
 				true, "Foo.png"
-			),
-			"Valid, StringValue" => array(
+			],
+			"Valid, StringValue" => [
 				true, new StringValue( "Foo.png" )
-			),
-			"Invalid, StringValue" => array(
+			],
+			"Invalid, StringValue" => [
 				false, new StringValue( "Foo.NOT-FOUND.png" )
-			)
-		);
+			]
+		];
 	}
 
 	public function testValidate_noString() {

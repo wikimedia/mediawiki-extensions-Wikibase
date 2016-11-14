@@ -10,33 +10,33 @@ return call_user_func( function() {
 	$remoteExtPathParts = explode(
 		DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR, __DIR__, 2
 	);
-	$moduleBase = array(
+	$moduleBase = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => $remoteExtPathParts[1],
-	);
+	];
 
-	$modules = array(
+	$modules = [
 
-		'jquery.wikibase.siteselector.tests' => $moduleBase + array(
-			'scripts' => array(
+		'jquery.wikibase.siteselector.tests' => $moduleBase + [
+			'scripts' => [
 				'jquery.wikibase.siteselector.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.wikibase.siteselector',
 				'wikibase.Site',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.wbtooltip.tests' => $moduleBase + array(
-			'scripts' => array(
+		'jquery.wikibase.wbtooltip.tests' => $moduleBase + [
+			'scripts' => [
 				'jquery.wikibase.wbtooltip.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.wikibase.wbtooltip',
-			),
-		),
+			],
+		],
 
-	);
+	];
 
 	return $modules;
 

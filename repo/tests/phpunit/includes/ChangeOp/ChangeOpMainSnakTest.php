@@ -43,7 +43,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 	 * @param array $data
 	 * @param string $dataName
 	 */
-	public function __construct( $name = null, array $data = array(), $dataName = '' ) {
+	public function __construct( $name = null, array $data = [], $dataName = '' ) {
 		parent::__construct( $name, $data, $dataName );
 
 		$this->mockProvider = new ChangeOpTestMockProvider( $this );
@@ -52,9 +52,9 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 	public function invalidArgumentProvider() {
 		$validSnak = new PropertyValueSnak( 7201010, new StringValue( 'o_O' ) );
 
-		$args = array();
-		$args[] = array( 123, $validSnak );
-		$args[] = array( false, $validSnak );
+		$args = [];
+		$args[] = [ 123, $validSnak ];
+		$args[] = [ false, $validSnak ];
 
 		return $args;
 	}
@@ -90,7 +90,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideChangeOps() {
 		$snak = $this->makeSnak( 'P5', 'test' );
-		$args = array();
+		$args = [];
 
 		// add a new claim
 		$item = $this->makeNewItemWithClaim( 'Q123', $snak );
@@ -98,7 +98,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		$guid = '';
 		$changeOp = $this->newChangeOpMainSnak( $guid, $newSnak );
 		$expected = $newSnak->getDataValue();
-		$args['add new claim'] = array( $item, $changeOp, $expected );
+		$args['add new claim'] = [ $item, $changeOp, $expected ];
 
 		// update an existing claim with a new main snak value
 		$item = $this->makeNewItemWithClaim( 'Q234', $snak );
@@ -108,7 +108,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		$guid = $statements[0]->getGuid();
 		$changeOp = $this->newChangeOpMainSnak( $guid, $newSnak );
 		$expected = $newSnak->getDataValue();
-		$args['update claim by guid'] = array( $item, $changeOp, $expected );
+		$args['update claim by guid'] = [ $item, $changeOp, $expected ];
 
 		return $args;
 	}
@@ -139,11 +139,11 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		// apply change to the wrong item
 		$wrongItem = new Item( new ItemId( 'Q888' ) );
 		$newSnak = $this->makeSnak( 'P12', 'newww' );
-		$args['wrong entity'] = array( $wrongItem, $this->newChangeOpMainSnak( $guid, $newSnak ) );
+		$args['wrong entity'] = [ $wrongItem, $this->newChangeOpMainSnak( $guid, $newSnak ) ];
 
 		// apply change to an unknown claim
 		$wrongClaimId = $item->getId()->getSerialization() . '$DEADBEEF-DEAD-BEEF-DEAD-BEEFDEADBEEF';
-		$args['unknown claim'] = array( $item, $this->newChangeOpMainSnak( $wrongClaimId, $newSnak ) );
+		$args['unknown claim'] = [ $item, $this->newChangeOpMainSnak( $wrongClaimId, $newSnak ) ];
 
 		// update an existing claim with wrong main snak property
 		$newSnak = $this->makeSnak( 'P13', 'changedSnak' );
@@ -153,16 +153,16 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 
 		$guid = $statement->getGuid();
 		$changeOp = $this->newChangeOpMainSnak( $guid, $newSnak );
-		$args['wrong main snak property'] = array( $item, $changeOp );
+		$args['wrong main snak property'] = [ $item, $changeOp ];
 
 		// apply invalid main snak
 		$badSnak = $this->makeSnak( 'P12', new NumberValue( 5 ) );
-		$args['bad value type'] = array( $wrongItem, $this->newChangeOpMainSnak( $guid, $badSnak ) );
+		$args['bad value type'] = [ $wrongItem, $this->newChangeOpMainSnak( $guid, $badSnak ) ];
 
 		// apply invalid main snak
 		// NOTE: the mock validator considers "INVALID" to be invalid.
 		$badSnak = $this->makeSnak( 'P12', 'INVALID' );
-		$args['invalid value'] = array( $wrongItem, $this->newChangeOpMainSnak( $guid, $badSnak ) );
+		$args['invalid value'] = [ $wrongItem, $this->newChangeOpMainSnak( $guid, $badSnak ) ];
 
 		return $args;
 	}
@@ -215,13 +215,13 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 
 		$guidGenerator = new GuidGenerator();
 
-		$cases = array();
+		$cases = [];
 
 		$guid = $guidGenerator->newGuid( $q17 );
-		$cases['bad snak value'] = array( $q17, $guid, $badSnak );
+		$cases['bad snak value'] = [ $q17, $guid, $badSnak ];
 
 		$guid = $guidGenerator->newGuid( $q17 );
-		$cases['broken snak'] = array( $q17, $guid, $brokenSnak );
+		$cases['broken snak'] = [ $q17, $guid, $brokenSnak ];
 
 		return $cases;
 	}

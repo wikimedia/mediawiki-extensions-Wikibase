@@ -63,7 +63,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 	}
 
 	private function getChangeHandler(
-		array $pageNamesPerItemId = array(),
+		array $pageNamesPerItemId = [],
 		PageUpdater $updater = null
 	) {
 		$siteLinkLookup = $this->getSiteLinkLookup( $pageNamesPerItemId );
@@ -142,12 +142,12 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 		$itemCreation->setField( 'time', '20130101010101' );
 		$itemDeletion->setField( 'time', '20130102020202' );
 
-		return array(
-			array(),
-			array( $itemCreation ),
-			array( $itemDeletion ),
-			array( $itemCreation, $itemDeletion ),
-		);
+		return [
+			[],
+			[ $itemCreation ],
+			[ $itemDeletion ],
+			[ $itemCreation, $itemDeletion ],
+		];
 	}
 
 	/**
@@ -160,16 +160,16 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 		$spy->handleChangeCallCount = 0;
 		$spy->handleChangesCallCount = 0;
 
-		$testHooks = array(
-			'WikibaseHandleChange' => array( function( Change $change ) use ( $spy ) {
+		$testHooks = [
+			'WikibaseHandleChange' => [ function( Change $change ) use ( $spy ) {
 				$spy->handleChangeCallCount++;
 				return true;
-			} ),
-			'WikibaseHandleChanges' => array( function( array $changes ) use ( $spy ) {
+			} ],
+			'WikibaseHandleChanges' => [ function( array $changes ) use ( $spy ) {
 				$spy->handleChangesCallCount++;
 				return true;
-			} )
-		);
+			} ]
+		];
 
 		$this->mergeMwGlobalArrayValue( 'wgHooks', $testHooks );
 
@@ -181,51 +181,51 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 	}
 
 	public function provideGetUpdateActions() {
-		return array(
-			'empty' => array(
-				array(),
-				array(),
-			),
-			'sitelink usage' => array(
-				array( EntityUsage::SITELINK_USAGE ),
-				array( ChangeHandler::LINKS_UPDATE_ACTION, ChangeHandler::PARSER_PURGE_ACTION,
-					ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ),
-			),
-			'label usage' => array(
-				array( EntityUsage::LABEL_USAGE ),
-				array( ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION,
-					ChangeHandler::RC_ENTRY_ACTION ),
-				array( ChangeHandler::LINKS_UPDATE_ACTION )
-			),
-			'title usage' => array(
-				array( EntityUsage::TITLE_USAGE ),
-				array( ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION,
-					ChangeHandler::RC_ENTRY_ACTION ),
-				array( ChangeHandler::LINKS_UPDATE_ACTION )
-			),
-			'other usage' => array(
-				array( EntityUsage::OTHER_USAGE ),
-				array( ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION,
-					ChangeHandler::RC_ENTRY_ACTION ),
-				array( ChangeHandler::LINKS_UPDATE_ACTION )
-			),
-			'all usage' => array(
-				array( EntityUsage::ALL_USAGE ),
-				array( ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION,
-					ChangeHandler::RC_ENTRY_ACTION ),
-			),
-			'sitelink and other usage (does links update)' => array(
-				array( EntityUsage::SITELINK_USAGE, EntityUsage::OTHER_USAGE ),
-				array( ChangeHandler::LINKS_UPDATE_ACTION, ChangeHandler::PARSER_PURGE_ACTION,
-					ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ),
-			),
-		);
+		return [
+			'empty' => [
+				[],
+				[],
+			],
+			'sitelink usage' => [
+				[ EntityUsage::SITELINK_USAGE ],
+				[ ChangeHandler::LINKS_UPDATE_ACTION, ChangeHandler::PARSER_PURGE_ACTION,
+					ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ],
+			],
+			'label usage' => [
+				[ EntityUsage::LABEL_USAGE ],
+				[ ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION,
+					ChangeHandler::RC_ENTRY_ACTION ],
+				[ ChangeHandler::LINKS_UPDATE_ACTION ]
+			],
+			'title usage' => [
+				[ EntityUsage::TITLE_USAGE ],
+				[ ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION,
+					ChangeHandler::RC_ENTRY_ACTION ],
+				[ ChangeHandler::LINKS_UPDATE_ACTION ]
+			],
+			'other usage' => [
+				[ EntityUsage::OTHER_USAGE ],
+				[ ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION,
+					ChangeHandler::RC_ENTRY_ACTION ],
+				[ ChangeHandler::LINKS_UPDATE_ACTION ]
+			],
+			'all usage' => [
+				[ EntityUsage::ALL_USAGE ],
+				[ ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION,
+					ChangeHandler::RC_ENTRY_ACTION ],
+			],
+			'sitelink and other usage (does links update)' => [
+				[ EntityUsage::SITELINK_USAGE, EntityUsage::OTHER_USAGE ],
+				[ ChangeHandler::LINKS_UPDATE_ACTION, ChangeHandler::PARSER_PURGE_ACTION,
+					ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ],
+			],
+		];
 	}
 
 	/**
 	 * @dataProvider provideGetUpdateActions
 	 */
-	public function testGetUpdateActions( array $aspects, array $expected, array $not = array() ) {
+	public function testGetUpdateActions( array $aspects, array $expected, array $not = [] ) {
 		$handler = $this->getChangeHandler();
 		$actions = $handler->getUpdateActions( $aspects );
 
@@ -253,7 +253,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 	 * @return string[]
 	 */
 	private function getFakePageIdMap( array $pageNamesPerItemId ) {
-		$titlesByPageId = array();
+		$titlesByPageId = [];
 		$siteId = 'enwiki';
 
 		foreach ( $pageNamesPerItemId as $idString => $pageNames ) {
@@ -333,7 +333,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 			->method( 'getPagesUsing' )
 			->will( $this->returnCallback(
 				function( $ids ) use ( $siteLinkLookup ) {
-					$pages = array();
+					$pages = [];
 
 					foreach ( $ids as $id ) {
 						if ( !( $id instanceof ItemId ) ) {
@@ -344,10 +344,10 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 						foreach ( $links as $link ) {
 							if ( $link->getSiteId() === 'enwiki' ) {
 								// we use the numeric item id as the fake page id of the local page!
-								$usages = array(
+								$usages = [
 									new EntityUsage( $id, EntityUsage::SITELINK_USAGE ),
 									new EntityUsage( $id, EntityUsage::LABEL_USAGE, 'en' )
-								);
+								];
 								$pages[] = new PageEntityUsages( $id->getNumericId(), $usages );
 							}
 						}
@@ -388,156 +388,156 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 		$changes = TestChanges::getChanges();
 		$userEmmy2 = Title::newFromText( 'User:Emmy2' )->getPrefixedText();
 
-		$empty = array(
-			'purgeParserCache' => array(),
-			'scheduleRefreshLinks' => array(),
-			'purgeWebCache' => array(),
-			'injectRCRecord' => array(),
-		);
+		$empty = [
+			'purgeParserCache' => [],
+			'scheduleRefreshLinks' => [],
+			'purgeWebCache' => [],
+			'injectRCRecord' => [],
+		];
 
-		$emmy2PurgeParser = array(
-			'purgeParserCache' => array( 'Emmy2' => true ),
-			'scheduleRefreshLinks' => array(),
-			'purgeWebCache' => array( 'Emmy2' => true ),
-			'injectRCRecord' => array( 'Emmy2' => true ),
-		);
+		$emmy2PurgeParser = [
+			'purgeParserCache' => [ 'Emmy2' => true ],
+			'scheduleRefreshLinks' => [],
+			'purgeWebCache' => [ 'Emmy2' => true ],
+			'injectRCRecord' => [ 'Emmy2' => true ],
+		];
 
-		$userEmmy2PurgeParser = array(
-			'purgeParserCache' => array( $userEmmy2 => true ),
-			'scheduleRefreshLinks' => array(),
-			'purgeWebCache' => array( $userEmmy2 => true ),
-			'injectRCRecord' => array( $userEmmy2 => true ),
-		);
+		$userEmmy2PurgeParser = [
+			'purgeParserCache' => [ $userEmmy2 => true ],
+			'scheduleRefreshLinks' => [],
+			'purgeWebCache' => [ $userEmmy2 => true ],
+			'injectRCRecord' => [ $userEmmy2 => true ],
+		];
 
-		$emmyUpdateLinks = array(
-			'purgeParserCache' => array( 'Emmy' => true ),
-			'scheduleRefreshLinks' => array( 'Emmy' => true ),
-			'purgeWebCache' => array( 'Emmy' => true ),
-			'injectRCRecord' => array( 'Emmy' => true ),
-		);
+		$emmyUpdateLinks = [
+			'purgeParserCache' => [ 'Emmy' => true ],
+			'scheduleRefreshLinks' => [ 'Emmy' => true ],
+			'purgeWebCache' => [ 'Emmy' => true ],
+			'injectRCRecord' => [ 'Emmy' => true ],
+		];
 
-		$emmy2UpdateLinks = array(
-			'purgeParserCache' => array( 'Emmy2' => true ),
-			'scheduleRefreshLinks' => array( 'Emmy2' => true ),
-			'purgeWebCache' => array( 'Emmy2' => true ),
-			'injectRCRecord' => array( 'Emmy2' => true ),
-		);
+		$emmy2UpdateLinks = [
+			'purgeParserCache' => [ 'Emmy2' => true ],
+			'scheduleRefreshLinks' => [ 'Emmy2' => true ],
+			'purgeWebCache' => [ 'Emmy2' => true ],
+			'injectRCRecord' => [ 'Emmy2' => true ],
+		];
 
-		$emmy2UpdateAll = array(
-			'purgeParserCache' => array( 'Emmy2' => true ),
-			'scheduleRefreshLinks' => array( 'Emmy2' => true ),
-			'purgeWebCache' => array( 'Emmy2' => true ),
-			'injectRCRecord' => array( 'Emmy2' => true ),
-		);
+		$emmy2UpdateAll = [
+			'purgeParserCache' => [ 'Emmy2' => true ],
+			'scheduleRefreshLinks' => [ 'Emmy2' => true ],
+			'purgeWebCache' => [ 'Emmy2' => true ],
+			'injectRCRecord' => [ 'Emmy2' => true ],
+		];
 
-		return array(
-			array( // #0
+		return [
+			[ // #0
 				$changes['property-creation'],
-				array( 'q100' => array() ),
+				[ 'q100' => [] ],
 				$empty
-			),
-			array( // #1
+			],
+			[ // #1
 				$changes['property-deletion'],
-				array( 'q100' => array() ),
+				[ 'q100' => [] ],
 				$empty
-			),
-			array( // #2
+			],
+			[ // #2
 				$changes['property-set-label'],
-				array( 'q100' => array() ),
+				[ 'q100' => [] ],
 				$empty
-			),
+			],
 
-			array( // #3
+			[ // #3
 				$changes['item-creation'],
-				array( 'q100' => array() ),
+				[ 'q100' => [] ],
 				$empty
-			),
-			array( // #4
+			],
+			[ // #4
 				$changes['item-deletion'],
-				array( 'q100' => array() ),
+				[ 'q100' => [] ],
 				$empty
-			),
-			array( // #5
+			],
+			[ // #5
 				$changes['item-deletion-linked'],
-				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				[ 'q100' => [ 'enwiki' => 'Emmy2' ] ],
 				$emmy2UpdateAll
-			),
+			],
 
-			array( // #6
+			[ // #6
 				$changes['set-de-label'],
-				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				[ 'q100' => [ 'enwiki' => 'Emmy2' ] ],
 				$empty, // For the dummy page, only label and sitelink usage is defined.
-			),
-			array( // #7
+			],
+			[ // #7
 				$changes['set-en-label'],
-				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				[ 'q100' => [ 'enwiki' => 'Emmy2' ] ],
 				$emmy2PurgeParser
-			),
-			array( // #8
+			],
+			[ // #8
 				$changes['set-en-label'],
-				array( 'q100' => array( 'enwiki' => 'User:Emmy2' ) ), // user namespace
+				[ 'q100' => [ 'enwiki' => 'User:Emmy2' ] ], // user namespace
 				$userEmmy2PurgeParser
-			),
-			array( // #9
+			],
+			[ // #9
 				$changes['set-en-aliases'],
-				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				[ 'q100' => [ 'enwiki' => 'Emmy2' ] ],
 				$empty, // For the dummy page, only label and sitelink usage is defined.
-			),
+			],
 
-			array( // #10
+			[ // #10
 				$changes['add-claim'],
-				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				[ 'q100' => [ 'enwiki' => 'Emmy2' ] ],
 				$empty // statements are ignored
-			),
-			array( // #11
+			],
+			[ // #11
 				$changes['remove-claim'],
-				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				[ 'q100' => [ 'enwiki' => 'Emmy2' ] ],
 				$empty // statements are ignored
-			),
+			],
 
-			array( // #12
+			[ // #12
 				$changes['set-dewiki-sitelink'],
-				array( 'q100' => array() ),
+				[ 'q100' => [] ],
 				$empty // not yet linked
-			),
-			array( // #13
+			],
+			[ // #13
 				$changes['set-enwiki-sitelink'],
-				array( 'q100' => array( 'enwiki' => 'Emmy' ) ),
+				[ 'q100' => [ 'enwiki' => 'Emmy' ] ],
 				$emmyUpdateLinks
-			),
+			],
 
-			array( // #14
+			[ // #14
 				$changes['change-dewiki-sitelink'],
-				array( 'q100' => array( 'enwiki' => 'Emmy' ) ),
+				[ 'q100' => [ 'enwiki' => 'Emmy' ] ],
 				$emmyUpdateLinks
-			),
-			array( // #15
+			],
+			[ // #15
 				$changes['change-enwiki-sitelink'],
-				array( 'q100' => array( 'enwiki' => 'Emmy' ), 'q200' => array( 'enwiki' => 'Emmy2' ) ),
-				array(
-					'purgeParserCache' => array( 'Emmy' => true, 'Emmy2' => true ),
-					'scheduleRefreshLinks' => array( 'Emmy' => true, 'Emmy2' => true ),
-					'purgeWebCache' => array( 'Emmy' => true, 'Emmy2' => true ),
-					'injectRCRecord' => array( 'Emmy' => true, 'Emmy2' => true ),
-				)
-			),
-			array( // #16
+				[ 'q100' => [ 'enwiki' => 'Emmy' ], 'q200' => [ 'enwiki' => 'Emmy2' ] ],
+				[
+					'purgeParserCache' => [ 'Emmy' => true, 'Emmy2' => true ],
+					'scheduleRefreshLinks' => [ 'Emmy' => true, 'Emmy2' => true ],
+					'purgeWebCache' => [ 'Emmy' => true, 'Emmy2' => true ],
+					'injectRCRecord' => [ 'Emmy' => true, 'Emmy2' => true ],
+				]
+			],
+			[ // #16
 				$changes['change-enwiki-sitelink-badges'],
-				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				[ 'q100' => [ 'enwiki' => 'Emmy2' ] ],
 				$emmy2UpdateLinks
-			),
+			],
 
-			array( // #17
+			[ // #17
 				$changes['remove-dewiki-sitelink'],
-				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				[ 'q100' => [ 'enwiki' => 'Emmy2' ] ],
 				$emmy2UpdateLinks
-			),
-			array( // #18
+			],
+			[ // #18
 				$changes['remove-enwiki-sitelink'],
-				array( 'q100' => array( 'enwiki' => 'Emmy2' ) ),
+				[ 'q100' => [ 'enwiki' => 'Emmy2' ] ],
 				$emmy2UpdateLinks
-			),
-		);
+			],
+		];
 	}
 
 	/**

@@ -36,9 +36,9 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	private $oldAllowDataAccessInUserLanguage;
 
 	protected function getTestModules() {
-		return parent::getTestModules() + array(
+		return parent::getTestModules() + [
 			'LuaWikibaseLibraryTests' => __DIR__ . '/LuaWikibaseLibraryTests.lua',
-		);
+		];
 	}
 
 	/**
@@ -64,10 +64,10 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	}
 
 	public function allowDataAccessInUserLanguageProvider() {
-		return array(
-			array( true ),
-			array( false ),
-		);
+		return [
+			[ true ],
+			[ false ],
+		];
 	}
 
 	public function testConstructor() {
@@ -103,48 +103,48 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit );
 		$entity = $luaWikibaseLibrary->getEntity( 'Q888' );
-		$this->assertEquals( array( null ), $entity );
+		$this->assertEquals( [ null ], $entity );
 
 		$this->assertSame( $allowDataAccessInUserLanguage, $cacheSplit );
 	}
 
 	public function testGetEntity_hasLanguageFallback() {
-		$this->setMwGlobals( array(
+		$this->setMwGlobals( [
 			'wgContLang' => Language::factory( 'ku-arab' )
-		) );
+		] );
 
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 		$entityArray = $luaWikibaseLibrary->getEntity( 'Q885588' );
 
-		$expected = array(
-			array(
+		$expected = [
+			[
 				'id' => 'Q885588',
 				'type' => 'item',
-				'labels' => array(
-					'ku-latn' => array(
+				'labels' => [
+					'ku-latn' => [
 						'language' => 'ku-latn',
 						'value' => 'Pisîk'
-					),
-					'ku-arab' => array(
+					],
+					'ku-arab' => [
 						'language' => 'ku-arab',
 						'value' => 'پسیک',
 						'source-language' => 'ku-latn',
-					)
-				),
+					]
+				],
 				'schemaVersion' => 2,
-				'descriptions' => array( 'de' =>
-					array(
+				'descriptions' => [ 'de' =>
+					[
 						'language' => 'de',
 						'value' => 'Description of Q885588'
-					)
-				)
-			)
-		);
+					]
+				]
+			]
+		];
 
 		$this->assertEquals( $expected, $entityArray, 'getEntity' );
 
 		$label = $luaWikibaseLibrary->getLabel( 'Q885588' );
-		$this->assertEquals( array( 'پسیک', 'ku-arab' ), $label, 'getLabel' );
+		$this->assertEquals( [ 'پسیک', 'ku-arab' ], $label, 'getLabel' );
 
 		// All languages in the fallback chain for 'ku-arab' count as "used".
 		$usage = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();
@@ -156,7 +156,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	public function testGetEntityInvalidIdType() {
 		$this->setExpectedException( ScribuntoException::class );
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
-		$luaWikibaseLibrary->getEntity( array() );
+		$luaWikibaseLibrary->getEntity( [] );
 	}
 
 	public function testGetEntityInvalidEntityId() {
@@ -182,7 +182,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit );
 
 		$entityId = $luaWikibaseLibrary->getEntityId( 'CanHazKitten123' );
-		$this->assertEquals( array( null ), $entityId );
+		$this->assertEquals( [ null ], $entityId );
 		$this->assertFalse( $cacheSplit );
 	}
 
@@ -236,12 +236,12 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 
 		if ( $allowDataAccessInUserLanguage ) {
 			$this->assertSame(
-				array( 'Lua Test Item', 'de' ),
+				[ 'Lua Test Item', 'de' ],
 				$label
 			);
 		} else {
 			$this->assertSame(
-				array( 'Test all the code paths', 'en' ),
+				[ 'Test all the code paths', 'en' ],
 				$label
 			);
 		}
@@ -262,7 +262,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 
 		$snak = $entityArr[0]['claims']['P456'][1]['mainsnak'];
 		$this->assertSame(
-			array( 'Q885588' ),
+			[ 'Q885588' ],
 			$luaWikibaseLibrary->renderSnak( $snak )
 		);
 
@@ -309,7 +309,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 
 		$this->setExpectedException( ScribuntoException::class );
-		$luaWikibaseLibrary->renderSnak( array( 'a' => 'b' ) );
+		$luaWikibaseLibrary->renderSnak( [ 'a' => 'b' ] );
 	}
 
 	/**
@@ -324,11 +324,11 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$entityArr = $luaWikibaseLibrary->getEntity( 'Q32487' );
 
 		$snaks = $entityArr[0]['claims']['P342'][1]['qualifiers'];
-		$expected = array( 'A qualifier Snak, Moar qualifiers' );
+		$expected = [ 'A qualifier Snak, Moar qualifiers' ];
 		if ( $allowDataAccessInUserLanguage ) {
-			$expected = array(
-				$lang->commaList( array( 'A qualifier Snak', 'Moar qualifiers' ) )
-			);
+			$expected = [
+				$lang->commaList( [ 'A qualifier Snak', 'Moar qualifiers' ] )
+			];
 		}
 
 		$this->assertSame( $expected, $luaWikibaseLibrary->renderSnaks( $snaks ) );
@@ -339,7 +339,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 
 		$this->setExpectedException( ScribuntoException::class );
-		$luaWikibaseLibrary->renderSnaks( array( 'a' => 'b' ) );
+		$luaWikibaseLibrary->renderSnaks( [ 'a' => 'b' ] );
 	}
 
 	public function testResolvePropertyId() {
@@ -347,7 +347,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit );
 
 		$this->assertSame(
-			array( 'P342' ),
+			[ 'P342' ],
 			$luaWikibaseLibrary->resolvePropertyId( 'LuaTestStringProperty' )
 		);
 		$this->assertFalse( $cacheSplit );
@@ -357,7 +357,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 
 		$this->assertSame(
-			array( 'P342' ),
+			[ 'P342' ],
 			$luaWikibaseLibrary->resolvePropertyId( 'P342' )
 		);
 	}
@@ -366,43 +366,43 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 
 		$this->assertSame(
-			array( null ),
+			[ null ],
 			$luaWikibaseLibrary->resolvePropertyId( 'foo' )
 		);
 	}
 
 	public function provideOrderProperties() {
-		return array(
-			'all IDs in the provider' => array(
-				array( 'P16', 'P5', 'P4', 'P8' ),
-				array( 'P8' => 0, 'P16' => 1, 'P4' => 2, 'P5' => 3 ),
-				array( array( 1 => 'P8', 2 => 'P16', 3 => 'P4', 4 => 'P5' ) )
-			),
-			'part of the IDs in the provider' => array(
-				array( 'P16', 'P5', 'P4', 'P8' ),
-				array( 'P8' => 0, 'P5' => 1 ),
-				array( array( 1 => 'P8', 2 => 'P5', 3 => 'P16', 4 => 'P4' ) )
-			),
-			'not all IDs used' => array(
-				array( 'P16', 'P5', 'P4' ),
-				array( 'P8' => 0, 'P5' => 1 ),
-				array( array( 1 => 'P5', 2 => 'P16', 3 => 'P4' ) )
-			),
-			'empty list of property ids' => array(
-				array(),
-				array( 'P8' => 0, 'P5' => 1 ),
-				array( array() )
-			)
-		);
+		return [
+			'all IDs in the provider' => [
+				[ 'P16', 'P5', 'P4', 'P8' ],
+				[ 'P8' => 0, 'P16' => 1, 'P4' => 2, 'P5' => 3 ],
+				[ [ 1 => 'P8', 2 => 'P16', 3 => 'P4', 4 => 'P5' ] ]
+			],
+			'part of the IDs in the provider' => [
+				[ 'P16', 'P5', 'P4', 'P8' ],
+				[ 'P8' => 0, 'P5' => 1 ],
+				[ [ 1 => 'P8', 2 => 'P5', 3 => 'P16', 4 => 'P4' ] ]
+			],
+			'not all IDs used' => [
+				[ 'P16', 'P5', 'P4' ],
+				[ 'P8' => 0, 'P5' => 1 ],
+				[ [ 1 => 'P5', 2 => 'P16', 3 => 'P4' ] ]
+			],
+			'empty list of property ids' => [
+				[],
+				[ 'P8' => 0, 'P5' => 1 ],
+				[ [] ]
+			]
+		];
 	}
 
 	public function provideGetPropertyOrder() {
-		return array(
-			'all IDs in the provider' => array(
-				array( 'P8' => 0, 'P16' => 1, 'P4' => 2, 'P5' => 3 ),
-				array( array( 'P8' => 0, 'P16' => 1, 'P4' => 2, 'P5' => 3 ) )
-			)
-		);
+		return [
+			'all IDs in the provider' => [
+				[ 'P8' => 0, 'P16' => 1, 'P4' => 2, 'P5' => 3 ],
+				[ [ 'P8' => 0, 'P16' => 1, 'P4' => 2, 'P5' => 3 ] ]
+			]
+		];
 	}
 
 	/**

@@ -24,8 +24,8 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityTermsView;
 
-return array(
-	'item' => array(
+return [
+	'item' => [
 		'view-factory-callback' => function(
 			$languageCode,
 			LabelDescriptionLookup $labelDescriptionLookup,
@@ -50,8 +50,8 @@ return array(
 		'entity-factory-callback' => function() {
 			return new Item();
 		},
-	),
-	'property' => array(
+	],
+	'property' => [
 		'view-factory-callback' => function(
 			$languageCode,
 			LabelDescriptionLookup $labelDescriptionLookup,
@@ -76,5 +76,5 @@ return array(
 		'entity-factory-callback' => function() {
 			return Property::newFromType( '' );
 		},
-	)
-);
+	]
+];

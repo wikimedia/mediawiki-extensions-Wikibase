@@ -52,24 +52,24 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	 * @return TermIndexSearchInteractor
 	 */
 	private function getMockSearchInteractor() {
-		$searchResults = array(
-			array(
+		$searchResults = [
+			[
 				'entityId' => new ItemId( 'Q2' ),
 				'matchedTermType' => 'label',
 				'matchedTerm' => new Term( 'fr', 'Foo' ),
-				'displayTerms' => array(
+				'displayTerms' => [
 					TermIndexEntry::TYPE_DESCRIPTION => new Term( 'en', 'DisplayDescription' ),
-				),
-			),
-			array(
+				],
+			],
+			[
 				'entityId' => new ItemId( 'Q3' ),
 				'matchedTermType' => 'label',
 				'matchedTerm' => new Term( 'fr', 'Foo' ),
-				'displayTerms' => array(
+				'displayTerms' => [
 					TermIndexEntry::TYPE_LABEL => new Term( 'en', 'DisplayLabel' ),
-				),
-			),
-		);
+				],
+			],
+		];
 		$mock = $this->getMockBuilder( TermIndexSearchInteractor::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -82,10 +82,10 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 						throw new InvalidArgumentException( 'Not a valid language code' );
 					}
 
-					$expectedTermTypes = array(
+					$expectedTermTypes = [
 						TermIndexEntry::TYPE_LABEL,
 						TermIndexEntry::TYPE_ALIAS
-					);
+					];
 
 					if (
 						$text === 'Foo' &&
@@ -95,7 +95,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 						return $searchResults;
 					}
 
-					return array();
+					return [];
 				}
 			) );
 
@@ -115,7 +115,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	}
 
 	private function getContentLanguages() {
-		return new StaticContentLanguages( array( 'ar', 'de', 'en', 'fr' ) );
+		return new StaticContentLanguages( [ 'ar', 'de', 'en', 'fr' ] );
 	}
 
 	/**
@@ -158,10 +158,10 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	}
 
 	public function testRequestParameters() {
-		$request = new FauxRequest( array(
+		$request = new FauxRequest( [
 			'language' => '<LANGUAGE>',
 			'label' => '<LABEL>',
-		) );
+		] );
 		list( $html, ) = $this->executeSpecialPage( '', $request );
 
 		$this->assertContains( '&lt;LANGUAGE&gt;', $html );

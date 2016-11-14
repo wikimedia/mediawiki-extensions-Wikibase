@@ -18,22 +18,22 @@ use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
  */
 class EntityDataFormatProviderTest extends \MediaWikiTestCase {
 
-	private static $apiMimeTypes = array(
+	private static $apiMimeTypes = [
 		'application/vnd.php.serialized',
 		'application/json',
-	);
+	];
 
-	private static $apiExtensions = array(
+	private static $apiExtensions = [
 		'php',
 		'json',
-	);
+	];
 
-	private static $apiFormats = array(
+	private static $apiFormats = [
 		'php',
 		'json',
-	);
+	];
 
-	private static $rdfMimeTypes = array(
+	private static $rdfMimeTypes = [
 		'application/rdf+xml',
 		'text/n3',
 		'text/rdf+n3',
@@ -41,48 +41,48 @@ class EntityDataFormatProviderTest extends \MediaWikiTestCase {
 		'application/x-turtle',
 		'text/n-triples',
 		'application/n-triples',
-	);
+	];
 
-	private static $rdfExtensions = array(
+	private static $rdfExtensions = [
 		'rdf',
 		'n3',
 		'ttl',
 		'nt'
-	);
+	];
 
-	private static $rdfFormats = array(
+	private static $rdfFormats = [
 		'rdfxml',
 		'n3',
 		'turtle',
 		'ntriples'
-	);
+	];
 
-	private static $badMimeTypes = array(
+	private static $badMimeTypes = [
 		'text/html',
 		'text/text',
 		// 'text/plain', // ntriples presents as text/plain!
-	);
+	];
 
-	private static $badExtensions = array(
+	private static $badExtensions = [
 		'html',
 		'text',
 		'txt',
-	);
+	];
 
-	private static $badFormats = array(
+	private static $badFormats = [
 		'html',
 		'text',
 		'xml',
-	);
+	];
 
-	private static $formatMappings = array(
+	private static $formatMappings = [
 		'json' => 'json', // should be api json
 		'application/json' => 'json', // should be api json
 		'application/rdf+xml' => 'rdfxml', // should be rdfxml
 		'text/n-triples' => 'ntriples', // should be ntriples
 		'text/plain' => 'ntriples', // should be ntriples
 		'ttl' => 'turtle', // should be turtle
-	);
+	];
 
 	/**
 	 * @return EntityDataFormatProvider
@@ -91,7 +91,7 @@ class EntityDataFormatProviderTest extends \MediaWikiTestCase {
 		$provider = new EntityDataFormatProvider();
 
 		$provider->setFormatWhiteList(
-			array(
+			[
 				// using the API
 				'json', // default
 				'php',
@@ -101,7 +101,7 @@ class EntityDataFormatProviderTest extends \MediaWikiTestCase {
 				'n3',
 				'turtle',
 				'ntriples',
-			)
+			]
 		);
 
 		return $provider;

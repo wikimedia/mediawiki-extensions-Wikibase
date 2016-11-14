@@ -28,20 +28,20 @@ class NotEntityIdValidatorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidConstructorArgumentProvider() {
-		return array(
-			array( null ),
-			array( 1 ),
-		);
+		return [
+			[ null ],
+			[ 1 ],
+		];
 	}
 
 	public function provideValidate() {
-		return array(
-			'empty' => array( '', 'label-no-entityid', null, null ),
-			'silly' => array( 'silly', 'label-no-entityid', null, null ),
-			'allowed type' => array( 'Q13', 'label-no-entityid', array( Property::ENTITY_TYPE ), null ),
-			'forbidden type' => array( 'P13', 'label-no-entityid', array( Property::ENTITY_TYPE ), 'label-no-entityid' ),
-			'all forbidden' => array( 'Q13', 'label-no-entityid', null, 'label-no-entityid' ),
-		);
+		return [
+			'empty' => [ '', 'label-no-entityid', null, null ],
+			'silly' => [ 'silly', 'label-no-entityid', null, null ],
+			'allowed type' => [ 'Q13', 'label-no-entityid', [ Property::ENTITY_TYPE ], null ],
+			'forbidden type' => [ 'P13', 'label-no-entityid', [ Property::ENTITY_TYPE ], 'label-no-entityid' ],
+			'all forbidden' => [ 'Q13', 'label-no-entityid', null, 'label-no-entityid' ],
+		];
 	}
 
 	/**

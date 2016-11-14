@@ -24,11 +24,11 @@ use Wikibase\StatementRankSerializer;
 class StatementRankSerializerTest extends PHPUnit_Framework_TestCase {
 
 	public function rankProvider() {
-		return array(
-			array( Statement::RANK_DEPRECATED, 'deprecated' ),
-			array( Statement::RANK_NORMAL, 'normal' ),
-			array( Statement::RANK_PREFERRED, 'preferred' ),
-		);
+		return [
+			[ Statement::RANK_DEPRECATED, 'deprecated' ],
+			[ Statement::RANK_NORMAL, 'normal' ],
+			[ Statement::RANK_PREFERRED, 'preferred' ],
+		];
 	}
 
 	/**

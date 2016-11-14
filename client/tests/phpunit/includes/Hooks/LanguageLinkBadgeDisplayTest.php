@@ -48,7 +48,7 @@ class LanguageLinkBadgeDisplayTest extends PHPUnit_Framework_TestCase {
 				return null;
 			} ) );
 
-		$badgeClassNames = array( 'Q4' => 'foo', 'Q3' => 'bar' );
+		$badgeClassNames = [ 'Q4' => 'foo', 'Q3' => 'bar' ];
 
 		return new LanguageLinkBadgeDisplay(
 			$labelLookup,
@@ -75,46 +75,46 @@ class LanguageLinkBadgeDisplayTest extends PHPUnit_Framework_TestCase {
 		$q4 = new ItemId( 'Q4' );
 
 		$link0 = new SiteLink( 'jawiki', 'Bah' );
-		$link1 = new SiteLink( 'dewiki', 'Foo', array( $q3, $q2 ) );
-		$link2 = new SiteLink( 'enwiki', 'Bar', array( $q3, $q4 ) );
+		$link1 = new SiteLink( 'dewiki', 'Foo', [ $q3, $q2 ] );
+		$link2 = new SiteLink( 'enwiki', 'Bar', [ $q3, $q4 ] );
 
-		$badge1 = array(
+		$badge1 = [
 			'class' => 'badge-Q3 bar badge-Q2',
 			'label' => 'Lesenswerter Artikel'
-		);
-		$badge2 = array(
+		];
+		$badge2 = [
 			'class' => 'badge-Q3 bar badge-Q4 foo',
 			'label' => 'Lesenswerter Artikel, Exzellenter Artikel'
-		);
+		];
 
-		return array(
-			'empty' => array( array(), array() ),
-			'no badges' => array( array(), array( $link0 ) ),
-			'some badges' => array(
-				array( 'dewiki' => $badge1, 'enwiki' => $badge2 ),
-				array( 'jawiki' => $link0, 'dewiki' => $link1, 'enwiki' => $link2 )
-			),
-		);
+		return [
+			'empty' => [ [], [] ],
+			'no badges' => [ [], [ $link0 ] ],
+			'some badges' => [
+				[ 'dewiki' => $badge1, 'enwiki' => $badge2 ],
+				[ 'jawiki' => $link0, 'dewiki' => $link1, 'enwiki' => $link2 ]
+			],
+		];
 	}
 
 	public function testApplyBadges() {
-		$badges = array(
-			'en' => array(
+		$badges = [
+			'en' => [
 				'class' => 'badge-Q3',
 				'label' => 'Lesenswerter Artikel',
-			)
-		);
+			]
+		];
 
-		$link = array(
+		$link = [
 			'href' => 'http://acme.com',
 			'class' => 'foo',
-		);
+		];
 
-		$expected = array(
+		$expected = [
 			'href' => 'http://acme.com',
 			'class' => 'foo badge-Q3',
 			'itemtitle' => 'Lesenswerter Artikel',
-		);
+		];
 
 		$languageLinkTitle = Title::makeTitle( NS_MAIN, 'Test', '', 'en' );
 

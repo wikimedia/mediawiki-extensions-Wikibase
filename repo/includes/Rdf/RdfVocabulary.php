@@ -75,28 +75,28 @@ class RdfVocabulary {
 	const ONE_ENTITY = 'http://www.wikidata.org/entity/Q199';
 	// Ranks
 	const WIKIBASE_RANK_BEST = 'BestRank';
-	public static $rankMap = array(
+	public static $rankMap = [
 		Statement::RANK_DEPRECATED => 'DeprecatedRank',
 		Statement::RANK_NORMAL => 'NormalRank',
 		Statement::RANK_PREFERRED => 'PreferredRank',
-	);
+	];
 	// Value properties
-	public static $claimToValue = array(
+	public static $claimToValue = [
 			self::NSP_CLAIM_STATEMENT => self::NSP_CLAIM_VALUE,
 			self::NSP_QUALIFIER => self::NSP_QUALIFIER_VALUE,
 			self::NSP_REFERENCE => self::NSP_REFERENCE_VALUE,
-	);
+	];
 	// Value properties for normalized values
-	public static $claimToValueNormalized = array(
+	public static $claimToValueNormalized = [
 		self::NSP_CLAIM_STATEMENT => self::NSP_CLAIM_VALUE_NORM,
 		self::NSP_QUALIFIER => self::NSP_QUALIFIER_VALUE_NORM,
 		self::NSP_REFERENCE => self::NSP_REFERENCE_VALUE_NORM,
-	);
+	];
 
 	/**
 	 * @var string[] Mapping of namespace names to URIs.
 	 */
-	private $namespaces = array();
+	private $namespaces = [];
 
 	/**
 	 * @var string
@@ -121,7 +121,7 @@ class RdfVocabulary {
 	/**
 	 * @var string[]
 	 */
-	private static $canonicalLanguageCodeCache = array();
+	private static $canonicalLanguageCodeCache = [];
 
 	/**
 	 * Map of the configured page properties.
@@ -141,9 +141,9 @@ class RdfVocabulary {
 	public function __construct(
 		$baseUri,
 		$dataUri,
-		array $canonicalLanguageCodes = array(),
-		array $dataTypeUris = array(),
-		array $pagePropertyDefs = array()
+		array $canonicalLanguageCodes = [],
+		array $dataTypeUris = [],
+		array $pagePropertyDefs = []
 	) {
 		$this->baseUri = $baseUri;
 		$this->dataUri = $dataUri;
@@ -158,7 +158,7 @@ class RdfVocabulary {
 		}
 		$propUri = $topUri."prop/";
 
-		$this->namespaces = array(
+		$this->namespaces = [
 				'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
 				'rdfs' => 'http://www.w3.org/2000/01/rdf-schema#',
 				'xsd' => 'http://www.w3.org/2001/XMLSchema#',
@@ -190,7 +190,7 @@ class RdfVocabulary {
 				self::NS_CC => self::CC_URI,
 				self::NS_GEO => self::GEO_URI,
 				self::NS_PROV => self::PROV_URI,
-		);
+		];
 	}
 
 	/**

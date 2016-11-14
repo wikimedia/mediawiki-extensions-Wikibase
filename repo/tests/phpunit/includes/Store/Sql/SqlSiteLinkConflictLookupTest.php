@@ -35,11 +35,11 @@ class SqlSiteLinkConflictLookupTest extends \MediaWikiTestCase {
 
 		$siteLinkTable = new SiteLinkTable( 'wb_items_per_site', false );
 
-		$siteLinks = new SiteLinkList( array(
+		$siteLinks = new SiteLinkList( [
 			new SiteLink( 'dewiki', 'Katze' ),
 			new SiteLink( 'enwiki', 'Kitten' ),
 			new SiteLink( 'eswiki', 'Gato' )
-		) );
+		] );
 
 		$item = new Item( new ItemId( 'Q9' ), null, $siteLinks );
 
@@ -49,13 +49,13 @@ class SqlSiteLinkConflictLookupTest extends \MediaWikiTestCase {
 	public function testGetConflictsForItem() {
 		$siteLinkConflictLookup = new SqlSiteLinkConflictLookup();
 
-		$expected = array(
-			array(
+		$expected = [
+			[
 				'siteId' => 'enwiki',
 				'itemId' => 9,
 				'sitePage' => 'Kitten'
-			)
-		);
+			]
+		];
 
 		$this->assertSame(
 			$expected,
@@ -67,15 +67,15 @@ class SqlSiteLinkConflictLookupTest extends \MediaWikiTestCase {
 		$siteLinkConflictLookup = new SqlSiteLinkConflictLookup();
 
 		$this->assertSame(
-			array(),
+			[],
 			$siteLinkConflictLookup->getConflictsForItem( $this->getItem( 'Cat' ) )
 		);
 	}
 
 	private function getItem( $pageName ) {
-		$siteLinks = new SiteLinkList( array(
+		$siteLinks = new SiteLinkList( [
 			new SiteLink( 'enwiki', $pageName )
-		) );
+		] );
 
 		return new Item( new ItemId( 'Q10' ), null, $siteLinks );
 	}

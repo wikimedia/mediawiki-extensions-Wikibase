@@ -24,10 +24,10 @@ class FingerprintSearchTextGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$fingerprint->setLabel( 'en', 'Test' );
 		$fingerprint->setLabel( 'de', 'Testen' );
 		$fingerprint->setDescription( 'en', 'city in Spain' );
-		$fingerprint->setAliasGroup( 'en', array( 'abc', 'cde' ) );
-		$fingerprint->setAliasGroup( 'de', array( 'xyz', 'uvw' ) );
+		$fingerprint->setAliasGroup( 'en', [ 'abc', 'cde' ] );
+		$fingerprint->setAliasGroup( 'de', [ 'xyz', 'uvw' ] );
 
-		$patterns = array(
+		$patterns = [
 			'/^Test$/',
 			'/^Testen$/',
 			'/^city in Spain$/',
@@ -36,11 +36,11 @@ class FingerprintSearchTextGeneratorTest extends \PHPUnit_Framework_TestCase {
 			'/^uvw$/',
 			'/^xyz$/',
 			'/^(?!abcde).*$/',
-		);
+		];
 
-		return array(
-			array( $fingerprint, $patterns )
-		);
+		return [
+			[ $fingerprint, $patterns ]
+		];
 	}
 
 	/**

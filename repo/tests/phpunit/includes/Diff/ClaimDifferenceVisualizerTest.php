@@ -85,13 +85,13 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 	 * @todo Come up with a better way of testing this.... EWW at all the html...
 	 */
 	public function provideDifferenceAndClaim() {
-		return array(
-			'no change' => array(
+		return [
+			'no change' => [
 				new ClaimDifference(),
 				new Statement( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
 				''
-			),
-			'mainsnak' => array(
+			],
+			'mainsnak' => [
 				new ClaimDifference(
 					new DiffOpChange(
 						new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'bar' ) ),
@@ -105,30 +105,30 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 				'<div><del class="diffchange diffchange-inline"><span>bar (DETAILED)</span></del></div></td>'.
 				'<td class="diff-marker">+</td><td class="diff-addedline">'.
 				'<div><ins class="diffchange diffchange-inline"><span>foo (DETAILED)</span></ins></div></td></tr>'
-			),
-			'+qualifiers' => array(
+			],
+			'+qualifiers' => [
 				new ClaimDifference(
 					null,
-					new Diff( array(
+					new Diff( [
 						new DiffOpAdd( new PropertyValueSnak( 44, new StringValue( 'v' ) ) ),
-					) )
+					] )
 				),
 				new Statement( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
 				'<tr><td colspan="2" class="diff-lineno"></td>' .
 				'<td colspan="2" class="diff-lineno">property / P1: foo / qualifier</td></tr>' .
 				'<tr><td colspan="2">&nbsp;</td><td class="diff-marker">+</td><td class="diff-addedline">'.
 				'<div><ins class="diffchange diffchange-inline"><span>P44: v (DETAILED)</span></ins></div></td></tr>'
-			),
+			],
 			'+references' =>
-			array(
+			[
 				new ClaimDifference(
 					null,
 					null,
-					new Diff( array(
+					new Diff( [
 						new DiffOpRemove( new Reference( new SnakList( [
 							new PropertyValueSnak( 50, new StringValue( 'v' ) ),
 						] ) ) ),
-					) )
+					] )
 				),
 				new Statement( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
 				'<tr><td colspan="2" class="diff-lineno">property / P1: foo / reference</td>' .
@@ -136,8 +136,8 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 				'<tr><td class="diff-marker">-</td><td class="diff-deletedline">'.
 				'<div><del class="diffchange diffchange-inline"><span>P50: v (DETAILED)</span>' .
 				'</del></div></td><td colspan="2">&nbsp;</td></tr>'
-			),
-			'ranks' => array(
+			],
+			'ranks' => [
 				new ClaimDifference(
 					null,
 					null,
@@ -157,21 +157,21 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 				. '<ins class="diffchange diffchange-inline"><span>Preferred rank</span></ins>'
 				. '</div></td>'
 				. '</tr>'
-			),
-			'mainsnak and qualifiers' => array(
+			],
+			'mainsnak and qualifiers' => [
 				new ClaimDifference(
 					new DiffOpChange(
 						new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'oldmainsnakvalue' ) ),
 						new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) )
 					),
-					new Diff( array(
+					new Diff( [
 						new DiffOpAdd(
 							new PropertyValueSnak( 44, new StringValue( 'newqualifiervalue' ) )
 						),
 						new DiffOpRemove(
 							new PropertyValueSnak( 44, new StringValue( 'oldqualifiervalue' ) )
 						)
-					) )
+					] )
 				),
 				new Statement( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) ) ),
 				// mainsnak change
@@ -208,22 +208,22 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 				. '<span>P44: oldqualifiervalue (DETAILED)</span></del></div></td>'
 				. '<td colspan="2">&nbsp;</td>'
 				. '</tr>'
-			),
-			'mainsnak and references' => array(
+			],
+			'mainsnak and references' => [
 				new ClaimDifference(
 					new DiffOpChange(
 						new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'oldmainsnakvalue' ) ),
 						new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) )
 					),
 					null,
-					new Diff( array(
-						new DiffOpAdd( new Reference( new SnakList( array(
+					new Diff( [
+						new DiffOpAdd( new Reference( new SnakList( [
 							new PropertyValueSnak( 44, new StringValue( 'newreferencevalue' ) )
-						) ) ) ),
-						new DiffOpRemove( new Reference( new SnakList( array(
+						] ) ) ),
+						new DiffOpRemove( new Reference( new SnakList( [
 							new PropertyValueSnak( 44, new StringValue( 'oldreferencevalue' ) )
-						) ) ) )
-					) )
+						] ) ) )
+					] )
 				),
 				new Statement( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) ) ),
 				// mainsnak change
@@ -260,8 +260,8 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 				. '<span>P44: oldreferencevalue (DETAILED)</span></del></div></td>'
 				. '<td colspan="2">&nbsp;</td>'
 				. '</tr>'
-			),
-			'mainsnak and rank' => array(
+			],
+			'mainsnak and rank' => [
 				new ClaimDifference(
 					new DiffOpChange(
 						new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'oldmainsnakvalue' ) ),
@@ -287,8 +287,8 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 				'<div><del class="diffchange diffchange-inline"><span>Normal rank</span></del></div></td>'.
 				'<td class="diff-marker">+</td><td class="diff-addedline">'.
 				'<div><ins class="diffchange diffchange-inline"><span>Preferred rank</span></ins></div></td></tr>'
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -329,12 +329,12 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 		$visualizer = $this->newClaimDifferenceVisualizer();
 		$claim = new Statement(
 			new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'foo' ) ),
-			new SnakList( array( new PropertyValueSnak( 50, new StringValue( 'v' ) ) ) ),
-			new ReferenceList( array(
+			new SnakList( [ new PropertyValueSnak( 50, new StringValue( 'v' ) ) ] ),
+			new ReferenceList( [
 				new Reference(
-					new SnakList( array(
+					new SnakList( [
 						new PropertyValueSnak( new PropertyId( 'P44' ), new StringValue( 'referencevalue' ) )
-					) ) ) ) ) );
+					] ) ) ] ) );
 		$html = $visualizer->visualizeNewClaim( $claim );
 
 		$this->assertHtmlEquals( $expect, $html );
@@ -373,12 +373,12 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 		$visualizer = $this->newClaimDifferenceVisualizer();
 		$claim = new Statement(
 			new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'foo' ) ),
-			new SnakList( array( new PropertyValueSnak( 50, new StringValue( 'v' ) ) ) ),
-			new ReferenceList( array(
+			new SnakList( [ new PropertyValueSnak( 50, new StringValue( 'v' ) ) ] ),
+			new ReferenceList( [
 				new Reference(
-					new SnakList( array(
+					new SnakList( [
 						new PropertyValueSnak( new PropertyId( 'P44' ), new StringValue( 'referencevalue' ) )
-					) ) ) ) ) );
+					] ) ) ] ) );
 		$html = $visualizer->visualizeRemovedClaim( $claim );
 
 		$this->assertHtmlEquals( $expect, $html );

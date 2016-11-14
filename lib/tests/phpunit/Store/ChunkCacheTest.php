@@ -16,7 +16,7 @@ use Wikibase\ChunkCache;
 class ChunkCacheTest extends \MediaWikiTestCase {
 
 	protected static function getTestData() {
-		static $data = array();
+		static $data = [];
 
 		if ( empty( $data ) ) {
 			for ( $i = 0; $i < 100; $i++ ) {
@@ -30,30 +30,30 @@ class ChunkCacheTest extends \MediaWikiTestCase {
 	protected static function makeCacheAction( $start, $length, $info ) {
 		$data = self::getTestData();
 
-		return array(
+		return [
 			'start' => $start,
 			'length' => $length,
 			'expected' => array_slice( $data, $start, $length ),
 			'info' => $info
-		);
+		];
 	}
 
 	public function provideLoadChunk() {
-		return array(
-			array( // #0: basic loading
+		return [
+			[ // #0: basic loading
 				10,  // chunkSize
 				50, // maxSize
-				array(
+				[
 					self::makeCacheAction( 0, 4, 'start at the start' ),
 					self::makeCacheAction( 10, 4, 'start at ten' ),
 					self::makeCacheAction( 98, 5, 'exceed end' ),
-				)
-			),
+				]
+			],
 
-			array( // #1: matching & loading
+			[ // #1: matching & loading
 				10,  // chunkSize
 				50, // maxSize
-				array(
+				[
 					self::makeCacheAction( 20, 4, 'start in the middle' ),
 
 					self::makeCacheAction( 16, 4, 'fit block before' ),
@@ -67,23 +67,23 @@ class ChunkCacheTest extends \MediaWikiTestCase {
 
 					self::makeCacheAction( 21, 2, 'single chunk match' ),
 					self::makeCacheAction( 18, 8, 'multi chunk match' ),
-				)
-			),
+				]
+			],
 
-			array( // #2: pruning
+			[ // #2: pruning
 				3, // chunkSize
 				7, // maxSize
-				array(
+				[
 					self::makeCacheAction( 3, 3, 'first chunk fits' ),
 					self::makeCacheAction( 0, 3, 'second chunk fits' ),
 					self::makeCacheAction( 2, 4, 'third chunk is a hit' ),
 					self::makeCacheAction( 16, 4, 'fourth chunk triggers prune' ),
 					self::makeCacheAction( 22, 4, 'fifth chunk triggers prune' ),
 					self::makeCacheAction( 26, 4, 'sixth chunk triggers prune' ),
-				)
-			),
+				]
+			],
 
-		);
+		];
 	}
 
 	/**

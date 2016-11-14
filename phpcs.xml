@@ -5,6 +5,8 @@
 		<exclude name="MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment" />
 	</rule>
 
+	<rule ref="Generic.Arrays.DisallowLongArraySyntax" />
+
 	<rule ref="Generic.Classes.DuplicateClassName.Found">
 		<exclude-pattern>DataAccess.Scribunto.Scribunto_LuaWikibaseLibraryTestCase\.php</exclude-pattern>
 	</rule>

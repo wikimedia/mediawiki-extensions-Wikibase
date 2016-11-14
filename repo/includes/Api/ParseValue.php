@@ -115,7 +115,7 @@ class ParseValue extends ApiBase {
 
 		$parser = $this->getParser();
 
-		$results = array();
+		$results = [];
 
 		$params = $this->extractRequestParams();
 		$validator = $params['validate'] ? $this->getValidator() : null;
@@ -197,9 +197,9 @@ class ParseValue extends ApiBase {
 	 * @return array
 	 */
 	private function parseStringValue( ValueParser $parser, $value, ValueValidator $validator = null ) {
-		$result = array(
+		$result = [
 			'raw' => $value
-		);
+		];
 
 		try {
 			$parseResult = $parser->parse( $value );
@@ -312,50 +312,50 @@ class ParseValue extends ApiBase {
 	 * @see ApiBase::getAllowedParams
 	 */
 	public function getAllowedParams() {
-		return array(
-			'datatype' => array(
+		return [
+			'datatype' => [
 				ApiBase::PARAM_TYPE => $this->dataTypeFactory->getTypeIds(),
 
 				// Currently, the deprecated 'parser' parameter may be used as an
 				// alternative to the 'datatype' parameter. Once 'parser' is removed,
 				// 'datatype' should be required.
 				ApiBase::PARAM_REQUIRED => false,
-			),
-			'parser' => array(
+			],
+			'parser' => [
 				self::PARAM_TYPE => $this->valueParserFactory->getParserIds(),
 
 				// Use 'datatype' instead!
 				// NOTE: when removing the 'parser' parameter, set 'datatype' to PARAM_REQUIRED
 				self::PARAM_DEPRECATED => true,
 				self::PARAM_REQUIRED => false,
-			),
-			'values' => array(
+			],
+			'values' => [
 				self::PARAM_TYPE => 'string',
 				self::PARAM_REQUIRED => true,
 				self::PARAM_ISMULTI => true,
-			),
-			'options' => array(
+			],
+			'options' => [
 				self::PARAM_TYPE => 'text',
 				self::PARAM_REQUIRED => false,
-			),
-			'validate' => array(
+			],
+			'validate' => [
 				ApiBase::PARAM_TYPE => 'boolean',
-			),
-		);
+			],
+		];
 	}
 
 	/**
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
-		return array(
+		return [
 			'action=wbparsevalue&datatype=string&values=foo|bar' =>
 				'apihelp-wbparsevalue-example-1',
 			'action=wbparsevalue&datatype=time&values=1994-02-08&options={"precision":9}' =>
 				'apihelp-wbparsevalue-example-2',
 			'action=wbparsevalue&datatype=time&validate&values=1994-02-08&options={"precision":14}' =>
 				'apihelp-wbparsevalue-example-3',
-		);
+		];
 	}
 
 }

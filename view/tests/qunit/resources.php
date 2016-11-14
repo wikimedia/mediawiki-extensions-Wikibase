@@ -9,20 +9,20 @@
 $remoteExtPathParts = explode(
 	DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR, __DIR__, 2
 );
-$moduleBase = array(
+$moduleBase = [
 	'localBasePath' => __DIR__,
 	'remoteExtPath' => $remoteExtPathParts[1],
-);
+];
 
-$modules = array(
-	'wikibase.tests.getMockListItemAdapter' => $moduleBase + array(
+$modules = [
+	'wikibase.tests.getMockListItemAdapter' => $moduleBase + [
 		'scripts' => 'getMockListItemAdapter.js',
-		'dependencies' => array(
+		'dependencies' => [
 			'jquery.wikibase.listview',
 			'wikibase.tests',
-		)
-	)
-);
+		]
+	]
+];
 
 return array_merge(
 	$modules,

@@ -26,7 +26,7 @@ class ItemMergeException extends MessageException {
 	 * @param Exception|null $previous The previous exception that caused this exception.
 	 */
 	public function __construct( $message, $errorCode = '', Exception $previous = null ) {
-		parent::__construct( 'wikibase-itemmerge-' . $errorCode, array(), $message, $previous );
+		parent::__construct( 'wikibase-itemmerge-' . $errorCode, [], $message, $previous );
 		$this->errorCode = $errorCode;
 	}
 

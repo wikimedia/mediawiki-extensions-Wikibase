@@ -13,11 +13,11 @@ use ValueParsers\BasicNumberUnlocalizer;
  */
 class MediaWikiNumberUnlocalizer extends BasicNumberUnlocalizer {
 
-	protected static $unlocalizerMap = array(
+	protected static $unlocalizerMap = [
 		"\xe2\x88\x92" => '-', // convert minus (U+2212) to hyphen
 		"\xe2\x93\x96" => '-', // convert "heavy minus" (U+2796) to hyphen
 		"\xe2\x93\x95" => '+', // convert "heavy plus" (U+2795) to plus
-	);
+	];
 
 	/**
 	 * @var Language

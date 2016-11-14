@@ -57,10 +57,10 @@ class EditEntityAction extends ViewEntityAction {
 		$languageCode = $this->getContext()->getLanguage()->getCode();
 
 		//TODO: proper injection
-		$options = new FormatterOptions( array(
+		$options = new FormatterOptions( [
 			//TODO: fallback chain
 			ValueFormatter::OPT_LANG => $languageCode
-		) );
+		] );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$termLookup = new EntityRetrievingTermLookup( $wikibaseRepo->getEntityLookup() );
@@ -229,7 +229,7 @@ class EditEntityAction extends ViewEntityAction {
 			return Status::newFatal( 'wikibase-undo-nocontent', $this->getTitle(), $latestRevision->getId() );
 		}
 
-		return Status::newGood( array( $olderRevision, $newerRevision, $latestRevision ) );
+		return Status::newGood( [ $olderRevision, $newerRevision, $latestRevision ] );
 	}
 
 	/**
@@ -371,7 +371,7 @@ class EditEntityAction extends ViewEntityAction {
 		return Linker::linkKnown(
 			$this->getContext()->getTitle(),
 			$this->msg( 'cancel' )->parse(),
-			array( 'id' => 'mw-editform-cancel' )
+			[ 'id' => 'mw-editform-cancel' ]
 		);
 	}
 
@@ -391,17 +391,17 @@ class EditEntityAction extends ViewEntityAction {
 	 */
 	private function getSummaryInput( $labelText ) {
 		// Note: the maxlength is overriden in JS to 255 and to make it use UTF-8 bytes, not characters.
-		$inputAttrs = array(
+		$inputAttrs = [
 			'id' => 'wpSummary',
 			'maxlength' => 200,
 			'size' => 60,
 			'spellcheck' => 'true',
-		) + Linker::tooltipAndAccesskeyAttribs( 'summary' );
+		] + Linker::tooltipAndAccesskeyAttribs( 'summary' );
 
-		$spanLabelAttrs = array(
+		$spanLabelAttrs = [
 			'class' => 'mw-summary',
 			'id' => 'wpSummaryLabel',
-		);
+		];
 
 		$label = null;
 		if ( $labelText ) {
@@ -411,7 +411,7 @@ class EditEntityAction extends ViewEntityAction {
 
 		$input = Html::input( 'wpSummary', '', 'text', $inputAttrs );
 
-		return array( $label, $input );
+		return [ $label, $input ];
 	}
 
 	/**
@@ -420,7 +420,7 @@ class EditEntityAction extends ViewEntityAction {
 	private function displayUndoDiff( EntityContentDiff $diff ) {
 		$tableClass = 'diff diff-contentalign-' . htmlspecialchars( $this->getTitle()->getPageLanguage()->alignStart() );
 
-		$this->getOutput()->addHTML( Html::openElement( 'table', array( 'class' => $tableClass ) ) );
+		$this->getOutput()->addHTML( Html::openElement( 'table', [ 'class' => $tableClass ] ) );
 
 		$this->getOutput()->addHTML( '<colgroup>'
 			. '<col class="diff-marker"><col class="diff-content">'
@@ -431,15 +431,15 @@ class EditEntityAction extends ViewEntityAction {
 		$old = $this->msg( 'currentrev' )->parse();
 		$new = $this->msg( 'yourtext' )->parse(); //XXX: better message?
 
-		$this->getOutput()->addHTML( Html::openElement( 'tr', array( 'style' => 'vertical-align: top;' ) ) );
+		$this->getOutput()->addHTML( Html::openElement( 'tr', [ 'style' => 'vertical-align: top;' ] ) );
 		$this->getOutput()->addHTML(
-			Html::rawElement( 'td', array( 'colspan' => '2' ),
-				Html::rawElement( 'div', array( 'id' => 'mw-diff-otitle1' ), $old )
+			Html::rawElement( 'td', [ 'colspan' => '2' ],
+				Html::rawElement( 'div', [ 'id' => 'mw-diff-otitle1' ], $old )
 			)
 		);
 		$this->getOutput()->addHTML(
-			Html::rawElement( 'td', array( 'colspan' => '2' ),
-				Html::rawElement( 'div', array( 'id' => 'mw-diff-ntitle1' ), $new )
+			Html::rawElement( 'td', [ 'colspan' => '2' ],
+				Html::rawElement( 'div', [ 'id' => 'mw-diff-ntitle1' ], $new )
 			)
 		);
 		$this->getOutput()->addHTML( Html::closeElement( 'tr' ) );
@@ -460,11 +460,11 @@ class EditEntityAction extends ViewEntityAction {
 			'wpSave',
 			$this->msg( 'savearticle' )->text(),
 			'submit',
-			array(
+			[
 				'id' => 'wpSave',
 				'accesskey' => $this->msg( 'accesskey-save' )->text(),
 				'title' => $this->msg( 'tooltip-save' )->text() . ' [' . $this->msg( 'accesskey-save' )->text() . ']',
-			)
+			]
 		);
 	}
 
@@ -476,9 +476,9 @@ class EditEntityAction extends ViewEntityAction {
 	private function showConfirmationForm( $undidRevision = 0 ) {
 		$req = $this->getRequest();
 
-		$args = array(
+		$args = [
 			'action' => 'submit',
-		);
+		];
 
 		if ( $req->getInt( 'undo' ) ) {
 			$args[ 'undo' ] = $req->getInt( 'undo' );
@@ -494,14 +494,14 @@ class EditEntityAction extends ViewEntityAction {
 
 		$actionUrl = $this->getTitle()->getLocalURL( $args );
 
-		$this->getOutput()->addHTML( Html::openElement( 'div', array( 'style' => 'margin-top: 1em;' ) ) );
+		$this->getOutput()->addHTML( Html::openElement( 'div', [ 'style' => 'margin-top: 1em;' ] ) );
 
-		$this->getOutput()->addHTML( Html::openElement( 'form', array(
+		$this->getOutput()->addHTML( Html::openElement( 'form', [
 			'id' => 'undo',
 			'name' => 'undo',
 			'method' => 'post',
 			'action' => $actionUrl,
-			'enctype' => 'multipart/form-data' ) ) );
+			'enctype' => 'multipart/form-data' ] ) );
 
 		$this->getOutput()->addHTML( "<p class='editOptions'>\n" );
 
@@ -516,10 +516,10 @@ class EditEntityAction extends ViewEntityAction {
 
 		$this->getOutput()->addHTML( "</p><!-- editButtons -->\n</p><!-- editOptions -->\n" );
 
-		$hidden = array(
+		$hidden = [
 			'wpEditToken' => $this->getUser()->getEditToken(),
 			'wpBaseRev' => $this->getTitle()->getLatestRevID(),
-		);
+		];
 		if ( !empty( $undidRevision ) ) {
 			$hidden['wpUndidRevision'] = $undidRevision;
 		}

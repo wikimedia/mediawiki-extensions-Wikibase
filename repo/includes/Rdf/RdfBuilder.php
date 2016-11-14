@@ -37,7 +37,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 *
 	 * @var bool[]
 	 */
-	private $entitiesResolved = array();
+	private $entitiesResolved = [];
 
 	/**
 	 * What the serializer would produce?
@@ -66,7 +66,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 * RDF builders to apply when building RDF for an entity.
 	 * @var EntityRdfBuilder[]
 	 */
-	private $builders = array();
+	private $builders = [];
 
 	/**
 	 * @var RdfVocabulary
@@ -426,7 +426,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 */
 	private function propertyIsLink( Property $property ) {
 		// For now, it's very simple but can be more complex later
-		return in_array( $property->getDataTypeId(), array( 'wikibase-item', 'wikibase-property', 'url', 'commonsMedia' ) );
+		return in_array( $property->getDataTypeId(), [ 'wikibase-item', 'wikibase-property', 'url', 'commonsMedia' ] );
 	}
 
 	/**

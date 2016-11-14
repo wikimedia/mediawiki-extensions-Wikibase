@@ -27,7 +27,7 @@ class SqlIdGeneratorTest extends \MediaWikiTestCase {
 	}
 
 	public function testIdBlacklisting() {
-		$generator = new SqlIdGenerator( wfGetLB(), array( 1, 2 ) );
+		$generator = new SqlIdGenerator( wfGetLB(), [ 1, 2 ] );
 
 		$id = $generator->getNewId( 'wikibase-blacklist' );
 		$this->assertSame( 3, $id );

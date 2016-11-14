@@ -137,28 +137,28 @@ class SetClaimValue extends ApiBase {
 	 */
 	protected function getAllowedParams() {
 		return array_merge(
-			array(
-				'claim' => array(
+			[
+				'claim' => [
 					self::PARAM_TYPE => 'string',
 					self::PARAM_REQUIRED => true,
-				),
-				'value' => array(
+				],
+				'value' => [
 					self::PARAM_TYPE => 'text',
 					self::PARAM_REQUIRED => false,
-				),
-				'snaktype' => array(
-					self::PARAM_TYPE => array( 'value', 'novalue', 'somevalue' ),
+				],
+				'snaktype' => [
+					self::PARAM_TYPE => [ 'value', 'novalue', 'somevalue' ],
 					self::PARAM_REQUIRED => true,
-				),
-				'summary' => array(
+				],
+				'summary' => [
 					self::PARAM_TYPE => 'string',
-				),
+				],
 				'token' => null,
-				'baserevid' => array(
+				'baserevid' => [
 					self::PARAM_TYPE => 'integer',
-				),
+				],
 				'bot' => false,
-			),
+			],
 			parent::getAllowedParams()
 		);
 	}
@@ -167,11 +167,11 @@ class SetClaimValue extends ApiBase {
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
-		return array(
+		return [
 			'action=wbsetclaimvalue&claim=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F&snaktype=value'
 				. '&value={"entity-type":"item","numeric-id":1}&token=foobar&baserevid=7201010'
 				=> 'apihelp-wbsetclaimvalue-example-1',
-		);
+		];
 	}
 
 }

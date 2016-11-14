@@ -34,7 +34,7 @@ class EntityTermLookup extends EntityTermLookupBase {
 	 * @return string[]
 	 */
 	protected function getTermsOfType( EntityId $entityId, $termType, array $languageCodes = null ) {
-		$wikibaseTerms = $this->termIndex->getTermsOfEntity( $entityId, array( $termType ), $languageCodes );
+		$wikibaseTerms = $this->termIndex->getTermsOfEntity( $entityId, [ $termType ], $languageCodes );
 
 		return $this->convertTermsToMap( $wikibaseTerms );
 	}

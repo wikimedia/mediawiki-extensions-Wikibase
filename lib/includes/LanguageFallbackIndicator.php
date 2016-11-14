@@ -62,7 +62,7 @@ class LanguageFallbackIndicator {
 			$classes .= ' wb-language-fallback-variant';
 		}
 
-		$attributes = array( 'class' => $classes );
+		$attributes = [ 'class' => $classes ];
 
 		$html = Html::element( 'sup', $attributes, $text );
 		return $html;

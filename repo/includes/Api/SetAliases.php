@@ -70,7 +70,7 @@ class SetAliases extends ModifyEntity {
 	 * @return string[] A list of permissions
 	 */
 	protected function getRequiredPermissions( EntityDocument $entity ) {
-		$permissions = $this->isWriteMode() ? array( 'read', 'edit' ) : array( 'read' );
+		$permissions = $this->isWriteMode() ? [ 'read', 'edit' ] : [ 'read' ];
 		$permissions[] = $entity->getType() . '-term';
 		return $permissions;
 	}
@@ -127,7 +127,7 @@ class SetAliases extends ModifyEntity {
 		}
 
 		if ( $aliasGroups->hasGroupForLanguage( $language ) ) {
-			$aliasGroupList = $aliasGroups->getWithLanguages( array( $language ) );
+			$aliasGroupList = $aliasGroups->getWithLanguages( [ $language ] );
 			$this->getResultBuilder()->addAliasGroupList( $aliasGroupList, 'entity' );
 		}
 
@@ -165,7 +165,7 @@ class SetAliases extends ModifyEntity {
 	 * @return ChangeOpAliases
 	 */
 	private function getChangeOps( array $params ) {
-		$changeOps = array();
+		$changeOps = [];
 		$language = $params['language'];
 
 		// Set the list of aliases to a user given one OR add/ remove certain entries
@@ -205,24 +205,24 @@ class SetAliases extends ModifyEntity {
 	protected function getAllowedParams() {
 		return array_merge(
 			parent::getAllowedParams(),
-			array(
-				'add' => array(
+			[
+				'add' => [
 					self::PARAM_TYPE => 'string',
 					self::PARAM_ISMULTI => true,
-				),
-				'remove' => array(
+				],
+				'remove' => [
 					self::PARAM_TYPE => 'string',
 					self::PARAM_ISMULTI => true,
-				),
-				'set' => array(
+				],
+				'set' => [
 					self::PARAM_TYPE => 'string',
 					self::PARAM_ISMULTI => true,
-				),
-				'language' => array(
+				],
+				'language' => [
 					self::PARAM_TYPE => WikibaseRepo::getDefaultInstance()->getTermsLanguages()->getLanguages(),
 					self::PARAM_REQUIRED => true,
-				),
-			)
+				],
+			]
 		);
 	}
 
@@ -230,7 +230,7 @@ class SetAliases extends ModifyEntity {
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
-		return array(
+		return [
 			'action=wbsetaliases&language=en&id=Q1&set=Foo|Bar'
 				=> 'apihelp-wbsetaliases-example-1',
 
@@ -242,7 +242,7 @@ class SetAliases extends ModifyEntity {
 
 			'action=wbsetaliases&language=en&id=Q1&remove=Foo&add=Bar'
 				=> 'apihelp-wbsetaliases-example-4',
-		);
+		];
 	}
 
 }

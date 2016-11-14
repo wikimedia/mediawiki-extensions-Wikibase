@@ -53,7 +53,7 @@ class StatementGrouperBuilderTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testAcceptsEmptyArray() {
-		$builder = $this->newInstance( array() );
+		$builder = $this->newInstance( [] );
 		$grouper = $builder->getStatementGrouper();
 		$this->assertInstanceOf( DispatchingEntityTypeStatementGrouper::class, $grouper );
 	}
@@ -61,52 +61,52 @@ class StatementGrouperBuilderTest extends PHPUnit_Framework_TestCase {
 	public function testAcceptsNullGrouper() {
 		$statements = $this->newStatementList();
 
-		$builder = $this->newInstance( array(
+		$builder = $this->newInstance( [
 			'item' => null,
-		) );
+		] );
 		$grouper = $builder->getStatementGrouper();
 		$groups = $grouper->groupStatements( $statements );
 
-		$this->assertSame( array( 'statements' => $statements ), $groups );
+		$this->assertSame( [ 'statements' => $statements ], $groups );
 	}
 
 	public function testAcceptsDefaultFilter() {
 		$statements = $this->newStatementList();
 
-		$builder = $this->newInstance( array(
-			'item' => array(
+		$builder = $this->newInstance( [
+			'item' => [
 				'default' => null,
-			)
-		) );
+			]
+		] );
 		$grouper = $builder->getStatementGrouper();
 		$groups = $grouper->groupStatements( $statements );
 
-		$this->assertEquals( array( 'default' => $statements ), $groups );
+		$this->assertEquals( [ 'default' => $statements ], $groups );
 	}
 
 	public function testAcceptsNullFilter() {
 		$statements = $this->newStatementList();
 
-		$builder = $this->newInstance( array(
-			'item' => array(
-				'custom' => array( 'type' => null ),
-			)
-		) );
+		$builder = $this->newInstance( [
+			'item' => [
+				'custom' => [ 'type' => null ],
+			]
+		] );
 		$grouper = $builder->getStatementGrouper();
 		$groups = $grouper->groupStatements( $statements );
 
-		$this->assertEquals( array(
+		$this->assertEquals( [
 			'custom' => $statements,
 			'statements' => new StatementList(),
-		), $groups );
+		], $groups );
 	}
 
 	public function testIncompleteDataTypeFilter() {
-		$builder = $this->newInstance( array(
-			'item' => array(
-				'custom' => array( 'type' => 'dataType' ),
-			)
-		) );
+		$builder = $this->newInstance( [
+			'item' => [
+				'custom' => [ 'type' => 'dataType' ],
+			]
+		] );
 		$this->setExpectedException( InvalidArgumentException::class );
 		$builder->getStatementGrouper();
 	}
@@ -114,26 +114,26 @@ class StatementGrouperBuilderTest extends PHPUnit_Framework_TestCase {
 	public function testDataTypeFilter() {
 		$statements = $this->newStatementList();
 
-		$builder = $this->newInstance( array(
-			'item' => array(
-				'custom' => array( 'type' => 'dataType', 'dataTypes' => array( 'string' ) ),
-			)
-		) );
+		$builder = $this->newInstance( [
+			'item' => [
+				'custom' => [ 'type' => 'dataType', 'dataTypes' => [ 'string' ] ],
+			]
+		] );
 		$grouper = $builder->getStatementGrouper();
 		$groups = $grouper->groupStatements( $statements );
 
-		$this->assertEquals( array(
+		$this->assertEquals( [
 			'custom' => $statements,
 			'statements' => new StatementList(),
-		), $groups );
+		], $groups );
 	}
 
 	public function testIncompletePropertySetFilter() {
-		$builder = $this->newInstance( array(
-			'item' => array(
-				'custom' => array( 'type' => 'propertySet' ),
-			)
-		) );
+		$builder = $this->newInstance( [
+			'item' => [
+				'custom' => [ 'type' => 'propertySet' ],
+			]
+		] );
 		$this->setExpectedException( InvalidArgumentException::class );
 		$builder->getStatementGrouper();
 	}
@@ -141,26 +141,26 @@ class StatementGrouperBuilderTest extends PHPUnit_Framework_TestCase {
 	public function testPropertySetFilter() {
 		$statements = $this->newStatementList();
 
-		$builder = $this->newInstance( array(
-			'item' => array(
-				'custom' => array( 'type' => 'propertySet', 'propertyIds' => array( 'P1' ) ),
-			)
-		) );
+		$builder = $this->newInstance( [
+			'item' => [
+				'custom' => [ 'type' => 'propertySet', 'propertyIds' => [ 'P1' ] ],
+			]
+		] );
 		$grouper = $builder->getStatementGrouper();
 		$groups = $grouper->groupStatements( $statements );
 
-		$this->assertEquals( array(
+		$this->assertEquals( [
 			'custom' => $statements,
 			'statements' => new StatementList(),
-		), $groups );
+		], $groups );
 	}
 
 	public function testInvalidFilterType() {
-		$builder = $this->newInstance( array(
-			'item' => array(
-				'custom' => array( 'type' => 'invalid' ),
-			)
-		) );
+		$builder = $this->newInstance( [
+			'item' => [
+				'custom' => [ 'type' => 'invalid' ],
+			]
+		] );
 		$this->setExpectedException( InvalidArgumentException::class );
 		$builder->getStatementGrouper();
 	}

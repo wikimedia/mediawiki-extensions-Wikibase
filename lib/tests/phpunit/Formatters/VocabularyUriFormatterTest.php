@@ -23,17 +23,17 @@ use Wikibase\Lib\VocabularyUriFormatter;
 class VocabularyUriFormatterTest extends PHPUnit_Framework_TestCase {
 
 	public function unitProvider() {
-		return array(
-			'empty unit' => array( '', null ),
-			'unit is 1' => array( '1', null ),
-			'unit is "NotAUnit"' => array( 'NotAUnit', null ),
-			'unit is bad id' => array( 'kittens', 'kittens' ),
-			'unit has label' => array( 'Q7', 'LABEL:Q7' ),
-			'unit has no label' => array( 'Q112233', 'Q112233' ),
-			'unknown int' => array( '2', '2' ),
-			'unknown URI' => array( 'http://www.wikidata.org/entity/Q200', 'http://www.wikidata.org/entity/Q200' ),
-			'property id' => array( 'P7', 'LABEL:P7' ),
-		);
+		return [
+			'empty unit' => [ '', null ],
+			'unit is 1' => [ '1', null ],
+			'unit is "NotAUnit"' => [ 'NotAUnit', null ],
+			'unit is bad id' => [ 'kittens', 'kittens' ],
+			'unit has label' => [ 'Q7', 'LABEL:Q7' ],
+			'unit has no label' => [ 'Q112233', 'Q112233' ],
+			'unknown int' => [ '2', '2' ],
+			'unknown URI' => [ 'http://www.wikidata.org/entity/Q200', 'http://www.wikidata.org/entity/Q200' ],
+			'property id' => [ 'P7', 'LABEL:P7' ],
+		];
 	}
 
 	/**
@@ -52,7 +52,7 @@ class VocabularyUriFormatterTest extends PHPUnit_Framework_TestCase {
 
 		$idParser = new BasicEntityIdParser();
 
-		$formatter = new VocabularyUriFormatter( $idParser, $labelLookup, array( 'NotAUnit' ) );
+		$formatter = new VocabularyUriFormatter( $idParser, $labelLookup, [ 'NotAUnit' ] );
 
 		$this->assertEquals( $expected, $formatter->format( $unit ) );
 	}

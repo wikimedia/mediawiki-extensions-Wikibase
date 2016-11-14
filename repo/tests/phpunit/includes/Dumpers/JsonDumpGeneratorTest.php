@@ -66,7 +66,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityDocument[]
 	 */
 	public function makeEntities( array $ids ) {
-		$entities = array();
+		$entities = [];
 
 		foreach ( $ids as $id ) {
 			$entity = $this->makeEntity( $id );
@@ -106,7 +106,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @return JsonDumpGenerator
 	 */
-	protected function newDumpGenerator( array $ids = array(), array $missingIds = array(), array $redirectedIds = array() ) {
+	protected function newDumpGenerator( array $ids = [], array $missingIds = [], array $redirectedIds = [] ) {
 		$out = fopen( 'php://output', 'w' );
 
 		$serializer = $this->serializerFactory->newEntitySerializer();
@@ -148,7 +148,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityId[]
 	 */
 	public function listEntities( array $ids, $entityType, $limit, &$offset = 0 ) {
-		$result = array();
+		$result = [];
 		$size = count( $ids );
 
 		while ( $offset < $size && count( $result ) < $limit ) {
@@ -205,7 +205,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$json = ob_get_clean();
 
 		$data = json_decode( $json, true );
-		$this->assertEquals( array(), $data );
+		$this->assertEquals( [], $data );
 	}
 
 	/**
@@ -221,7 +221,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$json = ob_get_clean();
 
 		$data = json_decode( $json, true );
-		$this->assertEquals( array(), $data );
+		$this->assertEquals( [], $data );
 	}
 
 	private function getJsonDumperWithExceptionHandler( array $ids, Exception $ex ) {
@@ -281,10 +281,10 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$p10 = new PropertyId( 'P10' );
 		$q30 = new ItemId( 'Q30' );
 
-		return array(
-			'empty' => array( array() ),
-			'some entities' => array( array( $p10, $q30 ) ),
-		);
+		return [
+			'empty' => [ [] ],
+			'some entities' => [ [ $p10, $q30 ] ],
+		];
 	}
 
 	/**
@@ -339,19 +339,19 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$p10 = new PropertyId( 'P10' );
 		$q30 = new ItemId( 'Q30' );
 
-		return array(
-			'empty' => array( array(), null, array() ),
-			'some entities' => array( array( $p10, $q30 ), null, array( $p10, $q30 ) ),
-			'just properties' => array( array( $p10, $q30 ), Property::ENTITY_TYPE, array( $p10 ) ),
-			'no matches' => array( array( $p10 ), Item::ENTITY_TYPE, array() ),
-		);
+		return [
+			'empty' => [ [], null, [] ],
+			'some entities' => [ [ $p10, $q30 ], null, [ $p10, $q30 ] ],
+			'just properties' => [ [ $p10, $q30 ], Property::ENTITY_TYPE, [ $p10 ] ],
+			'no matches' => [ [ $p10 ], Item::ENTITY_TYPE, [] ],
+		];
 	}
 
 	/**
 	 * @dataProvider shardingProvider
 	 */
 	public function testSharding( array $ids, $shardingFactor ) {
-		$actualIds = array();
+		$actualIds = [];
 		$dumper = $this->newDumpGenerator( $ids );
 
 		// Generate and check a dump for each shard,
@@ -375,7 +375,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 			// check shard
 			$this->assertEquals(
-				array(),
+				[],
 				array_intersect( $actualIds, $shardIds ),
 				'shard ' . $shard . ' overlaps previous shards'
 			);
@@ -394,7 +394,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function shardingProvider() {
-		$ids = array();
+		$ids = [];
 
 		for ( $i = 10; $i < 20; $i++ ) {
 			$ids[] = new PropertyId( "P$i" );
@@ -406,21 +406,21 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 			$ids[] = new ItemId( "Q$i" );
 		}
 
-		return array(
-			'empty sharding' => array( array(), 2 ),
-			'no sharding' => array( $ids, 1 ),
-			'two shards' => array( $ids, 2 ),
-			'three shards' => array( $ids, 3 ),
-			'five shards' => array( $ids, 5 ),
-			'ten shards' => array( $ids, 10 ),
-		);
+		return [
+			'empty sharding' => [ [], 2 ],
+			'no sharding' => [ $ids, 1 ],
+			'two shards' => [ $ids, 2 ],
+			'three shards' => [ $ids, 3 ],
+			'five shards' => [ $ids, 5 ],
+			'ten shards' => [ $ids, 10 ],
+		];
 	}
 
 	/**
 	 * @dataProvider badShardingProvider
 	 */
 	public function testInvalidSharding( $shardingFactor, $shard ) {
-		$dumper = $this->newDumpGenerator( array() );
+		$dumper = $this->newDumpGenerator( [] );
 
 		$this->setExpectedException( InvalidArgumentException::class );
 
@@ -428,21 +428,21 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function badShardingProvider() {
-		return array(
-			array( 0, 0 ),
-			array( 1, 1 ),
-			array( 2, 3 ),
-			array( 2, -1 ),
-			array( -2, 2 ),
-			array( -3, -2 ),
-			array( -2, -3 ),
-			array( array(), 1 ),
-			array( 2, array() ),
-			array( null, 1 ),
-			array( 2, null ),
-			array( '2', 1 ),
-			array( 2, '1' ),
-		);
+		return [
+			[ 0, 0 ],
+			[ 1, 1 ],
+			[ 2, 3 ],
+			[ 2, -1 ],
+			[ -2, 2 ],
+			[ -3, -2 ],
+			[ -2, -3 ],
+			[ [], 1 ],
+			[ 2, [] ],
+			[ null, 1 ],
+			[ 2, null ],
+			[ '2', 1 ],
+			[ 2, '1' ],
+		];
 	}
 
 	/**
@@ -457,16 +457,16 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function dataProvider() {
-		return array(
-			'string' => array( 'bla' ),
-			'list' => array( array( 'a', 'b', 'c' ) ),
-			'map' => array( array( 'a' => 1, 'b' => 2, 'c' => 3 ) ),
-		);
+		return [
+			'string' => [ 'bla' ],
+			'list' => [ [ 'a', 'b', 'c' ] ],
+			'map' => [ [ 'a' => 1, 'b' => 2, 'c' => 3 ] ],
+		];
 	}
 
 	public function testExceptionHandler() {
-		$ids = array();
-		$missingIds = array();
+		$ids = [];
+		$missingIds = [];
 
 		for ( $i = 1; $i <= 100; $i++ ) {
 			$id = new ItemId( "Q$i" );
@@ -496,7 +496,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testProgressReporter() {
-		$ids = array();
+		$ids = [];
 
 		for ( $i = 1; $i <= 100; $i++ ) {
 			$id = new ItemId( "Q$i" );
@@ -542,32 +542,32 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function useSnippetsProvider() {
-		$ids = array();
+		$ids = [];
 
 		for ( $i = 1; $i < 5; $i++ ) {
 			$ids[] = new ItemId( "Q$i" );
 		}
 
-		return array(
+		return [
 			// Only one shard
-			array( $ids, 1, 0, ),
+			[ $ids, 1, 0, ],
 
 			// Three shards
-			array( $ids, 3, 0, ),
-			array( $ids, 3, 1, ),
-			array( $ids, 3, 2, ),
-		);
+			[ $ids, 3, 0, ],
+			[ $ids, 3, 1, ],
+			[ $ids, 3, 2, ],
+		];
 	}
 
 	public function testRedirectsNotIncluded() {
-		$ids = array();
+		$ids = [];
 
 		for ( $i = 1; $i <= 10; $i++ ) {
 			$id = new ItemId( "Q$i" );
 			$ids[] = $id;
 		}
 
-		$dumper = $this->newDumpGenerator( $ids, array(), array( new ItemId( 'Q9' ) ) );
+		$dumper = $this->newDumpGenerator( $ids, [], [ new ItemId( 'Q9' ) ] );
 		$pager = $this->makeIdPager( $ids );
 
 		$dumper->setBatchSize( 10 );

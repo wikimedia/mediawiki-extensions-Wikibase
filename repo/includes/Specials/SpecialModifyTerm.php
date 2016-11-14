@@ -78,7 +78,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		parent::prepareArguments( $subPage );
 
 		$request = $this->getRequest();
-		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
+		$parts = ( $subPage === '' ) ? [] : explode( '/', $subPage, 2 );
 
 		// Language
 		$this->languageCode = $request->getVal( 'language', isset( $parts[1] ) ? $parts[1] : '' );
@@ -192,10 +192,10 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			'value',
 			$this->getRequest()->getVal( 'value' ) ? $this->getRequest()->getVal( 'value' ) : $this->value,
 			'text',
-			array(
+			[
 				'class' => 'wb-input',
 				'id' => 'wb-modifyterm-value',
-			)
+			]
 		);
 
 		$languageName = Language::fetchLanguageName( $this->languageCode, $this->getLanguage()->getCode() );
@@ -203,7 +203,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		if ( $entity !== null && $this->languageCode !== null && $languageName !== '' ) {
 			return Html::rawElement(
 				'p',
-				array(),
+				[],
 				// Messages: wikibase-setlabel-introfull, wikibase-setdescription-introfull,
 				// wikibase-setaliases-introfull
 				$this->msg(
@@ -219,7 +219,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		} else {
 			return Html::rawElement(
 				'p',
-				array(),
+				[],
 				// Messages: wikibase-setlabel-intro, wikibase-setdescription-intro,
 				// wikibase-setaliases-intro
 				$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-intro' )->parse()
@@ -229,18 +229,18 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			. Html::label(
 				$this->msg( 'wikibase-modifyterm-language' )->text(),
 				'wb-modifyterm-language',
-				array(
+				[
 					'class' => 'wb-label'
-				)
+				]
 			)
 			. Html::input(
 				'language',
 				$this->languageCode,
 				'text',
-				array(
+				[
 					'class' => 'wb-input',
 					'id' => 'wb-modifyterm-language'
-				)
+				]
 			)
 			. Html::element( 'br' )
 			. Html::label(
@@ -250,9 +250,9 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 				// wikibase-setaliases-label
 				$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-label' )->text(),
 				'wb-modifyterm-value',
-				array(
+				[
 					'class' => 'wb-label'
-				)
+				]
 			)
 			. $valueinput
 			. Html::element( 'br' );

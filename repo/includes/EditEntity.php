@@ -167,7 +167,7 @@ class EditEntity {
 	/**
 	 * @var string[]
 	 */
-	private $requiredPermissions = array( 'edit' );
+	private $requiredPermissions = [ 'edit' ];
 
 	/**
 	 * @since 0.5
@@ -608,7 +608,7 @@ class EditEntity {
 			//       and only set the correct error code, in one place, probably here.
 			$this->errorType |= self::TOKEN_ERROR;
 			$this->status->fatal( 'sessionfailure' );
-			$this->status->setResult( false, array( 'errorFlags' => $this->errorType ) );
+			$this->status->setResult( false, [ 'errorFlags' => $this->errorType ] );
 			return $this->status;
 		}
 
@@ -617,7 +617,7 @@ class EditEntity {
 		$this->checkRateLimits(); // modifies $this->status
 
 		if ( !$this->status->isOK() ) {
-			$this->status->setResult( false, array( 'errorFlags' => $this->errorType ) );
+			$this->status->setResult( false, [ 'errorFlags' => $this->errorType ] );
 			return $this->status;
 		}
 
@@ -634,7 +634,7 @@ class EditEntity {
 		}
 
 		if ( !$this->status->isOK() ) {
-			$this->status->setResult( false, array( 'errorFlags' => $this->errorType ) );
+			$this->status->setResult( false, [ 'errorFlags' => $this->errorType ] );
 			return $this->status;
 		}
 
@@ -645,7 +645,7 @@ class EditEntity {
 		$this->status->merge( $hookStatus );
 
 		if ( !$this->status->isOK() ) {
-			$this->status->setResult( false, array( 'errorFlags' => $this->errorType ) );
+			$this->status->setResult( false, [ 'errorFlags' => $this->errorType ] );
 			return $this->status;
 		}
 
@@ -658,7 +658,7 @@ class EditEntity {
 				$this->doesCheckForEditConflicts() ? $this->getLatestRevisionId() : false
 			);
 
-			$editStatus = Status::newGood( array( 'revision' => $entityRevision ) );
+			$editStatus = Status::newGood( [ 'revision' => $entityRevision ] );
 		} catch ( StorageException $ex ) {
 			$editStatus = $ex->getStatus();
 
@@ -754,7 +754,7 @@ class EditEntity {
 		$out = $this->context->getOutput();
 		$text = $this->status->getHTML();
 
-		$out->addHTML( Html::rawElement( 'div', array( 'class' => 'error' ), $text ) );
+		$out->addHTML( Html::rawElement( 'div', [ 'class' => 'error' ], $text ) );
 
 		return true;
 	}

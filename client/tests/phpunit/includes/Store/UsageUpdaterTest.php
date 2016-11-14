@@ -27,30 +27,30 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 		$q1 = new ItemId( 'Q1' );
 		$q2 = new ItemId( 'Q2' );
 
-		return array(
-			'empty' => array(
-				array(),
-				array()
-			),
+		return [
+			'empty' => [
+				[],
+				[]
+			],
 
-			'add usages' => array(
-				array( new EntityUsage( $q1, EntityUsage::LABEL_USAGE ),
-					new EntityUsage( $q2, EntityUsage::ALL_USAGE ) ),
-				array( $q1, $q2 )
-			),
+			'add usages' => [
+				[ new EntityUsage( $q1, EntityUsage::LABEL_USAGE ),
+					new EntityUsage( $q2, EntityUsage::ALL_USAGE ) ],
+				[ $q1, $q2 ]
+			],
 
-			'add usages, Q1 already subscribed' => array(
-				array( new EntityUsage( $q1, EntityUsage::LABEL_USAGE ),
-					new EntityUsage( $q2, EntityUsage::ALL_USAGE ) ),
-				array( $q2 )
-			),
+			'add usages, Q1 already subscribed' => [
+				[ new EntityUsage( $q1, EntityUsage::LABEL_USAGE ),
+					new EntityUsage( $q2, EntityUsage::ALL_USAGE ) ],
+				[ $q2 ]
+			],
 
-			'add usages, all usages already subscribed' => array(
-				array( new EntityUsage( $q1, EntityUsage::LABEL_USAGE ),
-					new EntityUsage( $q2, EntityUsage::ALL_USAGE ) ),
-				array()
-			),
-		);
+			'add usages, all usages already subscribed' => [
+				[ new EntityUsage( $q1, EntityUsage::LABEL_USAGE ),
+					new EntityUsage( $q2, EntityUsage::ALL_USAGE ) ],
+				[]
+			],
+		];
 	}
 
 	/**
@@ -102,20 +102,20 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 		$q1 = new ItemId( 'Q1' );
 		$q2 = new ItemId( 'Q2' );
 
-		return array(
-			'empty' => array(
-				array(),
-				array(),
-				array(),
-			),
+		return [
+			'empty' => [
+				[],
+				[],
+				[],
+			],
 
-			'pruned usages' => array(
-				array( new EntityUsage( $q1, EntityUsage::LABEL_USAGE ),
-					new EntityUsage( $q2, EntityUsage::ALL_USAGE ) ),
-				array( $q1, $q2 ),
-				array( $q2 ),
-			),
-		);
+			'pruned usages' => [
+				[ new EntityUsage( $q1, EntityUsage::LABEL_USAGE ),
+					new EntityUsage( $q2, EntityUsage::ALL_USAGE ) ],
+				[ $q1, $q2 ],
+				[ $q2 ],
+			],
+		];
 	}
 
 	/**
@@ -279,7 +279,7 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityId[]
 	 */
 	private function getEntityIds( array $entityUsages ) {
-		$entityIds = array();
+		$entityIds = [];
 
 		foreach ( $entityUsages as $usage ) {
 			$id = $usage->getEntityId();

@@ -118,7 +118,7 @@ class MergeItems extends ApiBase {
 			$summary = $params['summary'];
 
 			if ( $ignoreConflicts === null ) {
-				$ignoreConflicts = array();
+				$ignoreConflicts = [];
 			}
 
 			$this->mergeItems( $fromId, $toId, $ignoreConflicts, $summary, $params['bot'] );
@@ -190,37 +190,37 @@ class MergeItems extends ApiBase {
 	 * @see ApiBase::getAllowedParams
 	 */
 	protected function getAllowedParams() {
-		return array(
-			'fromid' => array(
+		return [
+			'fromid' => [
 				self::PARAM_TYPE => 'string',
-			),
-			'toid' => array(
+			],
+			'toid' => [
 				self::PARAM_TYPE => 'string',
-			),
-			'ignoreconflicts' => array(
+			],
+			'ignoreconflicts' => [
 				self::PARAM_ISMULTI => true,
 				self::PARAM_TYPE => ChangeOpsMerge::$conflictTypes,
 				self::PARAM_REQUIRED => false,
-			),
-			'summary' => array(
+			],
+			'summary' => [
 				self::PARAM_TYPE => 'string',
-			),
-			'bot' => array(
+			],
+			'bot' => [
 				self::PARAM_TYPE => 'boolean',
 				self::PARAM_DFLT => false,
-			),
-			'token' => array(
+			],
+			'token' => [
 				self::PARAM_TYPE => 'string',
 				self::PARAM_REQUIRED => true,
-			)
-		);
+			]
+		];
 	}
 
 	/**
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
-		return array(
+		return [
 			'action=wbmergeitems&fromid=Q42&toid=Q222' =>
 				'apihelp-wbmergeitems-example-1',
 			'action=wbmergeitems&fromid=Q555&toid=Q3' =>
@@ -229,7 +229,7 @@ class MergeItems extends ApiBase {
 				'apihelp-wbmergeitems-example-3',
 			'action=wbmergeitems&fromid=Q66&toid=Q99&ignoreconflicts=sitelink|description' =>
 				'apihelp-wbmergeitems-example-4',
-		);
+		];
 	}
 
 	/**

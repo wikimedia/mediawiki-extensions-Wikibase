@@ -10,55 +10,55 @@ return call_user_func( function() {
 	$remoteExtPathParts = explode(
 		DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR, __DIR__, 2
 	);
-	$moduleBase = array(
+	$moduleBase = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => $remoteExtPathParts[1],
-	);
+	];
 
-	$modules = array(
+	$modules = [
 
-		'jquery.wikibase.entitysearch.tests' => $moduleBase + array(
-			'scripts' => array(
+		'jquery.wikibase.entitysearch.tests' => $moduleBase + [
+			'scripts' => [
 				'jquery.wikibase/jquery.wikibase.entitysearch.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.wikibase.entitysearch',
-			),
-		),
+			],
+		],
 
-		'wikibase.dataTypeStore.tests' => $moduleBase + array(
-			'scripts' => array(
+		'wikibase.dataTypeStore.tests' => $moduleBase + [
+			'scripts' => [
 				'dataTypes/wikibase.dataTypeStore.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'dataTypes.DataTypeStore',
 				'wikibase.dataTypeStore',
-			),
-		),
+			],
+		],
 
-		'wikibase.experts.Item.tests' => $moduleBase + array(
-			'scripts' => array(
+		'wikibase.experts.Item.tests' => $moduleBase + [
+			'scripts' => [
 				'experts/Item.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.valueview.tests.testExpert',
 				'wikibase.experts.Item',
 				'wikibase.tests.qunit.testrunner',
-			),
-		),
+			],
+		],
 
-		'wikibase.experts.Property.tests' => $moduleBase + array(
-			'scripts' => array(
+		'wikibase.experts.Property.tests' => $moduleBase + [
+			'scripts' => [
 				'experts/Property.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.valueview.tests.testExpert',
 				'wikibase.experts.Property',
 				'wikibase.tests.qunit.testrunner',
-			),
-		),
+			],
+		],
 
-	);
+	];
 
 	return $modules;
 

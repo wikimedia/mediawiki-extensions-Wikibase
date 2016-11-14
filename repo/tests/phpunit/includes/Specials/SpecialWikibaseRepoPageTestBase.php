@@ -129,7 +129,7 @@ abstract class SpecialWikibaseRepoPageTestBase extends SpecialPageTestBase {
 
 		$formatter->expects( $this->any() )
 			->method( 'format' )
-			->will( $this->returnCallback( array( $this, 'formatValueAsText' ) ) );
+			->will( $this->returnCallback( [ $this, 'formatValueAsText' ] ) );
 
 		return $formatter;
 	}
@@ -142,7 +142,7 @@ abstract class SpecialWikibaseRepoPageTestBase extends SpecialPageTestBase {
 
 		$formatter->expects( $this->any() )
 			->method( 'formatSnak' )
-			->will( $this->returnCallback( array( $this, 'formatSnakAsText' ) ) );
+			->will( $this->returnCallback( [ $this, 'formatSnakAsText' ] ) );
 
 		$formatter->expects( $this->any() )
 			->method( 'getFormat' )

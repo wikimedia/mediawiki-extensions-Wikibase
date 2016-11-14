@@ -34,7 +34,7 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		foreach ( array( 'P1', 'Q1', 'Q20', 'Q21', 'Q22' ) as $pageName ) {
+		foreach ( [ 'P1', 'Q1', 'Q20', 'Q21', 'Q22' ] as $pageName ) {
 			$this->insertPage( $pageName, '{ "type": "item", "id": "Q1" }' );
 		}
 	}
@@ -112,7 +112,7 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 		SiteLinkList $siteLinks = null,
 		array $expected
 	) {
-		$actual = array();
+		$actual = [];
 
 		$parserOutput = $this->getMockBuilder( ParserOutput::class )
 			->disableOriginalConstructor()
@@ -155,36 +155,36 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 		) );
 
 		$siteLinks = new SiteLinkList();
-		$siteLinks->addNewSiteLink( 'siteId', 'pageName', array( new ItemId( 'Q1' ) ) );
+		$siteLinks->addNewSiteLink( 'siteId', 'pageName', [ new ItemId( 'Q1' ) ] );
 
-		return array(
-			array( new StatementList(), null, array(
-			) ),
-			array( $set1, null, array(
+		return [
+			[ new StatementList(), null, [
+			] ],
+			[ $set1, null, [
 				'P1',
 				'Q1',
-			) ),
-			array( new StatementList(), $siteLinks, array(
+			] ],
+			[ new StatementList(), $siteLinks, [
 				'Q1',
-			) ),
-			array( $set1, $siteLinks, array(
+			] ],
+			[ $set1, $siteLinks, [
 				'P1',
 				'Q1',
-			) ),
-			array( $set2, null, array(
-				'P1',
-				'Q20',
-				'Q21',
-				'Q22',
-			) ),
-			array( $set2, $siteLinks, array(
+			] ],
+			[ $set2, null, [
 				'P1',
 				'Q20',
 				'Q21',
 				'Q22',
+			] ],
+			[ $set2, $siteLinks, [
+				'P1',
+				'Q20',
+				'Q21',
+				'Q22',
 				'Q1',
-			) ),
-		);
+			] ],
+		];
 	}
 
 }

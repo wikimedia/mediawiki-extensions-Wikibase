@@ -201,7 +201,7 @@ class ItemContent extends EntityContent {
 		$searchTextGenerator = new ItemSearchTextGenerator();
 		$text = $searchTextGenerator->generate( $this->getItem() );
 
-		if ( !Hooks::run( 'WikibaseTextForSearchIndex', array( $this, &$text ) ) ) {
+		if ( !Hooks::run( 'WikibaseTextForSearchIndex', [ $this, &$text ] ) ) {
 			return '';
 		}
 

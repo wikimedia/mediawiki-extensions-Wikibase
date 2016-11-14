@@ -23,14 +23,14 @@ class HookChangeTransmitterTest extends \MediaWikiTestCase {
 			->getMock();
 
 		$called = false;
-		$this->mergeMwGlobalArrayValue( 'wgHooks', array(
-			'HookChangeTransmitterTest' => array(
+		$this->mergeMwGlobalArrayValue( 'wgHooks', [
+			'HookChangeTransmitterTest' => [
 				function ( $actualChange ) use ( $change, &$called ) {
 					self::assertEquals( $change, $actualChange );
 					$called = true;
 				},
-			),
-		) );
+			],
+		] );
 
 		$transmitter = new HookChangeTransmitter( 'HookChangeTransmitterTest' );
 		$transmitter->transmitChange( $change );

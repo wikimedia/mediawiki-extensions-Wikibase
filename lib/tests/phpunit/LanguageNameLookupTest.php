@@ -20,28 +20,28 @@ use Wikibase\Lib\LanguageNameLookup;
 class LanguageNameLookupTest extends PHPUnit_Framework_TestCase {
 
 	public function getNameProvider() {
-		return array(
-			array( // #0
+		return [
+			[ // #0
 				'en',
 				null,
 				'English'
-			),
-			array( // #1
+			],
+			[ // #1
 				'de',
 				null,
 				'Deutsch'
-			),
-			array( // #2
+			],
+			[ // #2
 				'en',
 				'de',
 				'Englisch'
-			),
-			array( // #3
+			],
+			[ // #3
 				'de',
 				'en',
 				'German'
-			),
-		);
+			],
+		];
 	}
 
 	/**

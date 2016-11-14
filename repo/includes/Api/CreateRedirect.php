@@ -141,34 +141,34 @@ class CreateRedirect extends ApiBase {
 	 * @see ApiBase::getAllowedParams
 	 */
 	protected function getAllowedParams() {
-		return array(
-			'from' => array(
+		return [
+			'from' => [
 				self::PARAM_TYPE => 'string',
 				self::PARAM_REQUIRED => true,
-			),
-			'to' => array(
+			],
+			'to' => [
 				self::PARAM_TYPE => 'string',
 				self::PARAM_REQUIRED => true,
-			),
-			'token' => array(
+			],
+			'token' => [
 				self::PARAM_TYPE => 'string',
 				self::PARAM_REQUIRED => true,
-			),
-			'bot' => array(
+			],
+			'bot' => [
 				self::PARAM_TYPE => 'boolean',
 				self::PARAM_DFLT => false,
-			)
-		);
+			]
+		];
 	}
 
 	/**
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
-		return array(
+		return [
 			'action=wbcreateredirect&from=Q11&to=Q12'
 				=> 'apihelp-wbcreateredirect-example-1',
-		);
+		];
 	}
 
 }

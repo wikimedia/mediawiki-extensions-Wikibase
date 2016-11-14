@@ -28,25 +28,25 @@ class DataFieldValidatorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidConstructorArgumentProvider() {
-		return array(
-			array( null ),
-			array( 1.0 ),
-			array( array() ),
-		);
+		return [
+			[ null ],
+			[ 1.0 ],
+			[ [] ],
+		];
 	}
 
 	public function provideValidate() {
 		$validator = new StringLengthValidator( 1, 10 );
 
-		return array(
-			array( 'a', $validator, array( 'a' => '', 'b' => 'foo' ), 'too-short', null, "mismatch assoc" ),
-			array( 'a', $validator, array( 'a' => 'foo', 'b' => '' ), null, null, "match assoc" ),
-			array( 1, $validator, array( 'x', '', 'foo' ), 'too-short', null, "mismatch indexed" ),
-			array( 1, $validator, array( 'x', 'foo', '' ), null, null, "match indexed" ),
-			array( 'a', $validator, array(), 'missing-field', null, "missing field" ),
-			array( 'a', $validator, array( 'a' => null ), 'missing-field', null, "field is null" ),
-			array( 1, $validator, 'xyz', null, InvalidArgumentException::class, 'not an array' ),
-		);
+		return [
+			[ 'a', $validator, [ 'a' => '', 'b' => 'foo' ], 'too-short', null, "mismatch assoc" ],
+			[ 'a', $validator, [ 'a' => 'foo', 'b' => '' ], null, null, "match assoc" ],
+			[ 1, $validator, [ 'x', '', 'foo' ], 'too-short', null, "mismatch indexed" ],
+			[ 1, $validator, [ 'x', 'foo', '' ], null, null, "match indexed" ],
+			[ 'a', $validator, [], 'missing-field', null, "missing field" ],
+			[ 'a', $validator, [ 'a' => null ], 'missing-field', null, "field is null" ],
+			[ 1, $validator, 'xyz', null, InvalidArgumentException::class, 'not an array' ],
+		];
 	}
 
 	/**

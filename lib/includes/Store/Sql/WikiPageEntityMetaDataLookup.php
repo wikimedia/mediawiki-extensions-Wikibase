@@ -67,7 +67,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 		array $entityIds,
 		$mode
 	) {
-		$rows = array();
+		$rows = [];
 
 		foreach ( $entityIds as $entityId ) {
 			if ( !$this->isEntityIdFromRightRepository( $entityId ) ) {
@@ -83,7 +83,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 
 		if ( $mode !== EntityRevisionLookup::LATEST_FROM_SLAVE ) {
 			// Attempt to load (missing) rows from master if the caller asked for that.
-			$loadFromMaster = array();
+			$loadFromMaster = [];
 			/** @var EntityId $entityId */
 			foreach ( $entityIds as $entityId ) {
 				if ( !isset( $rows[$entityId->getSerialization()] ) || !$rows[$entityId->getSerialization()] ) {
@@ -153,7 +153,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @return string[]
 	 */
 	private function selectFields() {
-		return array(
+		return [
 			'rev_id',
 			'rev_content_format',
 			'rev_timestamp',
@@ -162,7 +162,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 			'old_id',
 			'old_text',
 			'old_flags'
-		);
+		];
 	}
 
 	/**
@@ -178,20 +178,20 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	private function selectRevisionInformationById( EntityId $entityId, $revisionId, $connType ) {
 		$db = $this->getConnection( $connType );
 
-		$join = array();
+		$join = [];
 
 		// pick text via rev_text_id
-		$join['text'] = array( 'INNER JOIN', 'old_id=rev_text_id' );
-		$join['page'] = array( 'INNER JOIN', 'rev_page=page_id' );
+		$join['text'] = [ 'INNER JOIN', 'old_id=rev_text_id' ];
+		$join['page'] = [ 'INNER JOIN', 'rev_page=page_id' ];
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking up revision $revisionId of " . $entityId );
 
 		$row = $db->selectRow(
-			array( 'revision', 'text', 'page' ),
+			[ 'revision', 'text', 'page' ],
 			$this->selectFields(),
-			array( 'rev_id' => $revisionId ),
+			[ 'rev_id' => $revisionId ],
 			__METHOD__,
-			array(),
+			[],
 			$join
 		);
 

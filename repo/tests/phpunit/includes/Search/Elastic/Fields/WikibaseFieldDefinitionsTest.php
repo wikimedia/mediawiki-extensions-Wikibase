@@ -22,7 +22,7 @@ class WikibaseFieldDefinitionsTest extends PHPUnit_Framework_TestCase {
 		$wikibaseFieldDefinitions = new WikibaseFieldDefinitions();
 		$fields = $wikibaseFieldDefinitions->getFields();
 
-		$expectedFieldNames = array( 'label_count', 'sitelink_count', 'statement_count' );
+		$expectedFieldNames = [ 'label_count', 'sitelink_count', 'statement_count' ];
 
 		$this->assertSame( $expectedFieldNames, array_keys( $fields ) );
 	}

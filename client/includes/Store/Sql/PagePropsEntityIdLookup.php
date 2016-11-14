@@ -59,15 +59,15 @@ class PagePropsEntityIdLookup implements EntityIdLookup {
 
 		$res = $db->select(
 			'page_props',
-			array( 'pp_page', 'pp_value' ),
-			array(
+			[ 'pp_page', 'pp_value' ],
+			[
 				'pp_page' => $pageIds,
 				'pp_propname' => 'wikibase_item',
-			),
+			],
 			__METHOD__
 		);
 
-		$entityIds = array();
+		$entityIds = [];
 
 		foreach ( $res as $row ) {
 			$entityIds[$row->pp_page] = $this->idParser->parse( $row->pp_value );
@@ -85,7 +85,7 @@ class PagePropsEntityIdLookup implements EntityIdLookup {
 	 * @return EntityId|null
 	 */
 	public function getEntityIdForTitle( Title $title ) {
-		$entityIds = $this->getEntityIds( array( $title ) );
+		$entityIds = $this->getEntityIds( [ $title ] );
 
 		return reset( $entityIds ) ?: null;
 	}

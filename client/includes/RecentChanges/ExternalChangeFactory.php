@@ -115,7 +115,7 @@ class ExternalChangeFactory {
 			throw new UnexpectedValueException( 'Invalid Wikibase change' );
 		}
 
-		$keys = array( 'type', 'page_id', 'rev_id', 'parent_id', 'object_id' );
+		$keys = [ 'type', 'page_id', 'rev_id', 'parent_id', 'object_id' ];
 
 		foreach ( $keys as $key ) {
 			if ( !array_key_exists( $key, $changeParams ) ) {
@@ -187,9 +187,9 @@ class ExternalChangeFactory {
 	 * @return string
 	 */
 	private function parseAutoComment( $comment, $type ) {
-		$newComment = array(
+		$newComment = [
 			'key' => 'wikibase-comment-update'
-		);
+		];
 
 		if ( is_array( $comment ) ) {
 			if ( $type === 'wikibase-item~add' ) {

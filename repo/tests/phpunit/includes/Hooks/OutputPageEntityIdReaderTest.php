@@ -63,23 +63,23 @@ class OutputPageEntityIdReaderTest extends PHPUnit_Framework_TestCase {
 		$outputPageEntityId = clone $outputPage;
 		$outputPageEntityId->addJsConfigVars( 'wbEntityId', 'Q42' );
 
-		return array(
-			'Entity id set' => array(
+		return [
+			'Entity id set' => [
 				new ItemId( 'Q42' ),
 				$outputPageEntityId,
 				true
-			),
-			'entity content model, but no entity id set' => array(
+			],
+			'entity content model, but no entity id set' => [
 				null,
 				$outputPage,
 				true
-			),
-			'no entity content model, should abort early' => array(
+			],
+			'no entity content model, should abort early' => [
 				null,
 				$outputPageEntityId,
 				false
-			),
-		);
+			],
+		];
 	}
 
 }

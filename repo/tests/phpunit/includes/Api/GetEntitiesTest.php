@@ -23,7 +23,7 @@ use UsageException;
 class GetEntitiesTest extends WikibaseApiTestCase {
 
 	private static $hasSetup;
-	private static $usedHandles = array( 'StringProp', 'Berlin', 'London', 'Oslo', 'Guangzhou', 'Empty' );
+	private static $usedHandles = [ 'StringProp', 'Berlin', 'London', 'Oslo', 'Guangzhou', 'Empty' ];
 
 	protected function setUp() {
 		parent::setUp();
@@ -38,59 +38,59 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	 * The key 'p' contains the params, the key 'e' contains things to expect
 	 * handles will automatically be converted into the ID pointing to the item
 	 */
-	protected static $goodItems = array(
-		array( //1 good id
-			'p' => array( 'handles' => array( 'Berlin' ) ),
-			'e' => array( 'count' => 1 ) ),
-		array( //2 good ids
-			'p' => array( 'handles' => array( 'London', 'Oslo' ) ),
-			'e' => array( 'count' => 2 ) ),
-		array( //1 id requested twice (should only return 1 entity)
-			'p' => array( 'handles' => array( 'London', 'London' ) ),
-			'e' => array( 'count' => 1 ) ),
-		array( //1 good site title combination
-			'p' => array( 'sites' => 'dewiki', 'titles' => 'Berlin' ),
-			'e' => array( 'count' => 1 ) ),
-		array( //2 title, 1 site should return 2 entities
-			'p' => array( 'sites' => 'dewiki', 'titles' => 'Berlin|London' ),
-			'e' => array( 'count' => 2 ) ),
-		array( //2 sites, 1 title should return 1 entity
-			'p' => array( 'sites' => 'dewiki|enwiki', 'titles' => 'Oslo' ),
-			'e' => array( 'count' => 1 ) ),
-		array( //2 sites and 2 titles should return the two entities
-			'p' => array( 'sites' => 'dewiki|enwiki', 'titles' => 'Oslo|London' ),
-			'e' => array( 'count' => 2 ) ),
-		array( //1 id and 2 site title combinations returns 3 entities
-			'p' => array( 'handles' => array( 'Berlin' ), 'sites' => 'dewiki|enwiki', 'titles' => 'Oslo|London' ),
-			'e' => array( 'count' => 3 ) ),
-		array( //1 title with normalization works and gets normalized
-			'p' => array( 'sites' => 'dewiki', 'titles' => 'berlin', 'normalize' => '' ),
-			'e' => array( 'count' => 1, 'normalized' => true ) ),
-		array( //1 title with normalization works and doesn't get normalized if it doesn't need to
-			'p' => array( 'sites' => 'dewiki', 'titles' => 'Berlin', 'normalize' => '' ),
-			'e' => array( 'count' => 1, 'normalized' => false ) ),
-		array( //we still normalise even for non existing pages
-			'p' => array( 'sites' => 'dewiki', 'titles' => 'hoo', 'normalize' => '' ),
-			'e' => array( 'count' => 1, 'missing' => 1, 'normalized' => true ) ),
-		array( //1 non existing item by id
-			'p' => array( 'ids' => 'q999999999' ),
-			'e' => array( 'count' => 1, 'missing' => 1 ) ),
-		array( //2 non existing items by id
-			'p' => array( 'ids' => 'q999999999|q7777777' ),
-			'e' => array( 'count' => 2, 'missing' => 2 ) ),
-		array( //1 non existing item by site and title
-			'p' => array( 'sites' => 'enwiki', 'titles' => 'IDoNotExist' ),
-			'e' => array( 'count' => 1, 'missing' => 1 ) ),
-		array( //2 non existing items by site and title
-			'p' => array( 'sites' => 'enwiki', 'titles' => 'IDoNotExist|ImNotHere' ),
-			'e' => array( 'count' => 2, 'missing' => 2 ) ),
-	);
+	protected static $goodItems = [
+		[ //1 good id
+			'p' => [ 'handles' => [ 'Berlin' ] ],
+			'e' => [ 'count' => 1 ] ],
+		[ //2 good ids
+			'p' => [ 'handles' => [ 'London', 'Oslo' ] ],
+			'e' => [ 'count' => 2 ] ],
+		[ //1 id requested twice (should only return 1 entity)
+			'p' => [ 'handles' => [ 'London', 'London' ] ],
+			'e' => [ 'count' => 1 ] ],
+		[ //1 good site title combination
+			'p' => [ 'sites' => 'dewiki', 'titles' => 'Berlin' ],
+			'e' => [ 'count' => 1 ] ],
+		[ //2 title, 1 site should return 2 entities
+			'p' => [ 'sites' => 'dewiki', 'titles' => 'Berlin|London' ],
+			'e' => [ 'count' => 2 ] ],
+		[ //2 sites, 1 title should return 1 entity
+			'p' => [ 'sites' => 'dewiki|enwiki', 'titles' => 'Oslo' ],
+			'e' => [ 'count' => 1 ] ],
+		[ //2 sites and 2 titles should return the two entities
+			'p' => [ 'sites' => 'dewiki|enwiki', 'titles' => 'Oslo|London' ],
+			'e' => [ 'count' => 2 ] ],
+		[ //1 id and 2 site title combinations returns 3 entities
+			'p' => [ 'handles' => [ 'Berlin' ], 'sites' => 'dewiki|enwiki', 'titles' => 'Oslo|London' ],
+			'e' => [ 'count' => 3 ] ],
+		[ //1 title with normalization works and gets normalized
+			'p' => [ 'sites' => 'dewiki', 'titles' => 'berlin', 'normalize' => '' ],
+			'e' => [ 'count' => 1, 'normalized' => true ] ],
+		[ //1 title with normalization works and doesn't get normalized if it doesn't need to
+			'p' => [ 'sites' => 'dewiki', 'titles' => 'Berlin', 'normalize' => '' ],
+			'e' => [ 'count' => 1, 'normalized' => false ] ],
+		[ //we still normalise even for non existing pages
+			'p' => [ 'sites' => 'dewiki', 'titles' => 'hoo', 'normalize' => '' ],
+			'e' => [ 'count' => 1, 'missing' => 1, 'normalized' => true ] ],
+		[ //1 non existing item by id
+			'p' => [ 'ids' => 'q999999999' ],
+			'e' => [ 'count' => 1, 'missing' => 1 ] ],
+		[ //2 non existing items by id
+			'p' => [ 'ids' => 'q999999999|q7777777' ],
+			'e' => [ 'count' => 2, 'missing' => 2 ] ],
+		[ //1 non existing item by site and title
+			'p' => [ 'sites' => 'enwiki', 'titles' => 'IDoNotExist' ],
+			'e' => [ 'count' => 1, 'missing' => 1 ] ],
+		[ //2 non existing items by site and title
+			'p' => [ 'sites' => 'enwiki', 'titles' => 'IDoNotExist|ImNotHere' ],
+			'e' => [ 'count' => 2, 'missing' => 2 ] ],
+	];
 
 	/**
 	 * goodProps contains many combinations of props that should work when used with the api module
 	 * Each property in the array will cause extra assertions when the tests run
 	 */
-	protected static $goodProps = array(
+	protected static $goodProps = [
 		//individual props
 		'info',
 		'sitelinks',
@@ -101,35 +101,35 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		'datatype',
 		//multiple props
 		'labels|sitelinks/urls|info|claims',
-	);
+	];
 
 	/**
 	 * Each language in the array will cause extra assertions when the tests run
 	 */
-	protected static $goodLangs = array(
+	protected static $goodLangs = [
 		//single languages
 		'de',
 		'zh',
 		//multiple languages
 		'de|nn|nb|en|en-gb|it|es|zh|ar'
-	);
+	];
 
 	/**
 	 * These are all available formats for the API. we need to make sure they all work
 	 * Each format is only tested against the first set of good parameters, from then on json is always used
 	 */
-	protected static $goodFormats = array(
+	protected static $goodFormats = [
 		'json',
 		'php',
 		'xml',
-	);
+	];
 
 	/**
 	 * This method builds an array of test cases using the data provided in the static arrays above
 	 * @return array
 	 */
 	public function provideData() {
-		$testCases = array();
+		$testCases = [];
 
 		// Test cases for props filter
 		foreach ( self::$goodProps  as $propData ) {
@@ -205,7 +205,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		if ( array_key_exists( 'ids', $params ) ) {
 			$ids = explode( '|', $params['ids'] );
 		} else {
-			$ids = array();
+			$ids = [];
 		}
 
 		if ( array_key_exists( 'handles', $params ) ) {
@@ -231,7 +231,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		if ( array_key_exists( 'props', $params ) ) {
 			$expected['props'] = explode( '|', $params['props'] );
 		} else {
-			$expected['props'] = array( 'info', 'sitelinks', 'aliases', 'labels', 'descriptions', 'claims', 'datatype' );
+			$expected['props'] = [ 'info', 'sitelinks', 'aliases', 'labels', 'descriptions', 'claims', 'datatype' ];
 		}
 
 		//implied props
@@ -380,38 +380,38 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 
 	public function provideExceptionData() {
 		// TODO: More exception checks should be added once bug T55038 is resolved.
-		return array(
-			array( //0 no params
-				'p' => array(),
-				'e' => array( 'exception' => array( 'type' => UsageException::class, 'code' => 'param-missing' ) ) ),
-			array( //1 bad id
-				'p' => array( 'ids' => 'ABCD' ),
-				'e' => array( 'exception' => array( 'type' => UsageException::class, 'code' => 'no-such-entity', 'id' => 'ABCD' ) ) ),
-			array( //2 bad site
-				'p' => array( 'sites' => 'qwertyuiop', 'titles' => 'Berlin' ),
-				'e' => array( 'exception' => array( 'type' => UsageException::class, 'code' => 'param-missing' ) ) ),
-			array( //3 bad and good id
-				'p' => array( 'ids' => 'q1|aaaa' ),
-				'e' => array( 'exception' => array( 'type' => UsageException::class, 'code' => 'no-such-entity', 'id' => 'aaaa' ) ) ),
-			array( //4 site and no title
-				'p' => array( 'sites' => 'enwiki' ),
-				'e' => array( 'exception' => array( 'type' => UsageException::class, 'code' => 'param-missing' ) ) ),
-			array( //5 title and no site
-				'p' => array( 'titles' => 'Berlin' ),
-				'e' => array( 'exception' => array( 'type' => UsageException::class, 'code' => 'param-missing' ) ) ),
-			array( //6 normalization fails with 2 titles
-				'p' => array( 'sites' => 'enwiki', 'titles' => 'Foo|Bar' ,'normalize' => '' ),
-				'e' => array( 'exception' => array( 'type' => UsageException::class, 'code' => 'params-illegal' ) ) ),
-			array( //7 normalization fails with 2 sites
-				'p' => array( 'sites' => 'enwiki|dewiki', 'titles' => 'Boo' ,'normalize' => '' ),
-				'e' => array( 'exception' => array( 'type' => UsageException::class, 'code' => 'params-illegal' ) ) ),
-			array( //8 normalization fails with 2 sites and 2 titles
-				'p' => array( 'sites' => 'enwiki|dewiki', 'titles' => 'Foo|Bar' ,'normalize' => '' ),
-				'e' => array( 'exception' => array( 'type' => UsageException::class, 'code' => 'params-illegal' ) ) ),
-			array( //9 must request one site, one title, or an equal number of sites and titles
-				'p' => array( 'sites' => 'dewiki|enwiki', 'titles' => 'Oslo|Berlin|London' ),
-				'e' => array( 'exception' => array( 'type' => UsageException::class, 'code' => 'params-illegal' ) ) ),
-		);
+		return [
+			[ //0 no params
+				'p' => [],
+				'e' => [ 'exception' => [ 'type' => UsageException::class, 'code' => 'param-missing' ] ] ],
+			[ //1 bad id
+				'p' => [ 'ids' => 'ABCD' ],
+				'e' => [ 'exception' => [ 'type' => UsageException::class, 'code' => 'no-such-entity', 'id' => 'ABCD' ] ] ],
+			[ //2 bad site
+				'p' => [ 'sites' => 'qwertyuiop', 'titles' => 'Berlin' ],
+				'e' => [ 'exception' => [ 'type' => UsageException::class, 'code' => 'param-missing' ] ] ],
+			[ //3 bad and good id
+				'p' => [ 'ids' => 'q1|aaaa' ],
+				'e' => [ 'exception' => [ 'type' => UsageException::class, 'code' => 'no-such-entity', 'id' => 'aaaa' ] ] ],
+			[ //4 site and no title
+				'p' => [ 'sites' => 'enwiki' ],
+				'e' => [ 'exception' => [ 'type' => UsageException::class, 'code' => 'param-missing' ] ] ],
+			[ //5 title and no site
+				'p' => [ 'titles' => 'Berlin' ],
+				'e' => [ 'exception' => [ 'type' => UsageException::class, 'code' => 'param-missing' ] ] ],
+			[ //6 normalization fails with 2 titles
+				'p' => [ 'sites' => 'enwiki', 'titles' => 'Foo|Bar' ,'normalize' => '' ],
+				'e' => [ 'exception' => [ 'type' => UsageException::class, 'code' => 'params-illegal' ] ] ],
+			[ //7 normalization fails with 2 sites
+				'p' => [ 'sites' => 'enwiki|dewiki', 'titles' => 'Boo' ,'normalize' => '' ],
+				'e' => [ 'exception' => [ 'type' => UsageException::class, 'code' => 'params-illegal' ] ] ],
+			[ //8 normalization fails with 2 sites and 2 titles
+				'p' => [ 'sites' => 'enwiki|dewiki', 'titles' => 'Foo|Bar' ,'normalize' => '' ],
+				'e' => [ 'exception' => [ 'type' => UsageException::class, 'code' => 'params-illegal' ] ] ],
+			[ //9 must request one site, one title, or an equal number of sites and titles
+				'p' => [ 'sites' => 'dewiki|enwiki', 'titles' => 'Oslo|Berlin|London' ],
+				'e' => [ 'exception' => [ 'type' => UsageException::class, 'code' => 'params-illegal' ] ] ],
+		];
 	}
 
 	/**
@@ -421,7 +421,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		// -- set any defaults ------------------------------------
 		$params['action'] = 'wbgetentities';
 		if ( array_key_exists( 'handles', $params ) ) {
-			$ids = array();
+			$ids = [];
 			foreach ( $params['handles'] as $handle ) {
 				$ids[ $handle ] = EntityTestHelper::getId( $handle );
 			}
@@ -432,135 +432,135 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	}
 
 	public function provideLanguageFallback() {
-		return array(
-			'Guangzhou Fallback' => array(
+		return [
+			'Guangzhou Fallback' => [
 				'Guangzhou',
-				array( 'de-formal', 'en', 'fr', 'yue', 'zh-cn', 'zh-hk' ),
-				array(
-					'de-formal' => array(
+				[ 'de-formal', 'en', 'fr', 'yue', 'zh-cn', 'zh-hk' ],
+				[
+					'de-formal' => [
 						'language' => 'de',
 						'value' => 'Guangzhou',
 						'for-language' => 'de-formal',
-					),
-					'yue' => array(
+					],
+					'yue' => [
 						'language' => 'yue',
 						'value' => '廣州',
-					),
-					'zh-cn' => array(
+					],
+					'zh-cn' => [
 						'language' => 'zh-cn',
 						'value' => '广州市',
-					),
-					'zh-hk' => array(
+					],
+					'zh-hk' => [
 						'language' => 'zh-hk',
 						'source-language' => 'zh-cn',
 						'value' => '廣州市',
-					),
-				),
-				array(
-					'de-formal' => array(
+					],
+				],
+				[
+					'de-formal' => [
 						'language' => 'en',
 						'value' => 'Capital of Guangdong.',
 						'for-language' => 'de-formal',
-					),
-					'en' => array(
+					],
+					'en' => [
 						'language' => 'en',
 						'value' => 'Capital of Guangdong.',
-					),
-					'fr' => array(
+					],
+					'fr' => [
 						'language' => 'en',
 						'value' => 'Capital of Guangdong.',
 						'for-language' => 'fr',
-					),
-					'yue' => array(
+					],
+					'yue' => [
 						'language' => 'en',
 						'value' => 'Capital of Guangdong.',
 						'for-language' => 'yue',
-					),
-					'zh-cn' => array(
+					],
+					'zh-cn' => [
 						'language' => 'zh-cn',
 						'source-language' => 'zh-hk',
 						'value' => '广东的省会。',
-					),
-					'zh-hk' => array(
+					],
+					'zh-hk' => [
 						'language' => 'zh-hk',
 						'value' => '廣東的省會。',
-					),
-				),
-			),
-			'Oslo Fallback' => array(
+					],
+				],
+			],
+			'Oslo Fallback' => [
 				'Oslo',
-				array( 'sli', 'de-formal', 'kn', 'nb' ),
-				array(
-					'sli' => array(
+				[ 'sli', 'de-formal', 'kn', 'nb' ],
+				[
+					'sli' => [
 						'language' => 'de',
 						'value' => 'Oslo',
 						'for-language' => 'sli',
-					),
-					'de-formal' => array(
+					],
+					'de-formal' => [
 						'language' => 'de',
 						'value' => 'Oslo',
 						'for-language' => 'de-formal',
-					),
-					'kn' => array(
+					],
+					'kn' => [
 						'language' => 'en',
 						'value' => 'Oslo',
 						'for-language' => 'kn',
-					),
-					'nb' => array(
+					],
+					'nb' => [
 						'language' => 'nb',
 						'value' => 'Oslo',
-					),
-				),
-				array(
-					'sli' => array(
+					],
+				],
+				[
+					'sli' => [
 						'language' => 'de',
 						'value' => 'Hauptstadt der Norwegen.',
 						'for-language' => 'sli',
-					),
-					'de-formal' => array(
+					],
+					'de-formal' => [
 						'language' => 'de',
 						'value' => 'Hauptstadt der Norwegen.',
 						'for-language' => 'de-formal',
-					),
-					'kn' => array(
+					],
+					'kn' => [
 						'language' => 'en',
 						'value' => 'Capital city in Norway.',
 						'for-language' => 'kn',
-					),
-					'nb' => array(
+					],
+					'nb' => [
 						'language' => 'nb',
 						'value' => 'Hovedsted i Norge.',
-					),
-				),
-			),
-			'Oslo Fallback - Labels Only' => array(
+					],
+				],
+			],
+			'Oslo Fallback - Labels Only' => [
 				'Oslo',
-				array( 'sli', 'de-formal', 'kn', 'nb' ),
-				array(
-					'sli' => array(
+				[ 'sli', 'de-formal', 'kn', 'nb' ],
+				[
+					'sli' => [
 						'language' => 'de',
 						'value' => 'Oslo',
 						'for-language' => 'sli',
-					),
-					'de-formal' => array(
+					],
+					'de-formal' => [
 						'language' => 'de',
 						'value' => 'Oslo',
 						'for-language' => 'de-formal',
-					),
-					'kn' => array(
+					],
+					'kn' => [
 						'language' => 'en',
 						'value' => 'Oslo',
 						'for-language' => 'kn',
-					),
-					'nb' => array(
+					],
+					'nb' => [
 						'language' => 'nb',
 						'value' => 'Oslo',
-					),
-				),
+					],
+				],
 				null,
-				array( 'labels' )
-			),
-		);
+				[ 'labels' ]
+			],
+		];
 	}
 
 	/**
@@ -571,16 +571,16 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		array $languages,
 		array $expectedLabels = null,
 		array $expectedDescriptions = null,
-		array $props = array()
+		array $props = []
 	) {
 		$id = EntityTestHelper::getId( $handle );
 
-		$params = array(
+		$params = [
 			'action' => 'wbgetentities',
 			'languages' => join( '|', $languages ),
 			'languagefallback' => '',
 			'ids' => $id,
-		);
+		];
 
 		if ( !empty( $props ) ) {
 			$params['props'] = implode( '|', $props );
@@ -600,26 +600,26 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		$id = EntityTestHelper::getId( 'Oslo' );
 
 		list( $res,, ) = $this->doApiRequest(
-			array(
+			[
 				'action' => 'wbgetentities',
 				'sitefilter' => 'dewiki|enwiki',
 				'format' => 'json', // make sure IDs are used as keys
 				'ids' => $id,
-			)
+			]
 		);
 
-		$expectedSiteLinks = array(
-			'dewiki' => array(
+		$expectedSiteLinks = [
+			'dewiki' => [
 				'site' => 'dewiki',
 				'title' => 'Oslo',
-				'badges' => array(),
-			),
-			'enwiki' => array(
+				'badges' => [],
+			],
+			'enwiki' => [
 				'site' => 'enwiki',
 				'title' => 'Oslo',
-				'badges' => array(),
-			),
-		);
+				'badges' => [],
+			],
+		];
 		$this->assertEquals( $expectedSiteLinks, $res['entities'][$id]['sitelinks'] );
 	}
 

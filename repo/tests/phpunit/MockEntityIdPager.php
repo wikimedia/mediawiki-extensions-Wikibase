@@ -16,12 +16,12 @@ class MockEntityIdPager implements EntityPerPage, EntityIdPager {
 	/**
 	 * @var array
 	 */
-	private $pageIdToEntityId = array();
+	private $pageIdToEntityId = [];
 
 	/**
 	 * @var array
 	 */
-	private $redirects = array();
+	private $redirects = [];
 
 	/**
 	 * Adds a new link between an entity and a page
@@ -164,8 +164,8 @@ class MockEntityIdPager implements EntityPerPage, EntityIdPager {
 	 * @return boolean Success indicator
 	 */
 	public function clear() {
-		$this->pageIdToEntityId = array();
-		$this->redirects = array();
+		$this->pageIdToEntityId = [];
+		$this->redirects = [];
 	}
 
 }

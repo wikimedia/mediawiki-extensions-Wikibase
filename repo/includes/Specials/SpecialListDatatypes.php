@@ -76,12 +76,12 @@ class SpecialListDatatypes extends SpecialWikibasePage {
 
 		return Html::rawElement(
 			'dt',
-			array(),
+			[],
 			$this->msg( $baseKey . '-head' )->parse()
 		)
-		. Html::rawElement( 'dd', array(),
+		. Html::rawElement( 'dd', [],
 			$this->msg( $baseKey . '-body' )->parse()
-			. Html::rawElement( 'p', array(),
+			. Html::rawElement( 'p', [],
 				Linker::linkKnown( Title::newFromText( 'Special:' . SpecialPageFactory::getLocalNameFor( 'ListProperties', $dataTypeId ) ),
 					$this->msg( 'wikibase-listdatatypes-listproperties' )->parse() )
 			)

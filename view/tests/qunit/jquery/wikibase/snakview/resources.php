@@ -10,18 +10,18 @@ return call_user_func( function() {
 	$remoteExtPathParts = explode(
 		DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR, __DIR__, 2
 	);
-	$moduleTemplate = array(
+	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => $remoteExtPathParts[1],
-	);
+	];
 
-	$resources = array(
+	$resources = [
 
-		'jquery.wikibase.snakview.tests' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.snakview.tests' => $moduleTemplate + [
+			'scripts' => [
 				'snakview.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'dataTypes.DataTypeStore',
 				'jquery.wikibase.snakview',
 				'wikibase.datamodel.Property',
@@ -30,10 +30,10 @@ return call_user_func( function() {
 				'wikibase.datamodel.PropertyValueSnak',
 				'wikibase.serialization.SnakDeserializer',
 				'wikibase.serialization.SnakSerializer',
-			),
-		),
+			],
+		],
 
-	);
+	];
 
 	return $resources;
 } );

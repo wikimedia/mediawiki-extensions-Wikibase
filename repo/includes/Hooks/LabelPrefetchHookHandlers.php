@@ -63,7 +63,7 @@ class LabelPrefetchHookHandlers {
 			return null;
 		}
 
-		$termTypes = array( TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_DESCRIPTION );
+		$termTypes = [ TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_DESCRIPTION ];
 
 		// NOTE: keep in sync with fallback chain construction in LinkBeginHookHandler::newFromGlobalState
 		$context = RequestContext::getMain();
@@ -145,7 +145,7 @@ class LabelPrefetchHookHandlers {
 	 * @return Title[]
 	 */
 	private function getChangedTitles( $rows ) {
-		$titles = array();
+		$titles = [];
 
 		foreach ( $rows as $row ) {
 			$titles[] = $this->titleFactory->makeTitle( $row->rc_namespace, $row->rc_title );

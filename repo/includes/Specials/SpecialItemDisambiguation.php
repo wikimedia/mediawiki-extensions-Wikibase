@@ -132,7 +132,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 		parent::execute( $subPage );
 
 		$request = $this->getRequest();
-		$subPageParts = $subPage === '' ? array() : explode( '/', $subPage, 2 );
+		$subPageParts = $subPage === '' ? [] : explode( '/', $subPage, 2 );
 
 		$languageCode = $this->extractLanguageCode( $request, $subPageParts );
 		$label = $this->extractLabel( $request, $subPageParts );
@@ -221,7 +221,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 			$label,
 			$languageCode,
 			'item',
-			array( TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS )
+			[ TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS ]
 		);
 	}
 
@@ -238,12 +238,12 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 			$searchLink = $this->getTitleFor( 'Search' );
 			$this->getOutput()->addWikiMsg(
 				'wikibase-itemdisambiguation-search',
-				$searchLink->getFullURL( array( 'search' => $label ) )
+				$searchLink->getFullURL( [ 'search' => $label ] )
 			);
 			$createLink = $this->getTitleFor( 'NewItem' );
 			$this->getOutput()->addWikiMsg(
 				'wikibase-itemdisambiguation-create',
-				$createLink->getFullURL( array( 'label' => $label ) )
+				$createLink->getFullURL( [ 'label' => $label ] )
 			);
 		}
 	}
@@ -265,7 +265,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	 * @return array
 	 */
 	private function getLanguageOptions() {
-		$options = array();
+		$options = [];
 		foreach ( $this->contentLanguages->getLanguages() as $languageCode ) {
 			$languageName = $this->languageNameLookup->getName( $languageCode );
 			$options["$languageName ($languageCode)"] = $languageCode;
@@ -280,8 +280,8 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	 * @param string|null $label
 	 */
 	private function switchForm( $languageCode, $label ) {
-		$formDescriptor = array(
-			'language' => array(
+		$formDescriptor = [
+			'language' => [
 				'name' => 'language',
 				'default' => $languageCode ?: '',
 				'type' => 'combobox',
@@ -290,8 +290,8 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 				'size' => 12,
 				'cssclass' => 'wb-language-suggester',
 				'label-message' => 'wikibase-itemdisambiguation-lookup-language'
-			),
-			'label' => array(
+			],
+			'label' => [
 				'name' => 'label',
 				'default' => $label ?: '',
 				'type' => 'text',
@@ -299,21 +299,21 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 				'size' => 36,
 				'autofocus',
 				'label-message' => 'wikibase-itemdisambiguation-lookup-label'
-			),
-			'submit' => array(
+			],
+			'submit' => [
 				'name' => '',
 				'default' => $this->msg( 'wikibase-itemdisambiguation-submit' )->text(),
 				'type' => 'submit',
 				'id' => 'wb-itembytitle-submit',
-			)
-		);
+			]
+		];
 
 		HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext() )
 			->setId( 'wb-itemdisambiguation-form1' )
 			->setMethod( 'get' )
 			->setFooterText( Html::element(
 				'p',
-				array(),
+				[],
 				$this->msg( 'wikibase-itemdisambiguation-form-hints' )->numParams(
 					$this->limit
 				)->text()

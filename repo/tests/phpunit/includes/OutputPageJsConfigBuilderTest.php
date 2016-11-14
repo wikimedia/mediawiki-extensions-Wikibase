@@ -32,38 +32,38 @@ class OutputPageJsConfigBuilderTest extends \MediaWikiTestCase {
 			$this->getOutputPage( $isBlocked, $canEdit ),
 			'https://creativecommons.org',
 			'CC-0',
-			array(
+			[
 				'Q12' => 'wb-badge-goodarticle',
 				'Q42' => 'wb-badge-featuredarticle'
-			)
+			]
 		);
 
-		$expected = array(
+		$expected = [
 			'wbUserIsBlocked' => $isBlocked,
 			'wbUserCanEdit' => $canEdit,
-			'wbCopyright' => array(
+			'wbCopyright' => [
 				'version' => 'wikibase-1',
 				'messageHtml' =>
 					'(wikibase-shortcopyrightwarning: (wikibase-save), ' .
 					wfMessage( 'copyrightpage' )->inContentLanguage()->text() .
 					', <a rel="nofollow" class="external text" href="https://creativecommons.org">CC-0</a>)'
-			),
-			'wbBadgeItems' => array(
+			],
+			'wbBadgeItems' => [
 				'Q12' => 'wb-badge-goodarticle',
 				'Q42' => 'wb-badge-featuredarticle'
-			)
-		);
+			]
+		];
 
 		$this->assertEquals( $expected, $configVars );
 	}
 
 	public function buildProvider() {
-		return array(
-			array( true, true ),
-			array( true, false ),
-			array( false, false ),
-			array( false, true )
-		);
+		return [
+			[ true, true ],
+			[ true, false ],
+			[ false, false ],
+			[ false, true ]
+		];
 	}
 
 	/**

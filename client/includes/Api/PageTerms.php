@@ -73,7 +73,7 @@ class PageTerms extends ApiQueryBase {
 		$pagesToEntityIds = $this->getEntityIdsForTitles( $titles, $continue );
 		$entityToPageMap = $this->getEntityToPageMap( $pagesToEntityIds );
 
-		$terms = $this->getTermsOfEntities( $pagesToEntityIds, $params['terms'], array( $languageCode ) );
+		$terms = $this->getTermsOfEntities( $pagesToEntityIds, $params['terms'], [ $languageCode ] );
 
 		$termGroups = $this->groupTermsByPageAndType( $entityToPageMap, $terms );
 
@@ -86,7 +86,7 @@ class PageTerms extends ApiQueryBase {
 	 * @return array[]
 	 */
 	private function splitPageEntityMapByType( array $pagesToEntityIds ) {
-		$groups = array();
+		$groups = [];
 
 		foreach ( $pagesToEntityIds as $pageId => $entityId ) {
 			$type = $entityId->getEntityType();
@@ -105,7 +105,7 @@ class PageTerms extends ApiQueryBase {
 	 */
 	private function getTermsOfEntities( array $entityIds, array $termTypes = null, array $languageCodes = null ) {
 		$entityIdGroups = $this->splitPageEntityMapByType( $entityIds );
-		$terms = array();
+		$terms = [];
 
 		foreach ( $entityIdGroups as $entityIds ) {
 			$terms = array_merge(
@@ -129,7 +129,7 @@ class PageTerms extends ApiQueryBase {
 		// Re-sort, so the order of page IDs matches the order in which $titles
 		// were given. This is essential for paging to work properly.
 		// This also skips all page IDs up to $continue.
-		$sortedEntityId = array();
+		$sortedEntityId = [];
 		foreach ( $titles as $pid => $title ) {
 			if ( $pid >= $continue && isset( $entityIds[$pid] ) ) {
 				$sortedEntityId[$pid] = $entityIds[$pid];
@@ -162,7 +162,7 @@ class PageTerms extends ApiQueryBase {
 	 * @return array[] An associative array, mapping pageId + entity type to a list of strings.
 	 */
 	private function groupTermsByPageAndType( array $entityToPageMap, array $terms ) {
-		$termsPerPage = array();
+		$termsPerPage = [];
 
 		foreach ( $terms as $term ) {
 			// Since we construct $terms and $entityToPageMap from the same set of page IDs,
@@ -219,7 +219,7 @@ class PageTerms extends ApiQueryBase {
 	private function addTermsForPage( ApiResult $result, $pageId, array $termsByType ) {
 		ApiResult::setIndexedTagNameRecursive( $termsByType, 'term' );
 
-		$fit = $result->addValue( array( 'query', 'pages', $pageId ), 'terms', $termsByType );
+		$fit = $result->addValue( [ 'query', 'pages', $pageId ], 'terms', $termsByType );
 
 		if ( !$fit ) {
 			$this->setContinueEnumParameter( 'continue', $pageId );
@@ -242,22 +242,22 @@ class PageTerms extends ApiQueryBase {
 	 * @see ApiBase::getAllowedParams
 	 */
 	protected function getAllowedParams() {
-		return array(
-			'continue' => array(
+		return [
+			'continue' => [
 				self::PARAM_HELP_MSG => 'api-help-param-continue',
 				self::PARAM_TYPE => 'integer',
-			),
-			'terms' => array(
+			],
+			'terms' => [
 				// XXX: Ought to get this list from Wikibase\TermIndexEntry, its setType() also hardcodes it.
-				self::PARAM_TYPE => array(
+				self::PARAM_TYPE => [
 					TermIndexEntry::TYPE_ALIAS,
 					TermIndexEntry::TYPE_DESCRIPTION,
 					TermIndexEntry::TYPE_LABEL
-				),
+				],
 				self::PARAM_ISMULTI => true,
 				self::PARAM_HELP_MSG => 'apihelp-query+pageterms-param-terms',
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -265,17 +265,17 @@ class PageTerms extends ApiQueryBase {
 	 */
 	protected function getExamplesMessages() {
 		if ( defined( 'WB_VERSION' ) ) {
-			return array(
+			return [
 				'action=query&prop=pageterms&titles=Q84'
 					=> 'apihelp-query+pageterms-example-item',
-			);
+			];
 		} else {
-			return array(
+			return [
 				'action=query&prop=pageterms&titles=London'
 					=> 'apihelp-query+pageterms-example-simple',
 				'action=query&prop=pageterms&titles=London&wbptterms=label|alias&uselang=en'
 					=> 'apihelp-query+pageterms-example-label-en',
-			);
+			];
 		}
 	}
 

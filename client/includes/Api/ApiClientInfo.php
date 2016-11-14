@@ -58,14 +58,14 @@ class ApiClientInfo extends ApiQueryBase {
 	 * @return array
 	 */
 	private function getInfo( array $params ) {
-		$data = array();
+		$data = [];
 
 		foreach ( $params['prop'] as $p ) {
 			switch ( $p ) {
 				case 'url':
-					$data['repo'] = array(
+					$data['repo'] = [
 						'url' => $this->getRepoUrls()
-					);
+					];
 					break;
 				case 'siteid':
 					$data['siteid'] = $this->settings->getSetting( 'siteGlobalID' );
@@ -80,11 +80,11 @@ class ApiClientInfo extends ApiQueryBase {
 	 * @return string[]
 	 */
 	private function getRepoUrls() {
-		return array(
+		return [
 			'base' => $this->settings->getSetting( 'repoUrl' ),
 			'scriptpath' => $this->settings->getSetting( 'repoScriptPath' ),
 			'articlepath' => $this->settings->getSetting( 'repoArticlePath' ),
-		);
+		];
 	}
 
 	/**
@@ -101,25 +101,25 @@ class ApiClientInfo extends ApiQueryBase {
 	 * @see ApiBase::getAllowedParams
 	 */
 	protected function getAllowedParams() {
-		return array(
-			'prop' => array(
+		return [
+			'prop' => [
 				self::PARAM_DFLT => 'url|siteid',
 				self::PARAM_ISMULTI => true,
-				self::PARAM_TYPE => array(
+				self::PARAM_TYPE => [
 					'url', 'siteid'
-				)
-			),
-		);
+				]
+			],
+		];
 	}
 
 	/**
 	 * @see ApiBase::getExamplesMessages()
 	 */
 	protected function getExamplesMessages() {
-		return array(
+		return [
 			'action=query&meta=wikibase'
 				=> 'apihelp-query+wikibase-example',
-		);
+		];
 	}
 
 }

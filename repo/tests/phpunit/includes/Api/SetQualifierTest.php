@@ -43,7 +43,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		static $hasEntities = false;
 
 		if ( !$hasEntities ) {
-			$this->initTestEntities( array( 'StringProp', 'Berlin' ) );
+			$this->initTestEntities( [ 'StringProp', 'Berlin' ] );
 			$hasEntities = true;
 		}
 	}
@@ -57,7 +57,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	 * @return Snak
 	 */
 	private function getTestSnak( $type, $data ) {
-		static $snaks = array();
+		static $snaks = [];
 
 		if ( !isset( $snaks[$type] ) ) {
 			$prop = Property::newFromType( 'string' );
@@ -109,11 +109,11 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	}
 
 	public function provideAddRequests() {
-		return array(
-			array( PropertyNoValueSnak::class ),
-			array( PropertySomeValueSnak::class ),
-			array( PropertyValueSnak::class, new StringValue( 'o_O' ) )
-		);
+		return [
+			[ PropertyNoValueSnak::class ],
+			[ PropertySomeValueSnak::class ],
+			[ PropertyValueSnak::class, new StringValue( 'o_O' ) ]
+		];
 	}
 
 	/**
@@ -136,7 +136,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	}
 
 	public function provideChangeRequests() {
-		return array( array( PropertyValueSnak::class, new StringValue( 'o_O' ) ) );
+		return [ [ PropertyValueSnak::class, new StringValue( 'o_O' ) ] ];
 	}
 
 	/**
@@ -163,13 +163,13 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	}
 
 	protected function makeSetQualifierRequest( $statementGuid, $snakhash, Snak $qualifier, EntityId $entityId ) {
-		$params = array(
+		$params = [
 			'action' => 'wbsetqualifier',
 			'claim' => $statementGuid,
 			'snakhash' => $snakhash,
 			'snaktype' => $qualifier->getType(),
 			'property' => $qualifier->getPropertyId()->getSerialization(),
-		);
+		];
 
 		if ( $qualifier instanceof PropertyValueSnak ) {
 			$dataValue = $qualifier->getDataValue();
@@ -223,13 +223,13 @@ class SetQualifierTest extends WikibaseApiTestCase {
 			$value = json_encode( $value );
 		}
 
-		$params = array(
+		$params = [
 			'action' => 'wbsetqualifier',
 			'claim' => $guid,
 			'property' => $propertyId,
 			'snaktype' => $snakType,
 			'value' => $value,
-		);
+		];
 
 		try {
 			$this->doApiRequestWithToken( $params );
@@ -240,13 +240,13 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	}
 
 	public function invalidRequestProvider() {
-		return array(
-			'bad guid 1' => array( 'Berlin', 'xyz', 'StringProp', 'value', 'abc', 'invalid-guid' ),
-			'bad guid 2' => array( 'Berlin', 'x$y$z', 'StringProp', 'value', 'abc', 'invalid-guid' ),
-			'bad guid 3' => array( 'Berlin', 'i1813$358fa2a0-4345-82b6-12a4-7b0fee494a5f', 'StringProp', 'value', 'abc', 'invalid-guid' ),
-			'bad snak type' => array( 'Berlin', null, 'StringProp', 'alksdjf', 'abc', 'unknown_snaktype' ),
-			'bad snak value' => array( 'Berlin', null, 'StringProp', 'value', '"   "', 'modification-failed' ),
-		);
+		return [
+			'bad guid 1' => [ 'Berlin', 'xyz', 'StringProp', 'value', 'abc', 'invalid-guid' ],
+			'bad guid 2' => [ 'Berlin', 'x$y$z', 'StringProp', 'value', 'abc', 'invalid-guid' ],
+			'bad guid 3' => [ 'Berlin', 'i1813$358fa2a0-4345-82b6-12a4-7b0fee494a5f', 'StringProp', 'value', 'abc', 'invalid-guid' ],
+			'bad snak type' => [ 'Berlin', null, 'StringProp', 'alksdjf', 'abc', 'unknown_snaktype' ],
+			'bad snak value' => [ 'Berlin', null, 'StringProp', 'value', '"   "', 'modification-failed' ],
+		];
 	}
 
 }

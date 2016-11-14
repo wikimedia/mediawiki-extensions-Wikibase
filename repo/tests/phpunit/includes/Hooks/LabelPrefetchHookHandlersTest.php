@@ -38,7 +38,7 @@ class LabelPrefetchHookHandlersTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityId[]
 	 */
 	public function titlesToIds( array $titles ) {
-		$entityIds = array();
+		$entityIds = [];
 		$idParser = new BasicEntityIdParser();
 
 		foreach ( $titles as $title ) {
@@ -72,7 +72,7 @@ class LabelPrefetchHookHandlersTest extends \PHPUnit_Framework_TestCase {
 		$idLookup = $this->getMock( EntityIdLookup::class );
 		$idLookup->expects( $this->atLeastOnce() )
 			->method( 'getEntityIds' )
-			->will( $this->returnCallback( array( $this, 'titlesToIds' ) ) );
+			->will( $this->returnCallback( [ $this, 'titlesToIds' ] ) );
 
 		$titleFactory = new TitleFactory();
 
@@ -86,19 +86,19 @@ class LabelPrefetchHookHandlersTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testDoChangesListInitRows() {
-		$rows = array(
-			(object)array( 'rc_namespace' => NS_MAIN, 'rc_title' => 'XYZ' ),
-			(object)array( 'rc_namespace' => NS_MAIN, 'rc_title' => 'Q23' ),
-			(object)array( 'rc_namespace' => NS_MAIN, 'rc_title' => 'P55' ),
-		);
+		$rows = [
+			(object)[ 'rc_namespace' => NS_MAIN, 'rc_title' => 'XYZ' ],
+			(object)[ 'rc_namespace' => NS_MAIN, 'rc_title' => 'Q23' ],
+			(object)[ 'rc_namespace' => NS_MAIN, 'rc_title' => 'P55' ],
+		];
 
-		$expectedTermTypes = array( 'label', 'description' );
-		$expectedLanguageCodes = array( 'de', 'en', 'it' );
+		$expectedTermTypes = [ 'label', 'description' ];
+		$expectedLanguageCodes = [ 'de', 'en', 'it' ];
 
-		$expectedIds = array(
+		$expectedIds = [
 			new ItemId( 'Q23' ),
 			new PropertyId( 'P55' ),
-		);
+		];
 
 		$prefetchTerms = function (
 			array $entityIds,

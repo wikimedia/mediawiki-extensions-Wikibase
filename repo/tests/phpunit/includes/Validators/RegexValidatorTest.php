@@ -18,12 +18,12 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 class RegexValidatorTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideValidate() {
-		return array(
-			array( '/^x/', false, 'xyz', true, "match" ),
-			array( '/^x/', false, 'zyx', false, "mismatch" ),
-			array( '/^x/', true, 'zyx', true, "inverse match" ),
-			array( '/^x/', true, 'xyz', false, "inverse mismatch" ),
-		);
+		return [
+			[ '/^x/', false, 'xyz', true, "match" ],
+			[ '/^x/', false, 'zyx', false, "mismatch" ],
+			[ '/^x/', true, 'zyx', true, "inverse match" ],
+			[ '/^x/', true, 'xyz', false, "inverse mismatch" ],
+		];
 	}
 
 	/**

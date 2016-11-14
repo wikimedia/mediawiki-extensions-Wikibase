@@ -75,7 +75,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 			$propertyDataTypeLookup,
 			$fallbackChain,
 			$language,
-			new StaticContentLanguages( array( 'de', $langCode, 'es', 'ja' ) )
+			new StaticContentLanguages( [ 'de', $langCode, 'es', 'ja' ] )
 		);
 	}
 
@@ -93,7 +93,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 		$entityAccessor = $this->getEntityAccessor( $entityLookup );
 
 		$entityArr = $entityAccessor->getEntity( $prefixedId );
-		$actual = is_array( $entityArr ) ? $entityArr : array();
+		$actual = is_array( $entityArr ) ? $entityArr : [];
 		$this->assertSameSize( $expected, $actual );
 
 		foreach ( $expected as $expectedKey ) {
@@ -124,10 +124,10 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 
 		$item2 = new Item( new ItemId( 'Q9999' ) );
 
-		return array(
-			array( array( 'id', 'type', 'descriptions', 'labels', 'sitelinks', 'schemaVersion' ), $item, $entityLookup ),
-			array( array(), $item2, $entityLookup )
-		);
+		return [
+			[ [ 'id', 'type', 'descriptions', 'labels', 'sitelinks', 'schemaVersion' ], $item, $entityLookup ],
+			[ [], $item2, $entityLookup ]
+		];
 	}
 
 	protected function getItem() {
@@ -146,37 +146,37 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 	public function testZeroIndexArray( array $array, array $expected ) {
 		$renumber = new ReflectionMethod( EntityAccessor::class, 'renumber' );
 		$renumber->setAccessible( true );
-		$renumber->invokeArgs( $this->getEntityAccessor(), array( &$array ) );
+		$renumber->invokeArgs( $this->getEntityAccessor(), [ & $array ] );
 
 		$this->assertSame( $expected, $array );
 	}
 
 	public function provideZeroIndexedArray() {
-		return array(
-			array(
-				array( 'nyancat' => array( 0 => 'nyan', 1 => 'cat' ) ),
-				array( 'nyancat' => array( 1 => 'nyan', 2 => 'cat' ) )
-			),
-			array(
-				array( array( 'a', 'b' ) ),
-				array( array( 1 => 'a', 2 => 'b' ) )
-			),
-			array(
+		return [
+			[
+				[ 'nyancat' => [ 0 => 'nyan', 1 => 'cat' ] ],
+				[ 'nyancat' => [ 1 => 'nyan', 2 => 'cat' ] ]
+			],
+			[
+				[ [ 'a', 'b' ] ],
+				[ [ 1 => 'a', 2 => 'b' ] ]
+			],
+			[
 				// Nested arrays
-				array( array( 'a', 'b', array( 'c', 'd' ) ) ),
-				array( array( 1 => 'a', 2 => 'b', 3 => array( 1 => 'c', 2 => 'd' ) ) )
-			),
-			array(
+				[ [ 'a', 'b', [ 'c', 'd' ] ] ],
+				[ [ 1 => 'a', 2 => 'b', 3 => [ 1 => 'c', 2 => 'd' ] ] ]
+			],
+			[
 				// Already 1-based
-				array( array( 1 => 'a', 4 => 'c', 3 => 'b' ) ),
-				array( array( 1 => 'a', 4 => 'c', 3 => 'b' ) )
-			),
-			array(
+				[ [ 1 => 'a', 4 => 'c', 3 => 'b' ] ],
+				[ [ 1 => 'a', 4 => 'c', 3 => 'b' ] ]
+			],
+			[
 				// Associative array
-				array( array( 'foo' => 'bar', 1337 => 'Wikidata' ) ),
-				array( array( 'foo' => 'bar', 1337 => 'Wikidata' ) )
-			),
-		);
+				[ [ 'foo' => 'bar', 1337 => 'Wikidata' ] ],
+				[ [ 'foo' => 'bar', 1337 => 'Wikidata' ] ]
+			],
+		];
 	}
 
 	public function testFullEntityGetEntityResponse() {
@@ -185,12 +185,12 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 		//Basic
 		$item->setLabel( 'de', 'foo-de' );
 		$item->setLabel( 'qu', 'foo-qu' );
-		$item->setAliases( 'en', array( 'bar', 'baz' ) );
-		$item->setAliases( 'de-formal', array( 'bar', 'baz' ) );
+		$item->setAliases( 'en', [ 'bar', 'baz' ] );
+		$item->setAliases( 'de-formal', [ 'bar', 'baz' ] );
 		$item->setDescription( 'en', 'en-desc' );
 		$item->setDescription( 'pt', 'ptDesc' );
-		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q333' ) ) );
-		$item->getSiteLinkList()->addNewSiteLink( 'zh_classicalwiki', 'User:Addshore', array() );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Berlin', [ new ItemId( 'Q333' ) ] );
+		$item->getSiteLinkList()->addNewSiteLink( 'zh_classicalwiki', 'User:Addshore', [] );
 
 		$snak = new PropertyValueSnak( 65, new StringValue( 'snakStringValue' ) );
 
@@ -199,10 +199,10 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 		$qualifiers->addSnak( new PropertySomeValueSnak( 65 ) );
 
 		$references = new ReferenceList();
-		$references->addNewReference( array(
+		$references->addNewReference( [
 			new PropertySomeValueSnak( 65 ),
 			new PropertySomeValueSnak( 68 )
-		) );
+		] );
 
 		$guid = 'imaguid';
 		$item->getStatements()->addNewStatement( $snak, $qualifiers, $references, $guid );
@@ -212,113 +212,113 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 
 		$entityAccessor = $this->getEntityAccessor( $entityLookup, null, 'qug' );
 
-		$expected = array(
+		$expected = [
 			'id' => 'Q123098',
 			'type' => 'item',
-			'labels' => array(
-				'de' => array(
+			'labels' => [
+				'de' => [
 					'language' => 'de',
 					'value' => 'foo-de',
-				),
-			),
-			'descriptions' => array(
-				'en' => array(
+				],
+			],
+			'descriptions' => [
+				'en' => [
 					'language' => 'en',
 					'value' => 'en-desc',
-				),
-			),
-			'aliases' => array(
-				'en' => array(
-					1 => array(
+				],
+			],
+			'aliases' => [
+				'en' => [
+					1 => [
 						'language' => 'en',
 						'value' => 'bar',
-					),
-					2 => array(
+					],
+					2 => [
 						'language' => 'en',
 						'value' => 'baz',
-					),
-				),
-			),
-			'claims' => array(
-				'P65' => array(
-					1 => array(
+					],
+				],
+			],
+			'claims' => [
+				'P65' => [
+					1 => [
 						'id' => 'imaguid',
 						'type' => 'statement',
-						'mainsnak' => array(
+						'mainsnak' => [
 							'snaktype' => 'value',
 							'property' => 'P65',
 							'datatype' => 'structured-cat',
-							'datavalue' => array(
+							'datavalue' => [
 								'value' => 'snakStringValue',
 								'type' => 'string',
-							),
-						),
-						'qualifiers' => array(
-							'P65' => array(
-								1 => array(
+							],
+						],
+						'qualifiers' => [
+							'P65' => [
+								1 => [
 									'hash' => 'e95e866e7fa1c18bd06dae9b712cb99545107eb8',
 									'snaktype' => 'value',
 									'property' => 'P65',
-									'datavalue' => array(
+									'datavalue' => [
 										'value' => 'string!',
 										'type' => 'string',
-									),
+									],
 									'datatype' => 'structured-cat',
-								),
-								2 => array(
+								],
+								2 => [
 									'hash' => '210b00274bf03247a89de918f15b12142ebf9e56',
 									'snaktype' => 'somevalue',
 									'property' => 'P65',
 									'datatype' => 'structured-cat',
-								),
-							),
-						),
+								],
+							],
+						],
 						'rank' => 'normal',
-						'qualifiers-order' => array(
+						'qualifiers-order' => [
 							1 => 'P65'
-						),
-						'references' => array(
-							1 => array(
+						],
+						'references' => [
+							1 => [
 								'hash' => 'bdc5f7185904d6d3219e13b7443571dda8c4bee8',
-								'snaks' => array(
-									'P65' => array(
-										1 => array(
+								'snaks' => [
+									'P65' => [
+										1 => [
 											'snaktype' => 'somevalue',
 											'property' => 'P65',
 											'datatype' => 'structured-cat',
-										)
-									),
-									'P68' => array(
-										1 => array(
+										]
+									],
+									'P68' => [
+										1 => [
 											'snaktype' => 'somevalue',
 											'property' => 'P68',
 											'datatype' => 'structured-cat',
-										)
-									),
-								),
-								'snaks-order' => array(
+										]
+									],
+								],
+								'snaks-order' => [
 									1 => 'P65',
 									2 => 'P68'
-								),
-							),
-						),
-					),
-				),
-			),
-			'sitelinks' => array(
-				'enwiki' => array(
+								],
+							],
+						],
+					],
+				],
+			],
+			'sitelinks' => [
+				'enwiki' => [
 					'site' => 'enwiki',
 					'title' => 'Berlin',
-					'badges' => array( 1 => 'Q333' )
-				),
-				'zh_classicalwiki' => array(
+					'badges' => [ 1 => 'Q333' ]
+				],
+				'zh_classicalwiki' => [
 					'site' => 'zh_classicalwiki',
 					'title' => 'User:Addshore',
-					'badges' => array()
-				),
-			),
+					'badges' => []
+				],
+			],
 			'schemaVersion' => 2,
-		);
+		];
 
 		$this->assertEquals( $expected, $entityAccessor->getEntity( 'Q123098' ) );
 	}

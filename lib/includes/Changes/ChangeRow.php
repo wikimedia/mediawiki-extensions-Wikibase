@@ -21,7 +21,7 @@ class ChangeRow implements Change {
 	 *
 	 * @var array
 	 */
-	private $fields = array( 'id' => null );
+	private $fields = [ 'id' => null ];
 
 	/**
 	 * @see Change::getAge
@@ -45,7 +45,7 @@ class ChangeRow implements Change {
 		return $this->getField( 'time' );
 	}
 
-	public function __construct( array $fields = array() ) {
+	public function __construct( array $fields = [] ) {
 		$this->setFields( $fields );
 	}
 
@@ -188,7 +188,7 @@ class ChangeRow implements Change {
 
 		if ( !is_array( $info ) ) {
 			wfLogWarning( "Failed to unserializeInfo of id: " . $this->getObjectId() );
-			return array();
+			return [];
 		}
 
 		return $info;

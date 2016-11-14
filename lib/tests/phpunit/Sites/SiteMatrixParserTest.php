@@ -39,179 +39,179 @@ class SiteMatrixParserTest extends PHPUnit_Framework_TestCase {
 	public function sitesFromJsonProvider() {
 		$siteData = $this->getSiteData();
 
-		$data = array();
+		$data = [];
 
-		$data['Protocol relative'] = array(
+		$data['Protocol relative'] = [
 			'/w/$1',
 			'/wiki/$1',
 			false,
 			$this->getSites( $siteData, '/w/$1', '/wiki/$1' )
-		);
+		];
 
-		$data['Keep the protocol'] = array(
+		$data['Keep the protocol'] = [
 			'/w/$1',
 			'/wiki/$1',
 			true,
 			$this->getSites( $siteData, '/w/$1', '/wiki/$1', 'http:' )
-		);
+		];
 
-		$data['Force a protocol'] = array(
+		$data['Force a protocol'] = [
 			'/w/$1',
 			'/wiki/$1',
 			'CompuGlobalHyperMegaNet',
 			$this->getSites( $siteData, '/w/$1', '/wiki/$1', 'CompuGlobalHyperMegaNet:' )
-		);
+		];
 
 		return $data;
 	}
 
 	protected function getSiteMatrixJson() {
-		$sites = array(
-			array(
+		$sites = [
+			[
 				'code' => 'en',
 				'name' => 'English',
-				'site' => array(
-					array(
+				'site' => [
+					[
 						'url' => 'http://en.wikipedia.org',
 						'dbname' => 'enwiki',
 						'code' => 'wiki',
 						'sitename' => 'Wikipedia'
-					),
-					array(
+					],
+					[
 						'url' => 'http://en.wikivoyage.org',
 						'dbname' => 'enwikivoyage',
 						'code' => 'wikivoyage',
 						'sitename' => 'Wikipedia'
-					),
-					array(
+					],
+					[
 						'url' => 'http://en.wikiquote.org',
 						'dbname' => 'enwikiquote',
 						'code' => 'wikiquote',
 						'sitename' => 'Wikipedia'
-					)
-				),
-			),
-			array(
+					]
+				],
+			],
+			[
 				'code' => 'fr',
 				'name' => 'français',
-				'site' => array(
-					array(
+				'site' => [
+					[
 						'url' => 'http://fr.wikipedia.org',
 						'dbname' => 'frwiki',
 						'code' => 'wiki',
 						'sitename' => 'Wikipedia'
-					),
-					array(
+					],
+					[
 						'url' => 'http://fr.wikivoyage.org',
 						'dbname' => 'frwikivoyage',
 						'code' => 'wikivoyage',
 						'sitename' => 'Wikipedia'
-					)
-				)
-			)
-		);
+					]
+				]
+			]
+		];
 
-		$specialSites = array();
+		$specialSites = [];
 
-		$specialSites[] = array(
+		$specialSites[] = [
 			'url' => 'http://commons.wikimedia.org',
 			'dbname' => 'commonswiki',
 			'code' => 'commons'
-		);
+		];
 
-		$specialSites[] = array(
+		$specialSites[] = [
 			'url' => 'http://www.wikidata.org',
 			'dbname' => 'wikidatawiki',
 			'code' => 'wikidata'
-		);
+		];
 
-		$specials = array(
+		$specials = [
 			'specials' => $specialSites
-		);
+		];
 
 		$siteMatrix = array_merge(
-			array( 'count' => 879 ),
+			[ 'count' => 879 ],
 			$sites,
 			$specials
 		);
 
-		$data = array(
+		$data = [
 			'sitematrix' => $siteMatrix
-		);
+		];
 
 		return json_encode( $data );
 	}
 
 	protected function getSiteData() {
-		$siteData = array(
-			array(
+		$siteData = [
+			[
 				'siteid' => 'enwiki',
 				'group' => 'wikipedia',
 				'url' => 'en.wikipedia.org',
 				'lang' => 'en'
-			),
-			array(
+			],
+			[
 				'siteid' => 'frwiki',
 				'group' => 'wikipedia',
 				'url' => 'fr.wikipedia.org',
 				'lang' => 'fr'
-			),
-			array(
+			],
+			[
 				'siteid' => 'enwikivoyage',
 				'group' => 'wikivoyage',
 				'url' => 'en.wikivoyage.org',
 				'lang' => 'en'
-			),
-			array(
+			],
+			[
 				'siteid' => 'frwikivoyage',
 				'group' => 'wikivoyage',
 				'url' => 'fr.wikivoyage.org',
 				'lang' => 'fr'
-			),
-			array(
+			],
+			[
 				'siteid' => 'enwikiquote',
 				'group' => 'wikiquote',
 				'url' => 'en.wikiquote.org',
 				'lang' => 'en'
-			),
-			array(
+			],
+			[
 				'siteid' => 'commonswiki',
 				'group' => 'commons',
 				'url' => 'commons.wikimedia.org',
 				'lang' => 'en'
-			),
-			array(
+			],
+			[
 				'siteid' => 'wikidatawiki',
 				'group' => 'wikidata',
 				'url' => 'www.wikidata.org',
 				'lang' => 'en'
-			)
-		);
+			]
+		];
 
 		return $siteData;
 	}
 
 	public function getSites( array $sitesData, $scriptPath, $articlePath, $protocol = '' ) {
-		$sites = array();
+		$sites = [];
 
 		foreach ( $sitesData as $siteData ) {
-			$fields = array(
+			$fields = [
 				'globalid' => $siteData['siteid'],
 				'type' => 'mediawiki',
 				'group' => $siteData['group'],
 				'source' => 'local',
 				'language' => $siteData['lang'],
-				'localids' => array(),
+				'localids' => [],
 				'internalid' => null,
-				'data' => array(
-					'paths' => array(
+				'data' => [
+					'paths' => [
 						'file_path' => $protocol . '//' . $siteData['url'] . $scriptPath,
 						'page_path' => $protocol . '//' . $siteData['url'] . $articlePath
-					)
-				),
+					]
+				],
 				'forward' => false,
-				'config' => array()
-			);
+				'config' => []
+			];
 
 			$site = new MediaWikiSite();
 			$site->unserialize( serialize( $fields ) );

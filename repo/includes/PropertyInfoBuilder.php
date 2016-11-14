@@ -39,9 +39,9 @@ class PropertyInfoBuilder {
 	 * table. Must be an array and can contain anything that can be encoded by json_encode.
 	 */
 	public function buildPropertyInfo( Property $property ) {
-		$info = array(
+		$info = [
 			PropertyInfoStore::KEY_DATA_TYPE => $property->getDataTypeId()
-		);
+		];
 
 		$formatterUrl = $this->getFormatterUrl( $property->getStatements() );
 		if ( $formatterUrl !== null ) {

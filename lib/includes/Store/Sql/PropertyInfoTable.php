@@ -79,7 +79,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 	 * @return array[] The array of decoded blobs
 	 */
 	private function decodeResult( ResultWrapper $res ) {
-		$infos = array();
+		$infos = [];
 
 		foreach ( $res as $row ) {
 			$info = $this->decodeBlob( $row->pi_info );
@@ -111,7 +111,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 		$res = $dbr->selectField(
 			$this->tableName,
 			'pi_info',
-			array( 'pi_property_id' => $propertyId->getNumericId() ),
+			[ 'pi_property_id' => $propertyId->getNumericId() ],
 			__METHOD__
 		);
 
@@ -143,8 +143,8 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 
 		$res = $dbr->select(
 			$this->tableName,
-			array( 'pi_property_id', 'pi_info' ),
-			array( 'pi_type' => $dataType ),
+			[ 'pi_property_id', 'pi_info' ],
+			[ 'pi_type' => $dataType ],
 			__METHOD__
 		);
 
@@ -166,8 +166,8 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 
 		$res = $dbr->select(
 			$this->tableName,
-			array( 'pi_property_id', 'pi_info' ),
-			array(),
+			[ 'pi_property_id', 'pi_info' ],
+			[],
 			__METHOD__
 		);
 
@@ -203,12 +203,12 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 
 		$dbw->replace(
 			$this->tableName,
-			array( 'pi_property_id' ),
-			array(
+			[ 'pi_property_id' ],
+			[
 				'pi_property_id' => $propertyId->getNumericId(),
 				'pi_info' => $json,
 				'pi_type' => $type,
-			),
+			],
 			__METHOD__
 		);
 
@@ -233,7 +233,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 
 		$dbw->delete(
 			$this->tableName,
-			array( 'pi_property_id' => $propertyId->getNumericId() ),
+			[ 'pi_property_id' => $propertyId->getNumericId() ],
 			__METHOD__
 		);
 

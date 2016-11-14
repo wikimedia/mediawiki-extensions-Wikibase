@@ -35,13 +35,13 @@ use Wikibase\View\Template\TemplateRegistry;
 class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 
 	public function testNoGroups() {
-		$html = $this->newInstance()->getHtml( array(), null, array() );
+		$html = $this->newInstance()->getHtml( [], null, [] );
 
 		$this->assertSame( '', $html );
 	}
 
 	public function testEmptyGroup() {
-		$html = $this->newInstance()->getHtml( array(), null, array( 'wikipedia' ) );
+		$html = $this->newInstance()->getHtml( [], null, [ 'wikipedia' ] );
 
 		$this->assertSame(
 			'<h2 id="sitelinks" class="wikibase-sitelinks">(wikibase-sitelinks)</h2>'
@@ -54,10 +54,10 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testWikipediaGroup() {
-		$siteLinks = array(
+		$siteLinks = [
 			new SiteLink( 'enwiki', 'Title' ),
-		);
-		$html = $this->newInstance()->getHtml( $siteLinks, null, array( 'wikipedia' ) );
+		];
+		$html = $this->newInstance()->getHtml( $siteLinks, null, [ 'wikipedia' ] );
 
 		$this->assertSame(
 			'<h2 id="sitelinks" class="wikibase-sitelinks">(wikibase-sitelinks)</h2>'
@@ -73,10 +73,10 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testSpecialGroup() {
-		$siteLinks = array(
+		$siteLinks = [
 			new SiteLink( 'specialwiki', 'Title' ),
-		);
-		$html = $this->newInstance()->getHtml( $siteLinks, null, array( 'special' ) );
+		];
+		$html = $this->newInstance()->getHtml( $siteLinks, null, [ 'special' ] );
 
 		$this->assertSame(
 			'<h2 id="sitelinks" class="wikibase-sitelinks">(wikibase-sitelinks)</h2>'
@@ -92,11 +92,11 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testTwoSiteLinks() {
-		$siteLinks = array(
+		$siteLinks = [
 			new SiteLink( 'enwiki', 'Title' ),
 			new SiteLink( 'dewiki', 'Titel' ),
-		);
-		$html = $this->newInstance()->getHtml( $siteLinks, null, array( 'wikipedia' ) );
+		];
+		$html = $this->newInstance()->getHtml( $siteLinks, null, [ 'wikipedia' ] );
 
 		$this->assertSame( 2, substr_count( $html, '<LINK' ) );
 		$this->assertContains( 'mw-collapsible', $html );
@@ -105,11 +105,11 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 	public function testBadges() {
 		$featured = new ItemId( 'Q42' );
 		$good = new ItemId( 'Q12' );
-		$siteLinks = array(
-			new SiteLink( 'enwiki', 'Title', array( $featured ) ),
-			new SiteLink( 'dewiki', 'Titel', array( $featured, $good ) ),
-		);
-		$html = $this->newInstance()->getHtml( $siteLinks, null, array( 'wikipedia' ) );
+		$siteLinks = [
+			new SiteLink( 'enwiki', 'Title', [ $featured ] ),
+			new SiteLink( 'dewiki', 'Titel', [ $featured, $good ] ),
+		];
+		$html = $this->newInstance()->getHtml( $siteLinks, null, [ 'wikipedia' ] );
 
 		$this->assertSame( 3, substr_count( $html, '<BADGE' ) );
 		$this->assertContains(
@@ -126,7 +126,7 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 	 * @return SiteLinksView
 	 */
 	private function newInstance() {
-		$templateFactory = new TemplateFactory( new TemplateRegistry( array(
+		$templateFactory = new TemplateFactory( new TemplateRegistry( [
 			'wb-section-heading' => '<h2 id="$2" class="$3">$1</h2>',
 			'wikibase-sitelinkgrouplistview' => '$1',
 			'wikibase-listview' => '$1',
@@ -136,7 +136,7 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 			'wikibase-sitelinkview-pagename' => '<PAGE href="$1" lang="$4" dir="$5">$2</PAGE>$3',
 			'wikibase-badgeselector' => '$1',
 			'wb-badge' => '<BADGE class="$1" id="$3">$2</BADGE>',
-		) ) );
+		] ) );
 
 		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->any() )
@@ -150,11 +150,11 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 			$this->newEntityIdFormatter(),
 			$languageNameLookup,
 			$this->newNumberLocalizer(),
-			array(
+			[
 				'Q42' => 'wb-badge-featuredarticle',
 				'Q12' => 'wb-badge-goodarticle'
-			),
-			array( 'special group' ),
+			],
+			[ 'special group' ],
 			new DummyLocalizedTextProvider()
 		);
 	}
@@ -189,7 +189,7 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 		$deWiki->setLanguageCode( 'de' );
 		$deWiki->setGroup( 'wikipedia' );
 
-		return new SiteList( array( $enWiki, $specialWiki, $deWiki ) );
+		return new SiteList( [ $enWiki, $specialWiki, $deWiki ] );
 	}
 
 	/**

@@ -60,11 +60,11 @@ class EntityUsageTest extends PHPUnit_Framework_TestCase {
 		$aspect = EntityUsage::LABEL_USAGE;
 		$modifier = 'ru';
 
-		$expected = array(
+		$expected = [
 			'entityId' => $id->getSerialization(),
 			'aspect' => $aspect,
 			'modifier' => null
-		);
+		];
 
 		$usage = new EntityUsage( $id, $aspect );
 		$this->assertEquals( $expected, $usage->asArray() );
@@ -75,11 +75,11 @@ class EntityUsageTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function aspectKeyProvider() {
-		return array(
-			array( 'L', array( 'L', null ) ),
-			array( 'L.x', array( 'L', 'x' ) ),
-			array( 'L.x.y', array( 'L', 'x.y' ) ),
-		);
+		return [
+			[ 'L', [ 'L', null ] ],
+			[ 'L.x', [ 'L', 'x' ] ],
+			[ 'L.x.y', [ 'L', 'x.y' ] ],
+		];
 	}
 
 	/**
@@ -99,10 +99,10 @@ class EntityUsageTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function provideMakeAspectKey() {
-		return array(
-			array( 'L', null, 'L' ),
-			array( 'L', 'x', 'L.x' ),
-		);
+		return [
+			[ 'L', null, 'L' ],
+			[ 'L', 'x', 'L.x' ],
+		];
 	}
 
 	/**

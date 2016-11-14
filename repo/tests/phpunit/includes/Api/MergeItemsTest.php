@@ -68,17 +68,17 @@ class MergeItemsTest extends \MediaWikiTestCase {
 
 		$this->mockRepository = $this->entityModificationTestHelper->getMockRepository();
 
-		$this->entityModificationTestHelper->putEntities( array(
-			'Q1' => array(),
-			'Q2' => array(),
-			'P1' => array( 'datatype' => 'string' ),
-			'P2' => array( 'datatype' => 'string' ),
-		) );
+		$this->entityModificationTestHelper->putEntities( [
+			'Q1' => [],
+			'Q2' => [],
+			'P1' => [ 'datatype' => 'string' ],
+			'P2' => [ 'datatype' => 'string' ],
+		] );
 
-		$this->entityModificationTestHelper->putRedirects( array(
+		$this->entityModificationTestHelper->putRedirects( [
 			'Q11' => 'Q1',
 			'Q12' => 'Q2',
-		) );
+		] );
 	}
 
 	/**
@@ -194,7 +194,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 
 		$constraintProvider->expects( $this->any() )
 			->method( 'getUpdateValidators' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
 		return $constraintProvider;
 	}
@@ -228,7 +228,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 
 		return new TermValidatorFactory(
 			100,
-			array( 'en', 'de', 'fr' ),
+			[ 'en', 'de', 'fr' ],
 			new BasicEntityIdParser(),
 			$dupeDetector
 		);
@@ -240,65 +240,65 @@ class MergeItemsTest extends \MediaWikiTestCase {
 
 		$module->execute();
 
-		$data = $module->getResult()->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
+		$data = $module->getResult()->getResultData( null, [
+			'BC' => [],
+			'Types' => [],
 			'Strip' => 'all',
-		) );
+		] );
 		return $data;
 	}
 
 	public function provideData() {
-		$testCases = array();
-		$testCases['labelMerge'] = array(
-			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-			array(),
-			array(),
-			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
+		$testCases = [];
+		$testCases['labelMerge'] = [
+			[ 'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ],
+			[],
+			[],
+			[ 'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ],
 			true,
-		);
-		$testCases['ignoreConflictSitelinksMerge'] = array(
-			array( 'sitelinks' => array(
-				'dewiki' => array( 'site' => 'dewiki', 'title' => 'RemainFrom' ),
-				'enwiki' => array( 'site' => 'enwiki', 'title' => 'PlFrom' ),
-			) ),
-			array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'RemainTo' ) ) ),
-			array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'RemainFrom' ) ) ),
-			array( 'sitelinks' => array(
-				'dewiki' => array( 'site' => 'dewiki', 'title' => 'RemainTo' ),
-				'enwiki' => array( 'site' => 'enwiki', 'title' => 'PlFrom' ),
-			) ),
+		];
+		$testCases['ignoreConflictSitelinksMerge'] = [
+			[ 'sitelinks' => [
+				'dewiki' => [ 'site' => 'dewiki', 'title' => 'RemainFrom' ],
+				'enwiki' => [ 'site' => 'enwiki', 'title' => 'PlFrom' ],
+			] ],
+			[ 'sitelinks' => [ 'dewiki' => [ 'site' => 'dewiki', 'title' => 'RemainTo' ] ] ],
+			[ 'sitelinks' => [ 'dewiki' => [ 'site' => 'dewiki', 'title' => 'RemainFrom' ] ] ],
+			[ 'sitelinks' => [
+				'dewiki' => [ 'site' => 'dewiki', 'title' => 'RemainTo' ],
+				'enwiki' => [ 'site' => 'enwiki', 'title' => 'PlFrom' ],
+			] ],
 			false,
 			'sitelink',
-		);
-		$testCases['statementMerge'] = array(
-			array( 'claims' => array( 'P1' => array( array( 'mainsnak' => array(
-				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
-				'type' => 'statement', 'rank' => 'normal', 'id' => 'deadbeefdeadbeefdeadbeefdeadbeef' ) ) ) ),
-			array(),
-			array(),
-			array( 'claims' => array( 'P1' => array( array( 'mainsnak' => array(
-				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
-				'type' => 'statement', 'rank' => 'normal' ) ) ) ),
+		];
+		$testCases['statementMerge'] = [
+			[ 'claims' => [ 'P1' => [ [ 'mainsnak' => [
+				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => [ 'value' => 'imastring', 'type' => 'string' ] ],
+				'type' => 'statement', 'rank' => 'normal', 'id' => 'deadbeefdeadbeefdeadbeefdeadbeef' ] ] ] ],
+			[],
+			[],
+			[ 'claims' => [ 'P1' => [ [ 'mainsnak' => [
+				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => [ 'value' => 'imastring', 'type' => 'string' ] ],
+				'type' => 'statement', 'rank' => 'normal' ] ] ] ],
 			true,
-		);
-		$testCases['ignoreConflictStatementMerge'] = array(
-			array( 'claims' => array( 'P1' => array( array( 'mainsnak' => array(
-				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => array(
-					'value' => array( 'entity-type' => 'item', 'numeric-id' => 2 ), 'type' => 'wikibase-entityid' )
-				),
-				'type' => 'statement', 'rank' => 'normal', 'id' => 'deadbeefdeadbeefdeadbeefdeadbeef' ) ) ) ),
-			array(),
-			array(),
-			array( 'claims' => array( 'P1' => array( array( 'mainsnak' => array(
-				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => array(
-					'value' => array( 'entity-type' => 'item', 'numeric-id' => 2 ), 'type' => 'wikibase-entityid' )
-				),
-				'type' => 'statement', 'rank' => 'normal' ) ) )
-			),
+		];
+		$testCases['ignoreConflictStatementMerge'] = [
+			[ 'claims' => [ 'P1' => [ [ 'mainsnak' => [
+				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => [
+					'value' => [ 'entity-type' => 'item', 'numeric-id' => 2 ], 'type' => 'wikibase-entityid' ]
+				],
+				'type' => 'statement', 'rank' => 'normal', 'id' => 'deadbeefdeadbeefdeadbeefdeadbeef' ] ] ] ],
+			[],
+			[],
+			[ 'claims' => [ 'P1' => [ [ 'mainsnak' => [
+				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => [
+					'value' => [ 'entity-type' => 'item', 'numeric-id' => 2 ], 'type' => 'wikibase-entityid' ]
+				],
+				'type' => 'statement', 'rank' => 'normal' ] ] ]
+			],
 			true,
 			'statement',
-		);
+		];
 
 		return $testCases;
 	}
@@ -308,12 +308,12 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	 */
 	public function testMergeRequest( $pre1, $pre2, $expectedFrom, $expectedTo, $expectRedirect, $ignoreConflicts = null ) {
 		// -- set up params ---------------------------------
-		$params = array(
+		$params = [
 			'action' => 'wbmergeitems',
 			'fromid' => 'Q1',
 			'toid' => 'Q2',
 			'summary' => 'CustomSummary!',
-		);
+		];
 		if ( $ignoreConflicts !== null ) {
 			$params['ignoreconflicts'] = $ignoreConflicts;
 		}
@@ -344,13 +344,13 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	private function assertResultCorrect( array $result ) {
 		$this->apiModuleTestHelper->assertResultSuccess( $result );
 
-		$this->apiModuleTestHelper->assertResultHasKeyInPath( array( 'from', 'id' ), $result );
-		$this->apiModuleTestHelper->assertResultHasKeyInPath( array( 'to', 'id' ), $result );
+		$this->apiModuleTestHelper->assertResultHasKeyInPath( [ 'from', 'id' ], $result );
+		$this->apiModuleTestHelper->assertResultHasKeyInPath( [ 'to', 'id' ], $result );
 		$this->assertEquals( 'Q1', $result['from']['id'] );
 		$this->assertEquals( 'Q2', $result['to']['id'] );
 
-		$this->apiModuleTestHelper->assertResultHasKeyInPath( array( 'from', 'lastrevid' ), $result );
-		$this->apiModuleTestHelper->assertResultHasKeyInPath( array( 'to', 'lastrevid' ), $result );
+		$this->apiModuleTestHelper->assertResultHasKeyInPath( [ 'from', 'lastrevid' ], $result );
+		$this->apiModuleTestHelper->assertResultHasKeyInPath( [ 'to', 'lastrevid' ], $result );
 		$this->assertGreaterThan( 0, $result['from']['lastrevid'] );
 		$this->assertGreaterThan( 0, $result['to']['lastrevid'] );
 	}
@@ -374,86 +374,86 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	}
 
 	private function assertEditSummariesCorrect( array $result ) {
-		$this->entityModificationTestHelper->assertRevisionSummary( array( 'wbmergeitems' ), $result['from']['lastrevid'] );
+		$this->entityModificationTestHelper->assertRevisionSummary( [ 'wbmergeitems' ], $result['from']['lastrevid'] );
 		$this->entityModificationTestHelper->assertRevisionSummary( '/CustomSummary/', $result['from']['lastrevid'] );
-		$this->entityModificationTestHelper->assertRevisionSummary( array( 'wbmergeitems' ), $result['to']['lastrevid'] );
+		$this->entityModificationTestHelper->assertRevisionSummary( [ 'wbmergeitems' ], $result['to']['lastrevid'] );
 		$this->entityModificationTestHelper->assertRevisionSummary( '/CustomSummary/', $result['to']['lastrevid'] );
 	}
 
 	public function provideExceptionParamsData() {
-		return array(
-			array( //0 no ids given
-				'p' => array(),
-				'e' => array( 'exception' => array(
+		return [
+			[ //0 no ids given
+				'p' => [],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'param-missing'
-				) )
-			),
-			array( //1 only from id
-				'p' => array( 'fromid' => 'Q1' ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			[ //1 only from id
+				'p' => [ 'fromid' => 'Q1' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'param-missing'
-				) )
-			),
-			array( //2 only to id
-				'p' => array( 'toid' => 'Q1' ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			[ //2 only to id
+				'p' => [ 'toid' => 'Q1' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'param-missing'
-				) )
-			),
-			array( //3 toid bad
-				'p' => array( 'fromid' => 'Q1', 'toid' => 'ABCDE' ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			[ //3 toid bad
+				'p' => [ 'fromid' => 'Q1', 'toid' => 'ABCDE' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'invalid-entity-id'
-				) )
-			),
-			array( //4 fromid bad
-				'p' => array( 'fromid' => 'ABCDE', 'toid' => 'Q1' ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			[ //4 fromid bad
+				'p' => [ 'fromid' => 'ABCDE', 'toid' => 'Q1' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'invalid-entity-id'
-				) )
-			),
-			array( //5 both same id
-				'p' => array( 'fromid' => 'Q1', 'toid' => 'Q1' ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			[ //5 both same id
+				'p' => [ 'fromid' => 'Q1', 'toid' => 'Q1' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'invalid-entity-id',
 					'message' => 'You must provide unique ids'
-				) )
-			),
-			array( //6 from id is property
-				'p' => array( 'fromid' => 'P1', 'toid' => 'Q1' ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			[ //6 from id is property
+				'p' => [ 'fromid' => 'P1', 'toid' => 'Q1' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'not-item'
-				) )
-			),
-			array( //7 to id is property
-				'p' => array( 'fromid' => 'Q1', 'toid' => 'P1' ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			[ //7 to id is property
+				'p' => [ 'fromid' => 'Q1', 'toid' => 'P1' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'not-item'
-				) )
-			),
-			array( //8 bad ignoreconficts
-				'p' => array( 'fromid' => 'Q2', 'toid' => 'Q2', 'ignoreconflicts' => 'foo' ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			[ //8 bad ignoreconficts
+				'p' => [ 'fromid' => 'Q2', 'toid' => 'Q2', 'ignoreconflicts' => 'foo' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'invalid-entity-id'
-				) )
-			),
-			array( //9 bad ignoreconficts
-				'p' => array( 'fromid' => 'Q2', 'toid' => 'Q2', 'ignoreconflicts' => 'label|foo' ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			[ //9 bad ignoreconficts
+				'p' => [ 'fromid' => 'Q2', 'toid' => 'Q2', 'ignoreconflicts' => 'label|foo' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'invalid-entity-id'
-				) )
-			),
-		);
+				] ]
+			],
+		];
 	}
 
 	/**
@@ -472,51 +472,51 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	}
 
 	public function provideExceptionConflictsData() {
-		return array(
-			array(
-				array( 'descriptions' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-				array( 'descriptions' => array( 'en' => array( 'language' => 'en', 'value' => 'foo2' ) ) ),
-			),
-			array(
-				array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'Foo' ) ) ),
-				array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'Foo2' ) ) ),
-			),
-			array(
-				array( 'claims' => array( 'P1' => array( array( 'mainsnak' => array(
-					'snaktype' => 'value', 'property' => 'P1', 'datavalue' => array(
-						'value' => array( 'entity-type' => 'item', 'numeric-id' => 2 ), 'type' => 'wikibase-entityid' )
-					),
-					'type' => 'statement', 'rank' => 'normal' ) ) )
-				),
-				array(),
-			),
-			array(
-				array(),
-				array( 'claims' => array( 'P1' => array( array( 'mainsnak' => array(
-					'snaktype' => 'value', 'property' => 'P1', 'datavalue' => array(
-						'value' => array( 'entity-type' => 'item', 'numeric-id' => 1 ), 'type' => 'wikibase-entityid' )
-					),
-					'type' => 'statement', 'rank' => 'normal' ) ) )
-				),
-			)
-		);
+		return [
+			[
+				[ 'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ],
+				[ 'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'foo2' ] ] ],
+			],
+			[
+				[ 'sitelinks' => [ 'dewiki' => [ 'site' => 'dewiki', 'title' => 'Foo' ] ] ],
+				[ 'sitelinks' => [ 'dewiki' => [ 'site' => 'dewiki', 'title' => 'Foo2' ] ] ],
+			],
+			[
+				[ 'claims' => [ 'P1' => [ [ 'mainsnak' => [
+					'snaktype' => 'value', 'property' => 'P1', 'datavalue' => [
+						'value' => [ 'entity-type' => 'item', 'numeric-id' => 2 ], 'type' => 'wikibase-entityid' ]
+					],
+					'type' => 'statement', 'rank' => 'normal' ] ] ]
+				],
+				[],
+			],
+			[
+				[],
+				[ 'claims' => [ 'P1' => [ [ 'mainsnak' => [
+					'snaktype' => 'value', 'property' => 'P1', 'datavalue' => [
+						'value' => [ 'entity-type' => 'item', 'numeric-id' => 1 ], 'type' => 'wikibase-entityid' ]
+					],
+					'type' => 'statement', 'rank' => 'normal' ] ] ]
+				],
+			]
+		];
 	}
 
 	/**
 	 * @dataProvider provideExceptionConflictsData
 	 */
 	public function testMergeItemsConflictsExceptions( $pre1, $pre2 ) {
-		$expected = array( 'exception' => array( 'type' => UsageException::class, 'code' => 'failed-save' ) );
+		$expected = [ 'exception' => [ 'type' => UsageException::class, 'code' => 'failed-save' ] ];
 
 		// -- prefill the entities --------------------------------------------
 		$this->entityModificationTestHelper->putEntity( $pre1, 'Q1' );
 		$this->entityModificationTestHelper->putEntity( $pre2, 'Q2' );
 
-		$params = array(
+		$params = [
 			'action' => 'wbmergeitems',
 			'fromid' => 'Q1',
 			'toid' => 'Q2',
-		);
+		];
 
 		// -- do the request --------------------------------------------
 		try {
@@ -528,11 +528,11 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	}
 
 	public function testMergeNonExistingItem() {
-		$params = array(
+		$params = [
 			'action' => 'wbmergeitems',
 			'fromid' => 'Q60457977',
 			'toid' => 'Q60457978'
-		);
+		];
 
 		try {
 			$this->callApiModule( $params );

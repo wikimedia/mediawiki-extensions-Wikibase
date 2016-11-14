@@ -56,14 +56,14 @@ class DumpJsonTest extends MediaWikiTestCase {
 		$snakList->addSnak( new PropertySomeValueSnak( new PropertyId( 'P12' ) ) );
 		$snakList->addSnak( new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) ) );
 		/** @var EntityDocument[] $testEntities */
-		$testEntities = array(
+		$testEntities = [
 			new Item( new ItemId( 'Q1' ) ),
 			new Property( new PropertyId( 'P1' ), null, 'string' ),
 			new Property(
 				new PropertyId( 'P12' ),
 				null,
 				'string',
-				new StatementList( array(
+				new StatementList( [
 					new Statement(
 						// P999 is non existent thus the datatype will not be present
 						new PropertySomeValueSnak( new PropertyId( 'P999' ) ),
@@ -71,29 +71,29 @@ class DumpJsonTest extends MediaWikiTestCase {
 						null,
 						'GUID1'
 					)
-				) )
+				] )
 			),
 			new Item(
 				new ItemId( 'Q2' ),
 				new Fingerprint(
-					new TermList( array(
+					new TermList( [
 						new Term( 'en', 'en-label' ),
 						new Term( 'de', 'de-label' ),
-					) ),
-					new TermList( array(
+					] ),
+					new TermList( [
 						new Term( 'fr', 'en-desc' ),
 						new Term( 'de', 'de-desc' ),
-					) ),
-					new AliasGroupList( array(
-						new AliasGroup( 'en', array( 'ali1', 'ali2' ) ),
-						new AliasGroup( 'dv', array( 'ali11', 'ali22' ) )
-					) )
+					] ),
+					new AliasGroupList( [
+						new AliasGroup( 'en', [ 'ali1', 'ali2' ] ),
+						new AliasGroup( 'dv', [ 'ali11', 'ali22' ] )
+					] )
 				),
-				new SiteLinkList( array(
+				new SiteLinkList( [
 					new SiteLink( 'enwiki', 'Berlin' ),
-					new SiteLink( 'dewiki', 'England', array( new ItemId( 'Q1' ) ) )
-				) ),
-				new StatementList( array(
+					new SiteLink( 'dewiki', 'England', [ new ItemId( 'Q1' ) ] )
+				] ),
+				new StatementList( [
 					new Statement(
 						new PropertySomeValueSnak( new PropertyId( 'P12' ) ),
 						null,
@@ -103,17 +103,17 @@ class DumpJsonTest extends MediaWikiTestCase {
 					new Statement(
 						new PropertySomeValueSnak( new PropertyId( 'P12' ) ),
 						$snakList,
-						new ReferenceList( array(
-							new Reference( array(
+						new ReferenceList( [
+							new Reference( [
 								new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'refSnakVal' ) ),
 								new PropertyNoValueSnak( new PropertyId( 'P12' ) ),
-							) ),
-						) ),
+							] ),
+						] ),
 						'GUID2'
 					)
-				) )
+				] )
 			)
-		);
+		];
 
 		foreach ( $testEntities as $key => $testEntity ) {
 			$mockRepo->putEntity( $testEntity );
@@ -147,10 +147,10 @@ class DumpJsonTest extends MediaWikiTestCase {
 
 		$dumpScript->loadParamsAndArgs(
 			null,
-			array(
+			[
 				'log' => $logFileName,
 				'output' => $outFileName,
-			)
+			]
 		);
 
 		$dumpScript->execute();

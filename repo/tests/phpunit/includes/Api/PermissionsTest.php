@@ -23,57 +23,57 @@ use FormatJson;
 abstract class PermissionsTest extends PermissionsTestCase {
 
 	public function provideReadPermissions() {
-		return array(
-			array( //0
+		return [
+			[ //0
 				null, // normal permissions
 				null // no error
-			),
+			],
 
-			array( //1
-				array( // permissions
-					'*'    => array( 'read' => false ),
-					'user' => array( 'read' => false )
-				),
+			[ //1
+				[ // permissions
+					'*'    => [ 'read' => false ],
+					'user' => [ 'read' => false ]
+				],
 				'readapidenied' // error
-			),
-		);
+			],
+		];
 	}
 
 	public function provideEditPermissions() {
-		return array_merge( $this->provideReadPermissions(), array(
-			array( //2
-				array( // permissions
-					'*'    => array( 'edit' => false ),
-					'user' => array( 'edit' => false )
-				),
+		return array_merge( $this->provideReadPermissions(), [
+			[ //2
+				[ // permissions
+					'*'    => [ 'edit' => false ],
+					'user' => [ 'edit' => false ]
+				],
 				'permissiondenied' // error
-			),
+			],
 
-			array( //3
-				array( // permissions
-					'*'    => array( 'writeapi' => false ),
-					'user' => array( 'writeapi' => false )
-				),
+			[ //3
+				[ // permissions
+					'*'    => [ 'writeapi' => false ],
+					'user' => [ 'writeapi' => false ]
+				],
 				'writeapidenied' // error
-			),
+			],
 
-			array( //4
-				array( // permissions
-					'*'    => array( 'read' => false ),
-					'user' => array( 'read' => false )
-				),
+			[ //4
+				[ // permissions
+					'*'    => [ 'read' => false ],
+					'user' => [ 'read' => false ]
+				],
 				'readapidenied' // error
-			),
-		) );
+			],
+		] );
 	}
 
 	/**
 	 * @dataProvider provideReadPermissions
 	 */
 	public function testGetEntities( array $permissions = null, $expectedError ) {
-		$params = array(
+		$params = [
 			'ids' => EntityTestHelper::getId( 'Oslo' ),
-		);
+		];
 
 		$this->doPermissionsTest( 'wbgetentities', $params, $permissions, $expectedError );
 	}
@@ -81,13 +81,13 @@ abstract class PermissionsTest extends PermissionsTestCase {
 	public function provideCreateEntityPermissions() {
 		$permissions = $this->provideEditPermissions();
 
-		$permissions[] = array( //5
-			array( // permissions
-				'*'    => array( 'createpage' => false ),
-				'user' => array( 'createpage' => false )
-			),
+		$permissions[] = [ //5
+			[ // permissions
+				'*'    => [ 'createpage' => false ],
+				'user' => [ 'createpage' => false ]
+			],
 			'permissiondenied' // error
-		);
+		];
 
 		return $permissions;
 	}
@@ -96,14 +96,14 @@ abstract class PermissionsTest extends PermissionsTestCase {
 	 * @dataProvider provideCreateEntityPermissions
 	 */
 	public function testCreateItem( array $permissions = null, $expectedError ) {
-		$itemData = array(
-			'labels' => array( "en" => array( "language" => 'en', "value" => 'Test' ) ),
-		);
+		$itemData = [
+			'labels' => [ "en" => [ "language" => 'en', "value" => 'Test' ] ],
+		];
 
-		$params = array(
+		$params = [
 			'data' => FormatJson::encode( $itemData ),
 			'new' => 'item',
-		);
+		];
 
 		$this->doPermissionsTest( 'wbeditentity', $params, $permissions, $expectedError );
 	}
@@ -111,13 +111,13 @@ abstract class PermissionsTest extends PermissionsTestCase {
 	public function provideCreatePropertyPermissions() {
 		$permissions = $this->provideEditPermissions();
 
-		$permissions[] = array( //5
-			array( // permissions
-				'*'    => array( 'property-create' => false ),
-				'user' => array( 'property-create' => false )
-			),
+		$permissions[] = [ //5
+			[ // permissions
+				'*'    => [ 'property-create' => false ],
+				'user' => [ 'property-create' => false ]
+			],
 			'permissiondenied' // error
-		);
+		];
 
 		return $permissions;
 	}
@@ -126,15 +126,15 @@ abstract class PermissionsTest extends PermissionsTestCase {
 	 * @dataProvider provideCreatePropertyPermissions
 	 */
 	public function testCreateProperty( array $permissions = null, $expectedError ) {
-		$itemData = array(
-			'labels' => array( "en" => array( "language" => 'en', "value" => 'Testttttttt' ) ),
+		$itemData = [
+			'labels' => [ "en" => [ "language" => 'en', "value" => 'Testttttttt' ] ],
 			'datatype' => 'string',
-		);
+		];
 
-		$params = array(
+		$params = [
 			'data' => FormatJson::encode( $itemData ),
 			'new' => 'property',
-		);
+		];
 
 		$this->doPermissionsTest( 'wbeditentity', $params, $permissions, $expectedError );
 	}
@@ -142,13 +142,13 @@ abstract class PermissionsTest extends PermissionsTestCase {
 	public function provideItemTermPermissions() {
 		$permissions = $this->provideEditPermissions();
 
-		$permissions[] = array( //5
-			array( // permissions
-				'*'    => array( 'item-term' => false ),
-				'user' => array( 'item-term' => false )
-			),
+		$permissions[] = [ //5
+			[ // permissions
+				'*'    => [ 'item-term' => false ],
+				'user' => [ 'item-term' => false ]
+			],
 			'permissiondenied' // error
-		);
+		];
 
 		return $permissions;
 	}
@@ -157,11 +157,11 @@ abstract class PermissionsTest extends PermissionsTestCase {
 	 * @dataProvider provideItemTermPermissions
 	 */
 	public function testSetLabel( array $permissions = null, $expectedError ) {
-		$params = array(
+		$params = [
 			'id' => EntityTestHelper::getId( 'Oslo' ),
 			'language' => 'de',
 			'value' => 'Oslo',
-		);
+		];
 
 		$this->doPermissionsTest( 'wbsetlabel', $params, $permissions, $expectedError );
 	}
@@ -170,11 +170,11 @@ abstract class PermissionsTest extends PermissionsTestCase {
 	 * @dataProvider provideItemTermPermissions
 	 */
 	public function testSetDescription( array $permissions = null, $expectedError ) {
-		$params = array(
+		$params = [
 			'id' => EntityTestHelper::getId( 'Oslo' ),
 			'language' => 'en',
 			'value' => 'Capitol of Norway',
-		);
+		];
 
 		$this->doPermissionsTest( 'wbsetdescription', $params, $permissions, $expectedError );
 	}
@@ -182,13 +182,13 @@ abstract class PermissionsTest extends PermissionsTestCase {
 	public function provideMergeItemsPermissions() {
 		$permissions = $this->provideEditPermissions();
 
-		$permissions[] = array( #5
-			array( # permissions
-				'*'    => array( 'item-merge' => false ),
-				'user' => array( 'item-merge' => false )
-			),
+		$permissions[] = [ #5
+			[ # permissions
+				'*'    => [ 'item-merge' => false ],
+				'user' => [ 'item-merge' => false ]
+			],
 			'permissiondenied' # error
-		);
+		];
 
 		return $permissions;
 	}
@@ -197,10 +197,10 @@ abstract class PermissionsTest extends PermissionsTestCase {
 	 * @dataProvider provideMergeItemsPermissions
 	 */
 	public function testMergeItems( array $permissions = null, $expectedError ) {
-		$params = array(
+		$params = [
 			'fromid' => EntityTestHelper::getId( 'Oslo' ),
 			'toid' => EntityTestHelper::getId( 'Empty' ),
-		);
+		];
 
 		$this->doPermissionsTest( 'wbmergeitems', $params, $permissions, $expectedError );
 	}

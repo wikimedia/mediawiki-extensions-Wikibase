@@ -27,7 +27,7 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 	 * @return EntityRevision[]
 	 */
 	protected function getTestRevisions() {
-		$entities = array();
+		$entities = [];
 
 		$item = new Item( new ItemId( 'Q42' ) );
 
@@ -50,7 +50,7 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 	 * @return EntityRedirect[]
 	 */
 	protected function getTestRedirects() {
-		$redirects = array();
+		$redirects = [];
 
 		$redirects[] = new EntityRedirect( new ItemId( 'Q23' ), new ItemId( 'Q42' ) );
 
@@ -82,29 +82,29 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 	abstract protected function newEntityRevisionLookup( array $entityRevisions, array $entityRedirects );
 
 	public function provideGetEntityRevision() {
-		$cases = array(
-			array( // #0: any revision
+		$cases = [
+			[ // #0: any revision
 				new ItemId( 'q42' ), 0, true,
-			),
-			array( // #1: first revision
+			],
+			[ // #1: first revision
 				new ItemId( 'q42' ), 11, true,
-			),
-			array( // #2: second revision
+			],
+			[ // #2: second revision
 				new ItemId( 'q42' ), 12, true,
-			),
-			array( // #3: bad revision
+			],
+			[ // #3: bad revision
 				new ItemId( 'q42' ), 600000, false, StorageException::class,
-			),
-			array( // #4: wrong type
+			],
+			[ // #4: wrong type
 				new ItemId( 'q753' ), 0, false,
-			),
-			array( // #5: mismatching revision
+			],
+			[ // #5: mismatching revision
 				new PropertyId( 'p753' ), 11, false, StorageException::class,
-			),
-			array( // #6: some revision
+			],
+			[ // #6: some revision
 				new PropertyId( 'p753' ), 0, true,
-			),
-		);
+			],
+		];
 
 		return $cases;
 	}
@@ -137,10 +137,10 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 
 	public function provideGetEntityRevision_redirect() {
 		$redirects = $this->getTestRedirects();
-		$cases = array();
+		$cases = [];
 
 		foreach ( $redirects as $redirect ) {
-			$cases[] = array( $redirect->getEntityId(), $redirect->getTargetId() );
+			$cases[] = [ $redirect->getEntityId(), $redirect->getTargetId() ];
 		}
 
 		return $cases;
@@ -163,14 +163,14 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetLatestRevisionId() {
-		$cases = array(
-			array( // #0
+		$cases = [
+			[ // #0
 				new ItemId( 'q42' ), 12,
-			),
-			array( // #1
+			],
+			[ // #1
 				new PropertyId( 'p753' ), 13,
-			),
-		);
+			],
+		];
 
 		return $cases;
 	}

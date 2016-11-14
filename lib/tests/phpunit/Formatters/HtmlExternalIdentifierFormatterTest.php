@@ -39,18 +39,18 @@ class HtmlExternalIdentifierFormatterTest extends \PHPUnit_Framework_TestCase {
 				}
 			} ) );
 
-		return array(
-			'formatter URL' => array(
+		return [
+			'formatter URL' => [
 				$formatterUrlExpander,
 				new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'abc&123' ) ),
 				'<a class="wb-external-id" href="http://acme.test/stuff/abc%26123">abc&amp;123</a>'
-			),
-			'unknown property' => array(
+			],
+			'unknown property' => [
 				$formatterUrlExpander,
 				new PropertyValueSnak( new PropertyId( 'P2' ), new StringValue( 'abc&123' ) ),
 				'<span class="wb-external-id">abc&amp;123</span>'
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -67,11 +67,11 @@ class HtmlExternalIdentifierFormatterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideFormatSnak_ParameterTypeException() {
-		return array(
-			'bad snak type' => array(
+		return [
+			'bad snak type' => [
 				new PropertyNoValueSnak( new PropertyId( 'P7' ) )
-			),
-		);
+			],
+		];
 	}
 
 	/**

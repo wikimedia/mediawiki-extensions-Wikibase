@@ -47,7 +47,7 @@ abstract class ModifyTerm extends ModifyEntity {
 	 * @return string[] A list of permissions
 	 */
 	protected function getRequiredPermissions( EntityDocument $entity ) {
-		$permissions = $this->isWriteMode() ? array( 'read', 'edit' ) : array( 'read' );
+		$permissions = $this->isWriteMode() ? [ 'read', 'edit' ] : [ 'read' ];
 		$permissions[] = $entity->getType() . '-term';
 		return $permissions;
 	}
@@ -58,15 +58,15 @@ abstract class ModifyTerm extends ModifyEntity {
 	protected function getAllowedParams() {
 		return array_merge(
 			parent::getAllowedParams(),
-			array(
-				'language' => array(
+			[
+				'language' => [
 					self::PARAM_TYPE => WikibaseRepo::getDefaultInstance()->getTermsLanguages()->getLanguages(),
 					self::PARAM_REQUIRED => true,
-				),
-				'value' => array(
+				],
+				'value' => [
 					self::PARAM_TYPE => 'string',
-				),
-			)
+				],
+			]
 		);
 	}
 

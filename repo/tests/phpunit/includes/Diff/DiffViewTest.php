@@ -27,53 +27,53 @@ class DiffViewTest extends PHPUnit_Framework_TestCase {
 	public function diffOpProvider() {
 		$linkPath = wfMessage( 'wikibase-diffview-link' )->text();
 
-		return array(
-			'Empty' => array(
+		return [
+			'Empty' => [
 				'@^$@',
-			),
-			'Add operation inserted' => array(
+			],
+			'Add operation inserted' => [
 				'@<ins\b[^>]*>NEW</ins>@',
 				null,
 				'NEW',
-			),
-			'Remove operation is deleted' => array(
+			],
+			'Remove operation is deleted' => [
 				'@<del\b[^>]*>OLD</del>@',
 				'OLD',
-			),
-			'Change operation is deleted and inserted' => array(
+			],
+			'Change operation is deleted and inserted' => [
 				'@<del\b[^>]*>OLD</del>.*<ins\b[^>]*>NEW</ins>@',
 				'OLD',
 				'NEW',
-			),
-			'Link is linked' => array(
+			],
+			'Link is linked' => [
 				'@<a\b[^>]* href="[^"]*\bNEW"[^>]*>NEW</a>@',
 				null,
 				'NEW',
 				$linkPath . '/enwiki'
-			),
-			'Link has direction' => array(
+			],
+			'Link has direction' => [
 				'@<a\b[^>]* dir="auto"@',
 				null,
 				'NEW',
 				$linkPath . '/enwiki'
-			),
-			'Link has hreflang' => array(
+			],
+			'Link has hreflang' => [
 				'@<a\b[^>]* hreflang="en"@',
 				null,
 				'NEW',
 				$linkPath . '/enwiki'
-			),
-			'Badge is linked correctly' => array(
+			],
+			'Badge is linked correctly' => [
 				'@FORMATTED BADGE ID@',
 				null,
 				'Q123',
 				$linkPath . '/enwiki/badges'
-			)
-		);
+			]
+		];
 	}
 
 	private function getDiffOps( $oldValue = null, $newValue = null ) {
-		$diffOps = array();
+		$diffOps = [];
 		if ( $oldValue !== null && $newValue !== null ) {
 			$diffOps['change'] = new DiffOpChange( $oldValue, $newValue );
 		} elseif ( $oldValue !== null ) {
@@ -115,7 +115,7 @@ class DiffViewTest extends PHPUnit_Framework_TestCase {
 	 * @param string|null $newValue
 	 * @param string|string[] $path
 	 */
-	public function testGetHtml( $pattern, $oldValue = null, $newValue = null, $path = array() ) {
+	public function testGetHtml( $pattern, $oldValue = null, $newValue = null, $path = [] ) {
 		if ( !is_array( $path ) ) {
 			$path = preg_split( '@\s*/\s*@', $path );
 		}
@@ -147,12 +147,12 @@ class DiffViewTest extends PHPUnit_Framework_TestCase {
 	 * @param string $badgeId
 	 */
 	public function testGivenInvalidBadgeId_getHtmlDoesNotThrowException( $badgeId ) {
-		$path = array(
+		$path = [
 			wfMessage( 'wikibase-diffview-link' )->text(),
 			'enwiki',
 			'badges'
-		);
-		$diff = new Diff( array( new DiffOpAdd( $badgeId ) ) );
+		];
+		$diff = new Diff( [ new DiffOpAdd( $badgeId ) ] );
 
 		$diffView = $this->getDiffView( $path, $diff );
 		$html = $diffView->getHtml();
@@ -161,10 +161,10 @@ class DiffViewTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidBadgeIdProvider() {
-		return array(
-			array( 'invalidBadgeId' ),
-			array( '<a>injection</a>' ),
-		);
+		return [
+			[ 'invalidBadgeId' ],
+			[ '<a>injection</a>' ],
+		];
 	}
 
 }

@@ -122,7 +122,7 @@ class SearchEntities extends ApiBase {
 			$params['strictlanguage']
 		);
 
-		$entries = array();
+		$entries = [];
 
 		foreach ( $searchResults as $match ) {
 			$entries[] = $this->buildTermSearchMatchEntry( $match );
@@ -140,13 +140,13 @@ class SearchEntities extends ApiBase {
 		// TODO: use EntityInfoBuilder, EntityInfoTermLookup
 		$title = $this->titleLookup->getTitleForId( $match->getEntityId() );
 
-		$entry = array(
+		$entry = [
 			'id' => $match->getEntityId()->getSerialization(),
 			'concepturi' => $this->conceptBaseUri . $match->getEntityId()->getSerialization(),
 			'url' => $title->getFullURL(),
 			'title' => $title->getPrefixedText(),
 			'pageid' => $title->getArticleID()
-		);
+		];
 
 		$displayLabel = $match->getDisplayLabel();
 
@@ -165,7 +165,7 @@ class SearchEntities extends ApiBase {
 		// Special handling for 'entityId's as these are not actually Term objects
 		if ( $entry['match']['type'] === 'entityId' ) {
 			$entry['match']['text'] = $entry['id'];
-			$entry['aliases'] = array( $entry['id'] );
+			$entry['aliases'] = [ $entry['id'] ];
 		} else {
 			$matchedTerm = $match->getMatchedTerm();
 			$matchedTermText = $matchedTerm->getText();
@@ -178,7 +178,7 @@ class SearchEntities extends ApiBase {
 			 * XXX: This appears odd but is used in the UI / Entity suggesters
 			 */
 			if ( !array_key_exists( 'label', $entry ) || $matchedTermText != $entry['label'] ) {
-				$entry['aliases'] = array( $matchedTerm->getText() );
+				$entry['aliases'] = [ $matchedTerm->getText() ];
 			}
 		}
 
@@ -198,15 +198,15 @@ class SearchEntities extends ApiBase {
 		$this->getResult()->addValue(
 			null,
 			'searchinfo',
-			array(
+			[
 				'search' => $params['search']
-			)
+			]
 		);
 
 		$this->getResult()->addValue(
 			null,
 			'search',
-			array()
+			[]
 		);
 
 		// getSearchEntities returns one more item than requested in order to determine if there
@@ -234,7 +234,7 @@ class SearchEntities extends ApiBase {
 			$entries
 		);
 
-		$this->getResult()->addIndexedTagName( array( 'search' ), 'entity' );
+		$this->getResult()->addIndexedTagName( [ 'search' ], 'entity' );
 
 		// @todo use result builder?
 		$this->getResult()->addValue(
@@ -248,44 +248,44 @@ class SearchEntities extends ApiBase {
 	 * @see ApiBase::getAllowedParams
 	 */
 	protected function getAllowedParams() {
-		return array(
-			'search' => array(
+		return [
+			'search' => [
 				self::PARAM_TYPE => 'string',
 				self::PARAM_REQUIRED => true,
-			),
-			'language' => array(
+			],
+			'language' => [
 				self::PARAM_TYPE => $this->termsLanguages->getLanguages(),
 				self::PARAM_REQUIRED => true,
-			),
-			'strictlanguage' => array(
+			],
+			'strictlanguage' => [
 				self::PARAM_TYPE => 'boolean',
 				self::PARAM_DFLT => false
-			),
-			'type' => array(
+			],
+			'type' => [
 				self::PARAM_TYPE => $this->entityTypes,
 				self::PARAM_DFLT => 'item',
-			),
-			'limit' => array(
+			],
+			'limit' => [
 				self::PARAM_TYPE => 'limit',
 				self::PARAM_DFLT => 7,
 				self::PARAM_MAX => self::LIMIT_SML1,
 				self::PARAM_MAX2 => self::LIMIT_SML2,
 				self::PARAM_MIN => 0,
 				self::PARAM_RANGE_ENFORCE => true,
-			),
-			'continue' => array(
+			],
+			'continue' => [
 				self::PARAM_TYPE => 'integer',
 				self::PARAM_REQUIRED => false,
 				self::PARAM_DFLT => 0
-			),
-		);
+			],
+		];
 	}
 
 	/**
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
-		return array(
+		return [
 			'action=wbsearchentities&search=abc&language=en' =>
 				'apihelp-wbsearchentities-example-1',
 			'action=wbsearchentities&search=abc&language=en&limit=50' =>
@@ -294,7 +294,7 @@ class SearchEntities extends ApiBase {
 				'apihelp-wbsearchentities-example-4',
 			'action=wbsearchentities&search=alphabet&language=en&type=property' =>
 				'apihelp-wbsearchentities-example-3',
-		);
+		];
 	}
 
 }

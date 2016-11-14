@@ -62,30 +62,30 @@ class GetClaimsStatementFilterTest extends PHPUnit_Framework_TestCase {
 	public function statementProvider() {
 		$statement = new Statement( new PropertyNoValueSnak( 1 ) );
 
-		return array(
+		return [
 			// No filter
-			array( array(), $statement, true ),
+			[ [], $statement, true ],
 
 			// Filter by rank
-			array( array( 'rank' => 'normal' ), $statement, true ),
-			array( array( 'rank' => 'deprecated' ), $statement, false ),
+			[ [ 'rank' => 'normal' ], $statement, true ],
+			[ [ 'rank' => 'deprecated' ], $statement, false ],
 
 			// Filter by property
-			array( array( 'property' => 'p1' ), $statement, true ),
-			array( array( 'property' => 'p2' ), $statement, false ),
+			[ [ 'property' => 'p1' ], $statement, true ],
+			[ [ 'property' => 'p2' ], $statement, false ],
 
 			// Filter by both rank and property
-			array( array( 'rank' => 'normal', 'property' => 'p1' ), $statement, true ),
-			array( array( 'rank' => 'deprecated', 'property' => 'p1' ), $statement, false ),
-			array( array( 'rank' => 'normal', 'property' => 'p2' ), $statement, false ),
-		);
+			[ [ 'rank' => 'normal', 'property' => 'p1' ], $statement, true ],
+			[ [ 'rank' => 'deprecated', 'property' => 'p1' ], $statement, false ],
+			[ [ 'rank' => 'normal', 'property' => 'p2' ], $statement, false ],
+		];
 	}
 
 	public function testInvalidRankSerialization() {
 		$filter = new GetClaimsStatementFilter(
 			new BasicEntityIdParser(),
 			$this->getApiErrorReporter( true ),
-			array( 'rank' => 'invalid' )
+			[ 'rank' => 'invalid' ]
 		);
 
 		$statement = new Statement( new PropertyNoValueSnak( 1 ) );
@@ -96,7 +96,7 @@ class GetClaimsStatementFilterTest extends PHPUnit_Framework_TestCase {
 		$filter = new GetClaimsStatementFilter(
 			new BasicEntityIdParser(),
 			$this->getApiErrorReporter( true ),
-			array( 'property' => 'invalid' )
+			[ 'property' => 'invalid' ]
 		);
 
 		$statement = new Statement( new PropertyNoValueSnak( 1 ) );

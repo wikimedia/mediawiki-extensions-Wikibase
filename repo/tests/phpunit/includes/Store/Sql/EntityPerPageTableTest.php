@@ -98,7 +98,7 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 	 *
 	 * @return EntityPerPageTable
 	 */
-	private function newEntityPerPageTable( array $entities = array(), array $redirects = array() ) {
+	private function newEntityPerPageTable( array $entities = [], array $redirects = [] ) {
 		$table = new EntityPerPageTable(
 			MediaWikiServices::getInstance()->getDBLoadBalancer(),
 			new BasicEntityIdParser()
@@ -123,11 +123,11 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 
 		$row = $dbr->selectRow(
 			'wb_entity_per_page',
-			array( 'epp_page_id' ),
-			array(
+			[ 'epp_page_id' ],
+			[
 				'epp_entity_type' => $entityId->getEntityType(),
 				'epp_entity_id' => $entityId->getNumericId()
-			),
+			],
 			__METHOD__
 		);
 

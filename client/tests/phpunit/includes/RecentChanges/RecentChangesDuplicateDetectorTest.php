@@ -26,8 +26,8 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 	}
 
 	public function provideChangeExists() {
-		return array(
-			'same' => array( true, array(
+		return [
+			'same' => [ true, [
 				'rc_id' => 17,
 				'rc_timestamp' => '20111111111111',
 				'rc_user' => 23,
@@ -39,14 +39,14 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 				'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
 				'rc_last_oldid' => 11,
 				'rc_this_oldid' => 12,
-				'rc_params' => array(
-					'wikibase-repo-change' => array(
+				'rc_params' => [
+					'wikibase-repo-change' => [
 						'parent_id' => 1,
 						'rev_id' => 2,
-					)
-				),
-			) ),
-			'irrelevant differences' => array( true, array(
+					]
+				],
+			] ],
+			'irrelevant differences' => [ true, [
 				'rc_id' => 1117, // ignored
 				'rc_timestamp' => '20111111111111',
 				'rc_user' => 23,
@@ -58,14 +58,14 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 				'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
 				'rc_last_oldid' => 1111, // ignored
 				'rc_this_oldid' => 1112, // ignored
-				'rc_params' => array(
-					'wikibase-repo-change' => array(
+				'rc_params' => [
+					'wikibase-repo-change' => [
 						'parent_id' => 1,
 						'rev_id' => 2,
-					)
-				),
-			) ),
-			'repo change mismatch' => array( false, array(
+					]
+				],
+			] ],
+			'repo change mismatch' => [ false, [
 				'rc_id' => 17,
 				'rc_timestamp' => '20111111111111',
 				'rc_user' => 23,
@@ -77,14 +77,14 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 				'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
 				'rc_last_oldid' => 11,
 				'rc_this_oldid' => 12,
-				'rc_params' => array(
-					'wikibase-repo-change' => array(
+				'rc_params' => [
+					'wikibase-repo-change' => [
 						'parent_id' => 7,
 						'rev_id' => 8,
-					)
-				),
-			) ),
-			'local timestamp mismatch' => array( false, array(
+					]
+				],
+			] ],
+			'local timestamp mismatch' => [ false, [
 				'rc_id' => 17,
 				'rc_timestamp' => '20111111112233',
 				'rc_user' => 23,
@@ -96,14 +96,14 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 				'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
 				'rc_last_oldid' => 11,
 				'rc_this_oldid' => 12,
-				'rc_params' => array(
-					'wikibase-repo-change' => array(
+				'rc_params' => [
+					'wikibase-repo-change' => [
 						'parent_id' => 1,
 						'rev_id' => 2,
-					)
-				),
-			) ),
-			'local title mismatch' => array( false, array(
+					]
+				],
+			] ],
+			'local title mismatch' => [ false, [
 				'rc_id' => 17,
 				'rc_timestamp' => '20111111111111',
 				'rc_user' => 23,
@@ -115,14 +115,14 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 				'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
 				'rc_last_oldid' => 11,
 				'rc_this_oldid' => 12,
-				'rc_params' => array(
-					'wikibase-repo-change' => array(
+				'rc_params' => [
+					'wikibase-repo-change' => [
 						'parent_id' => 1,
 						'rev_id' => 2,
-					)
-				),
-			) ),
-		);
+					]
+				],
+			] ],
+		];
 	}
 
 	/**
@@ -144,7 +144,7 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 			$changeData['rc_params'] = serialize( $changeData['rc_params'] );
 		}
 
-		$defaults = array(
+		$defaults = [
 			'rc_id' => 0,
 			'rc_timestamp' => '20000000000000',
 			'rc_user' => 0,
@@ -169,20 +169,20 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 			'rc_log_type' => null,
 			'rc_log_action' => '',
 			'rc_params' => '',
-		);
+		];
 
 		$changeData = array_merge( $defaults, $changeData );
 
 		$change = RecentChange::newFromRow( (object)$changeData );
-		$change->setExtra( array(
+		$change->setExtra( [
 			'pageStatus' => 'changed'
-		) );
+		] );
 
 		return $change;
 	}
 
 	private function initRecentChanges() {
-		$change = $this->newChange( array(
+		$change = $this->newChange( [
 			'rc_id' => 17,
 			'rc_timestamp' => '20111111111111',
 			'rc_user' => 23,
@@ -194,16 +194,16 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 			'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
 			'rc_last_oldid' => 11,
 			'rc_this_oldid' => 12,
-			'rc_params' => array(
-				'wikibase-repo-change' => array(
+			'rc_params' => [
+				'wikibase-repo-change' => [
 					'parent_id' => 1001, // different id
 					'rev_id' => 1002, // different id
-				)
-			)
-		) );
+				]
+			]
+		] );
 		$change->save();
 
-		$change = $this->newChange( array(
+		$change = $this->newChange( [
 			'rc_id' => 18,
 			'rc_timestamp' => '20111111111111',
 			'rc_user' => 23,
@@ -215,13 +215,13 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 			'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
 			'rc_last_oldid' => 11,
 			'rc_this_oldid' => 12,
-			'rc_params' => array(
-				'wikibase-repo-change' => array(
+			'rc_params' => [
+				'wikibase-repo-change' => [
 					'parent_id' => 1,
 					'rev_id' => 2,
-				)
-			)
-		) );
+				]
+			]
+		] );
 
 		$change->save();
 	}

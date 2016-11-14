@@ -36,22 +36,22 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 	public function testGetSummary() {
 		$job = new UpdateRepoOnDeleteJob(
 			Title::newMainPage(),
-			array(
+			[
 				'siteId' => 'SiteID',
 				'title' => 'Test'
-			)
+			]
 		);
 
 		$summary = $job->getSummary();
 
 		$this->assertEquals( 'clientsitelink-remove', $summary->getMessageKey() );
 		$this->assertEquals(
-			array( 'SiteID' ),
+			[ 'SiteID' ],
 			$summary->getCommentArgs()
 		);
 
 		$this->assertEquals(
-			array( 'Test' ),
+			[ 'Test' ],
 			$summary->getAutoSummaryArgs()
 		);
 	}
@@ -119,7 +119,7 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 	 */
 	private function getMockEditFitlerHookRunner() {
 		$runner = $this->getMockBuilder( EditFilterHookRunner::class )
-			->setMethods( array( 'run' ) )
+			->setMethods( [ 'run' ] )
 			->disableOriginalConstructor()
 			->getMock();
 		$runner->expects( $this->any() )
@@ -129,13 +129,13 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 	}
 
 	public function runProvider() {
-		return array(
-			array( true, false, 'Delete me' ),
+		return [
+			[ true, false, 'Delete me' ],
 			// The title on client still exists, so don't unlink
-			array( false, true, 'Delete me' ),
+			[ false, true, 'Delete me' ],
 			// The title in the repo item is not the one we want to unlink, don't unlink
-			array( false, false, 'Something changed' )
-		);
+			[ false, false, 'Something changed' ]
+		];
 	}
 
 	/**
@@ -147,7 +147,7 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 	 */
 	public function testRun( $expected, $titleExists, $oldTitle ) {
 		$item = new Item();
-		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Delete me', array( new ItemId( 'Q42' ) ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Delete me', [ new ItemId( 'Q42' ) ] );
 
 		$mockRepository = new MockRepository();
 
@@ -158,12 +158,12 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 
 		$mockRepository->saveEntity( $item, 'UpdateRepoOnDeleteJobTest', $user, EDIT_NEW );
 
-		$params = array(
+		$params = [
 			'siteId' => 'enwiki',
 			'entityId' => $item->getId()->getSerialization(),
 			'title' => $oldTitle,
 			'user' => $user->getName()
-		);
+		];
 
 		$job = new UpdateRepoOnDeleteJob( Title::newMainPage(), $params );
 		$job->initServices(

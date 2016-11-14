@@ -30,9 +30,9 @@ class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 		$validGuid = $guidGenerator->newGuid( $item->getId() );
 		$validRank = 1;
 
-		$args = array();
-		$args[] = array( 123, $validRank );
-		$args[] = array( $validGuid, ':-)' );
+		$args = [];
+		$args[] = [ 123, $validRank ];
+		$args[] = [ $validGuid, ':-)' ];
 
 		return $args;
 	}
@@ -48,7 +48,7 @@ class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 
 	public function changeOpProvider() {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
-		$args = array();
+		$args = [];
 
 		$item = $this->newItemWithClaim( 'q123', $snak );
 		$statements = $item->getStatements()->toArray();
@@ -59,7 +59,7 @@ class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 
 		$changeOp = new ChangeOpStatementRank( $guid, $rank );
 
-		$args[] = array( $item, $changeOp, $rank );
+		$args[] = [ $item, $changeOp, $rank ];
 
 		return $args;
 	}

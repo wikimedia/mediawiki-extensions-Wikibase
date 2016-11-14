@@ -36,13 +36,13 @@ class ClientParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 	 * @return Item[]
 	 */
 	private function getItems() {
-		$items = array();
+		$items = [];
 
 		$item = new Item( new ItemId( 'Q1' ) );
 		$item->setLabel( 'en', 'Foo' );
 		$links = $item->getSiteLinkList();
 		$links->addNewSiteLink( 'dewiki', 'Foo de' );
-		$links->addNewSiteLink( 'enwiki', 'Foo en', array( new ItemId( 'Q17' ) ) );
+		$links->addNewSiteLink( 'enwiki', 'Foo en', [ new ItemId( 'Q17' ) ] );
 		$links->addNewSiteLink( 'srwiki', 'Foo sr' );
 		$links->addNewSiteLink( 'dewiktionary', 'Foo de word' );
 		$links->addNewSiteLink( 'enwiktionary', 'Foo en word' );
@@ -53,7 +53,7 @@ class ClientParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 		$links = $item->getSiteLinkList();
 		$links->addNewSiteLink( 'dewiki', 'Talk:Foo de' );
 		$links->addNewSiteLink( 'enwiki', 'Talk:Foo en' );
-		$links->addNewSiteLink( 'srwiki', 'Talk:Foo sr', array( new ItemId( 'Q17' ) ) );
+		$links->addNewSiteLink( 'srwiki', 'Talk:Foo sr', [ new ItemId( 'Q17' ) ] );
 		$items[] = $item;
 
 		return $items;
@@ -64,7 +64,7 @@ class ClientParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 	 *
 	 * @return ClientParserOutputDataUpdater
 	 */
-	private function newInstance( array $otherProjects = array() ) {
+	private function newInstance( array $otherProjects = [] ) {
 		$this->mockRepo = new MockRepository();
 
 		foreach ( $this->getItems() as $item ) {
@@ -185,28 +185,28 @@ class ClientParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function updateOtherProjectsLinksDataProvider() {
-		return array(
-			'other project exists, page has site link' => array(
-				array( 'project' => 'catswiki' ),
-				array( 'project' => 'catswiki' ),
+		return [
+			'other project exists, page has site link' => [
+				[ 'project' => 'catswiki' ],
+				[ 'project' => 'catswiki' ],
 				'Foo sr'
-			),
-			'other project exists, page has no site link' => array(
-				array(),
-				array( 'project' => 'catswiki' ),
+			],
+			'other project exists, page has no site link' => [
+				[],
+				[ 'project' => 'catswiki' ],
 				'Foo xx'
-			),
-			'no other projects, page has site link' => array(
-				array(),
-				array(),
+			],
+			'no other projects, page has site link' => [
+				[],
+				[],
 				'Foo sr'
-			),
-			'no site link for this page' => array(
-				array(),
-				array(),
+			],
+			'no site link for this page' => [
+				[],
+				[],
 				'Foo xx'
-			)
-		);
+			]
+		];
 	}
 
 	public function testUpdateBadgesProperty() {
@@ -255,7 +255,7 @@ class ClientParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 		}
 
 		$parserOutputDataUpdater = new ClientParserOutputDataUpdater(
-			$this->getOtherProjectsSidebarGeneratorFactory( array() ),
+			$this->getOtherProjectsSidebarGeneratorFactory( [] ),
 			$siteLinkLookup,
 			$mockRepoNoSiteLinks,
 			'srwiki'
@@ -281,7 +281,7 @@ class ClientParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 		}
 
 		$parserOutputDataUpdater = new ClientParserOutputDataUpdater(
-			$this->getOtherProjectsSidebarGeneratorFactory( array() ),
+			$this->getOtherProjectsSidebarGeneratorFactory( [] ),
 			$siteLinkLookup,
 			new MockRepository(),
 			'srwiki'

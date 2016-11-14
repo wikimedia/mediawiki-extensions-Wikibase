@@ -10,82 +10,82 @@ return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	$moduleTemplate = array(
+	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0]
-	);
+	];
 
-	$modules = array(
-		'wikibase.view.__namespace' => $moduleTemplate + array(
-			'scripts' => array(
+	$modules = [
+		'wikibase.view.__namespace' => $moduleTemplate + [
+			'scripts' => [
 				'namespace.js'
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase'
-			)
-		),
+			]
+		],
 
-		'wikibase.view.ViewController' => $moduleTemplate + array(
+		'wikibase.view.ViewController' => $moduleTemplate + [
 			'scripts' => 'ViewController.js',
-			'dependencies' => array(
+			'dependencies' => [
 				'util.inherit',
 				'wikibase.view.__namespace',
-			)
-		),
+			]
+		],
 
-		'wikibase.view.StructureEditorFactory' => $moduleTemplate + array(
+		'wikibase.view.StructureEditorFactory' => $moduleTemplate + [
 			'scripts' => 'StructureEditorFactory.js',
-			'dependencies' => array(
+			'dependencies' => [
 				'wikibase.view.__namespace',
-			)
-		),
+			]
+		],
 
-		'wikibase.view.ToolbarFactory' => $moduleTemplate + array(
+		'wikibase.view.ToolbarFactory' => $moduleTemplate + [
 			'scripts' => 'ToolbarFactory.js',
-			'dependencies' => array(
+			'dependencies' => [
 				'jquery.wikibase.addtoolbar',
 				'jquery.wikibase.edittoolbar',
 				'jquery.wikibase.removetoolbar',
 				'wikibase.view.__namespace',
-			)
-		),
+			]
+		],
 
-		'wikibase.view.ToolbarViewController' => $moduleTemplate + array(
+		'wikibase.view.ToolbarViewController' => $moduleTemplate + [
 			'scripts' => 'ToolbarViewController.js',
-			'dependencies' => array(
+			'dependencies' => [
 				'util.inherit',
 				'wikibase.view.__namespace',
 				'wikibase.view.ViewController',
-			),
-			'messages' => array(
+			],
+			'messages' => [
 				'wikibase-save-inprogress',
-			)
-		),
+			]
+		],
 
-		'wikibase.view.ControllerViewFactory' => $moduleTemplate + array(
+		'wikibase.view.ControllerViewFactory' => $moduleTemplate + [
 			'scripts' => 'ControllerViewFactory.js',
-			'dependencies' => array(
+			'dependencies' => [
 				'jquery.cookie',
 				'mediawiki.user',
 				'wikibase.view.__namespace',
 				'wikibase.view.ToolbarViewController',
 				'wikibase.view.ViewFactory'
-			)
-		),
+			]
+		],
 
-		'wikibase.view.ReadModeViewFactory' => $moduleTemplate + array(
+		'wikibase.view.ReadModeViewFactory' => $moduleTemplate + [
 			'scripts' => 'ReadModeViewFactory.js',
-			'dependencies' => array(
+			'dependencies' => [
 				'wikibase.view.__namespace',
 				'wikibase.view.ViewFactory'
-			),
-		),
+			],
+		],
 
-		'wikibase.view.ViewFactory' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.view.ViewFactory' => $moduleTemplate + [
+			'scripts' => [
 				'ViewFactory.js'
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.util.EventSingletonManager',
 				'jquery.wikibase.entitytermsview',
 				'jquery.wikibase.itemview',
@@ -102,12 +102,12 @@ return call_user_func( function() {
 				'wikibase.utilities.ClaimGuidGenerator',
 				'wikibase.view.__namespace',
 				'wikibase.ValueViewBuilder'
-			),
-			'messages' => array(
+			],
+			'messages' => [
 				'wikibase-entitytermsview-input-help-message',
-			)
-		),
-	);
+			]
+		],
+	];
 
 	return $modules;
 } );

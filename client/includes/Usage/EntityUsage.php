@@ -59,13 +59,13 @@ class EntityUsage {
 	 *
 	 * @var null[]
 	 */
-	private static $aspects = array(
+	private static $aspects = [
 		self::SITELINK_USAGE => null,
 		self::LABEL_USAGE => null,
 		self::TITLE_USAGE => null,
 		self::OTHER_USAGE => null,
 		self::ALL_USAGE => null,
-	);
+	];
 
 	/**
 	 * @var EntityId
@@ -149,11 +149,11 @@ class EntityUsage {
 	 * @return array array( 'entityId' => $entityId, 'aspect' => $aspect, 'modifier' => $modifier )
 	 */
 	public function asArray() {
-		return array(
+		return [
 			'entityId' => $this->entityId->getSerialization(),
 			'aspect' => $this->aspect,
 			'modifier' => $this->modifier
-		);
+		];
 	}
 
 	/**

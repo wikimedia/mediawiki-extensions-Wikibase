@@ -52,58 +52,58 @@ class QuantityDetailsFormatterTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function quantityFormatProvider() {
-		return array(
-			array(
+		return [
+			[
 				QuantityValue::newFromNumber( '+5', '1', '+6', '+4' ),
 				'@' . implode( '.*',
-					array(
+					[
 						'<h4[^<>]*>[^<>]*\b5\b[^<>]*1[^<>]*</h4>',
 						'<td[^<>]*>[^<>]*\b5\b[^<>]*</td>',
 						'<td[^<>]*>[^<>]*\b6\b[^<>]*</td>',
 						'<td[^<>]*>[^<>]*\b4\b[^<>]*</td>',
 						'<td[^<>]*>[^<>]*\b1\b[^<>]*</td>',
-					)
+					]
 				) . '@s'
-			),
-			array(
+			],
+			[
 				UnboundedQuantityValue::newFromNumber( '+5', '1' ),
 				'@<h4[^<>]*>5</h4>'
 					. '.*<td[^<>]*>5</td>'
 					. '.*<td[^<>]*>1</td>@s'
-			),
-			'Unit 1' => array(
+			],
+			'Unit 1' => [
 				QuantityValue::newFromNumber( '+5', '1', '+6', '+4' ),
 				'@<td class="wb-quantity-unit">1</td>@'
-			),
-			'Non-URL' => array(
+			],
+			'Non-URL' => [
 				QuantityValue::newFromNumber( '+5', 'Ultrameter', '+6', '+4' ),
 				'@<td class="wb-quantity-unit">Ultrameter</td>@'
-			),
-			'Item ID' => array(
+			],
+			'Item ID' => [
 				QuantityValue::newFromNumber( '+5', 'Q1', '+6', '+4' ),
 				'@<td class="wb-quantity-unit">Q1</td>@'
-			),
-			'Local URL' => array(
+			],
+			'Local URL' => [
 				QuantityValue::newFromNumber( '+5', 'http://localhost/repo/Q11573', '+6', '+4' ),
 				'@<td class="wb-quantity-unit">http://localhost/repo/Q11573</td>@'
-			),
-			'External URL' => array(
+			],
+			'External URL' => [
 				QuantityValue::newFromNumber( '+5', 'https://en.wikipedia.org/wiki/Unitless', '+6', '+4' ),
 				'@<td class="wb-quantity-unit">https://en\.wikipedia\.org/wiki/Unitless</td>@'
-			),
-			'Wikidata wiki URL' => array(
+			],
+			'Wikidata wiki URL' => [
 				QuantityValue::newFromNumber( '+5', 'https://www.wikidata.org/wiki/Q11573', '+6', '+4' ),
 				'@<td class="wb-quantity-unit">https://www\.wikidata\.org/wiki/Q11573</td>@'
-			),
-			'Wikidata concept URI' => array(
+			],
+			'Wikidata concept URI' => [
 				QuantityValue::newFromNumber( '+5', 'http://www.wikidata.org/entity/Q11573', '+6', '+4' ),
 				'@<td class="wb-quantity-unit"><a href="http://www\.wikidata\.org/entity/Q11573">Q11573</a></td>@'
-			),
-			'HTML injection' => array(
+			],
+			'HTML injection' => [
 				QuantityValue::newFromNumber( '+5', '<a>m</a>', '+6', '+4' ),
 				'@\b5 &lt;a&gt;m&lt;/a&gt;@'
-			),
-		);
+			],
+		];
 	}
 
 	public function testGivenHtmlCharacters_formatEscapesHtmlCharacters() {

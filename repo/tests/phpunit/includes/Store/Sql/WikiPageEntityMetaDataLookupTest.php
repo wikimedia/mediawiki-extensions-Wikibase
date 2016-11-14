@@ -33,7 +33,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	/**
 	 * @var EntityRevision[]
 	 */
-	private $data = array();
+	private $data = [];
 
 	protected function setUp() {
 		parent::setUp();
@@ -79,8 +79,8 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	 */
 	private function getLookupWithLaggedConnection( $selectCount, $selectRowCount, $getConnectionCount ) {
 		$lookup = $this->getMockBuilder( WikiPageEntityMetaDataLookup::class )
-			->setConstructorArgs( array( $this->getEntityNamespaceLookup() ) )
-			->setMethods( array( 'getConnection' ) )
+			->setConstructorArgs( [ $this->getEntityNamespaceLookup() ] )
+			->setMethods( [ 'getConnection' ] )
 			->getMock();
 
 		$lookup->expects( $this->exactly( $getConnectionCount ) )
@@ -105,7 +105,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	private function getLaggedDatabase( DatabaseBase $realDB, $selectCount, $selectRowCount ) {
 		$db = $this->getMockBuilder( DatabaseBase::class )
 			->disableOriginalConstructor()
-			->setMethods( array( 'select', 'selectRow' ) )
+			->setMethods( [ 'select', 'selectRow' ] )
 			->setProxyTarget( $realDB )
 			->getMockForAbstractClass();
 
@@ -114,12 +114,12 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 			->will( $this->returnCallback( function() use ( $realDB ) {
 				// Get the actual result
 				$res = call_user_func_array(
-					array( $realDB, 'select' ),
+					[ $realDB, 'select' ],
 					func_get_args()
 				);
 
 				// Return the real result minus the first row
-				$data = array();
+				$data = [];
 				foreach ( $res as $row ) {
 					$data[] = $row;
 				}
@@ -214,7 +214,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	}
 
 	private function assertRevisionInformation( $entityIds, $result ) {
-		$serializedEntityIds = array();
+		$serializedEntityIds = [];
 		foreach ( $entityIds as $entityId ) {
 			$serializedEntityIds[] = $entityId->getSerialization();
 		}
@@ -238,12 +238,12 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	}
 
 	public function testLoadRevisionInformation() {
-		$entityIds = array(
+		$entityIds = [
 			$this->data[0]->getEntity()->getId(),
 			$this->data[1]->getEntity()->getId(),
 			new ItemId( 'Q823487354' ), // Doesn't exist
 			$this->data[2]->getEntity()->getId()
-		);
+		];
 
 		$result = $this->getWikiPageEntityMetaDataLookup()
 			->loadRevisionInformation(
@@ -255,12 +255,12 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	}
 
 	public function testLoadRevisionInformation_masterFallback() {
-		$entityIds = array(
+		$entityIds = [
 			$this->data[0]->getEntity()->getId(),
 			$this->data[1]->getEntity()->getId(),
 			new ItemId( 'Q823487354' ), // Doesn't exist
 			$this->data[2]->getEntity()->getId()
-		);
+		];
 
 		// Make sure we have two calls to getConnection: One that asks for a
 		// slave and one that asks for the master.

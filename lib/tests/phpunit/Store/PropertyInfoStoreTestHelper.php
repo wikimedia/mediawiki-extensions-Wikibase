@@ -35,23 +35,23 @@ class PropertyInfoStoreTestHelper {
 	}
 
 	public static function provideSetPropertyInfo() {
-		return array(
-			array( // #0: ok
+		return [
+			[ // #0: ok
 				new PropertyId( 'P23' ),
-				array( PropertyInfoStore::KEY_DATA_TYPE => 'string' ),
+				[ PropertyInfoStore::KEY_DATA_TYPE => 'string' ],
 				null
-			),
-			array( // #1: missing required field
+			],
+			[ // #1: missing required field
 				new PropertyId( 'P23' ),
-				array(),
+				[],
 				InvalidArgumentException::class
-			),
-			array( // #2: extra data
+			],
+			[ // #2: extra data
 				new PropertyId( 'P23' ),
-				array( PropertyInfoStore::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ),
+				[ PropertyInfoStore::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ],
 				null
-			),
-		);
+			],
+		];
 	}
 
 	public function testSetPropertyInfo( PropertyId $id, array $info, $expectedException ) {
@@ -71,8 +71,8 @@ class PropertyInfoStoreTestHelper {
 		$table = $this->newPropertyInfoStore();
 		$p23 = new PropertyId( 'p23' );
 		$p42 = new PropertyId( 'p42' );
-		$info23 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string' );
-		$info42 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string', 'foo' => 'bar' );
+		$info23 = [ PropertyInfoStore::KEY_DATA_TYPE => 'string' ];
+		$info42 = [ PropertyInfoStore::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ];
 
 		$this->test->assertNull( $table->getPropertyInfo( $p23 ), "not set yet, should be null" );
 
@@ -103,39 +103,39 @@ class PropertyInfoStoreTestHelper {
 		$table = $this->newPropertyInfoStore();
 		$p23 = new PropertyId( 'P23' );
 		$p42 = new PropertyId( 'P42' );
-		$info23 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string' );
-		$info42 = array( PropertyInfoStore::KEY_DATA_TYPE => 'commonsMedia', 'foo' => 'bar' );
+		$info23 = [ PropertyInfoStore::KEY_DATA_TYPE => 'string' ];
+		$info42 = [ PropertyInfoStore::KEY_DATA_TYPE => 'commonsMedia', 'foo' => 'bar' ];
 
 		$this->test->assertSame(
-			array(),
+			[],
 			$table->getPropertyInfoForDataType( 'commonsMedia' ),
 			'should initially be empty'
 		);
 
 		$table->setPropertyInfo( $p23, $info23 );
 		$this->test->assertSame(
-			array(),
+			[],
 			$table->getPropertyInfoForDataType( 'commonsMedia' ),
 			'after adding one property'
 		);
 
 		$table->setPropertyInfo( $p42, $info42 );
 		$this->test->assertSame(
-			array( 42 => $info42 ),
+			[ 42 => $info42 ],
 			$table->getPropertyInfoForDataType( 'commonsMedia' ),
 			'after adding the second property'
 		);
 
 		$table->removePropertyInfo( $p23 );
 		$this->test->assertSame(
-			array( 42 => $info42 ),
+			[ 42 => $info42 ],
 			$table->getPropertyInfoForDataType( 'commonsMedia' ),
 			'after removing one property'
 		);
 
 		$table->removePropertyInfo( $p42 );
 		$this->test->assertSame(
-			array(),
+			[],
 			$table->getPropertyInfoForDataType( 'commonsMedia' ),
 			'after removing the second property'
 		);
@@ -145,32 +145,32 @@ class PropertyInfoStoreTestHelper {
 		$table = $this->newPropertyInfoStore();
 		$p23 = new PropertyId( 'P23' );
 		$p42 = new PropertyId( 'P42' );
-		$info23 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string' );
-		$info42 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string', 'foo' => 'bar' );
+		$info23 = [ PropertyInfoStore::KEY_DATA_TYPE => 'string' ];
+		$info42 = [ PropertyInfoStore::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ];
 
 		$this->test->assertSame(
-			array(),
+			[],
 			$table->getAllPropertyInfo(),
 			'should initially be empty'
 		);
 
 		$table->setPropertyInfo( $p23, $info23 );
 		$this->test->assertSame(
-			array( 23 => $info23 ),
+			[ 23 => $info23 ],
 			$table->getAllPropertyInfo(),
 			'after adding one property'
 		);
 
 		$table->setPropertyInfo( $p42, $info42 );
 		$this->test->assertSame(
-			array( 23 => $info23, 42 => $info42 ),
+			[ 23 => $info23, 42 => $info42 ],
 			$table->getAllPropertyInfo(),
 			'after adding the second property'
 		);
 
 		$table->removePropertyInfo( $p23 );
 		$this->test->assertSame(
-			array( 42 => $info42 ),
+			[ 42 => $info42 ],
 			$table->getAllPropertyInfo(),
 			'after removing one property'
 		);
@@ -180,7 +180,7 @@ class PropertyInfoStoreTestHelper {
 		$table = $this->newPropertyInfoStore();
 		$p23 = new PropertyId( 'p23' );
 		$p42 = new PropertyId( 'p42' );
-		$info23 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string' );
+		$info23 = [ PropertyInfoStore::KEY_DATA_TYPE => 'string' ];
 
 		$table->setPropertyInfo( $p23, $info23 );
 
@@ -192,7 +192,7 @@ class PropertyInfoStoreTestHelper {
 
 	public function testPropertyInfoPersistance() {
 		$p23 = new PropertyId( 'p23' );
-		$info23 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string' );
+		$info23 = [ PropertyInfoStore::KEY_DATA_TYPE => 'string' ];
 
 		$table1 = $this->newPropertyInfoStore();
 		$table1->setPropertyInfo( $p23, $info23 );

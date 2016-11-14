@@ -41,7 +41,7 @@ class MockPropertyLabelResolver implements PropertyLabelResolver {
 	 * @return EntityId[] a map of strings from $labels to the corresponding entity ID.
 	 */
 	public function getPropertyIdsForLabels( array $labels, $recache = '' ) {
-		$entityIds = array();
+		$entityIds = [];
 
 		foreach ( $labels as $label ) {
 			$entity = $this->mockRepository->getPropertyByLabel( $label, $this->languageCode );

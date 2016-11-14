@@ -34,13 +34,13 @@ class HtmlUrlFormatterTest extends \PHPUnit_Framework_TestCase {
 	public function urlFormatProvider() {
 		$options = new FormatterOptions();
 
-		return array(
-			array(
+		return [
+			[
 				new StringValue( 'http://acme.com' ),
 				$options,
 				'@<a .*href="http://acme\.com".*>.*http://acme\.com.*</a>@'
-			),
-		);
+			],
+		];
 	}
 
 	public function testFormatError() {

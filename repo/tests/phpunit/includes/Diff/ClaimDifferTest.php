@@ -31,101 +31,101 @@ use Wikibase\Repo\Diff\ClaimDifference;
 class ClaimDifferTest extends PHPUnit_Framework_TestCase {
 
 	public function diffClaimsProvider() {
-		$argLists = array();
+		$argLists = [];
 
 		$noValueForP42 = new Statement( new PropertyNoValueSnak( 42 ) );
 		$noValueForP43 = new Statement( new PropertyNoValueSnak( 43 ) );
 
-		$argLists[] = array(
+		$argLists[] = [
 			null,
 			null,
 			new ClaimDifference()
-		);
+		];
 
-		$argLists[] = array(
+		$argLists[] = [
 			$noValueForP42,
 			$noValueForP42,
 			new ClaimDifference()
-		);
+		];
 
-		$argLists[] = array(
+		$argLists[] = [
 			$noValueForP42,
 			$noValueForP43,
 			new ClaimDifference( new DiffOpChange( new PropertyNoValueSnak( 42 ), new PropertyNoValueSnak( 43 ) ) )
-		);
+		];
 
-		$qualifiers = new SnakList( array( new PropertyNoValueSnak( 1 ) ) );
+		$qualifiers = new SnakList( [ new PropertyNoValueSnak( 1 ) ] );
 		$withQualifiers = clone $noValueForP42;
 		$withQualifiers->setQualifiers( $qualifiers );
 
-		$argLists[] = array(
+		$argLists[] = [
 			$noValueForP42,
 			$withQualifiers,
 			new ClaimDifference(
 				null,
-				new Diff( array(
+				new Diff( [
 					new DiffOpAdd( new PropertyNoValueSnak( 1 ) )
-				), false )
+				], false )
 			)
-		);
+		];
 
-		$references = new ReferenceList( array( new Reference( array( new PropertyNoValueSnak( 2 ) ) ) ) );
+		$references = new ReferenceList( [ new Reference( [ new PropertyNoValueSnak( 2 ) ] ) ] );
 		$withReferences = clone $noValueForP42;
 		$withReferences->setReferences( $references );
 
-		$argLists[] = array(
+		$argLists[] = [
 			$noValueForP42,
 			$withReferences,
 			new ClaimDifference(
 				null,
 				null,
-				new Diff( array(
-					new DiffOpAdd( new Reference( array( new PropertyNoValueSnak( 2 ) ) ) )
-				), false )
+				new Diff( [
+					new DiffOpAdd( new Reference( [ new PropertyNoValueSnak( 2 ) ] ) )
+				], false )
 			)
-		);
+		];
 
-		$argLists[] = array(
+		$argLists[] = [
 			$withQualifiers,
 			$withReferences,
 			new ClaimDifference(
 				null,
-				new Diff( array(
+				new Diff( [
 					new DiffOpRemove( new PropertyNoValueSnak( 1 ) )
-				), false ),
-				new Diff( array(
-					new DiffOpAdd( new Reference( array( new PropertyNoValueSnak( 2 ) ) ) )
-				), false )
+				], false ),
+				new Diff( [
+					new DiffOpAdd( new Reference( [ new PropertyNoValueSnak( 2 ) ] ) )
+				], false )
 			)
-		);
+		];
 
-		$argLists[] = array(
+		$argLists[] = [
 			$withReferences,
 			null,
 			new ClaimDifference(
 				new DiffOpChange( new PropertyNoValueSnak( 42 ), null ),
 				null,
-				new Diff( array(
-					new DiffOpRemove( new Reference( array( new PropertyNoValueSnak( 2 ) ) ) )
-				), false ),
+				new Diff( [
+					new DiffOpRemove( new Reference( [ new PropertyNoValueSnak( 2 ) ] ) )
+				], false ),
 				new DiffOpChange( 1, null )
 			)
-		);
+		];
 
-		$argLists[] = array(
+		$argLists[] = [
 			null,
 			$withReferences,
 			new ClaimDifference(
 				new DiffOpChange( null, new PropertyNoValueSnak( 42 ) ),
 				null,
-				new Diff( array(
-					new DiffOpAdd( new Reference( array( new PropertyNoValueSnak( 2 ) ) ) )
-				), false ),
+				new Diff( [
+					new DiffOpAdd( new Reference( [ new PropertyNoValueSnak( 2 ) ] ) )
+				], false ),
 				new DiffOpChange( null, 1 )
 			)
-		);
+		];
 
-		$argLists[] = array(
+		$argLists[] = [
 			null,
 			new Statement( new PropertyNoValueSnak( 42 ), null, new ReferenceList() ),
 			new ClaimDifference(
@@ -134,12 +134,12 @@ class ClaimDifferTest extends PHPUnit_Framework_TestCase {
 				null,
 				new DiffOpChange( null, 1 )
 			)
-		);
+		];
 
 		$noValueForP42Preferred = clone $noValueForP42;
 		$noValueForP42Preferred->setRank( Statement::RANK_PREFERRED );
 
-		$argLists[] = array(
+		$argLists[] = [
 			$noValueForP42,
 			$noValueForP42Preferred,
 			new ClaimDifference(
@@ -148,7 +148,7 @@ class ClaimDifferTest extends PHPUnit_Framework_TestCase {
 				null,
 				new DiffOpChange( Statement::RANK_NORMAL, Statement::RANK_PREFERRED )
 			)
-		);
+		];
 
 		return $argLists;
 	}

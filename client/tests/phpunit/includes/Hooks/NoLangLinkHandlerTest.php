@@ -37,8 +37,8 @@ class NoLangLinkHandlerTest extends \PHPUnit_Framework_TestCase {
 		$this->excludeNamespaces = $settings->getSetting( 'excludeNamespaces' );
 		$this->namespacesToInclude = $settings->getSetting( 'namespaces' );
 
-		$settings->setSetting( 'excludeNamespaces', array() );
-		$settings->setSetting( 'namespaces', array() );
+		$settings->setSetting( 'excludeNamespaces', [] );
+		$settings->setSetting( 'namespaces', [] );
 	}
 
 	protected function tearDown() {
@@ -50,7 +50,7 @@ class NoLangLinkHandlerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetSetNoExternalLangLinks() {
 		$pout = new ParserOutput();
-		$list = array( 'xy', 'abc' );
+		$list = [ 'xy', 'abc' ];
 
 		NoLangLinkHandler::setNoExternalLangLinks( $pout, $list );
 		$actual = NoLangLinkHandler::getNoExternalLangLinks( $pout );
@@ -59,17 +59,17 @@ class NoLangLinkHandlerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testDoHandle() {
-		$handler = new NoLangLinkHandler( new NamespaceChecker( array() ) );
+		$handler = new NoLangLinkHandler( new NamespaceChecker( [] ) );
 		$parser = new Parser();
 		$parser->startExternalParse( null, new ParserOptions(), Parser::OT_HTML );
 
-		$handler->doHandle( $parser, array( 'en', 'fr' ) );
+		$handler->doHandle( $parser, [ 'en', 'fr' ] );
 		$actual = NoLangLinkHandler::getNoExternalLangLinks( $parser->getOutput() );
-		$this->assertEquals( array( 'en', 'fr' ), $actual );
+		$this->assertEquals( [ 'en', 'fr' ], $actual );
 
-		$handler->doHandle( $parser, array( '*', 'zh' ) );
+		$handler->doHandle( $parser, [ '*', 'zh' ] );
 		$actual = NoLangLinkHandler::getNoExternalLangLinks( $parser->getOutput() );
-		$this->assertEquals( array( 'en', 'fr', '*', 'zh' ), $actual );
+		$this->assertEquals( [ 'en', 'fr', '*', 'zh' ], $actual );
 	}
 
 	public function testHandle() {
@@ -79,7 +79,7 @@ class NoLangLinkHandlerTest extends \PHPUnit_Framework_TestCase {
 		NoLangLinkHandler::handle( $parser, '*' );
 		$actual = NoLangLinkHandler::getNoExternalLangLinks( $parser->getOutput() );
 
-		$this->assertEquals( array( '*' ), $actual );
+		$this->assertEquals( [ '*' ], $actual );
 	}
 
 }

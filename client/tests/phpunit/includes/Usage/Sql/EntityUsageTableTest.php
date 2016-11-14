@@ -37,13 +37,13 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 	 * @return array[]
 	 */
 	private function getUsageRows( $pageId, array $usages ) {
-		$rows = array();
+		$rows = [];
 
 		foreach ( $usages as $key => $usage ) {
-			$row = array(
+			$row = [
 				'eu_entity_id' => $usage->getEntityId()->getSerialization(),
 				'eu_aspect' => $usage->getAspectKey()
-			);
+			];
 
 			if ( $pageId > 0 ) {
 				$row['eu_page_id'] = $pageId;
@@ -68,17 +68,17 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 		$q4 = new ItemId( 'Q4' );
 		$q5 = new ItemId( 'Q5' );
 
-		$usagesT1 = array(
+		$usagesT1 = [
 			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
 			new EntityUsage( $q3, EntityUsage::LABEL_USAGE ),
 			new EntityUsage( $q4, EntityUsage::LABEL_USAGE ),
-		);
+		];
 
-		$usagesT2 = array(
+		$usagesT2 = [
 			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
 			new EntityUsage( $q4, EntityUsage::LABEL_USAGE ),
 			new EntityUsage( $q5, EntityUsage::ALL_USAGE ),
-		);
+		];
 
 		$usageTable = $this->getEntityUsageTable();
 
@@ -105,11 +105,11 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 		$q3 = new ItemId( 'Q3' );
 		$q4 = new ItemId( 'Q4' );
 
-		$usages = array(
+		$usages = [
 			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
 			new EntityUsage( $q3, EntityUsage::LABEL_USAGE ),
 			new EntityUsage( $q4, EntityUsage::LABEL_USAGE ),
-		);
+		];
 
 		$usageTable = $this->getEntityUsageTable();
 
@@ -129,11 +129,11 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 		$q3 = new ItemId( 'Q3' );
 		$q4 = new ItemId( 'Q4' );
 
-		$usages = array(
+		$usages = [
 			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
 			new EntityUsage( $q3, EntityUsage::LABEL_USAGE ),
 			new EntityUsage( $q4, EntityUsage::LABEL_USAGE ),
-		);
+		];
 
 		$usageTable = $this->getEntityUsageTable();
 
@@ -163,15 +163,15 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 		$q4 = new ItemId( 'Q4' );
 		$q5 = new ItemId( 'Q5' );
 
-		$usagesT1 = array(
+		$usagesT1 = [
 			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
 			new EntityUsage( $q4, EntityUsage::LABEL_USAGE ),
-		);
+		];
 
-		$usagesT2 = array(
+		$usagesT2 = [
 			new EntityUsage( $q3, EntityUsage::LABEL_USAGE ),
 			new EntityUsage( $q5, EntityUsage::ALL_USAGE ),
-		);
+		];
 
 		$usageTable = $this->getEntityUsageTable();
 
@@ -220,38 +220,38 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 		$u4t = new EntityUsage( $q4, EntityUsage::TITLE_USAGE );
 
 		$usageTable = $this->getEntityUsageTable( 3 );
-		$usageTable->addUsages( 23, array( $u3s, $u3l, $u4l ) );
-		$usageTable->addUsages( 42, array( $u4l, $u4t ) );
+		$usageTable->addUsages( 23, [ $u3s, $u3l, $u4l ] );
+		$usageTable->addUsages( 42, [ $u4l, $u4t ] );
 
-		$pages = $usageTable->getPagesUsing( array( $q6 ) );
+		$pages = $usageTable->getPagesUsing( [ $q6 ] );
 		$this->assertEmpty( iterator_to_array( $pages ) );
 
-		$pages = $usageTable->getPagesUsing( array( $q3 ) );
+		$pages = $usageTable->getPagesUsing( [ $q3 ] );
 		$this->assertSamePageEntityUsages(
-			array( 23 => new PageEntityUsages( 23, array( $u3s, $u3l ) ) ),
+			[ 23 => new PageEntityUsages( 23, [ $u3s, $u3l ] ) ],
 			iterator_to_array( $pages ),
 			'Pages using Q3'
 		);
 
-		$pages = $usageTable->getPagesUsing( array( $q4, $q3 ), array( EntityUsage::LABEL_USAGE ) );
+		$pages = $usageTable->getPagesUsing( [ $q4, $q3 ], [ EntityUsage::LABEL_USAGE ] );
 		$this->assertSamePageEntityUsages(
-			array(
-				23 => new PageEntityUsages( 23, array( $u3l, $u4l ) ),
-				42 => new PageEntityUsages( 42, array( $u4l ) ),
-			),
+			[
+				23 => new PageEntityUsages( 23, [ $u3l, $u4l ] ),
+				42 => new PageEntityUsages( 42, [ $u4l ] ),
+			],
 			iterator_to_array( $pages ),
 			'Pages using "label" on Q4 or Q3'
 		);
 
-		$pages = $usageTable->getPagesUsing( array( $q3 ), array( EntityUsage::ALL_USAGE ) );
+		$pages = $usageTable->getPagesUsing( [ $q3 ], [ EntityUsage::ALL_USAGE ] );
 		$this->assertEmpty( iterator_to_array( $pages ), 'Pages using "all" on Q3' );
 
-		$pages = $usageTable->getPagesUsing( array( $q4 ), array( EntityUsage::SITELINK_USAGE ) );
+		$pages = $usageTable->getPagesUsing( [ $q4 ], [ EntityUsage::SITELINK_USAGE ] );
 		$this->assertEmpty( iterator_to_array( $pages ), 'Pages using "sitelinks" on Q4' );
 
 		$pages = $usageTable->getPagesUsing(
-			array( $q3, $q4 ),
-			array( EntityUsage::TITLE_USAGE, EntityUsage::SITELINK_USAGE )
+			[ $q3, $q4 ],
+			[ EntityUsage::TITLE_USAGE, EntityUsage::SITELINK_USAGE ]
 		);
 		$this->assertCount(
 			2,
@@ -297,19 +297,19 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 		$u3l = new EntityUsage( $q3, EntityUsage::LABEL_USAGE );
 		$u4l = new EntityUsage( $q4, EntityUsage::LABEL_USAGE );
 
-		$usages = array( $u3i, $u3l, $u4l );
+		$usages = [ $u3i, $u3l, $u4l ];
 
 		$usageTable = $this->getEntityUsageTable( 3 );
 		$usageTable->addUsages( 23, $usages );
 
-		$this->assertEmpty( $usageTable->getUnusedEntities( array( $q4 ) ), 'Q4 should not be unused' );
+		$this->assertEmpty( $usageTable->getUnusedEntities( [ $q4 ] ), 'Q4 should not be unused' );
 
-		$entityIds = array( $q4, $q6 );
+		$entityIds = [ $q4, $q6 ];
 		if ( wfGetDB( DB_SLAVE )->getType() === 'mysql' ) {
 			// On MySQL we use UNIONs on the table… as the table is temporary that
 			// doesn't work in unit tests.
 			// https://dev.mysql.com/doc/refman/5.7/en/temporary-table-problems.html
-			$entityIds = array( $q6 );
+			$entityIds = [ $q6 ];
 		}
 
 		$unused = $usageTable->getUnusedEntities( $entityIds );

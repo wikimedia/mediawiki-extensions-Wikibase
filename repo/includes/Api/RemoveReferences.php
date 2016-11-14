@@ -135,7 +135,7 @@ class RemoveReferences extends ApiBase {
 	 * @return ChangeOp[]
 	 */
 	private function getChangeOps( $guid, array $referenceHashes ) {
-		$changeOps = array();
+		$changeOps = [];
 
 		foreach ( $referenceHashes as $referenceHash ) {
 			$changeOps[] = $this->statementChangeOpFactory->newRemoveReferenceOp( $guid, $referenceHash );
@@ -152,7 +152,7 @@ class RemoveReferences extends ApiBase {
 	 */
 	private function getReferenceHashesFromParams( array $params, Statement $statement ) {
 		$references = $statement->getReferences();
-		$hashes = array();
+		$hashes = [];
 
 		foreach ( array_unique( $params['references'] ) as $referenceHash ) {
 			if ( !$references->hasReferenceHash( $referenceHash ) ) {
@@ -185,25 +185,25 @@ class RemoveReferences extends ApiBase {
 	 */
 	protected function getAllowedParams() {
 		return array_merge(
-			array(
-				'statement' => array(
+			[
+				'statement' => [
 					self::PARAM_TYPE => 'string',
 					self::PARAM_REQUIRED => true,
-				),
-				'references' => array(
+				],
+				'references' => [
 					self::PARAM_TYPE => 'string',
 					self::PARAM_REQUIRED => true,
 					self::PARAM_ISMULTI => true,
-				),
-				'summary' => array(
+				],
+				'summary' => [
 					self::PARAM_TYPE => 'string',
-				),
+				],
 				'token' => null,
-				'baserevid' => array(
+				'baserevid' => [
 					self::PARAM_TYPE => 'integer',
-				),
+				],
 				'bot' => false,
-			),
+			],
 			parent::getAllowedParams()
 		);
 	}
@@ -212,12 +212,12 @@ class RemoveReferences extends ApiBase {
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
-		return array(
+		return [
 			'action=wbremovereferences&statement=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F'
 				. '&references=455481eeac76e6a8af71a6b493c073d54788e7e9&token=foobar'
 				. '&baserevid=7201010'
 				=> 'apihelp-wbremovereferences-example-1',
-		);
+		];
 	}
 
 }

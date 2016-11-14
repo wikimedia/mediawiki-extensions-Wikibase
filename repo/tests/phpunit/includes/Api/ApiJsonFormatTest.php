@@ -27,7 +27,7 @@ class ApiJsonFormatTest extends ApiFormatTestCase {
 	}
 
 	private function replaceIdsInArray( array $array ) {
-		$replacements = array();
+		$replacements = [];
 		if ( $this->lastPropertyId !== null ) {
 			$replacements['$propertyIdUnderTest'] = $this->lastPropertyId->getSerialization();
 		}
@@ -63,7 +63,7 @@ class ApiJsonFormatTest extends ApiFormatTestCase {
 	}
 
 	private function removePageInfoAttributes( array $result ) {
-		$attributesToRemove = array( 'pageid', 'lastrevid', 'modified', 'title', 'ns' );
+		$attributesToRemove = [ 'pageid', 'lastrevid', 'modified', 'title', 'ns' ];
 
 		foreach ( $attributesToRemove as $attributeToRemove ) {
 			if ( isset( $result['entity'] ) ) {
@@ -100,10 +100,10 @@ class ApiJsonFormatTest extends ApiFormatTestCase {
 		$entityRevision = $this->getNewEntityRevision( true );
 		$entityId = $entityRevision->getEntity()->getId()->getSerialization();
 
-		$params = array(
+		$params = [
 			'action' => 'wbgetentities',
 			'ids' => $entityId
-		);
+		];
 
 		$module = $this->getApiModule( GetEntities::class, 'wbgetentities', $params );
 		$result = $this->executeApiModule( $module );
@@ -116,12 +116,12 @@ class ApiJsonFormatTest extends ApiFormatTestCase {
 		$entityRevision = $this->getNewEntityRevision();
 		$entityId = $entityRevision->getEntity()->getId()->getSerialization();
 
-		$params = array(
+		$params = [
 			'action' => 'wbsetlabel',
 			'id' => $entityId,
 			'language' => 'en-gb',
 			'value' => 'enGbLabel',
-		);
+		];
 
 		$module = $this->getApiModule( SetLabel::class, 'wbsetlabel', $params, true );
 		$result = $this->executeApiModule( $module );
@@ -129,12 +129,12 @@ class ApiJsonFormatTest extends ApiFormatTestCase {
 
 		$this->assertEquals( $this->getExpectedJson( 'setlabel' ), $actual );
 
-		$params = array(
+		$params = [
 			'action' => 'wbsetlabel',
 			'id' => $entityId,
 			'language' => 'en-gb',
 			'value' => '',
-		);
+		];
 
 		$module = $this->getApiModule( SetLabel::class, 'wbsetlabel', $params, true );
 		$result = $this->executeApiModule( $module );

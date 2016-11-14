@@ -256,7 +256,7 @@ class ClaimDifferenceVisualizer {
 	 * @return string[] HTML
 	 */
 	private function visualizeSnaks( SnakList $snaks ) {
-		$html = array();
+		$html = [];
 
 		foreach ( $snaks as $snak ) {
 			$html[] = $this->snakVisualizer->getPropertyAndDetailedValue( $snak );

@@ -85,20 +85,20 @@ class SnakHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function getSnakHtmlProvider() {
-		return array(
-			array(
+		return [
+			[
 				new PropertyNoValueSnak( 1 ),
 				'wikibase-snakview-variation-novalue',
-			),
-			array(
+			],
+			[
 				new PropertySomeValueSnak( 2 ),
 				'wikibase-snakview-variation-somevalue',
-			),
-			array(
+			],
+			[
 				new PropertyValueSnak( 3, new StringValue( 'chocolate!' ) ),
 				'wikibase-snakview-variation-value',
-			)
-		);
+			]
+		];
 	}
 
 }

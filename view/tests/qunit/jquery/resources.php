@@ -11,49 +11,49 @@
 return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
-	$moduleBase = array(
+	$moduleBase = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0],
-	);
+	];
 
-	return array(
+	return [
 
-		'jquery.removeClassByRegex.tests' => $moduleBase + array(
-			'scripts' => array(
+		'jquery.removeClassByRegex.tests' => $moduleBase + [
+			'scripts' => [
 				'jquery.removeClassByRegex.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.removeClassByRegex',
-			),
-		),
+			],
+		],
 
-		'jquery.sticknode.tests' => $moduleBase + array(
-			'scripts' => array(
+		'jquery.sticknode.tests' => $moduleBase + [
+			'scripts' => [
 				'jquery.sticknode.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.sticknode',
-			),
-		),
+			],
+		],
 
-		'jquery.util.EventSingletonManager.tests' => $moduleBase + array(
-			'scripts' => array(
+		'jquery.util.EventSingletonManager.tests' => $moduleBase + [
+			'scripts' => [
 				'jquery.util.EventSingletonManager.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.util.EventSingletonManager',
-			),
-		),
+			],
+		],
 
-		'jquery.util.getDirectionality.tests' => $moduleBase + array(
-			'scripts' => array(
+		'jquery.util.getDirectionality.tests' => $moduleBase + [
+			'scripts' => [
 				'jquery.util.getDirectionality.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.util.getDirectionality',
-			),
-		),
+			],
+		],
 
-	);
+	];
 
 } );

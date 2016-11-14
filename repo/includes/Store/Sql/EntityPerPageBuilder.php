@@ -118,15 +118,15 @@ class EntityPerPageBuilder {
 			wfWaitForSlaves();
 
 			$pages = $dbw->select(
-				array( 'page', 'redirect', 'wb_entity_per_page' ),
-				array( 'page_title', 'page_id', 'rd_title' ),
+				[ 'page', 'redirect', 'wb_entity_per_page' ],
+				[ 'page_title', 'page_id', 'rd_title' ],
 				$this->getQueryConds( $lastPageSeen ),
 				__METHOD__,
-				array( 'LIMIT' => $this->batchSize, 'ORDER BY' => 'page_id' ),
-				array(
-					'redirect' => array( 'LEFT JOIN', 'rd_from = page_id' ),
-					'wb_entity_per_page' => array( 'LEFT JOIN', 'page_id = epp_page_id' )
-				)
+				[ 'LIMIT' => $this->batchSize, 'ORDER BY' => 'page_id' ],
+				[
+					'redirect' => [ 'LEFT JOIN', 'rd_from = page_id' ],
+					'wb_entity_per_page' => [ 'LEFT JOIN', 'page_id = epp_page_id' ]
+				]
 			);
 
 			$numPages = $pages->numRows();
@@ -155,10 +155,10 @@ class EntityPerPageBuilder {
 	protected function getQueryConds( $lastPageSeen ) {
 		global $wgContentHandlerUseDB;
 
-		$conds = array(
+		$conds = [
 			'page_namespace' => $this->entityNamespaceLookup->getEntityNamespaces(),
 			'page_id > ' . (int) $lastPageSeen,
-		);
+		];
 
 		if ( $wgContentHandlerUseDB ) {
 			$conds['page_content_model'] = $this->contentModels;

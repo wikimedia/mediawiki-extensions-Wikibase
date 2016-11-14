@@ -80,7 +80,7 @@ class SubmitEntityAction extends EditEntityAction {
 		$title = $this->getTitle();
 
 		if ( !$request->wasPosted() || !$request->getCheck( 'wpSave' ) ) {
-			$args = array( 'action' => 'edit' );
+			$args = [ 'action' => 'edit' ];
 
 			if ( $request->getCheck( 'undo' ) ) {
 				$args['undo'] = $request->getInt( 'undo' );
@@ -241,7 +241,7 @@ class SubmitEntityAction extends EditEntityAction {
 		$status = Status::newGood();
 
 		foreach ( $errors as $error ) {
-			call_user_func_array( array( $status, 'fatal' ), $error );
+			call_user_func_array( [ $status, 'fatal' ], $error );
 			$status->setResult( false );
 		}
 

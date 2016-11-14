@@ -19,9 +19,9 @@ use Wikibase\Lib\UnDeserializableValueFormatter;
 class UnDeserializableValueFormatterTest extends PHPUnit_Framework_TestCase {
 
 	public function testFormat() {
-		$options = new FormatterOptions( array(
+		$options = new FormatterOptions( [
 			ValueFormatter::OPT_LANG => 'qqx',
-		) );
+		] );
 
 		$formatter = new UnDeserializableValueFormatter( $options );
 

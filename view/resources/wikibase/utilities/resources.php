@@ -9,49 +9,49 @@ return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	$moduleTemplate = array(
+	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0],
-	);
+	];
 
-	$modules = array(
+	$modules = [
 
-		'wikibase.utilities.ClaimGuidGenerator' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.utilities.ClaimGuidGenerator' => $moduleTemplate + [
+			'scripts' => [
 				'wikibase.utilities.ClaimGuidGenerator.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.utilities.GuidGenerator',
-			),
-		),
+			],
+		],
 
-		'wikibase.utilities.GuidGenerator' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.utilities.GuidGenerator' => $moduleTemplate + [
+			'scripts' => [
 				'wikibase.utilities.GuidGenerator.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'util.inherit',
 				'wikibase.utilities',
-			),
-		),
+			],
+		],
 
-		'wikibase.utilities' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.utilities' => $moduleTemplate + [
+			'scripts' => [
 				'wikibase.utilities.js',
 				'wikibase.utilities.ui.js',
-			),
-			'styles' => array(
+			],
+			'styles' => [
 				'wikibase.utilities.ui.css',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase',
 				'jquery.tipsy',
 				'mediawiki.language',
 				'mediawiki.jqueryMsg'
-			),
-		),
+			],
+		],
 
-	);
+	];
 
 	return $modules;
 } );

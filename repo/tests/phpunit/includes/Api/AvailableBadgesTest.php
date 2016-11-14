@@ -20,10 +20,10 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class AvailabeBadgesTest extends ApiTestCase {
 
-	private static $badgeItems = array(
+	private static $badgeItems = [
 		'Q123' => '',
 		'Q999' => ''
-	);
+	];
 
 	private static $oldBadgeItems;
 
@@ -44,9 +44,9 @@ class AvailabeBadgesTest extends ApiTestCase {
 	}
 
 	public function testExecute() {
-		list( $result,, ) = $this->doApiRequest( array(
+		list( $result,, ) = $this->doApiRequest( [
 			'action' => 'wbavailablebadges'
-		) );
+		] );
 
 		$this->assertEquals( array_keys( self::$badgeItems ), $result['badges'] );
 	}

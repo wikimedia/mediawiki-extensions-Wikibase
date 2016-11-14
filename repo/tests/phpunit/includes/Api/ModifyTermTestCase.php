@@ -20,44 +20,44 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		parent::setUp();
 
 		if ( !isset( self::$hasSetup ) ) {
-			$this->initTestEntities( array( 'Empty' ) );
+			$this->initTestEntities( [ 'Empty' ] );
 		}
 		self::$hasSetup = true;
 	}
 
 	public function provideData() {
-		return array(
+		return [
 			// p => params, e => expected
 
 			// -- Test valid sequence -----------------------------
-			array( //0
-				'p' => array( 'language' => 'en', 'value' => '' ),
-				'e' => array( 'edit-no-change' => true ) ),
-			array( //1
-				'p' => array( 'language' => 'en', 'value' => 'Value' ),
-				'e' => array( 'value' => array( 'en' => 'Value' ) ) ),
-			array( //2
-				'p' => array( 'language' => 'en', 'value' => 'Value' ),
-				'e' => array( 'value' => array( 'en' => 'Value' ), 'edit-no-change'  => true ) ),
-			array( //3
-				'p' => array( 'language' => 'en', 'value' => 'Another Value', 'summary' => 'Test summary!' ),
-				'e' => array( 'value' => array( 'en' => 'Another Value' ) ) ),
-			array( //4
-				'p' => array( 'language' => 'en', 'value' => 'Different Value' ),
-				'e' => array( 'value' => array( 'en' => 'Different Value' ) ) ),
-			array( //5
-				'p' => array( 'language' => 'sgs', 'value' => 'V?sata' ),
-				'e' => array( 'value' => array( 'sgs' => 'V?sata','en' => 'Different Value' ) ) ),
-			array( //6
-				'p' => array( 'language' => 'en', 'value' => '' ),
-				'e' => array( 'value' => array( 'sgs' => 'V?sata' ) ) ),
-			array( //7
-				'p' => array( 'language' => 'sgs', 'value' => '' ),
-				'e' => array() ),
-			array( //8
-				'p' => array( 'language' => 'en', 'value' => "  x\nx  " ),
-				'e' => array( 'value' => array( 'en' => 'x x' ) ) ),
-		);
+			[ //0
+				'p' => [ 'language' => 'en', 'value' => '' ],
+				'e' => [ 'edit-no-change' => true ] ],
+			[ //1
+				'p' => [ 'language' => 'en', 'value' => 'Value' ],
+				'e' => [ 'value' => [ 'en' => 'Value' ] ] ],
+			[ //2
+				'p' => [ 'language' => 'en', 'value' => 'Value' ],
+				'e' => [ 'value' => [ 'en' => 'Value' ], 'edit-no-change'  => true ] ],
+			[ //3
+				'p' => [ 'language' => 'en', 'value' => 'Another Value', 'summary' => 'Test summary!' ],
+				'e' => [ 'value' => [ 'en' => 'Another Value' ] ] ],
+			[ //4
+				'p' => [ 'language' => 'en', 'value' => 'Different Value' ],
+				'e' => [ 'value' => [ 'en' => 'Different Value' ] ] ],
+			[ //5
+				'p' => [ 'language' => 'sgs', 'value' => 'V?sata' ],
+				'e' => [ 'value' => [ 'sgs' => 'V?sata','en' => 'Different Value' ] ] ],
+			[ //6
+				'p' => [ 'language' => 'en', 'value' => '' ],
+				'e' => [ 'value' => [ 'sgs' => 'V?sata' ] ] ],
+			[ //7
+				'p' => [ 'language' => 'sgs', 'value' => '' ],
+				'e' => [] ],
+			[ //8
+				'p' => [ 'language' => 'en', 'value' => "  x\nx  " ],
+				'e' => [ 'value' => [ 'en' => 'x x' ] ] ],
+		];
 	}
 
 	public function doTestSetTerm( $attribute, $params, $expected ) {
@@ -67,7 +67,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 			$params['id'] = EntityTestHelper::getId( 'Empty' );
 		}
 		if ( !array_key_exists( 'value', $expected ) ) {
-			$expected['value'] = array();
+			$expected['value'] = [];
 		}
 
 		// -- do the request --------------------------------------------------
@@ -125,7 +125,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 
 		// -- check the edit summary --------------------------------------------
 		if ( empty( $expected['edit-no-change'] ) ) {
-			$this->assertRevisionSummary( array( self::$testAction, $params['language'] ), $result['entity']['lastrevid'] );
+			$this->assertRevisionSummary( [ self::$testAction, $params['language'] ], $result['entity']['lastrevid'] );
 			if ( array_key_exists( 'summary', $params ) ) {
 				$this->assertRevisionSummary( "/{$params['summary']}/", $result['entity']['lastrevid'] );
 			}
@@ -133,81 +133,81 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 	}
 
 	public function provideExceptionData() {
-		return array(
+		return [
 			// p => params, e => expected
 
 			// -- Test Exceptions -----------------------------
-			array( //0
-				'p' => array( 'language' => 'xx', 'value' => 'Foo' ),
-				'e' => array( 'exception' => array(
+			[ //0
+				'p' => [ 'language' => 'xx', 'value' => 'Foo' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'unknown_language'
-				) )
-			),
-			array( //1
-				'p' => array( 'language' => 'nl', 'value' => TermTestHelper::makeOverlyLongString() ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			[ //1
+				'p' => [ 'language' => 'nl', 'value' => TermTestHelper::makeOverlyLongString() ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'modification-failed'
-				) )
-			),
-			array( //2
-				'p' => array( 'language' => 'pt', 'value' => 'normalValue' ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			[ //2
+				'p' => [ 'language' => 'pt', 'value' => 'normalValue' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'notoken',
 					'message' => 'The token parameter must be set'
-				) )
-			),
-			array( //3
-				'p' => array( 'language' => 'pt', 'value' => 'normalValue', 'token' => '88888888888888888888888888888888+\\' ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			[ //3
+				'p' => [ 'language' => 'pt', 'value' => 'normalValue', 'token' => '88888888888888888888888888888888+\\' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'badtoken',
 					'message' => 'Invalid token'
-				) )
-			),
-			array( //4
-				'p' => array( 'id' => 'noANid', 'language' => 'fr', 'value' => 'normalValue' ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			[ //4
+				'p' => [ 'id' => 'noANid', 'language' => 'fr', 'value' => 'normalValue' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'invalid-entity-id',
 					'message' => 'Invalid entity ID.'
-				) )
-			),
-			array( //5
-				'p' => array( 'site' => 'qwerty', 'language' => 'pl', 'value' => 'normalValue' ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			[ //5
+				'p' => [ 'site' => 'qwerty', 'language' => 'pl', 'value' => 'normalValue' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'unknown_site',
 					'message' => "Unrecognized value for parameter 'site'"
-				) )
-			),
-			array( //6
-				'p' => array( 'site' => 'enwiki', 'title' => 'GhskiDYiu2nUd', 'language' => 'en', 'value' => 'normalValue' ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			[ //6
+				'p' => [ 'site' => 'enwiki', 'title' => 'GhskiDYiu2nUd', 'language' => 'en', 'value' => 'normalValue' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'no-such-entity-link',
 					'message' => 'No entity found matching site link'
-				) )
-			),
-			array( //7
-				'p' => array( 'title' => 'Blub', 'language' => 'en', 'value' => 'normalValue' ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			[ //7
+				'p' => [ 'title' => 'Blub', 'language' => 'en', 'value' => 'normalValue' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'param-illegal',
 					'message' => 'Either provide the item "id" or pairs'
-				) )
-			),
-			array( //8
-				'p' => array( 'site' => 'enwiki', 'language' => 'en', 'value' => 'normalValue' ),
-				'e' => array( 'exception' => array(
+				] ]
+			],
+			[ //8
+				'p' => [ 'site' => 'enwiki', 'language' => 'en', 'value' => 'normalValue' ],
+				'e' => [ 'exception' => [
 					'type' => UsageException::class,
 					'code' => 'param-illegal',
 					'message' => 'Either provide the item "id" or pairs'
-				) )
-			),
-		);
+				] ]
+			],
+		];
 	}
 
 	public function doTestSetTermExceptions( $params, $expected ) {

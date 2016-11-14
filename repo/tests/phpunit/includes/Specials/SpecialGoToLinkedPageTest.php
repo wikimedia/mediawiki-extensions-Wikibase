@@ -36,8 +36,8 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 		$mock->expects( $this->any() )
 			->method( 'getLinks' )
 			->will( $this->returnCallback( function( $itemIds, $siteIds ) {
-				$result = array( array( '', 'TestPageName' ) );
-				if ( $siteIds === array( 'dewiki' ) && $itemIds === array( 23 ) ) {
+				$result = [ [ '', 'TestPageName' ] ];
+				if ( $siteIds === [ 'dewiki' ] && $itemIds === [ 23 ] ) {
 					return $result;
 				} else {
 					return null;
@@ -134,21 +134,21 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	}
 
 	public function requestWithoutRedirectProvider() {
-		return array(
-			'empty' => array( '', null, '', '', '' ),
-			'invalidItemID' => array(
+		return [
+			'empty' => [ '', null, '', '', '' ],
+			'invalidItemID' => [
 				'enwiki/invalid', null, 'enwiki', 'invalid',
 				'(wikibase-gotolinkedpage-error-item-id-invalid)'
-			),
-			'notFound' => array(
+			],
+			'notFound' => [
 				'enwiki/Q42', null, 'enwiki', 'Q42',
 				'(wikibase-gotolinkedpage-error-item-not-found)'
-			),
-			'notFound2' => array(
+			],
+			'notFound2' => [
 				'XXwiki/Q23', null, 'XXwiki', 'Q23',
 				'(wikibase-gotolinkedpage-error-page-not-found)'
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -160,29 +160,29 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 
 		$this->assertEquals( $target, $response->getheader( 'Location' ), 'Redirect' );
 
-		$matchers = array();
-		$matchers['site'] = array(
+		$matchers = [];
+		$matchers['site'] = [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-gotolinkedpage-sitename',
 				'name' => 'site',
 				'value' => $site
-			) );
-		$matchers['itemid'] = array(
+			] ];
+		$matchers['itemid'] = [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-gotolinkedpage-itemid',
 				'name' => 'itemid',
 				'value' => $item
-			) );
-		$matchers['submit'] = array(
+			] ];
+		$matchers['submit'] = [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-gotolinkedpage-submit',
 				'type' => 'submit',
 				'name' => ''
-			)
-		);
+			]
+		];
 		foreach ( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output for: " . $key );
 		}
@@ -194,10 +194,10 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	}
 
 	public function requestWithRedirectProvider() {
-		$cases = array();
-		$cases['found'] = array( 'dewiki/Q23', 'http://dewiki.com/TestPageName' );
-		$cases['foundEntityRedirect'] = array( 'dewiki/Q24', 'http://dewiki.com/TestPageName' );
-		$cases['foundWithSiteIdHack'] = array( 'de/Q23', 'http://dewiki.com/TestPageName' );
+		$cases = [];
+		$cases['found'] = [ 'dewiki/Q23', 'http://dewiki.com/TestPageName' ];
+		$cases['foundEntityRedirect'] = [ 'dewiki/Q24', 'http://dewiki.com/TestPageName' ];
+		$cases['foundWithSiteIdHack'] = [ 'de/Q23', 'http://dewiki.com/TestPageName' ];
 		return $cases;
 	}
 

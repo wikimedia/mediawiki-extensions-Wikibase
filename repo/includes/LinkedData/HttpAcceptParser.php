@@ -47,7 +47,7 @@ class HttpAcceptParser {
 			$rawHeader, $value_parse );
 
 		if ( !count( $value_parse[1] ) ) {
-			return array();
+			return [];
 		}
 
 		$values = $value_parse[1];

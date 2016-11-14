@@ -19,18 +19,18 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 class AlternativeValidatorTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideValidate() {
-		$validators = array(
+		$validators = [
 			new RegexValidator( '/aaa/' ),
 			new RegexValidator( '/bbb/' ),
 			new RegexValidator( '/ccc/' ),
-		);
+		];
 
-		return array(
-			array( array(), 'foo', 1, "no validators" ),
-			array( $validators, 'bbb', 0, "fail first validation" ),
-			array( $validators, 'aaa', 0, "fail second validation" ),
-			array( $validators, 'xxx', 3, "fail validations" ),
-		);
+		return [
+			[ [], 'foo', 1, "no validators" ],
+			[ $validators, 'bbb', 0, "fail first validation" ],
+			[ $validators, 'aaa', 0, "fail second validation" ],
+			[ $validators, 'xxx', 3, "fail validations" ],
+		];
 	}
 
 	/**

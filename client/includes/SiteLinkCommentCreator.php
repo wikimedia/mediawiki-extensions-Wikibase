@@ -211,35 +211,35 @@ class SiteLinkCommentCreator {
 	 * @return array|null
 	 */
 	private function getChangeParamsForDiffOp( DiffOp $diffOp, $siteId, $messagePrefix ) {
-		$params = array();
+		$params = [];
 
 		if ( $diffOp instanceof DiffOpAdd ) {
 			$params['message'] = $messagePrefix . 'add';
-			$params['sitelink'] = array(
-				'newlink' => array(
+			$params['sitelink'] = [
+				'newlink' => [
 					'site' => $siteId,
 					'page' => $diffOp->getNewValue()
-				)
-			);
+				]
+			];
 		} elseif ( $diffOp instanceof DiffOpRemove ) {
 			$params['message'] = $messagePrefix . 'remove';
-			$params['sitelink'] = array(
-				'oldlink' => array(
+			$params['sitelink'] = [
+				'oldlink' => [
 					'site' => $siteId,
 					'page' => $diffOp->getOldValue()
-				)
-			);
+				]
+			];
 		} elseif ( $diffOp instanceof DiffOpChange ) {
-			$params['sitelink'] = array(
-				'oldlink' => array(
+			$params['sitelink'] = [
+				'oldlink' => [
 					'site' => $siteId,
 					'page' => $diffOp->getOldValue()
-				),
-				'newlink' => array(
+				],
+				'newlink' => [
 					'site' => $siteId,
 					'page' => $diffOp->getNewValue()
-				)
-			);
+				]
+			];
 		} else {
 			// whatever
 			$params = null;
@@ -257,9 +257,9 @@ class SiteLinkCommentCreator {
 	 * @return array|null
 	 */
 	private function getSiteLinkAddRemoveParams( DiffOp $diffOp, $action, $siteId, Title $title = null ) {
-		$params = array();
+		$params = [];
 
-		if ( in_array( $action, array( 'remove', 'restore' ) ) ) {
+		if ( in_array( $action, [ 'remove', 'restore' ] ) ) {
 			// Messages: wikibase-comment-remove, wikibase-comment-restore
 			$params['message'] = 'wikibase-comment-' . $action;
 		} elseif ( $diffOp instanceof DiffOpAdd ) {
@@ -274,16 +274,16 @@ class SiteLinkCommentCreator {
 			} else {
 				$params['message'] = 'wikibase-comment-sitelink-change';
 
-				$params['sitelink'] = array(
-					'oldlink' => array(
+				$params['sitelink'] = [
+					'oldlink' => [
 						'site' => $siteId,
 						'page' => $diffOp->getOldValue()
-					),
-					'newlink' => array(
+					],
+					'newlink' => [
 						'site' => $siteId,
 						'page' => $diffOp->getNewValue()
-					)
-				);
+					]
+				];
 			}
 		} else {
 			// whatever
@@ -341,7 +341,7 @@ class SiteLinkCommentCreator {
 	 */
 	private function generateComment( array $messageSpec ) {
 		$key = $messageSpec['message'];
-		$args = array();
+		$args = [];
 
 		if ( isset( $messageSpec['sitelink']['oldlink'] ) ) {
 			$link = $messageSpec['sitelink']['oldlink'];

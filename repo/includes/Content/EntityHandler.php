@@ -658,7 +658,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return DataUpdate[]
 	 */
 	public function getEntityDeletionUpdates( EntityContent $content, Title $title ) {
-		$updates = array();
+		$updates = [];
 
 		$entityId = $content->getEntityId();
 
@@ -667,18 +667,18 @@ abstract class EntityHandler extends ContentHandler {
 		$updates[] = new DataUpdateAdapter(
 			'wfRunHooks',
 			'WikibaseEntityDeletionUpdate',
-			array( $content, $title )
+			[ $content, $title ]
 		);
 
 		// Unregister the entity from the terms table.
 		$updates[] = new DataUpdateAdapter(
-			array( $this->termIndex, 'deleteTermsOfEntity' ),
+			[ $this->termIndex, 'deleteTermsOfEntity' ],
 			$entityId
 		);
 
 		// Unregister the entity from the EntityPerPage table.
 		$updates[] = new DataUpdateAdapter(
-			array( $this->entityPerPage, 'deleteEntityPage' ),
+			[ $this->entityPerPage, 'deleteEntityPage' ],
 			$entityId,
 			$title->getArticleID()
 		);
@@ -699,7 +699,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return DataUpdate[]
 	 */
 	public function getEntityModificationUpdates( EntityContent $content, Title $title ) {
-		$updates = array();
+		$updates = [];
 
 		$entityId = $content->getEntityId();
 
@@ -711,13 +711,13 @@ abstract class EntityHandler extends ContentHandler {
 		if ( $content->isRedirect() ) {
 			// Remove the entity from the terms table since it's now a redirect.
 			$updates[] = new DataUpdateAdapter(
-				array( $this->termIndex, 'deleteTermsOfEntity' ),
+				[ $this->termIndex, 'deleteTermsOfEntity' ],
 				$entityId
 			);
 
 			// Register the redirect from the EntityPerPage table.
 			$updates[] = new DataUpdateAdapter(
-				array( $this->entityPerPage, 'addRedirectPage' ),
+				[ $this->entityPerPage, 'addRedirectPage' ],
 				$entityId,
 				$title->getArticleID(),
 				$content->getEntityRedirect()->getTargetId()
@@ -725,14 +725,14 @@ abstract class EntityHandler extends ContentHandler {
 		} else {
 			// Register the entity in the EntityPerPage table.
 			$updates[] = new DataUpdateAdapter(
-				array( $this->entityPerPage, 'addEntityPage' ),
+				[ $this->entityPerPage, 'addEntityPage' ],
 				$entityId,
 				$title->getArticleID()
 			);
 
 			// Register the entity in the terms table.
 			$updates[] = new DataUpdateAdapter(
-				array( $this->termIndex, 'saveTermsOfEntity' ),
+				[ $this->termIndex, 'saveTermsOfEntity' ],
 				$content->getEntity()
 			);
 		}
@@ -742,7 +742,7 @@ abstract class EntityHandler extends ContentHandler {
 		$updates[] = new DataUpdateAdapter(
 			'wfRunHooks',
 			'WikibaseEntityModificationUpdate',
-			array( $content, $title )
+			[ $content, $title ]
 		);
 
 		return $updates;

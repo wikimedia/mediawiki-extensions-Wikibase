@@ -39,44 +39,44 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 	public function validFingerprintProvider() {
 		$q99 = new ItemId( 'Q99' );
 
-		return array(
-			'no description' => array(
+		return [
+			'no description' => [
 				new Fingerprint(
-					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
+					new TermList( [ new Term( 'de', 'DUPE' ) ] ),
 					new TermList(),
 					new AliasGroupList()
 				),
 				$q99
-			),
-			'non-dupe description' => array(
+			],
+			'non-dupe description' => [
 				new Fingerprint(
-					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
-					new TermList( array( new Term( 'de', 'Foo' ) ) ),
+					new TermList( [ new Term( 'de', 'DUPE' ) ] ),
+					new TermList( [ new Term( 'de', 'Foo' ) ] ),
 					new AliasGroupList()
 				),
 				$q99
-			),
+			],
 
-			'self conflict' => array(
+			'self conflict' => [
 				// the mock considers "DUPE" a dupe with P666
 				new Fingerprint(
-					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
-					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
+					new TermList( [ new Term( 'de', 'DUPE' ) ] ),
+					new TermList( [ new Term( 'de', 'DUPE' ) ] ),
 					new AliasGroupList()
 				),
 				new PropertyId( 'P666' ) // ignore conflicts with P666
-			),
-			'ignored conflict' => array(
+			],
+			'ignored conflict' => [
 				// the mock considers "DUPE" a dupe with P666
 				new Fingerprint(
-					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
-					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
+					new TermList( [ new Term( 'de', 'DUPE' ) ] ),
+					new TermList( [ new Term( 'de', 'DUPE' ) ] ),
 					new AliasGroupList()
 				),
 				$q99,
-				array( 'en' ) // only consider conflicts in english
-			),
-		);
+				[ 'en' ] // only consider conflicts in english
+			],
+		];
 	}
 
 	private function fingerprintCaseToEntityCase( array $fingerprintCase, ItemId $id ) {
@@ -92,7 +92,7 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 	}
 
 	public function validEntityProvider() {
-		$cases = array();
+		$cases = [];
 
 		foreach ( $this->validFingerprintProvider() as $name => $fingerprintCase ) {
 			// if the case has a non-null languageCodes or a strange entityId param, skip it
@@ -105,9 +105,9 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 		}
 
 		// check validation without entity id
-		$cases["no id"] = array(
+		$cases["no id"] = [
 			new Item(),
-		);
+		];
 
 		return $cases;
 	}
@@ -146,18 +146,18 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 
 	public function invalidFingerprintProvider() {
 		$badFingerprint = new Fingerprint(
-			new TermList( array( new Term( 'de', 'DUPE' ) ) ),
-			new TermList( array( new Term( 'de', 'DUPE' ) ) ),
+			new TermList( [ new Term( 'de', 'DUPE' ) ] ),
+			new TermList( [ new Term( 'de', 'DUPE' ) ] ),
 			new AliasGroupList()
 		);
 
-		return array(
-			array( $badFingerprint, 'label-with-description-conflict' ),
-		);
+		return [
+			[ $badFingerprint, 'label-with-description-conflict' ],
+		];
 	}
 
 	public function invalidEntityProvider() {
-		$cases = array();
+		$cases = [];
 
 		$i = 1;
 		foreach ( $this->invalidFingerprintProvider() as $name => $fingerprintCase ) {

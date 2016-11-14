@@ -10,58 +10,58 @@ return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	$moduleTemplate = array(
+	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0],
-	);
+	];
 
-	return array(
+	return [
 
-		'wikibase.entityChangers.__namespace' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.entityChangers.__namespace' => $moduleTemplate + [
+			'scripts' => [
 				'namespace.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase',
-			),
-		),
+			],
+		],
 
-		'wikibase.entityChangers.AliasesChanger' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.entityChangers.AliasesChanger' => $moduleTemplate + [
+			'scripts' => [
 				'AliasesChanger.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.datamodel.MultiTerm',
 				'wikibase.entityChangers.__namespace',
 				'wikibase.api.RepoApiError',
-			),
-		),
+			],
+		],
 
-		'wikibase.entityChangers.StatementsChanger' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.entityChangers.StatementsChanger' => $moduleTemplate + [
+			'scripts' => [
 				'StatementsChanger.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.entityChangers.__namespace',
 				'wikibase.api.RepoApiError',
-			),
-		),
+			],
+		],
 
-		'wikibase.entityChangers.DescriptionsChanger' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.entityChangers.DescriptionsChanger' => $moduleTemplate + [
+			'scripts' => [
 				'DescriptionsChanger.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.entityChangers.__namespace',
 				'wikibase.api.RepoApiError',
-			)
-		),
+			]
+		],
 
-		'wikibase.entityChangers.EntityChangersFactory' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.entityChangers.EntityChangersFactory' => $moduleTemplate + [
+			'scripts' => [
 				'EntityChangersFactory.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.entityChangers.__namespace',
 				'wikibase.entityChangers.AliasesChanger',
 				'wikibase.entityChangers.DescriptionsChanger',
@@ -71,50 +71,50 @@ return call_user_func( function() {
 				'wikibase.entityChangers.StatementsChanger',
 				'wikibase.serialization.StatementDeserializer',
 				'wikibase.serialization.StatementSerializer',
-			)
-		),
+			]
+		],
 
-		'wikibase.entityChangers.EntityTermsChanger' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.entityChangers.EntityTermsChanger' => $moduleTemplate + [
+			'scripts' => [
 				'EntityTermsChanger.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.entityChangers.__namespace',
 				'wikibase.api.RepoApiError',
-			)
-		),
+			]
+		],
 
-		'wikibase.entityChangers.LabelsChanger' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.entityChangers.LabelsChanger' => $moduleTemplate + [
+			'scripts' => [
 				'LabelsChanger.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.entityChangers.__namespace',
 				'wikibase.api.RepoApiError',
-			)
-		),
+			]
+		],
 
-		'wikibase.entityChangers.SiteLinksChanger' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.entityChangers.SiteLinksChanger' => $moduleTemplate + [
+			'scripts' => [
 				'SiteLinksChanger.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.entityChangers.__namespace',
 				'wikibase.api.RepoApiError',
-			)
-		),
+			]
+		],
 
-		'wikibase.entityChangers.SiteLinkSetsChanger' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.entityChangers.SiteLinkSetsChanger' => $moduleTemplate + [
+			'scripts' => [
 				'SiteLinkSetsChanger.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.entityChangers.__namespace',
 				'wikibase.entityChangers.SiteLinksChanger',
 				'wikibase.api.RepoApiError',
-			)
-		),
+			]
+		],
 
-	);
+	];
 
 } );

@@ -71,39 +71,39 @@ class ApiClientInfoTest extends \MediaWikiTestCase {
 	public function executeProvider() {
 		$settings = $this->getSettings();
 
-		$repo = array( 'repo' => array(
-				'url' => array(
+		$repo = [ 'repo' => [
+				'url' => [
 					'base' => $settings->getSetting( 'repoUrl' ),
 					'scriptpath' => $settings->getSetting( 'repoScriptPath' ),
 					'articlepath' => $settings->getSetting( 'repoArticlePath' ),
-				)
-			)
-		);
+				]
+			]
+		];
 
-		$siteid = array( 'siteid' => $settings->getSetting( 'siteGlobalID' ) );
+		$siteid = [ 'siteid' => $settings->getSetting( 'siteGlobalID' ) ];
 
-		return array(
-			array(
-				array(),
+		return [
+			[
+				[],
 				$this->getApiRequestParams( '' )
-			),
-			array(
+			],
+			[
 				$repo + $siteid,
 				$this->getApiRequestParams( null )
-			),
-			array(
+			],
+			[
 				$repo + $siteid,
 				$this->getApiRequestParams( 'url|siteid' )
-			),
-			array(
+			],
+			[
 				$repo,
 				$this->getApiRequestParams( 'url' )
-			),
-			array(
+			],
+			[
 				$siteid,
 				$this->getApiRequestParams( 'siteid' )
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -112,11 +112,11 @@ class ApiClientInfoTest extends \MediaWikiTestCase {
 	 * @return array
 	 */
 	private function getApiRequestParams( $wbprop ) {
-		$params = array(
+		$params = [
 			'action' => 'query',
 			'meta' => 'wikibase',
 			'wbprop' => $wbprop
-		);
+		];
 
 		return $params;
 	}
@@ -125,12 +125,12 @@ class ApiClientInfoTest extends \MediaWikiTestCase {
 	 * @return SettingsArray
 	 */
 	private function getSettings() {
-		return new SettingsArray( array(
+		return new SettingsArray( [
 			'repoUrl' => 'http://www.example.org',
 			'repoScriptPath' => '/w',
 			'repoArticlePath' => '/wiki/$1',
 			'siteGlobalID' => 'somerandomwiki',
-		) );
+		] );
 	}
 
 }

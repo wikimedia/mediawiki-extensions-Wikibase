@@ -36,7 +36,7 @@ class LanguageFallbackLabelDescriptionLookupFactoryTest extends \PHPUnit_Framewo
 		$termLookup->expects( $this->any() )
 			->method( 'getLabels' )
 			->will( $this->returnCallback( function( EntityId $id ) {
-				return array( 'en' => $id->getSerialization() . '\'s label' );
+				return [ 'en' => $id->getSerialization() . '\'s label' ];
 			} ) );
 
 		return $termLookup;
@@ -50,8 +50,8 @@ class LanguageFallbackLabelDescriptionLookupFactoryTest extends \PHPUnit_Framewo
 		$termBuffer->expects( $this->once() )
 			->method( 'prefetchTerms' )
 			->with(
-				$this->equalTo( array( new ItemId( 'Q123' ), new ItemId( 'Q456' ) ) ),
-				$this->equalTo( array( 'label' ) ),
+				$this->equalTo( [ new ItemId( 'Q123' ), new ItemId( 'Q456' ) ] ),
+				$this->equalTo( [ 'label' ] ),
 				$this->anything()
 			);
 
@@ -67,7 +67,7 @@ class LanguageFallbackLabelDescriptionLookupFactoryTest extends \PHPUnit_Framewo
 
 		$labelDescriptionLookup = $factory->newLabelDescriptionLookup(
 			Language::factory( 'en-gb' ),
-			array( new ItemId( 'Q123' ), new ItemId( 'Q456' ) )
+			[ new ItemId( 'Q123' ), new ItemId( 'Q456' ) ]
 		);
 
 		$label = $labelDescriptionLookup->getLabel( new ItemId( 'Q123' ) );

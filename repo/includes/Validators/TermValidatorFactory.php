@@ -83,7 +83,7 @@ class TermValidatorFactory {
 				return new LabelDescriptionUniquenessValidator( $this->duplicateDetector );
 
 			default:
-				return new CompositeFingerprintValidator( array() );
+				return new CompositeFingerprintValidator( [] );
 		}
 	}
 
@@ -97,7 +97,7 @@ class TermValidatorFactory {
 
 		//TODO: Make this configurable. Use a builder. Allow more types to register.
 		if ( $entityType === Property::ENTITY_TYPE ) {
-			$validators[] = new NotEntityIdValidator( $this->idParser, 'label-no-entityid', array( Property::ENTITY_TYPE ) );
+			$validators[] = new NotEntityIdValidator( $this->idParser, 'label-no-entityid', [ Property::ENTITY_TYPE ] );
 		}
 
 		return new CompositeValidator( $validators, true );
@@ -127,7 +127,7 @@ class TermValidatorFactory {
 	 * @return ValueValidator[]
 	 */
 	protected function getCommonTermValidators() {
-		$validators = array();
+		$validators = [];
 		$validators[] = new TypeValidator( 'string' );
 		$validators[] = new StringLengthValidator( 1, $this->maxLength, 'mb_strlen' );
 		$validators[] = new RegexValidator( '/^\s|[\r\n\t]|\s$/', true ); // no leading/trailing whitespace, no line breaks.
@@ -139,7 +139,7 @@ class TermValidatorFactory {
 	 * @return ValueValidator
 	 */
 	public function getLanguageValidator() {
-		$validators = array();
+		$validators = [];
 		$validators[] = new TypeValidator( 'string' );
 		$validators[] = new MembershipValidator( $this->languageCodes, 'not-a-language' );
 

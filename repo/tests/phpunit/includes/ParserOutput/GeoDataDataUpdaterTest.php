@@ -50,7 +50,7 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 	 */
 	public function testProcessStatement( array $expected, array $statements, $message ) {
 		$updater = $this->newGeoDataDataUpdater(
-			array( 'P625', 'P9000' )
+			[ 'P625', 'P9000' ]
 		);
 
 		foreach ( $statements as $statement ) {
@@ -67,98 +67,98 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 
 	public function processStatementProvider() {
 		if ( $this->willSkipTests() ) {
-			return array( array( array(), array(), 'dummy test will be skipped' ) );
+			return [ [ [], [], 'dummy test will be skipped' ] ];
 		}
 
 		$statements = $this->getStatements();
 		$coords = $this->getCoords();
 
-		return array(
-			array(
-				array(),
-				array( $statements['P42-string'] ),
+		return [
+			[
+				[],
+				[ $statements['P42-string'] ],
 				'non-geo statement'
-			),
-			array(
-				array(
-					'P625|1' => array( $coords['P625-geo'] )
-				),
-				array( $statements['P625-geo'] ),
+			],
+			[
+				[
+					'P625|1' => [ $coords['P625-geo'] ]
+				],
+				[ $statements['P625-geo'] ],
 				'one normal geo statement'
-			),
-			array(
-				array(),
-				array( $statements['P17-geo-deprecated'] ),
+			],
+			[
+				[],
+				[ $statements['P17-geo-deprecated'] ],
 				'deprecated geo statement'
-			),
-			array(
-				array(
-					'P10|1' => array(
+			],
+			[
+				[
+					'P10|1' => [
 						$coords['P10-geo-A'],
 						$coords['P10-geo-B']
-					)
-				),
-				array(
+					]
+				],
+				[
 					$statements['P10-geo-A'],
 					$statements['P10-geo-B']
-				),
+				],
 				'multiple normal statements'
-			),
-			array(
-				array(
-					'P10|1' => array(
+			],
+			[
+				[
+					'P10|1' => [
 						$coords['P10-geo-A']
-					),
-					'P10|2' => array(
+					],
+					'P10|2' => [
 						$coords['P10-geo-preferred-A'],
 						$coords['P10-geo-preferred-B']
-					)
-				),
-				array(
+					]
+				],
+				[
 					$statements['P10-geo-A'],
 					$statements['P10-geo-preferred-A'],
 					$statements['P10-geo-preferred-B']
-				),
+				],
 				'multiple preferred, one normal'
-			),
-			array(
-				array(
-					'P10|1' => array(
+			],
+			[
+				[
+					'P10|1' => [
 						$coords['P10-geo-A'],
 						$coords['P10-geo-B']
-					),
-					'P10|2' => array(
+					],
+					'P10|2' => [
 						$coords['P10-geo-preferred-A']
-					)
-				),
-				array(
+					]
+				],
+				[
 					$statements['P10-geo-A'],
 					$statements['P10-geo-B'],
 					$statements['P10-geo-preferred-A']
-				),
+				],
 				'multiple normal, one preferred'
-			),
-			array(
-				array(),
-				array( $statements['P20-some-value'] ),
+			],
+			[
+				[],
+				[ $statements['P20-some-value'] ],
 				'geo property with some value snak'
-			),
-			array(
-				array(),
-				array( $statements['P404-unknown-property'] ),
+			],
+			[
+				[],
+				[ $statements['P404-unknown-property'] ],
 				'statement with unknown property, not in PropertyDataTypeLookup'
-			),
-			array(
-				array(),
-				array( $statements['P9002-unknown-globe'] ),
+			],
+			[
+				[],
+				[ $statements['P9002-unknown-globe'] ],
 				'statement with unknown globe'
-			)
-		);
+			]
+		];
 	}
 
 	public function testUpdateParserOutput_withPrimaryCoordPreferredStatement() {
 		$updater = $this->getUpdaterWithStatements(
-			array( 'P9000', 'P625' )
+			[ 'P9000', 'P625' ]
 		);
 
 		$coords = $this->getCoords();
@@ -183,7 +183,7 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 
 	public function testUpdateParserOutput_withPrimaryCoordNormalStatement() {
 		$updater = $this->getUpdaterWithStatements(
-			array( 'P625', 'P10' )
+			[ 'P625', 'P10' ]
 		);
 
 		$expected = new CoordinatesOutput();
@@ -215,7 +215,7 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 		$parserOutput = new ParserOutput();
 
 		$updater = $this->getUpdaterWithStatements(
-			array( 'P17', 'P404', 'P10', 'P20', 'P9000', 'P9001', 'P625' )
+			[ 'P17', 'P404', 'P10', 'P20', 'P9000', 'P9001', 'P625' ]
 		);
 
 		$updater->updateParserOutput( $parserOutput );
@@ -234,7 +234,7 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 		$parserOutput = new ParserOutput();
 		$parserOutput->geoData = $coordinatesOutput;
 
-		$updater = $this->getUpdaterWithStatements( array( 'P625', 'P10' ) );
+		$updater = $this->getUpdaterWithStatements( [ 'P625', 'P10' ] );
 		$updater->updateParserOutput( $parserOutput );
 
 		$this->assertEquals( $coord, $parserOutput->geoData->getPrimary() );
@@ -259,15 +259,15 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 		return new GeoDataDataUpdater(
 			new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() ),
 			$preferredProperties,
-			array(
+			[
 				'http://www.wikidata.org/entity/Q2' => 'earth',
 				'http://www.wikidata.org/entity/Q111' => 'mars'
-			)
+			]
 		);
 	}
 
 	private function getStatements() {
-		$statements = array();
+		$statements = [];
 
 		$statements['P42-string'] = $this->newStatement(
 			new PropertyId( 'P42' ),
@@ -309,12 +309,12 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 		$statements['P9000-geo-B'] = $this->newStatementWithQualifier(
 			new PropertyId( 'P9000' ),
 			$this->newGlobeCoordinateValue( 11.1234, 12.5678 ),
-			new SnakList( array(
+			new SnakList( [
 				new PropertyValueSnak(
 					new PropertyId( 'P625' ),
 					$this->newGlobeCoordinateValue( 30.0987, 20.1234 )
 				)
-			) )
+			] )
 		);
 
 		$statements['P9000-geo-preferred'] = $this->newStatementWithRank(
@@ -350,7 +350,7 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 	}
 
 	private function getCoords() {
-		return array(
+		return [
 			'P625-geo' => new Coord( 19.7, 306.8, 'mars' ),
 			'P10-geo-A' => new Coord( 40.748433, -73.985655 ),
 			'P10-geo-B' => new Coord( 44.264464, 52.643666 ),
@@ -359,7 +359,7 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 			'P9000-geo-A' => new Coord( 33.643664, 20.464222 ),
 			'P9000-geo-B' => new Coord( 11.1234, 12.5678 ),
 			'P9000-geo-preferred' => new Coord( 77.7777, 33.3333 )
-		);
+		];
 	}
 
 	private function newStatement( PropertyId $propertyId, DataValue $dataValue = null ) {

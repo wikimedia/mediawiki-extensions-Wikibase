@@ -136,7 +136,7 @@ class EditEntity extends ModifyEntity {
 	 * @return string[] A list of permissions
 	 */
 	protected function getRequiredPermissions( EntityDocument $entity ) {
-		$permissions = $this->isWriteMode() ? array( 'read', 'edit' ) : array( 'read' );
+		$permissions = $this->isWriteMode() ? [ 'read', 'edit' ] : [ 'read' ];
 
 		if ( !$this->entityExists( $entity->getId() ) ) {
 			$permissions[] = 'createpage';
@@ -335,7 +335,7 @@ class EditEntity extends ModifyEntity {
 	 * @return ChangeOp[]
 	 */
 	private function getLabelChangeOps( array $labels ) {
-		$labelChangeOps = array();
+		$labelChangeOps = [];
 
 		foreach ( $labels as $langCode => $arg ) {
 			$this->validateMultilangArgs( $arg, $langCode );
@@ -360,7 +360,7 @@ class EditEntity extends ModifyEntity {
 	 * @return ChangeOp[]
 	 */
 	private function getDescriptionChangeOps( array $descriptions ) {
-		$descriptionChangeOps = array();
+		$descriptionChangeOps = [];
 
 		foreach ( $descriptions as $langCode => $arg ) {
 			$this->validateMultilangArgs( $arg, $langCode );
@@ -397,13 +397,13 @@ class EditEntity extends ModifyEntity {
 	 * @return array[]
 	 */
 	private function getIndexedAliases( array $aliases ) {
-		$indexedAliases = array();
+		$indexedAliases = [];
 
 		foreach ( $aliases as $langCode => $arg ) {
 			if ( !is_string( $langCode ) ) {
-				$indexedAliases[] = ( array_values( $arg ) === $arg ) ? $arg : array( $arg );
+				$indexedAliases[] = ( array_values( $arg ) === $arg ) ? $arg : [ $arg ];
 			} else {
-				$indexedAliases[$langCode] = ( array_values( $arg ) === $arg ) ? $arg : array( $arg );
+				$indexedAliases[$langCode] = ( array_values( $arg ) === $arg ) ? $arg : [ $arg ];
 			}
 		}
 
@@ -416,15 +416,15 @@ class EditEntity extends ModifyEntity {
 	 * @return ChangeOp[]
 	 */
 	private function getIndexedAliasesChangeOps( array $indexedAliases ) {
-		$aliasesChangeOps = array();
+		$aliasesChangeOps = [];
 		foreach ( $indexedAliases as $langCode => $args ) {
-			$aliasesToSet = array();
+			$aliasesToSet = [];
 			$language = '';
 
 			foreach ( $args as $arg ) {
 				$this->validateMultilangArgs( $arg, $langCode );
 
-				$alias = array( $this->stringNormalizer->trimToNFC( $arg['value'] ) );
+				$alias = [ $this->stringNormalizer->trimToNFC( $arg['value'] ) ];
 				$language = $arg['language'];
 
 				if ( array_key_exists( 'remove', $arg ) ) {
@@ -436,7 +436,7 @@ class EditEntity extends ModifyEntity {
 				}
 			}
 
-			if ( $aliasesToSet !== array() ) {
+			if ( $aliasesToSet !== [] ) {
 				$aliasesChangeOps[] = $this->termChangeOpFactory->newSetAliasesOp( $language, $aliasesToSet );
 			}
 		}
@@ -451,7 +451,7 @@ class EditEntity extends ModifyEntity {
 	 * @return ChangeOp[]
 	 */
 	private function getSiteLinksChangeOps( array $siteLinks, Item $item ) {
-		$siteLinksChangeOps = array();
+		$siteLinksChangeOps = [];
 		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 
 		foreach ( $siteLinks as $siteId => $arg ) {
@@ -505,7 +505,7 @@ class EditEntity extends ModifyEntity {
 	 * @return ChangeOp[]
 	 */
 	private function getClaimsChangeOps( array $claims ) {
-		$changeOps = array();
+		$changeOps = [];
 
 		//check if the array is associative or in arrays by property
 		if ( array_keys( $claims ) !== range( 0, count( $claims ) - 1 ) ) {
@@ -529,7 +529,7 @@ class EditEntity extends ModifyEntity {
 	 * @return ChangeOp[]
 	 */
 	private function getModifyStatementChangeOps( array $statements ) {
-		$opsToReturn = array();
+		$opsToReturn = [];
 
 		foreach ( $statements as $statementArray ) {
 			if ( !array_key_exists( 'remove', $statementArray ) ) {
@@ -557,7 +557,7 @@ class EditEntity extends ModifyEntity {
 	 * @return ChangeOp[]
 	 */
 	private function getRemoveStatementChangeOps( array $claims ) {
-		$opsToReturn = array();
+		$opsToReturn = [];
 		foreach ( $claims as $claimArray ) {
 			if ( array_key_exists( 'remove', $claimArray ) ) {
 				if ( array_key_exists( 'id', $claimArray ) ) {
@@ -615,7 +615,7 @@ class EditEntity extends ModifyEntity {
 		$entityId = $entity->getId();
 		$title = $entityId === null ? null : $this->getTitleLookup()->getTitleForId( $entityId );
 
-		$allowedProps = array(
+		$allowedProps = [
 			// ignored props
 			'length',
 			'count',
@@ -635,7 +635,7 @@ class EditEntity extends ModifyEntity {
 			'sitelinks',
 			'claims',
 			'datatype'
-		);
+		];
 
 		$this->checkValidJson( $data, $allowedProps );
 		$this->checkEntityId( $data, $entityId );
@@ -774,16 +774,16 @@ class EditEntity extends ModifyEntity {
 	protected function getAllowedParams() {
 		return array_merge(
 			parent::getAllowedParams(),
-			array(
-				'data' => array(
+			[
+				'data' => [
 					self::PARAM_TYPE => 'text',
 					self::PARAM_REQUIRED => true,
-				),
-				'clear' => array(
+				],
+				'clear' => [
 					self::PARAM_TYPE => 'boolean',
 					self::PARAM_DFLT => false
-				),
-			)
+				],
+			]
 		);
 	}
 
@@ -791,7 +791,7 @@ class EditEntity extends ModifyEntity {
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
-		return array(
+		return [
 			// Creating new entites
 			'action=wbeditentity&new=item&data={}'
 				=> 'apihelp-wbeditentity-example-1',
@@ -838,7 +838,7 @@ class EditEntity extends ModifyEntity {
 				. '"property":"P56","datavalue":{"value":"ChangedString","type":"string"}},'
 				. '"type":"statement","rank":"normal"}]}'
 				=> 'apihelp-wbeditentity-example-10',
-		);
+		];
 	}
 
 	/**

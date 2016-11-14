@@ -106,7 +106,7 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 			$hookReturn = Status::newGood();
 		}
 		$mock = $this->getMockBuilder( EditFilterHookRunner::class )
-			->setMethods( array( 'run' ) )
+			->setMethods( [ 'run' ] )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $invokeCount )
@@ -170,11 +170,11 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function createRedirectProvider_success() {
-		return array(
-			'redirect empty entity' => array( new ItemId( 'Q11' ), new ItemId( 'Q12' ) ),
-			'update redirect' => array( new ItemId( 'Q22' ), new ItemId( 'Q11' ) ),
-			'over deleted item' => array( new ItemId( 'Q666' ), new ItemId( 'Q11' ) ),
-		);
+		return [
+			'redirect empty entity' => [ new ItemId( 'Q11' ), new ItemId( 'Q12' ) ],
+			'update redirect' => [ new ItemId( 'Q22' ), new ItemId( 'Q11' ) ],
+			'over deleted item' => [ new ItemId( 'Q666' ), new ItemId( 'Q11' ) ],
+		];
 	}
 
 	/**
@@ -194,16 +194,16 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function createRedirectProvider_failure() {
-		return array(
-			'source not found' => array( new ItemId( 'Q77' ), new ItemId( 'Q12' ), 'no-such-entity' ),
-			'target not found' => array( new ItemId( 'Q11' ), new ItemId( 'Q77' ), 'no-such-entity' ),
-			'target is a redirect' => array( new ItemId( 'Q11' ), new ItemId( 'Q22' ), 'target-is-redirect' ),
-			'target is incompatible' => array( new ItemId( 'Q11' ), new PropertyId( 'P11' ), 'target-is-incompatible' ),
+		return [
+			'source not found' => [ new ItemId( 'Q77' ), new ItemId( 'Q12' ), 'no-such-entity' ],
+			'target not found' => [ new ItemId( 'Q11' ), new ItemId( 'Q77' ), 'no-such-entity' ],
+			'target is a redirect' => [ new ItemId( 'Q11' ), new ItemId( 'Q22' ), 'target-is-redirect' ],
+			'target is incompatible' => [ new ItemId( 'Q11' ), new PropertyId( 'P11' ), 'target-is-incompatible' ],
 
-			'source not empty' => array( new ItemId( 'Q12' ), new ItemId( 'Q11' ), 'origin-not-empty' ),
-			'can\'t redirect' => array( new PropertyId( 'P11' ), new PropertyId( 'P12' ), 'cant-redirect' ),
-			'can\'t redirect EditFilter' => array( new ItemId( 'Q11' ), new ItemId( 'Q12' ), 'cant-redirect', Status::newFatal( 'EF' ) ),
-		);
+			'source not empty' => [ new ItemId( 'Q12' ), new ItemId( 'Q11' ), 'origin-not-empty' ],
+			'can\'t redirect' => [ new PropertyId( 'P11' ), new PropertyId( 'P12' ), 'cant-redirect' ],
+			'can\'t redirect EditFilter' => [ new ItemId( 'Q11' ), new ItemId( 'Q12' ), 'cant-redirect', Status::newFatal( 'EF' ) ],
+		];
 	}
 
 	/**
@@ -221,10 +221,10 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function permissionProvider() {
-		return array(
-			'edit' => array( 'edit' ),
-			'item-redirect' => array( 'item-redirect' ),
-		);
+		return [
+			'edit' => [ 'edit' ],
+			'item-redirect' => [ 'item-redirect' ],
+		];
 	}
 
 	/**

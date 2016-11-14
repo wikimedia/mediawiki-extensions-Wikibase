@@ -9,117 +9,117 @@ return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	$moduleTemplate = array(
+	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0],
-	);
+	];
 
-	$modules = array(
+	$modules = [
 
-		'jquery.wikibase.addtoolbar' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.addtoolbar' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.addtoolbar.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.wikibase.singlebuttontoolbar',
-			),
-			'messages' => array(
+			],
+			'messages' => [
 				'wikibase-add',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.edittoolbar' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.edittoolbar' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.edittoolbar.js',
-			),
-			'styles' => array(
+			],
+			'styles' => [
 				'themes/default/jquery.wikibase.edittoolbar.css',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.wikibase.toolbar',
 				'jquery.wikibase.toolbarbutton',
 				'jquery.wikibase.wbtooltip',
 				'wikibase.api.RepoApiError',
-			),
-			'messages' => array(
+			],
+			'messages' => [
 				'wikibase-cancel',
 				'wikibase-edit',
 				'wikibase-remove',
 				'wikibase-remove-inprogress',
 				'wikibase-save',
 				'wikibase-save-inprogress',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.removetoolbar' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.removetoolbar' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.removetoolbar.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.wikibase.singlebuttontoolbar',
-			),
-			'messages' => array(
+			],
+			'messages' => [
 				'wikibase-remove',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.singlebuttontoolbar' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.singlebuttontoolbar' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.singlebuttontoolbar.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.wikibase.toolbar',
 				'jquery.wikibase.toolbarbutton',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.toolbar' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.toolbar' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.toolbar.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.wikibase.toolbaritem',
 				'jquery.wikibase.toolbar.styles',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.toolbar.styles' => $moduleTemplate + array(
+		'jquery.wikibase.toolbar.styles' => $moduleTemplate + [
 			'position' => 'top',
-			'styles' => array(
+			'styles' => [
 				'themes/default/jquery.wikibase.toolbar.css',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.toolbarbutton' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.toolbarbutton' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.toolbarbutton.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.wikibase.toolbaritem',
 				'jquery.wikibase.toolbarbutton.styles',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.toolbarbutton.styles' => $moduleTemplate + array(
+		'jquery.wikibase.toolbarbutton.styles' => $moduleTemplate + [
 			'position' => 'top',
-			'styles' => array(
+			'styles' => [
 				'themes/default/jquery.wikibase.toolbarbutton.css',
-			),
-		),
+			],
+		],
 
-		'jquery.wikibase.toolbaritem' => $moduleTemplate + array(
-			'scripts' => array(
+		'jquery.wikibase.toolbaritem' => $moduleTemplate + [
+			'scripts' => [
 				'jquery.wikibase.toolbaritem.js',
-			),
-			'styles' => array(
+			],
+			'styles' => [
 				'themes/default/jquery.wikibase.toolbaritem.css',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.ui.TemplatedWidget',
-			),
-		),
+			],
+		],
 
-	);
+	];
 
 	return $modules;
 } );

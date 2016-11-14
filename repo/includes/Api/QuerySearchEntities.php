@@ -100,18 +100,18 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 		foreach ( $searchResults as $match ) {
 			$title = $this->titleLookup->getTitleForId( $match->getEntityId() );
 
-			$values = array(
+			$values = [
 				'ns' => intval( $title->getNamespace() ),
 				'title' => $title->getPrefixedText(),
 				'pageid' => intval( $title->getArticleID() ),
 				'displaytext' => $match->getMatchedTerm()->getText(),
-			);
+			];
 
-			$result->addValue( array( 'query', $this->getModuleName() ), null, $values );
+			$result->addValue( [ 'query', $this->getModuleName() ], null, $values );
 		}
 
 		$result->addIndexedTagName(
-			array( 'query', $this->getModuleName() ), $this->getModulePrefix()
+			[ 'query', $this->getModuleName() ], $this->getModulePrefix()
 		);
 	}
 
@@ -121,12 +121,12 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	public function executeGenerator( $resultPageSet ) {
 		$params = $this->extractRequestParams();
 		$searchResults = $this->getSearchResults( $params );
-		$titles = array();
+		$titles = [];
 
 		foreach ( $searchResults as $match ) {
 			$title = $this->titleLookup->getTitleForId( $match->getEntityId() );
 			$titles[] = $title;
-			$resultPageSet->setGeneratorData( $title, array( 'displaytext' => $match->getMatchedTerm()->getText() ) );
+			$resultPageSet->setGeneratorData( $title, [ 'displaytext' => $match->getMatchedTerm()->getText() ] );
 		}
 
 		$resultPageSet->populateFromTitles( $titles );
@@ -168,42 +168,42 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	 * @see ApiBase::getAllowedParams
 	 */
 	protected function getAllowedParams() {
-		return array(
-			'search' => array(
+		return [
+			'search' => [
 				self::PARAM_TYPE => 'string',
 				self::PARAM_REQUIRED => true,
-			),
-			'language' => array(
+			],
+			'language' => [
 				self::PARAM_TYPE => $this->termsLanguages->getLanguages(),
-			),
-			'strictlanguage' => array(
+			],
+			'strictlanguage' => [
 				self::PARAM_TYPE => 'boolean',
 				self::PARAM_DFLT => false,
-			),
-			'type' => array(
+			],
+			'type' => [
 				self::PARAM_TYPE => $this->entityTypes,
 				self::PARAM_DFLT => 'item',
-			),
-			'limit' => array(
+			],
+			'limit' => [
 				self::PARAM_TYPE => 'limit',
 				self::PARAM_DFLT => 7,
 				self::PARAM_MAX => self::LIMIT_SML1,
 				self::PARAM_MAX2 => self::LIMIT_SML2,
 				self::PARAM_MIN => 0,
 				self::PARAM_RANGE_ENFORCE => true,
-			),
-		);
+			],
+		];
 	}
 
 	/**
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
-		return array(
+		return [
 			'action=query&list=wbsearch&wbssearch=abc&wbslanguage=en' => 'apihelp-query+wbsearch-example-1',
 			'action=query&list=wbsearch&wbssearch=abc&wbslanguage=en&wbslimit=50' => 'apihelp-query+wbsearch-example-2',
 			'action=query&list=wbsearch&wbssearch=alphabet&wbslanguage=en&wbstype=property' => 'apihelp-query+wbsearch-example-3',
-		);
+		];
 	}
 
 }

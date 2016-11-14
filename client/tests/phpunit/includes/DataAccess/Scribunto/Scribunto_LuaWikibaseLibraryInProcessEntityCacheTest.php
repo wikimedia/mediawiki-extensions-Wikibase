@@ -24,9 +24,9 @@ class Scribunto_LuaWikibaseLibraryInProcessEntityCacheTest extends Scribunto_Lua
 	protected static $moduleName = 'LuaWikibaseLibraryInProcessEntityCacheTests';
 
 	protected function getTestModules() {
-		return parent::getTestModules() + array(
+		return parent::getTestModules() + [
 			'LuaWikibaseLibraryInProcessEntityCacheTests' => __DIR__ . '/LuaWikibaseLibraryInProcessEntityCacheTests.lua',
-		);
+		];
 	}
 
 	/**

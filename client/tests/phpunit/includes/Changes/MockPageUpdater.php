@@ -19,12 +19,12 @@ use Wikibase\EntityChange;
  */
 class MockPageUpdater implements PageUpdater {
 
-	private $updates = array(
-		'purgeParserCache' => array(),
-		'purgeWebCache' => array(),
-		'scheduleRefreshLinks' => array(),
-		'injectRCRecord' => array(),
-	);
+	private $updates = [
+		'purgeParserCache' => [],
+		'purgeWebCache' => [],
+		'scheduleRefreshLinks' => [],
+		'injectRCRecord' => [],
+	];
 
 	/**
 	 * @param Title[] $titles

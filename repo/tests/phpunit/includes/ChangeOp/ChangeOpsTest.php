@@ -46,10 +46,10 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 	public function changeOpProvider() {
 		$validatorFactory = $this->getTermValidatorFactory();
 
-		$ops = array();
-		$ops[] = array( new ChangeOpLabel( 'en', 'myNewLabel', $validatorFactory ) );
-		$ops[] = array( new ChangeOpDescription( 'de', 'myNewDescription', $validatorFactory ) );
-		$ops[] = array( new ChangeOpLabel( 'en', null, $validatorFactory ) );
+		$ops = [];
+		$ops[] = [ new ChangeOpLabel( 'en', 'myNewLabel', $validatorFactory ) ];
+		$ops[] = [ new ChangeOpDescription( 'de', 'myNewDescription', $validatorFactory ) ];
+		$ops[] = [ new ChangeOpLabel( 'en', null, $validatorFactory ) ];
 
 		return $ops;
 	}
@@ -60,20 +60,20 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 	public function testAdd( ChangeOp $changeOp ) {
 		$changeOps = new ChangeOps();
 		$changeOps->add( $changeOp );
-		$this->assertEquals( array( $changeOp ), $changeOps->getChangeOps() );
+		$this->assertEquals( [ $changeOp ], $changeOps->getChangeOps() );
 	}
 
 	public function changeOpArrayProvider() {
 		$validatorFactory = $this->getTermValidatorFactory();
 
-		$ops = array();
-		$ops[] = array(
-					array(
+		$ops = [];
+		$ops[] = [
+					[
 						new ChangeOpLabel( 'en', 'enLabel', $validatorFactory ),
 						new ChangeOpLabel( 'de', 'deLabel', $validatorFactory ),
 						new ChangeOpDescription( 'en', 'enDescr', $validatorFactory ),
-					)
-				);
+					]
+				];
 
 		return $ops;
 	}
@@ -90,9 +90,9 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 	public function invalidChangeOpProvider() {
 		$validatorFactory = $this->getTermValidatorFactory();
 
-		$ops = array();
-		$ops[] = array( 1234 );
-		$ops[] = array( array( new ChangeOpLabel( 'en', 'test', $validatorFactory ), 123 ) );
+		$ops = [];
+		$ops[] = [ 1234 ];
+		$ops[] = [ [ new ChangeOpLabel( 'en', 'test', $validatorFactory ), 123 ] ];
 
 		return $ops;
 	}
@@ -109,13 +109,13 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 	public function changeOpsProvider() {
 		$validatorFactory = $this->getTermValidatorFactory();
 
-		$args = array();
+		$args = [];
 
 		$language = 'en';
 		$changeOps = new ChangeOps();
 		$changeOps->add( new ChangeOpLabel( $language, 'newLabel', $validatorFactory ) );
 		$changeOps->add( new ChangeOpDescription( $language, 'newDescription', $validatorFactory ) );
-		$args[] = array( $changeOps, $language, 'newLabel', 'newDescription' );
+		$args[] = [ $changeOps, $language, 'newLabel', 'newDescription' ];
 
 		return $args;
 	}
@@ -138,8 +138,8 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 		$snak = new PropertyValueSnak( new PropertyId( 'P7' ), new StringValue( 'INVALID' ) );
 		$guidGenerator = new GuidGenerator();
 
-		$error = Error::newError( 'Testing', 'test', 'test-error', array() );
-		$result = Result::newError( array( $error ) );
+		$error = Error::newError( 'Testing', 'test', 'test-error', [] );
+		$result = Result::newError( [ $error ] );
 
 		$snakValidator = $this->getMockBuilder( SnakValidator::class )
 			->disableOriginalConstructor()
@@ -167,7 +167,7 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 			->will( $this->returnCallback( function( Item $item ) {
 				// Fail when the label is already set (by a previous apply call).
 				return $item->getFingerprint()->hasLabel( 'en' )
-					? Result::newError( array() )
+					? Result::newError( [] )
 					: Result::newSuccess();
 			} ) );
 		$changeOp->expects( $this->any() )

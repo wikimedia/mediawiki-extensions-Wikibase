@@ -36,20 +36,20 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 
 		// these are required because Linker is used in ChangeLineFormatter
 		// @todo eliminate Linker or at least use of Linker in Wikibase :)
-		$this->setMwGlobals( array(
+		$this->setMwGlobals( [
 			'wgScriptPath' => '',
 			'wgScript' => '/index.php',
 			'wgArticlePath' => '/wiki/$1'
-		) );
+		] );
 
 		$this->repoLinker = new RepoLinker(
 			'http://www.wikidata.org',
 			'/wiki/$1',
 			'/w',
-			array(
+			[
 				'item' => '',
 				'property' => 'Property'
-			)
+			]
 		);
 	}
 
@@ -77,7 +77,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			$externalChange,
 			$recentChange->getTitle(),
 			$recentChange->counter,
-			$changesList->recentChangesFlags( array( 'wikibase-edit' => true ), '' )
+			$changesList->recentChangesFlags( [ 'wikibase-edit' => true ], '' )
 		);
 
 		foreach ( $expectedTags as $key => $tag ) {
@@ -100,146 +100,146 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 	public function formatProvider() {
 		$commentHtml = '<span><a href="http://acme.test">Linky</a> <script>we can run scripts here</script><span/>';
 
-		return array(
-			'edit-change' => array(
+		return [
+			'edit-change' => [
 				$this->getEditSiteLinkChangeTagMatchers(),
 				$this->getEditSiteLinkPatterns(),
 				$this->getEditSiteLinkRecentChange(
 					'/* wbsetclaim-update:2||1 */ [[Property:P213]]: [[Q850]]'
 				)
-			),
-			'log-change' => array(
+			],
+			'log-change' => [
 				$this->getLogChangeTagMatchers(),
-				array(
+				[
 					'/Log Change Comment/',
-				),
+				],
 				$this->getLogRecentChange()
-			),
-			'comment-fallback' => array(
-				array(),
-				array(
+			],
+			'comment-fallback' => [
+				[],
+				[
 					'/<span class=\"comment\">.*\(Associated .*? item deleted\. Language links removed\.\)/'
-				),
+				],
 				$this->getEditSiteLinkRecentChange(
 					'',
 					null,
-					array(
+					[
 						'message' => 'wikibase-comment-remove',
-					),
+					],
 					null
 				)
-			),
-			'comment-injection' => array(
-				array(),
-				array(
+			],
+			'comment-injection' => [
+				[],
+				[
 					'/\(&lt;script&gt;evil&lt;\/script&gt;\)/'
-				),
+				],
 				$this->getEditSiteLinkRecentChange(
 					'<script>evil</script>'
 				)
-			),
-			'comment-html' => array(
-				array(),
-				array(
+			],
+			'comment-html' => [
+				[],
+				[
 					'/<span class=\"comment\">.*' . preg_quote( $commentHtml, '/' ) . '/',
-				),
+				],
 				$this->getEditSiteLinkRecentChange(
 					'this shall be ignored',
 					$commentHtml,
-					array(
+					[
 						'message' => 'this-shall-be-ignored',
-					),
+					],
 					null
 				)
-			),
-		);
+			],
+		];
 	}
 
 	public function getEditSiteLinkPatterns() {
-		return array(
+		return [
 			'/title=Q4&amp;curid=5&amp;action=history/',
 			'/title=Q4&amp;curid=5&amp;diff=92&amp;oldid=90/',
 			'/<span class="comment">\('
 				. '‎<span dir="auto"><span class="autocomment">Changed claim: <\/span><\/span> '
 				. '<a .*?>Property:P213<\/a>: <a .*?>Q850<\/a>'
 				. '\)<\/span>/',
-		);
+		];
 	}
 
 	public function getEditSiteLinkChangeTagMatchers() {
-		return array(
-			'edit-difflink' => array(
+		return [
+			'edit-difflink' => [
 				'tag' => 'a',
 				'content' => 'diff'
-			),
-			'edit-histlink' => array(
+			],
+			'edit-histlink' => [
 				'tag' => 'a',
 				'content' => 'hist'
-			),
-			'edit-changeslist-separator' => array(
+			],
+			'edit-changeslist-separator' => [
 				'tag' => 'span',
-				'attributes' => array(
+				'attributes' => [
 					'class' => 'mw-changeslist-separator'
-				),
+				],
 				'content' => '. .'
-			),
-			'edit-change-flag' => array(
+			],
+			'edit-change-flag' => [
 				'tag' => 'abbr',
-				'attributes' => array(
+				'attributes' => [
 					'class' => 'wikibase-edit'
-				),
+				],
 				'content' => 'D'
-			),
-			'edit-entitylink' => array(
+			],
+			'edit-entitylink' => [
 				'tag' => 'a',
-				'attributes' => array(
+				'attributes' => [
 					'class' => 'wb-entity-link',
 					'href' => 'http://www.wikidata.org/wiki/Q4'
-				),
+				],
 				'content' => 'Q4'
-			),
-			'edit-changeslist-date' => array(
+			],
+			'edit-changeslist-date' => [
 				'tag' => 'span',
-				'attributes' => array(
+				'attributes' => [
 					'class' => 'mw-changeslist-date'
-				),
+				],
 				'content' => '11:17'
-			),
-			'edit-userlink' => array(
+			],
+			'edit-userlink' => [
 				'tag' => 'a',
-				'attributes' => array(
+				'attributes' => [
 					'class' => 'mw-userlink',
 					'href' => 'http://www.wikidata.org/wiki/User:Cat'
-				),
+				],
 				'content' => 'Cat'
-			),
-			'edit-usertoollinks' => array(
+			],
+			'edit-usertoollinks' => [
 				'tag' => 'span',
-				'attributes' => array(
+				'attributes' => [
 					'class' => 'mw-usertoollinks'
-				)
-			),
-			'edit-usertalk' => array(
+				]
+			],
+			'edit-usertalk' => [
 				'tag' => 'a',
-				'attributes' => array(
+				'attributes' => [
 					'href' => 'http://www.wikidata.org/wiki/User_talk:Cat'
-				),
+				],
 				'content' => 'talk'
-			),
-			'edit-usercontribs' => array(
+			],
+			'edit-usercontribs' => [
 				'tag' => 'a',
-				'attributes' => array(
+				'attributes' => [
 					'href' => 'http://www.wikidata.org/wiki/Special:Contributions/Cat'
-				),
+				],
 				'content' => 'contribs'
-			),
-			'edit-comment' => array(
+			],
+			'edit-comment' => [
 				'tag' => 'span',
-				'attributes' => array(
+				'attributes' => [
 					'class' => 'comment'
-				)
-			)
-		);
+				]
+			]
+		];
 	}
 
 	protected function getEditSiteLinkRecentChange(
@@ -248,8 +248,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		$legacyComment = null,
 		$compositeLegacyComment = null
 	) {
-		$params = array(
-			'wikibase-repo-change' => array(
+		$params = [
+			'wikibase-repo-change' => [
 				'id' => 4,
 				'type' => 'wikibase-item~update',
 				'time' => '20130819111741',
@@ -262,8 +262,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 				'page_id' => 5,
 				'rev_id' => 92,
 				'parent_id' => 90,
-			)
-		);
+			]
+		];
 
 		if ( $legacyComment ) {
 			$params['wikibase-repo-change']['comment'] = $legacyComment;
@@ -282,79 +282,79 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 	}
 
 	protected function getLogChangeTagMatchers() {
-		return array(
-			'delete-deletionlog' => array(
+		return [
+			'delete-deletionlog' => [
 				'tag' => 'a',
-				'attributes' => array(
+				'attributes' => [
 					'href' => 'http://www.wikidata.org/wiki/Special:Log/delete'
-				),
+				],
 				'content' => 'Deletion log'
-			),
-			'delete-changeslist-separator' => array(
+			],
+			'delete-changeslist-separator' => [
 				'tag' => 'span',
-				'attributes' => array(
+				'attributes' => [
 					'class' => 'mw-changeslist-separator'
-				),
+				],
 				'content' => '. .'
-			),
-			'delete-change-flag' => array(
+			],
+			'delete-change-flag' => [
 				'tag' => 'abbr',
-				'attributes' => array(
+				'attributes' => [
 					'class' => 'wikibase-edit'
-				),
+				],
 				'content' => 'D'
-			),
-			'delete-titlelink' => array(
+			],
+			'delete-titlelink' => [
 				'tag' => 'a',
 				'content' => 'Canada'
-			),
-			'delete-changeslist-date' => array(
+			],
+			'delete-changeslist-date' => [
 				'tag' => 'span',
-				'attributes' => array(
+				'attributes' => [
 					'class' => 'mw-changeslist-date'
-				),
+				],
 				'content' => '15:18'
-			),
-			'delete-userlink' => array(
+			],
+			'delete-userlink' => [
 				'tag' => 'a',
-				'attributes' => array(
+				'attributes' => [
 					'class' => 'mw-userlink',
 					'href' => 'http://www.wikidata.org/wiki/User:Cat'
-				),
+				],
 				'content' => 'Cat'
-			),
-			'delete-usertoollinks' => array(
+			],
+			'delete-usertoollinks' => [
 				'tag' => 'span',
-				'attributes' => array(
+				'attributes' => [
 					'class' => 'mw-usertoollinks'
-				)
-			),
-			'delete-usertalk' => array(
+				]
+			],
+			'delete-usertalk' => [
 				'tag' => 'a',
-				'attributes' => array(
+				'attributes' => [
 					'href' => 'http://www.wikidata.org/wiki/User_talk:Cat'
-				),
+				],
 				'content' => 'talk'
-			),
-			'delete-contribs' => array(
+			],
+			'delete-contribs' => [
 				'tag' => 'a',
-				'attributes' => array(
+				'attributes' => [
 					'href' => 'http://www.wikidata.org/wiki/Special:Contributions/Cat'
-				),
+				],
 				'content' => 'contribs'
-			),
-			'delete-comment' => array(
+			],
+			'delete-comment' => [
 				'tag' => 'span',
-				'attributes' => array(
+				'attributes' => [
 					'class' => 'comment'
-				)
-			)
-		);
+				]
+			]
+		];
 	}
 
 	protected function getLogRecentChange() {
-		$params = array(
-			'wikibase-repo-change' => array(
+		$params = [
+			'wikibase-repo-change' => [
 				'id' => 20,
 				'type' => 'wikibase-item~remove',
 				'time' => '20130820151835',
@@ -367,8 +367,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 				'rev_id' => 0,
 				'parent_id' => 0,
 				'bot' => false
-			)
-		);
+			]
+		];
 
 		$title = $this->makeTitle( NS_MAIN, 'Canada', 12, 53 );
 		return $this->makeRecentChange( $params, $title, 'Log Change Comment' );
@@ -413,7 +413,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 	}
 
 	private function makeRecentChange( array $params, Title $title, $comment ) {
-		$attribs = array(
+		$attribs = [
 			'rc_id' => 1234,
 			'rc_timestamp' => $params['wikibase-repo-change']['time'],
 			'rc_user' => 0,
@@ -438,7 +438,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			'rc_log_type' => null,
 			'rc_log_action' => '',
 			'rc_params' => serialize( $params ),
-		);
+		];
 
 		$recentChange = RecentChange::newFromRow( (object)$attribs );
 		$recentChange->counter = 1;

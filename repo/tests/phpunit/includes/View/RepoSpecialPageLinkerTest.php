@@ -50,11 +50,11 @@ class RepoSpecialPageLinkerTest extends MediaWikiLangTestCase {
 	}
 
 	public function getLinkProvider() {
-		return array(
-			array( 'SetLabel', array(), '/Special:SetLabel\/?$/' ),
-			array( 'SetLabel', array( 'en' ), '/Special:SetLabel\/en\/?$/' ),
-			array( 'SetLabel', array( 'en', 'Q5' ), '/Special:SetLabel\/en\/Q5\/?$/' )
-		);
+		return [
+			[ 'SetLabel', [], '/Special:SetLabel\/?$/' ],
+			[ 'SetLabel', [ 'en' ], '/Special:SetLabel\/en\/?$/' ],
+			[ 'SetLabel', [ 'en', 'Q5' ], '/Special:SetLabel\/en\/Q5\/?$/' ]
+		];
 	}
 
 }

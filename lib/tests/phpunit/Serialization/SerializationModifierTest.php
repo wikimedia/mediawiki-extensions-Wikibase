@@ -23,17 +23,17 @@ class SerializationModifierTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function provideKeyValueInjection() {
-		return array(
-			array(
+		return [
+			[
 				null,
 				function( $value ) {
 					$value['foo'] = 'bar';
 					return $value;
 				},
-				array(),
-				array( 'foo' => 'bar' ),
-			),
-			array(
+				[],
+				[ 'foo' => 'bar' ],
+			],
+			[
 				'foo/*',
 				function( $value ) {
 					if ( isset( $value['a'] ) ) {
@@ -43,20 +43,20 @@ class SerializationModifierTest extends PHPUnit_Framework_TestCase {
 					$value['new'] = 'new';
 					return $value;
 				},
-				array(
-					'foo' => array(
-						array( 'a' => 'a' ),
-						array( 'b' => 'b' ),
-					)
-				),
-				array(
-					'foo' => array(
-						array( 'removed' => true, 'new' => 'new' ),
-						array( 'b' => 'b', 'new' => 'new' ),
-					)
-				),
-			),
-			array(
+				[
+					'foo' => [
+						[ 'a' => 'a' ],
+						[ 'b' => 'b' ],
+					]
+				],
+				[
+					'foo' => [
+						[ 'removed' => true, 'new' => 'new' ],
+						[ 'b' => 'b', 'new' => 'new' ],
+					]
+				],
+			],
+			[
 				'entities/*/claims/*/*/references/*/snaks/*/type',
 				function( $value ) {
 					if ( $value === 'bar' ) {
@@ -67,114 +67,114 @@ class SerializationModifierTest extends PHPUnit_Framework_TestCase {
 					}
 					return $value;
 				},
-				array(
-					'entities' => array(
-						'Q1' => array(
+				[
+					'entities' => [
+						'Q1' => [
 							'id' => 'Q1',
-							'claims' => array(
-								'P52' => array(
-									array(
-										'references' => array(
-											array(
-												'snaks' => array(
-													array( 'value' => 'val1', 'type' => 'foo' ),
-													array( 'value' => 'val2', 'type' => 'foo' ),
-												),
-											),
-										),
-									),
-									array(
-										'references' => array(
-											array(
-												'snaks' => array(
-													array( 'value' => 'val3', 'type' => 'bar' ),
-													array( 'value' => 'val4', 'type' => 'bar' ),
-												),
-											),
-										),
-									),
-								),
-							),
-						),
-						'Q2' => array(
+							'claims' => [
+								'P52' => [
+									[
+										'references' => [
+											[
+												'snaks' => [
+													[ 'value' => 'val1', 'type' => 'foo' ],
+													[ 'value' => 'val2', 'type' => 'foo' ],
+												],
+											],
+										],
+									],
+									[
+										'references' => [
+											[
+												'snaks' => [
+													[ 'value' => 'val3', 'type' => 'bar' ],
+													[ 'value' => 'val4', 'type' => 'bar' ],
+												],
+											],
+										],
+									],
+								],
+							],
+						],
+						'Q2' => [
 							'id' => 'Q2',
-							'claims' => array(
-								'P52' => array(
-									array(
-										'references' => array(
-											array(
-												'snaks' => array(
-													array( 'value' => 'valA', 'type' => 'bar' ),
-												),
-											),
-											array(
-												'snaks' => array(
-													array( 'value' => 'valB', 'type' => 'bar' ),
-													array( 'value' => 'valC', 'type' => 'foo' ),
-												),
-											),
-										),
-									),
-								),
-							),
-						),
-					),
-				),
-				array(
-					'entities' => array(
-						'Q1' => array(
+							'claims' => [
+								'P52' => [
+									[
+										'references' => [
+											[
+												'snaks' => [
+													[ 'value' => 'valA', 'type' => 'bar' ],
+												],
+											],
+											[
+												'snaks' => [
+													[ 'value' => 'valB', 'type' => 'bar' ],
+													[ 'value' => 'valC', 'type' => 'foo' ],
+												],
+											],
+										],
+									],
+								],
+							],
+						],
+					],
+				],
+				[
+					'entities' => [
+						'Q1' => [
 							'id' => 'Q1',
-							'claims' => array(
-								'P52' => array(
-									array(
-										'references' => array(
-											array(
-												'snaks' => array(
-													array( 'value' => 'val1', 'type' => '-foo-' ),
-													array( 'value' => 'val2', 'type' => '-foo-' ),
-												),
-											),
-										),
-									),
-									array(
-										'references' => array(
-											array(
-												'snaks' => array(
-													array( 'value' => 'val3', 'type' => 'BAR' ),
-													array( 'value' => 'val4', 'type' => 'BAR' ),
-												),
-											),
-										),
-									),
-								),
-							),
-						),
-						'Q2' => array(
+							'claims' => [
+								'P52' => [
+									[
+										'references' => [
+											[
+												'snaks' => [
+													[ 'value' => 'val1', 'type' => '-foo-' ],
+													[ 'value' => 'val2', 'type' => '-foo-' ],
+												],
+											],
+										],
+									],
+									[
+										'references' => [
+											[
+												'snaks' => [
+													[ 'value' => 'val3', 'type' => 'BAR' ],
+													[ 'value' => 'val4', 'type' => 'BAR' ],
+												],
+											],
+										],
+									],
+								],
+							],
+						],
+						'Q2' => [
 							'id' => 'Q2',
-							'claims' => array(
-								'P52' => array(
-									array(
-										'references' => array(
-											array(
-												'snaks' => array(
-													array( 'value' => 'valA', 'type' => 'BAR' ),
-												),
-											),
-											array(
-												'snaks' => array(
-													array( 'value' => 'valB', 'type' => 'BAR' ),
-													array( 'value' => 'valC', 'type' => '-foo-' ),
-												),
-											),
-										),
-									),
-								),
-							),
-						),
-					),
-				),
-			),
-		);
+							'claims' => [
+								'P52' => [
+									[
+										'references' => [
+											[
+												'snaks' => [
+													[ 'value' => 'valA', 'type' => 'BAR' ],
+												],
+											],
+											[
+												'snaks' => [
+													[ 'value' => 'valB', 'type' => 'BAR' ],
+													[ 'value' => 'valC', 'type' => '-foo-' ],
+												],
+											],
+										],
+									],
+								],
+							],
+						],
+					],
+				],
+			],
+		];
 	}
 
 	/**

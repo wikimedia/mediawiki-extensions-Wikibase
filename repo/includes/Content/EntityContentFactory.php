@@ -45,7 +45,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityIdLookup, EntityP
 	/**
 	 * @var EntityHandler[] Entity type ID to entity handler mapping.
 	 */
-	private $entityHandlers = array();
+	private $entityHandlers = [];
 
 	/**
 	 * @param string[] $entityContentModels Entity type ID to content model ID mapping.
@@ -145,7 +145,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityIdLookup, EntityP
 	 * @return EntityId[] Entity IDs, keyed by page IDs.
 	 */
 	public function getEntityIds( array $titles ) {
-		$entityIds = array();
+		$entityIds = [];
 
 		foreach ( $titles as $title ) {
 			$pageId = $title->getArticleID();
@@ -301,7 +301,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityIdLookup, EntityP
 		$status = Status::newGood();
 
 		foreach ( $errors as $error ) {
-			call_user_func_array( array( $status, 'fatal' ), $error );
+			call_user_func_array( [ $status, 'fatal' ], $error );
 			$status->setResult( false );
 		}
 

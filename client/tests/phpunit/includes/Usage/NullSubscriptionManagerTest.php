@@ -18,12 +18,12 @@ class NullSubscriptionManagerTest extends PHPUnit_Framework_TestCase {
 
 	public function testSubscribe() {
 		$instance = new NullSubscriptionManager();
-		$this->assertNull( $instance->subscribe( '', array() ) );
+		$this->assertNull( $instance->subscribe( '', [] ) );
 	}
 
 	public function testUnsubscribe() {
 		$instance = new NullSubscriptionManager();
-		$this->assertNull( $instance->unsubscribe( '', array() ) );
+		$this->assertNull( $instance->unsubscribe( '', [] ) );
 	}
 
 }

@@ -9,65 +9,65 @@ return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	$moduleTemplate = array(
+	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0],
-	);
+	];
 
-	$modules = array(
+	$modules = [
 
-		'wikibase.store.ApiEntityStore' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.store.ApiEntityStore' => $moduleTemplate + [
+			'scripts' => [
 				'store.ApiEntityStore.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.store',
 				'wikibase.store.EntityStore',
-			),
-		),
+			],
+		],
 
-		'wikibase.store.CachingEntityStore' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.store.CachingEntityStore' => $moduleTemplate + [
+			'scripts' => [
 				'store.CachingEntityStore.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'util.inherit',
 				'wikibase.store',
 				'wikibase.store.EntityStore',
-			),
-		),
+			],
+		],
 
-		'wikibase.store.CombiningEntityStore' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.store.CombiningEntityStore' => $moduleTemplate + [
+			'scripts' => [
 				'store.CombiningEntityStore.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'util.inherit',
 				'wikibase.store',
 				'wikibase.store.EntityStore',
-			),
-		),
+			],
+		],
 
-		'wikibase.store.EntityStore' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.store.EntityStore' => $moduleTemplate + [
+			'scripts' => [
 				'store.EntityStore.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'util.inherit',
 				'wikibase.store',
-			),
-		),
+			],
+		],
 
-		'wikibase.store' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.store' => $moduleTemplate + [
+			'scripts' => [
 				'store.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase',
-			),
-		),
+			],
+		],
 
-	);
+	];
 
 	return $modules;
 } );

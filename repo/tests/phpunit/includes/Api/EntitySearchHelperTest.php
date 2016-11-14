@@ -65,7 +65,7 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @return TermIndexSearchInteractor|\PHPUnit_Framework_MockObject_MockObject
 	 */
-	private function getMockSearchInteractor( $search, $language, $type, array $returnResults = array() ) {
+	private function getMockSearchInteractor( $search, $language, $type, array $returnResults = [] ) {
 		$mock = $this->getMockBuilder( TermIndexSearchInteractor::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -75,7 +75,7 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 				$this->equalTo( $search ),
 				$this->equalTo( $language ),
 				$this->equalTo( $type ),
-				$this->equalTo( array( TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS ) )
+				$this->equalTo( [ TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS ] )
 			)
 			->will( $this->returnValue( $returnResults ) );
 		return $mock;
@@ -109,10 +109,10 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideBooleanValues() {
-		return array(
-			array( true ),
-			array( false ),
-		);
+		return [
+			[ true ],
+			[ false ],
+		];
 	}
 
 	/**
@@ -152,38 +152,38 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 			new Term( 'fr', 'ADisplayLabel' )
 		);
 
-		return array(
-			'No exact match' => array(
-				'Q999', 10, array(), array()
-			),
-			'Exact EntityId match' => array(
-				'Q111', 10, array(), array( 'Q111' => $q111Result )
-			),
-			'EntityID plus term matches' => array(
-				'Q111', 10, array( $q222Result ), array( 'Q111' => $q111Result, 'Q222' => $q222Result )
-			),
-			'Trimming' => array(
-				' Q111 ', 10, array(), array( 'Q111' => $q111Result )
-			),
-			'Brackets are removed' => array(
-				'(Q111)', 10, array(), array( 'Q111' => $q111Result )
-			),
-			'URL prefixes are removed' => array(
-				'http://example.com/Q111', 10, array(), array( 'Q111' => $q111Result )
-			),
-			'Single characters are ignored' => array(
-				'w/Q111/w', 10, array(), array( 'Q111' => $q111Result )
-			),
-			'EntityID extraction plus term matches' => array(
-				'[id:Q111]', 10, array( $q222Result ), array( 'Q111' => $q111Result, 'Q222' => $q222Result )
-			),
-			'Multiple Results' => array(
-				'Foo', 10, array( $q222Result, $q333Result ), array( 'Q222' => $q222Result, 'Q333' => $q333Result )
-			),
-			'Multiple Results (limited)' => array(
-				'Foo', 1, array( $q222Result ), array( 'Q222' => $q222Result )
-			),
-		);
+		return [
+			'No exact match' => [
+				'Q999', 10, [], []
+			],
+			'Exact EntityId match' => [
+				'Q111', 10, [], [ 'Q111' => $q111Result ]
+			],
+			'EntityID plus term matches' => [
+				'Q111', 10, [ $q222Result ], [ 'Q111' => $q111Result, 'Q222' => $q222Result ]
+			],
+			'Trimming' => [
+				' Q111 ', 10, [], [ 'Q111' => $q111Result ]
+			],
+			'Brackets are removed' => [
+				'(Q111)', 10, [], [ 'Q111' => $q111Result ]
+			],
+			'URL prefixes are removed' => [
+				'http://example.com/Q111', 10, [], [ 'Q111' => $q111Result ]
+			],
+			'Single characters are ignored' => [
+				'w/Q111/w', 10, [], [ 'Q111' => $q111Result ]
+			],
+			'EntityID extraction plus term matches' => [
+				'[id:Q111]', 10, [ $q222Result ], [ 'Q111' => $q111Result, 'Q222' => $q222Result ]
+			],
+			'Multiple Results' => [
+				'Foo', 10, [ $q222Result, $q333Result ], [ 'Q222' => $q222Result, 'Q333' => $q333Result ]
+			],
+			'Multiple Results (limited)' => [
+				'Foo', 1, [ $q222Result ], [ 'Q222' => $q222Result ]
+			],
+		];
 	}
 
 	/**

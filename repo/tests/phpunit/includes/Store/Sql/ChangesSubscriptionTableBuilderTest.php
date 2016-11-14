@@ -49,12 +49,12 @@ class ChangesSubscriptionTableBuilderTest extends \MediaWikiTestCase {
 
 	public function testFillSubscriptionTable() {
 		$this->truncateItemPerSite();
-		$this->putItemPerSite( array(
-			array( 11, 'dewiki' ),
-			array( 11, 'enwiki' ),
-			array( 22, 'dewiki' ),
-			array( 22, 'frwiki' ),
-		) );
+		$this->putItemPerSite( [
+			[ 11, 'dewiki' ],
+			[ 11, 'enwiki' ],
+			[ 22, 'dewiki' ],
+			[ 22, 'frwiki' ],
+		] );
 
 		$primer = $this->getChangesSubscriptionTableBuilder( 3, 'standard' );
 		$primer->setProgressReporter( $this->getMessageReporter( $this->exactly( 2 ) ) );
@@ -65,24 +65,24 @@ class ChangesSubscriptionTableBuilderTest extends \MediaWikiTestCase {
 		$actual = $this->fetchAllSubscriptions();
 		sort( $actual );
 
-		$expected = array(
+		$expected = [
 			'dewiki@Q11',
 			'dewiki@Q22',
 			'enwiki@Q11',
 			'frwiki@Q22',
-		);
+		];
 
 		$this->assertEquals( $expected, $actual );
 	}
 
 	public function testFillSubscriptionTable_startItem() {
 		$this->truncateItemPerSite();
-		$this->putItemPerSite( array(
-			array( 11, 'dewiki' ),
-			array( 11, 'enwiki' ),
-			array( 22, 'dewiki' ),
-			array( 22, 'frwiki' ),
-		) );
+		$this->putItemPerSite( [
+			[ 11, 'dewiki' ],
+			[ 11, 'enwiki' ],
+			[ 22, 'dewiki' ],
+			[ 22, 'frwiki' ],
+		] );
 
 		$primer = $this->getChangesSubscriptionTableBuilder( 3, 'verbose' );
 		$primer->setProgressReporter( $this->getMessageReporter( $this->exactly( 4 ) ) );
@@ -93,10 +93,10 @@ class ChangesSubscriptionTableBuilderTest extends \MediaWikiTestCase {
 		$actual = $this->fetchAllSubscriptions();
 		sort( $actual );
 
-		$expected = array(
+		$expected = [
 			'dewiki@Q22',
 			'frwiki@Q22',
-		);
+		];
 
 		$this->assertEquals( $expected, $actual );
 	}
@@ -113,11 +113,11 @@ class ChangesSubscriptionTableBuilderTest extends \MediaWikiTestCase {
 
 		foreach ( $entries as $entry ) {
 			list( $itemId, $siteId ) = $entry;
-			$db->insert( 'wb_items_per_site', array(
+			$db->insert( 'wb_items_per_site', [
 				'ips_item_id' => (int)$itemId,
 				'ips_site_id' => $siteId,
 				'ips_site_page' => 'Page_about_Q' . $itemId. '_on_' . $siteId,
-			), __METHOD__ );
+			], __METHOD__ );
 		}
 
 		$db->endAtomic( __METHOD__ );
@@ -128,7 +128,7 @@ class ChangesSubscriptionTableBuilderTest extends \MediaWikiTestCase {
 
 		$res = $db->select( self::TABLE_NAME, "*", '', __METHOD__ );
 
-		$subscriptions = array();
+		$subscriptions = [];
 		foreach ( $res as $row ) {
 			$subscriptions[] = $row->cs_subscriber_id . '@' . $row->cs_entity_id;
 		}

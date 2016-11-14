@@ -35,7 +35,7 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 	 * @return Snak
 	 */
 	protected function snakProvider() {
-		$snaks = array();
+		$snaks = [];
 
 		$snaks[] = new PropertyNoValueSnak( 42 );
 		$snaks[] = new PropertySomeValueSnak( 9001 );
@@ -48,7 +48,7 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 	 * @return Statement[]
 	 */
 	protected function statementProvider() {
-		$statements = array();
+		$statements = [];
 
 		$mainSnak = new PropertyNoValueSnak( 42 );
 		$statement = new Statement( $mainSnak );
@@ -56,7 +56,7 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 
 		foreach ( $this->snakProvider() as $snak ) {
 			$statement = clone $statement;
-			$snaks = new SnakList( array( $snak ) );
+			$snaks = new SnakList( [ $snak ] );
 			$statement->setQualifiers( $snaks );
 			$statements[] = $statement;
 		}
@@ -90,7 +90,7 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 			if ( count( $qualifiers ) === 0 ) {
 				$this->makeInvalidRequest(
 					$statement->getGuid(),
-					array( '~=[,,_,,]:3' ),
+					[ '~=[,,_,,]:3' ],
 					'no-such-qualifier'
 				);
 			} else {
@@ -110,11 +110,11 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 	}
 
 	protected function makeValidRequest( $statementGuid, array $hashes ) {
-		$params = array(
+		$params = [
 			'action' => 'wbremovequalifiers',
 			'claim' => $statementGuid,
 			'qualifiers' => implode( '|', $hashes ),
-		);
+		];
 
 		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
 
@@ -125,11 +125,11 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 	}
 
 	protected function makeInvalidRequest( $statementGuid, array $hashes, $expectedError = null ) {
-		$params = array(
+		$params = [
 			'action' => 'wbremovequalifiers',
 			'claim' => $statementGuid,
 			'qualifiers' => implode( '|', $hashes ),
-		);
+		];
 
 		try {
 			$this->doApiRequestWithToken( $params );
@@ -151,11 +151,11 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 	 * @dataProvider invalidGuidProvider
 	 */
 	public function testInvalidClaimGuid( $claimGuid, $hash ) {
-		$params = array(
+		$params = [
 			'action' => 'wbremovequalifiers',
 			'claim' => $claimGuid,
 			'qualifiers' => $hash,
-		);
+		];
 
 		try {
 			$this->doApiRequestWithToken( $params );
@@ -173,10 +173,10 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 		$qualifierSnak = new PropertyValueSnak( 722, new StringValue( 'abc' ) );
 		$hash = $qualifierSnak->getHash();
 
-		return array(
-			array( 'xyz', $hash ),
-			array( 'x$y$z', $hash )
-		);
+		return [
+			[ 'xyz', $hash ],
+			[ 'x$y$z', $hash ]
+		];
 	}
 
 }

@@ -25,13 +25,13 @@ class LanguageFallbackIndicatorTest extends PHPUnit_Framework_TestCase {
 		$languageNameLookup->expects( $this->any() )
 			->method( 'getName' )
 			->will( $this->returnCallback( function( $languageCode ) {
-				$names = array(
+				$names = [
 						'de' => 'Deutsch',
 						'de-at' => 'Österreichisches Deutsch',
 						'de-ch' => 'Schweizer Hochdeutsch',
 						'en' => 'english in german',
 						'en-ca' => 'Canadian English'
-				);
+				];
 				return $names[ $languageCode ];
 			} ) );
 
@@ -53,42 +53,42 @@ class LanguageFallbackIndicatorTest extends PHPUnit_Framework_TestCase {
 		$translitDeCh = wfMessage( 'wikibase-language-fallback-transliteration-hint', 'Deutsch', 'Schweizer Hochdeutsch' )->text();
 		$translitEnCa = wfMessage( 'wikibase-language-fallback-transliteration-hint', 'Canadian English', 'English' )->text();
 
-		return array(
-			'plain fallabck term' => array(
+		return [
+			'plain fallabck term' => [
 				'expected' => '',
 				'term' => $deTermFallback,
-			),
-			'fallback to base' => array(
+			],
+			'fallback to base' => [
 				'expected' => '<sup class="wb-language-fallback-'
 					. 'indicator wb-language-fallback-variant">Deutsch</sup>',
 				'term' => $deAtTerm,
-			),
-			'fallback to variant' => array(
+			],
+			'fallback to variant' => [
 				'expected' => '<sup class="wb-language-fallback-'
 					. 'indicator wb-language-fallback-variant">Österreichisches Deutsch</sup>',
 				'term' => $atDeTerm,
-			),
-			'transliteration to requested language' => array(
+			],
+			'transliteration to requested language' => [
 				'expected' => '<sup class="wb-language-fallback-'
 					. 'indicator wb-language-fallback-transliteration">'
 					. $translitDeCh
 					. '</sup>',
 				'term' => $deChTerm,
-			),
-			'transliteration to other variant' => array(
+			],
+			'transliteration to other variant' => [
 				'expected' => '<sup class="wb-language-fallback-'
 					. 'indicator wb-language-fallback-transliteration wb-language-fallback-'
 					. 'variant">'
 					. $translitEnCa
 					. '</sup>',
 				'term' => $enGbEnCaTerm,
-			),
-			'fallback to alternative language' => array(
+			],
+			'fallback to alternative language' => [
 				'expected' => '<sup class="wb-language-fallback-'
 					. 'indicator">english in german</sup>',
 				'term' => $deEnTerm,
-			),
-		);
+			],
+		];
 	}
 
 	/**

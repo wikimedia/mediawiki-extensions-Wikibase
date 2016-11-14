@@ -104,12 +104,12 @@ class ChangePruner {
 		if ( !$this->ignoreDispatch ) {
 			$dbr = wfGetDB( DB_SLAVE );
 			$row = $dbr->selectRow(
-				array( 'wb_changes_dispatch', 'wb_changes' ),
+				[ 'wb_changes_dispatch', 'wb_changes' ],
 				'min(change_time) as timestamp',
-				array(
+				[
 					'chd_disabled' => 0,
 					'chd_seen = change_id'
-				),
+				],
 				__METHOD__
 			);
 
@@ -141,12 +141,12 @@ class ChangePruner {
 		$changeTime = $dbr->selectField(
 			'wb_changes',
 			'change_time',
-			array( 'change_time < ' . $dbr->addQuotes( $until ) ),
+			[ 'change_time < ' . $dbr->addQuotes( $until ) ],
 			__METHOD__,
-			array(
+			[
 				'OFFSET' => $this->batchSize - 1,
 				'ORDER BY' => 'change_time ASC',
-			)
+			]
 		);
 
 		return $changeTime ?: $until;
@@ -164,7 +164,7 @@ class ChangePruner {
 
 		$dbw->delete(
 			'wb_changes',
-			array( 'change_time < ' . $dbw->addQuotes( $until ) ),
+			[ 'change_time < ' . $dbw->addQuotes( $until ) ],
 			__METHOD__
 		);
 

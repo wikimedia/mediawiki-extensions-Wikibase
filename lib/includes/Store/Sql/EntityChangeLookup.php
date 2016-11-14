@@ -78,11 +78,11 @@ class EntityChangeLookup extends DBAccessBase implements ChunkAccess {
 		Assert::parameterType( 'integer', $size, '$size' );
 
 		return $this->loadChanges(
-			array( 'change_id >= ' . (int)$start ),
-			array(
+			[ 'change_id >= ' . (int)$start ],
+			[
 				'ORDER BY' => 'change_id ASC',
 				'LIMIT' => $size
-			),
+			],
 			__METHOD__
 		);
 	}
@@ -96,8 +96,8 @@ class EntityChangeLookup extends DBAccessBase implements ChunkAccess {
 		Assert::parameterElementType( 'integer', $ids, '$ids' );
 
 		return $this->loadChanges(
-			array( 'change_id' => $ids ),
-			array(),
+			[ 'change_id' => $ids ],
+			[],
 			__METHOD__
 		);
 	}
@@ -112,10 +112,10 @@ class EntityChangeLookup extends DBAccessBase implements ChunkAccess {
 		Assert::parameterType( 'integer', $revisionId, '$revisionId' );
 
 		$change = $this->loadChanges(
-			array( 'change_revision_id' => $revisionId ),
-			array(
+			[ 'change_revision_id' => $revisionId ],
+			[
 				'LIMIT' => 1
-			),
+			],
 			__METHOD__,
 			$mode === self::FROM_MASTER ? DB_MASTER : DB_SLAVE
 		);
@@ -140,10 +140,10 @@ class EntityChangeLookup extends DBAccessBase implements ChunkAccess {
 
 		$rows = $dbr->select(
 			'wb_changes',
-			array(
+			[
 				'change_id', 'change_type', 'change_time', 'change_object_id',
 				'change_revision_id', 'change_user_id', 'change_info'
-			),
+			],
 			$where,
 			$method,
 			$options

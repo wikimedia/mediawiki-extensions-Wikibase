@@ -28,10 +28,10 @@ class HtmlUrlFormatter implements ValueFormatter {
 	 */
 	public function __construct( FormatterOptions $options = null ) {
 		//TODO: configure from options
-		$this->attributes = array(
+		$this->attributes = [
 			'rel' => 'nofollow',
 			'class' => 'external free'
-		);
+		];
 	}
 
 	/**
@@ -51,7 +51,7 @@ class HtmlUrlFormatter implements ValueFormatter {
 
 		$url = $value->getValue();
 
-		$attributes = array_merge( $this->attributes, array( 'href' => $url ) );
+		$attributes = array_merge( $this->attributes, [ 'href' => $url ] );
 		$html = Html::element( 'a', $attributes, $url );
 
 		return $html;

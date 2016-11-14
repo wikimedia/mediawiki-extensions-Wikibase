@@ -101,7 +101,7 @@ class EntityViewPlaceholderExpander {
 		LanguageDirectionalityLookup $languageDirectionalityLookup,
 		LanguageNameLookup $languageNameLookup,
 		LocalizedTextProvider $textProvider,
-		array $termsListItems = array()
+		array $termsListItems = []
 	) {
 		$this->user = $user;
 		$this->labelsProvider = $labelsProvider;

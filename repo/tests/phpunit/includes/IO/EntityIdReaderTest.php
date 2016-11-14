@@ -66,20 +66,20 @@ class EntityIdReaderTest extends \PHPUnit_Framework_TestCase {
 		$q3 = new ItemId( 'Q3' );
 		$p4 = new PropertyId( 'P4' );
 
-		return array(
-			'all' => array(
-				'EntityIdReaderTest.txt', null, 100, array( $q1, $p2, $q3, $p4 )
-			),
-			'just properties' => array(
-				'EntityIdReaderTest.txt', Property::ENTITY_TYPE, 100, array( $p2, $p4 )
-			),
-			'limit' => array(
-				'EntityIdReaderTest.txt', null, 2, array( $q1, $p2 )
-			),
-			'limit and filter' => array(
-				'EntityIdReaderTest.txt', Item::ENTITY_TYPE, 1, array( $q1 )
-			),
-		);
+		return [
+			'all' => [
+				'EntityIdReaderTest.txt', null, 100, [ $q1, $p2, $q3, $p4 ]
+			],
+			'just properties' => [
+				'EntityIdReaderTest.txt', Property::ENTITY_TYPE, 100, [ $p2, $p4 ]
+			],
+			'limit' => [
+				'EntityIdReaderTest.txt', null, 2, [ $q1, $p2 ]
+			],
+			'limit and filter' => [
+				'EntityIdReaderTest.txt', Item::ENTITY_TYPE, 1, [ $q1 ]
+			],
+		];
 	}
 
 	/**
@@ -101,35 +101,35 @@ class EntityIdReaderTest extends \PHPUnit_Framework_TestCase {
 		$q3 = new ItemId( 'Q3' );
 		$p4 = new PropertyId( 'P4' );
 
-		return array(
-			'limit' => array(
+		return [
+			'limit' => [
 				'EntityIdReaderTest.txt',
 				null,
 				2,
-				array(
-					array( $q1, $p2 ),
-					array( $q3, $p4 ),
-					array(),
-				)
-			),
-			'limit and filter' => array(
+				[
+					[ $q1, $p2 ],
+					[ $q3, $p4 ],
+					[],
+				]
+			],
+			'limit and filter' => [
 				'EntityIdReaderTest.txt',
 				Item::ENTITY_TYPE,
 				1,
-				array(
-					array( $q1 ),
-					array( $q3 ),
-					array(),
-				)
-			)
-		);
+				[
+					[ $q1 ],
+					[ $q3 ],
+					[],
+				]
+			]
+		];
 	}
 
 	public function testErrorHandler() {
-		$expected = array(
+		$expected = [
 			new ItemId( 'Q23' ),
 			new PropertyId( 'P42' ),
-		);
+		];
 
 		$exceptionHandler = $this->getMock( ExceptionHandler::class );
 		$exceptionHandler->expects( $this->exactly( 2 ) ) //two bad lines in EntityIdReaderTest.bad.txt

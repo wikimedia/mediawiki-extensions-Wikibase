@@ -221,7 +221,7 @@ class EntityParserOutputGenerator {
 		$entityInfoBuilder->removeMissing();
 
 		$entityInfoBuilder->collectTerms(
-			array( 'label', 'description' ),
+			[ 'label', 'description' ],
 			$this->languageFallbackChain->getFetchLanguageCodes()
 		);
 
@@ -368,13 +368,13 @@ class EntityParserOutputGenerator {
 	 */
 	private function addModules( ParserOutput $parserOutput ) {
 		// make css available for JavaScript-less browsers
-		$parserOutput->addModuleStyles( array(
+		$parserOutput->addModuleStyles( [
 			'wikibase.common',
 			'jquery.ui.core.styles',
 			'jquery.wikibase.statementview.RankSelector.styles',
 			'jquery.wikibase.toolbar.styles',
 			'jquery.wikibase.toolbarbutton.styles',
-		) );
+		] );
 
 		// make sure required client-side resources will be loaded
 		// FIXME: Separate the JavaScript that is also needed in read-only mode from
@@ -398,7 +398,7 @@ class EntityParserOutputGenerator {
 		$entityDataFormatProvider = $this->entityDataFormatProvider;
 		$subPagePrefix = $entityId->getSerialization() . '.';
 
-		$links = array();
+		$links = [];
 
 		foreach ( $entityDataFormatProvider->getSupportedFormats() as $format ) {
 			$ext = $entityDataFormatProvider->getExtension( $format );
@@ -406,11 +406,11 @@ class EntityParserOutputGenerator {
 			if ( $ext !== null ) {
 				$entityDataTitle = SpecialPage::getTitleFor( 'EntityData', $subPagePrefix . $ext );
 
-				$links[] = array(
+				$links[] = [
 					'rel' => 'alternate',
 					'href' => $entityDataTitle->getCanonicalURL(),
 					'type' => $entityDataFormatProvider->getMimeType( $format )
-				);
+				];
 			}
 		}
 

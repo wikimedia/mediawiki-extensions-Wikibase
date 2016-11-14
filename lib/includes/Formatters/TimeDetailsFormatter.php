@@ -85,10 +85,10 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 		$html = '';
 		$html .= Html::rawElement(
 			'h4',
-			array( 'class' => 'wb-details wb-time-details wb-time-rendered' ),
+			[ 'class' => 'wb-details wb-time-details wb-time-rendered' ],
 			$this->timeFormatter->format( $value )
 		);
-		$html .= Html::openElement( 'table', array( 'class' => 'wb-details wb-time-details' ) );
+		$html .= Html::openElement( 'table', [ 'class' => 'wb-details wb-time-details' ] );
 
 		$html .= $this->getFieldHtml( 'isotime', $timeHtml );
 		$html .= $this->getFieldHtml( 'timezone', $timeZoneHtml );
@@ -222,9 +222,9 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 
 		$html = Html::openElement( 'tr' );
 
-		$html .= Html::element( 'th', array( 'class' => 'wb-time-' . $fieldName ),
+		$html .= Html::element( 'th', [ 'class' => 'wb-time-' . $fieldName ],
 			$this->msg( $key ) );
-		$html .= Html::rawElement( 'td', array( 'class' => 'wb-time-' . $fieldName ),
+		$html .= Html::rawElement( 'td', [ 'class' => 'wb-time-' . $fieldName ],
 			$valueHtml );
 
 		$html .= Html::closeElement( 'tr' );

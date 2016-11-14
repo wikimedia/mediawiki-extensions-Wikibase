@@ -106,7 +106,7 @@ class ChangeOpReferenceRemove extends ChangeOpBase {
 	protected function getSnakSummaryArgs( Snak $snak ) {
 		$propertyId = $snak->getPropertyId();
 
-		return array( array( $propertyId->getSerialization() => $snak ) );
+		return [ [ $propertyId->getSerialization() => $snak ] ];
 	}
 
 	/**

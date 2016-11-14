@@ -36,11 +36,11 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 	public function testGetSummary() {
 		$job = new UpdateRepoOnMoveJob(
 			Title::newMainPage(),
-			array(
+			[
 				'siteId' => 'SiteID',
 				'oldTitle' => 'Test',
 				'newTitle' => 'MoarTest',
-			)
+			]
 		);
 
 		$summary = $job->getSummary();
@@ -48,7 +48,7 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 		$this->assertEquals( 'clientsitelink-update', $summary->getMessageKey() );
 		$this->assertEquals( 'SiteID', $summary->getLanguageCode() );
 		$this->assertEquals(
-			array( 'SiteID:Test', 'SiteID:MoarTest' ),
+			[ 'SiteID:Test', 'SiteID:MoarTest' ],
 			$summary->getCommentArgs()
 		);
 	}
@@ -115,7 +115,7 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 	 */
 	private function getMockEditFitlerHookRunner() {
 		$runner = $this->getMockBuilder( EditFilterHookRunner::class )
-			->setMethods( array( 'run' ) )
+			->setMethods( [ 'run' ] )
 			->disableOriginalConstructor()
 			->getMock();
 		$runner->expects( $this->any() )
@@ -125,13 +125,13 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 	}
 
 	public function runProvider() {
-		return array(
-			array( 'New page name', 'New page name', 'Old page name' ),
+		return [
+			[ 'New page name', 'New page name', 'Old page name' ],
 			// Client normalization gets applied
-			array( 'Even newer page name', 'Even newer page name', 'Old page name' ),
+			[ 'Even newer page name', 'Even newer page name', 'Old page name' ],
 			// The title in the repo item is not the one we expect, so don't change it
-			array( 'Old page name', 'New page name', 'Something else' ),
-		);
+			[ 'Old page name', 'New page name', 'Something else' ],
+		];
 	}
 
 	/**
@@ -147,19 +147,19 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 		$user->addToDatabase();
 
 		$item = new Item();
-		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Old page name', array( new ItemId( 'Q42' ) ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Old page name', [ new ItemId( 'Q42' ) ] );
 
 		$mockRepository = new MockRepository();
 
 		$mockRepository->saveEntity( $item, 'UpdateRepoOnDeleteJobTest', $user, EDIT_NEW );
 
-		$params = array(
+		$params = [
 			'siteId' => 'enwiki',
 			'entityId' => $item->getId()->getSerialization(),
 			'oldTitle' => $oldTitle,
 			'newTitle' => 'New page name',
 			'user' => $user->getName()
-		);
+		];
 
 		$job = new UpdateRepoOnMoveJob( Title::newMainPage(), $params );
 		$job->initServices(
@@ -191,7 +191,7 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 
 		$this->assertEquals(
 			$item->getSiteLinkList()->getBySiteId( 'enwiki' )->getBadges(),
-			array( new ItemId( 'Q42' ) )
+			[ new ItemId( 'Q42' ) ]
 		);
 	}
 

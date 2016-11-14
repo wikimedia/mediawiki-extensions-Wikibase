@@ -41,9 +41,9 @@ class TokenCheckInteractorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testCheckToken() {
-		$data = array(
+		$data = [
 			'tokentest' => 'VALID'
-		);
+		];
 
 		$user = $this->getMockUser();
 		$request = new FauxRequest( $data, true );
@@ -55,11 +55,11 @@ class TokenCheckInteractorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function tokenFailureProvider() {
-		return array(
-			'missingtoken' => array( array( 'foo' => 'VALID' ), true, 'missingtoken' ),
-			'mustposttoken' => array( array( 'tokentest' => 'VALID' ), false, 'mustposttoken' ),
-			'badtoken' => array( array( 'tokentest' => 'BAD' ), true, 'badtoken' ),
-		);
+		return [
+			'missingtoken' => [ [ 'foo' => 'VALID' ], true, 'missingtoken' ],
+			'mustposttoken' => [ [ 'tokentest' => 'VALID' ], false, 'mustposttoken' ],
+			'badtoken' => [ [ 'tokentest' => 'BAD' ], true, 'badtoken' ],
+		];
 	}
 
 	/**

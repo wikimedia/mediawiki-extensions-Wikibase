@@ -26,7 +26,7 @@ abstract class EntityTermLookupBase implements TermLookup {
 	 * @return string|null
 	 */
 	public function getLabel( EntityId $entityId, $languageCode ) {
-		$labels = $this->getLabels( $entityId, array( $languageCode ) );
+		$labels = $this->getLabels( $entityId, [ $languageCode ] );
 
 		if ( isset( $labels[$languageCode] ) ) {
 			return $labels[$languageCode];
@@ -58,7 +58,7 @@ abstract class EntityTermLookupBase implements TermLookup {
 	 * @return string|null
 	 */
 	public function getDescription( EntityId $entityId, $languageCode ) {
-		$descriptions = $this->getDescriptions( $entityId, array( $languageCode ) );
+		$descriptions = $this->getDescriptions( $entityId, [ $languageCode ] );
 
 		if ( isset( $descriptions[$languageCode] ) ) {
 			return $descriptions[$languageCode];
@@ -95,7 +95,7 @@ abstract class EntityTermLookupBase implements TermLookup {
 	 * @return string[] strings keyed by language code
 	 */
 	protected function convertTermsToMap( array $wikibaseTerms ) {
-		$terms = array();
+		$terms = [];
 
 		foreach ( $wikibaseTerms as $wikibaseTerm ) {
 			$languageCode = $wikibaseTerm->getLanguage();

@@ -70,12 +70,12 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 		$recentChange = $this->makeRecentChange(
 			'',
 			null,
-			array(
+			[
 				'message' => 'wikibase-comment-sitelink-add',
-				'sitelink' => array(
-					'newlink' => array( 'site' => 'dewiki', 'page' => 'Kanada' )
-				)
-			),
+				'sitelink' => [
+					'newlink' => [ 'site' => 'dewiki', 'page' => 'Kanada' ]
+				]
+			],
 			null,
 			'wikibase-item~update',
 			false
@@ -93,9 +93,9 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 		$recentChange = $this->makeRecentChange(
 			'',
 			null,
-			array(
+			[
 				'message' => 'wikibase-comment-linked'
-			),
+			],
 			null,
 			'wikibase-item~add',
 			false
@@ -115,9 +115,9 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 		$recentChange = $this->makeRecentChange(
 			$comment,
 			null,
-			array(
+			[
 				'message' => 'this-shall-be-ignored'
-			),
+			],
 			null,
 			'wikibase-item~update',
 			false
@@ -138,9 +138,9 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 		$recentChange = $this->makeRecentChange(
 			$comment,
 			$commentHtml,
-			array(
+			[
 				'message' => 'this-shall-be-ignored'
-			),
+			],
 			null,
 			'wikibase-item~update',
 			false
@@ -159,10 +159,10 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 			'',
 			null,
 			null,
-			array(
+			[
 				'wikibase-comment-update',
 				'wikibase-comment-update'
-			),
+			],
 			'wikibase-item~update',
 			false
 		);
@@ -245,7 +245,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 			strval( $comment ),
 			$commentHtml,
 			'testrepo',
-			array(
+			[
 				'page_id' => 5,
 				'rev_id' => 92,
 				'parent_id' => 90,
@@ -259,7 +259,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 				'user_text' => 'Cat',
 				'bot' => 0,
 				'comment' => strval( $comment ),
-			)
+			]
 		);
 	}
 
@@ -299,8 +299,8 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 	 * @return array
 	 */
 	private function makeRCParams( $comment, $commentHtml, $legacyComment, $compositeLegacyComment, $changeType, $bot ) {
-		$params = array(
-			'wikibase-repo-change' => array(
+		$params = [
+			'wikibase-repo-change' => [
 				'id' => 4,
 				'type' => $changeType,
 				'time' => '20130819111741',
@@ -313,9 +313,9 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 				'page_id' => 5,
 				'rev_id' => 92,
 				'parent_id' => 90,
-			),
+			],
 			'comment' => $comment,
-		);
+		];
 
 		if ( $commentHtml !== null ) {
 			$params['comment-html'] = $commentHtml;
@@ -333,7 +333,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 	}
 
 	private function makeAttribs( array $rcParams, $bot ) {
-		return array(
+		return [
 			'rc_id' => 315,
 			'rc_timestamp' => '20130819111741',
 			'rc_user' => 0,
@@ -357,7 +357,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 			'rc_log_type' => null,
 			'rc_log_action' => '',
 			'rc_params' => serialize( $rcParams )
-		);
+		];
 	}
 
 }

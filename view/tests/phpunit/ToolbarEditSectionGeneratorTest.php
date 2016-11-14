@@ -42,9 +42,9 @@ class ToolbarEditSectionGeneratorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function getAddStatementToGroupSectionProvider() {
-		return array(
-			array( new PropertyId( 'P1' ) ),
-		);
+		return [
+			[ new PropertyId( 'P1' ) ],
+		];
 	}
 
 	/**
@@ -61,13 +61,13 @@ class ToolbarEditSectionGeneratorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function getLabelDescriptionAliasesEditSectionProvider() {
-		return array(
-			array(
+		return [
+			[
 				'en',
 				new PropertyId( 'P1' ),
 				'Special:SetLabelDescriptionAliases/P1/en'
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -80,9 +80,9 @@ class ToolbarEditSectionGeneratorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function getSiteLinksEditSectionProvider() {
-		return array(
-			array( new PropertyId( 'P1' ), 'Special:SetSiteLink/P1' )
-		);
+		return [
+			[ new PropertyId( 'P1' ), 'Special:SetSiteLink/P1' ]
+		];
 	}
 
 	/**
@@ -98,16 +98,16 @@ class ToolbarEditSectionGeneratorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function getStatementEditSection() {
-		return array(
-			array( new Statement( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) ) )
-		);
+		return [
+			[ new Statement( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) ) ]
+		];
 	}
 
 	private function newToolbarEditSectionGenerator() {
 		$specialPageLinker = $this->getMock( SpecialPageLinker::class );
 		$specialPageLinker->expects( $this->any() )
 			->method( 'getLink' )
-			->will( $this->returnCallback( function( $specialPage, $params = array() ) {
+			->will( $this->returnCallback( function( $specialPage, $params = [] ) {
 				return 'Special:' . $specialPage . '/' . implode( '/', $params );
 			} ) );
 

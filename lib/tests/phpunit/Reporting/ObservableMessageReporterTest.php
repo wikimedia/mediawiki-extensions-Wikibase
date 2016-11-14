@@ -16,7 +16,7 @@ use Wikibase\Lib\Reporting\ObservableMessageReporter;
 class ObservableMessageReporterTest extends \PHPUnit_Framework_TestCase {
 
 	public function testReportMessage() {
-		$observedMessages = array();
+		$observedMessages = [];
 
 		$observer = function( $message ) use ( &$observedMessages ) {
 			$observedMessages[] = $message;

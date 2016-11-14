@@ -179,10 +179,10 @@ class ChangesListSpecialPageHookHandlers {
 			// the toggle needs to be the inverse to invoke the inverse display status.
 			// e.g. if Wikibase changes currently hidden, then when the user
 			// clicks the toggle, then Wikibase changes are displayed.
-			$filters[$filterName] = array(
+			$filters[$filterName] = [
 				'msg' => 'wikibase-rc-hide-wikidata',
 				'default' => !$this->hasWikibaseChangesDisplayed()
-			);
+			];
 		}
 	}
 

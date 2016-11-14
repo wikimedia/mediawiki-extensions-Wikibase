@@ -31,7 +31,7 @@ class SiteLinkTargetProvider {
 	 * @param SiteStore $siteStore
 	 * @param string[] $specialSiteGroups
 	 */
-	public function __construct( SiteStore $siteStore, array $specialSiteGroups = array() ) {
+	public function __construct( SiteStore $siteStore, array $specialSiteGroups = [] ) {
 		$this->siteStore = $siteStore;
 		$this->specialSiteGroups = $specialSiteGroups;
 	}
@@ -69,7 +69,7 @@ class SiteLinkTargetProvider {
 			return;
 		}
 
-		$groups = array_diff( $groups, array( 'special' ) );
+		$groups = array_diff( $groups, [ 'special' ] );
 		$groups = array_merge( $groups, $this->specialSiteGroups );
 	}
 

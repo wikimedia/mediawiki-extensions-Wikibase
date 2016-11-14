@@ -32,15 +32,15 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testInvalidConstructorArgument( $maxLength ) {
 		$this->setExpectedException( InvalidArgumentException::class );
-		$this->newFactory( $maxLength, array() );
+		$this->newFactory( $maxLength, [] );
 	}
 
 	public function invalidConstructorArgumentProvider() {
-		return array(
-			array( null ),
-			array( 1.0 ),
-			array( 0 ),
-		);
+		return [
+			[ null ],
+			[ 1.0 ],
+			[ 0 ],
+		];
 	}
 
 	/**
@@ -60,29 +60,29 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetFingerprintValidator() {
-		$builders = $this->newFactory( 20, array( 'ja', 'ru' ) );
+		$builders = $this->newFactory( 20, [ 'ja', 'ru' ] );
 
 		$validator = $builders->getFingerprintValidator( Item::ENTITY_TYPE );
 
 		$this->assertInstanceOf( FingerprintValidator::class, $validator );
 
 		$goodFingerprint = new Fingerprint(
-			new TermList( array(
+			new TermList( [
 				new Term( 'en', 'DUPE' ),
-			) ),
-			new TermList( array(
+			] ),
+			new TermList( [
 				new Term( 'en', 'bla' ),
-			) ),
+			] ),
 			new AliasGroupList()
 		);
 
 		$labelDupeFingerprint = new Fingerprint(
-			new TermList( array(
+			new TermList( [
 				new Term( 'en', 'DUPE' ),
-			) ),
-			new TermList( array(
+			] ),
+			new TermList( [
 				new Term( 'en', 'DUPE' ),
-			) ),
+			] ),
 			new AliasGroupList()
 		);
 
@@ -99,7 +99,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetLanguageValidator() {
-		$builders = $this->newFactory( 20, array( 'ja', 'ru' ) );
+		$builders = $this->newFactory( 20, [ 'ja', 'ru' ] );
 
 		$validator = $builders->getLanguageValidator();
 
@@ -110,7 +110,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetLabelValidator() {
-		$builders = $this->newFactory( 8, array( 'en' ) );
+		$builders = $this->newFactory( 8, [ 'en' ] );
 
 		$validator = $builders->getLabelValidator( Item::ENTITY_TYPE );
 
@@ -122,7 +122,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetLabelValidator_property() {
-		$builders = $this->newFactory( 8, array( 'en' ) );
+		$builders = $this->newFactory( 8, [ 'en' ] );
 
 		$validator = $builders->getLabelValidator( Property::ENTITY_TYPE );
 
@@ -137,7 +137,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetDescriptionValidator() {
-		$builders = $this->newFactory( 8, array( 'en' ) );
+		$builders = $this->newFactory( 8, [ 'en' ] );
 
 		$validator = $builders->getDescriptionValidator();
 
@@ -149,7 +149,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetAliasValidator() {
-		$builders = $this->newFactory( 8, array( 'en' ) );
+		$builders = $this->newFactory( 8, [ 'en' ] );
 
 		$validator = $builders->getAliasValidator( Item::ENTITY_TYPE );
 

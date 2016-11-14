@@ -61,21 +61,21 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 		$this->templateTitle = Title::makeTitle( NS_TEMPLATE, 'UsageTrackingIntegrationTest_Template' );
 
 		// Register the necessary hook handlers. Registration of these handlers is normally skipped for unit test runs.
-		$this->mergeMwGlobalArrayValue( 'wgHooks', array(
-			'ArticleDeleteComplete' => array(
+		$this->mergeMwGlobalArrayValue( 'wgHooks', [
+			'ArticleDeleteComplete' => [
 				'Wikibase\Client\Hooks\DataUpdateHookHandlers::onArticleDeleteComplete',
 				'Wikibase\Client\Hooks\UpdateRepoHookHandlers::onArticleDeleteComplete',
-			),
-			'LinksUpdateComplete' => array(
+			],
+			'LinksUpdateComplete' => [
 				'Wikibase\Client\Hooks\DataUpdateHookHandlers::onLinksUpdateComplete',
-			),
-			'ParserCacheSaveComplete' => array(
+			],
+			'ParserCacheSaveComplete' => [
 				'Wikibase\Client\Hooks\DataUpdateHookHandlers::onParserCacheSaveComplete',
-			),
-			'TitleMoveComplete' => array(
+			],
+			'TitleMoveComplete' => [
 				'Wikibase\Client\Hooks\UpdateRepoHookHandlers::onTitleMoveComplete',
-			),
-		) );
+			],
+		] );
 	}
 
 	protected function tearDown() {
@@ -94,12 +94,12 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 	private function runJobs() {
 		$runner = new JobRunner();
 
-		$runner->run( array(
+		$runner->run( [
 			'type'     => 'refreshLinks',
 			'maxJobs'  => false,
 			'maxTime'  => false,
 			'throttle' => false,
-		) );
+		] );
 	}
 
 	private function deletePage( Title $title ) {
@@ -131,9 +131,9 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 		$this->updatePage( $this->articleTitle, $text );
 
 		// Check that the usage of Q11 is tracked.
-		$expected = array(
+		$expected = [
 			new EntityUsage( new ItemId( 'Q11' ), EntityUsage::OTHER_USAGE ),
-		);
+		];
 
 		$this->assertTrackedUsages( $expected, $this->articleTitle );
 	}
@@ -164,9 +164,9 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 
 		// Check that Q22, used via the template, is now tracked.
 		// Check that Q11 is no longer tracked, due to timestamp-based pruning.
-		$expected = array(
+		$expected = [
 			new EntityUsage( new ItemId( 'Q22' ), EntityUsage::OTHER_USAGE ),
-		);
+		];
 
 		$this->assertTrackedUsages( $expected, $this->articleTitle );
 	}
@@ -185,9 +185,9 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 
 		// Check that Q33, now used via the template, is tracked.
 		// Check that Q22 is no longer tracked, due to timestamp-based pruning.
-		$expected = array(
+		$expected = [
 			new EntityUsage( new ItemId( 'Q33' ), EntityUsage::OTHER_USAGE ),
-		);
+		];
 
 		$this->assertTrackedUsages( $expected, $this->articleTitle );
 	}
@@ -203,7 +203,7 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 		$this->deletePage( $this->articleTitle );
 
 		// Make sure tracking has been removed for all usages on the deleted page.
-		$this->assertTrackedUsages( array(), $this->articleTitle );
+		$this->assertTrackedUsages( [], $this->articleTitle );
 	}
 
 	/**

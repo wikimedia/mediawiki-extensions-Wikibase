@@ -64,16 +64,16 @@ class CirrusSearchHookHandlersTest extends PHPUnit_Framework_TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$config = array(
-			'page' => array(
-				'properties' => array()
-			)
-		);
+		$config = [
+			'page' => [
+				'properties' => []
+			]
+		];
 
 		CirrusSearchHookHandlers::onCirrusSearchMappingConfig( $config, $mappingConfigBuilder );
 
 		$this->assertSame(
-			array( 'label_count', 'sitelink_count', 'statement_count' ),
+			[ 'label_count', 'sitelink_count', 'statement_count' ],
 			array_keys( $config['page']['properties'] )
 		);
 	}
@@ -95,30 +95,30 @@ class CirrusSearchHookHandlersTest extends PHPUnit_Framework_TestCase {
 	public function testAddExtraFieldsToMappingConfig() {
 		$fieldDefinitions = $this->newFieldDefinitions();
 
-		$config = array(
-			'page' => array(
-				'properties' => array()
-			)
-		);
+		$config = [
+			'page' => [
+				'properties' => []
+			]
+		];
 
 		$hookHandlers = new CirrusSearchHookHandlers( $fieldDefinitions );
 		$hookHandlers->addExtraFieldsToMappingConfig( $config );
 
-		$expected = array(
-			'page' => array(
-				'properties' => array(
-					'label_count' => array(
+		$expected = [
+			'page' => [
+				'properties' => [
+					'label_count' => [
 						'type' => 'integer'
-					),
-					'sitelink_count' => array(
+					],
+					'sitelink_count' => [
 						'type' => 'integer'
-					),
-					'statement_count' => array(
+					],
+					'statement_count' => [
 						'type' => 'integer'
-					)
-				)
-			)
-		);
+					]
+				]
+			]
+		];
 
 		$this->assertSame( $expected, $config );
 	}
@@ -126,15 +126,15 @@ class CirrusSearchHookHandlersTest extends PHPUnit_Framework_TestCase {
 	public function testAddExtraFields_throwsExceptionIfFieldNameAlreadySet() {
 		$fieldDefinitions = $this->newFieldDefinitions();
 
-		$config = array(
-			'page' => array(
-				'properties' => array(
-					'sitelink_count' => array(
+		$config = [
+			'page' => [
+				'properties' => [
+					'sitelink_count' => [
 						'type' => 'long'
-					)
-				)
-			)
-		);
+					]
+				]
+			]
+		];
 
 		$this->setExpectedException( UnexpectedValueException::class );
 

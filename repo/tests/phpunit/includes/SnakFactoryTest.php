@@ -30,10 +30,10 @@ class SnakFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function newInstance() {
 		$dataTypeLookup = new InMemoryDataTypeLookup();
-		$dataTypeFactory = new DataTypeFactory( array( 'string' => 'string' ) );
-		$dataValueFactory = new DataValueFactory( new DataValueDeserializer( array(
+		$dataTypeFactory = new DataTypeFactory( [ 'string' => 'string' ] );
+		$dataValueFactory = new DataValueFactory( new DataValueDeserializer( [
 			'string' => StringValue::class,
-		) ) );
+		] ) );
 
 		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'p1' ), 'string' );
 
@@ -72,40 +72,40 @@ class SnakFactoryTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function newSnakProvider() {
-		return array(
-			'novalue' => array(
+		return [
+			'novalue' => [
 				1, 'novalue', null,
 				PropertyNoValueSnak::class,
-			),
-			'somevalue' => array(
+			],
+			'somevalue' => [
 				1, 'somevalue', null,
 				PropertySomeValueSnak::class,
-			),
-			'value' => array(
+			],
+			'value' => [
 				1, 'value', '"hello"',
 				PropertyValueSnak::class,
-			),
-			'novalue/badprop' => array(
+			],
+			'novalue/badprop' => [
 				66, 'novalue', null,
 				PropertyNoValueSnak::class,
 				PropertyDataTypeLookupException::class
-			),
-			'somevalue/badprop' => array(
+			],
+			'somevalue/badprop' => [
 				66, 'somevalue', null,
 				PropertySomeValueSnak::class,
 				PropertyDataTypeLookupException::class
-			),
-			'value/badprop' => array(
+			],
+			'value/badprop' => [
 				66, 'value', '"hello"',
 				PropertyValueSnak::class,
 				PropertyDataTypeLookupException::class
-			),
-			'value/badvalue' => array(
-				1, 'value', array( 'foo' ),
+			],
+			'value/badvalue' => [
+				1, 'value', [ 'foo' ],
 				PropertyValueSnak::class,
 				InvalidArgumentException::class
-			),
-		);
+			],
+		];
 	}
 
 }

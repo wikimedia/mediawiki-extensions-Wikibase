@@ -61,7 +61,7 @@ class GetEntitiesRedirectTest extends ApiTestCase {
 		$doubleRedirectKey = $doubleRedirectId->getSerialization();
 
 		// if redirect resolution is enabled, the redirect should be resolved
-		$params = array();
+		$params = [];
 		$params['action'] = 'wbgetentities';
 		$params['token'] = $user->getToken();
 		$params['ids'] = $redirectId->getSerialization();

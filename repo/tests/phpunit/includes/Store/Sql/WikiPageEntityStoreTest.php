@@ -92,12 +92,12 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 		$store = new WikiPageEntityStore(
 			new EntityContentFactory(
-				array(
+				[
 					'item' => CONTENT_MODEL_WIKIBASE_ITEM,
 					'property' => CONTENT_MODEL_WIKIBASE_PROPERTY,
 					'custom-type' => 'wikibase-custom-type',
-				),
-				array(
+				],
+				[
 					'item' => function() use ( $wikibaseRepo ) {
 						return $wikibaseRepo->newItemHandler();
 					},
@@ -107,12 +107,12 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 					'custom-type' => function() use ( $wikibaseRepo ) {
 						return $this->newCustomEntityHandler();
 					},
-				)
+				]
 			),
 			new SqlIdGenerator( wfGetLB() )
 		);
 
-		return array( $store, $lookup );
+		return [ $store, $lookup ];
 	}
 
 	public function simpleEntityParameterProvider() {
@@ -124,10 +124,10 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$property->setLabel( 'en', 'Property' );
 		$property->setDescription( 'en', 'Property description' );
 
-		return array(
-			array( $item, new Item() ),
-			array( $property, Property::newFromType( 'string' ) ),
-		);
+		return [
+			[ $item, new Item() ],
+			[ $property, Property::newFromType( 'string' ) ],
+		];
 	}
 
 	/**
@@ -186,21 +186,21 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$secondItem->setLabel( 'en', 'Bwahahaha' );
 		$secondItem->setLabel( 'de', 'Kähähähä' );
 
-		return array(
-			'not fresh' => array(
+		return [
+			'not fresh' => [
 				'entity' => $firstItem,
 				'flags' => EDIT_NEW,
 				'baseRevid' => false,
 				'error' => StorageException::class
-			),
+			],
 
-			'not exists' => array(
+			'not exists' => [
 				'entity' => $secondItem,
 				'flags' => EDIT_UPDATE,
 				'baseRevid' => false,
 				'error' => StorageException::class
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -297,9 +297,9 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$p1 = new PropertyId( 'P1' );
 		$p2 = new PropertyId( 'P2' );
 
-		return array(
-			'P1 -> P2' => array( new EntityRedirect( $p1, $p2 ) ),
-		);
+		return [
+			'P1 -> P2' => [ new EntityRedirect( $p1, $p2 ) ],
+		];
 	}
 
 	/**
@@ -620,11 +620,11 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 		$row = $dbr->selectRow(
 			'wb_entity_per_page',
-			array( 'epp_page_id' ),
-			array(
+			[ 'epp_page_id' ],
+			[
 				'epp_entity_type' => $entityId->getEntityType(),
 				'epp_entity_id' => $entityId->getNumericId()
-			),
+			],
 			__METHOD__
 		);
 

@@ -137,8 +137,8 @@ class PropertyInfoTableBuilder {
 
 		$total = 0;
 
-		$join = array();
-		$tables = array( 'wb_entity_per_page' );
+		$join = [];
+		$tables = [ 'wb_entity_per_page' ];
 
 		if ( !$this->shouldUpdateAllEntities ) {
 			// Find properties in wb_entity_per_page with no corresponding
@@ -147,11 +147,11 @@ class PropertyInfoTableBuilder {
 			$piTable = $this->propertyInfoTable->getTableName();
 
 			$tables[] = $piTable;
-			$join[$piTable] = array( 'LEFT JOIN',
-				array(
+			$join[$piTable] = [ 'LEFT JOIN',
+				[
 					'pi_property_id = epp_entity_id',
-				)
-			);
+				]
+			];
 		}
 
 		// @TODO: Inject the LBFactory
@@ -169,17 +169,17 @@ class PropertyInfoTableBuilder {
 			//FIXME: use an EntityIdPager from EntityPerPage
 			$props = $dbw->select(
 				$tables,
-				array(
+				[
 					'epp_entity_id',
-				),
-				array(
+				],
+				[
 					'epp_entity_type = ' . $dbw->addQuotes( Property::ENTITY_TYPE ),
 					'epp_entity_id > ' . (int) $rowId,
 					'epp_redirect_target IS NULL',
 					$this->shouldUpdateAllEntities ? '1' : 'pi_property_id IS NULL', // if not $all, only add missing entries
-				),
+				],
 				__METHOD__,
-				array(
+				[
 					'LIMIT' => $this->batchSize,
 					// XXX: We currently have a unique key defined as `wb_epp_entity` (`epp_entity_id`,`epp_entity_type`).
 					//      This SHOULD be the other way around:  `wb_epp_entity` (`epp_entity_type`, `epp_entity_id`).
@@ -187,7 +187,7 @@ class PropertyInfoTableBuilder {
 					//      'ORDER BY' => 'epp_entity_type ASC, epp_entity_id ASC'
 					'ORDER BY' => 'epp_entity_id ASC',
 					'FOR UPDATE'
-				),
+				],
 				$join
 			);
 

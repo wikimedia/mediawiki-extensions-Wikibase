@@ -9,35 +9,35 @@ return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	$moduleTemplate = array(
+	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0],
-	);
+	];
 
-	return array(
+	return [
 
-		'wikibase.formatters.ApiValueFormatter' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.formatters.ApiValueFormatter' => $moduleTemplate + [
+			'scripts' => [
 				'ApiValueFormatter.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase',
 				'util.inherit',
 				'valueFormatters.ValueFormatter',
-			),
-		),
+			],
+		],
 
-		'wikibase.formatters.ApiValueFormatterFactory' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.formatters.ApiValueFormatterFactory' => $moduleTemplate + [
+			'scripts' => [
 				'ApiValueFormatterFactory.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.api.FormatValueCaller',
 				'wikibase.formatters.ApiValueFormatter',
 				'wikibase.ValueFormatterFactory'
-			),
-		),
+			],
+		],
 
-	);
+	];
 
 } );

@@ -289,25 +289,25 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		// These functions will be exposed to the Lua module.
 		// They are member functions on a Lua table which is private to the module, thus
 		// these can't be called from user code, unless explicitly exposed in Lua.
-		$lib = array(
-			'getLabel' => array( $this, 'getLabel' ),
-			'getEntity' => array( $this, 'getEntity' ),
-			'getSetting' => array( $this, 'getSetting' ),
-			'getEntityUrl' => array( $this, 'getEntityUrl' ),
-			'renderSnak' => array( $this, 'renderSnak' ),
-			'renderSnaks' => array( $this, 'renderSnaks' ),
-			'getEntityId' => array( $this, 'getEntityId' ),
-			'getUserLang' => array( $this, 'getUserLang' ),
-			'getDescription' => array( $this, 'getDescription' ),
-			'resolvePropertyId' => array( $this, 'resolvePropertyId' ),
-			'getSiteLinkPageName' => array( $this, 'getSiteLinkPageName' ),
-			'incrementExpensiveFunctionCount' => array( $this, 'incrementExpensiveFunctionCount' ),
-			'getPropertyOrder' => array( $this, 'getPropertyOrder' ),
-			'orderProperties' => array( $this, 'orderProperties' ),
-		);
+		$lib = [
+			'getLabel' => [ $this, 'getLabel' ],
+			'getEntity' => [ $this, 'getEntity' ],
+			'getSetting' => [ $this, 'getSetting' ],
+			'getEntityUrl' => [ $this, 'getEntityUrl' ],
+			'renderSnak' => [ $this, 'renderSnak' ],
+			'renderSnaks' => [ $this, 'renderSnaks' ],
+			'getEntityId' => [ $this, 'getEntityId' ],
+			'getUserLang' => [ $this, 'getUserLang' ],
+			'getDescription' => [ $this, 'getDescription' ],
+			'resolvePropertyId' => [ $this, 'resolvePropertyId' ],
+			'getSiteLinkPageName' => [ $this, 'getSiteLinkPageName' ],
+			'incrementExpensiveFunctionCount' => [ $this, 'incrementExpensiveFunctionCount' ],
+			'getPropertyOrder' => [ $this, 'getPropertyOrder' ],
+			'orderProperties' => [ $this, 'orderProperties' ],
+		];
 
 		return $this->getEngine()->registerInterface(
-			__DIR__ . '/mw.wikibase.lua', $lib, array()
+			__DIR__ . '/mw.wikibase.lua', $lib, []
 		);
 	}
 
@@ -326,7 +326,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 		try {
 			$entityArr = $this->getEntityAccessor()->getEntity( $prefixedEntityId );
-			return array( $entityArr );
+			return [ $entityArr ];
 		} catch ( EntityIdParsingException $ex ) {
 			throw new ScribuntoException( 'wikibase-error-invalid-entity-id' );
 		} catch ( EntityAccessLimitException $ex ) {
@@ -347,7 +347,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function getEntityId( $pageTitle = null ) {
 		$this->checkType( 'getEntityByTitle', 1, $pageTitle, 'string' );
-		return array( $this->getLanguageIndependentLuaBindings()->getEntityId( $pageTitle ) );
+		return [ $this->getLanguageIndependentLuaBindings()->getEntityId( $pageTitle ) ];
 	}
 
 	/**
@@ -361,7 +361,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function getSetting( $setting ) {
 		$this->checkType( 'setting', 1, $setting, 'string' );
-		return array( $this->getLanguageIndependentLuaBindings()->getSetting( $setting ) );
+		return [ $this->getLanguageIndependentLuaBindings()->getSetting( $setting ) ];
 	}
 
 	/**
@@ -442,7 +442,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function getSiteLinkPageName( $prefixedEntityId ) {
 		$this->checkType( 'getSiteLinkPageName', 1, $prefixedEntityId, 'string' );
-		return array( $this->getLanguageIndependentLuaBindings()->getSiteLinkPageName( $prefixedEntityId ) );
+		return [ $this->getLanguageIndependentLuaBindings()->getSiteLinkPageName( $prefixedEntityId ) ];
 	}
 
 	/**
@@ -459,7 +459,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$this->checkType( 'renderSnak', 1, $snakSerialization, 'table' );
 
 		try {
-			$ret = array( $this->getSnakSerializationRenderer()->renderSnak( $snakSerialization ) );
+			$ret = [ $this->getSnakSerializationRenderer()->renderSnak( $snakSerialization ) ];
 			return $ret;
 		} catch ( DeserializationException $e ) {
 			throw new ScribuntoException( 'wikibase-error-deserialize-error' );
@@ -480,7 +480,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$this->checkType( 'renderSnaks', 1, $snaksSerialization, 'table' );
 
 		try {
-			$ret = array( $this->getSnakSerializationRenderer()->renderSnaks( $snaksSerialization ) );
+			$ret = [ $this->getSnakSerializationRenderer()->renderSnaks( $snaksSerialization ) ];
 			return $ret;
 		} catch ( DeserializationException $e ) {
 			throw new ScribuntoException( 'wikibase-error-deserialize-error' );
@@ -502,10 +502,10 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$this->checkType( 'resolvePropertyId', 1, $propertyLabelOrId, 'string' );
 		try {
 			$propertyId = $this->getPropertyIdResolver()->resolvePropertyId( $propertyLabelOrId, $wgContLang->getCode() );
-			$ret = array( $propertyId->getSerialization() );
+			$ret = [ $propertyId->getSerialization() ];
 			return $ret;
 		} catch ( PropertyLabelNotResolvedException $e ) {
-			return array( null );
+			return [ null ];
 		}
 	}
 
@@ -515,12 +515,12 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @return array[]
 	 */
 	public function orderProperties( $propertyIds ) {
-		if ( $propertyIds === array() ) {
-			return array( array() );
+		if ( $propertyIds === [] ) {
+			return [ [] ];
 		}
 
-		$orderedPropertiesPart = array();
-		$unorderedProperties = array();
+		$orderedPropertiesPart = [];
+		$unorderedProperties = [];
 
 		$propertyOrder = $this->getPropertyOrderProvider()->getPropertyOrder();
 		foreach ( $propertyIds as $propertyId ) {
@@ -537,7 +537,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$orderedPropertiesResult = array_combine(
 				range( 1, count( $orderedProperties ) ), array_values( $orderedProperties )
 		);
-		return array( $orderedPropertiesResult );
+		return [ $orderedPropertiesResult ];
 	}
 
 	/**
@@ -545,7 +545,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @return array[] either int[][] or null[][]
 	 */
 	public function getPropertyOrder() {
-		return array( $this->getPropertyOrderProvider()->getPropertyOrder() );
+		return [ $this->getPropertyOrderProvider()->getPropertyOrder() ];
 	}
 
 	/**

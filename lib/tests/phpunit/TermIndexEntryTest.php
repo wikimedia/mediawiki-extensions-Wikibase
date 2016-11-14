@@ -21,31 +21,31 @@ use Wikibase\TermIndexEntry;
 class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 
 	public function provideConstructor() {
-		return array(
-			array( // #0
-				array(
+		return [
+			[ // #0
+				[
 					'entityType' => 'item',
 					'entityId' => 23,
 					'termType' => TermIndexEntry::TYPE_LABEL,
 					'termLanguage' => 'en',
 					'termText' => 'foo',
 					'termWeight' => 1.234,
-				)
-			),
-			array( // #1
-				array(
+				]
+			],
+			[ // #1
+				[
 					'termType' => TermIndexEntry::TYPE_LABEL,
 					'termLanguage' => 'en',
 					'termText' => 'foo',
-				)
-			),
-			array( // #2
-				array(
+				]
+			],
+			[ // #2
+				[
 					'entityType' => 'item',
 					'entityId' => 23,
-				)
-			),
-		);
+				]
+			],
+		];
 	}
 
 	/**
@@ -69,9 +69,9 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testClone() {
-		$term = new TermIndexEntry( array(
+		$term = new TermIndexEntry( [
 			'termText' => 'Foo'
-		) );
+		] );
 
 		$clone = clone $term;
 		$clone->setText( 'Bar' );
@@ -84,78 +84,78 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function provideCompare() {
-		$tests = array();
+		$tests = [];
 
-		$tests[] = array( // #0
+		$tests[] = [ // #0
 			new TermIndexEntry(),
 			new TermIndexEntry(),
 			true
-		);
+		];
 
-		$term = new TermIndexEntry( array(
+		$term = new TermIndexEntry( [
 			'entityType' => 'item',
 			'entityId' => 23,
 			'termType' => TermIndexEntry::TYPE_LABEL,
 			'termLanguage' => 'en',
 			'termText' => 'foo',
-		) );
+		] );
 
 		$other = clone $term;
-		$tests[] = array( // #1
+		$tests[] = [ // #1
 			$term,
 			$other,
 			true
-		);
+		];
 
 		$other = clone $term;
 		$other->setText( 'bar' );
-		$tests[] = array( // #2
+		$tests[] = [ // #2
 			$term,
 			$other,
 			false
-		);
+		];
 
-		$other = new TermIndexEntry( array(
+		$other = new TermIndexEntry( [
 			'entityType' => 'property',
 			'entityId' => 11,
 			'termType' => TermIndexEntry::TYPE_LABEL,
 			'termLanguage' => 'en',
 			'termText' => 'foo',
-		) );
-		$tests[] = array( // #3
+		] );
+		$tests[] = [ // #3
 			$term,
 			$other,
 			false
-		);
+		];
 
-		$other = new TermIndexEntry( array(
+		$other = new TermIndexEntry( [
 			'entityType' => 'property',
 			'entityId' => 23,
 			'termType' => TermIndexEntry::TYPE_LABEL,
 			'termLanguage' => 'en',
 			'termText' => 'foo',
-		) );
-		$tests[] = array( // #4
+		] );
+		$tests[] = [ // #4
 			$term,
 			$other,
 			false
-		);
+		];
 
 		$other = clone $term;
 		$other->setLanguage( 'fr' );
-		$tests[] = array( // #5
+		$tests[] = [ // #5
 			$term,
 			$other,
 			false
-		);
+		];
 
 		$other = clone $term;
 		$other->setType( TermIndexEntry::TYPE_DESCRIPTION );
-		$tests[] = array( // #6
+		$tests[] = [ // #6
 			$term,
 			$other,
 			false
-		);
+		];
 
 		return $tests;
 	}
@@ -179,23 +179,23 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetTerm() {
-		$termIndexEntry = new TermIndexEntry( array(
+		$termIndexEntry = new TermIndexEntry( [
 			'termLanguage' => 'en',
 			'termText' => 'foo',
-		) );
+		] );
 		$expectedTerm = new Term( 'en', 'foo' );
 		$this->assertEquals( $expectedTerm, $termIndexEntry->getTerm() );
 	}
 
 	public function provideTermIndexEntryData() {
-		return array(
-			array( array(
+		return [
+			[ [
 				'termText' => 'foo',
-			) ),
-			array( array(
+			] ],
+			[ [
 				'termLanguage' => 'en',
-			) ),
-		);
+			] ],
+		];
 	}
 
 	/**

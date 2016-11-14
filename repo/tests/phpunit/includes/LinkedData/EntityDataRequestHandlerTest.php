@@ -119,7 +119,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		);
 
 		$entityDataFormatProvider->setFormatWhiteList(
-			array(
+			[
 				// using the API
 				'json', // default
 				'php',
@@ -129,10 +129,10 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 				'n3',
 				'turtle',
 				'ntriples',
-			)
+			]
 		);
 
-		$extensions = array(
+		$extensions = [
 			// using the API
 			'json' => 'json', // default
 			'php' => 'php',
@@ -142,7 +142,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			'n3' => 'n3',
 			'turtle' => 'ttl',
 			'ntriples' => 'n3',
-		);
+		];
 
 		$uriManager = new EntityDataUriManager(
 			$this->interfaceTitle,
@@ -213,7 +213,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		array $headers,
 		$expectedOutput,
 		$expectedStatusCode = 200,
-		array $expectedHeaders = array()
+		array $expectedHeaders = []
 	) {
 		$output = $this->makeOutputPage( $params, $headers );
 		$request = $output->getRequest();

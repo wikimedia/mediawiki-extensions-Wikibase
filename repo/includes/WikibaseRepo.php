@@ -182,7 +182,7 @@ class WikibaseRepo {
 	/**
 	 * @var Serializer[]
 	 */
-	private $entitySerializers = array();
+	private $entitySerializers = [];
 
 	/**
 	 * @var EntityIdParser|null
@@ -289,10 +289,10 @@ class WikibaseRepo {
 		}
 
 		$dataTypeDefinitions = $wgWBRepoDataTypes;
-		Hooks::run( 'WikibaseRepoDataTypes', array( &$dataTypeDefinitions ) );
+		Hooks::run( 'WikibaseRepoDataTypes', [ & $dataTypeDefinitions ] );
 
 		$entityTypeDefinitions = $wgWBRepoEntityTypes;
-		Hooks::run( 'WikibaseRepoEntityTypes', array( &$entityTypeDefinitions ) );
+		Hooks::run( 'WikibaseRepoEntityTypes', [ & $entityTypeDefinitions ] );
 
 		$settings = new SettingsArray( $wgWBRepoSettings );
 
@@ -536,10 +536,10 @@ class WikibaseRepo {
 	 */
 	public function getEntityChangeFactory() {
 		//TODO: take this from a setting or registry.
-		$changeClasses = array(
+		$changeClasses = [
 			Item::ENTITY_TYPE => ItemChange::class,
 			// Other types of entities will use EntityChange
-		);
+		];
 
 		return new EntityChangeFactory(
 			$this->getEntityDiffer(),
@@ -1028,12 +1028,12 @@ class WikibaseRepo {
 	 * @return ExceptionLocalizer[]
 	 */
 	private function getExceptionLocalizers( ValueFormatter $formatter ) {
-		return array(
+		return [
 			'MessageException' => new MessageExceptionLocalizer(),
 			'ParseException' => new ParseExceptionLocalizer(),
 			'ChangeOpValidationException' => new ChangeOpValidationExceptionLocalizer( $formatter ),
 			'Exception' => new GenericExceptionLocalizer()
-		);
+		];
 	}
 
 	/**
@@ -1079,7 +1079,7 @@ class WikibaseRepo {
 
 		// Create a new SnakFormatterFactory based on the specialized ValueFormatterFactory.
 		$snakFormatterFactory = new OutputFormatSnakFormatterFactory(
-			array(), // XXX: do we want $this->dataTypeDefinitions->getSnakFormatterFactoryCallbacks()
+			[], // XXX: do we want $this->dataTypeDefinitions->getSnakFormatterFactoryCallbacks()
 			$valueFormatterFactory,
 			$this->getPropertyDataTypeLookup(),
 			$this->getDataTypeFactory()
@@ -1212,7 +1212,7 @@ class WikibaseRepo {
 	public function getContentModelMappings() {
 		$map = $this->entityTypeDefinitions->getContentModelIds();
 
-		Hooks::run( 'WikibaseContentModelMapping', array( &$map ) );
+		Hooks::run( 'WikibaseContentModelMapping', [ & $map ] );
 
 		return $map;
 	}
@@ -1284,7 +1284,7 @@ class WikibaseRepo {
 		if ( $this->entityDeserializer === null ) {
 			$deserializerFactoryCallbacks = $this->entityTypeDefinitions->getDeserializerFactoryCallbacks();
 			$deserializerFactory = $this->getExternalFormatDeserializerFactory();
-			$deserializers = array();
+			$deserializers = [];
 
 			foreach ( $deserializerFactoryCallbacks as $callback ) {
 				$deserializers[] = call_user_func( $callback, $deserializerFactory );
@@ -1314,7 +1314,7 @@ class WikibaseRepo {
 		if ( !isset( $this->entitySerializers[$options] ) ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
 			$serializerFactory = new SerializerFactory( new DataValueSerializer(), $options );
-			$serializers = array();
+			$serializers = [];
 
 			foreach ( $serializerFactoryCallbacks as $callback ) {
 				$serializers[] = call_user_func( $callback, $serializerFactory );
@@ -1355,7 +1355,7 @@ class WikibaseRepo {
 	 * @return Deserializer
 	 */
 	private function getDataValueDeserializer() {
-		return new DataValueDeserializer( array(
+		return new DataValueDeserializer( [
 			'string' => StringValue::class,
 			'unknown' => UnknownValue::class,
 			'globecoordinate' => GlobeCoordinateValue::class,
@@ -1367,7 +1367,7 @@ class WikibaseRepo {
 					? new EntityIdValue( $this->getEntityIdParser()->parse( $value['id'] ) )
 					: EntityIdValue::newFromArray( $value );
 			},
-		) );
+		] );
 	}
 
 	/**
@@ -1549,7 +1549,7 @@ class WikibaseRepo {
 			'entityNamespaces'
 		);
 
-		Hooks::run( 'WikibaseEntityNamespaces', array( &$namespaces ) );
+		Hooks::run( 'WikibaseEntityNamespaces', [ & $namespaces ] );
 		return $namespaces;
 	}
 
@@ -1670,7 +1670,7 @@ class WikibaseRepo {
 			$this->monolingualTextLanguages = new DifferenceContentLanguages(
 				new UnionContentLanguages(
 					new MediaWikiContentLanguages(),
-					new StaticContentLanguages( array(
+					new StaticContentLanguages( [
 						// Special ISO 639-2 codes
 						'und', 'mis', 'mul', 'zxx',
 
@@ -1691,11 +1691,11 @@ class WikibaseRepo {
 
 						// T98314
 						'tzl',
-					) )
+					] )
 				),
 
 				// MediaWiki language codes we don't want for monolingual text values
-				new StaticContentLanguages( array(
+				new StaticContentLanguages( [
 					// Language codes that are not even well-formed BCP 47 language codes
 					'simple',
 					'tokipona',
@@ -1712,7 +1712,7 @@ class WikibaseRepo {
 					// Language codes we don't want for semantic reasons
 					'de-formal',
 					'nl-informal',
-				) )
+				] )
 			);
 		}
 		return $this->monolingualTextLanguages;

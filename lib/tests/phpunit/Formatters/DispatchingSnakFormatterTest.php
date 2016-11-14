@@ -86,18 +86,18 @@ class DispatchingSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 			SnakFormatter::FORMAT_HTML_DIFF
 		);
 
-		return array(
-			'plain constructor call' => array(
+		return [
+			'plain constructor call' => [
 				SnakFormatter::FORMAT_HTML_DIFF,
-				array( 'novalue' => $formatter ),
-				array( 'string' => $formatter ),
-			),
-			'constructor call with formatters for base format ID' => array(
+				[ 'novalue' => $formatter ],
+				[ 'string' => $formatter ],
+			],
+			'constructor call with formatters for base format ID' => [
 				SnakFormatter::FORMAT_HTML,
-				array( 'novalue' => $formatter ),
-				array( 'string' => $formatter ),
-			),
-		);
+				[ 'novalue' => $formatter ],
+				[ 'string' => $formatter ],
+			],
+		];
 	}
 
 	/**
@@ -123,85 +123,85 @@ class DispatchingSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 			SnakFormatter::FORMAT_PLAIN
 		);
 
-		return array(
-			'format must be a string' => array(
+		return [
+			'format must be a string' => [
 				17,
-				array(),
-				array(),
-			),
-			'snak types must be strings' => array(
+				[],
+				[],
+			],
+			'snak types must be strings' => [
 				SnakFormatter::FORMAT_PLAIN,
-				array( 17 => $formatter ),
-				array( 'string' => $formatter ),
-			),
-			'data types must be strings' => array(
+				[ 17 => $formatter ],
+				[ 'string' => $formatter ],
+			],
+			'data types must be strings' => [
 				SnakFormatter::FORMAT_PLAIN,
-				array(),
-				array( 17 => $formatter ),
-			),
-			'snak type formatters must be SnakFormatters' => array(
+				[],
+				[ 17 => $formatter ],
+			],
+			'snak type formatters must be SnakFormatters' => [
 				SnakFormatter::FORMAT_PLAIN,
-				array( 'novalue' => 17 ),
-				array( 'string' => $formatter ),
-			),
-			'data type formatters must be SnakFormatters' => array(
+				[ 'novalue' => 17 ],
+				[ 'string' => $formatter ],
+			],
+			'data type formatters must be SnakFormatters' => [
 				SnakFormatter::FORMAT_PLAIN,
-				array(),
-				array( 'string' => 17 ),
-			),
-			'snak type formatters mismatches output format' => array(
+				[],
+				[ 'string' => 17 ],
+			],
+			'snak type formatters mismatches output format' => [
 				SnakFormatter::FORMAT_HTML,
-				array( 'novalue' => $formatter ),
-				array( 'string' => $formatter ),
-			),
-			'data type formatters mismatches output format' => array(
+				[ 'novalue' => $formatter ],
+				[ 'string' => $formatter ],
+			],
+			'data type formatters mismatches output format' => [
 				SnakFormatter::FORMAT_HTML,
-				array(),
-				array( 'string' => $formatter ),
-			),
-		);
+				[],
+				[ 'string' => $formatter ],
+			],
+		];
 	}
 
 	public function provideFormatSnak() {
 		$p23 = new PropertyId( 'P23' );
 
-		return array(
-			'novalue' => array(
+		return [
+			'novalue' => [
 				'NO VALUE',
 				new PropertyNoValueSnak( $p23 ),
 				'string'
-			),
-			'somevalue' => array(
+			],
+			'somevalue' => [
 				'SOME VALUE',
 				new PropertySomeValueSnak( $p23 ),
 				'string'
-			),
-			'string value' => array(
+			],
+			'string value' => [
 				'STRING VALUE',
 				new PropertyValueSnak( $p23, new StringValue( 'dummy' ) ),
 				'string'
-			),
-			'other value' => array(
+			],
+			'other value' => [
 				'OTHER VALUE',
 				new PropertyValueSnak( $p23, new StringValue( 'dummy' ) ),
 				'url'
-			),
-		);
+			],
+		];
 	}
 
 	/**
 	 * @dataProvider provideFormatSnak
 	 */
 	public function testFormatSnak( $expected, Snak $snak, $dataType ) {
-		$formattersBySnakType = array(
+		$formattersBySnakType = [
 			'novalue' => $this->makeSnakFormatter( 'NO VALUE' ),
 			'somevalue' => $this->makeSnakFormatter( 'SOME VALUE' ),
-		);
+		];
 
-		$formattersByDataType = array(
+		$formattersByDataType = [
 			'PT:string' => $this->makeSnakFormatter( 'STRING VALUE' ),
 			'*' => $this->makeSnakFormatter( 'OTHER VALUE' ),
-		);
+		];
 
 		$formatter = new DispatchingSnakFormatter(
 			SnakFormatter::FORMAT_PLAIN,
@@ -214,7 +214,7 @@ class DispatchingSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetFormat() {
-		$formatter = new DispatchingSnakFormatter( 'test', $this->getDataTypeLookup(), array(), array() );
+		$formatter = new DispatchingSnakFormatter( 'test', $this->getDataTypeLookup(), [], [] );
 		$this->assertEquals( 'test', $formatter->getFormat() );
 	}
 

@@ -38,10 +38,10 @@ class BaseTemplateAfterPortletHandlerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function getEditLinkProvider() {
-		return array(
-			array( null, 'foo', 'bar' ),
-			array( 'foo', 'foo', 'lang' ),
-		);
+		return [
+			[ null, 'foo', 'bar' ],
+			[ 'foo', 'foo', 'lang' ],
+		];
 	}
 
 }

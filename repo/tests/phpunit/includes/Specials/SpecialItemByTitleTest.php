@@ -110,12 +110,12 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 		$page = new SpecialItemByTitle();
 
 		$page->initSettings(
-			array( 'wikipedia' )
+			[ 'wikipedia' ]
 		);
 
 		$siteStore = $this->getMockSiteStore();
 
-		$siteLinkTargetProvider = new SiteLinkTargetProvider( $siteStore, array() );
+		$siteLinkTargetProvider = new SiteLinkTargetProvider( $siteStore, [] );
 
 		$page->initServices(
 			$this->getMockTitleLookup(),
@@ -129,56 +129,56 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 	}
 
 	public function requestProvider() {
-		$cases = array();
-		$matchers = array();
+		$cases = [];
+		$matchers = [];
 
-		$matchers['site'] = array(
+		$matchers['site'] = [
 			'tag' => 'div',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-itembytitle-sitename',
-			),
-			'child' => array(
+			],
+			'child' => [
 				'tag' => 'input',
-				'attributes' => array(
+				'attributes' => [
 					'name' => 'site',
-				)
-			) );
-		$matchers['page'] = array(
+				]
+			] ];
+		$matchers['page'] = [
 			'tag' => 'div',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'pagename',
-			),
-			'child' => array(
+			],
+			'child' => [
 				'tag' => 'input',
-				'attributes' => array(
+				'attributes' => [
 					'name' => 'page',
-				)
-			) );
-		$matchers['submit'] = array(
+				]
+			] ];
+		$matchers['submit'] = [
 			'tag' => 'div',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-itembytitle-submit',
-			),
-			'child' => array(
+			],
+			'child' => [
 				'tag' => 'button',
-				'attributes' => array(
+				'attributes' => [
 					'type' => 'submit',
 					'name' => '',
-				)
-			) );
+				]
+			] ];
 
-		$cases['empty'] = array( '', null, $matchers );
+		$cases['empty'] = [ '', null, $matchers ];
 
 		// enwiki/NotFound  (mock returns null for everything but dewiki)
 		$matchers['site']['child'][0]['attributes']['value'] = 'enwiki';
 		$matchers['page']['child'][0]['attributes']['value'] = 'NotFound';
 
-		$cases['enwiki/NotFound'] = array( 'enwiki/NotFound', null, $matchers );
+		$cases['enwiki/NotFound'] = [ 'enwiki/NotFound', null, $matchers ];
 
 		// dewiki/Gefunden (mock returns Q123 for dewiki)
-		$matchers = array();
+		$matchers = [];
 
-		$cases['dewiki/Gefunden'] = array( 'dewiki/Gefunden', 'Q123', $matchers );
+		$cases['dewiki/Gefunden'] = [ 'dewiki/Gefunden', 'Q123', $matchers ];
 
 		return $cases;
 	}

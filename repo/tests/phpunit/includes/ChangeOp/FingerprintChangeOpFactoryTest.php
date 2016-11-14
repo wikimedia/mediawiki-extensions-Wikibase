@@ -29,17 +29,17 @@ class FingerprintChangeOpFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testNewAddAliasesOp() {
-		$op = $this->newChangeOpFactory()->newAddAliasesOp( 'en', array( 'foo' ) );
+		$op = $this->newChangeOpFactory()->newAddAliasesOp( 'en', [ 'foo' ] );
 		$this->assertInstanceOf( ChangeOp::class, $op );
 	}
 
 	public function testNewSetAliasesOp() {
-		$op = $this->newChangeOpFactory()->newSetAliasesOp( 'en', array( 'foo' ) );
+		$op = $this->newChangeOpFactory()->newSetAliasesOp( 'en', [ 'foo' ] );
 		$this->assertInstanceOf( ChangeOp::class, $op );
 	}
 
 	public function testNewRemoveAliasesOp() {
-		$op = $this->newChangeOpFactory()->newRemoveAliasesOp( 'en', array( 'foo' ) );
+		$op = $this->newChangeOpFactory()->newRemoveAliasesOp( 'en', [ 'foo' ] );
 		$this->assertInstanceOf( ChangeOp::class, $op );
 	}
 

@@ -149,7 +149,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * @return array
 	 */
 	private function getLanguageOptions() {
-		$options = array();
+		$options = [];
 		foreach ( $this->termsLanguages->getLanguages() as $languageCode ) {
 			$languageName = $this->languageNameLookup->getName( $languageCode );
 			$options["$languageName ($languageCode)"] = $languageCode;
@@ -161,17 +161,17 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * Build the HTML form
 	 */
 	private function setForm() {
-		$options = array(
+		$options = [
 			$this->msg( 'wikibase-entitieswithoutlabel-label-alltypes' )->text() => ''
-		);
+		];
 
 		foreach ( $this->entityTypes as $type ) {
 			// Messages: wikibase-entity-item, wikibase-entity-property, wikibase-entity-query
 			$options[$this->msg( 'wikibase-entity-' . $type )->text()] = $type;
 		}
 
-		$formDescriptor = array(
-			'language' => array(
+		$formDescriptor = [
+			'language' => [
 				'name' => 'language',
 				'default' => $this->language,
 				'type' => 'combobox',
@@ -179,22 +179,22 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 				'cssclass' => 'wb-language-suggester',
 				'id' => 'wb-entitieswithoutpage-language',
 				'label-message' => 'wikibase-entitieswithoutlabel-label-language'
-			),
-			'type' => array(
+			],
+			'type' => [
 				'name' => 'type',
 				'options' => $options,
 				'default' => $this->type,
 				'type' => 'select',
 				'id' => 'wb-entitieswithoutpage-type',
 				'label-message' => 'wikibase-entitieswithoutlabel-label-type'
-			),
-			'submit' => array(
+			],
+			'submit' => [
 				'name' => '',
 				'default' => $this->msg( 'wikibase-entitieswithoutlabel-submit' )->text(),
 				'type' => 'submit',
 				'id' => 'wikibase-entitieswithoutpage-submit',
-			)
-		);
+			]
+		];
 
 		HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext() )
 			->setId( 'wb-entitieswithoutpage-form' )

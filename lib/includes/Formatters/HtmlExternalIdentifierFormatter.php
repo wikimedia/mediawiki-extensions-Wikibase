@@ -52,7 +52,7 @@ class HtmlExternalIdentifierFormatter implements SnakFormatter {
 
 		$id = $snak->getDataValue()->getValue();
 		$url = $this->urlExpander->expandUrl( $snak );
-		$attr = array( 'class' => 'wb-external-id' );
+		$attr = [ 'class' => 'wb-external-id' ];
 
 		if ( $url === null ) {
 			return Html::element( 'span', $attr, $id );

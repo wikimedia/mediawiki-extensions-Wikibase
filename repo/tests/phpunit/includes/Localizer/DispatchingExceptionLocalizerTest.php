@@ -24,26 +24,26 @@ use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
 class DispatchingExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideGetExceptionMessage() {
-		$localizers = array(
+		$localizers = [
 			'MessageException' => new MessageExceptionLocalizer(),
 			'ParseException' => new ParseExceptionLocalizer(),
 			'Exception' => new GenericExceptionLocalizer()
-		);
+		];
 
-		return array(
-			'RuntimeException' => array(
+		return [
+			'RuntimeException' => [
 				new RuntimeException( 'Oops!' ),
 				'wikibase-error-unexpected',
-				array( 'Oops!' ),
+				[ 'Oops!' ],
 				$localizers
-			),
-			'ParseException' => array(
+			],
+			'ParseException' => [
 				new ParseException( 'Blarg!' ),
 				'wikibase-parse-error',
-				array(),
+				[],
 				$localizers
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -64,10 +64,10 @@ class DispatchingExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideGetExceptionMessageThrowsException() {
-		$localizers = array(
+		$localizers = [
 			'MessageException' => new MessageExceptionLocalizer(),
 			'ParseException' => new ParseExceptionLocalizer(),
-		);
+		];
 
 		$this->setExpectedException( InvalidArgumentException::class );
 

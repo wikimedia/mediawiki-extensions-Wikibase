@@ -33,11 +33,11 @@ class WikitextExternalIdentifierFormatter implements SnakFormatter {
 	}
 
 	private function escapeWikitextInUrl( $url ) {
-		return str_replace( array(
+		return str_replace( [
 			'[', ']',     '<', '>',     '\'',  ' ', "\r", "\n", "\t"
-		), array(
+		], [
 			'%5B', '%5D', '%3C', '%3E', '%27', '%20', '%0D', '%0A', '%09'
-		), $url );
+		], $url );
 	}
 
 	/**

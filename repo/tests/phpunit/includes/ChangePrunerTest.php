@@ -22,7 +22,7 @@ use Wikibase\Repo\Store\Sql\SqlChangeStore;
  */
 class ChangePrunerTest extends MediaWikiTestCase {
 
-	private $messages = array();
+	private $messages = [];
 
 	public function testConstructorWithInvalidBatchSize() {
 		$this->setExpectedException( InvalidArgumentException::class );
@@ -78,14 +78,14 @@ class ChangePrunerTest extends MediaWikiTestCase {
 	}
 
 	private function getChangeRowData( $timestamp ) {
-		return array(
+		return [
 			'type' => 'wikibase-item~update',
 			'time' => $timestamp,
 			'user_id' => 0,
 			'revision_id' => 9002,
 			'object_id' => 'Q9000',
-			'info' => array( 'diff' => array() )
-		);
+			'info' => [ 'diff' => [] ]
+		];
 	}
 
 	/**

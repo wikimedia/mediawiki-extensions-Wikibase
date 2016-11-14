@@ -79,8 +79,8 @@ class PopulateSitesTable extends Maintenance {
 		}
 
 		// @todo make it configurable, such as from a config file.
-		$validGroups = array( 'wikipedia', 'wikivoyage', 'wikiquote', 'wiktionary',
-			'wikibooks', 'wikisource', 'wikiversity', 'wikinews' );
+		$validGroups = [ 'wikipedia', 'wikivoyage', 'wikiquote', 'wiktionary',
+			'wikibooks', 'wikisource', 'wikiversity', 'wikinews' ];
 
 		try {
 			$json = $this->getSiteMatrixData( $url );

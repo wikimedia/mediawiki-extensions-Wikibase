@@ -42,21 +42,21 @@ class ValidatorErrorLocalizerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideGetErrorMessage() {
-		return array(
-			'simple' => array(
+		return [
+			'simple' => [
 				Error::newError( 'Bla bla' ),
-				array()
-			),
-			'with params' => array(
+				[]
+			],
+			'with params' => [
 				Error::newError(
 					'Bla bla',
 					null,
 					'test',
-					array( 'thingy', array( 'a', 'b', 'c' ) )
+					[ 'thingy', [ 'a', 'b', 'c' ] ]
 				),
-				array( 'thingy', 'a|b|c' )
-			),
-		);
+				[ 'thingy', 'a|b|c' ]
+			],
+		];
 	}
 
 	/**
@@ -72,15 +72,15 @@ class ValidatorErrorLocalizerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideGetResultStatus() {
-		return array(
-			array( Result::newSuccess() ),
-			array( Result::newError( array() ) ),
-			array( Result::newError( array( Error::newError( 'Bla bla' ) ) ) ),
-			array( Result::newError( array(
+		return [
+			[ Result::newSuccess() ],
+			[ Result::newError( [] ) ],
+			[ Result::newError( [ Error::newError( 'Bla bla' ) ] ) ],
+			[ Result::newError( [
 				Error::newError( 'Foo' ),
 				Error::newError( 'Bar' ),
-			) ) ),
-		);
+			] ) ],
+		];
 	}
 
 	/**

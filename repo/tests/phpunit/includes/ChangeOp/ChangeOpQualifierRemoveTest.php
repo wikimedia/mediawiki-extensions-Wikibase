@@ -23,10 +23,10 @@ use Wikibase\DataModel\Statement\Statement;
 class ChangeOpQualifierRemoveTest extends \PHPUnit_Framework_TestCase {
 
 	public function invalidConstructorProvider() {
-		$args = array();
-		$args[] = array( '', '' );
-		$args[] = array( 'foo', '' );
-		$args[] = array( '', 'foo' );
+		$args = [];
+		$args[] = [ '', '' ];
+		$args[] = [ 'foo', '' ];
+		$args[] = [ '', 'foo' ];
 		return $args;
 	}
 
@@ -40,7 +40,7 @@ class ChangeOpQualifierRemoveTest extends \PHPUnit_Framework_TestCase {
 
 	public function changeOpRemoveProvider() {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
-		$args = array();
+		$args = [];
 
 		$item = $this->newItemWithClaim( 'q345', $snak );
 		$statements = $item->getStatements()->toArray();
@@ -51,7 +51,7 @@ class ChangeOpQualifierRemoveTest extends \PHPUnit_Framework_TestCase {
 		$statement->getQualifiers()->addSnak( $newQualifier );
 		$snakHash = $newQualifier->getHash();
 		$changeOp = new ChangeOpQualifierRemove( $guid, $snakHash );
-		$args[] = array( $item, $changeOp, $snakHash );
+		$args[] = [ $item, $changeOp, $snakHash ];
 
 		return $args;
 	}

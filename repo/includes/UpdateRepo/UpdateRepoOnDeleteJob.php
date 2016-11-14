@@ -104,8 +104,8 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 			'clientsitelink',
 			'remove',
 			null,
-			array( $siteId ),
-			array( $page )
+			[ $siteId ],
+			[ $page ]
 		);
 	}
 

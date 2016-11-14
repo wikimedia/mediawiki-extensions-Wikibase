@@ -37,11 +37,11 @@ class PagePropsEntityIdLookupTest extends \MediaWikiTestCase {
 	private function insertPageProps( DatabaseBase $db, $pageId, EntityId $entityId ) {
 		$db->insert(
 			'page_props',
-			array(
+			[
 				'pp_page' => $pageId,
 				'pp_propname' => 'wikibase_item',
 				'pp_value' => $entityId->getSerialization(),
-			)
+			]
 		);
 	}
 
@@ -72,13 +72,13 @@ class PagePropsEntityIdLookupTest extends \MediaWikiTestCase {
 		$this->insertPageProps( $db, 11, $q11 );
 		$this->insertPageProps( $db, 22, $q22 );
 
-		$expected = array(
+		$expected = [
 			11 => $q11,
 			22 => $q22
-		);
+		];
 
 		$lookup = new PagePropsEntityIdLookup( wfGetLB(), new BasicEntityIdParser() );
-		$actual = $lookup->getEntityIds( array( $title22, $title99, $title11 ) );
+		$actual = $lookup->getEntityIds( [ $title22, $title99, $title11 ] );
 		ksort( $actual );
 
 		$this->assertEquals( $expected, $actual );

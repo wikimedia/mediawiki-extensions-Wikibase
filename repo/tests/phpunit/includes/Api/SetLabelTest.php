@@ -29,7 +29,7 @@ class SetLabelTest extends ModifyTermTestCase {
 		self::$testAction = 'wbsetlabel';
 
 		if ( !isset( self::$hasSetup ) ) {
-			$this->initTestEntities( array( 'Empty' ) );
+			$this->initTestEntities( [ 'Empty' ] );
 		}
 		self::$hasSetup = true;
 	}

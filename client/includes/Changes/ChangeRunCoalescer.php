@@ -63,7 +63,7 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 	 * @return Change[]
 	 */
 	public function transformChangeList( array $changes ) {
-		$coalesced = array();
+		$coalesced = [];
 
 		$changesByEntity = $this->groupChangesByEntity( $changes );
 		/** @var EntityChange[] $entityChanges */
@@ -72,7 +72,7 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 			$coalesced = array_merge( $coalesced, $entityChanges );
 		}
 
-		usort( $coalesced, array( $this, 'compareChangesByTimestamp' ) );
+		usort( $coalesced, [ $this, 'compareChangesByTimestamp' ] );
 
 		wfDebugLog( __CLASS__, __METHOD__ . ': coalesced '
 			. count( $changes ) . ' into ' . count( $coalesced ) . ' changes' );
@@ -89,13 +89,13 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 	 *         entity ID is the list of changes performed on that entity.
 	 */
 	private function groupChangesByEntity( array $changes ) {
-		$groups = array();
+		$groups = [];
 
 		foreach ( $changes as $change ) {
 			$id = $change->getEntityId()->getSerialization();
 
 			if ( !isset( $groups[$id] ) ) {
-				$groups[$id] = array();
+				$groups[$id] = [];
 			}
 
 			$groups[$id][] = $change;
@@ -134,7 +134,7 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 		$minor = true;
 		$bot = true;
 
-		$ids = array();
+		$ids = [];
 
 		foreach ( $changes as $change ) {
 			$ids[] = $change->getId();
@@ -171,25 +171,25 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 		);
 
 		$change->setFields(
-			array(
+			[
 				'revision_id' => $last->getField( 'revision_id' ),
 				'user_id' => $last->getField( 'user_id' ),
 				'time' => $last->getField( 'time' ),
-			)
+			]
 		);
 
 		$change->setMetadata( array_merge(
 			$lastmeta,
-			array(
+			[
 				'parent_id' => $parentRevId,
 				'minor' => $minor,
 				'bot' => $bot,
-			)
+			]
 		//FIXME: size before & size after
 		//FIXME: size before & size after
 		) );
 
-		$info = $change->hasField( 'info' ) ? $change->getField( 'info' ) : array();
+		$info = $change->hasField( 'info' ) ? $change->getField( 'info' ) : [];
 		$info['change-ids'] = $ids;
 		$info['changes'] = $changes;
 		$change->setField( 'info', $info );
@@ -211,9 +211,9 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 	 * @return Change[] grouped changes
 	 */
 	private function coalesceRuns( EntityId $entityId, array $changes ) {
-		$coalesced = array();
+		$coalesced = [];
 
-		$currentRun = array();
+		$currentRun = [];
 		$currentUser = null;
 		$currentAction = null;
 		$breakNext = false;
@@ -251,7 +251,7 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 						}
 					}
 
-					$currentRun = array();
+					$currentRun = [];
 					$currentUser = $user;
 					$currentAction = $action === EntityChange::ADD ? EntityChange::UPDATE : $action;
 				}

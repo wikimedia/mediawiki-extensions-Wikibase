@@ -101,7 +101,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		} catch ( RuntimeException $ex ) {
 			throw new UserInputException(
 				'wikibase-wikibaserepopage-invalid-id',
-				array( $rawId ),
+				[ $rawId ],
 				'Entity id is not valid'
 			);
 		}
@@ -123,7 +123,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		if ( !( $id instanceof ItemId ) ) {
 			throw new UserInputException(
 				'wikibase-wikibaserepopage-not-itemid',
-				array( $rawId ),
+				[ $rawId ],
 				'Entity id does not belong to an item'
 			);
 		}

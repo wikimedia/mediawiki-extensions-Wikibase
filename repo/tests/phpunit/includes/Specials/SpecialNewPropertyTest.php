@@ -33,42 +33,42 @@ class SpecialNewPropertyTest extends SpecialPageTestBase {
 		//TODO: Verify that more of the output is correct.
 		//TODO: Verify that item creation works via a faux post request
 
-		$this->setMwGlobals( 'wgGroupPermissions', array( '*' => array( 'property-create' => true ) ) );
+		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [ 'property-create' => true ] ] );
 
-		$matchers['label'] = array(
+		$matchers['label'] = [
 			'tag' => 'div',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-newentity-label',
-			),
-			'child' => array(
+			],
+			'child' => [
 				'tag' => 'input',
-				'attributes' => array(
+				'attributes' => [
 					'name' => 'label',
-				)
-			) );
-		$matchers['description'] = array(
+				]
+			] ];
+		$matchers['description'] = [
 			'tag' => 'div',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-newentity-description',
-			),
-			'child' => array(
+			],
+			'child' => [
 				'tag' => 'input',
-				'attributes' => array(
+				'attributes' => [
 					'name' => 'description',
-				)
-			) );
-		$matchers['submit'] = array(
+				]
+			] ];
+		$matchers['submit'] = [
 			'tag' => 'div',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-newentity-submit',
-			),
-			'child' => array(
+			],
+			'child' => [
 				'tag' => 'button',
-				'attributes' => array(
+				'attributes' => [
 					'type' => 'submit',
 					'name' => 'submit',
-				)
-			) );
+				]
+			] ];
 
 		list( $output, ) = $this->executeSpecialPage( '' );
 		foreach ( $matchers as $key => $matcher ) {

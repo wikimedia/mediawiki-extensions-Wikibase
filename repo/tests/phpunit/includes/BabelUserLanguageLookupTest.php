@@ -23,7 +23,7 @@ class BabelUserLanguageLookupTest extends \MediaWikiTestCase {
 	 * @return string[]
 	 */
 	private function split( $subject ) {
-		return empty( $subject ) ? array() : explode( '|', $subject );
+		return empty( $subject ) ? [] : explode( '|', $subject );
 	}
 
 	/**
@@ -65,24 +65,24 @@ class BabelUserLanguageLookupTest extends \MediaWikiTestCase {
 	}
 
 	public function userLanguagesProvider() {
-		return array(
+		return [
 			// 0. Language from the users settings
 			// 1. List of languages from the users babel box (as returned by the Babel extension)
 			// 2. List of usable user specified languages
 			// 3. Expected collection of all languages
-			array( 'de', '', '', 'de' ),
-			array( 'de', 'en', 'en', 'de|en' ),
-			array( 'de', 'de|en|fr', 'de|en|fr', 'de|en|fr' ),
-			array( 'en', '', '', 'en' ),
-			array( 'en', 'en', 'en', 'en' ),
-			array( 'en', 'de|en|fr', 'de|en|fr', 'en|de|fr' ),
+			[ 'de', '', '', 'de' ],
+			[ 'de', 'en', 'en', 'de|en' ],
+			[ 'de', 'de|en|fr', 'de|en|fr', 'de|en|fr' ],
+			[ 'en', '', '', 'en' ],
+			[ 'en', 'en', 'en', 'en' ],
+			[ 'en', 'de|en|fr', 'de|en|fr', 'en|de|fr' ],
 
 			// Codes reported from Babel are getting lower-cased
-			array( 'en', 'nds-NL', 'nds-nl', 'en|nds-nl' ),
+			[ 'en', 'nds-NL', 'nds-nl', 'en|nds-nl' ],
 
 			// Whatever we get from Babel will be retained
-			array( 'en', 'invalid-language-code', 'invalid-language-code', 'en|invalid-language-code' ),
-		);
+			[ 'en', 'invalid-language-code', 'invalid-language-code', 'en|invalid-language-code' ],
+		];
 	}
 
 }

@@ -55,9 +55,9 @@ class SqlUsageTrackerSchemaUpdater {
 			// Register function for populating the table.
 			// Note that this must be done with a static function,
 			// for reasons that do not need explaining at this juncture.
-			$this->dbUpdater->addExtensionUpdate( array(
-				array( __CLASS__, 'fillUsageTable' ),
-			) );
+			$this->dbUpdater->addExtensionUpdate( [
+				[ __CLASS__, 'fillUsageTable' ],
+			] );
 		} else {
 			// This update is neither needed on SQLite nor does it work there.
 			if ( $db->getType() !== 'sqlite' ) {
@@ -101,10 +101,10 @@ class SqlUsageTrackerSchemaUpdater {
 	}
 
 	private function getUpdateScriptPath( $name, $type ) {
-		$extensions = array(
+		$extensions = [
 			'.sql',
 			'.' . $type . '.sql',
-		);
+		];
 
 		foreach ( $extensions as $ext ) {
 			$path = __DIR__ . '/../../../sql/' . $name . $ext;

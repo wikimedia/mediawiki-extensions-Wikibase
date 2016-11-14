@@ -42,23 +42,23 @@ class WikitextExternalIdentifierFormatterTest extends \PHPUnit_Framework_TestCas
 				}
 			} ) );
 
-		return array(
-			'formatter URL' => array(
+		return [
+			'formatter URL' => [
 				$formatterUrlExpander,
 				new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'abc\'\'123' ) ),
 				'[http://acme.test/stuff/abc%27%27123 abc&#39;&#39;123]'
-			),
-			'formatter URL with escaping' => array(
+			],
+			'formatter URL with escaping' => [
 				$formatterUrlExpander,
 				new PropertyValueSnak( new PropertyId( 'P2' ), new StringValue( 'abc\'\'123' ) ),
 				'[http://acme.test/%5Bother%20stuff%5D/%3Cabc%27%27123%3E abc&#39;&#39;123]'
-			),
-			'unknown property' => array(
+			],
+			'unknown property' => [
 				$formatterUrlExpander,
 				new PropertyValueSnak( new PropertyId( 'P345' ), new StringValue( 'abc\'\'123' ) ),
 				'abc&#39;&#39;123'
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -75,11 +75,11 @@ class WikitextExternalIdentifierFormatterTest extends \PHPUnit_Framework_TestCas
 	}
 
 	public function provideFormatSnak_ParameterTypeException() {
-		return array(
-			'bad snak type' => array(
+		return [
+			'bad snak type' => [
 				new PropertyNoValueSnak( new PropertyId( 'P7' ) )
-			),
-		);
+			],
+		];
 	}
 
 	/**

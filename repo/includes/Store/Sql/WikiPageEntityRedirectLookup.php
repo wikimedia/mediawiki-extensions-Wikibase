@@ -74,19 +74,19 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 		}
 
 		$res = $dbr->select(
-			array( 'page', 'redirect' ),
-			array( 'page_namespace', 'page_title' ),
-			array(
+			[ 'page', 'redirect' ],
+			[ 'page_namespace', 'page_title' ],
+			[
 				'rd_title' => $title->getDBkey(),
 				'rd_namespace' => $title->getNamespace(),
 				// Entity redirects are guaranteed to be in the same namespace
 				'page_namespace' => $title->getNamespace(),
 				'page_id = rd_from'
-			),
+			],
 			__METHOD__,
-			array(
+			[
 				'LIMIT' => 1000 // everything should have a hard limit
-			)
+			]
 		);
 
 		try {
@@ -96,10 +96,10 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 		}
 
 		if ( !$res ) {
-			return array();
+			return [];
 		}
 
-		$ids = array();
+		$ids = [];
 		foreach ( $res as $row ) {
 			$title = Title::makeTitle( $row->page_namespace, $row->page_title );
 
@@ -138,17 +138,17 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 		}
 
 		$row = $db->selectRow(
-			array( 'page', 'redirect' ),
-			array( 'page_id', 'rd_namespace', 'rd_title' ),
-			array(
+			[ 'page', 'redirect' ],
+			[ 'page_id', 'rd_namespace', 'rd_title' ],
+			[
 				'page_title' => $title->getDBkey(),
 				'page_namespace' => $title->getNamespace()
-			),
+			],
 			__METHOD__,
-			array(),
-			array(
-				'redirect' => array( 'LEFT JOIN', 'rd_from=page_id' )
-			)
+			[],
+			[
+				'redirect' => [ 'LEFT JOIN', 'rd_from=page_id' ]
+			]
 		);
 
 		try {

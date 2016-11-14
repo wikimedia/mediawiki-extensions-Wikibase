@@ -77,16 +77,16 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 	 * @param EntityId[] $entityIds
 	 */
 	private function setEntityIds( array $entityIds ) {
-		$this->entityInfo = array();
+		$this->entityInfo = [];
 
 		foreach ( $entityIds as $entityId ) {
 			$key = $entityId->getSerialization();
 			$type = $entityId->getEntityType();
 
-			$this->entityInfo[$key] = array(
+			$this->entityInfo[$key] = [
 				'id' => $key,
 				'type' => $type,
-			);
+			];
 		}
 	}
 
@@ -118,7 +118,7 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 	public function resolveRedirects() {
 		$ids = array_keys( $this->entityInfo );
 
-		$this->redirects = array();
+		$this->redirects = [];
 
 		foreach ( $ids as $idString ) {
 			$id = $this->parseId( $idString );
@@ -222,44 +222,44 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 
 	private function injectLabels( array &$entityRecord, TermList $labels ) {
 		if ( !isset( $entityRecord['labels'] ) ) {
-			$entityRecord['labels'] = array();
+			$entityRecord['labels'] = [];
 		}
 
 		foreach ( $labels->toTextArray() as $lang => $text ) {
-			$entityRecord['labels'][$lang] = array(
+			$entityRecord['labels'][$lang] = [
 				'language' => $lang,
 				'value' => $text,
-			);
+			];
 		}
 	}
 
 	private function injectDescriptions( array &$entityRecord, TermList $descriptions ) {
 		if ( !isset( $entityRecord['descriptions'] ) ) {
-			$entityRecord['descriptions'] = array();
+			$entityRecord['descriptions'] = [];
 		}
 
 		foreach ( $descriptions->toTextArray() as $lang => $text ) {
-			$entityRecord['descriptions'][$lang] = array(
+			$entityRecord['descriptions'][$lang] = [
 				'language' => $lang,
 				'value' => $text,
-			);
+			];
 		}
 	}
 
 	private function injectAliases( array &$entityRecord, AliasGroupList $aliasGroups ) {
 		if ( !isset( $entityRecord['aliases'] ) ) {
-			$entityRecord['aliases'] = array();
+			$entityRecord['aliases'] = [];
 		}
 
 		foreach ( $aliasGroups->toArray() as $aliasGroup ) {
 			$lang = $aliasGroup->getLanguageCode();
-			$entityRecord['aliases'][$lang] = array();
+			$entityRecord['aliases'][$lang] = [];
 
 			foreach ( $aliasGroup->getAliases() as $text ) {
-				$entityRecord['aliases'][$lang][] = array( // note: append
+				$entityRecord['aliases'][$lang][] = [ // note: append
 					'language' => $lang,
 					'value' => $text,
-				);
+				];
 			}
 		}
 	}

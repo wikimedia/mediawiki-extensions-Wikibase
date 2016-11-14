@@ -148,27 +148,27 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 			$this->getLanguage()->getCode()
 		);
 
-		$options = array(
+		$options = [
 			$this->msg( 'wikibase-listproperties-all' )->text() => ''
-		);
+		];
 		$options = array_merge( $options, array_flip( $dataTypeSelect->getOptionsArray() ) );
 
-		$formDescriptor = array(
-			'datatype' => array(
+		$formDescriptor = [
+			'datatype' => [
 				'name' => 'datatype',
 				'type' => 'select',
 				'id' => 'wb-listproperties-datatype',
 				'label-message' => 'wikibase-listproperties-datatype',
 				'options' => $options,
 				'default' => $this->dataType
-			),
-			'submit' => array(
+			],
+			'submit' => [
 				'name' => '',
 				'type' => 'submit',
 				'id' => 'wikibase-listproperties-submit',
 				'default' => $this->msg( 'wikibase-listproperties-submit' )->text()
-			)
-		);
+			]
+		];
 
 		HTMLForm::factory( 'inline', $formDescriptor, $this->getContext() )
 			->setId( 'wb-listproperties-form' )
@@ -197,25 +197,25 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 
 		$row = Html::rawElement(
 			'a',
-			array(
+			[
 				'title' => $title ? $title->getPrefixedText() : $propertyId->getSerialization(),
 				'href' => $title ? $title->getLocalURL() : ''
-			),
+			],
 			Html::rawElement(
 				'span',
-				array( 'class' => 'wb-itemlink' ),
+				[ 'class' => 'wb-itemlink' ],
 				Html::element(
 					'span',
-					array(
+					[
 						'class' => 'wb-itemlink-label',
 						'lang' => $labelTerm ? $labelTerm->getLanguageCode() : '',
-					),
+					],
 					$labelTerm ? $labelTerm->getText() : ''
 				) .
 				( $labelTerm ? ' ' : '' ) .
 				Html::element(
 					'span',
-					array( 'class' => 'wb-itemlink-id' ),
+					[ 'class' => 'wb-itemlink-id' ],
 					'(' . $propertyId->getSerialization() . ')'
 				)
 			)
@@ -233,7 +233,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	protected function getResult( $offset = 0, $limit = 0 ) {
 		$propertyInfo = array_slice( $this->getPropertyInfo(), $offset, $limit, true );
 
-		$propertyIds = array();
+		$propertyIds = [];
 
 		foreach ( $propertyInfo as $numericId => $info ) {
 			$propertyIds[] = PropertyId::newFromNumber( $numericId );

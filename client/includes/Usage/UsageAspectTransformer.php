@@ -47,7 +47,7 @@ class UsageAspectTransformer {
 	 */
 	public function getRelevantAspects( EntityId $entityId ) {
 		$key = $entityId->getSerialization();
-		return isset( $this->relevantAspectsPerEntity[$key] ) ? $this->relevantAspectsPerEntity[$key] : array();
+		return isset( $this->relevantAspectsPerEntity[$key] ) ? $this->relevantAspectsPerEntity[$key] : [];
 	}
 
 	/**
@@ -84,7 +84,7 @@ class UsageAspectTransformer {
 	 */
 	public function transformPageEntityUsages( PageEntityUsages $pageEntityUsages ) {
 		$entityIds = $pageEntityUsages->getEntityIds();
-		$transformedPageEntityUsages = new PageEntityUsages( $pageEntityUsages->getPageId(), array() );
+		$transformedPageEntityUsages = new PageEntityUsages( $pageEntityUsages->getPageId(), [] );
 
 		foreach ( $entityIds as $id ) {
 			$aspects = $pageEntityUsages->getUsageAspectKeys( $id );
@@ -102,7 +102,7 @@ class UsageAspectTransformer {
 	 * @return EntityUsage[]
 	 */
 	private function buildEntityUsages( EntityId $entityId, array $aspects ) {
-		$usages = array();
+		$usages = [];
 
 		foreach ( $aspects as $aspect ) {
 			list( $aspect, $modifier ) = EntityUsage::splitAspectKey( $aspect );
@@ -140,7 +140,7 @@ class UsageAspectTransformer {
 	 */
 	private function getFilteredAspects( array $aspectKeys, array $relevant ) {
 		if ( empty( $aspectKeys ) || empty( $relevant ) ) {
-			return array();
+			return [];
 		}
 
 		if ( in_array( EntityUsage::ALL_USAGE, $aspectKeys ) ) {

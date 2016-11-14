@@ -23,9 +23,9 @@ class LabelCountFieldTest extends PHPUnit_Framework_TestCase {
 	public function testGetMapping() {
 		$labelCountField = new LabelCountField();
 
-		$expected = array(
+		$expected = [
 			'type' => 'integer'
-		);
+		];
 
 		$this->assertSame( $expected, $labelCountField->getMapping() );
 	}
@@ -43,10 +43,10 @@ class LabelCountFieldTest extends PHPUnit_Framework_TestCase {
 		$item = new Item();
 		$item->getFingerprint()->setLabel( 'es', 'Gato' );
 
-		return array(
-			array( 1, $item ),
-			array( 0, Property::newFromType( 'string' ) )
-		);
+		return [
+			[ 1, $item ],
+			[ 0, Property::newFromType( 'string' ) ]
+		];
 	}
 
 }

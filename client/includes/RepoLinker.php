@@ -101,7 +101,7 @@ class RepoLinker {
 	 *
 	 * @return string (html)
 	 */
-	public function formatLink( $url, $text, array $attribs = array() ) {
+	public function formatLink( $url, $text, array $attribs = [] ) {
 		$attribs['class'] = isset( $attribs['class'] )
 			? 'extiw ' . $attribs['class']
 			: 'extiw';
@@ -129,14 +129,14 @@ class RepoLinker {
 
 		$class = 'wb-entity-link';
 
-		if ( $classes !== array() ) {
+		if ( $classes !== [] ) {
 			$class .= ' ' . implode( ' ', $classes );
 		}
 
 		return $this->formatLink(
 			$this->getEntityUrl( $entityId ),
 			$text,
-			array( 'class' => $class )
+			[ 'class' => $class ]
 		);
 	}
 

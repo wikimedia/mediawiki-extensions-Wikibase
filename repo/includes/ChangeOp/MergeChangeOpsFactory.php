@@ -60,7 +60,7 @@ class MergeChangeOpsFactory {
 	public function newMergeOps(
 		Item $fromItem,
 		Item $toItem,
-		array $ignoreConflicts = array()
+		array $ignoreConflicts = []
 	) {
 		return new ChangeOpsMerge(
 			$fromItem,

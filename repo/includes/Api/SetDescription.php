@@ -59,7 +59,7 @@ class SetDescription extends ModifyTerm {
 		$resultBuilder = $this->getResultBuilder();
 
 		if ( $descriptions->hasTermForLanguage( $language ) ) {
-			$termList = $descriptions->getWithLanguages( array( $language ) );
+			$termList = $descriptions->getWithLanguages( [ $language ] );
 			$resultBuilder->addDescriptions( $termList, 'entity' );
 		} else {
 			$resultBuilder->addRemovedDescription( $language, 'entity' );
@@ -112,12 +112,12 @@ class SetDescription extends ModifyTerm {
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
-		return array(
+		return [
 			'action=wbsetdescription&id=Q42&language=en&value=An%20encyclopedia%20that%20everyone%20can%20edit'
 				=> 'apihelp-wbsetdescription-example-1',
 			'action=wbsetdescription&site=enwiki&title=Wikipedia&language=en&value=An%20encyclopedia%20that%20everyone%20can%20edit'
 				=> 'apihelp-wbsetdescription-example-2',
-		);
+		];
 	}
 
 }

@@ -22,10 +22,10 @@ class MessageSnakFormatter implements SnakFormatter {
 	/**
 	 * @var string[]
 	 */
-	private static $snakTypeCssClasses = array(
+	private static $snakTypeCssClasses = [
 		'somevalue' => 'wikibase-snakview-variation-somevaluesnak',
 		'novalue' => 'wikibase-snakview-variation-novaluesnak',
-	);
+	];
 
 	/**
 	 * @var string One of the SnakFormatter::FORMAT_... constants.
@@ -97,7 +97,7 @@ class MessageSnakFormatter implements SnakFormatter {
 			if ( array_key_exists( $this->snakType, self::$snakTypeCssClasses ) ) {
 				$html = Html::rawElement(
 					'span',
-					array( 'class' => self::$snakTypeCssClasses[$this->snakType] ),
+					[ 'class' => self::$snakTypeCssClasses[$this->snakType] ],
 					$html
 				);
 			}

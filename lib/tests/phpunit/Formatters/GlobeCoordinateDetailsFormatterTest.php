@@ -46,25 +46,25 @@ class GlobeCoordinateDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function quantityFormatProvider() {
-		$options = new FormatterOptions( array(
+		$options = new FormatterOptions( [
 			ValueFormatter::OPT_LANG => 'en'
-		) );
+		] );
 
-		return array(
-			array(
+		return [
+			[
 				new GlobeCoordinateValue( new LatLongValue( 50, 11 ), 1, GlobeCoordinateValue::GLOBE_EARTH ),
 				$options,
 				'@' . implode( '.*',
-					array(
+					[
 						'<h4[^<>]*>[^<>]*50[^<>]+11[^<>]*</h4>',
 						'<td[^<>]*>[^<>]*50[^<>]*</td>',
 						'<td[^<>]*>[^<>]*11[^<>]*</td>',
 						'<td[^<>]*>[^<>]*1[^<>]*</td>',
 						'<td[^<>]*>[^<>]*<a[^<>]*>[^<>]*.*formatted-globe-Q2[^<>]*</a>[^<>]*</td>',
-					)
+					]
 				) . '@s'
-			),
-		);
+			],
+		];
 	}
 
 	public function testFormatError() {
@@ -78,8 +78,8 @@ class GlobeCoordinateDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 	public function testEscaping() {
 		$value = $this->getMock(
 			GlobeCoordinateValue::class,
-			array( 'getLatitude', 'getLongitude', 'getPrecision' ),
-			array( new LatLongValue( 0, 0 ), null, '<GLOBE>' )
+			[ 'getLatitude', 'getLongitude', 'getPrecision' ],
+			[ new LatLongValue( 0, 0 ), null, '<GLOBE>' ]
 		);
 		$value->expects( $this->any() )
 			->method( 'getLatitude' )

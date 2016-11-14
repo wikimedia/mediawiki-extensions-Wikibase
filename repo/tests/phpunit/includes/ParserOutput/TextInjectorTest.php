@@ -19,7 +19,7 @@ class TextInjectorTest extends \PHPUnit_Framework_TestCase {
 		$injector = new TextInjector();
 		$this->assertEmpty( $injector->getMarkers() );
 
-		$injector = new TextInjector( array( 'test' => array( 'foo', 'bar' ) ) );
+		$injector = new TextInjector( [ 'test' => [ 'foo', 'bar' ] ] );
 		$this->assertArrayHasKey( 'test', $injector->getMarkers() );
 	}
 
@@ -32,10 +32,10 @@ class TextInjectorTest extends \PHPUnit_Framework_TestCase {
 		$markers = $injector->getMarkers();
 
 		$this->assertArrayHasKey( $foo, $markers );
-		$this->assertEquals( array( 'foo' ), $markers[$foo] );
+		$this->assertEquals( [ 'foo' ], $markers[$foo] );
 
 		$this->assertArrayHasKey( $bar, $markers );
-		$this->assertEquals( array( 'bar' ), $markers[$bar] );
+		$this->assertEquals( [ 'bar' ], $markers[$bar] );
 	}
 
 	public function testInject() {

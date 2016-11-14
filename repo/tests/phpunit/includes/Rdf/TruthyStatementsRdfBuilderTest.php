@@ -104,9 +104,9 @@ class TruthyStatementRdfBuilderTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function provideAddEntity() {
-		return array(
-			array( 'Q4', 'Q4_statements' ),
-		);
+		return [
+			[ 'Q4', 'Q4_statements' ],
+		];
 	}
 
 	/**

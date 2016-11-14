@@ -35,9 +35,9 @@ class CallbackFactoryTest extends PHPUnit_Framework_TestCase {
 		$callback = $instance->getCallbackToIndexTags( 'tagName' );
 		$this->assertInternalType( 'callable', $callback );
 
-		$array = array();
+		$array = [];
 		$array = $callback( $array );
-		$this->assertSame( array( '_element' => 'tagName' ), $array );
+		$this->assertSame( [ '_element' => 'tagName' ], $array );
 	}
 
 	/**
@@ -48,16 +48,16 @@ class CallbackFactoryTest extends PHPUnit_Framework_TestCase {
 		$callback = $instance->getCallbackToSetArrayType( 'default', $kvpKeyName );
 		$this->assertInternalType( 'callable', $callback );
 
-		$array = array();
+		$array = [];
 		$array = $callback( $array );
 		$this->assertSame( $expected, $array );
 	}
 
 	public function kvpKeyNameProvider() {
-		return array(
-			array( null, array( '_type' => 'default' ) ),
-			array( 'kvpKeyName', array( '_type' => 'default', '_kvpkeyname' => 'kvpKeyName' ) ),
-		);
+		return [
+			[ null, [ '_type' => 'default' ] ],
+			[ 'kvpKeyName', [ '_type' => 'default', '_kvpkeyname' => 'kvpKeyName' ] ],
+		];
 	}
 
 	public function testGetCallbackToAddDataTypeToSnaksGroupedByProperty() {
@@ -66,13 +66,13 @@ class CallbackFactoryTest extends PHPUnit_Framework_TestCase {
 		$callback = $instance->getCallbackToAddDataTypeToSnaksGroupedByProperty( $dataTypeLookup );
 		$this->assertInternalType( 'callable', $callback );
 
-		$array = array(
-			'P1' => array( array() ),
-		);
+		$array = [
+			'P1' => [ [] ],
+		];
 		$array = $callback( $array );
-		$this->assertSame( array(
-			'P1' => array( array( 'datatype' => 'propertyDataType' ) ),
-		), $array );
+		$this->assertSame( [
+			'P1' => [ [ 'datatype' => 'propertyDataType' ] ],
+		], $array );
 	}
 
 	public function testGetCallbackToAddDataTypeToSnak() {
@@ -81,14 +81,14 @@ class CallbackFactoryTest extends PHPUnit_Framework_TestCase {
 		$callback = $instance->getCallbackToAddDataTypeToSnak( $dataTypeLookup );
 		$this->assertInternalType( 'callable', $callback );
 
-		$array = array(
+		$array = [
 			'property' => 'P1',
-		);
+		];
 		$array = $callback( $array );
-		$this->assertSame( array(
+		$this->assertSame( [
 			'property' => 'P1',
 			'datatype' => 'propertyDataType',
-		), $array );
+		], $array );
 	}
 
 }

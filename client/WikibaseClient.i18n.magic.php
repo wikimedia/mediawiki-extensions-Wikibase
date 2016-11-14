@@ -8,182 +8,182 @@
  * @license GPL-2.0+
  */
 
-$magicWords = array();
+$magicWords = [];
 
 /** English (English) */
-$magicWords['en'] = array(
-	'noexternallanglinks' => array( 0, 'noexternallanglinks' ),
-	'property' => array( 0, 'property' ),
-	'statements' => array( 0, 'statements' ),
-	'wbreponame' => array( 0, 'wbreponame' ),
-);
+$magicWords['en'] = [
+	'noexternallanglinks' => [ 0, 'noexternallanglinks' ],
+	'property' => [ 0, 'property' ],
+	'statements' => [ 0, 'statements' ],
+	'wbreponame' => [ 0, 'wbreponame' ],
+];
 
 /** Arabic (العربية) */
-$magicWords['ar'] = array(
-	'noexternallanglinks' => array( 0, 'لا_وصلات_لغة_خارجية' ),
-	'property' => array( 0, 'خاصية' ),
-	'wbreponame' => array( 0, 'اسم_مستودع_وب' ),
-);
+$magicWords['ar'] = [
+	'noexternallanglinks' => [ 0, 'لا_وصلات_لغة_خارجية' ],
+	'property' => [ 0, 'خاصية' ],
+	'wbreponame' => [ 0, 'اسم_مستودع_وب' ],
+];
 
 /** Egyptian Arabic (مصرى) */
-$magicWords['arz'] = array(
-	'noexternallanglinks' => array( 0, 'من_غير_وصلات_لغه_خارجيه' ),
-	'property' => array( 0, 'خاصيه' ),
-	'wbreponame' => array( 0, 'اسم_ريبو_وب' ),
-);
+$magicWords['arz'] = [
+	'noexternallanglinks' => [ 0, 'من_غير_وصلات_لغه_خارجيه' ],
+	'property' => [ 0, 'خاصيه' ],
+	'wbreponame' => [ 0, 'اسم_ريبو_وب' ],
+];
 
 /** Czech (čeština) */
-$magicWords['cs'] = array(
-	'property' => array( 0, 'vlastnost' ),
-);
+$magicWords['cs'] = [
+	'property' => [ 0, 'vlastnost' ],
+];
 
 /** German (Deutsch) */
-$magicWords['de'] = array(
-	'noexternallanglinks' => array( 0, 'keineexternensprachlinks', 'keine_externen_sprachlinks' ),
-	'property' => array( 0, 'eigenschaft' ),
-	'wbreponame' => array( 0, 'wbrepositoriumsname' ),
-);
+$magicWords['de'] = [
+	'noexternallanglinks' => [ 0, 'keineexternensprachlinks', 'keine_externen_sprachlinks' ],
+	'property' => [ 0, 'eigenschaft' ],
+	'wbreponame' => [ 0, 'wbrepositoriumsname' ],
+];
 
 /** Zazaki (Zazaki) */
-$magicWords['diq'] = array(
-	'noexternallanglinks' => array( 0, 'tebergreyzuwaniçıniyo' ),
-	'property' => array( 0, 'nitelıg' ),
-);
+$magicWords['diq'] = [
+	'noexternallanglinks' => [ 0, 'tebergreyzuwaniçıniyo' ],
+	'property' => [ 0, 'nitelıg' ],
+];
 
 /** Esperanto (Esperanto) */
-$magicWords['eo'] = array(
-	'noexternallanglinks' => array( 0, 'neniuligiloalalialingvo' ),
-	'property' => array( 0, 'eco' ),
-);
+$magicWords['eo'] = [
+	'noexternallanglinks' => [ 0, 'neniuligiloalalialingvo' ],
+	'property' => [ 0, 'eco' ],
+];
 
 /** Spanish (español) */
-$magicWords['es'] = array(
-	'noexternallanglinks' => array( 0, 'nointerwikis' ),
-	'property' => array( 0, 'propiedad' ),
-);
+$magicWords['es'] = [
+	'noexternallanglinks' => [ 0, 'nointerwikis' ],
+	'property' => [ 0, 'propiedad' ],
+];
 
 /** Estonian (eesti) */
-$magicWords['et'] = array(
-	'noexternallanglinks' => array( 0, 'välistekeelelinkideta' ),
-	'property' => array( 0, 'omadus' ),
-);
+$magicWords['et'] = [
+	'noexternallanglinks' => [ 0, 'välistekeelelinkideta' ],
+	'property' => [ 0, 'omadus' ],
+];
 
 /** Persian (فارسی) */
-$magicWords['fa'] = array(
-	'property' => array( 0, 'ویژگی' ),
-);
+$magicWords['fa'] = [
+	'property' => [ 0, 'ویژگی' ],
+];
 
 /** Finnish (suomi) */
-$magicWords['fi'] = array(
-	'property' => array( 0, 'ominaisuus' ),
-);
+$magicWords['fi'] = [
+	'property' => [ 0, 'ominaisuus' ],
+];
 
 /** French (français) */
-$magicWords['fr'] = array(
-	'noexternallanglinks' => array( 0, 'sanslienexterne' ),
-	'property' => array( 0, 'propriété' ),
-);
+$magicWords['fr'] = [
+	'noexternallanglinks' => [ 0, 'sanslienexterne' ],
+	'property' => [ 0, 'propriété' ],
+];
 
 /** Western Frisian (Frysk) */
-$magicWords['fy'] = array(
-	'property' => array( 0, 'eigenskip' ),
-);
+$magicWords['fy'] = [
+	'property' => [ 0, 'eigenskip' ],
+];
 
 /** Hindi (हिन्दी) */
-$magicWords['hi'] = array(
-	'noexternallanglinks' => array( 0, 'कोई_अंतरविकी_कड़ियाँ_नहीं', 'कोई_अंतरविकि_कड़ियाँ_नहीं' ),
-	'property' => array( 0, 'गुण' ),
-);
+$magicWords['hi'] = [
+	'noexternallanglinks' => [ 0, 'कोई_अंतरविकी_कड़ियाँ_नहीं', 'कोई_अंतरविकि_कड़ियाँ_नहीं' ],
+	'property' => [ 0, 'गुण' ],
+];
 
 /** Korean (한국어) */
-$magicWords['ko'] = array(
-	'noexternallanglinks' => array( 0, '바깥언어링크없음', '바깥언어고리없음' ),
-	'property' => array( 0, '속성' ),
-);
+$magicWords['ko'] = [
+	'noexternallanglinks' => [ 0, '바깥언어링크없음', '바깥언어고리없음' ],
+	'property' => [ 0, '속성' ],
+];
 
 /** Luxembourgish (Lëtzebuergesch) */
-$magicWords['lb'] = array(
-	'property' => array( 0, 'Eegeschaft' ),
-);
+$magicWords['lb'] = [
+	'property' => [ 0, 'Eegeschaft' ],
+];
 
 /** Minangkabau (Baso Minangkabau) */
-$magicWords['min'] = array(
-	'noexternallanglinks' => array( 0, 'tanpainterwiki' ),
-	'property' => array( 0, 'properti' ),
-);
+$magicWords['min'] = [
+	'noexternallanglinks' => [ 0, 'tanpainterwiki' ],
+	'property' => [ 0, 'properti' ],
+];
 
 /** Macedonian (македонски) */
-$magicWords['mk'] = array(
-	'noexternallanglinks' => array( 0, 'безнадворјазврски' ),
-	'property' => array( 0, 'својство' ),
-	'wbreponame' => array( 0, 'вбскладиштеиме' ),
-);
+$magicWords['mk'] = [
+	'noexternallanglinks' => [ 0, 'безнадворјазврски' ],
+	'property' => [ 0, 'својство' ],
+	'wbreponame' => [ 0, 'вбскладиштеиме' ],
+];
 
 /** Malayalam (മലയാളം) */
-$magicWords['ml'] = array(
-	'noexternallanglinks' => array( 0, 'ബാഹ്യഭാഷാകണ്ണികൾവേണ്ട' ),
-);
+$magicWords['ml'] = [
+	'noexternallanglinks' => [ 0, 'ബാഹ്യഭാഷാകണ്ണികൾവേണ്ട' ],
+];
 
 /** Dutch (Nederlands) */
-$magicWords['nl'] = array(
-	'noexternallanglinks' => array( 0, 'geenexternetaalkoppelingen', 'geenexternetaalverwijzingen' ),
-	'property' => array( 0, 'eigenschap' ),
-);
+$magicWords['nl'] = [
+	'noexternallanglinks' => [ 0, 'geenexternetaalkoppelingen', 'geenexternetaalverwijzingen' ],
+	'property' => [ 0, 'eigenschap' ],
+];
 
 /** Norwegian Nynorsk (norsk nynorsk) */
-$magicWords['nn'] = array(
-	'noexternallanglinks' => array( 0, 'ingenspråklenkjerutanfrå' ),
-);
+$magicWords['nn'] = [
+	'noexternallanglinks' => [ 0, 'ingenspråklenkjerutanfrå' ],
+];
 
 /** Polish (polski) */
-$magicWords['pl'] = array(
-	'property' => array( 0, 'właściwość' ),
-);
+$magicWords['pl'] = [
+	'property' => [ 0, 'właściwość' ],
+];
 
 /** Portuguese (português) */
-$magicWords['pt'] = array(
-	'property' => array( 0, 'propriedade' ),
-);
+$magicWords['pt'] = [
+	'property' => [ 0, 'propriedade' ],
+];
 
 /** Brazilian Portuguese (português do Brasil) */
-$magicWords['pt-br'] = array(
-	'noexternallanglinks' => array( 0, 'naointerwikis' ),
-	'property' => array( 0, 'propriedade' ),
-);
+$magicWords['pt-br'] = [
+	'noexternallanglinks' => [ 0, 'naointerwikis' ],
+	'property' => [ 0, 'propriedade' ],
+];
 
 /** Russian (русский) */
-$magicWords['ru'] = array(
-	'property' => array( 0, 'свойство' ),
-);
+$magicWords['ru'] = [
+	'property' => [ 0, 'свойство' ],
+];
 
 /** Ukrainian (українська) */
-$magicWords['uk'] = array(
-	'noexternallanglinks' => array( 0, 'беззовнішніхпосилань' ),
-	'property' => array( 0, 'властивість' ),
-);
+$magicWords['uk'] = [
+	'noexternallanglinks' => [ 0, 'беззовнішніхпосилань' ],
+	'property' => [ 0, 'властивість' ],
+];
 
 /** Vietnamese (Tiếng Việt) */
-$magicWords['vi'] = array(
-	'noexternallanglinks' => array( 0, 'không_liên_kết_ngôn_ngữ_ngoài', 'khôngliênkếtngônngữngoài' ),
-	'property' => array( 0, 'thuộc_tính', 'thuộctính' ),
-	'wbreponame' => array( 0, 'tên_kho_wb', 'tênkhowb' ),
-);
+$magicWords['vi'] = [
+	'noexternallanglinks' => [ 0, 'không_liên_kết_ngôn_ngữ_ngoài', 'khôngliênkếtngônngữngoài' ],
+	'property' => [ 0, 'thuộc_tính', 'thuộctính' ],
+	'wbreponame' => [ 0, 'tên_kho_wb', 'tênkhowb' ],
+];
 
 /** Yiddish (ייִדיש) */
-$magicWords['yi'] = array(
-	'property' => array( 0, 'אייגנשאפט' ),
-);
+$magicWords['yi'] = [
+	'property' => [ 0, 'אייגנשאפט' ],
+];
 
 /** Simplified Chinese (中文（简体）‎) */
-$magicWords['zh-hans'] = array(
-	'noexternallanglinks' => array( 0, '无外部语言连接' ),
-	'property' => array( 0, '属性' ),
-	'wbreponame' => array( 0, 'wb报告名' ),
-);
+$magicWords['zh-hans'] = [
+	'noexternallanglinks' => [ 0, '无外部语言连接' ],
+	'property' => [ 0, '属性' ],
+	'wbreponame' => [ 0, 'wb报告名' ],
+];
 
 /** Traditional Chinese (中文（繁體）‎) */
-$magicWords['zh-hant'] = array(
-	'noexternallanglinks' => array( 0, '隱藏跨語言連結' ),
-	'property' => array( 0, '屬性' ),
-	'wbreponame' => array( 0, 'wb報表名稱' ),
-);
+$magicWords['zh-hant'] = [
+	'noexternallanglinks' => [ 0, '隱藏跨語言連結' ],
+	'property' => [ 0, '屬性' ],
+	'wbreponame' => [ 0, 'wb報表名稱' ],
+];

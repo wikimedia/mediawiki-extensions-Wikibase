@@ -23,11 +23,11 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	 * @return EntityId[]
 	 */
 	protected function getKnownRedirects() {
-		return array(
+		return [
 			'Q7' => new ItemId( 'Q2' ),
 			'Q12' => new ItemId( 'Q2' ),
 			'Q22' => new ItemId( 'Q2' ),
-		);
+		];
 	}
 
 	/**
@@ -39,14 +39,14 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 		$q1->setLabel( 'de', 'label:Q1/de' );
 		$q1->setDescription( 'en', 'description:Q1/en' );
 		$q1->setDescription( 'de', 'description:Q1/de' );
-		$q1->setAliases( 'en', array( 'alias:Q1/en#1' ) );
-		$q1->setAliases( 'de', array( 'alias:Q1/de#1', 'alias:Q1/de#2' ) );
+		$q1->setAliases( 'en', [ 'alias:Q1/en#1' ] );
+		$q1->setAliases( 'de', [ 'alias:Q1/de#1', 'alias:Q1/de#2' ] );
 
 		$q2 = new Item( new ItemId( 'Q2' ) );
 		$q2->setLabel( 'en', 'label:Q2/en' );
 		$q2->setLabel( 'de', 'label:Q2/de' );
-		$q2->setAliases( 'en', array( 'alias:Q2/en#1' ) );
-		$q2->setAliases( 'de', array( 'alias:Q2/de#1', 'alias:Q2/de#2' ) );
+		$q2->setAliases( 'en', [ 'alias:Q2/en#1' ] );
+		$q2->setAliases( 'de', [ 'alias:Q2/de#1', 'alias:Q2/de#2' ] );
 
 		$p2 = Property::newFromType( 'string' );
 		$p2->setId( new PropertyId( 'P2' ) );
@@ -54,8 +54,8 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 		$p2->setLabel( 'de', 'label:P2/de' );
 		$p2->setDescription( 'en', 'description:P2/en' );
 		$p2->setDescription( 'de', 'description:P2/de' );
-		$p2->setAliases( 'en', array( 'alias:P2/en#1' ) );
-		$p2->setAliases( 'de', array( 'alias:P2/de#1', 'alias:P2/de#2' ) );
+		$p2->setAliases( 'en', [ 'alias:P2/en#1' ] );
+		$p2->setAliases( 'de', [ 'alias:P2/de#1', 'alias:P2/de#2' ] );
 
 		$p3 = Property::newFromType( 'string' );
 		$p3->setId( new PropertyId( 'P3' ) );
@@ -64,7 +64,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 		$p3->setDescription( 'en', 'description:P3/en' );
 		$p3->setDescription( 'de', 'description:P3/de' );
 
-		return array( $q1, $q2, $p2, $p3 );
+		return [ $q1, $q2, $p2, $p3 ];
 	}
 
 	/**
@@ -75,33 +75,33 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	abstract protected function newEntityInfoBuilder( array $ids );
 
 	public function getEntityInfoProvider() {
-		return array(
-			array(
-				array(),
-				array()
-			),
+		return [
+			[
+				[],
+				[]
+			],
 
-			array(
-				array(
+			[
+				[
 					new ItemId( 'Q1' ),
 					new PropertyId( 'P3' )
-				),
-				array(
-					'Q1' => array( 'id' => 'Q1', 'type' => Item::ENTITY_TYPE ),
-					'P3' => array( 'id' => 'P3', 'type' => Property::ENTITY_TYPE ),
-				)
-			),
+				],
+				[
+					'Q1' => [ 'id' => 'Q1', 'type' => Item::ENTITY_TYPE ],
+					'P3' => [ 'id' => 'P3', 'type' => Property::ENTITY_TYPE ],
+				]
+			],
 
-			array(
-				array(
+			[
+				[
 					new ItemId( 'Q1' ),
 					new ItemId( 'Q1' ),
-				),
-				array(
-					'Q1' => array( 'id' => 'Q1', 'type' => Item::ENTITY_TYPE ),
-				)
-			),
-		);
+				],
+				[
+					'Q1' => [ 'id' => 'Q1', 'type' => Item::ENTITY_TYPE ],
+				]
+			],
+		];
 	}
 
 	/**
@@ -115,25 +115,25 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	}
 
 	public function resolveRedirectsProvider() {
-		return array(
-			'empty' => array(
-				array(),
-				array()
-			),
+		return [
+			'empty' => [
+				[],
+				[]
+			],
 
-			'some redirects' => array(
-				array(
+			'some redirects' => [
+				[
 					new ItemId( 'Q2' ),
 					new ItemId( 'Q12' ),
 					new ItemId( 'Q22' ),
-				),
-				array(
+				],
+				[
 					'Q2' => 'Q2',
 					'Q12' => 'Q2',
 					'Q22' => 'Q2',
-				),
-			),
-		);
+				],
+			],
+		];
 	}
 
 	/**
@@ -165,7 +165,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	 * @return array map if the form $language => array( 'language' => $language, 'value' => $value )
 	 */
 	protected function makeLanguageValueRecords( array $map, $language = null ) {
-		$records = array();
+		$records = [];
 
 		foreach ( $map as $key => $value ) {
 			if ( $language !== null ) {
@@ -177,10 +177,10 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 			if ( is_array( $value ) ) {
 				$records[$key] = $this->makeLanguageValueRecords( $value, $lang );
 			} else {
-				$records[$key] = array(
+				$records[$key] = [
 					'language' => $lang,
 					'value' => $value
-				);
+				];
 			}
 		}
 
@@ -188,94 +188,94 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	}
 
 	public function collectTermsProvider() {
-		return array(
-			'empty set' => array(
-				array(),
+		return [
+			'empty set' => [
+				[],
 				null,
 				null,
-				array()
-			),
+				[]
+			],
 
-			'all term types' => array(
-				array(
+			'all term types' => [
+				[
 					new ItemId( 'Q1' ),
 					new PropertyId( 'P3' ),
 					new ItemId( 'Q7' ),
-				),
+				],
 				null,
 				null,
-				array(
-					'Q1' => array( 'id' => 'Q1', 'type' => Item::ENTITY_TYPE,
-						'labels' => $this->makeLanguageValueRecords( array(
-							'en' => 'label:Q1/en', 'de' => 'label:Q1/de' ) ),
-						'descriptions' => $this->makeLanguageValueRecords( array(
-							'en' => 'description:Q1/en', 'de' => 'description:Q1/de' ) ),
-						'aliases' => $this->makeLanguageValueRecords( array(
-							'en' => array( 'alias:Q1/en#1' ),
-							'de' => array( 'alias:Q1/de#1', 'alias:Q1/de#2' ) ) ),
-					),
-					'P3' => array( 'id' => 'P3', 'type' => Property::ENTITY_TYPE,
-						'labels' => $this->makeLanguageValueRecords( array(
-							'en' => 'label:P3/en', 'de' => 'label:P3/de' ) ),
-						'descriptions' => $this->makeLanguageValueRecords( array(
-							'en' => 'description:P3/en', 'de' => 'description:P3/de' ) ),
-						'aliases' => array(),
-					),
-					'Q7' => array( 'id' => 'Q7', 'type' => Item::ENTITY_TYPE,
-						'labels' => array(),
-						'descriptions' => array(),
-						'aliases' => array()
-					),
-				)
-			),
+				[
+					'Q1' => [ 'id' => 'Q1', 'type' => Item::ENTITY_TYPE,
+						'labels' => $this->makeLanguageValueRecords( [
+							'en' => 'label:Q1/en', 'de' => 'label:Q1/de' ] ),
+						'descriptions' => $this->makeLanguageValueRecords( [
+							'en' => 'description:Q1/en', 'de' => 'description:Q1/de' ] ),
+						'aliases' => $this->makeLanguageValueRecords( [
+							'en' => [ 'alias:Q1/en#1' ],
+							'de' => [ 'alias:Q1/de#1', 'alias:Q1/de#2' ] ] ),
+					],
+					'P3' => [ 'id' => 'P3', 'type' => Property::ENTITY_TYPE,
+						'labels' => $this->makeLanguageValueRecords( [
+							'en' => 'label:P3/en', 'de' => 'label:P3/de' ] ),
+						'descriptions' => $this->makeLanguageValueRecords( [
+							'en' => 'description:P3/en', 'de' => 'description:P3/de' ] ),
+						'aliases' => [],
+					],
+					'Q7' => [ 'id' => 'Q7', 'type' => Item::ENTITY_TYPE,
+						'labels' => [],
+						'descriptions' => [],
+						'aliases' => []
+					],
+				]
+			],
 
-			'one term type' => array(
-				array(
+			'one term type' => [
+				[
 					new ItemId( 'Q1' ),
 					new PropertyId( 'P3' ),
 					new ItemId( 'Q7' ),
-				),
-				array( 'label' ),
-				array( 'de' ),
-				array(
-					'Q1' => array( 'id' => 'Q1', 'type' => Item::ENTITY_TYPE,
-						'labels' => $this->makeLanguageValueRecords( array( 'de' => 'label:Q1/de' ) ),
-					),
-					'P3' => array( 'id' => 'P3', 'type' => Property::ENTITY_TYPE,
-						'labels' => $this->makeLanguageValueRecords( array( 'de' => 'label:P3/de' ) ),
-					),
-					'Q7' => array( 'id' => 'Q7', 'type' => Item::ENTITY_TYPE, 'labels' => array() ),
-				)
-			),
+				],
+				[ 'label' ],
+				[ 'de' ],
+				[
+					'Q1' => [ 'id' => 'Q1', 'type' => Item::ENTITY_TYPE,
+						'labels' => $this->makeLanguageValueRecords( [ 'de' => 'label:Q1/de' ] ),
+					],
+					'P3' => [ 'id' => 'P3', 'type' => Property::ENTITY_TYPE,
+						'labels' => $this->makeLanguageValueRecords( [ 'de' => 'label:P3/de' ] ),
+					],
+					'Q7' => [ 'id' => 'Q7', 'type' => Item::ENTITY_TYPE, 'labels' => [] ],
+				]
+			],
 
-			'two term types' => array(
-				array(
+			'two term types' => [
+				[
 					new ItemId( 'Q1' ),
 					new PropertyId( 'P3' ),
 					new ItemId( 'Q7' ),
-				),
-				array( 'label', 'description' ),
+				],
+				[ 'label', 'description' ],
 				null,
-				array(
-					'Q1' => array( 'id' => 'Q1', 'type' => Item::ENTITY_TYPE,
-						'labels' => $this->makeLanguageValueRecords( array(
-							'en' => 'label:Q1/en', 'de' => 'label:Q1/de' ) ),
-						'descriptions' => $this->makeLanguageValueRecords( array(
-							'en' => 'description:Q1/en', 'de' => 'description:Q1/de' ) )
-					),
-					'P3' => array( 'id' => 'P3', 'type' => Property::ENTITY_TYPE,
-						'labels' => $this->makeLanguageValueRecords( array(
-							'en' => 'label:P3/en', 'de' => 'label:P3/de' ) ),
-						'descriptions' => $this->makeLanguageValueRecords( array(
-							'en' => 'description:P3/en', 'de' => 'description:P3/de' ) )
-					),
-					'Q7' => array( 'id' => 'Q7', 'type' => Item::ENTITY_TYPE,
-						'labels' => array(),
-						'descriptions' => array()
-					),
-				)
-			),
-		);
+				[
+					'Q1' => [ 'id' => 'Q1', 'type' => Item::ENTITY_TYPE,
+						'labels' => $this->makeLanguageValueRecords( [
+							'en' => 'label:Q1/en', 'de' => 'label:Q1/de' ] ),
+						'descriptions' => $this->makeLanguageValueRecords( [
+							'en' => 'description:Q1/en', 'de' => 'description:Q1/de' ] )
+					],
+					'P3' => [ 'id' => 'P3', 'type' => Property::ENTITY_TYPE,
+						'labels' => $this->makeLanguageValueRecords( [
+							'en' => 'label:P3/en', 'de' => 'label:P3/de' ] ),
+						'descriptions' => $this->makeLanguageValueRecords( [
+							'en' => 'description:P3/en', 'de' => 'description:P3/de' ] )
+					],
+					'Q7' => [ 'id' => 'Q7', 'type' => Item::ENTITY_TYPE,
+						'labels' => [],
+						'descriptions' => []
+					],
+				]
+			],
+		];
 	}
 
 	/**
@@ -303,24 +303,24 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	}
 
 	public function testCollectTerms_redirect() {
-		$ids = array( new ItemId( 'Q7' ), new ItemId( 'Q1' ) );
+		$ids = [ new ItemId( 'Q7' ), new ItemId( 'Q1' ) ];
 
-		$expected = array(
-			'Q1' => array( 'id' => 'Q1', 'type' => Item::ENTITY_TYPE,
-				'labels' => $this->makeLanguageValueRecords( array( 'de' => 'label:Q1/de' ) ),
-			),
-			'Q2' => array( 'id' => 'Q2', 'type' => Item::ENTITY_TYPE,
-				'labels' => $this->makeLanguageValueRecords( array( 'de' => 'label:Q2/de' ) ),
-			),
-			'Q7' => array( 'id' => 'Q2', 'type' => Item::ENTITY_TYPE,
-				'labels' => $this->makeLanguageValueRecords( array( 'de' => 'label:Q2/de' ) ),
-		)
-		);
+		$expected = [
+			'Q1' => [ 'id' => 'Q1', 'type' => Item::ENTITY_TYPE,
+				'labels' => $this->makeLanguageValueRecords( [ 'de' => 'label:Q1/de' ] ),
+			],
+			'Q2' => [ 'id' => 'Q2', 'type' => Item::ENTITY_TYPE,
+				'labels' => $this->makeLanguageValueRecords( [ 'de' => 'label:Q2/de' ] ),
+			],
+			'Q7' => [ 'id' => 'Q2', 'type' => Item::ENTITY_TYPE,
+				'labels' => $this->makeLanguageValueRecords( [ 'de' => 'label:Q2/de' ] ),
+		]
+		];
 
 		$builder = $this->newEntityInfoBuilder( $ids );
 
 		$builder->resolveRedirects();
-		$builder->collectTerms( array( 'label' ), array( 'de' ) );
+		$builder->collectTerms( [ 'label' ], [ 'de' ] );
 		$entityInfo = $builder->getEntityInfo()->asArray();
 
 		$this->assertEquals( array_keys( $expected ), array_keys( $entityInfo ) );
@@ -334,27 +334,27 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	}
 
 	public function collectDataTypesProvider() {
-		return array(
-			array(
-				array(),
-				array()
-			),
+		return [
+			[
+				[],
+				[]
+			],
 
-			array(
-				array(
+			[
+				[
 					new PropertyId( 'P2' ),
 					new PropertyId( 'P3' ),
 					new ItemId( 'Q7' ),
 					new PropertyId( 'P7' ),
-				),
-				array(
-					'P2' => array( 'id' => 'P2', 'type' => Property::ENTITY_TYPE, 'datatype' => 'string' ),
-					'P3' => array( 'id' => 'P3', 'type' => Property::ENTITY_TYPE, 'datatype' => 'string' ),
-					'Q7' => array( 'id' => 'Q7', 'type' => Item::ENTITY_TYPE ),
-					'P7' => array( 'id' => 'P7', 'type' => Property::ENTITY_TYPE, 'datatype' => null ),
-				)
-			),
-		);
+				],
+				[
+					'P2' => [ 'id' => 'P2', 'type' => Property::ENTITY_TYPE, 'datatype' => 'string' ],
+					'P3' => [ 'id' => 'P3', 'type' => Property::ENTITY_TYPE, 'datatype' => 'string' ],
+					'Q7' => [ 'id' => 'Q7', 'type' => Item::ENTITY_TYPE ],
+					'P7' => [ 'id' => 'P7', 'type' => Property::ENTITY_TYPE, 'datatype' => null ],
+				]
+			],
+		];
 	}
 
 	/**
@@ -377,41 +377,41 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	}
 
 	public function removeMissingAndRedirectsProvider() {
-		return array(
-			'empty' => array(
-				array(),
-				array()
-			),
+		return [
+			'empty' => [
+				[],
+				[]
+			],
 
-			'found' => array(
-				array(
+			'found' => [
+				[
 					new ItemId( 'Q2' ),
-				),
-				array(
-					'Q2' => array( 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ),
-				),
-			),
+				],
+				[
+					'Q2' => [ 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ],
+				],
+			],
 
-			'missing' => array(
-				array(
+			'missing' => [
+				[
 					new ItemId( 'Q77' ),
-				),
-				array()
-			),
+				],
+				[]
+			],
 
-			'some found' => array(
-				array(
+			'some found' => [
+				[
 					new ItemId( 'Q2' ),
 					new PropertyId( 'P7' ),
 					new ItemId( 'Q7' ),
 					new PropertyId( 'P2' ),
-				),
-				array(
-					'P2' => array( 'id' => 'P2', 'type' => Property::ENTITY_TYPE ),
-					'Q2' => array( 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ),
-				)
-			),
-		);
+				],
+				[
+					'P2' => [ 'id' => 'P2', 'type' => Property::ENTITY_TYPE ],
+					'Q2' => [ 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ],
+				]
+			],
+		];
 	}
 
 	/**
@@ -427,44 +427,44 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	}
 
 	public function removeMissingButKeepRedirects() {
-		return array(
-			'empty' => array(
-				array(),
-				array()
-			),
+		return [
+			'empty' => [
+				[],
+				[]
+			],
 
-			'unrelated redirect' => array(
-				array(
+			'unrelated redirect' => [
+				[
 					new ItemId( 'Q2' ),
-				),
-				array(
-					'Q2' => array( 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ),
-				),
-			),
+				],
+				[
+					'Q2' => [ 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ],
+				],
+			],
 
-			'redirect resolved' => array(
-				array(
+			'redirect resolved' => [
+				[
 					new ItemId( 'Q7' ),
-				),
-				array(
-					'Q7' => array( 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ),
-				),
-			),
+				],
+				[
+					'Q7' => [ 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ],
+				],
+			],
 
-			'some found, some resolved' => array(
-				array(
+			'some found, some resolved' => [
+				[
 					new ItemId( 'Q2' ),
 					new PropertyId( 'P7' ),
 					new ItemId( 'Q7' ),
 					new PropertyId( 'P2' ),
-				),
-				array(
-					'P2' => array( 'id' => 'P2', 'type' => Property::ENTITY_TYPE ),
-					'Q2' => array( 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ),
-					'Q7' => array( 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ),
-				)
-			),
-		);
+				],
+				[
+					'P2' => [ 'id' => 'P2', 'type' => Property::ENTITY_TYPE ],
+					'Q2' => [ 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ],
+					'Q7' => [ 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ],
+				]
+			],
+		];
 	}
 
 	/**
@@ -480,33 +480,33 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	}
 
 	public function removeEntityInfoProvider() {
-		return array(
-			'empty' => array(
-				array(),
-				array(),
-				array(),
-			),
-			'remove nonexisting' => array(
-				array(
+		return [
+			'empty' => [
+				[],
+				[],
+				[],
+			],
+			'remove nonexisting' => [
+				[
 					new ItemId( 'Q1' ),
-				),
-				array(
+				],
+				[
 					new ItemId( 'Q2' ),
-				),
-				array( 'Q1' ),
-			),
-			'remove some' => array(
-				array(
+				],
+				[ 'Q1' ],
+			],
+			'remove some' => [
+				[
 					new ItemId( 'Q1' ),
 					new ItemId( 'Q2' ),
 					new ItemId( 'Q3' ),
-				),
-				array(
+				],
+				[
 					new ItemId( 'Q2' ),
-				),
-				array( 'Q1', 'Q3' ),
-			),
-		);
+				],
+				[ 'Q1', 'Q3' ],
+			],
+		];
 	}
 
 	/**
@@ -522,33 +522,33 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	}
 
 	public function retainEntityInfoProvider() {
-		return array(
-			'empty' => array(
-				array(),
-				array(),
-				array(),
-			),
-			'retain nonexisting' => array(
-				array(
+		return [
+			'empty' => [
+				[],
+				[],
+				[],
+			],
+			'retain nonexisting' => [
+				[
 					new ItemId( 'Q1' ),
-				),
-				array(
+				],
+				[
 					new ItemId( 'Q2' ),
-				),
-				array(),
-			),
-			'retain some' => array(
-				array(
+				],
+				[],
+			],
+			'retain some' => [
+				[
 					new ItemId( 'Q1' ),
 					new ItemId( 'Q2' ),
 					new ItemId( 'Q3' ),
-				),
-				array(
+				],
+				[
 					new ItemId( 'Q2' ),
-				),
-				array( 'Q2' ),
-			),
-		);
+				],
+				[ 'Q2' ],
+			],
+		];
 	}
 
 	/**

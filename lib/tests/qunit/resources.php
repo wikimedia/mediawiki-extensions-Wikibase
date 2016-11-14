@@ -10,52 +10,52 @@ return call_user_func( function() {
 	$remoteExtPathParts = explode(
 		DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR, __DIR__, 2
 	);
-	$moduleBase = array(
+	$moduleBase = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => $remoteExtPathParts[1],
-	);
+	];
 
-	$modules = array(
-		'wikibase.tests.qunit.testrunner' => $moduleBase + array(
+	$modules = [
+		'wikibase.tests.qunit.testrunner' => $moduleBase + [
 			'scripts' => 'data/testrunner.js',
-			'dependencies' => array(
+			'dependencies' => [
 				'test.mediawiki.qunit.testrunner',
 				'wikibase',
-			),
+			],
 			'position' => 'top'
-		),
+		],
 
-		'wikibase.Site.tests' => $moduleBase + array(
-			'scripts' => array(
+		'wikibase.Site.tests' => $moduleBase + [
+			'scripts' => [
 				'wikibase.Site.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.Site',
-			),
-		),
+			],
+		],
 
-		'wikibase.sites.tests' => $moduleBase + array(
-			'scripts' => array(
+		'wikibase.sites.tests' => $moduleBase + [
+			'scripts' => [
 				'wikibase.sites.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase',
 				'wikibase.Site',
 				'wikibase.sites',
 				'wikibase.tests.qunit.testrunner',
-			),
-		),
+			],
+		],
 
-		'wikibase.tests' => $moduleBase + array(
-			'scripts' => array(
+		'wikibase.tests' => $moduleBase + [
+			'scripts' => [
 				'wikibase.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase',
-			),
-		),
+			],
+		],
 
-	);
+	];
 
 	return array_merge(
 		$modules,

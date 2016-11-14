@@ -92,7 +92,7 @@ class SkinTemplateOutputPageBeforeExecHandler {
 			&& ( $noExternalLangLinks === null || !in_array( '*', $noExternalLangLinks ) )
 			&& $action === 'view'
 		) {
-			$template->set( 'language_urls', array() );
+			$template->set( 'language_urls', [] );
 		}
 
 		return true;

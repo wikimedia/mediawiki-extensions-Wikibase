@@ -56,17 +56,17 @@ if ( ( !defined( 'WIKIBASE_DATAMODEL_VERSION' ) || !defined( 'Diff_VERSION' ) ||
 call_user_func( function() {
 	global $wgExtensionCredits, $wgJobClasses, $wgHooks, $wgResourceModules, $wgMessagesDirs;
 
-	$wgExtensionCredits['wikibase'][] = array(
+	$wgExtensionCredits['wikibase'][] = [
 		'path' => __DIR__,
 		'name' => 'WikibaseLib',
 		'version' => WBL_VERSION,
-		'author' => array(
+		'author' => [
 			'The Wikidata team', // TODO: link?
-		),
+		],
 		'url' => 'https://www.mediawiki.org/wiki/Extension:WikibaseLib',
 		'descriptionmsg' => 'wikibase-lib-desc',
 		'license-name' => 'GPL-2.0+'
-	);
+	];
 
 	define( 'SUMMARY_MAX_LENGTH', 250 );
 

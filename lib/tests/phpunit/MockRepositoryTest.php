@@ -170,7 +170,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetLinks() {
-		$cases = array();
+		$cases = [];
 
 		$a = new Item( new ItemId( 'Q1' ) );
 		$a->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
@@ -180,71 +180,71 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$b->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Bar' );
 		$b->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Xoo' );
 
-		$items = array( $a, $b );
+		$items = [ $a, $b ];
 
 		// #0: all ---------
-		$cases[] = array( $items,
-			array(), // items
-			array(), // sites
-			array(), // pages
-			array( // expected
-				array( 'enwiki', 'Foo', 1 ),
-				array( 'dewiki', 'Bar', 1 ),
-				array( 'enwiki', 'Bar', 2 ),
-				array( 'dewiki', 'Xoo', 2 ),
-			)
-		);
+		$cases[] = [ $items,
+			[], // items
+			[], // sites
+			[], // pages
+			[ // expected
+				[ 'enwiki', 'Foo', 1 ],
+				[ 'dewiki', 'Bar', 1 ],
+				[ 'enwiki', 'Bar', 2 ],
+				[ 'dewiki', 'Xoo', 2 ],
+			]
+		];
 
 		// #1: mismatch ---------
-		$cases[] = array( $items,
-			array(), // items
-			array( 'enwiki' ), // sites
-			array( 'Xoo' ), // pages
-			array() // expected
-		);
+		$cases[] = [ $items,
+			[], // items
+			[ 'enwiki' ], // sites
+			[ 'Xoo' ], // pages
+			[] // expected
+		];
 
 		// #2: by item ---------
-		$cases[] = array( $items,
-			array( 1 ), // items
-			array(), // sites
-			array(), // pages
-			array( // expected
-				array( 'enwiki', 'Foo', 1 ),
-				array( 'dewiki', 'Bar', 1 ),
-			)
-		);
+		$cases[] = [ $items,
+			[ 1 ], // items
+			[], // sites
+			[], // pages
+			[ // expected
+				[ 'enwiki', 'Foo', 1 ],
+				[ 'dewiki', 'Bar', 1 ],
+			]
+		];
 
 		// #3: by site ---------
-		$cases[] = array( $items,
-			array(), // items
-			array( 'enwiki' ), // sites
-			array(), // pages
-			array( // expected
-				array( 'enwiki', 'Foo', 1 ),
-				array( 'enwiki', 'Bar', 2 ),
-			)
-		);
+		$cases[] = [ $items,
+			[], // items
+			[ 'enwiki' ], // sites
+			[], // pages
+			[ // expected
+				[ 'enwiki', 'Foo', 1 ],
+				[ 'enwiki', 'Bar', 2 ],
+			]
+		];
 
 		// #4: by page ---------
-		$cases[] = array( $items,
-			array(), // items
-			array(), // sites
-			array( 'Bar' ), // pages
-			array( // expected
-				array( 'dewiki', 'Bar', 1 ),
-				array( 'enwiki', 'Bar', 2 ),
-			)
-		);
+		$cases[] = [ $items,
+			[], // items
+			[], // sites
+			[ 'Bar' ], // pages
+			[ // expected
+				[ 'dewiki', 'Bar', 1 ],
+				[ 'enwiki', 'Bar', 2 ],
+			]
+		];
 
 		// #5: by site and page ---------
-		$cases[] = array( $items,
-			array(), // items
-			array( 'dewiki' ), // sites
-			array( 'Bar' ), // pages
-			array( // expected
-				array( 'dewiki', 'Bar', 1 ),
-			)
-		);
+		$cases[] = [ $items,
+			[], // items
+			[ 'dewiki' ], // sites
+			[ 'Bar' ], // pages
+			[ // expected
+				[ 'dewiki', 'Bar', 1 ],
+			]
+		];
 
 		return $cases;
 	}
@@ -263,39 +263,39 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetEntities() {
-		return array(
-			array( // #0: empty
-				array(), // ids
-				array(), // expected
-			),
+		return [
+			[ // #0: empty
+				[], // ids
+				[], // expected
+			],
 
-			array( // #1: some entities
-				array( // ids
+			[ // #1: some entities
+				[ // ids
 					'Q1',
 					'Q2',
-				),
-				array( // expected
-					'Q1' => array(
+				],
+				[ // expected
+					'Q1' => [
 						'de' => 'eins',
 						'en' => 'one',
-					),
-					'Q2' => array(
+					],
+					'Q2' => [
 						'en' => 'two',
-					),
-				),
-			),
+					],
+				],
+			],
 
-			array( // #2: bad ID
-				array( 'Q1', 'Q22' ), // ids
-				array( // expected
-					'Q1' => array(
+			[ // #2: bad ID
+				[ 'Q1', 'Q22' ], // ids
+				[ // expected
+					'Q1' => [
 						'en' => 'one',
 						'de' => 'eins',
-					),
+					],
 					'Q22' => null,
-				),
-			)
-		);
+				],
+			]
+		];
 	}
 
 	protected function setupGetEntities() {
@@ -365,7 +365,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 		// extract map of entity IDs to label arrays.
 		/* @var EntityDocument $e  */
-		$actual = array();
+		$actual = [];
 		foreach ( $entities as $key => $e ) {
 			if ( is_object( $e ) ) {
 				$actual[ $e->getId()->getSerialization() ] = $e->getFingerprint()->getLabels()->toTextArray();
@@ -402,10 +402,10 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 		// check link retrieval
 		$this->assertEquals(
-			array(
+			[
 				new SiteLink( 'dewiki', 'Xoo' ),
 				new SiteLink( 'enwiki', 'Foo' ),
-			),
+			],
 			$this->repo->getSiteLinksForItem( $one->getId() )
 		);
 
@@ -432,40 +432,40 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$fifthItem->setLabel( 'en', 'one' );
 		$fifthItem->setLabel( 'de', 'eins' );
 
-		return array(
-			'fresh' => array(
+		return [
+			'fresh' => [
 				'entity' => $item,
 				'flags' => EDIT_NEW,
 				'baseRevid' => false,
-			),
+			],
 
-			'update' => array(
+			'update' => [
 				'entity' => $secondItem,
 				'flags' => EDIT_UPDATE,
 				'baseRevid' => 1011,
-			),
+			],
 
-			'not fresh' => array(
+			'not fresh' => [
 				'entity' => $thirdItem,
 				'flags' => EDIT_NEW,
 				'baseRevid' => false,
 				'error' => StorageException::class
-			),
+			],
 
-			'not exists' => array(
+			'not exists' => [
 				'entity' => $fourthItem,
 				'flags' => EDIT_UPDATE,
 				'baseRevid' => false,
 				'error' => StorageException::class
-			),
+			],
 
-			'bad base' => array(
+			'bad base' => [
 				'entity' => $fifthItem,
 				'flags' => EDIT_UPDATE,
 				'baseRevid' => 1234,
 				'error' => StorageException::class
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -684,7 +684,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$mock->putRedirect( new EntityRedirect( $q555, $q5 ) );
 
 		$this->assertEmpty( $mock->getRedirectIds( $q55 ), 'no redirects to redirect' );
-		$this->assertEquals( array( $q55, $q555 ), $mock->getRedirectIds( $q5 ), 'two redirects' );
+		$this->assertEquals( [ $q55, $q555 ], $mock->getRedirectIds( $q5 ), 'two redirects' );
 	}
 
 	public function testGetRedirectForEntityId() {

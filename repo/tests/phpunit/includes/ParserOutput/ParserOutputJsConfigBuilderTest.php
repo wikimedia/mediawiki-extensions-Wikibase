@@ -103,7 +103,7 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 
 	public function assertSerializationEqualsEntity( EntityDocument $entity, $serialization ) {
 		$deserializerFactory = new DeserializerFactory(
-			new DataValueDeserializer( array( 'string' => StringValue::class ) ),
+			new DataValueDeserializer( [ 'string' => StringValue::class ] ),
 			new BasicEntityIdParser()
 		);
 
@@ -138,37 +138,37 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 	}
 
 	private function getSerialization( EntityDocument $entity, PropertyId $propertyId ) {
-		return array(
+		return [
 			'id' => $entity->getId()->getSerialization(),
 			'type' => $entity->getType(),
-			'labels' => array(
-				'de' => array(
+			'labels' => [
+				'de' => [
 					'language' => 'de',
 					'value' => 'Kuchen'
-				),
-				'en' => array(
+				],
+				'en' => [
 					'language' => 'en',
 					'value' => 'Cake'
-				)
-			),
-			'claims' => array(
-				$propertyId->getSerialization() => array(
-					array(
+				]
+			],
+			'claims' => [
+				$propertyId->getSerialization() => [
+					[
 						'id' => $this->makeGuid( $entity->getId() ),
-						'mainsnak' => array(
+						'mainsnak' => [
 							'snaktype' => 'value',
 							'property' => $propertyId->getSerialization(),
-							'datavalue' => array(
+							'datavalue' => [
 								'value' => 'kittens!',
 								'type' => 'string'
-							),
-						),
+							],
+						],
 						'type' => 'statement',
 						'rank' => 'normal',
-					),
-				),
-			),
-		);
+					],
+				],
+			],
+		];
 	}
 
 }

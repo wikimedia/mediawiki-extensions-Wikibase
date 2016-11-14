@@ -36,9 +36,9 @@ final class TestChanges {
 	 * @return EntityChangeFactory
 	 */
 	public static function getEntityChangeFactory() {
-		$changeClasses = array(
+		$changeClasses = [
 			Item::ENTITY_TYPE => ItemChange::class,
-		);
+		];
 
 		$factory = new EntityChangeFactory(
 			new EntityDiffer(),
@@ -50,7 +50,7 @@ final class TestChanges {
 
 	private static function getInstances() {
 		/** @var EntityChange[] $changes */
-		static $changes = array();
+		static $changes = [];
 
 		$changeFactory = self::getEntityChangeFactory();
 
@@ -106,7 +106,7 @@ final class TestChanges {
 			$changes['change-enwiki-sitelink'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
-			$new->getSiteLinkList()->setNewSiteLink( 'enwiki', 'Emmy2', array( new ItemId( 'Q17' ) ) );
+			$new->getSiteLinkList()->setNewSiteLink( 'enwiki', 'Emmy2', [ new ItemId( 'Q17' ) ] );
 			$changes['change-enwiki-sitelink-badges'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
@@ -123,7 +123,7 @@ final class TestChanges {
 			$changes['set-en-label'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
-			$new->setAliases( "en", array( "foo", "bar" ) );
+			$new->setAliases( "en", [ "foo", "bar" ] );
 			$changes['set-en-aliases'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
@@ -133,7 +133,7 @@ final class TestChanges {
 			$statement = new Statement( $snak );
 			$statement->setGuid( 'TEST$test-guid' );
 
-			$statements = new StatementList( array( $statement ) );
+			$statements = new StatementList( [ $statement ] );
 			$new->setStatements( $statements );
 			$changes['add-claim'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
@@ -151,23 +151,23 @@ final class TestChanges {
 			$changes['remove-enwiki-sitelink'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 
 			// apply all the defaults ----------
-			$defaults = array(
+			$defaults = [
 				'user_id' => 0,
 				'time' => '20130101000000',
 				'type' => 'test',
-			);
+			];
 
 			$rev = 1000;
 
 			foreach ( $changes as $key => $change ) {
-				$meta = array(
+				$meta = [
 					'page_id' => 23,
 					'bot' => false,
 					'rev_id' => $rev,
 					'parent_id' => $rev - 1,
 					'user_text' => 'Some User',
 					'comment' => "/* $key:1| */ bla bla",
-				);
+				];
 
 				$change->setMetadata( $meta );
 				self::applyDefaults( $change, $defaults );
@@ -176,7 +176,7 @@ final class TestChanges {
 			}
 		}
 
-		$clones = array();
+		$clones = [];
 
 		foreach ( $changes as $key => $change ) {
 			$clones[$key] = unserialize( serialize( $change ) );
@@ -206,7 +206,7 @@ final class TestChanges {
 		// filter info field by key
 		if ( $infoFilter !== null ) {
 			$infoFilter = array_flip( $infoFilter );
-			$filteredChanges = array();
+			$filteredChanges = [];
 
 			/* @var ChangeRow $change */
 			foreach ( $changes as $change ) {
@@ -239,13 +239,13 @@ final class TestChanges {
 	 * @return EntityDocument[]
 	 */
 	public static function getEntities() {
-		$entityList = array();
+		$entityList = [];
 
 		/** @var FingerprintProvider[] $entities */
-		$entities = array(
+		$entities = [
 			new Item( new ItemId( 'Q112' ) ),
 			new Property( new PropertyId( 'P112' ), null, 'string' ),
-		);
+		];
 
 		foreach ( $entities as $entity ) {
 			$entityList[] = $entity;

@@ -75,10 +75,10 @@ class ChangeOpStatementRank extends ChangeOpBase {
 		if ( $summary !== null ) {
 			$statementRankSerializer = new StatementRankSerializer();
 			$summary->addAutoCommentArgs(
-				array(
+				[
 					$statementRankSerializer->serialize( $oldRank ),
 					$statementRankSerializer->serialize( $this->rank )
-				)
+				]
 			);
 		}
 	}
@@ -93,7 +93,7 @@ class ChangeOpStatementRank extends ChangeOpBase {
 	protected function getSnakSummaryArgs( Snak $snak ) {
 		$propertyId = $snak->getPropertyId();
 
-		return array( array( $propertyId->getSerialization() => $snak ) );
+		return [ [ $propertyId->getSerialization() => $snak ] ];
 	}
 
 	/**

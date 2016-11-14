@@ -10,37 +10,37 @@ return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	$moduleTemplate = array(
+	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0]
-	);
+	];
 
-	$modules = array(
+	$modules = [
 
-		'wikibase.view.testViewController' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.view.testViewController' => $moduleTemplate + [
+			'scripts' => [
 				'testViewController.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.view.ViewController',
-			),
-		),
+			],
+		],
 
-		'wikibase.view.ToolbarViewController.tests' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.view.ToolbarViewController.tests' => $moduleTemplate + [
+			'scripts' => [
 				'ToolbarViewController.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.view.testViewController',
 				'wikibase.view.ToolbarViewController',
-			),
-		),
+			],
+		],
 
-		'wikibase.view.ViewFactory.tests' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.view.ViewFactory.tests' => $moduleTemplate + [
+			'scripts' => [
 				'ViewFactory.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.datamodel.Claim',
 				'wikibase.datamodel.EntityId',
 				'wikibase.datamodel.Fingerprint',
@@ -53,19 +53,19 @@ return call_user_func( function() {
 				'wikibase.entityIdFormatter.EntityIdPlainFormatter',
 				'wikibase.view.ViewFactory',
 				'wikibase.ValueViewBuilder'
-			),
-		),
+			],
+		],
 
-		'wikibase.view.ToolbarFactory.tests' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.view.ToolbarFactory.tests' => $moduleTemplate + [
+			'scripts' => [
 				'ToolbarFactory.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.view.ToolbarFactory',
-			)
-		),
+			]
+		],
 
-	);
+	];
 
 	return $modules;
 

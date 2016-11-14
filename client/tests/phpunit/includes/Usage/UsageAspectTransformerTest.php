@@ -24,89 +24,89 @@ class UsageAspectTransformerTest extends \PHPUnit_Framework_TestCase {
 		$q1 = new ItemId( 'Q1' );
 		$q99 = new ItemId( 'Q99' );
 
-		$aspects = array(
+		$aspects = [
 			EntityUsage::TITLE_USAGE,
 			EntityUsage::LABEL_USAGE,
-		);
+		];
 
 		$transformer = new UsageAspectTransformer();
 		$transformer->setRelevantAspects( $q1, $aspects );
 
 		$this->assertEquals( $aspects, $transformer->getRelevantAspects( $q1 ) );
-		$this->assertEquals( array(), $transformer->getRelevantAspects( $q99 ) );
+		$this->assertEquals( [], $transformer->getRelevantAspects( $q99 ) );
 	}
 
 	public function provideGetFilteredUsages() {
 		$q1 = new ItemId( 'Q1' );
 
-		return array(
-			'empty' => array(
+		return [
+			'empty' => [
 				$q1,
-				array(),
-				array(),
-				array()
-			),
-			'non relevant' => array(
+				[],
+				[],
+				[]
+			],
+			'non relevant' => [
 				$q1,
-				array(),
-				array( 'X' ),
-				array()
-			),
-			'non used' => array(
+				[],
+				[ 'X' ],
+				[]
+			],
+			'non used' => [
 				$q1,
-				array( 'X' ),
-				array(),
-				array()
-			),
-			'simple filter' => array(
+				[ 'X' ],
+				[],
+				[]
+			],
+			'simple filter' => [
 				$q1,
-				array( 'T', 'L' ),
-				array( 'L', 'S' ),
-				array( 'Q1#L' )
-			),
-			'all filter' => array(
+				[ 'T', 'L' ],
+				[ 'L', 'S' ],
+				[ 'Q1#L' ]
+			],
+			'all filter' => [
 				$q1,
-				array( 'X' ),
-				array( 'S', 'L' ),
-				array( 'Q1#L', 'Q1#S' )
-			),
-			'filter all' => array(
+				[ 'X' ],
+				[ 'S', 'L' ],
+				[ 'Q1#L', 'Q1#S' ]
+			],
+			'filter all' => [
 				$q1,
-				array( 'S', 'L' ),
-				array( 'X' ),
-				array( 'Q1#L', 'Q1#S' )
-			),
-			'modifier: direct match' => array(
+				[ 'S', 'L' ],
+				[ 'X' ],
+				[ 'Q1#L', 'Q1#S' ]
+			],
+			'modifier: direct match' => [
 				$q1,
-				array( 'L.de', 'L.en' ),
-				array( 'L.en', 'L.ru' ),
-				array( 'Q1#L.en' )
-			),
-			'modifier: mismatch' => array(
+				[ 'L.de', 'L.en' ],
+				[ 'L.en', 'L.ru' ],
+				[ 'Q1#L.en' ]
+			],
+			'modifier: mismatch' => [
 				$q1,
-				array( 'L.ru' ),
-				array( 'L.en' ),
-				array()
-			),
-			'modifier: match unmodified relevant' => array(
+				[ 'L.ru' ],
+				[ 'L.en' ],
+				[]
+			],
+			'modifier: match unmodified relevant' => [
 				$q1,
-				array( 'L', 'L.ru' ),
-				array( 'L.en' ),
-				array( 'Q1#L.en' )
-			),
-			'modifier: match unmodified aspect' => array(
+				[ 'L', 'L.ru' ],
+				[ 'L.en' ],
+				[ 'Q1#L.en' ]
+			],
+			'modifier: match unmodified aspect' => [
 				$q1,
-				array( 'L.en' ),
-				array( 'L', 'L.ru' ),
-				array( 'Q1#L.en' )
-			),
-			'modifier: mixed' => array(
+				[ 'L.en' ],
+				[ 'L', 'L.ru' ],
+				[ 'Q1#L.en' ]
+			],
+			'modifier: mixed' => [
 				$q1,
-				array( 'L.en', 'L' ),
-				array( 'L', 'L.ru' ),
-				array( 'Q1#L', 'Q1#L.en', 'Q1#L.ru' )
-			),
-		);
+				[ 'L.en', 'L' ],
+				[ 'L', 'L.ru' ],
+				[ 'Q1#L', 'Q1#L.en', 'Q1#L.ru' ]
+			],
+		];
 	}
 
 	/**
@@ -124,39 +124,39 @@ class UsageAspectTransformerTest extends \PHPUnit_Framework_TestCase {
 		$q1 = new ItemId( 'Q1' );
 		$q2 = new ItemId( 'Q2' );
 
-		$usages = new PageEntityUsages( 23, array(
+		$usages = new PageEntityUsages( 23, [
 			new EntityUsage( $q1, EntityUsage::LABEL_USAGE ),
 			new EntityUsage( $q1, EntityUsage::TITLE_USAGE ),
 			new EntityUsage( $q2, EntityUsage::ALL_USAGE ),
-		) );
+		] );
 
-		return array(
-			'empty' => array(
-				array(),
+		return [
+			'empty' => [
+				[],
 				$usages,
-				array()
-			),
-			'non relevant' => array(
-				array(),
+				[]
+			],
+			'non relevant' => [
+				[],
 				$usages,
-				array()
-			),
-			'simple filter' => array(
-				array(
-					'Q1' => array( 'T' ),
-				),
+				[]
+			],
+			'simple filter' => [
+				[
+					'Q1' => [ 'T' ],
+				],
 				$usages,
-				array( 'Q1#T' )
-			),
-			'all filter' => array(
-				array(
-					'Q2' => array( 'T', 'L' ),
-					'Q1' => array( 'X' ),
-				),
+				[ 'Q1#T' ]
+			],
+			'all filter' => [
+				[
+					'Q2' => [ 'T', 'L' ],
+					'Q1' => [ 'X' ],
+				],
 				$usages,
-				array( 'Q1#L', 'Q1#T', 'Q2#L', 'Q2#T' )
-			),
-		);
+				[ 'Q1#L', 'Q1#T', 'Q2#L', 'Q2#T' ]
+			],
+		];
 	}
 
 	/**

@@ -110,11 +110,11 @@ class DatabaseSchemaUpdater {
 		);
 
 		if ( $type === 'mysql' && !$updater->updateRowExists( 'ChangeChangeObjectId.sql' ) ) {
-			$updater->addExtensionUpdate( array(
+			$updater->addExtensionUpdate( [
 				'applyPatch',
 				$this->getUpdateScriptPath( 'ChangeChangeObjectId', $type ),
 				true
-			) );
+			] );
 
 			$updater->insertUpdateRow( 'ChangeChangeObjectId.sql' );
 		}
@@ -172,9 +172,9 @@ class DatabaseSchemaUpdater {
 			$updater->addExtensionTable( $table, $file );
 
 			// populate the table after creating it
-			$updater->addExtensionUpdate( array(
-				array( __CLASS__, 'rebuildPropertyInfo' )
-			) );
+			$updater->addExtensionUpdate( [
+				[ __CLASS__, 'rebuildPropertyInfo' ]
+			] );
 		}
 	}
 
@@ -224,10 +224,10 @@ class DatabaseSchemaUpdater {
 	 * @return string The directory that contains the file
 	 */
 	private function getUpdateScriptDir( $fileName ) {
-		$dirs = array(
+		$dirs = [
 			__DIR__,
 			__DIR__ . '/../../../sql'
-		);
+		];
 
 		foreach ( $dirs as $dir ) {
 			if ( file_exists( "$dir/$fileName" ) ) {
@@ -250,11 +250,11 @@ class DatabaseSchemaUpdater {
 	 * @throws MWException If the script was not found in any script directory
 	 */
 	private function getUpdateScriptPath( $name, $type ) {
-		$extensions = array(
+		$extensions = [
 			'sqlite' => 'sqlite.sql',
 			//'postgres' => 'pg.sql', // PG support is broken as of Dec 2013
 			'mysql' => 'mysql.sql',
-		);
+		];
 
 		// Find the base directory by looking for a plain ".sql" file.
 		$dir = $this->getUpdateScriptDir( "$name.sql" );

@@ -107,13 +107,13 @@ class EntityDiffVisualizer {
 		$html = '';
 
 		$termDiffVisualizer = new DiffView(
-			array(),
+			[],
 			new Diff(
-				array(
+				[
 					$this->context->getLanguage()->getMessage( 'wikibase-diffview-label' ) => $diff->getLabelsDiff(),
 					$this->context->getLanguage()->getMessage( 'wikibase-diffview-alias' ) => $diff->getAliasesDiff(),
 					$this->context->getLanguage()->getMessage( 'wikibase-diffview-description' ) => $diff->getDescriptionsDiff(),
-				),
+				],
 				true
 			),
 			$this->siteStore,
@@ -130,11 +130,11 @@ class EntityDiffVisualizer {
 		// FIXME: this does not belong here as it is specific to items
 		if ( $diff instanceof ItemDiff ) {
 			$linkDiffVisualizer = new DiffView(
-				array(),
+				[],
 				new Diff(
-					array(
+					[
 						$this->context->getLanguage()->getMessage( 'wikibase-diffview-link' ) => $diff->getSiteLinkDiff(),
-					),
+					],
 					true
 				),
 				$this->siteStore,
@@ -165,7 +165,7 @@ class EntityDiffVisualizer {
 		//TODO: localize path (keys in the diff array)
 
 		$linkDiffVisualizer = new DiffView(
-			array(),
+			[],
 			$diff,
 			$this->siteStore,
 			$this->entityIdFormatter,

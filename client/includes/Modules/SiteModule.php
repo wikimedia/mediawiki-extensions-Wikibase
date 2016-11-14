@@ -37,13 +37,13 @@ class SiteModule extends ResourceLoaderModule {
 		 */
 		$site = $wikibaseClient->getSite();
 
-		$currentSite = array();
+		$currentSite = [];
 		if ( $site ) {
-			$currentSite = array(
+			$currentSite = [
 				'globalSiteId' => $site->getGlobalId(),
 				'languageCode' => $site->getLanguageCode(),
 				'langLinkSiteGroup' => $wikibaseClient->getLangLinkSiteGroup()
-			);
+			];
 		}
 
 		return 'mediaWiki.config.set( "wbCurrentSite", ' . FormatJson::encode( $currentSite ) . ' );';

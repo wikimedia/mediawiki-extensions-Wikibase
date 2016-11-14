@@ -109,7 +109,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		$request = $this->getRequest();
 		// explode the sub page from the format Special:SetSitelink/q123/enwiki
-		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
+		$parts = ( $subPage === '' ) ? [] : explode( '/', $subPage, 2 );
 
 		// check if id belongs to an item
 		if ( $this->entityRevision !== null
@@ -133,7 +133,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		$this->page = $request->getVal( 'page' );
 
-		$this->badges = array();
+		$this->badges = [];
 		foreach ( $this->badgeItems as $badgeId => $value ) {
 			if ( $request->getVal( 'badge-' . $badgeId ) ) {
 				$this->badges[] = $badgeId;
@@ -215,24 +215,24 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$this->page = $this->site === null ? '' : $this->getSiteLink( $entity, $this->site );
 		}
 		if ( empty( $this->badges ) ) {
-			$this->badges = $this->site === null ? array() : $this->getBadges( $entity, $this->site );
+			$this->badges = $this->site === null ? [] : $this->getBadges( $entity, $this->site );
 		}
 		$pageinput = Html::element( 'br' )
 			. Html::label(
 				$this->msg( 'wikibase-setsitelink-label' )->text(),
 				'wb-setsitelink-page',
-				array(
+				[
 					'class' => 'wb-label'
-				)
+				]
 			) .
 			Html::input(
 				'page',
 				$this->getRequest()->getVal( 'page' ) ?: $this->page,
 				'text',
-				array(
+				[
 					'class' => 'wb-input',
 					'id' => 'wb-setsitelink-page',
-				)
+				]
 			);
 
 		if ( !empty( $this->badgeItems ) ) {
@@ -240,9 +240,9 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			. Html::label(
 				$this->msg( 'wikibase-setsitelink-badges' )->text(),
 				'wb-setsitelink-badges',
-				array(
+				[
 					'class' => 'wb-label'
-				)
+				]
 			)
 			. $this->getHtmlForBadges();
 		}
@@ -253,7 +253,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			// show the detailed form which also allows users to remove site links
 			return Html::rawElement(
 				'p',
-				array(),
+				[],
 				$this->msg(
 					'wikibase-setsitelink-introfull',
 					$this->getEntityTitle( $entity->getId() )->getPrefixedText(),
@@ -273,7 +273,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 			return Html::element(
 				'p',
-				array(),
+				[],
 				$intro
 			)
 			. parent::getFormElements( $entity )
@@ -281,18 +281,18 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			. Html::label(
 				$this->msg( 'wikibase-setsitelink-site' )->text(),
 				'wb-setsitelink-site',
-				array(
+				[
 					'class' => 'wb-label'
-				)
+				]
 			)
 			. Html::input(
 				'site',
 				$this->getRequest()->getVal( 'site' ) ?: $this->site,
 				'text',
-				array(
+				[
 					'class' => 'wb-input',
 					'id' => 'wb-setsitelink-site'
-				)
+				]
 			)
 			. $pageinput;
 		}
@@ -328,15 +328,15 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 			$options .= Html::rawElement(
 				'div',
-				array(
+				[
 					'class' => 'wb-label'
-				),
+				],
 				Html::check(
 					$name,
 					in_array( $idSerialization, $this->badges ),
-					array(
+					[
 						'id' => $name
-					)
+					]
 				)
 				. Html::label( $label, $name )
 			);
@@ -373,7 +373,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 */
 	private function getBadges( Item $item = null, $siteId ) {
 		if ( $item === null || !$item->getSiteLinkList()->hasLinkWithSiteId( $siteId ) ) {
-			return array();
+			return [];
 		}
 
 		return array_map(
@@ -393,7 +393,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @return ItemId[]|boolean
 	 */
 	private function parseBadges( array $badges, Status $status ) {
-		$badgesObjects = array();
+		$badgesObjects = [];
 
 		foreach ( $badges as $badge ) {
 			try {

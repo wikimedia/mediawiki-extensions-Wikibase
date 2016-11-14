@@ -56,17 +56,17 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 
 		$this->mockRepository = $this->testHelper->getMockRepository();
 
-		$this->testHelper->putEntities( array(
-			'Q1' => array(),
-			'Q2' => array(),
-			'P1' => array( 'datatype' => 'string' ),
-			'P2' => array( 'datatype' => 'string' ),
-		) );
+		$this->testHelper->putEntities( [
+			'Q1' => [],
+			'Q2' => [],
+			'P1' => [ 'datatype' => 'string' ],
+			'P2' => [ 'datatype' => 'string' ],
+		] );
 
-		$this->testHelper->putRedirects( array(
+		$this->testHelper->putRedirects( [
 			'Q11' => 'Q1',
 			'Q12' => 'Q2',
-		) );
+		] );
 	}
 
 	/**
@@ -74,7 +74,7 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 	 */
 	public function getMockEditFilterHookRunner() {
 		$mock = $this->getMockBuilder( EditFilterHookRunner::class )
-			->setMethods( array( 'run' ) )
+			->setMethods( [ 'run' ] )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->any() )
@@ -187,136 +187,136 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 		// NOTE: Any empty arrays and any fields called 'id' or 'hash' get stripped
 		//       from the result before comparing it to the expected value.
 
-		$testCases = array();
-		$testCases['labelMerge'] = array(
-			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-			array(),
-			array(),
-			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-		);
-		$testCases['identicalLabelMerge'] = array(
-			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-			array(),
-			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-		);
-		$testCases['ignoreConflictLabelMerge'] = array(
-			array( 'labels' => array(
-				'en' => array( 'language' => 'en', 'value' => 'foo' ),
-				'de' => array( 'language' => 'de', 'value' => 'berlin' )
-			) ),
-			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'bar' ) ) ),
-			array(),
-			array(
-				'labels' => array(
-				'en' => array( 'language' => 'en', 'value' => 'bar' ),
-				'de' => array( 'language' => 'de', 'value' => 'berlin' )
-			),
-				'aliases' => array( 'en' => array( array( 'language' => 'en', 'value' => 'foo' ) ) )
-			),
-			array( 'label' )
-		);
-		$testCases['descriptionMerge'] = array(
-			array( 'descriptions' => array( 'de' => array( 'language' => 'de', 'value' => 'foo' ) ) ),
-			array(),
-			array(),
-			array( 'descriptions' => array( 'de' => array( 'language' => 'de', 'value' => 'foo' ) ) ),
-		);
-		$testCases['identicalDescriptionMerge'] = array(
-			array( 'descriptions' => array( 'de' => array( 'language' => 'de', 'value' => 'foo' ) ) ),
-			array( 'descriptions' => array( 'de' => array( 'language' => 'de', 'value' => 'foo' ) ) ),
-			array(),
-			array( 'descriptions' => array( 'de' => array( 'language' => 'de', 'value' => 'foo' ) ) ),
-		);
-		$testCases['ignoreConflictDescriptionMerge'] = array(
-			array( 'descriptions' => array(
-				'en' => array( 'language' => 'en', 'value' => 'foo' ),
-				'de' => array( 'language' => 'de', 'value' => 'berlin' )
-			) ),
-			array( 'descriptions' => array( 'en' => array( 'language' => 'en', 'value' => 'bar' ) ) ),
-			array( 'descriptions' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-			array( 'descriptions' => array(
-				'en' => array( 'language' => 'en', 'value' => 'bar' ),
-				'de' => array( 'language' => 'de', 'value' => 'berlin' )
-			) ),
-			array( 'description' )
-		);
-		$testCases['aliasesMerge'] = array(
-			array( 'aliases' => array( "nl" => array( array( "language" => "nl", "value" => "Dickes B" ) ) ) ),
-			array(),
-			array(),
-			array( 'aliases' => array( "nl" => array( array( "language" => "nl", "value" => "Dickes B" ) ) ) ),
-		);
-		$testCases['aliasesMerge2'] = array(
-			array( 'aliases' => array( "nl" => array( array( "language" => "nl", "value" => "Ali1" ) ) ) ),
-			array( 'aliases' => array( "nl" => array( array( "language" => "nl", "value" => "Ali2" ) ) ) ),
-			array(),
-			array( 'aliases' => array( 'nl' => array(
-				array( 'language' => 'nl', 'value' => 'Ali2' ),
-				array( 'language' => 'nl', 'value' => 'Ali1' )
-			) ) ),
-		);
-		$testCases['sitelinksMerge'] = array(
-			array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'Foo' ) ) ),
-			array(),
-			array(),
-			array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'Foo' ) ) ),
-		);
-		$testCases['IgnoreConflictSitelinksMerge'] = array(
-			array( 'sitelinks' => array(
-				'dewiki' => array( 'site' => 'dewiki', 'title' => 'RemainFrom' ),
-				'enwiki' => array( 'site' => 'enwiki', 'title' => 'PlFrom' ),
-			) ),
-			array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'RemainTo' ) ) ),
-			array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'RemainFrom' ) ) ),
-			array( 'sitelinks' => array(
-				'dewiki' => array( 'site' => 'dewiki', 'title' => 'RemainTo' ),
-				'enwiki' => array( 'site' => 'enwiki', 'title' => 'PlFrom' ),
-			) ),
-			array( 'sitelink' )
-		);
-		$testCases['claimMerge'] = array(
-			array( 'claims' => array( 'P1' => array( array( 'mainsnak' => array(
-				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
+		$testCases = [];
+		$testCases['labelMerge'] = [
+			[ 'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ],
+			[],
+			[],
+			[ 'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ],
+		];
+		$testCases['identicalLabelMerge'] = [
+			[ 'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ],
+			[ 'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ],
+			[],
+			[ 'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ],
+		];
+		$testCases['ignoreConflictLabelMerge'] = [
+			[ 'labels' => [
+				'en' => [ 'language' => 'en', 'value' => 'foo' ],
+				'de' => [ 'language' => 'de', 'value' => 'berlin' ]
+			] ],
+			[ 'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'bar' ] ] ],
+			[],
+			[
+				'labels' => [
+				'en' => [ 'language' => 'en', 'value' => 'bar' ],
+				'de' => [ 'language' => 'de', 'value' => 'berlin' ]
+			],
+				'aliases' => [ 'en' => [ [ 'language' => 'en', 'value' => 'foo' ] ] ]
+			],
+			[ 'label' ]
+		];
+		$testCases['descriptionMerge'] = [
+			[ 'descriptions' => [ 'de' => [ 'language' => 'de', 'value' => 'foo' ] ] ],
+			[],
+			[],
+			[ 'descriptions' => [ 'de' => [ 'language' => 'de', 'value' => 'foo' ] ] ],
+		];
+		$testCases['identicalDescriptionMerge'] = [
+			[ 'descriptions' => [ 'de' => [ 'language' => 'de', 'value' => 'foo' ] ] ],
+			[ 'descriptions' => [ 'de' => [ 'language' => 'de', 'value' => 'foo' ] ] ],
+			[],
+			[ 'descriptions' => [ 'de' => [ 'language' => 'de', 'value' => 'foo' ] ] ],
+		];
+		$testCases['ignoreConflictDescriptionMerge'] = [
+			[ 'descriptions' => [
+				'en' => [ 'language' => 'en', 'value' => 'foo' ],
+				'de' => [ 'language' => 'de', 'value' => 'berlin' ]
+			] ],
+			[ 'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'bar' ] ] ],
+			[ 'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ],
+			[ 'descriptions' => [
+				'en' => [ 'language' => 'en', 'value' => 'bar' ],
+				'de' => [ 'language' => 'de', 'value' => 'berlin' ]
+			] ],
+			[ 'description' ]
+		];
+		$testCases['aliasesMerge'] = [
+			[ 'aliases' => [ "nl" => [ [ "language" => "nl", "value" => "Dickes B" ] ] ] ],
+			[],
+			[],
+			[ 'aliases' => [ "nl" => [ [ "language" => "nl", "value" => "Dickes B" ] ] ] ],
+		];
+		$testCases['aliasesMerge2'] = [
+			[ 'aliases' => [ "nl" => [ [ "language" => "nl", "value" => "Ali1" ] ] ] ],
+			[ 'aliases' => [ "nl" => [ [ "language" => "nl", "value" => "Ali2" ] ] ] ],
+			[],
+			[ 'aliases' => [ 'nl' => [
+				[ 'language' => 'nl', 'value' => 'Ali2' ],
+				[ 'language' => 'nl', 'value' => 'Ali1' ]
+			] ] ],
+		];
+		$testCases['sitelinksMerge'] = [
+			[ 'sitelinks' => [ 'dewiki' => [ 'site' => 'dewiki', 'title' => 'Foo' ] ] ],
+			[],
+			[],
+			[ 'sitelinks' => [ 'dewiki' => [ 'site' => 'dewiki', 'title' => 'Foo' ] ] ],
+		];
+		$testCases['IgnoreConflictSitelinksMerge'] = [
+			[ 'sitelinks' => [
+				'dewiki' => [ 'site' => 'dewiki', 'title' => 'RemainFrom' ],
+				'enwiki' => [ 'site' => 'enwiki', 'title' => 'PlFrom' ],
+			] ],
+			[ 'sitelinks' => [ 'dewiki' => [ 'site' => 'dewiki', 'title' => 'RemainTo' ] ] ],
+			[ 'sitelinks' => [ 'dewiki' => [ 'site' => 'dewiki', 'title' => 'RemainFrom' ] ] ],
+			[ 'sitelinks' => [
+				'dewiki' => [ 'site' => 'dewiki', 'title' => 'RemainTo' ],
+				'enwiki' => [ 'site' => 'enwiki', 'title' => 'PlFrom' ],
+			] ],
+			[ 'sitelink' ]
+		];
+		$testCases['claimMerge'] = [
+			[ 'claims' => [ 'P1' => [ [ 'mainsnak' => [
+				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => [ 'value' => 'imastring', 'type' => 'string' ] ],
 				'type' => 'statement', 'rank' => 'normal',
-				'id' => 'deadbeefdeadbeefdeadbeefdeadbeef' ) ) ) ),
-			array(),
-			array(),
-			array( 'claims' => array(
-				'P1' => array(
-					array( 'mainsnak' => array(
-						'snaktype' => 'value', 'property' => 'P1', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
-						'type' => 'statement', 'rank' => 'normal' )
-				)
-			) ),
-		);
-		$testCases['claimMerge2'] = array(
-			array( 'claims' => array( 'P1' => array( array( 'mainsnak' => array(
-				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => array( 'value' => 'imastring1', 'type' => 'string' ) ),
+				'id' => 'deadbeefdeadbeefdeadbeefdeadbeef' ] ] ] ],
+			[],
+			[],
+			[ 'claims' => [
+				'P1' => [
+					[ 'mainsnak' => [
+						'snaktype' => 'value', 'property' => 'P1', 'datavalue' => [ 'value' => 'imastring', 'type' => 'string' ] ],
+						'type' => 'statement', 'rank' => 'normal' ]
+				]
+			] ],
+		];
+		$testCases['claimMerge2'] = [
+			[ 'claims' => [ 'P1' => [ [ 'mainsnak' => [
+				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => [ 'value' => 'imastring1', 'type' => 'string' ] ],
 				'type' => 'statement', 'rank' => 'normal',
-				'id' => 'deadbeefdeadbeefdeadbeefdeadbeef' ) ) ) ),
-			array( 'claims' => array( 'P1' => array( array( 'mainsnak' => array(
-				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => array( 'value' => 'imastring2', 'type' => 'string' ) ),
+				'id' => 'deadbeefdeadbeefdeadbeefdeadbeef' ] ] ] ],
+			[ 'claims' => [ 'P1' => [ [ 'mainsnak' => [
+				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => [ 'value' => 'imastring2', 'type' => 'string' ] ],
 				'type' => 'statement', 'rank' => 'normal',
-				'id' => 'deadb33fdeadb33fdeadb33fdeadb33f' ) ) ) ),
-			array(),
-			array( 'claims' => array(
-				'P1' => array(
-					array(
-						'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P1',
-							'datavalue' => array( 'value' => 'imastring2', 'type' => 'string' ) ),
+				'id' => 'deadb33fdeadb33fdeadb33fdeadb33f' ] ] ] ],
+			[],
+			[ 'claims' => [
+				'P1' => [
+					[
+						'mainsnak' => [ 'snaktype' => 'value', 'property' => 'P1',
+							'datavalue' => [ 'value' => 'imastring2', 'type' => 'string' ] ],
 						'type' => 'statement',
 						'rank' => 'normal'
-					),
-					array(
-						'mainsnak' => array( 'snaktype' => 'value', 'property' => 'P1',
-							'datavalue' => array( 'value' => 'imastring1', 'type' => 'string' ) ),
+					],
+					[
+						'mainsnak' => [ 'snaktype' => 'value', 'property' => 'P1',
+							'datavalue' => [ 'value' => 'imastring1', 'type' => 'string' ] ],
 						'type' => 'statement',
 						'rank' => 'normal'
-					)
-				)
-			) ),
-		);
+					]
+				]
+			] ],
+		];
 
 		return $testCases;
 	}
@@ -329,7 +329,7 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 		array $toData,
 		array $expectedFrom,
 		array $expectedTo,
-		array $ignoreConflicts = array()
+		array $ignoreConflicts = []
 	) {
 		$entityTitleLookup = $this->getEntityTitleLookup();
 		$interactor = $this->newInteractor();
@@ -337,10 +337,10 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 		$fromId = new ItemId( 'Q1' );
 		$toId = new ItemId( 'Q2' );
 
-		$this->testHelper->putEntities( array(
+		$this->testHelper->putEntities( [
 			'Q1' => $fromData,
 			'Q2' => $toData,
-		) );
+		] );
 
 		if ( method_exists( $this, 'getTestSysop' ) ) {
 			$user = $this->getTestSysop()->getUser();
@@ -385,13 +385,13 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 	}
 
 	public function mergeFailureProvider() {
-		return array(
-			'missing from' => array( new ItemId( 'Q100' ), new ItemId( 'Q2' ), array(), 'no-such-entity' ),
-			'missing to' => array( new ItemId( 'Q1' ), new ItemId( 'Q200' ), array(), 'no-such-entity' ),
-			'merge into self' => array( new ItemId( 'Q1' ), new ItemId( 'Q1' ), array(), 'cant-merge-self' ),
-			'from redirect' => array( new ItemId( 'Q11' ), new ItemId( 'Q2' ), array(), 'cant-load-entity-content' ),
-			'to redirect' => array( new ItemId( 'Q1' ), new ItemId( 'Q12' ), array(), 'cant-load-entity-content' ),
-		);
+		return [
+			'missing from' => [ new ItemId( 'Q100' ), new ItemId( 'Q2' ), [], 'no-such-entity' ],
+			'missing to' => [ new ItemId( 'Q1' ), new ItemId( 'Q200' ), [], 'no-such-entity' ],
+			'merge into self' => [ new ItemId( 'Q1' ), new ItemId( 'Q1' ), [], 'cant-merge-self' ],
+			'from redirect' => [ new ItemId( 'Q11' ), new ItemId( 'Q2' ), [], 'cant-load-entity-content' ],
+			'to redirect' => [ new ItemId( 'Q1' ), new ItemId( 'Q12' ), [], 'cant-load-entity-content' ],
+		];
 	}
 
 	/**
@@ -414,18 +414,18 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 	}
 
 	public function mergeConflictsProvider() {
-		return array(
-			array(
-				array( 'descriptions' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-				array( 'descriptions' => array( 'en' => array( 'language' => 'en', 'value' => 'foo2' ) ) ),
-				array()
-			),
-			array(
-				array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'Foo' ) ) ),
-				array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'Foo2' ) ) ),
-				array()
-			),
-		);
+		return [
+			[
+				[ 'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ],
+				[ 'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'foo2' ] ] ],
+				[]
+			],
+			[
+				[ 'sitelinks' => [ 'dewiki' => [ 'site' => 'dewiki', 'title' => 'Foo' ] ] ],
+				[ 'sitelinks' => [ 'dewiki' => [ 'site' => 'dewiki', 'title' => 'Foo2' ] ] ],
+				[]
+			],
+		];
 	}
 
 	/**
@@ -449,10 +449,10 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 	}
 
 	public function permissionProvider() {
-		return array(
-			'edit' => array( 'edit' ),
-			'item-merge' => array( 'item-merge' ),
-		);
+		return [
+			'edit' => [ 'edit' ],
+			'item-merge' => [ 'item-merge' ],
+		];
 	}
 
 	/**

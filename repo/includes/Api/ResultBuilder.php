@@ -275,8 +275,8 @@ class ResultBuilder {
 		EntityRevision $entityRevision,
 		$props = 'all',
 		array $filterSiteIds = null,
-		array $filterLangCodes = array(),
-		array $fallbackChains = array()
+		array $filterLangCodes = [],
+		array $fallbackChains = []
 	) {
 		$entity = $entityRevision->getEntity();
 		$entityId = $entity->getId();
@@ -285,10 +285,10 @@ class ResultBuilder {
 			$sourceEntityIdSerialization = $entityId->getSerialization();
 		}
 
-		$record = array();
+		$record = [];
 
 		//if there are no props defined only return type and id..
-		if ( $props === array() ) {
+		if ( $props === [] ) {
 			$record['id'] = $entityId->getSerialization();
 			$record['type'] = $entityId->getEntityType();
 		} else {
@@ -301,10 +301,10 @@ class ResultBuilder {
 				$record['modified'] = wfTimestamp( TS_ISO_8601, $entityRevision->getTimestamp() );
 			}
 			if ( $sourceEntityIdSerialization !== $entityId->getSerialization() ) {
-				$record['redirects'] = array(
+				$record['redirects'] = [
 					'from' => $sourceEntityIdSerialization,
 					'to' => $entityId->getSerialization()
-				);
+				];
 			}
 
 			$entitySerialization = $this->getEntityArray(
@@ -318,11 +318,11 @@ class ResultBuilder {
 			$record = array_merge( $record, $entitySerialization );
 		}
 
-		$this->appendValue( array( 'entities' ), $sourceEntityIdSerialization, $record, 'entity' );
+		$this->appendValue( [ 'entities' ], $sourceEntityIdSerialization, $record, 'entity' );
 		if ( $this->addMetaData ) {
-			$this->result->addArrayType( array( 'entities' ), 'kvp', 'id' );
+			$this->result->addArrayType( [ 'entities' ], 'kvp', 'id' );
 			$this->result->addValue(
-				array( 'entities' ),
+				[ 'entities' ],
 				ApiResult::META_KVP_MERGE,
 				true,
 				ApiResult::OVERRIDE
@@ -538,7 +538,7 @@ class ResultBuilder {
 	}
 
 	private function getEntitySerializationWithMetaData( array $serialization ) {
-		$arrayTypes = array(
+		$arrayTypes = [
 			'aliases' => 'id',
 			'claims/*/*/references/*/snaks' => 'id',
 			'claims/*/*/qualifiers' => 'id',
@@ -546,7 +546,7 @@ class ResultBuilder {
 			'descriptions' => 'language',
 			'labels' => 'language',
 			'sitelinks' => 'site',
-		);
+		];
 		foreach ( $arrayTypes as $path => $keyName ) {
 			$serialization = $this->modifier->modifyUsingCallback(
 				$serialization,
@@ -555,11 +555,11 @@ class ResultBuilder {
 			);
 		}
 
-		$kvpMergeArrays = array(
+		$kvpMergeArrays = [
 			'descriptions',
 			'labels',
 			'sitelinks',
-		);
+		];
 		foreach ( $kvpMergeArrays as $path ) {
 			$serialization = $this->modifier->modifyUsingCallback(
 				$serialization,
@@ -573,7 +573,7 @@ class ResultBuilder {
 			);
 		}
 
-		$indexTags = array(
+		$indexTags = [
 			'labels' => 'label',
 			'descriptions' => 'description',
 			'aliases/*' => 'alias',
@@ -589,7 +589,7 @@ class ResultBuilder {
 			'claims/*/*/references' => 'reference',
 			'claims/*' => 'claim',
 			'claims' => 'property',
-		);
+		];
 		foreach ( $indexTags as $path => $tag ) {
 			$serialization = $this->modifier->modifyUsingCallback(
 				$serialization,
@@ -689,12 +689,12 @@ class ResultBuilder {
 	 * @param array|string $path where the data is located
 	 */
 	private function addRemovedTerm( $language, $name, $tag, $path ) {
-		$value = array(
-			$language => array(
+		$value = [
+			$language => [
 				'language' => $language,
 				'removed' => '',
-			)
-		);
+			]
+		];
 		if ( $this->addMetaData ) {
 			ApiResult::setArrayType( $value, 'kvp', 'language' );
 			$value[ApiResult::META_KVP_MERGE] = true;
@@ -745,7 +745,7 @@ class ResultBuilder {
 	public function addSiteLinkList( SiteLinkList $siteLinkList, $path, $addUrl = false ) {
 		$serializer = $this->serializerFactory->newSiteLinkSerializer();
 
-		$values = array();
+		$values = [];
 		foreach ( $siteLinkList->toArray() as $siteLink ) {
 			$values[$siteLink->getSiteId()] = $serializer->serialize( $siteLink );
 		}
@@ -798,7 +798,7 @@ class ResultBuilder {
 	 */
 	public function addRemovedSiteLinks( SiteLinkList $siteLinkList, $path ) {
 		$serializer = $this->serializerFactory->newSiteLinkSerializer();
-		$values = array();
+		$values = [];
 		foreach ( $siteLinkList->toArray() as $siteLink ) {
 			$value = $serializer->serialize( $siteLink );
 			$value['removed'] = '';
@@ -933,34 +933,34 @@ class ResultBuilder {
 	 * @return array
 	 */
 	private function getClaimsArrayWithMetaData( array $array, $claimPath = '' ) {
-		$metaDataModifications = array(
-			'references/*/snaks/*' => array(
+		$metaDataModifications = [
+			'references/*/snaks/*' => [
 				$this->callbackFactory->getCallbackToIndexTags( 'snak' ),
-			),
-			'references/*/snaks' => array(
+			],
+			'references/*/snaks' => [
 				$this->callbackFactory->getCallbackToSetArrayType( 'kvp', 'id' ),
 				$this->callbackFactory->getCallbackToIndexTags( 'property' ),
-			),
-			'references/*/snaks-order' => array(
+			],
+			'references/*/snaks-order' => [
 				$this->callbackFactory->getCallbackToIndexTags( 'property' )
-			),
-			'references' => array(
+			],
+			'references' => [
 				$this->callbackFactory->getCallbackToIndexTags( 'reference' ),
-			),
-			'qualifiers/*' => array(
+			],
+			'qualifiers/*' => [
 				$this->callbackFactory->getCallbackToIndexTags( 'qualifiers' ),
-			),
-			'qualifiers' => array(
+			],
+			'qualifiers' => [
 				$this->callbackFactory->getCallbackToSetArrayType( 'kvp', 'id' ),
 				$this->callbackFactory->getCallbackToIndexTags( 'property' ),
-			),
-			'qualifiers-order' => array(
+			],
+			'qualifiers-order' => [
 				$this->callbackFactory->getCallbackToIndexTags( 'property' )
-			),
-			'mainsnak' => array(
+			],
+			'mainsnak' => [
 				$this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup ),
-			),
-		);
+			],
+		];
 
 		foreach ( $metaDataModifications as $path => $callbacks ) {
 			foreach ( $callbacks as $callback ) {
@@ -1051,15 +1051,15 @@ class ResultBuilder {
 		$this->appendValue(
 			'entities',
 			$key,
-			array_merge( $missingDetails, array( 'missing' => "" ) ),
+			array_merge( $missingDetails, [ 'missing' => "" ] ),
 			'entity'
 		);
 
 		if ( $this->addMetaData ) {
 			$this->result->addIndexedTagName( 'entities', 'entity' );
-			$this->result->addArrayType( array( 'entities' ), 'kvp', 'id' );
+			$this->result->addArrayType( [ 'entities' ], 'kvp', 'id' );
 			$this->result->addValue(
-				array( 'entities' ),
+				[ 'entities' ],
 				ApiResult::META_KVP_MERGE,
 				true,
 				ApiResult::OVERRIDE
@@ -1080,7 +1080,7 @@ class ResultBuilder {
 		$this->setValue(
 			'normalized',
 			$name,
-			array( 'from' => $from, 'to' => $to )
+			[ 'from' => $from, 'to' => $to ]
 		);
 	}
 

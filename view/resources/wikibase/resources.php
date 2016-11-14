@@ -11,17 +11,17 @@ return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	$moduleTemplate = array(
+	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0],
-	);
+	];
 
-	$modules = array(
+	$modules = [
 
 		// common styles independent from JavaScript being enabled or disabled
-		'wikibase.common' => $moduleTemplate + array(
+		'wikibase.common' => $moduleTemplate + [
 			'position' => 'top',
-			'styles' => array(
+			'styles' => [
 				// Order must be hierarchical, do not order alphabetically
 				'wikibase.css',
 				'../jquery/wikibase/themes/default/jquery.wikibase.aliasesview.css',
@@ -36,55 +36,55 @@ return call_user_func( function() {
 				'../jquery/wikibase/themes/default/jquery.wikibase.sitelinklistview.css',
 				'../jquery/wikibase/themes/default/jquery.wikibase.sitelinkview.css',
 				'../jquery/wikibase/themes/default/jquery.wikibase.statementgroupview.css',
-			)
-		),
+			]
+		],
 
-		'wikibase.mobile' => $moduleTemplate + array(
+		'wikibase.mobile' => $moduleTemplate + [
 			'position' => 'top',
-			'styles' => array(
+			'styles' => [
 				'wikibase.mobile.css'
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'jquery.wikibase.statementview.RankSelector.styles'
-			),
+			],
 			'targets' => 'mobile'
-		),
+		],
 
-		'wikibase.RevisionStore' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.RevisionStore' => $moduleTemplate + [
+			'scripts' => [
 				'wikibase.RevisionStore.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase'
-			)
-		),
+			]
+		],
 
-		'wikibase.templates' => $moduleTemplate + array(
+		'wikibase.templates' => $moduleTemplate + [
 			'class' => TemplateModule::class,
 			'scripts' => 'templates.js',
-		),
+		],
 
-		'wikibase.ValueViewBuilder' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.ValueViewBuilder' => $moduleTemplate + [
+			'scripts' => [
 				'wikibase.ValueViewBuilder.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase',
 				'jquery.valueview',
-			),
-		),
+			],
+		],
 
-		'wikibase.ValueFormatterFactory' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.ValueFormatterFactory' => $moduleTemplate + [
+			'scripts' => [
 				'wikibase.ValueFormatterFactory.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'util.inherit',
 				'wikibase',
-			),
-		),
+			],
+		],
 
-	);
+	];
 
 	return $modules;
 } );

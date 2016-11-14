@@ -23,7 +23,7 @@ class MediaWikiContentLanguagesTest extends PHPUnit_Framework_TestCase {
 		$this->assertInternalType( 'array', $result );
 
 		// Just check for some langs
-		$knownLangCodes = array( 'en', 'de', 'es', 'fr', 'nl', 'ru', 'zh' );
+		$knownLangCodes = [ 'en', 'de', 'es', 'fr', 'nl', 'ru', 'zh' ];
 		$this->assertSame(
 			$knownLangCodes,
 			array_intersect( $knownLangCodes, $result )

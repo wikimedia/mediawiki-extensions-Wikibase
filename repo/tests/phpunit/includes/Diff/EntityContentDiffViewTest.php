@@ -37,68 +37,68 @@ class EntityContentDiffViewTest extends \MediaWikiTestCase {
 		$item = new Item( new ItemId( 'Q11' ) );
 		$item->setDescription( 'en', 'ohi there' );
 		$item->setLabel( 'de', 'o_O' );
-		$item->setAliases( 'nl', array( 'foo', 'bar' ) );
+		$item->setAliases( 'nl', [ 'foo', 'bar' ] );
 
 		$item2 = new Item( new ItemId( 'Q12' ) );
 		$item2->setLabel( 'de', 'o_O' );
 		$item2->setLabel( 'en', 'O_o' );
-		$item2->setAliases( 'nl', array( 'daaaah' ) );
+		$item2->setAliases( 'nl', [ 'daaaah' ] );
 
 		$redirect = new EntityRedirect( new ItemId( 'Q11' ), new ItemId( 'Q21' ) );
 		$redirect2 = new EntityRedirect( new ItemId( 'Q11' ), new ItemId( 'Q22' ) );
 
-		$insTags = array(
-			'has <td>label / de</td>' => array( 'tag' => 'td', 'content' => 'label / de' ),
-			'has <ins>foo</ins>' => array( 'tag' => 'ins', 'content' => 'foo' ),
-			'has <td>aliases / nl / 0</td>' => array( 'tag' => 'td', 'content' => 'aliases / nl / 0' ),
-			'has <ins>bar</ins>' => array( 'tag' => 'ins', 'content' => 'bar' ),
-			'has <td>description / en</td>' => array( 'tag' => 'td', 'content' => 'description / en' ),
-			'has <ins>ohi there</ins>' => array( 'tag' => 'ins', 'content' => 'ohi there' ),
-		);
+		$insTags = [
+			'has <td>label / de</td>' => [ 'tag' => 'td', 'content' => 'label / de' ],
+			'has <ins>foo</ins>' => [ 'tag' => 'ins', 'content' => 'foo' ],
+			'has <td>aliases / nl / 0</td>' => [ 'tag' => 'td', 'content' => 'aliases / nl / 0' ],
+			'has <ins>bar</ins>' => [ 'tag' => 'ins', 'content' => 'bar' ],
+			'has <td>description / en</td>' => [ 'tag' => 'td', 'content' => 'description / en' ],
+			'has <ins>ohi there</ins>' => [ 'tag' => 'ins', 'content' => 'ohi there' ],
+		];
 
-		$delTags = array(
-			'has <td>label / de</td>' => array( 'tag' => 'td', 'content' => 'label / de' ),
-			'has <del>foo</del>' => array( 'tag' => 'del', 'content' => 'foo' ),
-			'has <td>aliases / nl / 0</td>' => array( 'tag' => 'td', 'content' => 'aliases / nl / 0' ),
-			'has <del>bar</del>' => array( 'tag' => 'del', 'content' => 'bar' ),
-			'has <td>description / en</td>' => array( 'tag' => 'td', 'content' => 'description / en' ),
-			'has <del>ohi there</del>' => array( 'tag' => 'del', 'content' => 'ohi there' ),
-		);
+		$delTags = [
+			'has <td>label / de</td>' => [ 'tag' => 'td', 'content' => 'label / de' ],
+			'has <del>foo</del>' => [ 'tag' => 'del', 'content' => 'foo' ],
+			'has <td>aliases / nl / 0</td>' => [ 'tag' => 'td', 'content' => 'aliases / nl / 0' ],
+			'has <del>bar</del>' => [ 'tag' => 'del', 'content' => 'bar' ],
+			'has <td>description / en</td>' => [ 'tag' => 'td', 'content' => 'description / en' ],
+			'has <del>ohi there</del>' => [ 'tag' => 'del', 'content' => 'ohi there' ],
+		];
 
-		$changeTags = array(
-			'has <td>label / en</td>' => array( 'tag' => 'td', 'content' => 'label / en' ),
-			'has <ins>O_o</ins>' => array( 'tag' => 'ins', 'content' => 'O_o' ),
-			'has <td>aliases / nl / 0</td>' => array( 'tag' => 'td', 'content' => 'aliases / nl / 0' ),
-			'has <ins>daaaah</ins>' => array( 'tag' => 'ins', 'content' => 'daaaah' ),
-			'has <td>aliases / nl / 1</td>' => array( 'tag' => 'td', 'content' => 'aliases / nl / 1' ),
-			'has <del>foo</del>' => array( 'tag' => 'del', 'content' => 'foo' ),
-			'has <td>aliases / nl / 2</td>' => array( 'tag' => 'td', 'content' => 'aliases / nl / 2' ),
-			'has <del>bar</del>' => array( 'tag' => 'del', 'content' => 'bar' ),
-			'has <td>description / en</td>' => array( 'tag' => 'td', 'content' => 'description / en' ),
-			'has <del>ohi there</del>' => array( 'tag' => 'del', 'content' => 'ohi there' ),
-		);
+		$changeTags = [
+			'has <td>label / en</td>' => [ 'tag' => 'td', 'content' => 'label / en' ],
+			'has <ins>O_o</ins>' => [ 'tag' => 'ins', 'content' => 'O_o' ],
+			'has <td>aliases / nl / 0</td>' => [ 'tag' => 'td', 'content' => 'aliases / nl / 0' ],
+			'has <ins>daaaah</ins>' => [ 'tag' => 'ins', 'content' => 'daaaah' ],
+			'has <td>aliases / nl / 1</td>' => [ 'tag' => 'td', 'content' => 'aliases / nl / 1' ],
+			'has <del>foo</del>' => [ 'tag' => 'del', 'content' => 'foo' ],
+			'has <td>aliases / nl / 2</td>' => [ 'tag' => 'td', 'content' => 'aliases / nl / 2' ],
+			'has <del>bar</del>' => [ 'tag' => 'del', 'content' => 'bar' ],
+			'has <td>description / en</td>' => [ 'tag' => 'td', 'content' => 'description / en' ],
+			'has <del>ohi there</del>' => [ 'tag' => 'del', 'content' => 'ohi there' ],
+		];
 
-		$fromRedirTags = array(
-			'has <td>label / de</td>' => array( 'tag' => 'td', 'content' => 'label / de' ),
-			'has <ins>foo</ins>' => array( 'tag' => 'ins', 'content' => 'foo' ),
+		$fromRedirTags = [
+			'has <td>label / de</td>' => [ 'tag' => 'td', 'content' => 'label / de' ],
+			'has <ins>foo</ins>' => [ 'tag' => 'ins', 'content' => 'foo' ],
 
-			'has <td>redirect</td>' => array( 'tag' => 'td', 'content' => 'redirect' ),
-			'has <del>Q21</del>' => array( 'tag' => 'del', 'content' => 'Q21' ),
-		);
+			'has <td>redirect</td>' => [ 'tag' => 'td', 'content' => 'redirect' ],
+			'has <del>Q21</del>' => [ 'tag' => 'del', 'content' => 'Q21' ],
+		];
 
-		$toRedirTags = array(
-			'has <td>label / de</td>' => array( 'tag' => 'td', 'content' => 'label / de' ),
-			'has <del>foo</del>' => array( 'tag' => 'del', 'content' => 'foo' ),
+		$toRedirTags = [
+			'has <td>label / de</td>' => [ 'tag' => 'td', 'content' => 'label / de' ],
+			'has <del>foo</del>' => [ 'tag' => 'del', 'content' => 'foo' ],
 
-			'has <td>redirect</td>' => array( 'tag' => 'td', 'content' => 'redirect' ),
-			'has <ins>Q21</ins>' => array( 'tag' => 'ins', 'content' => 'Q21' ),
-		);
+			'has <td>redirect</td>' => [ 'tag' => 'td', 'content' => 'redirect' ],
+			'has <ins>Q21</ins>' => [ 'tag' => 'ins', 'content' => 'Q21' ],
+		];
 
-		$changeRedirTags = array(
-			'has <td>redirect</td>' => array( 'tag' => 'td', 'content' => 'redirect' ),
-			'has <del>Q21</del>' => array( 'tag' => 'del', 'content' => 'Q21' ),
-			'has <ins>Q22</del>' => array( 'tag' => 'ins', 'content' => 'Q22' ),
-		);
+		$changeRedirTags = [
+			'has <td>redirect</td>' => [ 'tag' => 'td', 'content' => 'redirect' ],
+			'has <del>Q21</del>' => [ 'tag' => 'del', 'content' => 'Q21' ],
+			'has <ins>Q22</del>' => [ 'tag' => 'ins', 'content' => 'Q22' ],
+		];
 
 		$empty = ItemContent::newFromItem( $emptyItem );
 		$itemContent = ItemContent::newFromItem( $item );
@@ -113,16 +113,16 @@ class EntityContentDiffViewTest extends \MediaWikiTestCase {
 			$this->getMock( Title::class )
 		);
 
-		return array(
-			'empty' => array( $empty, $empty, array( 'empty' => '/^$/', ) ),
-			'same' => array( $itemContent, $itemContent, array( 'empty' => '/^$/', ) ),
-			'from emtpy' => array( $empty, $itemContent, $insTags ),
-			'to empty' => array( $itemContent, $empty, $delTags ),
-			'changed' => array( $itemContent, $itemContent2, $changeTags ),
-			'to redirect' => array( $itemContent, $redirectContent, $toRedirTags ),
-			'from redirect' => array( $redirectContent, $itemContent, $fromRedirTags ),
-			'redirect changed' => array( $redirectContent, $redirectContent2, $changeRedirTags ),
-		);
+		return [
+			'empty' => [ $empty, $empty, [ 'empty' => '/^$/', ] ],
+			'same' => [ $itemContent, $itemContent, [ 'empty' => '/^$/', ] ],
+			'from emtpy' => [ $empty, $itemContent, $insTags ],
+			'to empty' => [ $itemContent, $empty, $delTags ],
+			'changed' => [ $itemContent, $itemContent2, $changeTags ],
+			'to redirect' => [ $itemContent, $redirectContent, $toRedirTags ],
+			'from redirect' => [ $redirectContent, $itemContent, $fromRedirTags ],
+			'redirect changed' => [ $redirectContent, $redirectContent2, $changeRedirTags ],
+		];
 	}
 
 	/**

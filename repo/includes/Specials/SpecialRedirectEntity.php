@@ -95,7 +95,7 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 		} catch ( EntityIdParsingException $ex ) {
 			throw new UserInputException(
 				'wikibase-wikibaserepopage-invalid-id',
-				array( $rawId ),
+				[ $rawId ],
 				'Entity id is not valid'
 			);
 		}
@@ -170,7 +170,7 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 		if ( $this->getUser()->isAnon() ) {
 			$pre = Html::rawElement(
 				'p',
-				array( 'class' => 'warning' ),
+				[ 'class' => 'warning' ],
 				$this->msg(
 					'wikibase-anonymouseditwarning',
 					$this->msg( 'wikibase-entity' )->text()
@@ -195,22 +195,22 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	 * @return string
 	 */
 	protected function getFormElements() {
-		return array(
-			'fromid' => array(
+		return [
+			'fromid' => [
 				'name' => 'fromid',
 				'default' => $this->getRequest()->getVal( 'fromid' ),
 				'type' => 'text',
 				'id' => 'wb-redirectentity-fromid',
 				'label-message' => 'wikibase-redirectentity-fromid'
-			),
-			'toid' => array(
+			],
+			'toid' => [
 				'name' => 'toid',
 				'default' => $this->getRequest()->getVal( 'toid' ),
 				'type' => 'text',
 				'id' => 'wb-redirectentity-toid',
 				'label-message' => 'wikibase-redirectentity-toid'
-			)
-		);
+			]
+		];
 	}
 
 }

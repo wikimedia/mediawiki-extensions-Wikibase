@@ -28,23 +28,23 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 	private function applySettings() {
 		// Allow some badges for testing
-		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', array(
+		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', [
 			'Q42' => '',
 			'Q149' => '',
-		) );
+		] );
 	}
 
 	public function invalidConstructorProvider() {
 		$this->applySettings();
 
-		$argLists = array();
+		$argLists = [];
 
-		$argLists[] = array( 'enwiki', 1234 );
-		$argLists[] = array( 1234, 'Berlin' );
-		$argLists[] = array( 'plwiki', 'Warszawa', array( 'FA', 'GA' ) );
-		$argLists[] = array( 'plwiki', 'Warszawa', array( new ItemId( 'Q42' ), 'FA' ) );
-		$argLists[] = array( 'plwiki', 'Warszawa', array( new PropertyId( 'P42' ) ) );
-		$argLists[] = array( 'plwiki', 'Warszawa', array( new ItemId( 'Q2147483647' ) ) );
+		$argLists[] = [ 'enwiki', 1234 ];
+		$argLists[] = [ 1234, 'Berlin' ];
+		$argLists[] = [ 'plwiki', 'Warszawa', [ 'FA', 'GA' ] ];
+		$argLists[] = [ 'plwiki', 'Warszawa', [ new ItemId( 'Q42' ), 'FA' ] ];
+		$argLists[] = [ 'plwiki', 'Warszawa', [ new PropertyId( 'P42' ) ] ];
+		$argLists[] = [ 'plwiki', 'Warszawa', [ new ItemId( 'Q2147483647' ) ] ];
 
 		return $argLists;
 	}
@@ -62,69 +62,69 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		$this->applySettings();
 
 		$deSiteLink = new SiteLink( 'dewiki', 'Berlin' );
-		$enSiteLink = new SiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q149' ) ) );
-		$plSiteLink = new SiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ) ) );
+		$enSiteLink = new SiteLink( 'enwiki', 'Berlin', [ new ItemId( 'Q149' ) ] );
+		$plSiteLink = new SiteLink( 'plwiki', 'Berlin', [ new ItemId( 'Q42' ) ] );
 
-		$existingSiteLinks = array(
+		$existingSiteLinks = [
 			$deSiteLink,
 			$plSiteLink
-		);
+		];
 
-		$args = array();
+		$args = [];
 
 		// adding sitelink with badges
-		$args[] = array(
+		$args[] = [
 			$existingSiteLinks,
-			new ChangeOpSiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q149' ) ) ),
-			array_merge( $existingSiteLinks, array( $enSiteLink ) )
-		);
+			new ChangeOpSiteLink( 'enwiki', 'Berlin', [ new ItemId( 'Q149' ) ] ),
+			array_merge( $existingSiteLinks, [ $enSiteLink ] )
+		];
 
 		// deleting sitelink
-		$args[] = array(
+		$args[] = [
 			$existingSiteLinks,
 			new ChangeOpSiteLink( 'dewiki', null ),
-			array( $plSiteLink )
-		);
+			[ $plSiteLink ]
+		];
 
 		// setting badges on existing sitelink
-		$args[] = array(
+		$args[] = [
 			$existingSiteLinks,
-			new ChangeOpSiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ), new ItemId( 'Q149' ) ) ),
-			array(
+			new ChangeOpSiteLink( 'plwiki', 'Berlin', [ new ItemId( 'Q42' ), new ItemId( 'Q149' ) ] ),
+			[
 				$deSiteLink,
-				new SiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ), new ItemId( 'Q149' ) ) )
-			)
-		);
+				new SiteLink( 'plwiki', 'Berlin', [ new ItemId( 'Q42' ), new ItemId( 'Q149' ) ] )
+			]
+		];
 
 		// changing sitelink without modifying badges
-		$args[] = array(
+		$args[] = [
 			$existingSiteLinks,
 			new ChangeOpSiteLink( 'plwiki', 'Test' ),
-			array(
+			[
 				$deSiteLink,
-				new SiteLink( 'plwiki', 'Test', array( new ItemId( 'Q42' ) ) )
-			)
-		);
+				new SiteLink( 'plwiki', 'Test', [ new ItemId( 'Q42' ) ] )
+			]
+		];
 
 		// change badges without modifying title
-		$args[] = array(
+		$args[] = [
 			$existingSiteLinks,
-			new ChangeOpSiteLink( 'plwiki', null, array( new ItemId( 'Q149' ) ) ),
-			array(
+			new ChangeOpSiteLink( 'plwiki', null, [ new ItemId( 'Q149' ) ] ),
+			[
 				$deSiteLink,
-				new SiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q149' ) ) )
-			)
-		);
+				new SiteLink( 'plwiki', 'Berlin', [ new ItemId( 'Q149' ) ] )
+			]
+		];
 
 		// add duplicate badges
-		$args[] = array(
+		$args[] = [
 			$existingSiteLinks,
-			new ChangeOpSiteLink( 'plwiki', null, array( new ItemId( 'q42' ), new ItemId( 'Q149' ), new ItemId( 'Q42' ) ) ),
-			array(
+			new ChangeOpSiteLink( 'plwiki', null, [ new ItemId( 'q42' ), new ItemId( 'Q149' ), new ItemId( 'Q42' ) ] ),
+			[
 				$deSiteLink,
-				new SiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ), new ItemId( 'Q149' ) ) )
-			)
-		);
+				new SiteLink( 'plwiki', 'Berlin', [ new ItemId( 'Q42' ), new ItemId( 'Q149' ) ] )
+			]
+		];
 
 		return $args;
 	}
@@ -148,20 +148,20 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		$this->applySettings();
 
 		$deSiteLink = new SiteLink( 'dewiki', 'Berlin' );
-		$plSiteLink = new SiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ) ) );
+		$plSiteLink = new SiteLink( 'plwiki', 'Berlin', [ new ItemId( 'Q42' ) ] );
 
-		$existingSitelinks = array(
+		$existingSitelinks = [
 			$deSiteLink,
 			$plSiteLink
-		);
+		];
 
-		$args = array();
+		$args = [];
 
 		// cannot change badges of non-existing sitelink
-		$args[] = array(
+		$args[] = [
 			$existingSitelinks,
-			new ChangeOpSiteLink( 'enwiki', null, array( new ItemId( 'Q149' ) ) ),
-		);
+			new ChangeOpSiteLink( 'enwiki', null, [ new ItemId( 'Q149' ) ] ),
+		];
 
 		return $args;
 	}
@@ -183,61 +183,61 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	public function summaryTestProvider() {
 		$this->applySettings();
 
-		$sitelinks = array(
+		$sitelinks = [
 			new SiteLink( 'dewiki', 'Berlin' ),
-			new SiteLink( 'ruwiki', 'Берлин', array( new ItemId( 'Q42' ) ) )
-		);
+			new SiteLink( 'ruwiki', 'Берлин', [ new ItemId( 'Q42' ) ] )
+		];
 
-		$cases = array();
+		$cases = [];
 		$badge = new ItemId( 'Q149' );
 
 		// Add sitelink without badges
-		$cases['add-sitelink-without-badges'] = array(
+		$cases['add-sitelink-without-badges'] = [
 			'add',
-			array( 'Berlin' ),
+			[ 'Berlin' ],
 			$sitelinks,
-			new ChangeOpSiteLink( 'enwiki', 'Berlin', array() )
-		);
+			new ChangeOpSiteLink( 'enwiki', 'Berlin', [] )
+		];
 
 		// Add sitelink with badges
-		$cases['add-sitelink-with-badges'] = array(
+		$cases['add-sitelink-with-badges'] = [
 			'add-both',
-			array( 'Berlin', array( $badge ) ),
+			[ 'Berlin', [ $badge ] ],
 			$sitelinks,
-			new ChangeOpSiteLink( 'enwiki', 'Berlin', array( $badge ) )
-		);
+			new ChangeOpSiteLink( 'enwiki', 'Berlin', [ $badge ] )
+		];
 
 		// Set page name only for existing sitelink
-		$cases['set-pagename-existing-sitelink'] = array(
+		$cases['set-pagename-existing-sitelink'] = [
 			'set',
-			array( 'London' ),
+			[ 'London' ],
 			$sitelinks,
 			new ChangeOpSiteLink( 'ruwiki', 'London' )
-		);
+		];
 
 		// Add badge to existing sitelink
-		$cases['add-badges-to-existing-sitelink'] = array(
+		$cases['add-badges-to-existing-sitelink'] = [
 			'set-badges',
-			array( array( $badge ) ),
+			[ [ $badge ] ],
 			$sitelinks,
-			new ChangeOpSiteLink( 'dewiki', null, array( $badge ) )
-		);
+			new ChangeOpSiteLink( 'dewiki', null, [ $badge ] )
+		];
 
 		// Set page name and badges for existing sitelink
-		$cases['set-pagename-badges-existing-sitelink'] = array(
+		$cases['set-pagename-badges-existing-sitelink'] = [
 			'set-both',
-			array( 'London', array( $badge ) ),
+			[ 'London', [ $badge ] ],
 			$sitelinks,
-			new ChangeOpSiteLink( 'dewiki', 'London', array( $badge ) ),
-		);
+			new ChangeOpSiteLink( 'dewiki', 'London', [ $badge ] ),
+		];
 
 		// Changes badges for existing sitelink
-		$cases['change-badges-for-existing-sitelink'] = array(
+		$cases['change-badges-for-existing-sitelink'] = [
 			'set-badges',
-			array( array( $badge ) ),
+			[ [ $badge ] ],
 			$sitelinks,
-			new ChangeOpSiteLink( 'ruwiki', null, array( $badge ) )
-		);
+			new ChangeOpSiteLink( 'ruwiki', null, [ $badge ] )
+		];
 
 		return $cases;
 	}

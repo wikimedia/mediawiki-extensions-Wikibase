@@ -52,11 +52,11 @@ class PropertyIdResolverTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function resolvePropertyIdProvider() {
-		return array(
-			array( new PropertyId( 'P1337' ), 'a kitten!' ),
-			array( new PropertyId( 'P1337' ), 'p1337' ),
-			array( new PropertyId( 'P1337' ), 'P1337' ),
-		);
+		return [
+			[ new PropertyId( 'P1337' ), 'a kitten!' ],
+			[ new PropertyId( 'P1337' ), 'p1337' ],
+			[ new PropertyId( 'P1337' ), 'P1337' ],
+		];
 	}
 
 	/**
@@ -71,11 +71,11 @@ class PropertyIdResolverTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function resolvePropertyIdWithInvalidInput_throwsExceptionProvider() {
-		return array(
-			array( 'hedgehog' ),
-			array( 'Q100' ),
-			array( 'P1444' )
-		);
+		return [
+			[ 'hedgehog' ],
+			[ 'Q100' ],
+			[ 'P1444' ]
+		];
 	}
 
 }

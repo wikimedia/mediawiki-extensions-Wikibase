@@ -47,22 +47,22 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 	}
 
 	public function contentModelsProvider() {
-		$argLists = array();
+		$argLists = [];
 
-		$argLists[] = array( array(), array() );
-		$argLists[] = array( array( 'Foo' => 'Bar' ), array() );
-		$argLists[] = array( WikibaseRepo::getDefaultInstance()->getContentModelMappings(), array() );
+		$argLists[] = [ [], [] ];
+		$argLists[] = [ [ 'Foo' => 'Bar' ], [] ];
+		$argLists[] = [ WikibaseRepo::getDefaultInstance()->getContentModelMappings(), [] ];
 
 		return $argLists;
 	}
 
 	public function provideInvalidConstructorArguments() {
-		return array(
-			array( array( null ), array() ),
-			array( array(), array( null ) ),
-			array( array( 1 ), array() ),
-			array( array(), array( 'foo' ) )
-		);
+		return [
+			[ [ null ], [] ],
+			[ [], [ null ] ],
+			[ [ 1 ], [] ],
+			[ [], [ 'foo' ] ]
+		];
 	}
 
 	/**
@@ -88,18 +88,18 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		return new EntityContentFactory(
-			array(
+			[
 				'item' => CONTENT_MODEL_WIKIBASE_ITEM,
 				'property' => CONTENT_MODEL_WIKIBASE_PROPERTY
-			),
-			array(
+			],
+			[
 				'item' => function() use ( $wikibaseRepo ) {
 					return $wikibaseRepo->newItemHandler();
 				},
 				'property' => function() use ( $wikibaseRepo ) {
 					return $wikibaseRepo->newPropertyHandler();
 				}
-			)
+			]
 		);
 	}
 
@@ -125,13 +125,13 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 		$factory = $this->newFactory();
 
 		/** @var Title[] $titles */
-		$titles = array(
+		$titles = [
 			 0 => Title::makeTitle( $factory->getNamespaceForType( Item::ENTITY_TYPE ), 'Q17' ),
 			10 => Title::makeTitle( $factory->getNamespaceForType( Item::ENTITY_TYPE ), 'Q42' ),
 			20 => Title::makeTitle( NS_HELP, 'Q42' ),
 			30 => Title::makeTitle( $factory->getNamespaceForType( Item::ENTITY_TYPE ), 'XXX' ),
 			40 => Title::makeTitle( $factory->getNamespaceForType( Item::ENTITY_TYPE ), 'Q144' ),
-		);
+		];
 
 		foreach ( $titles as $id => $title ) {
 			$title->resetArticleID( $id );
@@ -189,73 +189,73 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetPermissionStatusForEntity() {
-		return array(
-			'read allowed for non-existing entity' => array(
+		return [
+			'read allowed for non-existing entity' => [
 				'read',
-				array( 'read' => true ),
+				[ 'read' => true ],
 				null,
-				array(
+				[
 					'getPermissionStatusForEntity' => true,
 					'getPermissionStatusForEntityType' => true,
-				),
-			),
-			'edit and createpage allowed for new entity' => array(
+				],
+			],
+			'edit and createpage allowed for new entity' => [
 				'edit',
-				array( 'read' => true, 'edit' => true, 'createpage' => true ),
+				[ 'read' => true, 'edit' => true, 'createpage' => true ],
 				null,
-				array(
+				[
 					'getPermissionStatusForEntity' => true,
 					'getPermissionStatusForEntityType' => true,
-				),
-			),
-			'implicit createpage not allowed for new entity' => array(
+				],
+			],
+			'implicit createpage not allowed for new entity' => [
 				'edit',
-				array( 'read' => true, 'edit' => true, 'createpage' => false ),
+				[ 'read' => true, 'edit' => true, 'createpage' => false ],
 				null,
-				array(
+				[
 					'getPermissionStatusForEntity' => false, // "createpage" is implicitly needed
 					'getPermissionStatusForEntityType' => true, // "edit" is allowed for type
-				),
-			),
-			'createpage not allowed' => array(
+				],
+			],
+			'createpage not allowed' => [
 				'createpage',
-				array( 'read' => true, 'edit' => true, 'createpage' => false ),
+				[ 'read' => true, 'edit' => true, 'createpage' => false ],
 				null,
-				array(
+				[
 					'getPermissionStatusForEntity' => false, // "createpage" is implicitly needed
 					'getPermissionStatusForEntityType' => false, // "createpage" is not allowed
-				),
-			),
-			'edit allowed for existing item' => array(
+				],
+			],
+			'edit allowed for existing item' => [
 				'edit',
-				array( 'read' => true, 'edit' => true, 'createpage' => false ),
+				[ 'read' => true, 'edit' => true, 'createpage' => false ],
 				'Q23',
-				array(
+				[
 					'getPermissionStatusForEntity' => true,
 					'getPermissionStatusForEntityType' => true,
 					'getPermissionStatusForEntityId' => true,
-				),
-			),
-			'edit not allowed' => array(
+				],
+			],
+			'edit not allowed' => [
 				'edit',
-				array( 'read' => true, 'edit' => false ),
+				[ 'read' => true, 'edit' => false ],
 				'Q23',
-				array(
+				[
 					'getPermissionStatusForEntity' => false,
 					'getPermissionStatusForEntityType' => false,
 					'getPermissionStatusForEntityId' => false,
-				),
-			),
-			'delete not allowed' => array(
+				],
+			],
+			'delete not allowed' => [
 				'delete',
-				array( 'read' => true, 'delete' => false ),
+				[ 'read' => true, 'delete' => false ],
 				null,
-				array(
+				[
 					'getPermissionStatusForEntity' => false,
 					'getPermissionStatusForEntityType' => false,
-				),
-			),
-		);
+				],
+			],
+		];
 	}
 
 	/**
@@ -276,11 +276,11 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 
 		PermissionsHelper::applyPermissions(
 			// set permissions for implicit groups
-			array( '*' => $permissions,
+			[ '*' => $permissions,
 					'user' => $permissions,
 					'autoconfirmed' => $permissions,
-					'emailconfirmed' => $permissions ),
-			array() // remove all groups not implied
+					'emailconfirmed' => $permissions ],
+			[] // remove all groups not implied
 		);
 
 		$factory = $this->newFactory();
@@ -305,10 +305,10 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 		$item = new Item();
 		$property = Property::newFromType( 'string' );
 
-		return array(
-			'item' => array( $item ),
-			'property' => array( $property ),
-		);
+		return [
+			'item' => [ $item ],
+			'property' => [ $property ],
+		];
 	}
 
 	/**
@@ -326,9 +326,9 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 		$q1 = new ItemId( 'Q1' );
 		$q2 = new ItemId( 'Q2' );
 
-		return array(
-			'item' => array( new EntityRedirect( $q1, $q2 ) ),
-		);
+		return [
+			'item' => [ new EntityRedirect( $q1, $q2 ) ],
+		];
 	}
 
 	/**
@@ -347,9 +347,9 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 		$p1 = new PropertyId( 'P1' );
 		$p2 = new PropertyId( 'P2' );
 
-		return array(
-			'property' => array( new EntityRedirect( $p1, $p2 ) ),
-		);
+		return [
+			'property' => [ new EntityRedirect( $p1, $p2 ) ],
+		];
 	}
 
 	/**

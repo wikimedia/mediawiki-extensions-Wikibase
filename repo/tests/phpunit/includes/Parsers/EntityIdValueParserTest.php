@@ -43,15 +43,15 @@ class EntityIdValueParserTest extends StringValueParserTest {
 	 * @see ValueParserTestBase::parseProvider
 	 */
 	public function validInputProvider() {
-		$argLists = array();
+		$argLists = [];
 
-		$valid = array(
+		$valid = [
 			'q1' => new EntityIdValue( new ItemId( 'q1' ) ),
 			'p1' => new EntityIdValue( new PropertyId( 'p1' ) ),
-		);
+		];
 
 		foreach ( $valid as $value => $expected ) {
-			$argLists[] = array( $value, $expected );
+			$argLists[] = [ $value, $expected ];
 		}
 
 		return array_merge( $argLists );
@@ -63,7 +63,7 @@ class EntityIdValueParserTest extends StringValueParserTest {
 	public function invalidInputProvider() {
 		$argLists = parent::invalidInputProvider();
 
-		$invalid = array(
+		$invalid = [
 			'foo',
 			'c2',
 			'a-1',
@@ -73,10 +73,10 @@ class EntityIdValueParserTest extends StringValueParserTest {
 			'a 1',
 			'a1 ',
 			' a1',
-		);
+		];
 
 		foreach ( $invalid as $value ) {
-			$argLists[] = array( $value );
+			$argLists[] = [ $value ];
 		}
 
 		return $argLists;

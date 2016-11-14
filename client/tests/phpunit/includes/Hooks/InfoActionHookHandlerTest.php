@@ -149,7 +149,7 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 			->getMock();
 
 		if ( $entityId ) {
-			$entityUsage = array( new EntityUsage( $entityId, 'S' ) );
+			$entityUsage = [ new EntityUsage( $entityId, 'S' ) ];
 			$sqlUsageTracker->expects( $this->any() )
 				->method( 'getUsagesForPage' )
 				->will( $this->returnValue( $entityUsage ) );

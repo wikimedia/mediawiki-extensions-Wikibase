@@ -102,7 +102,7 @@ class SpecialUnconnectedPages extends QueryPage {
 	 * @return string[]
 	 */
 	public function buildConditionals( DatabaseBase $dbr, Title $title = null, NamespaceChecker $checker = null ) {
-		$conds = array();
+		$conds = [];
 
 		if ( $checker === null ) {
 			$checker = $this->getNamespaceChecker();
@@ -134,30 +134,30 @@ class SpecialUnconnectedPages extends QueryPage {
 		$conds['page_is_redirect'] = 0;
 		$conds[] = 'pp_propname IS NULL';
 
-		return array(
-			'tables' => array(
+		return [
+			'tables' => [
 				'page',
 				'page_props',
-			),
-			'fields' => array(
+			],
+			'fields' => [
 				'value' => 'page_id',
 				'namespace' => 'page_namespace',
 				'title' => 'page_title',
 				// Placeholder, we'll get this from page_props in the future.
 				'page_num_iwlinks' => '0',
-			),
+			],
 			'conds' => $conds,
 			// Sorting is determined getOrderFields(), which returns array( 'value' ) per default.
-			'options' => array(),
-			'join_conds' => array(
+			'options' => [],
+			'join_conds' => [
 				// TODO Also get explicit_langlink_count from page_props once that is populated.
 				// Could even filter or sort by it via pp_sortkey.
-				'page_props' => array(
+				'page_props' => [
 					'LEFT JOIN',
-					array( 'page_id = pp_page', "pp_propname = 'wikibase_item'" )
-				),
-			)
-		);
+					[ 'page_id = pp_page', "pp_propname = 'wikibase_item'" ]
+				],
+			]
+		];
 	}
 
 	/**
@@ -170,7 +170,7 @@ class SpecialUnconnectedPages extends QueryPage {
 	 */
 	public function reallyDoQuery( $limit, $offset = false ) {
 		if ( is_int( $offset ) && $offset > self::MAX_OFFSET ) {
-			return new FakeResultWrapper( array() );
+			return new FakeResultWrapper( [] );
 		}
 
 		return parent::reallyDoQuery( $limit, $offset );
@@ -213,20 +213,20 @@ class SpecialUnconnectedPages extends QueryPage {
 
 		return Html::openElement(
 			'form',
-			array(
+			[
 				'action' => $this->getPageTitle()->getLocalURL()
-			)
+			]
 		) .
 		( $limit === null ? '' : Html::hidden( 'limit', $limit ) ) .
-		Html::namespaceSelector( array(
+		Html::namespaceSelector( [
 			'selected' => $ns === null ? '' : $ns,
 			'all' => '',
 			'exclude' => $excludeNamespaces,
 			'label' => $this->msg( 'namespace' )->text()
-		) ) . ' ' .
+		] ) . ' ' .
 		Html::submitButton(
 			$this->msg( 'wikibase-unconnectedpages-submit' )->text(),
-			array()
+			[]
 		) .
 		Html::closeElement( 'form' );
 	}
@@ -246,9 +246,9 @@ class SpecialUnconnectedPages extends QueryPage {
 	 * @return array
 	 */
 	public function linkParameters() {
-		return array(
+		return [
 			'namespace' => $this->getRequest()->getIntOrNull( 'namespace' ),
-		);
+		];
 	}
 
 }

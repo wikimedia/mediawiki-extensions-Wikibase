@@ -73,64 +73,64 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 	}
 
 	public function exceptionProvider() {
-		return array(
+		return [
 			// Reporting an unknown / generic exception with an unknown error
 			// code should result in the error code and being used directly,
 			// and the error info being set to the exception message.
-			'IllegalValueException' => array(
+			'IllegalValueException' => [
 				'$exception' => new IllegalValueException( 'ugh!' ),
 				'$code' => 'errorreporter-test-ugh',
 				'$httpStatusCode' => 0,
-				'$extradata' => array(),
+				'$extradata' => [],
 				'$infoPattern' => '/ugh!/',
-				'$expectedData' => array(
+				'$expectedData' => [
 					'code' => 'errorreporter-test-ugh',
-				),
-			),
+				],
+			],
 
 			// Any extra data should be passed through.
 			// The HTTP status code should be used.
-			'extradata' => array(
+			'extradata' => [
 				'$exception' => new IllegalValueException( 'ugh!' ),
 				'$code' => 'errorreporter-test-ugh',
 				'$httpStatusCode' => 555,
-				'$extradata' => array( 'fruit' => 'Banana' ),
+				'$extradata' => [ 'fruit' => 'Banana' ],
 				'$infoPattern' => '/ugh!/',
-				'$expectedData' => array(
+				'$expectedData' => [
 					'fruit' => 'Banana',
-				),
-			),
+				],
+			],
 
 			// Reporting an unknwon / generic exception along with a well known
 			// error code should result in that code being used find a message key
 			// and generate a localized message.
-			'known error code' => array(
+			'known error code' => [
 				'$exception' => new IllegalValueException( 'ugh!' ),
 				'$code' => 'no-such-sitelink',
 				'$httpStatusCode' => 0,
-				'$extradata' => array( 'fruit' => 'Banana' ),
+				'$extradata' => [ 'fruit' => 'Banana' ],
 				'$infoPattern' => '/sitelink.*\(ugh!\)$/',
-				'$expectedData' => array(
+				'$expectedData' => [
 					'fruit' => 'Banana',
 					'messages/0/name' => 'wikibase-api-no-such-sitelink',
 					'messages/0/html' => '/gefunden/', // in German
-				),
-			),
+				],
+			],
 
 			// Reporting a well known exception should result in an appropriate
 			// localized message via the ExceptionLocalizer mechanism.
-			'known exception' => array(
+			'known exception' => [
 				'$exception' => new ParseException( 'arg!' ),
 				'$code' => 'errorreporter-test-bla',
 				'$httpStatusCode' => 0,
 				'$extradata' => null,
 				'$infoPattern' => '/^Malformed value\./',
-				'$expectedData' => array(
+				'$expectedData' => [
 					'messages/0/name' => 'wikibase-parse-error',
 					'messages/0/html' => '/Wert/', // in German
-				),
-			),
-		);
+				],
+			],
+		];
 	}
 
 	/**
@@ -160,21 +160,21 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 		$code = 'no-such-sitelink';
 		$param = 'Foo';
 
-		return array(
+		return [
 			// The appropriate message should be included in the extra data.
 			// Most importantly, the info field should contain the message text in English,
 			// while the HTML should be in German. Any Message parameters must be present.
-			'known error code' => array(
+			'known error code' => [
 				'$code' => $code,
 				'$param' => $param,
 				'$infoPattern' => '/sitelink/',
-				'$expectedDataFields' => array(
+				'$expectedDataFields' => [
 					'messages/0/name' => 'wikibase-api-no-such-sitelink',
 					'messages/0/html' => '/gefunden/', // in German
 					'messages/0/parameters/0' => '/Foo/',
-				),
-			)
-		);
+				],
+			]
+		];
 	}
 
 	/**
@@ -197,41 +197,41 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 		$status = Status::newFatal( 'wikibase-api-no-such-sitelink' );
 		$status->fatal( 'wikibase-noentity', 'Q123' );
 
-		return array(
+		return [
 			// Using an (existing) message, the message should be included in the extra data.
 			// The code string should be unchanged.
 			// Most importantly, the info field should contain the message text in English,
 			// while the HTML should be in German.
 			// All error messages from the Status object should be present, all message
 			// parameters must be present.
-			'known error code' => array(
+			'known error code' => [
 				'$status' => $status,
 				'$code' => 'errorreporter-test-ugh',
 				'$httpStatusCode' => 0,
 				'$extradata' => null,
 				'$infoPattern' => '/sitelink/',
-				'$expectedData' => array(
+				'$expectedData' => [
 					'messages/0/name' => 'wikibase-api-no-such-sitelink',
 					'messages/0/html' => '/gefunden/', // in German
 					'messages/1/name' => 'wikibase-noentity',
 					'messages/1/parameters/0' => 'Q123',
 					'messages/1/html' => '/ist nicht vorhanden/', // in German
-				),
-			),
+				],
+			],
 
 			// Any extra data should be passed through.
 			// The HTTP status code should be used.
-			'extradata' => array(
+			'extradata' => [
 				'$status' => $status,
 				'$code' => 'errorreporter-test-ugh',
 				'$httpStatusCode' => 555,
-				'$extradata' => array( 'fruit' => 'Banana' ),
+				'$extradata' => [ 'fruit' => 'Banana' ],
 				'$infoPattern' => null,
-				'$expectedData' => array(
+				'$expectedData' => [
 					'fruit' => 'Banana',
-				),
-			),
-		);
+				],
+			],
+		];
 	}
 
 	/**
@@ -258,34 +258,34 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 	}
 
 	public function errorProvider() {
-		return array(
+		return [
 			// The provided description and code should be present
 			// in the result.
-			'IllegalValueException' => array(
+			'IllegalValueException' => [
 				'$description' => 'Ugh!',
 				'$code' => 'errorreporter-test-ugh',
 				'$httpStatusCode' => 0,
-				'$extradata' => array(),
+				'$extradata' => [],
 				'$infoPattern' => '/^Ugh!$/',
-				'$expectedData' => array(
+				'$expectedData' => [
 					'info' => 'Ugh!',
 					'code' => 'errorreporter-test-ugh',
-				),
-			),
+				],
+			],
 
 			// Any extra data should be passed through.
 			// The HTTP status code should be used.
-			'extradata' => array(
+			'extradata' => [
 				'$description' => 'Ugh!',
 				'$code' => 'errorreporter-test-ugh',
 				'$httpStatusCode' => 555,
-				'$extradata' => array( 'fruit' => 'Banana' ),
+				'$extradata' => [ 'fruit' => 'Banana' ],
 				'$infoPattern' => '/^Ugh!$/',
-				'$expectedData' => array(
+				'$expectedData' => [
 					'fruit' => 'Banana',
-				),
-			),
-		);
+				],
+			],
+		];
 	}
 
 	/**
@@ -316,18 +316,18 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 		$status->warning( 'wikibase-conflict-patched' );
 		$status->warning( 'undo-nochange' );
 
-		return array(
+		return [
 			// Messages from the Status object should be added to the 'warnings' section.
-			'known error code' => array(
+			'known error code' => [
 				'$status' => $status,
-				'$expectedData' => array(
+				'$expectedData' => [
 					'warnings/main_int/messages/0/name' => 'wikibase-conflict-patched',
 					'warnings/main_int/messages/0/html' => '/Version/', // in German
 					'warnings/main_int/messages/1/name' => 'undo-nochange',
 					'warnings/main_int/messages/1/html' => '/Bearbeitung.*bereits/', // in German
-				),
-			),
-		);
+				],
+			],
+		];
 	}
 
 	/**
@@ -352,9 +352,9 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 	 * @return ExceptionLocalizer
 	 */
 	private function getExceptionLocalizer() {
-		$localizers = array(
+		$localizers = [
 			new ParseExceptionLocalizer()
-		);
+		];
 
 		return new DispatchingExceptionLocalizer( $localizers );
 	}
