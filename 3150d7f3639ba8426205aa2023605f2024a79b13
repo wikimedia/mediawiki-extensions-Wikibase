@@ -155,6 +155,24 @@
     },
     {
       "key": {
+        "uuid": "2eb1770d_daae0495",
+        "filename": "lib/includes/Store/DispatchingTermBuffer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-14T13:38:08Z",
+      "side": 1,
+      "message": "It\u0027s the same behavior you also get when you ask for a label of a local item that does not exist, or in a language for which the item doesn\u0027t have a label.",
+      "parentUuid": "2eb1770d_daf604f6",
+      "revId": "3150d7f3639ba8426205aa2023605f2024a79b13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb4ebfb_18d9c126",
         "filename": "lib/includes/Store/DispatchingTermBuffer.php",
         "patchSetId": 3
