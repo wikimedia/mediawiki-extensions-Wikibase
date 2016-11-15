@@ -50,6 +50,23 @@
       "revId": "4f17da4521a87496d5f2436c8d335a9e04e707f9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2eb1770d_f69f9404",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-15T16:24:02Z",
+      "side": 1,
+      "message": "foreignRepositories needs documentation in docs/options.wiki",
+      "revId": "4f17da4521a87496d5f2436c8d335a9e04e707f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
