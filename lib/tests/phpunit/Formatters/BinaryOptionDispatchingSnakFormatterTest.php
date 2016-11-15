@@ -1,20 +1,21 @@
 <?php
 
-namespace Wikibase\Lib\Test;
+namespace Wikibase\Lib\Tests\Formatters;
 
 use PHPUnit_Framework_TestCase;
-use DataValues\DataValue;
+use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Lib\BinaryOptionDispatchingSnakFormatter;
+use Wikibase\Lib\Formatters\BinaryOptionDispatchingSnakFormatter;
 use Wikibase\Lib\SnakFormatter;
 
 /**
- * @covers Wikibase\Lib\BinaryOptionDispatchingSnakFormatterTest
+ * @covers Wikibase\Lib\Formatters\BinaryOptionDispatchingSnakFormatter
  *
  * @group SnakFormatters
  * @group DataValueExtensions
@@ -50,6 +51,7 @@ class BinaryOptionDispatchingSnakFormatterTest extends PHPUnit_Framework_TestCas
 	public function formatSnakProvider() {
 		$pSpecial = new PropertyId( 'P1' );
 		$pRegular = new PropertyId( 'P2' );
+		$value = new StringValue( '' );
 
 		return [
 			'PropertyNoValueSnak gets fallback treatment always' => [
@@ -61,13 +63,17 @@ class BinaryOptionDispatchingSnakFormatterTest extends PHPUnit_Framework_TestCas
 				false
 			],
 			'PropertyValueSnak with special treatment' => [
-				new PropertyValueSnak( $pSpecial, $this->getMock( DataValue::class ) ),
+				new PropertyValueSnak( $pSpecial, $value ),
 				true
 			],
 			'PropertyValueSnak without special treatment' => [
-				new PropertyValueSnak( $pRegular, $this->getMock( DataValue::class ) ),
+				new PropertyValueSnak( $pRegular, $value ),
 				false
-			]
+			],
+			'Fallback on non-existing Properties' => [
+				new PropertyValueSnak( new PropertyId( 'P3' ), $value ),
+				false
+			],
 		];
 	}
 
@@ -83,6 +89,12 @@ class BinaryOptionDispatchingSnakFormatterTest extends PHPUnit_Framework_TestCas
 		$this->assertSame( 'text/whatever', $formatter->getFormat() );
 	}
 
+	/**
+	 * @param int $expectedCallCount
+	 * @param string $result
+	 *
+	 * @return SnakFormatter
+	 */
 	private function getSnakFormatter( $expectedCallCount, $result = '' ) {
 		$snakFormatter = $this->getMock( SnakFormatter::class );
 		$snakFormatter->expects( $this->exactly( $expectedCallCount ) )
@@ -93,20 +105,23 @@ class BinaryOptionDispatchingSnakFormatterTest extends PHPUnit_Framework_TestCas
 		return $snakFormatter;
 	}
 
+	/**
+	 * @return PropertyDataTypeLookup
+	 */
 	private function getPropertyDataTypeLookup() {
 		$propertyDataTypeLookup = $this->getMock( PropertyDataTypeLookup::class );
 		$propertyDataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
-			->willReturnCallback( function( PropertyId $propertyId ) {
+			->will( $this->returnCallback( function( PropertyId $propertyId ) {
 				switch ( $propertyId->getSerialization() ) {
 					case 'P1':
 						return 'special';
 					case 'P2':
 						return 'something';
 					default:
-						$this->fail( 'Unexpcted PropertyId' );
+						throw new PropertyDataTypeLookupException( $propertyId );
 				}
-			} );
+			} ) );
 
 		return $propertyDataTypeLookup;
 	}
