@@ -61,7 +61,7 @@ class RepositoryNameAssert {
 	 * @param string $value
 	 * @return bool
 	 */
-	private static function isValidRepositoryName($value ) {
+	private static function isValidRepositoryName( $value ) {
 		return is_string( $value ) && strpos( $value, ':' ) === false;
 	}
 
