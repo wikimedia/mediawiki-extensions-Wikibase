@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "2eb1770d_50ead074",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-15T10:28:41Z",
+      "side": 1,
+      "message": "Indeed. I only did it like a quick temporary hack to test if the whole thing will somehow run.\nI am now going to make it per-repo too.",
+      "parentUuid": "2eb1770d_7d448a1c",
+      "revId": "d0a4589a2e7565ed5d008111d76d4c53167a3374",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2eb1770d_1d5a26fa",
         "filename": "client/includes/WikibaseClient.php",
         "patchSetId": 14
