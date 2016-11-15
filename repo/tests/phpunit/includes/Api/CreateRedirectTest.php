@@ -118,7 +118,7 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 		}
 
 		$request = new FauxRequest( $params, true );
-		$main = new ApiMain( $request );
+		$main = new ApiMain( $request, true );
 		$main->getContext()->setUser( $user );
 
 		$module = new CreateRedirect( $main, 'wbcreateredirect' );

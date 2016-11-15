@@ -37,7 +37,7 @@ class ApiModuleTestHelper {
 		}
 
 		$request = new FauxRequest( $params, true );
-		$main = new ApiMain( $request );
+		$main = new ApiMain( $request, true );
 		$main->getContext()->setUser( $user );
 
 		if ( is_string( $instantiator ) && class_exists( $instantiator ) ) {

@@ -50,7 +50,7 @@ abstract class ApiFormatTestCase extends \MediaWikiTestCase {
 			$params['token'] = $wgUser->getEditToken();
 		}
 		$request = new FauxRequest( $params, true );
-		$main = new ApiMain( $request );
+		$main = new ApiMain( $request, true );
 
 		return new $moduleClass( $main, $moduleName );
 	}
