@@ -8,7 +8,7 @@ use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\Client\Usage\UsageTrackingSnakFormatter;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\BinaryOptionDispatchingSnakFormatter;
+use Wikibase\Lib\Formatters\BinaryOptionDispatchingSnakFormatter;
 use Wikibase\Lib\EscapingSnakFormatter;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;

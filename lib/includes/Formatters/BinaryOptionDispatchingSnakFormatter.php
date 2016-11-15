@@ -1,11 +1,12 @@
 <?php
 
-namespace Wikibase\Lib;
+namespace Wikibase\Lib\Formatters;
 
 use ValueFormatters\FormattingException;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\Lib\SnakFormatter;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -76,11 +77,14 @@ class BinaryOptionDispatchingSnakFormatter implements SnakFormatter {
 	 * @param Snak $snak
 	 *
 	 * @throws PropertyDataTypeLookupException
-	 * @return string The Snak's data type
+	 * @return string|null The Snak's data type
 	 */
 	private function getSnakDataType( Snak $snak ) {
-		return $this->dataTypeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
-		// @todo: wrap the PropertyDataTypeLookupException, but make sure ErrorHandlingSnakFormatter still handles it.
+		try {
+			return $this->dataTypeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
+		} catch ( PropertyDataTypeLookupException $ex ) {
+			return null;
+		}
 	}
 
 	/**
@@ -97,7 +101,7 @@ class BinaryOptionDispatchingSnakFormatter implements SnakFormatter {
 
 		if ( $snakType === 'value' ) {
 			$dataType = $this->getSnakDataType( $snak );
-			if ( in_array( $dataType, $this->specialCasedPropertyDataTypes ) ) {
+			if ( $dataType !== null && in_array( $dataType, $this->specialCasedPropertyDataTypes ) ) {
 				return $this->specialCaseSnakFormatter->formatSnak( $snak );
 			}
 		}
