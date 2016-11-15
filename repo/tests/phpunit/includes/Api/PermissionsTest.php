@@ -20,7 +20,7 @@ use FormatJson;
  * @group Database
  * @group medium
  */
-abstract class PermissionsTest extends PermissionsTestCase {
+class PermissionsTest extends PermissionsTestCase {
 
 	public function provideReadPermissions() {
 		return array(

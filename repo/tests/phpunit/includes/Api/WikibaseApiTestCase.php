@@ -65,6 +65,8 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			'createpage' => true,
 			'bot' => true,
 			'item-term' => true,
+			'item-merge' => true,
+			'item-redirect' => true,
 			'property-term' => true,
 			'read' => true,
 			'edit' => true,

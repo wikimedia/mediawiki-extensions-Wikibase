@@ -14,36 +14,17 @@ use Wikibase\Test\PermissionsHelper;
  */
 class PermissionsTestCase extends WikibaseApiTestCase {
 
-	protected $permissions;
-	protected $old_user;
-
 	private static $hasSetup;
 
 	protected function setUp() {
-		global $wgGroupPermissions, $wgUser;
-
 		parent::setUp();
 
 		if ( !isset( self::$hasSetup ) ) {
 			$this->initTestEntities( array( 'Oslo', 'Empty' ) );
 		}
 		self::$hasSetup = true;
-
-		$this->permissions = $wgGroupPermissions;
-		$this->old_user = clone $wgUser;
-	}
-
-	protected function tearDown() {
-		global $wgGroupPermissions;
-		global $wgUser;
-
-		$wgGroupPermissions = $this->permissions;
-
-		if ( $this->old_user ) { // should not be null, but sometimes, it is
-			$wgUser = $this->old_user;
-		}
-
-		parent::tearDown();
+		$this->stashMwGlobals( 'wgGroupPermissions' );
+		$this->stashMwGlobals( 'wgUser' );
 	}
 
 	protected function doPermissionsTest(
@@ -52,10 +33,9 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 		array $permissions = null,
 		$expectedError = null
 	) {
-		global $wgUser, $wgGroupPermissions;
+		global $wgUser;
 
 		$this->setMwGlobals( 'wgUser', clone $wgUser );
-		$this->setMwGlobals( 'wgGroupPermissions', $wgGroupPermissions );
 		PermissionsHelper::applyPermissions( $permissions );
 
 		try {
