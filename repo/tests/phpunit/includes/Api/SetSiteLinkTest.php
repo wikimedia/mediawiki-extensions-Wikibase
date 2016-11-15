@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Repo\Api;
 
+use ApiUsageException;
 use UsageException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -237,6 +238,8 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 	}
 
 	public function provideExceptionData() {
+		$newText = class_exists( ApiUsageException::class );
+
 		return array(
 			array( //0 badtoken
 				'p' => array(
@@ -248,7 +251,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 				'e' => array( 'exception' => array(
 					'type' => UsageException::class,
 					'code' => 'notoken',
-					'message' => 'The token parameter must be set'
+					'message' => $newText ? 'The "token" parameter must be set' : 'The token parameter must be set'
 				) )
 			),
 			array( //1
@@ -262,7 +265,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 				'e' => array( 'exception' => array(
 					'type' => UsageException::class,
 					'code' => 'badtoken',
-					'message' => 'Invalid token'
+					'message' => $newText ? 'Invalid CSRF token.' : 'Invalid token'
 				) )
 			),
 			array( //2 testSetSiteLinkWithNoId
@@ -552,6 +555,8 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 	 * @dataProvider provideBadBadgeData
 	 */
 	public function testBadBadges( array $params ) {
+		$newText = class_exists( ApiUsageException::class );
+
 		// -- set any defaults ------------------------------------
 		$params['action'] = 'wbsetsitelink';
 
@@ -567,7 +572,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		list( $result, ) = $this->doApiRequestWithToken( $params );
 
 		$warning = $result['warnings']['wbsetsitelink']['warnings'];
-		$this->assertContains( 'Unrecognized value for parameter \'badges\'', $warning );
+		$this->assertContains( $newText ? 'Unrecognized value for parameter "badges"' : 'Unrecognized value for parameter \'badges\'', $warning );
 	}
 
 }

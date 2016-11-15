@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Repo\Api;
 
+use ApiUsageException;
 use UsageException;
 
 /**
@@ -133,6 +134,8 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 	}
 
 	public function provideExceptionData() {
+		$newText = class_exists( ApiUsageException::class );
+
 		return array(
 			// p => params, e => expected
 
@@ -156,7 +159,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 				'e' => array( 'exception' => array(
 					'type' => UsageException::class,
 					'code' => 'notoken',
-					'message' => 'The token parameter must be set'
+					'message' => $newText ? 'The "token" parameter must be set' : 'The token parameter must be set'
 				) )
 			),
 			array( //3
@@ -164,7 +167,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 				'e' => array( 'exception' => array(
 					'type' => UsageException::class,
 					'code' => 'badtoken',
-					'message' => 'Invalid token'
+					'message' => $newText ? 'Invalid CSRF token.' : 'Invalid token'
 				) )
 			),
 			array( //4
@@ -180,7 +183,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 				'e' => array( 'exception' => array(
 					'type' => UsageException::class,
 					'code' => 'unknown_site',
-					'message' => "Unrecognized value for parameter 'site'"
+					'message' => $newText ? 'Unrecognized value for parameter "site"' : "Unrecognized value for parameter 'site'"
 				) )
 			),
 			array( //6

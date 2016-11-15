@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Repo\Api;
 
+use ApiUsageException;
 use UsageException;
 
 /**
@@ -87,6 +88,8 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 	}
 
 	public function provideLinkTitleExceptions() {
+		$newText = class_exists( ApiUsageException::class );
+
 		return array(
 			'notoken' => array(
 				'p' => array(
@@ -98,7 +101,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 				'e' => array( 'exception' => array(
 					'type' => UsageException::class,
 					'code' => 'notoken',
-					'message' => 'The token parameter must be set'
+					'message' => $newText ? 'The "token" parameter must be set' : 'The token parameter must be set'
 				) )
 			),
 			'badtoken' => array(
@@ -112,7 +115,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 				'e' => array( 'exception' => array(
 					'type' => UsageException::class,
 					'code' => 'badtoken',
-					'message' => 'Invalid token'
+					'message' => $newText ? 'Invalid CSRF token.' : 'Invalid token'
 				) )
 			),
 			'add two links already exist together' => array(
