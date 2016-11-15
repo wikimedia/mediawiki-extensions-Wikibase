@@ -35,4 +35,7 @@ Feature: Authority control gadget test
   Examples:
     | item_id | debug_mode |
     | Q12480  | false |
+
+  Examples:
+    | item_id | debug_mode |
     | Q12480  | true |
