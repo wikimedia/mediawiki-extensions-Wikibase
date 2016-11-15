@@ -289,6 +289,10 @@ abstract class ModifyEntity extends ApiBase {
 		$status = $this->checkPermissions( $entity, $user );
 
 		if ( !$status->isOK() ) {
+			error_log( 'D#8b#NKE' );
+			error_log( print_r( $status, true ) );
+			error_log( print_r( $entity, true ) );
+			error_log( print_r( $user, true ) );
 			$this->errorReporter->dieError( 'You do not have sufficient permissions', 'permissiondenied' );
 		}
 
