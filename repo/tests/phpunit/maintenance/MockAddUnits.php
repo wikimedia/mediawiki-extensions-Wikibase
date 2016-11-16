@@ -3,7 +3,6 @@ namespace Wikibase\Test;
 
 use Wikibase\AddUnitConversions;
 use Wikibase\Lib\UnitConverter;
-use Wikibase\Rdf\Values\QuantityRdfBuilder;
 use Wikibase\Repo\Maintenance\SPARQLClient;
 
 class MockAddUnits extends AddUnitConversions {
