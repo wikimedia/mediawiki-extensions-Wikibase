@@ -24,6 +24,11 @@ class PrefixMappingEntityIdParserFactory {
 	private $parser;
 
 	/**
+	 * @var PrefixMappingEntityIdParser[]
+	 */
+	private $parsers = [];
+
+	/**
 	 * @since 3.7
 	 *
 	 * @param EntityIdParser $parser
@@ -72,6 +77,20 @@ class PrefixMappingEntityIdParserFactory {
 	 * @throws ParameterAssertionException
 	 */
 	public function getIdParser( $repository ) {
+		if ( !isset( $this->parsers[$repository] ) ) {
+			$this->parsers[$repository] = $this->newIdParserForRepository( $repository );
+		}
+
+		return $this->parsers[$repository];
+	}
+
+	/**
+	 * @param string $repository
+	 *
+	 * @return PrefixMappingEntityIdParser
+	 * @throws ParameterAssertionException
+	 */
+	private function newIdParserForRepository( $repository ) {
 		Assert::parameterType( 'string', $repository, '$repository' );
 		Assert::parameter( strpos( $repository, ':' ) === false, '$repository', 'must not contain a colon' );
 		$mapping = [ '' => $repository ];
