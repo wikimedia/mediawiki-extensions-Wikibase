@@ -19,7 +19,7 @@
 	"wikibase-error-save-connection": "Не атрымалася захаваць праз памылку злучэньня. Калі ласка, праверце вашае злучэньне з Інтэрнэтам.",
 	"wikibase-error-remove-connection": "Не атрымалася выдаліць праз памылку злучэньня. Калі ласка, праверце вашае злучэньне з Інтэрнэтам.",
 	"wikibase-error-save-timeout": "Мы маем тэхнічныя праблемы. Калі ласка, паспрабуйце яшчэ раз.",
-	"wikibase-error-remove-timeout": "Мы маем тэхнічныя праблемы. Вашае выдаленьне завершыць немагчыма.",
+	"wikibase-error-remove-timeout": "Мы маем тэхнічныя праблемы. Калі ласка, паспрабуйце яшчэ раз.",
 	"wikibase-error-autocomplete-connection": "Не атрымалася запытаць API сайта. Калі ласка, паспрабуйце пазьней.",
 	"wikibase-error-autocomplete-response": "Адказ сэрвэра: $1",
 	"wikibase-error-ui-no-external-page": "Пазначаны артыкул на адпаведным сайце ня знойдзены.",

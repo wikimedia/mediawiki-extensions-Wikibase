@@ -2,11 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"AlnashPiyash2",
-			"Kaganer"
+			"Kaganer",
+			"Wadorgurt"
 		]
 	},
 	"wikibase-edit": "тупатыны",
 	"wikibase-cancel": "берытсконо",
+	"wikibase-add": "ватсаны",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Мукет кылъёсын",
 	"wikibase-entityselector-more": "эшшо",
 	"wikibase-history-title-with-label": "«$2» ($1) воштонъёслэн историзы",

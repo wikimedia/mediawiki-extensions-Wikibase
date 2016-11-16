@@ -16,7 +16,8 @@
 			"Тест",
 			"Harriv",
 			"Pxos",
-			"Pitke"
+			"Pitke",
+			"Valtlait"
 		]
 	},
 	"wikibase-desc": "Säilö jäsennetylle datalle",
@@ -32,6 +33,9 @@
 	"wikibase-addreference": "lisää lähde",
 	"wikibase-save-inprogress": "Tallennetaan...",
 	"wikibase-remove-inprogress": "Poistetaan...",
+	"wikibase-statementlistview-add": "lisää",
+	"wikibase-statementlistview-add-tooltip": "Lisää uusi arvo",
+	"wikibase-statementgrouplistview-add": "lisää",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Muilla kielillä",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Määritä",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Näytä nimet, aliakset ja kuvaukset kaikilla kielilläni sivun latautuessa",
