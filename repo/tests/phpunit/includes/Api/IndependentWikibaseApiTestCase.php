@@ -101,7 +101,7 @@ abstract class IndependentWikibaseApiTestCase extends \MediaWikiTestCase {
 		$request = new FauxRequest( $params, true, $wgRequest->getSessionArray() );
 		$requestContext->setRequest( $request );
 
-		$apiMain = new ApiMain( $requestContext );
+		$apiMain = new ApiMain( $requestContext, true );
 
 		$class = $this->getModuleClass();
 		return new $class( $apiMain, 'iAmAName' );
