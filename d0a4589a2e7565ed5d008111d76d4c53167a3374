@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "eec4bf7e_42244807",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-16T14:51:13Z",
+      "side": 1,
+      "message": "I am now thinking about replacing all things that are repo-specific to RepoSpecificServices which would hopefully lead to not need ClientStore.\nThis will still take quite some time but hopefully it is doable and sane.",
+      "parentUuid": "2eb1770d_5dc2ee89",
+      "revId": "d0a4589a2e7565ed5d008111d76d4c53167a3374",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2eb1770d_9d475622",
         "filename": "client/includes/WikibaseClient.php",
         "patchSetId": 14
@@ -65,6 +83,24 @@
       "side": 1,
       "message": "Indeed. I only did it like a quick temporary hack to test if the whole thing will somehow run.\nI am now going to make it per-repo too.",
       "parentUuid": "2eb1770d_7d448a1c",
+      "revId": "d0a4589a2e7565ed5d008111d76d4c53167a3374",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eec4bf7e_c28618e0",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-16T14:51:13Z",
+      "side": 1,
+      "message": "So I mae this method private again.\nRepoSpecificServices (for which I switched this method to public) now has a separate service \"DataValueDeserializer\" returning factory of repo-specific DV deserializers. I still need to move the introduction of this factory to separate patch so this one is not becoming 10k line patch, and we can move one step at a time.",
+      "parentUuid": "2eb1770d_50ead074",
       "revId": "d0a4589a2e7565ed5d008111d76d4c53167a3374",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
