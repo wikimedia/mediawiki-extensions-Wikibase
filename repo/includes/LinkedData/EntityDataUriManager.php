@@ -4,7 +4,7 @@ namespace Wikibase\Repo\LinkedData;
 
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 
 /**
  * Manages URIs for the linked data interface
@@ -27,7 +27,7 @@ class EntityDataUriManager {
 	private $supportedExtensions;
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
 	private $entityTitleLookup;
 
@@ -36,12 +36,12 @@ class EntityDataUriManager {
 	 *
 	 * @param Title                $interfaceTitle
 	 * @param string[]             $supportedExtensions an associative Array mapping canonical format names to file extensions.
-	 * @param EntityTitleLookup    $entityTitleLookup
+	 * @param EntityTitleStoreLookup    $entityTitleLookup
 	 */
 	public function __construct(
 		Title $interfaceTitle,
 		array $supportedExtensions,
-		EntityTitleLookup $entityTitleLookup
+		EntityTitleStoreLookup $entityTitleLookup
 	) {
 		$this->interfaceTitle = $interfaceTitle;
 		$this->supportedExtensions = $supportedExtensions;

@@ -13,7 +13,7 @@ use Wikibase\EditEntityFactory;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\SummaryFormatter;
@@ -30,7 +30,7 @@ use Wikibase\SummaryFormatter;
 class ApiHelperFactory {
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
 	private $titleLookup;
 
@@ -92,7 +92,7 @@ class ApiHelperFactory {
 	/**
 	 * ApiHelperFactory constructor.
 	 *
-	 * @param EntityTitleLookup $titleLookup
+	 * @param EntityTitleStoreLookup $titleLookup
 	 * @param ExceptionLocalizer $exceptionLocalizer
 	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 * @param SiteStore $siteStore
@@ -106,7 +106,7 @@ class ApiHelperFactory {
 	 * @param EntityStore|null $entityStore
 	 */
 	public function __construct(
-		EntityTitleLookup $titleLookup,
+		EntityTitleStoreLookup $titleLookup,
 		ExceptionLocalizer $exceptionLocalizer,
 		PropertyDataTypeLookup $dataTypeLookup,
 		SiteStore $siteStore,

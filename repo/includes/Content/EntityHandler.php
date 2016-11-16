@@ -473,7 +473,7 @@ abstract class EntityHandler extends ContentHandler {
 	 *
 	 * @since 0.5
 	 *
-	 * @see EntityTitleLookup::getTitleForId
+	 * @see EntityTitleStoreLookup::getTitleForId
 	 *
 	 * @param EntityId $id
 	 *

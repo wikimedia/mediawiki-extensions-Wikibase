@@ -17,7 +17,7 @@ use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\EntityIdComposer;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
@@ -313,10 +313,10 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @return EntityTitleLookup
+	 * @return EntityTitleStoreLookup
 	 */
 	private function getEntityTitleLookupMock() {
-		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
+		$entityTitleLookup = $this->getMock( EntityTitleStoreLookup::class );
 
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )

@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\StaticContentLanguages;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\SearchEntities;
 use Wikibase\Lib\Interactors\TermSearchResult;
@@ -46,10 +46,10 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return EntityTitleLookup
+	 * @return EntityTitleStoreLookup
 	 */
 	private function getMockTitleLookup() {
-		$titleLookup = $this->getMock( EntityTitleLookup::class );
+		$titleLookup = $this->getMock( EntityTitleStoreLookup::class );
 		$titleLookup->expects( $this->any() )->method( 'getTitleForId' )
 			->will( $this->returnValue( $this->getMockTitle() ) );
 

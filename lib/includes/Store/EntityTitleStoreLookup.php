@@ -9,15 +9,18 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
- * Represents a mapping from entity IDs to wiki page titles.
+ * Represents a mapping from entity IDs to wiki page titles, assuming that the resulting title
+ * represents a page that actually stores the entity contents. For example, the property P1 will be
+ * resolved to the "Property" namespace and the page "Property:P1".
+ *
  * The mapping could be programmatic, or it could be based on database lookups.
  *
- * @since 0.4
+ * @since 0.5
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
-interface EntityTitleLookup {
+interface EntityTitleStoreLookup {
 
 	/**
 	 * Returns the Title for the given entity.
@@ -27,7 +30,7 @@ interface EntityTitleLookup {
 	 *
 	 * @todo change this to return a TitleValue
 	 *
-	 * @since 0.4
+	 * @since 0.5
 	 *
 	 * @param EntityId $id
 	 *

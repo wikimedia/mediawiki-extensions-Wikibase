@@ -9,7 +9,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\ItemDisambiguation;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 
 /**
  * @covers Wikibase\ItemDisambiguation
@@ -35,7 +35,7 @@ class ItemDisambiguationTest extends MediaWikiTestCase {
 	 * @return ItemDisambiguation
 	 */
 	private function newInstance() {
-		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
+		$entityTitleLookup = $this->getMock( EntityTitleStoreLookup::class );
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnValue( $this->getMock( Title::class ) ) );

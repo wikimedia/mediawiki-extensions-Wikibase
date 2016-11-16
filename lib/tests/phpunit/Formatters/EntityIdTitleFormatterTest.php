@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityIdTitleFormatter;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 
 /**
  * @covers Wikibase\Lib\EntityIdTitleFormatter
@@ -61,7 +61,7 @@ class EntityIdTitleFormatterTest extends PHPUnit_Framework_TestCase {
 	}
 
 	protected function newEntityIdTitleFormatter() {
-		$titleLookup = $this->getMock( EntityTitleLookup::class );
+		$titleLookup = $this->getMock( EntityTitleStoreLookup::class );
 		$titleLookup->expects( $this->any() )->method( 'getTitleForId' )
 			->will( $this->returnCallback( array( $this, 'getTitleForId' ) ) );
 

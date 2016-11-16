@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 
@@ -22,7 +22,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 class EditEntityFactory {
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
 	private $titleLookup;
 
@@ -62,7 +62,7 @@ class EditEntityFactory {
 	private $context;
 
 	/**
-	 * @param EntityTitleLookup $titleLookup
+	 * @param EntityTitleStoreLookup $titleLookup
 	 * @param EntityRevisionLookup $entityLookup
 	 * @param EntityStore $entityStore
 	 * @param EntityPermissionChecker $permissionChecker
@@ -72,7 +72,7 @@ class EditEntityFactory {
 	 * @param IContextSource|null $context
 	 */
 	public function __construct(
-		EntityTitleLookup $titleLookup,
+		EntityTitleStoreLookup $titleLookup,
 		EntityRevisionLookup $entityLookup,
 		EntityStore $entityStore,
 		EntityPermissionChecker $permissionChecker,

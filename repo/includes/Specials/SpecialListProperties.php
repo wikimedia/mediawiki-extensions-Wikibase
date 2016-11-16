@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataTypeSelector;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\PropertyInfoStore;
 use Wikibase\Repo\WikibaseRepo;
@@ -60,7 +60,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	private $entityIdFormatter;
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
 	private $titleLookup;
 
@@ -93,7 +93,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 		PropertyInfoStore $propertyInfoStore,
 		EntityIdFormatterFactory $entityIdFormatterFactory,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		EntityTitleLookup $titleLookup,
+		EntityTitleStoreLookup $titleLookup,
 		BufferingTermLookup $bufferingTermLookup
 	) {
 		$fallbackMode = LanguageFallbackChainFactory::FALLBACK_ALL;

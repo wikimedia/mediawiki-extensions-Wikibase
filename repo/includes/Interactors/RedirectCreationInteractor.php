@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
@@ -29,7 +29,7 @@ use Wikibase\SummaryFormatter;
 class RedirectCreationInteractor {
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
 	private $entityTitleLookup;
 
@@ -76,7 +76,7 @@ class RedirectCreationInteractor {
 	 * @param User $user
 	 * @param EditFilterHookRunner $editFilterHookRunner
 	 * @param EntityRedirectLookup $entityRedirectLookup
-	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityTitleStoreLookup $entityTitleLookup
 	 */
 	public function __construct(
 		EntityRevisionLookup $entityRevisionLookup,
@@ -86,7 +86,7 @@ class RedirectCreationInteractor {
 		User $user,
 		EditFilterHookRunner $editFilterHookRunner,
 		EntityRedirectLookup $entityRedirectLookup,
-		EntityTitleLookup $entityTitleLookup
+		EntityTitleStoreLookup $entityTitleLookup
 	) {
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityStore = $entityStore;

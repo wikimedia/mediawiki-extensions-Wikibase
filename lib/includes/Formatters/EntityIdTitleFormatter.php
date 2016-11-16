@@ -4,7 +4,7 @@ namespace Wikibase\Lib;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 
 /**
  * Formats entity IDs by generating the corresponding page title.
@@ -17,14 +17,14 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 class EntityIdTitleFormatter implements EntityIdFormatter {
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
 	protected $titleLookup;
 
 	/**
-	 * @param EntityTitleLookup $titleLookup
+	 * @param EntityTitleStoreLookup $titleLookup
 	 */
-	public function __construct( EntityTitleLookup $titleLookup ) {
+	public function __construct( EntityTitleStoreLookup $titleLookup ) {
 		$this->titleLookup = $titleLookup;
 	}
 

@@ -8,7 +8,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Dumpers\DumpGenerator;
 use Wikibase\Dumpers\RdfDumpGenerator;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Store\EntityIdPager;
@@ -62,7 +62,7 @@ class DumpRdf extends DumpScript {
 	private $hasHadServicesSet = false;
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
 	private $titleLookup;
 
@@ -79,7 +79,7 @@ class DumpRdf extends DumpScript {
 	 * @param ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory
 	 * @param EntityRevisionLookup       $entityRevisionLookup
 	 * @param RdfVocabulary              $rdfVocabulary
-	 * @param EntityTitleLookup          $titleLookup
+	 * @param EntityTitleStoreLookup          $titleLookup
 	 */
 	public function setServices(
 		SqlEntityIdPagerFactory $sqlEntityIdPagerFactory,
@@ -89,7 +89,7 @@ class DumpRdf extends DumpScript {
 		ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory,
 		EntityRevisionLookup $entityRevisionLookup,
 		RdfVocabulary $rdfVocabulary,
-		EntityTitleLookup $titleLookup
+		EntityTitleStoreLookup $titleLookup
 	) {
 		parent::setDumpEntitiesServices( $sqlEntityIdPagerFactory );
 		$this->entityPrefetcher = $entityPrefetcher;

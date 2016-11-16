@@ -16,7 +16,7 @@ use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\RedirectRevision;
@@ -68,7 +68,7 @@ class EntityDataRequestHandler {
 	private $entityRedirectLookup;
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
 	private $entityTitleLookup;
 
@@ -101,7 +101,7 @@ class EntityDataRequestHandler {
 	 * @since 0.4
 	 *
 	 * @param EntityDataUriManager $uriManager
-	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityTitleStoreLookup $entityTitleLookup
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityRedirectLookup $entityRedirectLookup
@@ -114,7 +114,7 @@ class EntityDataRequestHandler {
 	 */
 	public function __construct(
 		EntityDataUriManager $uriManager,
-		EntityTitleLookup $entityTitleLookup,
+		EntityTitleStoreLookup $entityTitleLookup,
 		EntityIdParser $entityIdParser,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityRedirectLookup $entityRedirectLookup,

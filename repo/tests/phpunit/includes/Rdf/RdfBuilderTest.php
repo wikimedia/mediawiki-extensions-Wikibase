@@ -7,7 +7,7 @@ use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfBuilder;
@@ -62,10 +62,10 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return EntityTitleLookup
+	 * @return EntityTitleStoreLookup
 	 */
 	private function getEntityTitleLookup() {
-		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
+		$entityTitleLookup = $this->getMock( EntityTitleStoreLookup::class );
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function ( EntityId $entityId ) {

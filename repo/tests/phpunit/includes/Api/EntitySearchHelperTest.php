@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchResult;
@@ -27,10 +27,10 @@ use Wikibase\TermIndexEntry;
 class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @return EntityTitleLookup
+	 * @return EntityTitleStoreLookup
 	 */
 	private function getMockTitleLookup() {
-		$titleLookup = $this->getMock( EntityTitleLookup::class );
+		$titleLookup = $this->getMock( EntityTitleStoreLookup::class );
 		$titleLookup->expects( $this->any() )->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				if ( $id->getSerialization() === 'Q111' ) {

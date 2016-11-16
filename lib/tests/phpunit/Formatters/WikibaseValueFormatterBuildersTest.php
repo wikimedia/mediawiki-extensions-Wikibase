@@ -27,7 +27,7 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 
 /**
@@ -51,11 +51,11 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityTitleStoreLookup $entityTitleLookup
 	 *
 	 * @return WikibaseValueFormatterBuilders
 	 */
-	private function newWikibaseValueFormatterBuilders( EntityTitleLookup $entityTitleLookup ) {
+	private function newWikibaseValueFormatterBuilders( EntityTitleStoreLookup $entityTitleLookup ) {
 		$termLookup = $this->getMock( TermLookup::class );
 
 		$termLookup->expects( $this->any() )
@@ -104,10 +104,10 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @return EntityTitleLookup
+	 * @return EntityTitleStoreLookup
 	 */
 	private function getTitleLookup() {
-		$titleLookup = $this->getMock( EntityTitleLookup::class );
+		$titleLookup = $this->getMock( EntityTitleStoreLookup::class );
 
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )

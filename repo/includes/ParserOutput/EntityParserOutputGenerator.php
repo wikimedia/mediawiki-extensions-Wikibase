@@ -17,7 +17,7 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityInfoTermLookup;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
@@ -52,7 +52,7 @@ class EntityParserOutputGenerator {
 	private $configBuilder;
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
 	private $entityTitleLookup;
 
@@ -99,7 +99,7 @@ class EntityParserOutputGenerator {
 	/**
 	 * @param DispatchingEntityViewFactory $entityViewFactory
 	 * @param ParserOutputJsConfigBuilder $configBuilder
-	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityTitleStoreLookup $entityTitleLookup
 	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
 	 * @param LanguageFallbackChain $languageFallbackChain
 	 * @param TemplateFactory $templateFactory
@@ -112,7 +112,7 @@ class EntityParserOutputGenerator {
 	public function __construct(
 		DispatchingEntityViewFactory $entityViewFactory,
 		ParserOutputJsConfigBuilder $configBuilder,
-		EntityTitleLookup $entityTitleLookup,
+		EntityTitleStoreLookup $entityTitleLookup,
 		EntityInfoBuilderFactory $entityInfoBuilderFactory,
 		LanguageFallbackChain $languageFallbackChain,
 		TemplateFactory $templateFactory,

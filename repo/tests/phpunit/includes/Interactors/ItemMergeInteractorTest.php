@@ -12,7 +12,7 @@ use User;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\ItemMergeException;
@@ -106,10 +106,10 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @return EntityTitleLookup
+	 * @return EntityTitleStoreLookup
 	 */
 	private function getEntityTitleLookup() {
-		$mock = $this->getMock( EntityTitleLookup::class );
+		$mock = $this->getMock( EntityTitleStoreLookup::class );
 
 		$mock->expects( $this->any() )
 			->method( 'getTitleForId' )
@@ -165,10 +165,10 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @return EntityTitleLookup
+	 * @return EntityTitleStoreLookup
 	 */
 	private function getMockEntityTitleLookup() {
-		$titleLookup = $this->getMock( EntityTitleLookup::class );
+		$titleLookup = $this->getMock( EntityTitleStoreLookup::class );
 
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForID' )

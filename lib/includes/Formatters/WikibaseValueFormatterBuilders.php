@@ -18,7 +18,7 @@ use Wikibase\Formatters\MonolingualHtmlFormatter;
 use Wikibase\Formatters\MonolingualTextFormatter;
 use Wikibase\Lib\Formatters\EntityIdSiteLinkFormatter;
 use Wikibase\Lib\Formatters\CommonsThumbnailFormatter;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -56,7 +56,7 @@ class WikibaseValueFormatterBuilders {
 	private $repoItemUriParser;
 
 	/**
-	 * @var EntityTitleLookup|null
+	 * @var EntityTitleStoreLookup|null
 	 */
 	private $entityTitleLookup;
 
@@ -87,7 +87,7 @@ class WikibaseValueFormatterBuilders {
 	 * @param FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param EntityIdParser $repoItemUriParser
-	 * @param EntityTitleLookup|null $entityTitleLookup Only when used on a repo.
+	 * @param EntityTitleStoreLookup|null $entityTitleLookup Only when used on a repo.
 	 * @param SiteLinkLookup|null $siteLinkLookup Only when used on a client.
 	 * @param string|null $localSiteId Only when used on a client.
 	 */
@@ -96,7 +96,7 @@ class WikibaseValueFormatterBuilders {
 		FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		LanguageNameLookup $languageNameLookup,
 		EntityIdParser $repoItemUriParser,
-		EntityTitleLookup $entityTitleLookup = null,
+		EntityTitleStoreLookup $entityTitleLookup = null,
 		SiteLinkLookup $siteLinkLookup = null,
 		$localSiteId = null
 	) {

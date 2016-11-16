@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\EditEntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\Api\EntityLoadingHelper;
@@ -33,7 +33,7 @@ use Wikibase\SummaryFormatter;
 class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	private function newApiHelperFactory() {
-		$titleLookup = $this->getMock( EntityTitleLookup::class );
+		$titleLookup = $this->getMock( EntityTitleStoreLookup::class );
 		$exceptionLocalizer = $this->getMock( ExceptionLocalizer::class );
 		$dataTypeLookup = $this->getMock( PropertyDataTypeLookup::class );
 		$summaryFormatter = $this->getMockBuilder( SummaryFormatter::class )

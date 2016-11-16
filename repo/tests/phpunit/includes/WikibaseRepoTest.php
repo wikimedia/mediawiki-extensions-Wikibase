@@ -47,7 +47,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -176,7 +176,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 
 	public function testGetEntityTitleLookupReturnType() {
 		$returnValue = $this->getWikibaseRepo()->getEntityTitleLookup();
-		$this->assertInstanceOf( EntityTitleLookup::class, $returnValue );
+		$this->assertInstanceOf( EntityTitleStoreLookup::class, $returnValue );
 	}
 
 	public function testGetEntityIdLookupReturnType() {

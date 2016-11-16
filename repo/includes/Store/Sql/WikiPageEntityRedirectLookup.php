@@ -8,7 +8,7 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Store\EntityIdLookup;
 
 /**
@@ -20,7 +20,7 @@ use Wikibase\Store\EntityIdLookup;
 class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
 	private $entityTitleLookup;
 
@@ -35,12 +35,12 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 	private $loadBalancer;
 
 	/**
-	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityTitleStoreLookup $entityTitleLookup
 	 * @param EntityIdLookup $entityIdLookup
 	 * @param LoadBalancer $loadBalancer
 	 */
 	public function __construct(
-		EntityTitleLookup $entityTitleLookup,
+		EntityTitleStoreLookup $entityTitleLookup,
 		EntityIdLookup $entityIdLookup,
 		LoadBalancer $loadBalancer
 	) {

@@ -8,7 +8,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 
 /**
  * Formats entity IDs by generating an HTML link to the corresponding page title.
@@ -27,18 +27,18 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	private $languageFallbackIndicator;
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
 	protected $entityTitleLookup;
 
 	/**
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
-	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityTitleStoreLookup $entityTitleLookup
 	 * @param LanguageNameLookup $languageNameLookup
 	 */
 	public function __construct(
 		LabelDescriptionLookup $labelDescriptionLookup,
-		EntityTitleLookup $entityTitleLookup,
+		EntityTitleStoreLookup $entityTitleLookup,
 		LanguageNameLookup $languageNameLookup
 	) {
 		parent::__construct( $labelDescriptionLookup );

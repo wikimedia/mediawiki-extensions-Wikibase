@@ -21,7 +21,7 @@ use Wikibase\EntityRevision;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Serialization\CallbackFactory;
 use Wikibase\Lib\Serialization\SerializationModifier;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -41,7 +41,7 @@ class ResultBuilder {
 	private $result;
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
 	private $entityTitleLookup;
 
@@ -87,7 +87,7 @@ class ResultBuilder {
 
 	/**
 	 * @param ApiResult $result
-	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityTitleStoreLookup $entityTitleLookup
 	 * @param SerializerFactory $serializerFactory
 	 * @param Serializer $entitySerializer
 	 * @param SiteStore $siteStore
@@ -96,7 +96,7 @@ class ResultBuilder {
 	 */
 	public function __construct(
 		ApiResult $result,
-		EntityTitleLookup $entityTitleLookup,
+		EntityTitleStoreLookup $entityTitleLookup,
 		SerializerFactory $serializerFactory,
 		Serializer $entitySerializer,
 		SiteStore $siteStore,

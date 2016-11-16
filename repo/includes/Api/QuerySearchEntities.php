@@ -7,7 +7,7 @@ use ApiQuery;
 use ApiQueryGeneratorBase;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -25,7 +25,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	private $entitySearchHelper;
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
 	private $titleLookup;
 
@@ -73,13 +73,13 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	 * Override services, for use for testing.
 	 *
 	 * @param EntitySearchHelper $entitySearchHelper
-	 * @param EntityTitleLookup $titleLookup
+	 * @param EntityTitleStoreLookup $titleLookup
 	 * @param ContentLanguages $termsLanguages
 	 * @param array $entityTypes
 	 */
 	public function setServices(
 		EntitySearchHelper $entitySearchHelper,
-		EntityTitleLookup $titleLookup,
+		EntityTitleStoreLookup $titleLookup,
 		ContentLanguages $termsLanguages,
 		array $entityTypes
 	) {

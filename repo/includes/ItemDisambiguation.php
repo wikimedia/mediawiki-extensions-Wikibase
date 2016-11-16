@@ -6,7 +6,7 @@ use Html;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Interactors\TermSearchResult;
 
 /**
@@ -24,7 +24,7 @@ use Wikibase\Lib\Interactors\TermSearchResult;
 class ItemDisambiguation {
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
 	private $titleLookup;
 
@@ -41,12 +41,12 @@ class ItemDisambiguation {
 	/**
 	 * @since 0.5
 	 *
-	 * @param EntityTitleLookup $titleLookup
+	 * @param EntityTitleStoreLookup $titleLookup
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param string $displayLanguageCode
 	 */
 	public function __construct(
-		EntityTitleLookup $titleLookup,
+		EntityTitleStoreLookup $titleLookup,
 		LanguageNameLookup $languageNameLookup,
 		$displayLanguageCode
 	) {

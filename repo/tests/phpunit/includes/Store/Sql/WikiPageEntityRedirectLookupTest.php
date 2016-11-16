@@ -8,7 +8,7 @@ use LoadBalancer;
 use MediaWikiTestCase;
 use Title;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Store\EntityIdLookup;
 use WikiPage;
 use Wikibase\DataModel\Entity\EntityId;
@@ -130,10 +130,10 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @return EntityTitleLookup
+	 * @return EntityTitleStoreLookup
 	 */
 	private function getMockEntityTitleLookup() {
-		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
+		$entityTitleLookup = $this->getMock( EntityTitleStoreLookup::class );
 
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )

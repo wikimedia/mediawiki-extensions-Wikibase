@@ -16,7 +16,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
@@ -59,7 +59,7 @@ class SqlStoreTest extends MediaWikiTestCase {
 			$this->getMock( EntityIdParser::class ),
 			$entityIdComposer,
 			$this->getMock( EntityIdLookup::class ),
-			$this->getMock( EntityTitleLookup::class ),
+			$this->getMock( EntityTitleStoreLookup::class ),
 			new EntityNamespaceLookup( [] )
 		);
 	}

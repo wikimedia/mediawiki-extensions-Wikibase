@@ -21,7 +21,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\SummaryFormatter;
 use Wikibase\Lib\Tests\MockRepository;
@@ -63,10 +63,10 @@ abstract class SpecialWikibaseRepoPageTestBase extends SpecialPageTestBase {
 	}
 
 	/**
-	 * @return EntityTitleLookup
+	 * @return EntityTitleStoreLookup
 	 */
 	protected function getEntityTitleLookup() {
-		$titleLookup = $this->getMock( EntityTitleLookup::class );
+		$titleLookup = $this->getMock( EntityTitleStoreLookup::class );
 
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )

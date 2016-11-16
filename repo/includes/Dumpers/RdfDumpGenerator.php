@@ -12,7 +12,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
@@ -56,7 +56,7 @@ class RdfDumpGenerator extends DumpGenerator {
 	private $pageProps;
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
 	private $titleLookup;
 
@@ -65,11 +65,11 @@ class RdfDumpGenerator extends DumpGenerator {
 	 * @param EntityRevisionLookup $lookup Must not resolve redirects
 	 * @param RdfBuilder           $rdfBuilder
 	 * @param EntityPrefetcher     $entityPrefetcher
-	 * @param EntityTitleLookup    $titleLookup
+	 * @param EntityTitleStoreLookup    $titleLookup
 	 */
 	public function __construct( $out, EntityRevisionLookup $lookup, RdfBuilder $rdfBuilder,
 	                             EntityPrefetcher $entityPrefetcher,
-	                             EntityTitleLookup $titleLookup ) {
+	                             EntityTitleStoreLookup $titleLookup ) {
 		parent::__construct( $out, $entityPrefetcher );
 		if ( $lookup instanceof RedirectResolvingEntityLookup ) {
 			throw new InvalidArgumentException( '$lookup must not resolve redirects!' );
@@ -196,8 +196,9 @@ class RdfDumpGenerator extends DumpGenerator {
 	 * @param ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory
 	 * @param EntityPrefetcher           $entityPrefetcher
 	 * @param RdfVocabulary              $vocabulary
-	 * @param EntityTitleLookup          $titleLookup
-	 * @return static
+	 * @param EntityTitleStoreLookup $titleLookup
+	 *
+*@return static
 	 * @throws MWException
 	 */
 	public static function createDumpGenerator(
@@ -209,7 +210,7 @@ class RdfDumpGenerator extends DumpGenerator {
 		ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory,
 		EntityPrefetcher $entityPrefetcher,
 		RdfVocabulary $vocabulary,
-		EntityTitleLookup $titleLookup
+		EntityTitleStoreLookup $titleLookup
 	) {
 		$rdfWriter = self::getRdfWriter( $format );
 		if ( !$rdfWriter ) {

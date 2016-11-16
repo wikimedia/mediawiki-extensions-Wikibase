@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\TermIndexEntry;
@@ -21,7 +21,7 @@ use Wikibase\TermIndexEntry;
 class EntitySearchHelper {
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
 	private $titleLookup;
 
@@ -41,7 +41,7 @@ class EntitySearchHelper {
 	private $labelDescriptionLookup;
 
 	public function __construct(
-		EntityTitleLookup $titleLookup,
+		EntityTitleStoreLookup $titleLookup,
 		EntityIdParser $idParser,
 		TermIndexSearchInteractor $termIndexSearchInteractor,
 		LabelDescriptionLookup $labelDescriptionLookup

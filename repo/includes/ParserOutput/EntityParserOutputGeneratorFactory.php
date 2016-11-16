@@ -11,7 +11,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
@@ -40,7 +40,7 @@ class EntityParserOutputGeneratorFactory {
 	private $entityInfoBuilderFactory;
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
 	private $entityTitleLookup;
 
@@ -88,7 +88,7 @@ class EntityParserOutputGeneratorFactory {
 	/**
 	 * @param DispatchingEntityViewFactory $entityViewFactory
 	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
-	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityTitleStoreLookup $entityTitleLookup
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
 	 * @param TemplateFactory $templateFactory
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
@@ -103,7 +103,7 @@ class EntityParserOutputGeneratorFactory {
 	public function __construct(
 		DispatchingEntityViewFactory $entityViewFactory,
 		EntityInfoBuilderFactory $entityInfoBuilderFactory,
-		EntityTitleLookup $entityTitleLookup,
+		EntityTitleStoreLookup $entityTitleLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		TemplateFactory $templateFactory,
 		EntityDataFormatProvider $entityDataFormatProvider,

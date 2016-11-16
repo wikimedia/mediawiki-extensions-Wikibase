@@ -6,7 +6,7 @@ use ApiBase;
 use ApiMain;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -30,7 +30,7 @@ class SearchEntities extends ApiBase {
 	private $entitySearchHelper;
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
 	private $titleLookup;
 
@@ -84,14 +84,14 @@ class SearchEntities extends ApiBase {
 	 * Override services, for use for testing.
 	 *
 	 * @param EntitySearchHelper $entitySearchHelper
-	 * @param EntityTitleLookup $titleLookup
+	 * @param EntityTitleStoreLookup $titleLookup
 	 * @param ContentLanguages $termLanguages
 	 * @param array $entityTypes
 	 * @param string $conceptBaseUri
 	 */
 	public function setServices(
 		EntitySearchHelper $entitySearchHelper,
-		EntityTitleLookup $titleLookup,
+		EntityTitleStoreLookup $titleLookup,
 		ContentLanguages $termLanguages,
 		array $entityTypes,
 		$conceptBaseUri

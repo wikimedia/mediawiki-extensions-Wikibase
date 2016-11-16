@@ -17,7 +17,7 @@ use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -41,7 +41,7 @@ class EditEntity {
 	private $entityRevisionLookup;
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
 	private $titleLookup;
 
@@ -172,7 +172,7 @@ class EditEntity {
 	/**
 	 * @since 0.5
 	 *
-	 * @param EntityTitleLookup $titleLookup
+	 * @param EntityTitleStoreLookup $titleLookup
 	 * @param EntityRevisionLookup $entityLookup
 	 * @param EntityStore $entityStore
 	 * @param EntityPermissionChecker $permissionChecker
@@ -193,7 +193,7 @@ class EditEntity {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
-		EntityTitleLookup $titleLookup,
+		EntityTitleStoreLookup $titleLookup,
 		EntityRevisionLookup $entityLookup,
 		EntityStore $entityStore,
 		EntityPermissionChecker $permissionChecker,

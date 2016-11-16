@@ -14,7 +14,7 @@ use Wikibase\EditEntityFactory;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\MessageException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\UserInputException;
@@ -84,14 +84,14 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 *
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityRevisionLookup $entityRevisionLookup
-	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityTitleStoreLookup $entityTitleLookup
 	 * @param SiteStore $siteStore
 	 * @param EditEntityFactory $editEntityFactory
 	 */
 	public function setSpecialModifyEntityServices(
 		SummaryFormatter $summaryFormatter,
 		EntityRevisionLookup $entityRevisionLookup,
-		EntityTitleLookup $entityTitleLookup,
+		EntityTitleStoreLookup $entityTitleLookup,
 		SiteStore $siteStore,
 		EditEntityFactory $editEntityFactory
 	) {

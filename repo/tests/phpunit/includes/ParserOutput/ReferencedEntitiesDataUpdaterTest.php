@@ -14,7 +14,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
 
 /**
@@ -45,7 +45,7 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 	 * @return ReferencedEntitiesDataUpdater
 	 */
 	private function newInstance( $count = 0 ) {
-		$entityTitleLookup = $this->getMockBuilder( EntityTitleLookup::class )
+		$entityTitleLookup = $this->getMockBuilder( EntityTitleStoreLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$entityTitleLookup->expects( $this->exactly( $count ) )

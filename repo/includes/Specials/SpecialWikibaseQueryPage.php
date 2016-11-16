@@ -6,7 +6,7 @@ use Html;
 use Linker;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -59,7 +59,7 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	protected $numRows;
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
 	private $entityTitleLookup;
 

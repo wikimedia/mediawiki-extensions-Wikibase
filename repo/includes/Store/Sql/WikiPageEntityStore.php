@@ -307,7 +307,7 @@ class WikiPageEntityStore implements EntityStore {
 	}
 
 	/**
-	 * @see EntityTitleLookup::getTitleForId
+	 * @see EntityTitleStoreLookup::getTitleForId
 	 *
 	 * @param EntityId $entityId
 	 *

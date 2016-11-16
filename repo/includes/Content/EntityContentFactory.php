@@ -14,7 +14,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\EntityContent;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Store\EntityIdLookup;
@@ -30,7 +30,7 @@ use Wikimedia\Assert\Assert;
  * @author Daniel Kinzler
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class EntityContentFactory implements EntityTitleLookup, EntityIdLookup, EntityPermissionChecker {
+class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup, EntityPermissionChecker {
 
 	/**
 	 * @var string[] Entity type ID to content model ID mapping.

@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Term\FingerprintProvider;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikimedia\Purtle\RdfWriter;
 
@@ -84,7 +84,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	private $valueSnakRdfBuilderFactory;
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
 	private $titleLookup;
 
@@ -102,7 +102,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 * @param int                        $flavor
 	 * @param RdfWriter                  $writer
 	 * @param DedupeBag                  $dedupeBag
-	 * @param EntityTitleLookup          $titleLookup
+	 * @param EntityTitleStoreLookup          $titleLookup
 	 */
 	public function __construct(
 		SiteList $sites,
@@ -112,7 +112,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		$flavor,
 		RdfWriter $writer,
 		DedupeBag $dedupeBag,
-		EntityTitleLookup $titleLookup
+		EntityTitleStoreLookup $titleLookup
 	) {
 		$this->vocabulary = $vocabulary;
 		$this->propertyLookup = $propertyLookup;

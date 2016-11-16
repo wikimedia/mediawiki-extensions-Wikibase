@@ -6,7 +6,7 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\View\EntityIdFormatterFactory;
 
 /**
@@ -18,7 +18,7 @@ use Wikibase\View\EntityIdFormatterFactory;
 class EntityIdHtmlLinkFormatterFactory implements EntityIdFormatterFactory {
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
 	private $titleLookup;
 
@@ -28,11 +28,11 @@ class EntityIdHtmlLinkFormatterFactory implements EntityIdFormatterFactory {
 	private $languageNameLookup;
 
 	/**
-	 * @param EntityTitleLookup $titleLookup
+	 * @param EntityTitleStoreLookup $titleLookup
 	 * @param LanguageNameLookup $languageNameLookup
 	 */
 	public function __construct(
-		EntityTitleLookup $titleLookup,
+		EntityTitleStoreLookup $titleLookup,
 		LanguageNameLookup $languageNameLookup
 	) {
 		$this->titleLookup = $titleLookup;

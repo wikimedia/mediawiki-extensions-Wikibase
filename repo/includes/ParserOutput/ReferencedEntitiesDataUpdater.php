@@ -15,7 +15,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 
 /**
  * Finds linked entities on an Entity and add the links to ParserOutput.
@@ -30,7 +30,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 class ReferencedEntitiesDataUpdater implements StatementDataUpdater, SiteLinkDataUpdater {
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
 	private $entityTitleLookup;
 
@@ -45,13 +45,13 @@ class ReferencedEntitiesDataUpdater implements StatementDataUpdater, SiteLinkDat
 	private $entityIds = array();
 
 	/**
-	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityTitleStoreLookup $entityTitleLookup
 	 * @param EntityIdParser $externalEntityIdParser Parser for external entity IDs (usually URIs)
 	 *		into EntityIds. Such external entity IDs may be used for units in QuantityValues, for
 	 *		calendar models in TimeValue, and for the reference globe in GlobeCoordinateValues.
 	 */
 	public function __construct(
-		EntityTitleLookup $entityTitleLookup,
+		EntityTitleStoreLookup $entityTitleLookup,
 		EntityIdParser $externalEntityIdParser
 	) {
 		$this->entityTitleLookup = $entityTitleLookup;

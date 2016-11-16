@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EditEntityFactory;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
@@ -33,7 +33,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	protected $summaryFormatter;
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
 	private $entityTitleLookup;
 
@@ -69,13 +69,13 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 * Override services (for testing).
 	 *
 	 * @param SummaryFormatter $summaryFormatter
-	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityTitleStoreLookup $entityTitleLookup
 	 * @param SiteStore $siteStore
 	 * @param EditEntityFactory $editEntityFactory
 	 */
 	public function setSpecialWikibaseRepoPageServices(
 		SummaryFormatter $summaryFormatter,
-		EntityTitleLookup $entityTitleLookup,
+		EntityTitleStoreLookup $entityTitleLookup,
 		SiteStore $siteStore,
 		EditEntityFactory $editEntityFactory
 	) {

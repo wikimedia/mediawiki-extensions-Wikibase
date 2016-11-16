@@ -12,7 +12,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 
 /**
  * @covers Wikibase\Lib\EntityIdHtmlLinkFormatter
@@ -59,10 +59,10 @@ class EntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 	/**
 	 * @param bool $exists
 	 *
-	 * @return EntityTitleLookup
+	 * @return EntityTitleStoreLookup
 	 */
 	private function newEntityTitleLookup( $exists = true ) {
-		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
+		$entityTitleLookup = $this->getMock( EntityTitleStoreLookup::class );
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function ( EntityId $id ) use ( $exists ) {

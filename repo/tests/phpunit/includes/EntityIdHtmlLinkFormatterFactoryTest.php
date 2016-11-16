@@ -7,7 +7,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 
 /**
@@ -23,7 +23,7 @@ use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 class EntityIdHtmlLinkFormatterFactoryTest extends PHPUnit_Framework_TestCase {
 
 	private function getFormatterFactory() {
-		$titleLookup = $this->getMock( EntityTitleLookup::class );
+		$titleLookup = $this->getMock( EntityTitleStoreLookup::class );
 
 		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->never() )

@@ -7,7 +7,7 @@ use Html;
 use Site;
 use SiteStore;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\WikibaseRepo;
@@ -25,7 +25,7 @@ use Wikibase\Repo\WikibaseRepo;
 class SpecialItemByTitle extends SpecialWikibasePage {
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
 	private $titleLookup;
 
@@ -101,14 +101,14 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 	 * Initialize the services used be this special page.
 	 * May be used to inject mock services for testing.
 	 *
-	 * @param EntityTitleLookup $titleLookup
+	 * @param EntityTitleStoreLookup $titleLookup
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param SiteStore $siteStore
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
 	 */
 	public function initServices(
-		EntityTitleLookup $titleLookup,
+		EntityTitleStoreLookup $titleLookup,
 		LanguageNameLookup $languageNameLookup,
 		SiteStore $siteStore,
 		SiteLinkLookup $siteLinkLookup,
