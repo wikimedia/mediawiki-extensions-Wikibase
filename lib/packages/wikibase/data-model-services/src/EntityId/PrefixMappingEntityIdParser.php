@@ -55,7 +55,6 @@ class PrefixMappingEntityIdParser implements EntityIdParser {
 			);
 		}
 
-		//$this->prefix = $prefix;
 		$this->prefixMapping = $prefixMapping;
 		$this->idParser = $idParser;
 	}
