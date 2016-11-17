@@ -7,6 +7,7 @@ use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Lookup\UnknownForeignRepositoryException;
+use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\ForeignEntityRevisionLookupFactory;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
@@ -50,10 +51,16 @@ class ForeignEntityRevisionLookupFactoryTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @return DataValueDeserializer
+	 * @return RepositorySpecificDataValueDeserializerFactory
 	 */
-	private function getDataValueDeserializer() {
-		return $this->getMock( DataValueDeserializer::class );
+	private function getDataValueDeserializerFactory() {
+		$factory = $this->getMockBuilder( RepositorySpecificDataValueDeserializerFactory::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$factory->expects( $this->any() )
+			->method( 'getDeserializer' )
+			->willReturn( $this->getMock( DataValueDeserializer::class ) );
+		return $factory;
 	}
 
 	/**
@@ -67,7 +74,7 @@ class ForeignEntityRevisionLookupFactoryTest extends \PHPUnit_Framework_TestCase
 		$factory = new ForeignEntityRevisionLookupFactory(
 			$this->getPrefixMappingEntityIdParserFactory(),
 			$this->getEntitySerializer(),
-			$this->getDataValueDeserializer(),
+			$this->getDataValueDeserializerFactory(),
 			$this->getEntityNamespaceLookup(),
 			0,
 			[ 'foo' => 'foodb' ]
@@ -80,7 +87,7 @@ class ForeignEntityRevisionLookupFactoryTest extends \PHPUnit_Framework_TestCase
 		$factory = new ForeignEntityRevisionLookupFactory(
 			$this->getPrefixMappingEntityIdParserFactory(),
 			$this->getEntitySerializer(),
-			$this->getDataValueDeserializer(),
+			$this->getDataValueDeserializerFactory(),
 			$this->getEntityNamespaceLookup(),
 			0,
 			[ 'foo' => 'foodb' ]
@@ -95,7 +102,7 @@ class ForeignEntityRevisionLookupFactoryTest extends \PHPUnit_Framework_TestCase
 		$factory = new ForeignEntityRevisionLookupFactory(
 			$this->getPrefixMappingEntityIdParserFactory(),
 			$this->getEntitySerializer(),
-			$this->getDataValueDeserializer(),
+			$this->getDataValueDeserializerFactory(),
 			$this->getEntityNamespaceLookup(),
 			0,
 			[ 'foo' => 'foodb' ]
@@ -128,7 +135,7 @@ class ForeignEntityRevisionLookupFactoryTest extends \PHPUnit_Framework_TestCase
 		new ForeignEntityRevisionLookupFactory(
 			$this->getPrefixMappingEntityIdParserFactory(),
 			$this->getEntitySerializer(),
-			$this->getDataValueDeserializer(),
+			$this->getDataValueDeserializerFactory(),
 			$this->getEntityNamespaceLookup(),
 			0,
 			$databaseNames
