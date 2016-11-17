@@ -1,0 +1,104 @@
+<?php
+
+namespace Wikibase\Repo\Validators;
+
+use ValueValidators\Error;
+use ValueValidators\Result;
+use ValueValidators\ValueValidator;
+use Wikibase\DataModel\Assert\RepositoryNameAssert;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikimedia\Assert\Assert;
+
+/**
+ * @license GPL-2.0+
+ */
+class ForeignEntityValidator implements ValueValidator {
+
+	/**
+	 * @var array
+	 */
+	private $supportedEntityTypes;
+
+	/**
+	 * @param array $supportedEntityTypes map of repository names to lists of supported entity types
+	 */
+	public function __construct( array $supportedEntityTypes ) {
+		RepositoryNameAssert::assertParameterKeysAreValidRepositoryNames(
+			$supportedEntityTypes,
+			'$supportedEntityTypes'
+		);
+		Assert::parameterElementType( 'array', $supportedEntityTypes, '$supportedEntityTypes' );
+
+		$this->supportedEntityTypes = $supportedEntityTypes;
+	}
+
+	/**
+	 * Ensures an entity's repository name is known and
+	 * the corresponding repository supports the entity's type.
+	 *
+	 * @param EntityId $id
+	 *
+	 * @return Result
+	 */
+	public function validate( $id ) {
+		Assert::parameterType( EntityId::class, $id, '$id' );
+
+		if ( !$id->isForeign() ) {
+			return Result::newSuccess();
+		}
+
+		if ( !$this->isKnownRepositoryName( $id->getRepositoryName() ) ) {
+			return Result::newError( [
+				Error::newError(
+					'Unknown repository name: ' . $id->getRepositoryName(),
+					null,
+					'unknown-repository-name',
+					[ $id ]
+				)
+			] );
+		}
+
+		if ( !$this->supportsEntityTypeFromRepository( $id ) ) {
+			return Result::newError( [
+				Error::newError(
+					'Unsupported entity type: ' . $id->getEntityType()
+					. ' for repository ' . $id->getRepositoryName(),
+					null,
+					'unsupported-entity-type',
+					[ $id ]
+				)
+			] );
+		}
+
+		return Result::newSuccess();
+	}
+
+	private function isKnownRepositoryName( $repository ) {
+		return in_array( $repository, array_keys( $this->supportedEntityTypes ) );
+	}
+
+	private function supportsEntityTypeFromRepository( EntityId $id ) {
+		$repository = $id->getRepositoryName();
+
+		if ( isset( $this->supportedEntityTypes[$repository] ) ) {
+			return in_array(
+				$id->getEntityType(),
+				$this->supportedEntityTypes[$repository]
+			);
+		}
+
+		return false;
+	}
+
+	/**
+	 * @see ValueValidator::setOptions()
+	 *
+	 * @param array $options
+	 *
+	 * @codeCoverageIgnore
+	 */
+	public function setOptions( array $options ) {
+		// Do nothing. This method shouldn't even be in the interface.
+	}
+
+}
