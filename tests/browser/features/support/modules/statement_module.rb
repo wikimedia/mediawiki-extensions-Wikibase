@@ -29,6 +29,7 @@ module StatementPage
 
   div(:inputextender_preview, css: 'div.ui-inputextender-extension > div.ui-preview > div.ui-preview-value')
   text_field(:inputextender_input, css: 'div.ui-inputextender-extension > input')
+  text_field(:inputextender_unitsuggester, css: 'div.ui-inputextender-extension > .ui-unitsuggester-input')
   span(:time_hint, css: 'div.ui-inputextender-extension > div.valueview-expertextender-calendarhint > span')
   a(:time_precision, css: 'div.ui-inputextender-extension div.valueview-expert-TimeInput-precision > a.ui-listrotator-curr')
   a(:time_calendar, css: 'div.ui-inputextender-extension div.valueview-expert-TimeInput-calendar > a.ui-listrotator-curr')
