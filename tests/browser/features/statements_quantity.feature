@@ -41,20 +41,26 @@ Feature: Using quantity properties in statements
     | 1:1 |
 
   @modify_entity
-  Scenario: Quantity parser and saving should work properly
+  Scenario Outline: Quantity parser and saving should work properly
     Given I am logged in to the repo
       And I am on an item page
       And The copyright warning has been dismissed
       And Anonymous edit warnings are disabled
     When I click the statement add button
       And I select the claim property quantprop
-      And I enter 1+-0 in the claim value input field
+      And I enter <value> in the claim value input field
       And I click the statement save button
-    Then Statement string value of claim 1 in group 1 should be 1
+    Then Statement string value of claim 1 in group 1 should be <expected_value>
       And Statement name of group 1 should be the label of quantprop
       And Statement save button should not be there
       And Statement cancel button should not be there
       And Statement edit button for claim 1 in group 1 should be there
+
+    Examples:
+      | value | expected_value |
+      | 1 | 1 |
+      | 1+-0 | 1±0 |
+      | 123+-100 | 123±100 |
 
   @modify_entity
   Scenario: Adding a statement of type quantity and reload page
