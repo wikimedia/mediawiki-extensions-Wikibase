@@ -40,7 +40,7 @@ Feature: Using quantity properties in statements
     | astring |
     | 1:1 |
 
-  @modify_entity
+  @modify_entity @integration
   Scenario Outline: Quantity parser and saving should work properly
     Given I am logged in to the repo
       And I am on an item page
