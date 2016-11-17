@@ -9,6 +9,7 @@ use DataValues\MonolingualTextValue;
 use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
+use DataValues\UnboundedQuantityValue;
 use DataValues\UnDeserializableValue;
 use Language;
 use MediaWikiTestCase;
@@ -306,7 +307,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				'Quantity',
 				SnakFormatter::FORMAT_PLAIN,
 				$this->newFormatterOptions( 'de' ),
-				QuantityValue::newFromNumber( '+123456.789' ),
+				UnboundedQuantityValue::newFromNumber( '+123456.789' ),
 				'@^123\\.456,789$@'
 			),
 			'quantity details' => array(

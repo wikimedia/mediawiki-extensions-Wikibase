@@ -8,6 +8,7 @@ use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use ApiUsageException;
+use DataValues\UnboundedQuantityValue;
 use UsageException;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
@@ -101,7 +102,7 @@ class FormatSnakValueTest extends ApiTestCase {
 				'@^http://acme\.test$@'
 			),
 			array(
-				QuantityValue::newFromNumber( '+12.33', '1' ),
+				UnboundedQuantityValue::newFromNumber( '+12.33' ),
 				'quantity',
 				SnakFormatter::FORMAT_PLAIN,
 				array( 'lang' => 'de' ),

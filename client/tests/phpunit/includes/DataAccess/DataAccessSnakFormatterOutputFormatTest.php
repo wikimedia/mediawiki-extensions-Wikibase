@@ -136,7 +136,7 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 				)
 			],
 			'quantity' => [
-				'42 a &#91;&#91;b&#93;&#93; c',
+				'42±0 a &#91;&#91;b&#93;&#93; c',
 				new PropertyValueSnak(
 					$p4,
 					new QuantityValue(
@@ -148,7 +148,7 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 				)
 			],
 			'quantity with unit' => [
-				'42 label &#91;&#91;with&#93;&#93; wikitext',
+				'42±0 label &#91;&#91;with&#93;&#93; wikitext',
 				new PropertyValueSnak(
 					$p4,
 					new QuantityValue(

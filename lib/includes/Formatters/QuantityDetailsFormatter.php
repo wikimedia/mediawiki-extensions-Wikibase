@@ -126,7 +126,7 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	 */
 	private function formatNumber( DecimalValue $number, $unit ) {
 		return htmlspecialchars( $this->numberFormatter->format(
-			new QuantityValue( $number, $unit, $number, $number )
+			new UnboundedQuantityValue( $number, $unit )
 		) );
 	}
 
