@@ -23,6 +23,7 @@ Feature: Using quantity properties in statements
       And I enter 1 in the claim value input field
     Then Statement save button should be there
       And Statement cancel button should be there
+      And Unit suggester should be there
 
   @ui_only
   Scenario Outline: Check quantity UI for invalid values

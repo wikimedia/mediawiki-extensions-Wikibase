@@ -296,3 +296,7 @@ end
 Then(/^InputExtender dropdown should be there$/) do
   expect(on(ItemPage).inputextender_dropdown_element.when_visible).to be_visible
 end
+
+Then(/^Unit suggester should be there$/) do
+  expect(on(ItemPage).inputextender_unitsuggester_element.when_visible).to be_visible
+end
