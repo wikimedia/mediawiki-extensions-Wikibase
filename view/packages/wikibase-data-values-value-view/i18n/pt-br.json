@@ -2,15 +2,19 @@
 	"@metadata": {
 		"authors": [
 			"Cainamarques",
-			"Luckas"
+			"Luckas",
+			"O andarilho"
 		]
 	},
 	"valueview-desc": "Componentes da interface para exibir e editar valores de dados.",
 	"valueview-expert-advancedadjustments": "ajustes avançados",
 	"valueview-expert-emptyvalue-empty": "vazio",
 	"valueview-expert-globecoordinateinput-precision": "Precisão:",
+	"valueview-expert-globecoordinateinput-nullprecision": "Não especificado",
+	"valueview-expert-globecoordinateinput-customprecision": "especial ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregoriano",
 	"valueview-expert-timevalue-calendar-julian": "Juliano",
 	"valueview-expert-timeinput-precision": "Precisão:",
-	"valueview-expert-timeinput-calendar": "Calendário:"
+	"valueview-expert-timeinput-calendar": "Calendário:",
+	"valueview-listrotator-manually": "definir manualmente"
 }
