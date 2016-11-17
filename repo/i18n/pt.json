@@ -112,7 +112,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "Aceito estes termos para as minhas futuras edições. Não mostrar esta mensagem novamente.",
 	"wikibase-entityselector-more": "mais",
 	"wikibase-entityselector-notfound": "Não foi encontrada nenhuma correspondência",
-	"wikibase-anonymouseditwarning": "Aviso: Não está autenticado.\nO seu endereço de IP será gravado no histórico de edições desta entidade.",
+	"wikibase-anonymouseditwarning": "Aviso: Não está autenticado.\nO seu endereço IP será gravado no histórico de edições desta entidade.",
 	"wikibase-move-error": "Não pode mover páginas fora ou dentro de um domínio de dados.",
 	"wikibase-validator-sitelink-conflict": "A ligação $1 já está a ser utilizada pelo item $2. Pode removê-la de $2 se não pertencer mais ou fundir os itens se forem exatamente sobre o mesmo tópico.",
 	"wikibase-validator-label-conflict": "A propriedade $3 já possui a etiqueta \"$1\" associada com o código de idioma $2.",

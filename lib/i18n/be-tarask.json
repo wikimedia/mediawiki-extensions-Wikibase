@@ -22,7 +22,7 @@
 	"wikibase-error-remove-timeout": "Мы маем тэхнічныя праблемы. Калі ласка, паспрабуйце яшчэ раз.",
 	"wikibase-error-autocomplete-connection": "Не атрымалася запытаць API сайта. Калі ласка, паспрабуйце пазьней.",
 	"wikibase-error-autocomplete-response": "Адказ сэрвэра: $1",
-	"wikibase-error-ui-no-external-page": "Пазначаны артыкул на адпаведным сайце ня знойдзены.",
+	"wikibase-error-ui-no-external-page": "Старонка «$2» ня знойдзеная на сайце «$1».",
 	"wikibase-error-ui-edit-conflict": "Адбыўся канфлікт рэдагаваньня. Захавайце свае зьмены на кампутары, абнавіце старонку і захавайце зноў, калі ласка.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (трансьлітаравана)",
 	"wikibase-quantitydetails-amount": "Сума",
