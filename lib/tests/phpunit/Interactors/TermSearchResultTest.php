@@ -27,13 +27,23 @@ class TermSearchResultTest extends PHPUnit_Framework_TestCase {
 				new ItemId( 'Q1234' ),
 				new Term( 'pt', 'ImaLabel' ),
 				new Term( 'en', 'ImaDescription' ),
+				''
 			),
 			array(
 				new Term( 'en-gb', 'FooText' ),
 				'description',
 				new PropertyId( 'P777' ),
 				null,
-				null
+				null,
+				''
+			),
+			array(
+				new Term( 'en-gb', 'FooText' ),
+				'description',
+				new PropertyId( 'foo:P777' ),
+				null,
+				null,
+				'foo'
 			),
 		);
 	}
@@ -46,7 +56,8 @@ class TermSearchResultTest extends PHPUnit_Framework_TestCase {
 		$matchedTermType,
 		$entityId,
 		$displayLabel,
-		$displayDescription
+		$displayDescription,
+		$expectedRepositoryName
 	) {
 		$result = new TermSearchResult(
 			$matchedTerm,
@@ -59,6 +70,7 @@ class TermSearchResultTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( $matchedTerm, $result->getMatchedTerm() );
 		$this->assertEquals( $matchedTermType, $result->getMatchedTermType() );
 		$this->assertEquals( $entityId, $result->getEntityId() );
+		$this->assertEquals( $expectedRepositoryName, $result->getRepositoryName() );
 		$this->assertEquals( $displayLabel, $result->getDisplayLabel() );
 		$this->assertEquals( $displayDescription, $result->getDisplayDescription() );
 	}
