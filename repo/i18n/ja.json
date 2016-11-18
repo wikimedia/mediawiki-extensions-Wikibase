@@ -14,7 +14,8 @@
 			"2nd-player",
 			"Otokoume",
 			"Afaz",
-			"Higa4"
+			"Higa4",
+			"ネイ"
 		]
 	},
 	"wikibase-desc": "構造化データのリポジトリ",
@@ -229,7 +230,7 @@
 	"wikibase-tokencheck-mustposttoken": "編集は POST 要求によってのみ可能です。",
 	"wikibase-tokencheck-badtoken": "不良な編集トークン（おそらくセッションの期限切れ）。",
 	"special-dispatchstats": "変更発送統計",
-	"wikibase-dispatchstats-intro": "このページはクライアントに発送された変更についての統計情報を提供します。クライアントのウィキは、ウィキ上の変更が派遣されると、{{SITENAME}}上の変更を通知され、そのウィキのジョブキューは通知を処理します。\n* {{int:wikibase-dispatchstats-changes}}が数と最古の日付とキュー内の現在の最新の項目を表示します。\n* {{int:wikibase-dispatchstats-stats}} は最大遅延と最小遅延のクライアントwikiについての情報を提供し、その間の一つの中央値の一つを情報提供します。それぞれのwikiのため、次の情報が提供されます:\n** \"{{int:wikibase-dispatchstats-site-id}}\" とは、クライアントウィキのインターナルIDです。\n** \"{{int:wikibase-dispatchstats-pos}}\" とは 、そのウィキへ最後に派遣された変更のIDです。\n** \"{{int:wikibase-dispatchstats-lag-num}}\" とは、まだwikiに派遣されていない変更の数です。\n** \"{{int:wikibase-dispatchstats-lag-time}}\" とは、最後にウィキへ派遣された変更と、{{SITENAME}}上で実行された最後の変更との間の時間です。\n** \"{{int:wikibase-dispatchstats-touched}}\" とは、最後にウィキへの派遣を得た変更のバッチの時間です。",
+	"wikibase-dispatchstats-intro": "このページはクライアントに発送された変更についての統計情報を提供します。{{SITENAME}}上の変更が通知され、そのウィキのジョブキューが通知を処理した後、クライアントのウィキはその変更を通知されます。\n* {{int:wikibase-dispatchstats-changes}}はキュー内の項目数、最古と最新の項目の日付を表示します。\n* {{int:wikibase-dispatchstats-stats}}は最大遅延と最小遅延のクライアントウィキ、そして遅延が中央値のウィキについての情報を提供します。それぞれのウィキについて、下記の情報が提供されます:\n** 「{{int:wikibase-dispatchstats-site-id}}」とは、クライアントウィキの内部IDです。\n** 「{{int:wikibase-dispatchstats-pos}}」とは 、そのウィキへ最後に通知された変更のIDです。\n** 「{{int:wikibase-dispatchstats-lag-num}}」とは、まだウィキに通知していない変更の数です。\n** 「{{int:wikibase-dispatchstats-lag-time}}」とは、最後にウィキへ通知された変更から、{{SITENAME}}上で実行された最後の変更までの時間です。\n** 「{{int:wikibase-dispatchstats-touched}}」とは、最後にウィキへ通知された変更のバッチの時間です。",
 	"wikibase-dispatchstats-no-stats": "現在利用できる統計はありません。",
 	"wikibase-dispatchstats-changes": "変更記録の統計",
 	"wikibase-dispatchstats-stats": "発送の統計",
