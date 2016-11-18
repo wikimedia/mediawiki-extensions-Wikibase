@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ceb9bbfa_cc3c0f91",
+        "filename": "repo/includes/Validators/ForeignEntityValidator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-18T11:53:00Z",
+      "side": 1,
+      "message": "Please avoid passing complex structures if possible. This class should ask for what it needs, and should not know or care where that comes from or how it is represented.\n\nIf this class needs a map of repo ids to a list of types supported for each repo, that\u0027s what it should ask for in the constructor.",
+      "revId": "c5b2661c284097d1d2bd559159a5c002b64c9dd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb9bbfa_4c511fdd",
+        "filename": "repo/includes/Validators/ForeignEntityValidator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-18T11:53:00Z",
+      "side": 1,
+      "message": "The semantics/intention of this check is unclear here. It looks like it checks whether the given repo supports the given entity type.\n\nWhat we want to check is whether the local repo supports the given repo for this entity type. \n\nExample: A 3rd party wiki uses Wikidata for Properties, but not for Items. On that wiki, wd:P123 would be ok, but wd:Q123 should fail, even though Wikidata supports items.\n\nThe implementation of this class really doesn\u0027t have to know which of the two interpretations is intended. But we should make very sure that we avoid confusion about this, especially in the configuration array that maintains the relevant mapping.",
+      "revId": "c5b2661c284097d1d2bd559159a5c002b64c9dd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb9bbfa_ac41db10",
+        "filename": "repo/includes/Validators/ForeignEntityValidator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-18T11:53:00Z",
+      "side": 1,
+      "message": "Hard-coding knowledge about the structure of that configuration array should be avoided. It\u0027s not horrible here, but unnecessary.",
+      "revId": "c5b2661c284097d1d2bd559159a5c002b64c9dd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
