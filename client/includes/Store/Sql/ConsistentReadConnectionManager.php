@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Store\Sql;
 
-use DatabaseBase;
+use Database;
 use IDatabase;
 use InvalidArgumentException;
 use LoadBalancer;
@@ -77,7 +77,7 @@ class ConsistentReadConnectionManager {
 	 * ConsistentReadConnectionManager instance, this method will return a connection to the master database,
 	 * to avoid inconsistencies.
 	 *
-	 * @return DatabaseBase
+	 * @return Database
 	 */
 	public function getReadConnection() {
 		$dbIndex = $this->forceMaster ? DB_MASTER : DB_SLAVE;
@@ -88,14 +88,14 @@ class ConsistentReadConnectionManager {
 	 * Returns a connection to the master DB, for updating. The connection should later be released
 	 * by calling releaseConnection().
 	 *
-	 * @return DatabaseBase
+	 * @return Database
 	 */
 	public function getWriteConnection() {
 		return $this->loadBalancer->getConnection( DB_MASTER, array(), $this->dbName );
 	}
 
 	/**
-	 * @param DatabaseBase $db
+	 * @param IDatabase $db
 	 */
 	public function releaseConnection( IDatabase $db ) {
 		$this->loadBalancer->reuseConnection( $db );
@@ -110,7 +110,7 @@ class ConsistentReadConnectionManager {
 	 *
 	 * @param string $fname
 	 *
-	 * @return DatabaseBase
+	 * @return Database
 	 */
 	public function beginAtomicSection( $fname ) {
 		// Once we have written to master, do not read from slave.
@@ -122,19 +122,19 @@ class ConsistentReadConnectionManager {
 	}
 
 	/**
-	 * @param DatabaseBase $db
+	 * @param Database $db
 	 * @param string $fname
 	 */
-	public function commitAtomicSection( IDatabase $db, $fname ) {
+	public function commitAtomicSection( Database $db, $fname ) {
 		$db->endAtomic( $fname );
 		$this->releaseConnection( $db );
 	}
 
 	/**
-	 * @param DatabaseBase $db
+	 * @param Database $db
 	 * @param string $fname
 	 */
-	public function rollbackAtomicSection( IDatabase $db, $fname ) {
+	public function rollbackAtomicSection( Database $db, $fname ) {
 		//FIXME: there does not seem to be a clean way to roll back an atomic section?!
 		$db->rollback( $fname, 'flush' );
 		$this->releaseConnection( $db );
