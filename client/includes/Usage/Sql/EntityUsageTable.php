@@ -3,7 +3,7 @@
 namespace Wikibase\Client\Usage\Sql;
 
 use ArrayIterator;
-use DatabaseBase;
+use Database;
 use DBUnexpectedError;
 use InvalidArgumentException;
 use MWException;
@@ -32,7 +32,7 @@ class EntityUsageTable {
 	private $idParser;
 
 	/**
-	 * @var DatabaseBase
+	 * @var Database
 	 */
 	private $connection;
 
@@ -48,7 +48,7 @@ class EntityUsageTable {
 
 	/**
 	 * @param EntityIdParser $idParser
-	 * @param DatabaseBase $connection
+	 * @param Database $connection
 	 * @param int $batchSize defaults to 100
 	 * @param string|null $tableName defaults to wbc_entity_usage
 	 *
@@ -56,7 +56,7 @@ class EntityUsageTable {
 	 */
 	public function __construct(
 		EntityIdParser $idParser,
-		DatabaseBase $connection,
+		Database $connection,
 		$batchSize = 100,
 		$tableName = null
 	) {

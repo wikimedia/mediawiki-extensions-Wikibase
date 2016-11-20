@@ -3,7 +3,7 @@
 namespace Wikibase\Client\Usage\Sql;
 
 use ArrayIterator;
-use DatabaseBase;
+use Database;
 use DBError;
 use Exception;
 use InvalidArgumentException;
@@ -49,11 +49,11 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	}
 
 	/**
-	 * @param DatabaseBase $db
+	 * @param Database $db
 	 *
 	 * @return EntityUsageTable
 	 */
-	private function newUsageTable( DatabaseBase $db ) {
+	private function newUsageTable( Database $db ) {
 		return new EntityUsageTable( $this->idParser, $db, $this->batchSize );
 	}
 

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Store\Sql;
 
-use DatabaseBase;
+use Database;
 use DBUnexpectedError;
 use Exception;
 use LoadBalancer;
@@ -217,16 +217,16 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	}
 
 	/**
-	 * @return DatabaseBase A connection to the repo's master database
+	 * @return Database A connection to the repo's master database
 	 */
 	private function getRepoMaster() {
 		return $this->getRepoLB()->getConnection( DB_MASTER, array(), $this->repoDB );
 	}
 
 	/**
-	 * @param DatabaseBase $db The repo database connection to release for re-use.
+	 * @param Database $db The repo database connection to release for re-use.
 	 */
-	private function releaseRepoMaster( DatabaseBase $db ) {
+	private function releaseRepoMaster( Database $db ) {
 		$this->getRepoLB()->reuseConnection( $db );
 	}
 
@@ -543,12 +543,12 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	/**
 	 * Tries to acquire a global lock on the given client wiki.
 	 *
-	 * @param DatabaseBase $db The database connection to work on.
+	 * @param Database $db The database connection to work on.
 	 * @param string  $lock  The name of the lock to release.
 	 *
 	 * @return bool whether the lock was engaged successfully.
 	 */
-	private function engageClientLock( DatabaseBase $db, $lock ) {
+	private function engageClientLock( Database $db, $lock ) {
 		if ( isset( $this->engageClientLockOverride ) ) {
 			return call_user_func( $this->engageClientLockOverride, $db, $lock );
 		}
@@ -559,12 +559,12 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	/**
 	 * Releases the given global lock on the given client wiki.
 	 *
-	 * @param DatabaseBase $db The database connection to work on.
+	 * @param Database $db The database connection to work on.
 	 * @param string  $lock  The name of the lock to release.
 	 *
 	 * @return bool whether the lock was released successfully.
 	 */
-	private function releaseClientLock( DatabaseBase $db, $lock ) {
+	private function releaseClientLock( Database $db, $lock ) {
 		if ( isset( $this->releaseClientLockOverride ) ) {
 			return call_user_func( $this->releaseClientLockOverride, $db, $lock );
 		}
@@ -575,12 +575,12 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	/**
 	 * Checks the given global lock on the given client wiki.
 	 *
-	 * @param DatabaseBase $db The database connection to work on.
+	 * @param Database $db The database connection to work on.
 	 * @param string  $lock  The name of the lock to check.
 	 *
 	 * @return bool true if the given lock is currently held by another process, false otherwise.
 	 */
-	private function isClientLockUsed( DatabaseBase $db, $lock ) {
+	private function isClientLockUsed( Database $db, $lock ) {
 		if ( isset( $this->isClientLockUsedOverride ) ) {
 			return call_user_func( $this->isClientLockUsedOverride, $db, $lock );
 		}

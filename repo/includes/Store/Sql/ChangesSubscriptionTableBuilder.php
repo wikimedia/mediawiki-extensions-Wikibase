@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
-use DatabaseBase;
+use Database;
 use InvalidArgumentException;
 use LoadBalancer;
 use ResultWrapper;
@@ -139,12 +139,12 @@ class ChangesSubscriptionTableBuilder {
 	}
 
 	/**
-	 * @param DatabaseBase $db
+	 * @param Database $db
 	 * @param array[] $subscriptionsPerItem
 	 *
 	 * @return int The number of rows inserted.
 	 */
-	private function insertSubscriptionBatch( DatabaseBase $db, array $subscriptionsPerItem ) {
+	private function insertSubscriptionBatch( Database $db, array $subscriptionsPerItem ) {
 		$db->startAtomic( __METHOD__ );
 
 		$c = 0;
@@ -173,12 +173,12 @@ class ChangesSubscriptionTableBuilder {
 	}
 
 	/**
-	 * @param DatabaseBase $db
+	 * @param Database $db
 	 * @param array &$continuation
 	 *
 	 * @return array[] An associative array mapping item IDs to lists of site IDs.
 	 */
-	private function getSubscriptionsPerItemBatch( DatabaseBase $db, &$continuation = array() ) {
+	private function getSubscriptionsPerItemBatch( Database $db, &$continuation = array() ) {
 		if ( empty( $continuation ) ) {
 			$continuationCondition = '1';
 		} else {
@@ -240,7 +240,7 @@ class ChangesSubscriptionTableBuilder {
 	}
 
 	/**
-	 * Returns a list of rows for insertion, using DatabaseBase's multi-row insert mechanism.
+	 * Returns a list of rows for insertion, using Database's multi-row insert mechanism.
 	 * Each row is represented as array( $itemId, $subscriber ).
 	 *
 	 * @param string $itemId

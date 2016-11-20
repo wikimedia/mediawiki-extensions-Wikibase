@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
-use DatabaseBase;
+use Database;
 use DatabaseUpdater;
 use HashBagOStuff;
 use MWException;
@@ -127,9 +127,9 @@ class DatabaseSchemaUpdater {
 
 	/**
 	 * @param DatabaseUpdater $updater
-	 * @param DatabaseBase $db
+	 * @param Database $db
 	 */
-	private function updateItemsPerSiteTable( DatabaseUpdater $updater, DatabaseBase $db ) {
+	private function updateItemsPerSiteTable( DatabaseUpdater $updater, Database $db ) {
 		// Make wb_items_per_site.ips_site_page VARCHAR(310) - T99459
 		// NOTE: this update doesn't work on SQLite, but it's not needed there anyway.
 		if ( $db->getType() !== 'sqlite' ) {
@@ -143,9 +143,9 @@ class DatabaseSchemaUpdater {
 
 	/**
 	 * @param DatabaseUpdater $updater
-	 * @param DatabaseBase $db
+	 * @param Database $db
 	 */
-	private function updateChangesTable( DatabaseUpdater $updater, DatabaseBase $db ) {
+	private function updateChangesTable( DatabaseUpdater $updater, Database $db ) {
 		// Make wb_changes.change_info MEDIUMBLOB - T108246
 		// NOTE: this update doesn't work on SQLite, but it's not needed there anyway.
 		if ( $db->getType() !== 'sqlite' ) {
@@ -244,7 +244,7 @@ class DatabaseSchemaUpdater {
 	 * falling back to the plain ".sql" extension if no specific script is found.
 	 *
 	 * @param string $name the script's name, without file extension
-	 * @param string $type the database type, as returned by DatabaseBase::getType()
+	 * @param string $type the database type, as returned by Database::getType()
 	 *
 	 * @return string The path to the script file
 	 * @throws MWException If the script was not found in any script directory
@@ -280,9 +280,9 @@ class DatabaseSchemaUpdater {
 	 * Applies updates to the wb_entity_per_page table.
 	 *
 	 * @param DatabaseUpdater $updater
-	 * @param DatabaseBase $db
+	 * @param Database $db
 	 */
-	private function updateEntityPerPageTable( DatabaseUpdater $updater, DatabaseBase $db ) {
+	private function updateEntityPerPageTable( DatabaseUpdater $updater, Database $db ) {
 		// Update from 0.1. or 0.2.
 		if ( !$db->tableExists( 'wb_entity_per_page' ) ) {
 			$updater->addExtensionTable(
@@ -304,9 +304,9 @@ class DatabaseSchemaUpdater {
 	 * Applies updates to the wb_terms table.
 	 *
 	 * @param DatabaseUpdater $updater
-	 * @param DatabaseBase $db
+	 * @param Database $db
 	 */
-	private function updateTermsTable( DatabaseUpdater $updater, DatabaseBase $db ) {
+	private function updateTermsTable( DatabaseUpdater $updater, Database $db ) {
 		// ---- Update from 0.1 or 0.2. ----
 		if ( !$db->fieldExists( 'wb_terms', 'term_search_key' ) ) {
 			$updater->addExtensionField(
