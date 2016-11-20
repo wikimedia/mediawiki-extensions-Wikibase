@@ -11,6 +11,7 @@
 	},
 	"tooltip-t-wikibase": "Poveznica na stavku na projektu Wikipodatci",
 	"wikibase-after-page-move-queued": "[$1 Stavka na Wikidati] povezana s ovom stranicom uskoro će biti automatski ažurirana.",
+	"wikibase-after-page-delete": "Trebali biste izbrisati i poveznicu na ovu stranicu na pripadajućoj stavci [$1 {{WBREPONAME}}].",
 	"wikibase-after-page-delete-queued": "[$1 Stavka na Wikidati] povezana s ovom stranicom uskoro će biti automatski ažurirana.",
 	"wikibase-comment-update": "{{WBREPONAME}} predmet se promijenio",
 	"wikibase-comment-sitelink-add": "Dodana jezična poveznica: $1",

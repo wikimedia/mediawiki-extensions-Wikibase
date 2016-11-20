@@ -3,7 +3,8 @@
 		"authors": [
 			"Dbc334",
 			"Eleassar",
-			"Yerpo"
+			"Yerpo",
+			"Janezdrilc"
 		]
 	},
 	"wikibase-client-desc": "Klient za razširitev Wikibase",
@@ -22,6 +23,7 @@
 	"wikibase-dataitem": "Objekt {{WBREPONAME}}",
 	"wikibase-editlinks": "Uredi povezave",
 	"wikibase-editlinkstitle": "Uredi medjezikovne povezave",
+	"wikibase-addlinkstitle": "Dodaj medjezikovne povezave",
 	"wikibase-linkitem-addlinks": "Dodaj povezave",
 	"wikibase-linkitem-close": "Zapri obvestilo in ponovno naloži stran",
 	"wikibase-linkitem-failure": "Med povezovanjem s stranjo je prišlo do neznane napake.",
