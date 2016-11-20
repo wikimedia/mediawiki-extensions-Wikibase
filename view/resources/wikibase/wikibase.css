@@ -69,11 +69,11 @@ h1 .wikibase-title .wikibase-title-id:before {
 }
 
 .ui-closeable.wb-edit {
-	background-color: #D6F3FF;
+	background-color: #eaf3ff;
 }
 
 .ui-closeable.wb-error {
-	background-color: #FFDFC9;
+	background-color: #fee7e6;
 }
 
 .wikibase-copyrightnotification-container a {
