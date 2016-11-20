@@ -1691,6 +1691,9 @@ class WikibaseRepo {
 
 						// T98314
 						'tzl',
+
+						// T151129
+						'moe',
 					) )
 				),
 
