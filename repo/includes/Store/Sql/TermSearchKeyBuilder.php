@@ -2,7 +2,7 @@
 
 namespace Wikibase;
 
-use DatabaseBase;
+use Database;
 use Wikibase\Lib\Reporting\MessageReporter;
 use MediaWiki\MediaWikiServices;
 
@@ -167,13 +167,13 @@ class TermSearchKeyBuilder {
 	 *
 	 * @see TermSqlIndex::getSearchKey
 	 *
-	 * @param DatabaseBase $dbw the database connection to use
+	 * @param Database $dbw the database connection to use
 	 * @param int $rowId the row to update
 	 * @param string $text the term's text
 	 *
 	 * @return string|bool the search key, or false if no search key could be calculated.
 	 */
-	private function updateSearchKey( DatabaseBase $dbw, $rowId, $text ) {
+	private function updateSearchKey( Database $dbw, $rowId, $text ) {
 		$key = $this->table->getSearchKey( $text );
 
 		if ( $key === '' ) {
