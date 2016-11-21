@@ -2,10 +2,7 @@
 
 namespace Wikibase\Client\Store\Sql;
 
-use Database;
-use IDatabase;
-use InvalidArgumentException;
-use LoadBalancer;
+use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 /**
  * Database connection manager.
@@ -24,120 +21,8 @@ use LoadBalancer;
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
+ *
+ * @deprecated Please use SessionConsistentConnectionManager from core
  */
-class ConsistentReadConnectionManager {
-
-	/**
-	 * @var LoadBalancer
-	 */
-	private $loadBalancer;
-
-	/**
-	 * The symbolic name of the target database, or false for the local wiki's database.
-	 *
-	 * @var string|false
-	 */
-	private $dbName;
-
-	/**
-	 * @var bool If true, getReadConnection() will also return a DB_MASTER connection.
-	 */
-	private $forceMaster = false;
-
-	/**
-	 * @param LoadBalancer $loadBalancer
-	 * @param string|bool $dbName Optional, defaults to current wiki.
-	 *        This follows the convention for database names used by $loadBalancer.
-	 *
-	 * @throws InvalidArgumentException
-	 */
-	public function __construct( LoadBalancer $loadBalancer, $dbName = false ) {
-		if ( !is_string( $dbName ) && $dbName !== false ) {
-			throw new InvalidArgumentException( '$dbName must be a string, or false.' );
-		}
-
-		$this->loadBalancer = $loadBalancer;
-		$this->dbName = $dbName;
-	}
-
-	/**
-	 * Forces all future calls to getReadConnection() to return a connection to the master DB.
-	 * Use this before performing read operations that are critical for a future update.
-	 * Calling beginAtomicSection() implies a call to forceMaster().
-	 */
-	public function forceMaster() {
-		$this->forceMaster = true;
-	}
-
-	/**
-	 * Returns a database connection for reading. The connection should later be released by
-	 * calling releaseConnection().
-	 *
-	 * @note: If forceMaster() or beginAtomicSection() were previously called on this
-	 * ConsistentReadConnectionManager instance, this method will return a connection to the master database,
-	 * to avoid inconsistencies.
-	 *
-	 * @return Database
-	 */
-	public function getReadConnection() {
-		$dbIndex = $this->forceMaster ? DB_MASTER : DB_SLAVE;
-		return $this->loadBalancer->getConnection( $dbIndex, array(), $this->dbName );
-	}
-
-	/**
-	 * Returns a connection to the master DB, for updating. The connection should later be released
-	 * by calling releaseConnection().
-	 *
-	 * @return Database
-	 */
-	public function getWriteConnection() {
-		return $this->loadBalancer->getConnection( DB_MASTER, array(), $this->dbName );
-	}
-
-	/**
-	 * @param IDatabase $db
-	 */
-	public function releaseConnection( IDatabase $db ) {
-		$this->loadBalancer->reuseConnection( $db );
-	}
-
-	/**
-	 * Begins an atomic section and returns a database connection to the master DB, for updating.
-	 *
-	 * @note: This causes all future calls to getReadConnection() to return a connection
-	 * to the master DB, even after commitAtomicSection() or rollbackAtomicSection() have
-	 * been called.
-	 *
-	 * @param string $fname
-	 *
-	 * @return Database
-	 */
-	public function beginAtomicSection( $fname ) {
-		// Once we have written to master, do not read from slave.
-		$this->forceMaster();
-
-		$db = $this->getWriteConnection();
-		$db->startAtomic( $fname );
-		return $db;
-	}
-
-	/**
-	 * @param IDatabase $db
-	 * @param string $fname
-	 */
-	public function commitAtomicSection( IDatabase $db, $fname ) {
-		$db->endAtomic( $fname );
-		$this->releaseConnection( $db );
-	}
-
-	/**
-	 * @param IDatabase $db
-	 * @param string $fname
-	 */
-	public function rollbackAtomicSection( IDatabase $db, $fname ) {
-		//FIXME: there does not seem to be a clean way to roll back an atomic section?!
-		$db->rollback( $fname, 'flush' );
-		$this->releaseConnection( $db );
-	}
-
+class ConsistentReadConnectionManager extends SessionConsistentConnectionManager{
 }
