@@ -396,7 +396,7 @@
 	"apihelp-query+wbsearch-param-limit": "Número máximo de resultados",
 	"apihelp-query+wbsearch-example-2": "Buscar \"abc\" en el idioma inglés con un límite de 50",
 	"apihelp-query+wbsearch-example-3": "De la búsqueda para \"alphabet\" en el idioma inglés para el tipo de propiedad",
-	"apihelp-wbsetaliases-description": "Establece el alias de un Wikibase entidad.",
+	"apihelp-wbsetaliases-description": "Establece los alias de una entidad de Wikibase.",
 	"apihelp-wbsetaliases-param-new": "Si se establece, se creará una entidad nueva.\nEstablece esto al tipo de entidad que quieres crear.",
 	"apihelp-wbsetaliases-param-bot": "Marcar esta edición como hecha por un robot. Este parámetro funcionará solo si el usuario pertenece al grupo «bot».",
 	"apihelp-wbsetaliases-param-set": "Una lista de alias que reemplazará la lista actual (no combinable ni con añadir ni con quitar)",
