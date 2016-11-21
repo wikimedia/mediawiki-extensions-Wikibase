@@ -146,7 +146,6 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	/**
 	 * @param int $flavorFlags Flavor flags to use for this builder
 	 * @return SnakRdfBuilder
-	 *
 	 */
 	private function newSnakBuilder( $flavorFlags ) {
 		$statementValueBuilder = $this->valueSnakRdfBuilderFactory->getValueSnakRdfBuilder(

@@ -223,7 +223,6 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 
 	/**
 	 * @param string $continueParam
-	 *
 	 */
 	private function addContinue( $continueParam ) {
 		$db = $this->getDB();
