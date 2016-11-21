@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ceb9bbfa_a46447e2",
+        "filename": "repo/includes/Validators/ForeignEntityValidator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-11-21T12:52:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ceb9bbfa_cc3c0f91",
+      "revId": "c5b2661c284097d1d2bd559159a5c002b64c9dd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ceb9bbfa_4c511fdd",
         "filename": "repo/includes/Validators/ForeignEntityValidator.php",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ceb9bbfa_c484db60",
+        "filename": "repo/includes/Validators/ForeignEntityValidator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-11-21T12:52:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ceb9bbfa_4c511fdd",
+      "revId": "c5b2661c284097d1d2bd559159a5c002b64c9dd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ceb9bbfa_ac41db10",
         "filename": "repo/includes/Validators/ForeignEntityValidator.php",
         "patchSetId": 4
@@ -47,6 +83,24 @@
       "writtenOn": "2016-11-18T11:53:00Z",
       "side": 1,
       "message": "Hard-coding knowledge about the structure of that configuration array should be avoided. It\u0027s not horrible here, but unnecessary.",
+      "revId": "c5b2661c284097d1d2bd559159a5c002b64c9dd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb9bbfa_84970393",
+        "filename": "repo/includes/Validators/ForeignEntityValidator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-11-21T12:52:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ceb9bbfa_ac41db10",
       "revId": "c5b2661c284097d1d2bd559159a5c002b64c9dd0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
