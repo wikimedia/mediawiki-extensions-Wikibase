@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Store\Sql;
 
 use IDatabase;
 use LoadBalancer;
+use PHPUnit_Framework_MockObject_MockObject;
 use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
 
 /**
@@ -19,14 +20,14 @@ use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
 class ConsistentReadConnectionManagerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @return IDatabase
+	 * @return IDatabase|PHPUnit_Framework_MockObject_MockObject
 	 */
-	private function getConnectionMock() {
+	private function getIDatabaseMock() {
 		return $this->getMock( IDatabase::class );
 	}
 
 	/**
-	 * @return LoadBalancer
+	 * @return LoadBalancer|PHPUnit_Framework_MockObject_MockObject
 	 */
 	private function getLoadBalancerMock() {
 		$lb = $this->getMockBuilder( LoadBalancer::class )
@@ -37,43 +38,43 @@ class ConsistentReadConnectionManagerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetReadConnection() {
-		$connection = $this->getConnectionMock();
+		$database = $this->getIDatabaseMock();
 		$lb = $this->getLoadBalancerMock();
 
 		$lb->expects( $this->once() )
 			->method( 'getConnection' )
 			->with( DB_SLAVE )
-			->will( $this->returnValue( $connection ) );
+			->will( $this->returnValue( $database ) );
 
 		$manager = new ConsistentReadConnectionManager( $lb );
 		$actual = $manager->getReadConnection();
 
-		$this->assertSame( $connection, $actual );
+		$this->assertSame( $database, $actual );
 	}
 
 	public function testGetWriteConnection() {
-		$connection = $this->getConnectionMock();
+		$database = $this->getIDatabaseMock();
 		$lb = $this->getLoadBalancerMock();
 
 		$lb->expects( $this->once() )
 			->method( 'getConnection' )
 			->with( DB_MASTER )
-			->will( $this->returnValue( $connection ) );
+			->will( $this->returnValue( $database ) );
 
 		$manager = new ConsistentReadConnectionManager( $lb );
 		$actual = $manager->getWriteConnection();
 
-		$this->assertSame( $connection, $actual );
+		$this->assertSame( $database, $actual );
 	}
 
 	public function testForceMaster() {
-		$connection = $this->getConnectionMock();
+		$database = $this->getIDatabaseMock();
 		$lb = $this->getLoadBalancerMock();
 
 		$lb->expects( $this->once() )
 			->method( 'getConnection' )
 			->with( DB_MASTER )
-			->will( $this->returnValue( $connection ) );
+			->will( $this->returnValue( $database ) );
 
 		$manager = new ConsistentReadConnectionManager( $lb );
 		$manager->forceMaster();
@@ -81,28 +82,28 @@ class ConsistentReadConnectionManagerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testReleaseConnection() {
-		$connection = $this->getConnectionMock();
+		$database = $this->getIDatabaseMock();
 		$lb = $this->getLoadBalancerMock();
 
 		$lb->expects( $this->once() )
 			->method( 'reuseConnection' )
-			->with( $connection )
+			->with( $database )
 			->will( $this->returnValue( null ) );
 
 		$manager = new ConsistentReadConnectionManager( $lb );
-		$manager->releaseConnection( $connection );
+		$manager->releaseConnection( $database );
 	}
 
 	public function testBeginAtomicSection() {
-		$connection = $this->getConnectionMock();
+		$database = $this->getIDatabaseMock();
 		$lb = $this->getLoadBalancerMock();
 
 		$lb->expects( $this->exactly( 2 ) )
 			->method( 'getConnection' )
 			->with( DB_MASTER )
-			->will( $this->returnValue( $connection ) );
+			->will( $this->returnValue( $database ) );
 
-		$connection->expects( $this->once() )
+		$database->expects( $this->once() )
 			->method( 'startAtomic' )
 			->will( $this->returnValue( null ) );
 
@@ -115,37 +116,37 @@ class ConsistentReadConnectionManagerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testCommitAtomicSection() {
-		$connection = $this->getConnectionMock();
+		$database = $this->getIDatabaseMock();
 		$lb = $this->getLoadBalancerMock();
 
 		$lb->expects( $this->once() )
 			->method( 'reuseConnection' )
-			->with( $connection )
+			->with( $database )
 			->will( $this->returnValue( null ) );
 
-		$connection->expects( $this->once() )
+		$database->expects( $this->once() )
 			->method( 'endAtomic' )
 			->will( $this->returnValue( null ) );
 
 		$manager = new ConsistentReadConnectionManager( $lb );
-		$manager->commitAtomicSection( $connection, 'TEST' );
+		$manager->commitAtomicSection( $database, 'TEST' );
 	}
 
 	public function testRollbackAtomicSection() {
-		$connection = $this->getConnectionMock();
+		$database = $this->getIDatabaseMock();
 		$lb = $this->getLoadBalancerMock();
 
 		$lb->expects( $this->once() )
 			->method( 'reuseConnection' )
-			->with( $connection )
+			->with( $database )
 			->will( $this->returnValue( null ) );
 
-		$connection->expects( $this->once() )
+		$database->expects( $this->once() )
 			->method( 'rollback' )
 			->will( $this->returnValue( null ) );
 
 		$manager = new ConsistentReadConnectionManager( $lb );
-		$manager->rollbackAtomicSection( $connection, 'TEST' );
+		$manager->rollbackAtomicSection( $database, 'TEST' );
 	}
 
 }
