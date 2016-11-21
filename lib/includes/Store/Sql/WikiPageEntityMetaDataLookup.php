@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Store\Sql;
 
-use DatabaseBase;
+use Database;
 use DBAccessBase;
 use DBQueryError;
 use InvalidArgumentException;
@@ -270,11 +270,11 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 
 	/**
 	 * @param EntityId[] $entityIds
-	 * @param DatabaseBase $db
+	 * @param Database $db
 	 *
 	 * @return string
 	 */
-	private function getWhere( array $entityIds, DatabaseBase $db ) {
+	private function getWhere( array $entityIds, Database $db ) {
 		$where = [];
 
 		foreach ( $entityIds as $entityId ) {
