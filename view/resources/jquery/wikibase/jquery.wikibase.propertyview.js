@@ -16,7 +16,6 @@ var PARENT = $.wikibase.entityview;
  * @param {Function} options.buildStatementGroupListView
  *
  * @constructor
- *
  */
 $.widget( 'wikibase.propertyview', PARENT, {
 	/**
