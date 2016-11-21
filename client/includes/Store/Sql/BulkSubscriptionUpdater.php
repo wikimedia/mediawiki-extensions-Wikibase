@@ -4,6 +4,7 @@ namespace Wikibase\Client\Store\Sql;
 
 use InvalidArgumentException;
 use ResultWrapper;
+use ConsistentReadConnectionManager;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Reporting\ExceptionHandler;

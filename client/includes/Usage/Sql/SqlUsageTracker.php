@@ -8,7 +8,7 @@ use DBError;
 use Exception;
 use InvalidArgumentException;
 use Traversable;
-use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
+use ConsistentReadConnectionManager;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Tests\Usage\Sql;
 
-use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
+use ConsistentReadConnectionManager;
 use Wikibase\Client\Tests\Usage\UsageLookupContractTester;
 use Wikibase\Client\Tests\Usage\UsageTrackerContractTester;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;

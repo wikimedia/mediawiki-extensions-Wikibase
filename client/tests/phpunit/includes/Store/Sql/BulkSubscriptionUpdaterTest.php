@@ -4,7 +4,7 @@ namespace Wikibase\Client\Tests\Store\Sql;
 
 use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use Wikibase\Client\Store\Sql\BulkSubscriptionUpdater;
-use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
+use ConsistentReadConnectionManager;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Reporting\ExceptionHandler;

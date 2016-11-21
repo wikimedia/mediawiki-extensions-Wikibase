@@ -5,7 +5,7 @@ namespace Wikibase\Client\Tests\RecentChanges;
 use RecentChange;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
-use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
+use ConsistentReadConnectionManager;
 
 /**
  * @covers Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector

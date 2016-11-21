@@ -4,7 +4,7 @@ namespace Wikibase\Client\RecentChanges;
 
 use MWException;
 use RecentChange;
-use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
+use ConsistentReadConnectionManager;
 
 /**
  * @since 0.5

@@ -4,7 +4,7 @@ namespace Wikibase;
 
 use Maintenance;
 use Wikibase\Client\Store\Sql\BulkSubscriptionUpdater;
-use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
+use ConsistentReadConnectionManager;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
