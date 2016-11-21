@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityIdComposer;
+use Wikimedia\Assert\ParameterAssertionException;
 
 /**
  * @covers Wikibase\Lib\EntityIdComposer
@@ -83,6 +84,20 @@ class EntityIdComposerTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $id );
 	}
 
+	public function testGivenRepositoryName_composeEntityIdReturnsTheEntityIdFromThisRepository() {
+		$id = $this->getComposer()->composeEntityId( 'item', 100, 'foo' );
+		$this->assertEquals( new ItemId( 'foo:Q100' ), $id );
+	}
+
+	public function testGivenRepositoryNameAndCustomEntityType_composeEntityIdReturnsTheEntityIdFromThisRepository() {
+		$composer = new EntityIdComposer( [
+			'foo-item' => function( $uniquePart, $repositoryName ) {
+				return new ItemId( EntityId::joinSerialization( [ $repositoryName, '', 'Q' . $uniquePart ] ) );
+			}
+		] );
+		$this->assertEquals( new ItemId( 'foo:Q100' ), $composer->composeEntityId( 'foo-item', 100, 'foo' ) );
+	}
+
 	public function invalidUniquePartProvider() {
 		return [
 			[ null, 1 ],
@@ -99,6 +114,30 @@ class EntityIdComposerTest extends PHPUnit_Framework_TestCase {
 		$composer = $this->getComposer();
 		$this->setExpectedException( InvalidArgumentException::class );
 		$composer->composeEntityId( $entityType, $uniquePart );
+	}
+
+	public function provideEntityTypeInvalidRepositoryNamePairs() {
+		return [
+			[ 'item', 'fo:o' ],
+			[ 'item', ':' ],
+			[ 'item', 100 ],
+			[ 'item', false ],
+			[ 'item', null ],
+			[ 'numeric-item', 'fo:o' ],
+			[ 'numeric-item', ':' ],
+			[ 'numeric-item', 100 ],
+			[ 'numeric-item', false ],
+			[ 'numeric-item', null ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideEntityTypeInvalidRepositoryNamePairs
+	 */
+	public function testGivenInvalidRepositoryName_composeEntityIdThrowsException( $entityType, $repositoryName ) {
+		$composer = $this->getComposer();
+		$this->setExpectedException( ParameterAssertionException::class );
+		$composer->composeEntityId( $entityType, 100, $repositoryName );
 	}
 
 }

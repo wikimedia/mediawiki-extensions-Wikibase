@@ -45,6 +45,16 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 					'entityId' => 23,
 				)
 			),
+			array(
+				array(
+					'entityType' => 'item',
+					'entityId' => 23,
+					'repositoryName' => 'foo',
+					'termType' => TermIndexEntry::TYPE_LABEL,
+					'termLanguage' => 'en',
+					'termText' => 'foo',
+				)
+			)
 		);
 	}
 
@@ -56,12 +66,14 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 
 		$entityId = null;
 		if ( isset( $fields['entityType'] ) && isset( $fields['entityId'] ) ) {
+			$repositoryName = isset( $fields['repositoryName'] ) ? $fields['repositoryName'] : '';
 			// FIXME: This must be removed once we got rid of all legacy numeric ids.
-			$entityId = LegacyIdInterpreter::newIdFromTypeAndNumber( $fields['entityType'], $fields['entityId'] );
+			$entityId = LegacyIdInterpreter::newIdFromTypeAndNumber( $fields['entityType'], $fields['entityId'], $repositoryName );
 		}
 
 		$this->assertEquals( isset( $fields['entityType'] ) ? $fields['entityType'] : null, $term->getEntityType() );
 		$this->assertEquals( $entityId, $term->getEntityId() );
+		$this->assertEquals( isset( $fields['repositoryName'] ) ? $fields['repositoryName'] : null, $term->getRepositoryName() );
 		$this->assertEquals( isset( $fields['termType'] ) ? $fields['termType'] : null, $term->getType() );
 		$this->assertEquals( isset( $fields['termLanguage'] ) ? $fields['termLanguage'] : null, $term->getLanguage() );
 		$this->assertEquals( isset( $fields['termText'] ) ? $fields['termText'] : null, $term->getText() );
@@ -95,6 +107,7 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 		$term = new TermIndexEntry( array(
 			'entityType' => 'item',
 			'entityId' => 23,
+			'repositoryName' => '',
 			'termType' => TermIndexEntry::TYPE_LABEL,
 			'termLanguage' => 'en',
 			'termText' => 'foo',
@@ -157,6 +170,14 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 			false
 		);
 
+		$other = clone $term;
+		$other->setRepositoryName( 'foo' );
+		$tests[] = array(
+			$term,
+			$other,
+			false
+		);
+
 		return $tests;
 	}
 
@@ -205,6 +226,27 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 		$termIndexEntry = new TermIndexEntry( $termIndexEntryData );
 		$this->setExpectedException( MWException::class, 'Can not construct Term from partial TermIndexEntry' );
 		$termIndexEntry->getTerm();
+	}
+
+	public function provideInvalidRepositoryNames() {
+		return [
+			[ 'fo:o' ],
+			[ ':' ],
+			[ 1 ],
+			[ null ],
+			[ true ],
+			[ false ],
+			[ [ 'foo' ] ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideInvalidRepositoryNames
+	 */
+	public function testGivenInvalidRepositoryName_setRepositoryNameThrowsException( $repositoryName ) {
+		$termIndexEntry = new TermIndexEntry();
+		$this->setExpectedException( MWException::class, 'Repository name must be a string and not contain colons' );
+		$termIndexEntry->setRepositoryName( $repositoryName );
 	}
 
 }

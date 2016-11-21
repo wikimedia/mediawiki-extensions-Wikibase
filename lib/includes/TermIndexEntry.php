@@ -6,9 +6,11 @@ use InvalidArgumentException;
 use MWException;
 use RuntimeException;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Assert\ParameterAssertionException;
 
 /**
  * Object representing a term index entry.
@@ -43,6 +45,7 @@ class TermIndexEntry {
 		'termLanguage',
 		'termText',
 		'termWeight',
+		'repositoryName',
 	);
 
 	/**
@@ -72,6 +75,9 @@ class TermIndexEntry {
 					break;
 				case 'termWeight':
 					$this->setWeight( $value );
+					break;
+				case 'repositoryName':
+					$this->setRepositoryName( $value );
 					break;
 				default:
 					throw new MWException( 'Invalid term field provided' );
@@ -238,14 +244,39 @@ class TermIndexEntry {
 				throw new RuntimeException( 'Need either client or repo loaded' );
 			}
 
+			$repositoryName = $this->getRepositoryName();
+			if ( $repositoryName === null ) {
+				$repositoryName = '';
+			}
 			try {
-				return $entityIdComposer->composeEntityId( $entityType, $numericId );
+				return $entityIdComposer->composeEntityId( $entityType, $numericId, $repositoryName );
 			} catch ( InvalidArgumentException $ex ) {
 				wfLogWarning( 'Unsupported entity type "' . $entityType . '"' );
 			}
 		}
 
 		return null;
+	}
+
+	/**
+	 * @param string $repositoryName
+	 *
+	 * @throws MWException
+	 */
+	public function setRepositoryName( $repositoryName ) {
+		try {
+			RepositoryNameAssert::assertParameterIsValidRepositoryName( $repositoryName, '$repositoryName' );
+			$this->fields['repositoryName'] = $repositoryName;
+		} catch ( ParameterAssertionException $exception ) {
+			throw new MWException( 'Repository name must be a string and not contain colons' );
+		}
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getRepositoryName() {
+		return array_key_exists( 'repositoryName', $this->fields ) ? $this->fields['repositoryName'] : null;
 	}
 
 	/**

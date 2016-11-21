@@ -4,9 +4,11 @@ namespace Wikibase\Lib;
 
 use InvalidArgumentException;
 use UnexpectedValueException;
+use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikimedia\Assert\ParameterAssertionException;
 
 /**
  * Constructs EntityId objects from entity type identifiers and unique parts of entity ID
@@ -51,20 +53,24 @@ class EntityIdComposer {
 	/**
 	 * @param string $entityType
 	 * @param mixed $uniquePart
+	 * @param string $repositoryName
 	 *
 	 * @throws InvalidArgumentException when the entity type is not known or the unique part is not
 	 *  unique.
+	 * @throws ParameterAssertionException when $repositoryName is invalid
 	 * @throws UnexpectedValueException when the configured composer did not return an EntityId
 	 *  object.
 	 * @return EntityId
 	 */
-	public function composeEntityId( $entityType, $uniquePart ) {
+	public function composeEntityId( $entityType, $uniquePart, $repositoryName = '' ) {
+		RepositoryNameAssert::assertParameterIsValidRepositoryName( $repositoryName, '$repositoryName' );
+
 		if ( isset( $this->composers[$entityType] ) ) {
-			$id = $this->composers[$entityType]( $uniquePart );
+			$id = $this->composers[$entityType]( $uniquePart, $repositoryName );
 		} elseif ( $entityType === 'item' ) {
-			return ItemId::newFromNumber( $uniquePart );
+			return ItemId::newFromNumber( $uniquePart, $repositoryName );
 		} elseif ( $entityType === 'property' ) {
-			return PropertyId::newFromNumber( $uniquePart );
+			return PropertyId::newFromNumber( $uniquePart, $repositoryName );
 		} else {
 			throw new InvalidArgumentException( 'Unknown entity type ' . $entityType );
 		}
