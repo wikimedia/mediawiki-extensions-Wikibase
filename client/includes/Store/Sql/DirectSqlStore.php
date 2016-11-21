@@ -5,7 +5,6 @@ namespace Wikibase;
 use HashBagOStuff;
 use ObjectCache;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
-use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\Sql\SqlSubscriptionManager;
@@ -32,6 +31,7 @@ use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Store\EntityIdLookup;
+use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 /**
  * Implementation of the client store interface using direct access to the repository's
@@ -66,12 +66,12 @@ class DirectSqlStore implements ClientStore {
 	private $repoWiki;
 
 	/**
-	 * @var ConsistentReadConnectionManager|null
+	 * @var SessionConsistentConnectionManager|null
 	 */
 	private $repoConnectionManager = null;
 
 	/**
-	 * @var ConsistentReadConnectionManager|null
+	 * @var SessionConsistentConnectionManager|null
 	 */
 	private $localConnectionManager = null;
 
@@ -205,11 +205,11 @@ class DirectSqlStore implements ClientStore {
 	 * Returns a LoadBalancer that acts as a factory for connections to the repo wiki's
 	 * database.
 	 *
-	 * @return ConsistentReadConnectionManager
+	 * @return SessionConsistentConnectionManager
 	 */
 	private function getRepoConnectionManager() {
 		if ( $this->repoConnectionManager === null ) {
-			$this->repoConnectionManager = new ConsistentReadConnectionManager( wfGetLB( $this->repoWiki ), $this->repoWiki );
+			$this->repoConnectionManager = new SessionConsistentConnectionManager( wfGetLB( $this->repoWiki ), $this->repoWiki );
 		}
 
 		return $this->repoConnectionManager;
@@ -219,11 +219,11 @@ class DirectSqlStore implements ClientStore {
 	 * Returns a LoadBalancer that acts as a factory for connections to the local (client) wiki's
 	 * database.
 	 *
-	 * @return ConsistentReadConnectionManager
+	 * @return SessionConsistentConnectionManager
 	 */
 	private function getLocalConnectionManager() {
 		if ( $this->localConnectionManager === null ) {
-			$this->localConnectionManager = new ConsistentReadConnectionManager( wfGetLB() );
+			$this->localConnectionManager = new SessionConsistentConnectionManager( wfGetLB() );
 		}
 
 		return $this->localConnectionManager;

@@ -4,7 +4,7 @@ namespace Wikibase\Client\RecentChanges;
 
 use MWException;
 use RecentChange;
-use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
+use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 /**
  * @since 0.5
@@ -16,11 +16,11 @@ use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
 class RecentChangesDuplicateDetector {
 
 	/**
-	 * @var ConsistentReadConnectionManager
+	 * @var SessionConsistentConnectionManager
 	 */
 	private $connectionManager;
 
-	public function __construct( ConsistentReadConnectionManager $connectionManager ) {
+	public function __construct( SessionConsistentConnectionManager $connectionManager ) {
 		$this->connectionManager = $connectionManager;
 	}
 

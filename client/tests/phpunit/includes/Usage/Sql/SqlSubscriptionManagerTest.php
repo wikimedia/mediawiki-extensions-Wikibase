@@ -2,10 +2,10 @@
 
 namespace Wikibase\Client\Tests\Usage\Sql;
 
-use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
 use Wikibase\Client\Usage\Sql\SqlSubscriptionManager;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 /**
  * @covers Wikibase\Client\Usage\Sql\SqlSubscriptionManager
@@ -36,7 +36,7 @@ class SqlSubscriptionManagerTest extends \MediaWikiTestCase {
 	 */
 	private function getSubscriptionManager() {
 		return new SqlSubscriptionManager(
-			new ConsistentReadConnectionManager( wfGetLB() )
+			new SessionConsistentConnectionManager( wfGetLB() )
 		);
 	}
 
