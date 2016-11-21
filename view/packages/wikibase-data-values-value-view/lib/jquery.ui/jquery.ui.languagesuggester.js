@@ -86,6 +86,7 @@ $.widget( 'ui.languagesuggester', PARENT, {
 
 	/**
 	 * Instantiates a menu item instance from a suggestion.
+	 * @see jQuery.ui.suggester._createMenuItemFromSuggestion
 	 * @protected
 	 *
 	 * @param {Object} suggestion
