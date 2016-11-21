@@ -91,7 +91,11 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback(
 				function ( EntityId $id ) {
-					return Title::makeTitle( NS_MAIN, $id->getSerialization() );
+					$title = $this->getMock( Title::class );
+					$title->expects( $this->any() )
+						->method( 'exists' )
+						->will( $this->returnValue( true ) );
+					return $title;
 				}
 			) );
 
@@ -100,7 +104,7 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
 		$specialPage = new SpecialListProperties();
-		$specialPage->getContext()->setLanguage( Language::factory( 'en' ) );
+		$specialPage->getContext()->setLanguage( Language::factory( 'en-gb' ) );
 
 		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->never() )
@@ -159,6 +163,9 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 		$this->assertContains( 'Property with label P123', $output );
 		$this->assertContains( 'Property with label P456', $output );
 		$this->assertNotContains( 'P789', $output );
+
+		$this->assertContains( 'lang="en"', $output );
+		$this->assertNotContains( 'lang="en-gb"', $output );
 	}
 
 	public function testExecute_string() {
