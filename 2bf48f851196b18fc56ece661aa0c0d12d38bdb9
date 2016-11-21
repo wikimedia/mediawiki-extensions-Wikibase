@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ceb9bbfa_4d910ffb",
+        "filename": "lib/includes/TermIndexEntry.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-21T17:54:20Z",
+      "side": 1,
+      "message": "probably should be private",
+      "revId": "2bf48f851196b18fc56ece661aa0c0d12d38bdb9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb9bbfa_2d96dbf3",
+        "filename": "lib/includes/TermIndexEntry.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-21T17:54:20Z",
+      "side": 1,
+      "message": "I don\u0027t think this should default to null. Rather to \u0027\u0027.",
+      "revId": "2bf48f851196b18fc56ece661aa0c0d12d38bdb9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
