@@ -184,7 +184,7 @@ class PageTermsTest extends MediaWikiLangTestCase {
 					'termLanguage' => $lang,
 					'termText' => $text,
 					'entityType' => $entityId->getEntityType(),
-					'entityId' => $entityId->getNumericId()
+					'entityId' => $entityId
 				) );
 			}
 		}

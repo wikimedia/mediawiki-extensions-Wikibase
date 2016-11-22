@@ -61,28 +61,28 @@ class TermPropertyLabelResolverTest extends \MediaWikiTestCase {
 			new TermIndexEntry( array(
 				'termType' => 'label',
 				'termLanguage' => 'de',
-				'entityId' => 1,
+				'entityId' => new PropertyId( 'P1' ),
 				'entityType' => Property::ENTITY_TYPE,
 				'termText' => 'Eins',
 			) ),
 			new TermIndexEntry( array(
 				'termType' => 'label',
 				'termLanguage' => 'de',
-				'entityId' => 2,
+				'entityId' => new PropertyId( 'P2' ),
 				'entityType' => Property::ENTITY_TYPE,
 				'termText' => 'Zwei',
 			) ),
 			new TermIndexEntry( array(
 				'termType' => 'label',
 				'termLanguage' => 'de',
-				'entityId' => 3,
+				'entityId' => new PropertyId( 'P3' ),
 				'entityType' => Property::ENTITY_TYPE,
 				'termText' => 'Drei',
 			) ),
 			new TermIndexEntry( array(
 				'termType' => 'label',
 				'termLanguage' => 'de',
-				'entityId' => 4,
+				'entityId' => new PropertyId( 'P4' ),
 				'entityType' => Property::ENTITY_TYPE,
 				'termText' => 'vier', // lower case
 			) ),
@@ -91,28 +91,28 @@ class TermPropertyLabelResolverTest extends \MediaWikiTestCase {
 			new TermIndexEntry( array(
 				'termType' => 'label',
 				'termLanguage' => 'en',
-				'entityId' => 1,
+				'entityId' => new PropertyId( 'P1' ),
 				'entityType' => Property::ENTITY_TYPE,
 				'termText' => 'One',
 			) ),
 			new TermIndexEntry( array(
 				'termType' => 'label',
 				'termLanguage' => 'en',
-				'entityId' => 2,
+				'entityId' => new PropertyId( 'P2' ),
 				'entityType' => Item::ENTITY_TYPE, // not a property
 				'termText' => 'Two',
 			) ),
 			new TermIndexEntry( array(
 				'termType' => 'alias', // not a label
 				'termLanguage' => 'en',
-				'entityId' => 3,
+				'entityId' => new PropertyId( 'P3' ),
 				'entityType' => Property::ENTITY_TYPE,
 				'termText' => 'Three',
 			) ),
 			new TermIndexEntry( array(
 				'termType' => 'description', // not a label
 				'termLanguage' => 'en',
-				'entityId' => 4,
+				'entityId' => new PropertyId( 'P4' ),
 				'entityType' => Property::ENTITY_TYPE,
 				'termText' => 'Four',
 			) ),

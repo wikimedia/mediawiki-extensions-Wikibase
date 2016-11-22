@@ -767,6 +767,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 				}
 
 				if ( $key === 'term_entity_id' ) {
+					// TODO: create an EntityId instance, needs EntityIdComposer injected?
 					$value = (int)$value;
 				} elseif ( $key === 'term_weight' ) {
 					$value = (float)$value;

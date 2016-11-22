@@ -262,21 +262,21 @@ class TermSqlIndexTest extends TermIndexTest {
 
 		$expectedTerms = array(
 			new TermIndexEntry( array(
-				'entityId' => 999,
+				'entityId' => new ItemId( 'Q999' ),
 				'entityType' => 'item',
 				'termText' => 'es un gato!',
 				'termLanguage' => 'es',
 				'termType' => 'description'
 			) ),
 			new TermIndexEntry( array(
-				'entityId' => 999,
+				'entityId' => new ItemId( 'Q999' ),
 				'entityType' => 'item',
 				'termText' => 'kittens!!!:)',
 				'termLanguage' => 'en',
 				'termType' => 'label'
 			) ),
 			new TermIndexEntry( array(
-				'entityId' => 999,
+				'entityId' => new ItemId( 'Q999' ),
 				'entityType' => 'item',
 				'termText' => 'kitten-alias',
 				'termLanguage' => 'en',
