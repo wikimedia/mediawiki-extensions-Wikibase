@@ -66,6 +66,11 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( isset( $fields['termText'] ) ? $fields['termText'] : null, $term->getText() );
 	}
 
+	public function testGivenInvalidField_constructorThrowsException() {
+		$this->setExpectedException( MWException::class );
+		new TermIndexEntry( [ 'fooField' => 'bar' ] );
+	}
+
 	public function testClone() {
 		$term = new TermIndexEntry( [ 'termText' => 'Foo' ] );
 
