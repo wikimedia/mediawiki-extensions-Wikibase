@@ -33,6 +33,24 @@
       "revId": "2bf48f851196b18fc56ece661aa0c0d12d38bdb9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb9bbfa_0439ac3e",
+        "filename": "lib/includes/TermIndexEntry.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-22T07:54:40Z",
+      "side": 1,
+      "message": "That has been my first thought too. But then I remembered that TermIndexEntry might be incomplete, so I thought maybe the repo name should be null-initialized as all other fields. This is also the only reason for making setRepositoryName public (per your other comment).\n\nBut maybe we don\u0027t want allow incompleteness when it comes to the repository.",
+      "parentUuid": "ceb9bbfa_2d96dbf3",
+      "revId": "2bf48f851196b18fc56ece661aa0c0d12d38bdb9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
