@@ -21,31 +21,31 @@ use Wikibase\TermIndexEntry;
 class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 
 	public function provideConstructor() {
-		return array(
-			array( // #0
-				array(
+		return [
+			[
+				[
 					'entityType' => 'item',
 					'entityId' => 23,
 					'termType' => TermIndexEntry::TYPE_LABEL,
 					'termLanguage' => 'en',
 					'termText' => 'foo',
 					'termWeight' => 1.234,
-				)
-			),
-			array( // #1
-				array(
+				]
+			],
+			[
+				[
 					'termType' => TermIndexEntry::TYPE_LABEL,
 					'termLanguage' => 'en',
 					'termText' => 'foo',
-				)
-			),
-			array( // #2
-				array(
+				]
+			],
+			[
+				[
 					'entityType' => 'item',
 					'entityId' => 23,
-				)
-			),
-		);
+				]
+			],
+		];
 	}
 
 	/**
@@ -69,95 +69,73 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testClone() {
-		$term = new TermIndexEntry( array(
-			'termText' => 'Foo'
-		) );
+		$term = new TermIndexEntry( [ 'termText' => 'Foo' ] );
 
 		$clone = clone $term;
 		$clone->setText( 'Bar' );
 
-		$this->assertEquals( 'Bar', $clone->getText(), "clone must change when modified" ); // sanity
-		$this->assertEquals( 'Foo', $term->getText(), "original must stay the same when clone is modified" );
+		$this->assertEquals( 'Bar', $clone->getText(), 'clone must change when modified' ); // sanity
+		$this->assertEquals( 'Foo', $term->getText(), 'original must stay the same when clone is modified' );
 
 		$clone = clone $term;
-		$this->assertEquals( $term, $clone, "clone must be equal to original" );
+		$this->assertEquals( $term, $clone, 'clone must be equal to original' );
+	}
+
+	/**
+	 * @param array $extraFields
+	 *
+	 * @return TermIndexEntry
+	 */
+	private function newInstance( array $extraFields = [] ) {
+		return new TermIndexEntry( $extraFields + [
+				'entityType' => 'item',
+				'entityId' => 23,
+				'termType' => TermIndexEntry::TYPE_LABEL,
+				'termLanguage' => 'en',
+				'termText' => 'foo',
+			] );
 	}
 
 	public function provideCompare() {
-		$tests = array();
+		$term = $this->newInstance();
 
-		$tests[] = array( // #0
-			new TermIndexEntry(),
-			new TermIndexEntry(),
-			true
-		);
-
-		$term = new TermIndexEntry( array(
-			'entityType' => 'item',
-			'entityId' => 23,
-			'termType' => TermIndexEntry::TYPE_LABEL,
-			'termLanguage' => 'en',
-			'termText' => 'foo',
-		) );
-
-		$other = clone $term;
-		$tests[] = array( // #1
-			$term,
-			$other,
-			true
-		);
-
-		$other = clone $term;
-		$other->setText( 'bar' );
-		$tests[] = array( // #2
-			$term,
-			$other,
-			false
-		);
-
-		$other = new TermIndexEntry( array(
-			'entityType' => 'property',
-			'entityId' => 11,
-			'termType' => TermIndexEntry::TYPE_LABEL,
-			'termLanguage' => 'en',
-			'termText' => 'foo',
-		) );
-		$tests[] = array( // #3
-			$term,
-			$other,
-			false
-		);
-
-		$other = new TermIndexEntry( array(
-			'entityType' => 'property',
-			'entityId' => 23,
-			'termType' => TermIndexEntry::TYPE_LABEL,
-			'termLanguage' => 'en',
-			'termText' => 'foo',
-		) );
-		$tests[] = array( // #4
-			$term,
-			$other,
-			false
-		);
-
-		$other = clone $term;
-		$other->setLanguage( 'fr' );
-		$tests[] = array( // #5
-			$term,
-			$other,
-			false
-		);
-
-		$other = clone $term;
-		$other->setType( TermIndexEntry::TYPE_DESCRIPTION );
-		$tests[] = array( // #6
-			$term,
-			$other,
-			false
-		);
-
-		return $tests;
+		return [
+			'empty' => [
+				new TermIndexEntry(),
+				new TermIndexEntry(),
+				true
+			],
+			'clone' => [
+				$term,
+				clone $term,
+				true
+			],
+			'other text' => [
+				$term,
+				$this->newInstance( [ 'termText' => 'bar' ] ),
+				false
+			],
+			'other entity id' => [
+				$term,
+				$this->newInstance( [ 'entityType' => 'property', 'entityId' => 11 ] ),
+				false
+			],
+			'other entity type' => [
+				$term,
+				$this->newInstance( [ 'entityType' => 'property' ] ),
+				false
+			],
+			'other language' => [
+				$term,
+				$this->newInstance( [ 'termLanguage' => 'fr' ] ),
+				false
+			],
+			'other term type' => [
+				$term,
+				$this->newInstance( [ 'termType' => TermIndexEntry::TYPE_DESCRIPTION ] ),
+				false
+			],
+		];
 	}
 
 	/**
@@ -169,33 +147,33 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 		$ba = TermIndexEntry::compare( $b, $a );
 
 		if ( $equal ) {
-			$this->assertEquals( 0, $ab, "Comparison of equal terms is expected to return 0" );
-			$this->assertEquals( 0, $ba, "Comparison of equal terms is expected to return 0" );
+			$this->assertEquals( 0, $ab, 'Comparison of equal terms is expected to return 0' );
+			$this->assertEquals( 0, $ba, 'Comparison of equal terms is expected to return 0' );
 		} else {
-			//NOTE: we don't know or care whether this is larger or smaller
-			$this->assertNotEquals( 0, $ab, "Comparison of unequal terms is expected to not return 0" );
-			$this->assertEquals( -$ab, $ba, "Comparing A to B should return the inverse of comparing B to A" );
+			// NOTE: We don't know or care whether this is larger or smaller
+			$this->assertNotEquals( 0, $ab, 'Comparison of unequal terms is expected to not return 0' );
+			$this->assertEquals( -$ab, $ba, 'Comparing A to B should return the inverse of comparing B to A' );
 		}
 	}
 
 	public function testGetTerm() {
-		$termIndexEntry = new TermIndexEntry( array(
+		$termIndexEntry = new TermIndexEntry( [
 			'termLanguage' => 'en',
 			'termText' => 'foo',
-		) );
+		] );
 		$expectedTerm = new Term( 'en', 'foo' );
 		$this->assertEquals( $expectedTerm, $termIndexEntry->getTerm() );
 	}
 
 	public function provideTermIndexEntryData() {
-		return array(
-			array( array(
-				'termText' => 'foo',
-			) ),
-			array( array(
-				'termLanguage' => 'en',
-			) ),
-		);
+		return [
+			[
+				[ 'termText' => 'foo' ]
+			],
+			[
+				[ 'termLanguage' => 'en' ]
+			],
+		];
 	}
 
 	/**
