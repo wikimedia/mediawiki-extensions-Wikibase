@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "ceb9bbfa_a7cc3f8d",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-11-22T18:05:29Z",
+      "side": 1,
+      "message": "I rewrote it along the lines of your patch",
+      "parentUuid": "ceb9bbfa_f10f9531",
+      "revId": "18f96430e46d915e9487cf5cd5c6fd910ba779f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ceb9bbfa_7f33510b",
         "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
         "patchSetId": 2
@@ -42,6 +60,24 @@
         "endLine": 87,
         "endChar": 22
       },
+      "revId": "18f96430e46d915e9487cf5cd5c6fd910ba779f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb9bbfa_c7cf3381",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-11-22T18:05:29Z",
+      "side": 1,
+      "message": "hmmm that condition should have been removed...",
+      "parentUuid": "ceb9bbfa_7f33510b",
       "revId": "18f96430e46d915e9487cf5cd5c6fd910ba779f4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
