@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ceb9bbfa_f10f9531",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-11-22T12:00:17Z",
+      "side": 1,
+      "message": "It\u0027s not obvious what this code does and why. Why is it possible to assign an MD5 hash to a variable that\u0027s documented as \"the LName of the value node in the RdfVocabulary::NS_VALUE namespace\"? I believe there are other ways to re-write this code that are much more obvious.",
+      "range": {
+        "startLine": 79,
+        "startChar": 4,
+        "endLine": 79,
+        "endChar": 35
+      },
+      "revId": "18f96430e46d915e9487cf5cd5c6fd910ba779f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb9bbfa_7f33510b",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-11-22T12:00:17Z",
+      "side": 1,
+      "message": "This is dead code now.",
+      "range": {
+        "startLine": 87,
+        "startChar": 8,
+        "endLine": 87,
+        "endChar": 22
+      },
+      "revId": "18f96430e46d915e9487cf5cd5c6fd910ba779f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
