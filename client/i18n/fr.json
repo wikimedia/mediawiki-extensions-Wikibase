@@ -20,7 +20,8 @@
 			"Dcausse",
 			"Wladek92",
 			"Pymouss",
-			"Zebulon84"
+			"Zebulon84",
+			"Urhixidur"
 		]
 	},
 	"wikibase-client-desc": "Client pour l’extension Wikibase",
@@ -123,9 +124,9 @@
 	"wikibase-otherprojects-beta-message": "Barre latérale des autres projets",
 	"wikibase-otherprojects-beta-description": "Ajoute une section « {{int:wikibase-otherprojects}} » à la barre latérale qui fournit des liens vers les autres  projets de Wikimédia basés sur les données {{WBREPONAME}}.",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Connexion|Connexions}} avec {{WBREPONAME}}",
-	"echo-pref-tooltip-wikibase-action": "M'avertir quand quelqu'un connecte une page que {{GENDER:|j'ai créée}} à l'élément {{WBREPONAME}}.",
+	"echo-pref-tooltip-wikibase-action": "M’avertir quand quelqu’un connecte une page que {{GENDER:|j’ai créée}} à l’élément {{WBREPONAME}}.",
 	"notification-header-page-connection": "La page <strong>de $3</strong> a {{GENDER:$2|relié}} un élément {{WBREPONAME}}.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> et {{PLURAL:$4|une autre page|$4 autres pages|100=99+ autres pages}} ont {{GENDER:$2|relié}} à {{WBREPONAME}} articles.",
 	"notification-link-text-view-item": "{{GENDER:$1|visualise}} la notification",
-	"notification-subject-page-connection": "Une page sur {{SITENAME}} que vous avez {{GENDER:$3|créée}} a été {{GENDER:$2|reliée}} à l'élément {{WBREPONAME}}"
+	"notification-subject-page-connection": "Une page sur {{SITENAME}} que vous avez {{GENDER:$3|créée}} a été {{GENDER:$2|reliée}} à l’élément {{WBREPONAME}}"
 }

@@ -4,7 +4,7 @@
 			"Giromin Cangiaxo"
 		]
 	},
-	"tooltip-t-wikibase": "Colegamento a l'elemento connesso de l'archivvio dæti",
+	"tooltip-t-wikibase": "Ingancio a l'elemento de l'archivvio di dæti connessi",
 	"wikibase-comment-update": "Elemento {{WBREPONAME}} modificou",
 	"wikibase-dataitem": "Elemento {{WBREPONAME}}",
 	"wikibase-editlinks": "Modiffica colegamenti",
@@ -15,5 +15,7 @@
 	"wikibase-rc-show-wikidata-pref": "Mostra e modiffiche de {{WBREPONAME}} inti urtime modiffiche",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Modiffica effettuâ insce {{WBREPONAME}}",
+	"unconnectedpages": "Paggine non conligæ a-i elementi",
+	"entityusage": "Utilizzo de l'entitæ",
 	"wikibase-otherprojects": "Inte di atri progetti"
 }

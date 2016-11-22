@@ -4,9 +4,12 @@
 			"Mogoeilor"
 		]
 	},
+	"wikibase-comment-update": "{{WBREPONAME}} قلم آلشد ڤابي",
 	"wikibase-dataitem": "{{WBREPONAME}} قلم",
 	"wikibase-editlinks": "ویرایشت هوم پیوندا",
+	"wikibase-editlinkstitle": "ڤیرایشت هوم پیڤندا مإن زۈنی",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "قام کردن",
 	"wikibase-rc-hide-wikidata-show": "نشون دائن",
 	"wikibase-rc-wikibase-edit-letter": "د",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ویرایشت"
