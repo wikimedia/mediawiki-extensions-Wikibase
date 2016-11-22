@@ -43,6 +43,24 @@
     },
     {
       "key": {
+        "uuid": "ceb9bbfa_87dedbdc",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-22T19:04:48Z",
+      "side": 1,
+      "message": "This indeed isn\u0027t very nice... we are spreading the knowledge of how the LName is composed. addValueNode returning null in case we had seen the value before is no longer a good solution.\n\n@Thiemo, I agree that there are probably better ways, but I\u0027m afraid there are not as simple as it may seem.",
+      "parentUuid": "ceb9bbfa_a7cc3f8d",
+      "revId": "18f96430e46d915e9487cf5cd5c6fd910ba779f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ceb9bbfa_7f33510b",
         "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
         "patchSetId": 2
