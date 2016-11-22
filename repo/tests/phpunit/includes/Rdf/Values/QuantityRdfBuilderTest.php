@@ -330,4 +330,66 @@ class QuantityRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$this->helper->assertNTriplesEquals( $expected, $result );
 	}
 
+	/**
+	 * @ticket T150877
+	 */
+	public function testWriteTwice() {
+		$unboundedValue = UnboundedQuantityValue::newFromNumber( '-79.1', 'Q2' );
+		$unboundedSnak = new PropertyValueSnak( new PropertyId( 'P7' ), $unboundedValue );
+		$unboundedSnak2 = new PropertyValueSnak( new PropertyId( 'P9' ), $unboundedValue );
+
+		$vocab = new RdfVocabulary( 'http://acme.com/item/', 'http://acme.com/data/' );
+		$snakWriter = $this->newSnakWriter();
+		$builder = $this->newQuantityRdfBuilder( $snakWriter->sub(), $vocab, true,
+				[ 'factor' => 1, 'unit' => 'Q2' ] );
+
+		$snakWriter->start();
+		$snakWriter->about( 'www', 'Q1' );
+
+		$builder->addValue(
+			$snakWriter,
+			RdfVocabulary::NSP_CLAIM_STATEMENT,
+			$vocab->getEntityLName( $unboundedSnak->getPropertyId() ),
+			'DUMMY',
+			$unboundedSnak
+		);
+		// And once more
+		$builder->addValue(
+			$snakWriter,
+			RdfVocabulary::NSP_CLAIM_STATEMENT,
+			$vocab->getEntityLName( $unboundedSnak2->getPropertyId() ),
+			'DUMMY',
+			$unboundedSnak2
+		);
+
+		$expected = [
+			'<http://www/Q1> ' . '<http://acme/statement/P7> ' .
+			'"-79.1"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+			'<http://www/Q1> ' . '<http://acme/statement/value/P7> ' .
+			'<http://acme/value/526c2826a6dfd29d460ea348b5d124a6> .',
+			'<http://www/Q1> ' . '<http://acme/statement/value-norm/P7> ' .
+			'<http://acme/value/526c2826a6dfd29d460ea348b5d124a6> .',
+			'<http://www/Q1> ' . '<http://acme/statement/P9> ' .
+			'"-79.1"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+			'<http://www/Q1> ' . '<http://acme/statement/value/P9> ' .
+			'<http://acme/value/526c2826a6dfd29d460ea348b5d124a6> .',
+			'<http://www/Q1> ' . '<http://acme/statement/value-norm/P9> ' .
+			'<http://acme/value/526c2826a6dfd29d460ea348b5d124a6> .',
+			'<http://acme/value/526c2826a6dfd29d460ea348b5d124a6> ' .
+			'<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ' .
+			'<http://acme/onto/QuantityValue> .',
+			'<http://acme/value/526c2826a6dfd29d460ea348b5d124a6> ' .
+			'<http://acme/onto/quantityAmount> ' .
+			'"-79.1"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+			'<http://acme/value/526c2826a6dfd29d460ea348b5d124a6> ' .
+			'<http://acme/onto/quantityUnit> ' . '<Q2> .',
+			'<http://acme/value/526c2826a6dfd29d460ea348b5d124a6> ' .
+			'<http://acme/onto/quantityNormalized> ' .
+			'<http://acme/value/526c2826a6dfd29d460ea348b5d124a6> .',
+		];
+
+		$result = $snakWriter->drain();
+		$this->helper->assertNTriplesEquals( $expected, $result );
+	}
+
 }

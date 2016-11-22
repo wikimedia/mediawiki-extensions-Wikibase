@@ -74,32 +74,22 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 			// Can we convert units? This condition may become more complex in the future,
 			// but should keep checks for all prerequisites being set.
 			// FIXME: make this depend on flavor
-			if ( $valueLName && $this->unitConverter != null ) {
+			if ( $this->unitConverter ) {
 				$newValue = $this->unitConverter->toStandardUnits( $value );
 
 				if ( $newValue ) {
+					$normLName = $this->addValueNode(
+						$writer,
+						$propertyValueNamespace,
+						$propertyValueLName,
+						$dataType,
+						$newValue,
+						true
+					);
 					if ( $newValue->equals( $value ) ) {
-						$this->complexValueHelper->attachValueNode(
-							$writer,
-							$propertyValueNamespace,
-							$propertyValueLName,
-							$dataType,
-							$value,
-							true
-						);
-
-						// The unnormalize value is always its own normalization.
+						// The normalized value is always its own normalization.
 						$this->linkNormalizedValue( $valueLName, $valueLName );
 					} else {
-						$normLName = $this->addValueNode(
-							$writer,
-							$propertyValueNamespace,
-							$propertyValueLName,
-							$dataType,
-							$newValue,
-							true
-						);
-
 						// The normalized value is always its own normalization.
 						$this->linkNormalizedValue( $normLName, $normLName );
 
@@ -114,10 +104,13 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 	/**
 	 * Connects a normalized value node to its base node via the quantityNormalized predicate.
 	 *
-	 * @param string $valueLName
-	 * @param string $normLName
+	 * @param string|null $valueLName
+	 * @param string|null $normLName
 	 */
 	private function linkNormalizedValue( $valueLName, $normLName ) {
+		if ( is_null( $valueLName ) || is_null( $normLName ) ) {
+			return;
+		}
 		$valueWriter = $this->complexValueHelper->getValueNodeWriter();
 		$valueWriter->about( RdfVocabulary::NS_VALUE, $valueLName )
 			->say( RdfVocabulary::NS_ONTOLOGY, 'quantityNormalized' )
