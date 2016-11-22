@@ -224,13 +224,14 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$terms = [];
 
 		foreach ( $termList->toTextArray() as $languageCode => $text ) {
-			$term = new TermIndexEntry( $extraFields );
-
-			$term->setLanguage( $languageCode );
-			$term->setType( $termType );
-			$term->setText( $text );
-
-			$terms[] = $term;
+			$terms[] = new TermIndexEntry( array_merge(
+				$extraFields,
+				[
+					'termLanguage' => $languageCode,
+					'termType' => $termType,
+					'termText' => $text,
+				]
+			) );
 		}
 
 		return $terms;
@@ -249,13 +250,14 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			$languageCode = $aliasGroup->getLanguageCode();
 
 			foreach ( $aliasGroup->getAliases() as $alias ) {
-				$term = new TermIndexEntry( $extraFields );
-
-				$term->setLanguage( $languageCode );
-				$term->setType( TermIndexEntry::TYPE_ALIAS );
-				$term->setText( $alias );
-
-				$terms[] = $term;
+				$terms[] = new TermIndexEntry( array_merge(
+					$extraFields,
+					[
+						'termLanguage' => $languageCode,
+						'termType' => TermIndexEntry::TYPE_ALIAS,
+						'termText' => $alias,
+					]
+				) );
 			}
 		}
 

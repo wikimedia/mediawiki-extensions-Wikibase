@@ -71,9 +71,7 @@ class TermSqlIndexTest extends TermIndexTest {
 
 		$termIndex->saveTermsOfEntity( $item );
 
-		$term = new TermIndexEntry();
-		$term->setLanguage( $languageCode );
-		$term->setText( $searchText );
+		$term = new TermIndexEntry( [ 'termLanguage' => $languageCode, 'termText' => $searchText ] );
 
 		$options = array(
 			'caseSensitive' => false,
