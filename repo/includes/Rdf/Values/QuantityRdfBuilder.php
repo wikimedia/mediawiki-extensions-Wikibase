@@ -71,6 +71,16 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 				$value
 			);
 
+			if (!$valueLName) {
+				$skipValue = true;
+				// Even if we didn't write the value, we still need it
+				// to write normalized statements and links.
+				// FIXME: this duplicates code from attachValueNode, think how to avoid this.
+				$valueLName = $value->getHash();
+			} else {
+				$skipValue = false;
+			}
+
 			// Can we convert units? This condition may become more complex in the future,
 			// but should keep checks for all prerequisites being set.
 			// FIXME: make this depend on flavor
@@ -88,8 +98,10 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 							true
 						);
 
-						// The unnormalize value is always its own normalization.
-						$this->linkNormalizedValue( $valueLName, $valueLName );
+						if ( !$skipValue ) {
+							// The unnormalize value is always its own normalization.
+							$this->linkNormalizedValue( $valueLName, $valueLName );
+						}
 					} else {
 						$normLName = $this->addValueNode(
 							$writer,
@@ -100,11 +112,13 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 							true
 						);
 
-						// The normalized value is always its own normalization.
-						$this->linkNormalizedValue( $normLName, $normLName );
+						if ( $normLName ) {
+							// The normalized value is always its own normalization.
+							$this->linkNormalizedValue( $normLName, $normLName );
 
-						// Connect the normalized value to the unnormalized value
-						$this->linkNormalizedValue( $valueLName, $normLName );
+							// Connect the normalized value to the unnormalized value
+							$this->linkNormalizedValue( $valueLName, $normLName );
+						}
 					}
 				}
 			}
