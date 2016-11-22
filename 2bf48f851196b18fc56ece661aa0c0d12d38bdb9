@@ -51,6 +51,24 @@
       "revId": "2bf48f851196b18fc56ece661aa0c0d12d38bdb9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb9bbfa_679187fb",
+        "filename": "lib/includes/TermIndexEntry.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-22T19:08:01Z",
+      "side": 1,
+      "message": "Yea... if we do not have an EntityId, getRepositoryName should return null. But if we do have an EntityId, it should never return null, but default to \u0027\u0027. This becomes obvious when we have an actual EntityId object as a member.",
+      "parentUuid": "ceb9bbfa_0439ac3e",
+      "revId": "2bf48f851196b18fc56ece661aa0c0d12d38bdb9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
