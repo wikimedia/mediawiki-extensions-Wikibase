@@ -222,7 +222,7 @@ class SqlStore implements Store {
 		//TODO: Get $stringNormalizer from WikibaseRepo?
 		//      Can't really pass this via the constructor...
 		$stringNormalizer = new StringNormalizer();
-		return new TermSqlIndex( $stringNormalizer );
+		return new TermSqlIndex( $stringNormalizer, $this->entityIdComposer );
 	}
 
 	/**
