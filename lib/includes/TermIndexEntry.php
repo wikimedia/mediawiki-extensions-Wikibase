@@ -42,7 +42,6 @@ class TermIndexEntry {
 		'termType',
 		'termLanguage',
 		'termText',
-		'termWeight',
 	);
 
 	/**
@@ -69,9 +68,6 @@ class TermIndexEntry {
 					break;
 				case 'termText':
 					$this->setText( $value );
-					break;
-				case 'termWeight':
-					$this->setWeight( $value );
 					break;
 				default:
 					throw new MWException( 'Invalid term field provided' );
@@ -152,30 +148,6 @@ class TermIndexEntry {
 	}
 
 	/**
-	 * @since 0.5
-	 *
-	 * @param float $weight
-	 *
-	 * @throws MWException
-	 */
-	public function setWeight( $weight ) {
-		if ( !is_float( $weight ) ) {
-			throw new MWException( 'Term weight code can only be a float' );
-		}
-
-		$this->fields['termWeight'] = $weight;
-	}
-
-	/**
-	 * @since 0.5
-	 *
-	 * @return float|null
-	 */
-	public function getWeight() {
-		return array_key_exists( 'termWeight', $this->fields ) ? $this->fields['termWeight'] : null;
-	}
-
-	/**
 	 * @param string $entityType
 	 *
 	 * @throws MWException
@@ -251,7 +223,6 @@ class TermIndexEntry {
 	/**
 	 * Imposes an canonical but arbitrary order on Term objects.
 	 * Useful for sorting lists of terms for comparison.
-	 * This comparison DOES NOT use termWeight
 	 *
 	 * @param self $a
 	 * @param self $b
@@ -259,10 +230,7 @@ class TermIndexEntry {
 	 * @return int Returns 1 if $a is greater than $b, -1 if $b is greater than $a, and 0 otherwise.
 	 */
 	public static function compare( self $a, self $b ) {
-		$fieldNames = self::$fieldNames;
-		unset( $fieldNames[array_search( 'termWeight', $fieldNames )] );
-
-		foreach ( $fieldNames as $n ) {
+		foreach ( self::$fieldNames as $n ) {
 			$exists = array_key_exists( $n, $a->fields );
 
 			if ( $exists !== array_key_exists( $n, $b->fields ) ) {

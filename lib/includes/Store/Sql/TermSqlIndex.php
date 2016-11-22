@@ -57,7 +57,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		'term_type' => 'termType',
 		'term_language' => 'termLanguage',
 		'term_text' => 'termText',
-		'term_weight' => 'termWeight',
 		'term_entity_id' => 'entityId',
 	);
 
@@ -766,8 +765,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 				if ( $key === 'term_entity_id' ) {
 					$value = (int)$value;
-				} elseif ( $key === 'term_weight' ) {
-					$value = (float)$value;
 				}
 
 				$matchingTerm[$this->termFieldMap[$key]] = $value;

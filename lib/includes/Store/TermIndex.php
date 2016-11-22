@@ -87,7 +87,7 @@ interface TermIndex {
 	 * method parameters.
 	 *
 	 * The return value is an array of Terms where entityId, entityType,
-	 * termType, termLanguage, termText, termWeight are all set.
+	 * termType, termLanguage, termText are all set.
 	 *
 	 * @since 0.2
 	 *
@@ -121,7 +121,7 @@ interface TermIndex {
 	 * method parameters.
 	 *
 	 * The return value is an array of Terms where entityId, entityType,
-	 * termType, termLanguage, termText, termWeight are all set.
+	 * termType, termLanguage, termText are all set.
 	 *
 	 * @since 0.5
 	 *
