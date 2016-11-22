@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ceb9bbfa_346a9bb2",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-11-22T15:25:53Z",
+      "side": 1,
+      "message": "I did this on purpose. This should never be disabled in a test situation.",
+      "parentUuid": "ceb9bbfa_3154edc8",
+      "revId": "e6222d474be81e86a570422040607e9113f34468",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ceb9bbfa_b168fd85",
         "filename": "docs/options.wiki",
         "patchSetId": 9
