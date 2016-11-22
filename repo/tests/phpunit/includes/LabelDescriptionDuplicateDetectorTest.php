@@ -6,6 +6,7 @@ use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\Tests\Store\MockTermIndex;
 use Wikibase\Repo\Validators\UniquenessViolation;
@@ -28,7 +29,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 		$world[] = new TermIndexEntry( array(
 			'termType' => TermIndexEntry::TYPE_LABEL,
 			'termLanguage' => 'en',
-			'entityId' => 42,
+			'entityId' => new ItemId( 'Q42' ),
 			'entityType' => Item::ENTITY_TYPE,
 			'termText' => 'item label',
 		) );
@@ -36,7 +37,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 		$world[] = new TermIndexEntry( array(
 			'termType' => TermIndexEntry::TYPE_DESCRIPTION,
 			'termLanguage' => 'en',
-			'entityId' => 42,
+			'entityId' => new ItemId( 'Q42' ),
 			'entityType' => Item::ENTITY_TYPE,
 			'termText' => 'item description',
 		) );
@@ -44,7 +45,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 		$world[] = new TermIndexEntry( array(
 			'termType' => TermIndexEntry::TYPE_ALIAS,
 			'termLanguage' => 'en',
-			'entityId' => 42,
+			'entityId' => new ItemId( 'Q42' ),
 			'entityType' => Item::ENTITY_TYPE,
 			'termText' => 'item alias',
 		) );
@@ -52,7 +53,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 		$world[] = new TermIndexEntry( array(
 			'termType' => TermIndexEntry::TYPE_LABEL,
 			'termLanguage' => 'en',
-			'entityId' => 17,
+			'entityId' => new PropertyId( 'P42' ),
 			'entityType' => Property::ENTITY_TYPE,
 			'termText' => 'property label',
 		) );

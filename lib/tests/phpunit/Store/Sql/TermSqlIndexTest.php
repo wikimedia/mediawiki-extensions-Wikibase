@@ -9,6 +9,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Lib\EntityIdComposer;
 use Wikibase\StringNormalizer;
 use Wikibase\TermIndexEntry;
 use Wikibase\TermSqlIndex;
@@ -43,8 +44,7 @@ class TermSqlIndexTest extends TermIndexTest {
 	 * @return TermSqlIndex
 	 */
 	public function getTermIndex() {
-		$normalizer = new StringNormalizer();
-		return new TermSqlIndex( $normalizer );
+		return new TermSqlIndex( new StringNormalizer(), new EntityIdComposer( [] ) );
 	}
 
 	public function termProvider() {
@@ -262,21 +262,21 @@ class TermSqlIndexTest extends TermIndexTest {
 
 		$expectedTerms = array(
 			new TermIndexEntry( array(
-				'entityId' => 999,
+				'entityId' => new ItemId( 'Q999' ),
 				'entityType' => 'item',
 				'termText' => 'es un gato!',
 				'termLanguage' => 'es',
 				'termType' => 'description'
 			) ),
 			new TermIndexEntry( array(
-				'entityId' => 999,
+				'entityId' => new ItemId( 'Q999' ),
 				'entityType' => 'item',
 				'termText' => 'kittens!!!:)',
 				'termLanguage' => 'en',
 				'termType' => 'label'
 			) ),
 			new TermIndexEntry( array(
-				'entityId' => 999,
+				'entityId' => new ItemId( 'Q999' ),
 				'entityType' => 'item',
 				'termText' => 'kitten-alias',
 				'termLanguage' => 'en',

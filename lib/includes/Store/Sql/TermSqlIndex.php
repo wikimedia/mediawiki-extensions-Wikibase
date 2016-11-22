@@ -16,6 +16,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\LabelConflictFinder;
 
 /**
@@ -43,6 +44,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	private $stringNormalizer;
 
 	/**
+	 * @var EntityIdComposer
+	 */
+	private $entityIdComposer;
+
+	/**
 	 * @var int
 	 */
 	private $maxConflicts = 500;
@@ -62,14 +68,16 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	);
 
 	/**
-	 * @since    0.4
+	 * @since 0.4
 	 *
 	 * @param StringNormalizer $stringNormalizer
-	 * @param string|bool      $wikiDb
+	 * @param EntityIdComposer $entityIdComposer
+	 * @param string|bool $wikiDb
 	 */
-	public function __construct( StringNormalizer $stringNormalizer, $wikiDb = false ) {
+	public function __construct( StringNormalizer $stringNormalizer, EntityIdComposer $entityIdComposer, $wikiDb = false ) {
 		parent::__construct( $wikiDb );
 		$this->stringNormalizer = $stringNormalizer;
+		$this->entityIdComposer = $entityIdComposer;
 		$this->tableName = 'wb_terms';
 	}
 
@@ -184,7 +192,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$terms = [];
 		$extraFields = [
 			'entityType' => $entity->getType(),
-			'entityId' => $id->getNumericId(),
+			'entityId' => $id,
 		];
 
 		if ( $entity instanceof DescriptionsProvider ) {
@@ -767,7 +775,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 				}
 
 				if ( $key === 'term_entity_id' ) {
-					$value = (int)$value;
+					// TODO: create an EntityId instance, needs EntityIdComposer injected?
+					$value = $this->getEntityId( $obtainedTerm );
 				} elseif ( $key === 'term_weight' ) {
 					$value = (float)$value;
 				}
@@ -779,6 +788,17 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		}
 
 		return $matchingTerms;
+	}
+
+	/**
+	 * @param object $termRow
+	 * @return EntityId|null
+	 */
+	private function getEntityId( $termRow ) {
+		if ( !isset( $termRow->term_entity_type ) || !isset( $termRow->term_entity_id ) ) {
+			return null;
+		}
+		return $this->entityIdComposer->composeEntityId( $termRow->term_entity_type, $termRow->term_entity_id );
 	}
 
 	/**
