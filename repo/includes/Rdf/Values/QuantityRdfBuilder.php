@@ -35,7 +35,10 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 	 * @param ComplexValueRdfHelper|null $complexValueHelper
 	 * @param UnitConverter|null         $unitConverter
 	 */
-	public function __construct( ComplexValueRdfHelper $complexValueHelper = null, UnitConverter $unitConverter = null ) {
+	public function __construct(
+		ComplexValueRdfHelper $complexValueHelper = null,
+		UnitConverter $unitConverter = null
+	) {
 		$this->complexValueHelper = $complexValueHelper;
 		$this->unitConverter = $unitConverter;
 	}
@@ -71,20 +74,10 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 				$value
 			);
 
-			if ( !$valueLName ) {
-				$skipValue = true;
-				// Even if we didn't write the value, we still need it
-				// to write normalized statements and links.
-				// FIXME: this duplicates code from attachValueNode, think how to avoid this.
-				$valueLName = $value->getHash();
-			} else {
-				$skipValue = false;
-			}
-
 			// Can we convert units? This condition may become more complex in the future,
 			// but should keep checks for all prerequisites being set.
 			// FIXME: make this depend on flavor
-			if ( $valueLName && $this->unitConverter != null ) {
+			if ( $this->unitConverter !== null ) {
 				$newValue = $this->unitConverter->toStandardUnits( $value );
 
 				if ( $newValue ) {
@@ -98,10 +91,8 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 							true
 						);
 
-						if ( !$skipValue ) {
-							// The unnormalize value is always its own normalization.
-							$this->linkNormalizedValue( $valueLName, $valueLName );
-						}
+						// The unnormalize value is always its own normalization.
+						$this->linkNormalizedValue( $valueLName, $valueLName );
 					} else {
 						$normLName = $this->addValueNode(
 							$writer,
@@ -112,13 +103,11 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 							true
 						);
 
-						if ( $normLName ) {
-							// The normalized value is always its own normalization.
-							$this->linkNormalizedValue( $normLName, $normLName );
+						// The normalized value is always its own normalization.
+						$this->linkNormalizedValue( $normLName, $normLName );
 
-							// Connect the normalized value to the unnormalized value
-							$this->linkNormalizedValue( $valueLName, $normLName );
-						}
+						// Connect the normalized value to the unnormalized value
+						$this->linkNormalizedValue( $valueLName, $normLName );
 					}
 				}
 			}
@@ -128,14 +117,16 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 	/**
 	 * Connects a normalized value node to its base node via the quantityNormalized predicate.
 	 *
-	 * @param string $valueLName
-	 * @param string $normLName
+	 * @param string|null $valueLName
+	 * @param string|null $normLName
 	 */
 	private function linkNormalizedValue( $valueLName, $normLName ) {
-		$valueWriter = $this->complexValueHelper->getValueNodeWriter();
-		$valueWriter->about( RdfVocabulary::NS_VALUE, $valueLName )
-			->say( RdfVocabulary::NS_ONTOLOGY, 'quantityNormalized' )
-			->is( RdfVocabulary::NS_VALUE, $normLName );
+		if ( $valueLName && $normLName ) {
+			$this->complexValueHelper->getValueNodeWriter()
+				->about( RdfVocabulary::NS_VALUE, $valueLName )
+				->say( RdfVocabulary::NS_ONTOLOGY, 'quantityNormalized' )
+				->is( RdfVocabulary::NS_VALUE, $normLName );
+		}
 	}
 
 	/**
