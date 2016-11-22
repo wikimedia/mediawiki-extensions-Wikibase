@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ceb9bbfa_3154edc8",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-11-22T12:44:27Z",
+      "side": 1,
+      "message": "this should be reverted in tear down.",
+      "revId": "e6222d474be81e86a570422040607e9113f34468",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb9bbfa_b168fd85",
+        "filename": "docs/options.wiki",
+        "patchSetId": 9
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-11-22T12:44:27Z",
+      "side": 1,
+      "message": "We use dot syntax here (mw.wikibase.formatValue(s)): These calls are \"static\".",
+      "range": {
+        "startLine": 110,
+        "startChar": 138,
+        "endLine": 110,
+        "endChar": 139
+      },
+      "revId": "e6222d474be81e86a570422040607e9113f34468",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
