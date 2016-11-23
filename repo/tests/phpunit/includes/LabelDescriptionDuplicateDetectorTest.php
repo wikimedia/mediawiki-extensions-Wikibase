@@ -24,39 +24,35 @@ use Wikibase\TermIndexEntry;
 class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase {
 
 	private function getWorld() {
-		$world = array();
+		$world = [];
 
-		$world[] = new TermIndexEntry( array(
+		$world[] = new TermIndexEntry( [
 			'termType' => TermIndexEntry::TYPE_LABEL,
 			'termLanguage' => 'en',
 			'entityId' => new ItemId( 'Q42' ),
-			'entityType' => Item::ENTITY_TYPE,
 			'termText' => 'item label',
-		) );
+		] );
 
-		$world[] = new TermIndexEntry( array(
+		$world[] = new TermIndexEntry( [
 			'termType' => TermIndexEntry::TYPE_DESCRIPTION,
 			'termLanguage' => 'en',
 			'entityId' => new ItemId( 'Q42' ),
-			'entityType' => Item::ENTITY_TYPE,
 			'termText' => 'item description',
-		) );
+		] );
 
-		$world[] = new TermIndexEntry( array(
+		$world[] = new TermIndexEntry( [
 			'termType' => TermIndexEntry::TYPE_ALIAS,
 			'termLanguage' => 'en',
 			'entityId' => new ItemId( 'Q42' ),
-			'entityType' => Item::ENTITY_TYPE,
 			'termText' => 'item alias',
-		) );
+		] );
 
-		$world[] = new TermIndexEntry( array(
+		$world[] = new TermIndexEntry( [
 			'termType' => TermIndexEntry::TYPE_LABEL,
 			'termLanguage' => 'en',
 			'entityId' => new PropertyId( 'P42' ),
-			'entityType' => Property::ENTITY_TYPE,
 			'termText' => 'property label',
-		) );
+		] );
 
 		return $world;
 	}

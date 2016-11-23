@@ -62,13 +62,12 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 	 * @return TermIndexEntry
 	 */
 	private function getTermIndexEntry( $text, $languageCode, $termType, EntityId $entityId ) {
-		return new TermIndexEntry( array(
+		return new TermIndexEntry( [
 			'termText' => $text,
 			'termLanguage' => $languageCode,
 			'termType' => $termType,
 			'entityId' => $entityId,
-			'entityType' => $entityId->getEntityType(),
-		) );
+		] );
 	}
 
 	/**

@@ -60,29 +60,26 @@ class BufferingTermLookupTest extends EntityTermLookupTest {
 	 * @return TermIndex
 	 */
 	private function getRestrictedTermIndex( $getTermsOfEntityCalls, $getTermsOfEntitiesCalls ) {
-		$terms = array(
-			'en' => new TermIndexEntry( array(
+		$terms = [
+			'en' => new TermIndexEntry( [
 				'termType' => 'label',
 				'termLanguage' => 'en',
 				'termText' => 'Vienna',
-				'entityType' => 'item',
 				'entityId' => new ItemId( 'Q123' ),
-			) ),
-			'de' => new TermIndexEntry( array(
+			] ),
+			'de' => new TermIndexEntry( [
 				'termType' => 'label',
 				'termLanguage' => 'de',
 				'termText' => 'Wien',
-				'entityType' => 'item',
 				'entityId' => new ItemId( 'Q123' ),
-			) ),
-			'fr' => new TermIndexEntry( array(
+			] ),
+			'fr' => new TermIndexEntry( [
 				'termType' => 'label',
 				'termLanguage' => 'fr',
 				'termText' => 'Vienne',
-				'entityType' => 'item',
 				'entityId' => new ItemId( 'Q123' ),
-			) ),
-		);
+			] ),
+		];
 
 		$termIndex = $this->getMock( TermIndex::class );
 

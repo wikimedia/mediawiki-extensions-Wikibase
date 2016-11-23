@@ -7,6 +7,7 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\LabelConflictFinder;
+use Wikibase\Lib\Store\TermIndexMask;
 use Wikibase\TermIndex;
 use Wikibase\TermIndexEntry;
 
@@ -124,7 +125,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 * @param array[]|string[] $textsByLanguage A list of texts, or a list of lists of texts (keyed by language on the top level)
 	 * @param string[] $types
 	 *
-	 * @return TermIndexEntry[]
+	 * @return TermIndexMask[]
 	 */
 	private function makeTemplateTerms( array $textsByLanguage, array $types ) {
 		$terms = array();
@@ -134,7 +135,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 
 			foreach ( $texts as $text ) {
 				foreach ( $types as $type ) {
-					$terms[] = new TermIndexEntry( array(
+					$terms[] = new TermIndexMask( array(
 						'termText' => $text,
 						'termLanguage' => $lang,
 						'termType' => $type,
@@ -164,7 +165,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 				continue;
 			}
 
-			if ( $entityType !== null && $term->getEntityType() !== $entityType ) {
+			if ( $entityType !== null && $term->getEntityId()->getEntityType() !== $entityType ) {
 				continue;
 			}
 
@@ -281,7 +282,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 * language of the first Term in $terms. $The termType and $entityType parameters are used,
 	 * but the termType and entityType fields of the Terms in $terms are ignored.
 	 *
-	 * @param TermIndexEntry[] $terms
+	 * @param TermIndexMask[] $masks
 	 * @param string|string[]|null $termType
 	 * @param string|string[]|null $entityType
 	 * @param array $options
@@ -289,7 +290,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 * @return TermIndexEntry[]
 	 */
 	public function getMatchingTerms(
-		array $terms,
+		array $masks,
 		$termType = null,
 		$entityType = null,
 		array $options = array()
@@ -300,9 +301,9 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 		$entityType = $entityType === null ? null : (array)$entityType;
 
 		foreach ( $this->terms as $term ) {
-			if ( ( $entityType === null || in_array( $term->getEntityType(), $entityType ) )
+			if ( ( $entityType === null || in_array( $term->getEntityId()->getEntityType(), $entityType ) )
 				&& ( $termType === null || in_array( $term->getType(), $termType ) )
-				&& $this->termMatchesTemplates( $term, $terms, $options )
+				&& $this->termMatchesTemplates( $term, $masks, $options )
 			) {
 				$matchingTerms[] = $term;
 			}
@@ -322,7 +323,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 * is returned per EntityId. This is the first term.
 	 * Weighting does not affect the order of return by this method.
 	 *
-	 * @param TermIndexEntry[] $terms
+	 * @param TermIndexMask[] $masks
 	 * @param string|string[]|null $termType
 	 * @param string|string[]|null $entityType
 	 * @param array $options
@@ -330,13 +331,13 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 * @return TermIndexEntry[]
 	 */
 	public function getTopMatchingTerms(
-		array $terms,
+		array $masks,
 		$termType = null,
 		$entityType = null,
 		array $options = array()
 	) {
 		$options['orderByWeight'] = true;
-		$terms = $this->getMatchingTerms( $terms, $termType, $entityType, $options );
+		$terms = $this->getMatchingTerms( $masks, $termType, $entityType, $options );
 		$previousEntityIdSerializations = array();
 		$returnTerms = array();
 		foreach ( $terms as $termIndexEntry ) {
@@ -392,18 +393,14 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 
 	/**
 	 * @param TermIndexEntry $term
-	 * @param TermIndexEntry[] $templates
+	 * @param TermIndexMask[] $templates
 	 * @param array $options
 	 *
 	 * @return bool
 	 */
 	private function termMatchesTemplates( TermIndexEntry $term, array $templates, array $options = array() ) {
 		foreach ( $templates as $template ) {
-			if ( $template->getType() !== null && $template->getType() != $term->getType() ) {
-				continue;
-			}
-
-			if ( $template->getEntityType() !== null && $template->getEntityType() != $term->getEntityType() ) {
+			if ( $template->getTermType() !== null && $template->getTermType() != $term->getType() ) {
 				continue;
 			}
 
@@ -412,10 +409,6 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 			}
 
 			if ( $template->getText() !== null && !$this->textMatches( $template->getText(), $term->getText(), $options ) ) {
-				continue;
-			}
-
-			if ( $template->getEntityId() !== null && !$template->getEntityId()->equals( $term->getEntityType() ) ) {
 				continue;
 			}
 

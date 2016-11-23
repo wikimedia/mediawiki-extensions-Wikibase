@@ -6,6 +6,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\TermIndexMask;
 use Wikibase\Store\BufferingTermLookup;
 use Wikibase\TermIndex;
 use Wikibase\TermIndexEntry;
@@ -361,17 +362,17 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	 * @param string[] $languageCodes
 	 * @param string[] $termTypes
 	 *
-	 * @return TermIndexEntry[]
+	 * @return TermIndexMask[]
 	 */
 	private function makeTermIndexEntryTemplates( $text, array $languageCodes, array $termTypes ) {
-		$terms = array();
+		$terms = [];
 		foreach ( $languageCodes as $languageCode ) {
 			foreach ( $termTypes as $termType ) {
-				$terms[] = new TermIndexEntry( array(
+				$terms[] = new TermIndexMask( [
 					'termText' => $text,
 					'termLanguage' => $languageCode,
 					'termType' => $termType,
-				) );
+				] );
 			}
 		}
 		return $terms;

@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Store\TermIndexMask;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\TermIndexEntry;
 use Wikibase\TermSearchKeyBuilder;
@@ -53,7 +54,7 @@ class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 
 		// remove search key
 		$dbw = wfGetDB( DB_MASTER );
-		$dbw->update( $termCache->getTableName(), array( 'term_search_key' => '' ), array(), __METHOD__ );
+		$dbw->update( $termCache->getTableName(), [ 'term_search_key' => '' ], [], __METHOD__ );
 
 		// rebuild search key
 		$builder = new TermSearchKeyBuilder( $termCache );
@@ -61,13 +62,11 @@ class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 		$builder->rebuildSearchKey();
 
 		// remove search key
-		$term = new TermIndexEntry( [ 'termLanguage' => $languageCode, 'termText' => $searchText ] );
+		$term = new TermIndexMask( [ 'termLanguage' => $languageCode, 'termText' => $searchText ] );
 
-		$options = array(
-			'caseSensitive' => false,
-		);
+		$options = [ 'caseSensitive' => false ];
 
-		$obtainedTerms = $termCache->getMatchingTerms( array( $term ), TermIndexEntry::TYPE_LABEL, Item::ENTITY_TYPE, $options );
+		$obtainedTerms = $termCache->getMatchingTerms( [ $term ], TermIndexEntry::TYPE_LABEL, Item::ENTITY_TYPE, $options );
 
 		$this->assertEquals( $matches ? 1 : 0, count( $obtainedTerms ) );
 

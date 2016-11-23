@@ -175,17 +175,16 @@ class PageTermsTest extends MediaWikiLangTestCase {
 	 * @return TermIndexEntry[]
 	 */
 	private function makeTermsFromGroups( EntityId $entityId, array $termGroups ) {
-		$terms = array();
+		$terms = [];
 
 		foreach ( $termGroups as $type => $group ) {
 			foreach ( $group as $lang => $text ) {
-				$terms[] = new TermIndexEntry( array(
+				$terms[] = new TermIndexEntry( [
 					'termType' => $type,
 					'termLanguage' => $lang,
 					'termText' => $text,
-					'entityType' => $entityId->getEntityType(),
 					'entityId' => $entityId
-				) );
+				] );
 			}
 		}
 

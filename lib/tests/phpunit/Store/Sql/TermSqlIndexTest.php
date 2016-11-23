@@ -10,6 +10,7 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\EntityIdComposer;
+use Wikibase\Lib\Store\TermIndexMask;
 use Wikibase\StringNormalizer;
 use Wikibase\TermIndexEntry;
 use Wikibase\TermSqlIndex;
@@ -71,14 +72,12 @@ class TermSqlIndexTest extends TermIndexTest {
 
 		$termIndex->saveTermsOfEntity( $item );
 
-		$term = new TermIndexEntry( [ 'termLanguage' => $languageCode, 'termText' => $searchText ] );
+		$term = new TermIndexMask( [ 'termLanguage' => $languageCode, 'termText' => $searchText ] );
 
-		$options = array(
-			'caseSensitive' => false,
-		);
+		$options = [ 'caseSensitive' => false, ];
 
 		//FIXME: test with arrays for term types and entity types!
-		$obtainedTerms = $termIndex->getMatchingTerms( array( $term ), TermIndexEntry::TYPE_LABEL, Item::ENTITY_TYPE, $options );
+		$obtainedTerms = $termIndex->getMatchingTerms( [ $term ], TermIndexEntry::TYPE_LABEL, Item::ENTITY_TYPE, $options );
 
 		$this->assertEquals( $matches ? 1 : 0, count( $obtainedTerms ) );
 
@@ -105,15 +104,15 @@ class TermSqlIndexTest extends TermIndexTest {
 	}
 
 	public function getMatchingTermsOptionsProvider() {
-		$labels = array(
+		$labels = [
 			'en' => new Term( 'en', 'Foo' ),
 			'de' => new Term( 'de', 'Fuh' ),
-		);
+		];
 
-		$descriptions = array(
+		$descriptions = [
 			'en' => new Term( 'en', 'Bar' ),
 			'de' => new Term( 'de', 'Bär' ),
-		);
+		];
 
 		$fingerprint = new Fingerprint(
 			new TermList( $labels ),
@@ -121,33 +120,33 @@ class TermSqlIndexTest extends TermIndexTest {
 			new AliasGroupList()
 		);
 
-		$labelFooEn = new TermIndexEntry( array(
+		$labelFooEn = new TermIndexMask( [
 			'termType' => TermIndexEntry::TYPE_LABEL,
 			'termLanguage' => 'en',
 			'termText' => 'Foo',
-		) );
-		$descriptionBarEn = new TermIndexEntry( array(
+		] );
+		$descriptionBarEn = new TermIndexMask( [
 			'termType' => TermIndexEntry::TYPE_DESCRIPTION,
 			'termLanguage' => 'en',
 			'termText' => 'Bar',
-		) );
+		] );
 
-		return array(
-			'no options' => array(
+		return [
+			'no options' => [
 				$fingerprint,
-				array( $labelFooEn ),
-				array(),
-				array( $labelFooEn ),
-			),
-			'LIMIT options' => array(
+				[ $labelFooEn ],
+				[],
+				[ $labelFooEn ],
+			],
+			'LIMIT options' => [
 				$fingerprint,
-				array( $labelFooEn, $descriptionBarEn ),
-				array( 'LIMIT' => 1 ),
+				[ $labelFooEn, $descriptionBarEn ],
+				[ 'LIMIT' => 1 ],
 				// This is not really well defined. Could be either of the two.
 				// So use null to show we want something but don't know what it is
-				array( null ),
-			)
-		);
+				[ null ],
+			]
+		];
 	}
 
 	/**
@@ -255,34 +254,31 @@ class TermSqlIndexTest extends TermIndexTest {
 		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', 'kittens!!!:)' );
 		$fingerprint->setDescription( 'es', 'es un gato!' );
-		$fingerprint->setAliasGroup( 'en', array( 'kitten-alias' ) );
+		$fingerprint->setAliasGroup( 'en', [ 'kitten-alias' ] );
 
 		$item = new Item( $id );
 		$item->setFingerprint( $fingerprint );
 
-		$expectedTerms = array(
-			new TermIndexEntry( array(
+		$expectedTerms = [
+			new TermIndexEntry( [
 				'entityId' => new ItemId( 'Q999' ),
-				'entityType' => 'item',
 				'termText' => 'es un gato!',
 				'termLanguage' => 'es',
 				'termType' => 'description'
-			) ),
-			new TermIndexEntry( array(
+			] ),
+			new TermIndexEntry( [
 				'entityId' => new ItemId( 'Q999' ),
-				'entityType' => 'item',
 				'termText' => 'kittens!!!:)',
 				'termLanguage' => 'en',
 				'termType' => 'label'
-			) ),
-			new TermIndexEntry( array(
+			] ),
+			new TermIndexEntry( [
 				'entityId' => new ItemId( 'Q999' ),
-				'entityType' => 'item',
 				'termText' => 'kitten-alias',
 				'termLanguage' => 'en',
 				'termType' => 'alias'
-			) )
-		);
+			] )
+		];
 
 		$entityWithoutTerms = $this->getMock( EntityDocument::class );
 		$entityWithoutTerms->expects( $this->any() )

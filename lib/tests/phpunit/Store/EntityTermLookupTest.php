@@ -125,36 +125,32 @@ class EntityTermLookupTest extends \MediaWikiTestCase {
 	}
 
 	protected function getTermIndex() {
-		$terms = array(
-			new TermIndexEntry( array(
+		$terms = [
+			new TermIndexEntry( [
 				'entityId' => new ItemId( 'Q116' ),
-				'entityType' => 'item',
 				'termType' => 'label',
 				'termLanguage' => 'en',
 				'termText' => 'New York City'
-			) ),
-			new TermIndexEntry( array(
+			] ),
+			new TermIndexEntry( [
 				'entityId' => new ItemId( 'Q116' ),
-				'entityType' => 'item',
 				'termType' => 'label',
 				'termLanguage' => 'es',
 				'termText' => 'Nueva York'
-			) ),
-			new TermIndexEntry( array(
+			] ),
+			new TermIndexEntry( [
 				'entityId' => new ItemId( 'Q116' ),
-				'entityType' => 'item',
 				'termType' => 'description',
 				'termLanguage' => 'en',
 				'termText' => 'largest city in New York and the United States of America'
-			) ),
-			new TermIndexEntry( array(
+			] ),
+			new TermIndexEntry( [
 				'entityId' => new ItemId( 'Q116' ),
-				'entityType' => 'item',
 				'termType' => 'description',
 				'termLanguage' => 'de',
 				'termText' => 'Metropole an der Ostküste der Vereinigten Staaten'
-			) ),
-		);
+			] ),
+		];
 
 		return new MockTermIndex( $terms );
 	}

@@ -6,6 +6,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Store\TermIndexMask;
 use Wikibase\TermIndex;
 use Wikibase\TermIndexEntry;
 
@@ -73,145 +74,145 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 	public function provideGetMatchingTerms() {
 		list( $item0, $item1, $item2 ) = $this->getTestItems();
 
-		return array(
-			'cross-language match' => array(
-				array( // $entities
+		return [
+			'cross-language match' => [
+				[ // $entities
 					$item0, $item1
-				),
-				array( // $queryTerms
-					new TermIndexEntry( array(
+				],
+				[ // $masks
+					new TermIndexMask( [
 						'termText' => 'mittens', // should match
-					) ),
-					new TermIndexEntry( array(
+					] ),
+					new TermIndexMask( [
 						'termText' => 'Kittens', // case doesn't match
-					) ),
-					new TermIndexEntry( array(
+					] ),
+					new TermIndexMask( [
 						'termText' => 'Mitt', // prefix isn't sufficient
-					) ),
-					new TermIndexEntry( array(
+					] ),
+					new TermIndexMask( [
 						'termLanguage' => 'en', // language mismatch
 						'termText' => 'Mittens',
-					) ),
-					new TermIndexEntry( array(
+					] ),
+					new TermIndexMask( [
 						'termType' => 'alias', // type mismatch
 						'termText' => 'Mittens',
-					) ),
-				),
+					] ),
+				],
 				null, // $termTypes
 				null, // $entityTypes
-				array(), // $options
-				array( // $expectedTermKeys
+				[], // $options
+				[ // $expectedTermKeys
 					'Q11/label.nl:mittens',
-				)
-			),
-			'case insensitive prefix' => array(
-				array( // $entities
+				]
+			],
+			'case insensitive prefix' => [
+				[ // $entities
 					$item0, $item1
-				),
-				array( // $queryTerms
-					new TermIndexEntry( array(
+				],
+				[ // $masks
+					new TermIndexMask( [
 						'termLanguage' => 'de', // language mismatch
 						'termText' => 'kitt',
-					) ),
-					new TermIndexEntry( array(
+					] ),
+					new TermIndexMask( [
 						'termText' => 'mitt', // prefix should match regardless of case
-					) ),
-				),
+					] ),
+				],
 				null, // $termTypes
 				null, // $entityTypes
-				array( // $options
+				[ // $options
 					'caseSensitive' => false,
 					'prefixSearch' => true,
-				),
-				array( // $expectedTermKeys
+				],
+				[ // $expectedTermKeys
 					'Q11/label.nl:mittens',
 					'Q11/label.de:Mittens',
-				)
-			),
-			'restrict by term type' => array(
-				array( // $entities
+				]
+			],
+			'restrict by term type' => [
+				[ // $entities
 					$item0, $item1
-				),
-				array( // $queryTerms
-					new TermIndexEntry( array(
+				],
+				[ // $masks
+					new TermIndexMask( [
 						'termText' => 'mittens',
-					) ),
-				),
+					] ),
+				],
 				TermIndexEntry::TYPE_ALIAS, // $termTypes
 				null, // $entityTypes
-				array(), // $options
-				array(), // $expectedTermKeys
-			),
-			'allow multiple term type' => array(
-				array( // $entities
+				[], // $options
+				[], // $expectedTermKeys
+			],
+			'allow multiple term type' => [
+				[ // $entities
 					$item0, $item1
-				),
-				array( // $queryTerms
-					new TermIndexEntry( array(
+				],
+				[ // $masks
+					new TermIndexMask( [
 						'termText' => 'mittens',
-					) ),
-				),
-				array( TermIndexEntry::TYPE_ALIAS, TermIndexEntry::TYPE_LABEL ), // $termTypes
+					] ),
+				],
+				[ TermIndexEntry::TYPE_ALIAS, TermIndexEntry::TYPE_LABEL ], // $termTypes
 				null, // $entityTypes
-				array(), // $options
-				array( // $expectedTermKeys
+				[], // $options
+				[ // $expectedTermKeys
 					'Q11/label.nl:mittens',
-				)
-			),
-			'restrict by entity type' => array(
-				array( // $entities
+				]
+			],
+			'restrict by entity type' => [
+				[ // $entities
 					$item0, $item1
-				),
-				array( // $queryTerms
-					new TermIndexEntry( array(
+				],
+				[ // $masks
+					new TermIndexMask( [
 						'termText' => 'mittens',
-					) ),
-				),
+					] ),
+				],
 				null, // $termTypes
 				Property::ENTITY_TYPE, // $entityTypes
-				array(), // $options
-				array(), // $expectedTermKeys
-			),
-			'allow multiple entity type' => array(
-				array( // $entities
+				[], // $options
+				[], // $expectedTermKeys
+			],
+			'allow multiple entity type' => [
+				[ // $entities
 					$item0, $item1
-				),
-				array( // $queryTerms
-					new TermIndexEntry( array(
+				],
+				[ // $masks
+					new TermIndexMask( [
 						'termText' => 'mittens',
-					) ),
-				),
+					] ),
+				],
 				null, // $termTypes
-				array( Property::ENTITY_TYPE, Item::ENTITY_TYPE ), // $entityTypes
-				array(), // $options
-				array( // $expectedTermKeys
+				[ Property::ENTITY_TYPE, Item::ENTITY_TYPE ], // $entityTypes
+				[], // $options
+				[ // $expectedTermKeys
 					'Q11/label.nl:mittens',
-				)
-			),
-			'orderByWeight, prefixSearch and caseSensitive options' => array(
-				array( // $entities
+				]
+			],
+			'orderByWeight, prefixSearch and caseSensitive options' => [
+				[ // $entities
 					$item0, $item1, $item2
-				),
-				array( // $queryTerms
-					new TermIndexEntry( array(
+				],
+				[ // $masks
+					new TermIndexMask( [
 						'termText' => 'KiTTeNS',
-					) ),
-				),
+					] ),
+				],
 				null, // $termTypes
 				null, // $entityTypes
-				array(
+				[
 					'orderByWeight' => true,
 					'prefixSearch' => true,
 					'caseSensitive' => false,
-				), // $options
-				array( // $expectedTermKeys
+				], // $options
+				[ // $expectedTermKeys
 					'Q11/label.fr:kittens love mittens',
 					'Q22/label.en:KITTENS should have mittens',
 					'Q22/label.sv:kittens should have mittens',
 					'Q10/label.en:kittens',
-				)
-			),
-		);
+				]
+			],
+		];
 	}
 
 	/**
@@ -219,7 +220,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 	 */
 	public function testGetMatchingTerms(
 		array $entities,
-		array $queryTerms,
+		array $masks,
 		$termTypes,
 		$entityTypes,
 		array $options,
@@ -231,7 +232,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 			$lookup->saveTermsOfEntity( $entitiy );
 		}
 
-		$actual = $lookup->getMatchingTerms( $queryTerms, $termTypes, $entityTypes, $options );
+		$actual = $lookup->getMatchingTerms( $masks, $termTypes, $entityTypes, $options );
 
 		$this->assertInternalType( 'array', $actual );
 
@@ -251,70 +252,70 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 	public function provideGetTopMatchingTerms() {
 		list( $item0, $item1, $item2 ) = $this->getTestItems();
 
-		return array(
-			'EXACT MATCH not prefix, case sensitive' => array(
-				array( // $entities
+		return [
+			'EXACT MATCH not prefix, case sensitive' => [
+				[ // $entities
 					$item0, $item1, $item2
-				),
-				array( // $queryTerms
-					new TermIndexEntry( array(
+				],
+				[ // $masks
+					new TermIndexMask( [
 						'termText' => 'Mittens',
-					) ),
-				),
+					] ),
+				],
 				null, // $termTypes
 				null, // $entityTypes
-				array(
+				[ // $options
 					'prefixSearch' => false,
 					'caseSensitive' => true,
-				), // $options
-				array( // $expectedTermKeys
+				],
+				[ // $expectedTermKeys
 					'Q11/label.de:Mittens',
-				),
-			),
-			'prefixSearch and not caseSensitive' => array(
-				array( // $entities
+				],
+			],
+			'prefixSearch and not caseSensitive' => [
+				[ // $entities
 					$item0, $item1, $item2
-				),
-				array( // $queryTerms
-					new TermIndexEntry( array(
+				],
+				[ // $masks
+					new TermIndexMask( [
 						'termText' => 'KiTTeNS',
-					) ),
-				),
+					] ),
+				],
 				null, // $termTypes
 				null, // $entityTypes
-				array(
+				[ // $options
 					'prefixSearch' => true,
 					'caseSensitive' => false,
-				), // $options
-				array( // $expectedTermKeys
+				],
+				[ // $expectedTermKeys
 					'Q11/label.fr:kittens love mittens',
 					'Q22/label.en:KITTENS should have mittens',
 					// If not asking for top terms the below would normally also be expected
 					//'Q22/label.sv:kittens should have mittens',
 					'Q10/label.en:kittens',
-				),
-			),
-			'prefixSearch and not caseSensitive LIMIT 1' => array(
-				array( // $entities
+				],
+			],
+			'prefixSearch and not caseSensitive LIMIT 1' => [
+				[ // $entities
 					$item0, $item1, $item2
-				),
-				array( // $queryTerms
-					new TermIndexEntry( array(
+				],
+				[ // $masks
+					new TermIndexMask( [
 						'termText' => 'KiTTeNS',
-					) ),
-				),
+					] ),
+				],
 				null, // $termTypes
 				null, // $entityTypes
-				array(
+				[ // $options
 					'prefixSearch' => true,
 					'caseSensitive' => false,
 					'LIMIT' => 1,
-				), // $options
-				array( // $expectedTermKeys
+				],
+				[ // $expectedTermKeys
 					'Q11/label.fr:kittens love mittens',
-				),
-			),
-		);
+				],
+			],
+		];
 	}
 
 	/**
@@ -322,7 +323,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 	 */
 	public function testGetTopMatchingTerms(
 		array $entities,
-		array $queryTerms,
+		array $masks,
 		$termTypes,
 		$entityTypes,
 		array $options,
@@ -334,7 +335,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 			$lookup->saveTermsOfEntity( $entitiy );
 		}
 
-		$actual = $lookup->getTopMatchingTerms( $queryTerms, $termTypes, $entityTypes, $options );
+		$actual = $lookup->getTopMatchingTerms( $masks, $termTypes, $entityTypes, $options );
 
 		$this->assertInternalType( 'array', $actual );
 
@@ -352,7 +353,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$item->setLabel( 'de', 'def' );
 		$item->setLabel( 'nl', 'ghi' );
 		$item->setDescription( 'en', 'testDeleteTermsForEntity' );
-		$item->setAliases( 'fr', array( 'o', '_', 'O' ) );
+		$item->setAliases( 'fr', [ 'o', '_', 'O' ] );
 
 		$lookup->saveTermsOfEntity( $item );
 
@@ -362,8 +363,8 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 
 		$this->assertNotTermExists( $lookup, 'testDeleteTermsForEntity' );
 
-		$abc = new TermIndexEntry( array( 'termType' => TermIndexEntry::TYPE_LABEL, 'termText' => 'abc' ) );
-		$matchedTerms = $lookup->getMatchingTerms( array( $abc ), array( TermIndexEntry::TYPE_LABEL ), Item::ENTITY_TYPE );
+		$abc = new TermIndexMask( [ 'termType' => TermIndexEntry::TYPE_LABEL, 'termText' => 'abc' ] );
+		$matchedTerms = $lookup->getMatchingTerms( [ $abc ], [ TermIndexEntry::TYPE_LABEL ], Item::ENTITY_TYPE );
 		foreach ( $matchedTerms as $matchedTerm ) {
 			if ( $matchedTerm->getEntityId() === $id ) {
 				$this->fail( 'Failed to delete term or entity: ' . $id->getSerialization() );
@@ -852,15 +853,15 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$language = null,
 		$entityType = null
 	) {
-		$termFields = array();
-		$termFields['termText'] = $text;
+		$maskFields = [];
+		$maskFields['termText'] = $text;
 
 		if ( $language !== null ) {
-			$termFields['termLanguage'] = $language;
+			$maskFields['termLanguage'] = $language;
 		}
 
 		$matches = $termIndex->getMatchingTerms(
-			array( new TermIndexEntry( $termFields ) ),
+			[ new TermIndexMask( $maskFields ) ],
 			$termType,
 			$entityType
 		);

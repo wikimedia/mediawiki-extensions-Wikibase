@@ -129,50 +129,44 @@ class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiTestCase {
 	}
 
 	private function getTermIndex() {
-		$terms = array(
-			new TermIndexEntry( array(
+		$terms = [
+			new TermIndexEntry( [
 				'entityId' => new ItemId( 'Q116' ),
-				'entityType' => 'item',
 				'termType' => 'label',
 				'termLanguage' => 'en',
 				'termText' => 'New York City'
-			) ),
-			new TermIndexEntry( array(
+			] ),
+			new TermIndexEntry( [
 				'entityId' => new ItemId( 'Q116' ),
-				'entityType' => 'item',
 				'termType' => 'label',
 				'termLanguage' => 'es',
 				'termText' => 'New York City'
-			) ),
-			new TermIndexEntry( array(
+			] ),
+			new TermIndexEntry( [
 				'entityId' => new ItemId( 'Q116' ),
-				'entityType' => 'item',
 				'termType' => 'description',
 				'termLanguage' => 'en',
 				'termText' => 'Big Apple'
-			) ),
-			new TermIndexEntry( array(
+			] ),
+			new TermIndexEntry( [
 				'entityId' => new ItemId( 'Q117' ),
-				'entityType' => 'item',
 				'termType' => 'label',
 				'termLanguage' => 'en',
 				'termText' => 'Berlin'
-			) ),
-			new TermIndexEntry( array(
+			] ),
+			new TermIndexEntry( [
 				'entityId' => new ItemId( 'Q118' ),
-				'entityType' => 'item',
 				'termType' => 'label',
 				'termLanguage' => 'zh-cn',
 				'termText' => '测试'
-			) ),
-			new TermIndexEntry( array(
+			] ),
+			new TermIndexEntry( [
 				'entityId' => new ItemId( 'Q118' ),
-				'entityType' => 'item',
 				'termType' => 'description',
 				'termLanguage' => 'zh-cn',
 				'termText' => 'zh-cn description'
-			) ),
-		);
+			] ),
+		];
 
 		return new MockTermIndex( $terms );
 	}
