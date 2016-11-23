@@ -1,13 +1,15 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Lib\Tests\Store\Sql;
 
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
+use Wikibase\Lib\Tests\Store\EntityInfoBuilderTest;
 
 /**
  * @covers Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder
@@ -140,7 +142,14 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 	protected function newEntityInfoBuilder( array $ids ) {
 		return new SqlEntityInfoBuilder(
 			new BasicEntityIdParser(),
-			new EntityIdComposer( [] ),
+			new EntityIdComposer( [
+				'item' => function( $repositoryName, $uniquePart ) {
+					return new ItemId( 'Q' . $uniquePart );
+				},
+				'property' => function( $repositoryName, $uniquePart ) {
+					return new PropertyId( 'P' . $uniquePart );
+				},
+			] ),
 			$ids
 		);
 	}

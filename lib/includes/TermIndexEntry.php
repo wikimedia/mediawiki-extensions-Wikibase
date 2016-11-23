@@ -205,7 +205,7 @@ class TermIndexEntry {
 			}
 
 			try {
-				return $entityIdComposer->composeEntityId( $entityType, $numericId );
+				return $entityIdComposer->composeEntityId( '', $entityType, $numericId );
 			} catch ( InvalidArgumentException $ex ) {
 				wfLogWarning( 'Unsupported entity type "' . $entityType . '"' );
 			}
