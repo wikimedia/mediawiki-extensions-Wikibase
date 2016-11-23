@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Tests\Store;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
@@ -44,7 +45,14 @@ class TermSqlIndexTest extends TermIndexTest {
 	 * @return TermSqlIndex
 	 */
 	public function getTermIndex() {
-		return new TermSqlIndex( new StringNormalizer(), new EntityIdComposer( [] ) );
+		return new TermSqlIndex( new StringNormalizer(), new EntityIdComposer( [
+			'item' => function( $repositoryName, $uniquePart ) {
+				return new ItemId( 'Q' . $uniquePart );
+			},
+			'property' => function( $repositoryName, $uniquePart ) {
+				return new PropertyId( 'P' . $uniquePart );
+			},
+		] ) );
 	}
 
 	public function termProvider() {

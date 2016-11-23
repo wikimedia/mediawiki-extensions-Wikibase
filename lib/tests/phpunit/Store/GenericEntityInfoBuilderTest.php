@@ -1,11 +1,10 @@
 <?php
 
-namespace Wikibase\Lib\Test;
+namespace Wikibase\Lib\Tests\Store;
 
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\Store\GenericEntityInfoBuilder;
-use Wikibase\Test\EntityInfoBuilderTest;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
