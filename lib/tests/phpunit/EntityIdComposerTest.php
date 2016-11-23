@@ -59,7 +59,7 @@ class EntityIdComposerTest extends PHPUnit_Framework_TestCase {
 			},
 		] );
 		$this->setExpectedException( UnexpectedValueException::class );
-		$composer->composeEntityId( 'item', 1 );
+		$composer->composeEntityId( '', 'item', 1 );
 	}
 
 	public function validUniquePartProvider() {
@@ -79,7 +79,7 @@ class EntityIdComposerTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider validUniquePartProvider
 	 */
 	public function testGivenValidFragment_buildSucceeds( $entityType, $uniquePart, EntityId $expected ) {
-		$id = $this->getComposer()->composeEntityId( $entityType, $uniquePart );
+		$id = $this->getComposer()->composeEntityId( '', $entityType, $uniquePart );
 		$this->assertEquals( $expected, $id );
 	}
 
@@ -98,7 +98,7 @@ class EntityIdComposerTest extends PHPUnit_Framework_TestCase {
 	public function testGivenInvalidFragment_buildFails( $entityType, $uniquePart ) {
 		$composer = $this->getComposer();
 		$this->setExpectedException( InvalidArgumentException::class );
-		$composer->composeEntityId( $entityType, $uniquePart );
+		$composer->composeEntityId( '', $entityType, $uniquePart );
 	}
 
 }
