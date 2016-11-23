@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ceb9bbfa_fd3abfbf",
+        "filename": "client/tests/phpunit/includes/Api/PageTermsTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-11-23T17:18:10Z",
+      "side": 1,
+      "message": "We don\u0027t need the type any more when the \"entityId\" field is an actual EntityId object now. Do you plan to drop this field later?",
+      "revId": "14de5f2206fea679b327b91baa7202353106a595",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb9bbfa_7df22f05",
+        "filename": "lib/includes/TermIndexEntry.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-11-23T17:18:10Z",
+      "side": 1,
+      "message": "This method misses a check similar to the sanity check above. If the \u0027entityType\u0027 field is already set, it should not be possible to set an \u0027entityId\u0027 with an other type. Even if the TermIndexEntry object is sane after doing this, such a change is almost certainly a bug (possibly inconsistent data, e.g. a database row that contains \"Q1\" but \"property\"). This should be made visible with a proper exception.",
+      "range": {
+        "startLine": 176,
+        "startChar": 18,
+        "endLine": 176,
+        "endChar": 29
+      },
+      "revId": "14de5f2206fea679b327b91baa7202353106a595",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
