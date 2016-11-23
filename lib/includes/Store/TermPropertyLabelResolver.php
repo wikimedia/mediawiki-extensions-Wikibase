@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
+use Wikibase\Lib\Store\TermIndexSearchCriteria;
 
 /**
  * Resolves property labels (which are unique per language) into entity IDs
@@ -121,10 +122,9 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 	}
 
 	protected function loadProperties() {
-		$termTemplate = new TermIndexEntry( array(
+		$termTemplate = new TermIndexSearchCriteria( array(
 			'termType' => 'label',
 			'termLanguage' => $this->languageCode,
-			'entityType' => Property::ENTITY_TYPE
 		) );
 
 		$terms = $this->termIndex->getMatchingTerms(

@@ -5,6 +5,7 @@ namespace Wikibase;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\Store\TermIndexSearchCriteria;
 
 /**
  * Interface to a cache for terms with both write and lookup methods.
@@ -91,7 +92,7 @@ interface TermIndex {
 	 *
 	 * @since 0.2
 	 *
-	 * @param TermIndexEntry[] $terms
+	 * @param TermIndexSearchCriteria[] $criteria
 	 * @param string|string[]|null $termType
 	 * @param string|string[]|null $entityType
 	 * @param array $options
@@ -104,7 +105,7 @@ interface TermIndex {
 	 * @return TermIndexEntry[]
 	 */
 	public function getMatchingTerms(
-		array $terms,
+		array $criteria,
 		$termType = null,
 		$entityType = null,
 		array $options = array()
@@ -125,7 +126,7 @@ interface TermIndex {
 	 *
 	 * @since 0.5
 	 *
-	 * @param TermIndexEntry[] $terms
+	 * @param TermIndexSearchCriteria[] $criteria
 	 * @param string|string[]|null $termType
 	 * @param string|string[]|null $entityType
 	 * @param array $options
@@ -137,7 +138,7 @@ interface TermIndex {
 	 * @return TermIndexEntry[]
 	 */
 	public function getTopMatchingTerms(
-		array $terms,
+		array $criteria,
 		$termType = null,
 		$entityType = null,
 		array $options = array()
