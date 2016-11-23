@@ -16,6 +16,24 @@
       "revId": "1983dfb59f7c37889cc1464e4f38d900a58c34b4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb9bbfa_373e1627",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-11-23T12:38:33Z",
+      "side": 1,
+      "message": "No, see the first line in linkNormalizedValue.",
+      "parentUuid": "ceb9bbfa_27cdcf34",
+      "revId": "1983dfb59f7c37889cc1464e4f38d900a58c34b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
