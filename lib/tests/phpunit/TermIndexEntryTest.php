@@ -2,13 +2,13 @@
 
 namespace Wikibase\Lib\Tests;
 
-use MWException;
 use PHPUnit_Framework_TestCase;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\LegacyIdInterpreter;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\TermIndexEntry;
+use Wikimedia\Assert\ParameterAssertionException;
 
 /**
  * @covers Wikibase\TermIndexEntry
@@ -22,12 +22,36 @@ use Wikibase\TermIndexEntry;
  */
 class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 
-	public function provideConstructor() {
+	public function testConstructor() {
+		$term = new TermIndexEntry( [
+			'entityId' => new ItemId( 'Q23' ),
+			'termType' => TermIndexEntry::TYPE_LABEL,
+			'termLanguage' => 'en',
+			'termText' => 'foo',
+		] );
+
+		$this->assertEquals( new ItemId( 'Q23' ), $term->getEntityId() );
+		$this->assertEquals( Item::ENTITY_TYPE, $term->getEntityType() );
+		$this->assertEquals( TermIndexEntry::TYPE_LABEL, $term->getTermType() );
+		$this->assertEquals( 'en', $term->getLanguage() );
+		$this->assertEquals( 'foo', $term->getText() );
+	}
+
+	public function testGivenInvalidField_constructorThrowsException() {
+		$this->setExpectedException( ParameterAssertionException::class );
+		new TermIndexEntry( [
+			'entityId' => new ItemId( 'Q23' ),
+			'termType' => TermIndexEntry::TYPE_LABEL,
+			'termLanguage' => 'en',
+			'termText' => 'foo',
+			'fooField' => 'bar',
+		] );
+	}
+
+	public function provideIncompleteFields() {
 		return [
 			[
 				[
-					'entityType' => 'item',
-					'entityId' => new ItemId( 'Q23' ),
 					'termType' => TermIndexEntry::TYPE_LABEL,
 					'termLanguage' => 'en',
 					'termText' => 'foo',
@@ -35,45 +59,61 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 			],
 			[
 				[
+					'entityId' => new ItemId( 'Q23' ),
 					'termType' => TermIndexEntry::TYPE_LABEL,
-					'termLanguage' => 'en',
-					'termText' => 'foo',
 				]
 			],
 			[
 				[
-					'entityType' => 'item',
 					'entityId' => new ItemId( 'Q23' ),
 				]
+			],
+			[
+				[]
 			],
 		];
 	}
 
 	/**
-	 * @dataProvider provideConstructor
+	 * @dataProvider provideIncompleteFields
 	 */
-	public function testConstructor( $fields ) {
-		$term = new TermIndexEntry( $fields );
-
-		$this->assertEquals( isset( $fields['entityType'] ) ? $fields['entityType'] : null, $term->getEntityType() );
-		$this->assertEquals( isset( $fields['entityId'] ) ? $fields['entityId'] : null, $term->getEntityId() );
-		$this->assertEquals( isset( $fields['termType'] ) ? $fields['termType'] : null, $term->getType() );
-		$this->assertEquals( isset( $fields['termLanguage'] ) ? $fields['termLanguage'] : null, $term->getLanguage() );
-		$this->assertEquals( isset( $fields['termText'] ) ? $fields['termText'] : null, $term->getText() );
+	public function testGivenIncompleteFields_constructorThrowsException( $fields ) {
+		$this->setExpectedException( ParameterAssertionException::class );
+		new TermIndexEntry( $fields );
 	}
 
-	public function testGivenInvalidField_constructorThrowsException() {
-		$this->setExpectedException( MWException::class );
-		new TermIndexEntry( [ 'fooField' => 'bar' ] );
+	public function provideInvalidValues() {
+		$goodFields = [
+			'entityId' => new ItemId( 'Q23' ),
+			'termType' => TermIndexEntry::TYPE_LABEL,
+			'termLanguage' => 'en',
+			'termText' => 'foo',
+		];
+
+		return [
+			'non-string term type' => [ array_merge( $goodFields, [ 'termType' => 100 ] ) ],
+			'invalid term type' => [ array_merge( $goodFields, [ 'termType' => 'foo' ] ) ],
+			'non-string term language' => [ array_merge( $goodFields, [ 'termLanguage' => 100 ] ) ],
+			'non-string term text' => [ array_merge( $goodFields, [ 'termText' => 100 ] ) ],
+			'non-EntityId as entity id' => [ array_merge( $goodFields, [ 'entityId' => 'foo' ] ) ],
+		];
 	}
 
-	public function testGivenEntityTypeMismatch_constructorThrowsException() {
-		$this->setExpectedException( MWException::class );
-		new TermIndexEntry( [ 'entityId' => new ItemId( 'Q222' ), 'entityType' => 'property' ] );
+	/**
+	 * @dataProvider provideInvalidValues
+	 */
+	public function testGivenInvalidValues_constructorThrowsException( $fields ) {
+		$this->setExpectedException( ParameterAssertionException::class );
+		new TermIndexEntry( $fields );
 	}
 
 	public function testClone() {
-		$term = new TermIndexEntry( [ 'termText' => 'Foo' ] );
+		$term = new TermIndexEntry( [
+			'entityId' => new ItemId( 'Q23' ),
+			'termType' => TermIndexEntry::TYPE_LABEL,
+			'termLanguage' => 'en',
+			'termText' => 'foo',
+		] );
 
 		$clone = clone $term;
 		$this->assertEquals( $term, $clone, 'clone must be equal to original' );
@@ -86,7 +126,6 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 	 */
 	private function newInstance( array $extraFields = [] ) {
 		return new TermIndexEntry( $extraFields + [
-				'entityType' => 'item',
 				'entityId' => new ItemId( 'Q23' ),
 				'termType' => TermIndexEntry::TYPE_LABEL,
 				'termLanguage' => 'en',
@@ -98,10 +137,10 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 		$term = $this->newInstance();
 
 		return [
-			'empty' => [
-				new TermIndexEntry(),
-				new TermIndexEntry(),
-				true
+			'the same object' => [
+				$term,
+				$term,
+				true,
 			],
 			'clone' => [
 				$term,
@@ -115,7 +154,7 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 			],
 			'other entity id' => [
 				$term,
-				$this->newInstance( [ 'entityType' => 'property', 'entityId' => new PropertyId( 'P11' ) ] ),
+				$this->newInstance( [ 'entityId' => new PropertyId( 'P11' ) ] ),
 				false
 			],
 			'other language' => [
@@ -151,31 +190,12 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetTerm() {
 		$termIndexEntry = new TermIndexEntry( [
+			'entityId' => new ItemId( 'Q23' ),
+			'termType' => TermIndexEntry::TYPE_LABEL,
 			'termLanguage' => 'en',
 			'termText' => 'foo',
 		] );
-		$expectedTerm = new Term( 'en', 'foo' );
-		$this->assertEquals( $expectedTerm, $termIndexEntry->getTerm() );
-	}
-
-	public function provideTermIndexEntryData() {
-		return [
-			[
-				[ 'termText' => 'foo' ]
-			],
-			[
-				[ 'termLanguage' => 'en' ]
-			],
-		];
-	}
-
-	/**
-	 * @dataProvider provideTermIndexEntryData
-	 */
-	public function testGetTerm_throwsException( $termIndexEntryData ) {
-		$termIndexEntry = new TermIndexEntry( $termIndexEntryData );
-		$this->setExpectedException( MWException::class, 'Can not construct Term from partial TermIndexEntry' );
-		$termIndexEntry->getTerm();
+		$this->assertEquals( new Term( 'en', 'foo' ), $termIndexEntry->getTerm() );
 	}
 
 }
