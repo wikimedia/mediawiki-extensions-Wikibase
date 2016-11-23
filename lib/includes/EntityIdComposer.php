@@ -5,8 +5,6 @@ namespace Wikibase\Lib;
 use InvalidArgumentException;
 use UnexpectedValueException;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * Constructs EntityId objects from entity type identifiers and unique parts of entity ID
@@ -49,6 +47,7 @@ class EntityIdComposer {
 	}
 
 	/**
+	 * @param string $repositoryName
 	 * @param string $entityType
 	 * @param mixed $uniquePart
 	 *
@@ -58,16 +57,12 @@ class EntityIdComposer {
 	 *  object.
 	 * @return EntityId
 	 */
-	public function composeEntityId( $entityType, $uniquePart ) {
-		if ( isset( $this->composers[$entityType] ) ) {
-			$id = $this->composers[$entityType]( $uniquePart );
-		} elseif ( $entityType === 'item' ) {
-			return ItemId::newFromNumber( $uniquePart );
-		} elseif ( $entityType === 'property' ) {
-			return PropertyId::newFromNumber( $uniquePart );
-		} else {
+	public function composeEntityId( $repositoryName, $entityType, $uniquePart ) {
+		if ( !isset( $this->composers[$entityType] ) ) {
 			throw new InvalidArgumentException( 'Unknown entity type ' . $entityType );
 		}
+
+		$id = $this->composers[$entityType]( $repositoryName, $uniquePart );
 
 		if ( !( $id instanceof EntityId ) ) {
 			throw new UnexpectedValueException( 'Composer for ' . $entityType . ' is invalid' );
