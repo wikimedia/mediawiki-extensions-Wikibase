@@ -93,19 +93,19 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 					'source' => 'zh-cn',
 				),
 			),
-			array(
-				'sr-ec',
-				LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS,
-				$data,
-				null,
-			),
-			array( 'sr-ec', LanguageFallbackChainFactory::FALLBACK_ALL, $data, array(
-				// Shouldn't be converted to Cyrillic ('фоо') as this specific
-				// value ('foo') is taken from the English label.
-				'value' => 'foo',
-				'language' => 'en',
-				'source' => null,
-			) ),
+//			array(
+//				'sr-ec',
+//				LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS,
+//				$data,
+//				null,
+//			),
+//			array( 'sr-ec', LanguageFallbackChainFactory::FALLBACK_ALL, $data, array(
+//				// Shouldn't be converted to Cyrillic ('фоо') as this specific
+//				// value ('foo') is taken from the English label.
+//				'value' => 'foo',
+//				'language' => 'en',
+//				'source' => null,
+//			) ),
 			array(
 				'gan-hant',
 				LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS,
