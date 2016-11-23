@@ -233,10 +233,10 @@ class LanguageFallbackChainFactoryTest extends MediaWikiTestCase {
 			) ),
 			array( 'ii', LanguageFallbackChainFactory::FALLBACK_OTHERS, array( 'zh-cn', 'zh-hans', 'en' ) ),
 
-			array( 'sr', LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS, array(
-				'sr',
-				array( 'sr', 'sr-ec' ),
-				array( 'sr', 'sr-el' ),
+			array( 'crh', LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS, array(
+				'crh',
+				array( 'crh', 'crh-cyrl' ),
+				array( 'crh', 'crh-latn' ),
 			) ),
 		);
 	}
