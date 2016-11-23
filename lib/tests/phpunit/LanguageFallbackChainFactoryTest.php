@@ -359,6 +359,15 @@ class LanguageFallbackChainFactoryTest extends MediaWikiTestCase {
 					[ 'kk', 'kk-cn' ],
 				]
 			],
+			[
+				'languageCode' => 'sr',
+				'mode' => LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS,
+				'expected' => [
+					'sr',
+					[ 'sr', 'sr-cyrl' ],
+					[ 'sr', 'sr-latn' ],
+				]
+			],
 		];
 	}
 
