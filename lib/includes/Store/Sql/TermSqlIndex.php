@@ -788,13 +788,19 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 	/**
 	 * @param object $termRow
+	 *
 	 * @return EntityId|null
 	 */
 	private function getEntityId( $termRow ) {
-		if ( !isset( $termRow->term_entity_type ) || !isset( $termRow->term_entity_id ) ) {
-			return null;
+		if ( isset( $termRow->term_entity_type ) && isset( $termRow->term_entity_id ) ) {
+			return $this->entityIdComposer->composeEntityId(
+				'',
+				$termRow->term_entity_type,
+				$termRow->term_entity_id
+			);
 		}
-		return $this->entityIdComposer->composeEntityId( $termRow->term_entity_type, $termRow->term_entity_id );
+
+		return null;
 	}
 
 	/**
