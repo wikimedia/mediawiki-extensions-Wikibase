@@ -30,10 +30,10 @@ class SnakFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function newInstance() {
 		$dataTypeLookup = new InMemoryDataTypeLookup();
-		$dataTypeFactory = new DataTypeFactory( array( 'string' => 'string' ) );
-		$dataValueFactory = new DataValueFactory( new DataValueDeserializer( array(
+		$dataTypeFactory = new DataTypeFactory( [ 'string' => 'string' ] );
+		$dataValueFactory = new DataValueFactory( new DataValueDeserializer( [
 			'string' => StringValue::class,
-		) ) );
+		] ) );
 
 		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'p1' ), 'string' );
 
@@ -56,56 +56,52 @@ class SnakFactoryTest extends PHPUnit_Framework_TestCase {
 		$expectedSnakClass,
 		$expectedException = null
 	) {
-		if ( is_int( $propertyId ) ) {
-			$propertyId = PropertyId::newFromNumber( $propertyId );
-		}
-
 		if ( $expectedException !== null ) {
 			$this->setExpectedException( $expectedException );
 		}
 
 		$service = $this->newInstance();
 
-		$snak = $service->newSnak( $propertyId, $snakType, $rawValue );
+		$snak = $service->newSnak( new PropertyId( $propertyId ), $snakType, $rawValue );
 
 		$this->assertInstanceOf( $expectedSnakClass, $snak );
 	}
 
 	public function newSnakProvider() {
-		return array(
-			'novalue' => array(
-				1, 'novalue', null,
+		return [
+			'novalue' => [
+				'P1', 'novalue', null,
 				PropertyNoValueSnak::class,
-			),
-			'somevalue' => array(
-				1, 'somevalue', null,
+			],
+			'somevalue' => [
+				'P1', 'somevalue', null,
 				PropertySomeValueSnak::class,
-			),
-			'value' => array(
-				1, 'value', '"hello"',
+			],
+			'value' => [
+				'P1', 'value', '"hello"',
 				PropertyValueSnak::class,
-			),
-			'novalue/badprop' => array(
-				66, 'novalue', null,
+			],
+			'novalue/badprop' => [
+				'P66', 'novalue', null,
 				PropertyNoValueSnak::class,
 				PropertyDataTypeLookupException::class
-			),
-			'somevalue/badprop' => array(
-				66, 'somevalue', null,
+			],
+			'somevalue/badprop' => [
+				'P66', 'somevalue', null,
 				PropertySomeValueSnak::class,
 				PropertyDataTypeLookupException::class
-			),
-			'value/badprop' => array(
-				66, 'value', '"hello"',
+			],
+			'value/badprop' => [
+				'P66', 'value', '"hello"',
 				PropertyValueSnak::class,
 				PropertyDataTypeLookupException::class
-			),
-			'value/badvalue' => array(
-				1, 'value', array( 'foo' ),
+			],
+			'value/badvalue' => [
+				'P1', 'value', [ 'foo' ],
 				PropertyValueSnak::class,
 				InvalidArgumentException::class
-			),
-		);
+			],
+		];
 	}
 
 }

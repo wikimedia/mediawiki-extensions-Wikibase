@@ -107,8 +107,8 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function getEntityTitleProvider() {
-		$itemId = ItemId::newFromNumber( 388 );
-		$propertyId = PropertyId::newFromNumber( 472 );
+		$itemId = new ItemId( 'Q388' );
+		$propertyId = new PropertyId( 'P472' );
 		$settings = $this->getRepoSettings();
 
 		return array(
