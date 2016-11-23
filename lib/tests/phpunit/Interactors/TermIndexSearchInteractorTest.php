@@ -67,7 +67,6 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 			'termLanguage' => $languageCode,
 			'termType' => $termType,
 			'entityId' => $entityId,
-			'entityType' => $entityId->getEntityType(),
 		) );
 	}
 

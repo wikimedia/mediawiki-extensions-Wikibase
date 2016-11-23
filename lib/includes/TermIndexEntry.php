@@ -2,15 +2,13 @@
 
 namespace Wikibase;
 
-use InvalidArgumentException;
-use MWException;
-use RuntimeException;
+use Wikimedia\Assert\Assert;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
+use Wikimedia\Assert\ParameterAssertionException;
 
 /**
  * Object representing a term index entry.
- * Term index entries can be incomplete.
  *
  * @since 0.2
  *
@@ -29,183 +27,110 @@ class TermIndexEntry {
 	const TYPE_ALIAS = 'alias';
 	const TYPE_DESCRIPTION = 'description';
 
-	private static $fieldNames = array(
-		'entityType',
+	private static $fieldNames = [
 		'entityId',
 		'termType',
 		'termLanguage',
 		'termText',
-	);
+	];
 
 	/**
-	 * @var string|null, one of self::TYPE_* constants
+	 * @var string, one of self::TYPE_* constants
 	 */
 	private $termType;
 
 	/**
-	 * @var string|null
+	 * @var string
 	 */
 	private $termLanguage;
 
 	/**
-	 * @var string|null
+	 * @var string
 	 */
 	private $termText;
 
 	/**
-	 * @var EntityId|null
+	 * @var EntityId
 	 */
 	private $entityId;
 
 	/**
-	 * @var string|null
-	 */
-	private $entityType;
-
-	/**
 	 * @since 0.2
 	 *
-	 * @param array $fields
+	 * @param array $fields, containing fields:
+	 *        'termType' => string, one of self::TYPE_* constants,
+	 *        'termLanguage' => string
+	 *        'termText' => string
+	 *        'entityId' => EntityId
 	 *
-	 * @throws MWException
+	 * @throws ParameterAssertionException
 	 */
-	public function __construct( array $fields = array() ) {
-		$unexpectedFields = array_diff_key( $fields, array_flip( self::$fieldNames ) );
-		if ( $unexpectedFields ) {
-			throw new MWException( 'Invalid term field provided' );
-		}
+	public function __construct( array $fields ) {
+		Assert::parameter(
+			count( $fields ) === count( self::$fieldNames ) &&
+				empty( array_diff( self::$fieldNames, array_keys( $fields ) ) ),
+			'$fields',
+			'must contain the following keys: termType, termLanguage, termText, entityId'
+		);
+		Assert::parameter(
+			is_string( $fields['termType'] ) &&
+				in_array( $fields['termType'], [ self::TYPE_ALIAS, self::TYPE_LABEL, self::TYPE_DESCRIPTION ] ),
+			'$fields["termType"]',
+			'must be self::TYPE_ALIAS, self::TYPE_LABEL, or self::TYPE_DESCRIPTION '
+		);
+		Assert::parameterType( 'string', $fields['termLanguage'], '$fields["termLanguage"]' );
+		Assert::parameterType( 'string', $fields['termText'], '$fields["termText"]' );
+		Assert::parameterType( EntityId::class, $fields['entityId'], '$fields["entityId"]' );
 
-		if ( array_key_exists( 'termType', $fields ) ) {
-			$this->setType( $fields['termType'] );
-		}
-		if ( array_key_exists( 'termLanguage', $fields ) ) {
-			$this->setLanguage( $fields['termLanguage'] );
-		}
-		if ( array_key_exists( 'entityId', $fields ) ) {
-			$this->setEntityId( $fields['entityId'] );
-		}
-		if ( array_key_exists( 'entityType', $fields ) ) {
-			$this->setEntityType( $fields['entityType'] );
-		}
-		if ( array_key_exists( 'termText', $fields ) ) {
-			$this->setText( $fields['termText'] );
-		}
-	}
-
-	/**
-	 * @param string $termType
-	 *
-	 * @throws MWException
-	 */
-	private function setType( $termType ) {
-		if ( !in_array( $termType, array( self::TYPE_ALIAS, self::TYPE_LABEL, self::TYPE_DESCRIPTION ), true ) ) {
-			throw new MWException( 'Invalid term type provided' );
-		}
-
-		$this->termType = $termType;
+		$this->termType = $fields['termType'];
+		$this->termLanguage = $fields['termLanguage'];
+		$this->termText = $fields['termText'];
+		$this->entityId = $fields['entityId'];
 	}
 
 	/**
 	 * @since 0.2
 	 *
-	 * @return string|null
+	 * @return string
 	 */
-	public function getType() {
+	public function getTermType() {
 		return $this->termType;
 	}
 
 	/**
-	 * @param string $languageCode
-	 *
-	 * @throws MWException
-	 */
-	private function setLanguage( $languageCode ) {
-		if ( !is_string( $languageCode ) ) {
-			throw new MWException( 'Language code can only be a string' );
-		}
-
-		$this->termLanguage = $languageCode;
-	}
-
-	/**
 	 * @since 0.2
 	 *
-	 * @return string|null
+	 * @return string
 	 */
 	public function getLanguage() {
 		return $this->termLanguage;
 	}
 
 	/**
-	 * @param string $text
-	 *
-	 * @throws MWException
-	 */
-	private function setText( $text ) {
-		if ( !is_string( $text ) ) {
-			throw new MWException( 'Term text code can only be a string' );
-		}
-
-		$this->termText = $text;
-	}
-
-	/**
 	 * @since 0.2
 	 *
-	 * @return string|null
+	 * @return string
 	 */
 	public function getText() {
 		return $this->termText;
 	}
 
 	/**
-	 * @param string $entityType
-	 *
-	 * @throws MWException
-	 */
-	private function setEntityType( $entityType ) {
-		if ( $this->entityId !== null ) {
-			if ( $this->entityId->getEntityType() !== $entityType ) {
-				throw new MWException(
-					'Cannot set entity type to "' . $entityType . '"" as it does not match the type of entity id: "' .
-					$this->entityId->getEntityType() . '"'
-				);
-			}
-			return;
-		}
-
-		if ( !is_string( $entityType ) ) {
-			throw new MWException( 'Entity type code can only be a string' );
-		}
-
-		$this->entityType = $entityType;
-	}
-
-	/**
 	 * @since 0.2
 	 *
-	 * @return string|null
-	 */
-	public function getEntityType() {
-		if ( $this->entityId !== null ) {
-			return $this->entityId->getEntityType();
-		}
-		return $this->entityType;
-	}
-
-	private function setEntityId( EntityId $id ) {
-		$this->entityId = $id;
-		$this->entityType = $id->getEntityType();
-	}
-
-	/**
-	 * @since 0.2
-	 *
-	 * @throws RuntimeException
-	 * @return EntityId|null
+	 * @return EntityId
 	 */
 	public function getEntityId() {
 		return $this->entityId;
+	}
+
+	/**
+	 * @since 0.2
+	 *
+	 * @return string
+	 */
+	public function getEntityType() {
+		return $this->entityId->getEntityType();
 	}
 
 	/**
@@ -222,16 +147,8 @@ class TermIndexEntry {
 		$bValues = self::getFieldValuesForCompare( $b );
 
 		foreach ( self::$fieldNames as $n ) {
-			$aDefined = $aValues[$n] !== null;
-			$bDefined = $bValues[$n] !== null;
-
-			if ( $aDefined !== $bDefined ) {
-				return $aDefined ? 1 : -1;
-			}
-			if ( $aDefined ) {
-				if ( $aValues[$n] !== $bValues[$n] ) {
-					return $aValues[$n] > $bValues[$n] ? 1 : -1;
-				}
+			if ( $aValues[$n] !== $bValues[$n] ) {
+				return $aValues[$n] > $bValues[$n] ? 1 : -1;
 			}
 		}
 
@@ -239,11 +156,9 @@ class TermIndexEntry {
 	}
 
 	private static function getFieldValuesForCompare( self $entry ) {
-		$entityId = $entry->getEntityId();
 		return [
-			'entityType' => $entry->getEntityType(),
-			'entityId' => $entityId !== null ? $entityId->getSerialization() : null,
-			'termType' => $entry->getType(),
+			'entityId' => $entry->getEntityId()->getSerialization(),
+			'termType' => $entry->getTermType(),
 			'termLanguage' => $entry->getLanguage(),
 			'termText' => $entry->getText(),
 		];
@@ -251,14 +166,9 @@ class TermIndexEntry {
 
 	/**
 	 * @return Term
-	 * @throws MWException
 	 */
 	public function getTerm() {
-		try {
-			return new Term( $this->getLanguage(), $this->getText() );
-		} catch ( InvalidArgumentException $e ) {
-			throw new MWException( 'Can not construct Term from partial TermIndexEntry' );
-		}
+		return new Term( $this->getLanguage(), $this->getText() );
 	}
 
 }

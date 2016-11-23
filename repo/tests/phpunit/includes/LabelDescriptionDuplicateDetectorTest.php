@@ -30,7 +30,6 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 			'termType' => TermIndexEntry::TYPE_LABEL,
 			'termLanguage' => 'en',
 			'entityId' => new ItemId( 'Q42' ),
-			'entityType' => Item::ENTITY_TYPE,
 			'termText' => 'item label',
 		) );
 
@@ -38,7 +37,6 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 			'termType' => TermIndexEntry::TYPE_DESCRIPTION,
 			'termLanguage' => 'en',
 			'entityId' => new ItemId( 'Q42' ),
-			'entityType' => Item::ENTITY_TYPE,
 			'termText' => 'item description',
 		) );
 
@@ -46,7 +44,6 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 			'termType' => TermIndexEntry::TYPE_ALIAS,
 			'termLanguage' => 'en',
 			'entityId' => new ItemId( 'Q42' ),
-			'entityType' => Item::ENTITY_TYPE,
 			'termText' => 'item alias',
 		) );
 
@@ -54,7 +51,6 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 			'termType' => TermIndexEntry::TYPE_LABEL,
 			'termLanguage' => 'en',
 			'entityId' => new PropertyId( 'P42' ),
-			'entityType' => Property::ENTITY_TYPE,
 			'termText' => 'property label',
 		) );
 
