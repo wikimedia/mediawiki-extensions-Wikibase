@@ -31,7 +31,10 @@
 	"wikibase-watchlist-show-changes-pref": "Erakutsi {{WBREPONAME}} guneko edizioak zure jarraipen-zerrendan",
 	"wikibase-unconnectedpages-submit": "Erakutsi oŕriak",
 	"wikibase-pageswithbadges-submit": "Erakutsi oŕriak",
+	"wikibase-entityusage-entity": "Entitatea:",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} elementu IDa",
 	"wikibase-pageinfo-entity-id-none": "Bat ere ez",
+	"wikibase-pageinfo-entity-usage-L": "Etiketa:$1",
+	"wikibase-pageinfo-entity-usage-T": "Titulua",
 	"wikibase-otherprojects": "Beste proiektuetan"
 }

@@ -88,7 +88,7 @@
 	"wikibase-snakview-snaktypeselector-value": "vrednost po meri",
 	"wikibase-snakformat-invalid-value": "Neveljavna vrednost.",
 	"wikibase-snakformat-propertynotfound": "Lastnosti ni mogoče najti.",
-	"wikibase-shortcopyrightwarning": "S klikom na gumb »$1« se strinjate s [[$2|pogoji uporabe]] in nepreklicno soglašate z objavo svojega prispevka pod licenco $3.",
+	"wikibase-shortcopyrightwarning": "S klikom na gumb »$1« se strinjaš s [[$2|pogoji uporabe]] in nepreklicno soglašaš z objavo svojega prispevka pod licenco $3.",
 	"wikibase-copyrighttooltip-acknowledge": "Te pogoje sprejmem za vsa prihodnja urejanja. Tega sporočila ne prikaži več.",
 	"wikibase-entityselector-more": "več",
 	"wikibase-anonymouseditwarning": "Opozorilo: niste prijavljeni.\nV povzetku urejanja tega predmeta bo shranjen vaš IP-naslov.",

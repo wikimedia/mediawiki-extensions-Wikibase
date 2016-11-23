@@ -6,7 +6,11 @@
 			"Sator"
 		]
 	},
-	"wikibase-error-save-generic": "Errore bat gertatu da gordetzean. Zure aldaketak ezingo dira osatu.",
+	"specialpages-group-wikibase": "Wikibase",
+	"wikibase-deletedentity-item": "Ezabatu elementua",
+	"wikibase-deletedentity-property": "Ezabatu propietatea",
+	"wikibase-deletedentity-query": "Ezabatu kontsulta",
+	"wikibase-error-save-generic": "Errore baten ondorioz ezin izan dira aldaketak gorde.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (transliteratuta)",
 	"wikibase-timedetails-timezone": "Ordu-eremua",
 	"wikibase-timedetails-calendar": "Egutegia",
@@ -15,5 +19,11 @@
 	"wikibase-sitelinks-wikipedia": "Wikipedia",
 	"wikibase-sitelinks-sitename-columnheading": "Hizkuntza",
 	"wikibase-tooltip-error-details": "Xehetasunak",
-	"wikibase-time-precision-Gannum": "$1 mila milioi urte K.o."
+	"datatypes-type-wikibase-item": "Elementua",
+	"datatypes-type-wikibase-property": "Propietatea",
+	"version-wikibase": "Wikibase",
+	"wikibase-time-precision-Gannum": "$1 mila milioi urte K.o.",
+	"wikibase-item-summary-wbcreate-new": "Elementu berria sortua",
+	"wikibase-item-summary-wbeditentity": "Elementu berria sortua",
+	"wikibase-item-summary-wbeditentity-create": "Elementu berria sortua"
 }
