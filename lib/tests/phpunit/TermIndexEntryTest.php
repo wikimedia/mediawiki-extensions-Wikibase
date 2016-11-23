@@ -70,12 +70,6 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 		$term = new TermIndexEntry( [ 'termText' => 'Foo' ] );
 
 		$clone = clone $term;
-		$clone->setText( 'Bar' );
-
-		$this->assertEquals( 'Bar', $clone->getText(), 'clone must change when modified' ); // sanity
-		$this->assertEquals( 'Foo', $term->getText(), 'original must stay the same when clone is modified' );
-
-		$clone = clone $term;
 		$this->assertEquals( $term, $clone, 'clone must be equal to original' );
 	}
 

@@ -76,13 +76,11 @@ class TermIndexEntry {
 	}
 
 	/**
-	 * @since 0.2
-	 *
 	 * @param string $termType
 	 *
 	 * @throws MWException
 	 */
-	public function setType( $termType ) {
+	private function setType( $termType ) {
 		if ( !in_array( $termType, array( self::TYPE_ALIAS, self::TYPE_LABEL, self::TYPE_DESCRIPTION ), true ) ) {
 			throw new MWException( 'Invalid term type provided' );
 		}
@@ -100,13 +98,11 @@ class TermIndexEntry {
 	}
 
 	/**
-	 * @since 0.2
-	 *
 	 * @param string $languageCode
 	 *
 	 * @throws MWException
 	 */
-	public function setLanguage( $languageCode ) {
+	private function setLanguage( $languageCode ) {
 		if ( !is_string( $languageCode ) ) {
 			throw new MWException( 'Language code can only be a string' );
 		}
@@ -124,13 +120,11 @@ class TermIndexEntry {
 	}
 
 	/**
-	 * @since 0.2
-	 *
 	 * @param string $text
 	 *
 	 * @throws MWException
 	 */
-	public function setText( $text ) {
+	private function setText( $text ) {
 		if ( !is_string( $text ) ) {
 			throw new MWException( 'Term text code can only be a string' );
 		}

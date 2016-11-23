@@ -61,9 +61,7 @@ class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 		$builder->rebuildSearchKey();
 
 		// remove search key
-		$term = new TermIndexEntry();
-		$term->setLanguage( $languageCode );
-		$term->setText( $searchText );
+		$term = new TermIndexEntry( [ 'termLanguage' => $languageCode, 'termText' => $searchText ] );
 
 		$options = array(
 			'caseSensitive' => false,
