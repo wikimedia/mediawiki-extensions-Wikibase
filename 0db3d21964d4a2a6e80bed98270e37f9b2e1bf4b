@@ -34,6 +34,24 @@
       "revId": "0db3d21964d4a2a6e80bed98270e37f9b2e1bf4b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb9bbfa_3db4b7e3",
+        "filename": "repo/tests/phpunit/includes/SnakFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-23T17:48:03Z",
+      "side": 1,
+      "message": "I also prefer to have strings here, it makes it easier to read the intent of the individual cases.",
+      "parentUuid": "ceb9bbfa_1772f210",
+      "revId": "0db3d21964d4a2a6e80bed98270e37f9b2e1bf4b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
