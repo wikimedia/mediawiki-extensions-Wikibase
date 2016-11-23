@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ceb9bbfa_771b6ed5",
+        "filename": "repo/tests/phpunit/includes/SnakFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-23T12:41:10Z",
+      "side": 1,
+      "message": "wouldn\u0027t it make sense to have provider provide actual PropertyId instances?",
+      "revId": "0db3d21964d4a2a6e80bed98270e37f9b2e1bf4b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
