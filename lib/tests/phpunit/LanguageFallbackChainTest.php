@@ -106,6 +106,19 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 				'source' => null,
 			] ],
 			[
+				'sr-cyrl',
+				LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS,
+				$data,
+				null,
+			],
+			[ 'sr-cyrl', LanguageFallbackChainFactory::FALLBACK_ALL, $data, [
+				// Shouldn't be converted to Cyrillic ('фоо') as this specific
+				// value ('foo') is taken from the English label.
+				'value' => 'foo',
+				'language' => 'en',
+				'source' => null,
+			] ],
+			[
 				'gan-hant',
 				LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS,
 				$data,
