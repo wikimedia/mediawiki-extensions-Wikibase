@@ -6,6 +6,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\Store\BufferingTermLookup;
 use Wikibase\TermIndex;
 use Wikibase\TermIndexEntry;
@@ -158,7 +159,7 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 		$languageCodes = [ $languageCode ];
 
 		$matchedTermIndexEntries = $this->termIndex->getTopMatchingTerms(
-			$this->makeTermIndexEntryTemplates(
+			$this->makeTermIndexSearchCriteria(
 				$text,
 				$languageCodes,
 				$termTypes
@@ -230,7 +231,7 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 		array $matchedEntityIdSerializations
 	) {
 		$fallbackMatchedTermIndexEntries = $this->termIndex->getTopMatchingTerms(
-			$this->makeTermIndexEntryTemplates(
+			$this->makeTermIndexSearchCriteria(
 				$text,
 				$this->addFallbackLanguageCodes( $languageCodes ),
 				$termTypes
@@ -305,7 +306,7 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 		$entityId = $termIndexEntry->getEntityId();
 		return new TermSearchResult(
 			$termIndexEntry->getTerm(),
-			$termIndexEntry->getType(),
+			$termIndexEntry->getTermType(),
 			$entityId,
 			$this->getLabelDisplayTerm( $entityId ),
 			$this->getDescriptionDisplayTerm( $entityId )
@@ -361,13 +362,13 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	 * @param string[] $languageCodes
 	 * @param string[] $termTypes
 	 *
-	 * @return TermIndexEntry[]
+	 * @return TermIndexSearchCriteria[]
 	 */
-	private function makeTermIndexEntryTemplates( $text, array $languageCodes, array $termTypes ) {
+	private function makeTermIndexSearchCriteria( $text, array $languageCodes, array $termTypes ) {
 		$terms = array();
 		foreach ( $languageCodes as $languageCode ) {
 			foreach ( $termTypes as $termType ) {
-				$terms[] = new TermIndexEntry( array(
+				$terms[] = new TermIndexSearchCriteria( array(
 					'termText' => $text,
 					'termLanguage' => $languageCode,
 					'termType' => $termType,

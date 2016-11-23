@@ -167,7 +167,7 @@ class PageTerms extends ApiQueryBase {
 		foreach ( $terms as $term ) {
 			// Since we construct $terms and $entityToPageMap from the same set of page IDs,
 			// the entry $entityToPageMap[$key] should really always be set.
-			$type = $term->getType();
+			$type = $term->getTermType();
 			$key = $term->getEntityId()->getSerialization();
 			$pageId = $entityToPageMap[$key];
 			$text = $term->getText();

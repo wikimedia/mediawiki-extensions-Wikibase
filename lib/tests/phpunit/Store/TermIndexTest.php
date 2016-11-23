@@ -6,6 +6,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\TermIndex;
 use Wikibase\TermIndexEntry;
 
@@ -35,8 +36,8 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 
 		$key .= '/';
 
-		if ( $term->getType() !== null ) {
-			$key .= $term->getType();
+		if ( $term->getTermType() !== null ) {
+			$key .= $term->getTermType();
 		}
 
 		$key .= '.';
@@ -78,21 +79,21 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 				array( // $entities
 					$item0, $item1
 				),
-				array( // $queryTerms
-					new TermIndexEntry( array(
+				array( // $criteria
+					new TermIndexSearchCriteria( array(
 						'termText' => 'mittens', // should match
 					) ),
-					new TermIndexEntry( array(
+					new TermIndexSearchCriteria( array(
 						'termText' => 'Kittens', // case doesn't match
 					) ),
-					new TermIndexEntry( array(
+					new TermIndexSearchCriteria( array(
 						'termText' => 'Mitt', // prefix isn't sufficient
 					) ),
-					new TermIndexEntry( array(
+					new TermIndexSearchCriteria( array(
 						'termLanguage' => 'en', // language mismatch
 						'termText' => 'Mittens',
 					) ),
-					new TermIndexEntry( array(
+					new TermIndexSearchCriteria( array(
 						'termType' => 'alias', // type mismatch
 						'termText' => 'Mittens',
 					) ),
@@ -108,12 +109,12 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 				array( // $entities
 					$item0, $item1
 				),
-				array( // $queryTerms
-					new TermIndexEntry( array(
+				array( // $criteria
+					new TermIndexSearchCriteria( array(
 						'termLanguage' => 'de', // language mismatch
 						'termText' => 'kitt',
 					) ),
-					new TermIndexEntry( array(
+					new TermIndexSearchCriteria( array(
 						'termText' => 'mitt', // prefix should match regardless of case
 					) ),
 				),
@@ -132,8 +133,8 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 				array( // $entities
 					$item0, $item1
 				),
-				array( // $queryTerms
-					new TermIndexEntry( array(
+				array( // $criteria
+					new TermIndexSearchCriteria( array(
 						'termText' => 'mittens',
 					) ),
 				),
@@ -146,8 +147,8 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 				array( // $entities
 					$item0, $item1
 				),
-				array( // $queryTerms
-					new TermIndexEntry( array(
+				array( // $criteria
+					new TermIndexSearchCriteria( array(
 						'termText' => 'mittens',
 					) ),
 				),
@@ -162,8 +163,8 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 				array( // $entities
 					$item0, $item1
 				),
-				array( // $queryTerms
-					new TermIndexEntry( array(
+				array( // $criteria
+					new TermIndexSearchCriteria( array(
 						'termText' => 'mittens',
 					) ),
 				),
@@ -176,8 +177,8 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 				array( // $entities
 					$item0, $item1
 				),
-				array( // $queryTerms
-					new TermIndexEntry( array(
+				array( // $criteria
+					new TermIndexSearchCriteria( array(
 						'termText' => 'mittens',
 					) ),
 				),
@@ -192,8 +193,8 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 				array( // $entities
 					$item0, $item1, $item2
 				),
-				array( // $queryTerms
-					new TermIndexEntry( array(
+				array( // $criteria
+					new TermIndexSearchCriteria( array(
 						'termText' => 'KiTTeNS',
 					) ),
 				),
@@ -219,7 +220,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 	 */
 	public function testGetMatchingTerms(
 		array $entities,
-		array $queryTerms,
+		array $criteria,
 		$termTypes,
 		$entityTypes,
 		array $options,
@@ -231,7 +232,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 			$lookup->saveTermsOfEntity( $entitiy );
 		}
 
-		$actual = $lookup->getMatchingTerms( $queryTerms, $termTypes, $entityTypes, $options );
+		$actual = $lookup->getMatchingTerms( $criteria, $termTypes, $entityTypes, $options );
 
 		$this->assertInternalType( 'array', $actual );
 
@@ -256,17 +257,17 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 				array( // $entities
 					$item0, $item1, $item2
 				),
-				array( // $queryTerms
-					new TermIndexEntry( array(
+				array( // $criteria
+					new TermIndexSearchCriteria( array(
 						'termText' => 'Mittens',
 					) ),
 				),
 				null, // $termTypes
 				null, // $entityTypes
-				array(
+				array( // $options
 					'prefixSearch' => false,
 					'caseSensitive' => true,
-				), // $options
+				),
 				array( // $expectedTermKeys
 					'Q11/label.de:Mittens',
 				),
@@ -275,17 +276,17 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 				array( // $entities
 					$item0, $item1, $item2
 				),
-				array( // $queryTerms
-					new TermIndexEntry( array(
+				array( // $criteria
+					new TermIndexSearchCriteria( array(
 						'termText' => 'KiTTeNS',
 					) ),
 				),
 				null, // $termTypes
 				null, // $entityTypes
-				array(
+				array( // $options
 					'prefixSearch' => true,
 					'caseSensitive' => false,
-				), // $options
+				),
 				array( // $expectedTermKeys
 					'Q11/label.fr:kittens love mittens',
 					'Q22/label.en:KITTENS should have mittens',
@@ -298,18 +299,18 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 				array( // $entities
 					$item0, $item1, $item2
 				),
-				array( // $queryTerms
-					new TermIndexEntry( array(
+				array( // $criteria
+					new TermIndexSearchCriteria( array(
 						'termText' => 'KiTTeNS',
 					) ),
 				),
 				null, // $termTypes
 				null, // $entityTypes
-				array(
+				array( // $options
 					'prefixSearch' => true,
 					'caseSensitive' => false,
 					'LIMIT' => 1,
-				), // $options
+				),
 				array( // $expectedTermKeys
 					'Q11/label.fr:kittens love mittens',
 				),
@@ -322,7 +323,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 	 */
 	public function testGetTopMatchingTerms(
 		array $entities,
-		array $queryTerms,
+		array $criteria,
 		$termTypes,
 		$entityTypes,
 		array $options,
@@ -334,7 +335,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 			$lookup->saveTermsOfEntity( $entitiy );
 		}
 
-		$actual = $lookup->getTopMatchingTerms( $queryTerms, $termTypes, $entityTypes, $options );
+		$actual = $lookup->getTopMatchingTerms( $criteria, $termTypes, $entityTypes, $options );
 
 		$this->assertInternalType( 'array', $actual );
 
@@ -362,7 +363,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 
 		$this->assertNotTermExists( $lookup, 'testDeleteTermsForEntity' );
 
-		$abc = new TermIndexEntry( array( 'termType' => TermIndexEntry::TYPE_LABEL, 'termText' => 'abc' ) );
+		$abc = new TermIndexSearchCriteria( array( 'termType' => TermIndexEntry::TYPE_LABEL, 'termText' => 'abc' ) );
 		$matchedTerms = $lookup->getMatchingTerms( array( $abc ), array( TermIndexEntry::TYPE_LABEL ), Item::ENTITY_TYPE );
 		foreach ( $matchedTerms as $matchedTerm ) {
 			if ( $matchedTerm->getEntityId() === $id ) {
@@ -721,7 +722,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		// make list of strings for easy checking
 		$term_keys = array();
 		foreach ( $terms as $t ) {
-			$term_keys[] = $t->getType() . '/' .  $t->getLanguage() . '/' . $t->getText();
+			$term_keys[] = $t->getTermType() . '/' .  $t->getLanguage() . '/' . $t->getText();
 		}
 
 		$k = TermIndexEntry::TYPE_LABEL . '/en/abc';
@@ -785,7 +786,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		// make list of strings for easy checking
 		$term_keys = array();
 		foreach ( $terms as $t ) {
-			$term_keys[] = $t->getType() . '/' .  $t->getLanguage() . '/' . $t->getText();
+			$term_keys[] = $t->getTermType() . '/' .  $t->getLanguage() . '/' . $t->getText();
 		}
 
 		$k = TermIndexEntry::TYPE_LABEL . '/en/abc';
@@ -852,15 +853,15 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$language = null,
 		$entityType = null
 	) {
-		$termFields = array();
-		$termFields['termText'] = $text;
+		$criteria = array();
+		$criteria['termText'] = $text;
 
 		if ( $language !== null ) {
-			$termFields['termLanguage'] = $language;
+			$criteria['termLanguage'] = $language;
 		}
 
 		$matches = $termIndex->getMatchingTerms(
-			array( new TermIndexEntry( $termFields ) ),
+			array( new TermIndexSearchCriteria( $criteria ) ),
 			$termType,
 			$entityType
 		);
