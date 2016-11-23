@@ -29,11 +29,6 @@ class TermIndexEntry {
 	const TYPE_ALIAS = 'alias';
 	const TYPE_DESCRIPTION = 'description';
 
-	/**
-	 * @var array
-	 */
-	private $fields = array();
-
 	private static $fieldNames = array(
 		'entityType',
 		'entityId',
@@ -42,6 +37,36 @@ class TermIndexEntry {
 		'termText',
 		'termWeight',
 	);
+
+	/**
+	 * @var string|null, one of self::TYPE_* constants
+	 */
+	private $termType;
+
+	/**
+	 * @var string|null
+	 */
+	private $termLanguage;
+
+	/**
+	 * @var string|null
+	 */
+	private $termText;
+
+	/**
+	 * @var float|null
+	 */
+	private $termWeight;
+
+	/**
+	 * @var EntityId|null
+	 */
+	private $entityId;
+
+	/**
+	 * @var string|null
+	 */
+	private $entityType;
 
 	/**
 	 * @since 0.2
@@ -86,7 +111,7 @@ class TermIndexEntry {
 			throw new MWException( 'Invalid term type provided' );
 		}
 
-		$this->fields['termType'] = $termType;
+		$this->termType = $termType;
 	}
 
 	/**
@@ -95,7 +120,7 @@ class TermIndexEntry {
 	 * @return string|null
 	 */
 	public function getType() {
-		return array_key_exists( 'termType', $this->fields ) ? $this->fields['termType'] : null;
+		return $this->termType;
 	}
 
 	/**
@@ -108,7 +133,7 @@ class TermIndexEntry {
 			throw new MWException( 'Language code can only be a string' );
 		}
 
-		$this->fields['termLanguage'] = $languageCode;
+		$this->termLanguage = $languageCode;
 	}
 
 	/**
@@ -117,7 +142,7 @@ class TermIndexEntry {
 	 * @return string|null
 	 */
 	public function getLanguage() {
-		return array_key_exists( 'termLanguage', $this->fields ) ? $this->fields['termLanguage'] : null;
+		return $this->termLanguage;
 	}
 
 	/**
@@ -130,7 +155,7 @@ class TermIndexEntry {
 			throw new MWException( 'Term text code can only be a string' );
 		}
 
-		$this->fields['termText'] = $text;
+		$this->termText = $text;
 	}
 
 	/**
@@ -139,7 +164,7 @@ class TermIndexEntry {
 	 * @return string|null
 	 */
 	public function getText() {
-		return array_key_exists( 'termText', $this->fields ) ? $this->fields['termText'] : null;
+		return $this->termText;
 	}
 
 	/**
@@ -152,7 +177,7 @@ class TermIndexEntry {
 			throw new MWException( 'Term weight code can only be a float' );
 		}
 
-		$this->fields['termWeight'] = $weight;
+		$this->termWeight = $weight;
 	}
 
 	/**
@@ -161,7 +186,7 @@ class TermIndexEntry {
 	 * @return float|null
 	 */
 	public function getWeight() {
-		return array_key_exists( 'termWeight', $this->fields ) ? $this->fields['termWeight'] : null;
+		return $this->termWeight;
 	}
 
 	/**
@@ -170,11 +195,11 @@ class TermIndexEntry {
 	 * @throws MWException
 	 */
 	private function setEntityType( $entityType ) {
-		if ( isset( $this->fields['entityId'] ) ) {
-			if ( $this->fields['entityId']->getEntityType() !== $entityType ) {
+		if ( $this->entityId !== null ) {
+			if ( $this->entityId->getEntityType() !== $entityType ) {
 				throw new MWException(
 					'Cannot set entity type to "' . $entityType . '"" as it does not match the type of entity id: "' .
-					$this->fields['entityId']->getEntityType() . '"'
+					$this->entityId->getEntityType() . '"'
 				);
 			}
 			return;
@@ -184,7 +209,7 @@ class TermIndexEntry {
 			throw new MWException( 'Entity type code can only be a string' );
 		}
 
-		$this->fields['entityType'] = $entityType;
+		$this->entityType = $entityType;
 	}
 
 	/**
@@ -193,15 +218,15 @@ class TermIndexEntry {
 	 * @return string|null
 	 */
 	public function getEntityType() {
-		if ( array_key_exists( 'entityId', $this->fields ) ) {
-			return $this->fields['entityId']->getEntityType();
+		if ( $this->entityId !== null ) {
+			return $this->entityId->getEntityType();
 		}
-		return array_key_exists( 'entityType', $this->fields ) ? $this->fields['entityType'] : null;
+		return $this->entityType;
 	}
 
 	private function setEntityId( EntityId $id ) {
-		$this->fields['entityId'] = $id;
-		$this->fields['entityType'] = $id->getEntityType();
+		$this->entityId = $id;
+		$this->entityType = $id->getEntityType();
 	}
 
 	/**
@@ -211,7 +236,7 @@ class TermIndexEntry {
 	 * @return EntityId|null
 	 */
 	public function getEntityId() {
-		return array_key_exists( 'entityId', $this->fields ) ? $this->fields['entityId'] : null;
+		return $this->entityId;
 	}
 
 	/**
@@ -228,22 +253,35 @@ class TermIndexEntry {
 		$fieldNames = self::$fieldNames;
 		unset( $fieldNames[array_search( 'termWeight', $fieldNames )] );
 
-		foreach ( $fieldNames as $n ) {
-			$exists = array_key_exists( $n, $a->fields );
+		$aValues = self::getFieldValuesForCompare( $a );
+		$bValues = self::getFieldValuesForCompare( $b );
 
-			if ( $exists !== array_key_exists( $n, $b->fields ) ) {
-				return $exists ? 1 : -1;
+		foreach ( $fieldNames as $n ) {
+			$aDefined = $aValues[$n] !== null;
+			$bDefined = $bValues[$n] !== null;
+
+			if ( $aDefined !== $bDefined ) {
+				return $aDefined ? 1 : -1;
 			}
-			if ( $exists ) {
-				$aValue = $n !== 'entityId' ? $a->fields[$n] : $a->fields[$n]->getSerialization();
-				$bValue = $n !== 'entityId' ? $b->fields[$n] : $b->fields[$n]->getSerialization();
-				if ( $aValue !== $bValue ) {
-					return $aValue > $bValue ? 1 : -1;
+			if ( $aDefined ) {
+				if ( $aValues[$n] !== $bValues[$n] ) {
+					return $aValues[$n] > $bValues[$n] ? 1 : -1;
 				}
 			}
 		}
 
 		return 0;
+	}
+
+	private static function getFieldValuesForCompare( self $entry ) {
+		$entityId = $entry->getEntityId();
+		return [
+			'entityType' => $entry->getEntityType(),
+			'entityId' => $entityId !== null ? $entityId->getSerialization() : null,
+			'termType' => $entry->getType(),
+			'termLanguage' => $entry->getLanguage(),
+			'termText' => $entry->getText(),
+		];
 	}
 
 	/**
