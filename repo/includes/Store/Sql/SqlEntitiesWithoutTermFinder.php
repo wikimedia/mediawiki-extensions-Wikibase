@@ -86,7 +86,7 @@ class SqlEntitiesWithoutTermFinder implements EntitiesWithoutTermFinder {
 
 		foreach ( $rows as $row ) {
 			try {
-				$entities[] = $this->entityIdComposer->composeEntityId( $row->entity_type, $row->entity_id );
+				$entities[] = $this->entityIdComposer->composeEntityId( '', $row->entity_type, $row->entity_id );
 			} catch ( InvalidArgumentException $ex ) {
 				wfLogWarning( 'Unsupported entity type "' . $row->entity_type . '"' );
 			}

@@ -150,7 +150,7 @@ class EntityTypeDefinitions {
 	 *  all entity types.
 	 */
 	public function getEntityIdComposers() {
-		return $this->getMapForDefinitionField( 'entity-id-composer' );
+		return $this->getMapForDefinitionField( 'entity-id-composer-callback' );
 	}
 
 }
