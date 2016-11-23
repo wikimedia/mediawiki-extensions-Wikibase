@@ -108,7 +108,7 @@ class LanguageWithConversionTest extends \MediaWikiTestCase {
 			[ 'zh-cn', 'zh-classical' ],
 			[ 'zh', 'sr' ],
 			[ 'zh-cn', 'en-gb' ],
-			[ 'zh-tw', 'sr-ec' ],
+			[ 'zh-tw', 'sr-cyrl' ],
 		];
 	}
 
