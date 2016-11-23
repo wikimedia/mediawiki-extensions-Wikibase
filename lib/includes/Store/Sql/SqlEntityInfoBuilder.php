@@ -389,6 +389,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		foreach ( $dbResult as $row ) {
 			try {
 				$entityId = $this->entityIdComposer->composeEntityId(
+					'',
 					$row->term_entity_type,
 					$row->term_entity_id
 				);

@@ -49,7 +49,7 @@ associated with a function having the dedicated signature:
 : a regular expression that matches serialized entity IDs
 ; entity-id-builder (repo and client)
 : a callable that returns an EntityId instance for a given entity ID serialization
-; entity-id-composer (repo and client)
+; entity-id-composer-callback (repo and client)
 : a callable that returns an EntityId instance for the given unique part of an entity ID
   serialization. Only entity types with IDs that are constructed from a static and a unique part can
   and should specify this.
