@@ -10,7 +10,6 @@
 	var SUBJECT = wikibase.entityChangers.EntityTermsChanger;
 
 	QUnit.test( 'is a function', function( assert ) {
-		assert.expect( 1 );
 		assert.equal(
 			typeof SUBJECT,
 			'function',
