@@ -352,6 +352,14 @@ class WikibaseRepo {
 	 */
 	private function newValidatorBuilders() {
 		$urlSchemes = $this->settings->getSetting( 'urlSchemes' );
+		$supportedEntityTypes = array_merge(
+			array_map( function( $repoSettings ) {
+				return $repoSettings[ 'supportedEntityTypes' ];
+			}, $this->settings->getSetting( 'foreignRepositories' ) ),
+			[
+				'' => $this->getEnabledEntityTypes(),
+			]
+		);
 
 		return new ValidatorBuilders(
 			$this->getEntityLookup(),
@@ -359,7 +367,8 @@ class WikibaseRepo {
 			$urlSchemes,
 			$this->getVocabularyBaseUri(),
 			$this->getMonolingualTextLanguages(),
-			$this->getCachingCommonsMediaFileNameLookup()
+			$this->getCachingCommonsMediaFileNameLookup(),
+			$supportedEntityTypes
 		);
 	}
 
