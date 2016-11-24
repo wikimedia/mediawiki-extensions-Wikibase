@@ -128,24 +128,18 @@
 			new wb.datamodel.Item( 'Q1' )
 		);
 
-		QUnit.stop();
-
-		entityTermsChanger.save(
+		return entityTermsChanger.save(
 			new wb.datamodel.Fingerprint( new wb.datamodel.TermMap( {
 				language: new wb.datamodel.Term( 'language', 'label' )
 			} ) ),
 			new wb.datamodel.Fingerprint()
 		).done( function( savedFingerprint ) {
-			QUnit.start();
 			assert.equal( savedFingerprint.getLabelFor( 'language' ).getText(), 'normalized label' );
-		} )
-		.fail( function() {
-			QUnit.start();
-			assert.ok( false, 'save failed' );
 		} );
 	} );
 
 	QUnit.test( 'save correctly handles API failures for labels', function( assert ) {
+		var done = assert.async();
 		assert.expect( 4 );
 		var api = {
 			setLabel: sinon.spy( function() {
@@ -158,24 +152,21 @@
 			new wb.datamodel.Item( 'Q1' )
 		);
 
-		QUnit.stop();
-
 		entityTermsChanger.save(
 			new wb.datamodel.Fingerprint( new wb.datamodel.TermMap( {
 				language: new wb.datamodel.Term( 'language', 'label' )
 			} ) ),
 			new wb.datamodel.Fingerprint()
 		).done( function( savedFingerprint ) {
-			QUnit.start();
 			assert.ok( false, 'save should have failed' );
 		} )
 		.fail( function( error ) {
-			QUnit.start();
 			assert.ok( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
 			assert.equal( error.code, 'errorCode' );
 			assert.equal( error.context.type, 'label' );
 			assert.ok( error.context.value.equals( new wb.datamodel.Term( 'language', 'label' ) ) );
-		} );
+		} )
+		.always( done );
 	} );
 
 	QUnit.test( 'save performs correct API calls for new description', function( assert ) {
@@ -468,9 +459,7 @@
 			new wb.datamodel.Item( 'Q1' )
 		);
 
-		QUnit.stop();
-
-		entityTermsChanger.save(
+		return entityTermsChanger.save(
 			new wb.datamodel.Fingerprint(
 				null,
 				null,
@@ -479,13 +468,8 @@
 				} )
 			),
 			new wb.datamodel.Fingerprint()
-		).done( function( savedFingerprint ) {
-			QUnit.start();
+		).then( function( savedFingerprint ) {
 			assert.deepEqual( savedFingerprint.getAliasesFor( 'language' ).getTexts(), [ 'normalized alias' ] );
-		} )
-		.fail( function() {
-			QUnit.start();
-			assert.ok( false, 'save failed' );
 		} );
 	} );
 
