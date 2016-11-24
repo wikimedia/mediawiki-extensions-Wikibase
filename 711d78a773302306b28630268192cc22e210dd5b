@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aebe47e0_00d76c29",
+        "filename": "lib/includes/Interactors/TermIndexSearchInteractor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-24T14:27:57Z",
+      "side": 1,
+      "message": "makeTermIndexMasks(",
+      "revId": "711d78a773302306b28630268192cc22e210dd5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_a0e56008",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-24T14:27:57Z",
+      "side": 1,
+      "message": "long line",
+      "revId": "711d78a773302306b28630268192cc22e210dd5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_60e868de",
+        "filename": "lib/includes/Store/TermIndexMask.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-24T14:27:57Z",
+      "side": 1,
+      "message": "isset() may be better than array_key_exists(), to avoid calling the setter if the value is null.",
+      "revId": "711d78a773302306b28630268192cc22e210dd5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_a0bc40d6",
+        "filename": "lib/includes/Store/TermIndexMask.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-24T14:27:57Z",
+      "side": 1,
+      "message": "Assert::parameter would be nicer",
+      "revId": "711d78a773302306b28630268192cc22e210dd5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_c0b734f1",
+        "filename": "lib/includes/TermIndexEntry.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-24T14:27:57Z",
+      "side": 1,
+      "message": "This doesn\u0027t guarantee that the correct keys are set. And if they are not set, we trigger a warning below, and execution would continue using a null value, triggering errors further on. Not really pretty...\n\nAfter checking the size, you would need to at least check that array_diff( self::$fieldNames, array_keys( $fields ) ) is empty. I\u0027d wrap that in an Assert::parameter call.",
+      "revId": "711d78a773302306b28630268192cc22e210dd5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_e0c2385d",
+        "filename": "lib/includes/TermIndexEntry.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-24T14:27:57Z",
+      "side": 1,
+      "message": "could use Assert::parameter()",
+      "revId": "711d78a773302306b28630268192cc22e210dd5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_80d25c2b",
+        "filename": "lib/tests/phpunit/Store/EntityTermLookupTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-24T14:27:57Z",
+      "side": 1,
+      "message": "Please do array style conversion in a separate patch, at least if you didn\u0027t touch the file otherwise.",
+      "revId": "711d78a773302306b28630268192cc22e210dd5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_60cf4883",
+        "filename": "lib/tests/phpunit/Store/MockTermIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-24T14:27:57Z",
+      "side": 1,
+      "message": "we could keep a convenience function for this",
+      "revId": "711d78a773302306b28630268192cc22e210dd5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_00a52cb1",
+        "filename": "lib/tests/phpunit/Store/MockTermIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-24T14:27:57Z",
+      "side": 1,
+      "message": "Perhaps TermIndexEntry::getType should also be renamed? For clarity and consistency?",
+      "revId": "711d78a773302306b28630268192cc22e210dd5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
