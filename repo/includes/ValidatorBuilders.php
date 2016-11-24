@@ -18,6 +18,7 @@ use Wikibase\Repo\Validators\CompositeValidator;
 use Wikibase\Repo\Validators\DataFieldValidator;
 use Wikibase\Repo\Validators\DataValueValidator;
 use Wikibase\Repo\Validators\EntityExistsValidator;
+use Wikibase\Repo\Validators\ForeignEntityValidator;
 use Wikibase\Repo\Validators\MembershipValidator;
 use Wikibase\Repo\Validators\NumberRangeValidator;
 use Wikibase\Repo\Validators\NumberValidator;
@@ -82,12 +83,18 @@ class ValidatorBuilders {
 	private $mediaFileNameLookup;
 
 	/**
+	 * @var array[]
+	 */
+	private $supportedEntityTypes;
+
+	/**
 	 * @param EntityLookup $lookup
 	 * @param EntityIdParser $idParser
 	 * @param string[] $urlSchemes
 	 * @param string $vocabularyBaseUri The base URI for vocabulary concepts.
 	 * @param ContentLanguages $contentLanguages
 	 * @param CachingCommonsMediaFileNameLookup $cachingCommonsMediaFileNameLookup
+	 * @param array $supportedEntityTypes map of repository names to lists of supported entity types
 	 */
 	public function __construct(
 		EntityLookup $lookup,
@@ -95,7 +102,8 @@ class ValidatorBuilders {
 		array $urlSchemes,
 		$vocabularyBaseUri,
 		ContentLanguages $contentLanguages,
-		CachingCommonsMediaFileNameLookup $cachingCommonsMediaFileNameLookup
+		CachingCommonsMediaFileNameLookup $cachingCommonsMediaFileNameLookup,
+		array $supportedEntityTypes
 	) {
 		$this->entityLookup = $lookup;
 		$this->entityIdParser = $idParser;
@@ -103,6 +111,7 @@ class ValidatorBuilders {
 		$this->vocabularyBaseUri = $vocabularyBaseUri;
 		$this->contentLanguages = $contentLanguages;
 		$this->mediaFileNameLookup = $cachingCommonsMediaFileNameLookup;
+		$this->supportedEntityTypes = $supportedEntityTypes;
 	}
 
 	/**
@@ -134,6 +143,7 @@ class ValidatorBuilders {
 	private function getEntityValidators( $entityType = null ) {
 		return [
 			new TypeValidator( EntityIdValue::class ),
+			new ForeignEntityValidator( $this->supportedEntityTypes ),
 			new EntityExistsValidator( $this->entityLookup, $entityType ),
 		];
 	}

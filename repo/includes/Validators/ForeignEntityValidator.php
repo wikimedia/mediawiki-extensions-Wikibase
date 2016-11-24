@@ -7,6 +7,7 @@ use ValueValidators\Result;
 use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -36,11 +37,14 @@ class ForeignEntityValidator implements ValueValidator {
 	 * Ensures an entity's repository name is known and
 	 * the corresponding repository supports the entity's type.
 	 *
-	 * @param EntityId $id
+	 * @param EntityId|EntityIdValue $id
 	 *
 	 * @return Result
 	 */
 	public function validate( $id ) {
+		if ( $id instanceof EntityIdValue ) {
+			$id = $id->getEntityId();
+		}
 		Assert::parameterType( EntityId::class, $id, '$id' );
 
 		if ( !$this->isKnownRepositoryName( $id->getRepositoryName() ) ) {
