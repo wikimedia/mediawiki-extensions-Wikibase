@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aebe47e0_8bc6fd4c",
+        "filename": "lib/includes/Store/TermIndexSearchCriteria.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-24T18:52:13Z",
+      "side": 1,
+      "message": "These setters are never called",
+      "revId": "a6eb5268025b09053bcc59f06f0ddc4cf38bf46f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
