@@ -3,6 +3,7 @@
 namespace Wikibase\Test\Repo\Validators;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -59,6 +60,12 @@ class ForeignEntityValidatorTest extends \PHPUnit_Framework_TestCase {
 			[ null ],
 			[ 123 ]
 		];
+	}
+
+	public function testGivenEntityIdValue_validateExtractsEntityId() {
+		$validator = new ForeignEntityValidator( [ '' => [ Item::ENTITY_TYPE ] ] );
+		$this->assertTrue( $validator->validate( new EntityIdValue( new ItemId( 'Q123' ) ) )->isValid() );
+		$this->assertFalse( $validator->validate( new EntityIdValue( new ItemId( 'foo:Q123' ) ) )->isValid() );
 	}
 
 	public function testGivenRepositoryIsUnknown_validateEntityReturnsFalse() {

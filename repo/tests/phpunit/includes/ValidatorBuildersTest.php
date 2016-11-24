@@ -13,12 +13,15 @@ use DataValues\UnboundedQuantityValue;
 use PHPUnit_Framework_TestCase;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\Lookup\DispatchingEntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
@@ -38,27 +41,47 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 	private function newValidatorBuilders() {
 		$entityIdParser = new BasicEntityIdParser();
 
+		$urlSchemes = array( 'http', 'https', 'ftp', 'mailto' );
+
+		$builders = new ValidatorBuilders(
+			$this->getEntityLookup(),
+			$entityIdParser,
+			$urlSchemes,
+			'http://qudt.org/vocab/',
+			new StaticContentLanguages( array( 'contentlanguage' ) ),
+			$this->getCachingCommonsMediaFileNameLookup(),
+			[
+				'' => [ Item::ENTITY_TYPE, Property::ENTITY_TYPE ],
+				'foo' => [ Item::ENTITY_TYPE ]
+			]
+		);
+
+		return $builders;
+	}
+
+	private function getEntityLookup() {
 		$q8 = new Item( new ItemId( 'Q8' ) );
 
 		$p8 = Property::newFromType( 'string' );
 		$p8->setId( new PropertyId( 'P8' ) );
 
-		$entityLookup = new MockRepository();
-		$entityLookup->putEntity( $q8 );
-		$entityLookup->putEntity( $p8 );
+		$localLookup = new MockRepository();
+		$localLookup->putEntity( $q8 );
+		$localLookup->putEntity( $p8 );
 
-		$urlSchemes = array( 'http', 'https', 'ftp', 'mailto' );
+		$fooQ123 = new ItemId( 'foo:Q123' );
+		$fooP42 = new PropertyId( 'foo:P42' );
 
-		$builders = new ValidatorBuilders(
-			$entityLookup,
-			$entityIdParser,
-			$urlSchemes,
-			'http://qudt.org/vocab/',
-			new StaticContentLanguages( array( 'contentlanguage' ) ),
-			$this->getCachingCommonsMediaFileNameLookup()
-		);
+		$foreignLookup = $this->getMock( EntityLookup::class );
+		$foreignLookup->method( 'hasEntity' )
+			->willReturnCallback( function( EntityId $id ) use ( $fooQ123, $fooP42 ) {
+				return $id->equals( $fooQ123 ) || $id->equals( $fooP42 );
+			} );
 
-		return $builders;
+		return new DispatchingEntityLookup( [
+			'' => $localLookup,
+			'foo' => $foreignLookup,
+		] );
 	}
 
 	/**
@@ -99,6 +122,9 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			array( 'wikibase-entity', new EntityIdValue( new PropertyId( 'p8' ) ), true, 'existing entity' ),
 			array( 'wikibase-entity', new EntityIdValue( new ItemId( 'q8' ) ), true, 'existing entity' ),
 			array( 'wikibase-entity', new EntityIdValue( new ItemId( 'q3' ) ), false, 'missing entity' ),
+			array( 'wikibase-entity', new EntityIdValue( new ItemId( 'bar:Q123' ) ), false, 'unknown repository' ),
+			array( 'wikibase-entity', new EntityIdValue( new ItemId( 'foo:Q123' ) ), true, 'foreign entity' ),
+			array( 'wikibase-entity', new EntityIdValue( new PropertyId( 'foo:P42' ) ), false, 'unsupported foreign entity type' ),
 			array( 'wikibase-entity', new StringValue( 'q8' ), false, 'Expected EntityId, StringValue supplied' ),
 
 			//commonsMedia
