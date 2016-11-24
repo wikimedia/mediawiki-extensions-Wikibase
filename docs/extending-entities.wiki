@@ -1,0 +1,24 @@
+This is a checklist of things that need doing when adding a new field to an existing entity type.
+
+* Add a provider interface, such as NewThingyProvider, for the new field.
+* Add to entity as an attribute and add getter and setter (implement the provider interface)
+* Add to content as part of FooContent::isStub
+* Add to Special:NewFoo if needed upon creation
+* Consider in equals() method of the Entity
+* Consider in __clone() method of the Entity
+* Consider in isEmpty() method of the Entity
+* Add support to FooSerializer
+* Add support to FooDeserializer
+* Add support to FooPatcher
+* Add support to FooDiffer
+* Add support in FooView (extends EntityView)
+
+CAVEAT (as of November 2016): For the below parts of Wikibase, there are no extension
+interfaces yet for handling additional fields of entities. Fields of entity types known
+to Wikibase itself can be hardcoded here, but for supporting entity types defined in
+other extensions, plug-in interfaces still need to be added.
+
+* Add to RDF mapping (not currently pluggable!)
+* Add Validator (not currently pluggable)
+* Add ChangeOp for updating (not currently pluggable) (must work with wbeditentity)
+* Add handling (or suppression) to EntityChangeFactory (not currently pluggable)
