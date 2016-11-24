@@ -634,7 +634,7 @@
 	"apihelp-wbsetsitelink-param-summary": "Summary for the edit.\nWill be prepended by an automatically generated comment. The length limit of the autocomment together with the summary is 260 characters. Be aware that everything above that limit will be cut off.",
 	"apihelp-wbsetsitelink-param-bot": "Mark this edit as bot. This URL flag will only be respected if the user belongs to the group \"bot\".",
 	"apihelp-wbsetsitelink-param-linksite": "The identifier of the site on which the article to link resides",
-	"apihelp-wbsetsitelink-param-linktitle": "The title of the article to link. If this parameter is an empty string or both linktitle and badges are not set, the link will be removed.",
+	"apihelp-wbsetsitelink-param-linktitle": "The title of the article to link. If this parameter is an empty string or both <var>linktitle</var> and <var>badges</var> are not set, the link will be removed.",
 	"apihelp-wbsetsitelink-param-badges": "The IDs of items to be set as badges. They will replace the current ones. If this parameter is not set, the badges will not be changed",
 	"apihelp-wbsetsitelink-example-1": "Add a sitelink to the English article \"Hydrogen\" to the item with ID \"Q42\", if the sitelink does not exist",
 	"apihelp-wbsetsitelink-example-2": "Add a sitelink to the English article \"Hydrogen\" to the item with ID \"Q42\", if the sitelink does not exist. Also appends \"Loves Oxygen\" to the edit summary.",
