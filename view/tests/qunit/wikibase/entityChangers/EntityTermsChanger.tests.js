@@ -23,8 +23,7 @@
 		assert.ok( new SUBJECT() instanceof SUBJECT );
 	} );
 
-	QUnit.test( 'save performs correct API calls for new label', function( assert ) {
-		assert.expect( 2 );
+	QUnit.test( 'save performs correct API calls for new label', 2, function( assert ) {
 		var api = {
 			setLabel: sinon.spy( function() {
 				return $.Deferred().promise();
@@ -36,19 +35,18 @@
 			new wb.datamodel.Item( 'Q1' )
 		);
 
-		entityTermsChanger.save(
+		return entityTermsChanger.save(
 			new wb.datamodel.Fingerprint( new wb.datamodel.TermMap( {
 				language: new wb.datamodel.Term( 'language', 'label' )
 			} ) ),
 			new wb.datamodel.Fingerprint()
-		);
-
-		assert.ok( api.setLabel.calledOnce );
-		sinon.assert.calledWith( api.setLabel, 'Q1', 0, 'label', 'language' );
+		).then( function () {
+			assert.ok( api.setLabel.calledOnce );
+			sinon.assert.calledWith( api.setLabel, 'Q1', 0, 'label', 'language' );
+		} );
 	} );
 
-	QUnit.test( 'save performs correct API calls for changed label', function( assert ) {
-		assert.expect( 2 );
+	QUnit.test( 'save performs correct API calls for changed label', 2, function( assert ) {
 		var api = {
 			setLabel: sinon.spy( function() {
 				return $.Deferred().promise();
@@ -60,17 +58,17 @@
 			new wb.datamodel.Item( 'Q1' )
 		);
 
-		entityTermsChanger.save(
+		return entityTermsChanger.save(
 			new wb.datamodel.Fingerprint( new wb.datamodel.TermMap( {
 				language: new wb.datamodel.Term( 'language', 'new label' )
 			} ) ),
 			new wb.datamodel.Fingerprint( new wb.datamodel.TermMap( {
 				language: new wb.datamodel.Term( 'language', 'old label' )
 			} ) )
-		);
-
-		assert.ok( api.setLabel.calledOnce );
-		sinon.assert.calledWith( api.setLabel, 'Q1', 0, 'new label', 'language' );
+		).then( function () {
+			assert.ok( api.setLabel.calledOnce );
+			sinon.assert.calledWith( api.setLabel, 'Q1', 0, 'new label', 'language' );
+		} );
 	} );
 
 	QUnit.test( 'save performs correct API calls for removed label', function( assert ) {
