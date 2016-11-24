@@ -52,6 +52,24 @@
       "revId": "b8671277de52b50f66ff68523f589a13baa8ebed",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_80fedc33",
+        "filename": "docs/extending-entities.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-11-24T16:41:27Z",
+      "side": 1,
+      "message": "or maybe better example is Lemma?",
+      "parentUuid": "aebe47e0_e08118ca",
+      "revId": "b8671277de52b50f66ff68523f589a13baa8ebed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
