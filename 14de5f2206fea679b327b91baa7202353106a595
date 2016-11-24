@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "aebe47e0_3d685784",
+        "filename": "client/tests/phpunit/includes/Api/PageTermsTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-24T09:08:21Z",
+      "side": 1,
+      "message": "As I get it TermIndexEntry is used for two different things:\n1. It is represents an item from the term index/result of search in that index. In this case it indeed does not make much sense to duplicate the entity type, while we have a \"real\" EntityId there now too.\n2. As a kind of search mask for searching in the term index. See for example TermSqlIndex::getMatchingTerms (and further down TermSqlIndex::termMatchConditions). This usage is, if I get it right, the very reason to allow creating incomplete instances of TermIndexEntry. And if Iam not missing anything, for this usage entityId field is not really used (you rather try to get matching items for the give entity type).\n\nThese two concerns use a quite similar set of fields but they are really separate, and as such, I\u0027d really like to split out the \"search mask\" thing to its own class. The mask class would then still allow to have null values of fields, and not include entity id. TermIndexEntry would then be the actual term index entry object, with no nulls allowed, and no duplicate entity type field. I have a work-in-progress patch doing this split, though not yet ready to be shown. I\u0027ll keep you updated on this.",
+      "parentUuid": "ceb9bbfa_fd3abfbf",
+      "revId": "14de5f2206fea679b327b91baa7202353106a595",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ceb9bbfa_7df22f05",
         "filename": "lib/includes/TermIndexEntry.php",
         "patchSetId": 3
@@ -30,6 +48,30 @@
       "writtenOn": "2016-11-23T17:18:10Z",
       "side": 1,
       "message": "This method misses a check similar to the sanity check above. If the \u0027entityType\u0027 field is already set, it should not be possible to set an \u0027entityId\u0027 with an other type. Even if the TermIndexEntry object is sane after doing this, such a change is almost certainly a bug (possibly inconsistent data, e.g. a database row that contains \"Q1\" but \"property\"). This should be made visible with a proper exception.",
+      "range": {
+        "startLine": 176,
+        "startChar": 18,
+        "endLine": 176,
+        "endChar": 29
+      },
+      "revId": "14de5f2206fea679b327b91baa7202353106a595",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_bd5347e2",
+        "filename": "lib/includes/TermIndexEntry.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-24T09:08:21Z",
+      "side": 1,
+      "message": "Valid point but given the way those setters are used (ie. they\u0027re only called in the particular order in the constructor) I believe doing this sanity check while setting entity type should be enough.\nFirst the entity id is set, which also sets the entity type. When then the different entity type is tried to be set instead of the one of the entity id then obviously something is wrong and the exception is thrown.\nBut as these setters are private it is not possible to first set entity type to let\u0027s say property, and then try to set the entity id of the TermIndexEntry to ItemId.\n\nThis all is a bit messy. I could add the sanity check here too, although I am not sure if it worth it. As said in the comment above, I am hoping we will depart from having both entity type and entity id in the same object.",
+      "parentUuid": "ceb9bbfa_7df22f05",
       "range": {
         "startLine": 176,
         "startChar": 18,
