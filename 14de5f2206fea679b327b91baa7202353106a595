@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "aebe47e0_1da6b3a7",
+        "filename": "client/tests/phpunit/includes/Api/PageTermsTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-11-24T10:32:08Z",
+      "side": 1,
+      "message": "I followed all code paths and I believe the feature of using a TermIndexEntry to search for an entity type (but no entity ID) is not used at all. You can see this in two places:\n* Most places that construct a TermIndexEntry neither set entityType nor entityId.\n* Pretty much all places that use TermIndexEntry objects for searching do have an extra $entityType parameter.\n\nThis is not meant as a blocker for this patch. Your plan to split the two usages sounds really good. I suggest to \"restore\" the old behavior of the class when you split off the search aspect: a value object that does not contain objects but only strings.",
+      "parentUuid": "aebe47e0_3d685784",
+      "revId": "14de5f2206fea679b327b91baa7202353106a595",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ceb9bbfa_7df22f05",
         "filename": "lib/includes/TermIndexEntry.php",
         "patchSetId": 3
@@ -72,6 +90,30 @@
       "side": 1,
       "message": "Valid point but given the way those setters are used (ie. they\u0027re only called in the particular order in the constructor) I believe doing this sanity check while setting entity type should be enough.\nFirst the entity id is set, which also sets the entity type. When then the different entity type is tried to be set instead of the one of the entity id then obviously something is wrong and the exception is thrown.\nBut as these setters are private it is not possible to first set entity type to let\u0027s say property, and then try to set the entity id of the TermIndexEntry to ItemId.\n\nThis all is a bit messy. I could add the sanity check here too, although I am not sure if it worth it. As said in the comment above, I am hoping we will depart from having both entity type and entity id in the same object.",
       "parentUuid": "ceb9bbfa_7df22f05",
+      "range": {
+        "startLine": 176,
+        "startChar": 18,
+        "endLine": 176,
+        "endChar": 29
+      },
+      "revId": "14de5f2206fea679b327b91baa7202353106a595",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_fdb1bfe0",
+        "filename": "lib/includes/TermIndexEntry.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-11-24T10:32:08Z",
+      "side": 1,
+      "message": "You are absolutely right. I missed the fact that this is private. Yes, the order is critical. When called the other way around the problem I described would appear, but this can never happen.",
+      "parentUuid": "aebe47e0_bd5347e2",
       "range": {
         "startLine": 176,
         "startChar": 18,
