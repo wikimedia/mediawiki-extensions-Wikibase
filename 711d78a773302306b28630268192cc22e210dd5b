@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "aebe47e0_607868c0",
+        "filename": "lib/includes/Interactors/TermIndexSearchInteractor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-24T17:57:20Z",
+      "side": 1,
+      "message": "renamed to makeTermIndexSearchCriteria",
+      "parentUuid": "aebe47e0_00d76c29",
+      "revId": "711d78a773302306b28630268192cc22e210dd5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aebe47e0_a0e56008",
         "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2016-11-24T14:27:57Z",
       "side": 1,
       "message": "long line",
+      "revId": "711d78a773302306b28630268192cc22e210dd5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_00352cf3",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-24T17:57:20Z",
+      "side": 1,
+      "message": "chopped down",
+      "parentUuid": "aebe47e0_a0e56008",
       "revId": "711d78a773302306b28630268192cc22e210dd5b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "aebe47e0_6b33a9f4",
+        "filename": "lib/includes/Store/TermIndexMask.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-24T17:57:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aebe47e0_60e868de",
+      "revId": "711d78a773302306b28630268192cc22e210dd5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aebe47e0_a0bc40d6",
         "filename": "lib/includes/Store/TermIndexMask.php",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2016-11-24T14:27:57Z",
       "side": 1,
       "message": "Assert::parameter would be nicer",
+      "revId": "711d78a773302306b28630268192cc22e210dd5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_e052383f",
+        "filename": "lib/includes/Store/TermIndexMask.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-24T17:57:20Z",
+      "side": 1,
+      "message": "Done, plus moved the assert to constructor",
+      "parentUuid": "aebe47e0_a0bc40d6",
       "revId": "711d78a773302306b28630268192cc22e210dd5b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "aebe47e0_40a68451",
+        "filename": "lib/includes/TermIndexEntry.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-24T17:57:20Z",
+      "side": 1,
+      "message": "done, and switched to Assert::parameter.\nAll assertions are done now right away in the constructor",
+      "parentUuid": "aebe47e0_c0b734f1",
+      "revId": "711d78a773302306b28630268192cc22e210dd5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aebe47e0_e0c2385d",
         "filename": "lib/includes/TermIndexEntry.php",
         "patchSetId": 2
@@ -98,6 +188,24 @@
       "writtenOn": "2016-11-24T14:27:57Z",
       "side": 1,
       "message": "could use Assert::parameter()",
+      "revId": "711d78a773302306b28630268192cc22e210dd5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_40f8c446",
+        "filename": "lib/includes/TermIndexEntry.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-24T17:57:20Z",
+      "side": 1,
+      "message": "So i didn\u0027t switch over to use Assert before as this had used to throw MWExceptions on errors. I am not sure wouldn\u0027t break something in the code using this.\nBut changed to Assert::parameter (in constructor) now.",
+      "parentUuid": "aebe47e0_e0c2385d",
       "revId": "711d78a773302306b28630268192cc22e210dd5b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "aebe47e0_c07054dc",
+        "filename": "lib/tests/phpunit/Store/EntityTermLookupTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-24T17:57:20Z",
+      "side": 1,
+      "message": "I believe I only changed the array style conversion near the places I touched. But you\u0027re right, it will be far more clear if I don\u0027t do those extra changes here. Reverted the array style where I couid",
+      "parentUuid": "aebe47e0_80d25c2b",
+      "revId": "711d78a773302306b28630268192cc22e210dd5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aebe47e0_60cf4883",
         "filename": "lib/tests/phpunit/Store/MockTermIndex.php",
         "patchSetId": 2
@@ -138,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "aebe47e0_60d4e8be",
+        "filename": "lib/tests/phpunit/Store/MockTermIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-24T17:57:20Z",
+      "side": 1,
+      "message": "restored",
+      "parentUuid": "aebe47e0_60cf4883",
+      "revId": "711d78a773302306b28630268192cc22e210dd5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aebe47e0_00a52cb1",
         "filename": "lib/tests/phpunit/Store/MockTermIndex.php",
         "patchSetId": 2
@@ -149,6 +293,24 @@
       "writtenOn": "2016-11-24T14:27:57Z",
       "side": 1,
       "message": "Perhaps TermIndexEntry::getType should also be renamed? For clarity and consistency?",
+      "revId": "711d78a773302306b28630268192cc22e210dd5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_20def0de",
+        "filename": "lib/tests/phpunit/Store/MockTermIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-24T17:57:20Z",
+      "side": 1,
+      "message": "Makes sense, especially as I re-added TermIndexEntry::getEntityType",
+      "parentUuid": "aebe47e0_00a52cb1",
       "revId": "711d78a773302306b28630268192cc22e210dd5b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
