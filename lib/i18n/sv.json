@@ -22,7 +22,7 @@
 	"wikibase-error-remove-timeout": "Vi har tekniska problem. Var god försök igen.",
 	"wikibase-error-autocomplete-connection": "Kunde inte fråga webbplatsens API. Försök igen senare.",
 	"wikibase-error-autocomplete-response": "Servern svarade: $1",
-	"wikibase-error-ui-no-external-page": "Den angivna artikeln kunde inte hittas på den motsvarande webbplatsen.",
+	"wikibase-error-ui-no-external-page": "En sida \"$2\" kunde inte hittas på \"$1\".",
 	"wikibase-error-ui-edit-conflict": "Det finns en redigeringskonflikt. Vänligen spara dina ändringar lokalt, ladda om och spara igen.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (translittererad)",
 	"wikibase-quantitydetails-amount": "Mängd",

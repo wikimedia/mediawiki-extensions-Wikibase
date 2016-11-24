@@ -12,6 +12,8 @@
 	"apihelp-query+pageterms-example-item": "Lortu Q84 elementuaren etiketak eta aliasak.",
 	"wikibase-comment-add": "{{WBREPONAME}} elementua sortu da.",
 	"wikibase-comment-update": "{{WBREPONAME}} elementua aldatua",
+	"wikibase-comment-sitelink-add": "Hizkuntza loturak gehituak:$1",
+	"wikibase-comment-multi": "{{PLURAL:$1|aldaketa 1|$1 aldaketa}}",
 	"wikibase-dataitem": "{{WBREPONAME}} itema",
 	"wikibase-editlinks": "Aldatu loturak",
 	"wikibase-editlinkstitle": "Aldatu hizkuntzen arteko loturak",
@@ -22,6 +24,7 @@
 	"wikibase-linkitem-input-site": "Hizkuntza:",
 	"wikibase-linkitem-input-page": "Orria:",
 	"wikibase-linkitem-confirmitem-button": "Berretsi",
+	"wikibase-property-notfound": "$1 propietatea ez da aurkitu.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Ezkutatu",
 	"wikibase-rc-hide-wikidata-show": "Erakutsi",
@@ -36,5 +39,6 @@
 	"wikibase-pageinfo-entity-id-none": "Bat ere ez",
 	"wikibase-pageinfo-entity-usage-L": "Etiketa:$1",
 	"wikibase-pageinfo-entity-usage-T": "Titulua",
-	"wikibase-otherprojects": "Beste proiektuetan"
+	"wikibase-otherprojects": "Beste proiektuetan",
+	"notification-link-text-view-item": "{{GENDER:$1|Ikus}} elementua"
 }

@@ -13,7 +13,8 @@
 			"Macofe",
 			"Maroen1990",
 			"Sonic N800",
-			"Mr. Ibrahem"
+			"Mr. Ibrahem",
+			"ديفيد"
 		]
 	},
 	"wikibase-lib-desc": "يمسك بالوظيفة المشتركة لامتدادات Wikibase و Wikibase Client",
@@ -122,7 +123,7 @@
 	"wikibase-entity-summary-wbsetaliases-add": "أضاف [$2] {{PLURAL:$1|اسم مستعار|أسماء مستعارة}}",
 	"wikibase-entity-summary-wbsetaliases-remove": "أزال [$2] {{PLURAL:$1|اسم مستعار|أسماء مستعارة}}",
 	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "غير [$2] التسمية، والوصف والأسماء المستعارة",
-	"wikibase-entity-summary-wbsetsitelink-add": "أضيفت وصلة إلى [$2]",
+	"wikibase-entity-summary-wbsetsitelink-add": "إضافة وصلة إلى [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add-both": "أضاف وصلة مع شارات إلى [$2]",
 	"wikibase-entity-summary-wbsetsitelink-set": "تغيير الوصلة إلى [$2]",
 	"wikibase-entity-summary-wbsetsitelink-set-badges": "غير الشارات ل[$2]",

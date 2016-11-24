@@ -15,7 +15,8 @@
 			"Dicto23456",
 			"Sealle",
 			"Adam-Yourist",
-			"Туллук"
+			"Туллук",
+			"Gamliel Fishkin"
 		]
 	},
 	"wikibase-client-desc": "Клиент для расширения Wikibase",
@@ -34,6 +35,7 @@
 	"apihelp-query+wikibase-description": "Получить сведения о клиенте Wikibase и связанном хранилище Wikibase.",
 	"wikibase-after-page-move": "Чтобы исправить на переименованной странице языковые ссылки, вы можете также [$1  обновить] связанный элемент {{grammar:genitive|{{WBREPONAME}}}}.",
 	"wikibase-after-page-move-queued": "Связанный с этой страницей [$1 элемент {{grammar:genitive|{{WBREPONAME}}}}] будет автоматически обновлён. Обратите внимание, что это не может произойти мгновенно.",
+	"wikibase-after-page-delete": "Следует также удалить ссылку на эту страницу из [$1 ассоциированного элемента {{GRAMMAR:genitive|{{WBREPONAME}}}}] для обслуживания языковых ссылок.",
 	"wikibase-after-page-delete-queued": "Связанный с этой страницей [$1 элемент {{grammar:genitive|{{WBREPONAME}}}}] будет автоматически обновлён. Обратите внимание, что это не может произойти мгновенно.",
 	"wikibase-comment-add": "Был создан элемент {{grammar:genitive|{{WBREPONAME}}}}.",
 	"wikibase-comment-remove": "Связанный элемент {{grammar:genitive|{{WBREPONAME}}}} удалён. Языковые ссылки ликвидированы.",

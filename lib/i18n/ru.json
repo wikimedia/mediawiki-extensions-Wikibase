@@ -75,6 +75,7 @@
 	"wikibase-validator-bad-value-type": "Недопустимое значение типа «$1», ожидаемый тип — «$2»",
 	"wikibase-validator-bad-data-type": "Неправильный тип данных: $1",
 	"wikibase-validator-bad-url": "URL-адреса не должны содержать определенные символы, такие как пробелы или квадратные скобки: $1",
+	"wikibase-validator-url-scheme-missing": "У этого URL-адреса отутствует URI-схема, например, «https://»: $1",
 	"wikibase-validator-bad-url-scheme": "URL-схема «$1» не поддерживается.",
 	"wikibase-validator-unknown-unit": "Неизвестная единица измерения: $1",
 	"wikibase-validator-not-allowed": "Недопустимое значение: $1",

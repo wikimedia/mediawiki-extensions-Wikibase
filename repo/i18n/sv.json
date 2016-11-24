@@ -485,6 +485,7 @@
 	"apihelp-query+wbsearch-example-1": "Sök efter \"abc\" på engelska, med standardvärden för typ och begränsning",
 	"apihelp-query+wbsearch-example-2": "Sök efter \"abc\" på Engelska med en gräns på 50",
 	"apihelp-query+wbsearch-example-3": "Sök efter \"alphabet\" på engelska för typen egenskap",
+	"apihelp-query+wbsubscribers-param-prop": "Egenskaper att lägga till i resultat",
 	"apihelp-query+wbsubscribers-param-limit": "Maximalt antal resultat",
 	"apihelp-query+wbsubscribers-example-1": "Hämta prenumeranter till entitet Q42",
 	"apihelp-query+wbsubscribers-example-2": "Hämta prenumeranter till entitet Q42 där url till Special:EntityUsage inkluderas",
