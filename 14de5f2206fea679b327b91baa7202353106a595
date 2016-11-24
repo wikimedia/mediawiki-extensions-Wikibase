@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "aebe47e0_7d436fb7",
+        "filename": "client/tests/phpunit/includes/Api/PageTermsTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-24T10:56:42Z",
+      "side": 1,
+      "message": "You\u0027re right, it looks like only TermPropertyLabelResolver::loadProperties tries to make use of it (it passes entityType \u003d\u003e Property::Entity_TYPE to TermIndex::getMatchingTerms) but it anyway specifies it wants properties by using getMatchingTerms $entityType param.\n\nSo the search mask thing will not have entity type neither type. Thanks for pointing this out, will make things even simpler.",
+      "parentUuid": "aebe47e0_1da6b3a7",
+      "revId": "14de5f2206fea679b327b91baa7202353106a595",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ceb9bbfa_7df22f05",
         "filename": "lib/includes/TermIndexEntry.php",
         "patchSetId": 3
