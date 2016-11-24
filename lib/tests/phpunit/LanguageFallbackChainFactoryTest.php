@@ -26,24 +26,27 @@ class LanguageFallbackChainFactoryTest extends MediaWikiTestCase {
 	 * @param \Wikibase\LanguageWithConversion[] $chain
 	 */
 	private function assertChainEquals( array $expectedItems, array $chain ) {
-		$this->assertEquals( count( $expectedItems ), count( $chain ) );
+		$this->assertSame( count( $expectedItems ), count( $chain ) );
 
 		foreach ( $expectedItems as $i => $expected ) {
 			if ( is_array( $expected ) ) {
-				$this->assertEquals( $expected[0], $chain[$i]->getLanguage()->getCode() );
-				$this->assertEquals( $expected[1], $chain[$i]->getSourceLanguage()->getCode() );
+				$this->assertSame( $expected[0], $chain[$i]->getLanguage()->getCode() );
+				$this->assertSame( $expected[1], $chain[$i]->getSourceLanguage()->getCode() );
 			} else {
-				$this->assertEquals( $expected, $chain[$i]->getLanguage()->getCode() );
+				$this->assertSame( $expected, $chain[$i]->getLanguage()->getCode() );
 				$this->assertNull( $chain[$i]->getSourceLanguage() );
 			}
 		}
 	}
 
-	private function setupDisabledVariants( $disabledVariants ) {
-		$this->setMwGlobals( array(
+	/**
+	 * @param string[] $disabledVariants
+	 */
+	private function setupDisabledVariants( array $disabledVariants ) {
+		$this->setMwGlobals( [
 			'wgDisabledVariants' => $disabledVariants,
-			'wgLangObjCacheSize' => 0
-		) );
+			'wgLangObjCacheSize' => 0,
+		] );
 	}
 
 	private function getLanguageFallbackChainFactory() {
@@ -67,198 +70,299 @@ class LanguageFallbackChainFactoryTest extends MediaWikiTestCase {
 	private function getLanguageFallbacksForCallback( $code ) {
 		switch ( $code ) {
 			case 'en':
-				return array();
+				return [];
 			case 'de':
-				return array( 'en' );
+				return [ 'en' ];
 			case 'de-formal':
-				return array( 'de', 'en' );
+				return [ 'de', 'en' ];
 			case 'zh':
-				return array( 'zh-hans', 'en' );
+				return [ 'zh-hans', 'en' ];
 			case 'zh-cn':
-				return array( 'zh-hans', 'en' );
+				return [ 'zh-hans', 'en' ];
 			case 'ii':
-				return array( 'zh-cn', 'zh-hans', 'en' );
+				return [ 'zh-cn', 'zh-hans', 'en' ];
 			case 'lzh':
-				return array( 'en' );
+				return [ 'en' ];
 			case 'kk-cn':
-				return array( 'kk-arab', 'kk-cyrl', 'en' );
+				return [ 'kk-arab', 'kk-cyrl', 'en' ];
 			case 'zh-hk':
-				return array( 'zh-hant', 'zh-hans', 'en' );
+				return [ 'zh-hant', 'zh-hans', 'en' ];
 			case 'kk':
-				return array( 'kk-cyrl', 'en' );
+				return [ 'kk-cyrl', 'en' ];
 			default:
-				// Language::getFallbacksFor returns array( 'en' ) if $code is unknown
-				return array( 'en' );
+				// Language::getFallbacksFor returns [ 'en' ] if $code is unknown
+				return [ 'en' ];
 		}
 	}
 
 	/**
 	 * @dataProvider providerNewFromLanguage
 	 */
-	public function testNewFromLanguage( $lang, $mode, $expected, $disabledVariants = array() ) {
+	public function testNewFromLanguage(
+		$languageCode,
+		$mode,
+		array $expected,
+		array $disabledVariants = []
+	) {
 		$this->setupDisabledVariants( $disabledVariants );
 		$factory = $this->getLanguageFallbackChainFactory();
-		$chain = $factory->newFromLanguage( Language::factory( $lang ), $mode )->getFallbackChain();
+		$chain = $factory->newFromLanguage( Language::factory( $languageCode ), $mode )->getFallbackChain();
 		$this->assertChainEquals( $expected, $chain );
 	}
 
 	/**
 	 * @dataProvider providerNewFromLanguage
 	 */
-	public function testNewFromLanguageCode( $lang, $mode, $expected, $disabledVariants = array() ) {
+	public function testNewFromLanguageCode(
+		$languageCode,
+		$mode,
+		array $expected,
+		array $disabledVariants = []
+	) {
 		$this->setupDisabledVariants( $disabledVariants );
 		$factory = $this->getLanguageFallbackChainFactory();
-		$chain = $factory->newFromLanguageCode( $lang, $mode )->getFallbackChain();
+		$chain = $factory->newFromLanguageCode( $languageCode, $mode )->getFallbackChain();
 		$this->assertChainEquals( $expected, $chain );
 	}
 
 	public function providerNewFromLanguage() {
-		return array(
-			array( 'en', LanguageFallbackChainFactory::FALLBACK_ALL, array( 'en' ) ),
-			array( 'en', LanguageFallbackChainFactory::FALLBACK_VARIANTS, array() ),
-			array( 'en', LanguageFallbackChainFactory::FALLBACK_OTHERS, array() ),
+		return [
+			[
+				'languageCode' => 'en',
+				'mode' => LanguageFallbackChainFactory::FALLBACK_ALL,
+				'expected' => [ 'en' ]
+			],
+			[
+				'languageCode' => 'en',
+				'mode' => LanguageFallbackChainFactory::FALLBACK_VARIANTS,
+				'expected' => []
+			],
+			[
+				'languageCode' => 'en',
+				'mode' => LanguageFallbackChainFactory::FALLBACK_OTHERS,
+				'expected' => []
+			],
 
-			array( 'zh-classical', LanguageFallbackChainFactory::FALLBACK_SELF, array( 'lzh' ) ),
+			[
+				'languageCode' => 'zh-classical',
+				'mode' => LanguageFallbackChainFactory::FALLBACK_SELF,
+				'expected' => [ 'lzh' ]
+			],
 
-			array( 'de-formal', LanguageFallbackChainFactory::FALLBACK_ALL, array( 'de-formal', 'de', 'en' ) ),
+			[
+				'languageCode' => 'de-formal',
+				'mode' => LanguageFallbackChainFactory::FALLBACK_ALL,
+				'expected' => [ 'de-formal', 'de', 'en' ]
+			],
 			// Repeated to test caching
-			array( 'de-formal', LanguageFallbackChainFactory::FALLBACK_ALL, array( 'de-formal', 'de', 'en' ) ),
-			array( 'de-formal', LanguageFallbackChainFactory::FALLBACK_VARIANTS, array() ),
-			array( 'de-formal', ~LanguageFallbackChainFactory::FALLBACK_SELF, array( 'de', 'en' ) ),
+			[
+				'languageCode' => 'de-formal',
+				'mode' => LanguageFallbackChainFactory::FALLBACK_ALL,
+				'expected' => [ 'de-formal', 'de', 'en' ]
+			],
+			[
+				'languageCode' => 'de-formal',
+				'mode' => LanguageFallbackChainFactory::FALLBACK_VARIANTS,
+				'expected' => []
+			],
+			[
+				'languageCode' => 'de-formal',
+				'mode' => ~LanguageFallbackChainFactory::FALLBACK_SELF,
+				'expected' => [ 'de', 'en' ]
+			],
 
-			array( 'zh', LanguageFallbackChainFactory::FALLBACK_ALL, array(
-				'zh',
-				array( 'zh', 'zh-hans' ),
-				array( 'zh', 'zh-hant' ),
-				array( 'zh', 'zh-cn' ),
-				array( 'zh', 'zh-tw' ),
-				array( 'zh', 'zh-hk' ),
-				array( 'zh', 'zh-sg' ),
-				array( 'zh', 'zh-mo' ),
-				array( 'zh', 'zh-my' ),
-				'en',
-			) ),
-			array( 'zh', LanguageFallbackChainFactory::FALLBACK_ALL, array(
-				'zh',
-				array( 'zh', 'zh-hans' ),
-				array( 'zh', 'zh-hant' ),
-				array( 'zh', 'zh-cn' ),
-				array( 'zh', 'zh-tw' ),
-				array( 'zh', 'zh-hk' ),
-				array( 'zh', 'zh-sg' ),
-				'en',
-			), array( 'zh-mo', 'zh-my' ) ),
-			array( 'zh', LanguageFallbackChainFactory::FALLBACK_SELF, array( 'zh' ) ),
-			array( 'zh', LanguageFallbackChainFactory::FALLBACK_VARIANTS, array(
-				array( 'zh', 'zh-hans' ),
-				array( 'zh', 'zh-hant' ),
-				array( 'zh', 'zh-cn' ),
-				array( 'zh', 'zh-tw' ),
-				array( 'zh', 'zh-hk' ),
-				array( 'zh', 'zh-sg' ),
-				array( 'zh', 'zh-mo' ),
-				array( 'zh', 'zh-my' ),
-				array( 'zh', 'zh' ),
-			) ),
-			array( 'zh', LanguageFallbackChainFactory::FALLBACK_OTHERS, array( 'zh-hans', 'en' ) ),
-			array( 'zh', LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_OTHERS,
-				array( 'zh', 'zh-hans', 'en' )
-			),
+			[
+				'languageCode' => 'zh',
+				'mode' => LanguageFallbackChainFactory::FALLBACK_ALL,
+				'expected' => [
+					'zh',
+					[ 'zh', 'zh-hans' ],
+					[ 'zh', 'zh-hant' ],
+					[ 'zh', 'zh-cn' ],
+					[ 'zh', 'zh-tw' ],
+					[ 'zh', 'zh-hk' ],
+					[ 'zh', 'zh-sg' ],
+					[ 'zh', 'zh-mo' ],
+					[ 'zh', 'zh-my' ],
+					'en',
+				]
+			],
+			[
+				'languageCode' => 'zh',
+				'mode' => LanguageFallbackChainFactory::FALLBACK_ALL,
+				'expected' => [
+					'zh',
+					[ 'zh', 'zh-hans' ],
+					[ 'zh', 'zh-hant' ],
+					[ 'zh', 'zh-cn' ],
+					[ 'zh', 'zh-tw' ],
+					[ 'zh', 'zh-hk' ],
+					[ 'zh', 'zh-sg' ],
+					'en',
+				],
+				'disabledVariants' => [ 'zh-mo', 'zh-my' ]
+			],
+			[
+				'languageCode' => 'zh',
+				'mode' => LanguageFallbackChainFactory::FALLBACK_SELF,
+				'expected' => [ 'zh' ]
+			],
+			[
+				'languageCode' => 'zh',
+				'mode' => LanguageFallbackChainFactory::FALLBACK_VARIANTS,
+				'expected' => [
+					[ 'zh', 'zh-hans' ],
+					[ 'zh', 'zh-hant' ],
+					[ 'zh', 'zh-cn' ],
+					[ 'zh', 'zh-tw' ],
+					[ 'zh', 'zh-hk' ],
+					[ 'zh', 'zh-sg' ],
+					[ 'zh', 'zh-mo' ],
+					[ 'zh', 'zh-my' ],
+					[ 'zh', 'zh' ],
+				]
+			],
+			[
+				'languageCode' => 'zh',
+				'mode' => LanguageFallbackChainFactory::FALLBACK_OTHERS,
+				'expected' => [ 'zh-hans', 'en' ]
+			],
+			[
+				'languageCode' => 'zh',
+				'mode' => LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_OTHERS,
+				'expected' => [ 'zh', 'zh-hans', 'en' ]
+			],
+			[
+				'languageCode' => 'zh-cn',
+				'mode' => LanguageFallbackChainFactory::FALLBACK_ALL,
+				'expected' => [
+					'zh-cn',
+					[ 'zh-cn', 'zh-hans' ],
+					[ 'zh-cn', 'zh-sg' ],
+					[ 'zh-cn', 'zh-my' ],
+					[ 'zh-cn', 'zh' ],
+					[ 'zh-cn', 'zh-hant' ],
+					[ 'zh-cn', 'zh-hk' ],
+					[ 'zh-cn', 'zh-mo' ],
+					[ 'zh-cn', 'zh-tw' ],
+					'en',
+				]
+			],
+			[
+				'languageCode' => 'zh-cn',
+				'mode' => LanguageFallbackChainFactory::FALLBACK_ALL,
+				'expected' => [
+					'zh-cn',
+					[ 'zh-cn', 'zh-sg' ],
+					[ 'zh-cn', 'zh' ],
+					[ 'zh-cn', 'zh-hant' ],
+					[ 'zh-cn', 'zh-hk' ],
+					[ 'zh-cn', 'zh-tw' ],
+					'zh-hans',
+					'en',
+				],
+				'disabledVariants' => [ 'zh-mo', 'zh-my', 'zh-hans' ]
+			],
+			[
+				'languageCode' => 'zh-cn',
+				'mode' => ~LanguageFallbackChainFactory::FALLBACK_VARIANTS,
+				'expected' => [ 'zh-cn', 'zh-hans', 'en' ]
+			],
+			[
+				'languageCode' => 'zh-cn',
+				'mode' => ~LanguageFallbackChainFactory::FALLBACK_OTHERS,
+				'expected' => [
+					'zh-cn',
+					[ 'zh-cn', 'zh-hans' ],
+					[ 'zh-cn', 'zh-sg' ],
+					[ 'zh-cn', 'zh-my' ],
+					[ 'zh-cn', 'zh' ],
+					[ 'zh-cn', 'zh-hant' ],
+					[ 'zh-cn', 'zh-hk' ],
+					[ 'zh-cn', 'zh-mo' ],
+					[ 'zh-cn', 'zh-tw' ],
+				],
+			],
 
-			array( 'zh-cn', LanguageFallbackChainFactory::FALLBACK_ALL, array(
-				'zh-cn',
-				array( 'zh-cn', 'zh-hans' ),
-				array( 'zh-cn', 'zh-sg' ),
-				array( 'zh-cn', 'zh-my' ),
-				array( 'zh-cn', 'zh' ),
-				array( 'zh-cn', 'zh-hant' ),
-				array( 'zh-cn', 'zh-hk' ),
-				array( 'zh-cn', 'zh-mo' ),
-				array( 'zh-cn', 'zh-tw' ),
-				'en',
-			) ),
-			array( 'zh-cn', LanguageFallbackChainFactory::FALLBACK_ALL, array(
-				'zh-cn',
-				array( 'zh-cn', 'zh-sg' ),
-				array( 'zh-cn', 'zh' ),
-				array( 'zh-cn', 'zh-hant' ),
-				array( 'zh-cn', 'zh-hk' ),
-				array( 'zh-cn', 'zh-tw' ),
-				'zh-hans',
-				'en',
-			), array( 'zh-mo', 'zh-my', 'zh-hans' ) ),
-			array( 'zh-cn', ~LanguageFallbackChainFactory::FALLBACK_VARIANTS,
-				array( 'zh-cn', 'zh-hans', 'en' )
-			),
-			array( 'zh-cn', ~LanguageFallbackChainFactory::FALLBACK_OTHERS, array(
-				'zh-cn',
-				array( 'zh-cn', 'zh-hans' ),
-				array( 'zh-cn', 'zh-sg' ),
-				array( 'zh-cn', 'zh-my' ),
-				array( 'zh-cn', 'zh' ),
-				array( 'zh-cn', 'zh-hant' ),
-				array( 'zh-cn', 'zh-hk' ),
-				array( 'zh-cn', 'zh-mo' ),
-				array( 'zh-cn', 'zh-tw' ),
-			) ),
+			[
+				'languageCode' => 'ii',
+				'mode' => LanguageFallbackChainFactory::FALLBACK_ALL,
+				'expected' => [
+					'ii',
+					'zh-cn',
+					[ 'zh-cn', 'zh-hans' ],
+					[ 'zh-cn', 'zh-sg' ],
+					[ 'zh-cn', 'zh-my' ],
+					[ 'zh-cn', 'zh' ],
+					[ 'zh-cn', 'zh-hant' ],
+					[ 'zh-cn', 'zh-hk' ],
+					[ 'zh-cn', 'zh-mo' ],
+					[ 'zh-cn', 'zh-tw' ],
+					'en',
+				]
+			],
+			[
+				'languageCode' => 'ii',
+				'mode' => ~LanguageFallbackChainFactory::FALLBACK_VARIANTS,
+				'expected' => [ 'ii', 'zh-cn', 'zh-hans', 'en' ]
+			],
+			[
+				'languageCode' => 'ii',
+				'mode' => LanguageFallbackChainFactory::FALLBACK_VARIANTS,
+				'expected' => []
+			],
+			[
+				'languageCode' => 'ii',
+				'mode' => LanguageFallbackChainFactory::FALLBACK_VARIANTS | LanguageFallbackChainFactory::FALLBACK_OTHERS,
+				'expected' => [
+					'zh-cn',
+					[ 'zh-cn', 'zh-hans' ],
+					[ 'zh-cn', 'zh-sg' ],
+					[ 'zh-cn', 'zh-my' ],
+					[ 'zh-cn', 'zh' ],
+					[ 'zh-cn', 'zh-hant' ],
+					[ 'zh-cn', 'zh-hk' ],
+					[ 'zh-cn', 'zh-mo' ],
+					[ 'zh-cn', 'zh-tw' ],
+					'en',
+				]
+			],
+			[
+				'languageCode' => 'ii',
+				'mode' => LanguageFallbackChainFactory::FALLBACK_OTHERS,
+				'expected' => [ 'zh-cn', 'zh-hans', 'en' ]
+			],
 
-			array( 'ii', LanguageFallbackChainFactory::FALLBACK_ALL, array(
-				'ii',
-				'zh-cn',
-				array( 'zh-cn', 'zh-hans' ),
-				array( 'zh-cn', 'zh-sg' ),
-				array( 'zh-cn', 'zh-my' ),
-				array( 'zh-cn', 'zh' ),
-				array( 'zh-cn', 'zh-hant' ),
-				array( 'zh-cn', 'zh-hk' ),
-				array( 'zh-cn', 'zh-mo' ),
-				array( 'zh-cn', 'zh-tw' ),
-				'en',
-			) ),
-			array( 'ii', ~LanguageFallbackChainFactory::FALLBACK_VARIANTS,
-				array( 'ii', 'zh-cn', 'zh-hans', 'en' )
-			),
-			array( 'ii', LanguageFallbackChainFactory::FALLBACK_VARIANTS, array() ),
-			array( 'ii', LanguageFallbackChainFactory::FALLBACK_VARIANTS | LanguageFallbackChainFactory::FALLBACK_OTHERS, array(
-				'zh-cn',
-				array( 'zh-cn', 'zh-hans' ),
-				array( 'zh-cn', 'zh-sg' ),
-				array( 'zh-cn', 'zh-my' ),
-				array( 'zh-cn', 'zh' ),
-				array( 'zh-cn', 'zh-hant' ),
-				array( 'zh-cn', 'zh-hk' ),
-				array( 'zh-cn', 'zh-mo' ),
-				array( 'zh-cn', 'zh-tw' ),
-				'en',
-			) ),
-			array( 'ii', LanguageFallbackChainFactory::FALLBACK_OTHERS, array( 'zh-cn', 'zh-hans', 'en' ) ),
-
-			array( 'kk', LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS, array(
-				'kk',
-				array( 'kk', 'kk-cyrl' ),
-				array( 'kk', 'kk-latn' ),
-				array( 'kk', 'kk-arab' ),
-				array( 'kk', 'kk-kz' ),
-				array( 'kk', 'kk-tr' ),
-				array( 'kk', 'kk-cn' ),
-			) ),
-		);
+			[
+				'languageCode' => 'kk',
+				'mode' => LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS,
+				'expected' => [
+					'kk',
+					[ 'kk', 'kk-cyrl' ],
+					[ 'kk', 'kk-latn' ],
+					[ 'kk', 'kk-arab' ],
+					[ 'kk', 'kk-kz' ],
+					[ 'kk', 'kk-tr' ],
+					[ 'kk', 'kk-cn' ],
+				]
+			],
+		];
 	}
 
 	/**
 	 * @dataProvider provideNewFromLanguageCodeException
 	 * @expectedException MWException
 	 */
-	public function testNewFromLanguageCodeException( $langCode ) {
+	public function testNewFromLanguageCodeException( $languageCode ) {
 		$factory = $this->getLanguageFallbackChainFactory();
-		$factory->newFromLanguageCode( $langCode );
+		$factory->newFromLanguageCode( $languageCode );
 	}
 
 	public function provideNewFromLanguageCodeException() {
-		return array(
-			array( ':' ),
-			array( '/' ),
-		);
+		return [
+			[ ':' ],
+			[ '/' ],
+		];
 	}
 
 	public function testNewFromContext() {
@@ -276,7 +380,12 @@ class LanguageFallbackChainFactoryTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider providerNewFromLanguage
 	 */
-	public function testNewFromUserAndLanguageCode( $lang, $mode, $expected, $disabledVariants = array() ) {
+	public function testNewFromUserAndLanguageCode(
+		$languageCode,
+		$mode,
+		array $expected,
+		array $disabledVariants = []
+	) {
 		if ( $mode !== LanguageFallbackChainFactory::FALLBACK_ALL ) {
 			$this->assertTrue( true );
 			return;
@@ -284,154 +393,112 @@ class LanguageFallbackChainFactoryTest extends MediaWikiTestCase {
 		$this->setupDisabledVariants( $disabledVariants );
 		$factory = $this->getLanguageFallbackChainFactory();
 		$anon = new User();
-		$chain = $factory->newFromUserAndLanguageCode( $anon, $lang )->getFallbackChain();
+		$chain = $factory->newFromUserAndLanguageCode( $anon, $languageCode )->getFallbackChain();
 		$this->assertChainEquals( $expected, $chain );
 	}
 
 	/**
 	 * @dataProvider provideTestFromBabel
 	 */
-	public function testBuildFromBabel( $babel, $expected ) {
+	public function testBuildFromBabel( array $babel, array $expected ) {
 		$factory = $this->getLanguageFallbackChainFactory();
 		$chain = $factory->buildFromBabel( $babel );
 		$this->assertChainEquals( $expected, $chain );
 	}
 
 	public function provideTestFromBabel() {
-		return array(
-			array(
-				array(
-					'N' => array( 'de-formal' ),
-				),
-				array(
-					'de-formal',
-					'de',
-					'en',
-				),
-			),
-			array(
-				array(
-					'N' => array( '/' ),
-				),
-				array(
-				),
-			),
-			array(
-				array(
-					'N' => array( ':', 'en' ),
-				),
-				array(
-					'en',
-				),
-			),
-			array(
-				array(
-					'N' => array( 'unknown' ),
-				),
-				array(
-					'unknown',
-					'en',
-				),
-			),
-			array(
-				array(
-					'N' => array( 'zh-classical' ),
-				),
-				array(
-					'lzh',
-					'en',
-				),
-			),
-			array(
-				array(
-					'N' => array( 'en', 'de-formal' ),
-				),
-				array(
-					'en',
-					'de-formal',
-					'de',
-				),
-			),
-			array(
-				array(
-					'N' => array( 'de-formal' ),
-					'3' => array( 'en' ),
-				),
-				array(
-					'de-formal',
-					'en',
-					'de',
-				),
-			),
-			array(
-				array(
-					'N' => array( 'zh-cn', 'de-formal' ),
-					'3' => array( 'en', 'de' ),
-				),
-				array(
+		return [
+			[
+				'babel' => [ 'N' => [ 'de-formal' ] ],
+				'expected' => [ 'de-formal', 'de', 'en' ]
+			],
+			[
+				'babel' => [ 'N' => [ '/' ] ],
+				'expected' => []
+			],
+			[
+				'babel' => [ 'N' => [ ':', 'en' ] ],
+				'expected' => [ 'en' ]
+			],
+			[
+				'babel' => [ 'N' => [ 'unknown' ] ],
+				'expected' => [ 'unknown', 'en' ]
+			],
+			[
+				'babel' => [ 'N' => [ 'zh-classical' ] ],
+				'expected' => [ 'lzh', 'en' ]
+			],
+			[
+				'babel' => [ 'N' => [ 'en', 'de-formal' ] ],
+				'expected' => [ 'en', 'de-formal', 'de' ]
+			],
+			[
+				'babel' => [ 'N' => [ 'de-formal' ], '3' => [ 'en' ] ],
+				'expected' => [ 'de-formal', 'en', 'de' ]
+			],
+			[
+				'babel' => [ 'N' => [ 'zh-cn', 'de-formal' ], '3' => [ 'en', 'de' ] ],
+				'expected' => [
 					'zh-cn',
 					'de-formal',
-					array( 'zh-cn', 'zh-hans' ),
-					array( 'zh-cn', 'zh-sg' ),
-					array( 'zh-cn', 'zh-my' ),
-					array( 'zh-cn', 'zh' ),
-					array( 'zh-cn', 'zh-hant' ),
-					array( 'zh-cn', 'zh-hk' ),
-					array( 'zh-cn', 'zh-mo' ),
-					array( 'zh-cn', 'zh-tw' ),
+					[ 'zh-cn', 'zh-hans' ],
+					[ 'zh-cn', 'zh-sg' ],
+					[ 'zh-cn', 'zh-my' ],
+					[ 'zh-cn', 'zh' ],
+					[ 'zh-cn', 'zh-hant' ],
+					[ 'zh-cn', 'zh-hk' ],
+					[ 'zh-cn', 'zh-mo' ],
+					[ 'zh-cn', 'zh-tw' ],
 					'en',
 					'de',
-				),
-			),
-			array(
-				array(
-					'N' => array( 'zh-cn', 'zh-hk' ),
-					'3' => array( 'en', 'de-formal' ),
-				),
-				array(
+				]
+			],
+			[
+				'babel' => [ 'N' => [ 'zh-cn', 'zh-hk' ], '3' => [ 'en', 'de-formal' ] ],
+				'expected' => [
 					'zh-cn',
 					'zh-hk',
-					array( 'zh-cn', 'zh-hans' ),
-					array( 'zh-cn', 'zh-sg' ),
-					array( 'zh-cn', 'zh-my' ),
-					array( 'zh-cn', 'zh' ),
-					array( 'zh-cn', 'zh-hant' ),
-					array( 'zh-cn', 'zh-mo' ),
-					array( 'zh-cn', 'zh-tw' ),
+					[ 'zh-cn', 'zh-hans' ],
+					[ 'zh-cn', 'zh-sg' ],
+					[ 'zh-cn', 'zh-my' ],
+					[ 'zh-cn', 'zh' ],
+					[ 'zh-cn', 'zh-hant' ],
+					[ 'zh-cn', 'zh-mo' ],
+					[ 'zh-cn', 'zh-tw' ],
 					'en',
 					'de-formal',
 					'de',
-				),
-			),
-			array(
-				array(
-					'N' => array( 'en', 'de-formal', 'zh', 'zh-cn' ),
-					'4' => array( 'kk-cn' ),
-					'2' => array( 'zh-hk', 'kk' ),
-				),
-				array(
+				]
+			],
+			[
+				'babel' => [
+					'N' => [ 'en', 'de-formal', 'zh', 'zh-cn' ],
+					'4' => [ 'kk-cn' ],
+					'2' => [ 'zh-hk', 'kk' ],
+				],
+				'expected' => [
 					'en',
 					'de-formal',
 					'zh',
 					'zh-cn',
-					array( 'zh', 'zh-hans' ),
-					array( 'zh', 'zh-hant' ),
-					array( 'zh', 'zh-tw' ),
-					array( 'zh', 'zh-hk' ),
-					array( 'zh', 'zh-sg' ),
-					array( 'zh', 'zh-mo' ),
-					array( 'zh', 'zh-my' ),
+					[ 'zh', 'zh-hans' ],
+					[ 'zh', 'zh-hant' ],
+					[ 'zh', 'zh-tw' ],
+					[ 'zh', 'zh-hk' ],
+					[ 'zh', 'zh-sg' ],
+					[ 'zh', 'zh-mo' ],
+					[ 'zh', 'zh-my' ],
 					'kk-cn',
-					array( 'kk-cn', 'kk' ),
-					array( 'kk-cn', 'kk-cyrl' ),
-					array( 'kk-cn', 'kk-latn' ),
-					array( 'kk-cn', 'kk-arab' ),
-					array( 'kk-cn', 'kk-kz' ),
-					array( 'kk-cn', 'kk-tr' ),
+					[ 'kk-cn', 'kk' ],
+					[ 'kk-cn', 'kk-cyrl' ],
+					[ 'kk-cn', 'kk-latn' ],
+					[ 'kk-cn', 'kk-arab' ],
+					[ 'kk-cn', 'kk-kz' ],
+					[ 'kk-cn', 'kk-tr' ],
 					'de',
-				),
-			),
-		);
+				]
+			],
+		];
 	}
 
 }
