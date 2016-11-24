@@ -70,6 +70,24 @@
       "revId": "b8671277de52b50f66ff68523f589a13baa8ebed",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_20f5d04c",
+        "filename": "docs/extending-entities.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-24T16:41:45Z",
+      "side": 1,
+      "message": "A new provider interface, for the thing you are trying to add. A NewThingyProvider.",
+      "parentUuid": "aebe47e0_606e282c",
+      "revId": "b8671277de52b50f66ff68523f589a13baa8ebed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
