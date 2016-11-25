@@ -23,7 +23,7 @@
 	"wikibase-error-autocomplete-connection": "Kunde inte fråga webbplatsens API. Försök igen senare.",
 	"wikibase-error-autocomplete-response": "Servern svarade: $1",
 	"wikibase-error-ui-no-external-page": "En sida \"$2\" kunde inte hittas på \"$1\".",
-	"wikibase-error-ui-edit-conflict": "Det finns en redigeringskonflikt. Vänligen spara dina ändringar lokalt, ladda om och spara igen.",
+	"wikibase-error-ui-edit-conflict": "Samma värde redigerades under tiden och orsakade en redigeringskonflikt. Vänligen ladda om sidan.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (translittererad)",
 	"wikibase-quantitydetails-amount": "Mängd",
 	"wikibase-quantitydetails-upperbound": "Övre gräns",

@@ -134,7 +134,7 @@
 	"wikibase-newitem-fieldset": "Стварыць новы аб’ект",
 	"wikibase-newitem-site": "Сайт першай злучанай старонкі",
 	"wikibase-newitem-page": "Назва першай злучанай старонкі",
-	"wikibase-newitem-no-external-page": "Пазначаная старонка на адпаведным сайце ня знойдзеная.",
+	"wikibase-newitem-no-external-page": "Старонка «$2» ня знойдзеная на сайце «$1».",
 	"wikibase-newitem-not-recognized-siteid": "Пададзены ідэнтыфікатар сайта не распазнаны.",
 	"wikibase-newentity-language": "Мова:",
 	"wikibase-newentity-label": "Метка:",
