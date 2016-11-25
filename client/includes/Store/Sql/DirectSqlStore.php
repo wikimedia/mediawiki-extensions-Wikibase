@@ -19,6 +19,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\CachingSiteLinkLookup;
 use Wikibase\Lib\Store\EntityChangeLookup;
@@ -59,6 +60,11 @@ class DirectSqlStore implements ClientStore {
 	 * @var EntityIdParser
 	 */
 	private $entityIdParser;
+
+	/**
+	 * @var EntityIdComposer
+	 */
+	private $entityIdComposer;
 
 	/**
 	 * @var string|bool The symbolic database name of the repo wiki or false for the local wiki.
@@ -159,6 +165,7 @@ class DirectSqlStore implements ClientStore {
 	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityIdParser $entityIdParser
+	 * @param EntityIdComposer $entityIdComposer
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param string|bool $repoWiki The symbolic database name of the repo wiki or false for the
 	 * local wiki.
@@ -168,6 +175,7 @@ class DirectSqlStore implements ClientStore {
 		EntityChangeFactory $entityChangeFactory,
 		EntityContentDataCodec $contentCodec,
 		EntityIdParser $entityIdParser,
+		EntityIdComposer $entityIdComposer,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		$repoWiki = false,
 		$languageCode
@@ -175,6 +183,7 @@ class DirectSqlStore implements ClientStore {
 		$this->contentCodec = $contentCodec;
 		$this->entityChangeFactory = $entityChangeFactory;
 		$this->entityIdParser = $entityIdParser;
+		$this->entityIdComposer = $entityIdComposer;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->repoWiki = $repoWiki;
 		$this->languageCode = $languageCode;
@@ -352,7 +361,7 @@ class DirectSqlStore implements ClientStore {
 		if ( $this->termIndex === null ) {
 			// TODO: Get StringNormalizer from WikibaseClient?
 			// Can't really pass this via the constructor...
-			$this->termIndex = new TermSqlIndex( new StringNormalizer(), $this->repoWiki );
+			$this->termIndex = new TermSqlIndex( new StringNormalizer(), $this->entityIdComposer, $this->repoWiki );
 		}
 
 		return $this->termIndex;

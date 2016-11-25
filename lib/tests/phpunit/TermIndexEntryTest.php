@@ -4,6 +4,8 @@ namespace Wikibase\Lib\Tests;
 
 use MWException;
 use PHPUnit_Framework_TestCase;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\LegacyIdInterpreter;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\TermIndexEntry;
@@ -25,7 +27,7 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 			[
 				[
 					'entityType' => 'item',
-					'entityId' => 23,
+					'entityId' => new ItemId( 'Q23' ),
 					'termType' => TermIndexEntry::TYPE_LABEL,
 					'termLanguage' => 'en',
 					'termText' => 'foo',
@@ -41,7 +43,7 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 			[
 				[
 					'entityType' => 'item',
-					'entityId' => 23,
+					'entityId' => new ItemId( 'Q23' ),
 				]
 			],
 		];
@@ -53,14 +55,8 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 	public function testConstructor( $fields ) {
 		$term = new TermIndexEntry( $fields );
 
-		$entityId = null;
-		if ( isset( $fields['entityType'] ) && isset( $fields['entityId'] ) ) {
-			// FIXME: This must be removed once we got rid of all legacy numeric ids.
-			$entityId = LegacyIdInterpreter::newIdFromTypeAndNumber( $fields['entityType'], $fields['entityId'] );
-		}
-
 		$this->assertEquals( isset( $fields['entityType'] ) ? $fields['entityType'] : null, $term->getEntityType() );
-		$this->assertEquals( $entityId, $term->getEntityId() );
+		$this->assertEquals( isset( $fields['entityId'] ) ? $fields['entityId'] : null, $term->getEntityId() );
 		$this->assertEquals( isset( $fields['termType'] ) ? $fields['termType'] : null, $term->getType() );
 		$this->assertEquals( isset( $fields['termLanguage'] ) ? $fields['termLanguage'] : null, $term->getLanguage() );
 		$this->assertEquals( isset( $fields['termText'] ) ? $fields['termText'] : null, $term->getText() );
@@ -69,6 +65,11 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 	public function testGivenInvalidField_constructorThrowsException() {
 		$this->setExpectedException( MWException::class );
 		new TermIndexEntry( [ 'fooField' => 'bar' ] );
+	}
+
+	public function testGivenEntityTypeMismatch_constructorThrowsException() {
+		$this->setExpectedException( MWException::class );
+		new TermIndexEntry( [ 'entityId' => new ItemId( 'Q222' ), 'entityType' => 'property' ] );
 	}
 
 	public function testClone() {
@@ -86,7 +87,7 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 	private function newInstance( array $extraFields = [] ) {
 		return new TermIndexEntry( $extraFields + [
 				'entityType' => 'item',
-				'entityId' => 23,
+				'entityId' => new ItemId( 'Q23' ),
 				'termType' => TermIndexEntry::TYPE_LABEL,
 				'termLanguage' => 'en',
 				'termText' => 'foo',
@@ -114,12 +115,7 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 			],
 			'other entity id' => [
 				$term,
-				$this->newInstance( [ 'entityType' => 'property', 'entityId' => 11 ] ),
-				false
-			],
-			'other entity type' => [
-				$term,
-				$this->newInstance( [ 'entityType' => 'property' ] ),
+				$this->newInstance( [ 'entityType' => 'property', 'entityId' => new PropertyId( 'P11' ) ] ),
 				false
 			],
 			'other language' => [
