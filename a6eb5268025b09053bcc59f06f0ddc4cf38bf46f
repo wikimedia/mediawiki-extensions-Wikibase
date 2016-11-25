@@ -16,6 +16,24 @@
       "revId": "a6eb5268025b09053bcc59f06f0ddc4cf38bf46f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_71ca784c",
+        "filename": "lib/includes/Store/TermIndexSearchCriteria.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-25T08:20:33Z",
+      "side": 1,
+      "message": "oops, forgot to remove those. Now done",
+      "parentUuid": "aebe47e0_8bc6fd4c",
+      "revId": "a6eb5268025b09053bcc59f06f0ddc4cf38bf46f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
