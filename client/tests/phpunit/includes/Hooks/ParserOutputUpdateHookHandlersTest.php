@@ -11,6 +11,7 @@ use Site;
 use SiteStore;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
+use Wikibase\Client\Hooks\InterwikiSortingHookHandlers;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
@@ -178,16 +179,22 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 			$settings->getSetting( 'languageLinkSiteGroup' )
 		);
 
+		return new ParserOutputUpdateHookHandlers(
+			$namespaceChecker,
+			$langLinkHandler,
+			$parserOutputDataUpdater,
+			$this->getInterwikiSortingHookHandlers( $settings )
+		);
+	}
+
+	private function getInterwikiSortingHookHandlers( SettingsArray $settings ) {
 		$interwikiSorter = new InterwikiSorter(
 			$settings->getSetting( 'sort' ),
 			$settings->getSetting( 'interwikiSortOrders' ),
 			$settings->getSetting( 'sortPrepend' )
 		);
 
-		return new ParserOutputUpdateHookHandlers(
-			$namespaceChecker,
-			$langLinkHandler,
-			$parserOutputDataUpdater,
+		return new InterwikiSortingHookHandlers(
 			$interwikiSorter,
 			$settings->getSetting( 'alwaysSort' )
 		);
