@@ -448,7 +448,7 @@
 	"apihelp-wbgetclaims-param-rank": "Optional filter to return only the claims that have the specified rank",
 	"apihelp-wbgetclaims-param-props": "Some parts of the claim are returned optionally. This parameter controls which ones are returned.",
 	"apihelp-wbgetclaims-example-1": "Get claims for item with ID Q42",
-	"apihelp-wbgetclaims-example-2": "Get claims for item with ID Q42 and property with ID P2",
+	"apihelp-wbgetclaims-example-2": "Get claims for item with ID Q42 and property with ID P31",
 	"apihelp-wbgetclaims-example-3": "Get claims for item with ID Q42 that are ranked as normal",
 	"apihelp-wbgetclaims-example-4": "Get claim with GUID of Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F",
 	"apihelp-wbgetentities-description": "Gets the data for multiple Wikibase entities.",
