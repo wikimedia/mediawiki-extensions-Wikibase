@@ -3,7 +3,8 @@
 		"authors": [
 			"Дзяніс Тутэйшы",
 			"Чаховіч Уладзіслаў",
-			"Macofe"
+			"Macofe",
+			"Mechanizatar"
 		]
 	},
 	"wikibase-desc": "Сховішча структураваных дадзеных",
@@ -57,7 +58,7 @@
 	"wikibase-statementsection-statements": "Факты",
 	"wikibase-sitelinks": "Спіс спасылак на сайты",
 	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|запіс|запісы|запісаў}}",
-	"wikibase-sitelinks-empty": "Ніводная старонка праекта яшчэ не спасылаецца сюды.",
+	"wikibase-sitelinks-empty": "Няма старонак, якія б спасылаліся на гэты элемент.",
 	"wikibase-sitelinks-special": "Іншыя сайты",
 	"wikibase-badgeselector-badge-placeholder-title": "Пстрыкніце, каб прызначыць значок.",
 	"wikibase-remove": "выдаліць",
@@ -77,6 +78,7 @@
 	"wb-special-newitem-new-item-notification": "Новы элемент «$1» створаны і перанакіраваны на яго старонку. Вярнуцца да «$2».",
 	"wikibase-aliases-input-help-message": "Калі гэты набор дадзеных вядомы пад больш чым пад адной назвай, вы можаце ўвесці тут псеўданімы, альтэрнатыўныя назвы і сінонімы, каб гэты элемент можна было знайсці па яго альтэрнатыўных імёнах.",
 	"wikibase-propertypage-datatype": "Тып дадзеных",
+	"wikibase-propertypage-bad-datatype": "Невядомы тып дадзеных: $1",
 	"wikibase-statementview-rank-preferred": "Пераважны ранг",
 	"wikibase-statementview-rank-normal": "Звычайны ранг",
 	"wikibase-statementview-rank-deprecated": "Нерэкамендаваны ранг",
@@ -116,7 +118,7 @@
 	"wikibase-newitem-fieldset": "Стварыць новы элемент",
 	"wikibase-newitem-site": "Праект першай звязанай старонкі",
 	"wikibase-newitem-page": "Назва першай звязанай старонкі",
-	"wikibase-newitem-no-external-page": "Не атрымалася знайсці ўказаную старонку на адпаведным праекце.",
+	"wikibase-newitem-no-external-page": "Старонка «$2» не знойдзена на сайце «$1».",
 	"wikibase-newentity-language": "Мова:",
 	"wikibase-newentity-label": "Назва:",
 	"wikibase-newentity-description": "Апісанне:",

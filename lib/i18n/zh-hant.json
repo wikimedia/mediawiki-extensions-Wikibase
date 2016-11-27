@@ -73,7 +73,7 @@
 	"wikibase-validator-bad-value": "資料值錯誤：$1",
 	"wikibase-validator-bad-value-type": "錯誤型態值 $1，預期為 $2",
 	"wikibase-validator-bad-url": "URL 格式不正確：$1",
-	"wikibase-validator-bad-url-scheme": "不支援的 URL 協定：$1",
+	"wikibase-validator-bad-url-scheme": "URL 協定 \"$1\" 不受支援。",
 	"wikibase-validator-unknown-unit": "不明的單位：$1",
 	"wikibase-validator-not-allowed": "不合法的數值：$1",
 	"wikibase-validator-no-validators": "禁止",

@@ -18,7 +18,7 @@
 	"wikibase-error-autocomplete-connection": "Не атрымалася запытаць Wikipedia API. Калі ласка, паспрабуйце пазней.",
 	"wikibase-error-autocomplete-response": "Адказ сервера: $1",
 	"wikibase-error-ui-no-external-page": "Старонка «$2» не знойдзена на сайце «$1».",
-	"wikibase-error-ui-edit-conflict": "Адбыўся канфлікт правак. Калі ласка, абнавіце старонку і захавайце зноў.",
+	"wikibase-error-ui-edit-conflict": "Адначасова з Вамі было змененае тое ж самае значэнне, у выніку чаго адбыўся канфлікт правак. Калі ласка, перазагрузіце старонку.",
 	"wikibase-sitelinks-wikipedia": "Вікіпедыя",
 	"wikibase-sitelinks-sitename-columnheading": "Мова",
 	"wikibase-sitelinks-link-columnheading": "Злучаны артыкул",

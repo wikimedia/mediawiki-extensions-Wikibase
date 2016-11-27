@@ -38,6 +38,7 @@
 	"wikibase-globedetails-latitude": "Γεωγραφικό πλάτος",
 	"wikibase-globedetails-precision": "Ακρίβεια",
 	"wikibase-parse-error": "Ακατάλληλη τιμή.",
+	"wikibase-parse-error-time": "Ακατάλληλη τιμή χρόνου.",
 	"wikibase-sitelinks-wikipedia": "Βικιπαίδεια",
 	"wikibase-sitelinks-sitename-columnheading": "Γλώσσα",
 	"wikibase-sitelinks-link-columnheading": "Σελίδες που συνδέονται",

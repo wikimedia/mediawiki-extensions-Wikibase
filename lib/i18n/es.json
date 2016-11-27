@@ -15,7 +15,8 @@
 			"Littledogboy",
 			"YoViajo",
 			"Dgstranz",
-			"Igv"
+			"Igv",
+			"Matiia"
 		]
 	},
 	"wikibase-lib-desc": "Contiene una funcionalidad común para las extensiones Wikibase y cliente de Wikibase.",
@@ -28,8 +29,8 @@
 	"wikibase-error-remove-generic": "No se pudo eliminar debido a un error.",
 	"wikibase-error-save-connection": "No se pudo guardar debido a un error de conexión. Comprueba tu conexión a Internet.",
 	"wikibase-error-remove-connection": "No se pudo eliminar debido a un error de conexión. Comprueba tu conexión a Internet.",
-	"wikibase-error-save-timeout": "Estamos experimentando dificultades técnicas. No se pudo completar tu guardado.",
-	"wikibase-error-remove-timeout": "Estamos experimentando dificultades técnicas. No se pudo completar tu eliminación.",
+	"wikibase-error-save-timeout": "Estamos experimentando dificultades técnicas. Inténtalo de nuevo.",
+	"wikibase-error-remove-timeout": "Estamos experimentando dificultades técnicas. Inténtalo de nuevo.",
 	"wikibase-error-autocomplete-connection": "No se pudo consultar la API del sitio. Inténtalo de nuevo más tarde.",
 	"wikibase-error-autocomplete-response": "El servidor respondió: $1",
 	"wikibase-error-ui-no-external-page": "No se encontró la página «$2» en «$1».",
@@ -77,7 +78,7 @@
 	"wikibase-validator-bad-value": "Valor corrupto: $1",
 	"wikibase-validator-bad-value-type": "Tipo de valor incorrecto $1, se esperaba $2",
 	"wikibase-validator-bad-data-type": "Tipo de dato erróneo: $1",
-	"wikibase-validator-bad-url": "Los URL no pueden contener determinados caracteres tales como espacios y corchetes: $1",
+	"wikibase-validator-bad-url": "Los URL no pueden contener determinados caracteres tales como espacios o corchetes: $1",
 	"wikibase-validator-url-scheme-missing": "A este URL le falta un esquema como «https://»: $1",
 	"wikibase-validator-bad-url-scheme": "No se admite el esquema de URL «$1».",
 	"wikibase-validator-unknown-unit": "Unidad desconocida: $1",
