@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aebe47e0_e9e57707",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-11-28T16:46:41Z",
+      "side": 1,
+      "message": "What is the singular of criteria? ;-)",
+      "range": {
+        "startLine": 669,
+        "startChar": 25,
+        "endLine": 669,
+        "endChar": 30
+      },
+      "revId": "56713a1dc007e7f32d3dca5757a4abba5a16d2ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_897b9beb",
+        "filename": "lib/includes/TermIndexEntry.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-11-28T16:46:41Z",
+      "side": 1,
+      "message": "This change here changes the sort order. Before the first search criteria was the entity type (item, property). Now it\u0027s the ID, and P comes before Q.\n\nNot relevant because this is not used for sorting, as far as I can tell.",
+      "revId": "56713a1dc007e7f32d3dca5757a4abba5a16d2ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_89e15b9a",
+        "filename": "lib/tests/phpunit/Store/TermIndexTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-11-28T16:46:41Z",
+      "side": 1,
+      "message": "A better scheme for this is to use array keys:\n\n\u0027options\u0027 \u003d\u003e [ … ], …",
+      "revId": "56713a1dc007e7f32d3dca5757a4abba5a16d2ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_69de07e0",
+        "filename": "lib/tests/phpunit/TermIndexEntryTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-11-28T16:46:41Z",
+      "side": 1,
+      "message": "Not critical here, but please prefer assertSame whenever possible.",
+      "range": {
+        "startLine": 37,
+        "startChar": 9,
+        "endLine": 37,
+        "endChar": 21
+      },
+      "revId": "56713a1dc007e7f32d3dca5757a4abba5a16d2ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
