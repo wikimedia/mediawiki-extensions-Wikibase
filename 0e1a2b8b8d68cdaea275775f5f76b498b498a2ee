@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "aebe47e0_4cc3510b",
+        "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-11-28T18:19:25Z",
+      "side": 1,
+      "message": "WHERE EXISTS is only for subqueries",
+      "parentUuid": "aebe47e0_acf2eddd",
+      "range": {
+        "startLine": 136,
+        "startChar": 37,
+        "endLine": 136,
+        "endChar": 49
+      },
+      "revId": "0e1a2b8b8d68cdaea275775f5f76b498b498a2ee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aebe47e0_ccf521c9",
         "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2016-11-28T17:42:27Z",
       "side": 1,
       "message": "Spaces missing.",
+      "range": {
+        "startLine": 150,
+        "startChar": 51,
+        "endLine": 150,
+        "endChar": 52
+      },
+      "revId": "0e1a2b8b8d68cdaea275775f5f76b498b498a2ee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_cc8081fc",
+        "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-11-28T18:19:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aebe47e0_ccf521c9",
       "range": {
         "startLine": 150,
         "startChar": 51,
