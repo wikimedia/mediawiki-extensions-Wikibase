@@ -31,7 +31,7 @@ class EntityTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 				'js-deserializer-factory-function' => 'foo-js-deserializer',
 				'entity-id-pattern' => 'foo-id-pattern',
 				'entity-id-builder' => 'new-foo-id',
-				'entity-id-composer' => 'new-composed-foo-id',
+				'entity-id-composer-callback' => 'new-composed-foo-id',
 			),
 			'bar' => array(
 				'serializer-factory-callback' => 'bar-serializer',
