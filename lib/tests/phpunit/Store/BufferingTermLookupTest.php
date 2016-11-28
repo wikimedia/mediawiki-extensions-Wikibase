@@ -65,21 +65,18 @@ class BufferingTermLookupTest extends EntityTermLookupTest {
 				'termType' => 'label',
 				'termLanguage' => 'en',
 				'termText' => 'Vienna',
-				'entityType' => 'item',
 				'entityId' => new ItemId( 'Q123' ),
 			) ),
 			'de' => new TermIndexEntry( array(
 				'termType' => 'label',
 				'termLanguage' => 'de',
 				'termText' => 'Wien',
-				'entityType' => 'item',
 				'entityId' => new ItemId( 'Q123' ),
 			) ),
 			'fr' => new TermIndexEntry( array(
 				'termType' => 'label',
 				'termLanguage' => 'fr',
 				'termText' => 'Vienne',
-				'entityType' => 'item',
 				'entityId' => new ItemId( 'Q123' ),
 			) ),
 		);

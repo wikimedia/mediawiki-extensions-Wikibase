@@ -63,28 +63,24 @@ class TermPropertyLabelResolverTest extends \MediaWikiTestCase {
 				'termType' => 'label',
 				'termLanguage' => 'de',
 				'entityId' => new PropertyId( 'P1' ),
-				'entityType' => Property::ENTITY_TYPE,
 				'termText' => 'Eins',
 			) ),
 			new TermIndexEntry( array(
 				'termType' => 'label',
 				'termLanguage' => 'de',
 				'entityId' => new PropertyId( 'P2' ),
-				'entityType' => Property::ENTITY_TYPE,
 				'termText' => 'Zwei',
 			) ),
 			new TermIndexEntry( array(
 				'termType' => 'label',
 				'termLanguage' => 'de',
 				'entityId' => new PropertyId( 'P3' ),
-				'entityType' => Property::ENTITY_TYPE,
 				'termText' => 'Drei',
 			) ),
 			new TermIndexEntry( array(
 				'termType' => 'label',
 				'termLanguage' => 'de',
 				'entityId' => new PropertyId( 'P4' ),
-				'entityType' => Property::ENTITY_TYPE,
 				'termText' => 'vier', // lower case
 			) ),
 
@@ -93,28 +89,24 @@ class TermPropertyLabelResolverTest extends \MediaWikiTestCase {
 				'termType' => 'label',
 				'termLanguage' => 'en',
 				'entityId' => new PropertyId( 'P1' ),
-				'entityType' => Property::ENTITY_TYPE,
 				'termText' => 'One',
 			) ),
 			new TermIndexEntry( array(
 				'termType' => 'label',
 				'termLanguage' => 'en',
-				'entityId' => new ItemId( 'Q2' ),
-				'entityType' => Item::ENTITY_TYPE, // not a property
+				'entityId' => new ItemId( 'Q2' ), // not a property
 				'termText' => 'Two',
 			) ),
 			new TermIndexEntry( array(
 				'termType' => 'alias', // not a label
 				'termLanguage' => 'en',
 				'entityId' => new PropertyId( 'P3' ),
-				'entityType' => Property::ENTITY_TYPE,
 				'termText' => 'Three',
 			) ),
 			new TermIndexEntry( array(
 				'termType' => 'description', // not a label
 				'termLanguage' => 'en',
 				'entityId' => new PropertyId( 'P4' ),
-				'entityType' => Property::ENTITY_TYPE,
 				'termText' => 'Four',
 			) ),
 		);
