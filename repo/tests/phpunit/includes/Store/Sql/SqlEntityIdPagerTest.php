@@ -34,11 +34,13 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 	public function setUp() {
 		parent::setUp();
 		$this->tablesUsed[] = 'page';
+		$this->tablesUsed[] = 'redirect';
 	}
 
 	public function addDBDataOnce() {
 		// We need to initially empty the table
 		wfGetDB( DB_MASTER )->delete( 'page', '*', __METHOD__ );
+		wfGetDB( DB_MASTER )->delete( 'redirect', '*', __METHOD__ );
 	}
 
 	/**
@@ -46,19 +48,34 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 	 * @param EntityRedirect[] $redirects
 	 */
 	private function insertEntities( array $entities = [], array $redirects = [] ) {
-		$pages = [];
+		$pageRows = [];
 		foreach ( $entities as $entity ) {
-			$pages[] = $this->getPageRow( $entity->getId(), false );
+			$pageRows[] = $this->getPageRow( $entity->getId(), false );
 		}
 
 		foreach ( $redirects as $redirect ) {
-			$pages[] = $this->getPageRow( $redirect->getEntityId(), true );
+			$pageRows[] = $this->getPageRow( $redirect->getEntityId(), true );
 		}
 
 		$dbw = wfGetDB( DB_MASTER );
 		$dbw->insert(
 			'page',
-			$pages,
+			$pageRows,
+			__METHOD__
+		);
+
+		if ( !$redirects ) {
+			return;
+		}
+
+		$redirectRows = [];
+		foreach ( $redirects as $redirect ) {
+			$redirectRows[] = $this->getRedirectRow( $redirect );
+		}
+
+		$dbw->insert(
+			'redirect',
+			$redirectRows,
 			__METHOD__
 		);
 	}
@@ -74,6 +91,17 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 			'page_latest' => 0,
 			'page_len' => 1,
 			'page_is_redirect' => $isRedirect ? 1 : 0
+		];
+	}
+
+	private function getRedirectRow( EntityRedirect $redirect ) {
+		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+
+		$redirectTitle = $entityTitleLookup->getTitleForId( $redirect->getEntityId() );
+		return [
+			'rd_from' => $redirectTitle->getArticleID(),
+			'rd_namespace' => $redirectTitle->getNamespace(),
+			'rd_title' => $redirectTitle->getDBkey()
 		];
 	}
 
