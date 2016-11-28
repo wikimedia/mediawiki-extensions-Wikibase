@@ -443,7 +443,7 @@
 	"apihelp-wbgetclaims-param-rank": "Filtre facultatif pour renvoyer uniquement les déclarations qui ont le rang spécifié",
 	"apihelp-wbgetclaims-param-props": "Certaines parties de la déclaration sont renvoyées de façon facultative. Ce paramètre contrôle lesquelles sont renvoyées.",
 	"apihelp-wbgetclaims-example-1": "Obtenir les déclarations pour l’élément d’ID Q42",
-	"apihelp-wbgetclaims-example-2": "Obtenir les déclarations pour l’élément avec l’ID Q42 et la propriété avec l’ID P2",
+	"apihelp-wbgetclaims-example-2": "Obtenir les déclarations pour l’élément avec l’ID Q42 et la propriété avec l’ID P31",
 	"apihelp-wbgetclaims-example-3": "Obtenir les déclarations pour l’élément d’ID Q42 qui sont de rang normal",
 	"apihelp-wbgetclaims-example-4": "Obtenir la déclaration de GUID Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F",
 	"apihelp-wbgetentities-description": "Obtiens les données de multiples entités de Wikibase.",

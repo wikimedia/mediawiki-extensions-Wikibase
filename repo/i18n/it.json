@@ -382,7 +382,7 @@
 	"apihelp-wbformatvalue-param-property": "ID proprietà a cui appartiene il valore dei dati, dovrebbe essere usato al posto del parametro <var>datatype</var>.",
 	"apihelp-wbgetclaims-description": "Ottiene asserzioni Wikibase.",
 	"apihelp-wbgetclaims-example-1": "Ottieni asserzioni per l'elemento con ID Q42",
-	"apihelp-wbgetclaims-example-2": "Ottieni asserzioni per l'elemento con ID Q42 e proprietà con ID P2",
+	"apihelp-wbgetclaims-example-2": "Ottieni asserzioni per l'elemento con ID Q42 e proprietà con ID P31",
 	"apihelp-wbgetclaims-example-3": "Ottieni asserzioni per l'elemento con ID Q42 che sono classificate come normali",
 	"apihelp-wbgetclaims-example-4": "Ottieni asserzione con GUID di Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F",
 	"apihelp-wbgetentities-description": "Ottiene i dati per più entità Wikibase.",

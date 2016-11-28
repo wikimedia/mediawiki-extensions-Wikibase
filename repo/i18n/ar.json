@@ -416,7 +416,7 @@
 	"apihelp-wbgetclaims-param-rank": "فلتر اختياري لإرجاع فقط الادعاءات التي لها الرتبة المحددة",
 	"apihelp-wbgetclaims-param-props": "بعض أجزاء الادعاء يتم إرجاعها اختياريا. هذه المعاملات تتحكم في أيها يتم إرجاعها.",
 	"apihelp-wbgetclaims-example-1": "الحصول على المزاعم للعنصر بالرقم Q42",
-	"apihelp-wbgetclaims-example-2": "الحصول على الادعاءات للعنصر بالرقم Q42 والخاصية بالرقم P2",
+	"apihelp-wbgetclaims-example-2": "الحصول على الادعاءات للعنصر بالرقم Q42 والخاصية بالرقم P31",
 	"apihelp-wbgetclaims-example-3": "الحصول على الادعاءات للعنصر بالرقم Q42 التي مرتبتها normal",
 	"apihelp-wbgetclaims-example-4": "الحصول على الادعاء بGUID Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F",
 	"apihelp-wbgetentities-description": "الحصول على البيانات لكيانات ويكي بيز متعددة.",

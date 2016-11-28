@@ -401,7 +401,7 @@
 	"apihelp-wbgetclaims-param-rank": "Filtro opcional para devolver só afirmacións que teñen o nivel indicado",
 	"apihelp-wbgetclaims-param-props": "Algunhas partes da afirmación devólvense de forma opcional. Este parámetro controla que partes se devolven.",
 	"apihelp-wbgetclaims-example-1": "Obter afirmacións para o elemento con identificador Q42",
-	"apihelp-wbgetclaims-example-2": "Obter as afirmacións para o obxecto con identicador Q42 e propiedade con identificador P2",
+	"apihelp-wbgetclaims-example-2": "Obter as afirmacións para o obxecto con identicador Q42 e propiedade con identificador P31",
 	"apihelp-wbgetclaims-example-3": "Obter afirmacións para o elemento con identificador Q42 que están clasificadas como normais",
 	"apihelp-wbgetclaims-example-4": "Obter afirmacións con GUID de Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F",
 	"apihelp-wbgetentities-description": "Obtén a información para múltiples entidades de Wikibase",

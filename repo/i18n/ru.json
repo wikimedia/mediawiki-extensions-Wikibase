@@ -363,7 +363,7 @@
 	"apihelp-wbmergeitems-example-2": "Объединяет данные из Q555 в Q3",
 	"apihelp-wbmergeitems-example-3": "Объединяет данные из Q66 в Q99, игнорируя любые конфликтующие ссылки",
 	"apihelp-wbparsevalue-description": "Анализирует значения, используя ValueParser.",
-	"apihelp-wbparsevalue-param-parser": "Идентификатор ValueParser для использования. <span class=\"apihelp-deprecated\"> \tУстаревший</span>. Вместо него следует использовать параметр типа данных.",
+	"apihelp-wbparsevalue-param-parser": "Идентификатор ValueParser для использования. <span class=\"apihelp-deprecated\"> \tУстаревший</span>. Вместо него следует использовать параметр <var>datatype</var>.",
 	"apihelp-wbparsevalue-param-values": "Значения для разбора",
 	"apihelp-wbsearchentities-description": "Ищет сущности, используя метки и псевдонимы.\nВозвращает метку и описание этой сущности на язык участника (если это возможно).\nВозвращает подробности о подходящих результатах.\nПодходящий по условию текст также присутствует в ключе псевдонима, если он отличается от отображаемой метки.",
 	"apihelp-wbsearchentities-param-search": "Искать этот текст.",

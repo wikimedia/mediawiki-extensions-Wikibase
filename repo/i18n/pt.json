@@ -407,7 +407,7 @@
 	"apihelp-wbgetclaims-param-rank": "Filtro opcional para devolver só as alegações que têm a classificação especificada",
 	"apihelp-wbgetclaims-param-props": "Algumas partes da alegação são devolvidas opcionalmente. Este parâmetro controla quais.",
 	"apihelp-wbgetclaims-example-1": "Obter as alegações do objeto com o identificador Q42",
-	"apihelp-wbgetclaims-example-2": "Obter as alegações do objeto com o identificador Q42 e a propriedade com o identificador P2",
+	"apihelp-wbgetclaims-example-2": "Obter as alegações do objeto com o identificador Q42 e a propriedade com o identificador P31",
 	"apihelp-wbgetclaims-example-3": "Obter as alegações do objeto com o identificador Q42 classificadas como normais",
 	"apihelp-wbgetclaims-example-4": "Obter a alegação com o identificador único global (GUID) Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F",
 	"apihelp-wbgetentities-description": "Obter os dados de várias entidades Wikibase",

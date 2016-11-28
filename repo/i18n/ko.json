@@ -81,6 +81,7 @@
 	"wikibase-undo-badpage": "잘못된 판: $2 판은 [[$1]]에 속하지 않습니다.",
 	"wikibase-undo-firstrev": "문서 만들기를 되돌릴 수 없습니다",
 	"wikibase-undo-nocontent": "$1 페이지의 $2 판의 내용을 불러올 수 없습니다",
+	"wikibase-summary-generated": "요약 (자동으로 생성되는 요약 뒤에 추가됩니다):",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|값 한 개|값 $1개}}가 아직 저장되지 않음",
 	"wikibase-disambiguation-title": "\"$1\"에 대한 동음이의",
 	"wb-special-newitem-new-item-notification": "새 $1 항목이 만들어졌고 그 페이지로 넘겨주기했습니다. $2(으)로 돌아갑니다.",

@@ -399,7 +399,7 @@
 	"apihelp-wbgetclaims-param-rank": "Valbart filter för att enbart returnera påståenden som har en specifik rang",
 	"apihelp-wbgetclaims-param-props": "Vissa delar av påståendet är valbart returnerbara. Denna parameter kontrollerar vilka som returneras.",
 	"apihelp-wbgetclaims-example-1": "Hämta påståenden från objektet med ID Q42",
-	"apihelp-wbgetclaims-example-2": "Hämta påsåenden för objektet med ID Q42 och egenskap med ID P2",
+	"apihelp-wbgetclaims-example-2": "Hämta påsåenden för objektet med ID Q42 och egenskap med ID P31",
 	"apihelp-wbgetclaims-example-3": "Hämta påståenden för objektet med ID Q42 som har normal rang",
 	"apihelp-wbgetclaims-example-4": "Hämta påståenden med GUID Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F",
 	"apihelp-wbgetentities-description": "Hämtar data från multipla Wikibase-entiteter.",

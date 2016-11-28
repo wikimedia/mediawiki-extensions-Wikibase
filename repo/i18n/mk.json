@@ -376,7 +376,7 @@
 	"apihelp-wbformatvalue-param-datavalue": "Податоците што треба да се форматират. Треба да има серијализација со JSON на DataValue-објект.",
 	"apihelp-wbgetclaims-description": "Дава тврдења од Викибазата.",
 	"apihelp-wbgetclaims-example-1": "Дај тврдења за предмет со назнака Q42",
-	"apihelp-wbgetclaims-example-2": "Дај тврдења за предмет со назнака Q42 и својство со назнака P2",
+	"apihelp-wbgetclaims-example-2": "Дај тврдења за предмет со назнака Q42 и својство со назнака P31",
 	"apihelp-wbmergeitems-param-fromid": "Назнака од која се спојува",
 	"apihelp-wbmergeitems-param-toid": "Назнака во која се спојува",
 	"apihelp-wbmergeitems-example-1": "Ги спојува податоците од Q42 во Q222",

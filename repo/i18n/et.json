@@ -367,7 +367,7 @@
 	"apihelp-wbgetclaims-param-rank": "Valikuline filter, millega tagastatakse ainult antud järguga väited",
 	"apihelp-wbgetclaims-param-props": "Väite mõni osa tagastatakse valikuliselt. Selle parameetriga määratakse, millised osad tagastatakse.",
 	"apihelp-wbgetclaims-example-1": "Hangi üksuse Q42 väited",
-	"apihelp-wbgetclaims-example-2": "Hangi üksuse Q42 ja omaduse P2 väited",
+	"apihelp-wbgetclaims-example-2": "Hangi üksuse Q42 ja omaduse P31 väited",
 	"apihelp-wbgetclaims-example-3": "Hangi üksuse Q42 väited, mis on tavajärguga",
 	"apihelp-wbgetclaims-example-4": "Hangi väide, mille GUID on Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F",
 	"apihelp-wbgetentities-description": "Hangib andmed Vikibaasi mitme olemi kohta.",

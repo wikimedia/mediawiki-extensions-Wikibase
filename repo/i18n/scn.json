@@ -357,7 +357,7 @@
 	"apihelp-wbgetclaims-param-rank": "Filtru opziunali p'arriturnari sulu l'affirmazzioni chi hannu lu rangu spicificatu",
 	"apihelp-wbgetclaims-param-props": "Certi parti di l'affirmazzioni vèninu arriturnati facultativamenti. Stu paràmitru spicìfica quali s'hannu a arriturnari.",
 	"apihelp-wbgetclaims-example-1": "Pigghia l'affirmazzioni pû suggettu cu ID Q42.",
-	"apihelp-wbgetclaims-example-2": "Pigghia l'affirmazzioni pû suggettu cu ID Q42 e la prupità cu ID P2.",
+	"apihelp-wbgetclaims-example-2": "Pigghia l'affirmazzioni pû suggettu cu ID Q42 e la prupità cu ID P31.",
 	"apihelp-wbgetclaims-example-3": "Pigghia l'affirmazzioni pû suggettu cu ID Q42 chi hannu rangu nurmali",
 	"apihelp-wbgetclaims-example-4": "Pigghia l'affirmazzioni cu GUID Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F",
 	"apihelp-wbgetentities-description": "Pigghia li dati di cchiù ntità di Wikibase.",

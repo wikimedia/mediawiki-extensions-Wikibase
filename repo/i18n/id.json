@@ -395,7 +395,7 @@
 	"apihelp-wbgetclaims-param-rank": "Penyaring pilihan yang hanya dipergunakan untuk mengembalikan klaim dengan peringkat tertentu",
 	"apihelp-wbgetclaims-param-props": "Beberapa bagian klaim akan dikembalikan secara terpilih. Parameter ini akan mengendalikan klaim mana saja yang akan dikembalikan.",
 	"apihelp-wbgetclaims-example-1": "Dapatkan klaim untuk butir dengan penanda Q42",
-	"apihelp-wbgetclaims-example-2": "Dapatkan klaim untuk butir dengan penanda Q42 dan atribut dengan penanda P2",
+	"apihelp-wbgetclaims-example-2": "Dapatkan klaim untuk butir dengan penanda Q42 dan atribut dengan penanda P31",
 	"apihelp-wbgetclaims-example-3": "Peroleh klaim dari butir dengan penanda Q42 yang memiliki peringat normal",
 	"apihelp-wbgetclaims-example-4": "Peroleh klaim dengan Penanda Unik Global (GUID) dari Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F",
 	"apihelp-wbgetentities-description": "Mengambil data untuk beberapa entitas Wikibase.",
