@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aebe47e0_0f054b13",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-28T18:53:08Z",
+      "side": 1,
+      "message": "Ideally, the repo name would be defined in the constructor. But no need to do that in this patch.",
+      "revId": "61c6f2d83fa74bcb3b225df76a7a68c8da14008f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
