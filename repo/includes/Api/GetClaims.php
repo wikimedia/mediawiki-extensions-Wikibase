@@ -213,7 +213,7 @@ class GetClaims extends ApiBase {
 		return array(
 			"action=wbgetclaims&entity=Q42" =>
 				"apihelp-wbgetclaims-example-1",
-			"action=wbgetclaims&entity=Q42&property=P2" =>
+			"action=wbgetclaims&entity=Q42&property=P31" =>
 				"apihelp-wbgetclaims-example-2",
 			"action=wbgetclaims&entity=Q42&rank=normal" =>
 				"apihelp-wbgetclaims-example-3",
