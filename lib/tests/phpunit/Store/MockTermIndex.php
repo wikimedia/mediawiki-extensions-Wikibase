@@ -188,6 +188,9 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	}
 
 	/**
+	 * @param EntityDocument $entity
+	 *
+	 * @return bool
 	 * @throws Exception always
 	 */
 	public function saveTermsOfEntity( EntityDocument $entity ) {
@@ -195,6 +198,9 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	}
 
 	/**
+	 * @param EntityId $entityId
+	 *
+	 * @return bool
 	 * @throws Exception always
 	 */
 	public function deleteTermsOfEntity( EntityId $entityId ) {
@@ -261,18 +267,6 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 		}
 
 		return $terms;
-	}
-
-	/**
-	 * @throws Exception always
-	 */
-	public function termExists(
-		$termValue,
-		$termType = null,
-		$termLanguage = null,
-		$entityType = null
-	) {
-		throw new Exception( 'not implemented by mock class ' );
 	}
 
 	/**
@@ -400,11 +394,11 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 */
 	private function termMatchesTemplates( TermIndexEntry $term, array $templates, array $options = array() ) {
 		foreach ( $templates as $template ) {
-			if ( $template->getTermType() !== null && $template->getTermType() != $term->getTermType() ) {
+			if ( $template->getTermType() !== null && $template->getTermType() !== $term->getTermType() ) {
 				continue;
 			}
 
-			if ( $template->getLanguage() !== null && $template->getLanguage() != $term->getLanguage() ) {
+			if ( $template->getLanguage() !== null && $template->getLanguage() !== $term->getLanguage() ) {
 				continue;
 			}
 
@@ -418,8 +412,14 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 		return false;
 	}
 
+	/**
+	 * @param string $find
+	 * @param string $text
+	 * @param array $options
+	 *
+	 * @return bool
+	 */
 	private function textMatches( $find, $text, array $options = array() ) {
-
 		if ( isset( $options[ 'caseSensitive' ] ) && !$options[ 'caseSensitive' ] ) {
 			$find = strtolower( $find );
 			$text = strtolower( $text );
