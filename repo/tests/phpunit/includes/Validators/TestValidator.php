@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\Validators;
 
 use DataValues\DataValue;
 use ValueValidators\Error;
@@ -19,8 +19,15 @@ use ValueValidators\ValueValidator;
  * @author Daniel Kinzler
  */
 class TestValidator implements ValueValidator {
+
+	/**
+	 * @var string
+	 */
 	protected $regex;
 
+	/**
+	 * @param string $regex
+	 */
 	public function __construct( $regex ) {
 		$this->regex = $regex;
 	}

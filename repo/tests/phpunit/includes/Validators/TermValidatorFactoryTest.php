@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\Validators;
 
 use InvalidArgumentException;
 use ValueValidators\ValueValidator;
@@ -14,6 +14,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\Validators\FingerprintValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
+use Wikibase\Test\ChangeOpTestMockProvider;
 
 /**
  * @covers Wikibase\Repo\Validators\TermValidatorFactory
