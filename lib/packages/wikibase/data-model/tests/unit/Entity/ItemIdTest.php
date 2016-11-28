@@ -81,6 +81,11 @@ class ItemIdTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame( 1, $id->getNumericId() );
 	}
 
+	public function testGetNumericId_foreignId() {
+		$id = new ItemId( 'foo:Q1' );
+		$this->assertSame( 1, $id->getNumericId() );
+	}
+
 	public function testGetEntityType() {
 		$id = new ItemId( 'Q1' );
 		$this->assertSame( 'item', $id->getEntityType() );
@@ -149,11 +154,6 @@ class ItemIdTest extends PHPUnit_Framework_TestCase {
 			[ 2147483648 ],
 			[ '2147483648' ],
 		];
-	}
-
-	public function testGetNumericIdThrowsExceptionOnForeignIds() {
-		$this->setExpectedException( RuntimeException::class );
-		( new ItemId( 'foo:Q42' ) )->getNumericId();
 	}
 
 }
