@@ -7,8 +7,8 @@ use Wikimedia\Assert\Assert;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
- * Object representing search criteria while performing a search in the term index..
- * Instances might be incomplete (have null values for some of fields).
+ * Object representing search criteria while performing a search in the term index.
+ * Instances might be incomplete (have null values for some of the fields).
  *
  * @license GPL-2.0+
  */
@@ -20,15 +20,24 @@ class TermIndexSearchCriteria {
 		'termText',
 	];
 
+	/**
+	 * @var string|null
+	 */
 	private $termType = null;
 
+	/**
+	 * @var string|null
+	 */
 	private $termLanguage = null;
 
+	/**
+	 * @var string|null
+	 */
 	private $termText = null;
 
 	/**
 	 * @param array $fields, containing fields:
-	 *        'termType' => string|null, one of self::TYPE_* constants,
+	 *        'termType' => string|null, one of TermIndexEntry::TYPE_… constants,
 	 *        'termLanguage' => string|null
 	 *        'termText' => string|null
 	 *
@@ -51,14 +60,18 @@ class TermIndexSearchCriteria {
 			'must be TermIndexEntry::TYPE_ALIAS, TermIndexEntry::TYPE_LABEL, or TermIndexEntry::TYPE_DESCRIPTION'
 		);
 		Assert::parameter(
-			!isset( $fields['termLanguage'] ) || is_string( $fields['termLanguage'] ),
+			!isset( $fields['termLanguage'] ) || (
+				is_string( $fields['termLanguage'] ) && $fields['termLanguage'] !== ''
+			),
 			'$fields["termLanguage"]',
-			'must be a string when provided'
+			'must be a non-empty string when provided'
 		);
 		Assert::parameter(
-			!isset( $fields['termText'] ) || is_string( $fields['termText'] ),
+			!isset( $fields['termText'] ) || (
+				is_string( $fields['termText'] ) && $fields['termText'] !== ''
+			),
 			'$fields["termText"]',
-			'must be a string when provided'
+			'must be a non-empty string when provided'
 		);
 
 		if ( isset( $fields['termType'] ) ) {

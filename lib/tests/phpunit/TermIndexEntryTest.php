@@ -31,10 +31,10 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 		] );
 
 		$this->assertEquals( new ItemId( 'Q23' ), $term->getEntityId() );
-		$this->assertEquals( Item::ENTITY_TYPE, $term->getEntityType() );
-		$this->assertEquals( TermIndexEntry::TYPE_LABEL, $term->getTermType() );
-		$this->assertEquals( 'en', $term->getLanguage() );
-		$this->assertEquals( 'foo', $term->getText() );
+		$this->assertSame( Item::ENTITY_TYPE, $term->getEntityType() );
+		$this->assertSame( TermIndexEntry::TYPE_LABEL, $term->getTermType() );
+		$this->assertSame( 'en', $term->getLanguage() );
+		$this->assertSame( 'foo', $term->getText() );
 	}
 
 	public function testGivenInvalidField_constructorThrowsException() {
@@ -179,12 +179,12 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 		$ba = TermIndexEntry::compare( $b, $a );
 
 		if ( $equal ) {
-			$this->assertEquals( 0, $ab, 'Comparison of equal terms is expected to return 0' );
-			$this->assertEquals( 0, $ba, 'Comparison of equal terms is expected to return 0' );
+			$this->assertSame( 0, $ab, 'Comparison of equal terms is expected to return 0' );
+			$this->assertSame( 0, $ba, 'Comparison of equal terms is expected to return 0' );
 		} else {
 			// NOTE: We don't know or care whether this is larger or smaller
-			$this->assertNotEquals( 0, $ab, 'Comparison of unequal terms is expected to not return 0' );
-			$this->assertEquals( -$ab, $ba, 'Comparing A to B should return the inverse of comparing B to A' );
+			$this->assertNotSame( 0, $ab, 'Comparison of unequal terms is expected to not return 0' );
+			$this->assertSame( -$ab, $ba, 'Comparing A to B should return the inverse of comparing B to A' );
 		}
 	}
 

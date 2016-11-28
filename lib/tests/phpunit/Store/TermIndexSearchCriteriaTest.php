@@ -75,9 +75,12 @@ class TermIndexSearchCriteriaTest extends PHPUnit_Framework_TestCase {
 
 		return [
 			'non-string term type' => [ array_merge( $goodFields, [ 'termType' => 100 ] ) ],
+			'empty term type' => [ array_merge( $goodFields, [ 'termType' => '' ] ) ],
 			'invalid term type' => [ array_merge( $goodFields, [ 'termType' => 'foo' ] ) ],
 			'non-string term language' => [ array_merge( $goodFields, [ 'termLanguage' => 100 ] ) ],
+			'empty term language' => [ array_merge( $goodFields, [ 'termLanguage' => '' ] ) ],
 			'non-string term text' => [ array_merge( $goodFields, [ 'termText' => 100 ] ) ],
+			'empty term text' => [ array_merge( $goodFields, [ 'termText' => '' ] ) ],
 		];
 	}
 
