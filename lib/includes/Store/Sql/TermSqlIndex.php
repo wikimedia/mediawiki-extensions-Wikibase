@@ -7,6 +7,7 @@ use DBAccessBase;
 use InvalidArgumentException;
 use MWException;
 use Traversable;
+use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Int32EntityId;
@@ -37,6 +38,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	/**
 	 * @var string
 	 */
+	private $repositoryName;
+
+	/**
+	 * @var string
+	 */
 	private $tableName;
 
 	/**
@@ -60,9 +66,17 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param StringNormalizer $stringNormalizer
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param string|bool $wikiDb
+	 * @param string $repositoryName
 	 */
-	public function __construct( StringNormalizer $stringNormalizer, EntityIdComposer $entityIdComposer, $wikiDb = false ) {
+	public function __construct(
+		StringNormalizer $stringNormalizer,
+		EntityIdComposer $entityIdComposer,
+		$wikiDb = false,
+		$repositoryName = ''
+	) {
+		RepositoryNameAssert::assertParameterIsValidRepositoryName( $repositoryName, '$repositoryName' );
 		parent::__construct( $wikiDb );
+		$this->repositoryName = $repositoryName;
 		$this->stringNormalizer = $stringNormalizer;
 		$this->entityIdComposer = $entityIdComposer;
 		$this->tableName = 'wb_terms';
@@ -89,16 +103,21 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *  declared by the TermIndexEntry::TYPE_... constants.
 	 *
 	 * @throws InvalidArgumentException when $entity does not have an ID.
+	 * @throws MWException
+	 *
 	 * @return bool Success indicator
 	 */
 	public function saveTermsOfEntity( EntityDocument $entity ) {
-		if ( $entity->getId() === null ) {
+		$entityId = $entity->getId();
+		if ( $entityId === null ) {
 			throw new InvalidArgumentException( '$entity must have an ID' );
 		}
 
+		$this->assertEntityIdFromRightRepository( $entityId );
+
 		//First check whether there's anything to update
 		$newTerms = $this->getEntityTerms( $entity );
-		$oldTerms = $this->getTermsOfEntity( $entity->getId() );
+		$oldTerms = $this->getTermsOfEntity( $entityId );
 
 		$termsToInsert = array_udiff( $newTerms, $oldTerms, 'Wikibase\TermIndexEntry::compare' );
 		$termsToDelete = array_udiff( $oldTerms, $newTerms, 'Wikibase\TermIndexEntry::compare' );
@@ -127,6 +146,32 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	}
 
 	/**
+	 * @param EntityId $entityId
+	 *
+	 * @throws MWException
+	 */
+	private function assertEntityIdFromRightRepository( EntityId $entityId ) {
+		if ( $entityId->getRepositoryName() !== $this->repositoryName ) {
+			throw new MWException(
+				'Entity ID: ' . $entityId->getSerialization() . ' does not belong to repository: ' . $this->repositoryName
+			);
+		}
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 *
+	 * @throws MWException
+	 */
+	private function assertIsNumericEntityId( EntityId $entityId ) {
+		if ( !( $entityId instanceof Int32EntityId ) ) {
+			throw new MWException(
+				'Entity ID: ' . $entityId->getSerialization() . ' does not implement Int32EntityId'
+			);
+		}
+	}
+
+	/**
 	 * @param EntityDocument $entity
 	 * @param TermIndexEntry[] $terms
 	 * @param Database $dbw
@@ -134,9 +179,13 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return bool Success indicator
 	 */
 	private function insertTerms( EntityDocument $entity, array $terms, Database $dbw ) {
+		$entityId = $entity->getId();
+		$this->assertIsNumericEntityId( $entityId );
+		/** @var Int32EntityId $entityId */
+
 		$entityIdentifiers = array(
 			// FIXME: this will fail for IDs that do not have a numeric form
-			'term_entity_id' => $entity->getId()->getNumericId(),
+			'term_entity_id' => $entityId->getNumericId(),
 			'term_entity_type' => $entity->getType(),
 			'term_weight' => $this->getWeight( $entity ),
 		);
@@ -167,14 +216,12 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param EntityDocument $entity
 	 *
 	 * @return TermIndexEntry[]
+	 * @throws MWException
 	 */
 	public function getEntityTerms( EntityDocument $entity ) {
 		$id = $entity->getId();
-
-		if ( !( $id instanceof Int32EntityId ) ) {
-			wfWarn( 'Entity type "' . $entity->getType() . '" does not implement Int32EntityId' );
-			return [];
-		}
+		$this->assertEntityIdFromRightRepository( $id );
+		$this->assertIsNumericEntityId( $id );
 
 		$terms = [];
 
@@ -262,6 +309,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		//TODO: Make getTermsOfEntity() collect term_row_id values, so we can use them here.
 		//      That would allow us to do the deletion in a single query, based on a set of ids.
 
+		$this->assertIsNumericEntityId( $entityId );
+
 		$entityIdentifiers = array(
 			// FIXME: this will fail for IDs that do not have a numeric form
 			'term_entity_id' => $entityId->getNumericId(),
@@ -347,6 +396,9 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return bool Success indicator
 	 */
 	public function deleteTermsOfEntity( EntityId $entityId ) {
+		$this->assertEntityIdFromRightRepository( $entityId );
+		$this->assertIsNumericEntityId( $entityId );
+
 		$dbw = $this->getConnection( DB_MASTER );
 
 		$success = $dbw->delete(
@@ -370,20 +422,21 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * Returns the terms stored for the given entity.
 	 *
 	 * @see TermIndex::getTermsOfEntity
-	 * @todo: share more code with getTermsOfEntities. There are only subtle differences
-	 * regarding what fields are loaded.
 	 *
 	 * @param EntityId $entityId
 	 * @param string[]|null $termTypes
 	 * @param string[]|null $languageCodes
 	 *
 	 * @return TermIndexEntry[]
+	 * @throws MWException
 	 */
 	public function getTermsOfEntity(
 		EntityId $entityId,
 		array $termTypes = null,
 		array $languageCodes = null
 	) {
+		$this->assertEntityIdFromRightRepository( $entityId );
+
 		return $this->getTermsOfEntities(
 			array( $entityId ),
 			$termTypes,
@@ -408,6 +461,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		array $termTypes = null,
 		array $languageCodes = null
 	) {
+		foreach ( $entityIds as $id ) {
+			$this->assertEntityIdFromRightRepository( $id );
+		}
+
 		return $this->fetchTerms( $entityIds, $termTypes, $languageCodes );
 	}
 
@@ -440,6 +497,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			} elseif ( $id->getEntityType() !== $entityType ) {
 				throw new MWException( "ID $id does not refer to an entity of type $entityType" );
 			}
+
+			$this->assertIsNumericEntityId( $id );
 
 			// FIXME: this will fail for IDs that do not have a numeric form
 			$numericIds[] = $id->getNumericId();
@@ -769,7 +828,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	private function getEntityId( $termRow ) {
 		if ( isset( $termRow->term_entity_type ) && isset( $termRow->term_entity_id ) ) {
 			return $this->entityIdComposer->composeEntityId(
-				'',
+				$this->repositoryName,
 				$termRow->term_entity_type,
 				$termRow->term_entity_id
 			);
