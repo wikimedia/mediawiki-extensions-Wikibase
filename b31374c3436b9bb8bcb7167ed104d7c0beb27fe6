@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aebe47e0_0ad9be83",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-28T08:50:31Z",
+      "side": 1,
+      "message": "shouldn\u0027t the commit message mention T151574 as well?",
+      "revId": "b31374c3436b9bb8bcb7167ed104d7c0beb27fe6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_6aeb9a0a",
+        "filename": "lib/tests/phpunit/Store/EntityInfoBuilderTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-28T08:50:31Z",
+      "side": 1,
+      "message": "not related but ok",
+      "revId": "b31374c3436b9bb8bcb7167ed104d7c0beb27fe6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
