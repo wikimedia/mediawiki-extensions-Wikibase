@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aebe47e0_ecbc65d7",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-28T17:56:12Z",
+      "side": 1,
+      "message": "The ForeignEntityValidator must be placed *before* the EntityExistsValidator. Otherwise we may try to check the existance of an entity for which we have no idea how to access it.",
+      "revId": "310c9a95a4a73ffd01e66513e3c39c0820c8afdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
