@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aebe47e0_25671524",
+        "filename": "client/includes/Hooks/InterwikiSortingHookHandlers.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-11-28T15:26:32Z",
+      "side": 1,
+      "message": "PHPDoc block missing.",
+      "revId": "8317a1cd584347b10526290129da0a427a9647a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_4530c9fc",
+        "filename": "client/includes/Hooks/InterwikiSortingHookHandlers.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-11-28T15:26:32Z",
+      "side": 1,
+      "message": "The old code did an\n\nif ( !$this-\u003enamespaceChecker-\u003eisWikibaseEnabled( $title-\u003egetNamespace() ) ) {\n\ncheck. I wonder why the new code does not do this? This looks like a mistake to me. As far as I can tell this hook is active in all namespaces.",
+      "range": {
+        "startLine": 93,
+        "startChar": 2,
+        "endLine": 93,
+        "endChar": 14
+      },
+      "revId": "8317a1cd584347b10526290129da0a427a9647a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_c54cd9a1",
+        "filename": "client/includes/Hooks/InterwikiSortingHookHandlers.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-11-28T15:26:32Z",
+      "side": 1,
+      "message": "The method can only return true or false, so a comparison with !… should be enough.",
+      "range": {
+        "startLine": 118,
+        "startChar": 75,
+        "endLine": 118,
+        "endChar": 84
+      },
+      "revId": "8317a1cd584347b10526290129da0a427a9647a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_4559e95c",
+        "filename": "client/includes/Hooks/InterwikiSortingHookHandlers.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-11-28T15:26:32Z",
+      "side": 1,
+      "message": "So this method *succeeds* when there is a placeholder in a setting that somehow *disables* language links? Triple negotiation? Can we please call this \"shouldSuppressAllLanguageLinks\"?",
+      "range": {
+        "startLine": 134,
+        "startChar": 10,
+        "endLine": 134,
+        "endChar": 14
+      },
+      "revId": "8317a1cd584347b10526290129da0a427a9647a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
