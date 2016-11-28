@@ -84,17 +84,29 @@ class SqlEntityIdPager implements EntityIdPager {
 	 */
 	public function fetchIds( $limit ) {
 		Assert::parameter( is_int( $limit ) && $limit > 0, '$limit', '$limit must be a positive integer' );
+		$tables = [ 'page' ];
+		if ( $this->redirectMode !== self::INCLUDE_REDIRECTS ) {
+			$tables[] = 'redirect';
+		}
+
+		$orderBy = 'page_id ASC';
+		if ( $this->redirectMode === self::ONLY_REDIRECTS ) {
+			// Allow the SELECT to be based on the redirect table in this case,
+			// rd_from equals page_id anyway.
+			$orderBy = 'rd_from ASC';
+		}
 
 		$dbr = wfGetDB( DB_REPLICA );
 		$rows = $dbr->select(
-			'page',
+			$tables,
 			[ 'page_id', 'page_title' ],
 			$this->getWhere( $this->position ),
 			__METHOD__,
 			[
-				'ORDER BY' => 'page_id ASC',
+				'ORDER BY' => $orderBy,
 				'LIMIT' => $limit
-			]
+			],
+			$this->getJoinConditions()
 		);
 
 		list( $entityIds, $position ) = $this->processRows( $rows );
@@ -122,12 +134,25 @@ class SqlEntityIdPager implements EntityIdPager {
 		}
 
 		if ( $this->redirectMode === self::NO_REDIRECTS ) {
-			$where['page_is_redirect'] = 0;
-		} elseif ( $this->redirectMode === self::ONLY_REDIRECTS ) {
-			$where['page_is_redirect'] = 1;
+			$where[] = 'rd_from IS NULL';
 		}
 
 		return $where;
+	}
+
+	/**
+	 * @return array
+	 */
+	private function getJoinConditions() {
+		$joinConds = [];
+
+		if ( $this->redirectMode === self::NO_REDIRECTS ) {
+			$joinConds['redirect'] = [ 'LEFT JOIN', 'page_id = rd_from' ];
+		} elseif ( $this->redirectMode === self::ONLY_REDIRECTS ) {
+			$joinConds['redirect'] = [ 'INNER JOIN', 'page_id = rd_from' ];
+		}
+
+		return $joinConds;
 	}
 
 	/**
