@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Dumpers;
+namespace Wikibase\Repo\Tests\Dumpers;
 
 use Exception;
 use DataValues\Serializers\DataValueSerializer;

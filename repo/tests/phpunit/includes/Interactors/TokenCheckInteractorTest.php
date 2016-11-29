@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Interactors;
+namespace Wikibase\Repo\Tests\Interactors;
 
 use FauxRequest;
 use PHPUnit_Framework_TestCase;
