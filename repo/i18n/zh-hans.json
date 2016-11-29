@@ -420,7 +420,7 @@
 	"apihelp-wbgetclaims-param-rank": "可选的过滤器，只返回有指定等级的声称",
 	"apihelp-wbgetclaims-param-props": "声称的某些部分可选返回。此参数控制返回哪些。",
 	"apihelp-wbgetclaims-example-1": "获取ID为Q42的项的声称",
-	"apihelp-wbgetclaims-example-2": "获得ID为Q42的项和ID为P31的属性的声称",
+	"apihelp-wbgetclaims-example-2": "获取ID为Q42的项和ID为P31的属性的声称",
 	"apihelp-wbgetclaims-example-3": "获得ID为Q42的项中，被评级为普通级的声称",
 	"apihelp-wbgetclaims-example-4": "获取GUID为Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F的声称",
 	"apihelp-wbgetentities-description": "获得多个Wikibase实体的数据。",
