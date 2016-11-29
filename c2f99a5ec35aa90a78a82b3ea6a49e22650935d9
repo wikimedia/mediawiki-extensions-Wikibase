@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "aebe47e0_5c86526b",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-11-29T17:50:41Z",
+      "side": 1,
+      "message": "this comment is also wrong",
+      "range": {
+        "startLine": 16,
+        "startChar": 23,
+        "endLine": 16,
+        "endChar": 34
+      },
+      "revId": "c2f99a5ec35aa90a78a82b3ea6a49e22650935d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aebe47e0_e158e38e",
         "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
         "patchSetId": 1
