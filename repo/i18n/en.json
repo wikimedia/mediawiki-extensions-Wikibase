@@ -147,6 +147,8 @@
 	"wikibase-wikibaserepopage-invalid-id": "The ID \"$1\" is unknown to the system. Please use a valid entity ID.",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 is a redirect.",
 	"wikibase-wikibaserepopage-storage-exception": "An error occurred while trying to load $1: $2.",
+	"special-availablebadges": "Available badges",
+	"wikibase-availablebadges-emptylist": "There are no badges configured on this wiki.",
 	"special-itembytitle": "Item by title",
 	"wikibase-itembytitle-lookup-fieldset": "Search for items by site and title",
 	"wikibase-itembytitle-lookup-site": "Site:",
