@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "aebe47e0_d26b7381",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-29T08:34:48Z",
+      "side": 1,
+      "message": "Bah, sorry for being sloppy about the language here.\nI think use of singular would be wrong here. What single instance of TermIndexSearchCriteria stands for is actually (mutltiple) criteria: search for term type X, and term text Y, etc. X, Y... could by \"any\" as well.\nSo even in special case only single \"criterion\" is specified (give me all terms of language \"en\" for example) all other criteria are implicitly specified too.\nSo I believe in the line above it would be more accurate if $mask became $criteria, and $criteria were $criteriaList or something in this direction",
+      "parentUuid": "aebe47e0_e9e57707",
+      "range": {
+        "startLine": 669,
+        "startChar": 25,
+        "endLine": 669,
+        "endChar": 30
+      },
+      "revId": "56713a1dc007e7f32d3dca5757a4abba5a16d2ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aebe47e0_897b9beb",
         "filename": "lib/includes/TermIndexEntry.php",
         "patchSetId": 6
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "aebe47e0_72282733",
+        "filename": "lib/includes/TermIndexEntry.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-29T08:34:48Z",
+      "side": 1,
+      "message": "you\u0027re right! it looks like indeed is only used in array_udiff but I will fix this for consistency.\nI guess should have caught this.",
+      "parentUuid": "aebe47e0_897b9beb",
+      "revId": "56713a1dc007e7f32d3dca5757a4abba5a16d2ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aebe47e0_89e15b9a",
         "filename": "lib/tests/phpunit/Store/TermIndexTest.php",
         "patchSetId": 6
@@ -53,6 +95,24 @@
       "writtenOn": "2016-11-28T16:46:41Z",
       "side": 1,
       "message": "A better scheme for this is to use array keys:\n\n\u0027options\u0027 \u003d\u003e [ … ], …",
+      "revId": "56713a1dc007e7f32d3dca5757a4abba5a16d2ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_725a67fb",
+        "filename": "lib/tests/phpunit/Store/TermIndexTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-11-29T08:34:48Z",
+      "side": 1,
+      "message": "sure. I just didn\u0027t want to do too many \"unrelated\" changes here, so the patch to review is not becoming too big",
+      "parentUuid": "aebe47e0_89e15b9a",
       "revId": "56713a1dc007e7f32d3dca5757a4abba5a16d2ba",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
