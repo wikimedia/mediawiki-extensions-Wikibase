@@ -209,6 +209,7 @@ call_user_func( function() {
 		= Wikibase\Repo\Specials\SpecialMyLanguageFallbackChain::class;
 	$wgSpecialPages['MergeItems'] = Wikibase\Repo\Specials\SpecialMergeItems::class;
 	$wgSpecialPages['RedirectEntity'] = Wikibase\Repo\Specials\SpecialRedirectEntity::class;
+	$wgSpecialPages['AvailableBadges'] = Wikibase\Repo\Specials\SpecialAvailableBadges::class;
 
 	// Jobs
 	$wgJobClasses['UpdateRepoOnMove'] = Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob::class;
