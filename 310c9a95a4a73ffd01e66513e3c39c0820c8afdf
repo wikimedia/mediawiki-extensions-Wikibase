@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "aebe47e0_06a08d3d",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-11-29T15:49:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aebe47e0_ecbc65d7",
+      "revId": "310c9a95a4a73ffd01e66513e3c39c0820c8afdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aebe47e0_0c39d93e",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2016-11-28T18:08:18Z",
       "side": 1,
       "message": "Oh, this is the wrong way around! getEnabledEntityTypes must also contain types that are supported via external repos, so it would look at the foreignRepositories.\n\nI suppose we need to introduce getLocalEntityTypes to be used here, which would just return array_keys( getEntityNamespacesSetting() ).\n\nUsing getLocalEntityTypes here should be done in this patch. Changing getEnabledEntityTypes() to include types supported via foreign repos should be done in a follow-up. PLease file a ticket.",
+      "revId": "310c9a95a4a73ffd01e66513e3c39c0820c8afdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_a6a6814e",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-11-29T15:49:05Z",
+      "side": 1,
+      "message": "Done. It felt a bit awkward since getEnabledEntityTypes and getLocalEntityTypes are now identical but it makes sense for now.\nTicket is T151869.",
+      "parentUuid": "aebe47e0_0c39d93e",
       "revId": "310c9a95a4a73ffd01e66513e3c39c0820c8afdf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
