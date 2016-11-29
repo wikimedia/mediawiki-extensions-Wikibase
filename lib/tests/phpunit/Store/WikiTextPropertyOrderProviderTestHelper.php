@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Tests;
+namespace Wikibase\Lib\Tests\Store;
 
 /**
  * Helper class for tests for WikiTextPropertyOrderProvider subclasses.

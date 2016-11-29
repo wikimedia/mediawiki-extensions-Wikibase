@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Tests;
+namespace Wikibase\Lib\Tests\Store;
 
 use Http;
 use PHPUnit_Framework_Assert;

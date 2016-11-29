@@ -58,8 +58,6 @@
 			"lib/includes/",
 			"lib/WikibaseLib.hooks.php",
 			"lib/maintenance/",
-			"lib/tests/phpunit/Store/HttpUrlPropertyOrderProviderTestMockHttp.php",
-			"lib/tests/phpunit/Store/WikiTextPropertyOrderProviderTestHelper.php",
 			"repo/includes/",
 			"repo/maintenance/",
 			"repo/tests/phpunit/",
