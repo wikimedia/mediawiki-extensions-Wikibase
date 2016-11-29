@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "aebe47e0_53864019",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 3057
+      },
+      "writtenOn": "2016-11-29T21:05:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aebe47e0_c16eff29",
+      "revId": "c2f99a5ec35aa90a78a82b3ea6a49e22650935d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aebe47e0_5c86526b",
         "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
         "patchSetId": 1
@@ -48,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "aebe47e0_338bcc22",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 3057
+      },
+      "writtenOn": "2016-11-29T21:05:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aebe47e0_5c86526b",
+      "revId": "c2f99a5ec35aa90a78a82b3ea6a49e22650935d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aebe47e0_e158e38e",
         "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
         "patchSetId": 1
@@ -65,6 +101,24 @@
         "endLine": 53,
         "endChar": 10
       },
+      "revId": "c2f99a5ec35aa90a78a82b3ea6a49e22650935d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_f37d5418",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 3057
+      },
+      "writtenOn": "2016-11-29T21:05:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aebe47e0_e158e38e",
       "revId": "c2f99a5ec35aa90a78a82b3ea6a49e22650935d9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
