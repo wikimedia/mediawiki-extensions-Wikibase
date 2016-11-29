@@ -842,6 +842,7 @@ call_user_func( function() {
 			)
 		);
 	};
+	$wgSpecialPages['AvailableBadges'] = Wikibase\Repo\Specials\SpecialAvailableBadges::class;
 
 	// Jobs
 	$wgJobClasses['UpdateRepoOnMove'] = Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob::class;
