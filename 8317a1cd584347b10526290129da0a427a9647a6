@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "aebe47e0_7e94738d",
+        "filename": "client/includes/Hooks/InterwikiSortingHookHandlers.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-11-29T03:09:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aebe47e0_25671524",
+      "revId": "8317a1cd584347b10526290129da0a427a9647a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aebe47e0_4530c9fc",
         "filename": "client/includes/Hooks/InterwikiSortingHookHandlers.php",
         "patchSetId": 6
@@ -30,6 +48,30 @@
       "writtenOn": "2016-11-28T15:26:32Z",
       "side": 1,
       "message": "The old code did an\n\nif ( !$this-\u003enamespaceChecker-\u003eisWikibaseEnabled( $title-\u003egetNamespace() ) ) {\n\ncheck. I wonder why the new code does not do this? This looks like a mistake to me. As far as I can tell this hook is active in all namespaces.",
+      "range": {
+        "startLine": 93,
+        "startChar": 2,
+        "endLine": 93,
+        "endChar": 14
+      },
+      "revId": "8317a1cd584347b10526290129da0a427a9647a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_de849f60",
+        "filename": "client/includes/Hooks/InterwikiSortingHookHandlers.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-11-29T03:09:26Z",
+      "side": 1,
+      "message": "I can put it back here but think the reason for that setting was mainly to disable other wikibase stuff for those namespaces.\n\nwonder if we should do sorting only in some namespaces in the InterwikiSorting extension? (it currently supports enabling sorting for some namespaces but maybe such setting is not needed there)",
+      "parentUuid": "aebe47e0_4530c9fc",
       "range": {
         "startLine": 93,
         "startChar": 2,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "aebe47e0_5e91af9b",
+        "filename": "client/includes/Hooks/InterwikiSortingHookHandlers.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-11-29T03:09:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aebe47e0_c54cd9a1",
+      "range": {
+        "startLine": 118,
+        "startChar": 75,
+        "endLine": 118,
+        "endChar": 84
+      },
+      "revId": "8317a1cd584347b10526290129da0a427a9647a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aebe47e0_4559e95c",
         "filename": "client/includes/Hooks/InterwikiSortingHookHandlers.php",
         "patchSetId": 6
@@ -76,6 +142,30 @@
       "writtenOn": "2016-11-28T15:26:32Z",
       "side": 1,
       "message": "So this method *succeeds* when there is a placeholder in a setting that somehow *disables* language links? Triple negotiation? Can we please call this \"shouldSuppressAllLanguageLinks\"?",
+      "range": {
+        "startLine": 134,
+        "startChar": 10,
+        "endLine": 134,
+        "endChar": 14
+      },
+      "revId": "8317a1cd584347b10526290129da0a427a9647a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_3eeddb22",
+        "filename": "client/includes/Hooks/InterwikiSortingHookHandlers.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-11-29T03:09:26Z",
+      "side": 1,
+      "message": "this refers to the noexternallanglinks parser function and is a check if that is there on a page (and set to suppress all links).\n\nI think we should keep the name of the parser function in the method name so it\u0027s clear what/why this is.",
+      "parentUuid": "aebe47e0_4559e95c",
       "range": {
         "startLine": 134,
         "startChar": 10,
