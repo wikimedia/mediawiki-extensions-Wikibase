@@ -22,6 +22,52 @@
       "revId": "ef2ba011fcd9d6a56676858390ed530678759fa8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_b9f91b81",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-11-30T19:19:38Z",
+      "side": 1,
+      "message": "here you can just have \"ItemId\"",
+      "range": {
+        "startLine": 73,
+        "startChar": 11,
+        "endLine": 73,
+        "endChar": 44
+      },
+      "revId": "ef2ba011fcd9d6a56676858390ed530678759fa8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_19d48feb",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-11-30T19:19:38Z",
+      "side": 1,
+      "message": "this function is deprecated and is being migrated from\n\ninstead you can use methods of LinkRenderer class which you can get via $this-\u003egetLinkRenderer()\n\nyou can find its code here: https://phabricator.wikimedia.org/diffusion/MW/browse/master/includes/linker/LinkRenderer.php",
+      "range": {
+        "startLine": 90,
+        "startChar": 17,
+        "endLine": 90,
+        "endChar": 29
+      },
+      "revId": "ef2ba011fcd9d6a56676858390ed530678759fa8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
