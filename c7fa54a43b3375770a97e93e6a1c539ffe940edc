@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ed34346_f963133d",
+        "filename": "repo/includes/Specials/SpecialMergeItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-11-30T19:29:20Z",
+      "side": 0,
+      "message": "this line shouldn\u0027t have got removed",
+      "revId": "c7fa54a43b3375770a97e93e6a1c539ffe940edc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ed34346_f97c33ea",
+        "filename": "repo/includes/Specials/SpecialMergeItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-11-30T19:29:20Z",
+      "side": 1,
+      "message": "\"S\" goes before \"U\"",
+      "range": {
+        "startLine": 13,
+        "startChar": 17,
+        "endLine": 13,
+        "endChar": 22
+      },
+      "revId": "7dfa8bfcf42885c9bae142a88e118c002e3f7b36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_19780fed",
+        "filename": "repo/includes/Specials/SpecialMergeItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-11-30T19:29:20Z",
+      "side": 1,
+      "message": "you don\u0027t need this if the following check is true, so you can move this to the \"else\" clause",
+      "range": {
+        "startLine": 161,
+        "startChar": 2,
+        "endLine": 161,
+        "endChar": 6
+      },
+      "revId": "7dfa8bfcf42885c9bae142a88e118c002e3f7b36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_b986bbde",
+        "filename": "repo/includes/Specials/SpecialMergeItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-11-30T19:29:20Z",
+      "side": 1,
+      "message": "MediaWiki has its conventions for whitespace, see https://www.mediawiki.org/wiki/Manual:Coding_conventions/PHP",
+      "range": {
+        "startLine": 162,
+        "startChar": 2,
+        "endLine": 162,
+        "endChar": 59
+      },
+      "revId": "7dfa8bfcf42885c9bae142a88e118c002e3f7b36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
