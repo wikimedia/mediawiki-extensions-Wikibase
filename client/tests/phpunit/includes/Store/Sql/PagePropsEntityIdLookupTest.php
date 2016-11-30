@@ -4,7 +4,7 @@ namespace Wikibase\Test;
 
 use DatabaseBase;
 use Title;
-use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
+use Wikimedia\Rdbms\PagePropsEntityIdLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;

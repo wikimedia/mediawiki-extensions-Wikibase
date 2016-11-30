@@ -8,7 +8,7 @@ use RequestContext;
 use FileBasedSiteLookup;
 use Site;
 use Title;
-use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
+use Wikimedia\Rdbms\PagePropsEntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
