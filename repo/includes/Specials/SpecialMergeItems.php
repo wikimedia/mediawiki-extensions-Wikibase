@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\UserInputException;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
@@ -158,10 +159,13 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	}
 
 	protected function showExceptionMessage( Exception $ex ) {
-		$msg = $this->exceptionLocalizer->getExceptionMessage( $ex );
-
-		$this->showErrorHTML( $msg->parse(), 'error' );
-
+		if ( $ex instanceof RevisionedUnresolvedRedirectException ){
+			$this->showErrorHTML( $this->msg( 'wikibase-itemmerge-alreadymerged' )->parse(), 'error' );
+		}
+		else {
+			$msg = $this->exceptionLocalizer->getExceptionMessage( $ex );
+			$this->showErrorHTML( $msg->parse(), 'error' );
+		}
 		// Report chained exceptions recursively
 		if ( $ex->getPrevious() ) {
 			$this->showExceptionMessage( $ex->getPrevious() );
