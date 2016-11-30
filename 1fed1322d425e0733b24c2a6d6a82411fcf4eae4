@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ed34346_96750ccb",
+        "filename": "lib/includes/Interactors/DispatchingTermSearchInteractor.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-11-30T18:30:36Z",
+      "side": 1,
+      "message": "An alternative term to \"dispatching\" is \"routing\". So a possible name would be \"EntityTypeRoutingTermSearchInteractor\"",
+      "revId": "1fed1322d425e0733b24c2a6d6a82411fcf4eae4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
