@@ -544,7 +544,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 * Tries to acquire a global lock on the given client wiki.
 	 *
 	 * @param Database $db The database connection to work on.
-	 * @param string  $lock  The name of the lock to release.
+	 * @param string  $lock  The name of the lock to engage.
 	 *
 	 * @return bool whether the lock was engaged successfully.
 	 */
