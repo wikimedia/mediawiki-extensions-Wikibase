@@ -6,7 +6,7 @@ use DatabaseBase;
 use DBError;
 use Exception;
 use InvalidArgumentException;
-use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
+use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageTrackerException;
 use Wikibase\DataModel\Entity\EntityId;
@@ -22,14 +22,14 @@ use Wikibase\DataModel\Entity\EntityId;
 class SqlSubscriptionManager implements SubscriptionManager {
 
 	/**
-	 * @var ConsistentReadConnectionManager
+	 * @var SessionConsistentConnectionManager
 	 */
 	private $connectionManager;
 
 	/**
-	 * @param ConsistentReadConnectionManager $connectionManager
+	 * @param SessionConsistentConnectionManager $connectionManager
 	 */
-	public function __construct( ConsistentReadConnectionManager $connectionManager ) {
+	public function __construct( SessionConsistentConnectionManager $connectionManager ) {
 		$this->connectionManager = $connectionManager;
 	}
 
