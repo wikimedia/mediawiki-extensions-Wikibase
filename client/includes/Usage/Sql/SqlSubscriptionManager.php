@@ -5,8 +5,9 @@ namespace Wikibase\Client\Usage\Sql;
 use Database;
 use DBError;
 use Exception;
+use IDatabase;
 use InvalidArgumentException;
-use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
+use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageTrackerException;
 use Wikibase\DataModel\Entity\EntityId;
@@ -22,14 +23,14 @@ use Wikibase\DataModel\Entity\EntityId;
 class SqlSubscriptionManager implements SubscriptionManager {
 
 	/**
-	 * @var ConsistentReadConnectionManager
+	 * @var SessionConsistentConnectionManager
 	 */
 	private $connectionManager;
 
 	/**
-	 * @param ConsistentReadConnectionManager $connectionManager
+	 * @param SessionConsistentConnectionManager $connectionManager
 	 */
-	public function __construct( ConsistentReadConnectionManager $connectionManager ) {
+	public function __construct( SessionConsistentConnectionManager $connectionManager ) {
 		$this->connectionManager = $connectionManager;
 	}
 
@@ -60,16 +61,17 @@ class SqlSubscriptionManager implements SubscriptionManager {
 		}
 
 		$subscriptions = $this->idsToString( $entityIds );
-		$db = $this->connectionManager->beginAtomicSection( __METHOD__ );
+		$dbw = $this->connectionManager->getWriteConnectionRef();
+		$dbw->startAtomic( __METHOD__ );
 
 		try {
-			$oldSubscriptions = $this->querySubscriptions( $db, $subscriber, $subscriptions );
+			$oldSubscriptions = $this->querySubscriptions( $dbw, $subscriber, $subscriptions );
 			$newSubscriptions = array_diff( $subscriptions, $oldSubscriptions );
-			$this->insertSubscriptions( $db, $subscriber, $newSubscriptions );
+			$this->insertSubscriptions( $dbw, $subscriber, $newSubscriptions );
 
-			$this->connectionManager->commitAtomicSection( $db, __METHOD__ );
+			$dbw->endAtomic( __METHOD__ );
 		} catch ( Exception $ex ) {
-			$this->connectionManager->rollbackAtomicSection( $db, __METHOD__ );
+			$dbw->rollback( __METHOD__ );
 
 			if ( $ex instanceof DBError ) {
 				throw new UsageTrackerException( $ex->getMessage(), $ex->getCode(), $ex );
@@ -95,16 +97,17 @@ class SqlSubscriptionManager implements SubscriptionManager {
 		}
 
 		$unsubscriptions = $this->idsToString( $entityIds );
-		$db = $this->connectionManager->beginAtomicSection( __METHOD__ );
+		$dbw = $this->connectionManager->getWriteConnectionRef();
+		$dbw->startAtomic( __METHOD__ );
 
 		try {
-			$oldSubscriptions = $this->querySubscriptions( $db, $subscriber, $unsubscriptions );
+			$oldSubscriptions = $this->querySubscriptions( $dbw, $subscriber, $unsubscriptions );
 			$obsoleteSubscriptions = array_intersect( $unsubscriptions, $oldSubscriptions );
-			$this->deleteSubscriptions( $db, $subscriber, $obsoleteSubscriptions );
+			$this->deleteSubscriptions( $dbw, $subscriber, $obsoleteSubscriptions );
 
-			$this->connectionManager->commitAtomicSection( $db, __METHOD__ );
+			$dbw->endAtomic( __METHOD__ );
 		} catch ( Exception $ex ) {
-			$this->connectionManager->rollbackAtomicSection( $db, __METHOD__ );
+			$dbw->rollback( __METHOD__ );
 
 			if ( $ex instanceof DBError ) {
 				throw new UsageTrackerException( $ex->getMessage(), $ex->getCode(), $ex );
@@ -117,13 +120,13 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	/**
 	 * For a set of potential subscriptions, returns the existing subscriptions.
 	 *
-	 * @param Database $db
+	 * @param IDatabase $db
 	 * @param string $subscriber
 	 * @param string[] $subscriptions
 	 *
 	 * @return string[] Entity ID strings from $subscriptions which $subscriber is already subscribed to.
 	 */
-	private function querySubscriptions( Database $db, $subscriber, array $subscriptions ) {
+	private function querySubscriptions( IDatabase $db, $subscriber, array $subscriptions ) {
 		if ( $subscriptions ) {
 			$subscriptions = $db->selectFieldValues(
 				'wb_changes_subscription',
@@ -142,11 +145,11 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	/**
 	 * Inserts a set of subscriptions.
 	 *
-	 * @param Database $db
+	 * @param IDatabase $db
 	 * @param string $subscriber
 	 * @param string[] $subscriptions
 	 */
-	private function insertSubscriptions( Database $db, $subscriber, array $subscriptions ) {
+	private function insertSubscriptions( IDatabase $db, $subscriber, array $subscriptions ) {
 		$rows = $this->makeSubscriptionRows( $subscriber, $subscriptions );
 
 		$db->insert(
@@ -160,11 +163,11 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	/**
 	 * Inserts a set of subscriptions.
 	 *
-	 * @param Database $db
+	 * @param IDatabase $db
 	 * @param string $subscriber
 	 * @param string[] $subscriptions
 	 */
-	private function deleteSubscriptions( Database $db, $subscriber, array $subscriptions ) {
+	private function deleteSubscriptions( IDatabase $db, $subscriber, array $subscriptions ) {
 		if ( $subscriptions ) {
 			$db->delete(
 				'wb_changes_subscription',

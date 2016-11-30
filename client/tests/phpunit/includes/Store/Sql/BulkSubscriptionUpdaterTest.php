@@ -4,7 +4,7 @@ namespace Wikibase\Client\Tests\Store\Sql;
 
 use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use Wikibase\Client\Store\Sql\BulkSubscriptionUpdater;
-use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
+use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Reporting\ExceptionHandler;
@@ -43,8 +43,8 @@ class BulkSubscriptionUpdaterTest extends \MediaWikiTestCase {
 		$loadBalancer = wfGetLB();
 
 		return new BulkSubscriptionUpdater(
-			new ConsistentReadConnectionManager( $loadBalancer, false ),
-			new ConsistentReadConnectionManager( $loadBalancer, false ),
+			new SessionConsistentConnectionManager( $loadBalancer, false ),
+			new SessionConsistentConnectionManager( $loadBalancer, false ),
 			'testwiki',
 			false,
 			$batchSize
