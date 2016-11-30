@@ -5,7 +5,6 @@ namespace Wikibase\Client\Tests\Store\Sql;
 use IDatabase;
 use LoadBalancer;
 use PHPUnit_Framework_MockObject_MockObject;
-use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
 
 /**
  * @covers Wikibase\Client\Store\Sql\ConsistentReadConnectionManager

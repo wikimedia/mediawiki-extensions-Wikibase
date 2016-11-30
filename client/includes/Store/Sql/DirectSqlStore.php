@@ -5,8 +5,7 @@ namespace Wikibase;
 use HashBagOStuff;
 use ObjectCache;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
-use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
-use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
+use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\Sql\SqlSubscriptionManager;
 use Wikibase\Client\Usage\Sql\SqlUsageTracker;
@@ -205,11 +204,11 @@ class DirectSqlStore implements ClientStore {
 	 * Returns a LoadBalancer that acts as a factory for connections to the repo wiki's
 	 * database.
 	 *
-	 * @return ConsistentReadConnectionManager
+	 * @return SessionConsistentConnectionManager
 	 */
 	private function getRepoConnectionManager() {
 		if ( $this->repoConnectionManager === null ) {
-			$this->repoConnectionManager = new ConsistentReadConnectionManager( wfGetLB( $this->repoWiki ), $this->repoWiki );
+			$this->repoConnectionManager = new SessionConsistentConnectionManager( wfGetLB( $this->repoWiki ), $this->repoWiki );
 		}
 
 		return $this->repoConnectionManager;
@@ -219,11 +218,11 @@ class DirectSqlStore implements ClientStore {
 	 * Returns a LoadBalancer that acts as a factory for connections to the local (client) wiki's
 	 * database.
 	 *
-	 * @return ConsistentReadConnectionManager
+	 * @return SessionConsistentConnectionManager
 	 */
 	private function getLocalConnectionManager() {
 		if ( $this->localConnectionManager === null ) {
-			$this->localConnectionManager = new ConsistentReadConnectionManager( wfGetLB() );
+			$this->localConnectionManager = new SessionConsistentConnectionManager( wfGetLB() );
 		}
 
 		return $this->localConnectionManager;
