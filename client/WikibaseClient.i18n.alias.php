@@ -33,6 +33,13 @@ $specialPageAliases['bgn'] = array(
 	'UnconnectedPages' => array( 'وسل_نه_بوته_ئین_تاکدیمان' ),
 );
 
+/** Bengali (বাংলা) */
+$specialPageAliases['bn'] = array(
+	'EntityUsage' => array( 'সত্তার_ব্যবহার', 'সত্তার_ব্যবহারের_উপাত্ত' ),
+	'PagesWithBadges' => array( 'ব্যাজসহ_পাতা' ),
+	'UnconnectedPages' => array( 'অসংযুক্ত_পাতা', 'সংযোগহীন', 'সাইট_সংযোগহীন', 'অসংযুক্ত_পৃষ্ঠা', 'সংযোগবিহীন_পৃষ্ঠা' ),
+);
+
 /** Czech (čeština) */
 $specialPageAliases['cs'] = array(
 	'PagesWithBadges' => array( 'Stránky_s_odznaky' ),
