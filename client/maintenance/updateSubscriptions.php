@@ -4,7 +4,7 @@ namespace Wikibase;
 
 use Maintenance;
 use Wikibase\Client\Store\Sql\BulkSubscriptionUpdater;
-use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
+use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
@@ -72,8 +72,8 @@ class UpdateSubscriptions extends Maintenance {
 		);
 
 		$updater = new BulkSubscriptionUpdater(
-			new ConsistentReadConnectionManager( wfGetLB() ),
-			new ConsistentReadConnectionManager( wfGetLB( $repoDB ), $repoDB ),
+			new SessionConsistentConnectionManager( wfGetLB() ),
+			new SessionConsistentConnectionManager( wfGetLB( $repoDB ), $repoDB ),
 			$clientId,
 			$repoDB,
 			$this->mBatchSize
