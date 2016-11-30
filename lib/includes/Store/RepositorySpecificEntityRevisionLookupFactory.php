@@ -19,11 +19,11 @@ use Wikimedia\Assert\Assert;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
- * A factory providing the WikiPageEntityRevisionLookup instance configured for the given foreign repository.
+ * A factory providing the WikiPageEntityRevisionLookup instance configured for the given repository.
  *
  * @license GPL-2.0+
  */
-class ForeignEntityRevisionLookupFactory {
+class RepositorySpecificEntityRevisionLookupFactory {
 
 	/**
 	 * @var PrefixMappingEntityIdParserFactory
@@ -86,9 +86,11 @@ class ForeignEntityRevisionLookupFactory {
 		$maxBlobSize,
 		array $databaseNames
 	) {
+		Assert::parameter( !empty( $databaseNames ), '$databaseNames', 'must not be empty' );
+		foreach ( $databaseNames as $name ) {
+			Assert::parameter( is_string( $name ) || $name === false, 'values of $databaseNames', 'must be either string or false' );
+		}
 		RepositoryNameAssert::assertParameterKeysAreValidRepositoryNames( $databaseNames, '$databaseNames' );
-		Assert::parameterElementType( 'string', $databaseNames, '$databaseNames' );
-		Assert::parameter( !array_key_exists( '', $databaseNames ), '$databaseNames', 'must not contain an empty string key' );
 
 		$this->parserFactory = $parserFactory;
 		$this->entitySerializer = $entitySerializer;
