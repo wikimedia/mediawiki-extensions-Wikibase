@@ -7,9 +7,9 @@
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase",
-	"wikibase-deletedentity-item": "Ezabatu elementua",
-	"wikibase-deletedentity-property": "Ezabatu propietatea",
-	"wikibase-deletedentity-query": "Ezabatu kontsulta",
+	"wikibase-deletedentity-item": "Elementu ezabatua",
+	"wikibase-deletedentity-property": "Propietate ezabatua",
+	"wikibase-deletedentity-query": "Kontsulta ezabatua",
 	"wikibase-error-save-generic": "Errore baten ondorioz ezin izan dira aldaketak gorde.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (transliteratuta)",
 	"wikibase-timedetails-timezone": "Ordu-eremua",
