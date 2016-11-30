@@ -5,7 +5,7 @@ namespace Wikibase\Client\Tests\RecentChanges;
 use RecentChange;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
-use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
+use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 /**
  * @covers Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector
@@ -129,7 +129,7 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 	 * @dataProvider provideChangeExists
 	 */
 	public function testChangeExists( $expected, array $changeData ) {
-		$connectionManager = new ConsistentReadConnectionManager( wfGetLB() );
+		$connectionManager = new SessionConsistentConnectionManager( wfGetLB() );
 		$detector = new RecentChangesDuplicateDetector( $connectionManager );
 
 		$this->initRecentChanges();
