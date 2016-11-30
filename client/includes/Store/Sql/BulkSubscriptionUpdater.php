@@ -10,6 +10,7 @@ use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
+use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 /**
  * Implements bulk updates for the repo's wb_changes_subscription table,
@@ -22,12 +23,12 @@ use Wikibase\Lib\Reporting\NullMessageReporter;
 class BulkSubscriptionUpdater {
 
 	/**
-	 * @var ConsistentReadConnectionManager
+	 * @var SessionConsistentConnectionManager
 	 */
 	private $localConnectionManager;
 
 	/**
-	 * @var ConsistentReadConnectionManager
+	 * @var SessionConsistentConnectionManager
 	 */
 	private $repoConnectionManager;
 
@@ -59,9 +60,9 @@ class BulkSubscriptionUpdater {
 	private $progressReporter;
 
 	/**
-	 * @param ConsistentReadConnectionManager $localConnectionManager Connection manager for DB
+	 * @param SessionConsistentConnectionManager $localConnectionManager Connection manager for DB
 	 * connections to the local wiki.
-	 * @param ConsistentReadConnectionManager $repoConnectionManager Connection manager for DB
+	 * @param SessionConsistentConnectionManager $repoConnectionManager Connection manager for DB
 	 * connections to the repo.
 	 * @param string $subscriberWikiId The local wiki's global ID, to be used as the subscriber ID
 	 * in the repo's subscription table.
@@ -73,8 +74,8 @@ class BulkSubscriptionUpdater {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
-		ConsistentReadConnectionManager $localConnectionManager,
-		ConsistentReadConnectionManager $repoConnectionManager,
+		SessionConsistentConnectionManager $localConnectionManager,
+		SessionConsistentConnectionManager $repoConnectionManager,
 		$subscriberWikiId,
 		$repoWiki,
 		$batchSize = 1000
@@ -122,7 +123,7 @@ class BulkSubscriptionUpdater {
 	 * @param EntityId|null $startEntity The entity to start with.
 	 */
 	public function updateSubscriptions( EntityId $startEntity = null ) {
-		$this->repoConnectionManager->forceMaster();
+		$this->repoConnectionManager->prepareForUpdates();
 
 		$continuation = $startEntity === null ? null : array( $startEntity->getSerialization() );
 
@@ -265,7 +266,7 @@ class BulkSubscriptionUpdater {
 	public function purgeSubscriptions( EntityId $startEntity = null ) {
 		$continuation = $startEntity === null ? null : array( $startEntity->getSerialization() );
 
-		$this->repoConnectionManager->forceMaster();
+		$this->repoConnectionManager->prepareForUpdates();
 
 		while ( true ) {
 			wfWaitForSlaves( null, $this->repoWiki );
