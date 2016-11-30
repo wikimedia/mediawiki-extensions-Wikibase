@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aebe47e0_ad33f5bf",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-11-30T14:24:46Z",
+      "side": 1,
+      "message": "minor: I think you can use $this-\u003emsg instead of this global",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 13
+      },
+      "revId": "ef2ba011fcd9d6a56676858390ed530678759fa8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
