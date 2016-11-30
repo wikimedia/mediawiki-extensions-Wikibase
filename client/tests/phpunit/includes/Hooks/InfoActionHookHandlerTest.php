@@ -6,6 +6,7 @@ use Html;
 use IContextSource;
 use RequestContext;
 use Title;
+use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\Sql\SqlUsageTracker;
