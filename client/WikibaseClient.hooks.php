@@ -421,11 +421,6 @@ final class ClientHooks {
 		$idParser = $wikibaseClient->getEntityIdParser();
 		$title = $context->getTitle();
 
-		if ( !$title || !$namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
-			// shorten out
-			return true;
-		}
-
 		$infoActionHookHandler = new InfoActionHookHandler(
 			$namespaceChecker,
 			$wikibaseClient->newRepoLinker(),
