@@ -3,12 +3,15 @@
 namespace Wikibase\Lib\Store;
 
 use DataValues\Deserializers\DataValueDeserializer;
+use Deserializers\Deserializer;
+use Deserializers\DispatchingDeserializer;
 use Serializers\Serializer;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
+use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Lookup\UnknownForeignRepositoryException;
-use Wikibase\InternalSerialization\DeserializerFactory;
+use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
@@ -16,7 +19,7 @@ use Wikimedia\Assert\Assert;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
- * A factory providing the WikiPageEntityMetaDataLookup instance configured for the given foreign repository.
+ * A factory providing the WikiPageEntityRevisionLookup instance configured for the given foreign repository.
  *
  * @license GPL-2.0+
  */
@@ -36,6 +39,11 @@ class ForeignEntityRevisionLookupFactory {
 	 * @var RepositorySpecificDataValueDeserializerFactory
 	 */
 	private $dataValueDeserializerFactory;
+
+	/**
+	 * @var callable[]
+	 */
+	private $deserializerFactoryCallbacks;
 
 	/**
 	 * @var EntityNamespaceLookup
@@ -61,9 +69,13 @@ class ForeignEntityRevisionLookupFactory {
 	 * @param PrefixMappingEntityIdParserFactory $parserFactory
 	 * @param Serializer $entitySerializer
 	 * @param RepositorySpecificDataValueDeserializerFactory $dataValueDeserializerFactory
+	 * @param callable[] $deserializerFactoryCallbacks array of callbacks returning a DispatchableDeserializer instance
+	 *        for a particular entity type. Callbacks should have same signature as deserializer factory callbacks
+	 *        in entity type definition.
+	 *        @see docs/entititypes.wiki @see lib/WikibaseLib.entitytypes.php
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param int $maxBlobSize The maximum size of a blob allowed in serialization/deserialization,
-	 *            @see EntityContentDataCodec
+	 *        @see EntityContentDataCodec
 	 * @param string[] $databaseNames Associative array mapping repository names (prefixes) to database names
 	 *
 	 * @throws ParameterAssertionException
@@ -72,6 +84,7 @@ class ForeignEntityRevisionLookupFactory {
 		PrefixMappingEntityIdParserFactory $parserFactory,
 		Serializer $entitySerializer,
 		RepositorySpecificDataValueDeserializerFactory $dataValueDeserializerFactory,
+		array $deserializerFactoryCallbacks,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		$maxBlobSize,
 		array $databaseNames
@@ -79,10 +92,13 @@ class ForeignEntityRevisionLookupFactory {
 		RepositoryNameAssert::assertParameterKeysAreValidRepositoryNames( $databaseNames, '$databaseNames' );
 		Assert::parameterElementType( 'string', $databaseNames, '$databaseNames' );
 		Assert::parameter( !array_key_exists( '', $databaseNames ), '$databaseNames', 'must not contain an empty string key' );
+		Assert::parameter( !empty( $deserializerFactoryCallbacks ), '$deserializerFactoryCallbacks', 'must not be empty' );
+		Assert::parameterElementType( 'callable', $deserializerFactoryCallbacks, '$deserializerFactoryCallbacks' );
 
 		$this->parserFactory = $parserFactory;
 		$this->entitySerializer = $entitySerializer;
 		$this->dataValueDeserializerFactory = $dataValueDeserializerFactory;
+		$this->deserializerFactoryCallbacks = $deserializerFactoryCallbacks;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->maxBlobSize = $maxBlobSize;
 		$this->databaseNames = $databaseNames;
@@ -116,15 +132,13 @@ class ForeignEntityRevisionLookupFactory {
 		}
 
 		$prefixMappingIdParser = $this->parserFactory->getIdParser( $repositoryName );
-		$entityDeserializerFactory = new DeserializerFactory(
-			$this->dataValueDeserializerFactory->getDeserializer( $repositoryName ),
-			$prefixMappingIdParser,
-			null
-		);
 		$codec = new EntityContentDataCodec(
 			$prefixMappingIdParser,
 			$this->entitySerializer,
-			$entityDeserializerFactory->newEntityDeserializer(),
+			$this->getEntityDeserializer(
+				$prefixMappingIdParser,
+				$this->dataValueDeserializerFactory->getDeserializer( $repositoryName )
+			),
 			$this->maxBlobSize
 		);
 
@@ -141,6 +155,35 @@ class ForeignEntityRevisionLookupFactory {
 			$metaDataLookup,
 			$this->databaseNames[$repositoryName]
 		);
+	}
+
+	/**
+	 * @param EntityIdParser $entityIdParser,
+	 * @param DataValueDeserializer $dataValueDeserializer
+	 *
+	 * @return Deserializer
+	 */
+	private function getEntityDeserializer(
+		EntityIdParser $entityIdParser,
+		DataValueDeserializer $dataValueDeserializer
+	) {
+		$deserializerFactory = new DeserializerFactory(
+			$dataValueDeserializer,
+			$entityIdParser
+		);
+
+		$deserializers = [];
+		foreach ( $this->deserializerFactoryCallbacks as $callback ) {
+			$deserializers[] = call_user_func( $callback, $deserializerFactory );
+		}
+
+		$internalDeserializerFactory = new InternalDeserializerFactory(
+			$dataValueDeserializer,
+			$entityIdParser,
+			new DispatchingDeserializer( $deserializers )
+		);
+
+		return $internalDeserializerFactory->newEntityDeserializer();
 	}
 
 }

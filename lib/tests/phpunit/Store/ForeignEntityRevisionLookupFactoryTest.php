@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Tests\Store;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use Serializers\Serializer;
+use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Lookup\UnknownForeignRepositoryException;
@@ -64,6 +65,20 @@ class ForeignEntityRevisionLookupFactoryTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * @return callable[]
+	 */
+	private function getDeserializerFactoryCallbacks() {
+		return [
+			'item' => function( DeserializerFactory $deserializerFactory ) {
+				return $deserializerFactory->newItemDeserializer();
+			},
+			'property' => function( DeserializerFactory $deserializerFactory ) {
+				return $deserializerFactory->newPropertyDeserializer();
+			}
+		];
+	}
+
+	/**
 	 * @return EntityNamespaceLookup
 	 */
 	private function getEntityNamespaceLookup() {
@@ -75,6 +90,7 @@ class ForeignEntityRevisionLookupFactoryTest extends \PHPUnit_Framework_TestCase
 			$this->getPrefixMappingEntityIdParserFactory(),
 			$this->getEntitySerializer(),
 			$this->getDataValueDeserializerFactory(),
+			$this->getDeserializerFactoryCallbacks(),
 			$this->getEntityNamespaceLookup(),
 			0,
 			[ 'foo' => 'foodb' ]
@@ -88,6 +104,7 @@ class ForeignEntityRevisionLookupFactoryTest extends \PHPUnit_Framework_TestCase
 			$this->getPrefixMappingEntityIdParserFactory(),
 			$this->getEntitySerializer(),
 			$this->getDataValueDeserializerFactory(),
+			$this->getDeserializerFactoryCallbacks(),
 			$this->getEntityNamespaceLookup(),
 			0,
 			[ 'foo' => 'foodb' ]
@@ -103,6 +120,7 @@ class ForeignEntityRevisionLookupFactoryTest extends \PHPUnit_Framework_TestCase
 			$this->getPrefixMappingEntityIdParserFactory(),
 			$this->getEntitySerializer(),
 			$this->getDataValueDeserializerFactory(),
+			$this->getDeserializerFactoryCallbacks(),
 			$this->getEntityNamespaceLookup(),
 			0,
 			[ 'foo' => 'foodb' ]
@@ -136,9 +154,34 @@ class ForeignEntityRevisionLookupFactoryTest extends \PHPUnit_Framework_TestCase
 			$this->getPrefixMappingEntityIdParserFactory(),
 			$this->getEntitySerializer(),
 			$this->getDataValueDeserializerFactory(),
+			$this->getDeserializerFactoryCallbacks(),
 			$this->getEntityNamespaceLookup(),
 			0,
 			$databaseNames
+		);
+	}
+
+	public function provideInvalidDeserializerFactoryCallbacks() {
+		return [
+			'empty array' => [ [] ],
+			'non-callback element' => [ [ 'item' => 100 ] ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideInvalidDeserializerFactoryCallbacks
+	 */
+	public function testGivenInvalidDeserializerFactoryCallbacks_exceptionIsThrown( array $callbacks ) {
+		$this->setExpectedException( ParameterAssertionException::class );
+
+		new ForeignEntityRevisionLookupFactory(
+			$this->getPrefixMappingEntityIdParserFactory(),
+			$this->getEntitySerializer(),
+			$this->getDataValueDeserializerFactory(),
+			$callbacks,
+			$this->getEntityNamespaceLookup(),
+			0,
+			[ 'foo' => 'foodb' ]
 		);
 	}
 
