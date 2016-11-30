@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Tests;
+namespace Wikibase\Lib\Tests\Store;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\Item;

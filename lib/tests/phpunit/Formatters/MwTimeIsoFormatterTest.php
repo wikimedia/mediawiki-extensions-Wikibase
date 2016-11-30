@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Tests;
+namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\TimeValue;
 use MediaWikiTestCase;

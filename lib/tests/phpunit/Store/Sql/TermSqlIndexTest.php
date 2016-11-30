@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Tests\Store;
+namespace Wikibase\Lib\Tests\Store\Sql;
 
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -12,6 +12,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
+use Wikibase\Lib\Tests\Store\TermIndexTest;
 use Wikibase\StringNormalizer;
 use Wikibase\TermIndexEntry;
 use Wikibase\TermSqlIndex;

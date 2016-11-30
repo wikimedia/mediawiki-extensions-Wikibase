@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Lib\Serialization;
+namespace Wikibase\Lib\Tests\Serialization;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\Lib\Serialization\SerializationModifier;

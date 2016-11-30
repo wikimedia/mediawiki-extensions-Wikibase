@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Formatters\Test;
+namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;

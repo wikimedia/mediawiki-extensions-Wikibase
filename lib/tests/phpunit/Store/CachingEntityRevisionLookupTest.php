@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Tests\Store;
+namespace Wikibase\Lib\Tests\Store;
 
 use HashBagOStuff;
 use Wikibase\DataModel\Entity\EntityRedirect;

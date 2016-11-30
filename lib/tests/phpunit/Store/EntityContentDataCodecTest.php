@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Store\Test;
+namespace Wikibase\Lib\Tests\Store;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;

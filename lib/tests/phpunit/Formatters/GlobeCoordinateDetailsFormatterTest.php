@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Test;
+namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\Geo\Values\LatLongValue;

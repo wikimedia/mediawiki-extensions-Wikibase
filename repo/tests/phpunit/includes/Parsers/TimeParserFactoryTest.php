@@ -210,7 +210,7 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 				array( '-0111-11-01T00:00:00Z', TimeValue::PRECISION_DAY, $julian ),
 
 			/**
-			 * @see Wikibase\Lib\Tests\MwTimeIsoFormatterTest
+			 * @see Wikibase\Lib\Tests\Formatters\MwTimeIsoFormatterTest
 			 */
 			'16 laMonth8 2013' =>
 				array( '+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY, $gregorian, 'la' ),

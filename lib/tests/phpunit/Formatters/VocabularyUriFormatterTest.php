@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Test;
+namespace Wikibase\Lib\Tests\Formatters;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
