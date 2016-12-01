@@ -8,7 +8,7 @@ use DBError;
 use Exception;
 use InvalidArgumentException;
 use Traversable;
-use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
+use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
@@ -30,7 +30,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	private $idParser;
 
 	/**
-	 * @var ConsistentReadConnectionManager
+	 * @var SessionConsistentConnectionManager
 	 */
 	private $connectionManager;
 
@@ -41,9 +41,9 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 
 	/**
 	 * @param EntityIdParser $idParser
-	 * @param ConsistentReadConnectionManager $connectionManager
+	 * @param SessionConsistentConnectionManager $connectionManager
 	 */
-	public function __construct( EntityIdParser $idParser, ConsistentReadConnectionManager $connectionManager ) {
+	public function __construct( EntityIdParser $idParser, SessionConsistentConnectionManager $connectionManager ) {
 		$this->idParser = $idParser;
 		$this->connectionManager = $connectionManager;
 	}
