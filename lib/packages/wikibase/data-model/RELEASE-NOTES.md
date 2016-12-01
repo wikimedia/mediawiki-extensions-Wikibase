@@ -6,7 +6,7 @@
 
 ## Version 6.3.1 (2016-11-30)
 
-* `ItemId::getNumericId` and `PropertyId::getNumericId` no loner throw exceptions for foreign entity ids
+* `ItemId::getNumericId` and `PropertyId::getNumericId` no longer throw exceptions for foreign ids
 
 ## Version 6.3.0 (2016-11-03)
 
