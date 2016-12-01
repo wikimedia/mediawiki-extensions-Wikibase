@@ -7,6 +7,7 @@ use MediaWiki\Services\ServiceContainer;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RepositorySpecificEntityRevisionLookupFactory;
@@ -49,6 +50,14 @@ class RepositorySpecificServices extends ServiceContainer {
 	public function getEntityRevisionLookups() {
 		// TODO: should rather use some other method as it returns a repo name => service map, not a service
 		return $this->getService( 'EntityRevisionLookups' );
+	}
+
+	/**
+	 * @return TermBuffer[]
+	 */
+	public function getTermBuffers() {
+		// TODO: should rather use some other method as it returns a repo name => service map, not a service
+		return $this->getService( 'TermBuffers' );
 	}
 
 	/**
@@ -100,7 +109,7 @@ class RepositorySpecificServices extends ServiceContainer {
 	/**
 	 * @return string[]
 	 */
-	private function getDatabaseNames() {
+	public function getDatabaseNames() {
 		$names = [ '' => $this->client->getSettings()->getSetting( 'repoDatabase' ) ];
 		$foreignRepositorySettings = $this->config->get( 'ForeignRepositorySettings' );
 		foreach ( $foreignRepositorySettings as $repositoryName => $settings ) {
@@ -122,6 +131,7 @@ class RepositorySpecificServices extends ServiceContainer {
 	 * @return callable[]
 	 */
 	private function getDeserializerFactoryCallbacks() {
+		// TODO: this should be coming from WikibaseClient somehow
 		return [
 			'item' => function( DeserializerFactory $deserializerFactory ) {
 				return $deserializerFactory->newItemDeserializer();
@@ -130,6 +140,10 @@ class RepositorySpecificServices extends ServiceContainer {
 				return $deserializerFactory->newPropertyDeserializer();
 			},
 		];
+	}
+
+	public function getClient() {
+		return $this->client;
 	}
 
 }

@@ -12,6 +12,7 @@ use MediaWikiTestCase;
 use ResultWrapper;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\DeserializerFactory;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\Lib\DataTypeDefinitions;
@@ -71,7 +72,7 @@ class WikibaseClientFederationIntegrationTest extends MediaWikiTestCase {
 		return $factory;
 	}
 
-	public function testFoo() {
+	public function testEntityLookup() {
 		$defaultLb = $this->getMockLoadBalancer( $this->getMockDb( new FakeResultWrapper( [] ) ) );
 		$lbFactory = $this->getLoadBalancerFactory( [
 			'foowiki' => $this->getMockLoadBalancer(
@@ -100,13 +101,43 @@ class WikibaseClientFederationIntegrationTest extends MediaWikiTestCase {
 		] );
 
 		$client = $this->getWikibaseClient();
-		$lookup = $client->getRestrictedEntityLookup();
+		$entityLookup = $client->getRestrictedEntityLookup();
 
-		$this->assertTrue( $lookup->hasEntity( new ItemId( 'foo:Q123' ) ) );
-		$this->assertFalse( $lookup->hasEntity( new ItemId( 'Q123' ) ) );
+		$this->assertTrue( $entityLookup->hasEntity( new ItemId( 'foo:Q123' ) ) );
+		$this->assertFalse( $entityLookup->hasEntity( new ItemId( 'Q123' ) ) );
 
-		$entity = $lookup->getEntity( new ItemId( 'foo:Q123' ) );
+		$entity = $entityLookup->getEntity( new ItemId( 'foo:Q123' ) );
 		$this->assertEquals( 'foo:Q123', $entity->getId()->getSerialization() );
+	}
+
+	public function testTermLookup() {
+		$defaultLb = $this->getMockLoadBalancer( $this->getMockDb( new FakeResultWrapper( [] ) ) );
+		$lbFactory = $this->getLoadBalancerFactory( [
+			'foowiki' => $this->getMockLoadBalancer(
+				$this->getMockDb( new FakeResultWrapper( [ $this->getRowObject( [
+					'term_entity_type' => 'item',
+					'term_type' => 'label',
+					'term_language' => 'en',
+					'term_text' => 'Foo Item',
+					'term_entity_id' => 123,
+				] ) ] ) )
+			),
+			WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'repoDatabase' ) => $defaultLb,
+		] );
+		$this->overrideMwServices( null, [
+			'DBLoadBalancerFactory' => function () use ( $lbFactory ) {
+				return $lbFactory;
+			},
+			'DBLoadBalancer' => function () use ( $defaultLb ) {
+				return $defaultLb;
+			},
+		] );
+
+		$client = $this->getWikibaseClient();
+		$termLookup = $client->getTermLookup();
+
+		$this->assertSame( 'Foo Item', $termLookup->getLabel( new ItemId( 'foo:Q123' ), 'en' ) );
+		$this->assertNull( $termLookup->getLabel( new ItemId( 'Q123' ), 'en' ) );
 	}
 
 	/**
@@ -130,6 +161,13 @@ class WikibaseClientFederationIntegrationTest extends MediaWikiTestCase {
 					'entity-id-pattern' => ItemId::PATTERN,
 					'entity-id-builder' => function( $serialization ) {
 						return new ItemId( $serialization );
+					},
+					'entity-id-composer-callback' => function( $repositoryName, $uniquePart ) {
+						return new ItemId( EntityId::joinSerialization( [
+							$repositoryName,
+							'',
+							'Q' . $uniquePart
+						] ) );
 					},
 				],
 			] ),

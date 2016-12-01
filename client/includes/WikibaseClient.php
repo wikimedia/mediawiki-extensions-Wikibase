@@ -73,6 +73,7 @@ use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\DispatchingTermBuffer;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\MediaWikiContentLanguages;
@@ -398,10 +399,9 @@ final class WikibaseClient {
 	 * @return BufferingTermLookup
 	 */
 	public function getBufferingTermLookup() {
-		if ( !$this->termLookup ) {
-			$this->termLookup = new BufferingTermLookup(
-				$this->getStore()->getTermIndex(),
-				1000 // @todo: configure buffer size
+		if ( $this->termLookup === null ) {
+			$this->termLookup = new DispatchingTermBuffer(
+				$this->getRepositorySpecificServices()->getTermBuffers()
 			);
 		}
 
@@ -507,14 +507,7 @@ final class WikibaseClient {
 		if ( $this->store === null ) {
 			$this->store = new DispatchingServiceStore(
 				$this->getSettings(),
-				new RepositorySpecificServices(
-					$this,
-					// TODO: TBC
-					new HashConfig( [
-						'ServiceWiringFiles' => $this->settings->getSetting( 'repositorySpecificServiceWiringFiles' ),
-						'ForeignRepositorySettings' => $this->settings->getSetting( 'foreignRepositories' ),
-					] )
-				),
+				$this->getRepositorySpecificServices(),
 				$this->getDirectSqlStore()
 			);
 		}
@@ -1298,6 +1291,20 @@ final class WikibaseClient {
 			}
 		}
 		return $setting;
+	}
+
+	/**
+	 * @return RepositorySpecificServices
+	 */
+	private function getRepositorySpecificServices() {
+		return new RepositorySpecificServices(
+			$this,
+			// TODO: TBC
+			new HashConfig( [
+				'ServiceWiringFiles' => $this->settings->getSetting( 'repositorySpecificServiceWiringFiles' ),
+				'ForeignRepositorySettings' => $this->settings->getSetting( 'foreignRepositories' ),
+			] )
+		);
 	}
 
 }
