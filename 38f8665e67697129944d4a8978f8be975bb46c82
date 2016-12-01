@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ed34346_4bd7c5f2",
+        "filename": "client/WikibaseClient.i18n.alias.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-01T07:44:03Z",
+      "side": 1,
+      "message": "5 aliases? Please explain what they mean.\n\nAlso there is a space missing at the end.",
+      "range": {
+        "startLine": 40,
+        "startChar": 30,
+        "endLine": 40,
+        "endChar": 114
+      },
+      "revId": "38f8665e67697129944d4a8978f8be975bb46c82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
