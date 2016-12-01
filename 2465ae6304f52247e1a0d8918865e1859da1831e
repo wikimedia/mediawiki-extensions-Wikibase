@@ -16,6 +16,24 @@
       "revId": "2465ae6304f52247e1a0d8918865e1859da1831e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_9358738e",
+        "filename": "lib/tests/phpunit/Store/DispatchingPropertyInfoLookupTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-12-01T16:28:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ed34346_f31a07d0",
+      "revId": "2465ae6304f52247e1a0d8918865e1859da1831e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
