@@ -1,18 +1,19 @@
 # Wikibase DataModel release notes
 
-## Version 7.0.0
+## Version 7.0.0 (dev)
 
-* Removed `FingerprintHolder`.
+* Removed `FingerprintHolder`
 
 ## Version 6.3.1 (2016-11-30)
 
-* Fixed `ItemId` and `PropertyId` to allow calling getNumericId on foreign entity ids.
+* `ItemId::getNumericId` and `PropertyId::getNumericId` no loner throw exceptions for foreign entity ids
 
 ## Version 6.3.0 (2016-11-03)
 
 * Added `RepositoryNameAssert` class
 
 ## Version 6.2.0 (2016-10-14)
+
 * Raised minimum PHP version to 5.5
 * Added basic support for foreign EntityIds
 	* Added `isForeign`, `getRepository` and `getLocalPart` to `EntityId`
