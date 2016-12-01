@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ed34346_a599e873",
+        "filename": "repo/includes/Specials/SpecialMergeItems.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-12-01T00:11:21Z",
+      "side": 1,
+      "message": "You either need to check whether the Item is actually redirecting to the target Item (preferred) or make the message less specific (like: \"One of the Items is a redirect… These items might already merged.\").",
+      "revId": "5e1e5714eb3cb82cbbd98050931e192dd946b3a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
