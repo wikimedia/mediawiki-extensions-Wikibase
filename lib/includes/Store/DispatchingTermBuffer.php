@@ -11,7 +11,7 @@ use Wikimedia\Assert\Assert;
 /**
  * @license GPL-2.0+
  */
-class DispatchingTermBuffer extends EntityTermLookupBase implements TermBuffer {
+class DispatchingTermBuffer extends EntityTermLookupBase implements PrefetchingTermLookup {
 
 	/**
 	 * @var TermBuffer[]
