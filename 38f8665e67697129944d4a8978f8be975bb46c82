@@ -22,6 +22,30 @@
       "revId": "38f8665e67697129944d4a8978f8be975bb46c82",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_96f501ca",
+        "filename": "client/WikibaseClient.i18n.alias.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1382
+      },
+      "writtenOn": "2016-12-01T17:11:25Z",
+      "side": 1,
+      "message": "Translated form \u0027UnconnectedPages\u0027 \u003d\u003e array( \u0027UnconnectedPages\u0027, \u0027WithoutConnection\u0027, \u0027WithoutSitelinks\u0027 ),\n\nhere: UnconnectedPages\u003d \u0027অসংযুক্ত_পাতা , অসংযুক্ত_পৃষ্ঠা\u0027, \u0026 \u0027সংযোগবিহীন_পৃষ্ঠা\nWithoutConnection\u003d সংযোগহীন\nWithoutSitelinks\u003d সাইট_সংযোগহীন",
+      "parentUuid": "8ed34346_4bd7c5f2",
+      "range": {
+        "startLine": 40,
+        "startChar": 30,
+        "endLine": 40,
+        "endChar": 114
+      },
+      "revId": "38f8665e67697129944d4a8978f8be975bb46c82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
