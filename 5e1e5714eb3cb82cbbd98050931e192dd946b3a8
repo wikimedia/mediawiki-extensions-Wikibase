@@ -2,6 +2,69 @@
   "comments": [
     {
       "key": {
+        "uuid": "8ed34346_4b16a5f7",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-01T07:24:51Z",
+      "side": 1,
+      "message": "This is a mistake. The message key must be identical to the one in en.json.",
+      "range": {
+        "startLine": 263,
+        "startChar": 11,
+        "endLine": 263,
+        "endChar": 25
+      },
+      "revId": "5e1e5714eb3cb82cbbd98050931e192dd946b3a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_2b136907",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-01T07:24:51Z",
+      "side": 1,
+      "message": "\"Error message displayed if someone tries to merge items which are already merged.\"",
+      "range": {
+        "startLine": 263,
+        "startChar": 43,
+        "endLine": 263,
+        "endChar": 123
+      },
+      "revId": "5e1e5714eb3cb82cbbd98050931e192dd946b3a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_4bf585b4",
+        "filename": "repo/includes/Specials/SpecialMergeItems.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-01T07:24:51Z",
+      "side": 1,
+      "message": "Instead of the \"if\" I would add an actual \"catch ( RevisionedUnresolvedRedirectException $ex )\" to the only place where this method is called. This would be pure refactoring of the code to make it easier to read and to understand, the outcome would be the exact same.",
+      "revId": "5e1e5714eb3cb82cbbd98050931e192dd946b3a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ed34346_a599e873",
         "filename": "repo/includes/Specials/SpecialMergeItems.php",
         "patchSetId": 3
