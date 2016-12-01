@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ed34346_1d49146b",
+        "filename": "lib/includes/Store/PropertyInfoLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-01T08:54:20Z",
+      "side": 1,
+      "message": "I know this is just being moved over from PropertyInfoStore but I believe it would be nice to put a new interface to Wikibase\\Lib\\Store.\nThe other interface might be move in a separate patch.",
+      "revId": "0d702c373c8b45e5c1a7fea510046d8479bf8dec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
