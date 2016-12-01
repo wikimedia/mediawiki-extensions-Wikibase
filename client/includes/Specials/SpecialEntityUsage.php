@@ -111,7 +111,7 @@ class SpecialEntityUsage extends QueryPage {
 			$formDescriptor['entity']['default'] = $this->entityId->getSerialization();
 		}
 
-		return HTMLForm::factory( 'inline', $formDescriptor, $this->getContext() )
+		return HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext() )
 			->setMethod( 'get' )
 			->setWrapperLegendMsg( 'wikibase-entityusage-legend' )
 			->suppressDefaultSubmit()
