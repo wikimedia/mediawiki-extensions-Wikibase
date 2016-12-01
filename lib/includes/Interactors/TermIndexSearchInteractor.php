@@ -6,6 +6,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\Store\BufferingTermLookup;
 use Wikibase\TermIndex;
@@ -31,7 +32,7 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	private $languageFallbackChainFactory;
 
 	/**
-	 * @var BufferingTermLookup
+	 * @var PrefetchingTermLookup
 	 */
 	private $bufferingTermLookup;
 
@@ -53,13 +54,13 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	/**
 	 * @param TermIndex $termIndex Used to search the terms
 	 * @param LanguageFallbackChainFactory $fallbackFactory
-	 * @param BufferingTermLookup $bufferingTermLookup Provides the displayTerms
+	 * @param PrefetchingTermLookup $bufferingTermLookup Provides the displayTerms
 	 * @param string $displayLanguageCode
 	 */
 	public function __construct(
 		TermIndex $termIndex,
 		LanguageFallbackChainFactory $fallbackFactory,
-		BufferingTermLookup $bufferingTermLookup,
+		PrefetchingTermLookup $bufferingTermLookup,
 		$displayLanguageCode
 	) {
 		Assert::parameterType( 'string', $displayLanguageCode, '$displayLanguageCode' );
