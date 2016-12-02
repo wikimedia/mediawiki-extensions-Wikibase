@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ed34346_67786aee",
+        "filename": "lib/includes/Store/PrefetchingTermLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-02T12:48:14Z",
+      "side": 1,
+      "message": "Shouldn\u0027t it be called BufferedTermLookup then?\n\nI just realized that we have a BufferingTermLookup, but not as an interface.\n\n… after looking into the two interfaces more: ok, PrefetchingTermLookup is cool.",
+      "range": {
+        "startLine": 9,
+        "startChar": 40,
+        "endLine": 9,
+        "endChar": 65
+      },
+      "revId": "4540c53cee41d9c910cf0abc63f86e800623bcf6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
