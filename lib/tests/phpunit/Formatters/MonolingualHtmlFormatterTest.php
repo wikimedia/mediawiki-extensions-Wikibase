@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Formatters\Test;
+namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\MonolingualTextValue;
 use ValueFormatters\FormatterOptions;

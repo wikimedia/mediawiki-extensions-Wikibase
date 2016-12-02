@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Lib\Tests\Modules;
 
 use BagOStuff;
 use HashBagOStuff;
@@ -53,7 +53,7 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @uses Wikibase\Test\SitesModuleWorkerTest::newSitesModuleWorker
+	 * @uses Wikibase\Lib\Tests\Modules\SitesModuleWorkerTest::newSitesModuleWorker
 	 *
 	 * @dataProvider getScriptProvider
 	 */

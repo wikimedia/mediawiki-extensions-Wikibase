@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Lib\Tests\Units;
 
 use DataValues\DecimalValue;
 use DataValues\QuantityValue;

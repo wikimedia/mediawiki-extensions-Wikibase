@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Lib\Tests\Reporting;
 
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 

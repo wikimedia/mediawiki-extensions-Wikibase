@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Lib\Tests\Formatters;
 
 use LogicException;
 use PHPUnit_Framework_TestCase;

@@ -3,9 +3,7 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use HashBagOStuff;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\TermIndexEntry;
