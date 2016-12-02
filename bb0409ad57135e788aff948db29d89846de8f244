@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ed34346_e41a387e",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-02T10:48:57Z",
+      "side": 1,
+      "message": "I\u0027m not a native speaker, but this does not sound like proper English to me.",
+      "range": {
+        "startLine": 232,
+        "startChar": 33,
+        "endLine": 232,
+        "endChar": 57
+      },
+      "revId": "bb0409ad57135e788aff948db29d89846de8f244",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_a40d6043",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-02T10:48:57Z",
+      "side": 1,
+      "message": "Did you meant \"is a redirect\"?",
+      "range": {
+        "startLine": 263,
+        "startChar": 79,
+        "endLine": 263,
+        "endChar": 90
+      },
+      "revId": "bb0409ad57135e788aff948db29d89846de8f244",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_c4105c5e",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-02T10:48:57Z",
+      "side": 1,
+      "message": "which",
+      "range": {
+        "startLine": 263,
+        "startChar": 152,
+        "endLine": 263,
+        "endChar": 156
+      },
+      "revId": "bb0409ad57135e788aff948db29d89846de8f244",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
