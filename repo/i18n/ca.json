@@ -32,7 +32,7 @@
 	"wikibase-save-inprogress": "S'està desant…",
 	"wikibase-remove-inprogress": "S'està suprimint…",
 	"wikibase-statementlistview-add": "afegeix",
-	"wikibase-statementlistview-add-tooltip": "Afegir un nou valor",
+	"wikibase-statementlistview-add-tooltip": "Afegir un valor nou",
 	"wikibase-statementgrouplistview-add": "afegeix",
 	"wikibase-statementgrouplistview-add-tooltip": "Afegeix una declaració nova",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "En més idiomes",

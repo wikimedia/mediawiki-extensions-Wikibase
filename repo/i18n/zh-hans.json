@@ -242,7 +242,7 @@
 	"wikibase-itemmerge-missing-parameter": "不完整的输入。",
 	"wikibase-itemmerge-not-item": "指定的实体不是数据项。",
 	"wikibase-itemmerge-failed-save": "保存数据项失败。",
-	"wikibase-itemmerge-permissiondenied": "权限错误。",
+	"wikibase-itemmerge-permissiondenied": "权限被拒绝。",
 	"wikibase-itemmerge-failed-modify": "合并数据项失败，请先解决任何冲突。",
 	"wikibase-itemmerge-no-such-entity": "找不到数据项。",
 	"wikibase-itemmerge-cant-load-entity-content": "加载数据项失败。",

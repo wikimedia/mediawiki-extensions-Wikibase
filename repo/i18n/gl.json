@@ -587,7 +587,7 @@
 	"apihelp-wbsetsitelink-param-summary": "Resumo da edición.\nEngadirase un comentario xenerado automaticamente. O límite de lonxitude do autocomentario xunto co seu resumo é de 260 caracteres. Teña en conta que todo o que exceda dese límite non será tido en conta.",
 	"apihelp-wbsetsitelink-param-bot": "Marcar esta edición como bot. Esta etiqueta de URL só será respectada se o usuario pertence ó grupo \"bot\".",
 	"apihelp-wbsetsitelink-param-linksite": "Identificador do sitio no que reside o artigo a ligar",
-	"apihelp-wbsetsitelink-param-linktitle": "Título do artigo a ligar. Se este parámetro é unha cadea de texto en branco ou linktitle e distintivo non teñen valor, a ligazón eliminarase.",
+	"apihelp-wbsetsitelink-param-linktitle": "Título do artigo a ligar. Se este parámetro é unha cadea de texto en branco ou <var>linktitle</var> e <var>badges</var> non teñen valor, a ligazón eliminarase.",
 	"apihelp-wbsetsitelink-param-badges": "Identificadores dos elementos a asignar como distintivos. Reemprazarán ós actuais. Se este parámetro non se indica, os distintivos non serán cambiados",
 	"apihelp-wbsetsitelink-example-1": "Engade unha ligazón a sitio ó artigo en inglés de \"Hydrogen\" con identificador \"Q42\", se a ligazón ó sitio non existe",
 	"apihelp-wbsetsitelink-example-2": "Engade unha ligazón a sitio ó artigo en inglés \"Hydrogen\"  con identificador \"Q42\", se a ligazón ó sitio non existe. Tamén engade \"Loves Oxygen\" ó resumo de edición.",
