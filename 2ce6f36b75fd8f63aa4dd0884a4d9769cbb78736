@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ed34346_271b92d6",
+        "filename": "lib/includes/Store/DispatchingPropertyInfoLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-02T12:31:29Z",
+      "side": 1,
+      "message": "my IDE wants to have use DBError on top",
+      "revId": "2ce6f36b75fd8f63aa4dd0884a4d9769cbb78736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_071096ac",
+        "filename": "lib/tests/phpunit/Store/DispatchingPropertyInfoLookupTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-02T12:31:29Z",
+      "side": 1,
+      "message": "shouldn\u0027t arguments of assertSame be flipped here? the expected result goes first in PHPUnit universe, right?",
+      "revId": "2ce6f36b75fd8f63aa4dd0884a4d9769cbb78736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
