@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ed34346_224ee39b",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 3033
+      },
+      "writtenOn": "2016-12-02T03:45:37Z",
+      "side": 1,
+      "message": "the items",
+      "range": {
+        "startLine": 263,
+        "startChar": 69,
+        "endLine": 263,
+        "endChar": 74
+      },
+      "revId": "7ac6d6174399d2b46b6298265a8ba165b79ef348",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_c24ccfa1",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 3033
+      },
+      "writtenOn": "2016-12-02T03:45:37Z",
+      "side": 1,
+      "message": "delete the comma\nwhich are already merged",
+      "range": {
+        "startLine": 263,
+        "startChar": 144,
+        "endLine": 263,
+        "endChar": 168
+      },
+      "revId": "7ac6d6174399d2b46b6298265a8ba165b79ef348",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_e247cb7a",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 3033
+      },
+      "writtenOn": "2016-12-02T03:45:37Z",
+      "side": 1,
+      "message": "tries",
+      "range": {
+        "startLine": 263,
+        "startChar": 126,
+        "endLine": 263,
+        "endChar": 129
+      },
+      "revId": "7ac6d6174399d2b46b6298265a8ba165b79ef348",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_0253e744",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 3033
+      },
+      "writtenOn": "2016-12-02T03:45:37Z",
+      "side": 1,
+      "message": "this occurs",
+      "range": {
+        "startLine": 263,
+        "startChar": 102,
+        "endLine": 263,
+        "endChar": 112
+      },
+      "revId": "7ac6d6174399d2b46b6298265a8ba165b79ef348",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
