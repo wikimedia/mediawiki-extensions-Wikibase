@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Repo\Validators;
+namespace Wikibase\Repo\Tests\Validators;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\LabelDescriptionDuplicateDetector;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Repo\Validators;
+namespace Wikibase\Repo\Tests\Validators;
 
 use Wikibase\Repo\Validators\RegexValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;

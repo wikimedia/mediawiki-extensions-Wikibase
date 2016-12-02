@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Repo\Validators;
+namespace Wikibase\Repo\Tests\Validators;
 
 use InvalidArgumentException;
 use Wikibase\Repo\Validators\MembershipValidator;
