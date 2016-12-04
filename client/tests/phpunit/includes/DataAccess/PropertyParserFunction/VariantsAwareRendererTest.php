@@ -2,6 +2,8 @@
 
 namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
 
+use ParserOutput;
+use Title;
 use Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer;
 use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory;
 use Wikibase\Client\DataAccess\PropertyParserFunction\VariantsAwareRenderer;
