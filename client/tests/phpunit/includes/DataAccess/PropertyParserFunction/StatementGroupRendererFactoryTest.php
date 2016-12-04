@@ -5,6 +5,7 @@ namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
 use Language;
 use Parser;
 use ParserOptions;
+use ParserOutput;
 use Title;
 use User;
 use ValueFormatters\FormatterOptions;
