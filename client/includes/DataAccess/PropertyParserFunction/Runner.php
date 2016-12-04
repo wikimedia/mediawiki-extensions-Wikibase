@@ -107,7 +107,7 @@ class Runner {
 		}
 
 		$renderer = $this->rendererFactory->newRendererFromParser( $parser, $type );
-		$rendered = $renderer->render( $entityId, $propertyLabelOrId );
+		$rendered = $renderer->render( $entityId, $propertyLabelOrId, $parser->getOutput(), $parser->getTitle() );
 		$result = $this->buildResult( $rendered );
 
 		// Track usage of "other" (that is, not label/title/sitelinks) data from the item.

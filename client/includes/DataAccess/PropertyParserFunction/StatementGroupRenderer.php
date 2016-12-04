@@ -2,6 +2,8 @@
 
 namespace Wikibase\Client\DataAccess\PropertyParserFunction;
 
+use ParserOutput;
+use Title;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -18,9 +20,11 @@ interface StatementGroupRenderer {
 	/**
 	 * @param EntityId $entityId
 	 * @param string $propertyLabelOrId
+	 * @param ParserOutput $parserOutput
+	 * @param Title $title
 	 *
 	 * @return string
 	 */
-	public function render( EntityId $entityId, $propertyLabelOrId );
+	public function render( EntityId $entityId, $propertyLabelOrId, ParserOutput $parserOutput, Title $title );
 
 }

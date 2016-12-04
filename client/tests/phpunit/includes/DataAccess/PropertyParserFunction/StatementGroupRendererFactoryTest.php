@@ -5,6 +5,7 @@ namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
 use Language;
 use Parser;
 use ParserOptions;
+use ParserOutput;
 use Title;
 use User;
 use ValueFormatters\FormatterOptions;
@@ -126,7 +127,12 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
 		$usageAccumulator = new ParserOutputUsageAccumulator( $parser->getOutput() );
-		$this->assertEquals( "Kittens!", $renderer->render( new ItemId( 'Q1' ), 'P1' ) );
+		$this->assertEquals( "Kittens!", $renderer->render(
+			new ItemId( 'Q1' ),
+			'P1',
+			$this->getMock( ParserOutput::class ),
+			$this->getMock( Title::class )
+		) );
 
 		$usages = $usageAccumulator->getUsages();
 		if ( $allowDataAccessInUserLanguage ) {
