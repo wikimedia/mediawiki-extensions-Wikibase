@@ -115,5 +115,7 @@
 	"notification-bundle-header-page-connection": "<strong>$3</strong> and {{PLURAL:$4|one other page|$4 other pages|100=99+ other pages}} were {{GENDER:$2|connected}} to {{WBREPONAME}} items.",
 	"notification-link-text-view-item": "{{GENDER:$1|View}} item",
 	"notification-subject-page-connection": "A page on {{SITENAME}} you {{GENDER:$3|created}} was {{GENDER:$2|connected}} to a {{WBREPONAME}} item",
-	"notification-page-connection-link": "Project:$1"
+	"notification-page-connection-link": "Project:$1",
+	"unresolved-property-category": "Pages with unresolved properties",
+	"unresolved-property-category-desc": "This category lists pages that reference {{WBREPONAME}} properties that can not be found neither by their property ID nor label."
 }
