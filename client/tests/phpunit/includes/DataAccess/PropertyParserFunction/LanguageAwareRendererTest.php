@@ -4,6 +4,9 @@ namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
 
 use DataValues\StringValue;
 use Language;
+use Parser;
+use ParserOutput;
+use Title;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
@@ -62,6 +65,22 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	/**
+	 * Return a mock ParserOutput object that checks how many times it adds a tracking category.
+	 * @param $num Number of times a tracking category should be added
+	 *
+	 * @return ParserOutput
+	 */
+	private function getMockParserOutput( $num ) {
+		$mockParser = $this->getMockBuilder( ParserOutput::class )
+			->setMethods( [ 'addTrackingCategory' ] )
+			->getMock();
+		$mockParser->expects( $this->exactly( $num ) )
+			->method( 'addTrackingCategory' );
+
+		return $mockParser;
+	}
+
 	public function testRender() {
 		$propertyId = new PropertyId( 'P1337' );
 		$snaks = array(
@@ -77,20 +96,22 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$q42 = new ItemId( 'Q42' );
-		$result = $renderer->render( $q42, 'p1337' );
+		$result = $renderer->render( $q42, 'p1337', $this->getMockParserOutput( 0 ), $this->getMock( Title::class ) );
 
 		$expected = 'a kitten!, two kittens!!';
 		$this->assertEquals( $expected, $result );
 	}
 
 	public function testRenderForPropertyNotFound() {
+		$mockParser = $this->getMockParserOutput( 1 );
 		$renderer = $this->getRenderer(
 			$this->getPropertyIdResolverForPropertyNotFound(),
 			$this->getSnaksFinder( array() ),
 			$this->getEntityLookup( 100 ),
 			'qqx'
 		);
-		$result = $renderer->render( new ItemId( 'Q4' ), 'invalidLabel' );
+
+		$result = $renderer->render( new ItemId( 'Q4' ), 'invalidLabel', $mockParser, $this->getMock( Title::class ) );
 
 		$this->assertRegExp(
 			'/<(?:strong|span|p|div)\s(?:[^\s>]*\s+)*?class="(?:[^"\s>]*\s+)*?error(?:\s[^">]*)?"/',
@@ -111,8 +132,8 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 			'qqx'
 		);
 
-		$renderer->render( new ItemId( 'Q3' ), 'tooManyEntities' );
-		$result = $renderer->render( new ItemId( 'Q4' ), 'tooManyEntities' );
+		$renderer->render( new ItemId( 'Q3' ), 'tooManyEntities', $this->getMockParserOutput( 0 ), $this->getMock( Title::class ) );
+		$result = $renderer->render( new ItemId( 'Q4' ), 'tooManyEntities', $this->getMockParserOutput( 0 ), $this->getMock( Title::class ) );
 
 		$this->assertRegExp(
 			'/<(?:strong|span|p|div)\s(?:[^\s>]*\s+)*?class="(?:[^"\s>]*\s+)*?error(?:\s[^">]*)?"/',
