@@ -3,8 +3,9 @@
 namespace Wikibase\Client\DataAccess\PropertyParserFunction;
 
 use Language;
-use MWException;
 use Parser;
+use ParserOutput;
+use Title;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\SnaksFinder;
@@ -86,13 +87,31 @@ class StatementGroupRendererFactory {
 			// Use the user's language.
 			// Note: This splits the parser cache.
 			$targetLanguage = $parser->getOptions()->getUserLangObj();
-			return $this->newLanguageAwareRenderer( $type, $targetLanguage, $usageAccumulator );
+			return $this->newLanguageAwareRenderer(
+				$type,
+				$targetLanguage,
+				$usageAccumulator,
+				$parser->getOutput(),
+				$parser->getTitle()
+			);
 		} elseif ( $this->useVariants( $parser ) ) {
 			$variants = $parser->getConverterLanguage()->getVariants();
-			return $this->newVariantsAwareRenderer( $type, $variants, $usageAccumulator );
+			return $this->newVariantsAwareRenderer(
+				$type,
+				$variants,
+				$usageAccumulator,
+				$parser->getOutput(),
+				$parser->getTitle()
+			);
 		} else {
 			$targetLanguage = $parser->getTargetLanguage();
-			return $this->newLanguageAwareRenderer( $type, $targetLanguage, $usageAccumulator );
+			return $this->newLanguageAwareRenderer(
+				$type,
+				$targetLanguage,
+				$usageAccumulator,
+				$parser->getOutput(),
+				$parser->getTitle()
+			);
 		}
 	}
 
@@ -100,14 +119,17 @@ class StatementGroupRendererFactory {
 	 * @param string $type
 	 * @param Language $language
 	 * @param UsageAccumulator $usageAccumulator
+	 * @param ParserOutput $parserOutput
+	 * @param Title $title
 	 *
 	 * @return LanguageAwareRenderer
-	 * @throws MWException
 	 */
 	private function newLanguageAwareRenderer(
 		$type,
 		Language $language,
-		UsageAccumulator $usageAccumulator
+		UsageAccumulator $usageAccumulator,
+		ParserOutput $parserOutput,
+		Title $title
 	) {
 		$snakFormatter = $this->dataAccessSnakFormatterFactory->newWikitextSnakFormatter(
 			$language,
@@ -125,7 +147,9 @@ class StatementGroupRendererFactory {
 
 		return new LanguageAwareRenderer(
 			$language,
-			$entityStatementsRenderer
+			$entityStatementsRenderer,
+			$parserOutput,
+			$title
 		);
 	}
 
@@ -133,19 +157,25 @@ class StatementGroupRendererFactory {
 	 * @param string $type
 	 * @param string $languageCode
 	 * @param UsageAccumulator $usageAccumulator
+	 * @param ParserOutput $parserOutput
+	 * @param Title $title
 	 *
 	 * @return LanguageAwareRenderer
 	 */
 	private function getLanguageAwareRendererFromCode(
 		$type,
 		$languageCode,
-		UsageAccumulator $usageAccumulator
+		UsageAccumulator $usageAccumulator,
+		ParserOutput $parserOutput,
+		Title $title
 	) {
 		if ( !isset( $this->languageAwareRenderers[$languageCode] ) ) {
 			$this->languageAwareRenderers[$languageCode] = $this->newLanguageAwareRenderer(
 				$type,
 				Language::factory( $languageCode ),
-				$usageAccumulator
+				$usageAccumulator,
+				$parserOutput,
+				$title
 			);
 		}
 
@@ -156,13 +186,17 @@ class StatementGroupRendererFactory {
 	 * @param string $type
 	 * @param string[] $variants
 	 * @param UsageAccumulator $usageAccumulator
+	 * @param ParserOutput $parserOutput
+	 * @param Title $title
 	 *
 	 * @return VariantsAwareRenderer
 	 */
 	private function newVariantsAwareRenderer(
 		$type,
 		array $variants,
-		UsageAccumulator $usageAccumulator
+		UsageAccumulator $usageAccumulator,
+		ParserOutput $parserOutput,
+		Title $title
 	) {
 		$languageAwareRenderers = [];
 
@@ -170,7 +204,9 @@ class StatementGroupRendererFactory {
 			$languageAwareRenderers[$variant] = $this->getLanguageAwareRendererFromCode(
 				$type,
 				$variant,
-				$usageAccumulator
+				$usageAccumulator,
+				$parserOutput,
+				$title
 			);
 		}
 

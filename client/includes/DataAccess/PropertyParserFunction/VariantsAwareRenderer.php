@@ -3,6 +3,8 @@
 namespace Wikibase\Client\DataAccess\PropertyParserFunction;
 
 use OutOfBoundsException;
+use ParserOutput;
+use Title;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**

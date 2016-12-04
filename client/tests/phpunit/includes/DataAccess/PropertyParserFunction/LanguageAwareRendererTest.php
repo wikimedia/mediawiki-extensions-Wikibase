@@ -4,6 +4,9 @@ namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
 
 use DataValues\StringValue;
 use Language;
+use Parser;
+use ParserOutput;
+use Title;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
@@ -37,6 +40,7 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 	 * @param SnaksFinder $snaksFinder
 	 * @param EntityLookup $entityLookup
 	 * @param string $languageCode
+	 * @param ParserOutput $parserOutput
 	 *
 	 * @return LanguageAwareRenderer
 	 */
@@ -44,7 +48,8 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 		PropertyIdResolver $propertyIdResolver,
 		SnaksFinder $snaksFinder,
 		EntityLookup $entityLookup,
-		$languageCode
+		$languageCode,
+		ParserOutput $parserOutput
 	) {
 		$targetLanguage = Language::factory( $languageCode );
 
@@ -58,8 +63,26 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 
 		return new LanguageAwareRenderer(
 			$targetLanguage,
-			$entityStatementsRenderer
+			$entityStatementsRenderer,
+			$parserOutput,
+			$this->getMock( Title::class )
 		);
+	}
+
+	/**
+	 * Return a mock ParserOutput object that checks how many times it adds a tracking category.
+	 * @param $num Number of times a tracking category should be added
+	 *
+	 * @return ParserOutput
+	 */
+	private function getMockParserOutput( $num ) {
+		$mockParser = $this->getMockBuilder( ParserOutput::class )
+			->setMethods( [ 'addTrackingCategory' ] )
+			->getMock();
+		$mockParser->expects( $this->exactly( $num ) )
+			->method( 'addTrackingCategory' );
+
+		return $mockParser;
 	}
 
 	public function testRender() {
@@ -73,7 +96,8 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 			$this->getPropertyIdResolver(),
 			$this->getSnaksFinder( $snaks ),
 			$this->getEntityLookup( 100 ),
-			'en'
+			'en',
+			$this->getMockParserOutput( 0 )
 		);
 
 		$q42 = new ItemId( 'Q42' );
@@ -84,12 +108,15 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testRenderForPropertyNotFound() {
+		$mockParser = $this->getMockParserOutput( 1 );
 		$renderer = $this->getRenderer(
 			$this->getPropertyIdResolverForPropertyNotFound(),
 			$this->getSnaksFinder( array() ),
 			$this->getEntityLookup( 100 ),
-			'qqx'
+			'qqx',
+			$mockParser
 		);
+
 		$result = $renderer->render( new ItemId( 'Q4' ), 'invalidLabel' );
 
 		$this->assertRegExp(
@@ -108,7 +135,8 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 			$this->getPropertyIdResolver(),
 			$this->getSnaksFinder( array() ),
 			$this->getEntityLookup( 1 ),
-			'qqx'
+			'qqx',
+			$this->getMockParserOutput( 0 )
 		);
 
 		$renderer->render( new ItemId( 'Q3' ), 'tooManyEntities' );

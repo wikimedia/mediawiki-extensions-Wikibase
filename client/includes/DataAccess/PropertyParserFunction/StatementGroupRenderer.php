@@ -2,6 +2,8 @@
 
 namespace Wikibase\Client\DataAccess\PropertyParserFunction;
 
+use ParserOutput;
+use Title;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
