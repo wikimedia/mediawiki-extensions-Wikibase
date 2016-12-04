@@ -86,13 +86,19 @@ class StatementGroupRendererFactory {
 			// Use the user's language.
 			// Note: This splits the parser cache.
 			$targetLanguage = $parser->getOptions()->getUserLangObj();
-			return $this->newLanguageAwareRenderer( $type, $targetLanguage, $usageAccumulator );
+			$renderer = $this->newLanguageAwareRenderer( $type, $targetLanguage, $usageAccumulator );
+			$renderer->setParser( $parser );
+			return $renderer;
 		} elseif ( $this->useVariants( $parser ) ) {
 			$variants = $parser->getConverterLanguage()->getVariants();
-			return $this->newVariantsAwareRenderer( $type, $variants, $usageAccumulator );
+			$renderer = $this->newVariantsAwareRenderer( $type, $variants, $usageAccumulator );
+			$renderer->setParser( $parser );
+			return $renderer;
 		} else {
 			$targetLanguage = $parser->getTargetLanguage();
-			return $this->newLanguageAwareRenderer( $type, $targetLanguage, $usageAccumulator );
+			$renderer = $this->newLanguageAwareRenderer( $type, $targetLanguage, $usageAccumulator );
+			$renderer->setParser( $parser );
+			return $renderer;
 		}
 	}
 
@@ -102,7 +108,6 @@ class StatementGroupRendererFactory {
 	 * @param UsageAccumulator $usageAccumulator
 	 *
 	 * @return LanguageAwareRenderer
-	 * @throws MWException
 	 */
 	private function newLanguageAwareRenderer(
 		$type,
@@ -125,7 +130,8 @@ class StatementGroupRendererFactory {
 
 		return new LanguageAwareRenderer(
 			$language,
-			$entityStatementsRenderer
+			$entityStatementsRenderer,
+			$parser
 		);
 	}
 

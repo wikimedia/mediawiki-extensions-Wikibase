@@ -4,6 +4,7 @@ namespace Wikibase\Client\DataAccess\PropertyParserFunction;
 
 use InvalidArgumentException;
 use Language;
+use Parser;
 use Status;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\PropertyLabelNotResolvedException;
@@ -30,6 +31,11 @@ class LanguageAwareRenderer implements StatementGroupRenderer {
 	private $language;
 
 	/**
+	 * @var Parser
+	 */
+	private $parser;
+
+	/**
 	 * @var StatementTransclusionInteractor
 	 */
 	private $statementTransclusionInteractor;
@@ -37,6 +43,7 @@ class LanguageAwareRenderer implements StatementGroupRenderer {
 	/**
 	 * @param Language $language
 	 * @param StatementTransclusionInteractor $statementTransclusionInteractor
+	 * @param Parser $parser
 	 */
 	public function __construct(
 		Language $language,
@@ -45,6 +52,14 @@ class LanguageAwareRenderer implements StatementGroupRenderer {
 		$this->language = $language;
 		$this->statementTransclusionInteractor = $statementTransclusionInteractor;
 	}
+
+	/**
+	 * @param Parser $parser
+	 */
+	public function setParser( $parser ) {
+		$this->parser = $parser;
+	}
+
 
 	/**
 	 * @param EntityId $entityId
@@ -62,6 +77,9 @@ class LanguageAwareRenderer implements StatementGroupRenderer {
 			);
 		} catch ( PropertyLabelNotResolvedException $ex ) {
 			// @fixme use ExceptionLocalizer
+			if ( isset( $this->parser ) ) {
+				$this->parser->addTrackingCategory( 'unresolved-property-category' );
+			}
 			$status = $this->getStatusForException( $propertyLabelOrId, $ex->getMessage() );
 		} catch ( EntityAccessLimitException $ex ) {
 			$status = $this->getStatusForException( $propertyLabelOrId, $ex->getMessage() );
