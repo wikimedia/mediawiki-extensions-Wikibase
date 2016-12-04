@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
 
 use DataValues\StringValue;
 use Language;
+use Parser;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
@@ -84,12 +85,21 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testRenderForPropertyNotFound() {
+		$mockParser = $this->getMockBuilder( Parser::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$mockParser->expects( $this->exactly( 1 ) )
+			->method( 'addTrackingCategory' )
+			->will( $this->returnValue( true ) );
+
 		$renderer = $this->getRenderer(
 			$this->getPropertyIdResolverForPropertyNotFound(),
 			$this->getSnaksFinder( array() ),
 			$this->getEntityLookup( 100 ),
 			'qqx'
 		);
+		$renderer->setParser( $mockParser );
+
 		$result = $renderer->render( new ItemId( 'Q4' ), 'invalidLabel' );
 
 		$this->assertRegExp(
