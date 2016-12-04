@@ -4,7 +4,9 @@ namespace Wikibase\Client\DataAccess\PropertyParserFunction;
 
 use InvalidArgumentException;
 use Language;
+use ParserOutput;
 use Status;
+use Title;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\DataModel\Entity\EntityId;
@@ -49,10 +51,17 @@ class LanguageAwareRenderer implements StatementGroupRenderer {
 	/**
 	 * @param EntityId $entityId
 	 * @param string $propertyLabelOrId property label or ID (pXXX)
+	 * @param ParserOutput $parserOutput
+	 * @param Title $title
 	 *
 	 * @return string
 	 */
-	public function render( EntityId $entityId, $propertyLabelOrId ) {
+	public function render(
+		EntityId $entityId,
+		$propertyLabelOrId,
+		ParserOutput $parserOutput,
+		Title $title
+	) {
 		try {
 			$status = Status::newGood(
 				$this->statementTransclusionInteractor->render(
@@ -61,6 +70,8 @@ class LanguageAwareRenderer implements StatementGroupRenderer {
 				)
 			);
 		} catch ( PropertyLabelNotResolvedException $ex ) {
+			$parserOutput->addTrackingCategory( 'unresolved-property-category', $title );
+
 			// @fixme use ExceptionLocalizer
 			$status = $this->getStatusForException( $propertyLabelOrId, $ex->getMessage() );
 		} catch ( EntityAccessLimitException $ex ) {

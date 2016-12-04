@@ -2,6 +2,8 @@
 
 namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
 
+use ParserOutput;
+use Title;
 use Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer;
 use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory;
 use Wikibase\Client\DataAccess\PropertyParserFunction\VariantsAwareRenderer;
@@ -47,7 +49,12 @@ class VariantsAwareRendererTest extends \PHPUnit_Framework_TestCase {
 			$variants
 		);
 
-		$result = $variantsRenderer->render( $itemId, $propertyLabel );
+		$mockParser = $this->getMockBuilder( ParserOutput::class )
+			->setMethods( [ 'addTrackingCategory' ] )
+			->getMock();
+		$mockTitle = $this->getMock( Title::class );
+
+		$result = $variantsRenderer->render( $itemId, $propertyLabel, $mockParser, $mockTitle );
 
 		$this->assertEquals( $expected, $result );
 	}

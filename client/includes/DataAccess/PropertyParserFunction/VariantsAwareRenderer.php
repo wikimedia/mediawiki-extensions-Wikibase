@@ -3,6 +3,8 @@
 namespace Wikibase\Client\DataAccess\PropertyParserFunction;
 
 use OutOfBoundsException;
+use ParserOutput;
+use Title;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -40,11 +42,13 @@ class VariantsAwareRenderer implements StatementGroupRenderer {
 	/**
 	 * @param EntityId $entityId
 	 * @param string $propertyLabelOrId
+	 * @param ParserOutput $parserOutput
+	 * @param Title $title
 	 *
 	 * @return string
 	 */
-	public function render( EntityId $entityId, $propertyLabelOrId ) {
-		$renderedVariantsArray = $this->buildRenderedVariantsArray( $entityId, $propertyLabelOrId );
+	public function render( EntityId $entityId, $propertyLabelOrId, ParserOutput $parserOutput, Title $title ) {
+		$renderedVariantsArray = $this->buildRenderedVariantsArray( $entityId, $propertyLabelOrId, $parserOutput, $title );
 
 		return $this->processRenderedArray( $renderedVariantsArray );
 	}
@@ -52,14 +56,16 @@ class VariantsAwareRenderer implements StatementGroupRenderer {
 	/**
 	 * @param EntityId $entityId
 	 * @param string $propertyLabelOrId
+	 * @param ParserOutput $parserOutput
+	 * @param Title $title
 	 *
 	 * @return string[] key by variant codes
 	 */
-	private function buildRenderedVariantsArray( EntityId $entityId, $propertyLabelOrId ) {
+	private function buildRenderedVariantsArray( EntityId $entityId, $propertyLabelOrId, ParserOutput $parserOutput, Title $title ) {
 		$renderedVariantsArray = array();
 
 		foreach ( $this->variants as $variantCode ) {
-			$variantText = $this->getVariantText( $variantCode, $entityId, $propertyLabelOrId );
+			$variantText = $this->getVariantText( $variantCode, $entityId, $propertyLabelOrId, $parserOutput, $title );
 
 			// LanguageConverter doesn't handle empty strings correctly, and it's more difficult
 			// to fix the issue there, as it's using empty string as a special value.
@@ -96,13 +102,15 @@ class VariantsAwareRenderer implements StatementGroupRenderer {
 	 * @param string $variantCode
 	 * @param EntityId $entityId
 	 * @param string $propertyLabelOrId
+	 * @param ParserOutput $parserOutput
+	 * @param Title $title
 	 *
 	 * @return string
 	 */
-	private function getVariantText( $variantCode, EntityId $entityId, $propertyLabelOrId ) {
+	private function getVariantText( $variantCode, EntityId $entityId, $propertyLabelOrId, ParserOutput $parserOutput, Title $title ) {
 		$renderer = $this->getLanguageAwareRendererFromCode( $variantCode );
 
-		return $renderer->render( $entityId, $propertyLabelOrId );
+		return $renderer->render( $entityId, $propertyLabelOrId, $parserOutput, $title );
 	}
 
 	/**
