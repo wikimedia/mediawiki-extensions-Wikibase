@@ -3,8 +3,13 @@
 namespace Wikibase\Lib\Tests\Store\Sql;
 
 use MediaWikiTestCase;
+use InvalidArgumentException;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Tests\Store\PropertyInfoStoreTestHelper;
+use Wikibase\PropertyInfoStore;
 use Wikibase\PropertyInfoTable;
 
 /**
@@ -42,8 +47,8 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 		$this->tablesUsed[] = 'wb_property_info';
 	}
 
-	public function newPropertyInfoTable() {
-		return new PropertyInfoTable( false );
+	public function newPropertyInfoTable( $repository = '' ) {
+		return new PropertyInfoTable( false, $this->getEntityComposer(), false, $repository );
 	}
 
 	public function provideSetPropertyInfo() {
@@ -75,6 +80,119 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 
 	public function testPropertyInfoPersistance() {
 		$this->helper->testPropertyInfoPersistance();
+	}
+
+	/**
+	 * @dataProvider invalidRepositoryNameProvider
+	 */
+	public function testGivenInvalidRepositoryName_throwsException( $name ) {
+		$this->setExpectedException( InvalidArgumentException::class );
+		new PropertyInfoTable( false, $this->getEntityComposer(), false, $name );
+	}
+
+	public function invalidRepositoryNameProvider() {
+		return [
+			[ 123, ],
+			[ false, ],
+			[ null, ],
+			[ ':foo', ],
+			[ 'foo:bar', ],
+		];
+	}
+
+	/**
+	 * @dataProvider incompatibleRepositoryNameAndPropertyIdProvider
+	 */
+	public function testGivenPropertyIdFromWrongRepository_setPropertyInfoThrowsException( $repositoryName, PropertyId $id ) {
+		$this->setExpectedException( InvalidArgumentException::class );
+
+		$infoTable = new PropertyInfoTable( false, $this->getEntityComposer(), false, $repositoryName );
+		$infoTable->setPropertyInfo( $id, [ PropertyInfoStore::KEY_DATA_TYPE => 'string' ] );
+	}
+
+	/**
+	 * @dataProvider incompatibleRepositoryNameAndPropertyIdProvider
+	 */
+	public function testGivenPropertyIdFromWrongRepository_getPropertyInfoThrowsException( $repositoryName, PropertyId $id ) {
+		$this->setExpectedException( InvalidArgumentException::class );
+
+		$infoTable = new PropertyInfoTable( false, $this->getEntityComposer(), false, $repositoryName );
+		$infoTable->getPropertyInfo( $id );
+	}
+
+	/**
+	 * @dataProvider incompatibleRepositoryNameAndPropertyIdProvider
+	 */
+	public function testGivenPropertyIdFromWrongRepository_removePropertyInfoThrowsException( $repositoryName, PropertyId $id ) {
+		$this->setExpectedException( InvalidArgumentException::class );
+
+		$infoTable = new PropertyInfoTable( false, $this->getEntityComposer(), false, $repositoryName );
+		$infoTable->removePropertyInfo( $id );
+	}
+
+	public function incompatibleRepositoryNameAndPropertyIdProvider() {
+		return [
+			[ '', new PropertyId( 'foo:P123' ) ],
+			[ 'foo', new PropertyId( 'P123' ) ],
+			[ 'foo', new PropertyId( 'bar:P123' ) ],
+		];
+	}
+
+	/**
+	 * @dataProvider repositoryNameProvider
+	 */
+	public function testGivenRepositoryName_getAllPropertyInfoReturnsPropertyIdsFromCorrectRepo( $repository ) {
+		$this->persistInfos();
+		$table = $this->newPropertyInfoTable( $repository );
+
+		foreach ( $table->getAllPropertyInfo() as $id => $info ) {
+			$this->assertSame( $repository, ( new PropertyId( $id ) )->getRepositoryName() );
+		}
+	}
+
+	/**
+	 * @dataProvider repositoryNameProvider
+	 */
+	public function testGivenRepositoryName_getPropertyInfoForDataTypeReturnsPropertyIdsFromCorrectRepo( $repository ) {
+		$this->persistInfos();
+		$table = $this->newPropertyInfoTable( $repository );
+
+		foreach ( $table->getPropertyInfoForDataType( 'string' ) as $id => $info ) {
+			$this->assertSame( $repository, ( new PropertyId( $id ) )->getRepositoryName() );
+		}
+		foreach ( $table->getPropertyInfoForDataType( 'commonsMedia' ) as $id => $info ) {
+			$this->assertSame( $repository, ( new PropertyId( $id ) )->getRepositoryName() );
+		}
+	}
+
+	public function repositoryNameProvider() {
+		return [
+			[ '' ],
+			[ 'foo' ],
+			[ 'bar' ],
+		];
+	}
+
+	private function persistInfos() {
+		$table = $this->newPropertyInfoTable();
+		$infos = [
+			'P123' => [ PropertyInfoStore::KEY_DATA_TYPE => 'string' ],
+			'P23' => [ PropertyInfoStore::KEY_DATA_TYPE => 'string' ],
+			'P42' => [ PropertyInfoStore::KEY_DATA_TYPE => 'commonsMedia' ],
+			'P1337' => [ PropertyInfoStore::KEY_DATA_TYPE => 'string' ],
+		];
+
+		foreach ( $infos as $id => $info ) {
+			$table->setPropertyInfo( new PropertyId( $id ), $info );
+		}
+	}
+
+	private function getEntityComposer() {
+		return new EntityIdComposer( [
+			Property::ENTITY_TYPE => function( $repository, $uniquePart ) {
+				return new PropertyId( EntityId::joinSerialization( [ $repository, '', "P$uniquePart" ] ) );
+			},
+		] );
 	}
 
 }
