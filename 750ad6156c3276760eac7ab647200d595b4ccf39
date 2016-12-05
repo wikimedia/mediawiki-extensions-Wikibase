@@ -22,6 +22,47 @@
       "revId": "750ad6156c3276760eac7ab647200d595b4ccf39",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_f5fe5965",
+        "filename": ".editorconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-05T09:06:56Z",
+      "side": 1,
+      "message": "My comment might be invalid as I don\u0027t know this Editorconfig, and haven\u0027t checked this particular setting yet but:\nI believe we do use tab indentation. PhpStorm/any other IDE might be showing tabs of width of four spaces but still \"technically\" we indent with tabs, right?",
+      "parentUuid": "8ed34346_215497c8",
+      "range": {
+        "startLine": 6,
+        "startChar": 15,
+        "endLine": 6,
+        "endChar": 18
+      },
+      "revId": "750ad6156c3276760eac7ab647200d595b4ccf39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_d5f47d85",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-05T09:06:56Z",
+      "side": 1,
+      "message": "I guess you don\u0027t need to have an extra space at the beginning of each line of more detailed commit message. It makes text look a bit odd when long lines like the one here are wrapped.",
+      "revId": "750ad6156c3276760eac7ab647200d595b4ccf39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
