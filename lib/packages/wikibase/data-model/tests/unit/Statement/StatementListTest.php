@@ -42,7 +42,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 		$statement->expects( $this->any() )
 			->method( 'getPropertyId' )
-			->will( $this->returnValue( PropertyId::newFromNumber( $propertyId ) ) );
+			->will( $this->returnValue( new PropertyId( 'P' . $propertyId ) ) );
 
 		$statement->expects( $this->any() )
 			->method( 'getRank' )
