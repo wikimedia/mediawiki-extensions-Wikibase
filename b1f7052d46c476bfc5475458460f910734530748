@@ -68,6 +68,30 @@
       "revId": "b1f7052d46c476bfc5475458460f910734530748",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_7adc754b",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1260
+      },
+      "writtenOn": "2016-12-05T14:12:32Z",
+      "side": 1,
+      "message": "I could throw the exception out to the Runner class so that this class doesn\u0027t have to depend on the parser, but I was worried that might mess up the design of the renderer, since this class wouldn\u0027t be able to render the error anymore.",
+      "parentUuid": "8ed34346_d0f5abc8",
+      "range": {
+        "startLine": 57,
+        "startChar": 11,
+        "endLine": 59,
+        "endChar": 26
+      },
+      "revId": "b1f7052d46c476bfc5475458460f910734530748",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
