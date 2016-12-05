@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ed34346_7065b7a9",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-05T12:07:06Z",
+      "side": 1,
+      "message": "I believe this is not only about \"property labels\" but also about properties that are references by id?",
+      "range": {
+        "startLine": 120,
+        "startChar": 59,
+        "endLine": 120,
+        "endChar": 74
+      },
+      "revId": "b1f7052d46c476bfc5475458460f910734530748",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_30061fd2",
+        "filename": "client/i18n/qqq.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-05T12:07:06Z",
+      "side": 1,
+      "message": "… again.",
+      "range": {
+        "startLine": 130,
+        "startChar": 178,
+        "endLine": 130,
+        "endChar": 184
+      },
+      "revId": "b1f7052d46c476bfc5475458460f910734530748",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_d0f5abc8",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-05T12:07:06Z",
+      "side": 1,
+      "message": "This is a quite extreme way to do this. The dependencies this class had before are quite trivial: a Language object (also from MediaWiki core) and a Wikibase service. But this here adds the entire Wikitext parser as a dependency. This is the largest and most brittle class MediaWiki core does have.",
+      "range": {
+        "startLine": 57,
+        "startChar": 11,
+        "endLine": 59,
+        "endChar": 26
+      },
+      "revId": "b1f7052d46c476bfc5475458460f910734530748",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
