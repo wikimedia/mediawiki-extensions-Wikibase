@@ -49,13 +49,12 @@ class PrefixMappingEntityIdParser implements EntityIdParser {
 		Assert::parameter( isset( $prefixMapping[''] ), '$prefixMapping', 'must contain an empty-string key' );
 		foreach ( $prefixMapping as $value ) {
 			Assert::parameter(
-				strpos( $value, ':') === false,
+				strpos( $value, ':' ) === false,
 				'$prefixMapping',
 				'must not contain strings containing colons'
 			);
 		}
 
-		//$this->prefix = $prefix;
 		$this->prefixMapping = $prefixMapping;
 		$this->idParser = $idParser;
 	}
