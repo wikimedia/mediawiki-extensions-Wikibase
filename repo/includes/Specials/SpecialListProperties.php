@@ -256,7 +256,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 			);
 		}
 
-		// NOTE: $propertyInfo uses numerical property IDs as keys!
+		// NOTE: $propertyInfo uses serialized property IDs as keys!
 		ksort( $propertyInfo );
 		return $propertyInfo;
 	}

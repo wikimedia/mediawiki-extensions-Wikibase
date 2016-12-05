@@ -152,7 +152,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 
 		$this->releaseConnection( $dbr );
 
-		return $infos;
+		return $this->convertNumericIdKeysToIdSerializations( $infos );
 	}
 
 	/**
@@ -175,7 +175,17 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 
 		$this->releaseConnection( $dbr );
 
-		return $infos;
+		return $this->convertNumericIdKeysToIdSerializations( $infos );
+	}
+
+	private function convertNumericIdKeysToIdSerializations( array $infos ) {
+		$newInfos = [];
+
+		foreach ( $infos as $id => $info ) {
+			$newInfos[PropertyId::newFromNumber( $id )->getSerialization()] = $info;
+		}
+
+		return $newInfos;
 	}
 
 	/**
