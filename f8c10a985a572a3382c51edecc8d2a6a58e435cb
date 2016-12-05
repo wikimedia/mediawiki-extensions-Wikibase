@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ed34346_600ba2da",
+        "filename": "lib/includes/Store/ForeignEntityRevisionLookupFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-05T17:46:31Z",
+      "side": 1,
+      "message": "I guess it would be nice to have description of exact callable type: what it accept as an argument and what type should it return",
+      "range": {
+        "startLine": 72,
+        "startChar": 4,
+        "endLine": 72,
+        "endChar": 51
+      },
+      "revId": "f8c10a985a572a3382c51edecc8d2a6a58e435cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_a0289a33",
+        "filename": "lib/includes/Store/ForeignEntityRevisionLookupFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-05T17:46:31Z",
+      "side": 1,
+      "message": "Why not use this notation:\n`$deserializers[] \u003d $callback( $deserializerFactory );` ? It does the same, but shorter.",
+      "range": {
+        "startLine": 172,
+        "startChar": 3,
+        "endLine": 172,
+        "endChar": 72
+      },
+      "revId": "f8c10a985a572a3382c51edecc8d2a6a58e435cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_805fdee7",
+        "filename": "lib/tests/phpunit/Store/ForeignEntityRevisionLookupFactoryTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-05T17:46:31Z",
+      "side": 1,
+      "message": "Keys are redundant, they are not used in production code.\nAs soon as tests also serve as usage examples, presence of keys may lead to confusion. Although, I can see how they improve readability.",
+      "range": {
+        "startLine": 72,
+        "startChar": 3,
+        "endLine": 72,
+        "endChar": 9
+      },
+      "revId": "f8c10a985a572a3382c51edecc8d2a6a58e435cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_c0e8360e",
+        "filename": "lib/tests/phpunit/Store/ForeignEntityRevisionLookupFactoryTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-05T17:46:31Z",
+      "side": 1,
+      "message": "If you replace it with `return [];` no tests will fail, so there are probably test cases missing.",
+      "range": {
+        "startLine": 70,
+        "startChar": 54,
+        "endLine": 78,
+        "endChar": 4
+      },
+      "revId": "f8c10a985a572a3382c51edecc8d2a6a58e435cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
