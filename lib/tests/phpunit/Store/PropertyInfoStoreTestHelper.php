@@ -121,14 +121,14 @@ class PropertyInfoStoreTestHelper {
 
 		$table->setPropertyInfo( $p42, $info42 );
 		$this->test->assertSame(
-			array( 42 => $info42 ),
+			array( 'P42' => $info42 ),
 			$table->getPropertyInfoForDataType( 'commonsMedia' ),
 			'after adding the second property'
 		);
 
 		$table->removePropertyInfo( $p23 );
 		$this->test->assertSame(
-			array( 42 => $info42 ),
+			array( 'P42' => $info42 ),
 			$table->getPropertyInfoForDataType( 'commonsMedia' ),
 			'after removing one property'
 		);
@@ -156,21 +156,21 @@ class PropertyInfoStoreTestHelper {
 
 		$table->setPropertyInfo( $p23, $info23 );
 		$this->test->assertSame(
-			array( 23 => $info23 ),
+			array( 'P23' => $info23 ),
 			$table->getAllPropertyInfo(),
 			'after adding one property'
 		);
 
 		$table->setPropertyInfo( $p42, $info42 );
 		$this->test->assertSame(
-			array( 23 => $info23, 42 => $info42 ),
+			array( 'P23' => $info23, 'P42' => $info42 ),
 			$table->getAllPropertyInfo(),
 			'after adding the second property'
 		);
 
 		$table->removePropertyInfo( $p23 );
 		$this->test->assertSame(
-			array( 42 => $info42 ),
+			array( 'P42' => $info42 ),
 			$table->getAllPropertyInfo(),
 			'after removing one property'
 		);
