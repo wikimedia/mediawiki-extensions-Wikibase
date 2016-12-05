@@ -4,7 +4,6 @@ namespace Wikibase\DataModel\Tests\Entity;
 
 use ReflectionClass;
 use InvalidArgumentException;
-use RuntimeException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;

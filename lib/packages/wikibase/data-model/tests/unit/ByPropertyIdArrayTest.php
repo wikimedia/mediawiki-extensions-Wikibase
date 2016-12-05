@@ -211,14 +211,14 @@ class ByPropertyIdArrayTest extends PHPUnit_Framework_TestCase {
 
 		$this->setExpectedException( 'OutOfBoundsException' );
 
-		$indexedArray->getByPropertyId( PropertyId::newFromNumber( 9000 ) );
+		$indexedArray->getByPropertyId( new PropertyId( 'P9000' ) );
 	}
 
 	public function testNotBuildExceptionIsThrownForByPropertyId() {
 		$indexedArray = new ByPropertyIdArray();
 
 		$this->setExpectedException( 'RuntimeException' );
-		$indexedArray->getByPropertyId( PropertyId::newFromNumber( 9000 ) );
+		$indexedArray->getByPropertyId( new PropertyId( 'P9000' ) );
 	}
 
 	public function testNotBuildExceptionIsThrownForGetPropertyIds() {
