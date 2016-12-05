@@ -63,7 +63,8 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 	}
 
 	public function testRebuildPropertyInfo() {
-		$table = new PropertyInfoTable( false );
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$table = new PropertyInfoTable( false, $wikibaseRepo->getEntityIdComposer() );
 
 		$this->resetPropertyInfoTable( $table );
 		$properties = $this->initProperties();
@@ -71,7 +72,6 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 
 		// NOTE: We use the EntityStore from WikibaseRepo in initProperties,
 		//       so we should also use the EntityLookup from WikibaseRepo.
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$entityLookup = $wikibaseRepo->getEntityLookup( 'uncached' );
 
 		$propertyInfoBuilder = new PropertyInfoBuilder( new PropertyId( 'P1630' ) );

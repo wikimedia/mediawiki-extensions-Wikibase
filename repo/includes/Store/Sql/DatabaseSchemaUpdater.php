@@ -192,8 +192,8 @@ class DatabaseSchemaUpdater {
 			}
 		);
 
-		$table = new PropertyInfoTable( false );
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$table = new PropertyInfoTable( false, $wikibaseRepo->getEntityIdComposer() );
 
 		$contentCodec = $wikibaseRepo->getEntityContentDataCodec();
 		$propertyInfoBuilder = $wikibaseRepo->newPropertyInfoBuilder();

@@ -512,7 +512,7 @@ class SqlStore implements Store {
 	 * @return PropertyInfoStore
 	 */
 	private function newPropertyInfoStore() {
-		$table = new PropertyInfoTable( false );
+		$table = new PropertyInfoTable( false, $this->entityIdComposer );
 		$cacheKey = $this->cacheKeyPrefix . ':CachingPropertyInfoStore';
 
 		return new CachingPropertyInfoStore(
