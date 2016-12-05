@@ -5,6 +5,7 @@
 		]
 	},
 	"tooltip-t-wikibase": "Мәғлүмәтле репозиторийтағы пәйләнкән элементҡа ссылка",
+	"wikibase-comment-update": "{{WBREPONAME}} элемент төсәтелгән",
 	"wikibase-dataitem": "{{WBREPONAME}}ның элементы",
 	"wikibase-editlinks": "Ссылкаларны төсәткәле",
 	"wikibase-editlinkstitle": "Пашҡа телләртәге ссылкаларны төсәткәле"
