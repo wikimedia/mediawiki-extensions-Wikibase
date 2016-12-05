@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "8ed34346_1dffbb32",
+        "filename": ".editorconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-05T16:50:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ed34346_f5fe5965",
+      "range": {
+        "startLine": 6,
+        "startChar": 15,
+        "endLine": 6,
+        "endChar": 18
+      },
+      "revId": "750ad6156c3276760eac7ab647200d595b4ccf39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ed34346_d5f47d85",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
