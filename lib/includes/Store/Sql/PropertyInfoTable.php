@@ -90,7 +90,8 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 				continue;
 			}
 
-			$infos[$row->pi_property_id] = $info;
+			$id = PropertyId::newFromNumber( $row->pi_property_id )->getSerialization();
+			$infos[$id] = $info;
 		}
 
 		return $infos;
@@ -135,7 +136,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 	 *
 	 * @param string $dataType
 	 *
-	 * @return array[]
+	 * @return array[] Array containing serialized property IDs as keys and info arrays as values
 	 * @throws DBError
 	 */
 	public function getPropertyInfoForDataType( $dataType ) {
@@ -158,7 +159,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 	/**
 	 * @see PropertyInfoStore::getAllPropertyInfo
 	 *
-	 * @return array[]
+	 * @return array[] Array containing serialized property IDs as keys and info arrays as values
 	 * @throws DBError
 	 */
 	public function getAllPropertyInfo() {
