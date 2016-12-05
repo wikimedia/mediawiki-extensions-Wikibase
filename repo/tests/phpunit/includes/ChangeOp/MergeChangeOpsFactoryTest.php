@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\ChangeOp;
 
 use HashSiteStore;
 use PHPUnit_Framework_TestCase;

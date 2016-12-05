@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Rdf;
+namespace Wikibase\Repo\Tests\Rdf;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;

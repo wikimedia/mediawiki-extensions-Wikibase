@@ -8,7 +8,7 @@ use MediaWikiLangTestCase;
 use Wikibase\Lib\UnitConverter;
 use Wikibase\Repo\Maintenance\SPARQLClient;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
-use Wikibase\Test\Rdf\RdfBuilderTestData;
+use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
 
 require_once __DIR__ . '/MockAddUnits.php';
 

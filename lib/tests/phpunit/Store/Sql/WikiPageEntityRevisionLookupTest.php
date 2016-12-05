@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Tests\Store;
+namespace Wikibase\Lib\Tests\Store\Sql;
 
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
