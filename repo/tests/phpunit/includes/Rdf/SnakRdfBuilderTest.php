@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Rdf;
+namespace Wikibase\Repo\Tests\Rdf;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\EntityId;
@@ -14,7 +14,6 @@ use Wikibase\Rdf\EntityMentionListener;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\SnakRdfBuilder;
 use Wikibase\Rdf\ValueSnakRdfBuilder;
-use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 
 /**
  * @covers Wikibase\Rdf\SnakRdfBuilder

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\Store;
 
 use Wikibase\IdGenerator;
 use Wikibase\Repo\WikibaseRepo;

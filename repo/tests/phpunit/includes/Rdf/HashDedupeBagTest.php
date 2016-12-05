@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Rdf;
+namespace Wikibase\Repo\Tests\Rdf;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\Rdf\HashDedupeBag;

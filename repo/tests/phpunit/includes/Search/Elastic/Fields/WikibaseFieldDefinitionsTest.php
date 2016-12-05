@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\Search\Elastic\Fields;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\Repo\Search\Elastic\Fields\SearchIndexField;

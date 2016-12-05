@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\ParserOutput\Tests;
+namespace Wikibase\Repo\Tests\ParserOutput;
 
 use Wikibase\Repo\ParserOutput\TextInjector;
 
