@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ed34346_639bac1c",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-12-05T19:54:19Z",
+      "side": 1,
+      "message": "$wgTrackingCategories[] \u003d \u0027unresolved-property-category\u0027;",
+      "range": {
+        "startLine": 106,
+        "startChar": 1,
+        "endLine": 106,
+        "endChar": 60
+      },
+      "revId": "425b6b744378eb68418c7d647b07b63bd55c6487",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
