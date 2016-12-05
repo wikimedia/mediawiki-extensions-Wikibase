@@ -92,6 +92,47 @@
       "revId": "b1f7052d46c476bfc5475458460f910734530748",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_5a16595b",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-05T15:11:56Z",
+      "side": 1,
+      "message": "Parser::addTrackingCategory is a trivial helper method that does nothing but forwarding to ParserOutput::addTrackingCategory. The least thing you should do is to inject $parser-\u003egetOutput() instead of the entire $parser. Thank you.",
+      "parentUuid": "8ed34346_7adc754b",
+      "range": {
+        "startLine": 57,
+        "startChar": 11,
+        "endLine": 59,
+        "endChar": 26
+      },
+      "revId": "b1f7052d46c476bfc5475458460f910734530748",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_7a2115ac",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-05T15:11:56Z",
+      "side": 1,
+      "message": "The FIXME does not belong to the next line.",
+      "revId": "b1f7052d46c476bfc5475458460f910734530748",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
