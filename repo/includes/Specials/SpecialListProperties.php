@@ -5,6 +5,8 @@ namespace Wikibase\Repo\Specials;
 use DataTypes\DataTypeFactory;
 use HTMLForm;
 use Html;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataTypeSelector;
@@ -69,6 +71,11 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	 */
 	private $bufferingTermLookup;
 
+	/**
+	 * @var EntityIdParser
+	 */
+	private $entityIdParser;
+
 	public function __construct() {
 		parent::__construct( 'ListProperties' );
 
@@ -77,6 +84,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 		$this->initServices(
 			$wikibaseRepo->getDataTypeFactory(),
 			$wikibaseRepo->getStore()->getPropertyInfoStore(),
+			$wikibaseRepo->getEntityIdParser(),
 			$wikibaseRepo->getEntityIdHtmlLinkFormatterFactory(),
 			$wikibaseRepo->getLanguageFallbackChainFactory(),
 			$wikibaseRepo->getEntityTitleLookup(),
@@ -91,6 +99,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	public function initServices(
 		DataTypeFactory $dataTypeFactory,
 		PropertyInfoStore $propertyInfoStore,
+		EntityIdParser $entityIdParser,
 		EntityIdFormatterFactory $entityIdFormatterFactory,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		EntityTitleLookup $titleLookup,
@@ -104,6 +113,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 
 		$this->dataTypeFactory = $dataTypeFactory;
 		$this->propertyInfoStore = $propertyInfoStore;
+		$this->entityIdParser = $entityIdParser;
 		$this->entityIdFormatter = $entityIdFormatterFactory->getEntityIdFormatter(
 			$this->labelDescriptionLookup
 		);
@@ -235,8 +245,8 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 
 		$propertyIds = array();
 
-		foreach ( $propertyInfo as $numericId => $info ) {
-			$propertyIds[] = PropertyId::newFromNumber( $numericId );
+		foreach ( $propertyInfo as $serialization => $info ) {
+			$propertyIds[] = $this->entityIdParser->parse( $serialization );
 		}
 
 		$this->bufferingTermLookup->prefetchTerms( $propertyIds );
@@ -256,7 +266,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 			);
 		}
 
-		// NOTE: $propertyInfo uses numerical property IDs as keys!
+		// NOTE: $propertyInfo uses serialized property IDs as keys!
 		ksort( $propertyInfo );
 		return $propertyInfo;
 	}

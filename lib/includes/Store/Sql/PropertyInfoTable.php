@@ -90,7 +90,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 				continue;
 			}
 
-			$infos[$row->pi_property_id] = $info;
+			$infos[PropertyId::newFromNumber( $row->pi_property_id )->getSerialization()] = $info;
 		}
 
 		return $infos;
