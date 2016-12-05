@@ -1,8 +1,7 @@
 <?php
 
-namespace Wikibase\Client\Usage\Tests;
+namespace Wikibase\Client\Tests\Usage;
 
-use Wikibase\Client\Tests\Usage\UsageAccumulatorContractTester;
 use Wikibase\Client\Usage\HashUsageAccumulator;
 
 /**

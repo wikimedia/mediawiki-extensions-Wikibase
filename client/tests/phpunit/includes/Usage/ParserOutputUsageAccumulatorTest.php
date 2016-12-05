@@ -1,9 +1,8 @@
 <?php
 
-namespace Wikibase\Client\Usage\Tests;
+namespace Wikibase\Client\Tests\Usage;
 
 use ParserOutput;
-use Wikibase\Client\Tests\Usage\UsageAccumulatorContractTester;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 
 /**

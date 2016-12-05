@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Test\Usage;
+namespace Wikibase\Client\Tests\Usage;
 
 use JobRunner;
 use MediaWikiTestCase;

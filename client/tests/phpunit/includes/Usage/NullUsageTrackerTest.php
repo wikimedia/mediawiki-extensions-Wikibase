@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Tests\RecentChanges;
+namespace Wikibase\Client\Tests\Usage;
 
 use ArrayIterator;
 use PHPUnit_Framework_TestCase;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Test\Store;
+namespace Wikibase\Client\Tests\Store;
 
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\EntityUsage;
