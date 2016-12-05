@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ed34346_4010a604",
+        "filename": "lib/includes/Store/Sql/PropertyInfoTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-05T17:42:03Z",
+      "side": 1,
+      "message": "Isn\u0027t it easier (and better performing) to update this line, instead of iterating the array this method returns and recreating it from scratch?",
+      "range": {
+        "startLine": 93,
+        "startChar": 10,
+        "endLine": 93,
+        "endChar": 30
+      },
+      "revId": "bf8ed4db6b0f30042eb665a4428d812c6d78926b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_e0ffb2a5",
+        "filename": "repo/includes/Specials/SpecialListProperties.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-05T17:42:03Z",
+      "side": 1,
+      "message": "Not that this matters much, but when looking at the control flow in this class the new ID parser parameter should be here, after the store.",
+      "revId": "bf8ed4db6b0f30042eb665a4428d812c6d78926b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
