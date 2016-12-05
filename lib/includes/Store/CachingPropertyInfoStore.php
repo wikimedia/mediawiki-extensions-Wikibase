@@ -81,7 +81,7 @@ class CachingPropertyInfoStore implements PropertyInfoStore {
 	 */
 	public function getPropertyInfo( PropertyId $propertyId ) {
 		$propertyInfo = $this->getAllPropertyInfo();
-		$id = $propertyId->getNumericId();
+		$id = $propertyId->getSerialization();
 
 		if ( isset( $propertyInfo[$id] ) ) {
 			return $propertyInfo[$id];
@@ -153,7 +153,7 @@ class CachingPropertyInfoStore implements PropertyInfoStore {
 		// Get local cached version.
 		// NOTE: this may be stale at this point, if it was already loaded
 		$propertyInfo = $this->getAllPropertyInfo();
-		$id = $propertyId->getNumericId();
+		$id = $propertyId->getSerialization();
 
 		// update local cache
 		$propertyInfo[$id] = $info;
@@ -172,7 +172,7 @@ class CachingPropertyInfoStore implements PropertyInfoStore {
 	 * @return bool
 	 */
 	public function removePropertyInfo( PropertyId $propertyId ) {
-		$id = $propertyId->getNumericId();
+		$id = $propertyId->getSerialization();
 
 		// if we don't know it, don't delete it.
 		if ( is_array( $this->propertyInfo ) && !array_key_exists( $id, $this->propertyInfo ) ) {

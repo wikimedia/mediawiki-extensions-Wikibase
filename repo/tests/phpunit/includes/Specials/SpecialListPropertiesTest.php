@@ -6,6 +6,7 @@ use DataTypes\DataTypeFactory;
 use Language;
 use SpecialPageTestBase;
 use Title;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\LanguageFallbackChainFactory;
@@ -116,7 +117,8 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 			new EntityIdHtmlLinkFormatterFactory( $this->getEntityTitleLookup(), $languageNameLookup ),
 			new LanguageFallbackChainFactory(),
 			$this->getEntityTitleLookup(),
-			$this->getBufferingTermLookup()
+			$this->getBufferingTermLookup(),
+			new BasicEntityIdParser()
 		);
 
 		return $specialPage;
