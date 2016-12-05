@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ed34346_e05e9216",
+        "filename": "client/includes/Hooks/InterwikiSortingHookHandlers.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-05T17:24:11Z",
+      "side": 1,
+      "message": "This is an implementation detail, but nevertheless: this method name is misleading. This does not return if the \"noexternallanglinks\" parser function is there or not. It checks if it is there and contains a specific (placeholder) value.",
+      "range": {
+        "startLine": 163,
+        "startChar": 18,
+        "endLine": 163,
+        "endChar": 40
+      },
+      "revId": "a9d03359e7a4ad3f04ea2c6ef591a8406e0960d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
