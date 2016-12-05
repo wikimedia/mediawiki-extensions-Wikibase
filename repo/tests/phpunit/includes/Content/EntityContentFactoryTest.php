@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\Content;
 
 use InvalidArgumentException;
 use OutOfBoundsException;
@@ -13,6 +13,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Test\PermissionsHelper;
 
 /**
  * @covers Wikibase\Repo\Content\EntityContentFactory

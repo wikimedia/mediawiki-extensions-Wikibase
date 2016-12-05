@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\Content;
 
 use MWException;
 use Wikibase\Content\EntityInstanceHolder;

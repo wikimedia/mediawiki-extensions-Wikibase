@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\ChangeOp;
 
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
