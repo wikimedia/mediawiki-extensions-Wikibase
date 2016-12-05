@@ -235,8 +235,8 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 
 		$propertyIds = array();
 
-		foreach ( $propertyInfo as $numericId => $info ) {
-			$propertyIds[] = PropertyId::newFromNumber( $numericId );
+		foreach ( $propertyInfo as $serialization => $info ) {
+			$propertyIds[] = new PropertyId( $serialization );
 		}
 
 		$this->bufferingTermLookup->prefetchTerms( $propertyIds );
@@ -256,7 +256,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 			);
 		}
 
-		// NOTE: $propertyInfo uses numerical property IDs as keys!
+		// NOTE: $propertyInfo uses serialized property IDs as keys!
 		ksort( $propertyInfo );
 		return $propertyInfo;
 	}

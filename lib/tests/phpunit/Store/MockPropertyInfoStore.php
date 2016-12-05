@@ -38,7 +38,7 @@ class MockPropertyInfoStore implements PropertyInfoStore {
 		}
 
 		$propertyInfo = $this->getAllPropertyInfo();
-		$id = $propertyId->getNumericId();
+		$id = $propertyId->getSerialization();
 
 		if ( isset( $propertyInfo[$id] ) ) {
 			return $propertyInfo[$id];
@@ -88,7 +88,7 @@ class MockPropertyInfoStore implements PropertyInfoStore {
 			throw new InvalidArgumentException( 'Missing required info field: ' . PropertyInfoStore::KEY_DATA_TYPE );
 		}
 
-		$id = $propertyId->getNumericId();
+		$id = $propertyId->getSerialization();
 		$this->propertyInfo[$id] = $info;
 	}
 
@@ -101,7 +101,7 @@ class MockPropertyInfoStore implements PropertyInfoStore {
 	 * @return bool
 	 */
 	public function removePropertyInfo( PropertyId $propertyId ) {
-		$id = $propertyId->getNumericId();
+		$id = $propertyId->getSerialization();
 
 		if ( array_key_exists( $id, $this->propertyInfo ) ) {
 			unset( $this->propertyInfo[$id] );
