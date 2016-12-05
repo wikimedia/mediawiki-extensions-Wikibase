@@ -433,7 +433,7 @@ class DirectSqlStore implements ClientStore {
 	 */
 	public function getPropertyInfoStore() {
 		if ( $this->propertyInfoTable === null ) {
-			$propertyInfoStore = new PropertyInfoTable( true, $this->repoWiki );
+			$propertyInfoStore = new PropertyInfoTable( true, $this->entityIdComposer, $this->repoWiki );
 			$cacheKey = $this->cacheKeyPrefix . ':CachingPropertyInfoStore';
 
 			$this->propertyInfoTable = new CachingPropertyInfoStore(

@@ -6,7 +6,11 @@ use DBAccessBase;
 use DBError;
 use InvalidArgumentException;
 use ResultWrapper;
+use Wikibase\DataModel\Assert\RepositoryNameAssert;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\EntityIdComposer;
+use Wikimedia\Assert\Assert;
 
 /**
  * Class PropertyInfoTable implements PropertyInfoStore on top of an SQL table.
@@ -30,23 +34,38 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 	private $isReadonly;
 
 	/**
+	 * @var EntityIdComposer
+	 */
+	private $entityIdComposer;
+
+	/**
+	 * @var string
+	 */
+	private $repositoryName;
+
+	/**
 	 * @param bool $isReadonly Whether the table can be modified.
+	 * @param EntityIdComposer $entityIdComposer
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
+	 * @param string $repositoryName
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $isReadonly, $wiki = false ) {
+	public function __construct( $isReadonly, EntityIdComposer $entityIdComposer, $wiki = false, $repositoryName = '' ) {
 		if ( !is_bool( $isReadonly ) ) {
 			throw new InvalidArgumentException( '$isReadonly must be boolean.' );
 		}
 		if ( !is_string( $wiki ) && $wiki !== false ) {
 			throw new InvalidArgumentException( '$wiki must be a string or false.' );
 		}
+		RepositoryNameAssert::assertParameterIsValidRepositoryName( $repositoryName, '$repositoryName' );
 
 		parent::__construct( $wiki );
 		$this->tableName = 'wb_property_info';
 		$this->isReadonly = $isReadonly;
+		$this->entityIdComposer = $entityIdComposer;
+		$this->repositoryName = $repositoryName;
 	}
 
 	/**
@@ -90,7 +109,12 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 				continue;
 			}
 
-			$infos[$row->pi_property_id] = $info;
+			$id = $this->entityIdComposer->composeEntityId(
+				$this->repositoryName,
+				Property::ENTITY_TYPE,
+				$row->pi_property_id
+			);
+			$infos[$id->getSerialization()] = $info;
 		}
 
 		return $infos;
@@ -135,7 +159,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 	 *
 	 * @param string $dataType
 	 *
-	 * @return array[]
+	 * @return array[] Array containing serialized property IDs as keys and info arrays as values
 	 * @throws DBError
 	 */
 	public function getPropertyInfoForDataType( $dataType ) {
@@ -158,7 +182,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 	/**
 	 * @see PropertyInfoStore::getAllPropertyInfo
 	 *
-	 * @return array[]
+	 * @return array[] Array containing serialized property IDs as keys and info arrays as values
 	 * @throws DBError
 	 */
 	public function getAllPropertyInfo() {
@@ -195,6 +219,12 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 		if ( !isset( $info[ PropertyInfoStore::KEY_DATA_TYPE ] ) ) {
 			throw new InvalidArgumentException( 'Missing required info field: ' . PropertyInfoStore::KEY_DATA_TYPE );
 		}
+
+		Assert::parameter(
+			$propertyId->getRepositoryName() === $this->repositoryName,
+			'$propertyId',
+			'The property id\'s repository name must match the PropertyInfoTable\'s'
+		);
 
 		$type = $info[ PropertyInfoStore::KEY_DATA_TYPE ];
 		$json = json_encode( $info );
