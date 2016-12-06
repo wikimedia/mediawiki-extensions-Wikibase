@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ed34346_97a39f3f",
+        "filename": "lib/includes/Store/DispatchingPropertyInfoLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-06T16:46:41Z",
+      "side": 1,
+      "message": "This case is not covered by tests. \nCondition can be replaced with `true` and all tests still pass.",
+      "range": {
+        "startLine": 40,
+        "startChar": 73,
+        "endLine": 40,
+        "endChar": 77
+      },
+      "revId": "4e50348e0ca8ba4ebeadea80d899a94e599c4013",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_d7c3573c",
+        "filename": "lib/tests/phpunit/Store/DispatchingPropertyInfoLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-06T16:46:41Z",
+      "side": 1,
+      "message": "There is a `setUp()` method in phpunit which will be called before each test so you don\u0027t need to play with test case\u0027s constructor.\nIt may become a problem when we decide to upgrade PhpUnit version and constructor arguments in PHPUnit_Framework_TestCase are changed.\n\nSee https://phpunit.de/manual/current/en/fixtures.html",
+      "range": {
+        "startLine": 25,
+        "startChar": 1,
+        "endLine": 37,
+        "endChar": 2
+      },
+      "revId": "4e50348e0ca8ba4ebeadea80d899a94e599c4013",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_b7857ba1",
+        "filename": "lib/tests/phpunit/Store/DispatchingPropertyInfoLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-06T16:46:41Z",
+      "side": 1,
+      "message": "Private method is before public (test). \nUsually private methods go to the bottom of the class. Do we have this convention?",
+      "range": {
+        "startLine": 83,
+        "startChar": 1,
+        "endLine": 83,
+        "endChar": 50
+      },
+      "revId": "4e50348e0ca8ba4ebeadea80d899a94e599c4013",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_97783fef",
+        "filename": "lib/tests/phpunit/Store/DispatchingPropertyInfoLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-06T16:46:41Z",
+      "side": 1,
+      "message": "I\u0027m not sure, but there is class \\Wikibase\\Lib\\Tests\\Store\\MockPropertyInfoStore which seem to do basically the same thing as current mock. Shouldn\u0027t we use the class?",
+      "range": {
+        "startLine": 84,
+        "startChar": 2,
+        "endLine": 84,
+        "endChar": 56
+      },
+      "revId": "4e50348e0ca8ba4ebeadea80d899a94e599c4013",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
