@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Exception;
+use LockManagerGroup;
 use Maintenance;
 use MediaWiki\MediaWikiServices;
 use MWException;
@@ -13,6 +14,7 @@ use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Repo\ChangeDispatcher;
 use Wikibase\Repo\Notifications\JobQueueChangeNotificationSender;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Store\Sql\LockManagerSqlChangeDispatchCoordinator;
 use Wikibase\Store\Sql\SqlChangeDispatchCoordinator;
 use Wikibase\Store\Sql\SqlSubscriptionLookup;
 
@@ -116,7 +118,20 @@ class DispatchChanges extends Maintenance {
 			}
 		);
 
-		$coordinator = new SqlChangeDispatchCoordinator( $repoDB, $repoID );
+		$lockManagerName = $settings->getSetting( 'dispatchingLockManager' );
+		if ( !is_null( $lockManagerName ) ) {
+			$lockManager = LockManagerGroup::singleton( wfWikiID() )->get( $lockManagerName );
+			$coordinator = new LockManagerSqlChangeDispatchCoordinator(
+				$lockManager,
+				$repoDB,
+				$repoID
+			);
+		} else {
+			$coordinator = new SqlChangeDispatchCoordinator(
+				$repoDB,
+				$repoID
+			);
+		}
 		$coordinator->setMessageReporter( $reporter );
 		$coordinator->setBatchSize( $batchSize );
 		$coordinator->setDispatchInterval( $dispatchInterval );
