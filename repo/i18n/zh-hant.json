@@ -17,7 +17,8 @@
 			"飞舞回堂前",
 			"Gi25ni",
 			"一個正常人",
-			"Kanashimi"
+			"Kanashimi",
+			"Alexsh"
 		]
 	},
 	"wikibase-desc": "結構化資料儲存庫",
@@ -43,7 +44,7 @@
 	"wikibase-entitytermsforlanguagelistview-description": "描述",
 	"wikibase-entitytermsforlanguagelistview-label": "標籤",
 	"wikibase-entitytermsforlanguagelistview-language": "語言",
-	"wikibase-entitytermsforlanguagelistview-more": "更多語言",
+	"wikibase-entitytermsforlanguagelistview-more": "所有已輸入語言",
 	"wikibase-entitytermsforlanguagelistview-less": "較少種語言",
 	"wikibase-label-empty": "尚未定義標籤",
 	"wikibase-label-edit-placeholder": "輸入標籤",
