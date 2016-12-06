@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ed34346_e46b3f81",
+        "filename": "lib/includes/Store/Sql/PropertyInfoTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-12-06T12:57:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ed34346_c43043e8",
+      "revId": "825111570204c1dc3830cd5284fa2522b330b0d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ed34346_a42d478d",
         "filename": "lib/includes/Store/Sql/PropertyInfoTable.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2016-12-06T12:26:42Z",
       "side": 1,
       "message": "it wasn\u0027t there before, but it would be nice if we\u0027d mention that this uses serialized property ids as keys.",
+      "revId": "825111570204c1dc3830cd5284fa2522b330b0d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_c4684387",
+        "filename": "lib/includes/Store/Sql/PropertyInfoTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-12-06T12:57:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ed34346_a42d478d",
       "revId": "825111570204c1dc3830cd5284fa2522b330b0d2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8ed34346_84012bbc",
+        "filename": "lib/includes/Store/Sql/PropertyInfoTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-12-06T12:57:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ed34346_84492b6d",
+      "revId": "825111570204c1dc3830cd5284fa2522b330b0d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ed34346_24581735",
         "filename": "repo/includes/Specials/SpecialListProperties.php",
         "patchSetId": 4
@@ -64,6 +118,24 @@
       "writtenOn": "2016-12-06T12:26:42Z",
       "side": 1,
       "message": "Sicne we know that these will always be property IDs, we could actually just use \n\n  new PropertyId( $serialization );\n\nNo need for a factory...",
+      "revId": "825111570204c1dc3830cd5284fa2522b330b0d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_440b13da",
+        "filename": "repo/includes/Specials/SpecialListProperties.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-12-06T12:57:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ed34346_24581735",
       "revId": "825111570204c1dc3830cd5284fa2522b330b0d2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
