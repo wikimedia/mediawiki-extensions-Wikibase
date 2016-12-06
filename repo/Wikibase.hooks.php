@@ -785,14 +785,8 @@ final class RepoHooks {
 		}
 
 		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
-
-		$entityType = array_search(
-			$title->getNamespace(),
-			$namespaceLookup->getEntityNamespaces(),
-			true
-		);
-
-		if ( $entityType === false ) {
+		$entityType = $namespaceLookup->getEntityType( $title->getNamespace() );
+		if ( $entityType === null ) {
 			return;
 		}
 
@@ -872,11 +866,8 @@ final class RepoHooks {
 		$contentModelIds = $wikibaseRepo->getContentModelMappings();
 
 		$expectedModel = false;
-		$expectedEntityType = array_search(
-			$title->getNamespace(),
-			$namespaceLookup->getEntityNamespaces()
-		);
-		if ( $expectedEntityType !== false ) {
+		$expectedEntityType = $namespaceLookup->getEntityType( $title->getNamespace() );
+		if ( $expectedEntityType !== null ) {
 			$expectedModel = $contentModelIds[$expectedEntityType];
 		}
 

@@ -15,6 +15,7 @@ use Wikimedia\Assert\Assert;
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Adrian Heine <adrian.heine@wikimedia.de>
+ * @author Thiemo Mättig
  */
 final class EntityNamespaceLookup {
 
@@ -36,6 +37,7 @@ final class EntityNamespaceLookup {
 	 * in which they reside.
 	 *
 	 * @since 0.4
+	 * @deprecated since 0.5, use self::getEntityType instead
 	 *
 	 * @return array [ entity type (string) -> namespace id (integer) ]
 	 */
@@ -44,20 +46,17 @@ final class EntityNamespaceLookup {
 	}
 
 	/**
-	 * Returns the namespace ID for the given entity type, or false if the parameter
-	 * is not a known entity type.
+	 * @since 0.5
 	 *
-	 * The return value is based on getEntityNamespaces(), which is configured via
-	 * $wgWBRepoSettings['entityNamespaces'].
+	 * @param string $entityType
 	 *
-	 * @since 0.4
-	 *
-	 * @param string $entityType the entity type
-	 *
-	 * @return int|bool the namespace associated with the given entity type (or false if there is none)
+	 * @return int|null The namespace ID number associated with the given entity type, or null if
+	 *  $entityType is not a know entity type identifier.
 	 */
 	public function getEntityNamespace( $entityType ) {
-		return isset( $this->entityNamespaces[$entityType] ) ? $this->entityNamespaces[$entityType] : false;
+		return isset( $this->entityNamespaces[$entityType] )
+			? $this->entityNamespaces[$entityType]
+			: null;
 	}
 
 	/**
@@ -71,7 +70,18 @@ final class EntityNamespaceLookup {
 	 * @return bool true if $ns is an entity namespace
 	 */
 	public function isEntityNamespace( $ns ) {
-		return in_array( $ns, $this->entityNamespaces );
+		return in_array( $ns, $this->entityNamespaces, true );
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @param int $ns
+	 *
+	 * @return string|null
+	 */
+	public function getEntityType( $ns ) {
+		return array_search( $ns, $this->entityNamespaces, true ) ?: null;
 	}
 
 }

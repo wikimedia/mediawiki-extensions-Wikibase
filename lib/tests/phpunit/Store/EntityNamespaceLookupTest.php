@@ -13,53 +13,48 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Adrian Heine <adrian.heine@wikimedia.de>
+ * @author Thiemo Mättig
  */
 class EntityNamespaceLookupTest extends PHPUnit_Framework_TestCase {
 
+	private function newInstance() {
+		return new EntityNamespaceLookup( [
+			'item' => 120,
+			'property' => 122,
+		] );
+	}
+
 	public function testGetEntityNamespaces() {
-		$entityNamespaces = $this->getNamespaces();
-		$entityNamespaceLookup = new EntityNamespaceLookup( $entityNamespaces );
+		$lookup = $this->newInstance();
 
-		$this->assertEquals( $entityNamespaces, $entityNamespaceLookup->getEntityNamespaces() );
-	}
-
-	/**
-	 * @dataProvider getEntityNamespaceProvider
-	 */
-	public function testGetEntityNamespace( $namespace, $expected ) {
-		$entityNamespaces = $this->getNamespaces();
-
-		$entityNamespaceLookup = new EntityNamespaceLookup( $entityNamespaces );
-		$this->assertEquals( $expected, $entityNamespaceLookup->getEntityNamespace( $namespace ) );
-	}
-
-	public function getEntityNamespaceProvider() {
-		return [
-			[ 'item', 120 ],
-			[ 'kittens', false ]
+		$expected = [
+			'item' => 120,
+			'property' => 122,
 		];
+		$this->assertSame( $expected, $lookup->getEntityNamespaces() );
+	}
+
+	public function testGetEntityNamespace() {
+		$lookup = $this->newInstance();
+
+		$this->assertSame( 120, $lookup->getEntityNamespace( 'item' ), 'found' );
+		$this->assertNull( $lookup->getEntityNamespace( 'kittens' ), 'not found' );
 	}
 
 	public function testIsEntityNamespace() {
-		$entityNamespaces = $this->getNamespaces();
-		$entityNamespaceLookup = new EntityNamespaceLookup( $entityNamespaces );
+		$lookup = $this->newInstance();
 
-		$this->assertTrue(
-			$entityNamespaceLookup->isEntityNamespace( 120 ),
-			'120 is an entity namespace'
-		);
-
-		$this->assertFalse(
-			$entityNamespaceLookup->isEntityNamespace( 4 ),
-			'4 is not an entity namespace'
-		);
+		$this->assertTrue( $lookup->isEntityNamespace( 120 ), 'found' );
+		$this->assertFalse( $lookup->isEntityNamespace( 120.0 ), 'must be int' );
+		$this->assertFalse( $lookup->isEntityNamespace( 4 ), 'not found' );
 	}
 
-	private function getNamespaces() {
-		return [
-			'item' => 120,
-			'property' => 122
-		];
+	public function testGetEntityType() {
+		$lookup = $this->newInstance();
+
+		$this->assertSame( 'item', $lookup->getEntityType( 120 ), 'found' );
+		$this->assertNull( $lookup->getEntityType( 120.0 ), 'must be int' );
+		$this->assertNull( $lookup->getEntityType( 4 ), 'not found' );
 	}
 
 }
