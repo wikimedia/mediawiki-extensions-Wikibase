@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "8ed34346_e10d7142",
+        "filename": "lib/includes/Store/Sql/PropertyInfoTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-12-06T12:16:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ed34346_4010a604",
+      "range": {
+        "startLine": 93,
+        "startChar": 10,
+        "endLine": 93,
+        "endChar": 30
+      },
+      "revId": "bf8ed4db6b0f30042eb665a4428d812c6d78926b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ed34346_e0ffb2a5",
         "filename": "repo/includes/Specials/SpecialListProperties.php",
         "patchSetId": 2
@@ -77,6 +101,24 @@
       "writtenOn": "2016-12-05T18:25:37Z",
       "side": 1,
       "message": "Well, what order do we want - chronological, semantic, or alphabetical?...",
+      "parentUuid": "8ed34346_e0ffb2a5",
+      "revId": "bf8ed4db6b0f30042eb665a4428d812c6d78926b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_44055312",
+        "filename": "repo/includes/Specials/SpecialListProperties.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-12-06T12:16:42Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "8ed34346_e0ffb2a5",
       "revId": "bf8ed4db6b0f30042eb665a4428d812c6d78926b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
