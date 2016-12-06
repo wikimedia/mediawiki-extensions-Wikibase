@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ed34346_019aad75",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialGoToLinkedPageTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-06T10:10:05Z",
+      "side": 0,
+      "message": "So this change made me think does it affect anything that elements with those ids are now a bit different. Ie. it is no longer input that has id\u003dwb-gotolinkedpage-sitename but div.\nI guess, at least in case of this special page, it is all good but as don\u0027t really know this stuff I am not sure.",
+      "revId": "35682c598e4aa69b0e76ff67281fd1c544224176",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
