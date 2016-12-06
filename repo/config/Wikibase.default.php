@@ -198,4 +198,6 @@ return [
 
 	// List of entity types for Special:EntitiesWithoutLabel and …Description, or null for all.
 	'supportedEntityTypesForEntitiesWithoutTermListings' => null,
+	// Name of the lock manager for dispatching coordinator
+	'dispatchingLockManager' => null,
 ];
