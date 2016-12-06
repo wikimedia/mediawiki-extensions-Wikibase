@@ -164,23 +164,19 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 		$matchers['site'] = array(
 			'tag' => 'input',
 			'attributes' => array(
-				'id' => 'wb-gotolinkedpage-sitename',
 				'name' => 'site',
 				'value' => $site
 			) );
 		$matchers['itemid'] = array(
 			'tag' => 'input',
 			'attributes' => array(
-				'id' => 'wb-gotolinkedpage-itemid',
 				'name' => 'itemid',
 				'value' => $item
 			) );
 		$matchers['submit'] = array(
-			'tag' => 'input',
+			'tag' => 'button',
 			'attributes' => array(
-				'id' => 'wb-gotolinkedpage-submit',
 				'type' => 'submit',
-				'name' => ''
 			)
 		);
 		foreach ( $matchers as $key => $matcher ) {

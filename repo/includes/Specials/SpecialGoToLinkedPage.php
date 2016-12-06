@@ -245,7 +245,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 			)
 		);
 
-		HTMLForm::factory( 'inline', $formDescriptor, $this->getContext() )
+		HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext() )
 			->setId( 'wb-gotolinkedpage-form1' )
 			->setMethod( 'get' )
 			->setSubmitID( 'wb-gotolinkedpage-submit' )
