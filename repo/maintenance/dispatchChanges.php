@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Exception;
+use LockManagerGroup;
 use Maintenance;
 use MediaWiki\MediaWikiServices;
 use MWException;
@@ -13,6 +14,7 @@ use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Repo\ChangeDispatcher;
 use Wikibase\Repo\Notifications\JobQueueChangeNotificationSender;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Store\Sql\LockManagerSqlChangeDispatchCoordinator;
 use Wikibase\Store\Sql\SqlChangeDispatchCoordinator;
 use Wikibase\Store\Sql\SqlSubscriptionLookup;
 
@@ -94,7 +96,6 @@ class DispatchChanges extends Maintenance {
 		EntityChangeLookup $changeLookup,
 		SettingsArray $settings
 	) {
-		$repoID = wfWikiID();
 		$repoDB = $settings->getSetting( 'changesDatabase' );
 		$batchChunkFactor = $settings->getSetting( 'dispatchBatchChunkFactor' );
 		$batchCacheFactor = $settings->getSetting( 'dispatchBatchCacheFactor' );
@@ -118,7 +119,7 @@ class DispatchChanges extends Maintenance {
 			}
 		);
 
-		$coordinator = new SqlChangeDispatchCoordinator( $repoDB, $repoID );
+		$coordinator = $this->getCoordinator( $settings );
 		$coordinator->setMessageReporter( $reporter );
 		$coordinator->setBatchSize( $batchSize );
 		$coordinator->setDispatchInterval( $dispatchInterval );
@@ -242,6 +243,31 @@ class DispatchChanges extends Maintenance {
 		$stats->updateCount( 'wikibase.repo.dispatchChanges.passes', $c );
 
 		$this->log( "Done, exiting after $c passes and $t seconds." );
+	}
+
+	/**
+	 * Find and return the proper ChangeDispatchCoordinator
+	 *
+	 * @param SettingsArray $settings
+	 *
+	 * @return SqlChangeDispatchCoordinator
+	 */
+	private function getCoordinator( SettingsArray $settings ) {
+		$repoID = wfWikiID();
+		$lockManagerName = $settings->getSetting( 'dispatchingLockManager' );
+		if ( !is_null( $lockManagerName ) ) {
+			$lockManager = LockManagerGroup::singleton( wfWikiID() )->get( $lockManagerName );
+			return new LockManagerSqlChangeDispatchCoordinator(
+				$lockManager,
+				$settings->getSetting( 'changesDatabase' ),
+				$repoID
+			);
+		} else {
+			return new SqlChangeDispatchCoordinator(
+				$settings->getSetting( 'changesDatabase' ),
+				$repoID
+			);
+		}
 	}
 
 	/**
