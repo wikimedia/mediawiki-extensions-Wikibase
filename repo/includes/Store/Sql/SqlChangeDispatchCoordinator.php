@@ -25,7 +25,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	/**
 	 * @var callable Override for the array_rand function
 	 */
-	private $array_rand = 'array_rand';
+	protected $array_rand = 'array_rand';
 
 	/**
 	 * @var callable Override for the time function
@@ -291,7 +291,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 *
 	 * @see selectClient()
 	 */
-	private function getCandidateClients() {
+	protected function getCandidateClients() {
 		$db = $this->getRepoMaster();
 
 		// XXX: subject to clock skew. Use DB based "now" time?
