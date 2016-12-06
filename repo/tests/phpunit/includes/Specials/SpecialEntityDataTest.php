@@ -24,7 +24,7 @@ use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\Specials\SpecialEntityData;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Test\EntityDataTestProvider;
+use Wikibase\Repo\Tests\LinkedData\EntityDataTestProvider;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialEntityData

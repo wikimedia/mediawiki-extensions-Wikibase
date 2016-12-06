@@ -13,7 +13,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Repo\Validators\LabelDescriptionUniquenessValidator;
-use Wikibase\Test\ChangeOpTestMockProvider;
+use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
 
 /**
  * @covers Wikibase\Repo\Validators\LabelDescriptionUniquenessValidator

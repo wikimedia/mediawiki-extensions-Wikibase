@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Rdf;
+namespace Wikibase\Repo\Tests\Rdf;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\Rdf\NullDedupeBag;
@@ -8,7 +8,6 @@ use Wikibase\Rdf\NullEntityMentionListener;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\SnakRdfBuilder;
 use Wikibase\Rdf\TruthyStatementRdfBuilder;
-use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\RdfWriter;
 

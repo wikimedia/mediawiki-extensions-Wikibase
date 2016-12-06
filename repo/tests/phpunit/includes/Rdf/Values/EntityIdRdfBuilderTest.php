@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Rdf;
+namespace Wikibase\Repo\Tests\Rdf\Values;
 
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;

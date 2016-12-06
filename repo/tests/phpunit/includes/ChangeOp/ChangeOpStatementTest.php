@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\ChangeOp;
 
 use DataValues\NumberValue;
 use DataValues\StringValue;
@@ -26,7 +26,6 @@ use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
-use Wikibase\Repo\Tests\ChangeOp\StatementListProviderDummy;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpStatement

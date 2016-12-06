@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Validators\SiteLinkUniquenessValidator;
 use Wikibase\Repo\Validators\UniquenessViolation;
-use Wikibase\Test\ChangeOpTestMockProvider;
+use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
 
 /**
  * @covers Wikibase\Repo\Validators\SiteLinkUniquenessValidator
