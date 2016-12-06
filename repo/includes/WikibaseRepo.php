@@ -1243,7 +1243,16 @@ class WikibaseRepo {
 	 *  $wgWBRepoSettings['entityNamespaces'] setting.
 	 */
 	public function getEnabledEntityTypes() {
-		return array_keys( $this->getEntityNamespacesSetting() );
+		return array_unique( array_merge(
+			$this->getLocalEntityTypes(),
+			array_reduce(
+				$this->settings->getSetting( 'foreignRepositories' ),
+				function( $types, $repoSettings ) {
+					return array_merge( $types, $repoSettings['supportedEntityTypes'] );
+				},
+				[]
+			)
+		) );
 	}
 
 	/**
