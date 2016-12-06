@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Exception;
+use LockManagerGroup;
 use Maintenance;
 use MediaWiki\MediaWikiServices;
 use MWException;
@@ -13,6 +14,8 @@ use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Repo\ChangeDispatcher;
 use Wikibase\Repo\Notifications\JobQueueChangeNotificationSender;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Store\Sql\LockManagerSqlChangeDispatchCoordinator;
+use Wikibase\Store\ChangeDispatchCoordinator;
 use Wikibase\Store\Sql\SqlChangeDispatchCoordinator;
 use Wikibase\Store\Sql\SqlSubscriptionLookup;
 
@@ -118,7 +121,7 @@ class DispatchChanges extends Maintenance {
 			}
 		);
 
-		$coordinator = new SqlChangeDispatchCoordinator( $repoDB, $repoID );
+		$coordinator = $this->getCoordinator( $settings, $repoID, $repoDB );
 		$coordinator->setMessageReporter( $reporter );
 		$coordinator->setBatchSize( $batchSize );
 		$coordinator->setDispatchInterval( $dispatchInterval );
@@ -242,6 +245,32 @@ class DispatchChanges extends Maintenance {
 		$stats->updateCount( 'wikibase.repo.dispatchChanges.passes', $c );
 
 		$this->log( "Done, exiting after $c passes and $t seconds." );
+	}
+
+	/**
+	 * Find and return the proper ChangeDispatchCoordinator
+	 *
+	 * @param SettingsArray $settings
+	 * @param string $repoID
+	 * @param string $repoDB
+	 *
+	 * @return ChangeDispatchCoordinator
+	 */
+	private function getCoordinator( SettingsArray $settings, $repoID, $repoDB ) {
+		$lockManagerName = $settings->getSetting( 'dispatchingLockManager' );
+		if ( !is_null( $lockManagerName ) ) {
+			$lockManager = LockManagerGroup::singleton( wfWikiID() )->get( $lockManagerName );
+			return new LockManagerSqlChangeDispatchCoordinator(
+				$lockManager,
+				$repoDB,
+				$repoID
+			);
+		} else {
+			return new SqlChangeDispatchCoordinator(
+				$repoDB,
+				$repoID
+			);
+		}
 	}
 
 	/**
