@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Tests\RecentChanges;
+namespace Wikibase\Client\Tests\Usage;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\Client\Usage\NullSubscriptionManager;

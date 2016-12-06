@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Tests\Usage\Sql;
+namespace Wikibase\Client\Tests\Usage;
 
 use MediaWikiTestCase;
 use Title;

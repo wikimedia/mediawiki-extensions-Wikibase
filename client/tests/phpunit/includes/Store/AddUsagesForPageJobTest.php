@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Test\Store;
+namespace Wikibase\Client\Tests\Store;
 
 use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;

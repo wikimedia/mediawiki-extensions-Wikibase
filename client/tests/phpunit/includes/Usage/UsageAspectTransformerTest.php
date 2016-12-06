@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Usage\Tests;
+namespace Wikibase\Client\Tests\Usage;
 
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
