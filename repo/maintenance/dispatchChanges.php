@@ -3,17 +3,19 @@
 namespace Wikibase;
 
 use Exception;
+use LockManagerGroup;
 use Maintenance;
 use MWException;
 use MWExceptionHandler;
 use RequestContext;
+use wfWikiID;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Repo\ChangeDispatcher;
 use Wikibase\Repo\Notifications\JobQueueChangeNotificationSender;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Store\Sql\SqlChangeDispatchCoordinator;
+use Wikibase\Store\Sql\LockManagerSqlChangeDispatchCoordinator;
 use Wikibase\Store\Sql\SqlSubscriptionLookup;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
@@ -118,7 +120,13 @@ class DispatchChanges extends Maintenance {
 			}
 		);
 
-		$coordinator = new SqlChangeDispatchCoordinator( $repoDB, $repoID );
+		$lockManagerName = $settings->getSetting( 'dispatchingLockManager' );
+		$lockManager = LockManagerGroup::singleton( wfWikiID() )->get( $lockManagerName );
+		$coordinator = new LockManagerSqlChangeDispatchCoordinator(
+			$lockManager,
+			$repoDB,
+			$repoID
+		);
 		$coordinator->setMessageReporter( $reporter );
 		$coordinator->setBatchSize( $batchSize );
 		$coordinator->setDispatchInterval( $dispatchInterval );

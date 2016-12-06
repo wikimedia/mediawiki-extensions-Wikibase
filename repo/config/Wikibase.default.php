@@ -197,4 +197,7 @@ return [
 
 	// Map of foreign repository names to repository-specific settings such as "supportedEntityTypes"
 	'foreignRepositories' => [],
+
+	// Name of the lock manager for dispatching coordinator
+	'dispatchingLockManager' => 'fsLockManager',
 ];
