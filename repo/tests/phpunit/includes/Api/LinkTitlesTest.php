@@ -1,9 +1,10 @@
 <?php
 
-namespace Wikibase\Test\Repo\Api;
+namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
 use UsageException;
+use Wikibase\Test\Repo\Api\WikibaseApiTestCase;
 
 /**
  * @covers Wikibase\Repo\Api\LinkTitles

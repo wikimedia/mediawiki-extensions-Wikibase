@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Repo\Api;
+namespace Wikibase\Repo\Tests\Api;
 
 use ApiTestCase;
 use Wikibase\Repo\WikibaseRepo;
@@ -18,7 +18,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class AvailabeBadgesTest extends ApiTestCase {
+class AvailableBadgesTest extends ApiTestCase {
 
 	private static $badgeItems = array(
 		'Q123' => '',

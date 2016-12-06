@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Repo\Api;
+namespace Wikibase\Repo\Tests\Api;
 
 use UsageException;
 use Wikibase\DataModel\Entity\Item;
@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Statement\StatementGuidParsingException;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Test\Repo\Api\WikibaseApiTestCase;
 
 /**
  * @covers Wikibase\Repo\Api\EditEntity
