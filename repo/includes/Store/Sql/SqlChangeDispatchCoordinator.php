@@ -23,7 +23,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	/**
 	 * @var callable Override for the array_rand function
 	 */
-	private $array_rand = 'array_rand';
+	protected $array_rand = 'array_rand';
 
 	/**
 	 * @var callable Override for the time function
@@ -289,7 +289,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 *
 	 * @see selectClient()
 	 */
-	private function getCandidateClients() {
+	protected function getCandidateClients() {
 		$db = $this->getRepoMaster();
 
 		// XXX: subject to clock skew. Use DB based "now" time?
@@ -546,7 +546,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 *
 	 * @return bool whether the lock was engaged successfully.
 	 */
-	private function engageClientLock( Database $db, $lock ) {
+	protected function engageClientLock( Database $db, $lock ) {
 		if ( isset( $this->engageClientLockOverride ) ) {
 			return call_user_func( $this->engageClientLockOverride, $db, $lock );
 		}
@@ -562,7 +562,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 *
 	 * @return bool whether the lock was released successfully.
 	 */
-	private function releaseClientLock( Database $db, $lock ) {
+	protected function releaseClientLock( Database $db, $lock ) {
 		if ( isset( $this->releaseClientLockOverride ) ) {
 			return call_user_func( $this->releaseClientLockOverride, $db, $lock );
 		}
@@ -578,7 +578,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 *
 	 * @return bool true if the given lock is currently held by another process, false otherwise.
 	 */
-	private function isClientLockUsed( Database $db, $lock ) {
+	protected function isClientLockUsed( Database $db, $lock ) {
 		if ( isset( $this->isClientLockUsedOverride ) ) {
 			return call_user_func( $this->isClientLockUsedOverride, $db, $lock );
 		}
