@@ -50,6 +50,24 @@
       "revId": "b946b675e628dcb586bcef000a96a81f652c164a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_88101906",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/StatementGroupRendererFactory.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1260
+      },
+      "writtenOn": "2016-12-06T23:57:04Z",
+      "side": 0,
+      "message": "IntelliJ said that this part of the phpdoc comment didn\u0027t match the actual exception throwing of the function and recommended that I remove it. I didn\u0027t really pay close attention to this, because I was just cleaning up other comments after changing up parameters and accepted what IntelliJ recommended.\n\nIf IntelliJ was wrong or if this doesn\u0027t belong in this patch I can remove it.",
+      "parentUuid": "8ed34346_3a7152de",
+      "revId": "b946b675e628dcb586bcef000a96a81f652c164a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
