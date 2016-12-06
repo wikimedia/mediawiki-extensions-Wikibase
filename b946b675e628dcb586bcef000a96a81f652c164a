@@ -33,6 +33,23 @@
       "revId": "b946b675e628dcb586bcef000a96a81f652c164a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_3a7152de",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/StatementGroupRendererFactory.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-12-06T18:20:22Z",
+      "side": 0,
+      "message": "Why is this removed?",
+      "revId": "b946b675e628dcb586bcef000a96a81f652c164a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
