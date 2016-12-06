@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8ed34346_c1a6f54f",
+        "filename": "lib/includes/Store/ForeignEntityRevisionLookupFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-06T12:30:41Z",
+      "side": 1,
+      "message": "Good point. Added some explanation and pointers for further reference",
+      "parentUuid": "8ed34346_600ba2da",
+      "range": {
+        "startLine": 72,
+        "startChar": 4,
+        "endLine": 72,
+        "endChar": 51
+      },
+      "revId": "f8c10a985a572a3382c51edecc8d2a6a58e435cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ed34346_a0289a33",
         "filename": "lib/includes/Store/ForeignEntityRevisionLookupFactory.php",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2016-12-05T17:46:31Z",
       "side": 1,
       "message": "Why not use this notation:\n`$deserializers[] \u003d $callback( $deserializerFactory );` ? It does the same, but shorter.",
+      "range": {
+        "startLine": 172,
+        "startChar": 3,
+        "endLine": 172,
+        "endChar": 72
+      },
+      "revId": "f8c10a985a572a3382c51edecc8d2a6a58e435cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_2176c9d5",
+        "filename": "lib/includes/Store/ForeignEntityRevisionLookupFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-06T12:30:41Z",
+      "side": 1,
+      "message": "I personally have no strongpreference on which is better. Using call_user_func still seems a bit nicer but no really good justification for that. I could change this.\nThe way it is done is basically copied from WikibaseClient::getExternalFormatEntityDeserializer.\nThat private method of WikibaseClient should be at some point replaced, so this code is not duplicated.",
+      "parentUuid": "8ed34346_a0289a33",
       "range": {
         "startLine": 172,
         "startChar": 3,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "8ed34346_413f85d3",
+        "filename": "lib/tests/phpunit/Store/ForeignEntityRevisionLookupFactoryTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-06T12:30:41Z",
+      "side": 1,
+      "message": "Keys are only used for readability indeed. I somehow imagined that the code using this class would also provide those keys (see the example in not ready patch at https://gerrit.wikimedia.org/r/#/c/324473/4/client/includes/RepositorySpecificServices.php@124) but on the other hand they do not really seem necessary. Will probably drop those keys, good catch!",
+      "parentUuid": "8ed34346_805fdee7",
+      "range": {
+        "startLine": 72,
+        "startChar": 3,
+        "endLine": 72,
+        "endChar": 9
+      },
+      "revId": "f8c10a985a572a3382c51edecc8d2a6a58e435cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ed34346_c0e8360e",
         "filename": "lib/tests/phpunit/Store/ForeignEntityRevisionLookupFactoryTest.php",
         "patchSetId": 2
@@ -82,6 +154,30 @@
       "writtenOn": "2016-12-05T17:46:31Z",
       "side": 1,
       "message": "If you replace it with `return [];` no tests will fail, so there are probably test cases missing.",
+      "range": {
+        "startLine": 70,
+        "startChar": 54,
+        "endLine": 78,
+        "endChar": 4
+      },
+      "revId": "f8c10a985a572a3382c51edecc8d2a6a58e435cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_c4196380",
+        "filename": "lib/tests/phpunit/Store/ForeignEntityRevisionLookupFactoryTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-06T12:30:41Z",
+      "side": 1,
+      "message": "Yeah, those tests only check if the instance of right class is created which is probably ok for a factory class tests.\nThe functionality in question should still be covered by some kind of integration tests, though. It is a bit tricky to test it in separation. \nI have a very drafty sketch of a possible integration test covering this in a follow up patch: https://gerrit.wikimedia.org/r/#/c/324473/4/client/tests/phpunit/includes/WikibaseClientFederationIntegrationTest.php\nI need to restructure the whole code building up on this, and relevant integration tests will probably go in their own patch. I believe it is reasonable to wait with this patch for some tests verifying it are in place.\n\nAnd considering returning an empty array here. Actually I realized this factory class should not be accepting the empty array here, if I read through the whole deserializer code correctly that could lead to very nasty problems.\nI\u0027ve added a check preventing from having an empty array passed in.",
+      "parentUuid": "8ed34346_c0e8360e",
       "range": {
         "startLine": 70,
         "startChar": 54,
