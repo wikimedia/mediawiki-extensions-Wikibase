@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Repo\Api;
+namespace Wikibase\Repo\Tests\Api;
 
 use DataValues\StringValue;
 use FormatJson;
@@ -20,6 +20,7 @@ use Wikibase\Lib\EntityIdPlainLinkFormatter;
 use Wikibase\Lib\EntityIdValueFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Test\Repo\Api\WikibaseApiTestCase;
 use WikiPage;
 
 /**

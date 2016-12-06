@@ -11,6 +11,7 @@ use TestUser;
 use Title;
 use UsageException;
 use User;
+use Wikibase\Repo\Tests\Api\EntityTestHelper;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 

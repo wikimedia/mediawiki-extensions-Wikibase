@@ -1,12 +1,13 @@
 <?php
 
-namespace Wikibase\Test\Repo\Api;
+namespace Wikibase\Repo\Tests\Api;
 
 use MWException;
 use UsageException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Test\Repo\Api\WikibaseApiTestCase;
 use WikiPage;
 
 /**
