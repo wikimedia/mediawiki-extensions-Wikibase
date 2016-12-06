@@ -106,4 +106,19 @@ $wgGroupPermissions['user']['item-merge'] = true;
 $wgGroupPermissions['user']['property-term'] = true;
 $wgGroupPermissions['user']['property-create'] = true;
 
+// Enable this part if you want to have redis dispatching lock manager
+$wgLockManagers[] = [
+        'name'         => 'redisLockManager',
+        'class'        => 'RedisLockManager',
+        'lockServers'  => [ 'rdb1' => '127.0.0.1' ],
+        'srvsByBucket' => [
+                0 => [ 'rdb1' ]
+        ],
+        'redisConfig'  => [
+                'connectTimeout' => 2,
+                'readTimeout'    => 2
+        ]
+];
+$wgWBRepoSettings['dispatchingLockManager'] = 'redisLockManager';
+
 */
