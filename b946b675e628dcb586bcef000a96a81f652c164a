@@ -103,6 +103,24 @@
       "revId": "b946b675e628dcb586bcef000a96a81f652c164a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_8e27015f",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/StatementGroupRendererFactory.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-07T08:20:07Z",
+      "side": 0,
+      "message": "In PS3 I checked and can confirm this change is correct. Please keep it, or upload it as a separate patch.",
+      "parentUuid": "8ed34346_68a01d8e",
+      "revId": "b946b675e628dcb586bcef000a96a81f652c164a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
