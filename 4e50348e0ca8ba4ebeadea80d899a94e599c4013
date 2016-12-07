@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "8ed34346_fc650fab",
+        "filename": "lib/tests/phpunit/Store/DispatchingPropertyInfoLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-07T14:22:38Z",
+      "side": 1,
+      "message": "Thanks for making this comment. You\u0027ve raised a very valid points here.\n\nWe should document the idea behind \"dispatching services\" (as the DispatchingPropertyInfoLookup here) better somewhere, so it is more clear.\n\n1. We have decided that dispatching should not be responsible for adding/removing repository prefixes (like foo in foo:P42). Stripping a prefix before querying a database, and adding a right prefix to the resulting entity id etc, should be done in the service actually touching the database, and creating the resulting entity id.\nYou\u0027re right in saying that the \"inner\" service will often know which repository it is configured to be used with (like \"foo\" in the example). Among other reasons we want the service accessing the database of repository \"foo\" to make sure it is asked for entities belonging to this repository. Otherwise unpredicted things could happen.\n\n2. In case of this service it seems that requiring dispatching service to receive a repo name \u003d\u003e repo-specific service map instead of simple list of services is a bit redundant. We could have a method like isLookupFor( EntityId $id ) or isLookupForRepository( $repoName ) in repo-specific PropertyInfoLookups, and have DispatchingLookup simply enumerate the list of lookups and pick the right one using this method, not based on the repo name string.\nI believe this new method should not be the part of PropertyInfoLookup interface, we\u0027d rather like to have something like DispatchablePropertyInfoLookup interface providing such method (cf. DispatchableSerializer/DispatchableDeserializer in DataModel component).\nHaving vary briefly thought about it I think this could work, and might be a bit cleaner than the approach we\u0027ve been using in dispatching services so far.\n\nWhat I am still not sure about though is that in case of many services there is a full bunch of wrapping services we use. For instance, given we had two repos \"wd\" and \"foo\", and have a PropertyInfoTable wrapped in CachingPropertyInfoStore. To use those in DispatchingPropertyInfoLookup we would need CachingPropertyInfoStore to also implement DispatchableInfoLookup. I am not sure if this makes sense (maybe...) and are there further implications. Situation could be even more complex in case of other service (one more level of wrapping in case of EntityRevisionLookup, for example).\n\n\nI think we should continue this discussion somewhere else as any change in the general dispatching service scenario should not only be reflected in this patch.",
+      "parentUuid": "8ed34346_8e4dc19d",
+      "range": {
+        "startLine": 42,
+        "startChar": 3,
+        "endLine": 42,
+        "endChar": 8
+      },
+      "revId": "4e50348e0ca8ba4ebeadea80d899a94e599c4013",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ed34346_b7857ba1",
         "filename": "lib/tests/phpunit/Store/DispatchingPropertyInfoLookupTest.php",
         "patchSetId": 3
