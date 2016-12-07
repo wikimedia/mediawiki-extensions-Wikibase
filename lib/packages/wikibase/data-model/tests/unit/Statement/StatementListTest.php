@@ -10,6 +10,7 @@ use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\ReferencedStatementFilter;
 use Wikibase\DataModel\Statement\Statement;
@@ -25,7 +26,7 @@ use Wikibase\DataModel\Statement\StatementList;
 class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @param int $propertyId
+	 * @param string $propertyId
 	 * @param string|null $guid
 	 * @param int $rank
 	 *
@@ -42,7 +43,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 		$statement->expects( $this->any() )
 			->method( 'getPropertyId' )
-			->will( $this->returnValue( new PropertyId( 'P' . $propertyId ) ) );
+			->will( $this->returnValue( new PropertyId( $propertyId ) ) );
 
 		$statement->expects( $this->any() )
 			->method( 'getRank' )
@@ -51,6 +52,12 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		return $statement;
 	}
 
+	/**
+	 * @param string $propertyId
+	 * @param string $stringValue
+	 *
+	 * @return Statement
+	 */
 	private function getStatementWithSnak( $propertyId, $stringValue ) {
 		$snak = $this->newSnak( $propertyId, $stringValue );
 		$statement = new Statement( $snak );
@@ -58,14 +65,23 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		return $statement;
 	}
 
+	/**
+	 * @param string $propertyId
+	 * @param string $stringValue
+	 *
+	 * @return Snak
+	 */
 	private function newSnak( $propertyId, $stringValue ) {
-		return new PropertyValueSnak( $propertyId, new StringValue( $stringValue ) );
+		return new PropertyValueSnak(
+			new PropertyId( $propertyId ),
+			new StringValue( $stringValue )
+		);
 	}
 
 	public function testConstructorAcceptsDuplicatesWithNoGuid() {
 		$list = new StatementList(
-			$this->getStatement( 1, null ),
-			$this->getStatement( 1, null )
+			$this->getStatement( 'P1', null ),
+			$this->getStatement( 'P1', null )
 		);
 
 		$this->assertSame( 2, $list->count() );
@@ -73,8 +89,8 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testConstructorAcceptsDuplicatesWithSameGuid() {
 		$list = new StatementList(
-			$this->getStatement( 1, 'duplicate' ),
-			$this->getStatement( 1, 'duplicate' )
+			$this->getStatement( 'P1', 'duplicate' ),
+			$this->getStatement( 'P1', 'duplicate' )
 		);
 
 		$this->assertSame( 2, $list->count() );
@@ -87,11 +103,11 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenStatements_getPropertyIdsReturnsArrayWithoutDuplicates() {
 		$list = new StatementList(
-			$this->getStatement( 1, 'kittens' ),
-			$this->getStatement( 3, 'foo' ),
-			$this->getStatement( 2, 'bar' ),
-			$this->getStatement( 2, 'baz' ),
-			$this->getStatement( 1, 'bah' )
+			$this->getStatement( 'P1', 'kittens' ),
+			$this->getStatement( 'P3', 'foo' ),
+			$this->getStatement( 'P2', 'bar' ),
+			$this->getStatement( 'P2', 'baz' ),
+			$this->getStatement( 'P1', 'bah' )
 		);
 
 		$this->assertEquals(
@@ -105,21 +121,21 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenStatementsWithArrayKeys_toArrayReturnsReindexedArray() {
-		$statement = $this->getStatement( 1, 'guid' );
+		$statement = $this->getStatement( 'P1', 'guid' );
 		$list = new StatementList( [ 'ignore-me' => $statement ] );
 
 		$this->assertSame( [ 0 => $statement ], $list->toArray() );
 	}
 
 	public function testGivenSparseArray_toArrayReturnsReindexedArray() {
-		$statement = $this->getStatement( 1, 'guid' );
+		$statement = $this->getStatement( 'P1', 'guid' );
 		$list = new StatementList( [ 1 => $statement ] );
 
 		$this->assertSame( [ 0 => $statement ], $list->toArray() );
 	}
 
 	public function testCanIterate() {
-		$statement = $this->getStatement( 1, 'kittens' );
+		$statement = $this->getStatement( 'P1', 'kittens' );
 		$list = new StatementList( $statement );
 
 		foreach ( $list as $statementFormList ) {
@@ -129,19 +145,19 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetUniqueMainSnaksReturnsListWithoutDuplicates() {
 		$list = new StatementList(
-			$this->getStatementWithSnak( 1, 'foo' ),
-			$this->getStatementWithSnak( 2, 'foo' ),
-			$this->getStatementWithSnak( 1, 'foo' ),
-			$this->getStatementWithSnak( 2, 'bar' ),
-			$this->getStatementWithSnak( 1, 'bar' )
+			$this->getStatementWithSnak( 'P1', 'foo' ),
+			$this->getStatementWithSnak( 'P2', 'foo' ),
+			$this->getStatementWithSnak( 'P1', 'foo' ),
+			$this->getStatementWithSnak( 'P2', 'bar' ),
+			$this->getStatementWithSnak( 'P1', 'bar' )
 		);
 
 		$this->assertEquals(
 			[
-				$this->getStatementWithSnak( 1, 'foo' ),
-				$this->getStatementWithSnak( 2, 'foo' ),
-				$this->getStatementWithSnak( 2, 'bar' ),
-				$this->getStatementWithSnak( 1, 'bar' ),
+				$this->getStatementWithSnak( 'P1', 'foo' ),
+				$this->getStatementWithSnak( 'P2', 'foo' ),
+				$this->getStatementWithSnak( 'P2', 'bar' ),
+				$this->getStatementWithSnak( 'P1', 'bar' ),
 			],
 			array_values( $list->getWithUniqueMainSnaks()->toArray() )
 		);
@@ -149,20 +165,20 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetAllSnaksReturnsAllSnaks() {
 		$list = new StatementList(
-			$this->getStatementWithSnak( 1, 'foo' ),
-			$this->getStatementWithSnak( 2, 'foo' ),
-			$this->getStatementWithSnak( 1, 'foo' ),
-			$this->getStatementWithSnak( 2, 'bar' ),
-			$this->getStatementWithSnak( 1, 'bar' )
+			$this->getStatementWithSnak( 'P1', 'foo' ),
+			$this->getStatementWithSnak( 'P2', 'foo' ),
+			$this->getStatementWithSnak( 'P1', 'foo' ),
+			$this->getStatementWithSnak( 'P2', 'bar' ),
+			$this->getStatementWithSnak( 'P1', 'bar' )
 		);
 
 		$this->assertEquals(
 			[
-				$this->newSnak( 1, 'foo' ),
-				$this->newSnak( 2, 'foo' ),
-				$this->newSnak( 1, 'foo' ),
-				$this->newSnak( 2, 'bar' ),
-				$this->newSnak( 1, 'bar' ),
+				$this->newSnak( 'P1', 'foo' ),
+				$this->newSnak( 'P2', 'foo' ),
+				$this->newSnak( 'P1', 'foo' ),
+				$this->newSnak( 'P2', 'bar' ),
+				$this->newSnak( 'P1', 'bar' ),
 			],
 			$list->getAllSnaks()
 		);
@@ -171,10 +187,10 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	public function testAddStatementWithOnlyMainSnak() {
 		$list = new StatementList();
 
-		$list->addNewStatement( $this->newSnak( 42, 'foo' ) );
+		$list->addNewStatement( $this->newSnak( 'P42', 'foo' ) );
 
 		$this->assertEquals(
-			new StatementList( new Statement( $this->newSnak( 42, 'foo' ) ) ),
+			new StatementList( new Statement( $this->newSnak( 'P42', 'foo' ) ) ),
 			$list
 		);
 	}
@@ -183,18 +199,18 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$list = new StatementList();
 
 		$list->addNewStatement(
-			$this->newSnak( 42, 'foo' ),
+			$this->newSnak( 'P42', 'foo' ),
 			[
-				$this->newSnak( 1, 'bar' )
+				$this->newSnak( 'P1', 'bar' )
 			]
 		);
 
 		$this->assertEquals(
 			new StatementList(
 				new Statement(
-					$this->newSnak( 42, 'foo' ),
+					$this->newSnak( 'P42', 'foo' ),
 					new SnakList( [
-						$this->newSnak( 1, 'bar' )
+						$this->newSnak( 'P1', 'bar' )
 					] )
 				)
 			),
@@ -205,16 +221,16 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	public function testAddStatementWithQualifiersAsSnakList() {
 		$list = new StatementList();
 		$snakList = new SnakList( [
-			$this->newSnak( 1, 'bar' )
+			$this->newSnak( 'P1', 'bar' )
 		] );
 
 		$list->addNewStatement(
-			$this->newSnak( 42, 'foo' ),
+			$this->newSnak( 'P42', 'foo' ),
 			$snakList
 		);
 
 		$this->assertEquals(
-			new StatementList( new Statement( $this->newSnak( 42, 'foo' ), $snakList ) ),
+			new StatementList( new Statement( $this->newSnak( 'P42', 'foo' ), $snakList ) ),
 			$list
 		);
 	}
@@ -223,13 +239,13 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$list = new StatementList();
 
 		$list->addNewStatement(
-			$this->newSnak( 42, 'foo' ),
+			$this->newSnak( 'P42', 'foo' ),
 			null,
 			null,
 			'kittens'
 		);
 
-		$statement = new Statement( $this->newSnak( 42, 'foo' ) );
+		$statement = new Statement( $this->newSnak( 'P42', 'foo' ) );
 
 		$statement->setGuid( 'kittens' );
 
@@ -273,9 +289,9 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenGuidOfPresentStatement_statementIsRemoved() {
-		$statement1 = new Statement( $this->newSnak( 24, 'foo' ), null, null, 'foo' );
-		$statement2 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
-		$statement3 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
+		$statement1 = new Statement( $this->newSnak( 'P24', 'foo' ), null, null, 'foo' );
+		$statement2 = new Statement( $this->newSnak( 'P32', 'bar' ), null, null, 'bar' );
+		$statement3 = new Statement( $this->newSnak( 'P32', 'bar' ), null, null, 'bar' );
 
 		$list = new StatementList( [ $statement1, $statement2, $statement3 ] );
 		$list->removeStatementsWithGuid( 'foo' );
@@ -284,9 +300,9 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenGuidOfMultipleStatements_multipleStatementsAreRemoved() {
-		$statement1 = new Statement( $this->newSnak( 24, 'foo' ), null, null, 'foo' );
-		$statement2 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
-		$statement3 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
+		$statement1 = new Statement( $this->newSnak( 'P24', 'foo' ), null, null, 'foo' );
+		$statement2 = new Statement( $this->newSnak( 'P32', 'bar' ), null, null, 'bar' );
+		$statement3 = new Statement( $this->newSnak( 'P32', 'bar' ), null, null, 'bar' );
 
 		$list = new StatementList( [ $statement1, $statement2, $statement3 ] );
 		$list->removeStatementsWithGuid( 'bar' );
@@ -295,9 +311,9 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenNotPresentGuid_listIsNotModified() {
-		$statement1 = new Statement( $this->newSnak( 24, 'foo' ), null, null, 'foo' );
-		$statement2 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
-		$statement3 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
+		$statement1 = new Statement( $this->newSnak( 'P24', 'foo' ), null, null, 'foo' );
+		$statement2 = new Statement( $this->newSnak( 'P32', 'bar' ), null, null, 'bar' );
+		$statement3 = new Statement( $this->newSnak( 'P32', 'bar' ), null, null, 'bar' );
 
 		$list = new StatementList( [ $statement1, $statement2, $statement3 ] );
 		$list->removeStatementsWithGuid( 'baz' );
@@ -306,9 +322,9 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenNullGuid_allStatementsWithNoGuidAreRemoved() {
-		$statement1 = new Statement( $this->newSnak( 24, 'foo' ), null, null, 'foo' );
-		$statement2 = new Statement( $this->newSnak( 32, 'bar' ) );
-		$statement3 = new Statement( $this->newSnak( 32, 'bar' ) );
+		$statement1 = new Statement( $this->newSnak( 'P24', 'foo' ), null, null, 'foo' );
+		$statement2 = new Statement( $this->newSnak( 'P32', 'bar' ) );
+		$statement3 = new Statement( $this->newSnak( 'P32', 'bar' ) );
 
 		$list = new StatementList( [ $statement1, $statement2, $statement3 ] );
 		$list->removeStatementsWithGuid( null );
@@ -318,8 +334,8 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testCanConstructWithTraversableContainingOnlyStatements() {
 		$statementArray = [
-			$this->getStatementWithSnak( 1, 'foo' ),
-			$this->getStatementWithSnak( 2, 'bar' ),
+			$this->getStatementWithSnak( 'P1', 'foo' ),
+			$this->getStatementWithSnak( 'P2', 'bar' ),
 		];
 
 		$object = new ArrayObject( $statementArray );
@@ -333,9 +349,9 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenTraversableWithNonStatements_constructorThrowsException() {
 		$traversable = new ArrayObject( [
-			$this->getStatementWithSnak( 1, 'foo' ),
+			$this->getStatementWithSnak( 'P1', 'foo' ),
 			new \stdClass(),
-			$this->getStatementWithSnak( 2, 'bar' ),
+			$this->getStatementWithSnak( 'P2', 'bar' ),
 		] );
 
 		$this->setExpectedException( 'InvalidArgumentException' );
@@ -348,7 +364,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testCanConstructWithStatement() {
-		$statement = new Statement( $this->newSnak( 42, 'foo' ) );
+		$statement = new Statement( $this->newSnak( 'P42', 'foo' ) );
 
 		$this->assertEquals(
 			new StatementList( [ $statement ] ),
@@ -357,9 +373,9 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testCanConstructWithStatementArgumentList() {
-		$statement0 = new Statement( $this->newSnak( 42, 'foo' ) );
-		$statement1 = new Statement( $this->newSnak( 42, 'bar' ) );
-		$statement2 = new Statement( $this->newSnak( 42, 'baz' ) );
+		$statement0 = new Statement( $this->newSnak( 'P42', 'foo' ) );
+		$statement1 = new Statement( $this->newSnak( 'P42', 'bar' ) );
+		$statement2 = new Statement( $this->newSnak( 'P42', 'baz' ) );
 
 		$this->assertEquals(
 			new StatementList( [ $statement0, $statement1, $statement2 ] ),
@@ -368,9 +384,9 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenArgumentListWithNonStatement_constructorThrowsException() {
-		$statement0 = new Statement( $this->newSnak( 42, 'foo' ) );
-		$statement1 = new Statement( $this->newSnak( 42, 'bar' ) );
-		$statement2 = new Statement( $this->newSnak( 42, 'baz' ) );
+		$statement0 = new Statement( $this->newSnak( 'P42', 'foo' ) );
+		$statement1 = new Statement( $this->newSnak( 'P42', 'bar' ) );
+		$statement2 = new Statement( $this->newSnak( 'P42', 'baz' ) );
 
 		$this->setExpectedException( 'InvalidArgumentException' );
 		new StatementList( $statement0, $statement1, [], $statement2 );
@@ -384,8 +400,8 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testCountForNonEmptyList() {
 		$list = new StatementList(
-			$this->getStatementWithSnak( 1, 'foo' ),
-			$this->getStatementWithSnak( 2, 'bar' )
+			$this->getStatementWithSnak( 'P1', 'foo' ),
+			$this->getStatementWithSnak( 'P2', 'bar' )
 		);
 
 		$this->assertSame( 2, $list->count() );
@@ -404,11 +420,11 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	public function statementArrayProvider() {
 		return [
 			[ [
-				$this->getStatementWithSnak( 1, 'foo' ),
-				$this->getStatementWithSnak( 2, 'bar' ),
+				$this->getStatementWithSnak( 'P1', 'foo' ),
+				$this->getStatementWithSnak( 'P2', 'bar' ),
 			] ],
 			[ [
-				$this->getStatementWithSnak( 1, 'foo' ),
+				$this->getStatementWithSnak( 'P1', 'foo' ),
 			] ],
 			[ [
 			] ],
@@ -417,13 +433,13 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenDifferentLists_equalsReturnsFalse() {
 		$firstStatements = new StatementList(
-			$this->getStatementWithSnak( 1, 'foo' ),
-			$this->getStatementWithSnak( 2, 'bar' )
+			$this->getStatementWithSnak( 'P1', 'foo' ),
+			$this->getStatementWithSnak( 'P2', 'bar' )
 		);
 
 		$secondStatements = new StatementList(
-			$this->getStatementWithSnak( 1, 'foo' ),
-			$this->getStatementWithSnak( 2, 'SPAM' )
+			$this->getStatementWithSnak( 'P1', 'foo' ),
+			$this->getStatementWithSnak( 'P2', 'SPAM' )
 		);
 
 		$this->assertFalse( $firstStatements->equals( $secondStatements ) );
@@ -431,15 +447,15 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenListsWithDifferentDuplicates_equalsReturnsFalse() {
 		$firstStatements = new StatementList(
-			$this->getStatementWithSnak( 1, 'foo' ),
-			$this->getStatementWithSnak( 1, 'foo' ),
-			$this->getStatementWithSnak( 2, 'bar' )
+			$this->getStatementWithSnak( 'P1', 'foo' ),
+			$this->getStatementWithSnak( 'P1', 'foo' ),
+			$this->getStatementWithSnak( 'P2', 'bar' )
 		);
 
 		$secondStatements = new StatementList(
-			$this->getStatementWithSnak( 1, 'foo' ),
-			$this->getStatementWithSnak( 2, 'bar' ),
-			$this->getStatementWithSnak( 2, 'bar' )
+			$this->getStatementWithSnak( 'P1', 'foo' ),
+			$this->getStatementWithSnak( 'P2', 'bar' ),
+			$this->getStatementWithSnak( 'P2', 'bar' )
 		);
 
 		$this->assertFalse( $firstStatements->equals( $secondStatements ) );
@@ -447,15 +463,15 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenListsWithDifferentOrder_equalsReturnsFalse() {
 		$firstStatements = new StatementList(
-			$this->getStatementWithSnak( 1, 'foo' ),
-			$this->getStatementWithSnak( 2, 'bar' ),
-			$this->getStatementWithSnak( 3, 'baz' )
+			$this->getStatementWithSnak( 'P1', 'foo' ),
+			$this->getStatementWithSnak( 'P2', 'bar' ),
+			$this->getStatementWithSnak( 'P3', 'baz' )
 		);
 
 		$secondStatements = new StatementList(
-			$this->getStatementWithSnak( 1, 'foo' ),
-			$this->getStatementWithSnak( 3, 'baz' ),
-			$this->getStatementWithSnak( 2, 'bar' )
+			$this->getStatementWithSnak( 'P1', 'foo' ),
+			$this->getStatementWithSnak( 'P3', 'baz' ),
+			$this->getStatementWithSnak( 'P2', 'bar' )
 		);
 
 		$this->assertFalse( $firstStatements->equals( $secondStatements ) );
@@ -465,9 +481,9 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$firstStatements = new StatementList();
 
 		$secondStatements = new StatementList(
-			$this->getStatementWithSnak( 1, 'foo' ),
-			$this->getStatementWithSnak( 3, 'baz' ),
-			$this->getStatementWithSnak( 2, 'bar' )
+			$this->getStatementWithSnak( 'P1', 'foo' ),
+			$this->getStatementWithSnak( 'P3', 'baz' ),
+			$this->getStatementWithSnak( 'P2', 'bar' )
 		);
 
 		$this->assertFalse( $firstStatements->equals( $secondStatements ) );
@@ -475,9 +491,9 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testNonEmptyListDoesNotEqualEmptyList() {
 		$firstStatements = new StatementList(
-			$this->getStatementWithSnak( 1, 'foo' ),
-			$this->getStatementWithSnak( 3, 'baz' ),
-			$this->getStatementWithSnak( 2, 'bar' )
+			$this->getStatementWithSnak( 'P1', 'foo' ),
+			$this->getStatementWithSnak( 'P3', 'baz' ),
+			$this->getStatementWithSnak( 'P2', 'bar' )
 		);
 
 		$secondStatements = new StatementList();
@@ -492,7 +508,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testNonEmptyListIsNotEmpty() {
-		$list = new StatementList( $this->getStatementWithSnak( 1, 'foo' ) );
+		$list = new StatementList( $this->getStatementWithSnak( 'P1', 'foo' ) );
 
 		$this->assertFalse( $list->isEmpty() );
 	}
@@ -629,9 +645,9 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenPresentStatement_getFirstStatementWithGuidReturnsStatement() {
-		$statement1 = $this->getStatement( 1, 'guid1' );
-		$statement2 = $this->getStatement( 2, 'guid2' );
-		$statement3 = $this->getStatement( 3, 'guid3' );
+		$statement1 = $this->getStatement( 'P1', 'guid1' );
+		$statement2 = $this->getStatement( 'P2', 'guid2' );
+		$statement3 = $this->getStatement( 'P3', 'guid3' );
 		$statements = new StatementList( $statement1, $statement2, $statement3 );
 
 		$actual = $statements->getFirstStatementWithGuid( 'guid2' );
@@ -639,10 +655,10 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenDoublyPresentStatement_getFirstStatementWithGuidReturnsFirstMatch() {
-		$statement1 = $this->getStatement( 1, 'guid1' );
-		$statement2 = $this->getStatement( 2, 'guid2' );
-		$statement3 = $this->getStatement( 3, 'guid3' );
-		$statement4 = $this->getStatement( 2, 'guid2' );
+		$statement1 = $this->getStatement( 'P1', 'guid1' );
+		$statement2 = $this->getStatement( 'P2', 'guid2' );
+		$statement3 = $this->getStatement( 'P3', 'guid3' );
+		$statement4 = $this->getStatement( 'P2', 'guid2' );
 		$statements = new StatementList( $statement1, $statement2, $statement3, $statement4 );
 
 		$actual = $statements->getFirstStatementWithGuid( 'guid2' );
@@ -650,8 +666,8 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenStatementsWithNoGuid_getFirstStatementWithGuidReturnsFirstMatch() {
-		$statement1 = $this->getStatement( 1, null );
-		$statement2 = $this->getStatement( 2, null );
+		$statement1 = $this->getStatement( 'P1', null );
+		$statement2 = $this->getStatement( 'P2', null );
 		$statements = new StatementList( $statement1, $statement2 );
 
 		$actual = $statements->getFirstStatementWithGuid( null );
