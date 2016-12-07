@@ -16,7 +16,6 @@
 // In effect this means that namespace translations apply only if the user defined the corresponding
 // namespace constant.
 $namespaceConstants = array(
-	'WB_NS_DATA',     'WB_NS_DATA_TALK',  // legacy
 	'WB_NS_ITEM',     'WB_NS_ITEM_TALK',
 	'WB_NS_PROPERTY', 'WB_NS_PROPERTY_TALK',
 	'WB_NS_QUERY',    'WB_NS_QUERY_TALK',
@@ -37,9 +36,6 @@ foreach ( $namespaceConstants as $const ) {
 $namespaceNames = array();
 
 $namespaceNames['en'] = array(
-	WB_NS_DATA      => 'Data',      // legacy
-	WB_NS_DATA_TALK => 'Data_talk', // legacy
-
 	WB_NS_ITEM      => 'Item',
 	WB_NS_ITEM_TALK => 'Item_talk',
 
@@ -51,9 +47,6 @@ $namespaceNames['en'] = array(
 );
 
 $namespaceNames['be-tarask'] = array(
-	WB_NS_DATA      => 'Зьвесткі',      // legacy
-	WB_NS_DATA_TALK => 'Абмеркаваньне_зьвестак', // legacy
-
 	WB_NS_ITEM      => 'Аб’ект',
 	WB_NS_ITEM_TALK => 'Абмеркаваньне_аб’екта',
 
@@ -65,9 +58,6 @@ $namespaceNames['be-tarask'] = array(
 );
 
 $namespaceNames['cs'] = array(
-	WB_NS_DATA      => 'Data',           // legacy
-	WB_NS_DATA_TALK => 'Diskuse k datům', // legacy
-
 	WB_NS_ITEM      => 'Položka',
 	WB_NS_ITEM_TALK => 'Diskuse k položce',
 
@@ -79,9 +69,6 @@ $namespaceNames['cs'] = array(
 );
 
 $namespaceNames['de'] = array(
-	WB_NS_DATA      => 'Daten',           // legacy
-	WB_NS_DATA_TALK => 'Datendiskussion', // legacy
-
 	WB_NS_ITEM      => 'Thema',
 	WB_NS_ITEM_TALK => 'Themendiskussion',
 
@@ -93,9 +80,6 @@ $namespaceNames['de'] = array(
 );
 
 $namespaceNames['he'] = array(
-	WB_NS_DATA      => 'נתונים',      // legacy
-	WB_NS_DATA_TALK => 'שיחת_נתונים', // legacy
-
 	WB_NS_ITEM      => 'פריט',
 	WB_NS_ITEM_TALK => 'שיחת_פריט',
 
@@ -107,9 +91,6 @@ $namespaceNames['he'] = array(
 );
 
 $namespaceNames['it'] = array(
-	WB_NS_DATA      => 'Dati',             // legacy
-	WB_NS_DATA_TALK => 'Discussioni_dati', // legacy
-
 	WB_NS_ITEM      => 'Elemento',
 	WB_NS_ITEM_TALK => 'Discussioni_elemento',
 
@@ -132,9 +113,6 @@ $namespaceNames['nl'] = array(
 );
 
 $namespaceNames['ru'] = array(
-	WB_NS_DATA      => 'Данные',            // legacy
-	WB_NS_DATA_TALK => 'Обсуждение_данных', // legacy
-
 	WB_NS_ITEM      => 'Предмет',
 	WB_NS_ITEM_TALK => 'Обсуждение_предмета',
 
@@ -146,9 +124,6 @@ $namespaceNames['ru'] = array(
 );
 
 $namespaceNames['vi'] = array(
-	WB_NS_DATA      => 'Dữ_liệu',           // legacy
-	WB_NS_DATA_TALK => 'Thảo_luận_Dữ_liệu', // legacy
-
 	WB_NS_ITEM      => 'Khoản_mục',
 	WB_NS_ITEM_TALK => 'Thảo_luận_Khoản_mục',
 
