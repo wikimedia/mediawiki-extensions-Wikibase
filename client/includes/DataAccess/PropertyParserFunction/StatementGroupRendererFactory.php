@@ -3,7 +3,6 @@
 namespace Wikibase\Client\DataAccess\PropertyParserFunction;
 
 use Language;
-use MWException;
 use Parser;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
@@ -102,7 +101,6 @@ class StatementGroupRendererFactory {
 	 * @param UsageAccumulator $usageAccumulator
 	 *
 	 * @return LanguageAwareRenderer
-	 * @throws MWException
 	 */
 	private function newLanguageAwareRenderer(
 		$type,
