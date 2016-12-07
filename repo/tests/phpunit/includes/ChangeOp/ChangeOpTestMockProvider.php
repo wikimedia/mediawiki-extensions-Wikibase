@@ -16,6 +16,7 @@ use ValueValidators\Result;
 use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
@@ -461,55 +462,29 @@ class ChangeOpTestMockProvider {
 	}
 
 	/**
-	 * @see SiteLinkLookup::getConflictsForItem
-	 *
-	 * The items in the return array are arrays with the following elements:
-	 * - integer itemId
-	 * - string siteId
-	 * - string sitePage
-	 *
-	 * @param Item $item
-	 *
-	 * @return array
-	 */
-	public function getSiteLinkConflictsForItem( Item $item ) {
-		$conflicts = array();
-
-		foreach ( $item->getSiteLinkList()->toArray() as $link ) {
-			$page = $link->getPageName();
-			$site = $link->getSiteId();
-
-			if ( $page === 'DUPE' ) {
-				//NOTE: some tests may rely on these exact values!
-				$conflicts[] = array(
-					'itemId' => 666,
-					'siteId' => $site,
-					'sitePage' => $page
-				);
-			}
-		}
-
-		return $conflicts;
-	}
-
-	/**
-	 * @param array|null $returnValue
-	 *
 	 * @return SiteLinkConflictLookup
 	 */
-	public function getMockSiteLinkConflictLookup( $returnValue = null ) {
-		if ( is_array( $returnValue ) ) {
-			$getConflictsForItem = function() use ( $returnValue ) {
-				return $returnValue;
-			};
-		} else {
-			$getConflictsForItem = array( $this, 'getSiteLinkConflictsForItem' );
-		}
-
+	public function getMockSiteLinkConflictLookup() {
 		$mock = $this->getMock( SiteLinkConflictLookup::class );
+
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'getConflictsForItem' )
-			->will( PHPUnit_Framework_TestCase::returnCallback( $getConflictsForItem ) );
+			->will( PHPUnit_Framework_TestCase::returnCallback( function ( Item $item ) {
+				$conflicts = [];
+
+				foreach ( $item->getSiteLinkList()->toArray() as $link ) {
+					if ( $link->getPageName() === 'DUPE' ) {
+						$conflicts[] = [
+							'siteId' => $link->getSiteId(),
+							'itemId' => new ItemId( 'Q666' ),
+							'sitePage' => $link->getPageName(),
+						];
+					}
+				}
+
+				return $conflicts;
+			} ) );
+
 		return $mock;
 	}
 
