@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "8ed34346_970b94d9",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-12-07T16:18:46Z",
+      "side": 1,
+      "message": "instead of making this a private property, load everything you need inside the constructor",
+      "range": {
+        "startLine": 32,
+        "startChar": 2,
+        "endLine": 32,
+        "endChar": 51
+      },
+      "revId": "ef2ba011fcd9d6a56676858390ed530678759fa8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_9754b4ca",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-12-07T16:18:46Z",
+      "side": 1,
+      "message": "this duplicates $this-\u003erepo but see my previous comment first",
+      "range": {
+        "startLine": 44,
+        "startChar": 16,
+        "endLine": 44,
+        "endChar": 50
+      },
+      "revId": "ef2ba011fcd9d6a56676858390ed530678759fa8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aebe47e0_ad33f5bf",
         "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
         "patchSetId": 3
@@ -41,6 +87,29 @@
         "startChar": 11,
         "endLine": 73,
         "endChar": 44
+      },
+      "revId": "ef2ba011fcd9d6a56676858390ed530678759fa8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_376cc098",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-12-07T16:18:46Z",
+      "side": 1,
+      "message": "maybe it\u0027s better to make this a private property",
+      "range": {
+        "startLine": 78,
+        "startChar": 2,
+        "endLine": 78,
+        "endChar": 20
       },
       "revId": "ef2ba011fcd9d6a56676858390ed530678759fa8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
