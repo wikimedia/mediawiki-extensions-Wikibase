@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\WikibaseRepo;
@@ -156,19 +157,17 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	private function getItemId( $itemString ) {
 		try {
 			$itemId = $this->idParser->parse( $itemString );
-			if ( $itemId instanceof ItemId ) {
-				if ( !$this->entityLookup->hasEntity( $itemId ) ) {
-					$this->errorMessageKey = "item-not-found";
-					return null;
-				}
+
+			if ( $itemId instanceof ItemId && $this->entityLookup->hasEntity( $itemId ) ) {
 				return $itemId;
 			}
 		} catch ( EntityIdParsingException $e ) {
-			$this->errorMessageKey = 'item-id-invalid';
-		} catch ( InvalidArgumentException $e ) {
-			$this->errorMessageKey = 'item-id-invalid';
+			// Expected exception, use the error message below
+		} catch ( EntityLookupException $e ) {
+			// Expected exception, use the error message below
 		}
 
+		$this->errorMessageKey = 'item-id-invalid';
 		return null;
 	}
 

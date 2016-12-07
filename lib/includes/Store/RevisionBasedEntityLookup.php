@@ -46,7 +46,7 @@ class RevisionBasedEntityLookup implements EntityLookup {
 			throw $ex;
 		} catch ( \Exception $ex ) {
 			// TODO: catch more specific exception once EntityRevisionLookup contract gets clarified
-			throw new EntityLookupException( $entityId, null, $ex );
+			throw new EntityLookupException( $entityId, $ex->getMessage(), $ex );
 		}
 
 		return $revision === null ? null : $revision->getEntity();
@@ -67,7 +67,7 @@ class RevisionBasedEntityLookup implements EntityLookup {
 			throw $ex;
 		} catch ( \Exception $ex ) {
 			// TODO: catch more specific exception once EntityRevisionLookup contract gets clarified
-			throw new EntityLookupException( $entityId, null, $ex );
+			throw new EntityLookupException( $entityId, $ex->getMessage(), $ex );
 		}
 	}
 
