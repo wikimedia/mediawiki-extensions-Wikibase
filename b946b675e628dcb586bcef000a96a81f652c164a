@@ -121,6 +121,24 @@
       "revId": "b946b675e628dcb586bcef000a96a81f652c164a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_11a794a4",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/StatementGroupRendererFactory.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-12-07T12:42:24Z",
+      "side": 0,
+      "message": "It is not related to this patch, I can make a patch later but It should not be here.",
+      "parentUuid": "8ed34346_8e27015f",
+      "revId": "b946b675e628dcb586bcef000a96a81f652c164a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
