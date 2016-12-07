@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "8ed34346_489d615a",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/StatementGroupRendererFactory.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-12-07T00:14:53Z",
+      "side": 0,
+      "message": "Do not forget to bring this back too.",
+      "revId": "b946b675e628dcb586bcef000a96a81f652c164a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ed34346_3a7152de",
         "filename": "client/includes/DataAccess/PropertyParserFunction/StatementGroupRendererFactory.php",
         "patchSetId": 11
@@ -65,6 +82,24 @@
       "side": 0,
       "message": "IntelliJ said that this part of the phpdoc comment didn\u0027t match the actual exception throwing of the function and recommended that I remove it. I didn\u0027t really pay close attention to this, because I was just cleaning up other comments after changing up parameters and accepted what IntelliJ recommended.\n\nIf IntelliJ was wrong or if this doesn\u0027t belong in this patch I can remove it.",
       "parentUuid": "8ed34346_3a7152de",
+      "revId": "b946b675e628dcb586bcef000a96a81f652c164a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_68a01d8e",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/StatementGroupRendererFactory.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-12-07T00:14:53Z",
+      "side": 0,
+      "message": "It definitely doesn\u0027t belong in this patch. I\u0027m not sure if this method actually can throw this but it is not unlikely.",
+      "parentUuid": "8ed34346_88101906",
       "revId": "b946b675e628dcb586bcef000a96a81f652c164a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
