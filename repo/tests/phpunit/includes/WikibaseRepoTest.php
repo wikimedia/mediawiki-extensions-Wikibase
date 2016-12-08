@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Tests\Repo;
+namespace Wikibase\Repo\Tests;
 
 use DataTypes\DataTypeFactory;
 use DataValues\DataValue;

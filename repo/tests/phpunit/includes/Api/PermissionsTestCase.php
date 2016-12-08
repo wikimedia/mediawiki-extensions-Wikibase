@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
-use Wikibase\Test\PermissionsHelper;
+use Wikibase\Repo\Tests\PermissionsHelper;
 use Wikibase\Test\Repo\Api\WikibaseApiTestCase;
 
 /**
