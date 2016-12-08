@@ -8,7 +8,7 @@
  */
 
 .wikibase-title-id {
-	color: grey;
+	color: gray;
 	font-size: 0.6em;
 	margin-left: 0.4em;
 }
@@ -39,7 +39,7 @@
 }
 
 .wikibase-entitytermsview-heading-aliases ul {
-	color: grey;
+	color: gray;
 	margin: 0;
 	word-wrap: break-word;
 }
