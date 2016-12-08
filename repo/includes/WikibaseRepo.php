@@ -1692,6 +1692,9 @@ class WikibaseRepo {
 						// Special ISO 639-2 codes
 						'und', 'mis', 'mul', 'zxx',
 
+						// T150633
+						'abe',
+
 						// T125066
 						'ett', 'fkv', 'koy', 'lkt', 'lld', 'smj',
 
