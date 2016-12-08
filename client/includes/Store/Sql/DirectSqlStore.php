@@ -4,8 +4,10 @@ namespace Wikibase;
 
 use HashBagOStuff;
 use ObjectCache;
+use Wikibase\Client\DispatchingServiceFactory;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
+use Wikibase\Lib\Store\DispatchingEntityRevisionLookup;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\Sql\SqlSubscriptionManager;
@@ -31,7 +33,6 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
-use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Store\EntityIdLookup;
 
 /**
@@ -105,6 +106,11 @@ class DirectSqlStore implements ClientStore {
 	 * @var EntityLookup|null
 	 */
 	private $entityRevisionLookup = null;
+
+	/**
+	 * @var DispatchingServiceFactory
+	 */
+	private $dispatchingServiceFactory = null;
 
 	/**
 	 * @var PropertyLabelResolver|null
@@ -194,6 +200,11 @@ class DirectSqlStore implements ClientStore {
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$this->siteId = $settings->getSetting( 'siteGlobalID' );
 
+		$this->dispatchingServiceFactory = new DispatchingServiceFactory(
+			$this->entityIdParser,
+			$this->entityNamespaceLookup,
+			$settings
+		);
 	}
 
 	/**
@@ -327,16 +338,13 @@ class DirectSqlStore implements ClientStore {
 		// NOTE: Keep cache key in sync with SqlStore::newEntityRevisionLookup in WikibaseRepo
 		$cacheKeyPrefix = $this->cacheKeyPrefix . ':WikiPageEntityRevisionLookup';
 
-		$metaDataFetcher = $this->getEntityPrefetcher();
-		$rawLookup = new WikiPageEntityRevisionLookup(
-			$this->contentCodec,
-			$metaDataFetcher,
-			$this->repoWiki
+		$dispatchingLookup = new DispatchingEntityRevisionLookup(
+			$this->dispatchingServiceFactory->getServiceMap( 'EntityRevisionLookup' )
 		);
 
 		// Lower caching layer using persistent cache (e.g. memcached).
 		$persistentCachingLookup = new CachingEntityRevisionLookup(
-			$rawLookup,
+			$dispatchingLookup,
 			wfGetCache( $this->cacheType ),
 			$this->cacheDuration,
 			$cacheKeyPrefix
