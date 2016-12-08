@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6ed52f32_90b05ada",
+        "filename": "lib/includes/Store/DispatchingPropertyInfoLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-12-08T13:01:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ed34346_97a39f3f",
+      "range": {
+        "startLine": 40,
+        "startChar": 73,
+        "endLine": 40,
+        "endChar": 77
+      },
+      "revId": "4e50348e0ca8ba4ebeadea80d899a94e599c4013",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ed34346_d7c3573c",
         "filename": "lib/tests/phpunit/Store/DispatchingPropertyInfoLookupTest.php",
         "patchSetId": 3
