@@ -177,6 +177,7 @@ class DirectSqlStore implements ClientStore {
 		EntityIdParser $entityIdParser,
 		EntityIdComposer $entityIdComposer,
 		EntityNamespaceLookup $entityNamespaceLookup,
+		SettingsArray $settings,
 		$repoWiki = false,
 		$languageCode
 	) {
@@ -188,12 +189,11 @@ class DirectSqlStore implements ClientStore {
 		$this->repoWiki = $repoWiki;
 		$this->languageCode = $languageCode;
 
-		// @TODO: Inject
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 		$this->cacheKeyPrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$this->siteId = $settings->getSetting( 'siteGlobalID' );
+
 	}
 
 	/**

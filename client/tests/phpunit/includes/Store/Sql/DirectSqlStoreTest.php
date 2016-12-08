@@ -53,6 +53,7 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			$idParser,
 			$idComposer,
 			$entityNamespaceLookup,
+			WikibaseClient::getDefaultInstance()->getSettings(),
 			wfWikiID(),
 			'en'
 		);
