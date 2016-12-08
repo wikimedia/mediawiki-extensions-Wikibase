@@ -95,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "6ed52f32_cdc76914",
+        "filename": "lib/tests/phpunit/Store/DispatchingPropertyInfoLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-08T09:27:07Z",
+      "side": 1,
+      "message": "To make it clear here as well. We\u0027ve discussed the issue in another round and here\u0027s what we ended up stating:\n- current approach we took regarding dispatching services could lead to cases that a dispatching services delegates the action to the service configured for \"wrong\" repository (which would generally result in false negative result returned by the service). Requiring specifying repositories for which services are configured explicitly in the dispatching service is putting the logic on the purpose of the service quite far from the actual service.\n- so far most of services configured for the single repository have been, in some way, aware of what repository they\u0027re configure to use with. We don\u0027t want to make it guaranteed for _all_ services though.\n- should we do this, we could add a service like \"getRepository\" to each single-repo service. It should probably not be a part of a service interface (ie. PropertyInfoLookup) but rather be a separate interface. That would allow us to have a simple list (not a repo \u003d\u003e service map) of service in the dispatching service.\n- apart from the above mentioned fact we don\u0027t want to make service always know what service it is configured, having such a DispatchableService interface would also require to pass the repository information  to decorators (ie. caching lookup etc).\n- side note: information on the repository the service is configure against (a.k.a. having a repo name in the service) is mostly used to perform sanity check in the service so far. The general idea should be that repo-specific services get other services properly configured to add/strip relevant prefixes (like EntityIdComposer) injected in their constructor. That logic should be then part of the higher-level factory class, and rather not engraved in the service (like this lookup) itself.\n- should we want to have multiple layers of dispatching services, the getRepository method should actually be getRepositories returning a list (often single-element). That would be doable but would also make implementation more complex.\n- recognizing architecture issue raised here we feel that the dispatching service architecture proposed in T148141 will prevent us from having a dispatching logic distributed all over the code base. DispatchingServiceFactory would be the only class having the needed knowledge and responsible for configuring and creating instances of Dispatching services.\n\nTL;DR: the outcome of the discussion is that Aleksey\u0027s point is 100% valid and justified. Considering all related issues we came to conclusion that the architecture discussed in T148141 should prevent us from possible problems issues raised could lead to. That means we for now decided to keep the dispatching service constructor parameters and the way service delegates the action to the repo-specific service we have been using so far.",
+      "parentUuid": "8ed34346_fc650fab",
+      "range": {
+        "startLine": 42,
+        "startChar": 3,
+        "endLine": 42,
+        "endChar": 8
+      },
+      "revId": "4e50348e0ca8ba4ebeadea80d899a94e599c4013",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ed34346_b7857ba1",
         "filename": "lib/tests/phpunit/Store/DispatchingPropertyInfoLookupTest.php",
         "patchSetId": 3
@@ -135,6 +159,47 @@
         "endLine": 84,
         "endChar": 56
       },
+      "revId": "4e50348e0ca8ba4ebeadea80d899a94e599c4013",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ed52f32_4df13992",
+        "filename": "lib/tests/phpunit/Store/DispatchingPropertyInfoLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-08T09:27:07Z",
+      "side": 1,
+      "message": "Jakob can correct me as he knows more details but the problem I see with MockPropertyInfoStore is that it does its loookups based only on the numeric part of the property id. That means it does not distinguish between P123 and foo:P123, at least yet.\nActually it definitely makes sense to adjust MockPropertyInfoStore so it is aware of repository prefixes (and at the same time drop one more not really needed use of EntityId::getNumericId). This could be either done before this patch (ie. these test would then use the updated mock class), or in a follow up (then it would be good to change those tests in a follow up too). Not sure which of those sounds better.",
+      "parentUuid": "8ed34346_97783fef",
+      "range": {
+        "startLine": 84,
+        "startChar": 2,
+        "endLine": 84,
+        "endChar": 56
+      },
+      "revId": "4e50348e0ca8ba4ebeadea80d899a94e599c4013",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ed52f32_8dfe0165",
+        "filename": "lib/tests/phpunit/Store/DispatchingPropertyInfoLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-08T09:27:07Z",
+      "side": 1,
+      "message": "minor and super nitpicky: could also use PropertyId here so nothing item-related is actually imported in the test. But this not a blocker or anything, just the appearance of ItemId struck me",
       "revId": "4e50348e0ca8ba4ebeadea80d899a94e599c4013",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
