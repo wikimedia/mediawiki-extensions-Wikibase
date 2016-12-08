@@ -120,6 +120,11 @@ final class WikibaseClient {
 	private $siteStore;
 
 	/**
+	 * @var DispatchingServiceFactory
+	 */
+	private $dispatchingServiceFactory;
+
+	/**
 	 * @var PropertyDataTypeLookup|null
 	 */
 	private $propertyDataTypeLookup = null;
@@ -373,6 +378,20 @@ final class WikibaseClient {
 	}
 
 	/**
+	 * @return DispatchingServiceFactory
+	 */
+	private function getDispatchingServiceFactory() {
+		if ( $this->dispatchingServiceFactory === null ) {
+			$factory = new DispatchingServiceFactory( $this );
+			$factory->loadWiringFiles( $this->settings->getSetting( 'dispatchingServiceWiringFiles' ) );
+
+			$this->dispatchingServiceFactory = $factory;
+		}
+
+		return $this->dispatchingServiceFactory;
+	}
+
+	/**
 	 * @return EntityLookup
 	 */
 	private function getEntityLookup() {
@@ -514,6 +533,7 @@ final class WikibaseClient {
 				$this->getEntityIdParser(),
 				$this->getEntityIdComposer(),
 				$this->getEntityNamespaceLookup(),
+				$this->getDispatchingServiceFactory(),
 				$repoDatabase,
 				$this->contentLanguage->getCode()
 			);

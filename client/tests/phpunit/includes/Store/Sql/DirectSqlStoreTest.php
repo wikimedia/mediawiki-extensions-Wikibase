@@ -2,11 +2,13 @@
 
 namespace Wikibase\Client\Tests\Store\Sql;
 
+use Wikibase\Client\DispatchingServiceFactory;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -16,6 +18,7 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\PropertyInfoStore;
 use Wikibase\Store\EntityIdLookup;
@@ -43,9 +46,16 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 		$idParser = new BasicEntityIdParser();
 		$idComposer = new EntityIdComposer( [] );
 
-		$contentCodec = WikibaseClient::getDefaultInstance()->getEntityContentDataCodec();
+		$client = WikibaseClient::getDefaultInstance();
+
+		$contentCodec = $client->getEntityContentDataCodec();
 
 		$entityNamespaceLookup = new EntityNamespaceLookup( [] );
+
+		$dispatchingServiceFactory = new DispatchingServiceFactory( $client );
+		$dispatchingServiceFactory->defineService( 'EntityRevisionLookup', function() {
+			return $this->getMock( EntityRevisionLookup::class );
+		} );
 
 		$store = new DirectSqlStore(
 			$entityChangeFactory,
@@ -53,6 +63,7 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			$idParser,
 			$idComposer,
 			$entityNamespaceLookup,
+			$dispatchingServiceFactory,
 			wfWikiID(),
 			'en'
 		);
