@@ -377,6 +377,24 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( DataAccessSnakFormatterFactory::class, $instance );
 	}
 
+	public function testGetIdPrefixMapping() {
+		$settings = WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy();
+		$settings['foreignRepositories'] = [ 'foo' => [ 'repoDatabase' => 'foowiki', 'prefixMapping' => [ 'd' => 'wd' ] ] ];
+
+		$client = new WikibaseClient(
+			new SettingsArray( $settings ),
+			Language::factory( 'en' ),
+			new DataTypeDefinitions( [] ),
+			new EntityTypeDefinitions( [] ),
+			new HashSiteStore()
+		);
+
+		$this->assertEquals(
+			[ 'foo' => [ 'd' => 'wd' ] ],
+			$client->getIdPrefixMapping()
+		);
+	}
+
 	/**
 	 * @return WikibaseClient
 	 */
