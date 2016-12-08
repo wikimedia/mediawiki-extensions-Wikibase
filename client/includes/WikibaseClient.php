@@ -41,6 +41,7 @@ use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
@@ -71,6 +72,7 @@ use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
+use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\MediaWikiContentLanguages;
@@ -82,6 +84,7 @@ use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
 use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
+use Wikibase\Lib\Store\RepositorySpecificEntityRevisionLookupFactory;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -222,6 +225,11 @@ final class WikibaseClient {
 	 * @var EntityNamespaceLookup|null
 	 */
 	private $entityNamespaceLookup = null;
+
+	/**
+	 * @var RepositorySpecificEntityRevisionLookupFactory
+	 */
+	private $entityRevisionLookupFactory = null;
 
 	/**
 	 * @var PropertyOrderProvider|null
@@ -920,7 +928,7 @@ final class WikibaseClient {
 	 */
 	private function getExternalFormatEntityDeserializer() {
 		if ( $this->entityDeserializer === null ) {
-			$deserializerFactoryCallbacks = $this->entityTypeDefinitions->getDeserializerFactoryCallbacks();
+			$deserializerFactoryCallbacks = $this->getEntityDeserializerFactoryCallbacks();
 			$deserializerFactory = $this->getExternalFormatDeserializerFactory();
 			$deserializers = array();
 
@@ -950,6 +958,13 @@ final class WikibaseClient {
 	 */
 	public function getInternalFormatStatementDeserializer() {
 		return $this->getInternalFormatDeserializerFactory()->newStatementDeserializer();
+	}
+
+	/**
+	 * @return callable[]
+	 */
+	public function getEntityDeserializerFactoryCallbacks() {
+		return $this->entityTypeDefinitions->getDeserializerFactoryCallbacks();
 	}
 
 	/**
