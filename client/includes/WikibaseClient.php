@@ -365,6 +365,20 @@ final class WikibaseClient {
 	}
 
 	/**
+	 * Returns a mapping of id prefixes defined for configured foreign repositories.
+	 * @return array Associative array mapping repository names to repository-specific prefix mapping
+	 */
+	public function getIdPrefixMapping() {
+		$mapping = [];
+		foreach ( $this->settings->getSetting( 'foreignRepositories' ) as $repositoryName => $settings ) {
+			if ( array_key_exists( 'prefixMapping', $settings ) ) {
+				$mapping[$repositoryName] = $settings['prefixMapping'];
+			}
+		}
+		return $mapping;
+	}
+
+	/**
 	 * @since 0.5
 	 *
 	 * @return EntityIdComposer
