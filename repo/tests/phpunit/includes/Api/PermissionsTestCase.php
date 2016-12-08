@@ -3,8 +3,7 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use UsageException;
-use Wikibase\Test\PermissionsHelper;
-use Wikibase\Test\Repo\Api\WikibaseApiTestCase;
+use Wikibase\Repo\Tests\PermissionsHelper;
 
 /**
  * Base class for permissions tests

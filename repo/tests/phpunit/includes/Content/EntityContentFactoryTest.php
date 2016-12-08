@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Test\PermissionsHelper;
+use Wikibase\Repo\Tests\PermissionsHelper;
 
 /**
  * @covers Wikibase\Repo\Content\EntityContentFactory
