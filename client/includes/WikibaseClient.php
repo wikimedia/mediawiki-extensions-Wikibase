@@ -41,6 +41,7 @@ use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
@@ -71,6 +72,7 @@ use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
+use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\MediaWikiContentLanguages;
@@ -82,6 +84,7 @@ use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
 use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
+use Wikibase\Lib\Store\RepositorySpecificEntityRevisionLookupFactory;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -222,6 +225,11 @@ final class WikibaseClient {
 	 * @var EntityNamespaceLookup|null
 	 */
 	private $entityNamespaceLookup = null;
+
+	/**
+	 * @var RepositorySpecificEntityRevisionLookupFactory
+	 */
+	private $entityRevisionLookupFactory = null;
 
 	/**
 	 * @var PropertyOrderProvider|null
@@ -1267,6 +1275,40 @@ final class WikibaseClient {
 		}
 
 		return $this->entityNamespaceLookup;
+	}
+
+	public function getEntityRevisionLookupFactory() {
+		if ( $this->entityRevisionLookupFactory === null ) {
+			$entityIdParserFactory = new PrefixMappingEntityIdParserFactory(
+				$this->getEntityIdParser(),
+				[] // TODO: prefix mappings from settings
+			);
+			$this->entityRevisionLookupFactory = new RepositorySpecificEntityRevisionLookupFactory(
+				$entityIdParserFactory,
+				new ForbiddenSerializer( 'Entity serialization is not supported on the client!' ),
+				new RepositorySpecificDataValueDeserializerFactory( $entityIdParserFactory ),
+				$this->entityTypeDefinitions->getDeserializerFactoryCallbacks(),
+				$this->getEntityNamespaceLookup(),
+				$this->settings->getSetting( 'maxSerializedEntitySize' ) * 1024,
+				$this->getDatabaseMap()
+			);
+		}
+
+		return $this->entityRevisionLookupFactory;
+	}
+
+	/**
+	 * @return string[] An array mapping repository names to symbolic database names
+	 */
+	private function getDatabaseMap() {
+		$names = [ '' => $this->settings->getSetting( 'repoDatabase' ) ];
+
+		$foreignRepositorySettings = $this->settings->getSetting( 'foreignRepositories' );
+		foreach ( $foreignRepositorySettings as $repositoryName => $repositorySettings ) {
+			$names[$repositoryName] = $repositorySettings['repoDatabase'];
+		}
+
+		return $names;
 	}
 
 	/**
