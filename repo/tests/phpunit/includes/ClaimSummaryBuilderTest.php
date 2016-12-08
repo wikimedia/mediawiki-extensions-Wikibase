@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests;
 
 use DataValues\StringValue;
 use Diff\Comparer\ComparableComparer;

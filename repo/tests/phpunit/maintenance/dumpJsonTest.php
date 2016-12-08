@@ -33,7 +33,7 @@ use Wikibase\DumpJson;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\Store\EntityIdPager;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
-use Wikibase\Repo\Tests\MockEntityIdPager;
+use Wikibase\Repo\Tests\Store\MockEntityIdPager;
 
 /**
  * @covers Wikibase\DumpJson

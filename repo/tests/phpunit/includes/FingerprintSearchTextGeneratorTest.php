@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests;
 
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Repo\FingerprintSearchTextGenerator;
