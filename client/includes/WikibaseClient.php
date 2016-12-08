@@ -521,6 +521,10 @@ final class WikibaseClient {
 				$this->getEntityIdParser(),
 				$this->getEntityIdComposer(),
 				$this->getEntityNamespaceLookup(),
+				new DispatchingServiceFactory(
+					$this,
+					$this->settings->getSetting( 'dispatchingServiceWiringFiles' )
+				),
 				$this->getSettings(),
 				$repoDatabase,
 				$this->contentLanguage->getCode()

@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use HashBagOStuff;
 use ObjectCache;
+use Wikibase\Client\DispatchingServiceFactory;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
@@ -13,7 +14,6 @@ use Wikibase\Client\Usage\Sql\SqlUsageTracker;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
@@ -31,7 +31,6 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
-use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Store\EntityIdLookup;
 
 /**
@@ -107,6 +106,11 @@ class DirectSqlStore implements ClientStore {
 	private $entityRevisionLookup = null;
 
 	/**
+	 * @var DispatchingServiceFactory
+	 */
+	private $dispatchingServiceFactory = null;
+
+	/**
 	 * @var PropertyLabelResolver|null
 	 */
 	private $propertyLabelResolver = null;
@@ -167,6 +171,7 @@ class DirectSqlStore implements ClientStore {
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
+	 * @param DispatchingServiceFactory $dispatchingServiceFactory
 	 * @param string|bool $repoWiki The symbolic database name of the repo wiki or false for the
 	 * local wiki.
 	 * @param string $languageCode
@@ -177,6 +182,7 @@ class DirectSqlStore implements ClientStore {
 		EntityIdParser $entityIdParser,
 		EntityIdComposer $entityIdComposer,
 		EntityNamespaceLookup $entityNamespaceLookup,
+		DispatchingServiceFactory $dispatchingServiceFactory,
 		SettingsArray $settings,
 		$repoWiki = false,
 		$languageCode
@@ -186,6 +192,7 @@ class DirectSqlStore implements ClientStore {
 		$this->entityIdParser = $entityIdParser;
 		$this->entityIdComposer = $entityIdComposer;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
+		$this->dispatchingServiceFactory = $dispatchingServiceFactory;
 		$this->repoWiki = $repoWiki;
 		$this->languageCode = $languageCode;
 
@@ -193,7 +200,6 @@ class DirectSqlStore implements ClientStore {
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$this->siteId = $settings->getSetting( 'siteGlobalID' );
-
 	}
 
 	/**
@@ -327,16 +333,11 @@ class DirectSqlStore implements ClientStore {
 		// NOTE: Keep cache key in sync with SqlStore::newEntityRevisionLookup in WikibaseRepo
 		$cacheKeyPrefix = $this->cacheKeyPrefix . ':WikiPageEntityRevisionLookup';
 
-		$metaDataFetcher = $this->getEntityPrefetcher();
-		$rawLookup = new WikiPageEntityRevisionLookup(
-			$this->contentCodec,
-			$metaDataFetcher,
-			$this->repoWiki
-		);
+		$dispatchingLookup = $this->dispatchingServiceFactory->getEntityRevisionLookup();
 
 		// Lower caching layer using persistent cache (e.g. memcached).
 		$persistentCachingLookup = new CachingEntityRevisionLookup(
-			$rawLookup,
+			$dispatchingLookup,
 			wfGetCache( $this->cacheType ),
 			$this->cacheDuration,
 			$cacheKeyPrefix
