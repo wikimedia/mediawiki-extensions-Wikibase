@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests;
 
 use DataValues\Serializers\DataValueSerializer;
 use Deserializers\Exceptions\DeserializationException;
