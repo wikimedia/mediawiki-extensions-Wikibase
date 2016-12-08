@@ -2,11 +2,13 @@
 
 namespace Wikibase\Client\Tests\Store\Sql;
 
+use Wikibase\Client\DispatchingServiceFactory;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -43,7 +45,9 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 		$idParser = new BasicEntityIdParser();
 		$idComposer = new EntityIdComposer( [] );
 
-		$contentCodec = WikibaseClient::getDefaultInstance()->getEntityContentDataCodec();
+		$client = WikibaseClient::getDefaultInstance();
+
+		$contentCodec = $client->getEntityContentDataCodec();
 
 		$entityNamespaceLookup = new EntityNamespaceLookup( [] );
 
@@ -53,6 +57,10 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			$idParser,
 			$idComposer,
 			$entityNamespaceLookup,
+			new DispatchingServiceFactory(
+				$client,
+				[ __DIR__ . '/../../../../../includes/DispatchingServiceWiring.php' ]
+			),
 			wfWikiID(),
 			'en'
 		);
