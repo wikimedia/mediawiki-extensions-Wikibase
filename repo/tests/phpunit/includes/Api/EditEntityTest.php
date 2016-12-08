@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Statement\StatementGuidParsingException;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Test\Repo\Api\WikibaseApiTestCase;
 
 /**
  * @covers Wikibase\Repo\Api\EditEntity
