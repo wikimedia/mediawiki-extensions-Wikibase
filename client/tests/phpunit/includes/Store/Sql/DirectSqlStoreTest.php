@@ -7,6 +7,7 @@ use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -53,12 +54,27 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			$idParser,
 			$idComposer,
 			$entityNamespaceLookup,
+			$this->getDeserializerFactoryCallbacks(),
 			WikibaseClient::getDefaultInstance()->getSettings(),
 			wfWikiID(),
 			'en'
 		);
 
 		return $store;
+	}
+
+	/**
+	 * @return callable[]
+	 */
+	private function getDeserializerFactoryCallbacks() {
+		return [
+			'item' => function( DeserializerFactory $deserializerFactory ) {
+				return $deserializerFactory->newItemDeserializer();
+			},
+			'property' => function( DeserializerFactory $deserializerFactory ) {
+				return $deserializerFactory->newPropertyDeserializer();
+			}
+		];
 	}
 
 	/**
