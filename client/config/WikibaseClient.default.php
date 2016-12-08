@@ -216,6 +216,7 @@ return call_user_func( function() {
 		],
 
 		'repositoryServiceWiringFiles' => [ __DIR__ . '/../includes/Store/RepositoryServiceWiring.php' ],
+		'dispatchingServiceWiringFiles' => [ __DIR__ . '/../includes/DispatchingServiceWiring.php' ],
 		'foreignRepositories' => [],
 	];
 

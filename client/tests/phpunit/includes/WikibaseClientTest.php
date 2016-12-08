@@ -156,7 +156,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 			$settings,
 			Language::factory( 'en' ),
 			new DataTypeDefinitions( array() ),
-			new EntityTypeDefinitions( array() ),
+			$this->getEntityTypeDefinitions(),
 			$this->getSiteStore()
 		);
 
@@ -403,9 +403,24 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 			new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() ),
 			Language::factory( 'en' ),
 			new DataTypeDefinitions( array() ),
-			new EntityTypeDefinitions( array() ),
+			$this->getEntityTypeDefinitions(),
 			new HashSiteStore()
 		);
+	}
+
+	/**
+	 * Provides a dummy entity type definitions to satisfy asserts of RepositorySpecificEntityRevisionLookupFactory
+	 *
+	 * @return EntityTypeDefinitions
+	 */
+	private function getEntityTypeDefinitions() {
+		return new EntityTypeDefinitions( [
+			'item' => [
+				'deserializer-factory-callback' => function( DeserializerFactory $deserializerFactory ) {
+					return $deserializerFactory->newItemDeserializer();
+				}
+			],
+		] );
 	}
 
 }
