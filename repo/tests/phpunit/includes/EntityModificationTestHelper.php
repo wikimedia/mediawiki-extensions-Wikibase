@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests;
 
 use Deserializers\Deserializer;
 use PHPUnit_Framework_Assert as Assert;
@@ -14,8 +14,6 @@ use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * EntityModificationTestHelper
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

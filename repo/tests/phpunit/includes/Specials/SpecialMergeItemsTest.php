@@ -26,7 +26,7 @@ use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\Specials\SpecialMergeItems;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Test\EntityModificationTestHelper;
+use Wikibase\Repo\Tests\EntityModificationTestHelper;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Repo;
+namespace Wikibase\Repo\Tests;
 
 use HashBagOStuff;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;

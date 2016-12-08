@@ -18,7 +18,6 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Test\Repo\Api\WikibaseApiTestCase;
 
 /**
  * @covers Wikibase\Repo\Api\SetReference
