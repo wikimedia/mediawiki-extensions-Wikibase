@@ -13,7 +13,6 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Test\Repo\Api\WikibaseApiTestCase;
 
 /**
  * @covers Wikibase\Repo\Api\RemoveClaims

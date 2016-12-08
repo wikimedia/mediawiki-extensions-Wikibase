@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
 use UsageException;
-use Wikibase\Test\Repo\Api\WikibaseApiTestCase;
 
 /**
  * Test case for language attributes API modules.

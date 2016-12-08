@@ -6,7 +6,6 @@ use ApiTestCase;
 use TestUser;
 use Title;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Test\Repo\Api\WikibaseApiTestCase;
 
 /**
  * Tests for the ApiWikibase class.
