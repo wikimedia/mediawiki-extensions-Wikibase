@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "6ed52f32_30cc068c",
+        "filename": "lib/tests/phpunit/Store/DispatchingPropertyInfoLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-12-08T12:55:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ed34346_d7c3573c",
+      "range": {
+        "startLine": 25,
+        "startChar": 1,
+        "endLine": 37,
+        "endChar": 2
+      },
+      "revId": "4e50348e0ca8ba4ebeadea80d899a94e599c4013",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ed34346_8e4dc19d",
         "filename": "lib/tests/phpunit/Store/DispatchingPropertyInfoLookupTest.php",
         "patchSetId": 3
@@ -142,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "6ed52f32_b085960d",
+        "filename": "lib/tests/phpunit/Store/DispatchingPropertyInfoLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-12-08T12:55:58Z",
+      "side": 1,
+      "message": "We don\u0027t have this convention.",
+      "parentUuid": "8ed34346_b7857ba1",
+      "range": {
+        "startLine": 83,
+        "startChar": 1,
+        "endLine": 83,
+        "endChar": 50
+      },
+      "revId": "4e50348e0ca8ba4ebeadea80d899a94e599c4013",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ed34346_97783fef",
         "filename": "lib/tests/phpunit/Store/DispatchingPropertyInfoLookupTest.php",
         "patchSetId": 3
@@ -189,6 +237,30 @@
     },
     {
       "key": {
+        "uuid": "6ed52f32_507d5216",
+        "filename": "lib/tests/phpunit/Store/DispatchingPropertyInfoLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-12-08T12:55:58Z",
+      "side": 1,
+      "message": "That\u0027s a good point. I\u0027ll prepare a patch for this that should be merged before this one so we don\u0027t need a follow-up for the follow-up.",
+      "parentUuid": "6ed52f32_4df13992",
+      "range": {
+        "startLine": 84,
+        "startChar": 2,
+        "endLine": 84,
+        "endChar": 56
+      },
+      "revId": "4e50348e0ca8ba4ebeadea80d899a94e599c4013",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ed52f32_8dfe0165",
         "filename": "lib/tests/phpunit/Store/DispatchingPropertyInfoLookupTest.php",
         "patchSetId": 3
@@ -200,6 +272,24 @@
       "writtenOn": "2016-12-08T09:27:07Z",
       "side": 1,
       "message": "minor and super nitpicky: could also use PropertyId here so nothing item-related is actually imported in the test. But this not a blocker or anything, just the appearance of ItemId struck me",
+      "revId": "4e50348e0ca8ba4ebeadea80d899a94e599c4013",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ed52f32_50967250",
+        "filename": "lib/tests/phpunit/Store/DispatchingPropertyInfoLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-12-08T12:55:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ed52f32_8dfe0165",
       "revId": "4e50348e0ca8ba4ebeadea80d899a94e599c4013",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
