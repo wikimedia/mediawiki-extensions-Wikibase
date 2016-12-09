@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ed52f32_224a74c9",
+        "filename": "client/includes/Store/Sql/DirectSqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-09T11:22:36Z",
+      "side": 1,
+      "message": "We\u0027ll end up injecting a LOT of different stuff into the constructor of DispatchingServiceFactory - and I\u0027m not sure that constructor can actually know all the things that may be needed to construct the services. Instantiators may need access to the top level factory (WikibaseClient)",
+      "revId": "9670ddb536056099b49d396166c69f09621ab6b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ed52f32_424d80df",
+        "filename": "client/includes/Store/Sql/DirectSqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-09T11:22:36Z",
+      "side": 1,
+      "message": "Shouldn\u0027t each ServiceContainer inside DispatchingServiceFactory have a different IdParser with a different mapping?",
+      "revId": "9670ddb536056099b49d396166c69f09621ab6b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ed52f32_62407ca9",
+        "filename": "client/includes/Store/Sql/DirectSqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-09T11:22:36Z",
+      "side": 1,
+      "message": "The more I think about it, the more I think this should be inside DispatchingServiceFactory. Maybe hard coded for now, but ideally via a wiring file.\n\nWe can do that in a follow-up patch, but maybe it\u0027s easier to put the construction of the dispatching service instance into DispatchingServiceFactory right away.",
+      "revId": "9670ddb536056099b49d396166c69f09621ab6b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
