@@ -2,7 +2,9 @@
 
 namespace Wikibase\Repo\LinkedData;
 
+use CdnCacheUpdate;
 use HttpError;
+use MediaWiki\Cdn\CdnController;
 use OutputPage;
 use SquidUpdate;
 use WebRequest;
@@ -73,6 +75,11 @@ class EntityDataRequestHandler {
 	private $entityTitleLookup;
 
 	/**
+	 * @var CdnController
+	 */
+	private $cdnController;
+
+	/**
 	 * @var EntityDataFormatProvider
 	 */
 	private $entityDataFormatProvider;
@@ -102,6 +109,7 @@ class EntityDataRequestHandler {
 	 *
 	 * @param EntityDataUriManager $uriManager
 	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param CdnController $cdnController
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityRedirectLookup $entityRedirectLookup
@@ -115,6 +123,7 @@ class EntityDataRequestHandler {
 	public function __construct(
 		EntityDataUriManager $uriManager,
 		EntityTitleLookup $entityTitleLookup,
+		CdnController $cdnController,
 		EntityIdParser $entityIdParser,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityRedirectLookup $entityRedirectLookup,
@@ -127,6 +136,7 @@ class EntityDataRequestHandler {
 	) {
 		$this->uriManager = $uriManager;
 		$this->entityTitleLookup = $entityTitleLookup;
+		$this->cdnController = $cdnController;
 		$this->entityIdParser = $entityIdParser;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityRedirectLookup = $entityRedirectLookup;
@@ -278,11 +288,14 @@ class EntityDataRequestHandler {
 	 * @param EntityId $id       The entity
 	 */
 	public function purgeWebCache( EntityId $id ) {
+		// FIXME: getthis info into Title::getCdnUrls
 		$urls = $this->uriManager->getCacheableUrls( $id );
+		$title = $this->entityTitleLookup->getTitleForId( $id );
 
-		//TODO: use a factory or service, so we can mock & test this
-		$update = new SquidUpdate( $urls );
-		$update->doUpdate();
+		if ( $title ) {
+			$this->cdnController->declareResourceDependencies( $title, $urls );
+			$this->cdnController->purgeDependenntResources( $title );
+		}
 	}
 
 	/**
@@ -409,7 +422,7 @@ class EntityDataRequestHandler {
 	 * @param WebRequest $request
 	 * @param OutputPage $output
 	 * @param string $format The name (mime type of file extension) of the format to use
-	 * @param EntityId $id The entity ID
+	 * @param EntityId $id The ID of the requested entity
 	 * @param int $revision The revision ID (use 0 for the current revision).
 	 *
 	 * @throws HttpError
@@ -419,7 +432,7 @@ class EntityDataRequestHandler {
 		$flavor = $request->getVal( "flavor" );
 
 		/** @var EntityRevision $entityRevision */
-		/** @var RedirectRevision $followedRedirectRevision */
+		/** @var RedirectRevision|null $followedRedirectRevision */
 		list( $entityRevision, $followedRedirectRevision ) = $this->getEntityRevision( $id, $revision );
 
 		// handle If-Modified-Since
@@ -434,12 +447,14 @@ class EntityDataRequestHandler {
 			}
 		}
 
+		$finalId = $entityRevision->getEntity()->getId();
+
 		if ( $flavor === 'dump' || $revision > 0 ) {
 			// In dump mode and when fetching a specific revision, don't include incoming redirects.
 			$incomingRedirects = array();
 		} else {
 			// Get the incoming redirects of the entity (if we followed a redirect, use the target id).
-			$incomingRedirects = $this->getIncomingRedirects( $entityRevision->getEntity()->getId() );
+			$incomingRedirects = $this->getIncomingRedirects( $finalId );
 		}
 
 		list( $data, $contentType ) = $this->serializationService->getSerializedData(
@@ -450,13 +465,30 @@ class EntityDataRequestHandler {
 			$flavor
 		);
 
+		$response = $output->getRequest()->response();
+		$this->publishResourceDependency( $finalId, $response );
+
+		if ( !$id->equals( $finalId ) ) {
+			// the final ID isn't the requested ID (because we followed a redirect)
+			$this->publishResourceDependency( $id, $response );
+		}
+
 		$output->disable();
 		$this->outputData(
 			$request,
-			$output->getRequest()->response(),
+			$response,
 			$data, $contentType,
 			$entityRevision->getTimestamp()
 		);
+	}
+
+	private function publishResourceDependency( EntityId $id, WebResponse $response ) {
+		// apply CDN tags
+		$title = $this->entityTitleLookup->getTitleForId( $id );
+
+		if ( $title ) {
+			$this->cdnController->publishResourceDependency( $title, $response );
+		}
 	}
 
 	/**
