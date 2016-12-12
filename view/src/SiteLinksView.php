@@ -110,7 +110,7 @@ class SiteLinksView {
 	 * @param ItemId|null $itemId The id of the item or might be null, if a new item.
 	 * @param string[] $groups An array of site group IDs
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	public function getHtml( array $siteLinks, ItemId $itemId = null, array $groups ) {
 		$html = '';
@@ -137,7 +137,7 @@ class SiteLinksView {
 	 *
 	 * @param string $heading message key of the heading; also used as css class
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	private function getHtmlForSectionHeading( $heading ) {
 		$html = $this->templateFactory->render(
@@ -157,7 +157,7 @@ class SiteLinksView {
 	 * @param ItemId|null $itemId The id of the item
 	 * @param string $group a site group ID
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	private function getHtmlForSiteLinkGroup( array $siteLinks, ItemId $itemId = null, $group ) {
 		$siteLinksForTable = $this->getSiteLinksForTable(
@@ -265,7 +265,7 @@ class SiteLinksView {
 	 * @param array[] $siteLinksForTable
 	 * @param bool $isSpecialGroup
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	private function getHtmlForSiteLinks( array $siteLinksForTable, $isSpecialGroup ) {
 		$html = '';
@@ -281,7 +281,7 @@ class SiteLinksView {
 	 * @param array $siteLinkForTable
 	 * @param bool $isSpecialGroup
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	private function getHtmlForSiteLink( array $siteLinkForTable, $isSpecialGroup ) {
 		/** @var Site $site */
@@ -324,15 +324,15 @@ class SiteLinksView {
 	 * @param SiteLink $siteLink
 	 * @param Site $site
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
-	private function getHtmlForPage( $siteLink, $site ) {
+	private function getHtmlForPage( SiteLink $siteLink, Site $site ) {
 		$pageName = $siteLink->getPageName();
 
 		return $this->templateFactory->render( 'wikibase-sitelinkview-pagename',
 			htmlspecialchars( $site->getPageUrl( $pageName ) ),
 			htmlspecialchars( $pageName ),
-			$this->getHtmlForBadges( $siteLink ),
+			$this->getHtmlForBadges( $siteLink->getBadges() ),
 			$site->getLanguageCode(),
 			'auto'
 		);
@@ -341,9 +341,9 @@ class SiteLinksView {
 	/**
 	 * @param SiteLink $siteLink
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
-	private function getHtmlForUnknownSiteLink( $siteLink ) {
+	private function getHtmlForUnknownSiteLink( SiteLink $siteLink ) {
 		// FIXME: No need for separate template; Use 'wikibase-sitelinkview' template.
 		return $this->templateFactory->render( 'wikibase-sitelinkview-unknown',
 			htmlspecialchars( $siteLink->getSiteId() ),
@@ -351,10 +351,15 @@ class SiteLinksView {
 		);
 	}
 
-	private function getHtmlForBadges( SiteLink $siteLink ) {
+	/**
+	 * @param ItemId[] $badges
+	 *
+	 * @return string HTML
+	 */
+	private function getHtmlForBadges( array $badges ) {
 		$html = '';
 
-		foreach ( $siteLink->getBadges() as $badge ) {
+		foreach ( $badges as $badge ) {
 			$serialization = $badge->getSerialization();
 			$classes = Sanitizer::escapeClass( $serialization );
 			if ( !empty( $this->badgeItems[$serialization] ) ) {
