@@ -557,6 +557,22 @@ final class WikibaseClient {
 	}
 
 	/**
+	 * Overrides client settings. This is intended for use by test cases.
+	 *
+	 * @param SettingsArray $settings
+	 *
+	 * @throws LogicException If MW_PHPUNIT_TEST is not defined, to avoid this
+	 * method being abused in production code.
+	 */
+	public function overrideSettings( SettingsArray $settings ) {
+		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
+			throw new LogicException( 'Overriding the settings is only supported in test mode' );
+		}
+
+		$this->settings = $settings;
+	}
+
+	/**
 	 * @since 0.4
 	 *
 	 * @return Language
