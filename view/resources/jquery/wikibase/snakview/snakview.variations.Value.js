@@ -176,7 +176,7 @@
 				this._entityStore
 				.get( this._viewState.propertyId() )
 				.done( function( fetchedProperty ) {
-					if ( newValue !== self.__currentNewValue ) {
+					if ( !self.$viewPort || newValue !== self.__currentNewValue ) {
 						// If the API response is not for the most recent newValue, discard it
 						return;
 					}
