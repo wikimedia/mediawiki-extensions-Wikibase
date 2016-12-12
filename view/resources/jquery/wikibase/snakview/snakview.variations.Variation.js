@@ -128,12 +128,22 @@
 		},
 
 		/**
+		 * @protected
+		 *
+		 * @return {boolean}
+		 */
+		isDestroyed: function() {
+			return !this._viewState;
+		},
+
+		/**
 		 * Returns an object that offers information about the related `snakview`'s current state as
 		 * well as allows updating the `snakview` instance.
 		 *
 		 * @see jQuery.wikibase.snakview
 		 *
-		 * @return {jQuery.wikibase.snakview.ViewState}
+		 * @return {jQuery.wikibase.snakview.ViewState|null} Null when called after the object got
+		 *  destroyed.
 		 */
 		viewState: function() {
 			return this._viewState;
