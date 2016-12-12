@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2edfb757_7726fbca",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-12T16:32:10Z",
+      "side": 1,
+      "message": "I\u0027m not a native speaker, but \"might already be\" sounds more familiar to me.",
+      "range": {
+        "startLine": 232,
+        "startChar": 45,
+        "endLine": 232,
+        "endChar": 61
+      },
+      "revId": "893f3ea5846d8b12477d221dc38d16ba541c46e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
