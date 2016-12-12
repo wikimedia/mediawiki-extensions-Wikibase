@@ -214,7 +214,7 @@ class LanguageWithConversion {
 	 * Translate data after fetching them.
 	 *
 	 * @param string $text Data to transform
-	 * @return String: Result
+	 * @return string
 	 */
 	public function translate( $text ) {
 		if ( $this->parentLanguage ) {

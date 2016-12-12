@@ -81,7 +81,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return String
+	 * @return string
 	 */
 	private function getCacheKey( EntityId $entityId ) {
 		$cacheKey = $this->cacheKeyPrefix . ':' . $entityId->getSerialization();

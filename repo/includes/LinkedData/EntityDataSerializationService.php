@@ -265,7 +265,7 @@ class EntityDataSerializationService {
 	/**
 	 * Returns an ApiMain module that acts as a context for the formatting and serialization.
 	 *
-	 * @param String $format The desired output format, as a format name that ApiBase understands.
+	 * @param string $format The desired output format, as a format name that ApiBase understands.
 	 *
 	 * @return ApiMain
 	 */

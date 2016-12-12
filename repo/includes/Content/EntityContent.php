@@ -328,7 +328,7 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * @return String a string representing the content in a way useful for building a full text
+	 * @return string A string representing the content in a way useful for building a full text
 	 *         search index.
 	 */
 	public function getTextForSearchIndex() {
@@ -364,7 +364,7 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * @return String a string representing the content in a way useful for content filtering as
+	 * @return string A string representing the content in a way useful for content filtering as
 	 *         performed by extensions like AbuseFilter.
 	 */
 	public function getTextForFilters() {
@@ -419,7 +419,7 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * @return String the wikitext to include when another page includes this  content, or false if
+	 * @return string The wikitext to include when another page includes this  content, or false if
 	 *         the content is not includable in a wikitext page.
 	 */
 	public function getWikitextForTransclusion() {
@@ -431,7 +431,7 @@ abstract class EntityContent extends AbstractContent {
 	 * messages.
 	 *
 	 * @param int $maxLength maximum length of the summary text
-	 * @return String the summary text
+	 * @return string
 	 */
 	public function getTextForSummary( $maxLength = 250 ) {
 		if ( $this->isRedirect() ) {

@@ -131,7 +131,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 	/**
 	 * Creates an action and supplies it with a fake web request.
 	 *
-	 * @param String|Action $action the action to call, may be an action name or class name.
+	 * @param string|Action $action The action to call, may be an action name or class name.
 	 * @param WikiPage  $page the wiki page to call the action on
 	 * @param array|null $params request parameters
 	 * @param bool       $post posted?
@@ -178,7 +178,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 	 * Calls the desired action using a fake web request.
 	 * This calls the show() method on the target action.
 	 *
-	 * @param String|Action $action the action to call; may be an action name or class name
+	 * @param string|Action $action The action to call; may be an action name or class name
 	 * @param WikiPage  $page the wiki page to call the action on
 	 * @param array|null $params request parameters
 	 * @param bool       $post posted?
@@ -345,7 +345,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 	/**
 	 * Deletes and re-creates the given test item.
 	 *
-	 * @param String $handle
+	 * @param string $handle
 	 */
 	protected function resetTestItem( $handle ) {
 		if ( isset( self::$testItems[ $handle ] ) ) {
@@ -372,7 +372,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 	/**
 	 * Deletes and re-creates the given test item.
 	 *
-	 * @param String $handle
+	 * @param string $handle
 	 * @return Item
 	 */
 	protected function loadTestItem( $handle ) {
@@ -386,7 +386,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 	/**
 	 * Returns the ID of a well known test item for the given $handle.
 	 *
-	 * @param String $handle the test item's handle
+	 * @param string $handle The test item's handle
 	 *
 	 * @return EntityId the item's ID
 	 * @throws Exception if the handle is not known
@@ -408,7 +408,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 	/**
 	 * Returns a wiki page for a well known test item for the given $handle, creating it in the database first if necessary.
 	 *
-	 * @param String $handle the test item's handle
+	 * @param string $handle The test item's handle
 	 *
 	 * @return WikiPage the item's page
 	 * @throws Exception if the handle is not known

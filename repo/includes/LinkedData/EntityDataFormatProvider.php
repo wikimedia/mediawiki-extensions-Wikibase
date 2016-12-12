@@ -226,9 +226,9 @@ class EntityDataFormatProvider {
 	/**
 	 * Normalizes the format specifier; Converts mime types to API format names.
 	 *
-	 * @param String $format the format as supplied in the request
+	 * @param string $format The format as supplied in the request
 	 *
-	 * @return String|null the normalized format name, or null if the format is unknown
+	 * @return string|null The normalized format name, or null if the format is unknown
 	 */
 	private static function getApiFormatName( $format ) {
 		$format = trim( strtolower( $format ) );
@@ -248,9 +248,9 @@ class EntityDataFormatProvider {
 	/**
 	 * Converts API format names to MIME types.
 	 *
-	 * @param String $format the API format name
+	 * @param string $format The API format name
 	 *
-	 * @return String[]|null the MIME types for the given format
+	 * @return string[]|null The MIME types for the given format
 	 */
 	private static function getApiMimeTypes( $format ) {
 		$format = trim( strtolower( $format ) );
@@ -274,7 +274,7 @@ class EntityDataFormatProvider {
 	/**
 	 * Returns an ApiMain module that acts as a context for the formatting and serialization.
 	 *
-	 * @param String $format The desired output format, as a format name that ApiBase understands.
+	 * @param string $format The desired output format, as a format name that ApiBase understands.
 	 *
 	 * @return ApiMain
 	 */

@@ -131,7 +131,7 @@ class EntityContentDiffView extends DifferenceEngine {
 	 * @param string $complete 'complete' to get the header wrapped depending
 	 *        the visibility of the revision and a link to edit the page.
 	 *
-	 * @return String HTML fragment
+	 * @return string HTML fragment
 	 */
 	public function getRevisionHeader( Revision $rev, $complete = '' ) {
 		//NOTE: This must be kept in sync with the parent implementation.
