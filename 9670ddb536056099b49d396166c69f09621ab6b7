@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2edfb757_202dd08b",
+        "filename": "client/includes/Store/Sql/DirectSqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-12T14:56:33Z",
+      "side": 1,
+      "message": "True, I was already thinking about passing WikibaseClient factory over. Thanks for suggesting this, I am changing that all.",
+      "parentUuid": "6ed52f32_224a74c9",
+      "revId": "9670ddb536056099b49d396166c69f09621ab6b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ed52f32_424d80df",
         "filename": "client/includes/Store/Sql/DirectSqlStore.php",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "2edfb757_65276a0e",
+        "filename": "client/includes/Store/Sql/DirectSqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-12T14:56:33Z",
+      "side": 1,
+      "message": "Yes! The idParser passed here is then wrapped in PrefixMappingEntityIdParser instances. ServiceContainer for each repo then uses the \"right\" id parser. But this is no longer really relevant as I am injecting DispatchingServiceFactory now to the store.",
+      "parentUuid": "6ed52f32_424d80df",
+      "revId": "9670ddb536056099b49d396166c69f09621ab6b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ed52f32_62407ca9",
         "filename": "client/includes/Store/Sql/DirectSqlStore.php",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2016-12-09T11:22:36Z",
       "side": 1,
       "message": "The more I think about it, the more I think this should be inside DispatchingServiceFactory. Maybe hard coded for now, but ideally via a wiring file.\n\nWe can do that in a follow-up patch, but maybe it\u0027s easier to put the construction of the dispatching service instance into DispatchingServiceFactory right away.",
+      "revId": "9670ddb536056099b49d396166c69f09621ab6b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2edfb757_05642644",
+        "filename": "client/includes/Store/Sql/DirectSqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-12T14:56:33Z",
+      "side": 1,
+      "message": "Makes definitely far more sense to do it right away IMO. Changed it.",
+      "parentUuid": "6ed52f32_62407ca9",
       "revId": "9670ddb536056099b49d396166c69f09621ab6b7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
