@@ -84,6 +84,7 @@ use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
 use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
+use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\RepositorySpecificEntityRevisionLookupFactory;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
@@ -92,7 +93,6 @@ use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\NamespaceChecker;
 use Wikibase\SettingsArray;
 use Wikibase\SiteLinkCommentCreator;
-use Wikibase\Store\BufferingTermLookup;
 use Wikibase\StringNormalizer;
 
 /**
@@ -120,6 +120,11 @@ final class WikibaseClient {
 	 * @var SiteStore|null
 	 */
 	private $siteStore;
+
+	/**
+	 * @var DispatchingServiceFactory
+	 */
+	private $dispatchingServiceFactory;
 
 	/**
 	 * @var PropertyDataTypeLookup|null
@@ -380,6 +385,20 @@ final class WikibaseClient {
 	}
 
 	/**
+	 * @return DispatchingServiceFactory
+	 */
+	private function getDispatchingServiceFactory() {
+		if ( $this->dispatchingServiceFactory === null ) {
+			$this->dispatchingServiceFactory = new DispatchingServiceFactory(
+				$this,
+				$this->settings->getSetting( 'dispatchingServiceWiringFiles' )
+			);
+		}
+
+		return $this->dispatchingServiceFactory;
+	}
+
+	/**
 	 * @return EntityLookup
 	 */
 	private function getEntityLookup() {
@@ -401,14 +420,14 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return BufferingTermLookup
+	 * TODO: method should be renamed as it returns an implementation of PrefetchingTermLookup interface, not
+	 * specifically BufferingTermLookup instance.
+	 *
+	 * @return PrefetchingTermLookup
 	 */
 	public function getBufferingTermLookup() {
 		if ( !$this->termLookup ) {
-			$this->termLookup = new BufferingTermLookup(
-				$this->getStore()->getTermIndex(),
-				1000 // @todo: configure buffer size
-			);
+			$this->termLookup = $this->getDispatchingServiceFactory()->getTermBuffer();
 		}
 
 		return $this->termLookup;
@@ -521,10 +540,7 @@ final class WikibaseClient {
 				$this->getEntityIdParser(),
 				$this->getEntityIdComposer(),
 				$this->getEntityNamespaceLookup(),
-				new DispatchingServiceFactory(
-					$this,
-					$this->settings->getSetting( 'dispatchingServiceWiringFiles' )
-				),
+				$this->getDispatchingServiceFactory(),
 				$repoDatabase,
 				$this->contentLanguage->getCode()
 			);
