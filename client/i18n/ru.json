@@ -94,11 +94,12 @@
 	"wikibase-entityusage-submit": "Показать страницы",
 	"wikibase-pageinfo-entity-id": "Идентификатор элемента в {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-pageinfo-entity-id-none": "отсутствует",
-	"wikibase-pageinfo-entity-usage-L": "Метка: $1",
+	"wikibase-pageinfo-entity-usage-L": "Обозначение (метка): $1",
 	"wikibase-pageinfo-entity-usage-T": "Заголовок",
 	"wikibase-pageinfo-entity-usage-X": "Все данные сущности",
 	"wikibase-property-render-error": "Ошибка раскрытия свойства «$1»: $2",
 	"wikibase-otherprojects": "В других проектах",
 	"wikibase-otherprojects-beta-message": "Боковая панель других проектов",
-	"wikibase-otherprojects-beta-description": "Добавляет на боковую панель раздел «{{int:wikibase-otherprojects}}», который содержит ссылки на другие проекты Фонда Викимедиа на основе данных {{WBREPONAME}}."
+	"wikibase-otherprojects-beta-description": "Добавляет на боковую панель раздел «{{int:wikibase-otherprojects}}», который содержит ссылки на другие проекты Фонда Викимедиа на основе данных {{WBREPONAME}}.",
+	"notification-link-text-view-item": "{{GENDER:$1|Посмотреть}} элемент"
 }

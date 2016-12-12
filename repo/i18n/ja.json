@@ -15,7 +15,8 @@
 			"Otokoume",
 			"Afaz",
 			"Higa4",
-			"ネイ"
+			"ネイ",
+			"おはぐろ蜻蛉"
 		]
 	},
 	"wikibase-desc": "構造化データのリポジトリ",
@@ -28,7 +29,7 @@
 	"wikibase-cancel": "キャンセル",
 	"wikibase-add": "追加",
 	"wikibase-addqualifier": "修飾子を追加",
-	"wikibase-addreference": "出典を追加",
+	"wikibase-addreference": "情報源を追加",
 	"wikibase-save-inprogress": "保存中…",
 	"wikibase-remove-inprogress": "除去中…",
 	"wikibase-statementlistview-add": "追加",
@@ -103,8 +104,8 @@
 	"wikibase-statementview-rank-tooltip-normal": "有効な値だがおそらく過去のもの",
 	"wikibase-statementview-rank-deprecated": "非推奨ランク",
 	"wikibase-statementview-rank-tooltip-deprecated": "値が間違っていることは分かっているが（かつては）広くそう考えられていた",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}}件の{{PLURAL:$1|出典}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|$1件の出典}}がまだ保存されていません",
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}}件の{{PLURAL:$1|情報源}}",
+	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|$1件の情報源}}がまだ保存されていません",
 	"wikibase-snakview-property-input-placeholder": "プロパティ",
 	"wikibase-snakview-choosesnaktype": "値の型を指定してください。",
 	"wikibase-snakview-variation-datavaluetypemismatch": "プロパティの定義に従っていない値です。",
