@@ -123,7 +123,7 @@ class ChangeOpMainSnak extends ChangeOpBase {
 			throw new ChangeOpException( "Entity does not have a statement with GUID " . $this->statementGuid );
 		}
 
-		$propertyId = $statement->getMainSnak()->getPropertyId();
+		$propertyId = $statement->getPropertyId();
 
 		if ( !$propertyId->equals( $this->snak->getPropertyId() ) ) {
 			throw new ChangeOpException( "Claim with GUID "

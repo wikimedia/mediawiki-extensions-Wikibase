@@ -183,7 +183,7 @@ class ChangeOpStatement extends ChangeOpBase {
 	 */
 	private function checkMainSnakUpdate( Statement $oldStatement ) {
 		$newMainSnak = $this->statement->getMainSnak();
-		$oldPropertyId = $oldStatement->getMainSnak()->getPropertyId();
+		$oldPropertyId = $oldStatement->getPropertyId();
 
 		if ( !$oldPropertyId->equals( $newMainSnak->getPropertyId() ) ) {
 			$guid = $this->statement->getGuid();

@@ -93,7 +93,7 @@ class SetClaimValue extends ApiBase {
 
 		$claim = $this->modificationHelper->getStatementFromEntity( $guid, $entity );
 
-		$snak = $this->modificationHelper->getSnakInstance( $params, $claim->getMainSnak()->getPropertyId() );
+		$snak = $this->modificationHelper->getSnakInstance( $params, $claim->getPropertyId() );
 
 		$summary = $this->modificationHelper->createSummary( $params, $this );
 

@@ -77,7 +77,7 @@ class GeoDataDataUpdater implements StatementDataUpdater {
 	 * @param Statement $statement
 	 */
 	public function processStatement( Statement $statement ) {
-		$propertyId = $statement->getMainSnak()->getPropertyId();
+		$propertyId = $statement->getPropertyId();
 
 		if ( $this->propertyDataTypeMatcher->isMatchingDataType(
 			$propertyId,
