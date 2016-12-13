@@ -83,4 +83,14 @@ class PrefixMappingEntityIdParserFactoryTest extends \PHPUnit_Framework_TestCase
 		];
 	}
 
+	public function testGetIdParserReusesTheInstanceOverMultitpleCalls() {
+		$dummyParser = $this->getDummyEntityIdParser();
+		$factory = new PrefixMappingEntityIdParserFactory( $dummyParser, [] );
+
+		$parserOne = $factory->getIdParser( 'foo' );
+		$parserTwo = $factory->getIdParser( 'foo' );
+
+		$this->assertSame( $parserOne, $parserTwo );
+	}
+
 }
