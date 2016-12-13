@@ -7,6 +7,8 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\Store\StorageException;
 
 /**
@@ -82,7 +84,7 @@ class WikibaseLanguageDependentLuaBindings {
 		}
 
 		// NOTE: This tracks a label usage in the wiki's content language.
-		return [ $term->getText(), $term->getLanguageCode() ];
+		return [ $term->getText(), $this->getTermLanguage( $term ) ];
 	}
 
 	/**
@@ -115,7 +117,20 @@ class WikibaseLanguageDependentLuaBindings {
 		// XXX: This. Sucks. A lot.
 		// Also notes about language fallbacks from getLabel apply
 		$this->usageAccumulator->addOtherUsage( $entityId );
-		return [ $term->getText(), $term->getLanguageCode() ];
+		return [ $term->getText(), $this->getTermLanguage( $term ) ];
+	}
+
+	/**
+	 * @param Term $term
+	 *
+	 * @return string
+	 */
+	private function getTermLanguage( Term $term ) {
+		if ( $term instanceof TermFallback ) {
+			return $term->getActualLanguageCode();
+		}
+
+		return $term->getLanguageCode();
 	}
 
 }
