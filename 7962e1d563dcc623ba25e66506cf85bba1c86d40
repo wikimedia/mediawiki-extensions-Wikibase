@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2edfb757_293daa8a",
+        "filename": "client/includes/Store/RepositoryServiceContainer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-13T19:59:46Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this get the appropriate mapping IdParser injected? Or does it have sufficient knowledge to construct the appropriate IdParser?",
+      "revId": "7962e1d563dcc623ba25e66506cf85bba1c86d40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2edfb757_695a92fb",
+        "filename": "client/includes/Store/RepositoryServiceWiring.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-13T19:59:46Z",
+      "side": 1,
+      "message": "This is ok for now, but seems a bit backwards. I would have expected the EntityRevisionLookupFactory to be constructed using information/callbacks that, in the end, would use a RepositoryServiceContainer to construct the specific EntityRevisionLookup.\n\nPerhaps add a comment that at least explains the considerations at work here.",
+      "revId": "7962e1d563dcc623ba25e66506cf85bba1c86d40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2edfb757_495fd6e8",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 1263,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-13T19:59:46Z",
+      "side": 1,
+      "message": "See my comment in the wiring file.",
+      "revId": "7962e1d563dcc623ba25e66506cf85bba1c86d40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
