@@ -1,0 +1,146 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2edfb757_290b6adb",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-13T20:08:02Z",
+      "side": 1,
+      "message": "probably not needed, see below.",
+      "revId": "4ce473c55cccf39e45626c59f134fc2b1ca4733b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2edfb757_4906b6d2",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-13T20:08:02Z",
+      "side": 1,
+      "message": "$repositoryNames could be a private variable in initRepositoryServiceContainers(). If needed laterm just use the keys of $this-\u003erepositoryServiceContainers",
+      "revId": "4ce473c55cccf39e45626c59f134fc2b1ca4733b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2edfb757_a9ff5aa6",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-13T20:08:02Z",
+      "side": 1,
+      "message": "loading the wiring file in the constructor feels wrong. Shouldn\u0027t be a serious problem, but still. Don\u0027t do work in a constructor. That includes file I/O.",
+      "revId": "4ce473c55cccf39e45626c59f134fc2b1ca4733b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2edfb757_c9f2a6df",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-13T20:08:02Z",
+      "side": 1,
+      "message": "Why not just\n\n  foreach ( $this-\u003erepositoryServiceContainers as $repositoryName \u003d\u003e $container )",
+      "revId": "4ce473c55cccf39e45626c59f134fc2b1ca4733b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2edfb757_0910ae03",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-13T20:08:02Z",
+      "side": 1,
+      "message": "Can this check ever fail?",
+      "revId": "4ce473c55cccf39e45626c59f134fc2b1ca4733b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2edfb757_e9f562c8",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-13T20:08:02Z",
+      "side": 1,
+      "message": "long line, please wrap",
+      "range": {
+        "startLine": 71,
+        "startChar": 35,
+        "endLine": 71,
+        "endChar": 69
+      },
+      "revId": "4ce473c55cccf39e45626c59f134fc2b1ca4733b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2edfb757_69285233",
+        "filename": "client/includes/DispatchingServiceWiring.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-13T20:08:02Z",
+      "side": 1,
+      "message": "I like this!",
+      "revId": "4ce473c55cccf39e45626c59f134fc2b1ca4733b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2edfb757_09278e60",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-13T20:08:02Z",
+      "side": 1,
+      "message": "This is another reason not to pass the wiring file to the constructor: you could register mock instantiators, and not use the wiring file for the test at all.",
+      "revId": "4ce473c55cccf39e45626c59f134fc2b1ca4733b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
