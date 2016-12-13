@@ -133,48 +133,6 @@ class ItemContentTest extends EntityContentTest {
 		return $cases;
 	}
 
-	public function provideGetEntityStatus() {
-		$cases = parent::provideGetEntityStatus();
-
-		$contentLinkStub = ItemContent::newEmpty();
-		$contentLinkStub->getEntity()->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
-
-		$cases['linkstub'] = array(
-			$contentLinkStub,
-			ItemContent::STATUS_LINKSTUB
-		);
-
-		$linksAndTerms = $contentLinkStub->copy();
-		$linksAndTerms->getEntity()->setLabel( 'en', 'foo' );
-
-		$cases['linkstub with terms'] = array(
-			$linksAndTerms,
-			ItemContent::STATUS_LINKSTUB
-		);
-
-		// @todo this is needed in PropertyContentTest as well
-		//       once we have statements in properties
-		$contentWithClaim = $this->newEmpty();
-		$snak = new PropertyNoValueSnak( 83 );
-		$guid = '$testing$';
-		$contentWithClaim->getEntity()->getStatements()->addNewStatement( $snak, null, null, $guid );
-
-		$cases['claims'] = array(
-			$contentWithClaim,
-			EntityContent::STATUS_NONE
-		);
-
-		$contentWithClaimAndLink = $contentWithClaim->copy();
-		$contentWithClaimAndLink->getEntity()->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
-
-		$cases['statements and links'] = array(
-			$contentWithClaimAndLink,
-			EntityContent::STATUS_NONE
-		);
-
-		return $cases;
-	}
-
 	/**
 	 * @return EntityContent
 	 */
@@ -235,7 +193,6 @@ class ItemContentTest extends EntityContentTest {
 			array(
 				'wb-claims' => 0,
 				'wb-sitelinks' => 1,
-				'wb-status' => ItemContent::STATUS_LINKSTUB,
 			)
 		);
 
