@@ -86,7 +86,7 @@ class StatementGroupListView {
 		$byProperty = array();
 
 		foreach ( $statements as $statement ) {
-			$propertyId = $statement->getMainSnak()->getPropertyId();
+			$propertyId = $statement->getPropertyId();
 			$byProperty[$propertyId->getSerialization()][] = $statement;
 		}
 
@@ -99,7 +99,7 @@ class StatementGroupListView {
 	 * @return string HTML
 	 */
 	private function getHtmlForStatementGroupView( array $statements ) {
-		$propertyId = $statements[0]->getMainSnak()->getPropertyId();
+		$propertyId = $statements[0]->getPropertyId();
 		$addStatementHtml = $this->editSectionGenerator->getAddStatementToGroupSection( $propertyId );
 
 		return $this->templateFactory->render(
