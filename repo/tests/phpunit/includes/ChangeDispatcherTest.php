@@ -7,6 +7,7 @@ use Diff\DiffOp\Diff\MapDiff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
+use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use Wikibase\Change;
 use Wikibase\ChunkAccess;
 use Wikibase\DataModel\Entity\EntityId;
@@ -60,7 +61,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 		$dispatcher = new ChangeDispatcher(
 			$coordinator,
 			$this->getNotificationSender( $notifications ),
-			$this->getChunkedChangesAccess(),
+			$this->getChunkedChangesAccess( $this->any() ),
 			$this->getSubscriptionLookup()
 		);
 
@@ -86,14 +87,20 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @param PHPUnit_Framework_MockObject_Matcher_Invocation|null $expectedLoadChunkCalls
+	 *
 	 * @return ChunkAccess Guaranteed to only return Change objects from loadChunk.
 	 */
-	private function getChunkedChangesAccess() {
+	private function getChunkedChangesAccess(
+		PHPUnit_Framework_MockObject_Matcher_Invocation $expectedLoadChunkCalls = null
+	) {
 		$chunkedAccess = $this->getMock( ChunkAccess::class );
 
-		$chunkedAccess->expects( $this->any() )
+		$chunkedAccess->expects( $expectedLoadChunkCalls ?: $this->never() )
 			->method( 'loadChunk' )
-			->will( $this->returnCallback( array( $this, 'getChanges' ) ) );
+			->will( $this->returnCallback( function ( $fromId, $limit ) {
+				return array_slice( $this->changes, $fromId, $limit );
+			} ) );
 
 		$chunkedAccess->expects( $this->any() )
 			->method( 'getRecordId' )
@@ -112,21 +119,13 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 
 		$lookup->expects( $this->any() )
 			->method( 'getSubscriptions' )
-			->will( $this->returnCallback( array( $this, 'getSubscriptions' ) ) );
+			->will( $this->returnCallback( function ( $siteId, array $entityIds ) {
+				return isset( $this->subscriptions[$siteId] )
+					? array_intersect( $this->subscriptions[$siteId], $entityIds )
+					: [];
+			} ) );
 
 		return $lookup;
-	}
-
-	public function getChanges( $fromId, $limit ) {
-		return array_slice( $this->changes, max( $fromId, 1 ), $limit );
-	}
-
-	public function getSubscriptions( $siteId, array $entityIds ) {
-		if ( !isset( $this->subscriptions[$siteId] ) ) {
-			return array();
-		}
-
-		return array_intersect( $this->subscriptions[$siteId], $entityIds );
 	}
 
 	/**
@@ -341,26 +340,14 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 		$pending = $dispatcher->getPendingChanges( $siteId, $afterId );
 
 		$this->assertChanges( $expectedChanges, $pending[0] );
-		$this->assertEquals( $expectedSeen, $pending[1] );
+		$this->assertSame( $expectedSeen, $pending[1] );
 	}
 
 	public function testGetPendingChanges_maxChunks() {
-		$chunkAccess = $this->getMock( ChunkAccess::class );
-
-		$chunkAccess->expects( $this->exactly( 1 ) )
-			->method( 'loadChunk' )
-			->will( $this->returnCallback( array( $this, 'getChanges' ) ) );
-
-		$chunkAccess->expects( $this->any() )
-			->method( 'getRecordId' )
-			->will( $this->returnCallback( function ( Change $change ) {
-				return $change->getId();
-			} ) );
-
 		$dispatcher = new ChangeDispatcher(
 			$this->getMock( ChangeDispatchCoordinator::class ),
 			$this->getNotificationSender(),
-			$chunkAccess,
+			$this->getChunkedChangesAccess( $this->exactly( 1 ) ),
 			$this->getSubscriptionLookup()
 		);
 
@@ -460,12 +447,21 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 		$this->assertNotifications( $expectedNotifications, $notifications );
 	}
 
+	/**
+	 * @param Change[] $changes
+	 *
+	 * @return int[]
+	 */
 	private function getChangeIds( array $changes ) {
 		return array_map( function( Change $change ) {
 			return $change->getId();
 		}, $changes );
 	}
 
+	/**
+	 * @param Change[] $expected
+	 * @param Change[] $actual
+	 */
 	private function assertChanges( array $expected, $actual ) {
 		$expected = $this->getChangeIds( $expected );
 		$actual = $this->getChangeIds( $actual );
@@ -473,6 +469,10 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
+	/**
+	 * @param array[] $expected
+	 * @param array[] $notifications
+	 */
 	private function assertNotifications( array $expected, array $notifications ) {
 		foreach ( $notifications as &$n ) {
 			$n[1] = $this->getChangeIds( $n[1] );

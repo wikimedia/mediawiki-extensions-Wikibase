@@ -102,7 +102,16 @@ class EditActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 
 		$repoLinker->expects( $this->any() )
 			->method( 'buildEntityLink' )
-			->will( $this->returnCallback( [ $this, 'buildEntityLink' ] ) );
+			->will( $this->returnCallback( function (
+				EntityId $entityId,
+				array $classes = [],
+				$text = null
+			) {
+				return Html::rawElement( 'a', [
+					'href' => 'https://www.wikidata.org/wiki/' . $entityId,
+					'class' => implode( ' ', $classes ),
+				], $text ?: $entityId );
+			} ) );
 
 		$siteLinkLookup = $this->getMockBuilder( SiteLinkLookup::class )
 			->disableOriginalConstructor()
@@ -137,7 +146,9 @@ class EditActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 
 		$idParser->expects( $this->any() )
 			->method( 'parse' )
-			->will( $this->returnCallback( [ $this, 'parse' ] ) );
+			->will( $this->returnCallback( function ( $idSerialization ) {
+				return new ItemId( $idSerialization );
+			} ) );
 
 		$hookHandler = new EditActionHookHandler(
 			$repoLinker,
@@ -174,54 +185,16 @@ class EditActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 
 		$lookup->expects( $this->any() )
 			->method( 'getLabel' )
-			->will( $this->returnCallback( [ $this, 'getLabel' ] ) );
+			->will( $this->returnCallback( function ( EntityId $entityId ) {
+				switch ( $entityId->getSerialization() ) {
+					case 'Q4':
+						return new Term( 'en', 'Berlin' );
+					default:
+						return null;
+				}
+			} ) );
 
 		return $lookup;
-	}
-
-	/**
-	 * @param EntityId $entity
-	 *
-	 * @return Term|null
-	 */
-	public function getLabel( EntityId $entity ) {
-		$labelMap = [ 'Q4' => 'Berlin' ];
-		$idSerialization = $entity->getSerialization();
-		if ( !isset( $labelMap[$idSerialization] ) ) {
-			return null;
-		}
-		$term = new Term( 'en', $labelMap[$idSerialization] );
-		return $term;
-	}
-
-	/**
-	 * @param string $entity
-	 *
-	 * @return ItemId
-	 */
-	public function parse( $entity ) {
-		// TODO: Let properties be tested too
-		return new ItemId( $entity );
-	}
-
-	/**
-	 * @param string $entityId
-	 * @param string[] $classes
-	 * @param string|null $text
-	 *
-	 * @return string HTML
-	 */
-	public function buildEntityLink( $entityId, array $classes, $text = null ) {
-		if ( $text === null ) {
-			$text = $entityId;
-		}
-
-		$attr = [
-			'href' => 'https://www.wikidata.org/wiki/' . $entityId,
-			'class' => implode( ' ', $classes )
-		];
-
-		return Html::rawElement( 'a', $attr, $text );
 	}
 
 	/**

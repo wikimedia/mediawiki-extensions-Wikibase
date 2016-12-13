@@ -176,18 +176,16 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 		$lookup->expects( $this->any() )
 			->method( 'getEntityRevision' )
 			->will( $this->returnCallback( function( EntityId $entityId ) {
-				if ( $entityId->getSerialization() === 'Q42' ) {
-					return new EntityRevision(
-						new Item( new ItemId( 'Q42' ) )
-					);
-				} elseif ( $entityId->getSerialization() === 'Q43' ) {
-					// Unresolved redirect, derived from EntityLookupException
-					throw new RevisionedUnresolvedRedirectException(
-						$entityId,
-						new ItemId( 'Q404' )
-					);
-				} else {
-					return null;
+				switch ( $entityId->getSerialization() ) {
+					case 'Q42':
+						return new EntityRevision( new Item( new ItemId( 'Q42' ) ) );
+					case 'Q43':
+						throw new RevisionedUnresolvedRedirectException(
+							$entityId,
+							new ItemId( 'Q404' )
+						);
+					default:
+						return null;
 				}
 			} )
 		);

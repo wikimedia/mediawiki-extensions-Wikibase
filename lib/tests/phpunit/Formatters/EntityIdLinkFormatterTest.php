@@ -44,7 +44,7 @@ class EntityIdLinkFormatterTest extends PHPUnit_Framework_TestCase {
 		$formatter = $this->newEntityIdLinkFormatter();
 
 		$actual = $formatter->formatEntityId( $id );
-		$this->assertEquals( $expected, $actual );
+		$this->assertSame( $expected, $actual );
 	}
 
 	public function getTitleForId( EntityId $entityId ) {
@@ -60,7 +60,8 @@ class EntityIdLinkFormatterTest extends PHPUnit_Framework_TestCase {
 
 	private function newEntityIdLinkFormatter() {
 		$titleLookup = $this->getMock( EntityTitleLookup::class );
-		$titleLookup->expects( $this->any() )->method( 'getTitleForId' )
+		$titleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
 			->will( $this->returnCallback( array( $this, 'getTitleForId' ) ) );
 
 		$formatter = new EntityIdLinkFormatter( $titleLookup );

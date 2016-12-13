@@ -39,13 +39,14 @@ class LanguageLinkBadgeDisplayTest extends PHPUnit_Framework_TestCase {
 		$labelLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->returnCallback( function( EntityId $entityId ) {
-				if ( $entityId->getSerialization() === 'Q3' ) {
-					return new Term( 'de', 'Lesenswerter Artikel' );
-				} elseif ( $entityId->getSerialization() === 'Q4' ) {
-					return new Term( 'de', 'Exzellenter Artikel' );
+				switch ( $entityId->getSerialization() ) {
+					case 'Q3':
+						return new Term( 'de', 'Lesenswerter Artikel' );
+					case 'Q4':
+						return new Term( 'de', 'Exzellenter Artikel' );
+					default:
+						return null;
 				}
-
-				return null;
 			} ) );
 
 		$badgeClassNames = array( 'Q4' => 'foo', 'Q3' => 'bar' );
