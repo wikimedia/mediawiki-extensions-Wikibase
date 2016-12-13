@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2edfb757_f1854e0c",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-13T10:50:54Z",
+      "side": 1,
+      "message": "specfically",
+      "range": {
+        "startLine": 424,
+        "startChar": 4,
+        "endLine": 424,
+        "endChar": 14
+      },
+      "revId": "a7ad428191b4e43d32589522272784c211875099",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
