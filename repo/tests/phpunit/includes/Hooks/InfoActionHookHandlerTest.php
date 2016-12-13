@@ -114,7 +114,12 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 
 		$siteLookup->expects( $this->any() )
 			->method( 'getSite' )
-			->will( $this->returnCallback( [ $this, 'getSite' ] ) );
+			->will( $this->returnCallback( function () {
+				$site = new Site();
+				$site->addInterwikiId( 'en' );
+				$site->setLinkPath( 'https://en.wikipedia.org/wiki/$1' );
+				return $site;
+			} ) );
 
 		$entityIdLookup = $this->getMockBuilder( PagePropsEntityIdLookup::class )
 			->disableOriginalConstructor()
@@ -166,16 +171,6 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 		$context->setLanguage( 'en' );
 
 		return $context;
-	}
-
-	/**
-	 * @return Site
-	 */
-	public function getSite() {
-		$site = new Site();
-		$site->addInterwikiId( 'en' );
-		$site->setLinkPath( 'https://en.wikipedia.org/wiki/$1' );
-		return $site;
 	}
 
 }

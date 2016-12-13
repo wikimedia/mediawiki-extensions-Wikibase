@@ -46,7 +46,7 @@ class EntityIdTitleFormatterTest extends PHPUnit_Framework_TestCase {
 		$formatter = $this->newEntityIdTitleFormatter();
 
 		$actual = $formatter->formatEntityId( $id );
-		$this->assertEquals( $expected, $actual );
+		$this->assertSame( $expected, $actual );
 	}
 
 	public function getTitleForId( EntityId $entityId ) {
@@ -62,7 +62,8 @@ class EntityIdTitleFormatterTest extends PHPUnit_Framework_TestCase {
 
 	protected function newEntityIdTitleFormatter() {
 		$titleLookup = $this->getMock( EntityTitleLookup::class );
-		$titleLookup->expects( $this->any() )->method( 'getTitleForId' )
+		$titleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
 			->will( $this->returnCallback( array( $this, 'getTitleForId' ) ) );
 
 		$formatter = new EntityIdTitleFormatter( $titleLookup );
