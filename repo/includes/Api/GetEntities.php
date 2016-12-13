@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -258,6 +259,7 @@ class GetEntities extends ApiBase {
 				$entityId = $ex->getRedirectTargetId();
 				$entityRevision = $this->getEntityRevision( $entityId, false );
 			}
+		} catch ( InvalidArgumentException $ex ) {
 		}
 
 		return $entityRevision;
