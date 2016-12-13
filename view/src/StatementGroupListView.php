@@ -4,6 +4,7 @@ namespace Wikibase\View;
 
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -16,6 +17,11 @@ use Wikibase\View\Template\TemplateFactory;
  * @author Daniel Kinzler
  */
 class StatementGroupListView {
+
+	/**
+	 * @var PropertyOrderProvider
+	 */
+	private $propertyOrderProvider;
 
 	/**
 	 * @var TemplateFactory
@@ -38,17 +44,20 @@ class StatementGroupListView {
 	private $claimHtmlGenerator;
 
 	/**
+	 * @param PropertyOrderProvider $propertyOrderProvider,
 	 * @param TemplateFactory $templateFactory
 	 * @param EntityIdFormatter $propertyIdFormatter
 	 * @param EditSectionGenerator $sectionEditLinkGenerator
 	 * @param ClaimHtmlGenerator $claimHtmlGenerator
 	 */
 	public function __construct(
+		PropertyOrderProvider $propertyOrderProvider,
 		TemplateFactory $templateFactory,
 		EntityIdFormatter $propertyIdFormatter,
 		EditSectionGenerator $sectionEditLinkGenerator,
 		ClaimHtmlGenerator $claimHtmlGenerator
 	) {
+		$this->propertyOrderProvider = $propertyOrderProvider;
 		$this->propertyIdFormatter = $propertyIdFormatter;
 		$this->editSectionGenerator = $sectionEditLinkGenerator;
 		$this->claimHtmlGenerator = $claimHtmlGenerator;
@@ -64,7 +73,9 @@ class StatementGroupListView {
 	 * @return string HTML
 	 */
 	public function getHtml( array $statements ) {
-		$statementsByProperty = $this->groupStatementsByProperties( $statements );
+		$statementsByProperty = $this->orderStatementsByPropertyOrder(
+			$this->groupStatementsByProperties( $statements )
+		);
 
 		$statementsHtml = '';
 		foreach ( $statementsByProperty as $statements ) {
@@ -91,6 +102,34 @@ class StatementGroupListView {
 		}
 
 		return $byProperty;
+	}
+
+	/**
+	 * @param array[] $statementsByProperty The array keys are expected to be Property ID
+	 *  serializations.
+	 *
+	 * @return array[]
+	 */
+	private function orderStatementsByPropertyOrder( array $statementsByProperty ) {
+		$propertyOrder = $this->propertyOrderProvider->getPropertyOrder();
+
+		if ( !$propertyOrder ) {
+			return $statementsByProperty;
+		}
+
+		$ordered = [];
+		$unordered = [];
+
+		foreach ( $statementsByProperty as $propertyId => $statements ) {
+			if ( isset( $propertyOrder[$propertyId] ) ) {
+				$ordered[$propertyOrder[$propertyId]] = $statements;
+			} else {
+				$unordered[] = $statements;
+			}
+		}
+
+		ksort( $ordered );
+		return array_merge( $ordered, $unordered );
 	}
 
 	/**
