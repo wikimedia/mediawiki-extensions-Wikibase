@@ -82,6 +82,7 @@ use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
 use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
+use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -1202,7 +1203,7 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return CachingPropertyOrderProvider
+	 * @return PropertyOrderProvider
 	 */
 	public function getPropertyOrderProvider() {
 		if ( $this->propertyOrderProvider === null ) {
