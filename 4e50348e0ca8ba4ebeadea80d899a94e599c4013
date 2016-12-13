@@ -285,6 +285,30 @@
     },
     {
       "key": {
+        "uuid": "2edfb757_26dcbe4a",
+        "filename": "lib/tests/phpunit/Store/DispatchingPropertyInfoLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-13T08:41:45Z",
+      "side": 1,
+      "message": "So for the record: this patch now depends on I819123a847ba39536c92abc177d18a2bb14d9ba5 which adjusts MockPropertyInfoStore.",
+      "parentUuid": "6ed52f32_507d5216",
+      "range": {
+        "startLine": 84,
+        "startChar": 2,
+        "endLine": 84,
+        "endChar": 56
+      },
+      "revId": "4e50348e0ca8ba4ebeadea80d899a94e599c4013",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ed52f32_8dfe0165",
         "filename": "lib/tests/phpunit/Store/DispatchingPropertyInfoLookupTest.php",
         "patchSetId": 3
