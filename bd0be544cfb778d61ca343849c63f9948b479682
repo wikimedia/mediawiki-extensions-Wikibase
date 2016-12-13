@@ -16,6 +16,24 @@
       "revId": "bd0be544cfb778d61ca343849c63f9948b479682",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2edfb757_6622c1a4",
+        "filename": "lib/includes/Store/Sql/PropertyInfoTable.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-12-13T17:37:02Z",
+      "side": 1,
+      "message": "I added the bits that made PropertyInfoTable repo-aware. It was probably not a great idea to make it part of this patch but PropertyInfoTable being repo-aware and it using serializations are closely related and not that much code.",
+      "parentUuid": "8ed34346_829a3065",
+      "revId": "bd0be544cfb778d61ca343849c63f9948b479682",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
