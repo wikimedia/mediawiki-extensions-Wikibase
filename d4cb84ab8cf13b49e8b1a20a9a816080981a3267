@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2edfb757_d7436266",
+        "filename": "repo/includes/Api/GetEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-13T15:56:09Z",
+      "side": 1,
+      "message": "There should be a comment explaining why this is empty, or better: why it is ok to return null in this case.",
+      "revId": "d4cb84ab8cf13b49e8b1a20a9a816080981a3267",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
