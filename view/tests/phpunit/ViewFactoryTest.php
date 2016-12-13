@@ -13,6 +13,7 @@ use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityTermsView;
 use Wikibase\View\HtmlSnakFormatterFactory;
@@ -68,6 +69,7 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 			$plainFactory ?: $this->getEntityIdFormatterFactory( SnakFormatter::FORMAT_PLAIN ),
 			$this->getSnakFormatterFactory(),
 			new NullStatementGrouper(),
+			$this->getMock( PropertyOrderProvider::class ),
 			new HashSiteStore(),
 			new DataTypeFactory( array() ),
 			$templateFactory,

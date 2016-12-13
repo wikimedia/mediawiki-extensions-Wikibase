@@ -13,6 +13,7 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\View\ClaimHtmlGenerator;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\StatementGroupListView;
@@ -39,9 +40,7 @@ class StatementGroupListViewTest extends PHPUnit_Framework_TestCase {
 		$propertyId = new PropertyId( 'P77' );
 		$statements = $this->makeStatements( $propertyId );
 
-		$propertyIdFormatter = $this->getEntityIdFormatter();
-
-		$statementGroupListView = $this->newStatementGroupListView( $propertyIdFormatter );
+		$statementGroupListView = $this->newStatementGroupListView();
 
 		$html = $statementGroupListView->getHtml( $statements );
 
@@ -51,6 +50,36 @@ class StatementGroupListViewTest extends PHPUnit_Framework_TestCase {
 			$this->assertContains( $statement->getGuid(), $html );
 		}
 		$this->assertContains( '<TOOLBAR></TOOLBAR>', $html );
+	}
+
+	public function testPropertyOrdering() {
+		$statements = [
+			$this->makeNoValueStatement( 'P2' ),
+			$this->makeNoValueStatement( 'P103' ),
+			$this->makeNoValueStatement( 'P1' ),
+			$this->makeNoValueStatement( 'P101' ),
+			$this->makeNoValueStatement( 'P102' ),
+		];
+		$view = $this->newStatementGroupListView();
+		$html = $view->getHtml( $statements );
+		$this->assertRegExp( '/^[^$]*\$' . implode( '\n[^$]*\$', [
+			'P101',
+			'P102',
+			'P103',
+			'P2',
+			'P1',
+		] ) . '\n[^$]*$/s', $html );
+	}
+
+	/**
+	 * @param string $propertyId
+	 *
+	 * @return Statement
+	 */
+	private function makeNoValueStatement( $propertyId ) {
+		$statement = new Statement( new PropertyNoValueSnak( new PropertyId( $propertyId ) ) );
+		$statement->setGuid( 'GUID$' . $propertyId );
+		return $statement;
 	}
 
 	/**
@@ -102,11 +131,9 @@ class StatementGroupListViewTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param EntityIdFormatter $propertyIdFormatter
-	 *
 	 * @return StatementGroupListView
 	 */
-	private function newStatementGroupListView( EntityIdFormatter $propertyIdFormatter ) {
+	private function newStatementGroupListView() {
 		$templateFactory = new TemplateFactory( new TemplateRegistry( array(
 			'wikibase-statementgrouplistview' => '<SGLIST>$1</SGLIST>',
 			'wikibase-listview' => '<LIST>$1</LIST>',
@@ -115,11 +142,29 @@ class StatementGroupListViewTest extends PHPUnit_Framework_TestCase {
 		) ) );
 
 		return new StatementGroupListView(
+			$this->getPropertyOrderProvider(),
 			$templateFactory,
-			$propertyIdFormatter,
+			$this->getEntityIdFormatter(),
 			$this->getMock( EditSectionGenerator::class ),
 			$this->getClaimHtmlGenerator()
 		);
+	}
+
+	/**
+	 * @return PropertyOrderProvider
+	 */
+	private function getPropertyOrderProvider() {
+		$propertyOrderProvider = $this->getMock( PropertyOrderProvider::class );
+
+		$propertyOrderProvider->expects( $this->any() )
+			->method( 'getPropertyOrder' )
+			->will( $this->returnValue( [
+				'P101' => 0,
+				'P102' => 1,
+				'P103' => 2,
+			] ) );
+
+		return $propertyOrderProvider;
 	}
 
 	/**
@@ -143,13 +188,13 @@ class StatementGroupListViewTest extends PHPUnit_Framework_TestCase {
 	 * @return EntityIdFormatter
 	 */
 	private function getEntityIdFormatter() {
-		$lookup = $this->getMock( EntityIdFormatter::class );
+		$entityIdFormatter = $this->getMock( EntityIdFormatter::class );
 
-		$lookup->expects( $this->once() )
+		$entityIdFormatter->expects( $this->any() )
 			->method( 'formatEntityId' )
 			->will( $this->returnValue( '<ID>' ) );
 
-		return $lookup;
+		return $entityIdFormatter;
 	}
 
 }

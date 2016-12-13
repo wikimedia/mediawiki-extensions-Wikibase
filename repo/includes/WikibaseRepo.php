@@ -77,6 +77,7 @@ use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\StaticContentLanguages;
+use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -84,6 +85,7 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\UnionContentLanguages;
 use Wikibase\Lib\UnitConverter;
 use Wikibase\Lib\UnitStorage;
@@ -1636,11 +1638,19 @@ class WikibaseRepo {
 			$this->getStatementGuidParser()
 		);
 
+		$propertyOrderProvider = new CachingPropertyOrderProvider(
+			new WikiPagePropertyOrderProvider(
+				Title::newFromText( 'MediaWiki:Wikibase-SortedProperties' )
+			),
+			wfGetMainCache()
+		);
+
 		return new ViewFactory(
 			$this->getEntityIdHtmlLinkFormatterFactory(),
 			new EntityIdLabelFormatterFactory(),
 			$this->getHtmlSnakFormatterFactory(),
 			$statementGrouperBuilder->getStatementGrouper(),
+			$propertyOrderProvider,
 			$this->getSiteStore(),
 			$this->getDataTypeFactory(),
 			TemplateFactory::getDefaultInstance(),

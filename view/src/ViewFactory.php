@@ -11,6 +11,7 @@ use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -45,6 +46,11 @@ class ViewFactory {
 	 * @var StatementGrouper
 	 */
 	private $statementGrouper;
+
+	/**
+	 * @var PropertyOrderProvider
+	 */
+	private $propertyOrderProvider;
 
 	/**
 	 * @var SiteStore
@@ -101,6 +107,7 @@ class ViewFactory {
 	 * @param EntityIdFormatterFactory $plainTextIdFormatterFactory
 	 * @param HtmlSnakFormatterFactory $htmlSnakFormatterFactory
 	 * @param StatementGrouper $statementGrouper
+	 * @param PropertyOrderProvider $propertyOrderProvider,
 	 * @param SiteStore $siteStore
 	 * @param DataTypeFactory $dataTypeFactory
 	 * @param TemplateFactory $templateFactory
@@ -119,6 +126,7 @@ class ViewFactory {
 		EntityIdFormatterFactory $plainTextIdFormatterFactory,
 		HtmlSnakFormatterFactory $htmlSnakFormatterFactory,
 		StatementGrouper $statementGrouper,
+		PropertyOrderProvider $propertyOrderProvider,
 		SiteStore $siteStore,
 		DataTypeFactory $dataTypeFactory,
 		TemplateFactory $templateFactory,
@@ -140,6 +148,7 @@ class ViewFactory {
 		$this->plainTextIdFormatterFactory = $plainTextIdFormatterFactory;
 		$this->htmlSnakFormatterFactory = $htmlSnakFormatterFactory;
 		$this->statementGrouper = $statementGrouper;
+		$this->propertyOrderProvider = $propertyOrderProvider;
 		$this->siteStore = $siteStore;
 		$this->dataTypeFactory = $dataTypeFactory;
 		$this->templateFactory = $templateFactory;
@@ -292,6 +301,7 @@ class ViewFactory {
 			$this->textProvider
 		);
 		$statementGroupListView = new StatementGroupListView(
+			$this->propertyOrderProvider,
 			$this->templateFactory,
 			$propertyIdFormatter,
 			$editSectionGenerator,
