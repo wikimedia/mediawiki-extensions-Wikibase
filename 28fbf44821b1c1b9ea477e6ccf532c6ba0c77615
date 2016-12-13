@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2edfb757_29afea92",
+        "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-13T20:23:21Z",
+      "side": 1,
+      "message": "This looks nice and simple already!\nIt would be even nicer to make SqlChangeDispatchCoordinator use a LockManager instead of handling locking itself, and to have an implementation of LockManager that contaisn the old locking code from SqlChangeDispatchCoordinator.\n\nNot absolutely needed, and not needed in this patch. Something to think about.",
+      "revId": "28fbf44821b1c1b9ea477e6ccf532c6ba0c77615",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2edfb757_e9d2022c",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-13T20:23:21Z",
+      "side": 1,
+      "message": "Uh, no, engage!",
+      "revId": "28fbf44821b1c1b9ea477e6ccf532c6ba0c77615",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2edfb757_e999e281",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-13T20:23:21Z",
+      "side": 1,
+      "message": "With this code, how do I get back the old behavior?",
+      "revId": "28fbf44821b1c1b9ea477e6ccf532c6ba0c77615",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
