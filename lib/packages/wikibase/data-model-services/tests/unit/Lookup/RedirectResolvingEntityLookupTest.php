@@ -20,36 +20,22 @@ class RedirectResolvingEntityLookupTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @param EntityId $id
 	 *
-	 * @return bool
-	 */
-	public function hasEntity( EntityId $id ) {
-		return $this->getEntity( $id ) !== null;
-	}
-
-	/**
-	 * @param EntityId $id
-	 *
 	 * @return null|Item
 	 * @throws UnresolvedEntityRedirectException
 	 */
 	public function getEntity( EntityId $id ) {
-		if ( $id->getSerialization() == 'Q11' ) {
-			throw new UnresolvedEntityRedirectException( new ItemId( 'Q11' ), new ItemId( 'Q10' ) );
+		switch ( $id->getSerialization() ) {
+			case 'Q10':
+				return new Item( $id );
+			case 'Q11':
+				throw new UnresolvedEntityRedirectException( new ItemId( 'Q11' ), new ItemId( 'Q10' ) );
+			case 'Q12':
+				throw new UnresolvedEntityRedirectException( new ItemId( 'Q12' ), new ItemId( 'Q11' ) );
+			case 'Q21':
+				throw new UnresolvedEntityRedirectException( new ItemId( 'Q21' ), new ItemId( 'Q20' ) );
+			default:
+				return null;
 		}
-
-		if ( $id->getSerialization() == 'Q12' ) {
-			throw new UnresolvedEntityRedirectException( new ItemId( 'Q12' ), new ItemId( 'Q11' ) );
-		}
-
-		if ( $id->getSerialization() == 'Q21' ) {
-			throw new UnresolvedEntityRedirectException( new ItemId( 'Q21' ), new ItemId( 'Q20' ) );
-		}
-
-		if ( $id->getSerialization() == 'Q10' ) {
-			return new Item( $id );
-		}
-
-		return null;
 	}
 
 	/**
@@ -64,7 +50,9 @@ class RedirectResolvingEntityLookupTest extends \PHPUnit_Framework_TestCase {
 
 		$mock->expects( $this->any() )
 			->method( 'hasEntity' )
-			->will( $this->returnCallback( [ $this, 'hasEntity' ] ) );
+			->will( $this->returnCallback( function ( EntityId $id ) {
+				return $this->getEntity( $id ) !== null;
+			} ) );
 
 		return $mock;
 	}
