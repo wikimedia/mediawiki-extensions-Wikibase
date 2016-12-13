@@ -10,7 +10,7 @@ use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
 
 /**
@@ -40,7 +40,10 @@ class WikibaseLanguageDependentLuaBindingsTest extends PHPUnit_Framework_TestCas
 	private function getWikibaseLanguageDependentLuaBindings(
 		UsageAccumulator $usageAccumulator = null
 	) {
-		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
+		$labelDescriptionLookup = $this->getMockBuilder( LanguageFallbackLabelDescriptionLookup::class )
+			->disableOriginalConstructor()
+			->getMock();
+
 		$labelDescriptionLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->returnValue( new Term( 'lang-code', 'LabelString' ) ) );

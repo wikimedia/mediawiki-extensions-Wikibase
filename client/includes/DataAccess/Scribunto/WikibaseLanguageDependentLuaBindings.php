@@ -5,7 +5,7 @@ namespace Wikibase\Client\DataAccess\Scribunto;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\Lib\Store\StorageException;
 
@@ -27,7 +27,7 @@ class WikibaseLanguageDependentLuaBindings {
 	private $entityIdParser;
 
 	/**
-	 * @var LabelDescriptionLookup
+	 * @var LanguageFallbackLabelDescriptionLookup
 	 */
 	private $labelDescriptionLookup;
 
@@ -38,7 +38,7 @@ class WikibaseLanguageDependentLuaBindings {
 
 	/**
 	 * @param EntityIdParser $entityIdParser
-	 * @param LabelDescriptionLookup $labelDescriptionLookup
+	 * @param LanguageFallbackLabelDescriptionLookup $labelDescriptionLookup
 	 * @param UsageAccumulator $usageAccumulator for tracking title usage via getEntityId.
 	 *
 	 * @note: label usage is not tracked in $usageAccumulator. This should be done inside
@@ -46,7 +46,7 @@ class WikibaseLanguageDependentLuaBindings {
 	 */
 	public function __construct(
 		EntityIdParser $entityIdParser,
-		LabelDescriptionLookup $labelDescriptionLookup,
+		LanguageFallbackLabelDescriptionLookup $labelDescriptionLookup,
 		UsageAccumulator $usageAccumulator
 	) {
 		$this->entityIdParser = $entityIdParser;
@@ -82,7 +82,7 @@ class WikibaseLanguageDependentLuaBindings {
 		}
 
 		// NOTE: This tracks a label usage in the wiki's content language.
-		return [ $term->getText(), $term->getLanguageCode() ];
+		return [ $term->getText(), $term->getActualLanguageCode() ];
 	}
 
 	/**
@@ -115,7 +115,7 @@ class WikibaseLanguageDependentLuaBindings {
 		// XXX: This. Sucks. A lot.
 		// Also notes about language fallbacks from getLabel apply
 		$this->usageAccumulator->addOtherUsage( $entityId );
-		return [ $term->getText(), $term->getLanguageCode() ];
+		return [ $term->getText(), $term->getActualLanguageCode() ];
 	}
 
 }
