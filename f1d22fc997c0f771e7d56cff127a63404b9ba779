@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2edfb757_89137e05",
+        "filename": "lib/includes/Store/RepositorySpecificEntityRevisionLookupFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-13T20:12:50Z",
+      "side": 1,
+      "message": "long line",
+      "revId": "f1d22fc997c0f771e7d56cff127a63404b9ba779",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
