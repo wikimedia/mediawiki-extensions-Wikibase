@@ -10,8 +10,7 @@ use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\DataModel\Term\Term;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\DataModel\Term\TermFallback;
 
 /**
@@ -37,12 +36,13 @@ class WikibaseLanguageDependentLuaBindingsTest extends PHPUnit_Framework_TestCas
 	}
 
 	/**
-	 * @param LabelDescriptionLookup $labelDescriptionLookup
+	 * @param LanguageFallbackLabelDescriptionLookup $labelDescriptionLookup
 	 * @param UsageAccumulator|null $usageAccumulator
-	 * @return WikibaseLuaBindings
+	 *
+	 * @return WikibaseLanguageDependentLuaBindings
 	 */
 	private function getWikibaseLanguageDependentLuaBindings(
-		LabelDescriptionLookup $labelDescriptionLookup,
+		LanguageFallbackLabelDescriptionLookup $labelDescriptionLookup,
 		UsageAccumulator $usageAccumulator = null
 	) {
 		return new WikibaseLanguageDependentLuaBindings(
@@ -53,37 +53,23 @@ class WikibaseLanguageDependentLuaBindingsTest extends PHPUnit_Framework_TestCas
 	}
 
 	/**
-	 * @return LabelDescriptionLookup
+	 * @return LanguageFallbackLabelDescriptionLookup
 	 */
 	private function getLabelDescriptionLookup() {
-		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
-		$labelDescriptionLookup->expects( $this->any() )
-			->method( 'getLabel' )
-			->will( $this->returnValue( new Term( 'lang-code', 'LabelString' ) ) );
-
-		$labelDescriptionLookup->expects( $this->any() )
-			->method( 'getDescription' )
-			->will( $this->returnValue( new Term( 'lang-code', 'DescriptionString' ) ) );
-
-		return $labelDescriptionLookup;
-	}
-
-	/**
-	 * @return LabelDescriptionLookup
-	 */
-	private function getLabelDescriptionLookupWithFallback() {
-		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
+		$labelDescriptionLookup = $this->getMockBuilder( LanguageFallbackLabelDescriptionLookup::class )
+			->disableOriginalConstructor()
+			->getMock();
 
 		$labelDescriptionLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->returnValue(
-				new TermFallback( 'ar', 'en-label-fallback', 'en', null )
+				new TermFallback( 'ar', 'LabelString', 'lang-code', null )
 			) );
 
 		$labelDescriptionLookup->expects( $this->any() )
 			->method( 'getDescription' )
 			->will( $this->returnValue(
-				new TermFallback( 'ar', 'en-desc-fallback', 'en', null )
+				new TermFallback( 'ar', 'DescriptionString', 'lang-code', null )
 			) );
 
 		return $labelDescriptionLookup;
@@ -114,17 +100,6 @@ class WikibaseLanguageDependentLuaBindingsTest extends PHPUnit_Framework_TestCas
 		);
 
 		$this->assertSame( $expected, $wikibaseLuaBindings->getLabel( $itemId ) );
-	}
-
-	public function testGetLabelWithFallback() {
-		$wikibaseLuaBindings = $this->getWikibaseLanguageDependentLuaBindings(
-			$this->getLabelDescriptionLookupWithFallback()
-		);
-
-		$this->assertSame(
-			[ 'en-label-fallback', 'en' ],
-			$wikibaseLuaBindings->getLabel( 'Q1234' )
-		);
 	}
 
 	public function testGetLabel_usage() {
@@ -169,17 +144,6 @@ class WikibaseLanguageDependentLuaBindingsTest extends PHPUnit_Framework_TestCas
 		);
 
 		$this->assertSame( $expected, $wikibaseLuaBindings->getDescription( $itemId ) );
-	}
-
-	public function testGetDescriptionWithFallback() {
-		$wikibaseLuaBindings = $this->getWikibaseLanguageDependentLuaBindings(
-			$this->getLabelDescriptionLookupWithFallback()
-		);
-
-		$this->assertSame(
-			[ 'en-desc-fallback', 'en' ],
-			$wikibaseLuaBindings->getDescription( 'Q1234' )
-		);
 	}
 
 	public function testGetDescription_usage() {
