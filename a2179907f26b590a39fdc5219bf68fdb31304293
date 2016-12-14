@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_590c4f3d",
+        "filename": "lib/includes/Store/Sql/PropertyInfoTable.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-14T18:50:51Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this method be also guarded against passing PropertyId from another repo? If there is a property with the same number part of id in two repositories, and for some weird reason you used the wrong lookup, you would get false data. I guess in such cases a big exception should be thrown.",
+      "revId": "a2179907f26b590a39fdc5219bf68fdb31304293",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
