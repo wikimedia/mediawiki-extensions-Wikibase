@@ -29,10 +29,8 @@ class UnitStorageTest extends MediaWikiTestCase {
 
 	/**
 	 * @dataProvider storageModels
-	 * @param $class
-	 * @param $args
 	 */
-	public function testStorage( $class, $args ) {
+	public function testStorage( $class, array $args ) {
 		$def = [ 'class' => $class, 'args' => $args ];
 		$storage = ObjectFactory::getObjectFromSpec( $def );
 		/**
@@ -57,12 +55,10 @@ class UnitStorageTest extends MediaWikiTestCase {
 
 	/**
 	 * @dataProvider storageModels
-	 * @param $class
-	 * @param $args
 	 * @expectedException RuntimeException
 	 * @expectedExceptionMessage Failed to load unit storage
 	 */
-	public function testBadStorage( $class, $args ) {
+	public function testBadStorage( $class, array $args ) {
 		$def = [ 'class' => $class, 'args' => [ 'nosuchfile' ] ];
 		$storage = ObjectFactory::getObjectFromSpec( $def );
 
