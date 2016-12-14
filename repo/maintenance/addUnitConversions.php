@@ -41,37 +41,45 @@ class AddUnitConversions extends Maintenance {
 	 * @var RdfWriter
 	 */
 	protected $rdfWriter;
+
 	/**
 	 * @var UnitConverter
 	 */
 	protected $unitConverter;
+
 	/**
 	 * @var SPARQLClient
 	 */
 	protected $client;
-	/***
+
+	/**
 	 * @var resource
 	 */
 	private $out;
+
 	/**
 	 * map of normalization predicates by full name
 	 * @var string[]
 	 */
 	private $normMap;
+
 	/**
 	 * Value URI prefix
 	 * @var string
 	 */
 	private $valueURI;
+
 	/**
 	 * Set of normalized namespace names.
 	 * @var bool[]
 	 */
 	private $normalizedNames;
+
 	/**
 	 * @var QuantityRdfBuilder
 	 */
 	protected $builder;
+
 	/**
 	 * @var boolean
 	 */
@@ -147,8 +155,9 @@ class AddUnitConversions extends Maintenance {
 
 	/**
 	 * Initialize RDF writer
+	 *
 	 * @param string $baseUri
-	 * @param        $format
+	 * @param string $format File extension or MIME type of the output format.
 	 */
 	public function initializeWriter( $baseUri, $format ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -176,6 +185,7 @@ class AddUnitConversions extends Maintenance {
 
 	/**
 	 * Generate all statements for a specific unit.
+	 *
 	 * @param string $unit Unit Q-id
 	 */
 	public function processUnit( $unit ) {
@@ -221,9 +231,11 @@ QUERY;
 
 	/**
 	 * Normalize unit and return the hash of the normalized node.
+	 *
 	 * @param string   $id Original value ID (hash)
 	 * @param string   $unit Short ID of the unit
 	 * @param string[] $value Value data array
+	 *
 	 * @return string Hash of the normalized node
 	 */
 	private function getNormalized( $id, $unit, array $value ) {
@@ -256,6 +268,7 @@ QUERY;
 	 * Will scan through the triples which use each of the values and
 	 * add appropriate normalized triple referring to the normalized value.
 	 * E.g. <s123> psv:P345 wdv:xys -> <s123> psn:P345 wdv:xyznorm
+	 *
 	 * @param string[] $values Value hashes
 	 * @param string[] $map Map old id -> normalized id
 	 */
@@ -323,8 +336,10 @@ QUERY;
 
 	/**
 	 * Get vocabulary instance
+	 *
 	 * @param string   $baseUri
 	 * @param string[] $typeUris
+	 *
 	 * @return RdfVocabulary
 	 */
 	private function createRdfVocabulary( $baseUri, $typeUris ) {
@@ -336,7 +351,8 @@ QUERY;
 	}
 
 	/**
-	 * @param string $format Writer format
+	 * @param string $format File extension or MIME type of the output format.
+	 *
 	 * @return RdfWriter
 	 */
 	private function createRdfWriter( $format ) {
