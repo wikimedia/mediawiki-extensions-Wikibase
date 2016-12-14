@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_edffc163",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 14
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-14T10:16:47Z",
+      "side": 1,
+      "message": "I would expect {{WBREPONAME}} to be mentioned here. Otherwise it\u0027s hard to understand to what \"properties\" refers to.\n\nIt\u0027s also hard to understand what \"not being resolved\" actually means? What went wrong? What can the user do to fix this issue?\n\nMaybe something like \"this category lists pages that reference {{WBREPONAME}} properties that can not be found neither by their property ID nor label\".",
+      "revId": "1298a38d2ff05140665e5e5a70368fc1e02c178e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
