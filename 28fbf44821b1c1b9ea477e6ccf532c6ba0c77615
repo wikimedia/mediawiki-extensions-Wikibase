@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_8ab02bda",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-12-14T02:36:11Z",
+      "side": 1,
+      "message": "Rebase issues. Fixed",
+      "parentUuid": "2edfb757_e9d2022c",
+      "revId": "28fbf44821b1c1b9ea477e6ccf532c6ba0c77615",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2edfb757_e999e281",
         "filename": "repo/maintenance/dispatchChanges.php",
         "patchSetId": 3
@@ -47,6 +65,24 @@
       "writtenOn": "2016-12-13T20:23:21Z",
       "side": 1,
       "message": "With this code, how do I get back the old behavior?",
+      "revId": "28fbf44821b1c1b9ea477e6ccf532c6ba0c77615",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_6ac61750",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-12-14T02:36:11Z",
+      "side": 1,
+      "message": "Hmm, I didn\u0027t think about it, let me get it done.",
+      "parentUuid": "2edfb757_e999e281",
       "revId": "28fbf44821b1c1b9ea477e6ccf532c6ba0c77615",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
