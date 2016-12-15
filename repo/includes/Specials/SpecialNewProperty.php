@@ -111,6 +111,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 		$formDescriptor['datatype'] = [
 			'name' => 'datatype',
 			'type' => 'select',
+			'default' => $this->dataType,
 			'options' => array_flip( $selector->getOptionsArray() ),
 			'id' => 'wb-newproperty-datatype',
 			'label-message' => 'wikibase-newproperty-datatype'
