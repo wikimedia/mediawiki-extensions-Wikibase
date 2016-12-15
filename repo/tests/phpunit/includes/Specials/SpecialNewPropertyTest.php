@@ -46,10 +46,6 @@ class SpecialNewPropertyTest extends SpecialNewEntityTest {
 	}
 
 	public function testLabelAndDescriptionAndDataTypeValuesAreSetAccordingToSubpagePath_WhenRendered() {
-		$this->markTestSkipped(
-			"Test fails due to the bug in code. Should be unskipped when bug is fixed"
-		);
-
 		$subPagePart1 = 'LabelText';
 		$subPagePart2 = 'DescriptionText';
 		$subPagePart3 = 'url';
@@ -70,18 +66,17 @@ class SpecialNewPropertyTest extends SpecialNewEntityTest {
 			'aliases' => '',
 			'datatype' => 'string',
 		];
-		$this->executeSpecialPage( '', new \FauxRequest($formData, true) );
+		$this->executeSpecialPage( '', new \FauxRequest( $formData, true ) );
 
-		list( $html ) = $this->executeSpecialPage( '', new \FauxRequest($formData, true) );
+		list( $html ) = $this->executeSpecialPage( '', new \FauxRequest( $formData, true ) );
 
 		$this->assertHtmlContainsErrorMessage( $html, "already has label" );
-
 	}
 
 	/**
 	 * @return array[][]
 	 */
-	public function validEntityCreationRequests() {
+	public function provideValidEntityCreationRequests() {
 		$labelIndex = 1;
 
 		return [
@@ -142,7 +137,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTest {
 			'all input is present' => [
 				[
 					'lang' => 'en',
-					'label' => 'label' . $labelIndex ++,
+					'label' => 'label' . $labelIndex,
 					'description' => 'desc',
 					'aliases' => 'a1|a2',
 					'datatype' => 'url',
@@ -156,7 +151,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTest {
 	 *
 	 * @return array[]
 	 */
-	public function invalidEntityCreationRequests() {
+	public function provideInvalidEntityCreationRequests() {
 		return [
 			'unknown language' => [
 				[
@@ -178,17 +173,16 @@ class SpecialNewPropertyTest extends SpecialNewEntityTest {
 				],
 				'Invalid data type specified',
 			],
-
-			//			'bad user token' => [  // TODO Probably should be implemented
-			//				[
-			//				],
-			//				'try again',
-			//			],
-			//			'all fields are empty' => [  // TODO Probably should be implemented
-			//				[
-			//				],
-			//				'???'
-			//			],
+//			'bad user token' => [  // TODO Probably should be implemented
+//				[
+//				],
+//				'try again',
+//			],
+//			'all fields are empty' => [  // TODO Probably should be implemented
+//				[
+//				],
+//				'???'
+//			],
 		];
 	}
 
@@ -236,4 +230,5 @@ class SpecialNewPropertyTest extends SpecialNewEntityTest {
 
 		$this->assertEquals( $form['datatype'], $entity->getDataTypeId() );
 	}
+
 }
