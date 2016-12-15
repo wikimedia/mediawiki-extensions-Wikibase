@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Specials;
 
 use FauxRequest;
 use RequestContext;
-use SpecialPageTestBase;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Specials\SpecialNewItem;
@@ -28,113 +28,201 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  * @author Addshore
  */
-class SpecialNewItemTest extends SpecialPageTestBase {
+class SpecialNewItemTest extends SpecialNewEntityTest {
 
 	protected function newSpecialPage() {
 		return new SpecialNewItem();
 	}
 
-	public function testExecute_creationForm() {
-		//TODO: Verify that more of the output is correct.
+	public function testAllNecessaryFormFieldsArePresent_WhenRendered() {
 
-		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [ 'createpage' => true ] ] );
+		list( $html ) = $this->executeSpecialPage();
 
-		$matchers['label'] = [
-			'tag' => 'div',
-			'attributes' => [
-				'id' => 'wb-newentity-label',
-			],
-			'child' => [
-				'tag' => 'input',
-				'attributes' => [
-					'name' => 'label',
-				]
-			] ];
-		$matchers['description'] = [
-			'tag' => 'div',
-			'attributes' => [
-				'id' => 'wb-newentity-description',
-			],
-			'child' => [
-				'tag' => 'input',
-				'attributes' => [
-					'name' => 'description',
-				]
-			] ];
-		$matchers['submit'] = [
-			'tag' => 'div',
-			'attributes' => [
-				'id' => 'wb-newentity-submit',
-			],
-			'child' => [
-				'tag' => 'button',
-				'attributes' => [
-					'type' => 'submit',
-					'name' => 'submit',
-				]
-			] ];
-
-		list( $output, ) = $this->executeSpecialPage( '' );
-		foreach ( $matchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
-		}
-
-		list( $output, ) = $this->executeSpecialPage( 'LabelText/DescriptionText' );
-		$matchers['label']['child'][0]['attributes']['value'] = 'LabelText';
-		$matchers['description']['child'][0]['attributes']['value'] = 'DescriptionText';
-
-		foreach ( $matchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
-		}
+		$this->assertHtmlContainsInputWithName( $html, 'lang' );
+		$this->assertHtmlContainsInputWithName( $html, 'label' );
+		$this->assertHtmlContainsInputWithName( $html, 'description' );
+		$this->assertHtmlContainsInputWithName( $html, 'aliases' );
+		$this->assertHtmlContainsSubmitControl( $html );
 	}
 
-	public function testExecute_itemCreation() {
-		$user = RequestContext::getMain()->getUser();
+	public function testSiteAndPageInputFieldsWithPredefinedValuesPresent_WhenRenderedWithGetParametersPassed() {
+		$getParameters = [
+			'site' => 'some-site',
+			'page' => 'some-page'
+		];
 
-		$this->setMwGlobals(
-			[
-				'wgGroupPermissions' =>
-				[ '*' => [
-					'createpage' => true,
-					'edit' => true
-				] ],
-				'wgArticlePath' => '/$1',
-				'wgServer' => 'much.data',
-			]
-		);
+		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $getParameters ) );
 
-		$label = 'SpecialNewItemTest label';
-		$description = 'SpecialNewItemTest description';
-		$request = new FauxRequest(
-			[
-				'lang' => 'en',
-				'label' => $label,
-				'description' => $description,
-				'aliases' => '',
-				'wpEditToken' => $user->getEditToken()
+		$this->assertHtmlContainsInputWithNameAndValue( $html, 'site', 'some-site' );
+		$this->assertHtmlContainsInputWithNameAndValue( $html, 'page', 'some-page' );
+	}
+
+	public function testLabelAndDescriptionValuesAreSetAccordingToSubpagePath_WhenRendered() {
+		$subPagePart1 = 'LabelText';
+		$subPagePart2 = 'DescriptionText';
+		$subPage = "{$subPagePart1}/{$subPagePart2}";
+
+		list( $html, ) = $this->executeSpecialPage( $subPage );
+
+		$this->assertHtmlContainsInputWithNameAndValue( $html, 'label', $subPagePart1 );
+		$this->assertHtmlContainsInputWithNameAndValue( $html, 'description', $subPagePart2 );
+	}
+
+	public function provideValidEntityCreationRequests() {
+		return [
+			'only label is set' => [
+				[
+					'lang' => 'en',
+					'label' => 'label',
+					'description' => '',
+					'aliases' => '',
+				],
 			],
-			true
-		);
+			'another language' => [
+				[
+					'lang' => 'fr',
+					'label' => 'label',
+					'description' => '',
+					'aliases' => '',
+				],
+			],
+			'only description is set' => [
+				[
+					'lang' => 'en',
+					'label' => '',
+					'description' => 'desc',
+					'aliases' => '',
+				],
+			],
+			'single alias' => [
+				[
+					'lang' => 'en',
+					'label' => '',
+					'description' => '',
+					'aliases' => 'alias',
+				],
+			],
+			'multiple aliases' => [
+				[
+					'lang' => 'en',
+					'label' => '',
+					'description' => '',
+					'aliases' => 'alias1|alias2|alias3',
+				],
+			],
+			'all input is present' => [
+				[
+					'lang' => 'en',
+					'label' => 'label',
+					'description' => 'desc',
+					'aliases' => 'a1|a2',
+				],
+			],
+		];
+	}
 
-		list( $output, $webResponse ) = $this->executeSpecialPage( '', $request );
-		$this->assertSame( '', $output );
+	public function provideInvalidEntityCreationRequests() {
+		return [
+			'unknown language' => [
+				[
+					'lang' => 'some-wierd-language',
+					'label' => 'label',
+					'description' => '',
+					'aliases' => '',
+				],
+				'language code was not recognized',
+			],
+			'unknown site identifier' => [
+				[
+					'lang' => 'en',
+					'label' => 'label',
+					'description' => '',
+					'aliases' => '',
+					'site' => 'unknown',
+					'page' => 'some page'
+				],
+				'site identifier was not recognized',
+			],
+			//Property - uniq: label(in language)
 
-		$itemUrl = $webResponse->getHeader( 'location' );
-		$itemIdSerialization = preg_replace( '@much\.data/(.*:)?(Q\d+)@', '$2', $itemUrl );
+			//			'bad user token' => [  // TODO Probably should be implemented
+			//				[
+			//					'lang' => 'en',
+			//					'label' => 'label',
+			//					'description' => '',
+			//					'aliases' => '',
+			//					'wpEditToken' => 'some bad token'
+			//				],
+			//				'try again',
+			//			],
+			//			'all fields are empty' => [  // TODO Probably should be implemented
+			//				[
+			//					'lang' => 'en',
+			//					'label' => '',
+			//					'description' => '',
+			//					'aliases' => '',
+			//				],
+			//				'???'
+			//			],
+		];
+	}
+
+	public function testErrorBeingDisplayed_WhenItemWithTheSameLabelAndDescriptionInThisLanguageAlreadyExists() {
+		if ( $this->db->getType() === 'mysql' ) {
+			$this->markTestSkipped( 'MySQL doesn\'t support self-joins on temporary tables' );
+		}
+
+		$formData = [
+			'lang' => 'en',
+			'label' => 'label1',
+			'description' => 'description1',
+			'aliases' => '',
+		];
+		$this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
+
+		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
+
+		$this->assertHtmlContainsErrorMessage( $html, 'already has label' );
+	}
+
+	/**
+	 * @param $itemUrl
+	 * @return ItemId
+	 */
+	protected function extractEntityIdFromUrl( $itemUrl ) {
+		$itemIdSerialization = preg_replace( '@^.*(Q\d+)$@', '$1', $itemUrl );
 		$itemId = new ItemId( $itemIdSerialization );
 
-		/* @var $item Item */
-		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $itemId );
-		$this->assertInstanceOf( Item::class, $item );
+		return $itemId;
+	}
 
-		$this->assertSame(
-			$label,
-			$item->getLabels()->getByLanguage( 'en' )->getText()
-		);
-		$this->assertSame(
-			$description,
-			$item->getDescriptions()->getByLanguage( 'en' )->getText()
-		);
+	/**
+	 * @param array $form
+	 * @param EntityDocument $entity
+	 */
+	protected function assertEntityMatchesFormData( array $form, EntityDocument $entity ) {
+		$this->assertInstanceOf( Item::class, $entity );
+		/** @var Item $entity */
+
+		$language = $form['lang'];
+		if ( $form['label'] !== '' ) {
+			$this->assertSame(
+				$form['label'],
+				$entity->getLabels()->getByLanguage( $language )->getText()
+			);
+		}
+		if ( $form['description'] !== '' ) {
+			$this->assertSame(
+				$form['description'],
+				$entity->getDescriptions()->getByLanguage( $language )->getText()
+			);
+		}
+		if ( $form['aliases'] !== '' ) {
+			$this->assertArrayEquals(
+				explode( '|', $form['aliases'] ),
+				$entity->getAliasGroups()->getByLanguage( $language )->getAliases()
+			);
+		}
 	}
 
 }
