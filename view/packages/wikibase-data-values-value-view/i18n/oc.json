@@ -8,6 +8,7 @@
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "La manipulacion de las valors de donadas « $1 » es pas encara suportada.",
 	"valueview-expert-emptyvalue-empty": "void",
 	"valueview-expert-globecoordinateinput-precision": "Precision :",
+	"valueview-expert-globecoordinateinput-nullprecision": "pas especificat",
 	"valueview-expert-globecoordinateinput-customprecision": "especial ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregorian",
 	"valueview-expert-timevalue-calendar-julian": "Julian",
