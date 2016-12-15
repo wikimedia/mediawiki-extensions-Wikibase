@@ -1,9 +1,10 @@
 <?php
 
-namespace Wikibase\Test\Repo\Api;
+namespace Wikibase\Repo\Tests\Api;
 
 use UsageException;
 use Wikibase\Test\PermissionsHelper;
+use Wikibase\Test\Repo\Api\WikibaseApiTestCase;
 
 /**
  * Base class for permissions tests

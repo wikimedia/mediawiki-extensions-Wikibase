@@ -1,10 +1,9 @@
 <?php
 
-namespace Wikibase\Test\Repo\Api;
+namespace Wikibase\Repo\Tests\Api;
 
 use ApiTestCase;
 use DataValues\DataValue;
-use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use ApiUsageException;
