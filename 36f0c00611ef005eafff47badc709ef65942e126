@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e0e73b5_9b96314e",
+        "filename": "repo/includes/Specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T18:51:53Z",
+      "side": 1,
+      "message": "it\u0027s a list, so it should be called $types.",
+      "revId": "36f0c00611ef005eafff47badc709ef65942e126",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_7bcc9d8c",
+        "filename": "repo/includes/Specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T18:51:53Z",
+      "side": 1,
+      "message": "long line :(",
+      "revId": "36f0c00611ef005eafff47badc709ef65942e126",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_3b8ce539",
+        "filename": "repo/includes/Store/EntitiesWithoutTermFinder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T18:51:53Z",
+      "side": 1,
+      "message": "Why is the interface restricted to these kinds of entities?",
+      "revId": "36f0c00611ef005eafff47badc709ef65942e126",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cea0dbb8_a67572ca",
         "filename": "repo/includes/Store/Sql/SqlEntitiesWithoutTermFinder.php",
         "patchSetId": 2
