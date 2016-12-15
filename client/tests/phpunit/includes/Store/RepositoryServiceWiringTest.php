@@ -6,6 +6,7 @@ use DataValues\Deserializers\DataValueDeserializer;
 use Wikibase\Client\Store\RepositoryServiceContainer;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParser;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -38,6 +39,7 @@ class RepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideServices() {
 		return [
+			[ 'EntityPrefetcher', EntityPrefetcher::class ],
 			[ 'EntityRevisionLookup', EntityRevisionLookup::class ],
 			[ 'PropertyInfoLookup', PropertyInfoLookup::class ],
 			[ 'TermIndex', TermIndex::class ],
@@ -59,7 +61,7 @@ class RepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 		$container = $this->getRepositoryServiceContainer();
 
 		$this->assertEquals(
-			[ 'EntityRevisionLookup', 'PropertyInfoLookup', 'TermIndex' ],
+			[ 'EntityPrefetcher', 'EntityRevisionLookup', 'PropertyInfoLookup', 'TermIndex' ],
 			$container->getServiceNames()
 		);
 	}

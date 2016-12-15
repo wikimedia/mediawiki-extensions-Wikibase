@@ -16,6 +16,19 @@ use Wikibase\TermSqlIndex;
 
 return [
 
+	'EntityPrefetcher' => function(
+		RepositoryServiceContainer $services,
+		WikibaseClient $client
+	) {
+		return new PrefetchingWikiPageEntityMetaDataAccessor(
+			new WikiPageEntityMetaDataLookup(
+				$client->getEntityNamespaceLookup(),
+				$services->getDatabaseName(),
+				$services->getRepositoryName()
+			)
+		);
+	},
+
 	'EntityRevisionLookup' => function(
 		RepositoryServiceContainer $services,
 		WikibaseClient $client
@@ -27,17 +40,12 @@ return [
 			$client->getSettings()->getSetting( 'maxSerializedEntitySize' ) * 1024
 		);
 
-		$metaDataLookup = new PrefetchingWikiPageEntityMetaDataAccessor(
-			new WikiPageEntityMetaDataLookup(
-				$client->getEntityNamespaceLookup(),
-				$services->getDatabaseName(),
-				$services->getRepositoryName()
-			)
-		);
+		/** @var PrefetchingWikiPageEntityMetaDataAccessor $metaDataAccessor */
+		$metaDataAccessor = $services->getService( 'EntityPrefetcher' );
 
 		return new WikiPageEntityRevisionLookup(
 			$codec,
-			$metaDataLookup,
+			$metaDataAccessor,
 			$services->getDatabaseName()
 		);
 	},

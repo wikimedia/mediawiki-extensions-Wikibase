@@ -4,11 +4,16 @@ namespace Wikibase\Client;
 
 use MediaWiki\Services\ServiceContainer;
 use Wikibase\Client\Store\RepositoryServiceContainer;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Term\TermBuffer;
+use Wikibase\EntityRevision;
 use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\SettingsArray;
 
 /**
@@ -20,7 +25,7 @@ use Wikibase\SettingsArray;
  *
  * @license GPL-2.0+
  */
-class DispatchingServiceFactory extends ServiceContainer {
+class DispatchingServiceFactory extends ServiceContainer implements DataRetrievalServiceFactory, EntityStoreWatcher {
 
 	/**
 	 * @var RepositoryServiceContainer[]
@@ -117,6 +122,52 @@ class DispatchingServiceFactory extends ServiceContainer {
 				$serviceMap[$repositoryName] = $container->getService( $service );
 		}
 		return $serviceMap;
+	}
+
+	/**
+	 * @see EntityStoreWatcher::entityUpdated
+	 *
+	 * @param EntityRevision $entityRevision
+	 */
+	public function entityUpdated( EntityRevision $entityRevision ) {
+		/** @var PrefetchingWikiPageEntityMetaDataAccessor[] $entityPrefetchers */
+		$entityPrefetchers = $this->getServiceMap( 'EntityPrefetcher' );
+
+		$repositoryName = $entityRevision->getEntity()->getId()->getRepositoryName();
+		if ( isset( $entityPrefetchers[$repositoryName] ) ) {
+			$entityPrefetchers[$repositoryName]->entityUpdated( $entityRevision );
+		}
+	}
+
+	/**
+	 * @see EntityStoreWatcher::entityDeleted
+	 *
+	 * @param EntityId $entityId
+	 */
+	public function entityDeleted( EntityId $entityId ) {
+		/** @var PrefetchingWikiPageEntityMetaDataAccessor[] $entityPrefetchers */
+		$entityPrefetchers = $this->getServiceMap( 'EntityPrefetcher' );
+
+		$repositoryName = $entityId->getRepositoryName();
+		if ( isset( $entityPrefetchers[$repositoryName] ) ) {
+			$entityPrefetchers[$repositoryName]->entityDeleted( $entityId );
+		}
+	}
+
+	/**
+	 * @see EntityStoreWatcher::redirectUpdated
+	 *
+	 * @param EntityRedirect $entityRedirect
+	 * @param int $revisionId
+	 */
+	public function redirectUpdated( EntityRedirect $entityRedirect, $revisionId ) {
+		/** @var PrefetchingWikiPageEntityMetaDataAccessor[] $entityPrefetchers */
+		$entityPrefetchers = $this->getServiceMap( 'EntityPrefetcher' );
+
+		$repositoryName = $entityRedirect->getEntityId()->getRepositoryName();
+		if ( isset( $entityPrefetchers[$repositoryName] ) ) {
+			$entityPrefetchers[$repositoryName]->redirectUpdated( $entityRedirect, $revisionId );
+		}
 	}
 
 	/**
