@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_3b074821",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-12-15T15:25:47Z",
+      "side": 1,
+      "message": "IMO it would be great to have a description for this class in the docs.\nWhat is it doing? Why is it here? Why is it needed?",
+      "range": {
+        "startLine": 16,
+        "startChar": 6,
+        "endLine": 16,
+        "endChar": 31
+      },
+      "revId": "60c53c1244f409141e2cc54aadf77b5490c2297f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
