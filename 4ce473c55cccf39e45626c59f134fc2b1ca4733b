@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_6533dd0b",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T12:37:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2edfb757_290b6adb",
+      "revId": "4ce473c55cccf39e45626c59f134fc2b1ca4733b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2edfb757_4906b6d2",
         "filename": "client/includes/DispatchingServiceFactory.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2016-12-13T20:08:02Z",
       "side": 1,
       "message": "$repositoryNames could be a private variable in initRepositoryServiceContainers(). If needed laterm just use the keys of $this-\u003erepositoryServiceContainers",
+      "revId": "4ce473c55cccf39e45626c59f134fc2b1ca4733b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_4530d9fc",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T12:37:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2edfb757_4906b6d2",
       "revId": "4ce473c55cccf39e45626c59f134fc2b1ca4733b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_0521c1ac",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T12:37:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2edfb757_a9ff5aa6",
+      "revId": "4ce473c55cccf39e45626c59f134fc2b1ca4733b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2edfb757_c9f2a6df",
         "filename": "client/includes/DispatchingServiceFactory.php",
         "patchSetId": 6
@@ -64,6 +118,24 @@
       "writtenOn": "2016-12-13T20:08:02Z",
       "side": 1,
       "message": "Why not just\n\n  foreach ( $this-\u003erepositoryServiceContainers as $repositoryName \u003d\u003e $container )",
+      "revId": "4ce473c55cccf39e45626c59f134fc2b1ca4733b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_850db143",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T12:37:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2edfb757_c9f2a6df",
       "revId": "4ce473c55cccf39e45626c59f134fc2b1ca4733b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_e0045b19",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T12:37:03Z",
+      "side": 1,
+      "message": "right, it couldn\u0027t. Removed.",
+      "parentUuid": "2edfb757_0910ae03",
+      "revId": "4ce473c55cccf39e45626c59f134fc2b1ca4733b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2edfb757_e9f562c8",
         "filename": "client/includes/DispatchingServiceFactory.php",
         "patchSetId": 6
@@ -98,6 +188,30 @@
       "writtenOn": "2016-12-13T20:08:02Z",
       "side": 1,
       "message": "long line, please wrap",
+      "range": {
+        "startLine": 71,
+        "startChar": 35,
+        "endLine": 71,
+        "endChar": 69
+      },
+      "revId": "4ce473c55cccf39e45626c59f134fc2b1ca4733b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_650abd2b",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T12:37:03Z",
+      "side": 1,
+      "message": "Done thanks to smarter loop",
+      "parentUuid": "2edfb757_e9f562c8",
       "range": {
         "startLine": 71,
         "startChar": 35,
@@ -138,6 +252,24 @@
       "writtenOn": "2016-12-13T20:08:02Z",
       "side": 1,
       "message": "This is another reason not to pass the wiring file to the constructor: you could register mock instantiators, and not use the wiring file for the test at all.",
+      "revId": "4ce473c55cccf39e45626c59f134fc2b1ca4733b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_a529d59c",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T12:37:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2edfb757_09278e60",
       "revId": "4ce473c55cccf39e45626c59f134fc2b1ca4733b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
