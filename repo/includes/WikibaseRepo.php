@@ -31,6 +31,7 @@ use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
+use Wikibase\Client\DispatchingServiceFactory;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -85,6 +86,7 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\UnionContentLanguages;
 use Wikibase\Lib\UnitConverter;
@@ -275,6 +277,11 @@ class WikibaseRepo {
 	 * @var CachingCommonsMediaFileNameLookup|null
 	 */
 	private $cachingCommonsMediaFileNameLookup = null;
+
+	/**
+	 * @var DispatchingServiceFactory|null
+	 */
+	private $dispatchingServiceFactory = null;
 
 	/**
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
@@ -470,12 +477,14 @@ class WikibaseRepo {
 		SettingsArray $settings,
 		DataTypeDefinitions $dataTypeDefinitions,
 		EntityTypeDefinitions $entityTypeDefinitions,
-		Language $defaultLanguage = null
+		Language $defaultLanguage = null,
+		DispatchingServiceFactory $dispatchingServiceFactory = null
 	) {
 		$this->settings = $settings;
 		$this->dataTypeDefinitions = $dataTypeDefinitions;
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
 		$this->defaultLanguage = $defaultLanguage;
+		$this->dispatchingServiceFactory = $dispatchingServiceFactory;
 	}
 
 	/**
@@ -873,7 +882,8 @@ class WikibaseRepo {
 				$this->getEntityIdComposer(),
 				$this->getEntityIdLookup(),
 				$this->getEntityTitleLookup(),
-				$this->getEntityNamespaceLookup()
+				$this->getEntityNamespaceLookup(),
+				$this->dispatchingServiceFactory
 			);
 		}
 
@@ -913,13 +923,23 @@ class WikibaseRepo {
 	 */
 	public function getBufferingTermLookup() {
 		if ( !$this->termLookup ) {
-			$this->termLookup = new BufferingTermLookup(
-				$this->getStore()->getTermIndex(),
-				1000 // @todo: configure buffer size
-			);
+			$this->termLookup = $this->newPrefetchingTermLookup();
 		}
 
 		return $this->termLookup;
+	}
+
+	/**
+	 * @return PrefetchingTermLookup
+	 */
+	private function newPrefetchingTermLookup() {
+		if ( $this->dispatchingServiceFactory !== null ) {
+			return $this->dispatchingServiceFactory->getTermBuffer();
+		}
+		return new BufferingTermLookup(
+			$this->getStore()->getTermIndex(),
+			1000 // @todo: configure buffer size
+		);
 	}
 
 	/**

@@ -19,9 +19,6 @@ return [
 		RepositoryServiceContainer $services,
 		WikibaseClient $client
 	) {
-		//$entityRevisionLookupFactory = $client->getEntityRevisionLookupFactory();
-		//return $entityRevisionLookupFactory->getLookup( $services->getRepositoryName() );
-
 		$codec = new EntityContentDataCodec(
 			$services->getEntityIdParser(),
 			new ForbiddenSerializer( 'Entity serialization is not supported on the client!' ),

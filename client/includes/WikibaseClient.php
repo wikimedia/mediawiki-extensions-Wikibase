@@ -394,7 +394,7 @@ final class WikibaseClient {
 	/**
 	 * @return DispatchingServiceFactory
 	 */
-	private function getDispatchingServiceFactory() {
+	public function getDispatchingServiceFactory() {
 		if ( $this->dispatchingServiceFactory === null ) {
 			$factory = new DispatchingServiceFactory( $this );
 			$factory->loadWiringFiles( $this->settings->getSetting( 'dispatchingServiceWiringFiles' ) );
