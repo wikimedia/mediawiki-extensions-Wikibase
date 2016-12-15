@@ -2,6 +2,9 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
+/**
+ * @license GPL-2.0+
+ */
 trait HtmlAssertionHelpers {
 
 	/**
@@ -63,6 +66,7 @@ trait HtmlAssertionHelpers {
 	/**
 	 * @param string $html
 	 * @param string $name
+	 * @param string $value
 	 */
 	protected function assertHtmlContainsSelectWithNameAndSelectedValue( $html, $name, $value ) {
 		$matcher = [
@@ -88,7 +92,6 @@ trait HtmlAssertionHelpers {
 
 	/**
 	 * @param string $html
-	 * @param string $name
 	 */
 	protected function assertHtmlContainsSubmitControl( $html ) {
 		$matchers = [
@@ -111,8 +114,7 @@ trait HtmlAssertionHelpers {
 				$this->assertTag( $matcher, $html, "Failed to find submit element" );
 
 				return;
-			}
-			catch ( \PHPUnit_Framework_ExpectationFailedException $exception ) {
+			} catch ( \PHPUnit_Framework_ExpectationFailedException $exception ) {
 				continue;
 			}
 		}
@@ -133,7 +135,22 @@ trait HtmlAssertionHelpers {
 		);
 	}
 
-	abstract protected function assertTag($matcher, $actual, $message = '', $isHtml = true);
+	/**
+	 * @param array $matcher Associative array of structure required by $options argument
+	 * 				of {@see \PHPUnit_Util_XML::findNodes}
+	 * @param string $htmlOrXml
+	 * @param string $message
+	 * @param bool $isHtml
+	 *
+	 *  @see \MediaWikiTestCase::assertTag
+	 */
+	abstract protected function assertTag( $matcher, $htmlOrXml, $message = '', $isHtml = true );
 
-	abstract public function fail($message = '');
+	/**
+	 * @param string $message
+	 *
+	 * @see \PHPUnit_Framework_Assert::fail
+	 */
+	abstract public function fail( $message = '' );
+
 }

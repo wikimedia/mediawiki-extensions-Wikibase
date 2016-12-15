@@ -9,11 +9,15 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\WikibaseRepo;
 
+/**
+ * @license GPL-2.0+
+ */
 abstract class SpecialNewEntityTest extends SpecialPageTestBase {
 
 	use HtmlAssertionHelpers;
+
 	/**
-	 * @dataProvider validEntityCreationRequests
+	 * @dataProvider provideValidEntityCreationRequests
 	 */
 	public function testEntityIsBeingCreated_WhenValidInputIsGiven( array $formData ) {
 		$formData['wpEditToken'] = RequestContext::getMain()->getUser()->getEditToken();
@@ -34,7 +38,7 @@ abstract class SpecialNewEntityTest extends SpecialPageTestBase {
 	 *
 	 * @return array[][]
 	 */
-	abstract public function validEntityCreationRequests();
+	abstract public function provideValidEntityCreationRequests();
 
 	/**
 	 * @param string $url
@@ -51,7 +55,7 @@ abstract class SpecialNewEntityTest extends SpecialPageTestBase {
 	abstract protected function assertEntityMatchesFormData( array $form, EntityDocument $entity );
 
 	/**
-	 * @dataProvider invalidEntityCreationRequests
+	 * @dataProvider provideInvalidEntityCreationRequests
 	 * @param array $formData
 	 * @param string $errorMessageText
 	 */
@@ -73,6 +77,6 @@ abstract class SpecialNewEntityTest extends SpecialPageTestBase {
 	 *
 	 * @return array[]
 	 */
-	abstract public function invalidEntityCreationRequests();
+	abstract public function provideInvalidEntityCreationRequests();
 
 }

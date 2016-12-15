@@ -51,7 +51,7 @@ class SpecialNewItemTest extends SpecialNewEntityTest {
 			'page' => 'some-page'
 		];
 
-		list( $html ) = $this->executeSpecialPage( '' , new FauxRequest( $getParameters ));
+		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $getParameters ) );
 
 		$this->assertHtmlContainsInputWithNameAndValue( $html, 'site', 'some-site' );
 		$this->assertHtmlContainsInputWithNameAndValue( $html, 'page', 'some-page' );
@@ -68,7 +68,7 @@ class SpecialNewItemTest extends SpecialNewEntityTest {
 		$this->assertHtmlContainsInputWithNameAndValue( $html, 'description', $subPagePart2 );
 	}
 
-	public function validEntityCreationRequests() {
+	public function provideValidEntityCreationRequests() {
 		return [
 			'only label is set' => [
 				[
@@ -121,9 +121,7 @@ class SpecialNewItemTest extends SpecialNewEntityTest {
 		];
 	}
 
-
-
-	public function invalidEntityCreationRequests() {
+	public function provideInvalidEntityCreationRequests() {
 		return [
 			'unknown language' => [
 				[
@@ -180,7 +178,7 @@ class SpecialNewItemTest extends SpecialNewEntityTest {
 			'description' => 'description1',
 			'aliases' => '',
 		];
-		$this->executeSpecialPage( '',  new FauxRequest( $formData, true ));
+		$this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
 
 		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
 
