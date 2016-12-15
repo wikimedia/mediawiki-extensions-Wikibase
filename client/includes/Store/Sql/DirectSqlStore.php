@@ -7,6 +7,7 @@ use ObjectCache;
 use Wikibase\Client\DispatchingServiceFactory;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
+use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Store\UsageUpdater;
