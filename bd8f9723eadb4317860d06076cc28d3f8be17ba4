@@ -16,6 +16,24 @@
       "revId": "bd8f9723eadb4317860d06076cc28d3f8be17ba4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_856ed128",
+        "filename": "lib/includes/Store/Sql/PropertyInfoTable.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-12-15T11:48:40Z",
+      "side": 1,
+      "message": "Good point, will do that!",
+      "parentUuid": "0e0e73b5_c514c9a2",
+      "revId": "bd8f9723eadb4317860d06076cc28d3f8be17ba4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
