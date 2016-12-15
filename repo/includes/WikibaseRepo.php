@@ -31,6 +31,8 @@ use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
+use Wikibase\Client\EntityDataRetrievalServiceFactory;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -85,6 +87,7 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\UnionContentLanguages;
 use Wikibase\Lib\UnitConverter;
@@ -258,11 +261,6 @@ class WikibaseRepo {
 	private $entityTypeDefinitions;
 
 	/**
-	 * @var Language
-	 */
-	private $defaultLanguage;
-
-	/**
 	 * @var ValueSnakRdfBuilderFactory
 	 */
 	private $valueSnakRdfBuilderFactory;
@@ -278,13 +276,23 @@ class WikibaseRepo {
 	private $cachingCommonsMediaFileNameLookup = null;
 
 	/**
+	 * @var EntityDataRetrievalServiceFactory|null
+	 */
+	private $entityDataRetrievalServiceFactory = null;
+
+	/**
+	 * @var SettingsArray|null
+	 */
+	private $clientSettings = null;
+
+	/**
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
 	 * @throws MWException
 	 * @return self
 	 */
 	private static function newInstance() {
-		global $wgWBRepoDataTypes, $wgWBRepoEntityTypes, $wgWBRepoSettings, $wgContLang;
+		global $wgWBRepoDataTypes, $wgWBRepoEntityTypes, $wgWBRepoSettings;
 
 		if ( !is_array( $wgWBRepoDataTypes ) || !is_array( $wgWBRepoEntityTypes ) ) {
 			throw new MWException( '$wgWBRepoDataTypes and $wgWBRepoEntityTypes must be arrays. '
@@ -299,6 +307,15 @@ class WikibaseRepo {
 
 		$settings = new SettingsArray( $wgWBRepoSettings );
 
+		$dataRetrievalServices = null;
+		$clientSettings = null;
+
+		// If client functionality is enabled, use it to enable federation.
+		if ( defined( 'WBC_VERSION' ) ) {
+			$dataRetrievalServices = WikibaseClient::getDefaultInstance()->getEntityDataRetrievalServiceFactory();
+			$clientSettings = WikibaseClient::getDefaultInstance()->getSettings();
+		}
+
 		return new self(
 			$settings,
 			new DataTypeDefinitions(
@@ -306,7 +323,8 @@ class WikibaseRepo {
 				$settings->getSetting( 'disabledDataTypes' )
 			),
 			new EntityTypeDefinitions( $entityTypeDefinitions ),
-			$wgContLang
+			$dataRetrievalServices,
+			$clientSettings
 		);
 	}
 
@@ -398,7 +416,7 @@ class WikibaseRepo {
 	 */
 	private function newWikibaseValueFormatterBuilders() {
 		return new WikibaseValueFormatterBuilders(
-			$this->getDefaultLanguage(),
+			$this->getContentLanguage(),
 			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
 			$this->getLanguageNameLookup(),
 			$this->getLocalItemUriParser(),
@@ -410,8 +428,7 @@ class WikibaseRepo {
 	 * @return LanguageNameLookup
 	 */
 	public function getLanguageNameLookup() {
-		global $wgLang;
-		return new LanguageNameLookup( $wgLang->getCode() );
+		return new LanguageNameLookup( $this->getUserLanguage()->getCode() );
 	}
 
 	/**
@@ -452,29 +469,67 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * FIXME: Optional $entityDataRetrievalServiceFactory and $clientSettings make it possible to access
+	 * entities from foreign repositories from Repo component but they also introduce the optional
+	 * dependency on the Client component. Such dependency is bad and in the long run it should be removed
+	 * by making EntityDataRetrievalServiceFactory implementation provided to WikibaseRepo not be
+	 * bound to WikibaseClient. Foreign repository settings should also moved out of Client's settings,
+	 * so WikibaseRepo could be aware of entity types introduced in foreign repositories without needing
+	 * to rely on $clientSettings.
+	 *
 	 * @param SettingsArray $settings
 	 * @param DataTypeDefinitions $dataTypeDefinitions
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
-	 * @param Language|null $defaultLanguage
+	 * @param EntityDataRetrievalServiceFactory|null $entityDataRetrievalServiceFactory optional factory
+	 *        of entity data retrieval services that will be used by the Repo instead of it creating
+	 *        instances of those services itself.
+	 *        This factory could be provided in order to allow Repo make use of Dispatching services
+	 *        and access data of entities from foreign repositories.
+	 * @param SettingsArray|null $clientSettings Settings of WikibaseClient related
+	 *        to the $entityDataRetrievalServiceFactory. Should be provided when
+	 *        foreign repositories configured in the WikibaseClient instance introduce custom
+	 *        entity types.
 	 */
 	public function __construct(
 		SettingsArray $settings,
 		DataTypeDefinitions $dataTypeDefinitions,
 		EntityTypeDefinitions $entityTypeDefinitions,
-		Language $defaultLanguage = null
+		EntityDataRetrievalServiceFactory $entityDataRetrievalServiceFactory = null,
+		SettingsArray $clientSettings = null
 	) {
 		$this->settings = $settings;
 		$this->dataTypeDefinitions = $dataTypeDefinitions;
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
-		$this->defaultLanguage = $defaultLanguage;
+		$this->entityDataRetrievalServiceFactory = $entityDataRetrievalServiceFactory;
+		$this->clientSettings = $clientSettings;
 	}
 
 	/**
 	 * @return Language
 	 */
-	private function getDefaultLanguage() {
+	private function getContentLanguage() {
 		global $wgContLang;
-		return $this->defaultLanguage ?: $wgContLang;
+
+		// TODO: define a LanguageProvider service instead of using a global directly.
+		// NOTE: we cannot inject $wgContLang in the constructor, because it may still be null
+		// when WikibaseRepo is initialized. In particular, the language object may not yet
+		// be there when the SetupAfterCache hook is run during bootstrapping.
+		StubObject::unstub( $wgContLang );
+		return $wgContLang;
+	}
+
+	/**
+	 * @return Language
+	 */
+	private function getUserLanguage() {
+		global $wgLang;
+
+		// TODO: define a LanguageProvider service instead of using a global directly.
+		// NOTE: we cannot inject $wgLang in the constructor, because it may still be null
+		// when WikibaseRepo is initialized. In particular, the language object may not yet
+		// be there when the SetupAfterCache hook is run during bootstrapping.
+		StubObject::unstub( $wgLang );
+		return $wgLang;
 	}
 
 	/**
@@ -635,7 +690,7 @@ class WikibaseRepo {
 		return new TermIndexSearchInteractor(
 			$this->getStore()->getTermIndex(),
 			$this->getLanguageFallbackChainFactory(),
-			$this->getBufferingTermLookup(),
+			$this->getPrefetchingTermLookup(),
 			$displayLanguageCode
 		);
 	}
@@ -809,7 +864,8 @@ class WikibaseRepo {
 				$this->getEntityIdComposer(),
 				$this->getEntityIdLookup(),
 				$this->getEntityTitleLookup(),
-				$this->getEntityNamespaceLookup()
+				$this->getEntityNamespaceLookup(),
+				$this->entityDataRetrievalServiceFactory
 			);
 		}
 
@@ -834,28 +890,38 @@ class WikibaseRepo {
 	 * @return TermBuffer
 	 */
 	public function getTermBuffer() {
-		return $this->getBufferingTermLookup();
+		return $this->getPrefetchingTermLookup();
 	}
 
 	/**
 	 * @return TermLookup
 	 */
 	public function getTermLookup() {
-		return $this->getBufferingTermLookup();
+		return $this->getPrefetchingTermLookup();
 	}
 
 	/**
-	 * @return BufferingTermLookup
+	 * @return PrefetchingTermLookup
 	 */
-	public function getBufferingTermLookup() {
+	public function getPrefetchingTermLookup() {
 		if ( !$this->termLookup ) {
-			$this->termLookup = new BufferingTermLookup(
-				$this->getStore()->getTermIndex(),
-				1000 // @todo: configure buffer size
-			);
+			$this->termLookup = $this->newPrefetchingTermLookup();
 		}
 
 		return $this->termLookup;
+	}
+
+	/**
+	 * @return PrefetchingTermLookup
+	 */
+	private function newPrefetchingTermLookup() {
+		if ( $this->entityDataRetrievalServiceFactory !== null ) {
+			return $this->entityDataRetrievalServiceFactory->getTermBuffer();
+		}
+		return new BufferingTermLookup(
+			$this->getStore()->getTermIndex(),
+			1000 // @todo: configure buffer size
+		);
 	}
 
 	/**
@@ -911,7 +977,7 @@ class WikibaseRepo {
 	protected function newValueFormatterFactory() {
 		return new OutputFormatValueFormatterFactory(
 			$this->dataTypeDefinitions->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ),
-			$this->getDefaultLanguage(),
+			$this->getContentLanguage(),
 			new LanguageFallbackChainFactory()
 		);
 	}
@@ -1000,8 +1066,6 @@ class WikibaseRepo {
 	 * @return SummaryFormatter
 	 */
 	protected function newSummaryFormatter() {
-		global $wgContLang;
-
 		// This needs to use an EntityIdPlainLinkFormatter as we want to mangle
 		// the links created in LinkBeginHookHandler afterwards (the links must not
 		// contain a display text: [[Item:Q1]] is fine but [[Item:Q1|Q1]] isn't).
@@ -1046,7 +1110,7 @@ class WikibaseRepo {
 			$idFormatter,
 			$valueFormatter,
 			$snakFormatter,
-			$wgContLang,
+			$this->getContentLanguage(),
 			$this->getEntityIdParser()
 		);
 
@@ -1120,9 +1184,6 @@ class WikibaseRepo {
 	 * @return ValueFormatter
 	 */
 	protected function getMessageParameterFormatter() {
-		global $wgLang;
-		StubObject::unstub( $wgLang );
-
 		$formatterOptions = new FormatterOptions();
 		$valueFormatterFactory = $this->getValueFormatterFactory();
 
@@ -1130,7 +1191,7 @@ class WikibaseRepo {
 			$valueFormatterFactory->getValueFormatter( SnakFormatter::FORMAT_WIKI, $formatterOptions ),
 			new EntityIdLinkFormatter( $this->getEntityTitleLookup() ),
 			$this->getSiteLookup(),
-			$wgLang
+			$this->getUserLanguage()
 		);
 	}
 
@@ -1174,19 +1235,29 @@ class WikibaseRepo {
 	/**
 	 * @return string[] List of entity type identifiers (typically "item" and "property")
 	 *  that are configured in WikibaseRepo.entitytypes.php and enabled via the
-	 *  $wgWBRepoSettings['entityNamespaces'] setting.
+	 *  $wgWBRepoSettings['entityNamespaces'] setting. Optionally the list also contains
+	 *  entity types from the configured foreign repositories.
 	 */
 	public function getEnabledEntityTypes() {
-		return array_unique( array_merge(
-			$this->getLocalEntityTypes(),
-			array_reduce(
-				$this->settings->getSetting( 'foreignRepositories' ),
+		if ( $this->clientSettings ) {
+			$foreignRepoConfig = $this->clientSettings->getSetting( 'foreignRepositories' );
+			$foreignRepoEntityTypes = array_reduce(
+				$foreignRepoConfig,
 				function( $types, $repoSettings ) {
 					return array_merge( $types, $repoSettings['supportedEntityTypes'] );
 				},
 				[]
-			)
+			);
+		} else {
+			$foreignRepoEntityTypes = [];
+		}
+
+		$enabledTypes = array_unique( array_merge(
+			$this->getLocalEntityTypes(),
+			$foreignRepoEntityTypes
 		) );
+
+		return $enabledTypes;
 	}
 
 	/**
@@ -1572,8 +1643,7 @@ class WikibaseRepo {
 	 * @return ViewFactory
 	 */
 	public function getViewFactory() {
-		/** @var Language $wgLang */
-		global $wgLang;
+		$lang = $this->getUserLanguage();
 
 		$statementGrouperBuilder = new StatementGrouperBuilder(
 			$this->settings->getSetting( 'statementSections' ),
@@ -1599,11 +1669,11 @@ class WikibaseRepo {
 			TemplateFactory::getDefaultInstance(),
 			$this->getLanguageNameLookup(),
 			$this->getLanguageDirectionalityLookup(),
-			new MediaWikiNumberLocalizer( $wgLang ),
+			new MediaWikiNumberLocalizer( $lang ),
 			$this->settings->getSetting( 'siteLinkGroups' ),
 			$this->settings->getSetting( 'specialSiteLinkGroups' ),
 			$this->settings->getSetting( 'badgeItems' ),
-			new MediaWikiLocalizedTextProvider( $wgLang->getCode() )
+			new MediaWikiLocalizedTextProvider( $lang->getCode() )
 		);
 	}
 

@@ -112,11 +112,6 @@ final class WikibaseClient {
 	private $settings;
 
 	/**
-	 * @var Language
-	 */
-	private $contentLanguage;
-
-	/**
 	 * @var SiteLookup
 	 */
 	private $siteLookup;
@@ -269,7 +264,7 @@ final class WikibaseClient {
 		);
 
 		return new WikibaseValueFormatterBuilders(
-			$this->contentLanguage,
+			$this->getContentLanguage(),
 			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
 			new LanguageNameLookup( $wgLang->getCode() ),
 			$this->getRepoItemUriParser(),
@@ -316,20 +311,17 @@ final class WikibaseClient {
 
 	/**
 	 * @param SettingsArray $settings
-	 * @param Language $contentLanguage
 	 * @param DataTypeDefinitions $dataTypeDefinitions
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 * @param SiteLookup $siteLookup
 	 */
 	public function __construct(
 		SettingsArray $settings,
-		Language $contentLanguage,
 		DataTypeDefinitions $dataTypeDefinitions,
 		EntityTypeDefinitions $entityTypeDefinitions,
 		SiteLookup $siteLookup
 	) {
 		$this->settings = $settings;
-		$this->contentLanguage = $contentLanguage;
 		$this->dataTypeDefinitions = $dataTypeDefinitions;
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
 		$this->siteLookup = $siteLookup;
@@ -375,7 +367,7 @@ final class WikibaseClient {
 	/**
 	 * @return EntityDataRetrievalServiceFactory
 	 */
-	private function getEntityDataRetrievalServiceFactory() {
+	public function getEntityDataRetrievalServiceFactory() {
 		if ( $this->entityDataRetrievalServiceFactory === null ) {
 			$factory = new DispatchingServiceFactory(
 				$this->getRepositoryServiceContainerFactory(),
@@ -575,7 +567,7 @@ final class WikibaseClient {
 				$this->getEntityNamespaceLookup(),
 				$this->getEntityDataRetrievalServiceFactory(),
 				$repoDatabase,
-				$this->contentLanguage->getCode()
+				$this->getContentLanguage()->getCode()
 			);
 		}
 
@@ -620,7 +612,30 @@ final class WikibaseClient {
 	 * @return Language
 	 */
 	public function getContentLanguage() {
-		return $this->contentLanguage;
+		global $wgContLang;
+
+		// TODO: define a LanguageProvider service instead of using a global directly.
+		// NOTE: we cannot inject $wgContLang in the constructor, because it may still be null
+		// when WikibaseClient is initialized. In particular, the language object may not yet
+		// be there when the SetupAfterCache hook is run during bootstrapping.
+		StubObject::unstub( $wgContLang );
+		return $wgContLang;
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return Language
+	 */
+	private function getUserLanguage() {
+		global $wgLang;
+
+		// TODO: define a LanguageProvider service instead of using a global directly.
+		// NOTE: we cannot inject $wgLang in the constructor, because it may still be null
+		// when WikibaseClient is initialized. In particular, the language object may not yet
+		// be there when the SetupAfterCache hook is run during bootstrapping.
+		StubObject::unstub( $wgLang );
+		return $wgLang;
 	}
 
 	/**
@@ -655,7 +670,7 @@ final class WikibaseClient {
 	 * @return WikibaseClient
 	 */
 	private static function newInstance() {
-		global $wgContLang, $wgWBClientSettings, $wgWBClientDataTypes, $wgWBClientEntityTypes;
+		global $wgWBClientSettings, $wgWBClientDataTypes, $wgWBClientEntityTypes;
 
 		if ( !is_array( $wgWBClientDataTypes ) || !is_array( $wgWBClientEntityTypes ) ) {
 			throw new MWException( '$wgWBClientDataTypes and $wgWBClientEntityTypes must be arrays. '
@@ -672,7 +687,6 @@ final class WikibaseClient {
 
 		return new self(
 			$settings,
-			$wgContLang,
 			new DataTypeDefinitions(
 				$dataTypeDefinitions,
 				$settings->getSetting( 'disabledDataTypes' )
@@ -907,16 +921,14 @@ final class WikibaseClient {
 	 * @return LanguageLinkBadgeDisplay
 	 */
 	public function getLanguageLinkBadgeDisplay() {
-		global $wgLang;
-		StubObject::unstub( $wgLang );
-
 		$labelDescriptionLookupFactory = $this->getLanguageFallbackLabelDescriptionLookupFactory();
 		$badgeClassNames = $this->settings->getSetting( 'badgeClassNames' );
+		$lang = $this->getUserLanguage();
 
 		return new LanguageLinkBadgeDisplay(
-			$labelDescriptionLookupFactory->newLabelDescriptionLookup( $wgLang ),
+			$labelDescriptionLookupFactory->newLabelDescriptionLookup( $lang ),
 			is_array( $badgeClassNames ) ? $badgeClassNames : array(),
-			$wgLang
+			$lang
 		);
 	}
 

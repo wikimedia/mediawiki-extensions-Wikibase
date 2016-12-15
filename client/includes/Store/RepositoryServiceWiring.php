@@ -27,18 +27,26 @@ return [
 			$client->getSettings()->getSetting( 'maxSerializedEntitySize' ) * 1024
 		);
 
-		$metaDataLookup = new PrefetchingWikiPageEntityMetaDataAccessor(
+		/** @var PrefetchingWikiPageEntityMetaDataAccessor $metaDataAccessor */
+		$metaDataAccessor = $services->getService( 'PrefetchingEntityMetaDataAccessor' );
+
+		return new WikiPageEntityRevisionLookup(
+			$codec,
+			$metaDataAccessor,
+			$services->getDatabaseName()
+		);
+	},
+
+	'PrefetchingEntityMetaDataAccessor' => function(
+		RepositoryServiceContainer $services,
+		WikibaseClient $client
+	) {
+		return new PrefetchingWikiPageEntityMetaDataAccessor(
 			new WikiPageEntityMetaDataLookup(
 				$client->getEntityNamespaceLookup(),
 				$services->getDatabaseName(),
 				$services->getRepositoryName()
 			)
-		);
-
-		return new WikiPageEntityRevisionLookup(
-			$codec,
-			$metaDataLookup,
-			$services->getDatabaseName()
 		);
 	},
 
