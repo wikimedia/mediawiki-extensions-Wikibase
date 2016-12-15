@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Api;
 use Profiler;
 use Site;
 use SiteStore;
-use UsageException;
+use ApiUsageException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\StringNormalizer;
@@ -66,7 +66,7 @@ class ItemByTitleHelper {
 	 * @param array $titles
 	 * @param bool $normalize
 	 *
-	 * @throws UsageException
+	 * @throws ApiUsageException
 	 * @return array( ItemId[], array[] )
 	 *         List containing valid ItemIds and MissingItem site title combinations
 	 */
@@ -160,11 +160,12 @@ class ItemByTitleHelper {
 	 * @param string $message
 	 * @param string $code
 	 *
-	 * @throws UsageException always
+	 * @throws ApiUsageException always
 	 */
 	private function throwUsageException( $message, $code ) {
 		Profiler::instance()->close();
-		throw new UsageException( $message, $code );
+		// TODO: The API module responsible for the error should be passed in here.
+		throw ApiUsageException::newWithMessage( null, $message, $code );
 	}
 
 }

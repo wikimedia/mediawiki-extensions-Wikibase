@@ -9,7 +9,7 @@ use InvalidArgumentException;
 use MWException;
 use SiteList;
 use Title;
-use UsageException;
+use ApiUsageException;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
@@ -277,7 +277,7 @@ class EditEntity extends ModifyEntity {
 	 * @param array $data
 	 * @param EntityDocument $entity
 	 *
-	 * @throws UsageException
+	 * @throws ApiUsageException
 	 * @return ChangeOps
 	 */
 	private function getChangeOps( array $data, EntityDocument $entity ) {

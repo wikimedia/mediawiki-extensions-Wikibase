@@ -6,7 +6,7 @@ use FauxRequest;
 use LogicException;
 use RequestContext;
 use Status;
-use UsageException;
+use ApiUsageException;
 use User;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -179,7 +179,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 			'dieErrorCode' => 'no-entity-id'
 		] );
 
-		$this->setExpectedException( UsageException::class );
+		$this->setExpectedException( ApiUsageException::class );
 		$helper->loadEntity();
 	}
 
@@ -211,7 +211,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 			'entityId' => isset( $params['entity'] ) ? new ItemId( $params['entity'] ) : null ,
 		] );
 
-		$this->setExpectedException( UsageException::class );
+		$this->setExpectedException( ApiUsageException::class );
 		$helper->loadEntity();
 	}
 
