@@ -299,7 +299,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertInstanceOf( EntityFactory::class, $entityFactory );
 	}
 
-	public function testGetEnabledEntityTypes() {
+	public function testGetLocalEntityTypes() {
 		$wikibaseRepo = $this->getWikibaseRepo();
 		$wikibaseRepo->getSettings()->setSetting(
 			'entityNamespaces',
@@ -309,9 +309,29 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 			]
 		);
 
+		$localEntityTypes = $wikibaseRepo->getLocalEntityTypes();
+		$this->assertContains( 'foo', $localEntityTypes );
+		$this->assertContains( 'bar', $localEntityTypes );
+	}
+
+	public function testGetEnabledEntityTypes() {
+		$wikibaseRepo = $this->getWikibaseRepo();
+		$wikibaseRepo->getSettings()->setSetting(
+			'entityNamespaces',
+			[ 'foo' => 100, 'bar' => 102 ]
+		);
+		$wikibaseRepo->getSettings()->setSetting(
+			'foreignRepositories',
+			[
+				'repo1' => [ 'supportedEntityTypes' => [ 'foo', 'baz' ] ],
+				'repo2' => [ 'supportedEntityTypes' => [ 'foobar' ] ],
+			]
+		);
 		$enabled = $wikibaseRepo->getEnabledEntityTypes();
 		$this->assertContains( 'foo', $enabled );
 		$this->assertContains( 'bar', $enabled );
+		$this->assertContains( 'baz', $enabled );
+		$this->assertContains( 'foobar', $enabled );
 	}
 
 	public function testGetExceptionLocalizer() {
