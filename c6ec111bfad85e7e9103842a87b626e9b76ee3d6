@@ -22,6 +22,30 @@
       "revId": "c6ec111bfad85e7e9103842a87b626e9b76ee3d6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_cc0f4de3",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/LanguageAwareRendererTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-12-15T22:41:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_364f5dc2",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 11
+      },
+      "revId": "c6ec111bfad85e7e9103842a87b626e9b76ee3d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
