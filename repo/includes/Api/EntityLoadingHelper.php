@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use LogicException;
-use UsageException;
+use ApiUsageException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -134,7 +134,7 @@ class EntityLoadingHelper {
 	 * @param string|null $mode LATEST_FROM_SLAVE, LATEST_FROM_SLAVE_WITH_FALLBACK or
 	 *        LATEST_FROM_MASTER (from EntityRevisionLookup). Null for the default.
 	 *
-	 * @throws UsageException
+	 * @throws ApiUsageException
 	 * @throws LogicException
 	 * @return EntityRevision|null
 	 */
@@ -218,7 +218,7 @@ class EntityLoadingHelper {
 	 *
 	 * @param string $id
 	 *
-	 * @throws UsageException
+	 * @throws ApiUsageException
 	 * @return EntityId
 	 */
 	private function getEntityIdFromString( $id ) {
@@ -235,7 +235,7 @@ class EntityLoadingHelper {
 	 * @param string $site
 	 * @param string $title
 	 *
-	 * @throws UsageException If no such entity is found.
+	 * @throws ApiUsageException If no such entity is found.
 	 * @return EntityId The ID of the entity connected to $title on $site.
 	 */
 	private function getEntityIdFromSiteTitleCombination( $site, $title ) {

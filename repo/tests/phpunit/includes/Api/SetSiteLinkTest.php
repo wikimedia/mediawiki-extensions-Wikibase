@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
-use UsageException;
+use ApiUsageException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\WikibaseRepo;
@@ -250,7 +250,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'linktitle' => 'testSetSiteLinkWithNoToken'
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'notoken',
 					'message' => $newText ? 'The "token" parameter must be set' : 'The token parameter must be set'
 				) )
@@ -264,7 +264,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'token' => '88888888888888888888888888888888+\\'
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'badtoken',
 					'message' => $newText ? 'Invalid CSRF token.' : 'Invalid token'
 				) )
@@ -274,14 +274,14 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'linksite' => 'enwiki',
 					'linktitle' => 'testSetSiteLinkWithNoId'
 				),
-				'e' => array( 'exception' => array( 'type' => UsageException::class ) ) ),
+				'e' => array( 'exception' => array( 'type' => ApiUsageException::class ) ) ),
 			array( //3 testSetSiteLinkWithBadId
 				'p' => array(
 					'id' => 123456789,
 					'linksite' => 'enwiki',
 					'linktitle' => 'testSetSiteLinkWithNoId'
 				),
-				'e' => array( 'exception' => array( 'type' => UsageException::class ) ) ),
+				'e' => array( 'exception' => array( 'type' => ApiUsageException::class ) ) ),
 			array( //4 testSetSiteLinkWithBadSite
 				'p' => array(
 					'site' => 'dewiktionary',
@@ -289,7 +289,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'linksite' => 'enwiki',
 					'linktitle' => 'Berlin'
 				),
-				'e' => array( 'exception' => array( 'type' => UsageException::class ) ) ),
+				'e' => array( 'exception' => array( 'type' => ApiUsageException::class ) ) ),
 			array( //5 testSetSiteLinkWithBadTitle
 				'p' => array(
 					'site' => 'dewiki',
@@ -297,7 +297,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'linksite' => 'enwiki',
 					'linktitle' => 'BadTitle_en'
 				),
-				'e' => array( 'exception' => array( 'type' => UsageException::class ) ) ),
+				'e' => array( 'exception' => array( 'type' => ApiUsageException::class ) ) ),
 			array( //6 testSetSiteLinkWithBadTargetSite
 				'p' => array(
 					'site' => 'dewiki',
@@ -305,7 +305,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'linksite' => 'enwiktionary',
 					'linktitle' => 'Berlin'
 				),
-				'e' => array( 'exception' => array( 'type' => UsageException::class ) ) ),
+				'e' => array( 'exception' => array( 'type' => ApiUsageException::class ) ) ),
 			array( //7 badge item does not exist
 				'p' => array(
 					'site' => 'enwiki',
@@ -315,7 +315,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'badges' => 'Q99999|{faItem}'
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'no-such-entity'
 				) )
 			),
@@ -327,7 +327,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'badges' => '{gaItem}|{faItem}'
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'no-such-sitelink'
 				) )
 			),

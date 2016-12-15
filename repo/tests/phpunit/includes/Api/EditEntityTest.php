@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use UsageException;
+use ApiUsageException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Statement\StatementGuidParsingException;
@@ -511,86 +511,86 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'empty entity id given' => array(
 				'p' => array( 'id' => '', 'data' => '{}' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'invalid-entity-id'
 				) ) ),
 			'invalid id' => array(
 				'p' => array( 'id' => 'abcde', 'data' => '{}' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'invalid-entity-id'
 				) ) ),
 			'unknown id' => array(
 				'p' => array( 'id' => 'Q1234567', 'data' => '{}' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'no-such-entity'
 				) ) ),
 			'invalid explicit id' => array(
 				'p' => array( 'id' => '1234', 'data' => '{}' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'invalid-entity-id'
 				) ) ),
 			'non existent sitelink' => array(
 				'p' => array( 'site' => 'dewiki','title' => 'NonExistent', 'data' => '{}' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'no-such-entity-link'
 				) ) ),
 			'missing site (also bad title)' => array(
 				'p' => array( 'title' => 'abcde', 'data' => '{}' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'param-missing'
 				) ) ),
 			'cant have id and new' => array(
 				'p' => array( 'id' => 'q666', 'new' => 'item', 'data' => '{}' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'param-missing'
 				) ) ),
 			'when clearing must also have data!' => array(
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'clear' => '' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'nodata'
 				) ) ),
 			'bad site' => array(
 				'p' => array( 'site' => 'abcde', 'data' => '{}' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'unknown_site'
 				) ) ),
 			'no data provided' => array(
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'nodata' // see 'no$1' in ApiBase::$messageMap
 				) )
 			),
 			'malformed json' => array(
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '{{{}' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'invalid-json'
 				) ) ),
 			'must be a json object (json_decode s this an an int)' => array(
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '1234' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'not-recognized-array'
 				) ) ),
 			'must be a json object (json_decode s this an an indexed array)' => array(
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '[ "xyz" ]' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'not-recognized-string'
 					) ) ),
 			'must be a json object (json_decode s this an a string)' => array(
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '"string"' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'not-recognized-array'
 				) ) ),
 			'inconsistent site in json' => array(
@@ -600,7 +600,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'data' => '{"sitelinks":{"ptwiki":{"site":"svwiki","title":"TestPage!"}}}'
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'inconsistent-site'
 				) ) ),
 			'inconsistent lang in json' => array(
@@ -610,7 +610,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'data' => '{"labels":{"de":{"language":"pt","value":"TestPage!"}}}'
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'inconsistent-language'
 				) ) ),
 			'inconsistent unknown site in json' => array(
@@ -620,7 +620,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'data' => '{"sitelinks":{"BLUB":{"site":"BLUB","title":"TestPage!"}}}'
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'not-recognized-site'
 				) ) ),
 			'inconsistent unknown languages' => array(
@@ -630,7 +630,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'data' => '{"labels":{"BLUB":{"language":"BLUB","value":"ImaLabel"}}}'
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'not-recognized-language'
 				) ) ),
 			// @todo the error codes in the overly long string tests make no sense
@@ -642,7 +642,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'data' => '{"labels":{"en":{"language":"en","value":"'
 						. TermTestHelper::makeOverlyLongString() . '"}}}'
 				),
-				'e' => array( 'exception' => array( 'type' => UsageException::class ) ) ),
+				'e' => array( 'exception' => array( 'type' => ApiUsageException::class ) ) ),
 			'overly long description' => array(
 				'p' => array(
 					'site' => 'enwiki',
@@ -650,7 +650,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'data' => '{"descriptions":{"en":{"language":"en","value":"'
 						. TermTestHelper::makeOverlyLongString() . '"}}}'
 				),
-				'e' => array( 'exception' => array( 'type' => UsageException::class ) ) ),
+				'e' => array( 'exception' => array( 'type' => ApiUsageException::class ) ) ),
 			'missing language in labels (T54731)' => array(
 				'p' => array(
 					'site' => 'enwiki',
@@ -658,7 +658,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'data' => '{"labels":{"de":{"site":"pt","title":"TestString"}}}'
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'missing-language',
 					'message' => '\'language\' was not found in the label or description json for de'
 				) )
@@ -670,7 +670,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'data' => '{"claims":[{"remove":""}]}'
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'invalid-claim',
 					'message' => 'Cannot remove a claim with no GUID'
 				) )
@@ -684,7 +684,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 					} ] }'
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'invalid-claim',
 					'message' => '\'P0\' is not a valid entity ID'
 				) )
@@ -721,7 +721,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 					}'
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'not-recognized',
 					'message' => 'Unknown key in json: remove' )
 				)
@@ -734,7 +734,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 						. '"badges":["abc","%Q149%"]}}}'
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'invalid-entity-id'
 				) )
 			),
@@ -746,7 +746,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 						. '"badges":["P2","%Q149%"]}}}'
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'invalid-entity-id'
 				) )
 			),
@@ -758,7 +758,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 						. '"badges":["%Q149%","%Q32%"]}}}'
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'not-badge'
 				) )
 			),
@@ -770,7 +770,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 						. '"badges":["Q99999","%Q149%"]}}}'
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'no-such-entity'
 				) )
 			),
@@ -782,14 +782,14 @@ class EditEntityTest extends WikibaseApiTestCase {
 						. '"badges":["%Q42%","%Q149%"]}}}'
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'no-such-sitelink'
 				) )
 			),
 			'bad id in serialization' => array(
 				'p' => array( 'id' => '%Berlin%', 'data' => '{"id":"Q13244"}' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'param-invalid',
 					'message' => 'Invalid field used in call: "id", must match id parameter'
 				) )
@@ -797,7 +797,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'bad type in serialization' => array(
 				'p' => array( 'id' => '%Berlin%', 'data' => '{"id":"%Berlin%","type":"foobar"}' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'param-invalid',
 					'message' => 'Invalid field used in call: "type", '
 						. 'must match type associated with id'
@@ -821,7 +821,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 						),
 					) ) ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'modification-failed',
 					'message' => 'uses property %P56%, can\'t change to %P72%' ) ) ),
 			'invalid main snak' => array(
@@ -839,7 +839,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 					),
 				) ) ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'modification-failed' ) ) ),
 			'properties cannot have sitelinks' => array(
 				'p' => array(
@@ -847,7 +847,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!"}}}',
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'not-supported',
 					'message' => 'Non Items cannot have sitelinks'
 				) ) ),
@@ -862,7 +862,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'create mediainfo with malformed id' => array(
 				'p' => array( 'id' => 'M123X', 'data' => '{}' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'invalid-entity-id',
 					'message' => 'Invalid entity ID.'
 				) ),
@@ -871,7 +871,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'create mediainfo with bad id' => array(
 				'p' => array( 'id' => 'M12734569', 'data' => '{}' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'no-such-entity',
 					'message' => 'Could not find such an entity'
 				) ),
@@ -906,7 +906,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$this->doApiRequestWithToken( $params );
 
 		$expectedException = array(
-			'type' => UsageException::class,
+			'type' => ApiUsageException::class,
 			'code' => 'failed-save',
 		);
 		// Repeating the same request with the same label should fail.
@@ -940,7 +940,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$this->doApiRequestWithToken( $params );
 
 		$expectedException = array(
-			'type' => UsageException::class,
+			'type' => ApiUsageException::class,
 			'code' => 'modification-failed',
 		);
 		// Repeating the same request with the same label and description should fail.
@@ -968,7 +968,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$setupParams['data'] = '{"descriptions":{"en":{"language":"en","value":"ClearFromBadRevidDesc2"}}}';
 		$this->doApiRequestWithToken( $setupParams );
 
-		$expectedException = array( 'type' => UsageException::class, 'code' => 'editconflict' );
+		$expectedException = array( 'type' => ApiUsageException::class, 'code' => 'editconflict' );
 		$this->doTestQueryExceptions( $params, $expectedException );
 	}
 

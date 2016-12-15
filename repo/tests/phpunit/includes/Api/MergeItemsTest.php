@@ -8,7 +8,7 @@ use RequestContext;
 use Status;
 use TestSites;
 use Title;
-use UsageException;
+use ApiUsageException;
 use User;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\Entity\EntityId;
@@ -385,42 +385,42 @@ class MergeItemsTest extends \MediaWikiTestCase {
 			array( //0 no ids given
 				'p' => array(),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'param-missing'
 				) )
 			),
 			array( //1 only from id
 				'p' => array( 'fromid' => 'Q1' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'param-missing'
 				) )
 			),
 			array( //2 only to id
 				'p' => array( 'toid' => 'Q1' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'param-missing'
 				) )
 			),
 			array( //3 toid bad
 				'p' => array( 'fromid' => 'Q1', 'toid' => 'ABCDE' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'invalid-entity-id'
 				) )
 			),
 			array( //4 fromid bad
 				'p' => array( 'fromid' => 'ABCDE', 'toid' => 'Q1' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'invalid-entity-id'
 				) )
 			),
 			array( //5 both same id
 				'p' => array( 'fromid' => 'Q1', 'toid' => 'Q1' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'invalid-entity-id',
 					'message' => 'You must provide unique ids'
 				) )
@@ -428,28 +428,28 @@ class MergeItemsTest extends \MediaWikiTestCase {
 			array( //6 from id is property
 				'p' => array( 'fromid' => 'P1', 'toid' => 'Q1' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'not-item'
 				) )
 			),
 			array( //7 to id is property
 				'p' => array( 'fromid' => 'Q1', 'toid' => 'P1' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'not-item'
 				) )
 			),
 			array( //8 bad ignoreconficts
 				'p' => array( 'fromid' => 'Q2', 'toid' => 'Q2', 'ignoreconflicts' => 'foo' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'invalid-entity-id'
 				) )
 			),
 			array( //9 bad ignoreconficts
 				'p' => array( 'fromid' => 'Q2', 'toid' => 'Q2', 'ignoreconflicts' => 'label|foo' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'invalid-entity-id'
 				) )
 			),
@@ -465,8 +465,8 @@ class MergeItemsTest extends \MediaWikiTestCase {
 
 		try {
 			$this->callApiModule( $params );
-			$this->fail( 'Expected UsageException!' );
-		} catch ( UsageException $ex ) {
+			$this->fail( 'Expected ApiUsageException!' );
+		} catch ( ApiUsageException $ex ) {
 			$this->apiModuleTestHelper->assertUsageException( $expected, $ex );
 		}
 	}
@@ -506,7 +506,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	 * @dataProvider provideExceptionConflictsData
 	 */
 	public function testMergeItemsConflictsExceptions( $pre1, $pre2 ) {
-		$expected = array( 'exception' => array( 'type' => UsageException::class, 'code' => 'failed-save' ) );
+		$expected = array( 'exception' => array( 'type' => ApiUsageException::class, 'code' => 'failed-save' ) );
 
 		// -- prefill the entities --------------------------------------------
 		$this->entityModificationTestHelper->putEntity( $pre1, 'Q1' );
@@ -521,8 +521,8 @@ class MergeItemsTest extends \MediaWikiTestCase {
 		// -- do the request --------------------------------------------
 		try {
 			$this->callApiModule( $params );
-			$this->fail( 'Expected UsageException!' );
-		} catch ( UsageException $ex ) {
+			$this->fail( 'Expected ApiUsageException!' );
+		} catch ( ApiUsageException $ex ) {
 			$this->apiModuleTestHelper->assertUsageException( $expected, $ex );
 		}
 	}
@@ -536,8 +536,8 @@ class MergeItemsTest extends \MediaWikiTestCase {
 
 		try {
 			$this->callApiModule( $params );
-			$this->fail( 'Expected UsageException!' );
-		} catch ( UsageException $ex ) {
+			$this->fail( 'Expected ApiUsageException!' );
+		} catch ( ApiUsageException $ex ) {
 			$this->apiModuleTestHelper->assertUsageException( 'no-such-entity', $ex );
 		}
 	}

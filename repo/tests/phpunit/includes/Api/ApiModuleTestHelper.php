@@ -7,7 +7,7 @@ use ApiMain;
 use Exception;
 use FauxRequest;
 use PHPUnit_Framework_Assert as Assert;
-use UsageException;
+use ApiUsageException;
 use User;
 
 /**
@@ -63,8 +63,8 @@ class ApiModuleTestHelper {
 	 * @param Exception $ex
 	 */
 	public function assertUsageException( $expected, Exception $ex ) {
-		Assert::assertInstanceOf( UsageException::class, $ex );
-		/** @var UsageException $ex */
+		Assert::assertInstanceOf( ApiUsageException::class, $ex );
+		/** @var ApiUsageException $ex */
 
 		if ( is_string( $expected ) ) {
 			$expected = array( 'code' => $expected );
