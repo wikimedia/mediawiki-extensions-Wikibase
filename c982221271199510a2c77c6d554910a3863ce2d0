@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_7bb0203f",
+        "filename": "repo/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-12-15T14:12:15Z",
+      "side": 1,
+      "message": "assertTag is deprecated / removed in recent versions of phpunit.\n\nhttps://github.com/sebastianbergmann/phpunit/issues/1292\n\ni suppose this is just factoring out code, but would be nice to find another way that doesn\u0027t use assertTag. Maybe there are replacement libraries that would work okay or something.",
+      "revId": "c982221271199510a2c77c6d554910a3863ce2d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
