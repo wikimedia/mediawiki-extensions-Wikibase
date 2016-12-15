@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_188247ce",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T17:43:50Z",
+      "side": 1,
+      "message": "I\u0027m ok with doing it now, but I\u0027d prefer that to be done in a separate patch. Also see my comment below.",
+      "parentUuid": "0e0e73b5_20b83374",
+      "revId": "0eedbc3359fc74ca993cb43efe37dfa5b6208b92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_4078c7ed",
         "filename": "client/includes/WikibaseClient.php",
         "patchSetId": 4
@@ -189,6 +207,30 @@
       "side": 1,
       "message": "I don\u0027t see it used by any other class but I have already learned I might not have checked all relevant extensions etc.\n\nBut if it is actually fine to make this private same as remark as with renaming: should this happen right away. I\u0027m fine with that, but again it is changing public api.",
       "parentUuid": "0e0e73b5_e05d7b7f",
+      "range": {
+        "startLine": 435,
+        "startChar": 1,
+        "endLine": 435,
+        "endChar": 7
+      },
+      "revId": "0eedbc3359fc74ca993cb43efe37dfa5b6208b92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_387d0be5",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T17:43:50Z",
+      "side": 1,
+      "message": "We don\u0027t have any 3rd party extensions relying on our code, and no extensions that rely on it are deployed, so it\u0027s ok to break stuff for these. However, I would prefer to see that in a separate patch, in case we want to roll back the change. Same for the renaming discussed above.",
+      "parentUuid": "0e0e73b5_605ceb4e",
       "range": {
         "startLine": 435,
         "startChar": 1,
