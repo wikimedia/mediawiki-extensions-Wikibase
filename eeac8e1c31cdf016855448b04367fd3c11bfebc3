@@ -1,0 +1,214 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_00052f7c",
+        "filename": "repo/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T14:06:11Z",
+      "side": 1,
+      "message": "I guess this could be in some more general namespace, or is it only relevant for special page asserts?",
+      "revId": "eeac8e1c31cdf016855448b04367fd3c11bfebc3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_c0d157d2",
+        "filename": "repo/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T14:06:11Z",
+      "side": 1,
+      "message": "I am not sure how strict we\u0027re about this but generally classes have a class-level comment, at least containing @license GPL-2.0+",
+      "revId": "eeac8e1c31cdf016855448b04367fd3c11bfebc3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_e00fbb8b",
+        "filename": "repo/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T14:06:11Z",
+      "side": 1,
+      "message": "$value is not documented above",
+      "revId": "eeac8e1c31cdf016855448b04367fd3c11bfebc3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_001befd5",
+        "filename": "repo/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T14:06:11Z",
+      "side": 1,
+      "message": "no such param",
+      "revId": "eeac8e1c31cdf016855448b04367fd3c11bfebc3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_207dd3e4",
+        "filename": "repo/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T14:06:11Z",
+      "side": 1,
+      "message": "spaces missing around parameters, no docs",
+      "revId": "eeac8e1c31cdf016855448b04367fd3c11bfebc3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_0082cfcd",
+        "filename": "repo/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T14:06:11Z",
+      "side": 1,
+      "message": "please add spaces around the parameter, and document $message as a string",
+      "revId": "eeac8e1c31cdf016855448b04367fd3c11bfebc3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_a0d783c3",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T14:06:11Z",
+      "side": 1,
+      "message": "same note about the class-level comment and @license tag as in the helper trait",
+      "revId": "eeac8e1c31cdf016855448b04367fd3c11bfebc3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_a071c30d",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T14:06:11Z",
+      "side": 1,
+      "message": "I\u0027d add a space below this",
+      "revId": "eeac8e1c31cdf016855448b04367fd3c11bfebc3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_20ea7374",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T14:06:11Z",
+      "side": 1,
+      "message": "no need to prefix with \\, as you\u0027ve imported it",
+      "range": {
+        "startLine": 22,
+        "startChar": 12,
+        "endLine": 22,
+        "endChar": 24
+      },
+      "revId": "eeac8e1c31cdf016855448b04367fd3c11bfebc3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_5b479c50",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T14:06:11Z",
+      "side": 1,
+      "message": "it is nice to have method names starting with a verb, so data providers could be then called \"provideValid...\"\nYou might not even to have a \"Data provider method\" comment then (although it doesn\u0027t hurt in this case probably)",
+      "revId": "eeac8e1c31cdf016855448b04367fd3c11bfebc3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_600aab2b",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewItemTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T14:06:11Z",
+      "side": 1,
+      "message": "please use single empty lines",
+      "revId": "eeac8e1c31cdf016855448b04367fd3c11bfebc3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_c01a777e",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewPropertyTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T14:06:11Z",
+      "side": 1,
+      "message": "if this cannot be implemented easily it is probably fine to have it as TODO now. But indentation level is too high",
+      "revId": "eeac8e1c31cdf016855448b04367fd3c11bfebc3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
