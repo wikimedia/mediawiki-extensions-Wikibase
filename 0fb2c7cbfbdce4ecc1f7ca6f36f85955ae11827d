@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_5619b17d",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-12-15T15:27:35Z",
+      "side": 1,
+      "message": "spacing looks wrong here.",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 6
+      },
+      "revId": "0fb2c7cbfbdce4ecc1f7ca6f36f85955ae11827d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
