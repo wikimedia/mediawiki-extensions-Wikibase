@@ -154,7 +154,6 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 
 		$wikibaseClient = new WikibaseClient(
 			$settings,
-			Language::factory( 'en' ),
 			new DataTypeDefinitions( array() ),
 			new EntityTypeDefinitions( array() ),
 			$this->getSiteLookup()
@@ -175,7 +174,6 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	public function testGetLangLinkSiteGroup( $expected, SettingsArray $settings, SiteLookup $siteLookup ) {
 		$client = new WikibaseClient(
 			$settings,
-			Language::factory( 'en' ),
 			new DataTypeDefinitions( array() ),
 			new EntityTypeDefinitions( array() ),
 			$siteLookup
@@ -210,7 +208,6 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	public function testGetSiteGroup( $expected, SettingsArray $settings, SiteLookup $siteLookup ) {
 		$client = new WikibaseClient(
 			$settings,
-			Language::factory( 'en' ),
 			new DataTypeDefinitions( array() ),
 			new EntityTypeDefinitions( array() ),
 			$siteLookup
@@ -378,7 +375,6 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	private function getWikibaseClient() {
 		return new WikibaseClient(
 			new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() ),
-			Language::factory( 'en' ),
 			new DataTypeDefinitions( array() ),
 			new EntityTypeDefinitions( array() ),
 			new HashSiteStore()
