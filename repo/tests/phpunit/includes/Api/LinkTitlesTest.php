@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
-use UsageException;
 use Wikibase\Test\Repo\Api\WikibaseApiTestCase;
 
 /**
@@ -100,7 +99,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 					'fromtitle' => 'AnotherPage'
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'notoken',
 					'message' => $newText ? 'The "token" parameter must be set' : 'The token parameter must be set'
 				) )
@@ -114,7 +113,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 					'token' => '88888888888888888888888888888888+\\'
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'badtoken',
 					'message' => $newText ? 'Invalid CSRF token.' : 'Invalid token'
 				) )
@@ -127,7 +126,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 					'fromtitle' => 'Oslo'
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'common-item'
 				) )
 			),
@@ -139,7 +138,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 					'fromtitle' => 'Oslo'
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'no-common-item'
 				) )
 			),
@@ -151,7 +150,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 					'fromtitle' => 'Hammerfest'
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'param-illegal'
 				) )
 			),
@@ -163,7 +162,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 					'fromtitle' => 'Hammerfest'
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'param-illegal'
 				) )
 			),
@@ -175,7 +174,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 					'fromtitle' => 'Hammerfest'
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'unknown_tosite'
 				) )
 			),
@@ -187,7 +186,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 					'fromtitle' => 'Hammerfest'
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'unknown_fromsite'
 				) )
 			),
@@ -199,7 +198,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 					'fromtitle' => 'Hammerfest'
 				),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'unknown_fromsite'
 				) )
 			),

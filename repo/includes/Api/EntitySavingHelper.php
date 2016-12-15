@@ -7,7 +7,7 @@ use InvalidArgumentException;
 use LogicException;
 use OutOfBoundsException;
 use Status;
-use UsageException;
+use ApiUsageException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -234,7 +234,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 *  one.
 	 *
 	 * @throws InvalidArgumentException when entity type and ID are given but do not match.
-	 * @throws UsageException
+	 * @throws ApiUsageException
 	 * @throws LogicException
 	 * @return EntityDocument
 	 */
@@ -418,7 +418,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 * @param int     $httpRespCode the HTTP response code to use in case
 	 *                $status->isOK() returns false.+
 	 *
-	 * @throws UsageException If $status->isOK() returns false.
+	 * @throws ApiUsageException If $status->isOK() returns false.
 	 */
 	private function handleStatus(
 		Status $status,

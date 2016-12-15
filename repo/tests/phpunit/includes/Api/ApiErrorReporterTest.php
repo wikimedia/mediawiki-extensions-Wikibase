@@ -6,7 +6,7 @@ use ApiMain;
 use DataValues\IllegalValueException;
 use Language;
 use Status;
-use UsageException;
+use ApiUsageException;
 use ValueParsers\ParseException;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Localizer\DispatchingExceptionLocalizer;
@@ -31,7 +31,7 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 		$code,
 		$httpStatusCode,
 		array $expectedDataFields,
-		UsageException $ex
+		ApiUsageException $ex
 	) {
 		$messageArray = $ex->getMessageArray();
 
@@ -150,8 +150,8 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 
 		try {
 			$reporter->dieException( $exception, $code, $httpStatusCode, $extradata );
-			$this->fail( 'UsageException was not thrown!' );
-		} catch ( UsageException $ex ) {
+			$this->fail( 'ApiUsageException was not thrown!' );
+		} catch ( ApiUsageException $ex ) {
 			$this->assertUsageException( $infoPattern, $code, $httpStatusCode, $expectedDataFields, $ex );
 		}
 	}
@@ -187,8 +187,8 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 
 		try {
 			$reporter->dieMessage( $code, $param );
-			$this->fail( 'UsageException was not thrown!' );
-		} catch ( UsageException $ex ) {
+			$this->fail( 'ApiUsageException was not thrown!' );
+		} catch ( ApiUsageException $ex ) {
 			$this->assertUsageException( $infoPattern, $code, null, $expectedDataFields, $ex );
 		}
 	}
@@ -251,8 +251,8 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 
 		try {
 			$reporter->dieStatus( $status, $code, $httpStatusCode, $extradata );
-			$this->fail( 'UsageException was not thrown!' );
-		} catch ( UsageException $ex ) {
+			$this->fail( 'ApiUsageException was not thrown!' );
+		} catch ( ApiUsageException $ex ) {
 			$this->assertUsageException( $infoPattern, $code, $httpStatusCode, $expectedDataFields, $ex );
 		}
 	}
@@ -305,8 +305,8 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 
 		try {
 			$reporter->dieError( $description, $code, $httpStatusCode, $extradata );
-			$this->fail( 'UsageException was not thrown!' );
-		} catch ( UsageException $ex ) {
+			$this->fail( 'ApiUsageException was not thrown!' );
+		} catch ( ApiUsageException $ex ) {
 			$this->assertUsageException( $infoPattern, $code, $httpStatusCode, $expectedDataFields, $ex );
 		}
 	}

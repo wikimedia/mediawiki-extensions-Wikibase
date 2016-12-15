@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Api;
 
 use DataValues\StringValue;
 use FormatJson;
-use UsageException;
+use ApiUsageException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -132,7 +132,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		$this->makeSetQualifierRequest( $guid, null, $snak, $item->getId() );
 
 		// now the hash exists, so the same request should fail
-		$this->setExpectedException( UsageException::class );
+		$this->setExpectedException( ApiUsageException::class );
 		$this->makeSetQualifierRequest( $guid, null, $snak, $item->getId() );
 	}
 
@@ -159,7 +159,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		$this->makeSetQualifierRequest( $guid, $hash, $newQualifier, $item->getId() );
 
 		// now the hash changed, so the same request should fail
-		$this->setExpectedException( UsageException::class );
+		$this->setExpectedException( ApiUsageException::class );
 		$this->makeSetQualifierRequest( $guid, $hash, $newQualifier, $item->getId() );
 	}
 
@@ -235,7 +235,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		try {
 			$this->doApiRequestWithToken( $params );
 			$this->fail( 'Invalid request did not raise an error' );
-		} catch ( UsageException $ex ) {
+		} catch ( ApiUsageException $ex ) {
 			$this->assertEquals( $error, $ex->getCodeString(), 'Invalid request raised correct error' );
 		}
 	}

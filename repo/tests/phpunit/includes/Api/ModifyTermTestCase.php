@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
-use UsageException;
 use Wikibase\Test\Repo\Api\WikibaseApiTestCase;
 
 /**
@@ -144,21 +143,21 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 			array( //0
 				'p' => array( 'language' => 'xx', 'value' => 'Foo' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'unknown_language'
 				) )
 			),
 			array( //1
 				'p' => array( 'language' => 'nl', 'value' => TermTestHelper::makeOverlyLongString() ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'modification-failed'
 				) )
 			),
 			array( //2
 				'p' => array( 'language' => 'pt', 'value' => 'normalValue' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'notoken',
 					'message' => $newText ? 'The "token" parameter must be set' : 'The token parameter must be set'
 				) )
@@ -166,7 +165,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 			array( //3
 				'p' => array( 'language' => 'pt', 'value' => 'normalValue', 'token' => '88888888888888888888888888888888+\\' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'badtoken',
 					'message' => $newText ? 'Invalid CSRF token.' : 'Invalid token'
 				) )
@@ -174,7 +173,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 			array( //4
 				'p' => array( 'id' => 'noANid', 'language' => 'fr', 'value' => 'normalValue' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'invalid-entity-id',
 					'message' => 'Invalid entity ID.'
 				) )
@@ -182,7 +181,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 			array( //5
 				'p' => array( 'site' => 'qwerty', 'language' => 'pl', 'value' => 'normalValue' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'unknown_site',
 					'message' => $newText ? 'Unrecognized value for parameter "site"' : "Unrecognized value for parameter 'site'"
 				) )
@@ -190,7 +189,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 			array( //6
 				'p' => array( 'site' => 'enwiki', 'title' => 'GhskiDYiu2nUd', 'language' => 'en', 'value' => 'normalValue' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'no-such-entity-link',
 					'message' => 'No entity found matching site link'
 				) )
@@ -198,7 +197,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 			array( //7
 				'p' => array( 'title' => 'Blub', 'language' => 'en', 'value' => 'normalValue' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'param-illegal',
 					'message' => 'Either provide the item "id" or pairs'
 				) )
@@ -206,7 +205,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 			array( //8
 				'p' => array( 'site' => 'enwiki', 'language' => 'en', 'value' => 'normalValue' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'param-illegal',
 					'message' => 'Either provide the item "id" or pairs'
 				) )

@@ -9,7 +9,7 @@ use Revision;
 use TestSites;
 use TestUser;
 use Title;
-use UsageException;
+use ApiUsageException;
 use User;
 use Wikibase\Repo\Tests\Api\EntityTestHelper;
 use Wikibase\Repo\WikibaseRepo;
@@ -180,7 +180,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			}
 
 			$this->fail( "Failed to throw UsageException" );
-		} catch ( UsageException $e ) {
+		} catch ( ApiUsageException $e ) {
 			if ( array_key_exists( 'type', $exception ) ) {
 				$this->assertInstanceOf( $exception['type'], $e );
 			}
