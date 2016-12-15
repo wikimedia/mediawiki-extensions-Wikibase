@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_364f5dc2",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/LanguageAwareRendererTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-12-15T16:20:27Z",
+      "side": 1,
+      "message": "seems not to be in use",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 11
+      },
+      "revId": "c6ec111bfad85e7e9103842a87b626e9b76ee3d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
