@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_855ff143",
+        "filename": "client/includes/Store/RepositoryServiceContainer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T12:37:07Z",
+      "side": 1,
+      "message": "So now properly configured mapping id parser is injected. Also an instance of DataValueDeserializer configured for the right repo prefix is needed, so it is now injected as well.\n\nIf there is more stuff becoming needed here, the constructor parameters should be rethought I guess. We don\u0027t want a list of 50 params.",
+      "parentUuid": "0e0e73b5_a59af5bb",
+      "revId": "7962e1d563dcc623ba25e66506cf85bba1c86d40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2edfb757_695a92fb",
         "filename": "client/includes/Store/RepositoryServiceWiring.php",
         "patchSetId": 6
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_c543a966",
+        "filename": "client/includes/Store/RepositoryServiceWiring.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T12:37:07Z",
+      "side": 1,
+      "message": "So this is now changed, so the wiring actually defined creating the instance of EntityRevisionLookup.\n\nI\u0027ll adjust the big lookup factory class to use service containers in the follow up (does not really belong here). This factory does not seem to be used in any production code so far, but I guess it still makes sense to have it.",
+      "parentUuid": "0e0e73b5_65bd1d16",
+      "revId": "7962e1d563dcc623ba25e66506cf85bba1c86d40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2edfb757_495fd6e8",
         "filename": "client/includes/WikibaseClient.php",
         "patchSetId": 6
@@ -83,6 +119,24 @@
       "writtenOn": "2016-12-13T19:59:46Z",
       "side": 1,
       "message": "See my comment in the wiring file.",
+      "revId": "7962e1d563dcc623ba25e66506cf85bba1c86d40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_45821999",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 1263,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T12:37:07Z",
+      "side": 1,
+      "message": "This is method is no longer needed, given the new approach, so removed.",
+      "parentUuid": "2edfb757_495fd6e8",
       "revId": "7962e1d563dcc623ba25e66506cf85bba1c86d40",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
