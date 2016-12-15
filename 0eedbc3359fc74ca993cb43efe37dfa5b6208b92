@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_a058a38d",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-15T13:35:06Z",
+      "side": 1,
+      "message": "I believe this must be changed to \"BufferingTermLookup\".",
+      "range": {
+        "startLine": 223,
+        "startChar": 9,
+        "endLine": 223,
+        "endChar": 19
+      },
+      "revId": "0eedbc3359fc74ca993cb43efe37dfa5b6208b92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_20c3930c",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-15T13:35:06Z",
+      "side": 1,
+      "message": "Why not rename it right now?",
+      "revId": "0eedbc3359fc74ca993cb43efe37dfa5b6208b92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_4078c7ed",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-15T13:35:06Z",
+      "side": 1,
+      "message": "Do callers need to know this? The private property above is marked as \"TermLookup\" only.",
+      "range": {
+        "startLine": 433,
+        "startChar": 12,
+        "endLine": 433,
+        "endChar": 33
+      },
+      "revId": "0eedbc3359fc74ca993cb43efe37dfa5b6208b92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_e05d7b7f",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-15T13:35:06Z",
+      "side": 1,
+      "message": "My local code base hints that this should be private.",
+      "range": {
+        "startLine": 435,
+        "startChar": 1,
+        "endLine": 435,
+        "endChar": 7
+      },
+      "revId": "0eedbc3359fc74ca993cb43efe37dfa5b6208b92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_2064b344",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-15T13:35:06Z",
+      "side": 1,
+      "message": "Is this still true and relevant for callers?",
+      "range": {
+        "startLine": 435,
+        "startChar": 20,
+        "endLine": 435,
+        "endChar": 29
+      },
+      "revId": "0eedbc3359fc74ca993cb43efe37dfa5b6208b92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
