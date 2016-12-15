@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_58a67fa8",
+        "filename": "repo/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-15T17:25:34Z",
+      "side": 1,
+      "message": "I use traits very rear in production code, but I\u0027ve them quiet often handy in test code.",
+      "parentUuid": "0e0e73b5_9b62b405",
+      "revId": "c982221271199510a2c77c6d554910a3863ce2d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_7bb0203f",
         "filename": "repo/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php",
         "patchSetId": 2
