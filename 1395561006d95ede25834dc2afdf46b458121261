@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e0e73b5_d8d26f5d",
+        "filename": "client/includes/Store/RepositoryServiceContainer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T17:07:29Z",
+      "side": 1,
+      "message": "It seems a bit strange to me to create a temporary factory instance. But that\u0027s not new, I guess.",
+      "revId": "1395561006d95ede25834dc2afdf46b458121261",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_db470c7b",
         "filename": "client/includes/Store/RepositoryServiceWiring.php",
         "patchSetId": 8
@@ -13,6 +30,58 @@
       "writtenOn": "2016-12-15T15:19:13Z",
       "side": 1,
       "message": "dead code!",
+      "revId": "1395561006d95ede25834dc2afdf46b458121261",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_58655fa9",
+        "filename": "client/includes/Store/RepositoryServiceWiring.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T17:07:29Z",
+      "side": 1,
+      "message": "want to remove it?",
+      "parentUuid": "0e0e73b5_db470c7b",
+      "revId": "1395561006d95ede25834dc2afdf46b458121261",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_38018bba",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 959,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T17:07:29Z",
+      "side": 1,
+      "message": "why is this public?",
+      "revId": "1395561006d95ede25834dc2afdf46b458121261",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_d826ef62",
+        "filename": "client/tests/phpunit/includes/Store/RepositoryServiceContainerTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T17:07:29Z",
+      "side": 1,
+      "message": "It may be useful to have a separate test class for the wiring file.",
       "revId": "1395561006d95ede25834dc2afdf46b458121261",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
