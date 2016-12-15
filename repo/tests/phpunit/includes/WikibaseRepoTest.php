@@ -20,6 +20,7 @@ use RequestContext;
 use Serializers\Serializer;
 use User;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -313,19 +314,39 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertContains( 'bar', $localEntityTypes );
 	}
 
+	/**
+	 * @param SettingsArray $clientSettings
+	 *
+	 * @return WikibaseRepo
+	 */
+	private function getWikibaseRepoWithClientSettings( SettingsArray $clientSettings ) {
+		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
+		return new WikibaseRepo(
+			$settings,
+			new DataTypeDefinitions( [] ),
+			new EntityTypeDefinitions( [] ),
+			null, // FIXME: providing no DataRetrievalServiceFactory but client settings does not make much sense
+			$clientSettings
+		);
+	}
+
 	public function testGetEnabledEntityTypes() {
-		$wikibaseRepo = $this->getWikibaseRepo();
+		if ( !defined( 'WBC_VERSION' ) ) {
+			$this->markTestSkipped( 'WikibaseClient must be enabled to run this test' );
+		}
+
+		$clientSettings = WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy();
+		$clientSettings['foreignRepositories'] = [
+			'repo1' => [ 'supportedEntityTypes' => [ 'foo', 'baz' ] ],
+			'repo2' => [ 'supportedEntityTypes' => [ 'foobar' ] ],
+		];
+
+		$wikibaseRepo = $this->getWikibaseRepoWithClientSettings( new SettingsArray( $clientSettings ) );
 		$wikibaseRepo->getSettings()->setSetting(
 			'entityNamespaces',
 			[ 'foo' => 100, 'bar' => 102 ]
 		);
-		$wikibaseRepo->getSettings()->setSetting(
-			'foreignRepositories',
-			[
-				'repo1' => [ 'supportedEntityTypes' => [ 'foo', 'baz' ] ],
-				'repo2' => [ 'supportedEntityTypes' => [ 'foobar' ] ],
-			]
-		);
+
 		$enabled = $wikibaseRepo->getEnabledEntityTypes();
 		$this->assertContains( 'foo', $enabled );
 		$this->assertContains( 'bar', $enabled );
@@ -441,13 +462,11 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	 * @return WikibaseRepo
 	 */
 	private function getWikibaseRepo( $entityTypeDefinitions = array() ) {
-		$language = Language::factory( 'qqx' );
 		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
 		return new WikibaseRepo(
 			$settings,
 			new DataTypeDefinitions( array() ),
-			new EntityTypeDefinitions( $entityTypeDefinitions ),
-			$language
+			new EntityTypeDefinitions( $entityTypeDefinitions )
 		);
 	}
 
