@@ -6,6 +6,7 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
+use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\TermSqlIndex;
@@ -27,17 +28,12 @@ return [
 			$client->getSettings()->getSetting( 'maxSerializedEntitySize' ) * 1024
 		);
 
-		$metaDataLookup = new PrefetchingWikiPageEntityMetaDataAccessor(
-			new WikiPageEntityMetaDataLookup(
-				$client->getEntityNamespaceLookup(),
-				$services->getDatabaseName(),
-				$services->getRepositoryName()
-			)
-		);
+		/** @var WikiPageEntityMetaDataAccessor $metaDataAccessor */
+		$metaDataAccessor = $services->getService( 'WikiPageEntityMetaDataAccessor' );
 
 		return new WikiPageEntityRevisionLookup(
 			$codec,
-			$metaDataLookup,
+			$metaDataAccessor,
 			$services->getDatabaseName()
 		);
 	},
@@ -62,6 +58,19 @@ return [
 			$client->getEntityIdComposer(),
 			$services->getDatabaseName(),
 			$services->getRepositoryName()
+		);
+	},
+
+	'WikiPageEntityMetaDataAccessor' => function(
+		RepositoryServiceContainer $services,
+		WikibaseClient $client
+	) {
+		return new PrefetchingWikiPageEntityMetaDataAccessor(
+			new WikiPageEntityMetaDataLookup(
+				$client->getEntityNamespaceLookup(),
+				$services->getDatabaseName(),
+				$services->getRepositoryName()
+			)
 		);
 	}
 

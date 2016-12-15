@@ -365,7 +365,7 @@ final class WikibaseClient {
 	/**
 	 * @return EntityDataRetrievalServiceFactory
 	 */
-	private function getEntityDataRetrievalServiceFactory() {
+	public function getEntityDataRetrievalServiceFactory() {
 		if ( $this->entityDataRetrievalServiceFactory === null ) {
 			$factory = new DispatchingServiceFactory(
 				$this->getRepositoryServiceContainerFactory(),
