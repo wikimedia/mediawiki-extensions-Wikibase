@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_58eb1fa1",
+        "filename": "docs/options.wiki",
+        "patchSetId": 9
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T17:36:31Z",
+      "side": 1,
+      "message": "Wiring file lists are not really configuration. They are extension points for use by other extensions.\n\nWe currently have no good place to put such information. For entity type definitions (which are also a kind of wiring files) we use a hook WikibaseEntityTypes. We could also use a separate global variable for each kind of wiring file, or a single global for all lists of wiring files.\n\nIt\u0027s ok to have this in the config array for now, but it should be listed here in a separate section, perhaps called \"pseudo-configuration\", with an explanation telling people that this is really not configuration, and should not be changed manually. Perhaps we should have a ticket for figuring out how to best do this.",
+      "revId": "f17974c727c0cf5ca6e0e1d52083d1e2526f8ca6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
