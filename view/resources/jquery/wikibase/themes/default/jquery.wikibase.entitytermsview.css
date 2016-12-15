@@ -50,6 +50,14 @@
 	display: none;
 }
 
+.wikibase-entitytermsview-entitytermsforlanguagelistview {
+	/* Reserve space for the toggler to avoid the rest of the page jumping down when it loads in */
+	margin-top: 2.6em;
+}
+.wikibase-entitytermsview-entitytermsforlanguagelistview-toggler ~ .wikibase-entitytermsview-entitytermsforlanguagelistview {
+	/* Remove the reserve space when the toggler loaded in */
+	margin-top: 0;
+}
 
 .wikibase-entitytermsview .wikibase-toolbar-container {
 	width: auto;
