@@ -66,6 +66,7 @@
 		"psr-4": {
 			"Wikibase\\Client\\Tests\\": "client/tests/phpunit/includes",
 			"Wikibase\\Lib\\Tests\\": "lib/tests/phpunit",
+			"Wikibase\\Repo\\Tests\\": "repo/tests/phpunit/includes",
 			"Wikibase\\View\\": "view/src",
 			"Wikibase\\View\\Tests\\": "view/tests/phpunit"
 		}
