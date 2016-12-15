@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_de8a571c",
+        "filename": "lib/includes/Formatters/CommonsLinkFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2016-12-15T20:52:46Z",
+      "side": 1,
+      "message": "PHP Fatal error:  Call to a member function getAllPaths() on a non-object in /srv/jenkins-workspace/workspace/mwext-testextension-php55-composer/src/extensions/Wikibase/lib/includes/Formatters/CommonsLinkFormatter.php on line 70",
+      "range": {
+        "startLine": 70,
+        "startChar": 78,
+        "endLine": 70,
+        "endChar": 91
+      },
+      "revId": "c66f066be911e4aa25411ad75bbbc28fd6b02305",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
