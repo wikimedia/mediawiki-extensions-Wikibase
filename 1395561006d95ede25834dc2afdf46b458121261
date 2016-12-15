@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e0e73b5_7816e3f7",
+        "filename": "client/includes/Store/RepositoryServiceContainer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T17:11:04Z",
+      "side": 1,
+      "message": "Please briefly describe the purpose of this class.",
+      "revId": "1395561006d95ede25834dc2afdf46b458121261",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_38d74b2a",
+        "filename": "client/includes/Store/RepositoryServiceContainer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T17:11:04Z",
+      "side": 1,
+      "message": "Since Deserializer is a very generic interface, please specify what kind of object this deserialize will return.",
+      "revId": "1395561006d95ede25834dc2afdf46b458121261",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_d8d26f5d",
         "filename": "client/includes/Store/RepositoryServiceContainer.php",
         "patchSetId": 8
@@ -82,6 +116,24 @@
       "writtenOn": "2016-12-15T17:07:29Z",
       "side": 1,
       "message": "It may be useful to have a separate test class for the wiring file.",
+      "revId": "1395561006d95ede25834dc2afdf46b458121261",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_d8e5cf07",
+        "filename": "client/tests/phpunit/includes/Store/RepositoryServiceContainerTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T17:11:04Z",
+      "side": 1,
+      "message": "...especially since we don\u0027t test the actual wiring file in this class any more.\n\nBut then, there is not much to test. Check that all the keys are there, and that the instantiators return objects of the correct type.",
+      "parentUuid": "0e0e73b5_d826ef62",
       "revId": "1395561006d95ede25834dc2afdf46b458121261",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
