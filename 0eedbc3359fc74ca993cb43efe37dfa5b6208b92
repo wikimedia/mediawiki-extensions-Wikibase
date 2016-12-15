@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_8026bfc7",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T13:51:10Z",
+      "side": 1,
+      "message": "Probably it should be changed yes. Although this is not caused by changes here. Will change.",
+      "parentUuid": "0e0e73b5_a058a38d",
+      "range": {
+        "startLine": 223,
+        "startChar": 9,
+        "endLine": 223,
+        "endChar": 19
+      },
+      "revId": "0eedbc3359fc74ca993cb43efe37dfa5b6208b92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_20c3930c",
         "filename": "client/includes/WikibaseClient.php",
         "patchSetId": 4
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_20b83374",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T13:51:10Z",
+      "side": 1,
+      "message": "I have no problem with renaming it but as this is a public interface of the top level factory I thought maybe renaming it should be done more carefully. But I can rename it right away",
+      "parentUuid": "0e0e73b5_20c3930c",
+      "revId": "0eedbc3359fc74ca993cb43efe37dfa5b6208b92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_4078c7ed",
         "filename": "client/includes/WikibaseClient.php",
         "patchSetId": 4
@@ -53,6 +95,30 @@
       "writtenOn": "2016-12-15T13:35:06Z",
       "side": 1,
       "message": "Do callers need to know this? The private property above is marked as \"TermLookup\" only.",
+      "range": {
+        "startLine": 433,
+        "startChar": 12,
+        "endLine": 433,
+        "endChar": 33
+      },
+      "revId": "0eedbc3359fc74ca993cb43efe37dfa5b6208b92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_e03e9bd6",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T13:51:10Z",
+      "side": 1,
+      "message": "yes, as this is called in TermSearchInteractor constructor which expects an instance of PrefetchingTermLookup, not just a TermLookup.",
+      "parentUuid": "0e0e73b5_4078c7ed",
       "range": {
         "startLine": 433,
         "startChar": 12,
@@ -104,6 +170,30 @@
         "startChar": 20,
         "endLine": 435,
         "endChar": 29
+      },
+      "revId": "0eedbc3359fc74ca993cb43efe37dfa5b6208b92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_605ceb4e",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T13:51:10Z",
+      "side": 1,
+      "message": "I don\u0027t see it used by any other class but I have already learned I might not have checked all relevant extensions etc.\n\nBut if it is actually fine to make this private same as remark as with renaming: should this happen right away. I\u0027m fine with that, but again it is changing public api.",
+      "parentUuid": "0e0e73b5_e05d7b7f",
+      "range": {
+        "startLine": 435,
+        "startChar": 1,
+        "endLine": 435,
+        "endChar": 7
       },
       "revId": "0eedbc3359fc74ca993cb43efe37dfa5b6208b92",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
