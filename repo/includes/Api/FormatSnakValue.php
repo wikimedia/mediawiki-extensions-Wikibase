@@ -10,7 +10,7 @@ use DataValues\IllegalValueException;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use LogicException;
-use UsageException;
+use ApiUsageException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -178,7 +178,7 @@ class FormatSnakValue extends ApiBase {
 	/**
 	 * @param string $json A JSON-encoded DataValue
 	 *
-	 * @throws UsageException
+	 * @throws ApiUsageException
 	 * @throws LogicException
 	 * @return DataValue
 	 */
@@ -196,7 +196,7 @@ class FormatSnakValue extends ApiBase {
 			$this->errorReporter->dieException( $ex, 'baddatavalue' );
 		}
 
-		throw new LogicException( 'ApiErrorReporter::dieException did not throw a UsageException' );
+		throw new LogicException( 'ApiErrorReporter::dieException did not throw an ApiUsageException' );
 	}
 
 	/**

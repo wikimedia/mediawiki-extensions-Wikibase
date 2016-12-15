@@ -160,7 +160,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 	}
 
 	/**
-	 * @expectedException \UsageException
+	 * @expectedException \ApiUsageException
 	 *
 	 * @dataProvider invalidClaimProvider
 	 */

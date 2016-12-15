@@ -5,7 +5,8 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiBase;
 use Exception;
 use PHPUnit_Framework_MockObject_MockObject;
-use UsageException;
+use ApiUsageException;
+use StatusValue;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -96,12 +97,16 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 			$mock->expects( $this->once() )
 				->method( 'dieException' )
 				->with( $this->isInstanceOf( Exception::class ), $expectedExceptionCode )
-				->will( $this->throwException( new UsageException( 'mockUsageException', $expectedExceptionCode ) ) );
+				->will( $this->throwException( ApiUsageException::newWithMessage(
+					null,
+					'mockUsageException',
+					$expectedExceptionCode
+				) ) );
 		} else {
 			$mock->expects( $this->any() )
 				->method( 'dieException' )
 				->will( $this->returnCallback( function( Exception $ex, $code ) {
-					throw new UsageException( $ex->getMessage(), $code );
+					throw ApiUsageException::newWithMessage( null, $ex->getMessage(), $code );
 				} ) );
 		}
 
@@ -109,12 +114,16 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 			$mock->expects( $this->once() )
 				->method( 'dieError' )
 				->with( $this->isType( 'string' ), $expectedErrorCode )
-				->will( $this->throwException( new UsageException( 'mockUsageException', $expectedErrorCode ) ) );
+				->will( $this->throwException( ApiUsageException::newWithMessage(
+					null,
+					'mockUsageException',
+					$expectedErrorCode
+				) ) );
 		} else {
 			$mock->expects( $this->any() )
 				->method( 'dieError' )
 				->will( $this->returnCallback( function( $msg, $code ) {
-					throw new UsageException( $msg, $code );
+					throw ApiUsageException::newWithMessage( null, $msg, $code );
 				} ) );
 		}
 
@@ -226,7 +235,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 			'dieExceptionCode' => 'invalid-entity-id'
 		] );
 
-		$this->setExpectedException( UsageException::class );
+		$this->setExpectedException( ApiUsageException::class );
 		$helper->loadEntity();
 	}
 
@@ -236,7 +245,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 			'dieErrorCode' => 'no-entity-id'
 		] );
 
-		$this->setExpectedException( UsageException::class );
+		$this->setExpectedException( ApiUsageException::class );
 		$helper->loadEntity();
 	}
 
@@ -248,7 +257,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 			'dieErrorCode' => 'no-such-entity'
 		] );
 
-		$this->setExpectedException( UsageException::class );
+		$this->setExpectedException( ApiUsageException::class );
 		$helper->loadEntity( $id );
 	}
 
@@ -264,7 +273,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 			'dieExceptionCode' => 'unresolved-redirect'
 		] );
 
-		$this->setExpectedException( UsageException::class );
+		$this->setExpectedException( ApiUsageException::class );
 		$helper->loadEntity( $id );
 	}
 
@@ -277,7 +286,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 			'dieExceptionCode' => 'nosuchrevid'
 		] );
 
-		$this->setExpectedException( UsageException::class );
+		$this->setExpectedException( ApiUsageException::class );
 		$helper->loadEntity( $id );
 	}
 
@@ -290,7 +299,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 			'dieExceptionCode' => 'cant-load-entity-content'
 		] );
 
-		$this->setExpectedException( UsageException::class );
+		$this->setExpectedException( ApiUsageException::class );
 		$helper->loadEntity( $id );
 	}
 

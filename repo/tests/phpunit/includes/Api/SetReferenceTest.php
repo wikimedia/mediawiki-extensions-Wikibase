@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Api;
 
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
-use UsageException;
+use ApiUsageException;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -245,7 +245,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		try {
 			$this->doApiRequestWithToken( $params );
 			$this->assertFalse( true, 'Invalid request should raise an exception' );
-		} catch ( UsageException $e ) {
+		} catch ( ApiUsageException $e ) {
 			$this->assertEquals(
 				$expectedErrorCode,
 				$e->getCodeString(),
@@ -327,7 +327,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	 * @dataProvider provideInvalidSerializations
 	 */
 	public function testInvalidSerialization( $snaksSerialization ) {
-		$this->setExpectedException( UsageException::class );
+		$this->setExpectedException( ApiUsageException::class );
 		$params = array(
 			'action' => 'wbsetreference',
 			'statement' => 'Foo$Guid',
@@ -414,7 +414,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		try {
 			$this->doApiRequestWithToken( $params );
 			$this->fail( 'Invalid request did not raise an error' );
-		} catch ( UsageException $ex ) {
+		} catch ( ApiUsageException $ex ) {
 			$this->assertEquals( $error, $ex->getCodeString(), 'Invalid request raised correct error' );
 		}
 	}

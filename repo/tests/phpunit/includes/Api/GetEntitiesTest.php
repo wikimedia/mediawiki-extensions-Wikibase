@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use UsageException;
+use ApiUsageException;
 use Wikibase\Test\Repo\Api\WikibaseApiTestCase;
 
 /**
@@ -384,34 +384,34 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		return array(
 			array( //0 no params
 				'p' => array(),
-				'e' => array( 'exception' => array( 'type' => UsageException::class, 'code' => 'param-missing' ) ) ),
+				'e' => array( 'exception' => array( 'type' => ApiUsageException::class, 'code' => 'param-missing' ) ) ),
 			array( //1 bad id
 				'p' => array( 'ids' => 'ABCD' ),
-				'e' => array( 'exception' => array( 'type' => UsageException::class, 'code' => 'no-such-entity', 'id' => 'ABCD' ) ) ),
+				'e' => array( 'exception' => array( 'type' => ApiUsageException::class, 'code' => 'no-such-entity', 'id' => 'ABCD' ) ) ),
 			array( //2 bad site
 				'p' => array( 'sites' => 'qwertyuiop', 'titles' => 'Berlin' ),
-				'e' => array( 'exception' => array( 'type' => UsageException::class, 'code' => 'param-missing' ) ) ),
+				'e' => array( 'exception' => array( 'type' => ApiUsageException::class, 'code' => 'param-missing' ) ) ),
 			array( //3 bad and good id
 				'p' => array( 'ids' => 'q1|aaaa' ),
-				'e' => array( 'exception' => array( 'type' => UsageException::class, 'code' => 'no-such-entity', 'id' => 'aaaa' ) ) ),
+				'e' => array( 'exception' => array( 'type' => ApiUsageException::class, 'code' => 'no-such-entity', 'id' => 'aaaa' ) ) ),
 			array( //4 site and no title
 				'p' => array( 'sites' => 'enwiki' ),
-				'e' => array( 'exception' => array( 'type' => UsageException::class, 'code' => 'param-missing' ) ) ),
+				'e' => array( 'exception' => array( 'type' => ApiUsageException::class, 'code' => 'param-missing' ) ) ),
 			array( //5 title and no site
 				'p' => array( 'titles' => 'Berlin' ),
-				'e' => array( 'exception' => array( 'type' => UsageException::class, 'code' => 'param-missing' ) ) ),
+				'e' => array( 'exception' => array( 'type' => ApiUsageException::class, 'code' => 'param-missing' ) ) ),
 			array( //6 normalization fails with 2 titles
 				'p' => array( 'sites' => 'enwiki', 'titles' => 'Foo|Bar' ,'normalize' => '' ),
-				'e' => array( 'exception' => array( 'type' => UsageException::class, 'code' => 'params-illegal' ) ) ),
+				'e' => array( 'exception' => array( 'type' => ApiUsageException::class, 'code' => 'params-illegal' ) ) ),
 			array( //7 normalization fails with 2 sites
 				'p' => array( 'sites' => 'enwiki|dewiki', 'titles' => 'Boo' ,'normalize' => '' ),
-				'e' => array( 'exception' => array( 'type' => UsageException::class, 'code' => 'params-illegal' ) ) ),
+				'e' => array( 'exception' => array( 'type' => ApiUsageException::class, 'code' => 'params-illegal' ) ) ),
 			array( //8 normalization fails with 2 sites and 2 titles
 				'p' => array( 'sites' => 'enwiki|dewiki', 'titles' => 'Foo|Bar' ,'normalize' => '' ),
-				'e' => array( 'exception' => array( 'type' => UsageException::class, 'code' => 'params-illegal' ) ) ),
+				'e' => array( 'exception' => array( 'type' => ApiUsageException::class, 'code' => 'params-illegal' ) ) ),
 			array( //9 must request one site, one title, or an equal number of sites and titles
 				'p' => array( 'sites' => 'dewiki|enwiki', 'titles' => 'Oslo|Berlin|London' ),
-				'e' => array( 'exception' => array( 'type' => UsageException::class, 'code' => 'params-illegal' ) ) ),
+				'e' => array( 'exception' => array( 'type' => ApiUsageException::class, 'code' => 'params-illegal' ) ) ),
 		);
 	}
 

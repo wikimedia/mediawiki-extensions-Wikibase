@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Api;
 use MediaWikiSite;
 use SiteStore;
 use Title;
-use UsageException;
+use ApiUsageException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\Api\ItemByTitleHelper;
@@ -139,7 +139,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 	 * Makes sure the request will fail if we want normalization for two titles
 	 */
 	public function testGetEntityIdsNormalizationNotAllowed() {
-		$this->setExpectedException( UsageException::class );
+		$this->setExpectedException( ApiUsageException::class );
 
 		$itemByTitleHelper = new ItemByTitleHelper(
 			$this->getResultBuilderMock(),
@@ -212,7 +212,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider notEnoughInputProvider
 	 */
 	public function testNotEnoughInput( array $sites, array $titles, $normalize ) {
-		$this->setExpectedException( UsageException::class );
+		$this->setExpectedException( ApiUsageException::class );
 
 		$itemByTitleHelper = new ItemByTitleHelper(
 			$this->getResultBuilderMock(),

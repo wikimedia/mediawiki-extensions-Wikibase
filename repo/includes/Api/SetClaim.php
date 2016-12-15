@@ -12,7 +12,7 @@ use InvalidArgumentException;
 use LogicException;
 use MediaWiki\MediaWikiServices;
 use OutOfBoundsException;
-use UsageException;
+use ApiUsageException;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\ClaimSummaryBuilder;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
@@ -178,7 +178,7 @@ class SetClaim extends ApiBase {
 	 * @param array $params
 	 *
 	 * @throws IllegalValueException
-	 * @throws UsageException
+	 * @throws ApiUsageException
 	 * @throws LogicException
 	 * @return Statement
 	 */

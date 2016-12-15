@@ -11,7 +11,7 @@ use LogicException;
 use MediaWiki\MediaWikiServices;
 use Message;
 use Status;
-use UsageException;
+use ApiUsageException;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 
 /**
@@ -106,7 +106,7 @@ class ApiErrorReporter {
 	 * @param int $httpRespCode The HTTP error code to send to the client
 	 * @param array|null $extradata Any extra data to include in the error report
 	 *
-	 * @throws UsageException
+	 * @throws ApiUsageException
 	 * @throws LogicException
 	 */
 	public function dieStatus( Status $status, $errorCode, $httpRespCode = 0, $extradata = array() ) {
@@ -121,7 +121,7 @@ class ApiErrorReporter {
 
 		$this->throwUsageException( $description, $errorCode, $httpRespCode, $extradata );
 
-		throw new LogicException( 'UsageException not thrown' );
+		throw new LogicException( 'ApiUsageException not thrown' );
 	}
 
 	/**
@@ -142,7 +142,7 @@ class ApiErrorReporter {
 	 * @param int $httpRespCode The HTTP error code to send to the client
 	 * @param array|null $extradata Any extra data to include in the error report
 	 *
-	 * @throws UsageException
+	 * @throws ApiUsageException
 	 * @throws LogicException
 	 */
 	public function dieException( Exception $ex, $errorCode, $httpRespCode = 0, $extradata = array() ) {
@@ -159,7 +159,7 @@ class ApiErrorReporter {
 
 		$this->dieError( $ex->getMessage(), $errorCode, $httpRespCode, $extradata );
 
-		throw new LogicException( 'UsageException not thrown' );
+		throw new LogicException( 'ApiUsageException not thrown' );
 	}
 
 	/**
@@ -168,7 +168,7 @@ class ApiErrorReporter {
 	 * @param string $errorCode A code identifying the error.
 	 * @param string [$param,...] Parameters for the Message.
 	 *
-	 * @throws UsageException
+	 * @throws ApiUsageException
 	 * @throws LogicException
 	 */
 	public function dieMessage( $errorCode /*...*/ ) {
@@ -184,7 +184,7 @@ class ApiErrorReporter {
 
 		$this->dieMessageObject( $message, $errorCode );
 
-		throw new LogicException( 'UsageException not thrown' );
+		throw new LogicException( 'ApiUsageException not thrown' );
 	}
 
 	/**
@@ -201,7 +201,7 @@ class ApiErrorReporter {
 	 * @param int $httpRespCode The HTTP error code to send to the client
 	 * @param array|null $extradata Any extra data to include in the error report
 	 *
-	 * @throws UsageException
+	 * @throws ApiUsageException
 	 * @throws LogicException
 	 */
 	private function dieMessageObject( Message $message, $errorCode, $httpRespCode = 0, $extradata = array() ) {
@@ -211,7 +211,7 @@ class ApiErrorReporter {
 
 		$this->throwUsageException( $description, $errorCode, $httpRespCode, $extradata );
 
-		throw new LogicException( 'UsageException not thrown' );
+		throw new LogicException( 'ApiUsageException not thrown' );
 	}
 
 	/**
@@ -230,7 +230,7 @@ class ApiErrorReporter {
 	 * @param int $httpRespCode The HTTP error code to send to the client
 	 * @param array|null $extradata Any extra data to include in the error report
 	 *
-	 * @throws UsageException
+	 * @throws ApiUsageException
 	 * @throws LogicException
 	 */
 	public function dieError( $description, $errorCode, $httpRespCode = 0, $extradata = array() ) {
@@ -252,11 +252,11 @@ class ApiErrorReporter {
 
 		$this->throwUsageException( $description, $errorCode, $httpRespCode, $extradata );
 
-		throw new LogicException( 'UsageException not thrown' );
+		throw new LogicException( 'ApiUsageException not thrown' );
 	}
 
 	/**
-	 * Throws a UsageException by calling ApiBase::dieUsage().
+	 * Throws a ApiUsageException by calling ApiBase::dieUsage().
 	 *
 	 * @see ApiBase::dieUsage()
 	 *
@@ -265,7 +265,7 @@ class ApiErrorReporter {
 	 * @param int $httpRespCode
 	 * @param null|array $extradata
 	 *
-	 * @throws UsageException
+	 * @throws ApiUsageException
 	 * @throws LogicException
 	 */
 	private function throwUsageException( $description, $errorCode, $httpRespCode = 0, $extradata = null ) {
@@ -274,7 +274,7 @@ class ApiErrorReporter {
 
 		$this->apiModule->getMain()->dieUsage( $description, $errorCode, $httpRespCode, $extradata );
 
-		throw new LogicException( 'UsageException not thrown' );
+		throw new LogicException( 'ApiUsageException not thrown' );
 	}
 
 	/**
