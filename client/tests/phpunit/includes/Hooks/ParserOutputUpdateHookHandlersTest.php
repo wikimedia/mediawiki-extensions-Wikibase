@@ -22,7 +22,6 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\InterwikiSorter;
 use Wikibase\LangLinkHandler;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\NamespaceChecker;
@@ -120,15 +119,9 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 	 */
 	private function newSettings( array $settings ) {
 		$defaults = array(
-			'sort' => 'code',
-			'sortPrepend' => array(),
-			'interwikiSortOrders' => array( 'alphabetic' => array(
-				'ar', 'de', 'en', 'sv', 'zh'
-			) ),
 			'siteGlobalID' => 'enwiki',
 			'languageLinkSiteGroup' => 'wikipedia',
 			'namespaces' => array( NS_MAIN, NS_CATEGORY ),
-			'alwaysSort' => false,
 			'otherProjectsLinks' => array( 'commonswiki' ),
 			'otherProjectsLinksBeta' => true,
 			'otherProjectsLinksByDefault' => false,
@@ -178,18 +171,10 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 			$settings->getSetting( 'languageLinkSiteGroup' )
 		);
 
-		$interwikiSorter = new InterwikiSorter(
-			$settings->getSetting( 'sort' ),
-			$settings->getSetting( 'interwikiSortOrders' ),
-			$settings->getSetting( 'sortPrepend' )
-		);
-
 		return new ParserOutputUpdateHookHandlers(
 			$namespaceChecker,
 			$langLinkHandler,
-			$parserOutputDataUpdater,
-			$interwikiSorter,
-			$settings->getSetting( 'alwaysSort' )
+			$parserOutputDataUpdater
 		);
 	}
 
