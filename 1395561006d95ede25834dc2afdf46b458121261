@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_db470c7b",
+        "filename": "client/includes/Store/RepositoryServiceWiring.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T15:19:13Z",
+      "side": 1,
+      "message": "dead code!",
+      "revId": "1395561006d95ede25834dc2afdf46b458121261",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
