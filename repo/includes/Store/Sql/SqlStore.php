@@ -6,6 +6,7 @@ use DBQueryError;
 use HashBagOStuff;
 use ObjectCache;
 use Revision;
+use Wikibase\Client\DispatchingServiceFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -15,6 +16,7 @@ use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
+use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\CachingPropertyInfoStore;
 use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -31,6 +33,7 @@ use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
+use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
@@ -146,6 +149,11 @@ class SqlStore implements Store {
 	private $entityNamespaceLookup;
 
 	/**
+	 * @var DispatchingServiceFactory
+	 */
+	private $dispatchingServiceFactory;
+
+	/**
 	 * @var string
 	 */
 	private $cacheKeyPrefix;
@@ -173,6 +181,8 @@ class SqlStore implements Store {
 	 * @param EntityIdLookup $entityIdLookup
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
+	 * @param DispatchingServiceFactory|null $dispatchingServiceFactory Optional service factory providing services
+	 *        configured for local database, and for foreign repositories
 	 */
 	public function __construct(
 		EntityChangeFactory $entityChangeFactory,
@@ -181,7 +191,8 @@ class SqlStore implements Store {
 		EntityIdComposer $entityIdComposer,
 		EntityIdLookup $entityIdLookup,
 		EntityTitleLookup $entityTitleLookup,
-		EntityNamespaceLookup $entityNamespaceLookup
+		EntityNamespaceLookup $entityNamespaceLookup,
+		DispatchingServiceFactory $dispatchingServiceFactory = null
 	) {
 		$this->entityChangeFactory = $entityChangeFactory;
 		$this->contentCodec = $contentCodec;
@@ -190,6 +201,7 @@ class SqlStore implements Store {
 		$this->entityIdLookup = $entityIdLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
+		$this->dispatchingServiceFactory = $dispatchingServiceFactory;
 
 		//TODO: inject settings
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
@@ -452,13 +464,11 @@ class SqlStore implements Store {
 		$dispatcher = $this->getEntityStoreWatcher();
 
 		$metaDataFetcher = $this->getEntityPrefetcher();
+		// TODO: this is wrong when using dispatching entity revision lookup. each of repo-specific lookups
+		// has it its own prefetcher. They should be watched here somehow?
 		$dispatcher->registerWatcher( $metaDataFetcher );
 
-		$rawLookup = new WikiPageEntityRevisionLookup(
-			$this->contentCodec,
-			$metaDataFetcher,
-			false
-		);
+		$rawLookup = $this->getRawEntityRevisionLookup( $metaDataFetcher );
 
 		// Lower caching layer using persistent cache (e.g. memcached).
 		$persistentCachingLookup = new CachingEntityRevisionLookup(
@@ -481,6 +491,17 @@ class SqlStore implements Store {
 		$dispatcher->registerWatcher( $hashCachingLookup );
 
 		return array( $rawLookup, $hashCachingLookup );
+	}
+
+	private function getRawEntityRevisionLookup( WikiPageEntityMetaDataAccessor $metaDataFetcher ) {
+		if ( $this->dispatchingServiceFactory !== null ) {
+			return $this->dispatchingServiceFactory->getEntityRevisionLookup();
+		}
+		return new WikiPageEntityRevisionLookup(
+			$this->contentCodec,
+			$metaDataFetcher,
+			false
+		);
 	}
 
 	/**
@@ -530,7 +551,12 @@ class SqlStore implements Store {
 	 * @return PropertyInfoLookup
 	 */
 	private function newPropertyInfoLookup() {
-		$table = new PropertyInfoTable( true, $this->entityIdComposer );
+		if ( $this->dispatchingServiceFactory !== null ) {
+			$table = $this->dispatchingServiceFactory->getPropertyInfoLookup();
+		} else {
+			$table = new PropertyInfoTable( true, $this->entityIdComposer );
+		}
+
 		$cacheKey = $this->cacheKeyPrefix . ':CachingPropertyInfoStore';
 
 		return new CachingPropertyInfoLookup(
