@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_7ba93d78",
+        "filename": "repo/includes/Store/Sql/SqlEntitiesWithoutTermFinder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T18:51:53Z",
+      "side": 1,
+      "message": "why only item or property?",
+      "revId": "6a5e6d685e44c7c9d762c62597519e56615b3493",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_1b900146",
+        "filename": "repo/includes/Store/Sql/SqlEntitiesWithoutTermFinder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T18:51:53Z",
+      "side": 1,
+      "message": "what in this code restricts the values to \"item\" or \"property\"?",
+      "revId": "6a5e6d685e44c7c9d762c62597519e56615b3493",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
