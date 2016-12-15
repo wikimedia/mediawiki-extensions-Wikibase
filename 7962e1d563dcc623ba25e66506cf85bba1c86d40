@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_a59af5bb",
+        "filename": "client/includes/Store/RepositoryServiceContainer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T10:01:38Z",
+      "side": 1,
+      "message": "it could infer it from things WikibaseClient exposes, at least with its current implementation. But it indeed would be much nicer to have the mapiing id parser knowing all prefix mapping injected here",
+      "parentUuid": "2edfb757_293daa8a",
+      "revId": "7962e1d563dcc623ba25e66506cf85bba1c86d40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2edfb757_695a92fb",
         "filename": "client/includes/Store/RepositoryServiceWiring.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2016-12-13T19:59:46Z",
       "side": 1,
       "message": "This is ok for now, but seems a bit backwards. I would have expected the EntityRevisionLookupFactory to be constructed using information/callbacks that, in the end, would use a RepositoryServiceContainer to construct the specific EntityRevisionLookup.\n\nPerhaps add a comment that at least explains the considerations at work here.",
+      "revId": "7962e1d563dcc623ba25e66506cf85bba1c86d40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_65bd1d16",
+        "filename": "client/includes/Store/RepositoryServiceWiring.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T10:01:38Z",
+      "side": 1,
+      "message": "Agreed. That was a bit odd way to do things. I\u0027ll move the repo-specific entity lookup instantiation to the wiring, and try to make the factory use repo-specific service containers.",
+      "parentUuid": "2edfb757_695a92fb",
       "revId": "7962e1d563dcc623ba25e66506cf85bba1c86d40",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
