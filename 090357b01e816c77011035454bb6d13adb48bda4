@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_1bdec114",
+        "filename": "repo/includes/Specials/SpecialEntitiesWithoutPageFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T18:55:41Z",
+      "side": 1,
+      "message": "This isn\u0027t needed, the constructor accepts null for $entityTypes, no?",
+      "revId": "090357b01e816c77011035454bb6d13adb48bda4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
