@@ -34,6 +34,24 @@
       "revId": "a2179907f26b590a39fdc5219bf68fdb31304293",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_c5fe0966",
+        "filename": "lib/includes/Store/Sql/PropertyInfoTable.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-15T11:46:42Z",
+      "side": 1,
+      "message": "Yes, removePropertyInfo should have it too. Thanks!",
+      "parentUuid": "0e0e73b5_e53c6d90",
+      "revId": "a2179907f26b590a39fdc5219bf68fdb31304293",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
