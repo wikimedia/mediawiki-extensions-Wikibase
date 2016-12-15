@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_1896c7f3",
+        "filename": "repo/includes/Store/Sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T17:50:39Z",
+      "side": 1,
+      "message": "DispatchingServiceFactory really isn\u0027t a good name to hint against. The name used here should not tell me how the thing works, but what its purpose is. \n\nMaybe the class (or an interface) should be called DataRetrievalServiceFactory? DataLookupServiceFactory?...",
+      "revId": "f619deb23ecc090bf552800440de4499afdfa451",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_58de7fdf",
+        "filename": "repo/includes/Store/Sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T17:50:39Z",
+      "side": 1,
+      "message": "Maybe the DispatchingServiceFactory could be such a watcher...",
+      "revId": "f619deb23ecc090bf552800440de4499afdfa451",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
