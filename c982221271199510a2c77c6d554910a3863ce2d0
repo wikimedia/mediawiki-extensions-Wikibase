@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_1649f96a",
+        "filename": "repo/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T15:31:52Z",
+      "side": 1,
+      "message": "Please note that traits are considered to be an unknown factor in the code architecture, they are not accepted as best practice. It\u0027s not forbidden to use them, but their use should be considered experimental. We can play with them, but let\u0027s not sprinkle our codebase with traits just yet. We should also actively look out for what impact using traits has on our codebase. Ideally, we can present our experiences with traits at the next devsummit :)",
+      "parentUuid": "0e0e73b5_9b62b405",
+      "revId": "c982221271199510a2c77c6d554910a3863ce2d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_7bb0203f",
         "filename": "repo/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php",
         "patchSetId": 2
