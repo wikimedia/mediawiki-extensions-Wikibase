@@ -8,7 +8,7 @@ use Language;
 use RequestContext;
 use Status;
 use Title;
-use UsageException;
+use ApiUsageException;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -236,13 +236,13 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 		try {
 			$this->callApiModule( $params );
 			$this->fail( 'API did not fail with error ' . $expectedCode . ' as expected!' );
-		} catch ( UsageException $ex ) {
+		} catch ( ApiUsageException $ex ) {
 			$this->assertEquals( $expectedCode, $ex->getCodeString() );
 		}
 	}
 
 	public function testSetRedirect_noPermission() {
-		$this->setExpectedException( UsageException::class );
+		$this->setExpectedException( ApiUsageException::class );
 
 		$user = User::newFromName( 'UserWithoutPermission' );
 
