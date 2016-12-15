@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Store;
 
 use BagOStuff;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
  * Class CachingPropertyInfoLookup is an implementation of PropertyInfoLookup
