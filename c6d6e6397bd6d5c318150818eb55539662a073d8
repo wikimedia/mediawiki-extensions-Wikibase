@@ -1,0 +1,261 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_182127ad",
+        "filename": "repo/includes/Api/EntityLoadingHelper.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-12-15T18:03:12Z",
+      "side": 1,
+      "message": "Update the class name here?",
+      "range": {
+        "startLine": 164,
+        "startChar": 76,
+        "endLine": 164,
+        "endChar": 90
+      },
+      "revId": "c6d6e6397bd6d5c318150818eb55539662a073d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_5859df5c",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-12-15T18:03:12Z",
+      "side": 1,
+      "message": "Update the class name here?",
+      "range": {
+        "startLine": 412,
+        "startChar": 67,
+        "endLine": 412,
+        "endChar": 81
+      },
+      "revId": "c6d6e6397bd6d5c318150818eb55539662a073d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_d8438f66",
+        "filename": "repo/includes/Api/FormatSnakValue.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-12-15T18:03:12Z",
+      "side": 1,
+      "message": "Update the class name here?",
+      "range": {
+        "startLine": 199,
+        "startChar": 76,
+        "endLine": 199,
+        "endChar": 90
+      },
+      "revId": "c6d6e6397bd6d5c318150818eb55539662a073d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_58a31f40",
+        "filename": "repo/includes/Api/ItemByTitleHelper.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-12-15T18:03:12Z",
+      "side": 1,
+      "message": "It\u0027d be good to inject the module into this class so you can pass it instead of null here.",
+      "revId": "c6d6e6397bd6d5c318150818eb55539662a073d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_7833830b",
+        "filename": "repo/includes/Api/ModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-12-15T18:03:12Z",
+      "side": 1,
+      "message": "Update the class name here?",
+      "range": {
+        "startLine": 216,
+        "startChar": 46,
+        "endLine": 216,
+        "endChar": 60
+      },
+      "revId": "c6d6e6397bd6d5c318150818eb55539662a073d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_183a47e5",
+        "filename": "repo/includes/Api/StatementModificationHelper.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-12-15T18:03:12Z",
+      "side": 1,
+      "message": "Update the class name here?",
+      "range": {
+        "startLine": 175,
+        "startChar": 46,
+        "endLine": 175,
+        "endChar": 60
+      },
+      "revId": "c6d6e6397bd6d5c318150818eb55539662a073d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_584f9fc0",
+        "filename": "repo/tests/phpunit/includes/Api/FormatSnakValueTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-12-15T18:03:12Z",
+      "side": 1,
+      "message": "The conditional and its \u0027else\u0027 branch can probably be removed if you\u0027re dropping support for pre-Ia6c402a4 MediaWiki.",
+      "revId": "c6d6e6397bd6d5c318150818eb55539662a073d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_58f55f4b",
+        "filename": "repo/tests/phpunit/includes/Api/LinkTitlesTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-12-15T18:03:12Z",
+      "side": 1,
+      "message": "$newText probably isn\u0027t needed anymore if you\u0027re dropping support for pre-Ia6c402a4 MediaWiki. Just keep the \u0027true\u0027 branch wherever it\u0027s used.",
+      "revId": "c6d6e6397bd6d5c318150818eb55539662a073d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_d89f0f05",
+        "filename": "repo/tests/phpunit/includes/Api/ModifyTermTestCase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-12-15T18:03:12Z",
+      "side": 1,
+      "message": "$newText probably isn\u0027t needed anymore if you\u0027re dropping support for pre-Ia6c402a4 MediaWiki. Just keep the \u0027true\u0027 branch wherever it\u0027s used.",
+      "revId": "c6d6e6397bd6d5c318150818eb55539662a073d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_b8fe9b33",
+        "filename": "repo/tests/phpunit/includes/Api/SetAliasesTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-12-15T18:03:12Z",
+      "side": 1,
+      "message": "$newText probably isn\u0027t needed anymore if you\u0027re dropping support for pre-Ia6c402a4 MediaWiki. Just keep the \u0027true\u0027 branch wherever it\u0027s used.",
+      "revId": "c6d6e6397bd6d5c318150818eb55539662a073d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_588c3fdb",
+        "filename": "repo/tests/phpunit/includes/Api/SetSiteLinkTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-12-15T18:03:12Z",
+      "side": 1,
+      "message": "$newText probably isn\u0027t needed anymore if you\u0027re dropping support for pre-Ia6c402a4 MediaWiki. Just keep the \u0027true\u0027 branch wherever it\u0027s used.",
+      "revId": "c6d6e6397bd6d5c318150818eb55539662a073d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_38b86b74",
+        "filename": "repo/tests/phpunit/includes/Api/SetSiteLinkTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-12-15T18:03:12Z",
+      "side": 1,
+      "message": "$newText probably isn\u0027t needed anymore if you\u0027re dropping support for pre-Ia6c402a4 MediaWiki. Just keep the \u0027true\u0027 branch wherever it\u0027s used.",
+      "revId": "c6d6e6397bd6d5c318150818eb55539662a073d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_b8621b05",
+        "filename": "repo/tests/phpunit/includes/Api/WikibaseApiTestCase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-12-15T18:03:12Z",
+      "side": 1,
+      "message": "Update class name here?",
+      "range": {
+        "startLine": 182,
+        "startChar": 33,
+        "endLine": 182,
+        "endChar": 47
+      },
+      "revId": "c6d6e6397bd6d5c318150818eb55539662a073d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
