@@ -108,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_78682385",
+        "filename": "client/includes/Store/RepositoryServiceWiring.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T17:07:29Z",
+      "side": 1,
+      "message": "Perhaps we don\u0027t need EntityRevisionLookupFactory any more. Its functionality is covered by RepositoryServiceContainer I think.",
+      "parentUuid": "0e0e73b5_c543a966",
+      "revId": "7962e1d563dcc623ba25e66506cf85bba1c86d40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2edfb757_495fd6e8",
         "filename": "client/includes/WikibaseClient.php",
         "patchSetId": 6
@@ -137,6 +155,24 @@
       "side": 1,
       "message": "This is method is no longer needed, given the new approach, so removed.",
       "parentUuid": "2edfb757_495fd6e8",
+      "revId": "7962e1d563dcc623ba25e66506cf85bba1c86d40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_1806c7d1",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 1263,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T17:07:29Z",
+      "side": 1,
+      "message": "Also remove the class, then?",
+      "parentUuid": "0e0e73b5_45821999",
       "revId": "7962e1d563dcc623ba25e66506cf85bba1c86d40",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
