@@ -36,7 +36,6 @@ class RepositoryServiceContainerTest extends \PHPUnit_Framework_TestCase {
 
 		return new WikibaseClient(
 			new SettingsArray( $settings ),
-			Language::factory( 'en' ),
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
 			new HashSiteStore()
