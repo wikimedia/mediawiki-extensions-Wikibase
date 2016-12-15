@@ -22,6 +22,115 @@
       "revId": "60c53c1244f409141e2cc54aadf77b5490c2297f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_38be2bd2",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T17:21:28Z",
+      "side": 1,
+      "message": "yes, all classes should have a brief description of their purpose.",
+      "parentUuid": "0e0e73b5_3b074821",
+      "range": {
+        "startLine": 16,
+        "startChar": 6,
+        "endLine": 16,
+        "endChar": 31
+      },
+      "revId": "60c53c1244f409141e2cc54aadf77b5490c2297f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_78cca38c",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T17:21:28Z",
+      "side": 1,
+      "message": "Injecting the top level factory is generally a NO-GO. It\u0027s OK here (for now), but it deserves a comment that explains a) why it is needed b) why other code shouldn\u0027t do it and c) how we can perhaps in the future remove the need to inject it.",
+      "revId": "60c53c1244f409141e2cc54aadf77b5490c2297f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_38a50bb2",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T17:21:28Z",
+      "side": 1,
+      "message": "Both of these methods should in the future be provided by DispatchingServiceFactory, not WikibaseClient. This is worth a //TODO or a phab ticket",
+      "revId": "60c53c1244f409141e2cc54aadf77b5490c2297f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_d88a6f1c",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T17:21:28Z",
+      "side": 1,
+      "message": "This is a map of maps, right? One map for each repo? In that case, it should be called, getIdPrefixMaps, with an s.\n\nAlso, this should be moved to DispatchingServicefactory. Ideally, each RepositoryServiceContainer would know the appropriate mapping for that repository. Worth a //TODO or a phab ticket.",
+      "revId": "60c53c1244f409141e2cc54aadf77b5490c2297f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_787a6321",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T17:21:28Z",
+      "side": 1,
+      "message": "why is this public?",
+      "revId": "60c53c1244f409141e2cc54aadf77b5490c2297f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_d8994f73",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-15T17:21:28Z",
+      "side": 1,
+      "message": "Using mock instantiators here is good, but then we should have a separate test for the wiring file.",
+      "revId": "60c53c1244f409141e2cc54aadf77b5490c2297f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
