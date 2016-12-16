@@ -4,6 +4,8 @@ namespace Wikibase\Repo\Tests\Specials;
 
 use FauxRequest;
 use RequestContext;
+use Site;
+use SiteList;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -29,9 +31,19 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Addshore
  */
 class SpecialNewItemTest extends SpecialNewEntityTest {
+	/**
+	 * @var \SiteStore
+	 */
+	private $siteStore;
+
+	protected function setUp() {
+		parent::setUp();
+
+		$this->siteStore = new \HashSiteStore();
+	}
 
 	protected function newSpecialPage() {
-		return new SpecialNewItem();
+		return new SpecialNewItem( $this->siteStore );
 	}
 
 	public function testAllNecessaryFormFieldsArePresent_WhenRendered() {
@@ -110,6 +122,22 @@ class SpecialNewItemTest extends SpecialNewEntityTest {
 					'aliases' => 'alias1|alias2|alias3',
 				],
 			],
+			'nontrimmed label' => [
+				[
+					'lang' => 'en',
+					'label' => '  some text with spaces on the sides    ',
+					'description' => '',
+					'aliases' => '',
+				],
+			],
+			'nontrimmed description' => [
+				[
+					'lang' => 'en',
+					'label' => '',
+					'description' => '  some description with spaces on the sides    ',
+					'aliases' => '',
+				],
+			],
 			'all input is present' => [
 				[
 					'lang' => 'en',
@@ -143,27 +171,15 @@ class SpecialNewItemTest extends SpecialNewEntityTest {
 				],
 				'site identifier was not recognized',
 			],
-			//Property - uniq: label(in language)
-
-			//			'bad user token' => [  // TODO Probably should be implemented
-			//				[
-			//					'lang' => 'en',
-			//					'label' => 'label',
-			//					'description' => '',
-			//					'aliases' => '',
-			//					'wpEditToken' => 'some bad token'
-			//				],
-			//				'try again',
-			//			],
-			//			'all fields are empty' => [  // TODO Probably should be implemented
-			//				[
-			//					'lang' => 'en',
-			//					'label' => '',
-			//					'description' => '',
-			//					'aliases' => '',
-			//				],
-			//				'???'
-			//			],
+			'all fields are empty' => [
+				[
+					'lang' => 'en',
+					'label' => '',
+					'description' => '',
+					'aliases' => '',
+				],
+				'you need to fill'
+			],
 		];
 	}
 
@@ -183,6 +199,23 @@ class SpecialNewItemTest extends SpecialNewEntityTest {
 		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
 
 		$this->assertHtmlContainsErrorMessage( $html, 'already has label' );
+	}
+
+	public function testErrorAboutNonExistentPageIsDisplayed_WhenSiteExistsButPageDoesNot() {
+		$existingSiteId = 'existing-site';
+		$formData = [
+			'lang' => 'en',
+			'label' => 'some label',
+			'description' => 'some description',
+			'aliases' => '',
+			'site' => $existingSiteId,
+			'page' => 'nonexistent-page'
+		];
+		$this->givenSiteWithNoPagesExists( $existingSiteId );
+
+		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
+
+		$this->assertHtmlContainsErrorMessage( $html, 'could not be found on' );
 	}
 
 	/**
@@ -207,13 +240,13 @@ class SpecialNewItemTest extends SpecialNewEntityTest {
 		$language = $form['lang'];
 		if ( $form['label'] !== '' ) {
 			$this->assertSame(
-				$form['label'],
+				trim( $form['label'] ),
 				$entity->getLabels()->getByLanguage( $language )->getText()
 			);
 		}
 		if ( $form['description'] !== '' ) {
 			$this->assertSame(
-				$form['description'],
+				trim( $form['description'] ),
 				$entity->getDescriptions()->getByLanguage( $language )->getText()
 			);
 		}
@@ -223,6 +256,18 @@ class SpecialNewItemTest extends SpecialNewEntityTest {
 				$entity->getAliasGroups()->getByLanguage( $language )->getAliases()
 			);
 		}
+	}
+
+	/**
+	 * @param $existingSiteId
+	 */
+	private function givenSiteWithNoPagesExists( $existingSiteId ) {
+		/** @var \PHPUnit_Framework_MockObject_MockObject|Site $siteMock */
+		$siteMock = $this->getMock( Site::class, [ 'normalizePageName' ] );
+		$siteMock->setGlobalId( $existingSiteId );
+		$siteMock->method( 'normalizePageName' )->willReturn( false );
+
+		$this->siteStore->saveSite( $siteMock );
 	}
 
 }

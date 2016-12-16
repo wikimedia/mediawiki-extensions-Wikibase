@@ -2,12 +2,12 @@
 
 namespace Wikibase\Repo\Specials;
 
-use InvalidArgumentException;
 use Status;
-use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\DataTypeSelector;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Summary;
 
 /**
  * Page for creating new Wikibase properties.
@@ -18,11 +18,11 @@ use Wikibase\Repo\WikibaseRepo;
  * @author John Erling Blad < jeblad@gmail.com >
  */
 class SpecialNewProperty extends SpecialNewEntity {
-
-	/**
-	 * @var string|null
-	 */
-	private $dataType = null;
+	const FIELD_LANG = 'lang';
+	const FIELD_DATATYPE = 'datatype';
+	const FIELD_LABEL = 'label';
+	const FIELD_DESCRIPTION = 'description';
+	const FIELD_ALIASES = 'aliases';
 
 	/**
 	 * @since 0.2
@@ -35,89 +35,112 @@ class SpecialNewProperty extends SpecialNewEntity {
 		return true;
 	}
 
-	/**
-	 * @see SpecialNewEntity::prepareArguments
-	 */
-	protected function prepareArguments() {
-		parent::prepareArguments();
+	protected function convertFormDataToEntity( array $formData ) {
+		$languageCode = $formData[ self::FIELD_LANG ];
 
-		$this->dataType = $this->getRequest()->getVal(
-			'datatype',
-			isset( $this->parts[2] ) ? $this->parts[2] : ''
-		);
-	}
+		$property = Property::newFromType( $formData[ self::FIELD_DATATYPE ] );
 
-	/**
-	 * @see SpecialNewEntity::hasSufficientArguments()
-	 */
-	protected function hasSufficientArguments() {
-		// TODO: Needs refinement
-		return parent::hasSufficientArguments() && ( $this->dataType !== '' );
-	}
+		$fingerprint = $property->getFingerprint();
+		$fingerprint->setLabel( $languageCode, $formData[ self::FIELD_LABEL ] );
+		$fingerprint->setDescription( $languageCode, $formData[ self::FIELD_DESCRIPTION ] );
 
-	/**
-	 * @see SpecialNewEntity::createEntity
-	 */
-	protected function createEntity() {
-		return Property::newFromType( 'string' );
-	}
+		$aliases = explode( '|', (string)$formData[ self::FIELD_ALIASES ] );
+		$aliases = array_map( [ $this->stringNormalizer, 'trimToNFC' ], $aliases );
+		$fingerprint->setAliasGroup( $languageCode, $aliases );
 
-	/**
-	 * @see SpecialNewEntity::modifyEntity
-	 *
-	 * @param EntityDocument $property
-	 *
-	 * @throws InvalidArgumentException
-	 * @return Status
-	 */
-	protected function modifyEntity( EntityDocument $property ) {
-		$status = parent::modifyEntity( $property );
-
-		if ( $this->dataType !== '' ) {
-			if ( !( $property instanceof Property ) ) {
-				throw new InvalidArgumentException( 'Unexpected entity type' );
-			}
-
-			if ( $this->dataTypeExists() ) {
-				$property->setDataTypeId( $this->dataType );
-			} else {
-				$status->fatal( 'wikibase-newproperty-invalid-datatype' );
-			}
-		}
-
-		return $status;
+		return $property;
 	}
 
 	/**
 	 * @return bool
 	 */
-	private function dataTypeExists() {
+	private function dataTypeExists( $dataType ) {
 		$dataTypeFactory = WikibaseRepo::getDefaultInstance()->getDataTypeFactory();
-		$ids = $dataTypeFactory->getTypeIds();
-		return in_array( $this->dataType, $ids );
+
+		return in_array( $dataType, $dataTypeFactory->getTypeIds() );
 	}
 
 	/**
-	 * @see SpecialNewEntity::additionalFormElements()
+	 * @see SpecialNewEntity::getFormFields()
 	 *
 	 * @return array[]
 	 */
-	protected function additionalFormElements() {
-		$formDescriptor = parent::additionalFormElements();
+	protected function getFormFields() {
+		$langCode = $this->getLanguage()->getCode();
+
+		$formFields = [
+			self::FIELD_LANG => [
+				'name' => self::FIELD_LANG,
+				'options' => $this->getLanguageOptions(),
+				'default' => $langCode,
+				'type' => 'combobox',
+				'id' => 'wb-newentity-language',
+				'filter-callback' => [ $this->stringNormalizer, 'trimToNFC' ],
+				'validation-callback' => function ( $language ) {
+					if ( !in_array( $language, $this->languageCodes ) ) {
+						return [ $this->msg( 'wikibase-newitem-not-recognized-language' )->text() ];
+					}
+
+					return true;
+				},
+				'label-message' => 'wikibase-newentity-language'
+			],
+			self::FIELD_LABEL => [
+				'name' => self::FIELD_LABEL,
+				'default' => isset( $this->parts[0] ) ? $this->parts[0] : '',
+				'type' => 'text',
+				'id' => 'wb-newentity-label',
+				'filter-callback' => [ $this->stringNormalizer, 'trimToNFC' ],
+				'placeholder' => $this->msg(
+					'wikibase-label-edit-placeholder'
+				)->text(),
+				'label-message' => 'wikibase-newentity-label'
+			],
+			self::FIELD_DESCRIPTION => [
+				'name' => self::FIELD_DESCRIPTION,
+				'default' => isset( $this->parts[1] ) ? $this->parts[1] : '',
+				'type' => 'text',
+				'id' => 'wb-newentity-description',
+				'filter-callback' => [ $this->stringNormalizer, 'trimToNFC' ],
+				'placeholder' => $this->msg(
+					'wikibase-description-edit-placeholder'
+				)->text(),
+				'label-message' => 'wikibase-newentity-description'
+			],
+			self::FIELD_ALIASES => [
+				'name' => self::FIELD_ALIASES,
+				'type' => 'text',
+				'id' => 'wb-newentity-aliases',
+				'placeholder' => $this->msg(
+					'wikibase-aliases-edit-placeholder'
+				)->text(),
+				'label-message' => 'wikibase-newentity-aliases'
+			]
+		];
 
 		$dataTypeFactory = WikibaseRepo::getDefaultInstance()->getDataTypeFactory();
-		$selector = new DataTypeSelector( $dataTypeFactory->getTypes(), $this->getLanguage()->getCode() );
+		$selector = new DataTypeSelector(
+			$dataTypeFactory->getTypes(),
+			$this->getLanguage()->getCode()
+		);
 
-		$formDescriptor['datatype'] = [
-			'name' => 'datatype',
+		$formFields[ self::FIELD_DATATYPE ] = [
+			'name' => self::FIELD_DATATYPE,
 			'type' => 'select',
-			'default' => $this->dataType,
+			'default' => isset( $this->parts[2] ) ? $this->parts[2] : 'string',
 			'options' => array_flip( $selector->getOptionsArray() ),
 			'id' => 'wb-newproperty-datatype',
+			'validation-callback' => function ( $dataType, $formData, $form ) {
+				if ( !$this->dataTypeExists( $dataType ) ) {
+					return [ $this->msg( 'wikibase-newproperty-invalid-datatype' )->text() ];
+				}
+
+				return true;
+			},
 			'label-message' => 'wikibase-newproperty-datatype'
 		];
 
-		return $formDescriptor;
+		return $formFields;
 	}
 
 	/**
@@ -143,6 +166,45 @@ class SpecialNewProperty extends SpecialNewEntity {
 		}
 
 		return [];
+	}
+
+	/**
+	 * @param array $formData
+	 *
+	 * @return Status
+	 */
+	protected function validateFormData( array $formData ) {
+		if (
+			$formData[ self::FIELD_LABEL ] == '' &&
+			$formData[ self::FIELD_DESCRIPTION ] == '' &&
+			$formData[ self::FIELD_ALIASES ] == ''
+		) {
+			return Status::newFatal( 'wikibase-newfingerprintprovider-insufficient-data' );
+		}
+
+		return Status::newGood();
+	}
+
+	/**
+	 * @param Property $property
+	 *
+	 * @return Summary
+	 */
+	protected function createSummary( $property ) {
+		$uiLanguageCode = $this->getLanguage()->getCode();
+
+		$summary = new Summary( 'wbeditentity', 'create' );
+		$summary->setLanguage( $uiLanguageCode );
+		/** @var Term|null $labelTerm */
+		$labelTerm = $property->getFingerprint()->getLabels()->getIterator()->current();
+		/** @var Term|null $descriptionTerm */
+		$descriptionTerm = $property->getFingerprint()->getDescriptions()->getIterator()->current();
+		$summary->addAutoSummaryArgs(
+			$labelTerm ? $labelTerm->getText() : '',
+			$descriptionTerm ? $descriptionTerm->getText() : ''
+		);
+
+		return $summary;
 	}
 
 }
