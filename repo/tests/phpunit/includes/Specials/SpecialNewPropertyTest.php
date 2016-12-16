@@ -46,9 +46,6 @@ class SpecialNewPropertyTest extends SpecialNewEntityTest {
 	}
 
 	public function testLabelAndDescriptionAndDataTypeValuesAreSetAccordingToSubpagePath_WhenRendered() {
-		$this->markTestSkipped(
-			"Test fails due to the bug in code. Should be unskipped when bug is fixed"
-		);
 		$subPagePart1 = 'LabelText';
 		$subPagePart2 = 'DescriptionText';
 		$subPagePart3 = 'url';
