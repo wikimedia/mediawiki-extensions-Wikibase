@@ -220,7 +220,7 @@ final class WikibaseClient {
 	private $entityTypeDefinitions;
 
 	/**
-	 * @var TermLookup|null
+	 * @var PrefetchingTermLookup|null
 	 */
 	private $termLookup = null;
 
@@ -402,23 +402,20 @@ final class WikibaseClient {
 	 * @return TermBuffer
 	 */
 	public function getTermBuffer() {
-		return $this->getBufferingTermLookup();
+		return $this->getPrefetchingTermLookup();
 	}
 
 	/**
 	 * @return TermLookup
 	 */
 	public function getTermLookup() {
-		return $this->getBufferingTermLookup();
+		return $this->getPrefetchingTermLookup();
 	}
 
 	/**
-	 * TODO: method should be renamed as it returns an implementation of PrefetchingTermLookup interface, not
-	 * specifically BufferingTermLookup instance.
-	 *
 	 * @return PrefetchingTermLookup
 	 */
-	public function getBufferingTermLookup() {
+	private function getPrefetchingTermLookup() {
 		if ( !$this->termLookup ) {
 			$this->termLookup = $this->getDispatchingServiceFactory()->getTermBuffer();
 		}
@@ -437,7 +434,7 @@ final class WikibaseClient {
 		return new TermIndexSearchInteractor(
 			$this->getStore()->getTermIndex(),
 			$this->getLanguageFallbackChainFactory(),
-			$this->getBufferingTermLookup(),
+			$this->getPrefetchingTermLookup(),
 			$displayLanguageCode
 		);
 	}
