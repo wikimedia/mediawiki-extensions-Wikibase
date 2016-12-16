@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_ff207298",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2016-12-16T14:38:07Z",
+      "side": 1,
+      "message": "Shouldn\u0027t all this references to dieUsage inside the comments be updated as well..? There are several in this file.",
+      "range": {
+        "startLine": 99,
+        "startChar": 32,
+        "endLine": 99,
+        "endChar": 40
+      },
+      "revId": "c4baf296def20e71c46b70153e41d5e9e3a2dca6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
