@@ -16,6 +16,24 @@
       "revId": "f17974c727c0cf5ca6e0e1d52083d1e2526f8ca6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_8db02f40",
+        "filename": "docs/options.wiki",
+        "patchSetId": 9
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-16T14:37:35Z",
+      "side": 1,
+      "message": "Agreed. I\u0027ve created a ticket for this (T153437) and moved description of those to separate section. That change is mostly done in cd10515e8eb713efba1000e987ece03e652e96c as it introduces wiring files \"settings\".",
+      "parentUuid": "0e0e73b5_58eb1fa1",
+      "revId": "f17974c727c0cf5ca6e0e1d52083d1e2526f8ca6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
