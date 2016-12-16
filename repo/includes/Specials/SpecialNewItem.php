@@ -2,10 +2,15 @@
 
 namespace Wikibase\Repo\Specials;
 
+use HTMLForm;
 use InvalidArgumentException;
+use SiteStore;
 use Status;
+use WebRequest;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\Summary;
 
 /**
  * Page for creating new Wikibase items.
@@ -17,21 +22,21 @@ use Wikibase\DataModel\Entity\Item;
  */
 class SpecialNewItem extends SpecialNewEntity {
 
-	/**
-	 * @var string|null
-	 */
-	private $siteId;
-
-	/**
-	 * @var string|null
-	 */
-	private $pageName;
+	const FIELD_LANG = 'lang';
+	const FIELD_LABEL = 'label';
+	const FIELD_DESCRIPTION = 'description';
+	const FIELD_ALIASES = 'aliases';
+	const FIELD_SITE = 'site';
+	const FIELD_PAGE = 'page';
 
 	/**
 	 * @since 0.1
 	 */
-	public function __construct() {
+	public function __construct(SiteStore $siteStore = null) {
 		parent::__construct( 'NewItem' );
+		if ($siteStore) {
+			$this->siteStore = $siteStore;
+		}
 	}
 
 	public function doesWrites() {
@@ -39,96 +44,146 @@ class SpecialNewItem extends SpecialNewEntity {
 	}
 
 	/**
-	 * @see SpecialNewEntity::prepareArguments
-	 */
-	protected function prepareArguments() {
-		parent::prepareArguments();
-
-		$this->siteId = $this->getRequest()->getVal( 'site' );
-		$this->pageName = $this->getRequest()->getVal( 'page' );
-	}
-
-	/**
 	 * @return bool
 	 */
-	private function isSiteLinkProvided() {
-		return $this->siteId !== null && $this->pageName !== null;
+	private function isSiteLinkProvided( WebRequest $request ) {
+		return $request->getVal( self::FIELD_SITE ) !== null &&
+			   $request->getVal( self::FIELD_PAGE ) !== null;
 	}
 
 	/**
-	 * @see SpecialNewEntity::createEntity
-	 *
+	 * @param array $formData
 	 * @return Item
 	 */
-	protected function createEntity() {
-		return new Item();
-	}
+	protected function convertFormDataToEntity( array $formData ) {
+		$languageCode = $formData[ self::FIELD_LANG ];
 
-	/**
-	 * @see SpecialNewEntity::modifyEntity
-	 *
-	 * @param EntityDocument $item
-	 *
-	 * @throws InvalidArgumentException
-	 * @return Status
-	 */
-	protected function modifyEntity( EntityDocument $item ) {
-		$status = parent::modifyEntity( $item );
+		$item = new Item();
+		$fingerprint = $item->getFingerprint();
+		$fingerprint->setLabel( $languageCode, $formData[ self::FIELD_LABEL ] );
+		$fingerprint->setDescription( $languageCode, $formData[ '' . self::FIELD_DESCRIPTION . '' ] );
 
-		if ( $this->isSiteLinkProvided() ) {
-			if ( !( $item instanceof Item ) ) {
-				throw new InvalidArgumentException( 'Unexpected entity type' );
-			}
+		$aliases = explode( '|', (string)$formData[ self::FIELD_ALIASES ] );
+		$aliases = array_map( [ $this->stringNormalizer, 'trimToNFC' ], $aliases );
+		$fingerprint->setAliasGroup( $languageCode, $aliases );
 
-			$site = $this->siteStore->getSite( $this->siteId );
+		if ( isset( $formData[ self::FIELD_SITE ] ) ) {
+			$site = $this->siteStore->getSite( $formData[ self::FIELD_SITE ] );
+			$normalizedPageName = $site->normalizePageName( $formData[ self::FIELD_PAGE ] );
 
-			if ( $site === null ) {
-				$status->error( 'wikibase-newitem-not-recognized-siteid' );
-				return $status;
-			}
-
-			$normalizedPageName = $site->normalizePageName( $this->pageName );
-
-			if ( $normalizedPageName === false ) {
-				$status->error( 'wikibase-newitem-no-external-page', $this->siteId, $this->pageName );
-				return $status;
-			}
-
-			$item->getSiteLinkList()->addNewSiteLink( $this->siteId, $normalizedPageName );
+			$item->getSiteLinkList()->addNewSiteLink( $site->getGlobalId(), $normalizedPageName );
 		}
 
-		return $status;
+		return $item;
 	}
 
 	/**
-	 * @see SpecialNewEntity::additionalFormElements
-	 *
 	 * @return array[]
 	 */
-	protected function additionalFormElements() {
-		$formDescriptor = parent::additionalFormElements();
+	protected function getFormFields() {
+		$langCode = $this->getLanguage()->getCode();
 
-		if ( $this->isSiteLinkProvided() ) {
-			$formDescriptor['site'] = [
-				'name' => 'site',
-				'default' => $this->siteId,
+		$formFields = [
+			self::FIELD_LANG => [
+				'name' => self::FIELD_LANG,
+				'options' => $this->getLanguageOptions(),
+				'default' => $langCode,
+				'type' => 'combobox',
+				'id' => 'wb-newentity-language',
+				'filter-callback' => [ $this->stringNormalizer, 'trimToNFC' ],
+				'validation-callback' => function ( $language ) {
+					if ( !in_array( $language, $this->languageCodes ) ) {
+						return [ $this->msg( 'wikibase-newitem-not-recognized-language' )->text() ];
+					}
+
+					return true;
+				},
+				'label-message' => 'wikibase-newentity-language'
+			],
+			self::FIELD_LABEL => [
+				'name' => self::FIELD_LABEL,
+				'default' => isset( $this->parts[0] ) ? $this->parts[0] : '',
+				'type' => 'text',
+				'id' => 'wb-newentity-label',
+				'lang' => $langCode,
+				'filter-callback' => [ $this->stringNormalizer, 'trimToNFC' ],
+				'placeholder' => $this->msg(
+					'wikibase-label-edit-placeholder'
+				)->text(),
+				'label-message' => 'wikibase-newentity-label'
+			],
+			self::FIELD_DESCRIPTION => [
+				'name' => self::FIELD_DESCRIPTION,
+				'default' => isset( $this->parts[1] ) ? $this->parts[1] : '',
+				'type' => 'text',
+				'id' => 'wb-newentity-description',
+				'lang' => $langCode,
+				'filter-callback' => [ $this->stringNormalizer, 'trimToNFC' ],
+				'placeholder' => $this->msg(
+					'wikibase-description-edit-placeholder'
+				)->text(),
+				'label-message' => 'wikibase-newentity-description'
+			],
+			self::FIELD_ALIASES => [
+				'name' => self::FIELD_ALIASES,
+				'type' => 'text',
+				'id' => 'wb-newentity-aliases',
+				'lang' => $langCode,
+				'placeholder' => $this->msg(
+					'wikibase-aliases-edit-placeholder'
+				)->text(),
+				'label-message' => 'wikibase-newentity-aliases'
+			]
+		];
+
+		if ( $this->isSiteLinkProvided( $this->getRequest() ) ) {
+			$formFields[ self::FIELD_SITE ] = [
+				'name' => self::FIELD_SITE,
+				'default' => $this->getRequest()->getVal( self::FIELD_SITE ),
 				'type' => 'text',
 				'id' => 'wb-newitem-site',
 				'readonly' => 'readonly',
+				'validation-callback' => function ( $siteId, $formData ) {
+					$site = $this->siteStore->getSite( $siteId );
+
+					if ( $site === null ) {
+						return [$this->msg('wikibase-newitem-not-recognized-siteid')->text()];
+					}
+					return true;
+				},
 				'label-message' => 'wikibase-newitem-site'
 			];
 
-			$formDescriptor['page'] = [
-				'name' => 'page',
-				'default' => $this->pageName,
+			$formFields[ self::FIELD_PAGE ] = [
+				'name' => self::FIELD_PAGE,
+				'default' => $this->getRequest()->getVal( self::FIELD_PAGE ),
 				'type' => 'text',
 				'id' => 'wb-newitem-page',
 				'readonly' => 'readonly',
+				'validation-callback' => function ( $pageName, $formData ) {
+					$siteId = $formData['site'];
+					$site = $this->siteStore->getSite( $siteId );
+					if ($site === null) {
+						return true;
+					}
+
+					$normalizedPageName = $site->normalizePageName( $pageName );
+					if ( $normalizedPageName === false ) {
+						return [
+							$this->msg(
+								'wikibase-newitem-no-external-page',
+								$siteId,
+								$pageName
+							)->text()
+						];
+					}
+					return true;
+				},
 				'label-message' => 'wikibase-newitem-page'
 			];
 		}
 
-		return $formDescriptor;
+		return $formFields;
 	}
 
 	/**
@@ -153,6 +208,43 @@ class SpecialNewItem extends SpecialNewEntity {
 		}
 
 		return [];
+	}
+
+	/**
+	 * @param array $formData
+	 *
+	 * @return Status
+	 */
+	protected function validateFormData( array $formData ) {
+		if ( $formData[ self::FIELD_LABEL ] == '' && $formData[ self::FIELD_DESCRIPTION ] == '' &&
+			 $formData[ self::FIELD_ALIASES ] == ''
+		) {
+			return Status::newFatal('wikibase-newfingerprintprovider-insufficient-data');
+		}
+
+		return Status::newGood();
+	}
+
+	/**
+	 * @param Item $item
+	 *
+	 * @return Summary
+	 */
+	protected function createSummary( $item ) {
+		$uiLanguageCode = $this->getLanguage()->getCode();
+
+		$summary = new Summary( 'wbeditentity', 'create' );
+		$summary->setLanguage( $uiLanguageCode );
+		/** @var Term|null $labelTerm */
+		$labelTerm = $item->getFingerprint()->getLabels()->getIterator()->current();
+		/** @var Term|null $descriptionTerm */
+		$descriptionTerm = $item->getFingerprint()->getDescriptions()->getIterator()->current();
+		$summary->addAutoSummaryArgs(
+			$labelTerm ? $labelTerm->getText() : '',
+			$descriptionTerm ? $descriptionTerm->getText() : ''
+		);
+
+		return $summary;
 	}
 
 }

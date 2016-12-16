@@ -173,16 +173,16 @@ class SpecialNewPropertyTest extends SpecialNewEntityTest {
 				],
 				'Invalid data type specified',
 			],
-//			'bad user token' => [  // TODO Probably should be implemented
-//				[
-//				],
-//				'try again',
-//			],
-//			'all fields are empty' => [  // TODO Probably should be implemented
-//				[
-//				],
-//				'???'
-//			],
+			'all fingerprint fields are empty' => [
+				[
+					'lang' => 'en',
+					'label' => '',
+					'description' => '',
+					'aliases' => '',
+					'datatype' => 'string',
+				],
+				'you need to fill'
+			],
 		];
 	}
 
