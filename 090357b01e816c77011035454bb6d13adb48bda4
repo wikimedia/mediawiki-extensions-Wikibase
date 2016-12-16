@@ -34,6 +34,24 @@
       "revId": "090357b01e816c77011035454bb6d13adb48bda4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_8dc5cf92",
+        "filename": "repo/includes/Specials/SpecialEntitiesWithoutPageFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-16T12:00:14Z",
+      "side": 1,
+      "message": "Oh, right, i confused this with the methods in SqlEntitiesWithoutTermFinder",
+      "parentUuid": "0e0e73b5_cd574704",
+      "revId": "090357b01e816c77011035454bb6d13adb48bda4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
