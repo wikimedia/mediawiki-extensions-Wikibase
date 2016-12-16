@@ -8,7 +8,9 @@ use Exception;
 use InvalidArgumentException;
 use Language;
 use LogicException;
+use MediaWiki\MediaWikiServices;
 use Message;
+use RawMessage;
 use Status;
 use ApiUsageException;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
@@ -97,7 +99,7 @@ class ApiErrorReporter {
 	 * constructor. If that fails, dieUsage() is called, which in turn
 	 * attempts localization based on the error code.
 	 *
-	 * @see ApiBase::dieUsage()
+	 * @see ApiBase::dieWithError
 	 *
 	 * @param Status $status The status to report. $status->getMessage() will be used
 	 * to generate the error's free form description.
@@ -114,10 +116,7 @@ class ApiErrorReporter {
 		}
 
 		$this->addStatusToResult( $status, $extradata );
-
-		//XXX: when to prefer $statusCode over $errorCode?
 		list( , $description ) = $this->apiModule->getErrorFromStatus( $status );
-
 		$this->throwUsageException( $description, $errorCode, $httpRespCode, $extradata );
 
 		throw new LogicException( 'ApiUsageException not thrown' );
@@ -133,7 +132,7 @@ class ApiErrorReporter {
 	 * constructor. If that fails, dieUsage() is called, which in turn
 	 * attempts localization based on the error code.
 	 *
-	 * @see ApiBase::dieUsage()
+	 * @see ApiBase::dieWithError
 	 *
 	 * @param Exception $ex The exception to report. $ex->getMessage() will be used as the error's
 	 * free form description.
@@ -190,7 +189,7 @@ class ApiErrorReporter {
 	 * Aborts the request with an error message. The given message is included in
 	 * the error's extra data.
 	 *
-	 * @see ApiBase::dieUsage()
+	 * @see ApiBase::dieWithError
 	 *
 	 * @param Message $message The error message. Will be used to generate the free form description
 	 * of the error (as plain text in the content language) and included in the extra data (as
@@ -221,7 +220,7 @@ class ApiErrorReporter {
 	 * constructed using the given code in "wikibase-api-$errorCode". If such a message
 	 * exists, it is included in the error's extra data.
 	 *
-	 * @see ApiBase::dieUsage()
+	 * @see ApiBase::dieWithError
 	 *
 	 * @param string $description An english, plain text description of the errror,
 	 * for use in logs.
@@ -257,7 +256,7 @@ class ApiErrorReporter {
 	/**
 	 * Throws a ApiUsageException by calling ApiBase::dieUsage().
 	 *
-	 * @see ApiBase::dieUsage()
+	 * @see ApiBase::dieWithError
 	 *
 	 * @param string $description
 	 * @param string $errorCode
@@ -268,8 +267,15 @@ class ApiErrorReporter {
 	 * @throws LogicException
 	 */
 	private function throwUsageException( $description, $errorCode, $httpRespCode = 0, $extradata = null ) {
-		$this->apiModule->getStats()->increment( 'wikibase.repo.api.errors.total' );
-		$this->apiModule->getMain()->dieUsage( $description, $errorCode, $httpRespCode, $extradata );
+		$stats = MediaWikiServices::getInstance()->getStatsdDataFactory();
+		$stats->increment( 'wikibase.repo.api.errors.total' );
+
+		$this->apiModule->getMain()->dieWithError(
+			new RawMessage( '$1', [ $description ] ),
+			$errorCode,
+			$extradata,
+			$httpRespCode
+		);
 
 		throw new LogicException( 'ApiUsageException not thrown' );
 	}
@@ -464,7 +470,7 @@ class ApiErrorReporter {
 			$name = $messageSpec;
 		} elseif ( is_array( $messageSpec ) ) {
 			if ( isset( $messageSpec[0] ) ) {
-				// it's an indexed array, the first entriy is the message key, the rest are paramters
+				// It's an indexed array, the first entry is the message key, the rest are parameters
 				$name = $messageSpec[0];
 				$params = array_slice( $messageSpec, 1 );
 			} else {
