@@ -1143,7 +1143,7 @@ final class WikibaseClient {
 			JobQueueGroup::singleton(),
 			$this->getRecentChangeFactory(),
 			$this->getStore()->getRecentChangesDuplicateDetector(),
-			RequestContext::getMain()->getStats()
+			MediaWikiServices::getInstance()->getStatsdDataFactory()
 		);
 	}
 
