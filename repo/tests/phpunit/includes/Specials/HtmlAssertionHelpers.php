@@ -41,7 +41,7 @@ trait HtmlAssertionHelpers {
 		$this->assertTag(
 			$matcher,
 			$html,
-			"Failed to find input element with name '{$name}' and value '{$value}'"
+			"Failed to find input element with name '{$name}' and value '{$value}' in :\n{$html}"
 		);
 	}
 
@@ -123,6 +123,27 @@ trait HtmlAssertionHelpers {
 	}
 
 	protected function assertHtmlContainsErrorMessage( $html, $messageText ) {
+		$assertions = [
+			[ $this, 'assertHtmlContainsFormErrorMessage' ],
+			[ $this, 'assertHtmlContainsOOUiErrorMessage' ],
+		];
+
+		foreach ( $assertions as $assertion ) {
+			try {
+				$assertion( $html, $messageText );
+
+				return;
+			} catch ( \PHPUnit_Framework_ExpectationFailedException $exception ) {
+				continue;
+			}
+		}
+
+		$this->fail(
+			"Failed to find error message with text '{$messageText}' in html:\n\n {$html}"
+		);
+	}
+
+	protected function assertHtmlContainsFormErrorMessage( $html, $messageText ) {
 		$matcher = [
 			'tag' => 'div',
 			'class' => 'error',
@@ -131,7 +152,20 @@ trait HtmlAssertionHelpers {
 		$this->assertTag(
 			$matcher,
 			$html,
-			"Failed to find error message with text '{$messageText}' in html:\n\n {$html}"
+			"Failed to find form error message with text '{$messageText}' in html:\n\n {$html}"
+		);
+	}
+
+	protected function assertHtmlContainsOOUiErrorMessage( $html, $messageText ) {
+		$matcher = [
+			'tag' => 'li',
+			'class' => 'oo-ui-fieldLayout-messages-error',
+			'content' => 'regexp: /' . preg_quote( $messageText, '/' ) . '/ui',
+		];
+		$this->assertTag(
+			$matcher,
+			$html,
+			"Failed to find OO-UI error message with text '{$messageText}' in html:\n\n {$html}"
 		);
 	}
 

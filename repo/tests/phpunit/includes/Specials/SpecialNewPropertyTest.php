@@ -36,11 +36,11 @@ class SpecialNewPropertyTest extends SpecialNewEntityTest {
 
 		list( $html ) = $this->executeSpecialPage();
 
-		$this->assertHtmlContainsInputWithName( $html, 'lang' );
-		$this->assertHtmlContainsInputWithName( $html, 'label' );
-		$this->assertHtmlContainsInputWithName( $html, 'description' );
-		$this->assertHtmlContainsInputWithName( $html, 'aliases' );
-		$this->assertHtmlContainsSelectWithName( $html, 'datatype' );
+		$this->assertHtmlContainsInputWithName( $html, SpecialNewProperty::FIELD_LANG );
+		$this->assertHtmlContainsInputWithName( $html, SpecialNewProperty::FIELD_LABEL );
+		$this->assertHtmlContainsInputWithName( $html, SpecialNewProperty::FIELD_DESCRIPTION );
+		$this->assertHtmlContainsInputWithName( $html, SpecialNewProperty::FIELD_ALIASES );
+		$this->assertHtmlContainsSelectWithName( $html, SpecialNewProperty::FIELD_DATATYPE );
 		$this->assertHtmlContainsSubmitControl( $html );
 	}
 
@@ -52,18 +52,30 @@ class SpecialNewPropertyTest extends SpecialNewEntityTest {
 
 		list( $html ) = $this->executeSpecialPage( $subPage );
 
-		$this->assertHtmlContainsInputWithNameAndValue( $html, 'label', $subPagePart1 );
-		$this->assertHtmlContainsInputWithNameAndValue( $html, 'description', $subPagePart2 );
-		$this->assertHtmlContainsSelectWithNameAndSelectedValue( $html, 'datatype', $subPagePart3 );
+		$this->assertHtmlContainsInputWithNameAndValue(
+			$html,
+			SpecialNewProperty::FIELD_LABEL,
+			$subPagePart1
+		);
+		$this->assertHtmlContainsInputWithNameAndValue(
+			$html,
+			SpecialNewProperty::FIELD_DESCRIPTION,
+			$subPagePart2
+		);
+		$this->assertHtmlContainsSelectWithNameAndSelectedValue(
+			$html,
+			SpecialNewProperty::FIELD_DATATYPE,
+			$subPagePart3
+		);
 	}
 
 	public function testFailsAndDisplaysAnError_WhenTryToCreateSecondPropertyWithTheSameLabel() {
 		$formData = [
-			'lang' => 'en',
-			'label' => 'label',
-			'description' => '',
-			'aliases' => '',
-			'datatype' => 'string',
+			SpecialNewProperty::FIELD_LANG => 'en',
+			SpecialNewProperty::FIELD_LABEL => 'label',
+			SpecialNewProperty::FIELD_DESCRIPTION => '',
+			SpecialNewProperty::FIELD_ALIASES => '',
+			SpecialNewProperty::FIELD_DATATYPE => 'string',
 		];
 		$this->executeSpecialPage( '', new \FauxRequest( $formData, true ) );
 
@@ -81,65 +93,65 @@ class SpecialNewPropertyTest extends SpecialNewEntityTest {
 		return [
 			'only label is set' => [
 				[
-					'lang' => 'en',
-					'label' => 'label' . $labelIndex ++,
-					'description' => '',
-					'aliases' => '',
-					'datatype' => 'string',
+					SpecialNewProperty::FIELD_LANG => 'en',
+					SpecialNewProperty::FIELD_LABEL => 'label' . $labelIndex ++,
+					SpecialNewProperty::FIELD_DESCRIPTION => '',
+					SpecialNewProperty::FIELD_ALIASES => '',
+					SpecialNewProperty::FIELD_DATATYPE => 'string',
 				],
 			],
 			'another language' => [
 				[
-					'lang' => 'fr',
-					'label' => 'label' . $labelIndex ++,
-					'description' => '',
-					'aliases' => '',
-					'datatype' => 'string',
+					SpecialNewProperty::FIELD_LANG => 'fr',
+					SpecialNewProperty::FIELD_LABEL => 'label' . $labelIndex ++,
+					SpecialNewProperty::FIELD_DESCRIPTION => '',
+					SpecialNewProperty::FIELD_ALIASES => '',
+					SpecialNewProperty::FIELD_DATATYPE => 'string',
 				],
 			],
 			'only description is set' => [
 				[
-					'lang' => 'en',
-					'label' => '',
-					'description' => 'desc',
-					'aliases' => '',
-					'datatype' => 'string',
+					SpecialNewProperty::FIELD_LANG => 'en',
+					SpecialNewProperty::FIELD_LABEL => '',
+					SpecialNewProperty::FIELD_DESCRIPTION => 'desc',
+					SpecialNewProperty::FIELD_ALIASES => '',
+					SpecialNewProperty::FIELD_DATATYPE => 'string',
 				],
 			],
 			'single alias' => [
 				[
-					'lang' => 'en',
-					'label' => '',
-					'description' => '',
-					'aliases' => 'alias',
-					'datatype' => 'string',
+					SpecialNewProperty::FIELD_LANG => 'en',
+					SpecialNewProperty::FIELD_LABEL => '',
+					SpecialNewProperty::FIELD_DESCRIPTION => '',
+					SpecialNewProperty::FIELD_ALIASES => 'alias',
+					SpecialNewProperty::FIELD_DATATYPE => 'string',
 				],
 			],
 			'multiple aliases' => [
 				[
-					'lang' => 'en',
-					'label' => '',
-					'description' => '',
-					'aliases' => 'alias1|alias2|alias3',
-					'datatype' => 'string',
+					SpecialNewProperty::FIELD_LANG => 'en',
+					SpecialNewProperty::FIELD_LABEL => '',
+					SpecialNewProperty::FIELD_DESCRIPTION => '',
+					SpecialNewProperty::FIELD_ALIASES => 'alias1|alias2|alias3',
+					SpecialNewProperty::FIELD_DATATYPE => 'string',
 				],
 			],
 			'another datatype is set' => [
 				[
-					'lang' => 'en',
-					'label' => 'label' . $labelIndex ++,
-					'description' => '',
-					'aliases' => '',
-					'datatype' => 'url',
+					SpecialNewProperty::FIELD_LANG => 'en',
+					SpecialNewProperty::FIELD_LABEL => 'label' . $labelIndex ++,
+					SpecialNewProperty::FIELD_DESCRIPTION => '',
+					SpecialNewProperty::FIELD_ALIASES => '',
+					SpecialNewProperty::FIELD_DATATYPE => 'url',
 				],
 			],
 			'all input is present' => [
 				[
-					'lang' => 'en',
-					'label' => 'label' . $labelIndex,
-					'description' => 'desc',
-					'aliases' => 'a1|a2',
-					'datatype' => 'url',
+					SpecialNewProperty::FIELD_LANG => 'en',
+					SpecialNewProperty::FIELD_LABEL => 'label' . $labelIndex,
+					SpecialNewProperty::FIELD_DESCRIPTION => 'desc',
+					SpecialNewProperty::FIELD_ALIASES => 'a1|a2',
+					SpecialNewProperty::FIELD_DATATYPE => 'url',
 				],
 			],
 		];
@@ -154,34 +166,34 @@ class SpecialNewPropertyTest extends SpecialNewEntityTest {
 		return [
 			'unknown language' => [
 				[
-					'lang' => 'some-weird-language',
-					'label' => 'label-that-does-not-exist-1',
-					'description' => '',
-					'aliases' => '',
-					'datatype' => 'string',
+					SpecialNewProperty::FIELD_LANG => 'some-weird-language',
+					SpecialNewProperty::FIELD_LABEL => 'label-that-does-not-exist-1',
+					SpecialNewProperty::FIELD_DESCRIPTION => '',
+					SpecialNewProperty::FIELD_ALIASES => '',
+					SpecialNewProperty::FIELD_DATATYPE => 'string',
 				],
 				'language code was not recognized',
 			],
 			'unknown datatype' => [
 				[
-					'lang' => 'en',
-					'label' => 'label-that-does-not-exist-2',
-					'description' => '',
-					'aliases' => '',
-					'datatype' => 'unknown-datatype',
+					SpecialNewProperty::FIELD_LANG => 'en',
+					SpecialNewProperty::FIELD_LABEL => 'label-that-does-not-exist-2',
+					SpecialNewProperty::FIELD_DESCRIPTION => '',
+					SpecialNewProperty::FIELD_ALIASES => '',
+					SpecialNewProperty::FIELD_DATATYPE => 'unknown-datatype',
 				],
 				'Invalid data type specified',
 			],
-//			'bad user token' => [  // TODO Probably should be implemented
-//				[
-//				],
-//				'try again',
-//			],
-//			'all fields are empty' => [  // TODO Probably should be implemented
-//				[
-//				],
-//				'???'
-//			],
+			'all fingerprint fields are empty' => [
+				[
+					SpecialNewProperty::FIELD_LANG => 'en',
+					SpecialNewProperty::FIELD_LABEL => '',
+					SpecialNewProperty::FIELD_DESCRIPTION => '',
+					SpecialNewProperty::FIELD_ALIASES => '',
+					SpecialNewProperty::FIELD_DATATYPE => 'string',
+				],
+				'you need to fill'
+			],
 		];
 	}
 
@@ -205,29 +217,29 @@ class SpecialNewPropertyTest extends SpecialNewEntityTest {
 		$this->assertInstanceOf( Property::class, $entity );
 		/** @var Property $entity */
 
-		$language = $form['lang'];
-		if ( $form['label'] !== '' ) {
+		$language = $form[SpecialNewProperty::FIELD_LANG];
+		if ( $form[SpecialNewProperty::FIELD_LABEL] !== '' ) {
 			$this->assertSame(
-				$form['label'],
+				$form[SpecialNewProperty::FIELD_LABEL],
 				$entity->getLabels()->getByLanguage( $language )->getText()
 			);
 		}
 
-		if ( $form['description'] !== '' ) {
+		if ( $form[SpecialNewProperty::FIELD_DESCRIPTION] !== '' ) {
 			$this->assertSame(
-				$form['description'],
+				$form[SpecialNewProperty::FIELD_DESCRIPTION],
 				$entity->getDescriptions()->getByLanguage( $language )->getText()
 			);
 		}
 
-		if ( $form['aliases'] !== '' ) {
+		if ( $form[SpecialNewProperty::FIELD_ALIASES] !== '' ) {
 			$this->assertArrayEquals(
-				explode( '|', $form['aliases'] ),
+				explode( '|', $form[SpecialNewProperty::FIELD_ALIASES] ),
 				$entity->getAliasGroups()->getByLanguage( $language )->getAliases()
 			);
 		}
 
-		$this->assertEquals( $form['datatype'], $entity->getDataTypeId() );
+		$this->assertEquals( $form[SpecialNewProperty::FIELD_DATATYPE], $entity->getDataTypeId() );
 	}
 
 }
