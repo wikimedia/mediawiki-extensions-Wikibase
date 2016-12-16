@@ -16,6 +16,24 @@
       "revId": "090357b01e816c77011035454bb6d13adb48bda4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_cd574704",
+        "filename": "repo/includes/Specials/SpecialEntitiesWithoutPageFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-16T11:18:30Z",
+      "side": 1,
+      "message": "I don\u0027t understand. It does not accept null.",
+      "parentUuid": "0e0e73b5_1bdec114",
+      "revId": "090357b01e816c77011035454bb6d13adb48bda4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
