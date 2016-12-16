@@ -16,6 +16,24 @@
       "revId": "800337a634d336ee78d3a45058b8956cd523d88b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_f2e30a9b",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-16T14:37:35Z",
+      "side": 1,
+      "message": "Follow up removing the not needed factory:  If90fe233701cd0cecf1270e9bf38390c4d6e6456",
+      "parentUuid": "0e0e73b5_f8abf36b",
+      "revId": "800337a634d336ee78d3a45058b8956cd523d88b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
