@@ -921,7 +921,7 @@ final class WikibaseClient {
 	 */
 	private function getExternalFormatEntityDeserializer() {
 		if ( $this->entityDeserializer === null ) {
-			$deserializerFactoryCallbacks = $this->entityTypeDefinitions->getDeserializerFactoryCallbacks();
+			$deserializerFactoryCallbacks = $this->getEntityDeserializerFactoryCallbacks();
 			$deserializerFactory = $this->getExternalFormatDeserializerFactory();
 			$deserializers = array();
 
@@ -951,6 +951,13 @@ final class WikibaseClient {
 	 */
 	public function getInternalFormatStatementDeserializer() {
 		return $this->getInternalFormatDeserializerFactory()->newStatementDeserializer();
+	}
+
+	/**
+	 * @return callable[]
+	 */
+	public function getEntityDeserializerFactoryCallbacks() {
+		return $this->entityTypeDefinitions->getDeserializerFactoryCallbacks();
 	}
 
 	/**
