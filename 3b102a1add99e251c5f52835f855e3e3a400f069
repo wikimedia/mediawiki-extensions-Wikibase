@@ -33,6 +33,24 @@
       "revId": "3b102a1add99e251c5f52835f855e3e3a400f069",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_ed69ebbd",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-16T11:28:25Z",
+      "side": 1,
+      "message": "I asked the same question in PS2 and PS3, and still don\u0027t understand what the benefit of this hard coded list is? This means that all third party users with custom entity types with terms that are indexed in the terms table can *not* use the special pages without updating this odd setting first.\n\nThis introduces duplication (hard coded lists of supported entity types) we are trying sooo hard to get rid of for a long, long time.\n\nI uploaded I2c0e918, but it did not got a +2, nor was this patch here updated since then.",
+      "parentUuid": "0e0e73b5_9bc3d13d",
+      "revId": "3b102a1add99e251c5f52835f855e3e3a400f069",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
