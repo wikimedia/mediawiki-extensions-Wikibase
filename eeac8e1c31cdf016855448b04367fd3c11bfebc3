@@ -185,6 +185,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_cdd2a75d",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-16T12:30:09Z",
+      "side": 1,
+      "message": "My bad, sorry. My eyes didnt catch the difference between Response and Request.",
+      "parentUuid": "0e0e73b5_18c36763",
+      "range": {
+        "startLine": 22,
+        "startChar": 12,
+        "endLine": 22,
+        "endChar": 24
+      },
+      "revId": "eeac8e1c31cdf016855448b04367fd3c11bfebc3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_5b479c50",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialNewEntityTest.php",
         "patchSetId": 1
