@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_8216b94b",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-12-16T18:15:22Z",
+      "side": 1,
+      "message": "When ApiErrorFormatter_BackCompat isn\u0027t in use, this is going to break the warnings array by converting it to an object.",
+      "revId": "960e970e73b6761b160bca81098190d6d09b5df5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_62fbc512",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-12-16T18:15:22Z",
+      "side": 1,
+      "message": "This method is deprecated. Ideally you\u0027d just use $this-\u003eapiModule-\u003edieStatus(), although I don\u0027t know whether that would confuse any of your existing uses somehow.",
+      "range": {
+        "startLine": 119,
+        "startChar": 45,
+        "endLine": 119,
+        "endChar": 63
+      },
+      "revId": "960e970e73b6761b160bca81098190d6d09b5df5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_6222a5a4",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-12-16T18:15:22Z",
+      "side": 1,
+      "message": "This comment is obsolete.",
+      "revId": "960e970e73b6761b160bca81098190d6d09b5df5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_4227a1b1",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-12-16T18:15:22Z",
+      "side": 1,
+      "message": "This breaks the functionality of the the `errorformat` parameter. And looking at callers, it\u0027s always going to be in English too regardless of what the client requested.\n\nWhy are you calling -\u003egetMain() in there? That\u0027s going to attribute the error to the \u0027main\u0027 module instead of the module that\u0027s actually the source of the error.",
+      "revId": "960e970e73b6761b160bca81098190d6d09b5df5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
