@@ -181,6 +181,7 @@
 	"wikibase-newitem-no-external-page": "A page \"$2\" could not be found on \"$1\".",
 	"wikibase-newitem-not-recognized-siteid": "The provided site identifier was not recognized.",
 	"wikibase-newitem-not-recognized-language": "The supplied language code was not recognized.",
+	"wikibase-newfingerprintprovider-insufficient-data": "You need to fill at least either label, description or aliases.",
 	"wikibase-newentity-language": "Language:",
 	"wikibase-newentity-label": "Label:",
 	"wikibase-newentity-description": "Description:",
