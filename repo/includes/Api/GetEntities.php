@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
+use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -124,7 +125,8 @@ class GetEntities extends ApiBase {
 
 		$entityIds = $this->getEntityIdsFromParams( $params );
 
-		$this->getStats()->updateCount( 'wikibase.repo.api.getentities.entities', count( $entityIds ) );
+		$stats = MediaWikiServices::getInstance()->getStatsdDataFactory();
+		$stats->updateCount( 'wikibase.repo.api.getentities.entities', count( $entityIds ) );
 
 		$entityRevisions = $this->getEntityRevisionsFromEntityIds( $entityIds, $resolveRedirects );
 
