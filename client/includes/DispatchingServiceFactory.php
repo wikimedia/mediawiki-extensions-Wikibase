@@ -8,6 +8,7 @@ use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\PropertyInfoStore;
 use Wikibase\SettingsArray;
 
 /**
@@ -119,6 +120,13 @@ class DispatchingServiceFactory extends ServiceContainer {
 	 */
 	public function getEntityRevisionLookup() {
 		return $this->getService( 'EntityRevisionLookup' );
+	}
+
+	/**
+	 * @return PropertyInfoStore
+	 */
+	public function getPropertyInfoStore() {
+		return $this->getService( 'PropertyInfoStore' );
 	}
 
 	/**

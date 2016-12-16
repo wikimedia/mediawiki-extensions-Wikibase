@@ -132,9 +132,9 @@ class DirectSqlStore implements ClientStore {
 	private $entityNamespaceLookup = null;
 
 	/**
-	 * @var PropertyInfoTable|null
+	 * @var PropertyInfoStore|null
 	 */
-	private $propertyInfoTable = null;
+	private $propertyInfoStore = null;
 
 	/**
 	 * @var SiteLinkLookup|null
@@ -435,11 +435,11 @@ class DirectSqlStore implements ClientStore {
 	 * @return PropertyInfoStore
 	 */
 	public function getPropertyInfoStore() {
-		if ( $this->propertyInfoTable === null ) {
-			$propertyInfoStore = new PropertyInfoTable( true, $this->entityIdComposer, $this->repoWiki );
+		if ( $this->propertyInfoStore === null ) {
+			$propertyInfoStore = $this->dispatchingServiceFactory->getPropertyInfoStore();
 			$cacheKey = $this->cacheKeyPrefix . ':CachingPropertyInfoStore';
 
-			$this->propertyInfoTable = new CachingPropertyInfoStore(
+			$this->propertyInfoStore = new CachingPropertyInfoStore(
 				$propertyInfoStore,
 				ObjectCache::getInstance( $this->cacheType ),
 				$this->cacheDuration,
@@ -447,7 +447,7 @@ class DirectSqlStore implements ClientStore {
 			);
 		}
 
-		return $this->propertyInfoTable;
+		return $this->propertyInfoStore;
 	}
 
 	/**
