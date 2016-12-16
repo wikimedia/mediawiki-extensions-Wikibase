@@ -119,54 +119,29 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 
 		$out = $this->getOutput();
 
-		$uiLanguageCode = $this->getLanguage()->getCode();
+		$out->addHTML( $this->getCopyrightText() );
 
-		if ( $this->getRequest()->wasPosted()
-			&& $this->getUser()->matchEditToken( $this->getRequest()->getVal( 'wpEditToken' ) )
-		) {
-			if ( $this->hasSufficientArguments() ) {
-				$entity = $this->createEntity();
+		$form = $this->createFormNew();
 
-				$status = $this->modifyEntity( $entity );
+		$form->prepareForm();
 
-				if ( $status->isGood() ) {
-					$summary = new Summary( 'wbeditentity', 'create' );
-					$summary->setLanguage( $uiLanguageCode );
-					$summary->addAutoSummaryArgs( $this->label, $this->description );
+		/** @var Status $submitStatus */
+		$submitStatus = $form->tryAuthorizedSubmit();
 
-					$status = $this->saveEntity(
-						$entity,
-						$summary,
-						$this->getRequest()->getVal( 'wpEditToken' ),
-						EDIT_NEW
-					);
+		if ( $submitStatus && $submitStatus->isGood() ) {
+			$savedEntity = $submitStatus->getValue();
+			$title = $this->getEntityTitle( $savedEntity->getId() );
+			$entityUrl = $title->getFullURL();
+			$this->getOutput()->redirect( $entityUrl );
 
-					$out = $this->getOutput();
-
-					if ( !$status->isOK() ) {
-						$out->addHTML( '<div class="error">' );
-						$out->addWikiText( $status->getWikiText() );
-						$out->addHTML( '</div>' );
-					} elseif ( $entity !== null ) {
-						$title = $this->getEntityTitle( $entity->getId() );
-						$entityUrl = $title->getFullURL();
-						$this->getOutput()->redirect( $entityUrl );
-					}
-				} else {
-					$out->addHTML( '<div class="error">' );
-					$out->addHTML( $status->getHTML() );
-					$out->addHTML( '</div>' );
-				}
-			}
+			return;
 		}
-
-		$this->getOutput()->addModuleStyles( [ 'wikibase.special' ] );
 
 		foreach ( $this->getWarnings() as $warning ) {
 			$out->addHTML( Html::element( 'div', [ 'class' => 'warning' ], $warning ) );
 		}
 
-		$this->createForm( $this->getLegend(), $this->additionalFormElements() );
+		$form->displayForm( $submitStatus ?: Status::newGood() );
 	}
 
 	/**
@@ -282,6 +257,13 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 				'default' => $langCode,
 				'type' => 'combobox',
 				'id' => 'wb-newentity-language',
+				'validation-callback' => function ( $language ) {
+					if ( !in_array( $language, $this->languageCodes ) ) {
+						return [ $this->msg( 'wikibase-newitem-not-recognized-language' )->text() ];
+					}
+
+					return true;
+				},
 				'label-message' => 'wikibase-newentity-language'
 			],
 			'label' => [
@@ -324,36 +306,6 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	}
 
 	/**
-	 * Building the HTML form for creating a new item.
-	 *
-	 * @param string|null $legend initial value for the label input box
-	 * @param array[] $additionalFormElements initial value for the description input box
-	 */
-	private function createForm( $legend = null, array $additionalFormElements ) {
-		$this->addCopyrightText();
-
-		$this->getOutput()->addModules( 'wikibase.special.newEntity' );
-
-		HTMLForm::factory( 'ooui', $additionalFormElements, $this->getContext() )
-			->setId( 'mw-newentity-form1' )
-			->setSubmitID( 'wb-newentity-submit' )
-			->setSubmitName( 'submit' )
-			->setSubmitTextMsg( 'wikibase-newentity-submit' )
-			->setWrapperLegendMsg( $legend )
-			->setSubmitCallback( function () {// no-op
-			} )->show();
-	}
-
-	/**
-	 * @todo could factor this out into a special page form builder and renderer
-	 */
-	private function addCopyrightText() {
-		$html = $this->copyrightView->getHtml( $this->getLanguage(), 'wikibase-newentity-submit' );
-
-		$this->getOutput()->addHTML( $html );
-	}
-
-	/**
 	 * @since 0.1
 	 *
 	 * @return string Legend for the fieldset
@@ -368,5 +320,88 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 * @return string[] Warnings that should be presented to the user
 	 */
 	abstract protected function getWarnings();
+
+	/**
+	 * @return HTMLForm
+	 */
+	private function createFormNew() {
+
+		$additionalFormElements = $this->additionalFormElements();
+
+		$this->getOutput()->addModules( 'wikibase.special.newEntity' );
+
+		return HTMLForm::factory( 'ooui', $additionalFormElements, $this->getContext() )->setId(
+				'mw-newentity-form1'
+			)->setSubmitID( 'wb-newentity-submit' )->setSubmitName( 'submit' )->setSubmitTextMsg(
+				'wikibase-newentity-submit'
+			)->setWrapperLegendMsg( $this->getLegend() )->setSubmitCallback(
+				function ( $data, HTMLForm $form ) {
+					$status = $this->validateFormData( $data );
+					if ( !$status->isGood() ) {
+						return $status;
+					}
+
+					$entity = $this->formDataToEntity( $data );
+
+					$summary = $this->createSummary( $entity );
+
+					$status = $this->saveEntity(
+						$entity,
+						$summary,
+						$form->getRequest()->getVal( 'wpEditToken' ),
+						EDIT_NEW
+					);
+
+					if ( !$status->isGood() ) {
+						return $status;
+					}
+
+					return Status::newGood( $entity );
+				}
+			);
+	}
+
+	/**
+	 * @param array $data
+	 * @param HTMLForm $form
+	 *
+	 * @return EntityDocument
+	 */
+	protected function formDataToEntity( array $data ) {
+		$entity = $this->createEntity();
+
+		$status = $this->modifyEntity( $entity );
+
+		return $entity;
+	}
+
+	/**
+	 * @param $entity
+	 *
+	 * @return Summary
+	 */
+	private function createSummary( $entity ) {
+		$uiLanguageCode = $this->getLanguage()->getCode();
+
+		$summary = new Summary( 'wbeditentity', 'create' );
+		$summary->setLanguage( $uiLanguageCode );
+		$summary->addAutoSummaryArgs( $this->label, $this->description );
+
+		return $summary;
+	}
+
+	/**
+	 * @param array $formData
+	 *
+	 * @return Status
+	 */
+	abstract protected function validateFormData( array $formData );
+
+	/**
+	 * @return string
+	 */
+	private function getCopyrightText() {
+		return $this->copyrightView->getHtml( $this->getLanguage(), 'wikibase-newentity-submit' );
+	}
 
 }

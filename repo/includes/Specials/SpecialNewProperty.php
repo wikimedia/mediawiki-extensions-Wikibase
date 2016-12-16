@@ -48,14 +48,6 @@ class SpecialNewProperty extends SpecialNewEntity {
 	}
 
 	/**
-	 * @see SpecialNewEntity::hasSufficientArguments()
-	 */
-	protected function hasSufficientArguments() {
-		// TODO: Needs refinement
-		return parent::hasSufficientArguments() && ( $this->dataType !== '' );
-	}
-
-	/**
 	 * @see SpecialNewEntity::createEntity
 	 */
 	protected function createEntity() {
@@ -78,7 +70,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 				throw new InvalidArgumentException( 'Unexpected entity type' );
 			}
 
-			if ( $this->dataTypeExists() ) {
+			if ( $this->dataTypeExists( $this->dataType ) ) {
 				$property->setDataTypeId( $this->dataType );
 			} else {
 				$status->fatal( 'wikibase-newproperty-invalid-datatype' );
@@ -91,10 +83,10 @@ class SpecialNewProperty extends SpecialNewEntity {
 	/**
 	 * @return bool
 	 */
-	private function dataTypeExists() {
+	private function dataTypeExists( $dataType ) {
 		$dataTypeFactory = WikibaseRepo::getDefaultInstance()->getDataTypeFactory();
-		$ids = $dataTypeFactory->getTypeIds();
-		return in_array( $this->dataType, $ids );
+
+		return in_array( $dataType, $dataTypeFactory->getTypeIds() );
 	}
 
 	/**
@@ -114,6 +106,13 @@ class SpecialNewProperty extends SpecialNewEntity {
 			'default' => $this->dataType,
 			'options' => array_flip( $selector->getOptionsArray() ),
 			'id' => 'wb-newproperty-datatype',
+			'validation-callback' => function ( $dataType, $formData, $form ) {
+				if ( !$this->dataTypeExists( $dataType ) ) {
+					return [ $this->msg( 'wikibase-newproperty-invalid-datatype' )->text() ];
+				}
+
+				return true;
+			},
 			'label-message' => 'wikibase-newproperty-datatype'
 		];
 
@@ -145,4 +144,16 @@ class SpecialNewProperty extends SpecialNewEntity {
 		return [];
 	}
 
+	/**
+	 * @param array $formData
+	 *
+	 * @return Status
+	 */
+	protected function validateFormData( array $formData ) {
+		if ( $formData['label'] === '' && $formData['description'] === '' && $formData['aliases'] === '' ) {
+			return Status::newFatal( 'You need to fill either label, description, or aliases.' );
+		}
+
+		return Status::newGood();
+	}
 }

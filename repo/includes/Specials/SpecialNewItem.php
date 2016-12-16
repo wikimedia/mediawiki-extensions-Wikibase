@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
+use HTMLForm;
 use InvalidArgumentException;
 use Status;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -115,6 +116,14 @@ class SpecialNewItem extends SpecialNewEntity {
 				'type' => 'text',
 				'id' => 'wb-newitem-site',
 				'readonly' => 'readonly',
+				'validation-callback' => function ( $siteId, $formData, $form) {
+					$site = $this->siteStore->getSite( $siteId );
+
+					if ( $site === null ) {
+						return [$this->msg('wikibase-newitem-not-recognized-siteid')->text()];
+					}
+					return true;
+				},
 				'label-message' => 'wikibase-newitem-site'
 			];
 
@@ -124,6 +133,26 @@ class SpecialNewItem extends SpecialNewEntity {
 				'type' => 'text',
 				'id' => 'wb-newitem-page',
 				'readonly' => 'readonly',
+				'validation-callback' => function ( $pageName, $formData, $form) {
+					// TODO: test this validation!
+					$siteId = $formData['site'];
+					$site = $this->siteStore->getSite( $siteId );
+					if ($site === null) {
+						return true;
+					}
+
+					$normalizedPageName = $site->normalizePageName( $pageName );
+					if ( $normalizedPageName === false ) {
+						return [
+							$this->msg(
+								'wikibase-newitem-no-external-page',
+								$siteId,
+								$pageName
+							)->text()
+						];
+					}
+					return true;
+				},
 				'label-message' => 'wikibase-newitem-page'
 			];
 		}
@@ -155,4 +184,16 @@ class SpecialNewItem extends SpecialNewEntity {
 		return [];
 	}
 
+	/**
+	 * @param array $formData
+	 *
+	 * @return Status
+	 */
+	protected function validateFormData( array $formData ) {
+		if ( $formData['label'] === '' && $formData['description'] === '' && $formData['aliases'] === '' ) {
+			return Status::newFatal('You need to fill either label, description, or aliases.');
+		}
+
+		return Status::newGood();
+	}
 }

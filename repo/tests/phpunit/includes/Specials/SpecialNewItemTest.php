@@ -143,27 +143,15 @@ class SpecialNewItemTest extends SpecialNewEntityTest {
 				],
 				'site identifier was not recognized',
 			],
-			//Property - uniq: label(in language)
-
-			//			'bad user token' => [  // TODO Probably should be implemented
-			//				[
-			//					'lang' => 'en',
-			//					'label' => 'label',
-			//					'description' => '',
-			//					'aliases' => '',
-			//					'wpEditToken' => 'some bad token'
-			//				],
-			//				'try again',
-			//			],
-			//			'all fields are empty' => [  // TODO Probably should be implemented
-			//				[
-			//					'lang' => 'en',
-			//					'label' => '',
-			//					'description' => '',
-			//					'aliases' => '',
-			//				],
-			//				'???'
-			//			],
+			'all fields are empty' => [
+				[
+					'lang' => 'en',
+					'label' => '',
+					'description' => '',
+					'aliases' => '',
+				],
+				'you need to fill'
+			],
 		];
 	}
 
