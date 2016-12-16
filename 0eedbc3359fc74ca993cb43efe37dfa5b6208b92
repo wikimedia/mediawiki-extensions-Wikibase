@@ -240,6 +240,30 @@
       "revId": "0eedbc3359fc74ca993cb43efe37dfa5b6208b92",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_3fa4ca03",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-16T15:11:24Z",
+      "side": 1,
+      "message": "Followup renaming and changing visibility: Ifa94c583c9404f37b4c4a569cc7b688dd0686447",
+      "parentUuid": "0e0e73b5_387d0be5",
+      "range": {
+        "startLine": 435,
+        "startChar": 1,
+        "endLine": 435,
+        "endChar": 7
+      },
+      "revId": "0eedbc3359fc74ca993cb43efe37dfa5b6208b92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
