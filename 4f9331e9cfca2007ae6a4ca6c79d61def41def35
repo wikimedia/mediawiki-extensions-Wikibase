@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_2dd7032a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-16T12:32:02Z",
+      "side": 1,
+      "message": "I think this patch is not only about adding test but also about refactoring them (it adds the SpecialNewEntityTest and the helper classes). It is all worth mentioning explicitly in the commit message IMO.",
+      "revId": "4f9331e9cfca2007ae6a4ca6c79d61def41def35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
