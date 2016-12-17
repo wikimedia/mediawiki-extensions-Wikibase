@@ -142,3 +142,5 @@ _:genid2 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://www.w3.org/2002/
 <https://de.wikipedia.org/wiki/USA> <http://schema.org/about> <fooUri/Q4> .
 <https://de.wikipedia.org/wiki/USA> <http://schema.org/inLanguage> "de" .
 <https://de.wikipedia.org/wiki/USA> <http://schema.org/isPartOf> <https://de.wikipedia.org/> .
+<https://de.wikipedia.org/wiki/England> <http://www.w3.org/2000/01/rdf-schema#label> "England" .
+<https://en.wikipedia.org/wiki/San%20Jose> <http://www.w3.org/2000/01/rdf-schema#label> "San Jose" .

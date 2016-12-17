@@ -114,7 +114,8 @@ class SiteLinksRdfBuilder implements EntityRdfBuilder {
 				->say( RdfVocabulary::NS_SCHEMA_ORG, 'about' )->is( RdfVocabulary::NS_ENTITY, $entityLName )
 				->say( RdfVocabulary::NS_SCHEMA_ORG, 'inLanguage' )->text(
 						$this->vocabulary->getCanonicalLanguageCode( $site->getLanguageCode() ) )
-				->say( RdfVocabulary::NS_SCHEMA_ORG, 'isPartOf' )->is( $siteUrl );
+				->say( RdfVocabulary::NS_SCHEMA_ORG, 'isPartOf' )->is( $siteUrl )
+				->say( 'rdfs', 'label' )->value( $siteLink->getPageName() );
 
 			foreach ( $siteLink->getBadges() as $badge ) {
 				$this->writer
