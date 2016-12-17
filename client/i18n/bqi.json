@@ -4,6 +4,7 @@
 			"Mogoeilor"
 		]
 	},
+	"tooltip-t-wikibase": "هوم پیڤأند سي إمایأجا رسينإ آ",
 	"wikibase-comment-update": "{{WBREPONAME}} قلم آلشد ڤابي",
 	"wikibase-dataitem": "{{WBREPONAME}} قلم",
 	"wikibase-editlinks": "ویرایشت هوم پیوندا",
@@ -12,5 +13,6 @@
 	"wikibase-rc-hide-wikidata-hide": "قام کردن",
 	"wikibase-rc-hide-wikidata-show": "نشون دائن",
 	"wikibase-rc-wikibase-edit-letter": "د",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ویرایشت"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ویرایشت",
+	"wikibase-otherprojects": "مإن پورجإیأل ديأ"
 }

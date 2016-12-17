@@ -57,7 +57,7 @@
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}-käännumer (ID)",
 	"wikibase-pageinfo-entity-id-none": "Nian",
 	"wikibase-property-render-error": "Eegenskap „$1“ küd ei ferwerket wurd: $2",
-	"wikibase-otherprojects": "Ööder projekten",
+	"wikibase-otherprojects": "Uun ööder projekten",
 	"wikibase-otherprojects-beta-message": "Sidjenliist faan ööder projekten",
 	"wikibase-otherprojects-beta-description": "Diar komt en kirew „{{int:wikibase-otherprojects}}“ tu det sidjenliist mä ferwisangen tu Wikimedia-projekten mä {{WBREPONAME}}-dooten."
 }
