@@ -8,5 +8,7 @@
 	"wikibase-comment-update": "{{WBREPONAME}} элемент төсәтелгән",
 	"wikibase-dataitem": "{{WBREPONAME}}ның элементы",
 	"wikibase-editlinks": "Ссылкаларны төсәткәле",
-	"wikibase-editlinkstitle": "Пашҡа телләртәге ссылкаларны төсәткәле"
+	"wikibase-editlinkstitle": "Пашҡа телләртәге ссылкаларны төсәткәле",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} төсәтеү"
 }
