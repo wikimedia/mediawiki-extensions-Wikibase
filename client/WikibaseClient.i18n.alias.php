@@ -44,6 +44,7 @@ $specialPageAliases['bn'] = array(
 $specialPageAliases['cs'] = array(
 	'PagesWithBadges' => array( 'Stránky_s_odznaky' ),
 	'UnconnectedPages' => array( 'Nepropojené_stránky' ),
+	'EntityUsage' => array( 'Použití_entity' ),
 );
 
 /** German (Deutsch) */
