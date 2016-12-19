@@ -11,6 +11,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\LabelConflictFinder;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Repo\Store\ChangeStore;
 use Wikibase\Repo\Store\EntityPerPage;
@@ -143,6 +144,13 @@ interface Store {
 	 * @return EntityInfoBuilderFactory
 	 */
 	public function getEntityInfoBuilderFactory();
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return PropertyInfoLookup
+	 */
+	public function getPropertyInfoLookup();
 
 	/**
 	 * @since 0.4

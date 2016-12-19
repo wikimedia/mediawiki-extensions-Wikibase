@@ -18,8 +18,8 @@ use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\PropertyInfoStore;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\TermIndex;
 
@@ -93,7 +93,7 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			array( 'getEntityLookup', EntityLookup::class ),
 			array( 'getTermIndex', TermIndex::class ),
 			array( 'getPropertyLabelResolver', PropertyLabelResolver::class ),
-			array( 'getPropertyInfoStore', PropertyInfoStore::class ),
+			array( 'getPropertyInfoLookup', PropertyInfoLookup::class ),
 			array( 'getUsageTracker', UsageTracker::class ),
 			array( 'getUsageLookup', UsageLookup::class ),
 			array( 'getSubscriptionManager', SubscriptionManager::class, true ),

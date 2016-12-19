@@ -2,14 +2,14 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql;
 
+use DBError;
 use MediaWikiTestCase;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityIdComposer;
-use Wikibase\Lib\Tests\Store\PropertyInfoStoreTestHelper;
-use Wikibase\PropertyInfoStore;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\PropertyInfoTable;
 
 /**
@@ -26,17 +26,6 @@ use Wikibase\PropertyInfoTable;
  */
 class PropertyInfoTableTest extends MediaWikiTestCase {
 
-	/**
-	 * @var PropertyInfoStoreTestHelper
-	 */
-	private $helper;
-
-	public function __construct( $name = null, $data = array(), $dataName = '' ) {
-		parent::__construct( $name, $data, $dataName );
-
-		$this->helper = new PropertyInfoStoreTestHelper( $this, array( $this, 'newPropertyInfoTable' ) );
-	}
-
 	protected function setUp() {
 		parent::setUp();
 
@@ -47,39 +36,161 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 		$this->tablesUsed[] = 'wb_property_info';
 	}
 
-	public function newPropertyInfoTable( $repository = '' ) {
+	private function newPropertyInfoTable( $repository = '' ) {
 		return new PropertyInfoTable( false, $this->getEntityComposer(), false, $repository );
 	}
 
-	public function provideSetPropertyInfo() {
-		return $this->helper->provideSetPropertyInfo();
+	private function newReadonlyPropertyInfoTable() {
+		return new PropertyInfoTable( true, $this->getEntityComposer(), false, '' );
 	}
 
-	/**
-	 * @dataProvider provideSetPropertyInfo
-	 */
-	public function testSetPropertyInfo( PropertyId $id, array $info, $expectedException ) {
-		$this->helper->testSetPropertyInfo( $id, $info, $expectedException );
+	public function testGivenNoDataTypeInInfo_setPropertyInfoThrowsException() {
+		$table = $this->newPropertyInfoTable();
+
+		$this->setExpectedException( InvalidArgumentException::class );
+
+		$table->setPropertyInfo( new PropertyId( 'P123' ), [ 'foo' => 'bar' ] );
 	}
 
-	public function testGetPropertyInfo() {
-		$this->helper->testGetPropertyInfo();
+	public function testGivenReadonlyTable_setPropertyInfoThrowsException() {
+		$table = $this->newReadonlyPropertyInfoTable();
+
+		$this->setExpectedException( DBError::class );
+
+		$table->setPropertyInfo( new PropertyId( 'P123' ), [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] );
 	}
 
-	public function testGetPropertyInfoForDataType() {
-		$this->helper->testGetPropertyInfoForDataType();
+	public function testGivenUnknownPropertyId_getPropertyInfoReturnsNull() {
+		$table = $this->newPropertyInfoTable();
+
+		$this->assertNull( $table->getPropertyInfo( new PropertyId( 'P123' ) ) );
 	}
 
-	public function testGetAllPropertyInfo() {
-		$this->helper->testGetAllPropertyInfo();
+	public function testGivenKnownPropertyId_getPropertyInfoTheInfo() {
+		$table = $this->newPropertyInfoTable();
+		$propertyId = new PropertyId( 'P123' );
+
+		$table->setPropertyInfo( $propertyId, [ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ] );
+
+		$this->assertSame(
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ],
+			$table->getPropertyInfo( $propertyId )
+		);
 	}
 
-	public function testRemovePropertyInfo() {
-		$this->helper->testRemovePropertyInfo();
+	public function testGivenNoInfo_getAllPropertyInfoReturnsEmptyList() {
+		$table = $this->newPropertyInfoTable();
+
+		$this->assertSame( [], $table->getAllPropertyInfo() );
 	}
 
-	public function testPropertyInfoPersistance() {
-		$this->helper->testPropertyInfoPersistance();
+	public function testGivenSomeProperties_getAllPropertyInfoReturnsAllInfo() {
+		$table = $this->newPropertyInfoTable();
+		$table->setPropertyInfo(
+			new PropertyId( 'P123' ),
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ]
+		);
+		$table->setPropertyInfo(
+			new PropertyId( 'P456' ),
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'external-id', PropertyInfoLookup::KEY_FORMATTER_URL => 'http://foo.bar/$1' ]
+		);
+
+		$this->assertSame(
+			[
+				'P123' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ],
+				'P456' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'external-id', PropertyInfoLookup::KEY_FORMATTER_URL => 'http://foo.bar/$1' ],
+			],
+			$table->getAllPropertyInfo()
+		);
+	}
+
+	public function testGivenDataTypeNotUsedInProperties_getPropertyInfoForDataTypeReturnsEmptyList() {
+		$table = $this->newPropertyInfoTable();
+		$table->setPropertyInfo(
+			new PropertyId( 'P123' ),
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ]
+		);
+
+		$this->assertSame( [], $table->getPropertyInfoForDataType( 'external-id' ) );
+	}
+
+	public function testGivenDataTypeUsedInSomeProperties_getPropertyInfoForDataTypeReturnsInfoForRelevantProperties() {
+		$table = $this->newPropertyInfoTable();
+		$table->setPropertyInfo(
+			new PropertyId( 'P123' ),
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ]
+		);
+		$table->setPropertyInfo(
+			new PropertyId( 'P456' ),
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'external-id', PropertyInfoLookup::KEY_FORMATTER_URL => 'http://foo.bar/$1' ]
+		);
+
+		$this->assertSame(
+			[
+				'P456' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'external-id', PropertyInfoLookup::KEY_FORMATTER_URL => 'http://foo.bar/$1' ],
+			],
+			$table->getPropertyInfoForDataType( 'external-id' )
+		);
+	}
+
+	public function testGivenReadonlyTable_removePropertyInfoThrowsException() {
+		$table = $this->newReadonlyPropertyInfoTable();
+
+		$this->setExpectedException( DBError::class );
+
+		$table->removePropertyInfo( new PropertyId( 'P123' ) );
+	}
+
+	public function testGivenKnownPropertyId_removePropertyInfoRemovesTheEntryAndReturnsTrue() {
+		$table = $this->newPropertyInfoTable();
+		$propertyId = new PropertyId( 'P123' );
+
+		$table->setPropertyInfo( $propertyId, [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] );
+
+		$this->assertSame(
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
+			$table->getPropertyInfo( $propertyId )
+		);
+
+		$this->assertTrue( $table->removePropertyInfo( $propertyId ) );
+
+		$this->assertNull( $table->getPropertyInfo( $propertyId ) );
+	}
+
+	public function testGivenUnknownPropertyId_removePropertyInfoReturnsFalse() {
+		$table = $this->newPropertyInfoTable();
+		$propertyId = new PropertyId( 'P123' );
+
+		$this->assertNull( $table->getPropertyInfo( $propertyId ) );
+
+		$this->assertFalse( $table->removePropertyInfo( $propertyId ) );
+
+		$this->assertNull( $table->getPropertyInfo( $propertyId ) );
+	}
+
+	public function testSettingAndRemovingPropertyInfoIsPersistent() {
+		$tableOne = $this->newPropertyInfoTable();
+		$tableTwo = $this->newPropertyInfoTable();
+		$propertyId = new PropertyId( 'P123' );
+
+		$this->assertNull( $tableOne->getPropertyInfo( $propertyId ) );
+		$this->assertNull( $tableTwo->getPropertyInfo( $propertyId ) );
+
+		$tableOne->setPropertyInfo( $propertyId, [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] );
+
+		$this->assertSame(
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
+			$tableOne->getPropertyInfo( $propertyId )
+		);
+		$this->assertSame(
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
+			$tableTwo->getPropertyInfo( $propertyId )
+		);
+
+		$tableTwo->removePropertyInfo( $propertyId );
+
+		$this->assertNull( $tableTwo->getPropertyInfo( $propertyId ) );
+		$this->assertNull( $tableOne->getPropertyInfo( $propertyId ) );
 	}
 
 	/**
@@ -107,7 +218,7 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 		$this->setExpectedException( InvalidArgumentException::class );
 
 		$infoTable = new PropertyInfoTable( false, $this->getEntityComposer(), false, $repositoryName );
-		$infoTable->setPropertyInfo( $id, [ PropertyInfoStore::KEY_DATA_TYPE => 'string' ] );
+		$infoTable->setPropertyInfo( $id, [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] );
 	}
 
 	/**
@@ -176,10 +287,10 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 	private function persistInfos() {
 		$table = $this->newPropertyInfoTable();
 		$infos = [
-			'P123' => [ PropertyInfoStore::KEY_DATA_TYPE => 'string' ],
-			'P23' => [ PropertyInfoStore::KEY_DATA_TYPE => 'string' ],
-			'P42' => [ PropertyInfoStore::KEY_DATA_TYPE => 'commonsMedia' ],
-			'P1337' => [ PropertyInfoStore::KEY_DATA_TYPE => 'string' ],
+			'P123' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
+			'P23' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
+			'P42' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'commonsMedia' ],
+			'P1337' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
 		];
 
 		foreach ( $infos as $id => $info ) {
