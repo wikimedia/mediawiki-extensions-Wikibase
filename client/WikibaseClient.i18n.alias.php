@@ -42,6 +42,7 @@ $specialPageAliases['bn'] = array(
 
 /** Czech (čeština) */
 $specialPageAliases['cs'] = array(
+	'EntityUsage' => array( 'Použití_entity' ),
 	'PagesWithBadges' => array( 'Stránky_s_odznaky' ),
 	'UnconnectedPages' => array( 'Nepropojené_stránky' ),
 );
