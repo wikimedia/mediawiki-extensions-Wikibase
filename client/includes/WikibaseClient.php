@@ -310,7 +310,7 @@ final class WikibaseClient {
 	private function newWikibaseSnakFormatterBuilders( WikibaseValueFormatterBuilders $valueFormatterBuilders ) {
 		return new WikibaseSnakFormatterBuilders(
 			$valueFormatterBuilders,
-			$this->getStore()->getPropertyInfoStore(),
+			$this->getStore()->getPropertyInfoLookup(),
 			$this->getPropertyDataTypeLookup(),
 			$this->getDataTypeFactory()
 		);
@@ -449,9 +449,9 @@ final class WikibaseClient {
 	 */
 	public function getPropertyDataTypeLookup() {
 		if ( $this->propertyDataTypeLookup === null ) {
-			$infoStore = $this->getStore()->getPropertyInfoStore();
+			$infoLookup = $this->getStore()->getPropertyInfoLookup();
 			$retrievingLookup = new EntityRetrievingDataTypeLookup( $this->getEntityLookup() );
-			$this->propertyDataTypeLookup = new PropertyInfoDataTypeLookup( $infoStore, $retrievingLookup );
+			$this->propertyDataTypeLookup = new PropertyInfoDataTypeLookup( $infoLookup, $retrievingLookup );
 		}
 
 		return $this->propertyDataTypeLookup;

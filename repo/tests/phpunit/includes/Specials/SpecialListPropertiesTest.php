@@ -11,11 +11,11 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\PropertyInfoStore;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Repo\Specials\SpecialListProperties;
 use Wikibase\Store\BufferingTermLookup;
-use Wikibase\Lib\Tests\Store\MockPropertyInfoStore;
+use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialListProperties
@@ -45,24 +45,13 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	}
 
 	private function getPropertyInfoStore() {
-		$propertyInfoStore = new MockPropertyInfoStore();
+		$propertyInfoLookup = new MockPropertyInfoLookup( [
+			'P789' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
+			'P456' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'wikibase-item' ],
+			'P123' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'wikibase-item' ],
+		] );
 
-		$propertyInfoStore->setPropertyInfo(
-			new PropertyId( 'P789' ),
-			array( PropertyInfoStore::KEY_DATA_TYPE => 'string' )
-		);
-
-		$propertyInfoStore->setPropertyInfo(
-			new PropertyId( 'P456' ),
-			array( PropertyInfoStore::KEY_DATA_TYPE => 'wikibase-item' )
-		);
-
-		$propertyInfoStore->setPropertyInfo(
-			new PropertyId( 'P123' ),
-			array( PropertyInfoStore::KEY_DATA_TYPE => 'wikibase-item' )
-		);
-
-		return $propertyInfoStore;
+		return $propertyInfoLookup;
 	}
 
 	/**

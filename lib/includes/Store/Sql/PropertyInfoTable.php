@@ -10,6 +10,7 @@ use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityIdComposer;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -21,7 +22,7 @@ use Wikimedia\Assert\Assert;
  * @author Daniel Kinzler
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
+class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, PropertyInfoStore {
 
 	/**
 	 * @var string
@@ -121,7 +122,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 	}
 
 	/**
-	 * @see PropertyInfoStore::getPropertyInfo
+	 * @see PropertyInfoLookup::getPropertyInfo
 	 *
 	 * @param PropertyId $propertyId
 	 *
@@ -157,7 +158,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 	}
 
 	/**
-	 * @see PropertyDataTypeLookup::getPropertyInfoForDataType
+	 * @see PropertyInfoLookup::getPropertyInfoForDataType
 	 *
 	 * @param string $dataType
 	 *
@@ -182,7 +183,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 	}
 
 	/**
-	 * @see PropertyInfoStore::getAllPropertyInfo
+	 * @see PropertyInfoLookup::getAllPropertyInfo
 	 *
 	 * @return array[] Array containing serialized property IDs as keys and info arrays as values
 	 * @throws DBError
@@ -215,16 +216,16 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 	 */
 	public function setPropertyInfo( PropertyId $propertyId, array $info ) {
 		if ( $this->isReadonly ) {
-			throw new DBError( 'Cannot write when in readonly mode' );
+			throw new DBError( null, 'Cannot write when in readonly mode' );
 		}
 
-		if ( !isset( $info[ PropertyInfoStore::KEY_DATA_TYPE ] ) ) {
-			throw new InvalidArgumentException( 'Missing required info field: ' . PropertyInfoStore::KEY_DATA_TYPE );
+		if ( !isset( $info[ PropertyInfoLookup::KEY_DATA_TYPE ] ) ) {
+			throw new InvalidArgumentException( 'Missing required info field: ' . PropertyInfoLookup::KEY_DATA_TYPE );
 		}
 
 		$this->assertPropertyIdFromCorrectRepository( $propertyId );
 
-		$type = $info[ PropertyInfoStore::KEY_DATA_TYPE ];
+		$type = $info[ PropertyInfoLookup::KEY_DATA_TYPE ];
 		$json = json_encode( $info );
 
 		$dbw = $this->getConnection( DB_MASTER );
@@ -254,7 +255,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 	 */
 	public function removePropertyInfo( PropertyId $propertyId ) {
 		if ( $this->isReadonly ) {
-			throw new DBError( 'Cannot write when in readonly mode' );
+			throw new DBError( null, 'Cannot write when in readonly mode' );
 		}
 
 		$this->assertPropertyIdFromCorrectRepository( $propertyId );
