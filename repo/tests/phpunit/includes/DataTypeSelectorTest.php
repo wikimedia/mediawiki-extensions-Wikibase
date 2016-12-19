@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests;
 
 use DataTypes\DataType;
 use MWException;
@@ -20,10 +20,11 @@ class DataTypeSelectorTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param string $propertyType
+	 * @param string $label
 	 *
 	 * @return DataType
 	 */
-	private function newDataType( $propertyType ) {
+	private function newDataType( $propertyType, $label ) {
 		$dataType = $this->getMockBuilder( DataType::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -34,21 +35,9 @@ class DataTypeSelectorTest extends PHPUnit_Framework_TestCase {
 
 		$dataType->expects( $this->any() )
 			->method( 'getLabel' )
-			->will( $this->returnValue( '(datatypes-type-' . $propertyType . ')' ) );
+			->will( $this->returnValue( $label ) );
 
 		return $dataType;
-	}
-
-	/**
-	 * @param DataType[]|null $dataTypes
-	 *
-	 * @return DataTypeSelector
-	 */
-	private function newInstance( array $dataTypes = null ) {
-		return new DataTypeSelector(
-			$dataTypes !== null ? $dataTypes : array( $this->newDataType( '<PT>' ) ),
-			'qqx'
-		);
 	}
 
 	/**
@@ -60,19 +49,55 @@ class DataTypeSelectorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidConstructorArgumentsProvider() {
-		return array(
-			array( array(), null ),
-			array( array(), false ),
-			array( array( null ), '' ),
-			array( array( false ), '' ),
-			array( array( '' ), '' ),
-		);
+		return [
+			[ [], null ],
+			[ [], false ],
+			[ [ null ], '' ],
+			[ [ false ], '' ],
+			[ [ '' ], '' ],
+		];
 	}
 
-	public function testGetOptionsArray() {
-		$selector = $this->newInstance();
+	/**
+	 * @dataProvider getOptionsArrayProvider
+	 */
+	public function testGetOptionsArray( array $dataTypes, array $expected ) {
+		$selector = new DataTypeSelector( $dataTypes, 'qqx' );
 		$options = $selector->getOptionsArray();
-		$this->assertSame( array( '<PT>' => '(datatypes-type-<PT>)' ), $options );
+		$this->assertSame( $expected, $options );
+	}
+
+	public function getOptionsArrayProvider() {
+		return [
+			'basic' => [
+				[
+					$this->newDataType( '<PT>', '<LABEL>' ),
+				],
+				[
+					'<LABEL>' => '<PT>',
+				]
+			],
+			'natcasesort' => [
+				[
+					$this->newDataType( '<PTA>', '<LABEL-10>' ),
+					$this->newDataType( '<PTB>', '<label-2>' ),
+				],
+				[
+					'<label-2>' => '<PTB>',
+					'<LABEL-10>' => '<PTA>',
+				]
+			],
+			'duplicate labels' => [
+				[
+					$this->newDataType( '<PTB>', '<LABEL>' ),
+					$this->newDataType( '<PTA>', '<LABEL>' ),
+				],
+				[
+					'<PTA>' => '<PTA>',
+					'<PTB>' => '<PTB>',
+				]
+			],
+		];
 	}
 
 }

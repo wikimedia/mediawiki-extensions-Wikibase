@@ -112,7 +112,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 			'name' => 'datatype',
 			'type' => 'select',
 			'default' => $this->dataType,
-			'options' => array_flip( $selector->getOptionsArray() ),
+			'options' => $selector->getOptionsArray(),
 			'id' => 'wb-newproperty-datatype',
 			'label-message' => 'wikibase-newproperty-datatype'
 		];
