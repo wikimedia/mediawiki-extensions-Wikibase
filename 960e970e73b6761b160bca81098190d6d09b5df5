@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_20449abc",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-12-19T18:30:46Z",
+      "side": 1,
+      "message": "Because this code is hacking around the way API warning reporting has always worked. It functioned with the old code, but when the non-backwards-compatible mode is in use the new code changes the structure of the result in such a way that this now breaks things.",
+      "parentUuid": "0e0e73b5_a0288a33",
+      "revId": "960e970e73b6761b160bca81098190d6d09b5df5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_62fbc512",
         "filename": "repo/includes/Api/ApiErrorReporter.php",
         "patchSetId": 3
@@ -72,6 +90,30 @@
       "side": 1,
       "message": "I know this is deprecated. How is this a reason for a -1?",
       "parentUuid": "0e0e73b5_62fbc512",
+      "range": {
+        "startLine": 119,
+        "startChar": 45,
+        "endLine": 119,
+        "endChar": 63
+      },
+      "revId": "960e970e73b6761b160bca81098190d6d09b5df5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_e04d62e1",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-12-19T18:30:46Z",
+      "side": 1,
+      "message": "You\u0027re supposedly removing the deprecated function calls in this patch. You missed this one. Thus the patch needs improvement.",
+      "parentUuid": "0e0e73b5_00f3d6e4",
       "range": {
         "startLine": 119,
         "startChar": 45,
