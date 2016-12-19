@@ -18,6 +18,7 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LabelConflictFinder;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\PropertyInfoStore;
@@ -117,6 +118,11 @@ class SqlStoreTest extends MediaWikiTestCase {
 	public function testGetEntityInfoBuilderFactory() {
 		$service = $this->newInstance()->getEntityInfoBuilderFactory();
 		$this->assertInstanceOf( EntityInfoBuilderFactory::class, $service );
+	}
+
+	public function testGetPropertyInfoLookup() {
+		$service = $this->newInstance()->getPropertyInfoLookup();
+		$this->assertInstanceOf( PropertyInfoLookup::class, $service );
 	}
 
 	public function testGetPropertyInfoStore() {

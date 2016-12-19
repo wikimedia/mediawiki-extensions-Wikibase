@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\DispatchingPropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
-use Wikibase\PropertyInfoStore;
 
 /**
  * @covers Wikibase\Lib\Store\DispatchingPropertyInfoLookup
@@ -24,12 +23,12 @@ class DispatchingPropertyInfoLookupTest extends \PHPUnit_Framework_TestCase {
 
 	public function setUp() {
 		$this->localPropertyInfo = [
-			'P23' => [ PropertyInfoStore::KEY_DATA_TYPE => 'string' ],
-			'P42' => [ PropertyInfoStore::KEY_DATA_TYPE => 'commonsMedia', 'foo' => 'bar' ]
+			'P23' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
+			'P42' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'commonsMedia', 'foo' => 'bar' ]
 		];
 		$this->fooPropertyInfo = [
-			'foo:P123' => [ PropertyInfoStore::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ],
-			'foo:P42' => [ PropertyInfoStore::KEY_DATA_TYPE => 'commonsMedia' ]
+			'foo:P123' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ],
+			'foo:P42' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'commonsMedia' ]
 		];
 	}
 
@@ -87,13 +86,7 @@ class DispatchingPropertyInfoLookupTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getPropertyInfoLookup( array $infos ) {
-		$lookup = new MockPropertyInfoStore();
-
-		foreach ( $infos as $id => $info ) {
-			$lookup->setPropertyInfo( new PropertyId( $id ), $info );
-		}
-
-		return $lookup;
+		return new MockPropertyInfoLookup( $infos );
 	}
 
 	/**

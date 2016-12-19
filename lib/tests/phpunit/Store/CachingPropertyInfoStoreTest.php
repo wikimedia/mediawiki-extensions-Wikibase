@@ -2,13 +2,15 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
-use HashBagOStuff;
-use Wikibase\CachingPropertyInfoStore;
+use BagOStuff;
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Store\CachingPropertyInfoStore;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\PropertyInfoStore;
 
 /**
- * @covers Wikibase\CachingPropertyInfoStore
+ * @covers Wikibase\Lib\Store\CachingPropertyInfoStore;
  *
  * @group Wikibase
  * @group WikibaseLib
@@ -16,69 +18,95 @@ use Wikibase\PropertyInfoStore;
  * @group WikibaseStore
  *
  * @license GPL-2.0+
- * @author Daniel Kinzler
  */
-class CachingPropertyInfoStoreTest extends \MediaWikiTestCase {
+class CachingPropertyInfoStoreTest extends \PHPUnit_Framework_TestCase {
 
-	/**
-	 * @var PropertyInfoStoreTestHelper
-	 */
-	private $helper;
+	private function newCachingPropertyInfoStore( BagOStuff $cache ) {
+		$mockStore = $this->getMock( PropertyInfoStore::class );
+		$mockStore->expects( $this->any() )->method( 'setPropertyInfo' );
+		$mockStore->expects( $this->any() )
+			->method( 'removePropertyInfo' )
+			->will(
+				$this->returnCallback( function( PropertyId $propertyId ) {
+					if ( $propertyId->getSerialization() === 'P100' ) {
+						return true;
+					}
+					return false;
+				} )
+			);
 
-	public function __construct( $name = null, $data = array(), $dataName = '' ) {
-		parent::__construct( $name, $data, $dataName );
-
-		$this->helper = new PropertyInfoStoreTestHelper( $this, array( $this, 'newCachingPropertyInfoStore' ) );
+		/** @var PropertyInfoStore $mockStore */
+		return new CachingPropertyInfoStore( $mockStore, $cache, 3600, __CLASS__ );
 	}
 
-	public function newCachingPropertyInfoStore() {
-		$mock = new MockPropertyInfoStore();
-		$cache = new HashBagOStuff();
-		return new CachingPropertyInfoStore( $mock, $cache );
+	public function testGivenKnownPropertyId_removePropertyInfoUpdatesCacheAndReturnsTrue() {
+		$propertyId = new PropertyId( 'P100' );
+
+		$cache = $this->getMock( BagOStuff::class );
+		$cache->expects( $this->once() )
+			->method( 'get' )
+			->with( __CLASS__ )
+			->will(
+				$this->returnValue( [ 'P100' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] ] )
+			);
+		$cache->expects( $this->once() )
+			->method( 'set' )
+			->with(
+				__CLASS__,
+				[],
+				$this->isType( 'int' )
+			);
+
+		$store = $this->newCachingPropertyInfoStore( $cache );
+
+		$this->assertTrue( $store->removePropertyInfo( $propertyId ) );
 	}
 
-	public function provideSetPropertyInfo() {
-		return $this->helper->provideSetPropertyInfo();
+	public function testGivenUnknownPropertyId_removePropertyInfoDoesNotTouchCacheAndReturnsFalse() {
+		$propertyId = new PropertyId( 'P110' );
+
+		$cache = $this->getMock( BagOStuff::class );
+		$cache->expects( $this->never() )->method( 'get' );
+		$cache->expects( $this->never() )->method( 'set' );
+
+		$store = $this->newCachingPropertyInfoStore( $cache );
+
+		$this->assertFalse( $store->removePropertyInfo( $propertyId ) );
 	}
 
-	/**
-	 * @dataProvider provideSetPropertyInfo
-	 */
-	public function testSetPropertyInfo( PropertyId $id, array $info, $expectedException ) {
-		$this->helper->testSetPropertyInfo( $id, $info, $expectedException );
+	public function testSetPropertyInfoUpdatesCache() {
+		$propertyId = new PropertyId( 'P111' );
+
+		$cache = $this->getMock( BagOStuff::class );
+		$cache->expects( $this->once() )
+			->method( 'get' )
+			->with( __CLASS__ )
+			->will(
+				$this->returnValue( [] )
+			);
+		$cache->expects( $this->once() )
+			->method( 'set' )
+			->with(
+				__CLASS__,
+				[ 'P111' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] ],
+				$this->isType( 'int' )
+			);
+
+		$store = $this->newCachingPropertyInfoStore( $cache );
+
+		$store->setPropertyInfo( $propertyId, [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] );
 	}
 
-	public function testGetPropertyInfo() {
-		$this->helper->testGetPropertyInfo();
-	}
+	public function testGivenInvalidInfo_setPropertyInfoThrowsException() {
+		$cache = $this->getMock( BagOStuff::class );
+		$cache->expects( $this->never() )->method( 'get' );
+		$cache->expects( $this->never() )->method( 'set' );
 
-	public function testGetAllPropertyInfo() {
-		$this->helper->testGetAllPropertyInfo();
-	}
+		$store = $this->newCachingPropertyInfoStore( $cache );
 
-	public function testRemovePropertyInfo() {
-		$this->helper->testRemovePropertyInfo();
-	}
+		$this->setExpectedException( InvalidArgumentException::class );
 
-	public function testPropertyInfoWriteThrough() {
-		$p23 = new PropertyId( 'P23' );
-		$p42 = new PropertyId( 'P42' );
-		$info23 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string' );
-		$info42 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string', 'foo' => 'bar' );
-
-		$mock = new MockPropertyInfoStore();
-		$cache = new HashBagOStuff();
-
-		$mock->setPropertyInfo( $p23, $info23 );
-
-		$store = new CachingPropertyInfoStore( $mock, $cache );
-
-		$this->assertEquals( $info23, $store->getPropertyInfo( $p23 ), "get from source" );
-		$this->assertEquals( $info23, $store->getPropertyInfo( $p23 ), "get cached" );
-
-		$store->setPropertyInfo( $p42, $info42 );
-		$this->assertEquals( $info42, $store->getPropertyInfo( $p42 ), "cache updated" );
-		$this->assertEquals( $info42, $mock->getPropertyInfo( $p42 ), "source updated" );
+		$store->setPropertyInfo( new PropertyId( 'P111' ), [ 'foo' => 'bar' ] );
 	}
 
 }
