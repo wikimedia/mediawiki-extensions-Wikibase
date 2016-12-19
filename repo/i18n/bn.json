@@ -28,6 +28,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "আরও ভাষায়",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "কনফিগার",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "পাতা লোডে আমার সব ভাষায় লেবেল, উপনাম এবং বিবরণ দেখান",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "ব্যবহারকারীর ইন্টারফেসের ভাষা ছাড়াও ব্যক্তিগত অন্যান্য ভাষা [[mw:Extension:Babel|বাবেল এক্সটেনশন]] ব্যবহার করে ব্যবহারকারী পাতায় যোগ করা যেতে পারে।",
 	"wikibase-entitytermsforlanguagelistview-aliases": "আরও যে নামে পরিচিত:",
 	"wikibase-entitytermsforlanguagelistview-description": "বিবরণ",
 	"wikibase-entitytermsforlanguagelistview-label": "লেবেল",

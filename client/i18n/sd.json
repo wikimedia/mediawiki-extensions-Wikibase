@@ -11,6 +11,8 @@
 	"wikibase-dataitem": "{{WBREPONAME}} اسم",
 	"wikibase-editlinks": "ڳنڍڻن کي سنواريو",
 	"wikibase-editlinkstitle": "بين‌الزباني ڳنڍڻا سنواريو",
+	"wikibase-addlinkstitle": "بين الزبان ڳنڍڻا وجھو",
+	"wikibase-linkitem-addlinks": "ڳنڍڻا وجھو",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "لڪايو",
 	"wikibase-rc-hide-wikidata-show": "ڏيکاريو",
