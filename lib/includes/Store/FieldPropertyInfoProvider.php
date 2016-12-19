@@ -3,13 +3,13 @@
 namespace Wikibase\Lib;
 
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\PropertyInfoStore;
 use Wikimedia\Assert\Assert;
 
 /**
  * PropertyInfoProvider implementation based on a specific field in the array returned
- * by a PropertyInfoStore.
+ * by a PropertyInfoLookup.
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
@@ -17,9 +17,9 @@ use Wikimedia\Assert\Assert;
 class FieldPropertyInfoProvider implements PropertyInfoProvider {
 
 	/**
-	 * @var PropertyInfoStore
+	 * @var PropertyInfoLookup
 	 */
-	private $infoStore;
+	private $infoLookup;
 
 	/**
 	 * @var string The property info field name
@@ -27,14 +27,14 @@ class FieldPropertyInfoProvider implements PropertyInfoProvider {
 	private $propertyInfoKey;
 
 	/**
-	 * @param PropertyInfoStore $infoStore
+	 * @param PropertyInfoLookup $infoLookup
 	 * @param string $propertyInfoKey Name of the desired field in the PropertyInfo array.
 	 *        Use one of the PropertyInfoStore::KEY_XXX constants.
 	 */
-	public function __construct( PropertyInfoStore $infoStore, $propertyInfoKey ) {
+	public function __construct( PropertyInfoLookup $infoLookup, $propertyInfoKey ) {
 		Assert::parameterType( 'string', $propertyInfoKey, '$propertyInfoKey' );
 
-		$this->infoStore = $infoStore;
+		$this->infoLookup = $infoLookup;
 		$this->propertyInfoKey = $propertyInfoKey;
 	}
 
@@ -48,7 +48,7 @@ class FieldPropertyInfoProvider implements PropertyInfoProvider {
 	 * @throws StorageException
 	 */
 	public function getPropertyInfo( PropertyId $propertyId ) {
-		$info = $this->infoStore->getPropertyInfo( $propertyId );
+		$info = $this->infoLookup->getPropertyInfo( $propertyId );
 
 		if ( $info !== null && isset( $info[$this->propertyInfoKey] ) ) {
 			return $info[$this->propertyInfoKey];

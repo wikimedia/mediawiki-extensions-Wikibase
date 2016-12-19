@@ -15,6 +15,7 @@ use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
+use Wikibase\Lib\Store\CachingPropertyInfoStore;
 use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
@@ -24,6 +25,7 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LabelConflictFinder;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\SiteLinkTable;
@@ -102,6 +104,11 @@ class SqlStore implements Store {
 	 * @var EntityInfoBuilderFactory|null
 	 */
 	private $entityInfoBuilderFactory = null;
+
+	/**
+	 * @var PropertyInfoLookup|null
+	 */
+	private $propertyInfoLookup = null;
 
 	/**
 	 * @var PropertyInfoStore|null
@@ -501,6 +508,40 @@ class SqlStore implements Store {
 	}
 
 	/**
+	 * @see Store::getPropertyInfoLookup
+	 *
+	 * @since 0.5
+	 *
+	 * @return PropertyInfoLookup
+	 */
+	public function getPropertyInfoLookup() {
+		if ( !$this->propertyInfoLookup ) {
+			$this->propertyInfoLookup = $this->newPropertyInfoLookup();
+		}
+
+		return $this->propertyInfoLookup;
+	}
+
+	/**
+	 * Creates a new PropertyInfoLookup instance
+	 * Note: cache key used by the lookup should be the same as the cache key used
+	 * by CachedPropertyInfoStore.
+	 *
+	 * @return PropertyInfoLookup
+	 */
+	private function newPropertyInfoLookup() {
+		$table = new PropertyInfoTable( true, $this->entityIdComposer );
+		$cacheKey = $this->cacheKeyPrefix . ':CachingPropertyInfoStore';
+
+		return new CachingPropertyInfoLookup(
+			$table,
+			ObjectCache::getInstance( $this->cacheType ),
+			$this->cacheDuration,
+			$cacheKey
+		);
+	}
+
+	/**
 	 * @see Store::getPropertyInfoStore
 	 *
 	 * @since 0.4
@@ -517,6 +558,8 @@ class SqlStore implements Store {
 
 	/**
 	 * Creates a new PropertyInfoStore
+	 * Note: cache key used by the lookup should be the same as the cache key used
+	 * by CachedPropertyInfoLookup.
 	 *
 	 * @return PropertyInfoStore
 	 */

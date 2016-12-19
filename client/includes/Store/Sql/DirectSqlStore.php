@@ -7,6 +7,7 @@ use ObjectCache;
 use Wikibase\Client\DispatchingServiceFactory;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\Sql\SqlSubscriptionManager;
@@ -132,9 +133,9 @@ class DirectSqlStore implements ClientStore {
 	private $entityNamespaceLookup = null;
 
 	/**
-	 * @var PropertyInfoTable|null
+	 * @var PropertyInfoLookup|null
 	 */
-	private $propertyInfoTable = null;
+	private $propertyInfoLookup = null;
 
 	/**
 	 * @var SiteLinkLookup|null
@@ -430,24 +431,24 @@ class DirectSqlStore implements ClientStore {
 	}
 
 	/**
-	 * @see ClientStore::getPropertyInfoStore
+	 * @see ClientStore::getPropertyInfoLookup
 	 *
-	 * @return PropertyInfoStore
+	 * @return PropertyInfoLookup
 	 */
-	public function getPropertyInfoStore() {
-		if ( $this->propertyInfoTable === null ) {
-			$propertyInfoStore = new PropertyInfoTable( true, $this->entityIdComposer, $this->repoWiki );
+	public function getPropertyInfoLookup() {
+		if ( $this->propertyInfoLookup === null ) {
+			$propertyInfoTable = new PropertyInfoTable( true, $this->entityIdComposer, $this->repoWiki );
 			$cacheKey = $this->cacheKeyPrefix . ':CachingPropertyInfoStore';
 
-			$this->propertyInfoTable = new CachingPropertyInfoStore(
-				$propertyInfoStore,
+			$this->propertyInfoLookup = new CachingPropertyInfoLookup(
+				$propertyInfoTable,
 				ObjectCache::getInstance( $this->cacheType ),
 				$this->cacheDuration,
 				$cacheKey
 			);
 		}
 
-		return $this->propertyInfoTable;
+		return $this->propertyInfoLookup;
 	}
 
 	/**

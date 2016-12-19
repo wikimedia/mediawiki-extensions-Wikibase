@@ -12,6 +12,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Store\EntityIdLookup;
 
@@ -99,9 +100,9 @@ interface ClientStore {
 	/**
 	 * @since 0.4
 	 *
-	 * @return PropertyInfoStore
+	 * @return PropertyInfoLookup
 	 */
-	public function getPropertyInfoStore();
+	public function getPropertyInfoLookup();
 
 	/**
 	 * Removes all data from the store.

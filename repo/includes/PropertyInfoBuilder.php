@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
  * Class to build the information about a property.
@@ -40,12 +41,12 @@ class PropertyInfoBuilder {
 	 */
 	public function buildPropertyInfo( Property $property ) {
 		$info = array(
-			PropertyInfoStore::KEY_DATA_TYPE => $property->getDataTypeId()
+			PropertyInfoLookup::KEY_DATA_TYPE => $property->getDataTypeId()
 		);
 
 		$formatterUrl = $this->getFormatterUrl( $property->getStatements() );
 		if ( $formatterUrl !== null ) {
-			$info[PropertyInfoStore::KEY_FORMATTER_URL] = $formatterUrl;
+			$info[PropertyInfoLookup::KEY_FORMATTER_URL] = $formatterUrl;
 		}
 
 		return $info;

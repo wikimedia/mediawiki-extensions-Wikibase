@@ -2,12 +2,23 @@
 
 namespace Wikibase\Lib\Store;
 
+use DBError;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * @license GPL-2.0+
  */
 interface PropertyInfoLookup {
+
+	/**
+	 * Key to use in the info array for the property's data type ID.
+	 */
+	const KEY_DATA_TYPE = 'type';
+
+	/**
+	 * Key to use in the info array for the property's formatter URL
+	 */
+	const KEY_FORMATTER_URL = 'formatterURL';
 
 	/**
 	 * Returns the property info for the given property ID.
