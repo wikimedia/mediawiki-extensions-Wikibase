@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Api;
 
+use ApiBase;
 use Profiler;
 use Site;
 use SiteStore;
@@ -20,6 +21,11 @@ use Wikibase\StringNormalizer;
  * @author Addshore
  */
 class ItemByTitleHelper {
+
+	/**
+	 * @var ApiBase
+	 */
+	private $apiModule;
 
 	/**
 	 * @var ResultBuilder
@@ -42,17 +48,20 @@ class ItemByTitleHelper {
 	private $stringNormalizer;
 
 	/**
+	 * @param ApiBase $apiModule
 	 * @param ResultBuilder $resultBuilder
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param SiteStore $siteStore
 	 * @param StringNormalizer $stringNormalizer
 	 */
 	public function __construct(
+		ApiBase $apiModule,
 		ResultBuilder $resultBuilder,
 		SiteLinkLookup $siteLinkLookup,
 		SiteStore $siteStore,
 		StringNormalizer $stringNormalizer
 	) {
+		$this->apiModule = $apiModule;
 		$this->resultBuilder = $resultBuilder;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->siteStore = $siteStore;
@@ -164,8 +173,7 @@ class ItemByTitleHelper {
 	 */
 	private function throwUsageException( $message, $code ) {
 		Profiler::instance()->close();
-		// TODO: The API module responsible for the error should be passed in here.
-		throw ApiUsageException::newWithMessage( null, $message, $code );
+		throw ApiUsageException::newWithMessage( $this->apiModule, $message, $code );
 	}
 
 }
