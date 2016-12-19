@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_daf5b1b6",
+        "filename": "client/WikibaseClient.i18n.alias.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-19T09:27:14Z",
+      "side": 1,
+      "message": "Are you sure you want to translate \"entity\" with \"entity\"? According to messages like\n\nhttps://translatewiki.net/wiki/MediaWiki:Wikibase-entity/cs\nhttps://translatewiki.net/wiki/MediaWiki:Wikibase-entityusage-entity/cs\n\nit should be \"entita\".",
+      "range": {
+        "startLine": 45,
+        "startChar": 34,
+        "endLine": 45,
+        "endChar": 40
+      },
+      "revId": "0f5d1038fc666d73c74deb725a5241890338fa73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
