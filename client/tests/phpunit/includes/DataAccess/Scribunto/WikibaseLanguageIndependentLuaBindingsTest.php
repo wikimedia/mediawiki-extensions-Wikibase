@@ -40,7 +40,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends PHPUnit_Framework_TestC
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param UsageAccumulator|null $usageAccumulator
 	 *
-	 * @return WikibaseLuaBindings
+	 * @return WikibaseLanguageIndependentLuaBindings
 	 */
 	private function getWikibaseLanguageIndependentLuaBindings(
 		SiteLinkLookup $siteLinkLookup,
