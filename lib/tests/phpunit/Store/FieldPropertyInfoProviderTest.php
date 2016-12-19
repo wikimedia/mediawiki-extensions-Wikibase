@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Tests\Store;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\FieldPropertyInfoProvider;
-use Wikibase\PropertyInfoStore;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
  * @covers Wikibase\Lib\FieldPropertyInfoProvider
@@ -25,7 +25,7 @@ class FieldPropertyInfoProviderTest extends PHPUnit_Framework_TestCase {
 	public function testGetPropertyInfo( $info, $key, $expected ) {
 		$propertyId = new PropertyId( 'P1' );
 
-		$lookup = $this->getMock( PropertyInfoStore::class );
+		$lookup = $this->getMock( PropertyInfoLookup::class );
 		$lookup->expects( $this->once() )
 			->method( 'getPropertyInfo' )
 			->with( $propertyId )

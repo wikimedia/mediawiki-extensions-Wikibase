@@ -4,7 +4,6 @@ namespace Wikibase;
 
 use DBError;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\StorageException;
 
 /**
@@ -12,17 +11,7 @@ use Wikibase\Lib\Store\StorageException;
  * @author Daniel Kinzler
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-interface PropertyInfoStore extends PropertyInfoLookup {
-
-	/**
-	 * Key to use in the info array for the property's data type ID.
-	 */
-	const KEY_DATA_TYPE = 'type';
-
-	/**
-	 * Key to use in the info array for the property's formatter URL
-	 */
-	const KEY_FORMATTER_URL = 'formatterURL';
+interface PropertyInfoStore {
 
 	/**
 	 * Update the info for the given property.

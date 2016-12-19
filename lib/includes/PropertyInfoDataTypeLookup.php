@@ -5,10 +5,10 @@ namespace Wikibase\Lib;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
-use Wikibase\PropertyInfoStore;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
- * PropertyDataTypeLookup that uses an PropertyInfoStore to find
+ * PropertyDataTypeLookup that uses an PropertyInfoLookup to find
  * a property's data type ID.
  *
  * @since 0.4
@@ -24,16 +24,16 @@ class PropertyInfoDataTypeLookup implements PropertyDataTypeLookup {
 	private $fallbackLookup;
 
 	/**
-	 * @var PropertyInfoStore
+	 * @var PropertyInfoLookup
 	 */
-	private $infoStore;
+	private $infoLookup;
 
 	/**
-	 * @param PropertyInfoStore $infoStore
+	 * @param PropertyInfoLookup $infoLookup
 	 * @param PropertyDataTypeLookup|null $fallbackLookup
 	 */
-	public function __construct( PropertyInfoStore $infoStore, PropertyDataTypeLookup $fallbackLookup = null ) {
-		$this->infoStore = $infoStore;
+	public function __construct( PropertyInfoLookup $infoLookup, PropertyDataTypeLookup $fallbackLookup = null ) {
+		$this->infoLookup = $infoLookup;
 		$this->fallbackLookup = $fallbackLookup;
 	}
 
@@ -47,10 +47,10 @@ class PropertyInfoDataTypeLookup implements PropertyDataTypeLookup {
 	 */
 	public function getDataTypeIdForProperty( PropertyId $propertyId ) {
 		$dataTypeId = null;
-		$info = $this->infoStore->getPropertyInfo( $propertyId );
+		$info = $this->infoLookup->getPropertyInfo( $propertyId );
 
-		if ( $info !== null && isset( $info[PropertyInfoStore::KEY_DATA_TYPE] ) ) {
-			$dataTypeId = $info[PropertyInfoStore::KEY_DATA_TYPE];
+		if ( $info !== null && isset( $info[PropertyInfoLookup::KEY_DATA_TYPE] ) ) {
+			$dataTypeId = $info[PropertyInfoLookup::KEY_DATA_TYPE];
 		}
 
 		if ( $dataTypeId === null && $this->fallbackLookup !== null ) {
