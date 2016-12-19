@@ -99,15 +99,11 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 				->with( $this->isInstanceOf( Exception::class ), $expectedExceptionCode )
 				->will( $this->throwException( ApiUsageException::newWithMessage(
 					null,
-					'mockUsageException',
-					$expectedExceptionCode
+					'mockApiUsageException'
 				) ) );
 		} else {
-			$mock->expects( $this->any() )
-				->method( 'dieException' )
-				->will( $this->returnCallback( function( Exception $ex, $code ) {
-					throw ApiUsageException::newWithMessage( null, $ex->getMessage(), $code );
-				} ) );
+			$mock->expects( $this->never() )
+				->method( 'dieException' );
 		}
 
 		if ( $expectedErrorCode ) {
@@ -116,15 +112,11 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 				->with( $this->isType( 'string' ), $expectedErrorCode )
 				->will( $this->throwException( ApiUsageException::newWithMessage(
 					null,
-					'mockUsageException',
-					$expectedErrorCode
+					'mockApiUsageException'
 				) ) );
 		} else {
-			$mock->expects( $this->any() )
-				->method( 'dieError' )
-				->will( $this->returnCallback( function( $msg, $code ) {
-					throw ApiUsageException::newWithMessage( null, $msg, $code );
-				} ) );
+			$mock->expects( $this->never() )
+				->method( 'dieError' );
 		}
 
 		return $mock;
