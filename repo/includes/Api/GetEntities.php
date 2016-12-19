@@ -193,6 +193,7 @@ class GetEntities extends ApiBase {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$siteLinkStore = $wikibaseRepo->getStore()->newSiteLinkStore();
 		return new ItemByTitleHelper(
+			$this,
 			$this->resultBuilder,
 			$siteLinkStore,
 			$wikibaseRepo->getSiteLookup(),
