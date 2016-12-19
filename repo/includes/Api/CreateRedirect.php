@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Api;
 use ApiBase;
 use ApiMain;
 use ApiResult;
-use UsageException;
+use ApiUsageException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -104,7 +104,7 @@ class CreateRedirect extends ApiBase {
 	/**
 	 * @param RedirectCreationException $ex
 	 *
-	 * @throws UsageException always
+	 * @throws ApiUsageException always
 	 */
 	private function handleRedirectCreationException( RedirectCreationException $ex ) {
 		$cause = $ex->getPrevious();

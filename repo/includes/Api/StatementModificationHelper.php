@@ -6,7 +6,7 @@ use ApiBase;
 use InvalidArgumentException;
 use LogicException;
 use OutOfBoundsException;
-use UsageException;
+use ApiUsageException;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpValidationException;
@@ -74,7 +74,6 @@ class StatementModificationHelper {
 	/**
 	 * @param string $guid
 	 *
-	 * @throws UsageException
 	 * @return bool
 	 */
 	public function validateStatementGuid( $guid ) {
@@ -85,7 +84,7 @@ class StatementModificationHelper {
 	 * @param string $guid
 	 * @param EntityDocument $entity
 	 *
-	 * @throws UsageException
+	 * @throws ApiUsageException
 	 * @return Statement
 	 */
 	public function getStatementFromEntity( $guid, EntityDocument $entity ) {
@@ -106,7 +105,7 @@ class StatementModificationHelper {
 	 * @param string[] $params Array with a 'snaktype' and an optional 'value' element.
 	 * @param PropertyId $propertyId
 	 *
-	 * @throws UsageException
+	 * @throws ApiUsageException
 	 * @throws LogicException
 	 * @return Snak
 	 */
@@ -140,7 +139,7 @@ class StatementModificationHelper {
 	 *
 	 * @param string $entityIdParam
 	 *
-	 * @throws UsageException
+	 * @throws ApiUsageException
 	 * @return EntityId
 	 * @todo this could go into an EntityModificationHelper or even in a ApiWikibaseHelper
 	 */
@@ -173,7 +172,7 @@ class StatementModificationHelper {
 
 	/**
 	 * Applies the given ChangeOp to the given Entity.
-	 * Any ChangeOpException is converted into a UsageException with the code 'modification-failed'.
+	 * Any ChangeOpException is converted into an ApiUsageException with the code 'modification-failed'.
 	 *
 	 * @param ChangeOp $changeOp
 	 * @param EntityDocument $entity

@@ -7,7 +7,7 @@ use ApiMain;
 use Exception;
 use InvalidArgumentException;
 use LogicException;
-use UsageException;
+use ApiUsageException;
 use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -86,7 +86,7 @@ class MergeItems extends ApiBase {
 	 * @param string $name
 	 *
 	 * @return ItemId
-	 * @throws UsageException if the given parameter is not a valiue ItemId
+	 * @throws ApiUsageException if the given parameter is not a valiue ItemId
 	 * @throws LogicException
 	 */
 	private function getItemIdParam( array $parameters, $name ) {
@@ -152,7 +152,7 @@ class MergeItems extends ApiBase {
 	/**
 	 * @param ItemMergeException|RedirectCreationException $ex
 	 *
-	 * @throws UsageException always
+	 * @throws ApiUsageException always
 	 */
 	private function handleException( Exception $ex ) {
 		$cause = $ex->getPrevious();

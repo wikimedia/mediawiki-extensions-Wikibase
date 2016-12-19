@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use UsageException;
+use ApiUsageException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\WikibaseRepo;
@@ -223,7 +223,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		try {
 			$this->doApiRequestWithToken( $params );
 			$this->fail( 'Invalid request should raise an exception' );
-		} catch ( UsageException $ex ) {
+		} catch ( ApiUsageException $ex ) {
 			$this->assertEquals(
 				$errorCode,
 				$ex->getCodeString(), 'Invalid request raised correct error: ' . $ex->getMessage()

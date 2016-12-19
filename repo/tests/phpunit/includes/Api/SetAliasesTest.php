@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
-use UsageException;
 
 /**
  * @covers Wikibase\Repo\Api\SetAliases
@@ -158,8 +157,6 @@ class SetAliasesTest extends ModifyTermTestCase {
 	}
 
 	public function provideExceptionData() {
-		$newText = class_exists( ApiUsageException::class );
-
 		return array(
 			// p => params, e => expected
 
@@ -167,37 +164,37 @@ class SetAliasesTest extends ModifyTermTestCase {
 			array( //0
 				'p' => array( 'language' => 'xx', 'add' => 'Foo' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'unknown_language'
 				) )
 			),
 			array( //1
 				'p' => array( 'language' => 'nl', 'set' => TermTestHelper::makeOverlyLongString() ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'modification-failed'
 				) )
 			),
 			array( //2
 				'p' => array( 'language' => 'pt', 'remove' => 'normalValue' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'notoken',
-					'message' => $newText ? 'The "token" parameter must be set' : 'The token parameter must be set'
+					'message' => 'The "token" parameter must be set'
 				) )
 			),
 			array( //3
 				'p' => array( 'language' => 'pt', 'value' => 'normalValue', 'token' => '88888888888888888888888888888888+\\' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'badtoken',
-					'message' => $newText ? 'Invalid CSRF token.' : 'Invalid token'
+					'message' => 'Invalid CSRF token.'
 				) )
 			),
 			array( //4
 				'p' => array( 'id' => 'noANid', 'language' => 'fr', 'add' => 'normalValue' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'invalid-entity-id',
 					'message' => 'Invalid entity ID.'
 				) )
@@ -205,15 +202,15 @@ class SetAliasesTest extends ModifyTermTestCase {
 			array( //5
 				'p' => array( 'site' => 'qwerty', 'language' => 'pl', 'set' => 'normalValue' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'unknown_site',
-					'message' => $newText ? 'Unrecognized value for parameter "site"' : "Unrecognized value for parameter 'site'"
+					'message' => 'Unrecognized value for parameter "site"'
 				) )
 			),
 			array( //6
 				'p' => array( 'site' => 'enwiki', 'title' => 'GhskiDYiu2nUd', 'language' => 'en', 'remove' => 'normalValue' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'no-such-entity-link',
 					'message' => 'No entity found matching site link'
 				) )
@@ -221,7 +218,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 			array( //7
 				'p' => array( 'title' => 'Blub', 'language' => 'en', 'add' => 'normalValue' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'param-illegal',
 					'message' => 'Either provide the item "id" or pairs'
 				) )
@@ -229,7 +226,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 			array( //8
 				'p' => array( 'site' => 'enwiki', 'language' => 'en', 'set' => 'normalValue' ),
 				'e' => array( 'exception' => array(
-					'type' => UsageException::class,
+					'type' => ApiUsageException::class,
 					'code' => 'param-illegal'
 				) )
 			),

@@ -6,7 +6,7 @@ use ApiBase;
 use ApiMain;
 use FauxRequest;
 use RequestContext;
-use UsageException;
+use ApiUsageException;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -72,9 +72,9 @@ abstract class IndependentWikibaseApiTestCase extends \MediaWikiTestCase {
 	public function doTestQueryExceptions( $params, $exception ) {
 		try {
 			$this->doApiRequest( $params );
-			$this->fail( "Failed to throw UsageException" );
+			$this->fail( 'Failed to throw ApiUsageException' );
 
-		} catch ( UsageException $e ) {
+		} catch ( ApiUsageException $e ) {
 			if ( array_key_exists( 'type', $exception ) ) {
 				$this->assertInstanceOf( $exception['type'], $e );
 			}
