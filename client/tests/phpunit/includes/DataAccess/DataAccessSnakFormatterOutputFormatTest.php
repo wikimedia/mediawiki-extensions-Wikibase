@@ -23,7 +23,8 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
-use Wikibase\PropertyInfoStore;
+use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikibase\Test\MockClientStore;
 
 /**
@@ -82,14 +83,14 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 		// Add a formatter URL for P10
 		$p10 = new PropertyId( 'P10' );
 		$propertyInfo = [
-			PropertyInfoStore::KEY_DATA_TYPE => 'external-id',
-			PropertyInfoStore::KEY_FORMATTER_URL => 'https://dataAccessSnakFormatterOutputFormatTest/P10/$1'
+			PropertyInfoLookup::KEY_DATA_TYPE => 'external-id',
+			PropertyInfoLookup::KEY_FORMATTER_URL => 'https://dataAccessSnakFormatterOutputFormatTest/P10/$1'
 		];
-		$propertyInfoStore = $store->getPropertyInfoStore();
-		$propertyInfoStore->setPropertyInfo(
-			$p10,
-			$propertyInfo
-		);
+
+		$propertyInfoLookup = new MockPropertyInfoLookup( [
+			$p10->getSerialization() => $propertyInfo,
+		] );
+		$store->setPropertyInfoLookup( $propertyInfoLookup );
 
 		$item = new Item( new ItemId( 'Q12' ) );
 		$item->setLabel( 'en', 'label [[with]] wikitext' );

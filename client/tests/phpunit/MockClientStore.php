@@ -9,11 +9,11 @@ use Wikibase\Client\Usage\NullUsageTracker;
 use Wikibase\ClientStore;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Tests\MockPropertyLabelResolver;
 use Wikibase\Lib\Tests\MockRepository;
-use Wikibase\Lib\Tests\Store\MockPropertyInfoStore;
+use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikibase\Lib\Tests\Store\MockTermIndex;
-use Wikibase\PropertyInfoStore;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\TermIndex;
 
@@ -45,9 +45,9 @@ class MockClientStore implements ClientStore {
 	private static $mockRepository = null;
 
 	/**
-	 * @var PropertyInfoStore|null
+	 * @var PropertyInfoLookup|null
 	 */
-	private static $propertyInfoStore = null;
+	private static $propertyInfoLookup = null;
 
 	/**
 	 * @var EntityLookup|null
@@ -183,16 +183,23 @@ class MockClientStore implements ClientStore {
 	}
 
 	/**
-	 * @see ClientStore::getPropertyInfoStore
+	 * @see ClientStore::getPropertyInfoLookup
 	 *
-	 * @return MockPropertyInfoStore
+	 * @return MockPropertyInfoLookup
 	 */
-	public function getPropertyInfoStore() {
-		if ( self::$propertyInfoStore === null ) {
-			self::$propertyInfoStore = new MockPropertyInfoStore();
+	public function getPropertyInfoLookup() {
+		if ( self::$propertyInfoLookup === null ) {
+			self::$propertyInfoLookup = new MockPropertyInfoLookup();
 		}
 
-		return self::$propertyInfoStore;
+		return self::$propertyInfoLookup;
+	}
+
+	/**
+	 * @param PropertyInfoLookup $propertyInfoLookup
+	 */
+	public function setPropertyInfoLookup( PropertyInfoLookup $propertyInfoLookup ) {
+		self::$propertyInfoLookup = $propertyInfoLookup;
 	}
 
 	/**
