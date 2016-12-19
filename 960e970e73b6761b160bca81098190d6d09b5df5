@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_a0288a33",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-19T17:34:26Z",
+      "side": 1,
+      "message": "I don\u0027t understand this comment. This code is not touched in this patch. How can this be a reason for a -1?",
+      "parentUuid": "0e0e73b5_8216b94b",
+      "revId": "960e970e73b6761b160bca81098190d6d09b5df5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_62fbc512",
         "filename": "repo/includes/Api/ApiErrorReporter.php",
         "patchSetId": 3
@@ -30,6 +48,30 @@
       "writtenOn": "2016-12-16T18:15:22Z",
       "side": 1,
       "message": "This method is deprecated. Ideally you\u0027d just use $this-\u003eapiModule-\u003edieStatus(), although I don\u0027t know whether that would confuse any of your existing uses somehow.",
+      "range": {
+        "startLine": 119,
+        "startChar": 45,
+        "endLine": 119,
+        "endChar": 63
+      },
+      "revId": "960e970e73b6761b160bca81098190d6d09b5df5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_00f3d6e4",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-19T17:34:26Z",
+      "side": 1,
+      "message": "I know this is deprecated. How is this a reason for a -1?",
+      "parentUuid": "0e0e73b5_62fbc512",
       "range": {
         "startLine": 119,
         "startChar": 45,
