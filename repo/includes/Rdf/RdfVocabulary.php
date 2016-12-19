@@ -305,7 +305,7 @@ class RdfVocabulary {
 		}
 
 		// Wikibase list goes first in case we want to override
-		// Like "simple" goes to en-x-simple not en
+		// Like "simple" goes to en-simple not en
 		if ( isset( $this->canonicalLanguageCodes[$languageCode] ) ) {
 			return $this->canonicalLanguageCodes[$languageCode];
 		}
