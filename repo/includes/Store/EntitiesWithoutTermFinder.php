@@ -22,12 +22,19 @@ interface EntitiesWithoutTermFinder {
 	 *
 	 * @param string $termType Can be any member of the TermIndexEntry::TYPE_ enum
 	 * @param string|null $language Restrict the search for one language. By default the search is done for all languages.
-	 * @param string|null $entityType Can be "item", "property" or "query". By default the search is done for all entities.
+	 * @param string[]|null $entityTypes Array containing the entity types to search for, typically
+	 *  "item" and/or "property". Null includes all indexed entity types.
 	 * @param integer $limit Limit of the query.
 	 * @param integer $offset Offset of the query.
 	 *
 	 * @return EntityId[]
 	 */
-	public function getEntitiesWithoutTerm( $termType, $language = null, $entityType = null, $limit = 50, $offset = 0 );
+	public function getEntitiesWithoutTerm(
+		$termType,
+		$language = null,
+		array $entityTypes = null,
+		$limit = 50,
+		$offset = 0
+	);
 
 }
