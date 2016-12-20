@@ -7,6 +7,7 @@ use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
+use Wikibase\PropertyInfoTable;
 use Wikibase\TermSqlIndex;
 
 /**
@@ -38,6 +39,20 @@ return [
 			$codec,
 			$metaDataLookup,
 			$services->getDatabaseName()
+		);
+	},
+
+	'PropertyInfoLookup' => function(
+		RepositoryServiceContainer $services,
+		WikibaseClient $client
+	) {
+		// TODO: It is OK to create only readonly PropertyInfoTables here as long those instances are
+		// only used by client. Repos would need to be able to get writing instances - at least local repo
+		return new PropertyInfoTable(
+			true,
+			$client->getEntityIdComposer(), // TODO: This should not be requiring WikibaseClient being passed in here
+			$services->getDatabaseName(),
+			$services->getRepositoryName()
 		);
 	},
 

@@ -437,7 +437,7 @@ class DirectSqlStore implements ClientStore {
 	 */
 	public function getPropertyInfoLookup() {
 		if ( $this->propertyInfoLookup === null ) {
-			$propertyInfoTable = new PropertyInfoTable( true, $this->entityIdComposer, $this->repoWiki );
+			$propertyInfoTable = $this->dispatchingServiceFactory->getPropertyInfoLookup();
 			$cacheKey = $this->cacheKeyPrefix . ':CachingPropertyInfoStore';
 
 			$this->propertyInfoLookup = new CachingPropertyInfoLookup(

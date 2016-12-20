@@ -6,6 +6,7 @@ use Wikibase\Client\DispatchingServiceFactory;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
  * @covers client/includes/DispatchingServiceWiring.php
@@ -29,6 +30,7 @@ class DispatchingServiceWiringTest extends \PHPUnit_Framework_TestCase {
 	public function provideServices() {
 		return [
 			[ 'EntityRevisionLookup', EntityRevisionLookup::class ],
+			[ 'PropertyInfoLookup', PropertyInfoLookup::class ],
 			[ 'TermBuffer', TermBuffer::class ],
 		];
 	}
@@ -47,7 +49,10 @@ class DispatchingServiceWiringTest extends \PHPUnit_Framework_TestCase {
 	public function testGetServiceNames() {
 		$factory = $this->getDispatchingServiceFactory();
 
-		$this->assertEquals( [ 'EntityRevisionLookup', 'TermBuffer' ], $factory->getServiceNames() );
+		$this->assertEquals(
+			[ 'EntityRevisionLookup', 'PropertyInfoLookup', 'TermBuffer' ],
+			$factory->getServiceNames()
+		);
 	}
 
 }
