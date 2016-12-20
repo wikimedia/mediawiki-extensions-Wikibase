@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Localizer;
 
 use DataValues\DataValue;
 use Language;
-use SiteStore;
+use SiteLookup;
 use ValueFormatters\FormattingException;
 use ValueFormatters\NumberLocalizer;
 use ValueFormatters\ValueFormatter;
@@ -35,7 +35,7 @@ class MessageParameterFormatter implements ValueFormatter {
 	private $entityIdFormatter;
 
 	/**
-	 * @var SiteStore
+	 * @var SiteLookup
 	 */
 	private $sites;
 
@@ -52,13 +52,13 @@ class MessageParameterFormatter implements ValueFormatter {
 	/**
 	 * @param ValueFormatter $dataValueFormatter A formatter for turning DataValues into wikitext.
 	 * @param EntityIdFormatter $entityIdFormatter An entity id formatter returning wikitext.
-	 * @param SiteStore $sites
+	 * @param SiteLookup $sites
 	 * @param Language $language
 	 */
 	public function __construct(
 		ValueFormatter $dataValueFormatter,
 		EntityIdFormatter $entityIdFormatter,
-		SiteStore $sites,
+		SiteLookup $sites,
 		Language $language
 	) {
 		$this->dataValueFormatter = $dataValueFormatter;

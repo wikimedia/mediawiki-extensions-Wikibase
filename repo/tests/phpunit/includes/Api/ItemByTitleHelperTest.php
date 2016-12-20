@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use MediaWikiSite;
-use SiteStore;
+use SiteLookup;
 use Title;
 use ApiUsageException;
 use Wikibase\DataModel\Entity\ItemId;
@@ -25,20 +25,20 @@ use Wikibase\StringNormalizer;
 class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @return SiteStore
+	 * @return SiteLookup
 	 */
-	public function getSiteStoreMock() {
+	public function getSiteLookupMock() {
 		$dummySite = new MediaWikiSite();
 
-		$siteStoreMock = $this->getMockBuilder( SiteStore::class )
+		$siteLookupMock = $this->getMockBuilder( SiteLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$siteStoreMock->expects( $this->any() )
+		$siteLookupMock->expects( $this->any() )
 			->method( 'getSite' )
 			->will( $this->returnValue( $dummySite ) );
 
-		return $siteStoreMock;
+		return $siteLookupMock;
 	}
 
 	/**
@@ -81,7 +81,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 		$itemByTitleHelper = new ItemByTitleHelper(
 			$this->getResultBuilderMock(),
 			$this->getSiteLinkLookupMock( new ItemId( 'Q123' ) ),
-			$this->getSiteStoreMock(),
+			$this->getSiteLookupMock(),
 			new StringNormalizer()
 		);
 
@@ -103,7 +103,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 		// Two values should be added: The normalization and the failure to find an entity
 			$this->getResultBuilderMock( 1 ),
 			$this->getSiteLinkLookupMock( null ),
-			$this->getSiteStoreMock(),
+			$this->getSiteLookupMock(),
 			new StringNormalizer()
 		);
 
@@ -125,7 +125,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 		// Two result values should be added (for both titles which wont be found)
 			$this->getResultBuilderMock(),
 			$this->getSiteLinkLookupMock( false ),
-			$this->getSiteStoreMock(),
+			$this->getSiteLookupMock(),
 			new StringNormalizer()
 		);
 
@@ -144,7 +144,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 		$itemByTitleHelper = new ItemByTitleHelper(
 			$this->getResultBuilderMock(),
 			$this->getSiteLinkLookupMock( 1 ),
-			$this->getSiteStoreMock(),
+			$this->getSiteLookupMock(),
 			new StringNormalizer()
 		);
 
@@ -180,7 +180,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 		$itemByTitleHelper = new ItemByTitleHelper(
 			$this->getResultBuilderMock( $expectedAddNormalizedCalls ),
 			$this->getSiteLinkLookupMock( $expectedEntityId ),
-			$this->getSiteStoreMock(),
+			$this->getSiteLookupMock(),
 			new StringNormalizer()
 		);
 
@@ -217,7 +217,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 		$itemByTitleHelper = new ItemByTitleHelper(
 			$this->getResultBuilderMock(),
 			$this->getSiteLinkLookupMock( new ItemId( 'Q123' ) ),
-			$this->getSiteStoreMock(),
+			$this->getSiteLookupMock(),
 			new StringNormalizer()
 		);
 

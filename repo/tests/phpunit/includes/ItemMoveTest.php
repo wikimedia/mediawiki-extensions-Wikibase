@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use MediaWiki\MediaWikiServices;
 use TestSites;
 use Title;
 use Wikibase\DataModel\Entity\Item;
@@ -54,7 +55,7 @@ class ItemMoveTest extends \MediaWikiTestCase {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		if ( !$hasSites ) {
-			$sitesTable = $wikibaseRepo->getSiteStore();
+			$sitesTable = MediaWikiServices::getInstance()->getSiteStore();
 			$sitesTable->clear();
 			$sitesTable->saveSites( TestSites::getSites() );
 			$hasSites = true;

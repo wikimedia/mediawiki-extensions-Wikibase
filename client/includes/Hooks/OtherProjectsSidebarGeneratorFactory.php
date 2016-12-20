@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Hooks;
 
-use SiteStore;
+use SiteLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\SettingsArray;
 
@@ -30,23 +30,23 @@ class OtherProjectsSidebarGeneratorFactory {
 	private $siteLinkLookup;
 
 	/**
-	 * @var SiteStore
+	 * @var SiteLookup
 	 */
-	private $siteStore;
+	private $siteLookup;
 
 	/**
 	 * @param SettingsArray $settings
 	 * @param SiteLinkLookup $siteLinkLookup
-	 * @param SiteStore $siteStore
+	 * @param SiteLookup $siteLookup
 	 */
 	public function __construct(
 		SettingsArray $settings,
 		SiteLinkLookup $siteLinkLookup,
-		SiteStore $siteStore
+		SiteLookup $siteLookup
 	) {
 		$this->settings = $settings;
 		$this->siteLinkLookup = $siteLinkLookup;
-		$this->siteStore = $siteStore;
+		$this->siteLookup = $siteLookup;
 	}
 
 	/**
@@ -67,7 +67,7 @@ class OtherProjectsSidebarGeneratorFactory {
 		return new OtherProjectsSidebarGenerator(
 			$this->settings->getSetting( 'siteGlobalID' ),
 			$this->siteLinkLookup,
-			$this->siteStore,
+			$this->siteLookup,
 			$this->settings->getSetting( 'otherProjectsLinks' )
 		);
 	}

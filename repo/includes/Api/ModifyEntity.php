@@ -114,7 +114,7 @@ abstract class ModifyEntity extends ApiBase {
 		$this->entitySavingHelper->setEntityIdParam( 'id' );
 
 		$this->setServices( new SiteLinkTargetProvider(
-			$wikibaseRepo->getSiteStore(),
+			$wikibaseRepo->getSiteLookup(),
 			$settings->getSetting( 'specialSiteLinkGroups' )
 		) );
 

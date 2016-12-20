@@ -6,7 +6,7 @@ use BagOStuff;
 use MediaWikiSite;
 use Site;
 use SiteList;
-use SiteStore;
+use SiteLookup;
 use Wikibase\SettingsArray;
 use Xml;
 
@@ -32,9 +32,9 @@ class SitesModuleWorker {
 	private $settings;
 
 	/**
-	 * @var SiteStore
+	 * @var SiteLookup
 	 */
-	private $siteStore;
+	private $siteLookup;
 
 	/**
 	 * @var BagOStuff
@@ -43,12 +43,12 @@ class SitesModuleWorker {
 
 	/**
 	 * @param SettingsArray $settings
-	 * @param SiteStore $siteStore
+	 * @param SiteLookup $siteLookup
 	 * @param BagOStuff $cache
 	 */
-	public function __construct( SettingsArray $settings, SiteStore $siteStore, BagOStuff $cache ) {
+	public function __construct( SettingsArray $settings, SiteLookup $siteLookup, BagOStuff $cache ) {
 		$this->settings = $settings;
-		$this->siteStore = $siteStore;
+		$this->siteLookup = $siteLookup;
 		$this->cache = $cache;
 	}
 
@@ -70,7 +70,7 @@ class SitesModuleWorker {
 	 * @return SiteList
 	 */
 	private function getSites() {
-		return $this->siteStore->getSites();
+		return $this->siteLookup->getSites();
 	}
 
 	/**

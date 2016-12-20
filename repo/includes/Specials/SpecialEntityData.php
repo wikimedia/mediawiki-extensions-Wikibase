@@ -93,10 +93,10 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$titleLookup,
 			$wikibaseRepo->getPropertyDataTypeLookup(),
 			$wikibaseRepo->getValueSnakRdfBuilderFactory(),
-			$wikibaseRepo->getSiteStore()->getSites(),
+			$wikibaseRepo->getSiteLookup()->getSites(),
 			$entityDataFormatProvider,
 			$serializerFactory,
-			$wikibaseRepo->getSiteStore(),
+			$wikibaseRepo->getSiteLookup(),
 			$wikibaseRepo->getRdfVocabulary()
 		);
 

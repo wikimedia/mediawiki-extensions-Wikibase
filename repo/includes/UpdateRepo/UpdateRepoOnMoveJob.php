@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\UpdateRepo;
 
 use OutOfBoundsException;
-use SiteStore;
+use SiteLookup;
 use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
@@ -25,9 +25,9 @@ use Wikibase\SummaryFormatter;
 class UpdateRepoOnMoveJob extends UpdateRepoJob {
 
 	/**
-	 * @var SiteStore
+	 * @var SiteLookup
 	 */
-	private $siteStore;
+	private $siteLookup;
 
 	/**
 	 * @var string|bool|null
@@ -58,7 +58,7 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
 			$wikibaseRepo->getEntityStore(),
 			$wikibaseRepo->getSummaryFormatter(),
-			$wikibaseRepo->getSiteStore(),
+			$wikibaseRepo->getSiteLookup(),
 			$wikibaseRepo->newEditEntityFactory()
 		);
 	}
@@ -67,7 +67,7 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityStore $entityStore,
 		SummaryFormatter $summaryFormatter,
-		SiteStore $siteStore,
+		SiteLookup $siteLookup,
 		EditEntityFactory $editEntityFactory
 	) {
 		$this->initRepoJobServices(
@@ -76,7 +76,7 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 			$summaryFormatter,
 			$editEntityFactory
 		);
-		$this->siteStore = $siteStore;
+		$this->siteLookup = $siteLookup;
 	}
 
 	/**
@@ -126,7 +126,7 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 			$newPage = $params['newTitle'];
 			$siteId = $params['siteId'];
 
-			$site = $this->siteStore->getSite( $siteId );
+			$site = $this->siteLookup->getSite( $siteId );
 			$this->normalizedPageName = $site->normalizePageName( $newPage );
 
 			if ( $this->normalizedPageName === false ) {

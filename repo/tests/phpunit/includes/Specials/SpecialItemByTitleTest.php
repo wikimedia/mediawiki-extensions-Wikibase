@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Specials;
 
 use Site;
 use SiteList;
-use SiteStore;
+use SiteLookup;
 use SpecialPageTestBase;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
@@ -76,9 +76,9 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 	}
 
 	/**
-	 * @return SiteStore
+	 * @return SiteLookup
 	 */
-	private function getMockSiteStore() {
+	private function getMockSiteLookup() {
 		$getSite = function( $siteId ) {
 			$site = new Site();
 			$site->setGlobalId( $siteId );
@@ -91,7 +91,7 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 		$siteList[] = $getSite( 'dewiki' );
 		$siteList[] = $getSite( 'enwiki' );
 
-		$mock = $this->getMock( SiteStore::class );
+		$mock = $this->getMock( SiteLookup::class );
 		$mock->expects( $this->any() )
 			->method( 'getSite' )
 			->will( $this->returnCallback( $getSite ) );
@@ -113,14 +113,14 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 			array( 'wikipedia' )
 		);
 
-		$siteStore = $this->getMockSiteStore();
+		$siteLookup = $this->getMockSiteLookup();
 
-		$siteLinkTargetProvider = new SiteLinkTargetProvider( $siteStore, array() );
+		$siteLinkTargetProvider = new SiteLinkTargetProvider( $siteLookup, array() );
 
 		$page->initServices(
 			$this->getMockTitleLookup(),
 			$this->getMockLanguageNameLookup(),
-			$siteStore,
+			$siteLookup,
 			$this->getMockSiteLinkLookup(),
 			$siteLinkTargetProvider
 		);

@@ -26,7 +26,7 @@ use RequestContext;
 use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
 use Site;
-use SiteStore;
+use SiteLookup;
 use StubObject;
 use Title;
 use Wikibase\Client\Changes\AffectedPagesFinder;
@@ -115,9 +115,9 @@ final class WikibaseClient {
 	private $contentLanguage;
 
 	/**
-	 * @var SiteStore|null
+	 * @var SiteLookup|null
 	 */
-	private $siteStore;
+	private $siteLookup;
 
 	/**
 	 * @var DispatchingServiceFactory
@@ -318,20 +318,20 @@ final class WikibaseClient {
 	 * @param Language $contentLanguage
 	 * @param DataTypeDefinitions $dataTypeDefinitions
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
-	 * @param SiteStore|null $siteStore
+	 * @param SiteLookup|null $siteLookup
 	 */
 	public function __construct(
 		SettingsArray $settings,
 		Language $contentLanguage,
 		DataTypeDefinitions $dataTypeDefinitions,
 		EntityTypeDefinitions $entityTypeDefinitions,
-		SiteStore $siteStore = null
+		SiteLookup $siteLookup = null
 	) {
 		$this->settings = $settings;
 		$this->contentLanguage = $contentLanguage;
 		$this->dataTypeDefinitions = $dataTypeDefinitions;
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
-		$this->siteStore = $siteStore;
+		$this->siteLookup = $siteLookup;
 	}
 
 	/**
@@ -678,7 +678,7 @@ final class WikibaseClient {
 			$globalId = $this->settings->getSetting( 'siteGlobalID' );
 			$localId = $this->settings->getSetting( 'siteLocalID' );
 
-			$this->site = $this->getSiteStore()->getSite( $globalId );
+			$this->site = $this->getSiteLookup()->getSite( $globalId );
 
 			if ( !$this->site ) {
 				wfDebugLog( __CLASS__, __FUNCTION__ . ": Unable to resolve site ID '{$globalId}'!" );
@@ -728,7 +728,7 @@ final class WikibaseClient {
 		if ( !$siteGroup ) {
 			$siteId = $this->settings->getSetting( 'siteGlobalID' );
 
-			$site = $this->getSiteStore()->getSite( $siteId );
+			$site = $this->getSiteLookup()->getSite( $siteId );
 
 			if ( !$site ) {
 				wfWarn( 'Cannot find site ' . $siteId . ' in sites table' );
@@ -842,7 +842,7 @@ final class WikibaseClient {
 				$this->getNamespaceChecker(),
 				$this->getStore()->getSiteLinkLookup(),
 				$this->getStore()->getEntityLookup(),
-				$this->getSiteStore(),
+				$this->getSiteLookup(),
 				$this->settings->getSetting( 'siteGlobalID' ),
 				$this->getLangLinkSiteGroup()
 			);
@@ -887,14 +887,14 @@ final class WikibaseClient {
 	/**
 	 * @since 0.5
 	 *
-	 * @return SiteStore
+	 * @return SiteLookup
 	 */
-	public function getSiteStore() {
-		if ( $this->siteStore === null ) {
-			$this->siteStore = MediaWikiServices::getInstance()->getSiteStore();
+	public function getSiteLookup() {
+		if ( $this->siteLookup === null ) {
+			$this->siteLookup = MediaWikiServices::getInstance()->getSiteLookup();
 		}
 
-		return $this->siteStore;
+		return $this->siteLookup;
 	}
 
 	/**
@@ -1026,7 +1026,7 @@ final class WikibaseClient {
 		return new OtherProjectsSidebarGeneratorFactory(
 			$this->settings,
 			$this->getStore()->getSiteLinkLookup(),
-			$this->getSiteStore()
+			$this->getSiteLookup()
 		);
 	}
 
@@ -1122,7 +1122,7 @@ final class WikibaseClient {
 	public function getOtherProjectsSitesProvider() {
 		return new CachingOtherProjectsSitesProvider(
 			new OtherProjectsSitesGenerator(
-				$this->getSiteStore(),
+				$this->getSiteLookup(),
 				$this->settings->getSetting( 'siteGlobalID' ),
 				$this->settings->getSetting( 'specialSiteLinkGroups' )
 			),
@@ -1154,7 +1154,7 @@ final class WikibaseClient {
 			new TitleFactory(),
 			$this->getWikiPageUpdater(),
 			$this->getChangeRunCoalescer(),
-			$this->getSiteStore(),
+			$this->getSiteLookup(),
 			$this->settings->getSetting( 'injectRecentChanges' )
 		);
 	}
@@ -1198,7 +1198,7 @@ final class WikibaseClient {
 	private function getSiteLinkCommentCreator() {
 		return new SiteLinkCommentCreator(
 			$this->getContentLanguage(),
-			$this->getSiteStore(),
+			$this->getSiteLookup(),
 			$this->settings->getSetting( 'siteGlobalID' )
 		);
 	}

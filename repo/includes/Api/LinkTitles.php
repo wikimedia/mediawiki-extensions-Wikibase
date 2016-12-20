@@ -76,7 +76,7 @@ class LinkTitles extends ApiBase {
 		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
 		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
 		$this->siteLinkTargetProvider = new SiteLinkTargetProvider(
-			$wikibaseRepo->getSiteStore(),
+			$wikibaseRepo->getSiteLookup(),
 			$settings->getSetting( 'specialSiteLinkGroups' )
 		);
 

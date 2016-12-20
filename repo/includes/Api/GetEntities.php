@@ -98,7 +98,7 @@ class GetEntities extends ApiBase {
 		$this->idParser = $wikibaseRepo->getEntityIdParser();
 
 		$this->siteLinkTargetProvider = new SiteLinkTargetProvider(
-			$wikibaseRepo->getSiteStore(),
+			$wikibaseRepo->getSiteLookup(),
 			$settings->getSetting( 'specialSiteLinkGroups' )
 		);
 
@@ -194,7 +194,7 @@ class GetEntities extends ApiBase {
 		return new ItemByTitleHelper(
 			$this->resultBuilder,
 			$siteLinkStore,
-			$wikibaseRepo->getSiteStore(),
+			$wikibaseRepo->getSiteLookup(),
 			$this->stringNormalizer
 		);
 	}

@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\UpdateRepo;
 
 use Site;
-use SiteStore;
+use SiteLookup;
 use Status;
 use Title;
 use User;
@@ -59,22 +59,22 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 	/**
 	 * @param bool $titleExists
 	 *
-	 * @return SiteStore
+	 * @return SiteLookup
 	 */
-	private function getSiteStore( $titleExists ) {
+	private function getSiteLookup( $titleExists ) {
 		$enwiki = $this->getMock( Site::class );
 		$enwiki->expects( $this->any() )
 			->method( 'normalizePageName' )
 			->with( 'Delete me' )
 			->will( $this->returnValue( $titleExists ) );
 
-		$siteStore = $this->getMock( SiteStore::class );
-		$siteStore->expects( $this->any() )
+		$siteLookup = $this->getMock( SiteLookup::class );
+		$siteLookup->expects( $this->any() )
 			->method( 'getSite' )
 			->with( 'enwiki' )
 			->will( $this->returnValue( $enwiki ) );
 
-		return $siteStore;
+		return $siteLookup;
 	}
 
 	/**
@@ -170,7 +170,7 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 			$mockRepository,
 			$mockRepository,
 			$this->getSummaryFormatter(),
-			$this->getSiteStore( $titleExists ),
+			$this->getSiteLookup( $titleExists ),
 			new EditEntityFactory(
 				$this->getEntityTitleLookup( $item->getId() ),
 				$mockRepository,
