@@ -153,4 +153,11 @@ class EntityTypeDefinitions {
 		return $this->getMapForDefinitionField( 'entity-id-composer-callback' );
 	}
 
+	/**
+	 * @return callable[] An array mapping entity type identifiers to callables returning
+	 * ChangeOp of EditEntity Api for their parts. Not guaranteed to contain all entity types.
+	 */
+	public function getEditEntityApiChangeOpsCallbacks() {
+		return $this->getMapForDefinitionField( 'edit-entity-api-change-op-callbacks' );
+	}
 }
