@@ -22,6 +22,30 @@
       "revId": "5fc53c14a4b02af80cbe57ebcba897c878d01524",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_01c7554b",
+        "filename": "repo/includes/Store/SiteLinkConflictLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-20T14:33:04Z",
+      "side": 1,
+      "message": "@Aleksey: I agree that creating a value object to model the conflict would be cleaner. However, for a one-off use case, using an associative array is often sufficient. If we have a public method signature somewhere that requires an array that is structured like this, I\u0027d say it\u0027s time to create such an object. Until then, using an assoc array should be fine.\n\nFeel free to make a follow-up patch to introduce aSiteLinkConflictDescription class, but please don\u0027t waste too much time on it. This seems \"nice to have\", not really important.\n\n@Thiemo: I see no reason to give any guarantees regarding the array indexes here. This seems like an unnecessary restriction on the implementation. The only caller is SiteLinkUniquenessValidator::validateEntitiy, and it doesn\u0027t care about the indexes.",
+      "parentUuid": "0e0e73b5_4691e351",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 29
+      },
+      "revId": "5fc53c14a4b02af80cbe57ebcba897c878d01524",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
