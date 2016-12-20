@@ -150,6 +150,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_77fb7312",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-12-20T17:26:26Z",
+      "side": 1,
+      "message": "Considering that T153359 is about removing all the deprecated calls, not just one, yes.",
+      "parentUuid": "0e0e73b5_5c2d3640",
+      "range": {
+        "startLine": 119,
+        "startChar": 45,
+        "endLine": 119,
+        "endChar": 63
+      },
+      "revId": "960e970e73b6761b160bca81098190d6d09b5df5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_6222a5a4",
         "filename": "repo/includes/Api/ApiErrorReporter.php",
         "patchSetId": 3
