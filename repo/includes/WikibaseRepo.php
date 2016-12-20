@@ -1839,4 +1839,13 @@ class WikibaseRepo {
 		return $storage;
 	}
 
+	/**
+	 * @see EntityTypeDefinitions::getChangeOpCallbacks
+	 *
+	 * @return callable[]
+	 */
+	public function getEditEntityApiChangeOpCallbacks() {
+		return $this->entityTypeDefinitions->getEditEntityApiChangeOpCallbacks();
+	}
+
 }
