@@ -46,6 +46,30 @@
       "revId": "5fc53c14a4b02af80cbe57ebcba897c878d01524",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_41b2ed93",
+        "filename": "repo/includes/Store/SiteLinkConflictLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-20T15:09:55Z",
+      "side": 1,
+      "message": "Generally I agree with Aleksey. Methods returning an array, even if it\u0027s only two trivial elements, always make me feel bad.\n\nBut I\u0027m not touching this code here. I just wanted to document what is here, without wasting to much time on this.\n\nDaniel, you are right, no consumer cares about the \"numeric indexes, starting from 0, guaranteed to not have gaps\" rule. I removed this.",
+      "parentUuid": "0e0e73b5_01c7554b",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 29
+      },
+      "revId": "5fc53c14a4b02af80cbe57ebcba897c878d01524",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
