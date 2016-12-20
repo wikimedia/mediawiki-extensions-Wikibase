@@ -455,6 +455,16 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		$this->assertError( 'Wikibase\Repo\Interactors\ItemMergeException:wikibase-itemmerge-no-such-entity', $html );
 	}
 
+	public function testCanNotMergeRedirects() {
+		$params = [
+			'fromid' => 'Q11',
+			'toid' => 'Q2',
+		];
+
+		$html = $this->executeSpecialMergeItems( $params );
+		$this->assertContains( '<p class="error">(wikibase-itemmerge-redirect)</p>', $html );
+	}
+
 	public function permissionProvider() {
 		return array(
 			'edit' => array( 'edit' ),
