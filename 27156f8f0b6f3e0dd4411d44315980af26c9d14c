@@ -16,6 +16,24 @@
       "revId": "27156f8f0b6f3e0dd4411d44315980af26c9d14c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_7cc35a0b",
+        "filename": "client/includes/Store/RepositoryServiceWiring.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-20T16:49:37Z",
+      "side": 1,
+      "message": "The comment indeed does not seem necessary as long as we only use this in Client.\nBut as we want to use those services in Repo too, I\u0027ve decided to put the \nThere is a naive patch about this I15d33dd688a0eb1de684d963ae94640aa3509f6d, I am adding the dispatching property info lookup to it at this very moment.\n\nIt is true that it is a bit odd to have this file, and related class in client subdir as we want to re-use it in repo. But repo basically becomes a client so the whole division is very much arbitrary. We decided to have repo optionally depend on client (to allow reuse of those services in repo), and have it as a first step towards more accurate component division.\nThere must have been a ticket about this, I cannot find it now...",
+      "parentUuid": "0e0e73b5_bc4d52e2",
+      "revId": "27156f8f0b6f3e0dd4411d44315980af26c9d14c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
