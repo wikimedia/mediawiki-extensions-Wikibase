@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Api;
 use ApiResult;
 use Revision;
 use Serializers\Serializer;
-use SiteStore;
+use SiteLookup;
 use Status;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -56,9 +56,9 @@ class ResultBuilder {
 	private $entitySerializer;
 
 	/**
-	 * @var SiteStore
+	 * @var SiteLookup
 	 */
-	private $siteStore;
+	private $siteLookup;
 
 	/**
 	 * @var PropertyDataTypeLookup
@@ -90,7 +90,7 @@ class ResultBuilder {
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param SerializerFactory $serializerFactory
 	 * @param Serializer $entitySerializer
-	 * @param SiteStore $siteStore
+	 * @param SiteLookup $siteLookup
 	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 * @param bool|null $addMetaData when special elements such as '_element' are needed
 	 */
@@ -99,7 +99,7 @@ class ResultBuilder {
 		EntityTitleLookup $entityTitleLookup,
 		SerializerFactory $serializerFactory,
 		Serializer $entitySerializer,
-		SiteStore $siteStore,
+		SiteLookup $siteLookup,
 		PropertyDataTypeLookup $dataTypeLookup,
 		$addMetaData = null
 	) {
@@ -107,7 +107,7 @@ class ResultBuilder {
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->serializerFactory = $serializerFactory;
 		$this->entitySerializer = $entitySerializer;
-		$this->siteStore = $siteStore;
+		$this->siteLookup = $siteLookup;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->addMetaData = $addMetaData;
 
@@ -762,9 +762,9 @@ class ResultBuilder {
 	}
 
 	private function getSiteLinkListArrayWithUrls( array $array ) {
-		$siteStore = $this->siteStore;
-		$addUrlCallback = function( $array ) use ( $siteStore ) {
-			$site = $siteStore->getSite( $array['site'] );
+		$siteLookup = $this->siteLookup;
+		$addUrlCallback = function( $array ) use ( $siteLookup ) {
+			$site = $siteLookup->getSite( $array['site'] );
 			if ( $site !== null ) {
 				$array['url'] = $site->getPageUrl( $array['title'] );
 			}

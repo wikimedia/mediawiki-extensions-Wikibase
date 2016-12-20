@@ -4,7 +4,7 @@ namespace Wikibase\Repo;
 
 use Site;
 use SiteList;
-use SiteStore;
+use SiteLookup;
 
 /**
  * @since 0.5
@@ -18,9 +18,9 @@ use SiteStore;
 class SiteLinkTargetProvider {
 
 	/**
-	 * @var SiteStore
+	 * @var SiteLookup
 	 */
-	private $siteStore;
+	private $siteLookup;
 
 	/**
 	 * @var string[]
@@ -28,11 +28,11 @@ class SiteLinkTargetProvider {
 	private $specialSiteGroups;
 
 	/**
-	 * @param SiteStore $siteStore
+	 * @param SiteLookup $siteLookup
 	 * @param string[] $specialSiteGroups
 	 */
-	public function __construct( SiteStore $siteStore, array $specialSiteGroups = array() ) {
-		$this->siteStore = $siteStore;
+	public function __construct( SiteLookup $siteLookup, array $specialSiteGroups = array() ) {
+		$this->siteLookup = $siteLookup;
 		$this->specialSiteGroups = $specialSiteGroups;
 	}
 
@@ -49,7 +49,7 @@ class SiteLinkTargetProvider {
 		$this->substituteSpecialSiteGroups( $groups );
 
 		$sites = new SiteList();
-		$allSites = $this->siteStore->getSites();
+		$allSites = $this->siteLookup->getSites();
 
 		/** @var Site $site */
 		foreach ( $allSites as $site ) {

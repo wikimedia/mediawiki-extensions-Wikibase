@@ -324,7 +324,7 @@ return call_user_func( function() {
 	};
 
 	$defaults['siteGroup'] = function ( SettingsArray $settings ) {
-		// by default lookup from SiteStore, can override with setting for performance reasons
+		// by default lookup from SiteLookup, can override with setting for performance reasons
 		return null;
 	};
 

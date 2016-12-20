@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use HTMLForm;
-use SiteStore;
+use SiteLookup;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -23,9 +23,9 @@ use Wikibase\Repo\WikibaseRepo;
 class SpecialGoToLinkedPage extends SpecialWikibasePage {
 
 	/**
-	 * @var SiteStore
+	 * @var SiteLookup
 	 */
-	private $siteStore;
+	private $siteLookup;
 
 	/**
 	 * @var SiteLinkLookup
@@ -62,7 +62,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$this->initServices(
-			$wikibaseRepo->getSiteStore(),
+			$wikibaseRepo->getSiteLookup(),
 			$wikibaseRepo->getStore()->newSiteLinkStore(),
 			$wikibaseRepo->getStore()->getEntityRedirectLookup(),
 			$wikibaseRepo->getEntityIdParser(),
@@ -76,20 +76,20 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	 * Initialize the services used be this special page.
 	 * May be used to inject mock services for testing.
 	 *
-	 * @param SiteStore $siteStore
+	 * @param SiteLookup $siteLookup
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param EntityRedirectLookup $redirectLookup
 	 * @param EntityIdParser $idParser
 	 * @param EntityLookup $entityLookup
 	 */
 	public function initServices(
-		SiteStore $siteStore,
+		SiteLookup $siteLookup,
 		SiteLinkLookup $siteLinkLookup,
 		EntityRedirectLookup $redirectLookup,
 		EntityIdParser $idParser,
 		EntityLookup $entityLookup
 	) {
-		$this->siteStore = $siteStore;
+		$this->siteLookup = $siteLookup;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->redirectLookup = $redirectLookup;
 		$this->idParser = $idParser;
@@ -123,7 +123,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 
 		$site = $this->stringNormalizer->trimToNFC( $site );
 
-		if ( !$this->siteStore->getSite( $site ) ) {
+		if ( !$this->siteLookup->getSite( $site ) ) {
 			// HACK: If the site ID isn't known, add "wiki" to it; this allows the wikipedia
 			// subdomains to be used to refer to wikipedias, instead of requiring their
 			// full global id to be used.
@@ -137,7 +137,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 
 		if ( isset( $links[0] ) ) {
 			list( , $pageName, ) = $links[0];
-			$siteObj = $this->siteStore->getSite( $site );
+			$siteObj = $this->siteLookup->getSite( $site );
 			$url = $siteObj->getPageUrl( $pageName );
 			return $url;
 		} else {

@@ -80,7 +80,7 @@ class SpecialNewItem extends SpecialNewEntity {
 				throw new InvalidArgumentException( 'Unexpected entity type' );
 			}
 
-			$site = $this->siteStore->getSite( $this->siteId );
+			$site = $this->siteLookup->getSite( $this->siteId );
 
 			if ( $site === null ) {
 				$status->error( 'wikibase-newitem-not-recognized-siteid' );

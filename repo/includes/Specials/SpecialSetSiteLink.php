@@ -86,7 +86,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		$this->siteLinkChangeOpFactory = $wikibaseRepo->getChangeOpFactoryProvider()->getSiteLinkChangeOpFactory();
 		$this->siteLinkTargetProvider = new SiteLinkTargetProvider(
-			$this->siteStore,
+			$this->siteLookup,
 			$settings->getSetting( 'specialSiteLinkGroups' )
 		);
 
@@ -247,7 +247,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			. $this->getHtmlForBadges();
 		}
 
-		$site = $this->siteStore->getSite( $this->site );
+		$site = $this->siteLookup->getSite( $this->site );
 
 		if ( $entity !== null && $this->site !== null && $site !== null ) {
 			// show the detailed form which also allows users to remove site links
@@ -439,7 +439,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		}
 
 		$status = Status::newGood();
-		$site = $this->siteStore->getSite( $siteId );
+		$site = $this->siteLookup->getSite( $siteId );
 
 		if ( $site === null ) {
 			$status->fatal( 'wikibase-setsitelink-invalid-site', $siteId );

@@ -5,7 +5,7 @@ namespace Wikibase\Tests\Repo;
 use HashSiteStore;
 use PHPUnit_Framework_TestCase;
 use Site;
-use SiteStore;
+use SiteLookup;
 use Wikibase\Repo\SiteLinkTargetProvider;
 
 /**
@@ -29,7 +29,7 @@ class SiteLinkTargetProviderTest extends PHPUnit_Framework_TestCase {
 		array $specialGroups,
 		array $expectedGlobalIds
 	) {
-		$provider = new SiteLinkTargetProvider( $this->getSiteStore(), $specialGroups );
+		$provider = new SiteLinkTargetProvider( $this->getSiteLookup(), $specialGroups );
 		$siteList = $provider->getSiteList( $groups );
 
 		$globalIds = array();
@@ -98,9 +98,9 @@ class SiteLinkTargetProviderTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return SiteStore
+	 * @return SiteLookup
 	 */
-	private function getSiteStore() {
+	private function getSiteLookup() {
 		return new HashSiteStore( array(
 			$this->newSite( 'dawiki', 'wikipedia' ),
 			$this->newSite( 'eswiki', 'wikipedia' ),

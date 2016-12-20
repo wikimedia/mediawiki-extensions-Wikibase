@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Specials;
 use HTMLForm;
 use Html;
 use Site;
-use SiteStore;
+use SiteLookup;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
@@ -35,7 +35,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 	private $languageNameLookup;
 
 	/**
-	 * @var SiteStore
+	 * @var SiteLookup
 	 */
 	private $sites;
 
@@ -72,14 +72,14 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 		);
 
 		$siteLinkTargetProvider = new SiteLinkTargetProvider(
-			$wikibaseRepo->getSiteStore(),
+			$wikibaseRepo->getSiteLookup(),
 			$wikibaseRepo->getSettings()->getSetting( 'specialSiteLinkGroups' )
 		);
 
 		$this->initServices(
 			$wikibaseRepo->getEntityTitleLookup(),
 			new LanguageNameLookup(),
-			$wikibaseRepo->getSiteStore(),
+			$wikibaseRepo->getSiteLookup(),
 			$wikibaseRepo->getStore()->newSiteLinkStore(),
 			$siteLinkTargetProvider
 		);
@@ -103,20 +103,20 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 	 *
 	 * @param EntityTitleLookup $titleLookup
 	 * @param LanguageNameLookup $languageNameLookup
-	 * @param SiteStore $siteStore
+	 * @param SiteLookup $siteLookup
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
 	 */
 	public function initServices(
 		EntityTitleLookup $titleLookup,
 		LanguageNameLookup $languageNameLookup,
-		SiteStore $siteStore,
+		SiteLookup $siteLookup,
 		SiteLinkLookup $siteLinkLookup,
 		SiteLinkTargetProvider $siteLinkTargetProvider
 	) {
 		$this->titleLookup = $titleLookup;
 		$this->languageNameLookup = $languageNameLookup;
-		$this->sites = $siteStore;
+		$this->sites = $siteLookup;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
 	}

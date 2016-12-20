@@ -58,7 +58,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			$this->getSummaryFormatter(),
 			$this->getEntityRevisionLookup(),
 			$this->getEntityTitleLookup(),
-			$this->getSiteStore(),
+			$this->getSiteLookup(),
 			$this->getFingerprintChangeOpsFactory(),
 			new StaticContentLanguages( self::$languageCodes ),
 			new EditEntityFactory(

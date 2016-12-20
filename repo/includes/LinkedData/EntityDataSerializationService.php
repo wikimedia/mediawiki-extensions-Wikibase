@@ -11,7 +11,7 @@ use MWException;
 use PageProps;
 use RequestContext;
 use SiteList;
-use SiteStore;
+use SiteLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\SerializerFactory;
@@ -82,9 +82,9 @@ class EntityDataSerializationService {
 	private $rdfWriterFactory;
 
 	/**
-	 * @var SiteStore
+	 * @var SiteLookup
 	 */
-	private $siteStore;
+	private $siteLookup;
 
 	/**
 	 * @var RdfVocabulary
@@ -104,7 +104,7 @@ class EntityDataSerializationService {
 	 * @param SiteList $sites
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
 	 * @param SerializerFactory $serializerFactory
-	 * @param SiteStore $siteStore
+	 * @param SiteLookup $siteLookup
 	 * @param RdfVocabulary $rdfVocabulary
 	 *
 	 * @since 0.4
@@ -117,7 +117,7 @@ class EntityDataSerializationService {
 		SiteList $sites,
 		EntityDataFormatProvider $entityDataFormatProvider,
 		SerializerFactory $serializerFactory,
-		SiteStore $siteStore,
+		SiteLookup $siteLookup,
 		RdfVocabulary $rdfVocabulary
 	) {
 		$this->entityLookup = $entityLookup;
@@ -127,7 +127,7 @@ class EntityDataSerializationService {
 		$this->valueSnakRdfBuilderFactory = $valueSnakRdfBuilderFactory;
 		$this->sites = $sites;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
-		$this->siteStore = $siteStore;
+		$this->siteLookup = $siteLookup;
 		$this->rdfVocabulary = $rdfVocabulary;
 
 		$this->rdfWriterFactory = new RdfWriterFactory();
@@ -402,7 +402,7 @@ class EntityDataSerializationService {
 			$this->entityTitleLookup,
 			$this->serializerFactory,
 			$this->serializerFactory->newEntitySerializer(),
-			$this->siteStore,
+			$this->siteLookup,
 			$this->propertyLookup,
 			false // Never add meta data for this service
 		);
