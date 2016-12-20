@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_9c44ce4b",
+        "filename": "client/includes/DataAccess/ClientSiteLinkTitleLookup.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-20T15:41:18Z",
+      "side": 1,
+      "message": "Would be nicer for testing to use a TitleFactory here.\n\nAlso, calling newFromText() with null as the parameter is leagal, but checking the return value first would be nicer.",
+      "revId": "0e42902aa8cfbffd2359442019e7d04e1a0fad1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
