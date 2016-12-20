@@ -87,6 +87,11 @@ class EditEntity extends ModifyEntity {
 	private $entityFactory;
 
 	/**
+	 * @var callable[]
+	 */
+	private $changeOpsCallbacks;
+
+	/**
 	 * @see ModifyEntity::__construct
 	 *
 	 * @param ApiMain $mainModule
@@ -109,6 +114,7 @@ class EditEntity extends ModifyEntity {
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
 		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
 		$this->siteLinkChangeOpFactory = $changeOpFactoryProvider->getSiteLinkChangeOpFactory();
+		$this->changeOpsCallbacks = $wikibaseRepo->getChangeOpsCallbacks();
 	}
 
 	/**
@@ -283,6 +289,12 @@ class EditEntity extends ModifyEntity {
 	private function getChangeOps( array $data, EntityDocument $entity ) {
 		$changeOps = new ChangeOps();
 
+		$type = $entity->getType();
+		if ( isset( $this->changeOpsCallbacks[$type] ) ) {
+			call_user_func_array( $this->changeOpsCallbacks[$type], [ $data, $changeOps ] );
+			// Shorten out
+			return $changeOps;
+		}
 		//FIXME: Use a ChangeOpBuilder so we can batch fingerprint ops etc,
 		//       for more efficient validation!
 
