@@ -154,7 +154,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 			}
 		} catch ( ItemMergeException $ex ) {
 			if ( $ex->getPrevious() instanceof RevisionedUnresolvedRedirectException ) {
-				$this->showErrorHTML( $this->msg( 'wikibase-itemmerge-redirect' )->parse(), 'error' );
+				$this->showErrorHTML( $this->msg( 'wikibase-itemmerge-redirect' )->parse() );
 			} else {
 				$this->showExceptionMessage( $ex );
 			}
@@ -168,7 +168,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	protected function showExceptionMessage( Exception $ex ) {
 		$msg = $this->exceptionLocalizer->getExceptionMessage( $ex );
 
-		$this->showErrorHTML( $msg->parse(), 'error' );
+		$this->showErrorHTML( $msg->parse() );
 
 		// Report chained exceptions recursively
 		if ( $ex->getPrevious() ) {
