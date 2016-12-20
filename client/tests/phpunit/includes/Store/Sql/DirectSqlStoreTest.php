@@ -20,6 +20,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\TermIndex;
 
@@ -54,6 +55,9 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 		$dispatchingServiceFactory = new DispatchingServiceFactory( $client );
 		$dispatchingServiceFactory->defineService( 'EntityRevisionLookup', function() {
 			return $this->getMock( EntityRevisionLookup::class );
+		} );
+		$dispatchingServiceFactory->defineService( 'PropertyInfoLookup', function() {
+			return new MockPropertyInfoLookup();
 		} );
 
 		$store = new DirectSqlStore(

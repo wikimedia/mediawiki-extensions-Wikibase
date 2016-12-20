@@ -8,6 +8,7 @@ use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\SettingsArray;
 
 /**
@@ -76,7 +77,7 @@ class DispatchingServiceFactory extends ServiceContainer {
 	/**
 	 * Returns a map of id prefix mappings defined for configured foreign repositories.
 	 *
-	 * @param array[] $settings
+	 * @param array[] $settings Repository definitions mapping repository names to settings
 	 *
 	 * @return array[] Associative array mapping repository names to repository-specific prefix
 	 *  mapping.
@@ -123,6 +124,13 @@ class DispatchingServiceFactory extends ServiceContainer {
 	 */
 	public function getEntityRevisionLookup() {
 		return $this->getService( 'EntityRevisionLookup' );
+	}
+
+	/**
+	 * @return PropertyInfoLookup
+	 */
+	public function getPropertyInfoLookup() {
+		return $this->getService( 'PropertyInfoLookup' );
 	}
 
 	/**
