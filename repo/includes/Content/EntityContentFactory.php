@@ -104,8 +104,20 @@ class EntityContentFactory implements EntityTitleLookup, EntityIdLookup, EntityP
 	 * @return Title
 	 */
 	public function getTitleForId( EntityId $id ) {
-		$handler = $this->getContentHandlerForType( $id->getEntityType() );
-		return $handler->getTitleForId( $id );
+		if ( $id->isForeign() ) {
+			// TODO: Special:EntityPage is not yet defined, see T153499.
+			$pageName = 'Special:EntityPage/' . $id->getLocalPart();
+
+			// TODO: The interwiki prefix *should* be the same as the repo name,
+			//        but we have no way to know or guarantee this! See T153496.
+			$interwiki = $id->getRepositoryName();
+
+			// TODO: use a TitleFactory
+			return Title::makeTitle( 0, $pageName, '', $interwiki );
+		} else {
+			$handler = $this->getContentHandlerForType( $id->getEntityType() );
+			return $handler->getTitleForId( $id );
+		}
 	}
 
 	/**
