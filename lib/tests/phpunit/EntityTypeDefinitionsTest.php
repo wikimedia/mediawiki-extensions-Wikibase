@@ -32,6 +32,7 @@ class EntityTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 				'entity-id-pattern' => 'foo-id-pattern',
 				'entity-id-builder' => 'new-foo-id',
 				'entity-id-composer-callback' => 'new-composed-foo-id',
+				'get-change-op-callback' => 'new-get-change-op-callback'
 			),
 			'bar' => array(
 				'serializer-factory-callback' => 'bar-serializer',
@@ -155,6 +156,14 @@ class EntityTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame( [
 			'foo' => 'new-composed-foo-id',
 		], $definitions->getEntityIdComposers() );
+	}
+
+	public function testGetChangeOpsCallbacks() {
+		$definitions = new EntityTypeDefinitions( $this->getDefinitions() );
+
+		$this->assertSame( [
+			'foo' => 'new-get-change-op-callback',
+		], $definitions->getChangeOpsCallbacks() );
 	}
 
 }

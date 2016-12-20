@@ -1838,4 +1838,12 @@ class WikibaseRepo {
 		return $storage;
 	}
 
+	/**
+	 * @see EntityTypeDefinitions::getChangeOpsCallbacks
+	 *
+	 * @return callable[]
+	 */
+	public function getChangeOpsCallbacks() {
+		return $this->entityTypeDefinitions->getChangeOpsCallbacks();
+	}
 }
