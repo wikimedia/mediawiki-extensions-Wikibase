@@ -614,4 +614,19 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertEquals( $expected, $deserialized );
 	}
 
+	public function testGetChagneOpDeserializerCallbacks() {
+		$wikibaseRepo = $this->getWikibaseRepo(
+			[
+				'foo' => [
+					'changeop-deserializer-callback' => 'new-changeop-deserializer-callback'
+				]
+			]
+		);
+		$changeOpsCallbacks = $wikibaseRepo->getChagneOpDeserializerCallbacks();
+		$expected = [
+			'foo' => 'new-changeop-deserializer-callback'
+		];
+		$this->assertSame( $expected, $changeOpsCallbacks );
+	}
+
 }
