@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Specials;
 use Html;
 use InvalidArgumentException;
 use Language;
-use SiteStore;
+use SiteLookup;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOps;
@@ -82,7 +82,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param SiteStore $siteStore
+	 * @param SiteLookup $siteLookup
 	 * @param FingerprintChangeOpFactory $changeOpFactory
 	 * @param ContentLanguages $termsLanguages
 	 * @param EditEntityFactory $editEntityFactory
@@ -91,7 +91,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		SummaryFormatter $summaryFormatter,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleLookup $entityTitleLookup,
-		SiteStore $siteStore,
+		SiteLookup $siteLookup,
 		FingerprintChangeOpFactory $changeOpFactory,
 		ContentLanguages $termsLanguages,
 		EditEntityFactory $editEntityFactory
@@ -100,7 +100,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			$summaryFormatter,
 			$entityRevisionLookup,
 			$entityTitleLookup,
-			$siteStore,
+			$siteLookup,
 			$editEntityFactory
 		);
 

@@ -2,7 +2,7 @@
 
 namespace Wikibase;
 
-use SiteStore;
+use SiteLookup;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Dumpers\DumpGenerator;
@@ -37,9 +37,9 @@ class DumpRdf extends DumpScript {
 	private $entityPrefetcher;
 
 	/**
-	 * @var SiteStore
+	 * @var SiteLookup
 	 */
-	private $siteStore;
+	private $siteLookup;
 
 	/**
 	 * @var PropertyDataTypeLookup
@@ -74,7 +74,7 @@ class DumpRdf extends DumpScript {
 	/**
 	 * @param SqlEntityIdPagerFactory    $sqlEntityIdPagerFactory
 	 * @param EntityPrefetcher           $entityPrefetcher
-	 * @param SiteStore                  $siteStore
+	 * @param SiteLookup                  $siteLookup
 	 * @param PropertyDataTypeLookup     $propertyDataTypeLookup
 	 * @param ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory
 	 * @param EntityRevisionLookup       $entityRevisionLookup
@@ -84,7 +84,7 @@ class DumpRdf extends DumpScript {
 	public function setServices(
 		SqlEntityIdPagerFactory $sqlEntityIdPagerFactory,
 		EntityPrefetcher $entityPrefetcher,
-		SiteStore $siteStore,
+		SiteLookup $siteLookup,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory,
 		EntityRevisionLookup $entityRevisionLookup,
@@ -93,7 +93,7 @@ class DumpRdf extends DumpScript {
 	) {
 		parent::setDumpEntitiesServices( $sqlEntityIdPagerFactory );
 		$this->entityPrefetcher = $entityPrefetcher;
-		$this->siteStore = $siteStore;
+		$this->siteLookup = $siteLookup;
 		$this->propertyDatatypeLookup = $propertyDataTypeLookup;
 		$this->valueSnakRdfBuilderFactory = $valueSnakRdfBuilderFactory;
 		$this->revisionLookup = $entityRevisionLookup;
@@ -113,7 +113,7 @@ class DumpRdf extends DumpScript {
 			$this->setServices(
 				$sqlEntityIdPagerFactory,
 				$wikibaseRepo->getStore()->getEntityPrefetcher(),
-				$wikibaseRepo->getSiteStore(),
+				$wikibaseRepo->getSiteLookup(),
 				$wikibaseRepo->getPropertyDataTypeLookup(),
 				$wikibaseRepo->getValueSnakRdfBuilderFactory(),
 				$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
@@ -144,7 +144,7 @@ class DumpRdf extends DumpScript {
 		return RdfDumpGenerator::createDumpGenerator(
 			$this->getOption( 'format', 'ttl' ),
 			$output,
-			$this->siteStore->getSites(),
+			$this->siteLookup->getSites(),
 			$this->revisionLookup,
 			$this->propertyDatatypeLookup,
 			$this->valueSnakRdfBuilderFactory,

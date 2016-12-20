@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiBase;
 use ApiMain;
 use FauxRequest;
+use MediaWiki\MediaWikiServices;
 use RequestContext;
 use ApiUsageException;
 use Wikibase\Repo\WikibaseRepo;
@@ -36,7 +37,7 @@ abstract class IndependentWikibaseApiTestCase extends \MediaWikiTestCase {
 
 		if ( !$isSetup ) {
 			// TODO: Remove me once everything that needs this is overridden.
-			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
+			$sitesTable = MediaWikiServices::getInstance()->getSiteStore();
 			$sitesTable->clear();
 			$sitesTable->saveSites( \TestSites::getSites() );
 			$isSetup = true;

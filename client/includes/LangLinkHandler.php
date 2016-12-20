@@ -4,7 +4,7 @@ namespace Wikibase;
 
 use ParserOutput;
 use Site;
-use SiteStore;
+use SiteLookup;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\DataModel\Entity\Item;
@@ -46,9 +46,9 @@ class LangLinkHandler {
 	private $entityLookup;
 
 	/**
-	 * @var SiteStore
+	 * @var SiteLookup
 	 */
-	private $siteStore;
+	private $siteLookup;
 
 	/**
 	 * @var string
@@ -65,7 +65,7 @@ class LangLinkHandler {
 	 * @param NamespaceChecker $namespaceChecker determines which namespaces wikibase is enabled on
 	 * @param SiteLinkLookup $siteLinkLookup A site link lookup service
 	 * @param EntityLookup $entityLookup An entity lookup service
-	 * @param SiteStore $siteStore
+	 * @param SiteLookup $siteLookup
 	 * @param string $siteId The global site ID for the local wiki
 	 * @param string $siteGroup The ID of the site group to use for showing language links.
 	 */
@@ -74,7 +74,7 @@ class LangLinkHandler {
 		NamespaceChecker $namespaceChecker,
 		SiteLinkLookup $siteLinkLookup,
 		EntityLookup $entityLookup,
-		SiteStore $siteStore,
+		SiteLookup $siteLookup,
 		$siteId,
 		$siteGroup
 	) {
@@ -82,7 +82,7 @@ class LangLinkHandler {
 		$this->namespaceChecker = $namespaceChecker;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->entityLookup = $entityLookup;
-		$this->siteStore = $siteStore;
+		$this->siteLookup = $siteLookup;
 		$this->siteId = $siteId;
 		$this->siteGroup = $siteGroup;
 	}
@@ -149,7 +149,7 @@ class LangLinkHandler {
 
 		foreach ( $links as $link ) {
 			$siteId = $link->getSiteId();
-			$site = $this->siteStore->getSite( $siteId );
+			$site = $this->siteLookup->getSite( $siteId );
 
 			if ( !$site ) {
 				continue;
@@ -221,7 +221,7 @@ class LangLinkHandler {
 				return array();
 			}
 
-			$sites = $this->siteStore->getSites();
+			$sites = $this->siteLookup->getSites();
 			if ( $sites->hasNavigationId( $code ) ) {
 				$site = $sites->getSiteByNavigationId( $code );
 				$wiki = $site->getGlobalId();
@@ -248,12 +248,12 @@ class LangLinkHandler {
 	 */
 	public function filterRepoLinksByGroup( array $repoLinks, array $allowedGroups ) {
 		foreach ( $repoLinks as $wiki => $link ) {
-			if ( !$this->siteStore->getSite( $wiki ) ) {
+			if ( !$this->siteLookup->getSite( $wiki ) ) {
 				unset( $repoLinks[$wiki] );
 				continue;
 			}
 
-			$site = $this->siteStore->getSite( $wiki );
+			$site = $this->siteLookup->getSite( $wiki );
 
 			if ( !in_array( $site->getGroup(), $allowedGroups ) ) {
 				unset( $repoLinks[$wiki] );
@@ -298,7 +298,7 @@ class LangLinkHandler {
 				$lang = $parts[0];
 				$page = $parts[1];
 
-				$sites = $this->siteStore->getSites();
+				$sites = $this->siteLookup->getSites();
 				if ( $sites->hasNavigationId( $lang ) ) {
 					$site = $sites->getSiteByNavigationId( $lang );
 					$wiki = $site->getGlobalId();
@@ -379,7 +379,7 @@ class LangLinkHandler {
 	private function addLinksToOutput( array $links, ParserOutput $out ) {
 		foreach ( $links as $siteId => $siteLink ) {
 			$page = $siteLink->getPageName();
-			$targetSite = $this->siteStore->getSite( $siteId );
+			$targetSite = $this->siteLookup->getSite( $siteId );
 
 			if ( !$targetSite ) {
 				wfLogWarning( "Unknown wiki '$siteId' used as sitelink target" );

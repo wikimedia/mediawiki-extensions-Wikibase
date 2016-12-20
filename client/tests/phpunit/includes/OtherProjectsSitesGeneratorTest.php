@@ -26,7 +26,7 @@ class OtherProjectsSitesGeneratorTest extends \MediaWikiTestCase {
 	 * @dataProvider otherProjectSitesProvider
 	 */
 	public function testOtherProjectSiteIds( array $supportedSites, $localSiteId, array $expectedSiteIds ) {
-		$siteStore = $this->getSiteStoreMock();
+		$siteStore = $this->getSiteLookupMock();
 		$otherProjectsSitesProvider = new OtherProjectsSitesGenerator( $siteStore, $localSiteId, array( 'wikidata' ) );
 
 		$this->assertEquals(
@@ -78,7 +78,7 @@ class OtherProjectsSitesGeneratorTest extends \MediaWikiTestCase {
 	}
 
 	public function testOtherProjectSiteIds_unknownSite() {
-		$siteStore = $this->getSiteStoreMock();
+		$siteStore = $this->getSiteLookupMock();
 		$otherProjectsSitesProvider = new OtherProjectsSitesGenerator( $siteStore, 'kittenswiki', array( 'wikidata' ) );
 
 		// getOtherProjectsSiteIds does wfWarn in case it's being called with a siteid
@@ -93,7 +93,7 @@ class OtherProjectsSitesGeneratorTest extends \MediaWikiTestCase {
 	/**
 	 * @return HashSiteStore
 	 */
-	private function getSiteStoreMock() {
+	private function getSiteLookupMock() {
 		$sites = array();
 
 		$site = new Site();

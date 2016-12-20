@@ -13,7 +13,7 @@ use IContextSource;
 use InvalidArgumentException;
 use MWException;
 use Site;
-use SiteStore;
+use SiteLookup;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 
@@ -32,9 +32,9 @@ use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 class DiffView extends ContextSource {
 
 	/**
-	 * @var SiteStore
+	 * @var SiteLookup
 	 */
-	private $siteStore;
+	private $siteLookup;
 
 	/**
 	 * @var string[]
@@ -56,21 +56,21 @@ class DiffView extends ContextSource {
 	 *
 	 * @param string[] $path
 	 * @param Diff $diff
-	 * @param SiteStore $siteStore
+	 * @param SiteLookup $siteLookup
 	 * @param EntityIdFormatter $entityIdFormatter that must return only HTML! otherwise injections might be possible
 	 * @param IContextSource|null $contextSource
 	 */
 	public function __construct(
 		array $path,
 		Diff $diff,
-		SiteStore $siteStore,
+		SiteLookup $siteLookup,
 		EntityIdFormatter $entityIdFormatter,
 		IContextSource $contextSource = null
 	) {
 		$this->path = $path;
 		$this->diff = $diff;
 		$this->entityIdFormatter = $entityIdFormatter;
-		$this->siteStore = $siteStore;
+		$this->siteLookup = $siteLookup;
 
 		if ( !is_null( $contextSource ) ) {
 			$this->setContext( $contextSource );
@@ -206,7 +206,7 @@ class DiffView extends ContextSource {
 	 * @return string
 	 */
 	private function getSiteLinkElement( $siteId, $pageName ) {
-		$site = $this->siteStore->getSite( $siteId );
+		$site = $this->siteLookup->getSite( $siteId );
 
 		$tagName = 'span';
 		$attrs = array(

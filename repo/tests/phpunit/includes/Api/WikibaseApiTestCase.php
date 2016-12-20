@@ -4,6 +4,7 @@ namespace Wikibase\Test\Repo\Api;
 
 use ApiTestCase;
 use Exception;
+use MediaWiki\MediaWikiServices;
 use OutOfBoundsException;
 use Revision;
 use TestSites;
@@ -38,7 +39,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		$this->setupUser();
 
 		if ( !$isSetup ) {
-			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
+			$sitesTable = MediaWikiServices::getInstance()->getSiteStore();
 			$sitesTable->clear();
 			$sitesTable->saveSites( TestSites::getSites() );
 

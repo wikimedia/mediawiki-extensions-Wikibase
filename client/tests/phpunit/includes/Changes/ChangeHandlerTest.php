@@ -4,7 +4,7 @@ namespace Wikibase\Client\Tests\Changes;
 
 use ArrayIterator;
 use MediaWikiTestCase;
-use SiteStore;
+use SiteLookup;
 use Title;
 use Wikibase\Change;
 use Wikibase\Client\Changes\AffectedPagesFinder;
@@ -77,7 +77,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 			$titleFactory,
 			$updater ?: new MockPageUpdater(),
 			$changeListTransformer,
-			$this->getMock( SiteStore::class ),
+			$this->getMock( SiteLookup::class ),
 			'repowiki',
 			true
 		);
