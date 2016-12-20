@@ -108,7 +108,7 @@ class EntityContentDiffView extends DifferenceEngine {
 				),
 				$langCode
 			),
-			$wikibaseRepo->getSiteStore(),
+			$wikibaseRepo->getSiteLookup(),
 			$this->entityIdFormatter
 		);
 	}

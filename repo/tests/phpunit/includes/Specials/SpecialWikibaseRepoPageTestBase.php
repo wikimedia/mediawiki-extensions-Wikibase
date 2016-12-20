@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Specials;
 use DataValues\DataValue;
 use HashSiteStore;
 use Language;
-use SiteStore;
+use SiteLookup;
 use SpecialPageTestBase;
 use Status;
 use TestSites;
@@ -108,9 +108,9 @@ abstract class SpecialWikibaseRepoPageTestBase extends SpecialPageTestBase {
 	}
 
 	/**
-	 * @return SiteStore
+	 * @return SiteLookup
 	 */
-	protected function getSiteStore() {
+	protected function getSiteLookup() {
 		return new HashSiteStore( TestSites::getSites() );
 	}
 

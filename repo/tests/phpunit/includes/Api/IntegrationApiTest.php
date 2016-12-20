@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiTestCase;
+use MediaWiki\MediaWikiServices;
 use TestSites;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -23,7 +24,7 @@ class IntegrationApiTest extends ApiTestCase {
 
 	protected function setUp() {
 		parent::setUp();
-		$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
+		$sitesTable = MediaWikiServices::getInstance()->getSiteStore();
 		$sitesTable->clear();
 		$sitesTable->saveSites( TestSites::getSites() );
 	}

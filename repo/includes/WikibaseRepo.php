@@ -24,7 +24,7 @@ use MWException;
 use RequestContext;
 use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
-use SiteStore;
+use SiteLookup;
 use StubObject;
 use Title;
 use User;
@@ -222,9 +222,9 @@ class WikibaseRepo {
 	private $exceptionLocalizer = null;
 
 	/**
-	 * @var SiteStore|null
+	 * @var SiteLookup|null
 	 */
-	private $siteStore = null;
+	private $siteLookup = null;
 
 	/**
 	 * @var Store|null
@@ -794,7 +794,7 @@ class WikibaseRepo {
 			$this->getStatementGuidParser(),
 			$this->getSnakValidator(),
 			$this->getTermValidatorFactory(),
-			$this->getSiteStore()
+			$this->getSiteLookup()
 		);
 	}
 
@@ -1166,14 +1166,14 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return SiteStore
+	 * @return SiteLookup
 	 */
-	public function getSiteStore() {
-		if ( $this->siteStore === null ) {
-			$this->siteStore = MediaWikiServices::getInstance()->getSiteStore();
+	public function getSiteLookup() {
+		if ( $this->siteLookup === null ) {
+			$this->siteLookup = MediaWikiServices::getInstance()->getSiteLookup();
 		}
 
-		return $this->siteStore;
+		return $this->siteLookup;
 	}
 
 	/**
@@ -1193,7 +1193,7 @@ class WikibaseRepo {
 		return new MessageParameterFormatter(
 			$valueFormatterFactory->getValueFormatter( SnakFormatter::FORMAT_WIKI, $formatterOptions ),
 			new EntityIdLinkFormatter( $this->getEntityTitleLookup() ),
-			$this->getSiteStore(),
+			$this->getSiteLookup(),
 			$wgLang
 		);
 	}
@@ -1512,7 +1512,7 @@ class WikibaseRepo {
 			$this->getEntityTitleLookup(),
 			$this->getExceptionLocalizer(),
 			$this->getPropertyDataTypeLookup(),
-			$this->getSiteStore(),
+			$this->getSiteLookup(),
 			$this->getSummaryFormatter(),
 			$this->getEntityRevisionLookup( 'uncached' ),
 			$this->newEditEntityFactory( $context ),
@@ -1660,7 +1660,7 @@ class WikibaseRepo {
 			$this->getHtmlSnakFormatterFactory(),
 			$statementGrouperBuilder->getStatementGrouper(),
 			$propertyOrderProvider,
-			$this->getSiteStore(),
+			$this->getSiteLookup(),
 			$this->getDataTypeFactory(),
 			TemplateFactory::getDefaultInstance(),
 			$this->getLanguageNameLookup(),

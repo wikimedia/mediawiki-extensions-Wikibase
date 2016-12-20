@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Specials;
 
 use FauxRequest;
 use FauxResponse;
+use MediaWiki\MediaWikiServices;
 use SpecialPageTestBase;
 use TestSites;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -97,7 +98,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		$this->setMwGlobals( 'wgGroupPermissions', array( '*' => array( 'edit' => true ) ) );
 
 		if ( !self::$badgeId ) {
-			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
+			$sitesTable = MediaWikiServices::getInstance()->getSiteStore();
 			$sitesTable->clear();
 			$sitesTable->saveSites( TestSites::getSites() );
 

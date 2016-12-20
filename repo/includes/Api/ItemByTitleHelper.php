@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Api;
 
 use Profiler;
 use Site;
-use SiteStore;
+use SiteLookup;
 use ApiUsageException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
@@ -32,9 +32,9 @@ class ItemByTitleHelper {
 	private $siteLinkLookup;
 
 	/**
-	 * @var SiteStore
+	 * @var SiteLookup
 	 */
-	private $siteStore;
+	private $siteLookup;
 
 	/**
 	 * @var StringNormalizer
@@ -44,18 +44,18 @@ class ItemByTitleHelper {
 	/**
 	 * @param ResultBuilder $resultBuilder
 	 * @param SiteLinkLookup $siteLinkLookup
-	 * @param SiteStore $siteStore
+	 * @param SiteLookup $siteLookup
 	 * @param StringNormalizer $stringNormalizer
 	 */
 	public function __construct(
 		ResultBuilder $resultBuilder,
 		SiteLinkLookup $siteLinkLookup,
-		SiteStore $siteStore,
+		SiteLookup $siteLookup,
 		StringNormalizer $stringNormalizer
 	) {
 		$this->resultBuilder = $resultBuilder;
 		$this->siteLinkLookup = $siteLinkLookup;
-		$this->siteStore = $siteStore;
+		$this->siteLookup = $siteLookup;
 		$this->stringNormalizer = $stringNormalizer;
 	}
 
@@ -130,7 +130,7 @@ class ItemByTitleHelper {
 
 		// Try harder by requesting normalization on the external site.
 		if ( $id === null && $normalize === true ) {
-			$siteObj = $this->siteStore->getSite( $siteId );
+			$siteObj = $this->siteLookup->getSite( $siteId );
 			//XXX: this passes the normalized title back into $title by reference...
 			$this->normalizeTitle( $title, $siteObj );
 			$id = $this->siteLinkLookup->getItemIdForLink( $siteObj->getGlobalId(), $title );

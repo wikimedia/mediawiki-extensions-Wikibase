@@ -8,7 +8,7 @@ use HashSiteStore;
 use Language;
 use RuntimeException;
 use Site;
-use SiteStore;
+use SiteLookup;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
@@ -157,7 +157,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 			Language::factory( 'en' ),
 			new DataTypeDefinitions( array() ),
 			new EntityTypeDefinitions( array() ),
-			$this->getSiteStore()
+			$this->getSiteLookup()
 		);
 
 		$handler = $wikibaseClient->getLangLinkHandler();
@@ -172,20 +172,20 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getLangLinkSiteGroupProvider
 	 */
-	public function testGetLangLinkSiteGroup( $expected, SettingsArray $settings, SiteStore $siteStore ) {
+	public function testGetLangLinkSiteGroup( $expected, SettingsArray $settings, SiteLookup $siteLookup ) {
 		$client = new WikibaseClient(
 			$settings,
 			Language::factory( 'en' ),
 			new DataTypeDefinitions( array() ),
 			new EntityTypeDefinitions( array() ),
-			$siteStore
+			$siteLookup
 		);
 
 		$this->assertEquals( $expected, $client->getLangLinkSiteGroup() );
 	}
 
 	public function getLangLinkSiteGroupProvider() {
-		$siteStore = $this->getSiteStore();
+		$siteLookup = $this->getSiteLookup();
 
 		$settings = clone WikibaseClient::getDefaultInstance()->getSettings();
 
@@ -199,39 +199,39 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$settings2->setSetting( 'languageLinkSiteGroup', 'wikivoyage' );
 
 		return array(
-			array( 'wikipedia', $settings, $siteStore ),
-			array( 'wikivoyage', $settings2, $siteStore )
+			array( 'wikipedia', $settings, $siteLookup ),
+			array( 'wikivoyage', $settings2, $siteLookup )
 		);
 	}
 
 	/**
 	 * @dataProvider getSiteGroupProvider
 	 */
-	public function testGetSiteGroup( $expected, SettingsArray $settings, SiteStore $siteStore ) {
+	public function testGetSiteGroup( $expected, SettingsArray $settings, SiteLookup $siteLookup ) {
 		$client = new WikibaseClient(
 			$settings,
 			Language::factory( 'en' ),
 			new DataTypeDefinitions( array() ),
 			new EntityTypeDefinitions( array() ),
-			$siteStore
+			$siteLookup
 		);
 
 		$this->assertEquals( $expected, $client->getSiteGroup() );
 	}
 
 	/**
-	 * @return SiteStore
+	 * @return SiteLookup
 	 */
-	private function getSiteStore() {
-		$siteStore = new HashSiteStore();
+	private function getSiteLookup() {
+		$siteLookup = new HashSiteStore();
 
 		$site = new Site();
 		$site->setGlobalId( 'enwiki' );
 		$site->setGroup( 'wikipedia' );
 
-		$siteStore->saveSite( $site );
+		$siteLookup->saveSite( $site );
 
-		return $siteStore;
+		return $siteLookup;
 	}
 
 	public function getSiteGroupProvider() {
@@ -243,11 +243,11 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$settings2->setSetting( 'siteGroup', 'wikivoyage' );
 		$settings2->setSetting( 'siteGlobalID', 'enwiki' );
 
-		$siteStore = $this->getSiteStore();
+		$siteLookup = $this->getSiteLookup();
 
 		return array(
-			array( 'wikipedia', $settings, $siteStore ),
-			array( 'wikivoyage', $settings2, $siteStore )
+			array( 'wikipedia', $settings, $siteLookup ),
+			array( 'wikivoyage', $settings2, $siteLookup )
 		);
 	}
 
@@ -266,9 +266,9 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( LanguageLinkBadgeDisplay::class, $returnValue );
 	}
 
-	public function testGetSiteStore() {
-		$store = $this->getWikibaseClient()->getSiteStore();
-		$this->assertInstanceOf( SiteStore::class, $store );
+	public function testGetSiteLookup() {
+		$store = $this->getWikibaseClient()->getSiteLookup();
+		$this->assertInstanceOf( SiteLookup::class, $store );
 	}
 
 	public function testGetOtherProjectsSidebarGeneratorFactoryReturnType() {

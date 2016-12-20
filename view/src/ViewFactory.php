@@ -4,7 +4,7 @@ namespace Wikibase\View;
 
 use DataTypes\DataTypeFactory;
 use InvalidArgumentException;
-use SiteStore;
+use SiteLookup;
 use ValueFormatters\NumberLocalizer;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
@@ -53,9 +53,9 @@ class ViewFactory {
 	private $propertyOrderProvider;
 
 	/**
-	 * @var SiteStore
+	 * @var SiteLookup
 	 */
-	private $siteStore;
+	private $siteLookup;
 
 	/**
 	 * @var DataTypeFactory
@@ -108,7 +108,7 @@ class ViewFactory {
 	 * @param HtmlSnakFormatterFactory $htmlSnakFormatterFactory
 	 * @param StatementGrouper $statementGrouper
 	 * @param PropertyOrderProvider $propertyOrderProvider,
-	 * @param SiteStore $siteStore
+	 * @param SiteLookup $siteLookup
 	 * @param DataTypeFactory $dataTypeFactory
 	 * @param TemplateFactory $templateFactory
 	 * @param LanguageNameLookup $languageNameLookup
@@ -127,7 +127,7 @@ class ViewFactory {
 		HtmlSnakFormatterFactory $htmlSnakFormatterFactory,
 		StatementGrouper $statementGrouper,
 		PropertyOrderProvider $propertyOrderProvider,
-		SiteStore $siteStore,
+		SiteLookup $siteLookup,
 		DataTypeFactory $dataTypeFactory,
 		TemplateFactory $templateFactory,
 		LanguageNameLookup $languageNameLookup,
@@ -149,7 +149,7 @@ class ViewFactory {
 		$this->htmlSnakFormatterFactory = $htmlSnakFormatterFactory;
 		$this->statementGrouper = $statementGrouper;
 		$this->propertyOrderProvider = $propertyOrderProvider;
-		$this->siteStore = $siteStore;
+		$this->siteLookup = $siteLookup;
 		$this->dataTypeFactory = $dataTypeFactory;
 		$this->templateFactory = $templateFactory;
 		$this->languageNameLookup = $languageNameLookup;
@@ -208,7 +208,7 @@ class ViewFactory {
 
 		$siteLinksView = new SiteLinksView(
 			$this->templateFactory,
-			$this->siteStore->getSites(),
+			$this->siteLookup->getSites(),
 			$editSectionGenerator,
 			$this->plainTextIdFormatterFactory->getEntityIdFormatter( $labelDescriptionLookup ),
 			$this->languageNameLookup,

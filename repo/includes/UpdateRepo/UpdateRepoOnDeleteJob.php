@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\UpdateRepo;
 
 use OutOfBoundsException;
-use SiteStore;
+use SiteLookup;
 use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
@@ -25,9 +25,9 @@ use Wikibase\SummaryFormatter;
 class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 
 	/**
-	 * @var SiteStore
+	 * @var SiteLookup
 	 */
-	private $siteStore;
+	private $siteLookup;
 
 	/**
 	 * Constructs a UpdateRepoOnMoveJob propagating a page move to the repo
@@ -53,7 +53,7 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
 			$wikibaseRepo->getEntityStore(),
 			$wikibaseRepo->getSummaryFormatter(),
-			$wikibaseRepo->getSiteStore(),
+			$wikibaseRepo->getSiteLookup(),
 			$wikibaseRepo->newEditEntityFactory()
 		);
 	}
@@ -62,7 +62,7 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityStore $entityStore,
 		SummaryFormatter $summaryFormatter,
-		SiteStore $siteStore,
+		SiteLookup $siteLookup,
 		EditEntityFactory $editEntityFactory
 	) {
 		$this->initRepoJobServices(
@@ -71,7 +71,7 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 			$summaryFormatter,
 			$editEntityFactory
 		);
-		$this->siteStore = $siteStore;
+		$this->siteLookup = $siteLookup;
 	}
 
 	/**
@@ -128,7 +128,7 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 			return false;
 		}
 
-		$site = $this->siteStore->getSite( $siteId );
+		$site = $this->siteLookup->getSite( $siteId );
 
 		// Maybe the page has been undeleted/ recreated?
 		$exists = $site->normalizePageName( $page );

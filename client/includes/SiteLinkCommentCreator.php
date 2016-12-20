@@ -10,7 +10,7 @@ use Diff\DiffOp\DiffOpRemove;
 use Language;
 use Message;
 use MWException;
-use SiteStore;
+use SiteLookup;
 use Title;
 
 /**
@@ -32,9 +32,9 @@ class SiteLinkCommentCreator {
 	private $language;
 
 	/**
-	 * @var SiteStore
+	 * @var SiteLookup
 	 */
-	private $siteStore;
+	private $siteLookup;
 
 	/**
 	 * @var string
@@ -43,12 +43,12 @@ class SiteLinkCommentCreator {
 
 	/**
 	 * @param Language $language
-	 * @param SiteStore $siteStore
+	 * @param SiteLookup $siteLookup
 	 * @param string $siteId
 	 */
-	public function __construct( Language $language, SiteStore $siteStore, $siteId ) {
+	public function __construct( Language $language, SiteLookup $siteLookup, $siteId ) {
 		$this->siteId = $siteId;
-		$this->siteStore = $siteStore;
+		$this->siteLookup = $siteLookup;
 		$this->language = $language;
 	}
 
@@ -301,7 +301,7 @@ class SiteLinkCommentCreator {
 	 */
 	private function getSitelinkWikitext( $siteId, $pageTitle ) {
 		// Try getting the interwiki id from the Site object of the link target
-		$site = $this->siteStore->getSite( $siteId );
+		$site = $this->siteLookup->getSite( $siteId );
 
 		if ( $site ) {
 			$interwikiIds = $site->getInterwikiIds();
