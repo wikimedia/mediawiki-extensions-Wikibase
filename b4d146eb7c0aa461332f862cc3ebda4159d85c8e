@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_e69fb753",
+        "filename": "repo/tests/phpunit/maintenance/dumpJsonTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-20T10:44:27Z",
+      "side": 1,
+      "message": "Not relevant in this case, because this class is not used outside of this file.",
+      "parentUuid": "0e0e73b5_068beb21",
+      "range": {
+        "startLine": 47,
+        "startChar": 6,
+        "endLine": 47,
+        "endChar": 18
+      },
+      "revId": "b4d146eb7c0aa461332f862cc3ebda4159d85c8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_e680d7fb",
         "filename": "repo/tests/phpunit/maintenance/dumpRdfTest.php",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2016-12-20T10:31:57Z",
       "side": 1,
       "message": "File name differs. PSR-4 autoloader won\u0027t work correctly",
+      "range": {
+        "startLine": 52,
+        "startChar": 6,
+        "endLine": 52,
+        "endChar": 17
+      },
+      "revId": "b4d146eb7c0aa461332f862cc3ebda4159d85c8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_c69cb361",
+        "filename": "repo/tests/phpunit/maintenance/dumpRdfTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-20T10:44:27Z",
+      "side": 1,
+      "message": "Not relevant in this case, because this class is not used outside of this file.",
+      "parentUuid": "0e0e73b5_e680d7fb",
       "range": {
         "startLine": 52,
         "startChar": 6,
