@@ -614,4 +614,19 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertEquals( $expected, $deserialized );
 	}
 
+	public function testGetChangeOpsCallbacks() {
+		$wikibaseRepo = $this->getWikibaseRepo(
+			[
+				'foo' => [
+					'get-change-op-callback' => 'new-get-change-op-callback'
+				]
+			]
+		);
+		$changeOpsCallbacks = $wikibaseRepo->getChangeOpsCallbacks();
+		$expected = [
+			'foo' => 'new-get-change-op-callback'
+		];
+		$this->assertSame( $expected, $changeOpsCallbacks );
+	}
+
 }
