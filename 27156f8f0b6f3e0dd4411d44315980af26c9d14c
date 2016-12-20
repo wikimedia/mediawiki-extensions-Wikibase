@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_bc4d52e2",
+        "filename": "client/includes/Store/RepositoryServiceWiring.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2016-12-20T16:43:14Z",
+      "side": 1,
+      "message": "Just out of curiosity - is this comment here because we\u0027re constructing a PropertyInfoTable which could technically be used for writing?\nOtherwise it seems somewhat redundant with this being in the client subdirectory and the key being \u0027PropertyInfoLookup\u0027 which is readonly.",
+      "revId": "27156f8f0b6f3e0dd4411d44315980af26c9d14c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
