@@ -22,7 +22,6 @@ use LogicException;
 use MediaWiki\MediaWikiServices;
 use MediaWikiSite;
 use MWException;
-use RequestContext;
 use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
 use Site;

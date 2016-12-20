@@ -8,7 +8,6 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
-use Wikibase\Store\BufferingTermLookup;
 use Wikibase\TermIndex;
 use Wikibase\TermIndexEntry;
 use Wikimedia\Assert\Assert;

@@ -6,7 +6,6 @@ use ApiBase;
 use Exception;
 use PHPUnit_Framework_MockObject_MockObject;
 use ApiUsageException;
-use StatusValue;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
