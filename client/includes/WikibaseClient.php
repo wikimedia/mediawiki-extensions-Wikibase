@@ -713,8 +713,6 @@ final class WikibaseClient {
 			$site = $this->getSiteStore()->getSite( $siteId );
 
 			if ( !$site ) {
-				wfWarn( 'Cannot find site ' . $siteId . ' in sites table' );
-
 				return true;
 			}
 
