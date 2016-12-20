@@ -153,4 +153,15 @@ class EntityTypeDefinitions {
 		return $this->getMapForDefinitionField( 'entity-id-composer-callback' );
 	}
 
+	/**
+	 * @return callable[] An array mapping entity type identifiers
+	 * to callables instantiating ChangeOpDeserializer objects
+	 * capable of turning serialization of the change (in array form)
+	 * to a ChangeOp object representing the change.
+	 * Not guaranteed to contain all entity types.
+	 */
+	public function getChangeOpDeserializerCallbacks() {
+		return $this->getMapForDefinitionField( 'changeop-deserializer-callback' );
+	}
+
 }
