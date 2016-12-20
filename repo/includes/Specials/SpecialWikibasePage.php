@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Specials;
 
-use Html;
 use SpecialPage;
 use UserBlockedError;
 use Wikibase\StringNormalizer;
@@ -101,19 +100,10 @@ abstract class SpecialWikibasePage extends SpecialPage {
 	}
 
 	/**
-	 * Showing an error.
-	 *
 	 * @param string $error The error message in HTML format
-	 * @param string $class The element's class, default 'error'
 	 */
-	protected function showErrorHTML( $error, $class = 'error' ) {
-		$this->getOutput()->addHTML(
-			Html::rawElement(
-				'p',
-				array( 'class' => $class ),
-				$error
-			)
-		);
+	protected function showErrorHTML( $error ) {
+		$this->getOutput()->addHTML( '<p class="error">' . $error . '</p>' );
 	}
 
 }
