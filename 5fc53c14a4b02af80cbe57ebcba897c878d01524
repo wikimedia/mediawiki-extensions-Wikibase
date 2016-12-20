@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_4691e351",
+        "filename": "repo/includes/Store/SiteLinkConflictLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-20T10:29:18Z",
+      "side": 1,
+      "message": "It seems like pretty complicated description to me.\nI would rather suggest to make it something like:\n```\n    * ...\n    * @returns ConflictDescription[]\n    * ...\n```\n```\n// ConflictDescription.php\nclass ConflictDescription {\n    /** @var ItemId */\n    public $itemId;\n    /** @var string */\n    public $siteId;\n    /** @var string */\n    public $sitePage;\n    \n    // Or private fields with getters and constructor\n}\n```\n\nOf course,  if it\u0027s not too hard to refactor towards something like this.",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 29
+      },
+      "revId": "5fc53c14a4b02af80cbe57ebcba897c878d01524",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
