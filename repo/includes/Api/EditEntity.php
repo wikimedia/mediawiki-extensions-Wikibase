@@ -87,6 +87,11 @@ class EditEntity extends ModifyEntity {
 	private $entityFactory;
 
 	/**
+	 * @var callable[]
+	 */
+	private $changeOpsCallbacks;
+
+	/**
 	 * @see ModifyEntity::__construct
 	 *
 	 * @param ApiMain $mainModule
@@ -109,6 +114,7 @@ class EditEntity extends ModifyEntity {
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
 		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
 		$this->siteLinkChangeOpFactory = $changeOpFactoryProvider->getSiteLinkChangeOpFactory();
+		$this->changeOpsDeserializerCallbacks = $wikibaseRepo->getChagneOpDeserializerCallbacks();
 	}
 
 	/**
@@ -274,56 +280,67 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param array $data
+	 * @param array $data an array of data to apply. For example:
+	 *        [ 'label' => [ 'zh' => [ 'remove' ], 'de' => [ 'value' => 'Foo' ] ] ]
 	 * @param EntityDocument $entity
 	 *
 	 * @throws ApiUsageException
 	 * @return ChangeOps
 	 */
-	private function getChangeOps( array $data, EntityDocument $entity ) {
+	private function getChangeOps( array $entitySerialization, EntityDocument $entity ) {
 		$changeOps = new ChangeOps();
 
+		$type = $entity->getType();
+		if ( isset( $this->changeOpsDeserializerCallbacks[$type] ) ) {
+			$changeOp = call_user_func(
+				[ $this->changeOpsDeserializerCallbacks[$type], 'deserialize' ],
+				$entitySerialization
+			);
+			$changeOps->add( $changeOp );
+			// Shorten out
+			return $changeOps;
+		}
 		//FIXME: Use a ChangeOpBuilder so we can batch fingerprint ops etc,
 		//       for more efficient validation!
 
-		if ( array_key_exists( 'labels', $data ) ) {
+		if ( array_key_exists( 'labels', $entitySerialization ) ) {
 			if ( !( $entity instanceof LabelsProvider ) ) {
 				$this->errorReporter->dieError( 'The given entity cannot contain labels', 'not-supported' );
 			}
-			$this->assertArray( $data['labels'], 'List of labels must be an array' );
-			$changeOps->add( $this->getLabelChangeOps( $data['labels'] ) );
+			$this->assertArray( $entitySerialization['labels'], 'List of labels must be an array' );
+			$changeOps->add( $this->getLabelChangeOps( $entitySerialization['labels'] ) );
 		}
 
-		if ( array_key_exists( 'descriptions', $data ) ) {
+		if ( array_key_exists( 'descriptions', $entitySerialization ) ) {
 			if ( !( $entity instanceof DescriptionsProvider ) ) {
 				$this->errorReporter->dieError( 'The given entity cannot contain descriptions', 'not-supported' );
 			}
-			$this->assertArray( $data['descriptions'], 'List of descriptions must be an array' );
-			$changeOps->add( $this->getDescriptionChangeOps( $data['descriptions'] ) );
+			$this->assertArray( $entitySerialization['descriptions'], 'List of descriptions must be an array' );
+			$changeOps->add( $this->getDescriptionChangeOps( $entitySerialization['descriptions'] ) );
 		}
 
-		if ( array_key_exists( 'aliases', $data ) ) {
+		if ( array_key_exists( 'aliases', $entitySerialization ) ) {
 			if ( !( $entity instanceof AliasesProvider ) ) {
 				$this->errorReporter->dieError( 'The given entity cannot contain aliases', 'not-supported' );
 			}
-			$this->assertArray( $data['aliases'], 'List of aliases must be an array' );
-			$changeOps->add( $this->getAliasesChangeOps( $data['aliases'] ) );
+			$this->assertArray( $entitySerialization['aliases'], 'List of aliases must be an array' );
+			$changeOps->add( $this->getAliasesChangeOps( $entitySerialization['aliases'] ) );
 		}
 
-		if ( array_key_exists( 'sitelinks', $data ) ) {
+		if ( array_key_exists( 'sitelinks', $entitySerialization ) ) {
 			if ( !( $entity instanceof Item ) ) {
 				$this->errorReporter->dieError( 'Non Items cannot have sitelinks', 'not-supported' );
 			}
-			$this->assertArray( $data['sitelinks'], 'List of sitelinks must be an array' );
-			$changeOps->add( $this->getSiteLinksChangeOps( $data['sitelinks'], $entity ) );
+			$this->assertArray( $entitySerialization['sitelinks'], 'List of sitelinks must be an array' );
+			$changeOps->add( $this->getSiteLinksChangeOps( $entitySerialization['sitelinks'], $entity ) );
 		}
 
-		if ( array_key_exists( 'claims', $data ) ) {
+		if ( array_key_exists( 'claims', $entitySerialization ) ) {
 			if ( !( $entity instanceof StatementListProvider ) ) {
 				$this->errorReporter->dieError( 'The given entity cannot contain statements', 'not-supported' );
 			}
-			$this->assertArray( $data['claims'], 'List of claims must be an array' );
-			$changeOps->add( $this->getClaimsChangeOps( $data['claims'] ) );
+			$this->assertArray( $entitySerialization['claims'], 'List of claims must be an array' );
+			$changeOps->add( $this->getClaimsChangeOps( $entitySerialization['claims'] ) );
 		}
 
 		return $changeOps;

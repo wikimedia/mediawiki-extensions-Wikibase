@@ -1839,4 +1839,13 @@ class WikibaseRepo {
 		return $storage;
 	}
 
+	/**
+	 * @see EntityTypeDefinitions::getChagneOpDeserializerCallbacks
+	 *
+	 * @return callable[]
+	 */
+	public function getChagneOpDeserializerCallbacks() {
+		return $this->entityTypeDefinitions->getChagneOpDeserializerCallbacks();
+	}
+
 }
