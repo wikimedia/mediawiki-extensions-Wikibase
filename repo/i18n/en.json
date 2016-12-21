@@ -607,7 +607,7 @@
 	"apihelp-wbsetqualifier-description": "Creates a qualifier or sets the value of an existing one.",
 	"apihelp-wbsetqualifier-param-claim": "A GUID identifying the claim for which a qualifier is being set",
 	"apihelp-wbsetqualifier-param-property": "ID of the snaks property.\nShould only be provided when creating a new qualifier or changing the property of an existing one",
-	"apihelp-wbsetqualifier-param-value": "The new value of the qualifier.\nShould only be provdied for PropertyValueSnak qualifiers",
+	"apihelp-wbsetqualifier-param-value": "The new value of the qualifier.\nShould only be provided for PropertyValueSnak qualifiers",
 	"apihelp-wbsetqualifier-param-snaktype": "The type of the snak.\nShould only be provided when creating a new qualifier or changing the type of an existing one",
 	"apihelp-wbsetqualifier-param-snakhash": "The hash of the snak to modify.\nShould only be provided for existing qualifiers",
 	"apihelp-wbsetqualifier-param-summary": "Summary for the edit.\nWill be prepended by an automatically generated comment. The length limit of the autocomment together with the summary is 260 characters. Be aware that everything above that limit will be cut off.",
