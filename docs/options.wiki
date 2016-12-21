@@ -50,8 +50,6 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;allowEntityImport: Allow importing entities via Special:Import and importDump.php. Per default, imports are forbidden, since entities defined in another wiki would have or use IDs that conflict with entities defined locally.
 ;pagePropertiesRdf: Array that maps between page properties and Wikibase predicates for RDF dumps. Maps from database property name to an array that contains a key <code>'name'</code> (RDF property name, which will be prefixed by <code>wikibase:</code>) and an optional key <code>'type'</code>.
 ;unitStorage: Definition for unit conversion storage. Should be in in the format <code>ObjectFactory</code> understands, example: <code>array( 'class' => 'Wikibase\\Lib\\JsonUnitStorage',  'args' => array( 'myUnits.json' ) )</code>.
-;foreignRepositories: An associative array mapping foreign repository names to settings relevant to the particular repository. Each repository's settings are an associative array containing the following keys:
-:;'supportedEntityTypes': list of entity types (strings) that the local wiki supports from the foreign repository
 
 == Client Settings ==
 
@@ -102,7 +100,8 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;otherProjectsLinksByDefault: Whether to show links to other projects per default. If not set, the links can be enabled as a beta feature (see '''otherProjectsLinksBeta''').
 ;otherProjectsLinksBeta: If this is set to true links to other projects will be available as beta feature, enabling every user to turn them on/off if wanted. (Only applies if other project links aren't enabled per default and the BetaFeatures extension is installed)
 ;propertyOrderUrl: URL to use for retrieving the property order used for sorting properties by property ID. Will be ignored if set to null.
-;foreignRepositories: An associative array mapping foreign repository names to settings relevant to the particular repository. Repository settings is an associative array containing the following keys:
+;foreignRepositories: An associative array mapping foreign repository names to settings relevant to the particular repository. Each repository's settings are an associative array containing the following keys:
+:;'supportedEntityTypes': list of entity types (strings) that the local wiki supports from the foreign repository
 :;'repoDatabase': value should be a symbolic database name,
 :;'prefixMapping': value should be a prefix mapping array, see also: docs/foreign-entity-ids.wiki in the DataModel component.
 
