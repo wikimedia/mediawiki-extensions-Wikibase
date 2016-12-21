@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
+use Wikimedia\Assert\ParameterAssertionException;
 
 /**
  * @covers Wikibase\Client\DispatchingServiceFactory
@@ -58,17 +59,30 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 	 * @return DispatchingServiceFactory
 	 */
 	private function getDispatchingServiceFactory( RepositoryServiceContainerFactory $containerFactory ) {
-		$client = WikibaseClient::getDefaultInstance();
-		$settings = $client->getSettings();
-		$settings->setSetting( 'foreignRepositories', [ 'foo' => [ 'repoDatabase' => 'foowiki' ] ] );
-
-		$factory = new DispatchingServiceFactory( $containerFactory, [ '', 'foo' ] );
+		$factory = new DispatchingServiceFactory(
+			$containerFactory,
+			[ '', 'foo' ],
+			[ 'property' => 'Property' ],
+			[ 'foo' => [ 'repoDatabase' => 'foowiki', 'supportedEntityTypes' => [ 'item' ] ] ]
+		);
 
 		$factory->defineService( 'EntityRevisionLookup', function() {
 			return $this->getMock( EntityRevisionLookup::class );
 		} );
 
 		return $factory;
+	}
+
+	public function testGetEntityTypeToRepoMapping() {
+		$factory = $this->getDispatchingServiceFactory( $this->getRepositoryServiceContainerFactory() );
+
+		$this->assertEquals(
+			[
+				'item' => 'foo',
+				'property' => '',
+			],
+			$factory->getEntityTypeToRepoMapping()
+		);
 	}
 
 	public function testGetServiceNames() {
@@ -182,6 +196,48 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$factory->redirectUpdated( new EntityRedirect( new ItemId( 'foo:Q123' ), new ItemId( 'foo:Q321' ) ), 100 );
+	}
+
+	public function provideInvalidConstructorArguments() {
+		$validNamespaces = [ 'item' => 'Item' ];
+		$validForeignRepoSettings = [
+			'foo' => [
+				'repoDatabase' => 'foodb',
+				'supportedEntityTypes' => [ 'item' ]
+			]
+		];
+
+		return [
+			'not entity type name' => [
+				[ 100 => 'Item' ],
+				$validForeignRepoSettings
+			],
+			'not namespace name' => [
+				[ 'item' => 300 ],
+				$validForeignRepoSettings
+			],
+			'repository name containing colon' => [
+				$validNamespaces,
+				[ 'fo:o' => [ 'repoDatabase' => 'foodb', 'supportedEntityTypes' => [ 'item' ] ] ]
+			],
+		];
+	}
+
+	/**
+	 * @dataProvider provideInvalidConstructorArguments
+	 */
+	public function testGivenInvalidConstructorArguments_constructorThrowsException(
+		array $repoNamespaces,
+		array $foreignRepositories
+	) {
+		$this->setExpectedException( ParameterAssertionException::class );
+
+		new DispatchingServiceFactory(
+			$this->getRepositoryServiceContainerFactory(),
+			[ '', 'foo' ],
+			$repoNamespaces,
+			$foreignRepositories
+		);
 	}
 
 }

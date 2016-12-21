@@ -4,15 +4,17 @@ namespace Wikibase\Client;
 
 use MediaWiki\Services\ServiceContainer;
 use Wikibase\Client\Store\RepositoryServiceContainerFactory;
+use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
-use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\EntityRevision;
+use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
+use Wikimedia\Assert\Assert;
 
 /**
  * A factory/locator of services dispatching the action to services configured for the
@@ -36,17 +38,42 @@ class DispatchingServiceFactory extends ServiceContainer implements EntityDataRe
 	private $repositoryServiceContainerFactory;
 
 	/**
+	 * @var string[]
+	 */
+	private $localRepositoryNamespaces;
+
+	/**
+	 * @var array
+	 */
+	private $foreignRepositorySettings;
+
+	/**
 	 * @param RepositoryServiceContainerFactory $repositoryServiceContainerFactory
 	 * @param string[] $repositoryNames
 	 */
 	public function __construct(
 		RepositoryServiceContainerFactory $repositoryServiceContainerFactory,
-		array $repositoryNames
+		array $repositoryNames,
+		array $localRepositoryNamespaces,
+		array $foreignRepositorySettings
 	) {
 		parent::__construct();
 
+		Assert::parameterElementType( 'string', $localRepositoryNamespaces, '$localRepositoryNamespaces' );
+		Assert::parameterElementType(
+			'string',
+			array_keys( $localRepositoryNamespaces ),
+			'array_keys( $localRepositoryNamespaces )'
+		);
+		RepositoryNameAssert::assertParameterKeysAreValidRepositoryNames(
+			$foreignRepositorySettings,
+			'$foreignRepositorySettings'
+		);
+
 		$this->repositoryServiceContainerFactory = $repositoryServiceContainerFactory;
 		$this->repositoryNames = $repositoryNames;
+		$this->localRepositoryNamespaces = $localRepositoryNamespaces;
+		$this->foreignRepositorySettings = $foreignRepositorySettings;
 	}
 
 	/**
@@ -117,6 +144,26 @@ class DispatchingServiceFactory extends ServiceContainer implements EntityDataRe
 		}
 	}
 
+	private function buildEntityTypeToRepoMapping() {
+		$localRepoEntityTypes = array_keys( $this->localRepositoryNamespaces );
+		$entityTypeToRepoMap = array_fill_keys( $localRepoEntityTypes, '' );
+		foreach ( $this->foreignRepositorySettings as $repositoryName => $repoSettings ) {
+			foreach ( $repoSettings['supportedEntityTypes'] as $entityType ) {
+				if ( !array_key_exists( $entityType, $entityTypeToRepoMap ) ) {
+					$entityTypeToRepoMap[$entityType] = $repositoryName;
+				}
+			}
+		}
+		return $entityTypeToRepoMap;
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getEntityTypeToRepoMapping() {
+		return $this->buildEntityTypeToRepoMapping();
+	}
+
 	/**
 	 * @return EntityRevisionLookup
 	 */
@@ -136,6 +183,13 @@ class DispatchingServiceFactory extends ServiceContainer implements EntityDataRe
 	 */
 	public function getTermBuffer() {
 		return $this->getService( 'TermBuffer' );
+	}
+
+	/**
+	 * @return TermSearchInteractorFactory
+	 */
+	public function getTermSearchInteractorFactory() {
+		return $this->getService( 'TermSearchInteractorFactory' );
 	}
 
 }

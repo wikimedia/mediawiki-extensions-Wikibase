@@ -374,7 +374,9 @@ final class WikibaseClient {
 				array_merge(
 					[ '' ],
 					array_keys( $this->getSettings()->getSetting( 'foreignRepositories' ) )
-				)
+				),
+				$this->getSettings()->getSetting( 'repoNamespaces' ),
+				$this->getSettings()->getSetting( 'foreignRepositories' )
 			);
 			$factory->loadWiringFiles( $this->settings->getSetting( 'dispatchingServiceWiringFiles' ) );
 
