@@ -1,6 +1,7 @@
 <?php
 
 use Wikibase\Client\DispatchingServiceFactory;
+use Wikibase\Lib\Interactors\DispatchingTermSearchInteractorFactory;
 use Wikibase\Lib\Store\DispatchingEntityRevisionLookup;
 use Wikibase\Lib\Store\DispatchingPropertyInfoLookup;
 use Wikibase\Lib\Store\DispatchingTermBuffer;
@@ -36,6 +37,18 @@ return [
 		);
 
 		return new DispatchingTermBuffer( $buffers );
-	}
+	},
+
+	'TermSearchInteractorFactory' => function( DispatchingServiceFactory $dispatchingServiceFactory ) {
+		$repoSpecificFactories = $dispatchingServiceFactory->getServiceMap( 'TermSearchInteractorFactory' );
+		$entityTypeToRepoMapping = $dispatchingServiceFactory->getEntityTypeToRepoMapping();
+
+		$factories = [];
+		foreach ( $entityTypeToRepoMapping as $entityType => $repositoryName ) {
+			$factories[$entityType] = $repoSpecificFactories[$repositoryName];
+		}
+
+		return new DispatchingTermSearchInteractorFactory( $factories );
+	},
 
 ];
