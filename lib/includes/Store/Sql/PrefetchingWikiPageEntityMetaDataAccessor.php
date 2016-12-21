@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Store\Sql;
 
+use InvalidArgumentException;
 use MapCacheLRU;
 use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
@@ -196,7 +197,18 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 			return;
 		}
 
-		$data = $this->lookup->loadRevisionInformation( $this->toFetch, $mode );
+		try {
+			$data = $this->lookup->loadRevisionInformation( $this->toFetch, $mode );
+		} catch ( InvalidArgumentException $exception ) {
+			// Do not store invalid entity ids (causing exceptions in lookup).
+
+			// TODO: if the $exception was of more specific type and provided the relevant entity id,
+			// it would possible to only remove the relevant key from toFetch.
+			$this->toFetch = [];
+
+			// Re-throw the exception to be handled by caller.
+			throw $exception;
+		}
 
 		// Store the data, including cache misses
 		$this->store( $data );
