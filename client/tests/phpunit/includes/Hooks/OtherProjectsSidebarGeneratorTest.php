@@ -289,16 +289,16 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	 * @return SiteLookup
 	 */
 	private function getSiteLookup() {
-		$siteLookup = new HashSiteStore( TestSites::getSites() );
+		$siteStore = new HashSiteStore( TestSites::getSites() );
 
 		$site = new MediaWikiSite();
 		$site->setGlobalId( 'enwikiquote' );
 		$site->setGroup( 'wikiquote' );
 		$site->setLanguageCode( 'en' );
 		$site->setPath( MediaWikiSite::PATH_PAGE, "https://en.wikiquote.org/wiki/$1" );
-		$siteLookup->saveSite( $site );
+		$siteStore->saveSite( $site );
 
-		return $siteLookup;
+		return $siteStore;
 	}
 
 	/**
