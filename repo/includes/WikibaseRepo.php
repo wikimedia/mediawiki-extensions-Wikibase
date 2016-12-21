@@ -83,7 +83,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\UnionContentLanguages;
@@ -598,7 +598,7 @@ class WikibaseRepo {
 	/**
 	 * @since 0.5
 	 *
-	 * @return EntityTitleLookup
+	 * @return EntityTitleStoreLookup
 	 */
 	public function getEntityTitleLookup() {
 		return $this->getEntityContentFactory();

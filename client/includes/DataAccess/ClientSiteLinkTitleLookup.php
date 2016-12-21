@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\DataAccess;
 
-use BadMethodCallException;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -33,10 +32,7 @@ class ClientSiteLinkTitleLookup implements EntityTitleLookup {
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param string $clientSiteId
 	 */
-	public function __construct(
-		SiteLinkLookup $siteLinkLookup,
-		$clientSiteId
-	) {
+	public function __construct( SiteLinkLookup $siteLinkLookup, $clientSiteId ) {
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->clientSiteId = $clientSiteId;
 	}
@@ -55,7 +51,13 @@ class ClientSiteLinkTitleLookup implements EntityTitleLookup {
 			return null;
 		}
 
-		return Title::newFromText( $this->getPageNameForItem( $id ) );
+		$pageName = $this->getPageNameForItem( $id );
+
+		if ( $pageName === null ) {
+			return null;
+		}
+
+		return Title::newFromText( $pageName );
 	}
 
 	/**
@@ -64,7 +66,7 @@ class ClientSiteLinkTitleLookup implements EntityTitleLookup {
 	 * @return string|null
 	 */
 	private function getPageNameForItem( ItemId $id ) {
-		// TODO: Bad, bad interface
+		// TODO: SiteLinkLookup::getLinks does have a bad, bad interface.
 		$siteLinkData = $this->siteLinkLookup->getLinks(
 			[ $id->getNumericId() ],
 			[ $this->clientSiteId ]
@@ -75,18 +77,6 @@ class ClientSiteLinkTitleLookup implements EntityTitleLookup {
 		}
 
 		return $siteLinkData[0][1];
-	}
-
-	/**
-	 * @see EntityTitleLookup::getNamespaceForType
-	 *
-	 * @param string $entityType
-	 *
-	 * @throws BadMethodCallException
-	 * @return int
-	 */
-	public function getNamespaceForType( $entityType ) {
-		throw new BadMethodCallException( 'Undefined in this implementation' );
 	}
 
 }
