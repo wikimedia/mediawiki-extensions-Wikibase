@@ -16,7 +16,7 @@ use Wikimedia\Assert\Assert;
  * @license GPL-2.0+
  * @author Addshore
  */
-class TermIndexSearchInteractor implements TermSearchInteractor {
+class TermIndexSearchInteractor implements ConfigurableTermSearchInteractor {
 
 	/**
 	 * @var TermIndex
