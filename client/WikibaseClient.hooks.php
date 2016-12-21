@@ -419,7 +419,6 @@ final class ClientHooks {
 			$wikibaseClient->getTermBuffer()
 		);
 		$idParser = $wikibaseClient->getEntityIdParser();
-		$title = $context->getTitle();
 
 		$infoActionHookHandler = new InfoActionHookHandler(
 			$namespaceChecker,

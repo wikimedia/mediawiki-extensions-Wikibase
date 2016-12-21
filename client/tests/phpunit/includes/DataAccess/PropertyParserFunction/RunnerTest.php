@@ -272,7 +272,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 	 * @return StatementGroupRendererFactory
 	 */
 	private function getStatementGroupRendererFactory( EntityId $entityId, $propertyLabelOrId, $type ) {
-		$renderer = $this->getRenderer( $entityId, $propertyLabelOrId, $type );
+		$renderer = $this->getRenderer( $entityId, $propertyLabelOrId );
 
 		$rendererFactory = $this->getMockBuilder( StatementGroupRendererFactory::class )
 			->disableOriginalConstructor()

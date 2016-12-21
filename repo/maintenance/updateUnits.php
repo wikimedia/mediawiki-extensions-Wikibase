@@ -27,17 +27,18 @@ require_once __DIR__ . '/SPARQLClient.php';
  */
 class UpdateUnits extends Maintenance {
 
-
 	/** Base URI
 	 * @var string
 	 */
 	private $baseUri;
+
 	/**
 	 * Length of the base URI.
 	 * Helper variable to speed up cutting it out.
 	 * @var int
 	 */
 	private $baseLen;
+
 	/**
 	 * @var SPARQLClient
 	 */
@@ -237,15 +238,6 @@ class UpdateUnits extends Maintenance {
 	}
 
 	/**
-	 * Format units as JSON
-	 * @param $convertUnits
-	 * @return string
-	 */
-	private function formatJSON( $convertUnits ) {
-		return json_encode( $convertUnits, JSON_PRETTY_PRINT );
-	}
-
-	/**
 	 * Get units that are used at least $min times.
 	 * We don't care about units that have been used less than 10 times, for now.
 	 * Only top 200 will be returned (though so far we don't have that many).
@@ -324,19 +316,6 @@ SELECT REDUCED ?unit ?si ?siUnit ?unitLabel ?siUnitLabel WHERE {
 }
 QUERY;
 		return $this->client->query( $unitsQuery );
-	}
-
-	/**
-	 * Format units as CSV
-	 * @param $convertUnits
-	 * @return string
-	 */
-	private function formatCSV( $convertUnits ) {
-		$str = '';
-		foreach ( $convertUnits as $name => $data ) {
-			$str .= "$name,$data[0],$data[1]\n";
-		}
-		return $str;
 	}
 
 	protected function error( $err, $die = 0 ) {

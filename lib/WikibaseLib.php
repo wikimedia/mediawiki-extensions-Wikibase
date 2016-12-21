@@ -54,7 +54,7 @@ if ( ( !defined( 'WIKIBASE_DATAMODEL_VERSION' ) || !defined( 'Diff_VERSION' ) ||
 }
 
 call_user_func( function() {
-	global $wgExtensionCredits, $wgJobClasses, $wgHooks, $wgResourceModules, $wgMessagesDirs;
+	global $wgExtensionCredits, $wgHooks, $wgResourceModules, $wgMessagesDirs;
 
 	$wgExtensionCredits['wikibase'][] = array(
 		'path' => __DIR__,
