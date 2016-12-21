@@ -16,6 +16,24 @@
       "revId": "66184aabe23ea61289d3ddf6676bd5648bc180a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_43d30a31",
+        "filename": "repo/includes/Store/EntityTitleStoreLookup.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-21T15:31:14Z",
+      "side": 1,
+      "message": "I\u0027m just killing this in the next patch.",
+      "parentUuid": "0e0e73b5_831c626b",
+      "revId": "66184aabe23ea61289d3ddf6676bd5648bc180a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
