@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\UpdateRepo;
 
 use Site;
-use SiteStore;
+use SiteLookup;
 use Status;
 use Title;
 use User;
@@ -56,21 +56,21 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 	/**
 	 * @param string $normalizedPageName
 	 *
-	 * @return SiteStore
+	 * @return SiteLookup
 	 */
-	private function getSiteStore( $normalizedPageName ) {
+	private function getSiteLookup( $normalizedPageName ) {
 		$enwiki = $this->getMock( Site::class );
 		$enwiki->expects( $this->any() )
 			->method( 'normalizePageName' )
 			->will( $this->returnValue( $normalizedPageName ) );
 
-		$siteStore = $this->getMock( SiteStore::class );
-		$siteStore->expects( $this->any() )
+		$siteLookup = $this->getMock( SiteLookup::class );
+		$siteLookup->expects( $this->any() )
 			->method( 'getSite' )
 			->with( 'enwiki' )
 			->will( $this->returnValue( $enwiki ) );
 
-		return $siteStore;
+		return $siteLookup;
 	}
 
 	/**
@@ -166,7 +166,7 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 			$mockRepository,
 			$mockRepository,
 			$this->getSummaryFormatter(),
-			$this->getSiteStore( $normalizedPageName ),
+			$this->getSiteLookup( $normalizedPageName ),
 			new EditEntityFactory(
 				$this->getEntityTitleLookup( $item->getId() ),
 				$mockRepository,

@@ -91,7 +91,7 @@ class EditEntityAction extends ViewEntityAction {
 				),
 				$languageCode
 			),
-			$wikibaseRepo->getSiteStore(),
+			$wikibaseRepo->getSiteLookup(),
 			$entityIdFormatter
 		);
 	}

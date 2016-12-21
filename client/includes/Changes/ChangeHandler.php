@@ -6,7 +6,7 @@ use Exception;
 use Hooks;
 use InvalidArgumentException;
 use MWException;
-use SiteStore;
+use SiteLookup;
 use Title;
 use Wikibase\Change;
 use Wikibase\Client\Store\TitleFactory;
@@ -72,9 +72,9 @@ class ChangeHandler {
 	private $changeListTransformer;
 
 	/**
-	 * @var SiteStore
+	 * @var SiteLookup
 	 */
-	private $siteStore;
+	private $siteLookup;
 
 	/**
 	 * @var string
@@ -91,7 +91,7 @@ class ChangeHandler {
 	 * @param TitleFactory $titleFactory
 	 * @param PageUpdater $updater
 	 * @param ChangeListTransformer $changeListTransformer
-	 * @param SiteStore $siteStore
+	 * @param SiteLookup $siteLookup
 	 * @param string $repoId
 	 * @param bool $injectRecentChanges
 	 *
@@ -102,7 +102,7 @@ class ChangeHandler {
 		TitleFactory $titleFactory,
 		PageUpdater $updater,
 		ChangeListTransformer $changeListTransformer,
-		SiteStore $siteStore,
+		SiteLookup $siteLookup,
 		$repoId,
 		$injectRecentChanges = true
 	) {
@@ -114,7 +114,7 @@ class ChangeHandler {
 		$this->titleFactory = $titleFactory;
 		$this->updater = $updater;
 		$this->changeListTransformer = $changeListTransformer;
-		$this->siteStore = $siteStore;
+		$this->siteLookup = $siteLookup;
 		$this->repoId = $repoId;
 		$this->injectRecentChanges = $injectRecentChanges;
 	}

@@ -3,7 +3,7 @@
 namespace Wikibase\Client;
 
 use Site;
-use SiteStore;
+use SiteLookup;
 
 /**
  * Generates a list of sites that should be displayed in the "Other projects" sidebar.
@@ -17,9 +17,9 @@ use SiteStore;
 class OtherProjectsSitesGenerator implements OtherProjectsSitesProvider {
 
 	/**
-	 * @var SiteStore
+	 * @var SiteLookup
 	 */
-	private $siteStore;
+	private $siteLookup;
 
 	/**
 	 * @var string
@@ -32,12 +32,12 @@ class OtherProjectsSitesGenerator implements OtherProjectsSitesProvider {
 	private $specialSiteGroups;
 
 	/**
-	 * @param SiteStore $siteStore
+	 * @param SiteLookup $siteLookup
 	 * @param string $localSiteId
 	 * @param string[] $specialSiteGroups
 	 */
-	public function __construct( SiteStore $siteStore, $localSiteId, array $specialSiteGroups ) {
-		$this->siteStore = $siteStore;
+	public function __construct( SiteLookup $siteLookup, $localSiteId, array $specialSiteGroups ) {
+		$this->siteLookup = $siteLookup;
 		$this->localSiteId = $localSiteId;
 		$this->specialSiteGroups = $specialSiteGroups;
 	}
@@ -86,7 +86,7 @@ class OtherProjectsSitesGenerator implements OtherProjectsSitesProvider {
 	 * @return Site|null
 	 */
 	private function getSiteForGroup( $groupId, $currentLanguageCode ) {
-		$siteGroupList = $this->siteStore->getSites()->getGroup( $groupId );
+		$siteGroupList = $this->siteLookup->getSites()->getGroup( $groupId );
 		if ( $siteGroupList->count() === 1 ) {
 			return $siteGroupList[0];
 		}
@@ -117,7 +117,7 @@ class OtherProjectsSitesGenerator implements OtherProjectsSitesProvider {
 	 * @return Site
 	 */
 	private function getLocalSite() {
-		return $this->siteStore->getSite( $this->localSiteId );
+		return $this->siteLookup->getSite( $this->localSiteId );
 	}
 
 }

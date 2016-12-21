@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Sites;
 
 use Site;
-use SiteStore;
+use SiteLookup;
 
 /**
  * Builds the site identifiers table
@@ -17,7 +17,7 @@ use SiteStore;
 class SitesBuilder {
 
 	/**
-	 * @var SiteStore
+	 * @var SiteLookup
 	 */
 	private $store;
 
@@ -27,10 +27,10 @@ class SitesBuilder {
 	private $validGroups;
 
 	/**
-	 * @param SiteStore $store
+	 * @param SiteLookup $store
 	 * @param string[] $validGroups
 	 */
-	public function __construct( SiteStore $store, array $validGroups ) {
+	public function __construct( SiteLookup $store, array $validGroups ) {
 		$this->store = $store;
 		$this->validGroups = $validGroups;
 	}

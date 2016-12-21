@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Specials;
 use FauxResponse;
 use InvalidArgumentException;
 use Site;
-use SiteStore;
+use SiteLookup;
 use SpecialPageTestBase;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
@@ -50,10 +50,10 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	}
 
 	/**
-	 * @return SiteStore
+	 * @return SiteLookup
 	 */
-	private function getMockSiteStore() {
-		$mock = $this->getMock( SiteStore::class );
+	private function getMockSiteLookup() {
+		$mock = $this->getMock( SiteLookup::class );
 		$mock->expects( $this->any() )
 			->method( 'getSite' )
 			->will( $this->returnCallback( function( $siteId ) {
@@ -129,7 +129,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 		$page = new SpecialGoToLinkedPage();
 
 		$page->initServices(
-			$this->getMockSiteStore(),
+			$this->getMockSiteLookup(),
 			$this->getMockSiteLinkLookup(),
 			$this->getEntityRedirectLookup(),
 			$this->getEntityIdParser(),

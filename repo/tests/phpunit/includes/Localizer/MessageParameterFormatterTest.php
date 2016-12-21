@@ -7,7 +7,7 @@ use DataValues\DecimalValue;
 use Language;
 use PHPUnit_Framework_TestCase;
 use Site;
-use SiteStore;
+use SiteLookup;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -97,14 +97,14 @@ class MessageParameterFormatterTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return SiteStore
+	 * @return SiteLookup
 	 */
 	private function getMockSitesTable() {
 		$acme = new Site();
 		$acme->setGlobalId( 'acme' );
 		$acme->setLinkPath( "http://acme.com/$1" );
 
-		$mock = $this->getMock( SiteStore::class );
+		$mock = $this->getMock( SiteLookup::class );
 		$mock->expects( $this->any() )
 			->method( 'getSite' )
 			->will( $this->returnValueMap( [
