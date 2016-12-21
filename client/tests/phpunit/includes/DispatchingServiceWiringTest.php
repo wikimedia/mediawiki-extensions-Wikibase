@@ -10,6 +10,7 @@ use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
+use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 
@@ -42,7 +43,12 @@ class DispatchingServiceWiringTest extends \PHPUnit_Framework_TestCase {
 	 * @return DispatchingServiceFactory
 	 */
 	private function getDispatchingServiceFactory() {
-		$factory = new DispatchingServiceFactory( $this->getRepositoryServiceContainerFactory(), [ '' ] );
+		$factory = new DispatchingServiceFactory(
+			$this->getRepositoryServiceContainerFactory(),
+			[ '' ],
+			[]
+		);
+
 		$factory->loadWiringFiles( [ __DIR__ . '/../../../includes/DispatchingServiceWiring.php' ] );
 		return $factory;
 	}
@@ -53,6 +59,7 @@ class DispatchingServiceWiringTest extends \PHPUnit_Framework_TestCase {
 			[ 'EntityRevisionLookup', EntityRevisionLookup::class ],
 			[ 'PropertyInfoLookup', PropertyInfoLookup::class ],
 			[ 'TermBuffer', TermBuffer::class ],
+			[ 'TermSearchInteractorFactory', TermSearchInteractorFactory::class ],
 		];
 	}
 
@@ -71,7 +78,13 @@ class DispatchingServiceWiringTest extends \PHPUnit_Framework_TestCase {
 		$factory = $this->getDispatchingServiceFactory();
 
 		$this->assertEquals(
-			[ 'EntityPrefetcher', 'EntityRevisionLookup', 'PropertyInfoLookup', 'TermBuffer' ],
+			[
+				'EntityPrefetcher',
+				'EntityRevisionLookup',
+				'PropertyInfoLookup',
+				'TermBuffer',
+				'TermSearchInteractorFactory',
+			],
 			$factory->getServiceNames()
 		);
 	}
