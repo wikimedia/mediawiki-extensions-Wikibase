@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_4e8691bf",
+        "filename": "repo/resources/wikibase.special/wikibase.special.languageLabelDescriptionAliases.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-12-21T18:11:35Z",
+      "side": 1,
+      "message": "Not sure if I understand this line",
+      "revId": "8ffe77c8aa734d8cc21a2eab733d9e088e87138d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
