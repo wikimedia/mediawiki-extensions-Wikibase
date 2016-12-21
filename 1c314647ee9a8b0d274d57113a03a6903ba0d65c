@@ -16,6 +16,24 @@
       "revId": "1c314647ee9a8b0d274d57113a03a6903ba0d65c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_a3aac680",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-21T15:36:57Z",
+      "side": 0,
+      "message": "We killed ArticlePlaceholder anyway by renaming this. I did not noticed because my ArticlePlaceholder brunch was not up to date. :-( Removing this does not do additional harm.",
+      "parentUuid": "0e0e73b5_8816c158",
+      "revId": "1c314647ee9a8b0d274d57113a03a6903ba0d65c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
