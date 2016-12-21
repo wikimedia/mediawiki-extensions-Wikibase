@@ -133,6 +133,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_031752f3",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-21T15:58:41Z",
+      "side": 1,
+      "message": "Used in tests also",
+      "parentUuid": "0e0e73b5_a8bd0565",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_48ad692d",
         "filename": "repo/includes/Specials/SpecialNewItem.php",
         "patchSetId": 7
@@ -144,6 +162,24 @@
       "writtenOn": "2016-12-21T14:27:06Z",
       "side": 1,
       "message": "Why the conditional? If $siteStore  is null, $this-\u003esiteStore should also be null, right?",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_c3bedad0",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-21T15:58:41Z",
+      "side": 1,
+      "message": "Made this to simplify injection for testing. Otherwise had to use \n`\\Wikibase\\Repo\\Specials\\SpecialWikibaseRepoPage::setSpecialWikibaseRepoPageServices( SummaryFormatter $summaryFormatter, EntityTitleLookup $entityTitleLookup, SiteStore $siteStore, EditEntityFactory $editEntityFactory )`.\n\nCondition and optional `null` will be removed when I\u0027ll make proper injection in `Wikibase/repo/Wikibase.php`",
+      "parentUuid": "0e0e73b5_48ad692d",
       "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -167,6 +203,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_e3131e04",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-21T15:58:41Z",
+      "side": 1,
+      "message": "It\u0027s declared in SpecialWikibaseRepoPage",
+      "parentUuid": "0e0e73b5_28aa3517",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_e8a3fd3d",
         "filename": "repo/includes/Specials/SpecialNewItem.php",
         "patchSetId": 7
@@ -178,6 +232,24 @@
       "writtenOn": "2016-12-21T14:27:06Z",
       "side": 1,
       "message": "In a later patch, this should be changed to use ChangeOps.",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_83b8e2e3",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-21T15:58:41Z",
+      "side": 1,
+      "message": "What is \"ChangeOps\"?",
+      "parentUuid": "0e0e73b5_e8a3fd3d",
       "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -292,6 +364,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_e3a0be9c",
+        "filename": "repo/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-21T15:58:41Z",
+      "side": 1,
+      "message": "Strange... Shouldn\u0027t Jenkins check this? It says success.",
+      "parentUuid": "0e0e73b5_6876edd6",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_287915c4",
         "filename": "repo/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php",
         "patchSetId": 7
@@ -303,6 +393,24 @@
       "writtenOn": "2016-12-21T14:27:06Z",
       "side": 1,
       "message": "Perhaps just re-throw $exception?",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_e3779e33",
+        "filename": "repo/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-21T15:58:41Z",
+      "side": 1,
+      "message": "That was my first idea, but which one of two? I think it makes more sense to display message related to what method called.",
+      "parentUuid": "0e0e73b5_287915c4",
       "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -332,6 +440,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_a3de4612",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewItemTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-21T15:58:41Z",
+      "side": 1,
+      "message": "Agree that it looks suspicious, but if we add expected item creation to the data provider it will clutter it.",
+      "parentUuid": "0e0e73b5_a3a40605",
+      "range": {
+        "startLine": 257,
+        "startChar": 4,
+        "endLine": 257,
+        "endChar": 8
+      },
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_439b0ac2",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialNewPropertyTest.php",
         "patchSetId": 7
@@ -343,6 +475,24 @@
       "writtenOn": "2016-12-21T15:12:32Z",
       "side": 1,
       "message": "Similar to Daniel, I\u0027m not sure if these constants are worth it. I feel they are making code like this much harder to read.",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_03251203",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewPropertyTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-21T15:58:41Z",
+      "side": 1,
+      "message": "Next, I want to move all code related to form creation/manipulation to separate `CreateNew(Property|Item)Form` classes, which will describe the forms\u0027 structure.\n I\u0027ve decided to extract constants now to make it easier later.\n \n Also, I don\u0027t like meaningful strings in the code. In this case, I agree, it\u0027s pretty easy to understand what is what, but still hard to change input\u0027s name, for example.",
+      "parentUuid": "0e0e73b5_439b0ac2",
       "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
