@@ -22,7 +22,11 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 	private function getDispatchingServiceFactory() {
 		$client = WikibaseClient::getDefaultInstance();
 		$settings = $client->getSettings();
-		$settings->setSetting( 'foreignRepositories', [ 'foo' => [ 'repoDatabase' => 'foowiki' ] ] );
+		$settings->setSetting( 'repoNamespaces', [ 'property' => 'Property' ] );
+		$settings->setSetting(
+			'foreignRepositories',
+			[ 'foo' => [ 'repoDatabase' => 'foowiki', 'supportedEntityTypes' => [ 'item' ] ] ]
+		);
 
 		$factory = new DispatchingServiceFactory( $client );
 
@@ -31,6 +35,18 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 		} );
 
 		return $factory;
+	}
+
+	public function testGetEntityTypeToRepoMapping() {
+		$factory = $this->getDispatchingServiceFactory();
+
+		$this->assertEquals(
+			[
+				'item' => 'foo',
+				'property' => '',
+			],
+			$factory->getEntityTypeToRepoMapping()
+		);
 	}
 
 	public function testGetServiceNames() {
