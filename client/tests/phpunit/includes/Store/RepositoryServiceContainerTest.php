@@ -4,7 +4,6 @@ namespace Wikibase\Client\Tests\Store;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use HashSiteStore;
-use Language;
 use stdClass;
 use Wikibase\Client\Store\RepositoryServiceContainer;
 use Wikibase\Client\WikibaseClient;

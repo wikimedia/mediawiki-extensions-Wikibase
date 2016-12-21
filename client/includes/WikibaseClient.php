@@ -373,7 +373,8 @@ final class WikibaseClient {
 				array_merge(
 					[ '' ],
 					array_keys( $this->getSettings()->getSetting( 'foreignRepositories' ) )
-				)
+				),
+				$this->buildEntityTypeToRepoMapping()
 			);
 			$factory->loadWiringFiles( $this->settings->getSetting( 'dispatchingServiceWiringFiles' ) );
 
@@ -437,6 +438,27 @@ final class WikibaseClient {
 	}
 
 	/**
+	 * @return string[] Associative array mapping entity type names to repository names which are used to provide
+	 *         entities of the given type.
+	 *         Note: currently single entity type is mapped to a single repository. This might change in the future
+	 *         and a particular entity type might be provide by multitple repositories.
+	 */
+	private function buildEntityTypeToRepoMapping() {
+		$localRepoEntityTypes = array_keys( $this->getSettings()->getSetting( 'repoNamespaces' ) );
+		$entityTypeToRepoMap = array_fill_keys( $localRepoEntityTypes, '' );
+		foreach ( $this->getSettings()->getSetting( 'foreignRepositories' ) as $repositoryName => $repoSettings ) {
+			foreach ( $repoSettings['supportedEntityTypes'] as $entityType ) {
+				if ( array_key_exists( $entityType, $entityTypeToRepoMap ) ) {
+					wfWarn( 'Using same entity types on multiple repositories is not supported yet.' );
+					continue;
+				}
+				$entityTypeToRepoMap[$entityType] = $repositoryName;
+			}
+		}
+		return $entityTypeToRepoMap;
+	}
+
+	/**
 	 * @return EntityLookup
 	 */
 	private function getEntityLookup() {
@@ -476,12 +498,8 @@ final class WikibaseClient {
 	 * @return TermIndexSearchInteractor
 	 */
 	public function newTermSearchInteractor( $displayLanguageCode ) {
-		return new TermIndexSearchInteractor(
-			$this->getStore()->getTermIndex(),
-			$this->getLanguageFallbackChainFactory(),
-			$this->getPrefetchingTermLookup(),
-			$displayLanguageCode
-		);
+		return $this->getEntityDataRetrievalServiceFactory()->getTermSearchInteractorFactory()
+			->newInteractor( $displayLanguageCode );
 	}
 
 	/**

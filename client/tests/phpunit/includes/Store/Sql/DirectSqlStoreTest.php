@@ -49,7 +49,7 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$dispatchingServiceFactory = new DispatchingServiceFactory( $containerFactory, [] );
+		$dispatchingServiceFactory = new DispatchingServiceFactory( $containerFactory, [ '' ], [] );
 
 		$dispatchingServiceFactory->defineService( 'EntityRevisionLookup', function() {
 			return $this->getMock( EntityRevisionLookup::class );
