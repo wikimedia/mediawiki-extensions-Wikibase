@@ -223,15 +223,15 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	 * @return SiteLookup
 	 */
 	private function getSiteLookup() {
-		$siteLookup = new HashSiteStore();
+		$siteStore = new HashSiteStore();
 
 		$site = new Site();
 		$site->setGlobalId( 'enwiki' );
 		$site->setGroup( 'wikipedia' );
 
-		$siteLookup->saveSite( $site );
+		$siteStore->saveSite( $site );
 
-		return $siteLookup;
+		return $siteStore;
 	}
 
 	public function getSiteGroupProvider() {
@@ -264,11 +264,6 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	public function testGetLanguageLinkBadgeDisplay() {
 		$returnValue = $this->getWikibaseClient()->getLanguageLinkBadgeDisplay();
 		$this->assertInstanceOf( LanguageLinkBadgeDisplay::class, $returnValue );
-	}
-
-	public function testGetSiteLookup() {
-		$store = $this->getWikibaseClient()->getSiteLookup();
-		$this->assertInstanceOf( SiteLookup::class, $store );
 	}
 
 	public function testGetOtherProjectsSidebarGeneratorFactoryReturnType() {

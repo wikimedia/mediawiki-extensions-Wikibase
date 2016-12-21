@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests;
 
 use HashSiteStore;
 use Site;
+use SiteLookup;
 use Wikibase\Client\OtherProjectsSitesGenerator;
 
 /**
@@ -25,9 +26,16 @@ class OtherProjectsSitesGeneratorTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider otherProjectSitesProvider
 	 */
-	public function testOtherProjectSiteIds( array $supportedSites, $localSiteId, array $expectedSiteIds ) {
-		$siteStore = $this->getSiteLookupMock();
-		$otherProjectsSitesProvider = new OtherProjectsSitesGenerator( $siteStore, $localSiteId, array( 'wikidata' ) );
+	public function testOtherProjectSiteIds(
+		array $supportedSites,
+		$localSiteId,
+		array $expectedSiteIds
+	) {
+		$otherProjectsSitesProvider = new OtherProjectsSitesGenerator(
+			$this->getSiteLookupMock(),
+			$localSiteId,
+			[ 'wikidata' ]
+		);
 
 		$this->assertEquals(
 			$expectedSiteIds,
@@ -36,65 +44,64 @@ class OtherProjectsSitesGeneratorTest extends \MediaWikiTestCase {
 	}
 
 	public function otherProjectSitesProvider() {
-		$tests = array();
-
-		$tests['Same language'] = array(
-			array( 'wikipedia', 'wikisource' ),
-			'frwikisource',
-			array( 'frwiki' )
-		);
-
-		$tests['Same language + only one in group'] = array(
-			array( 'wikipedia', 'wikisource', 'commons' ),
-			'frwikisource',
-			array( 'frwiki', 'commonswiki' )
-		);
-
-		$tests['Only one in group'] = array(
-			array( 'wikipedia', 'wikisource', 'commons' ),
-			'eswiki',
-			array( 'commonswiki' )
-		);
-
-		$tests['Special group'] = array(
-			array( 'wikipedia', 'wikisource', 'special' ),
-			'eswiki',
-			array( 'wikidatawiki' )
-		);
-
-		$tests['Special group + language'] = array(
-			array( 'wikipedia', 'wikisource', 'special' ),
-			'frwiki',
-			array( 'frwikisource', 'wikidatawiki' )
-		);
-
-		$tests['No other sites'] = array(
-			array( 'wikipedia', 'wikisource' ),
-			'eswiki',
-			array()
-		);
-
-		return $tests;
+		return [
+			'Same language' => [
+				[ 'wikipedia', 'wikisource' ],
+				'frwikisource',
+				[ 'frwiki' ]
+			],
+			'Same language + only one in group' => [
+				[ 'wikipedia', 'wikisource', 'commons' ],
+				'frwikisource',
+				[ 'frwiki', 'commonswiki' ]
+			],
+			'Only one in group' => [
+				[ 'wikipedia', 'wikisource', 'commons' ],
+				'eswiki',
+				[ 'commonswiki' ]
+			],
+			'Special group' => [
+				[ 'wikipedia', 'wikisource', 'special' ],
+				'eswiki',
+				[ 'wikidatawiki' ]
+			],
+			'Special group + language' => [
+				[ 'wikipedia', 'wikisource', 'special' ],
+				'frwiki',
+				[ 'frwikisource', 'wikidatawiki' ]
+			],
+			'No other sites' => [
+				[ 'wikipedia', 'wikisource' ],
+				'eswiki',
+				[]
+			],
+		];
 	}
 
 	public function testOtherProjectSiteIds_unknownSite() {
-		$siteStore = $this->getSiteLookupMock();
-		$otherProjectsSitesProvider = new OtherProjectsSitesGenerator( $siteStore, 'kittenswiki', array( 'wikidata' ) );
+		$otherProjectsSitesProvider = new OtherProjectsSitesGenerator(
+			$this->getSiteLookupMock(),
+			'kittenswiki',
+			[ 'wikidata' ]
+		);
 
 		// getOtherProjectsSiteIds does wfWarn in case it's being called with a siteid
 		// it doesn't know about. That's fine, we can just ignore that.
 		\MediaWiki\suppressWarnings();
-		$result = $otherProjectsSitesProvider->getOtherProjectsSiteIds( array( 'wikipedia', 'wikisource' ) );
+		$result = $otherProjectsSitesProvider->getOtherProjectsSiteIds( [
+			'wikipedia',
+			'wikisource',
+		] );
 		\MediaWiki\restoreWarnings();
 
-		$this->assertSame( array(), $result );
+		$this->assertSame( [], $result );
 	}
 
 	/**
-	 * @return HashSiteStore
+	 * @return SiteLookup
 	 */
 	private function getSiteLookupMock() {
-		$sites = array();
+		$sites = [];
 
 		$site = new Site();
 		$site->setGlobalId( 'foo' );
