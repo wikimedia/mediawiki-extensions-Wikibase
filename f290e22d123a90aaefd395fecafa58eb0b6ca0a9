@@ -52,6 +52,24 @@
       "revId": "f290e22d123a90aaefd395fecafa58eb0b6ca0a9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_4348aa32",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1841,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-12-21T15:14:12Z",
+      "side": 1,
+      "message": "Oh, I\u0027m sorry. I moved files but I forgot to move this one. Added now.",
+      "parentUuid": "0e0e73b5_03be3213",
+      "revId": "f290e22d123a90aaefd395fecafa58eb0b6ca0a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
