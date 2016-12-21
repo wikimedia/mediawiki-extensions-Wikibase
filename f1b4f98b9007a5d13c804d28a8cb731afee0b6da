@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_5dd3ed30",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-21T10:44:02Z",
+      "side": 1,
+      "message": "As I understood field is unused",
+      "range": {
+        "startLine": 77,
+        "startChar": 1,
+        "endLine": 77,
+        "endChar": 21
+      },
+      "revId": "f1b4f98b9007a5d13c804d28a8cb731afee0b6da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
