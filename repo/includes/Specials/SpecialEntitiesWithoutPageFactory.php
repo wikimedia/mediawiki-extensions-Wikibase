@@ -23,7 +23,7 @@ class SpecialEntitiesWithoutPageFactory {
 
 		return new self(
 			$wikibaseRepo->getStore()->newEntitiesWithoutTermFinder(),
-			$wikibaseRepo->getEnabledEntityTypes(),
+			$wikibaseRepo->getLocalEntityTypes(),
 			$wikibaseRepo->getTermsLanguages(),
 			new LanguageNameLookup()
 		);
