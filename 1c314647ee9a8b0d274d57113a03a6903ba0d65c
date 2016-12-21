@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_8816c158",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-21T14:36:34Z",
+      "side": 0,
+      "message": "This is still used in ArticlePlaceholder. I don\u0027t see a pressing need to remove this getter.",
+      "revId": "1c314647ee9a8b0d274d57113a03a6903ba0d65c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
