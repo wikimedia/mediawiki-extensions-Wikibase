@@ -34,6 +34,29 @@
       "revId": "27156f8f0b6f3e0dd4411d44315980af26c9d14c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_c316daab",
+        "filename": "client/includes/Store/Sql/DirectSqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-21T15:55:29Z",
+      "side": 1,
+      "message": "This variable name is not 100% correct any more.",
+      "range": {
+        "startLine": 440,
+        "startChar": 3,
+        "endLine": 440,
+        "endChar": 21
+      },
+      "revId": "27156f8f0b6f3e0dd4411d44315980af26c9d14c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
