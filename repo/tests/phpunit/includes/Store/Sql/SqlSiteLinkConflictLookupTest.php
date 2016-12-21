@@ -52,12 +52,12 @@ class SqlSiteLinkConflictLookupTest extends \MediaWikiTestCase {
 		$expected = array(
 			array(
 				'siteId' => 'enwiki',
-				'itemId' => 9,
+				'itemId' => new ItemId( 'Q9' ),
 				'sitePage' => 'Kitten'
 			)
 		);
 
-		$this->assertSame(
+		$this->assertEquals(
 			$expected,
 			$siteLinkConflictLookup->getConflictsForItem( $this->getItem( 'Kitten' ) )
 		);

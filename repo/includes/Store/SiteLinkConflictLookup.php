@@ -20,11 +20,11 @@ interface SiteLinkConflictLookup {
 	 * currently in the store. The array is empty if there are no such conflicts.
 	 *
 	 * The items in the return array are arrays with the following elements:
-	 * - int itemId Numeric (unprefixed) item id
+	 * - ItemId itemId
 	 * - string siteId
 	 * - string sitePage
 	 *
-	 * @since 0.1
+	 * @since 0.5
 	 *
 	 * @param Item          $item
 	 * @param Database|null $db The database object to use (optional).
@@ -33,7 +33,7 @@ interface SiteLinkConflictLookup {
 	 *        also be used for saving. This will preserve transactional integrity
 	 *        and avoid race conditions.
 	 *
-	 * @return array[]
+	 * @return array[] An array of arrays, each with the keys "siteId", "itemId" and "sitePage".
 	 */
 	public function getConflictsForItem( Item $item, Database $db = null );
 

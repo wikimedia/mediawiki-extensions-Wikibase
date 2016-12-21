@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Store\Sql;
 use Database;
 use DBAccessBase;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 
@@ -24,13 +25,13 @@ class SqlSiteLinkConflictLookup extends DBAccessBase implements SiteLinkConflict
 	 * @param Item $item
 	 * @param Database|null $db
 	 *
-	 * @return array[]
+	 * @return array[] An array of arrays, each with the keys "siteId", "itemId" and "sitePage".
 	 */
 	public function getConflictsForItem( Item $item, Database $db = null ) {
 		$siteLinks = $item->getSiteLinkList();
 
 		if ( $siteLinks->isEmpty() ) {
-			return array();
+			return [];
 		}
 
 		if ( $db ) {
@@ -60,23 +61,23 @@ class SqlSiteLinkConflictLookup extends DBAccessBase implements SiteLinkConflict
 
 		$conflictingLinks = $dbr->select(
 			'wb_items_per_site',
-			array(
+			[
 				'ips_site_id',
 				'ips_site_page',
 				'ips_item_id',
-			),
+			],
 			"($anyOfTheLinks) AND ips_item_id != " . (int)$item->getId()->getNumericId(),
 			__METHOD__
 		);
 
-		$conflicts = array();
+		$conflicts = [];
 
 		foreach ( $conflictingLinks as $link ) {
-			$conflicts[] = array(
+			$conflicts[] = [
 				'siteId' => $link->ips_site_id,
-				'itemId' => (int)$link->ips_item_id,
+				'itemId' => ItemId::newFromNumber( $link->ips_item_id ),
 				'sitePage' => $link->ips_site_page,
-			);
+			];
 		}
 
 		if ( !$db ) {
