@@ -624,4 +624,17 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		$this->assertEquals( $expectedSiteLinks, $res['entities'][$id]['sitelinks'] );
 	}
 
+	public function testGivenEntityIdFromUnknownRepository_getEntitiesMarksEntityAsMissing() {
+		$id = 'FOOOOO:Q123';
+		$result = $this->doApiRequest( [ 'action' => 'wbgetentities', 'ids' => $id ] );
+
+		$this->assertEquals(
+			[
+				'id' => $id,
+				'missing' => '',
+			],
+			$result[0]['entities'][$id]
+		);
+	}
+
 }
