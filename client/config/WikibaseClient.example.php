@@ -19,7 +19,8 @@ if ( !defined( 'WBC_VERSION' ) ) {
 }
 
 // The global site ID by which this wiki is known on the repo.
-$wgWBClientSettings['siteGlobalID'] = "mywiki";
+// Defaults to $wgDBname.
+// $wgWBClientSettings['siteGlobalID'] = "mywiki";
 
 $wgWBClientSettings['injectRecentChanges'] = true;
 $wgWBClientSettings['showExternalRecentChanges'] = true;
