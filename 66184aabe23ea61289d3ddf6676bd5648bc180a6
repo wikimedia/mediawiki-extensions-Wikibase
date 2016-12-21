@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_831c626b",
+        "filename": "repo/includes/Store/EntityTitleStoreLookup.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-21T14:47:30Z",
+      "side": 1,
+      "message": "Should be moved into a separate interface.\nBut that\u0027s for another patch, I guess.",
+      "revId": "66184aabe23ea61289d3ddf6676bd5648bc180a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
