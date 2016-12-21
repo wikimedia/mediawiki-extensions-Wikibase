@@ -51,7 +51,12 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 
 		$entityNamespaceLookup = new EntityNamespaceLookup( [] );
 
-		$dispatchingServiceFactory = new DispatchingServiceFactory( $client );
+		$dispatchingServiceFactory = new DispatchingServiceFactory(
+			$client,
+			$client->getSettings()->getSetting( 'repoDatabase' ),
+			$client->getSettings()->getSetting( 'repoNamespaces' ),
+			$client->getSettings()->getSetting( 'foreignRepositories' )
+		);
 		$dispatchingServiceFactory->defineService( 'EntityRevisionLookup', function() {
 			return $this->getMock( EntityRevisionLookup::class );
 		} );

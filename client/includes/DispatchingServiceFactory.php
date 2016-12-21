@@ -4,12 +4,14 @@ namespace Wikibase\Client;
 
 use MediaWiki\Services\ServiceContainer;
 use Wikibase\Client\Store\RepositoryServiceContainer;
+use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Term\TermBuffer;
+use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
-use Wikibase\SettingsArray;
+use Wikimedia\Assert\Assert;
 
 /**
  * A factory/locator of services dispatching the action to services configured for the
@@ -28,6 +30,21 @@ class DispatchingServiceFactory extends ServiceContainer {
 	private $repositoryServiceContainers = [];
 
 	/**
+	 * @var string|false
+	 */
+	private $localRepositoryDatabase;
+
+	/**
+	 * @var string[]
+	 */
+	private $localRepositoryNamespaces;
+
+	/**
+	 * @var array
+	 */
+	private $foreignRepositorySettings;
+
+	/**
 	 * FIXME: injecting of the top-level factory (WikibaseClient) here is only a temporary solution.
 	 * This class uses top-level factory to access settings and several services provided by the top-level
 	 * factory. Also, the instance of the top-level factory is being passed to instantiators of services
@@ -41,9 +58,38 @@ class DispatchingServiceFactory extends ServiceContainer {
 	 * whole top-level factory.
 	 *
 	 * @param WikibaseClient $client
+	 * @param string|false $localRepositoryDatabase
+	 * @param string[] $localRepositoryNamespaces Associative array mapping entity type names to namespace names
+	 * @param array $foreignRepositorySettings Associative array mapping repository names to repository-specific settings,
+	 *        see description of the 'foreignRepositories' client setting in docs/options.wiki.
 	 */
-	public function __construct( WikibaseClient $client ) {
+	public function __construct(
+		WikibaseClient $client,
+		$localRepositoryDatabase,
+		array $localRepositoryNamespaces,
+		array $foreignRepositorySettings
+	) {
+		Assert::parameter(
+			$localRepositoryDatabase === false || is_string( $localRepositoryDatabase ),
+			'$localRepositoryDatabase',
+			'must be either string or false'
+		);
+		Assert::parameterElementType( 'string', $localRepositoryNamespaces, '$localRepositoryNamespaces' );
+		Assert::parameterElementType(
+			'string',
+			array_keys( $localRepositoryNamespaces ),
+			'array_keys( $localRepositoryNamespaces )'
+		);
+		RepositoryNameAssert::assertParameterKeysAreValidRepositoryNames(
+			$foreignRepositorySettings,
+			'$foreignRepositorySettings'
+		);
+
 		parent::__construct();
+
+		$this->localRepositoryDatabase = $localRepositoryDatabase;
+		$this->localRepositoryNamespaces = $localRepositoryNamespaces;
+		$this->foreignRepositorySettings = $foreignRepositorySettings;
 
 		$this->initRepositoryServiceContainers( $client );
 	}
@@ -51,24 +97,27 @@ class DispatchingServiceFactory extends ServiceContainer {
 	private function initRepositoryServiceContainers( WikibaseClient $client ) {
 		$repositoryNames = array_merge(
 			[ '' ],
-			array_keys( $client->getSettings()->getSetting( 'foreignRepositories' ) )
+			array_keys( $this->foreignRepositorySettings )
 		);
 
 		$idParserFactory = new PrefixMappingEntityIdParserFactory(
 			$client->getEntityIdParser(), // TODO: this should be moved to this class; see T153427
-			$this->getIdPrefixMaps( $client->getSettings()->getSetting( 'foreignRepositories' ) )
+			$this->getIdPrefixMaps()
 		);
 		$dataValueDeserializerFactory = new RepositorySpecificDataValueDeserializerFactory( $idParserFactory );
 
 		foreach ( $repositoryNames as $repositoryName ) {
 			$container = new RepositoryServiceContainer(
-				$this->getRepositoryDatabaseName( $repositoryName, $client->getSettings() ),
+				$this->getRepositoryDatabaseName( $repositoryName ),
 				$repositoryName,
 				$idParserFactory->getIdParser( $repositoryName ),
 				$dataValueDeserializerFactory->getDeserializer( $repositoryName ),
 				$client
 			);
-			$container->loadWiringFiles( $client->getSettings()->getSetting( 'repositoryServiceWiringFiles' ) );
+			$container->loadWiringFiles(
+				// TODO: wiring files should not be a Client setting; see: T153437
+				$client->getSettings()->getSetting( 'repositoryServiceWiringFiles' )
+			);
 
 			$this->repositoryServiceContainers[$repositoryName] = $container;
 		}
@@ -77,14 +126,12 @@ class DispatchingServiceFactory extends ServiceContainer {
 	/**
 	 * Returns a map of id prefix mappings defined for configured foreign repositories.
 	 *
-	 * @param array[] $settings Repository definitions mapping repository names to settings,
-	 *
 	 * @return array[] Associative array mapping repository names to repository-specific prefix
 	 *  mapping.
 	 */
-	private function getIdPrefixMaps( array $settings ) {
+	private function getIdPrefixMaps() {
 		$mappings = [];
-		foreach ( $settings as $repositoryName => $repositorySettings ) {
+		foreach ( $this->foreignRepositorySettings as $repositoryName => $repositorySettings ) {
 			if ( array_key_exists( 'prefixMapping', $repositorySettings ) ) {
 				$mappings[$repositoryName] = $repositorySettings['prefixMapping'];
 			}
@@ -94,17 +141,35 @@ class DispatchingServiceFactory extends ServiceContainer {
 
 	/**
 	 * @param string $repositoryName
-	 * @param SettingsArray $settings
 	 *
 	 * @return string|false
 	 */
-	private function getRepositoryDatabaseName( $repositoryName, SettingsArray $settings ) {
+	private function getRepositoryDatabaseName( $repositoryName ) {
 		if ( $repositoryName === '' ) {
-			return $settings->getSetting( 'repoDatabase' );
+			return $this->localRepositoryDatabase;
 		}
 
-		$foreignRepoSettings = $settings->getSetting( 'foreignRepositories' );
-		return $foreignRepoSettings[$repositoryName]['repoDatabase'];
+		return $this->foreignRepositorySettings[$repositoryName]['repoDatabase'];
+	}
+
+	private function buildEntityTypeToRepoMapping() {
+		$localRepoEntityTypes = array_keys( $this->localRepositoryNamespaces );
+		$entityTypeToRepoMap = array_fill_keys( $localRepoEntityTypes, '' );
+		foreach ( $this->foreignRepositorySettings as $repositoryName => $repoSettings ) {
+			foreach ( $repoSettings['supportedEntityTypes'] as $entityType ) {
+				if ( !array_key_exists( $entityType, $entityTypeToRepoMap ) ) {
+					$entityTypeToRepoMap[$entityType] = $repositoryName;
+				}
+			}
+		}
+		return $entityTypeToRepoMap;
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getEntityTypeToRepoMapping() {
+		return $this->buildEntityTypeToRepoMapping();
 	}
 
 	/**
@@ -138,6 +203,13 @@ class DispatchingServiceFactory extends ServiceContainer {
 	 */
 	public function getTermBuffer() {
 		return $this->getService( 'TermBuffer' );
+	}
+
+	/**
+	 * @return TermSearchInteractorFactory
+	 */
+	public function getTermSearchInteractorFactory() {
+		return $this->getService( 'TermSearchInteractorFactory' );
 	}
 
 }
