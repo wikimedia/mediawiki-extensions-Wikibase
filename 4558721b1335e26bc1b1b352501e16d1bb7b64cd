@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_e8f53d4d",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-21T14:27:06Z",
+      "side": 1,
+      "message": "The language codes are only needed in the context of entering terms like labels, descriptions, and aliases. So this information should probably go wherever the other code for terms went.",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_68a02d3f",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-21T14:27:06Z",
+      "side": 1,
+      "message": "This seems to be unused in this class, so it probably should not be here. Can it be moved to wherever the code for labels went?",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_288355af",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-21T14:27:06Z",
+      "side": 1,
+      "message": "This should probably be factored out into a helper object. But that\u0027s for another patch, I guess.",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_c8b83977",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-21T14:27:06Z",
+      "side": 1,
+      "message": "This only makes sense if there are form elements for labels etc on the page.",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_a8bd0565",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-21T14:27:06Z",
+      "side": 1,
+      "message": "For names that are only used inside the class, declaring constants seems overkill. But it doesn\u0027t harm either.",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_48ad692d",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-21T14:27:06Z",
+      "side": 1,
+      "message": "Why the conditional? If $siteStore  is null, $this-\u003esiteStore should also be null, right?",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_28aa3517",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-21T14:27:06Z",
+      "side": 1,
+      "message": "where is the siteStore field declared?",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_e8a3fd3d",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-21T14:27:06Z",
+      "side": 1,
+      "message": "In a later patch, this should be changed to use ChangeOps.",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_6876edd6",
+        "filename": "repo/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-21T14:27:06Z",
+      "side": 1,
+      "message": "please add spaces after [ and before ]",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_287915c4",
+        "filename": "repo/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-21T14:27:06Z",
+      "side": 1,
+      "message": "Perhaps just re-throw $exception?",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
