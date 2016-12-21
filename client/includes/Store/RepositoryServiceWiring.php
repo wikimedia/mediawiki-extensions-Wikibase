@@ -3,12 +3,15 @@
 use Wikibase\Client\Serializer\ForbiddenSerializer;
 use Wikibase\Client\Store\RepositoryServiceContainer;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\Lib\Interactors\TermIndexSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
+use Wikibase\Store\BufferingTermLookup;
+use Wikibase\TermIndex;
 use Wikibase\TermSqlIndex;
 
 /**
@@ -38,6 +41,16 @@ return [
 		);
 	},
 
+	'PrefetchingTermLookup' => function(
+		RepositoryServiceContainer $services,
+		WikibaseClient $client
+	) {
+		/** @var TermIndex $termIndex */
+		$termIndex = $services->getService( 'TermIndex' );
+
+		return new BufferingTermLookup( $termIndex, 1000 ); // TODO: customize buffer sizes
+	},
+
 	'PropertyInfoLookup' => function(
 		RepositoryServiceContainer $services,
 		WikibaseClient $client
@@ -61,6 +74,19 @@ return [
 		);
 	},
 
+	'TermSearchInteractorFactory' => function(
+		RepositoryServiceContainer $services,
+		WikibaseClient $client
+	) {
+		/** @var TermIndex $termIndex */
+		$termIndex = $services->getService( 'TermIndex' );
+		return new TermIndexSearchInteractorFactory(
+			$termIndex,
+			$client->getLanguageFallbackChainFactory(),
+			$services->getService( 'PrefetchingTermLookup' )
+		);
+	},
+
 	'WikiPageEntityMetaDataAccessor' => function(
 		RepositoryServiceContainer $services,
 		WikibaseClient $client
@@ -72,6 +98,6 @@ return [
 				$services->getRepositoryName()
 			)
 		);
-	}
+	},
 
 ];
