@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_e84f7dbe",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-21T14:16:51Z",
+      "side": 1,
+      "message": "The nullable feature is in fact unused. The only caller of self( … ) with this parameter missing is here in this file.",
+      "revId": "1c314647ee9a8b0d274d57113a03a6903ba0d65c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_885ec179",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-21T14:16:51Z",
+      "side": 1,
+      "message": "Looks like this could be inlined everywhere now. Is this worth it?",
+      "revId": "1c314647ee9a8b0d274d57113a03a6903ba0d65c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_88e481a4",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 898,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-21T14:16:51Z",
+      "side": 1,
+      "message": "This could be inlined in the self( … ) call in this file, reducing complexity. No need to delay this call.",
+      "revId": "1c314647ee9a8b0d274d57113a03a6903ba0d65c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_683eed27",
+        "filename": "client/tests/phpunit/includes/OtherProjectsSitesGeneratorTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-21T14:16:51Z",
+      "side": 1,
+      "message": "This needs updating. Will fix in a follow up.",
+      "revId": "1c314647ee9a8b0d274d57113a03a6903ba0d65c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_48d8c9f4",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-21T14:16:51Z",
+      "side": 1,
+      "message": "This is a SiteStore. Will revert later.",
+      "revId": "1c314647ee9a8b0d274d57113a03a6903ba0d65c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_68638d3c",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1171,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-21T14:16:51Z",
+      "side": 1,
+      "message": "Looks like this could be inlined everywhere now. Is this worth it?",
+      "revId": "1c314647ee9a8b0d274d57113a03a6903ba0d65c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
