@@ -29,6 +29,8 @@ class PermissionsHelper {
 			return;
 		}
 
+		$wgUser->addToDatabase();
+
 		if ( is_array( $groups ) ) {
 			$oldGroups = $wgUser->getGroups();
 			foreach ( $oldGroups as $group ) {
