@@ -33,7 +33,7 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
+use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -87,7 +87,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 
 	public function testNewTermSearchInteractor() {
 		$interactor = $this->getWikibaseClient()->newTermSearchInteractor( 'en' );
-		$this->assertInstanceOf( TermIndexSearchInteractor::class, $interactor );
+		$this->assertInstanceOf( TermSearchInteractor::class, $interactor );
 	}
 
 	public function testGetPropertyDataTypeLookupReturnType() {
