@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\ItemContent;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
@@ -39,6 +40,10 @@ class EditFilterHookRunnerTest extends \MediaWikiTestCase {
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest() );
 
+		$namespaceLookup = $this->getMockBuilder( EntityNamespaceLookup::class )
+			->disableOriginalConstructor()
+			->getMock();
+
 		$entityTitleLookup = $this->getMock( EntityTitleStoreLookup::class );
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
@@ -62,6 +67,7 @@ class EditFilterHookRunnerTest extends \MediaWikiTestCase {
 			->will( $this->returnValue( ItemContent::newEmpty() ) );
 
 		return new EditFilterHookRunner(
+			$namespaceLookup,
 			$entityTitleLookup,
 			$entityContentFactory,
 			$context
