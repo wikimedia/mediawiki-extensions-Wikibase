@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_63272e60",
+        "filename": "lib/includes/Store/Sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-21T15:25:03Z",
+      "side": 1,
+      "message": "We do have a native \"finally\" for a while now, I believe.",
+      "revId": "849c2a7e5f74b2c262504a5259984b1aee7adb94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
