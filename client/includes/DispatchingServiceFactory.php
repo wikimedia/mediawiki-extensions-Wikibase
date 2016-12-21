@@ -6,6 +6,7 @@ use MediaWiki\Services\ServiceContainer;
 use Wikibase\Client\Store\RepositoryServiceContainer;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Term\TermBuffer;
+use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -28,6 +29,16 @@ class DispatchingServiceFactory extends ServiceContainer {
 	private $repositoryServiceContainers = [];
 
 	/**
+	 * @var SettingsArray
+	 */
+	private $clientSettings;
+
+	/**
+	 * @var string[]|null
+	 */
+	private $entityTypeToRepoMap = null;
+
+	/**
 	 * FIXME: injecting of the top-level factory (WikibaseClient) here is only a temporary solution.
 	 * This class uses top-level factory to access settings and several services provided by the top-level
 	 * factory. Also, the instance of the top-level factory is being passed to instantiators of services
@@ -44,6 +55,8 @@ class DispatchingServiceFactory extends ServiceContainer {
 	 */
 	public function __construct( WikibaseClient $client ) {
 		parent::__construct();
+
+		$this->clientSettings = $client->getSettings();
 
 		$this->initRepositoryServiceContainers( $client );
 	}
@@ -107,6 +120,29 @@ class DispatchingServiceFactory extends ServiceContainer {
 		return $foreignRepoSettings[$repositoryName]['repoDatabase'];
 	}
 
+	private function initEntityTypeToRepoMapping() {
+		$localRepoEntityTypes = array_keys( $this->clientSettings->getSetting( 'repoNamespaces' ) );
+		$entityTypeToRepoMap = array_fill_keys( $localRepoEntityTypes, '' );
+		foreach ( $this->clientSettings->getSetting( 'foreignRepositories' ) as $repositoryName => $repoSettings ) {
+			foreach ( $repoSettings['supportedEntityTypes'] as $entityType ) {
+				if ( !array_key_exists( $entityType, $entityTypeToRepoMap ) ) {
+					$entityTypeToRepoMap[$entityType] = $repositoryName;
+				}
+			}
+		}
+		return $entityTypeToRepoMap;
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getEntityTypeToRepoMapping() {
+		if ( $this->entityTypeToRepoMap === null ) {
+			$this->entityTypeToRepoMap = $this->initEntityTypeToRepoMapping();
+		}
+		return $this->entityTypeToRepoMap;
+	}
+
 	/**
 	 * @param string $service
 	 * @return array An associative array mapping repository names to service instances configured for the repository
@@ -138,6 +174,13 @@ class DispatchingServiceFactory extends ServiceContainer {
 	 */
 	public function getTermBuffer() {
 		return $this->getService( 'TermBuffer' );
+	}
+
+	/**
+	 * @return TermSearchInteractorFactory
+	 */
+	public function getTermSearchInteractorFactory() {
+		return $this->getService( 'TermSearchInteractorFactory' );
 	}
 
 }
