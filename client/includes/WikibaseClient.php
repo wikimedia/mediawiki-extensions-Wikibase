@@ -377,7 +377,12 @@ final class WikibaseClient {
 	 */
 	public function getDispatchingServiceFactory() {
 		if ( $this->dispatchingServiceFactory === null ) {
-			$factory = new DispatchingServiceFactory( $this );
+			$factory = new DispatchingServiceFactory(
+				$this,
+				$this->getSettings()->getSetting( 'repoDatabase' ),
+				$this->getSettings()->getSetting( 'repoNamespaces' ),
+				$this->getSettings()->getSetting( 'foreignRepositories' )
+			);
 			$factory->loadWiringFiles( $this->settings->getSetting( 'dispatchingServiceWiringFiles' ) );
 
 			$this->dispatchingServiceFactory = $factory;

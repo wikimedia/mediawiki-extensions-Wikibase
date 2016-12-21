@@ -709,6 +709,12 @@ class WikibaseRepo {
 	 * @return TermIndexSearchInteractor
 	 */
 	public function newTermSearchInteractor( $displayLanguageCode ) {
+		if ( $this->dispatchingServiceFactory !== null ) {
+			return $this->dispatchingServiceFactory->getTermSearchInteractorFactory()->getInteractor(
+				$displayLanguageCode
+			);
+		}
+
 		return new TermIndexSearchInteractor(
 			$this->getStore()->getTermIndex(),
 			$this->getLanguageFallbackChainFactory(),
