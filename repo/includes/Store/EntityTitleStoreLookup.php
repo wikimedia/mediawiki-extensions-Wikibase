@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Store;
 
-use OutOfBoundsException;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
@@ -19,17 +18,5 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  * @author Thiemo Mättig
  */
 interface EntityTitleStoreLookup extends EntityTitleLookup {
-
-	/**
-	 * Determines what namespace is suitable for the given type of entities.
-	 *
-	 * @since 0.5
-	 *
-	 * @param string $entityType the entity type to look up, as returned by Entity::getType()
-	 *
-	 * @throws OutOfBoundsException
-	 * @return int the namespace ID for this type
-	 */
-	public function getNamespaceForType( $entityType );
 
 }
