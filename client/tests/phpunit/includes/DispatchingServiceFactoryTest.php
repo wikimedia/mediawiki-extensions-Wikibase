@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
+use Wikimedia\Assert\ParameterAssertionException;
 
 /**
  * @covers Wikibase\Client\DispatchingServiceFactory
@@ -58,17 +59,29 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 	 * @return DispatchingServiceFactory
 	 */
 	private function getDispatchingServiceFactory( RepositoryServiceContainerFactory $containerFactory ) {
-		$client = WikibaseClient::getDefaultInstance();
-		$settings = $client->getSettings();
-		$settings->setSetting( 'foreignRepositories', [ 'foo' => [ 'repoDatabase' => 'foowiki' ] ] );
-
-		$factory = new DispatchingServiceFactory( $containerFactory, [ '', 'foo' ] );
+		$factory = new DispatchingServiceFactory(
+			$containerFactory,
+			[ '', 'foo' ],
+			[ 'item' => '', 'property' => 'foo' ]
+		);
 
 		$factory->defineService( 'EntityRevisionLookup', function() {
 			return $this->getMock( EntityRevisionLookup::class );
 		} );
 
 		return $factory;
+	}
+
+	public function testGetEntityTypeToRepoMapping() {
+		$factory = $this->getDispatchingServiceFactory( $this->getRepositoryServiceContainerFactory() );
+
+		$this->assertEquals(
+			[
+				'item' => '',
+				'property' => 'foo',
+			],
+			$factory->getEntityTypeToRepoMapping()
+		);
 	}
 
 	public function testGetServiceNames() {

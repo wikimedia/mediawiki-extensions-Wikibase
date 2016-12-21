@@ -8,6 +8,7 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParser;
+use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\TermIndex;
@@ -43,6 +44,7 @@ class RepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 			[ 'PrefetchingEntityMetaDataAccessor', EntityPrefetcher::class ],
 			[ 'PropertyInfoLookup', PropertyInfoLookup::class ],
 			[ 'TermIndex', TermIndex::class ],
+			[ 'TermSearchInteractorFactory', TermSearchInteractorFactory::class ],
 		];
 	}
 
@@ -61,7 +63,13 @@ class RepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 		$container = $this->getRepositoryServiceContainer();
 
 		$this->assertEquals(
-			[ 'EntityRevisionLookup', 'PrefetchingEntityMetaDataAccessor', 'PropertyInfoLookup', 'TermIndex' ],
+			[
+				'EntityRevisionLookup',
+				'PrefetchingEntityMetaDataAccessor',
+				'PropertyInfoLookup',
+				'TermIndex',
+				'TermSearchInteractorFactory'
+			],
 			$container->getServiceNames()
 		);
 	}
