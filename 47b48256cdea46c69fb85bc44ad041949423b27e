@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_7de6b114",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-12-21T10:17:29Z",
+      "side": 1,
+      "message": "createEntityFromFormData ?",
+      "revId": "47b48256cdea46c69fb85bc44ad041949423b27e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_5dec0df2",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-12-21T10:17:29Z",
+      "side": 1,
+      "message": "Maybe extract this to separate method.",
+      "revId": "47b48256cdea46c69fb85bc44ad041949423b27e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
