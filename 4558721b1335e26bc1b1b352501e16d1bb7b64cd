@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e0e73b5_e882dd96",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-21T15:12:32Z",
+      "side": 1,
+      "message": "Please duplicate this message (with the same text, but different keys) for …-newitem-… and …-newproperty-….",
+      "range": {
+        "startLine": 184,
+        "startChar": 81,
+        "endLine": 184,
+        "endChar": 117
+      },
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_e8f53d4d",
         "filename": "repo/includes/Specials/SpecialNewEntity.php",
         "patchSetId": 7
@@ -30,6 +53,29 @@
       "writtenOn": "2016-12-21T14:27:06Z",
       "side": 1,
       "message": "This seems to be unused in this class, so it probably should not be here. Can it be moved to wherever the code for labels went?",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_4863290b",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-21T15:12:32Z",
+      "side": 1,
+      "message": "I suggest to extract this to a private \"redirectToEntityPage\" method.",
+      "range": {
+        "startLine": 107,
+        "startChar": 3,
+        "endLine": 109,
+        "endChar": 46
+      },
       "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -138,6 +184,97 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_083411f0",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-21T15:12:32Z",
+      "side": 1,
+      "message": "This looks like a mistake. The constant is a trivial string anyway.",
+      "range": {
+        "startLine": 64,
+        "startChar": 58,
+        "endLine": 64,
+        "endChar": 91
+      },
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_a3d9a685",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-21T15:12:32Z",
+      "side": 1,
+      "message": "No hard rule, but I prefer this style:\n\nif ( condition\n    \u0026\u0026 condition\n    \u0026\u0026 condition\n) {\n\nDoes not matter much where the \u0026\u0026 are, but it\u0027s really nice to have one condition per line.",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_c3337abf",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-21T15:12:32Z",
+      "side": 1,
+      "message": "We talked about this: It\u0027s strange that users can create entities with aliases, but no labels. We decided to keep it like this for now. Can easily be changed later. Make sure the message key and text you are introducing still fits when we remove aliases from this check (and users must enter either label or description).",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_a34e4670",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-21T15:12:32Z",
+      "side": 1,
+      "message": "wikibase-newitem-insufficient-data",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_c3493a6c",
+        "filename": "repo/includes/Specials/SpecialNewProperty.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-21T15:12:32Z",
+      "side": 1,
+      "message": "wikibase-newproperty-insufficient-data",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_6876edd6",
         "filename": "repo/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php",
         "patchSetId": 7
@@ -166,6 +303,46 @@
       "writtenOn": "2016-12-21T14:27:06Z",
       "side": 1,
       "message": "Perhaps just re-throw $exception?",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_a3a40605",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewItemTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-21T15:12:32Z",
+      "side": 1,
+      "message": "This trimming looks suspicious. If we want to test this we should have two different variables for the given and the expected value. Personally I would feel most comfortable with a provider that contains string variables for all the given values, and an actual Item object for the expected value.\n\nNot meant as a blocker for this patch. Could be refactored later.",
+      "range": {
+        "startLine": 257,
+        "startChar": 4,
+        "endLine": 257,
+        "endChar": 8
+      },
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_439b0ac2",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewPropertyTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-21T15:12:32Z",
+      "side": 1,
+      "message": "Similar to Daniel, I\u0027m not sure if these constants are worth it. I feel they are making code like this much harder to read.",
       "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
