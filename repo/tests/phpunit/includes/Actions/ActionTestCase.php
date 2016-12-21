@@ -72,8 +72,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 		$this->permissionsChanged = true;
 
 		// reset rights cache
-		$wgUser->addGroup( "dummy" );
-		$wgUser->removeGroup( "dummy" );
+		$wgUser->clearInstanceCache();
 	}
 
 	/**

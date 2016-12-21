@@ -62,8 +62,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 		if ( $wgUser ) { // should not be null, but sometimes, it is
 			// reset rights cache
-			$wgUser->addGroup( "dummy" );
-			$wgUser->removeGroup( "dummy" );
+			$wgUser->clearInstanceCache();
 		}
 
 		parent::tearDown();
