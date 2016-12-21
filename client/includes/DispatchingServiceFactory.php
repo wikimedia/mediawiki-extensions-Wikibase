@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\EntityRevision;
+use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -42,17 +43,26 @@ class DispatchingServiceFactory extends ServiceContainer implements EntityDataRe
 	private $repositoryServiceContainers = [];
 
 	/**
+	 * @var string[] Associative array mapping entity type names to repository names which are used to provide
+	 *      entities of the given type.
+	 */
+	private $entityTypeToRepoMapping;
+
+	/**
 	 * @param RepositoryServiceContainerFactory $repositoryServiceContainerFactory
 	 * @param string[] $repositoryNames
+	 * @param string[] $entityTypeToRepoMapping
 	 */
 	public function __construct(
 		RepositoryServiceContainerFactory $repositoryServiceContainerFactory,
-		array $repositoryNames
+		array $repositoryNames,
+		array $entityTypeToRepoMapping
 	) {
 		parent::__construct();
 
 		$this->repositoryServiceContainerFactory = $repositoryServiceContainerFactory;
 		$this->repositoryNames = $repositoryNames;
+		$this->entityTypeToRepoMapping = $entityTypeToRepoMapping;
 	}
 
 	/**
@@ -133,6 +143,13 @@ class DispatchingServiceFactory extends ServiceContainer implements EntityDataRe
 	}
 
 	/**
+	 * @return string[]
+	 */
+	public function getEntityTypeToRepoMapping() {
+		return $this->entityTypeToRepoMapping;
+	}
+
+	/**
 	 * @return EntityPrefetcher
 	 */
 	public function getEntityPrefetcher() {
@@ -158,6 +175,13 @@ class DispatchingServiceFactory extends ServiceContainer implements EntityDataRe
 	 */
 	public function getTermBuffer() {
 		return $this->getService( 'TermBuffer' );
+	}
+
+	/**
+	 * @return TermSearchInteractorFactory
+	 */
+	public function getTermSearchInteractorFactory() {
+		return $this->getService( 'TermSearchInteractorFactory' );
 	}
 
 }
