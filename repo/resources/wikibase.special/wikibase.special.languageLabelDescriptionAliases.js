@@ -9,10 +9,6 @@
 	$( document ).ready( function () {
 		var $lang, fields, fieldCount, autonyms, langWidget;
 
-		if ( !$.uls ) {
-			return;
-		}
-
 		$lang = $( document.getElementsByName( 'lang' ) ).closest( '.oo-ui-inputWidget' );
 		if ( $lang.length === 0 ) {
 			return;
@@ -47,14 +43,14 @@
 			return;
 		}
 
-		autonyms = $.uls.data.getAutonyms();
+		autonyms = $.uls ? $.uls.data.getAutonyms() : {};
 		langWidget = OO.ui.infuse( $lang );
 		$.each( fields, function ( i ) {
 			fields[ i ].$input = OO.ui.infuse( fields[ i ].$element ).$input;
 		} );
 
 		function updatePlaceholders( value ) {
-			var autonym = autonyms[ value ];
+			var autonym = autonyms[ value ] || '[' + value + ']';
 			$.each( fields, function ( i ) {
 				var msg;
 				if ( autonym ) {
