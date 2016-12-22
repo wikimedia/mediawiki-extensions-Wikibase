@@ -8,6 +8,7 @@ use Status;
 use WebRequest;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Repo\Specials\HTMLForm\HTMLTrimmedTextField;
 use Wikibase\Summary;
 
 /**
@@ -102,24 +103,22 @@ class SpecialNewItem extends SpecialNewEntity {
 			self::FIELD_LABEL => [
 				'name' => self::FIELD_LABEL,
 				'default' => isset( $this->parts[0] ) ? $this->parts[0] : '',
-				'type' => 'text',
+				'class' => HTMLTrimmedTextField::class,
 				'id' => 'wb-newentity-label',
-				'filter-callback' => [ $this->stringNormalizer, 'trimToNFC' ],
 				'placeholder-message' => 'wikibase-label-edit-placeholder',
 				'label-message' => 'wikibase-newentity-label',
 			],
 			self::FIELD_DESCRIPTION => [
 				'name' => self::FIELD_DESCRIPTION,
 				'default' => isset( $this->parts[1] ) ? $this->parts[1] : '',
-				'type' => 'text',
+				'class' => HTMLTrimmedTextField::class,
 				'id' => 'wb-newentity-description',
-				'filter-callback' => [ $this->stringNormalizer, 'trimToNFC' ],
 				'placeholder-message' => 'wikibase-description-edit-placeholder',
 				'label-message' => 'wikibase-newentity-description',
 			],
 			self::FIELD_ALIASES => [
 				'name' => self::FIELD_ALIASES,
-				'type' => 'text',
+				'class' => HTMLTrimmedTextField::class,
 				'id' => 'wb-newentity-aliases',
 				'placeholder-message' => 'wikibase-aliases-edit-placeholder',
 				'label-message' => 'wikibase-newentity-aliases',
