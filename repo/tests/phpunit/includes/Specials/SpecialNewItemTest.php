@@ -3,14 +3,11 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 use FauxRequest;
-use RequestContext;
 use Site;
-use SiteList;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Specials\SpecialNewItem;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialNewItem
@@ -185,6 +182,15 @@ class SpecialNewItemTest extends SpecialNewEntityTest {
 					SpecialNewItem::FIELD_LABEL => '',
 					SpecialNewItem::FIELD_DESCRIPTION => '',
 					SpecialNewItem::FIELD_ALIASES => '',
+				],
+				'you need to fill'
+			],
+			'empty label and description, aliases contain only spaces and pipe symbols' => [
+				[
+					SpecialNewItem::FIELD_LANG => 'en',
+					SpecialNewItem::FIELD_LABEL => '',
+					SpecialNewItem::FIELD_DESCRIPTION => '',
+					SpecialNewItem::FIELD_ALIASES => ' | || | ',
 				],
 				'you need to fill'
 			],
