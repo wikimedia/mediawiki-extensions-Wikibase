@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_236016fc",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-22T11:22:06Z",
+      "side": 1,
+      "message": "It most certainly will, but later.",
+      "parentUuid": "0e0e73b5_e8f53d4d",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_68a02d3f",
         "filename": "repo/includes/Specials/SpecialNewEntity.php",
         "patchSetId": 7
@@ -53,6 +71,24 @@
       "writtenOn": "2016-12-21T14:27:06Z",
       "side": 1,
       "message": "This seems to be unused in this class, so it probably should not be here. Can it be moved to wherever the code for labels went?",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_a33ac6e2",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-22T11:22:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_68a02d3f",
       "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -82,6 +118,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_0334f2ef",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-22T11:22:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_4863290b",
+      "range": {
+        "startLine": 107,
+        "startChar": 3,
+        "endLine": 109,
+        "endChar": 46
+      },
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_288355af",
         "filename": "repo/includes/Specials/SpecialNewEntity.php",
         "patchSetId": 7
@@ -99,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_c31c9a7e",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-22T11:22:06Z",
+      "side": 1,
+      "message": "For another patch",
+      "parentUuid": "0e0e73b5_288355af",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_c8b83977",
         "filename": "repo/includes/Specials/SpecialNewEntity.php",
         "patchSetId": 7
@@ -110,6 +188,24 @@
       "writtenOn": "2016-12-21T14:27:06Z",
       "side": 1,
       "message": "This only makes sense if there are form elements for labels etc on the page.",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_f45e3316",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-22T11:22:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_c8b83977",
       "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -279,6 +375,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_1498a7c2",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-22T11:22:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_083411f0",
+      "range": {
+        "startLine": 64,
+        "startChar": 58,
+        "endLine": 64,
+        "endChar": 91
+      },
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_a3d9a685",
         "filename": "repo/includes/Specials/SpecialNewItem.php",
         "patchSetId": 7
@@ -290,6 +410,24 @@
       "writtenOn": "2016-12-21T15:12:32Z",
       "side": 1,
       "message": "No hard rule, but I prefer this style:\n\nif ( condition\n    \u0026\u0026 condition\n    \u0026\u0026 condition\n) {\n\nDoes not matter much where the \u0026\u0026 are, but it\u0027s really nice to have one condition per line.",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_f494f38e",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-22T11:22:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_a3d9a685",
       "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -330,6 +468,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_b4ed5b24",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-22T11:22:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_a34e4670",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_c3493a6c",
         "filename": "repo/includes/Specials/SpecialNewProperty.php",
         "patchSetId": 7
@@ -341,6 +497,24 @@
       "writtenOn": "2016-12-21T15:12:32Z",
       "side": 1,
       "message": "wikibase-newproperty-insufficient-data",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_94f25702",
+        "filename": "repo/includes/Specials/SpecialNewProperty.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-22T11:22:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_c3493a6c",
       "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -375,6 +549,24 @@
       "writtenOn": "2016-12-21T15:58:41Z",
       "side": 1,
       "message": "Strange... Shouldn\u0027t Jenkins check this? It says success.",
+      "parentUuid": "0e0e73b5_6876edd6",
+      "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_54fcdfd4",
+        "filename": "repo/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-22T11:22:06Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "0e0e73b5_6876edd6",
       "revId": "4558721b1335e26bc1b1b352501e16d1bb7b64cd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
