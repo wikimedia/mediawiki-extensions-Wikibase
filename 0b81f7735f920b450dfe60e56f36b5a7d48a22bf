@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_8a4eae70",
+        "filename": "repo/includes/Specials/HTMLAliasesField.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-22T17:09:13Z",
+      "side": 1,
+      "message": "Once again, question: where does this class belong?",
+      "revId": "0b81f7735f920b450dfe60e56f36b5a7d48a22bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_4a58b635",
+        "filename": "repo/includes/Specials/HTMLAliasesField.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-22T17:09:13Z",
+      "side": 1,
+      "message": "I guess I should create new language item for this one, shouldn\u0027t I?",
+      "range": {
+        "startLine": 18,
+        "startChar": 21,
+        "endLine": 18,
+        "endChar": 49
+      },
+      "revId": "0b81f7735f920b450dfe60e56f36b5a7d48a22bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
