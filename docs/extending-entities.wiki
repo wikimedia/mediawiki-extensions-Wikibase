@@ -2,7 +2,6 @@ This is a checklist of things that need doing when adding a new field to an exis
 
 * Add a provider interface, such as NewThingyProvider, for the new field.
 * Add to entity as an attribute and add getter and setter (implement the provider interface)
-* Add to content as part of FooContent::isStub
 * Add to Special:NewFoo if needed upon creation
 * Consider in equals() method of the Entity
 * Consider in __clone() method of the Entity
