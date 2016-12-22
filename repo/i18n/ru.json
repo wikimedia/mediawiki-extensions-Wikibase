@@ -189,7 +189,7 @@
 	"wikibase-newitem-no-external-page": "Не удалось найти страницу «$2» на сайте «$1».",
 	"wikibase-newitem-not-recognized-siteid": "Предоставленный идентификатор сайта не распознан.",
 	"wikibase-newitem-not-recognized-language": "Указанный языковой код не был распознан.",
-	"wikibase-newentity-language": "Язык:",
+	"wikibase-newentity-language": "Язык лексемы",
 	"wikibase-newentity-label": "Обозначение (метка):",
 	"wikibase-newentity-description": "Описание:",
 	"wikibase-newentity-aliases": "Псевдонимы, разделённые верт. чертой:",

@@ -21,6 +21,8 @@
 	},
 	"wikibase-client-desc": "Клиент для расширения Wikibase",
 	"tooltip-t-wikibase": "Ссылка на связанный элемент репозитория данных",
+	"apihelp-query+wbentityusage-param-prop": "Свойства для включения в результат",
+	"apihelp-query+wbentityusage-param-limit": "Сколько всего использований сущности возвращать.",
 	"apihelp-query+wblistentityusage-description": "Возвращает все страницы, которые использовали указанные ID",
 	"apihelp-query+wblistentityusage-param-prop": "Свойства для включения в результат",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Если активирован, путь будет добавлен к сущности.",

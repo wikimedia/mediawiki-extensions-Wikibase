@@ -231,6 +231,7 @@
 	"wikibase-mergeitems-toid": "L'ID dove unire",
 	"wikibase-mergeitems-submit": "Unisci elementi",
 	"wikibase-mergeitems-success": "$1 è stato unito in $3 e reindirizzato.",
+	"wikibase-itemmerge-redirect": "Questi elementi potrebbero essere già stati uniti.",
 	"wikibase-itemmerge-missing-parameter": "Dati di input incompleti.",
 	"wikibase-itemmerge-not-item": "L'entità indicata non è un elemento.",
 	"wikibase-itemmerge-failed-save": "Errore durante il salvataggio dell'elemento.",

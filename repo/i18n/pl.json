@@ -214,6 +214,7 @@
 	"wikibase-mergeitems-intro": "Przy łączeniu dwóch elementów, wszystkie etykiety, opisy, aliasy, linki i stwierdzenia zostaną przeniesione z jednego elementu do drugiego.",
 	"wikibase-mergeitems-submit": "Połącz elementy",
 	"wikibase-mergeitems-success": "Element $1 został połączony z $3 i przekierowany.",
+	"wikibase-itemmerge-redirect": "Te elementy być może są już połączone.",
 	"wikibase-itemmerge-missing-parameter": "Niekompletne dane wejściowe.",
 	"wikibase-itemmerge-not-item": "Podana encja nie jest elementem.",
 	"wikibase-itemmerge-failed-save": "Nie można zapisać elementu.",

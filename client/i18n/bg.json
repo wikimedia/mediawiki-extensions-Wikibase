@@ -7,7 +7,8 @@
 			"StanProg",
 			"Borislav",
 			"Vodnokon4e",
-			"Лорд Бъмбъри"
+			"Лорд Бъмбъри",
+			"Termininja"
 		]
 	},
 	"tooltip-t-wikibase": "Препратка към свързаният обект от хранилището за данни",
@@ -46,5 +47,9 @@
 	"wikibase-pageswithbadges-submit": "Показване на страниците",
 	"wikibase-pageinfo-entity-id": "ID на обекта в {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Няма",
+	"wikibase-pageinfo-entity-usage": "{{WBREPONAME}} обекти, използвани на страницата:",
+	"wikibase-pageinfo-entity-usage-L": "етикет: $1",
+	"wikibase-pageinfo-entity-usage-T": "заглавие",
+	"wikibase-pageinfo-entity-usage-O": "други (изявления)",
 	"wikibase-otherprojects": "В други проекти"
 }

@@ -167,7 +167,7 @@
 	"wikibase-newitem-page": "第一個連結頁面的名稱",
 	"wikibase-newitem-no-external-page": "在對應網站無法找到指定頁面。",
 	"wikibase-newitem-not-recognized-siteid": "提供的網站 ID 無法辨識。",
-	"wikibase-newentity-language": "語言",
+	"wikibase-newentity-language": "語言：",
 	"wikibase-newentity-label": "標籤：",
 	"wikibase-newentity-description": "描述：",
 	"wikibase-newentity-submit": "建立",
