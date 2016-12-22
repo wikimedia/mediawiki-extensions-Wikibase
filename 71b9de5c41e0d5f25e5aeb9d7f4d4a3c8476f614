@@ -16,6 +16,47 @@
       "revId": "71b9de5c41e0d5f25e5aeb9d7f4d4a3c8476f614",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_4f8c48ff",
+        "filename": "repo/includes/Specials/HTMLUtfTextField.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-22T16:06:43Z",
+      "side": 1,
+      "message": "Since this is a view component, it would be best to put in in a new namespace in the \"view\" folder. But stop, we can\u0027t do this, because this binds against code that is not in view. StringNormalizer is in lib and binds against code in core.\n\nNot sure how to resolve this.\n\nI suggest to leave it here for now. We can easily move it later.",
+      "parentUuid": "0e0e73b5_ef4d3ce1",
+      "revId": "71b9de5c41e0d5f25e5aeb9d7f4d4a3c8476f614",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_2f723411",
+        "filename": "repo/includes/Specials/HTMLUtfTextField.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-22T16:06:43Z",
+      "side": 1,
+      "message": "\"UTF\" is the \"Unicode Transformation Format\". This is not a very good class name. It does not explain what this class does, in contrast to the base class.\n\nWhat this does is trimming and some sort of Unicode normalization (removing and possibly fixing lose bytes that don\u0027t validate as UTF-8).",
+      "range": {
+        "startLine": 8,
+        "startChar": 10,
+        "endLine": 8,
+        "endChar": 13
+      },
+      "revId": "71b9de5c41e0d5f25e5aeb9d7f4d4a3c8476f614",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
