@@ -139,15 +139,4 @@ class PropertyContent extends EntityContent {
 		return !$this->isRedirect() && $this->getProperty()->isEmpty();
 	}
 
-	/**
-	 * @see EntityContent::isStub
-	 *
-	 * @return bool True if the property is not empty, but does not contain statements.
-	 */
-	public function isStub() {
-		return !$this->isRedirect()
-			&& !$this->getProperty()->isEmpty()
-			&& $this->getProperty()->getStatements()->isEmpty();
-	}
-
 }
