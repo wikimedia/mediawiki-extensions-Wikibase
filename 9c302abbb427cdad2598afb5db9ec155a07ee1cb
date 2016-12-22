@@ -33,6 +33,24 @@
       "revId": "9c302abbb427cdad2598afb5db9ec155a07ee1cb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_0fcbf04f",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 1846,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-12-22T15:42:24Z",
+      "side": 1,
+      "message": "Done: https://phabricator.wikimedia.org/T153950",
+      "parentUuid": "0e0e73b5_f1a6454f",
+      "revId": "9c302abbb427cdad2598afb5db9ec155a07ee1cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
