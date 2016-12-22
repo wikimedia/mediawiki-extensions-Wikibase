@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_ef4d3ce1",
+        "filename": "repo/includes/Specials/HTMLUtfTextField.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-22T15:53:15Z",
+      "side": 1,
+      "message": "I guess it is not the right place for this file.\n\nWhere should I put it?",
+      "revId": "71b9de5c41e0d5f25e5aeb9d7f4d4a3c8476f614",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
