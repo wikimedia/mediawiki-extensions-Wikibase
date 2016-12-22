@@ -12,7 +12,6 @@ use Wikibase\Client\Hooks\InterwikiSortingHookHandlers;
 use Wikibase\InterwikiSorter;
 use Wikibase\NamespaceChecker;
 use Wikibase\NoLangLinkHandler;
-use Wikibase\Settings;
 use Wikibase\SettingsArray;
 
 /**

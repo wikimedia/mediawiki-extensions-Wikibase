@@ -12,7 +12,6 @@ use DataValues\TimeValue;
 use DataValues\UnknownValue;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
-use Wikimedia\Assert\ParameterAssertionException;
 
 /**
  * Factory creating DataValueDeserializer instances configured for the given repository, ie.

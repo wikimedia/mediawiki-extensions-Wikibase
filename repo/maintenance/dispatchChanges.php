@@ -7,7 +7,6 @@ use Maintenance;
 use MediaWiki\MediaWikiServices;
 use MWException;
 use MWExceptionHandler;
-use RequestContext;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Lib\Store\EntityChangeLookup;
