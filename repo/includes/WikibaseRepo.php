@@ -652,6 +652,7 @@ class WikibaseRepo {
 	 */
 	private function newEditFilterHookRunner( IContextSource $context ) {
 		return new EditFilterHookRunner(
+			$this->getEntityNamespaceLookup(),
 			$this->getEntityTitleLookup(),
 			$this->getEntityContentFactory(),
 			$context

@@ -17,7 +17,7 @@ use Wikimedia\Assert\Assert;
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  * @author Thiemo Mättig
  */
-final class EntityNamespaceLookup {
+class EntityNamespaceLookup {
 
 	/**
 	 * @var int[]
