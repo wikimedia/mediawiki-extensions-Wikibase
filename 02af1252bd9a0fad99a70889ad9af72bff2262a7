@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_2fceb45f",
+        "filename": "repo/includes/DataTypeSelector.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-22T15:48:31Z",
+      "side": 1,
+      "message": "No, it can\u0027t. This is mainly a refactoring, and I wanted to replicate the old behavior. We do have code that is able to sort language name, and could reuse this here. Not sure if it\u0027s worth it. Should be a separate patch anyway.",
+      "parentUuid": "0e0e73b5_efc09c31",
+      "range": {
+        "startLine": 75,
+        "startChar": 20,
+        "endLine": 75,
+        "endChar": 35
+      },
+      "revId": "02af1252bd9a0fad99a70889ad9af72bff2262a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_4f8b2821",
         "filename": "repo/tests/phpunit/includes/DataTypeSelectorTest.php",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2016-12-22T15:38:42Z",
       "side": 1,
       "message": "What does it mean? Is it required to be `qqx`?\n\nI looked it up, it is language code :), what is not obvious from the test.\nIn cases like this I use one of two approaches when argument is a string:\n  * If format allows us, we can explain meaning in string itself. Ex.: \u0027some language code\u0027, \u0027some-language-code\u0027\n  * If format does not allow us (ex.: language code can contain only 2 letters), then we can introduce class constant that will explain our intention. Ex.: self::LANGUAGE_CODE, self::SOME_LANGUAGE_CODE, self::ANY_LANGUAGE_CODE",
+      "range": {
+        "startLine": 65,
+        "startChar": 48,
+        "endLine": 65,
+        "endChar": 53
+      },
+      "revId": "02af1252bd9a0fad99a70889ad9af72bff2262a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_af00646e",
+        "filename": "repo/tests/phpunit/includes/DataTypeSelectorTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-22T15:48:31Z",
+      "side": 1,
+      "message": "I agree with having self-explaining string constants.\n\nBut this is a specific language code in MediaWiki, well known to most MediaWiki developers. This is basically a debug code that disables localization and returns all message keys wrapped in brackets. Very common in tests.\n\nI don\u0027t think having a constant for this will be helpful.",
+      "parentUuid": "0e0e73b5_4f8b2821",
       "range": {
         "startLine": 65,
         "startChar": 48,
