@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_d4ba0f1e",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-22T11:09:12Z",
+      "side": 1,
+      "message": "We are increasingly falling down the \"kitchen sink\" rabbit hole. We currently need the WikibaseClient instance to pass it to the RepositoryServiceContainer, but try to not rely on it otherwise.\n\nIn particular, passing/remembering the entire settings object should be avoided. The constructor should ask exactly for the settings and services that it needs.",
+      "revId": "2d4ec05f7c3b527d5e17a90283343a0583466c68",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_b4867b68",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-22T11:09:12Z",
+      "side": 1,
+      "message": "\"init\" implies that this modifies state. How about \"construct\" or \"build\"?",
+      "revId": "2d4ec05f7c3b527d5e17a90283343a0583466c68",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_948b7772",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-22T11:09:12Z",
+      "side": 1,
+      "message": "remembering the value may be overkill. How often is this called?",
+      "revId": "2d4ec05f7c3b527d5e17a90283343a0583466c68",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_7480034c",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-22T11:09:12Z",
+      "side": 1,
+      "message": "long line.",
+      "revId": "2d4ec05f7c3b527d5e17a90283343a0583466c68",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
