@@ -16,6 +16,24 @@
       "revId": "8ffe77c8aa734d8cc21a2eab733d9e088e87138d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_f1c2c587",
+        "filename": "repo/resources/wikibase.special/wikibase.special.languageLabelDescriptionAliases.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-22T06:48:44Z",
+      "side": 1,
+      "message": "Either a language name from the \"autonyms\" map, or if there is none, put the language code in brackets (e.g. \"[en]\").",
+      "parentUuid": "0e0e73b5_4e8691bf",
+      "revId": "8ffe77c8aa734d8cc21a2eab733d9e088e87138d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
