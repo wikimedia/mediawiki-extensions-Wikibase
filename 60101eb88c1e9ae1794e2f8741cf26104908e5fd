@@ -16,6 +16,24 @@
       "revId": "60101eb88c1e9ae1794e2f8741cf26104908e5fd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_25d37332",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-22T20:10:44Z",
+      "side": 1,
+      "message": "I reverted this file entirely, and opened a separate patch for it, see I223d03c. That\u0027s why this empty line came back here.",
+      "parentUuid": "0e0e73b5_aab85275",
+      "revId": "60101eb88c1e9ae1794e2f8741cf26104908e5fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
