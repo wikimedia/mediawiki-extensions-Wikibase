@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_713ff5d3",
+        "filename": "client/includes/Store/ClientStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-22T10:54:26Z",
+      "side": 1,
+      "message": "Should be 0.5 now. But we have been on 0.5 for years no. It\u0027s a bit pointless.",
+      "revId": "d3c850a2fc1a7d30b0cf6b1dfd67828473aecda6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_f133e508",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-22T10:54:26Z",
+      "side": 1,
+      "message": "This *is* CachingPropertyInfoLookup. What should it by in sync with?\n\nAlso, please end the sentence with a \".\".",
+      "revId": "d3c850a2fc1a7d30b0cf6b1dfd67828473aecda6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_d130e1fe",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-22T10:54:26Z",
+      "side": 1,
+      "message": "You may want to credit yourself, too. This isn\u0027t the class as I originally wrote it...",
+      "revId": "d3c850a2fc1a7d30b0cf6b1dfd67828473aecda6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_7405a312",
+        "filename": "lib/includes/Store/CachingPropertyInfoStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-22T10:54:26Z",
+      "side": 1,
+      "message": "This should mention that any in-process cache held e.g. by CachingPropertyInfoLookup will not be updated.",
+      "revId": "d3c850a2fc1a7d30b0cf6b1dfd67828473aecda6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_f10ac528",
+        "filename": "lib/includes/Store/CachingPropertyInfoStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-22T10:54:26Z",
+      "side": 1,
+      "message": "You may want to credit yourself, too.",
+      "revId": "d3c850a2fc1a7d30b0cf6b1dfd67828473aecda6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_140d4739",
+        "filename": "lib/includes/Store/Sql/PropertyInfoTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-22T10:54:26Z",
+      "side": 1,
+      "message": "The implementation of PropertyInfoStore could be done in a subclass, then we wouldn\u0027t need the read-only mode. But that\u0027s for another patch, I think.",
+      "revId": "d3c850a2fc1a7d30b0cf6b1dfd67828473aecda6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_d4168f4c",
+        "filename": "repo/includes/Store/Sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-22T10:54:26Z",
+      "side": 1,
+      "message": "It feels wrong to have two separate instances of PropertyInfoTable. It would be nicer to have a separate \"internal service\" that can be gotten from a private getPropertyInfoTable() method. Core\u0027s ServiceWiring.php does something similar for the internal \u0027_MediaWikiTitleCodec\u0027 service.",
+      "revId": "d3c850a2fc1a7d30b0cf6b1dfd67828473aecda6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_b422fba0",
+        "filename": "repo/includes/Store/Sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-22T10:54:26Z",
+      "side": 1,
+      "message": "It feels wrong to have two separate instances of PropertyInfoTable. It would be nicer to have a separate \"internal service\" that can be gotten from a private getPropertyInfoTable() method. Core\u0027s ServiceWiring.php does something similar for the internal \u0027_MediaWikiTitleCodec\u0027 service.",
+      "revId": "d3c850a2fc1a7d30b0cf6b1dfd67828473aecda6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_34372be2",
+        "filename": "repo/includes/Store/Sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-22T10:54:26Z",
+      "side": 1,
+      "message": "Perhaps add a note that in the future we might want to register the CachingPropertyInfoLookup created by newPropertyInfoLookup as a watcher/listener to this CachingPropertyInfoStore.",
+      "revId": "d3c850a2fc1a7d30b0cf6b1dfd67828473aecda6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
