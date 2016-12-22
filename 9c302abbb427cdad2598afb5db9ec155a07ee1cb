@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e0e73b5_916ca906",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-22T10:25:39Z",
+      "side": 1,
+      "message": "It would be good to have a test case that uses this code path.",
+      "revId": "9c302abbb427cdad2598afb5db9ec155a07ee1cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_f1a6454f",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 5
