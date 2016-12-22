@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_b470bba4",
+        "filename": "client/includes/Store/RepositoryServiceWiring.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-22T10:59:35Z",
+      "side": 1,
+      "message": "Yes, when repo and client are active together, repo code should ideally be using the same PropertyInfoTable instance as the client code. \n\nOn the other hand, writing can only work for the local repo, so it could depend on $services-\u003egetRepositoryName() \u003d\u003d \u0027\u0027.\n\nAnyway, the readOnly-flag was intended as a safeguard. Since the PropertyInfoTable object isn\u0027t exposed to client code (it\u0027s wrapped in the DispatchingPropertyInfoLookup), this is perhaps no longer needed.",
+      "parentUuid": "0e0e73b5_7cc35a0b",
+      "revId": "27156f8f0b6f3e0dd4411d44315980af26c9d14c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_c316daab",
         "filename": "client/includes/Store/Sql/DirectSqlStore.php",
         "patchSetId": 2
