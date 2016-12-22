@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_2ff5947f",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-12-22T15:55:44Z",
+      "side": 1,
+      "message": "Just a wild idea, let\u0027s do it in lexeme (since mocking everything just to test this isn\u0027t straightforward)",
+      "parentUuid": "0e0e73b5_916ca906",
+      "revId": "9c302abbb427cdad2598afb5db9ec155a07ee1cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_f1a6454f",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 5
