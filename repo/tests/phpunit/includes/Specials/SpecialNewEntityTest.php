@@ -24,7 +24,7 @@ abstract class SpecialNewEntityTest extends SpecialPageTestBase {
 		$request = new FauxRequest( $formData, true );
 
 		/** @var \FauxResponse $webResponse */
-		list( $output, $webResponse ) = $this->executeSpecialPage( '', $request );
+		list( , $webResponse ) = $this->executeSpecialPage( '', $request );
 
 		$entityId = $this->extractEntityIdFromUrl( $webResponse->getHeader( 'location' ) );
 		/* @var $entity EntityDocument */

@@ -280,7 +280,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 
 		$this->setExpectedException( InvalidArgumentException::class );
 
-		$result = $lookup->loadRevisionInformation(
+		$lookup->loadRevisionInformation(
 			[ new ItemId( 'foo:Q123' ) ],
 			EntityRevisionLookup::LATEST_FROM_SLAVE
 		);
