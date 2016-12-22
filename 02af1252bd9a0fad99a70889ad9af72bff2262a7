@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_efc09c31",
+        "filename": "repo/includes/DataTypeSelector.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-22T15:38:42Z",
+      "side": 1,
+      "message": "Should/Will it work correctly with utf8?",
+      "range": {
+        "startLine": 75,
+        "startChar": 20,
+        "endLine": 75,
+        "endChar": 35
+      },
+      "revId": "02af1252bd9a0fad99a70889ad9af72bff2262a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_4f8b2821",
+        "filename": "repo/tests/phpunit/includes/DataTypeSelectorTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-22T15:38:42Z",
+      "side": 1,
+      "message": "What does it mean? Is it required to be `qqx`?\n\nI looked it up, it is language code :), what is not obvious from the test.\nIn cases like this I use one of two approaches when argument is a string:\n  * If format allows us, we can explain meaning in string itself. Ex.: \u0027some language code\u0027, \u0027some-language-code\u0027\n  * If format does not allow us (ex.: language code can contain only 2 letters), then we can introduce class constant that will explain our intention. Ex.: self::LANGUAGE_CODE, self::SOME_LANGUAGE_CODE, self::ANY_LANGUAGE_CODE",
+      "range": {
+        "startLine": 65,
+        "startChar": 48,
+        "endLine": 65,
+        "endChar": 53
+      },
+      "revId": "02af1252bd9a0fad99a70889ad9af72bff2262a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_6f86ec19",
+        "filename": "repo/tests/phpunit/includes/DataTypeSelectorTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-22T15:38:42Z",
+      "side": 1,
+      "message": "What does it mean?",
+      "range": {
+        "startLine": 80,
+        "startChar": 3,
+        "endLine": 80,
+        "endChar": 16
+      },
+      "revId": "02af1252bd9a0fad99a70889ad9af72bff2262a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_af8ce43a",
+        "filename": "repo/tests/phpunit/includes/DataTypeSelectorTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-22T15:38:42Z",
+      "side": 1,
+      "message": "It\u0027s hard to understand what behavior is being tested.\n\nI would expect that each test has 3 parts: preconditions, action we are testing, expected result.\nHere I can see only preconditions (in keys) and action (in test name) but can not understand what is the correct behavior.\nIt\u0027s pretty big problem in my opinion, because when this test will fail next developer won\u0027t be able to understand what is expected, and in the end he will var_dump() actual result and put it in test as expected.\n\nI would suggest not to use data provider but to make separate test at least for `duplicate labels` case.",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 4
+      },
+      "revId": "02af1252bd9a0fad99a70889ad9af72bff2262a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
