@@ -372,23 +372,4 @@ class ItemContentTest extends EntityContentTest {
 		$this->assertFalse( $content->isEmpty() );
 	}
 
-	public function testIsStub_stubItem() {
-		$item = new Item();
-		$item->setLabel( 'en', '~=[,,_,,]:3' );
-		$content = ItemContent::newFromItem( $item );
-		$this->assertTrue( $content->isStub() );
-	}
-
-	public function testIsStub_emptyItem() {
-		$content = ItemContent::newFromItem( new Item() );
-		$this->assertFalse( $content->isStub() );
-	}
-
-	public function testIsStub_nonStubItem() {
-		$item = new Item();
-		$item->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ) );
-		$content = ItemContent::newFromItem( $item );
-		$this->assertFalse( $content->isStub() );
-	}
-
 }

@@ -638,9 +638,11 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * @return bool
+	 * @deprecated
 	 */
-	abstract public function isStub();
+	public function isStub() {
+		throw new LogicException( 'Do not use, see T146792' );
+	}
 
 	/**
 	 * @see Content::copy

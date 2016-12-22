@@ -221,17 +221,6 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
-	 * @see EntityContent::isStub
-	 *
-	 * @return bool True if the item is not empty, but does not contain statements.
-	 */
-	public function isStub() {
-		return !$this->isRedirect()
-			&& !$this->getItem()->isEmpty()
-			&& $this->getItem()->getStatements()->isEmpty();
-	}
-
-	/**
 	 * @see EntityContent::getEntityPageProperties
 	 *
 	 * Records the number of statements in the 'wb-claims' key
