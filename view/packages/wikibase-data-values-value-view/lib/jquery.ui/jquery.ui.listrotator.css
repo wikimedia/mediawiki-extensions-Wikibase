@@ -39,6 +39,7 @@
 }
 .ui-listrotator .ui-state-active .ui-listrotator-label {
 	color: black;
+	overflow: hidden;
 }
 
 .ui-listrotator .ui-listrotator-manually {
