@@ -92,9 +92,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 				'type' => 'text',
 				'id' => 'wb-newentity-label',
 				'filter-callback' => [ $this->stringNormalizer, 'trimToNFC' ],
-				'placeholder' => $this->msg(
-					'wikibase-label-edit-placeholder'
-				)->text(),
+				'placeholder-message' => 'wikibase-label-edit-placeholder',
 				'label-message' => 'wikibase-newentity-label'
 			],
 			self::FIELD_DESCRIPTION => [
@@ -103,18 +101,14 @@ class SpecialNewProperty extends SpecialNewEntity {
 				'type' => 'text',
 				'id' => 'wb-newentity-description',
 				'filter-callback' => [ $this->stringNormalizer, 'trimToNFC' ],
-				'placeholder' => $this->msg(
-					'wikibase-description-edit-placeholder'
-				)->text(),
+				'placeholder-message' => 'wikibase-description-edit-placeholder',
 				'label-message' => 'wikibase-newentity-description'
 			],
 			self::FIELD_ALIASES => [
 				'name' => self::FIELD_ALIASES,
 				'type' => 'text',
 				'id' => 'wb-newentity-aliases',
-				'placeholder' => $this->msg(
-					'wikibase-aliases-edit-placeholder'
-				)->text(),
+				'placeholder-message' => 'wikibase-aliases-edit-placeholder',
 				'label-message' => 'wikibase-newentity-aliases'
 			]
 		];
