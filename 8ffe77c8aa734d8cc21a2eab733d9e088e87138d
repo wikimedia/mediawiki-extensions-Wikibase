@@ -34,6 +34,29 @@
       "revId": "8ffe77c8aa734d8cc21a2eab733d9e088e87138d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_143b07c6",
+        "filename": "repo/resources/wikibase.special/wikibase.special.languageLabelDescriptionAliases.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2016-12-22T10:58:50Z",
+      "side": 1,
+      "message": "With the change above this value is always true and the else branch is never reached. Is this correct?",
+      "range": {
+        "startLine": 56,
+        "startChar": 9,
+        "endLine": 56,
+        "endChar": 16
+      },
+      "revId": "8ffe77c8aa734d8cc21a2eab733d9e088e87138d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
