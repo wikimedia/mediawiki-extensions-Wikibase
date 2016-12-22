@@ -57,6 +57,30 @@
       "revId": "8ffe77c8aa734d8cc21a2eab733d9e088e87138d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_f4ff53a5",
+        "filename": "repo/resources/wikibase.special/wikibase.special.languageLabelDescriptionAliases.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-22T11:43:22Z",
+      "side": 1,
+      "message": "True. I removed it. Thanks for the review!",
+      "parentUuid": "0e0e73b5_143b07c6",
+      "range": {
+        "startLine": 56,
+        "startChar": 9,
+        "endLine": 56,
+        "endChar": 16
+      },
+      "revId": "8ffe77c8aa734d8cc21a2eab733d9e088e87138d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
