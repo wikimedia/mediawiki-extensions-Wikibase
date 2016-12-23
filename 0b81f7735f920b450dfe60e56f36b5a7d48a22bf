@@ -84,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_1bc7af16",
+        "filename": "repo/includes/Specials/HTMLAliasesField.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-23T14:59:28Z",
+      "side": 1,
+      "message": "`wikibase-newentity-aliases` is not used, so it can be deleted.\nI want to introduce new one `wikibase-aliases-edit-label`. (BTW, is this the good one? Is there a naming schema/convention?)\n\nMay be I should just replace all `wikibase-newentity-aliases` to `wikibase-aliases-edit-label` everywhere, including language files?",
+      "parentUuid": "0e0e73b5_f8af418f",
+      "range": {
+        "startLine": 18,
+        "startChar": 21,
+        "endLine": 18,
+        "endChar": 49
+      },
+      "revId": "0b81f7735f920b450dfe60e56f36b5a7d48a22bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_d8b23df9",
         "filename": "repo/includes/Specials/HTMLAliasesField.php",
         "patchSetId": 1
@@ -207,6 +231,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_dbe7d7a5",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLAliasesFieldTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-23T14:59:28Z",
+      "side": 1,
+      "message": "It happens before setUp() is being called.",
+      "parentUuid": "0e0e73b5_5b9f6762",
+      "revId": "0b81f7735f920b450dfe60e56f36b5a7d48a22bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_78a471af",
         "filename": "repo/tests/phpunit/includes/Specials/HTMLAliasesFieldTest.php",
         "patchSetId": 1
@@ -254,6 +296,24 @@
       "side": 1,
       "message": "The class under test relies on MediaWiki anyway. Instead of replicating functionality that\u0027s already there please use the existing MediaWikiTestCase. It\u0027s used in thousands of tests and well tested and maintained. Working around it is not worth it, but more likely to do us harm.",
       "parentUuid": "0e0e73b5_bb10a354",
+      "revId": "0b81f7735f920b450dfe60e56f36b5a7d48a22bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_9b25dfbe",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLAliasesFieldTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-23T14:59:28Z",
+      "side": 1,
+      "message": "Yeah, I didn\u0027t understand that class already has a dependency on whole global magic. MediaWikiTestCase it is!",
+      "parentUuid": "0e0e73b5_9b7cbf1c",
       "revId": "0b81f7735f920b450dfe60e56f36b5a7d48a22bf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
