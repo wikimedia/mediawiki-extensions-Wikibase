@@ -163,5 +163,6 @@
 	"wikibase-property-summary-wbeditentity-create": "Automatic edit summary generated when creating a new property.",
 	"wikibase-property-summary-wbeditentity-update": "Automatic edit summary generated when updating an existing property.",
 	"wikibase-property-summary-wbeditentity-override": "Automatic edit summary generated when overriding an existing property.",
-	"wikibase-property-summary-special-create-property": "Automatic edit summary when creating a property, and supplying one or more values. Parameters:\n* $1 - the number of values set (that is 0 - zero)\n* $2 - the language code of the entity page during creation"
+	"wikibase-property-summary-special-create-property": "Automatic edit summary when creating a property, and supplying one or more values. Parameters:\n* $1 - the number of values set (that is 0 - zero)\n* $2 - the language code of the entity page during creation",
+	"wikibase-SortedProperties": "Used to defines the sorting of the properties. Example: https://www.wikidata.org/wiki/MediaWiki:Wikibase-SortedProperties"
 }

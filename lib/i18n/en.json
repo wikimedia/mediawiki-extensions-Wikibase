@@ -153,5 +153,6 @@
 	"wikibase-property-summary-wbeditentity-create": "Created a new property",
 	"wikibase-property-summary-wbeditentity-update": "Changed a property",
 	"wikibase-property-summary-wbeditentity-override": "Cleared a property",
-	"wikibase-property-summary-special-create-property": "Created a [$2] property with {{PLURAL:$1|value|values}}"
+	"wikibase-property-summary-special-create-property": "Created a [$2] property with {{PLURAL:$1|value|values}}",
+	"wikibase-SortedProperties": ""
 }
