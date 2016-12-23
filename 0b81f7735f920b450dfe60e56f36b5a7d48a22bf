@@ -136,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_9b95df44",
+        "filename": "repo/includes/Specials/HTMLAliasesField.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-23T13:50:08Z",
+      "side": 1,
+      "message": "Sure, makes perfect sense. I just wanted to ask if you considered this, which you did. :-)",
+      "parentUuid": "0e0e73b5_f8162159",
+      "revId": "0b81f7735f920b450dfe60e56f36b5a7d48a22bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_388dd936",
         "filename": "repo/tests/phpunit/includes/Specials/HTMLAliasesFieldTest.php",
         "patchSetId": 1
@@ -171,6 +189,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_5b9f6762",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLAliasesFieldTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-23T13:50:08Z",
+      "side": 1,
+      "message": "This is better, but still weird. Why not set it in setUp?",
+      "parentUuid": "0e0e73b5_bb3783df",
+      "revId": "0b81f7735f920b450dfe60e56f36b5a7d48a22bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_78a471af",
         "filename": "repo/tests/phpunit/includes/Specials/HTMLAliasesFieldTest.php",
         "patchSetId": 1
@@ -200,6 +236,24 @@
       "side": 1,
       "message": "PHPUnit by default tries to backup global variables to restore them after the test run. Because some globals contain \\Closure instances in their fields this process triggers error \"Serialization of \u0027Closure\u0027 is not allowed\" on each test run.\n\nI could extend MediaWikiTestCase instead of PHPUnit_Framework_TestCase, but I didn\u0027t want it because it\u0027s 1830 lines long and the only thing I needed from it was these two fields set to false.",
       "parentUuid": "0e0e73b5_78a471af",
+      "revId": "0b81f7735f920b450dfe60e56f36b5a7d48a22bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_9b7cbf1c",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLAliasesFieldTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-23T13:50:08Z",
+      "side": 1,
+      "message": "The class under test relies on MediaWiki anyway. Instead of replicating functionality that\u0027s already there please use the existing MediaWikiTestCase. It\u0027s used in thousands of tests and well tested and maintained. Working around it is not worth it, but more likely to do us harm.",
+      "parentUuid": "0e0e73b5_bb10a354",
       "revId": "0b81f7735f920b450dfe60e56f36b5a7d48a22bf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
