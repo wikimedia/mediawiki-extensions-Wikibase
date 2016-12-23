@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_b8d30930",
+        "filename": "repo/includes/Specials/HTMLAliasesField.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-23T11:18:06Z",
+      "side": 1,
+      "message": "Wikibase\\Repo\\Specials\\HTMLForm is a good start.",
+      "parentUuid": "0e0e73b5_8a4eae70",
+      "revId": "0b81f7735f920b450dfe60e56f36b5a7d48a22bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_4a58b635",
         "filename": "repo/includes/Specials/HTMLAliasesField.php",
         "patchSetId": 1
@@ -35,6 +53,121 @@
         "startChar": 21,
         "endLine": 18,
         "endChar": 49
+      },
+      "revId": "0b81f7735f920b450dfe60e56f36b5a7d48a22bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_f8af418f",
+        "filename": "repo/includes/Specials/HTMLAliasesField.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-23T11:18:06Z",
+      "side": 1,
+      "message": "Yes, please do so.\n\nIt\u0027s not forbidden to leave it like it is, but this is confusing. The goal really should be to not have anything in the \"NewEntity\" class any more. This includes such message keys.\n\nDon\u0027t forget to remove the old keys from en.json and qqq.json, when they are not used any more.",
+      "parentUuid": "0e0e73b5_4a58b635",
+      "range": {
+        "startLine": 18,
+        "startChar": 21,
+        "endLine": 18,
+        "endChar": 49
+      },
+      "revId": "0b81f7735f920b450dfe60e56f36b5a7d48a22bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_d8b23df9",
+        "filename": "repo/includes/Specials/HTMLAliasesField.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-23T11:18:06Z",
+      "side": 1,
+      "message": "Code style issues.",
+      "revId": "0b81f7735f920b450dfe60e56f36b5a7d48a22bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_b89ae973",
+        "filename": "repo/includes/Specials/HTMLAliasesField.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-23T11:18:06Z",
+      "side": 1,
+      "message": "Good enough for a start, but I wonder: It should be possible to have both filters and merge them somehow, shouldn\u0027t it?",
+      "revId": "0b81f7735f920b450dfe60e56f36b5a7d48a22bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_388dd936",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLAliasesFieldTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-23T11:18:06Z",
+      "side": 1,
+      "message": "Overriding the constructor of a test is very, very rare. Usually one should override \"setUp\".",
+      "revId": "0b81f7735f920b450dfe60e56f36b5a7d48a22bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_78a471af",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLAliasesFieldTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-23T11:18:06Z",
+      "side": 1,
+      "message": "Why is this needed?",
+      "revId": "0b81f7735f920b450dfe60e56f36b5a7d48a22bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_987cc51c",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLAliasesFieldTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-23T11:18:06Z",
+      "side": 1,
+      "message": "Missing newline here, and more minor spacing issues below. I believe you can run phpcs locally to check your code before uploading.",
+      "range": {
+        "startLine": 21,
+        "startChar": 38,
+        "endLine": 21,
+        "endChar": 39
       },
       "revId": "0b81f7735f920b450dfe60e56f36b5a7d48a22bf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
