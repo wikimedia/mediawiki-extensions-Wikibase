@@ -3,6 +3,9 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 use FauxRequest;
+use HashSiteStore;
+use Site;
+use SiteStore;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -28,31 +31,50 @@ use Wikibase\Repo\Specials\SpecialNewItem;
  */
 class SpecialNewItemTest extends SpecialNewEntityTest {
 
+	/**
+	 * @var SiteStore
+	 */
+	private $siteStore;
+
+	protected function setUp() {
+		parent::setUp();
+
+		$this->siteStore = new HashSiteStore();
+	}
+
 	protected function newSpecialPage() {
-		return new SpecialNewItem();
+		return new SpecialNewItem( $this->siteStore );
 	}
 
 	public function testAllNecessaryFormFieldsArePresent_WhenRendered() {
 
 		list( $html ) = $this->executeSpecialPage();
 
-		$this->assertHtmlContainsInputWithName( $html, 'lang' );
-		$this->assertHtmlContainsInputWithName( $html, 'label' );
-		$this->assertHtmlContainsInputWithName( $html, 'description' );
-		$this->assertHtmlContainsInputWithName( $html, 'aliases' );
+		$this->assertHtmlContainsInputWithName( $html, SpecialNewItem::FIELD_LANG );
+		$this->assertHtmlContainsInputWithName( $html, SpecialNewItem::FIELD_LABEL );
+		$this->assertHtmlContainsInputWithName( $html, SpecialNewItem::FIELD_DESCRIPTION );
+		$this->assertHtmlContainsInputWithName( $html, SpecialNewItem::FIELD_ALIASES );
 		$this->assertHtmlContainsSubmitControl( $html );
 	}
 
 	public function testSiteAndPageInputFieldsWithPredefinedValuesPresent_WhenRenderedWithGetParametersPassed() {
 		$getParameters = [
-			'site' => 'some-site',
-			'page' => 'some-page'
+			SpecialNewItem::FIELD_SITE => 'some-site',
+			SpecialNewItem::FIELD_PAGE => 'some-page'
 		];
 
 		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $getParameters ) );
 
-		$this->assertHtmlContainsInputWithNameAndValue( $html, 'site', 'some-site' );
-		$this->assertHtmlContainsInputWithNameAndValue( $html, 'page', 'some-page' );
+		$this->assertHtmlContainsInputWithNameAndValue(
+			$html,
+			SpecialNewItem::FIELD_SITE,
+			'some-site'
+		);
+		$this->assertHtmlContainsInputWithNameAndValue(
+			$html,
+			SpecialNewItem::FIELD_PAGE,
+			'some-page'
+		);
 	}
 
 	public function testLabelAndDescriptionValuesAreSetAccordingToSubpagePath_WhenRendered() {
@@ -62,58 +84,74 @@ class SpecialNewItemTest extends SpecialNewEntityTest {
 
 		list( $html, ) = $this->executeSpecialPage( $subPage );
 
-		$this->assertHtmlContainsInputWithNameAndValue( $html, 'label', $subPagePart1 );
-		$this->assertHtmlContainsInputWithNameAndValue( $html, 'description', $subPagePart2 );
+		$this->assertHtmlContainsInputWithNameAndValue( $html, SpecialNewItem::FIELD_LABEL, $subPagePart1 );
+		$this->assertHtmlContainsInputWithNameAndValue( $html, SpecialNewItem::FIELD_DESCRIPTION, $subPagePart2 );
 	}
 
 	public function provideValidEntityCreationRequests() {
 		return [
 			'only label is set' => [
 				[
-					'lang' => 'en',
-					'label' => 'label',
-					'description' => '',
-					'aliases' => '',
+					SpecialNewItem::FIELD_LANG => 'en',
+					SpecialNewItem::FIELD_LABEL => 'label',
+					SpecialNewItem::FIELD_DESCRIPTION => '',
+					SpecialNewItem::FIELD_ALIASES => '',
 				],
 			],
 			'another language' => [
 				[
-					'lang' => 'fr',
-					'label' => 'label',
-					'description' => '',
-					'aliases' => '',
+					SpecialNewItem::FIELD_LANG => 'fr',
+					SpecialNewItem::FIELD_LABEL => 'label',
+					SpecialNewItem::FIELD_DESCRIPTION => '',
+					SpecialNewItem::FIELD_ALIASES => '',
 				],
 			],
 			'only description is set' => [
 				[
-					'lang' => 'en',
-					'label' => '',
-					'description' => 'desc',
-					'aliases' => '',
+					SpecialNewItem::FIELD_LANG => 'en',
+					SpecialNewItem::FIELD_LABEL => '',
+					SpecialNewItem::FIELD_DESCRIPTION => 'desc',
+					SpecialNewItem::FIELD_ALIASES => '',
 				],
 			],
 			'single alias' => [
 				[
-					'lang' => 'en',
-					'label' => '',
-					'description' => '',
-					'aliases' => 'alias',
+					SpecialNewItem::FIELD_LANG => 'en',
+					SpecialNewItem::FIELD_LABEL => '',
+					SpecialNewItem::FIELD_DESCRIPTION => '',
+					SpecialNewItem::FIELD_ALIASES => 'alias',
 				],
 			],
 			'multiple aliases' => [
 				[
-					'lang' => 'en',
-					'label' => '',
-					'description' => '',
-					'aliases' => 'alias1|alias2|alias3',
+					SpecialNewItem::FIELD_LANG => 'en',
+					SpecialNewItem::FIELD_LABEL => '',
+					SpecialNewItem::FIELD_DESCRIPTION => '',
+					SpecialNewItem::FIELD_ALIASES => 'alias1|alias2|alias3',
+				],
+			],
+			'nontrimmed label' => [
+				[
+					SpecialNewItem::FIELD_LANG => 'en',
+					SpecialNewItem::FIELD_LABEL => '  some text with spaces on the sides    ',
+					SpecialNewItem::FIELD_DESCRIPTION => '',
+					SpecialNewItem::FIELD_ALIASES => '',
+				],
+			],
+			'nontrimmed description' => [
+				[
+					SpecialNewItem::FIELD_LANG => 'en',
+					SpecialNewItem::FIELD_LABEL => '',
+					SpecialNewItem::FIELD_DESCRIPTION => ' description with spaces on the sides ',
+					SpecialNewItem::FIELD_ALIASES => '',
 				],
 			],
 			'all input is present' => [
 				[
-					'lang' => 'en',
-					'label' => 'label',
-					'description' => 'desc',
-					'aliases' => 'a1|a2',
+					SpecialNewItem::FIELD_LANG => 'en',
+					SpecialNewItem::FIELD_LABEL => 'label',
+					SpecialNewItem::FIELD_DESCRIPTION => 'desc',
+					SpecialNewItem::FIELD_ALIASES => 'a1|a2',
 				],
 			],
 		];
@@ -123,45 +161,33 @@ class SpecialNewItemTest extends SpecialNewEntityTest {
 		return [
 			'unknown language' => [
 				[
-					'lang' => 'some-weird-language',
-					'label' => 'label',
-					'description' => '',
-					'aliases' => '',
+					SpecialNewItem::FIELD_LANG => 'some-weird-language',
+					SpecialNewItem::FIELD_LABEL => 'label',
+					SpecialNewItem::FIELD_DESCRIPTION => '',
+					SpecialNewItem::FIELD_ALIASES => '',
 				],
 				'language code was not recognized',
 			],
 			'unknown site identifier' => [
 				[
-					'lang' => 'en',
-					'label' => 'label',
-					'description' => '',
-					'aliases' => '',
-					'site' => 'unknown',
-					'page' => 'some page'
+					SpecialNewItem::FIELD_LANG => 'en',
+					SpecialNewItem::FIELD_LABEL => 'label',
+					SpecialNewItem::FIELD_DESCRIPTION => '',
+					SpecialNewItem::FIELD_ALIASES => '',
+					SpecialNewItem::FIELD_SITE => 'unknown',
+					SpecialNewItem::FIELD_PAGE => 'some page'
 				],
 				'site identifier was not recognized',
 			],
-			//Property - uniq: label(in language)
-
-			//			'bad user token' => [  // TODO Probably should be implemented
-			//				[
-			//					'lang' => 'en',
-			//					'label' => 'label',
-			//					'description' => '',
-			//					'aliases' => '',
-			//					'wpEditToken' => 'some bad token'
-			//				],
-			//				'try again',
-			//			],
-			//			'all fields are empty' => [  // TODO Probably should be implemented
-			//				[
-			//					'lang' => 'en',
-			//					'label' => '',
-			//					'description' => '',
-			//					'aliases' => '',
-			//				],
-			//				'???'
-			//			],
+			'all fields are empty' => [
+				[
+					SpecialNewItem::FIELD_LANG => 'en',
+					SpecialNewItem::FIELD_LABEL => '',
+					SpecialNewItem::FIELD_DESCRIPTION => '',
+					SpecialNewItem::FIELD_ALIASES => '',
+				],
+				'you need to fill'
+			],
 		];
 	}
 
@@ -171,10 +197,10 @@ class SpecialNewItemTest extends SpecialNewEntityTest {
 		}
 
 		$formData = [
-			'lang' => 'en',
-			'label' => 'label1',
-			'description' => 'description1',
-			'aliases' => '',
+			SpecialNewItem::FIELD_LANG => 'en',
+			SpecialNewItem::FIELD_LABEL => 'label1',
+			SpecialNewItem::FIELD_DESCRIPTION => 'description1',
+			SpecialNewItem::FIELD_ALIASES => '',
 		];
 		$this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
 
@@ -183,8 +209,25 @@ class SpecialNewItemTest extends SpecialNewEntityTest {
 		$this->assertHtmlContainsErrorMessage( $html, 'already has label' );
 	}
 
+	public function testErrorAboutNonExistentPageIsDisplayed_WhenSiteExistsButPageDoesNot() {
+		$existingSiteId = 'existing-site';
+		$formData = [
+			SpecialNewItem::FIELD_LANG => 'en',
+			SpecialNewItem::FIELD_LABEL => 'some label',
+			SpecialNewItem::FIELD_DESCRIPTION => 'some description',
+			SpecialNewItem::FIELD_ALIASES => '',
+			SpecialNewItem::FIELD_SITE => $existingSiteId,
+			SpecialNewItem::FIELD_PAGE => 'nonexistent-page'
+		];
+		$this->givenSiteWithNoPagesExists( $existingSiteId );
+
+		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
+
+		$this->assertHtmlContainsErrorMessage( $html, 'could not be found on' );
+	}
+
 	/**
-	 * @param $itemUrl
+	 * @param string $itemUrl
 	 * @return ItemId
 	 */
 	protected function extractEntityIdFromUrl( $itemUrl ) {
@@ -202,25 +245,37 @@ class SpecialNewItemTest extends SpecialNewEntityTest {
 		$this->assertInstanceOf( Item::class, $entity );
 		/** @var Item $entity */
 
-		$language = $form['lang'];
-		if ( $form['label'] !== '' ) {
+		$language = $form[SpecialNewItem::FIELD_LANG];
+		if ( $form[SpecialNewItem::FIELD_LABEL] !== '' ) {
 			$this->assertSame(
-				$form['label'],
+				trim( $form[SpecialNewItem::FIELD_LABEL] ),
 				$entity->getLabels()->getByLanguage( $language )->getText()
 			);
 		}
-		if ( $form['description'] !== '' ) {
+		if ( $form[SpecialNewItem::FIELD_DESCRIPTION] !== '' ) {
 			$this->assertSame(
-				$form['description'],
+				trim( $form[SpecialNewItem::FIELD_DESCRIPTION] ),
 				$entity->getDescriptions()->getByLanguage( $language )->getText()
 			);
 		}
-		if ( $form['aliases'] !== '' ) {
+		if ( $form[SpecialNewItem::FIELD_ALIASES] !== '' ) {
 			$this->assertArrayEquals(
-				explode( '|', $form['aliases'] ),
+				explode( '|', $form[SpecialNewItem::FIELD_ALIASES] ),
 				$entity->getAliasGroups()->getByLanguage( $language )->getAliases()
 			);
 		}
+	}
+
+	/**
+	 * @param string $existingSiteId
+	 */
+	private function givenSiteWithNoPagesExists( $existingSiteId ) {
+		/** @var \PHPUnit_Framework_MockObject_MockObject|Site $siteMock */
+		$siteMock = $this->getMock( Site::class, [ 'normalizePageName' ] );
+		$siteMock->setGlobalId( $existingSiteId );
+		$siteMock->method( 'normalizePageName' )->willReturn( false );
+
+		$this->siteStore->saveSite( $siteMock );
 	}
 
 }
