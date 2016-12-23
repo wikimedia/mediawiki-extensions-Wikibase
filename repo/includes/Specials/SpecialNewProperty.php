@@ -9,6 +9,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataTypeSelector;
 use Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLTrimmedTextField;
+use Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
@@ -72,19 +73,8 @@ class SpecialNewProperty extends SpecialNewEntity {
 		$formFields = [
 			self::FIELD_LANG => [
 				'name' => self::FIELD_LANG,
-				'options' => $this->getLanguageOptions(),
-				'default' => $langCode,
-				'type' => 'combobox',
+				'class' => HTMLContentLanguageField::class,
 				'id' => 'wb-newentity-language',
-				'filter-callback' => [ $this->stringNormalizer, 'trimToNFC' ],
-				'validation-callback' => function ( $language ) {
-					if ( !in_array( $language, $this->languageCodes ) ) {
-						return [ $this->msg( 'wikibase-newitem-not-recognized-language' )->text() ];
-					}
-
-					return true;
-				},
-				'label-message' => 'wikibase-newentity-language'
 			],
 			self::FIELD_LABEL => [
 				'name' => self::FIELD_LABEL,
