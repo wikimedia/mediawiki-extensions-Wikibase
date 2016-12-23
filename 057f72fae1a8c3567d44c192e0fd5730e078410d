@@ -16,6 +16,24 @@
       "revId": "057f72fae1a8c3567d44c192e0fd5730e078410d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_156bfeef",
+        "filename": "lib/i18n/qqq.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 121
+      },
+      "writtenOn": "2016-12-23T08:33:27Z",
+      "side": 1,
+      "message": "The real \"no translate\" will be added to the translatewiki.net config once this patch is merged. The {{notranslate}} here never has a real effect.",
+      "parentUuid": "0e0e73b5_754ebade",
+      "revId": "057f72fae1a8c3567d44c192e0fd5730e078410d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
