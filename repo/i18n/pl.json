@@ -350,6 +350,8 @@
 	"apihelp-query+wbsearch-param-limit": "Maksymalna liczba wyników",
 	"apihelp-query+wbsubscribers-param-limit": "Maksymalna liczba wyników",
 	"apihelp-wbsetaliases-param-bot": "Oznacz tę zmianę jako wykonaną przez bota. Ten znacznik adresu URL będzie brany pod uwagę tylko, jeśli użytkownik należy do grupy „bot”.",
+	"apihelp-wbsetaliases-param-add": "Lista aliasów do dodania (można używać z <var>remove</var>)",
+	"apihelp-wbsetaliases-param-remove": "Lista aliasów do usunięcia (można używać z <var>add</var>)",
 	"apihelp-wbsetaliases-param-language": "Język, w którym ustawić aliasy",
 	"apihelp-wbsetclaim-param-bot": "Oznacz tę zmianę jako wykonaną przez bota. Ten znacznik adresu URL będzie brany pod uwagę tylko, jeśli użytkownik należy do grupy „bot”.",
 	"apihelp-wbsetclaimvalue-description": "Ustawia wartość stwierdzenia Wikibase.",

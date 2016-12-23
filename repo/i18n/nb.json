@@ -169,7 +169,7 @@
 	"wikibase-newitem-no-external-page": "Siden «$2» ble ikke funnet på «$1».",
 	"wikibase-newitem-not-recognized-siteid": "Den oppgitte nettstedidentifikatoren ble ikke gjenkjent.",
 	"wikibase-newitem-not-recognized-language": "Den angitte språkkoden ble ikke gjenkjent.",
-	"wikibase-newentity-language": "Språk:",
+	"wikibase-newentity-language": "Leksemets språk",
 	"wikibase-newentity-label": "Etikett:",
 	"wikibase-newentity-description": "Beskrivelse:",
 	"wikibase-newentity-aliases": "Alias adskilt av vertikalstrek:",

@@ -235,6 +235,7 @@
 	"wikibase-mergeitems-toid": "المعرِّف الذي يجري الدمج إليه",
 	"wikibase-mergeitems-submit": "دمج العناصر",
 	"wikibase-mergeitems-success": "تم دمج $1 إلى $3وتم تحويل.",
+	"wikibase-itemmerge-redirect": "هذه العناصر ربما تم دمجها فعلا.",
 	"wikibase-itemmerge-missing-parameter": "دخل ناقص.",
 	"wikibase-itemmerge-not-item": "الكائن المحدد ليس عنصراً.",
 	"wikibase-itemmerge-failed-save": "لم يمكن حفظ العنصر.",

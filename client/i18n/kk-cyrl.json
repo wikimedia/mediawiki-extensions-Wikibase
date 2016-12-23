@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Arystanbek"
+			"Arystanbek",
+			"Нұрлан Рахымжанов"
 		]
 	},
 	"tooltip-t-wikibase": "Сілтеме дерек қойма данасымен байланысқан",
@@ -33,7 +34,7 @@
 	"wikibase-linkitem-confirmitem-button": "Құптау",
 	"wikibase-linkitem-not-loggedin-title": "Сіз кіруіңіз керек",
 	"wikibase-linkitem-not-loggedin": "Сіз бұл уикиге кіруіңіз керек және  [$1 орталық дерек қоймасында] бұл мүмкіндікті қолдану",
-	"wikibase-linkitem-success-link": "Беттер сәтті сілтенді. Сіз [$1 орталық дерек қоймасыңыздан] жаңадан басталған элементердегі қамтылған сілтемелерді таба аласыз.",
+	"wikibase-linkitem-success-link": "Беттер сәтті сілтенді. Сіз [$1 орталық дерек қоймасынан] жаңадан басталған элементегі қамтылған сілтемелерді таба аласыз.",
 	"wikibase-property-notfound": "$1 сипаты табылмады.",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}}ті $1",
 	"wikibase-rc-hide-wikidata-hide": "жасыру",
