@@ -52,6 +52,24 @@
       "revId": "a73aacff05952f59670fe91bce261a7169bb4663",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_5b908798",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-23T13:03:45Z",
+      "side": 0,
+      "message": "And how to choose the code path later? Duplicate the switch? That\u0027s exactly what I want to avoid.",
+      "parentUuid": "0e0e73b5_3b4a7360",
+      "revId": "a73aacff05952f59670fe91bce261a7169bb4663",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
