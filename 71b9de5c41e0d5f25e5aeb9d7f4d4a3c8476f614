@@ -183,6 +183,30 @@
       "revId": "71b9de5c41e0d5f25e5aeb9d7f4d4a3c8476f614",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_d8259d57",
+        "filename": "repo/includes/Specials/HTMLUtfTextField.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-23T10:57:08Z",
+      "side": 1,
+      "message": "I don\u0027t think this trivial thing is worth so much discussion. In my opinion the base class should do this trimming and UTF-8 cleanup by default. On the other hand, the fact that it trims can be critical in rare cases where you *want* the user to input whitespace characters.\n\nIf you call it \"TermTextField\", then you can not reuse it in cases where you need the exact same functionality, but what the user enters is not a term.\n\nAll \"Sentence\" and \"Word\" suggestions do have the problem that what the user enters is rarely a \"sentence\" or \"word\". Something like \"HumanReadable\" sound odd. *All* text should be human readable, otherwise it\u0027s not text.\n\nWhat this class does is not encapsulating a high-level concept, but a technical detail. I still vote for something like \"TrimmedTextField\".",
+      "parentUuid": "0e0e73b5_785231e4",
+      "range": {
+        "startLine": 8,
+        "startChar": 10,
+        "endLine": 8,
+        "endChar": 13
+      },
+      "revId": "71b9de5c41e0d5f25e5aeb9d7f4d4a3c8476f614",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
