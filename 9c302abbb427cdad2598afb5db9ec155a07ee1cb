@@ -2,6 +2,69 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e0e73b5_38015972",
+        "filename": "lib/includes/EntityTypeDefinitions.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-23T11:48:18Z",
+      "side": 1,
+      "message": "Are the parameters this callable is called with documented?",
+      "range": {
+        "startLine": 157,
+        "startChar": 67,
+        "endLine": 157,
+        "endChar": 76
+      },
+      "revId": "9c302abbb427cdad2598afb5db9ec155a07ee1cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_58d3ed05",
+        "filename": "lib/includes/EntityTypeDefinitions.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-23T11:48:18Z",
+      "side": 1,
+      "message": "Upper case \"ChangeOp\".",
+      "range": {
+        "startLine": 158,
+        "startChar": 4,
+        "endLine": 158,
+        "endChar": 5
+      },
+      "revId": "9c302abbb427cdad2598afb5db9ec155a07ee1cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_58eacd9d",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-23T11:48:18Z",
+      "side": 1,
+      "message": "Especially the \"remove\" element is very specific for the EditEntity API, and not used anywhere else. Which means that this whole new configuration is very specific. The name should reflect this. These are not generic \"cangeOpCallbacks\" that can be used everywhere where ChangeOps are needed.",
+      "revId": "9c302abbb427cdad2598afb5db9ec155a07ee1cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_916ca906",
         "filename": "repo/includes/Api/EditEntity.php",
         "patchSetId": 5
