@@ -16,6 +16,24 @@
       "revId": "a73aacff05952f59670fe91bce261a7169bb4663",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_b52af28d",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-23T08:59:56Z",
+      "side": 0,
+      "message": "Because this is checked below, in the switch, and I did not wanted to duplicate code. Nothing bad happens if the body of this function runs, or does it?",
+      "parentUuid": "0e0e73b5_52fbccba",
+      "revId": "a73aacff05952f59670fe91bce261a7169bb4663",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
