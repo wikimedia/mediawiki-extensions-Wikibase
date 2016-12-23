@@ -63,9 +63,7 @@ class SpecialNewItem extends SpecialNewEntity {
 		$fingerprint->setLabel( $languageCode, $formData[ self::FIELD_LABEL ] );
 		$fingerprint->setDescription( $languageCode, $formData[ self::FIELD_DESCRIPTION ] );
 
-		$aliases = explode( '|', (string)$formData[ self::FIELD_ALIASES ] );
-		$aliases = array_map( [ $this->stringNormalizer, 'trimToNFC' ], $aliases );
-		$fingerprint->setAliasGroup( $languageCode, $aliases );
+		$fingerprint->setAliasGroup( $languageCode, $formData[ self::FIELD_ALIASES ] );
 
 		if ( isset( $formData[ self::FIELD_SITE ] ) ) {
 			$site = $this->siteLookup->getSite( $formData[ self::FIELD_SITE ] );
@@ -118,10 +116,8 @@ class SpecialNewItem extends SpecialNewEntity {
 			],
 			self::FIELD_ALIASES => [
 				'name' => self::FIELD_ALIASES,
-				'class' => HTMLTrimmedTextField::class,
+				'class' => HTMLAliasesField::class,
 				'id' => 'wb-newentity-aliases',
-				'placeholder-message' => 'wikibase-aliases-edit-placeholder',
-				'label-message' => 'wikibase-newentity-aliases',
 			],
 		];
 
@@ -209,7 +205,7 @@ class SpecialNewItem extends SpecialNewEntity {
 	protected function validateFormData( array $formData ) {
 		if ( $formData[ self::FIELD_LABEL ] == ''
 			 && $formData[ self::FIELD_DESCRIPTION ] == ''
-			 && $formData[ self::FIELD_ALIASES ] == ''
+			 && $formData[ self::FIELD_ALIASES ] === []
 		) {
 			return Status::newFatal( 'wikibase-newitem-insufficient-data' );
 		}
