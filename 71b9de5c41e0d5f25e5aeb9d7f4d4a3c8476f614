@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_f8050114",
+        "filename": "repo/includes/Specials/HTMLUtfTextField.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-23T09:21:32Z",
+      "side": 1,
+      "message": "The MediaWiki core classes used here are in a \"htmlform\" folder. We want strict PSR-4, so I think \"Wikibase\\Repo\\Specials\\HTMLForm\" is a good idea for a start. As said, can be changed later.",
+      "parentUuid": "0e0e73b5_8a758e94",
+      "revId": "71b9de5c41e0d5f25e5aeb9d7f4d4a3c8476f614",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_2f723411",
         "filename": "repo/includes/Specials/HTMLUtfTextField.php",
         "patchSetId": 1
@@ -90,6 +108,30 @@
       "side": 1,
       "message": "Agree that name is not the best, but how to name it then?\nOpen to suggestions.",
       "parentUuid": "0e0e73b5_2f723411",
+      "range": {
+        "startLine": 8,
+        "startChar": 10,
+        "endLine": 8,
+        "endChar": 13
+      },
+      "revId": "71b9de5c41e0d5f25e5aeb9d7f4d4a3c8476f614",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_58152d3f",
+        "filename": "repo/includes/Specials/HTMLUtfTextField.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-23T09:21:32Z",
+      "side": 1,
+      "message": "Clearly should repeat the original class name. Maybe \"HTMLTrimmingTextField\"? The fact that it\u0027s aware of UTF-8 does not matter much, because our entire code is UTF-8 anyway.",
+      "parentUuid": "0e0e73b5_aa7052a4",
       "range": {
         "startLine": 8,
         "startChar": 10,
