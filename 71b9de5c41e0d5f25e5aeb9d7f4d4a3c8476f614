@@ -207,6 +207,30 @@
       "revId": "71b9de5c41e0d5f25e5aeb9d7f4d4a3c8476f614",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_58588d59",
+        "filename": "repo/includes/Specials/HTMLUtfTextField.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-23T12:35:07Z",
+      "side": 1,
+      "message": "Ok, TrimmedTextField it is. \n\nBut I\u0027m still not happy about it. If anyone will have any suggestions I\u0027d be glad to hear them.",
+      "parentUuid": "0e0e73b5_d8259d57",
+      "range": {
+        "startLine": 8,
+        "startChar": 10,
+        "endLine": 8,
+        "endChar": 13
+      },
+      "revId": "71b9de5c41e0d5f25e5aeb9d7f4d4a3c8476f614",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
