@@ -154,7 +154,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTest {
 		return [
 			'unknown language' => [
 				[
-					'lang' => 'some-wierd-language',
+					'lang' => 'some-weird-language',
 					'label' => 'label-that-does-not-exist-1',
 					'description' => '',
 					'aliases' => '',

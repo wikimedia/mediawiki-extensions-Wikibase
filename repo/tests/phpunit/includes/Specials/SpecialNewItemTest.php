@@ -123,7 +123,7 @@ class SpecialNewItemTest extends SpecialNewEntityTest {
 		return [
 			'unknown language' => [
 				[
-					'lang' => 'some-wierd-language',
+					'lang' => 'some-weird-language',
 					'label' => 'label',
 					'description' => '',
 					'aliases' => '',

@@ -16,6 +16,12 @@ abstract class SpecialNewEntityTest extends SpecialPageTestBase {
 
 	use HtmlAssertionHelpers;
 
+	protected function setUp() {
+		parent::setUp();
+
+		$this->setUserLang( 'en' );
+	}
+
 	/**
 	 * @dataProvider provideValidEntityCreationRequests
 	 */
