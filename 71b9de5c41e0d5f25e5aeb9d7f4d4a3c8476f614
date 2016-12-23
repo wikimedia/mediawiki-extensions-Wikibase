@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_185e95ec",
+        "filename": "repo/includes/Specials/HTMLUtfTextField.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-23T10:41:04Z",
+      "side": 1,
+      "message": "Ok. I\u0027ll move it there",
+      "parentUuid": "0e0e73b5_f8050114",
+      "revId": "71b9de5c41e0d5f25e5aeb9d7f4d4a3c8476f614",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_2f723411",
         "filename": "repo/includes/Specials/HTMLUtfTextField.php",
         "patchSetId": 1
@@ -132,6 +150,30 @@
       "side": 1,
       "message": "Clearly should repeat the original class name. Maybe \"HTMLTrimmingTextField\"? The fact that it\u0027s aware of UTF-8 does not matter much, because our entire code is UTF-8 anyway.",
       "parentUuid": "0e0e73b5_aa7052a4",
+      "range": {
+        "startLine": 8,
+        "startChar": 10,
+        "endLine": 8,
+        "endChar": 13
+      },
+      "revId": "71b9de5c41e0d5f25e5aeb9d7f4d4a3c8476f614",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_785231e4",
+        "filename": "repo/includes/Specials/HTMLUtfTextField.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-23T10:41:04Z",
+      "side": 1,
+      "message": "I would rather have more declarative name.\nSo the name wouldn\u0027t tell us what it does, but tell us what type of data this field supposed to contain.\n\nTL;DR: Why do we trim this data in first place?\n\nTrimmingTextField tells us that it trims text but does not tell why. What I would like is something that explains why do we need to trim text in first place, like, for example: HumanReadableTextField, WordField, or SentenceField.\nIf we stick to TrimmingTextField and then for one case we will need to have to apply ucfirst() on the string, then we might end up with something like TrimmingAndUpercasingFirstLetterTextField which is not what I would like to ran into browsing code base :)\n\nI think if we stick with more declarative naming style using more domain-like concepts, the component/class will be more reusable.",
+      "parentUuid": "0e0e73b5_58152d3f",
       "range": {
         "startLine": 8,
         "startChar": 10,
