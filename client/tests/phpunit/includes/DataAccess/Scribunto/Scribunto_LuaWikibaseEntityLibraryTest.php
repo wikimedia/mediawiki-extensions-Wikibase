@@ -232,7 +232,7 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 	 * @param bool &$cacheSplit Will become true when the ParserCache has been split
 	 * @param Language|null $userLang The user's language
 	 *
-	 * @return Scribunto_LuaWikibaseLibrary
+	 * @return Scribunto_LuaWikibaseEntityLibrary
 	 */
 	private function newScribuntoLuaWikibaseLibrary( &$cacheSplit = false, Language $userLang = null ) {
 		/* @var $engine Scribunto_LuaEngine */

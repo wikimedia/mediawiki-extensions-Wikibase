@@ -18,6 +18,10 @@ class MediaWikiLanguageDirectionalityLookup implements LanguageDirectionalityLoo
 
 	/**
 	 * @see LanguageDirectionalityLookup::getDirectionality
+	 *
+	 * @param string $languageCode
+	 *
+	 * @return string|null 'ltr', 'rtl' or null if unknown
 	 */
 	public function getDirectionality( $languageCode ) {
 		return Language::factory( $languageCode )->getDir();

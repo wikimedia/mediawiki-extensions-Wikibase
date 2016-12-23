@@ -76,6 +76,12 @@ class ChangeOpDescription extends ChangeOpBase {
 
 	/**
 	 * @see ChangeOp::apply()
+	 *
+	 * @param EntityDocument $entity
+	 * @param Summary|null $summary
+	 *
+	 * @throws InvalidArgumentException
+	 * @throws ChangeOpException
 	 */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
 		if ( !( $entity instanceof DescriptionsProvider ) ) {
