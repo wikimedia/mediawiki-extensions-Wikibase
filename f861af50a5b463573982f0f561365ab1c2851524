@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_78c11133",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewPropertyTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-23T11:35:09Z",
+      "side": 1,
+      "message": "Just to let you know, there are two minor problems with this:\n* The double brackets are something only some IDEs and tools can recognize as a valid type. This should be array[] for maximum tool assistence.\n* This doc block is not helpful, because *all* PHPUnit data providers work like this. Documenting this trivial fact thousands of times does not help much, but is error-prone and makes the code even harder to read.",
+      "revId": "f861af50a5b463573982f0f561365ab1c2851524",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
