@@ -75,7 +75,9 @@ class DispatchingServiceFactory extends ServiceContainer {
 
 	/**
 	 * Returns a map of id prefix mappings defined for configured foreign repositories.
-	 * @return array Associative array mapping repository names to repository-specific prefix mapping
+	 *
+	 * @return array[] $settings Associative array mapping repository names to repository-specific
+	 *  prefix mapping.
 	 */
 	private function getIdPrefixMaps( array $settings ) {
 		$mappings = [];

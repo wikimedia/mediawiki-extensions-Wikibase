@@ -79,23 +79,6 @@ class SetSiteLink extends ModifyEntity {
 	}
 
 	/**
-	 * @see ModifyEntity::getEntityRevisionFromApiParams
-	 */
-	protected function getEntityRevisionFromApiParams( array $params ) {
-		$entityRev = parent::getEntityRevisionFromApiParams( $params );
-
-		// If we found anything then check if it is of the correct base class
-		if ( !is_null( $entityRev ) && !( $entityRev->getEntity() instanceof Item ) ) {
-			$this->errorReporter->dieError(
-				'The content on the found page is not of correct type',
-				'wrong-class'
-			);
-		}
-
-		return $entityRev;
-	}
-
-	/**
 	 * @see ModifyEntity::modifyEntity
 	 */
 	protected function modifyEntity( EntityDocument &$entity, array $params, $baseRevId ) {
