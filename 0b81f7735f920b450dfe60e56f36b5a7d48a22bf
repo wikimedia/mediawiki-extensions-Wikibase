@@ -304,6 +304,30 @@
       "revId": "0b81f7735f920b450dfe60e56f36b5a7d48a22bf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_9bd39fd7",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLAliasesFieldTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-23T14:33:01Z",
+      "side": 1,
+      "message": "This is from MediaWiki core. One instruction per line. Always the same formatting, no matter if the body is empty or not. This rule is going to stay. There are others we can talk about.",
+      "parentUuid": "0e0e73b5_9b54bf57",
+      "range": {
+        "startLine": 21,
+        "startChar": 38,
+        "endLine": 21,
+        "endChar": 39
+      },
+      "revId": "0b81f7735f920b450dfe60e56f36b5a7d48a22bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
