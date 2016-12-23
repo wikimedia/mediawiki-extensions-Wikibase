@@ -77,6 +77,8 @@ class MwTimeIsoParser extends StringValueParser {
 
 	/**
 	 * @see StringValueParser::__construct
+	 *
+	 * @param ParserOptions|null $options
 	 */
 	public function __construct( ParserOptions $options = null ) {
 		parent::__construct( $options );

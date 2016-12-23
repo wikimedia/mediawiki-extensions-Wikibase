@@ -18,7 +18,8 @@ use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 class PageConnectionPresentationModel extends EchoEventPresentationModel {
 
 	/**
-	 * @param EchoEvent
+	 * @param EchoEvent $event
+	 *
 	 * @return string
 	 */
 	public function callbackForBundleCount( EchoEvent $event ) {

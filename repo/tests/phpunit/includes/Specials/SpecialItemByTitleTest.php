@@ -7,6 +7,7 @@ use SiteList;
 use SiteLookup;
 use SpecialPageTestBase;
 use Title;
+use WebResponse;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\LanguageNameLookup;
@@ -187,13 +188,13 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 	 * @dataProvider requestProvider
 	 */
 	public function testExecute( $sub, $target, array $matchers ) {
-		/* @var FauxResponse $response */
+		/* @var WebResponse $response */
 		list( $output, $response ) = $this->executeSpecialPage( $sub );
 
 		if ( $target !== null ) {
 			$target = Title::newFromText( $target )->getFullURL();
 			$expected = wfExpandUrl( $target, PROTO_CURRENT );
-			$this->assertEquals( $expected, $response->getheader( 'Location' ), 'Redirect' );
+			$this->assertEquals( $expected, $response->getHeader( 'Location' ), 'Redirect' );
 		}
 
 		foreach ( $matchers as $key => $matcher ) {

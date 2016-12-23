@@ -36,7 +36,7 @@ class InterwikiSortingHookHandlers {
 	private $alwaysSort;
 
 	/**
-	 * @return InterwikiSortingConfig
+	 * @return self
 	 */
 	public static function newFromGlobalState() {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
@@ -57,7 +57,7 @@ class InterwikiSortingHookHandlers {
 	 * @param Config $config
 	 * @param NamespaceChecker $namespaceChecker
 	 *
-	 * @return InterwikiSortingHookHandlers
+	 * @return self
 	 */
 	public static function newFromInterwikiSortingConfig(
 		Config $config,
@@ -69,7 +69,7 @@ class InterwikiSortingHookHandlers {
 			$config->get( 'InterwikiSortingSortPrepend' )
 		);
 
-		return new InterwikiSortingHookHandlers(
+		return new self(
 			$interwikiSorter,
 			$namespaceChecker,
 			$config->get( 'InterwikiSortingAlwaysSort' )
@@ -80,7 +80,7 @@ class InterwikiSortingHookHandlers {
 	 * @param SettingsArray $settings
 	 * @param NamespaceChecker $namespaceChecker
 	 *
-	 * @return InterwikiSortingHookHandlers
+	 * @return self
 	 */
 	public static function newFromWikibaseConfig(
 		SettingsArray $settings,
@@ -92,7 +92,7 @@ class InterwikiSortingHookHandlers {
 			$settings->getSetting( 'sortPrepend' )
 		);
 
-		return new InterwikiSortingHookHandlers(
+		return new self(
 			$interwikiSorter,
 			$namespaceChecker,
 			$settings->getSetting( 'alwaysSort' )

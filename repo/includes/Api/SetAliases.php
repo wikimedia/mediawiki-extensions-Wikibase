@@ -77,6 +77,8 @@ class SetAliases extends ModifyEntity {
 
 	/**
 	 * @see ModifyEntity::validateParameters
+	 *
+	 * @param array $params
 	 */
 	protected function validateParameters( array $params ) {
 		parent::validateParameters( $params );
