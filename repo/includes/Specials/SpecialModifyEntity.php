@@ -246,13 +246,14 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 		$this->getOutput()->addModuleStyles( array( 'wikibase.special' ) );
 
 		if ( $this->getUser()->isAnon() ) {
-			$this->showErrorHTML(
+			$this->getOutput()->addHTML( Html::rawElement(
+				'p',
+				[ 'class' => 'warning' ],
 				$this->msg(
 					'wikibase-anonymouseditwarning',
 					$this->msg( 'wikibase-entity-item' )->text()
-				)->parse(),
-				'warning'
-			);
+				)->parse()
+			) );
 		}
 
 		// Form header
