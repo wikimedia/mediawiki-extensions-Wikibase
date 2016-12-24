@@ -194,6 +194,16 @@ class SpecialNewPropertyTest extends SpecialNewEntityTest {
 				],
 				'you need to fill'
 			],
+			'empty label and description, aliases contain only spaces and pipe symbols' => [
+				[
+					SpecialNewProperty::FIELD_LANG => 'en',
+					SpecialNewProperty::FIELD_LABEL => '',
+					SpecialNewProperty::FIELD_DESCRIPTION => '',
+					SpecialNewProperty::FIELD_ALIASES => ' | || | ',
+					SpecialNewProperty::FIELD_DATATYPE => 'string',
+				],
+				'you need to fill',
+			],
 		];
 	}
 
