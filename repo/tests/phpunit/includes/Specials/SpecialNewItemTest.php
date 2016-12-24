@@ -188,6 +188,15 @@ class SpecialNewItemTest extends SpecialNewEntityTest {
 				],
 				'you need to fill'
 			],
+			'empty label and description, aliases contain only spaces and pipe symbols' => [
+				[
+					SpecialNewItem::FIELD_LANG => 'en',
+					SpecialNewItem::FIELD_LABEL => '',
+					SpecialNewItem::FIELD_DESCRIPTION => '',
+					SpecialNewItem::FIELD_ALIASES => ' | || | ',
+				],
+				'you need to fill'
+			],
 		];
 	}
 
