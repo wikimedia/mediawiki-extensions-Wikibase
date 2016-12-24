@@ -207,6 +207,7 @@
 	"wikibase-mergeitems-fromid": "합병되는 문서의 id",
 	"wikibase-mergeitems-toid": "합병할 문서의 id",
 	"wikibase-mergeitems-submit": "항목 합병",
+	"wikibase-itemmerge-redirect": "이 항목들은 이미 병합되었을 수 있습니다.",
 	"wikibase-itemmerge-failed-save": "항목 저장에 실패했습니다.",
 	"wikibase-itemmerge-permissiondenied": "권한이 없습니다.",
 	"special-dispatchstats": "편집 전송 통계",

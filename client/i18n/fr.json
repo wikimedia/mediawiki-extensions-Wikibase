@@ -21,7 +21,8 @@
 			"Wladek92",
 			"Pymouss",
 			"Zebulon84",
-			"Urhixidur"
+			"Urhixidur",
+			"Dgstranz"
 		]
 	},
 	"wikibase-client-desc": "Client pour l’extension Wikibase",
@@ -31,7 +32,7 @@
 	"apihelp-query+wbentityusage-param-prop": "Propriétés à ajouter au résultat.",
 	"apihelp-query+wbentityusage-paramvalue-prop-url": "Si activé, l’URL de l’entité sera ajoutée",
 	"apihelp-query+wbentityusage-param-entities": "Renvoyer uniquement la page qui utilise ces entités.",
-	"apihelp-query+wbentityusage-param-limit": "Combien d’utilisation d'entités renvoyer.",
+	"apihelp-query+wbentityusage-param-limit": "Combien d’utilisations d'entités renvoyer.",
 	"apihelp-query+wbentityusage-example-simple": "Obtenir les entités utilisées dans la page <kbd>Main Page</kbd>.",
 	"apihelp-query+wblistentityusage-description": "Retourne toutes les pages qui utilisent les identifiants d'entité donnés.",
 	"apihelp-query+wblistentityusage-param-prop": "Propriétés à ajouter au résultat.",
