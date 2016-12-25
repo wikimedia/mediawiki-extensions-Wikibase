@@ -8,7 +8,8 @@
 			"Yekrats",
 			"Macofe",
 			"Robin van der Vliet",
-			"AVRS"
+			"AVRS",
+			"Rafaneta"
 		]
 	},
 	"wikibase-desc": "Deponejo por strukturitaj datumoj",
@@ -119,12 +120,14 @@
 	"special-newproperty": "Kreu novan econ",
 	"wikibase-newproperty-fieldset": "Kreu novan econ",
 	"wikibase-newproperty-datatype": "Datumtipo:",
+	"wikibase-newproperty-insufficient-data": "Vi devas almenaŭ plenigigi aŭ labelon, priskribon, aŭ alinomojn.",
 	"special-newitem": "Krei novan eron",
 	"wikibase-newitem-fieldset": "Kreu novan eron",
 	"wikibase-newitem-site": "Retejo de la unua ligita paĝo",
 	"wikibase-newitem-page": "Nomo de la unua ligita paĝo",
 	"wikibase-newitem-no-external-page": "La menciita paĝo ne povas esti trovita en la koresponda vikio.",
 	"wikibase-newitem-not-recognized-siteid": "La provizita identigilo de retejo ne estis rekonita.",
+	"wikibase-newitem-insufficient-data": "Vi devas almenaŭ plenigi aŭ labelon, priskribon aŭ alinomojn.",
 	"wikibase-newentity-language": "Lingvo:",
 	"wikibase-newentity-label": "Etikedo:",
 	"wikibase-newentity-description": "Priskribo:",
