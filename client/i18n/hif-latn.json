@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Girmitya",
-			"Thakurji"
+			"Thakurji",
+			"Abdul Kadir"
 		]
 	},
 	"tooltip-t-wikibase": "Connected data repository item ke jorr",
@@ -11,7 +12,9 @@
 	"wikibase-editlinks": "Links ke badlo",
 	"wikibase-editlinkstitle": "Interlanguage jorr ke badlo",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Lukao",
 	"wikibase-rc-hide-wikidata-show": "Dekhao",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} edit"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} edit",
+	"wikibase-otherprojects": "Duusra project me"
 }

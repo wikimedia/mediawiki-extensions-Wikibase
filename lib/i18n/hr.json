@@ -6,6 +6,7 @@
 		]
 	},
 	"wikibase-error-unexpected": "Greška: $1",
+	"wikibase-error-ui-no-external-page": "Stranica \"$2\" nije pronađena na \"$1\".",
 	"wikibase-sitelinks-wikipedia": "Wikipedija",
 	"wikibase-sitelinks-sitename-columnheading": "Jezik",
 	"wikibase-sitelinks-link-columnheading": "Povezana stranica",

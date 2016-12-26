@@ -119,6 +119,7 @@
 	"wikibase-newproperty-fieldset": "Eng nei Eegeschaft uleeën",
 	"wikibase-newproperty-datatype": "Datentyp:",
 	"wikibase-newproperty-invalid-datatype": "Net valabelen Datentyp uginn.",
+	"wikibase-newproperty-insufficient-data": "Dir musst mindestens entweder d'Etikett, d'Beschreiwung oder den Alias aginn.",
 	"wikibase-description-helppage": "Help:Beschreiwung",
 	"wikibase-label-helppage": "Help:Etikett",
 	"special-newitem": "En neit Element uleeën",
