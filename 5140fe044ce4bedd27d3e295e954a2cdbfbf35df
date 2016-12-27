@@ -22,6 +22,30 @@
       "revId": "5140fe044ce4bedd27d3e295e954a2cdbfbf35df",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_7e20cef2",
+        "filename": "view/src/SiteLinksView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-27T18:00:33Z",
+      "side": 1,
+      "message": "Revoke my concerns. Found https://gerrit.wikimedia.org/r/#/c/196204/",
+      "parentUuid": "0e0e73b5_be26460f",
+      "range": {
+        "startLine": 315,
+        "startChar": 10,
+        "endLine": 315,
+        "endChar": 15
+      },
+      "revId": "5140fe044ce4bedd27d3e295e954a2cdbfbf35df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
