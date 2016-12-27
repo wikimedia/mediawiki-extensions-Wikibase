@@ -38,11 +38,6 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	private $entityTitleLookup;
 
 	/**
-	 * @var SiteLookup
-	 */
-	protected $siteLookup;
-
-	/**
 	 * @var EditEntityFactory
 	 */
 	private $editEntityFactory;
@@ -60,7 +55,6 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		$this->setSpecialWikibaseRepoPageServices(
 			$wikibaseRepo->getSummaryFormatter(),
 			$wikibaseRepo->getEntityTitleLookup(),
-			$wikibaseRepo->getSiteLookup(),
 			$wikibaseRepo->newEditEntityFactory( $this->getContext() )
 		);
 	}
@@ -70,18 +64,15 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 *
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param SiteLookup $siteLookup
 	 * @param EditEntityFactory $editEntityFactory
 	 */
 	public function setSpecialWikibaseRepoPageServices(
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
-		SiteLookup $siteLookup,
 		EditEntityFactory $editEntityFactory
 	) {
 		$this->summaryFormatter = $summaryFormatter;
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->siteLookup = $siteLookup;
 		$this->editEntityFactory = $editEntityFactory;
 	}
 
