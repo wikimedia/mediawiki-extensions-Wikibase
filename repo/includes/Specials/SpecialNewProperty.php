@@ -31,8 +31,8 @@ class SpecialNewProperty extends SpecialNewEntity {
 	/**
 	 * @since 0.2
 	 */
-	public function __construct() {
-		parent::__construct( 'NewProperty', 'property-create' );
+	public function __construct( SpecialPageCopyrightView $specialPageCopyrightView ) {
+		parent::__construct( 'NewProperty', 'property-create', $specialPageCopyrightView );
 	}
 
 	/**
