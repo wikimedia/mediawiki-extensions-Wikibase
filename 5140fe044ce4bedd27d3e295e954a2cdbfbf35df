@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_be26460f",
+        "filename": "view/src/SiteLinksView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-27T17:58:45Z",
+      "side": 1,
+      "message": "1. Do we use `FIXME` or `TODO`?\n2. If we use both, then what is the difference?\n3. In my experience `TODO:` means `WON\u0027T BE EVER FIXED:`, unless it is planned to be fixed in the task person currently working on or new task is created. So, what is the plan?",
+      "range": {
+        "startLine": 315,
+        "startChar": 10,
+        "endLine": 315,
+        "endChar": 15
+      },
+      "revId": "5140fe044ce4bedd27d3e295e954a2cdbfbf35df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
