@@ -43,8 +43,10 @@ class SpecialNewItemTest extends SpecialNewEntityTest {
 	}
 
 	protected function newSpecialPage() {
-		return new SpecialNewItem( $this->siteStore );
+		return new SpecialNewItem( $this->siteStore, $this->copyrightView );
 	}
+
+	//TODO: Add test testing site link addition
 
 	public function testAllNecessaryFormFieldsArePresent_WhenRendered() {
 

@@ -11,6 +11,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLTrimmedTextField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField;
+use Wikibase\SettingsArray;
 use Wikibase\Summary;
 
 /**
@@ -31,14 +32,21 @@ class SpecialNewItem extends SpecialNewEntity {
 	const FIELD_PAGE = 'page';
 
 	/**
-	 * @since 0.1
-	 * @param SiteLookup|null $siteStore
+	 * @var SiteLookup
 	 */
-	public function __construct( SiteLookup $siteStore = null ) {
-		parent::__construct( 'NewItem' );
-		if ( $siteStore ) {
-			$this->siteLookup = $siteStore;
-		}
+	private $siteLookupService;
+
+	/**
+	 * @since 0.1
+	 * @param SiteLookup $siteLookup
+	 * @param SettingsArray $settings
+	 */
+	public function __construct(
+		SiteLookup $siteLookup,
+		SpecialPageCopyrightView $copyrightView
+	) {
+		parent::__construct( 'NewItem', 'createpage', $copyrightView );
+		$this->siteLookupService = $siteLookup;
 	}
 
 	public function doesWrites() {
@@ -68,7 +76,7 @@ class SpecialNewItem extends SpecialNewEntity {
 		$fingerprint->setAliasGroup( $languageCode, $formData[ self::FIELD_ALIASES ] );
 
 		if ( isset( $formData[ self::FIELD_SITE ] ) ) {
-			$site = $this->siteLookup->getSite( $formData[ self::FIELD_SITE ] );
+			$site = $this->siteLookupService->getSite( $formData[ self::FIELD_SITE ] );
 			$normalizedPageName = $site->normalizePageName( $formData[ self::FIELD_PAGE ] );
 
 			$item->getSiteLinkList()->addNewSiteLink( $site->getGlobalId(), $normalizedPageName );
@@ -118,7 +126,7 @@ class SpecialNewItem extends SpecialNewEntity {
 				'id' => 'wb-newitem-site',
 				'readonly' => 'readonly',
 				'validation-callback' => function ( $siteId, $formData ) {
-					$site = $this->siteLookup->getSite( $siteId );
+					$site = $this->siteLookupService->getSite( $siteId );
 
 					if ( $site === null ) {
 						return [ $this->msg( 'wikibase-newitem-not-recognized-siteid' )->text() ];
@@ -137,7 +145,7 @@ class SpecialNewItem extends SpecialNewEntity {
 				'readonly' => 'readonly',
 				'validation-callback' => function ( $pageName, $formData ) {
 					$siteId = $formData['site'];
-					$site = $this->siteLookup->getSite( $siteId );
+					$site = $this->siteLookupService->getSite( $siteId );
 					if ( $site === null ) {
 						return true;
 					}
