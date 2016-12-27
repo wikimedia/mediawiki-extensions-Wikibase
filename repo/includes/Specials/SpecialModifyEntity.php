@@ -74,7 +74,6 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 			$wikibaseRepo->getSummaryFormatter(),
 			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
 			$wikibaseRepo->getEntityTitleLookup(),
-			$wikibaseRepo->getSiteLookup(),
 			$wikibaseRepo->newEditEntityFactory( $this->getContext() )
 		);
 	}
@@ -85,21 +84,18 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param SiteLookup $siteLookup
 	 * @param EditEntityFactory $editEntityFactory
 	 */
 	public function setSpecialModifyEntityServices(
 		SummaryFormatter $summaryFormatter,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleLookup $entityTitleLookup,
-		SiteLookup $siteLookup,
 		EditEntityFactory $editEntityFactory
 	) {
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->setSpecialWikibaseRepoPageServices(
 			$summaryFormatter,
 			$entityTitleLookup,
-			$siteLookup,
 			$editEntityFactory
 		);
 	}

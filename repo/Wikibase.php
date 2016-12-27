@@ -180,8 +180,35 @@ call_user_func( function() {
 	$wgAPIListModules['wbsubscribers'] = Wikibase\Repo\Api\ListSubscribers::class;
 
 	// Special page registration
-	$wgSpecialPages['NewItem'] = Wikibase\Repo\Specials\SpecialNewItem::class;
-	$wgSpecialPages['NewProperty'] = Wikibase\Repo\Specials\SpecialNewProperty::class;
+	$wgSpecialPages['NewItem'] = function () {
+		$wikibaseRepo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+
+		$settings = $wikibaseRepo->getSettings();
+		$copyrightView = new \Wikibase\Repo\Specials\SpecialPageCopyrightView(
+			new \Wikibase\CopyrightMessageBuilder(),
+			$settings->getSetting( 'dataRightsUrl' ),
+			$settings->getSetting( 'dataRightsText' )
+		);
+
+		return new Wikibase\Repo\Specials\SpecialNewItem(
+			$wikibaseRepo->getSiteLookup(),
+			$copyrightView
+		);
+	};
+	$wgSpecialPages['NewProperty'] = function () {
+		$wikibaseRepo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+
+		$settings = $wikibaseRepo->getSettings();
+		$copyrightView = new \Wikibase\Repo\Specials\SpecialPageCopyrightView(
+			new \Wikibase\CopyrightMessageBuilder(),
+			$settings->getSetting( 'dataRightsUrl' ),
+			$settings->getSetting( 'dataRightsText' )
+		);
+
+		return new Wikibase\Repo\Specials\SpecialNewProperty(
+			$copyrightView
+		);
+	};
 	$wgSpecialPages['ItemByTitle'] = Wikibase\Repo\Specials\SpecialItemByTitle::class;
 	$wgSpecialPages['GoToLinkedPage'] = Wikibase\Repo\Specials\SpecialGoToLinkedPage::class;
 	$wgSpecialPages['ItemDisambiguation'] = Wikibase\Repo\Specials\SpecialItemDisambiguation::class;

@@ -82,7 +82,6 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param SiteLookup $siteLookup
 	 * @param FingerprintChangeOpFactory $changeOpFactory
 	 * @param ContentLanguages $termsLanguages
 	 * @param EditEntityFactory $editEntityFactory
@@ -91,7 +90,6 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		SummaryFormatter $summaryFormatter,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleLookup $entityTitleLookup,
-		SiteLookup $siteLookup,
 		FingerprintChangeOpFactory $changeOpFactory,
 		ContentLanguages $termsLanguages,
 		EditEntityFactory $editEntityFactory
@@ -100,7 +98,6 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			$summaryFormatter,
 			$entityRevisionLookup,
 			$entityTitleLookup,
-			$siteLookup,
 			$editEntityFactory
 		);
 
