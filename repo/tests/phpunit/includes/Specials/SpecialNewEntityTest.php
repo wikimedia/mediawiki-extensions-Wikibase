@@ -7,6 +7,7 @@ use RequestContext;
 use SpecialPageTestBase;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Repo\Specials\SpecialPageCopyrightView;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -16,11 +17,22 @@ abstract class SpecialNewEntityTest extends SpecialPageTestBase {
 
 	use HtmlAssertionHelpers;
 
+	/**
+	 * @var SpecialPageCopyrightView|\PHPUnit_Framework_MockObject_MockObject
+	 */
+	protected $copyrightView;
+
 	protected function setUp() {
 		parent::setUp();
 
 		$this->setUserLang( 'en' );
+
+		$this->copyrightView = $this->getMockBuilder( SpecialPageCopyrightView::class )
+			->disableOriginalConstructor()
+			->getMock();
 	}
+
+	//TODO: Add test checking copyright rendering
 
 	/**
 	 * @dataProvider provideValidEntityCreationRequests
