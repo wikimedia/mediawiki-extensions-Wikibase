@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_c9a93fde",
+        "filename": "repo/includes/ChangeOp/EditEntityApiChangeOpDeserializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-28T15:41:47Z",
+      "side": 1,
+      "message": "I would prefer not to bind this interface to EditEntity API. Why should we? We are constructing ChangeOps from some external representation, that\u0027s all. The ChangeOps are in no way specific to the API module.",
+      "parentUuid": "0e0e73b5_067184a7",
+      "revId": "3a64d0e822023e7ff500d68e1062f6f9090523d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_a6563807",
         "filename": "repo/includes/ChangeOp/EditEntityApiChangeOpDeserializer.php",
         "patchSetId": 2
@@ -76,6 +94,30 @@
       "writtenOn": "2016-12-28T11:50:08Z",
       "side": 1,
       "message": "What validations?",
+      "range": {
+        "startLine": 17,
+        "startChar": 48,
+        "endLine": 17,
+        "endChar": 59
+      },
+      "revId": "3a64d0e822023e7ff500d68e1062f6f9090523d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_a9accbeb",
+        "filename": "repo/includes/ChangeOp/EditEntityApiChangeOpDeserializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-28T15:41:47Z",
+      "side": 1,
+      "message": "Hm... why would a deserializer run validation? That seems like a completely different concern. The deserializer should just deserialize. Any checking of contextual validity is up to the caller.",
+      "parentUuid": "0e0e73b5_863e94b3",
       "range": {
         "startLine": 17,
         "startChar": 48,
