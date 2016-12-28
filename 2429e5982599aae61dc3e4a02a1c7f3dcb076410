@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_a69e3808",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-28T14:04:59Z",
+      "side": 1,
+      "message": "Not related to exactly this patch, but:\nShouldn\u0027t it fail on error even in silent mode? It might not out put anything, but should return expected code, I guess.",
+      "range": {
+        "startLine": 352,
+        "startChar": 0,
+        "endLine": 356,
+        "endChar": 2
+      },
+      "revId": "2429e5982599aae61dc3e4a02a1c7f3dcb076410",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
