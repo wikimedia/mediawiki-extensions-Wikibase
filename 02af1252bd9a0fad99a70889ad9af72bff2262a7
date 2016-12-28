@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_46ef7cad",
+        "filename": "repo/tests/phpunit/includes/DataTypeSelectorTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-28T13:18:24Z",
+      "side": 1,
+      "message": "I remember someone complained that it is hard for newbie to start working on Wikibase, and I think small things like this can make a big difference.\nI believe it is quiet hard (almost imposible) to understand what is \u0027qqx\u0027 if you sit alone at home. And also I wouldn\u0027t guess that I can ask someone about thing like this and get a reasonable answer.",
+      "parentUuid": "0e0e73b5_af00646e",
+      "range": {
+        "startLine": 65,
+        "startChar": 48,
+        "endLine": 65,
+        "endChar": 53
+      },
+      "revId": "02af1252bd9a0fad99a70889ad9af72bff2262a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_6f86ec19",
         "filename": "repo/tests/phpunit/includes/DataTypeSelectorTest.php",
         "patchSetId": 1
