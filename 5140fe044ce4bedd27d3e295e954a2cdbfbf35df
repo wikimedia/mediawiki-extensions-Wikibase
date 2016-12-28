@@ -46,6 +46,30 @@
       "revId": "5140fe044ce4bedd27d3e295e954a2cdbfbf35df",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_e39422ec",
+        "filename": "view/src/SiteLinksView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-28T10:04:13Z",
+      "side": 1,
+      "message": "Both. No strict rule. For me, personally, TODO is more relaxed (something we may or may not do in some months or even years), while FIXME is something that should be done after a certain requirement is fulfilled.\n\nIn this case I\u0027m introducing the FIXMEs to have two smaller, much easier to review patches.",
+      "parentUuid": "0e0e73b5_be26460f",
+      "range": {
+        "startLine": 315,
+        "startChar": 10,
+        "endLine": 315,
+        "endChar": 15
+      },
+      "revId": "5140fe044ce4bedd27d3e295e954a2cdbfbf35df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
