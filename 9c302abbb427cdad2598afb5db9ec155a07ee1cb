@@ -83,6 +83,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_09ee371f",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-28T16:14:59Z",
+      "side": 1,
+      "message": "I disagree. This type of \"serialization\" *is* currently bound to EditEntity. We can change this, but this needs at least a place for a good documentation of this \"serialization\" format.\n\nMy questions from the previous patch sets are not answered. Basically, where is this format documented? At the moment I can\u0027t find a serializer that outputs this format. I believe something like this does not even exist.",
+      "parentUuid": "0e0e73b5_49be6f14",
+      "revId": "9c302abbb427cdad2598afb5db9ec155a07ee1cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_916ca906",
         "filename": "repo/includes/Api/EditEntity.php",
         "patchSetId": 5
