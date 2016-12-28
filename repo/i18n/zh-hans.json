@@ -576,7 +576,7 @@
 	"apihelp-wbsetlabel-param-bot": "将此编辑标记为机器人编辑。此URL标记将只在用户属于“bot”用户组时受尊重。",
 	"apihelp-wbsetlabel-param-language": "标签语言",
 	"apihelp-wbsetlabel-param-value": "标签值",
-	"apihelp-wbsetlabel-example-1": "为ID为“Q42”的页面设置字符串“Wikimedia”作为英语标签，并报告它为漂亮打印的json",
+	"apihelp-wbsetlabel-example-1": "为ID为“Q42”的页面设置字符串“Wikimedia”作为英语标签，并报告它为优质打印的JSON。",
 	"apihelp-wbsetlabel-example-2": "为带有英语维基 => \"Earth\"的项设置英语标签为“Earth”。",
 	"apihelp-wbsetqualifier-description": "创建一个限定符或设置现有限定符的值。",
 	"apihelp-wbsetqualifier-param-claim": "识别用于已在标识符中设置的声明的GUID",

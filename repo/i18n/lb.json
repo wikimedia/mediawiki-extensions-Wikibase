@@ -165,6 +165,7 @@
 	"wikibase-mergeitems-toid": "D'ID op déi zesummegeluecht gëtt",
 	"wikibase-mergeitems-submit": "Elementer zesummeleeën",
 	"wikibase-mergeitems-success": "$1 gouf mat $3 zesummegeluecht a virugeleet.",
+	"wikibase-itemmerge-redirect": "Dës Elementer sinn eventuell scho fusionéiert.",
 	"wikibase-itemmerge-failed-save": "D'Element konnt net gespäichert ginn.",
 	"wikibase-itemmerge-permissiondenied": "Autorisatioun refuséiert",
 	"wikibase-itemmerge-no-such-entity": "Element gouf net fonnt.",
