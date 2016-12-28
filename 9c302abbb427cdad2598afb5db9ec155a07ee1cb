@@ -65,6 +65,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_49be6f14",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-28T16:08:42Z",
+      "side": 1,
+      "message": "They are ChangeOpDeserializerCallabcks. They should not be bound to the EditEntity API module. The \"remove\" element is needed to represent ChangeOps that remove something, it\u0027s not specific to EditEntity. It just happens that EditEntity is the only thing that uses serialized ChangeOps.",
+      "parentUuid": "0e0e73b5_58eacd9d",
+      "revId": "9c302abbb427cdad2598afb5db9ec155a07ee1cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_916ca906",
         "filename": "repo/includes/Api/EditEntity.php",
         "patchSetId": 5
@@ -94,6 +112,24 @@
       "side": 1,
       "message": "Just a wild idea, let\u0027s do it in lexeme (since mocking everything just to test this isn\u0027t straightforward)",
       "parentUuid": "0e0e73b5_916ca906",
+      "revId": "9c302abbb427cdad2598afb5db9ec155a07ee1cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_29b9fb29",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-28T16:08:42Z",
+      "side": 1,
+      "message": "It would be good to mock everything to test *everything*, not just this. Overhauling the tests for EditEntity would indeed be worthwhile, I think.",
+      "parentUuid": "0e0e73b5_2ff5947f",
       "revId": "9c302abbb427cdad2598afb5db9ec155a07ee1cb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
