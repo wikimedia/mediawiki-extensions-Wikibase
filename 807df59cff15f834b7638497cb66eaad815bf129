@@ -22,6 +22,30 @@
       "revId": "807df59cff15f834b7638497cb66eaad815bf129",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_c6e12cfd",
+        "filename": "repo/tests/phpunit/includes/Api/EntityLoadingHelperTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-28T12:58:17Z",
+      "side": 1,
+      "message": "In this patch I\u0027m aiming for a minimal change, that touches as few lines as possible, while making things *simpler* and easier to understand. I believe I achieved this goal. Yes, this is still hard to understand and needs more refactoring. But I believe this is not worth our time at the moment.",
+      "parentUuid": "0e0e73b5_26fb68bc",
+      "range": {
+        "startLine": 91,
+        "startChar": 89,
+        "endLine": 122,
+        "endChar": 15
+      },
+      "revId": "807df59cff15f834b7638497cb66eaad815bf129",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
