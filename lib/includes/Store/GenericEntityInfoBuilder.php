@@ -287,6 +287,8 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 
 	/**
 	 * @see EntityInfoBuilder::removeMissing
+	 *
+	 * @param string $redirects A flag, either "keep-redirects" (default) or "remove-redirects".
 	 */
 	public function removeMissing( $redirects = 'keep-redirects' ) {
 		foreach ( array_keys( $this->entityInfo ) as $key ) {

@@ -138,6 +138,9 @@ class ChangeOpsMerge {
 		return $this->changeOpFactoryProvider->getSiteLinkChangeOpFactory();
 	}
 
+	/**
+	 * @throws ChangeOpException
+	 */
 	public function apply() {
 		// NOTE: we don't want to validate the ChangeOps individually, since they represent
 		// data already present and saved on the system. Also, validating each would be
@@ -360,8 +363,10 @@ class ChangeOpsMerge {
 	}
 
 	/**
-	 * Throws an exception if it would not be possible to save the updated items
-	 * @throws ChangeOpException
+	 * @param Item $item
+	 * @param ItemId $fromId
+	 *
+	 * @throws ChangeOpValidationException if it would not be possible to save the updated items.
 	 */
 	private function applyConstraintChecks( Item $item, ItemId $fromId ) {
 		$constraintValidator = new CompositeEntityValidator(

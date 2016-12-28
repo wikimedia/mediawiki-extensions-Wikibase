@@ -87,6 +87,13 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	/**
 	 * Set service objects to use. Unit tests may call this to substitute mock
 	 * services.
+	 *
+	 * @param DataTypeFactory $dataTypeFactory
+	 * @param PropertyInfoStore $propertyInfoStore
+	 * @param EntityIdFormatterFactory $entityIdFormatterFactory
+	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
+	 * @param EntityTitleLookup $titleLookup
+	 * @param BufferingTermLookup $bufferingTermLookup
 	 */
 	public function initServices(
 		DataTypeFactory $dataTypeFactory,

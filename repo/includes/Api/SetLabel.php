@@ -45,7 +45,7 @@ class SetLabel extends ModifyTerm {
 	/**
 	 * @see ModifyEntity::modifyEntity
 	 *
-	 * @param EntityDocument $entity
+	 * @param EntityDocument &$entity
 	 * @param array $params
 	 * @param int $baseRevId
 	 *
