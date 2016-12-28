@@ -8,8 +8,6 @@ use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 
 /**
- * @covers client/includes/DispatchingServiceWiring.php
- *
  * @group Wikibase
  * @group WikibaseClient
  *

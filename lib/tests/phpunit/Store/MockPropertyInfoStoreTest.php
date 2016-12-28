@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Tests\Store;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
- * @covers Wikibase\Test\MockPropertyInfoStore
+ * @covers Wikibase\Lib\Tests\Store\MockPropertyInfoStore
  *
  * @since 0.4
  *

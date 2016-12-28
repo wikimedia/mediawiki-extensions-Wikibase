@@ -11,8 +11,6 @@ use Wikibase\View\EntityTermsView;
 use Wikibase\View\EntityView;
 
 /**
- * @covers WikibaseRepo.entitytypes.php
- *
  * @group Wikibase
  * @group WikibaseRepo
  *

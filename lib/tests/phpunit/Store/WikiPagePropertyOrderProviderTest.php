@@ -9,7 +9,7 @@ use WikitextContent;
 use MediaWikiTestCase;
 
 /**
- * @covers Wikibase\Store\WikiPagePropertyOrderProvider
+ * @covers Wikibase\Lib\Store\WikiPagePropertyOrderProvider
  * @group Wikibase
  * @group WikibaseLib
  * @group Database
