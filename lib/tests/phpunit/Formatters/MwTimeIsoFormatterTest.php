@@ -356,21 +356,21 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 				'1997',
 			),
 			array(
-				'+0-00-00T00:00:42Z', TimeValue::PRECISION_YEAR,
+				'+0-01-01T00:00:42Z', TimeValue::PRECISION_YEAR,
 				'0',
 			),
 
 			// centuries and millenia start with 1, so we can format "low" years just fine
 			array(
-				'+100-00-00T00:00:06Z', TimeValue::PRECISION_YEAR1K,
+				'+100-01-01T00:00:06Z', TimeValue::PRECISION_YEAR1K,
 				'1. millennium'
 			),
 			array(
-				'-100-00-00T00:00:06Z', TimeValue::PRECISION_YEAR1K,
+				'-100-01-01T00:00:06Z', TimeValue::PRECISION_YEAR1K,
 				'1. millennium BCE'
 			),
 			array(
-				'+10-00-00T00:00:07Z', TimeValue::PRECISION_YEAR100,
+				'+10-01-01T00:00:07Z', TimeValue::PRECISION_YEAR100,
 				'1. century'
 			),
 
@@ -458,31 +458,31 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 				'100000000',
 			),
 			array(
-				'+10000000-00-00T00:00:01Z', TimeValue::PRECISION_YEAR100M,
+				'+10000000-01-01T00:00:01Z', TimeValue::PRECISION_YEAR100M,
 				'10000000',
 			),
 			array(
-				'+1000000-00-00T00:00:02Z', TimeValue::PRECISION_YEAR10M,
+				'+1000000-01-01T00:00:02Z', TimeValue::PRECISION_YEAR10M,
 				'1000000',
 			),
 			array(
-				'+100000-00-00T00:00:03Z', TimeValue::PRECISION_YEAR1M,
+				'+100000-01-01T00:00:03Z', TimeValue::PRECISION_YEAR1M,
 				'100000',
 			),
 			array(
-				'+10000-00-00T00:00:04Z', TimeValue::PRECISION_YEAR100K,
+				'+10000-01-01T00:00:04Z', TimeValue::PRECISION_YEAR100K,
 				'10000',
 			),
 			array(
-				'+1000-00-00T00:00:05Z', TimeValue::PRECISION_YEAR10K,
+				'+1000-01-01T00:00:05Z', TimeValue::PRECISION_YEAR10K,
 				'1000',
 			),
 			array(
-				'+1-00-00T00:00:08Z', TimeValue::PRECISION_YEAR10,
+				'+1-01-01T00:00:08Z', TimeValue::PRECISION_YEAR10,
 				'1',
 			),
 			array(
-				'-0-00-00T00:00:42Z', TimeValue::PRECISION_YEAR,
+				'-0-01-01T00:00:42Z', TimeValue::PRECISION_YEAR,
 				'0 BCE',
 			),
 
@@ -506,7 +506,7 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 				'de'
 			),
 			array(
-				'+10000000-00-00T00:00:01Z', TimeValue::PRECISION_YEAR100M,
+				'+10000000-01-01T00:00:01Z', TimeValue::PRECISION_YEAR100M,
 				'10000000',
 				'de'
 			),
