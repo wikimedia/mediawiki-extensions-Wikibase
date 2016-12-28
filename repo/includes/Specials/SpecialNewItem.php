@@ -38,11 +38,18 @@ class SpecialNewItem extends SpecialNewEntity {
 		}
 	}
 
+	/**
+	 * @see SpecialNewEntity::doesWrites
+	 *
+	 * @return bool
+	 */
 	public function doesWrites() {
 		return true;
 	}
 
 	/**
+	 * @param WebRequest $request
+	 *
 	 * @return bool
 	 */
 	private function isSiteLinkProvided( WebRequest $request ) {
@@ -51,7 +58,10 @@ class SpecialNewItem extends SpecialNewEntity {
 	}
 
 	/**
+	 * @see SpecialNewEntity::createEntityFromFormData
+	 *
 	 * @param array $formData
+	 *
 	 * @return Item
 	 */
 	protected function createEntityFromFormData( array $formData ) {

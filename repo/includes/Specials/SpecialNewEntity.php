@@ -70,6 +70,11 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		$this->languageNameLookup = $wikibaseRepo->getLanguageNameLookup();
 	}
 
+	/**
+	 * @see SpecialPage::doesWrites
+	 *
+	 * @return bool
+	 */
 	public function doesWrites() {
 		return true;
 	}

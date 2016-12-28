@@ -112,6 +112,8 @@ class SetQualifier extends ApiBase {
 	/**
 	 * Checks if the required parameters are set and the ones that make no sense given the
 	 * snaktype value are not set.
+	 *
+	 * @param array $params
 	 */
 	private function validateParameters( array $params ) {
 		if ( !( $this->modificationHelper->validateStatementGuid( $params['claim'] ) ) ) {

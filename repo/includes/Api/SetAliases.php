@@ -95,6 +95,12 @@ class SetAliases extends ModifyEntity {
 
 	/**
 	 * @see ModifyEntity::modifyEntity
+	 *
+	 * @param EntityDocument &$entity
+	 * @param array $params
+	 * @param int $baseRevId
+	 *
+	 * @return Summary
 	 */
 	protected function modifyEntity( EntityDocument &$entity, array $params, $baseRevId ) {
 		if ( !( $entity instanceof AliasesProvider ) ) {
