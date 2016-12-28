@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_c6536c19",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-28T11:50:08Z",
+      "side": 1,
+      "message": "Typo.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "3a64d0e822023e7ff500d68e1062f6f9090523d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_067184a7",
+        "filename": "repo/includes/ChangeOp/EditEntityApiChangeOpDeserializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-28T11:50:08Z",
+      "side": 1,
+      "message": "What does is deserialize from what form to what other form?",
+      "revId": "3a64d0e822023e7ff500d68e1062f6f9090523d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_a6563807",
+        "filename": "repo/includes/ChangeOp/EditEntityApiChangeOpDeserializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-28T11:50:08Z",
+      "side": 1,
+      "message": "\"Apply\"? But apply to what? It\u0027s confusing to have this parameter when the method returns ChangeOps. What does it do?",
+      "range": {
+        "startLine": 16,
+        "startChar": 45,
+        "endLine": 16,
+        "endChar": 51
+      },
+      "revId": "3a64d0e822023e7ff500d68e1062f6f9090523d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_863e94b3",
+        "filename": "repo/includes/ChangeOp/EditEntityApiChangeOpDeserializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-28T11:50:08Z",
+      "side": 1,
+      "message": "What validations?",
+      "range": {
+        "startLine": 17,
+        "startChar": 48,
+        "endLine": 17,
+        "endChar": 59
+      },
+      "revId": "3a64d0e822023e7ff500d68e1062f6f9090523d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_26436845",
+        "filename": "repo/includes/ChangeOp/EditEntityApiChangeOpDeserializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-28T11:50:08Z",
+      "side": 1,
+      "message": "This sentence seems to be incomplete. \"If something implements the labels provider when applying labels\"? What does this mean?",
+      "range": {
+        "startLine": 18,
+        "startChar": 37,
+        "endLine": 18,
+        "endChar": 57
+      },
+      "revId": "3a64d0e822023e7ff500d68e1062f6f9090523d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
