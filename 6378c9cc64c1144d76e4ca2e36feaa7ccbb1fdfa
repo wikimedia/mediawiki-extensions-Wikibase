@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_295a1b23",
+        "filename": "repo/includes/ChangeOp/ChangeOpDescription.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-28T16:03:55Z",
+      "side": 1,
+      "message": "The exceptions are different in almost all cases.",
+      "parentUuid": "0e0e73b5_8663340a",
+      "range": {
+        "startLine": 76,
+        "startChar": 1,
+        "endLine": 84,
+        "endChar": 4
+      },
+      "revId": "6378c9cc64c1144d76e4ca2e36feaa7ccbb1fdfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_665e004a",
         "filename": "repo/includes/ChangeOp/ChangeOpQualifier.php",
         "patchSetId": 2
@@ -140,6 +164,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_29433b45",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialItemByTitleTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-28T16:03:55Z",
+      "side": 1,
+      "message": "The documentation of executeSpecialPage says WebResponse, which is all we need to know for the code below.",
+      "parentUuid": "0e0e73b5_660cc045",
+      "range": {
+        "startLine": 191,
+        "startChar": 10,
+        "endLine": 191,
+        "endChar": 21
+      },
+      "revId": "6378c9cc64c1144d76e4ca2e36feaa7ccbb1fdfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_c905bf14",
         "filename": "view/resources/wikibase/view/ViewFactory.js",
         "patchSetId": 2
@@ -151,6 +199,30 @@
       "writtenOn": "2016-12-28T14:40:48Z",
       "side": 1,
       "message": "Not critical, but there is a way to document callbacks\u0027 arguments and return type: http://usejsdoc.org/tags-callback.html",
+      "range": {
+        "startLine": 580,
+        "startChar": 4,
+        "endLine": 580,
+        "endChar": 36
+      },
+      "revId": "6378c9cc64c1144d76e4ca2e36feaa7ccbb1fdfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_e973e3ad",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-28T16:03:55Z",
+      "side": 1,
+      "message": "Good to know, thanks.",
+      "parentUuid": "0e0e73b5_c905bf14",
       "range": {
         "startLine": 580,
         "startChar": 4,
