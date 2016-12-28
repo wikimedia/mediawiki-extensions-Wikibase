@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_064f4498",
+        "filename": "repo/includes/Api/RemoveQualifiers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-28T14:40:48Z",
+      "side": 1,
+      "message": "I guess it\u0027s worth mentioning that it can throw `ApiUsageException`",
+      "range": {
+        "startLine": 114,
+        "startChar": 1,
+        "endLine": 117,
+        "endChar": 4
+      },
+      "revId": "6378c9cc64c1144d76e4ca2e36feaa7ccbb1fdfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_e651d03b",
+        "filename": "repo/includes/Api/SetAliases.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-28T14:40:48Z",
+      "side": 1,
+      "message": "@throws ApiUsageException",
+      "range": {
+        "startLine": 78,
+        "startChar": 1,
+        "endLine": 82,
+        "endChar": 4
+      },
+      "revId": "6378c9cc64c1144d76e4ca2e36feaa7ccbb1fdfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_8663340a",
+        "filename": "repo/includes/ChangeOp/ChangeOpDescription.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-28T14:40:48Z",
+      "side": 1,
+      "message": "Docblock is exactly matches docblock on parent method, besides method description.\nCan we use `{@inheritdoc}` or skip it entirely? \nI doesn\u0027t seem to add any value.",
+      "range": {
+        "startLine": 76,
+        "startChar": 1,
+        "endLine": 84,
+        "endChar": 4
+      },
+      "revId": "6378c9cc64c1144d76e4ca2e36feaa7ccbb1fdfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_665e004a",
+        "filename": "repo/includes/ChangeOp/ChangeOpQualifier.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-28T14:40:48Z",
+      "side": 1,
+      "message": "Cn be replaced with `{@inheritdoc}`",
+      "range": {
+        "startLine": 75,
+        "startChar": 71,
+        "endLine": 80,
+        "endChar": 29
+      },
+      "revId": "6378c9cc64c1144d76e4ca2e36feaa7ccbb1fdfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_06362400",
+        "filename": "repo/includes/ChangeOp/ChangeOpQualifierRemove.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-28T14:40:48Z",
+      "side": 1,
+      "message": "{@inheritdoc}",
+      "range": {
+        "startLine": 57,
+        "startChar": 27,
+        "endLine": 62,
+        "endChar": 29
+      },
+      "revId": "6378c9cc64c1144d76e4ca2e36feaa7ccbb1fdfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_660cc045",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialItemByTitleTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-28T14:40:48Z",
+      "side": 1,
+      "message": "It actually is FauxResponse - checked it.",
+      "range": {
+        "startLine": 191,
+        "startChar": 10,
+        "endLine": 191,
+        "endChar": 21
+      },
+      "revId": "6378c9cc64c1144d76e4ca2e36feaa7ccbb1fdfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_c905bf14",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-28T14:40:48Z",
+      "side": 1,
+      "message": "Not critical, but there is a way to document callbacks\u0027 arguments and return type: http://usejsdoc.org/tags-callback.html",
+      "range": {
+        "startLine": 580,
+        "startChar": 4,
+        "endLine": 580,
+        "endChar": 36
+      },
+      "revId": "6378c9cc64c1144d76e4ca2e36feaa7ccbb1fdfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
