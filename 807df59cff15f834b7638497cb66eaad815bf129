@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_26fb68bc",
+        "filename": "repo/tests/phpunit/includes/Api/EntityLoadingHelperTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-28T12:49:27Z",
+      "side": 1,
+      "message": "Read it the second time, but still, it took me 20 minutes to understand what exactly is happening. \nIt would be nice to have this whole mock setup in tests restructured.",
+      "range": {
+        "startLine": 91,
+        "startChar": 89,
+        "endLine": 122,
+        "endChar": 15
+      },
+      "revId": "807df59cff15f834b7638497cb66eaad815bf129",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
