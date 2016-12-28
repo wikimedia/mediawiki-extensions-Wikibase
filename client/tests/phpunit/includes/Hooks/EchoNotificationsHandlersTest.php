@@ -5,6 +5,7 @@ namespace Wikibase\Client\Tests\Hooks;
 use EchoEvent;
 use MediaWikiTestCase;
 use Title;
+use Wikibase\ChangeRow;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Lib\Tests\Changes\TestChanges;
