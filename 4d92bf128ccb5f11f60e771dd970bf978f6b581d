@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_e6daf04f",
+        "filename": "repo/resources/wikibase.special/wikibase.special.languageLabelDescriptionAliases.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-28T13:06:01Z",
+      "side": 1,
+      "message": "Unused in this scope",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 7
+      },
+      "revId": "4d92bf128ccb5f11f60e771dd970bf978f6b581d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_86ec54f3",
+        "filename": "repo/resources/wikibase.special/wikibase.special.languageLabelDescriptionAliases.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-28T13:06:01Z",
+      "side": 1,
+      "message": "Should be defined here.\n`var msg`",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 7
+      },
+      "revId": "4d92bf128ccb5f11f60e771dd970bf978f6b581d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
