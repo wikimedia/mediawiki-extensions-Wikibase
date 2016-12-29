@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_f58cd43b",
+        "filename": "repo/includes/Diff/DiffView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 3033
+      },
+      "writtenOn": "2016-12-29T23:27:12Z",
+      "side": 1,
+      "message": "Does not follow coding conventions. Please see https://www.mediawiki.org/wiki/Manual:Coding_conventions/PHP.",
+      "range": {
+        "startLine": 104,
+        "startChar": 5,
+        "endLine": 104,
+        "endChar": 81
+      },
+      "revId": "77b432cc222e76a546df420fb9805a423f072e5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
