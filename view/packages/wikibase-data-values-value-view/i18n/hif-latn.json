@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Thakurji"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "khaali",
+	"valueview-expert-globecoordinateinput-precision": "Precision:",
+	"valueview-expert-globecoordinateinput-nullprecision": "unspecified",
+	"valueview-expert-globecoordinateinput-customprecision": "khaas ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "Gregorian",
+	"valueview-expert-timevalue-calendar-julian": "Julian",
+	"valueview-expert-timeinput-precision": "Precision:",
+	"valueview-expert-timeinput-calendar": "Calendar:",
+	"valueview-expertextender-calendarhint-gregorian": "(Gregorian calendar)",
+	"valueview-expertextender-calendarhint-julian": "(Julian calendar)",
+	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr; change to Gregorian",
+	"valueview-expertextender-calendarhint-switch-julian": "&rarr; change to Julian",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Bhasa (mandatory):",
+	"valueview-expertextender-unitsuggester-label": "Unit (optional):",
+	"valueview-preview-label": "jaise dekhaawe, waise rahii:",
+	"valueview-preview-novalue": "koi valid value ke nai dkha gais hai",
+	"valueview-listrotator-manually": "manually set karo"
+}
