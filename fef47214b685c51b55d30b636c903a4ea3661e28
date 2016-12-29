@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_d4c1d659",
+        "filename": "repo/includes/Api/SetSiteLink.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-12-29T02:11:40Z",
+      "side": 0,
+      "message": "I checked and this method doesn\u0027t exist but I checked further and realized this method hasn\u0027t been used at all.",
+      "range": {
+        "startLine": 82,
+        "startChar": 9,
+        "endLine": 82,
+        "endChar": 53
+      },
+      "revId": "fef47214b685c51b55d30b636c903a4ea3661e28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
