@@ -9,8 +9,6 @@ use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\SerializerFactory;
 
 /**
- * @covers WikibaseLib.entitytypes.php
- *
  * @group Wikibase
  * @group WikibaseLib
  *

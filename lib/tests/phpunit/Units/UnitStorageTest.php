@@ -10,7 +10,9 @@ use Wikibase\Lib\UnitStorage;
 use RuntimeException;
 
 /**
- * @covers \Wikibase\Lib\UnitConverter
+ * @covers Wikibase\Lib\JsonUnitStorage
+ * @covers Wikibase\Lib\CSVUnitStorage
+ * @covers Wikibase\Lib\BaseUnitStorage
  *
  * @group Wikibase
  *

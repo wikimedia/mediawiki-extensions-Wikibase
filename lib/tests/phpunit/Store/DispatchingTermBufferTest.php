@@ -10,7 +10,7 @@ use Wikibase\Lib\Store\DispatchingTermBuffer;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
- * @covers Wikibase\Store\DispatchingTermBuffer
+ * @covers Wikibase\Lib\Store\DispatchingTermBuffer
  *
  * @group Wikibase
  * @group WikibaseLib

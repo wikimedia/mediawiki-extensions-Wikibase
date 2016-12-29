@@ -11,8 +11,6 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\TermIndex;
 
 /**
- * @covers client/includes/Store/RepositoryServiceWiring.php
- *
  * @group Wikibase
  * @group WikibaseClient
  *
