@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_7ad33331",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-29T15:01:57Z",
+      "side": 1,
+      "message": "The commit message could elaborate more on what is changed here.\n\nAlso, I think the word choice is a bit misleading here. EditEntity class is not going to be injected (as I first understood while reading the message).",
+      "revId": "da16157ec5e053bc3587a1570619b0776bfcaad0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
