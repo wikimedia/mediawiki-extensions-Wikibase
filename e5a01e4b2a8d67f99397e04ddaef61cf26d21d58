@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_9a56e707",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-29T13:59:18Z",
+      "side": 1,
+      "message": "On my machine current version is 1.2.0",
+      "range": {
+        "startLine": 27,
+        "startChar": 22,
+        "endLine": 27,
+        "endChar": 28
+      },
+      "revId": "e5a01e4b2a8d67f99397e04ddaef61cf26d21d58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_7a3e93b6",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-29T13:59:18Z",
+      "side": 1,
+      "message": "On my machine current version is 2.1.0",
+      "range": {
+        "startLine": 43,
+        "startChar": 16,
+        "endLine": 43,
+        "endChar": 22
+      },
+      "revId": "e5a01e4b2a8d67f99397e04ddaef61cf26d21d58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
