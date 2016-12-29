@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_8f19078c",
+        "filename": "composer.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-29T13:09:35Z",
+      "side": 1,
+      "message": "As soon as we don\u0027t have composer.lock, I think it\u0027s a bad idea to set \"open\" version. In minor versions BC should be persisted, but there are cases when even patch versions break stuff. So, I would suggest to fix the version to exact number.",
+      "range": {
+        "startLine": 32,
+        "startChar": 29,
+        "endLine": 32,
+        "endChar": 33
+      },
+      "revId": "40328812e253292abb1d23a1ef431654c2d00d04",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
