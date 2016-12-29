@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_1a7797fe",
+        "filename": "client/includes/Store/ClientStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-29T16:41:21Z",
+      "side": 1,
+      "message": "Changed to 0.5 as all public method of the interface have @since. I don\u0027t see too much point in keeping this 0.5 all over the place either, though.",
+      "parentUuid": "0e0e73b5_713ff5d3",
+      "revId": "d3c850a2fc1a7d30b0cf6b1dfd67828473aecda6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_f133e508",
         "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
         "patchSetId": 1
@@ -30,6 +48,41 @@
       "writtenOn": "2016-12-22T10:54:26Z",
       "side": 1,
       "message": "This *is* CachingPropertyInfoLookup. What should it by in sync with?\n\nAlso, please end the sentence with a \".\".",
+      "revId": "d3c850a2fc1a7d30b0cf6b1dfd67828473aecda6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_5a6d0f2c",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-29T16:41:21Z",
+      "side": 1,
+      "message": "changed to CachingPropertyInfoStore.",
+      "parentUuid": "0e0e73b5_f133e508",
+      "revId": "d3c850a2fc1a7d30b0cf6b1dfd67828473aecda6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_9a8a67e3",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-29T16:41:21Z",
+      "side": 1,
+      "message": "removed this @since in PS2 (was invalid any way)",
       "revId": "d3c850a2fc1a7d30b0cf6b1dfd67828473aecda6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_7a721312",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-29T16:41:21Z",
+      "side": 1,
+      "message": "I was about to ask you about it as it is your name which is being put here. Do you want me to keep your name here or should I create this class without it?\n\nThis is in major part copy-n-paste from CachingPropertyInfoStore, that\u0027s why I also copied the credit from that class.",
+      "parentUuid": "0e0e73b5_d130e1fe",
+      "revId": "d3c850a2fc1a7d30b0cf6b1dfd67828473aecda6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_7405a312",
         "filename": "lib/includes/Store/CachingPropertyInfoStore.php",
         "patchSetId": 1
@@ -70,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_3a25bb03",
+        "filename": "lib/includes/Store/CachingPropertyInfoStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-29T16:41:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_7405a312",
+      "revId": "d3c850a2fc1a7d30b0cf6b1dfd67828473aecda6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_f10ac528",
         "filename": "lib/includes/Store/CachingPropertyInfoStore.php",
         "patchSetId": 1
@@ -81,6 +170,24 @@
       "writtenOn": "2016-12-22T10:54:26Z",
       "side": 1,
       "message": "You may want to credit yourself, too.",
+      "revId": "d3c850a2fc1a7d30b0cf6b1dfd67828473aecda6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_1a20b7f1",
+        "filename": "lib/includes/Store/CachingPropertyInfoStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-29T16:41:21Z",
+      "side": 1,
+      "message": "I\u0027d let git blame take care of crediting myself :)",
+      "parentUuid": "0e0e73b5_f10ac528",
       "revId": "d3c850a2fc1a7d30b0cf6b1dfd67828473aecda6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +228,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_fac3a308",
+        "filename": "repo/includes/Store/Sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-29T16:41:21Z",
+      "side": 1,
+      "message": "Done. This private method creates a non-read-only version of PropertyInfoTable, so it could be used in the caching store.",
+      "parentUuid": "0e0e73b5_d4168f4c",
+      "revId": "d3c850a2fc1a7d30b0cf6b1dfd67828473aecda6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_b422fba0",
         "filename": "repo/includes/Store/Sql/SqlStore.php",
         "patchSetId": 1
@@ -149,6 +274,24 @@
       "writtenOn": "2016-12-22T10:54:26Z",
       "side": 1,
       "message": "Perhaps add a note that in the future we might want to register the CachingPropertyInfoLookup created by newPropertyInfoLookup as a watcher/listener to this CachingPropertyInfoStore.",
+      "revId": "d3c850a2fc1a7d30b0cf6b1dfd67828473aecda6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_dac69f18",
+        "filename": "repo/includes/Store/Sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-29T16:41:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_34372be2",
       "revId": "d3c850a2fc1a7d30b0cf6b1dfd67828473aecda6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
