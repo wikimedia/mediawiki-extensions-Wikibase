@@ -22,6 +22,7 @@
 		</properties>
 		<!-- Exclude auto-generated files from the Translate extension, see magic-export.php. -->
 		<exclude-pattern>\.i18n\.magic\.php</exclude-pattern>
+		<exclude-pattern>view.resources.templates\.php</exclude-pattern>
 	</rule>
 	<rule ref="Generic.Files.OneInterfacePerFile" />
 	<rule ref="Generic.Files.OneTraitPerFile" />
