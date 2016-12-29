@@ -22,6 +22,30 @@
       "revId": "1959fac64bd0e6410ecaa1dcbbd53bb9feac302d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_ef1c037e",
+        "filename": "repo/resources/wikibase.special/wikibase.special.languageLabelDescriptionAliases.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-29T13:03:54Z",
+      "side": 1,
+      "message": "I agree that it is 100% valid, but:\n  1. Why do we need `Object.prototype.hasOwnProperty.call`, why not `a.hasOwnProperty(languageCode)`?\n  2. It\u0027s very unlikely to happen by accident (only if user intentionally will type `valueOf`, for example) but will make code more complicated.",
+      "parentUuid": "0e0e73b5_cf193fdd",
+      "range": {
+        "startLine": 50,
+        "startChar": 17,
+        "endLine": 50,
+        "endChar": 41
+      },
+      "revId": "1959fac64bd0e6410ecaa1dcbbd53bb9feac302d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
