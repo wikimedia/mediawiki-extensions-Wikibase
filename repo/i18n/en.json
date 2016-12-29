@@ -62,6 +62,8 @@
 	"wikibase-diffview-alias": "aliases",
 	"wikibase-diffview-description": "description",
 	"wikibase-diffview-link": "links",
+	"wikibase-diffview-link-name": "name",
+	"wikibase-diffview-link-badges": "badges",
 	"wikibase-sitelink-site-edit-placeholder": "wiki",
 	"wikibase-sitelink-page-edit-placeholder": "page",
 	"wikibase-alias-edit-placeholder": "enter an alias",
