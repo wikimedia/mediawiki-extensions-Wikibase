@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_74d34a31",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-12-29T02:16:09Z",
+      "side": 1,
+      "message": "Not super related, but can this be moved to the line 485?",
+      "range": {
+        "startLine": 484,
+        "startChar": 90,
+        "endLine": 484,
+        "endChar": 95
+      },
+      "revId": "a6158e94e1e0c816dfb29625c41edfbc5b95e04f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
