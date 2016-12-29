@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_9ae6e7e1",
+        "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-29T15:46:03Z",
+      "side": 1,
+      "message": "This comment does not add any value to what is already visible in the class signature (\"interface ChangeOpDeserializer\").",
+      "range": {
+        "startLine": 6,
+        "startChar": 3,
+        "endLine": 6,
+        "endChar": 34
+      },
+      "revId": "aad9caabb6b9daf5726d5cd9710574172564787c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_bae3ebd3",
+        "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-29T15:46:03Z",
+      "side": 1,
+      "message": "This comment does not add any value to what is already visible in the method signature (\"deserialize array data\"). See https://gerrit.wikimedia.org/r/#/c/328357/10/lib/includes/EntityTypeDefinitions.php for a suggestion.",
+      "range": {
+        "startLine": 14,
+        "startChar": 23,
+        "endLine": 14,
+        "endChar": 54
+      },
+      "revId": "aad9caabb6b9daf5726d5cd9710574172564787c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_dadc5f1d",
+        "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-29T15:46:03Z",
+      "side": 1,
+      "message": "I believe this should be the \"ChangeOp\" interface, not the specific \"ChangeOps\" class.",
+      "range": {
+        "startLine": 16,
+        "startChar": 12,
+        "endLine": 16,
+        "endChar": 21
+      },
+      "revId": "aad9caabb6b9daf5726d5cd9710574172564787c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_fad9632d",
+        "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-29T15:46:03Z",
+      "side": 1,
+      "message": "\"Data\" is a way do generic weasel word. Please rename to $entitySerialization.\n\nAlso the Entity is missing here. It\u0027s not always possible to create *change* operations from a serialization alone. Certain ChangeOps are created based on a comparison with the old value from the existing entity object (e.g. sitelink change ops).\n\nSince the entity represents the old, unchanged data, it should be the first parameter and the two variable names should reflect which is which (e.g. \"$currentEntity\" and \"$changedEntitySerialization\", or something better if you can think of something).",
+      "range": {
+        "startLine": 18,
+        "startChar": 36,
+        "endLine": 18,
+        "endChar": 41
+      },
+      "revId": "aad9caabb6b9daf5726d5cd9710574172564787c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
