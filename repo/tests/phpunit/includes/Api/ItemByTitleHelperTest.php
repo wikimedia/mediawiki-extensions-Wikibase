@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
+use ApiBase;
 use MediaWikiSite;
 use SiteLookup;
 use Title;
@@ -23,6 +24,15 @@ use Wikibase\StringNormalizer;
  * @author Addshore
  */
 class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
+
+	/**
+	 * @return ApiBase
+	 */
+	private function getApiBaseMock() {
+		return $this->getMockBuilder( ApiBase::class )
+			->disableOriginalConstructor()
+			->getMock();
+	}
 
 	/**
 	 * @return SiteLookup
@@ -79,6 +89,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 		$expectedEntityId = $expectedEntityId->getSerialization();
 
 		$itemByTitleHelper = new ItemByTitleHelper(
+			$this->getApiBaseMock(),
 			$this->getResultBuilderMock(),
 			$this->getSiteLinkLookupMock( new ItemId( 'Q123' ) ),
 			$this->getSiteLookupMock(),
@@ -100,6 +111,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testGetEntityIdNormalized() {
 		$itemByTitleHelper = new ItemByTitleHelper(
+			$this->getApiBaseMock(),
 		// Two values should be added: The normalization and the failure to find an entity
 			$this->getResultBuilderMock( 1 ),
 			$this->getSiteLinkLookupMock( null ),
@@ -122,6 +134,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testGetEntityIdsNotFound() {
 		$itemByTitleHelper = new ItemByTitleHelper(
+			$this->getApiBaseMock(),
 		// Two result values should be added (for both titles which wont be found)
 			$this->getResultBuilderMock(),
 			$this->getSiteLinkLookupMock( false ),
@@ -142,6 +155,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 		$this->setExpectedException( ApiUsageException::class );
 
 		$itemByTitleHelper = new ItemByTitleHelper(
+			$this->getApiBaseMock(),
 			$this->getResultBuilderMock(),
 			$this->getSiteLinkLookupMock( 1 ),
 			$this->getSiteLookupMock(),
@@ -178,6 +192,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 		$dummySite = new MediaWikiSite();
 
 		$itemByTitleHelper = new ItemByTitleHelper(
+			$this->getApiBaseMock(),
 			$this->getResultBuilderMock( $expectedAddNormalizedCalls ),
 			$this->getSiteLinkLookupMock( $expectedEntityId ),
 			$this->getSiteLookupMock(),
@@ -215,6 +230,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 		$this->setExpectedException( ApiUsageException::class );
 
 		$itemByTitleHelper = new ItemByTitleHelper(
+			$this->getApiBaseMock(),
 			$this->getResultBuilderMock(),
 			$this->getSiteLinkLookupMock( new ItemId( 'Q123' ) ),
 			$this->getSiteLookupMock(),
