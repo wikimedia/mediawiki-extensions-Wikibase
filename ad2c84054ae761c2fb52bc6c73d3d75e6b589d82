@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_2fd8db21",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 1843,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-29T09:50:40Z",
+      "side": 1,
+      "message": "this is reference is out of sync with the method name in EntityTypeDefinitions\nBut: I am also not convinced those should be called *EditEntityApi*ChangeOpCallbacks. Is there any other change op serialization format used somewhere in Wikibase? That would be a point in favour of making these EditEntityApi-specfic. I don\u0027t know if this is the case, though.",
+      "range": {
+        "startLine": 1843,
+        "startChar": 32,
+        "endLine": 1843,
+        "endChar": 53
+      },
+      "revId": "ad2c84054ae761c2fb52bc6c73d3d75e6b589d82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
