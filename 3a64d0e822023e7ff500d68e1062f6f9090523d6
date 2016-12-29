@@ -83,6 +83,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_347cb2e1",
+        "filename": "repo/includes/ChangeOp/EditEntityApiChangeOpDeserializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-12-29T05:20:55Z",
+      "side": 1,
+      "message": "Yes, my mistake. We should not have this here.",
+      "parentUuid": "0e0e73b5_a6563807",
+      "range": {
+        "startLine": 16,
+        "startChar": 45,
+        "endLine": 16,
+        "endChar": 51
+      },
+      "revId": "3a64d0e822023e7ff500d68e1062f6f9090523d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_863e94b3",
         "filename": "repo/includes/ChangeOp/EditEntityApiChangeOpDeserializer.php",
         "patchSetId": 2
@@ -130,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_546de62b",
+        "filename": "repo/includes/ChangeOp/EditEntityApiChangeOpDeserializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-12-29T05:20:55Z",
+      "side": 1,
+      "message": "I wasn\u0027t sure about it either, I just wanted to copy the exact behavior of EditEntity API. I remove it.",
+      "parentUuid": "0e0e73b5_a9accbeb",
+      "range": {
+        "startLine": 17,
+        "startChar": 48,
+        "endLine": 17,
+        "endChar": 59
+      },
+      "revId": "3a64d0e822023e7ff500d68e1062f6f9090523d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_26436845",
         "filename": "repo/includes/ChangeOp/EditEntityApiChangeOpDeserializer.php",
         "patchSetId": 2
@@ -141,6 +189,30 @@
       "writtenOn": "2016-12-28T11:50:08Z",
       "side": 1,
       "message": "This sentence seems to be incomplete. \"If something implements the labels provider when applying labels\"? What does this mean?",
+      "range": {
+        "startLine": 18,
+        "startChar": 37,
+        "endLine": 18,
+        "endChar": 57
+      },
+      "revId": "3a64d0e822023e7ff500d68e1062f6f9090523d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_74722a12",
+        "filename": "repo/includes/ChangeOp/EditEntityApiChangeOpDeserializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-12-29T05:20:55Z",
+      "side": 1,
+      "message": "I\u0027m sorry if I wasn\u0027t clear enough. I meant as an example of validations. For example if the data contains \u0027label\u0027 and it is a lexeme (which should not have a label), it should throw an exception.",
+      "parentUuid": "0e0e73b5_26436845",
       "range": {
         "startLine": 18,
         "startChar": 37,
