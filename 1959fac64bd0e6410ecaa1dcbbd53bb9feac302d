@@ -46,6 +46,30 @@
       "revId": "1959fac64bd0e6410ecaa1dcbbd53bb9feac302d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_ba052b15",
+        "filename": "repo/resources/wikibase.special/wikibase.special.languageLabelDescriptionAliases.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2016-12-29T13:23:47Z",
+      "side": 1,
+      "message": "\u003e why not `a.hasOwnProperty(languageCode)`?\n\nWhen autonyms contains an entry with the key \u0027hasOwnProperty\u0027 then `a.hasOwnProperty(languageCode)` calls the value of this entry as function.\n\n \u003e 2. It\u0027s very unlikely to happen by accident (only if user\n \u003e intentionally will type `valueOf`, for example) but will make code\n \u003e more complicated.\n\nLanguage codes are user input and may stored in the database for other users. They can contain everything. The names of the Object prototypes depends on the browser. Strange thinks may happen when `autonym` contains a function instead of a string. Are you sure that this will never be a security issue?",
+      "parentUuid": "0e0e73b5_ef1c037e",
+      "range": {
+        "startLine": 50,
+        "startChar": 17,
+        "endLine": 50,
+        "endChar": 41
+      },
+      "revId": "1959fac64bd0e6410ecaa1dcbbd53bb9feac302d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
