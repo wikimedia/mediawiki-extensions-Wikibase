@@ -99,7 +99,13 @@ class DiffView extends ContextSource {
 	 */
 	private function generateOpHtml( array $path, DiffOp $op ) {
 		if ( $op->isAtomic() ) {
-			$html = $this->generateDiffHeaderHtml( implode( ' / ', $path ) );
+			$translatedPath = $path;
+
+			if($path[0] === $this->getLanguage()->getMessage( 'wikibase-diffview-link' )){
+				$translatedPath[2] = $this->getLanguage()->getMessage( 'wikibase-diffview-' . $path[2] );
+			}
+
+			$html = $this->generateDiffHeaderHtml( implode( ' / ', $translatedPath ) );
 
 			//TODO: no path, but localized section title
 
