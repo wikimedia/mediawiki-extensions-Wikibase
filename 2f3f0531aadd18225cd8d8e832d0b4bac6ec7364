@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_fa7de3e4",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-29T16:13:17Z",
+      "side": 1,
+      "message": "I think the \"Service\" suffix is not needed in field names, nor usually in class or interface names. It\u0027s just bloat with no added value. What can a lookup be, if not a service?\n\nNot a big deal here, I just don\u0027t want to see \"Service\" 25 times in every class, without any benefit.",
+      "revId": "2f3f0531aadd18225cd8d8e832d0b4bac6ec7364",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
