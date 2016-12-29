@@ -99,7 +99,17 @@ class DiffView extends ContextSource {
 	 */
 	private function generateOpHtml( array $path, DiffOp $op ) {
 		if ( $op->isAtomic() ) {
-			$html = $this->generateDiffHeaderHtml( implode( ' / ', $path ) );
+			$translatedPath = $path;
+
+			if ( $this->isSiteLinkPath( $path ) ){
+				if ( $this->getLanguage()->getMessage( 'wikibase-diffview-link-' . $path[2] ) != null ){
+					$translatedPath[2] = $this->getLanguage()->getMessage(
+						'wikibase-diffview-link-' . $path[2]
+					);
+				}
+			}
+
+			$html = $this->generateDiffHeaderHtml( implode( ' / ', $translatedPath ) );
 
 			//TODO: no path, but localized section title
 
@@ -188,7 +198,7 @@ class DiffView extends ContextSource {
 	 */
 	private function getChangedLine( $tag, $value, array $path ) {
 		// @todo: inject a formatter instead of doing special cases based on the path here!
-		if ( $path[0] === $this->getLanguage()->getMessage( 'wikibase-diffview-link' ) ) {
+		if ( $this->isSiteLinkPath( $path ) ) {
 			if ( $path[2] === 'badges' ) {
 				$value = $this->getBadgeLinkElement( $value );
 			} else {
@@ -252,6 +262,17 @@ class DiffView extends ContextSource {
 		$html .= Html::closeElement( 'tr' );
 
 		return $html;
+	}
+
+	/**
+	 * Check whether path is a sitelink
+	 *
+	 * @param  array   $path
+	 * @return boolean
+	 */
+	private function isSiteLinkPath( array $path ){
+		return count( $path ) === 3 &&
+			$path[0] === $this->getLanguage()->getMessage( 'wikibase-diffview-link' );
 	}
 
 }
