@@ -46,6 +46,30 @@
       "revId": "a6158e94e1e0c816dfb29625c41edfbc5b95e04f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_4ffaef41",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-29T11:42:35Z",
+      "side": 1,
+      "message": "Also, max line length is 140 symbols, as far as I am concerned. See: phpcs.xml:21",
+      "parentUuid": "0e0e73b5_ef8be319",
+      "range": {
+        "startLine": 484,
+        "startChar": 90,
+        "endLine": 484,
+        "endChar": 95
+      },
+      "revId": "a6158e94e1e0c816dfb29625c41edfbc5b95e04f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
