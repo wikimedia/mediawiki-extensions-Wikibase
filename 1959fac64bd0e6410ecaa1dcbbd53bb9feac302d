@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_cf193fdd",
+        "filename": "repo/resources/wikibase.special/wikibase.special.languageLabelDescriptionAliases.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2016-12-29T10:20:14Z",
+      "side": 1,
+      "message": "This evaluates to true if languageCode contains the name of a predefined Object prototype and returns a function. To avoid this use\n\n Object.prototype.hasOwnProperty.call( autonyms, languageCode ) ?\n autonyms[ languageCode ] : \u0027[\u0027 + languageCode + \u0027]\u0027",
+      "range": {
+        "startLine": 50,
+        "startChar": 17,
+        "endLine": 50,
+        "endChar": 41
+      },
+      "revId": "1959fac64bd0e6410ecaa1dcbbd53bb9feac302d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
