@@ -132,7 +132,7 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 			'wikibase-listview' => '$1',
 			'wikibase-sitelinkgroupview' => '<GROUP data="$5" class="$7"><h3 id="$1">$2$3</h3>$6$4</GROUP>',
 			'wikibase-sitelinklistview' => '$1',
-			'wikibase-sitelinkview' => '<LINK id="$1" title="$5">$4: $6</LINK>',
+			'wikibase-sitelinkview' => '<LINK id="$1" title="$3">$2: $4</LINK>',
 			'wikibase-sitelinkview-pagename' => '<PAGE href="$1" lang="$4" dir="$5">$2</PAGE>$3',
 			'wikibase-badgeselector' => '$1',
 			'wb-badge' => '<BADGE class="$1" id="$3">$2</BADGE>',
