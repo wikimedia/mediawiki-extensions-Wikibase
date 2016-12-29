@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_8fe7c7a6",
+        "filename": "repo/includes/ChangeOp/ChangeOpDescription.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-29T11:39:59Z",
+      "side": 1,
+      "message": "Should it really be a part of interface?\n\nAs I understand, exceptions listed in doc block are exceptions that client should catch and handle somehow.\nI can not imagine the case where client will be handling `\\InvalidArgumentException`. \n\nAlso, mentioning this exception breaks `\\Wikibase\\ChangeOp\\ChangeOp` interface. If we want to allow child class to throw this exception and declare it as a part of it\u0027s interface, then we should also define this exception on the parent interface. Because when someone will work with `ChangeOpDescription` as with general `ChangeOp` and will get `\\InvalidArgumentException` he won\u0027t expect it and his code will break.\n\nOn the other hand, in PHP \u0027\\Exception\u0027 can be thrown in any place and usually you can not guaranty that code that you call won\u0027t throw some exception. We treat it as \"unexpected exception\" somewhere in controller or main exception handler. I believe this is exactly the case with \"unexpected exception\" and we shouldn\u0027t tell client to get ready to it.",
+      "range": {
+        "startLine": 83,
+        "startChar": 4,
+        "endLine": 83,
+        "endChar": 36
+      },
+      "revId": "1b59e7029af5bd098a226068fa2818cd9a4d232d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
