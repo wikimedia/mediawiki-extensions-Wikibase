@@ -61,7 +61,8 @@ class DataTypeSelector {
 		$byId = [];
 
 		foreach ( $this->dataTypes as $dataType ) {
-			$label = $dataType->getLabel( $this->languageCode );
+			$label = wfMessage( $dataType->getMessageKey() )->inLanguage( $this->languageCode )
+				->text();
 			$id = $dataType->getId();
 
 			$byLabel[$label] = $id;
