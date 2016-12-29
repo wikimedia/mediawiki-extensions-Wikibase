@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_1aa5579a",
+        "filename": "lib/includes/EntityTypeDefinitions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-29T15:32:46Z",
+      "side": 1,
+      "message": "Name suggestion:\n\n\"changeop-deserializer-callback\" / getChagneOpDeserializerCallbacks.",
+      "revId": "95b070d39589870bb58adcbabc2faffaaaa4542c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_dab57fcb",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-29T15:32:46Z",
+      "side": 1,
+      "message": "\"callback\" is very generic and doesn\u0027t tell us what the callback does. These are \"deserializers\" or \"deserializer callbacks\".",
+      "revId": "95b070d39589870bb58adcbabc2faffaaaa4542c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
