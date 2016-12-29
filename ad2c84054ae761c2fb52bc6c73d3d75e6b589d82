@@ -22,6 +22,30 @@
       "revId": "ad2c84054ae761c2fb52bc6c73d3d75e6b589d82",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_cf6a5fea",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 1843,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-12-29T12:11:27Z",
+      "side": 1,
+      "message": "The sync part is done. About other parts, I also think it shouldn\u0027t be EditEntityApiChangeOpCallbacks.",
+      "parentUuid": "0e0e73b5_2fd8db21",
+      "range": {
+        "startLine": 1843,
+        "startChar": 32,
+        "endLine": 1843,
+        "endChar": 53
+      },
+      "revId": "ad2c84054ae761c2fb52bc6c73d3d75e6b589d82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
