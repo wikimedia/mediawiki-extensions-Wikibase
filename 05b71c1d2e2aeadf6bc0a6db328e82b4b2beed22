@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_3a1a5b74",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-29T13:37:10Z",
+      "side": 1,
+      "message": "One could argue that having three lines of code more at the top of the script checking if $format is one of few allowed values is less evil than running a query and performing the conversion just to complain about the invalid format provided once all but printing the output is done.\n\nI\u0027d also be in this group, but this is a maintenance script which is run arbitrarily, so you\u0027re probably right saying that nothing bad happens in such case.",
+      "revId": "05b71c1d2e2aeadf6bc0a6db328e82b4b2beed22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
