@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_3a4edbdd",
+        "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-29T16:00:15Z",
+      "side": 1,
+      "message": "\"Interface for services that construct ChangeOps from a JSON style array structure\".",
+      "parentUuid": "0e0e73b5_9ae6e7e1",
+      "range": {
+        "startLine": 6,
+        "startChar": 3,
+        "endLine": 6,
+        "endChar": 34
+      },
+      "revId": "aad9caabb6b9daf5726d5cd9710574172564787c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_bae3ebd3",
         "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2016-12-29T15:46:03Z",
       "side": 1,
       "message": "This comment does not add any value to what is already visible in the method signature (\"deserialize array data\"). See https://gerrit.wikimedia.org/r/#/c/328357/10/lib/includes/EntityTypeDefinitions.php for a suggestion.",
+      "range": {
+        "startLine": 14,
+        "startChar": 23,
+        "endLine": 14,
+        "endChar": 54
+      },
+      "revId": "aad9caabb6b9daf5726d5cd9710574172564787c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_5a3f4f20",
+        "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-29T16:00:15Z",
+      "side": 1,
+      "message": "I\u0027m a bit torn about whether this interface should specify what format it can handle. I tend to think it shouldn\u0027t, and we could have different implementations that handle different input formats (in theory - no need for that right now). \n\nOtoh, if we bind the interface to a specific data format, we should link the documentation of that format here (once we have it).",
+      "parentUuid": "0e0e73b5_bae3ebd3",
       "range": {
         "startLine": 14,
         "startChar": 23,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_7a4453bd",
+        "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-29T16:00:15Z",
+      "side": 1,
+      "message": "A single ChangeOp, or a list of ChangeOp objects? Could be done either way.",
+      "parentUuid": "0e0e73b5_dadc5f1d",
+      "range": {
+        "startLine": 16,
+        "startChar": 12,
+        "endLine": 16,
+        "endChar": 21
+      },
+      "revId": "aad9caabb6b9daf5726d5cd9710574172564787c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_fad9632d",
         "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
         "patchSetId": 3
@@ -82,6 +154,30 @@
       "writtenOn": "2016-12-29T15:46:03Z",
       "side": 1,
       "message": "\"Data\" is a way do generic weasel word. Please rename to $entitySerialization.\n\nAlso the Entity is missing here. It\u0027s not always possible to create *change* operations from a serialization alone. Certain ChangeOps are created based on a comparison with the old value from the existing entity object (e.g. sitelink change ops).\n\nSince the entity represents the old, unchanged data, it should be the first parameter and the two variable names should reflect which is which (e.g. \"$currentEntity\" and \"$changedEntitySerialization\", or something better if you can think of something).",
+      "range": {
+        "startLine": 18,
+        "startChar": 36,
+        "endLine": 18,
+        "endChar": 41
+      },
+      "revId": "aad9caabb6b9daf5726d5cd9710574172564787c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_9a3ca72e",
+        "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-29T16:00:15Z",
+      "side": 1,
+      "message": "I really want to avoid having the Entity here. If we need the old Entity to create the ChangeOp, something is quite wrong, I think.\n\newven if it\u0027s the case now - is there a *good* reason for it? In my mind, the input of the API module represents the change that is requested, and it should be possible to represent that request as an object, without any additional information.",
+      "parentUuid": "0e0e73b5_fad9632d",
       "range": {
         "startLine": 18,
         "startChar": 36,
