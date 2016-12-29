@@ -54,6 +54,8 @@ class SpecialNewProperty extends SpecialNewEntity {
 	}
 
 	/**
+	 * @param string $dataType
+	 *
 	 * @return bool
 	 */
 	private function dataTypeExists( $dataType ) {

@@ -577,6 +577,7 @@
 	 * @param {Object} options An object with keys `locked` and `autoStartEditing`
 	 * @param {wikibase.datamodel.Snak|null} snak
 	 * @param {jQuery} $snakview
+	 * @param {Function} removeCallback
 	 * @return {jQuery.wikibase.snakview} The constructed snakview
 	 */
 	SELF.prototype.getSnakView = function( startEditingCallback, drawProperty, options, snak, $snakview, removeCallback ) {
