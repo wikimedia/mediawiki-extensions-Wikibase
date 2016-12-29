@@ -2,6 +2,75 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e0e73b5_1abc37b0",
+        "filename": "lib/includes/Store/PropertyInfoStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-29T15:45:44Z",
+      "side": 1,
+      "message": "For me `StorageException` and `DBError` seem like the same thing. I would really like to understand difference and how should I handle/react to these exceptions from doc block.",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 19
+      },
+      "revId": "8a0e4da8acdb30b66f6f73a330d05c1ee1900e4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_9a89472a",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-29T15:45:44Z",
+      "side": 1,
+      "message": "`$1` variable format is only found in test, but not anywhere else in production code. \n  1. How can one find out that he/she can use \u0027$1\u0027 in pattern to be reference property id?\n  2. Format \u0027$\\d\u0027 can not handle more than 10 template placeholders. Also, escaping is not taken into account, if I want to put exactly \u0027$1\u0027 but not property id.\n  3. May be replace it with something like `$propertyId` or `{propertyId}`? It\u0027s more readable and maintainable, in my opinion.\n  4. I guess this kind of information should be mentioned somewhere in documentation of `PropertyInfoProvider` - that it can return strings with following placeholders.",
+      "range": {
+        "startLine": 56,
+        "startChar": 23,
+        "endLine": 56,
+        "endChar": 27
+      },
+      "revId": "8a0e4da8acdb30b66f6f73a330d05c1ee1900e4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_3aa49bae",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-29T15:45:44Z",
+      "side": 1,
+      "message": "`PropertyInfoProvider::getPropertyInfo` method has signature `@return mixed|null`, so some fixes in tests and code should be made or interface\u0027s doc block should be updated.",
+      "range": {
+        "startLine": 56,
+        "startChar": 3,
+        "endLine": 56,
+        "endChar": 61
+      },
+      "revId": "8a0e4da8acdb30b66f6f73a330d05c1ee1900e4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee9d9f70_9dff6662",
         "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
         "patchSetId": 3
@@ -36,6 +105,29 @@
       "writtenOn": "2016-08-08T15:13:08Z",
       "side": 1,
       "message": "I find this suspicious:\n* Trimming should not be done. Either it\u0027s already done somewhere else in the code base, which means it\u0027s not necessary to do it again here. Or it\u0027s not done, which means spaces are significant and should not be trimmed later.\n* If this is called on something that\u0027s not a StringValue the code should fail hard and not cast this to a string.",
+      "revId": "8a0e4da8acdb30b66f6f73a330d05c1ee1900e4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_7ace9360",
+        "filename": "repo/tests/phpunit/includes/Rdf/Values/ExternalIdentifierRdfBuilderTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-29T15:45:44Z",
+      "side": 1,
+      "message": "`PropertyInfoProvider::class` syntax would be better, because that way IDE can easily track class\u0027 usages.",
+      "range": {
+        "startLine": 36,
+        "startChar": 40,
+        "endLine": 36,
+        "endChar": 75
+      },
       "revId": "8a0e4da8acdb30b66f6f73a330d05c1ee1900e4c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
