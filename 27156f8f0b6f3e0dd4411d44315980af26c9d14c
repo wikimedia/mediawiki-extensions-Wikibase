@@ -151,6 +151,24 @@
       "revId": "27156f8f0b6f3e0dd4411d44315980af26c9d14c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_e7e307d3",
+        "filename": "client/tests/phpunit/includes/Store/RepositoryServiceWiringTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-30T12:13:11Z",
+      "side": 1,
+      "message": "I didn\u0027t notice it happened (I didn\u0027t remove it by hand, went away while rebasing).\nAccording to Icbdb444338533774c0549d949c4a9ce3e60e6027 this was invalid.",
+      "parentUuid": "0e0e73b5_87c20b38",
+      "revId": "27156f8f0b6f3e0dd4411d44315980af26c9d14c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
