@@ -215,6 +215,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_8a0b3226",
+        "filename": "repo/includes/Specials/SpecialNewProperty.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-30T13:59:20Z",
+      "side": 1,
+      "message": "bah. I obviously missed this the only parameter and with type hint already. Doesn\u0027t make sense to me to add @param in this case, I agree. My mistake, I was confused by similar change in the other classes (where actually also docs might possibly not be needed)\n\nOr do we require to have @param part if there is any other method documentation provided?",
+      "parentUuid": "0e0e73b5_c7b5a379",
+      "revId": "2f3f0531aadd18225cd8d8e832d0b4bac6ec7364",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_e7530719",
         "filename": "repo/includes/Specials/SpecialSetLabelDescriptionAliases.php",
         "patchSetId": 1
