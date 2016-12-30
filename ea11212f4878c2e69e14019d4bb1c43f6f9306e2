@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_c7afe376",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-30T12:09:55Z",
+      "side": 1,
+      "message": "These are repo definitions, with repo names as keys. Would be nice to mention this. Though it\u0027s not critical for a private function.",
+      "revId": "ea11212f4878c2e69e14019d4bb1c43f6f9306e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_67c15733",
+        "filename": "client/includes/Store/RepositoryServiceWiring.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-30T12:09:55Z",
+      "side": 1,
+      "message": "This is not a TODO, since there is nothing to be done. maybe a // NOTE.",
+      "revId": "ea11212f4878c2e69e14019d4bb1c43f6f9306e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_47bc13b1",
+        "filename": "client/includes/Store/RepositoryServiceWiring.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-30T12:09:55Z",
+      "side": 1,
+      "message": "WikibaseClient is passed into all the instantiator functions. It\u0027s fine.",
+      "revId": "ea11212f4878c2e69e14019d4bb1c43f6f9306e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
