@@ -46,10 +46,7 @@ return [
 		RepositoryServiceContainer $services,
 		WikibaseClient $client
 	) {
-		// NOTE: It is OK to create only readonly PropertyInfoTables here as long those instances are
-		// only used by client. Repos would need to be able to get writing instances - at least local repo
 		return new PropertyInfoTable(
-			true,
 			$client->getEntityIdComposer(),
 			$services->getDatabaseName(),
 			$services->getRepositoryName()
