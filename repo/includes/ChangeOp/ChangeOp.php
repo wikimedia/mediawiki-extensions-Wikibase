@@ -2,6 +2,7 @@
 
 namespace Wikibase\ChangeOp;
 
+use InvalidArgumentException;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Summary;
@@ -27,7 +28,9 @@ interface ChangeOp {
 	 *
 	 * @param EntityDocument $entity
 	 *
-	 * @throws ChangeOpException
+	 * @throws InvalidArgumentException when called with an unexpected entity type.
+	 * @throws ChangeOpException when the change is invalid for this entity for other reasons than
+	 *  the entity type.
 	 * @return Result
 	 */
 	public function validate( EntityDocument $entity );
@@ -40,7 +43,9 @@ interface ChangeOp {
 	 * @param EntityDocument $entity
 	 * @param Summary|null $summary
 	 *
-	 * @throws ChangeOpException
+	 * @throws InvalidArgumentException when called with an unexpected entity type.
+	 * @throws ChangeOpException when the change can not be applied to the entity, e.g. because the
+	 *  same data was edited in the meantime.
 	 */
 	public function apply( EntityDocument $entity, Summary $summary = null );
 
