@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_07f17bfe",
+        "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-30T09:36:53Z",
+      "side": 1,
+      "message": "\"ChangeOp\" please.\n\nThats why we have the ChangeOps class implementing the ChangeOp interface, so implementations are *free* to either return an atomic ChangeOp object or multiple, wrapped in a ChangeOps object.",
+      "range": {
+        "startLine": 16,
+        "startChar": 12,
+        "endLine": 16,
+        "endChar": 21
+      },
+      "revId": "9327d00ad0299109d8b87d9ec825588df61b29cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_27eebf1f",
+        "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-30T09:36:53Z",
+      "side": 1,
+      "message": "Guys, this interface is supposed to create *change* operations. We must know the old entity at this point. Otherwise this interface does nothing but deserializing the array representation of an entity into a series of objects that will, when applied, create the entity. Not \"change\" but \"create\". Without the old entity this interface is an entity deserializer, and should not have the word \"change\" in it.\n\nPeople are not (always) submitting \"changes\" to the EditEntity API. What they are submitting are \"changed entities\".\n\nIt\u0027s true (and intended) that most change operations don\u0027t care about the old entity. We do have a differ that will drop all change ops that do not represent an actual change. But this is not *always* possible. Some changes require a quick look at the old entity to understand what the user meant to do.",
+      "range": {
+        "startLine": 18,
+        "startChar": 17,
+        "endLine": 18,
+        "endChar": 52
+      },
+      "revId": "9327d00ad0299109d8b87d9ec825588df61b29cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
