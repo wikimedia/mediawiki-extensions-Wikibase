@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_27011f72",
+        "filename": "lib/includes/Store/CachingPropertyInfoStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-30T12:26:14Z",
+      "side": 1,
+      "message": "\"Caching\" is not really what this does. \"CacheAware\" maybe?",
+      "revId": "3a7a33d29040f061b0f798658989f192bf0eaeb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_a7f50f81",
+        "filename": "repo/includes/Store/Store.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-30T12:26:14Z",
+      "side": 1,
+      "message": "nope...",
+      "revId": "3a7a33d29040f061b0f798658989f192bf0eaeb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
