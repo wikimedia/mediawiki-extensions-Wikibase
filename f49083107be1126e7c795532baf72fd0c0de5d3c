@@ -338,6 +338,24 @@
       "revId": "f49083107be1126e7c795532baf72fd0c0de5d3c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_aa3716df",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewPropertyTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-30T14:11:44Z",
+      "side": 1,
+      "message": "Guys, please. Please focus. This is not helpful. We *do* have PHPCS in place. We can and should continue to work on a PHPCS rule set we all find helpful, without it getting in our way and making us upset. But we can not and certainly *should* not encode each and every detail into hard-coded rules. That would be painful to create, painful to maintain and painful to follow. It must be a balance. It must be allowed to not follow a rule if it makes sense. And at the same time it must be allowed to point out such details in code reviews, as long as such a comment is not a reason for a -1.\n\nWe are here to learn, not to build us a \"code style jail\".",
+      "parentUuid": "0e0e73b5_278c7f31",
+      "revId": "f49083107be1126e7c795532baf72fd0c0de5d3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
