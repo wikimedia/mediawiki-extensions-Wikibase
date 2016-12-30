@@ -122,6 +122,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_478bf3c4",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-30T13:50:55Z",
+      "side": 1,
+      "message": "It was temporary rename to avoid name clash with field name in parent class. Will remove it",
+      "parentUuid": "0e0e73b5_fa7de3e4",
+      "revId": "2f3f0531aadd18225cd8d8e832d0b4bac6ec7364",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_274a3f60",
         "filename": "repo/includes/Specials/SpecialNewItem.php",
         "patchSetId": 1
@@ -139,6 +157,29 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_271d9f78",
+        "filename": "repo/includes/Specials/SpecialNewProperty.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-30T13:50:55Z",
+      "side": 1,
+      "message": "What should I do with this tag?\nI\u0027ve changed constructor signature, should I remove it or update it?\n\nFYI, I would vote for removing.",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 14
+      },
+      "revId": "2f3f0531aadd18225cd8d8e832d0b4bac6ec7364",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_074dfb74",
         "filename": "repo/includes/Specials/SpecialNewProperty.php",
         "patchSetId": 1
@@ -150,6 +191,24 @@
       "writtenOn": "2016-12-30T08:42:16Z",
       "side": 1,
       "message": "Please document the parameter",
+      "revId": "2f3f0531aadd18225cd8d8e832d0b4bac6ec7364",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_c7b5a379",
+        "filename": "repo/includes/Specials/SpecialNewProperty.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-30T13:50:55Z",
+      "side": 1,
+      "message": "I really don\u0027t know what to document.\nI can add `@param SpecialPageCopyrightView $specialPageCopyrightView`, but this won\u0027t change anything.\n\nWhat exactly do you propose?",
+      "parentUuid": "0e0e73b5_074dfb74",
       "revId": "2f3f0531aadd18225cd8d8e832d0b4bac6ec7364",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
