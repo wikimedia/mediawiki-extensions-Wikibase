@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_27b35fea",
+        "filename": "repo/includes/Specials/SpecialSetSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-30T11:58:51Z",
+      "side": 1,
+      "message": "If you inject this, why not inject all services that are currently pulled from $wikibaseRepo here?",
+      "revId": "1b6e4b095db009c80bf3be037b1db898522d2704",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
