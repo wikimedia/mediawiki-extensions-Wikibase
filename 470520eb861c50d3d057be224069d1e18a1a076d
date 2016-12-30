@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_87268b0f",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-30T12:47:51Z",
+      "side": 1,
+      "message": "Injecting these objects changes the lifetime of instances of this class: while it could previously be re-used for rendering multiple pages, it is now specific to rendering a specific page. \n\nThat does not have to be a problem, but is something to be careful about.",
+      "revId": "470520eb861c50d3d057be224069d1e18a1a076d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
