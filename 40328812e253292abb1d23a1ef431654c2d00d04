@@ -22,6 +22,30 @@
       "revId": "40328812e253292abb1d23a1ef431654c2d00d04",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_fafba30f",
+        "filename": "composer.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-30T09:48:47Z",
+      "side": 1,
+      "message": "This is how we are doing this for all components listed here. Why should we change the current practice just because we need to update a single version number?",
+      "parentUuid": "0e0e73b5_8f19078c",
+      "range": {
+        "startLine": 32,
+        "startChar": 29,
+        "endLine": 32,
+        "endChar": 33
+      },
+      "revId": "40328812e253292abb1d23a1ef431654c2d00d04",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
