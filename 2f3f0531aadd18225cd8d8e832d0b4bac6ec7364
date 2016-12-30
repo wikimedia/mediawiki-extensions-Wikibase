@@ -2,6 +2,109 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e0e73b5_a7374fdf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-30T08:42:16Z",
+      "side": 1,
+      "message": "from",
+      "range": {
+        "startLine": 9,
+        "startChar": 60,
+        "endLine": 9,
+        "endChar": 64
+      },
+      "revId": "2f3f0531aadd18225cd8d8e832d0b4bac6ec7364",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_673157e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-30T08:42:16Z",
+      "side": 1,
+      "message": "Did you also mean \"from\" here?",
+      "range": {
+        "startLine": 12,
+        "startChar": 43,
+        "endLine": 12,
+        "endChar": 47
+      },
+      "revId": "2f3f0531aadd18225cd8d8e832d0b4bac6ec7364",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_c71fe35c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-30T08:42:16Z",
+      "side": 1,
+      "message": "Please use Bug not Task",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 4
+      },
+      "revId": "2f3f0531aadd18225cd8d8e832d0b4bac6ec7364",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_472c138f",
+        "filename": "repo/includes/Specials/SpecialModifyEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-30T08:42:16Z",
+      "side": 1,
+      "message": "this parameter was removed",
+      "revId": "2f3f0531aadd18225cd8d8e832d0b4bac6ec7364",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_87320bee",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-30T08:42:16Z",
+      "side": 1,
+      "message": "there is no default value here any more. This is fine, I guess, but docs should not mention it then too.\nAlso please add @param line for the new $copyrightView parameter.",
+      "revId": "2f3f0531aadd18225cd8d8e832d0b4bac6ec7364",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_fa7de3e4",
         "filename": "repo/includes/Specials/SpecialNewItem.php",
         "patchSetId": 1
@@ -13,6 +116,74 @@
       "writtenOn": "2016-12-29T16:13:17Z",
       "side": 1,
       "message": "I think the \"Service\" suffix is not needed in field names, nor usually in class or interface names. It\u0027s just bloat with no added value. What can a lookup be, if not a service?\n\nNot a big deal here, I just don\u0027t want to see \"Service\" 25 times in every class, without any benefit.",
+      "revId": "2f3f0531aadd18225cd8d8e832d0b4bac6ec7364",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_274a3f60",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-30T08:42:16Z",
+      "side": 1,
+      "message": "no such parameter, please document $copyrightView instead",
+      "revId": "2f3f0531aadd18225cd8d8e832d0b4bac6ec7364",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_074dfb74",
+        "filename": "repo/includes/Specials/SpecialNewProperty.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-30T08:42:16Z",
+      "side": 1,
+      "message": "Please document the parameter",
+      "revId": "2f3f0531aadd18225cd8d8e832d0b4bac6ec7364",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_e7530719",
+        "filename": "repo/includes/Specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-30T08:42:16Z",
+      "side": 1,
+      "message": "This parameter has been removed.",
+      "revId": "2f3f0531aadd18225cd8d8e832d0b4bac6ec7364",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_c756c308",
+        "filename": "repo/includes/Specials/SpecialWikibaseRepoPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-30T08:42:16Z",
+      "side": 1,
+      "message": "This parameter has been removed",
       "revId": "2f3f0531aadd18225cd8d8e832d0b4bac6ec7364",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
