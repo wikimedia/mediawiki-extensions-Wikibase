@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_07905b4d",
+        "filename": "client/includes/Store/RepositoryServiceWiring.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-30T11:35:00Z",
+      "side": 1,
+      "message": "I think I am going to remove the flag in the follow up.",
+      "parentUuid": "0e0e73b5_b470bba4",
+      "revId": "27156f8f0b6f3e0dd4411d44315980af26c9d14c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_c316daab",
         "filename": "client/includes/Store/Sql/DirectSqlStore.php",
         "patchSetId": 2
@@ -66,6 +84,30 @@
       "writtenOn": "2016-12-21T15:55:29Z",
       "side": 1,
       "message": "This variable name is not 100% correct any more.",
+      "range": {
+        "startLine": 440,
+        "startChar": 3,
+        "endLine": 440,
+        "endChar": 21
+      },
+      "revId": "27156f8f0b6f3e0dd4411d44315980af26c9d14c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_a7d3cf2f",
+        "filename": "client/includes/Store/Sql/DirectSqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-30T11:35:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_c316daab",
       "range": {
         "startLine": 440,
         "startChar": 3,
