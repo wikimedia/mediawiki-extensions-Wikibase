@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_47065324",
+        "filename": "repo/includes/Specials/HTMLForm/HTMLAliasesField.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-30T14:11:44Z",
+      "side": 1,
+      "message": "What is $info?",
+      "range": {
+        "startLine": 33,
+        "startChar": 52,
+        "endLine": 33,
+        "endChar": 57
+      },
+      "revId": "19cf6376f350c76caa55b2b68acc8aa07dc4f6f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_0aff42fd",
+        "filename": "repo/includes/Specials/HTMLForm/HTMLAliasesField.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-30T14:11:44Z",
+      "side": 1,
+      "message": "The @param docs are still missing here, as requested in PS10.",
+      "revId": "19cf6376f350c76caa55b2b68acc8aa07dc4f6f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_ea050e14",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLAliasesFieldTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-30T14:11:44Z",
+      "side": 1,
+      "message": "There is a PHPUnit syntax to tell which test case depends on which. We rarely use this, and it\u0027s not technically required here, but may make be helpful in this case.",
+      "revId": "19cf6376f350c76caa55b2b68acc8aa07dc4f6f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_ca080a2e",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLAliasesFieldTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-30T14:11:44Z",
+      "side": 1,
+      "message": "Please prefer assertSame when comparing strings. assertEquals has some bogus semantics, e.g. assertEquals( \"9a\", 9 ) succeeds.",
+      "range": {
+        "startLine": 49,
+        "startChar": 8,
+        "endLine": 49,
+        "endChar": 20
+      },
+      "revId": "19cf6376f350c76caa55b2b68acc8aa07dc4f6f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_aa103654",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLAliasesFieldTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-30T14:11:44Z",
+      "side": 1,
+      "message": "This variable name looks like a mistake.",
+      "range": {
+        "startLine": 97,
+        "startChar": 2,
+        "endLine": 97,
+        "endChar": 25
+      },
+      "revId": "19cf6376f350c76caa55b2b68acc8aa07dc4f6f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
