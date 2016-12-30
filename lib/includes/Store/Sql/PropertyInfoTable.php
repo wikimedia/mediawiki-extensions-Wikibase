@@ -31,11 +31,6 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 	private $tableName;
 
 	/**
-	 * @var bool
-	 */
-	private $isReadonly;
-
-	/**
 	 * @var EntityIdComposer
 	 */
 	private $entityIdComposer;
@@ -46,7 +41,6 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 	private $repositoryName;
 
 	/**
-	 * @param bool $isReadonly Whether the table can be modified.
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
@@ -54,10 +48,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $isReadonly, EntityIdComposer $entityIdComposer, $wiki = false, $repositoryName = '' ) {
-		if ( !is_bool( $isReadonly ) ) {
-			throw new InvalidArgumentException( '$isReadonly must be boolean.' );
-		}
+	public function __construct( EntityIdComposer $entityIdComposer, $wiki = false, $repositoryName = '' ) {
 		if ( !is_string( $wiki ) && $wiki !== false ) {
 			throw new InvalidArgumentException( '$wiki must be a string or false.' );
 		}
@@ -65,7 +56,6 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 
 		parent::__construct( $wiki );
 		$this->tableName = 'wb_property_info';
-		$this->isReadonly = $isReadonly;
 		$this->entityIdComposer = $entityIdComposer;
 		$this->repositoryName = $repositoryName;
 	}
@@ -216,10 +206,6 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 	 * @throws InvalidArgumentException
 	 */
 	public function setPropertyInfo( PropertyId $propertyId, array $info ) {
-		if ( $this->isReadonly ) {
-			throw new DBError( null, 'Cannot write when in readonly mode' );
-		}
-
 		if ( !isset( $info[ PropertyInfoLookup::KEY_DATA_TYPE ] ) ) {
 			throw new InvalidArgumentException( 'Missing required info field: ' . PropertyInfoLookup::KEY_DATA_TYPE );
 		}
@@ -255,10 +241,6 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 	 * @return bool
 	 */
 	public function removePropertyInfo( PropertyId $propertyId ) {
-		if ( $this->isReadonly ) {
-			throw new DBError( null, 'Cannot write when in readonly mode' );
-		}
-
 		$this->assertPropertyIdFromCorrectRepository( $propertyId );
 
 		$dbw = $this->getConnection( DB_MASTER );
