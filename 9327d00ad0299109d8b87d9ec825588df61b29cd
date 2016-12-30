@@ -45,6 +45,30 @@
       "revId": "9327d00ad0299109d8b87d9ec825588df61b29cd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_4749b3d2",
+        "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-30T12:39:53Z",
+      "side": 1,
+      "message": "\u003e Otherwise this interface does nothing but deserializing the array representation of an entity into a series of objects that will, when applied, create the entity. Not \"change\" but \"create\". \n\nI disagree. You can clearly construct ChangeOps that will modify an Entity without knowing the old version of the entity.\n\n\u003e People are not (always) submitting \"changes\" to the EditEntity API. What they are submitting are \"changed entities\".\n\nSo you are saying we should check whether anything needs to be changed, and not create ChangeOps for things that don\u0027t need changing? That seems like a confusion of responsibilities. I would rather add a method to the ChangeOp that checks if the change actually changes anything. or just let the ChangeOp do nothing.\n\n\u003e Some changes require a quick look at the old entity to understand what the user meant to do.\n\nThat seems wrong and broken. I\u0027ll let me be convinced otherwise when I see a very good reason for doing things this way. So far, I see none.",
+      "parentUuid": "0e0e73b5_27eebf1f",
+      "range": {
+        "startLine": 18,
+        "startChar": 17,
+        "endLine": 18,
+        "endChar": 52
+      },
+      "revId": "9327d00ad0299109d8b87d9ec825588df61b29cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
