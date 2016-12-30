@@ -70,7 +70,7 @@ call_user_func( function() {
 	global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgHooks, $wgExtensionFunctions;
 	global $wgAPIListModules, $wgAPIMetaModules, $wgAPIPropModules, $wgSpecialPages;
 	global $wgResourceModules, $wgWBClientSettings, $wgRecentChangesFlags, $wgMessagesDirs;
-	global $wgJobClasses, $wgWBClientDataTypes, $wgWBClientEntityTypes;
+	global $wgJobClasses, $wgTrackingCategories, $wgWBClientDataTypes, $wgWBClientEntityTypes;
 
 	$wgExtensionCredits['wikibase'][] = array(
 		'path' => __DIR__,
@@ -101,6 +101,9 @@ call_user_func( function() {
 	$wgMessagesDirs['wikibaseclient'] = __DIR__ . '/i18n';
 	$wgExtensionMessagesFiles['Wikibaseclientalias'] = __DIR__ . '/WikibaseClient.i18n.alias.php';
 	$wgExtensionMessagesFiles['wikibaseclientmagic'] = __DIR__ . '/WikibaseClient.i18n.magic.php';
+
+	// Tracking categories
+	$wgTrackingCategories[] = 'unresolved-property-category';
 
 	// Hooks
 	$wgHooks['UnitTestsList'][] = '\Wikibase\ClientHooks::registerUnitTests';
