@@ -88,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_2a4a0660",
+        "filename": "repo/includes/Specials/SpecialModifyEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-30T14:14:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_472c138f",
+      "revId": "2f3f0531aadd18225cd8d8e832d0b4bac6ec7364",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_87320bee",
         "filename": "repo/includes/Specials/SpecialNewEntity.php",
         "patchSetId": 1
@@ -140,6 +158,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_aa3ef6b2",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-30T14:14:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_fa7de3e4",
+      "revId": "2f3f0531aadd18225cd8d8e832d0b4bac6ec7364",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_274a3f60",
         "filename": "repo/includes/Specials/SpecialNewItem.php",
         "patchSetId": 1
@@ -151,6 +187,24 @@
       "writtenOn": "2016-12-30T08:42:16Z",
       "side": 1,
       "message": "no such parameter, please document $copyrightView instead",
+      "revId": "2f3f0531aadd18225cd8d8e832d0b4bac6ec7364",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_ca56ca08",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-30T14:14:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_274a3f60",
       "revId": "2f3f0531aadd18225cd8d8e832d0b4bac6ec7364",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -250,6 +304,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_ea53ce18",
+        "filename": "repo/includes/Specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-30T14:14:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_e7530719",
+      "revId": "2f3f0531aadd18225cd8d8e832d0b4bac6ec7364",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_67cdd787",
         "filename": "repo/includes/Specials/SpecialSetSiteLink.php",
         "patchSetId": 1
@@ -278,6 +350,24 @@
       "writtenOn": "2016-12-30T08:42:16Z",
       "side": 1,
       "message": "This parameter has been removed",
+      "revId": "2f3f0531aadd18225cd8d8e832d0b4bac6ec7364",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_8a39f2cd",
+        "filename": "repo/includes/Specials/SpecialWikibaseRepoPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-30T14:14:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_c756c308",
       "revId": "2f3f0531aadd18225cd8d8e832d0b4bac6ec7364",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
