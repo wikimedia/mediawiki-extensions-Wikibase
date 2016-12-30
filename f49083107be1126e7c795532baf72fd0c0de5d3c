@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_e7ac2786",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-30T13:00:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_4743f343",
+      "range": {
+        "startLine": 83,
+        "startChar": 67,
+        "endLine": 83,
+        "endChar": 76
+      },
+      "revId": "f49083107be1126e7c795532baf72fd0c0de5d3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_87968b95",
         "filename": "repo/includes/Specials/HTMLForm/HTMLAliasesField.php",
         "patchSetId": 10
@@ -36,6 +60,24 @@
       "writtenOn": "2016-12-30T09:56:11Z",
       "side": 1,
       "message": "Would it make sense to document $params (ie. by saying what are those two default keys that can be overriden in the constructor)?\nJust by looking at tests I\u0027d also suspect \"fieldname\" key being obligatory here - docs could make it explicit so users don\u0027t have to dig into core docs.",
+      "revId": "f49083107be1126e7c795532baf72fd0c0de5d3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_67aa776f",
+        "filename": "repo/includes/Specials/HTMLForm/HTMLAliasesField.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-30T13:00:34Z",
+      "side": 1,
+      "message": "`fieldname` is required because code in core doesn\u0027t check existence of this key because HTMLForm sets it by it self before creating the field, so in client code you won\u0027t care about this field.",
+      "parentUuid": "0e0e73b5_87968b95",
       "revId": "f49083107be1126e7c795532baf72fd0c0de5d3c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -94,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_677cb7e2",
+        "filename": "repo/includes/Specials/HTMLForm/HTMLAliasesField.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-30T13:00:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_6795d788",
+      "revId": "f49083107be1126e7c795532baf72fd0c0de5d3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_67ecb720",
         "filename": "repo/includes/Specials/HTMLForm/HTMLAliasesField.php",
         "patchSetId": 10
@@ -111,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_477773fd",
+        "filename": "repo/includes/Specials/HTMLForm/HTMLAliasesField.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-30T13:00:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_67ecb720",
+      "revId": "f49083107be1126e7c795532baf72fd0c0de5d3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_87afabdd",
         "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLAliasesFieldTest.php",
         "patchSetId": 10
@@ -122,6 +200,24 @@
       "writtenOn": "2016-12-30T09:56:11Z",
       "side": 1,
       "message": "Could also add @license and @covers tags.\n\nI am not sure what is the general policy here, should all tests under repo/tests also have @group WikibaseRepo?",
+      "revId": "f49083107be1126e7c795532baf72fd0c0de5d3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_879b2b68",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLAliasesFieldTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-30T13:00:34Z",
+      "side": 1,
+      "message": "\u003e should all tests under repo/tests also have @group WikibaseRepo?\n\nYes, otherwise some test fails and says that all tests should have `WikibaseRepo` group.\n\n\u003e Could also add @license\n\nWhy do we need to have `@license` tag in all files? Isn\u0027t it enough to have license file in the root of the repository and `license` parameter in `composer.json`?\nFor me it feels like additional text that doesn\u0027t add value which I have to ignore while I\u0027m looking through the file.\n\nIt seems that it is not a strict rule and a lot of code does not have it and I don\u0027t see a reason to enforce it.",
+      "parentUuid": "0e0e73b5_87afabdd",
       "revId": "f49083107be1126e7c795532baf72fd0c0de5d3c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -151,6 +247,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_c7980370",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLAliasesFieldTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-30T13:00:34Z",
+      "side": 1,
+      "message": "It is not part of the interface, so I don\u0027t think client should/can handle it, so I don\u0027t really care what exception will be thrown, the thing I care that object cannot be created - any exception is fine.",
+      "parentUuid": "0e0e73b5_e76ae7b0",
+      "range": {
+        "startLine": 13,
+        "startChar": 32,
+        "endLine": 13,
+        "endChar": 41
+      },
+      "revId": "f49083107be1126e7c795532baf72fd0c0de5d3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_c7fa43da",
         "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLAliasesFieldTest.php",
         "patchSetId": 10
@@ -168,6 +288,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_078f3b27",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLAliasesFieldTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-30T13:00:34Z",
+      "side": 1,
+      "message": "Yeah, but the test case is about field, and field FILTERS value...\n\nBTW, do we have test naming convention?",
+      "parentUuid": "0e0e73b5_c7fa43da",
+      "revId": "f49083107be1126e7c795532baf72fd0c0de5d3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_a7b4ef33",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialNewPropertyTest.php",
         "patchSetId": 10
@@ -179,6 +317,24 @@
       "writtenOn": "2016-12-30T09:56:11Z",
       "side": 1,
       "message": "No need to add this?",
+      "revId": "f49083107be1126e7c795532baf72fd0c0de5d3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_278c7f31",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewPropertyTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2016-12-30T13:00:34Z",
+      "side": 1,
+      "message": "I have a proposal: if phpcs doesn\u0027t say that formatting is wrong, then it is correct. If one spot something strange that he/she doesn\u0027t like, then one should create a task in Phabricator to fix phpcs settings or create a patch fixing phpcs settings.\n\nIn this case, noone will need to write comments about formating and formatting will evolve towards our needs.\n\nPS: I would really love to have one and only one source of correct code style, and have it automated.",
+      "parentUuid": "0e0e73b5_a7b4ef33",
       "revId": "f49083107be1126e7c795532baf72fd0c0de5d3c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
