@@ -69,6 +69,30 @@
       "revId": "9327d00ad0299109d8b87d9ec825588df61b29cd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_4781b391",
+        "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-30T13:37:32Z",
+      "side": 1,
+      "message": "No need to convince anybody. Just look how ChangeOps are constructed right now.\n\nAlso, how do you know that every possibly piece of every possible entity allows for an obvious differentiation between \"this edit means an old value changed to a new value\" and \"this edit means a new value is added, with the old untouched\"?",
+      "parentUuid": "0e0e73b5_4749b3d2",
+      "range": {
+        "startLine": 18,
+        "startChar": 17,
+        "endLine": 18,
+        "endChar": 52
+      },
+      "revId": "9327d00ad0299109d8b87d9ec825588df61b29cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
