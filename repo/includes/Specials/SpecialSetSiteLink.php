@@ -80,14 +80,16 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 	/**
 	 * @since 0.4
+	 *
+	 * @param SiteLookup $siteLookup
 	 */
-	public function __construct() {
+	public function __construct( SiteLookup $siteLookup ) {
 		parent::__construct( 'SetSiteLink' );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$settings = $wikibaseRepo->getSettings();
 
-		$this->siteLookup = $wikibaseRepo->getSiteLookup();
+		$this->siteLookup = $siteLookup;
 
 		$this->badgeItems = $settings->getSetting( 'badgeItems' );
 		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );

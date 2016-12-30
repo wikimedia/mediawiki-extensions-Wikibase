@@ -5,6 +5,8 @@ namespace Wikibase\Repo\Tests\Specials;
 use FauxRequest;
 use FauxResponse;
 use MediaWiki\MediaWikiServices;
+use Site;
+use SiteLookup;
 use SpecialPageTestBase;
 use TestSites;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -88,8 +90,36 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	 */
 	private static $oldBadgeItemsSetting;
 
+	/**
+	 * @return SiteLookup
+	 */
+	private function getSiteLookup() {
+		$dewiki = new Site();
+		$dewiki->setGlobalId( 'dewiki' );
+		$dewiki->setGroup( 'wikipedia' );
+
+		$lookup = $this->getMock( SiteLookup::class );
+		$lookup->expects( $this->any() )
+			->method( 'getSites' )
+			->will(
+				$this->returnValue( [ $dewiki ] )
+			);
+		$lookup->expects( $this->any() )
+			->method( 'getSite' )
+			->will(
+				$this->returnCallback( function( $siteId ) use ( $dewiki ) {
+					if ( $siteId === 'dewiki' ) {
+						return $dewiki;
+					}
+					return null;
+				} )
+			);
+
+		return $lookup;
+	}
+
 	protected function newSpecialPage() {
-		return new SpecialSetSiteLink();
+		return new SpecialSetSiteLink( $this->getSiteLookup() );
 	}
 
 	protected function setUp() {

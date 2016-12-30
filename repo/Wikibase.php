@@ -219,7 +219,11 @@ call_user_func( function() {
 	$wgSpecialPages['SetAliases'] = Wikibase\Repo\Specials\SpecialSetAliases::class;
 	$wgSpecialPages['SetLabelDescriptionAliases']
 		= Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases::class;
-	$wgSpecialPages['SetSiteLink'] = Wikibase\Repo\Specials\SpecialSetSiteLink::class;
+	$wgSpecialPages['SetSiteLink'] = function() {
+		return new Wikibase\Repo\Specials\SpecialSetSiteLink(
+			Wikibase\Repo\WikibaseRepo::getDefaultInstance()->getSiteLookup()
+		);
+	};
 	$wgSpecialPages['EntitiesWithoutLabel'] = array(
 		'Wikibase\Repo\Specials\SpecialEntitiesWithoutPageFactory',
 		'newSpecialEntitiesWithoutLabel'
