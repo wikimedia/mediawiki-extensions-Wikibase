@@ -485,6 +485,10 @@ abstract class EntityContent extends AbstractContent {
 	 * considered equal.
 	 *
 	 * @see Content::equals
+	 *
+	 * @param Content|null $that
+	 *
+	 * @return bool
 	 */
 	public function equals( Content $that = null ) {
 		if ( $that === $this ) {

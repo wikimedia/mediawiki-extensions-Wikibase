@@ -33,10 +33,22 @@ class SpecialNewProperty extends SpecialNewEntity {
 		parent::__construct( 'NewProperty', 'property-create' );
 	}
 
+	/**
+	 * @see SpecialNewEntity::doesWrites
+	 *
+	 * @return bool
+	 */
 	public function doesWrites() {
 		return true;
 	}
 
+	/**
+	 * @see SpecialNewEntity::createEntityFromFormData
+	 *
+	 * @param array $formData
+	 *
+	 * @return Property
+	 */
 	protected function createEntityFromFormData( array $formData ) {
 		$languageCode = $formData[ self::FIELD_LANG ];
 

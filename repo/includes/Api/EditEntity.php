@@ -163,6 +163,8 @@ class EditEntity extends ModifyEntity {
 
 	/**
 	 * @see ModifyEntity::validateParameters
+	 *
+	 * @param array $params
 	 */
 	protected function validateParameters( array $params ) {
 		$hasId = isset( $params['id'] );
@@ -195,6 +197,12 @@ class EditEntity extends ModifyEntity {
 
 	/**
 	 * @see ModifyEntity::modifyEntity
+	 *
+	 * @param EntityDocument &$entity
+	 * @param array $params
+	 * @param int $baseRevId
+	 *
+	 * @return Summary
 	 */
 	protected function modifyEntity( EntityDocument &$entity, array $params, $baseRevId ) {
 		$this->validateDataParameter( $params );

@@ -98,6 +98,10 @@ class EchoNotificationsHandlers {
 	 * Handler for BeforeCreateEchoEvent hook
 	 * @see https://www.mediawiki.org/wiki/Extension:Echo/BeforeCreateEchoEvent
 	 * @see doBeforeCreateEchoEvent
+	 *
+	 * @param array[] &$notifications
+	 * @param array[] &$notificationCategories
+	 * @param array[] &$icons
 	 */
 	public static function onBeforeCreateEchoEvent(
 		array &$notifications,

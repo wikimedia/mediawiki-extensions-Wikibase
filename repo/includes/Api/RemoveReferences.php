@@ -120,7 +120,7 @@ class RemoveReferences extends ApiBase {
 	}
 
 	/**
-	 * Check the provided parameters
+	 * @param array $params
 	 */
 	private function validateParameters( array $params ) {
 		if ( !( $this->modificationHelper->validateStatementGuid( $params['statement'] ) ) ) {

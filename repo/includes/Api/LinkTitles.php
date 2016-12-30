@@ -212,6 +212,8 @@ class LinkTitles extends ApiBase {
 
 	/**
 	 * @see ModifyEntity::validateParameters
+	 *
+	 * @param array $params
 	 */
 	protected function validateParameters( array $params ) {
 		if ( $params['fromsite'] === $params['tosite'] ) {
