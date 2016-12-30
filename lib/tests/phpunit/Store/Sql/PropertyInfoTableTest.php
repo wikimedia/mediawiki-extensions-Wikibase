@@ -37,11 +37,7 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 	}
 
 	private function newPropertyInfoTable( $repository = '' ) {
-		return new PropertyInfoTable( false, $this->getEntityComposer(), false, $repository );
-	}
-
-	private function newReadonlyPropertyInfoTable() {
-		return new PropertyInfoTable( true, $this->getEntityComposer(), false, '' );
+		return new PropertyInfoTable( $this->getEntityComposer(), false, $repository );
 	}
 
 	public function testGivenNoDataTypeInInfo_setPropertyInfoThrowsException() {
@@ -50,14 +46,6 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 		$this->setExpectedException( InvalidArgumentException::class );
 
 		$table->setPropertyInfo( new PropertyId( 'P123' ), [ 'foo' => 'bar' ] );
-	}
-
-	public function testGivenReadonlyTable_setPropertyInfoThrowsException() {
-		$table = $this->newReadonlyPropertyInfoTable();
-
-		$this->setExpectedException( DBError::class );
-
-		$table->setPropertyInfo( new PropertyId( 'P123' ), [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] );
 	}
 
 	public function testGivenUnknownPropertyId_getPropertyInfoReturnsNull() {
@@ -133,14 +121,6 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 		);
 	}
 
-	public function testGivenReadonlyTable_removePropertyInfoThrowsException() {
-		$table = $this->newReadonlyPropertyInfoTable();
-
-		$this->setExpectedException( DBError::class );
-
-		$table->removePropertyInfo( new PropertyId( 'P123' ) );
-	}
-
 	public function testGivenKnownPropertyId_removePropertyInfoRemovesTheEntryAndReturnsTrue() {
 		$table = $this->newPropertyInfoTable();
 		$propertyId = new PropertyId( 'P123' );
@@ -198,7 +178,7 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 	 */
 	public function testGivenInvalidRepositoryName_throwsException( $name ) {
 		$this->setExpectedException( InvalidArgumentException::class );
-		new PropertyInfoTable( false, $this->getEntityComposer(), false, $name );
+		new PropertyInfoTable( $this->getEntityComposer(), false, $name );
 	}
 
 	public function invalidRepositoryNameProvider() {
@@ -217,7 +197,7 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 	public function testGivenPropertyIdFromWrongRepository_setPropertyInfoThrowsException( $repositoryName, PropertyId $id ) {
 		$this->setExpectedException( InvalidArgumentException::class );
 
-		$infoTable = new PropertyInfoTable( false, $this->getEntityComposer(), false, $repositoryName );
+		$infoTable = new PropertyInfoTable( $this->getEntityComposer(), false, $repositoryName );
 		$infoTable->setPropertyInfo( $id, [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] );
 	}
 
@@ -227,7 +207,7 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 	public function testGivenPropertyIdFromWrongRepository_getPropertyInfoThrowsException( $repositoryName, PropertyId $id ) {
 		$this->setExpectedException( InvalidArgumentException::class );
 
-		$infoTable = new PropertyInfoTable( false, $this->getEntityComposer(), false, $repositoryName );
+		$infoTable = new PropertyInfoTable( $this->getEntityComposer(), false, $repositoryName );
 		$infoTable->getPropertyInfo( $id );
 	}
 
@@ -237,7 +217,7 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 	public function testGivenPropertyIdFromWrongRepository_removePropertyInfoThrowsException( $repositoryName, PropertyId $id ) {
 		$this->setExpectedException( InvalidArgumentException::class );
 
-		$infoTable = new PropertyInfoTable( false, $this->getEntityComposer(), false, $repositoryName );
+		$infoTable = new PropertyInfoTable( $this->getEntityComposer(), false, $repositoryName );
 		$infoTable->removePropertyInfo( $id );
 	}
 
