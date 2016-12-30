@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_ca836a56",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 12
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-30T14:38:00Z",
+      "side": 1,
+      "message": "Repeating the word \"language\" a second time is not necessary, but also doesn\u0027t hurt if you like it for consistency.",
+      "range": {
+        "startLine": 54,
+        "startChar": 47,
+        "endLine": 54,
+        "endChar": 56
+      },
+      "revId": "46f6251fbb73e792ee3edb3e7e58375829383cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_aa9b96c0",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 12
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-30T14:38:00Z",
+      "side": 1,
+      "message": "the",
+      "range": {
+        "startLine": 84,
+        "startChar": 59,
+        "endLine": 84,
+        "endChar": 60
+      },
+      "revId": "46f6251fbb73e792ee3edb3e7e58375829383cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_8a969295",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 12
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-30T14:38:00Z",
+      "side": 1,
+      "message": "a",
+      "range": {
+        "startLine": 85,
+        "startChar": 128,
+        "endLine": 85,
+        "endChar": 129
+      },
+      "revId": "46f6251fbb73e792ee3edb3e7e58375829383cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_2ad56647",
+        "filename": "repo/includes/Specials/HTMLForm/HTMLContentLanguageField.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-30T14:38:00Z",
+      "side": 1,
+      "message": "/**\n * @param string[] $languageCodes\n * …\n */",
+      "range": {
+        "startLine": 42,
+        "startChar": 42,
+        "endLine": 42,
+        "endChar": 56
+      },
+      "revId": "46f6251fbb73e792ee3edb3e7e58375829383cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_0ad8627e",
+        "filename": "repo/includes/Specials/HTMLForm/HTMLContentLanguageField.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-30T14:38:00Z",
+      "side": 1,
+      "message": "Looks like this should use in_array if this only checks for existence, and the actual result does not matter. It\u0027s also good to enable strict comparison, which both array_search and in_array support.",
+      "range": {
+        "startLine": 54,
+        "startChar": 7,
+        "endLine": 54,
+        "endChar": 49
+      },
+      "revId": "46f6251fbb73e792ee3edb3e7e58375829383cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_6a959e88",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLContentLanguageFieldTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-30T14:38:00Z",
+      "side": 1,
+      "message": "@covers missing.",
+      "revId": "46f6251fbb73e792ee3edb3e7e58375829383cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_4a909a98",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLContentLanguageFieldTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-30T14:38:00Z",
+      "side": 1,
+      "message": "Looks like it was meant to be a constant. Why not utilize \"const\" then? Because of the \"private\"? You said this is not a big issue in a test, and I tend to agree.\n\nAlso this is only used a single time below, as far as I can tell. Why not make it a trivial variable then? It can still have a nice, self-explaining name, but is hidden in a method body.",
+      "range": {
+        "startLine": 12,
+        "startChar": 17,
+        "endLine": 12,
+        "endChar": 44
+      },
+      "revId": "46f6251fbb73e792ee3edb3e7e58375829383cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_cafa4ada",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLContentLanguageFieldTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-30T14:38:00Z",
+      "side": 1,
+      "message": "These are params that are not acceptable, right? The name of the provider currently doesn\u0027t say that.",
+      "range": {
+        "startLine": 25,
+        "startChar": 17,
+        "endLine": 25,
+        "endChar": 58
+      },
+      "revId": "46f6251fbb73e792ee3edb3e7e58375829383cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_8add7275",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLContentLanguageFieldTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-12-30T14:38:00Z",
+      "side": 1,
+      "message": "It\u0027s worth mocking the Language object too, because this is quite expensive.",
+      "range": {
+        "startLine": 69,
+        "startChar": 14,
+        "endLine": 69,
+        "endChar": 29
+      },
+      "revId": "46f6251fbb73e792ee3edb3e7e58375829383cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
