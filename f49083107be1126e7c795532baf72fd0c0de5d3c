@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e0e73b5_4743f343",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-30T09:56:11Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be \"text field\"?",
+      "range": {
+        "startLine": 83,
+        "startChar": 67,
+        "endLine": 83,
+        "endChar": 76
+      },
+      "revId": "f49083107be1126e7c795532baf72fd0c0de5d3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_87968b95",
+        "filename": "repo/includes/Specials/HTMLForm/HTMLAliasesField.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-30T09:56:11Z",
+      "side": 1,
+      "message": "Would it make sense to document $params (ie. by saying what are those two default keys that can be overriden in the constructor)?\nJust by looking at tests I\u0027d also suspect \"fieldname\" key being obligatory here - docs could make it explicit so users don\u0027t have to dig into core docs.",
+      "revId": "f49083107be1126e7c795532baf72fd0c0de5d3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_fe571ecb",
         "filename": "repo/includes/Specials/HTMLForm/HTMLAliasesField.php",
         "patchSetId": 10
@@ -13,6 +53,132 @@
       "writtenOn": "2016-12-27T14:29:27Z",
       "side": 1,
       "message": "nitpick... Cannot is one word",
+      "revId": "f49083107be1126e7c795532baf72fd0c0de5d3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_67483761",
+        "filename": "repo/includes/Specials/HTMLForm/HTMLAliasesField.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-30T09:56:11Z",
+      "side": 1,
+      "message": "as we\u0027re already at nitpick levels: \"its\" not \"it\u0027s\".",
+      "parentUuid": "0e0e73b5_fe571ecb",
+      "revId": "f49083107be1126e7c795532baf72fd0c0de5d3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_6795d788",
+        "filename": "repo/includes/Specials/HTMLForm/HTMLAliasesField.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-30T09:56:11Z",
+      "side": 1,
+      "message": "I believe it would make sense to document parameters here (as $value here is a string, not like in other places in this class).",
+      "revId": "f49083107be1126e7c795532baf72fd0c0de5d3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_67ecb720",
+        "filename": "repo/includes/Specials/HTMLForm/HTMLAliasesField.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-30T09:56:11Z",
+      "side": 1,
+      "message": "filtering empty items is indirectly tested in SpecialNewItemTest and SpecialNewPropertyTest. Would it make sense though to have a unit test of this class covering this?",
+      "revId": "f49083107be1126e7c795532baf72fd0c0de5d3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_87afabdd",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLAliasesFieldTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-30T09:56:11Z",
+      "side": 1,
+      "message": "Could also add @license and @covers tags.\n\nI am not sure what is the general policy here, should all tests under repo/tests also have @group WikibaseRepo?",
+      "revId": "f49083107be1126e7c795532baf72fd0c0de5d3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_e76ae7b0",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLAliasesFieldTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-30T09:56:11Z",
+      "side": 1,
+      "message": "Would it make sense to expect InvalidArgumentException here?",
+      "range": {
+        "startLine": 13,
+        "startChar": 32,
+        "endLine": 13,
+        "endChar": 41
+      },
+      "revId": "f49083107be1126e7c795532baf72fd0c0de5d3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_c7fa43da",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLAliasesFieldTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-30T09:56:11Z",
+      "side": 1,
+      "message": "I found \"when filters\" part of the method name slightly misleading. It is \"filter\" method that converts string to an array and trims white space, so why not \"testFilterConvertsToArrayAndRemovesExtraSpace\" or something like that?",
+      "revId": "f49083107be1126e7c795532baf72fd0c0de5d3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_a7b4ef33",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewPropertyTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-30T09:56:11Z",
+      "side": 1,
+      "message": "No need to add this?",
       "revId": "f49083107be1126e7c795532baf72fd0c0de5d3c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
