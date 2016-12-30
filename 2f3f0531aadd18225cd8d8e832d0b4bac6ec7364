@@ -173,6 +173,23 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_67cdd787",
+        "filename": "repo/includes/Specials/SpecialSetSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-12-30T11:04:08Z",
+      "side": 1,
+      "message": "Having seen this I thought why not inject this into the constructor in this class too. So I\u0027ve submitted doing this I9c41e70f18cc9fd2c73386a776f2b96907fb470f.",
+      "revId": "2f3f0531aadd18225cd8d8e832d0b4bac6ec7364",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_c756c308",
         "filename": "repo/includes/Specials/SpecialWikibaseRepoPage.php",
         "patchSetId": 1
