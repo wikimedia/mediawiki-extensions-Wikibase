@@ -124,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_15e7683c",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-12-30T12:13:02Z",
+      "side": 1,
+      "message": "I don\u0027t care much. I usually just add my name. Only if I touch essentially all lines would I remove previous credits.\n\nThe main purpose of @author is to provide some info on who to talk to if there are questions.",
+      "parentUuid": "0e0e73b5_7a721312",
+      "revId": "d3c850a2fc1a7d30b0cf6b1dfd67828473aecda6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_7405a312",
         "filename": "lib/includes/Store/CachingPropertyInfoStore.php",
         "patchSetId": 1
