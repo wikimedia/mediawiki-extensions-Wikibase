@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_d5ed508a",
+        "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-12-30T03:51:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_3a4edbdd",
+      "range": {
+        "startLine": 6,
+        "startChar": 3,
+        "endLine": 6,
+        "endChar": 34
+      },
+      "revId": "aad9caabb6b9daf5726d5cd9710574172564787c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_bae3ebd3",
         "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
         "patchSetId": 3
@@ -178,6 +202,30 @@
       "side": 1,
       "message": "I really want to avoid having the Entity here. If we need the old Entity to create the ChangeOp, something is quite wrong, I think.\n\newven if it\u0027s the case now - is there a *good* reason for it? In my mind, the input of the API module represents the change that is requested, and it should be possible to represent that request as an object, without any additional information.",
       "parentUuid": "0e0e73b5_fad9632d",
+      "range": {
+        "startLine": 18,
+        "startChar": 36,
+        "endLine": 18,
+        "endChar": 41
+      },
+      "revId": "aad9caabb6b9daf5726d5cd9710574172564787c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_f5ea9472",
+        "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-12-30T03:51:22Z",
+      "side": 1,
+      "message": "I\u0027d say let\u0027s go with all other deserializers and use \"serialization\"",
+      "parentUuid": "0e0e73b5_9a3ca72e",
       "range": {
         "startLine": 18,
         "startChar": 36,
