@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_f63857ed",
+        "filename": "repo/includes/Diff/DiffView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 890
+      },
+      "writtenOn": "2016-12-31T19:38:03Z",
+      "side": 1,
+      "message": "Ah, Ok, this isn\u0027t a good idea either, sorry for my misleading comment before, I haven\u0027t considered that. Now it\u0027s possible, that you access the 3rd entry of the array, which does not need to exist at this moment, which would throw a notice. So, it seems you really need two if statements :)",
+      "revId": "5ecd97c1e7aabddd688ee699abfdec77c83dd359",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_5634c3f0",
+        "filename": "repo/includes/Diff/DiffView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 890
+      },
+      "writtenOn": "2016-12-31T19:38:03Z",
+      "side": 1,
+      "message": "Is path[0] a localised message? If not, this comparison is error prone, as the siteLinkPath is a localised message string.",
+      "revId": "5ecd97c1e7aabddd688ee699abfdec77c83dd359",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
