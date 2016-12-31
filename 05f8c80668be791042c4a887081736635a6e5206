@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_1bfc3607",
+        "filename": "repo/includes/Diff/DiffView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 890
+      },
+      "writtenOn": "2016-12-31T10:03:15Z",
+      "side": 1,
+      "message": "!\u003d\u003d please",
+      "range": {
+        "startLine": 105,
+        "startChar": 82,
+        "endLine": 105,
+        "endChar": 84
+      },
+      "revId": "05f8c80668be791042c4a887081736635a6e5206",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_db057e14",
+        "filename": "repo/includes/Diff/DiffView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 890
+      },
+      "writtenOn": "2016-12-31T10:03:15Z",
+      "side": 1,
+      "message": "You can put this if statement into the first one, instead of nesting two separate ifs.\n\nAlso, you can save the return of getMessage() into a local varoable and reuse it, instead of using getMessage() twice.\n\nAdditionally: Why do you use getLanguage()-\u003egetmessage() instead of $this-\u003emsg(), which also returns a Message object. However, msg() always returns a Message object if I\u0027m correct, but see my last statement, too.\n\nAlso: Why should the message does not exist? If so (and if I understand it correctly), this should be an error, and the execution should stop with an error message, shouldn\u0027t it? In this case, you doesn\u0027t need to check, if a Message object is returned.",
+      "range": {
+        "startLine": 105,
+        "startChar": 4,
+        "endLine": 105,
+        "endChar": 92
+      },
+      "revId": "05f8c80668be791042c4a887081736635a6e5206",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_5b1aae74",
+        "filename": "repo/includes/Diff/DiffView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 890
+      },
+      "writtenOn": "2016-12-31T10:03:15Z",
+      "side": 1,
+      "message": "wouldn\u0027t it be cheaper to do:\n\n$path[0] instanceof Message \u0026\u0026 $path[0]-\u003egetKey() \u003d\u003d\u003d \u0027wikibase-diffview-link\u0027\n\ninstead of generating the Message object again and again? :)",
+      "range": {
+        "startLine": 275,
+        "startChar": 3,
+        "endLine": 275,
+        "endChar": 76
+      },
+      "revId": "05f8c80668be791042c4a887081736635a6e5206",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
