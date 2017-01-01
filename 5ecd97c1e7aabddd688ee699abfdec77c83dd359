@@ -97,6 +97,24 @@
       "revId": "5ecd97c1e7aabddd688ee699abfdec77c83dd359",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_51316de8",
+        "filename": "repo/includes/Diff/DiffView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 4088
+      },
+      "writtenOn": "2017-01-01T18:59:37Z",
+      "side": 1,
+      "message": "\u003e Is path[0] a localised message? If not, this comparison is error\n \u003e prone, as the siteLinkPath is a localised message string.\n\n$path[0] is localised",
+      "parentUuid": "0e0e73b5_5634c3f0",
+      "revId": "5ecd97c1e7aabddd688ee699abfdec77c83dd359",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
