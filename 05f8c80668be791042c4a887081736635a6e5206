@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_9117e255",
+        "filename": "repo/includes/Diff/DiffView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-01T18:00:04Z",
+      "side": 1,
+      "message": "The two if can not be merged, but the message should be put into a local variable. The second if should then check if the variable is not null, and then use it.",
+      "parentUuid": "0e0e73b5_db057e14",
+      "range": {
+        "startLine": 105,
+        "startChar": 4,
+        "endLine": 105,
+        "endChar": 92
+      },
+      "revId": "05f8c80668be791042c4a887081736635a6e5206",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_5b1aae74",
         "filename": "repo/includes/Diff/DiffView.php",
         "patchSetId": 3
@@ -59,6 +83,30 @@
       "writtenOn": "2016-12-31T10:03:15Z",
       "side": 1,
       "message": "wouldn\u0027t it be cheaper to do:\n\n$path[0] instanceof Message \u0026\u0026 $path[0]-\u003egetKey() \u003d\u003d\u003d \u0027wikibase-diffview-link\u0027\n\ninstead of generating the Message object again and again? :)",
+      "range": {
+        "startLine": 275,
+        "startChar": 3,
+        "endLine": 275,
+        "endChar": 76
+      },
+      "revId": "05f8c80668be791042c4a887081736635a6e5206",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_711a2e80",
+        "filename": "repo/includes/Diff/DiffView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-01T18:00:04Z",
+      "side": 1,
+      "message": "$path[0] is a localized string, not an object. The right side is missing a -\u003etext() here.",
+      "parentUuid": "0e0e73b5_5b1aae74",
       "range": {
         "startLine": 275,
         "startChar": 3,
