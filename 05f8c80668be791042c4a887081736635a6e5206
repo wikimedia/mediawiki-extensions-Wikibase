@@ -116,6 +116,30 @@
       "revId": "05f8c80668be791042c4a887081736635a6e5206",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_b6bbffdd",
+        "filename": "repo/includes/Diff/DiffView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 4088
+      },
+      "writtenOn": "2017-01-01T18:59:37Z",
+      "side": 1,
+      "message": "$path[0] is string. It\u0027s not Message object.",
+      "parentUuid": "0e0e73b5_5b1aae74",
+      "range": {
+        "startLine": 275,
+        "startChar": 3,
+        "endLine": 275,
+        "endChar": 76
+      },
+      "revId": "05f8c80668be791042c4a887081736635a6e5206",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
