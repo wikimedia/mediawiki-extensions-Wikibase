@@ -19,6 +19,52 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_b120a6a9",
+        "filename": "repo/includes/Diff/DiffView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-01T18:00:04Z",
+      "side": 1,
+      "message": "This comment does not add anything to what\u0027s already visible in the method name \"is sitelink path\". Please do not write such comments. Either remove it or write something that adds useful information.",
+      "range": {
+        "startLine": 271,
+        "startChar": 4,
+        "endLine": 271,
+        "endChar": 36
+      },
+      "revId": "5ecd97c1e7aabddd688ee699abfdec77c83dd359",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_d11d5a79",
+        "filename": "repo/includes/Diff/DiffView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-01T18:00:04Z",
+      "side": 1,
+      "message": "string[]",
+      "range": {
+        "startLine": 273,
+        "startChar": 12,
+        "endLine": 273,
+        "endChar": 17
+      },
+      "revId": "5ecd97c1e7aabddd688ee699abfdec77c83dd359",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_5634c3f0",
         "filename": "repo/includes/Diff/DiffView.php",
         "patchSetId": 4
@@ -30,6 +76,24 @@
       "writtenOn": "2016-12-31T19:38:03Z",
       "side": 1,
       "message": "Is path[0] a localised message? If not, this comparison is error prone, as the siteLinkPath is a localised message string.",
+      "revId": "5ecd97c1e7aabddd688ee699abfdec77c83dd359",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_f12f3e9a",
+        "filename": "repo/includes/Diff/DiffView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-01T18:00:04Z",
+      "side": 1,
+      "message": "Yes, $path[0] is a localized string at this point, but [1] and [2] are not.",
+      "parentUuid": "0e0e73b5_5634c3f0",
       "revId": "5ecd97c1e7aabddd688ee699abfdec77c83dd359",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
