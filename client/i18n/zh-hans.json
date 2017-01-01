@@ -124,5 +124,7 @@
 	"notification-header-page-connection": "页面<strong>$3</strong>已{{GENDER:$2|连接}}到{{WBREPONAME}}项中。",
 	"notification-bundle-header-page-connection": "<strong>$3</strong>和{{PLURAL:$4|$4个|100=超过99个}}其他页面已{{GENDER:$2|连接}}到{{WBREPONAME}}项中。",
 	"notification-link-text-view-item": "{{GENDER:$1|查看}}项",
-	"notification-subject-page-connection": "您在{{SITENAME}}上{{GENDER:$3|创建}}的一个页面已{{GENDER:$2|连接}}至{{WBREPONAME}}项中"
+	"notification-subject-page-connection": "您在{{SITENAME}}上{{GENDER:$3|创建}}的一个页面已{{GENDER:$2|连接}}至{{WBREPONAME}}项中",
+	"unresolved-property-category": "有未解决属性的页面",
+	"unresolved-property-category-desc": "此分类列举引用了无法通过属性ID或标签找到的{{WBREPONAME}}属性的页面。"
 }

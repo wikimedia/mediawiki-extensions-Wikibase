@@ -9,7 +9,8 @@
 			"Macofe",
 			"கலைவாணன்",
 			"Jayarathina",
-			"தமிழ்க்குரிசில்"
+			"தமிழ்க்குரிசில்",
+			"ElangoRamanujam"
 		]
 	},
 	"wikibase-entity-item": "உருப்படி",
@@ -28,7 +29,6 @@
 	"wikibase-sitelinks-special": "பிற தளங்கள்",
 	"wikibase-remove": "நீக்கு",
 	"wikibase-disambiguation-title": "\"$1\" க்கான பக்க நெறிப்படுத்தல்",
-	"wikibase-aliases-empty": "மாற்றுகள் வரையறுக்கப்படவில்லை",
 	"wikibase-propertypage-datatype": "தரவு வகை",
 	"special-itembytitle": "தலைப்பு வாரியாக உருப்படி",
 	"wikibase-itembytitle-lookup-site": "தளம்:",
@@ -39,6 +39,7 @@
 	"wikibase-newproperty-datatype": "தரவு வகை:",
 	"special-newitem": "ஒரு புது உருப்படியை உருவாக்குக",
 	"wikibase-newitem-fieldset": "ஒரு புது உருப்படியை உருவாக்குக",
+	"wikibase-newentity-language": "மொழி:",
 	"wikibase-newentity-description": "விளக்கம்:",
 	"wikibase-modifyentity-id": "அடையாளவிலக்கம்",
 	"wikibase-modifyterm-language": "மொழிக் குறியீடு:",

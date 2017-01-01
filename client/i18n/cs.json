@@ -87,5 +87,7 @@
 	"notification-header-page-connection": "Stránka <strong>$3</strong> byla {{GENDER:$2|propojena}} s položkou na {{GRAMMAR:6sg|{{WBREPONAME}}}}.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> a {{PLURAL:$4|jedna další stránka|$4 další stránka|$4 dalších stránek|100=více než 99 dalších stránek}} byly {{GENDER:$2|propojeny}} s položkami na {{GRAMMAR:6sg|{{WBREPONAME}}}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|Zobrazit}} položku",
-	"notification-subject-page-connection": "{{GENDER:$3|Vámi}} vytvořená stránka na {{GRAMMAR:6sg|{{SITENAME}}}} byla {{GENDER:$2|propojena}} s položkou na {{GRAMMAR:6sg|{{WBREPONAME}}}}"
+	"notification-subject-page-connection": "{{GENDER:$3|Vámi}} vytvořená stránka na {{GRAMMAR:6sg|{{SITENAME}}}} byla {{GENDER:$2|propojena}} s položkou na {{GRAMMAR:6sg|{{WBREPONAME}}}}",
+	"unresolved-property-category": "Stránky s nenalezenými vlastnostmi",
+	"unresolved-property-category-desc": "Tato kategorie obsahuje stránky odkazující na vlastnosti na {{GRAMMAR:6sg|{{WBREPONAME}}}}, které nebyly nalezeny ani podle ID, ani podle štítku."
 }

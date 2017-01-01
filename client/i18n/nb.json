@@ -112,5 +112,7 @@
 	"notification-header-page-connection": "Siden <strong>$3</strong> ble {{GENDER:$2|koblet}} til et {{WBREPONAME}}-element.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> og {{PLURAL:$4|én annen side|$4 andre sider|100=99+ andre sider}} ble {{GENDER:$2|koblet}} til {{WBREPONAME}}-elementer.",
 	"notification-link-text-view-item": "{{GENDER:$1|Vis}} element",
-	"notification-subject-page-connection": "En side på {{SITENAME}} som du {{GENDER:$3|opprettet}} ble {{GENDER:$2|koblet}} til et {{WBREPONAME}}-element"
+	"notification-subject-page-connection": "En side på {{SITENAME}} som du {{GENDER:$3|opprettet}} ble {{GENDER:$2|koblet}} til et {{WBREPONAME}}-element",
+	"unresolved-property-category": "Sider med uløste egenskaper",
+	"unresolved-property-category-desc": "Denne kategorien lister opp sider som refererer til {{WBREPONAME}}-egenskaper som ikke kan finnes med egenskaps-ID eller etikett."
 }

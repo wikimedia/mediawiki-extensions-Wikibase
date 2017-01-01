@@ -108,5 +108,7 @@
 	"notification-header-page-connection": "Страницата <strong>$3</strong> е {{GENDER:$2|поврзана}} со предмет на {{WBREPONAME}}.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> и {{PLURAL:$4|уште една страница|уште $4 страници|100=преку 99 други страници}} се {{GENDER:$2|поврзани}} со предмет на {{WBREPONAME}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|Погл.}} предмет",
-	"notification-subject-page-connection": "Страница на {{SITENAME}} што ја имате {{GENDER:$3|создадено}} е {{GENDER:$2|поврзана}} со предмет на {{WBREPONAME}}"
+	"notification-subject-page-connection": "Страница на {{SITENAME}} што ја имате {{GENDER:$3|создадено}} е {{GENDER:$2|поврзана}} со предмет на {{WBREPONAME}}",
+	"unresolved-property-category": "Страници со нерешени својства",
+	"unresolved-property-category-desc": "Во категоријава се наведени страници што се повикуваат на својства од {{WBREPONAME}} кои не можат да се пронајдат ниту по назнаката на својството, ниту по патписот."
 }

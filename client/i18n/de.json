@@ -112,5 +112,7 @@
 	"notification-header-page-connection": "Die Seite <strong>$3</strong> wurde {{GENDER:$2|mit}} einem {{WBREPONAME}}-Objekt verbunden.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> und {{PLURAL:$4|eine weitere Seite|$4 weitere Seiten|100=mehr als 99 weitere Seiten}} wurden {{GENDER:$2|mit}} {{WBREPONAME}}-Objekten verbunden.",
 	"notification-link-text-view-item": "Objekt {{GENDER:$1|ansehen}}",
-	"notification-subject-page-connection": "Eine Seite auf {{SITENAME}}, die du {{GENDER:$3|erstellt}} hast, wurde mit einem {{WBREPONAME}}-Objekt {{GENDER:$2|verbunden}}."
+	"notification-subject-page-connection": "Eine Seite auf {{SITENAME}}, die du {{GENDER:$3|erstellt}} hast, wurde mit einem {{WBREPONAME}}-Objekt {{GENDER:$2|verbunden}}.",
+	"unresolved-property-category": "Seiten mit ungelösten Eigenschaften",
+	"unresolved-property-category-desc": "Diese Kategorie listet Seiten auf, deren Referenz weder {{WBREPONAME}}-Eigenschaften finden konnte noch ihre Eigenschaftskennung oder die Bezeichnung."
 }

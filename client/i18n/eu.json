@@ -24,6 +24,7 @@
 	"wikibase-linkitem-input-site": "Hizkuntza:",
 	"wikibase-linkitem-input-page": "Orria:",
 	"wikibase-linkitem-confirmitem-button": "Berretsi",
+	"wikibase-linkitem-success-link": "Orrialdeak lotuak izan dira. Elementua eta haren loturak gure [$1 datuen errepositorio nagusian] aurkitu ditzakezu.",
 	"wikibase-property-notfound": "$1 propietatea ez da aurkitu.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Ezkutatu",
