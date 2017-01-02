@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_68a11b91",
+        "filename": "client/tests/phpunit/includes/WikibaseClientIntegrationTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-02T16:55:21Z",
+      "side": 1,
+      "message": "I know that we don\u0027t have this rule in code style, but still, I would prefer to see test at the top of the class, but not private helper methods.",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 2
+      },
+      "revId": "1198f1a1ed426c333bd9edb6cc5884c1c355c5a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_48c3f73d",
+        "filename": "client/tests/phpunit/includes/WikibaseClientIntegrationTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-02T16:55:21Z",
+      "side": 1,
+      "message": "Confusing test name:\n  * EntityRevisionLookup - I would assume that we trying to get specific revision, but as I understood what is done here is lookup of latest revision\n  * `foo:Q123` item exists according to test, but I\u0027ve managed to understand only after 5 minutes where is the setup code defines relation between \u0027foo\u0027 and \u0027foowiki\u0027 - first I thought that there is some string concatination magic...\n  * Set up is very complicated. I guess it would be nice to hide set up details behind method calls\n  * Lack of expected behavior description in the test name. Seems like test tests too much.",
+      "range": {
+        "startLine": 78,
+        "startChar": 17,
+        "endLine": 78,
+        "endChar": 55
+      },
+      "revId": "1198f1a1ed426c333bd9edb6cc5884c1c355c5a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_28c20339",
+        "filename": "client/tests/phpunit/includes/WikibaseClientIntegrationTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-02T16:55:21Z",
+      "side": 1,
+      "message": "Didn\u0027t find usages. Redundant?",
+      "range": {
+        "startLine": 185,
+        "startChar": 62,
+        "endLine": 185,
+        "endChar": 80
+      },
+      "revId": "1198f1a1ed426c333bd9edb6cc5884c1c355c5a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
