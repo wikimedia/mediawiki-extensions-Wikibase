@@ -44,7 +44,7 @@ class StatementGroupListView {
 	private $claimHtmlGenerator;
 
 	/**
-	 * @param PropertyOrderProvider $propertyOrderProvider,
+	 * @param PropertyOrderProvider $propertyOrderProvider
 	 * @param TemplateFactory $templateFactory
 	 * @param EntityIdFormatter $propertyIdFormatter
 	 * @param EditSectionGenerator $sectionEditLinkGenerator

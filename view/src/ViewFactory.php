@@ -107,7 +107,7 @@ class ViewFactory {
 	 * @param EntityIdFormatterFactory $plainTextIdFormatterFactory
 	 * @param HtmlSnakFormatterFactory $htmlSnakFormatterFactory
 	 * @param StatementGrouper $statementGrouper
-	 * @param PropertyOrderProvider $propertyOrderProvider,
+	 * @param PropertyOrderProvider $propertyOrderProvider
 	 * @param SiteLookup $siteLookup
 	 * @param DataTypeFactory $dataTypeFactory
 	 * @param TemplateFactory $templateFactory

@@ -37,7 +37,13 @@ class UnitConverterTest extends PHPUnit_Framework_TestCase {
 		];
 	}
 
-	private function getConverter( $fromUnit, $result ) {
+	/**
+	 * @param string $fromUnit
+	 * @param string[]|null $result
+	 *
+	 * @return UnitConverter
+	 */
+	private function getConverter( $fromUnit, array $result = null ) {
 		if ( $result ) {
 			$result = [ 'factor' => $result[0], 'unit' => $result[1] ];
 		}
@@ -48,10 +54,6 @@ class UnitConverterTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider getConverterPairs
-	 * @param $fromUnit
-	 * @param $fromValue
-	 * @param $toUnit
-	 * @param $toValue
 	 */
 	public function testConvert( $fromUnit, $fromValue, $toUnit, $toValue ) {
 		$uc = $this->getConverter( $fromUnit, [ '123.45', 'Q2' ] );
@@ -105,10 +107,10 @@ class UnitConverterTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * Cases where no conversion should happen
 	 * @dataProvider getBadConversions
-	 * @param array $conv Conversion result data
+	 * @param string[]|null $conv Conversion result data
 	 * @param bool $expectNull Should result be null?
 	 */
-	public function testNoConversion( $conv, $expectNull ) {
+	public function testNoConversion( array $conv = null, $expectNull ) {
 		$uc = $this->getConverter( 'Q123', $conv );
 
 		$decimal = new DecimalValue( '+42' );
