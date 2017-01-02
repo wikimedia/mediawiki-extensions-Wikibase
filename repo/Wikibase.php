@@ -205,6 +205,12 @@ call_user_func( function() {
 	$wgSpecialPages['ListProperties'] = Wikibase\Repo\Specials\SpecialListProperties::class;
 	$wgSpecialPages['DispatchStats'] = Wikibase\Repo\Specials\SpecialDispatchStats::class;
 	$wgSpecialPages['EntityData'] = Wikibase\Repo\Specials\SpecialEntityData::class;
+	$wgSpecialPages['EntityPage'] = function() {
+		return new Wikibase\Repo\Specials\SpecialEntityPage(
+			Wikibase\Repo\WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
+			Wikibase\Repo\WikibaseRepo::getDefaultInstance()->getEntityContentFactory()
+		);
+	};
 	$wgSpecialPages['MyLanguageFallbackChain']
 		= Wikibase\Repo\Specials\SpecialMyLanguageFallbackChain::class;
 	$wgSpecialPages['MergeItems'] = Wikibase\Repo\Specials\SpecialMergeItems::class;
