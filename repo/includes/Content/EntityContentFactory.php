@@ -105,7 +105,6 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup, En
 	 */
 	public function getTitleForId( EntityId $id ) {
 		if ( $id->isForeign() ) {
-			// TODO: Special:EntityPage is not yet defined, see T153499.
 			$pageName = 'Special:EntityPage/' . $id->getLocalPart();
 
 			// TODO: The interwiki prefix *should* be the same as the repo name,
