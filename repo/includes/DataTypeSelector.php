@@ -6,12 +6,13 @@ use DataTypes\DataType;
 use MWException;
 
 /**
- * DataType selector UI element.
+ * Data provider for the property type (a.k.a. data type) selector UI element.
  *
  * @since 0.4
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Thiemo Mättig
  */
 class DataTypeSelector {
 
@@ -51,18 +52,28 @@ class DataTypeSelector {
 	/**
 	 * Builds and returns the array for the options of the DataType selector.
 	 *
-	 * @return array
+	 * @since 0.5
+	 *
+	 * @return string[]
 	 */
 	public function getOptionsArray() {
-		$dataTypes = array();
+		$byLabel = [];
+		$byId = [];
 
 		foreach ( $this->dataTypes as $dataType ) {
-			$dataTypes[$dataType->getId()] = $dataType->getLabel( $this->languageCode );
+			$label = $dataType->getLabel( $this->languageCode );
+			$id = $dataType->getId();
+
+			$byLabel[$label] = $id;
+			$byId[$id] = $id;
 		}
 
-		natcasesort( $dataTypes );
+		if ( count( $byLabel ) < count( $this->dataTypes ) ) {
+			$byLabel = $byId;
+		}
 
-		return $dataTypes;
+		uksort( $byLabel, 'strnatcasecmp' );
+		return $byLabel;
 	}
 
 }

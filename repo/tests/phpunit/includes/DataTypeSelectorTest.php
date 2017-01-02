@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests;
 
 use DataTypes\DataType;
 use MWException;
@@ -20,10 +20,11 @@ class DataTypeSelectorTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param string $propertyType
+	 * @param string $label
 	 *
 	 * @return DataType
 	 */
-	private function newDataType( $propertyType ) {
+	private function newDataType( $propertyType, $label ) {
 		$dataType = $this->getMockBuilder( DataType::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -34,21 +35,10 @@ class DataTypeSelectorTest extends PHPUnit_Framework_TestCase {
 
 		$dataType->expects( $this->any() )
 			->method( 'getLabel' )
-			->will( $this->returnValue( '(datatypes-type-' . $propertyType . ')' ) );
+			->with( 'en' )
+			->will( $this->returnValue( $label ) );
 
 		return $dataType;
-	}
-
-	/**
-	 * @param DataType[]|null $dataTypes
-	 *
-	 * @return DataTypeSelector
-	 */
-	private function newInstance( array $dataTypes = null ) {
-		return new DataTypeSelector(
-			$dataTypes !== null ? $dataTypes : array( $this->newDataType( '<PT>' ) ),
-			'qqx'
-		);
 	}
 
 	/**
@@ -60,19 +50,50 @@ class DataTypeSelectorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidConstructorArgumentsProvider() {
-		return array(
-			array( array(), null ),
-			array( array(), false ),
-			array( array( null ), '' ),
-			array( array( false ), '' ),
-			array( array( '' ), '' ),
-		);
+		return [
+			[ [], null ],
+			[ [], false ],
+			[ [ null ], '' ],
+			[ [ false ], '' ],
+			[ [ '' ], '' ],
+		];
 	}
 
-	public function testGetOptionsArray() {
-		$selector = $this->newInstance();
-		$options = $selector->getOptionsArray();
-		$this->assertSame( array( '<PT>' => '(datatypes-type-<PT>)' ), $options );
+	public function testGetOptionsArrayWithOneElement() {
+		$selector = new DataTypeSelector( [
+			$this->newDataType( '<PROPERTY-TYPE>', '<LABEL>' ),
+		], 'en' );
+
+		$expected = [
+			'<LABEL>' => '<PROPERTY-TYPE>',
+		];
+		$this->assertSame( $expected, $selector->getOptionsArray() );
+	}
+
+	public function testGetOptionsArrayWithDuplicateLabels() {
+		$selector = new DataTypeSelector( [
+			$this->newDataType( '<PROPERTY-TYPE-B>', '<LABEL>' ),
+			$this->newDataType( '<PROPERTY-TYPE-A>', '<LABEL>' ),
+		], 'en' );
+
+		$expected = [
+			'<PROPERTY-TYPE-A>' => '<PROPERTY-TYPE-A>',
+			'<PROPERTY-TYPE-B>' => '<PROPERTY-TYPE-B>',
+		];
+		$this->assertSame( $expected, $selector->getOptionsArray() );
+	}
+
+	public function testGetOptionsArraySortsLabelsInNaturalOrder() {
+		$selector = new DataTypeSelector( [
+			$this->newDataType( '<PROPERTY-TYPE-A>', '<LABEL-10>' ),
+			$this->newDataType( '<PROPERTY-TYPE-B>', '<label-2>' ),
+		], 'en' );
+
+		$expected = [
+			'<label-2>' => '<PROPERTY-TYPE-B>',
+			'<LABEL-10>' => '<PROPERTY-TYPE-A>',
+		];
+		$this->assertSame( $expected, $selector->getOptionsArray() );
 	}
 
 }

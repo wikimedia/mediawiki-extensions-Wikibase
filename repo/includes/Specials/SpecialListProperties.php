@@ -158,7 +158,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 		$options = array(
 			$this->msg( 'wikibase-listproperties-all' )->text() => ''
 		);
-		$options = array_merge( $options, array_flip( $dataTypeSelect->getOptionsArray() ) );
+		$options = array_merge( $options, $dataTypeSelect->getOptionsArray() );
 
 		$formDescriptor = array(
 			'datatype' => array(

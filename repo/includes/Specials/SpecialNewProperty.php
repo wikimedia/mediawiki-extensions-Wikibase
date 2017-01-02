@@ -133,7 +133,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 			'name' => self::FIELD_DATATYPE,
 			'type' => 'select',
 			'default' => isset( $this->parts[2] ) ? $this->parts[2] : 'string',
-			'options' => array_flip( $selector->getOptionsArray() ),
+			'options' => $selector->getOptionsArray(),
 			'id' => 'wb-newproperty-datatype',
 			'validation-callback' => function ( $dataType, $formData, $form ) {
 				if ( !$this->dataTypeExists( $dataType ) ) {
