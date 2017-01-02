@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_28e323a2",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialSetSiteLinkTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-02T17:44:55Z",
+      "side": 1,
+      "message": "I guess test would be easier to understand if you use `\\HashSiteStore` instead of mock.",
+      "range": {
+        "startLine": 101,
+        "startChar": 2,
+        "endLine": 116,
+        "endChar": 5
+      },
+      "revId": "c13e0a579dd75b785314c1b415bf999560cb9b8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
