@@ -16,6 +16,23 @@
       "revId": "4c7ec5e6a3749b94bb8082ea61723aeaeb1b9abe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_c390e850",
+        "filename": "repo/includes/Specials/SpecialEntityPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-02T22:09:10Z",
+      "side": 1,
+      "message": "This assumes that the wikibase repo name is the same as the interwiki prefix for that repo. A good convention, but a strong assumption that at least deserves a comment.",
+      "revId": "4c7ec5e6a3749b94bb8082ea61723aeaeb1b9abe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
