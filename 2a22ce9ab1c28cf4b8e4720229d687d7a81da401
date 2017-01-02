@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_7d0f9fe4",
+        "filename": "lib/includes/EntityTypeDefinitions.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-02T14:02:17Z",
+      "side": 1,
+      "message": "there is a typo in the word \"change\" here.",
+      "range": {
+        "startLine": 163,
+        "startChar": 17,
+        "endLine": 163,
+        "endChar": 49
+      },
+      "revId": "2a22ce9ab1c28cf4b8e4720229d687d7a81da401",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_3dca474b",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-02T14:02:17Z",
+      "side": 1,
+      "message": "I think there are two possible ways here, given we are willing to create the interface for \"deserializing\" change ops (Ia6f8e6848a65f640085fbb5e20fb41ff74fcd146):\n\n1. Either we say entity type definition defines a callback, which gets a \"data\" and returns ChangeOp implementation (the call here would then look like in PS11). This callback would probably use some services implementing the new interface to instantiate the actual ChangeOp objects but this code in EditEntity will not know about this detail.\n2. Or we change the new field in entity type definition so it is not some callback but an implementation of the new interface (or maybe a list of such services?). In this case the code here will know that entity type definitions provide the implementation of the interface, and simply call \u0027deserialize\u0027 method of provided object(s), passing in the actual data.\n\nI think 2 is is basically the reason to introduce the common interface. If it should be any interface (option 1), we wouldn\u0027t need the interface at all. But in this case the using code should always check that the provided callback returned the ChangeOp.",
+      "revId": "2a22ce9ab1c28cf4b8e4720229d687d7a81da401",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
