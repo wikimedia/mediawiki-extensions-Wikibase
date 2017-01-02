@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_5d5a9b86",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 12
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-02T14:27:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_aa9b96c0",
+      "range": {
+        "startLine": 84,
+        "startChar": 59,
+        "endLine": 84,
+        "endChar": 60
+      },
+      "revId": "46f6251fbb73e792ee3edb3e7e58375829383cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_8a969295",
         "filename": "repo/i18n/qqq.json",
         "patchSetId": 12
@@ -83,6 +107,30 @@
       "writtenOn": "2016-12-30T14:38:00Z",
       "side": 1,
       "message": "a",
+      "range": {
+        "startLine": 85,
+        "startChar": 128,
+        "endLine": 85,
+        "endChar": 129
+      },
+      "revId": "46f6251fbb73e792ee3edb3e7e58375829383cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_3d55a752",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 12
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-02T14:27:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_8a969295",
       "range": {
         "startLine": 85,
         "startChar": 128,
@@ -118,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_1d542354",
+        "filename": "repo/includes/Specials/HTMLForm/HTMLContentLanguageField.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-02T14:27:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_2ad56647",
+      "range": {
+        "startLine": 42,
+        "startChar": 42,
+        "endLine": 42,
+        "endChar": 56
+      },
+      "revId": "46f6251fbb73e792ee3edb3e7e58375829383cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_0ad8627e",
         "filename": "repo/includes/Specials/HTMLForm/HTMLContentLanguageField.php",
         "patchSetId": 12
@@ -141,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_fd4eefc2",
+        "filename": "repo/includes/Specials/HTMLForm/HTMLContentLanguageField.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-02T14:27:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_0ad8627e",
+      "range": {
+        "startLine": 54,
+        "startChar": 7,
+        "endLine": 54,
+        "endChar": 49
+      },
+      "revId": "46f6251fbb73e792ee3edb3e7e58375829383cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_6a959e88",
         "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLContentLanguageFieldTest.php",
         "patchSetId": 12
@@ -152,6 +248,24 @@
       "writtenOn": "2016-12-30T14:38:00Z",
       "side": 1,
       "message": "@covers missing.",
+      "revId": "46f6251fbb73e792ee3edb3e7e58375829383cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_5dd97bf7",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLContentLanguageFieldTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-02T14:27:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_6a959e88",
       "revId": "46f6251fbb73e792ee3edb3e7e58375829383cfb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -216,6 +330,30 @@
       "writtenOn": "2017-01-02T10:49:40Z",
       "side": 1,
       "message": "`private static` because PHP \u003c 5.6 doesn\u0027t support array as a constant value.\n\nLeftover after test refactoring - should be local variable.",
+      "parentUuid": "0e0e73b5_4a909a98",
+      "range": {
+        "startLine": 12,
+        "startChar": 17,
+        "endLine": 12,
+        "endChar": 44
+      },
+      "revId": "46f6251fbb73e792ee3edb3e7e58375829383cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_3dd487bd",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLContentLanguageFieldTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-02T14:27:24Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "0e0e73b5_4a909a98",
       "range": {
         "startLine": 12,
