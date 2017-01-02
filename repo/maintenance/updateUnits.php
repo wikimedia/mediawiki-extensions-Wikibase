@@ -27,17 +27,18 @@ require_once __DIR__ . '/SPARQLClient.php';
  */
 class UpdateUnits extends Maintenance {
 
-
-	/** Base URI
+	/**
 	 * @var string
 	 */
 	private $baseUri;
+
 	/**
 	 * Length of the base URI.
 	 * Helper variable to speed up cutting it out.
 	 * @var int
 	 */
 	private $baseLen;
+
 	/**
 	 * @var SPARQLClient
 	 */
@@ -56,7 +57,7 @@ class UpdateUnits extends Maintenance {
 		$this->addOption( 'base-unit-types', 'Types of base units.', true, true );
 		$this->addOption( 'base-uri', 'Base URI for the data.', false, true );
 		$this->addOption( 'unit-class', 'Class for units.', false, true );
-		$this->addOption( 'format', 'Output format, default is json.', false, true );
+		$this->addOption( 'format', 'Output format "json" (default) or "csv".', false, true );
 		$this->addOption( 'sparql', 'SPARQL endpoint URL.', false, true );
 	}
 
@@ -66,9 +67,6 @@ class UpdateUnits extends Maintenance {
 				1 );
 		}
 		$format = $this->getOption( 'format', 'json' );
-		if ( !is_callable( [ $this, 'format' . $format ] ) ) {
-			$this->error( "Invalid format", 1 );
-		}
 
 		$repo = WikibaseRepo::getDefaultInstance();
 		$endPoint =
@@ -141,8 +139,16 @@ class UpdateUnits extends Maintenance {
 			];
 		}
 
-		$formatter = 'format' . $format;
-		echo $this->$formatter( $convertUnits );
+		switch ( strtolower( $format ) ) {
+			case 'csv':
+				echo $this->formatCSV( $convertUnits );
+				break;
+			case 'json':
+				echo $this->formatJSON( $convertUnits );
+				break;
+			default:
+				$this->error( 'Invalid format', 1 );
+		}
 	}
 
 	/**
@@ -182,11 +188,11 @@ class UpdateUnits extends Maintenance {
 	 * Create conversion data for a single unit.
 	 * @param string[] $unit Unit data
 	 * @param string[] $convertUnits Already converted data
-	 * @param string[] $baseUnits Base unit list
+	 * @param array[] $baseUnits Base unit list
 	 * @param string[] $unitUsage Unit usage data
 	 * @param string[] &$reconvert Array collecting units that require re-conversion later,
 	 *                 due to their target unit not being base.
-	 * @return null|\string[] Produces conversion data for the unit or null if not possible.
+	 * @return string[]|null Produces conversion data for the unit or null if not possible.
 	 */
 	public function convertUnit( $unit, $convertUnits, $baseUnits, $unitUsage, &$reconvert ) {
 		$unit['unit'] = substr( $unit['unit'], $this->baseLen );
@@ -238,10 +244,10 @@ class UpdateUnits extends Maintenance {
 
 	/**
 	 * Format units as JSON
-	 * @param $convertUnits
+	 * @param array[] $convertUnits
 	 * @return string
 	 */
-	private function formatJSON( $convertUnits ) {
+	private function formatJSON( array $convertUnits ) {
 		return json_encode( $convertUnits, JSON_PRETTY_PRINT );
 	}
 
@@ -273,7 +279,7 @@ UQUERY;
 	/**
 	 * Get base units
 	 * @param string $filter Unit filter
-	 * @return array
+	 * @return array[]
 	 */
 	private function getBaseUnits( $filter ) {
 		$types =
@@ -301,7 +307,7 @@ QUERY;
 
 	/**
 	 * Retrieve the list of convertable units.
-	 * @param $filter
+	 * @param string $filter
 	 * @return array[]|false List of units that can be converted
 	 */
 	private function getConvertableUnits( $filter ) {
@@ -328,10 +334,10 @@ QUERY;
 
 	/**
 	 * Format units as CSV
-	 * @param $convertUnits
+	 * @param array[] $convertUnits
 	 * @return string
 	 */
-	private function formatCSV( $convertUnits ) {
+	private function formatCSV( array $convertUnits ) {
 		$str = '';
 		foreach ( $convertUnits as $name => $data ) {
 			$str .= "$name,$data[0],$data[1]\n";
@@ -339,9 +345,15 @@ QUERY;
 		return $str;
 	}
 
+	/**
+	 * @param string $err
+	 * @param int $die If > 0, go ahead and die out using this int as the code
+	 */
 	protected function error( $err, $die = 0 ) {
 		if ( !$this->silent ) {
 			parent::error( $err, $die );
+		} elseif ( $die > 0 ) {
+			die( $die );
 		}
 	}
 
