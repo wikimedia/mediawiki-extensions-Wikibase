@@ -285,6 +285,9 @@
 				self._viewState.notify( self._valueView.value() ? 'valid' : 'invalid' );
 			} )
 			.on( 'inputextenderanimation.' + this.variationBaseClass, function( animationEvent ) {
+				// FIXME: Temporarily disabled for user testing. Either re-enable or remove.
+				return;
+
 				animationEvent.animationCallbacks.add( 'done', function() {
 					var $input = $( animationEvent.target ),
 						$extension = $input.data( 'inputextender' ).extension(),
@@ -314,6 +317,9 @@
 				} );
 			} )
 			.on( 'inputextendercontentanimation.' + this.variationBaseClass, function( animationEvent ) {
+				// FIXME: Temporarily disabled for user testing. Either re-enable or remove.
+				return;
+
 				var $input = $( animationEvent.target ),
 					inputHeight = $input.outerHeight(),
 					$extension = $input.data( 'inputextender' ).extension();
