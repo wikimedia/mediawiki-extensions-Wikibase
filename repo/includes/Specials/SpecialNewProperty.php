@@ -7,6 +7,7 @@ use Status;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataTypeSelector;
+use Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLTrimmedTextField;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
@@ -58,9 +59,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 		$fingerprint->setLabel( $languageCode, $formData[ self::FIELD_LABEL ] );
 		$fingerprint->setDescription( $languageCode, $formData[ self::FIELD_DESCRIPTION ] );
 
-		$aliases = explode( '|', (string)$formData[ self::FIELD_ALIASES ] );
-		$aliases = array_map( [ $this->stringNormalizer, 'trimToNFC' ], $aliases );
-		$fingerprint->setAliasGroup( $languageCode, $aliases );
+		$fingerprint->setAliasGroup( $languageCode, $formData[ self::FIELD_ALIASES ] );
 
 		return $property;
 	}
@@ -119,10 +118,8 @@ class SpecialNewProperty extends SpecialNewEntity {
 			],
 			self::FIELD_ALIASES => [
 				'name' => self::FIELD_ALIASES,
-				'class' => HTMLTrimmedTextField::class,
+				'class' => HTMLAliasesField::class,
 				'id' => 'wb-newentity-aliases',
-				'placeholder-message' => 'wikibase-aliases-edit-placeholder',
-				'label-message' => 'wikibase-newentity-aliases'
 			]
 		];
 
@@ -184,7 +181,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 	protected function validateFormData( array $formData ) {
 		if ( $formData[ self::FIELD_LABEL ] == ''
 			 && $formData[ self::FIELD_DESCRIPTION ] == ''
-			 && $formData[ self::FIELD_ALIASES ] == ''
+			 && $formData[ self::FIELD_ALIASES ] === []
 		) {
 			return Status::newFatal( 'wikibase-newproperty-insufficient-data' );
 		}
