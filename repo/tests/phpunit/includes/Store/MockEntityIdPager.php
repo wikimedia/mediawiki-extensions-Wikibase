@@ -6,7 +6,7 @@ use BadMethodCallException;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\Store\EntityPerPage;
-use Wikibase\Repo\Store\EntityIdPager;
+use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 
 /**
  * @author Addshore

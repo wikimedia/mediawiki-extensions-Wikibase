@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Store\Sql;
 
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\Repo\Store\EntityIdPager;
+use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 
 /**
  * Factory for SqlEntityIdPager objects.

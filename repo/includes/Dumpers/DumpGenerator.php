@@ -12,7 +12,7 @@ use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
 use Wikibase\Lib\Reporting\RethrowingExceptionHandler;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Repo\Store\EntityIdPager;
+use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 
 /**
  * DumpGenerator generates a dump of a given set of entities, excluding
