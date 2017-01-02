@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_a87273e0",
+        "filename": "client/tests/phpunit/includes/Store/Sql/DirectSqlStoreTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-02T18:03:12Z",
+      "side": 1,
+      "message": "I guess use of `\\Wikibase\\Lib\\Tests\\Store\\MockPropertyInfoStore` instead of mock would reduce tests\u0027 brittleness.",
+      "range": {
+        "startLine": 59,
+        "startChar": 10,
+        "endLine": 59,
+        "endChar": 54
+      },
+      "revId": "7bcaf9fa95b3df784e811c8578d1e83b15949b28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
