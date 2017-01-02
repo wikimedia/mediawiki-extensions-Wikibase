@@ -176,6 +176,10 @@
 				this._entityStore
 				.get( this._viewState.propertyId() )
 				.done( function( fetchedProperty ) {
+					if ( self.isDestroyed() ) {
+						return;
+					}
+
 					if ( newValue !== self.__currentNewValue ) {
 						// If the API response is not for the most recent newValue, discard it
 						return;
@@ -338,6 +342,8 @@
 		/**
 		 * Creates and inserts a new `jQuery.valueview` while destroying the previously used
 		 * `jQuery.valueview` instance.
+		 *
+		 * @private
 		 *
 		 * @param {dataValues.DataValue} dataValue
 		 * @param {dataTypes.DataType} [dataType] The `DataTypes` which the given `DataValue` has
