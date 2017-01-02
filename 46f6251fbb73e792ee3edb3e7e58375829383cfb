@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_022dde8a",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 12
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-02T10:31:46Z",
+      "side": 1,
+      "message": "I thought about it in following structure: `\u003cextension\u003e-\u003ccomponent\u003e-\u003cmessage\u003e`",
+      "parentUuid": "0e0e73b5_ca836a56",
+      "range": {
+        "startLine": 54,
+        "startChar": 47,
+        "endLine": 54,
+        "endChar": 56
+      },
+      "revId": "46f6251fbb73e792ee3edb3e7e58375829383cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_aa9b96c0",
         "filename": "repo/i18n/qqq.json",
         "patchSetId": 12
