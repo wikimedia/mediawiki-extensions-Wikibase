@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_a36bb4b4",
+        "filename": "repo/includes/Specials/SpecialEntityPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-02T18:56:43Z",
+      "side": 1,
+      "message": "This is wrong! This would point to the special page again, causing an infinite redirect loop!\n\nInstead, use an EntityTitleLookup to get the actual entity page on the local wiki, and redirect there.",
+      "revId": "4c7ec5e6a3749b94bb8082ea61723aeaeb1b9abe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
