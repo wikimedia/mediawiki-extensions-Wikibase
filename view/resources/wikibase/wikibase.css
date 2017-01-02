@@ -231,7 +231,7 @@ div.wikibase-snakview {
 
 div.wikibase-snakview .wikibase-snakview-value-container {
 	margin-left: 16px;
-	min-height: .8em; /* reduces jumping when clicking edit */
+	min-height: 1.6em; /* reduces jumping when clicking edit */
 }
 
 div .wikibase-snakview-value span.error.wb-format-error {
