@@ -1,15 +1,30 @@
 {
 	"@metadata": {
 		"authors": [
-			"Danmichaelo"
+			"Danmichaelo",
+			"Jon Harald Søby"
 		]
 	},
 	"valueview-desc": "UI-komponenter for å vise og redigere dataverdier",
 	"valueview-expert-advancedadjustments": "avanserte justeringer",
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Håndtering av «$1»-verdier støttes ikke ennå.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Håndtering av verdier for datatypen «$1» støttes ikke ennå.",
+	"valueview-expert-emptyvalue-empty": "tom",
+	"valueview-expert-globecoordinateinput-precision": "Presisjon:",
+	"valueview-expert-globecoordinateinput-nullprecision": "uspesifisert",
+	"valueview-expert-globecoordinateinput-customprecision": "spesial ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "gregoriansk",
 	"valueview-expert-timevalue-calendar-julian": "juliansk",
 	"valueview-expert-timeinput-precision": "Presisjon:",
 	"valueview-expert-timeinput-calendar": "Kalender:",
-	"valueview-preview-label": "vil vises som:"
+	"valueview-expertextender-calendarhint-gregorian": "(gregoriansk kalender)",
+	"valueview-expertextender-calendarhint-julian": "(juliansk kalender)",
+	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr; endre til gregoriansk",
+	"valueview-expertextender-calendarhint-switch-julian": "&rarr; endre til juliansk",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Språk (obligatorisk):",
+	"valueview-expertextender-unitsuggester-label": "Enhet (valgfritt):",
+	"valueview-preview-label": "vil vises som:",
+	"valueview-preview-novalue": "ingen gyldig verdi gjenkjent",
+	"valueview-listrotator-manually": "sett manuelt"
 }
