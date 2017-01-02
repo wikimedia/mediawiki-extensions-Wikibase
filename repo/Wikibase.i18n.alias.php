@@ -18,6 +18,7 @@ $specialPageAliases['en'] = array(
 	'EntitiesWithoutDescription' => array( 'EntitiesWithoutDescription' ),
 	'EntitiesWithoutLabel' => array( 'EntitiesWithoutLabel' ),
 	'EntityData' => array( 'EntityData' ),
+	'EntityPage' => array( 'EntityPage' ),
 	'GoToLinkedPage' => array( 'GoToLinkedPage' ),
 	'ItemByTitle' => array( 'ItemByTitle' ),
 	'ItemDisambiguation' => array( 'ItemDisambiguation' ),
