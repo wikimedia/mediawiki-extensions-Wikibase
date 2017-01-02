@@ -11,7 +11,7 @@ use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Repo\Disposable;
 use Wikibase\Repo\IO\EntityIdReader;
 use Wikibase\Repo\IO\LineReader;
-use Wikibase\Repo\Store\EntityIdPager;
+use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\WikibaseRepo;
 

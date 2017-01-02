@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Repo\Store\EntityIdPager;
+use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
 use Wikibase\Repo\WikibaseRepo;
 

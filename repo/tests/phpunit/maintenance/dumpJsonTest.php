@@ -31,7 +31,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\DumpJson;
 use Wikibase\Lib\Tests\MockRepository;
-use Wikibase\Repo\Store\EntityIdPager;
+use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\Tests\MockEntityIdPager;
 

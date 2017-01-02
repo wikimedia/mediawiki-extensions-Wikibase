@@ -8,7 +8,7 @@ use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Store\SiteLinkTable;
-use Wikibase\Repo\Store\EntityIdPager;
+use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 
 /**
  * Utility class for rebuilding the wb_items_per_site table.
