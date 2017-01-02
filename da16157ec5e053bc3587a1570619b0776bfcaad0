@@ -65,6 +65,54 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_3d3a47c1",
+        "filename": "lib/includes/EntityTypeDefinitions.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-02T12:57:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_ba864b16",
+      "range": {
+        "startLine": 158,
+        "startChar": 16,
+        "endLine": 158,
+        "endChar": 30
+      },
+      "revId": "da16157ec5e053bc3587a1570619b0776bfcaad0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_1d49c364",
+        "filename": "lib/includes/EntityTypeDefinitions.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-02T12:57:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0e73b5_7a81f3fc",
+      "range": {
+        "startLine": 158,
+        "startChar": 31,
+        "endLine": 158,
+        "endChar": 46
+      },
+      "revId": "da16157ec5e053bc3587a1570619b0776bfcaad0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_da8e9f29",
         "filename": "repo/includes/Api/EditEntity.php",
         "patchSetId": 10
@@ -76,6 +124,30 @@
       "writtenOn": "2016-12-29T15:35:27Z",
       "side": 1,
       "message": "\"Data\" is a non-informative weasel word. Please rename into $entitySerialization.\n\nIt also appears there is something wrong with the parameters. The old entity should be first, the serialization second, and $changeOps should be the return value.",
+      "range": {
+        "startLine": 295,
+        "startChar": 61,
+        "endLine": 295,
+        "endChar": 66
+      },
+      "revId": "da16157ec5e053bc3587a1570619b0776bfcaad0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_5db5fb2d",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-02T12:57:57Z",
+      "side": 1,
+      "message": "$data is being passed in getChangeOps definition. So not part of this patch.",
+      "parentUuid": "0e0e73b5_da8e9f29",
       "range": {
         "startLine": 295,
         "startChar": 61,
