@@ -181,6 +181,54 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_826e6ec2",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLContentLanguageFieldTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-02T10:49:40Z",
+      "side": 1,
+      "message": "It was made `private static` because PHP \u003c 5.6 doesn\u0027t allow arrays as constants.\n\nIt can be made",
+      "parentUuid": "0e0e73b5_4a909a98",
+      "range": {
+        "startLine": 12,
+        "startChar": 17,
+        "endLine": 12,
+        "endChar": 44
+      },
+      "revId": "46f6251fbb73e792ee3edb3e7e58375829383cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_e2a08af3",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLContentLanguageFieldTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-02T10:49:40Z",
+      "side": 1,
+      "message": "`private static` because PHP \u003c 5.6 doesn\u0027t support array as a constant value.\n\nLeftover after test refactoring - should be local variable.",
+      "parentUuid": "0e0e73b5_4a909a98",
+      "range": {
+        "startLine": 12,
+        "startChar": 17,
+        "endLine": 12,
+        "endChar": 44
+      },
+      "revId": "46f6251fbb73e792ee3edb3e7e58375829383cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_cafa4ada",
         "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLContentLanguageFieldTest.php",
         "patchSetId": 12
@@ -204,6 +252,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_a26bb2b4",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLContentLanguageFieldTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-02T10:49:40Z",
+      "side": 1,
+      "message": "Don\u0027t think it should. Provider provides different variants how options for `\\HTMLField` can be set and there is test using this provider which name `testDoesNotAllowToSetOptions_WhenCreated` tells us what is the expected behaviour.",
+      "parentUuid": "0e0e73b5_cafa4ada",
+      "range": {
+        "startLine": 25,
+        "startChar": 17,
+        "endLine": 25,
+        "endChar": 58
+      },
+      "revId": "46f6251fbb73e792ee3edb3e7e58375829383cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_8add7275",
         "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLContentLanguageFieldTest.php",
         "patchSetId": 12
@@ -215,6 +287,30 @@
       "writtenOn": "2016-12-30T14:38:00Z",
       "side": 1,
       "message": "It\u0027s worth mocking the Language object too, because this is quite expensive.",
+      "range": {
+        "startLine": 69,
+        "startChar": 14,
+        "endLine": 69,
+        "endChar": 29
+      },
+      "revId": "46f6251fbb73e792ee3edb3e7e58375829383cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_82fb0ede",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLContentLanguageFieldTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-02T10:49:40Z",
+      "side": 1,
+      "message": "Failed to find anything expensive during it\u0027s creation. \nWhat exactly is expensive?",
+      "parentUuid": "0e0e73b5_8add7275",
       "range": {
         "startLine": 69,
         "startChar": 14,
