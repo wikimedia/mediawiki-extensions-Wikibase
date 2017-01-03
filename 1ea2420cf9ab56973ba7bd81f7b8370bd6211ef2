@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_3845b2b9",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-03T13:25:34Z",
+      "side": 1,
+      "message": "Providing this as a parameter moves the relationship between SpecialPagesWithBadgets and LanguageFallbackLabelDescriptionLookupFactory from static composition to dependency injection. This is generally a good thing, but may have unintended consequences if SpecialPagesWithBadgets relies on any implementation details of LanguageFallbackLabelDescriptionLookupFactory. Please check.",
+      "revId": "1ea2420cf9ab56973ba7bd81f7b8370bd6211ef2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_583d0628",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-03T13:25:34Z",
+      "side": 1,
+      "message": "Perhaps use a local variable for $wikibaseClient-\u003egetSettings(), for readability.",
+      "revId": "1ea2420cf9ab56973ba7bd81f7b8370bd6211ef2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_f8ef1aab",
+        "filename": "client/includes/Specials/SpecialPagesWithBadges.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-03T13:25:34Z",
+      "side": 1,
+      "message": "The default is unusable now, since it is followed by required parameters. Perhaps we can just hard code the name, and not take it as a parameter at all. Please check if that would break anything.",
+      "revId": "1ea2420cf9ab56973ba7bd81f7b8370bd6211ef2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_d8ea169c",
+        "filename": "client/tests/phpunit/includes/Specials/SpecialPagesWithBadgesTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-03T13:25:34Z",
+      "side": 1,
+      "message": "The name should not be null or empty. Providing nuill here does not cause the default to be used. I think this is what is causing the jenkins failures.",
+      "revId": "1ea2420cf9ab56973ba7bd81f7b8370bd6211ef2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
