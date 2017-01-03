@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Specials;
 use Html;
 use InvalidArgumentException;
 use OutOfBoundsException;
+use SiteLookup;
 use Status;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
@@ -73,6 +74,11 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	private $labelDescriptionLookupFactory;
 
 	/**
+	 * @var SiteLookup
+	 */
+	private $siteLookup;
+
+	/**
 	 * @since 0.4
 	 */
 	public function __construct() {
@@ -80,6 +86,8 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$settings = $wikibaseRepo->getSettings();
+
+		$this->siteLookup = $wikibaseRepo->getSiteLookup();
 
 		$this->badgeItems = $settings->getSetting( 'badgeItems' );
 		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );

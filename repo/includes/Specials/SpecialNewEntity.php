@@ -36,38 +36,24 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	protected $parts = null;
 
 	/**
-	 * @var string[]
-	 */
-	protected $languageCodes;
-
-	/**
 	 * @var SpecialPageCopyrightView
 	 */
 	private $copyrightView;
 
 	/**
-	 * @var LanguageNameLookup
-	 */
-	private $languageNameLookup;
-
-	/**
 	 * @param string $name Name of the special page, as seen in links and URLs.
-	 * @param string $restriction User right required, 'createpage' per default.
-	 *
+	 * @param string $restriction User right required,
+	 * @param SpecialPageCopyrightView $copyrightView
 	 * @since 0.1
 	 */
-	public function __construct( $name, $restriction = 'createpage' ) {
+	public function __construct(
+		$name,
+		$restriction,
+		SpecialPageCopyrightView $copyrightView
+	) {
 		parent::__construct( $name, $restriction );
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$settings = $wikibaseRepo->getSettings();
-		$this->copyrightView = new SpecialPageCopyrightView(
-			new CopyrightMessageBuilder(),
-			$settings->getSetting( 'dataRightsUrl' ),
-			$settings->getSetting( 'dataRightsText' )
-		);
-		$this->languageCodes = $wikibaseRepo->getTermsLanguages()->getLanguages();
-		$this->languageNameLookup = $wikibaseRepo->getLanguageNameLookup();
+		$this->copyrightView = $copyrightView;
 	}
 
 	/**
@@ -113,20 +99,6 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		$this->displayBeforeForm( $out );
 
 		$form->displayForm( $submitStatus ?: Status::newGood() );
-	}
-
-	/**
-	 * Get options for language selector
-	 *
-	 * @return string[]
-	 */
-	protected function getLanguageOptions() {
-		$languageOptions = [];
-		foreach ( $this->languageCodes as $code ) {
-			$languageName = $this->languageNameLookup->getName( $code );
-			$languageOptions["$languageName ($code)"] = $code;
-		}
-		return $languageOptions;
 	}
 
 	/**

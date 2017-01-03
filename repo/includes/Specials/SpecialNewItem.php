@@ -11,6 +11,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLTrimmedTextField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField;
+use Wikibase\SettingsArray;
 use Wikibase\Summary;
 
 /**
@@ -31,14 +32,21 @@ class SpecialNewItem extends SpecialNewEntity {
 	const FIELD_PAGE = 'page';
 
 	/**
-	 * @since 0.1
-	 * @param SiteLookup|null $siteStore
+	 * @var SiteLookup
 	 */
-	public function __construct( SiteLookup $siteStore = null ) {
-		parent::__construct( 'NewItem' );
-		if ( $siteStore ) {
-			$this->siteLookup = $siteStore;
-		}
+	private $siteLookup;
+
+	/**
+	 * @since 0.1
+	 * @param SiteLookup $siteLookup
+	 * @param SpecialPageCopyrightView $copyrightView
+	 */
+	public function __construct(
+		SiteLookup $siteLookup,
+		SpecialPageCopyrightView $copyrightView
+	) {
+		parent::__construct( 'NewItem', 'createpage', $copyrightView );
+		$this->siteLookup = $siteLookup;
 	}
 
 	/**
