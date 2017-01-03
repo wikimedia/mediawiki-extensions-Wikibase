@@ -46,6 +46,30 @@
       "revId": "c13e0a579dd75b785314c1b415bf999560cb9b8a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_2e1e8811",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialSetSiteLinkTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-03T17:05:43Z",
+      "side": 1,
+      "message": "My \"dogma\" of unit testing does not say anything about mocks, but mentions isolation and abstraction.\n\nHere code depends on abstraction \"HashSiteStore\", it has methods \"getSites\" and \"getSite\" which behaviors kind of connected to each other, that\u0027s why we see this pretty (in my opinion) complex mock setup.\n\nI suggested to use `\\HashSiteStore` because following set up is much more readable and understandable then mock setup in the code above:\n```\n$lookup \u003d new \\HashSiteStore();\n$lookup-\u003esaveSite($dewiki);\n```\nAnother reason is that `\\HashSiteStore` behaviour is tested but the mock is not.\n\nAlso, this mock set up is actually incorrect, because `SiteLookup::getSites()` should return instance of `\\SiteList` but the mock returns `\\Site[]` and code under test might actually have a bug.\n\nDrawing the line, it is not about personal preference, but about test quality.",
+      "parentUuid": "0e0e73b5_9895bee8",
+      "range": {
+        "startLine": 101,
+        "startChar": 2,
+        "endLine": 116,
+        "endChar": 5
+      },
+      "revId": "c13e0a579dd75b785314c1b415bf999560cb9b8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
