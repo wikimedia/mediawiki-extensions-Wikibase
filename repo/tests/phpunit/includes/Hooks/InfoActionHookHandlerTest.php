@@ -5,15 +5,15 @@ namespace Wikibase\Repo\Tests\Hooks;
 use Html;
 use IContextSource;
 use RequestContext;
-use FileBasedSiteLookup;
+use SiteLookup;
 use Site;
 use Title;
-use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
+use Wikibase\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
-use Wikibase\Store\Sql\SqlSubscriptionLookup;
+use Wikibase\Store\SubscriptionLookup;
 
 /**
  * @covers Wikibase\Repo\Hooks\InfoActionHookHandler
@@ -24,17 +24,22 @@ use Wikibase\Store\Sql\SqlSubscriptionLookup;
  *
  * @license GPL-2.0+
  * @author Amir Sarabadani <ladsgroup@gmail.com>
+ * @author Thiemo Mättig
  */
 class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider handleProvider
 	 */
-	public function testHandle( $expected, $context, $pageInfo, $enabled, $subscriptions, $message ) {
-		$hookHandler = $this->newHookHandler( $enabled, $subscriptions, $context );
-		$pageInfo = $hookHandler->handle( $context, $pageInfo );
+	public function testHandle(
+		array $expected,
+		IContextSource $context,
+		array $subscriptions
+	) {
+		$hookHandler = $this->newHookHandler( $subscriptions, $context );
+		$pageInfo = $hookHandler->handle( $context, [] );
 
-		$this->assertEquals( $expected, $pageInfo, $message );
+		$this->assertEquals( $expected, $pageInfo );
 	}
 
 	public function handleProvider() {
@@ -44,114 +49,92 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 		$elementElwiki = Html::element( 'a', [ 'href' => $url ], 'elwiki' );
 		$context = $this->getContext();
 
-		$cases = [];
-
-		$cases[] = [
-			[
-				'header-properties' => [
+		return [
+			'dewiki and enwiki' => [
+				[ 'header-properties' => [
 					[
 						$context->msg( 'wikibase-pageinfo-subscription' )->escaped(),
 						"<ul><li>$elementDewiki</li><li>$elementEnwiki</li></ul>",
 					],
-				]
+				] ],
+				$context,
+				[ 'dewiki', 'enwiki' ]
 			],
-			$context, [ 'header-properties' => [] ], true, [ 'dewiki', 'enwiki' ],
-			'dewiki and enwiki'
-		];
-
-		$cases[] = [
-			[ 'header-properties' => [
+			'elwiki' => [
+				[ 'header-properties' => [
 					[
 						$context->msg( 'wikibase-pageinfo-subscription' )->escaped(),
 						"<ul><li>$elementElwiki</li></ul>",
 					],
-				]
+				] ],
+				$context,
+				[ 'elwiki' ]
 			],
-			$context,
-			[ 'header-properties' => [] ],
-			false,
-			[ 'elwiki' ],
-			'elwiki'
-		];
-
-		$cases[] = [
-			[
-				'header-properties' => [
+			'no subscription' => [
+				[ 'header-properties' => [
 					[
 						$context->msg( 'wikibase-pageinfo-subscription' )->escaped(),
 						$context->msg( 'wikibase-pageinfo-subscription-none' )->escaped()
 					]
-				]
-			],
-			$context, [ 'header-properties' => [] ], true, false,
-			'no subscription'
+				] ],
+				$context,
+				[]
+			]
 		];
-
-		return $cases;
 	}
 
 	/**
-	 * @param bool $enabled
-	 * @param ItemId $entityId
+	 * @param string[] $subscriptions
+	 * @param IContextSource $context
 	 *
 	 * @return InfoActionHookHandler
 	 */
-	private function newHookHandler( $enabled, $subscriptions, $context ) {
-		$namespaceLookup = new EntityNamespaceLookup( [ Item::ENTITY_TYPE => NS_MAIN ] );
+	private function newHookHandler( array $subscriptions, IContextSource $context ) {
+		$itemId = new ItemId( 'Q4' );
 
-		$subLookup = $this->getMockBuilder( SqlSubscriptionLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$subLookup->expects( $this->any() )
+		$subLookup = $this->getMock( SubscriptionLookup::class );
+		$subLookup->expects( $this->once() )
 			->method( 'getSubscribers' )
+			->with( $itemId )
 			->will( $this->returnValue( $subscriptions ) );
 
-		$siteLookup = $this->getMockBuilder( FileBasedSiteLookup::class )
-			->disableOriginalConstructor()
-			->setMethods( [ 'getSite' ] )
-			->getMock();
-
-		$siteLookup->expects( $this->any() )
-			->method( 'getSite' )
-			->will( $this->returnCallback( function () {
-				$site = new Site();
-				$site->addInterwikiId( 'en' );
-				$site->setLinkPath( 'https://en.wikipedia.org/wiki/$1' );
-				return $site;
-			} ) );
-
-		$entityIdLookup = $this->getMockBuilder( PagePropsEntityIdLookup::class )
-			->disableOriginalConstructor()
-			->setMethods( [ 'getEntityIdForTitle' ] )
-			->getMock();
-
-		$entityIdLookup->expects( $this->any() )
+		$entityIdLookup = $this->getMock( EntityIdLookup::class );
+		$entityIdLookup->expects( $this->once() )
 			->method( 'getEntityIdForTitle' )
-			->will( $this->returnValue( new ItemId( 'Q4' ) ) );
+			->with( $context->getTitle() )
+			->will( $this->returnValue( $itemId ) );
 
-		$entityIdLookup->expects( $this->any() )
-			->method( 'getEntityIdForTitle' )
-			->will( $this->returnValue( false ) );
-
-		$hookHandler = new InfoActionHookHandler(
-			$namespaceLookup,
+		return new InfoActionHookHandler(
+			new EntityNamespaceLookup( [ Item::ENTITY_TYPE => NS_MAIN ] ),
 			$subLookup,
-			$siteLookup,
+			$this->newSiteLookup(),
 			$entityIdLookup,
 			$context
 		);
+	}
 
-		return $hookHandler;
+	/**
+	 * @return SiteLookup
+	 */
+	private function newSiteLookup() {
+		$site = new Site();
+		$site->addInterwikiId( 'en' );
+		$site->setLinkPath( 'https://en.wikipedia.org/wiki/$1' );
+
+		$siteLookup = $this->getMock( SiteLookup::class );
+
+		$siteLookup->expects( $this->any() )
+			->method( 'getSite' )
+			->will( $this->returnValue( $site ) );
+
+		return $siteLookup;
 	}
 
 	/**
 	 * @return IContextSource
 	 */
 	private function getContext() {
-		$title = $this->getMockBuilder( Title::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$title = $this->getMock( Title::class );
 
 		$title->expects( $this->any() )
 			->method( 'exists' )
@@ -167,7 +150,6 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 
 		$context = new RequestContext();
 		$context->setTitle( $title );
-
 		$context->setLanguage( 'en' );
 
 		return $context;
