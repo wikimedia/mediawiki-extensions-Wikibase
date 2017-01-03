@@ -78,6 +78,12 @@ return call_user_func( function() {
 				return $factory->newCommonsMediaFormatter( $format, $options );
 			},
 		],
+		'PT:commonsData' => [
+			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
+				$factory = WikibaseClient::getDefaultValueFormatterBuilders();
+				return $factory->newCommonsDataFormatter( $format, $options );
+			},
+		],
 		'VT:time' => [
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseClient::getDefaultValueFormatterBuilders();

@@ -43,6 +43,7 @@ MODULE.getStore = function( dataTypeStore ) {
 
 	var dataTypeIdToExpertConstructor = {
 		commonsMedia: vv.experts.CommonsMediaType,
+		commonsData: vv.experts.CommonsDataType,
 		'external-id': vv.experts.StringValue,
 		monolingualtext: vv.experts.MonolingualText,
 		url: vv.experts.StringValue,
