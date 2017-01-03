@@ -49,6 +49,47 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_98ddbe19",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-03T13:11:19Z",
+      "side": 1,
+      "message": "If you use a class level constant, you force the class to be loaded at bootstrap time - and code in the entry point is executed for *every* request. That used to be a big performance issue. I\u0027m not sure it\u0027s still as much of a problem as it used to be, but it still seems like a good idea to avoid class loading/initialization in bootstrap code. \n\nNote that Foo::class does not load the class. It\u0027s just syntactic sugar. It even works for undefined classes, no checking takes place. KJjkas\\Glkaqewr::class is just a different way of writing \"KJjkas\\Glkaqewr\".",
+      "parentUuid": "0e0e73b5_18966e4f",
+      "range": {
+        "startLine": 208,
+        "startChar": 17,
+        "endLine": 208,
+        "endChar": 29
+      },
+      "revId": "ef1026e6141b939a7057fdbf60079f922c2d2c84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_b8b3e2e7",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-03T13:11:19Z",
+      "side": 1,
+      "message": "shouldn\u0027t this mention *which* special page?",
+      "revId": "ef1026e6141b939a7057fdbf60079f922c2d2c84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_152637c9",
         "filename": "repo/includes/Specials/SpecialEntityPage.php",
         "patchSetId": 3
@@ -143,6 +184,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_189c2e5e",
+        "filename": "repo/includes/Specials/SpecialEntityPage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-03T13:11:19Z",
+      "side": 1,
+      "message": "Using the path syntax is for linking. Wiki-Links do not support parameters. But we still need to handle parameter syntax, so we can provide them via form fields.\n\nThis dualism is used a lot by MediaWiki. Most obviously, you can view any page using either /w/index.phpFoo or /w/index.php?title\u003dFoo (and, with some rewrite magic, you can use /wiki/Foo too). But it\u0027s also used a lot by Special pages.",
+      "parentUuid": "0e0e73b5_9837feaa",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 50
+      },
+      "revId": "ef1026e6141b939a7057fdbf60079f922c2d2c84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_f59043f3",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
         "patchSetId": 3
@@ -177,6 +242,30 @@
       "writtenOn": "2017-01-03T12:52:05Z",
       "side": 1,
       "message": "If I read RFC 2616 right, 303 might not perfect be either but is IMO clearly better than 301.\n\nBut 301 stands for \"Moved permanently\" which is not want resolve here.\n\nWe want to provide a simple and uniform way of generating URLs that could serve as links to entity pages, without knowing what namespace (in MW sense: \"Item:\", \"Property:\", etc) to use, and not needing to deal with foreign repository URLs when just want to having a link.\n\nSo users could just makes a link, and Wikibase would deal with all configuration (namespaces, repo URLs etc). We don\u0027t want though that users learn that pages those redirects point to are the \"right\" URLs (that 301 would lead to IMO). It might happen that repo X starts to use some custom URLs for its entities. In this case old redirects might become broken, and users would not now way. Our redirects would just be adjusted accordingly and serve the right entity pages as before.",
+      "parentUuid": "0e0e73b5_f59043f3",
+      "range": {
+        "startLine": 67,
+        "startChar": 21,
+        "endLine": 67,
+        "endChar": 24
+      },
+      "revId": "ef1026e6141b939a7057fdbf60079f922c2d2c84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_588aa61d",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-03T13:11:19Z",
+      "side": 1,
+      "message": "I suggested 303 in the ticket, since that is what Special:EntityData uses for content negotiation. But we are not doing content negotiation here, this is indeed just an alias address, so 301 may be more suitable. I\u0027m not 100% sure about the intended semantics though. Looking at \u003chttps://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html\u003e, 301 means:\n\n\u003e The requested resource has been assigned a new permanent \n\u003e URI and any future references to this resource SHOULD use \n\u003e one of the returned URIs. Clients with link editing \n\u003e capabilities ought to automatically re-link references to \n\u003e the Request-URI to one or more of the new references \n\u003e returned by the server, where possible.\n\nWhile 303 means: \n\n\u003e The response to the request can be found under a different \n\u003e URI and SHOULD be retrieved using a GET method on that \n\u003e resource. [...] The new URI is not a substitute reference \n\u003e for the originally requested resource.\n\nNeither of those fits perfectly, but you are probably right that 301 is closer to our intent here: an address alias (301), not an operational forwarding (303).",
       "parentUuid": "0e0e73b5_f59043f3",
       "range": {
         "startLine": 67,
@@ -237,6 +326,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_187d4e17",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-03T13:11:19Z",
+      "side": 1,
+      "message": "In my experience, re-using providers makes tests hard to understand. I prefer making a separate provider for each test method. If the providers could share code, I factor that code out into a private helper method.",
+      "parentUuid": "0e0e73b5_3587fbbb",
+      "range": {
+        "startLine": 72,
+        "startChar": 10,
+        "endLine": 72,
+        "endChar": 26
+      },
+      "revId": "ef1026e6141b939a7057fdbf60079f922c2d2c84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_d5f41f52",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
         "patchSetId": 3
@@ -271,6 +384,30 @@
       "writtenOn": "2017-01-03T12:52:05Z",
       "side": 1,
       "message": "I\u0027ve added a brief comment why it is needed (Title core class relying on global services).",
+      "parentUuid": "0e0e73b5_d5f41f52",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 59
+      },
+      "revId": "ef1026e6141b939a7057fdbf60079f922c2d2c84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_988ffe25",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-03T13:11:19Z",
+      "side": 1,
+      "message": "The intent here is to use an InterwikiLookup mock that returns an Interwiki object that maps the prefix \"foo\" to the given URL. It would be clearer to add -\u003ewith( \u0027foo\u0027 ), I think. That would also make sure InterwikiLookup::fetch is actually called with the correct parameter.",
       "parentUuid": "0e0e73b5_d5f41f52",
       "range": {
         "startLine": 89,
