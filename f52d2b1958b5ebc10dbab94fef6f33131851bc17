@@ -22,6 +22,30 @@
       "revId": "f52d2b1958b5ebc10dbab94fef6f33131851bc17",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_4b99ae70",
+        "filename": "composer.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-03T15:26:15Z",
+      "side": 1,
+      "message": "We can discuss this, but in my opinion this comment does not add a new argument.\n\nWhat you say is exactly the intention of this patch, as explained in the commit message. What is the benefit of automatically pulling new features in, if they are not used? If there is a patch that starts using said new features, the patch can update this version number with almost zero additional effort. I believe I said all this in the commit message.",
+      "parentUuid": "0e0e73b5_8bc2065c",
+      "range": {
+        "startLine": 37,
+        "startChar": 40,
+        "endLine": 37,
+        "endChar": 46
+      },
+      "revId": "f52d2b1958b5ebc10dbab94fef6f33131851bc17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
