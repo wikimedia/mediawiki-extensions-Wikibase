@@ -150,6 +150,30 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			array( 'commonsMedia', new StringValue( 'Foo.jpg ' ), false, 'media name with trailing space' ),
 			array( 'commonsMedia', new StringValue( 'Foo-NOT-FOUND.jpg' ), false, 'file not found' ),
 
+			//geo-shape
+			array( 'geo-shape', 'Foo.map', false, 'StringValue expected, string supplied' ),
+			array( 'geo-shape', new NumberValue( 7 ), false, 'StringValue expected' ),
+			array( 'geo-shape', new StringValue( '' ), false, 'empty string should be invalid' ),
+			array( 'geo-shape', new StringValue( str_repeat( 'x', 237 ) . '.map' ), false, 'name too long' ),
+			array( 'geo-shape', new StringValue( 'Data:Foo' ), false, 'no file extension' ),
+			array( 'geo-shape', new StringValue( 'Data:Foo.a' ), false, 'file extension to short' ),
+			array( 'geo-shape', new StringValue( 'Data:Foo.map' ), true, 'this should be good' ),
+			array( 'geo-shape', new StringValue( 'Foo.map' ), false, 'Should have data namespace' ),
+			array( 'geo-shape', new StringValue( "Data:a\na.map" ), false, 'illegal character: newline' ),
+			array( 'geo-shape', new StringValue( 'Data:a[a.map' ), false, 'illegal character: square bracket' ),
+			array( 'geo-shape', new StringValue( 'Data:a]a.map' ), false, 'illegal character: square bracket' ),
+			array( 'geo-shape', new StringValue( 'Data:a{a.map' ), false, 'illegal character: curly bracket' ),
+			array( 'geo-shape', new StringValue( 'Data:a}a.map' ), false, 'illegal character: curly bracket' ),
+			array( 'geo-shape', new StringValue( 'Data:a|a.map' ), false, 'illegal character: pipe' ),
+			array( 'geo-shape', new StringValue( 'Data:Foo#bar.map' ), false, 'illegal character: hash' ),
+			array( 'geo-shape', new StringValue( 'Data:Foo:bar.map' ), false, 'illegal character: colon' ),
+			array( 'geo-shape', new StringValue( 'Data:Foo/bar.map' ), false, 'illegal character: slash' ),
+			array( 'geo-shape', new StringValue( 'Data:Foo\bar.map' ), false, 'illegal character: backslash' ),
+			array( 'geo-shape', new StringValue( 'Data:Äöü.map' ), true, 'Unicode support' ),
+			array( 'geo-shape', new StringValue( ' Data:Foo.map' ), false, 'media name with leading space' ),
+			array( 'geo-shape', new StringValue( 'Data:Foo.map ' ), false, 'media name with trailing space' ),
+			array( 'geo-shape', new StringValue( 'Data:Foo-NOT-FOUND.map' ), false, 'file not found' ),
+
 			//string
 			array( 'string', 'Foo', false, 'StringValue expected, string supplied' ),
 			array( 'string', new NumberValue( 7 ), false, 'StringValue expected' ),
@@ -324,6 +348,7 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 
 		$validatorMap = array(
 			'commonsMedia'      => array( $builders, 'buildMediaValidators' ),
+			'geo-shape'         => array( $builders, 'buildGeoShapeValidators' ),
 			'globe-coordinate'  => array( $builders, 'buildCoordinateValidators' ),
 			'monolingualtext'   => array( $builders, 'buildMonolingualTextValidators' ),
 			'quantity'          => array( $builders, 'buildQuantityValidators' ),

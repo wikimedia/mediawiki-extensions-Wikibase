@@ -33,6 +33,7 @@ return call_user_func( function() {
 				'dataValues.values',
 				'jquery.valueview.ExpertStore',
 				'jquery.valueview.experts.CommonsMediaType',
+				'jquery.valueview.experts.GeoShape',
 				'jquery.valueview.experts.GlobeCoordinateInput',
 				'jquery.valueview.experts.MonolingualText',
 				'jquery.valueview.experts.QuantityInput',

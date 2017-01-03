@@ -237,6 +237,23 @@ class WikibaseValueFormatterBuilders {
 	 *
 	 * @return ValueFormatter
 	 */
+	public function newGeoShapeFormatter( $format, FormatterOptions $options ) {
+		switch ( $this->getBaseFormat( $format ) ) {
+			case SnakFormatter::FORMAT_HTML:
+				return new ExternalLinkFormatter( $options );
+			case SnakFormatter::FORMAT_WIKI:
+				return new ExternalLinkFormatter( $options );
+			default:
+				return $this->newStringFormatter( $format, $options );
+		}
+	}
+
+	/**
+	 * @param string $format The desired target format, see SnakFormatter::FORMAT_XXX
+	 * @param FormatterOptions $options
+	 *
+	 * @return ValueFormatter
+	 */
 	public function newTimeFormatter( $format, FormatterOptions $options ) {
 		// TODO: Add a wikitext formatter that shows the calendar model
 		if ( $format === SnakFormatter::FORMAT_HTML_DIFF ) {

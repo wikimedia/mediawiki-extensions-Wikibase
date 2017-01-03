@@ -194,6 +194,36 @@ class ValidatorBuilders {
 	}
 
 	/**
+	 * @param string $checkExistence Either 'checkExistence' or 'doNotCheckExistence'
+	 *
+	 * @return ValueValidator[]
+	 */
+	public function buildGeoShapeValidators( $checkExistence = 'checkExistence' ) {
+		// oi_archive_name is max 255 bytes, which include a timestamp and an exclamation mark,
+		// so restrict file name to 240 bytes (see UploadBase::getTitle).
+		$validators = $this->getCommonStringValidators( 240 );
+
+		// Must contain a non-empty file name with no nasty characters (see documentation of
+		// $wgLegalTitleChars as well as $wgIllegalFileChars). File name extensions with digits
+		// (e.g. ".jp2") are possible, as well as two characters (e.g. ".ai").
+		$validators[] = new RegexValidator(
+			'/^Data:[^#\/:[\\\\\]{|}]+\.map$/u',
+			false,
+			'illegal-file-chars'
+			);
+
+		if ( $checkExistence === 'checkExistence' ) {
+			$validators[] = new CommonsMediaExistsValidator( $this->mediaFileNameLookup );
+		}
+
+		$topValidator = new DataValueValidator(
+			new CompositeValidator( $validators ) //Note: each validator is fatal
+			);
+
+		return array( new TypeValidator( DataValue::class ), $topValidator );
+	}
+
+	/**
 	 * @return ValueValidator[]
 	 */
 	public function buildStringValidators() {
