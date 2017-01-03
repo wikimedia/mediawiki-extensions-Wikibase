@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_4eb65c86",
+        "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2017-01-03T17:26:35Z",
+      "side": 1,
+      "message": "This can actually be any old bag of stuff, not just memcache",
+      "range": {
+        "startLine": 12,
+        "startChar": 65,
+        "endLine": 12,
+        "endChar": 80
+      },
+      "revId": "3782f63875f7def692362e73448b81a22dbf6c08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_ae6838f3",
+        "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2017-01-03T17:26:35Z",
+      "side": 1,
+      "message": "Could add a @since tag, although I\u0027m not sure how much value they have in this repo!",
+      "range": {
+        "startLine": 19,
+        "startChar": 3,
+        "endLine": 19,
+        "endChar": 20
+      },
+      "revId": "3782f63875f7def692362e73448b81a22dbf6c08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_8edd7419",
+        "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2017-01-03T17:26:35Z",
+      "side": 1,
+      "message": "could all properties here be private?",
+      "range": {
+        "startLine": 27,
+        "startChar": 1,
+        "endLine": 27,
+        "endChar": 10
+      },
+      "revId": "3782f63875f7def692362e73448b81a22dbf6c08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_4e1adc7f",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2017-01-03T17:26:35Z",
+      "side": 1,
+      "message": "Should this not be Wikibase\\Lib\\Store ?",
+      "range": {
+        "startLine": 3,
+        "startChar": 10,
+        "endLine": 3,
+        "endChar": 18
+      },
+      "revId": "3782f63875f7def692362e73448b81a22dbf6c08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_eea7504a",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2017-01-03T17:26:35Z",
+      "side": 1,
+      "message": "This can actually be any old bag of stuff, not just memcache",
+      "range": {
+        "startLine": 11,
+        "startChar": 53,
+        "endLine": 11,
+        "endChar": 65
+      },
+      "revId": "3782f63875f7def692362e73448b81a22dbf6c08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_8e6b34ee",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2017-01-03T17:26:35Z",
+      "side": 1,
+      "message": "Could add a @since tag, although I\u0027m not sure how much value they have in this repo!",
+      "range": {
+        "startLine": 15,
+        "startChar": 3,
+        "endLine": 15,
+        "endChar": 20
+      },
+      "revId": "3782f63875f7def692362e73448b81a22dbf6c08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_ae36f8fd",
+        "filename": "lib/includes/Store/Sql/PropertyInfoTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2017-01-03T17:26:35Z",
+      "side": 1,
+      "message": "I\u0027m not sure this is strictly correct.\nAlthough the version in the previous patch is also wrong.\nI would just pass null in here",
+      "range": {
+        "startLine": 219,
+        "startChar": 22,
+        "endLine": 219,
+        "endChar": 55
+      },
+      "revId": "3782f63875f7def692362e73448b81a22dbf6c08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_8e39f4f1",
+        "filename": "lib/includes/Store/Sql/PropertyInfoTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2017-01-03T17:26:35Z",
+      "side": 1,
+      "message": "As above",
+      "range": {
+        "startLine": 258,
+        "startChar": 22,
+        "endLine": 258,
+        "endChar": 55
+      },
+      "revId": "3782f63875f7def692362e73448b81a22dbf6c08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
