@@ -2,6 +2,75 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e0e73b5_f59043f3",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-03T11:00:25Z",
+      "side": 1,
+      "message": "Why 303, but not 301?",
+      "range": {
+        "startLine": 67,
+        "startChar": 21,
+        "endLine": 67,
+        "endChar": 24
+      },
+      "revId": "ef1026e6141b939a7057fdbf60079f922c2d2c84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_3587fbbb",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-03T11:00:25Z",
+      "side": 1,
+      "message": "Provider and test coupled using this substring. It means that provider cannot be reused.\n\nIt is not critical in this case, but still makes test harder to understand.",
+      "range": {
+        "startLine": 72,
+        "startChar": 10,
+        "endLine": 72,
+        "endChar": 26
+      },
+      "revId": "ef1026e6141b939a7057fdbf60079f922c2d2c84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_d5f41f52",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-03T11:00:25Z",
+      "side": 1,
+      "message": "The mock set up is clear but intention is unclear.\n\nI would suggest to hide it behind the method like `givenWikiWithNameAndDomainIsSetUp(\u0027foo\u0027, \u0027https://foo.wiki\u0027)`. Name is not the best, because I cannot understand what exactly these lines supposed to mean.",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 59
+      },
+      "revId": "ef1026e6141b939a7057fdbf60079f922c2d2c84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_b5ebeb76",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
         "patchSetId": 3
