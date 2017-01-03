@@ -9,7 +9,6 @@ use Linker;
 use QueryPage;
 use Skin;
 use Title;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 
@@ -47,28 +46,11 @@ class SpecialPagesWithBadges extends QueryPage {
 	 * @see SpecialPage::__construct
 	 *
 	 * @param string $name
-	 */
-	public function __construct( $name = 'PagesWithBadges' ) {
-		parent::__construct( $name );
-
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$this->initServices(
-			new LanguageFallbackLabelDescriptionLookupFactory(
-				$wikibaseClient->getLanguageFallbackChainFactory(),
-				$wikibaseClient->getTermLookup(),
-				$wikibaseClient->getTermBuffer()
-			),
-			array_keys( $wikibaseClient->getSettings()->getSetting( 'badgeClassNames' ) ),
-			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
-		);
-	}
-
-	/**
 	 * @param LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param string[] $badgeIds
 	 * @param string $siteId
 	 */
-	public function initServices(
+	public function __construct(
 		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		array $badgeIds,
 		$siteId
@@ -76,6 +58,9 @@ class SpecialPagesWithBadges extends QueryPage {
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->badgeIds = $badgeIds;
 		$this->siteId = $siteId;
+
+		parent::__construct( 'PagesWithBadges' );
+
 	}
 
 	/**
