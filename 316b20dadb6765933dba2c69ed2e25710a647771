@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_7587b314",
+        "filename": "repo/tests/phpunit/includes/Store/MockEntityIdPager.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-03T09:45:24Z",
+      "side": 0,
+      "message": "Not sure whether this more belongs to repo/tests/phpunit/maintenance as according to my IDE it is only used by tests there.",
+      "revId": "316b20dadb6765933dba2c69ed2e25710a647771",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
