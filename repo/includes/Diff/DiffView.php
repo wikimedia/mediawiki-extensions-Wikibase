@@ -32,11 +32,6 @@ use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 class DiffView extends ContextSource {
 
 	/**
-	 * @var SiteLookup
-	 */
-	private $siteLookup;
-
-	/**
 	 * @var string[]
 	 */
 	private $path;
@@ -45,6 +40,11 @@ class DiffView extends ContextSource {
 	 * @var Diff
 	 */
 	private $diff;
+
+	/**
+	 * @var SiteLookup
+	 */
+	private $siteLookup;
 
 	/**
 	 * @var EntityIdFormatter
@@ -74,8 +74,8 @@ class DiffView extends ContextSource {
 	) {
 		$this->path = $path;
 		$this->diff = $diff;
-		$this->entityIdFormatter = $entityIdFormatter;
 		$this->siteLookup = $siteLookup;
+		$this->entityIdFormatter = $entityIdFormatter;
 
 		if ( !is_null( $contextSource ) ) {
 			$this->setContext( $contextSource );
@@ -211,8 +211,10 @@ class DiffView extends ContextSource {
 			} else {
 				$value = $this->getSiteLinkElement( $path[1], $value );
 			}
+
 			return Html::rawElement( $tag, array( 'class' => 'diffchange diffchange-inline' ), $value );
 		}
+
 		return Html::element( $tag, array( 'class' => 'diffchange diffchange-inline' ), $value );
 	}
 
