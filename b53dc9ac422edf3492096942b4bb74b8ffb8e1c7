@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_18978e94",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-03T12:05:49Z",
+      "side": 1,
+      "message": "Slightly misplaced comma.",
+      "range": {
+        "startLine": 80,
+        "startChar": 88,
+        "endLine": 80,
+        "endChar": 89
+      },
+      "revId": "b53dc9ac422edf3492096942b4bb74b8ffb8e1c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
