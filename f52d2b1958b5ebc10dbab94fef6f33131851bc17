@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_8bc2065c",
+        "filename": "composer.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2017-01-03T15:05:58Z",
+      "side": 1,
+      "message": "Are these changes that we really want?\nThis will mean we need to change the composer.json to allow wikibase to use 2.3.0, which will contain no breaking changes....\n\nThe same applies for most of these other changes.",
+      "range": {
+        "startLine": 37,
+        "startChar": 40,
+        "endLine": 37,
+        "endChar": 46
+      },
+      "revId": "f52d2b1958b5ebc10dbab94fef6f33131851bc17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
