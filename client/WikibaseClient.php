@@ -214,7 +214,19 @@ call_user_func( function() {
 
 	// Special page registration
 	$wgSpecialPages['UnconnectedPages'] = 'Wikibase\Client\Specials\SpecialUnconnectedPages';
-	$wgSpecialPages['PagesWithBadges'] = 'Wikibase\Client\Specials\SpecialPagesWithBadges';
+	$wgSpecialPages['PagesWithBadges'] = function( $name = 'PagesWithBadges' ) {
+		$wikibaseClient = Wikibase\Client\WikibaseClient::getDefaultInstance();
+		return new \Wikibase\Client\Specials\SpecialPagesWithBadges(
+			$name,
+			new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory(
+				$wikibaseClient->getLanguageFallbackChainFactory(),
+				$wikibaseClient->getTermLookup(),
+				$wikibaseClient->getTermBuffer()
+			),
+			array_keys( $wikibaseClient->getSettings()->getSetting( 'badgeClassNames' ) ),
+			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
+		);
+	};
 	$wgSpecialPages['EntityUsage'] = 'Wikibase\Client\Specials\SpecialEntityUsage';
 	$wgHooks['wgQueryPages'][] = 'Wikibase\ClientHooks::onwgQueryPages';
 
