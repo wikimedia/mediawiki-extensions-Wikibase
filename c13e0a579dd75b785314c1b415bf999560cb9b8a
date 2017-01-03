@@ -70,6 +70,30 @@
       "revId": "c13e0a579dd75b785314c1b415bf999560cb9b8a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_6e492090",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialSetSiteLinkTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-03T17:20:01Z",
+      "side": 1,
+      "message": "Guys, please. HashSiteStore is a trivial in-memory implementation, perfect for tests. It exists. Just use it.",
+      "parentUuid": "0e0e73b5_2e1e8811",
+      "range": {
+        "startLine": 101,
+        "startChar": 2,
+        "endLine": 116,
+        "endChar": 5
+      },
+      "revId": "c13e0a579dd75b785314c1b415bf999560cb9b8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
