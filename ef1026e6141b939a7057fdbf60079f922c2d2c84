@@ -2,6 +2,75 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e0e73b5_180c2e3c",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-03T11:35:41Z",
+      "side": 1,
+      "message": "This string should be exactly the same as in `repo/includes/Content/EntityContentFactory.php:109`. It would be nice to have this knowledge expressed somehow. \n\nI\u0027d suggest SpecialEntityPage class constant.",
+      "range": {
+        "startLine": 208,
+        "startChar": 17,
+        "endLine": 208,
+        "endChar": 29
+      },
+      "revId": "ef1026e6141b939a7057fdbf60079f922c2d2c84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_152637c9",
+        "filename": "repo/includes/Specials/SpecialEntityPage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-03T11:35:41Z",
+      "side": 1,
+      "message": "`(string)$subPage` and you don\u0027t need null check later.",
+      "range": {
+        "startLine": 49,
+        "startChar": 8,
+        "endLine": 49,
+        "endChar": 17
+      },
+      "revId": "ef1026e6141b939a7057fdbf60079f922c2d2c84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_55438f67",
+        "filename": "repo/includes/Specials/SpecialEntityPage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-03T11:35:41Z",
+      "side": 1,
+      "message": "There will be strange behavior when path like `Special:EntityPage/Q1?id\u003dQ2` is given.\n\nWhy do we need to handle both?",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 50
+      },
+      "revId": "ef1026e6141b939a7057fdbf60079f922c2d2c84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_f59043f3",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
         "patchSetId": 3
