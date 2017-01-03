@@ -8,6 +8,7 @@ use Diff\DiffOp\DiffOpRemove;
 use HashSiteStore;
 use IContextSource;
 use MediaWikiTestCase;
+use RawMessage;
 use Site;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
@@ -27,9 +28,14 @@ use Wikibase\Repo\Diff\EntityDiffVisualizer;
  */
 class EntityDiffVisualizerTest extends MediaWikiTestCase {
 
-	public function diffProvider() {
-		$emptyDiff = new EntityContentDiff( new EntityDiff(), new Diff() );
+	public function testEmptyDiff() {
+		$diff = new EntityContentDiff( new EntityDiff(), new Diff() );
+		$html = $this->getVisualizer()->visualizeEntityContentDiff( $diff );
 
+		$this->assertSame( '', $html );
+	}
+
+	public function diffProvider() {
 		$fingerprintDiff = new EntityContentDiff(
 			new EntityDiff( array(
 				'label' => new Diff( array(
@@ -42,26 +48,26 @@ class EntityDiffVisualizerTest extends MediaWikiTestCase {
 
 				'aliases' => new Diff( array(
 					'nl' => new Diff( array(
-							new DiffOpAdd( 'daaaah' ),
-							new DiffOpRemove( 'foo' ),
-							new DiffOpRemove( 'bar' ),
-						) )
+						new DiffOpAdd( 'daaaah' ),
+						new DiffOpRemove( 'foo' ),
+						new DiffOpRemove( 'bar' ),
+					) )
 				), true ),
 			) ),
 			new Diff()
 		);
 
 		$fingerprintTags = array(
-			'has <td>label / en</td>' => array( 'tag' => 'td', 'content' => 'label / en' ),
-			'has <ins>O_o</ins>' => array( 'tag' => 'ins', 'content' => 'O_o' ),
-			'has <td>aliases / nl / 0</td>' => array( 'tag' => 'td', 'content' => 'aliases / nl / 0' ),
-			'has <ins>daaaah</ins>' => array( 'tag' => 'ins', 'content' => 'daaaah' ),
-			'has <td>aliases / nl / 1</td>' => array( 'tag' => 'td', 'content' => 'aliases / nl / 1' ),
-			'has <del>foo</del>' => array( 'tag' => 'del', 'content' => 'foo' ),
-			'has <td>aliases / nl / 2</td>' => array( 'tag' => 'td', 'content' => 'aliases / nl / 2' ),
-			'has <del>bar</del>' => array( 'tag' => 'del', 'content' => 'bar' ),
-			'has <td>description / en</td>' => array( 'tag' => 'td', 'content' => 'description / en' ),
-			'has <del>ohi there</del>' => array( 'tag' => 'del', 'content' => 'ohi there' ),
+			'has <td>label / en</td>' => '>(wikibase-diffview-label) / en</td>',
+			'has <ins>O_o</ins>' => '>O_o</ins>',
+			'has <td>aliases / nl / 0</td>' => '>(wikibase-diffview-alias) / nl / 0</td>',
+			'has <ins>daaaah</ins>' => '>daaaah</ins>',
+			'has <td>aliases / nl / 1</td>' => '>(wikibase-diffview-alias) / nl / 1</td>',
+			'has <del>foo</del>' => '>foo</del>',
+			'has <td>aliases / nl / 2</td>' => '>(wikibase-diffview-alias) / nl / 2</td>',
+			'has <del>bar</del>' => '>bar</del>',
+			'has <td>description / en</td>' => '>(wikibase-diffview-description) / en</td>',
+			'has <del>ohi there</del>' => '>ohi there</del>',
 		);
 
 		$redirectDiff = new EntityContentDiff( new EntityDiff(), new Diff( array(
@@ -69,12 +75,11 @@ class EntityDiffVisualizerTest extends MediaWikiTestCase {
 		), true ) );
 
 		$redirectTags = array(
-			'has <td>redirect</td>' => array( 'tag' => 'td', 'content' => 'redirect' ),
-			'has <ins>Q1234</ins>' => array( 'tag' => 'ins', 'content' => 'Q1234' ),
+			'has <td>redirect</td>' => '>redirect</td>',
+			'has <ins>Q1234</ins>' => '>Q1234</ins>',
 		);
 
 		return array(
-			'empty' => array( $emptyDiff, array( 'empty' => '/^$/', ) ),
 			'fingerprint changed' => array( $fingerprintDiff, $fingerprintTags ),
 			'redirect changed' => array( $redirectDiff, $redirectTags ),
 		);
@@ -83,12 +88,13 @@ class EntityDiffVisualizerTest extends MediaWikiTestCase {
 	/**
 	 * @return IContextSource
 	 */
-	protected function getMockContext() {
+	private function getMockContext() {
 		$mock = $this->getMock( IContextSource::class );
+
 		$mock->expects( $this->any() )
 			->method( 'msg' )
 			->will( $this->returnCallback( function ( $key ) {
-				return wfMessage( $key )->inLanguage( 'en' );
+				return new RawMessage( "($key)" );
 			} ) );
 
 		return $mock;
@@ -97,7 +103,7 @@ class EntityDiffVisualizerTest extends MediaWikiTestCase {
 	/**
 	 * @return ClaimDiffer
 	 */
-	protected function getMockClaimDiffer() {
+	private function getMockClaimDiffer() {
 		$mock = $this->getMockBuilder( ClaimDiffer::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -107,7 +113,7 @@ class EntityDiffVisualizerTest extends MediaWikiTestCase {
 	/**
 	 * @return ClaimDifferenceVisualizer
 	 */
-	protected function getMockClaimDiffVisualizer() {
+	private function getMockClaimDiffVisualizer() {
 		$mock = $this->getMockBuilder( ClaimDifferenceVisualizer::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -117,7 +123,7 @@ class EntityDiffVisualizerTest extends MediaWikiTestCase {
 	/**
 	 * @return EntityDiffVisualizer
 	 */
-	protected function getVisualizer() {
+	private function getVisualizer() {
 		$enwiki = new Site();
 		$enwiki->setGlobalId( 'enwiki' );
 
@@ -134,18 +140,12 @@ class EntityDiffVisualizerTest extends MediaWikiTestCase {
 	 * @dataProvider diffProvider
 	 */
 	public function testGenerateEntityContentDiffBody( EntityContentDiff $diff, array $matchers ) {
-		$visualizer = $this->getVisualizer();
-
-		$html = $visualizer->visualizeEntityContentDiff( $diff );
+		$html = $this->getVisualizer()->visualizeEntityContentDiff( $diff );
 
 		$this->assertInternalType( 'string', $html );
 
 		foreach ( $matchers as $name => $matcher ) {
-			if ( is_string( $matcher ) ) {
-				$this->assertRegExp( $matcher, $html );
-			} else {
-				$this->assertTag( $matcher, $html, $name );
-			}
+			$this->assertContains( $matcher, $html, $name );
 		}
 	}
 
