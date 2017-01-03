@@ -22,6 +22,30 @@
       "revId": "a16394e14c37b9510d78072839474ff06e871a33",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_a9c2725b",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-03T17:48:48Z",
+      "side": 1,
+      "message": "wgSpecialPages might call it with name argument (that\u0027s why most of Special page classes have the argument.) Please correct me if I\u0027m wrong.",
+      "parentUuid": "0e0e73b5_0953bee7",
+      "range": {
+        "startLine": 217,
+        "startChar": 48,
+        "endLine": 217,
+        "endChar": 73
+      },
+      "revId": "a16394e14c37b9510d78072839474ff06e871a33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
