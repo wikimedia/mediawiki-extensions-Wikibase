@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_b55bebfc",
+        "filename": "repo/includes/Specials/SpecialEntityPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-03T08:53:52Z",
+      "side": 1,
+      "message": "Good point. Changed.\n\nIt wouldn\u0027t result in the infinite loop, as far as I get it, as it would 303 redirect to Special:EntityData which would then 303-redirect to the entity page.\nBut using EntityTitleLookup which does basically the same title selection as was done here is better, and also makes a single redirect in case of the local entity id, instead of two.",
+      "parentUuid": "0e0e73b5_a36bb4b4",
+      "revId": "4c7ec5e6a3749b94bb8082ea61723aeaeb1b9abe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_c390e850",
         "filename": "repo/includes/Specials/SpecialEntityPage.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2017-01-02T22:09:10Z",
       "side": 1,
       "message": "This assumes that the wikibase repo name is the same as the interwiki prefix for that repo. A good convention, but a strong assumption that at least deserves a comment.",
+      "revId": "4c7ec5e6a3749b94bb8082ea61723aeaeb1b9abe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_d54d3f40",
+        "filename": "repo/includes/Specials/SpecialEntityPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-03T08:53:52Z",
+      "side": 1,
+      "message": "True. This now relies on EntityContentFactory, which has a comment on the assumption.",
+      "parentUuid": "0e0e73b5_c390e850",
       "revId": "4c7ec5e6a3749b94bb8082ea61723aeaeb1b9abe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
