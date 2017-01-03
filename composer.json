@@ -60,7 +60,6 @@
 			"lib/maintenance/",
 			"repo/includes/",
 			"repo/maintenance/",
-			"repo/tests/phpunit/",
 			"repo/Wikibase.hooks.php"
 		],
 		"psr-4": {
