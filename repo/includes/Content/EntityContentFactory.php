@@ -105,14 +105,14 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup, En
 	 */
 	public function getTitleForId( EntityId $id ) {
 		if ( $id->isForeign() ) {
-			$pageName = 'Special:EntityPage/' . $id->getLocalPart();
+			$pageName = 'EntityPage/' . $id->getLocalPart();
 
 			// TODO: The interwiki prefix *should* be the same as the repo name,
 			//        but we have no way to know or guarantee this! See T153496.
 			$interwiki = $id->getRepositoryName();
 
 			// TODO: use a TitleFactory
-			return Title::makeTitle( 0, $pageName, '', $interwiki );
+			return Title::makeTitle( NS_SPECIAL, $pageName, '', $interwiki );
 		} else {
 			$handler = $this->getContentHandlerForType( $id->getEntityType() );
 			return $handler->getTitleForId( $id );
