@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
+use HashSiteStore;
 use Site;
-use SiteList;
 use SiteLookup;
 use SpecialPageTestBase;
 use Title;
@@ -80,28 +80,11 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 	 * @return SiteLookup
 	 */
 	private function getMockSiteLookup() {
-		$getSite = function( $siteId ) {
-			$site = new Site();
-			$site->setGlobalId( $siteId );
-			$site->setLinkPath( "http://$siteId.com/$1" );
+		$dewiki = new Site();
+		$dewiki->setGlobalId( 'dewiki' );
+		$dewiki->setLinkPath( 'http://dewiki.com/$1' );
 
-			return $site;
-		};
-
-		$siteList = new SiteList();
-		$siteList[] = $getSite( 'dewiki' );
-		$siteList[] = $getSite( 'enwiki' );
-
-		$mock = $this->getMock( SiteLookup::class );
-		$mock->expects( $this->any() )
-			->method( 'getSite' )
-			->will( $this->returnCallback( $getSite ) );
-
-		$mock->expects( $this->any() )
-			->method( 'getSites' )
-			->will( $this->returnValue( $siteList ) );
-
-		return $mock;
+		return new HashSiteStore( [ $dewiki ] );
 	}
 
 	/**

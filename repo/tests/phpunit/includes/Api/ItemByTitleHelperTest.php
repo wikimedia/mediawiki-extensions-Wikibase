@@ -3,7 +3,9 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiBase;
+use HashSiteStore;
 use MediaWikiSite;
+use Site;
 use SiteLookup;
 use Title;
 use ApiUsageException;
@@ -38,17 +40,13 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 	 * @return SiteLookup
 	 */
 	public function getSiteLookupMock() {
-		$dummySite = new MediaWikiSite();
+		$site = $this->getMock( Site::class );
 
-		$siteLookupMock = $this->getMockBuilder( SiteLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$site->expects( $this->any() )
+			->method( 'getGlobalId' )
+			->will( $this->returnValue( 'FooSite' ) );
 
-		$siteLookupMock->expects( $this->any() )
-			->method( 'getSite' )
-			->will( $this->returnValue( $dummySite ) );
-
-		return $siteLookupMock;
+		return new HashSiteStore( [ $site ] );
 	}
 
 	/**

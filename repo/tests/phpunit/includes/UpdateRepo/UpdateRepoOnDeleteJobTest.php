@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\UpdateRepo;
 
+use HashSiteStore;
 use Site;
 use SiteLookup;
 use Status;
@@ -64,17 +65,14 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 	private function getSiteLookup( $titleExists ) {
 		$enwiki = $this->getMock( Site::class );
 		$enwiki->expects( $this->any() )
+			->method( 'getGlobalId' )
+			->will( $this->returnValue( 'enwiki' ) );
+		$enwiki->expects( $this->any() )
 			->method( 'normalizePageName' )
 			->with( 'Delete me' )
 			->will( $this->returnValue( $titleExists ) );
 
-		$siteLookup = $this->getMock( SiteLookup::class );
-		$siteLookup->expects( $this->any() )
-			->method( 'getSite' )
-			->with( 'enwiki' )
-			->will( $this->returnValue( $enwiki ) );
-
-		return $siteLookup;
+		return new HashSiteStore( [ $enwiki ] );
 	}
 
 	/**
