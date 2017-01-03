@@ -8,6 +8,7 @@ use Diff\DiffOp\DiffOpRemove;
 use HashSiteStore;
 use IContextSource;
 use MediaWikiTestCase;
+use RawMessage;
 use Site;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
@@ -29,7 +30,6 @@ class EntityDiffVisualizerTest extends MediaWikiTestCase {
 
 	public function testVisualizingEmptyDiff() {
 		$emptyDiff = new EntityContentDiff( new EntityDiff(), new Diff() );
-
 		$html = $this->getVisualizer()->visualizeEntityContentDiff( $emptyDiff );
 
 		$this->assertSame( '', $html );
@@ -48,25 +48,25 @@ class EntityDiffVisualizerTest extends MediaWikiTestCase {
 
 				'aliases' => new Diff( array(
 					'nl' => new Diff( array(
-							new DiffOpAdd( 'daaaah' ),
-							new DiffOpRemove( 'foo' ),
-							new DiffOpRemove( 'bar' ),
-						) )
+						new DiffOpAdd( 'daaaah' ),
+						new DiffOpRemove( 'foo' ),
+						new DiffOpRemove( 'bar' ),
+					) )
 				), true ),
 			) ),
 			new Diff()
 		);
 
 		$fingerprintTags = array(
-			'has <td>label / en</td>' => '>label / en</td>',
+			'has <td>label / en</td>' => '>(wikibase-diffview-label) / en</td>',
 			'has <ins>O_o</ins>' => '>O_o</ins>',
-			'has <td>aliases / nl / 0</td>' => '>aliases / nl / 0</td>',
+			'has <td>aliases / nl / 0</td>' => '>(wikibase-diffview-alias) / nl / 0</td>',
 			'has <ins>daaaah</ins>' => '>daaaah</ins>',
-			'has <td>aliases / nl / 1</td>' => '>aliases / nl / 1</td>',
+			'has <td>aliases / nl / 1</td>' => '>(wikibase-diffview-alias) / nl / 1</td>',
 			'has <del>foo</del>' => '>foo</del>',
-			'has <td>aliases / nl / 2</td>' => '>aliases / nl / 2</td>',
+			'has <td>aliases / nl / 2</td>' => '>(wikibase-diffview-alias) / nl / 2</td>',
 			'has <del>bar</del>' => '>bar</del>',
-			'has <td>description / en</td>' => '>description / en</td>',
+			'has <td>description / en</td>' => '>(wikibase-diffview-description) / en</td>',
 			'has <del>ohi there</del>' => '>ohi there</del>',
 		);
 
@@ -90,10 +90,11 @@ class EntityDiffVisualizerTest extends MediaWikiTestCase {
 	 */
 	private function getMockContext() {
 		$mock = $this->getMock( IContextSource::class );
+
 		$mock->expects( $this->any() )
 			->method( 'msg' )
 			->will( $this->returnCallback( function ( $key ) {
-				return wfMessage( $key )->inLanguage( 'en' );
+				return new RawMessage( "($key)" );
 			} ) );
 
 		return $mock;
