@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_b801a273",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-03T13:18:52Z",
+      "side": 1,
+      "message": "Thanks Daniel! I was also expecting such issue but wasn\u0027t 100% sure.",
+      "parentUuid": "0e0e73b5_98ddbe19",
+      "range": {
+        "startLine": 208,
+        "startChar": 17,
+        "endLine": 208,
+        "endChar": 29
+      },
+      "revId": "ef1026e6141b939a7057fdbf60079f922c2d2c84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_b8b3e2e7",
         "filename": "repo/i18n/qqq.json",
         "patchSetId": 3
@@ -84,6 +108,24 @@
       "writtenOn": "2017-01-03T13:11:19Z",
       "side": 1,
       "message": "shouldn\u0027t this mention *which* special page?",
+      "revId": "ef1026e6141b939a7057fdbf60079f922c2d2c84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_f8d83a24",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-03T13:18:52Z",
+      "side": 1,
+      "message": "I guess it should. I only didn\u0027t do it as the similar message for Special:EntityData didn\u0027t do it, and I wondered why. I was hoping someone will catch it, thanks!\nWill add the page name to this message, and adjust other message separately.",
+      "parentUuid": "0e0e73b5_b8b3e2e7",
       "revId": "ef1026e6141b939a7057fdbf60079f922c2d2c84",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
