@@ -14,6 +14,7 @@ selenium/configuration.yml
 tests/browser/.idea
 tests/browser/.bundle/*
 tests/browser/config/config.yml
+tests/phan/issues
 
 # Editors
 *.kate-swp
