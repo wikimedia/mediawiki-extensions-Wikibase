@@ -6,7 +6,7 @@ use Html;
 use IContextSource;
 use SiteLookup;
 use Title;
-use Wikibase\Store\Sql\SqlSubscriptionLookup;
+use Wikibase\Store\SubscriptionLookup;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 
@@ -24,7 +24,7 @@ class InfoActionHookHandler {
 	private $namespaceChecker;
 
 	/**
-	 * @var SqlSubscriptionLookup
+	 * @var SubscriptionLookup
 	 */
 	private $subscriptionLookup;
 
@@ -45,7 +45,7 @@ class InfoActionHookHandler {
 
 	public function __construct(
 		EntityNamespaceLookup $namespaceChecker,
-		SqlSubscriptionLookup $subscriptionLookup,
+		SubscriptionLookup $subscriptionLookup,
 		SiteLookup $siteLookup,
 		EntityIdLookup $entityIdLookup,
 		IContextSource $context
@@ -77,7 +77,7 @@ class InfoActionHookHandler {
 	/**
 	 * @param Title $title
 	 *
-	 * @return array
+	 * @return string[] HTML
 	 */
 	private function getPageInfoRow( Title $title ) {
 		$entity = $this->entityIdLookup->getEntityIdForTitle( $title );
@@ -93,7 +93,7 @@ class InfoActionHookHandler {
 	 * @param string[] $subscriptions
 	 * @param Title $title
 	 *
-	 * @return string HTML[]
+	 * @return string[] HTML
 	 */
 	private function formatSubscriptions( array $subscriptions, Title $title ) {
 		$output = '';
