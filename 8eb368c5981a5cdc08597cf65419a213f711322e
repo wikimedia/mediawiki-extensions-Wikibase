@@ -22,6 +22,30 @@
       "revId": "8eb368c5981a5cdc08597cf65419a213f711322e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_ab026abc",
+        "filename": "repo/includes/Diff/DiffView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 4088
+      },
+      "writtenOn": "2017-01-03T14:42:59Z",
+      "side": 1,
+      "message": "The isDisabled() function checks before executing that line.",
+      "parentUuid": "0e0e73b5_c833675e",
+      "range": {
+        "startLine": 113,
+        "startChar": 5,
+        "endLine": 113,
+        "endChar": 57
+      },
+      "revId": "8eb368c5981a5cdc08597cf65419a213f711322e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
