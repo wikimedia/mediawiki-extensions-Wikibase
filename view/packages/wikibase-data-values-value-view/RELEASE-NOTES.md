@@ -1,5 +1,8 @@
 # ValueView release notes
 
+## 0.18.1 (2016-01-03)
+* Added support for `geo-shape` data type.
+
 ## 0.18.0 (2016-10-14)
 * `jQuery.ui.commonssuggester` now allows pasting full and partial Wikimedia Commons URLs.
 * Added support for `null` precision to `GlobeCoordinateInput`.

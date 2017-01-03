@@ -31,6 +31,19 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.valueview.experts.GeoShape' => $moduleTemplate + array(
+				'scripts' => array(
+						'GeoShape.js',
+				),
+				'dependencies' => array(
+						'jquery.event.special.eachchange',
+						'jquery.ui.commonssuggester',
+						'jquery.valueview.experts',
+						'jquery.valueview.experts.StringValue',
+						'jquery.valueview.Expert',
+				),
+		),
+
 		'jquery.valueview.experts.EmptyValue' => $moduleTemplate + array(
 			'scripts' => array(
 				'EmptyValue.js',
