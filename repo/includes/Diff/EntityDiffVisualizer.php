@@ -61,7 +61,8 @@ class EntityDiffVisualizer {
 	 * @param SiteLookup $siteLookup
 	 * @param EntityIdFormatter $entityIdFormatter
 	 */
-	public function __construct( IContextSource $contextSource,
+	public function __construct(
+		IContextSource $contextSource,
 		ClaimDiffer $claimDiffer,
 		ClaimDifferenceVisualizer $claimDiffView,
 		SiteLookup $siteLookup,
@@ -107,13 +108,13 @@ class EntityDiffVisualizer {
 		$html = '';
 
 		$termDiffVisualizer = new DiffView(
-			array(),
+			[],
 			new Diff(
-				array(
+				[
 					$this->context->msg( 'wikibase-diffview-label' )->text() => $diff->getLabelsDiff(),
 					$this->context->msg( 'wikibase-diffview-alias' )->text() => $diff->getAliasesDiff(),
 					$this->context->msg( 'wikibase-diffview-description' )->text() => $diff->getDescriptionsDiff(),
-				),
+				],
 				true
 			),
 			$this->siteLookup,
@@ -130,11 +131,11 @@ class EntityDiffVisualizer {
 		// FIXME: this does not belong here as it is specific to items
 		if ( $diff instanceof ItemDiff ) {
 			$linkDiffVisualizer = new DiffView(
-				array(),
+				[],
 				new Diff(
-					array(
+					[
 						$this->context->msg( 'wikibase-diffview-link' )->text() => $diff->getSiteLinkDiff(),
-					),
+					],
 					true
 				),
 				$this->siteLookup,

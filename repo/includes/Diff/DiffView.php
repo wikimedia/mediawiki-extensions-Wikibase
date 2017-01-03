@@ -32,11 +32,6 @@ use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 class DiffView extends ContextSource {
 
 	/**
-	 * @var SiteLookup
-	 */
-	private $siteLookup;
-
-	/**
 	 * @var string[]
 	 */
 	private $path;
@@ -45,6 +40,11 @@ class DiffView extends ContextSource {
 	 * @var Diff
 	 */
 	private $diff;
+
+	/**
+	 * @var SiteLookup
+	 */
+	private $siteLookup;
 
 	/**
 	 * @var EntityIdFormatter
@@ -74,12 +74,13 @@ class DiffView extends ContextSource {
 	) {
 		$this->path = $path;
 		$this->diff = $diff;
-		$this->entityIdFormatter = $entityIdFormatter;
 		$this->siteLookup = $siteLookup;
+		$this->entityIdFormatter = $entityIdFormatter;
 
 		if ( !is_null( $contextSource ) ) {
 			$this->setContext( $contextSource );
 		}
+
 		$this->siteLinkPath = $this->msg( 'wikibase-diffview-link' )->text();
 	}
 
@@ -105,16 +106,17 @@ class DiffView extends ContextSource {
 	 */
 	private function generateOpHtml( array $path, DiffOp $op ) {
 		if ( $op->isAtomic() ) {
-			$translatedPath = $path;
+			$localizedPath = $path;
 
-			if ( $this->isSiteLinkPath( $path ) ) {
+			if ( $this->isSiteLinkPath( $path ) && isset( $path[2] ) ) {
 				$translatedLinkSubPath = $this->msg( 'wikibase-diffview-link-' . $path[2] );
+
 				if ( !$translatedLinkSubPath->isDisabled() ) {
-					$translatedPath[2] = $translatedLinkSubPath->text();
+					$localizedPath[2] = $translatedLinkSubPath->text();
 				}
 			}
 
-			$html = $this->generateDiffHeaderHtml( implode( ' / ', $translatedPath ) );
+			$html = $this->generateDiffHeaderHtml( implode( ' / ', $localizedPath ) );
 
 			//TODO: no path, but localized section title
 
@@ -209,9 +211,20 @@ class DiffView extends ContextSource {
 			} else {
 				$value = $this->getSiteLinkElement( $path[1], $value );
 			}
+
 			return Html::rawElement( $tag, array( 'class' => 'diffchange diffchange-inline' ), $value );
 		}
+
 		return Html::element( $tag, array( 'class' => 'diffchange diffchange-inline' ), $value );
+	}
+
+	/**
+	 * @param string[] $path
+	 *
+	 * @return bool
+	 */
+	private function isSiteLinkPath( array $path ) {
+		return $path[0] === $this->siteLinkPath && isset( $path[1] );
 	}
 
 	/**
@@ -267,14 +280,6 @@ class DiffView extends ContextSource {
 		$html .= Html::closeElement( 'tr' );
 
 		return $html;
-	}
-
-	/**
-	 * @param  string[] $path
-	 * @return boolean
-	 */
-	private function isSiteLinkPath( array $path ) {
-		return count( $path ) === 3 && $path[0] === $this->siteLinkPath;
 	}
 
 }
