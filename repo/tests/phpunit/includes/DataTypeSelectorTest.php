@@ -18,13 +18,16 @@ use Wikibase\DataTypeSelector;
  */
 class DataTypeSelectorTest extends PHPUnit_Framework_TestCase {
 
+	/** @see \LanguageQqx */
+	const DUMMY_LANGUAGE = 'qqx';
+
 	/**
 	 * @param string $propertyType
-	 * @param string $label
+	 * @param string $messageKey
 	 *
 	 * @return DataType
 	 */
-	private function newDataType( $propertyType, $label ) {
+	private function newDataType( $propertyType, $messageKey ) {
 		$dataType = $this->getMockBuilder( DataType::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -34,9 +37,8 @@ class DataTypeSelectorTest extends PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( $propertyType ) );
 
 		$dataType->expects( $this->any() )
-			->method( 'getLabel' )
-			->with( 'en' )
-			->will( $this->returnValue( $label ) );
+			->method( 'getMessageKey' )
+			->will( $this->returnValue( $messageKey ) );
 
 		return $dataType;
 	}
@@ -62,10 +64,10 @@ class DataTypeSelectorTest extends PHPUnit_Framework_TestCase {
 	public function testGetOptionsArrayWithOneElement() {
 		$selector = new DataTypeSelector( [
 			$this->newDataType( '<PROPERTY-TYPE>', '<LABEL>' ),
-		], 'en' );
+		], self::DUMMY_LANGUAGE );
 
 		$expected = [
-			'<LABEL>' => '<PROPERTY-TYPE>',
+			'(<LABEL>)' => '<PROPERTY-TYPE>',
 		];
 		$this->assertSame( $expected, $selector->getOptionsArray() );
 	}
@@ -74,7 +76,7 @@ class DataTypeSelectorTest extends PHPUnit_Framework_TestCase {
 		$selector = new DataTypeSelector( [
 			$this->newDataType( '<PROPERTY-TYPE-B>', '<LABEL>' ),
 			$this->newDataType( '<PROPERTY-TYPE-A>', '<LABEL>' ),
-		], 'en' );
+		], self::DUMMY_LANGUAGE );
 
 		$expected = [
 			'<PROPERTY-TYPE-A>' => '<PROPERTY-TYPE-A>',
@@ -87,11 +89,11 @@ class DataTypeSelectorTest extends PHPUnit_Framework_TestCase {
 		$selector = new DataTypeSelector( [
 			$this->newDataType( '<PROPERTY-TYPE-A>', '<LABEL-10>' ),
 			$this->newDataType( '<PROPERTY-TYPE-B>', '<label-2>' ),
-		], 'en' );
+		], self::DUMMY_LANGUAGE );
 
 		$expected = [
-			'<label-2>' => '<PROPERTY-TYPE-B>',
-			'<LABEL-10>' => '<PROPERTY-TYPE-A>',
+			'(<label-2>)' => '<PROPERTY-TYPE-B>',
+			'(<LABEL-10>)' => '<PROPERTY-TYPE-A>',
 		];
 		$this->assertSame( $expected, $selector->getOptionsArray() );
 	}
