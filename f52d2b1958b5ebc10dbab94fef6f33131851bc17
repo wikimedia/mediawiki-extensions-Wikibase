@@ -46,6 +46,30 @@
       "revId": "f52d2b1958b5ebc10dbab94fef6f33131851bc17",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_4e589cfd",
+        "filename": "composer.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2017-01-03T16:46:07Z",
+      "side": 1,
+      "message": "Apparently I didn\u0027t attach my comments to this line, so they can be seen in the main gerrit comment section!",
+      "parentUuid": "0e0e73b5_4b99ae70",
+      "range": {
+        "startLine": 37,
+        "startChar": 40,
+        "endLine": 37,
+        "endChar": 46
+      },
+      "revId": "f52d2b1958b5ebc10dbab94fef6f33131851bc17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
