@@ -61,7 +61,8 @@ class EntityDiffVisualizer {
 	 * @param SiteLookup $siteLookup
 	 * @param EntityIdFormatter $entityIdFormatter
 	 */
-	public function __construct( IContextSource $contextSource,
+	public function __construct(
+		IContextSource $contextSource,
 		ClaimDiffer $claimDiffer,
 		ClaimDifferenceVisualizer $claimDiffView,
 		SiteLookup $siteLookup,
