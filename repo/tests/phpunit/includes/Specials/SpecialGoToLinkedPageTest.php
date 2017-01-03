@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 use FauxResponse;
+use HashSiteStore;
 use InvalidArgumentException;
 use Site;
 use SiteLookup;
@@ -53,22 +54,11 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	 * @return SiteLookup
 	 */
 	private function getMockSiteLookup() {
-		$mock = $this->getMock( SiteLookup::class );
-		$mock->expects( $this->any() )
-			->method( 'getSite' )
-			->will( $this->returnCallback( function( $siteId ) {
-				if ( substr( $siteId, -4 ) !== 'wiki' ) {
-					return null;
-				}
+		$dewiki = new Site();
+		$dewiki->setGlobalId( 'dewiki' );
+		$dewiki->setLinkPath( 'http://dewiki.com/$1' );
 
-				$site = new Site();
-				$site->setGlobalId( $siteId );
-				$site->setLinkPath( 'http://'.$siteId.'.com/$1' );
-
-				return $site;
-			} ) );
-
-		return $mock;
+		return new HashSiteStore( [ $dewiki ] );
 	}
 
 	/**

@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Localizer;
 
 use DataValues\DataValue;
 use DataValues\DecimalValue;
+use HashSiteStore;
 use Language;
 use PHPUnit_Framework_TestCase;
 use Site;
@@ -104,14 +105,7 @@ class MessageParameterFormatterTest extends PHPUnit_Framework_TestCase {
 		$acme->setGlobalId( 'acme' );
 		$acme->setLinkPath( "http://acme.com/$1" );
 
-		$mock = $this->getMock( SiteLookup::class );
-		$mock->expects( $this->any() )
-			->method( 'getSite' )
-			->will( $this->returnValueMap( [
-				[ 'acme', $acme ],
-			] ) );
-
-		return $mock;
+		return new HashSiteStore( [ $acme ] );
 	}
 
 }
