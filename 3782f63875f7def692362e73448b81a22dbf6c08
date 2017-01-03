@@ -163,6 +163,30 @@
     },
     {
       "key": {
+        "uuid": "0e0e73b5_c94a465f",
+        "filename": "lib/includes/Store/Sql/PropertyInfoTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2017-01-03T17:30:58Z",
+      "side": 1,
+      "message": "It looks like this is actually removed in https://gerrit.wikimedia.org/r/#/c/329669/3/lib/includes/Store/Sql/PropertyInfoTable.php which already has a +2 so fixing this isn\u0027t super important.",
+      "parentUuid": "0e0e73b5_ae36f8fd",
+      "range": {
+        "startLine": 219,
+        "startChar": 22,
+        "endLine": 219,
+        "endChar": 55
+      },
+      "revId": "3782f63875f7def692362e73448b81a22dbf6c08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_8e39f4f1",
         "filename": "lib/includes/Store/Sql/PropertyInfoTable.php",
         "patchSetId": 4
@@ -174,6 +198,30 @@
       "writtenOn": "2017-01-03T17:26:35Z",
       "side": 1,
       "message": "As above",
+      "range": {
+        "startLine": 258,
+        "startChar": 22,
+        "endLine": 258,
+        "endChar": 55
+      },
+      "revId": "3782f63875f7def692362e73448b81a22dbf6c08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0e73b5_89544e02",
+        "filename": "lib/includes/Store/Sql/PropertyInfoTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2017-01-03T17:30:58Z",
+      "side": 1,
+      "message": "As above (again)",
+      "parentUuid": "0e0e73b5_8e39f4f1",
       "range": {
         "startLine": 258,
         "startChar": 22,
