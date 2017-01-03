@@ -80,6 +80,6 @@
 		"cs": [
 			"composer phpcs"
 		],
-		"phpcs": "vendor/bin/phpcs -sp --standard=phpcs.xml --extensions=php --ignore=extensions/ValueView,vendor,.git ."
+		"phpcs": "vendor/bin/phpcs -sp --standard=phpcs.xml --extensions=php --ignore=extensions/ValueView,vendor,tests/phan/stubs,.git ."
 	}
 }
