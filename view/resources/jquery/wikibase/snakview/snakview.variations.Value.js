@@ -275,9 +275,7 @@
 		 * @private
 		 */
 		_attachEventHandlers: function() {
-			var self = this,
-				$viewPort = this.$viewPort,
-				heightAnimationQueue = self.variationBaseClass + 'height';
+			var self = this;
 
 			this._removeEventHandlers();
 
@@ -287,7 +285,13 @@
 			} )
 			.on( 'valueviewchange.' + this.variationBaseClass, function( event ) {
 				self._viewState.notify( self._valueView.value() ? 'valid' : 'invalid' );
-			} )
+			} );
+
+			/* FIXME: Temporarily disabled for user testing. Either re-enable or remove.
+			var $viewPort = this.$viewPort,
+				heightAnimationQueue = self.variationBaseClass + 'height';
+
+			this._valueView.element
 			.on( 'inputextenderanimation.' + this.variationBaseClass, function( animationEvent ) {
 				animationEvent.animationCallbacks.add( 'done', function() {
 					var $input = $( animationEvent.target ),
@@ -328,6 +332,7 @@
 					$viewPort.height( newHeight );
 				} );
 			} );
+			*/
 		},
 
 		/**
