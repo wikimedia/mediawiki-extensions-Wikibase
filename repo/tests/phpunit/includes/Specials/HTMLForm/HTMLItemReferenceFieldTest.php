@@ -1,0 +1,104 @@
+<?php
+
+namespace Wikibase\Repo\Tests\Specials\HTMLForm;
+
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
+use Wikibase\Repo\Specials\HTMLForm\HTMLItemReferenceField;
+
+/**
+ * @covers Wikibase\Repo\Specials\HTMLForm\HTMLItemReferenceField
+ *
+ * @group Wikibase
+ * @group WikibaseRepo
+ *
+ * @license GPL-2.0+
+ */
+class HTMLItemReferenceFieldTest extends \PHPUnit_Framework_TestCase {
+	/**
+	 * @var InMemoryEntityLookup
+	 */
+	private $entityLookup;
+
+	protected function setUp() {
+		$this->entityLookup = new InMemoryEntityLookup();
+	}
+
+	/**
+	 * Test ensures that client won't be able to set type of input field, because it will not work
+	 * with any type except "text" which it sets internally {@see testSetsTypeToText_WhenCreated}
+	 */
+	public function testThrowsExceptionIfTypeParameterIsSet_WhenCreated() {
+		$this->setExpectedException( \Exception::class );
+
+		$this->createField( [ 'type' => 'some-type', ] );
+	}
+
+	public function testSetsTypeToText_WhenCreated() {
+		$field = $this->createField();
+
+		self::assertEquals( 'text', $field->mParams['type'] );
+	}
+
+	public function testValidationPasses_WhenEmptyStringGivenAndFieldIsNotRequired() {
+		$field = $this->createField();
+
+		$result = $field->validate( '', [] );
+
+		self::assertTrue( $result );
+	}
+
+	public function testValidationFailsWithInvalidFormatMessage_WhenEnteredTextDoesNotMatchItemIdFormat() {
+		$field = $this->createField();
+
+		/** @var \Message $failureMessage */
+		$failureMessage = $field->validate( 'x', [] );
+
+		self::assertEquals( 'wikibase-item-reference-edit-invalid-format', $failureMessage->getKey() );
+	}
+
+	public function testValidationFailsWithNonexistentItemMessage_WhenItemHavingEnteredIdDoesNotExist() {
+		$field = $this->createField();
+
+		/** @var \Message $failureMessage */
+		$failureMessage = $field->validate( 'Q2', [] );
+
+		self::assertEquals( 'wikibase-item-reference-edit-nonexistent-item', $failureMessage->getKey() );
+	}
+
+	public function testValidationCallbackExecuted_WhenReferencedItemExists() {
+		$this->givenItemExists( $existingItemId = 'Q1' );
+		$field = $this->createField(
+			[
+				'validation-callback' => function () {
+					return wfMessage( 'some-message' );
+				},
+			]
+		);
+
+		/** @var \Message $failureMessage */
+		$failureMessage = $field->validate( $existingItemId, [] );
+
+		self::assertEquals( 'some-message', $failureMessage->getKey() );
+	}
+
+	/**
+	 * @return HTMLItemReferenceField
+	 */
+	protected function createField( $params = [] ) {
+		$paramsRequiredByParentClass = [
+			'fieldname' => 'some-name',
+		];
+
+		return new HTMLItemReferenceField( array_merge( $paramsRequiredByParentClass, $params ), $this->entityLookup );
+	}
+
+	/**
+	 * @param string $itemId
+	 */
+	private function givenItemExists( $itemId ) {
+		$this->entityLookup->addEntity( new Item( new ItemId( $itemId ) ) );
+	}
+
+}
