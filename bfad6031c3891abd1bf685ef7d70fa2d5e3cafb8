@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee12ffd6_12deb2de",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-04T14:31:41Z",
+      "side": 1,
+      "message": "Please upper case \"ID\" in messages. It\u0027s a mistake if you see places where we have not done this.",
+      "range": {
+        "startLine": 137,
+        "startChar": 57,
+        "endLine": 137,
+        "endChar": 59
+      },
+      "revId": "bfad6031c3891abd1bf685ef7d70fa2d5e3cafb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_f2e9de7f",
+        "filename": "repo/includes/Specials/HTMLForm/HTMLItemReferenceField.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-04T14:31:41Z",
+      "side": 1,
+      "message": "The message in en.json looks fine for me.\n\nThere are two more FIXMEs below that also look resolved to me.",
+      "revId": "bfad6031c3891abd1bf685ef7d70fa2d5e3cafb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_32f89646",
+        "filename": "repo/includes/Specials/HTMLForm/HTMLItemReferenceField.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-04T14:31:41Z",
+      "side": 1,
+      "message": "Why not simply add this to the $defaultValues array above?",
+      "revId": "bfad6031c3891abd1bf685ef7d70fa2d5e3cafb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_b29a4616",
+        "filename": "repo/includes/Specials/HTMLForm/HTMLItemReferenceField.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-04T14:31:41Z",
+      "side": 1,
+      "message": "Even if this is a public constant, I believe it is not meant to be public. Please construct a new ItemId( … ) instead and catch the exception.",
+      "revId": "bfad6031c3891abd1bf685ef7d70fa2d5e3cafb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
