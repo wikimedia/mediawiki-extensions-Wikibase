@@ -115,6 +115,7 @@ class SearchEntities extends ApiBase {
 		$title = $this->titleLookup->getTitleForId( $match->getEntityId() );
 
 		$entry = array(
+			'repository' => $match->getEntityId()->getRepositoryName(),
 			'id' => $match->getEntityId()->getSerialization(),
 			'concepturi' => $this->conceptBaseUri . $match->getEntityId()->getSerialization(),
 			'url' => $title->getFullURL(),
