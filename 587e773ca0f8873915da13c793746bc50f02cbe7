@@ -36,6 +36,29 @@
     },
     {
       "key": {
+        "uuid": "ee12ffd6_9d84f35f",
+        "filename": "tests/phan/config.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1883
+      },
+      "writtenOn": "2017-01-04T14:55:39Z",
+      "side": 1,
+      "message": "suppressed - not your fault, but is C\u0026P\u0027ed nearly everywhere. :-)",
+      "range": {
+        "startLine": 155,
+        "startChar": 35,
+        "endLine": 155,
+        "endChar": 44
+      },
+      "revId": "587e773ca0f8873915da13c793746bc50f02cbe7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee12ffd6_4f4001a9",
         "filename": "tests/phan/issues/latest",
         "patchSetId": 1
