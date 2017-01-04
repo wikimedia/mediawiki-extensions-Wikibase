@@ -50,6 +50,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;allowEntityImport: Allow importing entities via Special:Import and importDump.php. Per default, imports are forbidden, since entities defined in another wiki would have or use IDs that conflict with entities defined locally.
 ;pagePropertiesRdf: Array that maps between page properties and Wikibase predicates for RDF dumps. Maps from database property name to an array that contains a key <code>'name'</code> (RDF property name, which will be prefixed by <code>wikibase:</code>) and an optional key <code>'type'</code>.
 ;unitStorage: Definition for unit conversion storage. Should be in in the format <code>ObjectFactory</code> understands, example: <code>array( 'class' => 'Wikibase\\Lib\\JsonUnitStorage',  'args' => array( 'myUnits.json' ) )</code>.
+;supportedEntityTypesForEntitiesWithoutTermListings: Array of entity types that are supported on Special:EntitiesWithoutLabel and on Special:EntitiesWithoutDescription. Can contain either "item" or "property" (or both).
 
 == Client Settings ==
 
