@@ -463,6 +463,30 @@
     },
     {
       "key": {
+        "uuid": "ee12ffd6_7d713f0b",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-04T15:47:09Z",
+      "side": 1,
+      "message": "I wasn\u0027t speaking about mock setup itself, but about more general question: Why is this mock setup needed and what does it mean in global sense?\nHere I would say the intent is to setup (global) environment in a way like `interwiki with name \"foo\" exists and has some url`.\n\nComment made it better, I can now understand the intention, thank you. \nBut I still believe that it\u0027s too much of internal details in the test",
+      "parentUuid": "0e0e73b5_988ffe25",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 59
+      },
+      "revId": "ef1026e6141b939a7057fdbf60079f922c2d2c84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_b5ebeb76",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
         "patchSetId": 3
