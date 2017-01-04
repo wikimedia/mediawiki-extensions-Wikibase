@@ -189,7 +189,7 @@ class SpecialNewItem extends SpecialNewEntity {
 	}
 
 	/**
-	 * @see SpecialCreateEntity::getWarnings
+	 * @see SpecialNewEntity::getWarnings
 	 *
 	 * @return string[]
 	 */

@@ -146,7 +146,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 	}
 
 	/**
-	 * @see SpecialCreateEntity::getWarnings
+	 * @see SpecialNewEntity::getWarnings
 	 *
 	 * @return string[]
 	 */
