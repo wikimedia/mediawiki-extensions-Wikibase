@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee12ffd6_927502cb",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-04T14:29:54Z",
+      "side": 1,
+      "message": "I actually did this at first but then I realized in order to have an API error reporter, it needs 1- context (which I can\u0027t inject) 2- the class itself (see $this in line 62) so we can\u0027t inject API error reporter. Or maybe I\u0027m missing something",
+      "parentUuid": "ee12ffd6_72d72ec5",
+      "revId": "e5875ddf2975647b531ffaa8c2e6b2fd57d9687f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee12ffd6_b2cc8639",
         "filename": "repo/includes/Api/ListSubscribers.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2017-01-04T14:21:29Z",
       "side": 1,
       "message": "I would prefer to keep the original parameter order intact and keep this as the 3rd parameter instead of moving it to the end. The default can be removed because it is repeated in the other file anyway.",
+      "revId": "e5875ddf2975647b531ffaa8c2e6b2fd57d9687f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_328536a0",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-04T14:29:54Z",
+      "side": 1,
+      "message": "Okay, I\u0027ll do it.",
+      "parentUuid": "ee12ffd6_b2cc8639",
       "revId": "e5875ddf2975647b531ffaa8c2e6b2fd57d9687f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
