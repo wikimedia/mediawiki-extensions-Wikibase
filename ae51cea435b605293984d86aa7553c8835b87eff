@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "ee12ffd6_43ffbaa7",
+        "filename": "repo/tests/phpunit/includes/Diff/EntityContentDiffViewTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-04T19:04:42Z",
+      "side": 1,
+      "message": "Lets discuss test naming convention later. \n\nBut what really bothers me is that test says \"objectS\" but works with one. I believe either it should be changed so it will really pass different objects or should be renamed.",
+      "parentUuid": "ee12ffd6_3dd747f4",
+      "range": {
+        "startLine": 33,
+        "startChar": 17,
+        "endLine": 33,
+        "endChar": 40
+      },
+      "revId": "ae51cea435b605293984d86aa7553c8835b87eff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee12ffd6_3dbd0717",
         "filename": "repo/tests/phpunit/includes/Diff/EntityContentDiffViewTest.php",
         "patchSetId": 1
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "Even if I understand what you mean, my answer is no. This patch is refactoring existing code that was like this before. We could add a \"clone\" here or duplicate all the lines above, but this does not make a difference, does not make this better to read, does not cover the code better or anything.",
       "parentUuid": "ee12ffd6_3dbd0717",
+      "range": {
+        "startLine": 47,
+        "startChar": 57,
+        "endLine": 47,
+        "endChar": 83
+      },
+      "revId": "ae51cea435b605293984d86aa7553c8835b87eff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_2365e6aa",
+        "filename": "repo/tests/phpunit/includes/Diff/EntityContentDiffViewTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-04T19:04:42Z",
+      "side": 1,
+      "message": "Actually it does, because currently these two tests can be passed by following code inside `generateContentDiffBody` method:\n\n```\nif ($obj1 \u003d\u003d\u003d $obj2) {\n    return \u0027\u0027;\n}\n```\n\nin this case one of them can be safely deleted as it does not add value.\n\nAlso, refactoring is improving code and you\u0027re not obliged to preserve exactly the same behavior, especially in tests.",
+      "parentUuid": "ee12ffd6_3dee27b2",
       "range": {
         "startLine": 47,
         "startChar": 57,
