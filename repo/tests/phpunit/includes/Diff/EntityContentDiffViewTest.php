@@ -21,14 +21,32 @@ use Wikibase\Repo\Diff\EntityContentDiffView;
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Thiemo Mättig
  */
 class EntityContentDiffViewTest extends \MediaWikiTestCase {
-
-	//@todo: make this a baseclass to use with all types of entities.
 
 	public function testConstructor() {
 		new EntityContentDiffView( RequestContext::getMain() );
 		$this->assertTrue( true );
+	}
+
+	public function testDiffingEmptyContent() {
+		$emptyItem = new Item( new ItemId( 'Q1' ) );
+		$emptyContent = ItemContent::newFromItem( $emptyItem );
+
+		$html = $this->newDiffView()->generateContentDiffBody( $emptyContent, $emptyContent );
+
+		$this->assertSame( '', $html );
+	}
+
+	public function testDiffingSameContent() {
+		$item = new Item( new ItemId( 'Q1' ) );
+		$item->setLabel( 'en', 'Not empty any more' );
+		$itemContent = ItemContent::newFromItem( $item );
+
+		$html = $this->newDiffView()->generateContentDiffBody( $itemContent, $itemContent );
+
+		$this->assertSame( '', $html );
 	}
 
 	public function itemProvider() {
@@ -114,8 +132,6 @@ class EntityContentDiffViewTest extends \MediaWikiTestCase {
 		);
 
 		return array(
-			'empty' => array( $empty, $empty, array( 'empty' => '/^$/', ) ),
-			'same' => array( $itemContent, $itemContent, array( 'empty' => '/^$/', ) ),
 			'from emtpy' => array( $empty, $itemContent, $insTags ),
 			'to empty' => array( $itemContent, $empty, $delTags ),
 			'changed' => array( $itemContent, $itemContent2, $changeTags ),
@@ -129,22 +145,22 @@ class EntityContentDiffViewTest extends \MediaWikiTestCase {
 	 * @dataProvider itemProvider
 	 */
 	public function testGenerateContentDiffBody( ItemContent $itemContent, ItemContent $itemContent2, array $matchers ) {
+		$html = $this->newDiffView()->generateContentDiffBody( $itemContent, $itemContent2 );
+
+		$this->assertInternalType( 'string', $html );
+		foreach ( $matchers as $name => $matcher ) {
+			$this->assertTag( $matcher, $html, $name );
+		}
+	}
+
+	/**
+	 * @return EntityContentDiffView
+	 */
+	private function newDiffView() {
 		$context = new DerivativeContext( RequestContext::getMain() );
 		$context->setLanguage( Language::factory( 'en' ) );
 
-		$diffView = new EntityContentDiffView( $context );
-
-		$html = $diffView->generateContentDiffBody( $itemContent, $itemContent2 );
-
-		$this->assertInternalType( 'string', $html );
-
-		foreach ( $matchers as $name => $matcher ) {
-			if ( is_string( $matcher ) ) {
-				$this->assertRegExp( $matcher, $html );
-			} else {
-				$this->assertTag( $matcher, $html, $name );
-			}
-		}
+		return new EntityContentDiffView( $context );
 	}
 
 }
