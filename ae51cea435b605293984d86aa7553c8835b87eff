@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee12ffd6_fd488f68",
+        "filename": "repo/tests/phpunit/includes/Diff/EntityContentDiffViewTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-04T15:05:00Z",
+      "side": 1,
+      "message": "Pair of remarks:\n  * It\u0027s not critical here because case is pretty trivial, but still would be nice to have test name that tells not only what it tests but what result it expects: `testDiffingEmptyObjects_GeneratesEmptyDiff`\n  * This test is almost exactly the same as next one. I believe it would be nicer to compare to different objects but both empty.",
+      "range": {
+        "startLine": 33,
+        "startChar": 17,
+        "endLine": 33,
+        "endChar": 40
+      },
+      "revId": "ae51cea435b605293984d86aa7553c8835b87eff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_3dbd0717",
+        "filename": "repo/tests/phpunit/includes/Diff/EntityContentDiffViewTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-04T15:05:00Z",
+      "side": 1,
+      "message": "Similar to previous test: do we test difference between same object (sounds stupid, don\u0027t know how to put it better) or between two objects that have all properties with the same values. If second, then test should probably be changed.",
+      "range": {
+        "startLine": 47,
+        "startChar": 57,
+        "endLine": 47,
+        "endChar": 83
+      },
+      "revId": "ae51cea435b605293984d86aa7553c8835b87eff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_fd32cfbb",
+        "filename": "repo/tests/phpunit/includes/Diff/EntityDiffVisualizerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-04T15:05:00Z",
+      "side": 1,
+      "message": "As I see test doesn\u0027t test diffing itself, but tests visualization of EntityContentDiff object. I guess either test name or test code should be changed.",
+      "range": {
+        "startLine": 32,
+        "startChar": 17,
+        "endLine": 32,
+        "endChar": 40
+      },
+      "revId": "ae51cea435b605293984d86aa7553c8835b87eff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
