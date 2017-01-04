@@ -133,7 +133,7 @@ class EntityContentDiffView extends DifferenceEngine {
 	 *
 	 * @return String HTML fragment
 	 */
-	protected function getRevisionHeader( Revision $rev, $complete = '' ) {
+	public function getRevisionHeader( Revision $rev, $complete = '' ) {
 		//NOTE: This must be kept in sync with the parent implementation.
 		//      Perhaps some parts could be factored out to reduce code duplication.
 
