@@ -144,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "ee12ffd6_63cf5e83",
+        "filename": "repo/tests/phpunit/includes/Diff/EntityContentDiffViewTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-04T19:28:28Z",
+      "side": 1,
+      "message": "Considering what I wrote in my original commit message I really wonder why we are discussing this. It\u0027s not that I disagree that this test is weird (diffing an object with itself, and doing so twice). I\u0027m touching this code *because* it is weird. It\u0027s just that I don\u0027t see why I have to fix all this weirdness in a single patch, instead of being allowed to fix one issue after the other. Which I\u0027m doing right now. So let\u0027s move forward please.",
+      "parentUuid": "ee12ffd6_2365e6aa",
+      "range": {
+        "startLine": 47,
+        "startChar": 57,
+        "endLine": 47,
+        "endChar": 83
+      },
+      "revId": "ae51cea435b605293984d86aa7553c8835b87eff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee12ffd6_fd32cfbb",
         "filename": "repo/tests/phpunit/includes/Diff/EntityDiffVisualizerTest.php",
         "patchSetId": 1
