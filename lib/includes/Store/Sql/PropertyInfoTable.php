@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
 use DBError;

@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\PropertyInfoLookup;
-use Wikibase\PropertyInfoTable;
+use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 
 /**
  * @covers Wikibase\PropertyInfoTable

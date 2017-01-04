@@ -25,6 +25,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoStore;
+use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\PropertyInfoLookup;
