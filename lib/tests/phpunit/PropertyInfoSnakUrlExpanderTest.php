@@ -9,8 +9,8 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\FieldPropertyInfoProvider;
 use Wikibase\Lib\PropertyInfoProvider;
 use Wikibase\Lib\PropertyInfoSnakUrlExpander;
-use Wikibase\PropertyInfoStore;
-use Wikibase\Lib\Tests\Store\MockPropertyInfoStore;
+use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikimedia\Assert\ParameterTypeException;
 
 /**
@@ -32,34 +32,29 @@ class PropertyInfoSnakUrlExpanderTest extends \PHPUnit_Framework_TestCase {
 		$p5 = new PropertyId( 'P5' );
 		$p523 = new PropertyId( 'P523' );
 
-		$infoStore = new MockPropertyInfoStore();
+		$infoLookup = new MockPropertyInfoLookup( [
+			$p2->getSerialization() => [
+				PropertyInfoLookup::KEY_DATA_TYPE => 'string'
+			],
+			$p3->getSerialization() => [
+				PropertyInfoLookup::KEY_DATA_TYPE => 'string',
+				PropertyInfoLookup::KEY_FORMATTER_URL => 'http://acme.info/foo/$1',
+			],
+			$p4->getSerialization() => [
+				PropertyInfoLookup::KEY_DATA_TYPE => 'string',
+				PropertyInfoLookup::KEY_FORMATTER_URL => 'http://acme.info/foo?m=test&q=$1',
+			],
+			$p5->getSerialization() => [
+				PropertyInfoLookup::KEY_DATA_TYPE => 'string',
+				PropertyInfoLookup::KEY_FORMATTER_URL => 'http://acme.info/foo#$1',
+			],
+			$p523->getSerialization() => [
+				PropertyInfoLookup::KEY_DATA_TYPE => 'string',
+				PropertyInfoLookup::KEY_FORMATTER_URL => '$1',
+			],
+		] );
 
-		$infoStore->setPropertyInfo( $p2, array(
-			// MockPropertyInfoStore requires the KEY_DATA_TYPE field.
-			PropertyInfoStore::KEY_DATA_TYPE => 'string'
-		) );
-
-		$infoStore->setPropertyInfo( $p3, array(
-			PropertyInfoStore::KEY_DATA_TYPE => 'string',
-			PropertyInfoStore::KEY_FORMATTER_URL => 'http://acme.info/foo/$1',
-		) );
-
-		$infoStore->setPropertyInfo( $p4, array(
-			PropertyInfoStore::KEY_DATA_TYPE => 'string',
-			PropertyInfoStore::KEY_FORMATTER_URL => 'http://acme.info/foo?m=test&q=$1',
-		) );
-
-		$infoStore->setPropertyInfo( $p5, array(
-			PropertyInfoStore::KEY_DATA_TYPE => 'string',
-			PropertyInfoStore::KEY_FORMATTER_URL => 'http://acme.info/foo#$1',
-		) );
-
-		$infoStore->setPropertyInfo( $p523, array(
-			PropertyInfoStore::KEY_DATA_TYPE => 'string',
-			PropertyInfoStore::KEY_FORMATTER_URL => '$1',
-		) );
-
-		$infoProvider = new FieldPropertyInfoProvider( $infoStore, PropertyInfoStore::KEY_FORMATTER_URL );
+		$infoProvider = new FieldPropertyInfoProvider( $infoLookup, PropertyInfoLookup::KEY_FORMATTER_URL );
 
 		$value = new StringValue( 'X&Y' );
 		$url = new StringValue( 'http://acme.info/&?&foo/' );
@@ -133,8 +128,8 @@ class PropertyInfoSnakUrlExpanderTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testExpandUrl_ParameterTypeException( $snak ) {
 		$infoProvider = new FieldPropertyInfoProvider(
-			new MockPropertyInfoStore(),
-			PropertyInfoStore::KEY_FORMATTER_URL
+			new MockPropertyInfoLookup(),
+			PropertyInfoLookup::KEY_FORMATTER_URL
 		);
 		$urlExpander = new PropertyInfoSnakUrlExpander( $infoProvider );
 

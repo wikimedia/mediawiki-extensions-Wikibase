@@ -452,7 +452,7 @@ class WikibaseRepo {
 	private function newWikibaseSnakFormatterBuilders( WikibaseValueFormatterBuilders $valueFormatterBuilders ) {
 		return new WikibaseSnakFormatterBuilders(
 			$valueFormatterBuilders,
-			$this->getStore()->getPropertyInfoStore(),
+			$this->getStore()->getPropertyInfoLookup(),
 			$this->getPropertyDataTypeLookup(),
 			$this->getDataTypeFactory()
 		);
@@ -691,10 +691,10 @@ class WikibaseRepo {
 	 */
 	public function getPropertyDataTypeLookup() {
 		if ( $this->propertyDataTypeLookup === null ) {
-			$infoStore = $this->getStore()->getPropertyInfoStore();
+			$infoLookup = $this->getStore()->getPropertyInfoLookup();
 			$retrievingLookup = new EntityRetrievingDataTypeLookup( $this->getEntityLookup() );
 			$this->propertyDataTypeLookup = new PropertyInfoDataTypeLookup(
-				$infoStore,
+				$infoLookup,
 				$retrievingLookup
 			);
 		}
@@ -1622,7 +1622,7 @@ class WikibaseRepo {
 			TemplateFactory::getDefaultInstance(),
 			$entityDataFormatProvider,
 			// FIXME: Should this be done for all usages of this lookup, or is the impact of
-			// CachingPropertyInfoStore enough?
+			// CachingPropertyInfoLookup enough?
 			new InProcessCachingDataTypeLookup( $this->getPropertyDataTypeLookup() ),
 			$this->getLocalItemUriParser(),
 			$this->getEntitySerializer(

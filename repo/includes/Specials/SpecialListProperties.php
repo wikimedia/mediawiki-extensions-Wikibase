@@ -11,7 +11,7 @@ use Wikibase\DataTypeSelector;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
-use Wikibase\PropertyInfoStore;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\BufferingTermLookup;
 use Wikibase\View\EntityIdFormatterFactory;
@@ -40,9 +40,9 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	private $dataTypeFactory;
 
 	/**
-	 * @var PropertyInfoStore
+	 * @var PropertyInfoLookup
 	 */
-	private $propertyInfoStore;
+	private $propertyInfoLookup;
 
 	/**
 	 * @var LanguageFallbackLabelDescriptionLookup
@@ -76,7 +76,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 
 		$this->initServices(
 			$wikibaseRepo->getDataTypeFactory(),
-			$wikibaseRepo->getStore()->getPropertyInfoStore(),
+			$wikibaseRepo->getStore()->getPropertyInfoLookup(),
 			$wikibaseRepo->getEntityIdHtmlLinkFormatterFactory(),
 			$wikibaseRepo->getLanguageFallbackChainFactory(),
 			$wikibaseRepo->getEntityTitleLookup(),
@@ -97,7 +97,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	 */
 	public function initServices(
 		DataTypeFactory $dataTypeFactory,
-		PropertyInfoStore $propertyInfoStore,
+		PropertyInfoLookup $propertyInfoLookup,
 		EntityIdFormatterFactory $entityIdFormatterFactory,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		EntityTitleLookup $titleLookup,
@@ -110,7 +110,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 		);
 
 		$this->dataTypeFactory = $dataTypeFactory;
-		$this->propertyInfoStore = $propertyInfoStore;
+		$this->propertyInfoLookup = $propertyInfoLookup;
 		$this->entityIdFormatter = $entityIdFormatterFactory->getEntityIdFormatter(
 			$this->labelDescriptionLookup
 		);
@@ -256,9 +256,9 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	 */
 	private function getPropertyInfo() {
 		if ( $this->dataType === '' ) {
-			$propertyInfo = $this->propertyInfoStore->getAllPropertyInfo();
+			$propertyInfo = $this->propertyInfoLookup->getAllPropertyInfo();
 		} else {
-			$propertyInfo = $this->propertyInfoStore->getPropertyInfoForDataType(
+			$propertyInfo = $this->propertyInfoLookup->getPropertyInfoForDataType(
 				$this->dataType
 			);
 		}

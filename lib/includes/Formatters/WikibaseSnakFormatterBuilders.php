@@ -8,7 +8,7 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Formatters\HtmlExternalIdentifierFormatter;
 use Wikibase\Lib\Formatters\WikitextExternalIdentifierFormatter;
-use Wikibase\PropertyInfoStore;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
  * Low level factory for SnakFormatters for well known data types.
@@ -30,9 +30,9 @@ class WikibaseSnakFormatterBuilders {
 	private $valueFormatterBuilders;
 
 	/**
-	 * @var PropertyInfoStore
+	 * @var PropertyInfoLookup
 	 */
-	private $propertyInfoStore;
+	private $propertyInfoLookup;
 
 	/**
 	 * @var PropertyDataTypeLookup
@@ -46,18 +46,18 @@ class WikibaseSnakFormatterBuilders {
 
 	/**
 	 * @param WikibaseValueFormatterBuilders $valueFormatterBuilders
-	 * @param PropertyInfoStore $propertyInfoStore
+	 * @param PropertyInfoLookup $propertyInfoLookup
 	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 * @param DataTypeFactory $dataTypeFactory
 	 */
 	public function __construct(
 		WikibaseValueFormatterBuilders $valueFormatterBuilders,
-		PropertyInfoStore $propertyInfoStore,
+		PropertyInfoLookup $propertyInfoLookup,
 		PropertyDataTypeLookup $dataTypeLookup,
 		DataTypeFactory $dataTypeFactory
 	) {
 		$this->valueFormatterBuilders = $valueFormatterBuilders;
-		$this->propertyInfoStore = $propertyInfoStore;
+		$this->propertyInfoLookup = $propertyInfoLookup;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->dataTypeFactory = $dataTypeFactory;
 	}
@@ -111,8 +111,8 @@ class WikibaseSnakFormatterBuilders {
 		}
 
 		$urlProvider = new FieldPropertyInfoProvider(
-			$this->propertyInfoStore,
-			PropertyInfoStore::KEY_FORMATTER_URL
+			$this->propertyInfoLookup,
+			PropertyInfoLookup::KEY_FORMATTER_URL
 		);
 
 		$urlExpander = new PropertyInfoSnakUrlExpander( $urlProvider );
