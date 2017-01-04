@@ -25,6 +25,40 @@
     },
     {
       "key": {
+        "uuid": "ee12ffd6_ccdbdf53",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-01-04T02:50:17Z",
+      "side": 1,
+      "message": "are these actually files? or tabular data pages?",
+      "revId": "0b77041351167cf42f32bca2fc6c9121b9743b97",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_0c133707",
+        "filename": "lib/i18n/qqq.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-01-04T02:50:17Z",
+      "side": 1,
+      "message": "what are data files?",
+      "revId": "0b77041351167cf42f32bca2fc6c9121b9743b97",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_0e33c4f4",
         "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
         "patchSetId": 2
