@@ -6,7 +6,6 @@ use ApiBase;
 use ApiQueryBase;
 use ApiQuery;
 use ApiResult;
-use MediaWiki\MediaWikiServices;
 use ResultWrapper;
 use SiteLookup;
 use stdClass;
@@ -42,19 +41,27 @@ class ListSubscribers extends ApiQueryBase {
 	/**
 	 * @param ApiQuery $mainModule
 	 * @param string $moduleName
+	 * @param WikibaseRepo $repo
+	 * @param EntityIdParser $idParser
+	 * @param SiteLookup $siteLookup
 	 * @param string $modulePrefix
 	 *
 	 * @see ApiBase::__construct
 	 */
-	public function __construct( ApiQuery $mainModule, $moduleName, $modulePrefix = 'wbls' ) {
+	public function __construct(
+		ApiQuery $mainModule,
+		$moduleName,
+		WikibaseRepo $repo,
+		EntityIdParser $idParser,
+		SiteLookup $siteLookup,
+		$modulePrefix = 'wbls'
+	) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
-		$mediaWikiServices = MediaWikiServices::getInstance();
-		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
-		$this->idParser = $wikibaseRepo->getEntityIdParser();
-		$this->siteLookup = $mediaWikiServices->getSiteLookup();
+		$this->errorReporter = $repo->getApiHelperFactory( $this->getContext() )
+			->getErrorReporter( $this );
+		$this->idParser = $idParser;
+		$this->siteLookup = $siteLookup;
 	}
 
 	public function execute() {
