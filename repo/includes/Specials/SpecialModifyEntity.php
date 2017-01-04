@@ -172,27 +172,32 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 			return;
 		}
 
-		$entityId = $this->parseEntityId( $idString );
-		$this->entityRevision = $this->loadEntity( $entityId );
+		// Load from slave, since this is used on a GET request and only
+		// for preloading the editing form. We load from master when
+		// applying change ops when saving. (see T154555)
+		$this->entityRevision = $this->getLatestEntityRevision(
+			$this->parseEntityId( $idString ),
+			EntityRevisionLookup::LATEST_FROM_SLAVE
+		);
 	}
 
 	/**
-	 * Loads the entity for this entity id.
-	 *
-	 * @since 0.5
-	 *
 	 * @param EntityId $id
+	 * @param int $mode Optional, default EntityRevisionLookup::LATEST_FROM_MASTER
 	 *
 	 * @throws MessageException
 	 * @throws UserInputException
 	 * @return EntityRevision
 	 */
-	protected function loadEntity( EntityId $id ) {
+	private function getLatestEntityRevision(
+		EntityId $id,
+		$mode = EntityRevisionLookup::LATEST_FROM_MASTER
+	) {
 		try {
-			$entity = $this->entityRevisionLookup
-				->getEntityRevision( $id, 0, EntityRevisionLookup::LATEST_FROM_MASTER );
+			$entityRevision = $this->entityRevisionLookup
+				->getEntityRevision( $id, 0, $mode );
 
-			if ( $entity === null ) {
+			if ( $entityRevision === null ) {
 				throw new UserInputException(
 					'wikibase-wikibaserepopage-invalid-id',
 					array( $id->getSerialization() ),
@@ -213,7 +218,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 			);
 		}
 
-		return $entity;
+		return $entityRevision;
 	}
 
 	/**
@@ -375,7 +380,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 		$currentEntityRevision = $this->entityRevisionLookup->getEntityRevision(
 			$entity->getId(),
 			0,
-			EntityRevisionLookup::LATEST_FROM_SLAVE_WITH_FALLBACK
+			EntityRevisionLookup::LATEST_FROM_MASTER
 		);
 		$result = $changeOp->validate( $currentEntityRevision->getEntity() );
 
