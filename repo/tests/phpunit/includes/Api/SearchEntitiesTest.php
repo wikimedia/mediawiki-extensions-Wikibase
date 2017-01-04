@@ -182,10 +182,18 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			new Term( 'fr', 'ADisplayLabel' )
 		);
 
+		$foreignItemMatch = new TermSearchResult(
+			new Term( 'de', 'SomeText' ),
+			'label',
+			new ItemId( 'foo:Q333' ),
+			new Term( 'de', 'SomeText' )
+		);
+
 		$q111Result = array(
 			'id' => 'Q111',
 			'concepturi' => 'concept:Q111',
 			'url' => 'http://fullTitleUrl',
+			'repository' => '',
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
 			'label' => 'ptLabel',
@@ -201,6 +209,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			'id' => 'Q222',
 			'concepturi' => 'concept:Q222',
 			'url' => 'http://fullTitleUrl',
+			'repository' => '',
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
 			'label' => 'FooHeHe',
@@ -216,6 +225,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		$q333Result = array(
 			'id' => 'Q333',
 			'concepturi' => 'concept:Q333',
+			'repository' => '',
 			'url' => 'http://fullTitleUrl',
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
@@ -227,6 +237,21 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 				'text' => 'AMatchedTerm',
 			),
 		);
+
+		$foreignItemResult = [
+			'id' => 'foo:Q333',
+			'concepturi' => 'concept:foo:Q333',
+			'repository' => 'foo',
+			'url' => 'http://fullTitleUrl',
+			'title' => 'Prefixed:Title',
+			'pageid' => 42,
+			'label' => 'SomeText',
+			'match' => [
+				'type' => 'label',
+				'language' => 'de',
+				'text' => 'SomeText',
+			],
+		];
 
 		return array(
 			'No exact match' => array(
@@ -254,6 +279,11 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 				array( $q222Match, $q333Match ),
 				array( $q333Result ),
 			),
+			'Foreign entity matched' => [
+				[ 'search' => 'SomeText' ],
+				[ $foreignItemMatch ],
+				[ $foreignItemResult ],
+			]
 		);
 	}
 
@@ -286,6 +316,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			$this->assertArrayHasKey( 'id', $searchresult );
 			$this->assertArrayHasKey( 'concepturi', $searchresult );
 			$this->assertArrayHasKey( 'url', $searchresult );
+			$this->assertArrayHasKey( 'repository', $searchresult );
 			$this->assertArrayHasKey( 'title', $searchresult );
 			$this->assertArrayHasKey( 'pageid', $searchresult );
 		}
