@@ -94,6 +94,24 @@
     },
     {
       "key": {
+        "uuid": "ee12ffd6_435e9a18",
+        "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-04T18:22:04Z",
+      "side": 1,
+      "message": "Oh, this is different. Have not seen this. Sorry.",
+      "parentUuid": "ee12ffd6_4fd481be",
+      "revId": "0b77041351167cf42f32bca2fc6c9121b9743b97",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_ce2c8c91",
         "filename": "repo/resources/parsers/getStore.js",
         "patchSetId": 2
