@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee12ffd6_5d78bbbf",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-04T16:09:29Z",
+      "side": 1,
+      "message": "\"The entered …\" sounds better to me.",
+      "range": {
+        "startLine": 138,
+        "startChar": 49,
+        "endLine": 138,
+        "endChar": 56
+      },
+      "revId": "f4921c9d206a805c96012cda5b6d0e8aa08dabcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_3d8507a0",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-04T16:09:29Z",
+      "side": 1,
+      "message": "\"An item …\" sounds better to me.",
+      "range": {
+        "startLine": 139,
+        "startChar": 51,
+        "endLine": 139,
+        "endChar": 55
+      },
+      "revId": "f4921c9d206a805c96012cda5b6d0e8aa08dabcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_9d43d367",
+        "filename": "repo/includes/Specials/HTMLForm/HTMLItemReferenceField.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-04T16:09:29Z",
+      "side": 1,
+      "message": "I very much like the convention to name exceptions $ex.",
+      "range": {
+        "startLine": 52,
+        "startChar": 38,
+        "endLine": 52,
+        "endChar": 40
+      },
+      "revId": "f4921c9d206a805c96012cda5b6d0e8aa08dabcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
