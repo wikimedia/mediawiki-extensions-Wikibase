@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ee12ffd6_3dd747f4",
+        "filename": "repo/tests/phpunit/includes/Diff/EntityContentDiffViewTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-04T15:50:34Z",
+      "side": 1,
+      "message": "Please do not add spaces in front of your comment lines. This is very hard to read with the horizontal scrollbar.\n\nThe single, well visible assertion in this test literally means \"resulting HTML must be empty\". I don\u0027t see the value of repeating this in the function name. The contrary: I find such overly long function names hard to read. From my experience: If a test function name is that long, it is way to often confusing, misleading, or even wrong.\n\nI really don\u0027t want a \"givenThis_doingThis_expectingThis\" naming convention. Test functions should be named so that I can easily find the one I\u0027m looking for by only looking at the function names. This is a case-by-case thing, depending on the class under test and how the rest of the test class is structured.",
+      "parentUuid": "ee12ffd6_fd488f68",
+      "range": {
+        "startLine": 33,
+        "startChar": 17,
+        "endLine": 33,
+        "endChar": 40
+      },
+      "revId": "ae51cea435b605293984d86aa7553c8835b87eff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee12ffd6_3dbd0717",
         "filename": "repo/tests/phpunit/includes/Diff/EntityContentDiffViewTest.php",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-01-04T15:05:00Z",
       "side": 1,
       "message": "Similar to previous test: do we test difference between same object (sounds stupid, don\u0027t know how to put it better) or between two objects that have all properties with the same values. If second, then test should probably be changed.",
+      "range": {
+        "startLine": 47,
+        "startChar": 57,
+        "endLine": 47,
+        "endChar": 83
+      },
+      "revId": "ae51cea435b605293984d86aa7553c8835b87eff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_3dee27b2",
+        "filename": "repo/tests/phpunit/includes/Diff/EntityContentDiffViewTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-04T15:50:34Z",
+      "side": 1,
+      "message": "Even if I understand what you mean, my answer is no. This patch is refactoring existing code that was like this before. We could add a \"clone\" here or duplicate all the lines above, but this does not make a difference, does not make this better to read, does not cover the code better or anything.",
+      "parentUuid": "ee12ffd6_3dbd0717",
       "range": {
         "startLine": 47,
         "startChar": 57,
