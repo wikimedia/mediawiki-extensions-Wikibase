@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee12ffd6_e38a2e6e",
+        "filename": "repo/includes/Specials/SpecialModifyEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-04T18:22:26Z",
+      "side": 1,
+      "message": "I guess this tag can also be deleted.\nAnyway, it doesn\u0027t make much sense - method mane changed but @since didn\u0027t...",
+      "range": {
+        "startLine": 182,
+        "startChar": 4,
+        "endLine": 182,
+        "endChar": 14
+      },
+      "revId": "4cd7aff2a7648373c627dab57e17936ac3974471",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_8336d2e2",
+        "filename": "repo/includes/Specials/SpecialModifyEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-04T18:22:26Z",
+      "side": 1,
+      "message": "Then it can be named `loadLatestEntityRevision` and method description can be deleted. \nAnd also, when I see \"load entity revision\" first thing that happens in my head is question appearing: \"Which one?\"",
+      "range": {
+        "startLine": 190,
+        "startChar": 20,
+        "endLine": 190,
+        "endChar": 38
+      },
+      "revId": "4cd7aff2a7648373c627dab57e17936ac3974471",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_0349c26a",
+        "filename": "repo/includes/Specials/SpecialModifyEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-04T18:22:26Z",
+      "side": 1,
+      "message": "As soon as you didn\u0027t change any other files I assume that method is not used anywhere, so it can be made `private`.",
+      "range": {
+        "startLine": 190,
+        "startChar": 1,
+        "endLine": 190,
+        "endChar": 10
+      },
+      "revId": "4cd7aff2a7648373c627dab57e17936ac3974471",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
