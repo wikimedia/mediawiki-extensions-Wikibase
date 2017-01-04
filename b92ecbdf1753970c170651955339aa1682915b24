@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee12ffd6_bdcc5739",
+        "filename": "repo/tests/phpunit/includes/Api/SearchEntitiesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-04T15:49:10Z",
+      "side": 1,
+      "message": "not needed, remove!",
+      "revId": "b92ecbdf1753970c170651955339aa1682915b24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
