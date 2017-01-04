@@ -8,7 +8,8 @@
 			"Sujiniku",
 			"2nd-player",
 			"Ridmevo",
-			"Marine-Blue"
+			"Marine-Blue",
+			"にょきにょき"
 		]
 	},
 	"wikibase-client-desc": "Wikibase 拡張機能のクライアント",
@@ -68,6 +69,7 @@
 	"wikibase-pageswithbadges-submit": "ページを示す",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}項目 ID",
 	"wikibase-pageinfo-entity-id-none": "なし",
+	"wikibase-pageinfo-entity-usage": "このページで使われている{{WBREPONAME}}エンティティ",
 	"wikibase-property-render-error": "プロパティ $1 のレンダリングに失敗しました: $2",
 	"wikibase-otherprojects": "他のプロジェクト",
 	"wikibase-otherprojects-beta-message": "サイドバーに他のプロジェクト",

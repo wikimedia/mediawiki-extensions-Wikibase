@@ -110,5 +110,7 @@
 	"notification-header-page-connection": "La páxina <strong>$3</strong> {{GENDER:$2|conectóse}} a un elementu de {{WBREPONAME}}.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> y {{PLURAL:$4|otra páxina|otres $4 páxines|100=+99 otres páxines}} {{GENDER:$2|coneutáronse}} con elementos de {{WBREPONAME}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|Ver}} l'elementu",
-	"notification-subject-page-connection": "Una páxina de {{SITENAME}} que {{GENDER:$3|creasti}} {{GENDER:$2|coneutóse}} con un elementu de {{WBREPONAME}}"
+	"notification-subject-page-connection": "Una páxina de {{SITENAME}} que {{GENDER:$3|creasti}} {{GENDER:$2|coneutóse}} con un elementu de {{WBREPONAME}}",
+	"unresolved-property-category": "Páxines con propiedaes sin resolver",
+	"unresolved-property-category-desc": "Esta categoría amuesa páxines que referencien propiedaes {{WBREPONAME}} que nun pueden alcontrase nin pol identificador de propiedá nin pola etiqueta."
 }

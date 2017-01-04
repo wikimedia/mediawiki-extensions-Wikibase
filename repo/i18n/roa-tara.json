@@ -22,6 +22,7 @@
 	"wikibase-description-empty": "Nisciuna descrizione angore definite",
 	"wikibase-description-edit-placeholder": "mitte 'a descrizione",
 	"wikibase-description-edit-placeholder-language-aware": "mitte 'na descrizione jndr'à $1",
+	"wikibase-aliases-edit-label": "Alias, separate da 'na barre verticale:",
 	"wikibase-diffview-reference": "referimende",
 	"wikibase-diffview-rank": "posizione",
 	"wikibase-diffview-qualifier": "qualificatore",

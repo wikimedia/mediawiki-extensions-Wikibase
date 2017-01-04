@@ -101,5 +101,6 @@
 	"notification-header-page-connection": "Sidan <strong>$3</strong> {{GENDER:$2|anslöts}} till ett {{WBREPONAME}}-objekt.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> och {{PLURAL:$4|en till sida|$4 andra sidor|100=99+ andra sidor}} har {{GENDER:$2|anslutits}} till objekt på {{WBREPONAME}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|Visa}} objekt",
-	"notification-subject-page-connection": "En sida på {{SITENAME}} som du {{GENDER:$3|skapade}} har {{GENDER:$2|anslutits}} till ett {{WBREPONAME}}-objekt"
+	"notification-subject-page-connection": "En sida på {{SITENAME}} som du {{GENDER:$3|skapade}} har {{GENDER:$2|anslutits}} till ett {{WBREPONAME}}-objekt",
+	"unresolved-property-category": "Sidor med olösta egenskaper"
 }

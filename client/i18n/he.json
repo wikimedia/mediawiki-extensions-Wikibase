@@ -114,5 +114,7 @@
 	"notification-header-page-connection": "הדף <strong>$3</strong> {{GENDER:$2|חובר}} לפריט {{WBREPONAME}}.",
 	"notification-bundle-header-page-connection": "הדף <strong>$3</strong> ועוד {{PLURAL:$4|דף אחד|$4 דפים|100=99+ דפים}} {{GENDER:$2|חוברו}} לפריטי {{WBREPONAME}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|הצגת}} פריט",
-	"notification-subject-page-connection": "דף {{GENDER:$3|שיצרת}} באתר {{SITENAME}} {{GENDER:$2|חובר}} לפריט {{WBREPONAME}}"
+	"notification-subject-page-connection": "דף {{GENDER:$3|שיצרת}} באתר {{SITENAME}} {{GENDER:$2|חובר}} לפריט {{WBREPONAME}}",
+	"unresolved-property-category": "דפים עם מאפיינים בלתי־פתורים",
+	"unresolved-property-category-desc": "הקטגוריה הזאת כוללת דפים שמפנים למאפיינים ב{{GRAMMAR:תחילית|{{WBREPONAME}}}} שאי־אפשר למצוא לפי מזהה או תווית."
 }

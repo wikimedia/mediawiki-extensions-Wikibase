@@ -129,5 +129,7 @@
 	"notification-header-page-connection": "La page <strong>de $3</strong> a {{GENDER:$2|relié}} un élément {{WBREPONAME}}.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> et {{PLURAL:$4|une autre page|$4 autres pages|100=99+ autres pages}} ont {{GENDER:$2|relié}} à {{WBREPONAME}} articles.",
 	"notification-link-text-view-item": "{{GENDER:$1|visualise}} la notification",
-	"notification-subject-page-connection": "Une page sur {{SITENAME}} que vous avez {{GENDER:$3|créée}} a été {{GENDER:$2|reliée}} à l’élément {{WBREPONAME}}"
+	"notification-subject-page-connection": "Une page sur {{SITENAME}} que vous avez {{GENDER:$3|créée}} a été {{GENDER:$2|reliée}} à l’élément {{WBREPONAME}}",
+	"unresolved-property-category": "Pages avec des propriétés ne résolues",
+	"unresolved-property-category-desc": "Cette catégorie répertorie les pages qui utilisent les propriétés {{WBREPONAME}} que l'on ne peut trouver ni par l'identifiant de propriété (ID), ni par l'étiquette."
 }
