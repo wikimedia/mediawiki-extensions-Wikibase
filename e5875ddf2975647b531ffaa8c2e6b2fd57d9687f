@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee12ffd6_72d72ec5",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-04T14:21:29Z",
+      "side": 1,
+      "message": "We should not inject the entirety of WikibaseRepo here if all we need is an error reporter.",
+      "revId": "e5875ddf2975647b531ffaa8c2e6b2fd57d9687f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_b2cc8639",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-04T14:21:29Z",
+      "side": 1,
+      "message": "I would prefer to keep the original parameter order intact and keep this as the 3rd parameter instead of moving it to the end. The default can be removed because it is repeated in the other file anyway.",
+      "revId": "e5875ddf2975647b531ffaa8c2e6b2fd57d9687f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
