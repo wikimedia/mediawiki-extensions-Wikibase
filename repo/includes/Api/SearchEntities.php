@@ -50,52 +50,26 @@ class SearchEntities extends ApiBase {
 	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
-	 * @param string $modulePrefix
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param ContentLanguages $termLanguages
+	 * @param string[] $entityTypes
+	 * @param string $conceptBaseUri
 	 *
 	 * @see ApiBase::__construct
 	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
-
-		$repo = WikibaseRepo::getDefaultInstance();
-		$entitySearchHelper = new EntitySearchHelper(
-			$repo->getEntityTitleLookup(),
-			$repo->getEntityIdParser(),
-			$repo->newTermSearchInteractor( $this->getLanguage()->getCode() ),
-			new LanguageFallbackLabelDescriptionLookup(
-				$repo->getTermLookup(),
-				$repo->getLanguageFallbackChainFactory()
-					->newFromLanguage( $this->getLanguage() )
-			)
-		);
-
-		$this->setServices(
-			$entitySearchHelper,
-			$repo->getEntityTitleLookup(),
-			$repo->getTermsLanguages(),
-			$repo->getEnabledEntityTypes(),
-			$repo->getSettings()->getSetting( 'conceptBaseUri' )
-		);
-	}
-
-	/**
-	 * Override services, for use for testing.
-	 *
-	 * @param EntitySearchHelper $entitySearchHelper
-	 * @param EntityTitleLookup $titleLookup
-	 * @param ContentLanguages $termLanguages
-	 * @param array $entityTypes
-	 * @param string $conceptBaseUri
-	 */
-	public function setServices(
+	public function __construct(
+		ApiMain $mainModule,
+		$moduleName,
 		EntitySearchHelper $entitySearchHelper,
-		EntityTitleLookup $titleLookup,
+		EntityTitleLookup $entityTitleLookup,
 		ContentLanguages $termLanguages,
 		array $entityTypes,
 		$conceptBaseUri
 	) {
+		parent::__construct( $mainModule, $moduleName, '' );
+
 		$this->entitySearchHelper = $entitySearchHelper;
-		$this->titleLookup = $titleLookup;
+		$this->titleLookup = $entityTitleLookup;
 		$this->termsLanguages = $termLanguages;
 		$this->entityTypes = $entityTypes;
 		$this->conceptBaseUri = $conceptBaseUri;
