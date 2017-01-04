@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee12ffd6_fd1bef83",
+        "filename": "repo/includes/Api/SearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-04T16:12:52Z",
+      "side": 1,
+      "message": "I would expect this before \u0027id\u0027.",
+      "revId": "d3b2844cde1bcbf6cb2a4d0a0d027bc11af95367",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_5d0d5b40",
+        "filename": "repo/tests/phpunit/includes/Api/SearchEntitiesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-04T16:12:52Z",
+      "side": 1,
+      "message": "Can you please not name a foreign repository \"foo\"? Why not \"foreign\"?",
+      "range": {
+        "startLine": 188,
+        "startChar": 16,
+        "endLine": 188,
+        "endChar": 19
+      },
+      "revId": "d3b2844cde1bcbf6cb2a4d0a0d027bc11af95367",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_b8046518",
+        "filename": "repo/tests/phpunit/includes/Api/SearchEntitiesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-04T16:12:52Z",
+      "side": 1,
+      "message": "Sometimes the new parameter is below \u0027url\u0027, sometimes above. Please be consistent, even if this does not matter much. It helps when reading this.",
+      "revId": "d3b2844cde1bcbf6cb2a4d0a0d027bc11af95367",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
