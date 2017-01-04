@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee12ffd6_2f514dde",
+        "filename": "tests/phan/config.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-04T09:06:10Z",
+      "side": 1,
+      "message": "Why does it still report about issues in classes under vendor in \"latest\" issues file included here?\nBTW: using this config I don\u0027t get any issues in vendor/.",
+      "revId": "587e773ca0f8873915da13c793746bc50f02cbe7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
