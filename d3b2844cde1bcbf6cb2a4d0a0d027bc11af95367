@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee12ffd6_38475552",
+        "filename": "repo/includes/Api/SearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-04T16:22:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee12ffd6_fd1bef83",
+      "revId": "d3b2844cde1bcbf6cb2a4d0a0d027bc11af95367",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee12ffd6_5d0d5b40",
         "filename": "repo/tests/phpunit/includes/Api/SearchEntitiesTest.php",
         "patchSetId": 1
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "ee12ffd6_98840160",
+        "filename": "repo/tests/phpunit/includes/Api/SearchEntitiesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-04T16:22:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee12ffd6_5d0d5b40",
+      "range": {
+        "startLine": 188,
+        "startChar": 16,
+        "endLine": 188,
+        "endChar": 19
+      },
+      "revId": "d3b2844cde1bcbf6cb2a4d0a0d027bc11af95367",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee12ffd6_b8046518",
         "filename": "repo/tests/phpunit/includes/Api/SearchEntitiesTest.php",
         "patchSetId": 1
@@ -53,6 +95,24 @@
       "writtenOn": "2017-01-04T16:12:52Z",
       "side": 1,
       "message": "Sometimes the new parameter is below \u0027url\u0027, sometimes above. Please be consistent, even if this does not matter much. It helps when reading this.",
+      "revId": "d3b2844cde1bcbf6cb2a4d0a0d027bc11af95367",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_d874b998",
+        "filename": "repo/tests/phpunit/includes/Api/SearchEntitiesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-04T16:22:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee12ffd6_b8046518",
       "revId": "d3b2844cde1bcbf6cb2a4d0a0d027bc11af95367",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
