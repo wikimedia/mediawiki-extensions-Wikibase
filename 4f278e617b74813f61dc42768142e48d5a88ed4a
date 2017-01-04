@@ -16,6 +16,24 @@
       "revId": "4f278e617b74813f61dc42768142e48d5a88ed4a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_12bfd2f7",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 1625,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-04T13:37:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee12ffd6_b2cda6be",
+      "revId": "4f278e617b74813f61dc42768142e48d5a88ed4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
