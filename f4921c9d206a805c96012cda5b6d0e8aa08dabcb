@@ -68,6 +68,30 @@
       "revId": "f4921c9d206a805c96012cda5b6d0e8aa08dabcb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_83e1322c",
+        "filename": "repo/includes/Specials/HTMLForm/HTMLItemReferenceField.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-04T18:34:58Z",
+      "side": 1,
+      "message": "Come on! It\u0027s not even used! :)",
+      "parentUuid": "ee12ffd6_9d43d367",
+      "range": {
+        "startLine": 52,
+        "startChar": 38,
+        "endLine": 52,
+        "endChar": 40
+      },
+      "revId": "f4921c9d206a805c96012cda5b6d0e8aa08dabcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
