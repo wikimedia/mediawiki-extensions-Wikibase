@@ -33,6 +33,23 @@
       "revId": "587e773ca0f8873915da13c793746bc50f02cbe7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_4f4001a9",
+        "filename": "tests/phan/issues/latest",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-04T10:17:02Z",
+      "side": 1,
+      "message": "oh, the case of other extension classes is interesting.\nIt seems a quick way to \"fix\" the problem is adding \u0027../../extensions/Scribunto/engines\u0027 to dir list(s) but I am not sure if this is a best way to go. What if some extension changes its directory structure? And what about cases I want to run Phan locally but don\u0027t have Scribunto, Echo, whatever else extension installed (because I don\u0027t need it) - Phan would show a warning when directory is not there (might not be such a big deal, though).\nMaybe there are better ways deal with this? Maybe core\u0027s config/script should handle it somehow?",
+      "revId": "587e773ca0f8873915da13c793746bc50f02cbe7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
