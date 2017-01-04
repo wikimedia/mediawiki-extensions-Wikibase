@@ -173,26 +173,22 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 		}
 
 		$entityId = $this->parseEntityId( $idString );
-		$this->entityRevision = $this->loadEntity( $entityId );
+		$this->entityRevision = $this->loadLatestEntityRevision( $entityId );
 	}
 
 	/**
-	 * Loads the entity for this entity id.
-	 *
-	 * @since 0.5
-	 *
 	 * @param EntityId $id
 	 *
 	 * @throws MessageException
 	 * @throws UserInputException
 	 * @return EntityRevision
 	 */
-	protected function loadEntity( EntityId $id ) {
+	private function loadLatestEntityRevision( EntityId $id ) {
 		try {
-			$entity = $this->entityRevisionLookup
-				->getEntityRevision( $id, 0, EntityRevisionLookup::LATEST_FROM_MASTER );
+			$entityRevision = $this->entityRevisionLookup
+				->getEntityRevision( $id, 0, EntityRevisionLookup::LATEST_FROM_SLAVE );
 
-			if ( $entity === null ) {
+			if ( $entityRevision === null ) {
 				throw new UserInputException(
 					'wikibase-wikibaserepopage-invalid-id',
 					array( $id->getSerialization() ),
@@ -213,7 +209,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 			);
 		}
 
-		return $entity;
+		return $entityRevision;
 	}
 
 	/**
