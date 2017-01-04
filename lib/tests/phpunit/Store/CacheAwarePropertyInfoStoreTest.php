@@ -7,7 +7,7 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\CacheAwarePropertyInfoStore;
 use Wikibase\Lib\Store\PropertyInfoLookup;
-use Wikibase\PropertyInfoStore;
+use Wikibase\Lib\Store\PropertyInfoStore;
 
 /**
  * @covers Wikibase\Lib\Store\CacheAwarePropertyInfoStore;

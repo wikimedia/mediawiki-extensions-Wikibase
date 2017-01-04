@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Store;
 
 use DBError;
 use Wikibase\DataModel\Entity\PropertyId;
