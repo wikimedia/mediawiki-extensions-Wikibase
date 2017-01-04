@@ -10,6 +10,7 @@ use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\MediaWikiContentLanguages;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
@@ -127,18 +128,11 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 	private function callApiModule( array $params, EntitySearchHelper $entitySearchHelper = null ) {
 		$module = new SearchEntities(
 			$this->getApiMain( $params ),
-			'wbsearchentities'
-		);
-
-		if ( $entitySearchHelper == null ) {
-			$entitySearchHelper = $this->getMockEntitySearchHelper( $params );
-		}
-
-		$module->setServices(
-			$entitySearchHelper,
+			'wbsearchentities',
+			$entitySearchHelper !== null ? $entitySearchHelper : $this->getMockEntitySearchHelper( $params ),
 			$this->getMockTitleLookup(),
 			$this->getContentLanguages(),
-			array( 'item', 'property' ),
+			[ 'item', 'property' ],
 			'concept:'
 		);
 

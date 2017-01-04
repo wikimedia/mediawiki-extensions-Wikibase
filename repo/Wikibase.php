@@ -157,7 +157,33 @@ call_user_func( function() {
 	$wgAPIModules['wbgetentities'] = Wikibase\Repo\Api\GetEntities::class;
 	$wgAPIModules['wbsetlabel'] = Wikibase\Repo\Api\SetLabel::class;
 	$wgAPIModules['wbsetdescription'] = Wikibase\Repo\Api\SetDescription::class;
-	$wgAPIModules['wbsearchentities'] = Wikibase\Repo\Api\SearchEntities::class;
+	$wgAPIModules['wbsearchentities'] = [
+		'class' => Wikibase\Repo\Api\SearchEntities::class,
+		'factory' => function( ApiMain $mainModule, $moduleName ) {
+			$repo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+
+			$entitySearchHelper = new Wikibase\Repo\Api\EntitySearchHelper(
+				$repo->getEntityTitleLookup(),
+				$repo->getEntityIdParser(),
+				$repo->newTermSearchInteractor( $repo->getUserLanguage()->getCode() ),
+				new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
+					$repo->getTermLookup(),
+					$repo->getLanguageFallbackChainFactory()
+						->newFromLanguage( $repo->getUserLanguage() )
+				)
+			);
+
+			return new Wikibase\Repo\Api\SearchEntities(
+				$mainModule,
+				$moduleName,
+				$entitySearchHelper,
+				$repo->getEntityTitleLookup(),
+				$repo->getTermsLanguages(),
+				$repo->getEnabledEntityTypes(),
+				$repo->getSettings()->getSetting( 'conceptBaseUri' )
+			);
+		},
+	];
 	$wgAPIModules['wbsetaliases'] = Wikibase\Repo\Api\SetAliases::class;
 	$wgAPIModules['wbeditentity'] = Wikibase\Repo\Api\EditEntity::class;
 	$wgAPIModules['wblinktitles'] = Wikibase\Repo\Api\LinkTitles::class;
