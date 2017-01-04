@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ee12ffd6_e3d8ee81",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-04T18:37:25Z",
+      "side": 1,
+      "message": "I\u0027m not totally sure, but \"the\" would be needed if we were mentioning something that we talked about before.\n\nNative speaker welcome!",
+      "parentUuid": "ee12ffd6_5d78bbbf",
+      "range": {
+        "startLine": 138,
+        "startChar": 49,
+        "endLine": 138,
+        "endChar": 56
+      },
+      "revId": "f4921c9d206a805c96012cda5b6d0e8aa08dabcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee12ffd6_3d8507a0",
         "filename": "repo/i18n/en.json",
         "patchSetId": 2
