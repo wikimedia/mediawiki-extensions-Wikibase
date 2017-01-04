@@ -203,7 +203,33 @@ call_user_func( function() {
 			);
 		}
 	];
-	$wgAPIModules['wbsearchentities'] = Wikibase\Repo\Api\SearchEntities::class;
+	$wgAPIModules['wbsearchentities'] = [
+		'class' => Wikibase\Repo\Api\SearchEntities::class,
+		'factory' => function( ApiMain $mainModule, $moduleName ) {
+			$repo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+
+			$entitySearchHelper = new Wikibase\Repo\Api\EntitySearchHelper(
+				$repo->getEntityTitleLookup(),
+				$repo->getEntityIdParser(),
+				$repo->newTermSearchInteractor( $repo->getUserLanguage()->getCode() ),
+				new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
+					$repo->getTermLookup(),
+					$repo->getLanguageFallbackChainFactory()
+						->newFromLanguage( $repo->getUserLanguage() )
+				)
+			);
+
+			return new Wikibase\Repo\Api\SearchEntities(
+				$mainModule,
+				$moduleName,
+				$entitySearchHelper,
+				$repo->getEntityTitleLookup(),
+				$repo->getTermsLanguages(),
+				$repo->getEnabledEntityTypes(),
+				$repo->getSettings()->getSetting( 'conceptBaseUri' )
+			);
+		},
+	];
 	$wgAPIModules['wbsetaliases'] = [
 		'class' => Wikibase\Repo\Api\SetAliases::class,
 		'factory' => function ( ApiMain $mainModule, $moduleName ) {
