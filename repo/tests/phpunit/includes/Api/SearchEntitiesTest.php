@@ -180,7 +180,15 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			new Term( 'fr', 'ADisplayLabel' )
 		);
 
+		$foreignItemMatch = new TermSearchResult(
+			new Term( 'de', 'SomeText' ),
+			'label',
+			new ItemId( 'foreign:Q333' ),
+			new Term( 'de', 'SomeText' )
+		);
+
 		$q111Result = array(
+			'repository' => '',
 			'id' => 'Q111',
 			'concepturi' => 'concept:Q111',
 			'url' => 'http://fullTitleUrl',
@@ -196,6 +204,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$q222Result = array(
+			'repository' => '',
 			'id' => 'Q222',
 			'concepturi' => 'concept:Q222',
 			'url' => 'http://fullTitleUrl',
@@ -212,6 +221,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$q333Result = array(
+			'repository' => '',
 			'id' => 'Q333',
 			'concepturi' => 'concept:Q333',
 			'url' => 'http://fullTitleUrl',
@@ -225,6 +235,21 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 				'text' => 'AMatchedTerm',
 			),
 		);
+
+		$foreignItemResult = [
+			'repository' => 'foreign',
+			'id' => 'foreign:Q333',
+			'concepturi' => 'concept:foreign:Q333',
+			'url' => 'http://fullTitleUrl',
+			'title' => 'Prefixed:Title',
+			'pageid' => 42,
+			'label' => 'SomeText',
+			'match' => [
+				'type' => 'label',
+				'language' => 'de',
+				'text' => 'SomeText',
+			],
+		];
 
 		return array(
 			'No exact match' => array(
@@ -252,6 +277,11 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 				array( $q222Match, $q333Match ),
 				array( $q333Result ),
 			),
+			'Foreign entity matched' => [
+				[ 'search' => 'SomeText' ],
+				[ $foreignItemMatch ],
+				[ $foreignItemResult ],
+			]
 		);
 	}
 
@@ -281,6 +311,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 
 		foreach ( $result['search'] as $key => $searchresult ) {
 			$this->assertInternalType( 'integer', $key );
+			$this->assertArrayHasKey( 'repository', $searchresult );
 			$this->assertArrayHasKey( 'id', $searchresult );
 			$this->assertArrayHasKey( 'concepturi', $searchresult );
 			$this->assertArrayHasKey( 'url', $searchresult );
