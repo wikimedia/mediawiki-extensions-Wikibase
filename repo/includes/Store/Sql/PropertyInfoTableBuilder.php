@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Reporting\MessageReporter;
+use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 
 /**
  * Utility class for rebuilding the wb_property_info table.

@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\PropertyInfoBuilder;
-use Wikibase\PropertyInfoTable;
+use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\PropertyInfoTableBuilder;
 use Wikibase\Repo\WikibaseRepo;
 
