@@ -11,7 +11,6 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLTrimmedTextField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField;
-use Wikibase\SettingsArray;
 use Wikibase\Summary;
 
 /**
