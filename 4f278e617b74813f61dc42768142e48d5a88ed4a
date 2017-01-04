@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee12ffd6_b2cda6be",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 1625,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-04T12:19:28Z",
+      "side": 1,
+      "message": "This is now misleading, this comment should refer to CachingPropertyInfoLookup,",
+      "revId": "4f278e617b74813f61dc42768142e48d5a88ed4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
