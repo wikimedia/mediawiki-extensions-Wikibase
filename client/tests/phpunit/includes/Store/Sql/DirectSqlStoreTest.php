@@ -33,12 +33,11 @@ use Wikibase\TermIndex;
  * @group WikibaseClientStore
  *
  * @license GPL-2.0+
- * @author DanielKinzler
+ * @author Daniel Kinzler
  */
 class DirectSqlStoreTest extends \MediaWikiTestCase {
 
 	protected function newStore() {
-
 		$entityChangeFactory = $this->getMockBuilder( EntityChangeFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
