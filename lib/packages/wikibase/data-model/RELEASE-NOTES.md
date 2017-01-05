@@ -3,6 +3,10 @@
 ## Version 7.0.0 (dev)
 
 * Removed `FingerprintHolder`
+* Removed class aliases deprecated since 3.0:
+	* `Wikibase\DataModel\Claim\Claim`
+	* `Wikibase\DataModel\Claim\ClaimGuid`
+	* `Wikibase\DataModel\StatementListProvider`
 
 ## Version 6.3.1 (2016-11-30)
 
