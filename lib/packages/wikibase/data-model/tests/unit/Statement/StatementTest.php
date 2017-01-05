@@ -417,4 +417,18 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 		return $statement;
 	}
 
+	public function testHashesOfDifferentStatementsAreNotTheSame() {
+		$this->assertNotSame(
+			( new Statement( new PropertyNoValueSnak( 1 ) ) )->getHash(),
+			( new Statement( new PropertyNoValueSnak( 2 ) ) )->getHash()
+		);
+	}
+
+	public function testHashesOfEqualStatementsAreTheSame() {
+		$this->assertSame(
+			( new Statement( new PropertyNoValueSnak( 1 ) ) )->getHash(),
+			( new Statement( new PropertyNoValueSnak( 1 ) ) )->getHash()
+		);
+	}
+
 }
