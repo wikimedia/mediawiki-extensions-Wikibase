@@ -16,7 +16,7 @@ use Wikibase\DataModel\Statement\StatementByGuidMap;
  */
 class StatementByGuidMapTest extends \PHPUnit_Framework_TestCase {
 
-	public function testGivenNotPresentGuid_hasClaimWithGuidReturnsFalse() {
+	public function testGivenNotPresentGuid_hasStatementWithGuidReturnsFalse() {
 		$statements = new StatementByGuidMap();
 
 		$this->assertFalse( $statements->hasStatementWithGuid( 'some guid' ) );
@@ -40,7 +40,7 @@ class StatementByGuidMapTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider nonStringProvider
 	 */
-	public function testGivenNonStringGuid_hasClaimWithGuidThrowsException( $nonString ) {
+	public function testGivenNonStringGuid_hasStatementWithGuidThrowsException( $nonString ) {
 		$statements = new StatementByGuidMap();
 
 		$this->setExpectedException( 'InvalidArgumentException' );

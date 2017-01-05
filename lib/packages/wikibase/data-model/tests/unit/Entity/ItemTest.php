@@ -20,7 +20,6 @@ use Wikibase\DataModel\Term\TermList;
  * @covers Wikibase\DataModel\Entity\Item
  *
  * @group Wikibase
- * @group WikibaseItem
  * @group WikibaseDataModel
  *
  * @license GPL-2.0+

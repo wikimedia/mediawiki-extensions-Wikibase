@@ -19,7 +19,6 @@ use Wikibase\DataModel\Statement\Statement;
  *
  * @group Wikibase
  * @group WikibaseDataModel
- * @group WikibaseStatement
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -317,7 +316,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse( $statement->equals( new Statement( new PropertySomeValueSnak( 42 ) ) ) );
 	}
 
-	public function testStatementClaimWithDifferentQualifiers_equalsReturnsFalse() {
+	public function testStatementWithDifferentQualifiers_equalsReturnsFalse() {
 		$statement = new Statement(
 			new PropertyNoValueSnak( 42 ),
 			new SnakList( [
@@ -344,7 +343,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse( $statement->equals( $differentStatement ) );
 	}
 
-	public function testStatementClaimWithDifferentReferences_equalsReturnsFalse() {
+	public function testStatementWithDifferentReferences_equalsReturnsFalse() {
 		$statement = new Statement(
 			new PropertyNoValueSnak( 42 ),
 			new SnakList(),
