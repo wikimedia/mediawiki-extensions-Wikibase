@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee12ffd6_0138959a",
+        "filename": "repo/includes/Specials/SpecialModifyEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-05T14:46:32Z",
+      "side": 1,
+      "message": "This is the line I\u0027m talking about.",
+      "revId": "248dcf11eab27f268d1e471381d765613e777458",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_41bfadf6",
+        "filename": "repo/includes/Specials/SpecialModifyEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-05T14:46:32Z",
+      "side": 1,
+      "message": "This might be a misunderstanding or me doing something wrong, but when I follow all code paths I find code that calls ChangeOp::apply() with this entity. So this comment does not seem to be correct.",
+      "range": {
+        "startLine": 175,
+        "startChar": 62,
+        "endLine": 177,
+        "endChar": 24
+      },
+      "revId": "248dcf11eab27f268d1e471381d765613e777458",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
