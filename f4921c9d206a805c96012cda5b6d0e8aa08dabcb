@@ -154,6 +154,24 @@
     },
     {
       "key": {
+        "uuid": "ee12ffd6_860c9b3e",
+        "filename": "repo/includes/Specials/HTMLForm/HTMLItemReferenceField.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-05T11:22:34Z",
+      "side": 1,
+      "message": "Oh, right. It is quite nasty right now. Makes sense then.",
+      "parentUuid": "ee12ffd6_abb64883",
+      "revId": "f4921c9d206a805c96012cda5b6d0e8aa08dabcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee12ffd6_8bc6e44c",
         "filename": "repo/includes/Specials/HTMLForm/HTMLItemReferenceField.php",
         "patchSetId": 2
@@ -264,6 +282,24 @@
       "side": 1,
       "message": "It is TDD order. This test wasn\u0027t needed until I implemented former two cases.",
       "parentUuid": "ee12ffd6_6bc3b03e",
+      "revId": "f4921c9d206a805c96012cda5b6d0e8aa08dabcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_4644634a",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLItemReferenceFieldTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-05T11:22:34Z",
+      "side": 1,
+      "message": "Makes sense. But then when I look at test I don\u0027t really care in what order they have been created.\n\nTo be clear: I am not saying the order of tests should be changed. It is fine as it is. I just was surprised to see the test for the \"normal\" case at the very end, while I\u0027d rather expect after the test with not existing item id.\nBut again, it does not really matter here when there are six test cases over here, each \u003c10 lines long.",
+      "parentUuid": "ee12ffd6_2ba37841",
       "revId": "f4921c9d206a805c96012cda5b6d0e8aa08dabcb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
