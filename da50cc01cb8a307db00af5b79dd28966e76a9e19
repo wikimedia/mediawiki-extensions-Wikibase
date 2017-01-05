@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee12ffd6_0bc3140c",
+        "filename": "composer.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2017-01-05T10:41:03Z",
+      "side": 1,
+      "message": "I was going to say something about the change from 2.3 to 2.2 here.\nBut looking at the composer.json of the library it looks like the deps are correct there :)\nWhich means as wikibase requires dm 6.3.1 then internal serialization 2.3+ will always be included!\n\nIn Fact, this is the same for both serialization components",
+      "range": {
+        "startLine": 38,
+        "startChar": 38,
+        "endLine": 38,
+        "endChar": 44
+      },
+      "revId": "da50cc01cb8a307db00af5b79dd28966e76a9e19",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
