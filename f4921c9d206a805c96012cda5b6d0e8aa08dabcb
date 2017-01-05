@@ -119,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "ee12ffd6_e6aeb794",
+        "filename": "repo/includes/Specials/HTMLForm/HTMLItemReferenceField.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-05T12:37:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee12ffd6_8b9f0455",
+      "range": {
+        "startLine": 10,
+        "startChar": 65,
+        "endLine": 10,
+        "endChar": 67
+      },
+      "revId": "f4921c9d206a805c96012cda5b6d0e8aa08dabcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee12ffd6_2ba6d8a7",
         "filename": "repo/includes/Specials/HTMLForm/HTMLItemReferenceField.php",
         "patchSetId": 2
@@ -189,6 +213,24 @@
     },
     {
       "key": {
+        "uuid": "ee12ffd6_c6b3b3fc",
+        "filename": "repo/includes/Specials/HTMLForm/HTMLItemReferenceField.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-05T12:37:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee12ffd6_8bc6e44c",
+      "revId": "f4921c9d206a805c96012cda5b6d0e8aa08dabcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee12ffd6_9d43d367",
         "filename": "repo/includes/Specials/HTMLForm/HTMLItemReferenceField.php",
         "patchSetId": 2
@@ -253,6 +295,24 @@
     },
     {
       "key": {
+        "uuid": "ee12ffd6_06aaeb82",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLItemReferenceFieldTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-05T12:37:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee12ffd6_2bbdb8ad",
+      "revId": "f4921c9d206a805c96012cda5b6d0e8aa08dabcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee12ffd6_6bc3b03e",
         "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLItemReferenceFieldTest.php",
         "patchSetId": 2
@@ -306,6 +366,24 @@
     },
     {
       "key": {
+        "uuid": "ee12ffd6_26a5efb1",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLItemReferenceFieldTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-05T12:37:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee12ffd6_4644634a",
+      "revId": "f4921c9d206a805c96012cda5b6d0e8aa08dabcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee12ffd6_4ba90c78",
         "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLItemReferenceFieldTest.php",
         "patchSetId": 2
@@ -317,6 +395,30 @@
       "writtenOn": "2017-01-05T09:44:00Z",
       "side": 1,
       "message": "This one is interesting.\n\nI\u0027d appreciate if you convinced me that this is better than some boring way like:\n$exisitingItemId( \u0027Q1\u0027 );\n\n$this-\u003eaddItem( $existingItemId ); // Note renaming the method adding the item to the entity lookup; maybe I\u0027d be also passing ItemId/Item instance here instead of a string\n\nand then rest of the test as it is.",
+      "range": {
+        "startLine": 70,
+        "startChar": 9,
+        "endLine": 70,
+        "endChar": 24
+      },
+      "revId": "f4921c9d206a805c96012cda5b6d0e8aa08dabcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_c6bcd3d7",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLItemReferenceFieldTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-05T12:37:37Z",
+      "side": 1,
+      "message": "1. If inline call and assignment seems unclear I can remove it. For me it just looks more expressive, but I don\u0027t insist and can understand that it might look confusing.\n\n2. `givenItemExists` but not `addItem` on purpose, to hide implementation details from reader that are not relevant: it can pe implemented using `InMemoryEntityLookup` as in this case, it might create enitity in DB (how it was done before I found `InMemoryEntityLookup`) or it might be setting up mock object to return true each time certain value being passed to `hasItem` method - reader shouldnot care about it. And if he cares, he can inspect `givenItemExists` in isolation and change it\u0027s implementation independently of all test cases.\n\n3. Passed string because I need string later. Might be replaced with ItemId, but I don\u0027t see any real need or value. Don\u0027t want to replace it with an Item, because then `givenItemExists` looses a bit of abstractness and test will contain unnecessary details.",
+      "parentUuid": "ee12ffd6_4ba90c78",
       "range": {
         "startLine": 70,
         "startChar": 9,
