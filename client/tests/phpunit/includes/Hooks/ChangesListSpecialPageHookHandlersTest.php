@@ -29,6 +29,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 			)
 		);
 
+		/** @var \ChangesListSpecialPage $specialPage */
 		$specialPage = SpecialPageFactory::getPage( 'Recentchanges' );
 		$specialPage->getContext()->setUser( $user );
 
