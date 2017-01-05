@@ -91,17 +91,13 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 	 * @return SpecialItemByTitle
 	 */
 	protected function newSpecialPage() {
-		$page = new SpecialItemByTitle();
-
-		$page->initSettings(
-			array( 'wikipedia' )
-		);
 
 		$siteLookup = $this->getMockSiteLookup();
 
 		$siteLinkTargetProvider = new SiteLinkTargetProvider( $siteLookup, array() );
 
-		$page->initServices(
+		$page = new SpecialItemByTitle(
+			[ 'wikipedia' ],
 			$this->getMockTitleLookup(),
 			$this->getMockLanguageNameLookup(),
 			$siteLookup,

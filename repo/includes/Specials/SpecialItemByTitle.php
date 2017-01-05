@@ -60,65 +60,32 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 	 * @see SpecialWikibasePage::__construct
 	 *
 	 * @since 0.1
-	 */
-	public function __construct() {
-		// args $name, $restriction, $listed
-		parent::__construct( 'ItemByTitle', '', true );
-
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-		$this->initSettings(
-			$wikibaseRepo->getSettings()->getSetting( 'siteLinkGroups' )
-		);
-
-		$siteLinkTargetProvider = new SiteLinkTargetProvider(
-			$wikibaseRepo->getSiteLookup(),
-			$wikibaseRepo->getSettings()->getSetting( 'specialSiteLinkGroups' )
-		);
-
-		$this->initServices(
-			$wikibaseRepo->getEntityTitleLookup(),
-			new LanguageNameLookup(),
-			$wikibaseRepo->getSiteLookup(),
-			$wikibaseRepo->getStore()->newSiteLinkStore(),
-			$siteLinkTargetProvider
-		);
-	}
-
-	/**
-	 * Initialize essential settings for this special page.
-	 * may be used by unit tests to override global settings.
 	 *
 	 * @param string[] $siteLinkGroups
-	 */
-	public function initSettings(
-		array $siteLinkGroups
-	) {
-		$this->groups = $siteLinkGroups;
-	}
-
-	/**
-	 * Initialize the services used be this special page.
-	 * May be used to inject mock services for testing.
-	 *
 	 * @param EntityTitleLookup $titleLookup
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param SiteLookup $siteLookup
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
 	 */
-	public function initServices(
-		EntityTitleLookup $titleLookup,
-		LanguageNameLookup $languageNameLookup,
-		SiteLookup $siteLookup,
-		SiteLinkLookup $siteLinkLookup,
-		SiteLinkTargetProvider $siteLinkTargetProvider
+	public function __construct(
+		$siteLinkGroups,
+		$titleLookup,
+		$languageNameLookup,
+		$siteLookup,
+		$siteLinkLookup,
+		$siteLinkTargetProvider
 	) {
+		// args $name, $restriction, $listed
+		parent::__construct( 'ItemByTitle', '', true );
+
+		$this->groups = $siteLinkGroups;
 		$this->titleLookup = $titleLookup;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->sites = $siteLookup;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
+
 	}
 
 	/**
