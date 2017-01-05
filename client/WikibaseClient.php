@@ -227,7 +227,13 @@ call_user_func( function() {
 			$settings->getSetting( 'siteGlobalID' )
 		);
 	};
-	$wgSpecialPages['EntityUsage'] = 'Wikibase\Client\Specials\SpecialEntityUsage';
+	$wgSpecialPages['EntityUsage'] = function( $name = 'EntityUsage' ) {
+		$wikibaseClient = Wikibase\Client\WikibaseClient::getDefaultInstance();
+		return new \Wikibase\Client\Specials\SpecialEntityUsage(
+			$name,
+			$wikibaseClient->getEntityIdParser()
+		);
+	};
 	$wgHooks['wgQueryPages'][] = 'Wikibase\ClientHooks::onwgQueryPages';
 
 	// Resource loader modules
