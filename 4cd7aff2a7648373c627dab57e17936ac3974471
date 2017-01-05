@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ee12ffd6_0621cbac",
+        "filename": "repo/includes/Specials/SpecialModifyEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-01-05T14:05:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee12ffd6_e38a2e6e",
+      "range": {
+        "startLine": 182,
+        "startChar": 4,
+        "endLine": 182,
+        "endChar": 14
+      },
+      "revId": "4cd7aff2a7648373c627dab57e17936ac3974471",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee12ffd6_8336d2e2",
         "filename": "repo/includes/Specials/SpecialModifyEntity.php",
         "patchSetId": 1
@@ -64,6 +88,54 @@
         "startChar": 1,
         "endLine": 190,
         "endChar": 10
+      },
+      "revId": "4cd7aff2a7648373c627dab57e17936ac3974471",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_6633e70b",
+        "filename": "repo/includes/Specials/SpecialModifyEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-01-05T14:05:10Z",
+      "side": 1,
+      "message": "not used anywhere, so safe to rename",
+      "parentUuid": "ee12ffd6_0349c26a",
+      "range": {
+        "startLine": 190,
+        "startChar": 1,
+        "endLine": 190,
+        "endChar": 10
+      },
+      "revId": "4cd7aff2a7648373c627dab57e17936ac3974471",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_4630e3fc",
+        "filename": "repo/includes/Specials/SpecialModifyEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-01-05T14:05:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee12ffd6_8336d2e2",
+      "range": {
+        "startLine": 190,
+        "startChar": 20,
+        "endLine": 190,
+        "endChar": 38
       },
       "revId": "4cd7aff2a7648373c627dab57e17936ac3974471",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
