@@ -20,7 +20,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
- * @group WikibaseRepo
  * @group BreakingTheSlownessBarrier
  * @group Database
  * @group medium

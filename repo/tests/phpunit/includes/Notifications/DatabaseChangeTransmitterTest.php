@@ -12,7 +12,6 @@ use Wikibase\Repo\Store\ChangeStore;
  * @group Database
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseChange
  *
  * @license GPL-2.0+

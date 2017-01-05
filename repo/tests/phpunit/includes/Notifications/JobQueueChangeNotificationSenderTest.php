@@ -14,7 +14,6 @@ use Wikibase\Repo\Notifications\JobQueueChangeNotificationSender;
  * @group Wikibase
  * @group WikibaseStore
  * @group WikibaseChange
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Marius Hoch

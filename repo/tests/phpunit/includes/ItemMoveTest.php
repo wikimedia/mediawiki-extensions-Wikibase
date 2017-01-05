@@ -17,7 +17,6 @@ use WikitextContent;
  *
  * @group Wikibase
  * @group WikibaseItem
- * @group WikibaseRepo
  * @group Database
  *
  * @license GPL-2.0+

@@ -26,7 +26,6 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @group Wikibase
  * @group WikibaseItem
- * @group WikibaseRepo
  * @group WikibaseContent
  * @group WikibaseItemContent
  *

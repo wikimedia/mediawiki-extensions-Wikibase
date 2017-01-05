@@ -19,7 +19,6 @@ use Wikibase\Rdf\DedupeBag;
  * @covers Wikibase\Rdf\ValueSnakRdfBuilderFactory
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseRdf
  *
  * @license GPL-2.0+

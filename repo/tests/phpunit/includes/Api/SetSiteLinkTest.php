@@ -22,7 +22,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
- * @group WikibaseRepo
  * @group BreakingTheSlownessBarrier
  *
  * The database group has as a side effect that temporal database tables are created. This makes

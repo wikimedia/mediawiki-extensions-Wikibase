@@ -16,7 +16,6 @@ use Wikibase\Summary;
  * @covers Wikibase\ChangeOp\ChangeOpSiteLink
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group ChangeOp
  *
  * @license GPL-2.0+

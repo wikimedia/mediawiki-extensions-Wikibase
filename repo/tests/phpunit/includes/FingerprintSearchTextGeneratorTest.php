@@ -8,7 +8,6 @@ use Wikibase\Repo\FingerprintSearchTextGenerator;
 /**
  * @covers Wikibase\Repo\FingerprintSearchTextGenerator
  *
- * @group WikibaseRepo
  * @group Wikibase
  *
  * @license GPL-2.0+

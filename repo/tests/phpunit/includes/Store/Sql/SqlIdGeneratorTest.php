@@ -9,7 +9,6 @@ use Wikibase\SqlIdGenerator;
  *
  * @group Wikibase
  * @group WikibaseStore
- * @group WikibaseRepo
  * @group Database
  *
  * @group medium

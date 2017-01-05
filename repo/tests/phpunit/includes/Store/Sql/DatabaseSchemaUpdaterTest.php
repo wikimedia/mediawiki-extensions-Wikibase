@@ -11,7 +11,6 @@ use Wikibase\Store;
  * @covers Wikibase\Repo\Store\Sql\DatabaseSchemaUpdater
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseChange
  *
  * @license GPL-2.0+

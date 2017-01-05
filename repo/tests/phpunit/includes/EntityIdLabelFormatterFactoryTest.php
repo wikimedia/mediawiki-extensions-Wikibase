@@ -12,7 +12,6 @@ use Wikibase\Repo\EntityIdLabelFormatterFactory;
  * @covers Wikibase\Repo\EntityIdLabelFormatterFactory
  *
  * @group ValueFormatters
- * @group WikibaseRepo
  * @group Wikibase
  *
  * @license GPL-2.0+

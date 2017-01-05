@@ -7,7 +7,6 @@ use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseStore
  * @group Database
  *

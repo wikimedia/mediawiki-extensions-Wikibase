@@ -12,7 +12,6 @@ use Wikibase\Repo\Search\Elastic\Fields\SiteLinkCountField;
  * @covers Wikibase\Repo\Search\Elastic\Fields\SiteLinkCountField
  *
  * @group WikibaseElastic
- * @group WikibaseRepo
  * @group Wikibase
  *
  * @license GPL-2.0+

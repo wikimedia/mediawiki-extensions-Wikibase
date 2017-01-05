@@ -17,7 +17,6 @@ use Wikibase\View\TermsListView;
  * @covers Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView
  *
  * @group Wikibase
- * @group WikibaseRepo
  *
  * @license GNU GPL v2+
  * @author Adrian Heine <adrian.heine@wikimedia.de>

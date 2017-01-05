@@ -9,7 +9,6 @@ use Wikibase\Rdf\HashDedupeBag;
  * @covers Wikibase\Rdf\HashDedupeBag
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseRdf
  *
  * @license GPL-2.0+

@@ -9,7 +9,6 @@ use Wikibase\Repo\Notifications\HookChangeTransmitter;
  * @covers Wikibase\Repo\Notifications\HookChangeTransmitter
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseChange
  *
  * @license GPL-2.0+

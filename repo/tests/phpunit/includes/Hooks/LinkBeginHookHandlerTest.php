@@ -24,7 +24,6 @@ use Wikibase\Store\EntityIdLookup;
  * @since 0.5
  *
  * @group Database
- * @group WikibaseRepo
  * @group Wikibase
  *
  * @license GPL-2.0+

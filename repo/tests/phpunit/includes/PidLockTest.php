@@ -8,7 +8,6 @@ use Wikibase\Repo\PidLock;
 /**
  * @covers Wikibase\Repo\PidLock
  *
- * @group WikibaseRepo
  * @group Wikibase
  *
  * @license GPL-2.0+

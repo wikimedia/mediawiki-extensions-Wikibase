@@ -9,7 +9,6 @@ use Wikibase\Repo\Specials\SpecialMyLanguageFallbackChain;
  * @covers Wikibase\Repo\Specials\SpecialMyLanguageFallbackChain
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group SpecialPage
  * @group WikibaseSpecialPage
  * @group Database

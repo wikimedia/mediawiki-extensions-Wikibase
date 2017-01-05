@@ -22,7 +22,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @group Database
  * @group Wikibase
  * @group WikibaseAPI
- * @group WikibaseRepo
  *
  * @group medium
  *

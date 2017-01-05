@@ -18,7 +18,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @covers Wikibase\Repo\Store\Sql\SqlEntityIdPager
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseStore
  *
  * @group Database

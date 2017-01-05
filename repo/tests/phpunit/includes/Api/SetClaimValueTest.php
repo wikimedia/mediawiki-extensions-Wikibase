@@ -29,7 +29,6 @@ use WikiPage;
  * @group Database
  * @group Wikibase
  * @group WikibaseAPI
- * @group WikibaseRepo
  *
  * @group medium
  *

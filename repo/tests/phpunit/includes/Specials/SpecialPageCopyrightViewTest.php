@@ -11,7 +11,6 @@ use Wikibase\Repo\Specials\SpecialPageCopyrightView;
  * @covers Wikibase\Repo\Specials\SpecialPageCopyrightView
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group Database
  *
  * @license GPL-2.0+

@@ -20,7 +20,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @covers Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group SpecialPage
  * @group WikibaseSpecialPage
  *

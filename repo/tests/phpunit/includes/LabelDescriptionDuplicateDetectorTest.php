@@ -16,7 +16,6 @@ use Wikibase\TermIndexEntry;
  * @covers Wikibase\LabelDescriptionDuplicateDetector
  *
  * @group Wikibase
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

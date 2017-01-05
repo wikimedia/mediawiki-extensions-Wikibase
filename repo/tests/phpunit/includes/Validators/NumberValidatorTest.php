@@ -7,7 +7,6 @@ use Wikibase\Repo\Validators\NumberValidator;
 /**
  * @covers Wikibase\Repo\Validators\NumberValidator
  *
- * @group WikibaseRepo
  * @group Wikibase
  * @group WikibaseValidators
  *

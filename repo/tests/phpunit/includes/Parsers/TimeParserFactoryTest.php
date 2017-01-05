@@ -14,7 +14,6 @@ use Wikibase\Repo\Parsers\TimeParserFactory;
  * @covers Wikibase\Repo\Parsers\TimeParserFactory
  *
  * @group ValueParsers
- * @group WikibaseRepo
  * @group Wikibase
  * @group TimeParsers
  *

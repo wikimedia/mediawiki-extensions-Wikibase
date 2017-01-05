@@ -23,7 +23,6 @@ use Wikibase\Repo\Diff\DifferencesSnakVisualizer;
  * @covers Wikibase\Repo\Diff\ClaimDifferenceVisualizer
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseClaim
  * @group Database
  *

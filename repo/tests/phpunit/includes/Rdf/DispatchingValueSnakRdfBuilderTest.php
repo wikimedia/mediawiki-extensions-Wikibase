@@ -13,7 +13,6 @@ use Wikimedia\Purtle\RdfWriter;
  * @covers Wikibase\Rdf\DispatchingValueSnakRdfBuilder
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseRdf
  *
  * @license GPL-2.0+

@@ -11,7 +11,6 @@ use Wikibase\Repo\Content\EntityContentDiff;
 /**
  * @covers Wikibase\Repo\Content\EntityContentDiff
  *
- * @group WikibaseRepo
  * @group Wikibase
  *
  * @license GPL-2.0+

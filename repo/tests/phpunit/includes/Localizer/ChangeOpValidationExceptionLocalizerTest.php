@@ -13,7 +13,6 @@ use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
  * @covers Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer
  *
  * @group Wikibase
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

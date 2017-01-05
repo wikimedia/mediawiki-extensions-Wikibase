@@ -15,7 +15,6 @@ use Wikibase\Summary;
  * @covers Wikibase\ChangeOp\ChangeOpDescription
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group ChangeOp
  *
  * @license GPL-2.0+

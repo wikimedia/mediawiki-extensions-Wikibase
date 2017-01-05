@@ -15,7 +15,6 @@ use Wikibase\DataModel\Snak\Snak;
  * @covers Wikibase\ChangeOp\ChangeOpReferenceRemove
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group ChangeOp
  *
  * @license GPL-2.0+

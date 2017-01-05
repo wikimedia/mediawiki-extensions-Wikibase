@@ -18,7 +18,6 @@ use Wikibase\Repo\Specials\SpecialNewItem;
  * @covers Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group SpecialPage
  * @group WikibaseSpecialPage
  *

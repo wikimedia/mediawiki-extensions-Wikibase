@@ -13,7 +13,6 @@ use Wikibase\OutputPageJsConfigBuilder;
  *
  * @since 0.5
  *
- * @group WikibaseRepo
  * @group Wikibase
  * @group Database
  *

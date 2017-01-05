@@ -11,7 +11,6 @@ use Wikibase\Repo\GenericEventDispatcher;
  * @covers Wikibase\Repo\GenericEventDispatcher
  *
  * @group Wikibase
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

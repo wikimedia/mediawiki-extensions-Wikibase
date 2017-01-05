@@ -19,7 +19,6 @@ use Wikibase\TermIndexEntry;
  *
  * @group Wikibase
  * @group WikibaseAPI
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >

@@ -34,7 +34,6 @@ use WikitextContent;
  * @group Wikibase
  * @group WikibaseEntity
  * @group WikibaseEntityHandler
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

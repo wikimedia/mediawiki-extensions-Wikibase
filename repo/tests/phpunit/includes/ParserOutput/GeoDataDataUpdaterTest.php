@@ -25,7 +25,6 @@ use Wikibase\Repo\ParserOutput\GeoDataDataUpdater;
  * @covers Wikibase\Repo\ParserOutput\GeoDataDataUpdater
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group Database
  *
  * @license GPL-2.0+

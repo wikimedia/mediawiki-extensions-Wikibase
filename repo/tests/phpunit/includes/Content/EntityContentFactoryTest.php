@@ -21,7 +21,6 @@ use Wikibase\Repo\Tests\PermissionsHelper;
  * @group Wikibase
  * @group WikibaseEntity
  * @group WikibaseContent
- * @group WikibaseRepo
  *
  * @group Database
  *        ^--- just because we use the Title class

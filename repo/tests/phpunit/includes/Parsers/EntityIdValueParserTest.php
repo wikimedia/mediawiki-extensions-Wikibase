@@ -14,7 +14,6 @@ use Wikibase\Repo\Parsers\EntityIdValueParser;
  * @uses Wikibase\DataModel\Entity\BasicEntityIdParser
  *
  * @group ValueParsers
- * @group WikibaseRepo
  * @group Wikibase
  *
  * @license GPL-2.0+

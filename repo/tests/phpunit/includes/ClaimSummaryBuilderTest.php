@@ -20,7 +20,6 @@ use Wikibase\Summary;
  * @covers Wikibase\ClaimSummaryBuilder
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group ClaimSummaryBuilder
  *
  * @license GPL-2.0+

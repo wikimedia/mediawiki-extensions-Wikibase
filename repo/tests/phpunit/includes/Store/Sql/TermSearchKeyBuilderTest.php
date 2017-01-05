@@ -15,7 +15,6 @@ use Wikibase\TermSqlIndex;
  *
  * @group Wikibase
  * @group WikibaseStore
- * @group WikibaseRepo
  * @group WikibaseTerm
  * @group Database
  * @group medium

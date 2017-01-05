@@ -23,7 +23,6 @@ use Wikibase\TermIndex;
  * @covers Wikibase\Store
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseStore
  * @group Database
  *

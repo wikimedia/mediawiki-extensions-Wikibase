@@ -21,7 +21,6 @@ use Wikibase\Repo\Validators\SnakValidator;
  * @covers Wikibase\ChangeOp\ChangeOps
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group ChangeOp
  *
  * @license GPL-2.0+

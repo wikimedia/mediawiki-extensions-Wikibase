@@ -8,7 +8,6 @@ use User;
  * @covers Wikibase\Repo\BabelUserLanguageLookup
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group EntityView
  * @group Database
  *

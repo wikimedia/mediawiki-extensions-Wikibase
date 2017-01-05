@@ -15,7 +15,6 @@ use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
  * @covers Wikibase\Repo\Localizer\DispatchingExceptionLocalizer
  *
  * @group Wikibase
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

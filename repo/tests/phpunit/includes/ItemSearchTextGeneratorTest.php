@@ -9,7 +9,6 @@ use Wikibase\Repo\ItemSearchTextGenerator;
  * @covers Wikibase\Repo\ItemSearchTextGenerator
  *
  * @group Wikibase
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >

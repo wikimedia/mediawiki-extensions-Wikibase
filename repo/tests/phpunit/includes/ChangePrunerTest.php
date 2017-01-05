@@ -15,7 +15,6 @@ use Wikibase\Repo\Store\Sql\SqlChangeStore;
  *
  * @group Database
  * @group Wikibase
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >

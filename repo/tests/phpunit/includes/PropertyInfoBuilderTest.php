@@ -12,7 +12,6 @@ use Wikibase\PropertyInfoBuilder;
  * @covers Wikibase\PropertyInfoBuilder
  *
  * @group Wikibase
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >

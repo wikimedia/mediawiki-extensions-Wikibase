@@ -15,7 +15,6 @@ use Wikibase\Repo\Validators\FingerprintValidator;
  * @covers Wikibase\Repo\Validators\CompositeFingerprintValidator
  *
  * @group Wikibase
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

@@ -9,7 +9,6 @@ use Wikibase\Repo\Parsers\MonolingualTextParser;
  * @covers Wikibase\Repo\Parsers\MonolingualTextParser
  *
  * @group ValueParsers
- * @group WikibaseRepo
  * @group Wikibase
  *
  * @license GPL-2.0+

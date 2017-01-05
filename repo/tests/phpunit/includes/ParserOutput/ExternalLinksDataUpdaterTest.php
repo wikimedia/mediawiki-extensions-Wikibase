@@ -15,7 +15,6 @@ use Wikibase\Repo\ParserOutput\ExternalLinksDataUpdater;
  * @covers Wikibase\Repo\ParserOutput\ExternalLinksDataUpdater
  *
  * @group Wikibase
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Thiemo Mättig

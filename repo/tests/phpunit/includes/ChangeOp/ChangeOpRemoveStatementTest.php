@@ -15,7 +15,6 @@ use Wikibase\DataModel\Statement\Statement;
  * @covers Wikibase\ChangeOp\ChangeOpRemoveStatement
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group ChangeOp
  *
  * @license GPL-2.0+

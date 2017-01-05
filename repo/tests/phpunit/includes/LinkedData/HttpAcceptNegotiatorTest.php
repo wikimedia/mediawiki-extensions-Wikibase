@@ -8,7 +8,6 @@ use Wikibase\Repo\LinkedData\HttpAcceptNegotiator;
  * @covers Wikibase\Repo\LinkedData\HttpAcceptNegotiator
  *
  * @group Wikibase
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

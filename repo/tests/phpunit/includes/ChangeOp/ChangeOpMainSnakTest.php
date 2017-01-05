@@ -23,7 +23,6 @@ use Wikibase\DataModel\Statement\Statement;
  * @covers Wikibase\ChangeOp\ChangeOpMainSnak
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group ChangeOp
  * @group ChangeOpMainSnak
  *

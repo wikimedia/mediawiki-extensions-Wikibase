@@ -17,7 +17,6 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * @covers Wikibase\Rdf\Values\TimeRdfBuilder
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseRdf
  *
  * @license GPL-2.0+

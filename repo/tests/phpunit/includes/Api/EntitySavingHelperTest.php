@@ -31,7 +31,6 @@ use Wikibase\SummaryFormatter;
  * @group Database
  * @group Wikibase
  * @group WikibaseAPI
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Addshore

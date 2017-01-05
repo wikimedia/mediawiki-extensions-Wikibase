@@ -14,7 +14,6 @@ use Wikibase\Repo\Validators\ForeignEntityValidator;
  * @covers \Wikibase\Repo\Validators\ForeignEntityValidator
  *
  * @group Wikibase
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  */

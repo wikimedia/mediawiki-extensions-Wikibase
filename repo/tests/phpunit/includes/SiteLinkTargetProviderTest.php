@@ -12,7 +12,6 @@ use Wikibase\Repo\SiteLinkTargetProvider;
  * @covers Wikibase\Repo\SiteLinkTargetProvider
  *
  * @group Wikibase
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Addshore

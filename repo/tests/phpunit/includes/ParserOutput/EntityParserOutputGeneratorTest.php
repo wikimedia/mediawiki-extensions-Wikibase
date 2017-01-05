@@ -34,7 +34,6 @@ use Wikibase\View\Template\TemplateFactory;
  * @covers Wikibase\Repo\ParserOutput\EntityParserOutputGenerator
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group Database
  *
  * @license GPL-2.0+

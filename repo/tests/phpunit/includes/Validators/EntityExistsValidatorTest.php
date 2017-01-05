@@ -16,7 +16,6 @@ use Wikibase\Lib\Tests\MockRepository;
 /**
  * @covers Wikibase\Repo\Validators\EntityExistsValidator
  *
- * @group WikibaseRepo
  * @group Wikibase
  * @group WikibaseValidators
  *

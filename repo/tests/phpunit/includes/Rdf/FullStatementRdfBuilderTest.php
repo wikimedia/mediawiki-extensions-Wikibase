@@ -17,7 +17,6 @@ use Wikimedia\Purtle\RdfWriter;
  * @covers Wikibase\Rdf\FullStatementRdfBuilder
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseRdf
  *
  * @license GPL-2.0+

@@ -18,7 +18,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @covers Wikibase\Content\DeferredDecodingEntityHolder
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseEntity
  *
  * @license GPL-2.0+

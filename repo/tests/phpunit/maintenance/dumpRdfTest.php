@@ -43,7 +43,6 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * @covers Wikibase\DumpRdf
  *
- * @group WikibaseRepo
  * @group Wikibase
  *
  * @license GPL-2.0+
