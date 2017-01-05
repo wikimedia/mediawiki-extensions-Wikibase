@@ -69,6 +69,30 @@
       "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_414fadc0",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-05T16:06:34Z",
+      "side": 1,
+      "message": "Thanks for pointing this out. It seems super odd.\nIt is really odd such difference could actually happen. Both URLs should be generated from the \"same\" Title, generated using the same EntityTitleLookup.\n\nBeing able to hardcode the URL would be nice but if I am not mistaken it would require mocking the EntityTitleLookup, and Title it returns. I guess you wouldn\u0027t like it. I wouldn\u0027t :)\n\nI\u0027ll be looking into how to make test setup more stable.",
+      "parentUuid": "ee12ffd6_010655d1",
+      "range": {
+        "startLine": 68,
+        "startChar": 2,
+        "endLine": 68,
+        "endChar": 80
+      },
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
