@@ -15,7 +15,7 @@ use Wikibase\Repo\Api\ListSubscribers;
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
- * @group WikibaseClient
+ * @group WikibaseRepo
  * @group Database
  *
  * @license GPL-2.0+
