@@ -136,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "ee12ffd6_abb64883",
+        "filename": "repo/includes/Specials/HTMLForm/HTMLItemReferenceField.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-05T10:59:55Z",
+      "side": 1,
+      "message": "For tests only.\nCurrent HTMLForm API doesn\u0027t allow to pass any dependencies in form field, so in production code `WikibaseRepo::getDefaultInstance()-\u003egetEntityLookup()` will be executed because only one constructor argument will be passed. But in test I wanted to be able to pass custom implementation.",
+      "parentUuid": "ee12ffd6_2ba6d8a7",
+      "revId": "f4921c9d206a805c96012cda5b6d0e8aa08dabcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee12ffd6_8bc6e44c",
         "filename": "repo/includes/Specials/HTMLForm/HTMLItemReferenceField.php",
         "patchSetId": 2
@@ -228,6 +246,24 @@
       "writtenOn": "2017-01-05T09:44:00Z",
       "side": 1,
       "message": "super nitpick: I\u0027d either put this test after \"testValidationCallbackExecuted_WhenReferencedItemExists\", or maybe before \"testValidationFailsWithInvalidFormatMessage_WhenEnteredTextDoesNotMatchItemIdFormat\".\n\nIt feels slightly placed at random here when reading the whole test suite from top to bottom.\nNothing wrong about the test itself though!",
+      "revId": "f4921c9d206a805c96012cda5b6d0e8aa08dabcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_2ba37841",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLItemReferenceFieldTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-05T10:59:55Z",
+      "side": 1,
+      "message": "It is TDD order. This test wasn\u0027t needed until I implemented former two cases.",
+      "parentUuid": "ee12ffd6_6bc3b03e",
       "revId": "f4921c9d206a805c96012cda5b6d0e8aa08dabcb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
