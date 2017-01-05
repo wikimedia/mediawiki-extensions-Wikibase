@@ -70,6 +70,30 @@
       "revId": "563b1c595681c16659c642fff5a6c1f643c55aa3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_fc1ac8cf",
+        "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-05T18:18:34Z",
+      "side": 1,
+      "message": "Why plural if it constructs only one or none?",
+      "parentUuid": "ee12ffd6_e170e1db",
+      "range": {
+        "startLine": 8,
+        "startChar": 45,
+        "endLine": 8,
+        "endChar": 53
+      },
+      "revId": "563b1c595681c16659c642fff5a6c1f643c55aa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
