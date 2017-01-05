@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee12ffd6_06b78bd4",
+        "filename": "repo/tests/phpunit/includes/Content/ItemContentTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2017-01-05T12:44:57Z",
+      "side": 1,
+      "message": "Should this not also typehint against ItemId then?",
+      "range": {
+        "startLine": 55,
+        "startChar": 30,
+        "endLine": 55,
+        "endChar": 38
+      },
+      "revId": "e2562172f2541f6a568ac71015f2c8fc1b17614f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_e6ab576c",
+        "filename": "repo/tests/phpunit/includes/Content/PropertyContentTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2017-01-05T12:44:57Z",
+      "side": 1,
+      "message": "as in the other class!",
+      "range": {
+        "startLine": 39,
+        "startChar": 30,
+        "endLine": 39,
+        "endChar": 38
+      },
+      "revId": "e2562172f2541f6a568ac71015f2c8fc1b17614f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
