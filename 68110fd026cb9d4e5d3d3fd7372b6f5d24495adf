@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee12ffd6_664d27e0",
+        "filename": "client/includes/Specials/SpecialEntityUsage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-05T13:07:49Z",
+      "side": 1,
+      "message": "The string can be hard coded here and does not need to be a parameter.",
+      "range": {
+        "startLine": 44,
+        "startChar": 23,
+        "endLine": 44,
+        "endChar": 28
+      },
+      "revId": "68110fd026cb9d4e5d3d3fd7372b6f5d24495adf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
