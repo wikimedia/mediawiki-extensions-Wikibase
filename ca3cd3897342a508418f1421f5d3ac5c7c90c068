@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee12ffd6_86449b1d",
+        "filename": "repo/i18n/fr.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2017-01-05T11:49:21Z",
+      "side": 1,
+      "message": "Why Q42 left as is here but not above?",
+      "range": {
+        "startLine": 405,
+        "startChar": 73,
+        "endLine": 405,
+        "endChar": 76
+      },
+      "revId": "ca3cd3897342a508418f1421f5d3ac5c7c90c068",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
