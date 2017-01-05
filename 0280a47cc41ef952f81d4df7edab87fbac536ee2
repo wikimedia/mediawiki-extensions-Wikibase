@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee12ffd6_c1415d10",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-05T14:48:37Z",
+      "side": 1,
+      "message": "We discussed it with Thiemo already, it can be confusing for new developer what is \u0027qqx\u0027 and it looks like author just pressed random keys on a keyboard. Because of that I would suggest to add some reference for unexperienced developers so they knew that it has a special meaning, for example like Thiemo did here: https://gerrit.wikimedia.org/r/#/c/329596/5/repo/tests/phpunit/includes/DataTypeSelectorTest.php",
+      "range": {
+        "startLine": 33,
+        "startChar": 22,
+        "endLine": 33,
+        "endChar": 27
+      },
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_8197e592",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-05T14:48:37Z",
+      "side": 1,
+      "message": "For some reason, both provided tests fail on my setup with following error:\n```\nFailed asserting that two strings are identical.\n--- Expected\n+++ Actual\n@@ @@\n-//dev.wiki.local.wmftest.net:8080/wiki/Item:Q100\n+http://dev.wiki.local.wmftest.net:8080/wiki/Item:Q100\n```\n\nI guess some test setup is missing.",
+      "range": {
+        "startLine": 68,
+        "startChar": 2,
+        "endLine": 68,
+        "endChar": 80
+      },
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
