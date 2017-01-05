@@ -355,7 +355,7 @@
 	"apihelp-wbcreateclaim-param-value": "Verdien til en snak når man oppretter en påstand med en snak som har en verdi",
 	"apihelp-wbcreateclaim-param-snaktype": "Snak-ens type",
 	"apihelp-wbcreateclaim-param-summary": "Sammendrag for redigeringen.\nVil legges til med en automatisk generert kommentar. Lengdebegrensningen for den automatiske kommentaren pluss sammendragen er 260 tegn. Merk at alt over den grensa vil forsvinne.",
-	"apihelp-wbcreateclaim-example-1": "Oppretter en påstand for elementet Q42 med egenskapen P9001 med en novalue-snak.",
+	"apihelp-wbcreateclaim-example-1": "Oppretter en påstand for elementet <var>Q42</var> med egenskapen <var>P9001</var> med en <code>novalue</code>-snak.",
 	"apihelp-wbcreateclaim-example-2": "Oppretter en påstand for elementet Q42 med egenskapen P9002 med strengeverdien «itsastring»",
 	"apihelp-wbcreateclaim-example-3": "Oppretter en påstand for elementet Q42 med egenskapen P9003 med elementet Q1 som verdi",
 	"apihelp-wbcreateclaim-example-4": "Oppretter en påstand for element Q42 med egenskap P9004 med en koordinatverdi som snak",
