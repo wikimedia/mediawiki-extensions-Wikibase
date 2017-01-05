@@ -3,7 +3,8 @@
 		"authors": [
 			"Kwj2772",
 			"아라",
-			"Ykhwong"
+			"Ykhwong",
+			"Jerrykim306"
 		]
 	},
 	"valueview-desc": "데이터 값 보이기와 편집을 위한 사용자 인터페이스 구성 요소",
@@ -24,6 +25,8 @@
 	"valueview-expertextender-calendarhint-switch-julian": "&rarr; 율리우스력으로 변경",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "언어 (필수):",
+	"valueview-expertextender-unitsuggester-label": "단위 (선택 사항):",
 	"valueview-preview-label": "다음과 같이 보이기:",
-	"valueview-preview-novalue": "올바른 값이 인식되지 않음"
+	"valueview-preview-novalue": "올바른 값이 인식되지 않음",
+	"valueview-listrotator-manually": "수동 설정"
 }
