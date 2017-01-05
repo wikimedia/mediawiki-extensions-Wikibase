@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "ee12ffd6_773393f4",
+        "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-05T19:47:00Z",
+      "side": 1,
+      "message": "I have a concern that it should not check validity, as soon as we want multiple implementation for this interface, but what seems invalid for one implementation might make a lot of sense for another.\n\nAnd also, we already have validation in `ChangeOp`.",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 26,
+        "endChar": 65
+      },
+      "revId": "a82ee06928ef092b374435f318e7e9f0cd0823eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee12ffd6_3c074021",
         "filename": "repo/includes/ChangeOp/NullChangeOp.php",
         "patchSetId": 2
