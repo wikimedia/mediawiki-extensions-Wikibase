@@ -45,6 +45,30 @@
       "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_010655d1",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-05T14:58:47Z",
+      "side": 1,
+      "message": "Tests started to pass when I replaced `$title-\u003egetFullURL()` with `$title-\u003egetFullURL(\u0027\u0027, false, PROTO_HTTP)`, so I guess it\u0027s test problem.\n\nI would suggest to hardcode expected url, but not rely on other classes.",
+      "parentUuid": "ee12ffd6_8197e592",
+      "range": {
+        "startLine": 68,
+        "startChar": 2,
+        "endLine": 68,
+        "endChar": 80
+      },
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
