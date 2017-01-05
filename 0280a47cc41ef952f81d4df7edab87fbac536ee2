@@ -93,6 +93,30 @@
       "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_3cbd00ae",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-05T18:08:04Z",
+      "side": 1,
+      "message": "May be to check for substring `/wiki/Item:Q100`?",
+      "parentUuid": "ee12ffd6_414fadc0",
+      "range": {
+        "startLine": 68,
+        "startChar": 2,
+        "endLine": 68,
+        "endChar": 80
+      },
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
