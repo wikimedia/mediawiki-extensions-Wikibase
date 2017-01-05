@@ -212,7 +212,7 @@
 	"apihelp-wbcreateclaim-param-property": "Snaks özelliği kimliği",
 	"apihelp-wbcreateclaim-param-value": "Değeri olan bir Snak ile iddia yaratırken Snak'in değeri",
 	"apihelp-wbcreateclaim-param-snaktype": "Snak'in türü",
-	"apihelp-wbcreateclaim-example-1": "P9001 özellikli Q42 öğesi için değersiz Snak ile bir iddia oluşturur.",
+	"apihelp-wbcreateclaim-example-1": "<var>P9001</var> özellikli <var>Q42</var> öğesi için değersiz Snak ile bir iddia oluşturur <code>novalue</code>.",
 	"apihelp-wbcreateclaim-example-2": "P9002 özelliğinin Q42 öğesi için \"itsastring\" değeri ile iddia oluşturur.",
 	"apihelp-wbcreateredirect-example-1": "Q!! Q12 üzerine yönlendirmeye dönüşsün",
 	"apihelp-wbeditentity-description": "Tek bir yeni Wikibase varlığı oluşturur ve dizilenmiş bilgi ile onu modifiye eder.",

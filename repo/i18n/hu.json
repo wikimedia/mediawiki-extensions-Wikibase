@@ -289,7 +289,7 @@
 	"action-property-create": "tulajdonságok létrehozása",
 	"wikibase-pageinfo-subscription-none": "Nincs",
 	"apihelp-wbcreateredirect-example-1": "Q11 átirányítása Q12-re",
-	"apihelp-wbeditentity-example-2": "Új elem létrehozása és német és angol címkék beállítása",
+	"apihelp-wbeditentity-example-2": "Új elem létrehozása és <var>de</var> (német) és <var>en</var> (angol) címkék beállítása",
 	"apihelp-wbeditentity-example-11": "Címke hozzáadása létező felülírása nélkül",
 	"apihelp-wbeditentity-example-12": "Címke eltávolítása",
 	"apihelp-wbformatvalue-param-datatype": "Az érték adattípusa. Ez nem azonos az érték típusával",
