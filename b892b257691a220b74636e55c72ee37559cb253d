@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee12ffd6_1c359cf3",
+        "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-05T19:40:40Z",
+      "side": 0,
+      "message": "If the interface will be used not only in EditEntity, then it will help to avoid a lot of null checks what can lead to less errors.\nAs soon as we\u0027re going to offer null implementation right next to the `ChangeOp` interface it won\u0027t be a problem for a developer just to return instance of `NullChangeOp` if no change is needed.",
+      "range": {
+        "startLine": 23,
+        "startChar": 20,
+        "endLine": 23,
+        "endChar": 25
+      },
+      "revId": "b892b257691a220b74636e55c72ee37559cb253d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
