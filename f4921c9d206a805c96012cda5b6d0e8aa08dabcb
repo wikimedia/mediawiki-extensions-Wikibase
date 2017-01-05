@@ -96,6 +96,63 @@
     },
     {
       "key": {
+        "uuid": "ee12ffd6_8b9f0455",
+        "filename": "repo/includes/Specials/HTMLForm/HTMLItemReferenceField.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-05T09:44:00Z",
+      "side": 1,
+      "message": "Per previous suggestion on en.json - please uppercase ID here. Could also end a sentence with a period.",
+      "range": {
+        "startLine": 10,
+        "startChar": 65,
+        "endLine": 10,
+        "endChar": 67
+      },
+      "revId": "f4921c9d206a805c96012cda5b6d0e8aa08dabcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_2ba6d8a7",
+        "filename": "repo/includes/Specials/HTMLForm/HTMLItemReferenceField.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-05T09:44:00Z",
+      "side": 1,
+      "message": "Out of curiosity (I think I know where you\u0027d like to use the new class but haven\u0027t seen the actual code yet): As this is a new code, why make $entityLookup optional?",
+      "revId": "f4921c9d206a805c96012cda5b6d0e8aa08dabcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_8bc6e44c",
+        "filename": "repo/includes/Specials/HTMLForm/HTMLItemReferenceField.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-05T09:44:00Z",
+      "side": 1,
+      "message": "please document $value and $alldata (at least by pointing to docs of HTMLFormField::validate.",
+      "revId": "f4921c9d206a805c96012cda5b6d0e8aa08dabcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee12ffd6_9d43d367",
         "filename": "repo/includes/Specials/HTMLForm/HTMLItemReferenceField.php",
         "patchSetId": 2
@@ -136,6 +193,63 @@
         "startChar": 38,
         "endLine": 52,
         "endChar": 40
+      },
+      "revId": "f4921c9d206a805c96012cda5b6d0e8aa08dabcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_2bbdb8ad",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLItemReferenceFieldTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-05T09:44:00Z",
+      "side": 1,
+      "message": "Shouldn\u0027t also @group WikibaseRepo be added? CI didn\u0027t complain, so I dunno.",
+      "revId": "f4921c9d206a805c96012cda5b6d0e8aa08dabcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_6bc3b03e",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLItemReferenceFieldTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-05T09:44:00Z",
+      "side": 1,
+      "message": "super nitpick: I\u0027d either put this test after \"testValidationCallbackExecuted_WhenReferencedItemExists\", or maybe before \"testValidationFailsWithInvalidFormatMessage_WhenEnteredTextDoesNotMatchItemIdFormat\".\n\nIt feels slightly placed at random here when reading the whole test suite from top to bottom.\nNothing wrong about the test itself though!",
+      "revId": "f4921c9d206a805c96012cda5b6d0e8aa08dabcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_4ba90c78",
+        "filename": "repo/tests/phpunit/includes/Specials/HTMLForm/HTMLItemReferenceFieldTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-05T09:44:00Z",
+      "side": 1,
+      "message": "This one is interesting.\n\nI\u0027d appreciate if you convinced me that this is better than some boring way like:\n$exisitingItemId( \u0027Q1\u0027 );\n\n$this-\u003eaddItem( $existingItemId ); // Note renaming the method adding the item to the entity lookup; maybe I\u0027d be also passing ItemId/Item instance here instead of a string\n\nand then rest of the test as it is.",
+      "range": {
+        "startLine": 70,
+        "startChar": 9,
+        "endLine": 70,
+        "endChar": 24
       },
       "revId": "f4921c9d206a805c96012cda5b6d0e8aa08dabcb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
