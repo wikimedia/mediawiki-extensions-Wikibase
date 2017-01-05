@@ -6,32 +6,22 @@ use Comparable;
 use DataValues\StringValue;
 use Hashable;
 use InvalidArgumentException;
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
-use Wikibase\DataModel\Tests\HashArray\HashArrayTest;
 
 /**
  * @covers Wikibase\DataModel\Snak\SnakList
- * @uses DataValues\StringValue
- * @uses Wikibase\DataModel\Entity\PropertyId
- * @uses Wikibase\DataModel\Snak\PropertyNoValueSnak
- * @uses Wikibase\DataModel\Snak\PropertyValueSnak
- * @uses Wikibase\DataModel\Snak\Snak
- * @uses Wikibase\DataModel\Snak\SnakList
- * @uses Wikibase\DataModel\HashArray
- * @uses Wikibase\DataModel\Snak\SnakObject
- * @uses Wikibase\DataModel\Internal\MapValueHasher
- * @uses Wikibase\DataModel\Entity\EntityId
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Addshore
  * @author Thiemo Mättig
  */
-class SnakListTest extends HashArrayTest {
+class SnakListTest extends PHPUnit_Framework_TestCase {
 
 	public function elementInstancesProvider() {
 		$id42 = new PropertyId( 'P42' );
