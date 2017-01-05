@@ -9,6 +9,9 @@ use Deserializers\Exceptions\InvalidAttributeException;
 use Deserializers\Exceptions\MissingAttributeException;
 use Deserializers\Exceptions\MissingTypeException;
 use Deserializers\Exceptions\UnsupportedTypeException;
+use Wikibase\DataModel\ReferenceList;
+use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
@@ -90,8 +93,8 @@ class StatementDeserializer implements DispatchableDeserializer {
 	 * @return Statement
 	 */
 	private function getDeserialized( array $serialization ) {
+		/** @var Snak $mainSnak */
 		$mainSnak = $this->snakDeserializer->deserialize( $serialization['mainsnak'] );
-
 		$statement = new Statement( $mainSnak );
 
 		$this->setGuidFromSerialization( $serialization, $statement );
@@ -119,6 +122,7 @@ class StatementDeserializer implements DispatchableDeserializer {
 			return;
 		}
 
+		/** @var SnakList $qualifiers */
 		$qualifiers = $this->snaksDeserializer->deserialize( $serialization['qualifiers'] );
 
 		if ( array_key_exists( 'qualifiers-order', $serialization ) ) {
@@ -147,7 +151,9 @@ class StatementDeserializer implements DispatchableDeserializer {
 			return;
 		}
 
-		$statement->setReferences( $this->referencesDeserializer->deserialize( $serialization['references'] ) );
+		/** @var ReferenceList $references */
+		$references = $this->referencesDeserializer->deserialize( $serialization['references'] );
+		$statement->setReferences( $references );
 	}
 
 	private function assertCanDeserialize( $serialization ) {

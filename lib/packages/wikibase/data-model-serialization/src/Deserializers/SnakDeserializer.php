@@ -127,6 +127,12 @@ class SnakDeserializer implements DispatchableDeserializer {
 		}
 	}
 
+	/**
+	 * @param string $serialization
+	 *
+	 * @throw InvalidAttributeException
+	 * @return PropertyId
+	 */
 	private function deserializePropertyId( $serialization ) {
 		$propertyId = $this->entityIdDeserializer->deserialize( $serialization );
 

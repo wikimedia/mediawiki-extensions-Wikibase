@@ -4,6 +4,7 @@ namespace Wikibase\DataModel\Deserializers;
 
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**
@@ -52,12 +53,14 @@ class StatementListDeserializer implements Deserializer {
 		foreach ( $serialization as $key => $statementArray ) {
 			if ( is_string( $key ) ) {
 				foreach ( $statementArray as $statementSerialization ) {
-					$statementList->addStatement(
-						$this->statementDeserializer->deserialize( $statementSerialization )
-					);
+					/** @var Statement $statement */
+					$statement = $this->statementDeserializer->deserialize( $statementSerialization );
+					$statementList->addStatement( $statement );
 				}
 			} else {
-				$statementList->addStatement( $this->statementDeserializer->deserialize( $statementArray ) );
+				/** @var Statement $statement */
+				$statement = $this->statementDeserializer->deserialize( $statementArray );
+				$statementList->addStatement( $statement );
 			}
 
 		}

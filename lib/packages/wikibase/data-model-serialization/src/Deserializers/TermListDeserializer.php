@@ -5,6 +5,7 @@ namespace Wikibase\DataModel\Deserializers;
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\InvalidAttributeException;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 
 /**
@@ -50,7 +51,9 @@ class TermListDeserializer implements Deserializer {
 		$termList = new TermList();
 
 		foreach ( $serialization as $termSerialization ) {
-			$termList->setTerm( $this->termDeserializer->deserialize( $termSerialization ) );
+			/** @var Term $term */
+			$term = $this->termDeserializer->deserialize( $termSerialization );
+			$termList->setTerm( $term );
 		}
 
 		return $termList;
