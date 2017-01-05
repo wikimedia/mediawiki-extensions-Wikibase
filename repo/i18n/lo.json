@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Iberia2011"
+			"Iberia2011",
+			"Aefgh39622"
 		]
 	},
+	"wikibase-edit": "ແກ້ໄຂ",
 	"wikibase-itemdisambiguation-lookup-language": "ລະຫັດພາສາ:",
 	"wikibase-modifyterm-language": "ລະຫັດພາສາ:",
 	"wikibase-entitieswithoutlabel-label-language": "ລະຫັດພາສາ:"

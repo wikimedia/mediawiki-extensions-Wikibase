@@ -124,5 +124,7 @@
 	"notification-header-page-connection": "الصفحة <strong>$3</strong> تم {{GENDER:$2|وصلها}} بعنصر {{WBREPONAME}}.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> و {{PLURAL:$4|صفحة واحدة أخرى|$4 صفحات أخرى|100=99+ صفحات أخرى}} تم {{GENDER:$2|توصيلها}} لعناصر {{WBREPONAME}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|اعرض}} العنصر",
-	"notification-subject-page-connection": "الصفحة على {{SITENAME}} التي قمت {{GENDER:$3|بإنشائها}} تم {{GENDER:$2|وصلها}} إلى عنصر {{WBREPONAME}}"
+	"notification-subject-page-connection": "الصفحة على {{SITENAME}} التي قمت {{GENDER:$3|بإنشائها}} تم {{GENDER:$2|وصلها}} إلى عنصر {{WBREPONAME}}",
+	"unresolved-property-category": "الصفحات بخصائص غير محلولة",
+	"unresolved-property-category-desc": "هذا التصنيف يعرض الصفحات التي تستخدم خصائص {{WBREPONAME}} التي لا يمكن إيجادها بواسطة رقم الخاصية ولا بواسطة العلامة الخاصة بها."
 }
