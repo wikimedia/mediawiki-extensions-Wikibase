@@ -47,8 +47,9 @@ class ItemContentTest extends EntityContentTest {
 	}
 
 	/**
-	 * @param EntityId|null $itemId
+	 * @param ItemId|null $itemId
 	 *
+	 * @throws InvalidArgumentException
 	 * @return ItemContent
 	 */
 	protected function newEmpty( EntityId $itemId = null ) {
