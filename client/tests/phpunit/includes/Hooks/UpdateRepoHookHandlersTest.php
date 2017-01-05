@@ -124,6 +124,9 @@ class UpdateRepoHookHandlersTest extends PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( UpdateRepoHookHandlers::class, $handler );
 	}
 
+	/**
+	 * @return Title
+	 */
 	private function getTitle() {
 		$title = $this->getMock( Title::class );
 		$title->expects( $this->any() )

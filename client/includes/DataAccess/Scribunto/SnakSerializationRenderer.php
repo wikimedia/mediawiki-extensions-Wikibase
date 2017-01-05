@@ -5,6 +5,7 @@ namespace Wikibase\Client\DataAccess\Scribunto;
 use Deserializers\Deserializer;
 use Language;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\Lib\SnakFormatter;
 
 /**
@@ -65,6 +66,7 @@ class SnakSerializationRenderer {
 	 * @return string wikitext
 	 */
 	public function renderSnak( array $snakSerialization ) {
+		/** @var Snak $snak */
 		$snak = $this->snakDeserializer->deserialize( $snakSerialization );
 
 		return $this->snakFormatter->formatSnak( $snak );
@@ -80,13 +82,14 @@ class SnakSerializationRenderer {
 	 * @return string wikitext, snaks are comma separated
 	 */
 	public function renderSnaks( array $snaksSerialization ) {
-		$snaks = $this->snakListDeserializer->deserialize( $snaksSerialization );
+		/** @var SnakList $snakList */
+		$snakList = $this->snakListDeserializer->deserialize( $snaksSerialization );
 
-		if ( $snaks->isEmpty() ) {
+		if ( $snakList->isEmpty() ) {
 			return '';
 		}
 
-		$snaks = iterator_to_array( $snaks );
+		$snaks = iterator_to_array( $snakList );
 		return $this->formatSnakList( $snaks );
 	}
 
