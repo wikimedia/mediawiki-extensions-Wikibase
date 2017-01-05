@@ -22,6 +22,29 @@
       "revId": "b892b257691a220b74636e55c72ee37559cb253d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_9c106c5d",
+        "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-05T19:40:40Z",
+      "side": 0,
+      "message": "I wouldn\u0027t state this at the interface that belongs to UI/Presentation layer, it adds an assumption that might not be true because at least we have no control on 3-rd party extension.",
+      "range": {
+        "startLine": 18,
+        "startChar": 40,
+        "endLine": 18,
+        "endChar": 93
+      },
+      "revId": "b892b257691a220b74636e55c72ee37559cb253d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

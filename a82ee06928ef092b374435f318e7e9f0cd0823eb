@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee12ffd6_1c1c7c7b",
+        "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-05T19:40:40Z",
+      "side": 1,
+      "message": "That way we enforce deserializer to be able to hndle only one key.\nThis way deserializer won\u0027t be able to handle unknown keys. If it might be needed then please give an example, because I couldn\u0027t imagine a use case when you need to handle unknown keys having unknown structure.",
+      "range": {
+        "startLine": 19,
+        "startChar": 17,
+        "endLine": 19,
+        "endChar": 23
+      },
+      "revId": "a82ee06928ef092b374435f318e7e9f0cd0823eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_3c074021",
+        "filename": "repo/includes/ChangeOp/NullChangeOp.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-05T19:40:40Z",
+      "side": 1,
+      "message": "Don\u0027t really insist on singleton, but one can say that each new instance would waste memory. This way it won\u0027t.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 2
+      },
+      "revId": "a82ee06928ef092b374435f318e7e9f0cd0823eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
