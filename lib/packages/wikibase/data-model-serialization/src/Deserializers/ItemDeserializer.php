@@ -6,7 +6,12 @@ use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\TypedObjectDeserializer;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
+use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\TermList;
 
 /**
  * Package private
@@ -95,29 +100,31 @@ class ItemDeserializer extends TypedObjectDeserializer {
 			return;
 		}
 
-		$item->setId( $this->entityIdDeserializer->deserialize( $serialization['id'] ) );
+		/** @var ItemId $id */
+		$id = $this->entityIdDeserializer->deserialize( $serialization['id'] );
+		$item->setId( $id );
 	}
 
 	private function setTermsFromSerialization( array $serialization, Item $item ) {
 		if ( array_key_exists( 'labels', $serialization ) ) {
 			$this->assertAttributeIsArray( $serialization, 'labels' );
-			$item->getFingerprint()->setLabels(
-				$this->termListDeserializer->deserialize( $serialization['labels'] )
-			);
+			/** @var TermList $labels */
+			$labels = $this->termListDeserializer->deserialize( $serialization['labels'] );
+			$item->getFingerprint()->setLabels( $labels );
 		}
 
 		if ( array_key_exists( 'descriptions', $serialization ) ) {
 			$this->assertAttributeIsArray( $serialization, 'descriptions' );
-			$item->getFingerprint()->setDescriptions(
-				$this->termListDeserializer->deserialize( $serialization['descriptions'] )
-			);
+			/** @var TermList $descriptions */
+			$descriptions = $this->termListDeserializer->deserialize( $serialization['descriptions'] );
+			$item->getFingerprint()->setDescriptions( $descriptions );
 		}
 
 		if ( array_key_exists( 'aliases', $serialization ) ) {
 			$this->assertAttributeIsArray( $serialization, 'aliases' );
-			$item->getFingerprint()->setAliasGroups(
-				$this->aliasGroupListDeserializer->deserialize( $serialization['aliases'] )
-			);
+			/** @var AliasGroupList $aliases */
+			$aliases = $this->aliasGroupListDeserializer->deserialize( $serialization['aliases'] );
+			$item->getFingerprint()->setAliasGroups( $aliases );
 		}
 	}
 
@@ -126,6 +133,7 @@ class ItemDeserializer extends TypedObjectDeserializer {
 			return;
 		}
 
+		/** @var StatementList $statements */
 		$statements = $this->statementListDeserializer->deserialize( $serialization['claims'] );
 		$item->setStatements( $statements );
 	}
@@ -141,9 +149,9 @@ class ItemDeserializer extends TypedObjectDeserializer {
 		$this->assertAttributeIsArray( $serialization, 'sitelinks' );
 
 		foreach ( $serialization['sitelinks'] as $siteLinksSerialization ) {
-			$siteLinkList->addSiteLink(
-				$this->siteLinkDeserializer->deserialize( $siteLinksSerialization )
-			);
+			/** @var SiteLink $siteLink */
+			$siteLink = $this->siteLinkDeserializer->deserialize( $siteLinksSerialization );
+			$siteLinkList->addSiteLink( $siteLink );
 		}
 	}
 

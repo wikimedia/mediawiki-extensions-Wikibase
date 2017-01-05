@@ -4,6 +4,7 @@ namespace Wikibase\DataModel\Deserializers;
 
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 
 /**
@@ -52,10 +53,14 @@ class SnakListDeserializer implements Deserializer {
 		foreach ( $serialization as $key => $snakArray ) {
 			if ( is_string( $key ) ) {
 				foreach ( $snakArray as $snakSerialization ) {
-					$snakList->addElement( $this->snakDeserializer->deserialize( $snakSerialization ) );
+					/** @var Snak $snak */
+					$snak = $this->snakDeserializer->deserialize( $snakSerialization );
+					$snakList->addElement( $snak );
 				}
 			} else {
-				$snakList->addElement( $this->snakDeserializer->deserialize( $snakArray ) );
+				/** @var Snak $snak */
+				$snak = $this->snakDeserializer->deserialize( $snakArray );
+				$snakList->addElement( $snak );
 			}
 		}
 

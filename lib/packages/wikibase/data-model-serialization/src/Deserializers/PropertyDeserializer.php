@@ -6,6 +6,10 @@ use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\TypedObjectDeserializer;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\TermList;
 
 /**
  * Package private
@@ -93,29 +97,31 @@ class PropertyDeserializer extends TypedObjectDeserializer {
 			return;
 		}
 
-		$property->setId( $this->entityIdDeserializer->deserialize( $serialization['id'] ) );
+		/** @var PropertyId $id */
+		$id = $this->entityIdDeserializer->deserialize( $serialization['id'] );
+		$property->setId( $id );
 	}
 
 	private function setTermsFromSerialization( array $serialization, Property $property ) {
 		if ( array_key_exists( 'labels', $serialization ) ) {
 			$this->assertAttributeIsArray( $serialization, 'labels' );
-			$property->getFingerprint()->setLabels(
-				$this->termListDeserializer->deserialize( $serialization['labels'] )
-			);
+			/** @var TermList $labels */
+			$labels = $this->termListDeserializer->deserialize( $serialization['labels'] );
+			$property->getFingerprint()->setLabels( $labels );
 		}
 
 		if ( array_key_exists( 'descriptions', $serialization ) ) {
 			$this->assertAttributeIsArray( $serialization, 'descriptions' );
-			$property->getFingerprint()->setDescriptions(
-				$this->termListDeserializer->deserialize( $serialization['descriptions'] )
-			);
+			/** @var TermList $descriptions */
+			$descriptions = $this->termListDeserializer->deserialize( $serialization['descriptions'] );
+			$property->getFingerprint()->setDescriptions( $descriptions );
 		}
 
 		if ( array_key_exists( 'aliases', $serialization ) ) {
 			$this->assertAttributeIsArray( $serialization, 'aliases' );
-			$property->getFingerprint()->setAliasGroups(
-				$this->aliasGroupListDeserializer->deserialize( $serialization['aliases'] )
-			);
+			/** @var AliasGroupList $aliases */
+			$aliases = $this->aliasGroupListDeserializer->deserialize( $serialization['aliases'] );
+			$property->getFingerprint()->setAliasGroups( $aliases );
 		}
 	}
 
@@ -124,6 +130,7 @@ class PropertyDeserializer extends TypedObjectDeserializer {
 			return;
 		}
 
+		/** @var StatementList $statements */
 		$statements = $this->statementListDeserializer->deserialize( $serialization['claims'] );
 		$property->setStatements( $statements );
 	}

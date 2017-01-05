@@ -4,6 +4,7 @@ namespace Wikibase\DataModel\Deserializers;
 
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
+use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 
 /**
@@ -49,7 +50,9 @@ class ReferenceListDeserializer implements Deserializer {
 		$referenceList = new ReferenceList();
 
 		foreach ( $serialization as $referenceSerialization ) {
-			$referenceList->addReference( $this->referenceDeserializer->deserialize( $referenceSerialization ) );
+			/** @var Reference $reference */
+			$reference = $this->referenceDeserializer->deserialize( $referenceSerialization );
+			$referenceList->addReference( $reference );
 		}
 
 		return $referenceList;
