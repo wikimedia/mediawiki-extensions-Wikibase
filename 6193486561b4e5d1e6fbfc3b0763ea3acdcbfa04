@@ -56,6 +56,24 @@
       "revId": "6193486561b4e5d1e6fbfc3b0763ea3acdcbfa04",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee12ffd6_a171c90d",
+        "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-05T16:00:00Z",
+      "side": 1,
+      "message": "I just realized this is missing a @throws ChangeOpException. Critical difference: null means the provided array was totally fine, just did not contained anything relevant. Exception when the array was invalid.",
+      "parentUuid": "ee12ffd6_615191dd",
+      "revId": "6193486561b4e5d1e6fbfc3b0763ea3acdcbfa04",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
