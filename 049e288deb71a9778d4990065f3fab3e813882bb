@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae0c87c0_eafa070d",
+        "filename": "repo/includes/Specials/SpecialItemByTitle.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-06T10:04:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae0c87c0_e71b6284",
+      "revId": "049e288deb71a9778d4990065f3fab3e813882bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0c87c0_c7205eab",
         "filename": "repo/includes/Specials/SpecialItemByTitle.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2017-01-06T09:58:43Z",
       "side": 1,
       "message": "Copy-pasted parent documentation is not helpful here.",
+      "revId": "049e288deb71a9778d4990065f3fab3e813882bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0c87c0_caff43fb",
+        "filename": "repo/includes/Specials/SpecialItemByTitle.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-06T10:04:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae0c87c0_c7205eab",
       "revId": "049e288deb71a9778d4990065f3fab3e813882bb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
