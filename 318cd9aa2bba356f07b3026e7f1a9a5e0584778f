@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ae0c87c0_9bad1bea",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-06T16:57:18Z",
+      "side": 1,
+      "message": "The ErrorReporter should be injected. You can use $mainModule-\u003egetContext() instead of $this-\u003egetContext(), to avoid the chicken-or-egg problem here.",
+      "parentUuid": "ae0c87c0_6ab3b74d",
+      "range": {
+        "startLine": 60,
+        "startChar": 25,
+        "endLine": 60,
+        "endChar": 82
+      },
+      "revId": "318cd9aa2bba356f07b3026e7f1a9a5e0584778f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0c87c0_4ab0f33e",
         "filename": "repo/tests/phpunit/includes/Api/ListSubscribersTest.php",
         "patchSetId": 6
@@ -36,6 +60,24 @@
       "writtenOn": "2017-01-06T10:38:21Z",
       "side": 1,
       "message": "As said before, please refactor this test further and make it use more trivial services here. Not necessarily mocks, but in-memory implementations.",
+      "revId": "318cd9aa2bba356f07b3026e7f1a9a5e0584778f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0c87c0_1be80b0b",
+        "filename": "repo/tests/phpunit/includes/Api/ListSubscribersTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-06T16:57:18Z",
+      "side": 1,
+      "message": "Yea, you can use a HashSiteStore here, and a BasicEntityIdParser.",
+      "parentUuid": "ae0c87c0_4ab0f33e",
       "revId": "318cd9aa2bba356f07b3026e7f1a9a5e0584778f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
