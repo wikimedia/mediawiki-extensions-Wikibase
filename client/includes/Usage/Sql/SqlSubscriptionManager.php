@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Usage\Sql;
 
-use Database;
 use DBError;
 use Exception;
 use IDatabase;
