@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "ae0c87c0_8a094b32",
+        "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-06T10:25:29Z",
+      "side": 1,
+      "message": "I believe that kind of \"invalidity\" is meant here is when what is passed as $changeRequest/$changeSubRequest doesn\u0027t have a valid structure.\nIn particular the previous version would expect to get two-level array and the obvious case when the exception would be thrown would be passing [ \u0027foo\u0027 ] instead of e.g. [ \u0027label\u0027 \u003d\u003e [ ..] ].\n\nThat might become less likely if we went the way you suggest here but maybe still possible?\n\n\nChangeOp:validate is about something completely different. From method doc: \"This indicates whether this ChangeOp is valid with respect to the given entity.\"",
+      "parentUuid": "ee12ffd6_773393f4",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 26,
+        "endChar": 65
+      },
+      "revId": "a82ee06928ef092b374435f318e7e9f0cd0823eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee12ffd6_3c074021",
         "filename": "repo/includes/ChangeOp/NullChangeOp.php",
         "patchSetId": 2
