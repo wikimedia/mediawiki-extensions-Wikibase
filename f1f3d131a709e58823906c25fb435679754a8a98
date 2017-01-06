@@ -16,6 +16,24 @@
       "revId": "f1f3d131a709e58823906c25fb435679754a8a98",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0c87c0_30a9ae79",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/NullChangeOpTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-06T15:36:18Z",
+      "side": 1,
+      "message": "Addshore pointed to this file (https://github.com/wikimedia/integration-config/blob/master/jjb/wikidata.yaml) - if it is not used there then it is not used in our CI, as I understood.\n\nI don\u0027t think creating group for each namespace makes much sense as soon as these tests can be run by passing directory path to phpunit.",
+      "parentUuid": "ae0c87c0_10134a07",
+      "revId": "f1f3d131a709e58823906c25fb435679754a8a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
