@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ae0c87c0_6a64d7e1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-06T10:30:29Z",
+      "side": 1,
+      "message": "Correct me if I am wrong but Depends-On is meant more for cross-project (ie. cross-repo) dependencies.\nIn a single repo for making patch depending on each other it is enough to just put two commits in a chain.\n\nAnd once If3f3768b8255c7bd87bb71e362020b86b36b88c0 has actually been merged, it is just matter of making your patch based on the up-to-date master.",
+      "revId": "a82ee06928ef092b374435f318e7e9f0cd0823eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee12ffd6_1c1c7c7b",
         "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
         "patchSetId": 2
