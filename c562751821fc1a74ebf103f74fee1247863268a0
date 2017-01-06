@@ -51,6 +51,24 @@
       "revId": "c562751821fc1a74ebf103f74fee1247863268a0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0c87c0_e74da29f",
+        "filename": "repo/includes/Specials/SpecialItemByTitle.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-06T10:04:24Z",
+      "side": 1,
+      "message": "$sitelinkgroups is one of the settings (this class has two parts, one for settings and one for services) I can do services first and then settings if you insist.\n\nRegarding typehint, you\u0027re right and I forgot. I\u0027ll add it soon.",
+      "parentUuid": "ae0c87c0_07a31641",
+      "revId": "c562751821fc1a74ebf103f74fee1247863268a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
