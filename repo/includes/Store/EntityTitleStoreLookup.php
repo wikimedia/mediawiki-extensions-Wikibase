@@ -11,8 +11,6 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  *
  * The mapping could be programmatic, or it could be based on database lookups.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Thiemo Mättig

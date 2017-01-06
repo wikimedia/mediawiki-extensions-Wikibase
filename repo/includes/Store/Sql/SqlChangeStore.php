@@ -10,8 +10,6 @@ use Wikibase\Repo\Store\ChangeStore;
 use Wikimedia\Assert\Assert;
 
 /**
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Marius Hoch
  */

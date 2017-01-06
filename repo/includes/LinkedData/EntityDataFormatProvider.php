@@ -11,8 +11,6 @@ use Wikimedia\Purtle\RdfWriterFactory;
 /**
  * Service for getting information about supported data formats.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Thomas Pellissier Tanon

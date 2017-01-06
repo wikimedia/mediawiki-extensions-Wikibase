@@ -3,8 +3,6 @@
 /**
  * Internationalization file with magic words for the Wikibase Client extension.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  */
 

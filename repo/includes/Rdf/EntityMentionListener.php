@@ -12,8 +12,6 @@ use Wikibase\DataModel\Entity\PropertyId;
  * are referenced in the RDF output. Such stubs would typically give at
  * least a type and a label for the entity.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

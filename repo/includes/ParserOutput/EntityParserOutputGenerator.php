@@ -32,8 +32,6 @@ use Wikibase\View\ToolbarEditSectionGenerator;
 /**
  * Creates the parser output for an entity.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
@@ -137,8 +135,6 @@ class EntityParserOutputGenerator {
 
 	/**
 	 * Creates the parser output for the given entity revision.
-	 *
-	 * @since 0.5
 	 *
 	 * @param EntityDocument $entity
 	 * @param bool $generateHtml

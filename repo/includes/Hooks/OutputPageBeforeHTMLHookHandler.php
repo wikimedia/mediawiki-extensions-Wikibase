@@ -24,8 +24,6 @@ use Wikibase\View\Template\TemplateFactory;
 /**
  * Handler for the "OutputPageBeforeHTML" hook.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */

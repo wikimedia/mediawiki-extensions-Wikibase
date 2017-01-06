@@ -21,8 +21,6 @@ use Wikibase\View\Template\TemplateFactory;
  * This is used to inject any non-cacheable information into the HTML
  * that was cached as part of the ParserOutput.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Adrian Heine <adrian.heine@wikimedia.de>

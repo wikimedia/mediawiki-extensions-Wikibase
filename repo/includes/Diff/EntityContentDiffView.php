@@ -27,8 +27,6 @@ use WikiPage;
 /**
  * Difference view for Wikibase entities.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

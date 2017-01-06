@@ -15,8 +15,6 @@ use Wikibase\Lib\Store\EntityStoreWatcher;
 /**
  * A WikiPageEntityMetaDataAccessor decorator that implements prefetching and caching.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */

@@ -82,8 +82,6 @@ call_user_func( function() {
 	 * Called when generating the extensions credits, use this to change the tables headers.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ExtensionTypes
 	 *
-	 * @since 0.1
-	 *
 	 * @param array &$extensionTypes
 	 *
 	 * @return boolean

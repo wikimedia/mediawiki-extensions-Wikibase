@@ -7,8 +7,6 @@ use InvalidArgumentException;
 use ValueFormatters\ValueFormatterBase;
 
 /**
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

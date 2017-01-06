@@ -16,8 +16,6 @@ use Wikibase\DataModel\SiteLink;
  * Provides access to the badges of the current page's sitelinks
  * and adds some properties to the HTML output to display them.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Daniel Kinzler
@@ -84,8 +82,6 @@ class LanguageLinkBadgeDisplay {
 	 * $languageLinkTitle->getInterwiki().
 	 *
 	 * This is generally called in the context of generating skin output.
-	 *
-	 * @since 0.5
 	 *
 	 * @param array &$languageLink
 	 * @param Title $languageLinkTitle

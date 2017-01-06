@@ -18,8 +18,6 @@ use Wikibase\Lib\SnakFormatter;
  * A factory for SnakFormatters in a client context, to be reused in different methods that "access
  * repository data" from a client (typically parser functions and Lua scripts).
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Marius Hoch

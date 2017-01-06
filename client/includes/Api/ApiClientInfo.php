@@ -11,8 +11,6 @@ use Wikibase\SettingsArray;
  *
  * @todo: may want to include namespaces and other settings here too.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Marius Hoch < hoo@online.de >
@@ -25,8 +23,6 @@ class ApiClientInfo extends ApiQueryBase {
 	private $settings;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param SettingsArray $settings
 	 * @param ApiQuery $apiQuery
 	 * @param string $moduleName
@@ -39,8 +35,6 @@ class ApiClientInfo extends ApiQueryBase {
 
 	/**
 	 * @see ApiBase::execute
-	 *
-	 * @since 0.4
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();

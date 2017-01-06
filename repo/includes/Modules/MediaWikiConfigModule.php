@@ -11,8 +11,6 @@ use Xml;
  * Generic, reusable ResourceLoader module to set a JavaScript configuration variable via
  * mediaWiki.config.set.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */

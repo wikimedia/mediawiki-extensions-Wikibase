@@ -15,8 +15,6 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * API module for removing qualifiers from a statement.
  *
- * @since 0.3
- *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
@@ -82,8 +80,6 @@ class RemoveQualifiers extends ApiBase {
 
 	/**
 	 * @see ApiBase::execute
-	 *
-	 * @since 0.3
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();

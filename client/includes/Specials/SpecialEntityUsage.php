@@ -17,8 +17,6 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
  * A special page that lists client wiki pages that use a given entity ID from the repository, and
  * which aspects each page uses.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Amir Sarabadani (ladsgroup@gmail.com)
  */

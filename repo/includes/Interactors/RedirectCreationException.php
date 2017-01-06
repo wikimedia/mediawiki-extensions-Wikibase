@@ -7,8 +7,6 @@ use Exception;
 /**
  * Exception representing a failure to execute the "create redirect" use case.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

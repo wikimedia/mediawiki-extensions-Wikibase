@@ -10,8 +10,6 @@ use Wikimedia\Assert\ParameterTypeException;
  * EscapingSnakFormatter wraps another SnakFormatter and
  * applies a transformation (escaping) to that formatter's output.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

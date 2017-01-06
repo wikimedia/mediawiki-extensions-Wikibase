@@ -34,8 +34,6 @@ use Wikibase\Repo\Validators\UrlValidator;
  * @warning: This is a low level factory for use by boostrap code only!
  * Program logic should use an instance of DataTypeValidatorFactory.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

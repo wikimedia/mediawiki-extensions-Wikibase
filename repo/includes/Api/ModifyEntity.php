@@ -24,8 +24,6 @@ use Wikibase\Summary;
 /**
  * Base class for API modules modifying a single entity identified based on id xor a combination of site and page title.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
@@ -49,8 +47,6 @@ abstract class ModifyEntity extends ApiBase {
 	private $titleLookup;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var string[]
 	 */
 	protected $siteLinkGroups;
@@ -201,8 +197,6 @@ abstract class ModifyEntity extends ApiBase {
 	/**
 	 * Actually modify the entity.
 	 *
-	 * @since 0.1
-	 *
 	 * @param EntityDocument &$entity
 	 * @param array $params
 	 * @param int $baseRevId
@@ -214,8 +208,6 @@ abstract class ModifyEntity extends ApiBase {
 	/**
 	 * Applies the given ChangeOp to the given Entity.
 	 * Any ChangeOpException is converted into an ApiUsageException with the code 'modification-failed'.
-	 *
-	 * @since 0.5
 	 *
 	 * @param ChangeOp $changeOp
 	 * @param EntityDocument $entity
@@ -251,8 +243,6 @@ abstract class ModifyEntity extends ApiBase {
 	/**
 	 * Make sure the required parameters are provided and that they are valid.
 	 *
-	 * @since 0.1
-	 *
 	 * @param array $params
 	 */
 	protected function validateParameters( array $params ) {
@@ -268,8 +258,6 @@ abstract class ModifyEntity extends ApiBase {
 
 	/**
 	 * @see ApiBase::execute()
-	 *
-	 * @since 0.1
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();

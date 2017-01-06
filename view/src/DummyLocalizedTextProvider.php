@@ -5,8 +5,6 @@ namespace Wikibase\View;
 /**
  * A LocalizedTextProvider implementation that returns a string containing the given key and params
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */

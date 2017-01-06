@@ -7,8 +7,6 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * Interface for looking up which client is interested in changes to which entity.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

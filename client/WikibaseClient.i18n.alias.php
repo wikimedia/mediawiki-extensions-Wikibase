@@ -3,8 +3,6 @@
 /**
  * Aliases for the special pages of the Wikibase Client extension.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author John Erling Blad < jeblad@gmail.com >
  */

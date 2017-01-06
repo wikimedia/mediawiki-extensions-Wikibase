@@ -10,8 +10,6 @@ use Wikibase\DataModel\Statement\StatementListProvider;
 /**
  * Find Snaks for claims in a given Entity, based on PropertyId.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */

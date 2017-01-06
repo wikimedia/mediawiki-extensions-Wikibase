@@ -16,8 +16,6 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 /**
  * Functionality needed to expose Entities to Lua.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  * @author Katie Filbert < aude.wiki@gmail.com >
@@ -116,8 +114,6 @@ class EntityAccessor {
 
 	/**
 	 * Get entity from prefixed ID (e.g. "Q23") and return it as serialized array.
-	 *
-	 * @since 0.5
 	 *
 	 * @param string $prefixedEntityId
 	 *

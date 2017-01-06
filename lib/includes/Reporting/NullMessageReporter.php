@@ -6,8 +6,6 @@ namespace Wikibase\Lib\Reporting;
  * Mock implementation of the MessageReporter interface that
  * does nothing with messages it receives.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  *

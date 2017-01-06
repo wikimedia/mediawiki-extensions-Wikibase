@@ -10,8 +10,6 @@ use Xml;
  * JavaScript variables needed to access the repo independent from the current
  * working wiki
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */
@@ -21,8 +19,6 @@ class RepoAccessModule extends ResourceLoaderModule {
 	 * This one lets the client JavaScript know where it can find
 	 * the API and the article path of the repo
 	 * @see ResourceLoaderModule::getScript
-	 *
-	 * @since 0.4
 	 *
 	 * @param ResourceLoaderContext $context
 	 *

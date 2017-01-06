@@ -12,8 +12,6 @@ use Wikibase\DataModel\Statement\Statement;
 /**
  * Register commonsMedia values as used images in ParserOutput.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >

@@ -20,8 +20,6 @@ use WikiPage;
 /**
  * Handlers for client Echo notifications
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Matěj Suchánek
  */

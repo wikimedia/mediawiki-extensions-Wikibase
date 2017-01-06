@@ -9,8 +9,6 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 /**
  * Provides logic to update the repo after page moves in the client.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */

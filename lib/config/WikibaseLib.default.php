@@ -10,8 +10,6 @@
  * This file is NOT an entry point the WikibaseLib extension. Use WikibaseLib.php.
  * It should furthermore not be included from outside the extension.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  */
 return [

@@ -10,8 +10,6 @@ use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 /**
  * Presentation model for Echo notifications
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Matěj Suchánek
  */

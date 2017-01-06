@@ -14,8 +14,6 @@ use Wikibase\Repo\Store\EntityPerPage;
  * Represents a lookup database table that makes the link between entities and pages.
  * Corresponds to the wb_entities_per_page table.
  *
- * @since 0.2
- *
  * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
  * @author Daniel Kinzler
@@ -191,8 +189,6 @@ class EntityPerPageTable implements EntityPerPage {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param EntityId $entityId
 	 *
 	 * @return boolean
@@ -216,8 +212,6 @@ class EntityPerPageTable implements EntityPerPage {
 
 	/**
 	 * @see EntityPerPage::clear
-	 *
-	 * @since 0.2
 	 *
 	 * @return boolean Success indicator
 	 */

@@ -16,8 +16,6 @@ use Wikibase\Summary;
 /**
  * Class for mainsnak change operation
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Daniel Kinzler
@@ -47,8 +45,6 @@ class ChangeOpMainSnak extends ChangeOpBase {
 
 	/**
 	 * Constructs a new mainsnak change operation
-	 *
-	 * @since 0.4
 	 *
 	 * @param string $statementGuid
 	 * @param Snak $snak
@@ -143,8 +139,6 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param Snak $mainSnak
 	 *
 	 * @return array

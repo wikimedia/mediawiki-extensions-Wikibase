@@ -7,8 +7,6 @@ use Wikibase\Change;
 /**
  * Channel for sending notifications about changes to a repo's clients.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

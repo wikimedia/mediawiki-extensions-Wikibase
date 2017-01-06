@@ -18,8 +18,6 @@ use Wikimedia\Purtle\RdfWriter;
 /**
  * RDF mapping for wikibase data model.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >
  * @author Thomas Pellissier Tanon

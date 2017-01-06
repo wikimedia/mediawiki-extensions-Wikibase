@@ -13,8 +13,6 @@ use Wikibase\Client\Usage\EntityUsage;
 /**
  * API module to get the usage of entities.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Amir Sarabadani < ladsgroup@gmail.com >
  */

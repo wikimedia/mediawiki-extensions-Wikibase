@@ -12,8 +12,6 @@ use Wikibase\Repo\Store\SiteLinkConflictLookup;
 /**
  * Validator for checking that site links are unique across all Items.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

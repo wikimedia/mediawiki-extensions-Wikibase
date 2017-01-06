@@ -12,8 +12,6 @@ use Wikibase\StringNormalizer;
  * deal with weird SpecialPage insanity (ie $this->mFile inclusion)
  * in every base class.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Bene* < benestar.wikimedia@gmail.com >
@@ -26,8 +24,6 @@ abstract class SpecialWikibasePage extends SpecialPage {
 	protected $stringNormalizer;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param string $name
 	 * @param string $restriction
 	 * @param bool   $listed
@@ -52,8 +48,6 @@ abstract class SpecialWikibasePage extends SpecialPage {
 	/**
 	 * @see SpecialPage::getDescription
 	 *
-	 * @since 0.1
-	 *
 	 * @return string
 	 */
 	public function getDescription() {
@@ -62,8 +56,6 @@ abstract class SpecialWikibasePage extends SpecialPage {
 
 	/**
 	 * @see SpecialPage::setHeaders
-	 *
-	 * @since 0.1
 	 */
 	public function setHeaders() {
 		$out = $this->getOutput();
@@ -73,8 +65,6 @@ abstract class SpecialWikibasePage extends SpecialPage {
 
 	/**
 	 * @see SpecialPage::execute
-	 *
-	 * @since 0.1
 	 *
 	 * @param string|null $subPage
 	 */

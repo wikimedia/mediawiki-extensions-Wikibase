@@ -9,7 +9,6 @@
  * @class jQuery.wikibase.snaklistview
  * @extends jQuery.ui.EditableTemplatedWidget
  * @uses jQuery.wikibase.listview
- * @since 0.4
  * @license GPL-2.0+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  * @author H. Snater < mediawiki@snater.com >
@@ -154,7 +153,6 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 	 * `singleProperty` option is set.)
 	 *
 	 * @private
-	 * @since 0.5
 	 */
 	_updatePropertyLabels: function() {
 		if ( this.options.singleProperty ) {

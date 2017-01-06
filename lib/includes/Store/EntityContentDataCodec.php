@@ -26,8 +26,6 @@ use Wikibase\DataModel\LegacyIdInterpreter;
  * to depend on EntityContent objects, which are only available on the
  * repo.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

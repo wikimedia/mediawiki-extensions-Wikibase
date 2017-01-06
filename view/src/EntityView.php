@@ -12,8 +12,6 @@ use Wikibase\View\Template\TemplateFactory;
  * Base class for creating views for all different kinds of Wikibase\DataModel\Entity\EntityDocument.
  * For the Wikibase\DataModel\Entity\EntityDocument this basically is what the Parser is for WikitextContent.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author H. Snater < mediawiki at snater.com >
  * @author Daniel Werner
@@ -65,8 +63,6 @@ abstract class EntityView {
 	/**
 	 * Builds and returns the HTML representing a whole WikibaseEntity.
 	 *
-	 * @since 0.1
-	 *
 	 * @param EntityDocument $entity the entity to render
 	 *
 	 * @return string HTML
@@ -90,8 +86,6 @@ abstract class EntityView {
 	/**
 	 * Returns the html used for the title of the page.
 	 * @see ParserOutput::setDisplayTitle
-	 *
-	 * @since 0.5
 	 *
 	 * @param EntityDocument $entity
 	 *

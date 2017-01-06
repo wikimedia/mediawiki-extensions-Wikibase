@@ -13,8 +13,6 @@ use Wikibase\DataModel\Entity\EntityId;
  * Formats a changes line for including changes from the Wikibase repo in
  * the client's recent changes, watchlist and related changes special pages.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler

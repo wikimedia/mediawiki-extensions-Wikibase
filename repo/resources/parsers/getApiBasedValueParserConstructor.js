@@ -12,8 +12,6 @@ var PARENT = vp.ValueParser;
 /**
  * Returns a constructor for a ValueParser which parses using the given wb.api.ParseValueCaller.
  *
- * @since 0.5
- *
  * This is necessary since valueParser.ValueParserStore returns a constructor, not an instance, and
  * we have to pass in the RepoApi wrapped in a wikibase.api.ParseValueCaller.
  *
@@ -26,7 +24,6 @@ wb.parsers.getApiBasedValueParserConstructor = function( apiValueParser ) {
 	 * 'parseValue' API module.
 	 * @constructor
 	 * @extends valueParsers.ValueParser
-	 * @since 0.5
 	 */
 	return util.inherit( 'WbApiBasedValueParser', PARENT, {
 		/**
@@ -37,7 +34,6 @@ wb.parsers.getApiBasedValueParserConstructor = function( apiValueParser ) {
 
 		/**
 		 * @see valueParsers.ValueParser.parse
-		 * @since 0.5
 		 *
 		 * @param {string} rawValue
 		 * @return {Object} jQuery Promise

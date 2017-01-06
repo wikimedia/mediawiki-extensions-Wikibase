@@ -96,8 +96,6 @@ use Wikibase\StringNormalizer;
 /**
  * Top level factory for the WikibaseClient extension.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
@@ -238,8 +236,6 @@ final class WikibaseClient {
 	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
 	 * Program logic should use WikibaseClient::getSnakFormatterFactory() instead!
 	 *
-	 * @since 0.5
-	 *
 	 * @return WikibaseValueFormatterBuilders
 	 */
 	public static function getDefaultValueFormatterBuilders() {
@@ -280,8 +276,6 @@ final class WikibaseClient {
 	/**
 	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
 	 * Program logic should use WikibaseClient::getSnakFormatterFactory() instead!
-	 *
-	 * @since 0.5
 	 *
 	 * @return WikibaseSnakFormatterBuilders
 	 */
@@ -338,8 +332,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @return DataTypeFactory
 	 */
 	public function getDataTypeFactory() {
@@ -351,8 +343,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @return EntityIdParser
 	 */
 	public function getEntityIdParser() {
@@ -366,8 +356,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return EntityIdComposer
 	 */
 	public function getEntityIdComposer() {
@@ -443,8 +431,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @return PropertyDataTypeLookup
 	 */
 	public function getPropertyDataTypeLookup() {
@@ -458,8 +444,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @return StringNormalizer
 	 */
 	public function getStringNormalizer() {
@@ -471,8 +455,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @return RepoLinker
 	 */
 	public function newRepoLinker() {
@@ -488,8 +470,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @return LanguageFallbackChainFactory
 	 */
 	public function getLanguageFallbackChainFactory() {
@@ -501,8 +481,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return LanguageFallbackLabelDescriptionLookupFactory
 	 */
 	public function getLanguageFallbackLabelDescriptionLookupFactory() {
@@ -515,8 +493,6 @@ final class WikibaseClient {
 
 	/**
 	 * Returns an instance of the default store.
-	 *
-	 * @since 0.1
 	 *
 	 * @throws Exception
 	 * @return ClientStore
@@ -577,8 +553,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @return Language
 	 */
 	public function getContentLanguage() {
@@ -586,8 +560,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @return SettingsArray
 	 */
 	public function getSettings() {
@@ -648,8 +620,6 @@ final class WikibaseClient {
 
 	/**
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
-	 *
-	 * @since 0.4
 	 *
 	 * @param string $reset Flag: Pass "reset" to reset the default instance
 	 *
@@ -1007,8 +977,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return OtherProjectsSidebarGeneratorFactory
 	 */
 	public function getOtherProjectsSidebarGeneratorFactory() {
@@ -1020,8 +988,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return EntityChangeFactory
 	 */
 	public function getEntityChangeFactory() {
@@ -1038,8 +1004,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return EntityDiffer
 	 */
 	public function getEntityDiffer() {

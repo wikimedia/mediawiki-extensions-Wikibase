@@ -10,8 +10,6 @@ use ValueParsers\StringValueParser;
 /**
  * Parser for monolingual text strings.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Thiemo Mättig

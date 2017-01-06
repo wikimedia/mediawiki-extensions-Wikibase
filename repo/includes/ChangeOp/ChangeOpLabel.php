@@ -14,8 +14,6 @@ use Wikibase\Summary;
 /**
  * Class for label change operation
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Daniel Kinzler
@@ -39,8 +37,6 @@ class ChangeOpLabel extends ChangeOpBase {
 	private $termValidatorFactory;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param string $languageCode
 	 * @param string|null $label
 	 * @param TermValidatorFactory $termValidatorFactory

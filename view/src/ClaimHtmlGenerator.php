@@ -16,8 +16,6 @@ use Wikibase\View\Template\TemplateFactory;
  *
  * @todo move Statement-specific formatting elsewhere.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  * @author Pragunbhutani
@@ -83,8 +81,6 @@ class ClaimHtmlGenerator {
 
 	/**
 	 * Builds and returns the HTML representing a single WikibaseEntity's statement.
-	 *
-	 * @since 0.4
 	 *
 	 * @param Statement $statement
 	 * @param string $editSectionHtml has the html for the edit section

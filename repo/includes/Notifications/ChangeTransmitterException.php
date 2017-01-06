@@ -7,8 +7,6 @@ use RuntimeException;
 /**
  * Exception for indication problems with change notifications.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

@@ -21,8 +21,6 @@ use Wikibase\ItemContent;
  * @covers Wikibase\EntityChange
  * @covers Wikibase\DiffChange
  *
- * @since 0.3
- *
  * @group Database
  * @group Wikibase
  * @group WikibaseChange
@@ -34,7 +32,6 @@ use Wikibase\ItemContent;
 class EntityChangeTest extends ChangeRowTest {
 
 	/**
-	 * @since 0.4
 	 * @return string
 	 */
 	protected function getRowClass() {
@@ -135,7 +132,6 @@ class EntityChangeTest extends ChangeRowTest {
 
 	/**
 	 * @dataProvider changeProvider
-	 * @since 0.4
 	 */
 	public function testToString( EntityChange $entityChange ) {
 		$string = $entityChange->__toString();

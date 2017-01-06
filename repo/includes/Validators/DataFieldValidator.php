@@ -14,8 +14,6 @@ use ValueValidators\ValueValidator;
  * If the respective field is missing or null, the validation will fail with
  * the code 'missing-field'
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

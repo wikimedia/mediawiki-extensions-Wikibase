@@ -16,8 +16,6 @@ require_once $basePath . '/maintenance/Maintenance.php';
 /**
  * Maintenance script for rebuilding the items_per_site table.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */
@@ -73,8 +71,6 @@ class RebuildItemsPerSite extends Maintenance {
 
 	/**
 	 * Outputs a message vis the output() method.
-	 *
-	 * @since 0.4
 	 *
 	 * @param string $msg
 	 */

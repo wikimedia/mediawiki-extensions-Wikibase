@@ -5,8 +5,6 @@ namespace Wikibase\Lib\Interactors;
 use Wikimedia\Assert\Assert;
 
 /**
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Addshore
  * @author Katie Filbert < aude.wiki@gmail.com >

@@ -14,8 +14,6 @@ use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 /**
  * @covers Wikibase\Repo\Hooks\OutputPageEntityIdReader
  *
- * @since 0.5
- *
  * @group Wikibase
  *
  * @license GPL-2.0+

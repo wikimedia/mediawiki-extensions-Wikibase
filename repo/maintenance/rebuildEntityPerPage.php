@@ -14,8 +14,6 @@ require_once $basePath . '/maintenance/Maintenance.php';
 /**
  * Maintenance script for rebuilding the items_per_page table.
  *
- * @since 0.3
- *
  * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
  * @author Katie Filbert < aude.wiki@gmail.com >
@@ -71,8 +69,6 @@ class RebuildEntityPerPage extends LoggedUpdateMaintenance {
 
 	/**
 	 * Outputs a message vis the output() method.
-	 *
-	 * @since 0.4
 	 *
 	 * @param string $msg
 	 */

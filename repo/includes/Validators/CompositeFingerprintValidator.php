@@ -9,8 +9,6 @@ use Wikibase\DataModel\Term\Fingerprint;
 /**
  * Composite validator for applying multiple validators as one.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

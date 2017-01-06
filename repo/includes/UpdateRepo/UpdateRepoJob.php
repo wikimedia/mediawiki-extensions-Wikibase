@@ -19,8 +19,6 @@ use Wikibase\SummaryFormatter;
 /**
  * Job template for updating the repo after a change in client.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */

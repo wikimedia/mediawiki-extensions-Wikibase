@@ -15,8 +15,6 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * Provides logic to update the repo after certain changes have been
  * performed in the client (like page moves).
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */
@@ -28,7 +26,6 @@ abstract class UpdateRepo {
 	private $repoDB;
 
 	/**
-	 * @since 0.4
 	 * @var User
 	 */
 	protected $user;
@@ -39,13 +36,11 @@ abstract class UpdateRepo {
 	private $siteLinkLookup;
 
 	/**
-	 * @since 0.4
 	 * @var string
 	 */
 	protected $siteId;
 
 	/**
-	 * @since 0.4
 	 * @var Title
 	 */
 	protected $title;

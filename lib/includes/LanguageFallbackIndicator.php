@@ -10,8 +10,6 @@ use Wikibase\DataModel\Term\TermFallback;
  * (typically labels and descriptions) that are the result of a language fallback chain and/or
  * transliteration visible to the user.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  * @author Thiemo Mättig

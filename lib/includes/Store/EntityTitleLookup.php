@@ -15,8 +15,6 @@ use Wikibase\DataModel\Entity\EntityId;
  *
  * The mapping could be programmatic, or it could be based on database lookups.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
@@ -29,8 +27,6 @@ interface EntityTitleLookup {
 	 * or a Title object referring to a page that does not exist.
 	 *
 	 * @todo change this to return a TitleValue
-	 *
-	 * @since 0.4
 	 *
 	 * @param EntityId $id
 	 *

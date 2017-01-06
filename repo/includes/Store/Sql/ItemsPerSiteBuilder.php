@@ -13,8 +13,6 @@ use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 /**
  * Utility class for rebuilding the wb_items_per_site table.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */
@@ -58,8 +56,6 @@ class ItemsPerSiteBuilder {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param int $batchSize
 	 */
 	public function setBatchSize( $batchSize ) {
@@ -76,8 +72,6 @@ class ItemsPerSiteBuilder {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param EntityIdPager $entityIdPager
 	 */
 	public function rebuild( EntityIdPager $entityIdPager ) {

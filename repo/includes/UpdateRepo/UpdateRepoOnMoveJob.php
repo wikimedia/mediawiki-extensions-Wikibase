@@ -17,8 +17,6 @@ use Wikibase\SummaryFormatter;
 /**
  * Job for updating the repo after a page on the client has been moved.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */

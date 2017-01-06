@@ -11,8 +11,6 @@ use Wikibase\DataModel\Services\Lookup\TermLookupException;
  *
  * @see UsageAccumulator
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

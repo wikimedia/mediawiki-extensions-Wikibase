@@ -41,8 +41,6 @@ use Wikibase\Store\EntityIdLookup;
  * Implementation of the client store interface using direct access to the repository's
  * database via MediaWiki's foreign wiki mechanism as implemented by LBFactoryMulti.
  *
- * @since 0.3
- *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
@@ -482,8 +480,6 @@ class DirectSqlStore implements ClientStore {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return EntityChangeLookup
 	 */
 	public function getEntityChangeLookup() {

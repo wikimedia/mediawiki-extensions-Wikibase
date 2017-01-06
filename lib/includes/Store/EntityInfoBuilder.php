@@ -12,8 +12,6 @@ use Wikibase\DataModel\Entity\EntityId;
  *
  * @see EntityInfoBuilderFactory
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

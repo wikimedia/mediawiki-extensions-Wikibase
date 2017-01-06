@@ -11,8 +11,6 @@ use Wikibase\Lib\UserLanguageLookup;
  *
  * The current implementation relies on the Babel extension, but that may change.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Thiemo Mättig

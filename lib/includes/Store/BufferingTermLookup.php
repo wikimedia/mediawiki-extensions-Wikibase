@@ -11,8 +11,6 @@ use Wikibase\TermIndexEntry;
 use Wikibase\TermIndex;
 
 /**
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

@@ -13,8 +13,6 @@ use Wikibase\LabelDescriptionDuplicateDetector;
  * Validator for checking that entity labels and aliases are unique (per language).
  * This is used to make sure that Properties have unique labels and aliases.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

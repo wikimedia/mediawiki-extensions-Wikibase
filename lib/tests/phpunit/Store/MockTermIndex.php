@@ -21,8 +21,6 @@ use Wikibase\TermIndexEntry;
  * interface and passing tests for that interface. Only then will TermPropertyLabelResolverTest
  * be a true blackbox test.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

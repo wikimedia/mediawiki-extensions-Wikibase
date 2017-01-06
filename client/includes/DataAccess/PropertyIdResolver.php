@@ -11,8 +11,6 @@ use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 /**
  * Resolves the PropertyId for the input, which might be a property label or prefixed id.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

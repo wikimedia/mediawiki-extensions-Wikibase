@@ -15,8 +15,6 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 /**
  * API module for getting wikis subscribed to changes to given entities.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Amir Sarabadani <ladsgroup@gmail.com>
  */

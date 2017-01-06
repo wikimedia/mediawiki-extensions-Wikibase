@@ -8,8 +8,6 @@ use ResourceLoaderModule;
 use Wikibase\Lib\SitesModuleWorker;
 
 /**
- * @since 0.2
- *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Werner < daniel.werner@wikimedia.de >
@@ -34,8 +32,6 @@ class SitesModule extends ResourceLoaderModule {
 	 * Used to propagate information about sites to JavaScript.
 	 * Sites infos will be available in 'wbSiteDetails' config var.
 	 * @see ResourceLoaderModule::getScript
-	 *
-	 * @since 0.2
 	 *
 	 * @param ResourceLoaderContext $context
 	 *

@@ -22,8 +22,6 @@ use Wikibase\Repo\DataTypeValidatorFactory;
 /**
  * Class SnakValidator for validating Snaks.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

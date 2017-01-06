@@ -5,8 +5,6 @@ namespace Wikibase;
 /**
  * Language sorting utility functions.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author Nikola Smolenski <smolensk@eunet.rs>
  * @author Katie Filbert < aude.wiki@gmail.com >
@@ -40,8 +38,6 @@ class InterwikiSorter {
 	private $sortOrder = null;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param string $sort
 	 * @param array[] $sortOrders
 	 * @param string[] $sortPrepend
@@ -55,8 +51,6 @@ class InterwikiSorter {
 	/**
 	 * Sort an array of links in-place
 	 * @version Copied from InterlanguageExtension rev 114818
-	 *
-	 * @since 0.1
 	 *
 	 * @param string[] $links
 	 *

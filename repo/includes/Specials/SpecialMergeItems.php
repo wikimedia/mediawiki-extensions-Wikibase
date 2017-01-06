@@ -20,8 +20,6 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * Special page for merging one item to another.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Daniel Kinzler
@@ -48,9 +46,6 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	 */
 	private $tokenCheck;
 
-	/**
-	 * @since 0.5
-	 */
 	public function __construct() {
 		parent::__construct( 'MergeItems', 'item-merge' );
 
@@ -129,8 +124,6 @@ class SpecialMergeItems extends SpecialWikibasePage {
 
 	/**
 	 * @see SpecialWikibasePage::execute
-	 *
-	 * @since 0.5
 	 *
 	 * @param string|null $subPage
 	 */

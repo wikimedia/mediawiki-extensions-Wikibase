@@ -10,7 +10,6 @@
  * in client wikis.
  * The widget can take a couple of arguments to make it work on pages and sites other than the
  * current one. All these options default to global state / the current page's attributes.
- * @since 0.4
  *
  * @option mwApiForRep {mediaWiki.Api} A mw.Api instance configured to use the repo's API.
  *

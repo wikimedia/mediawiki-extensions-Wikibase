@@ -313,8 +313,6 @@ class WikibaseRepo {
 	/**
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
-	 * @since 0.4
-	 *
 	 * @return self
 	 */
 	public static function getDefaultInstance() {
@@ -330,8 +328,6 @@ class WikibaseRepo {
 	/**
 	 * @warning This is for use with bootstrap code in WikibaseRepo.datatypes.php only!
 	 * Program logic should use WikibaseRepo::getDataTypeValidatorFactory() instead!
-	 *
-	 * @since 0.5
 	 *
 	 * @return ValidatorBuilders
 	 */
@@ -379,8 +375,6 @@ class WikibaseRepo {
 	 * @warning This is for use with bootstrap code in WikibaseRepo.datatypes.php only!
 	 * Program logic should use WikibaseRepo::getSnakFormatterFactory() instead!
 	 *
-	 * @since 0.5
-	 *
 	 * @return WikibaseValueFormatterBuilders
 	 */
 	public static function getDefaultValueFormatterBuilders() {
@@ -424,8 +418,6 @@ class WikibaseRepo {
 	 * @warning This is for use with bootstrap code in WikibaseRepo.datatypes.php only!
 	 * Program logic should use WikibaseRepo::getSnakFormatterFactory() instead!
 	 *
-	 * @since 0.5
-	 *
 	 * @return WikibaseSnakFormatterBuilders
 	 */
 	public static function getDefaultSnakFormatterBuilders() {
@@ -460,8 +452,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param SettingsArray $settings
 	 * @param DataTypeDefinitions $dataTypeDefinitions
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
@@ -488,8 +478,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @return DataTypeFactory
 	 */
 	public function getDataTypeFactory() {
@@ -501,8 +489,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return ValueParserFactory
 	 */
 	public function getValueParserFactory() {
@@ -521,8 +507,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @return DataValueFactory
 	 */
 	public function getDataValueFactory() {
@@ -530,8 +514,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @return EntityContentFactory
 	 */
 	public function getEntityContentFactory() {
@@ -542,8 +524,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return EntityChangeFactory
 	 */
 	public function getEntityChangeFactory() {
@@ -560,8 +540,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return EntityDiffer
 	 */
 	public function getEntityDiffer() {
@@ -574,8 +552,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return EntityPatcher
 	 */
 	public function getEntityPatcher() {
@@ -588,8 +564,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return EntityStoreWatcher
 	 */
 	public function getEntityStoreWatcher() {
@@ -597,8 +571,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return EntityTitleStoreLookup
 	 */
 	public function getEntityTitleLookup() {
@@ -606,8 +578,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return EntityIdLookup
 	 */
 	public function getEntityIdLookup() {
@@ -615,8 +585,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
 	 *
 	 * @return EntityRevisionLookup
@@ -626,8 +594,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param User $user
 	 * @param IContextSource $context
 	 *
@@ -661,8 +627,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param string $displayLanguageCode
 	 *
 	 * @return TermIndexSearchInteractor
@@ -677,8 +641,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return EntityStore
 	 */
 	public function getEntityStore() {
@@ -686,8 +648,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @return PropertyDataTypeLookup
 	 */
 	public function getPropertyDataTypeLookup() {
@@ -704,8 +664,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @return StringNormalizer
 	 */
 	public function getStringNormalizer() {
@@ -717,8 +675,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
 	 *
 	 * @return EntityLookup
@@ -728,8 +684,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return SnakFactory
 	 */
 	public function getSnakFactory() {
@@ -745,8 +699,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @return EntityIdParser
 	 */
 	public function getEntityIdParser() {
@@ -760,8 +712,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return EntityIdComposer
 	 */
 	public function getEntityIdComposer() {
@@ -775,8 +725,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return StatementGuidParser
 	 */
 	public function getStatementGuidParser() {
@@ -784,8 +732,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return ChangeOpFactoryProvider
 	 */
 	public function getChangeOpFactoryProvider() {
@@ -801,8 +747,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return SnakValidator
 	 */
 	public function getSnakValidator() {
@@ -814,8 +758,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @return LanguageFallbackChainFactory
 	 */
 	public function getLanguageFallbackChainFactory() {
@@ -827,8 +769,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return LanguageFallbackLabelDescriptionLookupFactory
 	 */
 	public function getLanguageFallbackLabelDescriptionLookupFactory() {
@@ -840,8 +780,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @return StatementGuidValidator
 	 */
 	public function getStatementGuidValidator() {
@@ -853,8 +791,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @return SettingsArray
 	 */
 	public function getSettings() {
@@ -862,8 +798,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @return Store
 	 */
 	public function getStore() {
@@ -1217,8 +1151,6 @@ class WikibaseRepo {
 
 	/**
 	 * Get the mapping of entity types => content models
-	 *
-	 * @since 0.5
 	 *
 	 * @return array
 	 */

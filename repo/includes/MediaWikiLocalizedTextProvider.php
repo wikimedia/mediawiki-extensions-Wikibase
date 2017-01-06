@@ -9,8 +9,6 @@ use Wikibase\View\LocalizedTextProvider;
 /**
  * A LocalizedTextProvider wrapping MediaWiki's message system
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */

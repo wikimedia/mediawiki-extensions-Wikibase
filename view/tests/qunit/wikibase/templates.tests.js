@@ -3,8 +3,6 @@
  *
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */

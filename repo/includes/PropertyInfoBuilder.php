@@ -12,8 +12,6 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 /**
  * Class to build the information about a property.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */

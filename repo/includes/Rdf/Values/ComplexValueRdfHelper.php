@@ -11,8 +11,6 @@ use Wikimedia\Purtle\RdfWriter;
 /**
  * Helper object for mapping DataValues to complex RDF structures (value nodes).
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Stas Malyshev

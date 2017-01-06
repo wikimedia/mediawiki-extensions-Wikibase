@@ -39,8 +39,6 @@ use Wikibase\RedirectRevision;
  *
  * Mock repository for use in tests.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Thiemo Mättig
@@ -118,7 +116,6 @@ class MockRepository implements
 	}
 
 	/**
-	 * @since 0.4
 	 * @see EntityRevisionLookup::getEntityRevision
 	 *
 	 * @param EntityId $entityId
@@ -178,8 +175,6 @@ class MockRepository implements
 
 	/**
 	 * See EntityLookup::hasEntity()
-	 *
-	 * @since 0.4
 	 *
 	 * @param EntityId $entityId
 	 *
@@ -373,8 +368,6 @@ class MockRepository implements
 	 * id in the $entityIds array or false for latest. If all should be latest, false
 	 * can be provided instead of an array.
 	 *
-	 * @since 0.4
-	 *
 	 * @param EntityId[] $entityIds
 	 *
 	 * @return EntityDocument|null[]
@@ -447,8 +440,6 @@ class MockRepository implements
 
 	/**
 	 * @see PropertyDataTypeLookup::getDataTypeIdForProperty
-	 *
-	 * @since 0.5
 	 *
 	 * @param PropertyId $propertyId
 	 *
@@ -725,8 +716,6 @@ class MockRepository implements
 	/**
 	 * Returns the IDs that redirect to (are aliases of) the given target entity.
 	 *
-	 * @since 0.5
-	 *
 	 * @param EntityId $targetId
 	 *
 	 * @return EntityId[]
@@ -746,8 +735,6 @@ class MockRepository implements
 
 	/**
 	 * Returns the redirect target associated with the given redirect ID.
-	 *
-	 * @since 0.5
 	 *
 	 * @param EntityId $entityId
 	 * @param string $forUpdate

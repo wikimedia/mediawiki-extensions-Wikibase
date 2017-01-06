@@ -8,8 +8,6 @@ use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
 use Wikibase\Client\WikibaseClient;
 
 /**
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Thiemo Mättig

@@ -14,8 +14,6 @@ use Wikibase\LabelDescriptionDuplicateDetector;
  * are unique (per language). This is used to make sure that no two items have the same
  * label and description.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

@@ -165,8 +165,6 @@
 	 *  labels below the top of the new viewport position to the first `Statement` and all labels
 	 *  above the viewport position to the last `Statement` in their group.
 	 *
-	 * @since 0.4
-	 *
 	 * @class jQuery.wikibase.statementgrouplabelscroll
 	 * @extends jQuery.Widget
 	 */
@@ -192,8 +190,6 @@
 
 		/**
 		 * Will update the position of the statementgroup labels the widget is controlling.
-		 *
-		 * @since 0.4
 		 */
 		update: function() {
 			var $visibleStatementviews

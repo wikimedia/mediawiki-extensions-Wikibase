@@ -10,8 +10,6 @@ use Wikibase\Client\OtherProjectsSitesGenerator;
 /**
  * @covers Wikibase\Client\OtherProjectsSitesGenerator
  *
- * @since 0.5
- *
  * @group WikibaseClient
  * @group Wikibase
  * @group Database

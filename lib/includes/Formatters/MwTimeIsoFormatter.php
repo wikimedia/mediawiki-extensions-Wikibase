@@ -10,8 +10,6 @@ use ValueFormatters\ValueFormatter;
 use ValueFormatters\ValueFormatterBase;
 
 /**
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  * @author Addshore

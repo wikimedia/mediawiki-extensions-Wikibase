@@ -16,8 +16,6 @@ use Wikibase\Summary;
 /**
  * Page for creating new Wikibase items.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author John Erling Blad < jeblad@gmail.com >
  */
@@ -36,7 +34,6 @@ class SpecialNewItem extends SpecialNewEntity {
 	private $siteLookup;
 
 	/**
-	 * @since 0.1
 	 * @param SiteLookup $siteLookup
 	 * @param SpecialPageCopyrightView $copyrightView
 	 */

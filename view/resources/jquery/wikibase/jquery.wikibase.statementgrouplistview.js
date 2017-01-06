@@ -11,7 +11,6 @@
  * @uses jQuery.wikibase.statementgrouplabelscroll
  * @uses jQuery.wikibase.listview
  * @uses jQuery.wikibase.listview.ListItemAdapter
- * @since 0.5
  * @extends jQuery.ui.TemplatedWidget
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >

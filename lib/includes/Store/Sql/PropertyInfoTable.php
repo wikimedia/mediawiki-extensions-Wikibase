@@ -17,8 +17,6 @@ use Wikimedia\Assert\Assert;
 /**
  * Class PropertyInfoTable implements PropertyInfoStore on top of an SQL table.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Bene* < benestar.wikimedia@gmail.com >

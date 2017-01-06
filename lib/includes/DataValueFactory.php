@@ -7,8 +7,6 @@ use Deserializers\Exceptions\DeserializationException;
 use InvalidArgumentException;
 
 /**
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
@@ -26,8 +24,6 @@ class DataValueFactory {
 
 	/**
 	 * Constructs and returns a new DataValue of specified type with the provided data.
-	 *
-	 * @since 0.1
 	 *
 	 * @param string $dataValueType
 	 * @param mixed  $data
@@ -55,8 +51,6 @@ class DataValueFactory {
 	/**
 	 * Constructs a DataValue from its array representation.
 	 * This is what @see DataValue::toArray returns.
-	 *
-	 * @since 0.1
 	 *
 	 * @param array $data
 	 *

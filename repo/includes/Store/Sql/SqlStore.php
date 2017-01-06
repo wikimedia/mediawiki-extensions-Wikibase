@@ -56,8 +56,6 @@ use WikiPage;
  * Implementation of the store interface using an SQL backend via MediaWiki's
  * storage abstraction layer.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
@@ -211,8 +209,6 @@ class SqlStore implements Store {
 	/**
 	 * @see Store::getTermIndex
 	 *
-	 * @since 0.4
-	 *
 	 * @return TermIndex
 	 */
 	public function getTermIndex() {
@@ -244,8 +240,6 @@ class SqlStore implements Store {
 
 	/**
 	 * @see Store::clear
-	 *
-	 * @since 0.1
 	 */
 	public function clear() {
 		$this->newSiteLinkStore()->clear();
@@ -255,8 +249,6 @@ class SqlStore implements Store {
 
 	/**
 	 * @see Store::rebuild
-	 *
-	 * @since 0.1
 	 */
 	public function rebuild() {
 		$dbw = wfGetDB( DB_MASTER );
@@ -288,8 +280,6 @@ class SqlStore implements Store {
 	/**
 	 * @see Store::newIdGenerator
 	 *
-	 * @since 0.1
-	 *
 	 * @return IdGenerator
 	 */
 	public function newIdGenerator() {
@@ -298,8 +288,6 @@ class SqlStore implements Store {
 
 	/**
 	 * @see Store::newSiteLinkStore
-	 *
-	 * @since 0.1
 	 *
 	 * @return SiteLinkStore
 	 */
@@ -310,8 +298,6 @@ class SqlStore implements Store {
 	/**
 	 * @see Store::newEntityPerPage
 	 *
-	 * @since 0.3
-	 *
 	 * @return EntityPerPage
 	 */
 	public function newEntityPerPage() {
@@ -320,8 +306,6 @@ class SqlStore implements Store {
 
 	/**
 	 * @see Store::newEntitiesWithoutTermFinder
-	 *
-	 * @since 0.5
 	 *
 	 * @return EntitiesWithoutTermFinder
 	 */
@@ -339,8 +323,6 @@ class SqlStore implements Store {
 	/**
 	 * @see Store::newItemsWithoutSitelinksFinder
 	 *
-	 * @since 0.5
-	 *
 	 * @return ItemsWithoutSitelinksFinder
 	 */
 	public function newItemsWithoutSitelinksFinder() {
@@ -350,8 +332,6 @@ class SqlStore implements Store {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return EntityRedirectLookup
 	 */
 	public function getEntityRedirectLookup() {
@@ -368,8 +348,6 @@ class SqlStore implements Store {
 	 *
 	 * The EntityLookup returned by this method will resolve redirects.
 	 *
-	 * @since 0.4
-	 *
 	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
 	 *
 	 * @return EntityLookup
@@ -384,8 +362,6 @@ class SqlStore implements Store {
 	/**
 	 * @see Store::getEntityStoreWatcher
 	 *
-	 * @since 0.5
-	 *
 	 * @return EntityStoreWatcher
 	 */
 	public function getEntityStoreWatcher() {
@@ -398,8 +374,6 @@ class SqlStore implements Store {
 
 	/**
 	 * @see Store::getEntityStore
-	 *
-	 * @since 0.5
 	 *
 	 * @return EntityStore
 	 */
@@ -425,8 +399,6 @@ class SqlStore implements Store {
 
 	/**
 	 * @see Store::getEntityRevisionLookup
-	 *
-	 * @since 0.4
 	 *
 	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
 	 *
@@ -494,8 +466,6 @@ class SqlStore implements Store {
 	/**
 	 * @see Store::getEntityInfoBuilderFactory
 	 *
-	 * @since 0.5
-	 *
 	 * @return EntityInfoBuilderFactory
 	 */
 	public function getEntityInfoBuilderFactory() {
@@ -517,8 +487,6 @@ class SqlStore implements Store {
 
 	/**
 	 * @see Store::getPropertyInfoLookup
-	 *
-	 * @since 0.5
 	 *
 	 * @return PropertyInfoLookup
 	 */
@@ -551,8 +519,6 @@ class SqlStore implements Store {
 
 	/**
 	 * @see Store::getPropertyInfoStore
-	 *
-	 * @since 0.4
 	 *
 	 * @return PropertyInfoStore
 	 */
@@ -616,8 +582,6 @@ class SqlStore implements Store {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return EntityChangeLookup
 	 */
 	public function getEntityChangeLookup() {
@@ -625,8 +589,6 @@ class SqlStore implements Store {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return SqlChangeStore
 	 */
 	public function getChangeStore() {

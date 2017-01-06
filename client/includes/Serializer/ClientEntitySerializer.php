@@ -11,8 +11,6 @@ use Wikibase\Lib\Serialization\CallbackFactory;
 use Wikibase\Lib\Serialization\SerializationModifier;
 
 /**
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Addshore
  */

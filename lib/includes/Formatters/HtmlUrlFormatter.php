@@ -11,8 +11,6 @@ use ValueFormatters\ValueFormatter;
 /**
  * Formats the StringValue from a "url" snak as an HTML link pointing to that URL.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

@@ -13,8 +13,6 @@ use Wikimedia\Assert\Assert;
 /**
  * A factory to create EntityView implementations by entity type based on callbacks.
  *
- * @since 0.5
- *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */

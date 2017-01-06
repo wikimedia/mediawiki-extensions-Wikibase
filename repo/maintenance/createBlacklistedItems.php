@@ -14,8 +14,6 @@ require_once $basePath . '/maintenance/Maintenance.php';
 /**
  * Maintenance script for creating blacklisted items.
  *
- * @since 0.2
- *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */

@@ -18,8 +18,6 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
  * loading entities from WikiPages (via Revision) or to verify an entity against
  * page.page_latest.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Marius Hoch < hoo@online.de >

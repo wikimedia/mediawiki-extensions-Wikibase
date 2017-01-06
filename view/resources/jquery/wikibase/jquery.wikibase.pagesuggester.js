@@ -7,7 +7,6 @@
 
 /**
  * Suggester enhanced input element for selecting a site link's page.
- * @since 0.5
  *
  * @option {string} [siteId]
  *

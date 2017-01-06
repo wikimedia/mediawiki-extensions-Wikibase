@@ -27,8 +27,6 @@ use WikiPage;
  *
  * @todo: move the actual implementation of the storage logic from EntityContent into this class.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
@@ -132,8 +130,6 @@ class WikiPageEntityStore implements EntityStore {
 
 	/**
 	 * Returns the WikiPage object for the item with provided entity.
-	 *
-	 * @since 0.5
 	 *
 	 * @param EntityId $entityId
 	 *

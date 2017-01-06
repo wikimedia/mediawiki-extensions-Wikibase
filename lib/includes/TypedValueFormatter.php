@@ -8,8 +8,6 @@ use ValueFormatters\FormattingException;
 /**
  * Provides a string representation for a DataValue given its associated DataType.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

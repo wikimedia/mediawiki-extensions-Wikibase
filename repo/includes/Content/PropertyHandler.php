@@ -30,8 +30,6 @@ use Wikibase\ViewEntityAction;
 /**
  * Content handler for Wikibase items.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
@@ -60,8 +58,6 @@ class PropertyHandler extends EntityHandler {
 
 	/**
 	 * @see EntityHandler::getContentClass
-	 *
-	 * @since 0.3
 	 *
 	 * @return string
 	 */
@@ -133,7 +129,6 @@ class PropertyHandler extends EntityHandler {
 
 	/**
 	 * @see EntityHandler::getSpecialPageForCreation
-	 * @since 0.2
 	 *
 	 * @return string
 	 */
@@ -154,8 +149,6 @@ class PropertyHandler extends EntityHandler {
 	 * Returns deletion updates for the given EntityContent.
 	 *
 	 * @see EntityHandler::getEntityDeletionUpdates
-	 *
-	 * @since 0.5
 	 *
 	 * @param EntityContent $content
 	 * @param Title $title
@@ -180,8 +173,6 @@ class PropertyHandler extends EntityHandler {
 	 * Returns modification updates for the given EntityContent.
 	 *
 	 * @see EntityHandler::getEntityModificationUpdates
-	 *
-	 * @since 0.5
 	 *
 	 * @param EntityContent $content
 	 * @param Title $title
@@ -208,8 +199,6 @@ class PropertyHandler extends EntityHandler {
 
 	/**
 	 * @see EntityHandler::makeEmptyEntity()
-	 *
-	 * @since 0.5
 	 *
 	 * @return EntityContent
 	 */

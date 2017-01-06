@@ -15,8 +15,6 @@ use Wikibase\DataModel\Services\Lookup\EntityAccessLimitException;
 /**
  * StatementGroupRenderer of the {{#property}} parser function.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

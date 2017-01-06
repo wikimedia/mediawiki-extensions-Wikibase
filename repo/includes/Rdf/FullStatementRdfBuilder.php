@@ -19,8 +19,6 @@ use Wikimedia\Purtle\RdfWriter;
  *
  * @see TruthyStatementRdfBuilder
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Stas Malyshev

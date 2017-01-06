@@ -12,8 +12,6 @@ use Wikibase\DataModel\SiteLink;
  * Note: This doesn't implement any means of purging or data invalidation beyond the cache
  * timeout.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */
@@ -98,8 +96,6 @@ class CachingSiteLinkLookup implements SiteLinkLookup {
 	/**
 	 * Returns an array of SiteLink objects for an item. If the item isn't known or not an Item,
 	 * an empty array is returned.
-	 *
-	 * @since 0.4
 	 *
 	 * @param ItemId $itemId
 	 *

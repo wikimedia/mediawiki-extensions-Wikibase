@@ -10,8 +10,6 @@ use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
 /**
  * Service for getting Items without sitelinks.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
  * @author Marius Hoch
@@ -32,8 +30,6 @@ class SqlItemsWithoutSitelinksFinder implements ItemsWithoutSitelinksFinder {
 
 	/**
 	 * Return all items without sitelinks.
-	 *
-	 * @since 0.5
 	 *
 	 * @param integer $limit Limit of the query.
 	 * @param integer $offset Offset of the query.

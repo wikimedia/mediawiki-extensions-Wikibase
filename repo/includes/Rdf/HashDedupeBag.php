@@ -33,8 +33,6 @@ namespace Wikibase\Rdf;
  *
  * - In all cases, before returning anything, set $this->bag[$key] = $hash.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

@@ -13,8 +13,6 @@ use ValueValidators\ValueValidator;
  * If the value is a DataValue object, it's native representation
  * ("array value") will be checked.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

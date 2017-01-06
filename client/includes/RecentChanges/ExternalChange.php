@@ -7,8 +7,6 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * Represents an external change
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */

@@ -11,8 +11,6 @@ use Wikibase\Store\EntityIdLookup;
 /**
  * Lookup of EntityIds based on wikibase_item entries in the page_props table.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

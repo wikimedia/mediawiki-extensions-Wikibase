@@ -9,8 +9,6 @@ use Wikibase\View\LanguageDirectionalityLookup;
  * Service for looking up language directionalities based on MediaWiki's Language
  * class.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */

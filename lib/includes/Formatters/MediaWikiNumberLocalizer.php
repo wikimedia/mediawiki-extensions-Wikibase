@@ -9,8 +9,6 @@ use ValueFormatters\NumberLocalizer;
 /**
  * Localizes a numeric string using MediaWiki's Language class.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

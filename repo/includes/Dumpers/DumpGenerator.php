@@ -18,8 +18,6 @@ use Wikibase\DataModel\Services\EntityId\EntityIdPager;
  * DumpGenerator generates a dump of a given set of entities, excluding
  * redirects.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

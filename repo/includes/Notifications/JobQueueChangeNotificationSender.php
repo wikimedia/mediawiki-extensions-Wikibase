@@ -8,8 +8,6 @@ use Wikibase\Change;
 /**
  * ChangeNotificationSender based on a JobQueueGroup and ChangeNotificationJob.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Marius Hoch

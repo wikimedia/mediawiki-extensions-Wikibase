@@ -21,8 +21,6 @@ use Wikibase\Store\EntityIdLookup;
 /**
  * @covers Wikibase\Repo\Hooks\LinkBeginHookHandler
  *
- * @since 0.5
- *
  * @group Database
  * @group Wikibase
  *

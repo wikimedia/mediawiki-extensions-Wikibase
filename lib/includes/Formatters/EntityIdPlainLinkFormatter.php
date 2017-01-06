@@ -9,8 +9,6 @@ use Wikibase\DataModel\Entity\EntityId;
  * without display text. This link can contain a namespace like [[Property:P42]].
  * LinkBeginHookHandler requires this exact format.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */

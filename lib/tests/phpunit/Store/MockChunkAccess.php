@@ -7,8 +7,6 @@ use Wikibase\ChunkAccess;
 /**
  * Mock implementation of the ChunkAccess interface
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

@@ -19,8 +19,6 @@ use Wikibase\Store\SubscriptionLookup;
 /**
  * Interactor class for dispatching change notifications to client wikis via the job queue.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

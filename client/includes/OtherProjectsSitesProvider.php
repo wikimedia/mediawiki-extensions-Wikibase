@@ -5,8 +5,6 @@ namespace Wikibase\Client;
 /**
  * Provides a list of sites that should be displayed in the "Other projects" sidebar
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */

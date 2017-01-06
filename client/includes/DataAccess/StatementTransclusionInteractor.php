@@ -14,8 +14,6 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 /**
  * Renders the main Snaks associated with a given Property on an Entity.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */

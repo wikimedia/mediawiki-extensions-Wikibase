@@ -16,8 +16,6 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * API module for creating entity redirects.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

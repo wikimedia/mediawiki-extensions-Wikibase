@@ -12,8 +12,6 @@ use ValueFormatters\ValueFormatterBase;
  * the message "The value is invalid and cannot be displayed" instead. The message can be changed
  * via an option.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */

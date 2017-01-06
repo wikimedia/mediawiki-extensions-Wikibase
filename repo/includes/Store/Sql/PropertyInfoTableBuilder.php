@@ -13,8 +13,6 @@ use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 /**
  * Utility class for rebuilding the wb_property_info table.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
@@ -128,8 +126,6 @@ class PropertyInfoTableBuilder {
 	 *
 	 * Database updates a batched into multiple transactions. Do not call this
 	 * method within an (explicit) database transaction.
-	 *
-	 * @since 0.4
 	 */
 	public function rebuildPropertyInfo() {
 		$dbw = $this->propertyInfoTable->getWriteConnection();

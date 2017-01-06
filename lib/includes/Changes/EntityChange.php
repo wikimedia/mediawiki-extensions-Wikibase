@@ -21,8 +21,6 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * Represents a change for an entity; to be extended by various change subtypes
  *
- * @since 0.3
- *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
@@ -207,8 +205,6 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param Revision $revision
 	 */
 	public function setRevisionInfo( Revision $revision ) {
@@ -246,8 +242,6 @@ class EntityChange extends DiffChange {
 
 	/**
 	 * Returns a human readable string representation of the change. Useful for logging and debugging.
-	 *
-	 * @since 0.4
 	 *
 	 * @return string
 	 */

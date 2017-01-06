@@ -8,8 +8,6 @@ use Wikibase\DataModel\Entity\EntityId;
  * Formats entity IDs by generating a wiki link to the corresponding page title
  * with the id serialization as text.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

@@ -22,8 +22,6 @@ require_once $basePath . '/maintenance/Maintenance.php';
 /**
  * Maintenance script for generating a dump of entities in the repository.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

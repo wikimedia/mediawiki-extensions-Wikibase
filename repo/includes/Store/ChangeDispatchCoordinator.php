@@ -13,8 +13,6 @@ use MWException;
  * to next in a fair manner, and to prevent multiple processes to try and dispatch to the
  * same wiki at once.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

@@ -15,8 +15,6 @@ use Wikibase\Summary;
 /**
  * Page for creating new Wikibase entities that contain a Fingerprint.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Jens Ohlig
@@ -43,7 +41,6 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 * @param string $name Name of the special page, as seen in links and URLs.
 	 * @param string $restriction User right required,
 	 * @param SpecialPageCopyrightView $copyrightView
-	 * @since 0.1
 	 */
 	public function __construct(
 		$name,
@@ -66,8 +63,6 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 
 	/**
 	 * @see SpecialWikibasePage::execute
-	 *
-	 * @since 0.1
 	 *
 	 * @param string|null $subPage
 	 */
@@ -106,16 +101,12 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	abstract protected function getFormFields();
 
 	/**
-	 * @since 0.1
-	 *
 	 * @return string Legend for the fieldset
 	 */
 	abstract protected function getLegend();
 
 	/**
 	 * Returns any warnings.
-	 *
-	 * @since 0.4
 	 *
 	 * @return string[] Warnings that should be presented to the user
 	 */

@@ -43,7 +43,6 @@ function mwMsgOrString( msgKey, string ) {
  *         language: <{string} language code of the language to fetch results in>
  *     } );
  *
- * @since 0.2
  * @class jQuery.wikibase.entityselector
  * @extends jQuery.ui.suggester
  * @uses jQuery.event.special.eachchange

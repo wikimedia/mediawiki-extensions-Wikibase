@@ -9,8 +9,6 @@ use ValueFormatters\ValueFormatter;
  * EscapingValueFormatter wraps another ValueFormatter and
  * applies a transformation (escaping) to that formatter's output.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

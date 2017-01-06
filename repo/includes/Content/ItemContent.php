@@ -16,8 +16,6 @@ use Wikibase\Repo\ItemSearchTextGenerator;
 /**
  * Content object for articles representing Wikibase items.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Bene* < benestar.wikimedia@gmail.com >
@@ -101,8 +99,6 @@ class ItemContent extends EntityContent {
 
 	/**
 	 * Create a new ItemContent object representing a redirect to the given item ID.
-	 *
-	 * @since 0.5
 	 *
 	 * @param EntityRedirect $redirect
 	 * @param Title $redirectTitle Title of the redirect target.

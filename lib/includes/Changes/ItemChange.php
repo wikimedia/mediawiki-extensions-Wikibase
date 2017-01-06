@@ -6,8 +6,6 @@ use Diff\DiffOp\Diff\Diff;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
 
 /**
- * @since 0.3
- *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
@@ -15,8 +13,6 @@ use Wikibase\DataModel\Services\Diff\ItemDiff;
 class ItemChange extends EntityChange {
 
 	/**
-	 * @since 0.3
-	 *
 	 * @return Diff
 	 */
 	public function getSiteLinkDiff() {

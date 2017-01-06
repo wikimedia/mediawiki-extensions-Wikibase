@@ -10,8 +10,6 @@ use Wikibase\Summary;
 /**
  * API module to set the terms for a Wikibase entity.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
@@ -23,8 +21,6 @@ abstract class ModifyTerm extends ModifyEntity {
 	 * Creates a Summary object based on the given API call parameters.
 	 * The Summary will be initializes with the appropriate action name
 	 * and target language. It will not have any summary arguments set.
-	 *
-	 * @since 0.4
 	 *
 	 * @param array $params
 	 *

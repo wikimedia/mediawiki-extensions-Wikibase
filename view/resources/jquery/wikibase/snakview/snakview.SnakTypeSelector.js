@@ -15,7 +15,6 @@
 	 * @see wikibase.datamodel.Snak
 	 * @class jQuery.wikibase.snakview.SnakTypeSelector
 	 * @extends jQuery.Widget
-	 * @since 0.4
 	 * @license GPL-2.0+
 	 * @author H. Snater < mediawiki@snater.com >
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >

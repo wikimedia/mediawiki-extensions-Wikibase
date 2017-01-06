@@ -8,8 +8,6 @@ use Language;
  * Service for looking up language names based on MediaWiki's Language
  * class.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher

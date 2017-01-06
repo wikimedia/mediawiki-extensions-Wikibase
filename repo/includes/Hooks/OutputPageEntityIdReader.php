@@ -11,8 +11,6 @@ use Wikibase\Repo\Content\EntityContentFactory;
 /**
  * Allows retrieving an EntityId based on a previously propagated OutputPage.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */

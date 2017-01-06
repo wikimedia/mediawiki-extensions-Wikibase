@@ -33,7 +33,6 @@
 	 * Entity store wrapping multiple EntityStore instances.
 	 * @constructor
 	 * @extends wikibase.store.EntityStore
-	 * @since 0.5
 	 *
 	 * @param {Object[]} stores
 	 */

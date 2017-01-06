@@ -7,7 +7,6 @@ var PARENT = $.wikibase.singlebuttontoolbar;
  * "Remove" toolbar widget by default offering a "remove" button.
  * @class jQuery.wikibase.removetoolbar
  * @extends jQuery.wikibase.singlebuttontoolbar
- * @since 0.4
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *

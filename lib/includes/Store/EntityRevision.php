@@ -8,8 +8,6 @@ use Wikibase\DataModel\Entity\EntityDocument;
 /**
  * Represents a revision of a Wikibase entity.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

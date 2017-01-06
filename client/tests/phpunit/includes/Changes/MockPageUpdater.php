@@ -12,8 +12,6 @@ use Wikibase\EntityChange;
  *
  * Used for testing ChangeHandler.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

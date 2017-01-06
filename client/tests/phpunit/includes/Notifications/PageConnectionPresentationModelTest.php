@@ -17,8 +17,6 @@ use Wikibase\Client\RepoLinker;
  *
  * @group Database
  * @group Wikibase
- *
- * @since 0.5
  */
 class PageConnectionPresentationModelTest extends MediaWikiTestCase {
 

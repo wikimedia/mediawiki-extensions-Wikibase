@@ -9,8 +9,6 @@ use ValueFormatters\ValueFormatterBase;
 use Wikibase\Lib\LanguageNameLookup;
 
 /**
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

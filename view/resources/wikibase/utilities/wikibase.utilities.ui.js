@@ -1,5 +1,4 @@
 /**
- *
  * @license GPL-2.0+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
@@ -28,8 +27,6 @@
 	 * pending quantity whereas the quantity can be 0 or higher. If the pending quantity is 0, it
 	 * will not be shown and only the fixed quantity will be displayed, otherwise it will be
 	 * displayed as "fixedQuantity +pendingQuantity kindOfQuantity", e.g. "32 +2"
-	 *
-	 * @since 0.4
 	 *
 	 * @param {number} fixedQuantity
 	 * @param {number} pendingQuantity

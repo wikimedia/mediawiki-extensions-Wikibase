@@ -14,8 +14,6 @@ use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 
 /**
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Addshore
  */

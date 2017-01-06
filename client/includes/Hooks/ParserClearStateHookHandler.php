@@ -6,8 +6,6 @@ use Parser;
 use Wikibase\Client\WikibaseClient;
 
 /**
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */

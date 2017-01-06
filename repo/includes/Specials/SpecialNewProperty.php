@@ -16,8 +16,6 @@ use Wikibase\Summary;
 /**
  * Page for creating new Wikibase properties.
  *
- * @since 0.2
- *
  * @license GPL-2.0+
  * @author John Erling Blad < jeblad@gmail.com >
  */
@@ -28,9 +26,6 @@ class SpecialNewProperty extends SpecialNewEntity {
 	const FIELD_DESCRIPTION = 'description';
 	const FIELD_ALIASES = 'aliases';
 
-	/**
-	 * @since 0.2
-	 */
 	public function __construct( SpecialPageCopyrightView $specialPageCopyrightView ) {
 		parent::__construct( 'NewProperty', 'property-create', $specialPageCopyrightView );
 	}

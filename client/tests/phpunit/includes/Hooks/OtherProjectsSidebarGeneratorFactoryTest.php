@@ -12,8 +12,6 @@ use Wikibase\Lib\Tests\MockRepository;
 /**
  * @covers Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory
  *
- * @since 0.5
- *
  * @group WikibaseClient
  * @group Wikibase
  *

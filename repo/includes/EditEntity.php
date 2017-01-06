@@ -26,8 +26,6 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  * Handler for editing activity, providing a unified interface for saving modified entities while performing
  * permission checks and handling edit conflicts.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
@@ -170,8 +168,6 @@ class EditEntity {
 	private $requiredPermissions = array( 'edit' );
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param EntityTitleStoreLookup $titleLookup
 	 * @param EntityRevisionLookup $entityLookup
 	 * @param EntityStore $entityStore
@@ -378,8 +374,6 @@ class EditEntity {
 	 *  - revision: Revision the new revision object
 	 *  - errorFlags: bit field indicating errors, see the XXX_ERROR constants.
 	 *
-	 * @since 0.1
-	 *
 	 * @return Status|null
 	 */
 	public function getStatus() {
@@ -389,8 +383,6 @@ class EditEntity {
 	/**
 	 * Determines whether the last call to attemptSave was successful.
 	 *
-	 * @since 0.1
-	 *
 	 * @return bool false if attemptSave() failed, true otherwise
 	 */
 	public function isSuccess() {
@@ -399,8 +391,6 @@ class EditEntity {
 
 	/**
 	 * Checks whether this EditEntity encountered any of the given error types while executing attemptSave().
-	 *
-	 * @since 0.1
 	 *
 	 * @param int $errorType bit field using the EditEntity::XXX_ERROR constants.
 	 *            Defaults to EditEntity::ANY_ERROR.

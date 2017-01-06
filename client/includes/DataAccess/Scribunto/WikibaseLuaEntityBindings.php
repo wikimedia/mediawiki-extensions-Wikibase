@@ -9,8 +9,6 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 /**
  * Actual implementations of the functions to access Wikibase through the Scribunto extension
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */
@@ -66,8 +64,6 @@ class WikibaseLuaEntityBindings {
 	 * Format the main Snaks belonging to a Statement (which is identified by a PropertyId
 	 * or the label of a Property) as wikitext escaped plain text.
 	 *
-	 * @since 0.5
-	 *
 	 * @param string $entityId
 	 * @param string $propertyLabelOrId
 	 * @param int[]|null $acceptableRanks
@@ -87,8 +83,6 @@ class WikibaseLuaEntityBindings {
 	/**
 	 * Format the main Snaks belonging to a Statement (which is identified by a PropertyId
 	 * or the label of a Property) as rich wikitext.
-	 *
-	 * @since 0.5
 	 *
 	 * @param string $entityId
 	 * @param string $propertyLabelOrId
@@ -111,8 +105,6 @@ class WikibaseLuaEntityBindings {
 	 * This is basically a helper function.
 	 * @TODO: Make this part of mw.site in the Scribunto extension.
 	 *
-	 * @since 0.5
-	 *
 	 * @return string
 	 */
 	public function getGlobalSiteId() {
@@ -123,8 +115,6 @@ class WikibaseLuaEntityBindings {
 	 * Get the language we are currently working with.
 	 * @TODO: Once T114640 has been implemented, this should probably be
 	 * generally exposed in Scribunto as parser target language.
-	 *
-	 * @since 0.5
 	 *
 	 * @return string
 	 */

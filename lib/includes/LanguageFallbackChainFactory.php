@@ -14,8 +14,6 @@ use User;
 /**
  * Object creating LanguageFallbackChain objects in Wikibase.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Liangent < liangent@gmail.com >
  */

@@ -13,8 +13,6 @@ use Wikibase\View\Template\TemplateFactory;
  * Class for creating views for Property instances.
  * For the Property this basically is what the Parser is for WikitextContent.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author Daniel Werner
  * @author H. Snater < mediawiki@snater.com >

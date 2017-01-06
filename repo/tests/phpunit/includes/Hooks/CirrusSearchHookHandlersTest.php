@@ -20,8 +20,6 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * @covers Wikibase\Repo\Hooks\CirrusSearchHookHandlers
  *
- * @since 0.5
- *
  * @group WikibaseElastic
  * @group Wikibase
  *

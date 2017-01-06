@@ -16,7 +16,6 @@
 	 * @see wikibase.datamodel.Snak
 	 * @class jQuery.wikibase.snakview.variations.Variation
 	 * @abstract
-	 * @since 0.4
 	 *
 	 * @constructor
 	 *
@@ -219,19 +218,11 @@
 		 */
 		stopEditing: function( dropValue ) {},
 
-		/**
-		 * @since 0.5
-		 */
 		disable: function() {},
 
-		/**
-		 * @since 0.5
-		 */
 		enable: function() {},
 
 		/**
-		 * @since 0.5
-		 *
 		 * @return {boolean}
 		 */
 		isFocusable: function() {

@@ -11,16 +11,11 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * Page for listing available datatypes.
  *
- * @since 0.2
- *
  * @license GPL-2.0+
  * @author Jens Ohlig
  */
 class SpecialListDatatypes extends SpecialWikibasePage {
 
-	/**
-	 * @since 0.2
-	 */
 	public function __construct() {
 		parent::__construct( 'ListDatatypes' );
 	}

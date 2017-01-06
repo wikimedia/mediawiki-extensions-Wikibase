@@ -16,8 +16,6 @@ use Wikibase\DataModel\Entity\EntityId;
  *
  * @todo Move to DataModel Services.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Thiemo Mättig
  */

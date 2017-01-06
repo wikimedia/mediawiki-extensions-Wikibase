@@ -15,8 +15,6 @@ use Wikibase\SettingsArray;
  * All functions in here are independent from the target language, meaning that
  * this class can be instantiated without knowing the target language.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  * @author Marius Hoch < hoo@online.de >
@@ -64,8 +62,6 @@ class WikibaseLanguageIndependentLuaBindings {
 	/**
 	 * Get entity id from page title.
 	 *
-	 * @since 0.5
-	 *
 	 * @param string $pageTitle
 	 *
 	 * @return string|null
@@ -93,7 +89,6 @@ class WikibaseLanguageIndependentLuaBindings {
 	/**
 	 * @param string $prefixedEntityId
 	 *
-	 * @since 0.5
 	 * @return string|null Null if no site link found.
 	 */
 	public function getSiteLinkPageName( $prefixedEntityId ) {

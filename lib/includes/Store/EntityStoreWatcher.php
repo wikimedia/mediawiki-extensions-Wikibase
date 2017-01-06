@@ -9,8 +9,6 @@ use Wikibase\EntityRevision;
 /**
  * Watcher interface for watching an EntityStore.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

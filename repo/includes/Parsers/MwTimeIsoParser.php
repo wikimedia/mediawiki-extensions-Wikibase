@@ -16,8 +16,6 @@ use ValueParsers\ValueParser;
  * Class to parse values that can be formatted by MWTimeIsoFormatter
  * This includes parsing of localized values
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Addshore
  * @author Marius Hoch

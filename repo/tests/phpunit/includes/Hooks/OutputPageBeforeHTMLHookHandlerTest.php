@@ -22,8 +22,6 @@ use Wikibase\View\Template\TemplateFactory;
 /**
  * @covers Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler
  *
- * @since 0.5
- *
  * @group Wikibase
  *
  * @license GPL-2.0+

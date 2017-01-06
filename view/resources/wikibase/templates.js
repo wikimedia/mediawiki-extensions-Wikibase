@@ -180,8 +180,6 @@
 	 * could interfere with templates, the simple parser is re-implemented in the Template
 	 * constructor.
 	 *
-	 * @since 0.4
-	 *
 	 * @constructor
 	 */
 	mw.WbTemplate = function() { mw.Message.apply( this, arguments ); };
@@ -220,8 +218,6 @@
 	 * Returns a template filled with the specified parameters, similar to wfTemplate().
 	 *
 	 * @see mw.message
-	 *
-	 * @since 0.2
 	 *
 	 * @param {string} key Key of the template to get.
 	 * @param {string|string[]|jQuery} [parameter1] First argument in a list of variadic arguments,
@@ -297,8 +293,6 @@
 	 * nodes.
 	 *
 	 * @see mw.template
-	 *
-	 * @since 0.3
 	 *
 	 * @param {string} template
 	 * @param {string|string[]|jQuery} parameter1 First argument in a list of variadic arguments,

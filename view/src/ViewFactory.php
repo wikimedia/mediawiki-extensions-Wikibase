@@ -18,8 +18,6 @@ use Wikibase\View\Template\TemplateFactory;
  * This is a basic factory to create views for DataModel objects. It contains all dependencies of
  * the views besides request-specific options. Those are required in the parameters.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Thiemo Mättig

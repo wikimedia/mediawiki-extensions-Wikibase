@@ -15,8 +15,6 @@ use Wikibase\EntityContent;
  * all string and text values present in the main snak of any
  * statement associated with an item.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

@@ -9,8 +9,6 @@ use Wikibase\ChangeRow;
 /**
  * @covers Wikibase\ChangeRow
  *
- * @since 0.2
- *
  * @group Database
  * @group Wikibase
  * @group WikibaseChange

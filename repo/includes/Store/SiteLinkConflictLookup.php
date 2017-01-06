@@ -8,8 +8,6 @@ use Wikibase\DataModel\Entity\Item;
 /**
  * Contains methods for looking up SiteLink conflicts
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */
@@ -23,8 +21,6 @@ interface SiteLinkConflictLookup {
 	 * - ItemId itemId
 	 * - string siteId
 	 * - string sitePage
-	 *
-	 * @since 0.5
 	 *
 	 * @param Item          $item
 	 * @param Database|null $db The database object to use (optional).

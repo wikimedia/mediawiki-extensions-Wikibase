@@ -8,8 +8,6 @@ use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 /**
  * Mock resolver, based on a MockRepository
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

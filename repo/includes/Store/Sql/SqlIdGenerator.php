@@ -10,8 +10,6 @@ use MWException;
  * Unique Id generator implemented using an SQL table.
  * The table needs to have the fields id_value and id_type.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */

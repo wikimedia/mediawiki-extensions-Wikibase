@@ -11,8 +11,6 @@ use Wikibase\DataModel\Term\Fingerprint;
  *
  * This is intended particularly for uniqueness checks.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
@@ -20,8 +18,6 @@ interface FingerprintValidator {
 
 	/**
 	 * Validate the given fingerprint.
-	 *
-	 * @since 0.5
 	 *
 	 * @param Fingerprint $fingerprint
 	 * @param EntityId $entityId Context for uniqueness checks. Conflicts with this

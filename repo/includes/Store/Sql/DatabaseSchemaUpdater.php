@@ -19,8 +19,6 @@ use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Marius Hoch
@@ -48,8 +46,6 @@ class DatabaseSchemaUpdater {
 	/**
 	 * Schema update to set up the needed database tables.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/LoadExtensionSchemaUpdates
-	 *
-	 * @since 0.5
 	 *
 	 * @param DatabaseUpdater $updater
 	 *

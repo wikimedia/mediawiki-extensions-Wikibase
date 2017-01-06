@@ -13,8 +13,6 @@ use Wikibase\DataModel\SiteLink;
  * Represents a lookup database table for sitelinks.
  * It should have these fields: ips_item_id, ips_site_id, ips_site_page.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
@@ -22,22 +20,16 @@ use Wikibase\DataModel\SiteLink;
 class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 
 	/**
-	 * @since 0.1
-	 *
 	 * @var string
 	 */
 	protected $table;
 
 	/**
-	 * @since 0.3
-	 *
 	 * @var bool
 	 */
 	protected $readonly;
 
 	/**
-	 * @since 0.1
-	 *
 	 * @param string $table The table to use for the sitelinks
 	 * @param bool $readonly Whether the table can be modified.
 	 * @param string|bool $wiki The wiki's database to connect to.
@@ -86,8 +78,6 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 
 	/**
 	 * @see SiteLinkStore::saveLinksOfItem
-	 *
-	 * @since 0.1
 	 *
 	 * @param Item $item
 	 *
@@ -183,8 +173,6 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 	/**
 	 * @see SiteLinkStore::deleteLinksOfItem
 	 *
-	 * @since 0.1
-	 *
 	 * @param ItemId $itemId
 	 *
 	 * @return boolean Success indicator
@@ -250,8 +238,6 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 
 	/**
 	 * @see SiteLinkStore::clear
-	 *
-	 * @since 0.2
 	 *
 	 * @return boolean Success indicator
 	 * @throws MWException

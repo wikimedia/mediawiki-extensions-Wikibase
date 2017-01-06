@@ -8,8 +8,6 @@ use ValueParsers\MonthNameProvider;
 /**
  * A MonthNameProvider using MediaWiki's localization infrastructure.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Thiemo Mättig
  */

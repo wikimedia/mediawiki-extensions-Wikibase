@@ -33,8 +33,6 @@ use Wikibase\Repo\Validators\UniquenessViolation;
  * @group WikibaseSpecialPage
  * @group Database
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author H. Snater < mediawiki@snater.com >

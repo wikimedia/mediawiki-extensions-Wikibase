@@ -5,8 +5,6 @@ namespace Wikibase\Client\UpdateRepo;
 /**
  * Provides logic to update the repo after page deletes in the client.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */

@@ -14,8 +14,6 @@ require_once $basePath . '/maintenance/Maintenance.php';
 /**
  * Maintenance script for rebuilding the property info table.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
@@ -77,8 +75,6 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 
 	/**
 	 * Outputs a message vis the output() method.
-	 *
-	 * @since 0.4
 	 *
 	 * @param string $msg
 	 */

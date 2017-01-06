@@ -11,8 +11,6 @@ use Wikibase\DataModel\Statement\Statement;
 /**
  * RDF vocabulary for use in mapping for wikibase data model.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >
  * @author Thomas Pellissier Tanon

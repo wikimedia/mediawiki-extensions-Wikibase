@@ -18,8 +18,6 @@ use Wikibase\EntityChange;
  * Interface for change handling. Whenever a change is detected,
  * it should be fed to this service which then takes care handling it.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
@@ -122,8 +120,6 @@ class ChangeHandler {
 	/**
 	 * Handle the provided changes.
 	 *
-	 * @since 0.1
-	 *
 	 * @param Change[] $changes
 	 */
 	public function handleChanges( array $changes ) {
@@ -146,8 +142,6 @@ class ChangeHandler {
 	 * Main entry point for handling changes
 	 *
 	 * @todo: process multiple changes at once!
-	 *
-	 * @since 0.1
 	 *
 	 * @param Change $change
 	 *

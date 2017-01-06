@@ -8,8 +8,6 @@ namespace Wikibase\View\Template;
  *
  * This class Stores plain templates.
  *
- * @since 0.2
- *
  * @license GPL-2.0+
  * @author H. Snater <mediawiki@snater.com>
  * @author Thiemo Mättig

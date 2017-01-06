@@ -38,8 +38,6 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 /**
  * File defining the hook handlers for the Wikibase Client extension.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Jens Ohlig
@@ -66,8 +64,6 @@ final class ClientHooks {
 	 * Hook to add PHPUnit test cases.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/UnitTestsList
 	 *
-	 * @since 0.1
-	 *
 	 * @param string[] &$paths
 	 *
 	 * @return bool
@@ -80,8 +76,6 @@ final class ClientHooks {
 
 	/**
 	 * External library for Scribunto
-	 *
-	 * @since 0.4
 	 *
 	 * @param string $engine
 	 * @param array $extraLibraries
@@ -100,8 +94,6 @@ final class ClientHooks {
 	/**
 	 * Hook for formatting recent changes linkes
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/OldChangesListRecentChangesLine
-	 *
-	 * @since 0.2
 	 *
 	 * @param ChangesList $changesList
 	 * @param string $s
@@ -193,8 +185,6 @@ final class ClientHooks {
 	/**
 	 * Add Wikibase item link in toolbox
 	 *
-	 * @since 0.4
-	 *
 	 * @param BaseTemplate $baseTemplate
 	 * @param array $toolbox
 	 *
@@ -249,8 +239,6 @@ final class ClientHooks {
 	 * @param OutputPage &$out
 	 * @param Skin &$skin
 	 *
-	 * @since 0.4
-	 *
 	 * @return bool
 	 */
 	public static function onBeforePageDisplayAddJsConfig( OutputPage &$out, Skin &$skin ) {
@@ -270,8 +258,6 @@ final class ClientHooks {
 	 * @param OutputPage &$out
 	 * @param Skin &$skin
 	 *
-	 * @since 0.1
-	 *
 	 * @return bool
 	 */
 	public static function onBeforePageDisplay( OutputPage &$out, Skin &$skin ) {
@@ -286,8 +272,6 @@ final class ClientHooks {
 
 	/**
 	 * Initialise beta feature preferences
-	 *
-	 * @since 0.5
 	 *
 	 * @param User $user
 	 * @param array $betaPreferences

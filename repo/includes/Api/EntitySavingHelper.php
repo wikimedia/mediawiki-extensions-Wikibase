@@ -22,8 +22,6 @@ use Wikibase\SummaryFormatter;
 /**
  * Helper class for api modules to save entities.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Addshore
  * @author Daniel Kinzler

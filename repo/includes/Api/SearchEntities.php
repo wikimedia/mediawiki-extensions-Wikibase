@@ -13,8 +13,6 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * API module to search for Wikibase entities.
  *
- * @since 0.2
- *
  * @license GPL-2.0+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >

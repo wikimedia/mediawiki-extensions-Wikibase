@@ -13,8 +13,6 @@ use Wikimedia\Assert\Assert;
 /**
  * Allows accessing changes stored in a database.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Marius Hoch
  */

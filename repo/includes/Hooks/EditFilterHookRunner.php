@@ -22,8 +22,6 @@ use WikiPage;
 /**
  * Class to run the EditFilterMergedContent hook
  *
- * @since 0.5
- *
  * @author Addshore
  */
 class EditFilterHookRunner {

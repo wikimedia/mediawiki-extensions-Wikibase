@@ -9,8 +9,6 @@ use Wikibase\Lib\Store\StorageException;
 /**
  * Service interface for looking up EntityIds given local wiki pages.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

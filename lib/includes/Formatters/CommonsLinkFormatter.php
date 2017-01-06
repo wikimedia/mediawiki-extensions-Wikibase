@@ -13,8 +13,6 @@ use ValueFormatters\ValueFormatter;
  * Formats the StringValue from a "commonsMedia" snak as an HTML link pointing to the file
  * description page on Wikimedia Commons.
  *
- * @since 0.5
- *
  * @todo Use MediaWiki renderer
  *
  * @license GPL-2.0+
@@ -41,8 +39,6 @@ class CommonsLinkFormatter implements ValueFormatter {
 	 * @see ValueFormatter::format
 	 *
 	 * Formats the given commons file name as an HTML link
-	 *
-	 * @since 0.5
 	 *
 	 * @param StringValue $value The commons file name to turn into a link
 	 *

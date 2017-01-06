@@ -10,8 +10,6 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 
 /**
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler

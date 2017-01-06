@@ -19,8 +19,6 @@ use Wikibase\Summary;
 /**
  * Special page for setting the sitepage of a Wikibase entity.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@googlemail.com >
  */
@@ -109,8 +107,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 	/**
 	 * @see SpecialModifyEntity::prepareArguments()
-	 *
-	 * @since 0.4
 	 *
 	 * @param string $subPage
 	 */

@@ -20,8 +20,6 @@ use Wikibase\SummaryFormatter;
 /**
  * An interactor implementing the use case of creating a redirect.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Addshore

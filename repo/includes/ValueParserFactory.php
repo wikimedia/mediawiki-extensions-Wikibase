@@ -25,8 +25,6 @@ class ValueParserFactory {
 	private $parsers = array();
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param callable[] $valueParsers An associative array mapping parser ids to
 	 *        factory functions.
 	 *
@@ -49,8 +47,6 @@ class ValueParserFactory {
 	/**
 	 * Returns the ValueParser identifiers.
 	 *
-	 * @since 0.1
-	 *
 	 * @return string[]
 	 */
 	public function getParserIds() {
@@ -59,8 +55,6 @@ class ValueParserFactory {
 
 	/**
 	 * Returns an instance of the ValueParser with the provided id or null if there is no such ValueParser.
-	 *
-	 * @since 0.1
 	 *
 	 * @param string $parserId
 	 * @param ParserOptions $parserOptions

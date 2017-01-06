@@ -17,8 +17,6 @@ use Wikibase\DataModel\Term\TermList;
  * This is a rather inefficient implementation of EntityInfoBuilder, intended
  * mainly for testing.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

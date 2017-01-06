@@ -9,8 +9,6 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\NamespaceChecker;
 
 /**
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Marius Hoch < hoo@online.de >
@@ -43,8 +41,6 @@ class RepoItemLinkGenerator {
 	private $siteGlobalId;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param NamespaceChecker $namespaceChecker
 	 * @param RepoLinker       $repoLinker
 	 * @param EntityIdParser   $entityIdParser
@@ -66,8 +62,6 @@ class RepoItemLinkGenerator {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param Title $title
 	 * @param string $action
 	 * @param bool $hasLangLinks

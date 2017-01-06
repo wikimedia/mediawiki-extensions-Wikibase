@@ -20,8 +20,6 @@ use Wikibase\TermIndex;
 /**
  * (Incomplete) ClientStore mock
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */
@@ -165,8 +163,6 @@ class MockClientStore implements ClientStore {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return RecentChangesDuplicateDetector|null
 	 */
 	public function getRecentChangesDuplicateDetector() {
@@ -212,8 +208,6 @@ class MockClientStore implements ClientStore {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return UsageUpdater
 	 */
 	public function getUsageUpdater() {

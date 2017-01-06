@@ -11,8 +11,6 @@ use Wikibase\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 
 /**
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Amir Sarabadani <ladsgroup@gmail.com>
  */

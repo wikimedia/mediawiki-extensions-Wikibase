@@ -16,8 +16,6 @@ use Wikibase\EntityRevision;
  * @see EntityLookup
  * @see EntityRevisionLookup
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
@@ -70,8 +68,6 @@ interface EntityStore {
 
 	/**
 	 * Saves the given EntityRedirect to some underlying storage mechanism.
-	 *
-	 * @since 0.5
 	 *
 	 * @param EntityRedirect $redirect the redirect to save.
 	 * @param string $summary the edit summary for the new revision.

@@ -9,8 +9,6 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 /**
  * Manages URIs for the linked data interface
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
@@ -32,8 +30,6 @@ class EntityDataUriManager {
 	private $entityTitleLookup;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param Title                $interfaceTitle
 	 * @param string[]             $supportedExtensions an associative Array mapping canonical format names to file extensions.
 	 * @param EntityTitleLookup    $entityTitleLookup

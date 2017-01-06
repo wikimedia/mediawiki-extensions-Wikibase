@@ -9,8 +9,6 @@ use ValueParsers\Normalizers\StringNormalizer;
  * Adapter implementing ValueParsers\Normalizers\StringNormalizer based on \Wikibase\StringNormalize.
  * Used to perform string normalization in StringParser.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

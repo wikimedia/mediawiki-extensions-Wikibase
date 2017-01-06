@@ -8,7 +8,6 @@
  * @see wikibase.datamodel.Reference
  * @class jQuery.wikibase.referenceview
  * @extends jQuery.ui.EditableTemplatedWidget
- * @since 0.4
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
@@ -185,8 +184,6 @@ $.widget( 'wikibase.referenceview', PARENT, {
 
 	/**
 	 * Starts the widget's edit mode.
-	 *
-	 * @since 0.5
 	 */
 	_startEditing: function() {
 		this._attachEditModeEventHandlers();
@@ -199,8 +196,6 @@ $.widget( 'wikibase.referenceview', PARENT, {
 
 	/**
 	 * Stops the widget's edit mode.
-	 *
-	 * @since 0.5
 	 */
 	_stopEditing: function() {
 		this._detachEditModeEventHandlers();
@@ -227,7 +222,6 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	 * Adds a pending `snaklistview` to the widget.
 	 *
 	 * @see jQuery.wikibase.listview.enterNewItem
-	 * @since 0.5
 	 *
 	 * @return {Object} jQuery.Promise
 	 * @return {Function} return.done

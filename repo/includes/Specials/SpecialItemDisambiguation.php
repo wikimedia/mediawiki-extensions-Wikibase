@@ -16,8 +16,6 @@ use Wikibase\TermIndexEntry;
  * Enables accessing items by providing the label of the item and the language of the label.
  * A result page is shown, disambiguating between multiple results if necessary.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -77,8 +75,6 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 
 	/**
 	 * @see SpecialWikibasePage::execute
-	 *
-	 * @since 0.1
 	 *
 	 * @param string|null $subPage
 	 */

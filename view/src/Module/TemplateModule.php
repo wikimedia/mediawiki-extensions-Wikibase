@@ -10,8 +10,6 @@ use Wikibase\View\Template\TemplateFactory;
 /**
  * Injects templates into JavaScript.
  *
- * @since 0.2
- *
  * @license GPL-2.0+
  * @author H. Snater <mediawiki@snater.com>
  */

@@ -18,7 +18,6 @@ function namespaceEventNames( eventNames, namespace ) {
 
 /**
  * Displays and allows editing multiple site links.
- * @since 0.5
  * @extends jQuery.ui.EditableTemplatedWidget
  *
  * @option {wikibase.datamodel.SiteLink[]} [value]

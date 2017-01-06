@@ -8,8 +8,6 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 /**
  * @covers Wikibase\Lib\Tests\Store\MockPropertyInfoLookup
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibasePropertyInfo
  * @group WikibaseStore

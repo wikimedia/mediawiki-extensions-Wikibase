@@ -13,8 +13,6 @@ use Wikibase\View\Template\TemplateFactory;
 /**
  * Generates HTML to display terms of an entity in a list.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Thiemo Mättig
  * @author Bene* < benestar.wikimedia@gmail.com >

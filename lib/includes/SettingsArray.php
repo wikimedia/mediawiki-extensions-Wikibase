@@ -27,8 +27,6 @@ use OutOfBoundsException;
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
@@ -37,8 +35,6 @@ class SettingsArray extends ArrayObject {
 
 	/**
 	 * Gets the value of the specified setting.
-	 *
-	 * @since 0.1
 	 *
 	 * @param string $settingName
 	 *
@@ -75,8 +71,6 @@ class SettingsArray extends ArrayObject {
 	/**
 	 * Sets the value of the specified setting.
 	 *
-	 * @since 0.1
-	 *
 	 * @param string $settingName
 	 * @param mixed $settingValue The desired value. If this is a closure, the closure will be
 	 *        called to get the actual setting value the first time this setting is retrieved
@@ -88,8 +82,6 @@ class SettingsArray extends ArrayObject {
 
 	/**
 	 * Returns if the specified settings is set or not.
-	 *
-	 * @since 0.1
 	 *
 	 * @param string $settingName
 	 *

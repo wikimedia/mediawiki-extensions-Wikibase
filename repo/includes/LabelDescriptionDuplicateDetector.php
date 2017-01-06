@@ -14,8 +14,6 @@ use Wikibase\Repo\Validators\UniquenessViolation;
  *
  * @see LabelConflictFinder
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
@@ -38,8 +36,6 @@ class LabelDescriptionDuplicateDetector {
 	 * label or alias for a given language as is present in $label or $aliases. If $aliases is null,
 	 * only conflicts between labels are considered. If $aliases is not null (but possibly empty),
 	 *  conflicts are also detected between labels and aliases, in any combination.
-	 *
-	 * @since 0.5
 	 *
 	 * @param string $entityType The type of entity to search for conflicts.
 	 * @param string[] $labels An associative array of labels,
@@ -90,8 +86,6 @@ class LabelDescriptionDuplicateDetector {
 	 * (other than the one given by $ignoreEntityId, if any) has the same combination of label and
 	 * non-empty description for a given language as is present tin the $label and $description
 	 * parameters.
-	 *
-	 * @since 0.5
 	 *
 	 * @param string $entityType The type of entity to search for conflicts.
 	 * @param string[] $labels An associative array of labels,

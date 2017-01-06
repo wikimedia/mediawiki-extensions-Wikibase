@@ -132,8 +132,6 @@ class EntityIdReader implements EntityIdPager {
 	 * @note: After some finite number of calls, this method should eventually return
 	 * an empty list of IDs, indicating that no more IDs are available.
 	 *
-	 * @since 0.5
-	 *
 	 * @param int $limit The maximum number of IDs to return.
 	 *
 	 * @return EntityId[] A list of EntityIds matching the given parameters. Will

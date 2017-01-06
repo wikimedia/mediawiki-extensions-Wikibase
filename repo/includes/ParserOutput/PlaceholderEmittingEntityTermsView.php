@@ -17,8 +17,6 @@ use Wikibase\View\Template\TemplateFactory;
 /**
  * An EntityTermsView that returns placeholders for some parts of the HTML
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */

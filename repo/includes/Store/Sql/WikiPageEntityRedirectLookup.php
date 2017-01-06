@@ -12,8 +12,6 @@ use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Store\EntityIdLookup;
 
 /**
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Marius Hoch
  */
@@ -51,8 +49,6 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 
 	/**
 	 * Returns the IDs that redirect to (are aliases of) the given target entity.
-	 *
-	 * @since 0.5
 	 *
 	 * @param EntityId $targetId
 	 *
@@ -111,8 +107,6 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 
 	/**
 	 * @see EntityRedirectLookup::getRedirectForEntityId
-	 *
-	 * @since 0.5
 	 *
 	 * @param EntityId $entityId
 	 * @param string $forUpdate

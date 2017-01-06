@@ -8,8 +8,6 @@ namespace Wikibase\Repo\ParserOutput;
  * cacheable HTML (in ParserOutput), and later replacing it with non-cacheable HTML
  * snippets (for use by OutputPage).
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

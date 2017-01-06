@@ -10,8 +10,6 @@ use Wikibase\DataModel\Entity\Property;
 /**
  * Content object for articles representing Wikibase properties.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Bene* < benestar.wikimedia@gmail.com >

@@ -12,8 +12,6 @@ use Wikibase\DataModel\Entity\EntityDocument;
  * type defined in the mapping. (e.g. nested must be array,
  * integer field must get an int, etc)
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */

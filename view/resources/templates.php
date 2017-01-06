@@ -6,8 +6,6 @@ namespace Wikibase;
  * Contains templates commonly used in server-side output generation and client-side JavaScript
  * processing.
  *
- * @since 0.2
- *
  * @license GPL-2.0+
  * @author H. Snater <mediawiki@snater.com>
  *

@@ -14,8 +14,6 @@ use Wikibase\Repo\WikibaseRepo;
  * API module to associate a page on a site with a Wikibase entity or remove an already made such association.
  * Requires API write mode to be enabled.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

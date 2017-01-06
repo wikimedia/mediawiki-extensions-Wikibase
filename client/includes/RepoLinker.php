@@ -7,8 +7,6 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
- * @since 0.2
- *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
@@ -39,8 +37,6 @@ class RepoLinker {
 	 * Get namespace of an entity in string format
 	 * @todo: need a better way to have knowledge of repo namespace mappings
 	 *
-	 * @since 0.5
-	 *
 	 * @param string $entityType
 	 *
 	 * @return string
@@ -65,8 +61,6 @@ class RepoLinker {
 	}
 
 	/**
-	 * @since 0.3
-	 *
 	 * @param string $page
 	 *
 	 * @throws InvalidArgumentException
@@ -93,8 +87,6 @@ class RepoLinker {
 	/**
 	 * Format a link, with url encoding
 	 *
-	 * @since 0.5
-	 *
 	 * @param string $url
 	 * @param string $text
 	 * @param array $attribs
@@ -113,8 +105,6 @@ class RepoLinker {
 
 	/**
 	 * Constructs an html link to an entity
-	 *
-	 * @since 0.4
 	 *
 	 * @param EntityId $entityId
 	 * @param array $classes

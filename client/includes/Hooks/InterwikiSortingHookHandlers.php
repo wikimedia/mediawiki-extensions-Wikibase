@@ -14,8 +14,6 @@ use Wikibase\NoLangLinkHandler;
 use Wikibase\SettingsArray;
 
 /**
- * @since 0.5
- *
  * @license GPL-2.0+
  */
 class InterwikiSortingHookHandlers {

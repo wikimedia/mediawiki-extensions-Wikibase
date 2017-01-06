@@ -9,8 +9,6 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * API module to query available badge items.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
@@ -18,8 +16,6 @@ class AvailableBadges extends ApiBase {
 
 	/**
 	 * @see ApiBase::execute
-	 *
-	 * @since 0.5
 	 */
 	public function execute() {
 		$this->getMain()->setCacheMode( 'public' );

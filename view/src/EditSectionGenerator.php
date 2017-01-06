@@ -9,8 +9,6 @@ use Wikibase\DataModel\Statement\Statement;
 /**
  * Generates HTML for a section edit link
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
@@ -19,8 +17,6 @@ interface EditSectionGenerator {
 	/**
 	 * Returns HTML allowing to edit site links.
 	 *
-	 * @since 0.5
-	 *
 	 * @param EntityId|null $entityId
 	 * @return string HTML
 	 */
@@ -28,8 +24,6 @@ interface EditSectionGenerator {
 
 	/**
 	 * Returns HTML allowing to edit label, description and aliases.
-	 *
-	 * @since 0.5
 	 *
 	 * @param string $languageCode
 	 * @param EntityId|null $entityId
@@ -40,8 +34,6 @@ interface EditSectionGenerator {
 	/**
 	 * Returns HTML allowing to edit a statement
 	 *
-	 * @since 0.5
-	 *
 	 * @param Statement $statement
 	 * @return string HTML
 	 */
@@ -49,8 +41,6 @@ interface EditSectionGenerator {
 
 	/**
 	 * Returns HTML allowing to add a statement to a statementgroup
-	 *
-	 * @since 0.5
 	 *
 	 * @param PropertyId $propertyId The property of the statement group
 	 * @param EntityId|null $entityId The id of the entity on which to add a statement

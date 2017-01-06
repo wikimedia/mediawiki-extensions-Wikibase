@@ -8,8 +8,6 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 /**
  * A factory interface for generating EntityIdFormatters.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

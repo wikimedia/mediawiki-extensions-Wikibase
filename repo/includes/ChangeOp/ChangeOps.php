@@ -10,8 +10,6 @@ use Wikibase\Summary;
 /**
  * Class for holding a batch of change operations
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Thiemo Mättig
@@ -24,8 +22,6 @@ class ChangeOps implements ChangeOp {
 	private $changeOps = array();
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param ChangeOp|ChangeOp[] $changeOps
 	 *
 	 * @throws InvalidArgumentException
@@ -36,8 +32,6 @@ class ChangeOps implements ChangeOp {
 
 	/**
 	 * Adds one change operation or a list of change operations.
-	 *
-	 * @since 0.4
 	 *
 	 * @param ChangeOp|ChangeOp[] $changeOps
 	 *
@@ -62,8 +56,6 @@ class ChangeOps implements ChangeOp {
 	/**
 	 * Get the array of change operations.
 	 *
-	 * @since 0.4
-	 *
 	 * @return ChangeOp[]
 	 */
 	public function getChangeOps() {
@@ -72,8 +64,6 @@ class ChangeOps implements ChangeOp {
 
 	/**
 	 * Applies all changes to the given entity
-	 *
-	 * @since 0.4
 	 *
 	 * @param EntityDocument $entity
 	 * @param Summary|null $summary
@@ -88,8 +78,6 @@ class ChangeOps implements ChangeOp {
 
 	/**
 	 * @see ChangeOp::validate()
-	 *
-	 * @since 0.5
 	 *
 	 * @param EntityDocument $entity
 	 *

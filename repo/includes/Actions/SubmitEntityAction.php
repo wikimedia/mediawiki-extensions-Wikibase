@@ -18,8 +18,6 @@ use WikiPage;
  * This performs the undo and restore operations when requested.
  * Otherwise it will just show the normal entity view.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Jens Ohlig

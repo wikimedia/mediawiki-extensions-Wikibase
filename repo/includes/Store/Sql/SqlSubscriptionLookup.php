@@ -10,8 +10,6 @@ use Wikibase\Store\SubscriptionLookup;
 /**
  * Implementation of SubscriptionLookup based on a database table.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

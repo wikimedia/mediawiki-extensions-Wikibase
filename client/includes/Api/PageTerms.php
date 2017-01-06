@@ -19,8 +19,6 @@ use Wikibase\TermIndexEntry;
  * pageterms with titles=Washington_DC would include that label and description
  * in the response.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

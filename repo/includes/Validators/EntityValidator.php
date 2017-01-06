@@ -11,8 +11,6 @@ use Wikibase\DataModel\Entity\EntityDocument;
  *
  * @see EntityConstraintProivder
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
@@ -21,8 +19,6 @@ interface EntityValidator {
 	/**
 	 * Validate an entity before saving.
 	 * This is intended for enforcing "hard" global constraints.
-	 *
-	 * @since 0.5
 	 *
 	 * @param EntityDocument $entity The entity to validate
 	 *

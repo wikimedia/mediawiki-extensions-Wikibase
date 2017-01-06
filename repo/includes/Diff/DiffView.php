@@ -20,8 +20,6 @@ use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 /**
  * Class for generating views of DiffOp objects.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -57,8 +55,6 @@ class DiffView extends ContextSource {
 	private $siteLinkPath;
 
 	/**
-	 * @since 0.1
-	 *
 	 * @param string[] $path
 	 * @param Diff $diff
 	 * @param SiteLookup $siteLookup
@@ -86,8 +82,6 @@ class DiffView extends ContextSource {
 
 	/**
 	 * Builds and returns the HTML to represent the Diff.
-	 *
-	 * @since 0.1
 	 *
 	 * @return string
 	 */

@@ -35,8 +35,6 @@ use Wikibase\Summary;
  * Derived class for API modules modifying a single entity identified by id xor a combination of
  * site and page title.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler

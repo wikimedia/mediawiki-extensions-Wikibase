@@ -8,7 +8,6 @@
 	 *
 	 * @class wikibase.view.StructureEditorFactory
 	 * @license GPL-2.0+
-	 * @since 0.5
 	 * @author Adrian Heine <adrian.heine@wikimedia.de>
 	 * @constructor
 	 */

@@ -13,8 +13,6 @@ use Wikibase\View\Template\TemplateFactory;
 /**
  * Base class for generating Snak html.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  * @author Pragunbhutani

@@ -9,8 +9,6 @@ use MediaWiki\MediaWikiServices;
 /**
  * Utility class for rebuilding the term_search_key field.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
@@ -48,8 +46,6 @@ class TermSearchKeyBuilder {
 	private $batchSize = 100;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param TermSqlIndex $table
 	 */
 	public function __construct( TermSqlIndex $table ) {
@@ -92,8 +88,6 @@ class TermSearchKeyBuilder {
 	 *
 	 * Database updates a batched into multiple transactions. Do not call this
 	 * method whithin an (explicite) database transaction.
-	 *
-	 * @since 0.4
 	 */
 	public function rebuildSearchKey() {
 		$dbw = $this->table->getWriteDb();

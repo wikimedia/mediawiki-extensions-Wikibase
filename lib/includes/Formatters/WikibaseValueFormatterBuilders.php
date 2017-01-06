@@ -27,8 +27,6 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  * Program logic should use an instance of OutputFormatValueFormatterFactory
  * resp. OutputFormatSnakFormatterFactory.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

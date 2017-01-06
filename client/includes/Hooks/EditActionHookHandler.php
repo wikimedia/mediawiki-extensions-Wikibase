@@ -13,8 +13,6 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 
 /**
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Amir Sarabadani < ladsgroup@gmail.com >
  */

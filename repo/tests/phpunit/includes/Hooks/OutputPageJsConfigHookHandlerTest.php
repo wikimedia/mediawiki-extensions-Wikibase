@@ -13,8 +13,6 @@ use Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler;
 /**
  * @covers Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler
  *
- * @since 0.5
- *
  * @group Wikibase
  * @group Database
  *

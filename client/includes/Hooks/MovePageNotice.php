@@ -13,8 +13,6 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * Gets a notice about the Wikibase Item belonging to the current page
  * after a move (in case there's one).
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */
@@ -62,8 +60,6 @@ class MovePageNotice {
 	 * Hook for injecting a message on [[Special:MovePage]]
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialMovepageAfterMove
 	 *
-	 * @since 0.5
-	 *
 	 * @param MovePageForm $movePage
 	 * @param Title &$oldTitle
 	 * @param Title &$newTitle
@@ -80,8 +76,6 @@ class MovePageNotice {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param MovePageForm $movePage
 	 * @param Title &$oldTitle
 	 * @param Title &$newTitle

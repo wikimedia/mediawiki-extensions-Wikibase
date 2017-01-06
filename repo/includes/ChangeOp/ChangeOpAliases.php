@@ -13,8 +13,6 @@ use Wikibase\Summary;
 /**
  * Class for aliases change operation
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Daniel Kinzler
@@ -42,8 +40,6 @@ class ChangeOpAliases extends ChangeOpBase {
 	private $termValidatorFactory;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param string $languageCode
 	 * @param string[] $aliases
 	 * @param string $action should be set|add|remove

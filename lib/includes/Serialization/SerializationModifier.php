@@ -7,7 +7,6 @@ namespace Wikibase\Lib\Serialization;
  *
  * This could easily be factored out into a library.
  *
- * @since 0.5
  * @author Addshore
  */
 class SerializationModifier {

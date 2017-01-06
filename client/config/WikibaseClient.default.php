@@ -9,8 +9,6 @@ use Wikibase\SettingsArray;
  * This file is NOT an entry point the Wikibase Client extension. Use WikibaseClient.php.
  * It should furthermore not be included from outside the extension.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

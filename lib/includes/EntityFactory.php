@@ -20,8 +20,6 @@ class EntityFactory {
 	private $instantiators;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param callable[] $instantiators Array mapping entity type identifiers to callbacks returning
 	 *  a new, empty entity of that type.
 	 */
@@ -32,8 +30,6 @@ class EntityFactory {
 	}
 
 	/**
-	 * @since 0.3
-	 *
 	 * @param string $entityType
 	 *
 	 * @throws OutOfBoundsException

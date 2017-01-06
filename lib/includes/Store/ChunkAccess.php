@@ -6,8 +6,6 @@ namespace Wikibase;
  * Interface for DAO objects providing chunked access based on sequential indexes.
  * "holes" in the index sequence are acceptable but should not be frequent.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

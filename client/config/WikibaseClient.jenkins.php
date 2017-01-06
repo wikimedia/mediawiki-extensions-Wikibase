@@ -5,8 +5,6 @@
  *
  * NOTE: Ideally, no such overrides should be needed, as tests should be self-contained.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

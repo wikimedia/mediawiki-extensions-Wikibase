@@ -14,8 +14,6 @@ use Wikimedia\Assert\Assert;
 /**
  * Service for getting entities without terms.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
  * @author Daniel Kinzler
@@ -59,8 +57,6 @@ class SqlEntitiesWithoutTermFinder implements EntitiesWithoutTermFinder {
 
 	/**
 	 * @see EntitiesWithoutTermFinder::getEntitiesWithoutTerm
-	 *
-	 * @since 0.2
 	 *
 	 * @param string $termType Can be any member of the TermIndexEntry::TYPE_ enum
 	 * @param string|null $language Restrict the search for one language. By default the search is done for all languages.

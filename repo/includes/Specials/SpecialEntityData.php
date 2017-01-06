@@ -19,8 +19,6 @@ use Wikibase\Repo\WikibaseRepo;
  * Note that this is implemented as a special page and not a per-page action, so there is no need
  * for the web server to map ID prefixes to wiki namespaces.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Thomas Pellissier Tanon
@@ -33,9 +31,6 @@ class SpecialEntityData extends SpecialWikibasePage {
 	 */
 	private $requestHandler = null;
 
-	/**
-	 * @since 0.4
-	 */
 	public function __construct() {
 		parent::__construct( 'EntityData' );
 	}
@@ -140,8 +135,6 @@ class SpecialEntityData extends SpecialWikibasePage {
 
 	/**
 	 * @see SpecialWikibasePage::execute
-	 *
-	 * @since 0.4
 	 *
 	 * @param string|null $subPage
 	 *

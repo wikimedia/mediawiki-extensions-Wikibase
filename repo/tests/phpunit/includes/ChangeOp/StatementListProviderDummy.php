@@ -10,8 +10,6 @@ use Wikibase\DataModel\Statement\StatementListProvider;
 /**
  * A dummy entity for tests only.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Thiemo Mättig
  */

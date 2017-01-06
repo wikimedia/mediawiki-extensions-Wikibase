@@ -13,8 +13,6 @@ use Wikibase\Lib\Store\StorageException;
  * Actual implementations of various functions to access Wikibase functionality
  * through Scribunto. Functions in here can dependend on the target language.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  * @author Marius Hoch < hoo@online.de >
@@ -57,7 +55,6 @@ class WikibaseLanguageDependentLuaBindings {
 	/**
 	 * @param string $prefixedEntityId
 	 *
-	 * @since 0.5
 	 * @return string[]|null[] Array containing label, label language code.
 	 *     Null for both, if entity couldn't be found/ no label present.
 	 */
@@ -88,7 +85,6 @@ class WikibaseLanguageDependentLuaBindings {
 	/**
 	 * @param string $prefixedEntityId
 	 *
-	 * @since 0.5
 	 * @return string[]|null[] Array containing description, description language code.
 	 *     Null for both, if entity couldn't be found/ no description present.
 	 */

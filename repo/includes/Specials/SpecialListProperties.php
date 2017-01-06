@@ -19,8 +19,6 @@ use Wikibase\View\EntityIdFormatterFactory;
 /**
  * Special page to list properties by data type
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Addshore
@@ -120,8 +118,6 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 
 	/**
 	 * @see SpecialWikibasePage::execute
-	 *
-	 * @since 0.5
 	 *
 	 * @param string|null $subPage
 	 */
@@ -270,8 +266,6 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 
 	/**
 	 * @see SpecialWikibaseQueryPage::getTitleForNavigation
-	 *
-	 * @since 0.4
 	 */
 	protected function getTitleForNavigation() {
 		return $this->getPageTitle( $this->dataType );

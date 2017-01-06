@@ -23,8 +23,6 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
  * * If ValueFormatter::OPT_LANG is set, a LanguageLabelDescriptionLookup is created
  * * If none of these options is set, an InvalidArgumentException is thrown.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

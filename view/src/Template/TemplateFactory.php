@@ -3,8 +3,6 @@
 namespace Wikibase\View\Template;
 
 /**
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  * @author Thiemo Mättig
@@ -60,8 +58,6 @@ class TemplateFactory {
 	 *
 	 * important! note that the Template class does not escape anything.
 	 * be sure to escape your params before using this function!
-	 *
-	 * @since 0.2
 	 *
 	 * @param string $key template key
 	 * Varargs: normal template parameters

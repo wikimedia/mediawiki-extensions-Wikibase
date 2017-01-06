@@ -8,8 +8,6 @@ use MWNamespace;
 /**
  * Checks if a namespace in Wikibase Client shall have wikibase links, etc., based on settings
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
@@ -27,8 +25,6 @@ class NamespaceChecker {
 	private $enabledNamespaces;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param int[] $excludedNamespaces
 	 * @param int[] $enabledNamespaces if empty, setting not in use and all namespaces enabled
 	 */
@@ -40,8 +36,6 @@ class NamespaceChecker {
 	/**
 	 * Per the settings, does the namespace have wikibase enabled?
 	 * note: excludeNamespaces, if set, overrides namespace (inclusion) settings
-	 *
-	 * @since 0.4
 	 *
 	 * @param int $namespace
 	 *
@@ -90,8 +84,6 @@ class NamespaceChecker {
 	/**
 	 * Get enabled namespaces
 	 *
-	 * @since 0.4
-	 *
 	 * @return int[]
 	 */
 	public function getEnabledNamespaces() {
@@ -101,8 +93,6 @@ class NamespaceChecker {
 	/**
 	 * Get excluded namespaces
 	 *
-	 * @since 0.4
-	 *
 	 * @return int[]
 	 */
 	public function getExcludedNamespaces() {
@@ -111,8 +101,6 @@ class NamespaceChecker {
 
 	/**
 	 * Get the namespaces Wikibase is effectively enabled in.
-	 *
-	 * @since 0.4
 	 *
 	 * @return int[]
 	 */

@@ -11,8 +11,6 @@ use Wikibase\Lib\SnakFormatter;
 /**
  * Functionality needed to render snaks as provided through Lua.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */
@@ -59,8 +57,6 @@ class SnakSerializationRenderer {
 	/**
 	 * Render a snak from its serialization as provided from Lua.
 	 *
-	 * @since 0.5
-	 *
 	 * @param array $snakSerialization As obtained from ItemSerializer
 	 *
 	 * @return string wikitext
@@ -74,8 +70,6 @@ class SnakSerializationRenderer {
 
 	/**
 	 * Render a list of snaks from their serialization as provided from Lua.
-	 *
-	 * @since 0.5
 	 *
 	 * @param array $snaksSerialization Nested array structure, as obtained from ItemSerializer
 	 *

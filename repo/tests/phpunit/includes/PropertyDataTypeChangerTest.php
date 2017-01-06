@@ -18,8 +18,6 @@ use Wikibase\Repo\PropertyDataTypeChanger;
 /**
  * @covers Wikibase\Repo\PropertyDataTypeChanger
  *
- * @since 0.5
- *
  * @group Wikibase
  *
  * @license GPL-2.0+

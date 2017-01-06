@@ -12,7 +12,6 @@
 	 * Deserializes the entity passed to JavaScript via mw.config variable.
 	 *
 	 * @constructor
-	 * @since 0.5
 	 *
 	 * @param {string} configVarName
 	 *

@@ -15,8 +15,6 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * This tracks the usage of directly connected items as EntityUsage::SITELINK_USAGE.
  * Other types of usage are not tracked.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

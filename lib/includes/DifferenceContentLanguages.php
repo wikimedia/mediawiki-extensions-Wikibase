@@ -6,8 +6,6 @@ namespace Wikibase\Lib;
  * Provide languages supported as content languages by removing values in one ContentLanguages
  * from another ContentLanguages
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */

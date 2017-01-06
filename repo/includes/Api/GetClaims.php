@@ -18,8 +18,6 @@ use Wikibase\StatementRankSerializer;
 /**
  * API module for getting claims.
  *
- * @since 0.3
- *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Addshore
@@ -79,8 +77,6 @@ class GetClaims extends ApiBase {
 
 	/**
 	 * @see ApiBase::execute
-	 *
-	 * @since 0.3
 	 */
 	public function execute() {
 		$this->getMain()->setCacheMode( 'public' );

@@ -19,8 +19,6 @@ use Wikibase\Repo\Interactors\RedirectCreationException;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Addshore
  * @author Daniel Kinzler

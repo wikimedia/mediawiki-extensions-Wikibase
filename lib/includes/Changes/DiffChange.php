@@ -7,8 +7,6 @@ use Diff\DiffOp\Diff\Diff;
 /**
  * Class for changes that can be represented as a Diff.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
@@ -16,8 +14,6 @@ use Diff\DiffOp\Diff\Diff;
 abstract class DiffChange extends ChangeRow {
 
 	/**
-	 * @since 0.1
-	 *
 	 * @param string $cache set to 'cache' to cache the unserialized diff.
 	 *
 	 * @return Diff
@@ -36,8 +32,6 @@ abstract class DiffChange extends ChangeRow {
 	}
 
 	/**
-	 * @since 0.1
-	 *
 	 * @param Diff $diff
 	 */
 	public function setDiff( Diff $diff ) {

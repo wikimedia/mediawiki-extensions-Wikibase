@@ -12,8 +12,6 @@ use Wikimedia\Purtle\RdfWriter;
 /**
  * Implementation for RDF mapping for Snaks.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Stas Malyshev

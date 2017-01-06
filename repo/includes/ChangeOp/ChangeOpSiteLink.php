@@ -14,8 +14,6 @@ use Wikibase\Summary;
 /**
  * Class for sitelink change operation
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Michał Łazowik
@@ -40,8 +38,6 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	private $badges;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param string $siteId
 	 * @param string|null $pageName Null to remove the sitelink (if $badges are also null)
 	 * @param ItemId[]|null $badges Null for no-op

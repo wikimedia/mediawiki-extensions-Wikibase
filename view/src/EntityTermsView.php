@@ -10,8 +10,6 @@ use Wikibase\DataModel\Term\LabelsProvider;
 /**
  * Generates HTML to display the terms of an entity.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */

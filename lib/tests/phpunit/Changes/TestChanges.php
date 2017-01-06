@@ -20,8 +20,6 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
 /**
  * Test change data for ChangeRowTest
  *
- * @since 0.2
- *
  * @group Wikibase
  * @group WikibaseChange
  *

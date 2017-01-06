@@ -11,8 +11,6 @@ use Wikibase\Repo\GenericEventDispatcher;
 /**
  * EntityStoreWatcher that dispatches events to more EntityStoreWatchers.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

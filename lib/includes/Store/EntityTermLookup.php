@@ -6,8 +6,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\TermIndex;
 
 /**
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler

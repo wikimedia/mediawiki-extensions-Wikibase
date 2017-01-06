@@ -15,8 +15,6 @@ use Wikimedia\Assert\Assert;
 /**
  * SQL based implementation of ChangeDispatchCoordinator;
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

@@ -7,8 +7,6 @@ namespace Wikibase\Lib;
  * allow them to bubble up to presentation layer and contain message
  * that can be displayed to the user in their language.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */

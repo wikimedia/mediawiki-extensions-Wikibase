@@ -27,8 +27,6 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * API module for using value parsers.
  *
- * @since 0.1
- *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
@@ -107,8 +105,6 @@ class ParseValue extends ApiBase {
 
 	/**
 	 * @see ApiBase::execute
-	 *
-	 * @since 0.1
 	 */
 	public function execute() {
 		$this->getMain()->setCacheMode( 'public' );

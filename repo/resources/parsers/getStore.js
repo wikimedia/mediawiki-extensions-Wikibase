@@ -8,8 +8,6 @@
 wb.parsers = wb.parsers || {};
 
 /**
- * @since 0.5
- *
  * @param {wikibase.api.RepoApi} api
  * @return {valueParsers.ValueParserStore}
  */

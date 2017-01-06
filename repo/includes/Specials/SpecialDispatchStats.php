@@ -8,16 +8,11 @@ use Wikibase\DispatchStats;
 /**
  * Page for displaying diagnostics about the dispatch process.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class SpecialDispatchStats extends SpecialWikibasePage {
 
-	/**
-	 * @since 0.2
-	 */
 	public function __construct() {
 		parent::__construct( 'DispatchStats' );
 	}

@@ -15,8 +15,6 @@ use Wikibase\View\Template\TemplateFactory;
 /**
  * Creates views for lists of site links.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  * @author Bene* < benestar.wikimedia@gmail.com >
@@ -103,8 +101,6 @@ class SiteLinksView {
 
 	/**
 	 * Builds and returns the HTML representing a WikibaseEntity's site-links.
-	 *
-	 * @since 0.5
 	 *
 	 * @param SiteLink[] $siteLinks the site links to render
 	 * @param ItemId|null $itemId The id of the item or might be null, if a new item.

@@ -93,8 +93,6 @@ class AffectedPagesFinder {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param Change $change
 	 *
 	 * @return ArrayIterator of PageEntityUsage

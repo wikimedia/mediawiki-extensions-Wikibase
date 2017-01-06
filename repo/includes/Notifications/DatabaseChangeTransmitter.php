@@ -8,8 +8,6 @@ use Wikibase\Repo\Store\ChangeStore;
 /**
  * Notification channel based on a database table.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Marius Hoch
  */

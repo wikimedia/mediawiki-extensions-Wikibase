@@ -7,8 +7,6 @@ use MWException;
 /**
  * Interface for DAO objects providing chunked access.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

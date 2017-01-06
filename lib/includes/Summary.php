@@ -5,8 +5,6 @@ namespace Wikibase;
 /**
  * A Summary object can be used to build complex, translatable summaries.
  *
- * @since 0.1, major refactoring in 0.4
- *
  * @license GPL-2.0+
  * @author John Erling Blad
  * @author Daniel Kinzler
@@ -45,8 +43,6 @@ class Summary {
 	private $userSummary;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param string|null $moduleName The module part of the auto comment
 	 * @param string|null $actionName The action part of the auto comment
 	 * @param string|null $languageCode The language code to use as the second auto comment argument
@@ -70,8 +66,6 @@ class Summary {
 	/**
 	 * Set the user provided edit summary
 	 *
-	 * @since 0.4
-	 *
 	 * @param string|null $summary edit summary provided by the user
 	 */
 	public function setUserSummary( $summary = null ) {
@@ -80,8 +74,6 @@ class Summary {
 
 	/**
 	 * Set the language code to use as the second autocomment argument
-	 *
-	 * @since 0.4
 	 *
 	 * @param string|null $languageCode
 	 */
@@ -92,8 +84,6 @@ class Summary {
 	/**
 	 * Set the module part of the autocomment
 	 *
-	 * @since 0.4
-	 *
 	 * @param string $name
 	 */
 	public function setModuleName( $name ) {
@@ -102,8 +92,6 @@ class Summary {
 
 	/**
 	 * Get the module part of the autocomment
-	 *
-	 * @since 0.4
 	 *
 	 * @return string|null
 	 */
@@ -114,8 +102,6 @@ class Summary {
 	/**
 	 * Set the action part of the autocomment
 	 *
-	 * @since 0.4
-	 *
 	 * @param string|null $name
 	 */
 	public function setAction( $name ) {
@@ -124,8 +110,6 @@ class Summary {
 
 	/**
 	 * Get the action part of the autocomment
-	 *
-	 * @since 0.4
 	 *
 	 * @return string|null
 	 */
@@ -136,8 +120,6 @@ class Summary {
 	/**
 	 * Get the user-provided edit summary
 	 *
-	 * @since 0.4
-	 *
 	 * @return string|null
 	 */
 	public function getUserSummary() {
@@ -147,8 +129,6 @@ class Summary {
 	/**
 	 * Get the language part of the autocomment
 	 *
-	 * @since 0.4
-	 *
 	 * @return string|null
 	 */
 	public function getLanguageCode() {
@@ -157,8 +137,6 @@ class Summary {
 
 	/**
 	 * Format the message key using the object-specific values
-	 *
-	 * @since 0.3
 	 *
 	 * @return string with a message key, or possibly an empty string
 	 */
@@ -175,8 +153,6 @@ class Summary {
 	/**
 	 * Add auto comment arguments.
 	 *
-	 * @since 0.4
-	 *
 	 * @param mixed $args,... Parts to be stringed together
 	 */
 	public function addAutoCommentArgs( $args /*...*/ ) {
@@ -189,8 +165,6 @@ class Summary {
 
 	/**
 	 * Add arguments to the summary part.
-	 *
-	 * @since 0.4
 	 *
 	 * @param mixed $args,... Parts to be stringed together
 	 */

@@ -6,8 +6,6 @@ use Language;
 use Message;
 
 /**
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Werner
  * @author Katie Filbert < aude.wiki@gmail.com >

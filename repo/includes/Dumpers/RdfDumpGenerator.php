@@ -27,8 +27,6 @@ use Wikimedia\Purtle\RdfWriterFactory;
  * RdfDumpGenerator generates an RDF dump of a given set of entities, excluding
  * redirects.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Stas Malyshev

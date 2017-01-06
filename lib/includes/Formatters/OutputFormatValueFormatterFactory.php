@@ -23,8 +23,6 @@ use Wikimedia\Assert\Assert;
  * to stand in for others (with escaping applies if necessary). E.g. if there is not HTML formatter
  * defined for a data type, the plain text formatter plus HTML escaping would be used.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

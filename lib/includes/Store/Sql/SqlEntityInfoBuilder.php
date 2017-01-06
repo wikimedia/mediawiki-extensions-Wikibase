@@ -18,8 +18,6 @@ use Wikibase\Lib\Store\EntityInfoBuilder;
 /**
  * Class EntityInfoBuilder implementation relying on database access.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

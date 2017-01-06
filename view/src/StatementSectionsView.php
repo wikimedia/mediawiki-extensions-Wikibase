@@ -8,8 +8,6 @@ use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Thiemo Mättig
  * @author Adrian Heine <adrian.heine@wikimedia.de>

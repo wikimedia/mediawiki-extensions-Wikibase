@@ -7,8 +7,6 @@ namespace Wikibase\View;
  *
  * These are meant to be unescaped, plain text results.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */

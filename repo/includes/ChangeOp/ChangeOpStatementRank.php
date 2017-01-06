@@ -13,8 +13,6 @@ use Wikibase\Summary;
 /**
  * Class for statement rank change operation
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
@@ -32,8 +30,6 @@ class ChangeOpStatementRank extends ChangeOpBase {
 
 	/**
 	 * Constructs a new statement rank change operation
-	 *
-	 * @since 0.4
 	 *
 	 * @param string $statementGuid
 	 * @param integer $rank
@@ -90,8 +86,6 @@ class ChangeOpStatementRank extends ChangeOpBase {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param Snak $snak
 	 *
 	 * @return array

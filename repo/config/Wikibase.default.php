@@ -6,8 +6,6 @@
  * This file is NOT an entry point the Wikibase extension. Use Wikibase.php.
  * It should furthermore not be included from outside the extension.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  */
 

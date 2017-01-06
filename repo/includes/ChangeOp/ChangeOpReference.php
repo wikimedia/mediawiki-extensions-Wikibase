@@ -15,8 +15,6 @@ use Wikibase\Summary;
 /**
  * Class for reference change operation
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Daniel Kinzler
@@ -50,8 +48,6 @@ class ChangeOpReference extends ChangeOpBase {
 
 	/**
 	 * Constructs a new reference change operation
-	 *
-	 * @since 0.4
 	 *
 	 * @param string $statementGuid
 	 * @param Reference $reference
@@ -130,8 +126,6 @@ class ChangeOpReference extends ChangeOpBase {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param ReferenceList $references
 	 * @param Summary|null $summary
 	 *
@@ -147,8 +141,6 @@ class ChangeOpReference extends ChangeOpBase {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param ReferenceList $references
 	 * @param Summary|null $summary
 	 *
@@ -177,8 +169,6 @@ class ChangeOpReference extends ChangeOpBase {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param Snak $snak
 	 * @return array
 	 */

@@ -24,8 +24,6 @@ require_once $basePath . '/maintenance/Maintenance.php';
  * Maintenance script that polls for Wikibase changes in the shared wb_changes table
  * and dispatches the relevant changes to any client wikis' job queues.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

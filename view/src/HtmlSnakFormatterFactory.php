@@ -9,8 +9,6 @@ use Wikibase\Lib\SnakFormatter;
 /**
  * A factory constructing SnakFormatters that output HTML.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */

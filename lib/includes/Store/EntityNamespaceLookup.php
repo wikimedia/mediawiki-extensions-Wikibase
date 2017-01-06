@@ -7,8 +7,6 @@ use Wikimedia\Assert\Assert;
 /**
  * Utility functions for Wikibase namespaces.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher
@@ -36,7 +34,6 @@ class EntityNamespaceLookup {
 	 * Returns a list of entity types pointing to the ids of the namespaces
 	 * in which they reside.
 	 *
-	 * @since 0.4
 	 * @deprecated since 0.5, use self::getEntityType instead
 	 *
 	 * @return array [ entity type (string) -> namespace id (integer) ]
@@ -46,8 +43,6 @@ class EntityNamespaceLookup {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param string $entityType
 	 *
 	 * @return int|null The namespace ID number associated with the given entity type, or null if
@@ -63,8 +58,6 @@ class EntityNamespaceLookup {
 	 * Determines whether the given namespace is designated to hold some kind of Wikibase entity.
 	 * Shorthand for in_array( $ns, self::getEntityNamespaces() );
 	 *
-	 * @since 0.4
-	 *
 	 * @param int $ns the namespace ID
 	 *
 	 * @return bool true if $ns is an entity namespace
@@ -74,8 +67,6 @@ class EntityNamespaceLookup {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param int $ns
 	 *
 	 * @return string|null

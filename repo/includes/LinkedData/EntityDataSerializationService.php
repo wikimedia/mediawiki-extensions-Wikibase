@@ -37,8 +37,6 @@ use Wikimedia\Purtle\RdfWriterFactory;
  *
  * For RDF output, this relies on the RdfBuilder class.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Thomas Pellissier Tanon
@@ -106,8 +104,6 @@ class EntityDataSerializationService {
 	 * @param SerializerFactory $serializerFactory
 	 * @param SiteLookup $siteLookup
 	 * @param RdfVocabulary $rdfVocabulary
-	 *
-	 * @since 0.4
 	 */
 	public function __construct(
 		EntityLookup $entityLookup,

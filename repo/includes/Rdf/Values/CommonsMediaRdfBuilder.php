@@ -8,8 +8,6 @@ use Wikibase\Rdf\RdfVocabulary;
 /**
  * RDF mapping for commonsMedia DataValues.
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Stas Malyshev

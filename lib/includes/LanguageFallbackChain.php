@@ -9,8 +9,6 @@ use Language;
  * FIXME: this class is not a language fallback chain. It takes and uses a fallback chain.
  * The name thus needs to be updated to not be misleading.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Liangent < liangent@gmail.com >
  * @author Thiemo Mättig

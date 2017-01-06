@@ -21,8 +21,6 @@ use Wikibase\Summary;
 /**
  * Class for statement modification operations
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Addshore
  * @author H. Snater < mediawiki@snater.com >

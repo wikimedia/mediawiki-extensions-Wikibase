@@ -8,8 +8,6 @@ use MWException;
 /**
  * Data provider for the property type (a.k.a. data type) selector UI element.
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thiemo Mättig
@@ -27,8 +25,6 @@ class DataTypeSelector {
 	private $languageCode;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param DataType[] $dataTypes
 	 * @param string $languageCode
 	 *
@@ -51,8 +47,6 @@ class DataTypeSelector {
 
 	/**
 	 * Builds and returns the array for the options of the DataType selector.
-	 *
-	 * @since 0.5
 	 *
 	 * @return string[]
 	 */

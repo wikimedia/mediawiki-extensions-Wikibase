@@ -5,8 +5,6 @@ namespace Wikibase\Rdf;
 /**
  * RDF producer options
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Stas Malyshev
  */

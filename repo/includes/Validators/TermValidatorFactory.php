@@ -12,8 +12,6 @@ use Wikibase\LabelDescriptionDuplicateDetector;
 /**
  * Provides validators for terms (like the maximum length of labels, etc).
  *
- * @since 0.5
- *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */

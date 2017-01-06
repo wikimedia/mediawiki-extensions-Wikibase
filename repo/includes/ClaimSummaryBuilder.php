@@ -9,8 +9,6 @@ use Wikibase\Repo\Diff\ClaimDiffer;
 /**
  * EditSummary-Builder for claim operations
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Daniel Kinzler
@@ -28,8 +26,6 @@ class ClaimSummaryBuilder {
 	private $claimDiffer;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param string $apiModuleName
 	 * @param ClaimDiffer $claimDiffer
 	 *

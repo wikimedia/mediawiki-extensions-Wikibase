@@ -1,8 +1,6 @@
 /**
  * JavaScript that lazy loads the widget for linking articles on the client
  *
- * @since 0.4
- *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */
