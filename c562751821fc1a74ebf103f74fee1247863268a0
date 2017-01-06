@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae0c87c0_87438667",
+        "filename": "repo/includes/Specials/SpecialItemByTitle.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-06T09:58:43Z",
+      "side": 1,
+      "message": "Unused imports don\u0027t hurt (literally does nothing, not even if the class does not exist any more) and should not block patches from being merged. I\u0027m scanning for unused imports regularly.",
+      "parentUuid": "ae0c87c0_8775c6ca",
+      "revId": "c562751821fc1a74ebf103f74fee1247863268a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0c87c0_07a31641",
         "filename": "repo/includes/Specials/SpecialItemByTitle.php",
         "patchSetId": 1
