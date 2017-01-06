@@ -13,7 +13,6 @@ use Wikibase\Repo\WikibaseRepo;
  * Base for special pages that show the result of a Query. Rewriting of QueryPage but
  * with abstraction of the storage system and without cache support.
  *
- * @since 0.3
  *
  * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
@@ -23,7 +22,6 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	/**
 	 * Max server side caching time in seconds.
 	 *
-	 * @since 0.5
 	 *
 	 * @type integer
 	 */
@@ -32,7 +30,6 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	/**
 	 * The offset in use
 	 *
-	 * @since 0.3
 	 *
 	 * @var integer
 	 */
@@ -41,7 +38,6 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	/**
 	 * The limit in use
 	 *
-	 * @since 0.3
 	 *
 	 * @var integer
 	 */
@@ -52,7 +48,6 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 * only makes sense in functions that are run after the query has been
 	 * done.
 	 *
-	 * @since 0.3
 	 *
 	 * @var integer
 	 */
@@ -77,7 +72,6 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	/**
 	 * @see SpecialWikibasePage::execute
 	 *
-	 * @since 0.5
 	 *
 	 * @param string|null $subPage
 	 */
@@ -105,7 +99,6 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	/**
 	 * Return the result of the query
 	 *
-	 * @since 0.3
 	 *
 	 * @param integer $offset Start to include at number of entries from the start title
 	 * @param integer $limit Stop at number of entries after start of inclusion
@@ -119,7 +112,6 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 *
 	 * @param array $query optional array of URL query parameter strings
 	 *
-	 * @since 0.3
 	 */
 	protected function showQuery( array $query = array() ) {
 		$paging = false;
@@ -172,7 +164,6 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	/**
 	 * Format and output report results using the given information plus OutputPage
 	 *
-	 * @since 0.3
 	 *
 	 * @param EntityId[] $entityIds
 	 * @param integer $num number of available result rows
@@ -194,7 +185,6 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	/**
 	 * Return the Title of the special page with full subpages informations in order to be used for navigation.
 	 *
-	 * @since 0.3
 	 *
 	 * @return Title
 	 */

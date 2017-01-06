@@ -17,7 +17,6 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * Special page for creating redirects between entities
  *
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author Addshore
@@ -45,7 +44,6 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	private $tokenCheck;
 
 	/**
-	 * @since 0.5
 	 */
 	public function __construct() {
 		parent::__construct( 'RedirectEntity' );
@@ -109,7 +107,6 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	/**
 	 * @see SpecialWikibasePage::execute
 	 *
-	 * @since 0.5
 	 *
 	 * @param string|null $subPage
 	 */

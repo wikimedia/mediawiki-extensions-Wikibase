@@ -20,7 +20,6 @@
 	 * Store for `jQuery.wikibase.snakview.variations.Variation` objects.
 	 * @class jQuery.wikibase.snakview.variations
 	 * @singleton
-	 * @since 0.4
 	 * @license GPL-2.0+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 */

@@ -15,7 +15,6 @@ use Wikibase\ItemChange;
  * @covers Wikibase\ItemChange
  * @covers Wikibase\DiffChange
  *
- * @since 0.3
  *
  * @group Database
  * @group Wikibase
@@ -28,7 +27,6 @@ use Wikibase\ItemChange;
 class ItemChangeTest extends EntityChangeTest {
 
 	/**
-	 * @since 0.4
 	 * @return string
 	 */
 	protected function getRowClass() {

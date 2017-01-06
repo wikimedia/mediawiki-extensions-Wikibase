@@ -8,7 +8,6 @@ use SiteLookup;
 /**
  * Builds the site identifiers table
  *
- * @since 0.5
  * @note: this should move out of Wikibase
  *
  * @license GPL-2.0+

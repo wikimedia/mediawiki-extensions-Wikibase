@@ -9,7 +9,6 @@ use Wikibase\Client\OtherProjectsSitesProvider;
 /**
  * @covers Wikibase\Client\CachingOtherProjectsSitesProvider
  *
- * @since 0.5
  *
  * @group WikibaseClient
  * @group Wikibase

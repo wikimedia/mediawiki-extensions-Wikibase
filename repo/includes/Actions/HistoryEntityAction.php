@@ -11,7 +11,6 @@ use Wikibase\Store\EntityIdLookup;
 /**
  * Handles the history action for Wikibase entities.
  *
- * @since 0.3
  *
  * @license GPL-2.0+
  * @author John Erling Blad < jeblad@gmail.com >
@@ -30,7 +29,6 @@ class HistoryEntityAction extends HistoryAction {
 	private $labelLookup;
 
 	/**
-	 * @since 0.5
 	 *
 	 * @param Page $page
 	 * @param IContextSource|null $context

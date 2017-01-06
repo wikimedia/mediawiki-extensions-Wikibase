@@ -13,7 +13,6 @@ require_once $basePath . '/maintenance/Maintenance.php';
 /**
  * Maintenance script for rebuilding the search key of the TermSQLCache.
  *
- * @since 0.2
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -73,7 +72,6 @@ class RebuildTermsSearchKey extends LoggedUpdateMaintenance {
 	/**
 	 * Outputs a message vis the output() method.
 	 *
-	 * @since 0.4
 	 *
 	 * @param string $msg
 	 */

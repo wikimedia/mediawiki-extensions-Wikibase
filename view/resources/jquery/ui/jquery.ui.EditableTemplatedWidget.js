@@ -13,7 +13,6 @@
  * @constructor
  * @abstract
  * @extends jQuery.ui.TemplatedWidget
- * @since 0.5
  *
  * @option {*} [value]
  *

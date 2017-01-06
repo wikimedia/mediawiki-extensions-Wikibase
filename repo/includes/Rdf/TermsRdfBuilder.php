@@ -12,7 +12,6 @@ use Wikimedia\Purtle\RdfWriter;
 /**
  * RDF mapping for entity terms.
  *
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >

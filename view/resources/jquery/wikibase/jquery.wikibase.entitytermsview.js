@@ -9,7 +9,6 @@
 
 /**
  * Encapsulates a entitytermsforlanguagelistview widget.
- * @since 0.5
  * @extends jQuery.ui.EditableTemplatedWidget
  *
  * @option {Fingerprint} value

@@ -8,7 +8,6 @@ use Wikibase\DataModel\SiteLink;
 /**
  * Contains methods to lookup of sitelinks of lookup by sitelinks.
  *
- * @since 0.1
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -19,7 +18,6 @@ interface SiteLinkLookup {
 	 * Returns the id of the item that is equivalent to the
 	 * provided page, or null if there is none.
 	 *
-	 * @since 0.1
 	 *
 	 * @param string $globalSiteId
 	 * @param string $pageTitle
@@ -38,7 +36,6 @@ interface SiteLinkLookup {
 	 * Note: if the conditions are not very selective the result set can be very big.
 	 * Thus the caller is responsible for not executing too expensive queries in its context.
 	 *
-	 * @since 0.3
 	 *
 	 * @param int[] $numericIds Numeric (unprefixed) item ids
 	 * @param string[] $siteIds
@@ -52,7 +49,6 @@ interface SiteLinkLookup {
 	 * Returns an array of SiteLink objects for an item. If the item isn't known or not an Item,
 	 * an empty array is returned.
 	 *
-	 * @since 0.4
 	 *
 	 * @param ItemId $itemId
 	 *
@@ -61,7 +57,6 @@ interface SiteLinkLookup {
 	public function getSiteLinksForItem( ItemId $itemId );
 
 	/**
-	 * @since 0.5
 	 *
 	 * @param SiteLink $siteLink
 	 *

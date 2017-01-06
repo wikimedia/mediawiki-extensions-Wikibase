@@ -16,7 +16,6 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @todo split this up and find a better home for stuff that adds
  * parser output properties and extension data.
  *
- * @since 0.1
  *
  * @license GPL-2.0+
  * @author Nikola Smolenski <smolensk@eunet.rs>
@@ -90,7 +89,6 @@ class LangLinkHandler {
 	/**
 	 * Finds the corresponding item on the repository and returns the item's site links.
 	 *
-	 * @since 0.1
 	 *
 	 * @param Title $title
 	 *
@@ -172,7 +170,6 @@ class LangLinkHandler {
 	 * - Wikidata not enabled for namespace
 	 * - nel parser function = * (suppress all repo links)
 	 *
-	 * @since 0.1
 	 *
 	 * @param Title $title
 	 * @param ParserOutput $out
@@ -204,7 +201,6 @@ class LangLinkHandler {
 	 * inter-language link defined in the local wikitext. This is done later
 	 * by getEffectiveRepoLinks().
 	 *
-	 * @since 0.1
 	 *
 	 * @param ParserOutput $out
 	 * @param array $repoLinks An array that uses global site IDs as keys.
@@ -238,7 +234,6 @@ class LangLinkHandler {
 	 * Filters the given list of links by site group:
 	 * Any links pointing to a site that is not in $allowedGroups will be removed.
 	 *
-	 * @since  0.4
 	 *
 	 * @param array $repoLinks An array that uses global site IDs as keys.
 	 * @param string[] $allowedGroups A list of allowed site groups
@@ -321,7 +316,6 @@ class LangLinkHandler {
 	 * current page, excluding any target sites for which there already is a
 	 * link on the page.
 	 *
-	 * @since 0.4
 	 *
 	 * @param Title $title The page's title
 	 * @param ParserOutput $out   Parsed representation of the page
@@ -356,7 +350,6 @@ class LangLinkHandler {
 	 *
 	 * The language links are not sorted, call sortLanguageLinks() to do that.
 	 *
-	 * @since 0.4
 	 *
 	 * @param Title $title The page's title
 	 * @param ParserOutput $out Parsed representation of the page

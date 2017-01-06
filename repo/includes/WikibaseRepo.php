@@ -312,7 +312,6 @@ class WikibaseRepo {
 	/**
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
-	 * @since 0.4
 	 *
 	 * @return self
 	 */
@@ -330,7 +329,6 @@ class WikibaseRepo {
 	 * @warning This is for use with bootstrap code in WikibaseRepo.datatypes.php only!
 	 * Program logic should use WikibaseRepo::getDataTypeValidatorFactory() instead!
 	 *
-	 * @since 0.5
 	 *
 	 * @return ValidatorBuilders
 	 */
@@ -378,7 +376,6 @@ class WikibaseRepo {
 	 * @warning This is for use with bootstrap code in WikibaseRepo.datatypes.php only!
 	 * Program logic should use WikibaseRepo::getSnakFormatterFactory() instead!
 	 *
-	 * @since 0.5
 	 *
 	 * @return WikibaseValueFormatterBuilders
 	 */
@@ -423,7 +420,6 @@ class WikibaseRepo {
 	 * @warning This is for use with bootstrap code in WikibaseRepo.datatypes.php only!
 	 * Program logic should use WikibaseRepo::getSnakFormatterFactory() instead!
 	 *
-	 * @since 0.5
 	 *
 	 * @return WikibaseSnakFormatterBuilders
 	 */
@@ -459,7 +455,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @param SettingsArray $settings
 	 * @param DataTypeDefinitions $dataTypeDefinitions
@@ -487,7 +482,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @return DataTypeFactory
 	 */
@@ -500,7 +494,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @return ValueParserFactory
 	 */
@@ -520,7 +513,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @return DataValueFactory
 	 */
@@ -529,7 +521,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @return EntityContentFactory
 	 */
@@ -541,7 +532,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @return EntityChangeFactory
 	 */
@@ -559,7 +549,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @return EntityDiffer
 	 */
@@ -573,7 +562,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @return EntityPatcher
 	 */
@@ -587,7 +575,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @return EntityStoreWatcher
 	 */
@@ -596,7 +583,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @return EntityTitleStoreLookup
 	 */
@@ -605,7 +591,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @return EntityIdLookup
 	 */
@@ -614,7 +599,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
 	 *
@@ -625,7 +609,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @param User $user
 	 * @param IContextSource $context
@@ -660,7 +643,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @param string $displayLanguageCode
 	 *
@@ -676,7 +658,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @return EntityStore
 	 */
@@ -685,7 +666,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @return PropertyDataTypeLookup
 	 */
@@ -703,7 +683,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @return StringNormalizer
 	 */
@@ -716,7 +695,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
 	 *
@@ -727,7 +705,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @return SnakFactory
 	 */
@@ -744,7 +721,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @return EntityIdParser
 	 */
@@ -759,7 +735,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @return EntityIdComposer
 	 */
@@ -774,7 +749,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @return StatementGuidParser
 	 */
@@ -783,7 +757,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @return ChangeOpFactoryProvider
 	 */
@@ -800,7 +773,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @return SnakValidator
 	 */
@@ -813,7 +785,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @return LanguageFallbackChainFactory
 	 */
@@ -826,7 +797,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @return LanguageFallbackLabelDescriptionLookupFactory
 	 */
@@ -839,7 +809,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @return StatementGuidValidator
 	 */
@@ -852,7 +821,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @return SettingsArray
 	 */
@@ -861,7 +829,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @return Store
 	 */
@@ -1217,7 +1184,6 @@ class WikibaseRepo {
 	/**
 	 * Get the mapping of entity types => content models
 	 *
-	 * @since 0.5
 	 *
 	 * @return array
 	 */

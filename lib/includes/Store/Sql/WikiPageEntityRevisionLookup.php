@@ -17,7 +17,6 @@ use Wikimedia\Assert\Assert;
  * database server. This class also supports memcached (or accelerator) based caching
  * of entities.
  *
- * @since 0.3
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
@@ -52,7 +51,6 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	}
 
 	/**
-	 * @since 0.4
 	 * @see   EntityRevisionLookup::getEntityRevision
 	 *
 	 * @param EntityId $entityId
@@ -129,7 +127,6 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	/**
 	 * @see EntityRevisionLookup::getLatestRevisionId
 	 *
-	 * @since 0.5
 	 *
 	 * @param EntityId $entityId
 	 * @param string $mode

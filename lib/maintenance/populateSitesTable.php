@@ -27,7 +27,6 @@ if ( !class_exists( SiteMatrixParser::class ) ) {
  * Maintenance script for populating the Sites table from another wiki that runs the
  * SiteMatrix extension.
  *
- * @since 0.1
  * @note: this should move out of Wikibase
  *
  * @license GPL-2.0+

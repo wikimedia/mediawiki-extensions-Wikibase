@@ -10,7 +10,6 @@ var PARENT = $.wikibase.toolbaritem;
 /**
  * Represents a button to be used in a jQuery.wikibase.toolbar.
  * @extends jQuery.wikibase.toolbaritem
- * @since 0.5
  *
  * @option {string} [cssClassSuffix]
  *         If set, another css class "wikibase-toolbar-button-<cssClassSuffix>" is added to the

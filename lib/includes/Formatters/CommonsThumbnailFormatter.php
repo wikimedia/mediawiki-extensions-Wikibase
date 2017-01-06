@@ -16,7 +16,6 @@ use Wikimedia\Assert\ParameterTypeException;
  *
  * @todo Most feature requests require this to be a SnakFormatter instead of a ValueFormatter
  *
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author Thiemo Mättig
@@ -26,7 +25,6 @@ class CommonsThumbnailFormatter implements ValueFormatter {
 	/**
 	 * @see ValueFormatter::format
 	 *
-	 * @since 0.5
 	 *
 	 * @param StringValue $value A MediaWiki Commons file name
 	 *

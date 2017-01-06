@@ -27,7 +27,6 @@ use Wikibase\Summary;
 /**
  * API module for creating or updating an entire Claim.
  *
- * @since 0.4
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -102,7 +101,6 @@ class SetClaim extends ApiBase {
 	/**
 	 * @see ApiBase::execute
 	 *
-	 * @since 0.4
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();

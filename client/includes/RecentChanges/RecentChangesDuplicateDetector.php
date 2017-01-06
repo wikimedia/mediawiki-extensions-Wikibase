@@ -7,7 +7,6 @@ use RecentChange;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 /**
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
@@ -27,7 +26,6 @@ class RecentChangesDuplicateDetector {
 	/**
 	 * Checks if a recent change entry already exists in the recentchanges table
 	 *
-	 * @since 0.4
 	 *
 	 * @param RecentChange $change
 	 *

@@ -11,7 +11,6 @@ var MODULE = wb.experts,
  * @class wikibase.experts.Item
  * @extends wikibase.experts.Entity
  * @uses jQuery.valueview
- * @since 0.5
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */

@@ -11,7 +11,6 @@ use Wikibase\SettingsArray;
 use Xml;
 
 /**
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

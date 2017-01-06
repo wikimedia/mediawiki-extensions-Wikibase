@@ -37,7 +37,6 @@ use WikiPage;
 /**
  * Abstract content object for articles representing Wikibase entities.
  *
- * @since 0.1
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -211,7 +210,6 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @note Will fail if this EntityContent does not represent a redirect.
 	 *
@@ -241,7 +239,6 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @note Will fail if this EntityContent represents a redirect.
 	 *

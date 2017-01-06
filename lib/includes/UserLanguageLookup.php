@@ -7,7 +7,6 @@ use User;
 /**
  * Service for looking up the languages understood by a user.
  *
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

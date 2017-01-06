@@ -5,7 +5,6 @@
 
 /**
  * Displays and allows editing of a `wikibase.datamodel.Term` acting as an `Entity`'s label.
- * @since 0.5
  * @class jQuery.wikibase.labelview
  * @extends jQuery.ui.EditableTemplatedWidget
  * @license GPL-2.0+

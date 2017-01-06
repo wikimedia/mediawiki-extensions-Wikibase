@@ -21,7 +21,6 @@ function getSiteIdsOfGroup( group ) {
 
 /**
  * Manages a sitelinklistview widget specific to a particular site link group.
- * @since 0.5
  * @extends jQuery.ui.EditableTemplatedWidget
  *
  * @option {string} groupName

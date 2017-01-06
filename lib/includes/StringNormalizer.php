@@ -9,7 +9,6 @@ use UtfNormal\Validator;
  *
  * Copyright © 03.07.13 by the authors listed below.
  *
- * @since 0.4
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

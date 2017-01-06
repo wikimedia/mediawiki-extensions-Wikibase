@@ -16,7 +16,6 @@ use Wikibase\Client\PropertyLabelNotResolvedException;
 /**
  * Registers and defines functions to access Wikibase through the Scribunto extension
  *
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
@@ -124,7 +123,6 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	/**
 	 * Register mw.wikibase.entity.lua library
 	 *
-	 * @since 0.5
 	 *
 	 * @return array
 	 */
@@ -148,7 +146,6 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	/**
 	 * Wrapper for getGlobalSiteId in WikibaseLuaEntityBindings
 	 *
-	 * @since 0.5
 	 *
 	 * @return string[]
 	 */
@@ -159,7 +156,6 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	/**
 	 * Returns the value of the "enableLuaEntityFormatStatements" setting.
 	 *
-	 * @since 0.5
 	 *
 	 * @return bool[]
 	 */
@@ -175,7 +171,6 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	/**
 	 * Wrapper for getLanguageCode in WikibaseLuaEntityBindings
 	 *
-	 * @since 0.5
 	 *
 	 * @return string[]
 	 */
@@ -187,7 +182,6 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 * Format the main Snaks belonging to a Statement (which is identified by a PropertyId
 	 * or the label of a Property) as wikitext escaped plain text.
 	 *
-	 * @since 0.5
 	 *
 	 * @param string $entityId
 	 * @param string $propertyLabelOrId
@@ -222,7 +216,6 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 * Format the main Snaks belonging to a Statement (which is identified by a PropertyId
 	 * or the label of a Property) as rich wikitext.
 	 *
-	 * @since 0.5
 	 *
 	 * @param string $entityId
 	 * @param string $propertyLabelOrId

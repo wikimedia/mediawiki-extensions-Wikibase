@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\EntityDocument;
 /**
  * Composite validator for applying multiple validators as one.
  *
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
@@ -32,7 +31,6 @@ class CompositeEntityValidator implements EntityValidator {
 	 *
 	 * @see EntityValidator::validateEntity
 	 *
-	 * @since 0.5
 	 *
 	 * @param EntityDocument $entity
 	 *

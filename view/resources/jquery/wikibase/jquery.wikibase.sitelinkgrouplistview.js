@@ -92,7 +92,6 @@ var PARENT = $.ui.TemplatedWidget;
 
 /**
  * Encapsulates multiple sitelinkgroupview widgets.
- * @since 0.5
  * @extends jQuery.ui.TemplatedWidget
  *
  * @option {jQuery.wikibase.listview.ListItemAdapter} listItemAdapter

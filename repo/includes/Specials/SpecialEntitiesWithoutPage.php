@@ -11,7 +11,6 @@ use Wikibase\Repo\Store\EntitiesWithoutTermFinder;
 /**
  * Base page for pages listing entities without a specific value.
  *
- * @since 0.4
  *
  * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
@@ -94,7 +93,6 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	/**
 	 * @see SpecialWikibasePage::execute
 	 *
-	 * @since 0.4
 	 *
 	 * @param string|null $subPage
 	 */
@@ -208,7 +206,6 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	/**
 	 * @see SpecialWikibaseQueryPage::getResult
 	 *
-	 * @since 0.4
 	 *
 	 * @param int $offset
 	 * @param int $limit
@@ -228,7 +225,6 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	/**
 	 * @see SpecialWikibaseQueryPage::getTitleForNavigation
 	 *
-	 * @since 0.4
 	 */
 	protected function getTitleForNavigation() {
 		return $this->getPageTitle( $this->language . '/' . $this->type );

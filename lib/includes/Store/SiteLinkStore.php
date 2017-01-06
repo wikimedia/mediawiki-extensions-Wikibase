@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\ItemId;
 /**
  * Contains methods for write actions on the sitelink store.
  *
- * @since 0.1
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -18,7 +17,6 @@ interface SiteLinkStore extends SiteLinkLookup {
 	/**
 	 * Saves the links for the provided item.
 	 *
-	 * @since 0.1
 	 *
 	 * @param Item $item
 	 *
@@ -29,7 +27,6 @@ interface SiteLinkStore extends SiteLinkLookup {
 	/**
 	 * Removes the links for the provided item.
 	 *
-	 * @since 0.1
 	 *
 	 * @param ItemId $itemId
 	 *
@@ -40,7 +37,6 @@ interface SiteLinkStore extends SiteLinkLookup {
 	/**
 	 * Clears all sitelinks from the cache.
 	 *
-	 * @since 0.2
 	 *
 	 * @return boolean Success indicator
 	 */

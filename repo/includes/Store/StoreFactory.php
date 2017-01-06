@@ -8,7 +8,6 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * Factory for obtaining a store instance.
  *
- * @since 0.1
  *
  * @deprecated Use WikibaseRepo::getDefaultInstance()->getStore() instead
  *

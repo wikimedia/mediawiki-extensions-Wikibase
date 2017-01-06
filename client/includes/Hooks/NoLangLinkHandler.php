@@ -9,7 +9,6 @@ use Wikibase\Client\WikibaseClient;
 /**
  * Handles the NOEXTERNALLANGLINKS parser function.
  *
- * @since 0.1
  *
  * @license GPL-2.0+
  * @author Nikola Smolenski <smolensk@eunet.rs>
@@ -26,7 +25,6 @@ class NoLangLinkHandler {
 	/**
 	 * Parser function
 	 *
-	 * @since 0.4
 	 *
 	 * @param Parser &$parser
 	 * @param string [$languageCode,...] Language codes or '*'
@@ -78,7 +76,6 @@ class NoLangLinkHandler {
 	 * Set the noexternallanglinks page property in the ParserOutput,
 	 * which is set by the {{#noexternallanglinks}} parser function.
 	 *
-	 * @since 0.4
 	 *
 	 * @param ParserOutput $out
 	 * @param string[] $noexternallanglinks a list of languages to suppress
@@ -90,7 +87,6 @@ class NoLangLinkHandler {
 	/**
 	 * Parser function
 	 *
-	 * @since 0.5
 	 *
 	 * @param Parser &$parser
 	 * @param string[] $langs

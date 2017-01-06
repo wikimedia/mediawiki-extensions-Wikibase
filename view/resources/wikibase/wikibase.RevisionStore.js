@@ -13,7 +13,6 @@
  * Offers access to stored revision ids
  *
  * @constructor
- * @since 0.1
  */
 var SELF = wb.RevisionStore = function WbRevisionStore( baseRev ) {
 	this._revisions = {

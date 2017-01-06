@@ -29,7 +29,6 @@
 	 * will not be shown and only the fixed quantity will be displayed, otherwise it will be
 	 * displayed as "fixedQuantity +pendingQuantity kindOfQuantity", e.g. "32 +2"
 	 *
-	 * @since 0.4
 	 *
 	 * @param {number} fixedQuantity
 	 * @param {number} pendingQuantity

@@ -7,7 +7,6 @@ use MWException;
 /**
  * Class representing a single change (ie a row in the wb_changes).
  *
- * @since 0.1
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -26,7 +25,6 @@ class ChangeRow implements Change {
 	/**
 	 * @see Change::getAge
 	 *
-	 * @since 0.1
 	 *
 	 * @return integer
 	 */
@@ -37,7 +35,6 @@ class ChangeRow implements Change {
 	/**
 	 * @see Change::getTime
 	 *
-	 * @since 0.2
 	 *
 	 * @return string TS_MW
 	 */
@@ -52,7 +49,6 @@ class ChangeRow implements Change {
 	/**
 	 * @see Change::getType
 	 *
-	 * @since 0.1
 	 *
 	 * @return string
 	 */
@@ -63,7 +59,6 @@ class ChangeRow implements Change {
 	/**
 	 * @see Change::getObjectId
 	 *
-	 * @since 0.2
 	 *
 	 * @return string
 	 */
@@ -74,7 +69,6 @@ class ChangeRow implements Change {
 	/**
 	 * Overwritten to unserialize the info field on the fly.
 	 *
-	 * @since 0.4
 	 *
 	 * @param string $name Field name
 	 *
@@ -98,7 +92,6 @@ class ChangeRow implements Change {
 	/**
 	 * Overwritten to unserialize the info field on the fly.
 	 *
-	 * @since 0.4
 	 *
 	 * @return array
 	 */
@@ -141,7 +134,6 @@ class ChangeRow implements Change {
 	 * This may be overridden by subclasses to implement special handling
 	 * for information in the info field.
 	 *
-	 * @since 0.4
 	 *
 	 * @param array $info
 	 *
@@ -172,7 +164,6 @@ class ChangeRow implements Change {
 	 * This may be overridden by subclasses to implement special handling
 	 * for information in the info field.
 	 *
-	 * @since 0.4
 	 *
 	 * @param string $str
 	 *

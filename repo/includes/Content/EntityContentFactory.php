@@ -23,7 +23,6 @@ use Wikimedia\Assert\Assert;
 /**
  * Factory for EntityContent objects.
  *
- * @since 0.2
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -63,7 +62,6 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup, En
 	/**
 	 * Determines whether the given content model is designated to hold some kind of Wikibase entity.
 	 *
-	 * @since 0.2
 	 *
 	 * @param string $contentModel
 	 *
@@ -74,7 +72,6 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup, En
 	}
 
 	/**
-	 * @since 0.2
 	 *
 	 * @return string[] A list of content model IDs used to represent Wikibase entities.
 	 */
@@ -83,7 +80,6 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup, En
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @return string[] A list of entity type IDs used for Wikibase entities.
 	 */
@@ -94,7 +90,6 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup, En
 	/**
 	 * Returns the Title object for the item with provided id.
 	 *
-	 * @since 0.3
 	 *
 	 * @param EntityId $id
 	 *
@@ -177,7 +172,6 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup, En
 	/**
 	 * Determines what namespace is suitable for the given type of entities.
 	 *
-	 * @since 0.5
 	 *
 	 * @param string $entityType
 	 *
@@ -192,7 +186,6 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup, En
 	/**
 	 * Returns the EntityHandler for the given entity type.
 	 *
-	 * @since 0.5
 	 *
 	 * @param string $entityType
 	 *
@@ -239,7 +232,6 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup, En
 	/**
 	 * Determines what content model is suitable for the given type of entities.
 	 *
-	 * @since 0.5
 	 *
 	 * @param string $entityType
 	 *
@@ -259,7 +251,6 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup, En
 	 *
 	 * @see EntityHandler::makeEntityContent
 	 *
-	 * @since 0.3
 	 *
 	 * @param EntityDocument $entity
 	 *
@@ -276,7 +267,6 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup, En
 	 *
 	 * @see EntityHandler::makeEntityRedirectContent
 	 *
-	 * @since 0.5
 	 *
 	 * @param EntityRedirect $redirect
 	 *

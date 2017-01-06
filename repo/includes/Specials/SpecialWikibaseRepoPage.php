@@ -20,7 +20,6 @@ use Wikibase\SummaryFormatter;
 /**
  * Abstract base class for special pages of the WikibaseRepo extension.
  *
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
@@ -43,7 +42,6 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	private $editEntityFactory;
 
 	/**
-	 * @since 0.5
 	 *
 	 * @param string $title The title of the special page
 	 * @param string $restriction The required user right
@@ -122,7 +120,6 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @param EntityId $id
 	 *

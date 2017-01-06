@@ -7,7 +7,6 @@ use Wikibase\TermIndexEntry;
 /**
  * Service interface for detecting label conflicts.
  *
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

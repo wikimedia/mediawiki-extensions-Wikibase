@@ -15,7 +15,6 @@ use Wikibase\Repo\SiteLinkTargetProvider;
  * Enables accessing items by providing the identifier of a site and the title
  * of the corresponding page on that site.
  *
- * @since 0.1
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -58,7 +57,6 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 	/**
 	 * @see SpecialWikibasePage::__construct
 	 *
-	 * @since 0.1
 	 *
 	 * @param EntityTitleLookup $titleLookup
 	 * @param LanguageNameLookup $languageNameLookup
@@ -89,7 +87,6 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 	/**
 	 * @see SpecialWikibasePage::execute
 	 *
-	 * @since 0.1
 	 *
 	 * @param string|null $subPage
 	 */

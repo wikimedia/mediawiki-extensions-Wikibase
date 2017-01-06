@@ -14,7 +14,6 @@ use Wikibase\Summary;
 /**
  * Class for description change operation
  *
- * @since 0.4
  *
  * @license GPL-2.0+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
@@ -39,7 +38,6 @@ class ChangeOpDescription extends ChangeOpBase {
 	private $termValidatorFactory;
 
 	/**
-	 * @since 0.4
 	 *
 	 * @param string $languageCode
 	 * @param string|null $description

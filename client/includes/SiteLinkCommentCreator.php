@@ -18,7 +18,6 @@ use Title;
  * in the rc_params column of the RecentChange table, for use in
  * generating recent change comments for wikibase changes.
  *
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
@@ -56,7 +55,6 @@ class SiteLinkCommentCreator {
 	 * Returns the comment to use in RC and history entries for this change.
 	 * This may be a complex structure. It will be interpreted by
 	 *
-	 * @since 0.5
 	 *
 	 * @param Diff|null $siteLinkDiff
 	 * @param string $action e.g. 'remove', see the constants in EntityChange

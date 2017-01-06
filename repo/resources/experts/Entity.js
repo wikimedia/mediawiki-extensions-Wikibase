@@ -10,7 +10,6 @@
 	 * @extends jQuery.valueview.experts.StringValue
 	 * @abstract
 	 * @uses jQuery.wikibase.entityselector
-	 * @since 0.4
 	 * @license GPL-2.0+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 */

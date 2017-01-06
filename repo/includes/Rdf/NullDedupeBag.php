@@ -5,7 +5,6 @@ namespace Wikibase\Rdf;
 /**
  * Null implementation of DedupeBag.
  *
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

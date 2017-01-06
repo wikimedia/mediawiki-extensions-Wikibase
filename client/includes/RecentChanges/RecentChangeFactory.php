@@ -13,7 +13,6 @@ use Wikibase\SiteLinkCommentCreator;
 use Wikimedia\Assert\Assert;
 
 /**
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
@@ -50,7 +49,6 @@ class RecentChangeFactory {
 	 * Creates a local RecentChange object that corresponds to the EntityChange from the
 	 * repo, with respect to the given target page
 	 *
-	 * @since 0.5
 	 *
 	 * @param EntityChange $change A change reported from the wikibase repository
 	 * @param Title $target The title of a page affected by the change
@@ -226,7 +224,6 @@ class RecentChangeFactory {
 	/**
 	 * Returns a human readable comment representing the change.
 	 *
-	 * @since 0.4
 	 *
 	 * @param EntityChange $change the change to get a comment for
 	 * @param Title|null $target The page we create an edit summary for. Needed to create an article

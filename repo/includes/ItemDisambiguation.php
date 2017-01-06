@@ -12,7 +12,6 @@ use Wikibase\Lib\Interactors\TermSearchResult;
 /**
  * Class representing the disambiguation of a list of WikibaseItems.
  *
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
@@ -39,7 +38,6 @@ class ItemDisambiguation {
 	private $displayLanguageCode;
 
 	/**
-	 * @since 0.5
 	 *
 	 * @param EntityTitleLookup $titleLookup
 	 * @param LanguageNameLookup $languageNameLookup
@@ -58,7 +56,6 @@ class ItemDisambiguation {
 	/**
 	 * Builds and returns the HTML to represent the WikibaseItem.
 	 *
-	 * @since 0.5
 	 *
 	 * @param TermSearchResult[] $searchResults
 	 *

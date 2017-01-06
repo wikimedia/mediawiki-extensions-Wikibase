@@ -18,7 +18,6 @@ use Wikibase\Repo\PropertyDataTypeChanger;
 /**
  * @covers Wikibase\Repo\PropertyDataTypeChanger
  *
- * @since 0.5
  *
  * @group WikibaseRepo
  * @group Wikibase

@@ -10,7 +10,6 @@ var PARENT = $.wikibase.toolbar;
 /**
  * "Edit" toolbar widget.
  * @extends jQuery.wikibase.toolbar
- * @since 0.4
  *
  * This widget offers a "edit" toolbar allowing editing-related interaction with a specific widget.
  * The widget the toolbar shall interact with has to have implemented certain methods listed in

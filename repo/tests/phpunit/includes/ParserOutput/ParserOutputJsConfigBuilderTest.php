@@ -23,7 +23,6 @@ use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
 /**
  * @covers Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder
  *
- * @since 0.5
  *
  * @group WikibaseRepo
  * @group Wikibase

@@ -10,7 +10,6 @@ use Wikibase\View\Template\TemplateFactory;
 /**
  * Generates HTML to display statements.
  *
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
@@ -67,7 +66,6 @@ class StatementGroupListView {
 	/**
 	 * Builds and returns the HTML representing a WikibaseEntity's statements.
 	 *
-	 * @since 0.5
 	 *
 	 * @param Statement[] $statements
 	 * @return string HTML

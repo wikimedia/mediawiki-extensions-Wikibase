@@ -17,7 +17,6 @@ use Wikibase\NamespaceChecker;
 /**
  * List client pages that are not connected to repository items.
  *
- * @since 0.4
  *
  * @license GPL-2.0+
  * @author John Erling Blad < jeblad@gmail.com >
@@ -64,7 +63,6 @@ class SpecialUnconnectedPages extends QueryPage {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @param NamespaceChecker $namespaceChecker
 	 */
@@ -73,7 +71,6 @@ class SpecialUnconnectedPages extends QueryPage {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @return NamespaceChecker
 	 */
@@ -93,7 +90,6 @@ class SpecialUnconnectedPages extends QueryPage {
 	/**
 	 * Build conditionals for namespace
 	 *
-	 * @since 0.4
 	 *
 	 * @param Database $dbr
 	 * @param Title|null $title

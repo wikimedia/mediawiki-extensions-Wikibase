@@ -5,7 +5,6 @@ namespace Wikibase\Client\RecentChanges;
 /**
  * Represents a revision on a site
  *
- * @since 0.5
  *
  * @todo Merge this into ExternalChange
  *

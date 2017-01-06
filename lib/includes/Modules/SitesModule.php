@@ -8,7 +8,6 @@ use ResourceLoaderModule;
 use Wikibase\Lib\SitesModuleWorker;
 
 /**
- * @since 0.2
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -35,7 +34,6 @@ class SitesModule extends ResourceLoaderModule {
 	 * Sites infos will be available in 'wbSiteDetails' config var.
 	 * @see ResourceLoaderModule::getScript
 	 *
-	 * @since 0.2
 	 *
 	 * @param ResourceLoaderContext $context
 	 *

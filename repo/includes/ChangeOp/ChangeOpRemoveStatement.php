@@ -12,7 +12,6 @@ use Wikibase\Summary;
 /**
  * Class for statement remove operation.
  *
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author Addshore
@@ -35,7 +34,6 @@ class ChangeOpRemoveStatement extends ChangeOpBase {
 	/**
 	 * Constructs a new mainsnak change operation
 	 *
-	 * @since 0.5
 	 *
 	 * @param string $guid
 	 *
