@@ -13,7 +13,6 @@ use Wikibase\Repo\Interactors\TokenCheckInteractor;
  *
  * @group Wikibase
  * @group WikibaseRepo
- * @group WikibaseInteractor
  *
  * @group medium
  *

@@ -29,7 +29,6 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  *
  * @group Wikibase
  * @group WikibaseRepo
- * @group EditEntity
  *
  * @group Database
  *        ^--- needed just because we are using Title objects.

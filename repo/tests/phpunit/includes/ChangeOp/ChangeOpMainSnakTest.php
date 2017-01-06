@@ -25,7 +25,6 @@ use Wikibase\DataModel\Statement\Statement;
  * @group Wikibase
  * @group WikibaseRepo
  * @group ChangeOp
- * @group ChangeOpMainSnak
  *
  * @license GPL-2.0+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >

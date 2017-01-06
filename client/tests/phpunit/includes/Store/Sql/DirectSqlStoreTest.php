@@ -30,7 +30,6 @@ use Wikibase\TermIndex;
  * @group Database
  * @group Wikibase
  * @group WikibaseClient
- * @group WikibaseClientStore
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

@@ -21,7 +21,6 @@ use Wikibase\Repo\SnakFactory;
  *
  * @group Wikibase
  * @group WikibaseRepo
- * @group Snak
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

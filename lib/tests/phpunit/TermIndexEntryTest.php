@@ -14,7 +14,6 @@ use Wikimedia\Assert\ParameterAssertionException;
  * @covers Wikibase\TermIndexEntry
  *
  * @group Wikibase
- * @group WikibaseTerm
  * @group WikibaseLib
  *
  * @license GPL-2.0+

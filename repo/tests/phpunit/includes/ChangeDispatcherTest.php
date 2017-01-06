@@ -29,7 +29,6 @@ use Wikibase\Store\SubscriptionLookup;
  *
  * @group Wikibase
  * @group WikibaseChange
- * @group WikibaseChangeDispatcher
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

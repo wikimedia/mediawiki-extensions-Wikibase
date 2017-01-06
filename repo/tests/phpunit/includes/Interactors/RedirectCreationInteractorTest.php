@@ -28,7 +28,6 @@ use Wikibase\Lib\Tests\MockRepository;
  *
  * @group Wikibase
  * @group WikibaseRepo
- * @group WikibaseInteractor
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

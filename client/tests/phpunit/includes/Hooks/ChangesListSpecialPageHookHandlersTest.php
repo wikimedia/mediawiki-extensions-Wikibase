@@ -13,7 +13,6 @@ use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers;
 /**
  * @covers Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers
  *
- * @group WikibaseClientHooks
  * @group WikibaseClient
  * @group Wikibase
  *

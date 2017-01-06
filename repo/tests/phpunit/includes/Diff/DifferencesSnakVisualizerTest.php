@@ -18,7 +18,6 @@ use Wikibase\Repo\Diff\DifferencesSnakVisualizer;
  *
  * @group Wikibase
  * @group WikibaseRepo
- * @group WikibaseClaim
  *
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>

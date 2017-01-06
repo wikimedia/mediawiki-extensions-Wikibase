@@ -9,7 +9,6 @@ use Wikibase\Repo\Diff\DiffOpValueFormatter;
  *
  * @group Wikibase
  * @group WikibaseRepo
- * @group WikibaseClaim
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

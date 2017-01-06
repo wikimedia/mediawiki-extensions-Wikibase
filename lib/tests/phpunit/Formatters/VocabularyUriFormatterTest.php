@@ -14,7 +14,6 @@ use Wikibase\Lib\VocabularyUriFormatter;
  * @covers Wikibase\Lib\VocabularyUriFormatter
  *
  * @group Wikibase
- * @group WikibaseLIb
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

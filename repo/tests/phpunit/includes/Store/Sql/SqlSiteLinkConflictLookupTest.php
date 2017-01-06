@@ -14,7 +14,6 @@ use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
  *
  * @group Wikibase
  * @group WikibaseRepo
- * @group SiteLink
  * @group WikibaseStore
  * @group Database
  *

@@ -32,7 +32,6 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @group Wikibase
  * @group WikibaseRepo
- * @group JsonDump
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

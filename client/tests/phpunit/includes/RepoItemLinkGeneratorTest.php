@@ -13,7 +13,6 @@ use Wikibase\NamespaceChecker;
  * @covers Wikibase\Client\RepoItemLinkGenerator
  *
  * @group WikibaseClient
- * @group RepoItemLinkGenerator
  * @group Wikibase
  * @group Database
  *

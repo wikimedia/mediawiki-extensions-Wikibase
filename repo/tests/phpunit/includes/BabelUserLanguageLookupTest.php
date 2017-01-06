@@ -9,7 +9,6 @@ use User;
  *
  * @group Wikibase
  * @group WikibaseRepo
- * @group EntityView
  * @group Database
  *
  * @license GPL-2.0+

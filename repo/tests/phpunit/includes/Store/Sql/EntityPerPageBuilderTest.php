@@ -16,7 +16,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @group Wikibase
  * @group WikibaseRepo
  * @group WikibaseStore
- * @group WikibaseEntityPerPage
  * @group Database
  *
  * @group medium

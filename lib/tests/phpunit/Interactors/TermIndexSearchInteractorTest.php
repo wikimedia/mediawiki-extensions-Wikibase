@@ -21,7 +21,6 @@ use Wikibase\Lib\Tests\Store\MockTermIndex;
  *
  * @group Wikibase
  * @group WikibaseLib
- * @group WikibaseInteractor
  *
  * @license GPL-2.0+
  * @author Addshore

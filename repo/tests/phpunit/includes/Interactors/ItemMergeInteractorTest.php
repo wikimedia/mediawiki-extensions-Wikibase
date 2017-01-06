@@ -28,7 +28,6 @@ use Wikibase\Lib\Tests\MockRepository;
  *
  * @group Wikibase
  * @group WikibaseRepo
- * @group WikibaseInteractor
  * @group Database
  * @group medium
  *

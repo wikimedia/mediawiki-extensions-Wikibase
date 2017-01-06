@@ -25,7 +25,6 @@ use Wikibase\SummaryFormatter;
  *
  * @group Wikibase
  * @group WikibaseRepo
- * @group WikibaseSummary
  * @group Database
  *
  * @license GPL-2.0+
