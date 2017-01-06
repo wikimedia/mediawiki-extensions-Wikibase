@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0c87c0_8775c6ca",
+        "filename": "repo/includes/Specials/SpecialItemByTitle.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-06T09:34:29Z",
+      "side": 1,
+      "message": "Thanks to this nice refactoring importing WikibaseRepo is no longer needed I think.",
+      "revId": "c562751821fc1a74ebf103f74fee1247863268a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0c87c0_07a31641",
+        "filename": "repo/includes/Specials/SpecialItemByTitle.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-06T09:34:29Z",
+      "side": 1,
+      "message": "I guess you type hint against particular class/interface/array here as well, no?\nAlso, not really looking into this class in details, I\u0027d expect $siteLinkGroups at the end of parameter lists, not at the very beginning.",
+      "revId": "c562751821fc1a74ebf103f74fee1247863268a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
