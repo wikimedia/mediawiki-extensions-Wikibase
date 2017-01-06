@@ -322,4 +322,17 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedList, $list );
 	}
 
+	public function testEmptyListHasCountZero() {
+		$this->assertSame( 0, ( new SiteLinkList() )->count() );
+	}
+
+	public function testListWithElementsHasCorrectCount() {
+		$list = new SiteLinkList();
+		$list->addNewSiteLink( 'enwiki', 'foo' );
+		$list->addNewSiteLink( 'dewiki', 'bar' );
+		$list->setNewSiteLink( 'nlwiki', 'baz' );
+
+		$this->assertSame( 3, $list->count() );
+	}
+
 }
