@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0c87c0_6ab3b74d",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-06T10:38:21Z",
+      "side": 1,
+      "message": "Inlining the former $apiHelperFactory variable was not really necessary and makes the diff look more complicated than it is.",
+      "range": {
+        "startLine": 60,
+        "startChar": 25,
+        "endLine": 60,
+        "endChar": 82
+      },
+      "revId": "318cd9aa2bba356f07b3026e7f1a9a5e0584778f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0c87c0_4ab0f33e",
+        "filename": "repo/tests/phpunit/includes/Api/ListSubscribersTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-06T10:38:21Z",
+      "side": 1,
+      "message": "As said before, please refactor this test further and make it use more trivial services here. Not necessarily mocks, but in-memory implementations.",
+      "revId": "318cd9aa2bba356f07b3026e7f1a9a5e0584778f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
