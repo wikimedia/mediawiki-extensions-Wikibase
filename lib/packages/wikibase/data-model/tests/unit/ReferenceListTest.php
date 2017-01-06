@@ -143,7 +143,7 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 			$array->removeReference( $element );
 
 			$this->assertFalse( $array->hasReference( $element ) );
-			$this->assertEquals( --$elementCount, count( $array ) );
+			$this->assertSame( --$elementCount, count( $array ) );
 		}
 	}
 
@@ -180,13 +180,13 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 	}
 
 	private function assertSameReferenceOrder( ReferenceList $expectedList, ReferenceList $references ) {
-		$this->assertEquals(
+		$this->assertSame(
 			iterator_to_array( $expectedList ),
 			iterator_to_array( $references )
 		);
 	}
 
-	public function testAddReferenceOnNonEmptyList() {
+	public function testAddReferenceAtTheEnd() {
 		$reference1 = new Reference( [ new PropertyNoValueSnak( 1 ) ] );
 		$reference2 = new Reference( [ new PropertyNoValueSnak( 2 ) ] );
 		$reference3 = new Reference( [ new PropertyNoValueSnak( 3 ) ] );
@@ -198,6 +198,18 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 
 		$expectedList = new ReferenceList( [ $reference1, $reference2, $reference3 ] );
 		$this->assertSameReferenceOrder( $expectedList, $references );
+	}
+
+	public function testAddReferenceBetweenExistingReferences() {
+		$reference1 = new Reference( [ new PropertyNoValueSnak( 1 ) ] );
+		$reference2 = new Reference( [ new PropertyNoValueSnak( 2 ) ] );
+		$list = new ReferenceList( [ $reference1, $reference2 ] );
+
+		$reference3 = new Reference( [ new PropertyNoValueSnak( 3 ) ] );
+		$list->addReference( $reference3, 1 );
+
+		$this->assertCount( 3, $list );
+		$this->assertSame( 1, $list->indexOf( $reference3 ) );
 	}
 
 	public function testAddReferenceIgnoresIdenticalObjects() {
@@ -294,7 +306,7 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 
 		$i = 0;
 		foreach ( $array as $reference ) {
-			$this->assertEquals( $i++, $array->indexOf( $reference ) );
+			$this->assertSame( $i++, $array->indexOf( $reference ) );
 		}
 	}
 
@@ -329,7 +341,7 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testGetValueHashIsTheSameForClone( ReferenceList $array ) {
 		$copy = unserialize( serialize( $array ) );
-		$this->assertEquals( $array->getValueHash(), $copy->getValueHash() );
+		$this->assertSame( $array->getValueHash(), $copy->getValueHash() );
 	}
 
 	/**
