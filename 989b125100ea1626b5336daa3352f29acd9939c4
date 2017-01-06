@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0c87c0_4ddecd71",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/NullChangeOpTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-06T13:52:22Z",
+      "side": 1,
+      "message": "This type is not needed here.",
+      "range": {
+        "startLine": 17,
+        "startChar": 25,
+        "endLine": 17,
+        "endChar": 65
+      },
+      "revId": "989b125100ea1626b5336daa3352f29acd9939c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0c87c0_cdd87d82",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/NullChangeOpTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-06T13:52:22Z",
+      "side": 1,
+      "message": "Never used this before. Nice!",
+      "range": {
+        "startLine": 36,
+        "startChar": 50,
+        "endLine": 36,
+        "endChar": 66
+      },
+      "revId": "989b125100ea1626b5336daa3352f29acd9939c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
