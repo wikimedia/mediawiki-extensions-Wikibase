@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e01838a_8614aaa1",
+        "filename": "repo/tests/phpunit/includes/Api/ListSubscribersTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-06T20:13:29Z",
+      "side": 1,
+      "message": "Would be nice to mock this. But it\u0027s not a very nice class, lots of methods... I guess this is ok for now.",
+      "revId": "c65dfcd689e15117dd7d2221ec98c318fc60da38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
