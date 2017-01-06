@@ -180,12 +180,15 @@ call_user_func( function() {
 	$wgAPIListModules['wbsubscribers'] = [
 		'class' => Wikibase\Repo\Api\ListSubscribers::class,
 		'factory' => function( $mainModule, $moduleName, $modulePrefix = 'wbls' ) {
+			/** @var ApiQuery $mainModule */
 			$wikibaseRepo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
 			$mediaWikiServices = \MediaWiki\MediaWikiServices::getInstance();
+			$apiHelper = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
 			return new Wikibase\Repo\Api\ListSubscribers(
 				$mainModule,
 				$moduleName,
 				$modulePrefix,
+				$apiHelper->getErrorReporter( $mainModule ),
 				$wikibaseRepo->getEntityIdParser(),
 				$mediaWikiServices->getSiteLookup()
 			);
