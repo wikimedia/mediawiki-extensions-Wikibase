@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0c87c0_10134a07",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/NullChangeOpTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-06T15:27:08Z",
+      "side": 1,
+      "message": "to add more to the \"What @group tags are we using\" discussion in the other patch: many (I was too lazy to verify if all) tests in this directory also use \"@group ChangeOp\". Maybe this one should be also used here?",
+      "revId": "f1f3d131a709e58823906c25fb435679754a8a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
