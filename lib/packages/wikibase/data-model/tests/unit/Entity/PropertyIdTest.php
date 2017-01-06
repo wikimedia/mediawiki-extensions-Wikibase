@@ -5,7 +5,6 @@ namespace Wikibase\DataModel\Tests\Entity;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use InvalidArgumentException;
-use RuntimeException;
 
 /**
  * @covers Wikibase\DataModel\Entity\PropertyId
