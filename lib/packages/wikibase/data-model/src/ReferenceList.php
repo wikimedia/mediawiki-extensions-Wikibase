@@ -100,6 +100,10 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate, Seriali
 	 * @param int $index
 	 */
 	private function insertReferenceAtIndex( Reference $reference, $index ) {
+		if ( !is_int( $index ) ) {
+			throw new InvalidArgumentException( '$index must be an integer' );
+		}
+
 		$this->references = array_merge(
 			array_slice( $this->references, 0, $index ),
 			[ spl_object_hash( $reference ) => $reference ],
