@@ -222,7 +222,23 @@ call_user_func( function() {
 			$copyrightView
 		);
 	};
-	$wgSpecialPages['ItemByTitle'] = Wikibase\Repo\Specials\SpecialItemByTitle::class;
+	$wgSpecialPages['ItemByTitle'] = function () {
+		$wikibaseRepo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+
+		$siteLinkTargetProvider = new \Wikibase\Repo\SiteLinkTargetProvider(
+			$wikibaseRepo->getSiteLookup(),
+			$wikibaseRepo->getSettings()->getSetting( 'specialSiteLinkGroups' )
+		);
+
+		return new Wikibase\Repo\Specials\SpecialItemByTitle(
+			$wikibaseRepo->getEntityTitleLookup(),
+			new \Wikibase\Lib\LanguageNameLookup(),
+			$wikibaseRepo->getSiteLookup(),
+			$wikibaseRepo->getStore()->newSiteLinkStore(),
+			$siteLinkTargetProvider,
+			$wikibaseRepo->getSettings()->getSetting( 'siteLinkGroups' )
+		);
+	};
 	$wgSpecialPages['GoToLinkedPage'] = Wikibase\Repo\Specials\SpecialGoToLinkedPage::class;
 	$wgSpecialPages['ItemDisambiguation'] = Wikibase\Repo\Specials\SpecialItemDisambiguation::class;
 	$wgSpecialPages['ItemsWithoutSitelinks']
