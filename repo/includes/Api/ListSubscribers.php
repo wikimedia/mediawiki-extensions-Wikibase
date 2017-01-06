@@ -11,7 +11,6 @@ use SiteLookup;
 use stdClass;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for getting wikis subscribed to changes to given entities.
@@ -42,6 +41,7 @@ class ListSubscribers extends ApiQueryBase {
 	 * @param ApiQuery $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
+	 * @param ApiErrorReporter $errorReporter
 	 * @param EntityIdParser $idParser
 	 * @param SiteLookup $siteLookup
 	 *
@@ -51,14 +51,13 @@ class ListSubscribers extends ApiQueryBase {
 		ApiQuery $mainModule,
 		$moduleName,
 		$modulePrefix,
+		ApiErrorReporter $errorReporter,
 		EntityIdParser $idParser,
 		SiteLookup $siteLookup
 	) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$this->errorReporter = $wikibaseRepo->getApiHelperFactory( $this->getContext() )
-			->getErrorReporter( $this );
+		$this->errorReporter = $errorReporter;
 		$this->idParser = $idParser;
 		$this->siteLookup = $siteLookup;
 	}

@@ -5,9 +5,10 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiMain;
 use ApiQuery;
 use FauxRequest;
-use MediaWiki\MediaWikiServices;
+use HashSiteStore;
 use MediaWikiLangTestCase;
 use RequestContext;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Repo\Api\ListSubscribers;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -86,13 +87,18 @@ class ListSubscribersTest extends MediaWikiLangTestCase {
 	 */
 	private function callApiModule( array $params ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$mediaWikiServices = MediaWikiServices::getInstance();
+		$apiMain = $this->getQueryModule( $params );
+		$errorReporter = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() )
+			->getErrorReporter( $apiMain );
+		$idParser = new BasicEntityIdParser();
+		$siteLokup = new HashSiteStore();
 		$module = new ListSubscribers(
-			$this->getQueryModule( $params ),
+			$apiMain,
 			'subscribers',
 			'wbls',
-			$wikibaseRepo->getEntityIdParser(),
-			$mediaWikiServices->getSiteLookup()
+			$errorReporter,
+			$idParser,
+			$siteLokup
 		);
 
 		$module->execute();
