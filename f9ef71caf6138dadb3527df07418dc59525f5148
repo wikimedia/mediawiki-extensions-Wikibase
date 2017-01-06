@@ -34,6 +34,24 @@
       "revId": "f9ef71caf6138dadb3527df07418dc59525f5148",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0c87c0_305c0e4e",
+        "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-06T16:27:16Z",
+      "side": 1,
+      "message": "An @see tag does not mean implementations *must* use this. I would like to keep this comment as short as it is now.",
+      "parentUuid": "ae0c87c0_30852ea0",
+      "revId": "f9ef71caf6138dadb3527df07418dc59525f5148",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
