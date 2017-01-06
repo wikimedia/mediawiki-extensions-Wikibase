@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0c87c0_0abafb1e",
+        "filename": "repo/includes/Specials/SpecialItemByTitle.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-06T10:41:17Z",
+      "side": 1,
+      "message": "@param doc is a little mixed up now.",
+      "revId": "e2b2538fcf896b22e35feab9361d351d30186db3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0c87c0_ea85675e",
+        "filename": "repo/includes/Specials/SpecialItemByTitle.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-06T10:41:17Z",
+      "side": 1,
+      "message": "Should also move down for consistency and readability.",
+      "revId": "e2b2538fcf896b22e35feab9361d351d30186db3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
