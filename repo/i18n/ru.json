@@ -142,6 +142,8 @@
 	"wikibase-validator-label-no-entityid": "Метка не должна совпадать с действительным идентификатором сущности.",
 	"wikibase-validator-no-such-media": "Файла «$1» на [https://commons.wikimedia.org/ Викискладе] не существует.",
 	"wikibase-validator-not-a-language": "«$1» не является корректным кодом языка.",
+	"wikibase-item-reference-edit-invalid-format": "Введенный идентификатор элемента имеет недопустимый Формат",
+	"wikibase-item-reference-edit-nonexistent-item": "Элемент с таким идентификатором не существует",
 	"wikibase-wikibaserepopage-not-itemid": "«$1» — некорректный идентификатор элемента.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Неизвестный код языка «$1». Пожалуйста, используйте один из известных системе языковых кодов, например «ru».",
 	"wikibase-wikibaserepopage-invalid-id": "Системе неизвестен идентификатор «$1». Пожалуйста, используйте один из существующих идентификаторов.",
