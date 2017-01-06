@@ -19,7 +19,6 @@ use Wikibase\Summary;
  * API module to associate two pages on two different sites with a Wikibase item.
  * Requires API write mode to be enabled.
  *
- * @since 0.1
  *
  * @license GPL-2.0+
  * @author John Erling Blad < jeblad@gmail.com >
@@ -86,7 +85,6 @@ class LinkTitles extends ApiBase {
 	/**
 	 * Main method. Does the actual work and sets the result.
 	 *
-	 * @since 0.1
 	 */
 	public function execute() {
 		$lookup = $this->revisionLookup;

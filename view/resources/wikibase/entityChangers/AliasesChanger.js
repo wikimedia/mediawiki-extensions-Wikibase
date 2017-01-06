@@ -9,7 +9,6 @@ var MODULE = wb.entityChangers;
 
 /**
  * @constructor
- * @since 0.5
  *
  * @param {wikibase.api.RepoApi} api
  * @param {wikibase.RevisionStore} revisionStore

@@ -11,7 +11,6 @@ var PARENT = $.wikibase.toolbaritem;
  * Toolbar widget that can be filled with compatible toolbar items.
  * @constructor
  * @extends jQuery.wikibase.toolbaritem
- * @since 0.4
  *
  * @option {jQuery} [$content]
  *         jQuery wrapped DOM elements, each featuring an instance of jQuery.wikibase.toolbaritem.

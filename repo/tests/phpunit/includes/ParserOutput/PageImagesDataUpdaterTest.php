@@ -16,7 +16,6 @@ use Wikibase\Repo\ParserOutput\PageImagesDataUpdater;
 /**
  * @covers Wikibase\Repo\ParserOutput\PageImagesDataUpdater
  *
- * @since 0.5
  *
  * @group WikibaseRepo
  * @group Wikibase

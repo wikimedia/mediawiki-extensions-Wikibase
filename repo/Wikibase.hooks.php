@@ -43,7 +43,6 @@ use WikiPage;
 /**
  * File defining the hook handlers for the Wikibase extension.
  *
- * @since 0.1
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -58,7 +57,6 @@ final class RepoHooks {
 	 * Handler for the BeforePageDisplay hook, simply injects wikibase.ui.entitysearch module
 	 * replacing the native search box with the entity selector widget.
 	 *
-	 * @since 0.4
 	 *
 	 * @param OutputPage $out
 	 * @param Skin $skin
@@ -74,7 +72,6 @@ final class RepoHooks {
 	 * Handler for the SetupAfterCache hook, completing setup of
 	 * content and namespace setup.
 	 *
-	 * @since 0.1
 	 *
 	 * @note: $wgExtraNamespaces and $wgNamespaceAliases have already been processed at this point
 	 *        and should no longer be touched.
@@ -111,7 +108,6 @@ final class RepoHooks {
 	 * Hook to add PHPUnit test cases.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/UnitTestsList
 	 *
-	 * @since 0.1
 	 *
 	 * @param string[] &$paths
 	 *
@@ -149,7 +145,6 @@ final class RepoHooks {
 	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/NamespaceIsMovable
 	 *
-	 * @since 0.1
 	 *
 	 * @param int $ns Namespace ID
 	 * @param bool $movable
@@ -170,7 +165,6 @@ final class RepoHooks {
 	 * Called when a revision was inserted due to an edit.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/NewRevisionFromEditComplete
 	 *
-	 * @since 0.1
 	 *
 	 * @param WikiPage $article A WikiPage object as of MediaWiki 1.19, an Article one before.
 	 * @param Revision $revision
@@ -226,7 +220,6 @@ final class RepoHooks {
 	 * Occurs after the delete article request has been processed.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ArticleDeleteComplete
 	 *
-	 * @since 0.1
 	 *
 	 * @param WikiPage &$wikiPage
 	 * @param User &$user
@@ -266,7 +259,6 @@ final class RepoHooks {
 	/**
 	 * Handle changes for undeletions
 	 *
-	 * @since 0.2
 	 *
 	 * @param Title $title
 	 * @param bool $created
@@ -348,7 +340,6 @@ final class RepoHooks {
 	 * NOTE: Might make sense to put the inner functionality into a well structured Preferences file once this
 	 *       becomes more.
 	 *
-	 * @since 0.1
 	 *
 	 * @param User $user
 	 * @param array &$preferences
@@ -391,7 +382,6 @@ final class RepoHooks {
 	 * Modify line endings on history page.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/PageHistoryLineEnding
 	 *
-	 * @since 0.1
 	 *
 	 * @param HistoryPager $history
 	 * @param object &$row
@@ -432,7 +422,6 @@ final class RepoHooks {
 	 * Alter the structured navigation links in SkinTemplates.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SkinTemplateNavigation
 	 *
-	 * @since 0.1
 	 *
 	 * @param SkinTemplate $skinTemplate
 	 * @param array $links
@@ -493,7 +482,6 @@ final class RepoHooks {
 	/**
 	 * Reorder the groups for the special pages
 	 *
-	 * @since 0.4
 	 *
 	 * @param array &$groups
 	 * @param bool &$moveOther
@@ -509,7 +497,6 @@ final class RepoHooks {
 	 * Used to append a css class to the body, so the page can be identified as Wikibase item page.
 	 * @see http://www.mediawiki.org/wiki/Manual:Hooks/OutputPageBodyAttributes
 	 *
-	 * @since 0.1
 	 *
 	 * @param OutputPage $out
 	 * @param Skin $sk
@@ -602,7 +589,6 @@ final class RepoHooks {
 	/**
 	 * Format the output when the search result contains entities
 	 *
-	 * @since 0.3
 	 *
 	 * @param SpecialSearch $searchPage
 	 * @param SearchResult $result
@@ -683,7 +669,6 @@ final class RepoHooks {
 	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/TitleGetRestrictionTypes
 	 *
-	 * @since 0.3
 	 *
 	 * @param Title $title
 	 * @param array $types The types of protection available
@@ -707,7 +692,6 @@ final class RepoHooks {
 	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/TitleQuickPermissions
 	 *
-	 * @since 0.5
 	 *
 	 * @param Title $title The Title being checked
 	 * @param User $user The User performing the action

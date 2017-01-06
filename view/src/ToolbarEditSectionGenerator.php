@@ -10,7 +10,6 @@ use Wikibase\View\Template\TemplateFactory;
 /**
  * Generates HTML for a section edit link
  *
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >

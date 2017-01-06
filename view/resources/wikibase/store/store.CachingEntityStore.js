@@ -12,7 +12,6 @@
 	 *
 	 * @constructor
 	 * @extends wikibase.store.EntityStore
-	 * @since 0.5
 	 *
 	 * @param {wikibase.store.EntityStore} store
 	 */

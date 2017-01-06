@@ -11,7 +11,6 @@
 	 * Entity store fetching entities from API.
 	 * @constructor
 	 * @extends wikibase.store.EntityStore
-	 * @since 0.5
 	 *
 	 * @param {wikibase.api.RepoApi} repoApi
 	 * @param {wikibase.serialization.EntityDeserializer} entityDeserializer;

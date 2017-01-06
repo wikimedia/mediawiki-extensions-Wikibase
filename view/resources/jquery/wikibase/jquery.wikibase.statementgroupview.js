@@ -8,7 +8,6 @@
  * `Property` id by managing a list of `jQuery.wikibase.statementview` widgets encapsulated by a
  * `jquery.wikibase.statementlistview` widget.
  * @see wikibase.datamodel.StatementGroup
- * @since 0.5
  * @extends jQuery.ui.TemplatedWidget
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >

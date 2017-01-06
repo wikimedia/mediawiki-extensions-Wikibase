@@ -13,7 +13,6 @@ use Wikibase\Repo\Store\EntityPerPage;
 /**
  * Utility class for rebuilding the wb_entity_per_page table.
  *
- * @since 0.4
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
@@ -86,7 +85,6 @@ class EntityPerPageBuilder {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @param bool $rebuildAll
 	 */
@@ -104,7 +102,6 @@ class EntityPerPageBuilder {
 	}
 
 	/**
-	 * @since 0.4
 	 */
 	public function rebuild() {
 		$dbw = wfGetDB( DB_MASTER );
@@ -146,7 +143,6 @@ class EntityPerPageBuilder {
 	/**
 	 * Construct query conditions
 	 *
-	 * @since 0.4
 	 *
 	 * @param int $lastPageSeen
 	 *
@@ -189,7 +185,6 @@ class EntityPerPageBuilder {
 	/**
 	 * Rebuilds EntityPerPageTable for specified pages
 	 *
-	 * @since 0.4
 	 *
 	 * @param ResultWrapper $pages
 	 *
@@ -237,7 +232,6 @@ class EntityPerPageBuilder {
 	/**
 	 * reports a message
 	 *
-	 * @since 0.4
 	 *
 	 * @param string $msg
 	 */

@@ -10,7 +10,6 @@ use Wikimedia\Assert\ParameterAssertionException;
 /**
  * Object representing a term index entry.
  *
- * @since 0.2
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -21,7 +20,6 @@ class TermIndexEntry {
 	/**
 	 * Term type enum.
 	 *
-	 * @since 0.2
 	 */
 	const TYPE_LABEL = 'label';
 	const TYPE_ALIAS = 'alias';
@@ -55,7 +53,6 @@ class TermIndexEntry {
 	private $entityId;
 
 	/**
-	 * @since 0.2
 	 *
 	 * @param array $fields, containing fields:
 	 *        'termType' => string, one of self::TYPE_* constants,
@@ -89,7 +86,6 @@ class TermIndexEntry {
 	}
 
 	/**
-	 * @since 0.2
 	 *
 	 * @return string
 	 */
@@ -98,7 +94,6 @@ class TermIndexEntry {
 	}
 
 	/**
-	 * @since 0.2
 	 *
 	 * @return string
 	 */
@@ -107,7 +102,6 @@ class TermIndexEntry {
 	}
 
 	/**
-	 * @since 0.2
 	 *
 	 * @return string
 	 */
@@ -116,7 +110,6 @@ class TermIndexEntry {
 	}
 
 	/**
-	 * @since 0.2
 	 *
 	 * @return EntityId
 	 */
@@ -125,7 +118,6 @@ class TermIndexEntry {
 	}
 
 	/**
-	 * @since 0.2
 	 *
 	 * @return string
 	 */

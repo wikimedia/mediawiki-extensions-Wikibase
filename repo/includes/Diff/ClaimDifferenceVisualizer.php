@@ -15,7 +15,6 @@ use Wikibase\StatementRankSerializer;
 /**
  * Class for generating HTML for Claim Diffs.
  *
- * @since 0.4
  *
  * @license GPL-2.0+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
@@ -38,7 +37,6 @@ class ClaimDifferenceVisualizer {
 	private $languageCode;
 
 	/**
-	 * @since 0.4
 	 *
 	 * @param DifferencesSnakVisualizer $snakVisualizer
 	 * @param string $languageCode
@@ -54,7 +52,6 @@ class ClaimDifferenceVisualizer {
 	/**
 	 * Generates HTML of a statement change.
 	 *
-	 * @since 0.4
 	 *
 	 * @param ClaimDifference $claimDifference
 	 * @param Statement $baseStatement The new statement, if it exists. Otherwise the old statement.
@@ -105,7 +102,6 @@ class ClaimDifferenceVisualizer {
 	/**
 	 * Get diff html for a new claim
 	 *
-	 * @since 0.4
 	 *
 	 * @param Statement $statement
 	 *
@@ -120,7 +116,6 @@ class ClaimDifferenceVisualizer {
 	/**
 	 * Get diff html for a removed claim
 	 *
-	 * @since 0.4
 	 *
 	 * @param Statement $statement
 	 *

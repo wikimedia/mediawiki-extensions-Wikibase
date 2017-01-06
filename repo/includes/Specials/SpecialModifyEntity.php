@@ -25,7 +25,6 @@ use Wikibase\SummaryFormatter;
 /**
  * Abstract special page for modifying Wikibase entity.
  *
- * @since 0.4
  *
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@googlemail.com >
@@ -39,7 +38,6 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	private $entityRevisionLookup;
 
 	/**
-	 * @since 0.5
 	 *
 	 * @var EntityRevision|null
 	 */
@@ -56,7 +54,6 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	private $rightsText;
 
 	/**
-	 * @since 0.4
 	 *
 	 * @param string $title The title of the special page
 	 * @param string $restriction The required user right, 'edit' per default.
@@ -107,7 +104,6 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	/**
 	 * @see SpecialWikibasePage::execute
 	 *
-	 * @since 0.4
 	 *
 	 * @param string|null $subPage
 	 */
@@ -159,7 +155,6 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	/**
 	 * Prepares the arguments.
 	 *
-	 * @since 0.4
 	 *
 	 * @param string $subPage
 	 */
@@ -179,7 +174,6 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	/**
 	 * Loads the entity for this entity id.
 	 *
-	 * @since 0.5
 	 *
 	 * @param EntityId $id
 	 *
@@ -306,7 +300,6 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	/**
 	 * Returns the form elements.
 	 *
-	 * @since 0.5
 	 *
 	 * @param EntityDocument|null $entity
 	 *
@@ -337,7 +330,6 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 * The default implementation just checks whether a target entity was specified via a POST request.
 	 * Subclasses should override this to detect otherwise incomplete or erroneous input.
 	 *
-	 * @since 0.5
 	 *
 	 * @return bool true if the form input is ok and normal processing should
 	 * continue by calling modifyEntity().
@@ -349,7 +341,6 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	/**
 	 * Modifies the entity.
 	 *
-	 * @since 0.5
 	 *
 	 * @param EntityDocument $entity
 	 *
@@ -361,7 +352,6 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 * Applies the given ChangeOp to the given Entity.
 	 * If validation fails, a ChangeOpValidationException is thrown.
 	 *
-	 * @since 0.5
 	 *
 	 * @param ChangeOp $changeOp
 	 * @param EntityDocument $entity

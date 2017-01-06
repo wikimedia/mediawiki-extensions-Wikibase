@@ -7,7 +7,6 @@ use Html;
 /**
  * Class for generating diff rows for a given set of old and new values.
  *
- * @since 0.4
  *
  * @license GPL-2.0+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
@@ -38,7 +37,6 @@ class DiffOpValueFormatter {
 	private $newValues;
 
 	/**
-	 * @since 0.4
 	 *
 	 * @param string $oldName HTML of old name
 	 * @param string $newName HTML of new name
@@ -133,7 +131,6 @@ class DiffOpValueFormatter {
 	/**
 	 * Generates HTML for a diffOP
 	 *
-	 * @since 0.4
 	 *
 	 * @return string HTML
 	 */

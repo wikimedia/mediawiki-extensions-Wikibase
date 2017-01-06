@@ -16,7 +16,6 @@ use Wikibase\Summary;
 /**
  * Abstract special page for setting a value of a Wikibase entity.
  *
- * @since 0.4
  *
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
@@ -49,7 +48,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	private $termsLanguages;
 
 	/**
-	 * @since 0.4
 	 *
 	 * @param string $title The title of the special page
 	 * @param string $restriction The required user right, 'edit' per default.
@@ -70,7 +68,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	/**
 	 * @see SpecialModifyEntity::prepareArguments()
 	 *
-	 * @since 0.4
 	 *
 	 * @param string $subPage
 	 */
@@ -143,7 +140,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	/**
 	 * @see SpecialModifyEntity::modifyEntity()
 	 *
-	 * @since 0.5
 	 *
 	 * @param EntityDocument $entity
 	 *
@@ -272,7 +268,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	/**
 	 * Returning the posted value of the request.
 	 *
-	 * @since 0.4
 	 *
 	 * @return string
 	 */
@@ -281,7 +276,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	/**
 	 * Returning the value of the entity name by the given language
 	 *
-	 * @since 0.5
 	 *
 	 * @param EntityDocument $entity
 	 * @param string $languageCode
@@ -293,7 +287,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	/**
 	 * Setting the value of the entity name by the given language
 	 *
-	 * @since 0.5
 	 *
 	 * @param EntityDocument $entity
 	 * @param string $languageCode

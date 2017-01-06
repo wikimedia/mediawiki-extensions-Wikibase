@@ -11,7 +11,6 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * Handles the view action for Wikibase entities.
  *
- * @since 0.1
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

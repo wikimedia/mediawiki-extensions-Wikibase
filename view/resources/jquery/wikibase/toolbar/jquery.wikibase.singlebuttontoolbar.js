@@ -9,7 +9,6 @@ var PARENT = $.wikibase.toolbar;
 
 /**
  * Toolbar by default featuring a single button.
- * @since 0.5
  * @extends jQuery.wikibase.toolbar
  *
  * @option {string} [label]

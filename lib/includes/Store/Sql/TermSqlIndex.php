@@ -24,7 +24,6 @@ use Wikibase\Lib\Store\TermIndexSearchCriteria;
 /**
  * Term lookup cache.
  *
- * @since 0.1
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -61,7 +60,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	private $maxConflicts = 500;
 
 	/**
-	 * @since 0.4
 	 *
 	 * @param StringNormalizer $stringNormalizer
 	 * @param EntityIdComposer $entityIdComposer
@@ -86,7 +84,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * Returns the name of the database table used to store the terms.
 	 * This is the logical table name, subject to prefixing by the Database object.
 	 *
-	 * @since 0.4
 	 *
 	 * @return string
 	 */
@@ -97,7 +94,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	/**
 	 * @see TermIndex::saveTermsOfEntity
 	 *
-	 * @since 0.1
 	 *
 	 * @param EntityDocument $entity Must have an ID, and optionally any combination of terms as
 	 *  declared by the TermIndexEntry::TYPE_... constants.
@@ -389,7 +385,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	/**
 	 * @see TermIndex::deleteTermsOfEntity
 	 *
-	 * @since 0.5
 	 *
 	 * @param EntityId $entityId
 	 *
@@ -536,7 +531,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	/**
 	 * Returns the Database connection from which to read.
 	 *
-	 * @since 0.1
 	 *
 	 * @return Database
 	 */
@@ -547,7 +541,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	/**
 	 * Returns the Database connection to which to write.
 	 *
-	 * @since 0.4
 	 *
 	 * @return Database
 	 */
@@ -558,7 +551,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	/**
 	 * @see TermIndex::getMatchingTerms
 	 *
-	 * @since 0.2
 	 *
 	 * @param TermIndexSearchCriteria[] $criteria
 	 * @param string|string[]|null $termType
@@ -615,7 +607,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	/**
 	 * @see TermIndex::getTopMatchingTerms
 	 *
-	 * @since 0.5
 	 *
 	 * @param TermIndexSearchCriteria[] $criteria
 	 * @param string|string[]|null $termType
@@ -840,7 +831,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	/**
 	 * @see TermIndex::clear
 	 *
-	 * @since 0.2
 	 *
 	 * @return bool Success indicator
 	 */
@@ -857,7 +847,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @note: This implementation does not guarantee that all matches are returned.
 	 * The maximum number of conflicts returned is controlled by $this->maxConflicts.
 	 *
-	 * @since 0.5
 	 *
 	 * @param string $entityType
 	 * @param string[] $labels
@@ -904,7 +893,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @note: This implementation does not guarantee that all matches are returned.
 	 * The maximum number of conflicts returned is controlled by $this->maxConflicts.
 	 *
-	 * @since 0.5
 	 *
 	 * @param string $entityType
 	 * @param string[] $labels
@@ -1011,7 +999,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @param string $text
 	 *

@@ -29,7 +29,6 @@ use Wikibase\Repo\WikibaseRepo;
  * This shows the forms for the undo and restore operations if requested.
  * Otherwise it will just show the normal entity view.
  *
- * @since 0.1
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -99,7 +98,6 @@ class EditEntityAction extends ViewEntityAction {
 	/**
 	 * @see Action::getName()
 	 *
-	 * @since 0.1
 	 *
 	 * @return string
 	 */
@@ -110,7 +108,6 @@ class EditEntityAction extends ViewEntityAction {
 	/**
 	 * Show an error page if the user is not allowed to perform the given action.
 	 *
-	 * @since 0.1
 	 *
 	 * @param string $action The action to check
 	 *
@@ -136,7 +133,6 @@ class EditEntityAction extends ViewEntityAction {
 	 * Loads the revisions specified by the web request and returns them as a three element array
 	 * wrapped in a Status object. If any error arises, it will be reported using the status object.
 	 *
-	 * @since 0.1
 	 *
 	 * @return Status A Status object containing an array with three revisions, array(
 	 * $olderRevision, $newerRevision, $latestRevision ).
@@ -238,7 +234,6 @@ class EditEntityAction extends ViewEntityAction {
 	/**
 	 * Output an error page showing the given status
 	 *
-	 * @since 0.1
 	 *
 	 * @param Status $status The status to report.
 	 */
@@ -258,7 +253,6 @@ class EditEntityAction extends ViewEntityAction {
 	 *
 	 * Calls parent show() action to just display the entity, unless an undo action is requested.
 	 *
-	 * @since 0.1
 	 */
 	public function show() {
 		$req = $this->getRequest();

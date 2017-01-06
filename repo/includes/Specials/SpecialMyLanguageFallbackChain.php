@@ -14,7 +14,6 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * Page for displaying the current language fallback chain for debugging.
  *
- * @since 0.4
  *
  * @license GPL-2.0+
  * @author Liangent < liangent@gmail.com >
@@ -32,7 +31,6 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 	private $factory;
 
 	/**
-	 * @since 0.4
 	 */
 	public function __construct() {
 		parent::__construct( 'MyLanguageFallbackChain' );
@@ -52,7 +50,6 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 	/**
 	 * @see SpecialPage::getDescription
 	 *
-	 * @since 0.4
 	 *
 	 * @return string
 	 */
@@ -95,7 +92,6 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 	/**
 	 * @see SpecialPage::execute
 	 *
-	 * @since 0.4
 	 *
 	 * @param string|null $subPage
 	 */

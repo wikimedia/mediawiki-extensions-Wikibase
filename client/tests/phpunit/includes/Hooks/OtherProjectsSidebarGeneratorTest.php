@@ -16,7 +16,6 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 /**
  * @covers Wikibase\Client\Hooks\OtherProjectsSidebarGenerator
  *
- * @since 0.5
  *
  * @group WikibaseClient
  * @group Wikibase

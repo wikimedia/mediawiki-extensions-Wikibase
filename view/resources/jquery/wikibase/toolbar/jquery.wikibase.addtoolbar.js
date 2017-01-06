@@ -10,7 +10,6 @@ var PARENT = $.wikibase.singlebuttontoolbar;
 /**
  * "Add" toolbar widget by default offering an "add" button.
  * @extends jQuery.wikibase.singlebuttontoolbar
- * @since 0.4
  *
  * @option {string} [label]
  *         Default: mw.msg( 'wikibase-add' )

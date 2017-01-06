@@ -14,7 +14,6 @@ use Wikibase\Summary;
 /**
  * Class for qualifier change operation
  *
- * @since 0.4
  *
  * @license GPL-2.0+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
@@ -45,7 +44,6 @@ class ChangeOpQualifier extends ChangeOpBase {
 	/**
 	 * Constructs a new qualifier change operation
 	 *
-	 * @since 0.4
 	 *
 	 * @param string $statementGuid
 	 * @param Snak $snak
@@ -104,7 +102,6 @@ class ChangeOpQualifier extends ChangeOpBase {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @param SnakList $qualifiers
 	 * @param Summary|null $summary
@@ -121,7 +118,6 @@ class ChangeOpQualifier extends ChangeOpBase {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @param SnakList $qualifiers
 	 * @param Summary|null $summary
@@ -141,7 +137,6 @@ class ChangeOpQualifier extends ChangeOpBase {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @param Snak $snak
 	 *
@@ -155,7 +150,6 @@ class ChangeOpQualifier extends ChangeOpBase {
 	/**
 	 * @see ChangeOp::validate
 	 *
-	 * @since 0.5
 	 *
 	 * @param EntityDocument $entity
 	 *

@@ -11,7 +11,6 @@ use Wikibase\OutputPageJsConfigBuilder;
 /**
  * @covers Wikibase\OutputPageJsConfigBuilder
  *
- * @since 0.5
  *
  * @group WikibaseRepo
  * @group Wikibase

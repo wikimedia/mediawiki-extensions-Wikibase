@@ -16,7 +16,6 @@
  * @see wikibase.datamodel.Snak
  * @class jQuery.wikibase.snakview
  * @extends jQuery.ui.EditableTemplatedWidget
- * @since 0.3
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  * @author H. Snater < mediawiki@snater.com >
  *
@@ -358,7 +357,6 @@ $.widget( 'wikibase.snakview', PARENT, {
 	/**
 	 * Updates this `snakview`'s status.
 	 *
-	 * @since 0.4
 	 *
 	 * @param {string} status May either be 'valid' or 'invalid'
 	 */
@@ -458,7 +456,6 @@ $.widget( 'wikibase.snakview', PARENT, {
 	 * `Snak`. If no parameter is supplied, the current `Snak` represented by the `snakview` is
 	 * returned.
 	 *
-	 * @since 0.4
 	 *
 	 * @param {wikibase.datamodel.Snak|null} [snak]
 	 * @return {wikibase.datamodel.Snak|null|undefined}
@@ -520,7 +517,6 @@ $.widget( 'wikibase.snakview', PARENT, {
 	 * `Snak` type is set, `null` is returned.
 	 *
 	 * @see wikibase.datamodel.Snak.TYPE
-	 * @since 0.4
 	 *
 	 * @param {string|null} [snakType]
 	 * @return {string|null|undefined}
@@ -548,7 +544,6 @@ $.widget( 'wikibase.snakview', PARENT, {
 	 * Returns the `snakview`'s `Variation` object required for presenting the current `Snak` type.
 	 * If a `Snak` type has not been defined yet, `null` is returned.
 	 *
-	 * @since 0.4
 	 *
 	 * @return {jQuery.wikibase.snakview.variations.Variation|null}
 	 */
@@ -559,7 +554,6 @@ $.widget( 'wikibase.snakview', PARENT, {
 	/**
 	 * Updates the `Variation` according to the widget's current value.
 	 *
-	 * @since 0.5
 	 */
 	updateVariation: function() {
 		var value = this.value(),
@@ -618,7 +612,6 @@ $.widget( 'wikibase.snakview', PARENT, {
 	/**
 	 * (Re-)renders the widget.
 	 *
-	 * @since 0.4
 	 */
 	draw: function() {
 		this.drawProperty();
@@ -631,7 +624,6 @@ $.widget( 'wikibase.snakview', PARENT, {
 	 * is not (re-)rendered if changing the `Property` is locked via the `locked` option and
 	 * previously generated HTML is detected.
 	 *
-	 * @since 0.5
 	 *
 	 * @return {Object} jQuery.Promise
 	 * @return {Function} return.done
@@ -734,7 +726,6 @@ $.widget( 'wikibase.snakview', PARENT, {
 	 * is not (re-)rendered if changing the `Snak` type is locked via the `locked` option and
 	 * previously generated HTML is detected.
 	 *
-	 * @since 0.4
 	 */
 	drawSnakTypeSelector: function() {
 		if ( this.options.locked.snaktype && this.$snakTypeSelector.contents().length ) {
@@ -778,7 +769,6 @@ $.widget( 'wikibase.snakview', PARENT, {
 	/**
 	 * Renders the `Variation` or placeholder text if no proper `Variation` is available.
 	 *
-	 * @since 0.4
 	 */
 	drawVariation: function() {
 		// property ID will be null if not in edit mode and no Snak set or if in edit mode and user
@@ -813,7 +803,6 @@ $.widget( 'wikibase.snakview', PARENT, {
 
 	/**
 	 * @private
-	 * @since 0.4
 	 *
 	 * @param {string|null} snakType
 	 * @return {jQuery}
@@ -848,14 +837,12 @@ $.widget( 'wikibase.snakview', PARENT, {
 	},
 
 	/**
-	 * @since 0.5
 	 */
 	hidePropertyLabel: function() {
 		this.$property.hide();
 	},
 
 	/**
-	 * @since 0.5
 	 */
 	showPropertyLabel: function() {
 		this.$property.show();

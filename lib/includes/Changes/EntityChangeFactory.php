@@ -17,7 +17,6 @@ use Wikibase\EntityChange;
 /**
  * Factory for EntityChange objects
  *
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
@@ -49,7 +48,6 @@ class EntityChangeFactory {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @param string $action The action name
 	 * @param EntityId $entityId
@@ -84,7 +82,6 @@ class EntityChangeFactory {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @param string $changeType
 	 * @param EntityId $entityId
@@ -100,7 +97,6 @@ class EntityChangeFactory {
 	/**
 	 * Constructs an EntityChange from the given old and new Entity.
 	 *
-	 * @since 0.5
 	 *
 	 * @param string      $action The action name
 	 * @param EntityDocument|null $oldEntity

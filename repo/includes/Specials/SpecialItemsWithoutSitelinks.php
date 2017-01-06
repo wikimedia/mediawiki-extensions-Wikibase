@@ -8,7 +8,6 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * Special page for listing Items without sitelinks.
  *
- * @since 0.4
  *
  * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
@@ -22,7 +21,6 @@ class SpecialItemsWithoutSitelinks extends SpecialWikibaseQueryPage {
 	/**
 	 * @see SpecialWikibasePage::execute
 	 *
-	 * @since 0.4
 	 *
 	 * @param string|null $subPage
 	 */
@@ -35,7 +33,6 @@ class SpecialItemsWithoutSitelinks extends SpecialWikibaseQueryPage {
 	/**
 	 * @see SpecialWikibaseQueryPage::getResult
 	 *
-	 * @since 0.4
 	 *
 	 * @param int $offset
 	 * @param int $limit

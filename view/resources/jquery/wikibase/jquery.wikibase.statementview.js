@@ -21,7 +21,6 @@
  * @uses wikibase.datamodel.ReferenceList
  * @uses wikibase.datamodel.Statement
  * @uses wikibase.utilities.ui
- * @since 0.4
  * @license GPL-2.0+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  * @author H. Snater < mediawiki@snater.com >
@@ -171,7 +170,6 @@ $.widget( 'wikibase.statementview', PARENT, {
 	},
 
 	/**
-	 * @since 0.5
 	 * @private
 	 *
 	 * @param {number} rank

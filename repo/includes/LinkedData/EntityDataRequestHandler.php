@@ -24,7 +24,6 @@ use Wikibase\RedirectRevision;
 /**
  * Request handler implementing a linked data interface for Wikibase entities.
  *
- * @since 0.4
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
@@ -98,7 +97,6 @@ class EntityDataRequestHandler {
 	private $frameOptionsHeader;
 
 	/**
-	 * @since 0.4
 	 *
 	 * @param EntityDataUriManager $uriManager
 	 * @param EntityTitleLookup $entityTitleLookup
@@ -145,7 +143,6 @@ class EntityDataRequestHandler {
 	 * This does not check whether the request is valid and will actually produce a successful
 	 * response.
 	 *
-	 * @since 0.4
 	 *
 	 * @param string|null $doc Document name, e.g. Q5 or Q5.json or Q5:33.xml
 	 * @param WebRequest $request
@@ -166,7 +163,6 @@ class EntityDataRequestHandler {
 	/**
 	 * Main method for handling requests.
 	 *
-	 * @since 0.4
 	 *
 	 * @param string $doc Document name, e.g. Q5 or Q5.json or Q5:33.xml
 	 * @param WebRequest $request The request parameters. Known parameters are:

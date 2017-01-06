@@ -8,7 +8,6 @@ use Wikibase\EntityRevision;
 /**
  * Service interface for retrieving EntityRevisions from storage.
  *
- * @since 0.4
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
@@ -45,7 +44,6 @@ interface EntityRevisionLookup {
 	 *
 	 * Implementations of this method must not silently resolve redirects.
 	 *
-	 * @since 0.4
 	 *
 	 * @param EntityId $entityId
 	 * @param int $revisionId The desired revision id, or 0 for the latest revision.

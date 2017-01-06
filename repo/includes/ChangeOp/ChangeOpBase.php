@@ -8,7 +8,6 @@ use Wikibase\Summary;
 /**
  * Base class for change operations.
  *
- * @since 0.4
  *
  * @license GPL-2.0+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
@@ -16,7 +15,6 @@ use Wikibase\Summary;
 abstract class ChangeOpBase implements ChangeOp {
 
 	/**
-	 * @since 0.4
 	 *
 	 * @param Summary|null $summary
 	 * @param string $action

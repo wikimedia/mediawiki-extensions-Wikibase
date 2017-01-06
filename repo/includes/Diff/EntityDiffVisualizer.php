@@ -18,7 +18,6 @@ use Wikibase\Repo\Content\EntityContentDiff;
 /**
  * Class for generating views of EntityDiff objects.
  *
- * @since 0.4
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -53,7 +52,6 @@ class EntityDiffVisualizer {
 	private $entityIdFormatter;
 
 	/**
-	 * @since 0.4
 	 *
 	 * @param IContextSource $contextSource
 	 * @param ClaimDiffer $claimDiffer
@@ -77,7 +75,6 @@ class EntityDiffVisualizer {
 	/**
 	 * Generates and returns an HTML visualization of the provided EntityContentDiff.
 	 *
-	 * @since 0.5
 	 *
 	 * @param EntityContentDiff $diff
 	 *
@@ -93,7 +90,6 @@ class EntityDiffVisualizer {
 	/**
 	 * Generates and returns an HTML visualization of the provided EntityDiff.
 	 *
-	 * @since 0.4
 	 *
 	 * @param EntityDiff $diff
 	 *
@@ -151,7 +147,6 @@ class EntityDiffVisualizer {
 	/**
 	 * Generates and returns an HTML visualization of the provided redirect Diff.
 	 *
-	 * @since 0.5
 	 *
 	 * @param Diff $diff
 	 *
@@ -179,7 +174,6 @@ class EntityDiffVisualizer {
 	/**
 	 * Returns the HTML for a single claim DiffOp.
 	 *
-	 * @since 0.4
 	 *
 	 * @param DiffOp $claimDiffOp
 	 *

@@ -96,7 +96,6 @@ use Wikibase\StringNormalizer;
 /**
  * Top level factory for the WikibaseClient extension.
  *
- * @since 0.4
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -238,7 +237,6 @@ final class WikibaseClient {
 	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
 	 * Program logic should use WikibaseClient::getSnakFormatterFactory() instead!
 	 *
-	 * @since 0.5
 	 *
 	 * @return WikibaseValueFormatterBuilders
 	 */
@@ -281,7 +279,6 @@ final class WikibaseClient {
 	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
 	 * Program logic should use WikibaseClient::getSnakFormatterFactory() instead!
 	 *
-	 * @since 0.5
 	 *
 	 * @return WikibaseSnakFormatterBuilders
 	 */
@@ -338,7 +335,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @return DataTypeFactory
 	 */
@@ -351,7 +347,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @return EntityIdParser
 	 */
@@ -366,7 +361,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @return EntityIdComposer
 	 */
@@ -443,7 +437,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @return PropertyDataTypeLookup
 	 */
@@ -458,7 +451,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @return StringNormalizer
 	 */
@@ -471,7 +463,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @return RepoLinker
 	 */
@@ -488,7 +479,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @return LanguageFallbackChainFactory
 	 */
@@ -501,7 +491,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @return LanguageFallbackLabelDescriptionLookupFactory
 	 */
@@ -516,7 +505,6 @@ final class WikibaseClient {
 	/**
 	 * Returns an instance of the default store.
 	 *
-	 * @since 0.1
 	 *
 	 * @throws Exception
 	 * @return ClientStore
@@ -577,7 +565,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @return Language
 	 */
@@ -586,7 +573,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @return SettingsArray
 	 */
@@ -649,7 +635,6 @@ final class WikibaseClient {
 	/**
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
-	 * @since 0.4
 	 *
 	 * @param string $reset Flag: Pass "reset" to reset the default instance
 	 *
@@ -1007,7 +992,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @return OtherProjectsSidebarGeneratorFactory
 	 */
@@ -1020,7 +1004,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @return EntityChangeFactory
 	 */
@@ -1038,7 +1021,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @return EntityDiffer
 	 */

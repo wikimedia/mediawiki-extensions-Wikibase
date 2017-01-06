@@ -13,7 +13,6 @@
  * @extends jQuery.ui.TemplatedWidget
  * @uses jQuery.wikibase.listview
  * @uses jQuery.wikibase.listview.ListItemAdapter
- * @since 0.4
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
@@ -146,7 +145,6 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	/**
 	 * Creates the `listview` widget managing the `statementview` widgets.
 	 *
-	 * @since 0.5
 	 * @private
 	 */
 	_createListView: function() {

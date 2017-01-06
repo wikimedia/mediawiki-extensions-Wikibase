@@ -10,7 +10,6 @@ use Diff\DiffOp\DiffOpChange;
  * Represents the difference between two Statement objects.
  * @fixme Contains references and rank? It's a StatementDifference!
  *
- * @since 0.4
  *
  * @license GPL-2.0+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
@@ -39,7 +38,6 @@ class ClaimDifference implements Comparable {
 	private $rankChange;
 
 	/**
-	 * @since 0.4
 	 *
 	 * @param DiffOpChange|null $mainSnakChange
 	 * @param Diff|null $qualifierChanges
@@ -61,7 +59,6 @@ class ClaimDifference implements Comparable {
 	/**
 	 * Returns the set of reference changes.
 	 *
-	 * @since 0.4
 	 *
 	 * @return Diff
 	 */
@@ -72,7 +69,6 @@ class ClaimDifference implements Comparable {
 	/**
 	 * Returns the main snak change.
 	 *
-	 * @since 0.4
 	 *
 	 * @return DiffOpChange|null
 	 */
@@ -83,7 +79,6 @@ class ClaimDifference implements Comparable {
 	/**
 	 * Returns the rank change.
 	 *
-	 * @since 0.4
 	 *
 	 * @return DiffOpChange|null
 	 */
@@ -94,7 +89,6 @@ class ClaimDifference implements Comparable {
 	/**
 	 * Returns the set of qualifier changes.
 	 *
-	 * @since 0.4
 	 *
 	 * @return Diff
 	 */
@@ -105,7 +99,6 @@ class ClaimDifference implements Comparable {
 	/**
 	 * @see Comparable::equals
 	 *
-	 * @since 0.1
 	 *
 	 * @param mixed $target
 	 *
@@ -130,7 +123,6 @@ class ClaimDifference implements Comparable {
 	 * Checks whether the difference represented by this object is atomic, which means
 	 * the Statement has only changed either its main snak, qualifiers, references or rank.
 	 *
-	 * @since 0.4
 	 *
 	 * @return bool
 	 */

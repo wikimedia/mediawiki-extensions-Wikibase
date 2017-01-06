@@ -15,7 +15,6 @@
 	 *
 	 * @constructor
 	 * @extends valueFormatters.ValueFormatter
-	 * @since 0.5
 	 *
 	 * @param {wikibase.api.FormatValueCaller} formatValueCaller
 	 * @param {Object} additionalOptions
@@ -61,7 +60,6 @@
 
 			/**
 			 * @see valueFormatters.ValueFormatter.format
-			 * @since 0.1
 			 *
 			 * @param {dataValues.DataValue} dataValue
 			 * @return {jQuery.Promise}

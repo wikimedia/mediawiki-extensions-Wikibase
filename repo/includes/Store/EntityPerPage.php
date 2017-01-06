@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * Interface to a table that join wiki pages and entities.
  *
- * @since 0.2
  *
  * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
@@ -18,7 +17,6 @@ interface EntityPerPage {
 	/**
 	 * Adds a new link between an entity and a page
 	 *
-	 * @since 0.5
 	 *
 	 * @param EntityId $entityId
 	 * @param int $pageId
@@ -30,7 +28,6 @@ interface EntityPerPage {
 	/**
 	 * Adds a new link between an entity redirect and a page
 	 *
-	 * @since 0.5
 	 *
 	 * @param EntityId $entityId
 	 * @param int $pageId
@@ -41,7 +38,6 @@ interface EntityPerPage {
 	/**
 	 * Removes a link between an entity (or entity redirect) and a page
 	 *
-	 * @since 0.5
 	 *
 	 * @param EntityId $entityId
 	 * @param int $pageId
@@ -54,7 +50,6 @@ interface EntityPerPage {
 	/**
 	 * Removes all associations of the given entity (or entity redirect).
 	 *
-	 * @since 0.5
 	 *
 	 * @param EntityId $entityId
 	 *
@@ -65,7 +60,6 @@ interface EntityPerPage {
 	/**
 	 * Clears the table
 	 *
-	 * @since 0.2
 	 *
 	 * @return boolean Success indicator
 	 */

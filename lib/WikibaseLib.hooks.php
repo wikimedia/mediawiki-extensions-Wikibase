@@ -8,7 +8,6 @@ use ResourceLoader;
 /**
  * File defining the hook handlers for the WikibaseLib extension.
  *
- * @since 0.1
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -21,7 +20,6 @@ final class LibHooks {
 	 * Hook to add PHPUnit test cases.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/UnitTestsList
 	 *
-	 * @since 0.2
 	 *
 	 * @param string[] &$paths
 	 *

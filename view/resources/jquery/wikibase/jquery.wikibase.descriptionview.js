@@ -9,7 +9,6 @@
 
 /**
  * Manages a description.
- * @since 0.5
  * @extends jQuery.ui.EditableTemplatedWidget
  *
  * @option {wikibase.datamodel.Term} value

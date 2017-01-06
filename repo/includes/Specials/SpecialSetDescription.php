@@ -10,7 +10,6 @@ use Wikibase\Summary;
 /**
  * Special page for setting the description of a Wikibase entity.
  *
- * @since 0.4
  *
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
@@ -18,7 +17,6 @@ use Wikibase\Summary;
 class SpecialSetDescription extends SpecialModifyTerm {
 
 	/**
-	 * @since 0.4
 	 */
 	public function __construct() {
 		parent::__construct( 'SetDescription' );
@@ -44,7 +42,6 @@ class SpecialSetDescription extends SpecialModifyTerm {
 	/**
 	 * @see SpecialSetEntity::getPostedValue()
 	 *
-	 * @since 0.4
 	 *
 	 * @return string
 	 */
@@ -55,7 +52,6 @@ class SpecialSetDescription extends SpecialModifyTerm {
 	/**
 	 * @see SpecialSetEntity::getValue()
 	 *
-	 * @since 0.4
 	 *
 	 * @param EntityDocument $entity
 	 * @param string $languageCode
@@ -80,7 +76,6 @@ class SpecialSetDescription extends SpecialModifyTerm {
 	/**
 	 * @see SpecialSetEntity::setValue()
 	 *
-	 * @since 0.4
 	 *
 	 * @param EntityDocument $entity
 	 * @param string $languageCode

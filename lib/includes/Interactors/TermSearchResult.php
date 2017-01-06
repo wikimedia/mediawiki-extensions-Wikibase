@@ -7,7 +7,6 @@ use Wikibase\DataModel\Term\Term;
 use Wikimedia\Assert\Assert;
 
 /**
- * @since 0.5
  *
  * @author Addshore
  */

@@ -13,7 +13,6 @@ use Wikibase\Summary;
 /**
  * Class for reference removal change operation
  *
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author Addshore
@@ -33,7 +32,6 @@ class ChangeOpReferenceRemove extends ChangeOpBase {
 	/**
 	 * Constructs a new reference removal change operation
 	 *
-	 * @since 0.5
 	 *
 	 * @param string $statementGuid
 	 * @param string $referenceHash
@@ -85,7 +83,6 @@ class ChangeOpReferenceRemove extends ChangeOpBase {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @param ReferenceList $references
 	 * @param Summary|null $summary
@@ -104,7 +101,6 @@ class ChangeOpReferenceRemove extends ChangeOpBase {
 	}
 
 	/**
-	 * @since 0.4
 	 *
 	 * @param Snak $snak
 	 * @return array

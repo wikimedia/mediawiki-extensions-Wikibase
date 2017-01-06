@@ -9,7 +9,6 @@ use UnexpectedValueException;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
@@ -37,7 +36,6 @@ class ExternalChangeFactory {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @param RecentChange $recentChange
 	 *

@@ -23,7 +23,6 @@ use Wikibase\Repo\Hooks\EditFilterHookRunner;
 /**
  * @covers Wikibase\Repo\Hooks\EditFilterHookRunner
  *
- * @since 0.5
  *
  * @group WikibaseRepo
  * @group Wikibase

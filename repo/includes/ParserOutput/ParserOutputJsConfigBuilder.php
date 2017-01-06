@@ -7,7 +7,6 @@ use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityDocument;
 
 /**
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author H. Snater < mediawiki at snater.com >

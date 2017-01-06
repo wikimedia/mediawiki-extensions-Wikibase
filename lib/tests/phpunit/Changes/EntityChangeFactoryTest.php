@@ -21,7 +21,6 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
 /**
  * @covers Wikibase\Lib\Changes\EntityChangeFactory
  *
- * @since 0.5
  *
  * @group Database
  * @group Wikibase

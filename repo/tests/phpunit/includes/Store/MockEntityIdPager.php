@@ -26,7 +26,6 @@ class MockEntityIdPager implements EntityPerPage, EntityIdPager {
 	/**
 	 * Adds a new link between an entity and a page
 	 *
-	 * @since 0.5
 	 *
 	 * @param EntityId $entityId
 	 * @param int $pageId
@@ -40,7 +39,6 @@ class MockEntityIdPager implements EntityPerPage, EntityIdPager {
 	/**
 	 * Adds a new link between an entity redirect and a page
 	 *
-	 * @since 0.5
 	 *
 	 * @param EntityId $entityId
 	 * @param int $pageId
@@ -73,7 +71,6 @@ class MockEntityIdPager implements EntityPerPage, EntityIdPager {
 	/**
 	 * Lists entities of the given type (optionally including redirects).
 	 *
-	 * @since 0.5
 	 *
 	 * @param null|string $entityType The entity type to look for.
 	 * @param int $limit The maximum number of IDs to return.
@@ -130,7 +127,6 @@ class MockEntityIdPager implements EntityPerPage, EntityIdPager {
 	/**
 	 * Removes a link between an entity (or entity redirect) and a page
 	 *
-	 * @since 0.5
 	 *
 	 * @param EntityId $entityId
 	 * @param int $pageId
@@ -145,7 +141,6 @@ class MockEntityIdPager implements EntityPerPage, EntityIdPager {
 	/**
 	 * Removes all associations of the given entity (or entity redirect).
 	 *
-	 * @since 0.5
 	 *
 	 * @param EntityId $entityId
 	 *
@@ -159,7 +154,6 @@ class MockEntityIdPager implements EntityPerPage, EntityIdPager {
 	/**
 	 * Clears the table
 	 *
-	 * @since 0.2
 	 *
 	 * @return boolean Success indicator
 	 */

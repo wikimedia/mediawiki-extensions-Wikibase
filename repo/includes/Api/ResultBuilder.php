@@ -27,7 +27,6 @@ use Wikimedia\Assert\Assert;
 /**
  * Builder for Api Results
  *
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author Addshore
@@ -116,7 +115,6 @@ class ResultBuilder {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @param bool|int|null $success
 	 */
@@ -143,7 +141,6 @@ class ResultBuilder {
 	 * @see ResultBuilder::setValue()
 	 * @see ResultBuilder::appendValue()
 	 *
-	 * @since 0.5
 	 *
 	 * @param array|string|null $path
 	 * @param string $name
@@ -176,7 +173,6 @@ class ResultBuilder {
 	 * @see ResultBuilder::appendValue()
 	 * @see ApiResult::addValue
 	 *
-	 * @since 0.5
 	 *
 	 * @param array|string|null $path
 	 * @param string $name
@@ -202,7 +198,6 @@ class ResultBuilder {
 	 * @see ApiResult::addValue
 	 * @see ApiResult::setIndexedTagName_internal
 	 *
-	 * @since 0.5
 	 *
 	 * @param array|string|null $path
 	 * @param int|string|null $key the key to use when appending, or null for automatic.
@@ -268,7 +263,6 @@ class ResultBuilder {
 	 * @param string[] $filterLangCodes A list of language codes to filter by
 	 * @param LanguageFallbackChain[] $fallbackChains with keys of the origional language
 	 *
-	 * @since 0.5
 	 */
 	public function addEntityRevision(
 		$sourceEntityIdSerialization,
@@ -607,7 +601,6 @@ class ResultBuilder {
 	 * @param EntityId $entityId
 	 * @param string|array|null $path
 	 *
-	 * @since 0.5
 	 */
 	public function addBasicEntityInformation( EntityId $entityId, $path ) {
 		$this->setValue( $path, 'id', $entityId->getSerialization() );
@@ -617,7 +610,6 @@ class ResultBuilder {
 	/**
 	 * Get serialized labels and add them to result
 	 *
-	 * @since 0.5
 	 *
 	 * @param TermList $labels the labels to insert in the result
 	 * @param array|string $path where the data is located
@@ -629,7 +621,6 @@ class ResultBuilder {
 	/**
 	 * Adds fake serialization to show a label has been removed
 	 *
-	 * @since 0.5
 	 *
 	 * @param string $language
 	 * @param array|string $path where the data is located
@@ -641,7 +632,6 @@ class ResultBuilder {
 	/**
 	 * Get serialized descriptions and add them to result
 	 *
-	 * @since 0.5
 	 *
 	 * @param TermList $descriptions the descriptions to insert in the result
 	 * @param array|string $path where the data is located
@@ -653,7 +643,6 @@ class ResultBuilder {
 	/**
 	 * Adds fake serialization to show a label has been removed
 	 *
-	 * @since 0.5
 	 *
 	 * @param string $language
 	 * @param array|string $path where the data is located
@@ -705,7 +694,6 @@ class ResultBuilder {
 	/**
 	 * Get serialized AliasGroupList and add it to result
 	 *
-	 * @since 0.5
 	 *
 	 * @param AliasGroupList $aliasGroupList the AliasGroupList to set in the result
 	 * @param array|string $path where the data is located
@@ -734,7 +722,6 @@ class ResultBuilder {
 	/**
 	 * Get serialized sitelinks and add them to result
 	 *
-	 * @since 0.5
 	 *
 	 * @todo use a SiteLinkListSerializer when created in DataModelSerialization here
 	 *
@@ -791,7 +778,6 @@ class ResultBuilder {
 	/**
 	 * Adds fake serialization to show a sitelink has been removed
 	 *
-	 * @since 0.5
 	 *
 	 * @param SiteLinkList $siteLinkList
 	 * @param array|string $path where the data is located
@@ -818,7 +804,6 @@ class ResultBuilder {
 	/**
 	 * Get serialized claims and add them to result
 	 *
-	 * @since 0.5
 	 *
 	 * @param StatementList $statements the labels to set in the result
 	 * @param array|string $path where the data is located
@@ -874,7 +859,6 @@ class ResultBuilder {
 	 *
 	 * @param Statement $statement
 	 *
-	 * @since 0.5
 	 */
 	public function addStatement( Statement $statement ) {
 		$serializer = $this->serializerFactory->newStatementSerializer();
@@ -976,7 +960,6 @@ class ResultBuilder {
 	 *
 	 * @param Reference $reference
 	 *
-	 * @since 0.5
 	 */
 	public function addReference( Reference $reference ) {
 		$serializer = $this->serializerFactory->newReferenceSerializer();
@@ -1037,7 +1020,6 @@ class ResultBuilder {
 	 *        otherwise, it defaults to using a unique negative number.
 	 * @param array $missingDetails array containing key value pair missing details
 	 *
-	 * @since 0.5
 	 */
 	public function addMissingEntity( $key, array $missingDetails ) {
 		if ( $key === null && isset( $missingDetails['id'] ) ) {
@@ -1074,7 +1056,6 @@ class ResultBuilder {
 	 * @param string $to
 	 * @param string $name
 	 *
-	 * @since 0.5
 	 */
 	public function addNormalizedTitle( $from, $to, $name = 'n' ) {
 		$this->setValue(
@@ -1095,7 +1076,6 @@ class ResultBuilder {
 	 *
 	 * @see ApiResult::addValue()
 	 *
-	 * @since 0.5
 	 *
 	 * @param Status $status The status to get the revision ID from.
 	 * @param string|null|array $path Where in the result to put the revision id

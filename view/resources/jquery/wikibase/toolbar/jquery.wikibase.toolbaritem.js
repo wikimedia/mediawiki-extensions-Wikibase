@@ -11,7 +11,6 @@ var PARENT = $.ui.TemplatedWidget;
  * Represents a generic item to be wrapped by a jQuery.wikibase.toolbar.
  * @constructor
  * @extends jQuery.ui.TemplatedWidget
- * @since 0.5
  */
 $.widget( 'wikibase.toolbaritem', PARENT, {
 	/**

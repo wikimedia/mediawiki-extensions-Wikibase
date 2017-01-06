@@ -11,7 +11,6 @@ use Wikibase\TermIndexEntry;
 /**
  * Factory to create special pages.
  *
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
@@ -83,7 +82,6 @@ class SpecialEntitiesWithoutPageFactory {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @return SpecialEntitiesWithoutPage
 	 */
@@ -100,7 +98,6 @@ class SpecialEntitiesWithoutPageFactory {
 	}
 
 	/**
-	 * @since 0.5
 	 *
 	 * @return SpecialEntitiesWithoutPage
 	 */

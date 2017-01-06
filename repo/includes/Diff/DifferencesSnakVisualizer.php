@@ -108,7 +108,6 @@ class DifferencesSnakVisualizer {
 	/**
 	 * Get formatted header for a snak, including the snak's property label, but not the snak's value.
 	 *
-	 * @since 0.4
 	 *
 	 * @param Snak|null $snak
 	 *
@@ -128,7 +127,6 @@ class DifferencesSnakVisualizer {
 	/**
 	 * Get formatted header for a snak, including the snak's property label and value.
 	 *
-	 * @since 0.4
 	 *
 	 * @param Snak $snak
 	 *

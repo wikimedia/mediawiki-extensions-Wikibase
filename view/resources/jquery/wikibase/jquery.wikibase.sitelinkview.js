@@ -9,7 +9,6 @@
 
 /**
  * Displays and allows editing a site link.
- * @since 0.5
  * @extends jQuery.ui.EditableTemplatedWidget
  *
  * @option {wikibase.datamodel.SiteLink} [value]

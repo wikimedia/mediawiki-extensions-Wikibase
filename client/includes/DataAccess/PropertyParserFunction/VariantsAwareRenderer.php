@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * Handler of the {{#property}} parser function.
  *
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >

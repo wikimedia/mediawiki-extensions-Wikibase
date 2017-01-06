@@ -18,7 +18,6 @@ use Wikibase\DataModel\Term\Term;
 /**
  * @covers Wikibase\Client\Hooks\LanguageLinkBadgeDisplay
  *
- * @since 0.5
  *
  * @group WikibaseClient
  * @group Wikibase

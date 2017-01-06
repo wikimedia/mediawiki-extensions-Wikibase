@@ -19,7 +19,6 @@ use Wikibase\Client\RepoLinker;
  * @group Wikibase
  * @group Wikibase Client
  *
- * @since 0.5
  */
 class PageConnectionPresentationModelTest extends MediaWikiTestCase {
 

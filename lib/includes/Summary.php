@@ -45,7 +45,6 @@ class Summary {
 	private $userSummary;
 
 	/**
-	 * @since 0.4
 	 *
 	 * @param string|null $moduleName The module part of the auto comment
 	 * @param string|null $actionName The action part of the auto comment
@@ -70,7 +69,6 @@ class Summary {
 	/**
 	 * Set the user provided edit summary
 	 *
-	 * @since 0.4
 	 *
 	 * @param string|null $summary edit summary provided by the user
 	 */
@@ -81,7 +79,6 @@ class Summary {
 	/**
 	 * Set the language code to use as the second autocomment argument
 	 *
-	 * @since 0.4
 	 *
 	 * @param string|null $languageCode
 	 */
@@ -92,7 +89,6 @@ class Summary {
 	/**
 	 * Set the module part of the autocomment
 	 *
-	 * @since 0.4
 	 *
 	 * @param string $name
 	 */
@@ -103,7 +99,6 @@ class Summary {
 	/**
 	 * Get the module part of the autocomment
 	 *
-	 * @since 0.4
 	 *
 	 * @return string|null
 	 */
@@ -114,7 +109,6 @@ class Summary {
 	/**
 	 * Set the action part of the autocomment
 	 *
-	 * @since 0.4
 	 *
 	 * @param string|null $name
 	 */
@@ -125,7 +119,6 @@ class Summary {
 	/**
 	 * Get the action part of the autocomment
 	 *
-	 * @since 0.4
 	 *
 	 * @return string|null
 	 */
@@ -136,7 +129,6 @@ class Summary {
 	/**
 	 * Get the user-provided edit summary
 	 *
-	 * @since 0.4
 	 *
 	 * @return string|null
 	 */
@@ -147,7 +139,6 @@ class Summary {
 	/**
 	 * Get the language part of the autocomment
 	 *
-	 * @since 0.4
 	 *
 	 * @return string|null
 	 */
@@ -158,7 +149,6 @@ class Summary {
 	/**
 	 * Format the message key using the object-specific values
 	 *
-	 * @since 0.3
 	 *
 	 * @return string with a message key, or possibly an empty string
 	 */
@@ -175,7 +165,6 @@ class Summary {
 	/**
 	 * Add auto comment arguments.
 	 *
-	 * @since 0.4
 	 *
 	 * @param mixed $args,... Parts to be stringed together
 	 */
@@ -190,7 +179,6 @@ class Summary {
 	/**
 	 * Add arguments to the summary part.
 	 *
-	 * @since 0.4
 	 *
 	 * @param mixed $args,... Parts to be stringed together
 	 */

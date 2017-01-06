@@ -10,7 +10,6 @@ use Wikibase\DataModel\Statement\Statement;
 /**
  * Class for generating a ClaimDifference given two statements.
  *
- * @since 0.4
  *
  * @license GPL-2.0+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
@@ -28,7 +27,6 @@ class ClaimDiffer {
 	/**
 	 * Calculates diff of two Statements and stores the difference in a ClaimDifference
 	 *
-	 * @since 0.4
 	 *
 	 * @param Statement|null $oldStatement
 	 * @param Statement|null $newStatement

@@ -12,7 +12,6 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * API module for creating claims.
  *
- * @since 0.2
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -77,7 +76,6 @@ class CreateClaim extends ApiBase {
 	/**
 	 * @see ApiBase::execute
 	 *
-	 * @since 0.2
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();

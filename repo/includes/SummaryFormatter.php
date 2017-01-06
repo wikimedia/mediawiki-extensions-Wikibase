@@ -18,7 +18,6 @@ use Wikibase\Lib\SnakFormatter;
 /**
  * Formatter for Summary objects
  *
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author John Erling Blad
@@ -91,7 +90,6 @@ class SummaryFormatter {
 	 * and the second one is always the language code supplied via setLanguage()
 	 * (or the constructor).
 	 *
-	 * @since 0.5
 	 *
 	 * @param Summary $summary
 	 *
@@ -120,7 +118,6 @@ class SummaryFormatter {
 	/**
 	 * Formats the auto summary part of a full summary.
 	 *
-	 * @since 0.4
 	 *
 	 * @param Summary $summary
 	 *
@@ -170,7 +167,6 @@ class SummaryFormatter {
 	/**
 	 * Format an auto summary argument
 	 *
-	 * @since 0.4
 	 *
 	 * @param mixed $arg
 	 *
@@ -272,7 +268,6 @@ class SummaryFormatter {
 	/**
 	 * Format the given summary
 	 *
-	 * @since 0.5
 	 *
 	 * @param Summary $summary
 	 *

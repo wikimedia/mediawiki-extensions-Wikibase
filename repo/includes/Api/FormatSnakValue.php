@@ -24,7 +24,6 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * API module for using value formatters.
  *
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
@@ -89,7 +88,6 @@ class FormatSnakValue extends ApiBase {
 	/**
 	 * @see ApiBase::execute
 	 *
-	 * @since 0.1
 	 */
 	public function execute() {
 		$this->getMain()->setCacheMode( 'public' );

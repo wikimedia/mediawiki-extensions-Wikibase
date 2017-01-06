@@ -12,7 +12,6 @@ use Wikibase\View\Template\TemplateFactory;
  * Class for creating views for Item instances.
  * For the Item this basically is what the Parser is for WikitextContent.
  *
- * @since 0.1
  *
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
@@ -110,7 +109,6 @@ class ItemView extends EntityView {
 	/**
 	 * Builds and returns the HTML representing a WikibaseEntity's site-links.
 	 *
-	 * @since 0.1
 	 *
 	 * @param Item $item the entity to render
 	 *

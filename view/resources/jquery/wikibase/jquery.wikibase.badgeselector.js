@@ -15,7 +15,6 @@ var $menu = null;
 
 /**
  * Selector for toggling badges.
- * @since 0.5
  * @extends jQuery.ui.EditableTemplatedWidget
  *
  * @option {string[]} [value]

@@ -8,7 +8,6 @@ var PARENT = $.wikibase.entityview;
  * @see wikibase.datamodel.Item
  * @class jQuery.wikibase.itemview
  * @extends jQuery.wikibase.entityview
- * @since 0.5
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *

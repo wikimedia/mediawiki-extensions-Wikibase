@@ -10,7 +10,6 @@ use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 /**
  * A simple wrapper that forwards formatting of an EntityIdValue object to an EntityIdFormatter.
  *
- * @since 0.5
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -35,7 +34,6 @@ class EntityIdValueFormatter implements ValueFormatter {
 	 *
 	 * Format an EntityIdValue
 	 *
-	 * @since 0.5
 	 *
 	 * @param EntityIdValue $value
 	 *
