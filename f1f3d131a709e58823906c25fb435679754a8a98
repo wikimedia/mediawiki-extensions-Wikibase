@@ -34,6 +34,24 @@
       "revId": "f1f3d131a709e58823906c25fb435679754a8a98",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0c87c0_50cae24b",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/NullChangeOpTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-06T15:43:34Z",
+      "side": 1,
+      "message": "I have not clear opinion on this as I don\u0027t know what possible use cases are there.\nCI is one of them. I\u0027d also mostly likely just run locally tests from one dir and be happy with that.\nI am just asking openly about this as maybe there is more of use of those @groups than just CI. For instance, we\u0027re going to have custom ChangeOp implementations in WikibaseLexeme. If their tests also have @group ChangeOp one could run all \"core\" Wikibase and the extension test in one go. Whether such use case is actually something that happens in practice, this is another story.\n\nSo yes, I think we should either have \"@group ChangeOp\" for all change-op-related tests, or remove it completely. What is intended - I don\u0027t know.",
+      "parentUuid": "ae0c87c0_30a9ae79",
+      "revId": "f1f3d131a709e58823906c25fb435679754a8a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
