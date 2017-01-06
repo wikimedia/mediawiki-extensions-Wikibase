@@ -31,7 +31,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @covers Wikibase\Dumpers\DumpGenerator
  *
  * @group Wikibase
- * @group JsonDump
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

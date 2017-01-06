@@ -9,7 +9,6 @@ use Wikibase\Summary;
  * @covers Wikibase\Summary
  *
  * @group Wikibase
- * @group WikibaseSummary
  *
  * @license GPL-2.0+
  * @author John Erling Blad < jeblad@gmail.com >

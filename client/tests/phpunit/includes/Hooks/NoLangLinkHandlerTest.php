@@ -13,7 +13,6 @@ use Wikibase\NoLangLinkHandler;
  * @covers Wikibase\NoLangLinkHandler
  *
  * @group WikibaseClient
- * @group HookHandler
  * @group Wikibase
  *
  * @license GPL-2.0+

@@ -17,7 +17,6 @@ use Wikibase\Client\RepoLinker;
  *
  * @group Database
  * @group Wikibase
- * @group Wikibase Client
  *
  * @since 0.5
  */

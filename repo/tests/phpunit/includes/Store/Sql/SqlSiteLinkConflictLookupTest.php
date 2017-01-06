@@ -13,7 +13,6 @@ use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
  * @covers Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup
  *
  * @group Wikibase
- * @group SiteLink
  * @group WikibaseStore
  * @group Database
  *

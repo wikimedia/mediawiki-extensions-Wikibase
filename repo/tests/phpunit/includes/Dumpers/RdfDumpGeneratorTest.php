@@ -30,7 +30,6 @@ use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
  *
  * @group Wikibase
  * @group WikibaseRdf
- * @group RdfDump
  *
  * @license GPL-2.0+
  * @author Stas Malyshev

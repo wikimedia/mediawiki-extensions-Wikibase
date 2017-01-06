@@ -18,7 +18,6 @@ use Wikibase\Store\SubscriptionLookup;
 /**
  * @covers Wikibase\Repo\Hooks\InfoActionHookHandler
  *
- * @group InfoActionHookHandler
  * @group Wikibase
  *
  * @license GPL-2.0+

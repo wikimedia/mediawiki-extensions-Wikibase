@@ -28,7 +28,6 @@ use Wikibase\Lib\Tests\Changes\TestChanges;
  * @group Database
  * @group WikibaseClient
  * @group Wikibase
- * @group AffectedPagesFinder
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >

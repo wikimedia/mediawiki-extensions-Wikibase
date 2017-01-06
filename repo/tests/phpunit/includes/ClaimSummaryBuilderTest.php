@@ -20,7 +20,6 @@ use Wikibase\Summary;
  * @covers Wikibase\ClaimSummaryBuilder
  *
  * @group Wikibase
- * @group ClaimSummaryBuilder
  *
  * @license GPL-2.0+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >

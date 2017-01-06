@@ -20,7 +20,6 @@ use Wikibase\Repo\SnakFactory;
  * @covers Wikibase\Repo\SnakFactory
  *
  * @group Wikibase
- * @group Snak
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

@@ -27,7 +27,6 @@ use Wikibase\Lib\Tests\MockRepository;
  * @covers Wikibase\Repo\Interactors\ItemMergeInteractor
  *
  * @group Wikibase
- * @group WikibaseInteractor
  * @group Database
  * @group medium
  *

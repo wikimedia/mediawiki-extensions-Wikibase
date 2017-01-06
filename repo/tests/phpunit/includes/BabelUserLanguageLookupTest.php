@@ -8,7 +8,6 @@ use User;
  * @covers Wikibase\Repo\BabelUserLanguageLookup
  *
  * @group Wikibase
- * @group EntityView
  * @group Database
  *
  * @license GPL-2.0+

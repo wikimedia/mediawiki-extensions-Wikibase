@@ -8,7 +8,6 @@ use Wikibase\Repo\IO\LineReader;
  * @covers Wikibase\Repo\IO\LineReader
  *
  * @group Wikibase
- * @group WikibaseIO
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

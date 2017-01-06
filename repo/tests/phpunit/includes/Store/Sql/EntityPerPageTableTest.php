@@ -17,7 +17,6 @@ use Wikibase\Repo\Store\Sql\EntityPerPageTable;
  *
  * @group Wikibase
  * @group WikibaseStore
- * @group WikibaseEntityPerPage
  * @group Database
  *
  * @group medium

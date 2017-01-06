@@ -14,7 +14,6 @@ use Wikibase\Repo\Diff\ClaimDifference;
  * @covers Wikibase\Repo\Diff\ClaimDifference
  *
  * @group Wikibase
- * @group WikibaseClaim
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

@@ -22,7 +22,6 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @group Wikibase
  * @group WikibaseAPI
- * @group FormatSnakValueAPI
  * @group Database
  * @group medium
  *

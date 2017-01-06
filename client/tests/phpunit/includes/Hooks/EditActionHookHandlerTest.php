@@ -23,7 +23,6 @@ use Wikibase\Client\Usage\EntityUsage;
  * @covers Wikibase\Client\Hooks\EditActionHookHandler
  *
  * @group WikibaseClient
- * @group EditActionHookHandler
  * @group Wikibase
  *
  * @license GPL-2.0+
