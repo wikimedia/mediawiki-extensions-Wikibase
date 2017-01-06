@@ -16,6 +16,24 @@
       "revId": "f9ef71caf6138dadb3527df07418dc59525f5148",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0c87c0_30852ea0",
+        "filename": "repo/includes/ChangeOp/ChangeOpDeserializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-06T16:22:33Z",
+      "side": 1,
+      "message": "But it clearly says `@return ChangeOp`. Does anyone else also have this confusion?\n\nI can return the part about ChangeOps, but then I probably should also add part about NullChangeOp. Which I don\u0027t think will improve readability, as soon as description of the class should be short (as Thiemo once told me).",
+      "parentUuid": "ae0c87c0_b0859e0d",
+      "revId": "f9ef71caf6138dadb3527df07418dc59525f5148",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
