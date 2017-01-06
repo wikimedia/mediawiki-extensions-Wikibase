@@ -6,7 +6,7 @@
 ( function ( $, mw, OO ) {
 	'use strict';
 
-	$( document ).ready( function () {
+	$( function () {
 		var $lang, fields, fieldCount, autonyms, langWidget;
 
 		$lang = $( document.getElementsByName( 'lang' ) ).closest( '.oo-ui-inputWidget' );

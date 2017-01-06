@@ -12,7 +12,7 @@
 	 */
 	var IS_RTL = false;
 
-	$( document ).ready( function() {
+	$( function() {
 		// have to wait for document to be loaded for this, otherwise 'rtl' might not yet be there!
 		IS_RTL = $( 'body' ).hasClass( 'rtl' );
 	} );
