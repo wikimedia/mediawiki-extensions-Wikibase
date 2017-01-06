@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0c87c0_c7397ef1",
+        "filename": "repo/includes/Api/ListSubscribers.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-06T09:55:15Z",
+      "side": 1,
+      "message": "minor: no need to rename the local var here.",
+      "range": {
+        "startLine": 59,
+        "startChar": 2,
+        "endLine": 59,
+        "endChar": 7
+      },
+      "revId": "024063e8142fa2af6a2eb79e3ae2db7c50ae35eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0c87c0_275cda4d",
+        "filename": "repo/tests/phpunit/includes/Api/ListSubscribersTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-06T09:55:15Z",
+      "side": 1,
+      "message": "instead of getting global state instances you could possibly also inject BasicEntityIdParser and HashSiteStore instances here.\n\nHaving briefly looked it seems those tests don\u0027t check subscriber url, so I\u0027d suspect it not that imporant to have SiteLookup aware of all global config etc in here.\n\nBasicEntityIdParser deals fine with item and property ID parsing, so it should also be enough for those tests.",
+      "revId": "024063e8142fa2af6a2eb79e3ae2db7c50ae35eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
