@@ -49,7 +49,7 @@ class DispatchingEntityIdParser implements EntityIdParser {
 			} catch ( InvalidArgumentException $ex ) {
 				// EntityId::splitSerialization performs some sanity checks which
 				// might result in an exception. Should this happen, re-throw the exception message
-				throw new EntityIdParsingException( $ex->getMessage() );
+				throw new EntityIdParsingException( $ex->getMessage(), 0, $ex );
 			}
 			if ( preg_match( $idPattern, $localId ) ) {
 				return $this->buildId( $idBuilder, $idSerialization );
@@ -84,7 +84,7 @@ class DispatchingEntityIdParser implements EntityIdParser {
 			return call_user_func( $idBuilder, $idSerialization );
 		} catch ( InvalidArgumentException $ex ) {
 			// Should not happen, but if it does, re-throw the original message
-			throw new EntityIdParsingException( $ex->getMessage() );
+			throw new EntityIdParsingException( $ex->getMessage(), 0, $ex );
 		}
 	}
 

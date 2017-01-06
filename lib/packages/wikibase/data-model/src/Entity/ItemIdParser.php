@@ -26,7 +26,7 @@ class ItemIdParser implements EntityIdParser {
 		try {
 			return new ItemId( $idSerialization );
 		} catch ( InvalidArgumentException $ex ) {
-			throw new EntityIdParsingException( $ex->getMessage() );
+			throw new EntityIdParsingException( $ex->getMessage(), 0, $ex );
 		}
 	}
 
