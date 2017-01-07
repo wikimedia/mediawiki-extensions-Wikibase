@@ -5,7 +5,8 @@
 			"Papuass",
 			"Edgars2007",
 			"Macofe",
-			"Nitalynx"
+			"Nitalynx",
+			"Silraks"
 		]
 	},
 	"wikibase-entity-item": "vienums",
@@ -33,6 +34,7 @@
 	"wikibase-label-edit-placeholder": "ievadiet nosaukumu",
 	"wikibase-description-empty": "Nav apraksta",
 	"wikibase-description-edit-placeholder": "ievadiet aprakstu",
+	"wikibase-content-language-edit-label": "Valoda:",
 	"wikibase-diffview-reference": "atsauce",
 	"wikibase-diffview-rank": "rangs",
 	"wikibase-diffview-rank-preferred": "Vēlamais rangs",

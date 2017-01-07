@@ -109,6 +109,7 @@
 	"wikibase-validator-illegal-file-chars": "ফাইলের নামে কোলন বা স্ল্যাশের মত অক্ষর ধারণ করার অনুমতি নেই। \"File:\" লেখার পাশে শুধুমাত্র ফাইলের নাম প্রতিলেপন করুন, ধন্যবাদ।",
 	"wikibase-validator-no-such-media": "[https://commons.wikimedia.org/ উইকিমিডিয়া কমন্সে] \"$1\" ফাইলটির অস্তিত্ব নেই।",
 	"wikibase-validator-not-a-language": "\"$1\" জানা ভাষার কোড নয়।",
+	"wikibase-item-reference-edit-placeholder": "আইটেমের আইডি লিখুন উদা. Q10",
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" কোন বৈধ আইটেম আইডি নয়।",
 	"wikibase-wikibaserepopage-invalid-langcode": "ভাষা কোড \"$1\" অজানা। সিস্টেমের জন্য পরিচিত এমন একটি ভাষা কোড ব্যবহার করুন, যেমন \"bn\"।",
 	"wikibase-wikibaserepopage-invalid-id": "সিস্টেমের কাছে আইডি \"$1\" অজানা। দয়া করে একটি বৈধ সত্তার আইডি ব্যবহার করুন।",

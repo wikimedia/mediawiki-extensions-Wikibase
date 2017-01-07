@@ -146,6 +146,8 @@
 	"wikibase-validator-label-no-entityid": "La etiqueta no debe ser un identificador de entidad válido.",
 	"wikibase-validator-no-such-media": "El archivo \"$1\" no existe en [https://commons.wikimedia.org/ Wikimedia Commons].",
 	"wikibase-validator-not-a-language": "«$1» no es un código de idioma conocido.",
+	"wikibase-item-reference-edit-invalid-format": "El identificador de elemento introducido tiene un formato no válido",
+	"wikibase-item-reference-edit-nonexistent-item": "El elemento con este identificador no existe",
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" no es un identificador de elemento válido.",
 	"wikibase-wikibaserepopage-invalid-langcode": "El código de idioma «$1» es desconocido. Utiliza un código de idioma que el sistema reconozca, como «es».",
 	"wikibase-wikibaserepopage-invalid-id": "El identificador \"$1\" es desconocido para el sistema. Utiliza un identificador de entidad que sea válido.",
