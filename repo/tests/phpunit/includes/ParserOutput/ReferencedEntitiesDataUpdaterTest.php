@@ -21,7 +21,6 @@ use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
  * @covers Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group Database
  *
  * @license GPL-2.0+

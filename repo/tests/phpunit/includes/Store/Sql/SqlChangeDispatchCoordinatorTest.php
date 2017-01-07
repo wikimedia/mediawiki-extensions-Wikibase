@@ -10,7 +10,6 @@ use Wikibase\Store\Sql\SqlChangeDispatchCoordinator;
  * @group Wikibase
  * @group WikibaseStore
  * @group WikibaseChange
- * @group WikibaseRepo
  * @group Database
  *
  * @license GPL-2.0+

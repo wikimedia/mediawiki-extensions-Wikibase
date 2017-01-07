@@ -10,7 +10,6 @@ use Wikibase\Repo\Validators\UniquenessViolation;
  *
  * @group Database
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseContent
  *
  * @license GPL-2.0+

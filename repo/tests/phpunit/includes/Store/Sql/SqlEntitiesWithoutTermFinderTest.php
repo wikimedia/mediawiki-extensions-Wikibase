@@ -19,7 +19,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @group Database
  *
  * @group Wikibase
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Marius Hoch

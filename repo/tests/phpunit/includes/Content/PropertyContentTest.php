@@ -15,7 +15,6 @@ use Wikibase\PropertyContent;
  * @group Database
  * @group Wikibase
  * @group WikibaseProperty
- * @group WikibaseRepo
  * @group WikibaseContent
  *
  * @license GPL-2.0+

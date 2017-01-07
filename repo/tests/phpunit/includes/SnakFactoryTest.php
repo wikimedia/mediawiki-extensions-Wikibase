@@ -20,7 +20,6 @@ use Wikibase\Repo\SnakFactory;
  * @covers Wikibase\Repo\SnakFactory
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group Snak
  *
  * @license GPL-2.0+

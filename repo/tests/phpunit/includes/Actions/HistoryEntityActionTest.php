@@ -24,7 +24,6 @@ use Wikibase\Store\EntityIdLookup;
  * @group Action
  * @group Wikibase
  * @group WikibaseAction
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Thiemo Mättig

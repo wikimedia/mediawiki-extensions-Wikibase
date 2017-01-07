@@ -13,7 +13,6 @@ use Wikibase\DataModel\Statement\Statement;
  * @covers Wikibase\ChangeOp\StatementChangeOpFactory
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group ChangeOp
  *
  * @license GPL-2.0+

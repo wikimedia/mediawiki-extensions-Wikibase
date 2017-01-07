@@ -28,7 +28,6 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  * @covers Wikibase\EditEntity
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group EditEntity
  *
  * @group Database

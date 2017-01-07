@@ -13,7 +13,6 @@ use Wikibase\DataModel\Entity\ItemId;
  * @covers Wikibase\Content\DeferredCopyEntityHolder
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseEntity
  *
  * @license GPL-2.0+

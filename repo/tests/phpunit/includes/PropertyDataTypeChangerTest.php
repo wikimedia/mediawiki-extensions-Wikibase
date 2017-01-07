@@ -20,7 +20,6 @@ use Wikibase\Repo\PropertyDataTypeChanger;
  *
  * @since 0.5
  *
- * @group WikibaseRepo
  * @group Wikibase
  *
  * @license GPL-2.0+

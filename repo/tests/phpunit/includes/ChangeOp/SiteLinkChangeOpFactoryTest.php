@@ -9,7 +9,6 @@ use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
  * @covers Wikibase\ChangeOp\SiteLinkChangeOpFactory
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group ChangeOp
  *
  * @license GPL-2.0+

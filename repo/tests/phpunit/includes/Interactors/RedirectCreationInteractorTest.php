@@ -27,7 +27,6 @@ use Wikibase\Lib\Tests\MockRepository;
  * @covers Wikibase\Repo\Interactors\RedirectCreationInteractor
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseInteractor
  *
  * @license GPL-2.0+

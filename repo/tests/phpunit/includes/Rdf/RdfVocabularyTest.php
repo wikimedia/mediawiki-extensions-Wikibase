@@ -15,7 +15,6 @@ use Wikibase\Rdf\RdfVocabulary;
  * @covers Wikibase\Rdf\RdfVocabulary
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseRdf
  *
  * @license GPL-2.0+

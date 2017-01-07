@@ -14,7 +14,6 @@ use Wikibase\Repo\Parsers\MwTimeIsoParser;
  * @covers Wikibase\Repo\Parsers\MwTimeIsoParser
  *
  * @group ValueParsers
- * @group WikibaseRepo
  * @group Wikibase
  * @group TimeParsers
  *

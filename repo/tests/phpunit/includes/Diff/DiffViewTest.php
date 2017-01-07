@@ -15,7 +15,6 @@ use Wikibase\Repo\Diff\DiffView;
 /**
  * @covers Wikibase\Repo\Diff\DiffView
  *
- * @group WikibaseRepo
  * @group Wikibase
  *
  * @license GPL-2.0+

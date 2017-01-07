@@ -6,7 +6,6 @@ use Wikibase\SettingsArray;
 
 /**
  * @group Wikibase
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >

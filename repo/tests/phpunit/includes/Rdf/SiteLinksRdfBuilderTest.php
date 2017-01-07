@@ -9,7 +9,6 @@ use Wikimedia\Purtle\RdfWriter;
  * @covers Wikibase\Rdf\SiteLinksRdfBuilder
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseRdf
  *
  * @license GPL-2.0+

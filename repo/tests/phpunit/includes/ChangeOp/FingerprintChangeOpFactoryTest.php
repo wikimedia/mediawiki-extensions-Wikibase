@@ -9,7 +9,6 @@ use Wikibase\ChangeOp\FingerprintChangeOpFactory;
  * @covers Wikibase\ChangeOp\FingerprintChangeOpFactory
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group ChangeOp
  *
  * @license GPL-2.0+

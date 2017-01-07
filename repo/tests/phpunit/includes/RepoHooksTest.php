@@ -21,7 +21,6 @@ use WikiImporter;
  * @covers Wikibase\RepoHooks
  *
  * @group Wikibase
- * @group WikibaseRepo
  *
  * @group Database
  *

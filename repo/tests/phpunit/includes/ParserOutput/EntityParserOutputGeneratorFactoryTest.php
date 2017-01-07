@@ -18,7 +18,6 @@ use Wikibase\View\Template\TemplateFactory;
  * @covers Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group Database
  *
  * @license GPL-2.0+

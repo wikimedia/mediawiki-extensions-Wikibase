@@ -17,7 +17,6 @@ use Wikibase\Repo\Parsers\TimeParserFactory;
  * @covers Wikibase\Lib\MwTimeIsoFormatter
  * @covers Wikibase\Repo\Parsers\TimeParserFactory
  *
- * @group WikibaseRepo
  * @group Wikibase
  *
  * @license GPL-2.0+

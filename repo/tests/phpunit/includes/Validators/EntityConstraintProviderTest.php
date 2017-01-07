@@ -12,7 +12,6 @@ use Wikibase\Repo\Validators\EntityValidator;
  * @covers Wikibase\Repo\Validators\EntityConstraintProvider
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseValidators
  *
  * @license GPL-2.0+

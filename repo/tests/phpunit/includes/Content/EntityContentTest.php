@@ -21,7 +21,6 @@ use WikiPage;
 /**
  * @covers Wikibase\EntityContent
  *
- * @group WikibaseRepo
  * @group Wikibase
  *
  * @license GPL-2.0+

@@ -34,7 +34,6 @@ use Wikibase\TermIndex;
  *
  * @group Wikibase
  * @group WikibaseStore
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Thiemo Mättig

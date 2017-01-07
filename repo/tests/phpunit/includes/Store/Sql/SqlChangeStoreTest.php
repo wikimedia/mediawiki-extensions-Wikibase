@@ -15,7 +15,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @group Database
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseChange
  *
  * @license GPL-2.0+

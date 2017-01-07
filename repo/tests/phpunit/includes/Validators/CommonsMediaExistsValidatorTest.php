@@ -10,7 +10,6 @@ use Wikibase\Repo\Validators\CommonsMediaExistsValidator;
 /**
  * @covers Wikibase\Repo\Validators\CommonsMediaExistsValidator
  *
- * @group WikibaseRepo
  * @group Wikibase
  * @group WikibaseValidators
  *

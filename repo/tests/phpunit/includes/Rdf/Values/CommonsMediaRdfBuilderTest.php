@@ -14,7 +14,6 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * @covers Wikibase\Rdf\Values\CommonsMediaRdfBuilder
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseRdf
  *
  * @license GPL-2.0+

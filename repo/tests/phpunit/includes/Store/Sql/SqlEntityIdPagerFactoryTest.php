@@ -12,7 +12,6 @@ use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
  * @covers Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseStore
  *
  * @license GPL-2.0+

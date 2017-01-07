@@ -80,7 +80,6 @@ use Wikibase\SummaryFormatter;
  * @covers Wikibase\Repo\WikibaseRepo
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group Database
  *
  * @license GPL-2.0+

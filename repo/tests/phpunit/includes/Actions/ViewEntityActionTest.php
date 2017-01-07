@@ -16,7 +16,6 @@ use WikiPage;
  * @group Action
  * @group Wikibase
  * @group WikibaseAction
- * @group WikibaseRepo
  *
  * @group Database
  * @group medium

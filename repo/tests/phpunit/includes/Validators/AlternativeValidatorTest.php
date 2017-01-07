@@ -9,7 +9,6 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 /**
  * @covers Wikibase\Repo\Validators\AlternativeValidator
  *
- * @group WikibaseRepo
  * @group Wikibase
  * @group WikibaseValidators
  *

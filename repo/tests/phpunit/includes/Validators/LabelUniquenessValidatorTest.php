@@ -19,7 +19,6 @@ use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
  *
  * @group Database
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseContent
  *
  * @license GPL-2.0+

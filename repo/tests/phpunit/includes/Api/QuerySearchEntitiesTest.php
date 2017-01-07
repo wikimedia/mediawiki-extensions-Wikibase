@@ -24,7 +24,6 @@ use Wikibase\Repo\Api\QuerySearchEntities;
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >

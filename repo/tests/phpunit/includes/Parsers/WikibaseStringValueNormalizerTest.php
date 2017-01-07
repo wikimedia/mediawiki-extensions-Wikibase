@@ -9,7 +9,6 @@ use Wikibase\StringNormalizer;
  * @covers Wikibase\Repo\Parsers\WikibaseStringValueNormalizer
  *
  * @group ValueParsers
- * @group WikibaseRepo
  * @group Wikibase
  *
  * @license GPL-2.0+

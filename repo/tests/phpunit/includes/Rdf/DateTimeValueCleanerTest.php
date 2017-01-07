@@ -11,7 +11,6 @@ use Wikibase\Rdf\JulianDateTimeValueCleaner;
  * @covers Wikibase\Rdf\JulianDateTimeValueCleaner
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseRdf
  *
  * @license GPL-2.0+

@@ -33,7 +33,6 @@ use Wikibase\Repo\Tests\LinkedData\EntityDataTestProvider;
  * @group Database
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group SpecialPage
  * @group WikibaseSpecialPage
  * @group WikibaseEntityData

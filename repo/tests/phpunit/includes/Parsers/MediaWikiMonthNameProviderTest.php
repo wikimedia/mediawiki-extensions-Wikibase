@@ -9,7 +9,6 @@ use Wikibase\Repo\Parsers\MediaWikiMonthNameProvider;
  * @covers Wikibase\Repo\Parsers\MediaWikiMonthNameProvider
  *
  * @group ValueParsers
- * @group WikibaseRepo
  * @group Wikibase
  * @group TimeParsers
  *

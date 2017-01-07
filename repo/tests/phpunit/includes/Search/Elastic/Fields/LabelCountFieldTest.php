@@ -12,7 +12,6 @@ use Wikibase\Repo\Search\Elastic\Fields\LabelCountField;
  * @covers Wikibase\Repo\Search\Elastic\Fields\LabelCountField
  *
  * @group WikibaseElastic
- * @group WikibaseRepo
  * @group Wikibase
  *
  * @license GPL-2.0+

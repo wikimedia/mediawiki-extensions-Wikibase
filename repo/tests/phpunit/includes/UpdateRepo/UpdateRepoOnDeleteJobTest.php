@@ -25,7 +25,6 @@ use Wikibase\Lib\Tests\MockRepository;
  * @covers Wikibase\Repo\UpdateRepo\UpdateRepoJob
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseIntegration
  * @group Database
  *

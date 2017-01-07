@@ -10,7 +10,6 @@ use Wikibase\DispatchStats;
  *
  * @group Database
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseChange
  *
  * @license GPL-2.0+

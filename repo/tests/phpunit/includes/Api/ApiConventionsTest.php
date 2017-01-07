@@ -10,7 +10,6 @@ use ReflectionMethod;
 
 /**
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseAPI
  * @group Database
  *

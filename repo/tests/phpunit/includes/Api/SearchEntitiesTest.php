@@ -22,7 +22,6 @@ use Wikibase\Lib\Interactors\TermSearchResult;
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
- * @group WikibaseRepo
  *
  * @group medium
  *

@@ -22,7 +22,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @covers Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseStore
  * @group Database
  *

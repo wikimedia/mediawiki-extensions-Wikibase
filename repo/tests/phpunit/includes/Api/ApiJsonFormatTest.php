@@ -10,7 +10,6 @@ use Wikibase\Repo\Api\SetLabel;
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
- * @group WikibaseRepo
  * @group Database
  * @group medium
  *

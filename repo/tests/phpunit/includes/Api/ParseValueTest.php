@@ -24,7 +24,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

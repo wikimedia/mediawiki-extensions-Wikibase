@@ -15,7 +15,6 @@ use Wikibase\StatementRankSerializer;
  * @covers Wikibase\StatementRankSerializer
  *
  * @group Wikibase
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Addshore

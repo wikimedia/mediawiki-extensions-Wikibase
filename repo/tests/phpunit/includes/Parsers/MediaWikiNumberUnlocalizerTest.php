@@ -11,7 +11,6 @@ use Wikibase\Repo\Parsers\MediaWikiNumberUnlocalizer;
  * @covers Wikibase\Repo\Parsers\MediaWikiNumberUnlocalizer
  *
  * @group ValueParsers
- * @group WikibaseRepo
  * @group Wikibase
  *
  * @license GPL-2.0+

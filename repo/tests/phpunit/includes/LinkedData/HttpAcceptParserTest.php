@@ -8,7 +8,6 @@ use Wikibase\Repo\LinkedData\HttpAcceptParser;
  * @covers Wikibase\Repo\LinkedData\HttpAcceptParser
  *
  * @group Wikibase
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

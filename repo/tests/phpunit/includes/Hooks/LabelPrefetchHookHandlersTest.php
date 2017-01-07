@@ -21,7 +21,6 @@ use Wikibase\Store\EntityIdLookup;
  *
  * @since 0.5
  *
- * @group WikibaseRepo
  * @group Wikibase
  * @group Database
  *        ^--- who knows what ChangesList may do internally...

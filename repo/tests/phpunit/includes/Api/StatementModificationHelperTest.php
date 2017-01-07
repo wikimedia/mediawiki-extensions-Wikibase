@@ -20,7 +20,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @covers Wikibase\Repo\Api\StatementModificationHelper
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseAPI
  * @group Database
  *

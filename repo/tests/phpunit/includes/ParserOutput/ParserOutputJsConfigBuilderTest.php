@@ -25,7 +25,6 @@ use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
  *
  * @since 0.5
  *
- * @group WikibaseRepo
  * @group Wikibase
  *
  * @license GPL-2.0+

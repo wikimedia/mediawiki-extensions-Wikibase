@@ -28,7 +28,6 @@ use Wikibase\Repo\Validators\EntityValidator;
  * @covers Wikibase\ChangeOp\ChangeOpsMerge
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group ChangeOp
  * @group Database
  *

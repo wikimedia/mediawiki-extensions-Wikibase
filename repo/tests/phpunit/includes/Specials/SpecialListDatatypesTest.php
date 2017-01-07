@@ -12,7 +12,6 @@ use Wikibase\Repo\Specials\SpecialListDatatypes;
  * @covers Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group SpecialPage
  * @group WikibaseSpecialPage
  *

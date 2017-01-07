@@ -13,7 +13,6 @@ use Wikibase\Repo\Store\Sql\SqlItemsWithoutSitelinksFinder;
  *
  * @group Wikibase
  * @group WikibaseStore
- * @group WikibaseRepo
  * @group Database
  *
  * @group Medium

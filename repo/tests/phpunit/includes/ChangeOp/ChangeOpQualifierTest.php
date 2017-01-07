@@ -22,7 +22,6 @@ use Wikibase\DataModel\Statement\Statement;
  * @covers Wikibase\ChangeOp\ChangeOpQualifier
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group ChangeOp
  *
  * @license GPL-2.0+

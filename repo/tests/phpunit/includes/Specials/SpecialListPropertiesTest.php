@@ -25,7 +25,6 @@ use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
  * @group Database
  * @group SpecialPage
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseSpecialPage
  *
  * @license GPL-2.0+

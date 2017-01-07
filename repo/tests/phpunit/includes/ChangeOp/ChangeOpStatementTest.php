@@ -31,7 +31,6 @@ use Wikibase\DataModel\Statement\StatementListProvider;
  * @covers Wikibase\ChangeOp\ChangeOpStatement
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group ChangeOp
  * @group ChangeOpStatement
  *

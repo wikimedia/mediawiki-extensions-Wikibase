@@ -20,7 +20,6 @@ use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
  * @covers Wikibase\Repo\Validators\TermValidatorFactory
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseValidators
  *
  * @license GPL-2.0+

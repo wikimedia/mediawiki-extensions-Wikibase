@@ -12,7 +12,6 @@ use Wikibase\DataModel\Entity\ItemId;
  * @covers Wikibase\Content\EntityInstanceHolder
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseEntity
  *
  * @license GPL-2.0+

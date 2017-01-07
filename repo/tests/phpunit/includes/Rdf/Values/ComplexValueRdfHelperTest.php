@@ -13,7 +13,6 @@ use Wikimedia\Purtle\NTriplesRdfWriter;
  * @covers Wikibase\Rdf\Values\ComplexValueRdfHelper
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseRdf
  *
  * @license GPL-2.0+

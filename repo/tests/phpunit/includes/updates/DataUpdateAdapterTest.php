@@ -11,7 +11,6 @@ use Wikibase\Updates\DataUpdateAdapter;
  * @covers Wikibase\Updates\DataUpdateAdapter
  *
  * @group Wikibase
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

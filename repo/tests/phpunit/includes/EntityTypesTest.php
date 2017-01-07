@@ -12,7 +12,6 @@ use Wikibase\View\EntityView;
 
 /**
  * @group Wikibase
- * @group WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >

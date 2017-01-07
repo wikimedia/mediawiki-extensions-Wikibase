@@ -16,7 +16,6 @@ use Wikibase\Repo\Validators\EntityConstraintProvider;
  * @covers Wikibase\ChangeOp\ChangeOpFactoryProvider
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group ChangeOp
  *
  * @license GPL-2.0+

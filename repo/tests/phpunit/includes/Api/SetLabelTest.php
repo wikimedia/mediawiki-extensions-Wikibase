@@ -13,7 +13,6 @@ namespace Wikibase\Repo\Tests\Api;
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
- * @group WikibaseRepo
  * @group BreakingTheSlownessBarrier
  *
  * @license GPL-2.0+

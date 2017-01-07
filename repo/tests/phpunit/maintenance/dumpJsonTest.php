@@ -38,7 +38,6 @@ use Wikibase\Repo\Tests\Store\MockEntityIdPager;
 /**
  * @covers Wikibase\DumpJson
  *
- * @group WikibaseRepo
  * @group Wikibase
  *
  * @license GPL-2.0+

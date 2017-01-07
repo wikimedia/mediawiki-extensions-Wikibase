@@ -11,7 +11,6 @@ use Wikibase\DataTypeSelector;
  * @covers Wikibase\DataTypeSelector
  *
  * @group Wikibase
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Thiemo Mättig

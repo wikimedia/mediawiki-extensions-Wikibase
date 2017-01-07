@@ -13,7 +13,6 @@ use Wikibase\ItemContent;
  * @covers Wikibase\ChangeOp\ChangeOpAliases
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group ChangeOp
  *
  * @license GPL-2.0+

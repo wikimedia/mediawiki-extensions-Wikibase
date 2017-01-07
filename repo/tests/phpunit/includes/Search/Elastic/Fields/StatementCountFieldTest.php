@@ -13,7 +13,6 @@ use Wikibase\Repo\Search\Elastic\Fields\StatementCountField;
  * @covers Wikibase\Repo\Search\Elastic\Fields\StatementCountField
  *
  * @group WikibaseElastic
- * @group WikibaseRepo
  * @group Wikibase
  *
  * @license GPL-2.0+

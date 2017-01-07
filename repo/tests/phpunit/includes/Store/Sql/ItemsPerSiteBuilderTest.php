@@ -15,7 +15,6 @@ use Wikibase\Repo\Store\Sql\ItemsPerSiteBuilder;
  *
  * @group Wikibase
  * @group WikibaseStore
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >

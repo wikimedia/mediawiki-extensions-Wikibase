@@ -10,7 +10,6 @@ use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
 /**
  * @covers Wikibase\Repo\CachingCommonsMediaFileNameLookup
  *
- * @group WikibaseRepo
  * @group Wikibase
  *
  * @license GPL-2.0+

@@ -19,7 +19,6 @@ use Wikibase\Rdf\ValueSnakRdfBuilder;
  * @covers Wikibase\Rdf\SnakRdfBuilder
  *
  * @group Wikibase
- * @group WikibaseRepo
  * @group WikibaseRdf
  *
  * @license GPL-2.0+
