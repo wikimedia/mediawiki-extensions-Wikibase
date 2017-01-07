@@ -5,10 +5,12 @@ namespace Wikibase\Repo\Specials;
 use Exception;
 use HTMLForm;
 use Html;
+use Message;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EntityRevision;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\Interactors\ItemMergeException;
@@ -46,6 +48,11 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	private $tokenCheck;
 
 	/**
+	 * @var EntityTitleLookup
+	 */
+	private $titleLookup;
+
+	/**
 	 * @param EntityIdParser $idParser
 	 * @param ExceptionLocalizer $exceptionLocalizer
 	 * @param TokenCheckInteractor $tokenCheck
@@ -55,7 +62,8 @@ class SpecialMergeItems extends SpecialWikibasePage {
 		EntityIdParser $idParser,
 		ExceptionLocalizer $exceptionLocalizer,
 		TokenCheckInteractor $tokenCheck,
-		ItemMergeInteractor $interactor
+		ItemMergeInteractor $interactor,
+		EntityTitleLookup $titleLookup
 	) {
 		parent::__construct( 'MergeItems', 'item-merge' );
 
@@ -63,6 +71,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 		$this->exceptionLocalizer = $exceptionLocalizer;
 		$this->tokenCheck = $tokenCheck;
 		$this->interactor = $interactor;
+		$this->titleLookup = $titleLookup;
 	}
 
 	public function doesWrites() {
@@ -169,19 +178,35 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	 */
 	private function mergeItems( ItemId $fromId, ItemId $toId, array $ignoreConflicts, $summary ) {
 		$this->tokenCheck->checkRequestToken( $this->getRequest(), 'wpEditToken' );
+		$fromTitle = $this->titleLookup->getTitleForId( $fromId );
+		$toTitle = $this->titleLookup->getTitleForId( $toId );
 
 		/** @var EntityRevision $newRevisionFrom  */
 		/** @var EntityRevision $newRevisionTo */
 		list( $newRevisionFrom, $newRevisionTo, )
 			= $this->interactor->mergeItems( $fromId, $toId, $ignoreConflicts, $summary );
 
-		//XXX: might be nicer to pass pre-rendered links as parameters
+		$linkRenderer = $this->getLinkRenderer();
 		$this->getOutput()->addWikiMsg(
 			'wikibase-mergeitems-success',
-			$fromId->getSerialization(),
+			Message::rawParam(
+				$linkRenderer->makePreloadedLink(
+					$fromTitle,
+					$fromId->getSerialization(),
+					'mw-redirect',
+					[],
+					[ 'redirect' => 'no' ]
+				)
+			),
 			$newRevisionFrom->getRevisionId(),
-			$toId->getSerialization(),
-			$newRevisionTo->getRevisionId() );
+			Message::rawParam(
+				$linkRenderer->makeKnownLink(
+					$toTitle,
+					$toId->getSerialization()
+				)
+			),
+			$newRevisionTo->getRevisionId()
+		);
 	}
 
 	/**

@@ -808,7 +808,8 @@ call_user_func( function() {
 			$wikibaseRepo->getEntityIdParser(),
 			$wikibaseRepo->getExceptionLocalizer(),
 			new \Wikibase\Repo\Interactors\TokenCheckInteractor( $wgUser ),
-			$wikibaseRepo->newItemMergeInteractor( RequestContext::getMain() )
+			$wikibaseRepo->newItemMergeInteractor( RequestContext::getMain() ),
+			$wikibaseRepo->getEntityTitleLookup()
 		);
 	};
 	$wgSpecialPages['RedirectEntity'] = Wikibase\Repo\Specials\SpecialRedirectEntity::class;
