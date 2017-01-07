@@ -125,12 +125,12 @@ class InfoActionHookHandler {
 	 */
 	private function formatSubscription( $subscription, Title $title ) {
 		$site = $this->siteLookup->getSite( $subscription );
-		if ( !$site ) {
+		if ( $site === null ) {
 			return $subscription;
 		}
 
 		$url = $site->getPageUrl( 'Special:EntityUsage/' . $title->getText() );
-		if ( !$url ) {
+		if ( $url === false ) {
 			return $subscription;
 		}
 		$element = Html::element( 'a',
