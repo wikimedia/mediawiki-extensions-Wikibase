@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e01838a_ef7c51ea",
+        "filename": "lib/tests/phpunit/EntityTypeDefinitionsTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2017-01-07T01:23:44Z",
+      "side": 1,
+      "message": "That\u0027s some weird-ass indentation",
+      "revId": "60099939368476209709493a1874634b587dd30f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_cf8195ca",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2017-01-07T01:23:44Z",
+      "side": 1,
+      "message": "This field name does not match what you defined. Naming is also not consistent with the method.",
+      "revId": "60099939368476209709493a1874634b587dd30f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_af8659de",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2017-01-07T01:23:44Z",
+      "side": 1,
+      "message": "Really no need to introduce all these local vars IMO. Why are you doing this? Debugger? Readability?",
+      "revId": "60099939368476209709493a1874634b587dd30f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
