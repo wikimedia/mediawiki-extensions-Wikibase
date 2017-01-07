@@ -82,11 +82,12 @@ class InfoActionHookHandler {
 	private function getPageInfoRow( Title $title ) {
 		$entity = $this->entityIdLookup->getEntityIdForTitle( $title );
 		$subscriptions = $this->subscriptionLookup->getSubscribers( $entity );
-		if ( !$subscriptions ) {
-			return $this->getNoSubscriptionText();
-		} else {
+
+		if ( $subscriptions ) {
 			return $this->formatSubscriptions( $subscriptions, $title );
 		}
+
+		return $this->getNoSubscriptionText();
 	}
 
 	/**
