@@ -133,11 +133,11 @@ class InfoActionHookHandler {
 		if ( !$url ) {
 			return $subscription;
 		}
-		$element = Html::element( 'a',
+
+		return Html::element( 'a',
 			[ 'href' => $url ],
 			$subscription
 		);
-		return $element;
 	}
 
 }
