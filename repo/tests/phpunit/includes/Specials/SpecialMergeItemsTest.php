@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Specials;
 
 use Exception;
 use HashSiteStore;
+use MediaWiki\Linker\LinkRenderer;
 use PermissionsError;
 use PHPUnit_Framework_Error;
 use RawMessage;
@@ -101,7 +102,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 
 		$mock->expects( $this->any() )
 			->method( 'run' )
-			 ->will( $this->returnValue( Status::newGood() ) );
+			->will( $this->returnValue( Status::newGood() ) );
 
 		return $mock;
 	}
@@ -157,6 +158,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 				return new RawMessage( '(@' . $text . '@)' );
 			} ) );
 
+		$titleLookup = $this->getEntityTitleLookup();
 		$page->initServices(
 			$wikibaseRepo->getEntityIdParser(),
 			$exceptionLocalizer,
@@ -178,9 +180,21 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 						$this->mockRepository,
 						$this->getMockEntityTitleLookup()
 				),
-				$this->getEntityTitleLookup()
-			)
+				$titleLookup
+			),
+			$titleLookup
 		);
+
+		$linkRenderer = $this->getMockBuilder( LinkRenderer::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$linkRenderer->expects( $this->any() )
+			->method( 'makeKnownLink' )
+			->will( $this->returnArgument( 1 ) );
+		$linkRenderer->expects( $this->any() )
+			->method( 'makePreloadedLink' )
+			->will( $this->returnArgument( 1 ) );
+		$page->setLinkRenderer( $linkRenderer );
 	}
 
 	/**
