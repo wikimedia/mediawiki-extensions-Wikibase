@@ -40,7 +40,6 @@ class ListSubscribers extends ApiQueryBase {
 	/**
 	 * @param ApiQuery $mainModule
 	 * @param string $moduleName
-	 * @param string $modulePrefix
 	 * @param ApiErrorReporter $errorReporter
 	 * @param EntityIdParser $idParser
 	 * @param SiteLookup $siteLookup
@@ -50,12 +49,11 @@ class ListSubscribers extends ApiQueryBase {
 	public function __construct(
 		ApiQuery $mainModule,
 		$moduleName,
-		$modulePrefix,
 		ApiErrorReporter $errorReporter,
 		EntityIdParser $idParser,
 		SiteLookup $siteLookup
 	) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+		parent::__construct( $mainModule, $moduleName, 'wbls' );
 
 		$this->errorReporter = $errorReporter;
 		$this->idParser = $idParser;
