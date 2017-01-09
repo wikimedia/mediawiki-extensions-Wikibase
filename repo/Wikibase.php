@@ -179,16 +179,14 @@ call_user_func( function() {
 	$wgAPIListModules['wbsearch'] = Wikibase\Repo\Api\QuerySearchEntities::class;
 	$wgAPIListModules['wbsubscribers'] = [
 		'class' => Wikibase\Repo\Api\ListSubscribers::class,
-		'factory' => function( $mainModule, $moduleName, $modulePrefix = 'wbls' ) {
-			/** @var ApiQuery $mainModule */
+		'factory' => function( ApiQuery $apiQuery, $moduleName ) {
 			$wikibaseRepo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
 			$mediaWikiServices = \MediaWiki\MediaWikiServices::getInstance();
-			$apiHelper = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
+			$apiHelper = $wikibaseRepo->getApiHelperFactory( $apiQuery->getContext() );
 			return new Wikibase\Repo\Api\ListSubscribers(
-				$mainModule,
+				$apiQuery,
 				$moduleName,
-				$modulePrefix,
-				$apiHelper->getErrorReporter( $mainModule ),
+				$apiHelper->getErrorReporter( $apiQuery ),
 				$wikibaseRepo->getEntityIdParser(),
 				$mediaWikiServices->getSiteLookup()
 			);
