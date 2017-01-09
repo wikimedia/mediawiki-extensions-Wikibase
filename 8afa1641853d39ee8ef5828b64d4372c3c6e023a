@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8e01838a_4de12a97",
+        "filename": "repo/tests/phpunit/includes/Api/ItemByTitleHelperTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-09T09:16:54Z",
+      "side": 1,
+      "message": "I tried, but this test needs a mock, because it expects normalizePageName to *not* return the given $pageName untouched. A PHPUnit mock returns null by default, which is enough to make the test succeed.",
+      "parentUuid": "8e01838a_2d5b8e28",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 45
+      },
+      "revId": "8afa1641853d39ee8ef5828b64d4372c3c6e023a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e01838a_8db3a24c",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialGoToLinkedPageTest.php",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-01-09T01:38:09Z",
       "side": 1,
       "message": "Sadly, but it\u0027s not the same behavior as before.\n\nIt took me a while to understand why tests are still passing. It\u0027s because some strange implementation `SpecialGoToLinkedPage.php:158-171`. If someone start refactoring `SpecialGoToLinkedPage` tests might fail for the wrong reason.\n\nI looked at the tests and found out that it assumed that following wikies exist: dewiki, enwiki, XXwiki.\n\nPS: I still not totally sure, so please check once more.",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 49
+      },
+      "revId": "8afa1641853d39ee8ef5828b64d4372c3c6e023a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_6dfbc645",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialGoToLinkedPageTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-09T09:16:54Z",
+      "side": 1,
+      "message": "The lines you are mentioning cover the SpecialGoToLinkedPage::getItemId, which does an entity lookup, not a sitelink lookup.\n\nThis code is never hit by any other $siteId but \"dewiki\". That\u0027s how I came up with this 1-element list. Try for yourself: Check out the old code, add \"var_dump( $siteId )\" after the initial \"if\", and the only $siteId you will see is \"dewiki\".",
+      "parentUuid": "8e01838a_8db3a24c",
       "range": {
         "startLine": 57,
         "startChar": 0,
