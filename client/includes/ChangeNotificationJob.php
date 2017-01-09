@@ -11,6 +11,8 @@ use Wikimedia\Assert\Assert;
 /**
  * Job for notifying a client wiki of a batch of changes on the repository.
  *
+ * @see docs/change-propagation.wiki for an overview of the change propagation mechanism.
+ *
  * @since 0.4
  *
  * @license GPL-2.0+

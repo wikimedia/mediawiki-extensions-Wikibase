@@ -41,8 +41,10 @@ class DispatchChanges extends Maintenance {
 		parent::__construct();
 
 		$this->addDescription(
-			'Maintenance script that polls for Wikibase changes in the shared wb_changes table
-			and dispatches them to any client wikis using their job queue.' );
+			"Maintenance script that polls for Wikibase changes in the shared wb_changes table\n" .
+			"and dispatches them to any client wikis using their job queue.\n" .
+			"See docs/change-propagation.wiki for an overview of the change propagation mechanism."
+		);
 
 		$this->addOption( 'verbose', "Report activity." );
 		$this->addOption( 'idle-delay', "Seconds to sleep when idle. Default: 10", false, true );
