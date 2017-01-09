@@ -55,26 +55,6 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 
 	/**
 	 * @see SpecialWikibasePage::__construct
-	 */
-	public function __construct() {
-		parent::__construct( 'GoToLinkedPage', '', true );
-
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-		$this->initServices(
-			$wikibaseRepo->getSiteLookup(),
-			$wikibaseRepo->getStore()->newSiteLinkStore(),
-			$wikibaseRepo->getStore()->getEntityRedirectLookup(),
-			$wikibaseRepo->getEntityIdParser(),
-			$wikibaseRepo->getStore()->getEntityLookup()
-		);
-
-		$this->errorMessageKey = null;
-	}
-
-	/**
-	 * Initialize the services used be this special page.
-	 * May be used to inject mock services for testing.
 	 *
 	 * @param SiteLookup $siteLookup
 	 * @param SiteLinkLookup $siteLinkLookup
@@ -82,18 +62,22 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	 * @param EntityIdParser $idParser
 	 * @param EntityLookup $entityLookup
 	 */
-	public function initServices(
+	public function __construct(
 		SiteLookup $siteLookup,
 		SiteLinkLookup $siteLinkLookup,
 		EntityRedirectLookup $redirectLookup,
 		EntityIdParser $idParser,
 		EntityLookup $entityLookup
 	) {
+		parent::__construct( 'GoToLinkedPage', '', true );
+
 		$this->siteLookup = $siteLookup;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->redirectLookup = $redirectLookup;
 		$this->idParser = $idParser;
 		$this->entityLookup = $entityLookup;
+
+		$this->errorMessageKey = null;
 	}
 
 	/**
