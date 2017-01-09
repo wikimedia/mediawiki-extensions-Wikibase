@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "8e01838a_c39a8917",
+        "filename": "repo/tests/phpunit/includes/Api/ItemByTitleHelperTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-09T15:49:30Z",
+      "side": 1,
+      "message": "Ok, I finally got it.\nIf it were production code I would agree, but here I propose to set this method up explicitly. Because as I see it, if we don\u0027t setup the method then we don\u0027t care about it.\nAnd there is also another thing - `\\Site::normalizePageName` supposed to return string but not null, so this setup is also incorrect.",
+      "parentUuid": "8e01838a_4de12a97",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 45
+      },
+      "revId": "8afa1641853d39ee8ef5828b64d4372c3c6e023a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e01838a_8db3a24c",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialGoToLinkedPageTest.php",
         "patchSetId": 1
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "The lines you are mentioning cover the SpecialGoToLinkedPage::getItemId, which does an entity lookup, not a sitelink lookup.\n\nThis code is never hit by any other $siteId but \"dewiki\". That\u0027s how I came up with this 1-element list. Try for yourself: Check out the old code, add \"var_dump( $siteId )\" after the initial \"if\", and the only $siteId you will see is \"dewiki\".",
       "parentUuid": "8e01838a_8db3a24c",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 49
+      },
+      "revId": "8afa1641853d39ee8ef5828b64d4372c3c6e023a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_23eb9da2",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialGoToLinkedPageTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-09T15:49:30Z",
+      "side": 1,
+      "message": "I tried and I know what are you talking about, but I cannot understand how is it possible to get url of an item if site doesn\u0027t exist. It is more of a logical problem.\n\nI mean I know that current implementation doesn\u0027t care about site existence in SiteLookup, but what if we refactor it?",
+      "parentUuid": "8e01838a_6dfbc645",
       "range": {
         "startLine": 57,
         "startChar": 0,
