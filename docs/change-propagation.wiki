@@ -1,0 +1,65 @@
+This document describes how changes to entities on the repository are propagated to client wikis. The goal of change propagation is to allow clients to update pages in a timely manner after information on the repository changed.
+
+: NOTE: As of this writing in January 2017, change propagation is only possible with direct database access between the wikis (that is, inside a "wiki farm").
+
+: NOTE: As of this writing in January 2017, change propagation does not support federation (change propagation between repositories) nor does it support multi-repository setups on the client wiki.
+
+Change propagation requires several components to work together. On the repository, we need:
+* Subscription management, so the repository knows which client wiki is interested in changes to which entities.
+* Dispatch state, so the repository knows which changes have already been dispatched to which client.
+* A buffer of the changes themselves.
+* Access to each client's job queue.
+
+On each client, there needs to be:
+* Usage tracking.
+* Access to sitelinks stored in the repository.
+
+The basic operation of change dispatching involves running two scripts regularly, typically as cron jobs: dispatchChanges.php and pruneChanges.php, both located in the repo/maintenance/ directory. A typical cron setup could look like this:
+* Every minute, run dispatchChanges.php --max-time 120
+* Every hour, run pruneChanges.php --keep-hours 3 --grace-minutes 20
+* Every minute, run runJobs.php on all clients.
+
+The --max-time 120 parameter tells dispatchChanges.php to be active for at most two minutes. --grace-minutes 20 tells pruneChanges.php to keep changes for at least 20 minutes after they have been dispatched. This allows the client side job queue to lag for up to 20 minutes before problems arise.
+
+Note that multiple instances of dispatchChanges.php can run at the the same time. They are designed to automatically coordinate. For details, refer to the --help output of these maintenance scripts.
+
+Below, some of the components involved in change dispatching are described in more detail.
+
+
+== Usage Tracking and Subscription Management ==
+Usage tracking and description management are described in detail in the file usagetracking.wiki.
+
+== Change Buffer ==
+The change buffer holds information about each change, stored in the wb_changes table, to be accessed by the client wikis when processing the respective change. This is similar to MediaWiki's recentchanges table. The table structure is as follows:
+* change_id, an int(10) with an autoincrement id identifying the change.
+* change_type, a varchar(25) representing the kind of change. It has the form ''wikibase-<entity-type>~<action>'', e.g. "wikibase-item~add".
+** Well known entity types are "item" and "property". Custom entity types will define their own type names.
+** Known actions: "update", "add", "remove", "restore"
+* change_time, a varbinary(14) the time at which the edit was made
+* change_object_id, a varbinary(14) containing the entity ID
+* change_revision_id, a int(10) containing the revision ID
+* change_user_id, a int(10) containing the user id
+* change_info, a mediumblob containing a JSON structure with additional information about the change. Well known top level fields are:
+** "diff": a serialized diff, as produced by EntityDiffer
+** "metadata", a JSON object representing essential revision meta data, using the following fields:
+*** "user_text": the user name (string)
+*** "page_id": the id of the wiki page containing the entity on the repo (int)
+*** "rev_id": the id of the revision created by this change on the repo (int)
+*** "parent_id": the id of the parent revision of this change on the repo (int)
+*** "comment": the edit summary for the change
+*** "bot": whether the change was performed as a bot edit (0 or 1)
+
+== Dispatch State ==
+Dispatch state is managed by a ChangeDispatchCoordinator service. The default implementation is based on the wb_changes_dispatch table. This table contains one row per client wiki, with the following information:
+
+* chd_site, a varbinary(32) identifying the target wiki with its global site ID.
+* chd_db, a varbinary(32) specifying the logical database name of the client wiki.
+* chd_seen, a int(11) containing the last change ID that was sent to this client wiki.
+* chd_touched, a varbinary(14) representing the time at which this row was last updated. This is useful only for reporting and debugging.
+* chd_lock, a varbinary(64), the name of some kind of lock that some process currently holds on this row. The lock name should indicate the locking mechanism. The locking mechanism should be able to reliably detect stale locks belonging to dead processes.
+* chd_disabled, a tinyint(3), set to 1 to disable dispatching for this wiki.
+
+Per default, global MySQL locks are used to ensure that only one process can dispatch to any given client wiki at a time.
+
+== SiteLinkLookup ==
+Each client wiki can access the repo's sitelink information via a SiteLinkLookup service returned by ClientStore::getSiteLinkLookup. This information is stored in the wb_items_per_site table in the repo's database.
