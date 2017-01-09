@@ -22,6 +22,30 @@
       "revId": "7180be1c6c77e32867a2a8966eddcb6665729b50",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_2dba6e1f",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialItemByTitleTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-09T01:38:09Z",
+      "side": 0,
+      "message": "Took me a while to understand the reason to smile.\n\nNow I can agree: :D",
+      "parentUuid": "8e01838a_ef669125",
+      "range": {
+        "startLine": 104,
+        "startChar": 14,
+        "endLine": 104,
+        "endChar": 15
+      },
+      "revId": "7180be1c6c77e32867a2a8966eddcb6665729b50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
