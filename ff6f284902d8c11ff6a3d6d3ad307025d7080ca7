@@ -22,6 +22,30 @@
       "revId": "ff6f284902d8c11ff6a3d6d3ad307025d7080ca7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_10fb4913",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-09T10:23:33Z",
+      "side": 0,
+      "message": "Indention looks fine for me.",
+      "parentUuid": "8e01838a_ed39f6f0",
+      "range": {
+        "startLine": 183,
+        "startChar": 2,
+        "endLine": 183,
+        "endChar": 3
+      },
+      "revId": "ff6f284902d8c11ff6a3d6d3ad307025d7080ca7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

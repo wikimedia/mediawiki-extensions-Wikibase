@@ -33,6 +33,24 @@
       "revId": "6c9a71be397d60d836a9aeb0e3ddfd0fb9e75d8a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_f0ff8dfa",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-09T10:23:33Z",
+      "side": 1,
+      "message": "There are currently 3 of these \u0027factory\u0027 functions in the code base, and I wanted to make them all the same.",
+      "parentUuid": "8e01838a_8d29629d",
+      "revId": "6c9a71be397d60d836a9aeb0e3ddfd0fb9e75d8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
