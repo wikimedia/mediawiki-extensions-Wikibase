@@ -95,7 +95,6 @@ class ListSubscribersTest extends MediaWikiLangTestCase {
 		$module = new ListSubscribers(
 			$apiMain,
 			'subscribers',
-			'wbls',
 			$errorReporter,
 			$idParser,
 			$siteLokup
