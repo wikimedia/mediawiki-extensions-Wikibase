@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e01838a_7c26d6ca",
+        "filename": "lib/includes/EntityTypeDefinitions.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-09T21:51:39Z",
+      "side": 1,
+      "message": "Minor: there is a type in the method name \"chagne\" not \"change\".\n\nMore important: shouldn\u0027t the return value rather be an array of callables, not the array of ChangeOpDeserializer?",
+      "revId": "60099939368476209709493a1874634b587dd30f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e01838a_ef7c51ea",
         "filename": "lib/tests/phpunit/EntityTypeDefinitionsTest.php",
         "patchSetId": 15
@@ -30,6 +47,46 @@
       "writtenOn": "2017-01-07T01:23:44Z",
       "side": 1,
       "message": "This field name does not match what you defined. Naming is also not consistent with the method.",
+      "revId": "60099939368476209709493a1874634b587dd30f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_5c0afa2a",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-09T21:51:39Z",
+      "side": 1,
+      "message": "I believe the work flow here would be more of the following:\ncall the callback for the given type, it would return the instance of ChangeOpDeserializer (probably would make sense to check this). As we know the interface, let\u0027s just call createEntityChangeOp on the instance we just had. It in turn would return an instance of ChangeOp. If it is not the null change op, just add it to $changeOps (or maybe ChangeOps could be expanded, so its add method ignores NullChangeOp - not sure if is something we\u0027d like to have there, though?)",
+      "revId": "60099939368476209709493a1874634b587dd30f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_bc1a0e7d",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 1847,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-09T21:51:39Z",
+      "side": 1,
+      "message": "same remark concerning the name of the method EntityTypeDefinitions (although the return type I also complained about there seems correct here!)",
+      "range": {
+        "startLine": 1847,
+        "startChar": 17,
+        "endLine": 1847,
+        "endChar": 49
+      },
       "revId": "60099939368476209709493a1874634b587dd30f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
