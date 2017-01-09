@@ -1,0 +1,9 @@
+Code-Review+1: Aleksey Bekh-Ivanov (WMDE) <aleksey.bekh-ivanov@wikimedia.de>
+Verified+1: Aleksey Bekh-Ivanov (WMDE) <aleksey.bekh-ivanov@wikimedia.de>
+Code-Review+2: Jonas Kress (WMDE) <jonas.kress@wikimedia.de>
+Verified+2: jenkins-bot
+Submitted-by: jenkins-bot
+Submitted-at: Mon, 09 Jan 2017 18:35:01 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/330146
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
