@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e01838a_6d2626cb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-09T10:10:40Z",
+      "side": 1,
+      "message": "I don\u0027t think they are \"unused\". They were used. A better commit message would be hard-coding module prefix or something like that.",
+      "revId": "6c9a71be397d60d836a9aeb0e3ddfd0fb9e75d8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_8d29629d",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-09T10:10:40Z",
+      "side": 1,
+      "message": "These changes don\u0027t look they are related.",
+      "revId": "6c9a71be397d60d836a9aeb0e3ddfd0fb9e75d8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
