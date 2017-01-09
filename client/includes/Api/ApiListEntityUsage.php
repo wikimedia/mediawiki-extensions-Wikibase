@@ -31,10 +31,11 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 	/**
 	 * @param ApiQuery $query
 	 * @param string $moduleName
+	 * @param RepoLinker $repoLinker
 	 */
-	public function __construct( ApiQuery $query, $moduleName ) {
+	public function __construct( ApiQuery $query, $moduleName, RepoLinker $repoLinker ) {
 		parent::__construct( $query, $moduleName, 'wbeu' );
-		$this->repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
+		$this->repoLinker = $repoLinker;
 	}
 
 	public function executeGenerator( $resultPageSet ) {

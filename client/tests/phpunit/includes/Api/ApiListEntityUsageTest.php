@@ -9,6 +9,7 @@ use MediaWikiLangTestCase;
 use RequestContext;
 use Title;
 use Wikibase\Client\Api\ApiListEntityUsage;
+use Wikibase\Client\WikibaseClient;
 use WikiPage;
 
 /**
@@ -120,9 +121,11 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 	 * @return array[]
 	 */
 	private function callApiModule( array $params ) {
+		$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
 		$module = new ApiListEntityUsage(
 			$this->getQueryModule( $params ),
-			'entityusage'
+			'entityusage',
+			$repoLinker
 		);
 
 		$module->execute();

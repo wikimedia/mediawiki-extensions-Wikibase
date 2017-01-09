@@ -210,8 +210,17 @@ call_user_func( function() {
 	);
 
 	$wgAPIPropModules['wbentityusage'] = Wikibase\Client\Api\ApiPropsEntityUsage::class;
-	$wgAPIListModules['wblistentityusage'] = Wikibase\Client\Api\ApiListEntityUsage::class;
-
+	$wgAPIListModules['wblistentityusage'] = [
+		'class' => 'Wikibase\Client\Api\ApiListEntityUsage',
+		'factory' => function ( ApiQuery $apiQuery, $moduleName ) {
+			$repoLinker = Wikibase\Client\WikibaseClient::getDefaultInstance()->newRepoLinker();
+			return new Wikibase\Client\Api\ApiListEntityUsage(
+				$apiQuery,
+				$moduleName,
+				$repoLinker
+			);
+		}
+	];
 	// Special page registration
 	$wgSpecialPages['UnconnectedPages'] = 'Wikibase\Client\Specials\SpecialUnconnectedPages';
 	$wgSpecialPages['PagesWithBadges'] = function() {
