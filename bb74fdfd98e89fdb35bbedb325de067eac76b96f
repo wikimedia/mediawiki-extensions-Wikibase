@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e01838a_4d192a7e",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-09T00:33:58Z",
+      "side": 1,
+      "message": "I don\u0027t see what value it brings. $site is either object or null, objects cannot be falsysh so what\u0027s the point?",
+      "range": {
+        "startLine": 128,
+        "startChar": 7,
+        "endLine": 128,
+        "endChar": 21
+      },
+      "revId": "bb74fdfd98e89fdb35bbedb325de067eac76b96f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_ed2696b4",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-09T00:33:58Z",
+      "side": 1,
+      "message": "Here only weird case is if $url is \u00270\u0027, but otherwise it is also not necessary.",
+      "range": {
+        "startLine": 133,
+        "startChar": 7,
+        "endLine": 133,
+        "endChar": 21
+      },
+      "revId": "bb74fdfd98e89fdb35bbedb325de067eac76b96f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
