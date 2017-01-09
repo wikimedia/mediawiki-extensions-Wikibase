@@ -19,6 +19,8 @@ use Wikibase\Store\SubscriptionLookup;
 /**
  * Interactor class for dispatching change notifications to client wikis via the job queue.
  *
+ * @see docs/change-propagation.wiki for an overview of the change propagation mechanism.
+ *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
