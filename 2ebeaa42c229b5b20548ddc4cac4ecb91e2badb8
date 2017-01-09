@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e01838a_9c71920e",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-09T20:38:13Z",
+      "side": 1,
+      "message": "any reason not to use  Wikibase\\Client\\Api\\ApiListEntityUsage::class here?",
+      "revId": "2ebeaa42c229b5b20548ddc4cac4ecb91e2badb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
