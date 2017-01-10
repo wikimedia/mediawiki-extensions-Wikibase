@@ -108,7 +108,7 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 		$this->addReallyDoQueryData();
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$special = new SpecialEntityUsage( 'EntityUsage', $wikibaseClient->getEntityIdParser() );
+		$special = new SpecialEntityUsage( $wikibaseClient->getEntityIdParser() );
 		$special->prepareParams( 'Q3' );
 		$res = $special->reallyDoQuery( 50 );
 		$values = [];

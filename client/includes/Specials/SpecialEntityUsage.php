@@ -37,11 +37,10 @@ class SpecialEntityUsage extends QueryPage {
 	/**
 	 * @see SpecialPage::__construct
 	 *
-	 * @param string $name
 	 * @param EntityIdParser $idParser
 	 */
-	public function __construct( $name, EntityIdParser $idParser ) {
-		parent::__construct( $name );
+	public function __construct( EntityIdParser $idParser ) {
+		parent::__construct( 'EntityUsage' );
 
 		$this->idParser = $idParser;
 	}

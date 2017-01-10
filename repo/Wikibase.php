@@ -251,11 +251,11 @@ call_user_func( function() {
 		= Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases::class;
 	$wgSpecialPages['SetSiteLink'] = Wikibase\Repo\Specials\SpecialSetSiteLink::class;
 	$wgSpecialPages['EntitiesWithoutLabel'] = array(
-		'Wikibase\Repo\Specials\SpecialEntitiesWithoutPageFactory',
+		Wikibase\Repo\Specials\SpecialEntitiesWithoutPageFactory::class,
 		'newSpecialEntitiesWithoutLabel'
 	);
 	$wgSpecialPages['EntitiesWithoutDescription'] = array(
-		'Wikibase\Repo\Specials\SpecialEntitiesWithoutPageFactory',
+		Wikibase\Repo\Specials\SpecialEntitiesWithoutPageFactory::class,
 		'newSpecialEntitiesWithoutDescription'
 	);
 	$wgSpecialPages['ListDatatypes'] = Wikibase\Repo\Specials\SpecialListDatatypes::class;
