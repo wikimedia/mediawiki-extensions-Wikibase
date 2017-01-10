@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e01838a_174e9872",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-10T15:07:11Z",
+      "side": 1,
+      "message": "This is called 3 times. A local variable may make this a little bit more readable.",
+      "range": {
+        "startLine": 263,
+        "startChar": 3,
+        "endLine": 263,
+        "endChar": 21
+      },
+      "revId": "58d6431e6955869d28e9f8e641efe7592f1d8937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_77470c51",
+        "filename": "repo/includes/Specials/SpecialItemDisambiguation.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-10T15:07:11Z",
+      "side": 1,
+      "message": "This block is a bit mixed up compared to the order in the constructor.",
+      "range": {
+        "startLine": 56,
+        "startChar": 4,
+        "endLine": 59,
+        "endChar": 49
+      },
+      "revId": "58d6431e6955869d28e9f8e641efe7592f1d8937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_b73d84ba",
+        "filename": "repo/includes/Specials/SpecialItemDisambiguation.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-10T15:07:11Z",
+      "side": 1,
+      "message": "This is not true any more, please remove.",
+      "range": {
+        "startLine": 61,
+        "startChar": 4,
+        "endLine": 61,
+        "endChar": 14
+      },
+      "revId": "58d6431e6955869d28e9f8e641efe7592f1d8937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_5744104a",
+        "filename": "repo/includes/Specials/SpecialItemDisambiguation.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-10T15:07:11Z",
+      "side": 1,
+      "message": "The actual execution order below is the other way around: interactor first, ItemDisambiguation to view the results after. Would feel a bit more natural to me. Just a suggestion because it obviously does not make a difference, technically.",
+      "range": {
+        "startLine": 66,
+        "startChar": 2,
+        "endLine": 67,
+        "endChar": 45
+      },
+      "revId": "58d6431e6955869d28e9f8e641efe7592f1d8937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_d757e003",
+        "filename": "repo/includes/Specials/SpecialItemDisambiguation.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-10T15:07:11Z",
+      "side": 1,
+      "message": "This is the default and could be removed.",
+      "range": {
+        "startLine": 70,
+        "startChar": 43,
+        "endLine": 70,
+        "endChar": 53
+      },
+      "revId": "58d6431e6955869d28e9f8e641efe7592f1d8937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_377074a3",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialItemDisambiguationTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-10T15:07:11Z",
+      "side": 1,
+      "message": "This is a weird line to add. How does it help? There is no code below that uses this variable.\n\nSame below.",
+      "revId": "58d6431e6955869d28e9f8e641efe7592f1d8937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
