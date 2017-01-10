@@ -35,7 +35,7 @@ class EntityTypesConfigValueProvider implements MediaWikiConfigValueProvider {
 	/**
 	 * @see MediaWikiJsConfigProvider::getValue
 	 *
-	 * @return array
+	 * @return array[]
 	 */
 	public function getValue() {
 		return [
