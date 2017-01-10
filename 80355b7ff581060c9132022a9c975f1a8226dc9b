@@ -16,6 +16,24 @@
       "revId": "80355b7ff581060c9132022a9c975f1a8226dc9b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_1a5fdfe9",
+        "filename": "lib/includes/EntityTypeDefinitions.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-10T18:39:39Z",
+      "side": 1,
+      "message": "Okay. I want to change it to \"An array mapping entity type identifiers to callables instantiating ChangeOpDeserializer capable of turning serialization of the change (in array form) to a ChangeOp object representing the change.\"\nTell me if it\u0027s okay for you or you have any feedback about this.",
+      "parentUuid": "8e01838a_979cc860",
+      "revId": "80355b7ff581060c9132022a9c975f1a8226dc9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
