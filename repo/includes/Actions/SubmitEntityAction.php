@@ -214,7 +214,16 @@ class SubmitEntityAction extends EditEntityAction {
 		$page = new WikiPage( $title );
 
 		// NOTE: Constraint checks are performed automatically via EntityContent::prepareSave.
-		$status = $page->doEditContent( $content, $summary );
+		$status = $page->doEditContent(
+			$content,
+			$summary,
+			0,
+			false,
+			$this->getUser(),
+			null,
+			array(),
+			$this->getRequest()->getInt( 'undo', 0 )
+		);
 
 		if ( !$status->isOK() ) {
 			return $status;
