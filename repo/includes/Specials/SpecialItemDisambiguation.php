@@ -10,8 +10,6 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\MediaWikiContentLanguages;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\TermIndexEntry;
 
 /**
@@ -25,18 +23,9 @@ use Wikibase\TermIndexEntry;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  * @author Addshore
+ * @author Amir Sarabadani
  */
 class SpecialItemDisambiguation extends SpecialWikibasePage {
-
-	/**
-	 * @var ItemDisambiguation DO NOT ACCESS DIRECTLY use this->getItemDisambiguation
-	 */
-	private $itemDisambiguation;
-
-	/**
-	 * @var TermIndexSearchInteractor|null DO NOT ACCESS DIRECTLY use this->getSearchInteractor
-	 */
-	private $searchInteractor = null;
 
 	/**
 	 * @var ContentLanguages
@@ -49,76 +38,41 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	private $languageNameLookup;
 
 	/**
+	 * @var ItemDisambiguation
+	 */
+	private $itemDisambiguation;
+
+	/**
+	 * @var TermIndexSearchInteractor
+	 */
+	private $searchInteractor = null;
+
+	/**
 	 * @var int
 	 */
 	private $limit;
 
 	/**
-	 * @see SpecialWikibasePage::__construct
-	 *
-	 * @since 0.1
-	 */
-	public function __construct() {
-		parent::__construct( 'ItemDisambiguation', '', true );
-
-		// @todo inject these
-		$this->contentLanguages = new MediaWikiContentLanguages();
-		$this->languageNameLookup = new LanguageNameLookup();
-
-		// @todo make this configurable
-		$this->limit = 100;
-	}
-
-	/**
-	 * Set service objects to use. Unit tests may call this to substitute mock
-	 * services.
-	 *
 	 * @param ItemDisambiguation $itemDisambiguation
 	 * @param TermIndexSearchInteractor $searchInteractor
 	 * @param ContentLanguages $contentLanguages
 	 * @param LanguageNameLookup $languageNameLookup
+	 * @param int $limit
 	 */
-	public function initServices(
+	public function __construct(
+		ContentLanguages $contentLanguages,
+		LanguageNameLookup $languageNameLookup,
 		ItemDisambiguation $itemDisambiguation,
 		TermIndexSearchInteractor $searchInteractor,
-		ContentLanguages $contentLanguages,
-		LanguageNameLookup $languageNameLookup
+		$limit = 100
 	) {
-		$this->itemDisambiguation = $itemDisambiguation;
-		$this->searchInteractor = $searchInteractor;
+		parent::__construct( 'ItemDisambiguation' );
+
 		$this->contentLanguages = $contentLanguages;
 		$this->languageNameLookup = $languageNameLookup;
-	}
-
-	/**
-	 * @param string $displayLanguageCode Only used if the service does not already exist
-	 *
-	 * @return TermIndexSearchInteractor
-	 */
-	private function getSearchInteractor( $displayLanguageCode ) {
-		if ( $this->searchInteractor === null ) {
-			$this->searchInteractor = WikibaseRepo::getDefaultInstance()->newTermSearchInteractor(
-				$displayLanguageCode
-			);
-		}
-		return $this->searchInteractor;
-	}
-
-	/**
-	 * @return ItemDisambiguation
-	 */
-	private function getItemDisambiguation() {
-		global $wgLang;
-
-		if ( $this->itemDisambiguation === null ) {
-			$this->itemDisambiguation = new ItemDisambiguation(
-				WikibaseRepo::getDefaultInstance()->getEntityTitleLookup(),
-				new LanguageNameLookup( $wgLang->getCode() ),
-				$this->getLanguage()->getCode()
-			);
-		}
-
-		return $this->itemDisambiguation;
+		$this->itemDisambiguation = $itemDisambiguation;
+		$this->searchInteractor = $searchInteractor;
+		$this->limit = $limit;
 	}
 
 	/**
@@ -211,7 +165,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	 * @return TermSearchResult[]
 	 */
 	private function getSearchResults( $label, $languageCode ) {
-		$searchInteractor = $this->getSearchInteractor( $this->getLanguage()->getCode() );
+		$searchInteractor = $this->searchInteractor;
 		$searchInteractor->setLimit( $this->limit );
 		$searchInteractor->setIsCaseSensitive( false );
 		$searchInteractor->setIsPrefixSearch( false );
@@ -254,8 +208,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	 * @param TermSearchResult[] $searchResults
 	 */
 	private function displayDisambiguationPage( array $searchResults ) {
-		$itemDisambiguation = $this->getItemDisambiguation();
-		$html = $itemDisambiguation->getHTML( $searchResults );
+		$html = $this->itemDisambiguation->getHTML( $searchResults );
 		$this->getOutput()->addHTML( $html );
 	}
 
@@ -265,7 +218,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	 * @return array
 	 */
 	private function getLanguageOptions() {
-		$options = array();
+		$options = [];
 		foreach ( $this->contentLanguages->getLanguages() as $languageCode ) {
 			$languageName = $this->languageNameLookup->getName( $languageCode );
 			$options["$languageName ($languageCode)"] = $languageCode;
@@ -280,8 +233,8 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	 * @param string|null $label
 	 */
 	private function switchForm( $languageCode, $label ) {
-		$formDescriptor = array(
-			'language' => array(
+		$formDescriptor = [
+			'language' => [
 				'name' => 'language',
 				'default' => $languageCode ?: '',
 				'type' => 'combobox',
@@ -290,8 +243,8 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 				'size' => 12,
 				'cssclass' => 'wb-language-suggester',
 				'label-message' => 'wikibase-itemdisambiguation-lookup-language'
-			),
-			'label' => array(
+			],
+			'label' => [
 				'name' => 'label',
 				'default' => $label ?: '',
 				'type' => 'text',
@@ -299,21 +252,21 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 				'size' => 36,
 				'autofocus',
 				'label-message' => 'wikibase-itemdisambiguation-lookup-label'
-			),
-			'submit' => array(
+			],
+			'submit' => [
 				'name' => '',
 				'default' => $this->msg( 'wikibase-itemdisambiguation-submit' )->text(),
 				'type' => 'submit',
 				'id' => 'wb-itembytitle-submit',
-			)
-		);
+			]
+		];
 
 		HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext() )
 			->setId( 'wb-itemdisambiguation-form1' )
 			->setMethod( 'get' )
 			->setFooterText( Html::element(
 				'p',
-				array(),
+				[],
 				$this->msg( 'wikibase-itemdisambiguation-form-hints' )->numParams(
 					$this->limit
 				)->text()
