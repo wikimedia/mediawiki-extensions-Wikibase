@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e01838a_94e846df",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-10T11:22:59Z",
+      "side": 1,
+      "message": "I highly doubt that this patch is related to this phab card. I think you should remove it or make a new phab card.",
+      "range": {
+        "startLine": 13,
+        "startChar": 5,
+        "endLine": 13,
+        "endChar": 12
+      },
+      "revId": "c936e365c2c114cd2cf56babbfaf716c8f40b77a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
