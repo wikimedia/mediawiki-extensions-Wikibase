@@ -10,7 +10,6 @@ use Wikibase\DataModel\Entity\ItemId;
  * @covers Wikibase\Client\Usage\EntityUsage
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseUsageTracking
  *
  * @license GPL-2.0+

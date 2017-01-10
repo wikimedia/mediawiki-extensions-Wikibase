@@ -18,7 +18,6 @@ use WikiPage;
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
- * @group WikibaseClient
  * @group Database
  *
  * @license GPL-2.0+

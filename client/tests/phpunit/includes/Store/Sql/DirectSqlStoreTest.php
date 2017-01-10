@@ -29,7 +29,6 @@ use Wikibase\TermIndex;
  *
  * @group Database
  * @group Wikibase
- * @group WikibaseClient
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

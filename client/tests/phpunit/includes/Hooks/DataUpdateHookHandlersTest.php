@@ -15,7 +15,6 @@ use Wikibase\DataModel\Entity\ItemId;
 /**
  * @covers Wikibase\Client\Hooks\DataUpdateHookHandlers
  *
- * @group WikibaseClient
  * @group WikibaseUsageTracking
  * @group Wikibase
  * @group WikibaseHooks

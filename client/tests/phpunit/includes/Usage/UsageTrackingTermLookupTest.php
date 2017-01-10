@@ -11,7 +11,6 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
  * @covers Wikibase\Client\Usage\UsageTrackingTermLookup
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseUsageTracking
  *
  * @license GPL-2.0+

@@ -12,7 +12,6 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 /**
  * @covers Wikibase\Client\Specials\SpecialPagesWithBadges
  *
- * @group WikibaseClient
  * @group SpecialPage
  * @group WikibaseSpecialPage
  * @group Wikibase

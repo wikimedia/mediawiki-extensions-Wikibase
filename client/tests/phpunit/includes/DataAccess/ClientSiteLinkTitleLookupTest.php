@@ -12,7 +12,6 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @covers Wikibase\Client\DataAccess\ClientSiteLinkTitleLookup
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseDataAccess
  *
  * @license GPL-2.0+

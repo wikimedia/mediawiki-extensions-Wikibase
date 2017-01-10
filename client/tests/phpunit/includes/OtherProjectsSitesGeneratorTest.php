@@ -12,7 +12,6 @@ use Wikibase\Client\OtherProjectsSitesGenerator;
  *
  * @since 0.5
  *
- * @group WikibaseClient
  * @group Wikibase
  * @group Database
  * @group WikibaseIntegration

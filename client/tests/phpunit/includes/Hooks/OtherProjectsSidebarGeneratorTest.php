@@ -18,7 +18,6 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  *
  * @since 0.5
  *
- * @group WikibaseClient
  * @group Wikibase
  *
  * @license GPL-2.0+

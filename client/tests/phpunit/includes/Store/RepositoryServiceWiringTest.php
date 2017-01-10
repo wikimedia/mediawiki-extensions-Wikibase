@@ -13,7 +13,6 @@ use Wikibase\TermIndex;
 
 /**
  * @group Wikibase
- * @group WikibaseClient
  *
  * @license GPL-2.0+
  */

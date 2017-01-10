@@ -17,7 +17,6 @@ use Wikibase\NamespaceChecker;
 /**
  * @covers Wikibase\Client\Hooks\UpdateRepoHookHandlers
  *
- * @group WikibaseClient
  * @group Wikibase
  *
  * @license GNU GPL v2+

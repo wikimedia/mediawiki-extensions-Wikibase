@@ -11,7 +11,6 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @covers Wikibase\Client\Usage\Sql\SqlSubscriptionManager
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseUsageTracking
  * @group Database
  *

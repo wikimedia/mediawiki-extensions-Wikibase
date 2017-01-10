@@ -9,7 +9,6 @@ use Wikibase\SettingsArray;
  * Copyright © 02.07.13 by the authors listed below.
  *
  * @group Wikibase
- * @group WikibaseClient
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

@@ -18,7 +18,6 @@ use Wikibase\SettingsArray;
  * @covers Wikibase\Client\DataAccess\Scribunto\WikibaseLanguageIndependentLuaBindings
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseScribunto
  *
  * @license GPL-2.0+

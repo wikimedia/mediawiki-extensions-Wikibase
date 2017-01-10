@@ -11,7 +11,6 @@ use Wikibase\Client\OtherProjectsSitesProvider;
  *
  * @since 0.5
  *
- * @group WikibaseClient
  * @group Wikibase
  * @group Database
  *

@@ -13,7 +13,6 @@ use WikitextContent;
 
 /**
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseUsageTracking
  *
  * @group Database

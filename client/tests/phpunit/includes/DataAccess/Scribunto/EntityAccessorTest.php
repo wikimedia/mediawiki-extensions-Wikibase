@@ -29,7 +29,6 @@ use Wikibase\Lib\Tests\MockRepository;
  * @covers Wikibase\Client\DataAccess\Scribunto\EntityAccessor
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseScribunto
  *
  * @license GPL-2.0+

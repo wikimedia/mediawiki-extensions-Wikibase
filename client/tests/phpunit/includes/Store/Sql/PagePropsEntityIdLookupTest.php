@@ -13,7 +13,6 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
  * @covers Wikibase\Client\Store\Sql\PagePropsEntityIdLookup
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseStore
  * @group Database
  *

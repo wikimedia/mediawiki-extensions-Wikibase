@@ -9,7 +9,6 @@ use Wikibase\NamespaceChecker;
 /**
  * @covers Wikibase\NamespaceChecker
  *
- * @group WikibaseClient
  * @group Wikibase
  *
  * @license GPL-2.0+

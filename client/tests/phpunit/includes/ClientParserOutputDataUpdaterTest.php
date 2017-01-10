@@ -18,7 +18,6 @@ use Wikibase\Lib\Tests\MockRepository;
 /**
  * @covers Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater
  *
- * @group WikibaseClient
  * @group Wikibase
  *
  * @license GPL-2.0+

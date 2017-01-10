@@ -10,7 +10,6 @@ use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
  * @covers Wikibase\Client\Usage\UsageAccumulator
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseUsageTracking
  *
  * @license GPL-2.0+

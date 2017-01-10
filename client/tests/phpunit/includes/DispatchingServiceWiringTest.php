@@ -10,7 +10,6 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
  * @group Wikibase
- * @group WikibaseClient
  *
  * @license GPL-2.0+
  */

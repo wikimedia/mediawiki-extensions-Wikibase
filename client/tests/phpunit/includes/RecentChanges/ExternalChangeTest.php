@@ -10,7 +10,6 @@ use Wikibase\DataModel\Entity\ItemId;
 /**
  * @covers Wikibase\Client\RecentChanges\ExternalChange
  *
- * @group WikibaseClient
  * @group Wikibase
  *
  * @license GPL-2.0+

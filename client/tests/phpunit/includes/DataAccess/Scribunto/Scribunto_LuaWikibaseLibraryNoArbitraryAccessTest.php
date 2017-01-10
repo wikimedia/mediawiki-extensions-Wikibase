@@ -9,7 +9,6 @@ namespace Wikibase\Client\Tests\DataAccess\Scribunto;
  *
  * @group WikibaseScribunto
  * @group WikibaseIntegration
- * @group WikibaseClient
  * @group Wikibase
  *
  * @license GPL-2.0+

@@ -32,7 +32,6 @@ use Wikibase\Lib\Tests\MockRepository;
 /**
  * @covers Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers
  *
- * @group WikibaseClient
  * @group Wikibase
  * @group WikibaseHooks
  *

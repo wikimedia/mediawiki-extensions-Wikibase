@@ -19,7 +19,6 @@ use Wikibase\SiteLinkCommentCreator;
 /**
  * @covers Wikibase\Client\RecentChanges\RecentChangeFactory
  *
- * @group WikibaseClient
  * @group Wikibase
  *
  * @license GPL-2.0+

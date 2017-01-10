@@ -10,7 +10,6 @@ use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 /**
  * @covers Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector
  *
- * @group WikibaseClient
  * @group Wikibase
  * @group Database
  *

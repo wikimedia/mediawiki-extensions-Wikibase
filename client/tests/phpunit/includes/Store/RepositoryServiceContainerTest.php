@@ -18,7 +18,6 @@ use Wikibase\SettingsArray;
  * @covers Wikibase\Client\Store\RepositoryServiceContainer
  *
  * @group Wikibase
- * @group WikibaseClient
  *
  * @license GPL-2.0+
  */

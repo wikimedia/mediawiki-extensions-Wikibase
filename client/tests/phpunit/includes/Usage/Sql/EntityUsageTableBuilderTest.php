@@ -13,7 +13,6 @@ use Wikibase\Lib\Reporting\MessageReporter;
  * @covers Wikibase\Client\Usage\Sql\EntityUsageTableBuilder
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseUsageTracking
  * @group Database
  *

@@ -26,7 +26,6 @@ use Wikibase\Lib\Tests\Changes\TestChanges;
  * @covers Wikibase\Client\Changes\AffectedPagesFinder
  *
  * @group Database
- * @group WikibaseClient
  * @group Wikibase
  *
  * @license GPL-2.0+

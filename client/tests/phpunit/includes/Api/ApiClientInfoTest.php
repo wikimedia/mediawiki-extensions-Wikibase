@@ -17,7 +17,6 @@ use Wikibase\SettingsArray;
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
- * @group WikibaseClient
  *
  * @group medium
  *

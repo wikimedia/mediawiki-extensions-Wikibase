@@ -19,7 +19,6 @@ use Wikibase\Lib\SnakFormatter;
  * @covers Wikibase\Client\DataAccess\Scribunto\SnakSerializationRenderer
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseScribunto
  *
  * @license GPL-2.0+

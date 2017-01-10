@@ -22,7 +22,6 @@ use Wikibase\Lib\SnakFormatter;
  * @note We also have integration tests for this at DataAccessSnakFormatterOutputFormatTest.
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseDataAccess
  *
  * @license GPL-2.0+

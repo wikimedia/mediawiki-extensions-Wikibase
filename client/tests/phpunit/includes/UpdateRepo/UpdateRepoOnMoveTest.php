@@ -17,7 +17,6 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @covers Wikibase\Client\UpdateRepo\UpdateRepoOnMove
  * @covers Wikibase\Client\UpdateRepo\UpdateRepo
  *
- * @group WikibaseClient
  * @group Wikibase
  *
  * @license GPL-2.0+

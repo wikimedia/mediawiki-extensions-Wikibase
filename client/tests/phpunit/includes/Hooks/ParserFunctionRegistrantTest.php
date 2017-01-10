@@ -11,7 +11,6 @@ use Wikibase\Client\WikibaseClient;
  * @covers Wikibase\Client\Hooks\ParserFunctionRegistrant
  *
  * @group Wikibase
- * @group WikibaseClient
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >

@@ -9,7 +9,6 @@ use Wikibase\Client\Usage\HashUsageAccumulator;
  * @covers Wikibase\Client\Usage\UsageAccumulator
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseUsageTracking
  *
  * @license GPL-2.0+

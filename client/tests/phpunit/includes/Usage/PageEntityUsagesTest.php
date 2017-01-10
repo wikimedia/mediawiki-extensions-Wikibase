@@ -11,7 +11,6 @@ use Wikibase\DataModel\Entity\ItemId;
  * @covers Wikibase\Client\Usage\PageEntityUsages
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseUsageTracking
  *
  * @license GPL-2.0+

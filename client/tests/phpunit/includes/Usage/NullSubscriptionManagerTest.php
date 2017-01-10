@@ -8,7 +8,6 @@ use Wikibase\Client\Usage\NullSubscriptionManager;
 /**
  * @covers Wikibase\Client\Usage\NullSubscriptionManager
  *
- * @group WikibaseClient
  * @group Wikibase
  *
  * @license GPL-2.0+

@@ -19,7 +19,6 @@ use Wikibase\Client\WikibaseClient;
 /**
  * @covers Wikibase\Client\RecentChanges\ChangeLineFormatter
  *
- * @group WikibaseClient
  * @group Wikibase
  * @group Database
  * @group medium

@@ -10,7 +10,6 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
  * @covers Wikibase\Client\DispatchingServiceFactory
  *
  * @group Wikibase
- * @group WikibaseClient
  *
  * @license GPL-2.0+
  */

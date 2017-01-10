@@ -12,7 +12,6 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
  * @covers Wikibase\Client\Usage\UsageAspectTransformer
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseUsageTracking
  *
  * @license GPL-2.0+

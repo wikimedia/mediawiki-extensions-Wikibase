@@ -48,7 +48,6 @@ use Wikibase\StringNormalizer;
  * @covers Wikibase\Client\WikibaseClient
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group Database
  *
  * @license GPL-2.0+

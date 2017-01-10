@@ -15,7 +15,6 @@ use Wikibase\Test\MockClientStore;
  * @covers Wikibase\Client\Hooks\ParserClearStateHookHandler
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseIntegration
  * @group Database
  *

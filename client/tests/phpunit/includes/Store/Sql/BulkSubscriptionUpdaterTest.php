@@ -14,7 +14,6 @@ use Wikibase\Lib\Reporting\MessageReporter;
  * @covers Wikibase\Client\Store\Sql\BulkSubscriptionUpdater
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseUsageTracking
  * @group Database
  *

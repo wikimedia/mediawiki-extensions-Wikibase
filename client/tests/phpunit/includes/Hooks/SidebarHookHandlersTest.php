@@ -24,7 +24,6 @@ use Wikibase\SettingsArray;
 /**
  * @covers Wikibase\Client\Hooks\SidebarHookHandlers
  *
- * @group WikibaseClient
  * @group Wikibase
  * @group WikibaseHooks
  *

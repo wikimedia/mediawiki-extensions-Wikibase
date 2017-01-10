@@ -19,7 +19,6 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @covers Wikibase\Client\Usage\SiteLinkUsageLookup
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseUsageTracking
  * @group Database
  *

@@ -32,7 +32,6 @@ use Wikibase\Test\MockClientStore;
  * Technically this tests the SnakFormatters outputted by DataAccessSnakFormatterFactory.
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseDataAccess
  *
  * @license GPL-2.0+

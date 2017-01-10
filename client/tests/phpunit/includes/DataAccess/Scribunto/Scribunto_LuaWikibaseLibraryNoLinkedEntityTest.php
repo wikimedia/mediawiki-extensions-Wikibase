@@ -11,7 +11,6 @@ use Title;
  *
  * @group WikibaseScribunto
  * @group WikibaseIntegration
- * @group WikibaseClient
  * @group Wikibase
  *
  * @license GPL-2.0+

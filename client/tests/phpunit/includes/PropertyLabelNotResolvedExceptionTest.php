@@ -9,7 +9,6 @@ use Wikibase\Client\PropertyLabelNotResolvedException;
 /**
  * @covers Wikibase\Client\PropertyLabelNotResolvedException
  *
- * @group WikibaseClient
  * @group Wikibase
  *
  * @license GPL-2.0+

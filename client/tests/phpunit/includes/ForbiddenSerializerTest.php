@@ -9,7 +9,6 @@ use Wikibase\Client\ForbiddenSerializer;
 /**
  * @covers Wikibase\Client\ForbiddenSerializer
  *
- * @group WikibaseClient
  * @group Wikibase
  *
  * @license GPL-2.0+

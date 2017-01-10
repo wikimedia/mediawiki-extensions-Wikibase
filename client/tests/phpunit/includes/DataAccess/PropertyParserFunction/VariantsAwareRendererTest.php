@@ -11,7 +11,6 @@ use Wikibase\DataModel\Entity\ItemId;
  * @covers Wikibase\Client\DataAccess\PropertyParserFunction\VariantsAwareRenderer
  *
  * @group Wikibase
- * @group WikibaseClient
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >

@@ -12,7 +12,6 @@ use Wikibase\NoLangLinkHandler;
 /**
  * @covers Wikibase\NoLangLinkHandler
  *
- * @group WikibaseClient
  * @group Wikibase
  *
  * @license GPL-2.0+

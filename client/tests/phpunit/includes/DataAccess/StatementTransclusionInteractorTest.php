@@ -26,7 +26,6 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
  * @covers Wikibase\Client\DataAccess\StatementTransclusionInteractor
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseDataAccess
  *
  * @license GPL-2.0+

@@ -16,7 +16,6 @@ use Wikibase\EntityChange;
  * @covers Wikibase\Client\Changes\WikiPageUpdater
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseChange
  *
  * @group Database

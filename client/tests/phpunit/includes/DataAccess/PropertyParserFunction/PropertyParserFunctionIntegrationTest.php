@@ -16,7 +16,6 @@ use Wikibase\Test\MockClientStore;
  * Simple integration test for the {{#property:…}} parser function.
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseDataAccess
  * @group WikibaseIntegration
  * @group Database

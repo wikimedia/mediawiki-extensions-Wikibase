@@ -11,7 +11,6 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 /**
  * @covers Wikibase\Client\Hooks\DeletePageNoticeCreator
  *
- * @group WikibaseClient
  * @group Wikibase
  * @group Database
  *

@@ -19,7 +19,6 @@ use Wikibase\Lib\Tests\MockRepository;
 /**
  * @covers Wikibase\LangLinkHandler
  *
- * @group WikibaseClient
  * @group Wikibase
  * @group Database
  *

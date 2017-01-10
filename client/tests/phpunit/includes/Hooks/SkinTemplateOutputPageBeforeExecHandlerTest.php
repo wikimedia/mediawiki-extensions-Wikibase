@@ -18,7 +18,6 @@ use WikiPage;
 /**
  * @covers Wikibase\Client\Hooks\SkinTemplateOutputPageBeforeExecHandler
  *
- * @group WikibaseClient
  * @group Wikibase
  *
  * @license GPL-2.0+

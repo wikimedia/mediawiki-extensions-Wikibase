@@ -10,7 +10,6 @@ use Wikibase\SiteModule;
  * @covers Wikibase\SiteModule
  *
  * @group Wikibase
- * @group WikibaseClient
  *
  * @license GPL-2.0+
  * @author Thiemo Mättig

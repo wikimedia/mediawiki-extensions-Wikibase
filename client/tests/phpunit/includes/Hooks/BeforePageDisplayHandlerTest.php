@@ -13,7 +13,6 @@ use Wikibase\NamespaceChecker;
 /**
  * @covers Wikibase\Client\Hooks\BeforePageDisplayHandler
  *
- * @group WikibaseClient
  * @group WikibaseHooks
  * @group Wikibase
  *

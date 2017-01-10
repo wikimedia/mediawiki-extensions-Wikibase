@@ -15,7 +15,6 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
  * @covers Wikibase\Client\Store\AddUsagesForPageJob
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseUsageTracking
  *
  * @license GPL-2.0+

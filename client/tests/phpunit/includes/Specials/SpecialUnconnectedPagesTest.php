@@ -10,7 +10,6 @@ use Wikibase\NamespaceChecker;
 /**
  * @covers Wikibase\Client\Specials\SpecialUnconnectedPages
  *
- * @group WikibaseClient
  * @group SpecialPage
  * @group WikibaseSpecialPage
  * @group Wikibase

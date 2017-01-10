@@ -33,7 +33,6 @@ use Wikibase\Lib\SnakFormatter;
  * @covers Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseDataAccess
  *
  * @license GPL-2.0+

@@ -15,7 +15,6 @@ use Wikibase\LanguageFallbackChain;
  * @covers Wikibase\Client\Serializer\ClientEntitySerializer
  *
  * @group Wikibase
- * @group WikibaseClient
  *
  * @license GPL-2.0+
  * @author Thiemo Mättig

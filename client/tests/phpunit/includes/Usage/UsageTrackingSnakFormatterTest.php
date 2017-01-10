@@ -16,7 +16,6 @@ use Wikibase\Lib\SnakFormatter;
  * @covers Wikibase\Client\Usage\UsageTrackingSnakFormatter
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseUsageTracking
  *
  * @license GPL-2.0+

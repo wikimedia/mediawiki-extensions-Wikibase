@@ -8,7 +8,6 @@ use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
 /**
  * @covers Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler
  *
- * @group WikibaseClient
  * @group WikibaseHooks
  * @group Wikibase
  *

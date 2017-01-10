@@ -13,7 +13,6 @@ use Wikibase\Lib\Tests\MockRepository;
  * @covers Wikibase\Client\DataAccess\PropertyIdResolver
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseDataAccess
  *
  * @license GPL-2.0+

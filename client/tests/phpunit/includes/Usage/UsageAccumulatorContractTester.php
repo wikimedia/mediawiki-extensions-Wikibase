@@ -14,7 +14,6 @@ use Wikibase\DataModel\Entity\ItemId;
  * @uses Wikibase\Client\Usage\EntityUsage
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseUsageTracking
  *
  * @license GPL-2.0+

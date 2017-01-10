@@ -11,7 +11,6 @@ use Wikibase\DataModel\Entity\PropertyId;
 /**
  * @covers Wikibase\Client\RepoLinker
  *
- * @group WikibaseClient
  * @group Wikibase
  *
  * @license GPL-2.0+

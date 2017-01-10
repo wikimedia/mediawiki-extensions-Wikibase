@@ -13,7 +13,6 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
  * @covers Wikibase\Client\Usage\Sql\SqlUsageTracker
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseUsageTracking
  * @group Database
  *

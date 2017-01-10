@@ -23,7 +23,6 @@ use Wikibase\TermIndexEntry;
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
- * @group WikibaseClient
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

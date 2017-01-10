@@ -14,7 +14,6 @@ use Wikibase\DataModel\Statement\Statement;
  * @covers Wikibase\Client\DataAccess\Scribunto\WikibaseLuaEntityBindings
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseScribunto
  *
  * @license GPL-2.0+

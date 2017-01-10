@@ -12,7 +12,6 @@ use Wikibase\DataModel\Entity\ItemId;
 /**
  * @covers Wikibase\Client\RecentChanges\ExternalChangeFactory
  *
- * @group WikibaseClient
  * @group Database
  * @group medium
  * @group Wikibase

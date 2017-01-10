@@ -15,7 +15,6 @@ use Wikibase\SettingsArray;
  * @covers Wikibase\Client\Hooks\EchoNotificationsHandlers
  *
  * @group Database
- * @group WikibaseClient
  * @group Wikibase
  */
 class EchoNotificationsHandlersTestCase extends MediaWikiTestCase {

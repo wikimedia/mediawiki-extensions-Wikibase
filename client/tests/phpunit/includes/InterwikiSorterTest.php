@@ -7,7 +7,6 @@ use Wikibase\InterwikiSorter;
 /**
  * @covers Wikibase\InterwikiSorter
  *
- * @group WikibaseClient
  * @group Wikibase
  *
  * @license GPL-2.0+

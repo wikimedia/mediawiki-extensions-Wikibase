@@ -7,7 +7,6 @@ use Wikibase\Client\RecentChanges\RevisionData;
 /**
  * @covers Wikibase\Client\RecentChanges\RevisionData
  *
- * @group WikibaseClient
  * @group Wikibase
  *
  * @license GPL-2.0+

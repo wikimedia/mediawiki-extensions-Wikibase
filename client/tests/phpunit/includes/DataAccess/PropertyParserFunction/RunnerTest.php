@@ -27,7 +27,6 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @covers Wikibase\Client\DataAccess\PropertyParserFunction\Runner
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseDataAccess
  *
  * @license GPL-2.0+

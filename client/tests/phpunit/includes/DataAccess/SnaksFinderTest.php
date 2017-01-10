@@ -15,7 +15,6 @@ use Wikibase\DataModel\Statement\StatementListProvider;
  * @covers Wikibase\Client\DataAccess\SnaksFinder
  *
  * @group Wikibase
- * @group WikibaseClient
  * @group WikibaseDataAccess
  *
  * @license GPL-2.0+

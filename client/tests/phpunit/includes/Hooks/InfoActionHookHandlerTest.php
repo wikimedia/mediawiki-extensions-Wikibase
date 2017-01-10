@@ -22,7 +22,6 @@ use Wikibase\NamespaceChecker;
 /**
  * @covers Wikibase\Client\Hooks\InfoActionHookHandler
  *
- * @group WikibaseClient
  * @group Wikibase
  *
  * @license GPL-2.0+
