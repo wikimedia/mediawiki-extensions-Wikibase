@@ -311,6 +311,24 @@
       "revId": "58d6431e6955869d28e9f8e641efe7592f1d8937",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_77682c85",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialItemDisambiguationTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-10T15:55:23Z",
+      "side": 1,
+      "message": "I disagree:\n~/Wikibase3/repo$ grep -ir \"/\\*\\* @var \" . | wc -l\n155",
+      "parentUuid": "8e01838a_574e503d",
+      "revId": "58d6431e6955869d28e9f8e641efe7592f1d8937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
