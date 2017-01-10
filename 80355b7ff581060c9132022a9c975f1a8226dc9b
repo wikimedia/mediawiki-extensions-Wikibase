@@ -34,6 +34,24 @@
       "revId": "80355b7ff581060c9132022a9c975f1a8226dc9b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_baeb2bdb",
+        "filename": "lib/includes/EntityTypeDefinitions.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-10T18:52:14Z",
+      "side": 1,
+      "message": "Thanks! That sounds good.\nProbably for sake of being even more accurate \"instantiating ChangeOpDeserializer *objects*\".",
+      "parentUuid": "8e01838a_1a5fdfe9",
+      "revId": "80355b7ff581060c9132022a9c975f1a8226dc9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
