@@ -190,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "8e01838a_9744c81d",
+        "filename": "repo/includes/Specials/SpecialItemDisambiguation.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-10T15:50:13Z",
+      "side": 1,
+      "message": "Sorry, my comment was confusing. Also I did not realized that the $limit belongs to the $searchInteractor. All the following orders do make sense, I believe:\n\n TermIndexSearchInteractor $searchInteractor,\n $limit,\n ItemDisambiguation $itemDisambiguation,\n ContentLanguages $contentLanguages,\n LanguageNameLookup $languageNameLookup\n\n ContentLanguages $contentLanguages,\n LanguageNameLookup $languageNameLookup,\n TermIndexSearchInteractor $searchInteractor,\n $limit,\n ItemDisambiguation $itemDisambiguation\n\n ContentLanguages $contentLanguages,\n LanguageNameLookup $languageNameLookup,\n ItemDisambiguation $itemDisambiguation,\n TermIndexSearchInteractor $searchInteractor,\n $limit",
+      "parentUuid": "8e01838a_d7d2405d",
+      "range": {
+        "startLine": 66,
+        "startChar": 2,
+        "endLine": 67,
+        "endChar": 45
+      },
+      "revId": "58d6431e6955869d28e9f8e641efe7592f1d8937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e01838a_d757e003",
         "filename": "repo/includes/Specials/SpecialItemDisambiguation.php",
         "patchSetId": 1
@@ -266,6 +290,24 @@
       "side": 1,
       "message": "It shuts up Phpstorm for saying the return types does not match.",
       "parentUuid": "8e01838a_377074a3",
+      "revId": "58d6431e6955869d28e9f8e641efe7592f1d8937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_574e503d",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialItemDisambiguationTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-10T15:50:13Z",
+      "side": 1,
+      "message": "We have never done this in our code base. It makes the code hard to read and to maintain, but the value it adds is very small, and only relevant for a specific (optional) code inspection check in specific tools.\n\nI don\u0027t think we should do this. The type hint in the PHPDoc block at the top of the method is enough to be able to understand this code.",
+      "parentUuid": "8e01838a_97c5e892",
       "revId": "58d6431e6955869d28e9f8e641efe7592f1d8937",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
