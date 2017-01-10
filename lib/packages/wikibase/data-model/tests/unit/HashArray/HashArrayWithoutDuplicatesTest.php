@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel\Tests\HashArray;
 
 use Wikibase\DataModel\Fixtures\HashArrayElement;
-use Wikibase\DataModel\Fixtures\MutableHashable;
 use Wikibase\DataModel\HashArray;
 
 /**
@@ -112,26 +111,6 @@ class HashArrayWithoutDuplicatesTest extends HashArrayTest {
 		} else {
 			$this->assertNotSame( $hash, $array->getHash() );
 		}
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 * @param HashArray $array
-	 */
-	public function testIndicesAreUpToDate( HashArray $array ) {
-		$this->assertInternalType( 'boolean', $array->indicesAreUpToDate() );
-
-		$mutable = new MutableHashable();
-
-		$array->addElement( $mutable );
-
-		$mutable->text = '~[,,_,,]:3';
-
-		$this->assertFalse( $array->indicesAreUpToDate() );
-
-		$array->rebuildIndices();
-
-		$this->assertTrue( $array->indicesAreUpToDate() );
 	}
 
 }

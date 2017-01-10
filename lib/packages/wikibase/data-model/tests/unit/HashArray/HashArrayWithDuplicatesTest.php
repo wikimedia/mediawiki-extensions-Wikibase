@@ -4,7 +4,6 @@ namespace Wikibase\DataModel\Tests\HashArray;
 
 use Hashable;
 use Wikibase\DataModel\Fixtures\HashArrayElement;
-use Wikibase\DataModel\Fixtures\MutableHashable;
 use Wikibase\DataModel\HashArray;
 
 /**
@@ -115,26 +114,6 @@ class HashArrayWithDuplicatesTest extends HashArrayTest {
 			$array->getHash(),
 			'Hash should not be the same after adding an existing element again'
 		);
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 * @param HashArray $array
-	 */
-	public function testIndicesAreUpToDate( HashArray $array ) {
-		$this->assertInternalType( 'boolean', $array->indicesAreUpToDate() );
-
-		$mutable = new MutableHashable();
-
-		$array->addElement( $mutable );
-
-		$mutable->text = '~[,,_,,]:3';
-
-		$this->assertFalse( $array->indicesAreUpToDate() );
-
-		$array->rebuildIndices();
-
-		$this->assertTrue( $array->indicesAreUpToDate() );
 	}
 
 }
