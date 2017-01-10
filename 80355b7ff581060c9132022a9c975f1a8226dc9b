@@ -52,6 +52,29 @@
       "revId": "80355b7ff581060c9132022a9c975f1a8226dc9b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_7af5b3b4",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-10T18:53:34Z",
+      "side": 1,
+      "message": "sorry, another minor nitpicky thing: it should now rather be \"changeOpDeserializerCallbacks\", with singular Op, not Ops. As in the name of WikibaseRepo method called in the assignment!",
+      "range": {
+        "startLine": 117,
+        "startChar": 9,
+        "endLine": 117,
+        "endChar": 39
+      },
+      "revId": "80355b7ff581060c9132022a9c975f1a8226dc9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
