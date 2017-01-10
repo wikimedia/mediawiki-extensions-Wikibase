@@ -11,7 +11,6 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Enables accessing a linked page on a site by providing the item id and site
@@ -48,10 +47,9 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	private $entityLookup;
 
 	/**
-	 * Error message key
 	 * @var string|null
 	 */
-	private $errorMessageKey;
+	private $errorMessageKey = null;
 
 	/**
 	 * @see SpecialWikibasePage::__construct
@@ -69,22 +67,21 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 		EntityIdParser $idParser,
 		EntityLookup $entityLookup
 	) {
-		parent::__construct( 'GoToLinkedPage', '', true );
+		parent::__construct( 'GoToLinkedPage' );
 
 		$this->siteLookup = $siteLookup;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->redirectLookup = $redirectLookup;
 		$this->idParser = $idParser;
 		$this->entityLookup = $entityLookup;
-
-		$this->errorMessageKey = null;
 	}
 
 	/**
 	 * @param string $subPage
+	 *
 	 * @return array array( string $site, string $itemString )
 	 */
-	protected function getArguments( $subPage ) {
+	private function getArguments( $subPage ) {
 		$request = $this->getRequest();
 		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
 		$site = trim( $request->getVal( 'site', isset( $parts[0] ) ? $parts[0] : '' ) );
@@ -96,9 +93,10 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	/**
 	 * @param string $site
 	 * @param string|null $itemString
+	 *
 	 * @return string|null the URL to redirect to or null if the sitelink does not exist
 	 */
-	protected function getTargetUrl( $site, $itemString = null ) {
+	private function getTargetUrl( $site, $itemString = null ) {
 		$itemId = $this->getItemId( $itemString );
 
 		if ( $site === '' || $itemId === null ) {
@@ -135,6 +133,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	 * Parses a string to itemId
 	 *
 	 * @param string $itemString
+	 *
 	 * @return ItemId|null
 	 */
 	private function getItemId( $itemString ) {
@@ -208,7 +207,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	 * @param string $site
 	 * @param string $itemString
 	 */
-	protected function outputForm( $site, $itemString ) {
+	private function outputForm( $site, $itemString ) {
 		$formDescriptor = array(
 			'site' => array(
 				'name' => 'site',
