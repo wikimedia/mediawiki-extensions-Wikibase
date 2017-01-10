@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e01838a_979cc860",
+        "filename": "lib/includes/EntityTypeDefinitions.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-10T17:25:00Z",
+      "side": 1,
+      "message": "sorry, I should have pointed out this as well in the previous comment: the whole description here is a bit off.\nNamely:\n - return value of this is an (associative) array mapping entity type identifiers (do we actually call those identifiers?) to callbacks/callable instantiating ChangeOpDeserializer instances/returning instances of ChangeOpDeserializer (not sure which wording variant sounds better).\n - having an extra description here about what those ChangeOpDeserializers are meant to is nice but I believe it is not quite accurate in its current form: ChangeOpDeserializer defines an interface of service that get a description of changes to the entity in a form of array, and returns a ChangeOp object representing the change. Or something like this. In particular interface does not say. anything about the Entity object. Also once we finally have \"change op serialization format\" documented, this should be also referencing it.",
+      "revId": "80355b7ff581060c9132022a9c975f1a8226dc9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
