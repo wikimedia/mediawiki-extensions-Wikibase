@@ -44,6 +44,8 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 			->will( $this->returnCallback( function ( $searchResult ) {
 				return '<span class="mock-span" >ItemDisambiguationHTML-' . count( $searchResult ) . '</span>';
 			} ) );
+
+		/** @var ItemDisambiguation $mock */
 		return $mock;
 	}
 
@@ -110,6 +112,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 			->method( 'setUseLanguageFallback' )
 			->with( true );
 
+		/** @var TermIndexSearchInteractor $mock */
 		return $mock;
 	}
 
@@ -126,18 +129,17 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 			->method( 'getName' )
 			->will( $this->returnValue( '<LANG>' ) );
 
+		/** @var LanguageNameLookup $mock */
 		return $mock;
 	}
 
 	protected function newSpecialPage() {
-		$page = new SpecialItemDisambiguation();
-		$page->initServices(
-			$this->getMockItemDisambiguation(),
-			$this->getMockSearchInteractor(),
+		return new SpecialItemDisambiguation(
 			$this->getContentLanguages(),
-			$this->getMockLanguageNameLookup()
+			$this->getMockLanguageNameLookup(),
+			$this->getMockItemDisambiguation(),
+			$this->getMockSearchInteractor()
 		);
-		return $page;
 	}
 
 	public function testForm() {

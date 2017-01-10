@@ -250,7 +250,25 @@ call_user_func( function() {
 			$wikibaseRepo->getStore()->getEntityLookup()
 		);
 	};
-	$wgSpecialPages['ItemDisambiguation'] = Wikibase\Repo\Specials\SpecialItemDisambiguation::class;
+	$wgSpecialPages['ItemDisambiguation'] = function() {
+		global $wgLang;
+		$wikibaseRepo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+		$languageNameLookup = new \Wikibase\Lib\LanguageNameLookup( $wgLang->getCode() );
+		$itemDisambiguation = new \Wikibase\ItemDisambiguation(
+			$wikibaseRepo->getEntityTitleLookup(),
+			$languageNameLookup,
+			$wgLang->getCode()
+		);
+		$searchInteractor = $wikibaseRepo->newTermSearchInteractor(
+			$wgLang->getCode()
+		);
+		return new Wikibase\Repo\Specials\SpecialItemDisambiguation(
+			new \Wikibase\Lib\MediaWikiContentLanguages(),
+			$languageNameLookup,
+			$itemDisambiguation,
+			$searchInteractor
+		);
+	};
 	$wgSpecialPages['ItemsWithoutSitelinks']
 		= Wikibase\Repo\Specials\SpecialItemsWithoutSitelinks::class;
 	$wgSpecialPages['SetLabel'] = Wikibase\Repo\Specials\SpecialSetLabel::class;
