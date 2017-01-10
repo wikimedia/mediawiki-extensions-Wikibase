@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e01838a_14bd7663",
+        "filename": "lib/includes/EntityTypeDefinitions.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-10T13:45:23Z",
+      "side": 1,
+      "message": "Done, Thanks for noticing the typo",
+      "parentUuid": "8e01838a_7c26d6ca",
+      "revId": "60099939368476209709493a1874634b587dd30f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e01838a_ef7c51ea",
         "filename": "lib/tests/phpunit/EntityTypeDefinitionsTest.php",
         "patchSetId": 15
@@ -30,6 +48,24 @@
       "writtenOn": "2017-01-07T01:23:44Z",
       "side": 1,
       "message": "That\u0027s some weird-ass indentation",
+      "revId": "60099939368476209709493a1874634b587dd30f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_b47b42bd",
+        "filename": "lib/tests/phpunit/EntityTypeDefinitionsTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-10T13:45:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e01838a_ef7c51ea",
       "revId": "60099939368476209709493a1874634b587dd30f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8e01838a_745caa4e",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-10T13:45:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e01838a_cf8195ca",
+      "revId": "60099939368476209709493a1874634b587dd30f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e01838a_5c0afa2a",
         "filename": "repo/includes/Api/EditEntity.php",
         "patchSetId": 15
@@ -64,6 +118,24 @@
       "writtenOn": "2017-01-09T21:51:39Z",
       "side": 1,
       "message": "I believe the work flow here would be more of the following:\ncall the callback for the given type, it would return the instance of ChangeOpDeserializer (probably would make sense to check this). As we know the interface, let\u0027s just call createEntityChangeOp on the instance we just had. It in turn would return an instance of ChangeOp. If it is not the null change op, just add it to $changeOps (or maybe ChangeOps could be expanded, so its add method ignores NullChangeOp - not sure if is something we\u0027d like to have there, though?)",
+      "revId": "60099939368476209709493a1874634b587dd30f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_945f2644",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-10T13:45:23Z",
+      "side": 1,
+      "message": "I changed it so it\u0027ll be more aligned with your plan. I think other parts can be done in a follow-up patch",
+      "parentUuid": "8e01838a_5c0afa2a",
       "revId": "60099939368476209709493a1874634b587dd30f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +176,24 @@
       "writtenOn": "2017-01-07T01:23:44Z",
       "side": 1,
       "message": "Really no need to introduce all these local vars IMO. Why are you doing this? Debugger? Readability?",
+      "revId": "60099939368476209709493a1874634b587dd30f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_343512f4",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-10T13:45:23Z",
+      "side": 1,
+      "message": "Readability mostly. I\u0027m open to change it one line if you think that\u0027s better.",
+      "parentUuid": "8e01838a_af8659de",
       "revId": "60099939368476209709493a1874634b587dd30f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
