@@ -11,7 +11,6 @@ use ResultWrapper;
 use Title;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\EntityUsage;
-use Wikibase\Client\WikibaseClient;
 
 /**
  * API module to get the usage of entities.
@@ -26,7 +25,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 	/**
 	 * @var RepoLinker
 	 */
-	private $repoLinker = null;
+	private $repoLinker;
 
 	/**
 	 * @param ApiQuery $query
@@ -35,6 +34,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 	 */
 	public function __construct( ApiQuery $query, $moduleName, RepoLinker $repoLinker ) {
 		parent::__construct( $query, $moduleName, 'wbeu' );
+
 		$this->repoLinker = $repoLinker;
 	}
 
@@ -48,7 +48,6 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 
 	/**
 	 * @param ApiPageSet|null $resultPageSet
-	 * @return void
 	 */
 	public function run( ApiPageSet $resultPageSet = null ) {
 		$params = $this->extractRequestParams();
@@ -63,6 +62,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 
 	/**
 	 * @param object $row
+	 *
 	 * @return array
 	 */
 	private function addPageData( $row ) {

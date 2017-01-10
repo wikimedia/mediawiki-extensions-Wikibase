@@ -171,7 +171,7 @@ call_user_func( function() {
 
 	// api modules
 	$wgAPIMetaModules['wikibase'] = array(
-		'class' => 'Wikibase\Client\Api\ApiClientInfo',
+		'class' => Wikibase\Client\Api\ApiClientInfo::class,
 		'factory' => function( ApiQuery $apiQuery, $moduleName ) {
 			return new Wikibase\Client\Api\ApiClientInfo(
 				Wikibase\Client\WikibaseClient::getDefaultInstance()->getSettings(),
@@ -182,7 +182,7 @@ call_user_func( function() {
 	);
 
 	$wgAPIPropModules['pageterms'] = array(
-		'class' => 'Wikibase\Client\Api\PageTerms',
+		'class' => Wikibase\Client\Api\PageTerms::class,
 		'factory' => function ( ApiQuery $apiQuery, $moduleName ) {
 			// FIXME: HACK: make pageterms work directly on entity pages on the repo.
 			// We should instead use an EntityIdLookup that combines the repo and the client
@@ -191,11 +191,11 @@ call_user_func( function() {
 			// self-documentation of the API module in the "apihelp-query+pageterms-description"
 			// message and the PageTerms::getExamplesMessages() method.
 			if ( defined( 'WB_VERSION' ) ) {
-				$repo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+				$repo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
 				$termIndex = $repo->getStore()->getTermIndex();
 				$entityIdLookup = $repo->getEntityContentFactory();
 			} else {
-				$client = \Wikibase\Client\WikibaseClient::getDefaultInstance();
+				$client = Wikibase\Client\WikibaseClient::getDefaultInstance();
 				$termIndex = $client->getStore()->getTermIndex();
 				$entityIdLookup = $client->getStore()->getEntityIdLookup();
 			}
@@ -211,22 +211,22 @@ call_user_func( function() {
 
 	$wgAPIPropModules['wbentityusage'] = Wikibase\Client\Api\ApiPropsEntityUsage::class;
 	$wgAPIListModules['wblistentityusage'] = [
-		'class' => 'Wikibase\Client\Api\ApiListEntityUsage',
+		'class' => Wikibase\Client\Api\ApiListEntityUsage::class,
 		'factory' => function ( ApiQuery $apiQuery, $moduleName ) {
-			$repoLinker = Wikibase\Client\WikibaseClient::getDefaultInstance()->newRepoLinker();
 			return new Wikibase\Client\Api\ApiListEntityUsage(
 				$apiQuery,
 				$moduleName,
-				$repoLinker
+				Wikibase\Client\WikibaseClient::getDefaultInstance()->newRepoLinker()
 			);
 		}
 	];
+
 	// Special page registration
-	$wgSpecialPages['UnconnectedPages'] = 'Wikibase\Client\Specials\SpecialUnconnectedPages';
+	$wgSpecialPages['UnconnectedPages'] = Wikibase\Client\Specials\SpecialUnconnectedPages::class;
 	$wgSpecialPages['PagesWithBadges'] = function() {
 		$wikibaseClient = Wikibase\Client\WikibaseClient::getDefaultInstance();
 		$settings = $wikibaseClient->getSettings();
-		return new \Wikibase\Client\Specials\SpecialPagesWithBadges(
+		return new Wikibase\Client\Specials\SpecialPagesWithBadges(
 			new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory(
 				$wikibaseClient->getLanguageFallbackChainFactory(),
 				$wikibaseClient->getTermLookup(),
@@ -236,13 +236,12 @@ call_user_func( function() {
 			$settings->getSetting( 'siteGlobalID' )
 		);
 	};
-	$wgSpecialPages['EntityUsage'] = function( $name = 'EntityUsage' ) {
-		$wikibaseClient = Wikibase\Client\WikibaseClient::getDefaultInstance();
-		return new \Wikibase\Client\Specials\SpecialEntityUsage(
-			$name,
-			$wikibaseClient->getEntityIdParser()
+	$wgSpecialPages['EntityUsage'] = function () {
+		return new Wikibase\Client\Specials\SpecialEntityUsage(
+			Wikibase\Client\WikibaseClient::getDefaultInstance()->getEntityIdParser()
 		);
 	};
+
 	$wgHooks['wgQueryPages'][] = 'Wikibase\ClientHooks::onwgQueryPages';
 
 	// Resource loader modules
