@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e01838a_f45d3a7f",
+        "filename": "docs/change-propagation.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-10T12:55:05Z",
+      "side": 1,
+      "message": "\"Online\" where?",
+      "range": {
+        "startLine": 24,
+        "startChar": 155,
+        "endLine": 24,
+        "endChar": 161
+      },
+      "revId": "22ae0370f7f827f733358732c4b36ce596b49457",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_d4623e37",
+        "filename": "docs/change-propagation.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-10T12:55:05Z",
+      "side": 1,
+      "message": "What\u0027s this?",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 6
+      },
+      "revId": "22ae0370f7f827f733358732c4b36ce596b49457",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
