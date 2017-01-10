@@ -8,7 +8,6 @@ use Wikibase\Lib\AutoCommentFormatter;
 /**
  * @covers Wikibase\Lib\AutoCommentFormatter
  *
- * @group WikibaseLib
  * @group Wikibase
  *
  * @license GPL-2.0+

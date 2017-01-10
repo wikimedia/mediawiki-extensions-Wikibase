@@ -8,7 +8,6 @@ use Wikibase\ChunkCache;
  * @covers Wikibase\ChunkCache
  *
  * @group Wikibase
- * @group WikibaseLib
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

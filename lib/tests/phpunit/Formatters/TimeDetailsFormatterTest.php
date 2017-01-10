@@ -14,7 +14,6 @@ use Wikibase\Lib\TimeDetailsFormatter;
  * @uses DataValues\TimeValue
  *
  * @group ValueFormatters
- * @group WikibaseLib
  * @group Wikibase
  *
  * @license GPL-2.0+

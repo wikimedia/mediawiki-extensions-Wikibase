@@ -12,7 +12,6 @@ use Wikibase\Lib\Interactors\TermSearchResult;
  * @covers Wikibase\Lib\Interactors\TermSearchResult
  *
  * @group Wikibase
- * @group WikibaseLib
  *
  * @license GPL-2.0+
  * @author Addshore

@@ -9,7 +9,6 @@ use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
  * @covers Wikibase\Lib\Store\HttpUrlPropertyOrderProvider
  *
  * @group Wikibase
- * @group WikibaseLib
  * @group Database
  *
  * @license GPL-2.0+

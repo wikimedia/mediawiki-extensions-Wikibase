@@ -10,7 +10,6 @@ use Wikibase\Lib\UnDeserializableValueFormatter;
 /**
  * @covers Wikibase\Lib\UnDeserializableValueFormatter
  *
- * @group WikibaseLib
  * @group Wikibase
  *
  * @license GPL-2.0+

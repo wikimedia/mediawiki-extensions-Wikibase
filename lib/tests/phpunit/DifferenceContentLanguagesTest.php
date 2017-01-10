@@ -12,7 +12,6 @@ use Wikibase\Lib\StaticContentLanguages;
  *
  * @uses Wikibase\Lib\StaticContentLanguages
  *
- * @group WikibaseLib
  * @group Wikibase
  *
  * @license GPL-2.0+

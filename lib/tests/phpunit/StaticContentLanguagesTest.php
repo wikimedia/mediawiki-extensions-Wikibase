@@ -8,7 +8,6 @@ use Wikibase\Lib\StaticContentLanguages;
 /**
  * @covers Wikibase\Lib\StaticContentLanguages
  *
- * @group WikibaseLib
  * @group Wikibase
  *
  * @license GPL-2.0+

@@ -15,7 +15,6 @@ use Wikibase\Lib\Tests\Store\EntityInfoBuilderTest;
  * @covers Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder
  *
  * @group Wikibase
- * @group WikibaseLib
  * @group WikibaseStore
  * @group WikibasePropertyInfo
  * @group Database

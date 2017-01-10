@@ -9,7 +9,6 @@ use Wikibase\Lib\DataTypeDefinitions;
  * @covers Wikibase\Lib\DataTypeDefinitions
  *
  * @group DataValueExtensions
- * @group WikibaseLib
  * @group Wikibase
  *
  * @license GPL-2.0+

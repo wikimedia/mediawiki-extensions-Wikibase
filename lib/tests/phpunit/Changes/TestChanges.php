@@ -23,7 +23,6 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
  * @since 0.2
  *
  * @group Wikibase
- * @group WikibaseLib
  * @group WikibaseChange
  *
  * @license GPL-2.0+

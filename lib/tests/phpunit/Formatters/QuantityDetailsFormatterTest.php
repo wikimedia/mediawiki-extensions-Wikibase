@@ -16,7 +16,6 @@ use Wikibase\Lib\QuantityDetailsFormatter;
  * @covers Wikibase\Lib\QuantityDetailsFormatter
  *
  * @group ValueFormatters
- * @group WikibaseLib
  * @group Wikibase
  *
  * @license GPL-2.0+

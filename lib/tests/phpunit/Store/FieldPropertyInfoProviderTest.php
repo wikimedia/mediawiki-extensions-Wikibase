@@ -11,7 +11,6 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
  * @covers Wikibase\Lib\FieldPropertyInfoProvider
  *
  * @group Wikibase
- * @group WikibaseLib
  * @group WikibaseStore
  *
  * @license GPL-2.0+

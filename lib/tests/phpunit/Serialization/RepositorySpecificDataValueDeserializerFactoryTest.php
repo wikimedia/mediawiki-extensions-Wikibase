@@ -14,7 +14,6 @@ use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
  * @covers Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory
  *
  * @group Wikibase
- * @group WikibaseLib
  *
  * @license GPL-2.0+
  */

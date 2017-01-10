@@ -17,7 +17,6 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  * @covers Wikibase\Lib\EntityIdPlainLinkFormatter
  *
  * @group Wikibase
- * @group WikibaseLib
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

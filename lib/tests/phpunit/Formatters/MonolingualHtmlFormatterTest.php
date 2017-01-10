@@ -13,7 +13,6 @@ use Wikibase\Lib\LanguageNameLookup;
  *
  * @group ValueFormatters
  * @group DataValueExtensions
- * @group WikibaseLib
  * @group Wikibase
  * @group Database
  *

@@ -13,7 +13,6 @@ use Wikibase\TermPropertyLabelResolver;
  * @covers Wikibase\TermPropertyLabelResolver
  *
  * @group Wikibase
- * @group WikibaseLib
  * @group WikibaseStore
  *
  * @license GPL-2.0+

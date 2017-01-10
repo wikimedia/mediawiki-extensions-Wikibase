@@ -24,7 +24,6 @@ use Wikimedia\Assert\ParameterAssertionException;
  * @covers Wikibase\TermSqlIndex
  *
  * @group Wikibase
- * @group WikibaseLib
  * @group WikibaseStore
  * @group Database
  *

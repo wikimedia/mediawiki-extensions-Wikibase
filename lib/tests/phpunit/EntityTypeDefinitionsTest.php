@@ -9,7 +9,6 @@ use Wikibase\Lib\EntityTypeDefinitions;
  * @covers Wikibase\Lib\EntityTypeDefinitions
  *
  * @group Wikibase
- * @group WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >

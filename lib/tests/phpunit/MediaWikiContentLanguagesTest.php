@@ -8,7 +8,6 @@ use Wikibase\Lib\MediaWikiContentLanguages;
 /**
  * @covers Wikibase\Lib\MediaWikiContentLanguages
  *
- * @group WikibaseLib
  * @group Wikibase
  *
  * @license GPL-2.0+

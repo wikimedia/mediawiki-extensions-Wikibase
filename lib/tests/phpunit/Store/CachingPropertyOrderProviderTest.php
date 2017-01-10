@@ -10,7 +10,6 @@ use Wikibase\Lib\Store\PropertyOrderProvider;
 /**
  * @covers Wikibase\Lib\Store\CachingPropertyOrderProvider
  *
- * @group WikibaseLib
  * @group WikibaseStore
  * @group Wikibase
  *

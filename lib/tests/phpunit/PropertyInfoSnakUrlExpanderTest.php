@@ -17,7 +17,6 @@ use Wikimedia\Assert\ParameterTypeException;
  * @covers Wikibase\Lib\PropertyInfoSnakUrlExpander
  *
  * @group Wikibase
- * @group WikibaseLib
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

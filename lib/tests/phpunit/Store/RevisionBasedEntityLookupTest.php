@@ -14,7 +14,6 @@ use Wikibase\Lib\Tests\MockRepository;
 /**
  * @covers Wikibase\Lib\Store\RevisionBasedEntityLookup
  *
- * @group WikibaseLib
  * @group WikibaseEntityLookup
  * @group Wikibase
  *

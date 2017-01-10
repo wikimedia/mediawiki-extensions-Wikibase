@@ -11,7 +11,6 @@ use Wikibase\Lib\Store\HashSiteLinkStore;
  * @covers Wikibase\Lib\Store\HashSiteLinkStore
  *
  * @group Wikibase
- * @group WikibaseLib
  * @group WikibaseStore
  *
  * @license GPL-2.0+

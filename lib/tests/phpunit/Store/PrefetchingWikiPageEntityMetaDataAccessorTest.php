@@ -15,7 +15,6 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 /**
  * @covers Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor
  *
- * @group WikibaseLib
  * @group WikibaseStore
  * @group Wikibase
  *

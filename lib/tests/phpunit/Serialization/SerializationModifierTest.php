@@ -9,7 +9,6 @@ use Wikibase\Lib\Serialization\SerializationModifier;
  * @author Addshore
  *
  * @group Wikibase
- * @group WikibaseLib
  *
  * @covers Wikibase\Lib\Serialization\SerializationModifier
  */

@@ -10,7 +10,6 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 /**
  * @covers Wikibase\Lib\Store\DispatchingPropertyInfoLookup
  *
- * @group WikibaseLib
  * @group WikibaseStore
  * @group Wikibase
  *

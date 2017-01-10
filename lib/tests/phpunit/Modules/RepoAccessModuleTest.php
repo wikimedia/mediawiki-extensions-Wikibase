@@ -10,7 +10,6 @@ use Wikibase\RepoAccessModule;
  * @covers Wikibase\RepoAccessModule
  *
  * @group Wikibase
- * @group WikibaseLib
  *
  * @license GPL-2.0+
  * @author Thiemo Mättig

@@ -18,7 +18,6 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  * @covers Wikibase\Lib\EntityIdHtmlLinkFormatter
  *
  * @group ValueFormatters
- * @group WikibaseLib
  * @group Wikibase
  * @group Database
  *

@@ -10,7 +10,6 @@ use Wikibase\ChangeNotificationJob;
  * @covers Wikibase\ChangeNotificationJob
  *
  * @group Wikibase
- * @group WikibaseLib
  * @group WikibaseChange
  *
  * @license GPL-2.0+

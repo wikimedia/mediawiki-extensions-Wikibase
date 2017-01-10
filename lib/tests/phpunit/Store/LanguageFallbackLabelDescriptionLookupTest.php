@@ -14,7 +14,6 @@ use Wikibase\TermIndexEntry;
  * @covers Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup
  *
  * @group Wikibase
- * @group WikibaseLib
  * @group WikibaseStore
  *
  * @license GPL-2.0+

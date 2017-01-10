@@ -10,7 +10,6 @@ use Wikibase\Lib\Serialization\CallbackFactory;
  * @covers Wikibase\Lib\Serialization\CallbackFactory
  *
  * @group Wikibase
- * @group WikibaseLib
  *
  * @license GPL-2.0+
  * @author Thiemo Mättig

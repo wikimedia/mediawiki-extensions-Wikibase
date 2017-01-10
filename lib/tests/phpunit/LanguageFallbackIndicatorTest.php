@@ -11,7 +11,6 @@ use Wikibase\Lib\LanguageNameLookup;
  * @covers Wikibase\Lib\LanguageFallbackIndicator
  *
  * @group ValueFormatters
- * @group WikibaseLib
  * @group Wikibase
  *
  * @license GPL-2.0+

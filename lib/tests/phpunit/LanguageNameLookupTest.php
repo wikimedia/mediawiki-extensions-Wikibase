@@ -8,7 +8,6 @@ use Wikibase\Lib\LanguageNameLookup;
 /**
  * @covers Wikibase\Lib\LanguageNameLookup
  *
- * @group WikibaseLib
  * @group Wikibase
  *
  * @license GPL-2.0+

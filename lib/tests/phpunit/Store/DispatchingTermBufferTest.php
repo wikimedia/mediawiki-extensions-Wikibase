@@ -13,7 +13,6 @@ use Wikimedia\Assert\ParameterAssertionException;
  * @covers Wikibase\Lib\Store\DispatchingTermBuffer
  *
  * @group Wikibase
- * @group WikibaseLib
  * @group WikibaseStore
  *
  * @license GPL-2.0+

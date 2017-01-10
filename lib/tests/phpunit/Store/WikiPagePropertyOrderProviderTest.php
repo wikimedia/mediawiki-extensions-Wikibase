@@ -11,7 +11,6 @@ use MediaWikiTestCase;
 /**
  * @covers Wikibase\Lib\Store\WikiPagePropertyOrderProvider
  * @group Wikibase
- * @group WikibaseLib
  * @group Database
  *
  * @license GPL-2.0+

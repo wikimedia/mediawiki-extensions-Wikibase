@@ -8,7 +8,6 @@ use Wikibase\StringNormalizer;
 /**
  * @covers Wikibase\StringNormalizer
  *
- * @group WikibaseLib
  * @group Wikibase
  *
  * @license GPL-2.0+

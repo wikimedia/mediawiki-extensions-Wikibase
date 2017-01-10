@@ -9,7 +9,6 @@ use Wikibase\Lib\Interactors\TermSearchOptions;
  * @covers Wikibase\Lib\Interactors\TermSearchOptions
  *
  * @group Wikibase
- * @group WikibaseLib
  *
  * @license GPL-2.0+
  * @author Addshore

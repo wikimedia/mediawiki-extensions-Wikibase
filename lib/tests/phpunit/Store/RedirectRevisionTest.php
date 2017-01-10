@@ -12,7 +12,6 @@ use Wikibase\RedirectRevision;
  * @covers Wikibase\RedirectRevision
  *
  * @group Wikibase
- * @group WikibaseLib
  * @group WikibaseStore
  *
  * @license GPL-2.0+

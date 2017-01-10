@@ -12,7 +12,6 @@ use PHPUnit_Framework_TestCase;
 /**
  * @covers DataValues\DataValueFactory
  *
- * @group WikibaseLib
  * @group Wikibase
  *
  * @license GPL-2.0+

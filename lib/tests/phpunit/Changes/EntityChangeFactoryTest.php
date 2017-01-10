@@ -25,7 +25,6 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
  *
  * @group Database
  * @group Wikibase
- * @group WikibaseLib
  * @group WikibaseChange
  *
  * @license GPL-2.0+

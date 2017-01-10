@@ -11,7 +11,6 @@ use Wikibase\EntityRevision;
  * @covers Wikibase\EntityRevision
  *
  * @group Wikibase
- * @group WikibaseLib
  * @group WikibaseStore
  *
  * @license GPL-2.0+

@@ -8,7 +8,6 @@ use RecursiveIteratorIterator;
 use SplFileInfo;
 
 /**
- * @group WikibaseLib
  * @group Wikibase
  *
  * @license GPL-2.0+

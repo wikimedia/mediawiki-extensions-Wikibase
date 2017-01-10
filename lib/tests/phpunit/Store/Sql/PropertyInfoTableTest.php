@@ -16,7 +16,6 @@ use Wikibase\Lib\Store\Sql\PropertyInfoTable;
  * @covers Wikibase\PropertyInfoTable
  *
  * @group Wikibase
- * @group WikibaseLib
  * @group WikibaseStore
  * @group WikibasePropertyInfo
  * @group Database

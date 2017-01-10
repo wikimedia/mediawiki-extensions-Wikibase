@@ -13,7 +13,6 @@ use Wikibase\Lib\CommonsLinkFormatter;
  *
  * @group ValueFormatters
  * @group DataValueExtensions
- * @group WikibaseLib
  * @group Wikibase
  * @group Database
  *

@@ -10,7 +10,6 @@ use Wikibase\Lib\UnionContentLanguages;
 /**
  * @covers Wikibase\Lib\UnionContentLanguages
  *
- * @group WikibaseLib
  * @group Wikibase
  *
  * @license GPL-2.0+

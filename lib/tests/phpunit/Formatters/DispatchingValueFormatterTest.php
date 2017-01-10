@@ -16,7 +16,6 @@ use Wikibase\Lib\DispatchingValueFormatter;
  *
  * @group ValueFormatters
  * @group DataValueExtensions
- * @group WikibaseLib
  * @group Wikibase
  *
  * @license GPL-2.0+

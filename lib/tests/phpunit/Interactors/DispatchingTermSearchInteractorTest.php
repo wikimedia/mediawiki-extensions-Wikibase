@@ -16,7 +16,6 @@ use Wikimedia\Assert\ParameterAssertionException;
  * @covers Wikibase\Lib\Interactors\DispatchingTermSearchInteractor
  *
  * @group Wikibase
- * @group WikibaseLib
  *
  * @license GPL-2.0+
  */

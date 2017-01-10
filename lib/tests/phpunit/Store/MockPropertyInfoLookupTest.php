@@ -11,7 +11,6 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
  * @since 0.4
  *
  * @group Wikibase
- * @group WikibaseLib
  * @group WikibasePropertyInfo
  * @group WikibaseStore
  *

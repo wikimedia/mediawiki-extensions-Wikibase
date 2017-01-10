@@ -11,7 +11,6 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
  * @covers Wikibase\CachingPropertyInfoLookup
  *
  * @group Wikibase
- * @group WikibaseLib
  * @group WikibasePropertyInfo
  * @group WikibaseStore
  *

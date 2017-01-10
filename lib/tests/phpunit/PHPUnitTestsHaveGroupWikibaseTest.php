@@ -10,7 +10,6 @@ use SplFileInfo;
 /**
  * Structure test making sure all PHPUnit tests within Wikibase have "@group Wikibase" set.
  *
- * @group WikibaseLib
  * @group Wikibase
  *
  * @license GPL-2.0+

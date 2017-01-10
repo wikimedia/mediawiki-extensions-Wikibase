@@ -15,7 +15,6 @@ use Wikibase\Lib\HtmlTimeFormatter;
  *
  * @group ValueFormatters
  * @group DataValueExtensions
- * @group WikibaseLib
  * @group Wikibase
  *
  * @license GPL-2.0+

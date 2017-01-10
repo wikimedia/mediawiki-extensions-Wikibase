@@ -11,7 +11,6 @@ use Wikibase\SitesModule;
  * @covers Wikibase\SitesModule
  *
  * @group Wikibase
- * @group WikibaseLib
  *
  * @license GPL-2.0+
  * @author Thiemo Mättig

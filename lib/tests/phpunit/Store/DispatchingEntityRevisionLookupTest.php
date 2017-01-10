@@ -13,7 +13,6 @@ use Wikimedia\Assert\ParameterAssertionException;
 /**
  * @covers Wikibase\Lib\Store\DispatchingEntityRevisionLookup
  *
- * @group WikibaseLib
  * @group WikibaseStore
  * @group Wikibase
  *

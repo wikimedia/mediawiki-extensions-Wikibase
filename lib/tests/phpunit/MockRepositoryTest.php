@@ -21,7 +21,6 @@ use Wikibase\Lib\Store\StorageException;
  * @covers Wikibase\Lib\Tests\MockRepository
  *
  * @group Wikibase
- * @group WikibaseLib
  * @group WikibaseEntityLookup
  *
  * @license GPL-2.0+

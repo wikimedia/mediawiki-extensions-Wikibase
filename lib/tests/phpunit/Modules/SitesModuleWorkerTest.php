@@ -20,7 +20,6 @@ use Wikibase\SettingsArray;
  * @uses Wikibase\Lib\LanguageNameLookup
  *
  * @group Wikibase
- * @group WikibaseLib
  *
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */

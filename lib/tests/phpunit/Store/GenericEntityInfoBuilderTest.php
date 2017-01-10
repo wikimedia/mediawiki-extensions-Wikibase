@@ -11,7 +11,6 @@ use Wikibase\Lib\Tests\MockRepository;
  * @covers Wikibase\Lib\Store\GenericEntityInfoBuilder
  *
  * @group Wikibase
- * @group WikibaseLib
  * @group WikibaseEntityLookup
  *
  * @license GPL-2.0+

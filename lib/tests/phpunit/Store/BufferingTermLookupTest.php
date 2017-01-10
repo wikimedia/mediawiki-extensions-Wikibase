@@ -13,7 +13,6 @@ use Wikibase\TermIndexEntry;
  * @covers Wikibase\Lib\Store\EntityTermLookupBase
  *
  * @group Wikibase
- * @group WikibaseLib
  * @group WikibaseStore
  *
  * @license GPL-2.0+

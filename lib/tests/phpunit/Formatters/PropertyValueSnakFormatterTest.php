@@ -27,7 +27,6 @@ use Wikibase\Lib\UnDeserializableValueFormatter;
  *
  * @group ValueFormatters
  * @group DataValueExtensions
- * @group WikibaseLib
  * @group Wikibase
  * @group Database
  *

@@ -9,7 +9,6 @@ use Wikibase\SettingsArray;
  * @covers Wikibase\SettingsArray
  *
  * @group Wikibase
- * @group WikibaseLib
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

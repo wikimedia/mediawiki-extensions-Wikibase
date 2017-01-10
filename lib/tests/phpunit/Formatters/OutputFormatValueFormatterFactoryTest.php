@@ -26,7 +26,6 @@ use Wikibase\Lib\SnakFormatter;
  *
  * @group ValueFormatters
  * @group DataValueExtensions
- * @group WikibaseLib
  * @group Wikibase
  *
  * @license GPL-2.0+

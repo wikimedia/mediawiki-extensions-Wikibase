@@ -13,7 +13,6 @@ use Wikibase\Lib\MwTimeIsoFormatter;
  *
  * @group ValueFormatters
  * @group DataValueExtensions
- * @group WikibaseLib
  * @group Wikibase
  *
  * @license GPL-2.0+

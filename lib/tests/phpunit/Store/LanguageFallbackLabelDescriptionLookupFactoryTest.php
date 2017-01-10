@@ -14,7 +14,6 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
  * @covers Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory
  *
  * @group Wikibase
- * @group WikibaseLib
  * @group WikibaseStore
  *
  * @license GPL-2.0+

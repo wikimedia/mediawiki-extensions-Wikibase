@@ -12,7 +12,6 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 /**
  * @covers Wikibase\Lib\Store\CachingSiteLinkLookup
  *
- * @group WikibaseLib
  * @group WikibaseStore
  * @group Wikibase
  *

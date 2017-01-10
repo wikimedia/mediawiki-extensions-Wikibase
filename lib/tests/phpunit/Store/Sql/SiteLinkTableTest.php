@@ -10,7 +10,6 @@ use Wikibase\Lib\Store\SiteLinkTable;
  * @covers Wikibase\Lib\Store\SiteLinkTable
  *
  * @group Wikibase
- * @group WikibaseLib
  * @group WikibaseStore
  * @group Database
  *

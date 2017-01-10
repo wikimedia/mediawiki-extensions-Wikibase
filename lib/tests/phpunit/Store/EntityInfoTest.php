@@ -17,7 +17,6 @@ use Wikibase\Lib\Tests\MockRepository;
  * @covers Wikibase\Lib\Store\EntityInfo
  *
  * @group Wikibase
- * @group WikibaseLib
  * @group WikibaseStore
  *
  * @license GPL-2.0+
