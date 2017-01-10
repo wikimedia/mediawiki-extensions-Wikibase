@@ -329,6 +329,24 @@
       "revId": "58d6431e6955869d28e9f8e641efe7592f1d8937",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_170698d1",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialItemDisambiguationTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-10T16:01:42Z",
+      "side": 1,
+      "message": "What I meant is: We have never done this in the last line of a method, right before the \"return …\", just to make an optional inspector happy. I believe this overloads the code with information that does more harm than it helps.",
+      "parentUuid": "8e01838a_77682c85",
+      "revId": "58d6431e6955869d28e9f8e641efe7592f1d8937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
