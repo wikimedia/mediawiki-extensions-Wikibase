@@ -115,17 +115,13 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	 * @return SpecialGoToLinkedPage
 	 */
 	protected function newSpecialPage() {
-		$page = new SpecialGoToLinkedPage();
-
-		$page->initServices(
+		return new SpecialGoToLinkedPage(
 			$this->getMockSiteLookup(),
 			$this->getMockSiteLinkLookup(),
 			$this->getEntityRedirectLookup(),
 			$this->getEntityIdParser(),
 			$this->getEntityLookup()
 		);
-
-		return $page;
 	}
 
 	public function requestWithoutRedirectProvider() {
