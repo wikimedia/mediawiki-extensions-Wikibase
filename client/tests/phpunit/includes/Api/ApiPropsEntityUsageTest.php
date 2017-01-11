@@ -10,6 +10,7 @@ use MediaWikiLangTestCase;
 use RequestContext;
 use Title;
 use Wikibase\Client\Api\ApiPropsEntityUsage;
+use Wikibase\Client\WikibaseClient;
 use WikiPage;
 
 /**
@@ -161,7 +162,8 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 
 		$module = new ApiPropsEntityUsage(
 			$this->getQueryModule( $params, $titles ),
-			'entityusage'
+			'entityusage',
+			WikibaseClient::getDefaultInstance()->newRepoLinker()
 		);
 
 		$module->execute();
