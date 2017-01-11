@@ -44,6 +44,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 			->will( $this->returnCallback( function ( $searchResult ) {
 				return '<span class="mock-span" >ItemDisambiguationHTML-' . count( $searchResult ) . '</span>';
 			} ) );
+
 		return $mock;
 	}
 
@@ -130,14 +131,12 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	}
 
 	protected function newSpecialPage() {
-		$page = new SpecialItemDisambiguation();
-		$page->initServices(
-			$this->getMockItemDisambiguation(),
-			$this->getMockSearchInteractor(),
+		return new SpecialItemDisambiguation(
 			$this->getContentLanguages(),
-			$this->getMockLanguageNameLookup()
+			$this->getMockLanguageNameLookup(),
+			$this->getMockItemDisambiguation(),
+			$this->getMockSearchInteractor()
 		);
-		return $page;
 	}
 
 	public function testForm() {
