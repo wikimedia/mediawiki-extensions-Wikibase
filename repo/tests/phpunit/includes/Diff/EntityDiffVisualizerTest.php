@@ -7,7 +7,6 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
 use HashSiteStore;
 use IContextSource;
-use Language;
 use MediaWikiTestCase;
 use Site;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
@@ -90,12 +89,12 @@ class EntityDiffVisualizerTest extends MediaWikiTestCase {
 	 * @return IContextSource
 	 */
 	private function getMockContext() {
-		$en = Language::factory( 'en' );
-
 		$mock = $this->getMock( IContextSource::class );
 		$mock->expects( $this->any() )
-			->method( 'getLanguage' )
-			->will( $this->returnValue( $en ) );
+			->method( 'msg' )
+			->will( $this->returnCallback( function ( $key ) {
+				return wfMessage( $key )->inLanguage( 'en' );
+			} ) );
 
 		return $mock;
 	}
