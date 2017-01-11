@@ -335,49 +335,6 @@ abstract class HashArray extends ArrayObject implements Hashable, Comparable {
 	}
 
 	/**
-	 * Returns if the hash indices are up to date.
-	 * For an HashArray with immutable objects this should always be the case.
-	 * For one with mutable objects it's the responsibility of the mutating code
-	 * to keep the indices up to date (see class documentation) and thus possible
-	 * this has not been done since the last update, thus causing a state where
-	 * one or more indices are out of date.
-	 *
-	 * @since 0.4
-	 *
-	 * @return bool
-	 */
-	public function indicesAreUpToDate() {
-		foreach ( $this->offsetHashes as $hash => $offsets ) {
-			$offsets = (array)$offsets;
-
-			foreach ( $offsets as $offset ) {
-				/** @var Hashable[] $this */
-				if ( $this[$offset]->getHash() !== $hash ) {
-					return false;
-				}
-			}
-		}
-
-		return true;
-	}
-
-	/**
-	 * Removes and adds all elements, ensuring the indices are up to date.
-	 *
-	 * @since 0.4
-	 */
-	public function rebuildIndices() {
-		$hashables = iterator_to_array( $this );
-
-		$this->offsetHashes = [];
-
-		foreach ( $hashables as $offset => $hashable ) {
-			$this->offsetUnset( $offset );
-			$this->offsetSet( $offset, $hashable );
-		}
-	}
-
-	/**
 	 * @see ArrayObject::append
 	 *
 	 * @param mixed $value
