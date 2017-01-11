@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efb0bce_8d572905",
+        "filename": "repo/includes/Specials/SpecialItemDisambiguation.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-11T16:15:50Z",
+      "side": 0,
+      "message": "I love this change and I hate the old array() syntax :D",
+      "revId": "c84a0df59eccd91204f10243a71c940ee3b7b103",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
