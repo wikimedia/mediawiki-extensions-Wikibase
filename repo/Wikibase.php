@@ -252,22 +252,19 @@ call_user_func( function() {
 	};
 	$wgSpecialPages['ItemDisambiguation'] = function() {
 		global $wgLang;
-		$langCode = $wgLang->getCode();
-		$wikibaseRepo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
-		$languageNameLookup = new \Wikibase\Lib\LanguageNameLookup( $langCode );
-		$itemDisambiguation = new \Wikibase\ItemDisambiguation(
+		$languageCode = $wgLang->getCode();
+		$wikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+		$languageNameLookup = new Wikibase\Lib\LanguageNameLookup( $languageCode );
+		$itemDisambiguation = new Wikibase\ItemDisambiguation(
 			$wikibaseRepo->getEntityTitleLookup(),
 			$languageNameLookup,
-			$langCode
-		);
-		$searchInteractor = $wikibaseRepo->newTermSearchInteractor(
-			$langCode
+			$languageCode
 		);
 		return new Wikibase\Repo\Specials\SpecialItemDisambiguation(
-			new \Wikibase\Lib\MediaWikiContentLanguages(),
+			new Wikibase\Lib\MediaWikiContentLanguages(),
 			$languageNameLookup,
 			$itemDisambiguation,
-			$searchInteractor
+			$wikibaseRepo->newTermSearchInteractor( $languageCode )
 		);
 	};
 	$wgSpecialPages['ItemsWithoutSitelinks']
