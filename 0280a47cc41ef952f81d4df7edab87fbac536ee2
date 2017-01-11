@@ -2,6 +2,161 @@
   "comments": [
     {
       "key": {
+        "uuid": "4efb0bce_ca04e782",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-11T15:30:04Z",
+      "side": 1,
+      "message": "This is a new special page, so I guess this should be \"expects\".",
+      "range": {
+        "startLine": 9,
+        "startChar": 19,
+        "endLine": 9,
+        "endChar": 27
+      },
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_aaf9ab80",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-11T15:30:04Z",
+      "side": 1,
+      "message": "Because items are in the main namespace on wikidata.org, users will assume they can do something like https://www.wikidata.org/wiki/commons:M123. It looks like we can not do anything about this, because MediaWiki itself will try to resolve this as a namespace, and we should not (probably can\u0027t) hook into this code.",
+      "range": {
+        "startLine": 14,
+        "startChar": 44,
+        "endLine": 15,
+        "endChar": 15
+      },
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_8afeef64",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-11T15:30:04Z",
+      "side": 1,
+      "message": "\"on the repository\"?",
+      "range": {
+        "startLine": 297,
+        "startChar": 69,
+        "endLine": 297,
+        "endChar": 82
+      },
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_ca33c75e",
+        "filename": "repo/includes/Specials/SpecialEntityPage.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-11T15:30:04Z",
+      "side": 1,
+      "message": "There is nothing in the code below that guarantees this will happen. It looks like this is entirely the job of the provided EntityTitleLookup. At the moment this class here does not know anything about foreign repositories.",
+      "range": {
+        "startLine": 14,
+        "startChar": 3,
+        "endLine": 15,
+        "endChar": 100
+      },
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_2aeedbb1",
+        "filename": "repo/includes/Specials/SpecialEntityPage.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-11T15:30:04Z",
+      "side": 1,
+      "message": "I believe this should do the same as Special:EntityData, which currently does *not* show a form.",
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_ea2e83f6",
+        "filename": "repo/includes/Specials/SpecialEntityPage.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-11T15:30:04Z",
+      "side": 1,
+      "message": "This can be null at this point.",
+      "range": {
+        "startLine": 66,
+        "startChar": 32,
+        "endLine": 66,
+        "endChar": 38
+      },
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_aa388b3b",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-11T15:30:04Z",
+      "side": 1,
+      "message": "Please remove.",
+      "range": {
+        "startLine": 20,
+        "startChar": 3,
+        "endLine": 20,
+        "endChar": 22
+      },
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee12ffd6_c1415d10",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
         "patchSetId": 8
@@ -18,6 +173,76 @@
         "startChar": 22,
         "endLine": 33,
         "endChar": 27
+      },
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_8a3dcf2b",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-11T15:30:04Z",
+      "side": 1,
+      "message": "A local $dummyLanguage variable is fine in this case.",
+      "parentUuid": "ee12ffd6_c1415d10",
+      "range": {
+        "startLine": 33,
+        "startChar": 22,
+        "endLine": 33,
+        "endChar": 27
+      },
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_0a4affc8",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-11T15:30:04Z",
+      "side": 1,
+      "message": "I think this should be a mock and not the real, possibly expensive service.",
+      "range": {
+        "startLine": 39,
+        "startChar": 3,
+        "endLine": 39,
+        "endChar": 64
+      },
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_2a4dbbe0",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-11T15:30:04Z",
+      "side": 1,
+      "message": "When the service above is mocked, this can be a mocked Title object as well.",
+      "range": {
+        "startLine": 46,
+        "startChar": 11,
+        "endLine": 46,
+        "endChar": 111
       },
       "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
