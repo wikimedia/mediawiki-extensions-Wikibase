@@ -9,7 +9,6 @@ use ApiResult;
 use ResultWrapper;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\EntityUsage;
-use Wikibase\Client\WikibaseClient;
 
 /**
  * API module to get the usage of entities.
@@ -29,11 +28,12 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 	/**
 	 * @param ApiQuery $query
 	 * @param string $moduleName
+	 * @param RepoLinker $repoLinker
 	 */
-	public function __construct( ApiQuery $query, $moduleName ) {
+	public function __construct( ApiQuery $query, $moduleName, RepoLinker $repoLinker ) {
 		parent::__construct( $query, $moduleName, 'wbeu' );
 
-		$this->repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
+		$this->repoLinker = $repoLinker;
 	}
 
 	public function execute() {

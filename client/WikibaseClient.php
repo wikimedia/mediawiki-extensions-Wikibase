@@ -209,7 +209,17 @@ call_user_func( function() {
 		}
 	);
 
-	$wgAPIPropModules['wbentityusage'] = Wikibase\Client\Api\ApiPropsEntityUsage::class;
+	$wgAPIPropModules['wbentityusage'] = [
+		'class' => Wikibase\Client\Api\ApiPropsEntityUsage::class,
+		'factory' => function ( ApiQuery $query, $moduleName ) {
+			$repoLinker = \Wikibase\Client\WikibaseClient::getDefaultInstance()->newRepoLinker();
+			return new \Wikibase\Client\Api\ApiPropsEntityUsage(
+				$query,
+				$moduleName,
+				$repoLinker
+			);
+		}
+	];
 	$wgAPIListModules['wblistentityusage'] = [
 		'class' => Wikibase\Client\Api\ApiListEntityUsage::class,
 		'factory' => function ( ApiQuery $apiQuery, $moduleName ) {
