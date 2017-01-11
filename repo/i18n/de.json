@@ -76,6 +76,8 @@
 	"wikibase-diffview-alias": "Aliasse",
 	"wikibase-diffview-description": "Beschreibung",
 	"wikibase-diffview-link": "Links",
+	"wikibase-diffview-link-name": "Name",
+	"wikibase-diffview-link-badges": "Auszeichnungen",
 	"wikibase-sitelink-site-edit-placeholder": "Wiki",
 	"wikibase-sitelink-page-edit-placeholder": "Seite",
 	"wikibase-alias-edit-placeholder": "Alias eingeben",

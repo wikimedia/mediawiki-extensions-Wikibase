@@ -38,6 +38,7 @@
 	"wikibase-description-empty": "Опис није наведен",
 	"wikibase-description-edit-placeholder": "унесите опис",
 	"wikibase-description-edit-placeholder-language-aware": "унесите опис на $1",
+	"wikibase-content-language-edit-label": "Језик:",
 	"wikibase-diffview-reference": "референца",
 	"wikibase-diffview-rank": "ранг",
 	"wikibase-diffview-qualifier": "квалификатор",
