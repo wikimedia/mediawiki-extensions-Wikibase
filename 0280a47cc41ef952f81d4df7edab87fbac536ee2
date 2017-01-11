@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_3924f306",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-11T23:00:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4efb0bce_ca04e782",
+      "range": {
+        "startLine": 9,
+        "startChar": 19,
+        "endLine": 9,
+        "endChar": 27
+      },
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_aaf9ab80",
         "filename": "/COMMIT_MSG",
         "patchSetId": 8
@@ -36,6 +60,30 @@
       "writtenOn": "2017-01-11T15:30:04Z",
       "side": 1,
       "message": "Because items are in the main namespace on wikidata.org, users will assume they can do something like https://www.wikidata.org/wiki/commons:M123. It looks like we can not do anything about this, because MediaWiki itself will try to resolve this as a namespace, and we should not (probably can\u0027t) hook into this code.",
+      "range": {
+        "startLine": 14,
+        "startChar": 44,
+        "endLine": 15,
+        "endChar": 15
+      },
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_59d44fbe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-11T23:00:21Z",
+      "side": 1,
+      "message": "That\u0027s very true but I think there\u0027s not much we can do about it.",
+      "parentUuid": "4efb0bce_aaf9ab80",
       "range": {
         "startLine": 14,
         "startChar": 44,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_6b8292ab",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-11T23:00:21Z",
+      "side": 1,
+      "message": "Yes! Done.",
+      "parentUuid": "4efb0bce_8afeef64",
+      "range": {
+        "startLine": 297,
+        "startChar": 69,
+        "endLine": 297,
+        "endChar": 82
+      },
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_ca33c75e",
         "filename": "repo/includes/Specials/SpecialEntityPage.php",
         "patchSetId": 8
@@ -82,6 +154,30 @@
       "writtenOn": "2017-01-11T15:30:04Z",
       "side": 1,
       "message": "There is nothing in the code below that guarantees this will happen. It looks like this is entirely the job of the provided EntityTitleLookup. At the moment this class here does not know anything about foreign repositories.",
+      "range": {
+        "startLine": 14,
+        "startChar": 3,
+        "endLine": 15,
+        "endChar": 100
+      },
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_394d13e1",
+        "filename": "repo/includes/Specials/SpecialEntityPage.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-11T23:00:21Z",
+      "side": 1,
+      "message": "True. I\u0027ve changed this comment, and also a description in the commit message.",
+      "parentUuid": "4efb0bce_ca33c75e",
       "range": {
         "startLine": 14,
         "startChar": 3,
@@ -111,6 +207,24 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_19f5b74c",
+        "filename": "repo/includes/Specials/SpecialEntityPage.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-11T23:00:21Z",
+      "side": 1,
+      "message": "Removed the TODO then.",
+      "parentUuid": "4efb0bce_2aeedbb1",
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_ea2e83f6",
         "filename": "repo/includes/Specials/SpecialEntityPage.php",
         "patchSetId": 8
@@ -134,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_aed2d85b",
+        "filename": "repo/includes/Specials/SpecialEntityPage.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-11T23:00:21Z",
+      "side": 1,
+      "message": "Good catch, thanks! I think I\u0027ve missed it as it looks like the EntityTitleLookup implementation production code uses is assuring it is not returning a null. Which still doesn\u0027t mean this class should not check for null here.\nSo I\u0027ve added a check. Please note I am kind of abusing wikibase-entitypage-bad-id message for this case. The only reason I decided not to add separate i18n message for this is that I don\u0027t know if it makes sense to add a message and ask people to translate it while it seems it will never be used. Please comment if it is the wrong assumption.",
+      "parentUuid": "4efb0bce_ea2e83f6",
+      "range": {
+        "startLine": 66,
+        "startChar": 32,
+        "endLine": 66,
+        "endChar": 38
+      },
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_aa388b3b",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
         "patchSetId": 8
@@ -145,6 +283,30 @@
       "writtenOn": "2017-01-11T15:30:04Z",
       "side": 1,
       "message": "Please remove.",
+      "range": {
+        "startLine": 20,
+        "startChar": 3,
+        "endLine": 20,
+        "endChar": 22
+      },
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_590d6f40",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-11T23:00:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4efb0bce_aa388b3b",
       "range": {
         "startLine": 20,
         "startChar": 3,
@@ -204,6 +366,30 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_990f67e4",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-11T23:00:21Z",
+      "side": 1,
+      "message": "I\u0027ve added a comment explaining what is qqx. I don\u0027t know if having a local variable would be better than this.",
+      "parentUuid": "4efb0bce_8a3dcf2b",
+      "range": {
+        "startLine": 33,
+        "startChar": 22,
+        "endLine": 33,
+        "endChar": 27
+      },
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_0a4affc8",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
         "patchSetId": 8
@@ -227,6 +413,30 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_39ff53a9",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-11T23:00:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4efb0bce_0a4affc8",
+      "range": {
+        "startLine": 39,
+        "startChar": 3,
+        "endLine": 39,
+        "endChar": 64
+      },
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_2a4dbbe0",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
         "patchSetId": 8
@@ -238,6 +448,30 @@
       "writtenOn": "2017-01-11T15:30:04Z",
       "side": 1,
       "message": "When the service above is mocked, this can be a mocked Title object as well.",
+      "range": {
+        "startLine": 46,
+        "startChar": 11,
+        "endLine": 46,
+        "endChar": 111
+      },
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_d92cbf47",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-11T23:00:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4efb0bce_2a4dbbe0",
       "range": {
         "startLine": 46,
         "startChar": 11,
@@ -333,6 +567,30 @@
       "side": 1,
       "message": "May be to check for substring `/wiki/Item:Q100`?",
       "parentUuid": "ee12ffd6_414fadc0",
+      "range": {
+        "startLine": 68,
+        "startChar": 2,
+        "endLine": 68,
+        "endChar": 80
+      },
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0c87c0_6ae17729",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-11T23:00:21Z",
+      "side": 1,
+      "message": "As far as I can tell both \u0027/wiki/\u0027 and \u0027Item:\u0027 parts are depending on global configuration.\nI was trying to figure out how come getFullUrl returns different outputs on something which is supposed to be the same value but I didn\u0027t come to anything (I didn\u0027t spend too much time on this, though).\n\nI ended up going with mocking the title lookup and have a mock title returning the URL I can control for the need of the test (which also Thiemo suggested). I don\u0027t think it is very nice but on the other hand it seems more reliable.",
+      "parentUuid": "ee12ffd6_3cbd00ae",
       "range": {
         "startLine": 68,
         "startChar": 2,
