@@ -312,29 +312,6 @@ abstract class HashArray extends ArrayObject implements Hashable, Comparable {
 	}
 
 	/**
-	 * Removes duplicates bases on hash value.
-	 *
-	 * @since 0.3
-	 */
-	public function removeDuplicates() {
-		$knownHashes = [];
-
-		/**
-		 * @var Hashable $hashable
-		 */
-		foreach ( iterator_to_array( $this ) as $hashable ) {
-			$hash = $hashable->getHash();
-
-			if ( in_array( $hash, $knownHashes ) ) {
-				$this->removeByElementHash( $hash );
-			}
-			else {
-				$knownHashes[] = $hash;
-			}
-		}
-	}
-
-	/**
 	 * @see ArrayObject::append
 	 *
 	 * @param mixed $value

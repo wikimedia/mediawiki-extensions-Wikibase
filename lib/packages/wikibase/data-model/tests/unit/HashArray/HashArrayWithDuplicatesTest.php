@@ -62,36 +62,6 @@ class HashArrayWithDuplicatesTest extends HashArrayTest {
 	 * @dataProvider instanceProvider
 	 * @param HashArray $array
 	 */
-	public function testRemoveDuplicates( HashArray $array ) {
-		$count = count( $array );
-		$duplicateCount = 0;
-		$hashes = [];
-
-		/**
-		 * @var Hashable $hashable
-		 */
-		foreach ( $array as $hashable ) {
-			if ( in_array( $hashable->getHash(), $hashes ) ) {
-				$duplicateCount++;
-			}
-			else {
-				$hashes[] = $hashable->getHash();
-			}
-		}
-
-		$array->removeDuplicates();
-
-		$this->assertEquals(
-			$count - $duplicateCount,
-			count( $array ),
-			'Count should decrease by the number of duplicates after removing duplicates'
-		);
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 * @param HashArray $array
-	 */
 	public function testGetHash( HashArray $array ) {
 		$hash = $array->getHash();
 
