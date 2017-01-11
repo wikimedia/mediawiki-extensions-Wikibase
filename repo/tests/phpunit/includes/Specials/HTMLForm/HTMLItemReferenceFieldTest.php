@@ -11,7 +11,6 @@ use Wikibase\Repo\Specials\HTMLForm\HTMLItemReferenceField;
  * @covers Wikibase\Repo\Specials\HTMLForm\HTMLItemReferenceField
  *
  * @group Wikibase
- * @group WikibaseRepo
  *
  * @license GPL-2.0+
  */
