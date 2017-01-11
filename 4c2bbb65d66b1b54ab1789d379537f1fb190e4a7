@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efb0bce_cdee4186",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-11T17:56:56Z",
+      "side": 1,
+      "message": "The method could have been even renamed to use singular",
+      "revId": "4c2bbb65d66b1b54ab1789d379537f1fb190e4a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_0df5794c",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-11T17:56:56Z",
+      "side": 1,
+      "message": "We don\u0027t need this comment any more I believe?",
+      "revId": "4c2bbb65d66b1b54ab1789d379537f1fb190e4a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
