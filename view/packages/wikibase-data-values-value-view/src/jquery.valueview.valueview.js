@@ -127,10 +127,17 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * Most current formatted value. Might be "behind" the `Expert`'s raw value as well as the
 	 * `valueview`'s parsed `DataValue` since formatting might involve an asynchronous
 	 * request.
-	 * @property {string|jQuery|null}
+	 * @property {string} HTML
 	 * @private
 	 */
-	_formattedValue: null,
+	_formattedValue: '',
+
+	/**
+	 * Plain text version of the value to be shown when the user starts editing.
+	 * @property {string} Plain text
+	 * @private
+	 */
+	_textValue: '',
 
 	/**
 	 * The DOM node containing the actual value representation. This is the `Expert`'s viewport.
@@ -444,7 +451,6 @@ $.widget( 'valueview.valueview', PARENT, {
 		var self = this;
 
 		if ( this._value === null ) {
-			this._formattedValue = null;
 			this.draw();
 		} else {
 			// TODO: Cache the initial formatted value in order to not have to trigger an API
@@ -465,7 +471,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	/**
 	 * Returns the most current formatted value featured by this `valueview`.
 	 *
-	 * @return {string|jQuery|null}
+	 * @return {string}
 	 */
 	getFormattedValue: function() {
 		return this._formattedValue;
@@ -476,13 +482,8 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * @since 0.4
 	 *
 	 * @return {string}
-	 *
-	 * @throws {Error} if current text value is null.
 	 */
 	getTextValue: function() {
-		if ( this._textValue === null ) {
-			throw new Error( 'This cannot happen' );
-		}
 		return this._textValue;
 	},
 
@@ -656,12 +657,15 @@ $.widget( 'valueview.valueview', PARENT, {
 	_updateValue: function() {
 		var self = this;
 
+		this._value = null;
+		this._formattedValue = '';
+		this._textValue = '';
+
 		return this._parseValue()
 			.done( function( parsedValue ) {
 				self._value = parsedValue;
 
 				if ( self._value === null ) {
-					self._formattedValue = null;
 					self.drawContent();
 					return;
 				}
@@ -673,7 +677,6 @@ $.widget( 'valueview.valueview', PARENT, {
 					} )
 					.fail( function( message ) {
 						if ( message ) {
-							self._formattedValue = null;
 							self._renderError( message );
 						}
 					} );
@@ -681,7 +684,6 @@ $.widget( 'valueview.valueview', PARENT, {
 			} )
 			.fail( function( message ) {
 				if ( message ) {
-					self._value = null;
 					self._renderError( message );
 				}
 			} );
@@ -735,7 +737,6 @@ $.widget( 'valueview.valueview', PARENT, {
 
 		self.__lastUpdateValue = rawValue;
 		this._parseTimer = setTimeout( function() {
-
 			// TODO: Hacky preview spinner activation. Necessary until we move the responsibility
 			//  for previews out of the experts. The preview should be handled in the same place for
 			//  all value types, could perhaps move into its own widget, listening to valueview
@@ -859,7 +860,6 @@ $.widget( 'valueview.valueview', PARENT, {
 			dataValue = this._value;
 
 		if ( !dataValue ) {
-			self._textValue = '';
 			deferred.resolve();
 			return deferred.promise();
 		}
