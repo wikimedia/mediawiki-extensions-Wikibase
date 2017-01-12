@@ -53,10 +53,10 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	private $limit;
 
 	/**
-	 * @param ItemDisambiguation $itemDisambiguation
-	 * @param TermIndexSearchInteractor $searchInteractor
 	 * @param ContentLanguages $contentLanguages
 	 * @param LanguageNameLookup $languageNameLookup
+	 * @param ItemDisambiguation $itemDisambiguation
+	 * @param TermIndexSearchInteractor $searchInteractor
 	 * @param int $limit
 	 */
 	public function __construct(
@@ -86,7 +86,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 		parent::execute( $subPage );
 
 		$request = $this->getRequest();
-		$subPageParts = $subPage === '' ? array() : explode( '/', $subPage, 2 );
+		$subPageParts = $subPage === '' ? [] : explode( '/', $subPage, 2 );
 
 		$languageCode = $this->extractLanguageCode( $request, $subPageParts );
 		$label = $this->extractLabel( $request, $subPageParts );
@@ -175,7 +175,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 			$label,
 			$languageCode,
 			'item',
-			array( TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS )
+			[ TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS ]
 		);
 	}
 
@@ -192,12 +192,12 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 			$searchLink = $this->getTitleFor( 'Search' );
 			$this->getOutput()->addWikiMsg(
 				'wikibase-itemdisambiguation-search',
-				$searchLink->getFullURL( array( 'search' => $label ) )
+				$searchLink->getFullURL( [ 'search' => $label ] )
 			);
 			$createLink = $this->getTitleFor( 'NewItem' );
 			$this->getOutput()->addWikiMsg(
 				'wikibase-itemdisambiguation-create',
-				$createLink->getFullURL( array( 'label' => $label ) )
+				$createLink->getFullURL( [ 'label' => $label ] )
 			);
 		}
 	}
