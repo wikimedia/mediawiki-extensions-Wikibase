@@ -236,6 +236,20 @@ abstract class ModifyEntity extends ApiBase {
 
 			$changeOp->apply( $entity, $summary );
 		} catch ( ChangeOpException $ex ) {
+			// FIXME: this is a bit of hack. As API reports some errors
+			// using ApiErrorReporter::dieMessage while most of errors
+			// are reported using ApiErrorReporter::dieError, this
+			// checks if the exception has both message key and message arguments,
+			// and calls dieMessage if this is a case.
+			if ( $ex->getMessageKey() !== '' && $ex->getMessageArgs() ) {
+				call_user_func_array(
+					[
+						$this->errorReporter,
+						'dieMessage'
+					],
+					array_merge( [ $ex->getMessageKey() ], $ex->getMessageArgs() )
+				);
+			}
 			$this->errorReporter->dieException( $ex, 'modification-failed' );
 		}
 	}
