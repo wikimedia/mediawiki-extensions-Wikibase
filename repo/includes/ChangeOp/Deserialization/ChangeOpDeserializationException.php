@@ -12,20 +12,31 @@ class ChangeOpDeserializationException extends \InvalidArgumentException {
 	/**
 	 * @var string
 	 */
-	private $errorCode;
+	private $messageKey;
 
 	/**
-	 * @param string $message - descriptive error message to be used in logs
-	 * @param string $errorCode - i18n code of the error message
+	 * @var array
 	 */
-	public function __construct( $message, $errorCode ) {
-		parent::__construct( $message );
+	private $messageArgs;
 
-		$this->errorCode = $errorCode;
+	/**
+	 * @param string $description descriptive error message (in English) to be used in logs
+	 * @param string $messageKey key of i18n message relevant to the exception
+	 * @param array $messageArgs optional arguments of the translatable message
+	 */
+	public function __construct( $description, $messageKey, array $messageArgs = [] ) {
+		parent::__construct( $description );
+
+		$this->messageKey = $messageKey;
+		$this->messageArgs = $messageArgs;
 	}
 
-	public function getErrorCode() {
-		return $this->errorCode;
+	public function getMessageKey() {
+		return $this->messageKey;
+	}
+
+	public function getMessageArgs() {
+		return $this->messageArgs;
 	}
 
 }
