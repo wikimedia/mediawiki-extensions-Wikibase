@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_c1b1658f",
+        "filename": "repo/includes/Store/Sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-12T00:52:16Z",
+      "side": 1,
+      "message": "Added DataRetrievalServiceFactory in PS12. I believe this should be finally done in a separate patch.",
+      "parentUuid": "0e0e73b5_1896c7f3",
+      "revId": "f619deb23ecc090bf552800440de4499afdfa451",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0e73b5_58de7fdf",
         "filename": "repo/includes/Store/Sql/SqlStore.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2016-12-15T17:50:39Z",
       "side": 1,
       "message": "Maybe the DispatchingServiceFactory could be such a watcher...",
+      "revId": "f619deb23ecc090bf552800440de4499afdfa451",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_21a39941",
+        "filename": "repo/includes/Store/Sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-12T00:52:16Z",
+      "side": 1,
+      "message": "I\u0027ve made DispatchingServiceFactory such a watcher. Some things related to that seem a bit sloppy but it might be something that actually works.",
+      "parentUuid": "0e0e73b5_58de7fdf",
       "revId": "f619deb23ecc090bf552800440de4499afdfa451",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
