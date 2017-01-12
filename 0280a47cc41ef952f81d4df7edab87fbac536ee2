@@ -272,6 +272,30 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_bfad60e9",
+        "filename": "repo/includes/Specials/SpecialEntityPage.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-12T10:48:42Z",
+      "side": 1,
+      "message": "The only implementation currently relevant here (currently in EntityContentFactory) is guaranteed to return a Title object. This is because it is not checking if the page exists. This implementation detail may change.",
+      "parentUuid": "4efb0bce_aed2d85b",
+      "range": {
+        "startLine": 66,
+        "startChar": 32,
+        "endLine": 66,
+        "endChar": 38
+      },
+      "revId": "0280a47cc41ef952f81d4df7edab87fbac536ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_aa388b3b",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
         "patchSetId": 8
