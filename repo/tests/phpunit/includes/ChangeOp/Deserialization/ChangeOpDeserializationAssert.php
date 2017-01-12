@@ -23,7 +23,7 @@ class ChangeOpDeserializationAssert {
 
 		/** @var $exception ChangeOpDeserializationException */
 		Assert::assertInstanceOf( ChangeOpDeserializationException::class, $exception );
-		Assert::assertSame( $errorCode, $exception->getErrorCode() );
+		Assert::assertSame( $errorCode, $exception->getMessageKey() );
 	}
 
 }

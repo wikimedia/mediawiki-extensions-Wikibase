@@ -65,6 +65,8 @@ associated with a function having the dedicated signature:
 ; js-deserializer-factory-function (repo only)
 : a string representing a resource loader module that, when `require`d, returns a function returning
   a `wikibase.serialization.Deserializer` instance supporting this entity type
+; changeop-deserializer-callback (repo only)
+: a callable that returns a ChangeOp instance, with the argument being a change request array
 ; rdf-builder-factory-callback (repo only)
 : a callable that returns a EntityRdfBuilder instance. See EntityRdfBuilderFactory::getEntityRdfBuilders
   for arguments in the callback
