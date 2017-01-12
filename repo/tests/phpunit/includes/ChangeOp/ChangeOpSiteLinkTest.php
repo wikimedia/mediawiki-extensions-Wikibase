@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\ChangeOp;
 
 use InvalidArgumentException;
+use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpSiteLink;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -142,7 +143,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function invalidChangeOpSiteLinkProvider() {
+	public function testGivenNoSitelinkForSite_applyThrowsException() {
 		$deSiteLink = new SiteLink( 'dewiki', 'Berlin' );
 		$plSiteLink = new SiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ) ) );
 
@@ -151,28 +152,12 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 			$plSiteLink
 		);
 
-		$args = array();
-
-		// cannot change badges of non-existing sitelink
-		$args[] = array(
-			$existingSitelinks,
-			new ChangeOpSiteLink( 'enwiki', null, array( new ItemId( 'Q149' ) ), $this->allowedBadgeItemIds ),
-		);
-
-		return $args;
-	}
-
-	/**
-	 * @dataProvider invalidChangeOpSiteLinkProvider
-	 * @param SiteLink[] $existingSitelinks
-	 * @param ChangeOpSiteLink $changeOpSiteLink
-	 *
-	 * @expectedException InvalidArgumentException
-	 */
-	public function testApplyWithInvalidData( array $existingSitelinks, ChangeOpSiteLink $changeOpSiteLink ) {
 		$item = new Item();
 		$item->setSiteLinkList( new SiteLinkList( $existingSitelinks ) );
 
+		$changeOpSiteLink = new ChangeOpSiteLink( 'enwiki', null, array( new ItemId( 'Q149' ) ), $this->allowedBadgeItemIds );
+
+		$this->setExpectedException( ChangeOpException::class );
 		$changeOpSiteLink->apply( $item );
 	}
 

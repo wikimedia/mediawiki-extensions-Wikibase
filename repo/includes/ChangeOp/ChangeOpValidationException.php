@@ -29,7 +29,7 @@ class ChangeOpValidationException extends ChangeOpException {
 	 */
 	public function __construct( Result $result, Exception $previous = null ) {
 		$messages = $this->composeErrorMessage( $result->getErrors() );
-		parent::__construct( 'Validation failed: ' . $messages, 0, $previous );
+		parent::__construct( 'Validation failed: ' . $messages, '', [], $previous );
 
 		$this->result = $result;
 	}

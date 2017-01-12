@@ -658,7 +658,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'e' => array( 'exception' => array(
 					'type' => ApiUsageException::class,
 					'code' => 'missing-language',
-					'message' => '\'language\' was not found in the label or description json for de'
+					'message' => '\'language\' was not found in term serialization for de'
 				) )
 			),
 			'removing invalid claim fails' => array(

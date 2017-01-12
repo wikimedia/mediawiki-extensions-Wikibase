@@ -12,7 +12,8 @@ For example if you want to add "NewThingy" part to entity type called "Foo":
 * Add support to FooPatcher
 * Add support to FooDiffer
 * Add support in FooView (extends EntityView)
-* Add a ChangeOp for the new field, e.g. NewThingyChangeOp
+* Add a ChangeOp for the new field, e.g. NewThingyChangeOp, and the related ChangeOpDeserializer,
+  e.g. NewThingyChangeOpDeserializer
 * Add support in FooValidatorFactory
 * Add support in FooChangeOpDeserializer
 

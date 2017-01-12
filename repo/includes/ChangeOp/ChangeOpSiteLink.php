@@ -133,6 +133,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	 * @param Summary|null $summary
 	 *
 	 * @throws InvalidArgumentException
+	 * @throws ChangeOpException
 	 */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
 		if ( !( $entity instanceof Item ) ) {
@@ -153,10 +154,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 
 			if ( $this->pageName === null ) {
 				if ( !$siteLinks->hasLinkWithSiteId( $this->siteId ) ) {
-					// FIXME: Code in Api\EditEntity processing the site link change request used to call
-					// ApiErrorReporter::dieMessage( 'no-such-sitelink', $globalSiteId ) in this case.
-					// Should the following exception result in the similar behaviour?
-					throw new InvalidArgumentException( 'The sitelink does not exist' );
+					throw new ChangeOpException( 'The sitelink does not exist', 'no-such-sitelink', [ $this->siteId ] );
 				}
 
 				// If page name is not set (but badges are) make sure that it remains intact
