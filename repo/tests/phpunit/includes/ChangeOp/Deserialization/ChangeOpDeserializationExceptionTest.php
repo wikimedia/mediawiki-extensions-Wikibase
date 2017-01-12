@@ -27,16 +27,22 @@ class ChangeOpDeserializationExceptionTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider errorCodeProvider
+	 * @dataProvider messageKeyProvider
 	 */
-	public function testGetCode( $errorCode ) {
-		$exception = new ChangeOpDeserializationException( 'foo', $errorCode );
+	public function testGetMessageKey( $messageKey ) {
+		$exception = new ChangeOpDeserializationException( 'foo', $messageKey );
 
-		$this->assertSame( $errorCode, $exception->getErrorCode() );
+		$this->assertSame( $messageKey, $exception->getMessageKey() );
 	}
 
-	public function errorCodeProvider() {
+	public function messageKeyProvider() {
 		return [ [ 'error-foo' ], [ 'error-bar' ] ];
+	}
+
+	public function testGetMessageArgs() {
+		$exception = new ChangeOpDeserializationException( 'foo', 'error', [ 'one', 'two' ] );
+
+		$this->assertEquals( [ 'one', 'two' ], $exception->getMessageArgs() );
 	}
 
 }
