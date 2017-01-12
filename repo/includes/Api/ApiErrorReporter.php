@@ -222,7 +222,7 @@ class ApiErrorReporter {
 	 *
 	 * @see ApiBase::dieUsage()
 	 *
-	 * @param string $description An english, plain text description of the errror,
+	 * @param string $description An English, plain text description of the error,
 	 * for use in logs.
 	 * @param string $errorCode A code identifying the error
 	 * @param int $httpRespCode The HTTP error code to send to the client
