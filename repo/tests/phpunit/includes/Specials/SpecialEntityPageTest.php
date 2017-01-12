@@ -39,38 +39,31 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 	 * @return EntityTitleLookup
 	 */
 	private function getEntityTitleLookup() {
-		$localTitle = $this->getMock( Title::class );
-		$localTitle->expects( $this->any() )
-			->method( 'getFullURL' )
-			->will(
-				$this->returnValue( self::LOCAL_ENTITY_PAGE_URL )
-			);
-		$foreignTitle = $this->getMock( Title::class );
-		$foreignTitle->expects( $this->any() )
-			->method( 'getFullURL' )
-			->will(
-				$this->returnValue( self::FOREIGN_ENTITY_PAGE_URL )
-			);
-
 		$titleLookup = $this->getMock( EntityTitleLookup::class );
+
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
-			->will( $this->returnCallback(
-				function ( $id ) use ( $localTitle, $foreignTitle ) {
-					return strpos( $id, ':' ) === false ? $localTitle : $foreignTitle;
-				}
-			) );
+			->will( $this->returnCallback( function ( $id ) {
+				$title = $this->getMock( Title::class );
+
+				$title->expects( $this->any() )
+					->method( 'getFullURL' )
+					->will( $this->returnValue( strstr( $id, ':' )
+						? self::FOREIGN_ENTITY_PAGE_URL
+						: self::LOCAL_ENTITY_PAGE_URL
+					) );
+
+				return $title;
+			} ) );
 
 		return $titleLookup;
 	}
 
 	protected function newSpecialPage() {
-		$page = new SpecialEntityPage(
+		return new SpecialEntityPage(
 			new BasicEntityIdParser(),
 			$this->getEntityTitleLookup()
 		);
-
-		return $page;
 	}
 
 	public function provideLocalEntityIdArgumentsToSpecialPage() {
@@ -131,13 +124,13 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 	 */
 	public function testGivenInvalidId_pageShowsBadEntityIdError( $subPage, array $requestParams, $idExpectedInErrorMsg ) {
 		$request = new FauxRequest( $requestParams );
-		$this->setExpectedException( HttpError::class );
+
+		$this->setExpectedException( HttpError::class, "(wikibase-entitypage-bad-id: $idExpectedInErrorMsg)" );
 
 		try {
 			$this->executeSpecialPage( $subPage, $request );
 		} catch ( HttpError $exception ) {
 			$this->assertSame( 400, $exception->getStatusCode() );
-			$this->assertEquals( "(wikibase-entitypage-bad-id: $idExpectedInErrorMsg)", $exception->getMessage() );
 			throw $exception;
 		}
 	}
@@ -154,16 +147,14 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 			$nullReturningTitleLookup
 		);
 
-		$this->setExpectedException( HttpError::class );
+		$this->setExpectedException( HttpError::class, '(wikibase-entitypage-bad-id: Q123)' );
 
 		try {
 			( new SpecialPageExecutor() )->executeSpecialPage( $specialEntityPage, 'Q123' );
 		} catch ( HttpError $exception ) {
 			$this->assertSame( 400, $exception->getStatusCode() );
-			$this->assertEquals( '(wikibase-entitypage-bad-id: Q123)', $exception->getMessage() );
 			throw $exception;
 		}
-
 	}
 
 	public function provideNoEntityIdArgumentsToSpecialPage() {
@@ -179,7 +170,6 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 	public function testGivenNoEntityId_pageShowsHelpMessage( $subPage, array $requestParams = [] ) {
 		$request = new FauxRequest( $requestParams );
 
-		/* @var FauxResponse $response */
 		list( $output, ) = $this->executeSpecialPage( $subPage, $request );
 
 		$this->assertContains( '(wikibase-entitypage-text)', $output );

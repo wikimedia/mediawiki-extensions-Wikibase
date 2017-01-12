@@ -10,7 +10,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 /**
  * Special page for addressing entity data pages without knowing the namespace.
  *
- * This special page redirects the a page related to the given entity ID.
+ * This special page redirects to a page that represents the given entity ID.
  * This special page is completely agnostic to what is the page of the entity. This is the responsibility
  * of EntityTitleLookup that can e.g. return local titles for local entities, and use interwikis
  * for foreign entities.
