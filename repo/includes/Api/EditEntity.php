@@ -300,6 +300,8 @@ class EditEntity extends ModifyEntity {
 			return $changeOpDeserializer->createEntityChangeOp( $changeRequest );
 		}
 
+		// TODO: once changeop deserialization is moved to type definitions of items and properties,
+		// remove the code below as it is no longer needed.
 		$changeOps = new ChangeOps();
 
 		//FIXME: Use a ChangeOpBuilder so we can batch fingerprint ops etc,
