@@ -86,7 +86,11 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Rdf\EntityRdfBuilderFactory;
+use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializerFactory;
+use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
+use Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
+use Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
@@ -853,6 +857,34 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * TODO: this should be probably cached?
+	 *
+	 * @return ChangeOpDeserializerFactory
+	 */
+	public function getChangeOpDeserializerFactory() {
+		$changeOpFactoryProvider = $this->getChangeOpFactoryProvider();
+
+		return new ChangeOpDeserializerFactory(
+			$changeOpFactoryProvider->getFingerprintChangeOpFactory(),
+			$changeOpFactoryProvider->getStatementChangeOpFactory(),
+			$changeOpFactoryProvider->getSiteLinkChangeOpFactory(),
+			new TermChangeOpSerializationValidator( $this->getTermsLanguages() ),
+			new SiteLinkBadgeChangeOpSerializationValidator(
+				$this->getEntityTitleLookup(),
+				array_keys( $this->settings->getSetting( 'badgeItems' ) )
+			),
+			$this->getExternalFormatStatementDeserializer(),
+			new SiteLinkTargetProvider(
+				$this->getSiteLookup(),
+				$this->settings->getSetting( 'specialSiteLinkGroups' )
+			),
+			$this->getEntityIdParser(),
+			$this->getStringNormalizer(),
+			$this->settings->getSetting( 'siteLinkGroups' )
+		);
+	}
+
+	/**
 	 * @return LanguageFallbackChainFactory
 	 */
 	public function getLanguageFallbackChainFactory() {
@@ -1076,6 +1108,7 @@ class WikibaseRepo {
 			'MessageException' => new MessageExceptionLocalizer(),
 			'ParseException' => new ParseExceptionLocalizer(),
 			'ChangeOpValidationException' => new ChangeOpValidationExceptionLocalizer( $formatter ),
+			'ChangeOpDeserializationException' => new ChangeOpDeserializationExceptionLocalizer(),
 			'Exception' => new GenericExceptionLocalizer()
 		);
 	}
@@ -1848,15 +1881,6 @@ class WikibaseRepo {
 			return null;
 		}
 		return $storage;
-	}
-
-	/**
-	 * @see EntityTypeDefinitions::getChangeOpDeserializerCallbacks
-	 *
-	 * @return callable[]
-	 */
-	public function getChangeOpDeserializerCallbacks() {
-		return $this->entityTypeDefinitions->getChangeOpDeserializerCallbacks();
 	}
 
 	/**

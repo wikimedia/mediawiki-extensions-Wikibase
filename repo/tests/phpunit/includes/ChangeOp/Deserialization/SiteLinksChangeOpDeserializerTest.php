@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 
+use Exception;
 use HashSiteStore;
 use Site;
 use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
@@ -167,14 +168,19 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase {
 			[ 'testwikis' ]
 		);
 
-		ChangeOpDeserializationAssert::assertThrowsChangeOpDeserializationException(
-			function() use ( $deserializer ) {
-				$deserializer->createEntityChangeOp(
-					[ 'sitelinks' => [ self::SITE_ID => [ 'site' => self::SITE_ID, 'title' => 'Some Random Page' ] ] ]
-				);
-			},
-			'no-external-page'
-		);
+		$exception = null;
+
+		try {
+			$deserializer->createEntityChangeOp(
+				[ 'sitelinks' => [ self::SITE_ID => [ 'site' => self::SITE_ID, 'title' => 'Some Random Page' ] ] ]
+			);
+		} catch ( Exception $ex ) {
+			$exception = $ex;
+		}
+
+		$this->assertInstanceOf( ChangeOpDeserializationException::class, $exception );
+		$this->assertSame( 'no-external-page', $exception->getErrorCode() );
+		$this->assertEquals( [ 'somewiki', 'Some Random Page' ], $exception->getParams() );
 	}
 
 	private function getItemWithoutSiteLinks() {

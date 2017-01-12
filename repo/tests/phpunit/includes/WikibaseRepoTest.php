@@ -58,6 +58,7 @@ use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
 use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
+use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializerFactory;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\EntityHandler;
@@ -285,6 +286,11 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	public function testGetEntityChangeOpProvider() {
 		$provider = $this->getWikibaseRepo()->getEntityChangeOpProvider();
 		$this->assertInstanceOf( EntityChangeOpProvider::class, $provider );
+	}
+
+	public function testGetChangeOpDeserializerFactory() {
+		$factory = $this->getWikibaseRepo()->getChangeOpDeserializerFactory();
+		$this->assertInstanceOf( ChangeOpDeserializerFactory::class, $factory );
 	}
 
 	public function testGetLanguageFallbackChainFactory() {
@@ -695,21 +701,6 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 
 		$expected = new EntityIdValue( new ItemId( 'Q13' ) );
 		$this->assertEquals( $expected, $deserialized );
-	}
-
-	public function testGetChangeOpDeserializerCallbacks() {
-		$wikibaseRepo = $this->getWikibaseRepo(
-			[
-				'foo' => [
-					'changeop-deserializer-callback' => 'new-changeop-deserializer-callback'
-				]
-			]
-		);
-		$changeOpsCallbacks = $wikibaseRepo->getChangeOpDeserializerCallbacks();
-		$expected = [
-			'foo' => 'new-changeop-deserializer-callback'
-		];
-		$this->assertSame( $expected, $changeOpsCallbacks );
 	}
 
 }

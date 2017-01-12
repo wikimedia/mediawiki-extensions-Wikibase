@@ -658,7 +658,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'e' => array( 'exception' => array(
 					'type' => ApiUsageException::class,
 					'code' => 'missing-language',
-					'message' => '\'language\' was not found in the label or description json for de'
+					'message' => '\'language\' was not found in term serialization for de'
 				) )
 			),
 			'removing invalid claim fails' => array(
@@ -780,7 +780,8 @@ class EditEntityTest extends WikibaseApiTestCase {
 				),
 				'e' => array( 'exception' => array(
 					'type' => ApiUsageException::class,
-					'code' => 'no-such-sitelink'
+					'code' => 'modification-failed',
+					'message' => wfMessage( 'wikibase-validator-no-such-sitelink', 'svwiki' )->text(),
 				) )
 			),
 			'bad id in serialization' => array(
@@ -846,7 +847,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'e' => array( 'exception' => array(
 					'type' => ApiUsageException::class,
 					'code' => 'not-supported',
-					'message' => 'Non Items cannot have sitelinks'
+					'message' => 'The requested feature is not supported by the given entity'
 				) ) ),
 			'create mediainfo with automatic id' => array(
 				'p' => array( 'new' => 'mediainfo', 'data' => '{}' ),
