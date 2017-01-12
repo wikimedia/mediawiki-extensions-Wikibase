@@ -4,14 +4,12 @@ namespace Wikibase\Repo\Api;
 
 use ApiMain;
 use Deserializers\Deserializer;
-use Exception;
 use InvalidArgumentException;
 use MWException;
 use SiteList;
 use Title;
 use ApiUsageException;
 use Wikibase\ChangeOp\ChangeOp;
-use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
@@ -20,7 +18,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
@@ -28,6 +25,7 @@ use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
@@ -291,297 +289,32 @@ class EditEntity extends ModifyEntity {
 	private function getChangeOp( array $changeRequest, EntityDocument $entity ) {
 		$type = $entity->getType();
 		if ( isset( $this->changeOpDeserializerCallbacks[$type] ) ) {
-			$changeOpDeserializer = call_user_func( $this->changeOpDeserializerCallbacks[$type] );
-			return $changeOpDeserializer->createEntityChangeOp( $changeRequest );
-		}
-
-		$changeOps = new ChangeOps();
-
-		//FIXME: Use a ChangeOpBuilder so we can batch fingerprint ops etc,
-		//       for more efficient validation!
-
-		if ( array_key_exists( 'labels', $changeRequest ) ) {
-			if ( !( $entity instanceof LabelsProvider ) ) {
-				$this->errorReporter->dieError( 'The given entity cannot contain labels', 'not-supported' );
-			}
-			$this->assertArray( $changeRequest['labels'], 'List of labels must be an array' );
-			$changeOps->add( $this->getLabelChangeOps( $changeRequest['labels'] ) );
-		}
-
-		if ( array_key_exists( 'descriptions', $changeRequest ) ) {
-			if ( !( $entity instanceof DescriptionsProvider ) ) {
-				$this->errorReporter->dieError( 'The given entity cannot contain descriptions', 'not-supported' );
-			}
-			$this->assertArray( $changeRequest['descriptions'], 'List of descriptions must be an array' );
-			$changeOps->add( $this->getDescriptionChangeOps( $changeRequest['descriptions'] ) );
-		}
-
-		if ( array_key_exists( 'aliases', $changeRequest ) ) {
-			if ( !( $entity instanceof AliasesProvider ) ) {
-				$this->errorReporter->dieError( 'The given entity cannot contain aliases', 'not-supported' );
-			}
-			$this->assertArray( $changeRequest['aliases'], 'List of aliases must be an array' );
-			$changeOps->add( $this->getAliasesChangeOps( $changeRequest['aliases'] ) );
-		}
-
-		if ( array_key_exists( 'sitelinks', $changeRequest ) ) {
-			if ( !( $entity instanceof Item ) ) {
-				$this->errorReporter->dieError( 'Non Items cannot have sitelinks', 'not-supported' );
-			}
-			$this->assertArray( $changeRequest['sitelinks'], 'List of sitelinks must be an array' );
-			$changeOps->add( $this->getSiteLinksChangeOps( $changeRequest['sitelinks'], $entity ) );
-		}
-
-		if ( array_key_exists( 'claims', $changeRequest ) ) {
-			if ( !( $entity instanceof StatementListProvider ) ) {
-				$this->errorReporter->dieError( 'The given entity cannot contain statements', 'not-supported' );
-			}
-			$this->assertArray( $changeRequest['claims'], 'List of claims must be an array' );
-			$changeOps->add( $this->getClaimsChangeOps( $changeRequest['claims'] ) );
-		}
-
-		return $changeOps;
-	}
-
-	/**
-	 * @param array[] $labels
-	 *
-	 * @return ChangeOp[]
-	 */
-	private function getLabelChangeOps( array $labels ) {
-		$labelChangeOps = array();
-
-		foreach ( $labels as $langCode => $arg ) {
-			$this->validateMultilangArgs( $arg, $langCode );
-
-			$language = $arg['language'];
-			$newLabel = ( array_key_exists( 'remove', $arg ) ? '' :
-				$this->stringNormalizer->trimToNFC( $arg['value'] ) );
-
-			if ( $newLabel === "" ) {
-				$labelChangeOps[] = $this->termChangeOpFactory->newRemoveLabelOp( $language );
-			} else {
-				$labelChangeOps[] = $this->termChangeOpFactory->newSetLabelOp( $language, $newLabel );
-			}
-		}
-
-		return $labelChangeOps;
-	}
-
-	/**
-	 * @param array[] $descriptions
-	 *
-	 * @return ChangeOp[]
-	 */
-	private function getDescriptionChangeOps( array $descriptions ) {
-		$descriptionChangeOps = array();
-
-		foreach ( $descriptions as $langCode => $arg ) {
-			$this->validateMultilangArgs( $arg, $langCode );
-
-			$language = $arg['language'];
-			$newDescription = ( array_key_exists( 'remove', $arg ) ? '' :
-				$this->stringNormalizer->trimToNFC( $arg['value'] ) );
-
-			if ( $newDescription === "" ) {
-				$descriptionChangeOps[] = $this->termChangeOpFactory->newRemoveDescriptionOp( $language );
-			} else {
-				$descriptionChangeOps[] = $this->termChangeOpFactory->newSetDescriptionOp( $language, $newDescription );
-			}
-		}
-
-		return $descriptionChangeOps;
-	}
-
-	/**
-	 * @param array[] $aliases
-	 *
-	 * @return ChangeOp[]
-	 */
-	private function getAliasesChangeOps( array $aliases ) {
-		$indexedAliases = $this->getIndexedAliases( $aliases );
-		$aliasesChangeOps = $this->getIndexedAliasesChangeOps( $indexedAliases );
-
-		return $aliasesChangeOps;
-	}
-
-	/**
-	 * @param array[] $aliases
-	 *
-	 * @return array[]
-	 */
-	private function getIndexedAliases( array $aliases ) {
-		$indexedAliases = array();
-
-		foreach ( $aliases as $langCode => $arg ) {
-			if ( !is_string( $langCode ) ) {
-				$indexedAliases[] = ( array_values( $arg ) === $arg ) ? $arg : array( $arg );
-			} else {
-				$indexedAliases[$langCode] = ( array_values( $arg ) === $arg ) ? $arg : array( $arg );
-			}
-		}
-
-		return $indexedAliases;
-	}
-
-	/**
-	 * @param array[] $indexedAliases
-	 *
-	 * @return ChangeOp[]
-	 */
-	private function getIndexedAliasesChangeOps( array $indexedAliases ) {
-		$aliasesChangeOps = array();
-		foreach ( $indexedAliases as $langCode => $args ) {
-			$aliasesToSet = array();
-			$language = '';
-
-			foreach ( $args as $arg ) {
-				$this->validateMultilangArgs( $arg, $langCode );
-
-				$alias = array( $this->stringNormalizer->trimToNFC( $arg['value'] ) );
-				$language = $arg['language'];
-
-				if ( array_key_exists( 'remove', $arg ) ) {
-					$aliasesChangeOps[] = $this->termChangeOpFactory->newRemoveAliasesOp( $language, $alias );
-				} elseif ( array_key_exists( 'add', $arg ) ) {
-					$aliasesChangeOps[] = $this->termChangeOpFactory->newAddAliasesOp( $language, $alias );
-				} else {
-					$aliasesToSet[] = $alias[0];
+			try {
+				$changeOpDeserializer = call_user_func( $this->changeOpDeserializerCallbacks[$type] );
+				return $changeOpDeserializer->createEntityChangeOp( $changeRequest );
+			} catch ( ChangeOpDeserializationException $exception ) {
+				// FIXME: this is a bit of hack. As API reports some errors
+				// using ApiErrorReporter::dieMessage while most of errors
+				// are reported using ApiErrorReporter::dieError, this
+				// checks if the exception has both message key and message arguments,
+				// and calls dieMessage if this is a case.
+				if ( $exception->getMessageKey() !== '' && $exception->getMessageArgs() ) {
+					call_user_func_array(
+						[
+							$this->errorReporter,
+							'dieMessage'
+						],
+						array_merge( [ $exception->getMessageKey() ], $exception->getMessageArgs() )
+					);
 				}
-			}
-
-			if ( $aliasesToSet !== array() ) {
-				$aliasesChangeOps[] = $this->termChangeOpFactory->newSetAliasesOp( $language, $aliasesToSet );
+				$this->errorReporter->dieError( $exception->getMessage(), $exception->getMessageKey() );
 			}
 		}
 
-		return $aliasesChangeOps;
-	}
-
-	/**
-	 * @param array[] $siteLinks
-	 * @param Item $item
-	 *
-	 * @return ChangeOp[]
-	 */
-	private function getSiteLinksChangeOps( array $siteLinks, Item $item ) {
-		$siteLinksChangeOps = array();
-		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
-
-		foreach ( $siteLinks as $siteId => $arg ) {
-			$this->checkSiteLinks( $arg, $siteId, $sites );
-			$globalSiteId = $arg['site'];
-
-			if ( !$sites->hasSite( $globalSiteId ) ) {
-				$this->errorReporter->dieError( "There is no site for global site id '$globalSiteId'", 'no-such-site' );
-			}
-
-			$linkSite = $sites->getSite( $globalSiteId );
-			$shouldRemove = array_key_exists( 'remove', $arg )
-				|| ( !isset( $arg['title'] ) && !isset( $arg['badges'] ) )
-				|| ( isset( $arg['title'] ) && $arg['title'] === '' );
-
-			if ( $shouldRemove ) {
-				$siteLinksChangeOps[] = $this->siteLinkChangeOpFactory->newRemoveSiteLinkOp( $globalSiteId );
-			} else {
-				$badges = ( isset( $arg['badges'] ) )
-					? $this->parseSiteLinkBadges( $arg['badges'] )
-					: null;
-
-				if ( isset( $arg['title'] ) ) {
-					$linkPage = $linkSite->normalizePageName( $this->stringNormalizer->trimWhitespace( $arg['title'] ) );
-
-					if ( $linkPage === false ) {
-						$this->errorReporter->dieMessage(
-							'no-external-page',
-							$globalSiteId,
-							$arg['title']
-						);
-					}
-				} else {
-					$linkPage = null;
-
-					if ( !$item->getSiteLinkList()->hasLinkWithSiteId( $globalSiteId ) ) {
-						$this->errorReporter->dieMessage( 'no-such-sitelink', $globalSiteId );
-					}
-				}
-
-				$siteLinksChangeOps[] = $this->siteLinkChangeOpFactory->newSetSiteLinkOp( $globalSiteId, $linkPage, $badges );
-			}
-		}
-
-		return $siteLinksChangeOps;
-	}
-
-	/**
-	 * @param array[] $claims
-	 *
-	 * @return ChangeOp[]
-	 */
-	private function getClaimsChangeOps( array $claims ) {
-		$changeOps = array();
-
-		//check if the array is associative or in arrays by property
-		if ( array_keys( $claims ) !== range( 0, count( $claims ) - 1 ) ) {
-			foreach ( $claims as $subClaims ) {
-				$changeOps = array_merge( $changeOps,
-					$this->getRemoveStatementChangeOps( $subClaims ),
-					$this->getModifyStatementChangeOps( $subClaims ) );
-			}
-		} else {
-			$changeOps = array_merge( $changeOps,
-				$this->getRemoveStatementChangeOps( $claims ),
-				$this->getModifyStatementChangeOps( $claims ) );
-		}
-
-		return $changeOps;
-	}
-
-	/**
-	 * @param array[] $statements array of serialized statements
-	 *
-	 * @return ChangeOp[]
-	 */
-	private function getModifyStatementChangeOps( array $statements ) {
-		$opsToReturn = array();
-
-		foreach ( $statements as $statementArray ) {
-			if ( !array_key_exists( 'remove', $statementArray ) ) {
-				try {
-					$statement = $this->statementDeserializer->deserialize( $statementArray );
-
-					if ( !( $statement instanceof Statement ) ) {
-						throw new Exception( 'Statement serialization did not contained a Statement.' );
-					}
-
-					$opsToReturn[] = $this->statementChangeOpFactory->newSetStatementOp( $statement );
-				} catch ( Exception $ex ) {
-					$this->errorReporter->dieException( $ex, 'invalid-claim' );
-				}
-			}
-		}
-		return $opsToReturn;
-	}
-
-	/**
-	 * Get changeops that remove all claims that have the 'remove' key in the array
-	 *
-	 * @param array[] $claims array of serialized claims
-	 *
-	 * @return ChangeOp[]
-	 */
-	private function getRemoveStatementChangeOps( array $claims ) {
-		$opsToReturn = array();
-		foreach ( $claims as $claimArray ) {
-			if ( array_key_exists( 'remove', $claimArray ) ) {
-				if ( array_key_exists( 'id', $claimArray ) ) {
-					$opsToReturn[] = $this->statementChangeOpFactory->newRemoveStatementOp( $claimArray['id'] );
-				} else {
-					$this->errorReporter->dieError( 'Cannot remove a claim with no GUID', 'invalid-claim' );
-				}
-			}
-		}
-		return $opsToReturn;
+		$this->errorReporter->dieError(
+			'Could not process change request for entity of type: ' . $type,
+			'no-change-request-deserializer'
+		);
 	}
 
 	/**

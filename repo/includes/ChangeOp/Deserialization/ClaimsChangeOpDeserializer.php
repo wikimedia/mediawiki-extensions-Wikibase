@@ -86,6 +86,10 @@ class ClaimsChangeOpDeserializer implements ChangeOpDeserializer {
 
 					$opsToReturn[] = $this->statementChangeOpFactory->newSetStatementOp( $statement );
 				} catch ( Exception $ex ) {
+					// FIXME: code in Api\EditEntity creating the ChangeOp used to call
+					// ApiErrorReporter::dieException with arguments $ex, 'invalid-claim'.
+					// Solution below makes API fail with exception's original message which
+					// can possibly not be translated while it used to be translated before.
 					$this->throwException( $ex->getMessage(), 'invalid-claim' );
 				}
 			}
