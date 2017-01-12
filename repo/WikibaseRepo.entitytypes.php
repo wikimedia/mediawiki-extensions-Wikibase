@@ -20,6 +20,8 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\Repo\ChangeOp\Deserialization\ItemChangeOpDeserializer;
+use Wikibase\Repo\ChangeOp\Deserialization\PropertyChangeOpDeserializer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityTermsView;
@@ -50,6 +52,11 @@ return array(
 		'entity-factory-callback' => function() {
 			return new Item();
 		},
+		'changeop-deserializer-callback' => function() {
+			return new ItemChangeOpDeserializer(
+				WikibaseRepo::getDefaultInstance()->getChangeOpDeserializerFactory()
+			);
+		},
 	),
 	'property' => array(
 		'view-factory-callback' => function(
@@ -75,6 +82,11 @@ return array(
 		},
 		'entity-factory-callback' => function() {
 			return Property::newFromType( '' );
+		},
+		'changeop-deserializer-callback' => function() {
+			return new PropertyChangeOpDeserializer(
+				WikibaseRepo::getDefaultInstance()->getChangeOpDeserializerFactory()
+			);
 		},
 	)
 );

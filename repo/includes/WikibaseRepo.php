@@ -84,6 +84,10 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializerFactory;
+use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
+use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkChangeOpSerializationValidator;
+use Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
@@ -838,6 +842,36 @@ class WikibaseRepo {
 			$this->getPropertyDataTypeLookup(),
 			$this->getDataTypeFactory(),
 			$this->getDataTypeValidatorFactory()
+		);
+	}
+
+	/**
+	 * TODO: this should be probably cached?
+	 *
+	 * @return ChangeOpDeserializerFactory
+	 */
+	public function getChangeOpDeserializerFactory() {
+		$changeOpFactoryProvider = $this->getChangeOpFactoryProvider();
+
+		return new ChangeOpDeserializerFactory(
+			$changeOpFactoryProvider->getFingerprintChangeOpFactory(),
+			$changeOpFactoryProvider->getStatementChangeOpFactory(),
+			$changeOpFactoryProvider->getSiteLinkChangeOpFactory(),
+			new TermChangeOpSerializationValidator( $this->getTermsLanguages() ),
+			new SiteLinkChangeOpSerializationValidator(
+				new SiteLinkBadgeChangeOpSerializationValidator(
+					$this->getEntityTitleLookup(),
+					array_keys( $this->settings->getSetting( 'badgeItems' ) )
+				)
+			),
+			$this->getExternalFormatStatementDeserializer(),
+			new SiteLinkTargetProvider(
+				$this->getSiteLookup(),
+				$this->settings->getSetting( 'specialSiteLinkGroups' )
+			),
+			$this->getEntityIdParser(),
+			$this->getStringNormalizer(),
+			$this->settings->getSetting( 'siteLinkGroups' )
 		);
 	}
 

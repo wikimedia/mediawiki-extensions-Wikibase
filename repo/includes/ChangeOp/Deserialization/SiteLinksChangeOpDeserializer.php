@@ -116,14 +116,10 @@ class SiteLinksChangeOpDeserializer implements ChangeOpDeserializer {
 					$linkPage = $linkSite->normalizePageName( $this->stringNormalizer->trimWhitespace( $serialization['title'] ) );
 
 					if ( $linkPage === false ) {
-						// FIXME: in this case API class is supposed to print i18n-ed version of 'no-external-page' message,
-						// using $globalSiteId and $serialization['title'] as arguments. How this should be achieved
-						// now with Api\EditEntity using deserializers throwing ChangeOpDeserializationExceptions?
 						throw new ChangeOpDeserializationException(
 							'A page "' . $serialization['title'] . '" could not be found on "' . $globalSiteId . '"',
 							'no-external-page',
-							$globalSiteId,
-							$serialization['title']
+							[ $globalSiteId,  $serialization['title'] ]
 						);
 					}
 				} else {
