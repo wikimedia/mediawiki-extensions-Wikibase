@@ -28,6 +28,9 @@ use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Repo\ChangeOpDeserializers\ChangeOpDeserializerFactory;
+use Wikibase\Repo\ChangeOpDeserializers\ItemChangeOpDeserializer;
+use Wikibase\Repo\ChangeOpDeserializers\PropertyChangeOpDeserializer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
@@ -87,6 +90,11 @@ class EditEntity extends ModifyEntity {
 	private $entityFactory;
 
 	/**
+	 * @var ChangeOpDeserializerFactory
+	 */
+	private $changeOpDeserializerFactory;
+
+	/**
 	 * @see ModifyEntity::__construct
 	 *
 	 * @param ApiMain $mainModule
@@ -109,6 +117,7 @@ class EditEntity extends ModifyEntity {
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
 		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
 		$this->siteLinkChangeOpFactory = $changeOpFactoryProvider->getSiteLinkChangeOpFactory();
+		$this->changeOpDeserializerFactory = new ChangeOpDeserializerFactory(); // TODO: add to ChangeOpFactoryProvider
 	}
 
 	/**
@@ -290,6 +299,15 @@ class EditEntity extends ModifyEntity {
 	 */
 	private function getChangeOps( array $data, EntityDocument $entity ) {
 		$changeOps = new ChangeOps();
+
+		if ( $entity->getType() === Item::ENTITY_TYPE ) {
+			$changeOps->add(
+				( new ItemChangeOpDeserializer( $this->changeOpDeserializerFactory ) )
+					->createEntityChangeOp( $data )
+			);
+		} elseif ( $entity->getType() === Property::ENTITY_TYPE ) {
+			$changeOps->add( ( new PropertyChangeOpDeserializer() )->createEntityChangeOp( $data ) );
+		}
 
 		//FIXME: Use a ChangeOpBuilder so we can batch fingerprint ops etc,
 		//       for more efficient validation!
