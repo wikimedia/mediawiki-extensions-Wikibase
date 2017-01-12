@@ -53,7 +53,7 @@ class LabelPrefetchHookHandlers {
 	private $languageCodes;
 
 	/**
-	 * @return null|LabelPrefetchHookHandlers
+	 * @return self|null
 	 */
 	private static function newFromGlobalState() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -70,7 +70,7 @@ class LabelPrefetchHookHandlers {
 		$languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
 		$languageFallbackChain = $languageFallbackChainFactory->newFromContext( $context );
 
-		return new LabelPrefetchHookHandlers(
+		return new self(
 			$termBuffer,
 			$wikibaseRepo->getEntityIdLookup(),
 			new TitleFactory(),

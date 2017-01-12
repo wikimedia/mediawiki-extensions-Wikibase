@@ -37,13 +37,16 @@ class ParserOutputUpdateHookHandlers {
 	 */
 	private $parserOutputDataUpdater;
 
+	/**
+	 * @return self
+	 */
 	public static function newFromGlobalState() {
 		global $wgLang;
 		StubUserLang::unstub( $wgLang );
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
-		return new ParserOutputUpdateHookHandlers(
+		return new self(
 			$wikibaseClient->getNamespaceChecker(),
 			$wikibaseClient->getLangLinkHandler(),
 			$wikibaseClient->getParserOutputDataUpdater()

@@ -153,8 +153,6 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
-	 * Returns a new empty ItemContent.
-	 *
 	 * @return self
 	 */
 	public static function newEmpty() {

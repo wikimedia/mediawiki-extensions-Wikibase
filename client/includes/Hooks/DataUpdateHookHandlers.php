@@ -44,8 +44,11 @@ class DataUpdateHookHandlers {
 	 */
 	private $jobScheduler;
 
+	/**
+	 * @return self
+	 */
 	public static function newFromGlobalState() {
-		return new DataUpdateHookHandlers(
+		return new self(
 			WikibaseClient::getDefaultInstance()->getStore()->getUsageUpdater(),
 			JobQueueGroup::singleton()
 		);
