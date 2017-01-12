@@ -29,7 +29,7 @@ class TermChangeOpSerializationValidatorTest extends \PHPUnit_Framework_TestCase
 		} catch ( \Exception $exception ) {
 			/** @var ChangeOpDeserializationException $exception */
 			$this->assertInstanceOf( ChangeOpDeserializationException::class, $exception );
-			$this->assertSame( $errorCode, $exception->getErrorCode() );
+			$this->assertSame( $errorCode, $exception->getMessageKey() );
 		}
 	}
 
