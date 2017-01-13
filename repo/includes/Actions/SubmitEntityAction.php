@@ -218,7 +218,7 @@ class SubmitEntityAction extends EditEntityAction {
 			$content,
 			$summary,
 			0,
-			false,
+			$this->getRequest()->getInt( 'undoafter', 0 ),
 			$this->getUser(),
 			null,
 			array(),
