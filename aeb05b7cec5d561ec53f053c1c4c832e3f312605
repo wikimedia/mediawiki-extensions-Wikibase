@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efb0bce_9c6bcb82",
+        "filename": "repo/includes/Actions/SubmitEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-13T17:22:19Z",
+      "side": 1,
+      "message": "I also believe this should still default to false when the parameter is not set, and not to 0. This is what the documentation of doEditContent() says.",
+      "revId": "aeb05b7cec5d561ec53f053c1c4c832e3f312605",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
