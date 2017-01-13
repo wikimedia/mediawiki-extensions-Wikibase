@@ -28,8 +28,6 @@ class ClaimSummaryBuilder {
 	private $claimDiffer;
 
 	/**
-	 * Constructs a new ClaimSummaryBuilder
-	 *
 	 * @since 0.4
 	 *
 	 * @param string $apiModuleName

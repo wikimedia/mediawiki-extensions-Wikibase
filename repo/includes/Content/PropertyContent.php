@@ -66,8 +66,6 @@ class PropertyContent extends EntityContent {
 	}
 
 	/**
-	 * Returns a new empty PropertyContent.
-	 *
 	 * @return self
 	 */
 	public static function newEmpty() {

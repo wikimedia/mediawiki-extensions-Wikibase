@@ -43,6 +43,9 @@ class NoLangLinkHandler {
 		$handler->doHandle( $parser, $langs );
 	}
 
+	/**
+	 * @return self
+	 */
 	private static function newFromGlobalState() {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$settings = $wikibaseClient->getSettings();
@@ -52,7 +55,7 @@ class NoLangLinkHandler {
 			$settings->getSetting( 'namespaces' )
 		);
 
-		return new NoLangLinkHandler( $namespaceChecker );
+		return new self( $namespaceChecker );
 	}
 
 	public function __construct( NamespaceChecker $namespaceChecker ) {
