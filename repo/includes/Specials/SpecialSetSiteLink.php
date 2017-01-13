@@ -14,7 +14,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\SiteLinkTargetProvider;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**
@@ -26,6 +25,36 @@ use Wikibase\Summary;
  * @author Bene* < benestar.wikimedia@googlemail.com >
  */
 class SpecialSetSiteLink extends SpecialModifyEntity {
+
+	/**
+	 * @var SiteLookup
+	 */
+	private $siteLookup;
+
+	/**
+	 * @var SiteLinkTargetProvider
+	 */
+	private $siteLinkTargetProvider;
+
+	/**
+	 * @var string[]
+	 */
+	private $siteLinkGroups;
+
+	/**
+	 * @var string[]
+	 */
+	private $badgeItems;
+
+	/**
+	 * @var LanguageFallbackLabelDescriptionLookupFactory
+	 */
+	private $labelDescriptionLookupFactory;
+
+	/**
+	 * @var SiteLinkChangeOpFactory
+	 */
+	private $siteLinkChangeOpFactory;
 
 	/**
 	 * The site of the site link.
@@ -49,56 +78,29 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	private $badges;
 
 	/**
-	 * @var string[]
+	 * @param SiteLookup $siteLookup
+	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
+	 * @param string[] $siteLinkGroups
+	 * @param string[] $badgeItems
+	 * @param LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory
+	 * @param SiteLinkChangeOpFactory $siteLinkChangeOpFactory
 	 */
-	private $badgeItems;
-
-	/**
-	 * @var string[]
-	 */
-	private $siteLinkGroups;
-
-	/**
-	 * @var SiteLinkChangeOpFactory
-	 */
-	private $siteLinkChangeOpFactory;
-
-	/**
-	 * @var SiteLinkTargetProvider
-	 */
-	private $siteLinkTargetProvider;
-
-	/**
-	 * @var LanguageFallbackLabelDescriptionLookupFactory
-	 */
-	private $labelDescriptionLookupFactory;
-
-	/**
-	 * @var SiteLookup
-	 */
-	private $siteLookup;
-
-	/**
-	 * @since 0.4
-	 */
-	public function __construct() {
+	public function __construct(
+		SiteLookup $siteLookup,
+		SiteLinkTargetProvider $siteLinkTargetProvider,
+		array $siteLinkGroups,
+		array $badgeItems,
+		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
+		SiteLinkChangeOpFactory $siteLinkChangeOpFactory
+	) {
 		parent::__construct( 'SetSiteLink' );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$settings = $wikibaseRepo->getSettings();
-
-		$this->siteLookup = $wikibaseRepo->getSiteLookup();
-
-		$this->badgeItems = $settings->getSetting( 'badgeItems' );
-		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
-
-		$this->siteLinkChangeOpFactory = $wikibaseRepo->getChangeOpFactoryProvider()->getSiteLinkChangeOpFactory();
-		$this->siteLinkTargetProvider = new SiteLinkTargetProvider(
-			$this->siteLookup,
-			$settings->getSetting( 'specialSiteLinkGroups' )
-		);
-
-		$this->labelDescriptionLookupFactory = $wikibaseRepo->getLanguageFallbackLabelDescriptionLookupFactory();
+		$this->siteLookup = $siteLookup;
+		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
+		$this->siteLinkGroups = $siteLinkGroups;
+		$this->badgeItems = $badgeItems;
+		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
+		$this->siteLinkChangeOpFactory = $siteLinkChangeOpFactory;
 	}
 
 	public function doesWrites() {

@@ -10,6 +10,7 @@ use TestSites;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\Specials\SpecialSetSiteLink;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -88,7 +89,25 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	private static $oldBadgeItemsSetting;
 
 	protected function newSpecialPage() {
-		return new SpecialSetSiteLink();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$siteLookup = $wikibaseRepo->getSiteLookup();
+		$settings = $wikibaseRepo->getSettings();
+
+		$siteLinkChangeOpFactory = $wikibaseRepo->getChangeOpFactoryProvider()->getSiteLinkChangeOpFactory();
+		$siteLinkTargetProvider = new SiteLinkTargetProvider(
+			$siteLookup,
+			$settings->getSetting( 'specialSiteLinkGroups' )
+		);
+
+		$labelDescriptionLookupFactory = $wikibaseRepo->getLanguageFallbackLabelDescriptionLookupFactory();
+		return new SpecialSetSiteLink(
+			$siteLookup,
+			$siteLinkTargetProvider,
+			$settings->getSetting( 'siteLinkGroups' ),
+			$settings->getSetting( 'badgeItems' ),
+			$labelDescriptionLookupFactory,
+			$siteLinkChangeOpFactory
+		);
 	}
 
 	protected function setUp() {

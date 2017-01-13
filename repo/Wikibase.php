@@ -274,7 +274,27 @@ call_user_func( function() {
 	$wgSpecialPages['SetAliases'] = Wikibase\Repo\Specials\SpecialSetAliases::class;
 	$wgSpecialPages['SetLabelDescriptionAliases']
 		= Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases::class;
-	$wgSpecialPages['SetSiteLink'] = Wikibase\Repo\Specials\SpecialSetSiteLink::class;
+	$wgSpecialPages['SetSiteLink'] = function() {
+		$wikibaseRepo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+		$siteLookup = $wikibaseRepo->getSiteLookup();
+		$settings = $wikibaseRepo->getSettings();
+
+		$siteLinkChangeOpFactory = $wikibaseRepo->getChangeOpFactoryProvider()->getSiteLinkChangeOpFactory();
+		$siteLinkTargetProvider = new \Wikibase\Repo\SiteLinkTargetProvider(
+			$siteLookup,
+			$settings->getSetting( 'specialSiteLinkGroups' )
+		);
+
+		$labelDescriptionLookupFactory = $wikibaseRepo->getLanguageFallbackLabelDescriptionLookupFactory();
+		return new Wikibase\Repo\Specials\SpecialSetSiteLink(
+			$siteLookup,
+			$siteLinkTargetProvider,
+			$settings->getSetting( 'siteLinkGroups' ),
+			$settings->getSetting( 'badgeItems' ),
+			$labelDescriptionLookupFactory,
+			$siteLinkChangeOpFactory
+		);
+	};
 	$wgSpecialPages['EntitiesWithoutLabel'] = array(
 		Wikibase\Repo\Specials\SpecialEntitiesWithoutPageFactory::class,
 		'newSpecialEntitiesWithoutLabel'
