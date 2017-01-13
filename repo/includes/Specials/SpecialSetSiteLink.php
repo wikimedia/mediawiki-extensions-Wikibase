@@ -14,7 +14,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\SiteLinkTargetProvider;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**
@@ -79,26 +78,29 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	private $siteLookup;
 
 	/**
-	 * @since 0.4
+	 * @param SiteLookup $siteLookup
+	 * @param array $badgeItems
+	 * @param array $siteLinkGroups
+	 * @param SiteLinkChangeOpFactory $siteLinkChangeOpFactory
+	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
+	 * @param LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 */
-	public function __construct() {
+	public function __construct(
+		array $badgeItems,
+		array $siteLinkGroups,
+		SiteLinkChangeOpFactory $siteLinkChangeOpFactory,
+		SiteLinkTargetProvider $siteLinkTargetProvider,
+		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
+		SiteLookup $siteLookup
+	) {
 		parent::__construct( 'SetSiteLink' );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$settings = $wikibaseRepo->getSettings();
-
-		$this->siteLookup = $wikibaseRepo->getSiteLookup();
-
-		$this->badgeItems = $settings->getSetting( 'badgeItems' );
-		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
-
-		$this->siteLinkChangeOpFactory = $wikibaseRepo->getChangeOpFactoryProvider()->getSiteLinkChangeOpFactory();
-		$this->siteLinkTargetProvider = new SiteLinkTargetProvider(
-			$this->siteLookup,
-			$settings->getSetting( 'specialSiteLinkGroups' )
-		);
-
-		$this->labelDescriptionLookupFactory = $wikibaseRepo->getLanguageFallbackLabelDescriptionLookupFactory();
+		$this->badgeItems = $badgeItems;
+		$this->siteLinkGroups = $siteLinkGroups;
+		$this->siteLinkChangeOpFactory = $siteLinkChangeOpFactory;
+		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
+		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
+		$this->siteLookup = $siteLookup;
 	}
 
 	public function doesWrites() {
