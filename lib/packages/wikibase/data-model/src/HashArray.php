@@ -22,11 +22,6 @@ use Wikibase\DataModel\Internal\MapValueHasher;
  * made to them via their mutator methods will not cause an update of
  * their associated hash in this array.
  *
- * When acceptDuplicates is set to true, multiple elements with the same
- * hash can reside in the HashArray. Lookup by such a non-unique hash will
- * return only the first element and deletion will also delete only
- * the first such element.
- *
  * @since 0.1
  *
  * @license GPL-2.0+
@@ -39,18 +34,9 @@ abstract class HashArray extends ArrayObject implements Hashable, Comparable {
 	 *
 	 * @since 0.1
 	 *
-	 * @var array [ element hash (string) => array [ element offset (string|int) ] | element offset (string|int) ]
+	 * @var array [ element hash (string) => element offset (string|int) ]
 	 */
 	protected $offsetHashes = [];
-
-	/**
-	 * If duplicate values (based on hash) should be accepted or not.
-	 *
-	 * @since 0.3
-	 *
-	 * @var bool
-	 */
-	protected $acceptDuplicates = false;
 
 	/**
 	 * @var integer
@@ -125,20 +111,11 @@ abstract class HashArray extends ArrayObject implements Hashable, Comparable {
 
 		$hasHash = $this->hasElementHash( $hash );
 
-		if ( !$this->acceptDuplicates && $hasHash ) {
+		if ( $hasHash ) {
 			return false;
 		}
 		else {
-			if ( $hasHash ) {
-				if ( !is_array( $this->offsetHashes[$hash] ) ) {
-					$this->offsetHashes[$hash] = [ $this->offsetHashes[$hash] ];
-				}
-
-				$this->offsetHashes[$hash][] = $index;
-			}
-			else {
-				$this->offsetHashes[$hash] = $index;
-			}
+			$this->offsetHashes[$hash] = $index;
 
 			return true;
 		}
@@ -191,11 +168,6 @@ abstract class HashArray extends ArrayObject implements Hashable, Comparable {
 	public function removeByElementHash( $elementHash ) {
 		if ( $this->hasElementHash( $elementHash ) ) {
 			$offset = $this->offsetHashes[$elementHash];
-
-			if ( is_array( $offset ) ) {
-				$offset = reset( $offset );
-			}
-
 			$this->offsetUnset( $offset );
 		}
 	}
@@ -210,7 +182,7 @@ abstract class HashArray extends ArrayObject implements Hashable, Comparable {
 	 * @return bool Indicates if the element was added or not.
 	 */
 	public function addElement( Hashable $element ) {
-		$append = $this->acceptDuplicates || !$this->hasElementHash( $element->getHash() );
+		$append = !$this->hasElementHash( $element->getHash() );
 
 		if ( $append ) {
 			$this->append( $element );
@@ -231,11 +203,6 @@ abstract class HashArray extends ArrayObject implements Hashable, Comparable {
 	public function getByElementHash( $elementHash ) {
 		if ( $this->hasElementHash( $elementHash ) ) {
 			$offset = $this->offsetHashes[$elementHash];
-
-			if ( is_array( $offset ) ) {
-				$offset = reset( $offset );
-			}
-
 			return $this->offsetGet( $offset );
 		}
 		else {
@@ -259,19 +226,7 @@ abstract class HashArray extends ArrayObject implements Hashable, Comparable {
 
 			$hash = $element->getHash();
 
-			if ( array_key_exists( $hash, $this->offsetHashes )
-				&& is_array( $this->offsetHashes[$hash] )
-				&& count( $this->offsetHashes[$hash] ) > 1 ) {
-				$this->offsetHashes[$hash] = array_filter(
-					$this->offsetHashes[$hash],
-					function( $value ) use ( $index ) {
-						return $value !== $index;
-					}
-				);
-			}
-			else {
-				unset( $this->offsetHashes[$hash] );
-			}
+			unset( $this->offsetHashes[$hash] );
 
 			parent::offsetUnset( $index );
 		}

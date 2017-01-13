@@ -14,9 +14,4 @@ class HashArrayWithoutDuplicates extends HashArray {
 		return '\Hashable';
 	}
 
-	public function __construct( $input = null ) {
-		$this->acceptDuplicates = false;
-		parent::__construct( $input );
-	}
-
 }
