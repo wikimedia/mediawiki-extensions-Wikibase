@@ -7,6 +7,10 @@
 	* `Wikibase\DataModel\Claim\Claim`
 	* `Wikibase\DataModel\Claim\ClaimGuid`
 	* `Wikibase\DataModel\StatementListProvider`
+* Removed `HashArray::rebuildIndices`
+* Removed `HashArray::indicesAreUpToDate`
+* Removed `HashArray::removeDuplicates`
+* Removed `$acceptDuplicates` feature from `HashArray`
 
 ## Version 6.3.1 (2016-11-30)
 
