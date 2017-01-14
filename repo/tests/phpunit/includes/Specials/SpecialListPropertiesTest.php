@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Repo\Specials\SpecialListProperties;
@@ -91,20 +92,34 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	}
 
 	protected function newSpecialPage() {
-		$specialPage = new SpecialListProperties();
-		$specialPage->getContext()->setLanguage( Language::factory( 'en-gb' ) );
+		$language = Language::factory( 'en-gb' );
 
 		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->never() )
 			->method( 'getName' );
-
-		$specialPage->initServices(
+		$entityIdFormatterFactory = new EntityIdHtmlLinkFormatterFactory(
+			$this->getEntityTitleLookup(),
+			$languageNameLookup
+		);
+		$bufferingTermLookup = $this->getBufferingTermLookup();
+		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
+		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
+			$bufferingTermLookup,
+			$languageFallbackChainFactory->newFromLanguage(
+				$language,
+				LanguageFallbackChainFactory::FALLBACK_ALL
+			)
+		);
+		$entityIdFormatter = $entityIdFormatterFactory->getEntityIdFormatter(
+			$labelDescriptionLookup
+		);
+		$specialPage = new SpecialListProperties(
 			$this->getDataTypeFactory(),
 			$this->getPropertyInfoStore(),
-			new EntityIdHtmlLinkFormatterFactory( $this->getEntityTitleLookup(), $languageNameLookup ),
-			new LanguageFallbackChainFactory(),
+			$labelDescriptionLookup,
+			$entityIdFormatter,
 			$this->getEntityTitleLookup(),
-			$this->getBufferingTermLookup()
+			$bufferingTermLookup
 		);
 
 		return $specialPage;
