@@ -29,15 +29,17 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 	/**
 	 * @var LanguageFallbackChainFactory
 	 */
-	private $factory;
+	private $languageFallbackChainFactory;
 
 	/**
-	 * @since 0.4
+	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
 	 */
-	public function __construct() {
+	public function __construct(
+		LanguageFallbackChainFactory $languageFallbackChainFactory
+	) {
 		parent::__construct( 'MyLanguageFallbackChain' );
 
-		$this->factory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
+		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 	}
 
 	/**
@@ -77,7 +79,9 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 	 */
 	public function getLanguageFallbackChain() {
 		if ( $this->chain === null ) {
-			$this->setLanguageFallbackChain( $this->factory->newFromContext( $this->getContext() ) );
+			$this->setLanguageFallbackChain(
+				$this->languageFallbackChainFactory->newFromContext( $this->getContext() )
+			);
 		}
 		return $this->chain;
 	}

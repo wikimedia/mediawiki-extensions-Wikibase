@@ -307,8 +307,11 @@ call_user_func( function() {
 	$wgSpecialPages['ListProperties'] = Wikibase\Repo\Specials\SpecialListProperties::class;
 	$wgSpecialPages['DispatchStats'] = Wikibase\Repo\Specials\SpecialDispatchStats::class;
 	$wgSpecialPages['EntityData'] = Wikibase\Repo\Specials\SpecialEntityData::class;
-	$wgSpecialPages['MyLanguageFallbackChain']
-		= Wikibase\Repo\Specials\SpecialMyLanguageFallbackChain::class;
+	$wgSpecialPages['MyLanguageFallbackChain'] = function() {
+		return new Wikibase\Repo\Specials\SpecialMyLanguageFallbackChain(
+			\Wikibase\Repo\WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory()
+		);
+	};
 	$wgSpecialPages['MergeItems'] = Wikibase\Repo\Specials\SpecialMergeItems::class;
 	$wgSpecialPages['RedirectEntity'] = Wikibase\Repo\Specials\SpecialRedirectEntity::class;
 
