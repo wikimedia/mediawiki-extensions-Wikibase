@@ -304,7 +304,27 @@ call_user_func( function() {
 		'newSpecialEntitiesWithoutDescription'
 	);
 	$wgSpecialPages['ListDatatypes'] = Wikibase\Repo\Specials\SpecialListDatatypes::class;
-	$wgSpecialPages['ListProperties'] = Wikibase\Repo\Specials\SpecialListProperties::class;
+	$wgSpecialPages['ListProperties'] = function () {
+		global $wgLang;
+		$wikibaseRepo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+		$bufferingTermLookup = $wikibaseRepo->getBufferingTermLookup();
+		$languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
+		$fallbackMode = \Wikibase\LanguageFallbackChainFactory::FALLBACK_ALL;
+		$labelDescriptionLookup = new \Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
+			$bufferingTermLookup,
+			$languageFallbackChainFactory->newFromLanguage( $wgLang, $fallbackMode )
+		);
+		$entityIdFormatter = $wikibaseRepo->getEntityIdHtmlLinkFormatterFactory()
+			->getEntityIdFormatter( $labelDescriptionLookup );
+		return new \Wikibase\Repo\Specials\SpecialListProperties(
+			$wikibaseRepo->getDataTypeFactory(),
+			$wikibaseRepo->getStore()->getPropertyInfoLookup(),
+			$labelDescriptionLookup,
+			$entityIdFormatter,
+			$wikibaseRepo->getEntityTitleLookup(),
+			$bufferingTermLookup
+		);
+	};
 	$wgSpecialPages['DispatchStats'] = Wikibase\Repo\Specials\SpecialDispatchStats::class;
 	$wgSpecialPages['EntityData'] = Wikibase\Repo\Specials\SpecialEntityData::class;
 	$wgSpecialPages['MyLanguageFallbackChain']
