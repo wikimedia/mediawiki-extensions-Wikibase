@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efb0bce_2abec9d1",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialListPropertiesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-14T12:41:08Z",
+      "side": 1,
+      "message": "What about moving the existing line\n$specialPage-\u003egetContext()-\u003esetLanguage( $language );\ndown here?",
+      "revId": "c186688ace13132b453827fe4f71409baf5574ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
