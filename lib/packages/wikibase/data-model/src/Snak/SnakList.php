@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Snak;
 
+use Comparable;
 use Hashable;
 use InvalidArgumentException;
 use Traversable;
@@ -18,7 +19,7 @@ use Wikibase\DataModel\Internal\MapValueHasher;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Addshore
  */
-class SnakList extends HashArray implements Hashable {
+class SnakList extends HashArray implements Comparable, Hashable {
 
 	/**
 	 * @param Snak[]|Traversable $snaks
@@ -106,6 +107,26 @@ class SnakList extends HashArray implements Hashable {
 	 */
 	public function getSnak( $snakHash ) {
 		return $this->getByElementHash( $snakHash );
+	}
+
+	/**
+	 * @see Comparable::equals
+	 *
+	 * The comparison is done purely value based, ignoring the order of the elements in the array.
+	 *
+	 * @since 0.3
+	 *
+	 * @param mixed $target
+	 *
+	 * @return bool
+	 */
+	public function equals( $target ) {
+		if ( $this === $target ) {
+			return true;
+		}
+
+		return $target instanceof self
+		&& $this->getHash() === $target->getHash();
 	}
 
 	/**

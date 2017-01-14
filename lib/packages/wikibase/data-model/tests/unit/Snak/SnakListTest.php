@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Tests\Snak;
 
+use Comparable;
 use DataValues\StringValue;
 use Hashable;
 use InvalidArgumentException;
@@ -292,6 +293,50 @@ class SnakListTest extends HashArrayTest {
 		} else {
 			$this->assertNotSame( $initialSnakList->getHash(), $snakList->getHash() );
 		}
+	}
+
+	public function testComparableInterface() {
+		$this->assertInstanceOf( Comparable::class, new SnakList() );
+	}
+
+	/**
+	 * @dataProvider equalsProvider
+	 */
+	public function testEquals( SnakList $list1, SnakList $list2, $expected ) {
+		$this->assertSame( $expected, $list1->equals( $list2 ) );
+	}
+
+	public function equalsProvider() {
+		$empty = new SnakList();
+		$oneSnak = new SnakList( [ new PropertyNoValueSnak( 1 ) ] );
+
+		return [
+			'empty object is equal to itself' => [
+				$empty,
+				$empty,
+				true
+			],
+			'non-empty object is equal to itself' => [
+				$oneSnak,
+				$oneSnak,
+				true
+			],
+			'different empty objects are equal' => [
+				$empty,
+				new SnakList(),
+				true
+			],
+			'different objects with same content are equal' => [
+				$oneSnak,
+				new SnakList( [ new PropertyNoValueSnak( 1 ) ] ),
+				true
+			],
+			'different objects with different content are not equal' => [
+				$oneSnak,
+				new SnakList( [ new PropertyNoValueSnak( 2 ) ] ),
+				false
+			],
+		];
 	}
 
 	public function testHashableInterface() {
