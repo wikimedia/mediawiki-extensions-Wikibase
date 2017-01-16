@@ -33,7 +33,6 @@ use Wikibase\Repo\Validators\EntityValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\TermIndex;
-use Wikibase\Updates\DataUpdateAdapter;
 
 /**
  * Base handler class for Entity content classes.

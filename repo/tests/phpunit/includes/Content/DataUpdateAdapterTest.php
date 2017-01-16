@@ -1,14 +1,14 @@
 <?php
 
-namespace Wikibase\Updates\Test;
+namespace Wikibase\Repo\Tests\Content;
 
 use RuntimeException;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
-use Wikibase\Updates\DataUpdateAdapter;
+use Wikibase\Repo\Content\DataUpdateAdapter;
 
 /**
- * @covers Wikibase\Updates\DataUpdateAdapter
+ * @covers Wikibase\Repo\Content\DataUpdateAdapter
  *
  * @group Wikibase
  *
