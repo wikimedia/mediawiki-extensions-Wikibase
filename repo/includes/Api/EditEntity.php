@@ -244,7 +244,7 @@ class EditEntity extends ModifyEntity {
 			}
 		}
 
-		$changeOps = $this->getChangeOps( $data, $entity );
+		$changeOps = $this->getChangeOp( $data, $entity );
 
 		$this->applyChangeOp( $changeOps, $entity );
 
@@ -293,21 +293,17 @@ class EditEntity extends ModifyEntity {
 	 * @param EntityDocument $entity
 	 *
 	 * @throws ApiUsageException
-	 * @return ChangeOps
+	 * @return ChangeOp
 	 */
-	private function getChangeOps( array $changeRequest, EntityDocument $entity ) {
-		$changeOps = new ChangeOps();
-
+	private function getChangeOp( array $changeRequest, EntityDocument $entity ) {
 		$type = $entity->getType();
 		if ( isset( $this->changeOpDeserializerCallbacks[$type] ) ) {
-			$changeOpDeserializer = call_user_func(
-				$this->changeOpDeserializerCallbacks[$type]
-			);
-			$changeOp = $changeOpDeserializer->createEntityChangeOp( $changeRequest );
-			$changeOps->add( $changeOp );
-			// Shorten out
-			return $changeOps;
+			$changeOpDeserializer = call_user_func( $this->changeOpDeserializerCallbacks[$type] );
+			return $changeOpDeserializer->createEntityChangeOp( $changeRequest );
 		}
+
+		$changeOps = new ChangeOps();
+
 		//FIXME: Use a ChangeOpBuilder so we can batch fingerprint ops etc,
 		//       for more efficient validation!
 
