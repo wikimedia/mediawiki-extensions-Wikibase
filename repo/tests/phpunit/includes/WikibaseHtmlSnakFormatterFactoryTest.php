@@ -10,10 +10,10 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Repo\WikibaseHtmlSnakFormatterFactory;
+use Wikibase\Repo\View\WikibaseHtmlSnakFormatterFactory;
 
 /**
- * @covers Wikibase\Repo\WikibaseHtmlSnakFormatterFactory
+ * @covers Wikibase\Repo\View\WikibaseHtmlSnakFormatterFactory
  *
  * @group Wikibase
  *
