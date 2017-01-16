@@ -2,11 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Luckas",
-			"Vitorvicentevalente"
+			"Vitorvicentevalente",
+			"Fúlvio"
 		]
 	},
 	"valueview-expert-advancedadjustments": "configurações avançadas",
 	"valueview-expert-emptyvalue-empty": "vazio",
+	"valueview-expert-globecoordinateinput-precision": "Precisão:",
 	"valueview-expert-globecoordinateinput-nullprecision": "não especificado",
 	"valueview-expert-globecoordinateinput-customprecision": "especial ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregoriano",
