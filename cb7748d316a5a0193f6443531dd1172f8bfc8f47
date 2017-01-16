@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efb0bce_f1b09dda",
+        "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-16T15:06:29Z",
+      "side": 1,
+      "message": "A class like this should mention at least once what \"Redis\" is. Other classes do this by mentioning something like \"… based on Redis (http://redis.io/) …\".",
+      "range": {
+        "startLine": 9,
+        "startChar": 3,
+        "endLine": 9,
+        "endChar": 8
+      },
+      "revId": "cb7748d316a5a0193f6443531dd1172f8bfc8f47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_91c04931",
+        "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-16T15:06:29Z",
+      "side": 1,
+      "message": "I don\u0027t think we can override private methods. Must be protected in the base class to have an effect.\n\nSame below.",
+      "range": {
+        "startLine": 41,
+        "startChar": 1,
+        "endLine": 41,
+        "endChar": 8
+      },
+      "revId": "cb7748d316a5a0193f6443531dd1172f8bfc8f47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_71bdcdac",
+        "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-16T15:06:29Z",
+      "side": 1,
+      "message": "Why does a constructor parameter need an additional getter and setter?",
+      "range": {
+        "startLine": 76,
+        "startChar": 17,
+        "endLine": 76,
+        "endChar": 31
+      },
+      "revId": "cb7748d316a5a0193f6443531dd1172f8bfc8f47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
