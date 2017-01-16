@@ -39,6 +39,7 @@ use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFact
 use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
+use Wikibase\Client\Serializer\ForbiddenSerializer;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
