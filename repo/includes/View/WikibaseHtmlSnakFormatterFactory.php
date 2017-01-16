@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo;
+namespace Wikibase\Repo\View;
 
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
