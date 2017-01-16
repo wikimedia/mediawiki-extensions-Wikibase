@@ -61,6 +61,7 @@
 	"wikibase-diffview-alias": "별칭",
 	"wikibase-diffview-description": "설명",
 	"wikibase-diffview-link": "링크",
+	"wikibase-diffview-link-name": "이름",
 	"wikibase-sitelink-site-edit-placeholder": "위키",
 	"wikibase-sitelink-page-edit-placeholder": "문서",
 	"wikibase-alias-edit-placeholder": "다른 이름 입력",

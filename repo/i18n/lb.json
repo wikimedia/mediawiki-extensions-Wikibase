@@ -41,6 +41,8 @@
 	"wikibase-diffview-alias": "Aliasen",
 	"wikibase-diffview-description": "Beschreiwung",
 	"wikibase-diffview-link": "Linken",
+	"wikibase-diffview-link-name": "Numm",
+	"wikibase-diffview-link-badges": "Auszeechnungen",
 	"wikibase-sitelink-site-edit-placeholder": "Wiki",
 	"wikibase-sitelink-page-edit-placeholder": "Säit",
 	"wikibase-alias-edit-placeholder": "Alias aginn",

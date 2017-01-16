@@ -56,6 +56,8 @@
 	"wikibase-diffview-alias": "alias",
 	"wikibase-diffview-description": "beskrivelse",
 	"wikibase-diffview-link": "lenker",
+	"wikibase-diffview-link-name": "navn",
+	"wikibase-diffview-link-badges": "merker",
 	"wikibase-sitelink-site-edit-placeholder": "wiki",
 	"wikibase-sitelink-page-edit-placeholder": "side",
 	"wikibase-alias-edit-placeholder": "fyll inn alias",

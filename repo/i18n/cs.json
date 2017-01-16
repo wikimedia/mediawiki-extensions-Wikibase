@@ -67,6 +67,8 @@
 	"wikibase-diffview-alias": "aliasy",
 	"wikibase-diffview-description": "popis",
 	"wikibase-diffview-link": "odkazy",
+	"wikibase-diffview-link-name": "název",
+	"wikibase-diffview-link-badges": "odznaky",
 	"wikibase-sitelink-site-edit-placeholder": "wiki",
 	"wikibase-sitelink-page-edit-placeholder": "stránka",
 	"wikibase-alias-edit-placeholder": "zadejte alias",

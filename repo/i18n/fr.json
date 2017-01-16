@@ -101,6 +101,8 @@
 	"wikibase-diffview-alias": "alias",
 	"wikibase-diffview-description": "description",
 	"wikibase-diffview-link": "liens",
+	"wikibase-diffview-link-name": "nom",
+	"wikibase-diffview-link-badges": "badges",
 	"wikibase-sitelink-site-edit-placeholder": "wiki",
 	"wikibase-sitelink-page-edit-placeholder": "page",
 	"wikibase-alias-edit-placeholder": "entrer un alias",

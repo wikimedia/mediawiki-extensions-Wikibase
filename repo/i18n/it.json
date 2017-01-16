@@ -70,6 +70,8 @@
 	"wikibase-diffview-alias": "alias",
 	"wikibase-diffview-description": "descrizione",
 	"wikibase-diffview-link": "collegamenti",
+	"wikibase-diffview-link-name": "nome",
+	"wikibase-diffview-link-badges": "distintivi",
 	"wikibase-sitelink-site-edit-placeholder": "wiki",
 	"wikibase-sitelink-page-edit-placeholder": "pagina",
 	"wikibase-alias-edit-placeholder": "inserisci un alias",

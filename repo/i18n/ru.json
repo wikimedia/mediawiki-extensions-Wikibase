@@ -47,6 +47,7 @@
 	"wikibase-statementlistview-add": "добавить",
 	"wikibase-statementlistview-add-tooltip": "Добавить новое значение",
 	"wikibase-statementgrouplistview-add": "добавить",
+	"wikibase-statementgrouplistview-add-tooltip": "Добавить новое утверждение",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "На других языках",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Настроить",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Показывать метки, псевдонимы и описания сразу на всех моих языках",

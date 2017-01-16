@@ -74,6 +74,8 @@
 	"wikibase-diffview-alias": "أسماء أخرى",
 	"wikibase-diffview-description": "وصف",
 	"wikibase-diffview-link": "وصلات",
+	"wikibase-diffview-link-name": "الاسم",
+	"wikibase-diffview-link-badges": "أوسمة",
 	"wikibase-sitelink-site-edit-placeholder": "الويكي",
 	"wikibase-sitelink-page-edit-placeholder": "صفحة",
 	"wikibase-alias-edit-placeholder": "أدخل كنية",

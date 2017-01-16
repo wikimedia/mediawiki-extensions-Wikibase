@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Khanmarat"
+			"Khanmarat",
+			"Sorbat"
 		]
 	},
 	"wikibase-edit": "төсәткәле",
-	"wikibase-add": "өстәгәле"
+	"wikibase-add": "өстәгәле",
+	"wikibase-diffview-link-name": "исем"
 }

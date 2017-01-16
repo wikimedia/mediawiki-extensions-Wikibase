@@ -85,6 +85,8 @@
 	"wikibase-diffview-alias": "alias",
 	"wikibase-diffview-description": "descripción",
 	"wikibase-diffview-link": "enlaces",
+	"wikibase-diffview-link-name": "nombre",
+	"wikibase-diffview-link-badges": "insignias",
 	"wikibase-sitelink-site-edit-placeholder": "wiki",
 	"wikibase-sitelink-page-edit-placeholder": "página",
 	"wikibase-alias-edit-placeholder": "escribe un alias",

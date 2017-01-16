@@ -75,6 +75,8 @@
 	"wikibase-diffview-alias": "别名",
 	"wikibase-diffview-description": "描述",
 	"wikibase-diffview-link": "链接",
+	"wikibase-diffview-link-name": "名称",
+	"wikibase-diffview-link-badges": "徽章",
 	"wikibase-sitelink-site-edit-placeholder": "wiki",
 	"wikibase-sitelink-page-edit-placeholder": "页面",
 	"wikibase-alias-edit-placeholder": "请输入别名",

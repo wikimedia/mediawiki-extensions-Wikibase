@@ -61,6 +61,8 @@
 	"wikibase-diffview-alias": "כינויים",
 	"wikibase-diffview-description": "תיאור",
 	"wikibase-diffview-link": "קישורים",
+	"wikibase-diffview-link-name": "שם",
+	"wikibase-diffview-link-badges": "סמלים",
 	"wikibase-sitelink-site-edit-placeholder": "אתר ויקי",
 	"wikibase-sitelink-page-edit-placeholder": "דף",
 	"wikibase-alias-edit-placeholder": "נא להזין כינוי",
