@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Tests;
+namespace Wikibase\Client\Tests\RecentChanges;
 
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
@@ -11,11 +11,11 @@ use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityChange;
-use Wikibase\SiteLinkCommentCreator;
+use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
 use Wikibase\Lib\Tests\Changes\TestChanges;
 
 /**
- * @covers Wikibase\SiteLinkCommentCreator
+ * @covers Wikibase\Client\RecentChanges\SiteLinkCommentCreator
  *
  * @group Wikibase
  * @group WikibaseClient

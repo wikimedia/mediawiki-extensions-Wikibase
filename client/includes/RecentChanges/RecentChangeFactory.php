@@ -9,7 +9,6 @@ use RecentChange;
 use Title;
 use Wikibase\EntityChange;
 use Wikibase\ItemChange;
-use Wikibase\SiteLinkCommentCreator;
 use Wikimedia\Assert\Assert;
 
 /**

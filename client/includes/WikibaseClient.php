@@ -90,7 +90,7 @@ use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\NamespaceChecker;
 use Wikibase\SettingsArray;
-use Wikibase\SiteLinkCommentCreator;
+use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
 use Wikibase\StringNormalizer;
 
 /**
@@ -1177,18 +1177,11 @@ final class WikibaseClient {
 	private function getRecentChangeFactory() {
 		return new RecentChangeFactory(
 			$this->getContentLanguage(),
-			$this->getSiteLinkCommentCreator()
-		);
-	}
-
-	/**
-	 * @return SiteLinkCommentCreator
-	 */
-	private function getSiteLinkCommentCreator() {
-		return new SiteLinkCommentCreator(
-			$this->getContentLanguage(),
-			$this->siteLookup,
-			$this->settings->getSetting( 'siteGlobalID' )
+			new SiteLinkCommentCreator(
+				$this->getContentLanguage(),
+				$this->siteLookup,
+				$this->settings->getSetting( 'siteGlobalID' )
+			)
 		);
 	}
 
