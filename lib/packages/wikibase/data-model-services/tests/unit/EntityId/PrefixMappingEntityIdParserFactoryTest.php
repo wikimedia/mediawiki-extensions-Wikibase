@@ -15,6 +15,9 @@ use Wikimedia\Assert\ParameterTypeException;
  */
 class PrefixMappingEntityIdParserFactoryTest extends \PHPUnit_Framework_TestCase {
 
+	/**
+	 * @return EntityIdParser
+	 */
 	private function getDummyEntityIdParser() {
 		return $this->getMock( EntityIdParser::class );
 	}
