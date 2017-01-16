@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Updates;
+namespace Wikibase\Repo\Content;
 
 use DataUpdate;
 use Exception;
