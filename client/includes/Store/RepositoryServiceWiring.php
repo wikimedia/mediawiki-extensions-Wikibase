@@ -1,6 +1,6 @@
 <?php
 
-use Wikibase\Client\ForbiddenSerializer;
+use Wikibase\Client\Serializer\ForbiddenSerializer;
 use Wikibase\Client\Store\RepositoryServiceContainer;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Store\EntityContentDataCodec;
