@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "4efb0bce_cba3ada7",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-17T11:26:11Z",
+      "side": 1,
+      "message": "The problem is that $wgLang is global language but $languageFallbackChainFactory uses context language (which can be different obviously). I couldn\u0027t find a way to obtain the context in here.",
+      "range": {
+        "startLine": 308,
+        "startChar": 9,
+        "endLine": 308,
+        "endChar": 16
+      },
+      "revId": "c186688ace13132b453827fe4f71409baf5574ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_2abec9d1",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialListPropertiesTest.php",
         "patchSetId": 1
