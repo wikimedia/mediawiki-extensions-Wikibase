@@ -80,31 +80,44 @@ class GetEntities extends ApiBase {
 	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
-	 * @param string $modulePrefix
+	 * @param StringNormalizer $stringNormalizer
+	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
+	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
+	 * @param EntityPrefetcher $entityPrefetcher
+	 * @param string[] $siteLinkGroups
+	 * @param ApiErrorReporter $errorReporter
+	 * @param ResultBuilder $resultBuilder
+	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param EntityIdParser $idParser
+	 * @internal param string $modulePrefix
 	 *
 	 * @see ApiBase::__construct
 	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+	public function __construct(
+		$mainModule,
+		$moduleName,
+		StringNormalizer $stringNormalizer,
+		LanguageFallbackChainFactory $languageFallbackChainFactory,
+		SiteLinkTargetProvider $siteLinkTargetProvider,
+		EntityPrefetcher $entityPrefetcher,
+		array $siteLinkGroups,
+		ApiErrorReporter $errorReporter,
+		ResultBuilder $resultBuilder,
+		EntityRevisionLookup $entityRevisionLookup,
+		EntityIdParser $idParser
+	) {
+		parent::__construct( $mainModule, $moduleName, '' );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$settings = $wikibaseRepo->getSettings();
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
+		$this->stringNormalizer = $stringNormalizer;
+		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
+		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
+		$this->entityPrefetcher = $entityPrefetcher;
+		$this->siteLinkGroups = $siteLinkGroups;
+		$this->errorReporter = $errorReporter;
+		$this->resultBuilder = $resultBuilder;
+		$this->entityRevisionLookup = $entityRevisionLookup;
+		$this->idParser = $idParser;
 
-		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
-		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
-		$this->stringNormalizer = $wikibaseRepo->getStringNormalizer();
-		$this->languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
-		$this->entityRevisionLookup = $wikibaseRepo->getEntityRevisionLookup();
-		$this->idParser = $wikibaseRepo->getEntityIdParser();
-
-		$this->siteLinkTargetProvider = new SiteLinkTargetProvider(
-			$wikibaseRepo->getSiteLookup(),
-			$settings->getSetting( 'specialSiteLinkGroups' )
-		);
-
-		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
-		$this->entityPrefetcher = $wikibaseRepo->getStore()->getEntityPrefetcher();
 	}
 
 	/**
