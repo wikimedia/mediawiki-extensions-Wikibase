@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efb0bce_6e38479c",
+        "filename": "repo/includes/Api/SetLabel.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-17T14:00:30Z",
+      "side": 1,
+      "message": "Should it stay as a $modulePrefix?\nStill, you are not passing any module prefix to parent::__construct below, I don\u0027t know if this is intended.",
+      "range": {
+        "startLine": 35,
+        "startChar": 27,
+        "endLine": 35,
+        "endChar": 34
+      },
+      "revId": "ea88cb4d8ad0675fa5452bf3ba7770584f065fb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
