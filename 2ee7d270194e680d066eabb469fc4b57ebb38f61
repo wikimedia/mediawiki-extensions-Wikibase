@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efb0bce_c87a931f",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-17T08:59:19Z",
+      "side": 1,
+      "message": "So you changed strpos to strstr because it is slightly faster, I guess?\nWouldn\u0027t it still make it even simpler to follow if it was strstr( $id, \u0027:\u0027 ) \u003d\u003d\u003d false explicitly?\n\nDoes not matter much I believe, it is pretty good as it is now.",
+      "revId": "2ee7d270194e680d066eabb469fc4b57ebb38f61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
