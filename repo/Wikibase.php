@@ -155,7 +155,19 @@ call_user_func( function() {
 
 	// API module registration
 	$wgAPIModules['wbgetentities'] = Wikibase\Repo\Api\GetEntities::class;
-	$wgAPIModules['wbsetlabel'] = Wikibase\Repo\Api\SetLabel::class;
+	$wgAPIModules['wbsetlabel'] = [
+		'class' => Wikibase\Repo\Api\SetLabel::class,
+		'factory' => function ( ApiMain $mainModule, $moduleName ) {
+			$wikibaseRepo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+			$termChangeOpFactory = $wikibaseRepo->getChangeOpFactoryProvider()
+				->getFingerprintChangeOpFactory();
+			return new \Wikibase\Repo\Api\SetLabel(
+				$mainModule,
+				$moduleName,
+				$termChangeOpFactory
+			);
+		}
+	];
 	$wgAPIModules['wbsetdescription'] = Wikibase\Repo\Api\SetDescription::class;
 	$wgAPIModules['wbsearchentities'] = Wikibase\Repo\Api\SearchEntities::class;
 	$wgAPIModules['wbsetaliases'] = Wikibase\Repo\Api\SetAliases::class;
