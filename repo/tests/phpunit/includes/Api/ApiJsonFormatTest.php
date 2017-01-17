@@ -3,8 +3,12 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiBase;
+use ApiMain;
+use FauxRequest;
 use Wikibase\Repo\Api\GetEntities;
 use Wikibase\Repo\Api\SetLabel;
+use Wikibase\Repo\SiteLinkTargetProvider;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @group API
@@ -104,7 +108,7 @@ class ApiJsonFormatTest extends ApiFormatTestCase {
 			'ids' => $entityId
 		);
 
-		$module = $this->getApiModule( GetEntities::class, 'wbgetentities', $params );
+		$module = $this->getGetEntitiesApi( 'wbgetentities', $params );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result );
 
@@ -142,4 +146,43 @@ class ApiJsonFormatTest extends ApiFormatTestCase {
 		$this->assertEquals( $this->getExpectedJson( 'setlabel-removed' ), $actual );
 	}
 
+	/**
+	 * @param string $moduleName
+	 * @param array $params
+	 * @param bool $needsToken
+	 *
+	 * @return GetEntities
+	 */
+	private function getGetEntitiesApi( $moduleName, array $params, $needsToken = false	) {
+		global $wgUser;
+
+		if ( $needsToken ) {
+			$params['token'] = $wgUser->getEditToken();
+		}
+		$request = new FauxRequest( $params, true );
+		$main = new ApiMain( $request, true );
+
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$settings = $wikibaseRepo->getSettings();
+		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $main->getContext() );
+
+		$siteLinkTargetProvider = new SiteLinkTargetProvider(
+			$wikibaseRepo->getSiteLookup(),
+			$settings->getSetting( 'specialSiteLinkGroups' )
+		);
+
+		return new GetEntities(
+			$main,
+			$moduleName,
+			$wikibaseRepo->getStringNormalizer(),
+			$wikibaseRepo->getLanguageFallbackChainFactory(),
+			$siteLinkTargetProvider,
+			$wikibaseRepo->getStore()->getEntityPrefetcher(),
+			$settings->getSetting( 'siteLinkGroups' ),
+			$apiHelperFactory->getErrorReporter( $apiMain ),
+			$apiHelperFactory->getResultBuilder( $apiMain ),
+			$wikibaseRepo->getEntityRevisionLookup(),
+			$wikibaseRepo->getEntityIdParser()
+		);
+	}
 }
