@@ -275,6 +275,7 @@
 	"wikibase-entitydata-unsupported-format": "Ten interfejs nie obsługuje formatu danych $1.",
 	"wikibase-entitydata-storage-error": "Nie udało się pobrać encji $1.",
 	"wikibase-entitydata-title": "Dane encji",
+	"wikibase-entitypage-bad-id": "Nieprawidłowy identyfikator: $1.",
 	"special-redirectentity": "Przekierowanie encji",
 	"wikibase-redirectentity-success": "$1 przekierowano do $2.",
 	"wikibase-redirectentity-fromid": "Identyfikator, z którego idzie przekierowanie",
