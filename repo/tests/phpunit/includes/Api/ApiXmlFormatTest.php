@@ -9,7 +9,6 @@ use HashSiteStore;
 use TestSites;
 use Wikibase\Repo\Api\EditEntity;
 use Wikibase\Repo\Api\GetClaims;
-use Wikibase\Repo\Api\GetEntities;
 use Wikibase\Repo\Api\SetAliases;
 use Wikibase\Repo\Api\SetClaim;
 use Wikibase\Repo\Api\SetDescription;
@@ -41,7 +40,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 			'ids' => $entityId
 		);
 
-		$module = $this->getApiModule( GetEntities::class, 'wbgetentities', $params );
+		$module = $this->getGetEntitiesApi( 'wbgetentities', $params );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 
