@@ -154,7 +154,33 @@ call_user_func( function() {
 	};
 
 	// API module registration
-	$wgAPIModules['wbgetentities'] = Wikibase\Repo\Api\GetEntities::class;
+	$wgAPIModules['wbgetentities'] = [
+		'class' => Wikibase\Repo\Api\GetEntities::class,
+	    'factory' => function( ApiMain $apiMain, $moduleName ) {
+		    $wikibaseRepo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+		    $settings = $wikibaseRepo->getSettings();
+		    $apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() );
+
+		    $siteLinkTargetProvider = new \Wikibase\Repo\SiteLinkTargetProvider(
+			    $wikibaseRepo->getSiteLookup(),
+			    $settings->getSetting( 'specialSiteLinkGroups' )
+		    );
+
+		    return new \Wikibase\Repo\Api\GetEntities(
+			    $apiMain,
+			    $moduleName,
+			    $wikibaseRepo->getStringNormalizer(),
+			    $wikibaseRepo->getLanguageFallbackChainFactory(),
+			    $siteLinkTargetProvider,
+			    $wikibaseRepo->getStore()->getEntityPrefetcher(),
+			    $settings->getSetting( 'siteLinkGroups' ),
+			    $apiHelperFactory->getErrorReporter( $apiMain ),
+			    $apiHelperFactory->getResultBuilder( $apiMain ),
+			    $wikibaseRepo->getEntityRevisionLookup(),
+			    $wikibaseRepo->getEntityIdParser()
+		    );
+	    }
+	];
 	$wgAPIModules['wbsetlabel'] = Wikibase\Repo\Api\SetLabel::class;
 	$wgAPIModules['wbsetdescription'] = Wikibase\Repo\Api\SetDescription::class;
 	$wgAPIModules['wbsearchentities'] = Wikibase\Repo\Api\SearchEntities::class;
