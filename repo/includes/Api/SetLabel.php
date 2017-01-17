@@ -31,15 +31,16 @@ class SetLabel extends ModifyTerm {
 	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
-	 * @param string $modulePrefix
+	 * @param FingerprintChangeOpFactory $termChangeOpFactory
 	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+	public function __construct(
+		ApiMain $mainModule,
+		$moduleName,
+		FingerprintChangeOpFactory $termChangeOpFactory
+	) {
+		parent::__construct( $mainModule, $moduleName );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
-
-		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
+		$this->termChangeOpFactory = $termChangeOpFactory;
 	}
 
 	/**
