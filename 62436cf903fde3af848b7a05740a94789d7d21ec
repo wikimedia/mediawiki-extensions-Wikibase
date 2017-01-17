@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_0e59d390",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-17T15:04:44Z",
+      "side": 1,
+      "message": "Level looks nice for me, but this is indented with a mixture of tabs and spaces.",
+      "parentUuid": "4efb0bce_4ef7cbf2",
+      "revId": "62436cf903fde3af848b7a05740a94789d7d21ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_4e546bc9",
         "filename": "repo/includes/Api/GetEntities.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2017-01-17T14:07:09Z",
       "side": 1,
       "message": "BTW: what\u0027s the deal with this @internal param annotation?\n\nWhy do we want/need to tell user of this class what parameters it implicitly passes to the parent class constructor?\n\nAlso it looks like with @internal added to the method doc block, my IDE considers the class method as internal and shows big warning when it is used (ie. new GetEntities is marked as wrong thing to do). But maybe it is only PhpStorm.",
+      "revId": "62436cf903fde3af848b7a05740a94789d7d21ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_4ecd8b33",
+        "filename": "repo/includes/Api/GetEntities.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-17T15:04:44Z",
+      "side": 1,
+      "message": "PHPStorm does this when updating a PHPDoc block, instead of removing it.",
+      "parentUuid": "4efb0bce_4e546bc9",
       "revId": "62436cf903fde3af848b7a05740a94789d7d21ec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
