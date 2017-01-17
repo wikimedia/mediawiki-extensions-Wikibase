@@ -14,7 +14,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
 use Wikibase\EntityChange;
 use Wikibase\ItemChange;
-use Wikibase\SiteLinkCommentCreator;
+use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
 
 /**
  * @covers Wikibase\Client\RecentChanges\RecentChangeFactory

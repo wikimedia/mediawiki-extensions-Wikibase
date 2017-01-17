@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Client\RecentChanges;
 
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOp;
