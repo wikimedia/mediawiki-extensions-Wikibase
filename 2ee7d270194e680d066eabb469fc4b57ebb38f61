@@ -16,6 +16,24 @@
       "revId": "2ee7d270194e680d066eabb469fc4b57ebb38f61",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_28e9277c",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityPageTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-17T09:30:33Z",
+      "side": 1,
+      "message": "Performance doesn\u0027t matter here. http://maettig.com/code/php/php-performance-benchmarks.php#indexof The PHP manual even says strpos() is faster. http://php.net/manual/en/function.strstr.php I changed this because it\u0027s shorter, because I always find strpos() a little confusing (we don\u0027t care about the position), and strstr() is the \"classic\" PHP way of doing this.",
+      "parentUuid": "4efb0bce_c87a931f",
+      "revId": "2ee7d270194e680d066eabb469fc4b57ebb38f61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
