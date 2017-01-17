@@ -32,7 +32,6 @@ class SetLabel extends ModifyTerm {
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param FingerprintChangeOpFactory $termChangeOpFactory
-	 * @internal param string $module
 	 */
 	public function __construct(
 		ApiMain $mainModule,

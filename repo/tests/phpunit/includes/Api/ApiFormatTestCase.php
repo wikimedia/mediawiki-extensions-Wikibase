@@ -43,13 +43,20 @@ abstract class ApiFormatTestCase extends \MediaWikiTestCase {
 	 * @return ApiMain
 	 */
 	protected function getApiModule( $moduleClass, $moduleName, array $params, $needsToken = false ) {
-		global $wgUser;
+		global $wgUser,
+			$wgAPIModules;
 
 		if ( $needsToken ) {
 			$params['token'] = $wgUser->getEditToken();
 		}
 		$request = new FauxRequest( $params, true );
 		$main = new ApiMain( $request, true );
+
+		if ( isset( $wgAPIModules[$moduleName]['factory'] )
+			&& $wgAPIModules[$moduleName]['class'] === $moduleClass
+		) {
+			return $wgAPIModules[$moduleName]['factory']( $main, $moduleName );
+		}
 
 		return new $moduleClass( $main, $moduleName );
 	}
