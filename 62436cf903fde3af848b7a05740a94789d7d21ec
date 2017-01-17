@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efb0bce_4ef7cbf2",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-17T14:07:09Z",
+      "side": 1,
+      "message": "indentation level is off here",
+      "revId": "62436cf903fde3af848b7a05740a94789d7d21ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_4e546bc9",
+        "filename": "repo/includes/Api/GetEntities.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-17T14:07:09Z",
+      "side": 1,
+      "message": "BTW: what\u0027s the deal with this @internal param annotation?\n\nWhy do we want/need to tell user of this class what parameters it implicitly passes to the parent class constructor?\n\nAlso it looks like with @internal added to the method doc block, my IDE considers the class method as internal and shows big warning when it is used (ie. new GetEntities is marked as wrong thing to do). But maybe it is only PhpStorm.",
+      "revId": "62436cf903fde3af848b7a05740a94789d7d21ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_4eceabba",
+        "filename": "repo/tests/phpunit/includes/Api/ApiFormatTestCase.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-17T14:07:09Z",
+      "side": 1,
+      "message": "\"get get\" looks a bit funny but I guess this is the best we can get.\n\nHow about getGetEntitiesApi*Module*, for kind of consistency with getApiModule?\n\nAlso I am not sure if we need to duplicate $moduleName and $needsToken parameters here. Module name is always \u0027wbgetentities\u0027, and it is never needed to add edit token to params.",
+      "range": {
+        "startLine": 122,
+        "startChar": 20,
+        "endLine": 122,
+        "endChar": 37
+      },
+      "revId": "62436cf903fde3af848b7a05740a94789d7d21ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
