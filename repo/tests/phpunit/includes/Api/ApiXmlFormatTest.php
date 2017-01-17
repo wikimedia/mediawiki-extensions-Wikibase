@@ -40,7 +40,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 			'ids' => $entityId
 		);
 
-		$module = $this->getGetEntitiesApi( 'wbgetentities', $params );
+		$module = $this->getGetEntitiesApiModule( $params );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 

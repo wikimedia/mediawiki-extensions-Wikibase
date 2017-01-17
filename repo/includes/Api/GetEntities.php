@@ -89,7 +89,6 @@ class GetEntities extends ApiBase {
 	 * @param ResultBuilder $resultBuilder
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityIdParser $idParser
-	 * @internal param string $modulePrefix
 	 *
 	 * @see ApiBase::__construct
 	 */
@@ -106,7 +105,7 @@ class GetEntities extends ApiBase {
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityIdParser $idParser
 	) {
-		parent::__construct( $mainModule, $moduleName, '' );
+		parent::__construct( $mainModule, $moduleName );
 
 		$this->stringNormalizer = $stringNormalizer;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
@@ -117,7 +116,6 @@ class GetEntities extends ApiBase {
 		$this->resultBuilder = $resultBuilder;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->idParser = $idParser;
-
 	}
 
 	/**

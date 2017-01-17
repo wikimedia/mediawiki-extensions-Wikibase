@@ -113,24 +113,17 @@ abstract class ApiFormatTestCase extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param string $moduleName
 	 * @param array $params
-	 * @param bool $needsToken
 	 *
 	 * @return GetEntities
 	 */
-	protected function getGetEntitiesApi( $moduleName, array $params, $needsToken = false ) {
-		global $wgUser;
-
-		if ( $needsToken ) {
-			$params['token'] = $wgUser->getEditToken();
-		}
+	protected function getGetEntitiesApiModule( array $params ) {
 		$request = new FauxRequest( $params, true );
-		$main = new ApiMain( $request, true );
+		$apiMain = new ApiMain( $request, true );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$settings = $wikibaseRepo->getSettings();
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $main->getContext() );
+		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() );
 
 		$siteLinkTargetProvider = new SiteLinkTargetProvider(
 			$wikibaseRepo->getSiteLookup(),
@@ -138,15 +131,15 @@ abstract class ApiFormatTestCase extends \MediaWikiTestCase {
 		);
 
 		return new GetEntities(
-			$main,
-			$moduleName,
+			$apiMain,
+			'wbgetentities',
 			$wikibaseRepo->getStringNormalizer(),
 			$wikibaseRepo->getLanguageFallbackChainFactory(),
 			$siteLinkTargetProvider,
 			$wikibaseRepo->getStore()->getEntityPrefetcher(),
 			$settings->getSetting( 'siteLinkGroups' ),
-			$apiHelperFactory->getErrorReporter( $main ),
-			$apiHelperFactory->getResultBuilder( $main ),
+			$apiHelperFactory->getErrorReporter( $apiMain ),
+			$apiHelperFactory->getResultBuilder( $apiMain ),
 			$wikibaseRepo->getEntityRevisionLookup(),
 			$wikibaseRepo->getEntityIdParser()
 		);
