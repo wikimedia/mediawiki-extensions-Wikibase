@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "4efb0bce_79d7e428",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-18T18:22:34Z",
+      "side": 1,
+      "message": "I see some problems here:\n1. Method added for test purposes only.\n2. Service is mutable because of this method.\n3. Test code has to know about internal implementation of `repositoryServiceContainers` field.\n\n\nI would suggest to use a mock in the test or extend the class and override constructor if mocking is a problem.",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 2
+      },
+      "revId": "94894b28d17e37c3a1fded683a627f0d72478426",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_19e6b013",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-18T18:22:34Z",
+      "side": 1,
+      "message": "Seems like duplicated code. I guess it can be refactored into method like `getEntityPrefetcherFor($repositoryName)`",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 38
+      },
+      "revId": "94894b28d17e37c3a1fded683a627f0d72478426",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_de6ebe29",
         "filename": "client/includes/Store/RepositoryServiceWiring.php",
         "patchSetId": 1
@@ -13,6 +59,29 @@
       "writtenOn": "2017-01-18T16:37:00Z",
       "side": 1,
       "message": "It\u0027s a bit weird to see an \"EntityPrefetcher\" being turned into a \"$metaDataAccessor\", like these two words are describing the same concept.",
+      "revId": "94894b28d17e37c3a1fded683a627f0d72478426",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_d9cff880",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-18T18:22:34Z",
+      "side": 1,
+      "message": "`false` as DB name looks very strange. Is this correct?",
+      "range": {
+        "startLine": 103,
+        "startChar": 65,
+        "endLine": 103,
+        "endChar": 70
+      },
       "revId": "94894b28d17e37c3a1fded683a627f0d72478426",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
