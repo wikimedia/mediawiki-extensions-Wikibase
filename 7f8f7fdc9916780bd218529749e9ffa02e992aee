@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efb0bce_59530844",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoIntegrationTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-18T18:47:45Z",
+      "side": 1,
+      "message": "I know that we don\u0027t have this convention, but to me it feels strange to see implementation details before actual tests. I would really appreciate if you move it down after the tests.",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 2
+      },
+      "revId": "7f8f7fdc9916780bd218529749e9ffa02e992aee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_b9a67c4e",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoIntegrationTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-18T18:47:45Z",
+      "side": 1,
+      "message": "Can we enable client in test so it will always run correctly?",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 3
+      },
+      "revId": "7f8f7fdc9916780bd218529749e9ffa02e992aee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_d97818c2",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoIntegrationTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-18T18:47:45Z",
+      "side": 1,
+      "message": "Setup is complicated, I can\u0027t really say what is important and what is not. Can it be simplified? May be some unimportant details can be hidden behind method calls?",
+      "range": {
+        "startLine": 91,
+        "startChar": 2,
+        "endLine": 118,
+        "endChar": 6
+      },
+      "revId": "7f8f7fdc9916780bd218529749e9ffa02e992aee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
