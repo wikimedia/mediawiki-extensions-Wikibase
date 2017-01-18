@@ -1,0 +1,141 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efb0bce_becc228d",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-18T16:26:18Z",
+      "side": 1,
+      "message": "I suggest to do this wiring in a later patch. Basically, have this patch only introducing the new service classes (with tests), and start using them in an other patch.\n\nNote that this code will currently create the same ChangeOps twice.",
+      "revId": "45453a29facb91534c63474c1960994cf4437058",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_1eb1f6dc",
+        "filename": "repo/includes/ChangeOpDeserializers/AliasesChangeOpDeserializer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-18T16:26:18Z",
+      "side": 1,
+      "message": "I suggest some kind of TermChangeOpValidator.",
+      "revId": "45453a29facb91534c63474c1960994cf4437058",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_7ed90a2c",
+        "filename": "repo/includes/ChangeOpDeserializers/ChangeOpDeserializerFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-18T16:26:18Z",
+      "side": 1,
+      "message": "WikibaseChangeOpDeserializerFactory? Because this only supports stuff that is in Wikibase core.\n\nBut wait. I think this does not need a factory. This encapsulates some quite trivial constructors. Neither the constructor nor the getters have parameters, which is a string hint that a factory is not needed.",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 33
+      },
+      "revId": "45453a29facb91534c63474c1960994cf4437058",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_3efa7274",
+        "filename": "repo/includes/ChangeOpDeserializers/ClaimsChangeOpDeserializer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-18T16:26:18Z",
+      "side": 1,
+      "message": "Was the original code arranged like this? I wonder what the benefit is over a single loop with an if-else.",
+      "revId": "45453a29facb91534c63474c1960994cf4437058",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_9ed4c6ed",
+        "filename": "repo/includes/ChangeOpDeserializers/ClaimsChangeOpDeserializer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-18T16:26:18Z",
+      "side": 1,
+      "message": "Please rename to $statements.",
+      "range": {
+        "startLine": 88,
+        "startChar": 53,
+        "endLine": 88,
+        "endChar": 60
+      },
+      "revId": "45453a29facb91534c63474c1960994cf4437058",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_def11e94",
+        "filename": "repo/includes/ChangeOpDeserializers/ItemChangeOpDeserializer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-18T16:26:18Z",
+      "side": 1,
+      "message": "I believe it\u0027s ok to call this $factory. This would make the code below more readable.",
+      "range": {
+        "startLine": 12,
+        "startChar": 9,
+        "endLine": 12,
+        "endChar": 37
+      },
+      "revId": "45453a29facb91534c63474c1960994cf4437058",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_beee62af",
+        "filename": "repo/includes/ChangeOpDeserializers/SiteLinksChangeOpDeserializer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-18T16:26:18Z",
+      "side": 1,
+      "message": "Suggestion: Submit the easy stuff as a separate patch, and introduce this in a later one.",
+      "revId": "45453a29facb91534c63474c1960994cf4437058",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
