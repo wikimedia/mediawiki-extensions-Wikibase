@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_400d4838",
+        "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-18T23:06:35Z",
+      "side": 1,
+      "message": "As I see, all code is completely Redis-agnostic so more generic name should be used.",
+      "parentUuid": "4efb0bce_f1b09dda",
+      "range": {
+        "startLine": 9,
+        "startChar": 3,
+        "endLine": 9,
+        "endChar": 8
+      },
+      "revId": "cb7748d316a5a0193f6443531dd1172f8bfc8f47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_91c04931",
         "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
         "patchSetId": 4
@@ -48,6 +72,29 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_403b08c5",
+        "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-18T23:06:35Z",
+      "side": 1,
+      "message": "Here is probable bug:\nDB is not taken into account, so we can not acquire lock with the same name on different DBs. Same with lock release.",
+      "range": {
+        "startLine": 43,
+        "startChar": 9,
+        "endLine": 43,
+        "endChar": 55
+      },
+      "revId": "cb7748d316a5a0193f6443531dd1172f8bfc8f47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_71bdcdac",
         "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
         "patchSetId": 4
@@ -64,6 +111,29 @@
         "startChar": 17,
         "endLine": 76,
         "endChar": 31
+      },
+      "revId": "cb7748d316a5a0193f6443531dd1172f8bfc8f47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_5d2ad190",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-18T23:06:35Z",
+      "side": 1,
+      "message": "Is it needed to be imported?",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 10
       },
       "revId": "cb7748d316a5a0193f6443531dd1172f8bfc8f47",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
