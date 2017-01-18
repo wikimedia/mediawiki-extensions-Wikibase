@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efb0bce_be47824f",
+        "filename": "repo/tests/phpunit/includes/Content/EntityContentFactoryTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-18T14:13:32Z",
+      "side": 1,
+      "message": "There are multiple ways to get a TestUser in MediaWikiTestCase. Don\u0027t they do what is needed here?",
+      "revId": "539ee6822f12ea06915e27d607ff6bf7463bbab7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_be30a2e6",
+        "filename": "repo/tests/phpunit/includes/Content/EntityContentFactoryTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-18T14:13:32Z",
+      "side": 1,
+      "message": "Why the prefix?",
+      "range": {
+        "startLine": 37,
+        "startChar": 17,
+        "endLine": 37,
+        "endChar": 19
+      },
+      "revId": "539ee6822f12ea06915e27d607ff6bf7463bbab7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_5e752e91",
+        "filename": "repo/tests/phpunit/includes/Content/EntityContentFactoryTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-18T14:13:32Z",
+      "side": 1,
+      "message": "I wonder why this needs to be in the setUp() method. Could as well be in setUpBeforeClass(). Or much more trivial: in a private getUser() method that instantiates and returns the static object.",
+      "revId": "539ee6822f12ea06915e27d607ff6bf7463bbab7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_5e4e4e73",
+        "filename": "repo/tests/phpunit/includes/Content/EntityContentFactoryTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-18T14:13:32Z",
+      "side": 1,
+      "message": "We don\u0027t need the TestUser object below. It would be enough to store the result of …-\u003egetUser() in this variable, and name it accordingly.",
+      "revId": "539ee6822f12ea06915e27d607ff6bf7463bbab7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_9e2de68d",
+        "filename": "repo/tests/phpunit/includes/Content/EntityContentFactoryTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-18T14:13:32Z",
+      "side": 1,
+      "message": "Confusing variable name. This is not a TestUser object but a User.",
+      "range": {
+        "startLine": 302,
+        "startChar": 3,
+        "endLine": 302,
+        "endChar": 11
+      },
+      "revId": "539ee6822f12ea06915e27d607ff6bf7463bbab7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
