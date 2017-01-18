@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Content;
 
 use InvalidArgumentException;
 use OutOfBoundsException;
+use TestUser;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -13,7 +14,6 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Repo\Tests\PermissionsHelper;
 
 /**
  * @covers Wikibase\Repo\Content\EntityContentFactory
@@ -30,6 +30,41 @@ use Wikibase\Repo\Tests\PermissionsHelper;
  * @author Daniel Kinzler
  */
 class EntityContentFactoryTest extends \MediaWikiTestCase {
+
+	/**
+	 * @var TestUser|null
+	 */
+	private static $wbTestUser = null;
+
+	protected function setUp() {
+		parent::setUp();
+		$this->setupUser();
+	}
+
+	private function setupUser() {
+		if ( !self::$wbTestUser ) {
+			self::$wbTestUser = new TestUser(
+				__CLASS__,
+				'Test Editor',
+				'test_editor@example.com',
+				array( 'wbeditor' )
+			);
+		}
+
+		$this->setMwGlobals( 'wgUser', self::$wbTestUser->getUser() );
+		$this->setMwGlobals( 'wgGroupPermissions', array( '*' => array(
+			'property-create' => true,
+			'createpage' => true,
+			'bot' => true,
+			'item-term' => true,
+			'item-merge' => true,
+			'item-redirect' => true,
+			'property-term' => true,
+			'read' => true,
+			'edit' => true,
+			'writeapi' => true
+		) ) );
+	}
 
 	/**
 	 * @dataProvider contentModelsProvider
@@ -283,17 +318,12 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 			$entity->setId( new ItemId( $id ) );
 		}
 
-		$this->stashMwGlobals( 'wgUser' );
-		$this->stashMwGlobals( 'wgGroupPermissions' );
-
-		PermissionsHelper::applyPermissions(
-			// set permissions for implicit groups
-			array( '*' => $permissions,
-					'user' => $permissions,
-					'autoconfirmed' => $permissions,
-					'emailconfirmed' => $permissions ),
-			array() // remove all groups not implied
-		);
+		$this->setMwGlobals( 'wgUser', self::$wbTestUser->getUser() );
+		$this->setMwGlobals( 'wgGroupPermissions', array(
+			'*' => $permissions,
+			'user' => $permissions,
+			'autoconfirmed' => $permissions,
+			'emailconfirmed' => $permissions ) );
 
 		$factory = $this->newFactory();
 
