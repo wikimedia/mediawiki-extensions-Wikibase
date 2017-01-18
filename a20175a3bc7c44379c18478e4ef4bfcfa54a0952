@@ -16,6 +16,24 @@
       "revId": "a20175a3bc7c44379c18478e4ef4bfcfa54a0952",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_838c713b",
+        "filename": "repo/tests/phpunit/includes/WikibaseHtmlSnakFormatterFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-18T10:40:39Z",
+      "side": 1,
+      "message": "I was planning to do this but missed it somehow. Thanks!",
+      "parentUuid": "4efb0bce_039be1c2",
+      "revId": "a20175a3bc7c44379c18478e4ef4bfcfa54a0952",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
