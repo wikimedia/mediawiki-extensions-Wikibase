@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efb0bce_bd90a547",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-18T22:34:57Z",
+      "side": 1,
+      "message": "This property is only used during object construction, so can be converted to local variable.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 34
+      },
+      "revId": "0fb8772d04a56e53dff252972b267497e9a93870",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
