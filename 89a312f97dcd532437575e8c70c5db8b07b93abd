@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efb0bce_5e1beed4",
+        "filename": "client/includes/DataRetrievalServiceFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-18T16:34:37Z",
+      "side": 1,
+      "message": "This is very unspecific. Is this really about *any* kind of \"data\"? The three methods in here are about: actual Entities, Property meta data, and Terms. So it\u0027s more an \"EntityDataRetrievalServiceFactory\"?\n\nNot the longest class name we have. ;-)",
+      "range": {
+        "startLine": 14,
+        "startChar": 10,
+        "endLine": 14,
+        "endChar": 14
+      },
+      "revId": "89a312f97dcd532437575e8c70c5db8b07b93abd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_9e2166f9",
+        "filename": "client/includes/Store/Sql/DirectSqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-18T16:34:37Z",
+      "side": 1,
+      "message": "I suggest $dataRetrievalServices as a variable name that different from the class name (on purpose) to make the code more readable.",
+      "range": {
+        "startLine": 114,
+        "startChar": 9,
+        "endLine": 114,
+        "endChar": 37
+      },
+      "revId": "89a312f97dcd532437575e8c70c5db8b07b93abd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
