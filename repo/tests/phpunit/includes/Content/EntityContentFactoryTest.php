@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Content;
 
 use InvalidArgumentException;
 use OutOfBoundsException;
+use TestUser;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -13,7 +14,6 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Repo\Tests\PermissionsHelper;
 
 /**
  * @covers Wikibase\Repo\Content\EntityContentFactory
@@ -30,6 +30,22 @@ use Wikibase\Repo\Tests\PermissionsHelper;
  * @author Daniel Kinzler
  */
 class EntityContentFactoryTest extends \MediaWikiTestCase {
+
+	/**
+	 * @var TestUser|null
+	 */
+	private static $wbTestUser = null;
+
+	protected function setUp() {
+		parent::setUp();
+		if ( !self::$wbTestUser ) {
+			self::$wbTestUser = new TestUser(
+				__CLASS__,
+				'Test Editor',
+				'test_editor@example.com'
+			);
+		}
+	}
 
 	/**
 	 * @dataProvider contentModelsProvider
@@ -283,32 +299,28 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 			$entity->setId( new ItemId( $id ) );
 		}
 
-		$this->stashMwGlobals( 'wgUser' );
-		$this->stashMwGlobals( 'wgGroupPermissions' );
-
-		PermissionsHelper::applyPermissions(
-			// set permissions for implicit groups
-			array( '*' => $permissions,
-					'user' => $permissions,
-					'autoconfirmed' => $permissions,
-					'emailconfirmed' => $permissions ),
-			array() // remove all groups not implied
-		);
+		$testUser = self::$wbTestUser->getUser();
+		$this->setMwGlobals( 'wgUser', $testUser );
+		$this->setMwGlobals( 'wgGroupPermissions', array(
+			'*' => $permissions,
+			'user' => $permissions,
+			'autoconfirmed' => $permissions,
+			'emailconfirmed' => $permissions ) );
 
 		$factory = $this->newFactory();
 
 		if ( isset( $expectations['getPermissionStatusForEntity'] ) ) {
-			$status = $factory->getPermissionStatusForEntity( $wgUser, $action, $entity );
+			$status = $factory->getPermissionStatusForEntity( $testUser, $action, $entity );
 			$this->assertEquals( $expectations['getPermissionStatusForEntity'], $status->isOK() );
 		}
 
 		if ( isset( $expectations['getPermissionStatusForEntityType'] ) ) {
-			$status = $factory->getPermissionStatusForEntityType( $wgUser, $action, $entity->getType() );
+			$status = $factory->getPermissionStatusForEntityType( $testUser, $action, $entity->getType() );
 			$this->assertEquals( $expectations['getPermissionStatusForEntityType'], $status->isOK() );
 		}
 
 		if ( isset( $expectations['getPermissionStatusForEntityId'] ) ) {
-			$status = $factory->getPermissionStatusForEntityId( $wgUser, $action, $entity->getId() );
+			$status = $factory->getPermissionStatusForEntityId( $testUser, $action, $entity->getId() );
 			$this->assertEquals( $expectations['getPermissionStatusForEntityId'], $status->isOK() );
 		}
 	}
