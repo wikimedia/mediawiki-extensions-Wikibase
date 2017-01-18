@@ -2,13 +2,19 @@
 
 namespace Wikibase\Client;
 
+use LogicException;
 use MediaWiki\Services\ServiceContainer;
 use Wikibase\Client\Store\RepositoryServiceContainer;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Term\TermBuffer;
+use Wikibase\EntityRevision;
 use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\SettingsArray;
 
 /**
@@ -16,11 +22,11 @@ use Wikibase\SettingsArray;
  * particular input, based on the repository the particular input entity belongs to.
  * Dispatching services provide a way of using entities from multiple repositories.
  *
- * Services are defined by loading a wiring array(s), or by using defineService method.
+ * Services are defined by loading wiring array(s), or by using defineService method.
  *
  * @license GPL-2.0+
  */
-class DispatchingServiceFactory extends ServiceContainer implements DataRetrievalServiceFactory {
+class DispatchingServiceFactory extends ServiceContainer implements DataRetrievalServiceFactory, EntityStoreWatcher {
 
 	/**
 	 * @var RepositoryServiceContainer[]
@@ -75,6 +81,23 @@ class DispatchingServiceFactory extends ServiceContainer implements DataRetrieva
 	}
 
 	/**
+	 * Overrides repository service containers configured in the instance.
+	 * This is only intended to be used in tests.
+	 *
+	 * @param RepositoryServiceContainer[] $containers
+	 *
+	 * @throws LogicException If MW_PHPUNIT_TEST is not defined, to avoid this
+	 * method being abused in production code.
+	 */
+	public function overrideRepositoryServiceContainers( array $containers ) {
+		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
+			throw new LogicException( 'Overriding containers is only supported in test mode' );
+		}
+
+		$this->repositoryServiceContainers = $containers;
+	}
+
+	/**
 	 * Returns a map of id prefix mappings defined for configured foreign repositories.
 	 *
 	 * @param array[] $settings Repository definitions mapping repository names to settings
@@ -117,6 +140,52 @@ class DispatchingServiceFactory extends ServiceContainer implements DataRetrieva
 				$serviceMap[$repositoryName] = $container->getService( $service );
 		}
 		return $serviceMap;
+	}
+
+	/**
+	 * @see EntityStoreWatcher::entityUpdated
+	 *
+	 * @param EntityRevision $entityRevision
+	 */
+	public function entityUpdated( EntityRevision $entityRevision ) {
+		/** @var PrefetchingWikiPageEntityMetaDataAccessor[] $entityPrefetchers */
+		$entityPrefetchers = $this->getServiceMap( 'EntityPrefetcher' );
+
+		$repositoryName = $entityRevision->getEntity()->getId()->getRepositoryName();
+		if ( isset( $entityPrefetchers[$repositoryName] ) ) {
+			$entityPrefetchers[$repositoryName]->entityUpdated( $entityRevision );
+		}
+	}
+
+	/**
+	 * @see EntityStoreWatcher::entityDeleted
+	 *
+	 * @param EntityId $entityId
+	 */
+	public function entityDeleted( EntityId $entityId ) {
+		/** @var PrefetchingWikiPageEntityMetaDataAccessor[] $entityPrefetchers */
+		$entityPrefetchers = $this->getServiceMap( 'EntityPrefetcher' );
+
+		$repositoryName = $entityId->getRepositoryName();
+		if ( isset( $entityPrefetchers[$repositoryName] ) ) {
+			$entityPrefetchers[$repositoryName]->entityDeleted( $entityId );
+		}
+	}
+
+	/**
+	 * @see EntityStoreWatcher::redirectUpdated
+	 *
+	 * @param EntityRedirect $entityRedirect
+	 * @param int $revisionId
+	 */
+	public function redirectUpdated( EntityRedirect $entityRedirect, $revisionId ) {
+		/** @var PrefetchingWikiPageEntityMetaDataAccessor[] $entityPrefetchers */
+		$entityPrefetchers = $this->getServiceMap( 'EntityPrefetcher' );
+
+		$repositoryName = $entityRedirect->getEntityId()->getRepositoryName();
+		if ( isset( $entityPrefetchers[$repositoryName] ) ) {
+			$entityPrefetchers[$repositoryName]->redirectUpdated( $entityRedirect, $revisionId );
+		}
 	}
 
 	/**
