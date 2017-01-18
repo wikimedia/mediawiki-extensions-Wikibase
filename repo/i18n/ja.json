@@ -16,7 +16,8 @@
 			"Afaz",
 			"Higa4",
 			"ネイ",
-			"おはぐろ蜻蛉"
+			"おはぐろ蜻蛉",
+			"Dgstranz"
 		]
 	},
 	"wikibase-desc": "構造化データのリポジトリ",
@@ -54,6 +55,8 @@
 	"wikibase-description-edit-placeholder-language-aware": "説明を$1で入力してください",
 	"wikibase-aliases-edit-placeholder": "いくつかの別名を入力",
 	"wikibase-aliases-edit-placeholder-language-aware": "別名をいくつか$1で入力してください",
+	"wikibase-aliases-edit-label": "別名（複数ある場合、縦線|で区切り）:",
+	"wikibase-content-language-edit-not-recognized-language": "入力された言語コードが認識できません。",
 	"wikibase-diffview-reference": "情報源",
 	"wikibase-diffview-rank": "ランク",
 	"wikibase-diffview-rank-preferred": "推奨ランク",
@@ -172,11 +175,9 @@
 	"wikibase-newitem-page": "最初にリンクされたページの名前",
 	"wikibase-newitem-no-external-page": "ページ \"$2\" は\"$1\"で見つかりません。",
 	"wikibase-newitem-not-recognized-siteid": "指定したサイト識別子を認識できませんでした。",
-	"wikibase-newitem-not-recognized-language": "入力された言語コードが認識できません。",
 	"wikibase-newentity-language": "言語:",
 	"wikibase-newentity-label": "ラベル:",
 	"wikibase-newentity-description": "説明:",
-	"wikibase-newentity-aliases": "別名（複数ある場合、縦線|で区切り）:",
 	"wikibase-newentity-submit": "作成",
 	"special-setlabel": "ラベルの設定",
 	"wikibase-setlabel-introfull": "[[$1]] に対する$2のラベルを設定しています。",
@@ -299,6 +300,7 @@
 	"wikibase-conflict-patched": "あなたの編集内容を最新版に反映させました。",
 	"wikibase-restoreold": "復元",
 	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] による版 $3 を復元",
+	"wikibase-entity-summary-undo": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|トーク]]) による版 $3 を取り消し",
 	"wikibase-no-direct-editing": "$1 名前空間では直接の編集は無効になっています",
 	"wikibase-noentity": "この実体は存在しません。<span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} 関連する記録を検索し]</span>どこに行ったのか調べることができます。",
 	"wikibase-noentity-createone": "[[$1|新規作成]]することもできます。",

@@ -323,6 +323,7 @@
 	"wikibase-conflict-patched": "Su edición fue modificada en la versión más reciente.",
 	"wikibase-restoreold": "restaurar",
 	"wikibase-entity-summary-restore": "Se restauró la revisión $3 de [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
+	"wikibase-entity-summary-undo": "Se ha deshecho la revisión $3 de [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|disc.]])",
 	"wikibase-no-direct-editing": "La edición directa está desactivada en el espacio de nombres $1",
 	"wikibase-noentity": "Esta entidad no existe. Puedes [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} buscar en los registros relacionados] para encontrarla.",
 	"wikibase-noentity-createone": "También puedes [[$1|crear una nueva]].",
