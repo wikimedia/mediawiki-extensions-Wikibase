@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efb0bce_de6ebe29",
+        "filename": "client/includes/Store/RepositoryServiceWiring.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-18T16:37:00Z",
+      "side": 1,
+      "message": "It\u0027s a bit weird to see an \"EntityPrefetcher\" being turned into a \"$metaDataAccessor\", like these two words are describing the same concept.",
+      "revId": "94894b28d17e37c3a1fded683a627f0d72478426",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
