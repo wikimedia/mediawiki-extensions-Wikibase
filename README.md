@@ -10,6 +10,7 @@ Introduction to Wikibase
 The Wikibase.git package is part of the [Wikibase software](http://wikiba.se/) and consists of
 three interconnected extensions:
 
+
 * Wikibase Repository (in the directory repo)
 * Wikibase Client (in the directory client)
 * WikibaseLib (in the directory lib)
