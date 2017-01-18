@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Content;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Title;
+use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -274,9 +275,9 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 	 * @dataProvider provideGetPermissionStatusForEntity
 	 */
 	public function testGetPermissionStatusForEntity( $action, array $permissions, $id, array $expectations ) {
-		global $wgUser;
 
 		$entity = new Item();
+		$user = new User( 'Foo' );
 
 		if ( $id ) {
 			// "exists"
@@ -288,27 +289,30 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 
 		PermissionsHelper::applyPermissions(
 			// set permissions for implicit groups
-			array( '*' => $permissions,
-					'user' => $permissions,
-					'autoconfirmed' => $permissions,
-					'emailconfirmed' => $permissions ),
-			array() // remove all groups not implied
+			[
+				'*' => $permissions,
+				'user' => $permissions,
+				'autoconfirmed' => $permissions,
+				'emailconfirmed' => $permissions
+			],
+			[], // remove all groups not implied
+			$user
 		);
 
 		$factory = $this->newFactory();
 
 		if ( isset( $expectations['getPermissionStatusForEntity'] ) ) {
-			$status = $factory->getPermissionStatusForEntity( $wgUser, $action, $entity );
+			$status = $factory->getPermissionStatusForEntity( $user, $action, $entity );
 			$this->assertEquals( $expectations['getPermissionStatusForEntity'], $status->isOK() );
 		}
 
 		if ( isset( $expectations['getPermissionStatusForEntityType'] ) ) {
-			$status = $factory->getPermissionStatusForEntityType( $wgUser, $action, $entity->getType() );
+			$status = $factory->getPermissionStatusForEntityType( $user, $action, $entity->getType() );
 			$this->assertEquals( $expectations['getPermissionStatusForEntityType'], $status->isOK() );
 		}
 
 		if ( isset( $expectations['getPermissionStatusForEntityId'] ) ) {
-			$status = $factory->getPermissionStatusForEntityId( $wgUser, $action, $entity->getId() );
+			$status = $factory->getPermissionStatusForEntityId( $user, $action, $entity->getId() );
 			$this->assertEquals( $expectations['getPermissionStatusForEntityId'], $status->isOK() );
 		}
 	}

@@ -21,24 +21,31 @@ class PermissionsHelper {
 	 *
 	 * @todo: try to do this without messing with the globals, or at least without hardcoding them.
 	 */
-	public static function applyPermissions( array $permissions = null, array $groups = null ) {
+	public static function applyPermissions(
+		array $permissions = null,
+		array $groups = null,
+		User $user = null
+	) {
 		global $wgGroupPermissions;
-		global $wgUser;
+		if ( $user === null ) {
+			global $wgUser;
+			$user = $wgUser;
+		}
 
 		if ( !$permissions ) {
 			return;
 		}
 
-		$wgUser->addToDatabase();
+		$user->addToDatabase();
 
 		if ( is_array( $groups ) ) {
-			$oldGroups = $wgUser->getGroups();
+			$oldGroups = $user->getGroups();
 			foreach ( $oldGroups as $group ) {
-				$wgUser->removeGroup( $group );
+				$user->removeGroup( $group );
 			}
 
 			foreach ( $groups as $group ) {
-				$wgUser->addGroup( $group );
+				$user->addGroup( $group );
 			}
 		}
 
@@ -51,8 +58,8 @@ class PermissionsHelper {
 		}
 
 		// reset rights cache
-		$wgUser->addGroup( "dummy" );
-		$wgUser->removeGroup( "dummy" );
+		$user->addGroup( "dummy" );
+		$user->removeGroup( "dummy" );
 	}
 
 }
