@@ -20,7 +20,7 @@ use Wikibase\SettingsArray;
  *
  * @license GPL-2.0+
  */
-class DispatchingServiceFactory extends ServiceContainer {
+class DispatchingServiceFactory extends ServiceContainer implements EntityDataRetrievalServiceFactory {
 
 	/**
 	 * @var RepositoryServiceContainer[]
