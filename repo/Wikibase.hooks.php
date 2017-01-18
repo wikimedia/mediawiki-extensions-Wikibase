@@ -664,7 +664,7 @@ final class RepoHooks {
 	 *
 	 * @return bool
 	 */
-	public static function onShowSearchHitTitle( &$link_t, &$titleSnippet, SearchResult $result ) {
+	public static function onShowSearchHitTitle( $link_t, &$titleSnippet, SearchResult $result ) {
 		$title = $result->getTitle();
 		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
