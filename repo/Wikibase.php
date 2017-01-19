@@ -181,7 +181,18 @@ call_user_func( function() {
 			);
 		}
 	];
-	$wgAPIModules['wbsetlabel'] = Wikibase\Repo\Api\SetLabel::class;
+	$wgAPIModules['wbsetlabel'] = [
+		'class' => Wikibase\Repo\Api\SetLabel::class,
+		'factory' => function ( ApiMain $mainModule, $moduleName ) {
+
+			return new \Wikibase\Repo\Api\SetLabel(
+				$mainModule,
+				$moduleName,
+				Wikibase\Repo\WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider()
+					->getFingerprintChangeOpFactory()
+			);
+		}
+	];
 	$wgAPIModules['wbsetdescription'] = Wikibase\Repo\Api\SetDescription::class;
 	$wgAPIModules['wbsearchentities'] = Wikibase\Repo\Api\SearchEntities::class;
 	$wgAPIModules['wbsetaliases'] = Wikibase\Repo\Api\SetAliases::class;
