@@ -6,7 +6,11 @@ use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 
 /**
- * Interface for services that can construct a ChangeOp from a JSON style array structure describing changes to an entity.
+ * Interface for services that can construct a ChangeOp from a JSON style array structure describing
+ * changes to an entity.
+ *
+ * Implementations are encouraged to provide a detailed documentation of the serialization format
+ * they are supporting in @see docs/change-op-serializations.wiki.
  *
  * @license GPL-2.0+
  * @author Amir Sarabadani <ladsgroup@gmail.com>
