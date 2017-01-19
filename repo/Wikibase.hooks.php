@@ -658,21 +658,26 @@ final class RepoHooks {
 	 *
 	 * @todo highlight the Q## part of the entity link formatting and highlight label matches
 	 *
-	 * @param string &$link_t
+	 * @param Title &$title
 	 * @param string &$titleSnippet
 	 * @param SearchResult $result
-	 *
-	 * @return bool
+	 * @param string $terms
+	 * @param SpecialSearch $specialSearch
+	 * @param string[] &$queryString
 	 */
-	public static function onShowSearchHitTitle( &$link_t, &$titleSnippet, SearchResult $result ) {
-		$title = $result->getTitle();
+	public static function onShowSearchHitTitle(
+		Title &$title,
+		&$titleSnippet,
+		SearchResult $result,
+		$terms,
+		SpecialSearch $specialSearch,
+		array &$queryString
+	) {
 		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
 		if ( $namespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
 			$titleSnippet = $title->getPrefixedText();
 		}
-
-		return true;
 	}
 
 	/**
