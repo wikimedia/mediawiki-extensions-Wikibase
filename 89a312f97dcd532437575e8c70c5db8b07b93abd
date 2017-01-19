@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_546f468f",
+        "filename": "client/includes/DataRetrievalServiceFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-19T16:36:04Z",
+      "side": 1,
+      "message": "I am convinced by this argument. Will rename.",
+      "parentUuid": "4efb0bce_d45a16f9",
+      "range": {
+        "startLine": 14,
+        "startChar": 10,
+        "endLine": 14,
+        "endChar": 14
+      },
+      "revId": "89a312f97dcd532437575e8c70c5db8b07b93abd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_9e2166f9",
         "filename": "client/includes/Store/Sql/DirectSqlStore.php",
         "patchSetId": 2
