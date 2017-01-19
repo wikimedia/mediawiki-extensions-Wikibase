@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efb0bce_2e791dc4",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-19T11:32:06Z",
+      "side": 1,
+      "message": "`$title` is unchanged, so reference is not needed.",
+      "range": {
+        "startLine": 669,
+        "startChar": 8,
+        "endLine": 669,
+        "endChar": 9
+      },
+      "revId": "56f994d2a8523622e6226d8af4e614a517dd1a03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_6e4dd59a",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-19T11:32:06Z",
+      "side": 1,
+      "message": "These are unused. \nIs it needed to add them?",
+      "range": {
+        "startLine": 671,
+        "startChar": 0,
+        "endLine": 674,
+        "endChar": 21
+      },
+      "revId": "56f994d2a8523622e6226d8af4e614a517dd1a03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
