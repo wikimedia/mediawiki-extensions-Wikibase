@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_c02138ae",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoIntegrationTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-19T01:00:46Z",
+      "side": 1,
+      "message": "I guess it\u0027s a matter of taste. To me, it\u0027s more intuitive to have the scaffolding at the top, and the meat at the bottom.",
+      "parentUuid": "4efb0bce_59530844",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 2
+      },
+      "revId": "7f8f7fdc9916780bd218529749e9ffa02e992aee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_b9a67c4e",
         "filename": "repo/tests/phpunit/includes/WikibaseRepoIntegrationTest.php",
         "patchSetId": 13
@@ -36,6 +60,30 @@
       "writtenOn": "2017-01-18T18:47:45Z",
       "side": 1,
       "message": "Can we enable client in test so it will always run correctly?",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 3
+      },
+      "revId": "7f8f7fdc9916780bd218529749e9ffa02e992aee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_a0163c58",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoIntegrationTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-19T01:00:46Z",
+      "side": 1,
+      "message": "No, we want to be able to test with and without client enabled.",
+      "parentUuid": "4efb0bce_b9a67c4e",
       "range": {
         "startLine": 87,
         "startChar": 0,
