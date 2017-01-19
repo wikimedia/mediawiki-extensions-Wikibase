@@ -66,15 +66,6 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 :'''Note:''' This may be removed once we can get this information from the sites table.
 ;repoArticlePath: The repository's article path. Default is $wgArticlePath, assuming that the repo's article path is the same as this wiki's script path.
 :'''Note:''' This may be removed once we can get this information from the sites table.
-;sort: How to sort language links in the side bar. Possible values:
-:;<code>'code'</code>: By language code
-:;<code>'alphabetic'</code>: [[meta:Interwiki_sorting_order|By language name]] (<code>meta-native-languagename</code>)
-:;<code>'alphabetic_revised'</code>: [[meta:Interwiki_sorting_order|By language name (alternative)]] (<code>meta-native-languagename-firstword</code>)
-:;<code>'none'</code>: Don't sort. Basically, the order of the links is not guaranteed. '''Deprecated''' and dysfunctional.
-: Default is <code>'code'</code>.
-;sortPrepend: List of language codes to put on top of the language links in the side bar. Default: <code>array()</code>.
-:'''Note''': this may change to use global wiki IDs instead of language codes in the future.
-;interwikiSortOrders: Array of arrays of language codes, specifying custom sort orders for interwiki links; default options provided include <code>'code'</code>, <code>'alphabetic'</code>, <code>'alphabetic_revised'</code>, <code>'alphabetic_sr'</code>, and <code>'alphabetic_fy'</code>.
 ;siteGlobalID: This site's global ID (e.g. <code>'itwiki'</code>), as used in the sites table. Default: <code>$wgDBname</code>.
 ;siteLocalID: This site's local ID resp. language code (e.g. <code>'it'</code>). Default: <code>$wgLanguageCode</code>.
 :'''Note:''' This setting will be removed once we can take this information from the sites table.
