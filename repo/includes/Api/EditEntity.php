@@ -865,8 +865,8 @@ class EditEntity extends ModifyEntity {
 	/**
 	 * Check some of the supplied data for multilang arg
 	 *
-	 * @param array $arg The argument array to verify
-	 * @param string $langCode The language code used in the value part
+	 * @param string[] $arg The argument array to verify
+	 * @param int|string $langCode The language code used in the value part
 	 */
 	private function validateMultilangArgs( $arg, $langCode ) {
 		$this->assertArray( $arg, 'An array was expected, but not found in the json for the '
