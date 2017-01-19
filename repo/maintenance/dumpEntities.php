@@ -8,10 +8,10 @@ use Wikibase\Dumpers\DumpGenerator;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
-use Wikibase\Repo\Disposable;
 use Wikibase\Repo\IO\EntityIdReader;
 use Wikibase\Repo\IO\LineReader;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
+use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -177,7 +177,7 @@ abstract class DumpScript extends Maintenance {
 		$dumper->generateDump( $idStream );
 		\MediaWiki\restoreWarnings();
 
-		if ( $idStream instanceof Disposable ) {
+		if ( $idStream instanceof EntityIdReader ) {
 			// close stream / free resources
 			$idStream->dispose();
 		}
@@ -189,7 +189,7 @@ abstract class DumpScript extends Maintenance {
 	 * @param null|string $entityType
 	 * @param ExceptionHandler|null $exceptionReporter
 	 *
-	 * @return EntityIdPager a stream of EntityId objects
+	 * @return EntityIdReader|SqlEntityIdPager a stream of EntityId objects
 	 */
 	private function makeIdStream( $entityType = null, ExceptionHandler $exceptionReporter = null ) {
 		$listFile = $this->getOption( 'list-file' );
@@ -215,7 +215,7 @@ abstract class DumpScript extends Maintenance {
 	/**
 	 * @param string|null $entityType
 	 *
-	 * @return EntityIdPager
+	 * @return SqlEntityIdPager
 	 */
 	private function makeIdQueryStream( $entityType ) {
 		return $this->sqlEntityIdPagerFactory->newSqlEntityIdPager( $entityType, $this->getRedirectMode() );
@@ -226,7 +226,7 @@ abstract class DumpScript extends Maintenance {
 	 * @param ExceptionHandler|null $exceptionReporter
 	 *
 	 * @throws MWException
-	 * @return EntityIdPager
+	 * @return EntityIdReader
 	 */
 	private function makeIdFileStream( $listFile, ExceptionHandler $exceptionReporter = null ) {
 		$input = fopen( $listFile, 'r' );

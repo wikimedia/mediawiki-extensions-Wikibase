@@ -7,7 +7,6 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\RethrowingExceptionHandler;
-use Wikibase\Repo\Disposable;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 
 /**
@@ -16,7 +15,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdPager;
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
-class EntityIdReader implements EntityIdPager, Disposable {
+class EntityIdReader implements EntityIdPager {
 
 	/**
 	 * @var LineReader

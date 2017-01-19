@@ -4,7 +4,6 @@ namespace Wikibase\Repo\IO;
 
 use InvalidArgumentException;
 use Iterator;
-use Wikibase\Repo\Disposable;
 
 /**
  * LineReader allows iterating over the lines of a file.
@@ -14,7 +13,7 @@ use Wikibase\Repo\Disposable;
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
-class LineReader implements Iterator, Disposable {
+class LineReader implements Iterator {
 
 	/**
 	 * @var resource
