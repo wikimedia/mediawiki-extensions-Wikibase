@@ -65,11 +65,6 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	 */
 	private function newSettings( array $settings ) {
 		$defaults = array(
-			'sort' => 'code',
-			'sortPrepend' => array(),
-			'interwikiSortOrders' => array( 'alphabetic' => array(
-				'ar', 'de', 'en', 'sv', 'zh'
-			) ),
 			'siteGlobalID' => 'enwiki',
 			'languageLinkSiteGroup' => 'wikipedia',
 			'namespaces' => array( NS_MAIN, NS_CATEGORY ),
