@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_aeef4d81",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoIntegrationTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-19T11:02:33Z",
+      "side": 1,
+      "message": "Then can we have two tests: one with client enabled and another with client disabled?",
+      "parentUuid": "4efb0bce_a0163c58",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 3
+      },
+      "revId": "7f8f7fdc9916780bd218529749e9ffa02e992aee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_d97818c2",
         "filename": "repo/tests/phpunit/includes/WikibaseRepoIntegrationTest.php",
         "patchSetId": 13
