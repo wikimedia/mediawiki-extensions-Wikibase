@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_f46512ab",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoIntegrationTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2017-01-19T16:36:47Z",
+      "side": 1,
+      "message": "Yes, although the tests may have to be in different classes / files with different @groups annotations",
+      "parentUuid": "4efb0bce_aeef4d81",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 3
+      },
+      "revId": "7f8f7fdc9916780bd218529749e9ffa02e992aee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_d97818c2",
         "filename": "repo/tests/phpunit/includes/WikibaseRepoIntegrationTest.php",
         "patchSetId": 13
