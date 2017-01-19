@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Tests;
+namespace Wikibase\Repo\Tests\View;
 
 use PHPUnit_Framework_TestCase;
 use ValueFormatters\FormatterOptions;
@@ -10,10 +10,10 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Repo\WikibaseHtmlSnakFormatterFactory;
+use Wikibase\Repo\View\WikibaseHtmlSnakFormatterFactory;
 
 /**
- * @covers Wikibase\Repo\WikibaseHtmlSnakFormatterFactory
+ * @covers Wikibase\Repo\View\WikibaseHtmlSnakFormatterFactory
  *
  * @group Wikibase
  *

@@ -120,6 +120,7 @@ use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
+use Wikibase\Repo\View\WikibaseHtmlSnakFormatterFactory;
 use Wikibase\SettingsArray;
 use Wikibase\SqlStore;
 use Wikibase\Store;
@@ -1658,7 +1659,7 @@ class WikibaseRepo {
 		return new ViewFactory(
 			$this->getEntityIdHtmlLinkFormatterFactory(),
 			new EntityIdLabelFormatterFactory(),
-			$this->getHtmlSnakFormatterFactory(),
+			new WikibaseHtmlSnakFormatterFactory( $this->getSnakFormatterFactory() ),
 			$statementGrouperBuilder->getStatementGrouper(),
 			$propertyOrderProvider,
 			$this->getSiteLookup(),
@@ -1783,10 +1784,6 @@ class WikibaseRepo {
 		}
 
 		return $this->cachingCommonsMediaFileNameLookup;
-	}
-
-	private function getHtmlSnakFormatterFactory() {
-		return new WikibaseHtmlSnakFormatterFactory( $this->getSnakFormatterFactory() );
 	}
 
 	public function getEntityTypesConfigValueProvider() {
