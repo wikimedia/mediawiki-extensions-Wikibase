@@ -7,8 +7,6 @@ namespace Wikibase\Repo;
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
- *
- * @todo make this reusable outside Wikibase
  */
 interface Disposable {
 
