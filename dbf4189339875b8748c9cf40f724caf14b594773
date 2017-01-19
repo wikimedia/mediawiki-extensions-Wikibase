@@ -22,6 +22,30 @@
       "revId": "dbf4189339875b8748c9cf40f724caf14b594773",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_d49fb6b7",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 868,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-19T16:20:39Z",
+      "side": 1,
+      "message": "Could be, yes. All the array keys this function cares about are strings, that\u0027s why I changed it like that.",
+      "parentUuid": "4efb0bce_f416324c",
+      "range": {
+        "startLine": 868,
+        "startChar": 11,
+        "endLine": 868,
+        "endChar": 17
+      },
+      "revId": "dbf4189339875b8748c9cf40f724caf14b594773",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
