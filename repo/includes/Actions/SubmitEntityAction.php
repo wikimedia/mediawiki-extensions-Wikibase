@@ -77,13 +77,14 @@ class SubmitEntityAction extends EditEntityAction {
 	 */
 	public function undo() {
 		$request = $this->getRequest();
+		$undidRevId = $request->getInt( 'undo' );
 		$title = $this->getTitle();
 
 		if ( !$request->wasPosted() || !$request->getCheck( 'wpSave' ) ) {
-			$args = array( 'action' => 'edit' );
+			$args = [ 'action' => 'edit' ];
 
-			if ( $request->getCheck( 'undo' ) ) {
-				$args['undo'] = $request->getInt( 'undo' );
+			if ( $undidRevId !== 0 ) {
+				$args['undo'] = $undidRevId;
 			}
 
 			if ( $request->getCheck( 'undoafter' ) ) {
@@ -127,7 +128,7 @@ class SubmitEntityAction extends EditEntityAction {
 			}
 
 			$editToken = $request->getText( 'wpEditToken' );
-			$status = $this->attemptSave( $title, $patchedContent, $summary, $editToken );
+			$status = $this->attemptSave( $title, $patchedContent, $summary, $undidRevId, $editToken );
 		}
 
 		if ( $status->isOK() ) {
@@ -193,11 +194,12 @@ class SubmitEntityAction extends EditEntityAction {
 	 * @param Title $title
 	 * @param Content $content
 	 * @param string $summary
+	 * @param int $undidRevId
 	 * @param string $editToken
 	 *
 	 * @return Status
 	 */
-	private function attemptSave( Title $title, Content $content, $summary, $editToken ) {
+	private function attemptSave( Title $title, Content $content, $summary, $undidRevId, $editToken ) {
 		$status = $this->getEditTokenStatus( $editToken );
 
 		if ( !$status->isOK() ) {
@@ -221,8 +223,8 @@ class SubmitEntityAction extends EditEntityAction {
 			false,
 			$this->getUser(),
 			null,
-			array(),
-			$this->getRequest()->getInt( 'undo', 0 )
+			[],
+			$undidRevId
 		);
 
 		if ( !$status->isOK() ) {
@@ -250,7 +252,7 @@ class SubmitEntityAction extends EditEntityAction {
 		$status = Status::newGood();
 
 		foreach ( $errors as $error ) {
-			call_user_func_array( array( $status, 'fatal' ), $error );
+			call_user_func_array( [ $status, 'fatal' ], $error );
 			$status->setResult( false );
 		}
 
