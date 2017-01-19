@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_746fe2c0",
+        "filename": "client/includes/DataRetrievalServiceFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-19T16:22:03Z",
+      "side": 1,
+      "message": "Suggested name would be fine in the current state of this class, I think.\n\nBut this is supposed to provide access to TermSearchInteractor (see I9212885005d4753661996acdac607dc4f88eb21d - note: quite outdated, needs major rebase, cleaning, etc.) so \"entity\" part of name would not be that nice any more. Or would it still be accurate?",
+      "parentUuid": "4efb0bce_5e1beed4",
+      "range": {
+        "startLine": 14,
+        "startChar": 10,
+        "endLine": 14,
+        "endChar": 14
+      },
+      "revId": "89a312f97dcd532437575e8c70c5db8b07b93abd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_9e2166f9",
         "filename": "client/includes/Store/Sql/DirectSqlStore.php",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2017-01-18T16:34:37Z",
       "side": 1,
       "message": "I suggest $dataRetrievalServices as a variable name that different from the class name (on purpose) to make the code more readable.",
+      "range": {
+        "startLine": 114,
+        "startChar": 9,
+        "endLine": 114,
+        "endChar": 37
+      },
+      "revId": "89a312f97dcd532437575e8c70c5db8b07b93abd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_14be6e13",
+        "filename": "client/includes/Store/Sql/DirectSqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-19T16:22:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4efb0bce_9e2166f9",
       "range": {
         "startLine": 114,
         "startChar": 9,
