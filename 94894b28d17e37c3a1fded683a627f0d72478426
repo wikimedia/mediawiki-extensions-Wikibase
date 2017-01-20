@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_4bffa062",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-20T13:29:34Z",
+      "side": 1,
+      "message": "Thanks. I was aware of those issues. I knew it was not a good solution but it seemed to be best I could think of, and, most importantly, was only supposed to be a temporary means until the refactoring involved classes are going to get any way (getting rid of depending on top-level factory etc).\n\nMocking would have been horrible. Introducing class to override the constructor that would only be used for few test cases also didn\u0027t seem that much better to me. Yes, probably it would have been better in a way but one could argue it could have also been worse in other ways.\n\nSo I was planning to have this overrideContainers as a temporary means and refactor later when more important bits are done but given your comments I went ahead and did the relevant part right now. See XX (this patch is now based on top of it).\nSo now there is no test-only method in production class. Tests are pile of mocking stuff but it is not that horrible in the end.",
+      "parentUuid": "4efb0bce_79d7e428",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 2
+      },
+      "revId": "94894b28d17e37c3a1fded683a627f0d72478426",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_19e6b013",
         "filename": "client/includes/DispatchingServiceFactory.php",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-01-18T18:22:34Z",
       "side": 1,
       "message": "Seems like duplicated code. I guess it can be refactored into method like `getEntityPrefetcherFor($repositoryName)`",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 38
+      },
+      "revId": "94894b28d17e37c3a1fded683a627f0d72478426",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_8b1b58d4",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-20T13:29:34Z",
+      "side": 1,
+      "message": "True. Code moved to separate method.",
+      "parentUuid": "4efb0bce_19e6b013",
       "range": {
         "startLine": 183,
         "startChar": 0,
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_6b87fcdc",
+        "filename": "client/includes/Store/RepositoryServiceWiring.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-20T13:29:34Z",
+      "side": 1,
+      "message": "yes, I am struggling with naming here.\nEntity revision lookup here actually wants a \"EntityMetaDataAccessor\" while the whole watching of entity change \"events\" is more related to prefetching instances of such accessors...\n\nI ended up with PrefetchingEntityMetaDataAccessor.\nPlease help with better name suggestions!",
+      "parentUuid": "4efb0bce_de6ebe29",
+      "revId": "94894b28d17e37c3a1fded683a627f0d72478426",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_d9cff880",
         "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
         "patchSetId": 1
@@ -76,6 +142,30 @@
       "writtenOn": "2017-01-18T18:22:34Z",
       "side": 1,
       "message": "`false` as DB name looks very strange. Is this correct?",
+      "range": {
+        "startLine": 103,
+        "startChar": 65,
+        "endLine": 103,
+        "endChar": 70
+      },
+      "revId": "94894b28d17e37c3a1fded683a627f0d72478426",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_abb294e2",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-20T13:29:34Z",
+      "side": 1,
+      "message": "It is.\nfalse is a special value meaning database of local wiki.",
+      "parentUuid": "4efb0bce_d9cff880",
       "range": {
         "startLine": 103,
         "startChar": 65,
