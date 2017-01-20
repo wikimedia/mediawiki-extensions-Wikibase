@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Store\Sql;
 
 use Wikibase\Client\DispatchingServiceFactory;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
+use Wikibase\Client\Store\RepositoryServiceContainerFactory;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
@@ -50,7 +51,13 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 
 		$entityNamespaceLookup = new EntityNamespaceLookup( [] );
 
-		$dispatchingServiceFactory = new DispatchingServiceFactory( $client );
+		/** @var RepositoryServiceContainerFactory $containerFactory */
+		$containerFactory = $this->getMockBuilder( RepositoryServiceContainerFactory::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$dispatchingServiceFactory = new DispatchingServiceFactory( $containerFactory, [] );
+
 		$dispatchingServiceFactory->defineService( 'EntityRevisionLookup', function() {
 			return $this->getMock( EntityRevisionLookup::class );
 		} );

@@ -3,8 +3,12 @@
 namespace Wikibase\Client\Tests;
 
 use Wikibase\Client\DispatchingServiceFactory;
+use Wikibase\Client\Store\RepositoryServiceContainerFactory;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Term\TermBuffer;
+use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 
@@ -17,10 +21,27 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 class DispatchingServiceWiringTest extends \PHPUnit_Framework_TestCase {
 
 	/**
+	 * @return RepositoryServiceContainerFactory
+	 */
+	private function getRepositoryServiceContainerFactory() {
+		$idParser = new PrefixMappingEntityIdParserFactory(
+			new BasicEntityIdParser(), []
+		);
+
+		return new RepositoryServiceContainerFactory(
+			$idParser,
+			new RepositorySpecificDataValueDeserializerFactory( $idParser ),
+			[ '' => false ],
+			[ __DIR__ . '/../../../includes/Store/RepositoryServiceWiring.php' ],
+			WikibaseClient::getDefaultInstance()
+		);
+	}
+
+	/**
 	 * @return DispatchingServiceFactory
 	 */
 	private function getDispatchingServiceFactory() {
-		$factory = new DispatchingServiceFactory( WikibaseClient::getDefaultInstance() );
+		$factory = new DispatchingServiceFactory( $this->getRepositoryServiceContainerFactory(), [ '' ] );
 		$factory->loadWiringFiles( [ __DIR__ . '/../../../includes/DispatchingServiceWiring.php' ] );
 		return $factory;
 	}
