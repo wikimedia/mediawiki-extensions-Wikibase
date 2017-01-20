@@ -4,12 +4,11 @@ namespace Wikibase\Client;
 
 use MediaWiki\Services\ServiceContainer;
 use Wikibase\Client\Store\RepositoryServiceContainer;
-use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
+use Wikibase\Client\Store\RepositoryServiceContainerFactory;
+use Wikibase\DataModel\Services\Lookup\UnknownForeignRepositoryException;
 use Wikibase\DataModel\Services\Term\TermBuffer;
-use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
-use Wikibase\SettingsArray;
 
 /**
  * A factory/locator of services dispatching the action to services configured for the
@@ -23,88 +22,32 @@ use Wikibase\SettingsArray;
 class DispatchingServiceFactory extends ServiceContainer implements EntityDataRetrievalServiceFactory {
 
 	/**
+	 * @var string[]
+	 */
+	private $repositoryNames;
+
+	/**
+	 * @var RepositoryServiceContainerFactory
+	 */
+	private $repositoryServiceContainerFactory;
+
+	/**
 	 * @var RepositoryServiceContainer[]
 	 */
 	private $repositoryServiceContainers = [];
 
 	/**
-	 * FIXME: injecting of the top-level factory (WikibaseClient) here is only a temporary solution.
-	 * This class uses top-level factory to access settings and several services provided by the top-level
-	 * factory. Also, the instance of the top-level factory is being passed to instantiators of services
-	 * stored in the RepositoryServiceContainer in order to get service they depend on.
-	 *
-	 * This approach is not clean, the class should not depend on the top-level factory.
-	 * This should be changed after some refactoring: this factory should be able to instantiate
-	 * services it now gets from the client. Config should be also passed in properly, without
-	 * a need to inject WikibaseClient instance to access relevant settings. Instantiators
-	 * in RepositoryServiceWiring should rather be getting some other service container, not the
-	 * whole top-level factory.
-	 *
-	 * @param WikibaseClient $client
+	 * @param RepositoryServiceContainerFactory $repositoryServiceContainerFactory
+	 * @param string[] $repositoryNames
 	 */
-	public function __construct( WikibaseClient $client ) {
+	public function __construct(
+		RepositoryServiceContainerFactory $repositoryServiceContainerFactory,
+		array $repositoryNames
+	) {
 		parent::__construct();
 
-		$this->initRepositoryServiceContainers( $client );
-	}
-
-	private function initRepositoryServiceContainers( WikibaseClient $client ) {
-		$repositoryNames = array_merge(
-			[ '' ],
-			array_keys( $client->getSettings()->getSetting( 'foreignRepositories' ) )
-		);
-
-		$idParserFactory = new PrefixMappingEntityIdParserFactory(
-			$client->getEntityIdParser(), // TODO: this should be moved to this class; see T153427
-			$this->getIdPrefixMaps( $client->getSettings()->getSetting( 'foreignRepositories' ) )
-		);
-		$dataValueDeserializerFactory = new RepositorySpecificDataValueDeserializerFactory( $idParserFactory );
-
-		foreach ( $repositoryNames as $repositoryName ) {
-			$container = new RepositoryServiceContainer(
-				$this->getRepositoryDatabaseName( $repositoryName, $client->getSettings() ),
-				$repositoryName,
-				$idParserFactory->getIdParser( $repositoryName ),
-				$dataValueDeserializerFactory->getDeserializer( $repositoryName ),
-				$client
-			);
-			$container->loadWiringFiles( $client->getSettings()->getSetting( 'repositoryServiceWiringFiles' ) );
-
-			$this->repositoryServiceContainers[$repositoryName] = $container;
-		}
-	}
-
-	/**
-	 * Returns a map of id prefix mappings defined for configured foreign repositories.
-	 *
-	 * @param array[] $settings Repository definitions mapping repository names to settings
-	 *
-	 * @return array[] Associative array mapping repository names to repository-specific prefix
-	 *  mapping.
-	 */
-	private function getIdPrefixMaps( array $settings ) {
-		$mappings = [];
-		foreach ( $settings as $repositoryName => $repositorySettings ) {
-			if ( array_key_exists( 'prefixMapping', $repositorySettings ) ) {
-				$mappings[$repositoryName] = $repositorySettings['prefixMapping'];
-			}
-		}
-		return $mappings;
-	}
-
-	/**
-	 * @param string $repositoryName
-	 * @param SettingsArray $settings
-	 *
-	 * @return string|false
-	 */
-	private function getRepositoryDatabaseName( $repositoryName, SettingsArray $settings ) {
-		if ( $repositoryName === '' ) {
-			return $settings->getSetting( 'repoDatabase' );
-		}
-
-		$foreignRepoSettings = $settings->getSetting( 'foreignRepositories' );
-		return $foreignRepoSettings[$repositoryName]['repoDatabase'];
+		$this->repositoryServiceContainerFactory = $repositoryServiceContainerFactory;
+		$this->repositoryNames = $repositoryNames;
 	}
 
 	/**
@@ -113,10 +56,31 @@ class DispatchingServiceFactory extends ServiceContainer implements EntityDataRe
 	 */
 	public function getServiceMap( $service ) {
 		$serviceMap = [];
-		foreach ( $this->repositoryServiceContainers as $repositoryName => $container ) {
+		foreach ( $this->repositoryNames as $repositoryName ) {
+			$container = $this->getContainerForRepository( $repositoryName );
+			if ( $container !== null ) {
 				$serviceMap[$repositoryName] = $container->getService( $service );
+			}
 		}
 		return $serviceMap;
+	}
+
+	/**
+	 * @param string $repositoryName
+	 *
+	 * @return RepositoryServiceContainer|null
+	 */
+	private function getContainerForRepository( $repositoryName ) {
+		if ( !array_key_exists( $repositoryName, $this->repositoryServiceContainers ) ) {
+			try {
+				$this->repositoryServiceContainers[$repositoryName] =
+					$this->repositoryServiceContainerFactory->newContainer( $repositoryName );
+			} catch ( UnknownForeignRepositoryException $exception ) {
+				$this->repositoryServiceContainers[$repositoryName] = null;
+			}
+		}
+
+		return $this->repositoryServiceContainers[$repositoryName];
 	}
 
 	/**
