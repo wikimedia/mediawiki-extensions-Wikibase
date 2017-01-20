@@ -184,8 +184,7 @@ call_user_func( function() {
 	$wgAPIModules['wbsetlabel'] = [
 		'class' => Wikibase\Repo\Api\SetLabel::class,
 		'factory' => function ( ApiMain $mainModule, $moduleName ) {
-
-			return new \Wikibase\Repo\Api\SetLabel(
+			return new Wikibase\Repo\Api\SetLabel(
 				$mainModule,
 				$moduleName,
 				Wikibase\Repo\WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider()
