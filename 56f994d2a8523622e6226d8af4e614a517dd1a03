@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4efb0bce_55761dd6",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-20T08:12:23Z",
+      "side": 1,
+      "message": "Not that it is critical but I\u0027ve just noticed that some of parameter names used here (and in your edit of the mw.org page) are not 100% in sync with what docs/hooks.txt in core uses:\n - $titleSnippet vs $text\n - $specialSearch vs $page\n - $queryString vs $query (in this case \"queryString\" as a name for array seems a bit odd)\n\nIf this should be changed then where? Here or in core?",
+      "revId": "56f994d2a8523622e6226d8af4e614a517dd1a03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_2e791dc4",
         "filename": "repo/Wikibase.hooks.php",
         "patchSetId": 2
