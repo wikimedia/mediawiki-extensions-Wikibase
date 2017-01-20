@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efb0bce_8befd881",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialListPropertiesTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-20T13:24:38Z",
+      "side": 1,
+      "message": "I find this detail of this patch fascinating. Before the language of the special page context was changed. It looks like the only effect this had was exactly what the new code now does explicitly. Correct me if I\u0027m wrong.",
+      "revId": "6555cb6ca7519795f5ddaf2e56632fda13f315d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
