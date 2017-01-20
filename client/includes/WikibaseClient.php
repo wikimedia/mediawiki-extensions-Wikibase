@@ -118,9 +118,9 @@ final class WikibaseClient {
 	private $siteLookup;
 
 	/**
-	 * @var DispatchingServiceFactory
+	 * @var EntityDataRetrievalServiceFactory
 	 */
-	private $dispatchingServiceFactory;
+	private $entityDataRetrievalServiceFactory;
 
 	/**
 	 * @var PropertyDataTypeLookup|null
@@ -369,17 +369,17 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return DispatchingServiceFactory
+	 * @return EntityDataRetrievalServiceFactory
 	 */
-	private function getDispatchingServiceFactory() {
-		if ( $this->dispatchingServiceFactory === null ) {
+	private function getEntityDataRetrievalServiceFactory() {
+		if ( $this->entityDataRetrievalServiceFactory === null ) {
 			$factory = new DispatchingServiceFactory( $this );
 			$factory->loadWiringFiles( $this->settings->getSetting( 'dispatchingServiceWiringFiles' ) );
 
-			$this->dispatchingServiceFactory = $factory;
+			$this->entityDataRetrievalServiceFactory = $factory;
 		}
 
-		return $this->dispatchingServiceFactory;
+		return $this->entityDataRetrievalServiceFactory;
 	}
 
 	/**
@@ -408,7 +408,7 @@ final class WikibaseClient {
 	 */
 	private function getPrefetchingTermLookup() {
 		if ( !$this->termLookup ) {
-			$this->termLookup = $this->getDispatchingServiceFactory()->getTermBuffer();
+			$this->termLookup = $this->getEntityDataRetrievalServiceFactory()->getTermBuffer();
 		}
 
 		return $this->termLookup;
@@ -509,7 +509,7 @@ final class WikibaseClient {
 				$this->getEntityIdParser(),
 				$this->getEntityIdComposer(),
 				$this->getEntityNamespaceLookup(),
-				$this->getDispatchingServiceFactory(),
+				$this->getEntityDataRetrievalServiceFactory(),
 				$repoDatabase,
 				$this->contentLanguage->getCode()
 			);
