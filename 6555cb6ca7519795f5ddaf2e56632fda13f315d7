@@ -16,6 +16,24 @@
       "revId": "6555cb6ca7519795f5ddaf2e56632fda13f315d7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_26d37932",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialListPropertiesTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-20T15:01:15Z",
+      "side": 1,
+      "message": "Yes, I think it\u0027s a good consequence of having better dependency injection.",
+      "parentUuid": "4efb0bce_8befd881",
+      "revId": "6555cb6ca7519795f5ddaf2e56632fda13f315d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
