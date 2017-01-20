@@ -22,6 +22,30 @@
       "revId": "94894b28d17e37c3a1fded683a627f0d72478426",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_2b2a2490",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-20T13:46:32Z",
+      "side": 0,
+      "message": "Yes, not related. It\u0027s a left over from some previous clean up patch. I must have spotted it while messing with this patch.",
+      "parentUuid": "4efb0bce_19d230d6",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 42
+      },
+      "revId": "94894b28d17e37c3a1fded683a627f0d72478426",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
