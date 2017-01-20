@@ -5,6 +5,7 @@
 			"9.sinistra"
 		]
 	},
+	"wikibase-dataitem": "{{WBREPONAME}} item",
 	"wikibase-editlinks": "လင့်ခ်များကို တည်းဖြတ်ရန်",
 	"wikibase-editlinkstitle": "ဘာသာစကားလင့်ခ်များကို တည်းဖြတ်ရန်",
 	"wikibase-linkitem-input-page": "စာမျက်နှာ:",
