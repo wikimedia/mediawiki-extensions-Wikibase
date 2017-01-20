@@ -144,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_4e8699bf",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoIntegrationTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-20T07:28:07Z",
+      "side": 1,
+      "message": "Well this is actually the case, in a way. Those tests are supposed to be only run when Client is enabled, otherwise there is nothing to test. The behaviour in a setup with no Client enabled is correct IMO - tests are skipped with the message explaining why they\u0027re skipped.\n\nI am going to move the check to setUp so it is more evident, and to rename the test class slightly. Current class name is a left over from the time I was fiddling to get it all together, and is not really meaningful.",
+      "parentUuid": "4efb0bce_aeef4d81",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 3
+      },
+      "revId": "7f8f7fdc9916780bd218529749e9ffa02e992aee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_d97818c2",
         "filename": "repo/tests/phpunit/includes/WikibaseRepoIntegrationTest.php",
         "patchSetId": 13
