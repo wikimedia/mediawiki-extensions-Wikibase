@@ -39,8 +39,10 @@ use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFact
 use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
+use Wikibase\Client\Store\RepositoryServiceContainerFactory;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
@@ -71,6 +73,7 @@ use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
+use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\MediaWikiContentLanguages;
@@ -385,13 +388,66 @@ final class WikibaseClient {
 	 */
 	private function getEntityDataRetrievalServiceFactory() {
 		if ( $this->entityDataRetrievalServiceFactory === null ) {
-			$factory = new DispatchingServiceFactory( $this );
+			$factory = new DispatchingServiceFactory(
+				$this->getRepositoryServiceContainerFactory(),
+				array_merge(
+					[ '' ],
+					array_keys( $this->getSettings()->getSetting( 'foreignRepositories' ) )
+				)
+			);
 			$factory->loadWiringFiles( $this->settings->getSetting( 'dispatchingServiceWiringFiles' ) );
 
 			$this->entityDataRetrievalServiceFactory = $factory;
 		}
 
 		return $this->entityDataRetrievalServiceFactory;
+	}
+
+	private function getRepositoryServiceContainerFactory() {
+		$idParserFactory = new PrefixMappingEntityIdParserFactory(
+			$this->getEntityIdParser(),
+			$this->getIdPrefixMaps()
+		);
+
+		return new RepositoryServiceContainerFactory(
+			$idParserFactory,
+			new RepositorySpecificDataValueDeserializerFactory( $idParserFactory ),
+			$this->getRepositoryDatabaseNames(),
+			$this->getSettings()->getSetting( 'repositoryServiceWiringFiles' ),
+			$this
+		);
+	}
+
+	/**
+	 * Returns an associative array mapping names of configured repositories to respective database names
+	 * (either strings or false for local wiki's database).
+	 * Returned map contains an empty string key for a local repository.
+	 *
+	 * @return array
+	 */
+	private function getRepositoryDatabaseNames() {
+		$databaseNames = [ '' => $this->getSettings()->getSetting( 'repoDatabase' ) ];
+
+		foreach ( $this->getSettings()->getSetting( 'foreignRepositories' ) as $repositoryName => $repositorySettings ) {
+			$databaseNames[$repositoryName] = $repositorySettings['repoDatabase'];
+		}
+
+		return $databaseNames;
+	}
+
+	/**
+	 * Returns a map of id prefix mappings defined for configured foreign repositories.
+	 *
+	 * @return array[] Associative array mapping repository names to repository-specific prefix mapping.
+	 */
+	private function getIdPrefixMaps() {
+		$mappings = [];
+		foreach ( $this->getSettings()->getSetting( 'foreignRepositories' ) as $repositoryName => $repositorySettings ) {
+			if ( array_key_exists( 'prefixMapping', $repositorySettings ) ) {
+				$mappings[$repositoryName] = $repositorySettings['prefixMapping'];
+			}
+		}
+		return $mappings;
 	}
 
 	/**
