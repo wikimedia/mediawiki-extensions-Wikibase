@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_667171dd",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoIntegrationTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-20T16:06:25Z",
+      "side": 1,
+      "message": "I cannot satisfy both preferred orders :)\nMy personal intuition seems to be more similar to Daniel\u0027s. I wouldn\u0027t oppose if convention Aleksey is referring too was introduced, though.",
+      "parentUuid": "4efb0bce_c02138ae",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 2
+      },
+      "revId": "7f8f7fdc9916780bd218529749e9ffa02e992aee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_b9a67c4e",
         "filename": "repo/tests/phpunit/includes/WikibaseRepoIntegrationTest.php",
         "patchSetId": 13
@@ -179,6 +203,30 @@
       "writtenOn": "2017-01-18T18:47:45Z",
       "side": 1,
       "message": "Setup is complicated, I can\u0027t really say what is important and what is not. Can it be simplified? May be some unimportant details can be hidden behind method calls?",
+      "range": {
+        "startLine": 91,
+        "startChar": 2,
+        "endLine": 118,
+        "endChar": 6
+      },
+      "revId": "7f8f7fdc9916780bd218529749e9ffa02e992aee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_26113960",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoIntegrationTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-20T16:06:25Z",
+      "side": 1,
+      "message": "I am very glad you\u0027ve commented on this. Thanks.\n\nSetup is indeed big and messy. The main reason is that what I do here faking performing SQL selects that are joins on multiple tables.\nI managed to remove some bits here and there, and have tests still pass. Hopefully that makes it easier to get the idea what the particular test is about. It\u0027s still not perfect though.\n\nI am not at all convinced this is the best/right (tm) way of performing such tests. On the other hand, the other option would be to create \"real\" entities and store them in test DB using Wikibase services etc. I imagine that would make test setup far more complex (as there are completely different kinds of services touching different aspects of entities, thus requiring different kind of test setup).\n\nI\u0027ve moved those tests to separate patch: Ia2361ae56ab5222c71f14f69a0f591e198363b97 (which also includes similar tests for Client component). I believe such tests do not really belong here. On the other hand I also believe we want to have it tested somehow.\n\nThat other patch is mostly to verify that all services we\u0027ve creating and adjusting work as intended if there is expected data in the expected DB. They\u0027re far from nice and clean tests, and they should not be considered as such.\nI\u0027d very much like to discuss how and where we would like to have the whole \"federation\" functionality tested.",
+      "parentUuid": "4efb0bce_d97818c2",
       "range": {
         "startLine": 91,
         "startChar": 2,
