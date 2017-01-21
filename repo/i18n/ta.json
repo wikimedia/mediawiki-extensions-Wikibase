@@ -24,6 +24,8 @@
 	"wikibase-label-empty": "மாற்றுகள் வரையறுக்கப்படவில்லை",
 	"wikibase-description-empty": "விவரணமேதும் வழங்கப்படவில்லை",
 	"wikibase-description-edit-placeholder": "விவரங்களை உள்ளிடவும்",
+	"wikibase-content-language-edit-label": "மொழி:",
+	"wikibase-diffview-link-name": "பெயர்",
 	"wikibase-sitelink-site-edit-placeholder": "தளம்",
 	"wikibase-sitelink-page-edit-placeholder": "பக்கம்",
 	"wikibase-sitelinks-special": "பிற தளங்கள்",
