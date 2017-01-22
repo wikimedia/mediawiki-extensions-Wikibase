@@ -5,7 +5,15 @@
 			"Katxis"
 		]
 	},
+	"tooltip-t-wikibase": "Lia a article de reserva de datos nonjuntada",
+	"wikibase-comment-update": "{{WBREPONAME}} article cambiada",
+	"wikibase-dataitem": "{{WBREPONAME}} article",
 	"wikibase-editlinks": "Edita lias",
 	"wikibase-editlinkstitle": "Edit lias interlingual",
-	"wikibase-rc-hide-wikidata-show": "Mostra"
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Asconde",
+	"wikibase-rc-hide-wikidata-show": "Mostra",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} edita",
+	"wikibase-otherprojects": "En otra projetas"
 }

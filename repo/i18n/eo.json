@@ -9,7 +9,8 @@
 			"Macofe",
 			"Robin van der Vliet",
 			"AVRS",
-			"Rafaneta"
+			"Rafaneta",
+			"Psychoslave"
 		]
 	},
 	"wikibase-desc": "Deponejo por strukturitaj datumoj",
@@ -46,7 +47,7 @@
 	"wikibase-diffview-alias": "kromnomoj",
 	"wikibase-diffview-description": "priskribo",
 	"wikibase-diffview-link": "ligiloj",
-	"wikibase-sitelink-site-edit-placeholder": "retejo",
+	"wikibase-sitelink-site-edit-placeholder": "vikio",
 	"wikibase-sitelink-page-edit-placeholder": "paĝo",
 	"wikibase-alias-edit-placeholder": "enigi kromnomon",
 	"wikibase-label-input-help-message": "Enskribu la etikedon por ĉi tiu ero en $1",
