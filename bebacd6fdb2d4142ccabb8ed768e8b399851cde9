@@ -22,6 +22,30 @@
       "revId": "bebacd6fdb2d4142ccabb8ed768e8b399851cde9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_1d1d5c66",
+        "filename": "docs/change-op-serializations.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-23T17:16:47Z",
+      "side": 1,
+      "message": "The headlines below mention items and properties. Other entity types will be in other code bases and should probably be documented there.",
+      "parentUuid": "4efb0bce_824d6b41",
+      "range": {
+        "startLine": 1,
+        "startChar": 23,
+        "endLine": 1,
+        "endChar": 81
+      },
+      "revId": "bebacd6fdb2d4142ccabb8ed768e8b399851cde9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
