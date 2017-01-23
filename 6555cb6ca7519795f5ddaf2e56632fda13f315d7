@@ -2,6 +2,63 @@
   "comments": [
     {
       "key": {
+        "uuid": "4efb0bce_ece4180c",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-23T12:40:21Z",
+      "side": 1,
+      "message": "minor: this file is not entirely consistent whether to refer to Wikibase namespace as to Wikibase\\... or \\Wikibase\\... but it seems no leading backslash approach is preferred. You might want to consider this.\nBut I don\u0027t consider this a blocker, as said there seem to be no rule on this, and it is not wrong.",
+      "range": {
+        "startLine": 309,
+        "startChar": 18,
+        "endLine": 309,
+        "endChar": 19
+      },
+      "revId": "6555cb6ca7519795f5ddaf2e56632fda13f315d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_2cdd9017",
+        "filename": "repo/includes/Specials/SpecialListProperties.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-23T12:40:21Z",
+      "side": 1,
+      "message": "I am wondering whether it is OK to have BufferingTermLookup here or should it rather be PrefetchingTermLookup (ie. interface combining TermBuffer and TermLookup).\nFor a long time BufferingTermLookup was a synononym to TermBuffer+TermLookup but since DispatchingTermBuffer was introduced being strict about requiring BufferingTermLookup might be wrong.\n\nIn particular, this code is valid for no, but if I15d33dd688a0eb1de684d963ae94640aa3509f6d got merged it would result in fatal errors if Repo was configured to use Dispatching services from the Client.",
+      "revId": "6555cb6ca7519795f5ddaf2e56632fda13f315d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_2cb6b0d7",
+        "filename": "repo/includes/Specials/SpecialListProperties.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-23T12:40:21Z",
+      "side": 1,
+      "message": "Any reason not to type hint against actual interfaces/classes here?",
+      "revId": "6555cb6ca7519795f5ddaf2e56632fda13f315d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_8befd881",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialListPropertiesTest.php",
         "patchSetId": 3
