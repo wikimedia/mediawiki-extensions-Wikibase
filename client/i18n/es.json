@@ -116,6 +116,7 @@
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Conexión|Conexiones}} con {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Notificarme cuando alguien conecta una página que {{GENDER:|he creado}} a un elemento de {{WBREPONAME}}.",
 	"notification-header-page-connection": "La página <strong>$3</strong> se {{GENDER:$2|conectó}} un elemento de  {{WBREPONAME}}.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> y {{PLURAL:$4|otra página|otras $4 páginas|100=otras 99 o más páginas}} fueron {{GENDER:$2|conectadas}} a elementos de {{WBREPONAME}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|Ver}} elemento",
 	"notification-subject-page-connection": "Una página en {{SITENAME}} que tu {{GENDER:$3|creaste}} se {{GENDER:$2|conectó}} un elemento de {{WBREPONAME}}",
 	"unresolved-property-category": "Páginas con propiedades no resueltas",

@@ -165,7 +165,7 @@
 	"wikibase-move-error": "Vous ne pouvez pas déplacer des pages situées dans un espace des données, ni déplacer des pages vers cet espace.",
 	"wikibase-validator-sitelink-conflict": "Le lien $1 est déjà utilisé par l’élément $2. Vous pouvez le supprimer de $2 s’il n’a rien à faire là, ou fusionner les éléments s’ils concernent exactement le même sujet.",
 	"wikibase-validator-label-conflict": "La propriété $3 a déjà un libellé «&nbsp;$1&nbsp;» associé au code de langue $2.",
-	"wikibase-validator-label-with-description-conflict": "L’élément $3 a déjà le libellé «&nbsp;$1&nbsp;» associé au code de langue $2, en utilisant exactement le même texte descriptif.",
+	"wikibase-validator-label-with-description-conflict": "L’élément $3 a déjà le libellé «&nbsp;$1&nbsp;» associé au code de langue $2, qui utilise exactement le même texte descriptif.",
 	"wikibase-validator-label-no-entityid": "Le libellé ne doit pas être un identifiant d’entité valide.",
 	"wikibase-validator-illegal-file-chars": "Les noms de fichier ne doivent pas contenir certains caractères comme les virgules ou les barres obliques. Merci de bien vouloir coller uniquement le nom de fichier après «&nbsp;File:&nbsp;».",
 	"wikibase-validator-no-such-media": "Le fichier «&nbsp;$1&nbsp;» n'existe pas sur [https://commons.wikimedia.org/Wikimedia Commons].",
