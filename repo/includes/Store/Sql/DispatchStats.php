@@ -36,7 +36,7 @@ class DispatchStats {
 	 * @return int the number of client wikis.
 	 */
 	public function load( $now = 0 ) {
-		$db = wfGetDB( DB_SLAVE ); // XXX: use master?
+		$db = wfGetDB( DB_REPLICA ); // XXX: use master?
 
 		$now = wfTimestamp( TS_UNIX, $now );
 

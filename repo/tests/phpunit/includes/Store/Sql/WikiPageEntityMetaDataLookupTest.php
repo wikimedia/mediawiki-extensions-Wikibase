@@ -88,7 +88,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 			->will( $this->returnCallback( function( $id ) use ( $selectCount, $selectRowCount ) {
 				$db = $realDB = wfGetDB( DB_MASTER );
 
-				if ( $id === DB_SLAVE ) {
+				if ( $id === DB_REPLICA ) {
 					// This is a (fake) lagged database connection.
 					$db = $this->getLaggedDatabase( $realDB, $selectCount, $selectRowCount );
 				}

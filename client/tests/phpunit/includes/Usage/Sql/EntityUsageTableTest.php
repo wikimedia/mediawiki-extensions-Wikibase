@@ -305,7 +305,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 		$this->assertEmpty( $usageTable->getUnusedEntities( array( $q4 ) ), 'Q4 should not be unused' );
 
 		$entityIds = array( $q4, $q6 );
-		if ( wfGetDB( DB_SLAVE )->getType() === 'mysql' ) {
+		if ( wfGetDB( DB_REPLICA )->getType() === 'mysql' ) {
 			// On MySQL we use UNIONs on the table… as the table is temporary that
 			// doesn't work in unit tests.
 			// https://dev.mysql.com/doc/refman/5.7/en/temporary-table-problems.html
@@ -321,7 +321,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 	 * @param array[] $rows
 	 */
 	private function assertUsageTableContains( array $rows ) {
-		$db = wfGetDB( DB_SLAVE );
+		$db = wfGetDB( DB_REPLICA );
 
 		foreach ( $rows as $row ) {
 			$name = preg_replace( '/\s+/s', ' ', print_r( $row, true ) );
@@ -333,7 +333,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 	 * @param array[] $rows
 	 */
 	private function assertUsageTableDoesNotContain( array $rows ) {
-		$db = wfGetDB( DB_SLAVE );
+		$db = wfGetDB( DB_REPLICA );
 
 		foreach ( $rows as $row ) {
 			$name = preg_replace( '/\s+/s', ' ', print_r( $row, true ) );

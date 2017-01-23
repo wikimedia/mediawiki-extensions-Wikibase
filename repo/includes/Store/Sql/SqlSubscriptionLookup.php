@@ -41,7 +41,7 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 			return array();
 		}
 
-		$dbr = $this->dbLoadBalancer->getConnection( DB_SLAVE );
+		$dbr = $this->dbLoadBalancer->getConnection( DB_REPLICA );
 
 		// NOTE: non-Item ids are ignored, since only items can be subscribed to
 		//       via sitelinks.

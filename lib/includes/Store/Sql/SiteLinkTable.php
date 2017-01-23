@@ -210,7 +210,7 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 		// We store page titles with spaces instead of underscores
 		$pageTitle = str_replace( '_', ' ', $pageTitle );
 
-		$db = $this->getConnection( DB_SLAVE );
+		$db = $this->getConnection( DB_REPLICA );
 
 		$result = $db->selectRow(
 			$this->table,
@@ -266,7 +266,7 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 	 * @note The arrays returned by this method do not contain badges!
 	 */
 	public function getLinks( array $numericIds = array(), array $siteIds = array(), array $pageNames = array() ) {
-		$dbr = $this->getConnection( DB_SLAVE );
+		$dbr = $this->getConnection( DB_REPLICA );
 
 		$conditions = array();
 
@@ -318,7 +318,7 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 	public function getSiteLinksForItem( ItemId $itemId ) {
 		$numericId = $itemId->getNumericId();
 
-		$dbr = $this->getConnection( DB_SLAVE );
+		$dbr = $this->getConnection( DB_REPLICA );
 
 		$rows = $dbr->select(
 			$this->table,

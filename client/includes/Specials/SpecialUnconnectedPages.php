@@ -120,7 +120,7 @@ class SpecialUnconnectedPages extends QueryPage {
 	 * @return array[]
 	 */
 	public function getQueryInfo() {
-		$dbr = wfGetDB( DB_SLAVE );
+		$dbr = wfGetDB( DB_REPLICA );
 
 		$conds = $this->buildConditionals( $dbr );
 		$conds['page_is_redirect'] = 0;

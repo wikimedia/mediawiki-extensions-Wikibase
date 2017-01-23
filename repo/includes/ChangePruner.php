@@ -102,7 +102,7 @@ class ChangePruner {
 		$until = time() - $this->keepSeconds;
 
 		if ( !$this->ignoreDispatch ) {
-			$dbr = wfGetDB( DB_SLAVE );
+			$dbr = wfGetDB( DB_REPLICA );
 			$row = $dbr->selectRow(
 				array( 'wb_changes_dispatch', 'wb_changes' ),
 				'min(change_time) as timestamp',
@@ -137,7 +137,7 @@ class ChangePruner {
 	 * @return string MediaWiki concatenated string timestamp
 	 */
 	private function limitCutoffTimestamp( $until ) {
-		$dbr = wfGetDB( DB_SLAVE );
+		$dbr = wfGetDB( DB_REPLICA );
 		$changeTime = $dbr->selectField(
 			'wb_changes',
 			'change_time',
