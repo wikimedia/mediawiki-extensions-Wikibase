@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efb0bce_8cbec411",
+        "filename": "docs/extending-entities.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-23T11:53:55Z",
+      "side": 1,
+      "message": "this could also say: add a ChangeOp for the new field, e.g. NewThingyChangeOp (just saying as it wasn\u0027t immediately obvious to me what this NewThingy is; I see it is also mentioned above when referring to the provider interface, so it might be clear enough without adding more words.",
+      "revId": "c38d9be9f80da8b1e3edcc27d3999bbf686ea838",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
