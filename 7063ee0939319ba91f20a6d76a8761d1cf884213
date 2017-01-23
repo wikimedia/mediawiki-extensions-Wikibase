@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efb0bce_a2486761",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-23T15:18:57Z",
+      "side": 1,
+      "message": "It is 49-th public method on this class. \n\nAnniversary is coming! :)",
+      "range": {
+        "startLine": 381,
+        "startChar": 1,
+        "endLine": 381,
+        "endChar": 17
+      },
+      "revId": "7063ee0939319ba91f20a6d76a8761d1cf884213",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_e72af18e",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 1294,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-23T15:18:57Z",
+      "side": 1,
+      "message": "It seems that it is the only place where clientSettings are used. \n\nWhy not require foreign repositories in the first place but not the whole settings object?",
+      "range": {
+        "startLine": 1294,
+        "startChar": 24,
+        "endLine": 1294,
+        "endChar": 83
+      },
+      "revId": "7063ee0939319ba91f20a6d76a8761d1cf884213",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
