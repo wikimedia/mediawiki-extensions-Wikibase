@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_c76015cf",
+        "filename": "docs/extending-entities.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-23T13:54:39Z",
+      "side": 1,
+      "message": "Done. I also added some notes above to make it more clear.",
+      "parentUuid": "4efb0bce_8cbec411",
+      "revId": "c38d9be9f80da8b1e3edcc27d3999bbf686ea838",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_8c5244e1",
         "filename": "docs/extending-entities.wiki",
         "patchSetId": 2
@@ -30,6 +48,30 @@
       "writtenOn": "2017-01-23T12:10:39Z",
       "side": 1,
       "message": "Typo.",
+      "range": {
+        "startLine": 15,
+        "startChar": 6,
+        "endLine": 15,
+        "endChar": 13
+      },
+      "revId": "c38d9be9f80da8b1e3edcc27d3999bbf686ea838",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_a75f5912",
+        "filename": "docs/extending-entities.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-23T13:54:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4efb0bce_8c5244e1",
       "range": {
         "startLine": 15,
         "startChar": 6,
