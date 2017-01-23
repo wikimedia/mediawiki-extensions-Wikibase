@@ -46,7 +46,7 @@ class PagePropsEntityIdLookup implements EntityIdLookup {
 	 * @return EntityId[]
 	 */
 	public function getEntityIds( array $titles ) {
-		$db = $this->loadBalancer->getConnection( DB_SLAVE );
+		$db = $this->loadBalancer->getConnection( DB_REPLICA );
 
 		$pageIds = array_map(
 			function ( Title $title ) {

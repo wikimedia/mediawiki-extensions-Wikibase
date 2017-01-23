@@ -615,7 +615,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	}
 
 	private function getPageId( EntityId $entityId ) {
-		$dbr = wfGetDB( DB_SLAVE );
+		$dbr = wfGetDB( DB_REPLICA );
 
 		$row = $dbr->selectRow(
 			'wb_entity_per_page',

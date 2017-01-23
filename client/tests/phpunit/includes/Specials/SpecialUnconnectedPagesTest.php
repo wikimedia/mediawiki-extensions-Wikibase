@@ -61,7 +61,7 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 		$page = $this->newSpecialPage();
 		$title = Title::newFromText( $text );
 		$checker = new NamespaceChecker( array( 2, 4 ), array( 0 ) );
-		$dbr = wfGetDB( DB_SLAVE );
+		$dbr = wfGetDB( DB_REPLICA );
 		$this->assertEquals( $expected, $page->buildConditionals( $dbr, $title, $checker ) );
 	}
 

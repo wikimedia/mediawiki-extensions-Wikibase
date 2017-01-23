@@ -35,7 +35,7 @@ class SqlSiteLinkConflictLookup extends DBAccessBase implements SiteLinkConflict
 		if ( $db ) {
 			$dbr = $db;
 		} else {
-			$dbr = $this->getConnection( DB_SLAVE );
+			$dbr = $this->getConnection( DB_REPLICA );
 		}
 
 		$anyOfTheLinks = '';

@@ -194,7 +194,7 @@ class ChangesListSpecialPageHookHandlers {
 		// do not include wikibase changes for activated enhanced watchlist
 		// since we do not support that format yet
 		if ( $this->shouldHideWikibaseChanges( $opts ) ) {
-			$dbr = $this->loadBalancer->getConnection( DB_SLAVE );
+			$dbr = $this->loadBalancer->getConnection( DB_REPLICA );
 			$conds[] = 'rc_source != ' . $dbr->addQuotes( RecentChangeFactory::SRC_WIKIBASE );
 			$this->loadBalancer->reuseConnection( $dbr );
 		}

@@ -529,7 +529,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return Database
 	 */
 	public function getReadDb() {
-		return $this->getConnection( DB_SLAVE );
+		return $this->getConnection( DB_REPLICA );
 	}
 
 	/**

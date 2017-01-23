@@ -357,7 +357,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 			$where['term_language'] = $languages;
 		}
 
-		$dbw = $this->getConnection( DB_SLAVE );
+		$dbw = $this->getConnection( DB_REPLICA );
 
 		// Do one query per term type here, this is way faster on MySQL: T147748
 		foreach ( $termTypes as $termType ) {
@@ -469,7 +469,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 
 		$numericPropertyIds = $this->numericIdsByType[Property::ENTITY_TYPE];
 
-		$dbw = $this->getConnection( DB_SLAVE );
+		$dbw = $this->getConnection( DB_REPLICA );
 
 		$res = $dbw->select(
 			$this->propertyInfoTable,
@@ -552,7 +552,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 
 		$entityIds = $this->numericIdsByType[$entityType];
 
-		$dbw = $this->getConnection( DB_SLAVE );
+		$dbw = $this->getConnection( DB_REPLICA );
 
 		$fields = array(
 			'epp_entity_type',

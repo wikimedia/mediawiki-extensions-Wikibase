@@ -64,7 +64,7 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 		}
 
 		try {
-			$dbr = $this->loadBalancer->getConnection( DB_SLAVE );
+			$dbr = $this->loadBalancer->getConnection( DB_REPLICA );
 		} catch ( MWException $ex ) {
 			throw new EntityRedirectLookupException( $targetId, null, $ex );
 		}
@@ -123,7 +123,7 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 			throw new EntityRedirectLookupException( $entityId, null, $ex );
 		}
 
-		$forUpdate = $forUpdate === 'for update' ? DB_MASTER : DB_SLAVE;
+		$forUpdate = $forUpdate === 'for update' ? DB_MASTER : DB_REPLICA;
 
 		try {
 			$db = $this->loadBalancer->getConnection( $forUpdate );

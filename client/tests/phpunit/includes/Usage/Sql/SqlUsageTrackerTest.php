@@ -53,7 +53,7 @@ class SqlUsageTrackerTest extends \MediaWikiTestCase {
 	}
 
 	public function getUsages( $pageId ) {
-		$db = wfGetDB( DB_SLAVE );
+		$db = wfGetDB( DB_REPLICA );
 		$updater = new EntityUsageTable( new BasicEntityIdParser(), $db );
 		return $updater->queryUsages( $pageId );
 	}
