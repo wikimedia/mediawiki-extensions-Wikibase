@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_a253c76d",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-23T16:49:46Z",
+      "side": 1,
+      "message": "The stupid Phpstorm :D",
+      "parentUuid": "4efb0bce_ece4180c",
+      "range": {
+        "startLine": 309,
+        "startChar": 18,
+        "endLine": 309,
+        "endChar": 19
+      },
+      "revId": "6555cb6ca7519795f5ddaf2e56632fda13f315d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_2cdd9017",
         "filename": "repo/includes/Specials/SpecialListProperties.php",
         "patchSetId": 3
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_e259bf91",
+        "filename": "repo/includes/Specials/SpecialListProperties.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-23T16:49:46Z",
+      "side": 1,
+      "message": "I think we should have a phab card for removing this usage.",
+      "parentUuid": "4efb0bce_2cdd9017",
+      "revId": "6555cb6ca7519795f5ddaf2e56632fda13f315d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_2cb6b0d7",
         "filename": "repo/includes/Specials/SpecialListProperties.php",
         "patchSetId": 3
@@ -53,6 +95,24 @@
       "writtenOn": "2017-01-23T12:40:21Z",
       "side": 1,
       "message": "Any reason not to type hint against actual interfaces/classes here?",
+      "revId": "6555cb6ca7519795f5ddaf2e56632fda13f315d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_028bbbe9",
+        "filename": "repo/includes/Specials/SpecialListProperties.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-23T16:49:46Z",
+      "side": 1,
+      "message": "It was my mistake. Done. Thanks for noticing it!",
+      "parentUuid": "4efb0bce_2cb6b0d7",
       "revId": "6555cb6ca7519795f5ddaf2e56632fda13f315d7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
