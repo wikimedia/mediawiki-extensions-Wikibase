@@ -11,6 +11,9 @@ This is a checklist of things that need doing when adding a new field to an exis
 * Add support to FooPatcher
 * Add support to FooDiffer
 * Add support in FooView (extends EntityView)
+* Build NewThingyChangeOp
+* Add suuport in FooValidatorFactory
+* Add support in FooChangeOpDeserializer
 
 CAVEAT (as of November 2016): For the below parts of Wikibase, there are no extension
 interfaces yet for handling additional fields of entities. Fields of entity types known
@@ -19,5 +22,4 @@ other extensions, plug-in interfaces still need to be added.
 
 * Add to RDF mapping (not currently pluggable!)
 * Add Validator (not currently pluggable)
-* Add ChangeOp for updating (not currently pluggable) (must work with wbeditentity)
 * Add handling (or suppression) to EntityChangeFactory (not currently pluggable)
