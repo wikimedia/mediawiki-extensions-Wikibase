@@ -7,7 +7,7 @@ use Wikibase\ChangeOp\ChangeOpDescription;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\DescriptionsProvider;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Summary;
 
 /**
  * API module for the language attributes for a Wikibase entity.
@@ -28,15 +28,16 @@ class SetDescription extends ModifyTerm {
 	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
-	 * @param string $modulePrefix
+	 * @param FingerprintChangeOpFactory $termChangeOpFactory
 	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+	public function __construct(
+		ApiMain $mainModule,
+		$moduleName,
+		FingerprintChangeOpFactory $termChangeOpFactory
+	) {
+		parent::__construct( $mainModule, $moduleName );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
-
-		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
+		$this->termChangeOpFactory = $termChangeOpFactory;
 	}
 
 	/**
