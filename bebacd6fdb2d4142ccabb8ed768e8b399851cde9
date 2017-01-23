@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efb0bce_824d6b41",
+        "filename": "docs/change-op-serializations.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-23T15:50:40Z",
+      "side": 1,
+      "message": "I guess it should say that it is only about Item and Property, as soon as other entities will have its own deserializers with its own rules.",
+      "range": {
+        "startLine": 1,
+        "startChar": 23,
+        "endLine": 1,
+        "endChar": 81
+      },
+      "revId": "bebacd6fdb2d4142ccabb8ed768e8b399851cde9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
