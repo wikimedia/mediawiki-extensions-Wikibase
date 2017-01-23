@@ -3,7 +3,9 @@
 namespace Wikibase\Repo\Api;
 
 use ApiMain;
+use ApiUsageException;
 use InvalidArgumentException;
+use Wikibase\Summary;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpAliases;
 use Wikibase\ChangeOp\ChangeOps;
@@ -32,15 +34,15 @@ class SetAliases extends ModifyEntity {
 	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
-	 * @param string $modulePrefix
+	 * @param FingerprintChangeOpFactory $termChangeOpFactory
 	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
-
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
-
-		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
+	public function __construct(
+		ApiMain $mainModule,
+		$moduleName,
+		FingerprintChangeOpFactory  $termChangeOpFactory
+	) {
+		parent::__construct( $mainModule, $moduleName );
+		$this->termChangeOpFactory = $termChangeOpFactory;
 	}
 
 	/**
@@ -170,7 +172,7 @@ class SetAliases extends ModifyEntity {
 	/**
 	 * @param array $params
 	 *
-	 * @return ChangeOpAliases
+	 * @return ChangeOpAliases[]
 	 */
 	private function getChangeOps( array $params ) {
 		$changeOps = array();
