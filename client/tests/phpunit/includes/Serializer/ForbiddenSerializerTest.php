@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\Client\Tests;
+namespace Wikibase\Client\Tests\Serializer;
 
 use PHPUnit_Framework_TestCase;
 use RuntimeException;
-use Wikibase\Client\ForbiddenSerializer;
+use Wikibase\Client\Serializer\ForbiddenSerializer;
 
 /**
- * @covers Wikibase\Client\ForbiddenSerializer
+ * @covers Wikibase\Client\Serializer\ForbiddenSerializer
  *
  * @group WikibaseClient
  * @group Wikibase
