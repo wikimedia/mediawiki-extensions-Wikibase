@@ -6,6 +6,7 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\PropertyContent;
 use Wikibase\Repo\Content\PropertyHandler;
 use Wikibase\SettingsArray;
@@ -108,6 +109,16 @@ class PropertyHandlerTest extends EntityHandlerTest {
 		$handler = $this->getHandler();
 		$id = new PropertyId( 'P7' );
 		$this->assertFalse( $handler->canCreateWithCustomId( $id ) );
+	}
+
+	protected function getTestItemContent() {
+		$item = new Property( null, null, 'string' );
+		$item->getFingerprint()->setLabel( 'en', 'Kitten' );
+		$item->getStatements()->addNewStatement(
+			new PropertyNoValueSnak( new PropertyId( 'P1' ) )
+		);
+
+		return PropertyContent::newFromProperty( $item );
 	}
 
 }
