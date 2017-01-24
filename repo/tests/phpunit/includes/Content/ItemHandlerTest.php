@@ -3,16 +3,21 @@
 namespace Wikibase\Repo\Tests\Content;
 
 use MWException;
+use Title;
 use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\Repo\Content\ItemHandler;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
+use WikiPage;
 
 /**
  * @covers Wikibase\Repo\Content\ItemHandler
@@ -156,4 +161,32 @@ class ItemHandlerTest extends EntityHandlerTest {
 		$this->assertFalse( $handler->canCreateWithCustomId( $id ) );
 	}
 
+	public function testDataForSearchIndex() {
+		$handler = $this->getHandler();
+		$engine = $this->getMock( \SearchEngine::class );
+
+		$page =
+			$this->getMockBuilder( WikiPage::class )
+				->setConstructorArgs( [ Title::newFromText( 'Q1' ) ] )
+				->getMock();
+		$page->method( 'getContent' )->willReturn( $this->getTestItemContent() );
+
+		$data = $handler->getDataForSearchIndex( $page, new \ParserOutput(), $engine );
+		$this->assertSame( 1, $data['label_count'], 'label_count' );
+		$this->assertSame( 1, $data['sitelink_count'], 'sitelink_count' );
+		$this->assertSame( 1, $data['statement_count'], 'statement_count' );
+	}
+
+	private function getTestItemContent() {
+		$item = new Item();
+		$item->getFingerprint()->setLabel( 'en', 'Kitten' );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Kitten' );
+		$item->getStatements()->addNewStatement(
+			new PropertyNoValueSnak( new PropertyId( 'P1' ) )
+		);
+
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+
+		return $entityContentFactory->newFromEntity( $item );
+	}
 }
