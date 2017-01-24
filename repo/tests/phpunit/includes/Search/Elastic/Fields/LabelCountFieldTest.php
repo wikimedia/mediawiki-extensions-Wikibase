@@ -2,11 +2,10 @@
 
 namespace Wikibase\Repo\Tests\Search\Elastic\Fields;
 
-use PHPUnit_Framework_TestCase;
-use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\Search\Elastic\Fields\LabelCountField;
+use Wikibase\Repo\Search\Elastic\Fields\WikibaseNumericField;
 
 /**
  * @covers Wikibase\Repo\Search\Elastic\Fields\LabelCountField
@@ -17,26 +16,7 @@ use Wikibase\Repo\Search\Elastic\Fields\LabelCountField;
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class LabelCountFieldTest extends PHPUnit_Framework_TestCase {
-
-	public function testGetMapping() {
-		$labelCountField = new LabelCountField();
-
-		$expected = array(
-			'type' => 'integer'
-		);
-
-		$this->assertSame( $expected, $labelCountField->getMapping() );
-	}
-
-	/**
-	 * @dataProvider getFieldDataProvider
-	 */
-	public function testGetFieldData( $expected, EntityDocument $entity ) {
-		$labelCountField = new LabelCountField();
-
-		$this->assertSame( $expected, $labelCountField->getFieldData( $entity ) );
-	}
+class LabelCountFieldTest extends WikibaseNumericFieldTest {
 
 	public function getFieldDataProvider() {
 		$item = new Item();
@@ -46,6 +26,13 @@ class LabelCountFieldTest extends PHPUnit_Framework_TestCase {
 			array( 1, $item ),
 			array( 0, Property::newFromType( 'string' ) )
 		);
+	}
+
+	/**
+	 * @return WikibaseNumericField
+	 */
+	protected function getFieldObject() {
+		return new LabelCountField();
 	}
 
 }
