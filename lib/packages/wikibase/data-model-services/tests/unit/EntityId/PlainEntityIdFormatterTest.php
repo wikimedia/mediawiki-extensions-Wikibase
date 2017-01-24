@@ -16,13 +16,6 @@ use Wikibase\DataModel\Services\EntityId\PlainEntityIdFormatter;
  */
 class PlainEntityIdFormatterTest extends PHPUnit_Framework_TestCase {
 
-	protected function newEntityIdFormatter() {
-		return new PlainEntityIdFormatter();
-	}
-
-	/**
-	 * @return array
-	 */
 	public function validProvider() {
 		$argLists = [];
 
@@ -44,7 +37,7 @@ class PlainEntityIdFormatterTest extends PHPUnit_Framework_TestCase {
 	 * @param string $expectedString
 	 */
 	public function testParseWithValidArguments( EntityId $entityId, $expectedString ) {
-		$formatter = $this->newEntityIdFormatter();
+		$formatter = new PlainEntityIdFormatter();
 
 		$formattingResult = $formatter->formatEntityId( $entityId );
 
