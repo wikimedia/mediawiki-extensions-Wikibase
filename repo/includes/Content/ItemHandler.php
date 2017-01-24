@@ -5,7 +5,10 @@ namespace Wikibase\Repo\Content;
 use DataUpdate;
 use IContextSource;
 use Page;
+use SearchEngine;
+use SearchIndexField;
 use Title;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -17,6 +20,7 @@ use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\SiteLinkStore;
+use Wikibase\Repo\Search\Elastic\Fields\WikibaseFieldDefinitions;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
@@ -195,7 +199,7 @@ class ItemHandler extends EntityHandler {
 	/**
 	 * @see EntityHandler::makeEmptyEntity()
 	 *
-	 * @return EntityContent
+	 * @return EntityDocument
 	 */
 	public function makeEmptyEntity() {
 		return new Item();
@@ -211,5 +215,4 @@ class ItemHandler extends EntityHandler {
 	public function makeEntityId( $id ) {
 		return new ItemId( $id );
 	}
-
 }
