@@ -1,0 +1,228 @@
+{
+    "description": "wikibase_prefix search for '{query}'",
+    "params": {
+        "timeout": "20s"
+    },
+    "query": {
+        "query": {
+            "bool": {
+                "should": [
+                    {
+                        "bool": {
+                            "filter": [
+                                {
+                                    "match": {
+                                        "labels_all.prefix": "\u7236\u985e"
+                                    }
+                                }
+                            ],
+                            "should": [
+                                {
+                                    "multi_match": {
+                                        "type": "best_fields",
+                                        "tie_breaker": 0,
+                                        "query": "\u7236\u985e",
+                                        "fields": [
+                                            "labels.zh.near_match^40",
+                                            "labels.zh.near_match_folded^30",
+                                            "labels.zh.prefix^15",
+                                            "labels_all.near_match^1",
+                                            "labels.zh-hans.near_match^25",
+                                            "labels.zh-hans.near_match_folded^20",
+                                            "labels.zh-hans.prefix^10",
+                                            "labels.zh-hant.near_match^22.5",
+                                            "labels.zh-hant.near_match_folded^18",
+                                            "labels.zh-hant.prefix^9",
+                                            "labels.zh-cn.near_match^20.25",
+                                            "labels.zh-cn.near_match_folded^16.2",
+                                            "labels.zh-cn.prefix^8.1",
+                                            "labels.zh-tw.near_match^18.225",
+                                            "labels.zh-tw.near_match_folded^14.58",
+                                            "labels.zh-tw.prefix^7.29",
+                                            "labels.zh-hk.near_match^16.4025",
+                                            "labels.zh-hk.near_match_folded^13.122",
+                                            "labels.zh-hk.prefix^6.561",
+                                            "labels.zh-sg.near_match^14.76225",
+                                            "labels.zh-sg.near_match_folded^11.8098",
+                                            "labels.zh-sg.prefix^5.9049",
+                                            "labels.zh-mo.near_match^13.286025",
+                                            "labels.zh-mo.near_match_folded^10.62882",
+                                            "labels.zh-mo.prefix^5.31441",
+                                            "labels.zh-my.near_match^11.9574225",
+                                            "labels.zh-my.near_match_folded^9.565938",
+                                            "labels.zh-my.prefix^4.782969",
+                                            "labels.en.near_match^10.76168025",
+                                            "labels.en.near_match_folded^8.6093442",
+                                            "labels.en.prefix^4.3046721"
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "term": {
+                            "title.keyword": "\u7236\u985e"
+                        }
+                    }
+                ],
+                "minimum_should_match": 1,
+                "filter": [
+                    {
+                        "term": {
+                            "content_model": "wikibase-property"
+                        }
+                    }
+                ]
+            }
+        },
+        "_source": [
+            "namespace",
+            "title",
+            "labels.de-ch",
+            "labels.de",
+            "labels.en"
+        ],
+        "stored_fields": [],
+        "highlight": {
+            "pre_tags": [
+                ""
+            ],
+            "post_tags": [
+                ""
+            ],
+            "fields": {
+                "title": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "matched_fields": [
+                        "title.keyword"
+                    ]
+                },
+                "labels.zh.prefix": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "options": {
+                        "skip_if_last_matched": true
+                    }
+                },
+                "labels.zh-hans.prefix": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "options": {
+                        "skip_if_last_matched": true
+                    }
+                },
+                "labels.zh-hant.prefix": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "options": {
+                        "skip_if_last_matched": true
+                    }
+                },
+                "labels.zh-cn.prefix": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "options": {
+                        "skip_if_last_matched": true
+                    }
+                },
+                "labels.zh-tw.prefix": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "options": {
+                        "skip_if_last_matched": true
+                    }
+                },
+                "labels.zh-hk.prefix": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "options": {
+                        "skip_if_last_matched": true
+                    }
+                },
+                "labels.zh-sg.prefix": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "options": {
+                        "skip_if_last_matched": true
+                    }
+                },
+                "labels.zh-mo.prefix": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "options": {
+                        "skip_if_last_matched": true
+                    }
+                },
+                "labels.zh-my.prefix": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "options": {
+                        "skip_if_last_matched": true
+                    }
+                },
+                "labels.en.prefix": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "options": {
+                        "skip_if_last_matched": true
+                    }
+                },
+                "labels_all.prefix": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "options": {
+                        "skip_if_last_matched": true
+                    }
+                }
+            }
+        },
+        "rescore": [
+            {
+                "window_size": 8192,
+                "query": {
+                    "query_weight": 1,
+                    "rescore_query_weight": 1,
+                    "score_mode": "multiply",
+                    "rescore_query": {
+                        "function_score": {
+                            "score_mode": "max",
+                            "functions": [
+                                {
+                                    "field_value_factor": {
+                                        "field": "label_count",
+                                        "missing": 0
+                                    },
+                                    "weight": 1
+                                },
+                                {
+                                    "field_value_factor": {
+                                        "field": "sitelink_count",
+                                        "missing": 0
+                                    },
+                                    "weight": 1
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "options": {
+        "timeout": "20s"
+    }
+}
