@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests;
 
 use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -36,7 +36,7 @@ class DispatchingEntityTypeStatementGrouperTest extends PHPUnit_Framework_TestCa
 	}
 
 	private function getStatementGuidParser() {
-		return new StatementGuidParser( new BasicEntityIdParser() );
+		return new StatementGuidParser( new ItemIdParser() );
 	}
 
 	/**

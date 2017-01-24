@@ -8,7 +8,7 @@ use FauxRequest;
 use HashSiteStore;
 use MediaWikiLangTestCase;
 use RequestContext;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Repo\Api\ListSubscribers;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -89,14 +89,12 @@ class ListSubscribersTest extends MediaWikiLangTestCase {
 		$apiMain = $this->getQueryModule( $params );
 		$errorReporter = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() )
 			->getErrorReporter( $apiMain );
-		$idParser = new BasicEntityIdParser();
-		$siteLokup = new HashSiteStore();
 		$module = new ListSubscribers(
 			$apiMain,
 			'subscribers',
 			$errorReporter,
-			$idParser,
-			$siteLokup
+			new ItemIdParser(),
+			new HashSiteStore()
 		);
 
 		$module->execute();

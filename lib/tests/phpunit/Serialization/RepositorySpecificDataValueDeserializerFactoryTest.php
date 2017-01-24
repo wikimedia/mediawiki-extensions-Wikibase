@@ -4,9 +4,9 @@ namespace Wikibase\Lib\Tests\Serialization;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\IllegalValueException;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 
@@ -44,7 +44,7 @@ class RepositorySpecificDataValueDeserializerFactoryTest extends \PHPUnit_Framew
 
 	public function testGivenLocalRepository_getDeserializerReturnsDeserializerReturningUnchangedEntityIdValue() {
 		$factory = new RepositorySpecificDataValueDeserializerFactory(
-			new PrefixMappingEntityIdParserFactory( new BasicEntityIdParser(), [] )
+			new PrefixMappingEntityIdParserFactory( new ItemIdParser(), [] )
 		);
 
 		$deserializer = $factory->getDeserializer( '' );
@@ -58,7 +58,7 @@ class RepositorySpecificDataValueDeserializerFactoryTest extends \PHPUnit_Framew
 
 	public function testGivenForeignRepository_getDeserializerReturnsDeserializerPrefixingTheEntityIdValue() {
 		$factory = new RepositorySpecificDataValueDeserializerFactory(
-			new PrefixMappingEntityIdParserFactory( new BasicEntityIdParser(), [] )
+			new PrefixMappingEntityIdParserFactory( new ItemIdParser(), [] )
 		);
 
 		$deserializer = $factory->getDeserializer( 'foo' );
@@ -72,7 +72,7 @@ class RepositorySpecificDataValueDeserializerFactoryTest extends \PHPUnit_Framew
 
 	public function testGivenLocalRepository_getDeserializerReturnsDeserializerParsingNumericEntityIdValue() {
 		$factory = new RepositorySpecificDataValueDeserializerFactory(
-			new PrefixMappingEntityIdParserFactory( new BasicEntityIdParser(), [] )
+			new PrefixMappingEntityIdParserFactory( new ItemIdParser(), [] )
 		);
 
 		$deserializer = $factory->getDeserializer( '' );
@@ -86,7 +86,7 @@ class RepositorySpecificDataValueDeserializerFactoryTest extends \PHPUnit_Framew
 
 	public function testGivenForeignRepository_getDeserializerReturnsDeserializerThrowingExceptionOnNumericEntityIdValues() {
 		$factory = new RepositorySpecificDataValueDeserializerFactory(
-			new PrefixMappingEntityIdParserFactory( new BasicEntityIdParser(), [] )
+			new PrefixMappingEntityIdParserFactory( new ItemIdParser(), [] )
 		);
 
 		$deserializer = $factory->getDeserializer( 'foo' );

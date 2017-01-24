@@ -50,13 +50,14 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 	 * @return TermValidatorFactory
 	 */
 	private function newFactory( $maxLength, array $languageCodes ) {
-		$idParser = new BasicEntityIdParser();
-
 		$mockProvider = new ChangeOpTestMockProvider( $this );
-		$dupeDetector = $mockProvider->getMockLabelDescriptionDuplicateDetector();
 
-		$builders = new TermValidatorFactory( $maxLength, $languageCodes, $idParser, $dupeDetector );
-		return $builders;
+		return new TermValidatorFactory(
+			$maxLength,
+			$languageCodes,
+			new BasicEntityIdParser(),
+			$mockProvider->getMockLabelDescriptionDuplicateDetector()
+		);
 	}
 
 	public function testGetFingerprintValidator() {

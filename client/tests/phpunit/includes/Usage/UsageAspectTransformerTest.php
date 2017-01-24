@@ -6,7 +6,6 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\UsageAspectTransformer;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
 /**
  * @covers Wikibase\Client\Usage\UsageAspectTransformer
@@ -112,7 +111,7 @@ class UsageAspectTransformerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideGetFilteredUsages
 	 */
-	public function testGetFilteredUsages( $entityId, $relevant, $used, $expected ) {
+	public function testGetFilteredUsages( ItemId $entityId, array $relevant, array $used, array $expected ) {
 		$transformer = new UsageAspectTransformer();
 		$transformer->setRelevantAspects( $entityId, $relevant );
 
@@ -162,12 +161,11 @@ class UsageAspectTransformerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideTransformPageEntityUsages
 	 */
-	public function testTransformPageEntityUsages( $relevant, PageEntityUsages $usages, $expected ) {
+	public function testTransformPageEntityUsages( array $relevant, PageEntityUsages $usages, array $expected ) {
 		$transformer = new UsageAspectTransformer();
-		$idParser = new BasicEntityIdParser();
 
 		foreach ( $relevant as $id => $aspects ) {
-			$transformer->setRelevantAspects( $idParser->parse( $id ), $aspects );
+			$transformer->setRelevantAspects( new ItemId( $id ), $aspects );
 		}
 
 		$transformed = $transformer->transformPageEntityUsages( $usages );

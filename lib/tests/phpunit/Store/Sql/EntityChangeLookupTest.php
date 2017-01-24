@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql;
 
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
@@ -24,7 +24,7 @@ class EntityChangeLookupTest extends \MediaWikiTestCase {
 	private function newEntityChangeLookup( $wiki ) {
 		return new EntityChangeLookup(
 			new EntityChangeFactory( new EntityDiffer(), [ 'item' => EntityChange::class ] ),
-			new BasicEntityIdParser(),
+			new ItemIdParser(),
 			$wiki
 		);
 	}

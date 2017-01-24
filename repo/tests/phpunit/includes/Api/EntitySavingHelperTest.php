@@ -8,11 +8,11 @@ use RequestContext;
 use Status;
 use ApiUsageException;
 use User;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\EditEntity;
@@ -290,7 +290,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 
 		$helper = new EntitySavingHelper(
 			$apiModule,
-			isset( $config['EntityIdParser'] ) ? $config['EntityIdParser'] : new BasicEntityIdParser(),
+			isset( $config['EntityIdParser'] ) ? $config['EntityIdParser'] : new ItemIdParser(),
 			$this->getMockEntityRevisionLookup(
 				isset( $config['entityId'] ) ? $config['entityId'] : null,
 				isset( $config['revision'] ) ? $config['revision'] : null,

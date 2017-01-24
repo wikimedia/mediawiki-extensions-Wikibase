@@ -2,8 +2,10 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
-use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityRedirect;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\GenericEntityInfoBuilder;
 use Wikibase\Lib\Tests\MockRepository;
 
@@ -19,13 +21,11 @@ use Wikibase\Lib\Tests\MockRepository;
 class GenericEntityInfoBuilderTest extends EntityInfoBuilderTest {
 
 	/**
-	 * @param array $ids
+	 * @param EntityId[] $ids
 	 *
 	 * @return GenericEntityInfoBuilder
 	 */
 	protected function newEntityInfoBuilder( array $ids ) {
-		$idParser = new BasicEntityIdParser();
-
 		$repo = new MockRepository();
 
 		foreach ( $this->getKnownEntities() as $entity ) {
@@ -33,11 +33,10 @@ class GenericEntityInfoBuilderTest extends EntityInfoBuilderTest {
 		}
 
 		foreach ( $this->getKnownRedirects() as $from => $toId ) {
-			$fromId = $idParser->parse( $from );
-			$repo->putRedirect( new EntityRedirect( $fromId, $toId ) );
+			$repo->putRedirect( new EntityRedirect( new ItemId( $from ), $toId ) );
 		}
 
-		return new GenericEntityInfoBuilder( $ids, $idParser, $repo );
+		return new GenericEntityInfoBuilder( $ids, new BasicEntityIdParser(), $repo );
 	}
 
 }

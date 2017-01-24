@@ -13,8 +13,8 @@ use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\ReferenceList;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -68,7 +68,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		return new EntityAccessor(
-			new BasicEntityIdParser(),
+			new ItemIdParser(),
 			$entityLookup ?: new MockRepository(),
 			$usageAccumulator ? $usageAccumulator : new HashUsageAccumulator(),
 			$entitySerializer,

@@ -9,7 +9,7 @@ use Wikibase\Client\Store\AddUsagesForPageJob;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\ItemIdParser;
 
 /**
  * @covers Wikibase\Client\Store\AddUsagesForPageJob
@@ -113,7 +113,7 @@ class AddUsagesForPageJobTest extends PHPUnit_Framework_TestCase {
 			);
 
 		$job = new AddUsagesForPageJob( $this->getMock( Title::class ), $params );
-		$job->overrideServices( $usageUpdater, new BasicEntityIdParser() );
+		$job->overrideServices( $usageUpdater, new ItemIdParser() );
 
 		$job->run();
 	}

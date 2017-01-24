@@ -34,7 +34,7 @@ class EntityDataTestProvider {
 	 * @return EntityRedirect[]
 	 */
 	public static function getEntityRedirects() {
-		$redirect = new EntityRedirect( new ItemId( 'Q22' ), new Itemid( 'Q42' ) );
+		$redirect = new EntityRedirect( new ItemId( 'Q22' ), new ItemId( 'Q42' ) );
 
 		return array( $redirect );
 	}

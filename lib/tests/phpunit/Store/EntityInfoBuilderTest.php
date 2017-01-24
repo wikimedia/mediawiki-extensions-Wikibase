@@ -20,7 +20,7 @@ use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 
 	/**
-	 * @return EntityId[]
+	 * @return ItemId[]
 	 */
 	protected function getKnownRedirects() {
 		return array(
