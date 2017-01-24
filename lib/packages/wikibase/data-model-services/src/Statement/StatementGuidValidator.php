@@ -17,7 +17,7 @@ class StatementGuidValidator {
 	/**
 	 * @var EntityIdParser
 	 */
-	protected $entityIdParser;
+	private $entityIdParser;
 
 	/**
 	 * @param EntityIdParser $entityIdParser
@@ -81,7 +81,7 @@ class StatementGuidValidator {
 	 *
 	 * @return boolean
 	 */
-	protected function validateGuid( $guid ) {
+	private function validateGuid( $guid ) {
 		return (bool)preg_match(
 			'/^\{?[A-Z\d]{8}-[A-Z\d]{4}-[A-Z\d]{4}-[A-Z\d]{4}-[A-Z\d]{12}\}?\z/i',
 			$guid
@@ -97,7 +97,7 @@ class StatementGuidValidator {
 	 *
 	 * @return boolean
 	 */
-	protected function validateStatementGuidPrefix( $prefixedId ) {
+	private function validateStatementGuidPrefix( $prefixedId ) {
 		try {
 			$this->entityIdParser->parse( $prefixedId );
 			return true;

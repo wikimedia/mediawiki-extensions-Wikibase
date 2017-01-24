@@ -23,7 +23,7 @@ class RedirectResolvingEntityLookup implements EntityLookup {
 	 *
 	 * @var EntityLookup
 	 */
-	protected $lookup;
+	private $lookup;
 
 	/**
 	 * @param EntityLookup $lookup The lookup to use

@@ -36,7 +36,7 @@ class GuidGeneratorTest extends \PHPUnit_Framework_TestCase {
 		return $argLists;
 	}
 
-	protected function assertIsGuidForId( $guid, EntityId $id ) {
+	private function assertIsGuidForId( $guid, EntityId $id ) {
 		$this->assertInternalType( 'string', $guid );
 		$this->assertStringStartsWith( $id->getSerialization(), $guid );
 	}
