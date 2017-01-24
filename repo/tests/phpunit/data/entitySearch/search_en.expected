@@ -1,0 +1,127 @@
+{
+    "description": "wikibase_prefix search for 'Duck'",
+    "params": {
+        "timeout": "20s"
+    },
+    "query": {
+        "query": {
+            "bool": {
+                "should": [
+                    {
+                        "bool": {
+                            "filter": [
+                                {
+                                    "match": {
+                                        "labels_all.prefix": "Duck"
+                                    }
+                                }
+                            ],
+                            "should": [
+                                {
+                                    "multi_match": {
+                                        "type": "best_fields",
+                                        "tie_breaker": 0,
+                                        "query": "Duck",
+                                        "fields": [
+                                            "labels.en.near_match^40",
+                                            "labels.en.near_match_folded^30",
+                                            "labels.en.prefix^15",
+                                            "labels_all.near_match^1"
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "term": {
+                            "title.keyword": "Duck"
+                        }
+                    }
+                ],
+                "minimum_should_match": 1,
+                "filter": [
+                    {
+                        "term": {
+                            "content_model": "wikibase-item"
+                        }
+                    }
+                ]
+            }
+        },
+        "_source": [
+            "namespace",
+            "title",
+            "labels.en"
+        ],
+        "stored_fields": [],
+        "highlight": {
+            "pre_tags": [
+                ""
+            ],
+            "post_tags": [
+                ""
+            ],
+            "fields": {
+                "title": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "matched_fields": [
+                        "title.keyword"
+                    ]
+                },
+                "labels.en.prefix": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "options": {
+                        "skip_if_last_matched": true
+                    }
+                },
+                "labels_all.prefix": {
+                    "type": "experimental",
+                    "fragmenter": "none",
+                    "number_of_fragments": 0,
+                    "options": {
+                        "skip_if_last_matched": true
+                    }
+                }
+            }
+        },
+        "rescore": [
+            {
+                "window_size": 8192,
+                "query": {
+                    "query_weight": 1,
+                    "rescore_query_weight": 1,
+                    "score_mode": "multiply",
+                    "rescore_query": {
+                        "function_score": {
+                            "score_mode": "max",
+                            "functions": [
+                                {
+                                    "field_value_factor": {
+                                        "field": "label_count",
+                                        "missing": 0
+                                    },
+                                    "weight": 1
+                                },
+                                {
+                                    "field_value_factor": {
+                                        "field": "sitelink_count",
+                                        "missing": 0
+                                    },
+                                    "weight": 1
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "options": {
+        "timeout": "20s"
+    }
+}
