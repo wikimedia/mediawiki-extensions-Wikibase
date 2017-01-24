@@ -45,7 +45,9 @@
 	},
 	"require-dev": {
 		"jakub-onderka/php-parallel-lint": ">=0.3 <0.10",
-		"mediawiki/mediawiki-codesniffer": ">=0.4 <0.8"
+		"mediawiki/mediawiki-codesniffer": ">=0.4 <0.8",
+		"hamcrest/hamcrest-php": "^2.0",
+		"wmde/hamcrest-html-matchers": "0.1.x-dev"
 	},
 	"conflict": {
 		"mediawiki/mediawiki": "<1.25"
@@ -72,6 +74,12 @@
 			"Wikibase\\View\\": "view/src",
 			"Wikibase\\View\\Tests\\": "view/tests/phpunit"
 		}
+	},
+	"autoload-dev": {
+		"files": [
+			"vendor/hamcrest/hamcrest-php/hamcrest/Hamcrest.php",
+			"vendor/wmde/hamcrest-html-matchers/src/functions.php"
+		]
 	},
 	"scripts": {
 		"test": [
