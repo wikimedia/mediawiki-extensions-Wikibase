@@ -504,5 +504,4 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	public function testSupportsCategories() {
 		$this->assertFalse( $this->getHandler()->supportsCategories() );
 	}
-
 }
