@@ -37,7 +37,11 @@ class InterwikiSortingHookHandlers {
 
 		$config = MediaWikiServices::getInstance()->getMainConfig();
 
-		if ( $config->has( 'InterwikiSortingSort' ) ) {
+		if (
+			$config->has( 'InterwikiSortingSort' ) &&
+			$config->has( 'InterwikiSortingInterwikiSortOrders' ) &&
+			$config->has( 'InterwikiSortingSortPrepend' )
+		) {
 			return self::newFromInterwikiSortingConfig( $config, $namespaceChecker );
 		}
 
