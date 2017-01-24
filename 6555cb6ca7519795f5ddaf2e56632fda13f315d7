@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_9208122d",
+        "filename": "repo/includes/Specials/SpecialListProperties.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-24T08:27:57Z",
+      "side": 1,
+      "message": "Yes, it is fine as it is in this patch. I am going to take care of it, as I am messing with this BufferinTermLookup/PrefetchingTermLookup in another patch.",
+      "parentUuid": "4efb0bce_e259bf91",
+      "revId": "6555cb6ca7519795f5ddaf2e56632fda13f315d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_2cb6b0d7",
         "filename": "repo/includes/Specials/SpecialListProperties.php",
         "patchSetId": 3
