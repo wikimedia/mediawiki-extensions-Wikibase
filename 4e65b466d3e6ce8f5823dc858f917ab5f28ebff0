@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efb0bce_05f17bfe",
+        "filename": "lib/WikibaseLib.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-24T19:29:25Z",
+      "side": 0,
+      "message": "this should probably not be removed",
+      "revId": "4e65b466d3e6ce8f5823dc858f917ab5f28ebff0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
