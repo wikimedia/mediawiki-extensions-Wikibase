@@ -10,7 +10,7 @@ interface FieldDefinitions {
 
 	/**
 	 * Get the list of definitions, key is name, value is SearchIndexField
-	 * @return SearchIndexField[]
+	 * @return WikibaseIndexField[]
 	 */
 	public function getFields();
 
