@@ -7,14 +7,12 @@ use HTMLForm;
 use Html;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataTypeSelector;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\BufferingTermLookup;
-use Wikibase\View\EntityIdFormatterFactory;
 
 /**
  * Special page to list properties by data type
@@ -67,53 +65,31 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	 */
 	private $bufferingTermLookup;
 
-	public function __construct() {
-		parent::__construct( 'ListProperties' );
-
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-		$this->initServices(
-			$wikibaseRepo->getDataTypeFactory(),
-			$wikibaseRepo->getStore()->getPropertyInfoLookup(),
-			$wikibaseRepo->getEntityIdHtmlLinkFormatterFactory(),
-			$wikibaseRepo->getLanguageFallbackChainFactory(),
-			$wikibaseRepo->getEntityTitleLookup(),
-			$wikibaseRepo->getBufferingTermLookup()
-		);
-	}
-
 	/**
-	 * Set service objects to use. Unit tests may call this to substitute mock
-	 * services.
-	 *
 	 * @param DataTypeFactory $dataTypeFactory
-	 * @param PropertyInfoStore $propertyInfoStore
-	 * @param EntityIdFormatterFactory $entityIdFormatterFactory
-	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
+	 * @param PropertyInfoLookup $propertyInfoLookup
+	 * @param LabelDescriptionLookup $labelDescriptionLookup
+	 * @param EntityIdFormatter $entityIdFormatter
 	 * @param EntityTitleLookup $titleLookup
 	 * @param BufferingTermLookup $bufferingTermLookup
 	 */
-	public function initServices(
+	public function __construct(
 		DataTypeFactory $dataTypeFactory,
 		PropertyInfoLookup $propertyInfoLookup,
-		EntityIdFormatterFactory $entityIdFormatterFactory,
-		LanguageFallbackChainFactory $languageFallbackChainFactory,
+		LabelDescriptionLookup $labelDescriptionLookup,
+		EntityIdFormatter $entityIdFormatter,
 		EntityTitleLookup $titleLookup,
 		BufferingTermLookup $bufferingTermLookup
 	) {
-		$fallbackMode = LanguageFallbackChainFactory::FALLBACK_ALL;
-		$this->labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
-			$bufferingTermLookup,
-			$languageFallbackChainFactory->newFromLanguage( $this->getLanguage(), $fallbackMode )
-		);
+		parent::__construct( 'ListProperties' );
 
 		$this->dataTypeFactory = $dataTypeFactory;
 		$this->propertyInfoLookup = $propertyInfoLookup;
-		$this->entityIdFormatter = $entityIdFormatterFactory->getEntityIdFormatter(
-			$this->labelDescriptionLookup
-		);
+		$this->labelDescriptionLookup = $labelDescriptionLookup;
+		$this->entityIdFormatter = $entityIdFormatter;
 		$this->titleLookup = $titleLookup;
 		$this->bufferingTermLookup = $bufferingTermLookup;
+
 	}
 
 	/**
