@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efb0bce_98d033ce",
+        "filename": "repo/WikibaseRepo.datatypes.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-24T16:19:35Z",
+      "side": 1,
+      "message": "There are already some @see tags above. Isn\u0027t it better to keep them together?",
+      "revId": "928f1afe17994b6f6d70830e1cf622a025f22ea4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
