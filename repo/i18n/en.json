@@ -410,6 +410,8 @@
 	"action-property-create": "create properties",
 	"wikibase-pageinfo-subscription": "Wikis subscribed to this entity",
 	"wikibase-pageinfo-subscription-none": "None",
+	"wb-search-bad-entity-type": "Bad entity type: $1",
+	"wb-search-bad-profile-name": "Bad search profile name: $1",
 	"apihelp-wbavailablebadges-description": "Queries available badge items.",
 	"apihelp-wbavailablebadges-example-1": "Queries all available badge items",
 	"apihelp-wbcreateclaim-description": "Creates Wikibase claims.",
