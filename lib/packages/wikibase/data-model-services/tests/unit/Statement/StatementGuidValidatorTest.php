@@ -2,7 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Tests\Statement;
 
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 
 /**
@@ -13,9 +13,8 @@ use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
  */
 class StatementGuidValidatorTest extends \PHPUnit_Framework_TestCase {
 
-	protected function newStatementGuidValidator() {
-		$entityIdParser = new BasicEntityIdParser();
-		return new StatementGuidValidator( $entityIdParser );
+	private function newStatementGuidValidator() {
+		return new StatementGuidValidator( new ItemIdParser() );
 	}
 
 	/**
