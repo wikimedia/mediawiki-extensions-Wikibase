@@ -33,6 +33,24 @@
       "revId": "0621a539454b1cb6536f9ef911cbe9f366d1b12e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_ade173fd",
+        "filename": "docs/extending-entities.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-24T12:18:09Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "4efb0bce_ad0bb3d8",
+      "revId": "0621a539454b1cb6536f9ef911cbe9f366d1b12e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
