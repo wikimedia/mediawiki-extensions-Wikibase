@@ -14,10 +14,11 @@ use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Repo\Api\EntitySearchHelper;
+use Wikibase\Repo\Api\EntitySearchTermIndex;
 use Wikibase\TermIndexEntry;
 
 /**
- * @covers Wikibase\Repo\Api\EntitySearchHelper
+ * @covers Wikibase\Repo\Api\EntitySearchTermIndex
  *
  * @group Wikibase
  * @group WikibaseAPI
@@ -25,7 +26,7 @@ use Wikibase\TermIndexEntry;
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
+class EntitySearchTermIndexTest extends \PHPUnit_Framework_TestCase {
 
 	const EXISTING_LOCAL_ITEM = 'Q111';
 	const FOREIGN_REPO_PREFIX = 'foreign';
@@ -112,7 +113,7 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 			]
 		);
 
-		return new EntitySearchHelper(
+		return new EntitySearchTermIndex(
 			$entityLookup,
 			new ItemIdParser(),
 			$searchInteractor,
