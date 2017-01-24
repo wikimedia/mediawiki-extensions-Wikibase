@@ -13,8 +13,10 @@ use Language;
 use MWContentSerializationException;
 use MWException;
 use ParserOptions;
+use ParserOutput;
 use RequestContext;
 use Revision;
+use SearchEngine;
 use Title;
 use User;
 use Wikibase\Content\DeferredDecodingEntityHolder;
@@ -28,12 +30,14 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Repo\Diff\EntityContentDiffView;
+use Wikibase\Repo\Search\Elastic\Fields\WikibaseFieldDefinitions;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\EntityValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\TermIndex;
+use WikiPage;
 
 /**
  * Base handler class for Entity content classes.
@@ -52,6 +56,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * to parser output.
 	 */
 	const PARSER_VERSION = 3;
+	protected $fieldDefinitions;
 
 	/**
 	 * @var EntityPerPage
@@ -129,6 +134,8 @@ abstract class EntityHandler extends ContentHandler {
 		$this->errorLocalizer = $errorLocalizer;
 		$this->entityIdParser = $entityIdParser;
 		$this->legacyExportFormatDetector = $legacyExportFormatDetector;
+		// FIXME: convert to DI, will be in the next patch
+		$this->fieldDefinitions = new WikibaseFieldDefinitions();
 	}
 
 	/**
@@ -332,7 +339,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @param string $blob
 	 * @param string|null $format
 	 *
-	 * @return string|void
+	 * @return string
 	 */
 	public function exportTransform( $blob, $format = null ) {
 		if ( !$this->legacyExportFormatDetector ) {
@@ -757,6 +764,43 @@ abstract class EntityHandler extends ContentHandler {
 	 */
 	public function canCreateWithCustomId( EntityId $id ) {
 		return false;
+	}
+
+	/**
+	 * @param SearchEngine $engine
+	 * @return \SearchIndexField[] List of fields this content handler can provide.
+	 */
+	public function getFieldsForSearchIndex( SearchEngine $engine ) {
+		$fields = [];
+
+		foreach ( $this->fieldDefinitions->getFields() as $name => $field ) {
+			$fields[$name] = $field->getMapping( $engine, $name );
+		}
+
+		return $fields;
+	}
+
+	/**
+	 * @param WikiPage $page
+	 * @param ParserOutput $output
+	 * @param SearchEngine $engine
+	 * @return array
+	 */
+	public function getDataForSearchIndex( WikiPage $page, ParserOutput $output,
+	                                       SearchEngine $engine ) {
+		$fieldsData = parent::getDataForSearchIndex( $page, $output, $engine );
+
+		$content = $page->getContent();
+		if ( ( $content instanceof EntityContent ) && !$content->isRedirect() ) {
+			$entity = $content->getEntity();
+			$fields = $this->fieldDefinitions->getFields();
+
+			foreach ( $fields as $fieldName => $field ) {
+				$fieldsData[$fieldName] = $field->getFieldData( $entity );
+			}
+		}
+
+		return $fieldsData;
 	}
 
 }

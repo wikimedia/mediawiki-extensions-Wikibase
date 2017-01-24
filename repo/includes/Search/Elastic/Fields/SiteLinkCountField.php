@@ -9,18 +9,7 @@ use Wikibase\DataModel\Entity\Item;
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class SiteLinkCountField implements SearchIndexField {
-
-	/**
-	 * @see SearchIndexField::getMapping
-	 *
-	 * @return array
-	 */
-	public function getMapping() {
-		return array(
-			'type' => 'integer'
-		);
-	}
+class SiteLinkCountField extends WikibaseNumericField {
 
 	/**
 	 * @see SearchIndexField::getFieldData
