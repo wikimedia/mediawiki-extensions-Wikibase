@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Search\Elastic\Fields;
 
+use SearchEngine;
 use Wikibase\DataModel\Entity\EntityDocument;
 
 /**
@@ -18,14 +19,12 @@ use Wikibase\DataModel\Entity\EntityDocument;
 interface SearchIndexField {
 
 	/**
-	 * @return array The field mapping defines attributes of the field,
-	 *               such as the field type (e.g. "string", "long", "nested")
-	 *               and other attributes like "not_analyzed".
-	 *
-	 *               For detailed documentation about mapping of fields, see:
-	 *               https://www.elastic.co/guide/en/elasticsearch/guide/current/mapping-intro.html
+	 * Produce specific field mapping
+	 * @param SearchEngine $engine
+	 * @param string $name
+	 * @return \SearchIndexField
 	 */
-	public function getMapping();
+	public function getMapping( SearchEngine $engine, $name );
 
 	/**
 	 * @param EntityDocument $entity

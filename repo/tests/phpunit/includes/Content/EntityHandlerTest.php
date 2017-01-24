@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Content;
 
 use ContentHandler;
 use DataValues\Serializers\DataValueSerializer;
+use DummySearchIndexFieldDefinition;
 use FauxRequest;
 use InvalidArgumentException;
 use Language;
@@ -19,13 +20,16 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\EntityContent;
+use Wikibase\ItemContent;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Repo\Content\EntityHandler;
+use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Validators\EntityValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
+use WikiPage;
 use WikitextContent;
 
 /**
@@ -471,6 +475,46 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 
 	public function testSupportsCategories() {
 		$this->assertFalse( $this->getHandler()->supportsCategories() );
+	}
+
+	public function testFieldsForSearchIndex() {
+		$handler = $this->getHandler();
+
+		$searchEngine = $this->getMockBuilder( 'SearchEngine' )->getMock();
+
+		$searchEngine->expects( $this->any() )
+			->method( 'makeSearchFieldMapping' )
+			->will( $this->returnCallback( function ( $name, $type ) {
+				return new DummySearchIndexFieldDefinition( $name, $type );
+			} ) );
+
+		$fields = $handler->getFieldsForSearchIndex( $searchEngine );
+		$expectedFields = [ 'label_count', 'sitelink_count', 'statement_count' ];
+		foreach ( $expectedFields as $expected ) {
+			$this->assertInstanceOf( \SearchIndexField::class, $fields[$expected] );
+			$mapping = $fields[$expected]->getMapping( $searchEngine );
+			$this->assertEquals( $expected, $mapping['name'] );
+		}
+	}
+
+	abstract protected function getTestItemContent();
+
+	public function testDataForSearchIndex() {
+		$handler = $this->getHandler();
+		$engine = $this->getMock( \SearchEngine::class );
+
+		$page =
+			$this->getMockBuilder( WikiPage::class )
+				->setConstructorArgs( [ Title::newFromText( 'Q1' ) ] )
+				->getMock();
+		$page->method( 'getContent' )->willReturn( $this->getTestItemContent() );
+
+		$data = $handler->getDataForSearchIndex( $page, new \ParserOutput(), $engine );
+		$this->assertSame( 1, $data['label_count'], 'label_count' );
+		if ( $handler instanceof ItemHandler ) {
+			$this->assertSame( 1, $data['sitelink_count'], 'sitelink_count' );
+		}
+		$this->assertSame( 1, $data['statement_count'], 'statement_count' );
 	}
 
 }
