@@ -94,6 +94,19 @@ final class RepoHooks {
 			};
 		}
 
+		$searchSettings = $wikibaseRepo->getSettings()->getSetting( 'entitySearch' );
+		if ( $searchSettings['useCirrus'] ) {
+			global $wgCirrusSearchRescoreFunctionScoreChains, $wgCirrusSearchExtraIndexSettings;
+			// ElasticSearch function for entity weight
+			$wgCirrusSearchRescoreFunctionScoreChains = array_merge(
+				isset( $wgCirrusSearchRescoreFunctionScoreChains ) ? $wgCirrusSearchRescoreFunctionScoreChains : [],
+				require __DIR__ . '/config/ElasticSearchRescoreFunctions.php'
+			);
+			// Bump max fields so that labels/descriptions fields fit in.
+			$wgCirrusSearchExtraIndexSettings['index.mapping.total_fields.limit'] = 5000;
+
+		}
+
 		return true;
 	}
 
