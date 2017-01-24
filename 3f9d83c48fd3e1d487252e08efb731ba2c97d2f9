@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efb0bce_58c2bb3a",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-24T15:56:04Z",
+      "side": 1,
+      "message": "long line, please wrap",
+      "revId": "3f9d83c48fd3e1d487252e08efb731ba2c97d2f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_d8dc6b1d",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-24T15:56:04Z",
+      "side": 1,
+      "message": "long line",
+      "revId": "3f9d83c48fd3e1d487252e08efb731ba2c97d2f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_98e6f3e1",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-24T15:56:04Z",
+      "side": 1,
+      "message": "long line",
+      "revId": "3f9d83c48fd3e1d487252e08efb731ba2c97d2f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_58c99b54",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-24T15:56:04Z",
+      "side": 1,
+      "message": "Is there a good reason to run this test against the actually configured set of foreign repos? Shouldn\u0027t we just make something up for the test?",
+      "revId": "3f9d83c48fd3e1d487252e08efb731ba2c97d2f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_18d32307",
+        "filename": "client/tests/phpunit/includes/Store/RepositoryServiceContainerFactoryTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-24T15:56:04Z",
+      "side": 1,
+      "message": "Or just ItemIdParser?",
+      "revId": "3f9d83c48fd3e1d487252e08efb731ba2c97d2f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
