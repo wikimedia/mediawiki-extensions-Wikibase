@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Search\Elastic\Fields;
 
+use DummySearchIndexFieldDefinition;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -22,11 +23,19 @@ class SiteLinkCountFieldTest extends PHPUnit_Framework_TestCase {
 	public function testGetMapping() {
 		$siteLinkCountField = new SiteLinkCountField();
 
-		$expected = array(
-			'type' => 'integer'
-		);
+		$searchEngine = $this->getMockBuilder( 'SearchEngine' )->getMock();
 
-		$this->assertSame( $expected, $siteLinkCountField->getMapping() );
+		$searchEngine->expects( $this->any() )
+			->method( 'makeSearchFieldMapping' )
+			->will( $this->returnCallback( function ( $name, $type ) {
+				return new DummySearchIndexFieldDefinition( $name, $type );
+			} ) );
+
+		$mapping =
+			$siteLinkCountField->getMapping( $searchEngine, "sitelink_field" )
+				->getMapping( $searchEngine );
+		$this->assertEquals( \SearchIndexField::INDEX_TYPE_INTEGER, $mapping['type'] );
+		$this->assertEquals( "sitelink_field", $mapping['name'] );
 	}
 
 	/**

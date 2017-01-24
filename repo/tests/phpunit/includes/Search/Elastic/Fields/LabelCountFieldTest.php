@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Search\Elastic\Fields;
 
+use DummySearchIndexFieldDefinition;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -22,11 +23,19 @@ class LabelCountFieldTest extends PHPUnit_Framework_TestCase {
 	public function testGetMapping() {
 		$labelCountField = new LabelCountField();
 
-		$expected = array(
-			'type' => 'integer'
-		);
+		$searchEngine = $this->getMockBuilder( 'SearchEngine' )->getMock();
 
-		$this->assertSame( $expected, $labelCountField->getMapping() );
+		$searchEngine->expects( $this->any() )
+			->method( 'makeSearchFieldMapping' )
+			->will( $this->returnCallback( function ( $name, $type ) {
+				return new DummySearchIndexFieldDefinition( $name, $type );
+			} ) );
+
+		$mapping =
+			$labelCountField->getMapping( $searchEngine, "label_field" )
+				->getMapping( $searchEngine );
+		$this->assertEquals( \SearchIndexField::INDEX_TYPE_INTEGER, $mapping['type'] );
+		$this->assertEquals( "label_field", $mapping['name'] );
 	}
 
 	/**

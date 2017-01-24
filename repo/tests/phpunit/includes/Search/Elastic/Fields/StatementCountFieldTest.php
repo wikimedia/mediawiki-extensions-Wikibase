@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Search\Elastic\Fields;
 
+use DummySearchIndexFieldDefinition;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -23,11 +24,19 @@ class StatementCountFieldTest extends PHPUnit_Framework_TestCase {
 	public function testGetMapping() {
 		$statementCountField = new StatementCountField();
 
-		$expected = array(
-			'type' => 'integer'
-		);
+		$searchEngine = $this->getMockBuilder( 'SearchEngine' )->getMock();
 
-		$this->assertSame( $expected, $statementCountField->getMapping() );
+		$searchEngine->expects( $this->any() )
+			->method( 'makeSearchFieldMapping' )
+			->will( $this->returnCallback( function ( $name, $type ) {
+				return new DummySearchIndexFieldDefinition( $name, $type );
+			} ) );
+
+		$mapping =
+			$statementCountField->getMapping( $searchEngine, "count_field" )
+				->getMapping( $searchEngine );
+		$this->assertEquals( \SearchIndexField::INDEX_TYPE_INTEGER, $mapping['type'] );
+		$this->assertEquals( "count_field", $mapping['name'] );
 	}
 
 	/**
