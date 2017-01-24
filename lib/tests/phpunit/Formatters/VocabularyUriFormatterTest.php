@@ -3,8 +3,8 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use PHPUnit_Framework_TestCase;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\Term;
@@ -49,9 +49,7 @@ class VocabularyUriFormatterTest extends PHPUnit_Framework_TestCase {
 				return new Term( 'en', 'LABEL:' . $id->getSerialization() );
 			} ) );
 
-		$idParser = new BasicEntityIdParser();
-
-		$formatter = new VocabularyUriFormatter( $idParser, $labelLookup, array( 'NotAUnit' ) );
+		$formatter = new VocabularyUriFormatter( new ItemIdParser(), $labelLookup, [ 'NotAUnit' ] );
 
 		$this->assertEquals( $expected, $formatter->format( $unit ) );
 	}

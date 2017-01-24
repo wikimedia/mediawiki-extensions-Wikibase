@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Api;
 
 use PHPUnit_Framework_TestCase;
 use RuntimeException;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\Api\ApiErrorReporter;
@@ -50,7 +50,7 @@ class GetClaimsStatementFilterTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testIsMatch( array $requestParams, Statement $statement, $expected ) {
 		$filter = new GetClaimsStatementFilter(
-			new BasicEntityIdParser(),
+			new ItemIdParser(),
 			$this->getApiErrorReporter(),
 			$requestParams
 		);
@@ -82,7 +82,7 @@ class GetClaimsStatementFilterTest extends PHPUnit_Framework_TestCase {
 
 	public function testInvalidRankSerialization() {
 		$filter = new GetClaimsStatementFilter(
-			new BasicEntityIdParser(),
+			new ItemIdParser(),
 			$this->getApiErrorReporter( true ),
 			array( 'rank' => 'invalid' )
 		);
@@ -93,7 +93,7 @@ class GetClaimsStatementFilterTest extends PHPUnit_Framework_TestCase {
 
 	public function testInvalidPropertySerialization() {
 		$filter = new GetClaimsStatementFilter(
-			new BasicEntityIdParser(),
+			new ItemIdParser(),
 			$this->getApiErrorReporter( true ),
 			array( 'property' => 'invalid' )
 		);

@@ -15,7 +15,6 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -309,10 +308,8 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals( $expectedIds, $actualIds );
 
-		$idParser = new BasicEntityIdParser();
-
 		foreach ( $data as $serialization ) {
-			$id = $idParser->parse( $serialization['id'] );
+			$id = new ItemId( $serialization['id'] );
 			$this->assertEntitySerialization( $id, $serialization );
 		}
 	}

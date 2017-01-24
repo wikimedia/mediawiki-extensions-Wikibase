@@ -14,8 +14,8 @@ use SiteList;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\SerializerFactory;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Rdf\RdfVocabulary;
@@ -75,7 +75,6 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	 */
 	protected function newHandler() {
 		$mockRepository = EntityDataTestProvider::getMockRepository();
-		$idParser = new BasicEntityIdParser(); // we only test for items and properties here.
 
 		$dataTypeLookup = $this->getMock( PropertyDataTypeLookup::class );
 		$dataTypeLookup->expects( $this->any() )
@@ -88,8 +87,6 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			->will( $this->returnCallback( function( EntityId $id ) {
 				return Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
 			} ) );
-
-		$propertyLookup = $this->getMock( PropertyDataTypeLookup::class );
 
 		$entityDataFormatProvider = new EntityDataFormatProvider();
 		$serializerFactory = new SerializerFactory(
@@ -105,7 +102,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		$service = new EntityDataSerializationService(
 			$mockRepository,
 			$titleLookup,
-			$propertyLookup,
+			$this->getMock( PropertyDataTypeLookup::class ),
 			$rdfBuilder,
 			new SiteList(),
 			$entityDataFormatProvider,
@@ -152,7 +149,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		$handler = new EntityDataRequestHandler(
 			$uriManager,
 			$titleLookup,
-			$idParser,
+			new ItemIdParser(),
 			$mockRepository,
 			$mockRepository,
 			$service,

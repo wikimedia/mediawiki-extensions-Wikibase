@@ -8,7 +8,7 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\ItemIdParser;
 
 /**
  * @covers Wikibase\Client\Usage\Sql\EntityUsageTable
@@ -60,7 +60,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 	}
 
 	private function getEntityUsageTable( $batchSize = 1000 ) {
-		return new EntityUsageTable( new BasicEntityIdParser(), wfGetDB( DB_MASTER ), $batchSize );
+		return new EntityUsageTable( new ItemIdParser(), wfGetDB( DB_MASTER ), $batchSize );
 	}
 
 	public function testAddUsages() {

@@ -13,8 +13,8 @@ use SpecialPage;
 use SpecialPageTestBase;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\SerializerFactory;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Rdf\RdfVocabulary;
@@ -114,7 +114,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		return new EntityDataRequestHandler(
 			$uriManager,
 			$titleLookup,
-			new BasicEntityIdParser(),
+			new ItemIdParser(),
 			$mockRepository,
 			$mockRepository,
 			$serializationService,

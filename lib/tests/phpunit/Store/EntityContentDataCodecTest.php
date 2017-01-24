@@ -6,12 +6,12 @@ use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use MediaWikiTestCase;
 use MWContentSerializationException;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\InternalSerialization\DeserializerFactory;
@@ -29,19 +29,16 @@ use Wikibase\Lib\Store\EntityContentDataCodec;
 class EntityContentDataCodecTest extends MediaWikiTestCase {
 
 	private function getCodec( $maxBlobSize = 0 ) {
-		$idParser = new BasicEntityIdParser();
-
+		$idParser = new ItemIdParser();
 		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
 		$deserializerFactory = new DeserializerFactory( new DataValueDeserializer(), $idParser );
 
-		$codec = new EntityContentDataCodec(
+		return new EntityContentDataCodec(
 			$idParser,
 			$serializerFactory->newEntitySerializer(),
 			$deserializerFactory->newEntityDeserializer(),
 			$maxBlobSize
 		);
-
-		return $codec;
 	}
 
 	public function entityIdProvider() {

@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Api;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -99,7 +99,7 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 	private function newEntitySearchHelper( TermIndexSearchInteractor $searchInteractor ) {
 		return new EntitySearchHelper(
 			$this->getMockTitleLookup(),
-			new BasicEntityIdParser(),
+			new ItemIdParser(),
 			$searchInteractor,
 			$this->getMockLabelDescriptionLookup()
 		);

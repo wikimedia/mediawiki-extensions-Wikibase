@@ -10,7 +10,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityRevision;
@@ -325,15 +324,13 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetEntities
 	 */
-	public function testGetEntities( $ids, $expected, $expectedError = false ) {
+	public function testGetEntities( array $ids, array $expected, $expectedError = false ) {
 		$this->setupGetEntities();
-
-		$idParser = new BasicEntityIdParser();
 
 		// convert string IDs to EntityId objects
 		foreach ( $ids as $i => $id ) {
 			if ( is_string( $id ) ) {
-				$ids[ $i ] = $idParser->parse( $id );
+				$ids[ $i ] = new ItemId( $id );
 			}
 		}
 

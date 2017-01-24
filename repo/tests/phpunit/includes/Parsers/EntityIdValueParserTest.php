@@ -5,13 +5,12 @@ namespace Wikibase\Repo\Tests\Parsers;
 use ValueParsers\Test\StringValueParserTest;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Repo\Parsers\EntityIdValueParser;
 
 /**
  * @covers Wikibase\Repo\Parsers\EntityIdValueParser
- * @uses Wikibase\DataModel\Entity\BasicEntityIdParser
  *
  * @group ValueParsers
  * @group Wikibase
@@ -35,7 +34,7 @@ class EntityIdValueParserTest extends StringValueParserTest {
 	 * @return EntityIdValueParser
 	 */
 	protected function getInstance() {
-		return new EntityIdValueParser( new BasicEntityIdParser() );
+		return new EntityIdValueParser( new ItemIdParser() );
 	}
 
 	/**

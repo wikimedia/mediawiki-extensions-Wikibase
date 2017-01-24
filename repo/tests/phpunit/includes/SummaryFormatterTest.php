@@ -9,8 +9,8 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
@@ -104,15 +104,13 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 
 		$language = Language::factory( 'en' );
 
-		$formatter = new SummaryFormatter(
+		return new SummaryFormatter(
 			$idFormatter,
 			$valueFormatter,
 			$snakFormatter,
 			$language,
-			new BasicEntityIdParser()
+			new ItemIdParser()
 		);
-
-		return $formatter;
 	}
 
 	/**

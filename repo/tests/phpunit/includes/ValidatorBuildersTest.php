@@ -17,9 +17,9 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\DispatchingEntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\StaticContentLanguages;
@@ -39,24 +39,18 @@ use Wikibase\Repo\ValidatorBuilders;
 class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 
 	private function newValidatorBuilders() {
-		$entityIdParser = new BasicEntityIdParser();
-
-		$urlSchemes = array( 'http', 'https', 'ftp', 'mailto' );
-
-		$builders = new ValidatorBuilders(
+		return new ValidatorBuilders(
 			$this->getEntityLookup(),
-			$entityIdParser,
-			$urlSchemes,
+			new ItemIdParser(),
+			[ 'http', 'https', 'ftp', 'mailto' ],
 			'http://qudt.org/vocab/',
-			new StaticContentLanguages( array( 'contentlanguage' ) ),
+			new StaticContentLanguages( [ 'contentlanguage' ] ),
 			$this->getCachingCommonsMediaFileNameLookup(),
 			[
 				'' => [ Item::ENTITY_TYPE, Property::ENTITY_TYPE ],
 				'foo' => [ Item::ENTITY_TYPE ]
 			]
 		);
-
-		return $builders;
 	}
 
 	private function getEntityLookup() {

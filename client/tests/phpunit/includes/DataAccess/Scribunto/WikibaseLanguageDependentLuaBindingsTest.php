@@ -9,7 +9,7 @@ use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\DataModel\Term\TermFallback;
 
@@ -46,7 +46,7 @@ class WikibaseLanguageDependentLuaBindingsTest extends PHPUnit_Framework_TestCas
 		UsageAccumulator $usageAccumulator = null
 	) {
 		return new WikibaseLanguageDependentLuaBindings(
-			new BasicEntityIdParser(),
+			new ItemIdParser(),
 			$labelDescriptionLookup,
 			$usageAccumulator ?: new HashUsageAccumulator()
 		);

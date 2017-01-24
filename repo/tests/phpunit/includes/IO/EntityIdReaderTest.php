@@ -5,9 +5,9 @@ namespace Wikibase\Repo\Tests\IO;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Repo\IO\EntityIdReader;
 use Wikibase\Repo\IO\LineReader;
@@ -29,7 +29,7 @@ class EntityIdReaderTest extends \PHPUnit_Framework_TestCase {
 	protected function openIdReader( $file, $type = null ) {
 		$path = __DIR__ . '/' . $file;
 		$handle = fopen( $path, 'r' );
-		return new EntityIdReader( new LineReader( $handle ), new BasicEntityIdParser(), $type );
+		return new EntityIdReader( new LineReader( $handle ), new ItemIdParser(), $type );
 	}
 
 	protected function getIdStrings( array $entityIds ) {

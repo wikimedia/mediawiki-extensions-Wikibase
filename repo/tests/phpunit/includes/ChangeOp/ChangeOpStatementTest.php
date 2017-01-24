@@ -7,10 +7,10 @@ use DataValues\StringValue;
 use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpStatement;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
@@ -278,7 +278,7 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 	 * @return ChangeOpStatement
 	 */
 	private function newChangeOpStatement( Statement $statement, $index = null ) {
-		$idParser = new BasicEntityIdParser();
+		$idParser = new ItemIdParser();
 
 		return new ChangeOpStatement(
 			$statement,

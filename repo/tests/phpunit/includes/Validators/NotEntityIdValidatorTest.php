@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests\Validators;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Repo\Validators\NotEntityIdValidator;
 
 /**
@@ -23,7 +23,7 @@ class NotEntityIdValidatorTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testInvalidConstructorArgument( $errorCode ) {
 		$this->setExpectedException( InvalidArgumentException::class );
-		new NotEntityIdValidator( new BasicEntityIdParser(), $errorCode );
+		new NotEntityIdValidator( new ItemIdParser(), $errorCode );
 	}
 
 	public function invalidConstructorArgumentProvider() {
@@ -47,8 +47,7 @@ class NotEntityIdValidatorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideValidate
 	 */
 	public function testValidate( $value, $code, array $forbiddenTypes = null, $expectedCode ) {
-		$idParser = new BasicEntityIdParser();
-		$validator = new NotEntityIdValidator( $idParser, $code, $forbiddenTypes );
+		$validator = new NotEntityIdValidator( new ItemIdParser(), $code, $forbiddenTypes );
 		$result = $validator->validate( $value );
 
 		if ( $expectedCode === null ) {

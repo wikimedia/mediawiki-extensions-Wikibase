@@ -14,9 +14,9 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\CreateRedirect;
@@ -133,7 +133,7 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 		$context->setRequest( new FauxRequest() );
 
 		$module->setServices(
-			new BasicEntityIdParser(),
+			new ItemIdParser(),
 			$errorReporter,
 			new RedirectCreationInteractor(
 				$this->mockRepository,

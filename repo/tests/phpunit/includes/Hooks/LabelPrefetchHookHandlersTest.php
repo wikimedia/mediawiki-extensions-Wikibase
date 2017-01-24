@@ -10,7 +10,6 @@ use Wikibase\Client\Store\TitleFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Repo\Hooks\LabelPrefetchHookHandlers;
@@ -36,12 +35,11 @@ class LabelPrefetchHookHandlersTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function titlesToIds( array $titles ) {
 		$entityIds = array();
-		$idParser = new BasicEntityIdParser();
 
 		foreach ( $titles as $title ) {
 			try {
 				// Pretend the article ID is the numeric entity ID.
-				$entityId = $idParser->parse( $title->getText() );
+				$entityId = new ItemId( $title->getText() );
 				$key = $entityId->getNumericId();
 
 				$entityIds[$key] = $entityId;

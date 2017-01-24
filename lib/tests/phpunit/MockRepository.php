@@ -11,9 +11,9 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
@@ -435,7 +435,7 @@ class MockRepository implements
 	 * @return GenericEntityInfoBuilder
 	 */
 	public function newEntityInfoBuilder( array $entityIds ) {
-		return new GenericEntityInfoBuilder( $entityIds, new BasicEntityIdParser(), $this );
+		return new GenericEntityInfoBuilder( $entityIds, new ItemIdParser(), $this );
 	}
 
 	/**
@@ -644,11 +644,10 @@ class MockRepository implements
 	/**
 	 * @param string $idString
 	 *
-	 * @return ItemId|PropertyId
+	 * @return ItemId
 	 */
 	private function parseId( $idString ) {
-		$parser = new BasicEntityIdParser();
-		return $parser->parse( $idString );
+		return new ItemId( $idString );
 	}
 
 	/**

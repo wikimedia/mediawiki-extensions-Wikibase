@@ -7,11 +7,11 @@ use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use MediaWikiTestCase;
 use Wikibase\DataModel\DeserializerFactory;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
@@ -101,7 +101,7 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 	public function assertSerializationEqualsEntity( EntityDocument $entity, $serialization ) {
 		$deserializerFactory = new DeserializerFactory(
 			new DataValueDeserializer( array( 'string' => StringValue::class ) ),
-			new BasicEntityIdParser()
+			new ItemIdParser()
 		);
 
 		$unserializedEntity = $deserializerFactory->newEntityDeserializer()->deserialize( $serialization );

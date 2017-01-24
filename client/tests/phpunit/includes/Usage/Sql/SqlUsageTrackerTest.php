@@ -2,12 +2,12 @@
 
 namespace Wikibase\Client\Tests\Usage\Sql;
 
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Tests\Usage\UsageLookupContractTester;
 use Wikibase\Client\Tests\Usage\UsageTrackerContractTester;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\Client\Usage\Sql\SqlUsageTracker;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
 /**
  * @covers Wikibase\Client\Usage\Sql\SqlUsageTracker
@@ -44,7 +44,7 @@ class SqlUsageTrackerTest extends \MediaWikiTestCase {
 		parent::setUp();
 
 		$this->sqlUsageTracker = new SqlUsageTracker(
-			new BasicEntityIdParser(),
+			new ItemIdParser(),
 			new SessionConsistentConnectionManager( wfGetLB() )
 		);
 
@@ -54,13 +54,13 @@ class SqlUsageTrackerTest extends \MediaWikiTestCase {
 
 	public function getUsages( $pageId ) {
 		$db = wfGetDB( DB_REPLICA );
-		$updater = new EntityUsageTable( new BasicEntityIdParser(), $db );
+		$updater = new EntityUsageTable( new ItemIdParser(), $db );
 		return $updater->queryUsages( $pageId );
 	}
 
 	public function putUsages( $pageId, array $usages ) {
 		$db = wfGetDB( DB_MASTER );
-		$updater = new EntityUsageTable( new BasicEntityIdParser(), $db );
+		$updater = new EntityUsageTable( new ItemIdParser(), $db );
 		return $updater->addUsages( $pageId, $usages );
 	}
 

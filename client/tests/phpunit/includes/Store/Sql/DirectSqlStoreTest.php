@@ -8,7 +8,7 @@ use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
@@ -41,14 +41,7 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$idParser = new BasicEntityIdParser();
-		$idComposer = new EntityIdComposer( [] );
-
 		$client = WikibaseClient::getDefaultInstance();
-
-		$contentCodec = $client->getEntityContentDataCodec();
-
-		$entityNamespaceLookup = new EntityNamespaceLookup( [] );
 
 		$dispatchingServiceFactory = new DispatchingServiceFactory( $client );
 		$dispatchingServiceFactory->defineService( 'EntityRevisionLookup', function() {
@@ -58,18 +51,16 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			return new MockPropertyInfoLookup();
 		} );
 
-		$store = new DirectSqlStore(
+		return new DirectSqlStore(
 			$entityChangeFactory,
-			$contentCodec,
-			$idParser,
-			$idComposer,
-			$entityNamespaceLookup,
+			$client->getEntityContentDataCodec(),
+			new ItemIdParser(),
+			new EntityIdComposer( [] ),
+			new EntityNamespaceLookup( [] ),
 			$dispatchingServiceFactory,
 			wfWikiID(),
 			'en'
 		);
-
-		return $store;
 	}
 
 	/**
