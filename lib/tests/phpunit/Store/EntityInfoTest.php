@@ -8,7 +8,7 @@ use RuntimeException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\GenericEntityInfoBuilder;
 use Wikibase\Lib\Tests\MockRepository;
@@ -40,7 +40,7 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 
 		$builder = new GenericEntityInfoBuilder(
 			$ids,
-			new BasicEntityIdParser(),
+			new ItemIdParser(),
 			$entityRevisionLookup
 		);
 

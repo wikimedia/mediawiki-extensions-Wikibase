@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Repo\WikibaseRepo;
@@ -46,7 +46,7 @@ class DeferredDecodingEntityHolderTest extends \PHPUnit_Framework_TestCase {
 	private function newHolder( EntityDocument $entity, $expectedEntityType = null, EntityId $expectedEntityId = null ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$codec = new EntityContentDataCodec(
-			new BasicEntityIdParser(),
+			new ItemIdParser(),
 			$wikibaseRepo->getEntitySerializer(),
 			$wikibaseRepo->getInternalFormatEntityDeserializer()
 		);

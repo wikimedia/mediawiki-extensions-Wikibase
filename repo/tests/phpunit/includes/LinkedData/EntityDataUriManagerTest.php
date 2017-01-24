@@ -4,8 +4,7 @@ namespace Wikibase\Repo\Tests\LinkedData;
 
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 
@@ -22,17 +21,6 @@ use Wikibase\Repo\LinkedData\EntityDataUriManager;
  * @author Daniel Kinzler
  */
 class EntityDataUriManagerTest extends \MediaWikiTestCase {
-
-	/**
-	 * @var EntityIdParser
-	 */
-	private $idParser;
-
-	protected function setUp() {
-		parent::setUp();
-
-		$this->idParser = new BasicEntityIdParser();
-	}
 
 	protected function makeUriManager() {
 		$titleLookup = $this->getMock( EntityTitleLookup::class );
@@ -129,7 +117,7 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 	 * @dataProvider provideGetDocName
 	 */
 	public function testGetDocName( $id, $format, $expected ) {
-		$id = $this->idParser->parse( $id );
+		$id = new ItemId( $id );
 
 		$uriManager = $this->makeUriManager();
 
@@ -152,7 +140,7 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 	 * @dataProvider provideGetDocTitle
 	 */
 	public function testGetDocTitle( $id, $format, $expected ) {
-		$id = $this->idParser->parse( $id );
+		$id = new ItemId( $id );
 
 		$uriManager = $this->makeUriManager();
 
@@ -174,7 +162,7 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 	 * @dataProvider provideGetDocUrl
 	 */
 	public function testGetDocUrl( $id, $format, $revision, $expectedExp ) {
-		$id = $this->idParser->parse( $id );
+		$id = new ItemId( $id );
 
 		$uriManager = $this->makeUriManager();
 
@@ -198,7 +186,7 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 	 * @dataProvider provideGetCacheableUrls
 	 */
 	public function testGetCacheableUrls( $id, $expected ) {
-		$id = $this->idParser->parse( $id );
+		$id = new ItemId( $id );
 
 		$uriManager = $this->makeUriManager();
 

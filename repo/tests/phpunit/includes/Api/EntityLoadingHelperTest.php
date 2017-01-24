@@ -6,10 +6,10 @@ use ApiBase;
 use Exception;
 use PHPUnit_Framework_MockObject_MockObject;
 use ApiUsageException;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -151,7 +151,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 	protected function newEntityLoadingHelper( array $config ) {
 		return new EntityLoadingHelper(
 			$this->getMockApiBase( isset( $config['params'] ) ? $config['params'] : [] ),
-			new BasicEntityIdParser(),
+			new ItemIdParser(),
 			$this->getMockEntityRevisionLookup(
 				isset( $config['entityId'] ) ? $config['entityId'] : null,
 				isset( $config['revision'] ) ? $config['revision'] : null,

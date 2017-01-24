@@ -5,7 +5,7 @@ namespace Wikibase\Client\Tests\Usage\Sql;
 use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\Client\Usage\Sql\EntityUsageTableBuilder;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 
@@ -29,13 +29,6 @@ class EntityUsageTableBuilderTest extends \MediaWikiTestCase {
 		parent::setUp();
 	}
 
-	private function getEntityUsageTableBuilder( $batchSize = 10 ) {
-		$loadBalancer = wfGetLB();
-		$idParser = new BasicEntityIdParser();
-
-		return new EntityUsageTableBuilder( $idParser, $loadBalancer, $batchSize );
-	}
-
 	public function testFillUsageTable() {
 		$this->putWikidataItemPageProps( array(
 			11 => 'Q11',
@@ -46,7 +39,7 @@ class EntityUsageTableBuilderTest extends \MediaWikiTestCase {
 			99 => '--broken--',
 		) );
 
-		$primer = $this->getEntityUsageTableBuilder( 2 );
+		$primer = new EntityUsageTableBuilder( new ItemIdParser(), wfGetLB(), 2 );
 		$primer->setProgressReporter( $this->getMessageReporter( $this->exactly( 3 ) ) );
 		$primer->setExceptionHandler( $this->getExceptionHandler( $this->exactly( 2 ) ) );
 

@@ -104,15 +104,13 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 
 		$language = Language::factory( 'en' );
 
-		$formatter = new SummaryFormatter(
+		return new SummaryFormatter(
 			$idFormatter,
 			$valueFormatter,
 			$snakFormatter,
 			$language,
 			new BasicEntityIdParser()
 		);
-
-		return $formatter;
 	}
 
 	/**

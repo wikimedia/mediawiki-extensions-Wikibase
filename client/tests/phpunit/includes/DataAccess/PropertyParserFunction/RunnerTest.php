@@ -15,12 +15,12 @@ use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
 use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRenderer;
 use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -45,7 +45,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 		$runner = new Runner(
 			$this->getStatementGroupRendererFactory( $itemId, 'Cat', $type ),
 			$this->getSiteLinkLookup( $itemId ),
-			new BasicEntityIdParser(),
+			new ItemIdParser(),
 			$this->getRestrictedEntityLookup(),
 			'enwiki',
 			true
@@ -79,7 +79,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 		$runner = new Runner(
 			$this->getStatementGroupRendererFactory( $itemId, 'Cat', 'escaped-plaintext' ),
 			$this->getMock( SiteLinkLookup::class ),
-			new BasicEntityIdParser(),
+			new ItemIdParser(),
 			$this->getRestrictedEntityLookup(),
 			'enwiki',
 			true
@@ -115,7 +115,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 		$runner = new Runner(
 			$this->getStatementGroupRendererFactory( $itemId, 'Cat', 'escaped-plaintext' ),
 			$this->getMock( SiteLinkLookup::class ),
-			new BasicEntityIdParser(),
+			new ItemIdParser(),
 			$restrictedEntityLookup,
 			'enwiki',
 			true
@@ -139,7 +139,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 		$runner = new Runner(
 			$this->getStatementGroupRendererFactory( $itemId, 'Cat', 'escaped-plaintext' ),
 			$this->getMock( SiteLinkLookup::class ),
-			new BasicEntityIdParser(),
+			new ItemIdParser(),
 			$this->getRestrictedEntityLookup(),
 			'enwiki',
 			true
@@ -173,7 +173,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 		$runner = new Runner(
 			$rendererFactory,
 			$this->getMock( SiteLinkLookup::class ),
-			new BasicEntityIdParser(),
+			new ItemIdParser(),
 			$this->getRestrictedEntityLookup(),
 			'enwiki',
 			true

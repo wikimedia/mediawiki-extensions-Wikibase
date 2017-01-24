@@ -13,8 +13,8 @@ use User;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
@@ -143,8 +143,6 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	 * @param EntityRedirect|null $expectedRedirect
 	 */
 	private function overrideServices( MergeItems $module, EntityRedirect $expectedRedirect = null ) {
-		$idParser = new BasicEntityIdParser();
-
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$errorReporter = new ApiErrorReporter(
 			$module,
@@ -167,7 +165,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 		);
 
 		$module->setServices(
-			$idParser,
+			new ItemIdParser(),
 			$errorReporter,
 			$resultBuilder,
 			new ItemMergeInteractor(
@@ -228,7 +226,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 		return new TermValidatorFactory(
 			100,
 			array( 'en', 'de', 'fr' ),
-			new BasicEntityIdParser(),
+			new ItemIdParser(),
 			$dupeDetector
 		);
 	}

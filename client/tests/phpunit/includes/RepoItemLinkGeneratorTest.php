@@ -6,7 +6,7 @@ use PHPUnit_Framework_TestCase;
 use Title;
 use Wikibase\Client\RepoItemLinkGenerator;
 use Wikibase\Client\RepoLinker;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\NamespaceChecker;
 
 /**
@@ -22,7 +22,7 @@ use Wikibase\NamespaceChecker;
  */
 class RepoItemLinkGeneratorTest extends PHPUnit_Framework_TestCase {
 
-	protected function getRepoLinker() {
+	private function getRepoLinker() {
 		$baseUrl = 'http://www.example.com';
 		$articlePath = '/wiki/$1';
 		$scriptPath = '';
@@ -32,14 +32,6 @@ class RepoItemLinkGeneratorTest extends PHPUnit_Framework_TestCase {
 		);
 
 		return new RepoLinker( $baseUrl, $articlePath, $scriptPath, $repoNamespaces );
-	}
-
-	protected function getNamespaceChecker() {
-		return new NamespaceChecker( array() );
-	}
-
-	protected function getEntityIdParser() {
-		return new BasicEntityIdParser();
 	}
 
 	public function getLinksProvider() {
@@ -130,28 +122,23 @@ class RepoItemLinkGeneratorTest extends PHPUnit_Framework_TestCase {
 		);
 
 		return $data;
-
 	}
 
 	/**
 	 * @dataProvider getLinksProvider
 	 */
 	public function testGetLinks(
-			$expected,
-			$title,
-			$action,
-			$noExternalLangLinks,
-			$prefixedId,
-			$hasLangLinks
-		) {
-		$repoLinker = $this->getRepoLinker();
-		$namespaceChecker = $this->getNamespaceChecker();
-		$entityIdParser = $this->getEntityIdParser();
-
+		$expected,
+		$title,
+		$action,
+		$noExternalLangLinks,
+		$prefixedId,
+		$hasLangLinks
+	) {
 		$repoItemLinkGenerator = new RepoItemLinkGenerator(
-			$namespaceChecker,
-			$repoLinker,
-			$entityIdParser,
+			new NamespaceChecker( [] ),
+			$this->getRepoLinker(),
+			new ItemIdParser(),
 			'wikipedia',
 			'enwiki'
 		);

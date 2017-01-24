@@ -133,8 +133,8 @@ class LabelPrefetchHookHandlersTest extends \PHPUnit_Framework_TestCase {
 
 		/** @var ChangesList $changesList */
 		$changesList = $this->getMockBuilder( ChangesList::class )
-		->disableOriginalConstructor()
-		->getMock();
+			->disableOriginalConstructor()
+			->getMock();
 
 		$linkBeginHookHandler->doChangesListInitRows(
 			$changesList,

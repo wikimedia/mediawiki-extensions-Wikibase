@@ -8,7 +8,7 @@ use HttpError;
 use SpecialPageExecutor;
 use SpecialPageTestBase;
 use Title;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Specials\SpecialEntityPage;
 
@@ -61,7 +61,7 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
 		return new SpecialEntityPage(
-			new BasicEntityIdParser(),
+			new ItemIdParser(),
 			$this->getEntityTitleLookup()
 		);
 	}
@@ -143,7 +143,7 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 			->will( $this->returnValue( null ) );
 
 		$specialEntityPage = new SpecialEntityPage(
-			new BasicEntityIdParser(),
+			new ItemIdParser(),
 			$nullReturningTitleLookup
 		);
 

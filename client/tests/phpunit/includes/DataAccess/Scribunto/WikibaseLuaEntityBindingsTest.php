@@ -7,7 +7,7 @@ use PHPUnit_Framework_TestCase;
 use Wikibase\Client\DataAccess\Scribunto\WikibaseLuaEntityBindings;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
@@ -47,7 +47,7 @@ class WikibaseLuaEntityBindingsTest extends PHPUnit_Framework_TestCase {
 		return new WikibaseLuaEntityBindings(
 			$plainTextTransclusionInteractor,
 			$richWikitextTransclusionInteractor,
-			new BasicEntityIdParser(),
+			new ItemIdParser(),
 			Language::factory( 'es' ),
 			'enwiki'
 		);

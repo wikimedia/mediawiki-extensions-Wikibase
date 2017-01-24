@@ -49,9 +49,11 @@ class VocabularyUriFormatterTest extends PHPUnit_Framework_TestCase {
 				return new Term( 'en', 'LABEL:' . $id->getSerialization() );
 			} ) );
 
-		$idParser = new BasicEntityIdParser();
-
-		$formatter = new VocabularyUriFormatter( $idParser, $labelLookup, array( 'NotAUnit' ) );
+		$formatter = new VocabularyUriFormatter(
+			new BasicEntityIdParser(),
+			$labelLookup,
+			[ 'NotAUnit' ]
+		);
 
 		$this->assertEquals( $expected, $formatter->format( $unit ) );
 	}
