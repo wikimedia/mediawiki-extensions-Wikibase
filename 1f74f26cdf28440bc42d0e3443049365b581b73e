@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_4d81dfa3",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-01-24T13:36:47Z",
+      "side": 1,
+      "message": "agree, it should be DataValue",
+      "parentUuid": "4efb0bce_baad6ee9",
+      "range": {
+        "startLine": 443,
+        "startChar": 115,
+        "endLine": 443,
+        "endChar": 116
+      },
+      "revId": "1f74f26cdf28440bc42d0e3443049365b581b73e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_7ab0163f",
         "filename": "repo/i18n/en.json",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2017-01-12T15:46:26Z",
       "side": 1,
       "message": "A main snak only has 1 datavalue.",
+      "range": {
+        "startLine": 581,
+        "startChar": 71,
+        "endLine": 581,
+        "endChar": 72
+      },
+      "revId": "1f74f26cdf28440bc42d0e3443049365b581b73e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_2d90e3f0",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-01-24T13:36:47Z",
+      "side": 1,
+      "message": "I would say DataValue, instead of DataValues",
+      "parentUuid": "4efb0bce_7ab0163f",
       "range": {
         "startLine": 581,
         "startChar": 71,
