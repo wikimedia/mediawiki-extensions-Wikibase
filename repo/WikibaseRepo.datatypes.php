@@ -21,6 +21,8 @@
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
+ *
+ * @see docs/datatypes.wiki Documentation on how to add new data type
  */
 
 use DataValues\Geo\Parsers\GlobeCoordinateParser;
