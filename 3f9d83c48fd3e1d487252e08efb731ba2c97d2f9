@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_d3fe8cff",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-24T17:23:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4efb0bce_58c2bb3a",
+      "revId": "3f9d83c48fd3e1d487252e08efb731ba2c97d2f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_d8dc6b1d",
         "filename": "client/includes/WikibaseClient.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2017-01-24T15:56:04Z",
       "side": 1,
       "message": "long line",
+      "revId": "3f9d83c48fd3e1d487252e08efb731ba2c97d2f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_331a8074",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-24T17:23:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4efb0bce_d8dc6b1d",
       "revId": "3f9d83c48fd3e1d487252e08efb731ba2c97d2f9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_13154440",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-24T17:23:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4efb0bce_98e6f3e1",
+      "revId": "3f9d83c48fd3e1d487252e08efb731ba2c97d2f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_58c99b54",
         "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
         "patchSetId": 2
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_53329cf0",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-24T17:23:49Z",
+      "side": 1,
+      "message": "This code is actually not even needed any more. DispatchingServiceFactory no longer reads any settings from WikibaseClient. Those three lines above have been left from some previous patchset. Now removed.",
+      "parentUuid": "4efb0bce_58c99b54",
+      "revId": "3f9d83c48fd3e1d487252e08efb731ba2c97d2f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_18d32307",
         "filename": "client/tests/phpunit/includes/Store/RepositoryServiceContainerFactoryTest.php",
         "patchSetId": 2
@@ -81,6 +153,24 @@
       "writtenOn": "2017-01-24T15:56:04Z",
       "side": 1,
       "message": "Or just ItemIdParser?",
+      "revId": "3f9d83c48fd3e1d487252e08efb731ba2c97d2f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_931ff45d",
+        "filename": "client/tests/phpunit/includes/Store/RepositoryServiceContainerFactoryTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-24T17:23:49Z",
+      "side": 1,
+      "message": "Even better. Done.",
+      "parentUuid": "4efb0bce_18d32307",
       "revId": "3f9d83c48fd3e1d487252e08efb731ba2c97d2f9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
