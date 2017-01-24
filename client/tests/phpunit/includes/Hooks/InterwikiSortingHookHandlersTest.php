@@ -50,8 +50,7 @@ class InterwikiSortingHookHandlersTest extends MediaWikiTestCase {
 				'alphabetic' => [
 					'ar', 'de', 'en', 'sv', 'zh'
 				]
-			],
-			'alwaysSort' => false,
+			]
 		] );
 
 		$hookHandlers = InterwikiSortingHookHandlers::newFromWikibaseConfig(
@@ -83,7 +82,6 @@ class InterwikiSortingHookHandlersTest extends MediaWikiTestCase {
 	public function testDoContentAlterParserOutput(
 		$expected,
 		$parserOutput,
-		$alwaysSort,
 		$wikibaseEnabledForNamespace,
 		$msg
 	) {
@@ -97,8 +95,7 @@ class InterwikiSortingHookHandlersTest extends MediaWikiTestCase {
 
 		$interwikiSortingHookHandlers = new InterwikiSortingHookHandlers(
 			$interwikiSorter,
-			$this->getNamespaceChecker( $wikibaseEnabledForNamespace ),
-			$alwaysSort
+			$this->getNamespaceChecker( $wikibaseEnabledForNamespace )
 		);
 
 		$title = Title::makeTitle( NS_HELP, 'InterwikiSortTestPage' );
@@ -114,28 +111,18 @@ class InterwikiSortingHookHandlersTest extends MediaWikiTestCase {
 			[
 				[ 'fr:Chat', 'de:Katzen', 'en:Cat', 'es:Gato' ],
 				$this->getParserOutput( [ 'es:Gato', 'en:Cat', 'fr:Chat', 'de:Katzen' ], false ),
-				false,
 				true,
 				'external links'
 			],
 			[
 				[ 'es:Gato', 'de:Katzen' ],
 				$this->getParserOutput( [ 'es:Gato', 'de:Katzen' ], true ),
-				false,
 				true,
 				'noexternallanglinks'
 			],
 			[
-				[ 'de:Katzen', 'es:Gato' ],
-				$this->getParserOutput( [ 'es:Gato', 'de:Katzen' ], true ),
-				true,
-				true,
-				'alwaysSort'
-			],
-			[
 				[ 'es:Gato', 'en:Cat', 'fr:Chat', 'de:Katzen' ],
 				$this->getParserOutput( [ 'es:Gato', 'en:Cat', 'fr:Chat', 'de:Katzen' ], false ),
-				false,
 				false,
 				'wikibase not enabled for namespace'
 			]
@@ -170,7 +157,6 @@ class InterwikiSortingHookHandlersTest extends MediaWikiTestCase {
 				'alphabetic' => [ 'ar', 'de', 'en', 'es', 'fr' ]
 			],
 			'InterwikiSortingSortPrepend' => [ 'fr' ],
-			'InterwikiSortingAlwaysSort' => true
 		];
 
 		return new HashConfig( $settings );

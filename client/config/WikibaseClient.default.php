@@ -21,7 +21,6 @@ return call_user_func( function() {
 		'excludeNamespaces' => [],
 		'sort' => 'code',
 		'sortPrepend' => [],
-		'alwaysSort' => false,
 		// @todo would be great to just get this from the sites stuff
 		// but we will need to make sure the caching works good enough
 		'siteLocalID' => $wgLanguageCode,
