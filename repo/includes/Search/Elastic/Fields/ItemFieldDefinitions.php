@@ -29,7 +29,7 @@ class ItemFieldDefinitions implements FieldDefinitions {
 	}
 
 	/**
-	 * @return SearchIndexField[]
+	 * @return WikibaseIndexField[]
 	 */
 	public function getFields() {
 		/*
