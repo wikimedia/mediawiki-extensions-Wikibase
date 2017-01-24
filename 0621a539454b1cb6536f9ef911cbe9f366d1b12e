@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efb0bce_8d0eb7e6",
+        "filename": "docs/extending-entities.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-24T12:05:50Z",
+      "side": 1,
+      "message": "This could be the next thing to work on... Not urgent, but important!",
+      "revId": "0621a539454b1cb6536f9ef911cbe9f366d1b12e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_ad0bb3d8",
+        "filename": "docs/extending-entities.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-24T12:05:50Z",
+      "side": 1,
+      "message": "Isn\u0027t that now covered by FooValidatorFactory?",
+      "revId": "0621a539454b1cb6536f9ef911cbe9f366d1b12e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
