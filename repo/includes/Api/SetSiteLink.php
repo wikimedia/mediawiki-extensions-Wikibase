@@ -8,7 +8,6 @@ use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLinkList;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module to associate a page on a site with a Wikibase entity or remove an already made such association.
@@ -32,15 +31,16 @@ class SetSiteLink extends ModifyEntity {
 	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
-	 * @param string $modulePrefix
+	 * @param SiteLinkChangeOpFactory $siteLinkChangeOpFactory
 	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+	public function __construct(
+		ApiMain $mainModule,
+		$moduleName,
+		SiteLinkChangeOpFactory $siteLinkChangeOpFactory
+	) {
+		parent::__construct( $mainModule, $moduleName );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
-
-		$this->siteLinkChangeOpFactory = $changeOpFactoryProvider->getSiteLinkChangeOpFactory();
+		$this->siteLinkChangeOpFactory = $siteLinkChangeOpFactory;
 	}
 
 	/**

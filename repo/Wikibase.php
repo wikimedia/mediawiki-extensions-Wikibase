@@ -217,7 +217,17 @@ call_user_func( function() {
 	];
 	$wgAPIModules['wbeditentity'] = Wikibase\Repo\Api\EditEntity::class;
 	$wgAPIModules['wblinktitles'] = Wikibase\Repo\Api\LinkTitles::class;
-	$wgAPIModules['wbsetsitelink'] = Wikibase\Repo\Api\SetSiteLink::class;
+	$wgAPIModules['wbsetsitelink'] = [
+		'class' => Wikibase\Repo\Api\SetSiteLink::class,
+		'factory' => function ( ApiMain $mainModule, $moduleName ) {
+			return new Wikibase\Repo\Api\SetSiteLink(
+				$mainModule,
+				$moduleName,
+				Wikibase\Repo\WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider()
+					->getSiteLinkChangeOpFactory()
+			);
+		}
+	];
 	$wgAPIModules['wbcreateclaim'] = Wikibase\Repo\Api\CreateClaim::class;
 	$wgAPIModules['wbgetclaims'] = Wikibase\Repo\Api\GetClaims::class;
 	$wgAPIModules['wbremoveclaims'] = Wikibase\Repo\Api\RemoveClaims::class;
