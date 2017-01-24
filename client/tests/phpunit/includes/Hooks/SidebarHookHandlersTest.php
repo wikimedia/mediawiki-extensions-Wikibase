@@ -73,7 +73,6 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 			'siteGlobalID' => 'enwiki',
 			'languageLinkSiteGroup' => 'wikipedia',
 			'namespaces' => array( NS_MAIN, NS_CATEGORY ),
-			'alwaysSort' => false,
 			'otherProjectsLinks' => array( 'commonswiki' ),
 			'otherProjectsLinksBeta' => true,
 			'otherProjectsLinksByDefault' => false,
