@@ -21,7 +21,7 @@ abstract class WikibaseNumericFieldTest extends PHPUnit_Framework_TestCase {
 				return new DummySearchIndexFieldDefinition( $name, $type );
 			} ) );
 
-		$mapping = $field->getMapping( $searchEngine, get_class( $field ) )
+		$mapping = $field->getMappingField( $searchEngine, get_class( $field ) )
 			->getMapping( $searchEngine );
 		$this->assertEquals( \SearchIndexField::INDEX_TYPE_INTEGER, $mapping['type'] );
 		$this->assertEquals( get_class( $field ), $mapping['name'] );
