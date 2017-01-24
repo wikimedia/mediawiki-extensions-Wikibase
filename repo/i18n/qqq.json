@@ -442,6 +442,8 @@
 	"action-property-create": "{{Doc-action|property-create}}",
 	"wikibase-pageinfo-subscription": "Text to put in action=info for entity usage",
 	"wikibase-pageinfo-subscription-none": "When there is no wiki subscribed to this entity\n{{Identical|None}}",
+	"wb-search-bad-entity-type": "Error message displayed when user supplies bad entity type to wbsearchentities",
+	"wb-search-bad-profile-name": "Error message displayed when user supplies bad search profile name",
 	"apihelp-wbavailablebadges-description": "{{doc-apihelp-description|wbavailablebadges}}",
 	"apihelp-wbavailablebadges-example-1": "{{doc-apihelp-example|wbavailablebadges}}",
 	"apihelp-wbcreateclaim-description": "{{doc-apihelp-description|wbcreateclaim}}",
