@@ -52,7 +52,7 @@ class AllLabelsFieldTest extends PHPUnit_Framework_TestCase {
 		$this->assertArrayHasKey( 'fields', $mapping );
 		$this->assertCount( 2, $mapping['fields'] );
 		$this->assertEquals( 'text', $mapping['type'] );
-		$this->assertEquals( false, $mapping['index'] );
+		$this->assertEquals( 'false', $mapping['index'] );
 	}
 
 }
