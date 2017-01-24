@@ -19,23 +19,13 @@ class LabelsProviderFieldDefinitions implements FieldDefinitions {
 	}
 
 	/**
-	 * @return SearchIndexField[]
+	 * @return WikibaseIndexField[]
 	 */
 	public function getFields() {
 
-		$fields = $this->getLabelFields();
 		$fields['label_count'] = new LabelCountField();
-
-		return $fields;
-	}
-
-	/**
-	 * @return SearchIndexField[]
-	 */
-	private function getLabelFields() {
-		$fields = [];
-
-		// TODO: next patch will have actual label fields
+		$fields['labels'] = new LabelsField( $this->languageCodes );
+		$fields['labels_all'] = new AllLabelsField();
 
 		return $fields;
 	}
