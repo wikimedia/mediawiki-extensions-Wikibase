@@ -16,15 +16,15 @@ use Wikibase\DataModel\Entity\EntityDocument;
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-interface SearchIndexField {
+interface WikibaseIndexField {
 
 	/**
 	 * Produce specific field mapping
 	 * @param SearchEngine $engine
 	 * @param string $name
-	 * @return \SearchIndexField
+	 * @return \SearchIndexField|null Null if mapping is not supported
 	 */
-	public function getMapping( SearchEngine $engine, $name );
+	public function getMappingField( SearchEngine $engine, $name );
 
 	/**
 	 * @param EntityDocument $entity
