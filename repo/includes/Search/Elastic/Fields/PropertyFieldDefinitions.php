@@ -30,7 +30,7 @@ class PropertyFieldDefinitions implements FieldDefinitions {
 	}
 
 	/**
-	 * @return SearchIndexField[]
+	 * @return WikibaseIndexField[]
 	 */
 	public function getFields() {
 		/*

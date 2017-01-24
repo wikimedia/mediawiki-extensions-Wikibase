@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Search\Elastic\Fields;
 
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Term\LabelsProvider;
 
 /**
  * @license GPL-2.0+
@@ -19,8 +19,8 @@ class LabelCountField extends WikibaseNumericField {
 	 * @return int
 	 */
 	public function getFieldData( EntityDocument $entity ) {
-		if ( $entity instanceof FingerprintProvider ) {
-			return $entity->getFingerprint()->getLabels()->count();
+		if ( $entity instanceof LabelsProvider ) {
+			return $entity->getLabels()->count();
 		}
 
 		return 0;
