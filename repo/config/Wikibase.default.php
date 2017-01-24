@@ -209,4 +209,22 @@ return [
 
 	// Name of the lock manager for dispatch changes coordinator
 	'dispatchingLockManager' => null,
+
+	// Configurations for searching entities
+	'entitySearch' => [
+		// Use CirrusSearch (ElasticSearch) for searching
+		'useCirrus' => false,
+		// Default label scoring profile name, for prefix search
+		// See profiles in config/EntityPrefixSearchProfiles.php
+		'defaultPrefixProfile' => 'default',
+		// Field weight profiles. These profiles specify relative weights
+		// of label fields for different languages, e.g. exact language match
+		// vs. fallback language match.
+		// Loaded from config/EntityPrefixSearchProfiles.php by Wikibase.php
+		'prefixSearchProfiles' => [],
+		// Default rescore profile for prefix search
+		'defaultPrefixRescoreProfile' => 'wikibase_prefix',
+		// Rescore profiles, loaded by Wikibase.php
+		'rescoreProfiles' => [],
+	],
 ];
