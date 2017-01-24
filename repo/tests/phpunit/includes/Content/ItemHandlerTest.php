@@ -3,16 +3,21 @@
 namespace Wikibase\Repo\Tests\Content;
 
 use MWException;
+use Title;
 use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\Repo\Content\ItemHandler;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
+use WikiPage;
 
 /**
  * @covers Wikibase\Repo\Content\ItemHandler
@@ -151,6 +156,17 @@ class ItemHandlerTest extends EntityHandlerTest {
 		$handler = $this->getHandler();
 		$id = new ItemId( 'Q7' );
 		$this->assertFalse( $handler->canCreateWithCustomId( $id ) );
+	}
+
+	protected function getTestItemContent() {
+		$item = new Item();
+		$item->getFingerprint()->setLabel( 'en', 'Kitten' );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Kitten' );
+		$item->getStatements()->addNewStatement(
+			new PropertyNoValueSnak( new PropertyId( 'P1' ) )
+		);
+
+		return ItemContent::newFromItem( $item );
 	}
 
 }
