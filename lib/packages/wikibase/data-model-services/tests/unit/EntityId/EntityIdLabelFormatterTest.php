@@ -60,7 +60,7 @@ class EntityIdLabelFormatterTest extends PHPUnit_Framework_TestCase {
 	 *
 	 * @return LabelDescriptionLookup
 	 */
-	protected function getLabelDescriptionLookup( $languageCode ) {
+	private function getLabelDescriptionLookup( $languageCode ) {
 		$labelDescriptionLookup = $this->getMockBuilder( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' )
 			->disableOriginalConstructor()
 			->getMock();
