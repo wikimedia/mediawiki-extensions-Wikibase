@@ -2,8 +2,8 @@
 
 namespace Wikibase\DataModel\Services\Tests\Statement;
 
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementGuid;
 
@@ -24,8 +24,8 @@ class StatementGuidParserTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $actual, $expected );
 	}
 
-	protected function newParser() {
-		return new StatementGuidParser( new BasicEntityIdParser() );
+	private function newParser() {
+		return new StatementGuidParser( new ItemIdParser() );
 	}
 
 	public function guidProvider() {
