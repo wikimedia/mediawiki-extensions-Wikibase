@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Content;
 
 use ContentHandler;
 use DataValues\Serializers\DataValueSerializer;
+use DummySearchIndexFieldDefinition;
 use FauxRequest;
 use InvalidArgumentException;
 use Language;
@@ -503,6 +504,26 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 
 	public function testSupportsCategories() {
 		$this->assertFalse( $this->getHandler()->supportsCategories() );
+	}
+
+	public function testFieldsForSearchIndex() {
+		$handler = $this->getHandler();
+
+		$searchEngine = $this->getMockBuilder( 'SearchEngine' )->getMock();
+
+		$searchEngine->expects( $this->any() )
+			->method( 'makeSearchFieldMapping' )
+			->will( $this->returnCallback( function ( $name, $type ) {
+				return new DummySearchIndexFieldDefinition( $name, $type );
+			} ) );
+
+		$fields = $handler->getFieldsForSearchIndex( $searchEngine );
+		$expectedFields = [ 'label_count', 'sitelink_count', 'statement_count' ];
+		foreach ( $expectedFields as $expected ) {
+			$this->assertInstanceOf( \SearchIndexField::class, $fields[$expected] );
+			$mapping = $fields[$expected]->getMapping( $searchEngine );
+			$this->assertEquals( $expected, $mapping['name'] );
+		}
 	}
 
 }
