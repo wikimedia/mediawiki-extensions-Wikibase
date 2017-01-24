@@ -50,6 +50,7 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 
 		try {
 			$helper->getEntityIdFromString( $invalidEntityIdString );
+			$this->fail( 'Expected exception was not thrown' );
 		} catch ( ApiUsageException $ex ) {
 			$this->assertMessage( 'invalid-entity-id', $ex );
 		}
@@ -96,6 +97,7 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 
 		try {
 			$helper->getStatementFromEntity( 'foo', $entity );
+			$this->fail( 'Expected exception was not thrown' );
 		} catch ( ApiUsageException $ex ) {
 			$this->assertMessage( 'no-such-claim', $ex );
 		}
@@ -108,6 +110,7 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 
 		try {
 			$helper->getStatementFromEntity( 'unknown', $entity );
+			$this->fail( 'Expected exception was not thrown' );
 		} catch ( ApiUsageException $ex ) {
 			$this->assertMessage( 'no-such-claim', $ex );
 		}
@@ -141,6 +144,7 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 
 		try {
 			$helper->applyChangeOp( $changeOp, new Item() );
+			$this->fail( 'Expected exception was not thrown' );
 		} catch ( ApiUsageException $ex ) {
 			$this->assertMessage( 'modification-failed', $ex );
 		}
@@ -160,6 +164,7 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 
 		try {
 			$helper->applyChangeOp( $changeOp, new Item() );
+			$this->fail( 'Expected exception was not thrown' );
 		} catch ( ApiUsageException $ex ) {
 			$this->assertMessage( 'modification-failed', $ex );
 		}
