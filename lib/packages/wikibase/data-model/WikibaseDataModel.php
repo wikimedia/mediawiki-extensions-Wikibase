@@ -7,6 +7,10 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 
+if ( defined( 'WIKIBASE_DATAMODEL_VERSION' ) ) {
+	return;
+}
+
 define( 'WIKIBASE_DATAMODEL_VERSION', '6.3.0' );
 
 if ( defined( 'MEDIAWIKI' ) && function_exists( 'wfLoadExtension' ) ) {
