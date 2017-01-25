@@ -2,10 +2,12 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 
+use DataValues\StringValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Repo\ChangeOp\Deserialization\ClaimsChangeOpDeserializer;
@@ -109,6 +111,45 @@ class ClaimsChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase {
 				] ],
 				$item->copy(),
 				$property
+			],
+		];
+	}
+
+	/**
+	 * @dataProvider editStatementProvider
+	 */
+	public function testGivenEditChangeRequest_statementGetsChanged( $changeRequest, Item $item ) {
+		$changeOp = $this->newClaimsChangeOpDeserializer()
+			->createEntityChangeOp( $changeRequest );
+		$changeOp->apply( $item, new Summary() );
+
+		$this->assertCount( 1, $item->getStatements()->toArray() );
+		$this->assertSame(
+			'bar',
+			$item->getStatements()->toArray()[0]
+				->getMainSnak()
+				->getDataValue()
+				->getValue()
+		);
+	}
+
+	public function editStatementProvider() {
+		$property = new PropertyId( 'P7' );
+		$statement = new Statement( new PropertyValueSnak( $property, new StringValue( 'foo' ) ) );
+		$statement->setGuid( 'Q23$D8404CDA-25E4-4334-AF13-A3290BC66666' );
+		$item = new Item( new ItemId( 'Q23' ) );
+		$item->setStatements( new StatementList( [ $statement ] ) );
+		$statementSerialization = $this->getStatementSerializer()->serialize( $statement );
+		$statementSerialization['mainsnak']['datavalue']['value'] = 'bar';
+
+		return [
+			'numeric index format' => [
+				[ 'claims' => [ $statementSerialization ] ],
+				$item
+			],
+			'associative format' => [
+				[ 'claims' => [ 'P7' => [ $statementSerialization ] ] ],
+				$item
 			],
 		];
 	}
