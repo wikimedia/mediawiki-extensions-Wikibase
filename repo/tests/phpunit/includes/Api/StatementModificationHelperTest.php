@@ -20,6 +20,7 @@ use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\CreateClaim;
 use Wikibase\Repo\Api\StatementModificationHelper;
 use Wikibase\Repo\SnakFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\Api\StatementModificationHelper
@@ -60,16 +61,43 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 		$helper = $this->getNewInstance();
 		$customSummary = 'I did it!';
 
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() );
+		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
+
+		$modificationHelper = new StatementModificationHelper(
+			$wikibaseRepo->getSnakFactory(),
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getStatementGuidValidator(),
+			$apiHelperFactory->getErrorReporter( $apiMain )
+		);
+
 		$summary = $helper->createSummary(
 			array( 'summary' => $customSummary ),
-			new CreateClaim( $apiMain, 'wbcreateclaim' )
+			new CreateClaim(
+				$apiMain,
+				'wbcreateclaim',
+				$changeOpFactoryProvider->getStatementChangeOpFactory(),
+				$apiHelperFactory->getErrorReporter( $apiMain ),
+				$modificationHelper,
+				$apiHelperFactory->getResultBuilder( $apiMain ),
+				$apiHelperFactory->getEntitySavingHelper( $apiMain )
+			)
 		);
 		$this->assertEquals( 'wbcreateclaim', $summary->getModuleName() );
 		$this->assertEquals( $customSummary, $summary->getUserSummary() );
 
 		$summary = $helper->createSummary(
 			array(),
-			new CreateClaim( $apiMain, 'wbcreateclaim' )
+			new CreateClaim(
+				$apiMain,
+				'wbcreateclaim',
+				$changeOpFactoryProvider->getStatementChangeOpFactory(),
+				$apiHelperFactory->getErrorReporter( $apiMain ),
+				$modificationHelper,
+				$apiHelperFactory->getResultBuilder( $apiMain ),
+				$apiHelperFactory->getEntitySavingHelper( $apiMain )
+			)
 		);
 		$this->assertEquals( 'wbcreateclaim', $summary->getModuleName() );
 		$this->assertNull( $summary->getUserSummary() );
@@ -211,3 +239,4 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 	}
 
 }
+
