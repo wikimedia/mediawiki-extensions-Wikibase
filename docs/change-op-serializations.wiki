@@ -56,7 +56,7 @@ The only element specific for properties, their data type, can not be edited.
 == Item specific elements ==
 
 === "sitelinks" ===
-* To add a new sitelink, provide it's "site" ID, "title" and optional "badges", e.g. <code>{ "site": "enwiki", "title": "…", "badges": [] }</code>.
+* To add a new sitelink, provide its "site" ID, "title" and optional "badges", e.g. <code>{ "site": "enwiki", "title": "…", "badges": [] }</code>.
 * Editing the "site" ID of an existing sitelink is not possible. You must remove the old sitelink and add the new sitelink instead.
 * To edit the page name of an existing sitelink, provide the "site" ID with the new "title", e.g. <code>{ "site": "enwiki", "title": "…" }</code>.
 * There are three ways to remove a sitelink:

@@ -22,7 +22,7 @@ use Wikibase\Summary;
 class ClaimsChangeOpSerializationTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenClaimsFieldNotAnArray_createEntityChangeOpThrowsError() {
-		TermChangeOpDeserializationAssert::assertThrowsChangeOpDeserializationException(
+		ChangeOpDeserializationAssert::assertThrowsChangeOpDeserializationException(
 			function() {
 				$this->newClaimsChangeOpDeserializer()->createEntityChangeOp( [ 'claims' => null ] );
 			},
@@ -31,7 +31,7 @@ class ClaimsChangeOpSerializationTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenRemoveClaimChangeRequestWithoutId_throwsException() {
-		TermChangeOpDeserializationAssert::assertThrowsChangeOpDeserializationException(
+		ChangeOpDeserializationAssert::assertThrowsChangeOpDeserializationException(
 			function() {
 				$this->newClaimsChangeOpDeserializer()->createEntityChangeOp( [
 					'claims' => [ [ 'remove' => '', ] ]
@@ -42,7 +42,7 @@ class ClaimsChangeOpSerializationTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenClaimsDoesNotContainStatementSerialization_throwsException() {
-		TermChangeOpDeserializationAssert::assertThrowsChangeOpDeserializationException(
+		ChangeOpDeserializationAssert::assertThrowsChangeOpDeserializationException(
 			function() {
 				$this->newClaimsChangeOpDeserializer()->createEntityChangeOp( [
 					'claims' => [ [ 'foo' ] ]

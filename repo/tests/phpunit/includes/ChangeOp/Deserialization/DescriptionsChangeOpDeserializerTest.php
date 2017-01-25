@@ -21,7 +21,7 @@ use Wikibase\Summary;
 class DescriptionsChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenDescriptionsFieldNotAnArray_createEntityChangeOpThrowsError() {
-		TermChangeOpDeserializationAssert::assertThrowsChangeOpDeserializationException(
+		ChangeOpDeserializationAssert::assertThrowsChangeOpDeserializationException(
 			function() {
 				$this->newDescriptionsChangeOpDeserializer()->createEntityChangeOp( [ 'descriptions' => null ] );
 			},
@@ -30,7 +30,7 @@ class DescriptionsChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenInvalidLanguage_createEntityChangeOpThrowsError() {
-		TermChangeOpDeserializationAssert::assertThrowsChangeOpDeserializationException(
+		ChangeOpDeserializationAssert::assertThrowsChangeOpDeserializationException(
 			function() {
 				$this->newDescriptionsChangeOpDeserializer()->createEntityChangeOp( [
 					'descriptions' => [ 'en' => [ 'language' => 'de', 'value' => 'foo' ] ]

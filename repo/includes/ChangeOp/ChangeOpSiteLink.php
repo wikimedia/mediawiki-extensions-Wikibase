@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLinkList;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**
@@ -40,11 +39,12 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	/**
 	 * @param string $siteId
 	 * @param string|null $pageName Null to remove the sitelink (if $badges are also null)
+	 * @param string[] $allowedBadgeItems
 	 * @param ItemId[]|null $badges Null for no-op
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $siteId, $pageName, array $badges = null ) {
+	public function __construct( $siteId, $pageName, array $allowedBadgeItems, array $badges = null ) {
 		if ( !is_string( $siteId ) ) {
 			throw new InvalidArgumentException( '$siteId needs to be a string' );
 		}
@@ -54,7 +54,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 		}
 
 		if ( $badges !== null ) {
-			$badges = $this->validateBadges( $badges );
+			$badges = $this->validateBadges( $badges, $allowedBadgeItems );
 		}
 
 		$this->siteId = $siteId;
@@ -64,12 +64,12 @@ class ChangeOpSiteLink extends ChangeOpBase {
 
 	/**
 	 * @param ItemId[] $badges
+	 * @param string[] $allowedBadgeItems
 	 *
 	 * @throws InvalidArgumentException
 	 * @return ItemId[]
 	 */
-	private function validateBadges( array $badges ) {
-		$badgeItems = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'badgeItems' );
+	private function validateBadges( array $badges, array $allowedBadgeItems ) {
 		$uniqueBadges = array();
 
 		foreach ( $badges as $id ) {
@@ -77,7 +77,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 				throw new InvalidArgumentException( '$badges needs to be an array of ItemId instances' );
 			}
 
-			if ( !array_key_exists( $id->getSerialization(), $badgeItems ) ) {
+			if ( !array_key_exists( $id->getSerialization(), $allowedBadgeItems ) ) {
 				throw new InvalidArgumentException( 'Only items specified in the badgeItems setting can be badges' );
 			}
 

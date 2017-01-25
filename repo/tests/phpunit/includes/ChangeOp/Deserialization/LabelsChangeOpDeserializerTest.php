@@ -22,7 +22,7 @@ use Wikibase\Summary;
 class LabelsChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenLabelsFieldNotAnArray_createEntityChangeOpThrowsError() {
-		TermChangeOpDeserializationAssert::assertThrowsChangeOpDeserializationException(
+		ChangeOpDeserializationAssert::assertThrowsChangeOpDeserializationException(
 			function() {
 				$this->newLabelsChangeOpDeserializer()->createEntityChangeOp( [ 'labels' => null ] );
 			},
@@ -31,7 +31,7 @@ class LabelsChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenInvalidLanguage_createEntityChangeOpThrowsError() {
-		TermChangeOpDeserializationAssert::assertThrowsChangeOpDeserializationException(
+		ChangeOpDeserializationAssert::assertThrowsChangeOpDeserializationException(
 			function() {
 				$this->newLabelsChangeOpDeserializer()->createEntityChangeOp( [
 					'labels' => [ 'en' => [ 'language' => 'de', 'value' => 'foo' ] ]

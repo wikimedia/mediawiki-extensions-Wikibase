@@ -6,7 +6,7 @@ use Exception;
 use PHPUnit_Framework_Assert as Assert;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 
-class TermChangeOpDeserializationAssert {
+class ChangeOpDeserializationAssert {
 
 	/**
 	 * @param callable $callback
