@@ -90,4 +90,5 @@ class TermChangeOpValidator {
 			$this->errorReporter->dieError( $message, 'not-recognized-' . $type );
 		}
 	}
+
 }
