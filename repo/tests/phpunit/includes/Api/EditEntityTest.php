@@ -706,8 +706,8 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'data' => '{
-						"remove": "",
 						"claims": [ {
+							"remove": "",
 							"mainsnak": {
 								"snaktype": "value",
 								"property": "%P56%",
@@ -720,9 +720,8 @@ class EditEntityTest extends WikibaseApiTestCase {
 				),
 				'e' => array( 'exception' => array(
 					'type' => ApiUsageException::class,
-					'code' => 'not-recognized',
-					'message' => 'Unknown key in json: remove' )
-				)
+					'code' => 'invalid-claim',
+				) )
 			),
 			'bad badge id' => array(
 				'p' => array(
@@ -875,6 +874,27 @@ class EditEntityTest extends WikibaseApiTestCase {
 				) ),
 				'requires' => 'mediainfo' // skip if MediaInfo is not configured
 			),
+			'remove key misplaced in data' => [
+				'p' => [
+					'id' => '%Berlin%',
+					'data' => json_encode( [
+						'remove' => '',
+						'claims' => [ [
+							'type' => 'statement',
+							'mainsnak' => [
+								'snaktype' => 'novalue',
+								'property' => '%P56%',
+							],
+							'id' => '%BerlinP56%',
+						] ],
+					] )
+				],
+				'e' => [ 'exception' => [
+					'type' => ApiUsageException::class,
+					'code' => 'not-recognized',
+					'message' => '"remove" should not be a top-level key'
+				] ],
+			],
 		);
 	}
 
