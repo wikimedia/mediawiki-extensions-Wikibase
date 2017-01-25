@@ -52,13 +52,13 @@ logTableAccess = function(entity)
 	loggedEntityClaims = entity['claims']
 	entity['claims'] = {}
 
-	loggedEntityMetatable.__index = function(entity['claims'], propertyID)
+	loggedEntityMetatable.__index = function(empty_table, propertyID)
 		-- Need entity id: Is it entity['id']?
 		-- Write entity id and property id to DB
 		return loggedEntityClaims[propertyID]
 	end
 	
-	setmetatable(loggedEntityClaims,loggedEntityMetatable)
+	setmetatable(entity['claims'],loggedEntityMetatable)
 	return entity
 end
 
