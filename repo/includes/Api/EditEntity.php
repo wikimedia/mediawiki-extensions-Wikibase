@@ -634,29 +634,7 @@ class EditEntity extends ModifyEntity {
 		$entityId = $entity->getId();
 		$title = $entityId === null ? null : $this->getTitleLookup()->getTitleForId( $entityId );
 
-		$allowedProps = array(
-			// ignored props
-			'length',
-			'count',
-			'touched',
-			'modified',
-			// checked props
-			'id',
-			'type',
-			'pageid',
-			'ns',
-			'title',
-			'lastrevid',
-			// useful props
-			'labels',
-			'descriptions',
-			'aliases',
-			'sitelinks',
-			'claims',
-			'datatype'
-		);
-
-		$this->checkValidJson( $data, $allowedProps );
+		$this->checkValidJson( $data );
 		$this->checkEntityId( $data, $entityId );
 		$this->checkEntityType( $data, $entity );
 		$this->checkPageIdProp( $data, $title );
@@ -667,9 +645,8 @@ class EditEntity extends ModifyEntity {
 
 	/**
 	 * @param mixed $data
-	 * @param array $allowedProps
 	 */
-	private function checkValidJson( $data, array $allowedProps ) {
+	private function checkValidJson( $data ) {
 		if ( is_null( $data ) ) {
 			$this->errorReporter->dieError( 'Invalid json: The supplied JSON structure could not be parsed or '
 				. 'recreated as a valid structure', 'invalid-json' );
@@ -681,10 +658,6 @@ class EditEntity extends ModifyEntity {
 		foreach ( $data as $prop => $args ) {
 			// Catch json_decode returning an indexed array (list).
 			$this->assertString( $prop, 'Top level structure must be a JSON object (no keys found)' );
-
-			if ( !in_array( $prop, $allowedProps ) ) {
-				$this->errorReporter->dieError( "Unknown key in json: $prop", 'not-recognized' );
-			}
 		}
 	}
 
