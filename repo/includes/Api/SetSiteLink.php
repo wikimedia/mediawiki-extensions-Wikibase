@@ -8,6 +8,7 @@ use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLinkList;
+use Wikibase\Summary;
 
 /**
  * API module to associate a page on a site with a Wikibase entity or remove an already made such association.

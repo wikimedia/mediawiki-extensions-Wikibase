@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Specials;
 use Html;
 use InvalidArgumentException;
 use Language;
-use SiteLookup;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOps;

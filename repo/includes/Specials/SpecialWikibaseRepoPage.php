@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Specials;
 
 use MWException;
 use RuntimeException;
-use SiteLookup;
 use Status;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;

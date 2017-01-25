@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql;
 
-use DBError;
 use MediaWikiTestCase;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;

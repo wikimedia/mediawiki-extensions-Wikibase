@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Specials;
 
 use Html;
-use SiteLookup;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpValidationException;
