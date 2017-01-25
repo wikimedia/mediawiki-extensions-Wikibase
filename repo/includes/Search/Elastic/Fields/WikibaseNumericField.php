@@ -4,8 +4,7 @@ namespace Wikibase\Repo\Search\Elastic\Fields;
 use SearchEngine;
 
 /**
- * Generic numeric field
- * @package Wikibase\Repo\Search\Elastic\Fields
+ * Generic numeric field.
  */
 abstract class WikibaseNumericField implements SearchIndexField {
 
