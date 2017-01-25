@@ -14,14 +14,19 @@ use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 class MockEntityIdPager implements EntityPerPage, EntityIdPager {
 
 	/**
-	 * @var array
+	 * @var EntityId[]
 	 */
 	private $pageIdToEntityId = array();
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
 	private $redirects = array();
+
+	/**
+	 * @var EntityId|null
+	 */
+	private $position = null;
 
 	/**
 	 * Adds a new link between an entity and a page
@@ -56,7 +61,7 @@ class MockEntityIdPager implements EntityPerPage, EntityIdPager {
 	 * be empty if there are no more entities to list from the given offset.
 	 */
 	public function fetchIds( $limit ) {
-		$ids = $this->listEntities( $this->entityType, $limit, $this->position, $this->redirectMode );
+		$ids = $this->listEntities( $limit, $this->position );
 
 		if ( !empty( $ids ) ) {
 			$this->position = end( $ids );
@@ -67,41 +72,20 @@ class MockEntityIdPager implements EntityPerPage, EntityIdPager {
 	}
 
 	/**
-	 * Lists entities of the given type (optionally including redirects).
-	 *
-	 * @param null|string $entityType The entity type to look for.
 	 * @param int $limit The maximum number of IDs to return.
 	 * @param EntityId|null $after Only return entities with IDs greater than this.
-	 * @param string $redirects A XXX_REDIRECTS constant (default is NO_REDIRECTS).
 	 *
 	 * @return EntityId[]
 	 */
-	private function listEntities(
-		$entityType,
-		$limit,
-		EntityId $after = null,
-		$redirects = self::NO_REDIRECTS
-	) {
+	private function listEntities( $limit, EntityId $after = null ) {
 		/** @var EntityId[] $entityIds */
 		$entityIds = $this->pageIdToEntityId;
 		$entityIds = array_values( $entityIds );
 
-		// Act on $entityType
-		if ( is_string( $entityType ) ) {
-			foreach ( $entityIds as $key => $entityId ) {
-				if ( $entityId->getEntityType() !== $entityType ) {
-					unset( $entityIds[$key] );
-				}
-			}
-		}
-
 		// Act on $redirects
 		foreach ( $entityIds as $key => $entityId ) {
 			$entityIdString = $entityId->getSerialization();
-			if (
-				( $redirects === self::NO_REDIRECTS && in_array( $entityIdString, $this->redirects ) ) ||
-				( $redirects === self::ONLY_REDIRECTS && !in_array( $entityIdString, $this->redirects ) )
-			) {
+			if ( in_array( $entityIdString, $this->redirects ) ) {
 				unset( $entityIds[$key] );
 			}
 		}
@@ -122,38 +106,24 @@ class MockEntityIdPager implements EntityPerPage, EntityIdPager {
 	}
 
 	/**
-	 * Removes a link between an entity (or entity redirect) and a page
-	 *
-	 * @param EntityId $entityId
-	 * @param int $pageId
-	 *
 	 * @throws BadMethodCallException always
-	 * @return boolean Success indicator
 	 */
 	public function deleteEntityPage( EntityId $entityId, $pageId ) {
 		throw new BadMethodCallException( 'Mock method not yet implemented' );
 	}
 
 	/**
-	 * Removes all associations of the given entity (or entity redirect).
-	 *
-	 * @param EntityId $entityId
-	 *
 	 * @throws BadMethodCallException always
-	 * @return boolean Success indicator
 	 */
 	public function deleteEntity( EntityId $entityId ) {
 		throw new BadMethodCallException( 'Mock method not yet implemented' );
 	}
 
 	/**
-	 * Clears the table
-	 *
-	 * @return boolean Success indicator
+	 * @throws BadMethodCallException always
 	 */
 	public function clear() {
-		$this->pageIdToEntityId = array();
-		$this->redirects = array();
+		throw new BadMethodCallException( 'Mock method not yet implemented' );
 	}
 
 }
