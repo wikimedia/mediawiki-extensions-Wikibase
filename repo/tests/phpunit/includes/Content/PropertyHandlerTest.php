@@ -121,4 +121,8 @@ class PropertyHandlerTest extends EntityHandlerTest {
 		return PropertyContent::newFromProperty( $item );
 	}
 
+	protected function getExpectedSearchIndexFields() {
+		return [ 'label_count', 'statement_count' ];
+	}
+
 }

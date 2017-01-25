@@ -185,4 +185,8 @@ class ItemHandlerTest extends EntityHandlerTest {
 		return ItemContent::newFromItem( $item );
 	}
 
+	protected function getExpectedSearchIndexFields() {
+		return [ 'label_count', 'statement_count', 'sitelink_count' ];
+	}
+
 }
