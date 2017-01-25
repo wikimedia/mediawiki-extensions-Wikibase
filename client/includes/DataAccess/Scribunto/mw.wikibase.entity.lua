@@ -49,16 +49,25 @@ end
 --
 -- @param {table} entity
 logTableAccess = function(entity)
-	loggedEntityClaims = entity['claims']
+	actualEntityClaims = entity['claims']
 	entity['claims'] = {}
 
-	loggedEntityMetatable.__index = function(empty_table, propertyID)
+	pseudoClaimsMetatable = {}
+	pseudoClaimsMetatable.__index = function(empty_table, propertyID)
 		-- Need entity id: Is it entity['id']?
 		-- Write entity id and property id to DB
-		return loggedEntityClaims[propertyID]
+		return actualEntityClaims[propertyID]
 	end
-	
-	setmetatable(entity['claims'],loggedEntityMetatable)
+
+	pseudoClaimsMetatable.__pairs = function(empty_table)
+		return pairs(actualEntityClaims)
+	end
+
+	pseudoClaimsMetatable.__ipairs = function(empty_table)
+		return ipairs(actualEntityClaims)
+	end
+
+	setmetatable(entity['claims'], pseudoClaimsMetatable)
 	return entity
 end
 
