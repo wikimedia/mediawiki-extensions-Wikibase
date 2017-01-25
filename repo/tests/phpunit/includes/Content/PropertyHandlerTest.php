@@ -113,4 +113,8 @@ class PropertyHandlerTest extends EntityHandlerTest {
 		$this->assertFalse( $handler->canCreateWithCustomId( $id ) );
 	}
 
+	protected function getExpectedFields() {
+		return 	[ 'label_count', 'statement_count' ];
+	}
+
 }

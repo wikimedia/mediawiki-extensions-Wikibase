@@ -190,4 +190,8 @@ class ItemHandlerTest extends EntityHandlerTest {
 		return $entityContentFactory->newFromEntity( $item );
 	}
 
+	protected function getExpectedFields() {
+		return 	[ 'label_count', 'statement_count', 'sitelink_count' ];
+	}
+
 }
