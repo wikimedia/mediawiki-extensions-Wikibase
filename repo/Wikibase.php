@@ -228,7 +228,31 @@ call_user_func( function() {
 			);
 		}
 	];
-	$wgAPIModules['wbcreateclaim'] = Wikibase\Repo\Api\CreateClaim::class;
+	$wgAPIModules['wbcreateclaim'] = [
+		'class' => Wikibase\Repo\Api\CreateClaim::class,
+	    'factory' => function ( ApiMain $mainModule, $moduleName ) {
+		    $wikibaseRepo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+		    $apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
+		    $changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
+
+		    $modificationHelper = new \Wikibase\Repo\Api\StatementModificationHelper(
+			    $wikibaseRepo->getSnakFactory(),
+			    $wikibaseRepo->getEntityIdParser(),
+			    $wikibaseRepo->getStatementGuidValidator(),
+			    $apiHelperFactory->getErrorReporter( $mainModule )
+		    );
+
+		    return new Wikibase\Repo\Api\CreateClaim(
+			    $mainModule,
+			    $moduleName,
+			    $changeOpFactoryProvider->getStatementChangeOpFactory(),
+			    $apiHelperFactory->getErrorReporter( $mainModule ),
+			    $modificationHelper,
+			    $apiHelperFactory->getResultBuilder( $mainModule ),
+			    $apiHelperFactory->getEntitySavingHelper( $mainModule )
+		    );
+	    }
+	];
 	$wgAPIModules['wbgetclaims'] = Wikibase\Repo\Api\GetClaims::class;
 	$wgAPIModules['wbremoveclaims'] = Wikibase\Repo\Api\RemoveClaims::class;
 	$wgAPIModules['wbsetclaimvalue'] = Wikibase\Repo\Api\SetClaimValue::class;
