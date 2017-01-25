@@ -34,6 +34,24 @@
       "revId": "4e65b466d3e6ce8f5823dc858f917ab5f28ebff0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_7ef0bc8e",
+        "filename": "lib/WikibaseLib.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-25T12:07:05Z",
+      "side": 0,
+      "message": "removed it because it didn\u0027t include autoload on my setup, for some reason.\n\nAnyway, as far as I see it, it is not Wikibase\u0027s responsibility to care what and how other extensions define. If something breaks it should be fixed in the extension.",
+      "parentUuid": "4efb0bce_05f17bfe",
+      "revId": "4e65b466d3e6ce8f5823dc858f917ab5f28ebff0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
