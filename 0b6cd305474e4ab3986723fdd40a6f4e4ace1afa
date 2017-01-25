@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efb0bce_7b7c4e1b",
+        "filename": "repo/includes/Search/Elastic/Fields/SearchIndexField.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-01-25T02:36:21Z",
+      "side": 1,
+      "message": "maybe we can move this stuff out of the Elastic namespace since we are making this more generalized?",
+      "revId": "0b6cd305474e4ab3986723fdd40a6f4e4ace1afa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
