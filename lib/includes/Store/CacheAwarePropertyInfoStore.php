@@ -92,9 +92,7 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 		$propertyInfo = $this->cache->get( $this->cacheKey );
 		$id = $propertyId->getSerialization();
 
-		// update local cache
 		$propertyInfo[$id] = $info;
-		$this->propertyInfo = $propertyInfo;
 
 		// update external cache
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': updating cache after updating property ' . $id );
