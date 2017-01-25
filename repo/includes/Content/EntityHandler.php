@@ -30,6 +30,7 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Repo\Diff\EntityContentDiffView;
+use Wikibase\Repo\Search\Elastic\Fields\FieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\WikibaseFieldDefinitions;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
@@ -56,6 +57,9 @@ abstract class EntityHandler extends ContentHandler {
 	 * to parser output.
 	 */
 	const PARSER_VERSION = 3;
+	/**
+	 * @var FieldDefinitions
+	 */
 	protected $fieldDefinitions;
 
 	/**
@@ -102,12 +106,12 @@ abstract class EntityHandler extends ContentHandler {
 	 * @param EntityConstraintProvider $constraintProvider
 	 * @param ValidatorErrorLocalizer $errorLocalizer
 	 * @param EntityIdParser $entityIdParser
+	 * @param FieldDefinitions $fieldDefinitions
 	 * @param callable|null $legacyExportFormatDetector Callback to determine whether a serialized
 	 *        blob needs to be re-serialized on export. The callback must take two parameters,
 	 *        the blob an the serialization format. It must return true if re-serialization is needed.
 	 *        False positives are acceptable, false negatives are not.
 	 *
-	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		$modelId,
@@ -117,6 +121,7 @@ abstract class EntityHandler extends ContentHandler {
 		EntityConstraintProvider $constraintProvider,
 		ValidatorErrorLocalizer $errorLocalizer,
 		EntityIdParser $entityIdParser,
+		FieldDefinitions $fieldDefinitions,
 		$legacyExportFormatDetector = null
 	) {
 		$formats = $contentCodec->getSupportedFormats();
@@ -134,8 +139,7 @@ abstract class EntityHandler extends ContentHandler {
 		$this->errorLocalizer = $errorLocalizer;
 		$this->entityIdParser = $entityIdParser;
 		$this->legacyExportFormatDetector = $legacyExportFormatDetector;
-		// FIXME: convert to DI, will be in the next patch
-		$this->fieldDefinitions = new WikibaseFieldDefinitions();
+		$this->fieldDefinitions = $fieldDefinitions;
 	}
 
 	/**
