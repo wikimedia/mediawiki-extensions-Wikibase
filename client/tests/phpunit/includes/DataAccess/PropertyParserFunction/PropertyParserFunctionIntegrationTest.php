@@ -26,6 +26,11 @@ use Wikibase\Test\MockClientStore;
  */
 class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 
+	/**
+	 * @var bool
+	 */
+	private $oldAllowDataAccessInUserLanguage;
+
 	protected function setUp() {
 		parent::setUp();
 
