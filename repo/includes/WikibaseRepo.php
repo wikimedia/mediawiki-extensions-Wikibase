@@ -92,6 +92,10 @@ use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationVal
 use Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer;
+use Wikibase\Repo\Search\Elastic\Fields\DescriptionsProviderFieldDefinitions;
+use Wikibase\Repo\Search\Elastic\Fields\ItemFieldDefinitions;
+use Wikibase\Repo\Search\Elastic\Fields\LabelsProviderFieldDefinitions;
+use Wikibase\Repo\Search\Elastic\Fields\PropertyFieldDefinitions;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
@@ -1488,10 +1492,44 @@ class WikibaseRepo {
 			$siteLinkStore,
 			$this->getEntityIdLookup(),
 			$this->getLanguageFallbackLabelDescriptionLookupFactory(),
+			$this->getItemFieldDefinitions(),
 			$legacyFormatDetector
 		);
 
 		return $handler;
+	}
+
+	/**
+	 * @return LabelsProviderFieldDefinitions
+	 */
+	public function getLabelProviderDefinitions() {
+		return new LabelsProviderFieldDefinitions( $this->getTermsLanguages()->getLanguages() );
+	}
+
+	/**
+	 * @return DescriptionsProviderFieldDefinitions
+	 */
+	public function getDescriptionProviderDefinitions() {
+		return new DescriptionsProviderFieldDefinitions( $this->getTermsLanguages()
+			->getLanguages() );
+	}
+
+	/**
+	 * @return ItemFieldDefinitions
+	 */
+	private function getItemFieldDefinitions() {
+		return new ItemFieldDefinitions(
+			$this->getLabelProviderDefinitions(), $this->getDescriptionProviderDefinitions()
+		);
+	}
+
+	/**
+	 * @return PropertyFieldDefinitions
+	 */
+	private function getPropertyFieldDefinitions() {
+		return new PropertyFieldDefinitions(
+			$this->getLabelProviderDefinitions(), $this->getDescriptionProviderDefinitions()
+		);
 	}
 
 	/**
@@ -1518,6 +1556,7 @@ class WikibaseRepo {
 			$this->getLanguageFallbackLabelDescriptionLookupFactory(),
 			$propertyInfoStore,
 			$propertyInfoBuilder,
+			$this->getPropertyFieldDefinitions(),
 			$legacyFormatDetector
 		);
 
