@@ -485,6 +485,8 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$this->assertFalse( $this->getHandler()->supportsCategories() );
 	}
 
+	abstract protected function getExpectedFields();
+
 	public function testFieldsForSearchIndex() {
 		$handler = $this->getHandler();
 
@@ -497,8 +499,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 			} ) );
 
 		$fields = $handler->getFieldsForSearchIndex( $searchEngine );
-		$expectedFields = [ 'label_count', 'sitelink_count', 'statement_count' ];
-		foreach ( $expectedFields as $expected ) {
+		foreach ( $this->getExpectedFields() as $expected ) {
 			$this->assertInstanceOf( \SearchIndexField::class, $fields[$expected] );
 			$mapping = $fields[$expected]->getMapping( $searchEngine );
 			$this->assertEquals( $expected, $mapping['name'] );
