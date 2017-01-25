@@ -7,7 +7,6 @@ use ApiMain;
 use Wikibase\ChangeOp\ChangeOpMainSnak;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for creating claims.
@@ -47,28 +46,28 @@ class CreateClaim extends ApiBase {
 	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
-	 * @param string $modulePrefix
+	 * @param StatementChangeOpFactory $statementChangeOpFactory
+	 * @param ApiErrorReporter $errorReporter
+	 * @param StatementModificationHelper $modificationHelper
+	 * @param ResultBuilder $resultBuilder
+	 * @param EntitySavingHelper $entitySavingHelper
 	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+	public function __construct(
+		ApiMain $mainModule,
+		$moduleName,
+		StatementChangeOpFactory $statementChangeOpFactory,
+		ApiErrorReporter $errorReporter,
+		StatementModificationHelper $modificationHelper,
+		ResultBuilder $resultBuilder,
+		EntitySavingHelper $entitySavingHelper
+	) {
+		parent::__construct( $mainModule, $moduleName );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
-		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
-
-		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
-		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
-
-		$this->modificationHelper = new StatementModificationHelper(
-			$wikibaseRepo->getSnakFactory(),
-			$wikibaseRepo->getEntityIdParser(),
-			$wikibaseRepo->getStatementGuidValidator(),
-			$apiHelperFactory->getErrorReporter( $this )
-		);
-
-		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
-		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
-
+		$this->statementChangeOpFactory = $statementChangeOpFactory;
+		$this->errorReporter = $errorReporter;
+		$this->modificationHelper = $modificationHelper;
+		$this->resultBuilder = $resultBuilder;
+		$this->entitySavingHelper = $entitySavingHelper;
 		$this->entitySavingHelper->setEntityIdParam( 'entity' );
 	}
 
