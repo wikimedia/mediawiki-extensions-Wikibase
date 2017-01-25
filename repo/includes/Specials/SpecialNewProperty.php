@@ -77,8 +77,6 @@ class SpecialNewProperty extends SpecialNewEntity {
 	 * @return array[]
 	 */
 	protected function getFormFields() {
-		$langCode = $this->getLanguage()->getCode();
-
 		$formFields = [
 			self::FIELD_LANG => [
 				'name' => self::FIELD_LANG,
