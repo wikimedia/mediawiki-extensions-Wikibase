@@ -8,7 +8,6 @@ use Wikibase\Repo\Search\Elastic\Fields\WikibaseNumericField;
 
 /**
  * Base class for testing numeric fields.
- * @package Wikibase\Repo\Tests\Search\Elastic\Fields
  */
 abstract class WikibaseNumericFieldTest extends PHPUnit_Framework_TestCase {
 
