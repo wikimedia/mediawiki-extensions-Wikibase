@@ -536,7 +536,7 @@
 	"apihelp-wbmergeitems-example-3": "{{doc-apihelp-example|wbmergeitems}}",
 	"apihelp-wbmergeitems-example-4": "{{doc-apihelp-example|wbmergeitems}}",
 	"apihelp-wbparsevalue-description": "{{doc-apihelp-description|wbparsevalue}}",
-	"apihelp-wbparsevalue-param-parser": "{{doc-apihelp-param|wbparsevalue|parser}}",
+	"apihelp-wbparsevalue-param-parser": "{{doc-apihelp-param|wbparsevalue|parser}}\n{{doc-important|You can translate the word \"Deprecated\", but please do not alter the <code><nowiki>class=\"apihelp-deprecated\"</nowiki></code> attribute}}",
 	"apihelp-wbparsevalue-param-datatype": "{{doc-apihelp-param|wbparsevalue|datatype}}",
 	"apihelp-wbparsevalue-param-validate": "{{doc-apihelp-param|wbparsevalue|validate}}",
 	"apihelp-wbparsevalue-param-values": "{{doc-apihelp-param|wbparsevalue|values}}",

@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joao Xavier"
+		]
+	},
+	"tooltip-t-wikibase": "Ligilo ad arkivo de la datumaro",
+	"wikibase-editlinks": "Redaktar ligili",
+	"wikibase-editlinkstitle": "Redaktar la ligili ad altra lingui",
+	"wikibase-rc-hide-wikidata-hide": "Celar",
+	"wikibase-rc-hide-wikidata-show": "Montrar",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Redakto en {{WBREPONAME}}",
+	"wikibase-otherprojects": "En altra projeti"
+}

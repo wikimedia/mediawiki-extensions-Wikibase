@@ -1,8 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Lakaoso"
+			"Lakaoso",
+			"Joao Xavier"
 		]
 	},
-	"wikibase-diffview-link-name": "Nomo"
+	"wikibase-edit": "redaktar",
+	"wikibase-add": "adjuntar",
+	"wikibase-label-empty": "Nula notico definita",
+	"wikibase-description-empty": "Nula deskripto definita",
+	"wikibase-diffview-link-name": "Nomo",
+	"wikibase-sitelinks-special": "Altra pagini"
 }
