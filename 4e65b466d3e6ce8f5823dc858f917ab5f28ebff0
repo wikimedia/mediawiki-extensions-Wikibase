@@ -16,6 +16,24 @@
       "revId": "4e65b466d3e6ce8f5823dc858f917ab5f28ebff0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_fe038c77",
+        "filename": "lib/WikibaseLib.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-25T12:01:51Z",
+      "side": 0,
+      "message": "diff/diff has this code:\n```\nif ( defined( \u0027Diff_VERSION\u0027 ) ) {\n\t// Do not initialize more than once.\n\treturn 1;\n}\n```\ndata-values:\n```\nif ( defined( \u0027DataValues_VERSION\u0027 ) ) {\n\t// Do not initialize more than once.\n\treturn 1;\n}\n```\nIn DataModel PR is already merged:\nhttps://github.com/wmde/WikibaseDataModel/pull/715",
+      "parentUuid": "4efb0bce_05f17bfe",
+      "revId": "4e65b466d3e6ce8f5823dc858f917ab5f28ebff0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
