@@ -39,13 +39,6 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
  * File defining the hook handlers for the Wikibase Client extension.
  *
  * @license GPL-2.0+
- * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Jens Ohlig
- * @author Daniel Kinzler
- * @author Tobias Gritschacher
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Marius Hoch < hoo@online.de >
- * @author Bene* < benestar.wikimedia@gmail.com >
  */
 final class ClientHooks {
 

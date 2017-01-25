@@ -12,12 +12,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @covers Wikibase\Repo\Api\ModifyEntity
  *
  * @license GPL-2.0+
- * @author John Erling Blad < jeblad@gmail.com >
- * @author Daniel Kinzler
- * @author Addshore
- * @author Michał Łazowik
- * @author Bene* < benestar.wikimedia@gmail.com >
- * @author Marius Hoch < hoo@online.de >
  *
  * @group API
  * @group Wikibase

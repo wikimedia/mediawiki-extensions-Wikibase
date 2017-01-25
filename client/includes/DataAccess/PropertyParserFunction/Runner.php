@@ -16,12 +16,6 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * Runner for the {{#property|…}} and {{#statements|…}} parser functions.
  *
  * @license GPL-2.0+
- * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Daniel Kinzler
- * @author Liangent < liangent@gmail.com >
- * @author Marius Hoch < hoo@online.de >
- * @author Thiemo Mättig
  */
 class Runner {
 

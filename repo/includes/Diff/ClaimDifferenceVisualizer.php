@@ -16,12 +16,6 @@ use Wikibase\StatementRankSerializer;
  * Class for generating HTML for Claim Diffs.
  *
  * @license GPL-2.0+
- * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
- * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Addshore
- * @author Daniel Kinzler
- * @author Adrian Heine <adrian.heine@wikimedia.de>
- * @author Thiemo Mättig
  */
 class ClaimDifferenceVisualizer {
 
