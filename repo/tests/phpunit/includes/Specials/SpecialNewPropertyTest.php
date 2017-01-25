@@ -7,7 +7,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\Specials\SpecialNewProperty;
-use Wikibase\Repo\Specials\SpecialPageCopyrightView;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialNewProperty

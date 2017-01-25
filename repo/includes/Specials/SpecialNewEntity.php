@@ -6,10 +6,7 @@ use Html;
 use HTMLForm;
 use OutputPage;
 use Status;
-use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**

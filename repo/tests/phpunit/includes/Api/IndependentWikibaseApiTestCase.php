@@ -8,7 +8,6 @@ use FauxRequest;
 use MediaWiki\MediaWikiServices;
 use RequestContext;
 use ApiUsageException;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * This class can be used instead of the Mediawiki Api TestCase.

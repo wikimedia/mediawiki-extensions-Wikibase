@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Store;
 
 use DBError;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\StorageException;
 
 /**
  * @license GPL-2.0+

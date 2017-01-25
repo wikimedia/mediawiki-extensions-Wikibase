@@ -7,7 +7,6 @@ use Wikibase\ChangeOp\ChangeOpLabel;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\LabelsProvider;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**

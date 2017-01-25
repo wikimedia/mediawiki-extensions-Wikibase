@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Tests\Content;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\PropertyContent;
 
 /**

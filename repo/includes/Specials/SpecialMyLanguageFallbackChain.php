@@ -9,7 +9,6 @@ use Language;
 use SpecialPage;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Page for displaying the current language fallback chain for debugging.
