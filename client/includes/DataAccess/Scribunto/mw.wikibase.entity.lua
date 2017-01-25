@@ -38,11 +38,33 @@ entity.create = function( data )
 		error( 'mw.wikibase.entity must not be constructed using legacy data' )
 	end
 
-	local entity = data
+	local entity = logTableAccess(data)
 	setmetatable( entity, metatable )
 
 	return entity
 end
+
+-- Wrapper function to log access to claims of an entity
+-- Code for logging based on: http://www.lua.org/pil/13.4.4.html
+--
+-- @param {table} entity
+logTableAccess = function(entity)
+	loggedEntityClaims = entity['claims']
+	entity['claims'] = {}
+
+	loggedEntityMetatable.__index = function(entity['claims'], propertyID)
+		-- Need entity id: Is it entity['id']?
+		-- Write entity id and property id to DB
+		return loggedEntityClaims[propertyID]
+	end
+	
+	setmetatable(loggedEntityClaims,loggedEntityMetatable)
+	return entity
+end
+
+
+
+
 
 -- Get a term of a given type for a given language code or the content language (on monolingual wikis)
 -- or the user's language (on multilingual wikis).
