@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_97b61484",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-26T09:45:38Z",
+      "side": 1,
+      "message": "params should be added to a doc block above for consistency.",
+      "revId": "00808eed1c13964f81e077e87f61871b17763fb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_77d718c5",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-26T09:45:38Z",
+      "side": 1,
+      "message": "I don\u0027t know how to express it the best way (so the test name is not a novel) but the expected behaviour with only one \"subpage\" provided that it show the field to input the value of the term, and assumes the language of the term is the user language.\nWithout this mentioned in the test name, and not knowing how Special:SetAliases works I was wondering why on Earth it uses English as a language of the term here .",
+      "range": {
+        "startLine": 83,
+        "startChar": 17,
+        "endLine": 83,
+        "endChar": 92
+      },
+      "revId": "00808eed1c13964f81e077e87f61871b17763fb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_97b054da",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-26T09:45:38Z",
+      "side": 1,
+      "message": "$language and $termValue variables are not used after initialized if I see correctly. Not a big deal but could be omitted I guess.",
+      "revId": "00808eed1c13964f81e077e87f61871b17763fb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_178c64da",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-26T09:45:38Z",
+      "side": 1,
+      "message": "I believe this test should be also setting $wgGroupPermissions global.\nOr no tests should be doing this.\n\nOn my local setup all tests pass without setting the global but I suppose it might be worth doing, as there are many factors that might causing false positives once this is not set explicitly before the test (e.g. more strict defaults set on wiki, or some other tests, possibly in some extension messing with globals and not restoring defaults after they\u0027re run).",
+      "revId": "00808eed1c13964f81e077e87f61871b17763fb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_37f88046",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-26T09:45:38Z",
+      "side": 1,
+      "message": "I don\u0027t quite get why you\u0027re adding this (technically the same as line 195 below only with using $language instead of a string literal)",
+      "revId": "00808eed1c13964f81e077e87f61871b17763fb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
