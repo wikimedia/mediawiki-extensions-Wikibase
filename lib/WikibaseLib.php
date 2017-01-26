@@ -61,7 +61,7 @@ call_user_func( function() {
 		'name' => 'WikibaseLib',
 		'version' => WBL_VERSION,
 		'author' => array(
-			'The Wikidata team', // TODO: link?
+			'The Wikidata team',
 		),
 		'url' => 'https://www.mediawiki.org/wiki/Extension:WikibaseLib',
 		'descriptionmsg' => 'wikibase-lib-desc',

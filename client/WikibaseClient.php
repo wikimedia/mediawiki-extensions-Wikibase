@@ -78,7 +78,7 @@ call_user_func( function() {
 		'name' => 'Wikibase Client',
 		'version' => WBC_VERSION,
 		'author' => array(
-			'The Wikidata team', // TODO: link?
+			'The Wikidata team',
 		),
 		'url' => 'https://www.mediawiki.org/wiki/Extension:Wikibase_Client',
 		'descriptionmsg' => 'wikibase-client-desc',
