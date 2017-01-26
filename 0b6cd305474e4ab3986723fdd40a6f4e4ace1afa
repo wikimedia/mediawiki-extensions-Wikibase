@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_4c9c935f",
+        "filename": "repo/includes/Search/Elastic/Fields/SearchIndexField.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-01-26T00:27:51Z",
+      "side": 1,
+      "message": "Possible. I\u0027d like to keep the patches small so I didn\u0027t do it until we finalized things, but we can do it when we have the code in more stable shape.",
+      "parentUuid": "4efb0bce_7b7c4e1b",
+      "revId": "0b6cd305474e4ab3986723fdd40a6f4e4ace1afa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_7b9b2e69",
         "filename": "repo/tests/phpunit/includes/Content/ItemHandlerTest.php",
         "patchSetId": 9
@@ -30,6 +48,24 @@
       "writtenOn": "2017-01-25T02:42:26Z",
       "side": 1,
       "message": "Think it would be better to avoid using EntityContentFactory and the WikibaseRepo factory.\n\nWhat about instead we do ItemContent::newFromItem( $item ) ?",
+      "revId": "0b6cd305474e4ab3986723fdd40a6f4e4ace1afa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_ecb1ffe0",
+        "filename": "repo/tests/phpunit/includes/Content/ItemHandlerTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-01-26T00:27:51Z",
+      "side": 1,
+      "message": "I\u0027ll check it. I think I copied this test from your patch :)",
+      "parentUuid": "4efb0bce_7b9b2e69",
       "revId": "0b6cd305474e4ab3986723fdd40a6f4e4ace1afa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
