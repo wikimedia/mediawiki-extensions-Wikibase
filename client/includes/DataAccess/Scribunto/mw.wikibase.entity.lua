@@ -239,11 +239,6 @@ methodtable.formatStatements = function( entity, propertyLabelOrId, acceptableRa
 	checkType( 'formatStatements', 1, propertyLabelOrId, 'string' )
 	checkTypeMulti( 'formatStatements', 2, acceptableRanks, { 'table', 'nil' } )
 
-	-- TODO: Remove the feature flag when not needed anymore!
-	if php.isFormatStatementsEnabled() ~= true then
-		error( 'mw.wikibase.entity:formatStatements() is not enabled on this wiki.', 2 )
-	end
-
 	return formatValuesByPropertyId(
 		entity,
 		'formatStatements',

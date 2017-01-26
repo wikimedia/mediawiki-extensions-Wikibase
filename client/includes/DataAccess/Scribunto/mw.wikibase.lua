@@ -220,11 +220,6 @@ function wikibase.setupInterface()
 	wikibase.formatValue = function( snakSerialization )
 		checkType( 'formatValue', 1, snakSerialization, 'table' )
 
-		-- TODO: Remove the feature flag when not needed anymore!
-		if php.isFormatStatementsEnabled() ~= true then
-			error( 'mw.wikibase:formatValue() is not enabled on this wiki.', 2 )
-		end
-
 		return php.formatValue( snakSerialization )
 	end
 
@@ -242,11 +237,6 @@ function wikibase.setupInterface()
 	-- @param {table} snaksSerialization
 	wikibase.formatValues = function( snaksSerialization )
 		checkType( 'formatValues', 1, snaksSerialization, 'table' )
-
-		-- TODO: Remove the feature flag when not needed anymore!
-		if php.isFormatStatementsEnabled() ~= true then
-			error( 'mw.wikibase:formatValues() is not enabled on this wiki.', 2 )
-		end
 
 		return php.formatValues( snaksSerialization )
 	end

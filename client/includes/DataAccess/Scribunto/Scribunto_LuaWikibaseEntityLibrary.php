@@ -133,7 +133,6 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 			'getLanguageCode' => [ $this, 'getLanguageCode' ],
 			'formatStatements' => [ $this, 'formatStatements' ],
 			'formatPropertyValues' => [ $this, 'formatPropertyValues' ],
-			'isFormatStatementsEnabled' => [ $this, 'isFormatStatementsEnabled' ],
 		];
 
 		return $this->getEngine()->registerInterface(
@@ -148,20 +147,6 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function getGlobalSiteId() {
 		return [ $this->getImplementation()->getGlobalSiteId() ];
-	}
-
-	/**
-	 * Returns the value of the "enableLuaEntityFormatStatements" setting.
-	 *
-	 * @return bool[]
-	 */
-	public function isFormatStatementsEnabled() {
-		// TODO: Remove this once the feature flag is not needed anymore!
-		$value = WikibaseClient::getDefaultInstance()->getSettings()->getSetting(
-			'enableLuaEntityFormatStatements'
-		);
-
-		return [ $value ];
 	}
 
 	/**

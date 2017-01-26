@@ -310,26 +310,11 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			'incrementExpensiveFunctionCount' => array( $this, 'incrementExpensiveFunctionCount' ),
 			'getPropertyOrder' => array( $this, 'getPropertyOrder' ),
 			'orderProperties' => array( $this, 'orderProperties' ),
-			'isFormatStatementsEnabled' => array( $this, 'isFormatStatementsEnabled' ),
 		);
 
 		return $this->getEngine()->registerInterface(
 			__DIR__ . '/mw.wikibase.lua', $lib, array()
 		);
-	}
-
-	/**
-	 * Returns the value of the "enableLuaEntityFormatStatements" setting.
-	 *
-	 * @return bool[]
-	 */
-	public function isFormatStatementsEnabled() {
-		// TODO: Remove this once the feature flag is not needed anymore!
-		$value = WikibaseClient::getDefaultInstance()->getSettings()->getSetting(
-			'enableLuaEntityFormatStatements'
-		);
-
-		return [ $value ];
 	}
 
 	/**
