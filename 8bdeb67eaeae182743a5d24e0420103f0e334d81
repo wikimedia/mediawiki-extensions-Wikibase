@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_d82cb947",
+        "filename": "CREDITS",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-01-26T14:09:49Z",
+      "side": 1,
+      "message": "maybe should be Denny Vrandečić, with the special characters?",
+      "revId": "8bdeb67eaeae182743a5d24e0420103f0e334d81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
