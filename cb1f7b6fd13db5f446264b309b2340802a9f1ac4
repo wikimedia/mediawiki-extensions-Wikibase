@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_cf3e30d7",
+        "filename": "client/includes/Store/RepositoryServiceContainerFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-26T18:27:18Z",
+      "side": 1,
+      "message": "should now perhaps be called newContainer, since it guarantees a fresh instance every time. Or this fact should be mentioned in the documentation.",
+      "revId": "cb1f7b6fd13db5f446264b309b2340802a9f1ac4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_4f33600b",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-26T18:27:18Z",
+      "side": 1,
+      "message": "At some point, we\u0027ll want to just have a single \"repositories\" array...",
+      "revId": "cb1f7b6fd13db5f446264b309b2340802a9f1ac4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
