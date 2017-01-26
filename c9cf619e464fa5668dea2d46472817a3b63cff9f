@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_a2e54b08",
+        "filename": "client/includes/Store/RepositoryServiceContainer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-26T19:04:18Z",
+      "side": 1,
+      "message": "This will instantiate the service if it\u0027s not already instantiated. We may want to avoid this - I assume that services that we haven\u0027tr used yet do not need to be notified. You could use peekService() to achieve that.",
+      "revId": "c9cf619e464fa5668dea2d46472817a3b63cff9f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_22f27bce",
+        "filename": "client/includes/Store/RepositoryServiceWiring.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-26T19:04:18Z",
+      "side": 1,
+      "message": "Confused - why does this split happen in this patch.",
+      "revId": "c9cf619e464fa5668dea2d46472817a3b63cff9f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
