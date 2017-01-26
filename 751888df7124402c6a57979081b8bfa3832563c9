@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_e22c6347",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialItemByTitleTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-26T18:57:16Z",
+      "side": 1,
+      "message": "How do you like this way of describing mocks?\n\nPS: This is Prophecy, bundled with PhpUnit. For more see:\nhttps://phpunit.de/manual/current/en/test-doubles.html#test-doubles.prophecy\nhttps://github.com/phpspec/prophecy",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 35
+      },
+      "revId": "751888df7124402c6a57979081b8bfa3832563c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
