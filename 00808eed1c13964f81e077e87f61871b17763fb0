@@ -42,6 +42,48 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_6f55fc51",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-26T18:19:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_97b61484",
+      "revId": "00808eed1c13964f81e077e87f61871b17763fb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_cf5d1080",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-26T18:19:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_4f680085",
+      "range": {
+        "startLine": 26,
+        "startChar": 44,
+        "endLine": 26,
+        "endChar": 72
+      },
+      "revId": "00808eed1c13964f81e077e87f61871b17763fb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_77d718c5",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
         "patchSetId": 1
@@ -53,6 +95,30 @@
       "writtenOn": "2017-01-26T09:45:38Z",
       "side": 1,
       "message": "I don\u0027t know how to express it the best way (so the test name is not a novel) but the expected behaviour with only one \"subpage\" provided that it show the field to input the value of the term, and assumes the language of the term is the user language.\nWithout this mentioned in the test name, and not knowing how Special:SetAliases works I was wondering why on Earth it uses English as a language of the term here .",
+      "range": {
+        "startLine": 83,
+        "startChar": 17,
+        "endLine": 83,
+        "endChar": 92
+      },
+      "revId": "00808eed1c13964f81e077e87f61871b17763fb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_ef68cc1b",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-26T18:19:38Z",
+      "side": 1,
+      "message": "But what language should it use, if none provided?\n\nI\u0027ll add a TODO and we\u0027ll add this test later. Would it be ok?",
+      "parentUuid": "2ef897d1_77d718c5",
       "range": {
         "startLine": 83,
         "startChar": 17,
@@ -82,6 +148,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_0fc3280c",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-26T18:19:38Z",
+      "side": 1,
+      "message": "I added them intentionally to understand what those strings mean (what \u0027foo\u0027 is is pretty unclear), but I believe I can do it another way.",
+      "parentUuid": "2ef897d1_97b054da",
+      "revId": "00808eed1c13964f81e077e87f61871b17763fb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_178c64da",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
         "patchSetId": 1
@@ -93,6 +177,24 @@
       "writtenOn": "2017-01-26T09:45:38Z",
       "side": 1,
       "message": "I believe this test should be also setting $wgGroupPermissions global.\nOr no tests should be doing this.\n\nOn my local setup all tests pass without setting the global but I suppose it might be worth doing, as there are many factors that might causing false positives once this is not set explicitly before the test (e.g. more strict defaults set on wiki, or some other tests, possibly in some extension messing with globals and not restoring defaults after they\u0027re run).",
+      "revId": "00808eed1c13964f81e077e87f61871b17763fb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_cfe3d09b",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-26T18:19:38Z",
+      "side": 1,
+      "message": "Moved it to setUp method",
+      "parentUuid": "2ef897d1_178c64da",
       "revId": "00808eed1c13964f81e077e87f61871b17763fb0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -128,6 +230,24 @@
       "side": 1,
       "message": "This looks like a copy paste mistake to me.",
       "parentUuid": "2ef897d1_37f88046",
+      "revId": "00808eed1c13964f81e077e87f61871b17763fb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_4ff80047",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-26T18:19:38Z",
+      "side": 1,
+      "message": "Exactly!",
+      "parentUuid": "2ef897d1_6f197c27",
       "revId": "00808eed1c13964f81e077e87f61871b17763fb0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
