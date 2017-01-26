@@ -7,6 +7,7 @@ use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
 
 /**
  * @covers Wikibase\Lib\Store\HttpUrlPropertyOrderProvider
+ * @covers Wikibase\Lib\Store\WikiTextPropertyOrderProvider
  *
  * @group Wikibase
  * @group Database
