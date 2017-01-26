@@ -16,6 +16,52 @@
       "revId": "8bdeb67eaeae182743a5d24e0420103f0e334d81",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_f8d6552b",
+        "filename": "CREDITS",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-26T14:12:05Z",
+      "side": 1,
+      "message": "Why am I the only one with this?",
+      "range": {
+        "startLine": 37,
+        "startChar": 16,
+        "endLine": 37,
+        "endChar": 22
+      },
+      "revId": "8bdeb67eaeae182743a5d24e0420103f0e334d81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_38f50db6",
+        "filename": "CREDITS",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-26T14:12:05Z",
+      "side": 1,
+      "message": "Why is this linked but nobody else is?",
+      "range": {
+        "startLine": 158,
+        "startChar": 2,
+        "endLine": 158,
+        "endChar": 20
+      },
+      "revId": "8bdeb67eaeae182743a5d24e0420103f0e334d81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
