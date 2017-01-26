@@ -13,6 +13,25 @@ class WikiTextPropertyOrderProviderTestHelper {
 
 	public static function provideGetPropertyOrder() {
 		return [
+			'empty page' => [
+				'',
+				[]
+			],
+			'syntax that is not accepted' => [
+				"*\nP1\n"
+				. "* P2P\n"
+				. "# P3\n"
+				. " * P4\n"
+				. "* Property:P5\n"
+				. "* [[d:P6]]\n"
+				. "* d:P7\n"
+				. "* {{p|8}}\n"
+				. "* {{P|P9}}\n"
+				. "* {{Q|P10}}\n"
+				. "* {{P|Q11}}",
+				[]
+			],
+
 			'simple match' => [
 				"* P1 \n"
 				. "*P133 \n"
@@ -35,7 +54,7 @@ class WikiTextPropertyOrderProviderTestHelper {
 				"* P1 \n"
 				. "* P133 \n"
 				. "* P5 Unicorns are all \n"
-				. "*  very beautiful!"
+				. "*  very beautiful!\n"
 				. "** This is a subheading",
 				[ 'P1' => 0, 'P133' => 1, 'P5' => 2 ]
 			],
@@ -45,6 +64,13 @@ class WikiTextPropertyOrderProviderTestHelper {
 				. "* P5 Unicorns are all \n"
 				. "very beautiful!",
 				[ 'P1' => 0, 'P133' => 1, 'P5' => 2 ]
+			],
+			'wiki links' => [
+				"*\t[[Property:P9]]\n"
+				. "* [[Property:P8|P1008]]\n"
+				. "* [[d:Property:P7]]\n"
+				. "* [[Q6|P1006]]",
+				[ 'P9' => 0, 'P8' => 1, 'P7' => 2 ]
 			],
 		];
 	}
