@@ -16,6 +16,24 @@
       "revId": "1f7bc749b277146c0b355c7410ed99d550ac1dd2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_02be5fd1",
+        "filename": "repo/includes/Search/Elastic/Fields/LabelsField.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-01-26T19:42:13Z",
+      "side": 1,
+      "message": "Generally, it shouldn\u0027t even get to here since TermIndexField should have returned null when generating the field, so this check is just in case something weird is going on. But won\u0027t hurt to log.",
+      "parentUuid": "2ef897d1_2c85d79f",
+      "revId": "1f7bc749b277146c0b355c7410ed99d550ac1dd2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
