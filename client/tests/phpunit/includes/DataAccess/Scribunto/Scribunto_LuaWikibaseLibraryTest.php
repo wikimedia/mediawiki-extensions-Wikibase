@@ -55,9 +55,6 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 		$this->oldAllowDataAccessInUserLanguage = $settings->getSetting( 'allowDataAccessInUserLanguage' );
 		$this->setAllowDataAccessInUserLanguage( false );
-
-		// TODO: Remove the feature flag when not needed any more!
-		$settings->setSetting( 'enableLuaEntityFormatStatements', true );
 	}
 
 	protected function tearDown() {

@@ -27,11 +27,6 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 	 */
 	private $oldAllowDataAccessInUserLanguage;
 
-	/**
-	 * @var bool
-	 */
-	private $oldEnableLuaEntityFormatStatements;
-
 	protected static $moduleName = 'LuaWikibaseEntityLibraryTests';
 
 	protected function getTestModules() {
@@ -45,9 +40,6 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 
-		$this->oldEnableLuaEntityFormatStatements = $settings->getSetting( 'enableLuaEntityFormatStatements' );
-		$settings->setSetting( 'enableLuaEntityFormatStatements', true );
-
 		$this->oldAllowDataAccessInUserLanguage = $settings->getSetting( 'allowDataAccessInUserLanguage' );
 		$this->setAllowDataAccessInUserLanguage( false );
 	}
@@ -56,12 +48,6 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		parent::tearDown();
 
 		$this->setAllowDataAccessInUserLanguage( $this->oldAllowDataAccessInUserLanguage );
-
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
-		$settings->setSetting(
-			'enableLuaEntityFormatStatements',
-			$this->oldEnableLuaEntityFormatStatements
-		);
 	}
 
 	public function allowDataAccessInUserLanguageProvider() {
