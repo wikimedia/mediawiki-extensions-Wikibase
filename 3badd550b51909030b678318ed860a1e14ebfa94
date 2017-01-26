@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_4230d7e5",
+        "filename": "repo/includes/Specials/SpecialListProperties.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-26T18:40:11Z",
+      "side": 1,
+      "message": "Hm, why is this change in this patch, again?",
+      "revId": "3badd550b51909030b678318ed860a1e14ebfa94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_a220ab97",
+        "filename": "repo/includes/Store/Sql/SqlStore.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-26T18:40:11Z",
+      "side": 1,
+      "message": "I no longer understand why we need this conditional. A comment would help.",
+      "revId": "3badd550b51909030b678318ed860a1e14ebfa94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
