@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_18a0119a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-26T14:19:21Z",
+      "side": 1,
+      "message": "The implementations are still incomplete. We defined a \"minimal acceptable feature set\", but never defined what \"complete\" means. For example: Have data attributes for property IDs and raw values? Render multiple images as \u003cgallery\u003e?",
+      "range": {
+        "startLine": 9,
+        "startChar": 21,
+        "endLine": 10,
+        "endChar": 15
+      },
+      "revId": "a0cdb302e027d3a9c6d178e996a1b2d31e80b097",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_788025fa",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/StatementsParserFunctionIntegrationTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-26T14:19:21Z",
+      "side": 1,
+      "message": "Dead code now.",
+      "range": {
+        "startLine": 130,
+        "startChar": 2,
+        "endLine": 130,
+        "endChar": 66
+      },
+      "revId": "a0cdb302e027d3a9c6d178e996a1b2d31e80b097",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
