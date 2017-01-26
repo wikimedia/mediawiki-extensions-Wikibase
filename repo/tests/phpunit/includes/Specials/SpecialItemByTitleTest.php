@@ -180,4 +180,74 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 		}
 	}
 
+	public function testAllNeededFieldsArePresent_WhenRendered() {
+
+		list( $output ) = $this->executeSpecialPage();
+
+		$matchers = [];
+
+		$matchers['site'] = [
+			'tag' => 'input',
+			'attributes' => [
+				'name' => 'site',
+			],
+		];
+		$matchers['page'] = [
+			'tag' => 'input',
+			'attributes' => [
+				'name' => 'page',
+			],
+		];
+		$matchers['submit'] = [
+			'tag' => 'button',
+			'attributes' => [
+				'type' => 'submit',
+				'name' => '',
+			],
+		];
+
+		foreach ( $matchers as $key => $matcher ) {
+			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
+		}
+	}
+
+	public function testSiteAndPageFieldsAreFilledIn_WhenRenderedWithSubpageReferingToNonexistentTitle() {
+
+		list( $output ) = $this->executeSpecialPage( 'enwiki/NotFound' );
+
+		$matchers = [];
+
+		$matchers['site'] = [
+			'tag' => 'input',
+			'attributes' => [
+				'name' => 'site',
+				'value' => 'enwiki'
+			],
+		];
+		$matchers['page'] = [
+			'tag' => 'input',
+			'attributes' => [
+				'name' => 'page',
+				'value' => 'NotFound'
+			],
+		];
+
+		foreach ( $matchers as $key => $matcher ) {
+			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
+		}
+	}
+
+	public function testRedirectsToItem_WhenGivenSubpageReferencesExistingTitle() {
+		$target = 'Q123';
+		$sub = 'dewiki/Gefunden';
+
+
+		/* @var WebResponse $response */
+		list( $output, $response ) = $this->executeSpecialPage( $sub );
+
+		$target = Title::newFromText( $target )->getFullURL();
+		$expected = wfExpandUrl( $target, PROTO_CURRENT );
+		$this->assertEquals( $expected, $response->getHeader( 'Location' ), 'Redirect' );
+	}
+
 }
