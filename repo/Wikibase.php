@@ -241,7 +241,20 @@ call_user_func( function() {
 	$wgAPIModules['wbformatvalue'] = Wikibase\Repo\Api\FormatSnakValue::class;
 	$wgAPIModules['wbparsevalue'] = Wikibase\Repo\Api\ParseValue::class;
 	$wgAPIModules['wbavailablebadges'] = Wikibase\Repo\Api\AvailableBadges::class;
-	$wgAPIModules['wbcreateredirect'] = Wikibase\Repo\Api\CreateRedirect::class;
+	$wgAPIModules['wbcreateredirect'] = [
+		'class' => Wikibase\Repo\Api\CreateRedirect::class,
+		'factory' => function( ApiMain $apiMain, $moduleName ) {
+			$wikibaseRepo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+			$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() );
+			return new Wikibase\Repo\Api\CreateRedirect(
+				$apiMain,
+				$moduleName,
+				$wikibaseRepo->getEntityIdParser(),
+				$apiHelperFactory->getErrorReporter( $apiMain ),
+				$wikibaseRepo->newRedirectCreationInteractor( $apiMain->getUser(), $apiMain->getContext() )
+			);
+		}
+	];
 	$wgAPIListModules['wbsearch'] = Wikibase\Repo\Api\QuerySearchEntities::class;
 	$wgAPIListModules['wbsubscribers'] = [
 		'class' => Wikibase\Repo\Api\ListSubscribers::class,
