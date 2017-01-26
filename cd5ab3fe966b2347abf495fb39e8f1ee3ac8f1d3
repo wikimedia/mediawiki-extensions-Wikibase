@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_258cc5da",
+        "filename": "lib/includes/Store/WikiTextPropertyOrderProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-01-26T23:13:10Z",
+      "side": 1,
+      "message": "This no longer includes tabs… why not use \\h (horizontal spaces)?",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 9
+      },
+      "revId": "cd5ab3fe966b2347abf495fb39e8f1ee3ac8f1d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
