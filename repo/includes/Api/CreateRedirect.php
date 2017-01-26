@@ -43,23 +43,15 @@ class CreateRedirect extends ApiBase {
 	 *
 	 * @see ApiBase::__construct
 	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
-
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
-		$this->setServices(
-			$wikibaseRepo->getEntityIdParser(),
-			$apiHelperFactory->getErrorReporter( $this ),
-			$wikibaseRepo->newRedirectCreationInteractor( $this->getUser(), $this->getContext() )
-		);
-	}
-
-	public function setServices(
+	public function __construct(
+		ApiMain $mainModule,
+		$moduleName,
 		EntityIdParser $idParser,
 		ApiErrorReporter $errorReporter,
 		RedirectCreationInteractor $interactor
 	) {
+		parent::__construct( $mainModule, $moduleName );
+
 		$this->idParser = $idParser;
 		$this->errorReporter = $errorReporter;
 		$this->interactor = $interactor;
