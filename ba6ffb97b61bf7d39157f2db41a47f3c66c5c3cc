@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_18ded1de",
+        "filename": "CREDITS",
+        "patchSetId": 7
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-01-26T14:44:12Z",
+      "side": 1,
+      "message": "listed twice",
+      "revId": "ba6ffb97b61bf7d39157f2db41a47f3c66c5c3cc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_38e18d98",
+        "filename": "CREDITS",
+        "patchSetId": 7
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-01-26T14:44:12Z",
+      "side": 1,
+      "message": "looks like he is listed twice",
+      "revId": "ba6ffb97b61bf7d39157f2db41a47f3c66c5c3cc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
