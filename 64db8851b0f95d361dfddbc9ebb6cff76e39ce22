@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_384d0de1",
+        "filename": "CREDITS",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-26T14:33:20Z",
+      "side": 1,
+      "message": "I think this one and the one below is the same. Not sure though.",
+      "revId": "64db8851b0f95d361dfddbc9ebb6cff76e39ce22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_184a51c9",
+        "filename": "CREDITS",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-26T14:33:20Z",
+      "side": 1,
+      "message": "I think this is our Abraham.",
+      "revId": "64db8851b0f95d361dfddbc9ebb6cff76e39ce22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_d81a79d0",
+        "filename": "CREDITS",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-26T14:33:20Z",
+      "side": 1,
+      "message": "I know this person offline. Lines 69 and 70 are the same.",
+      "revId": "64db8851b0f95d361dfddbc9ebb6cff76e39ce22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_782a65d9",
+        "filename": "CREDITS",
+        "patchSetId": 6
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-26T14:33:20Z",
+      "side": 1,
+      "message": "This and line 73 are the same person.",
+      "revId": "64db8851b0f95d361dfddbc9ebb6cff76e39ce22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
