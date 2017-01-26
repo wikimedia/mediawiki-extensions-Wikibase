@@ -19,6 +19,29 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_4f680085",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-26T17:31:31Z",
+      "side": 1,
+      "message": "$termValue please. You already used this below.",
+      "range": {
+        "startLine": 26,
+        "startChar": 44,
+        "endLine": 26,
+        "endChar": 72
+      },
+      "revId": "00808eed1c13964f81e077e87f61871b17763fb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_77d718c5",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
         "patchSetId": 1
@@ -87,6 +110,24 @@
       "writtenOn": "2017-01-26T09:45:38Z",
       "side": 1,
       "message": "I don\u0027t quite get why you\u0027re adding this (technically the same as line 195 below only with using $language instead of a string literal)",
+      "revId": "00808eed1c13964f81e077e87f61871b17763fb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_6f197c27",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-26T17:31:31Z",
+      "side": 1,
+      "message": "This looks like a copy paste mistake to me.",
+      "parentUuid": "2ef897d1_37f88046",
       "revId": "00808eed1c13964f81e077e87f61871b17763fb0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
