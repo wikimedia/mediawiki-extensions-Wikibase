@@ -34,6 +34,24 @@
       "revId": "ebb50ad9cb59b7ace7e3f6f928e9b650703fc3d8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_d86b99ed",
+        "filename": "CREDITS",
+        "patchSetId": 9
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-01-26T14:52:36Z",
+      "side": 1,
+      "message": "also, according to https://phabricator.wikimedia.org/p/Vogone/ and his git name / email, he is same person as line 103. Not sure how he prefers to be listed though",
+      "parentUuid": "2ef897d1_d8bcb969",
+      "revId": "ebb50ad9cb59b7ace7e3f6f928e9b650703fc3d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
