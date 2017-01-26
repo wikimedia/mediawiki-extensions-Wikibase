@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_38f86d46",
+        "filename": "CREDITS",
+        "patchSetId": 7
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-01-26T14:45:38Z",
+      "side": 1,
+      "message": "Nikola was on the team for the first month. idk if he should be listed as a team member.",
+      "revId": "ba6ffb97b61bf7d39157f2db41a47f3c66c5c3cc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_38e18d98",
         "filename": "CREDITS",
         "patchSetId": 7
