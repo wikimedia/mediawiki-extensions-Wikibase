@@ -20,7 +20,7 @@ use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -413,11 +413,11 @@ class MockRepository implements
 
 			$property = $this->getEntity( $propertyId );
 
-			if ( !( $property instanceof FingerprintProvider ) ) {
+			if ( !( $property instanceof LabelsProvider ) ) {
 				continue;
 			}
 
-			$labels = $property->getFingerprint()->getLabels();
+			$labels = $property->getLabels();
 
 			if ( $labels->hasTermForLanguage( $languageCode )
 				&& $labels->getByLanguage( $languageCode )->getText() === $propertyLabel

@@ -5,13 +5,14 @@ namespace Wikibase\Repo\Tests\Content;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
 use Diff\Patcher\PatcherException;
+use InvalidArgumentException;
 use ParserOutput;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
-use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\Content\EntityContentDiff;
@@ -86,12 +87,12 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$this->assertSame( $expected, $entityContent->getTextForSearchIndex() );
 	}
 
-	private function setLabel( EntityDocument $entity, $lang, $text ) {
-		if ( $entity instanceof FingerprintProvider ) {
-			$entity->getFingerprint()->setLabel( $lang, $text );
-		} else {
-			throw new \InvalidArgumentException( 'FingerprintProvider expected!' );
+	private function setLabel( EntityDocument $entity, $languageCode, $text ) {
+		if ( !( $entity instanceof LabelsProvider ) ) {
+			throw new InvalidArgumentException( '$entity must be a LabelsProvider' );
 		}
+
+		$entity->getLabels()->setTextForLanguage( $languageCode, $text );
 	}
 
 	public function getTextForSearchIndexProvider() {

@@ -6,7 +6,7 @@ use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\LabelDescriptionDuplicateDetector;
 
 /**
@@ -38,10 +38,10 @@ class LabelUniquenessValidator implements EntityValidator, FingerprintValidator 
 	 * @return Result
 	 */
 	public function validateEntity( EntityDocument $entity ) {
-		if ( $entity instanceof FingerprintProvider ) {
+		if ( $entity instanceof LabelsProvider ) {
 			return $this->duplicateDetector->detectLabelConflicts(
 				$entity->getType(),
-				$entity->getFingerprint()->getLabels()->toTextArray(),
+				$entity->getLabels()->toTextArray(),
 				// insert again when T104393 is resolved
 				null, //$entity->getFingerprint()->getAliasGroups()->toTextArray(),
 				$entity->getId()
