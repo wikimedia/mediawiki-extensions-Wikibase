@@ -16,6 +16,24 @@
       "revId": "e58385e780e2c374dea7c2a651744639b060db79",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_3b2f3df5",
+        "filename": "lib/tests/phpunit/Store/EntityInfoBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-27T16:06:46Z",
+      "side": 1,
+      "message": "You are right. But there is no other way to specify this. This is the best we have.\n\nThe difference is barely relevant. It can only become relevant when code checks the type of the first element, and assumes all other elements have the same type. But such code should not exist, in my opinion.",
+      "parentUuid": "2ef897d1_dbb029db",
+      "revId": "e58385e780e2c374dea7c2a651744639b060db79",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
