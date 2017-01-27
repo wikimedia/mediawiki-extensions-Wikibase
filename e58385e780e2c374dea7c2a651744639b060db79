@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_dbb029db",
+        "filename": "lib/tests/phpunit/Store/EntityInfoBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T15:57:26Z",
+      "side": 1,
+      "message": "I am bad at those but doesn\u0027t it mean \"an array of Items or an array of Properties\" not \"an array of Items and Properties\"?",
+      "revId": "e58385e780e2c374dea7c2a651744639b060db79",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
