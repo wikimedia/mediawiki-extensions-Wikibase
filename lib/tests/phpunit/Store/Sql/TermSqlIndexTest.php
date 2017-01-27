@@ -332,14 +332,11 @@ class TermSqlIndexTest extends TermIndexTest {
 
 	public function getEntityTermsProvider() {
 		$id = new ItemId( 'Q999' );
-
-		$fingerprint = new Fingerprint();
-		$fingerprint->setLabel( 'en', 'kittens!!!:)' );
-		$fingerprint->setDescription( 'es', 'es un gato!' );
-		$fingerprint->setAliasGroup( 'en', array( 'kitten-alias' ) );
-
 		$item = new Item( $id );
-		$item->setFingerprint( $fingerprint );
+
+		$item->setLabel( 'en', 'kittens!!!:)' );
+		$item->setDescription( 'es', 'es un gato!' );
+		$item->setAliases( 'en', array( 'kitten-alias' ) );
 
 		$expectedTerms = array(
 			new TermIndexEntry( array(
