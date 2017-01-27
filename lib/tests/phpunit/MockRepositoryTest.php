@@ -2,9 +2,7 @@
 
 namespace Wikibase\Lib\Tests;
 
-use MWException;
 use User;
-use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -86,13 +84,13 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$item = $this->repo->getEntity( $itemId );
 		$this->assertNotNull( $item, 'Entity ' . $itemId );
 		$this->assertInstanceOf( Item::class, $item, 'Entity ' . $itemId );
-		$this->assertEquals( 'foo', $item->getFingerprint()->getLabel( 'en' )->getText() );
-		$this->assertEquals( 'bar', $item->getFingerprint()->getLabel( 'de' )->getText() );
+		$this->assertEquals( 'foo', $item->getLabels()->getByLanguage( 'en' )->getText() );
+		$this->assertEquals( 'bar', $item->getLabels()->getByLanguage( 'de' )->getText() );
 
 		// test we can't mess with entities in the repo
 		$item->setLabel( 'en', 'STRANGE' );
 		$item = $this->repo->getEntity( $itemId );
-		$this->assertEquals( 'foo', $item->getFingerprint()->getLabel( 'en' )->getText() );
+		$this->assertEquals( 'foo', $item->getLabels()->getByLanguage( 'en' )->getText() );
 
 		// test latest prop
 		$prop = $this->repo->getEntity( $propId );
@@ -168,8 +166,6 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetLinks() {
-		$cases = array();
-
 		$a = new Item( new ItemId( 'Q1' ) );
 		$a->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
 		$a->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Bar' );
@@ -178,122 +174,118 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$b->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Bar' );
 		$b->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Xoo' );
 
-		$items = array( $a, $b );
+		$items = [ $a, $b ];
 
-		// #0: all ---------
-		$cases[] = array( $items,
-			array(), // items
-			array(), // sites
-			array(), // pages
-			array( // expected
-				array( 'enwiki', 'Foo', 1 ),
-				array( 'dewiki', 'Bar', 1 ),
-				array( 'enwiki', 'Bar', 2 ),
-				array( 'dewiki', 'Xoo', 2 ),
-			)
-		);
-
-		// #1: mismatch ---------
-		$cases[] = array( $items,
-			array(), // items
-			array( 'enwiki' ), // sites
-			array( 'Xoo' ), // pages
-			array() // expected
-		);
-
-		// #2: by item ---------
-		$cases[] = array( $items,
-			array( 1 ), // items
-			array(), // sites
-			array(), // pages
-			array( // expected
-				array( 'enwiki', 'Foo', 1 ),
-				array( 'dewiki', 'Bar', 1 ),
-			)
-		);
-
-		// #3: by site ---------
-		$cases[] = array( $items,
-			array(), // items
-			array( 'enwiki' ), // sites
-			array(), // pages
-			array( // expected
-				array( 'enwiki', 'Foo', 1 ),
-				array( 'enwiki', 'Bar', 2 ),
-			)
-		);
-
-		// #4: by page ---------
-		$cases[] = array( $items,
-			array(), // items
-			array(), // sites
-			array( 'Bar' ), // pages
-			array( // expected
-				array( 'dewiki', 'Bar', 1 ),
-				array( 'enwiki', 'Bar', 2 ),
-			)
-		);
-
-		// #5: by site and page ---------
-		$cases[] = array( $items,
-			array(), // items
-			array( 'dewiki' ), // sites
-			array( 'Bar' ), // pages
-			array( // expected
-				array( 'dewiki', 'Bar', 1 ),
-			)
-		);
-
-		return $cases;
+		return [
+			'all' => [
+				$items,
+				'numericIds' => [],
+				'siteIds' => [],
+				'pageNames' => [],
+				'expectedLinks' => [
+					[ 'enwiki', 'Foo', 1 ],
+					[ 'dewiki', 'Bar', 1 ],
+					[ 'enwiki', 'Bar', 2 ],
+					[ 'dewiki', 'Xoo', 2 ],
+				]
+			],
+			'mismatch' => [
+				$items,
+				'numericIds' => [],
+				'siteIds' => [ 'enwiki' ],
+				'pageNames' => [ 'Xoo' ],
+				'expectedLinks' => []
+			],
+			'by item' => [
+				$items,
+				'numericIds' => [ 1 ],
+				'siteIds' => [],
+				'pageNames' => [],
+				'expectedLinks' => [
+					[ 'enwiki', 'Foo', 1 ],
+					[ 'dewiki', 'Bar', 1 ],
+				]
+			],
+			'by site' => [
+				$items,
+				'numericIds' => [],
+				'siteIds' => [ 'enwiki' ],
+				'pageNames' => [],
+				'expectedLinks' => [
+					[ 'enwiki', 'Foo', 1 ],
+					[ 'enwiki', 'Bar', 2 ],
+				]
+			],
+			'by page' => [
+				$items,
+				'numericIds' => [],
+				'siteIds' => [],
+				'pageNames' => [ 'Bar' ],
+				'expectedLinks' => [
+					[ 'dewiki', 'Bar', 1 ],
+					[ 'enwiki', 'Bar', 2 ],
+				]
+			],
+			'by site and page' => [
+				$items,
+				'numericIds' => [],
+				'siteIds' => [ 'dewiki' ],
+				'pageNames' => [ 'Bar' ],
+				'expectedLinks' => [
+					[ 'dewiki', 'Bar', 1 ],
+				]
+			],
+		];
 	}
 
 	/**
 	 * @dataProvider provideGetLinks
 	 */
-	public function testGetLinks( array $items, array $itemIds, array $sites, array $pages, array $expectedLinks ) {
+	public function testGetLinks(
+		array $items,
+		array $numericIds,
+		array $siteIds,
+		array $pageNames,
+		array $expectedLinks
+	) {
 		foreach ( $items as $item ) {
 			$this->repo->putEntity( $item );
 		}
 
-		$links = $this->repo->getLinks( $itemIds, $sites, $pages );
+		$links = $this->repo->getLinks( $numericIds, $siteIds, $pageNames );
 
 		$this->assertArrayEquals( $expectedLinks, $links );
 	}
 
 	public function provideGetEntities() {
-		return array(
-			array( // #0: empty
-				array(), // ids
-				array(), // expected
-			),
-
-			array( // #1: some entities
-				array( // ids
-					'Q1',
-					'Q2',
-				),
-				array( // expected
-					'Q1' => array(
+		return [
+			'empty' => [
+				'itemIds' => [],
+				'expectedLabels' => []
+			],
+			'some entities' => [
+				'itemIds' => [ 'Q1', 'Q2' ],
+				'expectedLabels' => [
+					'Q1' => [
 						'de' => 'eins',
 						'en' => 'one',
-					),
-					'Q2' => array(
+					],
+					'Q2' => [
 						'en' => 'two',
-					),
-				),
-			),
-
-			array( // #2: bad ID
-				array( 'Q1', 'Q22' ), // ids
-				array( // expected
-					'Q1' => array(
+					],
+				]
+			],
+			'bad ID' => [
+				'itemIds' => [ 'Q1', 'Q22' ],
+				'expectedLabels' => [
+					'Q1' => [
 						'en' => 'one',
 						'de' => 'eins',
-					),
+					],
 					'Q22' => null,
-				),
-			)
-		);
+				]
+			]
+		];
 	}
 
 	protected function setupGetEntities() {
@@ -324,66 +316,44 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetEntities
 	 */
-	public function testGetEntities( array $ids, array $expected, $expectedError = false ) {
+	public function testGetEntities( array $itemIds, array $expectedLabels ) {
 		$this->setupGetEntities();
 
 		// convert string IDs to EntityId objects
-		foreach ( $ids as $i => $id ) {
+		foreach ( $itemIds as $i => $id ) {
 			if ( is_string( $id ) ) {
-				$ids[ $i ] = new ItemId( $id );
+				$itemIds[$i] = new ItemId( $id );
 			}
 		}
 
-		$entities = false;
+		/** @var Item[]|null[] $items */
+		$items = $this->repo->getEntities( $itemIds );
 
-		// do it!
-		try {
-			$entities = $this->repo->getEntities( $ids );
-
-			if ( $expectedError !== false ) {
-				$this->fail( 'expected error: ' . $expectedError );
-			}
-		} catch ( MWException $ex ) {
-			if ( $expectedError !== false ) {
-				$this->assertInstanceOf( $expectedError, $ex );
-			} else {
-				$this->fail( 'error: ' . $ex->getMessage() );
-			}
-		}
-
-		if ( !is_array( $expected ) ) {
-			// expected some kind of special return value, e.g. false.
-			$this->assertEquals( $expected, $entities, 'return value' );
-			return;
-		} else {
-			$this->assertType( 'array', $entities, 'return value' );
-		}
+		$this->assertType( 'array', $items, 'return value' );
 
 		// extract map of entity IDs to label arrays.
-		/* @var EntityDocument $e  */
-		$actual = array();
-		foreach ( $entities as $key => $e ) {
-			if ( is_object( $e ) ) {
-				$actual[ $e->getId()->getSerialization() ] = $e->getFingerprint()->getLabels()->toTextArray();
+		$actualLabels = [];
+		foreach ( $items as $key => $item ) {
+			if ( $item === null ) {
+				$actualLabels[$key] = null;
 			} else {
-				$actual[ $key ] = $e;
+				$actualLabels[$key] = $item->getLabels()->toTextArray();
 			}
 		}
 
 		// check that we found the right number of entities
-		$this->assertEquals( count( $expected ), count( $actual ), 'number of entities found' );
+		$this->assertEquals( count( $expectedLabels ), count( $actualLabels ), 'number of entities found' );
 
-		foreach ( $expected as $id => $labels ) {
+		foreach ( $expectedLabels as $id => $labels ) {
 			// check that thew correct entity was found
-			$this->assertArrayHasKey( $id, $actual );
+			$this->assertArrayHasKey( $id, $actualLabels );
 
-			if ( is_array( $labels ) ) {
-				// check that the entity contains the expected labels
-				$this->assertArrayEquals( $labels, $actual[$id] );
-			} else {
-				// typically, $labels would be null here.
+			if ( $labels === null ) {
 				// check that the entity/revision wasn't found
-				$this->assertEquals( $labels, $actual[$id] );
+				$this->assertNull( $actualLabels[$id] );
+			} else {
+				// check that the entity contains the expected labels
+				$this->assertArrayEquals( $labels, $actualLabels[$id] );
 			}
 		}
 	}
@@ -398,10 +368,10 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 		// check link retrieval
 		$this->assertEquals(
-			array(
+			[
 				new SiteLink( 'dewiki', 'Xoo' ),
 				new SiteLink( 'enwiki', 'Foo' ),
-			),
+			],
 			$this->repo->getSiteLinksForItem( $one->getId() )
 		);
 
@@ -428,70 +398,75 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$fifthItem->setLabel( 'en', 'one' );
 		$fifthItem->setLabel( 'de', 'eins' );
 
-		return array(
-			'fresh' => array(
+		return [
+			'fresh' => [
 				'entity' => $item,
 				'flags' => EDIT_NEW,
 				'baseRevid' => false,
-			),
+			],
 
-			'update' => array(
+			'update' => [
 				'entity' => $secondItem,
 				'flags' => EDIT_UPDATE,
 				'baseRevid' => 1011,
-			),
+			],
 
-			'not fresh' => array(
+			'not fresh' => [
 				'entity' => $thirdItem,
 				'flags' => EDIT_NEW,
 				'baseRevid' => false,
 				'error' => StorageException::class
-			),
+			],
 
-			'not exists' => array(
+			'not exists' => [
 				'entity' => $fourthItem,
 				'flags' => EDIT_UPDATE,
 				'baseRevid' => false,
 				'error' => StorageException::class
-			),
+			],
 
-			'bad base' => array(
+			'bad base' => [
 				'entity' => $fifthItem,
 				'flags' => EDIT_UPDATE,
 				'baseRevid' => 1234,
 				'error' => StorageException::class
-			),
-		);
+			],
+		];
 	}
 
 	/**
 	 * @dataProvider provideSaveEntity
 	 */
-	public function testSaveEntity( EntityDocument $entity, $flags, $baseRevId, $error = null ) {
+	public function testSaveEntity( Item $item, $flags, $baseRevId, $error = null ) {
 		$this->setupGetEntities();
 
 		if ( $error !== null ) {
 			$this->setExpectedException( $error );
 		}
 
-		$rev = $this->repo->saveEntity( $entity, 'f00', $GLOBALS['wgUser'], $flags, $baseRevId );
+		$rev = $this->repo->saveEntity( $item, 'f00', $GLOBALS['wgUser'], $flags, $baseRevId );
+		$itemId = $item->getId();
+		$revisionId = $rev->getRevisionId();
 
-		$logEntry = $this->repo->getLogEntry( $rev->getRevisionId() );
+		$logEntry = $this->repo->getLogEntry( $revisionId );
 		$this->assertNotNull( $logEntry );
-		$this->assertEquals( $rev->getRevisionId(), $logEntry['revision'] );
-		$this->assertEquals( $entity->getId()->getSerialization(), $logEntry['entity'] );
+		$this->assertEquals( $revisionId, $logEntry['revision'] );
+		$this->assertEquals( $itemId->getSerialization(), $logEntry['entity'] );
 		$this->assertEquals( 'f00', $logEntry['summary'] );
 
-		$savedEntity = $this->repo->getEntity( $entity->getId() );
+		/** @var Item $revisionItem */
+		$revisionItem = $rev->getEntity();
+		/** @var Item $savedItem */
+		$savedItem = $this->repo->getEntity( $itemId );
 
-		$this->assertTrue( $entity->getFingerprint()->equals( $rev->getEntity()->getFingerprint() ) );
-		$this->assertTrue( $entity->getFingerprint()->equals( $savedEntity->getFingerprint() ) );
+		$this->assertTrue( $item->getFingerprint()->equals( $revisionItem->getFingerprint() ) );
+		$this->assertTrue( $item->getFingerprint()->equals( $savedItem->getFingerprint() ) );
 
 		// test we can't mess with entities in the repo
-		$entity->getFingerprint()->setLabel( 'en', 'STRANGE' );
-		$entity = $this->repo->getEntity( $entity->getId() );
-		$this->assertNotNull( $entity );
-		$this->assertNotEquals( 'STRANGE', $entity->getFingerprint()->getLabel( 'en' )->getText() );
+		$item->setLabel( 'en', 'STRANGE' );
+		$savedItem = $this->repo->getEntity( $itemId );
+		$this->assertNotNull( $savedItem );
+		$this->assertNotEquals( 'STRANGE', $savedItem->getLabels()->getByLanguage( 'en' )->getText() );
 	}
 
 	public function testSaveRedirect() {
@@ -680,7 +655,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$mock->putRedirect( new EntityRedirect( $q555, $q5 ) );
 
 		$this->assertEmpty( $mock->getRedirectIds( $q55 ), 'no redirects to redirect' );
-		$this->assertEquals( array( $q55, $q555 ), $mock->getRedirectIds( $q5 ), 'two redirects' );
+		$this->assertEquals( [ $q55, $q555 ], $mock->getRedirectIds( $q5 ), 'two redirects' );
 	}
 
 	public function testGetRedirectForEntityId() {
