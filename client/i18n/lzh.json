@@ -7,6 +7,7 @@
 			"SolidBlock"
 		]
 	},
+	"wikibase-after-page-move": "斯頁自有相繫者，在於{{WBREPONAME}}。君既改其題，亦宜改其[$1 相繫之頁]。然後諸語之間，方能不斷連結。",
 	"wikibase-comment-update": "{{WBREPONAME}}項變",
 	"wikibase-editlinks": "纂鏈",
 	"wikibase-editlinkstitle": "修跨語鏈",
