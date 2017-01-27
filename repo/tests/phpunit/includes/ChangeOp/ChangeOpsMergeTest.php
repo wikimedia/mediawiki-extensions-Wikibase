@@ -211,11 +211,11 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		);
 
 		$itemWithEnBarLabel = new Item();
-		$itemWithEnBarLabel->getFingerprint()->setLabel( 'en', 'bar' );
+		$itemWithEnBarLabel->setLabel( 'en', 'bar' );
 
 		$itemWithLabelAndAlias = new Item();
-		$itemWithLabelAndAlias->getFingerprint()->setLabel( 'en', 'bar' );
-		$itemWithLabelAndAlias->getFingerprint()->setAliasGroup( 'en', array( 'foo' ) );
+		$itemWithLabelAndAlias->setLabel( 'en', 'bar' );
+		$itemWithLabelAndAlias->setAliases( 'en', [ 'foo' ] );
 
 		$testCases['labelAsAliasMerge'] = array(
 			$itemWithEnLabel->copy(),
@@ -225,7 +225,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		);
 
 		$itemWithDescription = new Item();
-		$itemWithDescription->getFingerprint()->setDescription( 'en', 'foo' );
+		$itemWithDescription->setDescription( 'en', 'foo' );
 
 		$testCases['descriptionMerge'] = array(
 			$itemWithDescription->copy(),
@@ -241,7 +241,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		);
 
 		$itemWithBarDescription = new Item();
-		$itemWithBarDescription->getFingerprint()->setDescription( 'en', 'bar' );
+		$itemWithBarDescription->setDescription( 'en', 'bar' );
 		$testCases['ignoreConflictDescriptionMerge'] = array(
 			$itemWithDescription->copy(),
 			$itemWithBarDescription->copy(),
@@ -251,7 +251,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		);
 
 		$itemWithFooBarAliases = new Item();
-		$itemWithFooBarAliases->getFingerprint()->setAliasGroup( 'en', array( 'foo', 'bar' ) );
+		$itemWithFooBarAliases->setAliases( 'en', [ 'foo', 'bar' ] );
 
 		$testCases['aliasMerge'] = array(
 			$itemWithFooBarAliases->copy(),
@@ -261,7 +261,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		);
 
 		$itemWithFooBarBazAliases = new Item();
-		$itemWithFooBarBazAliases->getFingerprint()->setAliasGroup( 'en', array( 'foo', 'bar', 'baz' ) );
+		$itemWithFooBarBazAliases->setAliases( 'en', [ 'foo', 'bar', 'baz' ] );
 
 		$testCases['duplicateAliasMerge'] = array(
 			$itemWithFooBarAliases->copy(),
@@ -339,12 +339,12 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 
 		$bigItem = new Item();
 		$bigItem->setId( 111 );
-		$bigItem->getFingerprint()->setLabel( 'en', 'foo' );
-		$bigItem->getFingerprint()->setLabel( 'pt', 'ptfoo' );
-		$bigItem->getFingerprint()->setDescription( 'en', 'foo' );
-		$bigItem->getFingerprint()->setDescription( 'pl', 'pldesc' );
-		$bigItem->getFingerprint()->setAliasGroup( 'en', array( 'foo', 'bar' ) );
-		$bigItem->getFingerprint()->setAliasGroup( 'de', array( 'defoo', 'debar' ) );
+		$bigItem->setLabel( 'en', 'foo' );
+		$bigItem->setLabel( 'pt', 'ptfoo' );
+		$bigItem->setDescription( 'en', 'foo' );
+		$bigItem->setDescription( 'pl', 'pldesc' );
+		$bigItem->setAliases( 'en', [ 'foo', 'bar' ] );
+		$bigItem->setAliases( 'de', [ 'defoo', 'debar' ] );
 		$bigItem->getSiteLinkList()->addNewSiteLink( 'dewiki', 'foo' );
 		$bigItem->getStatements()->addStatement( $anotherQualifiedStatement );
 		$bigItem->getStatements()->addStatement( $selfReferencingStatement );
@@ -377,12 +377,12 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 
 		$bigMergedItem = new Item();
 		$bigMergedItem->setId( 111 );
-		$bigMergedItem->getFingerprint()->setLabel( 'en', 'toLabel' );
-		$bigMergedItem->getFingerprint()->setLabel( 'pt', 'ptfoo' );
-		$bigMergedItem->getFingerprint()->setDescription( 'en', 'foo' );
-		$bigMergedItem->getFingerprint()->setDescription( 'pl', 'toDescription' );
-		$bigMergedItem->getFingerprint()->setAliasGroup( 'en', array( 'foo', 'bar' ) );
-		$bigMergedItem->getFingerprint()->setAliasGroup( 'de', array( 'defoo', 'debar' ) );
+		$bigMergedItem->setLabel( 'en', 'toLabel' );
+		$bigMergedItem->setLabel( 'pt', 'ptfoo' );
+		$bigMergedItem->setDescription( 'en', 'foo' );
+		$bigMergedItem->setDescription( 'pl', 'toDescription' );
+		$bigMergedItem->setAliases( 'en', [ 'foo', 'bar' ] );
+		$bigMergedItem->setAliases( 'de', [ 'defoo', 'debar' ] );
 
 		$bigMergedItem->getSiteLinkList()->addNewSiteLink( 'dewiki', 'foo' );
 		$bigMergedItem->getSiteLinkList()->addNewSiteLink( 'nlwiki', 'toLink' );

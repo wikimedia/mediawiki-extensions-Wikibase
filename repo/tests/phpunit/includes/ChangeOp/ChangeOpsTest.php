@@ -126,8 +126,8 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 		$entity = new Item();
 
 		$changeOps->apply( $entity );
-		$this->assertEquals( $expectedLabel, $entity->getFingerprint()->getLabel( $language )->getText() );
-		$this->assertEquals( $expectedDescription, $entity->getFingerprint()->getDescription( $language )->getText() );
+		$this->assertEquals( $expectedLabel, $entity->getLabels()->getByLanguage( $language )->getText() );
+		$this->assertEquals( $expectedDescription, $entity->getDescriptions()->getByLanguage( $language )->getText() );
 	}
 
 	public function testValidate() {

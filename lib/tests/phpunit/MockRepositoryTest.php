@@ -86,13 +86,13 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$item = $this->repo->getEntity( $itemId );
 		$this->assertNotNull( $item, 'Entity ' . $itemId );
 		$this->assertInstanceOf( Item::class, $item, 'Entity ' . $itemId );
-		$this->assertEquals( 'foo', $item->getFingerprint()->getLabel( 'en' )->getText() );
-		$this->assertEquals( 'bar', $item->getFingerprint()->getLabel( 'de' )->getText() );
+		$this->assertEquals( 'foo', $item->getLabels()->getByLanguage( 'en' )->getText() );
+		$this->assertEquals( 'bar', $item->getLabels()->getByLanguage( 'de' )->getText() );
 
 		// test we can't mess with entities in the repo
 		$item->setLabel( 'en', 'STRANGE' );
 		$item = $this->repo->getEntity( $itemId );
-		$this->assertEquals( 'foo', $item->getFingerprint()->getLabel( 'en' )->getText() );
+		$this->assertEquals( 'foo', $item->getLabels()->getByLanguage( 'en' )->getText() );
 
 		// test latest prop
 		$prop = $this->repo->getEntity( $propId );

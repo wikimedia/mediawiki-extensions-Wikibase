@@ -55,11 +55,11 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 		$mockRepo = new MockRepository();
 
 		$p5 = new Property( new PropertyId( 'P5' ), null, 'wikibase-item' );
-		$p5->getFingerprint()->setLabel( 'en', 'Label5' );
+		$p5->setLabel( 'en', 'Label5' );
 		$mockRepo->putEntity( $p5 );
 
 		$q23 = new Item( new ItemId( 'Q23' ) );
-		$q23->getFingerprint()->setLabel( 'en', 'Label23' );
+		$q23->setLabel( 'en', 'Label23' );
 		$mockRepo->putEntity( $q23 );
 
 		$q2233 = new EntityRedirect( new ItemId( 'Q2233' ), new ItemId( 'Q23' ) );
@@ -69,7 +69,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 		$mockRepo->putRedirect( $q222333 );
 
 		$q42 = new Item( new ItemId( 'Q42' ) );
-		$q42->getFingerprint()->setLabel( 'en', 'Label42' );
+		$q42->setLabel( 'en', 'Label42' );
 
 		$snak = new PropertyValueSnak( $p5->getId(), new EntityIdValue( $q2233->getEntityId() ) );
 		$q42->getStatements()->addNewStatement( $snak, null, null, 'Q42$DEADBEEF' );

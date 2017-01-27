@@ -40,7 +40,7 @@ class LabelCountFieldTest extends PHPUnit_Framework_TestCase {
 
 	public function getFieldDataProvider() {
 		$item = new Item();
-		$item->getFingerprint()->setLabel( 'es', 'Gato' );
+		$item->setLabel( 'es', 'Gato' );
 
 		return array(
 			array( 1, $item ),
