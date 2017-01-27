@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_182da741",
+        "filename": "repo/includes/Validators/TermChangeOpSerializationValidator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T14:14:14Z",
+      "side": 1,
+      "message": "I think so!",
+      "parentUuid": "2ef897d1_35918efc",
+      "revId": "b95fcc51d81b3a09e3c48d0f4bc90d3c9c0801b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_515c1f4e",
         "filename": "repo/includes/Validators/TermChangeOpSerializationValidator.php",
         "patchSetId": 5
@@ -82,6 +100,23 @@
       "writtenOn": "2017-01-27T13:17:11Z",
       "side": 1,
       "message": "As per what I say in the comment in the public method of this class, I don\u0027t wonder it is difficult to describe what this class actually does :)\nBut especially because of that we should come up with some nice description, and link to change op serialization format docs.",
+      "revId": "b95fcc51d81b3a09e3c48d0f4bc90d3c9c0801b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_f8e08bf9",
+        "filename": "repo/includes/Validators/TermChangeOpSerializationValidator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T14:14:14Z",
+      "side": 1,
+      "message": "I missed one remark: personally I\u0027d prefer ApiErrorReporter to be the last argument, as it is secondary to what the purpose of the class is. What do you think?",
       "revId": "b95fcc51d81b3a09e3c48d0f4bc90d3c9c0801b8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -117,6 +152,24 @@
       "side": 1,
       "message": "how about\nvalidateTermChangeRequestLanguage( $termChangeData, $langCode )\n\nI feel like \"language code\" still represents best what\u0027s behind the variable, especially with the type hint.",
       "parentUuid": "2ef897d1_9533a2f3",
+      "revId": "b95fcc51d81b3a09e3c48d0f4bc90d3c9c0801b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_b81c5319",
+        "filename": "repo/includes/Validators/TermChangeOpSerializationValidator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T14:14:14Z",
+      "side": 1,
+      "message": "I agree, language code is OK. The intention of the int part should become more clear.\nMaybe it doesn\u0027t need to be reflected in the variable name. In doc block it could say if $langCode is an integer $arg array must contain a \u0027language\u0027 key with a term language code as value. Or something like this.",
+      "parentUuid": "2ef897d1_354e2e9c",
       "revId": "b95fcc51d81b3a09e3c48d0f4bc90d3c9c0801b8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -220,6 +273,24 @@
       "side": 1,
       "message": "I\u0027m using this thing all over the place in the other patch as well and would prefer not to repeat it. Not sure whether it needs its own class or whether it\u0027s better to throw it into some test helper class. I\u0027m leaning towards the latter.",
       "parentUuid": "2ef897d1_318c03db",
+      "revId": "b95fcc51d81b3a09e3c48d0f4bc90d3c9c0801b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_b8f573c9",
+        "filename": "repo/tests/phpunit/includes/Validators/TermChangeOpSerializationValidatorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T14:14:14Z",
+      "side": 1,
+      "message": "Sorry, I was suggesting to remove the TODO but this is indeed something worth improving in the later patch, so TODO should stay!\nNot knowing all details from the further work it seems to me that having some class extending ApiErrorReporter so tests don\u0027t need ApiBase and all the stuff sound like a good idea. If this is what you meant by a \"test helper class\". Any other helper thing should be good here as well I think!",
+      "parentUuid": "2ef897d1_b80fb332",
       "revId": "b95fcc51d81b3a09e3c48d0f4bc90d3c9c0801b8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
