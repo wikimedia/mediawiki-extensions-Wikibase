@@ -16,6 +16,24 @@
       "revId": "74defe9b62d555478f844428941cf343ec983dac",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_91d737c4",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T12:28:44Z",
+      "side": 1,
+      "message": "They\u0027re actually doing this (container for \u0027\u0027 repo is expecting to be never called, and the container for \u0027foo\u0027 is expecting to be called at least).\nBut this could probably be done in a more clear way.",
+      "parentUuid": "2ef897d1_91f5f7c9",
+      "revId": "74defe9b62d555478f844428941cf343ec983dac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
