@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_71fb9b45",
+        "filename": "client/includes/Store/RepositoryServiceWiring.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-27T12:47:31Z",
+      "side": 1,
+      "message": "Using the name of the concrete implementation as the service name is a bit icky... what interface do we expect this to implement? \"prefetching\" sounds very specific.",
+      "revId": "983c5a9d8d5ebf95b3918a1c463038a1f1286dc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_119107fc",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-27T12:47:31Z",
+      "side": 1,
+      "message": "I realize I introduced this into this patch, but looking at it now, it seems like all the changes related to not injecting the Language objects into WikibaseRepo and WikibaseClient should go into a separate patch. That would make the scope of the patch more clear, and review easier.",
+      "revId": "983c5a9d8d5ebf95b3918a1c463038a1f1286dc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_d19a4f17",
+        "filename": "repo/includes/Store/Sql/SqlStore.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-27T12:47:31Z",
+      "side": 1,
+      "message": "This isn\u0027t necessarily \"raw\", is it? We have to be careful about when and where we add a caching decorator. Aren\u0027t we nesting two caching layers here?",
+      "revId": "983c5a9d8d5ebf95b3918a1c463038a1f1286dc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
