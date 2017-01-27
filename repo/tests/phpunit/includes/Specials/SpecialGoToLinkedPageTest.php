@@ -29,6 +29,11 @@ use Wikibase\Repo\Specials\SpecialGoToLinkedPage;
  */
 class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 
+	use HtmlAssertionHelpers;
+
+	/** @see \LanguageQqx */
+	const DUMMY_LANGUAGE = 'qqx';
+
 	/**
 	 * @return SiteLinkLookup
 	 */
@@ -147,32 +152,13 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	 */
 	public function testExecuteWithoutRedirect( $sub, $target, $site, $item, $error ) {
 		/* @var FauxResponse $response */
-		list( $output, $response ) = $this->executeSpecialPage( $sub, null, 'qqx' );
+		list( $output, $response ) = $this->executeSpecialPage( $sub, null, self::DUMMY_LANGUAGE );
 
 		$this->assertEquals( $target, $response->getheader( 'Location' ), 'Redirect' );
 
-		$matchers = array();
-		$matchers['site'] = array(
-			'tag' => 'input',
-			'attributes' => array(
-				'name' => 'site',
-				'value' => $site
-			) );
-		$matchers['itemid'] = array(
-			'tag' => 'input',
-			'attributes' => array(
-				'name' => 'itemid',
-				'value' => $item
-			) );
-		$matchers['submit'] = array(
-			'tag' => 'button',
-			'attributes' => array(
-				'type' => 'submit',
-			)
-		);
-		foreach ( $matchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to match html output for: " . $key );
-		}
+		$this->assertHtmlContainsInputWithNameAndValue( $output, 'site', $site );
+		$this->assertHtmlContainsInputWithNameAndValue( $output, 'itemid', $item );
+		$this->assertHtmlContainsSubmitControl( $output );
 
 		if ( !empty( $error ) ) {
 			$this->assertContains( '<p class="error">' . $error . '</p>', $output,
