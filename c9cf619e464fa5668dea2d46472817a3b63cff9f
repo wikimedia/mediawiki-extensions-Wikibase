@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_716b9b83",
+        "filename": "client/includes/Store/RepositoryServiceContainer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-27T11:13:49Z",
+      "side": 1,
+      "message": "Ah! Yea, I\u0027d say this counts as internal use. Internal to the service container. This isn\u0027t application logic.",
+      "parentUuid": "2ef897d1_16b21de5",
+      "revId": "c9cf619e464fa5668dea2d46472817a3b63cff9f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_22f27bce",
         "filename": "client/includes/Store/RepositoryServiceWiring.php",
         "patchSetId": 6
