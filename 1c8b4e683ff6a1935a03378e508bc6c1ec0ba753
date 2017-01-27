@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_917bb7bd",
+        "filename": "repo/tests/phpunit/includes/Diff/EntityContentDiffViewTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-27T12:58:34Z",
+      "side": 1,
+      "message": "Changed it to recursive clone because `Content` object stores link to an item (or something containing item) and doesn\u0027t have `__clone()` method defined.",
+      "range": {
+        "startLine": 49,
+        "startChar": 2,
+        "endLine": 49,
+        "endChar": 57
+      },
+      "revId": "1c8b4e683ff6a1935a03378e508bc6c1ec0ba753",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
