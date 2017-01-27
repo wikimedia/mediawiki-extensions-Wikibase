@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_11ea2774",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T12:39:50Z",
+      "side": 1,
+      "message": "not true. It is implemented. My bad as I\u0027ve added this comment here. I just didn\u0027t read the code carefully enough.",
+      "revId": "b95fcc51d81b3a09e3c48d0f4bc90d3c9c0801b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
