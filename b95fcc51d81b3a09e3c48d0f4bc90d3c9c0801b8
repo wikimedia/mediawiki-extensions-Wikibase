@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "2ef897d1_7533860b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T13:51:03Z",
+      "side": 1,
+      "message": "this no longer reflects the name of the class introduced.\n\nWhile I am commenting on the commit message: it should probably also be mentioning this is actually moving (or actually copying) code from Api\\EditEntity.",
+      "revId": "b95fcc51d81b3a09e3c48d0f4bc90d3c9c0801b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_11ea2774",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
