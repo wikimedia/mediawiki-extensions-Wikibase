@@ -131,6 +131,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_db3eeed6",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T10:35:00Z",
+      "side": 1,
+      "message": "TODO is not really needed as this test is actually testing exactly the behaviour described there.\nIt just wasn\u0027t immediately obvious to me what language should it pick if there was no language provided. It makes most sense it was the user language but I was just saying this is the behaviour we expected from this special page so it could be somehow reflected it in the test case description (ie. in the test method name).\n\nThat all said, I am completely fine with the current state. It is going to be improved any way.",
+      "parentUuid": "2ef897d1_ef68cc1b",
+      "range": {
+        "startLine": 83,
+        "startChar": 17,
+        "endLine": 83,
+        "endChar": 92
+      },
+      "revId": "00808eed1c13964f81e077e87f61871b17763fb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_97b054da",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
         "patchSetId": 1
@@ -160,6 +184,24 @@
       "side": 1,
       "message": "I added them intentionally to understand what those strings mean (what \u0027foo\u0027 is is pretty unclear), but I believe I can do it another way.",
       "parentUuid": "2ef897d1_97b054da",
+      "revId": "00808eed1c13964f81e077e87f61871b17763fb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_3b59825e",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T10:35:00Z",
+      "side": 1,
+      "message": "Got it. Would have been fine as it was. The way it is now is also clear enough IMO.",
+      "parentUuid": "2ef897d1_0fc3280c",
       "revId": "00808eed1c13964f81e077e87f61871b17763fb0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -248,6 +290,24 @@
       "side": 1,
       "message": "Exactly!",
       "parentUuid": "2ef897d1_6f197c27",
+      "revId": "00808eed1c13964f81e077e87f61871b17763fb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_7b5ffa44",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T10:35:00Z",
+      "side": 1,
+      "message": "OK! Looked like it but as they weren\u0027t exactly the same lines I was wondering maybe there was some special purpose of that :)",
+      "parentUuid": "2ef897d1_4ff80047",
       "revId": "00808eed1c13964f81e077e87f61871b17763fb0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
