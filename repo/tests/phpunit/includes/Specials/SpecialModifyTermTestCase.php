@@ -16,17 +16,29 @@ use Wikibase\Repo\WikibaseRepo;
  */
 abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 
+	const USER_LANGUAGE = 'en';
+
+	protected function setUp() {
+
+		parent::setUp();
+
+		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [ 'edit' => true, 'item-term' => true ] ] );
+	}
+
 	/**
 	 * Creates a new item and returns its id.
 	 *
+	 * @param string $language
+	 * @param string $termValue
 	 * @return string
 	 */
-	private function createNewItem() {
+	private function createNewItemWithTerms( $language, $termValue ) {
+
 		$item = new Item();
 		// add data and check if it is shown in the form
-		$item->setLabel( 'de', 'foo' );
-		$item->setDescription( 'de', 'foo' );
-		$item->setAliases( 'de', array( 'foo' ) );
+		$item->setLabel( $language, $termValue );
+		$item->setDescription( $language, $termValue );
+		$item->setAliases( $language, [ $termValue ] );
 
 		// save the item
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
@@ -36,102 +48,165 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 		return $item->getId()->getSerialization();
 	}
 
-	public function testExecute() {
-		$id = $this->createNewItem();
-
-		$this->setMwGlobals( 'wgGroupPermissions', array( '*' => array( 'edit' => true, 'item-term' => true ) ) );
-
+	public function testRenderWithoutSubPage_AllInputFieldsPresent() {
 		$page = $this->newSpecialPage();
 
-		$matchers['id'] = array(
+		$matchers['id'] = [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-modifyentity-id',
 				'class' => 'wb-input',
 				'name' => 'id',
-			) );
-		$matchers['language'] = array(
+			] ];
+		$matchers['language'] = [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-modifyterm-language',
 				'class' => 'wb-input',
 				'name' => 'language',
-				'value' => 'en',
-			) );
-		$matchers['value'] = array(
+				'value' => self::USER_LANGUAGE,
+			] ];
+		$matchers['value'] = [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-modifyterm-value',
 				'class' => 'wb-input',
 				'name' => 'value',
-			) );
-		$matchers['submit'] = array(
+			] ];
+		$matchers['submit'] = [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-' . strtolower( $page->getName() ) . '-submit',
 				'class' => 'wb-button',
 				'type' => 'submit',
 				'name' => 'wikibase-' . strtolower( $page->getName() ) . '-submit',
-			) );
+			] ];
 
 		// execute with no subpage value
-		list( $output, ) = $this->executeSpecialPage( '', null, 'en' );
+		list( $output, ) = $this->executeSpecialPage( '', null, self::USER_LANGUAGE );
 		foreach ( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}'" );
 		}
+	}
 
-		// execute with one subpage value
-		list( $output, ) = $this->executeSpecialPage( $id, null, 'en' );
-		$matchers['id']['attributes'] = array(
+	public function testRenderWithOneSubpageValue_TreatsValueAsItemIdAndShowsOnlyTermInputField() {
+		$notUserLanguage = 'de';
+		$id = $this->createNewItemWithTerms( $notUserLanguage, 'some-term-value' );
+
+		$page = $this->newSpecialPage();
+
+		$matchers['id'] = [
+			'tag' => 'input',
+			'attributes' => [
 				'type' => 'hidden',
 				'name' => 'id',
 				'value' => $id,
-			);
-		$matchers['language']['attributes'] = array(
-				'type' => 'hidden',
-				'name' => 'language',
-				'value' => 'en',
-			);
-		$matchers['remove'] = array(
+			] ];
+		$matchers['language'] = [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
+				'name' => 'language',
+				'value' => self::USER_LANGUAGE,
+				'type' => 'hidden',
+			] ];
+		$matchers['value'] = [
+			'tag' => 'input',
+			'attributes' => [
+				'id' => 'wb-modifyterm-value',
+				'class' => 'wb-input',
+				'name' => 'value',
+			] ];
+		$matchers['submit'] = [
+			'tag' => 'input',
+			'attributes' => [
+				'id' => 'wb-' . strtolower( $page->getName() ) . '-submit',
+				'class' => 'wb-button',
+				'type' => 'submit',
+				'name' => 'wikibase-' . strtolower( $page->getName() ) . '-submit',
+			] ];
+		$matchers['remove'] = [
+			'tag' => 'input',
+			'attributes' => [
 				'type' => 'hidden',
 				'name' => 'remove',
 				'value' => 'remove',
-			) );
+			] ];
+
+		// execute with one subpage value
+		list( $output, ) = $this->executeSpecialPage( $id, null, self::USER_LANGUAGE );
 
 		foreach ( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}' passing one subpage value" );
 		}
+	}
+
+	public function testRenderWithTwoSubpageValues_TreatsSecondValueAsLanguageAndShowsOnlyTermInputField() {
+		$id = $this->createNewItemWithTerms( $itemTermLanguage = 'de', $termValue = 'foo' );
+
+		$page = $this->newSpecialPage();
+
+		$matchers['id'] = [
+			'tag' => 'input',
+			'attributes' => [
+				'type' => 'hidden',
+				'name' => 'id',
+				'value' => $id,
+			] ];
+		$matchers['language'] = [
+			'tag' => 'input',
+			'attributes' => [
+				'name' => 'language',
+				'value' => $itemTermLanguage,
+				'type' => 'hidden',
+			] ];
+		$matchers['value'] = [
+			'tag' => 'input',
+			'attributes' => [
+				'id' => 'wb-modifyterm-value',
+				'class' => 'wb-input',
+				'name' => 'value',
+				'value' => $termValue
+			] ];
+		$matchers['submit'] = [
+			'tag' => 'input',
+			'attributes' => [
+				'id' => 'wb-' . strtolower( $page->getName() ) . '-submit',
+				'class' => 'wb-button',
+				'type' => 'submit',
+				'name' => 'wikibase-' . strtolower( $page->getName() ) . '-submit',
+			] ];
+		$matchers['remove'] = [
+			'tag' => 'input',
+			'attributes' => [
+				'type' => 'hidden',
+				'name' => 'remove',
+				'value' => 'remove',
+			] ];
 
 		// execute with two subpage values
-		list( $output, ) = $this->executeSpecialPage( $id . '/de', null, 'en' );
-		$matchers['language']['attributes']['value'] = 'de';
-		$matchers['value']['attributes']['value'] = 'foo';
+		list( $output, ) = $this->executeSpecialPage( $id . '/' . $itemTermLanguage, null, self::USER_LANGUAGE );
 
 		foreach ( $matchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}' passing two subpage values" );
+			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}' passing two subpage values" . PHP_EOL . $output );
 		}
 	}
 
 	public function testValuePreservesWhenNothingEntered() {
-		$id = $this->createNewItem();
+		$id = $this->createNewItemWithTerms( $language = 'de', $termValue = 'foo' );
 
-		$this->setMwGlobals( 'wgGroupPermissions', array( '*' => array( 'edit' => true, 'item-term' => true ) ) );
-
-		$request = new FauxRequest( array( 'id' => $id, 'language' => 'de', 'value' => '' ), true );
+		$request = new FauxRequest( [ 'id' => $id, 'language' => $language, 'value' => '' ], true );
 
 		list( $output, ) = $this->executeSpecialPage( '', $request );
 
-		$this->assertTag( array(
+		$this->assertTag( [
 			'tag' => 'input',
-			'attributes' => array(
+			'attributes' => [
 				'id' => 'wb-modifyterm-value',
 				'class' => 'wb-input',
 				'name' => 'value',
-				'value' => 'foo',
-			)
-		), $output, 'Value still preserves when no value was entered in the big form' );
+				'value' => $termValue,
+			]
+		], $output, 'Value still preserves when no value was entered in the big form' );
 	}
 
 }
