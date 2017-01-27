@@ -69,6 +69,24 @@
       "revId": "3badd550b51909030b678318ed860a1e14ebfa94",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_f1ee6b85",
+        "filename": "repo/includes/Store/Sql/SqlStore.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-27T12:39:10Z",
+      "side": 1,
+      "message": "Yep, thanks!",
+      "parentUuid": "2ef897d1_912a97d6",
+      "revId": "3badd550b51909030b678318ed860a1e14ebfa94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
