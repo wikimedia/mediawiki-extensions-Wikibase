@@ -239,7 +239,24 @@ call_user_func( function() {
 	$wgAPIModules['wbsetqualifier'] = Wikibase\Repo\Api\SetQualifier::class;
 	$wgAPIModules['wbmergeitems'] = Wikibase\Repo\Api\MergeItems::class;
 	$wgAPIModules['wbformatvalue'] = Wikibase\Repo\Api\FormatSnakValue::class;
-	$wgAPIModules['wbparsevalue'] = Wikibase\Repo\Api\ParseValue::class;
+	$wgAPIModules['wbparsevalue'] = [
+		'class' => Wikibase\Repo\Api\ParseValue::class,
+		'factory' => function( ApiMain $mainModule, $moduleName ) {
+			$wikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+			$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
+
+			return new Wikibase\Repo\Api\ParseValue(
+				$mainModule,
+				$moduleName,
+				$wikibaseRepo->getDataTypeFactory(),
+				$wikibaseRepo->getValueParserFactory(),
+				$wikibaseRepo->getDataTypeValidatorFactory(),
+				$wikibaseRepo->getExceptionLocalizer(),
+				$wikibaseRepo->getValidatorErrorLocalizer(),
+				$apiHelperFactory->getErrorReporter( $mainModule )
+			);
+		}
+	];
 	$wgAPIModules['wbavailablebadges'] = Wikibase\Repo\Api\AvailableBadges::class;
 	$wgAPIModules['wbcreateredirect'] = [
 		'class' => Wikibase\Repo\Api\CreateRedirect::class,
