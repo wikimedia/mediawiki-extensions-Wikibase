@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_16869d6a",
+        "filename": "client/includes/Store/RepositoryServiceContainerFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T08:58:36Z",
+      "side": 1,
+      "message": "Renamed to newContainer",
+      "parentUuid": "2ef897d1_cf3e30d7",
+      "revId": "cb1f7b6fd13db5f446264b309b2340802a9f1ac4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_4f33600b",
         "filename": "client/includes/WikibaseClient.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2017-01-26T18:27:18Z",
       "side": 1,
       "message": "At some point, we\u0027ll want to just have a single \"repositories\" array...",
+      "revId": "cb1f7b6fd13db5f446264b309b2340802a9f1ac4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_f68ae16d",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T08:58:36Z",
+      "side": 1,
+      "message": "Yes! I\u0027ve added a comment with a link to T153767 so we feel more pressure on fixing this.",
+      "parentUuid": "2ef897d1_4f33600b",
       "revId": "cb1f7b6fd13db5f446264b309b2340802a9f1ac4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
