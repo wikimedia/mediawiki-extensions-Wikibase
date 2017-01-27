@@ -34,6 +34,24 @@
       "revId": "1f7bc749b277146c0b355c7410ed99d550ac1dd2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_58a31f40",
+        "filename": "repo/includes/Search/Elastic/Fields/LabelsField.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-27T15:03:18Z",
+      "side": 1,
+      "message": "Well, if it\u0027s not supposed to happen, don\u0027t be silent about it. It would even be ok to throw an exception in such a case. I generally prefer \"fail fast, be safe\" over \"make do, carry on\".",
+      "parentUuid": "2ef897d1_02be5fd1",
+      "revId": "1f7bc749b277146c0b355c7410ed99d550ac1dd2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
