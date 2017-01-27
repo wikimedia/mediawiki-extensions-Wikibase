@@ -41,6 +41,20 @@ Feature: Using quantity properties in statements
     | astring |
     | 1:1 |
 
+  # TODO: Remove @integration tag when the bug is fixed!
+  @ui_only @integration
+  Scenario: Valueview parser state resets properly
+    Given I am on an item page
+      And The copyright warning has been dismissed
+      And Anonymous edit warnings are disabled
+    When I click the statement add button
+      And I select the claim property quantprop
+      # This specific sequence triggers a bug in the valueview's internal state management
+      And I enter 1 in the claim value input field
+      And I enter 1+ in the claim value input field
+      And I enter 1 in the claim value input field
+     Then Statement save button should be there
+
   @modify_entity
   Scenario Outline: Quantity parser and saving should work properly
     Given I am logged in to the repo
