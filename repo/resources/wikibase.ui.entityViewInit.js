@@ -177,17 +177,17 @@
 
 			update( $link, 'watch', 'loading' );
 
-			var api = new mw.Api(),
-				pageId = mw.config.get( 'wgArticleId' );
+			var api = new mw.Api();
 
 			api.get( {
+				formatversion: 2,
 				action: 'query',
 				prop: 'info',
 				inprop: 'watched',
-				pageids: pageId
+				pageids: mw.config.get( 'wgArticleId' )
 			} ).done( function( data ) {
-				var watched = data.query && data.query.pages[pageId]
-					&& data.query.pages[pageId].watched !== undefined;
+				var watched = data.query && data.query.pages[0]
+					&& data.query.pages[0].watched;
 				update( $link, watched ? 'unwatch' : 'watch' );
 			} ).fail( function() {
 				update( $link, 'watch' );
