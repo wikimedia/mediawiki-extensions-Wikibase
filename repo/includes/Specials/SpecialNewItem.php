@@ -75,11 +75,10 @@ class SpecialNewItem extends SpecialNewEntity {
 		$languageCode = $formData[ self::FIELD_LANG ];
 
 		$item = new Item();
-		$fingerprint = $item->getFingerprint();
-		$fingerprint->setLabel( $languageCode, $formData[ self::FIELD_LABEL ] );
-		$fingerprint->setDescription( $languageCode, $formData[ self::FIELD_DESCRIPTION ] );
+		$item->setLabel( $languageCode, $formData[ self::FIELD_LABEL ] );
+		$item->setDescription( $languageCode, $formData[ self::FIELD_DESCRIPTION ] );
 
-		$fingerprint->setAliasGroup( $languageCode, $formData[ self::FIELD_ALIASES ] );
+		$item->setAliases( $languageCode, $formData[ self::FIELD_ALIASES ] );
 
 		if ( isset( $formData[ self::FIELD_SITE ] ) ) {
 			$site = $this->siteLookup->getSite( $formData[ self::FIELD_SITE ] );
@@ -227,9 +226,9 @@ class SpecialNewItem extends SpecialNewEntity {
 		$summary = new Summary( 'wbeditentity', 'create' );
 		$summary->setLanguage( $uiLanguageCode );
 		/** @var Term|null $labelTerm */
-		$labelTerm = $item->getFingerprint()->getLabels()->getIterator()->current();
+		$labelTerm = $item->getLabels()->getIterator()->current();
 		/** @var Term|null $descriptionTerm */
-		$descriptionTerm = $item->getFingerprint()->getDescriptions()->getIterator()->current();
+		$descriptionTerm = $item->getDescriptions()->getIterator()->current();
 		$summary->addAutoSummaryArgs(
 			$labelTerm ? $labelTerm->getText() : '',
 			$descriptionTerm ? $descriptionTerm->getText() : ''

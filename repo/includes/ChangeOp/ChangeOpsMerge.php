@@ -164,9 +164,9 @@ class ChangeOpsMerge {
 	}
 
 	private function generateLabelsChangeOps() {
-		foreach ( $this->fromItem->getFingerprint()->getLabels()->toTextArray() as $langCode => $label ) {
-			if ( !$this->toItem->getFingerprint()->hasLabel( $langCode )
-				|| $this->toItem->getFingerprint()->getLabel( $langCode )->getText() === $label
+		foreach ( $this->fromItem->getLabels()->toTextArray() as $langCode => $label ) {
+			if ( !$this->toItem->getLabels()->hasTermForLanguage( $langCode )
+				|| $this->toItem->getLabels()->getByLanguage( $langCode )->getText() === $label
 			) {
 				$this->fromChangeOps->add( $this->getFingerprintChangeOpFactory()->newRemoveLabelOp( $langCode ) );
 				$this->toChangeOps->add( $this->getFingerprintChangeOpFactory()->newSetLabelOp( $langCode, $label ) );
@@ -178,9 +178,9 @@ class ChangeOpsMerge {
 	}
 
 	private function generateDescriptionsChangeOps() {
-		foreach ( $this->fromItem->getFingerprint()->getDescriptions()->toTextArray() as $langCode => $desc ) {
-			if ( !$this->toItem->getFingerprint()->hasDescription( $langCode )
-				|| $this->toItem->getFingerprint()->getDescription( $langCode )->getText() === $desc
+		foreach ( $this->fromItem->getDescriptions()->toTextArray() as $langCode => $desc ) {
+			if ( !$this->toItem->getDescriptions()->hasTermForLanguage( $langCode )
+				|| $this->toItem->getDescriptions()->getByLanguage( $langCode )->getText() === $desc
 			) {
 				$this->fromChangeOps->add( $this->getFingerprintChangeOpFactory()->newRemoveDescriptionOp( $langCode ) );
 				$this->toChangeOps->add( $this->getFingerprintChangeOpFactory()->newSetDescriptionOp( $langCode, $desc ) );
@@ -191,7 +191,7 @@ class ChangeOpsMerge {
 	}
 
 	private function generateAliasesChangeOps() {
-		foreach ( $this->fromItem->getFingerprint()->getAliasGroups()->toTextArray() as $langCode => $aliases ) {
+		foreach ( $this->fromItem->getAliasGroups()->toTextArray() as $langCode => $aliases ) {
 			$this->fromChangeOps->add( $this->getFingerprintChangeOpFactory()->newRemoveAliasesOp( $langCode, $aliases ) );
 			$this->toChangeOps->add( $this->getFingerprintChangeOpFactory()->newAddAliasesOp( $langCode, $aliases ) );
 		}

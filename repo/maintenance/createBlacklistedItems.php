@@ -68,7 +68,7 @@ class CreateBlacklistedItems extends Maintenance {
 			$report( "   Importing $name as item $id..." );
 
 			$item = new Item( new ItemId( $id ) );
-			$item->getFingerprint()->setLabel( 'en', $name );
+			$item->setLabel( 'en', $name );
 			$item->getSiteLinkList()->addNewSiteLink( 'enwiki', $name );
 
 			$store->saveEntity( $item, 'Import', $user, EDIT_NEW );
