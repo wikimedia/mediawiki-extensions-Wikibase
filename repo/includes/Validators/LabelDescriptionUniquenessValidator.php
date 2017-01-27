@@ -5,8 +5,9 @@ namespace Wikibase\Repo\Validators;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\LabelDescriptionDuplicateDetector;
 
 /**
@@ -39,11 +40,11 @@ class LabelDescriptionUniquenessValidator implements EntityValidator, Fingerprin
 	 * @return Result
 	 */
 	public function validateEntity( EntityDocument $entity ) {
-		if ( $entity instanceof FingerprintProvider ) {
+		if ( $entity instanceof LabelsProvider && $entity instanceof DescriptionsProvider ) {
 			return $this->duplicateDetector->detectLabelDescriptionConflicts(
 				$entity->getType(),
-				$entity->getFingerprint()->getLabels()->toTextArray(),
-				$entity->getFingerprint()->getDescriptions()->toTextArray(),
+				$entity->getLabels()->toTextArray(),
+				$entity->getDescriptions()->toTextArray(),
 				$entity->getId()
 			);
 		}

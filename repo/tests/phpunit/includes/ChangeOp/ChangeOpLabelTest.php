@@ -8,7 +8,6 @@ use Wikibase\ChangeOp\ChangeOpLabel;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Summary;
 
 /**
@@ -102,7 +101,7 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return FingerprintProvider|EntityDocument
+	 * @return Item
 	 */
 	private function provideNewEntity() {
 		$item = new Item( new ItemId( 'Q23' ) );
