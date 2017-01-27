@@ -35,59 +35,68 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 		$this->tablesUsed[] = 'wb_terms';
 		$this->tablesUsed[] = 'wb_entity_per_page';
 
-		$termRows = array();
-		$infoRows = array();
-		$eppRows = array();
+		$termRows = [];
+		$infoRows = [];
+		$eppRows = [];
 
 		$pageId = 1000;
 
 		foreach ( $this->getKnownEntities() as $entity ) {
-			$eppRows[] = array(
+			$id = $entity->getId();
+
+			$eppRows[] = [
 				$entity->getType(),
-				$entity->getId()->getNumericId(),
+				$id->getNumericId(),
 				$pageId++,
 				null
-			);
+			];
 
-			$labels = $entity->getFingerprint()->getLabels()->toTextArray();
-			$descriptions = $entity->getFingerprint()->getDescriptions()->toTextArray();
-			$aliases = $entity->getFingerprint()->getAliasGroups()->toTextArray();
+			$labels = $entity->getLabels()->toTextArray();
+			$descriptions = $entity->getDescriptions()->toTextArray();
+			$aliases = $entity->getAliasGroups()->toTextArray();
 
-			$termRows = array_merge( $termRows, $this->getTermRows( $entity->getId(), 'label', $labels ) );
-			$termRows = array_merge( $termRows, $this->getTermRows( $entity->getId(), 'description', $descriptions ) );
-			$termRows = array_merge( $termRows, $this->getTermRows( $entity->getId(), 'alias', $aliases ) );
+			$termRows = array_merge( $termRows, $this->getTermRows( $id, 'label', $labels ) );
+			$termRows = array_merge( $termRows, $this->getTermRows( $id, 'description', $descriptions ) );
+			$termRows = array_merge( $termRows, $this->getTermRows( $id, 'alias', $aliases ) );
 
 			if ( $entity instanceof Property ) {
-				$infoRows[] = array(
-					$entity->getId()->getNumericId(),
+				$infoRows[] = [
+					$id->getNumericId(),
 					$entity->getDataTypeId(),
 					'{"type":"' . $entity->getDataTypeId() . '"}'
-				);
+				];
 			}
 		}
 
 		foreach ( $this->getKnownRedirects() as $from => $toId ) {
 			$fromId = new ItemId( $from );
 
-			$eppRows[] = array(
+			$eppRows[] = [
 				$fromId->getEntityType(),
 				$fromId->getNumericId(),
 				$pageId++,
 				$toId->getSerialization()
-			);
+			];
 		}
 
 		$this->insertRows(
 			'wb_terms',
-			array( 'term_entity_type', 'term_entity_id', 'term_type', 'term_language', 'term_text', 'term_search_key' ),
+			[
+				'term_entity_type',
+				'term_entity_id',
+				'term_type',
+				'term_language',
+				'term_text',
+				'term_search_key'
+			],
 			$termRows );
 
 		$this->insertRows(
 			'wb_property_info',
-			array( 'pi_property_id', 'pi_type', 'pi_info' ),
+			[ 'pi_property_id', 'pi_type', 'pi_info' ],
 			$infoRows );
 
-		$eppColumns = array( 'epp_entity_type', 'epp_entity_id', 'epp_page_id', 'epp_redirect_target' );
+		$eppColumns = [ 'epp_entity_type', 'epp_entity_id', 'epp_page_id', 'epp_redirect_target' ];
 
 		$this->insertRows(
 			'wb_entity_per_page',
@@ -96,19 +105,20 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 	}
 
 	private function getTermRows( EntityId $id, $termType, $terms ) {
-		$rows = array();
+		$rows = [];
 
 		foreach ( $terms as $lang => $langTerms ) {
 			$langTerms = (array)$langTerms;
 
 			foreach ( $langTerms as $term ) {
-				$rows[] = array(
+				$rows[] = [
 					$id->getEntityType(),
 					$id->getNumericId(),
 					$termType,
 					$lang,
 					$term,
-					$term );
+					$term
+				];
 			}
 		}
 
@@ -128,7 +138,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 				// Just ignore insertation errors... if similar data already is in the DB
 				// it's probably good enough for the tests (as this is only testing for UNIQUE
 				// fields anyway).
-				array( 'IGNORE' )
+				[ 'IGNORE' ]
 			);
 		}
 	}
