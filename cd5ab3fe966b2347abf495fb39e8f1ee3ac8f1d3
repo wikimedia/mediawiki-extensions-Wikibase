@@ -22,6 +22,30 @@
       "revId": "cd5ab3fe966b2347abf495fb39e8f1ee3ac8f1d3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_387d03e5",
+        "filename": "lib/includes/Store/WikiTextPropertyOrderProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-27T14:46:16Z",
+      "side": 1,
+      "message": "I left tabs out on purpose because I think it is not relevant in wikitext. But you are right. It was supported before and it\u0027s a breaking change when I remove it. I\u0027m using \\h now – for the first time ever. ;-)",
+      "parentUuid": "2ef897d1_258cc5da",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 9
+      },
+      "revId": "cd5ab3fe966b2347abf495fb39e8f1ee3ac8f1d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
