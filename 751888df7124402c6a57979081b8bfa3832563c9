@@ -22,6 +22,30 @@
       "revId": "751888df7124402c6a57979081b8bfa3832563c9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_55788aed",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialItemByTitleTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T13:47:16Z",
+      "side": 1,
+      "message": "It is better readable without this callback that it used to be. Also as we\u0027ve discussed IRL there are few other cases when Prophecy mocks seem nicer than those PHPUnit ones. So you\u0027ve sold it to me.\nI wasn\u0027t aware it is \"part\" of PHPunit, and I am surprised even this quite ancient PHPUnit that MediaWiki is using has it, nice!\n\nOnly problem I see is that my IDE really doesn\u0027t like this Prophecy syntax but I hope there is some why to help it (like things we sometimes do for PHPUnit mocks).\n\nIt is probably often matter of taste, and there are cases where PHPUnit mocks serve better so I guess we are not going to decide it is one or other mock library that we\u0027re using.",
+      "parentUuid": "2ef897d1_e22c6347",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 35
+      },
+      "revId": "751888df7124402c6a57979081b8bfa3832563c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
