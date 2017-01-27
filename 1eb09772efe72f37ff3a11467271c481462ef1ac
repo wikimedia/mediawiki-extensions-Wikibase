@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_9be871df",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T15:51:11Z",
+      "side": 1,
+      "message": "No longer WIP as this is in pretty good shape now.",
+      "range": {
+        "startLine": 7,
+        "startChar": 1,
+        "endLine": 7,
+        "endChar": 4
+      },
+      "revId": "1eb09772efe72f37ff3a11467271c481462ef1ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_7bf5b5b4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T15:51:11Z",
+      "side": 1,
+      "message": "per above, this whole crappy comment can go now.",
+      "revId": "1eb09772efe72f37ff3a11467271c481462ef1ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_1bdc814a",
+        "filename": "repo/tests/phpunit/includes/ChangeOpDeserialization/ChangeOpDeserializationTestHelper.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T15:51:11Z",
+      "side": 1,
+      "message": "that looks suspicious",
+      "revId": "1eb09772efe72f37ff3a11467271c481462ef1ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_5bc9d97a",
+        "filename": "repo/tests/phpunit/includes/ChangeOpDeserialization/TermChangeOpSerializationValidatorTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T15:51:11Z",
+      "side": 1,
+      "message": "I remember some recent patch saying that @covers tags should be using fully qualified names of classes under test. So I guess this should be changed to include the whole boring name.",
+      "revId": "1eb09772efe72f37ff3a11467271c481462ef1ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
