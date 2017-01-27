@@ -83,17 +83,10 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 		// update primary store
 		$this->store->setPropertyInfo( $propertyId, $info );
 
-		// NOTE: Even if we don't have the propertyInfo locally, we still need to
-		//       fully load it to update memcached.
-
-		// Get local cached version.
-		// NOTE: this may be stale at this point, if it was already loaded
 		$propertyInfo = $this->cache->get( $this->cacheKey );
 		$id = $propertyId->getSerialization();
 
-		// update local cache
 		$propertyInfo[$id] = $info;
-		$this->propertyInfo = $propertyInfo;
 
 		// update external cache
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': updating cache after updating property ' . $id );
@@ -118,14 +111,8 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 			return false;
 		}
 
-		// NOTE: Even if we don't have the propertyInfo locally, we still need to
-		//       fully load it to update memcached.
-
-		// Get local cached version.
-		// NOTE: this may be stale at this point, if it was already loaded
 		$propertyInfo = $this->cache->get( $this->cacheKey );
 
-		// update local cache
 		unset( $propertyInfo[$id] );
 
 		// update external cache
