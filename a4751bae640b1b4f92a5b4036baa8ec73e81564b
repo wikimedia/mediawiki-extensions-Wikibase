@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_51a65f51",
+        "filename": "repo/tests/phpunit/includes/Diff/EntityContentDiffViewTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-27T12:58:34Z",
+      "side": 1,
+      "message": "I don\u0027t think it really adds value",
+      "range": {
+        "startLine": 50,
+        "startChar": 3,
+        "endLine": 50,
+        "endChar": 59
+      },
+      "revId": "a4751bae640b1b4f92a5b4036baa8ec73e81564b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
