@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_35918efc",
+        "filename": "repo/includes/Validators/TermChangeOpSerializationValidator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2017-01-27T13:52:56Z",
+      "side": 1,
+      "message": "Fair enough. In that case it might be nicer to rename the namespace to ChangeOpDeserialization?",
+      "parentUuid": "2ef897d1_1527b2b2",
+      "revId": "b95fcc51d81b3a09e3c48d0f4bc90d3c9c0801b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_515c1f4e",
         "filename": "repo/includes/Validators/TermChangeOpSerializationValidator.php",
         "patchSetId": 5
@@ -81,6 +99,24 @@
       "writtenOn": "2017-01-27T13:17:11Z",
       "side": 1,
       "message": "I was wondering for quite a while what this whole class is actually about, and why this method does such weird things.\nThen I realized it basically extracting the code from Api\\EditEntity, basically unchanged. This is fine I believe, and in the bigger contexts the purpose of this class/method are clear.\n\nI am still not very happy about the name of the method (\"multilang\"?) Maybe it could be change to something along these lines:\nvalidateTermChangeOpData( $changeOpData, $languageOrIndex )\n\nNoooo, seeing this $languageOrIndex makes me cry. I hate naming things!\nI\u0027ll try to have another look on this and maybe I\u0027d be able to suggest better names.",
+      "revId": "b95fcc51d81b3a09e3c48d0f4bc90d3c9c0801b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_354e2e9c",
+        "filename": "repo/includes/Validators/TermChangeOpSerializationValidator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2017-01-27T13:52:56Z",
+      "side": 1,
+      "message": "how about\nvalidateTermChangeRequestLanguage( $termChangeData, $langCode )\n\nI feel like \"language code\" still represents best what\u0027s behind the variable, especially with the type hint.",
+      "parentUuid": "2ef897d1_9533a2f3",
       "revId": "b95fcc51d81b3a09e3c48d0f4bc90d3c9c0801b8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -166,6 +202,24 @@
       "writtenOn": "2017-01-27T13:17:11Z",
       "side": 1,
       "message": "this TODO is done now as it mocks ApiErrorReporter, isn\u0027t?",
+      "revId": "b95fcc51d81b3a09e3c48d0f4bc90d3c9c0801b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_b80fb332",
+        "filename": "repo/tests/phpunit/includes/Validators/TermChangeOpSerializationValidatorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2017-01-27T13:52:56Z",
+      "side": 1,
+      "message": "I\u0027m using this thing all over the place in the other patch as well and would prefer not to repeat it. Not sure whether it needs its own class or whether it\u0027s better to throw it into some test helper class. I\u0027m leaning towards the latter.",
+      "parentUuid": "2ef897d1_318c03db",
       "revId": "b95fcc51d81b3a09e3c48d0f4bc90d3c9c0801b8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
