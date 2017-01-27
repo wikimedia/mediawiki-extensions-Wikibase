@@ -34,6 +34,24 @@
       "revId": "74defe9b62d555478f844428941cf343ec983dac",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_d5feba65",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-27T13:38:37Z",
+      "side": 1,
+      "message": "Oh, you are right, sorry! Never mind, then.",
+      "parentUuid": "2ef897d1_91d737c4",
+      "revId": "74defe9b62d555478f844428941cf343ec983dac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
