@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_db75c9c9",
+        "filename": "repo/includes/ChangeOpDeserialization/TermChangeOpSerializationValidator.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-27T17:01:59Z",
+      "side": 1,
+      "message": "There is already a \"Wikibase\\repo\\includes\\ChangeOp\" folder. Why not make this a sub-folder? It feels a bit weird that these are two folders next to each other like they are independent.",
+      "range": {
+        "startLine": 3,
+        "startChar": 32,
+        "endLine": 3,
+        "endChar": 47
+      },
+      "revId": "6833452c93e41a75a5f670af25bfb65ce4f5af4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_db438966",
+        "filename": "repo/includes/ChangeOpDeserialization/TermChangeOpSerializationValidator.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-27T17:01:59Z",
+      "side": 1,
+      "message": "This is not entirely correct. The \"language\" key must always be there. It\u0027s just that the value is not validated if this is an integer.",
+      "range": {
+        "startLine": 34,
+        "startChar": 74,
+        "endLine": 35,
+        "endChar": 72
+      },
+      "revId": "6833452c93e41a75a5f670af25bfb65ce4f5af4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_bb620d05",
+        "filename": "repo/includes/ChangeOpDeserialization/TermChangeOpSerializationValidator.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-27T17:01:59Z",
+      "side": 1,
+      "message": "This name is confusing. This does not validate \"multiple\" things. It expects a 2-element array with a \"language\" and a \"value\". Suggestions:\n* validateTermArguments( $arguments, $languageCode )\n* validateTermSerialization( $serialization, $languageCode )\n\nBut this must not be done in this patch. We can rename this any time.",
+      "range": {
+        "startLine": 39,
+        "startChar": 25,
+        "endLine": 39,
+        "endChar": 38
+      },
+      "revId": "6833452c93e41a75a5f670af25bfb65ce4f5af4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_5b30b9fc",
+        "filename": "repo/tests/phpunit/includes/ChangeOpDeserialization/ChangeOpDeserializationTestHelper.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-27T17:01:59Z",
+      "side": 1,
+      "message": "I was fiddling with very similar code recently. You can find my result in StatementModificationHelperTest. Relevant differences:\n* I throw an ApiUsageException, but your solution is muchj more clever because it allows to use the default setExpectedException. I will change my code accordingly.\n* I do no \"expects\" because I found it adds no value to the tests. The tests should expect the exception, that should be enough.\n* I mock both dieError and dieException.",
+      "range": {
+        "startLine": 42,
+        "startChar": 15,
+        "endLine": 42,
+        "endChar": 31
+      },
+      "revId": "6833452c93e41a75a5f670af25bfb65ce4f5af4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_de093731",
+        "filename": "repo/tests/phpunit/includes/ChangeOpDeserialization/TermChangeOpSerializationValidatorTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-27T17:01:59Z",
+      "side": 1,
+      "message": "I find it better if there are two providers and two short test methods, instead of this conditional. Can also be split later.",
+      "revId": "6833452c93e41a75a5f670af25bfb65ce4f5af4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
