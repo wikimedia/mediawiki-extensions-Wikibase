@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_40a32f40",
+        "filename": "CREDITS",
+        "patchSetId": 11
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-01-27T01:23:34Z",
+      "side": 1,
+      "message": "duplicate of line 71, though suppose once we have a script for generating / updating the files, then we probably have duplicates",
+      "revId": "9aeebd512c3a55cb6dc794ac68198f003329bb4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_a07b03bd",
+        "filename": "CREDITS",
+        "patchSetId": 11
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-01-27T01:23:34Z",
+      "side": 1,
+      "message": "line 79 and 80 are probably duplicates but not 100% sure",
+      "revId": "9aeebd512c3a55cb6dc794ac68198f003329bb4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_807807c1",
+        "filename": "CREDITS",
+        "patchSetId": 11
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-01-27T01:23:34Z",
+      "side": 1,
+      "message": "lines 88 and 89 are probably duplicates but not 100% sure",
+      "revId": "9aeebd512c3a55cb6dc794ac68198f003329bb4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
