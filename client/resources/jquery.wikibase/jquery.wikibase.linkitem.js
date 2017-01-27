@@ -572,6 +572,7 @@ $.widget( 'wikibase.linkitem', {
 		// Purge this page in the background... we shouldn't confuse the user with the newly added
 		// link(s) not being there:
 		mwApi.post( {
+			formatversion: 2,
 			action: 'purge',
 			titles: this.options.pageTitle
 		} );
