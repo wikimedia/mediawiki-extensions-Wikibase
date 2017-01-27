@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_9171770e",
+        "filename": "repo/includes/Specials/SpecialListProperties.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T12:24:39Z",
+      "side": 1,
+      "message": "This is a new one.\nAfter this special page class got refactored so its dependencies are injected, it was also getting an instance of BufferingTermLookup.\nNow with Repo getting dispatching services from Client, WikibaseRepo::getBuffeingTermLookup is returning the DispatchingTermBuffer instance (and still a BufferingTermLookup as before when no Client not enabled).\n\nSo I\u0027ve changed this to accept PrefetchingTermLookup which is an interface which both BufferingTermLookup and DispatchingTermBuffer implement.\n\nI believe WikibaseRepo::getBufferingTermLookup should also become getPrefetchingTermLookup now. So renaming this as well.",
+      "parentUuid": "2ef897d1_4230d7e5",
+      "revId": "3badd550b51909030b678318ed860a1e14ebfa94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_a220ab97",
         "filename": "repo/includes/Store/Sql/SqlStore.php",
         "patchSetId": 19
@@ -30,6 +48,24 @@
       "writtenOn": "2017-01-26T18:40:11Z",
       "side": 1,
       "message": "I no longer understand why we need this conditional. A comment would help.",
+      "revId": "3badd550b51909030b678318ed860a1e14ebfa94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_912a97d6",
+        "filename": "repo/includes/Store/Sql/SqlStore.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T12:24:39Z",
+      "side": 1,
+      "message": "I\u0027ve added a comment, and restructred this a very tiny bit better.\nI am not going to explain why this is needed here in the comment, let\u0027s see if the comment in code is explaining it good enough.",
+      "parentUuid": "2ef897d1_a220ab97",
       "revId": "3badd550b51909030b678318ed860a1e14ebfa94",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
