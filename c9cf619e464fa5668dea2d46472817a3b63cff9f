@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_16b21de5",
+        "filename": "client/includes/Store/RepositoryServiceContainer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T10:47:30Z",
+      "side": 1,
+      "message": "I was about to use peekService initially but its documentation says \"This is intended for internal use and for test fixtures. Application logic should use getService() instead.\" so I thought maybe it is better to use getService. But instantiating not yet used service just to notify them does not seem very wise indeed.\nOne more thing which peekService",
+      "parentUuid": "2ef897d1_a2e54b08",
+      "revId": "c9cf619e464fa5668dea2d46472817a3b63cff9f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_22f27bce",
         "filename": "client/includes/Store/RepositoryServiceWiring.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2017-01-26T19:04:18Z",
       "side": 1,
       "message": "Confused - why does this split happen in this patch.",
+      "revId": "c9cf619e464fa5668dea2d46472817a3b63cff9f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_16b8dd73",
+        "filename": "client/includes/Store/RepositoryServiceWiring.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T10:47:30Z",
+      "side": 1,
+      "message": "Bah, it should have been moved to patch where it is really relevant. Removed from here.",
+      "parentUuid": "2ef897d1_22f27bce",
       "revId": "c9cf619e464fa5668dea2d46472817a3b63cff9f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
