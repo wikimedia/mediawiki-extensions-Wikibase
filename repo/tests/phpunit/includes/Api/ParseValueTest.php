@@ -40,14 +40,12 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 		$request = new FauxRequest( $params, true );
 		$main = new ApiMain( $request );
 
-		$module = new ParseValue( $main, 'wbparsevalue' );
-
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$exceptionLocalizer = $wikibaseRepo->getExceptionLocalizer();
 		$validatorErrorLocalizer = $wikibaseRepo->getValidatorErrorLocalizer();
 
 		$errorReporter = new ApiErrorReporter(
-			$module,
+			$main,
 			$exceptionLocalizer,
 			Language::factory( 'qqq' )
 		);
@@ -70,7 +68,9 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 			'url' => array( $this, 'newArrayWithStringValidator' ),
 		) );
 
-		$module->setServices(
+		return new ParseValue(
+			$main,
+			'wbparsevalue',
 			$dataTypeFactory,
 			$valueParserFactory,
 			$validatorFactory,
@@ -78,8 +78,6 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 			$validatorErrorLocalizer,
 			$errorReporter
 		);
-
-		return $module;
 	}
 
 	public function newArrayWithStringValidator() {
