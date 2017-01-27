@@ -81,5 +81,7 @@
 	"notification-header-page-connection": "A(z) <strong>$3</strong> {{GENDER:$2|össze lett kapcsolva}} egy {{WBREPONAME}}-elemmel",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> és {{PLURAL:$4|még egy|$4 másik|100=99+ másik}} lap {{GENDER:$2|össze lett kapcsolva}} {{WBREPONAME}}-elemekkel.",
 	"notification-link-text-view-item": "Elem {{GENDER:$1|megtekintése}}",
-	"notification-subject-page-connection": "A(z) {{SITENAME}} wikin {{GENDER:$3|létrehozott}} oldaladat {{GENDER:$2|összekapcsolták}} egy {{WBREPONAME}}-elemmel"
+	"notification-subject-page-connection": "A(z) {{SITENAME}} wikin {{GENDER:$3|létrehozott}} oldaladat {{GENDER:$2|összekapcsolták}} egy {{WBREPONAME}}-elemmel",
+	"unresolved-property-category": "Lapok feloldhatatlan tulajdonságokkal",
+	"unresolved-property-category-desc": "Ez a kategória azokat a lapokat listázza, amik olyan {{WBREPONAME}}-tulajdonságokat próbálnak lekérdezni, amiket sem az azonosítójuk, sem a címkéjük alapján nem sikerült megtalálni."
 }

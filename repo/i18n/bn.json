@@ -5,7 +5,8 @@
 			"Bellayet",
 			"Leemon2010",
 			"Aftabuzzaman",
-			"Nasir8891"
+			"Nasir8891",
+			"Elias Ahmmad"
 		]
 	},
 	"wikibase-desc": "কাঠামোবদ্ধ তথ্য ভান্ডার",
@@ -243,6 +244,7 @@
 	"wikibase-entitydata-bad-id": "অবৈধ আইডি: $1।",
 	"wikibase-entitydata-storage-error": "$1 সত্তা লোড করতে ব্যর্থ।",
 	"wikibase-entitydata-title": "সত্তার উপাত্ত",
+	"special-entitypage": "সত্তা পাতা",
 	"special-redirectentity": "একটি সত্তা পুনঃনির্দেশ করুন",
 	"wikibase-redirectentity-success": "$1 $2-এর দিকে পুনঃনির্দেশিত হয়েছে।",
 	"wikibase-redirectentity-submit": "পুনঃনির্দেশ",

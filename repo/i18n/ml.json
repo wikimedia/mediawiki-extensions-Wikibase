@@ -6,7 +6,8 @@
 			"Praveenp",
 			"Santhosh.thottingal",
 			"Vssun",
-			"Macofe"
+			"Macofe",
+			"Jameela P."
 		]
 	},
 	"wikibase-desc": "വിന്യസിത ഡേറ്റാ റെപ്പോസിറ്ററി",
@@ -33,6 +34,7 @@
 	"wikibase-description-empty": "വിവരണമൊന്നും നിർവചിച്ചിട്ടില്ല",
 	"wikibase-description-edit-placeholder": "വിവരണം നൽകുക",
 	"wikibase-description-edit-placeholder-language-aware": "$1 ഭാഷയിൽ വിവരണം നൽകുക",
+	"wikibase-content-language-edit-label": "ഭാഷ:",
 	"wikibase-diffview-reference": "അവലംബം",
 	"wikibase-diffview-rank": "റാങ്ക്",
 	"wikibase-diffview-rank-preferred": "ഉദ്ദേശിക്കുന്ന റാങ്ക്",
@@ -43,6 +45,7 @@
 	"wikibase-diffview-alias": "അപരനാമങ്ങൾ",
 	"wikibase-diffview-description": "വിവരണം",
 	"wikibase-diffview-link": "കണ്ണികൾ",
+	"wikibase-diffview-link-name": "പേര്‌",
 	"wikibase-sitelink-site-edit-placeholder": "സൈറ്റ്",
 	"wikibase-sitelink-page-edit-placeholder": "താൾ",
 	"wikibase-alias-edit-placeholder": "ഒരു അപരനാമം നൽകുക",
@@ -69,7 +72,6 @@
 	"wikibase-disambiguation-title": "\"$1\" എന്നതിനുള്ള വിവക്ഷകൾ",
 	"wb-special-newitem-new-item-notification": "പുതിയ ഇനം $1 സൃഷ്ടിക്കപ്പെട്ടു, അതിന്റെ താളിലേയ്ക്ക് തിരിച്ചുവിടപ്പെട്ടു. $2 എന്നതിലേക്ക് മടങ്ങുക.",
 	"wikibase-aliases-input-help-message": "ഈ ഡേറ്റാ ഗണം ഒന്നിലധികം പേരുകളിൽ അറിയപ്പെടുന്നുണ്ടെങ്കിൽ, താങ്കൾക്കവ ഇവിടെ പര്യായങ്ങളായോ അപരനാമങ്ങളായോ ചേർക്കാവുന്നതാണ്, അങ്ങനെ ചെയ്യുമ്പോൾ അവയുടെ ഇതരനാമങ്ങൾ ഉപയോഗിച്ചും അവ കണ്ടെത്താനാവും.",
-	"wikibase-aliases-empty": "അപരനാമങ്ങളൊന്നും കണ്ടെത്താനായില്ല.",
 	"wikibase-propertypage-datatype": "ഡേറ്റാ തരം",
 	"wikibase-statementview-rank-normal": "സാധാരണ റാങ്ക്",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|സ്രോതസ്സ്|സ്രോതസ്സുകൾ}}",
@@ -139,6 +141,7 @@
 	"wikibase-entitieswithoutlabel-label-alltypes": "എല്ലാം",
 	"wikibase-entitieswithoutlabel-submit": "കണ്ടെത്തുക",
 	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" എന്നത് സാധുവായ ഭാഷാ കോഡ് അല്ല.",
+	"wikibase-entitypage-bad-id": "അസാധുവായ ഉപയോക്തൃനാമം: $1",
 	"wikibase-restoreold": "പുനഃസ്ഥാപിക്കുക",
 	"wikibase-no-direct-editing": "$1  എന്ന നാമമേഖലയിൽ നേരിട്ടുള്ള തിരുത്ത് പ്രവർത്തനരഹിതമാക്കിയിരിക്കുന്നു",
 	"wikibase-noentity-createone": "ഒപ്പം താങ്കൾക്ക് [[$1|പുതിയൊരെണ്ണം സൃഷ്ടിക്കാവുന്നതുമാണ്]].",
