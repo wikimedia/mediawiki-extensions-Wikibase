@@ -16,6 +16,142 @@
       "revId": "b95fcc51d81b3a09e3c48d0f4bc90d3c9c0801b8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_1527b2b2",
+        "filename": "repo/includes/Validators/TermChangeOpSerializationValidator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T13:17:11Z",
+      "side": 1,
+      "message": "I wouldn\u0027t be surprised if it was me who suggested to put this class into this namespace. It is a validator after all...\nBut looking what at stuff is in this namespace it seems that it mostly (if not exclusively) code related to ValueValidators. This class has nothing to do with that if I am not mistaken, so maybe it would make more sense to have it in Wikibase\\Repo\\ChangeOpDeserializers/Deserialization? It seems it might fit better in there.",
+      "revId": "b95fcc51d81b3a09e3c48d0f4bc90d3c9c0801b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_515c1f4e",
+        "filename": "repo/includes/Validators/TermChangeOpSerializationValidator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T13:17:11Z",
+      "side": 1,
+      "message": "As per what I say in the comment in the public method of this class, I don\u0027t wonder it is difficult to describe what this class actually does :)\nBut especially because of that we should come up with some nice description, and link to change op serialization format docs.",
+      "revId": "b95fcc51d81b3a09e3c48d0f4bc90d3c9c0801b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_9533a2f3",
+        "filename": "repo/includes/Validators/TermChangeOpSerializationValidator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T13:17:11Z",
+      "side": 1,
+      "message": "I was wondering for quite a while what this whole class is actually about, and why this method does such weird things.\nThen I realized it basically extracting the code from Api\\EditEntity, basically unchanged. This is fine I believe, and in the bigger contexts the purpose of this class/method are clear.\n\nI am still not very happy about the name of the method (\"multilang\"?) Maybe it could be change to something along these lines:\nvalidateTermChangeOpData( $changeOpData, $languageOrIndex )\n\nNoooo, seeing this $languageOrIndex makes me cry. I hate naming things!\nI\u0027ll try to have another look on this and maybe I\u0027d be able to suggest better names.",
+      "revId": "b95fcc51d81b3a09e3c48d0f4bc90d3c9c0801b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_71a95b21",
+        "filename": "repo/tests/phpunit/includes/Validators/TermChangeOpSerializationValidatorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T13:17:11Z",
+      "side": 1,
+      "message": "class name changed",
+      "revId": "b95fcc51d81b3a09e3c48d0f4bc90d3c9c0801b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_b14c73a0",
+        "filename": "repo/tests/phpunit/includes/Validators/TermChangeOpSerializationValidatorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T13:17:11Z",
+      "side": 1,
+      "message": "Those tests are really simple and small so it is not a big deal here but this is introducing a bit of clutter here.\n\nGenerally I\u0027d prefer to have two providers and two tests, one for case when the exception is thrown, and one for a \"positive\" case. That would remove the need to pass the false for \"good\" cases. It would also mean some code duplication though, but I\u0027d argue this is fine for tests. Putting too much stuff in providers make tests less easy to read IMO.\n\nBut in this case it might be just matter of taste in this case (small easy tests). So I am not opposing to having it like it is, just making a (lengthy) comment.\n\nOh wait, this validator does not return anything etc when it is all good. In this case positive tests would be doing no assertions.",
+      "revId": "b95fcc51d81b3a09e3c48d0f4bc90d3c9c0801b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_f1954be7",
+        "filename": "repo/tests/phpunit/includes/Validators/TermChangeOpSerializationValidatorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T13:17:11Z",
+      "side": 1,
+      "message": "So if I read docs/change-op-serialization right in most cases that would be the actual integer. I don\u0027t know why the old code has \"is_numeric\" there as if both 0 and \u00270\u0027 were allowed. I guess we must assume this is required. So maybe both cases should be covered by tests?",
+      "revId": "b95fcc51d81b3a09e3c48d0f4bc90d3c9c0801b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_11b8e773",
+        "filename": "repo/tests/phpunit/includes/Validators/TermChangeOpSerializationValidatorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T13:17:11Z",
+      "side": 1,
+      "message": "When \"remove\" key is present the value does not matter. Having true is correct. Then autogenerated API docs seem to be using \u0027remove\u0027 \u003d\u003e \u0027\u0027 in examples which is also quite common in Mediawiki API. Then Thiemo\u0027s documentation in docs/change-op-serialization uses \u0027remove\u0027: 1 as an example.\nThis is all not really critical but if I didn\u0027t know how to make a remove label change op and I looked in the tests, and then in docs I\u0027d be confused :)\nMaybe we should go for one convention in all three places mentioned here? E.g. \u0027remove\u0027: \u0027\u0027 (as this was there first one that has been there)? Again, this is nothing wrong with this test but I think it would be nice for clarity.",
+      "revId": "b95fcc51d81b3a09e3c48d0f4bc90d3c9c0801b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_318c03db",
+        "filename": "repo/tests/phpunit/includes/Validators/TermChangeOpSerializationValidatorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-27T13:17:11Z",
+      "side": 1,
+      "message": "this TODO is done now as it mocks ApiErrorReporter, isn\u0027t?",
+      "revId": "b95fcc51d81b3a09e3c48d0f4bc90d3c9c0801b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
