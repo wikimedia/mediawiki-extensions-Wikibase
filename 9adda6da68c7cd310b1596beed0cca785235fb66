@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_5e91c79b",
+        "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-27T17:30:26Z",
+      "side": 1,
+      "message": "You fixed old array style in other files, can you do for this too?",
+      "range": {
+        "startLine": 339,
+        "startChar": 27,
+        "endLine": 339,
+        "endChar": 33
+      },
+      "revId": "9adda6da68c7cd310b1596beed0cca785235fb66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
