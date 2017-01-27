@@ -258,11 +258,6 @@ class WikibaseRepo {
 	private $entityTypeDefinitions;
 
 	/**
-	 * @var Language
-	 */
-	private $defaultLanguage;
-
-	/**
 	 * @var ValueSnakRdfBuilderFactory
 	 */
 	private $valueSnakRdfBuilderFactory;
@@ -398,7 +393,7 @@ class WikibaseRepo {
 	 */
 	private function newWikibaseValueFormatterBuilders() {
 		return new WikibaseValueFormatterBuilders(
-			$this->getDefaultLanguage(),
+			$this->getContentLanguage(),
 			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
 			$this->getLanguageNameLookup(),
 			$this->getLocalItemUriParser(),
@@ -455,26 +450,43 @@ class WikibaseRepo {
 	 * @param SettingsArray $settings
 	 * @param DataTypeDefinitions $dataTypeDefinitions
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
-	 * @param Language|null $defaultLanguage
 	 */
 	public function __construct(
 		SettingsArray $settings,
 		DataTypeDefinitions $dataTypeDefinitions,
-		EntityTypeDefinitions $entityTypeDefinitions,
-		Language $defaultLanguage = null
+		EntityTypeDefinitions $entityTypeDefinitions
 	) {
 		$this->settings = $settings;
 		$this->dataTypeDefinitions = $dataTypeDefinitions;
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
-		$this->defaultLanguage = $defaultLanguage;
 	}
 
 	/**
 	 * @return Language
 	 */
-	private function getDefaultLanguage() {
+	private function getContentLanguage() {
 		global $wgContLang;
-		return $this->defaultLanguage ?: $wgContLang;
+
+		// TODO: define a LanguageProvider service instead of using a global directly.
+		// NOTE: we cannot inject $wgContLang in the constructor, because it may still be null
+		// when WikibaseRepo is initialized. In particular, the language object may not yet
+		// be there when the SetupAfterCache hook is run during bootstrapping.
+		StubObject::unstub( $wgContLang );
+		return $wgContLang;
+	}
+
+	/**
+	 * @return Language
+	 */
+	private function getUserLanguage() {
+		global $wgLang;
+
+		// TODO: define a LanguageProvider service instead of using a global directly.
+		// NOTE: we cannot inject $wgLang in the constructor, because it may still be null
+		// when WikibaseRepo is initialized. In particular, the language object may not yet
+		// be there when the SetupAfterCache hook is run during bootstrapping.
+		StubObject::unstub( $wgLang );
+		return $wgLang;
 	}
 
 	/**
@@ -911,7 +923,7 @@ class WikibaseRepo {
 	protected function newValueFormatterFactory() {
 		return new OutputFormatValueFormatterFactory(
 			$this->dataTypeDefinitions->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ),
-			$this->getDefaultLanguage(),
+			$this->getContentLanguage(),
 			new LanguageFallbackChainFactory()
 		);
 	}
@@ -1000,8 +1012,6 @@ class WikibaseRepo {
 	 * @return SummaryFormatter
 	 */
 	protected function newSummaryFormatter() {
-		global $wgContLang;
-
 		// This needs to use an EntityIdPlainLinkFormatter as we want to mangle
 		// the links created in LinkBeginHookHandler afterwards (the links must not
 		// contain a display text: [[Item:Q1]] is fine but [[Item:Q1|Q1]] isn't).
@@ -1046,7 +1056,7 @@ class WikibaseRepo {
 			$idFormatter,
 			$valueFormatter,
 			$snakFormatter,
-			$wgContLang,
+			$this->getContentLanguage(),
 			$this->getEntityIdParser()
 		);
 
@@ -1120,9 +1130,6 @@ class WikibaseRepo {
 	 * @return ValueFormatter
 	 */
 	protected function getMessageParameterFormatter() {
-		global $wgLang;
-		StubObject::unstub( $wgLang );
-
 		$formatterOptions = new FormatterOptions();
 		$valueFormatterFactory = $this->getValueFormatterFactory();
 
@@ -1130,7 +1137,7 @@ class WikibaseRepo {
 			$valueFormatterFactory->getValueFormatter( SnakFormatter::FORMAT_WIKI, $formatterOptions ),
 			new EntityIdLinkFormatter( $this->getEntityTitleLookup() ),
 			$this->getSiteLookup(),
-			$wgLang
+			$this->getUserLanguage()
 		);
 	}
 
@@ -1572,8 +1579,7 @@ class WikibaseRepo {
 	 * @return ViewFactory
 	 */
 	public function getViewFactory() {
-		/** @var Language $wgLang */
-		global $wgLang;
+		$lang = $this->getUserLanguage();
 
 		$statementGrouperBuilder = new StatementGrouperBuilder(
 			$this->settings->getSetting( 'statementSections' ),
@@ -1599,11 +1605,11 @@ class WikibaseRepo {
 			TemplateFactory::getDefaultInstance(),
 			$this->getLanguageNameLookup(),
 			$this->getLanguageDirectionalityLookup(),
-			new MediaWikiNumberLocalizer( $wgLang ),
+			new MediaWikiNumberLocalizer( $lang ),
 			$this->settings->getSetting( 'siteLinkGroups' ),
 			$this->settings->getSetting( 'specialSiteLinkGroups' ),
 			$this->settings->getSetting( 'badgeItems' ),
-			new MediaWikiLocalizedTextProvider( $wgLang->getCode() )
+			new MediaWikiLocalizedTextProvider( $lang->getCode() )
 		);
 	}
 
