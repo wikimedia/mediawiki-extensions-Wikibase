@@ -72,6 +72,7 @@ return call_user_func( function() {
 				'wikibase.ui.entityViewInit.js',
 			),
 			'dependencies' => array(
+				'mediawiki.api.options',
 				'mediawiki.page.watch.ajax',
 				'mediawiki.user',
 				'mw.config.values.wbEntityTypes',
