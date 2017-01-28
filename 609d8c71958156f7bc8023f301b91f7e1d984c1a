@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_0f3afbe4",
+        "filename": "repo/includes/Specials/SpecialModifyEntity.php",
+        "patchSetId": 31
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2017-01-28T12:14:58Z",
+      "side": 1,
+      "message": "weird two-return-values overriding stuff",
+      "revId": "609d8c71958156f7bc8023f301b91f7e1d984c1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
