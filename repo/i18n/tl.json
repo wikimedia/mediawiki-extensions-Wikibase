@@ -70,6 +70,7 @@
 	"special-mergeitems": "Ipagsama ang dalawang bagay",
 	"wikibase-mergeitems-submit": "Ipagsama ang mga bagay",
 	"wikibase-entitieswithoutlabel-label-language": "Kodigong pang-wika:",
+	"special-entitypage": "Pinagmulang pagina",
 	"wikibase-restoreold": "itakdang muli",
 	"wikibase-entity-summary-restore": "Ipanumbalik ang rebisyong $3 ni [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"apihelp-query+wbsearch-param-search": "Maghanap para sa tekstong ito.",
