@@ -362,7 +362,7 @@ class MockRepository implements
 	/**
 	 * Fetches the entities with provided ids and returns them.
 	 * The result array contains the prefixed entity ids as keys.
-	 * The values are either an Entity or null, if there is no entity with the associated id.
+	 * The values are either an EntityDocument or null, if there is no entity with the associated id.
 	 *
 	 * The revisions can be specified as an array holding an integer element for each
 	 * id in the $entityIds array or false for latest. If all should be latest, false
@@ -370,7 +370,7 @@ class MockRepository implements
 	 *
 	 * @param EntityId[] $entityIds
 	 *
-	 * @return EntityDocument|null[]
+	 * @return EntityDocument[]|null[]
 	 */
 	public function getEntities( array $entityIds ) {
 		$entities = array();
