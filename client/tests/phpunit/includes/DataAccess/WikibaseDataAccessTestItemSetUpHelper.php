@@ -148,7 +148,7 @@ class WikibaseDataAccessTestItemSetUpHelper {
 	 */
 	private function createTestItem( ItemId $id, array $labels, array $statements = null, array $siteLinks = null ) {
 		$item = new Item( $id );
-		$item->getFingerprint()->setDescription( 'de', 'Description of ' . $id->getSerialization() );
+		$item->setDescription( 'de', 'Description of ' . $id->getSerialization() );
 
 		foreach ( $labels as $lang => $label ) {
 			$item->setLabel( $lang, $label );

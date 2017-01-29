@@ -56,14 +56,14 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testApply( ChangeOp $changeOpLabel, $expectedLabel ) {
 		$entity = $this->provideNewEntity();
-		$entity->getFingerprint()->setLabel( 'en', 'INVALID' );
+		$entity->setLabel( 'en', 'INVALID' );
 
 		$changeOpLabel->apply( $entity );
 
 		if ( $expectedLabel === '' ) {
-			$this->assertFalse( $entity->getFingerprint()->hasLabel( 'en' ) );
+			$this->assertFalse( $entity->getLabels()->hasTermForLanguage( 'en' ) );
 		} else {
-			$this->assertEquals( $expectedLabel, $entity->getFingerprint()->getLabel( 'en' )->getText() );
+			$this->assertEquals( $expectedLabel, $entity->getLabels()->getByLanguage( 'en' )->getText() );
 		}
 	}
 
@@ -90,13 +90,13 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 	public function testValidate( ChangeOp $changeOp, $valid ) {
 		$entity = $this->provideNewEntity();
 
-		$oldLabels = $entity->getFingerprint()->getLabels()->toTextArray();
+		$oldLabels = $entity->getLabels()->toTextArray();
 
 		$result = $changeOp->validate( $entity );
 		$this->assertEquals( $valid, $result->isValid(), 'isValid()' );
 
 		// labels should not have changed during validation
-		$newLabels = $entity->getFingerprint()->getLabels()->toTextArray();
+		$newLabels = $entity->getLabels()->toTextArray();
 		$this->assertEquals( $oldLabels, $newLabels, 'Labels modified by validation!' );
 	}
 
@@ -118,15 +118,15 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 		$args = array();
 
 		$entity = $this->provideNewEntity();
-		$entity->getFingerprint()->setLabel( 'de', 'Test' );
+		$entity->setLabel( 'de', 'Test' );
 		$args[] = array( $entity, new ChangeOpLabel( 'de', 'Zusammenfassung', $validatorFactory ), 'set', 'de' );
 
 		$entity = $this->provideNewEntity();
-		$entity->getFingerprint()->setLabel( 'de', 'Test' );
+		$entity->setLabel( 'de', 'Test' );
 		$args[] = array( $entity, new ChangeOpLabel( 'de', null, $validatorFactory ), 'remove', 'de' );
 
 		$entity = $this->provideNewEntity();
-		$entity->getFingerprint()->removeLabel( 'de' );
+		$entity->getLabels()->removeByLanguage( 'de' );
 		$args[] = array( $entity, new ChangeOpLabel( 'de', 'Zusammenfassung', $validatorFactory
 		), 'add', 'de' );
 

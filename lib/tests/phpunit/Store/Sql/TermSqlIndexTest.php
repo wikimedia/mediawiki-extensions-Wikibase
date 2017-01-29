@@ -59,11 +59,7 @@ class TermSqlIndexTest extends TermIndexTest {
 		$this->setExpectedException( ParameterAssertionException::class );
 		new TermSqlIndex(
 			new StringNormalizer(),
-			new EntityIdComposer( [
-				'item' => function( $repositoryName, $uniquePart ) {
-					return new ItemId( 'Q' . $uniquePart );
-				},
-			] ),
+			new EntityIdComposer( [] ),
 			false,
 			$repositoryName
 		);
@@ -87,15 +83,12 @@ class TermSqlIndexTest extends TermIndexTest {
 	}
 
 	public function termProvider() {
-		$argLists = array();
-
-		$argLists[] = array( 'en', 'FoO', 'fOo', true );
-		$argLists[] = array( 'ru', 'Берлин', 'берлин', true );
-
-		$argLists[] = array( 'en', 'FoO', 'bar', false );
-		$argLists[] = array( 'ru', 'Берлин', 'бе55585рлин', false );
-
-		return $argLists;
+		return [
+			[ 'en', 'FoO', 'fOo', true ],
+			[ 'ru', 'Берлин', 'берлин', true ],
+			[ 'en', 'FoO', 'bar', false ],
+			[ 'ru', 'Берлин', 'бе55585рлин', false ],
+		];
 	}
 
 	/**
@@ -112,12 +105,13 @@ class TermSqlIndexTest extends TermIndexTest {
 
 		$term = new TermIndexSearchCriteria( [ 'termLanguage' => $languageCode, 'termText' => $searchText ] );
 
-		$options = array(
-			'caseSensitive' => false,
-		);
-
 		//FIXME: test with arrays for term types and entity types!
-		$obtainedTerms = $termIndex->getMatchingTerms( array( $term ), TermIndexEntry::TYPE_LABEL, Item::ENTITY_TYPE, $options );
+		$obtainedTerms = $termIndex->getMatchingTerms(
+			[ $term ],
+			TermIndexEntry::TYPE_LABEL,
+			Item::ENTITY_TYPE,
+			[ 'caseSensitive' => false ]
+		);
 
 		$this->assertEquals( $matches ? 1 : 0, count( $obtainedTerms ) );
 
@@ -186,15 +180,15 @@ class TermSqlIndexTest extends TermIndexTest {
 	}
 
 	public function getMatchingTermsOptionsProvider() {
-		$labels = array(
+		$labels = [
 			'en' => new Term( 'en', 'Foo' ),
 			'de' => new Term( 'de', 'Fuh' ),
-		);
+		];
 
-		$descriptions = array(
+		$descriptions = [
 			'en' => new Term( 'en', 'Bar' ),
 			'de' => new Term( 'de', 'Bär' ),
-		);
+		];
 
 		$fingerprint = new Fingerprint(
 			new TermList( $labels ),
@@ -202,33 +196,33 @@ class TermSqlIndexTest extends TermIndexTest {
 			new AliasGroupList()
 		);
 
-		$labelFooEn = new TermIndexSearchCriteria( array(
+		$labelFooEn = new TermIndexSearchCriteria( [
 			'termType' => TermIndexEntry::TYPE_LABEL,
 			'termLanguage' => 'en',
 			'termText' => 'Foo',
-		) );
-		$descriptionBarEn = new TermIndexSearchCriteria( array(
+		] );
+		$descriptionBarEn = new TermIndexSearchCriteria( [
 			'termType' => TermIndexEntry::TYPE_DESCRIPTION,
 			'termLanguage' => 'en',
 			'termText' => 'Bar',
-		) );
+		] );
 
-		return array(
-			'no options' => array(
+		return [
+			'no options' => [
 				$fingerprint,
-				array( $labelFooEn ),
-				array(),
-				array( $labelFooEn ),
-			),
-			'LIMIT options' => array(
+				[ $labelFooEn ],
+				[],
+				[ $labelFooEn ],
+			],
+			'LIMIT options' => [
 				$fingerprint,
-				array( $labelFooEn, $descriptionBarEn ),
-				array( 'LIMIT' => 1 ),
+				[ $labelFooEn, $descriptionBarEn ],
+				[ 'LIMIT' => 1 ],
 				// This is not really well defined. Could be either of the two.
 				// So use null to show we want something but don't know what it is
-				array( null ),
-			)
-		);
+				[ null ],
+			]
+		];
 	}
 
 	/**
@@ -264,50 +258,50 @@ class TermSqlIndexTest extends TermIndexTest {
 	}
 
 	public function provideGetSearchKey() {
-		return array(
-			'basic' => array(
+		return [
+			'basic' => [
 				'foo', // raw
 				'foo', // normalized
-			),
+			],
 
-			'trailing newline' => array(
+			'trailing newline' => [
 				"foo \n",
 				'foo',
-			),
+			],
 
-			'whitespace' => array(
+			'whitespace' => [
 				'  foo  ', // raw
 				'foo', // normalized
-			),
+			],
 
-			'lower case of non-ascii character' => array(
+			'lower case of non-ascii character' => [
 				'ÄpFEl', // raw
 				'äpfel', // normalized
-			),
+			],
 
-			'lower case of decomposed character' => array(
+			'lower case of decomposed character' => [
 				"A\xCC\x88pfel", // raw
 				'äpfel', // normalized
-			),
+			],
 
-			'lower case of cyrillic character' => array(
+			'lower case of cyrillic character' => [
 				'Берлин', // raw
 				'берлин', // normalized
-			),
+			],
 
-			'lower case of greek character' => array(
+			'lower case of greek character' => [
 				'Τάχιστη', // raw
 				'τάχιστη', // normalized
-			),
+			],
 
-			'nasty unicode whitespace' => array(
+			'nasty unicode whitespace' => [
 				// ZWNJ: U+200C \xE2\x80\x8C
 				// RTLM: U+200F \xE2\x80\x8F
 				// PSEP: U+2029 \xE2\x80\xA9
 				"\xE2\x80\x8F\xE2\x80\x8Cfoo\xE2\x80\x8Cbar\xE2\x80\xA9", // raw
 				"foo bar", // normalized
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -332,35 +326,32 @@ class TermSqlIndexTest extends TermIndexTest {
 
 	public function getEntityTermsProvider() {
 		$id = new ItemId( 'Q999' );
-
-		$fingerprint = new Fingerprint();
-		$fingerprint->setLabel( 'en', 'kittens!!!:)' );
-		$fingerprint->setDescription( 'es', 'es un gato!' );
-		$fingerprint->setAliasGroup( 'en', array( 'kitten-alias' ) );
-
 		$item = new Item( $id );
-		$item->setFingerprint( $fingerprint );
 
-		$expectedTerms = array(
-			new TermIndexEntry( array(
+		$item->setLabel( 'en', 'kittens!!!:)' );
+		$item->setDescription( 'es', 'es un gato!' );
+		$item->setAliases( 'en', [ 'kitten-alias' ] );
+
+		$expectedTerms = [
+			new TermIndexEntry( [
 				'entityId' => new ItemId( 'Q999' ),
 				'termText' => 'es un gato!',
 				'termLanguage' => 'es',
 				'termType' => 'description'
-			) ),
-			new TermIndexEntry( array(
+			] ),
+			new TermIndexEntry( [
 				'entityId' => new ItemId( 'Q999' ),
 				'termText' => 'kittens!!!:)',
 				'termLanguage' => 'en',
 				'termType' => 'label'
-			) ),
-			new TermIndexEntry( array(
+			] ),
+			new TermIndexEntry( [
 				'entityId' => new ItemId( 'Q999' ),
 				'termText' => 'kitten-alias',
 				'termLanguage' => 'en',
 				'termType' => 'alias'
-			) )
-		);
+			] )
+		];
 
 		$entityWithoutTerms = $this->getMock( EntityDocument::class );
 		$entityWithoutTerms->expects( $this->any() )

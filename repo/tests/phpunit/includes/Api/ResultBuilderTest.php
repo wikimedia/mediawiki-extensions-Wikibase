@@ -527,12 +527,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	public function testAddEntityRevisionWithLanguagesFilter() {
 		$item = new Item( new ItemId( 'Q123099' ) );
-		$item->getFingerprint()->setLabel( 'en', 'text' );
-		$item->getFingerprint()->setLabel( 'de', 'text' );
-		$item->getFingerprint()->setDescription( 'en', 'text' );
-		$item->getFingerprint()->setDescription( 'de', 'text' );
-		$item->getFingerprint()->setAliasGroup( 'en', array( 'text' ) );
-		$item->getFingerprint()->setAliasGroup( 'de', array( 'text' ) );
+		$item->setLabel( 'en', 'text' );
+		$item->setLabel( 'de', 'text' );
+		$item->setDescription( 'en', 'text' );
+		$item->setDescription( 'de', 'text' );
+		$item->setAliases( 'en', array( 'text' ) );
+		$item->setAliases( 'de', array( 'text' ) );
 		$entityRevision = new EntityRevision( $item );
 
 		$result = $this->getDefaultResult();
