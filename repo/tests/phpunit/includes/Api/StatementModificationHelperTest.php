@@ -4,8 +4,7 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
 use DataValues\StringValue;
-use ApiUsageException;
-use StatusValue;
+use RuntimeException;
 use ValueValidators\Result;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
@@ -48,12 +47,8 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 		$errorReporter = $this->newApiErrorReporter();
 		$helper = $this->getNewInstance( $errorReporter );
 
-		try {
-			$helper->getEntityIdFromString( $invalidEntityIdString );
-			$this->fail( 'Expected exception was not thrown' );
-		} catch ( ApiUsageException $ex ) {
-			$this->assertMessage( 'invalid-entity-id', $ex );
-		}
+		$this->setExpectedException( RuntimeException::class, 'invalid-entity-id' );
+		$helper->getEntityIdFromString( $invalidEntityIdString );
 	}
 
 	public function testCreateSummary() {
@@ -95,12 +90,8 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 		$errorReporter = $this->newApiErrorReporter();
 		$helper = $this->getNewInstance( $errorReporter );
 
-		try {
-			$helper->getStatementFromEntity( 'foo', $entity );
-			$this->fail( 'Expected exception was not thrown' );
-		} catch ( ApiUsageException $ex ) {
-			$this->assertMessage( 'no-such-claim', $ex );
-		}
+		$this->setExpectedException( RuntimeException::class, 'no-such-claim' );
+		$helper->getStatementFromEntity( 'foo', $entity );
 	}
 
 	public function testGetStatementFromEntity_reportsErrorForUnknownStatementGuid() {
@@ -108,12 +99,8 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 		$errorReporter = $this->newApiErrorReporter();
 		$helper = $this->getNewInstance( $errorReporter );
 
-		try {
-			$helper->getStatementFromEntity( 'unknown', $entity );
-			$this->fail( 'Expected exception was not thrown' );
-		} catch ( ApiUsageException $ex ) {
-			$this->assertMessage( 'no-such-claim', $ex );
-		}
+		$this->setExpectedException( RuntimeException::class, 'no-such-claim' );
+		$helper->getStatementFromEntity( 'unknown', $entity );
 	}
 
 	public function testApplyChangeOp_validatesAndAppliesChangeOp() {
@@ -142,12 +129,8 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 		$changeOp->expects( $this->never() )
 			->method( 'apply' );
 
-		try {
-			$helper->applyChangeOp( $changeOp, new Item() );
-			$this->fail( 'Expected exception was not thrown' );
-		} catch ( ApiUsageException $ex ) {
-			$this->assertMessage( 'modification-failed', $ex );
-		}
+		$this->setExpectedException( RuntimeException::class, 'modification-failed' );
+		$helper->applyChangeOp( $changeOp, new Item() );
 	}
 
 	public function testApplyChangeOp_reportsErrorWhenApplyFails() {
@@ -162,12 +145,8 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 		$changeOp->method( 'apply' )
 			->will( $this->throwException( new ChangeOpException() ) );
 
-		try {
-			$helper->applyChangeOp( $changeOp, new Item() );
-			$this->fail( 'Expected exception was not thrown' );
-		} catch ( ApiUsageException $ex ) {
-			$this->assertMessage( 'modification-failed', $ex );
-		}
+		$this->setExpectedException( RuntimeException::class, 'modification-failed' );
+		$helper->applyChangeOp( $changeOp, new Item() );
 	}
 
 	/**
@@ -196,23 +175,15 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 
 		$errorReporter->method( 'dieException' )
 			->will( $this->returnCallback( function ( $exception, $message ) {
-				throw new ApiUsageException( null, StatusValue::newFatal( $message ) );
+				throw new RuntimeException( $message );
 			} ) );
 
 		$errorReporter->method( 'dieError' )
 			->will( $this->returnCallback( function ( $description, $message ) {
-				throw new ApiUsageException( null, StatusValue::newFatal( $message ) );
+				throw new RuntimeException( $message );
 			} ) );
 
 		return $errorReporter;
-	}
-
-	/**
-	 * @param string $expectedMessage
-	 * @param ApiUsageException $actualException
-	 */
-	private function assertMessage( $expectedMessage, ApiUsageException $actualException ) {
-		$this->assertTrue( $actualException->getStatusValue()->hasMessage( $expectedMessage ) );
 	}
 
 }
