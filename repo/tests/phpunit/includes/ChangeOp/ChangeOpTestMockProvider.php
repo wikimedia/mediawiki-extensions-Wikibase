@@ -26,7 +26,6 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
@@ -273,56 +272,6 @@ class ChangeOpTestMockProvider {
 			->method( 'parse' )
 			->will( PHPUnit_Framework_TestCase::returnValue( $guid ) );
 		return $mock;
-	}
-
-	public function detectLabelConflictsForEntity( FingerprintProvider $entity ) {
-		foreach ( $entity->getFingerprint()->getLabels()->toTextArray() as $lang => $label ) {
-			if ( $label === 'DUPE' ) {
-				return Result::newError( array(
-					Error::newError(
-						'found conflicting terms',
-						'label',
-						'label-conflict',
-						array(
-							'label',
-							$lang,
-							$label,
-							'P666'
-						)
-					)
-				) );
-			}
-		}
-
-		return Result::newSuccess();
-	}
-
-	public function detectLabelDescriptionConflictsForEntity( FingerprintProvider $entity ) {
-		foreach ( $entity->getFingerprint()->getLabels()->toTextArray() as $lang => $label ) {
-			if ( !$entity->getFingerprint()->hasDescription( $lang ) ) {
-				continue;
-			}
-
-			$description = $entity->getFingerprint()->getDescription( $lang )->getText();
-
-			if ( $label === 'DUPE' && $description === 'DUPE' ) {
-				return Result::newError( array(
-					Error::newError(
-						'found conflicting terms',
-						'label',
-						'label-with-description-conflict',
-						array(
-							'label',
-							$lang,
-							$label,
-							'Q666'
-						)
-					)
-				) );
-			}
-		}
-
-		return Result::newSuccess();
 	}
 
 	public function detectLabelConflicts(
