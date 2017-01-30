@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_e75fbe42",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-30T16:49:00Z",
+      "side": 1,
+      "message": "Is there a related task? If there is, can you mention it in commit message.",
+      "revId": "16dac9c0ee3a4a17914fd6386a2c57a6813706e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_072bfadc",
+        "filename": "repo/includes/Search/Elastic/Fields/FieldDefinitions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-30T16:49:00Z",
+      "side": 1,
+      "message": "This more relates to return value. Can you move it there?",
+      "range": {
+        "startLine": 12,
+        "startChar": 33,
+        "endLine": 12,
+        "endChar": 71
+      },
+      "revId": "16dac9c0ee3a4a17914fd6386a2c57a6813706e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_47e452a3",
+        "filename": "repo/includes/Search/Elastic/Fields/ItemFieldDefinitions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-30T16:49:00Z",
+      "side": 1,
+      "message": "As a suggestion:\nEvery usage I\u0027ve found create instances of `LabelsProviderFieldDefinitions` and `DescriptionsProviderFieldDefinitions` with the same arguments.\nMay be creation of those can be encapsulated in the constructor and just pass language list as an argument?\nIn another words, does it make sense to have `LabelsProviderFieldDefinitions` and `DescriptionsProviderFieldDefinitions` created with different language set?",
+      "range": {
+        "startLine": 27,
+        "startChar": 2,
+        "endLine": 28,
+        "endChar": 86
+      },
+      "revId": "16dac9c0ee3a4a17914fd6386a2c57a6813706e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_87648a46",
+        "filename": "repo/includes/Search/Elastic/Fields/ItemFieldDefinitions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-30T16:49:00Z",
+      "side": 1,
+      "message": "I guess it is better to have list of real key values in doc block in @return tag.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 22
+      },
+      "revId": "16dac9c0ee3a4a17914fd6386a2c57a6813706e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_07ff7a32",
+        "filename": "repo/includes/Search/Elastic/Fields/LabelsProviderFieldDefinitons.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-30T16:49:00Z",
+      "side": 1,
+      "message": "unused field",
+      "range": {
+        "startLine": 18,
+        "startChar": 2,
+        "endLine": 18,
+        "endChar": 40
+      },
+      "revId": "16dac9c0ee3a4a17914fd6386a2c57a6813706e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_4748d28c",
+        "filename": "repo/includes/Search/Elastic/Fields/PropertyFieldDefinitions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-30T16:49:00Z",
+      "side": 1,
+      "message": "I don\u0027t think it is needed, is it?",
+      "range": {
+        "startLine": 6,
+        "startChar": 3,
+        "endLine": 6,
+        "endChar": 47
+      },
+      "revId": "16dac9c0ee3a4a17914fd6386a2c57a6813706e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_e7a9fe22",
+        "filename": "repo/includes/Search/Elastic/Fields/PropertyFieldDefinitions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-30T16:49:00Z",
+      "side": 1,
+      "message": "Same question as in `ItemFieldDefinitions` constructor",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 29,
+        "endChar": 86
+      },
+      "revId": "16dac9c0ee3a4a17914fd6386a2c57a6813706e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_475e927c",
+        "filename": "repo/includes/Search/Elastic/Fields/PropertyFieldDefinitions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-30T16:49:00Z",
+      "side": 1,
+      "message": "I guess it is better to have list of real key values in doc block in @return tag.",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 22
+      },
+      "revId": "16dac9c0ee3a4a17914fd6386a2c57a6813706e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_a7a3063f",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Fields/ItemFieldDefinitionsTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-30T16:49:00Z",
+      "side": 1,
+      "message": "Are these groups really needed?",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 22
+      },
+      "revId": "16dac9c0ee3a4a17914fd6386a2c57a6813706e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
