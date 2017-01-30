@@ -54,28 +54,32 @@ class SetQualifier extends ApiBase {
 	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
-	 * @param string $modulePrefix
+	 * @param ApiErrorReporter $errorReporter
+	 * @param StatementChangeOpFactory $statementChangeOpFactory
+	 * @param StatementModificationHelper $modificationHelper
+	 * @param StatementGuidParser $guidParser
+	 * @param ResultBuilder $resultBuilder
+	 * @param EntitySavingHelper $entitySavingHelper
 	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+	public function __construct(
+		ApiMain $mainModule,
+		$moduleName,
+		ApiErrorReporter $errorReporter,
+		StatementChangeOpFactory $statementChangeOpFactory,
+		StatementModificationHelper $modificationHelper,
+		StatementGuidParser $guidParser,
+		ResultBuilder $resultBuilder,
+		EntitySavingHelper $entitySavingHelper
+	) {
+		parent::__construct( $mainModule, $moduleName );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
-		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
+		$this->errorReporter = $errorReporter;
+		$this->statementChangeOpFactory = $statementChangeOpFactory;
 
-		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
-		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
-
-		$this->modificationHelper = new StatementModificationHelper(
-			$wikibaseRepo->getSnakFactory(),
-			$wikibaseRepo->getEntityIdParser(),
-			$wikibaseRepo->getStatementGuidValidator(),
-			$apiHelperFactory->getErrorReporter( $this )
-		);
-
-		$this->guidParser = $wikibaseRepo->getStatementGuidParser();
-		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
-		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
+		$this->modificationHelper = $modificationHelper;
+		$this->guidParser = $guidParser;
+		$this->resultBuilder = $resultBuilder;
+		$this->entitySavingHelper = $entitySavingHelper;
 	}
 
 	/**
