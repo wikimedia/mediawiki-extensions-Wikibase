@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_a86bd881",
+        "filename": "tests/browser/features/statements_quantity.feature",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-30T12:00:25Z",
+      "side": 1,
+      "message": "What does this tag mean?\nWhy there is need to write this TODO if we have \"Depends-On: XXX\" in commit message?",
+      "range": {
+        "startLine": 44,
+        "startChar": 17,
+        "endLine": 44,
+        "endChar": 29
+      },
+      "revId": "a6fc63f14420c54ea2d2f723d23988a4c0296251",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_480104b9",
+        "filename": "tests/browser/features/statements_quantity.feature",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-30T12:00:25Z",
+      "side": 1,
+      "message": "I would rater see link to ticket (or patch commit message, as in this case) before the scenario that describes the problem in general.",
+      "range": {
+        "startLine": 52,
+        "startChar": 6,
+        "endLine": 52,
+        "endChar": 90
+      },
+      "revId": "a6fc63f14420c54ea2d2f723d23988a4c0296251",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
