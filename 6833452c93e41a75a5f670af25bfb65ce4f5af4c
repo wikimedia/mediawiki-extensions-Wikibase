@@ -94,6 +94,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_a8199829",
+        "filename": "repo/tests/phpunit/includes/ChangeOpDeserialization/ChangeOpDeserializationTestHelper.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-30T12:19:15Z",
+      "side": 1,
+      "message": "I cannot agree. \nAlthough Thiemo\u0027s tests look a bit more complicated, the mock set up conforms to the implementation interface. \nBut in this case mock is set up so it implements different interface, so the tests are more likely to break if some refactoring will be made, or might not break when should.\n\nImagine, if in class under test developer will decide to catch ApiUsageException and do some additional check (may be fix revalidate), then tests using this helper will break the code with invalid reason.",
+      "parentUuid": "2ef897d1_5b30b9fc",
+      "range": {
+        "startLine": 42,
+        "startChar": 15,
+        "endLine": 42,
+        "endChar": 31
+      },
+      "revId": "6833452c93e41a75a5f670af25bfb65ce4f5af4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_de093731",
         "filename": "repo/tests/phpunit/includes/ChangeOpDeserialization/TermChangeOpSerializationValidatorTest.php",
         "patchSetId": 7
