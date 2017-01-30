@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_1b06c1d1",
+        "filename": "client/includes/Store/RepositoryServiceWiring.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-30T07:39:48Z",
+      "side": 1,
+      "message": "True. Changed to \u0027WikiPageEntityMetaDataAccessor\u0027.",
+      "parentUuid": "2ef897d1_71fb9b45",
+      "revId": "983c5a9d8d5ebf95b3918a1c463038a1f1286dc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_119107fc",
         "filename": "client/includes/WikibaseClient.php",
         "patchSetId": 20
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_9bf2b1de",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-30T07:39:48Z",
+      "side": 1,
+      "message": "Extracted to I709d163872779364f68bef739d8b276348b41d13. Hopefully I didn\u0027t miss anything.",
+      "parentUuid": "2ef897d1_119107fc",
+      "revId": "983c5a9d8d5ebf95b3918a1c463038a1f1286dc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_d19a4f17",
         "filename": "repo/includes/Store/Sql/SqlStore.php",
         "patchSetId": 20
@@ -47,6 +83,24 @@
       "writtenOn": "2017-01-27T12:47:31Z",
       "side": 1,
       "message": "This isn\u0027t necessarily \"raw\", is it? We have to be careful about when and where we add a caching decorator. Aren\u0027t we nesting two caching layers here?",
+      "revId": "983c5a9d8d5ebf95b3918a1c463038a1f1286dc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_388ce339",
+        "filename": "repo/includes/Store/Sql/SqlStore.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-30T07:39:48Z",
+      "side": 1,
+      "message": "yeah, \"raw\" is no longer a right adjective. Should it then be \"nonCachingLookup\"?\nCurrent implementation in DispatchingServiceWiring does not return a caching decorator so it is good. But maybe it makes sense to add some guard? But where? E.g. lines below intentionally nest two caching wrappers so CachingEntityRevisionLookup\u0027s constructor can\u0027t just check that is not not getting another CachingEntityRevisionLookup as it is sometimes wanted.",
+      "parentUuid": "2ef897d1_d19a4f17",
       "revId": "983c5a9d8d5ebf95b3918a1c463038a1f1286dc0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
