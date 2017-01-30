@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "2ef897d1_ad5f6a43",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialItemByTitleTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2017-01-30T11:03:28Z",
+      "side": 1,
+      "message": "This returns a PHPUnit_Framework_MockObject_MockObject ?",
+      "range": {
+        "startLine": 41,
+        "startChar": 31,
+        "endLine": 41,
+        "endChar": 84
+      },
+      "revId": "751888df7124402c6a57979081b8bfa3832563c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_8d5cae4f",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialItemByTitleTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2017-01-30T11:03:28Z",
+      "side": 1,
+      "message": "as above",
+      "range": {
+        "startLine": 55,
+        "startChar": 32,
+        "endLine": 55,
+        "endChar": 85
+      },
+      "revId": "751888df7124402c6a57979081b8bfa3832563c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_e22c6347",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialItemByTitleTest.php",
         "patchSetId": 2
