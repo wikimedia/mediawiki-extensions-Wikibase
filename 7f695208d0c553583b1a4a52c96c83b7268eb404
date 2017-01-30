@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_32de3715",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-30T08:19:00Z",
+      "side": 1,
+      "message": "It\u0027s the other round. Keys are repository names, and values are service instances for the particular repository. Which is actually what you\u0027re expecting in the test below, so just the test name states it wrong.",
+      "range": {
+        "startLine": 37,
+        "startChar": 17,
+        "endLine": 37,
+        "endChar": 96
+      },
+      "revId": "7f695208d0c553583b1a4a52c96c83b7268eb404",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
