@@ -8,12 +8,6 @@ use Wikimedia\Assert\Assert;
  * Utility functions for Wikibase namespaces.
  *
  * @license GPL-2.0+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Tobias Gritschacher
- * @author Jens Ohlig < jens.ohlig@wikimedia.de >
- * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Adrian Heine <adrian.heine@wikimedia.de>
- * @author Thiemo Mättig
  */
 class EntityNamespaceLookup {
 

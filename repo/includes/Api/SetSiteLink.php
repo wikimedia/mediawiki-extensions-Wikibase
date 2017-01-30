@@ -15,12 +15,6 @@ use Wikibase\Summary;
  * Requires API write mode to be enabled.
  *
  * @license GPL-2.0+
- * @author John Erling Blad < jeblad@gmail.com >
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Daniel Kinzler
- * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
- * @author Michał Łazowik
- * @author Addshore
  */
 class SetSiteLink extends ModifyEntity {
 

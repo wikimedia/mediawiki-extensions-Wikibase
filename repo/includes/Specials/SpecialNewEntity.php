@@ -13,12 +13,6 @@ use Wikibase\Summary;
  * Page for creating new Wikibase entities that contain a Fingerprint.
  *
  * @license GPL-2.0+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Jens Ohlig
- * @author John Erling Blad < jeblad@gmail.com >
- * @author Bene* < benestar.wikimedia@gmail.com >
- * @author Adrian Heine <adrian.heine@wikimedia.de>
- * @author Aleksey Bekh-Ivanov < aleksey.bekh-ivanov@wikimedia.de >
  */
 abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 
