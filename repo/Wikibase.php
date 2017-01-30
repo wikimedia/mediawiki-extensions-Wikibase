@@ -237,7 +237,19 @@ call_user_func( function() {
 	$wgAPIModules['wbsetclaim'] = Wikibase\Repo\Api\SetClaim::class;
 	$wgAPIModules['wbremovequalifiers'] = Wikibase\Repo\Api\RemoveQualifiers::class;
 	$wgAPIModules['wbsetqualifier'] = Wikibase\Repo\Api\SetQualifier::class;
-	$wgAPIModules['wbmergeitems'] = Wikibase\Repo\Api\MergeItems::class;
+	$wgAPIModules['wbmergeitems'] = [
+		'class' => Wikibase\Repo\Api\MergeItems::class,
+		'factory' => function( ApiMain $mainModule, $moduleName ) {
+			$wikibaseRepo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+
+			return new Wikibase\Repo\Api\MergeItems(
+				$mainModule,
+				$moduleName,
+				$wikibaseRepo->getEntityIdParser(),
+				$wikibaseRepo->newItemMergeInteractor( $mainModule->getContext() )
+			);
+		}
+	];
 	$wgAPIModules['wbformatvalue'] = [
 		'class' => Wikibase\Repo\Api\FormatSnakValue::class,
 		'factory' => function( ApiMain $mainModule, $moduleName ) {
