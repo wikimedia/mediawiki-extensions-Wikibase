@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Changes;
 
 use Wikibase\ChangeRow;
-use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -12,7 +11,6 @@ use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\EntityChange;
 use Wikibase\ItemChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
@@ -230,29 +228,6 @@ final class TestChanges {
 				$change->setField( $name, $value );
 			}
 		}
-	}
-
-	/**
-	 * @return EntityDocument[]
-	 */
-	public static function getEntities() {
-		$entityList = array();
-
-		/** @var FingerprintProvider[] $entities */
-		$entities = array(
-			new Item( new ItemId( 'Q112' ) ),
-			new Property( new PropertyId( 'P112' ), null, 'string' ),
-		);
-
-		foreach ( $entities as $entity ) {
-			$entityList[] = $entity;
-
-			$entity->getFingerprint()->setLabel( 'ja', '\u30d3\u30fc\u30eb' );
-
-			$entityList[] = $entity;
-		}
-
-		return $entityList;
 	}
 
 }
