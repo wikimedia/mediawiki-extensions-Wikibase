@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_ea27830b",
+        "filename": "repo/includes/Content/EntityHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 792,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-01-30T19:33:56Z",
+      "side": 1,
+      "message": "It can be any type, depending on data",
+      "parentUuid": "2ef897d1_0711ba5f",
+      "range": {
+        "startLine": 792,
+        "startChar": 12,
+        "endLine": 792,
+        "endChar": 38
+      },
+      "revId": "7a8a68c998ca3bd54408213e7a9df532dbeabaee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_072ada8f",
         "filename": "repo/includes/Content/EntityHandler.php",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2017-01-30T17:19:12Z",
       "side": 1,
       "message": "Is `!\u003d` intentional? May be `!\u003d\u003d`?",
+      "range": {
+        "startLine": 805,
+        "startChar": 36,
+        "endLine": 805,
+        "endChar": 38
+      },
+      "revId": "7a8a68c998ca3bd54408213e7a9df532dbeabaee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_ea82e3a8",
+        "filename": "repo/includes/Content/EntityHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-01-30T19:33:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_072ada8f",
       "range": {
         "startLine": 805,
         "startChar": 36,
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_ca8f27d0",
+        "filename": "repo/includes/Search/Elastic/Fields/AllLabelsField.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-01-30T19:33:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_c7a60250",
+      "revId": "7a8a68c998ca3bd54408213e7a9df532dbeabaee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_e70d7e42",
         "filename": "repo/includes/Search/Elastic/Fields/LabelsField.php",
         "patchSetId": 5
@@ -76,6 +142,30 @@
       "writtenOn": "2017-01-30T17:19:12Z",
       "side": 1,
       "message": "Is it `string[]`?",
+      "range": {
+        "startLine": 16,
+        "startChar": 9,
+        "endLine": 16,
+        "endChar": 14
+      },
+      "revId": "7a8a68c998ca3bd54408213e7a9df532dbeabaee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_2a3ebb26",
+        "filename": "repo/includes/Search/Elastic/Fields/LabelsField.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-01-30T19:33:56Z",
+      "side": 1,
+      "message": "yes",
+      "parentUuid": "2ef897d1_e70d7e42",
       "range": {
         "startLine": 16,
         "startChar": 9,
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_4a39f73d",
+        "filename": "repo/includes/Search/Elastic/Fields/LabelsField.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-01-30T19:33:56Z",
+      "side": 1,
+      "message": "it depends on specific engine and specific field.",
+      "parentUuid": "2ef897d1_c70a8229",
+      "range": {
+        "startLine": 27,
+        "startChar": 12,
+        "endLine": 27,
+        "endChar": 17
+      },
+      "revId": "7a8a68c998ca3bd54408213e7a9df532dbeabaee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_0759ba90",
         "filename": "repo/includes/Search/Elastic/Fields/LabelsField.php",
         "patchSetId": 5
@@ -128,6 +242,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_0a7c1fb3",
+        "filename": "repo/includes/Search/Elastic/Fields/LabelsField.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-01-30T19:33:56Z",
+      "side": 1,
+      "message": "oops forgot to add this part. Fixed.",
+      "parentUuid": "2ef897d1_0759ba90",
+      "revId": "7a8a68c998ca3bd54408213e7a9df532dbeabaee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_0a377fe1",
         "filename": "repo/includes/Search/Elastic/Fields/TermIndexField.php",
         "patchSetId": 5
@@ -139,6 +271,30 @@
       "writtenOn": "2017-01-30T17:19:12Z",
       "side": 1,
       "message": "Would be nice to have (reference to) documentation of array structure.",
+      "range": {
+        "startLine": 15,
+        "startChar": 12,
+        "endLine": 15,
+        "endChar": 17
+      },
+      "revId": "7a8a68c998ca3bd54408213e7a9df532dbeabaee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_0a441fbc",
+        "filename": "repo/includes/Search/Elastic/Fields/TermIndexField.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-01-30T19:33:56Z",
+      "side": 1,
+      "message": "it\u0027s static array now, so structure is pretty obvious. In general, the structure of such data depends on the engine and the field.",
+      "parentUuid": "2ef897d1_0a377fe1",
       "range": {
         "startLine": 15,
         "startChar": 12,
@@ -174,6 +330,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_aa4aabc6",
+        "filename": "repo/includes/Search/Elastic/Fields/TermIndexField.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-01-30T19:33:56Z",
+      "side": 1,
+      "message": "1. yes 2. no I don\u0027t think so. This function checks if fields can be merged. If yes, it returns merged field, if no, it returns false. The client decides what to do with it. I am no fan of flow control by exception.",
+      "parentUuid": "2ef897d1_4a1c576a",
+      "range": {
+        "startLine": 48,
+        "startChar": 28,
+        "endLine": 48,
+        "endChar": 34
+      },
+      "revId": "7a8a68c998ca3bd54408213e7a9df532dbeabaee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_8a492f6d",
         "filename": "repo/includes/Search/Elastic/Fields/TermIndexField.php",
         "patchSetId": 5
@@ -197,6 +377,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_2a159b9c",
+        "filename": "repo/includes/Search/Elastic/Fields/TermIndexField.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-01-30T19:33:56Z",
+      "side": 1,
+      "message": "No, it\u0027s not a bug - it\u0027s a standard signature for this function from WikibaseIndexField, but in this case $name is not needed.",
+      "parentUuid": "2ef897d1_8a492f6d",
+      "range": {
+        "startLine": 69,
+        "startChar": 2,
+        "endLine": 69,
+        "endChar": 15
+      },
+      "revId": "7a8a68c998ca3bd54408213e7a9df532dbeabaee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_c7e16299",
         "filename": "repo/tests/phpunit/includes/Search/Elastic/Fields/LabelsFieldTest.php",
         "patchSetId": 5
@@ -208,6 +412,24 @@
       "writtenOn": "2017-01-30T16:37:57Z",
       "side": 1,
       "message": "indent",
+      "revId": "7a8a68c998ca3bd54408213e7a9df532dbeabaee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_4a48d78c",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Fields/LabelsFieldTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-01-30T19:33:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_c7e16299",
       "revId": "7a8a68c998ca3bd54408213e7a9df532dbeabaee",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
