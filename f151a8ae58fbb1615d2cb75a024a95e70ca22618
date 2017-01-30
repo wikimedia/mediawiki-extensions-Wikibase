@@ -16,6 +16,24 @@
       "revId": "f151a8ae58fbb1615d2cb75a024a95e70ca22618",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_4d16b6ad",
+        "filename": "repo/tests/phpunit/includes/Content/EntityHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-30T10:32:32Z",
+      "side": 1,
+      "message": "Thats right. From our experience base classes like this are usually problematic. Luckily, this is the base class for ItemHandler and PropertyHandler only. Neither MediaInfoHandlerTest nor LexemeHandlerTest use it.",
+      "parentUuid": "2ef897d1_2d06dad1",
+      "revId": "f151a8ae58fbb1615d2cb75a024a95e70ca22618",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
