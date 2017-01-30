@@ -38,31 +38,28 @@ class ItemHandlerTest extends EntityHandlerTest {
 		return CONTENT_MODEL_WIKIBASE_ITEM;
 	}
 
-	/**
-	 * @see EntityHandlerTest::getClassName
-	 * @return string
-	 */
-	public function getClassName() {
-		return ItemHandler::class;
+	public function testGetModelID() {
+		$this->assertSame( CONTENT_MODEL_WIKIBASE_ITEM, $this->getHandler()->getModelID() );
 	}
 
 	/**
 	 * @see EntityHandlerTest::contentProvider
 	 */
 	public function contentProvider() {
-		$contents = parent::contentProvider();
+		$contents = [];
+		$contents[] = [ $this->newEntityContent() ];
 
 		/** @var ItemContent $content */
 		$content = $this->newEntityContent();
-		$content->getEntity()->setAliases( 'en', array( 'foo' ) );
+		$content->getEntity()->setAliases( 'en', [ 'foo' ] );
 		$content->getEntity()->setDescription( 'de', 'foobar' );
 		$content->getEntity()->setDescription( 'en', 'baz' );
 		$content->getEntity()->setLabel( 'nl', 'o_O' );
-		$contents[] = array( $content );
+		$contents[] = [ $content ];
 
 		$content = $content->copy();
 		$content->getItem()->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foobar' );
-		$contents[] = array( $content );
+		$contents[] = [ $content ];
 
 		return $contents;
 	}

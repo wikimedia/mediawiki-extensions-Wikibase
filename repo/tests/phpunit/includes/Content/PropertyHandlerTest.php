@@ -32,31 +32,28 @@ class PropertyHandlerTest extends EntityHandlerTest {
 		return CONTENT_MODEL_WIKIBASE_PROPERTY;
 	}
 
-	/**
-	 * @see EntityHandlerTest::getClassName
-	 * @return string
-	 */
-	public function getClassName() {
-		return PropertyHandler::class;
+	public function testGetModelID() {
+		$this->assertSame( CONTENT_MODEL_WIKIBASE_PROPERTY, $this->getHandler()->getModelID() );
 	}
 
 	/**
 	 * @see EntityHandlerTest::contentProvider
 	 */
 	public function contentProvider() {
-		$contents = parent::contentProvider();
+		$contents = [];
+		$contents[] = [ $this->newEntityContent() ];
 
 		/** @var PropertyContent $content */
 		$content = $this->newEntityContent();
-		$content->getEntity()->setAliases( 'en', array( 'foo' ) );
+		$content->getEntity()->setAliases( 'en', [ 'foo' ] );
 		$content->getEntity()->setDescription( 'de', 'foobar' );
 		$content->getEntity()->setDescription( 'en', 'baz' );
 		$content->getEntity()->setLabel( 'nl', 'o_O' );
-		$contents[] = array( $content );
+		$contents[] = [ $content ];
 
 		$content = clone $contents[1][0];
 		// TODO: add some prop-specific stuff: $content->getProperty()->;
-		$contents[] = array( $content );
+		$contents[] = [ $content ];
 
 		return $contents;
 	}
