@@ -51,11 +51,10 @@ class SpecialNewProperty extends SpecialNewEntity {
 
 		$property = Property::newFromType( $formData[ self::FIELD_DATATYPE ] );
 
-		$fingerprint = $property->getFingerprint();
-		$fingerprint->setLabel( $languageCode, $formData[ self::FIELD_LABEL ] );
-		$fingerprint->setDescription( $languageCode, $formData[ self::FIELD_DESCRIPTION ] );
+		$property->setLabel( $languageCode, $formData[ self::FIELD_LABEL ] );
+		$property->setDescription( $languageCode, $formData[ self::FIELD_DESCRIPTION ] );
 
-		$fingerprint->setAliasGroup( $languageCode, $formData[ self::FIELD_ALIASES ] );
+		$property->setAliases( $languageCode, $formData[ self::FIELD_ALIASES ] );
 
 		return $property;
 	}
@@ -183,9 +182,9 @@ class SpecialNewProperty extends SpecialNewEntity {
 		$summary = new Summary( 'wbeditentity', 'create' );
 		$summary->setLanguage( $uiLanguageCode );
 		/** @var Term|null $labelTerm */
-		$labelTerm = $property->getFingerprint()->getLabels()->getIterator()->current();
+		$labelTerm = $property->getLabels()->getIterator()->current();
 		/** @var Term|null $descriptionTerm */
-		$descriptionTerm = $property->getFingerprint()->getDescriptions()->getIterator()->current();
+		$descriptionTerm = $property->getDescriptions()->getIterator()->current();
 		$summary->addAutoSummaryArgs(
 			$labelTerm ? $labelTerm->getText() : '',
 			$descriptionTerm ? $descriptionTerm->getText() : ''
