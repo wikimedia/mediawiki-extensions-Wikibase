@@ -8,7 +8,6 @@ use Wikibase\ChangeOp\ChangeOpDescription;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Summary;
 
 /**
@@ -57,14 +56,14 @@ class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testApply( ChangeOp $changeOpDescription, $expectedDescription ) {
 		$entity = $this->provideNewEntity();
-		$entity->getFingerprint()->setDescription( 'en', 'INVALID' );
+		$entity->setDescription( 'en', 'INVALID' );
 
 		$changeOpDescription->apply( $entity );
 
 		if ( $expectedDescription === '' ) {
-			$this->assertFalse( $entity->getFingerprint()->hasDescription( 'en' ) );
+			$this->assertFalse( $entity->getDescriptions()->hasTermForLanguage( 'en' ) );
 		} else {
-			$this->assertEquals( $expectedDescription, $entity->getFingerprint()->getDescription( 'en' )->getText() );
+			$this->assertEquals( $expectedDescription, $entity->getDescriptions()->getByLanguage( 'en' )->getText() );
 		}
 	}
 
@@ -91,18 +90,18 @@ class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
 	public function testValidate( ChangeOp $changeOp, $valid ) {
 		$entity = $this->provideNewEntity();
 
-		$oldDescriptions = $entity->getFingerprint()->getDescriptions()->toTextArray();
+		$oldDescriptions = $entity->getDescriptions()->toTextArray();
 
 		$result = $changeOp->validate( $entity );
 		$this->assertEquals( $valid, $result->isValid(), 'isValid()' );
 
 		// descriptions should not have changed during validation
-		$newDescriptions = $entity->getFingerprint()->getDescriptions()->toTextArray();
+		$newDescriptions = $entity->getDescriptions()->toTextArray();
 		$this->assertEquals( $oldDescriptions, $newDescriptions, 'Descriptions modified by validation!' );
 	}
 
 	/**
-	 * @return EntityDocument|FingerprintProvider
+	 * @return Item
 	 */
 	private function provideNewEntity() {
 		$item = new Item( new ItemId( 'Q23' ) );
@@ -119,11 +118,11 @@ class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
 		$args = array();
 
 		$entity = $this->provideNewEntity();
-		$entity->getFingerprint()->setDescription( 'de', 'Test' );
+		$entity->setDescription( 'de', 'Test' );
 		$args[] = array( $entity, new ChangeOpDescription( 'de', 'Zusammenfassung', $validatorFactory ), 'set', 'de' );
 
 		$entity = $this->provideNewEntity();
-		$entity->getFingerprint()->setDescription( 'de', 'Test' );
+		$entity->setDescription( 'de', 'Test' );
 		$args[] = array( $entity, new ChangeOpDescription( 'de', null, $validatorFactory ), 'remove', 'de' );
 
 		$entity = $this->provideNewEntity();

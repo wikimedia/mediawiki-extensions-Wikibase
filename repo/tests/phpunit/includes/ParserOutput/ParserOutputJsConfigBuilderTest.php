@@ -17,7 +17,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementListProvider;
-use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
 
 /**
@@ -112,9 +112,10 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 		);
 	}
 
-	private function addLabels( FingerprintProvider $fingerprintProvider ) {
-		$fingerprintProvider->getFingerprint()->setLabel( 'en', 'Cake' );
-		$fingerprintProvider->getFingerprint()->setLabel( 'de', 'Kuchen' );
+	private function addLabels( LabelsProvider $entity ) {
+		$termList = $entity->getLabels();
+		$termList->setTextForLanguage( 'en', 'Cake' );
+		$termList->setTextForLanguage( 'de', 'Kuchen' );
 	}
 
 	private function addStatements( StatementListProvider $statementListProvider ) {
