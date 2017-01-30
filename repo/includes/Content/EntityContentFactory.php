@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\Content;
 
 use InvalidArgumentException;
+use MediaWiki\Interwiki\InterwikiLookup;
+use MediaWiki\MediaWikiServices;
 use MWException;
 use OutOfBoundsException;
 use Status;
@@ -41,6 +43,11 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup, En
 	private $entityHandlerFactoryCallbacks;
 
 	/**
+	 * @var InterwikiLookup
+	 */
+	private $interwikiLookup;
+
+	/**
 	 * @var EntityHandler[] Entity type ID to entity handler mapping.
 	 */
 	private $entityHandlers = array();
@@ -56,6 +63,7 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup, En
 
 		$this->entityContentModels = $entityContentModels;
 		$this->entityHandlerFactoryCallbacks = $entityHandlerFactoryCallbacks;
+		$this->interwikiLookup = MediaWikiServices::getInstance()->getInterwikiLookup();
 	}
 
 	/**
@@ -95,18 +103,20 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup, En
 	 */
 	public function getTitleForId( EntityId $id ) {
 		if ( $id->isForeign() ) {
-			$pageName = 'EntityPage/' . $id->getLocalPart();
-
 			// TODO: The interwiki prefix *should* be the same as the repo name,
 			//        but we have no way to know or guarantee this! See T153496.
 			$interwiki = $id->getRepositoryName();
 
-			// TODO: use a TitleFactory
-			return Title::makeTitle( NS_SPECIAL, $pageName, '', $interwiki );
-		} else {
-			$handler = $this->getContentHandlerForType( $id->getEntityType() );
-			return $handler->getTitleForId( $id );
+			if ( $this->interwikiLookup->isValidInterwiki( $interwiki ) ) {
+				$pageName = 'EntityPage/' . $id->getLocalPart();
+
+				// TODO: use a TitleFactory
+				return Title::makeTitle( NS_SPECIAL, $pageName, '', $interwiki );
+			}
 		}
+
+		$handler = $this->getContentHandlerForType( $id->getEntityType() );
+		return $handler->getTitleForId( $id );
 	}
 
 	/**
