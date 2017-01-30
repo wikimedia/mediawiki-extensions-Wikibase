@@ -142,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_07ec1af1",
+        "filename": "repo/tests/phpunit/includes/ChangeOpDeserialization/ChangeOpDeserializationTestHelper.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-30T15:48:16Z",
+      "side": 1,
+      "message": "1. I maybe would agree to merge if it were localized somewhere in the test case, but here it is separate class that, as I guess, supposed to be reused, and I am strongly against this reuse.\n\n2. If we are going to refactor it then it is even more important to have correct mock in place so we won\u0027t have false impression of safety.\n\n3. Test is nice to read, but when someone will look at it he/she will get impression that it throws RuntimeException with error code in the message, which is false. For example, tests is the first place where I look to get understanding of how class should be used, what it does and usage examples.\n\nGiven those points, I don\u0027t think this code should be merged as it is.",
+      "parentUuid": "2ef897d1_a37d3b19",
+      "range": {
+        "startLine": 42,
+        "startChar": 15,
+        "endLine": 42,
+        "endChar": 31
+      },
+      "revId": "6833452c93e41a75a5f670af25bfb65ce4f5af4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_de093731",
         "filename": "repo/tests/phpunit/includes/ChangeOpDeserialization/TermChangeOpSerializationValidatorTest.php",
         "patchSetId": 7
