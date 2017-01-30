@@ -238,7 +238,22 @@ call_user_func( function() {
 	$wgAPIModules['wbremovequalifiers'] = Wikibase\Repo\Api\RemoveQualifiers::class;
 	$wgAPIModules['wbsetqualifier'] = Wikibase\Repo\Api\SetQualifier::class;
 	$wgAPIModules['wbmergeitems'] = Wikibase\Repo\Api\MergeItems::class;
-	$wgAPIModules['wbformatvalue'] = Wikibase\Repo\Api\FormatSnakValue::class;
+	$wgAPIModules['wbformatvalue'] = [
+		'class' => Wikibase\Repo\Api\FormatSnakValue::class,
+		'factory' => function( ApiMain $mainModule, $moduleName ) {
+			$wikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+			$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
+
+			return new Wikibase\Repo\Api\FormatSnakValue(
+				$mainModule,
+				$moduleName,
+				$wikibaseRepo->getValueFormatterFactory(),
+				$wikibaseRepo->getSnakFormatterFactory(),
+				$wikibaseRepo->getDataValueFactory(),
+				$apiHelperFactory->getErrorReporter( $mainModule )
+			);
+		}
+	];
 	$wgAPIModules['wbparsevalue'] = [
 		'class' => Wikibase\Repo\Api\ParseValue::class,
 		'factory' => function( ApiMain $mainModule, $moduleName ) {

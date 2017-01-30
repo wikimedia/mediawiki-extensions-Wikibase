@@ -52,32 +52,25 @@ class FormatSnakValue extends ApiBase {
 	private $errorReporter;
 
 	/**
+	 * @see ApiBase::__construct
+	 *
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
-	 * @param string $modulePrefix
-	 *
-	 * @see ApiBase::__construct
+	 * @param OutputFormatValueFormatterFactory $valueFormatterFactory
+	 * @param OutputFormatSnakFormatterFactory $snakFormatterFactory
+	 * @param DataValueFactory $dataValueFactory
+	 * @param ApiErrorReporter $apiErrorReporter
 	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
-
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
-
-		$this->setServices(
-			$wikibaseRepo->getValueFormatterFactory(),
-			$wikibaseRepo->getSnakFormatterFactory(),
-			$wikibaseRepo->getDataValueFactory(),
-			$apiHelperFactory->getErrorReporter( $this )
-		);
-	}
-
-	public function setServices(
+	public function __construct(
+		ApiMain $mainModule,
+		$moduleName,
 		OutputFormatValueFormatterFactory $valueFormatterFactory,
 		OutputFormatSnakFormatterFactory $snakFormatterFactory,
 		DataValueFactory $dataValueFactory,
 		ApiErrorReporter $apiErrorReporter
 	) {
+		parent::__construct( $mainModule, $moduleName );
+
 		$this->valueFormatterFactory = $valueFormatterFactory;
 		$this->snakFormatterFactory = $snakFormatterFactory;
 		$this->dataValueFactory = $dataValueFactory;
