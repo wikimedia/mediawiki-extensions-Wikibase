@@ -8,11 +8,6 @@ use Wikibase\DataModel\Entity\EntityDocument;
 
 /**
  * @license GPL-2.0+
- * @author H. Snater < mediawiki at snater.com >
- * @author Daniel Werner
- * @author Daniel Kinzler
- * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Addshore
  */
 class ParserOutputJsConfigBuilder {
 

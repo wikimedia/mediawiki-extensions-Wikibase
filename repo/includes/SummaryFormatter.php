@@ -19,10 +19,6 @@ use Wikibase\Lib\SnakFormatter;
  * Formatter for Summary objects
  *
  * @license GPL-2.0+
- * @author John Erling Blad
- * @author Daniel Kinzler
- * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
- * @author Addshore
  */
 class SummaryFormatter {
 

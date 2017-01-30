@@ -25,10 +25,6 @@ use Wikibase\Store\EntityIdLookup;
  * @group Wikibase
  *
  * @license GPL-2.0+
- * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Daniel Kinzler
- * @author Marius Hoch < hoo@online.de >
- * @author Thiemo Mättig
  */
 class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 

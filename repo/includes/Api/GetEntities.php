@@ -22,11 +22,6 @@ use Wikibase\StringNormalizer;
  * API module to get the data for one or more Wikibase entities.
  *
  * @license GPL-2.0+
- * @author John Erling Blad < jeblad@gmail.com >
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Marius Hoch < hoo@online.de >
- * @author Michał Łazowik
- * @author Addshore
  */
 class GetEntities extends ApiBase {
 

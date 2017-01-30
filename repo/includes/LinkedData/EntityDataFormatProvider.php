@@ -12,10 +12,6 @@ use Wikimedia\Purtle\RdfWriterFactory;
  * Service for getting information about supported data formats.
  *
  * @license GPL-2.0+
- * @author Daniel Kinzler
- * @author Thomas Pellissier Tanon
- * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >
- * @author Marius Hoch < hoo@online.de >
  */
 class EntityDataFormatProvider {
 

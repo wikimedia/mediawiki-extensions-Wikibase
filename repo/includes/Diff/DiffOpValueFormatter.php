@@ -8,10 +8,6 @@ use Html;
  * Class for generating diff rows for a given set of old and new values.
  *
  * @license GPL-2.0+
- * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
- * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Daniel Kinzler
- * @author Thiemo Mättig
  */
 class DiffOpValueFormatter {
 

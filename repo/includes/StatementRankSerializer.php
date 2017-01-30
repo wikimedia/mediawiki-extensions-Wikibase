@@ -14,10 +14,6 @@ use Wikibase\DataModel\Statement\Statement;
  * @todo this could be moved to DataModelSerialization (in some form)
  *
  * @license GPL-2.0+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Daniel Kinzler
- * @author Addshore
- * @author Thiemo Mättig
  */
 class StatementRankSerializer implements Serializer, Deserializer {
 

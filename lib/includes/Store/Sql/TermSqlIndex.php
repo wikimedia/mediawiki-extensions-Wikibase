@@ -25,11 +25,6 @@ use Wikibase\Lib\Store\TermIndexSearchCriteria;
  * Term lookup cache.
  *
  * @license GPL-2.0+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Jens Ohlig < jens.ohlig@wikimedia.de >
- * @author Daniel Kinzler
- * @author Denny
- * @author Thiemo Mättig
  */
 class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinder {
 

@@ -17,11 +17,6 @@ use Wikibase\View\Template\TemplateFactory;
  * @todo move Statement-specific formatting elsewhere.
  *
  * @license GPL-2.0+
- * @author H. Snater < mediawiki@snater.com >
- * @author Pragunbhutani
- * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Daniel Kinzler
- * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class ClaimHtmlGenerator {
 

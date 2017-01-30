@@ -36,11 +36,6 @@ use Wikibase\Summary;
  * site and page title.
  *
  * @license GPL-2.0+
- * @author John Erling Blad < jeblad@gmail.com >
- * @author Daniel Kinzler
- * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
- * @author Addshore
- * @author Michał Łazowik
  */
 class EditEntity extends ModifyEntity {
 

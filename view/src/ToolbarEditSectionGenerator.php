@@ -11,10 +11,6 @@ use Wikibase\View\Template\TemplateFactory;
  * Generates HTML for a section edit link
  *
  * @license GPL-2.0+
- * @author H. Snater < mediawiki@snater.com >
- * @author Daniel Werner
- * @author Daniel Kinzler
- * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class ToolbarEditSectionGenerator implements EditSectionGenerator {
 

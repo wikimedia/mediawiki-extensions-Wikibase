@@ -13,11 +13,6 @@ use Wikibase\View\Template\TemplateFactory;
  * For the Wikibase\DataModel\Entity\EntityDocument this basically is what the Parser is for WikitextContent.
  *
  * @license GPL-2.0+
- * @author H. Snater < mediawiki at snater.com >
- * @author Daniel Werner
- * @author Daniel Kinzler
- * @author Bene* < benestar.wikimedia@gmail.com >
- * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 abstract class EntityView {
 

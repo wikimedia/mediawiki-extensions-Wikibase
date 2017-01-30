@@ -8,10 +8,6 @@ use SiteLookup;
 
 /**
  * @license GPL-2.0+
- * @author Daniel K
- * @author Addshore
- * @author Marius Hoch < hoo@online.de >
- * @author Thiemo Mättig
  */
 class SiteLinkTargetProvider {
 

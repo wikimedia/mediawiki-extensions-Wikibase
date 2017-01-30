@@ -19,10 +19,6 @@ use Wikibase\Repo\WikibaseRepo;
  * Requires API write mode to be enabled.
  *
  * @license GPL-2.0+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author John Erling Blad < jeblad@gmail.com >
- * @author Marius Hoch < hoo@online.de >
- * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class SetAliases extends ModifyEntity {
 
