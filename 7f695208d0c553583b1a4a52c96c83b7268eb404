@@ -22,6 +22,30 @@
       "revId": "7f695208d0c553583b1a4a52c96c83b7268eb404",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_b2f10795",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-30T08:19:25Z",
+      "side": 1,
+      "message": "the other _way_ round, I meant.",
+      "parentUuid": "2ef897d1_32de3715",
+      "range": {
+        "startLine": 37,
+        "startChar": 17,
+        "endLine": 37,
+        "endChar": 96
+      },
+      "revId": "7f695208d0c553583b1a4a52c96c83b7268eb404",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
