@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "2ef897d1_c7a60250",
+        "filename": "repo/includes/Search/Elastic/Fields/AllLabelsField.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2017-01-30T16:50:20Z",
+      "side": 1,
+      "message": "might be worth adding \"by the copy_to property of individual fields\"",
+      "revId": "7a8a68c998ca3bd54408213e7a9df532dbeabaee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_0759ba90",
         "filename": "repo/includes/Search/Elastic/Fields/LabelsField.php",
         "patchSetId": 5
