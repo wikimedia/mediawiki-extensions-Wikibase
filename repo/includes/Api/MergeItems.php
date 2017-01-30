@@ -47,32 +47,25 @@ class MergeItems extends ApiBase {
 	private $resultBuilder;
 
 	/**
+	 * @see ApiBase::__construct
+	 *
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
-	 * @param string $modulePrefix
-	 *
-	 * @see ApiBase::__construct
+	 * @param EntityIdParser $idParser
+	 * @param ApiErrorReporter $errorReporter
+	 * @param ResultBuilder $resultBuilder
+	 * @param ItemMergeInteractor $interactor
 	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
-
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
-
-		$this->setServices(
-			$wikibaseRepo->getEntityIdParser(),
-			$apiHelperFactory->getErrorReporter( $this ),
-			$apiHelperFactory->getResultBuilder( $this ),
-			$wikibaseRepo->newItemMergeInteractor( $this->getContext() )
-		);
-	}
-
-	public function setServices(
+	public function __construct(
+		ApiMain $mainModule,
+		$moduleName,
 		EntityIdParser $idParser,
 		ApiErrorReporter $errorReporter,
 		ResultBuilder $resultBuilder,
 		ItemMergeInteractor $interactor
 	) {
+		parent::__construct( $mainModule, $moduleName );
+
 		$this->idParser = $idParser;
 		$this->errorReporter = $errorReporter;
 		$this->resultBuilder = $resultBuilder;
