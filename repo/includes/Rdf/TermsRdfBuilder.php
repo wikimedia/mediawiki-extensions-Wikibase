@@ -3,9 +3,11 @@
 namespace Wikibase\Rdf;
 
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Term\DescriptionsProvider;
+use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\TermList;
 use Wikimedia\Purtle\RdfWriter;
 
@@ -111,15 +113,18 @@ class TermsRdfBuilder implements EntityRdfBuilder {
 	 * @param EntityDocument $entity the entity to output.
 	 */
 	public function addEntity( EntityDocument $entity ) {
-		if ( $entity instanceof FingerprintProvider ) {
-			$fingerprint = $entity->getFingerprint();
+		$entityLName = $this->vocabulary->getEntityLName( $entity->getId() );
 
-			/** @var EntityDocument $entity */
-			$entityLName = $this->vocabulary->getEntityLName( $entity->getId() );
+		if ( $entity instanceof LabelsProvider ) {
+			$this->addLabels( $entityLName, $entity->getLabels() );
+		}
 
-			$this->addLabels( $entityLName, $fingerprint->getLabels() );
-			$this->addDescriptions( $entityLName, $fingerprint->getDescriptions() );
-			$this->addAliases( $entityLName, $fingerprint->getAliasGroups() );
+		if ( $entity instanceof DescriptionsProvider ) {
+			$this->addDescriptions( $entityLName, $entity->getDescriptions() );
+		}
+
+		if ( $entity instanceof AliasesProvider ) {
+			$this->addAliases( $entityLName, $entity->getAliasGroups() );
 		}
 	}
 
