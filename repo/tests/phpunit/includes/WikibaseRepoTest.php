@@ -441,13 +441,11 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	 * @return WikibaseRepo
 	 */
 	private function getWikibaseRepo( $entityTypeDefinitions = array() ) {
-		$language = Language::factory( 'qqx' );
 		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
 		return new WikibaseRepo(
 			$settings,
 			new DataTypeDefinitions( array() ),
-			new EntityTypeDefinitions( $entityTypeDefinitions ),
-			$language
+			new EntityTypeDefinitions( $entityTypeDefinitions )
 		);
 	}
 

@@ -70,8 +70,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		return new WikibaseRepo(
 			new SettingsArray( $repoSettings ),
 			new DataTypeDefinitions( array() ),
-			new EntityTypeDefinitions( require __DIR__ . '/../../../../../lib/WikibaseLib.entitytypes.php' ),
-			Language::factory( 'qqq' )
+			new EntityTypeDefinitions( require __DIR__ . '/../../../../../lib/WikibaseLib.entitytypes.php' )
 		);
 	}
 
