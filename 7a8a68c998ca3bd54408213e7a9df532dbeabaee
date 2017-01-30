@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_0759ba90",
+        "filename": "repo/includes/Search/Elastic/Fields/LabelsField.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-01-30T16:37:57Z",
+      "side": 1,
+      "message": "I don\u0027t see where you populate aliases.\nShould it be done here?",
+      "revId": "7a8a68c998ca3bd54408213e7a9df532dbeabaee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_c7e16299",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Fields/LabelsFieldTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-01-30T16:37:57Z",
+      "side": 1,
+      "message": "indent",
+      "revId": "7a8a68c998ca3bd54408213e7a9df532dbeabaee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
