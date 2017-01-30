@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_2d06dad1",
+        "filename": "repo/tests/phpunit/includes/Content/EntityHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-30T10:01:56Z",
+      "side": 1,
+      "message": "I am not familiar with those tests but it looks like it might need some further refactoring if we want to use this base class for tests for other entity types.\nBut the current change is definitely a step in the right direction!",
+      "revId": "f151a8ae58fbb1615d2cb75a024a95e70ca22618",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
