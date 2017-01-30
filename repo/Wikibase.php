@@ -418,11 +418,11 @@ call_user_func( function() {
 	$wgSpecialPages['ListProperties'] = function () {
 		global $wgContLang;
 		$wikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
-		$bufferingTermLookup = $wikibaseRepo->getBufferingTermLookup();
+		$prefetchingTermLookup = $wikibaseRepo->getPrefetchingTermLookup();
 		$languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
 		$fallbackMode = Wikibase\LanguageFallbackChainFactory::FALLBACK_ALL;
 		$labelDescriptionLookup = new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
-			$bufferingTermLookup,
+			$prefetchingTermLookup,
 			$languageFallbackChainFactory->newFromLanguage( $wgContLang, $fallbackMode )
 		);
 		$entityIdFormatter = $wikibaseRepo->getEntityIdHtmlLinkFormatterFactory()
@@ -433,7 +433,7 @@ call_user_func( function() {
 			$labelDescriptionLookup,
 			$entityIdFormatter,
 			$wikibaseRepo->getEntityTitleLookup(),
-			$bufferingTermLookup
+			$prefetchingTermLookup
 		);
 	};
 	$wgSpecialPages['DispatchStats'] = Wikibase\Repo\Specials\SpecialDispatchStats::class;
