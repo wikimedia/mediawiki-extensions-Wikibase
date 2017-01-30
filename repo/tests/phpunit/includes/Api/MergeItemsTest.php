@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
+use ApiMain;
+use FauxRequest;
 use HashSiteStore;
-use Language;
-use RequestContext;
 use Status;
 use TestSites;
 use Title;
@@ -18,7 +18,6 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
-use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\MergeItems;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
@@ -139,20 +138,21 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param MergeItems $module
 	 * @param EntityRedirect|null $expectedRedirect
+	 * @param string[] $params
+	 * @return MergeItems
 	 */
-	private function overrideServices( MergeItems $module, EntityRedirect $expectedRedirect = null ) {
+	private function getApiModule( EntityRedirect $expectedRedirect = null, array $params ) {
+		global $wgUser;
+
+		if ( !isset( $params['token'] ) ) {
+			$params['token'] = $wgUser->getToken();
+		}
+
+		$request = new FauxRequest( $params, true );
+		$main = new ApiMain( $request );
+
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$errorReporter = new ApiErrorReporter(
-			$module,
-			$wikibaseRepo->getExceptionLocalizer(),
-			Language::factory( 'en' )
-		);
-
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( new RequestContext() );
-
-		$resultBuilder = $apiHelperFactory->getResultBuilder( $module );
 
 		$changeOpsFactoryProvider = new ChangeOpFactoryProvider(
 			$this->getConstraintProvider(),
@@ -164,17 +164,17 @@ class MergeItemsTest extends \MediaWikiTestCase {
 			new HashSiteStore( TestSites::getSites() )
 		);
 
-		$module->setServices(
+		return new MergeItems(
+			$main,
+			$params,
 			new ItemIdParser(),
-			$errorReporter,
-			$resultBuilder,
 			new ItemMergeInteractor(
 				$changeOpsFactoryProvider->getMergeChangeOpFactory(),
 				$this->mockRepository,
 				$this->mockRepository,
 				$this->getPermissionCheckers(),
 				$wikibaseRepo->getSummaryFormatter(),
-				$module->getUser(),
+				$main->getUser(),
 				$this->getMockRedirectCreationInteractor( $expectedRedirect ),
 				$this->getEntityTitleLookup()
 			)
@@ -232,8 +232,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	}
 
 	private function callApiModule( $params, EntityRedirect $expectedRedirect = null ) {
-		$module = $this->apiModuleTestHelper->newApiModule( MergeItems::class, 'wbmergeitems', $params );
-		$this->overrideServices( $module, $expectedRedirect );
+		$module = $this->getApiModule( $expectedRedirect, $params );
 
 		$module->execute();
 
@@ -437,14 +436,18 @@ class MergeItemsTest extends \MediaWikiTestCase {
 				) )
 			),
 			array( //8 bad ignoreconficts
-				'p' => array( 'fromid' => 'Q2', 'toid' => 'Q2', 'ignoreconflicts' => 'foo' ),
+				'p' => array( 'fromid' => 'Q2', 'toid' => 'Q2', 'ignoreconflicts' => [ 'foo' ] ),
 				'e' => array( 'exception' => array(
 					'type' => ApiUsageException::class,
 					'code' => 'invalid-entity-id'
 				) )
 			),
 			array( //9 bad ignoreconficts
-				'p' => array( 'fromid' => 'Q2', 'toid' => 'Q2', 'ignoreconflicts' => 'label|foo' ),
+				'p' => [
+					'fromid' => 'Q2',
+					'toid' => 'Q2',
+					'ignoreconflicts' => [ 'label', 'foo' ]
+				],
 				'e' => array( 'exception' => array(
 					'type' => ApiUsageException::class,
 					'code' => 'invalid-entity-id'
