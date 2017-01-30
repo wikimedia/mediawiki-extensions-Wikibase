@@ -294,7 +294,23 @@ call_user_func( function() {
 			);
 		}
 	];
-	$wgAPIModules['wbmergeitems'] = Wikibase\Repo\Api\MergeItems::class;
+	$wgAPIModules['wbmergeitems'] = [
+		'class' => Wikibase\Repo\Api\MergeItems::class,
+		'factory' => function( ApiMain $mainModule, $moduleName ) {
+			$wikibaseRepo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+			$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
+
+			return new Wikibase\Repo\Api\MergeItems(
+				$mainModule,
+				$moduleName,
+				$wikibaseRepo->getEntityIdParser(),
+				$wikibaseRepo->newItemMergeInteractor( $mainModule->getContext() ),
+				function ( $module ) use ( $apiHelperFactory ) {
+					return $apiHelperFactory->getErrorReporter( $module );
+				}
+			);
+		}
+	];
 	$wgAPIModules['wbformatvalue'] = [
 		'class' => Wikibase\Repo\Api\FormatSnakValue::class,
 		'factory' => function( ApiMain $mainModule, $moduleName ) {
