@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Diff;
 
+use Content;
 use DerivativeContext;
 use Language;
 use RequestContext;
@@ -29,23 +30,28 @@ class EntityContentDiffViewTest extends \MediaWikiTestCase {
 		$this->assertTrue( true );
 	}
 
-	public function testDiffingEmptyContent() {
-		$emptyItem = new Item( new ItemId( 'Q1' ) );
-		$emptyContent = ItemContent::newFromItem( $emptyItem );
-
-		$html = $this->newDiffView()->generateContentDiffBody( $emptyContent, $emptyContent );
-
+	/**
+	 * @dataProvider provideEmptyDiffs
+	 */
+	public function testEmptyDiffs( Content $oldContent, Content $newContent ) {
+		$html = $this->newDiffView()->generateContentDiffBody( $oldContent, $newContent );
 		$this->assertSame( '', $html );
 	}
 
-	public function testDiffingSameContent() {
+	public function provideEmptyDiffs() {
 		$item = new Item( new ItemId( 'Q1' ) );
+		$emptyContent1 = ItemContent::newFromItem( clone $item );
+		$emptyContent2 = ItemContent::newFromItem( clone $item );
+
 		$item->setLabel( 'en', 'Not empty any more' );
-		$itemContent = ItemContent::newFromItem( $item );
+		$itemContent1 = ItemContent::newFromItem( clone $item );
+		$itemContent2 = ItemContent::newFromItem( clone $item );
 
-		$html = $this->newDiffView()->generateContentDiffBody( $itemContent, $itemContent );
-
-		$this->assertSame( '', $html );
+		return [
+			'same object' => [ $itemContent1, $itemContent1 ],
+			'empty objects' => [ $emptyContent1, $emptyContent2 ],
+			'two non-empty equal objects' => [ $itemContent1, $itemContent2 ],
+		];
 	}
 
 	public function itemProvider() {
