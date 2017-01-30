@@ -141,7 +141,7 @@ class EntityChangeFactory {
 	 *
 	 * @fixme Implement T113468 and remove this.
 	 *
-	 * @param EntityDocument $entity
+	 * @param EntityDocument|null $entity
 	 */
 	private function minimizeEntityForDiffing( EntityDocument $entity = null ) {
 		if ( $entity instanceof StatementListHolder ) {
