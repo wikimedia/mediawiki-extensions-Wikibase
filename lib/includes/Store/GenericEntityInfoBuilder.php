@@ -2,13 +2,15 @@
 
 namespace Wikibase\Lib\Store;
 
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Term\DescriptionsProvider;
+use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\TermList;
 
 /**
@@ -175,20 +177,20 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 			// FIXME: OCP violation
 			// This code does not allow extensions that define new entity types with
 			// new types of terms to register appropriate support for those here.
-			if ( $entity instanceof FingerprintProvider ) {
-				$this->injectFingerprint( $types, $entityRecord, $entity->getFingerprint(), $languages );
-			}
+			$this->injectTerms( $types, $entityRecord, $entity, $languages );
 		}
 	}
 
-	private function injectFingerprint(
+	private function injectTerms(
 		array $types = null,
 		array &$entityRecord,
-		Fingerprint $fingerprint,
+		EntityDocument $entity,
 		array $languages = null
 	) {
-		if ( $types === null || in_array( 'label', $types ) ) {
-			$labels = $fingerprint->getLabels();
+		if ( $entity instanceof LabelsProvider
+			&& ( $types === null || in_array( 'label', $types ) )
+		) {
+			$labels = $entity->getLabels();
 
 			if ( $languages !== null ) {
 				$labels = $labels->getWithLanguages( $languages );
@@ -197,8 +199,10 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 			$this->injectLabels( $entityRecord, $labels );
 		}
 
-		if ( $types === null || in_array( 'description', $types ) ) {
-			$descriptions = $fingerprint->getDescriptions();
+		if ( $entity instanceof DescriptionsProvider
+			&& ( $types === null || in_array( 'description', $types ) )
+		) {
+			$descriptions = $entity->getDescriptions();
 
 			if ( $languages !== null ) {
 				$descriptions = $descriptions->getWithLanguages( $languages );
@@ -207,8 +211,10 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 			$this->injectDescriptions( $entityRecord, $descriptions );
 		}
 
-		if ( $types === null || in_array( 'alias', $types ) ) {
-			$aliases = $fingerprint->getAliasGroups();
+		if ( $entity instanceof AliasesProvider
+			&& ( $types === null || in_array( 'alias', $types ) )
+		) {
+			$aliases = $entity->getAliasGroups();
 
 			if ( $languages !== null ) {
 				$aliases = $aliases->getWithLanguages( $languages );
