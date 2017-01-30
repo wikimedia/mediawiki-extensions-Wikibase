@@ -166,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_278b9622",
+        "filename": "repo/tests/phpunit/includes/ChangeOpDeserialization/ChangeOpDeserializationTestHelper.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-30T15:55:20Z",
+      "side": 1,
+      "message": "And to simplify assertion of ApiUsageException custom \nassertion method can be created. Like:\n```\npublic function assertApiUsageExceptionWithCodeIsThrown( \n    $expectedCode, \n    callable $callback \n) {\n\t/** @var ApiUsageException $exception */\n\t$exception \u003d null;\n\ttry {\n\t\t$callback();\n\t} catch (\\Exception $e) {\n\t\t$exception \u003d $e;\n\t}\n\t$this-\u003eassertInstanceOf(ApiUsageException::class, $exception);\n\t$this-\u003eassertEqual($expectedCode, $exception-\u003egetCodeString())\n}\n```",
+      "parentUuid": "2ef897d1_07ec1af1",
+      "range": {
+        "startLine": 42,
+        "startChar": 15,
+        "endLine": 42,
+        "endChar": 31
+      },
+      "revId": "6833452c93e41a75a5f670af25bfb65ce4f5af4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_de093731",
         "filename": "repo/tests/phpunit/includes/ChangeOpDeserialization/TermChangeOpSerializationValidatorTest.php",
         "patchSetId": 7
