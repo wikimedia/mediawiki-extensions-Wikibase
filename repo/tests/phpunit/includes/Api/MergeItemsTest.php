@@ -2,24 +2,30 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
+use ApiMain;
+use ApiUsageException;
+use FauxRequest;
 use HashSiteStore;
 use Language;
-use RequestContext;
+use SiteLookup;
 use Status;
 use TestSites;
 use Title;
-use ApiUsageException;
 use User;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Serializers\ItemSerializer;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\MergeItems;
+use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -139,20 +145,21 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param MergeItems $module
+	 * @param string[] $params
 	 * @param EntityRedirect|null $expectedRedirect
+	 * @return MergeItems
 	 */
-	private function overrideServices( MergeItems $module, EntityRedirect $expectedRedirect = null ) {
+	private function newMergeItemsApiModule( array $params, EntityRedirect $expectedRedirect = null ) {
+		global $wgUser;
+
+		if ( !isset( $params['token'] ) ) {
+			$params['token'] = $wgUser->getToken();
+		}
+
+		$request = new FauxRequest( $params, true );
+		$main = new ApiMain( $request );
+
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$errorReporter = new ApiErrorReporter(
-			$module,
-			$wikibaseRepo->getExceptionLocalizer(),
-			Language::factory( 'en' )
-		);
-
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( new RequestContext() );
-
-		$resultBuilder = $apiHelperFactory->getResultBuilder( $module );
 
 		$changeOpsFactoryProvider = new ChangeOpFactoryProvider(
 			$this->getConstraintProvider(),
@@ -164,20 +171,39 @@ class MergeItemsTest extends \MediaWikiTestCase {
 			new HashSiteStore( TestSites::getSites() )
 		);
 
-		$module->setServices(
+		$apiResultBuilder = new ResultBuilder(
+			$main->getResult(),
+			$this->getEntityTitleLookup(),
+			$this->getMockBuilder( SerializerFactory::class )
+				->disableOriginalConstructor()
+				->getMock(),
+			$this->getMockBuilder( ItemSerializer::class )->disableOriginalConstructor()->getMock(),
+			$this->getMock( SiteLookup::class ),
+			$this->getMock( PropertyDataTypeLookup::class )
+		);
+		$errorReporter = new ApiErrorReporter(
+			$main,
+			$wikibaseRepo->getExceptionLocalizer(),
+			Language::factory( 'en' )
+		);
+		return new MergeItems(
+			$main,
+			'wbmergeitems',
 			new ItemIdParser(),
-			$errorReporter,
-			$resultBuilder,
 			new ItemMergeInteractor(
 				$changeOpsFactoryProvider->getMergeChangeOpFactory(),
 				$this->mockRepository,
 				$this->mockRepository,
 				$this->getPermissionCheckers(),
 				$wikibaseRepo->getSummaryFormatter(),
-				$module->getUser(),
+				$main->getUser(),
 				$this->getMockRedirectCreationInteractor( $expectedRedirect ),
 				$this->getEntityTitleLookup()
-			)
+			),
+			$errorReporter,
+			function ( $module ) use ( $apiResultBuilder ) {
+				return $apiResultBuilder;
+			}
 		);
 	}
 
@@ -232,8 +258,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	}
 
 	private function callApiModule( $params, EntityRedirect $expectedRedirect = null ) {
-		$module = $this->apiModuleTestHelper->newApiModule( MergeItems::class, 'wbmergeitems', $params );
-		$this->overrideServices( $module, $expectedRedirect );
+		$module = $this->newMergeItemsApiModule( $params, $expectedRedirect );
 
 		$module->execute();
 
