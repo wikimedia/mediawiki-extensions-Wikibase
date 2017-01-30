@@ -13,7 +13,8 @@
 			"Patio",
 			"SPQRobin",
 			"McDutchie",
-			"Mbch331"
+			"Mbch331",
+			"Xxmarijnw"
 		]
 	},
 	"wikibase-client-desc": "Client voor de uitbreiding Wikibase",
@@ -73,6 +74,7 @@
 	"wikibase-pageswithbadges-badge": "Badge:",
 	"wikibase-pageswithbadges-submit": "Pagina's weergeven",
 	"entityusage": "Entiteitsgebruik",
+	"entityusage-summary": "Deze pagina creëert een lijst van pagina's die gebruikmaken van de gegeven entiteit (bijvoorbeeld Q42). De lijst is gesorteerd op aflopend pagina-ID, zodat de nieuwere pagina's als eerste worden weergegeven.",
 	"wikibase-entityusage-entity": "Entiteit:",
 	"wikibase-entityusage-submit": "Pagina's weergeven",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} item-ID",
