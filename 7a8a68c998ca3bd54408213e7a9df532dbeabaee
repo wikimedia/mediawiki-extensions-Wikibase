@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "2ef897d1_0711ba5f",
+        "filename": "repo/includes/Content/EntityHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 792,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-30T17:19:12Z",
+      "side": 1,
+      "message": "Would be nice to have more information about the type:\n* Array of items of what type?\n* Mention that array is associative.",
+      "range": {
+        "startLine": 792,
+        "startChar": 12,
+        "endLine": 792,
+        "endChar": 38
+      },
+      "revId": "7a8a68c998ca3bd54408213e7a9df532dbeabaee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_072ada8f",
+        "filename": "repo/includes/Content/EntityHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-30T17:19:12Z",
+      "side": 1,
+      "message": "Is `!\u003d` intentional? May be `!\u003d\u003d`?",
+      "range": {
+        "startLine": 805,
+        "startChar": 36,
+        "endLine": 805,
+        "endChar": 38
+      },
+      "revId": "7a8a68c998ca3bd54408213e7a9df532dbeabaee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_c7a60250",
         "filename": "repo/includes/Search/Elastic/Fields/AllLabelsField.php",
         "patchSetId": 5
@@ -19,6 +65,52 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_e70d7e42",
+        "filename": "repo/includes/Search/Elastic/Fields/LabelsField.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-30T17:19:12Z",
+      "side": 1,
+      "message": "Is it `string[]`?",
+      "range": {
+        "startLine": 16,
+        "startChar": 9,
+        "endLine": 16,
+        "endChar": 14
+      },
+      "revId": "7a8a68c998ca3bd54408213e7a9df532dbeabaee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_c70a8229",
+        "filename": "repo/includes/Search/Elastic/Fields/LabelsField.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-30T17:19:12Z",
+      "side": 1,
+      "message": "What is the type?\nWould be nice to have description of expected structure or point to documentation which describes this structure.",
+      "range": {
+        "startLine": 27,
+        "startChar": 12,
+        "endLine": 27,
+        "endChar": 17
+      },
+      "revId": "7a8a68c998ca3bd54408213e7a9df532dbeabaee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_0759ba90",
         "filename": "repo/includes/Search/Elastic/Fields/LabelsField.php",
         "patchSetId": 5
@@ -30,6 +122,75 @@
       "writtenOn": "2017-01-30T16:37:57Z",
       "side": 1,
       "message": "I don\u0027t see where you populate aliases.\nShould it be done here?",
+      "revId": "7a8a68c998ca3bd54408213e7a9df532dbeabaee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_0a377fe1",
+        "filename": "repo/includes/Search/Elastic/Fields/TermIndexField.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-30T17:19:12Z",
+      "side": 1,
+      "message": "Would be nice to have (reference to) documentation of array structure.",
+      "range": {
+        "startLine": 15,
+        "startChar": 12,
+        "endLine": 15,
+        "endChar": 17
+      },
+      "revId": "7a8a68c998ca3bd54408213e7a9df532dbeabaee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_4a1c576a",
+        "filename": "repo/includes/Search/Elastic/Fields/TermIndexField.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-30T17:19:12Z",
+      "side": 1,
+      "message": "Is it really a valid return value? In what case this is possible? Can exception be thrown?",
+      "range": {
+        "startLine": 48,
+        "startChar": 28,
+        "endLine": 48,
+        "endChar": 34
+      },
+      "revId": "7a8a68c998ca3bd54408213e7a9df532dbeabaee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_8a492f6d",
+        "filename": "repo/includes/Search/Elastic/Fields/TermIndexField.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-30T17:19:12Z",
+      "side": 1,
+      "message": "$name is passed and never used. Bug?",
+      "range": {
+        "startLine": 69,
+        "startChar": 2,
+        "endLine": 69,
+        "endChar": 15
+      },
       "revId": "7a8a68c998ca3bd54408213e7a9df532dbeabaee",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
