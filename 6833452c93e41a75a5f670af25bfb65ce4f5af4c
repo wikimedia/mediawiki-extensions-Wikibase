@@ -118,6 +118,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_a37d3b19",
+        "filename": "repo/tests/phpunit/includes/ChangeOpDeserialization/ChangeOpDeserializationTestHelper.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-30T14:35:45Z",
+      "side": 1,
+      "message": "Not there is something wrong with this argument, but this is a theoretical scenario that may or may not become relevant. This can not be a reason for a -1. What matters much more in my opinion is how the test looks right now. And this looks much more obvious than throwing an ApiUsageException that must be catched to compare a custom parameter that does not exist in the base class.\n\nWe are going to refactor all this error reporting code anyway.",
+      "parentUuid": "2ef897d1_a8199829",
+      "range": {
+        "startLine": 42,
+        "startChar": 15,
+        "endLine": 42,
+        "endChar": 31
+      },
+      "revId": "6833452c93e41a75a5f670af25bfb65ce4f5af4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_de093731",
         "filename": "repo/tests/phpunit/includes/ChangeOpDeserialization/TermChangeOpSerializationValidatorTest.php",
         "patchSetId": 7
