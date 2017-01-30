@@ -16,7 +16,7 @@ use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
-use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\EntityContent;
 use Wikibase\InternalSerialization\SerializerFactory;
 use Wikibase\Lib\DataTypeDefinitions;
@@ -246,44 +246,43 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetUndoContent() {
-		/** @var FingerprintProvider $e1 */
-		/** @var FingerprintProvider $e2 */
-		/** @var FingerprintProvider $e3 */
-		/** @var FingerprintProvider $e4 */
-		/** @var FingerprintProvider $e5 */
-		/** @var FingerprintProvider $e5u4 */
-		/** @var FingerprintProvider $e5u4u3 */
+		/** @var LabelsProvider $e2 */
+		/** @var LabelsProvider $e3 */
+		/** @var LabelsProvider $e4 */
+		/** @var LabelsProvider $e5 */
+		/** @var LabelsProvider $e5u4 */
+		/** @var LabelsProvider $e5u4u3 */
 
 		$e1 = $this->newEntity();
 		$r1 = $this->fakeRevision( $this->newEntityContent( $e1 ), 1 );
 
 		$e2 = $this->newEntity();
-		$e2->getFingerprint()->setLabel( 'en', 'Foo' );
+		$e2->getLabels()->setTextForLanguage( 'en', 'Foo' );
 		$r2 = $this->fakeRevision( $this->newEntityContent( $e2 ), 2 );
 
 		$e3 = $this->newEntity();
-		$e3->getFingerprint()->setLabel( 'en', 'Foo' );
-		$e3->getFingerprint()->setLabel( 'de', 'Fuh' );
+		$e3->getLabels()->setTextForLanguage( 'en', 'Foo' );
+		$e3->getLabels()->setTextForLanguage( 'de', 'Fuh' );
 		$r3 = $this->fakeRevision( $this->newEntityContent( $e3 ), 3 );
 
 		$e4 = $this->newEntity();
-		$e4->getFingerprint()->setLabel( 'en', 'Foo' );
-		$e4->getFingerprint()->setLabel( 'de', 'Fuh' );
-		$e4->getFingerprint()->setLabel( 'fr', 'Fu' );
+		$e4->getLabels()->setTextForLanguage( 'en', 'Foo' );
+		$e4->getLabels()->setTextForLanguage( 'de', 'Fuh' );
+		$e4->getLabels()->setTextForLanguage( 'fr', 'Fu' );
 		$r4 = $this->fakeRevision( $this->newEntityContent( $e4 ), 4 );
 
 		$e5 = $this->newEntity();
-		$e5->getFingerprint()->setLabel( 'en', 'F00' );
-		$e5->getFingerprint()->setLabel( 'de', 'Fuh' );
-		$e5->getFingerprint()->setLabel( 'fr', 'Fu' );
+		$e5->getLabels()->setTextForLanguage( 'en', 'F00' );
+		$e5->getLabels()->setTextForLanguage( 'de', 'Fuh' );
+		$e5->getLabels()->setTextForLanguage( 'fr', 'Fu' );
 		$r5 = $this->fakeRevision( $this->newEntityContent( $e5 ), 5 );
 
 		$e5u4 = $this->newEntity();
-		$e5u4->getFingerprint()->setLabel( 'en', 'F00' );
-		$e5u4->getFingerprint()->setLabel( 'de', 'Fuh' );
+		$e5u4->getLabels()->setTextForLanguage( 'en', 'F00' );
+		$e5u4->getLabels()->setTextForLanguage( 'de', 'Fuh' );
 
 		$e5u4u3 = $this->newEntity();
-		$e5u4u3->getFingerprint()->setLabel( 'en', 'F00' );
+		$e5u4u3->getLabels()->setTextForLanguage( 'en', 'F00' );
 
 		return array(
 			array( $r5, $r5, $r4, $this->newEntityContent( $e4 ), "undo last edit" ),
