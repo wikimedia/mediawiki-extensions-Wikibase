@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_28aa4883",
+        "filename": "tests/browser/features/statements_quantity.feature",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-30T12:34:39Z",
+      "side": 1,
+      "message": "Jenkins is set up in a way that it executes a small subset of the browser tests with each commit.\n\nThis test is to specific and should not be in this subset. This is temporary to make Jenkins fail for this patch here.",
+      "parentUuid": "2ef897d1_a86bd881",
+      "range": {
+        "startLine": 44,
+        "startChar": 17,
+        "endLine": 44,
+        "endChar": 29
+      },
+      "revId": "a6fc63f14420c54ea2d2f723d23988a4c0296251",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_480104b9",
         "filename": "tests/browser/features/statements_quantity.feature",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2017-01-30T12:00:25Z",
       "side": 1,
       "message": "I would rater see link to ticket (or patch commit message, as in this case) before the scenario that describes the problem in general.",
+      "range": {
+        "startLine": 52,
+        "startChar": 6,
+        "endLine": 52,
+        "endChar": 90
+      },
+      "revId": "a6fc63f14420c54ea2d2f723d23988a4c0296251",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_08af8c92",
+        "filename": "tests/browser/features/statements_quantity.feature",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-30T12:34:39Z",
+      "side": 1,
+      "message": "I worked on this for about a week and still can not come up with a trivial sentence that explains the issue. It\u0027s just weird. Let\u0027s please ditch the weirdness and move on.",
+      "parentUuid": "2ef897d1_480104b9",
       "range": {
         "startLine": 52,
         "startChar": 6,
