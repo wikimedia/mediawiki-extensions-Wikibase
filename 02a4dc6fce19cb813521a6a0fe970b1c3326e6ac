@@ -16,6 +16,24 @@
       "revId": "02a4dc6fce19cb813521a6a0fe970b1c3326e6ac",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_524e539c",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-30T09:33:27Z",
+      "side": 1,
+      "message": "Yes, this is tested via SpecialNewEntityTest. It was just recently that Aleksey refactored the test nicely.",
+      "parentUuid": "2ef897d1_18efe783",
+      "revId": "02a4dc6fce19cb813521a6a0fe970b1c3326e6ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
