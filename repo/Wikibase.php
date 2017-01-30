@@ -236,7 +236,38 @@ call_user_func( function() {
 	$wgAPIModules['wbremovereferences'] = Wikibase\Repo\Api\RemoveReferences::class;
 	$wgAPIModules['wbsetclaim'] = Wikibase\Repo\Api\SetClaim::class;
 	$wgAPIModules['wbremovequalifiers'] = Wikibase\Repo\Api\RemoveQualifiers::class;
-	$wgAPIModules['wbsetqualifier'] = Wikibase\Repo\Api\SetQualifier::class;
+	$wgAPIModules['wbsetqualifier'] = [
+		'class' => Wikibase\Repo\Api\SetQualifier::class,
+		'factory' => function( ApiMain $mainModule, $moduleName ) {
+			$wikibaseRepo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+			$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
+			$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
+
+			$modificationHelper = new \Wikibase\Repo\Api\StatementModificationHelper(
+				$wikibaseRepo->getSnakFactory(),
+				$wikibaseRepo->getEntityIdParser(),
+				$wikibaseRepo->getStatementGuidValidator(),
+				$apiHelperFactory->getErrorReporter( $mainModule )
+			);
+
+			return new Wikibase\Repo\Api\SetQualifier(
+				$mainModule,
+				$moduleName,
+				function ( $module ) use ( $apiHelperFactory ) {
+					return $apiHelperFactory->getErrorReporter( $module );
+				},
+				$changeOpFactoryProvider->getStatementChangeOpFactory(),
+				$modificationHelper,
+				$wikibaseRepo->getStatementGuidParser(),
+				function ( $module ) use ( $apiHelperFactory ) {
+					return $apiHelperFactory->getResultBuilder( $module );
+				},
+				function ( $module ) use ( $apiHelperFactory ) {
+					return $apiHelperFactory->getEntitySavingHelper( $module );
+				}
+			);
+		}
+	];
 	$wgAPIModules['wbmergeitems'] = Wikibase\Repo\Api\MergeItems::class;
 	$wgAPIModules['wbformatvalue'] = [
 		'class' => Wikibase\Repo\Api\FormatSnakValue::class,

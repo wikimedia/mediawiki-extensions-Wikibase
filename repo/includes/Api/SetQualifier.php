@@ -54,28 +54,34 @@ class SetQualifier extends ApiBase {
 	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
-	 * @param string $modulePrefix
+	 * @param callable $errorReporterInstantiator
+	 * @param StatementChangeOpFactory $statementChangeOpFactory
+	 * @param StatementModificationHelper $modificationHelper
+	 * @param StatementGuidParser $guidParser
+	 * @param callable $resultBuilderInstantiator
+	 * @param callable $entitySavingHelperInstantiator
+	 *
+	 * @note Using callable for several arguments because of circular dependency and unability to inject object to constructor
 	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+	public function __construct(
+		ApiMain $mainModule,
+		$moduleName,
+		callable $errorReporterInstantiator,
+		StatementChangeOpFactory $statementChangeOpFactory,
+		StatementModificationHelper $modificationHelper,
+		StatementGuidParser $guidParser,
+		callable $resultBuilderInstantiator,
+		callable $entitySavingHelperInstantiator
+	) {
+		parent::__construct( $mainModule, $moduleName );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
-		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
+		$this->errorReporter = $errorReporterInstantiator( $this );
+		$this->statementChangeOpFactory = $statementChangeOpFactory;
 
-		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
-		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
-
-		$this->modificationHelper = new StatementModificationHelper(
-			$wikibaseRepo->getSnakFactory(),
-			$wikibaseRepo->getEntityIdParser(),
-			$wikibaseRepo->getStatementGuidValidator(),
-			$apiHelperFactory->getErrorReporter( $this )
-		);
-
-		$this->guidParser = $wikibaseRepo->getStatementGuidParser();
-		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
-		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
+		$this->modificationHelper = $modificationHelper;
+		$this->guidParser = $guidParser;
+		$this->resultBuilder = $resultBuilderInstantiator( $this );
+		$this->entitySavingHelper = $entitySavingHelperInstantiator( $this );
 	}
 
 	/**
