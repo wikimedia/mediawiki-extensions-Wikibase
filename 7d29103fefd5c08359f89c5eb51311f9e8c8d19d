@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_29cec0b9",
+        "filename": "repo/includes/Search/Elastic/Fields/AllLabelsField.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-01-31T22:52:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_b0d7b5f1",
+      "range": {
+        "startLine": 31,
+        "startChar": 21,
+        "endLine": 31,
+        "endChar": 31
+      },
+      "revId": "7d29103fefd5c08359f89c5eb51311f9e8c8d19d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_3b272b61",
         "filename": "repo/includes/Search/Elastic/Fields/LabelsField.php",
         "patchSetId": 8
