@@ -354,6 +354,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_b607b21e",
+        "filename": "repo/includes/Search/Elastic/Fields/TermIndexField.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-01-31T11:51:13Z",
+      "side": 1,
+      "message": "Absolutely agree with later, but I didn\u0027t find a case (and cannot imagine one) where `false` case is handled.\n\nIf the check is really needed, wouldn\u0027t it be better to have method like `canBeMerged()` returning boolean and method `merge()` that will always return merged object and some runtime exception if it fails?",
+      "parentUuid": "2ef897d1_aa4aabc6",
+      "range": {
+        "startLine": 48,
+        "startChar": 28,
+        "endLine": 48,
+        "endChar": 34
+      },
+      "revId": "7a8a68c998ca3bd54408213e7a9df532dbeabaee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_8a492f6d",
         "filename": "repo/includes/Search/Elastic/Fields/TermIndexField.php",
         "patchSetId": 5
