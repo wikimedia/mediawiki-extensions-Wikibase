@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_964ef699",
+        "filename": "repo/includes/Api/MergeItems.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-01-31T11:31:40Z",
+      "side": 0,
+      "message": "Daniel suggested to leave this untouched and only move what can be moved for now. Basically split this patch into a trivial one, and continue working on this later.",
+      "range": {
+        "startLine": 60,
+        "startChar": 2,
+        "endLine": 60,
+        "endChar": 19
+      },
+      "revId": "700b5ce3ef54b3e6e46147a5da658471da52c2bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
