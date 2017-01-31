@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_613df689",
+        "filename": "repo/includes/Api/SetQualifier.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-31T13:01:12Z",
+      "side": 1,
+      "message": "Ah, I see, the trouble is that we need the Context to construct the ApiHelperFactory. Perhaps that can be changed (in another patch) so that ApiHelperFactory takes the Context as a parameter to getErrorReporter, etc. Then the APiHelperFactory could be injected into the API module.",
+      "revId": "a0490da01abc1863deba2df237d339c203f3bc00",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
