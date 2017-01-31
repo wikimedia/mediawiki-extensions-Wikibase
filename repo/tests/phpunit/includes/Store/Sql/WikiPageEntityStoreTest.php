@@ -52,6 +52,19 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		return $handler;
 	}
 
+	public function setUp() {
+		parent::setUp();
+
+		$this->mergeMwGlobalArrayValue(
+			'wgContentHandlers',
+			[
+				'wikibase-custom-type' => function() {
+					return $this->newCustomEntityHandler();
+				}
+			]
+		);
+	}
+
 	/**
 	 * @param string $idString
 	 *
@@ -95,17 +108,6 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 					'item' => CONTENT_MODEL_WIKIBASE_ITEM,
 					'property' => CONTENT_MODEL_WIKIBASE_PROPERTY,
 					'custom-type' => 'wikibase-custom-type',
-				),
-				array(
-					'item' => function() use ( $wikibaseRepo ) {
-						return $wikibaseRepo->newItemHandler();
-					},
-					'property' => function() use ( $wikibaseRepo ) {
-						return $wikibaseRepo->newPropertyHandler();
-					},
-					'custom-type' => function() use ( $wikibaseRepo ) {
-						return $this->newCustomEntityHandler();
-					},
 				)
 			),
 			new SqlIdGenerator( wfGetLB() )

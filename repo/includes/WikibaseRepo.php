@@ -573,8 +573,7 @@ class WikibaseRepo {
 	 */
 	public function getEntityContentFactory() {
 		return new EntityContentFactory(
-			$this->getContentModelMappings(),
-			$this->entityTypeDefinitions->getContentHandlerFactoryCallbacks()
+			$this->getContentModelMappings()
 		);
 	}
 
@@ -1224,6 +1223,20 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * Get a mapping of entity types => content handler instantiator callback.
+	 *
+	 * @note This is for use by bootstrap code only. Application logic should have
+	 * no need to call this method.
+	 */
+	public function getContentHandlerInstantiators() {
+		$map = $this->entityTypeDefinitions->getContentHandlerFactoryCallbacks();
+
+		// XXX: do we need Hooks::run( 'WikibaseContentHandlerInstantiators', array( &$map ) );
+
+		return $map;
+	}
+
+	/**
 	 * @return EntityFactory
 	 */
 	public function getEntityFactory() {
@@ -1584,6 +1597,14 @@ class WikibaseRepo {
 		);
 
 		Hooks::run( 'WikibaseEntityNamespaces', array( &$namespaces ) );
+
+		if ( empty( $namespaces ) ) {
+			throw new MWException( 'Wikibase: Incomplete configuration: '
+				. '$wgWBRepoSettings[\'entityNamespaces\'] has to be set to an '
+				. 'array mapping entity types to namespace IDs. '
+				. 'See Wikibase.example.php for details and examples.' );
+		}
+
 		return $namespaces;
 	}
 
