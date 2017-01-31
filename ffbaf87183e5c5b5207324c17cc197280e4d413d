@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_1cd8e5f3",
+        "filename": "repo/includes/Api/EntitySearchHelper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-31T16:58:23Z",
+      "side": 1,
+      "message": "probably also rename variable and the class field.",
+      "revId": "ffbaf87183e5c5b5207324c17cc197280e4d413d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_5ccd3d33",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-31T16:58:23Z",
+      "side": 1,
+      "message": "no longer valid (the \"Index\" part)",
+      "revId": "ffbaf87183e5c5b5207324c17cc197280e4d413d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_3cd281d6",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-01-31T16:58:23Z",
+      "side": 1,
+      "message": "long line",
+      "revId": "ffbaf87183e5c5b5207324c17cc197280e4d413d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
