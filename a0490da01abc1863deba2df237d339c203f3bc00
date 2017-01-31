@@ -16,6 +16,24 @@
       "revId": "a0490da01abc1863deba2df237d339c203f3bc00",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_7cefd982",
+        "filename": "repo/includes/Api/SetQualifier.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-01-31T16:57:24Z",
+      "side": 1,
+      "message": "We can do some sort of monkey patching by defining a setter for context in APiHelperFactory and then changing it here.",
+      "parentUuid": "2ef897d1_613df689",
+      "revId": "a0490da01abc1863deba2df237d339c203f3bc00",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
