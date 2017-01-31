@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\ChangeOpDeserialization;
 use ApiUsageException;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Repo\Api\ApiErrorReporter;
+use Wikibase\Repo\ChangeOpDeserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOpDeserialization\TermChangeOpSerializationValidator;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 
@@ -12,30 +13,47 @@ use Wikibase\Repo\Localizer\ExceptionLocalizer;
  * @covers Wikibase\Repo\ChangeOpDeserialization\TermChangeOpSerializationValidator
  *
  * @group Wikibase
- * @group WikibaseValidators
  *
  * @license GPL-2.0+
  */
 class TermChangeOpSerializationValidatorTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @dataProvider multilangArgsProvider
+	 * @dataProvider invalidMultilangArgsProvider
 	 */
-	public function testValidateMultilangArgs( $arg, $langCode, $errorCode ) {
+	public function testGivenLanguageIsInvalid_throwsException( $arg, $langCode, $errorCode ) {
 		$validator = new TermChangeOpSerializationValidator(
-			$this->getContentLanguages(),
-			$this->getApiErrorReporter()
+			$this->getContentLanguages()
 		);
 
-		$this->assertApiUsageExceptionWithCodeIsThrown(
-			$errorCode,
-			function() use ( $validator, $arg, $langCode ) {
-				$validator->validateMultilangArgs( $arg, $langCode );
-			}
-		);
+		try {
+			$validator->validateMultilangArgs( $arg, $langCode );
+		} catch ( \Exception $exception ) {
+			/** @var ChangeOpDeserializationException $exception */
+			$this->assertInstanceOf( ChangeOpDeserializationException::class, $exception );
+			$this->assertSame( $errorCode, $exception->getErrorCode() );
+		}
 	}
 
-	public function multilangArgsProvider() {
+	/**
+	 * @dataProvider validMultilangArgsProvider
+	 */
+	public function testGivenLanguageIsValid_noExceptionIsThrown( $arg, $langCode ) {
+		$validator = new TermChangeOpSerializationValidator(
+			$this->getContentLanguages()
+		);
+		$exception = null;
+
+		try {
+			$validator->validateMultilangArgs( $arg, $langCode );
+		} catch ( \Exception $e ) {
+			$exception = $e;
+		}
+
+		$this->assertNull( $exception );
+	}
+
+	public function invalidMultilangArgsProvider() {
 		return [
 			'no language key' => [ [], 'en', 'missing-language' ],
 			'language not a string (bool)' => [ [ 'language' => false ], 'en', 'not-recognized-string' ],
@@ -51,56 +69,33 @@ class TermChangeOpSerializationValidatorTest extends \PHPUnit_Framework_TestCase
 				'xx',
 				'not-recognized-language'
 			],
-			'valid' => [
+		];
+	}
+
+	public function validMultiLangArgsProvider() {
+		return [
+			'normal language code' => [
 				[ 'language' => 'en', 'value' => 'foo' ],
 				'en',
 				false
 			],
-			'valid numeric langcode' => [
+			'numeric langcode' => [
 				[ 'language' => 'en', 'value' => 'foo' ],
 				'123',
-				false
 			],
-			'valid int langcode' => [
+			'int langcode' => [
 				[ 'language' => 'en', 'value' => 'foo' ],
 				123,
-				false
 			],
-			'valid remove' => [
+			'remove' => [
 				[ 'language' => 'en', 'remove' => '' ],
 				'en',
-				false
 			],
 		];
 	}
 
 	private function getContentLanguages() {
 		return new StaticContentLanguages( [ 'en', 'de', 'fr' ] );
-	}
-
-	private function getApiErrorReporter() {
-		return new ApiErrorReporter(
-			new \ApiMain(),
-			$this->getMock( ExceptionLocalizer::class ),
-			new \Language()
-		);
-	}
-
-	public function assertApiUsageExceptionWithCodeIsThrown( $expectedCode, callable $callback ) {
-		/** @var ApiUsageException $exception */
-		$exception = null;
-		try {
-			$callback();
-		} catch ( \Exception $e ) {
-			$exception = $e;
-		}
-
-		if ( $expectedCode === false ) {
-			$this->assertNull( $exception );
-		} else {
-			$this->assertInstanceOf( ApiUsageException::class, $exception );
-			$this->assertSame( $expectedCode, $exception->getCodeString() );
-		}
 	}
 
 }
