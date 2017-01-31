@@ -18,7 +18,7 @@ class ItemSearchTextGenerator {
 	 */
 	public function generate( Item $item ) {
 		$fingerprintGenerator = new FingerprintSearchTextGenerator();
-		$text = $fingerprintGenerator->generate( $item->getFingerprint() );
+		$text = $fingerprintGenerator->generate( $item );
 
 		foreach ( $item->getSiteLinkList()->toArray() as $siteLink ) {
 			$text .= "\n" . $siteLink->getPageName();
