@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_53d9ab82",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1234,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-01-31T20:00:20Z",
+      "side": 1,
+      "message": "isn\u0027t the callback list already modifyable? If yes, then I don\u0027t think the hook is needed.",
+      "revId": "91141dc344d433294e1e6ef27064a547147c9799",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
