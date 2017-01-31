@@ -67,35 +67,39 @@ final class RepoHooks {
 	}
 
 	/**
-	 * Handler for the SetupAfterCache hook, completing setup of
-	 * content and namespace setup.
-	 *
-	 * @note: $wgExtraNamespaces and $wgNamespaceAliases have already been processed at this point
-	 *        and should no longer be touched.
+	 * Handler for the SetupAfterCache hook, completing the content and namespace setup.
+	 * This updates the $wgContentHandlers and $wgNamespaceContentModels registries
+	 * according to information provided by entity type definitions and the entityNamespaces
+	 * setting.
 	 *
 	 * @throws MWException
 	 * @return bool
 	 */
 	public static function onSetupAfterCache() {
 		global $wgNamespaceContentModels;
+		global $wgContentHandlers;
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$entityNamespaceLookup = $wikibaseRepo->getEntityNamespaceLookup();
 		$namespaces = $entityNamespaceLookup->getEntityNamespaces();
 
-		if ( empty( $namespaces ) ) {
-			throw new MWException( 'Wikibase: Incomplete configuration: '
-				. '$wgWBRepoSettings[\'entityNamespaces\'] has to be set to an '
-				. 'array mapping entity types to namespace IDs. '
-				. 'See Wikibase.example.php for details and examples.' );
-		}
-
+		// Register entity namespaces.
+		// Note that $wgExtraNamespaces and $wgNamespaceAliases have already been processed at this
+		// point and should no longer be touched.
 		$contentModelIds = $wikibaseRepo->getContentModelMappings();
 
 		foreach ( $namespaces as $entityType => $namespace ) {
 			if ( !isset( $wgNamespaceContentModels[$namespace] ) ) {
 				$wgNamespaceContentModels[$namespace] = $contentModelIds[$entityType];
 			}
+		}
+
+		// Register callbacks for instantiating ContentHandlers for EntityContent.
+		foreach ( $contentModelIds as $entityType => $model ) {
+			$wgContentHandlers[$model] = function () use ( $wikibaseRepo, $entityType ) {
+				$entityContentFactory = $wikibaseRepo->getEntityContentFactory();
+				return $entityContentFactory->getContentHandlerForType( $entityType );
+			};
 		}
 
 		return true;
@@ -850,27 +854,6 @@ final class RepoHooks {
 		}
 
 		return true;
-	}
-
-	/**
-	 * Handler for the ContentHandlerForModelID hook, implemented to create EntityHandler
-	 * instances that have knowledge of the necessary services.
-	 *
-	 * @param string $modelId
-	 * @param ContentHandler|null $handler
-	 *
-	 * @return bool|null False on success to stop other ContentHandlerForModelID hooks from running,
-	 *  null on error.
-	 */
-	public static function onContentHandlerForModelID( $modelId, &$handler ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-		try {
-			$handler = $wikibaseRepo->getEntityContentFactory()->getEntityHandlerForContentModel( $modelId );
-			return false;
-		} catch ( OutOfBoundsException $ex ) {
-			// no entity content model id
-		}
 	}
 
 	/**
