@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_a95e3015",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-01-31T22:34:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_e75fbe42",
+      "revId": "16dac9c0ee3a4a17914fd6386a2c57a6813706e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_072bfadc",
         "filename": "repo/includes/Search/Elastic/Fields/FieldDefinitions.php",
         "patchSetId": 6
@@ -30,6 +48,30 @@
       "writtenOn": "2017-01-30T16:49:00Z",
       "side": 1,
       "message": "This more relates to return value. Can you move it there?",
+      "range": {
+        "startLine": 12,
+        "startChar": 33,
+        "endLine": 12,
+        "endChar": 71
+      },
+      "revId": "16dac9c0ee3a4a17914fd6386a2c57a6813706e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_699f18ba",
+        "filename": "repo/includes/Search/Elastic/Fields/FieldDefinitions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-01-31T22:34:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_072bfadc",
       "range": {
         "startLine": 12,
         "startChar": 33,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_a93070e6",
+        "filename": "repo/includes/Search/Elastic/Fields/ItemFieldDefinitions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-01-31T22:34:04Z",
+      "side": 1,
+      "message": "I don\u0027t think they will be created with different lang sets, but there can definitely be an object that has labels but not descriptions, and labels and descriptions eventually will have quite different mappings, possibly. They both will have some lang set, usually, but it\u0027s not that useful commonality.\n\nAlso note that in tests we may pass mocks as definitions objects, that\u0027s why they are not created here.",
+      "parentUuid": "2ef897d1_47e452a3",
+      "range": {
+        "startLine": 27,
+        "startChar": 2,
+        "endLine": 28,
+        "endChar": 86
+      },
+      "revId": "16dac9c0ee3a4a17914fd6386a2c57a6813706e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_87648a46",
         "filename": "repo/includes/Search/Elastic/Fields/ItemFieldDefinitions.php",
         "patchSetId": 6
@@ -76,6 +142,30 @@
       "writtenOn": "2017-01-30T16:49:00Z",
       "side": 1,
       "message": "I guess it is better to have list of real key values in doc block in @return tag.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 22
+      },
+      "revId": "16dac9c0ee3a4a17914fd6386a2c57a6813706e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_892db48d",
+        "filename": "repo/includes/Search/Elastic/Fields/ItemFieldDefinitions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-01-31T22:34:04Z",
+      "side": 1,
+      "message": "this is not about return, this is about what search fields items have. It explains the code below.",
+      "parentUuid": "2ef897d1_87648a46",
       "range": {
         "startLine": 37,
         "startChar": 0,
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_a947504f",
+        "filename": "repo/includes/Search/Elastic/Fields/LabelsProviderFieldDefinitons.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-01-31T22:34:04Z",
+      "side": 1,
+      "message": "unused for now. Will be used in the next patch.",
+      "parentUuid": "2ef897d1_07ff7a32",
+      "range": {
+        "startLine": 18,
+        "startChar": 2,
+        "endLine": 18,
+        "endChar": 40
+      },
+      "revId": "16dac9c0ee3a4a17914fd6386a2c57a6813706e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_4748d28c",
         "filename": "repo/includes/Search/Elastic/Fields/PropertyFieldDefinitions.php",
         "patchSetId": 6
@@ -122,6 +236,30 @@
       "writtenOn": "2017-01-30T16:49:00Z",
       "side": 1,
       "message": "I don\u0027t think it is needed, is it?",
+      "range": {
+        "startLine": 6,
+        "startChar": 3,
+        "endLine": 6,
+        "endChar": 47
+      },
+      "revId": "16dac9c0ee3a4a17914fd6386a2c57a6813706e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_8944944b",
+        "filename": "repo/includes/Search/Elastic/Fields/PropertyFieldDefinitions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-01-31T22:34:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_4748d28c",
       "range": {
         "startLine": 6,
         "startChar": 3,
@@ -180,6 +318,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_a9bd1018",
+        "filename": "repo/includes/Search/Elastic/Fields/PropertyFieldDefinitions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-01-31T22:34:04Z",
+      "side": 1,
+      "message": "these are not keys, these are code comments that describe how we view the property. In fact, I don\u0027t know the list of keys here since it depends on labels and descriptions classes, which are going to change.",
+      "parentUuid": "2ef897d1_475e927c",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 22
+      },
+      "revId": "16dac9c0ee3a4a17914fd6386a2c57a6813706e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_a7a3063f",
         "filename": "repo/tests/phpunit/includes/Search/Elastic/Fields/ItemFieldDefinitionsTest.php",
         "patchSetId": 6
@@ -191,6 +353,30 @@
       "writtenOn": "2017-01-30T16:49:00Z",
       "side": 1,
       "message": "Are these groups really needed?",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 22
+      },
+      "revId": "16dac9c0ee3a4a17914fd6386a2c57a6813706e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_6986f86b",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Fields/ItemFieldDefinitionsTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-01-31T22:34:04Z",
+      "side": 1,
+      "message": "don\u0027t see much harm in them, though I\u0027m not using them currently",
+      "parentUuid": "2ef897d1_a7a3063f",
       "range": {
         "startLine": 16,
         "startChar": 0,
