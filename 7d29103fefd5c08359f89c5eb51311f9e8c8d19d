@@ -39,6 +39,24 @@
       "revId": "7d29103fefd5c08359f89c5eb51311f9e8c8d19d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_0985445a",
+        "filename": "repo/includes/Search/Elastic/Fields/LabelsField.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-01-31T22:36:36Z",
+      "side": 1,
+      "message": "Same field will hold labels and aliases. We can call it something else, but I\u0027m afraid it\u0027ll only add more confusion. Unless you have an idea for a name that is less confusing?",
+      "parentUuid": "2ef897d1_3b272b61",
+      "revId": "7d29103fefd5c08359f89c5eb51311f9e8c8d19d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
