@@ -294,6 +294,12 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertContainsOnly( 'string', $array );
 	}
 
+	public function testGetContentHandlerInstantiators() {
+		$array = $this->getWikibaseRepo()->getContentHandlerInstantiators();
+		$this->assertInternalType( 'array', $array );
+		$this->assertContainsOnly( 'callable', $array );
+	}
+
 	public function testGetEntityFactory() {
 		$entityFactory = $this->getWikibaseRepo()->getEntityFactory();
 		$this->assertInstanceOf( EntityFactory::class, $entityFactory );

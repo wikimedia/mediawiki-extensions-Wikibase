@@ -36,8 +36,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 	 */
 	public function testGetEntityContentModels( array $contentModelIds, array $callbacks ) {
 		$factory = new EntityContentFactory(
-			$contentModelIds,
-			$callbacks
+			$contentModelIds
 		);
 
 		$this->assertEquals(
@@ -58,20 +57,18 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 
 	public function provideInvalidConstructorArguments() {
 		return array(
-			array( array( null ), array() ),
-			array( array(), array( null ) ),
-			array( array( 1 ), array() ),
-			array( array(), array( 'foo' ) )
+			array( array( null ) ),
+			array( array( 1 ) ),
 		);
 	}
 
 	/**
 	 * @dataProvider provideInvalidConstructorArguments
 	 */
-	public function testInvalidConstructorArguments( array $contentModelIds, array $callbacks ) {
+	public function testInvalidConstructorArguments( array $contentModelIds ) {
 		$this->setExpectedException( InvalidArgumentException::class );
 
-		new EntityContentFactory( $contentModelIds, $callbacks );
+		new EntityContentFactory( $contentModelIds );
 	}
 
 	public function testIsEntityContentModel() {
@@ -91,14 +88,6 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 			array(
 				'item' => CONTENT_MODEL_WIKIBASE_ITEM,
 				'property' => CONTENT_MODEL_WIKIBASE_PROPERTY
-			),
-			array(
-				'item' => function() use ( $wikibaseRepo ) {
-					return $wikibaseRepo->newItemHandler();
-				},
-				'property' => function() use ( $wikibaseRepo ) {
-					return $wikibaseRepo->newPropertyHandler();
-				}
 			)
 		);
 	}

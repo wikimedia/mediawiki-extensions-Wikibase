@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Content;
 
+use ContentHandler;
 use InvalidArgumentException;
 use MWException;
 use OutOfBoundsException;
@@ -36,26 +37,18 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup, En
 	private $entityContentModels;
 
 	/**
-	 * @var callable[] Entity type ID to callback mapping for creating ContentHandler objects.
-	 */
-	private $entityHandlerFactoryCallbacks;
-
-	/**
 	 * @var EntityHandler[] Entity type ID to entity handler mapping.
 	 */
 	private $entityHandlers = array();
 
 	/**
 	 * @param string[] $entityContentModels Entity type ID to content model ID mapping.
-	 * @param callable[] $entityHandlerFactoryCallbacks Entity type ID to callback mapping for
 	 *  creating ContentHandler objects.
 	 */
-	public function __construct( array $entityContentModels, array $entityHandlerFactoryCallbacks ) {
+	public function __construct( array $entityContentModels ) {
 		Assert::parameterElementType( 'string', $entityContentModels, '$entityContentModels' );
-		Assert::parameterElementType( 'callable', $entityHandlerFactoryCallbacks, '$entityHandlerFactoryCallbacks' );
 
 		$this->entityContentModels = $entityContentModels;
-		$this->entityHandlerFactoryCallbacks = $entityHandlerFactoryCallbacks;
 	}
 
 	/**
@@ -185,22 +178,8 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup, En
 	 * @return EntityHandler
 	 */
 	public function getContentHandlerForType( $entityType ) {
-		if ( !isset( $this->entityHandlerFactoryCallbacks[$entityType] ) ) {
-			throw new OutOfBoundsException( 'No content handler defined for entity type ' . $entityType );
-		}
-
-		if ( !isset( $this->entityHandlers[$entityType] ) ) {
-			$entityHandler = call_user_func( $this->entityHandlerFactoryCallbacks[$entityType] );
-
-			Assert::postcondition(
-				$entityHandler instanceof EntityHandler,
-				'Callback must return an instance of EntityHandler'
-			);
-
-			$this->entityHandlers[$entityType] = $entityHandler;
-		}
-
-		return $this->entityHandlers[$entityType];
+		$model = $this->getContentModelForType( $entityType );
+		return ContentHandler::getForModelID( $model );
 	}
 
 	/**

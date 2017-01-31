@@ -480,7 +480,13 @@ abstract class EntityHandler extends ContentHandler {
 	final public function getEntityNamespace() {
 		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
-		return $entityNamespaceLookup->getEntityNamespace( $this->getEntityType() );
+		$ns = $entityNamespaceLookup->getEntityNamespace( $this->getEntityType() );
+
+		if ( $ns === null ) {
+			throw new MWException( 'No namespace configured for entity type ' . $this->getEntityType() );
+		}
+
+		return $ns;
 	}
 
 	/**
