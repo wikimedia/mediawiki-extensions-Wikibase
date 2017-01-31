@@ -2,9 +2,7 @@
 
 namespace Wikibase\Repo\ChangeOp\Deserialization;
 
-use ApiUsageException;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Repo\Api\ApiErrorReporter;
 
 /**
  * This class is used to validate attributes of term change serializations
@@ -20,28 +18,27 @@ class TermChangeOpSerializationValidator {
 	private $termsLanguages;
 
 	/**
-	 * @var ApiErrorReporter
+	 * @param ContentLanguages $termsLanguages
 	 */
-	private $errorReporter;
-
-	public function __construct( ContentLanguages $termsLanguages, ApiErrorReporter $errorReporter ) {
+	public function __construct( ContentLanguages $termsLanguages ) {
 		$this->termsLanguages = $termsLanguages;
-		$this->errorReporter = $errorReporter;
 	}
 
 	/**
+	 * TODO: improve method and argument names
+	 *
 	 * @param string[] $arg The argument array to verify
 	 * @param int|string $langCode The language code used in the value part. If $langCode is an integer
 	 *                             $arg array must contain a 'language' key with a term language code as value.
 	 *
-	 * @throws ApiUsageException
+	 * @throws ChangeOpDeserializationException
 	 */
 	public function validateMultilangArgs( $arg, $langCode ) {
 		$this->assertArray( $arg, 'An array was expected, but not found in the json for the '
 			. "langCode $langCode" );
 
 		if ( !array_key_exists( 'language', $arg ) ) {
-			$this->errorReporter->dieError(
+			$this->throwException(
 				"'language' was not found in the label or description json for $langCode",
 				'missing-language' );
 		}
@@ -50,20 +47,24 @@ class TermChangeOpSerializationValidator {
 			. "for the langCode $langCode and argument 'language'" );
 		if ( !is_numeric( $langCode ) ) {
 			if ( $langCode !== $arg['language'] ) {
-				$this->errorReporter->dieError(
+				$this->throwException(
 					"inconsistent language: $langCode is not equal to {$arg['language']}",
 					'inconsistent-language' );
 			}
 		}
 
 		if ( !$this->termsLanguages->hasLanguage( $arg['language'] ) ) {
-			$this->errorReporter->dieError( 'Unknown language: ' . $arg['language'], 'not-recognized-language' );
+			$this->throwException( 'Unknown language: ' . $arg['language'], 'not-recognized-language' );
 		}
 
 		if ( !array_key_exists( 'remove', $arg ) ) {
 			$this->assertString( $arg['value'], 'A string was expected, but not found in the json '
 				. "for the langCode $langCode and argument 'value'" );
 		}
+	}
+
+	private function throwException( $message, $errorCode ) {
+		throw new ChangeOpDeserializationException( $message, $errorCode );
 	}
 
 	/**
@@ -89,7 +90,7 @@ class TermChangeOpSerializationValidator {
 	 */
 	private function assertType( $type, $value, $message ) {
 		if ( gettype( $value ) !== $type ) {
-			$this->errorReporter->dieError( $message, 'not-recognized-' . $type );
+			$this->throwException( $message, 'not-recognized-' . $type );
 		}
 	}
 
