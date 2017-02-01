@@ -13,7 +13,8 @@
 			"Tar Lócesilion",
 			"The Polish",
 			"Rzuwig",
-			"Woytecr"
+			"Woytecr",
+			"Sp5uhe"
 		]
 	},
 	"wikibase-client-desc": "Klient rozszerzenia Wikibase",
@@ -45,14 +46,14 @@
 	"wikibase-comment-linked": "Z tą stroną powiązano element Wikidanych.",
 	"wikibase-comment-unlink": "Zostało zerwane powiązanie elementu Wikidanych z tą stroną. Linki do innych wersji językowych usunięte.",
 	"wikibase-comment-restore": "Powiązany element Wikidanych odtworzony. Linki do innych wersji językowych przywrócone.",
-	"wikibase-comment-update": "Zmieniono element Wikidanych",
+	"wikibase-comment-update": "Zmieniono element w Wikidanych",
 	"wikibase-comment-sitelink-add": "Dodano link interwiki: $1",
 	"wikibase-comment-sitelink-change": "Zmieniono link interwiki z $1 na $2",
 	"wikibase-comment-sitelink-remove": "Usunięto link interwiki: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|zmiana|zmiany|zmian}}",
 	"wikibase-dataitem": "Element Wikidanych",
 	"wikibase-editlinks": "Edytuj linki",
-	"wikibase-editlinkstitle": "Edytuj linki wersji językowych",
+	"wikibase-editlinkstitle": "Edytuj linki pomiędzy wersjami językowymi",
 	"wikibase-addlinkstitle": "Dodaj linki wersji językowych",
 	"wikibase-linkitem-addlinks": "Dodaj linki",
 	"wikibase-linkitem-alreadylinked": "Wybrana strona jest już wykorzystywana w naszym centralnym repozytorium danych przez [$1 element], który odsyła do strony $2 tutaj. Każdy element może być powiązany tylko z jedną stroną w witrynie. Wybierz, proszę, inną stronę.",
