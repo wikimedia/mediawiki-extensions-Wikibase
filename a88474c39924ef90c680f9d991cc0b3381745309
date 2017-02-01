@@ -45,6 +45,30 @@
       "revId": "a88474c39924ef90c680f9d991cc0b3381745309",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_5f1bead4",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialItemDisambiguationTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-01T10:29:13Z",
+      "side": 1,
+      "message": "This is not setting the return value of the mock method but states what conditions method argument should fulfill (note \"with\" not \"will\").\n\nI don\u0027t really like it but this is what existing tests were doing. This is just adjusting old tests to a new interface (and having removed setIsCaseSensitive and co).",
+      "parentUuid": "2ef897d1_9feba2a0",
+      "range": {
+        "startLine": 102,
+        "startChar": 3,
+        "endLine": 109,
+        "endChar": 7
+      },
+      "revId": "a88474c39924ef90c680f9d991cc0b3381745309",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
