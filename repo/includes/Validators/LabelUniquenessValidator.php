@@ -4,8 +4,6 @@ namespace Wikibase\Repo\Validators;
 
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\LabelDescriptionDuplicateDetector;
 
@@ -16,7 +14,7 @@ use Wikibase\LabelDescriptionDuplicateDetector;
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
-class LabelUniquenessValidator implements EntityValidator, FingerprintValidator {
+class LabelUniquenessValidator implements EntityValidator {
 
 	/**
 	 * @var LabelDescriptionDuplicateDetector
@@ -49,43 +47,6 @@ class LabelUniquenessValidator implements EntityValidator, FingerprintValidator 
 		}
 
 		return Result::newSuccess();
-	}
-
-	/**
-	 * @see FingerprintValidator::validateFingerprint()
-	 *
-	 * @param Fingerprint $fingerprint
-	 * @param EntityId $entityId
-	 * @param string[]|null $languageCodes
-	 *
-	 * @return Result
-	 */
-	public function validateFingerprint(
-		Fingerprint $fingerprint,
-		EntityId $entityId,
-		array $languageCodes = null
-	) {
-		$labels = $fingerprint->getLabels()->toTextArray();
-		$aliases = $fingerprint->getAliasGroups()->toTextArray();
-
-		if ( $languageCodes !== null ) {
-			$languageKeys = array_flip( $languageCodes );
-			$labels = array_intersect_key( $labels, $languageKeys );
-			$aliases = array_intersect_key( $aliases, $languageKeys );
-		}
-
-		// Nothing to do if there are no labels AND no aliases.
-		if ( empty( $labels ) && empty( $aliases ) ) {
-			return Result::newSuccess();
-		}
-
-		return $this->duplicateDetector->detectLabelConflicts(
-			$entityId->getEntityType(),
-			$labels,
-			// insert again when T104393 is resolved
-			null, //$aliases,
-			$entityId
-		);
 	}
 
 }

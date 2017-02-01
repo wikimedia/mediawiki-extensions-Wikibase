@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Validators;
 
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\AliasGroupList;
@@ -149,26 +148,6 @@ class LabelUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider validFingerprintProvider
-	 *
-	 * @param Fingerprint $fingerprint
-	 * @param EntityId $entityId
-	 * @param string[]|null $languageCodes
-	 */
-	public function testValidateFingerprint(
-		Fingerprint $fingerprint,
-		EntityId $entityId,
-		$languageCodes = null
-	) {
-		$dupeDetector = $this->getMockDupeDetector();
-		$validator = new LabelUniquenessValidator( $dupeDetector );
-
-		$result = $validator->validateFingerprint( $fingerprint, $entityId, $languageCodes );
-
-		$this->assertTrue( $result->isValid(), 'isValid' );
-	}
-
-	/**
 	 * @dataProvider invalidEntityProvider
 	 *
 	 * @param EntityDocument $entity
@@ -179,24 +158,6 @@ class LabelUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 		$validator = new LabelUniquenessValidator( $dupeDetector );
 
 		$result = $validator->validateEntity( $entity );
-
-		$this->assertFalse( $result->isValid(), 'isValid' );
-
-		$errors = $result->getErrors();
-		$this->assertEquals( $error, $errors[0]->getCode() );
-	}
-
-	/**
-	 * @dataProvider invalidFingerprintProvider
-	 *
-	 * @param Fingerprint $fingerprint
-	 * @param string|null $error
-	 */
-	public function testValidateFingerprint_failure( Fingerprint $fingerprint, $error ) {
-		$dupeDetector = $this->getMockDupeDetector();
-		$validator = new LabelUniquenessValidator( $dupeDetector );
-
-		$result = $validator->validateFingerprint( $fingerprint, new PropertyId( 'P99' ) );
 
 		$this->assertFalse( $result->isValid(), 'isValid' );
 
