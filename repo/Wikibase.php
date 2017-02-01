@@ -76,7 +76,7 @@ call_user_func( function() {
 	global $wgExtensionMessagesFiles, $wgMessagesDirs;
 	global $wgAPIModules, $wgAPIListModules, $wgSpecialPages, $wgHooks;
 	global $wgWBRepoSettings, $wgResourceModules, $wgValueParsers, $wgJobClasses;
-	global $wgWBRepoDataTypes, $wgWBRepoEntityTypes;
+	global $wgWBRepoDataTypes, $wgWBRepoEntityTypes, $wgCirrusSearchRescoreFunctionScoreChains;
 
 	$wgExtensionCredits['wikibase'][] = array(
 		'path' => __DIR__,
@@ -207,17 +207,30 @@ call_user_func( function() {
 		'class' => Wikibase\Repo\Api\SearchEntities::class,
 		'factory' => function( ApiMain $mainModule, $moduleName ) {
 			$repo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
-
-			$entitySearchHelper = new Wikibase\Repo\Api\EntitySearchHelper(
-				$repo->getEntityLookup(),
-				$repo->getEntityIdParser(),
-				$repo->newTermSearchInteractor( $repo->getUserLanguage()->getCode() ),
-				new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
-					$repo->getTermLookup(),
-					$repo->getLanguageFallbackChainFactory()
-						->newFromLanguage( $repo->getUserLanguage() )
-				)
-			);
+			$settings = $repo->getSettings()->getSetting( 'entitySearch' );
+			if ( $settings['useCirrus'] ) {
+				$entitySearchHelper = new Wikibase\Repo\Search\Elastic\EntitySearchElastic(
+					$repo->getLanguageFallbackChainFactory(),
+					$repo->getEntityIdParser(),
+					new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
+						$repo->getTermLookup(),
+						$repo->getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
+					),
+					$repo->getContentModelMappings(),
+					$mainModule->getRequest(),
+					$settings
+				);
+			} else {
+				$entitySearchHelper = new Wikibase\Repo\Api\EntitySearchHelper(
+					$repo->getEntityLookup(),
+					$repo->getEntityIdParser(),
+					$repo->newTermSearchInteractor( $repo->getUserLanguage()->getCode() ),
+					new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
+						$repo->getTermLookup(),
+						$repo->getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
+					)
+				);
+			}
 
 			return new Wikibase\Repo\Api\SearchEntities(
 				$mainModule,
@@ -650,6 +663,7 @@ call_user_func( function() {
 	$wgHooks['ContentHandlerForModelID'][] = 'Wikibase\RepoHooks::onContentHandlerForModelID';
 	$wgHooks['BeforeDisplayNoArticleText'][] = 'Wikibase\ViewEntityAction::onBeforeDisplayNoArticleText';
 	$wgHooks['InfoAction'][] = '\Wikibase\RepoHooks::onInfoAction';
+	$wgHooks['GetContentModels'][] = '\Wikibase\RepoHooks::onGetContentModels';
 
 	// update hooks
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Repo\Store\Sql\ChangesSubscriptionSchemaUpdater::onSchemaUpdate';
@@ -663,5 +677,23 @@ call_user_func( function() {
 	$wgWBRepoSettings = array_merge(
 		require __DIR__ . '/../lib/config/WikibaseLib.default.php',
 		require __DIR__ . '/config/Wikibase.default.php'
+	);
+
+	// Field weight profiles. These profiles specify relative weights
+	// of label fields for different languages, e.g. exact language match
+	// vs. fallback language match.
+	$wgWBRepoSettings['entitySearch']['prefixSearchProfiles'] =
+		require __DIR__ . '/config/EntityPrefixSearchProfiles.php';
+	// Wikibase prefix search scoring profile for CirrusSearch.
+	// This profile applies to the whole document.
+	// These configurations define how the results are ordered.
+	// The names should be distinct from other Cirrus rescoring profile, so
+	// prefixing with 'wikibase' is recommended.
+	$wgWBRepoSettings['entitySearch']['rescoreProfiles'] =
+		require __DIR__ . '/config/ElasticSearchRescoreProfiles.php';
+	// ElasticSearch function for entity weight
+	$wgCirrusSearchRescoreFunctionScoreChains = array_merge(
+		isset( $wgCirrusSearchRescoreFunctionScoreChains ) ? $wgCirrusSearchRescoreFunctionScoreChains : [],
+		require __DIR__ . '/config/ElasticSearchRescoreFunctions.php'
 	);
 } );
