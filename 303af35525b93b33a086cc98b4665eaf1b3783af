@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_ff997681",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialItemByTitleTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-01T09:53:55Z",
+      "side": 1,
+      "message": "I found this test case slightly confusing: I somehow connected \"title\" referred to here with a \"page title\", not with a both combination of a site and a page.\nBut this is not a problem related to this change, the \"old\" test covered exactly the same case.\nIt might be worth thinking (not as part of this, I really don\u0027t think it belongs here) whether non-existing site, and non-existing title are two separate cases from the perspective of the special page, or should the non-existing pair be considered as a single case. I personally don\u0027t know.",
+      "range": {
+        "startLine": 143,
+        "startChar": 17,
+        "endLine": 143,
+        "endChar": 99
+      },
+      "revId": "303af35525b93b33a086cc98b4665eaf1b3783af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_df96ba4e",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialItemByTitleTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-01T09:53:55Z",
+      "side": 1,
+      "message": "could be probably called $subPage but whatever.",
+      "range": {
+        "startLine": 173,
+        "startChar": 2,
+        "endLine": 173,
+        "endChar": 6
+      },
+      "revId": "303af35525b93b33a086cc98b4665eaf1b3783af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_7f8c663a",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialItemByTitleTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-01T09:53:55Z",
+      "side": 1,
+      "message": "Looks like Perl :) Do you think having this like here is better than just omitting the not needed part (ie. list ( , $response ) \u003d ... ). Asking just out of curiosity.",
+      "range": {
+        "startLine": 176,
+        "startChar": 8,
+        "endLine": 176,
+        "endChar": 10
+      },
+      "revId": "303af35525b93b33a086cc98b4665eaf1b3783af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
