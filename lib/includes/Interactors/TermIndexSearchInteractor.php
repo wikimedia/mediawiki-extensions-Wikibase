@@ -16,7 +16,7 @@ use Wikimedia\Assert\Assert;
  * @license GPL-2.0+
  * @author Addshore
  */
-class TermIndexSearchInteractor implements TermSearchInteractor {
+class TermIndexSearchInteractor implements ConfigurableTermSearchInteractor {
 
 	/**
 	 * @var TermIndex
@@ -78,38 +78,6 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	 */
 	public function setTermSearchOptions( TermSearchOptions $termSearchOptions ) {
 		$this->termSearchOptions = $termSearchOptions;
-	}
-
-	/**
-	 * @param int $limit Hard upper limit of 5000
-	 * @deprecated
-	 */
-	public function setLimit( $limit ) {
-		$this->termSearchOptions->setLimit( $limit );
-	}
-
-	/**
-	 * @param bool $caseSensitive
-	 * @deprecated
-	 */
-	public function setIsCaseSensitive( $caseSensitive ) {
-		$this->termSearchOptions->setIsCaseSensitive( $caseSensitive );
-	}
-
-	/**
-	 * @param bool $prefixSearch
-	 * @deprecated
-	 */
-	public function setIsPrefixSearch( $prefixSearch ) {
-		$this->termSearchOptions->setIsPrefixSearch( $prefixSearch );
-	}
-
-	/**
-	 * @param bool $useLanguageFallback
-	 * @deprecated
-	 */
-	public function setUseLanguageFallback( $useLanguageFallback ) {
-		$this->termSearchOptions->setUseLanguageFallback( $useLanguageFallback );
 	}
 
 	/**

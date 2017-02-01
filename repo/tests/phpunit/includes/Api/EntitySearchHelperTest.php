@@ -8,9 +8,10 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
+use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
-use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\TermIndexEntry;
 
@@ -60,12 +61,10 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 	 * @param string $type
 	 * @param TermSearchResult[] $returnResults
 	 *
-	 * @return TermIndexSearchInteractor|\PHPUnit_Framework_MockObject_MockObject
+	 * @return ConfigurableTermSearchInteractor|\PHPUnit_Framework_MockObject_MockObject
 	 */
 	private function getMockSearchInteractor( $search, $language, $type, array $returnResults = array() ) {
-		$mock = $this->getMockBuilder( TermIndexSearchInteractor::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mock = $this->getMock( ConfigurableTermSearchInteractor::class );
 		$mock->expects( $this->atLeastOnce() )
 			->method( 'searchForEntities' )
 			->with(
@@ -96,7 +95,7 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 		return $mock;
 	}
 
-	private function newEntitySearchHelper( TermIndexSearchInteractor $searchInteractor ) {
+	private function newEntitySearchHelper( ConfigurableTermSearchInteractor $searchInteractor ) {
 		return new EntitySearchHelper(
 			$this->getMockTitleLookup(),
 			new ItemIdParser(),
@@ -105,24 +104,28 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function provideBooleanValues() {
-		return array(
-			array( true ),
-			array( false ),
-		);
+	public function provideStrictLanguageValues() {
+		return [
+			[ true ],
+			[ false ],
+		];
 	}
 
 	/**
-	 * @dataProvider provideBooleanValues
+	 * @dataProvider provideStrictLanguageValues
 	 */
-	public function testSearchStrictLanguage_passedToSearchInteractor( $boolean ) {
+	public function testSearchStrictLanguage_passedToSearchInteractor( $strictLanguage ) {
 		$searchInteractor = $this->getMockSearchInteractor( 'Foo', 'de-ch', 'item' );
 		$searchInteractor->expects( $this->atLeastOnce() )
-			->method( 'setUseLanguageFallback' )
-			->with( $this->equalTo( !$boolean ) );
+			->method( 'setTermSearchOptions' )
+			->with( $this->callback(
+				function ( TermSearchOptions $options ) use ( $strictLanguage ) {
+					return $options->getUseLanguageFallback() !== $strictLanguage;
+				}
+			) );
 
 		$entitySearchHelper = $this->newEntitySearchHelper( $searchInteractor );
-		$entitySearchHelper->getRankedSearchResults( 'Foo', 'de-ch', 'item', 10, $boolean );
+		$entitySearchHelper->getRankedSearchResults( 'Foo', 'de-ch', 'item', 10, $strictLanguage );
 	}
 
 	public function provideTestGetRankedSearchResults() {

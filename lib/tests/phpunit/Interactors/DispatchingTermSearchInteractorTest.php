@@ -6,8 +6,10 @@ use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
 use Wikibase\Lib\Interactors\DispatchingTermSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
+use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\TermIndexEntry;
 use Wikimedia\Assert\ParameterAssertionException;
@@ -124,6 +126,24 @@ class DispatchingTermSearchInteractorTest extends PHPUnit_Framework_TestCase  {
 			],
 			$interactor->searchForEntities( 'fo', 'en', 'property', [ TermIndexEntry::TYPE_LABEL ] )
 		);
+	}
+
+	public function testTermSearchOptionsArePassedToInteractor() {
+		$searchOptions = new TermSearchOptions();
+		$searchOptions->setLimit( 1234 );
+		$searchOptions->setIsPrefixSearch( true );
+		$searchOptions->setIsCaseSensitive( true );
+
+		$itemInteractor = $this->getMock( ConfigurableTermSearchInteractor::class );
+		$itemInteractor->expects( $this->atLeastOnce() )
+			->method( 'setTermSearchOptions' )
+			->with( $searchOptions );
+
+		$dispatchingInteractor = new DispatchingTermSearchInteractor( [ 'item' => $itemInteractor ] );
+
+		$dispatchingInteractor->setTermSearchOptions( $searchOptions );
+
+		$dispatchingInteractor->searchForEntities( 'foo', 'en', 'item', [ TermIndexEntry::TYPE_LABEL ] );
 	}
 
 }
