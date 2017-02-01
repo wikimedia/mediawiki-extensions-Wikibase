@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_3f394e3f",
+        "filename": "repo/tests/phpunit/includes/Api/EntitySearchHelperTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-01T10:25:29Z",
+      "side": 1,
+      "message": "Shouldn\u0027t return aything",
+      "range": {
+        "startLine": 123,
+        "startChar": 5,
+        "endLine": 123,
+        "endChar": 67
+      },
+      "revId": "a88474c39924ef90c680f9d991cc0b3381745309",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_9feba2a0",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialItemDisambiguationTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-01T10:25:29Z",
+      "side": 1,
+      "message": "`setTermSearchOptions` is not supposed to return anything as I see in interface. Why is it needed then?",
+      "range": {
+        "startLine": 102,
+        "startChar": 3,
+        "endLine": 109,
+        "endChar": 7
+      },
+      "revId": "a88474c39924ef90c680f9d991cc0b3381745309",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
