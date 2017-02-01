@@ -41,19 +41,7 @@ use WikitextContent;
  */
 abstract class EntityHandlerTest extends \MediaWikiTestCase {
 
-	abstract public function getClassName();
-
 	abstract public function getModelId();
-
-	/**
-	 * Returns instances of the EntityHandler deriving class.
-	 * @return array
-	 */
-	public function instanceProvider() {
-		return array(
-			array( $this->getHandler() ),
-		);
-	}
 
 	/**
 	 * @param SettingsArray|null $settings
@@ -118,28 +106,10 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function contentProvider() {
-		return array(
-			array( $this->newEntityContent() ),
-		);
-	}
+	abstract public function contentProvider();
 
-	/**
-	 * @dataProvider instanceProvider
-	 * @param EntityHandler $entityHandler
-	 */
-	public function testGetModelName( EntityHandler $entityHandler ) {
-		$this->assertEquals( $this->getModelId(), $entityHandler->getModelID() );
-		$this->assertInstanceOf( ContentHandler::class, $entityHandler );
-		$this->assertInstanceOf( $this->getClassName(), $entityHandler );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 * @param EntityHandler $entityHandler
-	 */
-	public function testGetSpecialPageForCreation( EntityHandler $entityHandler ) {
-		$specialPageName = $entityHandler->getSpecialPageForCreation();
+	public function testGetSpecialPageForCreation() {
+		$specialPageName = $this->getHandler()->getSpecialPageForCreation();
 		$this->assertTrue( $specialPageName === null || is_string( $specialPageName ) );
 	}
 
