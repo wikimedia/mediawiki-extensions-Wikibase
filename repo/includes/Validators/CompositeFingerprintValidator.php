@@ -4,7 +4,8 @@ namespace Wikibase\Repo\Validators;
 
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\TermList;
 
 /**
  * Composite validator for applying multiple validators as one.
@@ -31,19 +32,29 @@ class CompositeFingerprintValidator implements FingerprintValidator {
 	 *
 	 * @see FingerprintValidator::validateFingerprint
 	 *
-	 * @param Fingerprint $fingerprint
+	 * @param TermList $labels
+	 * @param TermList $descriptions
+	 * @param AliasGroupList $aliasGroups
 	 * @param EntityId $entityId
 	 * @param string[]|null $languageCodes
 	 *
 	 * @return Result
 	 */
 	public function validateFingerprint(
-		Fingerprint $fingerprint,
+		TermList $labels,
+		TermList $descriptions,
+		AliasGroupList $aliasGroups,
 		EntityId $entityId,
 		array $languageCodes = null
 	) {
 		foreach ( $this->validators as $validator ) {
-			$result = $validator->validateFingerprint( $fingerprint, $entityId, $languageCodes );
+			$result = $validator->validateFingerprint(
+				$labels,
+				$descriptions,
+				$aliasGroups,
+				$entityId,
+				$languageCodes
+			);
 
 			if ( !$result->isValid() ) {
 				return $result;

@@ -6,7 +6,6 @@ use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\Validators\CompositeFingerprintValidator;
 use Wikibase\Repo\Validators\FingerprintValidator;
@@ -47,14 +46,16 @@ class CompositeFingerprintValidatorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider validFingerprintProvider
 	 */
 	public function testValidateFingerprint( $validators, $expected ) {
-		$fingerprint = new Fingerprint(
-			new TermList(),
-			new TermList(),
-			new AliasGroupList()
-		);
+		$terms = new TermList();
+		$aliasGroups = new AliasGroupList();
 
 		$validator = new CompositeFingerprintValidator( $validators );
-		$result = $validator->validateFingerprint( $fingerprint, new ItemId( 'Q99' ) );
+		$result = $validator->validateFingerprint(
+			$terms,
+			$terms,
+			$aliasGroups,
+			new ItemId( 'Q99' )
+		);
 
 		$this->assertEquals( $expected, $result->isValid(), 'isValid' );
 	}

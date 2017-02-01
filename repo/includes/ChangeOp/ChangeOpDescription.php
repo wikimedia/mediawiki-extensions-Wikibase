@@ -138,7 +138,9 @@ class ChangeOpDescription extends ChangeOpBase {
 			$this->updateDescriptions( $fingerprint->getDescriptions() );
 
 			$result = $fingerprintValidator->validateFingerprint(
-				$fingerprint,
+				$fingerprint->getLabels(),
+				$fingerprint->getDescriptions(),
+				$fingerprint->getAliasGroups(),
 				$entity->getId(),
 				array( $this->languageCode )
 			);

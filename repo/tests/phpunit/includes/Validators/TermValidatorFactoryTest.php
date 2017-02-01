@@ -9,7 +9,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\Validators\FingerprintValidator;
@@ -67,36 +66,16 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertInstanceOf( FingerprintValidator::class, $validator );
 
-		$goodFingerprint = new Fingerprint(
-			new TermList( array(
-				new Term( 'en', 'DUPE' ),
-			) ),
-			new TermList( array(
-				new Term( 'en', 'bla' ),
-			) ),
-			new AliasGroupList()
-		);
-
-		$labelDupeFingerprint = new Fingerprint(
-			new TermList( array(
-				new Term( 'en', 'DUPE' ),
-			) ),
-			new TermList( array(
-				new Term( 'en', 'DUPE' ),
-			) ),
-			new AliasGroupList()
-		);
-
+		$blaTerms = new TermList( [ new Term( 'en', 'bla' ) ] );
+		$dupeTerms = new TermList( [ new Term( 'en', 'DUPE' ) ] );
+		$emptyAliases = new AliasGroupList();
 		$q99 = new ItemId( 'Q99' );
 
-		$this->assertTrue(
-			$validator->validateFingerprint( $goodFingerprint, $q99 )->isValid(),
-			'isValid(good)'
-		);
-		$this->assertFalse(
-			$validator->validateFingerprint( $labelDupeFingerprint, $q99 )->isValid(),
-			'isValid(bad): label/description'
-		);
+		$result = $validator->validateFingerprint( $dupeTerms, $blaTerms, $emptyAliases, $q99 );
+		$this->assertTrue( $result->isValid(), 'isValid(good)' );
+
+		$result = $validator->validateFingerprint( $dupeTerms, $dupeTerms, $emptyAliases, $q99 );
+		$this->assertFalse( $result->isValid(), 'isValid(bad): label/description' );
 	}
 
 	public function testGetLanguageValidator() {

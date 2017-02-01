@@ -5,8 +5,9 @@ namespace Wikibase\Repo\Validators;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\LabelsProvider;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\LabelDescriptionDuplicateDetector;
 
 /**
@@ -54,19 +55,23 @@ class LabelUniquenessValidator implements EntityValidator, FingerprintValidator 
 	/**
 	 * @see FingerprintValidator::validateFingerprint()
 	 *
-	 * @param Fingerprint $fingerprint
+	 * @param TermList $labels
+	 * @param TermList $descriptions
+	 * @param AliasGroupList $aliasGroups
 	 * @param EntityId $entityId
 	 * @param string[]|null $languageCodes
 	 *
 	 * @return Result
 	 */
 	public function validateFingerprint(
-		Fingerprint $fingerprint,
+		TermList $labels,
+		TermList $descriptions,
+		AliasGroupList $aliasGroups,
 		EntityId $entityId,
 		array $languageCodes = null
 	) {
-		$labels = $fingerprint->getLabels()->toTextArray();
-		$aliases = $fingerprint->getAliasGroups()->toTextArray();
+		$labels = $labels->toTextArray();
+		$aliases = $aliasGroups->toTextArray();
 
 		if ( $languageCodes !== null ) {
 			$languageKeys = array_flip( $languageCodes );

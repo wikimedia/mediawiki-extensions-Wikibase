@@ -136,7 +136,9 @@ class ChangeOpLabel extends ChangeOpBase {
 			$this->updateLabels( $fingerprint->getLabels() );
 
 			$result = $fingerprintValidator->validateFingerprint(
-				$fingerprint,
+				$fingerprint->getLabels(),
+				$fingerprint->getDescriptions(),
+				$fingerprint->getAliasGroups(),
 				$entity->getId(),
 				array( $this->languageCode )
 			);

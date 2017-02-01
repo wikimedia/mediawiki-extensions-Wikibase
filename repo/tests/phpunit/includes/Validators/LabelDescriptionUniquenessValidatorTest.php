@@ -138,7 +138,13 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 		$dupeDetector = $this->getMockDupeDetector();
 		$validator = new LabelDescriptionUniquenessValidator( $dupeDetector );
 
-		$result = $validator->validateFingerprint( $fingerprint, $entityId, $languageCodes );
+		$result = $validator->validateFingerprint(
+			$fingerprint->getLabels(),
+			$fingerprint->getDescriptions(),
+			$fingerprint->getAliasGroups(),
+			$entityId,
+			$languageCodes
+		);
 
 		$this->assertTrue( $result->isValid(), 'isValid' );
 	}
@@ -193,7 +199,12 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 		$dupeDetector = $this->getMockDupeDetector();
 		$validator = new LabelDescriptionUniquenessValidator( $dupeDetector );
 
-		$result = $validator->validateFingerprint( $fingerprint, new ItemId( 'Q99' ) );
+		$result = $validator->validateFingerprint(
+			$fingerprint->getLabels(),
+			$fingerprint->getDescriptions(),
+			$fingerprint->getAliasGroups(),
+			new ItemId( 'Q99' )
+		);
 
 		$this->assertFalse( $result->isValid(), 'isValid' );
 
