@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_9a773035",
+        "filename": "repo/includes/Search/Elastic/Fields/ItemFieldDefinitions.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-02-01T13:08:07Z",
+      "side": 1,
+      "message": "you frequently repeat this pattern,\nI was wondering it would make sense to create something like an AbstractCompositeFieldDefinitions that would take care of merging FieldDefinitions.\nBut given that sometimes you return some SearchIndeField without their pending FieldDefinitions it\u0027s maybe not good idea...\nI\u0027m saying this because I think we should probably make sure that there are no collision in fieldnames.\n\nMaybe a simple utility class to merge SearchIndexFields with all the appropriate checks would be sufficient?",
+      "range": {
+        "startLine": 42,
+        "startChar": 12,
+        "endLine": 42,
+        "endChar": 23
+      },
+      "revId": "e449aa11464ceb6c651d3e24abdb4accb0247673",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
