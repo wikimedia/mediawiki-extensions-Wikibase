@@ -34,6 +34,24 @@
       "revId": "a0490da01abc1863deba2df237d339c203f3bc00",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_dac5a891",
+        "filename": "repo/includes/Api/SetQualifier.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-01T11:59:35Z",
+      "side": 1,
+      "message": "Sorry if my comment is irrelevant but just looking at the change I am a bit confused.\n\nStatementModificationHelper injected here is instantiated in repo/Wikibase.php using ApiHelperFactory class created with main module Context.\nOn the other hand, you then get another ApiHelperFactory with  Context of this module, and then use to get resultBuilder and entitySavingHelper.\n\nIt seems a bit inconsistent. I\u0027d get if the reason was that for ApiErrorReporter (the thing actually used from api helper factory in repo/Wikibase.php) the context it is not that super imporant that context is 100% accurate, while for those things used here it is. If you know what I mean. It might be a fair explanation, I simply don\u0027t know all those classes and I am not sure if I am guessing right.",
+      "parentUuid": "2ef897d1_7cefd982",
+      "revId": "a0490da01abc1863deba2df237d339c203f3bc00",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
