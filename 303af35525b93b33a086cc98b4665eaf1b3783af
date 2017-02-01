@@ -68,6 +68,30 @@
       "revId": "303af35525b93b33a086cc98b4665eaf1b3783af",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_5f82cace",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialItemByTitleTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-01T10:31:54Z",
+      "side": 1,
+      "message": "Never did Perl, but can imagine :)\nI did it at first, but dangling comma in the beginning confused me and I decided to put some senseless placeholder there.",
+      "parentUuid": "2ef897d1_7f8c663a",
+      "range": {
+        "startLine": 176,
+        "startChar": 8,
+        "endLine": 176,
+        "endChar": 10
+      },
+      "revId": "303af35525b93b33a086cc98b4665eaf1b3783af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
