@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\RecentChanges;
 
 use ChangesList;
 use DerivativeContext;
+use Hamcrest\Matcher;
 use Language;
 use MediaWikiLangTestCase;
 use RecentChange;
@@ -80,8 +81,13 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			$changesList->recentChangesFlags( array( 'wikibase-edit' => true ), '' )
 		);
 
-		foreach ( $expectedTags as $key => $tag ) {
-			$this->assertTag( $tag, $formattedLine, $key . "\n\t" . $formattedLine );
+		foreach ( $expectedTags as $key => $tagMatcher ) {
+			$message = $key . "\n\t" . $formattedLine;
+			assertThat(
+				$message,
+				$formattedLine,
+				is( htmlPiece( havingChild( $tagMatcher ) ) )
+			);
 		}
 
 		foreach ( $patterns as $pattern ) {
@@ -167,79 +173,55 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 	}
 
 	public function getEditSiteLinkChangeTagMatchers() {
-		return array(
-			'edit-difflink' => array(
-				'tag' => 'a',
-				'content' => 'diff'
+		return [
+			'edit-difflink' => both( withTagName( 'a' ) )->andAlso( havingTextContents( 'diff' ) ),
+			'edit-histlink' => both( withTagName( 'a' ) )->andAlso( havingTextContents( 'hist' ) ),
+			'edit-changeslist-separator' => allOf(
+				withTagName( 'span' ),
+				withClass( 'mw-changeslist-separator' ),
+				havingTextContents( '. .' )
 			),
-			'edit-histlink' => array(
-				'tag' => 'a',
-				'content' => 'hist'
+			'edit-change-flag' => allOf(
+				withTagName( 'abbr' ),
+				withClass( 'wikibase-edit' ),
+				havingTextContents( 'D' )
 			),
-			'edit-changeslist-separator' => array(
-				'tag' => 'span',
-				'attributes' => array(
-					'class' => 'mw-changeslist-separator'
+			'edit-entitylink' => allOf(
+				withTagName( 'a' ),
+				withClass( 'wb-entity-link' ),
+				withAttribute( 'href' )->havingValue( 'http://www.wikidata.org/wiki/Q4' ),
+				havingTextContents( 'Q4' )
+			),
+			'edit-changeslist-date' => allOf(
+				withTagName( 'span' ),
+				withClass( 'mw-changeslist-date' ),
+				havingTextContents( '11:17' )
+			),
+			'edit-userlink' => allOf(
+				withTagName( 'a' ),
+				withClass( 'mw-userlink' ),
+				withAttribute( 'href' )->havingValue( 'http://www.wikidata.org/wiki/User:Cat' ),
+				havingTextContents( 'Cat' )
+			),
+			'edit-usertoollinks' => both( withTagName( 'span' ) )->andAlso(
+				withClass( 'mw-usertoollinks' )
+			),
+			'edit-usertalk' => allOf(
+				withTagName( 'a' ),
+				withAttribute( 'href' )->havingValue(
+					'http://www.wikidata.org/wiki/User_talk:Cat'
 				),
-				'content' => '. .'
+				havingTextContents( 'talk' )
 			),
-			'edit-change-flag' => array(
-				'tag' => 'abbr',
-				'attributes' => array(
-					'class' => 'wikibase-edit'
+			'edit-usercontribs' => allOf(
+				withTagName( 'a' ),
+				withAttribute( 'href' )->havingValue(
+					'http://www.wikidata.org/wiki/Special:Contributions/Cat'
 				),
-				'content' => 'D'
+				havingTextContents( 'contribs' )
 			),
-			'edit-entitylink' => array(
-				'tag' => 'a',
-				'attributes' => array(
-					'class' => 'wb-entity-link',
-					'href' => 'http://www.wikidata.org/wiki/Q4'
-				),
-				'content' => 'Q4'
-			),
-			'edit-changeslist-date' => array(
-				'tag' => 'span',
-				'attributes' => array(
-					'class' => 'mw-changeslist-date'
-				),
-				'content' => '11:17'
-			),
-			'edit-userlink' => array(
-				'tag' => 'a',
-				'attributes' => array(
-					'class' => 'mw-userlink',
-					'href' => 'http://www.wikidata.org/wiki/User:Cat'
-				),
-				'content' => 'Cat'
-			),
-			'edit-usertoollinks' => array(
-				'tag' => 'span',
-				'attributes' => array(
-					'class' => 'mw-usertoollinks'
-				)
-			),
-			'edit-usertalk' => array(
-				'tag' => 'a',
-				'attributes' => array(
-					'href' => 'http://www.wikidata.org/wiki/User_talk:Cat'
-				),
-				'content' => 'talk'
-			),
-			'edit-usercontribs' => array(
-				'tag' => 'a',
-				'attributes' => array(
-					'href' => 'http://www.wikidata.org/wiki/Special:Contributions/Cat'
-				),
-				'content' => 'contribs'
-			),
-			'edit-comment' => array(
-				'tag' => 'span',
-				'attributes' => array(
-					'class' => 'comment'
-				)
-			)
-		);
+			'edit-comment' => both( withTagName( 'span' ) )->andAlso( withClass( 'comment' ) ),
+		];
 	}
 
 	protected function getEditSiteLinkRecentChange(
@@ -282,74 +264,42 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 	}
 
 	protected function getLogChangeTagMatchers() {
-		return array(
-			'delete-deletionlog' => array(
-				'tag' => 'a',
-				'attributes' => array(
-					'href' => 'http://www.wikidata.org/wiki/Special:Log/delete'
-				),
-				'content' => 'Deletion log'
-			),
-			'delete-changeslist-separator' => array(
-				'tag' => 'span',
-				'attributes' => array(
-					'class' => 'mw-changeslist-separator'
-				),
-				'content' => '. .'
-			),
-			'delete-change-flag' => array(
-				'tag' => 'abbr',
-				'attributes' => array(
-					'class' => 'wikibase-edit'
-				),
-				'content' => 'D'
-			),
-			'delete-titlelink' => array(
-				'tag' => 'a',
-				'content' => 'Canada'
-			),
-			'delete-changeslist-date' => array(
-				'tag' => 'span',
-				'attributes' => array(
-					'class' => 'mw-changeslist-date'
-				),
-				'content' => '15:18'
-			),
-			'delete-userlink' => array(
-				'tag' => 'a',
-				'attributes' => array(
-					'class' => 'mw-userlink',
-					'href' => 'http://www.wikidata.org/wiki/User:Cat'
-				),
-				'content' => 'Cat'
-			),
-			'delete-usertoollinks' => array(
-				'tag' => 'span',
-				'attributes' => array(
-					'class' => 'mw-usertoollinks'
-				)
-			),
-			'delete-usertalk' => array(
-				'tag' => 'a',
-				'attributes' => array(
-					'href' => 'http://www.wikidata.org/wiki/User_talk:Cat'
-				),
-				'content' => 'talk'
-			),
-			'delete-contribs' => array(
-				'tag' => 'a',
-				'attributes' => array(
-					'href' => 'http://www.wikidata.org/wiki/Special:Contributions/Cat'
-				),
-				'content' => 'contribs'
-			),
-			'delete-comment' => array(
-				'tag' => 'span',
-				'attributes' => array(
-					'class' => 'comment'
+		return [
+			'delete-deletionlog' => both(
+				tagMatchingOutline( '<a href="http://www.wikidata.org/wiki/Special:Log/delete"/>' )
+			)
+				->andAlso( havingTextContents( 'Deletion log' ) ),
+			'delete-changeslist-separator' => both(
+				tagMatchingOutline( '<span class="mw-changeslist-separator"/>' )
+			)
+				->andAlso( havingTextContents( '. .' ) ),
+			'delete-change-flag' => both( tagMatchingOutline( '<abbr class="wikibase-edit"/>' ) )
+				->andAlso( havingTextContents( 'D' ) ),
+			'delete-titlelink' => both( withTagName( 'a' ) )
+				->andAlso( havingTextContents( 'Canada' ) ),
+			'delete-changeslist-date' => both(
+				tagMatchingOutline( '<span class="mw-changeslist-date"/>' )
+			)
+				->andAlso( havingTextContents( '15:18' ) ),
+			'delete-userlink' => both(
+				tagMatchingOutline(
+					'<a class="mw-userlink" href="http://www.wikidata.org/wiki/User:Cat"/>'
 				)
 			)
-		);
+				->andAlso( havingTextContents( 'Cat' ) ),
+			'delete-usertoollinks' => tagMatchingOutline( '<span class="mw-usertoollinks"/>' ),
+			'delete-usertalk' => both(
+				tagMatchingOutline( '<a href="http://www.wikidata.org/wiki/User_talk:Cat"/>' )
+			)
+				->andAlso( havingTextContents( 'talk' ) ),
+			'delete-contribs' => both(
+				tagMatchingOutline(
+					'<a href="http://www.wikidata.org/wiki/Special:Contributions/Cat"/>'
+				)
+			)
+				->andAlso( havingTextContents( 'contribs' ) ),
+			'delete-comment' => tagMatchingOutline( '<span class="comment"/>' ),
+		];
 	}
 
 	protected function getLogRecentChange() {
