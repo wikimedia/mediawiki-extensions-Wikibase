@@ -6,7 +6,6 @@ use DataUpdate;
 use IContextSource;
 use Page;
 use Title;
-use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -18,7 +17,6 @@ use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\SiteLinkStore;
-use Wikibase\Repo\Search\Elastic\Fields\ItemFieldDefinitions;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
@@ -62,7 +60,6 @@ class ItemHandler extends EntityHandler {
 	 * @param SiteLinkStore $siteLinkStore
 	 * @param EntityIdLookup $entityIdLookup
 	 * @param LanguageFallbackLabelDescriptionLookupFactory $labelLookupFactory
-	 * @param ItemFieldDefinitions $itemFieldDefinitions
 	 * @param callable|null $legacyExportFormatDetector
 	 */
 	public function __construct(
@@ -75,7 +72,6 @@ class ItemHandler extends EntityHandler {
 		SiteLinkStore $siteLinkStore,
 		EntityIdLookup $entityIdLookup,
 		LanguageFallbackLabelDescriptionLookupFactory $labelLookupFactory,
-		ItemFieldDefinitions $itemFieldDefinitions,
 		$legacyExportFormatDetector = null
 	) {
 		parent::__construct(
@@ -86,7 +82,6 @@ class ItemHandler extends EntityHandler {
 			$constraintProvider,
 			$errorLocalizer,
 			$entityIdParser,
-			$itemFieldDefinitions,
 			$legacyExportFormatDetector
 		);
 
@@ -199,7 +194,7 @@ class ItemHandler extends EntityHandler {
 	/**
 	 * @see EntityHandler::makeEmptyEntity()
 	 *
-	 * @return EntityDocument
+	 * @return EntityContent
 	 */
 	public function makeEmptyEntity() {
 		return new Item();
