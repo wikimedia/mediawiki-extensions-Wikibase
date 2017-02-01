@@ -110,6 +110,24 @@
       "revId": "fc6d7784937d5fd844a4ce8e7428d730bed03ce5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_7fa0e13e",
+        "filename": "repo/tests/phpunit/includes/Content/EntityHandlerTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-02-01T23:53:34Z",
+      "side": 1,
+      "message": "ItemHandlerTest has it. Data is different for each type, so having it in Entity won\u0027t make much sense?",
+      "parentUuid": "2ef897d1_999bbd1b",
+      "revId": "fc6d7784937d5fd844a4ce8e7428d730bed03ce5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
