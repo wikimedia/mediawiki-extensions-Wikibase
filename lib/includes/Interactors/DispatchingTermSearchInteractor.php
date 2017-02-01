@@ -12,12 +12,17 @@ use Wikimedia\Assert\ParameterAssertionException;
  *
  * TODO: rename to DispatchingByEntityTypeTermSearchInteractor ?
  */
-class DispatchingTermSearchInteractor implements TermSearchInteractor {
+class DispatchingTermSearchInteractor implements ConfigurableTermSearchInteractor {
 
 	/**
 	 * @var TermSearchInteractor[]
 	 */
 	private $interactors = [];
+
+	/**
+	 * @var TermSearchOptions
+	 */
+	private $searchOptions;
 
 	/**
 	 * @param TermSearchInteractor[] $interactors Associative array mapping entity types (strings) to TermSearchInteractor instances
@@ -27,7 +32,9 @@ class DispatchingTermSearchInteractor implements TermSearchInteractor {
 	public function __construct( array $interactors ) {
 		Assert::parameterElementType( TermSearchInteractor::class, $interactors, '$interactors' );
 		Assert::parameterElementType( 'string', array_keys( $interactors ), 'array_keys( $interactors )' );
+
 		$this->interactors = $interactors;
+		$this->searchOptions = new TermSearchOptions();
 	}
 
 	/**
@@ -47,6 +54,10 @@ class DispatchingTermSearchInteractor implements TermSearchInteractor {
 			return [];
 		}
 
+		if ( $interactor instanceof ConfigurableTermSearchInteractor ) {
+			$interactor->setTermSearchOptions( $this->searchOptions );
+		}
+
 		return $interactor->searchForEntities( $text, $languageCode, $entityType, $termTypes );
 	}
 
@@ -57,6 +68,10 @@ class DispatchingTermSearchInteractor implements TermSearchInteractor {
 	 */
 	private function getInteractorForEntityType( $entityType ) {
 		return isset( $this->interactors[$entityType] ) ? $this->interactors[$entityType] : null;
+	}
+
+	public function setTermSearchOptions( TermSearchOptions $termSearchOptions ) {
+		$this->searchOptions = $termSearchOptions;
 	}
 
 }

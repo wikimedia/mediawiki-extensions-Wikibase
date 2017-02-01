@@ -7,7 +7,8 @@ use Html;
 use WebRequest;
 use Wikibase\ItemDisambiguation;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
+use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
+use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\TermIndexEntry;
@@ -41,7 +42,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	private $itemDisambiguation;
 
 	/**
-	 * @var TermIndexSearchInteractor
+	 * @var ConfigurableTermSearchInteractor
 	 */
 	private $searchInteractor = null;
 
@@ -54,14 +55,14 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	 * @param ContentLanguages $contentLanguages
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param ItemDisambiguation $itemDisambiguation
-	 * @param TermIndexSearchInteractor $searchInteractor
+	 * @param ConfigurableTermSearchInteractor $searchInteractor
 	 * @param int $limit
 	 */
 	public function __construct(
 		ContentLanguages $contentLanguages,
 		LanguageNameLookup $languageNameLookup,
 		ItemDisambiguation $itemDisambiguation,
-		TermIndexSearchInteractor $searchInteractor,
+		ConfigurableTermSearchInteractor $searchInteractor,
 		$limit = 100
 	) {
 		parent::__construct( 'ItemDisambiguation' );
@@ -161,13 +162,15 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	 * @return TermSearchResult[]
 	 */
 	private function getSearchResults( $label, $languageCode ) {
-		$searchInteractor = $this->searchInteractor;
-		$searchInteractor->setLimit( $this->limit );
-		$searchInteractor->setIsCaseSensitive( false );
-		$searchInteractor->setIsPrefixSearch( false );
-		$searchInteractor->setUseLanguageFallback( true );
+		$searchOptions = new TermSearchOptions();
+		$searchOptions->setLimit( $this->limit );
+		$searchOptions->setIsCaseSensitive( false );
+		$searchOptions->setIsPrefixSearch( false );
+		$searchOptions->setUseLanguageFallback( true );
 
-		return $searchInteractor->searchForEntities(
+		$this->searchInteractor->setTermSearchOptions( $searchOptions );
+
+		return $this->searchInteractor->searchForEntities(
 			$label,
 			$languageCode,
 			'item',

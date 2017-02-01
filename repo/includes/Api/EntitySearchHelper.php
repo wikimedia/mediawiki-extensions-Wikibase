@@ -7,8 +7,9 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
+use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\TermIndexEntry;
 
@@ -31,9 +32,9 @@ class EntitySearchHelper {
 	private $idParser;
 
 	/**
-	 * @var TermIndexSearchInteractor
+	 * @var ConfigurableTermSearchInteractor
 	 */
-	private $termIndexSearchInteractor;
+	private $termSearchInteractor;
 
 	/**
 	 * @var LabelDescriptionLookup
@@ -43,12 +44,12 @@ class EntitySearchHelper {
 	public function __construct(
 		EntityTitleLookup $titleLookup,
 		EntityIdParser $idParser,
-		TermIndexSearchInteractor $termIndexSearchInteractor,
+		ConfigurableTermSearchInteractor $termSearchInteractor,
 		LabelDescriptionLookup $labelDescriptionLookup
 	) {
 		$this->titleLookup = $titleLookup;
 		$this->idParser = $idParser;
-		$this->termIndexSearchInteractor = $termIndexSearchInteractor;
+		$this->termSearchInteractor = $termSearchInteractor;
 		$this->labelDescriptionLookup = $labelDescriptionLookup;
 	}
 
@@ -203,11 +204,15 @@ class EntitySearchHelper {
 	 * @return TermSearchResult[]
 	 */
 	private function searchEntities( $text, $languageCode, $entityType, $limit, $prefixSearch, $strictLanguage ) {
-		$this->termIndexSearchInteractor->setLimit( $limit );
-		$this->termIndexSearchInteractor->setIsPrefixSearch( $prefixSearch );
-		$this->termIndexSearchInteractor->setIsCaseSensitive( false );
-		$this->termIndexSearchInteractor->setUseLanguageFallback( !$strictLanguage );
-		return $this->termIndexSearchInteractor->searchForEntities(
+		$searchOptions = new TermSearchOptions();
+		$searchOptions->setLimit( $limit );
+		$searchOptions->setIsPrefixSearch( $prefixSearch );
+		$searchOptions->setIsCaseSensitive( false );
+		$searchOptions->setUseLanguageFallback( !$strictLanguage );
+
+		$this->termSearchInteractor->setTermSearchOptions( $searchOptions );
+
+		return $this->termSearchInteractor->searchForEntities(
 			$text,
 			$languageCode,
 			$entityType,

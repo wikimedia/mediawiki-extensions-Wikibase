@@ -11,6 +11,7 @@ use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
+use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Store\BufferingTermLookup;
 use Wikibase\TermIndexEntry;
@@ -172,15 +173,19 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 			$this->getMockBufferingTermLookup(),
 			'pt'
 		);
+
+		$searchOptions = new TermSearchOptions();
 		if ( $caseSensitive !== null ) {
-			$interactor->setIsCaseSensitive( $caseSensitive );
+			$searchOptions->setIsCaseSensitive( $caseSensitive );
 		}
 		if ( $prefixSearch !== null ) {
-			$interactor->setIsPrefixSearch( $prefixSearch );
+			$searchOptions->setIsPrefixSearch( $prefixSearch );
 		}
 		if ( $limit !== null ) {
-			$interactor->setLimit( $limit );
+			$searchOptions->setLimit( $limit );
 		}
+
+		$interactor->setTermSearchOptions( $searchOptions );
 
 		return $interactor;
 	}

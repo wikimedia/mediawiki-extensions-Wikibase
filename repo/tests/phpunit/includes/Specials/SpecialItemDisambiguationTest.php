@@ -8,7 +8,8 @@ use SpecialPageTestBase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\ItemDisambiguation;
-use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
+use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
+use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Repo\Specials\SpecialItemDisambiguation;
@@ -49,7 +50,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	}
 
 	/**
-	 * @return TermIndexSearchInteractor
+	 * @return ConfigurableTermSearchInteractor
 	 */
 	private function getMockSearchInteractor() {
 		$searchResults = array(
@@ -70,9 +71,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 				),
 			),
 		);
-		$mock = $this->getMockBuilder( TermIndexSearchInteractor::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mock = $this->getMock( ConfigurableTermSearchInteractor::class );
 
 		$mock->expects( $this->any() )
 			->method( 'searchForEntities' )
@@ -100,16 +99,14 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 			) );
 
 		$mock->expects( $this->any() )
-			->method( 'setIsCaseSensitive' )
-			->with( false );
-
-		$mock->expects( $this->any() )
-			->method( 'setPrefixMatch' )
-			->with( false );
-
-		$mock->expects( $this->any() )
-			->method( 'setUseLanguageFallback' )
-			->with( true );
+			->method( 'setTermSearchOptions' )
+			->with(
+				$this->callback( function ( TermSearchOptions $options ) {
+					return $options->getIsCaseSensitive() === false
+						&& $options->getIsPrefixSearch() === false
+						&& $options->getUseLanguageFallback() === true;
+				}
+			) );
 
 		return $mock;
 	}
