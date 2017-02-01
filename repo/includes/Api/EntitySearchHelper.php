@@ -19,7 +19,7 @@ use Wikibase\TermIndexEntry;
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class EntitySearchHelper {
+class EntitySearchHelper implements EntitySearcher {
 
 	/**
 	 * @var EntityTitleLookup
