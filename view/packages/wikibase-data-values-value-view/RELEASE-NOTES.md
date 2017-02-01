@@ -1,9 +1,12 @@
 # ValueView release notes
 
+## 0.18.2 (2017-02-02)
+* Fixed `jQuery.ui.ooMenu`'s `customItems` initialization.
+
 ## 0.18.1 (2017-02-01)
 * Added support for `geo-shape` data type.
 * The close icon on inputextenders now follows MediaWiki standard.
-* Fixed ooMenu custom items sharing state.
+* Fixed `jQuery.ui.ooMenu`'s `customItems` sharing state.
 * Fixed text overflow in listrotator dropdowns.
 
 ## 0.18.0 (2016-10-14)

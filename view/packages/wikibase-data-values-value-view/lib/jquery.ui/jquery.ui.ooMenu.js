@@ -65,7 +65,7 @@ $.widget( 'ui.ooMenu', {
 	 * @protected
 	 */
 	_create: function() {
-		this.options.customItems = [];
+		this.options.customItems = this.options.customItems || [];
 
 		this.element.addClass( 'ui-ooMenu ui-widget ui-widget-content' );
 
