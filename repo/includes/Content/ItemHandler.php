@@ -197,6 +197,14 @@ class ItemHandler extends EntityHandler {
 	}
 
 	/**
+	 * Temporary fix for T155139
+	 * @return ItemContent
+	 */
+	public function makeEmptyContent() {
+		return ItemContent::newEmpty();
+	}
+
+	/**
 	 * @see EntityHandler::makeEmptyEntity()
 	 *
 	 * @return EntityDocument
