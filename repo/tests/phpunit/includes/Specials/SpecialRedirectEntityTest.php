@@ -41,6 +41,8 @@ use Wikibase\Lib\Tests\MockRepository;
  */
 class SpecialRedirectEntityTest extends SpecialPageTestBase {
 
+	use HtmlAssertionHelpers;
+
 	/**
 	 * @var MockRepository|null
 	 */
@@ -178,49 +180,13 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		return $html;
 	}
 
-	public function testForm() {
-		$matchers['fromid'] = array(
-			'tag' => 'div',
-			'attributes' => array(
-				'id' => 'wb-redirectentity-fromid',
-			),
-			'child' => array(
-				'tag' => 'input',
-				'attributes' => array(
-					'name' => 'fromid',
-				)
-			) );
-		$matchers['toid'] = array(
-			'tag' => 'div',
-			'attributes' => array(
-				'id' => 'wb-redirectentity-toid',
-			),
-			'child' => array(
-				'tag' => 'input',
-				'attributes' => array(
-					'name' => 'toid',
-				)
-			) );
-		$matchers['submit'] = array(
-			'tag' => 'div',
-			'attributes' => array(
-				'id' => 'wb-redirectentity-submit',
-			),
-			'child' => array(
-				'tag' => 'button',
-				'attributes' => array(
-					'type' => 'submit',
-					'name' => 'wikibase-redirectentity-submit',
-				)
-			) );
-
+	public function testAllFormFieldsAreRendered() {
 		$output = $this->executeSpecialEntityRedirect( array() );
 
 		$this->assertNoError( $output );
-
-		foreach ( $matchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
-		}
+		$this->assertHtmlContainsInputWithName( $output, 'fromid' );
+		$this->assertHtmlContainsInputWithName( $output, 'toid' );
+		$this->assertHtmlContainsSubmitControl( $output );
 	}
 
 	/**
