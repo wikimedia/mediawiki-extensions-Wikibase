@@ -202,5 +202,23 @@ return [
 	// URL of geo shape storage frontend. Used primarily to build links to the geo shapes.
 	// URL will be concatenated with the page title, so should end up with '/' or 'title='
 	// Special characters (e.g. space, percent, etc.) in URL should NOT be encoded
-	'geoShapeStorageFrontendUrl' => 'https://commons.wikimedia.org/wiki/'
+	'geoShapeStorageFrontendUrl' => 'https://commons.wikimedia.org/wiki/',
+
+	// Configurations for searching entities
+	'entitySearch' => [
+		// Use CirrusSearch (ElasticSearch) for searching
+		'useCirrus' => false,
+		// Default label scoring profile name, for prefix search
+		// See profiles in config/EntityPrefixSearchProfiles.php
+		'defaultPrefixProfile' => 'default',
+		// Field weight profiles. These profiles specify relative weights
+		// of label fields for different languages, e.g. exact language match
+		// vs. fallback language match.
+		// Loaded from config/EntityPrefixSearchProfiles.php by Wikibase.php
+		'prefixSearchProfiles' => [],
+		// Default rescore profile for prefix search
+		'defaultPrefixRescoreProfile' => 'wikibase_prefix',
+		// Rescore profiles, loaded by Wikibase.php
+		'rescoreProfiles' => [],
+	],
 ];
