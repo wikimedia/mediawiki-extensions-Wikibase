@@ -76,7 +76,8 @@ call_user_func( function() {
 	global $wgExtensionMessagesFiles, $wgMessagesDirs;
 	global $wgAPIModules, $wgAPIListModules, $wgSpecialPages, $wgHooks;
 	global $wgWBRepoSettings, $wgResourceModules, $wgValueParsers, $wgJobClasses;
-	global $wgWBRepoDataTypes, $wgWBRepoEntityTypes;
+	global $wgWBRepoDataTypes, $wgWBRepoEntityTypes, $wgEntitySearchUseCirrus,
+	       $wgEntitySearchDefaultProfile, $wgEntityPrefixSearchProfiles;
 
 	$wgExtensionCredits['wikibase'][] = array(
 		'path' => __DIR__,
@@ -206,18 +207,30 @@ call_user_func( function() {
 	$wgAPIModules['wbsearchentities'] = [
 		'class' => Wikibase\Repo\Api\SearchEntities::class,
 		'factory' => function( ApiMain $mainModule, $moduleName ) {
+			global $wgEntitySearchUseCirrus;
 			$repo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
 
-			$entitySearchHelper = new Wikibase\Repo\Api\EntitySearchHelper(
-				$repo->getEntityTitleLookup(),
-				$repo->getEntityIdParser(),
-				$repo->newTermSearchInteractor( $repo->getUserLanguage()->getCode() ),
-				new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
-					$repo->getTermLookup(),
-					$repo->getLanguageFallbackChainFactory()
-						->newFromLanguage( $repo->getUserLanguage() )
-				)
-			);
+			if ( $wgEntitySearchUseCirrus ) {
+				$entitySearchHelper = new Wikibase\Repo\Api\EntitySearchElastic(
+					$repo->getLanguageFallbackChainFactory(),
+					$repo->getEntityIdParser(),
+					new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
+						$repo->getTermLookup(),
+						$repo->getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
+					),
+					$repo->getContentModelMappings()
+				);
+			} else {
+				$entitySearchHelper = new Wikibase\Repo\Api\EntitySearchHelper(
+					$repo->getEntityTitleLookup(),
+					$repo->getEntityIdParser(),
+					$repo->newTermSearchInteractor( $repo->getUserLanguage()->getCode() ),
+					new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
+						$repo->getTermLookup(),
+						$repo->getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
+					)
+				);
+			}
 
 			return new Wikibase\Repo\Api\SearchEntities(
 				$mainModule,
@@ -553,6 +566,7 @@ call_user_func( function() {
 	$wgHooks['ContentHandlerForModelID'][] = 'Wikibase\RepoHooks::onContentHandlerForModelID';
 	$wgHooks['BeforeDisplayNoArticleText'][] = 'Wikibase\ViewEntityAction::onBeforeDisplayNoArticleText';
 	$wgHooks['InfoAction'][] = '\Wikibase\RepoHooks::onInfoAction';
+	$wgHooks['GetContentModels'][] = '\Wikibase\RepoHooks::onGetContentModels';
 
 	// update hooks
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Repo\Store\Sql\ChangesSubscriptionSchemaUpdater::onSchemaUpdate';
@@ -567,4 +581,9 @@ call_user_func( function() {
 		require __DIR__ . '/../lib/config/WikibaseLib.default.php',
 		require __DIR__ . '/config/Wikibase.default.php'
 	);
+
+	// Entity search configs for ElasticSearch
+	$wgEntitySearchUseCirrus = false;
+	$wgEntityPrefixSearchProfiles = include __DIR__ . '/includes/Api/EntityPrefixSearchProfiles.php';
+	$wgEntitySearchDefaultProfile = 'default';
 } );
