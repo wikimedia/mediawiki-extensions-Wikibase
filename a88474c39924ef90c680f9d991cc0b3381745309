@@ -69,6 +69,30 @@
       "revId": "a88474c39924ef90c680f9d991cc0b3381745309",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_9fde02dd",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialItemDisambiguationTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-01T10:37:12Z",
+      "side": 1,
+      "message": "Oh!\nI can imagine I\u0027m not the only one that can run into this confusion.\nMay be extract a local variable for this thing like:\n```\n$expectedArgumentMatcher \u003d $this-\u003ecallback( function ( TermSearchOptions $options ) { \n    return $options-\u003egetIsCaseSensitive() \u003d\u003d\u003d false \n        \u0026\u0026 $options-\u003egetIsPrefixSearch() \u003d\u003d\u003d false \n        \u0026\u0026 $options-\u003egetUseLanguageFallback() \u003d\u003d\u003d true; \n}\n\n$mock-\u003eexpects( $this-\u003eany() )\n     -\u003emethod( \u0027setTermSearchOptions\u0027 )\n     -\u003ewith( $expectedArgumentMatcher );\n```",
+      "parentUuid": "2ef897d1_5f1bead4",
+      "range": {
+        "startLine": 102,
+        "startChar": 3,
+        "endLine": 109,
+        "endChar": 7
+      },
+      "revId": "a88474c39924ef90c680f9d991cc0b3381745309",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
