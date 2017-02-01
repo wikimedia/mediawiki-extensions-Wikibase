@@ -23,7 +23,7 @@ use Wikibase\Repo\WikibaseRepo;
 class SearchEntities extends ApiBase {
 
 	/**
-	 * @var EntitySearchHelper
+	 * @var EntitySearcher
 	 */
 	private $entitySearchHelper;
 
@@ -50,6 +50,7 @@ class SearchEntities extends ApiBase {
 	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
+	 * @param EntitySearcher $entitySearchHelper
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param ContentLanguages $termLanguages
 	 * @param string[] $entityTypes
@@ -60,7 +61,7 @@ class SearchEntities extends ApiBase {
 	public function __construct(
 		ApiMain $mainModule,
 		$moduleName,
-		EntitySearchHelper $entitySearchHelper,
+		EntitySearcher $entitySearchHelper,
 		EntityTitleLookup $entityTitleLookup,
 		ContentLanguages $termLanguages,
 		array $entityTypes,

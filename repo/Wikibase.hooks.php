@@ -874,6 +874,16 @@ final class RepoHooks {
 	}
 
 	/**
+	 * Add Wikibase content models to model list.
+	 * @param string[] $models List of content models
+	 */
+	public static function onGetContentModels( &$models ) {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$models = array_merge( $models,
+			$wikibaseRepo->getEntityContentFactory()->getEntityContentModels() );
+	}
+
+	/**
 	 * Adds a list of data value types, sparql endpoint and concept base URI to
 	 * the action=query&meta=siteinfo API.
 	 *
