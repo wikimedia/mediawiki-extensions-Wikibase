@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_bad78cf1",
+        "filename": "repo/includes/Search/Elastic/Fields/SearchIndexField.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-02-01T13:40:56Z",
+      "side": 1,
+      "message": "Should be renamed to something like WikibaseSearchIndexField as it is extremely confusing to have SearchIndexField here and in core.\n\nAlso why don\u0027t you extend \\SearchIndexField ?\nWhat\u0027s the benefit of having this level of abstraction here?",
+      "range": {
+        "startLine": 19,
+        "startChar": 10,
+        "endLine": 19,
+        "endChar": 26
+      },
+      "revId": "fc6d7784937d5fd844a4ce8e7428d730bed03ce5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_9ad4d0ed",
+        "filename": "repo/includes/Search/Elastic/Fields/SearchIndexField.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-02-01T13:40:56Z",
+      "side": 1,
+      "message": "this is confusing, I\u0027d rename the method or maybe extends \\SearchIndexField and return the mapping.",
+      "range": {
+        "startLine": 27,
+        "startChar": 17,
+        "endLine": 27,
+        "endChar": 27
+      },
+      "revId": "fc6d7784937d5fd844a4ce8e7428d730bed03ce5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
