@@ -1,7 +1,10 @@
 # ValueView release notes
 
-## 0.18.1 (2016-01-03)
+## 0.18.1 (2017-02-01)
 * Added support for `geo-shape` data type.
+* The close icon on inputextenders now follows MediaWiki standard.
+* Fixed ooMenu custom items sharing state.
+* Fixed text overflow in listrotator dropdowns.
 
 ## 0.18.0 (2016-10-14)
 * `jQuery.ui.commonssuggester` now allows pasting full and partial Wikimedia Commons URLs.
