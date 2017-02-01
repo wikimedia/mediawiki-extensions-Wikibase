@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_5fc3ea61",
+        "filename": "repo/includes/Search/Elastic/Fields/SearchIndexField.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-01T09:46:40Z",
+      "side": 1,
+      "message": "I would suggest to leave it in `Elastic` namespace, as soon as we don\u0027t have integration with another search engine, so it might me premature to think of something as general before we implemented at least another search engine integration.\n\nPS: If I made some wrong statement, please feel free to correct me. Thank you in advance! :)",
+      "parentUuid": "2ef897d1_4c9c935f",
+      "revId": "0b6cd305474e4ab3986723fdd40a6f4e4ace1afa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_7b9b2e69",
         "filename": "repo/tests/phpunit/includes/Content/ItemHandlerTest.php",
         "patchSetId": 9
