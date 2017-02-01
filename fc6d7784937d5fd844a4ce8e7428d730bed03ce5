@@ -45,6 +45,23 @@
       "revId": "fc6d7784937d5fd844a4ce8e7428d730bed03ce5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_999bbd1b",
+        "filename": "repo/tests/phpunit/includes/Content/EntityHandlerTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-01T20:42:19Z",
+      "side": 1,
+      "message": "Needs a test for getDataForSearchIndex",
+      "revId": "fc6d7784937d5fd844a4ce8e7428d730bed03ce5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
