@@ -53,18 +53,22 @@ logTableAccess = function(entity)
 	entity['claims'] = {}
 
 	pseudoClaimsMetatable = {}
-	pseudoClaimsMetatable.__index = function(empty_table, propertyID)
+	pseudoClaimsMetatable.__index = function(emptyTable, propertyID)
 		-- Need entity id: Is it entity['id']?
 		-- Write entity id and property id to DB
 		return actualEntityClaims[propertyID]
 	end
 
-	pseudoClaimsMetatable.__pairs = function(empty_table)
-		return pairs(actualEntityClaims)
+	logNext = function(emptyTable, propertyID)
+		if propertyID ~= nil then
+			-- Need entity id: Is it entity['id']?
+			-- Write entity id and property id to DB
+		end
+		return next(actualEntityClaims, propertyID)
 	end
 
-	pseudoClaimsMetatable.__ipairs = function(empty_table)
-		return ipairs(actualEntityClaims)
+	pseudoClaimsMetatable.__pairs = function(emptyTable)
+		return logNext, {}, nil
 	end
 
 	setmetatable(entity['claims'], pseudoClaimsMetatable)
