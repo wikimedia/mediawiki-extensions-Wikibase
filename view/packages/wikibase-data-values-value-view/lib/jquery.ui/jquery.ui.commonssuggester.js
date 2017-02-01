@@ -1,6 +1,12 @@
 ( function( $, util ) {
 	'use strict';
 
+	// TODO: Avoid using namespaces here instead use filters within opensearch
+	var NAMESPACE = {
+		File: 6,
+		Data: 486
+	};
+
 	/**
 	 * Commons suggester.
 	 * Enhances an input box with suggestion functionality for Wikimedia Commons asset names.
@@ -19,7 +25,8 @@
 		 * @see jQuery.ui.suggester.options
 		 */
 		options: {
-			ajax: $.ajax
+			ajax: $.ajax,
+			namespace: null
 		},
 
 		/**
@@ -51,7 +58,7 @@
 					data: {
 						search: self._grepFileTitleFromTerm( term ),
 						action: 'opensearch',
-						namespace: 6
+						namespace: NAMESPACE[self.options.namespace] || NAMESPACE.File
 					},
 					timeout: 8000
 				} )
