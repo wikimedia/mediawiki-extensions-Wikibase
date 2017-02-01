@@ -198,4 +198,12 @@ return [
 
 	// List of entity types for Special:EntitiesWithoutLabel and …Description, or null for all.
 	'supportedEntityTypesForEntitiesWithoutTermListings' => null,
+    // Configurations for searching entities
+    'entitySearch' => [
+    	// Use CirrusSearch (ElasticSearch) for searching
+    	'useCirrus' => false,
+	    // Default label scoring profile name, for prefix search
+	    // See profiles in config/EntityPrefixSearchProfiles.php
+        'defaultPrefixProfile' => 'default'
+    ]
 ];
