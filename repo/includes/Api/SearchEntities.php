@@ -18,7 +18,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 class SearchEntities extends ApiBase {
 
 	/**
-	 * @var EntitySearchHelper
+	 * @var EntitySearcher
 	 */
 	private $entitySearchHelper;
 
@@ -50,7 +50,7 @@ class SearchEntities extends ApiBase {
 	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
-	 * @param EntitySearchHelper $entitySearchHelper
+	 * @param EntitySearcher $entitySearchHelper
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param ContentLanguages $termLanguages
@@ -62,7 +62,7 @@ class SearchEntities extends ApiBase {
 	public function __construct(
 		ApiMain $mainModule,
 		$moduleName,
-		EntitySearchHelper $entitySearchHelper,
+		EntitySearcher $entitySearchHelper,
 		EntityTitleLookup $entityTitleLookup,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		ContentLanguages $termLanguages,

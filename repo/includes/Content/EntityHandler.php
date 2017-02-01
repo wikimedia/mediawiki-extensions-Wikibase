@@ -21,6 +21,7 @@ use Title;
 use User;
 use Wikibase\Content\DeferredDecodingEntityHolder;
 use Wikibase\Content\EntityHolder;
+use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -230,7 +231,8 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return EntityContent
 	 */
 	public function makeEmptyContent() {
-		throw new MWException( 'Cannot make an empty EntityContent, since we require at least an ID to be set.' );
+		$empty = $this->makeEmptyEntity();
+		return $this->makeEntityContent( new EntityInstanceHolder( $empty ) );
 	}
 
 	/**

@@ -316,11 +316,11 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public function testMakeEmptyContent() {
-		// We don't support empty content.
-		$this->setExpectedException( MWException::class );
-
 		$handler = $this->getHandler();
-		$handler->makeEmptyContent();
+		$entity = $handler->makeEmptyContent()->getEntity();
+
+		$this->assertTrue( $entity->isEmpty(), 'isEmpty' );
+		$this->assertEquals( $handler->getEntityType(), $entity->getType(), 'entity type' );
 	}
 
 	public function testMakeRedirectContent() {
@@ -335,6 +335,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$handler = $this->getHandler();
 		$entity = $handler->makeEmptyEntity();
 
+		$this->assertTrue( $entity->isEmpty(), 'isEmpty' );
 		$this->assertEquals( $handler->getEntityType(), $entity->getType(), 'entity type' );
 	}
 
