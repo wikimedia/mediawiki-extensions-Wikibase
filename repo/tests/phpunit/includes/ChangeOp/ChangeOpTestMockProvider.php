@@ -29,7 +29,7 @@ use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
-use Wikibase\Repo\Validators\CompositeFingerprintValidator;
+use Wikibase\Repo\Validators\NullFingerprintValidator;
 use Wikibase\Repo\Validators\CompositeValidator;
 use Wikibase\Repo\Validators\DataValueValidator;
 use Wikibase\Repo\Validators\LabelDescriptionUniquenessValidator;
@@ -455,7 +455,7 @@ class ChangeOpTestMockProvider {
 	 *
 	 * @param string $entityType
 	 *
-	 * @return LabelDescriptionUniquenessValidator|CompositeFingerprintValidator
+	 * @return LabelDescriptionUniquenessValidator|NullFingerprintValidator
 	 */
 	public function getMockFingerprintValidator( $entityType ) {
 		switch ( $entityType ) {
@@ -463,7 +463,7 @@ class ChangeOpTestMockProvider {
 				return new LabelDescriptionUniquenessValidator( $this->getMockLabelDescriptionDuplicateDetector() );
 
 			default:
-				return new CompositeFingerprintValidator( array() );
+				return new NullFingerprintValidator( array() );
 		}
 	}
 
