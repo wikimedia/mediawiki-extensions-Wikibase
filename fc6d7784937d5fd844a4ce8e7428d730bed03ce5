@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_bfde5912",
+        "filename": "repo/includes/Search/Elastic/Fields/SearchIndexField.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-02-01T23:23:41Z",
+      "side": 1,
+      "message": "yes, this is done in the next patch. \n\nThis interface provides mapping between SearchIndexField and fields in Wikibase object. This patch doesn\u0027t really finish the job, please look at the following ones, it\u0027ll be more clear. I just don\u0027t want to make mega-patches.",
+      "parentUuid": "2ef897d1_bad78cf1",
+      "range": {
+        "startLine": 19,
+        "startChar": 10,
+        "endLine": 19,
+        "endChar": 26
+      },
+      "revId": "fc6d7784937d5fd844a4ce8e7428d730bed03ce5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_9ad4d0ed",
         "filename": "repo/includes/Search/Elastic/Fields/SearchIndexField.php",
         "patchSetId": 10
@@ -36,6 +60,30 @@
       "writtenOn": "2017-02-01T13:40:56Z",
       "side": 1,
       "message": "this is confusing, I\u0027d rename the method or maybe extends \\SearchIndexField and return the mapping.",
+      "range": {
+        "startLine": 27,
+        "startChar": 17,
+        "endLine": 27,
+        "endChar": 27
+      },
+      "revId": "fc6d7784937d5fd844a4ce8e7428d730bed03ce5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_3fc4a943",
+        "filename": "repo/includes/Search/Elastic/Fields/SearchIndexField.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-02-01T23:23:41Z",
+      "side": 1,
+      "message": "yes, fixed in the following patches",
+      "parentUuid": "2ef897d1_9ad4d0ed",
       "range": {
         "startLine": 27,
         "startChar": 17,
