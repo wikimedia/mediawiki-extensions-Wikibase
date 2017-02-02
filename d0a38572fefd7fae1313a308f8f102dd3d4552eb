@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_22980dc3",
+        "filename": "repo/includes/Search/Elastic/Fields/LabelsField.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2017-02-02T19:58:05Z",
+      "side": 1,
+      "message": "do these need to be adjusted (maybe not here though) so we set the similarity to arrays rather than taking defaults?",
+      "revId": "d0a38572fefd7fae1313a308f8f102dd3d4552eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
