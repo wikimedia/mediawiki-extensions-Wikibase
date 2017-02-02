@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_1331e6e9",
+        "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-02T14:47:38Z",
+      "side": 1,
+      "message": "This formatter outputs an \u003ca\u003e element, which is fine, but not valid in wikitext. The wikitext format must use an other formatter.\n\nCould be set to the plain string formatter for the moment and added later.",
+      "range": {
+        "startLine": 245,
+        "startChar": 15,
+        "endLine": 245,
+        "endChar": 37
+      },
+      "revId": "6b957681c6bb91deb498014fce996e188da0e816",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
