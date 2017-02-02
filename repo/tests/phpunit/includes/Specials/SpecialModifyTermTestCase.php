@@ -16,6 +16,8 @@ use Wikibase\Repo\WikibaseRepo;
  */
 abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 
+	use HtmlAssertionHelpers;
+
 	const USER_LANGUAGE = 'en';
 
 	protected function setUp() {
@@ -49,146 +51,55 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 	}
 
 	public function testRenderWithoutSubPage_AllInputFieldsPresent() {
-		$page = $this->newSpecialPage();
 
-		$matchers['id'] = [
-			'tag' => 'input',
-			'attributes' => [
-				'id' => 'wb-modifyentity-id',
-				'class' => 'wb-input',
-				'name' => 'id',
-			] ];
-		$matchers['language'] = [
-			'tag' => 'input',
-			'attributes' => [
-				'id' => 'wb-modifyterm-language',
-				'class' => 'wb-input',
-				'name' => 'language',
-				'value' => self::USER_LANGUAGE,
-			] ];
-		$matchers['value'] = [
-			'tag' => 'input',
-			'attributes' => [
-				'id' => 'wb-modifyterm-value',
-				'class' => 'wb-input',
-				'name' => 'value',
-			] ];
-		$matchers['submit'] = [
-			'tag' => 'input',
-			'attributes' => [
-				'id' => 'wb-' . strtolower( $page->getName() ) . '-submit',
-				'class' => 'wb-button',
-				'type' => 'submit',
-				'name' => 'wikibase-' . strtolower( $page->getName() ) . '-submit',
-			] ];
-
-		// execute with no subpage value
 		list( $output, ) = $this->executeSpecialPage( '', null, self::USER_LANGUAGE );
-		foreach ( $matchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}'" );
-		}
+
+		$expectedLanguage = self::USER_LANGUAGE;
+		assertThat( $output, is( htmlPiece( havingChild(
+			tagMatchingOutline( "<input name='id'/>" ) ) ) ) );
+		assertThat( $output, is( htmlPiece( havingChild(
+			tagMatchingOutline( "<input name='language' value='$expectedLanguage'/>" ) ) ) ) );
+		assertThat( $output, is( htmlPiece( havingChild(
+			tagMatchingOutline( "<input name='value'/>" ) ) ) ) );
+		$this->assertHtmlContainsSubmitControl( $output );
+
 	}
 
 	public function testRenderWithOneSubpageValue_TreatsValueAsItemIdAndShowsOnlyTermInputField() {
 		$notUserLanguage = 'de';
 		$id = $this->createNewItemWithTerms( $notUserLanguage, 'some-term-value' );
 
-		$page = $this->newSpecialPage();
-
-		$matchers['id'] = [
-			'tag' => 'input',
-			'attributes' => [
-				'type' => 'hidden',
-				'name' => 'id',
-				'value' => $id,
-			] ];
-		$matchers['language'] = [
-			'tag' => 'input',
-			'attributes' => [
-				'name' => 'language',
-				'value' => self::USER_LANGUAGE,
-				'type' => 'hidden',
-			] ];
-		$matchers['value'] = [
-			'tag' => 'input',
-			'attributes' => [
-				'id' => 'wb-modifyterm-value',
-				'class' => 'wb-input',
-				'name' => 'value',
-			] ];
-		$matchers['submit'] = [
-			'tag' => 'input',
-			'attributes' => [
-				'id' => 'wb-' . strtolower( $page->getName() ) . '-submit',
-				'class' => 'wb-button',
-				'type' => 'submit',
-				'name' => 'wikibase-' . strtolower( $page->getName() ) . '-submit',
-			] ];
-		$matchers['remove'] = [
-			'tag' => 'input',
-			'attributes' => [
-				'type' => 'hidden',
-				'name' => 'remove',
-				'value' => 'remove',
-			] ];
-
-		// execute with one subpage value
 		list( $output, ) = $this->executeSpecialPage( $id, null, self::USER_LANGUAGE );
 
-		foreach ( $matchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}' passing one subpage value" );
-		}
+		$expectedLanguage = self::USER_LANGUAGE;
+		assertThat( $output, is( htmlPiece( havingChild(
+			tagMatchingOutline( "<input name='id' type='hidden' value='$id'/>" ) ) ) ) );
+		assertThat( $output, is( htmlPiece( havingChild(
+			tagMatchingOutline( "<input name='language' type='hidden' value='$expectedLanguage'/>" ) ) ) ) );
+		assertThat( $output, is( htmlPiece( havingChild(
+			tagMatchingOutline( "<input name='value'/>" ) ) ) ) );
+		assertThat( $output, is( htmlPiece( havingChild(
+			tagMatchingOutline( "<input name='remove' value='remove' type='hidden'/>" ) ) ) ) );
+
+		$this->assertHtmlContainsSubmitControl( $output );
 	}
 
 	public function testRenderWithTwoSubpageValues_TreatsSecondValueAsLanguageAndShowsOnlyTermInputField() {
 		$id = $this->createNewItemWithTerms( $itemTermLanguage = 'de', $termValue = 'foo' );
 
-		$page = $this->newSpecialPage();
-
-		$matchers['id'] = [
-			'tag' => 'input',
-			'attributes' => [
-				'type' => 'hidden',
-				'name' => 'id',
-				'value' => $id,
-			] ];
-		$matchers['language'] = [
-			'tag' => 'input',
-			'attributes' => [
-				'name' => 'language',
-				'value' => $itemTermLanguage,
-				'type' => 'hidden',
-			] ];
-		$matchers['value'] = [
-			'tag' => 'input',
-			'attributes' => [
-				'id' => 'wb-modifyterm-value',
-				'class' => 'wb-input',
-				'name' => 'value',
-				'value' => $termValue
-			] ];
-		$matchers['submit'] = [
-			'tag' => 'input',
-			'attributes' => [
-				'id' => 'wb-' . strtolower( $page->getName() ) . '-submit',
-				'class' => 'wb-button',
-				'type' => 'submit',
-				'name' => 'wikibase-' . strtolower( $page->getName() ) . '-submit',
-			] ];
-		$matchers['remove'] = [
-			'tag' => 'input',
-			'attributes' => [
-				'type' => 'hidden',
-				'name' => 'remove',
-				'value' => 'remove',
-			] ];
-
 		// execute with two subpage values
 		list( $output, ) = $this->executeSpecialPage( $id . '/' . $itemTermLanguage, null, self::USER_LANGUAGE );
 
-		foreach ( $matchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}' passing two subpage values" . PHP_EOL . $output );
-		}
+		assertThat( $output, is( htmlPiece( havingChild(
+			tagMatchingOutline( "<input name='id' type='hidden' value='$id'/>" ) ) ) ) );
+		assertThat( $output, is( htmlPiece( havingChild(
+			tagMatchingOutline( "<input name='language' type='hidden' value='$itemTermLanguage'/>" ) ) ) ) );
+		assertThat( $output, is( htmlPiece( havingChild(
+			tagMatchingOutline( "<input name='value' value='$termValue'/>" ) ) ) ) );
+		assertThat( $output, is( htmlPiece( havingChild(
+			tagMatchingOutline( "<input name='remove' value='remove' type='hidden'/>" ) ) ) ) );
+
+		$this->assertHtmlContainsSubmitControl( $output );
 	}
 
 	public function testValuePreservesWhenNothingEntered() {
@@ -198,15 +109,8 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 
 		list( $output, ) = $this->executeSpecialPage( '', $request );
 
-		$this->assertTag( [
-			'tag' => 'input',
-			'attributes' => [
-				'id' => 'wb-modifyterm-value',
-				'class' => 'wb-input',
-				'name' => 'value',
-				'value' => $termValue,
-			]
-		], $output, 'Value still preserves when no value was entered in the big form' );
+		assertThat( $output, is( htmlPiece( havingChild(
+			tagMatchingOutline( "<input name='value' value='$termValue'/>" ) ) ) ) );
 	}
 
 }
