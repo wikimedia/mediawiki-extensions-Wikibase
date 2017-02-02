@@ -131,7 +131,6 @@ use Wikibase\Store\BufferingTermLookup;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
-use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
 
@@ -790,25 +789,20 @@ class WikibaseRepo {
 	 * @return ChangeOpFactoryProvider
 	 */
 	public function getChangeOpFactoryProvider() {
+		$snakValidator = new SnakValidator(
+			$this->getPropertyDataTypeLookup(),
+			$this->getDataTypeFactory(),
+			$this->getDataTypeValidatorFactory()
+		);
+
 		return new ChangeOpFactoryProvider(
 			$this->getEntityConstraintProvider(),
 			new GuidGenerator(),
 			$this->getStatementGuidValidator(),
 			$this->getStatementGuidParser(),
-			$this->getSnakValidator(),
+			$snakValidator,
 			$this->getTermValidatorFactory(),
 			$this->getSiteLookup()
-		);
-	}
-
-	/**
-	 * @return SnakValidator
-	 */
-	public function getSnakValidator() {
-		return new SnakValidator(
-			$this->getPropertyDataTypeLookup(),
-			$this->getDataTypeFactory(),
-			$this->getDataTypeValidatorFactory()
 		);
 	}
 
@@ -880,7 +874,12 @@ class WikibaseRepo {
 	 */
 	public function getSnakFormatterFactory() {
 		if ( $this->snakFormatterFactory === null ) {
-			$this->snakFormatterFactory = $this->newSnakFormatterFactory();
+			$this->snakFormatterFactory = new OutputFormatSnakFormatterFactory(
+				$this->dataTypeDefinitions->getSnakFormatterFactoryCallbacks(),
+				$this->getValueFormatterFactory(),
+				$this->getPropertyDataTypeLookup(),
+				$this->getDataTypeFactory()
+			);
 		}
 
 		return $this->snakFormatterFactory;
@@ -944,20 +943,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return OutputFormatSnakFormatterFactory
-	 */
-	protected function newSnakFormatterFactory() {
-		$factory = new OutputFormatSnakFormatterFactory(
-			$this->dataTypeDefinitions->getSnakFormatterFactoryCallbacks(),
-			$this->getValueFormatterFactory(),
-			$this->getPropertyDataTypeLookup(),
-			$this->getDataTypeFactory()
-		);
-
-		return $factory;
-	}
-
-	/**
 	 * Returns a OutputFormatValueFormatterFactory the provides ValueFormatters
 	 * for different output formats.
 	 *
@@ -974,7 +959,7 @@ class WikibaseRepo {
 	/**
 	 * @return OutputFormatValueFormatterFactory
 	 */
-	protected function newValueFormatterFactory() {
+	private function newValueFormatterFactory() {
 		return new OutputFormatValueFormatterFactory(
 			$this->dataTypeDefinitions->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ),
 			$this->getContentLanguage(),
@@ -1065,7 +1050,7 @@ class WikibaseRepo {
 	/**
 	 * @return SummaryFormatter
 	 */
-	protected function newSummaryFormatter() {
+	private function newSummaryFormatter() {
 		// This needs to use an EntityIdPlainLinkFormatter as we want to mangle
 		// the links created in LinkBeginHookHandler afterwards (the links must not
 		// contain a display text: [[Item:Q1]] is fine but [[Item:Q1|Q1]] isn't).
@@ -1127,7 +1112,7 @@ class WikibaseRepo {
 	/**
 	 * @return TermValidatorFactory
 	 */
-	protected function getTermValidatorFactory() {
+	private function getTermValidatorFactory() {
 		$constraints = $this->settings->getSetting( 'multilang-limits' );
 		$maxLength = $constraints['length'];
 
@@ -1161,7 +1146,7 @@ class WikibaseRepo {
 	/**
 	 * @return LabelDescriptionDuplicateDetector
 	 */
-	public function getLabelDescriptionDuplicateDetector() {
+	private function getLabelDescriptionDuplicateDetector() {
 		return new LabelDescriptionDuplicateDetector( $this->getStore()->getLabelConflictFinder() );
 	}
 
@@ -1183,7 +1168,7 @@ class WikibaseRepo {
 	 *
 	 * @return ValueFormatter
 	 */
-	protected function getMessageParameterFormatter() {
+	private function getMessageParameterFormatter() {
 		$formatterOptions = new FormatterOptions();
 		$valueFormatterFactory = $this->getValueFormatterFactory();
 
@@ -1294,7 +1279,7 @@ class WikibaseRepo {
 	/**
 	 * @return InternalDeserializerFactory
 	 */
-	public function getInternalFormatDeserializerFactory() {
+	private function getInternalFormatDeserializerFactory() {
 		return new InternalDeserializerFactory(
 			$this->getDataValueDeserializer(),
 			$this->getEntityIdParser(),
@@ -1303,18 +1288,11 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return InternalSerializerFactory
-	 */
-	public function getSerializerFactory() {
-		return new InternalSerializerFactory( new DataValueSerializer() );
-	}
-
-	/**
 	 * Returns a deserializer to deserialize entities in current serialization only.
 	 *
 	 * @return Deserializer
 	 */
-	public function getExternalFormatEntityDeserializer() {
+	private function getExternalFormatEntityDeserializer() {
 		if ( $this->entityDeserializer === null ) {
 			$deserializerFactoryCallbacks = $this->entityTypeDefinitions->getDeserializerFactoryCallbacks();
 			$deserializerFactory = $this->getExternalFormatDeserializerFactory();
@@ -1382,7 +1360,8 @@ class WikibaseRepo {
 	 * @return Serializer
 	 */
 	public function getStatementSerializer() {
-		return $this->getSerializerFactory()->newStatementSerializer();
+		$factory = new InternalSerializerFactory( new DataValueSerializer() );
+		return $factory->newStatementSerializer();
 	}
 
 	/**
@@ -1668,20 +1647,13 @@ class WikibaseRepo {
 			$this->getDataTypeFactory(),
 			TemplateFactory::getDefaultInstance(),
 			$this->getLanguageNameLookup(),
-			$this->getLanguageDirectionalityLookup(),
+			new MediaWikiLanguageDirectionalityLookup(),
 			new MediaWikiNumberLocalizer( $lang ),
 			$this->settings->getSetting( 'siteLinkGroups' ),
 			$this->settings->getSetting( 'specialSiteLinkGroups' ),
 			$this->settings->getSetting( 'badgeItems' ),
 			new MediaWikiLocalizedTextProvider( $lang->getCode() )
 		);
-	}
-
-	/**
-	 * @return LanguageDirectionalityLookup
-	 */
-	public function getLanguageDirectionalityLookup() {
-		return new MediaWikiLanguageDirectionalityLookup();
 	}
 
 	/**
@@ -1777,7 +1749,7 @@ class WikibaseRepo {
 	/**
 	 * @return CachingCommonsMediaFileNameLookup
 	 */
-	public function getCachingCommonsMediaFileNameLookup() {
+	private function getCachingCommonsMediaFileNameLookup() {
 		if ( $this->cachingCommonsMediaFileNameLookup === null ) {
 			$this->cachingCommonsMediaFileNameLookup = new CachingCommonsMediaFileNameLookup(
 				new MediaWikiPageNameNormalizer(),
