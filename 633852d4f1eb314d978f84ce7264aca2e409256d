@@ -70,6 +70,24 @@
       "revId": "633852d4f1eb314d978f84ce7264aca2e409256d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_f3d40aee",
+        "filename": "repo/includes/Content/EntityContentFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-02T15:55:49Z",
+      "side": 1,
+      "message": "Nope. That IS the point, and it\u0027s extremely useful for that! But ideally, it is really ONLY used there. \n\nSee https://en.wikipedia.org/wiki/Service_locator_pattern#Disadvantages",
+      "parentUuid": "2ef897d1_137b2625",
+      "revId": "633852d4f1eb314d978f84ce7264aca2e409256d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
