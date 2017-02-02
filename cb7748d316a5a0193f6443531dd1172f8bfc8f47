@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_4eb45533",
+        "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-02-02T16:56:38Z",
+      "side": 1,
+      "message": "I fixed it another way. Explained it and used redis as an example",
+      "parentUuid": "4efb0bce_d28235a9",
+      "range": {
+        "startLine": 9,
+        "startChar": 3,
+        "endLine": 9,
+        "endChar": 8
+      },
+      "revId": "cb7748d316a5a0193f6443531dd1172f8bfc8f47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_91c04931",
         "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
         "patchSetId": 4
@@ -156,6 +180,30 @@
       "side": 1,
       "message": "True! Please change to protected in the base class.",
       "parentUuid": "4efb0bce_91c04931",
+      "range": {
+        "startLine": 41,
+        "startChar": 1,
+        "endLine": 41,
+        "endChar": 8
+      },
+      "revId": "cb7748d316a5a0193f6443531dd1172f8bfc8f47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_2eb11943",
+        "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-02-02T16:56:38Z",
+      "side": 1,
+      "message": "Done already",
+      "parentUuid": "4efb0bce_b28fb9d0",
       "range": {
         "startLine": 41,
         "startChar": 1,
@@ -345,6 +393,24 @@
       "writtenOn": "2017-02-02T15:50:25Z",
       "side": 1,
       "message": "Is there a need for having the setter? Service objects should generally not be mutable.",
+      "revId": "cb7748d316a5a0193f6443531dd1172f8bfc8f47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_ceede523",
+        "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-02-02T16:56:38Z",
+      "side": 1,
+      "message": "I already deleted both setter and getter",
+      "parentUuid": "4efb0bce_32b2a993",
       "revId": "cb7748d316a5a0193f6443531dd1172f8bfc8f47",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
