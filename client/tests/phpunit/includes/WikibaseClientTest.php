@@ -25,17 +25,13 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
-use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\LangLinkHandler;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
-use Wikibase\Lib\OutputFormatSnakFormatterFactory;
-use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyOrderProvider;
@@ -244,16 +240,6 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testGetSnakFormatterFactoryReturnType() {
-		$returnValue = $this->getWikibaseClient()->getSnakFormatterFactory();
-		$this->assertInstanceOf( OutputFormatSnakFormatterFactory::class, $returnValue );
-	}
-
-	public function testGetValueFormatterFactoryReturnType() {
-		$returnValue = $this->getWikibaseClient()->getValueFormatterFactory();
-		$this->assertInstanceOf( OutputFormatValueFormatterFactory::class, $returnValue );
-	}
-
 	public function testGetLanguageLinkBadgeDisplay() {
 		$returnValue = $this->getWikibaseClient()->getLanguageLinkBadgeDisplay();
 		$this->assertInstanceOf( LanguageLinkBadgeDisplay::class, $returnValue );
@@ -283,29 +269,14 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$codec->encodeEntity( new Item(), CONTENT_FORMAT_JSON );
 	}
 
-	public function testGetInternalFormatDeserializerFactory() {
-		$deserializerFactory = $this->getWikibaseClient()->getInternalFormatDeserializerFactory();
-		$this->assertInstanceOf( InternalDeserializerFactory::class, $deserializerFactory );
-	}
-
 	public function testGetExternalFormatDeserializerFactory() {
 		$deserializerFactory = $this->getWikibaseClient()->getExternalFormatDeserializerFactory();
 		$this->assertInstanceOf( DeserializerFactory::class, $deserializerFactory );
 	}
 
-	public function testGetInternalFormatEntityDeserializer() {
-		$deserializer = $this->getWikibaseClient()->getInternalFormatEntityDeserializer();
-		$this->assertInstanceOf( Deserializer::class, $deserializer );
-	}
-
 	public function testGetInternalFormatStatementDeserializer() {
 		$deserializer = $this->getWikibaseClient()->getInternalFormatStatementDeserializer();
 		$this->assertInstanceOf( Deserializer::class, $deserializer );
-	}
-
-	public function testGetEntityChangeFactory() {
-		$factory = $this->getWikibaseClient()->getEntityChangeFactory();
-		$this->assertInstanceOf( EntityChangeFactory::class, $factory );
 	}
 
 	public function testGetChangeHandler() {

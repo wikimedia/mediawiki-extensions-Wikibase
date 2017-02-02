@@ -130,7 +130,6 @@ use Wikibase\Store\BufferingTermLookup;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
-use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
 
@@ -818,25 +817,20 @@ class WikibaseRepo {
 	 * @return ChangeOpFactoryProvider
 	 */
 	public function getChangeOpFactoryProvider() {
+		$snakValidator = new SnakValidator(
+			$this->getPropertyDataTypeLookup(),
+			$this->getDataTypeFactory(),
+			$this->getDataTypeValidatorFactory()
+		);
+
 		return new ChangeOpFactoryProvider(
 			$this->getEntityConstraintProvider(),
 			new GuidGenerator(),
 			$this->getStatementGuidValidator(),
 			$this->getStatementGuidParser(),
-			$this->getSnakValidator(),
+			$snakValidator,
 			$this->getTermValidatorFactory(),
 			$this->getSiteLookup()
-		);
-	}
-
-	/**
-	 * @return SnakValidator
-	 */
-	public function getSnakValidator() {
-		return new SnakValidator(
-			$this->getPropertyDataTypeLookup(),
-			$this->getDataTypeFactory(),
-			$this->getDataTypeValidatorFactory()
 		);
 	}
 
@@ -1146,7 +1140,7 @@ class WikibaseRepo {
 	/**
 	 * @return TermValidatorFactory
 	 */
-	public function getTermValidatorFactory() {
+	private function getTermValidatorFactory() {
 		$constraints = $this->settings->getSetting( 'multilang-limits' );
 		$maxLength = $constraints['length'];
 
@@ -1180,7 +1174,7 @@ class WikibaseRepo {
 	/**
 	 * @return LabelDescriptionDuplicateDetector
 	 */
-	public function getLabelDescriptionDuplicateDetector() {
+	private function getLabelDescriptionDuplicateDetector() {
 		return new LabelDescriptionDuplicateDetector( $this->getStore()->getLabelConflictFinder() );
 	}
 
@@ -1313,7 +1307,7 @@ class WikibaseRepo {
 	/**
 	 * @return InternalDeserializerFactory
 	 */
-	public function getInternalFormatDeserializerFactory() {
+	private function getInternalFormatDeserializerFactory() {
 		return new InternalDeserializerFactory(
 			$this->getDataValueDeserializer(),
 			$this->getEntityIdParser(),
@@ -1335,7 +1329,7 @@ class WikibaseRepo {
 	 *
 	 * @return Deserializer
 	 */
-	public function getExternalFormatEntityDeserializer() {
+	private function getExternalFormatEntityDeserializer() {
 		if ( $this->entityDeserializer === null ) {
 			$deserializerFactoryCallbacks = $this->entityTypeDefinitions->getDeserializerFactoryCallbacks();
 			$deserializerFactory = $this->getExternalFormatDeserializerFactory();
@@ -1403,7 +1397,8 @@ class WikibaseRepo {
 	 * @return Serializer
 	 */
 	public function getStatementSerializer() {
-		return $this->getSerializerFactory()->newStatementSerializer();
+		$factory = new InternalSerializerFactory( new DataValueSerializer() );
+		return $factory->newStatementSerializer();
 	}
 
 	/**
@@ -1696,20 +1691,13 @@ class WikibaseRepo {
 			$this->getDataTypeFactory(),
 			TemplateFactory::getDefaultInstance(),
 			$this->getLanguageNameLookup(),
-			$this->getLanguageDirectionalityLookup(),
+			new MediaWikiLanguageDirectionalityLookup(),
 			new MediaWikiNumberLocalizer( $lang ),
 			$this->settings->getSetting( 'siteLinkGroups' ),
 			$this->settings->getSetting( 'specialSiteLinkGroups' ),
 			$this->settings->getSetting( 'badgeItems' ),
 			new MediaWikiLocalizedTextProvider( $lang->getCode() )
 		);
-	}
-
-	/**
-	 * @return LanguageDirectionalityLookup
-	 */
-	public function getLanguageDirectionalityLookup() {
-		return new MediaWikiLanguageDirectionalityLookup();
 	}
 
 	/**
@@ -1805,7 +1793,7 @@ class WikibaseRepo {
 	/**
 	 * @return CachingCommonsMediaFileNameLookup
 	 */
-	public function getCachingCommonsMediaFileNameLookup() {
+	private function getCachingCommonsMediaFileNameLookup() {
 		if ( $this->cachingCommonsMediaFileNameLookup === null ) {
 			$this->cachingCommonsMediaFileNameLookup = new CachingCommonsMediaFileNameLookup(
 				new MediaWikiPageNameNormalizer(),
