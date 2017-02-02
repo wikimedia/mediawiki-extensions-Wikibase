@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_083415f0",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-02T14:44:03Z",
+      "side": 1,
+      "message": "This is confusing because \"Data:\" contains a colon.\n\nMaybe something like \"must start with \"Data:\", but not contain colons after that\"?",
+      "range": {
+        "startLine": 133,
+        "startChar": 89,
+        "endLine": 133,
+        "endChar": 94
+      },
+      "revId": "748d2355721e44a63046d95f445f0243cccd9021",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_e83099fe",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-02T14:44:03Z",
+      "side": 1,
+      "message": "As before, \"Data:\" contains a colon.",
+      "range": {
+        "startLine": 165,
+        "startChar": 187,
+        "endLine": 165,
+        "endChar": 193
+      },
+      "revId": "748d2355721e44a63046d95f445f0243cccd9021",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_681b8983",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-02T14:44:03Z",
+      "side": 1,
+      "message": "oi is the oldimage database table, which is for files, but not relevant for the Data: namespace.",
+      "range": {
+        "startLine": 211,
+        "startChar": 5,
+        "endLine": 211,
+        "endChar": 7
+      },
+      "revId": "748d2355721e44a63046d95f445f0243cccd9021",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_8816c558",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-02T14:44:03Z",
+      "side": 1,
+      "message": "This setting is not relevant for the Data: namespace.",
+      "range": {
+        "startLine": 216,
+        "startChar": 35,
+        "endLine": 216,
+        "endChar": 54
+      },
+      "revId": "748d2355721e44a63046d95f445f0243cccd9021",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_4811ed5e",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-02T14:44:03Z",
+      "side": 1,
+      "message": "Since this regular expression does much more than just checking for illegal characters, please rename the message key and rephrase the message accordingly.",
+      "range": {
+        "startLine": 221,
+        "startChar": 22,
+        "endLine": 221,
+        "endChar": 27
+      },
+      "revId": "748d2355721e44a63046d95f445f0243cccd9021",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
