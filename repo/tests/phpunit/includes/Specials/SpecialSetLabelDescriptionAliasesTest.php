@@ -37,6 +37,8 @@ use Wikibase\Repo\Validators\UniquenessViolation;
  */
 class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestBase {
 
+	use HtmlAssertionHelpers;
+
 	private static $languageCodes = array( 'en', 'de', 'de-ch', 'ii', 'zh' );
 
 	const USER_LANGUAGE = 'en';
@@ -273,30 +275,9 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 
 		list( $output ) = $this->executeSpecialPage( '' );
 
-		$tagMatchers = [];
-		$tagMatchers[ 'id' ] = [
-			'tag' => 'input',
-			'attributes' => [
-				'name' => 'id',
-			],
-		];
-		$tagMatchers[ 'language' ] = [
-			'tag' => 'input',
-			'attributes' => [
-				'name' => 'language',
-				'value' => self::USER_LANGUAGE,
-			],
-		];
-		$tagMatchers[ 'submit' ] = [
-			'tag' => 'input',
-			'attributes' => [
-				'type' => 'submit',
-			],
-		];
-
-		foreach ( $tagMatchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to assert output: $key" );
-		}
+		$this->assertHtmlContainsInputWithName( $output, 'id' );
+		$this->assertHtmlContainsInputWithNameAndValue( $output, 'language', self::USER_LANGUAGE );
+		$this->assertHtmlContainsSubmitControl( $output );
 	}
 
 	public function testFormForEditingDataInUserLanguageIsDisplayed_WhenPageRenderedWithItemIdAsFirstSubPagePart() {
@@ -305,52 +286,14 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 
 		list( $output ) = $this->executeSpecialPage( $item->getId()->getSerialization() );
 
-		$tagMatchers = [];
-		$tagMatchers[ 'id' ] = [
-			'tag' => 'input',
-			'attributes' => [
-				'name' => 'id',
-				'type' => 'hidden',
-				'value' => $item->getId()->getSerialization(),
-			],
-		];
-		$tagMatchers[ 'language' ] = [
-			'tag' => 'input',
-			'attributes' => [
-				'name' => 'language',
-				'type' => 'hidden',
-				'value' => self::USER_LANGUAGE,
-			],
-		];
 
-		$tagMatchers[ 'label' ] = [
-			'tag' => 'input',
-			'attributes' => [
-				'name' => 'label',
-			],
-		];
-		$tagMatchers[ 'description' ] = [
-			'tag' => 'input',
-			'attributes' => [
-				'name' => 'description',
-			],
-		];
-		$tagMatchers[ 'aliases' ] = [
-			'tag' => 'input',
-			'attributes' => [
-				'name' => 'aliases',
-			],
-		];
-		$tagMatchers[ 'submit' ] = [
-			'tag' => 'input',
-			'attributes' => [
-				'type' => 'submit',
-			],
-		];
-
-		foreach ( $tagMatchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to assert output: $key" );
-		}
+		assertThat( $output, is( htmlPiece( havingChild(
+			tagMatchingOutline( "<input name='id' type='hidden' value='{$item->getId()->getSerialization()}'/>") ) ) ) );
+		$this->assertHtmlContainsInputWithNameAndValue( $output, 'language', self::USER_LANGUAGE );
+		$this->assertHtmlContainsInputWithName( $output, 'label' );
+		$this->assertHtmlContainsInputWithName( $output, 'description' );
+		$this->assertHtmlContainsInputWithName( $output, 'aliases' );
+		$this->assertHtmlContainsSubmitControl( $output );
 	}
 
 	public function testRendersEditFormInLanguageProvidedAsSecondPartOfSubPage() {
@@ -361,43 +304,12 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$subPage = $item->getId()->getSerialization() . '/' . $language;
 		list( $output ) = $this->executeSpecialPage( $subPage );
 
-		$tagMatchers = [];
-		$tagMatchers[ 'language' ] = [
-			'tag' => 'input',
-			'attributes' => [
-				'name' => 'language',
-				'type' => 'hidden',
-				'value' => $language,
-			],
-		];
-		$tagMatchers[ 'label' ] = [
-			'tag' => 'input',
-			'attributes' => [
-				'name' => 'label',
-			],
-		];
-		$tagMatchers[ 'description' ] = [
-			'tag' => 'input',
-			'attributes' => [
-				'name' => 'description',
-			],
-		];
-		$tagMatchers[ 'aliases' ] = [
-			'tag' => 'input',
-			'attributes' => [
-				'name' => 'aliases',
-			],
-		];
-		$tagMatchers[ 'submit' ] = [
-			'tag' => 'input',
-			'attributes' => [
-				'type' => 'submit',
-			],
-		];
-
-		foreach ( $tagMatchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to assert output: $key" );
-		}
+		assertThat( $output, is( htmlPiece( havingChild(
+			tagMatchingOutline( "<input name='language' type='hidden' value='$language'/>") ) ) ) );
+		$this->assertHtmlContainsInputWithName( $output, 'label' );
+		$this->assertHtmlContainsInputWithName( $output, 'description' );
+		$this->assertHtmlContainsInputWithName( $output, 'aliases' );
+		$this->assertHtmlContainsSubmitControl( $output );
 	}
 
 	public function testRendersEditFormInLanguageProvidedAsQueryParameter() {
@@ -417,39 +329,12 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 
 		list( $output ) = $this->executeSpecialPage( $item->getId()->getSerialization(), new FauxRequest( [ 'language' => $language ] ) );
 
-		$tagMatchers[ 'language' ] = [
-			'tag' => 'input',
-			'attributes' => [
-				'name' => 'language',
-				'type' => 'hidden',
-				'value' => $language,
-			],
-		];
-		$tagMatchers[ 'label' ] = [
-			'tag' => 'input',
-			'attributes' => [
-				'name' => 'label',
-				'value' => $label,
-			],
-		];
-		$tagMatchers[ 'description' ] = [
-			'tag' => 'input',
-			'attributes' => [
-				'name' => 'description',
-				'value' => $description,
-			],
-		];
-		$tagMatchers[ 'aliases' ] = [
-			'tag' => 'input',
-			'attributes' => [
-				'name' => 'aliases',
-				'value' => $alias,
-			],
-		];
-
-		foreach ( $tagMatchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to assert output: $key" );
-		}
+		assertThat( $output, is( htmlPiece( havingChild(
+			tagMatchingOutline( "<input name='language' type='hidden' value='$language'/>") ) ) ) );
+		$this->assertHtmlContainsInputWithNameAndValue( $output, 'label', $label );
+		$this->assertHtmlContainsInputWithNameAndValue( $output, 'description', $label );
+		$this->assertHtmlContainsInputWithNameAndValue( $output, 'aliases', $label );
+		$this->assertHtmlContainsSubmitControl( $output );
 	}
 
 	public function testLanguageCodeEscaping() {
