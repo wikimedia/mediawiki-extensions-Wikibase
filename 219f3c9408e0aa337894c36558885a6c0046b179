@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_53c99ead",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-02T15:15:09Z",
+      "side": 1,
+      "message": "Please change to \"wikibase-validator-illegal-geo-shape-title\".",
+      "range": {
+        "startLine": 133,
+        "startChar": 39,
+        "endLine": 133,
+        "endChar": 44
+      },
+      "revId": "219f3c9408e0aa337894c36558885a6c0046b179",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_d3d46e4d",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-02T15:15:09Z",
+      "side": 1,
+      "message": "You forgot to remove this line. This is also from the File: namespace.",
+      "range": {
+        "startLine": 211,
+        "startChar": 45,
+        "endLine": 211,
+        "endChar": 55
+      },
+      "revId": "219f3c9408e0aa337894c36558885a6c0046b179",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
