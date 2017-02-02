@@ -837,26 +837,17 @@ final class WikibaseClient {
 	 *
 	 * @return OutputFormatSnakFormatterFactory
 	 */
-	public function getSnakFormatterFactory() {
+	private function getSnakFormatterFactory() {
 		if ( $this->snakFormatterFactory === null ) {
-			$this->snakFormatterFactory = $this->newSnakFormatterFactory();
+			$this->snakFormatterFactory = new OutputFormatSnakFormatterFactory(
+				$this->dataTypeDefinitions->getSnakFormatterFactoryCallbacks(),
+				$this->getValueFormatterFactory(),
+				$this->getPropertyDataTypeLookup(),
+				$this->getDataTypeFactory()
+			);
 		}
 
 		return $this->snakFormatterFactory;
-	}
-
-	/**
-	 * @return OutputFormatSnakFormatterFactory
-	 */
-	private function newSnakFormatterFactory() {
-		$factory = new OutputFormatSnakFormatterFactory(
-			$this->dataTypeDefinitions->getSnakFormatterFactoryCallbacks(),
-			$this->getValueFormatterFactory(),
-			$this->getPropertyDataTypeLookup(),
-			$this->getDataTypeFactory()
-		);
-
-		return $factory;
 	}
 
 	/**
@@ -865,23 +856,16 @@ final class WikibaseClient {
 	 *
 	 * @return OutputFormatValueFormatterFactory
 	 */
-	public function getValueFormatterFactory() {
+	private function getValueFormatterFactory() {
 		if ( $this->valueFormatterFactory === null ) {
-			$this->valueFormatterFactory = $this->newValueFormatterFactory();
+			$this->valueFormatterFactory = new OutputFormatValueFormatterFactory(
+				$this->dataTypeDefinitions->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ),
+				$this->getContentLanguage(),
+				$this->getLanguageFallbackChainFactory()
+			);
 		}
 
 		return $this->valueFormatterFactory;
-	}
-
-	/**
-	 * @return OutputFormatValueFormatterFactory
-	 */
-	private function newValueFormatterFactory() {
-		return new OutputFormatValueFormatterFactory(
-			$this->dataTypeDefinitions->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ),
-			$this->getContentLanguage(),
-			$this->getLanguageFallbackChainFactory()
-		);
 	}
 
 	/**
@@ -986,7 +970,7 @@ final class WikibaseClient {
 	/**
 	 * @return InternalDeserializerFactory
 	 */
-	public function getInternalFormatDeserializerFactory() {
+	private function getInternalFormatDeserializerFactory() {
 		return new InternalDeserializerFactory(
 			$this->getDataValueDeserializer(),
 			$this->getEntityIdParser(),
@@ -1018,7 +1002,7 @@ final class WikibaseClient {
 	 *
 	 * @return Deserializer
 	 */
-	public function getInternalFormatEntityDeserializer() {
+	private function getInternalFormatEntityDeserializer() {
 		return $this->getInternalFormatDeserializerFactory()->newEntityDeserializer();
 	}
 
@@ -1092,7 +1076,7 @@ final class WikibaseClient {
 	/**
 	 * @return EntityChangeFactory
 	 */
-	public function getEntityChangeFactory() {
+	private function getEntityChangeFactory() {
 		//TODO: take this from a setting or registry.
 		$changeClasses = array(
 			Item::ENTITY_TYPE => ItemChange::class,
@@ -1108,7 +1092,7 @@ final class WikibaseClient {
 	/**
 	 * @return EntityDiffer
 	 */
-	public function getEntityDiffer() {
+	private function getEntityDiffer() {
 		$strategieBuilders = $this->entityTypeDefinitions->getEntityDifferStrategyBuilders();
 		$entityDiffer = new EntityDiffer();
 		foreach ( $strategieBuilders as $strategyBuilder ) {
@@ -1191,7 +1175,7 @@ final class WikibaseClient {
 	/**
 	 * @return AffectedPagesFinder
 	 */
-	public function getAffectedPagesFinder() {
+	private function getAffectedPagesFinder() {
 		return new AffectedPagesFinder(
 			$this->getStore()->getUsageLookup(),
 			new TitleFactory(),
@@ -1204,36 +1188,26 @@ final class WikibaseClient {
 	 * @return ChangeHandler
 	 */
 	public function getChangeHandler() {
-		return new ChangeHandler(
-			$this->getAffectedPagesFinder(),
-			new TitleFactory(),
-			$this->getWikiPageUpdater(),
-			$this->getChangeRunCoalescer(),
-			$this->siteLookup,
-			$this->settings->getSetting( 'injectRecentChanges' )
-		);
-	}
-
-	/**
-	 * @return WikiPageUpdater
-	 */
-	private function getWikiPageUpdater() {
-		return new WikiPageUpdater(
+		$updater = new WikiPageUpdater(
 			JobQueueGroup::singleton(),
 			$this->getRecentChangeFactory(),
 			$this->getStore()->getRecentChangesDuplicateDetector(),
 			MediaWikiServices::getInstance()->getStatsdDataFactory()
 		);
-	}
 
-	/**
-	 * @return ChangeRunCoalescer
-	 */
-	private function getChangeRunCoalescer() {
-		return new ChangeRunCoalescer(
+		$changeListTransformer = new ChangeRunCoalescer(
 			$this->getStore()->getEntityRevisionLookup(),
 			$this->getEntityChangeFactory(),
 			$this->settings->getSetting( 'siteGlobalID' )
+		);
+
+		return new ChangeHandler(
+			$this->getAffectedPagesFinder(),
+			new TitleFactory(),
+			$updater,
+			$changeListTransformer,
+			$this->siteLookup,
+			$this->settings->getSetting( 'injectRecentChanges' )
 		);
 	}
 
