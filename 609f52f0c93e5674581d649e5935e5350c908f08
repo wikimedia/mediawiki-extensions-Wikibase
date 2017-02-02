@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_ceea8573",
+        "filename": "lib/includes/Formatters/InterWikiLinkFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-02T18:08:17Z",
+      "side": 1,
+      "message": "Are you sure that we need this default value?\nI would propose throwing an exception.",
+      "range": {
+        "startLine": 42,
+        "startChar": 3,
+        "endLine": 44,
+        "endChar": 3
+      },
+      "revId": "609f52f0c93e5674581d649e5935e5350c908f08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
