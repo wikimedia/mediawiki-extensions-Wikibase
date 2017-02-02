@@ -34,6 +34,24 @@
       "revId": "633852d4f1eb314d978f84ce7264aca2e409256d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_93af1691",
+        "filename": "repo/includes/Content/EntityContentFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-02T15:37:03Z",
+      "side": 1,
+      "message": "No, that is indeed not the point! We achieve this by proper separation of concerns, not by havign a service registry.\n\nUsing the service registry as a service locator, like here, should ONLY be done in static entry points (bootstrap code, newFromGlobalState in hook handler classes). Using it this way means we lose the advantages of proper DI: the ability to inject mocks, avoiding strong coupling, and explicit declaration of dependencies.\n\n\nThe constructor should only use a service locator if we *cannot* modify the parameters for some reason.\n\nOne advantage of having a top level service registry is that there is only one place in production code that callas the constructor, so adding an argument is easy.",
+      "parentUuid": "2ef897d1_a8b741d2",
+      "revId": "633852d4f1eb314d978f84ce7264aca2e409256d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
