@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_d3490e6c",
+        "filename": "repo/includes/Validators/InterWikiLinkExistsValidator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-02T14:54:44Z",
+      "side": 1,
+      "message": "Lower case string please.",
+      "range": {
+        "startLine": 29,
+        "startChar": 9,
+        "endLine": 29,
+        "endChar": 10
+      },
+      "revId": "a182a41dbd8c94aa87874afd0272676810f96832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_b34e9270",
+        "filename": "repo/includes/Validators/InterWikiLinkExistsValidator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-02T14:54:44Z",
+      "side": 1,
+      "message": "Upper case please.",
+      "range": {
+        "startLine": 34,
+        "startChar": 11,
+        "endLine": 34,
+        "endChar": 12
+      },
+      "revId": "a182a41dbd8c94aa87874afd0272676810f96832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_9353961a",
+        "filename": "repo/tests/phpunit/includes/Validators/InterWikiLinkExistsValidatorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-02T14:54:44Z",
+      "side": 1,
+      "message": "These indention issues make it really hard to read and review the code.",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 38,
+        "endChar": 26
+      },
+      "revId": "a182a41dbd8c94aa87874afd0272676810f96832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_533e3eb6",
+        "filename": "repo/tests/phpunit/includes/Validators/InterWikiLinkExistsValidatorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-02T14:54:44Z",
+      "side": 1,
+      "message": "Can be null in this test. Makes this easier to read.",
+      "range": {
+        "startLine": 45,
+        "startChar": 90,
+        "endLine": 45,
+        "endChar": 109
+      },
+      "revId": "a182a41dbd8c94aa87874afd0272676810f96832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
