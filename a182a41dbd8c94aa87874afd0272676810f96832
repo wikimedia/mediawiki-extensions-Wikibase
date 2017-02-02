@@ -119,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_53a07e8d",
+        "filename": "repo/tests/phpunit/includes/Validators/InterWikiLinkExistsValidatorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-02-02T15:44:07Z",
+      "side": 1,
+      "message": "I don\u0027t really understand what you need here.\nFeel free to modify it to your needs.",
+      "parentUuid": "2ef897d1_9353961a",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 38,
+        "endChar": 26
+      },
+      "revId": "a182a41dbd8c94aa87874afd0272676810f96832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_533e3eb6",
         "filename": "repo/tests/phpunit/includes/Validators/InterWikiLinkExistsValidatorTest.php",
         "patchSetId": 3
@@ -130,6 +154,30 @@
       "writtenOn": "2017-02-02T14:54:44Z",
       "side": 1,
       "message": "Can be null in this test. Makes this easier to read.",
+      "range": {
+        "startLine": 45,
+        "startChar": 90,
+        "endLine": 45,
+        "endChar": 109
+      },
+      "revId": "a182a41dbd8c94aa87874afd0272676810f96832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_b390d247",
+        "filename": "repo/tests/phpunit/includes/Validators/InterWikiLinkExistsValidatorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-02-02T15:44:07Z",
+      "side": 1,
+      "message": "I don\u0027t agree, but I don\u0027t have a strong opinion about this.",
+      "parentUuid": "2ef897d1_533e3eb6",
       "range": {
         "startLine": 45,
         "startChar": 90,
