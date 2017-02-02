@@ -211,6 +211,30 @@
       "revId": "a182a41dbd8c94aa87874afd0272676810f96832",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_ae3aa9e2",
+        "filename": "repo/tests/phpunit/includes/Validators/InterWikiLinkExistsValidatorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-02T19:02:47Z",
+      "side": 1,
+      "message": "I disagree with Thiemo. If class requires string - string should be given.\nIn this case I would suggest an empty string or something like `\u0027does not matter\u0027` or `\u0027http://does-not.matter/\u0027` to conform to expected format. Conforming to expected format serves two purposes: \n1. Gives developer a clue what actually should/might be passed there.\n2. Test won\u0027t break if someone decide to implement argument validation.",
+      "parentUuid": "2ef897d1_b390d247",
+      "range": {
+        "startLine": 45,
+        "startChar": 90,
+        "endLine": 45,
+        "endChar": 109
+      },
+      "revId": "a182a41dbd8c94aa87874afd0272676810f96832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
