@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_eebd41ae",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-02T17:32:10Z",
+      "side": 1,
+      "message": "Can you please rename this? Or even inline it? Or replace with more trivial getMock from PHPUnit? Because it looks like the features from the \"prophesize\" are not needed here.",
+      "range": {
+        "startLine": 152,
+        "startChar": 18,
+        "endLine": 152,
+        "endChar": 23
+      },
+      "revId": "c189fc52194e0f61d98aebca5b43f929d94c291e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_8ee36dd4",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-02T17:32:10Z",
+      "side": 1,
+      "message": "Do you know of this neat hack?\n\n return (object)[ \u0027description\u0027 \u003d\u003e $description ];",
+      "revId": "c189fc52194e0f61d98aebca5b43f929d94c291e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
