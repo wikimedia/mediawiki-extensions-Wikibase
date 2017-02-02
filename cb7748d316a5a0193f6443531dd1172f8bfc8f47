@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "4efb0bce_d28235a9",
+        "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-02T15:50:25Z",
+      "side": 1,
+      "message": "I think this is not even true any more. This class can use any LockManager, doesn\u0027t have to be redis.",
+      "parentUuid": "4efb0bce_f1b09dda",
+      "range": {
+        "startLine": 9,
+        "startChar": 3,
+        "endLine": 9,
+        "endChar": 8
+      },
+      "revId": "cb7748d316a5a0193f6443531dd1172f8bfc8f47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_91c04931",
         "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
         "patchSetId": 4
@@ -107,6 +131,30 @@
       "writtenOn": "2017-02-02T08:11:47Z",
       "side": 1,
       "message": "Done",
+      "parentUuid": "4efb0bce_91c04931",
+      "range": {
+        "startLine": 41,
+        "startChar": 1,
+        "endLine": 41,
+        "endChar": 8
+      },
+      "revId": "cb7748d316a5a0193f6443531dd1172f8bfc8f47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_b28fb9d0",
+        "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-02T15:50:25Z",
+      "side": 1,
+      "message": "True! Please change to protected in the base class.",
       "parentUuid": "4efb0bce_91c04931",
       "range": {
         "startLine": 41,
@@ -191,6 +239,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_f3bd2aae",
+        "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-02T15:50:25Z",
+      "side": 1,
+      "message": "I think there is a misunderstanding here. The idea is:\n\n- lockClient( $siteId ) grabs a lock for $siteId. No two instances can hold that lock for $siteId at the same time.\n\n- SqlChangeDispatchCoordinator uses MySQLs GET_LOCK on *some* database (probably, the repo\u0027s DB). It\u0027S completely irrelevant which DB is used as long as all instances use the same one. THis doesn\u0027t have to be, and probably should not be, the client wiki\u0027s database.\n\n- This class now replaces the MySQL based mechanism with a generic LockManager. One might think that then it shouldn\u0027t derive from the SQL based class. But it is still using an SQL table to record the dispatch state. This would need to be factored out, if we want the implementation mechanism for locking to be completely independent of the status tracking. It\u0027S probably easier to do the opposite, though: move the GET_LOCK based implementation from the parent class into an implementation of LockManager.\n\nPS on the side: LSP is pretty much impossible to uphold for amorphous mutable objects (like collections) if you don\u0027t have generics.",
+      "parentUuid": "2ef897d1_1369e688",
+      "range": {
+        "startLine": 43,
+        "startChar": 9,
+        "endLine": 43,
+        "endChar": 55
+      },
+      "revId": "cb7748d316a5a0193f6443531dd1172f8bfc8f47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_71bdcdac",
         "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
         "patchSetId": 4
@@ -232,6 +304,47 @@
         "endLine": 76,
         "endChar": 31
       },
+      "revId": "cb7748d316a5a0193f6443531dd1172f8bfc8f47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_928cbddc",
+        "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-02T15:50:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4efb0bce_71bdcdac",
+      "range": {
+        "startLine": 76,
+        "startChar": 17,
+        "endLine": 76,
+        "endChar": 31
+      },
+      "revId": "cb7748d316a5a0193f6443531dd1172f8bfc8f47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_32b2a993",
+        "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-02T15:50:25Z",
+      "side": 1,
+      "message": "Is there a need for having the setter? Service objects should generally not be mutable.",
       "revId": "cb7748d316a5a0193f6443531dd1172f8bfc8f47",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
