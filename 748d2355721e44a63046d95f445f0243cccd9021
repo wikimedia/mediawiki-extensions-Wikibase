@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_f391aa9d",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-02-02T15:09:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_681b8983",
+      "range": {
+        "startLine": 211,
+        "startChar": 5,
+        "endLine": 211,
+        "endChar": 7
+      },
+      "revId": "748d2355721e44a63046d95f445f0243cccd9021",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_8816c558",
         "filename": "repo/includes/ValidatorBuilders.php",
         "patchSetId": 3
@@ -94,6 +118,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_d3ed8e23",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-02-02T15:09:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_8816c558",
+      "range": {
+        "startLine": 216,
+        "startChar": 35,
+        "endLine": 216,
+        "endChar": 54
+      },
+      "revId": "748d2355721e44a63046d95f445f0243cccd9021",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_4811ed5e",
         "filename": "repo/includes/ValidatorBuilders.php",
         "patchSetId": 3
@@ -105,6 +153,30 @@
       "writtenOn": "2017-02-02T14:44:03Z",
       "side": 1,
       "message": "Since this regular expression does much more than just checking for illegal characters, please rename the message key and rephrase the message accordingly.",
+      "range": {
+        "startLine": 221,
+        "startChar": 22,
+        "endLine": 221,
+        "endChar": 27
+      },
+      "revId": "748d2355721e44a63046d95f445f0243cccd9021",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_b3f21202",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-02-02T15:09:29Z",
+      "side": 1,
+      "message": "I don\u0027t think the name is misleading. If you strongly think so feel free to change it.",
+      "parentUuid": "2ef897d1_4811ed5e",
       "range": {
         "startLine": 221,
         "startChar": 22,
