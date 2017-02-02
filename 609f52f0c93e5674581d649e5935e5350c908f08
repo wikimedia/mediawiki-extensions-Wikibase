@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "2ef897d1_8eb24d91",
+        "filename": "lib/includes/Formatters/InterWikiLinkFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-02-02T18:23:43Z",
+      "side": 1,
+      "message": "Thank you for improving this code Aleksey!",
+      "revId": "609f52f0c93e5674581d649e5935e5350c908f08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_ceea8573",
         "filename": "lib/includes/Formatters/InterWikiLinkFormatter.php",
         "patchSetId": 4
