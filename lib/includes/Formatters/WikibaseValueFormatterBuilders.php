@@ -16,8 +16,8 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
 use Wikibase\Formatters\MonolingualHtmlFormatter;
 use Wikibase\Formatters\MonolingualTextFormatter;
-use Wikibase\Lib\Formatters\EntityIdSiteLinkFormatter;
 use Wikibase\Lib\Formatters\CommonsThumbnailFormatter;
+use Wikibase\Lib\Formatters\EntityIdSiteLinkFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
@@ -226,6 +226,23 @@ class WikibaseValueFormatterBuilders {
 				return new CommonsLinkFormatter( $options );
 			case SnakFormatter::FORMAT_WIKI:
 				return new CommonsThumbnailFormatter();
+			default:
+				return $this->newStringFormatter( $format, $options );
+		}
+	}
+
+	/**
+	 * @param string $format The desired target format, see SnakFormatter::FORMAT_XXX
+	 * @param FormatterOptions $options
+	 *
+	 * @return ValueFormatter
+	 */
+	public function newGeoShapeFormatter( $format, FormatterOptions $options ) {
+		switch ( $this->getBaseFormat( $format ) ) {
+			case SnakFormatter::FORMAT_HTML:
+				return new InterWikiLinkFormatter( $options );
+			case SnakFormatter::FORMAT_WIKI:
+				return new InterWikiLinkFormatter( $options );
 			default:
 				return $this->newStringFormatter( $format, $options );
 		}
