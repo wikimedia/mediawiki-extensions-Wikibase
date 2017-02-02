@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_edbd4bae",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-02T09:00:26Z",
+      "side": 1,
+      "message": "Extra builders should be injected when constructing the RdfBuilder, not be taken from global state. Injection doesn\u0027t have to be via the constructor. addBuilderCallback( $callback ) should work.",
+      "revId": "f824d31055a9c6fc6d50bff76278a0feaf9af909",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_8de377d4",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-02T09:00:26Z",
+      "side": 1,
+      "message": "Using the callback directly instead of using it as a factory for EntityRdfBuilder instances has some disadvantages: when defining the callback, all required services have to be instantiated and injected; that would happen on every request, even though RDF is not needed for most of them.\n\nAlso, the method signature is complex, and without an interface, there is no way to declare or check it.\n\nI would prefer to see factory callbacks for EntityRdfBuilders. They could either keyed by entity type, or we could always call all of them, and they just ignore what they don\u0027t know.",
+      "revId": "f824d31055a9c6fc6d50bff76278a0feaf9af909",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
