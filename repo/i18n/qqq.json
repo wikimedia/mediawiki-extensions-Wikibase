@@ -163,6 +163,7 @@
 	"wikibase-validator-label-no-entityid": "Error message shown when a user tries to save an item that has a valid entity id as label. Parameters:\n* $1 is the label.",
 	"wikibase-validator-illegal-file-chars": "Validator error message shown when a user tries to link to a Wikimedia Commons media file, but the file name contains illegal special characters such as slashes or colons.",
 	"wikibase-validator-no-such-media": "Error message shown when a user tries to add a link to a Wikimedia Commons media file which does not exist. Parameters:\n* $1 is the name of the file.",
+	"wikibase-validator-page-not-exist": "Error message shown when a user tries to add a link to a Wiki page which does not exist. Parameters:\n* $1 is the name of the file.",
 	"wikibase-validator-not-a-language": "Validation error message shown when a user tries to use a language code that is not known to the system.\n* $1 - the invalid language code\nSee also:\n* {{msg-mw|wikibase-wikibaserepopage-invalid-langcode}}",
 	"wikibase-itemlink": "{{optional}}\nused to generate the link text for links to items. $1 is the items label, $2 the id given to \"wikibase-itemlink-id-wrapper\". This message can be altered to change the position of the single parts within the link. Params:\n* $1 is label on a html form\n* $2 is id on a html form",
 	"wikibase-itemlink-id-wrapper": "{{optional}}\nUsed to wrap the items id for a link to an item in parentheses or similar. Params:\n* $1 is the prefixed id of the item",
