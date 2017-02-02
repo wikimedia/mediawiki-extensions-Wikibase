@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Content;
 
 use InvalidArgumentException;
 use MediaWiki\Interwiki\InterwikiLookup;
-use MediaWiki\MediaWikiServices;
 use MWException;
 use OutOfBoundsException;
 use Status;
@@ -43,7 +42,7 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup, En
 	private $entityHandlerFactoryCallbacks;
 
 	/**
-	 * @var InterwikiLookup
+	 * @var InterwikiLookup|null
 	 */
 	private $interwikiLookup;
 
@@ -56,14 +55,19 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup, En
 	 * @param string[] $entityContentModels Entity type ID to content model ID mapping.
 	 * @param callable[] $entityHandlerFactoryCallbacks Entity type ID to callback mapping for
 	 *  creating ContentHandler objects.
+	 * @param InterwikiLookup|null $interwikiLookup
 	 */
-	public function __construct( array $entityContentModels, array $entityHandlerFactoryCallbacks ) {
+	public function __construct(
+		array $entityContentModels,
+		array $entityHandlerFactoryCallbacks,
+		InterwikiLookup $interwikiLookup = null
+	) {
 		Assert::parameterElementType( 'string', $entityContentModels, '$entityContentModels' );
 		Assert::parameterElementType( 'callable', $entityHandlerFactoryCallbacks, '$entityHandlerFactoryCallbacks' );
 
 		$this->entityContentModels = $entityContentModels;
 		$this->entityHandlerFactoryCallbacks = $entityHandlerFactoryCallbacks;
-		$this->interwikiLookup = MediaWikiServices::getInstance()->getInterwikiLookup();
+		$this->interwikiLookup = $interwikiLookup;
 	}
 
 	/**
@@ -107,7 +111,7 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup, En
 			//        but we have no way to know or guarantee this! See T153496.
 			$interwiki = $id->getRepositoryName();
 
-			if ( $this->interwikiLookup->isValidInterwiki( $interwiki ) ) {
+			if ( $this->interwikiLookup && $this->interwikiLookup->isValidInterwiki( $interwiki ) ) {
 				$pageName = 'EntityPage/' . $id->getLocalPart();
 
 				// TODO: use a TitleFactory

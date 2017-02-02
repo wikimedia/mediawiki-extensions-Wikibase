@@ -574,7 +574,8 @@ class WikibaseRepo {
 	public function getEntityContentFactory() {
 		return new EntityContentFactory(
 			$this->getContentModelMappings(),
-			$this->entityTypeDefinitions->getContentHandlerFactoryCallbacks()
+			$this->entityTypeDefinitions->getContentHandlerFactoryCallbacks(),
+			MediaWikiServices::getInstance()->getInterwikiLookup()
 		);
 	}
 

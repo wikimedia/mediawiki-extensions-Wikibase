@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Content;
 
 use InvalidArgumentException;
 use MediaWiki\Interwiki\InterwikiLookup;
+use MediaWiki\MediaWikiServices;
 use OutOfBoundsException;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -100,7 +101,8 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 				'property' => function() use ( $wikibaseRepo ) {
 					return $wikibaseRepo->newPropertyHandler();
 				}
-			)
+			),
+			MediaWikiServices::getInstance()->getInterwikiLookup()
 		);
 	}
 
