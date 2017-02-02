@@ -152,6 +152,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			'newStringFormatter',
 			'newUrlFormatter',
 			'newCommonsMediaFormatter',
+			'newGeoShapeFormatter',
 			'newEntityIdFormatter',
 			'newMonolingualFormatter',
 			'newTimeFormatter',
@@ -284,7 +285,22 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				'@^<a class="extiw" href="//commons\\.wikimedia\\.org/wiki/File:Example\\.jpg">Example\\.jpg</a>$@',
 				'commonsMedia'
 			),
-
+			// geo-shape
+			'plain geo-shape' => array(
+				'GeoShape',
+				SnakFormatter::FORMAT_PLAIN,
+				$this->newFormatterOptions(),
+				new StringValue( 'Data:GeoShape.map' ),
+				'@^Data:GeoShape.map$@',
+			),
+			'html geo-shape' => array(
+				'GeoShape',
+				SnakFormatter::FORMAT_HTML,
+				$this->newFormatterOptions(),
+				new StringValue( 'Data:GeoShape.map' ),
+				'@^<a class="extiw" href="//commons\\.wikimedia\\.org/wiki/Data%3AGeoShape\\.map">Data:GeoShape\\.map</a>$@',
+				'ge-shape'
+			),
 			// GlobeCoordinate
 			'plain coordinate' => array(
 				'GlobeCoordinate',
