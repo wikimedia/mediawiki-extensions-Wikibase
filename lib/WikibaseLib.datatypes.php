@@ -17,6 +17,7 @@
 
 return array(
 	'PT:commonsMedia'      => array( 'value-type' => 'string' ),
+	'PT:geo-shape'         => array( 'value-type' => 'string' ),
 	'PT:globe-coordinate'  => array( 'value-type' => 'globecoordinate' ),
 	'PT:monolingualtext'   => array( 'value-type' => 'monolingualtext' ),
 	'PT:quantity'          => array( 'value-type' => 'quantity' ),
