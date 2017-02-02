@@ -16,6 +16,24 @@
       "revId": "1f8ac8569ef7d9eecfbdc201d5e2ed35bf3b42fe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_4d445fbd",
+        "filename": "repo/tests/phpunit/includes/Api/SearchEntitiesTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-02T09:23:22Z",
+      "side": 1,
+      "message": "Thanks. Done",
+      "parentUuid": "2ef897d1_2df24398",
+      "revId": "1f8ac8569ef7d9eecfbdc201d5e2ed35bf3b42fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
