@@ -1,0 +1,186 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_e8ebf99e",
+        "filename": "repo/includes/ChangeOp/Deserialization/AliasesChangeOpDeserializer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-02T15:12:05Z",
+      "side": 1,
+      "message": "I know it is copied over but please use short array syntax for a new code. Also below.",
+      "range": {
+        "startLine": 77,
+        "startChar": 20,
+        "endLine": 77,
+        "endChar": 25
+      },
+      "revId": "a0d183b1250a519f8f88593dcc0e0b51ea4cd168",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_48ce8d60",
+        "filename": "repo/includes/ChangeOp/Deserialization/LabelsChangeOpDeserializer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-02T15:12:05Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be also saying it can throw an exception if labels data is in valid format?",
+      "revId": "a0d183b1250a519f8f88593dcc0e0b51ea4cd168",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_28cb5150",
+        "filename": "repo/includes/ChangeOp/Deserialization/LabelsChangeOpDeserializer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-02T15:12:05Z",
+      "side": 1,
+      "message": "PHPDoc could be added here  I guess (as other classes have it).\n\nNot asking to change just a remark: This could possibly be also called \"assertIsArray\", \"assertLabelDataIsArray\" etc. I am not sure what verb, \"validate\" or \"assert\", better expresses the intention of this method.",
+      "range": {
+        "startLine": 72,
+        "startChar": 18,
+        "endLine": 72,
+        "endChar": 37
+      },
+      "revId": "a0d183b1250a519f8f88593dcc0e0b51ea4cd168",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_288351af",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/AliasesChangeOpDeserializerTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-02T15:12:05Z",
+      "side": 1,
+      "message": "import not needed",
+      "revId": "a0d183b1250a519f8f88593dcc0e0b51ea4cd168",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_c8ea7d73",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/AliasesChangeOpDeserializerTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-02T15:12:05Z",
+      "side": 1,
+      "message": "This test wouldn\u0027t fail if the class didn\u0027t throw the exception, would it?\nSome extra check would be needed I think.\n\nBTW: Maybe it would be worth to have this try/catch wrapped in some assertFoo method, so it is more evident what code is tested and what is the part related to just performing a test? I mean something like we had in https://gerrit.wikimedia.org/r/#/c/334137/9/repo/tests/phpunit/includes/ChangeOp/Deserialization/TermChangeOpSerializationValidatorTest.php@89 (maybe without the conditional part as here we know that exception must be thrown).\nThat would wrap the code under test in the closure, so I am not sure what would be better readable in the end. Might be it just a matter of taste.",
+      "revId": "a0d183b1250a519f8f88593dcc0e0b51ea4cd168",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_68e9497b",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/AliasesChangeOpDeserializerTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-02T15:12:05Z",
+      "side": 1,
+      "message": "Same remark as above, I think this test will not be marked as failed if the exception was not thrown. I believe it should.",
+      "revId": "a0d183b1250a519f8f88593dcc0e0b51ea4cd168",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_f3baca1d",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/AliasesChangeOpDeserializerTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-02T15:12:05Z",
+      "side": 1,
+      "message": "I am not completely convinced by the way those tests actually test that right right ChangeOp is created for the particular input.\nIn general what is expected from the deserializer is that it returns a ChangeOp instance. Here in turn it only checks a relevant method on some dependency is called. As method names asserted in tests are exclusively related to the ChangeOp objects classes we expect deserializer to create this might be OK. But then, apart from relying on implementation details of both class under test and FingerprintChangeOpFactory, tests don\u0027t check that actually parameters are passed to the ChangeOp.\n\nThat all said I\u0027ve look at FingerprintChangeOpFactory and have noticed that if we wanted to use actual instance here, that would probably pulling in few more dependencies, so I\u0027d understand it might not be easy to do for test (not sure whether it was the reason why you decide to use mock here, though).",
+      "revId": "a0d183b1250a519f8f88593dcc0e0b51ea4cd168",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_a86ce105",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/AliasesChangeOpDeserializerTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-02T15:12:05Z",
+      "side": 1,
+      "message": "Wouldn\u0027t new StringNormalizer() also work here? It could be simpler than pulling in the top-level factory.\nAlthough I rembember seeing someone complaining new StringNormalizer() behaving some odd way in tests, so just tell me if this is the case here.",
+      "revId": "a0d183b1250a519f8f88593dcc0e0b51ea4cd168",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_6876e9d6",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/AliasesChangeOpDeserializerTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-02T15:12:05Z",
+      "side": 1,
+      "message": "Don\u0027t those tests only require English and possibly German? You could also just use StaticContentLanguages here.\nWith this and what I said above about StringNormalizer those tests would not depend on WikibaseRepo.",
+      "revId": "a0d183b1250a519f8f88593dcc0e0b51ea4cd168",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_089095f0",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/DescriptionsChangeOpDeserializerTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-02T15:12:05Z",
+      "side": 1,
+      "message": "import not needed",
+      "revId": "a0d183b1250a519f8f88593dcc0e0b51ea4cd168",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
