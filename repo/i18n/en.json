@@ -130,6 +130,7 @@
 	"wikibase-validator-label-with-description-conflict": "Item $3 already has label \"$1\" associated with language code $2, using the same description text.",
 	"wikibase-validator-label-no-entityid": "The label must not be a valid entity ID.",
 	"wikibase-validator-illegal-file-chars": "File names are not allowed to contain characters like colons or slashes. Only paste the file name after \"File:\", please.",
+	"wikibase-validator-illegal-geo-shape-title": "Value must start with \"Data:\" and end with \".map\". In addition title should not contain characters like colon, hash or pipe.",
 	"wikibase-validator-no-such-media": "The file \"$1\" does not exist on [https://commons.wikimedia.org/ Wikimedia Commons].",
 	"wikibase-validator-page-not-exists": "The page \"$1\" does not exist.",
 	"wikibase-validator-not-a-language": "\"$1\" is not a known language code.",

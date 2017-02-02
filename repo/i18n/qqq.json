@@ -162,6 +162,7 @@
 	"wikibase-validator-label-with-description-conflict": "Error message shown when a user tries to save an item that has a non-unique label+description pair.\n\nParameters:\n* $1 - label text\n* $2 - the label's language code\n* $3 - the id of the item that already has the label and the description\nSee also:\n* {{msg-mw|Wikibase-validator-label-conflict}}",
 	"wikibase-validator-label-no-entityid": "Error message shown when a user tries to save an item that has a valid entity id as label. Parameters:\n* $1 is the label.",
 	"wikibase-validator-illegal-file-chars": "Validator error message shown when a user tries to link to a Wikimedia Commons media file, but the file name contains illegal special characters such as slashes or colons.",
+	"wikibase-validator-illegal-geo-shape-title": "Validator error message shown when a user tries to link to a geo-shape page, but the page title contains illegal special characters such as hash.",
 	"wikibase-validator-no-such-media": "Error message shown when a user tries to add a link to a Wikimedia Commons media file which does not exist. Parameters:\n* $1 is the name of the file.",
 	"wikibase-validator-page-not-exists": "Error message shown when a user tries to add a link to a Wiki page which does not exist. Parameters:\n* $1 is the name of the page.",
 	"wikibase-validator-not-a-language": "Validation error message shown when a user tries to use a language code that is not known to the system.\n* $1 - the invalid language code\nSee also:\n* {{msg-mw|wikibase-wikibaserepopage-invalid-langcode}}",
