@@ -103,6 +103,11 @@ SELF.prototype.getStatementView = function( startEditingCallback, entityId, prop
 	if ( !value ) {
 		controller.startEditing().done( $.proxy( statementview, 'focus' ) );
 	}
+
+	statementview.element.on( 'statementviewafterstartediting', function() {
+		statementview.focus();
+	} );
+
 	return statementview;
 };
 
