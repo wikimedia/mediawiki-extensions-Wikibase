@@ -837,7 +837,7 @@ final class WikibaseClient {
 	 *
 	 * @return OutputFormatSnakFormatterFactory
 	 */
-	public function getSnakFormatterFactory() {
+	private function getSnakFormatterFactory() {
 		if ( $this->snakFormatterFactory === null ) {
 			$this->snakFormatterFactory = new OutputFormatSnakFormatterFactory(
 				$this->dataTypeDefinitions->getSnakFormatterFactoryCallbacks(),
@@ -856,7 +856,7 @@ final class WikibaseClient {
 	 *
 	 * @return OutputFormatValueFormatterFactory
 	 */
-	public function getValueFormatterFactory() {
+	private function getValueFormatterFactory() {
 		if ( $this->valueFormatterFactory === null ) {
 			$this->valueFormatterFactory = new OutputFormatValueFormatterFactory(
 				$this->dataTypeDefinitions->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ),
@@ -970,7 +970,7 @@ final class WikibaseClient {
 	/**
 	 * @return InternalDeserializerFactory
 	 */
-	public function getInternalFormatDeserializerFactory() {
+	private function getInternalFormatDeserializerFactory() {
 		return new InternalDeserializerFactory(
 			$this->getDataValueDeserializer(),
 			$this->getEntityIdParser(),
@@ -1002,7 +1002,7 @@ final class WikibaseClient {
 	 *
 	 * @return Deserializer
 	 */
-	public function getInternalFormatEntityDeserializer() {
+	private function getInternalFormatEntityDeserializer() {
 		return $this->getInternalFormatDeserializerFactory()->newEntityDeserializer();
 	}
 
@@ -1076,7 +1076,7 @@ final class WikibaseClient {
 	/**
 	 * @return EntityChangeFactory
 	 */
-	public function getEntityChangeFactory() {
+	private function getEntityChangeFactory() {
 		//TODO: take this from a setting or registry.
 		$changeClasses = array(
 			Item::ENTITY_TYPE => ItemChange::class,
@@ -1092,7 +1092,7 @@ final class WikibaseClient {
 	/**
 	 * @return EntityDiffer
 	 */
-	public function getEntityDiffer() {
+	private function getEntityDiffer() {
 		$strategieBuilders = $this->entityTypeDefinitions->getEntityDifferStrategyBuilders();
 		$entityDiffer = new EntityDiffer();
 		foreach ( $strategieBuilders as $strategyBuilder ) {
@@ -1175,7 +1175,7 @@ final class WikibaseClient {
 	/**
 	 * @return AffectedPagesFinder
 	 */
-	public function getAffectedPagesFinder() {
+	private function getAffectedPagesFinder() {
 		return new AffectedPagesFinder(
 			$this->getStore()->getUsageLookup(),
 			new TitleFactory(),
