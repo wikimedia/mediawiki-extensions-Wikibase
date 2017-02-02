@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_68d269d7",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialSetSiteLinkTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-02T14:13:22Z",
+      "side": 0,
+      "message": "There is no matcher `value` in this class.\nWhat author actually meant (I guess) is `page`, because it has value \u0027Wikidata\u0027",
+      "range": {
+        "startLine": 259,
+        "startChar": 2,
+        "endLine": 259,
+        "endChar": 57
+      },
+      "revId": "5d1a0c6181ded476891fe7d9779cc85655a0c985",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_88cda536",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialSetSiteLinkTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-02T14:13:22Z",
+      "side": 0,
+      "message": "There is no matcher `badges` in this class.\nAlso no tags with attribute `selected` in output.\n\nI have no idea what author wanted to test.",
+      "range": {
+        "startLine": 260,
+        "startChar": 2,
+        "endLine": 260,
+        "endChar": 73
+      },
+      "revId": "5d1a0c6181ded476891fe7d9779cc85655a0c985",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
