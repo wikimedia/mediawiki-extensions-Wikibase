@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Content;
 
 use InvalidArgumentException;
+use MediaWiki\Interwiki\InterwikiLookup;
 use OutOfBoundsException;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -116,11 +117,14 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetTitleForId_foreign() {
+		$lookup = $this->getMock( InterwikiLookup::class );
+		$lookup->method( 'isValidInterwiki' )
+			->will( $this->returnValue( true ) );
+		$this->setService( 'InterwikiLookup', $lookup );
+
 		$factory = $this->newFactory();
-
 		$title = $factory->getTitleForId( new ItemId( 'foo:Q42' ) );
-
-		$this->assertEquals( 'foo:Special:EntityPage/Q42', $title->getFullText() );
+		$this->assertSame( 'foo:Special:EntityPage/Q42', $title->getFullText() );
 	}
 
 	public function testGetEntityIdForTitle() {
