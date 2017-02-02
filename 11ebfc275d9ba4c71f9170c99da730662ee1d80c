@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_0ef9bd4a",
+        "filename": "repo/includes/Validators/InterWikiLinkExistsValidator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-02T19:02:47Z",
+      "side": 1,
+      "message": ":D\n\n`return $actualPageName !\u003d\u003d false;`",
+      "range": {
+        "startLine": 80,
+        "startChar": 2,
+        "endLine": 80,
+        "endChar": 50
+      },
+      "revId": "11ebfc275d9ba4c71f9170c99da730662ee1d80c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_6ea0313f",
+        "filename": "repo/includes/Validators/InterWikiLinkExistsValidator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-02T19:02:47Z",
+      "side": 1,
+      "message": "I don\u0027t think this method is being called. Probably can be removed from the interface.\nCan anybody check?",
+      "range": {
+        "startLine": 90,
+        "startChar": 1,
+        "endLine": 92,
+        "endChar": 2
+      },
+      "revId": "11ebfc275d9ba4c71f9170c99da730662ee1d80c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
