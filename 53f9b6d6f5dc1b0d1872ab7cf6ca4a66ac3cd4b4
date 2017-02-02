@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_b3a45205",
+        "filename": "repo/includes/Api/CreateClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-02T15:02:44Z",
+      "side": 1,
+      "message": "I think $moduleName can be removed from argument list. As I understood it will always be `wbcreateclaim`, is it?",
+      "range": {
+        "startLine": 57,
+        "startChar": 2,
+        "endLine": 57,
+        "endChar": 14
+      },
+      "revId": "53f9b6d6f5dc1b0d1872ab7cf6ca4a66ac3cd4b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_13be8613",
+        "filename": "repo/tests/phpunit/includes/Api/StatementModificationHelperTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-02T15:02:44Z",
+      "side": 1,
+      "message": "Because of increase of boilerplate code test became hard to read, so I would suggest to hide creation code in method like:\n`createCreateClaimApiModule()`",
+      "range": {
+        "startLine": 92,
+        "startChar": 3,
+        "endLine": 100,
+        "endChar": 4
+      },
+      "revId": "53f9b6d6f5dc1b0d1872ab7cf6ca4a66ac3cd4b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
