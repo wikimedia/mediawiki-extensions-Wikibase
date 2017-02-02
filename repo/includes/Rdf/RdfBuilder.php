@@ -2,6 +2,7 @@
 
 namespace Wikibase\Rdf;
 
+use Doctrine\Instantiator\Exception\UnexpectedValueException;
 use PageProps;
 use SiteList;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -14,6 +15,8 @@ use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Assert\Assert;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
@@ -140,8 +143,28 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 			$builder->setDedupeBag( $this->dedupeBag );
 			$this->builders[] = $builder;
 		}
+
+		$this->addExtraBuilders();
 	}
 
+	private function addExtraBuilders() {
+		$rdfBuilderCallbacks = WikibaseRepo::getDefaultInstance()->getRdfBuildersCallbacks();
+		foreach ( $rdfBuilderCallbacks as $entity => $rdfBuilderCallback ) {
+			foreach ( $rdfBuilderCallback as $rdfBuilder ) {
+				Assert::parameter( EntityRdfBuilder::class, $rdfBuilder, '$rdfBuilder' );
+
+				$this->builders[] = call_user_func_array( $rdfBuilder, [
+					$this->vocabulary,
+					$this->propertyLookup,
+					$this->valueSnakRdfBuilderFactory,
+					$this->writer,
+					$this->produceWhat,
+					$this->dedupeBag,
+					$this->titleLookup
+				] );
+			}
+		}
+	}
 	/**
 	 * @param int $flavorFlags Flavor flags to use for this builder
 	 * @return SnakRdfBuilder

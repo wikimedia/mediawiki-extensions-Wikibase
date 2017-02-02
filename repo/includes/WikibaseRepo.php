@@ -1847,4 +1847,12 @@ class WikibaseRepo {
 		return $this->entityTypeDefinitions->getChangeOpDeserializerCallbacks();
 	}
 
+	/**
+	 * @see EntityTypeDefinitions::getRdfBuildersCallbacks
+	 *
+	 * @return callable[]
+	 */
+	public function getRdfBuildersCallbacks() {
+		return $this->entityTypeDefinitions->getRdfBuildersCallbacks();
+	}
 }
