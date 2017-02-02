@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_4d11ff5e",
+        "filename": "repo/tests/phpunit/includes/Content/EntityContentFactoryTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-02T10:44:38Z",
+      "side": 1,
+      "message": "If  I get it right resetServiceForTesting does NOT automagically restore the service it used to be before you called redefineService. It just re-instantiates the service using its current defintion.\nSo all tests run after this use the dummy interwiki lookup you\u0027ve created above, thus core tests related to interwiki fail.\n\nI\u0027ve been struggling with similar problems a while ago and it turned out that instead of using redefineService + resetServiceForTesting, you could simply have $this-\u003esetService( \u0027InterwikiLookup\u0027, $lookup ); above (before the actual code you\u0027re testing. It will take care of ditching the custom service implementation etc after the test is run.",
+      "revId": "b1673ace5149b01a4a03ea84bf7633b66b33253b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
