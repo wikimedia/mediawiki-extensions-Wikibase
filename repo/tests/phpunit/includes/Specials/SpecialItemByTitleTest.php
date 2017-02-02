@@ -33,6 +33,8 @@ use Wikibase\Repo\Specials\SpecialItemByTitle;
  */
 class SpecialItemByTitleTest extends SpecialPageTestBase {
 
+	use HtmlAssertionHelpers;
+
 	const EXISTING_WIKI = 'dewiki';
 	const EXISTING_PAGE = 'Gefunden';
 	const EXISTING_ITEM_ID = 'Q123';
@@ -113,31 +115,9 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 
 		list( $output ) = $this->executeSpecialPage();
 
-		$matchers = [];
-
-		$matchers['site'] = [
-			'tag' => 'input',
-			'attributes' => [
-				'name' => 'site',
-			],
-		];
-		$matchers['page'] = [
-			'tag' => 'input',
-			'attributes' => [
-				'name' => 'page',
-			],
-		];
-		$matchers['submit'] = [
-			'tag' => 'button',
-			'attributes' => [
-				'type' => 'submit',
-				'name' => '',
-			],
-		];
-
-		foreach ( $matchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
-		}
+		$this->assertHtmlContainsInputWithName( $output, 'site' );
+		$this->assertHtmlContainsInputWithName( $output, 'page' );
+		$this->assertHtmlContainsSubmitControl( $output );
 	}
 
 	public function testSiteAndPageFieldsAreFilledIn_WhenRenderedWithSubpageReferingToNonexistentTitle() {
@@ -145,26 +125,8 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 		$page = 'AnyPage';
 		list( $output ) = $this->executeSpecialPage( $wiki . '/' . $page );
 
-		$matchers = [];
-
-		$matchers['site'] = [
-			'tag' => 'input',
-			'attributes' => [
-				'name' => 'site',
-				'value' => $wiki
-			],
-		];
-		$matchers['page'] = [
-			'tag' => 'input',
-			'attributes' => [
-				'name' => 'page',
-				'value' => $page
-			],
-		];
-
-		foreach ( $matchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
-		}
+		$this->assertHtmlContainsInputWithNameAndValue( $output, 'site', $wiki );
+		$this->assertHtmlContainsInputWithNameAndValue( $output, 'page', $page );
 	}
 
 	public function testRedirectsToCorrespondingItem_WhenGivenSubPageReferencesExistingPage() {
