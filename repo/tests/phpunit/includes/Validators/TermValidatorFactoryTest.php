@@ -90,11 +90,19 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 		$q99 = new ItemId( 'Q99' );
 
 		$this->assertTrue(
-			$validator->validateFingerprint( $goodFingerprint, $q99 )->isValid(),
+			$validator->validateFingerprint(
+				$goodFingerprint->getLabels(),
+				$goodFingerprint->getDescriptions(),
+				$q99
+			)->isValid(),
 			'isValid(good)'
 		);
 		$this->assertFalse(
-			$validator->validateFingerprint( $labelDupeFingerprint, $q99 )->isValid(),
+			$validator->validateFingerprint(
+				$labelDupeFingerprint->getLabels(),
+				$labelDupeFingerprint->getDescriptions(),
+				$q99
+			)->isValid(),
 			'isValid(bad): label/description'
 		);
 	}

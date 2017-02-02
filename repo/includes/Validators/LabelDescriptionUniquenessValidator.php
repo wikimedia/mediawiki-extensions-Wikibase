@@ -6,8 +6,8 @@ use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\DescriptionsProvider;
-use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\LabelsProvider;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\LabelDescriptionDuplicateDetector;
 
 /**
@@ -55,19 +55,21 @@ class LabelDescriptionUniquenessValidator implements EntityValidator, Fingerprin
 	/**
 	 * @see FingerprintValidator::validateFingerprint()
 	 *
-	 * @param Fingerprint $fingerprint
+	 * @param TermList $labels
+	 * @param TermList $descriptions
 	 * @param EntityId $entityId
 	 * @param string[]|null $languageCodes
 	 *
 	 * @return Result
 	 */
 	public function validateFingerprint(
-		Fingerprint $fingerprint,
+		TermList $labels,
+		TermList $descriptions,
 		EntityId $entityId,
 		array $languageCodes = null
 	) {
-		$labels = $fingerprint->getLabels()->toTextArray();
-		$descriptions = $fingerprint->getDescriptions()->toTextArray();
+		$labels = $labels->toTextArray();
+		$descriptions = $descriptions->toTextArray();
 
 		if ( $languageCodes !== null ) {
 			$languageKeys = array_flip( $languageCodes );
