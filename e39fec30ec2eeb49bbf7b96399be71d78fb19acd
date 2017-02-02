@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_ed21cbf7",
+        "filename": "client/tests/phpunit/includes/Store/Sql/DirectSqlStoreTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-02T09:38:14Z",
+      "side": 1,
+      "message": "Constructor only takes three parameters. This one got missed during one of rebase rounds. Additional empty array here does not have any effect, though. Will remove.",
+      "revId": "e39fec30ec2eeb49bbf7b96399be71d78fb19acd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
