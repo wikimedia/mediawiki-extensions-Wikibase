@@ -152,6 +152,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			'newStringFormatter',
 			'newUrlFormatter',
 			'newCommonsMediaFormatter',
+			'newGeoShapeFormatter',
 			'newEntityIdFormatter',
 			'newMonolingualFormatter',
 			'newTimeFormatter',
@@ -257,7 +258,6 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				$this->newFormatterOptions(),
 				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'/^<a\b[^>]* href="[^"]*\bQ5">Label for Q5<\/a>.*$/', // compare mock object created in newBuilders()
-				'wikibase-item'
 			),
 			'property link (with entity lookup)' => array(
 				'EntityId',
@@ -265,7 +265,6 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				$this->newFormatterOptions(),
 				new EntityIdValue( new PropertyId( 'P5' ) ),
 				'/^<a\b[^>]* href="[^"]*\bP5">Label for P5<\/a>.*$/',
-				'wikibase-property'
 			),
 
 			// CommonsMedia
@@ -282,9 +281,22 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				$this->newFormatterOptions(),
 				new StringValue( 'Example.jpg' ),
 				'@^<a class="extiw" href="//commons\\.wikimedia\\.org/wiki/File:Example\\.jpg">Example\\.jpg</a>$@',
-				'commonsMedia'
 			),
-
+			// geo-shape
+			'plain geo-shape' => array(
+				'GeoShape',
+				SnakFormatter::FORMAT_PLAIN,
+				$this->newFormatterOptions(),
+				new StringValue( 'Data:GeoShape.map' ),
+				'@^Data:GeoShape.map$@',
+			),
+			'html geo-shape' => array(
+				'GeoShape',
+				SnakFormatter::FORMAT_HTML,
+				$this->newFormatterOptions(),
+				new StringValue( 'Data:GeoShape.map' ),
+				'@^<a class="extiw" href="//commons\\.wikimedia\\.org/wiki/Data%3AGeoShape\\.map">Data:GeoShape\\.map</a>$@',
+			),
 			// GlobeCoordinate
 			'plain coordinate' => array(
 				'GlobeCoordinate',
