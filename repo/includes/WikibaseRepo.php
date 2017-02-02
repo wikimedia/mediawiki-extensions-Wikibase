@@ -521,7 +521,7 @@ class WikibaseRepo {
 	/**
 	 * @return Language
 	 */
-	private function getUserLanguage() {
+	public function getUserLanguage() {
 		global $wgLang;
 
 		// TODO: define a LanguageProvider service instead of using a global directly.
