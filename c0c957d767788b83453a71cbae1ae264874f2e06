@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_6eaef1e5",
+        "filename": "repo/includes/ChangeOp/ChangeOpDescription.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-02T16:55:35Z",
+      "side": 1,
+      "message": "Now authorship of this line will belong to you. Do you understand what does it mean?",
+      "range": {
+        "startLine": 131,
+        "startChar": 2,
+        "endLine": 131,
+        "endChar": 93
+      },
+      "revId": "c0c957d767788b83453a71cbae1ae264874f2e06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
