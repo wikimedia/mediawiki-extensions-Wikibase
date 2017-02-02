@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "2ef897d1_532bdedb",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-02T16:37:00Z",
+      "side": 1,
+      "message": "First I wanted to complain that this test less than it used to do before but then I realized that returning all defined services is already tested in the parent class, so this is enough. Thanks, I like it.",
+      "revId": "7f695208d0c553583b1a4a52c96c83b7268eb404",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_32de3715",
         "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
         "patchSetId": 1
@@ -67,6 +84,40 @@
         "endLine": 37,
         "endChar": 96
       },
+      "revId": "7f695208d0c553583b1a4a52c96c83b7268eb404",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_d3c34e09",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-02T16:37:00Z",
+      "side": 1,
+      "message": "At first glance I\u0027ve read like \"gimme a service called local\", as in this ServiceContainer area services are indentified names.\nWhy do you actually need this \"description\" in someService?",
+      "revId": "7f695208d0c553583b1a4a52c96c83b7268eb404",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_336f4228",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-02T16:37:00Z",
+      "side": 1,
+      "message": "Good question. I haven\u0027t really think about it. But I guess it should be OK to have some services for not all repositories (e.g. we might not need PropertyInfoLookup for repos that don\u0027t provide properties).\nDispatching services we\u0027ve implemented so far generally ignore entities from repositories they don\u0027t have a service configured for. So I believe it would fine if the factory also accept \"incomplete\" service maps.\nIf this is right assumption DispatchingServiceFactory should be changed as currently does not allow this completely I think. But I will check with Daniel again about this.",
       "revId": "7f695208d0c553583b1a4a52c96c83b7268eb404",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
