@@ -27,6 +27,8 @@ use Wikibase\Repo\Validators\StringLengthValidator;
 use Wikibase\Repo\Validators\TypeValidator;
 use Wikibase\Repo\Validators\UrlSchemeValidators;
 use Wikibase\Repo\Validators\UrlValidator;
+use MediaWiki\Site\MediaWikiPageNameNormalizer;
+use Wikibase\Repo\Validators\InterWikiLinkExistsValidator;
 
 /**
  * Defines validators for the basic well known data types supported by Wikibase.
@@ -86,6 +88,11 @@ class ValidatorBuilders {
 	private $supportedEntityTypes;
 
 	/**
+	 * @var MediaWikiPageNameNormalizer
+	 */
+	private $mediaWikiPageNameNormalizer;
+
+	/**
 	 * @param EntityLookup $lookup
 	 * @param EntityIdParser $idParser
 	 * @param string[] $urlSchemes
@@ -93,6 +100,7 @@ class ValidatorBuilders {
 	 * @param ContentLanguages $contentLanguages
 	 * @param CachingCommonsMediaFileNameLookup $cachingCommonsMediaFileNameLookup
 	 * @param array $supportedEntityTypes map of repository names to lists of supported entity types
+	 * @param MediaWikiPageNameNormalizer $mediaWikiPageNameNormalizer
 	 */
 	public function __construct(
 		EntityLookup $lookup,
@@ -101,7 +109,8 @@ class ValidatorBuilders {
 		$vocabularyBaseUri,
 		ContentLanguages $contentLanguages,
 		CachingCommonsMediaFileNameLookup $cachingCommonsMediaFileNameLookup,
-		array $supportedEntityTypes
+		array $supportedEntityTypes,
+		MediaWikiPageNameNormalizer $mediaWikiPageNameNormalizer
 	) {
 		$this->entityLookup = $lookup;
 		$this->entityIdParser = $idParser;
@@ -110,6 +119,7 @@ class ValidatorBuilders {
 		$this->contentLanguages = $contentLanguages;
 		$this->mediaFileNameLookup = $cachingCommonsMediaFileNameLookup;
 		$this->supportedEntityTypes = $supportedEntityTypes;
+		$this->mediaWikiPageNameNormalizer = $mediaWikiPageNameNormalizer;
 	}
 
 	/**
@@ -184,6 +194,34 @@ class ValidatorBuilders {
 
 		if ( $checkExistence === 'checkExistence' ) {
 			$validators[] = new CommonsMediaExistsValidator( $this->mediaFileNameLookup );
+		}
+
+		$topValidator = new DataValueValidator(
+			new CompositeValidator( $validators ) //Note: each validator is fatal
+		);
+
+		return array( new TypeValidator( DataValue::class ), $topValidator );
+	}
+
+	/**
+	 * @param string $checkExistence Either 'checkExistence' or 'doNotCheckExistence'
+	 *
+	 * @return ValueValidator[]
+	 */
+	public function buildGeoShapeValidators( $checkExistence = 'checkExistence' ) {
+		$validators = $this->getCommonStringValidators( 240 );
+		//Don't forget to change message `wikibase-validator-illegal-geo-shape-title` modifying this
+		// Check for 'Data:' prefix, '.map' extension and illegal characters
+		$validators[] = new RegexValidator(
+			'/^Data:[^\\[\\]#\\\:{|}]+\.map$/u',
+			false,
+			'illegal-geo-shape-title'
+		);
+		if ( $checkExistence === 'checkExistence' ) {
+			$validators[] = new InterWikiLinkExistsValidator(
+				$this->mediaWikiPageNameNormalizer,
+				'https://commons.wikimedia.org/w/api.php'
+			);
 		}
 
 		$topValidator = new DataValueValidator(

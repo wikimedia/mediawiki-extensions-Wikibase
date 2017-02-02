@@ -26,6 +26,7 @@ use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
 use Wikibase\Repo\ValidatorBuilders;
+use MediaWiki\Site\MediaWikiPageNameNormalizer;
 
 /**
  * @covers Wikibase\Repo\ValidatorBuilders
@@ -49,7 +50,8 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			[
 				'' => [ Item::ENTITY_TYPE, Property::ENTITY_TYPE ],
 				'foo' => [ Item::ENTITY_TYPE ]
-			]
+			],
+			$this->getMediaWikiPageNameNormalizer()
 		);
 	}
 
@@ -76,6 +78,23 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			'' => $localLookup,
 			'foo' => $foreignLookup,
 		] );
+	}
+
+	/**
+	 * @return MediaWikiPageNameNormalizer
+	 */
+	private function getMediaWikiPageNameNormalizer() {
+		$pageNormalizer = $this->getMockBuilder( MediaWikiPageNameNormalizer::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$pageNormalizer->expects( $this->any() )
+			->method( 'normalizePageName' )
+			->will( $this->returnCallback( function( $pageName ) {
+				return strpos( $pageName, 'NOT-FOUND' ) === false ? $pageName : false;
+			} ) );
+
+		return $pageNormalizer;
 	}
 
 	/**
@@ -143,6 +162,30 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			array( 'commonsMedia', new StringValue( ' Foo.jpg' ), false, 'media name with leading space' ),
 			array( 'commonsMedia', new StringValue( 'Foo.jpg ' ), false, 'media name with trailing space' ),
 			array( 'commonsMedia', new StringValue( 'Foo-NOT-FOUND.jpg' ), false, 'file not found' ),
+
+			//geo-shape
+			array( 'geo-shape', 'Foo.map', false, 'StringValue expected, string supplied' ),
+			array( 'geo-shape', new NumberValue( 7 ), false, 'StringValue expected' ),
+			array( 'geo-shape', new StringValue( '' ), false, 'empty string should be invalid' ),
+			array( 'geo-shape', new StringValue( str_repeat( 'x', 237 ) . '.map' ), false, 'name too long' ),
+			array( 'geo-shape', new StringValue( 'Data:Foo' ), false, 'no file extension' ),
+			array( 'geo-shape', new StringValue( 'Data:Foo.a' ), false, 'file extension to short' ),
+			array( 'geo-shape', new StringValue( 'Data:Foo.map' ), true, 'this should be good' ),
+			array( 'geo-shape', new StringValue( 'Foo.map' ), false, 'Should have data namespace' ),
+			array( 'geo-shape', new StringValue( "Data:a\na.map" ), false, 'illegal character: newline' ),
+			array( 'geo-shape', new StringValue( 'Data:a[a.map' ), false, 'illegal character: square bracket' ),
+			array( 'geo-shape', new StringValue( 'Data:a]a.map' ), false, 'illegal character: square bracket' ),
+			array( 'geo-shape', new StringValue( 'Data:a{a.map' ), false, 'illegal character: curly bracket' ),
+			array( 'geo-shape', new StringValue( 'Data:a}a.map' ), false, 'illegal character: curly bracket' ),
+			array( 'geo-shape', new StringValue( 'Data:a|a.map' ), false, 'illegal character: pipe' ),
+			array( 'geo-shape', new StringValue( 'Data:Foo#bar.map' ), false, 'illegal character: hash' ),
+			array( 'geo-shape', new StringValue( 'Data:Foo:bar.map' ), false, 'illegal character: colon' ),
+			array( 'geo-shape', new StringValue( 'Data:Foo/bar.map' ), true, 'allowed character: slash' ),
+			array( 'geo-shape', new StringValue( 'Data:Foo\bar.map' ), false, 'illegal character: backslash' ),
+			array( 'geo-shape', new StringValue( 'Data:Äöü.map' ), true, 'Unicode support' ),
+			array( 'geo-shape', new StringValue( ' Data:Foo.map' ), false, 'media name with leading space' ),
+			array( 'geo-shape', new StringValue( 'Data:Foo.map ' ), false, 'media name with trailing space' ),
+			array( 'geo-shape', new StringValue( 'Data:Foo-NOT-FOUND.map' ), false, 'file not found' ),
 
 			//string
 			array( 'string', 'Foo', false, 'StringValue expected, string supplied' ),
@@ -318,6 +361,7 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 
 		$validatorMap = array(
 			'commonsMedia'      => array( $builders, 'buildMediaValidators' ),
+			'geo-shape'         => array( $builders, 'buildGeoShapeValidators' ),
 			'globe-coordinate'  => array( $builders, 'buildCoordinateValidators' ),
 			'monolingualtext'   => array( $builders, 'buildMonolingualTextValidators' ),
 			'quantity'          => array( $builders, 'buildQuantityValidators' ),
