@@ -51,6 +51,14 @@ wb.parsers.getStore = function( api ) {
 	parserStore.registerDataTypeParser(
 		util.inherit(
 			ApiBasedValueParser,
+			{ API_VALUE_PARSER_ID: 'geo-shape' }
+		),
+		'geo-shape'
+	);
+
+	parserStore.registerDataTypeParser(
+		util.inherit(
+			ApiBasedValueParser,
 			{ API_VALUE_PARSER_ID: 'url' }
 		),
 		'url'
