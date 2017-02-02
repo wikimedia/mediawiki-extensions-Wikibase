@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_a83aa1e2",
+        "filename": "composer.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-02T14:37:04Z",
+      "side": 1,
+      "message": "We changed these all to ^ because it is semantically more correct. Please do not change back.\n\nAlso it should be 0.18.2 because 0.18.1 is buggy.",
+      "range": {
+        "startLine": 35,
+        "startChar": 29,
+        "endLine": 35,
+        "endChar": 30
+      },
+      "revId": "2c4e98ac6e64cda63115fc034f009a9202826e6d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
