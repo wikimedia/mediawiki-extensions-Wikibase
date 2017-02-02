@@ -167,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_1369e688",
+        "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-02T15:26:18Z",
+      "side": 1,
+      "message": "But what is the use case? \n\nIt seems very strange for me to acquire lock on English Wikipedia database and can not get lock on German wikipedia db.\n\nHere is the line from the parent class:\n`Tries to acquire a global lock on the given client wiki.`\nAlso, from ChangeDispatchCoordinator interface:\n`The purpose of a ChangeDispatchCoordinator is to determine which client wiki to dispatch to next in a fair manner, and to prevent multiple processes to try and dispatch to the same wiki at once`\nI believe this assumes that lock is per db, isn\u0027t it?\n\nIf you like SOLID principles: this seem to violate Liskov Substitution Principle.",
+      "parentUuid": "2ef897d1_ad2d1343",
+      "range": {
+        "startLine": 43,
+        "startChar": 9,
+        "endLine": 43,
+        "endChar": 55
+      },
+      "revId": "cb7748d316a5a0193f6443531dd1172f8bfc8f47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_71bdcdac",
         "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
         "patchSetId": 4
