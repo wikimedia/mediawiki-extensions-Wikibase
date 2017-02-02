@@ -52,6 +52,24 @@
       "revId": "633852d4f1eb314d978f84ce7264aca2e409256d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_137b2625",
+        "filename": "repo/includes/Content/EntityContentFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-02T15:45:16Z",
+      "side": 1,
+      "message": "Then there is no point in having a service registry, if the only place where it can be used is the top level factory.",
+      "parentUuid": "2ef897d1_93af1691",
+      "revId": "633852d4f1eb314d978f84ce7264aca2e409256d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
