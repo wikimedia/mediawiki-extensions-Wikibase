@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_cd284f35",
+        "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-02-02T08:11:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4efb0bce_400d4838",
+      "range": {
+        "startLine": 9,
+        "startChar": 3,
+        "endLine": 9,
+        "endChar": 8
+      },
+      "revId": "cb7748d316a5a0193f6443531dd1172f8bfc8f47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_91c04931",
         "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
         "patchSetId": 4
@@ -60,6 +84,30 @@
       "writtenOn": "2017-01-16T15:06:29Z",
       "side": 1,
       "message": "I don\u0027t think we can override private methods. Must be protected in the base class to have an effect.\n\nSame below.",
+      "range": {
+        "startLine": 41,
+        "startChar": 1,
+        "endLine": 41,
+        "endChar": 8
+      },
+      "revId": "cb7748d316a5a0193f6443531dd1172f8bfc8f47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_2d1a431d",
+        "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-02-02T08:11:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4efb0bce_91c04931",
       "range": {
         "startLine": 41,
         "startChar": 1,
@@ -95,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_ad2d1343",
+        "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-02-02T08:11:47Z",
+      "side": 1,
+      "message": "Here\u0027s the whole point of having different type of lock manager, it should lock and release without knowing the db, so once it\u0027s locked, it\u0027s locked for all dbs and when it\u0027s free, it\u0027s free for all dbs",
+      "parentUuid": "4efb0bce_403b08c5",
+      "range": {
+        "startLine": 43,
+        "startChar": 9,
+        "endLine": 43,
+        "endChar": 55
+      },
+      "revId": "cb7748d316a5a0193f6443531dd1172f8bfc8f47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_71bdcdac",
         "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
         "patchSetId": 4
@@ -118,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_0d1787f3",
+        "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-02-02T08:11:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4efb0bce_71bdcdac",
+      "range": {
+        "startLine": 76,
+        "startChar": 17,
+        "endLine": 76,
+        "endChar": 31
+      },
+      "revId": "cb7748d316a5a0193f6443531dd1172f8bfc8f47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efb0bce_5d2ad190",
         "filename": "repo/maintenance/dispatchChanges.php",
         "patchSetId": 4
@@ -129,6 +225,30 @@
       "writtenOn": "2017-01-18T23:06:35Z",
       "side": 1,
       "message": "Is it needed to be imported?",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 10
+      },
+      "revId": "cb7748d316a5a0193f6443531dd1172f8bfc8f47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_cdd72f27",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-02-02T08:11:47Z",
+      "side": 1,
+      "message": "It\u0027s being used down there.",
+      "parentUuid": "4efb0bce_5d2ad190",
       "range": {
         "startLine": 11,
         "startChar": 0,
