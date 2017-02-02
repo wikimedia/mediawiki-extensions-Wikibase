@@ -100,9 +100,17 @@ SELF.prototype.getStatementView = function( startEditingCallback, entityId, prop
 		startEditingCallback
 	);
 
+	// Empty statementviews (added with the "add" button) should start in edit mode
 	if ( !value ) {
-		controller.startEditing().done( $.proxy( statementview, 'focus' ) );
+		controller.startEditing()
+			.done( $.proxy( statementview, 'focus' ) );
 	}
+
+	// Always focus the statementview that switched to edit mode last
+	statementview.element.on( 'statementviewafterstartediting', function() {
+		statementview.focus();
+	} );
+
 	return statementview;
 };
 
