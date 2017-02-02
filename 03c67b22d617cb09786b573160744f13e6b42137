@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_2860f1fb",
+        "filename": "lib/WikibaseLib.datatypes.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-02T14:34:55Z",
+      "side": 1,
+      "message": "Indention.",
+      "range": {
+        "startLine": 20,
+        "startChar": 15,
+        "endLine": 20,
+        "endChar": 22
+      },
+      "revId": "03c67b22d617cb09786b573160744f13e6b42137",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_c84efd9a",
+        "filename": "repo/WikibaseRepo.datatypes.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-02T14:34:55Z",
+      "side": 1,
+      "message": "Is it only the indention that is off here, or is the nesting actually messed up?",
+      "range": {
+        "startLine": 113,
+        "startChar": 3,
+        "endLine": 116,
+        "endChar": 75
+      },
+      "revId": "03c67b22d617cb09786b573160744f13e6b42137",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_8848058e",
+        "filename": "repo/WikibaseRepo.datatypes.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-02T14:34:55Z",
+      "side": 1,
+      "message": "More odd nesting.",
+      "range": {
+        "startLine": 121,
+        "startChar": 3,
+        "endLine": 122,
+        "endChar": 62
+      },
+      "revId": "03c67b22d617cb09786b573160744f13e6b42137",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
