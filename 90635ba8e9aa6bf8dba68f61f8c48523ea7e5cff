@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_b88b0a1b",
+        "filename": "repo/includes/Validators/InterWikiLinkExistsValidator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-03T01:10:49Z",
+      "side": 1,
+      "message": "Suggest \"Page does not exist\" if the validator is generally for interwiki links",
+      "revId": "90635ba8e9aa6bf8dba68f61f8c48523ea7e5cff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
