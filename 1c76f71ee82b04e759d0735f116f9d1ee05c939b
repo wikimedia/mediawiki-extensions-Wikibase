@@ -33,6 +33,57 @@
       "revId": "1c76f71ee82b04e759d0735f116f9d1ee05c939b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_963a5fe3",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-03T14:14:39Z",
+      "side": 1,
+      "message": "please update the documentation.\n\nalso, just a personal preference, but I would put MediaWikiPageNameNormalizer before $supportedEntityTypes. (I like objects befor arrays and it somewhat goes together with the CachingCommonsMediaFileNameLookup)",
+      "revId": "1c76f71ee82b04e759d0735f116f9d1ee05c939b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_362a8b90",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-03T14:14:39Z",
+      "side": 1,
+      "message": "will this url be configurable?  we might want it to point to commons beta wiki on beta wikidata, for example",
+      "revId": "1c76f71ee82b04e759d0735f116f9d1ee05c939b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_16278fc6",
+        "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-03T14:14:39Z",
+      "side": 1,
+      "message": "can we sort these?",
+      "revId": "1c76f71ee82b04e759d0735f116f9d1ee05c939b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
