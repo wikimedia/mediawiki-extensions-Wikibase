@@ -116,6 +116,24 @@
       "revId": "995a07e7445b3a28ab934adb5c40873a281a8c13",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_3b3ef4b5",
+        "filename": "view/resources/wikibase/view/ControllerViewFactory.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-03T07:32:35Z",
+      "side": 1,
+      "message": "If all the other focus calls are here, this one should also be here. The only issue are the duplicate calls in line 104 and 108. To me it looks like we can simply remove the \"if ( !value )\" from line 103. The second focus call is not needed then.\n\nPlease try this out. Thanks.",
+      "parentUuid": "2ef897d1_0e865dac",
+      "revId": "995a07e7445b3a28ab934adb5c40873a281a8c13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
