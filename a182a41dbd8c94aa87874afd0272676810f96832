@@ -235,6 +235,30 @@
       "revId": "a182a41dbd8c94aa87874afd0272676810f96832",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_db2da08c",
+        "filename": "repo/tests/phpunit/includes/Validators/InterWikiLinkExistsValidatorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-03T07:25:17Z",
+      "side": 1,
+      "message": "I suggested this because I was under the impression the parameter is nullable. Not sure why I was thinking this. Empty string is better, thanks for pointing this out.",
+      "parentUuid": "2ef897d1_ae3aa9e2",
+      "range": {
+        "startLine": 45,
+        "startChar": 90,
+        "endLine": 45,
+        "endChar": 109
+      },
+      "revId": "a182a41dbd8c94aa87874afd0272676810f96832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
