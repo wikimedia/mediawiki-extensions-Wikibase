@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_fb0a9c28",
+        "filename": "view/resources/wikibase/view/ControllerViewFactory.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-02-03T10:39:03Z",
+      "side": 1,
+      "message": "When removing this line something really crazy happens that totally destroys the page:\ncontroller.startEditing()",
+      "revId": "995a07e7445b3a28ab934adb5c40873a281a8c13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_b33a12e3",
         "filename": "view/resources/wikibase/view/ControllerViewFactory.js",
         "patchSetId": 1
