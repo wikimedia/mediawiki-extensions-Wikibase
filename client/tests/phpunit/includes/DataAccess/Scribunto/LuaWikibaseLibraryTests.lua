@@ -64,13 +64,18 @@ local function testFormatValues()
 
 	return mw.wikibase.formatValues( snaks )
 end
+local function testPrinting()
+	local entity = mw.wikibase.getEntityObject( 'Q32487' )
+	for a,b in pairs(entity) do
+		print(a)
+	end
+
+	return mw.wikibase.formatValues( snaks )
+end
 
 local tests = {
 	-- Integration tests
 
-	{ name = 'mw.wikibase.getEntityIdForCurrentPage', func = mw.wikibase.getEntityIdForCurrentPage,
-	  expect = { 'Q32487' }
-	},
 	{ name = 'mw.wikibase.getEntityIdForCurrentPage', func = mw.wikibase.getEntityIdForCurrentPage,
 	  expect = { 'Q32487' }
 	},
