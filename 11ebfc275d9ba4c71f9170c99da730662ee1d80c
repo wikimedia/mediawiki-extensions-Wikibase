@@ -45,6 +45,30 @@
       "revId": "11ebfc275d9ba4c71f9170c99da730662ee1d80c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_bb49c46c",
+        "filename": "repo/includes/Validators/InterWikiLinkExistsValidator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-03T07:25:17Z",
+      "side": 1,
+      "message": "See https://github.com/DataValues/Interfaces/pull/24. I\u0027m trying to fix this interface for a long time now. If you have an idea that allows us to deprecate and remove this from the interface, please go ahead.",
+      "parentUuid": "2ef897d1_6ea0313f",
+      "range": {
+        "startLine": 90,
+        "startChar": 1,
+        "endLine": 92,
+        "endChar": 2
+      },
+      "revId": "11ebfc275d9ba4c71f9170c99da730662ee1d80c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
