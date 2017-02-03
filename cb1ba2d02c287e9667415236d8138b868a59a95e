@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_765ec37c",
+        "filename": "repo/tests/phpunit/includes/Validators/InterWikiLinkExistsValidatorTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-03T13:29:55Z",
+      "side": 1,
+      "message": "is the validator specific to pages?\n\nof course, we have some pages named the same as files, but suggest the constants at least not be named *_FILE",
+      "revId": "cb1ba2d02c287e9667415236d8138b868a59a95e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
