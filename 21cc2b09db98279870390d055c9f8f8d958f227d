@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_d6e8d70d",
+        "filename": "view/resources/wikibase/view/ControllerViewFactory.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-02-03T11:18:37Z",
+      "side": 1,
+      "message": "This is needed for when adding a statement.",
+      "revId": "21cc2b09db98279870390d055c9f8f8d958f227d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
