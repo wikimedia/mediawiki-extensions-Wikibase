@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_d62d778c",
+        "filename": "repo/includes/ChangeOp/Deserialization/AliasesChangeOpDeserializer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2017-02-03T15:01:26Z",
+      "side": 1,
+      "message": "Ew! Done.",
+      "parentUuid": "2ef897d1_e8ebf99e",
+      "range": {
+        "startLine": 77,
+        "startChar": 20,
+        "endLine": 77,
+        "endChar": 25
+      },
+      "revId": "a0d183b1250a519f8f88593dcc0e0b51ea4cd168",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_48ce8d60",
         "filename": "repo/includes/ChangeOp/Deserialization/LabelsChangeOpDeserializer.php",
         "patchSetId": 16
@@ -36,6 +60,24 @@
       "writtenOn": "2017-02-02T15:12:05Z",
       "side": 1,
       "message": "Shouldn\u0027t this be also saying it can throw an exception if labels data is in valid format?",
+      "revId": "a0d183b1250a519f8f88593dcc0e0b51ea4cd168",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_7653631b",
+        "filename": "repo/includes/ChangeOp/Deserialization/LabelsChangeOpDeserializer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2017-02-03T15:01:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_48ce8d60",
       "revId": "a0d183b1250a519f8f88593dcc0e0b51ea4cd168",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_56586735",
+        "filename": "repo/includes/ChangeOp/Deserialization/LabelsChangeOpDeserializer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2017-02-03T15:01:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_28cb5150",
+      "range": {
+        "startLine": 72,
+        "startChar": 18,
+        "endLine": 72,
+        "endChar": 37
+      },
+      "revId": "a0d183b1250a519f8f88593dcc0e0b51ea4cd168",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_288351af",
         "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/AliasesChangeOpDeserializerTest.php",
         "patchSetId": 16
@@ -76,6 +142,24 @@
       "writtenOn": "2017-02-02T15:12:05Z",
       "side": 1,
       "message": "import not needed",
+      "revId": "a0d183b1250a519f8f88593dcc0e0b51ea4cd168",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_163b0fc6",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/AliasesChangeOpDeserializerTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2017-02-03T15:01:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_288351af",
       "revId": "a0d183b1250a519f8f88593dcc0e0b51ea4cd168",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -99,6 +183,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_763fe3d3",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/AliasesChangeOpDeserializerTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2017-02-03T15:01:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_c8ea7d73",
+      "revId": "a0d183b1250a519f8f88593dcc0e0b51ea4cd168",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_68e9497b",
         "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/AliasesChangeOpDeserializerTest.php",
         "patchSetId": 16
@@ -110,6 +212,24 @@
       "writtenOn": "2017-02-02T15:12:05Z",
       "side": 1,
       "message": "Same remark as above, I think this test will not be marked as failed if the exception was not thrown. I believe it should.",
+      "revId": "a0d183b1250a519f8f88593dcc0e0b51ea4cd168",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_5644e76d",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/AliasesChangeOpDeserializerTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2017-02-03T15:01:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_68e9497b",
       "revId": "a0d183b1250a519f8f88593dcc0e0b51ea4cd168",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -133,6 +253,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_f1ebdd07",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/AliasesChangeOpDeserializerTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2017-02-03T15:01:26Z",
+      "side": 1,
+      "message": "Right, I agree that this way of testing it is pretty sketchy but I didn\u0027t quite figure out a good approach for this.\n\nThe issue I have is that there is no way of knowing whether the correct ChangeOp for labels, aliases and descriptions were dispatched from the ChangeOpDeserializer until it is applied to an entity. This also seemed awkward since it appeared to me more like testing the ChangeOp rather than the deserializer. Now that I\u0027m thinking about it this approach might actually be slightly better as it would only test behavior, not implementation details. Let me know what you think!\n\nI\u0027m sure there\u0027s a better way to do this that I\u0027m not seeing at the moment so any suggestions would be very much appreciated! :)",
+      "parentUuid": "2ef897d1_f3baca1d",
+      "revId": "a0d183b1250a519f8f88593dcc0e0b51ea4cd168",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_a86ce105",
         "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/AliasesChangeOpDeserializerTest.php",
         "patchSetId": 16
@@ -144,6 +282,24 @@
       "writtenOn": "2017-02-02T15:12:05Z",
       "side": 1,
       "message": "Wouldn\u0027t new StringNormalizer() also work here? It could be simpler than pulling in the top-level factory.\nAlthough I rembember seeing someone complaining new StringNormalizer() behaving some odd way in tests, so just tell me if this is the case here.",
+      "revId": "a0d183b1250a519f8f88593dcc0e0b51ea4cd168",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_96dc9f4c",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/AliasesChangeOpDeserializerTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2017-02-03T15:01:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_a86ce105",
       "revId": "a0d183b1250a519f8f88593dcc0e0b51ea4cd168",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -167,6 +323,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_167e6f14",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/AliasesChangeOpDeserializerTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2017-02-03T15:01:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_6876e9d6",
+      "revId": "a0d183b1250a519f8f88593dcc0e0b51ea4cd168",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_089095f0",
         "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/DescriptionsChangeOpDeserializerTest.php",
         "patchSetId": 16
@@ -178,6 +352,24 @@
       "writtenOn": "2017-02-02T15:12:05Z",
       "side": 1,
       "message": "import not needed",
+      "revId": "a0d183b1250a519f8f88593dcc0e0b51ea4cd168",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_b6d79b27",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/DescriptionsChangeOpDeserializerTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2017-02-03T15:01:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_089095f0",
       "revId": "a0d183b1250a519f8f88593dcc0e0b51ea4cd168",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
