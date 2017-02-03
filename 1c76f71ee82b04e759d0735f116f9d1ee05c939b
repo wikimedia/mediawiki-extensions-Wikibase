@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_b6679b21",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-03T14:11:17Z",
+      "side": 1,
+      "message": "having geo-shapes in the Data namespace is something specific to commons. theoretically, this could be something else on some other wiki that is configured to use for geo-shapes.\n\nthat might be enough of an edge case though to not worry about",
+      "revId": "1c76f71ee82b04e759d0735f116f9d1ee05c939b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_567627d6",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-03T14:11:17Z",
+      "side": 1,
+      "message": "in en.json, it says \u0027values must start with \"Data:\"\u0027. So do they need the namespace and colon or is the colon illegal character?",
+      "revId": "1c76f71ee82b04e759d0735f116f9d1ee05c939b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
