@@ -1473,6 +1473,8 @@ class WikibaseRepo {
 			$formatterUrlProperty = new PropertyId( $formatterUrlProperty );
 		}
 
+		//TODO inject stuff here
+
 		return new PropertyInfoBuilder( $formatterUrlProperty );
 	}
 

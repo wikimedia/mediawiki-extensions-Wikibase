@@ -42,9 +42,14 @@ class PropertyInfoBuilder {
 			PropertyInfoLookup::KEY_DATA_TYPE => $property->getDataTypeId()
 		);
 
-		$formatterUrl = $this->getFormatterUrl( $property->getStatements() );
+		$formatterUrl = $this->getOneStatementValue( $property->getStatements(), $this->formatterUrlProperty );
 		if ( $formatterUrl !== null ) {
 			$info[PropertyInfoLookup::KEY_FORMATTER_URL] = $formatterUrl;
+		}
+
+		$luaFormatter = $this->getOneStatementValue( $property->getStatements(), new PropertyId('P13') );
+		if ( $luaFormatter !== null ) {
+			$info['luaFormatter'] = $luaFormatter;
 		}
 
 		return $info;
@@ -56,12 +61,12 @@ class PropertyInfoBuilder {
 	 * @return string|null The string value of the main snak of the first best
 	 * "formatterUrlProperty" statements, if such exists. Null otherwise.
 	 */
-	private function getFormatterUrl( StatementList $statements ) {
-		if ( $this->formatterUrlProperty === null ) {
+	private function getOneStatementValue( StatementList $statements, PropertyId $propertyId = null ) {
+		if ( $propertyId === null ) {
 			return null;
 		}
 
-		$bestStatements = $statements->getByPropertyId( $this->formatterUrlProperty )->getBestStatements();
+		$bestStatements = $statements->getByPropertyId( $propertyId )->getBestStatements();
 		if ( $bestStatements->isEmpty() ) {
 			return null;
 		}

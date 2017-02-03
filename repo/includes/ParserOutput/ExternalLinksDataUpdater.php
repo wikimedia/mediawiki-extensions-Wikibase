@@ -56,6 +56,7 @@ class ExternalLinksDataUpdater implements StatementDataUpdater {
 			$id = $snak->getPropertyId();
 			$value = $snak->getDataValue();
 
+			//TODO There is a bug here: `formatter URL` is not url by itself, but it will be added
 			if ( $value instanceof StringValue
 				&& $this->propertyDataTypeMatcher->isMatchingDataType( $id, 'url' )
 			) {

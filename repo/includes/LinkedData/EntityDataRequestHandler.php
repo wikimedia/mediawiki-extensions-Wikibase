@@ -416,7 +416,7 @@ class EntityDataRequestHandler {
 
 		// handle If-Modified-Since
 		$imsHeader = $request->getHeader( 'IF-MODIFIED-SINCE' );
-		if ( $imsHeader !== false ) {
+		if ( false ) {
 			$ims = wfTimestamp( TS_MW, $imsHeader );
 
 			if ( $entityRevision->getTimestamp() <= $ims ) {

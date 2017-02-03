@@ -4,6 +4,8 @@ namespace Wikibase\Lib;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\Lib\Store\Sql\PropertyInfoTable;
+use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -42,6 +44,28 @@ class PropertyInfoSnakUrlExpander implements SnakUrlExpander {
 		Assert::parameterType( StringValue::class, $value, '$snak->getDataValue()' );
 
 		$pattern = $this->infoProvider->getPropertyInfo( $propertyId );
+
+		try {
+			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+			$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer() );
+			$luaFormatterProvider = new FieldPropertyInfoProvider( $table, 'luaFormatter' );
+			$luaCode = $luaFormatterProvider->getPropertyInfo( $propertyId );
+
+			$luaSandbox = new \LuaSandbox();
+			$luaSandbox->registerLibrary(
+				'property',
+				[ 'value' => function () use ( $value ) { return [ $value->getValue() ]; } ]
+			);
+			$result = $luaSandbox->loadString( $luaCode, 'main' )->call();
+			if ( $result[0] ) {
+				return wfUrlencode($result[0]);
+			}
+		} catch ( \LuaSandboxError $e) {
+			//ignore
+			throw $e;
+		}
+
+
 
 		if ( $pattern === null ) {
 			return null;
