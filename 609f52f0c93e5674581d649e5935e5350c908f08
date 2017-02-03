@@ -63,6 +63,30 @@
       "revId": "609f52f0c93e5674581d649e5935e5350c908f08",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_56d3c761",
+        "filename": "lib/includes/Formatters/InterWikiLinkFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-03T11:24:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_ee8c21dd",
+      "range": {
+        "startLine": 42,
+        "startChar": 3,
+        "endLine": 44,
+        "endChar": 3
+      },
+      "revId": "609f52f0c93e5674581d649e5935e5350c908f08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
