@@ -70,7 +70,7 @@ local function testPrinting()
 		print(a)
 	end
 
-	return mw.wikibase.formatValues( snaks )
+	return nil
 end
 
 local tests = {
@@ -78,6 +78,9 @@ local tests = {
 
 	{ name = 'mw.wikibase.getEntityIdForCurrentPage', func = mw.wikibase.getEntityIdForCurrentPage,
 	  expect = { 'Q32487' }
+	},
+	{ name = 'mw.wikibase.testPrinting', func = testPrinting,
+	  expect = { 'nil' }
 	},
 	{ name = 'mw.wikibase.getEntity (type)', func = testGetEntityType, type='ToString',
 	  expect = { 'table' }
