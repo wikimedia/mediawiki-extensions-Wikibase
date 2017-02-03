@@ -16,6 +16,24 @@
       "revId": "90635ba8e9aa6bf8dba68f61f8c48523ea7e5cff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_761c836a",
+        "filename": "repo/includes/Validators/InterWikiLinkExistsValidator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-02-03T10:46:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_b88b0a1b",
+      "revId": "90635ba8e9aa6bf8dba68f61f8c48523ea7e5cff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
