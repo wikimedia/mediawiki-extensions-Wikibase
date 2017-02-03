@@ -64,13 +64,15 @@ local function testFormatValues()
 
 	return mw.wikibase.formatValues( snaks )
 end
-local function testPrinting()
+local function testClaimsPairs()
 	local entity = mw.wikibase.getEntityObject( 'Q32487' )
-	for a,b in pairs(entity) do
-		print(a)
+	-- return claims == nil
+	count = 0
+	for a,b in pairs(entity['claims']) do
+		count = count + 1
 	end
 
-	return nil
+	return count
 end
 
 local tests = {
@@ -79,8 +81,8 @@ local tests = {
 	{ name = 'mw.wikibase.getEntityIdForCurrentPage', func = mw.wikibase.getEntityIdForCurrentPage,
 	  expect = { 'Q32487' }
 	},
-	{ name = 'mw.wikibase.testPrinting', func = testPrinting,
-	  expect = { 'nil' }
+	{ name = 'mw.wikibase.testClaimsPairs', func = testClaimsPairs,
+	  expect = { 1 }
 	},
 	{ name = 'mw.wikibase.getEntity (type)', func = testGetEntityType, type='ToString',
 	  expect = { 'table' }

@@ -39,6 +39,7 @@ entity.create = function( data )
 	end
 
 	local entity = logTableAccess(data)
+	-- local entity = data
 	setmetatable( entity, metatable )
 
 	return entity
@@ -49,6 +50,9 @@ end
 --
 -- @param {table} entity
 logTableAccess = function(entity)
+	if entity.claims == nil then
+		return entity
+	end
 	actualEntityClaims = entity['claims']
 	entity['claims'] = {}
 
@@ -57,6 +61,10 @@ logTableAccess = function(entity)
 		-- Need entity id: Is it entity['id']?
 		-- Write entity id and property id to DB
 		return actualEntityClaims[propertyID]
+	end
+
+	pseudoClaimsMetatable.__newindex = function(emptyTable, propertyID, data)
+		actualEntityClaims[propertyID] = data
 	end
 
 	logNext = function(emptyTable, propertyID)
