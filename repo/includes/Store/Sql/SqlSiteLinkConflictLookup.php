@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @license GPL-2.0+
@@ -27,6 +28,7 @@ class SqlSiteLinkConflictLookup extends DBAccessBase implements SiteLinkConflict
 	 */
 	public function getConflictsForItem( Item $item, Database $db = null ) {
 		$siteLinks = $item->getSiteLinkList();
+		$entityIdComposer = WikibaseRepo::getDefaultInstance()->getEntityIdComposer();
 
 		if ( $siteLinks->isEmpty() ) {
 			return [];
@@ -73,7 +75,7 @@ class SqlSiteLinkConflictLookup extends DBAccessBase implements SiteLinkConflict
 		foreach ( $conflictingLinks as $link ) {
 			$conflicts[] = [
 				'siteId' => $link->ips_site_id,
-				'itemId' => ItemId::newFromNumber( $link->ips_item_id ),
+				'itemId' => $entityIdComposer->composeEntityId( '', Item::ENTITY_TYPE, $link->ips_item_id ),
 				'sitePage' => $link->ips_site_page,
 			];
 		}
