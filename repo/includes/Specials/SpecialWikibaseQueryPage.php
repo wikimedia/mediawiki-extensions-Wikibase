@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Specials;
 
 use Html;
-use Linker;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -85,7 +84,7 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 */
 	protected function formatRow( $entityId ) {
 		$title = $this->entityTitleLookup->getTitleForId( $entityId );
-		return Linker::linkKnown( $title );
+		return $this->getLinkRenderer()->makeKnownLink( $title );
 	}
 
 	/**
