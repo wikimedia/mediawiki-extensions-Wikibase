@@ -5,7 +5,6 @@ namespace Wikibase\Client\Specials;
 use HTMLForm;
 use Html;
 use InvalidArgumentException;
-use Linker;
 use QueryPage;
 use Skin;
 use Title;
@@ -198,7 +197,7 @@ class SpecialPagesWithBadges extends QueryPage {
 	public function formatResult( $skin, $result ) {
 		// FIXME: This should use a TitleFactory.
 		$title = Title::newFromID( $result->value );
-		$out = Linker::linkKnown( $title );
+		$out = $this->getLinkRenderer()->makeKnownLink( $title );
 
 		return $out;
 	}
