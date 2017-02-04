@@ -173,10 +173,10 @@ class SpecialEntityUsage extends QueryPage {
 			);
 		}
 
-		return Linker::link(
+		return $this->getLinkRenderer()->makeLink(
 			$title,
-			htmlspecialchars( $wgContLang->convert( $title->getPrefixedText() ) )
-		) . ': ' . $this->formatAspects( $row->aspects );
+			$wgContLang->convert( $title->getPrefixedText() )
+		) . $this->msg( 'colon-separator' )->escaped() . $this->formatAspects( $row->aspects );
 	}
 
 	/**

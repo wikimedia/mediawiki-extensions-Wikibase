@@ -7,6 +7,8 @@ use Diff\Differ\OrderedListDiffer;
 use Html;
 use IContextSource;
 use Linker;
+use MediaWiki\Linker\LinkRenderer;
+use MediaWiki\MediaWikiServices;
 use MWException;
 use Page;
 use Revision;
@@ -40,6 +42,11 @@ class EditEntityAction extends ViewEntityAction {
 	 * @var EntityDiffVisualizer
 	 */
 	private $entityDiffVisualizer;
+
+	/**
+	 * @var LinkRenderer
+	 */
+	protected $linkRenderer;
 
 	/**
 	 * @see Action::__construct
@@ -92,6 +99,8 @@ class EditEntityAction extends ViewEntityAction {
 			$wikibaseRepo->getSiteLookup(),
 			$entityIdFormatter
 		);
+
+		$this->linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
 	}
 
 	/**
@@ -359,9 +368,9 @@ class EditEntityAction extends ViewEntityAction {
 	 * @return string
 	 */
 	private function getCancelLink() {
-		return Linker::linkKnown(
+		return $this->linkRenderer->makeKnownLink(
 			$this->getContext()->getTitle(),
-			$this->msg( 'cancel' )->parse(),
+			$this->msg( 'cancel' )->text(),
 			array( 'id' => 'mw-editform-cancel' )
 		);
 	}
