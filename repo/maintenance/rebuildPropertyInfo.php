@@ -46,11 +46,13 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 		);
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer() );
-		$entityLookup = $wikibaseRepo->getEntityLookup();
-		$propertyInfoBuilder = $wikibaseRepo->newPropertyInfoBuilder();
 
-		$builder = new PropertyInfoTableBuilder( $table, $entityLookup, $propertyInfoBuilder );
+		$builder = new PropertyInfoTableBuilder(
+			new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer() ),
+			$wikibaseRepo->getEntityLookup(),
+			$wikibaseRepo->newPropertyInfoBuilder(),
+			$wikibaseRepo->getEntityIdComposer()
+		);
 		$builder->setReporter( $reporter );
 
 		$builder->setBatchSize( (int)$this->getOption( 'batch-size', 100 ) );
