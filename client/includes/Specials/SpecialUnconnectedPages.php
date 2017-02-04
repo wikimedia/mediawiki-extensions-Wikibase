@@ -5,7 +5,6 @@ namespace Wikibase\Client\Specials;
 use Database;
 use FakeResultWrapper;
 use Html;
-use Linker;
 use MWNamespace;
 use QueryPage;
 use ResultWrapper;
@@ -179,7 +178,7 @@ class SpecialUnconnectedPages extends QueryPage {
 	public function formatResult( $skin, $result ) {
 		// FIXME: This should use a TitleFactory.
 		$title = Title::newFromID( $result->value );
-		$out = Linker::linkKnown( $title );
+		$out = $this->getLinkRenderer()->makeKnownLink( $title );
 
 		if ( $result->page_num_iwlinks > 0 ) {
 			$out .= ' ' . $this->msg( 'wikibase-unconnectedpages-format-row' )
