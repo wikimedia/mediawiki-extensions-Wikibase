@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Repo\Store\Sql\ChangesSubscriptionTableBuilder;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\Store\Sql\ChangesSubscriptionTableBuilder
@@ -40,6 +41,7 @@ class ChangesSubscriptionTableBuilderTest extends \MediaWikiTestCase {
 
 		return new ChangesSubscriptionTableBuilder(
 			$loadBalancer,
+			WikibaseRepo::getDefaultInstance()->getEntityIdComposer(),
 			self::TABLE_NAME,
 			$batchSize,
 			$verbosity
