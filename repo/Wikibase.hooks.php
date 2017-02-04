@@ -388,9 +388,10 @@ final class RepoHooks {
 			&& $rev->getTitle()->quickUserCan( 'edit', $history->getUser() )
 			&& !$rev->isDeleted( Revision::DELETED_TEXT )
 		) {
-			$link = Linker::linkKnown(
+			$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
+			$link = $linkRenderer->makeKnownLink(
 				$rev->getTitle(),
-				$history->msg( 'wikibase-restoreold' )->escaped(),
+				$history->msg( 'wikibase-restoreold' )->text(),
 				array(),
 				array(
 					'action' => 'edit',

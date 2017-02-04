@@ -147,7 +147,7 @@ class EntityContentDiffView extends DifferenceEngine {
 			$timestamp,
 			$dateofrev,
 			$timeofrev
-		)->escaped();
+		)->text();
 
 		if ( $complete !== 'complete' ) {
 			return $header;
@@ -155,7 +155,9 @@ class EntityContentDiffView extends DifferenceEngine {
 
 		$title = $rev->getTitle();
 
-		$header = Linker::linkKnown( $title, $header, array(),
+		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
+
+		$header = $linkRenderer->makeKnownLink( $title, $header, array(),
 			array( 'oldid' => $rev->getId() ) );
 
 		if ( $rev->userCan( Revision::DELETED_TEXT, $user ) ) {
@@ -164,9 +166,9 @@ class EntityContentDiffView extends DifferenceEngine {
 					'action' => 'edit',
 					'restore' => $rev->getId()
 				);
-				$msg = $this->msg( 'wikibase-restoreold' )->escaped();
+				$msg = $this->msg( 'wikibase-restoreold' )->text();
 				$header .= ' ' . $this->msg( 'parentheses' )->rawParams(
-					Linker::linkKnown( $title, $msg, array(), $editQuery )
+					$linkRenderer->makeKnownLink( $title, $msg, array(), $editQuery )
 				)->escaped();
 			}
 
