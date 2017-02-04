@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Store\Sql;
 use DatabaseUpdater;
 use MWException;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Schema updater for the wb_changes_subscription table.
@@ -70,6 +71,7 @@ class ChangesSubscriptionSchemaUpdater {
 	public static function fillSubscriptionTable( DatabaseUpdater $dbUpdater, $table ) {
 		$primer = new ChangesSubscriptionTableBuilder(
 			wfGetLB(), // would be nice to pass in $dbUpdater->getDB().
+			WikibaseRepo::getDefaultInstance()->getEntityIdComposer(),
 			$table,
 			1000
 		);

@@ -7,10 +7,12 @@ use InvalidArgumentException;
 use LoadBalancer;
 use ResultWrapper;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Implements initial population (priming) for the wb_changes_subscription table,
@@ -48,7 +50,13 @@ class ChangesSubscriptionTableBuilder {
 	private $verbosity;
 
 	/**
+	 * @var EntityIdComposer
+	 */
+	private $entityIdComposer;
+
+	/**
 	 * @param LoadBalancer $loadBalancer
+	 * @param EntityIdComposer $entityIdComposer
 	 * @param string $tableName
 	 * @param int $batchSize
 	 * @param string $verbosity Either 'standard' or 'verbose'
@@ -57,6 +65,7 @@ class ChangesSubscriptionTableBuilder {
 	 */
 	public function __construct(
 		LoadBalancer $loadBalancer,
+		EntityIdComposer $entityIdComposer,
 		$tableName,
 		$batchSize,
 		$verbosity = 'standard'
@@ -81,6 +90,8 @@ class ChangesSubscriptionTableBuilder {
 
 		$this->exceptionHandler = new LogWarningExceptionHandler();
 		$this->progressReporter = new NullMessageReporter();
+
+		$this->entityIdComposer = $entityIdComposer;
 	}
 
 	/**
@@ -229,7 +240,9 @@ class ChangesSubscriptionTableBuilder {
 		foreach ( $res as $row ) {
 			if ( $row->ips_item_id != $currentItemId ) {
 				$currentItemId = $row->ips_item_id;
-				$itemId = ItemId::newFromNumber( $currentItemId )->getSerialization();
+				$itemId = $this->entityIdComposer
+					->composeEntityId( '', 'item', $currentItemId )
+					->getSerialization();
 			}
 
 			$subscriptionsPerItem[$itemId][] = $row->ips_site_id;
