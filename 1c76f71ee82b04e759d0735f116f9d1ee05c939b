@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_ae729f0e",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-02-04T11:11:25Z",
+      "side": 1,
+      "message": "Yes, I would like to introduce a setting for geo-shapes and commonsMedia.",
+      "parentUuid": "2ef897d1_362a8b90",
+      "revId": "1c76f71ee82b04e759d0735f116f9d1ee05c939b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_16278fc6",
         "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
         "patchSetId": 6
