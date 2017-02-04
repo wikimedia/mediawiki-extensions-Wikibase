@@ -203,7 +203,12 @@ class DatabaseSchemaUpdater {
 		$cachingEntityLookup = new CachingEntityRevisionLookup( $wikiPageEntityLookup, new HashBagOStuff() );
 		$entityLookup = new RevisionBasedEntityLookup( $cachingEntityLookup );
 
-		$builder = new PropertyInfoTableBuilder( $table, $entityLookup, $propertyInfoBuilder );
+		$builder = new PropertyInfoTableBuilder(
+			$table,
+			$entityLookup,
+			$propertyInfoBuilder,
+			$wikibaseRepo->getEntityIdComposer()
+		);
 		$builder->setReporter( $reporter );
 		$builder->setUseTransactions( false );
 
