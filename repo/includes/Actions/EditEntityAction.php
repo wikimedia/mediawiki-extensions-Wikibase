@@ -7,6 +7,7 @@ use Diff\Differ\OrderedListDiffer;
 use Html;
 use IContextSource;
 use Linker;
+use MediaWiki\MediaWikiServices;
 use MWException;
 use Page;
 use Revision;
@@ -359,9 +360,10 @@ class EditEntityAction extends ViewEntityAction {
 	 * @return string
 	 */
 	private function getCancelLink() {
-		return Linker::linkKnown(
+		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
+		return $linkRenderer->makeKnownLink(
 			$this->getContext()->getTitle(),
-			$this->msg( 'cancel' )->parse(),
+			$this->msg( 'cancel' )->text(),
 			array( 'id' => 'mw-editform-cancel' )
 		);
 	}
