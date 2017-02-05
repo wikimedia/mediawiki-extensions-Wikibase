@@ -38,6 +38,7 @@
 	"wikibase-linkitem-success-link": "Laman ka meuhasé geupupawôt. Droëneuh jeuët neuteumèë item nyang meuasoë peunawôt lam [$1 pusat keubah data] kamoë.",
 	"wikibase-property-notfound": "Properti $1 hana geuteumèë.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Peusom",
 	"wikibase-rc-hide-wikidata-show": "Peuleumah",
 	"wikibase-rc-show-wikidata-pref": "Peuleumah neuandam Wikidata bak neuubah barô",
 	"wikibase-rc-wikibase-edit-letter": "D",
