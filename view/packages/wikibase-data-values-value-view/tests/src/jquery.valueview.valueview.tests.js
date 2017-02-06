@@ -3,7 +3,7 @@
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 /* jshint nonew: false */
-( function( $, vv, dv, vf, vp, sinon, QUnit, CompletenessTest ) {
+( function( $, vv, dv, vf, vp, sinon, QUnit ) {
 	'use strict';
 
 	var $vvElem;
@@ -11,13 +11,6 @@
 	var stringValue = new dv.StringValue( 'STRING VALUE' );
 
 	QUnit.module( 'jquery.valueview.valueview' );
-
-	if ( QUnit.urlParams.completenesstest && CompletenessTest ) {
-		new CompletenessTest( vv.prototype, function( cur, tester, path ) {
-			// Don't check code coverage for options
-			return path[path.length - 1] === 'options';
-		} );
-	}
 
 	function initVv( opts ) {
 		opts = $.extend( {}, initVv.defaultOpts, opts );
@@ -212,6 +205,5 @@
 	valueFormatters,
 	valueParsers,
 	sinon,
-	QUnit,
-	typeof CompletenessTest !== 'undefined' ? CompletenessTest : null
+	QUnit
 );

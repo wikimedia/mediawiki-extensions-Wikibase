@@ -3,19 +3,10 @@
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 /* jshint nonew: false */
-( function( $, ExpertExtender, testExpertExtenderExtension, sinon, QUnit, CompletenessTest ) {
+( function( $, ExpertExtender, testExpertExtenderExtension, sinon, QUnit ) {
 	'use strict';
 
 	QUnit.module( 'jquery.valueview.ExpertExtender.LanguageSelector' );
-
-	if ( QUnit.urlParams.completenesstest && CompletenessTest ) {
-		new CompletenessTest(
-			ExpertExtender.LanguageSelector.prototype,
-			function( cur, tester, path ) {
-				return false;
-			}
-		);
-	}
 
 	var messageProvider = {
 		getMessage: function( key, params ) {
@@ -221,6 +212,5 @@
 	jQuery.valueview.ExpertExtender,
 	jQuery.valueview.tests.testExpertExtenderExtension,
 	sinon,
-	QUnit,
-	typeof CompletenessTest !== 'undefined' ? CompletenessTest : null
+	QUnit
 );

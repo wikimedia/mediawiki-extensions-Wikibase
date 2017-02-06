@@ -3,16 +3,10 @@
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 /* jshint nonew: false */
-( function( $, ExpertExtender, sinon, QUnit, CompletenessTest ) {
+( function( $, ExpertExtender, sinon, QUnit ) {
 	'use strict';
 
 	QUnit.module( 'jquery.valueview.ExpertExtender' );
-
-	if ( QUnit.urlParams.completenesstest && CompletenessTest ) {
-		new CompletenessTest( ExpertExtender.prototype, function( cur, tester, path ) {
-			return false;
-		} );
-	}
 
 	QUnit.test( 'Constructor', function( assert ) {
 		assert.expect( 2 );
@@ -83,6 +77,5 @@
 	jQuery,
 	jQuery.valueview.ExpertExtender,
 	sinon,
-	QUnit,
-	typeof CompletenessTest !== 'undefined' ? CompletenessTest : null
+	QUnit
 );

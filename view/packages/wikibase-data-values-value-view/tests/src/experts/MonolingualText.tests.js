@@ -11,12 +11,6 @@
 
 	QUnit.module( 'jquery.valueview.experts.MonolingualText' );
 
-	if ( QUnit.urlParams.completenesstest ) {
-		new CompletenessTest( expertToTest, function( cur, tester, path ) {
-			return false;
-		} );
-	}
-
 	testExpert( {
 		expertConstructor: expertToTest
 	} );

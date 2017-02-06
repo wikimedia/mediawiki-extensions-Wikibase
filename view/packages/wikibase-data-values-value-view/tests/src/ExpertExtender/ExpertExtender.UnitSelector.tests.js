@@ -3,19 +3,10 @@
  * @author Jonas Kress
  */
 /* jshint nonew: false */
-( function( $, ExpertExtender, testExpertExtenderExtension, sinon, QUnit, CompletenessTest ) {
+( function( $, ExpertExtender, testExpertExtenderExtension, sinon, QUnit ) {
 	'use strict';
 
 	QUnit.module( 'jquery.valueview.ExpertExtender.UnitSelector' );
-
-	if ( QUnit.urlParams.completenesstest && CompletenessTest ) {
-		new CompletenessTest(
-			ExpertExtender.UnitSelector.prototype,
-			function( cur, tester, path ) {
-				return false;
-			}
-		);
-	}
 
 	var messageProvider = {
 		getMessage: function( key, params ) {
@@ -90,6 +81,5 @@
 	jQuery.valueview.ExpertExtender,
 	jQuery.valueview.tests.testExpertExtenderExtension,
 	sinon,
-	QUnit,
-	typeof CompletenessTest !== 'undefined' ? CompletenessTest : null
+	QUnit
 );

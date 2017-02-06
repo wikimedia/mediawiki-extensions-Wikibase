@@ -28,7 +28,6 @@
 
 	// Globals
 	"globals": {
-		"CompletenessTest": false,
 		"dataValues": false,
 		"globeCoordinate": false,
 		"jQuery": false,

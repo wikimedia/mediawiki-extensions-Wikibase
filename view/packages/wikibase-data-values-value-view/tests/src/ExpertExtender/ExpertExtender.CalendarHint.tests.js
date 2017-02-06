@@ -10,18 +10,11 @@
 	TimeValue,
 	HashMessageProvider,
 	sinon,
-	QUnit,
-	CompletenessTest
+	QUnit
 ) {
 	'use strict';
 
 	QUnit.module( 'jquery.valueview.ExpertExtender.CalendarHint' );
-
-	if ( QUnit.urlParams.completenesstest && CompletenessTest ) {
-		new CompletenessTest( ExpertExtender.CalendarHint.prototype, function( cur, tester, path ) {
-			return false;
-		} );
-	}
 
 	testExpertExtenderExtension.all(
 		ExpertExtender.CalendarHint,
@@ -150,6 +143,5 @@
 	dataValues.TimeValue,
 	util.HashMessageProvider,
 	sinon,
-	QUnit,
-	typeof CompletenessTest !== 'undefined' ? CompletenessTest : null
+	QUnit
 );
