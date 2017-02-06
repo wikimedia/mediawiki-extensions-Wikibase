@@ -271,6 +271,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_65816292",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/AliasesChangeOpDeserializerTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-06T10:28:36Z",
+      "side": 1,
+      "message": "Yeah, once applied it could actually be checked if the change op was the one you\u0027d expect it to be. But then I guess to have it tested \"right\" you\u0027d have to create a dummy item, get a change op from deserializer, apply it on the item, get some things from the item (in this cases alias list), and see if the thing has been changed accordingly.\nThis is getting far away from a \"clean\" user tests... And indeed it is at the same time testing that ChangeOp of kind X is applied as expected.\n\nI\u0027ve spent a bit of time this morning trying to figure out what could we test without actually applying the ChangeOp (I\u0027d really prefer to avoid that) and the only thing I came up with is something that could be seen in Ib8179f0770f5786d37223b77df79e5ed607312ed (this particular test only). Not really nice and far from complete, also I am not sure if this would be applicable for other kinds of ChangeOps.\nSo the more I think of it the more I am fine with the current way of testing, be it your original way, or including the extra check Aleksey provided (I personally don\u0027t think any of those two approach is significantly \"better\" than the other one).",
+      "parentUuid": "2ef897d1_f1ebdd07",
+      "revId": "a0d183b1250a519f8f88593dcc0e0b51ea4cd168",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_6c3dd489",
         "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/AliasesChangeOpDeserializerTest.php",
         "patchSetId": 16
