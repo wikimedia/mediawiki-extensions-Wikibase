@@ -16,6 +16,24 @@
       "revId": "7b18e4a17d31c5b775375f435382f8e58bc19588",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_57ee1720",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-02-06T18:52:45Z",
+      "side": 1,
+      "message": "I\u0027m not sure what lookup interface is using (but looking up just label/desc for one item should be fast, not?). We don\u0027t have descriptions in ES yet. Once they are there, we can change the lookup of course.",
+      "parentUuid": "2ef897d1_dad0f1ce",
+      "revId": "7b18e4a17d31c5b775375f435382f8e58bc19588",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
