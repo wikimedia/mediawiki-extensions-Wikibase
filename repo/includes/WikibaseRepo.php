@@ -31,8 +31,6 @@ use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
-use Wikibase\Client\EntityDataRetrievalServiceFactory;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -87,7 +85,6 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
-use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\UnionContentLanguages;
 use Wikibase\Lib\UnitConverter;
@@ -276,16 +273,6 @@ class WikibaseRepo {
 	private $cachingCommonsMediaFileNameLookup = null;
 
 	/**
-	 * @var EntityDataRetrievalServiceFactory|null
-	 */
-	private $entityDataRetrievalServiceFactory = null;
-
-	/**
-	 * @var SettingsArray|null
-	 */
-	private $clientSettings = null;
-
-	/**
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
 	 * @throws MWException
@@ -307,24 +294,13 @@ class WikibaseRepo {
 
 		$settings = new SettingsArray( $wgWBRepoSettings );
 
-		$dataRetrievalServices = null;
-		$clientSettings = null;
-
-		// If client functionality is enabled, use it to enable federation.
-		if ( defined( 'WBC_VERSION' ) ) {
-			$dataRetrievalServices = WikibaseClient::getDefaultInstance()->getEntityDataRetrievalServiceFactory();
-			$clientSettings = WikibaseClient::getDefaultInstance()->getSettings();
-		}
-
 		return new self(
 			$settings,
 			new DataTypeDefinitions(
 				$dataTypeDefinitions,
 				$settings->getSetting( 'disabledDataTypes' )
 			),
-			new EntityTypeDefinitions( $entityTypeDefinitions ),
-			$dataRetrievalServices,
-			$clientSettings
+			new EntityTypeDefinitions( $entityTypeDefinitions )
 		);
 	}
 
@@ -469,39 +445,18 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * FIXME: Optional $entityDataRetrievalServiceFactory and $clientSettings make it possible to access
-	 * entities from foreign repositories from Repo component but they also introduce the optional
-	 * dependency on the Client component. Such dependency is bad and in the long run it should be removed
-	 * by making EntityDataRetrievalServiceFactory implementation provided to WikibaseRepo not be
-	 * bound to WikibaseClient. Foreign repository settings should also moved out of Client's settings,
-	 * so WikibaseRepo could be aware of entity types introduced in foreign repositories without needing
-	 * to rely on $clientSettings.
-	 *
 	 * @param SettingsArray $settings
 	 * @param DataTypeDefinitions $dataTypeDefinitions
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
-	 * @param EntityDataRetrievalServiceFactory|null $entityDataRetrievalServiceFactory optional factory
-	 *        of entity data retrieval services that will be used by the Repo instead of it creating
-	 *        instances of those services itself.
-	 *        This factory could be provided in order to allow Repo make use of Dispatching services
-	 *        and access data of entities from foreign repositories.
-	 * @param SettingsArray|null $clientSettings Settings of WikibaseClient related
-	 *        to the $entityDataRetrievalServiceFactory. Should be provided when
-	 *        foreign repositories configured in the WikibaseClient instance introduce custom
-	 *        entity types.
 	 */
 	public function __construct(
 		SettingsArray $settings,
 		DataTypeDefinitions $dataTypeDefinitions,
-		EntityTypeDefinitions $entityTypeDefinitions,
-		EntityDataRetrievalServiceFactory $entityDataRetrievalServiceFactory = null,
-		SettingsArray $clientSettings = null
+		EntityTypeDefinitions $entityTypeDefinitions
 	) {
 		$this->settings = $settings;
 		$this->dataTypeDefinitions = $dataTypeDefinitions;
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
-		$this->entityDataRetrievalServiceFactory = $entityDataRetrievalServiceFactory;
-		$this->clientSettings = $clientSettings;
 	}
 
 	/**
@@ -690,7 +645,7 @@ class WikibaseRepo {
 		return new TermIndexSearchInteractor(
 			$this->getStore()->getTermIndex(),
 			$this->getLanguageFallbackChainFactory(),
-			$this->getPrefetchingTermLookup(),
+			$this->getBufferingTermLookup(),
 			$displayLanguageCode
 		);
 	}
@@ -864,8 +819,7 @@ class WikibaseRepo {
 				$this->getEntityIdComposer(),
 				$this->getEntityIdLookup(),
 				$this->getEntityTitleLookup(),
-				$this->getEntityNamespaceLookup(),
-				$this->entityDataRetrievalServiceFactory
+				$this->getEntityNamespaceLookup()
 			);
 		}
 
@@ -890,38 +844,28 @@ class WikibaseRepo {
 	 * @return TermBuffer
 	 */
 	public function getTermBuffer() {
-		return $this->getPrefetchingTermLookup();
+		return $this->getBufferingTermLookup();
 	}
 
 	/**
 	 * @return TermLookup
 	 */
 	public function getTermLookup() {
-		return $this->getPrefetchingTermLookup();
+		return $this->getBufferingTermLookup();
 	}
 
 	/**
-	 * @return PrefetchingTermLookup
+	 * @return BufferingTermLookup
 	 */
-	public function getPrefetchingTermLookup() {
+	public function getBufferingTermLookup() {
 		if ( !$this->termLookup ) {
-			$this->termLookup = $this->newPrefetchingTermLookup();
+			$this->termLookup = new BufferingTermLookup(
+				$this->getStore()->getTermIndex(),
+				1000 // @todo: configure buffer size
+			);
 		}
 
 		return $this->termLookup;
-	}
-
-	/**
-	 * @return PrefetchingTermLookup
-	 */
-	private function newPrefetchingTermLookup() {
-		if ( $this->entityDataRetrievalServiceFactory !== null ) {
-			return $this->entityDataRetrievalServiceFactory->getTermBuffer();
-		}
-		return new BufferingTermLookup(
-			$this->getStore()->getTermIndex(),
-			1000 // @todo: configure buffer size
-		);
 	}
 
 	/**
@@ -1235,29 +1179,19 @@ class WikibaseRepo {
 	/**
 	 * @return string[] List of entity type identifiers (typically "item" and "property")
 	 *  that are configured in WikibaseRepo.entitytypes.php and enabled via the
-	 *  $wgWBRepoSettings['entityNamespaces'] setting. Optionally the list also contains
-	 *  entity types from the configured foreign repositories.
+	 *  $wgWBRepoSettings['entityNamespaces'] setting.
 	 */
 	public function getEnabledEntityTypes() {
-		if ( $this->clientSettings ) {
-			$foreignRepoConfig = $this->clientSettings->getSetting( 'foreignRepositories' );
-			$foreignRepoEntityTypes = array_reduce(
-				$foreignRepoConfig,
+		return array_unique( array_merge(
+			$this->getLocalEntityTypes(),
+			array_reduce(
+				$this->settings->getSetting( 'foreignRepositories' ),
 				function( $types, $repoSettings ) {
 					return array_merge( $types, $repoSettings['supportedEntityTypes'] );
 				},
 				[]
-			);
-		} else {
-			$foreignRepoEntityTypes = [];
-		}
-
-		$enabledTypes = array_unique( array_merge(
-			$this->getLocalEntityTypes(),
-			$foreignRepoEntityTypes
+			)
 		) );
-
-		return $enabledTypes;
 	}
 
 	/**
