@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_40fc1408",
+        "filename": "repo/tests/phpunit/includes/Api/MergeItemsTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-06T10:50:13Z",
+      "side": 1,
+      "message": "I think it would read better if $params came first.",
+      "revId": "b1f5ae8018da5c9847e3e0053182d3dd7a255cd7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_a50cfa45",
+        "filename": "repo/tests/phpunit/includes/Api/MergeItemsTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-06T10:50:13Z",
+      "side": 1,
+      "message": "This seems wrong. Shouldn\u0027t this be \u0027wbmergeitems\u0027 or some other arbitrary string?",
+      "range": {
+        "startLine": 169,
+        "startChar": 3,
+        "endLine": 169,
+        "endChar": 10
+      },
+      "revId": "b1f5ae8018da5c9847e3e0053182d3dd7a255cd7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
