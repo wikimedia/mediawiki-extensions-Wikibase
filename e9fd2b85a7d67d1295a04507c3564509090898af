@@ -34,6 +34,24 @@
       "revId": "e9fd2b85a7d67d1295a04507c3564509090898af",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_a5a87a1e",
+        "filename": "repo/includes/Validators/InterWikiLinkExistsValidator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-06T10:17:48Z",
+      "side": 1,
+      "message": "This text is already quite misleading when used for .map pages. They are not files, they are not expected to exist as files, and they cannot be uploaded as files. I fear the current message will make users try to upload geo-shapes, which will fail.\n\nSo either the message is reworded, or there should be separate messages.",
+      "parentUuid": "2ef897d1_c586d6bd",
+      "revId": "e9fd2b85a7d67d1295a04507c3564509090898af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
