@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_65f162c8",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-02-06T08:34:26Z",
+      "side": 1,
+      "message": "This is the error message key for the regex filter that expects \u0027Data:\u0027 at the beginning. When we allow other wikis than commons we can make it less strict.\nIs this the reason for your -1, because I don\u0027t really understand what the problem is and what needs to be improved.",
+      "parentUuid": "2ef897d1_b6679b21",
+      "revId": "1c76f71ee82b04e759d0735f116f9d1ee05c939b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_567627d6",
         "filename": "repo/i18n/qqq.json",
         "patchSetId": 6
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_05b98ee6",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-02-06T08:34:26Z",
+      "side": 1,
+      "message": "Colon in the path is not allowed.\nDone.",
+      "parentUuid": "2ef897d1_567627d6",
+      "revId": "1c76f71ee82b04e759d0735f116f9d1ee05c939b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_963a5fe3",
         "filename": "repo/includes/ValidatorBuilders.php",
         "patchSetId": 6
@@ -47,6 +83,24 @@
       "writtenOn": "2017-02-03T14:14:39Z",
       "side": 1,
       "message": "please update the documentation.\n\nalso, just a personal preference, but I would put MediaWikiPageNameNormalizer before $supportedEntityTypes. (I like objects befor arrays and it somewhat goes together with the CachingCommonsMediaFileNameLookup)",
+      "revId": "1c76f71ee82b04e759d0735f116f9d1ee05c939b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_c5d3762f",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-02-06T08:34:26Z",
+      "side": 1,
+      "message": "So what about $urlSchemes then?\nWhat documentation is missing?",
+      "parentUuid": "2ef897d1_963a5fe3",
       "revId": "1c76f71ee82b04e759d0735f116f9d1ee05c939b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
