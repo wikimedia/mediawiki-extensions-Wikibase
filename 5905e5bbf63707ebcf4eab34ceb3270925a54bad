@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_e08ae0e3",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-02-06T13:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_00b05cf0",
+      "revId": "5905e5bbf63707ebcf4eab34ceb3270925a54bad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_408d3435",
         "filename": "repo/includes/ValidatorBuilders.php",
         "patchSetId": 7
@@ -106,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_c0724410",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-02-06T13:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_a0950844",
+      "revId": "5905e5bbf63707ebcf4eab34ceb3270925a54bad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_e0b2e0f8",
         "filename": "repo/includes/ValidatorBuilders.php",
         "patchSetId": 7
@@ -117,6 +153,24 @@
       "writtenOn": "2017-02-06T13:00:31Z",
       "side": 1,
       "message": "Bad indent",
+      "revId": "5905e5bbf63707ebcf4eab34ceb3270925a54bad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_a06d082f",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-02-06T13:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_e0b2e0f8",
       "revId": "5905e5bbf63707ebcf4eab34ceb3270925a54bad",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -140,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_807c4ce3",
+        "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-02-06T13:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_e089c028",
+      "revId": "5905e5bbf63707ebcf4eab34ceb3270925a54bad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_a07ce81b",
         "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
         "patchSetId": 7
@@ -151,6 +223,24 @@
       "writtenOn": "2017-02-06T13:00:31Z",
       "side": 1,
       "message": "lines starting with -1 should have one more tab.",
+      "revId": "5905e5bbf63707ebcf4eab34ceb3270925a54bad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_607710fe",
+        "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-02-06T13:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_a07ce81b",
       "revId": "5905e5bbf63707ebcf4eab34ceb3270925a54bad",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -186,6 +276,24 @@
       "side": 1,
       "message": "\u0026 is not tested above?!",
       "parentUuid": "2ef897d1_807b2c23",
+      "revId": "5905e5bbf63707ebcf4eab34ceb3270925a54bad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_208118c9",
+        "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-02-06T13:41:56Z",
+      "side": 1,
+      "message": "Evaluating https://www.mediawiki.org/wiki/Manual:$wgLegalTitleChars\n\nand our census we should check less in regex and fallback to actual page exist test. \nI don\u0027t think testing for \u0026 makes sense.",
+      "parentUuid": "2ef897d1_80efacac",
       "revId": "5905e5bbf63707ebcf4eab34ceb3270925a54bad",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
