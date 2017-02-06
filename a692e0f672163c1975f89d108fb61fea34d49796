@@ -16,6 +16,24 @@
       "revId": "a692e0f672163c1975f89d108fb61fea34d49796",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_b46d492f",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-02-06T16:44:56Z",
+      "side": 1,
+      "message": "Yes, but only in prefix \u0027Data:\u0027.\nWe could also allow it I don\u0027t really mind I just took the rules from commonsMedia to be consistent.\nPlease feel free to modify the text to what you think fits best!",
+      "parentUuid": "2ef897d1_6058305a",
+      "revId": "a692e0f672163c1975f89d108fb61fea34d49796",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
