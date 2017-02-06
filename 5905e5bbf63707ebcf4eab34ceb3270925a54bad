@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_f4ace1ec",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-06T17:45:11Z",
+      "side": 1,
+      "message": "\u003e I think it is very obvious that the text of the validation error message needs to be changed when the validation behavior is changed.\n\nMy experience with MediaWiki tells me that this is not the case. There are hundreds of contributors messing with the code over years. This may be obvious to you and me, but not to the wmf intern adjusting a regex in two years. Especially since this message key does not appear anywhere in full, and there is no mention of message keys in the code that has the regex.",
+      "parentUuid": "2ef897d1_e01300b8",
+      "revId": "5905e5bbf63707ebcf4eab34ceb3270925a54bad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_00b05cf0",
         "filename": "repo/i18n/qqq.json",
         "patchSetId": 7
@@ -101,6 +119,41 @@
       "side": 1,
       "message": "TBH I am not sure what this does I just took and modified the above regex.",
       "parentUuid": "2ef897d1_408d3435",
+      "revId": "5905e5bbf63707ebcf4eab34ceb3270925a54bad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_b42549be",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-06T17:45:11Z",
+      "side": 1,
+      "message": "I think it just looks odd, but it\u0027s actually correct. It\u0027s really \\\\[\\\\]\\\\\\\\. Makes more sense.",
+      "parentUuid": "2ef897d1_a026280f",
+      "revId": "5905e5bbf63707ebcf4eab34ceb3270925a54bad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_541df576",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-06T17:45:11Z",
+      "side": 1,
+      "message": "This is supposed to correspond to the message key, right? It doesn\u0027t, the key is illegal-geo-shape-title.\n\nAs I noted in my comment to the message itself, it\u0027s not obvious at all that there is a message to be adapted if you change the regex. It\u0027s not even clear that this is a message key (in fact, it isn\u0027t, it\u0027s just part of one). I think a comment would be in order.",
       "revId": "5905e5bbf63707ebcf4eab34ceb3270925a54bad",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
