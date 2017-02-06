@@ -16,6 +16,24 @@
       "revId": "e9fd2b85a7d67d1295a04507c3564509090898af",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_c586d6bd",
+        "filename": "repo/includes/Validators/InterWikiLinkExistsValidator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-02-06T10:14:15Z",
+      "side": 1,
+      "message": "The text is: The file \\\"$1\\\" does not exist on [https://commons.wikimedia.org/ Wikimedia Commons].\n\nI think it is OK for now, but we might want to modify when we have configurable wikis.",
+      "parentUuid": "2ef897d1_4592e601",
+      "revId": "e9fd2b85a7d67d1295a04507c3564509090898af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
