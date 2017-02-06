@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_458c2632",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/AliasesChangeOpDeserializerTest.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-06T10:28:36Z",
+      "side": 1,
+      "message": "Honestly, I am not convinced this is really better. I mean, it is, as it asserts that some ChangeOp that mock factory creates is actually returned by the deserializer. But to me it is still not what I actually would like to see tested here.",
+      "revId": "05ab224d5362b8a5d191254622ee9cd02d32e3af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
