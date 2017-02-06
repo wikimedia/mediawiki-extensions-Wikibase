@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_dad0f1ce",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-06T03:40:41Z",
+      "side": 1,
+      "message": "this is still using the terms table?\n\nit would be better if we can use ElasticSearch for this also",
+      "revId": "7b18e4a17d31c5b775375f435382f8e58bc19588",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
