@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_6058305a",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-06T14:21:27Z",
+      "side": 1,
+      "message": "still think this is slightly confusing. It says the value must start with / contain \"Data:\" but should not have a colon.\n\nSo, the colon is allowed?",
+      "revId": "a692e0f672163c1975f89d108fb61fea34d49796",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
