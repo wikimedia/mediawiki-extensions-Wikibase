@@ -203,4 +203,59 @@ class EntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 		$this->assertRegExp( $expectedRegex, $result );
 	}
 
+	public function testGivenEntityIdWithNullTitle_htmlForNonExistentEntityIsDisplayed() {
+		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
+		$entityTitleLookup->expects( $this->any() )
+			->method( $this->anything() )
+			->will( $this->returnValue( null ) );
+
+		$formatter = new EntityIdHtmlLinkFormatter(
+			$this->getMock( LabelDescriptionLookup::class ),
+			$entityTitleLookup,
+			$this->getMock( LanguageNameLookup::class )
+		);
+
+		$expectedPattern = '/^Q123' . preg_quote( wfMessage( 'word-separator' )->text(), '/' ) . '.*>' .
+			preg_quote( wfMessage( 'parentheses', wfMessage( 'wikibase-deletedentity-item' )->text() )->text(), '/' ) .
+			'</';
+
+		$this->assertRegExp( $expectedPattern, $formatter->formatEntityId( new ItemId( 'Q123' ) ) );
+	}
+
+	public function testGivenForeignEntityId_fullUrlIsUsedInTheOutput() {
+		$this->setUserLang( 'en' );
+
+		$localTitle = $this->getMock( Title::class );
+		$localTitle->expects( $this->any() )
+			->method( 'isLocal' )
+			->will( $this->returnValue( true ) );
+		$localTitle->expects( $this->any() )
+			->method( 'getLocalUrl' )
+			->will( $this->returnValue( '/wiki/Q42' ) );
+
+		$foreignTitle = $this->getMock( Title::class );
+		$foreignTitle->expects( $this->any() )
+			->method( 'isLocal' )
+			->will( $this->returnValue( false ) );
+		$foreignTitle->expects( $this->any() )
+			->method( 'getFullUrl' )
+			->will( $this->returnValue( 'http://foo.wiki/wiki/Q42' ) );
+
+		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
+		$entityTitleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will( $this->returnCallback( function ( EntityId $id ) use ( $localTitle, $foreignTitle ) {
+				return $id->isForeign() ? $foreignTitle : $localTitle;
+			} ) );
+
+		$formatter = new EntityIdHtmlLinkFormatter(
+			$this->getLabelDescriptionLookup( new Term( 'en', 'Something' ) ),
+			$entityTitleLookup,
+			$this->getMock( LanguageNameLookup::class )
+		);
+
+		$this->assertRegExp( '|"http://foo.wiki/wiki/Q42".*>Something<|', $formatter->formatEntityId( new ItemId( 'foo:Q42' ) ) );
+		$this->assertRegExp( '|"/wiki/Q42".*>Something<|', $formatter->formatEntityId( new ItemId( 'Q42' ) ) );
+	}
+
 }

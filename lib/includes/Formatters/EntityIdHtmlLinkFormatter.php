@@ -55,17 +55,23 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	public function formatEntityId( EntityId $entityId ) {
 		$title = $this->entityTitleLookup->getTitleForId( $entityId );
 
+		if ( $title === null ) {
+			return $this->getHtmlForNonExistent( $entityId );
+		}
+
 		$term = $this->lookupEntityLabel( $entityId );
 
+		$url = $title->isLocal() ? $title->getLocalURL() : $title->getFullURL();
+
 		if ( $term ) {
-			return $this->getHtmlForTerm( $title->getLocalURL(), $term, $title->getPrefixedText() );
-		} elseif ( !$title->exists() ) {
+			return $this->getHtmlForTerm( $url, $term, $title->getPrefixedText() );
+		} elseif ( $title->isLocal() && !$title->exists() ) {
 			return $this->getHtmlForNonExistent( $entityId );
 		}
 
 		$attributes = array(
 			'title' => $title->getPrefixedText(),
-			'href' => $title->getLocalURL()
+			'href' => $url
 		);
 
 		$html = Html::element( 'a', $attributes, $entityId->getSerialization() );
