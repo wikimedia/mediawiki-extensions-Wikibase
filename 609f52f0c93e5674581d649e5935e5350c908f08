@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_85e21e9b",
+        "filename": "lib/includes/Formatters/InterWikiLinkFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-06T10:01:55Z",
+      "side": 1,
+      "message": "I wonder whether we should get rid of FormatterOptions. Just ask for the specific information you need, supply setters for anything that has a sensible default.",
+      "revId": "609f52f0c93e5674581d649e5935e5350c908f08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_65dde2e0",
+        "filename": "lib/includes/Formatters/InterWikiLinkFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-06T10:01:55Z",
+      "side": 1,
+      "message": "Would probably be fine to just hardcode it.",
+      "revId": "609f52f0c93e5674581d649e5935e5350c908f08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_ceea8573",
         "filename": "lib/includes/Formatters/InterWikiLinkFormatter.php",
         "patchSetId": 4
@@ -84,6 +118,40 @@
         "endLine": 44,
         "endChar": 3
       },
+      "revId": "609f52f0c93e5674581d649e5935e5350c908f08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_45eb0678",
+        "filename": "lib/includes/Formatters/InterWikiLinkFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-06T10:01:55Z",
+      "side": 1,
+      "message": "Assert::parameterType( StringValue::class, $value, \u0027$value\u0027 );",
+      "revId": "609f52f0c93e5674581d649e5935e5350c908f08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_e5e792a5",
+        "filename": "lib/tests/phpunit/Formatters/InterWikiLinkFormatterTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-06T10:01:55Z",
+      "side": 1,
+      "message": "Please also test a link with an ampersand (\u0026). Not that for \u0026, escaping is expected to apply in the URL as well as in the link text.",
       "revId": "609f52f0c93e5674581d649e5935e5350c908f08",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
