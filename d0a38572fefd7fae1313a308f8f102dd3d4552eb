@@ -16,6 +16,24 @@
       "revId": "d0a38572fefd7fae1313a308f8f102dd3d4552eb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_17b9bfe6",
+        "filename": "repo/includes/Search/Elastic/Fields/LabelsField.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-02-06T19:21:32Z",
+      "side": 1,
+      "message": "I have no idea :) David should know I guess.",
+      "parentUuid": "2ef897d1_22980dc3",
+      "revId": "d0a38572fefd7fae1313a308f8f102dd3d4552eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
