@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_544a9560",
+        "filename": "repo/includes/Api/MergeItems.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-06T14:39:32Z",
+      "side": 1,
+      "message": "would be nicer if we can avoid accessing WikibaseRepo here",
+      "revId": "39ad13a164cd1b45bd3f68949a243d79405fad5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_742c718f",
+        "filename": "repo/includes/Api/MergeItems.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-06T14:39:32Z",
+      "side": 1,
+      "message": "is there reason not to inject this and resultBuilder in the constructor?",
+      "revId": "39ad13a164cd1b45bd3f68949a243d79405fad5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
