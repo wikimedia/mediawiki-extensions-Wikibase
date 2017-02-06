@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_c0ec84f4",
+        "filename": "lib/tests/phpunit/Formatters/WikibaseValueFormatterBuildersTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-06T12:48:11Z",
+      "side": 1,
+      "message": "the test case only takes 5 parameters, the 6th is ignored...\nNot a problem introduced by this patch, but a problem *copied* by this patch. So fix it first in a separate patch, or fix all of them here, or just don\u0027t repeat the mistake.",
+      "revId": "c2f1043c1375757674057b4bb999ee4930b5729a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_a0e7480c",
+        "filename": "lib/tests/phpunit/Formatters/WikibaseValueFormatterBuildersTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-06T12:48:11Z",
+      "side": 1,
+      "message": "again",
+      "revId": "c2f1043c1375757674057b4bb999ee4930b5729a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_00e29c00",
+        "filename": "lib/tests/phpunit/Formatters/WikibaseValueFormatterBuildersTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-06T12:48:11Z",
+      "side": 1,
+      "message": "again.",
+      "revId": "c2f1043c1375757674057b4bb999ee4930b5729a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_60127003",
+        "filename": "lib/tests/phpunit/Formatters/WikibaseValueFormatterBuildersTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-06T12:48:11Z",
+      "side": 1,
+      "message": "If this wasn\u0027t ignored, it would be wrong...",
+      "revId": "c2f1043c1375757674057b4bb999ee4930b5729a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
