@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_c0d804f7",
+        "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-02-06T13:53:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_6558425a",
+      "range": {
+        "startLine": 204,
+        "startChar": 6,
+        "endLine": 204,
+        "endChar": 14
+      },
+      "revId": "191f7053c79fe673cb8cfd371d2320b36735b3a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_855d7e4c",
         "filename": "repo/includes/Store/Sql/SqlSiteLinkConflictLookup.php",
         "patchSetId": 3
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_80532c6e",
+        "filename": "repo/includes/Store/Sql/SqlSiteLinkConflictLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-02-06T13:53:20Z",
+      "side": 1,
+      "message": "I tried to do this but this class doesn\u0027t have constructor and if I want to inject it using getConflictsForItem method, I need to change SiteLinkConflictLookup interface which is better to be done in another changeset.",
+      "parentUuid": "2ef897d1_855d7e4c",
+      "revId": "191f7053c79fe673cb8cfd371d2320b36735b3a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_05174e57",
         "filename": "repo/includes/Store/Sql/SqlSiteLinkConflictLookup.php",
         "patchSetId": 3
@@ -53,6 +95,30 @@
       "writtenOn": "2017-02-06T10:44:37Z",
       "side": 1,
       "message": "Could also use Item::ENTITY_TYPE",
+      "range": {
+        "startLine": 78,
+        "startChar": 57,
+        "endLine": 78,
+        "endChar": 61
+      },
+      "revId": "191f7053c79fe673cb8cfd371d2320b36735b3a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_80e20c9b",
+        "filename": "repo/includes/Store/Sql/SqlSiteLinkConflictLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-02-06T13:53:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_05174e57",
       "range": {
         "startLine": 78,
         "startChar": 57,
