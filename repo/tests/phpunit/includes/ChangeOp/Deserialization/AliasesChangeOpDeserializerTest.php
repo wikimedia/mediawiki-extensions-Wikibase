@@ -2,15 +2,17 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 
+use PHPUnit_Framework_Constraint_IsInstanceOf;
 use Prophecy\Argument;
 use Wikibase\ChangeOp\ChangeOp;
+use Wikibase\ChangeOp\ChangeOpAliases;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Repo\ChangeOp\Deserialization\AliasesChangeOpDeserializer;
 use Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator;
+use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\StringNormalizer;
 
 /**
@@ -45,13 +47,44 @@ class AliasesChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenChangeRequestWithNewAliases_callsNewSetAliasesOp() {
-		$factory = $this->getFingerPrintChangeOpFactory();
-		$factory->expects( $this->once() )
-			->method( 'newSetAliasesOp' )
-			->willReturn( new ChangeOps() );
+		$termValidatorFactory = $this->getMockBuilder( TermValidatorFactory::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$changeOpFactory = new FingerprintChangeOpFactory( $termValidatorFactory );
 
-		$this->newAliasesChangeOpDeserializer( $factory )
-			->createEntityChangeOp( [ 'aliases' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ] );
+		$changeOpDeserializer = $this->newAliasesChangeOpDeserializer( $changeOpFactory );
+		$resultChangeOp = $changeOpDeserializer->createEntityChangeOp(
+			[ 'aliases' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ]
+		);
+
+		$this->assertIncludesChangeOp(
+			new ChangeOpAliases( 'en', [ 'foo' ], 'set', $termValidatorFactory ),
+			$resultChangeOp
+		);
+	}
+
+	private function assertIncludesChangeOp( ChangeOp $expectedChangeOp, $actual ) {
+		$this->assertInstanceOf( ChangeOp::class, $actual );
+		$expectedChangeOpClass = get_class( $expectedChangeOp );
+
+		$this->assertThat(
+			$actual,
+			$this->logicalOr(
+				new PHPUnit_Framework_Constraint_IsInstanceOf( $expectedChangeOpClass ),
+				new PHPUnit_Framework_Constraint_IsInstanceOf( ChangeOps::class )
+			)
+		);
+
+		if ( $actual instanceof ChangeOps ) {
+			$this->assertContains(
+				$expectedChangeOp,
+				$actual->getChangeOps(),
+				'Must contain similar change op',
+				false, // case-sensitive matching does not matter as $expectedChangeOp is not a string
+				false, // non-strict equality of objects
+				true // strict equality of non-object
+			);
+		}
 	}
 
 	public function testGivenChangeRequestWithRemove_callsNewRemoveAliasesOp() {
