@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_e01300b8",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-02-06T13:32:30Z",
+      "side": 1,
+      "message": "I think it is very obvious that the text of the validation error message needs to be changed when the validation behavior is changed. We don\u0027t need a comment for that in the code.\n\nAnd I think the error message reflects the current validation behavior. If you don\u0027t agree feel free to modify it to your needs.",
+      "parentUuid": "2ef897d1_40a654bf",
+      "revId": "5905e5bbf63707ebcf4eab34ceb3270925a54bad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_00b05cf0",
         "filename": "repo/i18n/qqq.json",
         "patchSetId": 7
@@ -47,6 +65,24 @@
       "writtenOn": "2017-02-06T13:00:31Z",
       "side": 1,
       "message": "[\\\\\\\\\\]    \u003c---- whut?",
+      "revId": "5905e5bbf63707ebcf4eab34ceb3270925a54bad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_a026280f",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-02-06T13:32:30Z",
+      "side": 1,
+      "message": "TBH I am not sure what this does I just took and modified the above regex.",
+      "parentUuid": "2ef897d1_408d3435",
       "revId": "5905e5bbf63707ebcf4eab34ceb3270925a54bad",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -132,6 +168,24 @@
       "writtenOn": "2017-02-06T13:00:31Z",
       "side": 1,
       "message": "Also test ampersand (\u0026)",
+      "revId": "5905e5bbf63707ebcf4eab34ceb3270925a54bad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_80efacac",
+        "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-02-06T13:32:30Z",
+      "side": 1,
+      "message": "\u0026 is not tested above?!",
+      "parentUuid": "2ef897d1_807b2c23",
       "revId": "5905e5bbf63707ebcf4eab34ceb3270925a54bad",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
