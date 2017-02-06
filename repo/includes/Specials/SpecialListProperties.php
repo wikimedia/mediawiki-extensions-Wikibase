@@ -11,8 +11,8 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataTypeSelector;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
-use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\Store\BufferingTermLookup;
 
 /**
  * Special page to list properties by data type
@@ -61,9 +61,9 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	private $titleLookup;
 
 	/**
-	 * @var PrefetchingTermLookup
+	 * @var BufferingTermLookup
 	 */
-	private $prefetchingTermLookup;
+	private $bufferingTermLookup;
 
 	/**
 	 * @param DataTypeFactory $dataTypeFactory
@@ -71,7 +71,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param EntityIdFormatter $entityIdFormatter
 	 * @param EntityTitleLookup $titleLookup
-	 * @param PrefetchingTermLookup $prefetchingTermLookup
+	 * @param BufferingTermLookup $bufferingTermLookup
 	 */
 	public function __construct(
 		DataTypeFactory $dataTypeFactory,
@@ -79,7 +79,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 		LabelDescriptionLookup $labelDescriptionLookup,
 		EntityIdFormatter $entityIdFormatter,
 		EntityTitleLookup $titleLookup,
-		PrefetchingTermLookup $prefetchingTermLookup
+		BufferingTermLookup $bufferingTermLookup
 	) {
 		parent::__construct( 'ListProperties' );
 
@@ -88,7 +88,8 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 		$this->labelDescriptionLookup = $labelDescriptionLookup;
 		$this->entityIdFormatter = $entityIdFormatter;
 		$this->titleLookup = $titleLookup;
-		$this->prefetchingTermLookup = $prefetchingTermLookup;
+		$this->bufferingTermLookup = $bufferingTermLookup;
+
 	}
 
 	/**
@@ -217,7 +218,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 			$propertyIds[] = new PropertyId( $serialization );
 		}
 
-		$this->prefetchingTermLookup->prefetchTerms( $propertyIds );
+		$this->bufferingTermLookup->prefetchTerms( $propertyIds );
 
 		return $propertyIds;
 	}
