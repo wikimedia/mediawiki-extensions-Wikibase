@@ -11,6 +11,7 @@ use ParserOutput;
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
+ * @author Andrew Hall
  */
 class ParserOutputUsageAccumulator extends UsageAccumulator {
 
@@ -26,9 +27,9 @@ class ParserOutputUsageAccumulator extends UsageAccumulator {
 	/**
 	 * @see UsageAccumulator::addUsage
 	 *
-	 * @param EntityUsage $usage
+	 * @param EntityDataUsage $usage
 	 */
-	public function addUsage( EntityUsage $usage ) {
+	public function addUsage( EntityDataUsage $usage ) {
 		$usages = $this->getUsages();
 		$key = $usage->getIdentityString();
 		$usages[$key] = $usage;
@@ -38,7 +39,7 @@ class ParserOutputUsageAccumulator extends UsageAccumulator {
 	/**
 	 * @see UsageAccumulator::getUsage
 	 *
-	 * @return EntityUsage[]
+	 * @return EntityDataUsage[]
 	 */
 	public function getUsages() {
 		$usages = $this->parserOutput->getExtensionData( 'wikibase-entity-usage' );

@@ -24,7 +24,7 @@ class AddUsagesForPageJob extends Job {
 	private $pageId;
 
 	/**
-	 * @var EntityUsage[]
+	 * @var EntityDataUsage[]
 	 */
 	private $usages;
 
@@ -42,13 +42,13 @@ class AddUsagesForPageJob extends Job {
 	 * Spec constructor, for creating JobSpecifications to be pushed to the job queue.
 	 *
 	 * @param Title $title
-	 * @param EntityUsage[] $usages
+	 * @param EntityDataUsage[] $usages
 	 *
 	 * @return JobSpecification
 	 */
 	public static function newSpec( Title $title, array $usages ) {
-		// NOTE: Map EntityUsage objects to scalar arrays, for JSON serialization in the job queue.
-		$usages = array_map( function ( EntityUsage $usage ) {
+		// NOTE: Map EntityDataUsage objects to scalar arrays, for JSON serialization in the job queue.
+		$usages = array_map( function ( EntityDataUsage $usage ) {
 			return $usage->asArray();
 		}, $usages );
 
@@ -108,10 +108,10 @@ class AddUsagesForPageJob extends Job {
 	}
 
 	/**
-	 * @return EntityUsage[]
+	 * @return EntityDataUsage[]
 	 */
 	private function getUsages() {
-		// Turn serialized usage info into EntityUsage objects
+		// Turn serialized usage info into EntityDataUsage objects
 		$idParser = $this->idParser;
 		$usages = array_map( function ( array $usageArray ) use ( $idParser ) {
 			// This is the inverse of EntityUsage::asArray()

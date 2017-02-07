@@ -16,9 +16,9 @@ abstract class UsageAccumulator {
 	/**
 	 * Registers usage of the given aspect of the given entity.
 	 *
-	 * @param EntityUsage $usage
+	 * @param EntityDataUsage $usage
 	 */
-	abstract public function addUsage( EntityUsage $usage );
+	abstract public function addUsage( EntityDataUsage $usage );
 
 	/**
 	 * Registers the usage of an entity's label (in the given language).

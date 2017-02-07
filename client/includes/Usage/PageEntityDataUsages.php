@@ -6,12 +6,12 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
- * Value object representing the entity usages on a single page.
+ * Value object representing the entity data usages on a single page.
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
-class PageEntityUsages {
+class PageEntityDataUsages {
 
 	/**
 	 * @var int
@@ -19,13 +19,13 @@ class PageEntityUsages {
 	private $pageId;
 
 	/**
-	 * @var EntityUsage[]
+	 * @var EntityDataUsage[]
 	 */
 	private $usages = array();
 
 	/**
 	 * @param int $pageId
-	 * @param EntityUsage[] $usages
+	 * @param EntityDataUsage[] $usages
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -39,7 +39,7 @@ class PageEntityUsages {
 	}
 
 	/**
-	 * Returns the page this PageEntityUsages object applies to.
+	 * Returns the page this PageEntityDataUsages object applies to.
 	 *
 	 * @return int
 	 */
@@ -48,7 +48,7 @@ class PageEntityUsages {
 	}
 
 	/**
-	 * @return EntityUsage[] $usages EntityUsage objects keyed and sorted by identity string.
+	 * @return EntityDataUsage[] $usages EntityDataUsage objects keyed and sorted by identity string.
 	 */
 	public function getUsages() {
 		return $this->usages;
@@ -68,8 +68,8 @@ class PageEntityUsages {
 	 */
 	public function addUsages( array $usages ) {
 		foreach ( $usages as $usage ) {
-			if ( !( $usage instanceof EntityUsage ) ) {
-				throw new InvalidArgumentException( '$usages must contain only EntityUsage objects' );
+			if ( !( $usage instanceof EntityDataUsage ) ) {
+				throw new InvalidArgumentException( '$usages must contain only EntityDataUsage objects' );
 			}
 
 			$key = $usage->getIdentityString();
@@ -135,7 +135,7 @@ class PageEntityUsages {
 	}
 
 	/**
-	 * Returns all entities used on the page represented by this PageEntityUsages object.
+	 * Returns all entities used on the page represented by this PageEntityDataUsages object.
 	 *
 	 * @return EntityId[] List of EntityIde objects, keyed and sorted by their identity string.
 	 */
@@ -154,7 +154,7 @@ class PageEntityUsages {
 
 	/**
 	 * Returns the aspects used by the given entity on the page
-	 * represented by this PageEntityUsages object. They aspects
+	 * represented by this PageEntityDataUsages object. They aspects
 	 * will include any modifiers.
 	 *
 	 * @param EntityId $id

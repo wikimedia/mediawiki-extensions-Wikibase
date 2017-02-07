@@ -40,12 +40,18 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	private $batchSize = 100;
 
 	/**
+	 * @var string
+	 */
+	private $usageTableClass;
+
+	/**
 	 * @param EntityIdParser $idParser
 	 * @param SessionConsistentConnectionManager $connectionManager
 	 */
-	public function __construct( EntityIdParser $idParser, SessionConsistentConnectionManager $connectionManager ) {
+	public function __construct( EntityIdParser $idParser, SessionConsistentConnectionManager $connectionManager, $usageTableClass ) {
 		$this->idParser = $idParser;
 		$this->connectionManager = $connectionManager;
+		$this->usageTableClass = $usageTableClass;
 	}
 
 	/**
@@ -54,7 +60,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @return EntityUsageTable
 	 */
 	private function newUsageTable( Database $db ) {
-		return new EntityUsageTable( $this->idParser, $db, $this->batchSize );
+		return new $this->usageTableClass( $this->idParser, $db, $this->batchSize );
 	}
 
 	/**
