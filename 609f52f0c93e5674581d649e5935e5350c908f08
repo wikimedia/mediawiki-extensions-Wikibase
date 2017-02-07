@@ -155,6 +155,24 @@
       "revId": "609f52f0c93e5674581d649e5935e5350c908f08",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_5dc2b13a",
+        "filename": "lib/tests/phpunit/Formatters/InterWikiLinkFormatterTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-07T18:05:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_e5e792a5",
+      "revId": "609f52f0c93e5674581d649e5935e5350c908f08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
