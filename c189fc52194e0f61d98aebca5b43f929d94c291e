@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_fe25d856",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-07T12:15:55Z",
+      "side": 1,
+      "message": "It is just a helper method to express intention that I don\u0027t want MOCK I want DUMMY.\n\nWith PhpUnit it will be: `$this-\u003egetMockBuilder($class)-\u003edisableOriginalConstructor()-\u003egetMock();`\nIs it really better?",
+      "parentUuid": "2ef897d1_eebd41ae",
+      "range": {
+        "startLine": 152,
+        "startChar": 18,
+        "endLine": 152,
+        "endChar": 23
+      },
+      "revId": "c189fc52194e0f61d98aebca5b43f929d94c291e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_8ee36dd4",
         "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
         "patchSetId": 3
@@ -36,6 +60,24 @@
       "writtenOn": "2017-02-02T17:32:10Z",
       "side": 1,
       "message": "Do you know of this neat hack?\n\n return (object)[ \u0027description\u0027 \u003d\u003e $description ];",
+      "revId": "c189fc52194e0f61d98aebca5b43f929d94c291e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_3edb7056",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-07T12:15:55Z",
+      "side": 1,
+      "message": "No, I didn\u0027t.\nDo you think we should use it?",
+      "parentUuid": "2ef897d1_8ee36dd4",
       "revId": "c189fc52194e0f61d98aebca5b43f929d94c291e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
