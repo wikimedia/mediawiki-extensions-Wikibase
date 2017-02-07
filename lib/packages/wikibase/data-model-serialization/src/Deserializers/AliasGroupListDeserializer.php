@@ -27,7 +27,10 @@ class AliasGroupListDeserializer implements Deserializer {
 	 * @return AliasGroupList
 	 */
 	public function deserialize( $serialization ) {
-		$this->assertCanDeserialize( $serialization );
+		if ( !is_array( $serialization ) ) {
+			throw new DeserializationException( 'The aliasGroup list serialization should be an array' );
+		}
+
 		return $this->getDeserialized( $serialization );
 	}
 
@@ -40,6 +43,8 @@ class AliasGroupListDeserializer implements Deserializer {
 		$aliasGroupList = new AliasGroupList();
 
 		foreach ( $serialization as $languageCode => $aliasGroupSerialization ) {
+			$this->assertAttributeIsArray( $serialization, $languageCode );
+
 			$aliasGroupList->setGroup( $this->deserializeAliasGroup( $aliasGroupSerialization, $languageCode ) );
 		}
 
@@ -56,6 +61,8 @@ class AliasGroupListDeserializer implements Deserializer {
 		$aliases = array();
 
 		foreach ( $serialization as $aliasSerialization ) {
+			$this->assertIsValidAliasSerialization( $aliasSerialization, $languageCode );
+
 			$aliases[] = $aliasSerialization['value'];
 		}
 
@@ -63,25 +70,6 @@ class AliasGroupListDeserializer implements Deserializer {
 			$languageCode,
 			$aliases
 		);
-	}
-
-	/**
-	 * @param array[] $serialization
-	 *
-	 * @throws DeserializationException
-	 */
-	private function assertCanDeserialize( $serialization ) {
-		if ( !is_array( $serialization ) ) {
-			throw new DeserializationException( 'The aliasGroup list serialization should be an array' );
-		}
-
-		foreach ( $serialization as $requestedLanguage => $valueSerialization ) {
-			$this->assertAttributeIsArray( $serialization, $requestedLanguage );
-
-			foreach ( $valueSerialization as $aliasSerialization ) {
-				$this->assertIsValidAliasSerialization( $aliasSerialization, $requestedLanguage );
-			}
-		}
 	}
 
 	private function assertIsValidAliasSerialization( $serialization, $requestedLanguage ) {

@@ -37,7 +37,9 @@ class StatementListDeserializer implements Deserializer {
 	 * @return StatementList
 	 */
 	public function deserialize( $serialization ) {
-		$this->assertHasGoodFormat( $serialization );
+		if ( !is_array( $serialization ) ) {
+			throw new DeserializationException( 'The StatementList serialization should be an array' );
+		}
 
 		return $this->getDeserialized( $serialization );
 	}
@@ -52,6 +54,10 @@ class StatementListDeserializer implements Deserializer {
 
 		foreach ( $serialization as $key => $statementArray ) {
 			if ( is_string( $key ) ) {
+				if ( !is_array( $statementArray ) ) {
+					throw new DeserializationException( "The statements per property \"$key\" should be an array" );
+				}
+
 				foreach ( $statementArray as $statementSerialization ) {
 					/** @var Statement $statement */
 					$statement = $this->statementDeserializer->deserialize( $statementSerialization );
@@ -62,22 +68,9 @@ class StatementListDeserializer implements Deserializer {
 				$statement = $this->statementDeserializer->deserialize( $statementArray );
 				$statementList->addStatement( $statement );
 			}
-
 		}
 
 		return $statementList;
-	}
-
-	private function assertHasGoodFormat( $serialization ) {
-		if ( !is_array( $serialization ) ) {
-			throw new DeserializationException( 'The StatementList serialization should be an array' );
-		}
-
-		foreach ( $serialization as $key => $statementArray ) {
-			if ( is_string( $key ) && !is_array( $statementArray ) ) {
-				throw new DeserializationException( 'The statements per property should be an array' );
-			}
-		}
 	}
 
 }

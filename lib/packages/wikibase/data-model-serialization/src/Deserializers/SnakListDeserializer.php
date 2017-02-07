@@ -37,7 +37,9 @@ class SnakListDeserializer implements Deserializer {
 	 * @return SnakList
 	 */
 	public function deserialize( $serialization ) {
-		$this->assertHasGoodFormat( $serialization );
+		if ( !is_array( $serialization ) ) {
+			throw new DeserializationException( 'The SnakList serialization should be an array' );
+		}
 
 		return $this->getDeserialized( $serialization );
 	}
@@ -52,6 +54,10 @@ class SnakListDeserializer implements Deserializer {
 
 		foreach ( $serialization as $key => $snakArray ) {
 			if ( is_string( $key ) ) {
+				if ( !is_array( $snakArray ) ) {
+					throw new DeserializationException( "The snaks per property \"$key\" should be an array" );
+				}
+
 				foreach ( $snakArray as $snakSerialization ) {
 					/** @var Snak $snak */
 					$snak = $this->snakDeserializer->deserialize( $snakSerialization );
@@ -65,23 +71,6 @@ class SnakListDeserializer implements Deserializer {
 		}
 
 		return $snakList;
-	}
-
-	/**
-	 * @param array[] $serialization
-	 *
-	 * @throws DeserializationException
-	 */
-	private function assertHasGoodFormat( $serialization ) {
-		if ( !is_array( $serialization ) ) {
-			throw new DeserializationException( 'The SnakList serialization should be an array' );
-		}
-
-		foreach ( $serialization as $key => $snakArray ) {
-			if ( is_string( $key ) && !is_array( $snakArray ) ) {
-				throw new DeserializationException( 'The snaks per property should be an array' );
-			}
-		}
 	}
 
 }
