@@ -5,6 +5,7 @@ namespace Wikibase\Client;
 use MediaWiki\Services\ServiceContainer;
 use Wikibase\Client\Store\RepositoryServiceContainer;
 use Wikibase\Client\Store\RepositoryServiceContainerFactory;
+use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\UnknownForeignRepositoryException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -129,6 +130,13 @@ class DispatchingServiceFactory extends ServiceContainer implements EntityDataRe
 		if ( $container !== null ) {
 			$container->redirectUpdated( $entityRedirect, $revisionId );
 		}
+	}
+
+	/**
+	 * @return EntityPrefetcher
+	 */
+	public function getEntityPrefetcher() {
+		return $this->getService( 'EntityPrefetcher' );
 	}
 
 	/**

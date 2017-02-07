@@ -3,6 +3,7 @@
 use Wikibase\Client\Serializer\ForbiddenSerializer;
 use Wikibase\Client\Store\RepositoryServiceContainer;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
@@ -10,12 +11,27 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\TermSqlIndex;
+use Wikimedia\Assert\Assert;
 
 /**
  * @license GPL-2.0+
  */
 
 return [
+
+	'EntityPrefetcher' => function(
+		RepositoryServiceContainer $services,
+		WikibaseClient $client
+	) {
+		$prefetcher = $services->getService( 'WikiPageEntityMetaDataAccessor' );
+
+		Assert::postcondition(
+			$prefetcher instanceof EntityPrefetcher,
+			'The WikiPageEntityMetaDataAccessor service is expected to implement EntityPrefetcher interface.'
+		);
+
+		return $prefetcher;
+	},
 
 	'EntityRevisionLookup' => function(
 		RepositoryServiceContainer $services,

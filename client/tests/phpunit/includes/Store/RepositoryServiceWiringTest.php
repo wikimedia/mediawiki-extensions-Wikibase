@@ -3,9 +3,11 @@
 namespace Wikibase\Client\Tests\Store;
 
 use DataValues\Deserializers\DataValueDeserializer;
+use LogicException;
 use Wikibase\Client\Store\RepositoryServiceContainer;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParser;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -39,6 +41,7 @@ class RepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideServices() {
 		return [
+			[ 'EntityPrefetcher', EntityPrefetcher::class ],
 			[ 'EntityRevisionLookup', EntityRevisionLookup::class ],
 			[ 'PropertyInfoLookup', PropertyInfoLookup::class ],
 			[ 'TermIndex', TermIndex::class ],
@@ -61,9 +64,29 @@ class RepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 		$container = $this->getRepositoryServiceContainer();
 
 		$this->assertEquals(
-			[ 'EntityRevisionLookup', 'PropertyInfoLookup', 'TermIndex', 'WikiPageEntityMetaDataAccessor' ],
+			[
+				'EntityPrefetcher',
+				'EntityRevisionLookup',
+				'PropertyInfoLookup',
+				'TermIndex',
+				'WikiPageEntityMetaDataAccessor'
+			],
 			$container->getServiceNames()
 		);
+	}
+
+	public function testGetEntityPrefetcherThrowsAnExceptionIfNoPrefetcherService() {
+		$container = $this->getRepositoryServiceContainer();
+
+		// Make 'WikiPageEntityMetaDataAccessor' service not an implementation
+		// of EntityPrefetcher interface
+		$container->redefineService( 'WikiPageEntityMetaDataAccessor', function() {
+			return $this->getMock( WikiPageEntityMetaDataAccessor::class );
+		} );
+
+		$this->setExpectedException( LogicException::class );
+
+		$container->getService( 'EntityPrefetcher' );
 	}
 
 }

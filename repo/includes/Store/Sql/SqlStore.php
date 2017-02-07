@@ -10,6 +10,7 @@ use Wikibase\Client\EntityDataRetrievalServiceFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
@@ -608,12 +609,22 @@ class SqlStore implements Store {
 	 */
 	public function getEntityPrefetcher() {
 		if ( $this->entityPrefetcher === null ) {
-			$this->entityPrefetcher = new PrefetchingWikiPageEntityMetaDataAccessor(
-				new WikiPageEntityMetaDataLookup( $this->entityNamespaceLookup )
-			);
+			$this->entityPrefetcher = $this->newEntityPrefetcher();
 		}
 
 		return $this->entityPrefetcher;
+	}
+
+	/**
+	 * @return EntityPrefetcher
+	 */
+	private function newEntityPrefetcher() {
+		if ( $this->entityDataRetrievalServices !== null ) {
+			return $this->entityDataRetrievalServices->getEntityPrefetcher();
+		}
+		return new PrefetchingWikiPageEntityMetaDataAccessor(
+			new WikiPageEntityMetaDataLookup( $this->entityNamespaceLookup )
+		);
 	}
 
 	/**
