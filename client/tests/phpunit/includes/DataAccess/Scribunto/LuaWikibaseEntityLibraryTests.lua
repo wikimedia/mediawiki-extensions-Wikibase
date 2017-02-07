@@ -190,11 +190,45 @@ local function integrationTestFormatStatementsProperty()
 	return entity:formatStatements( 'P342', mw.wikibase.entity.claimRanks )
 end
 
+local function testClaimsPairSize()
+	local entity = mw.wikibase.getEntityObject( 'Q32487' )
+	local count = 0
+	for a,b in pairs(entity.claims) do
+		count = count + 1
+	end
+
+	return count
+end
+
+local function testClaimsPairContent()
+	local testItem = getNewTestItem()
+	local claimsTable = {}
+	for a in pairs(testItem.claims) do
+		claimsTable[a] = testItem.claims[a]
+	end
+	return claimsTable
+end
+
+local function testClaimsNewIndex()
+	local entity = mw.wikibase.getEntityObject( 'Q32487' )
+	entity['claims']['P321'] = ""
+end
+
+
 local tests = {
 	-- Unit Tests
 
 	{ name = 'mw.wikibase.entity exists', func = testExists, type='ToString',
 	  expect = { 'table' }
+	},
+	{ name = 'mw.wikibase.testClaimsPairSize', func = testClaimsPairSize,
+	  expect = { 1 }
+	},
+	{ name = 'mw.wikibase.testClaimsPairContent', func = testClaimsPairContent,
+	  expect = { {P321={}, P4321={}}, }
+	},
+	{ name = 'mw.wikibase.testClaimsNewIndex', func = testClaimsNewIndex,
+	  expect = 'Entity cannot be modified'
 	},
 	{ name = 'mw.wikibase.entity.create 1', func = testCreate,
 	  args = { {} },
