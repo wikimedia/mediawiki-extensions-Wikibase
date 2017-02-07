@@ -147,7 +147,8 @@ class StatementGroupRendererFactory {
 			$propertyIdResolver,
 			$this->snaksFinder,
 			$snakFormatter,
-			$this->entityLookup
+			$this->entityLookup,
+			$usageAccumulator
 		);
 
 		return new LanguageAwareRenderer(
