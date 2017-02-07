@@ -3,6 +3,9 @@
 	<!-- See https://github.com/wikimedia/mediawiki-tools-codesniffer/blob/master/MediaWiki/ruleset.xml -->
 	<rule ref="vendor/mediawiki/mediawiki-codesniffer/MediaWiki">
 		<exclude name="MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment" />
+		<exclude name="Generic.Arrays.DisallowLongArraySyntax" />
+		<exclude name="MediaWiki.WhiteSpace.SpaceyParenthesis.UnnecessarySpaceBetweenParentheses" />
+		<exclude name="MediaWiki.WhiteSpace.SpaceyParenthesis.SingleSpaceAfterOpenParenthesis" />
 	</rule>
 
 	<rule ref="Generic.Classes.DuplicateClassName.Found">
