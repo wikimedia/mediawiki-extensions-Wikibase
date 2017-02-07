@@ -16,6 +16,24 @@
       "revId": "30aa644fe091c119495a590d319542573fe58f61",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_3ec2505e",
+        "filename": "repo/includes/Store/Sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-07T12:19:19Z",
+      "side": 1,
+      "message": "Removed the else branch.\nI agree about the no-client EntityDataRetrievalServiceFactory. I am going to think how to move forward with this.",
+      "parentUuid": "2ef897d1_fe0ef8e6",
+      "revId": "30aa644fe091c119495a590d319542573fe58f61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
