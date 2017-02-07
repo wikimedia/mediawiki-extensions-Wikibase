@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_7dc9edad",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/AliasesChangeOpDeserializerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-07T17:35:39Z",
+      "side": 1,
+      "message": "This method is used only in tests, so it probably should be deleted",
+      "range": {
+        "startLine": 81,
+        "startChar": 4,
+        "endLine": 81,
+        "endChar": 28
+      },
+      "revId": "6c9a2ac3acee17ffaf7fd10a0494a7fa3a63e64c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
