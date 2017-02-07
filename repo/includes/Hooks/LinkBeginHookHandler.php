@@ -5,7 +5,8 @@ namespace Wikibase\Repo\Hooks;
 use Action;
 use DummyLinker;
 use Language;
-use Linker;
+use MediaWiki\Linker\LinkRenderer;
+use MediaWiki\MediaWikiServices;
 use RequestContext;
 use SpecialPageFactory;
 use Title;
@@ -57,6 +58,11 @@ class LinkBeginHookHandler {
 	private $pageLanguage;
 
 	/**
+	 * @var LinkRenderer
+	 */
+	private $linkRenderer;
+
+	/**
 	 * @return self
 	 */
 	private static function newFromGlobalState() {
@@ -71,7 +77,8 @@ class LinkBeginHookHandler {
 			$wikibaseRepo->getTermLookup(),
 			$wikibaseRepo->getEntityNamespaceLookup(),
 			$languageFallbackChain,
-			$context->getLanguage()
+			$context->getLanguage(),
+			MediaWikiServices::getInstance()->getLinkRenderer()
 		);
 	}
 
@@ -119,13 +126,15 @@ class LinkBeginHookHandler {
 		TermLookup $termLookup,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		LanguageFallbackChain $languageFallback,
-		Language $pageLanguage
+		Language $pageLanguage,
+		LinkRenderer $linkRenderer
 	) {
 		$this->entityIdLookup = $entityIdLookup;
 		$this->termLookup = $termLookup;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->languageFallback = $languageFallback;
 		$this->pageLanguage = $pageLanguage;
+		$this->linkRenderer = $linkRenderer;
 	}
 
 	/**
@@ -162,7 +171,7 @@ class LinkBeginHookHandler {
 		// to indicate that the logged action occurred while creating an entity.
 		if ( SpecialPageFactory::exists( $targetText ) ) {
 			$target = Title::makeTitle( NS_SPECIAL, $targetText );
-			$html = Linker::linkKnown( $target );
+			$html = $this->linkRenderer->makeKnownLink( $target );
 
 			return;
 		}
