@@ -5,7 +5,6 @@ namespace Wikibase\Client\DataAccess\PropertyParserFunction;
 use Parser;
 use PPFrame;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
-use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -100,13 +99,7 @@ class Runner {
 
 		$renderer = $this->rendererFactory->newRendererFromParser( $parser, $type );
 		$rendered = $renderer->render( $entityId, $propertyLabelOrId );
-		$result = $this->buildResult( $rendered );
-
-		// Track usage of "other" (that is, not label/title/sitelinks) data from the item.
-		$usageAcc = new ParserOutputUsageAccumulator( $parser->getOutput() );
-		$usageAcc->addOtherUsage( $entityId );
-
-		return $result;
+		return $this->buildResult( $rendered );
 	}
 
 	/**

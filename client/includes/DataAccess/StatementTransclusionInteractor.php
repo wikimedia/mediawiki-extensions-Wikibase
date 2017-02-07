@@ -4,6 +4,7 @@ namespace Wikibase\Client\DataAccess;
 
 use Language;
 use Wikibase\Client\PropertyLabelNotResolvedException;
+use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Snak\Snak;
@@ -45,24 +46,32 @@ class StatementTransclusionInteractor {
 	private $entityLookup;
 
 	/**
+	 * @var UsageAccumulator
+	 */
+	private $usageAccumulator;
+
+	/**
 	 * @param Language $language
 	 * @param PropertyIdResolver $propertyIdResolver
 	 * @param SnaksFinder $snaksFinder
 	 * @param SnakFormatter $snakFormatter
 	 * @param EntityLookup $entityLookup
+	 * @param UsageAccumulator $usageAccumulator
 	 */
 	public function __construct(
 		Language $language,
 		PropertyIdResolver $propertyIdResolver,
 		SnaksFinder $snaksFinder,
 		SnakFormatter $snakFormatter,
-		EntityLookup $entityLookup
+		EntityLookup $entityLookup,
+		UsageAccumulator $usageAccumulator
 	) {
 		$this->language = $language;
 		$this->propertyIdResolver = $propertyIdResolver;
 		$this->snaksFinder = $snaksFinder;
 		$this->snakFormatter = $snakFormatter;
 		$this->entityLookup = $entityLookup;
+		$this->usageAccumulator = $usageAccumulator;
 	}
 
 	/**
@@ -81,17 +90,34 @@ class StatementTransclusionInteractor {
 		try {
 			$entity = $this->entityLookup->getEntity( $entityId );
 		} catch ( RevisionedUnresolvedRedirectException $ex ) {
+			// Continue as if nothing happened (for usage tracking purposes).
+			$entity = null;
+		}
+
+		if ( $entity && !( $entity instanceof StatementListProvider ) ) {
+			// For entities that can't have Statements, we don't need to track usage,
+			// so just bail out.
 			return '';
 		}
 
-		if ( !( $entity instanceof StatementListProvider ) ) {
-			return '';
+		// Currently statement usage implies other usage.
+		$this->usageAccumulator->addOtherUsage( $entityId );
+
+		// If the entity doesn't exist, we just want to resolve the property id
+		// for usage tracking purposes, so don't let the exception bubble up.
+		$shouldThrow = $entity !== null;
+
+		$propertyId = $this->resolvePropertyId( $propertyLabelOrId, $shouldThrow );
+
+		if ( $propertyId ) {
+			// XXX: This means we only track a statement usage if the property id /label
+			// can be resolved. This requires the property to exist!
+			$this->usageAccumulator->addStatementUsage( $entityId, $propertyId );
 		}
 
-		$propertyId = $this->propertyIdResolver->resolvePropertyId(
-			$propertyLabelOrId,
-			$this->language->getCode()
-		);
+		if ( $entity === null ) {
+			return '';
+		}
 
 		$snaks = $this->snaksFinder->findSnaks(
 			$entity,
@@ -100,6 +126,31 @@ class StatementTransclusionInteractor {
 		);
 
 		return $this->formatSnaks( $snaks );
+	}
+
+	/**
+	 * @param string $propertyLabelOrId property label or ID (Pxxx)
+	 * @param bool $shouldThrow Whether PropertyLabelNotResolvedException should be thrown
+	 *
+	 * @return PropertyId|null
+	 *
+	 * @throws PropertyLabelNotResolvedException
+	 */
+	private function resolvePropertyId( $propertyLabelOrId, $shouldThrow ) {
+		try {
+			$propertyId = $this->propertyIdResolver->resolvePropertyId(
+				$propertyLabelOrId,
+				$this->language->getCode()
+			);
+		} catch ( PropertyLabelNotResolvedException $propertyLabelNotResolvedException ) {
+			if ( !$shouldThrow ) {
+				return null;
+			}
+
+			throw $propertyLabelNotResolvedException;
+		}
+
+		return $propertyId;
 	}
 
 	/**
