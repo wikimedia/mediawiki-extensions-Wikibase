@@ -16,6 +16,24 @@
       "revId": "05ab224d5362b8a5d191254622ee9cd02d32e3af",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_fd8cbd3b",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/AliasesChangeOpDeserializerTest.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-07T17:54:21Z",
+      "side": 1,
+      "message": "\u003e But to me it is still not what I actually would like to see tested here.\n\nBut what then?\n\nWe have test case for `FingerprintChangeOpFactory` testing it works as expected. So we can hook in.\nOf course, if we don\u0027t allow factory to be replaced with another instance, then we shouldn\u0027t mock it. But in that case, we also shouldn\u0027t allow to pass it as a dependency to deserializer.\n\nI would agree that testing that returned ChangeOp does what expected is closer to production use and is closer to reality, but it probably will make tests less granular and slower (may be, depends on change op).\n\nI would suggest to create pair of those tests per \"property\" checking the whole change use case, but cover \nall the use cases using smaller tests.\n\n\nPS: By the way, `FingerprintChangeOpFactoryTest` tests almost nothing and needs improvement.",
+      "parentUuid": "2ef897d1_458c2632",
+      "revId": "05ab224d5362b8a5d191254622ee9cd02d32e3af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
