@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_fe0ef8e6",
+        "filename": "repo/includes/Store/Sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-07T12:11:28Z",
+      "side": 1,
+      "message": "Side note: These else-branches are are not very nice. It would be better to have an EntityDataRetrievalServiceFactory implementation that covers the \"no client\" case. Much cleaner that way.",
+      "revId": "30aa644fe091c119495a590d319542573fe58f61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
