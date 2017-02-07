@@ -273,7 +273,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			$this->getMockBuilder( PageProps::class )->disableOriginalConstructor()->getMock();
 		$propsMock->method( 'getProperties' )->willReturnCallback( function ( Title $title,
 		                                                                      $propertyNames ) {
-			$props = [ ];
+			$props = [];
 			foreach ( $propertyNames as $prop ) {
 				if ( $prop[0] == 'X' ) {
 					continue;

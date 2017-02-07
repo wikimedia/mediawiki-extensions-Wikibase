@@ -185,7 +185,7 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 					'query' => 'entityusage',
 					'titles' => 'Vienna11|Berlin22',
 				],
-				["11" => [
+				[ "11" => [
 					"entityusage" => [
 						"Q3" => [ "aspects" => [ "O", "S" ] ],
 					]
@@ -204,7 +204,7 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 					'titles' => 'Vienna11|Berlin22',
 					'entities' => 'Q3|Q4',
 				],
-				["11" => [
+				[ "11" => [
 					"entityusage" => [
 						"Q3" => [ "aspects" => [ "O", "S" ] ],
 					]
