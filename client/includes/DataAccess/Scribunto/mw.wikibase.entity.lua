@@ -26,6 +26,44 @@ entity.claimRanks = {
 	RANK_DEPRECATED = 0
 }
 
+-- Wrapper function to log access to claims of an entity
+-- Code for logging based on: http://www.lua.org/pil/13.4.4.html
+--
+-- @param {table} entity
+local logTableAccess = function(entity)
+	if entity.claims == nil then
+		return entity
+	end
+	local actualEntityClaims = entity.claims
+	entity.claims = {}
+
+	local pseudoClaimsMetatable = {}
+	pseudoClaimsMetatable.__index = function( emptyTable, propertyID )
+		local propertyExists = actualEntityClaims[propertyID] ~= nil
+		-- If entry for entity and property does not already exist, write entity.id and property id, and propertyExists to DB
+		return actualEntityClaims[propertyID]
+	end
+
+	pseudoClaimsMetatable.__newindex = function( emptyTable, propertyID, data )
+		error( 'Entity cannot be modified' )
+	end
+
+	logNext = function(emptyTable, propertyID)
+		if propertyID ~= nil then
+		local propertyExists = actualEntityClaims[propertyID] ~= nil
+			-- If entry for entity and property does not already exist, write entity.id and property id, and propertyExists to DB
+		end
+		return next( actualEntityClaims, propertyID )
+	end
+
+	pseudoClaimsMetatable.__pairs = function( emptyTable )
+		return logNext, {}, nil
+	end
+
+	setmetatable( entity.claims, pseudoClaimsMetatable )
+	return entity
+end
+
 -- Create new entity object from given data
 --
 -- @param {table} data
@@ -38,7 +76,7 @@ entity.create = function( data )
 		error( 'mw.wikibase.entity must not be constructed using legacy data' )
 	end
 
-	local entity = data
+	local entity = logTableAccess( data )
 	setmetatable( entity, metatable )
 
 	return entity
