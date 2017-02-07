@@ -26,6 +26,47 @@ entity.claimRanks = {
 	RANK_DEPRECATED = 0
 }
 
+-- Function to mask an entity's claims table in order log access
+-- to individual claims of an entity.
+-- Code for logging based on: http://www.lua.org/pil/13.4.4.html
+--
+-- @param {table} entity
+local maskClaimsTable = function( entity )
+	if entity.claims == nil then
+		return entity
+	end
+	local actualEntityClaims = entity.claims
+	entity.claims = {}
+
+	local pseudoClaimsMetatable = {}
+	pseudoClaimsMetatable.__index = function( emptyTable, propertyID )
+		local propertyExists = actualEntityClaims[propertyID] ~= nil
+		-- Write entity.id and property id, and propertyExists to DB if propertyExists has changed or entry for entity and property did not exist
+		php.addStatementUsage(entity.id, propertyID, propertyExists)
+		return actualEntityClaims[propertyID]
+	end
+
+	pseudoClaimsMetatable.__newindex = function( emptyTable, propertyID, data )
+		error( 'Entity cannot be modified' )
+	end
+
+	local logNext = function( emptyTable, propertyID )
+		if propertyID ~= nil then
+			local propertyExists = actualEntityClaims[propertyID] ~= nil
+			-- Write entity.id and property id, and propertyExists to DB if propertyExists has changed or entry for entity and property did not exist
+			php.addStatementUsage(entity.id, propertyID, propertyExists)
+		end
+		return next( actualEntityClaims, propertyID )
+	end
+
+	pseudoClaimsMetatable.__pairs = function( emptyTable )
+		return logNext, {}, nil
+	end
+
+	setmetatable( entity.claims, pseudoClaimsMetatable )
+	return entity
+end
+
 -- Create new entity object from given data
 --
 -- @param {table} data
@@ -38,7 +79,7 @@ entity.create = function( data )
 		error( 'mw.wikibase.entity must not be constructed using legacy data' )
 	end
 
-	local entity = data
+	local entity = maskClaimsTable( data )
 	setmetatable( entity, metatable )
 
 	return entity
