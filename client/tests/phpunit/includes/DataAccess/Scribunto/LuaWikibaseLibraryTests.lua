@@ -65,7 +65,6 @@ local function testFormatValues()
 	return mw.wikibase.formatValues( snaks )
 end
 
-
 local tests = {
 	-- Integration tests
 
