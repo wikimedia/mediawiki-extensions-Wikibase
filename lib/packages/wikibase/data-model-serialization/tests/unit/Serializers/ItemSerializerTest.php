@@ -134,7 +134,7 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 		);
 
 		$entity = new Item();
-		$entity->getFingerprint()->setLabel( 'en', 'foo' );
+		$entity->setLabel( 'en', 'foo' );
 		$provider[] = array(
 			array(
 				'type' => 'item',
@@ -153,7 +153,7 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 		);
 
 		$entity = new Item();
-		$entity->getFingerprint()->setDescription( 'en', 'foo' );
+		$entity->setDescription( 'en', 'foo' );
 		$provider[] = array(
 			array(
 				'type' => 'item',
@@ -172,7 +172,7 @@ class ItemSerializerTest extends DispatchableSerializerTest {
 		);
 
 		$entity = new Item();
-		$entity->getFingerprint()->setAliasGroup( 'en', array( 'foo', 'bar' ) );
+		$entity->setAliases( 'en', [ 'foo', 'bar' ] );
 		$provider[] = array(
 			array(
 				'type' => 'item',

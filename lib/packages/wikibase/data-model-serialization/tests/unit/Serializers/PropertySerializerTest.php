@@ -130,7 +130,7 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 		);
 
 		$property = Property::newFromType( 'string' );
-		$property->getFingerprint()->setLabel( 'en', 'foo' );
+		$property->setLabel( 'en', 'foo' );
 		$provider[] = array(
 			array(
 				'type' => 'property',
@@ -149,7 +149,7 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 		);
 
 		$property = Property::newFromType( 'string' );
-		$property->getFingerprint()->setDescription( 'en', 'foo' );
+		$property->setDescription( 'en', 'foo' );
 		$provider[] = array(
 			array(
 				'type' => 'property',
@@ -168,7 +168,7 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 		);
 
 		$property = Property::newFromType( 'string' );
-		$property->getFingerprint()->setAliasGroup( 'en', array( 'foo', 'bar' ) );
+		$property->setAliases( 'en', [ 'foo', 'bar' ] );
 		$provider[] = array(
 			array(
 				'type' => 'property',
