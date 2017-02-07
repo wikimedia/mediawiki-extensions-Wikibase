@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_dd2b412d",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-07T17:43:14Z",
+      "side": 1,
+      "message": "It would be nice to also change this to use proper DI. newFromGlobalState() gives us a place to fetch the service from MediaWikiServices.",
+      "revId": "a3c1a7679e788862ece983a8a5abbd1bc2bbb57e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
