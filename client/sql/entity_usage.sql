@@ -10,3 +10,14 @@ CREATE UNIQUE INDEX /*i*/eu_entity_id ON /*_*/wbc_entity_usage ( eu_entity_id, e
 
 -- look up (and especially, delete) usage entries by page id
 CREATE INDEX /*i*/eu_page_id ON /*_*/wbc_entity_usage ( eu_page_id, eu_entity_id ) ;
+
+
+CREATE TABLE IF NOT EXISTS /*_*/wbc_statement_usage (
+  eu_entity_id               VARBINARY(255) NOT NULL, -- the ID of the entity being used
+  eu_property_id             VARBINARY(37) NOT NULL,  -- the property ID used from the entity.
+  eu_page_id                 INT NOT NULL,            -- the ID of the page that uses the entities.
+  eu_user_specified_value    Boolean,                 -- true if property value specified in lua module
+  eu_property_exists         Boolean,                 -- true if entity table has value for property          
+
+ ) /*$wgDBTableOptions*/;
+
