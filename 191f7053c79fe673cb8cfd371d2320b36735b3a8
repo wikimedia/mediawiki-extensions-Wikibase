@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_83769137",
+        "filename": "repo/includes/Store/Sql/SqlSiteLinkConflictLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-07T10:00:31Z",
+      "side": 1,
+      "message": "Yeah, I meant it seems like it is a right time to add the constructor to this class. I\u0027m fine in adding it in the follow up.",
+      "parentUuid": "2ef897d1_80532c6e",
+      "revId": "191f7053c79fe673cb8cfd371d2320b36735b3a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_05174e57",
         "filename": "repo/includes/Store/Sql/SqlSiteLinkConflictLookup.php",
         "patchSetId": 3
