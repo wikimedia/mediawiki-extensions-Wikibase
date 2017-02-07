@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_fdfb9d0f",
+        "filename": "phpcs.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-07T17:05:25Z",
+      "side": 1,
+      "message": "I\u0027m not sure if it is a good way to depend on external config.\n\nI would suggest to attach `mediawiki-codesniffer` repository as submodule and depend on config that way. Or, may be, even copy-paste current version into this repository and modify it.\n\nWhat do you think?",
+      "range": {
+        "startLine": 4,
+        "startChar": 12,
+        "endLine": 4,
+        "endChar": 60
+      },
+      "revId": "56673f354f461d07ad9974864fbd17fd0b6330df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
