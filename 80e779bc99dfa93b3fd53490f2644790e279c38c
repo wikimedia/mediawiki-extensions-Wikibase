@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_def69cd3",
+        "filename": "client/includes/Store/RepositoryServiceWiring.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-07T12:11:28Z",
+      "side": 1,
+      "message": "Maybe better: \"The WikiPageEntityMetaDataAccessor service is expected to implement EntityPrefetcher interface.\"",
+      "revId": "80e779bc99dfa93b3fd53490f2644790e279c38c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
