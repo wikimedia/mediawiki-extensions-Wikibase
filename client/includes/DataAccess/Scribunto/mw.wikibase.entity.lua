@@ -39,7 +39,6 @@ entity.create = function( data )
 	end
 
 	local entity = logTableAccess(data)
-	-- local entity = data
 	setmetatable( entity, metatable )
 
 	return entity
