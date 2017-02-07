@@ -36,7 +36,9 @@ class ReferenceListDeserializer implements Deserializer {
 	 * @return ReferenceList
 	 */
 	public function deserialize( $serialization ) {
-		$this->assertIsArray( $serialization );
+		if ( !is_array( $serialization ) ) {
+			throw new DeserializationException( 'The ReferenceList serialization should be an array' );
+		}
 
 		return $this->getDeserialized( $serialization );
 	}
@@ -56,12 +58,6 @@ class ReferenceListDeserializer implements Deserializer {
 		}
 
 		return $referenceList;
-	}
-
-	private function assertIsArray( $serialization ) {
-		if ( !is_array( $serialization ) ) {
-			throw new DeserializationException( 'The ReferenceList serialization should be an array' );
-		}
 	}
 
 }
