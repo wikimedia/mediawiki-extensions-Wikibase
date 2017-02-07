@@ -80,7 +80,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
-			[ 'P342#L.de', 'Q32487#O' ],
+			[ 'P342#L.de', 'Q32487#O', 'Q32487#C.P342' ],
 			array_keys( $usageAccumulator->getUsages() )
 		);
 	}
@@ -92,7 +92,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
-			[ 'Q32487#O' ],
+			[ 'Q32487#O', 'Q32487#C.P342' ],
 			array_keys( $usageAccumulator->getUsages() )
 		);
 	}
@@ -104,7 +104,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
-			[ 'Q32488#O' ],
+			[ 'Q32488#O', 'Q32488#C.P342' ],
 			array_keys( $usageAccumulator->getUsages() )
 		);
 	}
@@ -116,7 +116,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
-			[ 'Q32489#O' ],
+			[ 'Q32489#O', 'Q32489#C.P342' ],
 			array_keys( $usageAccumulator->getUsages() )
 		);
 	}
@@ -128,7 +128,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
-			[ 'Q1234567#O' ],
+			[ 'Q1234567#O', 'Q1234567#C.P342' ],
 			array_keys( $usageAccumulator->getUsages() )
 		);
 	}
@@ -143,7 +143,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
-			[ 'Q32487#O' ],
+			[ 'Q32487#O' ], // 'Q32487#C.P2147483645' is not tracked, as P2147483645 doesn't exist
 			array_keys( $usageAccumulator->getUsages() )
 		);
 	}

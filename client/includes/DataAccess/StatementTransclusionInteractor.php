@@ -100,16 +100,24 @@ class StatementTransclusionInteractor {
 			return '';
 		}
 
+		// Currently statement usage implies other usage.
 		$this->usageAccumulator->addOtherUsage( $entityId );
+
+		// If the entity doesn't exist, we just want to resolve the property id
+		// for usage tracking purposes, so don't let the exception bubble up.
+		$shouldThrow = $entity !== null;
+
+		$propertyId = $this->resolvePropertyId( $propertyLabelOrId, $shouldThrow );
+
+		if ( $propertyId ) {
+			// XXX: This means we only track a statement usage if the property id /label
+			// can be resolved. This requires the property to exist!
+			$this->usageAccumulator->addStatementUsage( $entityId, $propertyId );
+		}
 
 		if ( $entity === null ) {
 			return '';
 		}
-
-		$propertyId = $this->propertyIdResolver->resolvePropertyId(
-			$propertyLabelOrId,
-			$this->language->getCode()
-		);
 
 		$snaks = $this->snaksFinder->findSnaks(
 			$entity,
@@ -118,6 +126,31 @@ class StatementTransclusionInteractor {
 		);
 
 		return $this->formatSnaks( $snaks );
+	}
+
+	/**
+	 * @param string $propertyLabelOrId property label or ID (Pxxx)
+	 * @param bool $shouldThrow Whether PropertyLabelNotResolvedException should be thrown
+	 *
+	 * @return PropertyId|null
+	 *
+	 * @throws PropertyLabelNotResolvedException
+	 */
+	private function resolvePropertyId( $propertyLabelOrId, $shouldThrow ) {
+		try {
+			$propertyId = $this->propertyIdResolver->resolvePropertyId(
+				$propertyLabelOrId,
+				$this->language->getCode()
+			);
+		} catch ( PropertyLabelNotResolvedException $propertyLabelNotResolvedException ) {
+			if ( !$shouldThrow ) {
+				return null;
+			}
+
+			throw $propertyLabelNotResolvedException;
+		}
+
+		return $propertyId;
 	}
 
 	/**
