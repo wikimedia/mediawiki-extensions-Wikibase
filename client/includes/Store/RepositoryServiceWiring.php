@@ -17,6 +17,13 @@ use Wikibase\TermSqlIndex;
 
 return [
 
+	'EntityPrefetcher' => function(
+		RepositoryServiceContainer $services,
+		WikibaseClient $client
+	) {
+		return $services->getService( 'WikiPageEntityMetaDataAccessor' );
+	},
+
 	'EntityRevisionLookup' => function(
 		RepositoryServiceContainer $services,
 		WikibaseClient $client

@@ -11,6 +11,7 @@ use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
+use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\DirectSqlStore;
@@ -51,6 +52,9 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 
 		$dispatchingServiceFactory = new DispatchingServiceFactory( $containerFactory, [] );
 
+		$dispatchingServiceFactory->defineService( 'EntityPrefetcher', function() {
+			return new NullEntityPrefetcher();
+		} );
 		$dispatchingServiceFactory->defineService( 'EntityRevisionLookup', function() {
 			return $this->getMock( EntityRevisionLookup::class );
 		} );

@@ -6,6 +6,7 @@ use Wikibase\Client\DispatchingServiceFactory;
 use Wikibase\Client\Store\RepositoryServiceContainerFactory;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
@@ -48,6 +49,7 @@ class DispatchingServiceWiringTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideServices() {
 		return [
+			[ 'EntityPrefetcher', EntityPrefetcher::class ],
 			[ 'EntityRevisionLookup', EntityRevisionLookup::class ],
 			[ 'PropertyInfoLookup', PropertyInfoLookup::class ],
 			[ 'TermBuffer', TermBuffer::class ],
@@ -69,7 +71,7 @@ class DispatchingServiceWiringTest extends \PHPUnit_Framework_TestCase {
 		$factory = $this->getDispatchingServiceFactory();
 
 		$this->assertEquals(
-			[ 'EntityRevisionLookup', 'PropertyInfoLookup', 'TermBuffer' ],
+			[ 'EntityPrefetcher', 'EntityRevisionLookup', 'PropertyInfoLookup', 'TermBuffer' ],
 			$factory->getServiceNames()
 		);
 	}
