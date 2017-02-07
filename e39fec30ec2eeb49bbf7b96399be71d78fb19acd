@@ -2,6 +2,91 @@
   "comments": [
     {
       "key": {
+        "uuid": "2ef897d1_de81fcfe",
+        "filename": "client/includes/Store/RepositoryServiceWiring.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-07T12:56:44Z",
+      "side": 1,
+      "message": "This should be move to RepositoryServiceContainer, so DispatchingServiceFactory can also access it, and we don\u0027t create multiple BufferingTermLookups for a single repository.",
+      "revId": "e39fec30ec2eeb49bbf7b96399be71d78fb19acd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_5e8cec31",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-07T12:56:44Z",
+      "side": 1,
+      "message": "WikibaseClient::newTermSearchInteractor should be also using the service factory.",
+      "revId": "e39fec30ec2eeb49bbf7b96399be71d78fb19acd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_7ec8c877",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-07T12:56:44Z",
+      "side": 1,
+      "message": "Add a note that mapping may change so it is 1:n mapping.",
+      "revId": "e39fec30ec2eeb49bbf7b96399be71d78fb19acd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_5ea62cbf",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-07T12:56:44Z",
+      "side": 1,
+      "message": "Add a warning like \"Same entity type for multiple repositories not supported yet\".",
+      "revId": "e39fec30ec2eeb49bbf7b96399be71d78fb19acd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_feaf1876",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceWiringTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-07T12:56:44Z",
+      "side": 1,
+      "message": "too many arrays I guess.",
+      "revId": "e39fec30ec2eeb49bbf7b96399be71d78fb19acd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_ed21cbf7",
         "filename": "client/tests/phpunit/includes/Store/Sql/DirectSqlStoreTest.php",
         "patchSetId": 12
