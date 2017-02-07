@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_19b9eee6",
+        "filename": "client/includes/Store/RepositoryServiceWiring.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-07T16:08:57Z",
+      "side": 1,
+      "message": "Done. I am wondering whether this change should be moved to a separate patch (preceding this one).",
+      "parentUuid": "2ef897d1_de81fcfe",
+      "revId": "e39fec30ec2eeb49bbf7b96399be71d78fb19acd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_5e8cec31",
         "filename": "client/includes/WikibaseClient.php",
         "patchSetId": 12
@@ -30,6 +48,24 @@
       "writtenOn": "2017-02-07T12:56:44Z",
       "side": 1,
       "message": "WikibaseClient::newTermSearchInteractor should be also using the service factory.",
+      "revId": "e39fec30ec2eeb49bbf7b96399be71d78fb19acd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_d9a0f68f",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-07T16:08:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_5e8cec31",
       "revId": "e39fec30ec2eeb49bbf7b96399be71d78fb19acd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_799fc262",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-07T16:08:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_7ec8c877",
+      "revId": "e39fec30ec2eeb49bbf7b96399be71d78fb19acd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_5ea62cbf",
         "filename": "client/includes/WikibaseClient.php",
         "patchSetId": 12
@@ -64,6 +118,24 @@
       "writtenOn": "2017-02-07T12:56:44Z",
       "side": 1,
       "message": "Add a warning like \"Same entity type for multiple repositories not supported yet\".",
+      "revId": "e39fec30ec2eeb49bbf7b96399be71d78fb19acd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_99a4beb0",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-07T16:08:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_5ea62cbf",
       "revId": "e39fec30ec2eeb49bbf7b96399be71d78fb19acd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_f983b255",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceWiringTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-07T16:08:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_feaf1876",
+      "revId": "e39fec30ec2eeb49bbf7b96399be71d78fb19acd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_ed21cbf7",
         "filename": "client/tests/phpunit/includes/Store/Sql/DirectSqlStoreTest.php",
         "patchSetId": 12
@@ -98,6 +188,24 @@
       "writtenOn": "2017-02-02T09:38:14Z",
       "side": 1,
       "message": "Constructor only takes three parameters. This one got missed during one of rebase rounds. Additional empty array here does not have any effect, though. Will remove.",
+      "revId": "e39fec30ec2eeb49bbf7b96399be71d78fb19acd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_398a6a6f",
+        "filename": "client/tests/phpunit/includes/Store/Sql/DirectSqlStoreTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-07T16:08:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_ed21cbf7",
       "revId": "e39fec30ec2eeb49bbf7b96399be71d78fb19acd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
