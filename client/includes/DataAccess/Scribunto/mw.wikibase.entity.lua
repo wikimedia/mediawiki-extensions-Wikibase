@@ -58,18 +58,20 @@ logTableAccess = function(entity)
 	pseudoClaimsMetatable = {}
 	pseudoClaimsMetatable.__index = function(emptyTable, propertyID)
 		-- Need entity id: Is it entity['id']?
-		-- Write entity id and property id to DB
+		-- If entry for entity and property does not already exist, write entity id and property id to DB, set flag if actualEntityClaims.propertyID is not nil. 
 		return actualEntityClaims[propertyID]
 	end
 
 	pseudoClaimsMetatable.__newindex = function(emptyTable, propertyID, data)
+		-- Need entity id: Is it entity['id']?
+		-- Write entity id and property id to DB. Also flag as user specified value.
 		actualEntityClaims[propertyID] = data
 	end
 
 	logNext = function(emptyTable, propertyID)
 		if propertyID ~= nil then
 			-- Need entity id: Is it entity['id']?
-			-- Write entity id and property id to DB
+			-- If entry for entity and property does not already exist, write entity id and property id to DB, set flag if actualEntityClaims.propertyID is not nil. 
 		end
 		return next(actualEntityClaims, propertyID)
 	end
