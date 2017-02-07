@@ -4,7 +4,8 @@
 			"FocalPoint",
 			"Geraki",
 			"Nikosguard",
-			"Glavkos"
+			"Glavkos",
+			"Protnet"
 		]
 	},
 	"wikibase-client-desc": "Πελάτης για την επέκταση Wikibase",
@@ -46,7 +47,7 @@
 	"wikibase-rc-show-wikidata-pref": "Εμφάνιση επεξεργασιών {{WBREPONAME}} στις πρόσφατες αλλαγές",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Επεξεργασία {{WBREPONAME}}",
-	"wikibase-replicationnote": "Παρακαλώ να λάβετε υπόψη ότι έως ότου οι αλλαγές γίνουν ορατές σε όλα τα wiki μπορεί να περάσουν μερικά λεπτά.",
+	"wikibase-replicationnote": "Παρακαλούμε λάβετε υπόψιν σας ότι μπορεί να περάσουν αρκετά λεπτά έως ότου οι αλλαγές να γίνουν ορατές σε όλα τα wiki.",
 	"wikibase-watchlist-show-changes-pref": "Εμφάνιση αλλαγών {{WBREPONAME}} στη λίστα παρακολούθησης σας",
 	"wikibase-error-serialize-error": "Η σειριοποίηση δεδομένων απέτυχε",
 	"wikibase-error-invalid-entity-id": "Το κωδικός που θέσατε δεν αναγνωρίστηκε από το σύστημα. Παρακαλούμε χρησιμοποιήστε έναν έγκυρο κωδικό.",

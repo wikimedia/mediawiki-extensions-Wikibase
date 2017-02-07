@@ -10,7 +10,8 @@
 			"ערן",
 			"פוילישער",
 			"Guycn2",
-			"LaG roiL"
+			"LaG roiL",
+			"Esh77"
 		]
 	},
 	"wikibase-desc": "מאגר נתונים מובְנים",
@@ -71,7 +72,7 @@
 	"wikibase-statementsection-statements": "קביעוֹת",
 	"wikibase-sitelinks": "קישורי אתר",
 	"wikibase-sitelinkgroupview-input-help-message": "הוספת קישור אתר על־ידי ציון אתר ודף באותו האתר, עריכה או הסרה של קישורי אתר קיימים.",
-	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|עיול|עיולים}}",
+	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|רשומה|רשומות}}",
 	"wikibase-sitelinks-empty": "שום דף אינו מקושר לפריט הזה",
 	"wikibase-sitelinks-special": "אתרים אחרים",
 	"wikibase-badgeselector-badge-placeholder-title": "יש ללחוץ כאן לשיוך סמל.",
@@ -165,7 +166,7 @@
 	"wikibase-itemdisambiguation-search": "באפשרותך [$1 לחפש פריט].",
 	"wikibase-itemdisambiguation-create": "אפשר גם [$1 ליצור את הפריט].",
 	"wikibase-itemdisambiguation-invalid-langcode": "מצטערים, קוד השפה שהזנת אינו ידוע למערכת. נא להשתמש בקוד תקין כגון \"en\".",
-	"wikibase-itemdisambiguation-description": "ערכים שמשמשים לחיפוש צריכים להיות עיול טקסט שלם. שפה היא מזהה, כגון \"en\".",
+	"wikibase-itemdisambiguation-description": "ערכים שמשמשים לחיפוש צריכים להיות רשומת טקסט שלמה. שפה היא מזהה, כגון \"en\".",
 	"wikibase-itemdisambiguation-summary": "חיפוש כל הפריטים עם אותה תווית בדיוק.",
 	"special-newproperty": "יצירת מאפיין חדש",
 	"wikibase-newproperty-summary": "נא [[Special:PropertyDisambiguation|לבדוק אם המאפיין כבר קיים]]!<br />כדאי לך ליצור [[{{int:Wikibase-label-helppage}}|תווית]] ו[[{{int:Wikibase-description-helppage}}|תיאור]] לכל המאפיינים החדשים ובנוסף סוג תקין למאפיין.",

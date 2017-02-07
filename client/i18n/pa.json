@@ -3,7 +3,8 @@
 		"authors": [
 			"Babanwalia",
 			"Satdeep gill",
-			"Tow"
+			"Tow",
+			"Sony dandiwal"
 		]
 	},
 	"tooltip-t-wikibase": "ਡਾਟਾ ਭੰਡਾਰ ਦੀ ਆਈਟਮ ਨਾਲ ਲਿੰਕ ਕਰੋ",
@@ -13,7 +14,7 @@
 	"wikibase-editlinkstitle": "ਅੰਤਰਭਾਸ਼ਾਈ ਜੋੜ ਸੋਧੋ",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "ਲੁਕਾਉ",
-	"wikibase-rc-hide-wikidata-show": "ਵਿਖਾਉ",
+	"wikibase-rc-hide-wikidata-show": "ਵਿਖਾਓ",
 	"wikibase-rc-wikibase-edit-letter": "ਡ",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ਸੋਧੋ",
 	"wikibase-otherprojects": "ਹੋਰ ਪ੍ਰਾਜੈਕਟਾਂ ਵਿੱਚ"
