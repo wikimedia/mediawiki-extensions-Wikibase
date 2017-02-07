@@ -18,6 +18,7 @@ use Wikibase\Client\PropertyLabelNotResolvedException;
  *
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
+ * @author Andrew Hall
  */
 class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 
@@ -77,6 +78,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 			$richWikitextTransclusionInteractor,
 			$wikibaseClient->getEntityIdParser(),
 			$lang,
+			$this->getUsageAccumulator(),
 			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
 		);
 	}
@@ -121,6 +123,19 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
+	 * Add a statement usage (called once specific statements are accessed).
+	 *
+	 * @param string $entityId The Entity from which the statements were accessed.
+	 * @param string $propertyId Property id of the statements accessed.
+	 * @param bool $propertyExists
+	 */
+	public function addStatementUsage( $entityId, $propertyId, $propertyExists ) {
+		// TODO: Feature flag!!
+
+		$this->getImplementation()->addStatementUsage( $entityId, $propertyId );
+	}
+
+	/**
 	 * Register mw.wikibase.entity.lua library
 	 *
 	 * @return array
@@ -134,6 +149,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 			'getLanguageCode' => [ $this, 'getLanguageCode' ],
 			'formatStatements' => [ $this, 'formatStatements' ],
 			'formatPropertyValues' => [ $this, 'formatPropertyValues' ],
+			'addStatementUsage' => [ $this, 'addStatementUsage' ],
 		];
 
 		return $this->getEngine()->registerInterface(

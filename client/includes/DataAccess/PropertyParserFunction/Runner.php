@@ -103,6 +103,7 @@ class Runner {
 		$result = $this->buildResult( $rendered );
 
 		// Track usage of "other" (that is, not label/title/sitelinks) data from the item.
+		// TODO: We also need to track the statement usage here!
 		$usageAcc = new ParserOutputUsageAccumulator( $parser->getOutput() );
 		$usageAcc->addOtherUsage( $entityId );
 

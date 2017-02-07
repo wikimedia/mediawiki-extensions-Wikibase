@@ -4,6 +4,7 @@ namespace Wikibase\Client\DataAccess\Scribunto;
 
 use Language;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
+use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityIdParser;
 
 /**
@@ -35,6 +36,11 @@ class WikibaseLuaEntityBindings {
 	private $language;
 
 	/**
+	 * @var UsageAccumulator
+	 */
+	private $usageAccumulator;
+
+	/**
 	 * @var string
 	 */
 	private $siteId;
@@ -44,6 +50,7 @@ class WikibaseLuaEntityBindings {
 	 * @param StatementTransclusionInteractor $richWikitextTransclusionInteractor
 	 * @param EntityIdParser $entityIdParser
 	 * @param Language $language
+	 * @param UsageAccumulator $usageAccumulator
 	 * @param string $siteId
 	 */
 	public function __construct(
@@ -51,12 +58,14 @@ class WikibaseLuaEntityBindings {
 		StatementTransclusionInteractor $richWikitextTransclusionInteractor,
 		EntityIdParser $entityIdParser,
 		Language $language,
+		UsageAccumulator $usageAccumulator,
 		$siteId
 	) {
 		$this->plainTextTransclusionInteractor = $plainTextTransclusionInteractor;
 		$this->richWikitextTransclusionInteractor = $richWikitextTransclusionInteractor;
 		$this->entityIdParser = $entityIdParser;
 		$this->language = $language;
+		$this->usageAccumulator = $usageAccumulator;
 		$this->siteId = $siteId;
 	}
 
@@ -98,6 +107,20 @@ class WikibaseLuaEntityBindings {
 			$propertyLabelOrId,
 			$acceptableRanks
 		);
+	}
+
+	/**
+	 * Add a statement usage (called once specific statements are accessed).
+	 *
+	 * @param string $entityId The Entity from which the statements were accessed.
+	 * @param string $propertyId Property id of the statements accessed.
+	 * @param bool $propertyExists
+	 */
+	public function addStatementUsage( $entityId, $propertyId ) {
+		$entityId = $this->entityIdParser->parse( $entityId );
+		$propertyId = $this->entityIdParser->parse( $propertyId );
+
+		$this->usageAccumulator->addStatementUsage( $entityId, $propertyId );
 	}
 
 	/**
