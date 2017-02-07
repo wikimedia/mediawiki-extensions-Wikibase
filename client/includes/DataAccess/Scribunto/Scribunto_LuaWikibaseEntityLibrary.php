@@ -120,6 +120,13 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
+	 * @return
+	 */
+	public function updateStatementTracking( $entityId, $propertyId, $propertyExists ) {
+		// Call usage accumulator?
+	}
+
+	/**
 	 * Register mw.wikibase.entity.lua library
 	 *
 	 * @return array
@@ -133,6 +140,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 			'getLanguageCode' => [ $this, 'getLanguageCode' ],
 			'formatStatements' => [ $this, 'formatStatements' ],
 			'formatPropertyValues' => [ $this, 'formatPropertyValues' ],
+			'updateStatementTracking' => [ $this, 'updateStatementTracking' ],
 		];
 
 		return $this->getEngine()->registerInterface(
