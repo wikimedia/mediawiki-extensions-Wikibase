@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_3daa556e",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-07T18:03:27Z",
+      "side": 1,
+      "message": "Having a parametrized factory function in the top level factory is really annoying. Can\u0027t we just expose getTermSearchInteractorFactory() here?\n\nBut maybe that\u0027s for a separate patch.",
+      "revId": "d4a9ae905bbf80a046ac8621ce728b2194ece4a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_bd952537",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-07T18:03:27Z",
+      "side": 1,
+      "message": "It would be nice if we could get rid of this method entirely, and expose getTermSearchInteractorFactory() instead.\n\nThis would be really easy if we created an implementation of EntityDataServiceRetrievalFactory for the repo-specific case.\n\n(That\u0027s for two separate patches, though - not for this one here)",
+      "revId": "d4a9ae905bbf80a046ac8621ce728b2194ece4a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
