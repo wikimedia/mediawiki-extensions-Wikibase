@@ -1,6 +1,7 @@
 <?php
 
 use Wikibase\Client\DispatchingServiceFactory;
+use Wikibase\Lib\Store\DispatchingEntityPrefetcher;
 use Wikibase\Lib\Store\DispatchingEntityRevisionLookup;
 use Wikibase\Lib\Store\DispatchingPropertyInfoLookup;
 use Wikibase\Lib\Store\DispatchingTermBuffer;
@@ -12,6 +13,12 @@ use Wikibase\TermIndex;
  */
 
 return [
+
+	'EntityPrefetcher' => function( DispatchingServiceFactory $dispatchingServiceFactory ) {
+		return new DispatchingEntityPrefetcher(
+			$dispatchingServiceFactory->getServiceMap( 'EntityPrefetcher' )
+		);
+	},
 
 	'EntityRevisionLookup' => function( DispatchingServiceFactory $dispatchingServiceFactory ) {
 		return new DispatchingEntityRevisionLookup(
