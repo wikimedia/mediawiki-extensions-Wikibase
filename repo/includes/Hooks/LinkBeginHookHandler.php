@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Hooks;
 use Action;
 use DummyLinker;
 use Language;
-use Linker;
+use MediaWiki\MediaWikiServices;
 use RequestContext;
 use SpecialPageFactory;
 use Title;
@@ -162,7 +162,7 @@ class LinkBeginHookHandler {
 		// to indicate that the logged action occurred while creating an entity.
 		if ( SpecialPageFactory::exists( $targetText ) ) {
 			$target = Title::makeTitle( NS_SPECIAL, $targetText );
-			$html = Linker::linkKnown( $target );
+			$html = MediaWikiServices::getInstance()->getLinkRenderer()->makeKnownLink( $target );
 
 			return;
 		}

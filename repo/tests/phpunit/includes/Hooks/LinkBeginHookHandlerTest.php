@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Hooks;
 
 use Language;
-use Linker;
+use MediaWiki\MediaWikiServices;
 use RequestContext;
 use SpecialPageFactory;
 use Title;
@@ -164,7 +164,10 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 			SpecialPageFactory::getLocalNameFor( $linkTitle )
 		);
 
-		$this->assertContains( Linker::linkKnown( $specialPageTitle ), $html );
+		$this->assertContains(
+			MediaWikiServices::getInstance()->getLinkRenderer()->makeKnownLink( $specialPageTitle ),
+			$html
+		);
 		$this->assertContains( $specialPageTitle->getFullText(), $html );
 	}
 
