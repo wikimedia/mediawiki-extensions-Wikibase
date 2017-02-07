@@ -6,8 +6,10 @@ use Language;
 use PHPUnit_Framework_TestCase;
 use Wikibase\Client\DataAccess\Scribunto\WikibaseLuaEntityBindings;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
+use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
@@ -23,9 +25,13 @@ use Wikibase\DataModel\Statement\Statement;
 class WikibaseLuaEntityBindingsTest extends PHPUnit_Framework_TestCase {
 
 	/**
+	 * @param HashUsageAccumulator|null $usageAccumulator
+	 *
 	 * @return WikibaseLuaEntityBindings
 	 */
-	private function getWikibaseLuaEntityBindings() {
+	private function getWikibaseLuaEntityBindings( HashUsageAccumulator $usageAccumulator = null ) {
+		$usageAccumulator = $usageAccumulator ?: new HashUsageAccumulator();
+
 		$plainTextTransclusionInteractor = $this->getMockBuilder( StatementTransclusionInteractor::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -47,8 +53,9 @@ class WikibaseLuaEntityBindingsTest extends PHPUnit_Framework_TestCase {
 		return new WikibaseLuaEntityBindings(
 			$plainTextTransclusionInteractor,
 			$richWikitextTransclusionInteractor,
-			new ItemIdParser(),
+			new BasicEntityIdParser(),
 			Language::factory( 'es' ),
+			$usageAccumulator,
 			'enwiki'
 		);
 	}
@@ -76,6 +83,22 @@ class WikibaseLuaEntityBindingsTest extends PHPUnit_Framework_TestCase {
 				'some label',
 				[ Statement::RANK_DEPRECATED ]
 			)
+		);
+	}
+
+	public function testAddStatementUsage() {
+		$q2013 = new ItemId( 'Q2013' );
+		$usageAccumulator = new HashUsageAccumulator();
+
+		$wikibaseLuaEntityBindings = $this->getWikibaseLuaEntityBindings( $usageAccumulator );
+		$wikibaseLuaEntityBindings->addStatementUsage( $q2013->getSerialization(), 'P1337', true );
+
+		$this->assertCount( 1, $usageAccumulator->getUsages() );
+		$this->assertEquals(
+			[
+				'Q2013#C.P1337' => new EntityUsage( $q2013, EntityUsage::STATEMENT_USAGE, 'P1337' )
+			],
+			$usageAccumulator->getUsages()
 		);
 	}
 
