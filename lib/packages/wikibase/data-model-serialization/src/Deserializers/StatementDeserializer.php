@@ -81,8 +81,20 @@ class StatementDeserializer implements DispatchableDeserializer {
 	 * @return Statement
 	 */
 	public function deserialize( $serialization ) {
-		$this->assertCanDeserialize( $serialization );
-		$this->requireAttribute( $serialization, 'mainsnak' );
+		// Note: The following functions have been inlined on purpose, see T157013.
+		if ( !is_array( $serialization ) || !array_key_exists( 'type', $serialization ) ) {
+			throw new MissingTypeException();
+		}
+
+		if ( $serialization['type'] !== 'claim' && $serialization['type'] !== 'statement' ) {
+			throw new UnsupportedTypeException( $serialization['type'] );
+		}
+
+		if ( !array_key_exists( 'mainsnak', $serialization ) ) {
+			throw new MissingAttributeException(
+				'mainsnak'
+			);
+		}
 
 		return $this->getDeserialized( $serialization );
 	}
@@ -97,19 +109,24 @@ class StatementDeserializer implements DispatchableDeserializer {
 		$mainSnak = $this->snakDeserializer->deserialize( $serialization['mainsnak'] );
 		$statement = new Statement( $mainSnak );
 
-		$this->setGuidFromSerialization( $serialization, $statement );
-		$this->setQualifiersFromSerialization( $serialization, $statement );
-		$this->setRankFromSerialization( $serialization, $statement );
-		$this->setReferencesFromSerialization( $serialization, $statement );
+		// Note: The following ifs are inlined on purpose, see T157013.
+		if ( array_key_exists( 'id', $serialization ) ) {
+			$this->setGuidFromSerialization( $serialization, $statement );
+		}
+		if ( array_key_exists( 'qualifiers', $serialization ) ) {
+			$this->setQualifiersFromSerialization( $serialization, $statement );
+		}
+		if ( array_key_exists( 'rank', $serialization ) ) {
+			$this->setRankFromSerialization( $serialization, $statement );
+		}
+		if ( array_key_exists( 'references', $serialization ) ) {
+			$this->setReferencesFromSerialization( $serialization, $statement );
+		}
 
 		return $statement;
 	}
 
 	private function setGuidFromSerialization( array $serialization, Statement $statement ) {
-		if ( !array_key_exists( 'id', $serialization ) ) {
-			return;
-		}
-
 		if ( !is_string( $serialization['id'] ) ) {
 			throw new DeserializationException( 'The id ' . $serialization['id'] . ' is not a valid GUID.' );
 		}
@@ -118,10 +135,6 @@ class StatementDeserializer implements DispatchableDeserializer {
 	}
 
 	private function setQualifiersFromSerialization( array $serialization, Statement $statement ) {
-		if ( !array_key_exists( 'qualifiers', $serialization ) ) {
-			return;
-		}
-
 		/** @var SnakList $qualifiers */
 		$qualifiers = $this->snaksDeserializer->deserialize( $serialization['qualifiers'] );
 
@@ -135,10 +148,6 @@ class StatementDeserializer implements DispatchableDeserializer {
 	}
 
 	private function setRankFromSerialization( array $serialization, Statement $statement ) {
-		if ( !array_key_exists( 'rank', $serialization ) ) {
-			return;
-		}
-
 		if ( !array_key_exists( $serialization['rank'], $this->rankIds ) ) {
 			throw new DeserializationException( 'The rank ' . $serialization['rank'] . ' is not a valid rank.' );
 		}
@@ -147,31 +156,9 @@ class StatementDeserializer implements DispatchableDeserializer {
 	}
 
 	private function setReferencesFromSerialization( array $serialization, Statement $statement ) {
-		if ( !array_key_exists( 'references', $serialization ) ) {
-			return;
-		}
-
 		/** @var ReferenceList $references */
 		$references = $this->referencesDeserializer->deserialize( $serialization['references'] );
 		$statement->setReferences( $references );
-	}
-
-	private function assertCanDeserialize( $serialization ) {
-		if ( !$this->hasType( $serialization ) ) {
-			throw new MissingTypeException();
-		}
-
-		if ( !$this->hasCorrectType( $serialization ) ) {
-			throw new UnsupportedTypeException( $serialization['type'] );
-		}
-	}
-
-	private function requireAttribute( array $array, $attributeName ) {
-		if ( !array_key_exists( $attributeName, $array ) ) {
-			throw new MissingAttributeException(
-				$attributeName
-			);
-		}
 	}
 
 	private function assertQualifiersOrderIsArray( array $serialization ) {
