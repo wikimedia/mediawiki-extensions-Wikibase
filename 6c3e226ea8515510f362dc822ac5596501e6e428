@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_3dd81522",
+        "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-07T18:12:29Z",
+      "side": 1,
+      "message": "The EntityRdfBuilders will need an RdfWriter - which will have to be passed into this method, or into the factory\u0027s constructor (but then the Factory can no longer be a singleton service). Similarly, it will need the RdfVocabulary.\n\nIt should probably also know the desired output flavor.\n\nThe factory may also need to know the entity type to decide what EntityRdfBuilders are needed. Perhaps it would even be better to supply the concrete Entity object, so the factory can check which interfaces it implements.\n\nCOmpare the signature of ValueSnakRdfBuilderFactory::getValueSnakRdfBuilder",
+      "revId": "6c3e226ea8515510f362dc822ac5596501e6e428",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
