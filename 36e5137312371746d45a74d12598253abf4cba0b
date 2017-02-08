@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_fa4cb67a",
+        "filename": "repo/includes/Api/EntityPrefixSearchProfiles.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-02-08T23:05:48Z",
+      "side": 1,
+      "message": "moved files to elastic directory and configs to config directory.",
+      "parentUuid": "2ef897d1_dc0b3ad8",
+      "revId": "36e5137312371746d45a74d12598253abf4cba0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_178bf2c5",
         "filename": "repo/includes/Api/EntitySearchElastic.php",
         "patchSetId": 20
