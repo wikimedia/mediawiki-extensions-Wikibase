@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_32ecbc1f",
+        "filename": "repo/tests/phpunit/includes/Hooks/LinkBeginHookHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-08T15:21:51Z",
+      "side": 1,
+      "message": "Usage of this constant makes test confusing because it is required to know values of all three constants to understand what is happening which makes constants usage bring more confusion than clarity.\n\nI would rather suggest to use: \n`self::FOREIGN_REPO_PREFIX . \u0027:\u0027 . self::ITEM_FOREIGN_NO_DATA_NO_PREFIX`\ninstead",
+      "range": {
+        "startLine": 305,
+        "startChar": 40,
+        "endLine": 305,
+        "endChar": 66
+      },
+      "revId": "dd229696e951d94748c7321aecfcdab4b6346ba9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_12be60fa",
+        "filename": "repo/tests/phpunit/includes/Hooks/LinkBeginHookHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-08T15:21:51Z",
+      "side": 1,
+      "message": "Suggest to extract a variable - takes time to understand the relation with line in the beginning otherwise.",
+      "range": {
+        "startLine": 326,
+        "startChar": 22,
+        "endLine": 326,
+        "endChar": 25
+      },
+      "revId": "dd229696e951d94748c7321aecfcdab4b6346ba9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
