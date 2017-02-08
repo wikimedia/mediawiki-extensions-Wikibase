@@ -1,0 +1,129 @@
+<?php
+
+namespace Wikibase\Lib;
+
+use InvalidArgumentException;
+use Wikibase\DataModel\Assert\RepositoryNameAssert;
+use Wikimedia\Assert\Assert;
+
+/**
+ * Service providing access to repository settings.
+ *
+ * Repositories are identified by strings. A specially empty string name is used for the local repository.
+ *
+ * Each repository definition is an associative array with following keys:
+ *  - database: symbolic name of the database (string or false),
+ *  - entity-types: list of entity names the repository provides (array of strings).
+ *  - prefix-mapping: map of repository prefixes used in the repository (@see docs/foreign-entity-ids.wiki
+ *    in the Data Model component for documention on prefix mapping).
+ *
+ * Note: currently single entity type is mapped to a single repository. This might change in the future
+ * and a particular entity type might be provided by multiple repositories.
+ *
+ * @see docs/options.wiki for documentation on Client's "foreignRepositories" settings defining configuration
+ * of foreign repositories..
+ *
+ * @license GPL-2.0+
+ */
+class RepositoryDefinitions {
+
+	/**
+	 * @var array
+	 */
+	private $repositoryDefinitions = [];
+
+	/**
+	 * @var string[]
+	 */
+	private $entityTypeToRepositoryMapping = [];
+
+	/**
+	 * @param array $repositoryDefinitions Associative array mapping repository names to an array of
+	 * repository settings. Emtpty-string key stands for local repository.
+	 *
+	 * @throws InvalidArgumentException if $repositoryDefinitions has invalid format
+	 */
+	public function __construct( array $repositoryDefinitions ) {
+		RepositoryNameAssert::assertParameterKeysAreValidRepositoryNames( $repositoryDefinitions, '$repositoryDefinitions' );
+		Assert::parameterElementType( 'array', $repositoryDefinitions, '$repositoryDefinitions' );
+		Assert::parameter(
+			array_key_exists( '', $repositoryDefinitions ),
+			'$repositoryDefinitions',
+			'must containg definition of the local repository (empty-string key)'
+		);
+		// TODO: check that at least 'database' and 'entity-types' are defined for each repository?
+
+		$this->repositoryDefinitions = $repositoryDefinitions;
+
+		$this->buildEntityTypeToRepositoryMapping();
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getRepositoryNames() {
+		return array_keys( $this->repositoryDefinitions );
+	}
+
+	/**
+	 * @return array Associative array (string => string|false) mapping repository names to database symbolic names
+	 */
+	public function getDatabaseNames() {
+		return $this->getMapForDefinitionField( 'database' );
+	}
+
+	/**
+	 * @return array[] Associative array (string => array) mapping repository names to prefix mapping for the repository,
+	 */
+	public function getPrefixMappings() {
+		return $this->getMapForDefinitionField( 'prefix-mapping' );
+	}
+
+	/**
+	 * @return string[] Associative array (string => string) mapping entity types to repository names which provide
+	 * entities of the given type.
+	 */
+	public function getEntityTypeToRepositoryMapping() {
+		return $this->entityTypeToRepositoryMapping;
+	}
+
+	private function buildEntityTypeToRepositoryMapping() {
+		foreach ( $this->repositoryDefinitions as $repositoryName => $definition ) {
+			if ( !isset( $definition['entity-types'] ) ) {
+				continue;
+			}
+
+			foreach ( $definition['entity-types'] as $entityType ) {
+				if ( isset( $this->entityTypeToRepositoryMapping[$entityType] ) ) {
+					wfWarn( 'Using same entity types on multiple repositories is not supported yet. '
+						. '"' . $entityType . '" has already be defined for repository '
+						. '"' . $this->entityTypeToRepositoryMapping[$entityType] .'"'
+					);
+					continue;
+				}
+
+				$this->entityTypeToRepositoryMapping[$entityType] = $repositoryName;
+			}
+		}
+	}
+
+	/**
+	 * @param string $field
+	 *
+	 * @return array Associative array mapping repository names to values of $field in
+	 * the repository definition provided to the class constructor.
+	 * Repositories without value defined for $field are skipped in the result map.
+	 */
+	private function getMapForDefinitionField( $field ) {
+		$values = [];
+
+		foreach ( $this->repositoryDefinitions as $repositoryName => $definition ) {
+			if ( isset( $definition[$field] ) ) {
+				$values[$repositoryName] = $definition[$field];
+			}
+		}
+
+		return $values;
+	}
+
+}
