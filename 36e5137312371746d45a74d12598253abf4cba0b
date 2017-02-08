@@ -301,6 +301,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_ff1948dc",
+        "filename": "repo/includes/Api/WikibasePrefixSearcher.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-08T22:25:00Z",
+      "side": 1,
+      "message": "EntitySearchElastic should also have this injected. In general, the refactoring strategy to get rid of global state is to push access to global state up the stack, step by step.\n\nAlso, I think it does make sense to test WikibasePrefixSearcher separately - and also to test EntitySearchElastic against a mock WikibasePrefixSearcher. Being able to do this is one of the reasons to use composition over sub-classing. Private classes actually poses a problem to unit testing - a quick search for \"junit private classes\" seems to show that it\u0027s a common issue; a common workaround is to use reflection.",
+      "parentUuid": "2ef897d1_dccd7a35",
+      "revId": "36e5137312371746d45a74d12598253abf4cba0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_b7cd3e36",
         "filename": "repo/tests/phpunit/includes/Api/ElasticTermResultTest.php",
         "patchSetId": 20
