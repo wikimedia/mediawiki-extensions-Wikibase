@@ -16,6 +16,24 @@
       "revId": "6c3e226ea8515510f362dc822ac5596501e6e428",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_6cec9df2",
+        "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-02-08T16:52:31Z",
+      "side": 1,
+      "message": "You are completely right. I forgot. I fix it now.",
+      "parentUuid": "2ef897d1_3dd81522",
+      "revId": "6c3e226ea8515510f362dc822ac5596501e6e428",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
