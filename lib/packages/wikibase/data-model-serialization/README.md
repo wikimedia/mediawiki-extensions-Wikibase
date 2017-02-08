@@ -10,7 +10,7 @@
 [![Latest Stable Version](https://poser.pugx.org/wikibase/data-model-serialization/version.png)](https://packagist.org/packages/wikibase/data-model-serialization)
 [![Latest Unstable Version](https://poser.pugx.org/wikibase/data-model-serialization/v/unstable.svg)](//packagist.org/packages/wikibase/data-model-serialization)
 
-Library containing serializers and deserializers for the Wikibase DataModel.
+Library containing serializers and deserializers for the [Wikibase DataModel](https://github.com/wmde/WikibaseDataModel).
 The supported formats are limited to public ones, ie those used by a web API.
 Serialization code for private formats, such as the format used by the Wikibase
 Repo data access layer, belongs in other components.
