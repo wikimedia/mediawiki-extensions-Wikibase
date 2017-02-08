@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_26eb6179",
+        "filename": "lib/includes/RepositoryDefinitions.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-08T18:16:47Z",
+      "side": 1,
+      "message": "\u003e Plus I need to figure out the best way to test wfWarn is fired\n\nHow about injecting `LoggerInterface` and checking that `$this-\u003elogger-\u003ewarning(...)` was called.\nAnd for production we can create some handler for Monolog delegating/mapping PSR log levels to mediawiki functions.",
+      "range": {
+        "startLine": 98,
+        "startChar": 5,
+        "endLine": 101,
+        "endChar": 7
+      },
+      "revId": "c20b078b1045248942b46cf2fc57cfdef1ce072e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
