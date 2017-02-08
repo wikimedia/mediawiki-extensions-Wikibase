@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "2ef897d1_f25aa4f8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-08T17:23:50Z",
+      "side": 1,
+      "message": "Bug: T151717 should be above Change-Id with a blank line above it",
+      "revId": "478a8c7245f53cc733a372280f8383131ddf0105",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_d2f0c8fc",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-08T17:23:50Z",
+      "side": 1,
+      "message": "local",
+      "range": {
+        "startLine": 55,
+        "startChar": 1,
+        "endLine": 55,
+        "endChar": 19
+      },
+      "revId": "478a8c7245f53cc733a372280f8383131ddf0105",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_ac3f35d2",
         "filename": "client/sql/entity_usage.sql",
         "patchSetId": 1
@@ -230,6 +270,236 @@
         "startChar": 62,
         "endLine": 20,
         "endChar": 100
+      },
+      "revId": "478a8c7245f53cc733a372280f8383131ddf0105",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_12b9c029",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/LuaWikibaseEntityLibraryTests.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-08T17:23:50Z",
+      "side": 1,
+      "message": "local",
+      "range": {
+        "startLine": 195,
+        "startChar": 1,
+        "endLine": 195,
+        "endChar": 6
+      },
+      "revId": "478a8c7245f53cc733a372280f8383131ddf0105",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_92837057",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/LuaWikibaseEntityLibraryTests.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-08T17:23:50Z",
+      "side": 1,
+      "message": "entity.claims",
+      "range": {
+        "startLine": 196,
+        "startChar": 18,
+        "endLine": 196,
+        "endChar": 35
+      },
+      "revId": "478a8c7245f53cc733a372280f8383131ddf0105",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_52c2983a",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/LuaWikibaseEntityLibraryTests.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-08T17:23:50Z",
+      "side": 1,
+      "message": "nowhere but here, not necessary",
+      "range": {
+        "startLine": 204,
+        "startChar": 34,
+        "endLine": 204,
+        "endChar": 35
+      },
+      "revId": "478a8c7245f53cc733a372280f8383131ddf0105",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_f2862469",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/LuaWikibaseEntityLibraryTests.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-08T17:23:50Z",
+      "side": 1,
+      "message": "local",
+      "range": {
+        "startLine": 205,
+        "startChar": 1,
+        "endLine": 205,
+        "endChar": 12
+      },
+      "revId": "478a8c7245f53cc733a372280f8383131ddf0105",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_d289e87a",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/LuaWikibaseEntityLibraryTests.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-08T17:23:50Z",
+      "side": 1,
+      "message": "\"for a in\" is enough",
+      "range": {
+        "startLine": 206,
+        "startChar": 5,
+        "endLine": 206,
+        "endChar": 8
+      },
+      "revId": "478a8c7245f53cc733a372280f8383131ddf0105",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_d2dc481d",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/LuaWikibaseEntityLibraryTests.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-08T17:23:50Z",
+      "side": 1,
+      "message": "as above",
+      "range": {
+        "startLine": 206,
+        "startChar": 18,
+        "endLine": 206,
+        "endChar": 36
+      },
+      "revId": "478a8c7245f53cc733a372280f8383131ddf0105",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_52961898",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/LuaWikibaseEntityLibraryTests.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-08T17:23:50Z",
+      "side": 1,
+      "message": "as above",
+      "range": {
+        "startLine": 215,
+        "startChar": 1,
+        "endLine": 215,
+        "endChar": 12
+      },
+      "revId": "478a8c7245f53cc733a372280f8383131ddf0105",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_729b54c2",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/LuaWikibaseEntityLibraryTests.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-08T17:23:50Z",
+      "side": 1,
+      "message": "as above",
+      "range": {
+        "startLine": 216,
+        "startChar": 1,
+        "endLine": 216,
+        "endChar": 38
+      },
+      "revId": "478a8c7245f53cc733a372280f8383131ddf0105",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_1290a097",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/LuaWikibaseEntityLibraryTests.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-08T17:23:50Z",
+      "side": 1,
+      "message": "whitespace",
+      "range": {
+        "startLine": 234,
+        "startChar": 14,
+        "endLine": 234,
+        "endChar": 34
+      },
+      "revId": "478a8c7245f53cc733a372280f8383131ddf0105",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_f2ed0423",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/LuaWikibaseEntityLibraryTests.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-08T17:23:50Z",
+      "side": 1,
+      "message": "as above",
+      "range": {
+        "startLine": 237,
+        "startChar": 12,
+        "endLine": 237,
+        "endChar": 32
       },
       "revId": "478a8c7245f53cc733a372280f8383131ddf0105",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
