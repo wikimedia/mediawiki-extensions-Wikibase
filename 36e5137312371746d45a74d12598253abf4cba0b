@@ -70,6 +70,40 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_77ffc631",
+        "filename": "repo/includes/Api/WikibasePrefixSearcher.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-08T14:19:14Z",
+      "side": 1,
+      "message": "suggest we import the namespace and then just need AbstractQuery as the type hint.\n\nAlso, is this suppose to be Elastica\\Query\\AbstractQuery?\n\nalso, personal preference, I would put the AbstractQuery object as the first constructor param here.",
+      "revId": "36e5137312371746d45a74d12598253abf4cba0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_57fa8a41",
+        "filename": "repo/includes/Api/WikibasePrefixSearcher.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-08T14:19:14Z",
+      "side": 1,
+      "message": "think that this config should be injected in the constructor",
+      "revId": "36e5137312371746d45a74d12598253abf4cba0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_b7cd3e36",
         "filename": "repo/tests/phpunit/includes/Api/ElasticTermResultTest.php",
         "patchSetId": 20
