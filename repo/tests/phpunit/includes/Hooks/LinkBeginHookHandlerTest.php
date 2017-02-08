@@ -3,12 +3,14 @@
 namespace Wikibase\Repo\Tests\Hooks;
 
 use Language;
+use MediaWiki\Interwiki\InterwikiLookup;
 use MediaWiki\MediaWikiServices;
 use RequestContext;
 use SpecialPageFactory;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
@@ -36,10 +38,18 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 	const ITEM_WITHOUT_LABEL = 'Q11';
 	const ITEM_DELETED = 'Q111';
 	const ITEM_LABEL_NO_DESCRIPTION = 'Q1111';
+	const ITEM_FOREIGN = 'foo:Q2';
+	const ITEM_FOREIGN_NO_DATA = 'foo:Q22';
+	const ITEM_FOREIGN_NO_PREFIX = 'Q2';
+	const ITEM_FOREIGN_NO_DATA_NO_PREFIX = 'Q22';
+
+	const FOREIGN_REPO_PREFIX = 'foo';
 
 	const DUMMY_LABEL = 'linkbegin-label';
+	const DUMMY_LABEL_FOREIGN_ITEM = 'linkbegin-foreign-item-label';
 
 	const DUMMY_DESCRIPTION = 'linkbegin-description';
+	const DUMMY_DESCRIPTION_FOREIGN_ITEM = 'linkbegin-foreign-item-description';
 
 	/**
 	 * @param string $id
@@ -248,6 +258,76 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		);
 	}
 
+	public function testGivenForeignIdWithLabelAndDescription_labelAndIdAreUsedAsLinkTextAndLabelAndDescriptionAreUsedInLinkTitle() {
+		$linkBeginHookHandler = $this->getLinkBeginHookHandler();
+
+		$title = Title::makeTitle(
+			NS_MAIN,
+			'Special:EntityPage/' . self::ITEM_FOREIGN_NO_PREFIX,
+			'',
+			self::FOREIGN_REPO_PREFIX
+		);
+		$html = $title->getFullText();
+		$customAttribs = [];
+
+		$context = $this->newContext();
+
+		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
+
+		$expectedHtml = '<span class="wb-itemlink">'
+			. '<span class="wb-itemlink-label" lang="en" dir="ltr">' . self::DUMMY_LABEL_FOREIGN_ITEM . '</span> '
+			. '<span class="wb-itemlink-id">(' . self::ITEM_FOREIGN  . ')</span></span>';
+
+		$this->assertSame( $expectedHtml, $html );
+
+		$this->assertContains( self::DUMMY_LABEL_FOREIGN_ITEM, $customAttribs['title'] );
+		$this->assertContains( self::DUMMY_DESCRIPTION_FOREIGN_ITEM, $customAttribs['title'] );
+	}
+
+	public function testGivenForeignIdWithoutLabelAndDescription_idIsUsedAsLinkTextAndWikitextLinkIsUsedInLinkTitle() {
+		$linkBeginHookHandler = $this->getLinkBeginHookHandler();
+
+		$title = Title::makeTitle(
+			NS_MAIN,
+			'Special:EntityPage/' . self::ITEM_FOREIGN_NO_DATA_NO_PREFIX,
+			'',
+			self::FOREIGN_REPO_PREFIX
+		);
+		$html = $title->getFullText();
+		$customAttribs = [];
+
+		$context = $this->newContext();
+
+		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
+
+		$expectedHtml = '<span class="wb-itemlink">'
+			. '<span class="wb-itemlink-label" lang="en" dir="ltr"></span> '
+			. '<span class="wb-itemlink-id">(' . self::ITEM_FOREIGN_NO_DATA  . ')</span></span>';
+
+		$this->assertSame( $expectedHtml, $html );
+
+		$this->assertSame(
+			self::FOREIGN_REPO_PREFIX . ':Special:EntityPage/' . self::ITEM_FOREIGN_NO_DATA_NO_PREFIX,
+			$customAttribs['title']
+		);
+	}
+
+	public function testGivenEntityPageOnUnknownForeignRepo_entityPageIsUsedAsLinkTextAndThereIsNoLinkTitle() {
+		$linkBeginHookHandler = $this->getLinkBeginHookHandler();
+
+		$title = Title::makeTitle( NS_MAIN, 'Special:EntityPage/' . self::ITEM_FOREIGN_NO_PREFIX, '', 'bar' );
+		$html = $title->getFullText();
+		$customAttribs = [];
+
+		$context = $this->newContext();
+
+		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
+
+		$this->assertSame( 'bar:Special:EntityPage/' . self::ITEM_FOREIGN_NO_PREFIX, $html );
+
+		$this->assertArrayNotHasKey( 'title', $customAttribs );
+	}
+
 	/**
 	 * @return EntityIdLookup
 	 */
@@ -282,6 +362,10 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 						return [ 'en' => self::DUMMY_LABEL ];
 					case self::ITEM_WITHOUT_LABEL:
 						return [];
+					case self::ITEM_FOREIGN:
+						return [ 'en' => self::DUMMY_LABEL_FOREIGN_ITEM ];
+					case self::ITEM_FOREIGN_NO_DATA:
+						return [];
 					default:
 						throw new StorageException( "Unexpected entity id $id" );
 				}
@@ -295,6 +379,10 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 						return [ 'en' => self::DUMMY_DESCRIPTION ];
 					case self::ITEM_WITHOUT_LABEL:
 					case self::ITEM_LABEL_NO_DESCRIPTION:
+						return [];
+					case self::ITEM_FOREIGN:
+						return [ 'en' => self::DUMMY_DESCRIPTION_FOREIGN_ITEM ];
+					case self::ITEM_FOREIGN_NO_DATA:
 						return [];
 					default:
 						throw new StorageException( "Unexpected entity id $id" );
@@ -313,6 +401,18 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		return new EntityNamespaceLookup( $entityNamespaces );
 	}
 
+	private function getInterwikiLookup() {
+		$lookup = $this->getMock( InterwikiLookup::class );
+		$lookup->expects( $this->any() )
+			->method( 'isValidInterwiki' )
+			->will(
+				$this->returnCallback( function( $interwiki ) {
+					return $interwiki === self::FOREIGN_REPO_PREFIX;
+				} )
+			);
+		return $lookup;
+	}
+
 	private function getLinkBeginHookHandler() {
 		$languageFallback = new LanguageFallbackChain( array(
 			LanguageWithConversion::factory( 'de-ch' ),
@@ -322,11 +422,13 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 
 		return new LinkBeginHookHandler(
 			$this->getEntityIdLookup(),
+			new ItemIdParser(),
 			$this->getTermLookup(),
 			$this->getEntityNamespaceLookup(),
 			$languageFallback,
 			Language::factory( 'en' ),
-			MediaWikiServices::getInstance()->getLinkRenderer()
+			MediaWikiServices::getInstance()->getLinkRenderer(),
+			$this->getInterwikiLookup()
 		);
 	}
 
