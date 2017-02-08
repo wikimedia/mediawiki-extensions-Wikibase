@@ -16,6 +16,24 @@
       "revId": "f1f846b8ca2812859cd51af78b727a28fe86ed8d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_776fc68f",
+        "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-08T12:30:01Z",
+      "side": 1,
+      "message": "There used to be (and may be will be again) three cases.\n\nI don\u0027t think it is less readable than suggested code.",
+      "parentUuid": "2ef897d1_19e56e9f",
+      "revId": "f1f846b8ca2812859cd51af78b727a28fe86ed8d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
