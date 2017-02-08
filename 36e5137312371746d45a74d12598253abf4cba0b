@@ -33,6 +33,23 @@
       "revId": "36e5137312371746d45a74d12598253abf4cba0b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_b7cd3e36",
+        "filename": "repo/tests/phpunit/includes/Api/ElasticTermResultTest.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-08T14:08:05Z",
+      "side": 1,
+      "message": "new BasicEntityIdParser() would work here and not need the WikibaseRepo factory here.\n\nafaik, BasicEntityIdParser only works for items and properties, but that should be okay here.",
+      "revId": "36e5137312371746d45a74d12598253abf4cba0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
