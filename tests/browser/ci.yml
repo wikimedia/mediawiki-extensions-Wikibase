@@ -7,3 +7,5 @@ MEDIAWIKI_ENVIRONMENT:
 
 PLATFORM:
   - Linux
+  - macOS 10.12
+  - Windows 10
