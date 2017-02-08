@@ -5,4 +5,4 @@ MEDIAWIKI_ENVIRONMENT:
   - beta
 
 PLATFORM:
-  - Linux
+  - Windows 10
