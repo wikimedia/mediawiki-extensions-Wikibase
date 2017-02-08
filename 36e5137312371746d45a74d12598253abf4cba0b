@@ -36,6 +36,40 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_b7e41ea4",
+        "filename": "repo/includes/Api/WikibasePrefixSearcher.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-08T14:13:29Z",
+      "side": 1,
+      "message": "In Wikibase, there should be a blank line above here, between the php opening tag and namespace.",
+      "revId": "36e5137312371746d45a74d12598253abf4cba0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_37e26e9d",
+        "filename": "repo/includes/Api/WikibasePrefixSearcher.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-08T14:13:29Z",
+      "side": 1,
+      "message": "just nitpick (and I know phpstorm puts these comments here), but we generally don\u0027t include these in Wikibase. (they are clutter).\n\nIn PHPStorm, if you go to settings -\u003e editor -\u003e File and Code Templates and click the \"code\" tab, you can change the \"PHP constructor\" template stop adding the comment. :)",
+      "revId": "36e5137312371746d45a74d12598253abf4cba0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_b7cd3e36",
         "filename": "repo/tests/phpunit/includes/Api/ElasticTermResultTest.php",
         "patchSetId": 20
