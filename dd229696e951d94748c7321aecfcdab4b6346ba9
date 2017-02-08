@@ -66,6 +66,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_26da4122",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-08T18:01:43Z",
+      "side": 1,
+      "message": "Put it here as private method",
+      "parentUuid": "2ef897d1_f24e249a",
+      "range": {
+        "startLine": 265,
+        "startChar": 9,
+        "endLine": 265,
+        "endChar": 99
+      },
+      "revId": "dd229696e951d94748c7321aecfcdab4b6346ba9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_32ecbc1f",
         "filename": "repo/tests/phpunit/includes/Hooks/LinkBeginHookHandlerTest.php",
         "patchSetId": 1
