@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "2ef897d1_d25d68f0",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-08T15:25:35Z",
+      "side": 1,
+      "message": "Looks complicated.\nHow about extracting a method `startsWith($haystack, $needle)`?",
+      "range": {
+        "startLine": 265,
+        "startChar": 9,
+        "endLine": 265,
+        "endChar": 99
+      },
+      "revId": "dd229696e951d94748c7321aecfcdab4b6346ba9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_32ecbc1f",
         "filename": "repo/tests/phpunit/includes/Hooks/LinkBeginHookHandlerTest.php",
         "patchSetId": 1
