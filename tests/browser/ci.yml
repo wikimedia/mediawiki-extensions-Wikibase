@@ -6,4 +6,4 @@ MEDIAWIKI_ENVIRONMENT:
   - test
 
 PLATFORM:
-  - Linux
+  - macOS 10.12
