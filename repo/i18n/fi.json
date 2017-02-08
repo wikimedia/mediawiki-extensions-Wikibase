@@ -17,7 +17,8 @@
 			"Harriv",
 			"Pxos",
 			"Pitke",
-			"Valtlait"
+			"Valtlait",
+			"Pyscowicz"
 		]
 	},
 	"wikibase-desc": "Säilö jäsennetylle datalle",
@@ -53,6 +54,7 @@
 	"wikibase-description-edit-placeholder-language-aware": "kirjoita kuvaus kielellä $1",
 	"wikibase-aliases-edit-placeholder": "lisää aliaksia",
 	"wikibase-aliases-edit-placeholder-language-aware": "lisää aliaksia kielellä $1",
+	"wikibase-aliases-edit-label": "Aliakset, erotusmerkkinä pystyviiva:",
 	"wikibase-diffview-reference": "lähde",
 	"wikibase-diffview-rank": "sija",
 	"wikibase-diffview-rank-preferred": "Suosittu asema",
@@ -63,6 +65,7 @@
 	"wikibase-diffview-alias": "aliakset",
 	"wikibase-diffview-description": "kuvaus",
 	"wikibase-diffview-link": "linkit",
+	"wikibase-diffview-link-name": "nimi",
 	"wikibase-sitelink-site-edit-placeholder": "wiki",
 	"wikibase-sitelink-page-edit-placeholder": "sivu",
 	"wikibase-alias-edit-placeholder": "kirjoita alias",
@@ -157,7 +160,6 @@
 	"wikibase-newentity-language": "Kieli:",
 	"wikibase-newentity-label": "Nimi",
 	"wikibase-newentity-description": "Kuvaus",
-	"wikibase-newentity-aliases": "Aliakset, erotusmerkkinä pystyviiva:",
 	"wikibase-newentity-submit": "Luo",
 	"special-setlabel": "Aseta nimi",
 	"wikibase-setlabel-introfull": "Asetat kohteen [[$1]] nimeä kielellä $2.",
