@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_bf08702c",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2017-02-08T23:39:41Z",
+      "side": 1,
+      "message": "does this really support all namespaces? I suppose my concern is that this profile will become available via action\u003dquery\u0026list\u003dsearch. Perhaps rather than this though we need some way to specify this profile shouldn\u0027t be offered for full-text search.",
+      "revId": "454328a5f4ad92d04b8ddee551dd4c59ac3da8ce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
