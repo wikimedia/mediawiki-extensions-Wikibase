@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_178bf2c5",
+        "filename": "repo/includes/Api/EntitySearchElastic.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-08T14:25:05Z",
+      "side": 1,
+      "message": "can WikibasePrefixSearcher go in the constructor? maybe if $query was not part of the constructor and was passed to performSearch or something else?",
+      "revId": "36e5137312371746d45a74d12598253abf4cba0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_b7e41ea4",
         "filename": "repo/includes/Api/WikibasePrefixSearcher.php",
         "patchSetId": 20
