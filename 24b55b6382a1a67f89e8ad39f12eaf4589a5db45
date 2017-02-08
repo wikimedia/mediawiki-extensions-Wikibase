@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_e63d498b",
+        "filename": "repo/includes/Store/Sql/ChangesSubscriptionTableBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-08T17:41:52Z",
+      "side": 1,
+      "message": "The new field should be here, at the same position where it is in the constructor.\n\nYou should also add the missing private $tableName field while you are here. :-)",
+      "range": {
+        "startLine": 31,
+        "startChar": 23,
+        "endLine": 33,
+        "endChar": 1
+      },
+      "revId": "24b55b6382a1a67f89e8ad39f12eaf4589a5db45",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_063745ac",
+        "filename": "repo/includes/Store/Sql/ChangesSubscriptionTableBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-08T17:41:52Z",
+      "side": 1,
+      "message": "The new line should be here.",
+      "range": {
+        "startLine": 87,
+        "startChar": 38,
+        "endLine": 88,
+        "endChar": 2
+      },
+      "revId": "24b55b6382a1a67f89e8ad39f12eaf4589a5db45",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_c657edcb",
+        "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-08T17:41:52Z",
+      "side": 1,
+      "message": "This should move up after $propertyInfoBuilder.",
+      "revId": "24b55b6382a1a67f89e8ad39f12eaf4589a5db45",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_e65429cb",
+        "filename": "repo/includes/Store/Sql/SqlSiteLinkConflictLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-08T17:41:52Z",
+      "side": 1,
+      "message": "Why not inject this as a constructor dependency?",
+      "revId": "24b55b6382a1a67f89e8ad39f12eaf4589a5db45",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
