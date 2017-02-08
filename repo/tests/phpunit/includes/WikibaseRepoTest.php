@@ -22,6 +22,7 @@ use User;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\DeserializerFactory;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
@@ -69,6 +70,7 @@ use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\Repo\SnakFactory;
 use Wikibase\Repo\ValidatorBuilders;
 use Wikibase\Repo\Validators\CompositeValidator;
+use Wikibase\Repo\Validators\EntityExistsValidator;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
@@ -90,11 +92,55 @@ use Wikibase\SummaryFormatter;
 class WikibaseRepoTest extends MediaWikiTestCase {
 
 	public function testGetDefaultValidatorBuilders() {
-		$first = $this->getWikibaseRepo()->getDefaultValidatorBuilders();
+		$first = WikibaseRepo::getDefaultValidatorBuilders();
 		$this->assertInstanceOf( ValidatorBuilders::class, $first );
 
-		$second = $this->getWikibaseRepo()->getDefaultValidatorBuilders();
+		$second = WikibaseRepo::getDefaultValidatorBuilders();
 		$this->assertSame( $first, $second );
+	}
+
+	public function testNewValidatorBuilders() {
+		$repo = $this->getWikibaseRepoWithClientSettings( new SettingsArray( [
+			'foreignRepositories' => [
+				'other' => [
+					'supportedEntityTypes' => [ 'kitten' ],
+				]
+			]
+		] ) );
+
+		$kittenId = $this->getMockBuilder( EntityId::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$kittenId->expects( $this->any() )
+			->method( 'getEntityType' )
+			->will( $this->returnValue( 'kitten' ) );
+		$kittenId->expects( $this->any() )
+			->method( 'getSerialization' )
+			->will( $this->returnValue( 'other:K9' ) );
+		$kittenId->expects( $this->any() )
+			->method( 'getLocalPart' )
+			->will( $this->returnValue( 'K9' ) );
+		$kittenId->expects( $this->any() )
+			->method( 'getRepositoryName' )
+			->will( $this->returnValue( 'other' ) );
+
+		$value = new EntityIdValue( $kittenId );
+
+		$builders = $repo->newValidatorBuilders();
+		$this->assertInstanceOf( ValidatorBuilders::class, $builders );
+
+		// We get the resulting ValueValidators and run them against our fake remote-repo
+		// custom-type EntityIdValue. We skip the existence check though, since we don't
+		// have a mock lookup in place.
+		$entityValidators = $builders->buildEntityValidators();
+		foreach ( $entityValidators as $validator ) {
+			if ( $validator instanceof EntityExistsValidator ) {
+				continue;
+			}
+
+			$result = $validator->validate( $value );
+			$this->assertTrue( $result->isValid(), get_class( $validator ) );
+		}
 	}
 
 	/**

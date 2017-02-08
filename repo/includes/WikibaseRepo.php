@@ -362,20 +362,29 @@ class WikibaseRepo {
 
 	/**
 	 * Returns a low level factory object for creating validators for well known data types.
+	 *
 	 * @warning This is for use with getDefaultValidatorBuilders() during bootstrap only!
 	 * Program logic should use WikibaseRepo::getDataTypeValidatorFactory() instead!
 	 *
 	 * @return ValidatorBuilders
 	 */
-	private function newValidatorBuilders() {
+	public function newValidatorBuilders() {
 		$urlSchemes = $this->settings->getSetting( 'urlSchemes' );
-		$supportedEntityTypes = array_merge(
-			array_map( function( $repoSettings ) {
-				return $repoSettings[ 'supportedEntityTypes' ];
-			}, $this->settings->getSetting( 'foreignRepositories' ) ),
-			[
-				'' => $this->getLocalEntityTypes(),
-			]
+		$entityTypesPerRepo = [];
+
+		if ( $this->clientSettings ) {
+			$foreignRepoConfig = $this->clientSettings->getSetting( 'foreignRepositories' );
+			$entityTypesPerRepo = array_map(
+				function( $repoSettings ) {
+					return $repoSettings[ 'supportedEntityTypes' ];
+				},
+				$foreignRepoConfig
+			);
+		}
+
+		$entityTypesPerRepo = array_merge(
+			$entityTypesPerRepo,
+			[ '' => $this->getLocalEntityTypes(), ]
 		);
 
 		return new ValidatorBuilders(
@@ -385,7 +394,7 @@ class WikibaseRepo {
 			$this->getVocabularyBaseUri(),
 			$this->getMonolingualTextLanguages(),
 			$this->getCachingCommonsMediaFileNameLookup(),
-			$supportedEntityTypes
+			$entityTypesPerRepo
 		);
 	}
 
