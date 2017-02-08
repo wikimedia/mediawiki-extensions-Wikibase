@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_17bc12b0",
+        "filename": "repo/includes/Api/CreateClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-08T13:11:38Z",
+      "side": 1,
+      "message": "See ApiModuleManager::instantiateModule for the code that calls the factory method.",
+      "parentUuid": "2ef897d1_2c0b452f",
+      "range": {
+        "startLine": 57,
+        "startChar": 2,
+        "endLine": 57,
+        "endChar": 14
+      },
+      "revId": "53f9b6d6f5dc1b0d1872ab7cf6ca4a66ac3cd4b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_13be8613",
         "filename": "repo/tests/phpunit/includes/Api/StatementModificationHelperTest.php",
         "patchSetId": 5
