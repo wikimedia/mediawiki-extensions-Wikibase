@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_d7367aae",
+        "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-08T12:26:09Z",
+      "side": 1,
+      "message": "Where/How will it be used?",
+      "parentUuid": "2ef897d1_c0d3642f",
+      "revId": "c2f1043c1375757674057b4bb999ee4930b5729a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_c0ec84f4",
         "filename": "lib/tests/phpunit/Formatters/WikibaseValueFormatterBuildersTest.php",
         "patchSetId": 5
