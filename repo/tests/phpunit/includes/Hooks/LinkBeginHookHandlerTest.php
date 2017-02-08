@@ -37,6 +37,10 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 	const ITEM_DELETED = 'Q111';
 	const ITEM_LABEL_NO_DESCRIPTION = 'Q1111';
 
+	const DUMMY_LABEL = 'linkbegin-label';
+
+	const DUMMY_DESCRIPTION = 'linkbegin-description';
+
 	/**
 	 * @param string $id
 	 * @param bool $exists
@@ -86,13 +90,13 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
 
 		$expectedHtml = '<span class="wb-itemlink">'
-			. '<span class="wb-itemlink-label" lang="en" dir="ltr">linkbegin-label</span> '
+			. '<span class="wb-itemlink-label" lang="en" dir="ltr">' . self::DUMMY_LABEL . '</span> '
 			. '<span class="wb-itemlink-id">(' . self::ITEM_WITH_LABEL . ')</span></span>';
 
 		$this->assertEquals( $expectedHtml, $html );
 
-		$this->assertContains( 'linkbegin-label', $customAttribs['title'] );
-		$this->assertContains( 'linkbegin-description', $customAttribs['title'] );
+		$this->assertContains( self::DUMMY_LABEL, $customAttribs['title'] );
+		$this->assertContains( self::DUMMY_DESCRIPTION, $customAttribs['title'] );
 
 		$this->assertContains( 'wikibase.common', $context->getOutput()->getModuleStyles() );
 	}
@@ -233,7 +237,7 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
 
 		$expected = '<span class="wb-itemlink">'
-			. '<span class="wb-itemlink-label" lang="en" dir="ltr">linkbegin-label</span> '
+			. '<span class="wb-itemlink-label" lang="en" dir="ltr">' . self::DUMMY_LABEL . '</span> '
 			. '<span class="wb-itemlink-id">(' . self::ITEM_LABEL_NO_DESCRIPTION . ')</span></span>';
 
 		$lang = Language::factory( 'en' );
@@ -275,7 +279,7 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 				switch ( $id->getSerialization() ) {
 					case self::ITEM_WITH_LABEL:
 					case self::ITEM_LABEL_NO_DESCRIPTION:
-						return [ 'en' => 'linkbegin-label' ];
+						return [ 'en' => self::DUMMY_LABEL ];
 					case self::ITEM_WITHOUT_LABEL:
 						return [];
 					default:
@@ -288,7 +292,7 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 			->will( $this->returnCallback( function ( EntityId $id ) {
 				switch ( $id->getSerialization() ) {
 					case self::ITEM_WITH_LABEL:
-						return [ 'en' => 'linkbegin-description' ];
+						return [ 'en' => self::DUMMY_DESCRIPTION ];
 					case self::ITEM_WITHOUT_LABEL:
 					case self::ITEM_LABEL_NO_DESCRIPTION:
 						return [];
