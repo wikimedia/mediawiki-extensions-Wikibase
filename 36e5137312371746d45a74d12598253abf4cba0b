@@ -247,6 +247,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_fc039677",
+        "filename": "repo/includes/Api/WikibasePrefixSearcher.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-08T20:53:21Z",
+      "side": 1,
+      "message": "Because any access to any global state anywhere should be avoided - not at *all* cost, but with strong preference.\n\nOne reason is easier testing. The other is making all dependencies and all information flow explicit, and thus easier to discover and to debug.",
+      "parentUuid": "2ef897d1_7c7c461b",
+      "revId": "36e5137312371746d45a74d12598253abf4cba0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_b7cd3e36",
         "filename": "repo/tests/phpunit/includes/Api/ElasticTermResultTest.php",
         "patchSetId": 20
