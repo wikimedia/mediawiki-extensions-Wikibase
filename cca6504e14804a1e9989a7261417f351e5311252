@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_3fdda0e1",
+        "filename": "repo/config/ElasticSearchRescoreProfiles.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2017-02-08T23:39:41Z",
+      "side": 1,
+      "message": "more a note really, but this will then be available as a rescore profile for the full text search api. I wonder if it will work appropriately there (not result quality, but not for example returning (originalScore * max(0, 0)) for documents that have 0 or non-existent values for the custom fields used",
+      "revId": "cca6504e14804a1e9989a7261417f351e5311252",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_1aee721f",
+        "filename": "repo/includes/Api/EntitySearchElastic.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2017-02-08T23:39:41Z",
+      "side": 1,
+      "message": "As discussed, this should probably either be an addMust(), or highlighting should work on labels_all as the final attempt, otherwise an entity that only matches labels_all but not the provided language codes could still be returned but won\u0027t have any highlighting indicating what label was matched. Keeping this as should will improve recall in cases where the label being searched for isn\u0027t in the fallbacks. I have no clue how common that might be.\n\nThis should also probably always be addMust() when $strictLanguage \u003d\u003d true",
+      "revId": "cca6504e14804a1e9989a7261417f351e5311252",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_7a432616",
+        "filename": "repo/includes/Api/EntitySearchElastic.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2017-02-08T23:39:41Z",
+      "side": 1,
+      "message": "is the second half of this correct? Seems we want to dump the results here as well, although perhaps thats done elsewhere and I havn\u0027t seen it yet (but keeping it all together would make sense).",
+      "revId": "cca6504e14804a1e9989a7261417f351e5311252",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_7a6a0680",
+        "filename": "repo/tests/phpunit/includes/Api/ElasticTermResultTest.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2017-02-08T23:39:41Z",
+      "side": 1,
+      "message": "quibble, but this file has mixed spaces and tabs",
+      "revId": "cca6504e14804a1e9989a7261417f351e5311252",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_fa04b6c9",
+        "filename": "repo/tests/phpunit/includes/Api/EntitySearchElasticTest.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2017-02-08T23:39:41Z",
+      "side": 1,
+      "message": "would it be desirable to load these from the config\u0027s rather than duplicating?",
+      "revId": "cca6504e14804a1e9989a7261417f351e5311252",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_9af6e2d2",
+        "filename": "repo/tests/phpunit/includes/Api/EntitySearchElasticTest.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2017-02-08T23:39:41Z",
+      "side": 1,
+      "message": "same about config vs duplicating",
+      "revId": "cca6504e14804a1e9989a7261417f351e5311252",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
