@@ -143,7 +143,7 @@ class SpecialEntityUsage extends QueryPage {
 				'eu_page_id',
 			],
 			'conds' => $conds,
-			'options' => ['GROUP BY' => 'eu_page_id' ],
+			'options' => [ 'GROUP BY' => 'eu_page_id' ],
 			'join_conds' => $joinConds
 		];
 	}

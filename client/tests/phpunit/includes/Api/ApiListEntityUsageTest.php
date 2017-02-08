@@ -147,7 +147,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 					'query' => 'entityusage',
 					'wbeuentities' => 'Q3',
 				],
-				["11" => [
+				[ "11" => [
 					"ns" => 0,
 					"title" => "Vienna",
 					"pageid" => 11,
@@ -162,7 +162,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 					'query' => 'entityusage',
 					'wbeuentities' => 'Q3|Q5',
 				],
-				["11" => [
+				[ "11" => [
 					"ns" => 0,
 					"title" => "Vienna",
 					"pageid" => 11,
@@ -186,7 +186,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 					'wbeuentities' => 'Q3|Q5',
 					'wbeucontinue' => '11|Q3|S',
 				],
-				["11" => [
+				[ "11" => [
 					"ns" => 0,
 					"title" => "Vienna",
 					"pageid" => 11,
