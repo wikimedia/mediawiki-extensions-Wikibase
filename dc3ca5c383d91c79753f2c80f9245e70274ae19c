@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_f264e446",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/LabelsChangeOpDeserializerTest.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-08T17:41:07Z",
+      "side": 1,
+      "message": "Obvious test case seems to be missing: Item does not have a label in language \u0027en\u0027, after change op like [ \u0027en\u0027 \u003d\u003e [ \u0027language\u0027 \u003d\u003e \u0027en, \u0027value\u0027 \u003d\u003e \u0027Goat\u0027 ] ] is deserialized it applied, the item has the label in this language AND its value is \u0027Goat\u0027.\n\nPossible other test cases (I am not sure whether we want/need all of them here, and which of edge cases should be rather in the ChangeOp tests and not here):\n - using unknown language code\n - no language code in the input labels array\n - remove request on item that doesn\u0027t have a label in the given language results in change in labels\n\nFirst two basically come down to the fact that exceptions thrown by TermChangeOpSerializationValidator are not caught but I am tending to think we should tests those as a test case of providing invalid data to the deserializer (especially the one with \"language\" key missing in the input array).\n\nThere might be more test cases I didn\u0027t think of, I\u0027ll think about this again.",
+      "revId": "dc3ca5c383d91c79753f2c80f9245e70274ae19c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_665f1914",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/LabelsChangeOpDeserializerTest.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-08T17:41:07Z",
+      "side": 1,
+      "message": "I wasn\u0027t aware of ItemContent. Not saying that it wrong I was simply expecting that test entities would be created with something like new Item(), then possibly call setLabel or any relevant property.\n\nI have no preference on whether we you do now, and what I had in mind (without even checking if it would work for those test s in the first place). I am just slightly surprised (in a positive sense) to see ItemContent here, thus longer comment.\n\nIt would be brilliant if someone more aware of all the Wikibase could chime in and say whether we should be doing one, or another, or it doesn\u0027t matter which here.",
+      "revId": "dc3ca5c383d91c79753f2c80f9245e70274ae19c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
