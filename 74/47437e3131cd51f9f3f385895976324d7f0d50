@@ -1,0 +1,8 @@
+Code-Review+1: Daniel Kinzler <daniel.kinzler@wikimedia.de>
+Code-Review+2: Hoo man <hoo@online.de>
+Verified+2: jenkins-bot
+Submitted-by: jenkins-bot
+Submitted-at: Wed, 08 Feb 2017 09:45:02 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/336452
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/wmf/1.29.0-wmf.10
