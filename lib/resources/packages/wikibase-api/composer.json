@@ -1,9 +1,6 @@
 {
 	"name": "wikibase/javascript-api",
 	"description": "JavaScript client for the Wikibase Repository web API",
-	"require": {
-		"data-values/javascript": "~0.8.0|~0.7.0|~0.6.0"
-	},
 	"license": "GPL-2.0+",
 	"authors": [
 		{
@@ -19,19 +16,22 @@
 		"issues": "https://phabricator.wikimedia.org/",
 		"irc": "irc://irc.freenode.net/wikidata"
 	},
+	"require": {
+		"data-values/javascript": "~0.8.0|~0.7.0|~0.6.0"
+	},
 	"require-dev": {
-		"jakub-onderka/php-parallel-lint": "0.9.2",
-		"mediawiki/mediawiki-codesniffer": "0.5.1"
+		"jakub-onderka/php-parallel-lint": ">=0.3 <0.10",
+		"mediawiki/mediawiki-codesniffer": ">=0.4 <0.8"
+	},
+	"autoload": {
+		"files": [
+			"WikibaseJavaScriptApi.php"
+		]
 	},
 	"scripts": {
 		"test": [
 			"parallel-lint . --exclude vendor",
 			"phpcs -p -s"
-		]
-	},
-	"autoload": {
-		"files": [
-			"WikibaseJavaScriptApi.php"
 		]
 	}
 }
