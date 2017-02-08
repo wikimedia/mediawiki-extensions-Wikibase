@@ -369,13 +369,21 @@ class WikibaseRepo {
 	 */
 	private function newValidatorBuilders() {
 		$urlSchemes = $this->settings->getSetting( 'urlSchemes' );
-		$supportedEntityTypes = array_merge(
-			array_map( function( $repoSettings ) {
-				return $repoSettings[ 'supportedEntityTypes' ];
-			}, $this->settings->getSetting( 'foreignRepositories' ) ),
-			[
-				'' => $this->getLocalEntityTypes(),
-			]
+		$entityTypesPerRepo = [];
+
+		if ( $this->clientSettings ) {
+			$foreignRepoConfig = $this->clientSettings->getSetting( 'foreignRepositories' );
+			$entityTypesPerRepo = array_map(
+				function( $repoSettings ) {
+					return $repoSettings[ 'supportedEntityTypes' ];
+				},
+				$foreignRepoConfig
+			);
+		}
+
+		$entityTypesPerRepo = array_merge(
+			$entityTypesPerRepo,
+			[ '' => $this->getLocalEntityTypes(), ]
 		);
 
 		return new ValidatorBuilders(
@@ -385,7 +393,7 @@ class WikibaseRepo {
 			$this->getVocabularyBaseUri(),
 			$this->getMonolingualTextLanguages(),
 			$this->getCachingCommonsMediaFileNameLookup(),
-			$supportedEntityTypes
+			$entityTypesPerRepo
 		);
 	}
 
