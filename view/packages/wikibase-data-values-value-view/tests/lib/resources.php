@@ -73,7 +73,6 @@ return call_user_func( function() {
 			),
 		),
 
-
 		'jquery.event.special.eachchange.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.event/jquery.event.special.eachchange.tests.js',
@@ -82,7 +81,6 @@ return call_user_func( function() {
 				'jquery.event.special.eachchange',
 			),
 		),
-
 
 		'jquery.ui.commonssuggester.tests' => $moduleTemplate + array(
 			'scripts' => array(
@@ -147,7 +145,6 @@ return call_user_func( function() {
 			),
 		),
 
-
 		'jquery.util.adaptlettercase.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.util/jquery.util.adaptlettercase.tests.js',
@@ -165,7 +162,6 @@ return call_user_func( function() {
 				'jquery.util.getscrollbarwidth',
 			),
 		),
-
 
 		'util.highlightSubstring.tests' => $moduleTemplate + array(
 			'scripts' => array(

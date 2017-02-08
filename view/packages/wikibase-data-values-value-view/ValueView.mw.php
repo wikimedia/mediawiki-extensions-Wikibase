@@ -11,7 +11,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
 
-global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgHooks, $wgResourceModules, $wgMessagesDirs;
+global $wgExtensionCredits, $wgHooks, $wgResourceModules, $wgMessagesDirs;
 
 $wgExtensionCredits['other'][] = array(
 	'path' => __DIR__,

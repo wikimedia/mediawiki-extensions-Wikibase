@@ -66,7 +66,6 @@ return call_user_func( function() {
 			),
 		),
 
-
 		'jquery.event.special.eachchange' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.event/jquery.event.special.eachchange.js'
@@ -75,7 +74,6 @@ return call_user_func( function() {
 				'jquery.client',
 			),
 		),
-
 
 		'jquery.ui.inputextender' => $moduleTemplate + array(
 			'scripts' => array(
@@ -211,7 +209,6 @@ return call_user_func( function() {
 				'jquery.util/jquery.util.getscrollbarwidth.js',
 			),
 		),
-
 
 		'util.ContentLanguages' => $moduleTemplate + array(
 			'scripts' => array(

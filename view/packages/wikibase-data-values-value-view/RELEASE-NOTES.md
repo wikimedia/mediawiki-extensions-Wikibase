@@ -1,5 +1,8 @@
 # ValueView release notes
 
+## 0.18.3 (2017-02-08)
+* Maximized developer dependency ranges.
+
 ## 0.18.2 (2017-02-02)
 * Fixed `jQuery.ui.ooMenu`'s `customItems` initialization.
 
