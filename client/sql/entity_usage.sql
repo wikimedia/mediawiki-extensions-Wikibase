@@ -10,3 +10,7 @@ CREATE UNIQUE INDEX /*i*/eu_entity_id ON /*_*/wbc_entity_usage ( eu_entity_id, e
 
 -- look up (and especially, delete) usage entries by page id
 CREATE INDEX /*i*/eu_page_id ON /*_*/wbc_entity_usage ( eu_page_id, eu_entity_id ) ;
+
+
+
+
