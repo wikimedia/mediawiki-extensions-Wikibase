@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_52d3b8d7",
+        "filename": "client/sql/entity_usage.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 4548
+      },
+      "writtenOn": "2017-02-08T17:11:26Z",
+      "side": 1,
+      "message": "Technically it is logging properties used, not specific statements -- you are correct.",
+      "parentUuid": "2ef897d1_ac3f35d2",
+      "range": {
+        "startLine": 15,
+        "startChar": 36,
+        "endLine": 15,
+        "endChar": 51
+      },
+      "revId": "478a8c7245f53cc733a372280f8383131ddf0105",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_2c5d854a",
         "filename": "client/sql/entity_usage.sql",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-02-08T11:28:56Z",
       "side": 1,
       "message": "\"eu\" is for \"entity usage\". This should probably be \"su\".\n\nI also suggest to split this of to a separate file.",
+      "range": {
+        "startLine": 16,
+        "startChar": 2,
+        "endLine": 16,
+        "endChar": 4
+      },
+      "revId": "478a8c7245f53cc733a372280f8383131ddf0105",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_12dd40e1",
+        "filename": "client/sql/entity_usage.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 4548
+      },
+      "writtenOn": "2017-02-08T17:11:26Z",
+      "side": 1,
+      "message": "I fixed this in updated code I submitted for review just now.",
+      "parentUuid": "2ef897d1_2c5d854a",
       "range": {
         "startLine": 16,
         "startChar": 2,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_f2eaa472",
+        "filename": "client/sql/entity_usage.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 4548
+      },
+      "writtenOn": "2017-02-08T17:11:26Z",
+      "side": 1,
+      "message": "I also fixed this.",
+      "parentUuid": "2ef897d1_0c588958",
+      "range": {
+        "startLine": 17,
+        "startChar": 39,
+        "endLine": 17,
+        "endChar": 41
+      },
+      "revId": "478a8c7245f53cc733a372280f8383131ddf0105",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_cc3831ee",
         "filename": "client/sql/entity_usage.sql",
         "patchSetId": 1
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_32a71c4e",
+        "filename": "client/sql/entity_usage.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 4548
+      },
+      "writtenOn": "2017-02-08T17:11:26Z",
+      "side": 1,
+      "message": "This boolean is used to track if a Lua module creator writes to the Lua table representing an entity. Its used in order to determine what data to exclude from analyses analyzing Wikidata usage",
+      "parentUuid": "2ef897d1_cc3831ee",
+      "range": {
+        "startLine": 19,
+        "startChar": 65,
+        "endLine": 19,
+        "endChar": 103
+      },
+      "revId": "478a8c7245f53cc733a372280f8383131ddf0105",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_ec352df4",
         "filename": "client/sql/entity_usage.sql",
         "patchSetId": 1
@@ -105,6 +201,30 @@
       "writtenOn": "2017-02-08T11:28:56Z",
       "side": 1,
       "message": "If a property exists or not may change any time. The boolean flag in this column will be outdated then.\n\nWhat is this used for?",
+      "range": {
+        "startLine": 20,
+        "startChar": 62,
+        "endLine": 20,
+        "endChar": 100
+      },
+      "revId": "478a8c7245f53cc733a372280f8383131ddf0105",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_1281c092",
+        "filename": "client/sql/entity_usage.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 4548
+      },
+      "writtenOn": "2017-02-08T17:11:26Z",
+      "side": 1,
+      "message": "This is used to determine if the property was in existence when the page was rendered. It\u0027s possible that certain properties that a Lua module tries to access will not exist for a given entity.",
+      "parentUuid": "2ef897d1_ec352df4",
       "range": {
         "startLine": 20,
         "startChar": 62,
