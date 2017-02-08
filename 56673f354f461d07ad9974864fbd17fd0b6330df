@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "2ef897d1_17dd32e1",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-08T14:11:05Z",
+      "side": 1,
+      "message": "Please:\n\n\"jakub-onderka/php-parallel-lint\": \"\u003e\u003d0.3 \u003c0.10\",\n\"mediawiki/mediawiki-codesniffer\": \"\u003e\u003d0.4 \u003c0.8\"",
+      "revId": "56673f354f461d07ad9974864fbd17fd0b6330df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_fdfb9d0f",
         "filename": "phpcs.xml",
         "patchSetId": 1
@@ -19,6 +36,23 @@
         "endLine": 4,
         "endChar": 60
       },
+      "revId": "56673f354f461d07ad9974864fbd17fd0b6330df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_f7ea9672",
+        "filename": "phpcs.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-08T14:11:05Z",
+      "side": 1,
+      "message": "Can you bring this in alphabetic order please?",
       "revId": "56673f354f461d07ad9974864fbd17fd0b6330df",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
