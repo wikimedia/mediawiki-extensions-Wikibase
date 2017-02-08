@@ -319,6 +319,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_ffc6e817",
+        "filename": "repo/includes/Api/WikibasePrefixSearcher.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-02-08T22:34:39Z",
+      "side": 1,
+      "message": "I don\u0027t see a point of testing EntitySearchElastic against mock WikibasePrefixSearcher - they are essentially same unit, just split into two classes because they need to be implementing different APIs, one faces the Wikibase API and another the CirrusSearch searching API. Testable API is in EntitySearchElastic, WikibasePrefixSearcher is just an internal implementation detail of it which should not be visible from outside.",
+      "parentUuid": "2ef897d1_ff1948dc",
+      "revId": "36e5137312371746d45a74d12598253abf4cba0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_b7cd3e36",
         "filename": "repo/tests/phpunit/includes/Api/ElasticTermResultTest.php",
         "patchSetId": 20
