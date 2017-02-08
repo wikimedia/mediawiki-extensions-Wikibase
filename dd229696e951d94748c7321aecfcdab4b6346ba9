@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "2ef897d1_b271ccdf",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-08T17:10:04Z",
+      "side": 1,
+      "message": "long line",
+      "revId": "dd229696e951d94748c7321aecfcdab4b6346ba9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_d25d68f0",
         "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
         "patchSetId": 1
@@ -13,6 +30,30 @@
       "writtenOn": "2017-02-08T15:25:35Z",
       "side": 1,
       "message": "Looks complicated.\nHow about extracting a method `startsWith($haystack, $needle)`?",
+      "range": {
+        "startLine": 265,
+        "startChar": 9,
+        "endLine": 265,
+        "endChar": 99
+      },
+      "revId": "dd229696e951d94748c7321aecfcdab4b6346ba9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_f24e249a",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-08T17:10:04Z",
+      "side": 1,
+      "message": "...or use a regex, or strncmp.\n\nThe problem with startsWith is - we don\u0027t know where to put it. StringUtils?",
+      "parentUuid": "2ef897d1_d25d68f0",
       "range": {
         "startLine": 265,
         "startChar": 9,
