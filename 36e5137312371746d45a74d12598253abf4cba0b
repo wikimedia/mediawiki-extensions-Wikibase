@@ -16,6 +16,23 @@
       "revId": "36e5137312371746d45a74d12598253abf4cba0b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_77590690",
+        "filename": "repo/includes/Api/EntityPrefixSearchProfiles.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-08T14:06:03Z",
+      "side": 1,
+      "message": "think the repo/includes/Api directory isn\u0027t the best place for this and all the other elastic / cirrus specific stuff.\n\nWe have Wikibase/Repo/Search/Elastic which might be better or maybe some place else.\n\nfor this specific file, we also have repo/config or config type stuff.",
+      "revId": "36e5137312371746d45a74d12598253abf4cba0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
