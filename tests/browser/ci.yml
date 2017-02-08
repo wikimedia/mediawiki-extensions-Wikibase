@@ -5,4 +5,4 @@ MEDIAWIKI_ENVIRONMENT:
   - beta
 
 PLATFORM:
-  - Linux
+  - macOS 10.12
