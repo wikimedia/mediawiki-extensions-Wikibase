@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_1c02f2be",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-02-08T20:43:00Z",
+      "side": 1,
+      "message": "I can\u0027t do much about Cirrus globals, but I certainly can put Entity search configs under $wgWBRepoSettings",
+      "parentUuid": "2ef897d1_0cbc09b0",
+      "revId": "36e5137312371746d45a74d12598253abf4cba0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_77590690",
         "filename": "repo/includes/Api/EntityPrefixSearchProfiles.php",
         "patchSetId": 20
@@ -30,6 +48,24 @@
       "writtenOn": "2017-02-08T14:06:03Z",
       "side": 1,
       "message": "think the repo/includes/Api directory isn\u0027t the best place for this and all the other elastic / cirrus specific stuff.\n\nWe have Wikibase/Repo/Search/Elastic which might be better or maybe some place else.\n\nfor this specific file, we also have repo/config or config type stuff.",
+      "revId": "36e5137312371746d45a74d12598253abf4cba0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_dc0b3ad8",
+        "filename": "repo/includes/Api/EntityPrefixSearchProfiles.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-02-08T20:43:00Z",
+      "side": 1,
+      "message": "I agree it may not be the best place. I didn\u0027t think yet where to put them (want to get them working first) so suggestions welcome.",
+      "parentUuid": "2ef897d1_77590690",
       "revId": "36e5137312371746d45a74d12598253abf4cba0b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_fca8368b",
+        "filename": "repo/includes/Api/EntitySearchElastic.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-02-08T20:43:00Z",
+      "side": 1,
+      "message": "it can, but I don\u0027t see why do it - searcher is useful only when you have a query, so why keep it around when we don\u0027t have one?",
+      "parentUuid": "2ef897d1_178bf2c5",
+      "revId": "36e5137312371746d45a74d12598253abf4cba0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_b7e41ea4",
         "filename": "repo/includes/Api/WikibasePrefixSearcher.php",
         "patchSetId": 20
@@ -64,6 +118,24 @@
       "writtenOn": "2017-02-08T14:13:29Z",
       "side": 1,
       "message": "In Wikibase, there should be a blank line above here, between the php opening tag and namespace.",
+      "revId": "36e5137312371746d45a74d12598253abf4cba0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_9c9a6274",
+        "filename": "repo/includes/Api/WikibasePrefixSearcher.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-02-08T20:43:00Z",
+      "side": 1,
+      "message": "Done.\nWe may want to add a rule into the syntax checker for this, maybe?",
+      "parentUuid": "2ef897d1_b7e41ea4",
       "revId": "36e5137312371746d45a74d12598253abf4cba0b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_3c9fee63",
+        "filename": "repo/includes/Api/WikibasePrefixSearcher.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-02-08T20:43:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_37e26e9d",
+      "revId": "36e5137312371746d45a74d12598253abf4cba0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_77ffc631",
         "filename": "repo/includes/Api/WikibasePrefixSearcher.php",
         "patchSetId": 20
@@ -98,6 +188,24 @@
       "writtenOn": "2017-02-08T14:19:14Z",
       "side": 1,
       "message": "suggest we import the namespace and then just need AbstractQuery as the type hint.\n\nAlso, is this suppose to be Elastica\\Query\\AbstractQuery?\n\nalso, personal preference, I would put the AbstractQuery object as the first constructor param here.",
+      "revId": "36e5137312371746d45a74d12598253abf4cba0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_9c814200",
+        "filename": "repo/includes/Api/WikibasePrefixSearcher.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-02-08T20:43:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_77ffc631",
       "revId": "36e5137312371746d45a74d12598253abf4cba0b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_7c7c461b",
+        "filename": "repo/includes/Api/WikibasePrefixSearcher.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-02-08T20:43:00Z",
+      "side": 1,
+      "message": "could you explain why? It\u0027s not hard to do it but I\u0027m not sure why.",
+      "parentUuid": "2ef897d1_57fa8a41",
+      "revId": "36e5137312371746d45a74d12598253abf4cba0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_b7cd3e36",
         "filename": "repo/tests/phpunit/includes/Api/ElasticTermResultTest.php",
         "patchSetId": 20
@@ -132,6 +258,24 @@
       "writtenOn": "2017-02-08T14:08:05Z",
       "side": 1,
       "message": "new BasicEntityIdParser() would work here and not need the WikibaseRepo factory here.\n\nafaik, BasicEntityIdParser only works for items and properties, but that should be okay here.",
+      "revId": "36e5137312371746d45a74d12598253abf4cba0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_5ccd0a87",
+        "filename": "repo/tests/phpunit/includes/Api/ElasticTermResultTest.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-02-08T20:43:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_b7cd3e36",
       "revId": "36e5137312371746d45a74d12598253abf4cba0b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
