@@ -200,7 +200,7 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 
 	public function testItemWithStuffIsNotEmpty() {
 		$item = new Item();
-		$item->getFingerprint()->setAliasGroup( 'en', [ 'foo' ] );
+		$item->setAliases( 'en', [ 'foo' ] );
 		$this->assertFalse( $item->isEmpty() );
 
 		$item = new Item();
@@ -292,11 +292,14 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 		$this->assertTrue( $secondItem->equals( $firstItem ) );
 	}
 
+	/**
+	 * @return Item
+	 */
 	private function getBaseItem() {
 		$item = new Item( new ItemId( 'Q42' ) );
-		$item->getFingerprint()->setLabel( 'en', 'Same' );
-		$item->getFingerprint()->setDescription( 'en', 'Same' );
-		$item->getFingerprint()->setAliasGroup( 'en', [ 'Same' ] );
+		$item->setLabel( 'en', 'Same' );
+		$item->setDescription( 'en', 'Same' );
+		$item->setAliases( 'en', [ 'Same' ] );
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Same' );
 		$item->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ) );
 
@@ -305,13 +308,13 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 
 	public function notEqualsProvider() {
 		$differentLabel = $this->getBaseItem();
-		$differentLabel->getFingerprint()->setLabel( 'en', 'Different' );
+		$differentLabel->setLabel( 'en', 'Different' );
 
 		$differentDescription = $this->getBaseItem();
-		$differentDescription->getFingerprint()->setDescription( 'en', 'Different' );
+		$differentDescription->setDescription( 'en', 'Different' );
 
 		$differentAlias = $this->getBaseItem();
-		$differentAlias->getFingerprint()->setAliasGroup( 'en', [ 'Different' ] );
+		$differentAlias->setAliases( 'en', [ 'Different' ] );
 
 		$differentSiteLink = $this->getBaseItem();
 		$differentSiteLink->getSiteLinkList()->removeLinkWithSiteId( 'enwiki' );
