@@ -164,21 +164,6 @@ class ElasticTermResultTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * Get a lookup that always returns a pt label and description suffixed by the entity ID
-	 *
-	 * @return LabelDescriptionLookup
-	 */
-	private function getMockLabelDescriptionLookup() {
-		$mock = $this->getMockBuilder( LabelDescriptionLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$mock->expects( $this->any() )
-			->method( 'getDescription' )
-			->will( $this->returnValue( new Term( 'en', 'DESCRIPTION' ) ) );
-		return $mock;
-	}
-
-	/**
 	 * @dataProvider termResultsProvider
 	 * @param $languages
 	 * @param $resultData
@@ -187,7 +172,6 @@ class ElasticTermResultTest extends MediaWikiTestCase {
 	public function testTransformResult( $languages, $resultData, $expected ) {
 		$res = new ElasticTermResult(
 			new BasicEntityIdParser(),
-			$this->getMockLabelDescriptionLookup(),
 			$languages
 		);
 
