@@ -19,8 +19,8 @@ use RequestContext;
 use Serializers\Serializer;
 use User;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\DeserializerFactory;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
@@ -42,6 +42,7 @@ use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
+use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -98,15 +99,28 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	}
 
 	public function testNewValidatorBuilders() {
-		$entityId = new ItemId( 'other:Q9' );
-		$repo = $this->getWikibaseRepoWithClientSettings( new SettingsArray( [
-			'foreignRepositories' => [
-				'other' => [
-					'supportedEntityTypes' => [ $entityId->getEntityType() ],
-				]
-			]
-		] ) );
-		$valueToValidate = new EntityIdValue( $entityId );
+		$kittenId = $this->getMockBuilder( EntityId::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$kittenId->expects( $this->any() )
+			->method( 'getEntityType' )
+			->will( $this->returnValue( 'kitten' ) );
+		$kittenId->expects( $this->any() )
+			->method( 'getSerialization' )
+			->will( $this->returnValue( 'other:K9' ) );
+		$kittenId->expects( $this->any() )
+			->method( 'getLocalPart' )
+			->will( $this->returnValue( 'K9' ) );
+		$kittenId->expects( $this->any() )
+			->method( 'getRepositoryName' )
+			->will( $this->returnValue( 'other' ) );
+
+		$valueToValidate = new EntityIdValue( $kittenId );
+
+		$repo = $this->getWikibaseRepoWithCustomRepositoryDefinitions( array_merge(
+			$this->getRepositoryDefinition( '', [ 'entity-types' => [ 'item', 'property' ] ] ),
+			$this->getRepositoryDefinition( 'other', [ 'entity-types' => [ 'kitten' ] ] )
+		) );
 
 		$builders = $repo->newValidatorBuilders();
 		$this->assertInstanceOf( ValidatorBuilders::class, $builders );
@@ -343,18 +357,29 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @param SettingsArray $clientSettings
+	 * @param $repositoryName
+	 * @param array $customSettings
+	 *
+	 * @return array
+	 */
+	private function getRepositoryDefinition( $repositoryName, array $customSettings = [] ) {
+		return [ $repositoryName => array_merge(
+			[ 'database' => '', 'entity-types' => [ 'item', 'property' ], 'prefix-mapping' => [] ],
+			$customSettings
+		) ];
+	}
+
+	/**
+	 * @param array $repoDefinitions
 	 *
 	 * @return WikibaseRepo
 	 */
-	private function getWikibaseRepoWithClientSettings( SettingsArray $clientSettings ) {
-		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
+	private function getWikibaseRepoWithCustomRepositoryDefinitions( array $repoDefinitions ) {
 		return new WikibaseRepo(
-			$settings,
+			WikibaseRepo::getDefaultInstance()->getSettings(),
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
-			null, // FIXME: providing no DataRetrievalServiceFactory but client settings does not make much sense
-			$clientSettings
+			new RepositoryDefinitions( $repoDefinitions )
 		);
 	}
 
@@ -363,17 +388,11 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 			$this->markTestSkipped( 'WikibaseClient must be enabled to run this test' );
 		}
 
-		$clientSettings = WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy();
-		$clientSettings['foreignRepositories'] = [
-			'repo1' => [ 'supportedEntityTypes' => [ 'foo', 'baz' ] ],
-			'repo2' => [ 'supportedEntityTypes' => [ 'foobar' ] ],
-		];
-
-		$wikibaseRepo = $this->getWikibaseRepoWithClientSettings( new SettingsArray( $clientSettings ) );
-		$wikibaseRepo->getSettings()->setSetting(
-			'entityNamespaces',
-			[ 'foo' => 100, 'bar' => 102 ]
-		);
+		$wikibaseRepo = $this->getWikibaseRepoWithCustomRepositoryDefinitions( array_merge(
+			$this->getRepositoryDefinition( '', [ 'entity-types' => [ 'foo', 'bar' ] ] ),
+			$this->getRepositoryDefinition( 'repo1', [ 'entity-types' => [ 'baz' ] ] ),
+			$this->getRepositoryDefinition( 'repo2', [ 'entity-types' => [ 'foobar' ] ] )
+		) );
 
 		$enabled = $wikibaseRepo->getEnabledEntityTypes();
 		$this->assertContains( 'foo', $enabled );
@@ -490,11 +509,17 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	 * @return WikibaseRepo
 	 */
 	private function getWikibaseRepo( $entityTypeDefinitions = array() ) {
+		/** @var RepositoryDefinitions $repositoryDefinitions */
+		$repositoryDefinitions = $this->getMockBuilder( RepositoryDefinitions::class )
+			->disableOriginalConstructor()
+			->getMock();
+
 		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
 		return new WikibaseRepo(
 			$settings,
 			new DataTypeDefinitions( array() ),
-			new EntityTypeDefinitions( $entityTypeDefinitions )
+			new EntityTypeDefinitions( $entityTypeDefinitions ),
+			$repositoryDefinitions
 		);
 	}
 
