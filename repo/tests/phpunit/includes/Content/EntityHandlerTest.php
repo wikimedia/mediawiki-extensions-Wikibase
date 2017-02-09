@@ -21,6 +21,7 @@ use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\EntityContent;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Validators\EntityValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
@@ -55,10 +56,16 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 			$repoSettings = array_merge( $repoSettings, $settings->getArrayCopy() );
 		}
 
+		/** @var RepositoryDefinitions $repositoryDefinitions */
+		$repositoryDefinitions = $this->getMockBuilder( RepositoryDefinitions::class )
+			->disableOriginalConstructor()
+			->getMock();
+
 		return new WikibaseRepo(
 			new SettingsArray( $repoSettings ),
 			new DataTypeDefinitions( array() ),
-			new EntityTypeDefinitions( require __DIR__ . '/../../../../../lib/WikibaseLib.entitytypes.php' )
+			new EntityTypeDefinitions( require __DIR__ . '/../../../../../lib/WikibaseLib.entitytypes.php' ),
+			$repositoryDefinitions
 		);
 	}
 
