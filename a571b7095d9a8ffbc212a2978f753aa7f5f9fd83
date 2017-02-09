@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_8f0c61f1",
+        "filename": "repo/tests/phpunit/includes/Api/MergeItemsTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-09T15:24:04Z",
+      "side": 1,
+      "message": "newMergeItemsApiModule() would be a nice method name, in my opinion.",
+      "range": {
+        "startLine": 147,
+        "startChar": 18,
+        "endLine": 147,
+        "endChar": 30
+      },
+      "revId": "a571b7095d9a8ffbc212a2978f753aa7f5f9fd83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
