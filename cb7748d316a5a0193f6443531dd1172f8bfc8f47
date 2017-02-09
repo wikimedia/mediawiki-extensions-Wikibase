@@ -461,6 +461,30 @@
       "revId": "cb7748d316a5a0193f6443531dd1172f8bfc8f47",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_f094d7eb",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-09T11:41:45Z",
+      "side": 1,
+      "message": "But it\u0027s just a global function...",
+      "parentUuid": "2ef897d1_cdd72f27",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 10
+      },
+      "revId": "cb7748d316a5a0193f6443531dd1172f8bfc8f47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
