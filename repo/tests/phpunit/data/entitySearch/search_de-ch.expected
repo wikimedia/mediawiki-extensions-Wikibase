@@ -59,8 +59,11 @@
             "namespace",
             "title",
             "labels.de-ch",
+            "descriptions.de-ch",
             "labels.de",
-            "labels.en"
+            "descriptions.de",
+            "labels.en",
+            "descriptions.en"
         ],
         "stored_fields": [],
         "highlight": {
