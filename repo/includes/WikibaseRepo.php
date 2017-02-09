@@ -1309,10 +1309,12 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * @param int $options bitwise combination of the SerializerFactory::OPTION_ flags
+	 *
 	 * @return SerializerFactory
 	 */
-	public function getSerializerFactory() {
-		return new SerializerFactory( new DataValueSerializer() );
+	public function getSerializerFactory( $options = 0 ) {
+		return new SerializerFactory( new DataValueSerializer(), $options );
 	}
 
 	/**
@@ -1353,7 +1355,7 @@ class WikibaseRepo {
 	public function getEntitySerializer( $options = 0 ) {
 		if ( !isset( $this->entitySerializers[$options] ) ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
-			$serializerFactory = new SerializerFactory( new DataValueSerializer(), $options );
+			$serializerFactory = $this->getSerializerFactory( $options );
 			$serializers = array();
 
 			foreach ( $serializerFactoryCallbacks as $callback ) {
