@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_3af48e4f",
+        "filename": "repo/config/ElasticSearchRescoreProfiles.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-02-09T00:34:05Z",
+      "side": 1,
+      "message": "it might work, but it won\u0027t be really useful I think, so it\u0027d probably be better to segregate it.",
+      "parentUuid": "2ef897d1_3fdda0e1",
+      "revId": "cca6504e14804a1e9989a7261417f351e5311252",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_1aee721f",
         "filename": "repo/includes/Api/EntitySearchElastic.php",
         "patchSetId": 24
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_ba9e3e08",
+        "filename": "repo/includes/Api/EntitySearchElastic.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-02-09T00:34:05Z",
+      "side": 1,
+      "message": "yes, for return result we want to return it, even if it\u0027s a dump, it\u0027s used in tests (since this is the only way I see to get dump in the tests, other that playing with output buffers). If we had this functionality generalized in Searched, might be nicer.",
+      "parentUuid": "2ef897d1_7a432616",
+      "revId": "cca6504e14804a1e9989a7261417f351e5311252",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_7a6a0680",
         "filename": "repo/tests/phpunit/includes/Api/ElasticTermResultTest.php",
         "patchSetId": 24
@@ -81,6 +117,24 @@
       "writtenOn": "2017-02-08T23:39:41Z",
       "side": 1,
       "message": "would it be desirable to load these from the config\u0027s rather than duplicating?",
+      "revId": "cca6504e14804a1e9989a7261417f351e5311252",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_9a86e2bc",
+        "filename": "repo/tests/phpunit/includes/Api/EntitySearchElasticTest.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-02-09T00:34:05Z",
+      "side": 1,
+      "message": "good point, this was written before config file existed, now it can just load from config.",
+      "parentUuid": "2ef897d1_fa04b6c9",
       "revId": "cca6504e14804a1e9989a7261417f351e5311252",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
