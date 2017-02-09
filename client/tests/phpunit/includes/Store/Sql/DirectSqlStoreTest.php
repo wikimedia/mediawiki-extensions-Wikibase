@@ -17,6 +17,7 @@ use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\DirectSqlStore;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\EntityIdComposer;
+use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -50,7 +51,15 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$dispatchingServiceFactory = new DispatchingServiceFactory( $containerFactory, [ '' ], [] );
+		/** @var RepositoryDefinitions $repositoryDefinitions */
+		$repositoryDefinitions = $this->getMockBuilder( RepositoryDefinitions::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$dispatchingServiceFactory = new DispatchingServiceFactory(
+			$containerFactory,
+			$repositoryDefinitions
+		);
 
 		$dispatchingServiceFactory->defineService( 'EntityPrefetcher', function() {
 			return new NullEntityPrefetcher();
