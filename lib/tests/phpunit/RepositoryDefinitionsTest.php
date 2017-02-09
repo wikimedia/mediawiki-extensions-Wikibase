@@ -81,6 +81,19 @@ class RepositoryDefinitionsTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testGetEntityTypesPerRepository() {
+		$definitions = new RepositoryDefinitions( $this->getCompleteRepositoryDefinitionArray() );
+
+		$this->assertEquals(
+			[
+				'' => [ 'item', 'property' ],
+				'media' => [ 'mediainfo' ],
+				'lexeme' => [ 'lexeme' ],
+			],
+			$definitions->getEntityTypesPerRepository()
+		);
+	}
+
 	public function testGetEntityTypeToRepositoryMapping() {
 		$definitions = new RepositoryDefinitions( $this->getCompleteRepositoryDefinitionArray() );
 

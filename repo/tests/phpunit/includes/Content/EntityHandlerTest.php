@@ -21,6 +21,7 @@ use Wikibase\EntityContent;
 use Wikibase\InternalSerialization\SerializerFactory;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Validators\EntityValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
@@ -58,7 +59,8 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		return new WikibaseRepo(
 			new SettingsArray( $repoSettings ),
 			new DataTypeDefinitions( array() ),
-			new EntityTypeDefinitions( require __DIR__ . '/../../../../../lib/WikibaseLib.entitytypes.php' )
+			new EntityTypeDefinitions( require __DIR__ . '/../../../../../lib/WikibaseLib.entitytypes.php' ),
+			new RepositoryDefinitions( [ '' => [ 'database' => false, 'entity-types' => [], 'prefix-mapping' => [] ] ] )
 		);
 	}
 
