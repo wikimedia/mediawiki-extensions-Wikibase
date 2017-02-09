@@ -46,7 +46,8 @@
     "_source": [
         "namespace",
         "title",
-        "labels.en"
+        "labels.en",
+        "descriptions.en"
     ],
     "stored_fields": [],
     "highlight": {
