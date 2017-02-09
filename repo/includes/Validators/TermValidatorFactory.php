@@ -81,7 +81,7 @@ class TermValidatorFactory {
 				return new LabelDescriptionUniquenessValidator( $this->duplicateDetector );
 
 			default:
-				return new CompositeFingerprintValidator( array() );
+				return new NullFingerprintValidator();
 		}
 	}
 
