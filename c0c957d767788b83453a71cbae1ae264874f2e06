@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_6f1a4580",
+        "filename": "repo/includes/ChangeOp/ChangeOpDescription.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-09T16:41:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_cfb379e7",
+      "range": {
+        "startLine": 132,
+        "startChar": 7,
+        "endLine": 132,
+        "endChar": 40
+      },
+      "revId": "c0c957d767788b83453a71cbae1ae264874f2e06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_6ffec567",
         "filename": "repo/includes/ChangeOp/ChangeOpDescription.php",
         "patchSetId": 1
@@ -107,6 +131,24 @@
       "writtenOn": "2017-02-09T16:12:29Z",
       "side": 1,
       "message": "We need to check instanc eof DescriptionProvider before calling this.",
+      "revId": "c0c957d767788b83453a71cbae1ae264874f2e06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_8f17c155",
+        "filename": "repo/includes/ChangeOp/ChangeOpDescription.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-09T16:41:01Z",
+      "side": 1,
+      "message": "Ah! I got in the same trap!\nWe don\u0027t. It is already checked on line 112.",
+      "parentUuid": "2ef897d1_6ffec567",
       "revId": "c0c957d767788b83453a71cbae1ae264874f2e06",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
