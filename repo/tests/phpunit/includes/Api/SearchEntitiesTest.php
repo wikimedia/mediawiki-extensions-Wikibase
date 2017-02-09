@@ -8,13 +8,15 @@ use PHPUnit_Framework_TestCase;
 use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\SearchEntities;
-use Wikibase\Lib\Interactors\TermSearchResult;
 
 /**
  * @covers Wikibase\Repo\Api\SearchEntities
@@ -118,6 +120,18 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @return PropertyDataTypeLookup
+	 */
+	private function getMockPropertyDataTypeLookup() {
+		$mock = $this->getMock( PropertyDataTypeLookup::class );
+		$mock->expects( $this->any() )
+			->method( 'getDataTypeIdForProperty' )
+			->willReturn( 'datatype' );
+
+		return $mock;
+	}
+
+	/**
 	 * @param array $params
 	 * @param EntitySearchHelper|null $entitySearchHelper
 	 *
@@ -131,7 +145,8 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			$this->getMockTitleLookup(),
 			$this->getContentLanguages(),
 			[ 'item', 'property' ],
-			'concept:'
+			'concept:',
+			$this->getMockPropertyDataTypeLookup()
 		);
 
 		$module->execute();
@@ -286,6 +301,30 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			$this->assertArrayHasKey( 'url', $searchresult );
 			$this->assertArrayHasKey( 'title', $searchresult );
 			$this->assertArrayHasKey( 'pageid', $searchresult );
+		}
+	}
+
+	public function testSearchEntities_propertyHasDatatype() {
+		$params = array(
+			'action' => 'wbsearchentities',
+			'search' => 'P123',
+			'type' => 'property',
+			'language' => 'en'
+		);
+		$interactorReturn = array();
+		$interactorReturn[] = new TermSearchResult(
+			new Term( 'pid', 'P123' ),
+			'entityId',
+			new PropertyId( 'P123' )
+		);
+
+		$entitySearchHelper = $this->getMockEntitySearchHelper( $params, $interactorReturn );
+
+		$result = $this->callApiModule( $params, $entitySearchHelper );
+
+		$this->assertResultLooksGood( $result );
+		foreach ( $result['search'] as $key => $searchresult ) {
+			$this->assertArrayHasKey( 'datatype', $searchresult );
 		}
 	}
 
