@@ -22,6 +22,30 @@
       "revId": "ea26a6b8f1f44bbf80fe086127bee906f3c8ae99",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_49dd4ee0",
+        "filename": "repo/includes/Specials/SpecialMergeItems.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-09T13:38:09Z",
+      "side": 1,
+      "message": "\u003e I hope this is not relevant in these two cases, but the title\n \u003e lookup might return null if there is no page assigned to this ID.\n\nI\u0027m not sure but the Title object *could* be guaranteed by https://phabricator.wikimedia.org/diffusion/EWBA/browse/master/repo/includes/Content/EntityHandler.php;045001d10e88618c7ca7bf66d12a79bae58f7e07$464\n\n \u003e What I find more problematic is that this is called *after* the\n \u003e merge. The title lookup might either return null or the same title\n \u003e for both the \"from\" and the \"to\" ID, because one is a redirect\n \u003e after the merge. Please fetch the two titles before the redirect is\n \u003e created to make sure this can not happen.\n\nDone.",
+      "parentUuid": "2ef897d1_c9e49e0c",
+      "range": {
+        "startLine": 201,
+        "startChar": 25,
+        "endLine": 201,
+        "endChar": 38
+      },
+      "revId": "ea26a6b8f1f44bbf80fe086127bee906f3c8ae99",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
