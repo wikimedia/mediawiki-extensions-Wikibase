@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_12ed361c",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1316,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-09T17:06:00Z",
+      "side": 1,
+      "message": "`$options \u003d SerializerFactory::OPTION_DEFAULT` would be much more readable.\nIf it is what was meant...",
+      "range": {
+        "startLine": 1316,
+        "startChar": 50,
+        "endLine": 1316,
+        "endChar": 51
+      },
+      "revId": "716c8803f179c936de72aed6cc0d278fbce98acd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
