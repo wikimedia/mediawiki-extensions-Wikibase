@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_f004d7c9",
+        "filename": "lib/tests/phpunit/Interactors/DispatchingTermSearchInteractorFactoryTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-09T10:24:37Z",
+      "side": 1,
+      "message": "As PHPCS check failed before a merge (for a good reason) I had to touch this file any way. Thus the assert got removed, as suggested.",
+      "parentUuid": "2ef897d1_952a358e",
+      "revId": "79af577ca218fe31c5b110b8225971eacf8ad6bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_352f019e",
         "filename": "lib/tests/phpunit/Interactors/TermIndexSearchInteractorFactoryTest.php",
         "patchSetId": 15
@@ -30,6 +48,24 @@
       "writtenOn": "2017-02-09T09:50:07Z",
       "side": 1,
       "message": "See my comment in DispatchingTermSearchInteractorFactoryTest",
+      "revId": "79af577ca218fe31c5b110b8225971eacf8ad6bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_3064afad",
+        "filename": "lib/tests/phpunit/Interactors/TermIndexSearchInteractorFactoryTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-09T10:24:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_352f019e",
       "revId": "79af577ca218fe31c5b110b8225971eacf8ad6bc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
