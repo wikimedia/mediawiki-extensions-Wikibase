@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_8fb0e1f2",
+        "filename": "lib/includes/RepositoryDefinitions.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-09T15:52:43Z",
+      "side": 1,
+      "message": "this method should probably be added together with the whole class in Id23db330f20d0e3bcd62669607db1b12e70049b6. I somehow managed to miss the fact such map is also required in existing code.",
+      "revId": "dca6be644ac1aef40a0d125fcf827f865300c01d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
