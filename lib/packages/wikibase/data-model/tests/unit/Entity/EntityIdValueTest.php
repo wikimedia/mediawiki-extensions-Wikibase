@@ -87,8 +87,7 @@ class EntityIdValueTest extends PHPUnit_Framework_TestCase {
 	public function testSerializationCompatibility() {
 		$id = new EntityIdValue( new ItemId( 'Q31337' ) );
 
-		// This is the serialization format from when the EntityIdValue was still together with EntityId.
-		$this->assertEquals( '["item",31337]', $id->serialize() );
+		$this->assertEquals( 'C:32:"Wikibase\DataModel\Entity\ItemId":6:{Q31337}', $id->serialize() );
 	}
 
 	public function testDeserializationCompatibility() {
