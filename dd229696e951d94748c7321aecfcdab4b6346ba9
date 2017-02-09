@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_abfa72d8",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-09T13:11:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_b271ccdf",
+      "revId": "dd229696e951d94748c7321aecfcdab4b6346ba9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_d25d68f0",
         "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
         "patchSetId": 1
@@ -90,6 +108,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_ebf06afc",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-09T13:11:49Z",
+      "side": 1,
+      "message": "Moved to private method. While considering how to check this I thought substr method would be the fastest. But I am not sure about it.\n\nAs I get it this hook handler is called whenever a link is parsed (which is pretty often) but results are cached (aren\u0027t they) and this is not going to be reached for each link (contrary, only for a minor part of all), so I guess micro-optimization here might not be worth an effort.\n\nBut I\u0027d happy to change this to some other method.",
+      "parentUuid": "2ef897d1_26da4122",
+      "range": {
+        "startLine": 265,
+        "startChar": 9,
+        "endLine": 265,
+        "endChar": 99
+      },
+      "revId": "dd229696e951d94748c7321aecfcdab4b6346ba9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_32ecbc1f",
         "filename": "repo/tests/phpunit/includes/Hooks/LinkBeginHookHandlerTest.php",
         "patchSetId": 1
@@ -113,6 +155,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_eb362aae",
+        "filename": "repo/tests/phpunit/includes/Hooks/LinkBeginHookHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-09T13:11:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_32ecbc1f",
+      "range": {
+        "startLine": 305,
+        "startChar": 40,
+        "endLine": 305,
+        "endChar": 66
+      },
+      "revId": "dd229696e951d94748c7321aecfcdab4b6346ba9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_12be60fa",
         "filename": "repo/tests/phpunit/includes/Hooks/LinkBeginHookHandlerTest.php",
         "patchSetId": 1
@@ -124,6 +190,30 @@
       "writtenOn": "2017-02-08T15:21:51Z",
       "side": 1,
       "message": "Suggest to extract a variable - takes time to understand the relation with line in the beginning otherwise.",
+      "range": {
+        "startLine": 326,
+        "startChar": 22,
+        "endLine": 326,
+        "endChar": 25
+      },
+      "revId": "dd229696e951d94748c7321aecfcdab4b6346ba9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_8b48d633",
+        "filename": "repo/tests/phpunit/includes/Hooks/LinkBeginHookHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-09T13:11:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_12be60fa",
       "range": {
         "startLine": 326,
         "startChar": 22,
