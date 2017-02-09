@@ -212,10 +212,6 @@ call_user_func( function() {
 				$entitySearchHelper = new Wikibase\Repo\Search\Elastic\EntitySearchElastic(
 					$repo->getLanguageFallbackChainFactory(),
 					$repo->getEntityIdParser(),
-					new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
-						$repo->getTermLookup(),
-						$repo->getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
-					),
 					$repo->getContentModelMappings(),
 					$mainModule->getRequest(),
 					$settings
