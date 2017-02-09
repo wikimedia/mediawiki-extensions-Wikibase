@@ -6,7 +6,6 @@ use CirrusSearch\Search\ResultsType;
 use CirrusSearch\Search\SearchContext;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\TermSearchResult;
 
@@ -15,11 +14,6 @@ use Wikibase\Lib\Interactors\TermSearchResult;
  * a Wikibase entity by its label or alias.
  */
 class ElasticTermResult implements ResultsType {
-
-	/**
-	 * @var LabelDescriptionLookup
-	 */
-	private $labelDescriptionLookup;
 
 	/**
 	 * @var EntityIdParser
@@ -34,28 +28,24 @@ class ElasticTermResult implements ResultsType {
 	private $searchLanguageCodes;
 
 	/**
-	 * List of language codes in the display fallback chain, the first
-	 * is the preferred language.
-	 * @var string[]
+	 * Display fallback chain.
+	 * @var LanguageFallbackChain
 	 */
-	private $displayLanguageCodes;
+	private $fallbackChain;
 
 	/**
 	 * ElasticTermResult constructor.
 	 * @param EntityIdParser $idParser
-	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param string[] $searchLanguageCodes Language fallback chain for search
 	 * @param string[] $displayLanguageCodes Language fallback chain for display
 	 */
 	public function __construct( EntityIdParser $idParser,
-	                             LabelDescriptionLookup $labelDescriptionLookup,
 	                             array $searchLanguageCodes,
 	                             array $displayLanguageCodes
 	) {
 		$this->idParser = $idParser;
 		$this->searchLanguageCodes = $searchLanguageCodes;
-		$this->displayLanguageCodes = $displayLanguageCodes;
-		$this->labelDescriptionLookup = $labelDescriptionLookup;
+		$this->fallbackChain = $displayFallbackChain;
 	}
 
 	/**
@@ -67,6 +57,7 @@ class ElasticTermResult implements ResultsType {
 		$fields = [ 'namespace', 'title' ];
 		foreach ( $this->displayLanguageCodes as $code ) {
 			$fields[] = "labels.$code";
+			$fields[] = "descriptions.$code";
 		}
 		return $fields;
 	}
@@ -129,13 +120,20 @@ class ElasticTermResult implements ResultsType {
 	/**
 	 * Locate label for display among the source data, basing on fallback chain.
 	 * @param array $sourceData
+	 * @param string $field
 	 * @return null|Term
 	 */
-	private function findLabelForDisplay( $sourceData ) {
-		foreach ( $this->displayLanguageCodes as $code ) {
-			if ( !empty( $sourceData['labels'][$code] ) && $sourceData['labels'][$code][0] !== '' ) {
-				return new Term( $code, $sourceData['labels'][$code][0] );
-			}
+	private function findTermForDisplay( $sourceData, $field ) {
+		$labels_data = array_filter( array_map(
+			function ( $data ) {
+				return !empty( $data[0] ) ? $data[0] : null;
+			},
+			$sourceData[$field] )
+		);
+
+		$preferredValue = $this->fallbackChain->extractPreferredValueOrAny( $labels_data );
+		if ( $preferredValue ) {
+			return new Term( $preferredValue['language'], $preferredValue['value'] );
 		}
 		return null;
 	}
@@ -160,7 +158,8 @@ class ElasticTermResult implements ResultsType {
 			// Highlight part contains information about what has actually been matched.
 			$highlight = $r->getHighlights();
 			$matchedTermType = 'label';
-			$displayLabel = $this->findLabelForDisplay( $sourceData );
+			$displayLabel = $this->findTermForDisplay( $sourceData, 'labels' );
+			$displayDescription = $this->findTermForDisplay( $sourceData, 'descriptions' );
 
 			if ( !empty( $highlight['title'] ) ) {
 				// If we matched title, this means it's a match by ID
@@ -196,8 +195,6 @@ class ElasticTermResult implements ResultsType {
 				// This should not happen, but just in case, it's better to return something
 				$displayLabel = $matchedTerm;
 			}
-			// TODO: eventually this will be fetched from ES.
-			$displayDescription = $this->labelDescriptionLookup->getDescription( $entityId );
 
 			$results[$entityId->getSerialization()] = new TermSearchResult(
 				$matchedTerm, $matchedTermType, $entityId, $displayLabel,
