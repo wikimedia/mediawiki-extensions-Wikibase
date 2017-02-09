@@ -7,8 +7,6 @@ use Elastica\Result;
 use Elastica\ResultSet;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\DataModel\Term\Term;
 use Wikibase\Repo\Search\Elastic\ElasticTermResult;
 
 /**
@@ -25,13 +23,15 @@ class ElasticTermResultTest extends MediaWikiTestCase {
 				[
 					'_source' => [
 						'title' => 'Q1',
-						'labels' => [ 'en' => [ 'Test 1', 'Test 1 alias' ] ]
+						'labels' => [ 'en' => [ 'Test 1', 'Test 1 alias' ] ],
+						'descriptions' => [ 'en' => 'Describe it' ],
 					],
 					'highlight' => [ 'labels.en.prefix' => [ 'Test 1' ] ]
 				],
 				[
 					'id' => 'Q1',
 					'label' => [ 'en', 'Test 1' ],
+					'description' => [ 'en', 'Describe it' ],
 					'matched' => [ 'en', 'Test 1' ],
 					'matchedType' => 'label'
 				]
@@ -42,13 +42,15 @@ class ElasticTermResultTest extends MediaWikiTestCase {
 				[
 					'_source' => [
 						'title' => 'Q2',
-						'labels' => [ 'en' => [ 'Test 1', 'Alias', 'Another' ] ]
+						'labels' => [ 'en' => [ 'Test 1', 'Alias', 'Another' ] ],
+						'descriptions' => [ 'en' => 'Describe it' ],
 					],
 					'highlight' => [ 'labels.en.prefix' => [ 'Another' ] ]
 				],
 				[
 					'id' => 'Q2',
 					'label' => [ 'en', 'Test 1' ],
+					'description' => [ 'en', 'Describe it' ],
 					'matched' => [ 'en', 'Another' ],
 					'matchedType' => 'alias'
 				]
@@ -59,13 +61,15 @@ class ElasticTermResultTest extends MediaWikiTestCase {
 				[
 					'_source' => [
 						'title' => 'Q10',
-						'labels' => [ 'en' => [ 'Test 1', 'Alias', 'Another' ] ]
+						'labels' => [ 'en' => [ 'Test 1', 'Alias', 'Another' ] ],
+						'descriptions' => [ 'en' => 'Describe it' ],
 					],
 					'highlight' => [ 'title' => [ 'Q10' ] ]
 				],
 				[
 					'id' => 'Q10',
 					'label' => [ 'en', 'Test 1' ],
+					'description' => [ 'en', 'Describe it' ],
 					'matched' => [ 'qid', 'Q10' ],
 					'matchedType' => 'entityId'
 				]
@@ -79,12 +83,14 @@ class ElasticTermResultTest extends MediaWikiTestCase {
 						'labels' => [ 'en' => [ 'Test 1', 'Test 1 alias' ],
 									  'ru' => [ 'Тест 1', 'Тили тили тест' ]
 									],
+						'descriptions' => [ 'en' => 'Describe it' ],
 					],
 					'highlight' => [ 'labels.ru.prefix' => [ 'Тест 1' ] ]
 				],
 				[
 					'id' => 'Q3',
 					'label' => [ 'en', 'Test 1' ],
+					'description' => [ 'en', 'Describe it' ],
 					'matched' => [ 'ru', 'Тест 1' ],
 					'matchedType' => 'label'
 				]
@@ -96,12 +102,33 @@ class ElasticTermResultTest extends MediaWikiTestCase {
 					'_source' => [
 						'title' => 'Q3',
 						'labels' => [ 'ru' => [ 'Тест 1', 'Тили тили тест' ] ],
+						'descriptions' => [ 'en' => 'Describe it' ],
 					],
 					'highlight' => [ 'labels.en.prefix' => [ 'Test 1' ] ]
 				],
 				[
 					'id' => 'Q3',
 					'label' => [ 'ru', 'Тест 1' ],
+					'description' => [ 'en', 'Describe it' ],
+					'matched' => [ 'en', 'Test 1' ],
+					'matchedType' => 'label'
+				],
+			],
+			'fallback description' => [
+				[ 'en', 'ru' ],
+				[ 'en', 'ru' ],
+				[
+					'_source' => [
+						'title' => 'Q3',
+						'labels' => [ 'ru' => [ 'Тест 1', 'Тили тили тест' ] ],
+						'descriptions' => [ 'ru' => 'Описание' ],
+					],
+					'highlight' => [ 'labels.en.prefix' => [ 'Test 1' ] ]
+				],
+				[
+					'id' => 'Q3',
+					'label' => [ 'ru', 'Тест 1' ],
+					'description' => [ 'ru', 'Описание' ],
 					'matched' => [ 'en', 'Test 1' ],
 					'matchedType' => 'label'
 				],
@@ -116,12 +143,14 @@ class ElasticTermResultTest extends MediaWikiTestCase {
 							'de' => [ 'Der Test 1', 'Test 2' ],
 							'de-ch' => [ '', 'Test 2' ]
 						],
+						'descriptions' => [ 'en' => 'Describe it' ],
 					],
 					'highlight' => [ 'labels.de-ch.prefix' => [ 'Test 2' ] ]
 				],
 				[
 					'id' => 'Q6',
 					'label' => [ 'de', 'Der Test 1' ],
+					'description' => [ 'en', 'Describe it' ],
 					'matched' => [ 'de-ch', 'Test 2' ],
 					'matchedType' => 'alias'
 				],
@@ -137,12 +166,14 @@ class ElasticTermResultTest extends MediaWikiTestCase {
 							'en' => [ 'Test 1', 'Test 3' ],
 							'de-ch' => [ '', 'Test 2' ]
 						],
+						'descriptions' => [ 'en' => 'Describe it' ],
 					],
 					'highlight' => [ 'labels.de-ch.prefix' => [ 'Test 2' ] ]
 				],
 				[
 					'id' => 'Q8',
 					'label' => [ 'en', 'Test 1' ],
+					'description' => [ 'en', 'Describe it' ],
 					'matched' => [ 'de-ch', 'Test 2' ],
 					'matchedType' => 'alias'
 				],
@@ -172,21 +203,6 @@ class ElasticTermResultTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * Get a lookup that always returns a pt label and description suffixed by the entity ID
-	 *
-	 * @return LabelDescriptionLookup
-	 */
-	private function getMockLabelDescriptionLookup() {
-		$mock = $this->getMockBuilder( LabelDescriptionLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$mock->expects( $this->any() )
-			->method( 'getDescription' )
-			->will( $this->returnValue( new Term( 'en', 'DESCRIPTION' ) ) );
-		return $mock;
-	}
-
-	/**
 	 * @dataProvider termResultsProvider
 	 * @param $languages
 	 * @param $displayLanguages
@@ -196,7 +212,6 @@ class ElasticTermResultTest extends MediaWikiTestCase {
 	public function testTransformResult( $languages, $displayLanguages, $resultData, $expected ) {
 		$res = new ElasticTermResult(
 			new BasicEntityIdParser(),
-			$this->getMockLabelDescriptionLookup(),
 			$languages,
 			$displayLanguages
 		);
@@ -225,9 +240,15 @@ class ElasticTermResultTest extends MediaWikiTestCase {
 
 		$this->assertEquals( $expected['matchedType'], $converted->getMatchedTermType(), 'Match type is wrong' );
 
-		// TODO: this will be fixed when descriptions are indexed too
-		$this->assertEquals( 'DESCRIPTION', $converted->getDisplayDescription()->getText() );
-		$this->assertEquals( 'en', $converted->getDisplayDescription()->getLanguageCode() );
+		if ( !empty( $expected['description'] ) ) {
+			$this->assertEquals( $expected['description'][0],
+				$converted->getDisplayDescription()->getLanguageCode(),
+				'Description language is wrong' );
+			$this->assertEquals( $expected['description'][1],
+				$converted->getDisplayDescription()->getText(), 'Description text is wrong' );
+		} else {
+			$this->assertNull( $converted->getDisplayDescription() );
+		}
 	}
 
 }
