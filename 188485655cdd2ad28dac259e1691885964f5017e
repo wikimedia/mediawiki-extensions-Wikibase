@@ -34,6 +34,24 @@
       "revId": "188485655cdd2ad28dac259e1691885964f5017e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_d0b8bbe4",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-09T10:36:11Z",
+      "side": 1,
+      "message": "This will cause a fatal error in PHP 5.5 if I read manual right:\n\n \u003e  PHP 5.6+ also allows aliasing or importing function and constant names. \n\nfrom: https://secure.php.net/manual/en/language.namespaces.importing.php\n\nIf your IDE cannot find MediaWiki global functions, you could try point it directly to where your MW code is (ie. add MW directory to include path). In phpstorm 10 it would be Settings/Languages \u0026 Frameworks/PHP and then \"Include path\" list.",
+      "parentUuid": "2ef897d1_855fbe12",
+      "revId": "188485655cdd2ad28dac259e1691885964f5017e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
