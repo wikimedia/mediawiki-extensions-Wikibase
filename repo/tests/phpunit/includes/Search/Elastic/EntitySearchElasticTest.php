@@ -5,8 +5,6 @@ namespace Wikibase\Repo\Search\Elastic\Tests;
 use Language;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\DataModel\Term\Term;
 use Wikibase\Repo\Search\Elastic\EntitySearchElastic;
 
 /**
@@ -22,28 +20,12 @@ class EntitySearchElasticTest extends MediaWikiTestCase {
 		}
 	}
 
-	/**
-	 * Get a lookup that always returns a fixed label and description
-	 *
-	 * @return LabelDescriptionLookup
-	 */
-	private function getMockLabelDescriptionLookup() {
-		$mock = $this->getMockBuilder( LabelDescriptionLookup::class )
-				->disableOriginalConstructor()
-				->getMock();
-		$mock->expects( $this->any() )
-			->method( 'getDescription' )
-			->will( $this->returnValue( new Term( 'en', 'DESCRIPTION' ) ) );
-		return $mock;
-	}
-
 	private function newEntitySearch( Language $userLang ) {
 		$repo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
 
 		return new EntitySearchElastic(
 			$repo->getLanguageFallbackChainFactory(),
 			new BasicEntityIdParser(),
-			$this->getMockLabelDescriptionLookup(),
 			$userLang,
 			$repo->getContentModelMappings(),
 			$this->getMockRequest(),
