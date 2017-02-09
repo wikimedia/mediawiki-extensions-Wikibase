@@ -98,11 +98,13 @@ class ViewEntityAction extends ViewAction {
 				$this->setPageTitle( $outputPage, $meta['title'] );
 			} else {
 				$this->setHTMLTitle( $outputPage, $meta['title'] );
+				$outputPage->addMeta( 'og:title', $meta['title'] );
 			}
 		}
 
 		if ( isset( $meta['description'] ) ) {
 			$outputPage->addMeta( 'description', $meta['description'] );
+			$outputPage->addMeta( 'og:description', $meta['description'] );
 		}
 	}
 
