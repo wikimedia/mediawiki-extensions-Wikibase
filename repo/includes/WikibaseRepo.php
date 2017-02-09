@@ -56,7 +56,6 @@ use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\EditEntityFactory;
 use Wikibase\EntityFactory;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
-use Wikibase\InternalSerialization\SerializerFactory as InternalSerializerFactory;
 use Wikibase\ItemChange;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\LanguageFallbackChainFactory;
@@ -1310,10 +1309,10 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return InternalSerializerFactory
+	 * @return SerializerFactory
 	 */
 	public function getSerializerFactory() {
-		return new InternalSerializerFactory( new DataValueSerializer() );
+		return new SerializerFactory( new DataValueSerializer() );
 	}
 
 	/**
