@@ -30,10 +30,7 @@ class EntityIdValue extends DataValueObject {
 	 * @return string
 	 */
 	public function serialize() {
-		return json_encode( [
-			$this->entityId->getEntityType(),
-			$this->getNumericId()
-		] );
+		return serialize( $this->entityId );
 	}
 
 	/**
@@ -58,7 +55,14 @@ class EntityIdValue extends DataValueObject {
 	 * @throws IllegalValueException
 	 */
 	public function unserialize( $serialized ) {
-		list( $entityType, $numericId ) = json_decode( $serialized );
+		$array = json_decode( $serialized );
+
+		if ( !is_array( $array ) ) {
+			$this->entityId = unserialize( $serialized );
+			return;
+		}
+
+		list( $entityType, $numericId ) = $array;
 
 		try {
 			$entityId = LegacyIdInterpreter::newIdFromTypeAndNumber( $entityType, $numericId );

@@ -70,7 +70,7 @@ class ItemId extends EntityId implements Int32EntityId {
 	 * @return string
 	 */
 	public function serialize() {
-		return json_encode( [ 'item', $this->serialization ] );
+		return $this->serialization;
 	}
 
 	/**
@@ -79,7 +79,8 @@ class ItemId extends EntityId implements Int32EntityId {
 	 * @param string $serialized
 	 */
 	public function unserialize( $serialized ) {
-		list( , $this->serialization ) = json_decode( $serialized );
+		$array = json_decode( $serialized );
+		$this->serialization = is_array( $array ) ? $array[1] : $serialized;
 	}
 
 	/**
