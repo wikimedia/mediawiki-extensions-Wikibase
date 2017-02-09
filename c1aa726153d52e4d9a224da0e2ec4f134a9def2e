@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_92aa46d0",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-09T16:56:37Z",
+      "side": 1,
+      "message": "Didn\u0027t like it. Fixed in follow up patch",
+      "range": {
+        "startLine": 104,
+        "startChar": 33,
+        "endLine": 104,
+        "endChar": 39
+      },
+      "revId": "c1aa726153d52e4d9a224da0e2ec4f134a9def2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
