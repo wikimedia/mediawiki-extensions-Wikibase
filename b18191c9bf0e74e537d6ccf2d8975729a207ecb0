@@ -22,6 +22,30 @@
       "revId": "b18191c9bf0e74e537d6ccf2d8975729a207ecb0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_eb32aa5a",
+        "filename": "lib/includes/RepositoryDefinitions.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-09T14:09:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_4bef7ead",
+      "range": {
+        "startLine": 55,
+        "startChar": 9,
+        "endLine": 55,
+        "endChar": 17
+      },
+      "revId": "b18191c9bf0e74e537d6ccf2d8975729a207ecb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
