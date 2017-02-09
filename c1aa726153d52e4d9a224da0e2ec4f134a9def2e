@@ -46,6 +46,54 @@
       "revId": "c1aa726153d52e4d9a224da0e2ec4f134a9def2e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_9596b040",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-09T19:16:59Z",
+      "side": 1,
+      "message": "\u003e There is zero practical benefit in preferring a named constant over a string constant.\n\nStrongly disagree. It reveals the relation between pieces of code. Here, before understanding if it is important that this string has value \u0027item\u0027 I first tried to change it, and after tests broke I understood that this exact value matters and it is really some type defining constant.\n\n\u003e Nobody does a \"where is this used\" search.\n\nFor now. Imagine if one day you will decide to change those values. How easier it would be?",
+      "parentUuid": "2ef897d1_3227120f",
+      "range": {
+        "startLine": 104,
+        "startChar": 33,
+        "endLine": 104,
+        "endChar": 39
+      },
+      "revId": "c1aa726153d52e4d9a224da0e2ec4f134a9def2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_b5908c4f",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-09T19:16:59Z",
+      "side": 1,
+      "message": "\u003e There is zero practical benefit in preferring a named constant over a string constant.\n\nDisagree. It reveals the relation.",
+      "parentUuid": "2ef897d1_3227120f",
+      "range": {
+        "startLine": 104,
+        "startChar": 33,
+        "endLine": 104,
+        "endChar": 39
+      },
+      "revId": "c1aa726153d52e4d9a224da0e2ec4f134a9def2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
