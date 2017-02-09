@@ -22,6 +22,30 @@
       "revId": "c1aa726153d52e4d9a224da0e2ec4f134a9def2e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_3227120f",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-09T17:46:06Z",
+      "side": 1,
+      "message": "I remember us discussing this exact detail multiple times over the years. Main arguments are:\n* The constant Item::ENTITY_TYPE does have an extremely weird name. It is meant to be the \"entity type identifier for Items\", but the way the constant name is constructed sounds very different from that. Should be \"ITEM_TYPE\", but sound like a constant for an array key that holds an entity type.\n* There is zero practical benefit in preferring a named constant over a string constant. It\u0027s impossible to change it anyway. Nobody does a \"where is this used\" search.\n\nThat\u0027s for the constant. Your solution is very different. I like it. Thanks.",
+      "parentUuid": "2ef897d1_92aa46d0",
+      "range": {
+        "startLine": 104,
+        "startChar": 33,
+        "endLine": 104,
+        "endChar": 39
+      },
+      "revId": "c1aa726153d52e4d9a224da0e2ec4f134a9def2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
