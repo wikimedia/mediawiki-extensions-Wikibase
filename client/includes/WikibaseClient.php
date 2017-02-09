@@ -75,6 +75,7 @@ use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
+use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\LanguageNameLookup;
@@ -217,6 +218,11 @@ final class WikibaseClient {
 	private $entityTypeDefinitions;
 
 	/**
+	 * @var RepositoryDefinitions
+	 */
+	private $repositoryDefinitions;
+
+	/**
 	 * @var PrefetchingTermLookup|null
 	 */
 	private $termLookup = null;
@@ -313,17 +319,20 @@ final class WikibaseClient {
 	 * @param SettingsArray $settings
 	 * @param DataTypeDefinitions $dataTypeDefinitions
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
+	 * @param RepositoryDefinitions $repositoryDefinitions
 	 * @param SiteLookup $siteLookup
 	 */
 	public function __construct(
 		SettingsArray $settings,
 		DataTypeDefinitions $dataTypeDefinitions,
 		EntityTypeDefinitions $entityTypeDefinitions,
+		RepositoryDefinitions $repositoryDefinitions,
 		SiteLookup $siteLookup
 	) {
 		$this->settings = $settings;
 		$this->dataTypeDefinitions = $dataTypeDefinitions;
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
+		$this->repositoryDefinitions = $repositoryDefinitions;
 		$this->siteLookup = $siteLookup;
 	}
 
@@ -371,12 +380,8 @@ final class WikibaseClient {
 		if ( $this->entityDataRetrievalServiceFactory === null ) {
 			$factory = new DispatchingServiceFactory(
 				$this->getRepositoryServiceContainerFactory(),
-				// FIXME: array_merge trick will no longer be needed once repositry settings are unified, see: T153767.
-				array_merge(
-					[ '' ],
-					array_keys( $this->getSettings()->getSetting( 'foreignRepositories' ) )
-				),
-				$this->buildEntityTypeToRepoMapping()
+				$this->repositoryDefinitions->getRepositoryNames(),
+				$this->repositoryDefinitions->getEntityTypeToRepositoryMapping()
 			);
 			$factory->loadWiringFiles( $this->settings->getSetting( 'dispatchingServiceWiringFiles' ) );
 
@@ -389,75 +394,16 @@ final class WikibaseClient {
 	private function getRepositoryServiceContainerFactory() {
 		$idParserFactory = new PrefixMappingEntityIdParserFactory(
 			$this->getEntityIdParser(),
-			$this->getIdPrefixMaps()
+			$this->repositoryDefinitions->getPrefixMappings()
 		);
 
 		return new RepositoryServiceContainerFactory(
 			$idParserFactory,
 			new RepositorySpecificDataValueDeserializerFactory( $idParserFactory ),
-			$this->getRepositoryDatabaseNames(),
+			$this->repositoryDefinitions->getDatabaseNames(),
 			$this->getSettings()->getSetting( 'repositoryServiceWiringFiles' ),
 			$this
 		);
-	}
-
-	/**
-	 * Returns an associative array mapping names of configured repositories to respective database names
-	 * (either strings or false for local wiki's database).
-	 * Returned map contains an empty string key for a local repository.
-	 *
-	 * @return array
-	 */
-	private function getRepositoryDatabaseNames() {
-		// FIXME: t no longer be needed to check different settings (repoDatabase vs foreignRepositories
-		// once repositry settings are unified, see: T153767.
-		$databaseNames = [ '' => $this->getSettings()->getSetting( 'repoDatabase' ) ];
-
-		foreach ( $this->getSettings()->getSetting( 'foreignRepositories' )
-			as $repositoryName => $repositorySettings
-		) {
-			$databaseNames[$repositoryName] = $repositorySettings['repoDatabase'];
-		}
-
-		return $databaseNames;
-	}
-
-	/**
-	 * Returns a map of id prefix mappings defined for configured foreign repositories.
-	 *
-	 * @return array[] Associative array mapping repository names to repository-specific prefix mapping.
-	 */
-	private function getIdPrefixMaps() {
-		$mappings = [];
-		foreach ( $this->getSettings()->getSetting( 'foreignRepositories' )
-			as $repositoryName => $repositorySettings
-		) {
-			if ( array_key_exists( 'prefixMapping', $repositorySettings ) ) {
-				$mappings[$repositoryName] = $repositorySettings['prefixMapping'];
-			}
-		}
-		return $mappings;
-	}
-
-	/**
-	 * @return string[] Associative array mapping entity type names to repository names which are used to provide
-	 *         entities of the given type.
-	 *         Note: currently single entity type is mapped to a single repository. This might change in the future
-	 *         and a particular entity type might be provide by multitple repositories.
-	 */
-	private function buildEntityTypeToRepoMapping() {
-		$localRepoEntityTypes = array_keys( $this->getSettings()->getSetting( 'repoNamespaces' ) );
-		$entityTypeToRepoMap = array_fill_keys( $localRepoEntityTypes, '' );
-		foreach ( $this->getSettings()->getSetting( 'foreignRepositories' ) as $repositoryName => $repoSettings ) {
-			foreach ( $repoSettings['supportedEntityTypes'] as $entityType ) {
-				if ( array_key_exists( $entityType, $entityTypeToRepoMap ) ) {
-					wfWarn( 'Using same entity types on multiple repositories is not supported yet.' );
-					continue;
-				}
-				$entityTypeToRepoMap[$entityType] = $repositoryName;
-			}
-		}
-		return $entityTypeToRepoMap;
 	}
 
 	/**
@@ -717,8 +663,34 @@ final class WikibaseClient {
 				$settings->getSetting( 'disabledDataTypes' )
 			),
 			new EntityTypeDefinitions( $entityTypeDefinitions ),
+			self::getRepositoryDefinitionsFromSettings( $settings ),
 			MediaWikiServices::getInstance()->getSiteLookup()
 		);
+	}
+
+	/**
+	 * @param SettingsArray $settings
+	 *
+	 * @return RepositoryDefinitions
+	 */
+	private static function getRepositoryDefinitionsFromSettings( SettingsArray $settings ) {
+		// FIXME: It might no longer be needed to check different settings (repoDatabase vs foreignRepositories)
+		// once repository settings are unified, see: T153767.
+		$definitions = [ '' => [
+			'database' => $settings->getSetting( 'repoDatabase' ),
+			'prefix-mapping' => [ '' => '' ],
+			'entity-types' => array_keys( $settings->getSetting( 'repoNamespaces' ) ),
+		] ];
+
+		foreach ( $settings->getSetting( 'foreignRepositories' ) as $repository => $repositorySettings ) {
+			$definitions[$repository] = [
+				'database' => $repositorySettings['repoDatabase'],
+				'entity-types' => $repositorySettings['supportedEntityTypes'],
+				'prefix-mapping' => $repositorySettings['prefixMapping'],
+			];
+		}
+
+		return new RepositoryDefinitions( $definitions );
 	}
 
 	/**
@@ -1304,6 +1276,13 @@ final class WikibaseClient {
 			$language,
 			LanguageFallbackChainFactory::FALLBACK_ALL
 		);
+	}
+
+	/**
+	 * @return RepositoryDefinitions
+	 */
+	public function getRepositoryDefinitions() {
+		return $this->repositoryDefinitions;
 	}
 
 }
