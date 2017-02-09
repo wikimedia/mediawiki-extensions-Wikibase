@@ -1347,15 +1347,10 @@ class WikibaseRepo {
 	 */
 	public function getEntitySerializer( $options = 0 ) {
 		if ( !isset( $this->entitySerializers[$options] ) ) {
-			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
-			$serializerFactory = new SerializerFactory( new DataValueSerializer(), $options );
-			$serializers = array();
-
-			foreach ( $serializerFactoryCallbacks as $callback ) {
-				$serializers[] = call_user_func( $callback, $serializerFactory );
-			}
-
-			$this->entitySerializers[$options] = new DispatchingSerializer( $serializers );
+			$factory = new SerializerFactory( new DataValueSerializer(), $options );
+			$this->entitySerializers[$options] = $factory->newDispatchingSerializer(
+				$this->entityTypeDefinitions->getSerializerFactoryCallbacks()
+			);
 		}
 
 		return $this->entitySerializers[$options];
