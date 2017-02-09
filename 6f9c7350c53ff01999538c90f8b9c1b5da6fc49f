@@ -22,6 +22,30 @@
       "revId": "6f9c7350c53ff01999538c90f8b9c1b5da6fc49f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_2f556d52",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-09T16:20:58Z",
+      "side": 1,
+      "message": "Thiemo, note that your follow up is changing tested behaviour slightly. Here idea is there is a repository \"other\" that uses custom entity type \"kitten\".\nQ9 !\u003d K9.",
+      "parentUuid": "2ef897d1_2ff1ed92",
+      "range": {
+        "startLine": 111,
+        "startChar": 2,
+        "endLine": 125,
+        "endChar": 43
+      },
+      "revId": "6f9c7350c53ff01999538c90f8b9c1b5da6fc49f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
