@@ -10,7 +10,6 @@ use Elastica\Query\Term;
 use RequestContext;
 use WebRequest;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Repo\Api\EntitySearcher;
@@ -29,11 +28,6 @@ class EntitySearchElastic implements EntitySearcher {
 	 * @var LanguageFallbackChainFactory
 	 */
 	private $languageChainFactory;
-	/**
-	 * @var LabelDescriptionLookup
-	 */
-	private $labelDescriptionLookup;
-
 	/**
 	 * @var EntityIdParser
 	 */
@@ -64,7 +58,6 @@ class EntitySearchElastic implements EntitySearcher {
 	/**
 	 * @param LanguageFallbackChainFactory $languageChainFactory
 	 * @param EntityIdParser $idParser
-	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param string $userLang
 	 * @param array $contentModelMap
 	 * @param WebRequest $request
@@ -73,7 +66,6 @@ class EntitySearchElastic implements EntitySearcher {
 	public function __construct(
 		LanguageFallbackChainFactory $languageChainFactory,
 		EntityIdParser $idParser,
-		LabelDescriptionLookup $labelDescriptionLookup,
 		$userLang,
 		array $contentModelMap,
 		WebRequest $request,
@@ -81,7 +73,6 @@ class EntitySearchElastic implements EntitySearcher {
 	) {
 		$this->languageChainFactory = $languageChainFactory;
 		$this->idParser = $idParser;
-		$this->labelDescriptionLookup = $labelDescriptionLookup;
 		$this->contentModelMap = $contentModelMap;
 		$this->request = $request;
 		$this->settings = $settings;
@@ -210,7 +201,6 @@ class EntitySearchElastic implements EntitySearcher {
 		$searcher = new WikibasePrefixSearcher( 0, $limit );
 		$searcher->setResultsType( new ElasticTermResult(
 			$this->idParser,
-			$this->labelDescriptionLookup,
 			$this->searchLanguageCodes,
 			$this->languageChainFactory->newFromLanguageCode( $this->userLang )->getFetchLanguageCodes()
 		) );
