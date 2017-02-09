@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_cfbff9cb",
+        "filename": "repo/tests/phpunit/includes/Api/StatementModificationHelperTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-09T15:31:45Z",
+      "side": 1,
+      "message": "\u003e Verb phrases are preferred: use getReturnText() instead of returnText()\n`From: https://www.mediawiki.org/wiki/Manual:Coding_conventions/PHP#Functions_and_parameters`\n\nYour preference contradicts core\u0027s coding conventions. :)\nBTW, do we follow this?",
+      "parentUuid": "2ef897d1_0fc4f191",
+      "range": {
+        "startLine": 74,
+        "startChar": 18,
+        "endLine": 74,
+        "endChar": 30
+      },
+      "revId": "559987712e5b6da3109022380c615736d36be77b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_af371daa",
         "filename": "repo/tests/phpunit/includes/Api/StatementModificationHelperTest.php",
         "patchSetId": 7
