@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_2ff1ed92",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-09T16:15:51Z",
+      "side": 1,
+      "message": "I find this quite extreme for something that can be a trivial new ItemId( \u0027other:Q9\u0027 ). I uploaded a follow up that removes this.",
+      "range": {
+        "startLine": 111,
+        "startChar": 2,
+        "endLine": 125,
+        "endChar": 43
+      },
+      "revId": "6f9c7350c53ff01999538c90f8b9c1b5da6fc49f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
