@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_5525dd01",
+        "filename": "repo/includes/Store/Sql/ChangesSubscriptionTableBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-02-09T08:09:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_e63d498b",
+      "range": {
+        "startLine": 31,
+        "startChar": 23,
+        "endLine": 33,
+        "endChar": 1
+      },
+      "revId": "24b55b6382a1a67f89e8ad39f12eaf4589a5db45",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_063745ac",
         "filename": "repo/includes/Store/Sql/ChangesSubscriptionTableBuilder.php",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2017-02-08T17:41:52Z",
       "side": 1,
       "message": "The new line should be here.",
+      "range": {
+        "startLine": 87,
+        "startChar": 38,
+        "endLine": 88,
+        "endChar": 2
+      },
+      "revId": "24b55b6382a1a67f89e8ad39f12eaf4589a5db45",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_75269912",
+        "filename": "repo/includes/Store/Sql/ChangesSubscriptionTableBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-02-09T08:09:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_063745ac",
       "range": {
         "startLine": 87,
         "startChar": 38,
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_352021f2",
+        "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-02-09T08:09:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_c657edcb",
+      "revId": "24b55b6382a1a67f89e8ad39f12eaf4589a5db45",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_e65429cb",
         "filename": "repo/includes/Store/Sql/SqlSiteLinkConflictLookup.php",
         "patchSetId": 4
@@ -76,6 +142,24 @@
       "writtenOn": "2017-02-08T17:41:52Z",
       "side": 1,
       "message": "Why not inject this as a constructor dependency?",
+      "revId": "24b55b6382a1a67f89e8ad39f12eaf4589a5db45",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_b58ad1e2",
+        "filename": "repo/includes/Store/Sql/SqlSiteLinkConflictLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-02-09T08:09:38Z",
+      "side": 1,
+      "message": "Mostly because I want to do it in a follow up. It\u0027s already super big and touches so many files also I need to make a constructor which makes the patch much bigger.",
+      "parentUuid": "2ef897d1_e65429cb",
       "revId": "24b55b6382a1a67f89e8ad39f12eaf4589a5db45",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
