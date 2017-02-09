@@ -36,6 +36,7 @@ use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
+use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyOrderProvider;
@@ -156,6 +157,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 			$settings,
 			new DataTypeDefinitions( array() ),
 			new EntityTypeDefinitions( array() ),
+			$this->getRepositoryDefinitions(),
 			$this->getSiteLookup()
 		);
 
@@ -176,6 +178,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 			$settings,
 			new DataTypeDefinitions( array() ),
 			new EntityTypeDefinitions( array() ),
+			$this->getRepositoryDefinitions(),
 			$siteLookup
 		);
 
@@ -210,6 +213,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 			$settings,
 			new DataTypeDefinitions( array() ),
 			new EntityTypeDefinitions( array() ),
+			$this->getRepositoryDefinitions(),
 			$siteLookup
 		);
 
@@ -369,6 +373,12 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( DataAccessSnakFormatterFactory::class, $instance );
 	}
 
+	public function testGetRepositoryDefinitions() {
+		$repositoryDefinitions = $this->getWikibaseClient()->getRepositoryDefinitions();
+		$this->assertInstanceOf( RepositoryDefinitions::class, $repositoryDefinitions );
+		$this->assertEquals( $this->getRepositoryDefinitions(), $repositoryDefinitions );
+	}
+
 	/**
 	 * @return WikibaseClient
 	 */
@@ -377,7 +387,17 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 			new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() ),
 			new DataTypeDefinitions( array() ),
 			new EntityTypeDefinitions( array() ),
+			$this->getRepositoryDefinitions(),
 			new HashSiteStore()
+		);
+	}
+
+	/**
+	 * @return RepositoryDefinitions
+	 */
+	private function getRepositoryDefinitions() {
+		return new RepositoryDefinitions(
+			[ '' => [ 'database' => '', 'entity-types' => [], 'prefix-mapping' => [] ] ]
 		);
 	}
 
