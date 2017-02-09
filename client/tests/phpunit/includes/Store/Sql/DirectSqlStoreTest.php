@@ -50,7 +50,7 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$dispatchingServiceFactory = new DispatchingServiceFactory( $containerFactory, [] );
+		$dispatchingServiceFactory = new DispatchingServiceFactory( $containerFactory, [ '' ], [] );
 
 		$dispatchingServiceFactory->defineService( 'EntityPrefetcher', function() {
 			return new NullEntityPrefetcher();
