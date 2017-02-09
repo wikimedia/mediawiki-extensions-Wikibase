@@ -224,6 +224,7 @@ call_user_func( function() {
 				$moduleName,
 				$entitySearchHelper,
 				$repo->getEntityTitleLookup(),
+				$repo->getPropertyDataTypeLookup(),
 				$repo->getTermsLanguages(),
 				$repo->getEnabledEntityTypes(),
 				$repo->getSettings()->getSetting( 'conceptBaseUri' )

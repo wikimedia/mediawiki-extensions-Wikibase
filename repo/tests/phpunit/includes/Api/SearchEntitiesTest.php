@@ -8,13 +8,15 @@ use PHPUnit_Framework_TestCase;
 use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\SearchEntities;
-use Wikibase\Lib\Interactors\TermSearchResult;
 
 /**
  * @covers Wikibase\Repo\Api\SearchEntities
@@ -118,6 +120,18 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @return PropertyDataTypeLookup
+	 */
+	private function getMockPropertyDataTypeLookup() {
+		$mock = $this->getMock( PropertyDataTypeLookup::class );
+		$mock->expects( $this->any() )
+			->method( 'getDataTypeIdForProperty' )
+			->willReturn( 'PropertyDataType' );
+
+		return $mock;
+	}
+
+	/**
 	 * @param array $params
 	 * @param EntitySearchHelper|null $entitySearchHelper
 	 *
@@ -129,6 +143,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			'wbsearchentities',
 			$entitySearchHelper ?: $this->getMockEntitySearchHelper( $params ),
 			$this->getMockTitleLookup(),
+			$this->getMockPropertyDataTypeLookup(),
 			$this->getContentLanguages(),
 			[ 'item', 'property' ],
 			'concept:'
@@ -185,6 +200,13 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			'label',
 			new ItemId( 'foreign:Q333' ),
 			new Term( 'de', 'SomeText' )
+		);
+
+		$propertyMatch = new TermSearchResult(
+			new Term( 'en', 'PropertyLabel' ),
+			'label',
+			new PropertyId( 'P123' ),
+			new Term( 'en', 'PropertyLabel' )
 		);
 
 		$q111Result = array(
@@ -251,6 +273,22 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			],
 		];
 
+		$propertyResult = [
+			'repository' => '',
+			'id' => 'P123',
+			'concepturi' => 'concept:P123',
+			'url' => 'http://fullTitleUrl',
+			'title' => 'Prefixed:Title',
+			'pageid' => 42,
+			'datatype' => 'PropertyDataType',
+			'label' => 'PropertyLabel',
+			'match' => [
+				'type' => 'label',
+				'language' => 'en',
+				'text' => 'PropertyLabel',
+			],
+		];
+
 		return array(
 			'No exact match' => array(
 				array( 'search' => 'Q999' ),
@@ -281,6 +319,11 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 				[ 'search' => 'SomeText' ],
 				[ $foreignItemMatch ],
 				[ $foreignItemResult ],
+			],
+			'Property has datatype' => [
+				[ 'search' => 'PropertyLabel', 'type' => 'property' ],
+				[ $propertyMatch ],
+				[ $propertyResult ],
 			]
 		);
 	}
