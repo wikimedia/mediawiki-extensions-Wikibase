@@ -22,7 +22,6 @@ use LogicException;
 use MediaWiki\MediaWikiServices;
 use MediaWikiSite;
 use MWException;
-use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
 use Site;
 use SiteLookup;
@@ -978,6 +977,7 @@ final class WikibaseClient {
 	 */
 	public function getExternalFormatDeserializerFactory() {
 		return new DeserializerFactory(
+			$this->getEntityDeserializerFactoryCallbacks(),
 			$this->getDataValueDeserializer(),
 			$this->getEntityIdParser()
 		);
@@ -999,15 +999,8 @@ final class WikibaseClient {
 	 */
 	private function getExternalFormatEntityDeserializer() {
 		if ( $this->entityDeserializer === null ) {
-			$deserializerFactoryCallbacks = $this->getEntityDeserializerFactoryCallbacks();
-			$deserializerFactory = $this->getExternalFormatDeserializerFactory();
-			$deserializers = array();
-
-			foreach ( $deserializerFactoryCallbacks as $callback ) {
-				$deserializers[] = call_user_func( $callback, $deserializerFactory );
-			}
-
-			$this->entityDeserializer = new DispatchingDeserializer( $deserializers );
+			$factory = $this->getExternalFormatDeserializerFactory();
+			$this->entityDeserializer = $factory->newEntityDeserializer();
 		}
 
 		return $this->entityDeserializer;
@@ -1045,15 +1038,12 @@ final class WikibaseClient {
 	 */
 	public function getEntitySerializer( $options = SerializerFactory::OPTION_DEFAULT ) {
 		if ( !isset( $this->entitySerializers[$options] ) ) {
-			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
-			$serializerFactory = new SerializerFactory( new DataValueSerializer(), $options );
-			$serializers = array();
-
-			foreach ( $serializerFactoryCallbacks as $callback ) {
-				$serializers[] = call_user_func( $callback, $serializerFactory );
-			}
-
-			$this->entitySerializers[$options] = new DispatchingSerializer( $serializers );
+			$factory = new SerializerFactory(
+				$this->entityTypeDefinitions->getSerializerFactoryCallbacks(),
+				new DataValueSerializer(),
+				$options
+			);
+			$this->entitySerializers[$options] = $factory->newEntitySerializer();
 		}
 
 		return $this->entitySerializers[$options];

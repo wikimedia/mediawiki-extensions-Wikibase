@@ -32,6 +32,7 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 
 	private function newEntitySerializer() {
 		$serializerFactory = new SerializerFactory(
+			[],
 			new DataValueSerializer(),
 			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
 			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
@@ -100,6 +101,7 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 
 	public function assertSerializationEqualsEntity( EntityDocument $entity, $serialization ) {
 		$deserializerFactory = new DeserializerFactory(
+			[],
 			new DataValueDeserializer( array( 'string' => StringValue::class ) ),
 			new BasicEntityIdParser()
 		);

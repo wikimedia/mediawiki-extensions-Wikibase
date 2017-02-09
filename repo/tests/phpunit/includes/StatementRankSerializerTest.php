@@ -55,7 +55,7 @@ class StatementRankSerializerTest extends PHPUnit_Framework_TestCase {
 		$statement = new Statement( new PropertyNoValueSnak( 1 ) );
 		$statement->setRank( $rank );
 
-		$factory = new SerializerFactory( new DataValueSerializer() );
+		$factory = new SerializerFactory( [], new DataValueSerializer() );
 		$statementSerializer = $factory->newStatementSerializer();
 
 		$serialization = $statementSerializer->serialize( $statement );

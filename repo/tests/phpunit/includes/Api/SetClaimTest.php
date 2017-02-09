@@ -142,7 +142,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 				// Simply reorder the qualifiers by putting the first qualifier to the end. This is
 				// supposed to be done in the serialized representation since changing the actual
 				// object might apply intrinsic sorting.
-				$serializerFactory = new SerializerFactory( new DataValueSerializer() );
+				$serializerFactory = new SerializerFactory( [], new DataValueSerializer() );
 				$statementSerializer = $serializerFactory->newStatementSerializer();
 				$serialized = $statementSerializer->serialize( $statement );
 				$firstPropertyId = array_shift( $serialized['qualifiers-order'] );
@@ -292,7 +292,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$baserevid = null,
 		$error = null
 	) {
-		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
+		$serializerFactory = new SerializerFactory( [], new DataValueSerializer() );
 		$statementSerializer = $serializerFactory->newStatementSerializer();
 		$statementDeserializer = WikibaseRepo::getDefaultInstance()->getExternalFormatStatementDeserializer();
 

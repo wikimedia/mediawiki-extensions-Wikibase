@@ -93,6 +93,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 			} ) );
 
 		$serializerFactory = new SerializerFactory(
+			[],
 			new DataValueSerializer(),
 			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
 			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH

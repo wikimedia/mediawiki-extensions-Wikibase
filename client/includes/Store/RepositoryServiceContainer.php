@@ -4,7 +4,6 @@ namespace Wikibase\Client\Store;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
-use Deserializers\DispatchingDeserializer;
 use MediaWiki\Services\ServiceContainer;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\DeserializerFactory;
@@ -107,19 +106,15 @@ class RepositoryServiceContainer extends ServiceContainer implements EntityStore
 	 */
 	public function getEntityDeserializer() {
 		$deserializerFactory = new DeserializerFactory(
+			$this->deserializerFactoryCallbacks,
 			$this->dataValueDeserializer,
 			$this->entityIdParser
 		);
 
-		$deserializers = [];
-		foreach ( $this->deserializerFactoryCallbacks as $callback ) {
-			$deserializers[] = call_user_func( $callback, $deserializerFactory );
-		}
-
 		$internalDeserializerFactory = new InternalDeserializerFactory(
 			$this->dataValueDeserializer,
 			$this->entityIdParser,
-			new DispatchingDeserializer( $deserializers )
+			$deserializerFactory->newEntityDeserializer()
 		);
 
 		return $internalDeserializerFactory->newEntityDeserializer();
