@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_eb386aed",
+        "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-09T14:48:22Z",
+      "side": 1,
+      "message": "I\u0027m very sorry. But this almost literally repeats the method and parameter name without adding any information. What \"flavor\"? What integer numbers are allowed, what\u0027s the effect?",
+      "range": {
+        "startLine": 23,
+        "startChar": 28,
+        "endLine": 23,
+        "endChar": 60
+      },
+      "revId": "d84a45f1ef90faf0eafd38efd1190c0e41b13800",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
