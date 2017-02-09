@@ -92,17 +92,27 @@ class ViewEntityAction extends ViewAction {
 	 */
 	private function overridePageMetaTags( OutputPage $outputPage ) {
 		$meta = $this->getOutput()->getProperty( 'wikibase-meta-tags' );
+		$openGraphTitleAdded = false;
+		$openGraphDescriptionAdded = false;
 
 		if ( isset( $meta['title'] ) ) {
 			if ( $this->isDiff() ) {
 				$this->setPageTitle( $outputPage, $meta['title'] );
 			} else {
 				$this->setHTMLTitle( $outputPage, $meta['title'] );
+				$outputPage->addMeta( 'og:title', $meta['title'] );
+				$openGraphTitleAdded = true;
 			}
 		}
 
 		if ( isset( $meta['description'] ) ) {
 			$outputPage->addMeta( 'description', $meta['description'] );
+			$outputPage->addMeta( 'og:description', $meta['description'] );
+			$openGraphDescriptionAdded = true;
+		}
+
+		if ( $openGraphTitleAdded === true && $openGraphDescriptionAdded === true ) {
+			$outputPage->addMeta( 'twitter:card', 'summary' );
 		}
 	}
 
