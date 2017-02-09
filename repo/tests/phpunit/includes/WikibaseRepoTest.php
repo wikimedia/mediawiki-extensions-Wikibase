@@ -14,7 +14,6 @@ use DataValues\TimeValue;
 use DataValues\UnboundedQuantityValue;
 use DataValues\UnknownValue;
 use Deserializers\Deserializer;
-use Language;
 use MediaWikiTestCase;
 use RequestContext;
 use Serializers\Serializer;
@@ -22,7 +21,6 @@ use User;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\DeserializerFactory;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
@@ -103,28 +101,12 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$repo = $this->getWikibaseRepoWithClientSettings( new SettingsArray( [
 			'foreignRepositories' => [
 				'other' => [
-					'supportedEntityTypes' => [ 'kitten' ],
+					'supportedEntityTypes' => [ 'item' ],
 				]
 			]
 		] ) );
 
-		$kittenId = $this->getMockBuilder( EntityId::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$kittenId->expects( $this->any() )
-			->method( 'getEntityType' )
-			->will( $this->returnValue( 'kitten' ) );
-		$kittenId->expects( $this->any() )
-			->method( 'getSerialization' )
-			->will( $this->returnValue( 'other:K9' ) );
-		$kittenId->expects( $this->any() )
-			->method( 'getLocalPart' )
-			->will( $this->returnValue( 'K9' ) );
-		$kittenId->expects( $this->any() )
-			->method( 'getRepositoryName' )
-			->will( $this->returnValue( 'other' ) );
-
-		$value = new EntityIdValue( $kittenId );
+		$value = new EntityIdValue( new ItemId( 'other:Q9' ) );
 
 		$builders = $repo->newValidatorBuilders();
 		$this->assertInstanceOf( ValidatorBuilders::class, $builders );
@@ -147,7 +129,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	 * @dataProvider urlSchemesProvider
 	 */
 	public function testDefaultUrlValidators( $input, $expected ) {
-		$validatorBuilders = $this->getWikibaseRepo()->getDefaultValidatorBuilders();
+		$validatorBuilders = WikibaseRepo::getDefaultValidatorBuilders();
 		$urlValidator = new CompositeValidator( $validatorBuilders->buildUrlValidators() );
 		$result = $urlValidator->validate( new StringValue( $input ) );
 		$this->assertSame( $expected, $result->isValid() );
