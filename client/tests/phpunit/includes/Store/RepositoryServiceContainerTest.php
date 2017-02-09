@@ -15,9 +15,9 @@ use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParser;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\SettingsArray;
 
 /**
  * @covers Wikibase\Client\Store\RepositoryServiceContainer
@@ -33,15 +33,16 @@ class RepositoryServiceContainerTest extends \PHPUnit_Framework_TestCase {
 	 * @return WikibaseClient
 	 */
 	private function getWikibaseClient() {
-		$settings = WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy();
-		$settings['foreignRepositories'] = [
-			'foo' => [ 'repoDatabase' => 'foowiki', 'prefixMapping' => [ 'bar' => 'xyz' ] ]
-		];
+		/** @var RepositoryDefinitions $repositoryDefinitions */
+		$repositoryDefinitions = $this->getMockBuilder( RepositoryDefinitions::class )
+			->disableOriginalConstructor()
+			->getMock();
 
 		return new WikibaseClient(
-			new SettingsArray( $settings ),
+			WikibaseClient::getDefaultInstance()->getSettings(),
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
+			$repositoryDefinitions,
 			new HashSiteStore()
 		);
 	}
