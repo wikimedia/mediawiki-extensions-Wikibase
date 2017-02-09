@@ -46,6 +46,29 @@
       "revId": "c0c957d767788b83453a71cbae1ae264874f2e06",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_cfb379e7",
+        "filename": "repo/includes/ChangeOp/ChangeOpDescription.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-09T16:03:53Z",
+      "side": 1,
+      "message": "It is not equal to `instanceof FingerprintProvider`.\nI guess it should be \n`$entity instanceof LabelsProvider \u0026\u0026 $entity instanceof DescriptionsProvider` as soon as `$entity-\u003egetDescriptions()` is called.",
+      "range": {
+        "startLine": 132,
+        "startChar": 7,
+        "endLine": 132,
+        "endChar": 40
+      },
+      "revId": "c0c957d767788b83453a71cbae1ae264874f2e06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
