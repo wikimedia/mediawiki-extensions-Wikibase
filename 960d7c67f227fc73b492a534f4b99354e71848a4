@@ -1,0 +1,289 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_55539d6e",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-09T09:04:26Z",
+      "side": 1,
+      "message": "local …",
+      "revId": "960d7c67f227fc73b492a534f4b99354e71848a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_d59b0d1a",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-09T09:04:26Z",
+      "side": 1,
+      "message": "local …",
+      "revId": "960d7c67f227fc73b492a534f4b99354e71848a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_b561b134",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-09T09:04:26Z",
+      "side": 1,
+      "message": "trailing white space",
+      "range": {
+        "startLine": 65,
+        "startChar": 119,
+        "endLine": 65,
+        "endChar": 120
+      },
+      "revId": "960d7c67f227fc73b492a534f4b99354e71848a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_7581f9a3",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-09T09:04:26Z",
+      "side": 1,
+      "message": "It is",
+      "revId": "960d7c67f227fc73b492a534f4b99354e71848a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_55903df1",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-09T09:04:26Z",
+      "side": 1,
+      "message": "Not worth it, either don\u0027t care at all or error here",
+      "revId": "960d7c67f227fc73b492a534f4b99354e71848a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_b59e5108",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-09T09:04:26Z",
+      "side": 1,
+      "message": "local …",
+      "revId": "960d7c67f227fc73b492a534f4b99354e71848a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_95591593",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-09T09:04:26Z",
+      "side": 1,
+      "message": "trailing white space",
+      "range": {
+        "startLine": 82,
+        "startChar": 120,
+        "endLine": 82,
+        "endChar": 121
+      },
+      "revId": "960d7c67f227fc73b492a534f4b99354e71848a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_f5bba96e",
+        "filename": "client/sql/entity_usage.sql",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-09T09:04:26Z",
+      "side": 1,
+      "message": "What\u0027s this?",
+      "revId": "960d7c67f227fc73b492a534f4b99354e71848a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_b5b5317a",
+        "filename": "client/sql/property_usage.sql",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-09T09:04:26Z",
+      "side": 1,
+      "message": "wbc_statement_usage would be more appropriate.\nWe\u0027re tracking the usage of Statements on a per-property level.",
+      "range": {
+        "startLine": 1,
+        "startChar": 36,
+        "endLine": 1,
+        "endChar": 44
+      },
+      "revId": "960d7c67f227fc73b492a534f4b99354e71848a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_95ad9530",
+        "filename": "client/sql/property_usage.sql",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-09T09:04:26Z",
+      "side": 1,
+      "message": "Not quite accurate, we\u0027re tracking usages of Statements with a certain main snak property id",
+      "range": {
+        "startLine": 3,
+        "startChar": 62,
+        "endLine": 3,
+        "endChar": 94
+      },
+      "revId": "960d7c67f227fc73b492a534f4b99354e71848a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_75a8d91d",
+        "filename": "client/sql/property_usage.sql",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-09T09:04:26Z",
+      "side": 1,
+      "message": "The definition for the page table is:\nint unsigned NOT NULL\nWe should also use that",
+      "range": {
+        "startLine": 4,
+        "startChar": 29,
+        "endLine": 4,
+        "endChar": 41
+      },
+      "revId": "960d7c67f227fc73b492a534f4b99354e71848a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_35a2613c",
+        "filename": "client/sql/property_usage.sql",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-09T09:04:26Z",
+      "side": 1,
+      "message": "Drop this, see also my comment in \t\tclient/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+      "revId": "960d7c67f227fc73b492a534f4b99354e71848a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_d571cdde",
+        "filename": "client/sql/property_usage.sql",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-09T09:04:26Z",
+      "side": 1,
+      "message": "trailing space\nAlso: Why do we need this? Can\u0027t this be derived from the state on the repo, if needed?",
+      "revId": "960d7c67f227fc73b492a534f4b99354e71848a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_b57411cd",
+        "filename": "client/sql/property_usage.sql",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-09T09:04:26Z",
+      "side": 1,
+      "message": "No indexes?",
+      "revId": "960d7c67f227fc73b492a534f4b99354e71848a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_5586fdac",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/LuaWikibaseEntityLibraryTests.lua",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-09T09:04:26Z",
+      "side": 1,
+      "message": "If you use this local test item (and extend the \"claims\" below), you can also easily test that the actual values (k,v in pairs(…)) are correct.",
+      "revId": "960d7c67f227fc73b492a534f4b99354e71848a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
