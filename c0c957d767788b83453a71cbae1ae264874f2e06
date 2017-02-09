@@ -93,6 +93,23 @@
       "revId": "c0c957d767788b83453a71cbae1ae264874f2e06",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_6ffec567",
+        "filename": "repo/includes/ChangeOp/ChangeOpDescription.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-09T16:12:29Z",
+      "side": 1,
+      "message": "We need to check instanc eof DescriptionProvider before calling this.",
+      "revId": "c0c957d767788b83453a71cbae1ae264874f2e06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
