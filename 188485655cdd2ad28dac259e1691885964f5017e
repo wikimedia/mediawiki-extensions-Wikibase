@@ -2,6 +2,75 @@
   "comments": [
     {
       "key": {
+        "uuid": "2ef897d1_cf87f964",
+        "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-09T15:13:49Z",
+      "side": 1,
+      "message": "Typo.",
+      "range": {
+        "startLine": 10,
+        "startChar": 31,
+        "endLine": 10,
+        "endChar": 32
+      },
+      "revId": "188485655cdd2ad28dac259e1691885964f5017e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_6f84855e",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-09T15:13:49Z",
+      "side": 1,
+      "message": "I don\u0027t see this being used in the sub class, so why protected?",
+      "range": {
+        "startLine": 26,
+        "startChar": 1,
+        "endLine": 26,
+        "endChar": 22
+      },
+      "revId": "188485655cdd2ad28dac259e1691885964f5017e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_ef90759a",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-09T15:13:49Z",
+      "side": 1,
+      "message": "I don\u0027t see this being used in the sub class, so why protected?",
+      "range": {
+        "startLine": 292,
+        "startChar": 1,
+        "endLine": 292,
+        "endChar": 39
+      },
+      "revId": "188485655cdd2ad28dac259e1691885964f5017e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_1ac7a916",
         "filename": "repo/maintenance/dispatchChanges.php",
         "patchSetId": 8
