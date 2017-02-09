@@ -4,6 +4,8 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -48,12 +50,18 @@ class SearchEntities extends ApiBase {
 	private $conceptBaseUri;
 
 	/**
+	 * @var PropertyDataTypeLookup
+	 */
+	private $propertyDataTypeLookup;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param ContentLanguages $termLanguages
 	 * @param string[] $entityTypes
 	 * @param string $conceptBaseUri
+	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 *
 	 * @see ApiBase::__construct
 	 */
@@ -64,7 +72,8 @@ class SearchEntities extends ApiBase {
 		EntityTitleLookup $entityTitleLookup,
 		ContentLanguages $termLanguages,
 		array $entityTypes,
-		$conceptBaseUri
+		$conceptBaseUri,
+		PropertyDataTypeLookup $propertyDataTypeLookup
 	) {
 		parent::__construct( $mainModule, $moduleName, '' );
 
@@ -73,6 +82,7 @@ class SearchEntities extends ApiBase {
 		$this->termsLanguages = $termLanguages;
 		$this->entityTypes = $entityTypes;
 		$this->conceptBaseUri = $conceptBaseUri;
+		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 	}
 
 	/**
@@ -110,16 +120,22 @@ class SearchEntities extends ApiBase {
 	 */
 	private function buildTermSearchMatchEntry( $match ) {
 		// TODO: use EntityInfoBuilder, EntityInfoTermLookup
-		$title = $this->titleLookup->getTitleForId( $match->getEntityId() );
+		$entityId = $match->getEntityId();
+		$title = $this->titleLookup->getTitleForId( $entityId );
 
 		$entry = array(
-			'repository' => $match->getEntityId()->getRepositoryName(),
-			'id' => $match->getEntityId()->getSerialization(),
-			'concepturi' => $this->conceptBaseUri . $match->getEntityId()->getSerialization(),
+			'repository' => $entityId->getRepositoryName(),
+			'id' => $entityId->getSerialization(),
+			'concepturi' => $this->conceptBaseUri . $entityId->getSerialization(),
 			'url' => $title->getFullURL(),
 			'title' => $title->getPrefixedText(),
 			'pageid' => $title->getArticleID()
 		);
+
+		if ( $entityId instanceof PropertyId ) {
+			$entry['datatype'] = $this->propertyDataTypeLookup
+				->getDataTypeIdForProperty( $entityId );
+		}
 
 		$displayLabel = $match->getDisplayLabel();
 
