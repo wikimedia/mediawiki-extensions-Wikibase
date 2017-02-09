@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
+use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -28,14 +29,14 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 class DispatchingServiceFactory extends ServiceContainer implements EntityDataRetrievalServiceFactory, EntityStoreWatcher {
 
 	/**
-	 * @var string[]
-	 */
-	private $repositoryNames;
-
-	/**
 	 * @var RepositoryServiceContainerFactory
 	 */
 	private $repositoryServiceContainerFactory;
+
+	/**
+	 * @var RepositoryDefinitions
+	 */
+	private $repositoryDefinitions;
 
 	/**
 	 * @var RepositoryServiceContainer[]
@@ -43,26 +44,17 @@ class DispatchingServiceFactory extends ServiceContainer implements EntityDataRe
 	private $repositoryServiceContainers = [];
 
 	/**
-	 * @var string[] Associative array mapping entity type names to repository names which are used to provide
-	 *      entities of the given type.
-	 */
-	private $entityTypeToRepoMapping;
-
-	/**
 	 * @param RepositoryServiceContainerFactory $repositoryServiceContainerFactory
-	 * @param string[] $repositoryNames
-	 * @param string[] $entityTypeToRepoMapping
+	 * @param RepositoryDefinitions $repositoryDefinitions
 	 */
 	public function __construct(
 		RepositoryServiceContainerFactory $repositoryServiceContainerFactory,
-		array $repositoryNames,
-		array $entityTypeToRepoMapping
+		RepositoryDefinitions $repositoryDefinitions
 	) {
 		parent::__construct();
 
 		$this->repositoryServiceContainerFactory = $repositoryServiceContainerFactory;
-		$this->repositoryNames = $repositoryNames;
-		$this->entityTypeToRepoMapping = $entityTypeToRepoMapping;
+		$this->repositoryDefinitions = $repositoryDefinitions;
 	}
 
 	/**
@@ -71,7 +63,7 @@ class DispatchingServiceFactory extends ServiceContainer implements EntityDataRe
 	 */
 	public function getServiceMap( $service ) {
 		$serviceMap = [];
-		foreach ( $this->repositoryNames as $repositoryName ) {
+		foreach ( $this->repositoryDefinitions->getRepositoryNames() as $repositoryName ) {
 			$container = $this->getContainerForRepository( $repositoryName );
 			if ( $container !== null ) {
 				$serviceMap[$repositoryName] = $container->getService( $service );
@@ -146,7 +138,7 @@ class DispatchingServiceFactory extends ServiceContainer implements EntityDataRe
 	 * @return string[]
 	 */
 	public function getEntityTypeToRepoMapping() {
-		return $this->entityTypeToRepoMapping;
+		return $this->repositoryDefinitions->getEntityTypeToRepositoryMapping();
 	}
 
 	/**
