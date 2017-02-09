@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_f594c9eb",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/ChangeOpDeserializationExceptionTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-09T09:34:25Z",
+      "side": 1,
+      "message": "Just realized that mixing \u0027foo\u0027 and \u0027bar\u0027 here might be slightly confusing. Not a huge deal, but I think I am going to change strings used for the error code parameter in this and the other test so nobody gets confused.",
+      "range": {
+        "startLine": 20,
+        "startChar": 64,
+        "endLine": 20,
+        "endChar": 67
+      },
+      "revId": "41c5c3de5d2bc80122cc85e8ee5610bb05319072",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
