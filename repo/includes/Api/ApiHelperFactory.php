@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
-use DataValues\Serializers\DataValueSerializer;
 use Serializers\Serializer;
 use SiteLookup;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -65,6 +64,11 @@ class ApiHelperFactory {
 	private $siteLookup;
 
 	/**
+	 * @var SerializerFactory
+	 */
+	private $serializerFactory;
+
+	/**
 	 * @var Serializer
 	 */
 	private $entitySerializer;
@@ -99,6 +103,7 @@ class ApiHelperFactory {
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EditEntityFactory $editEntityFactory
+	 * @param SerializerFactory $serializerFactory
 	 * @param Serializer $entitySerializer
 	 * @param EntityIdParser $idParser
 	 * @param SiteLinkLookup|null $siteLinkLookup
@@ -113,6 +118,7 @@ class ApiHelperFactory {
 		SummaryFormatter $summaryFormatter,
 		EntityRevisionLookup $entityRevisionLookup,
 		EditEntityFactory $editEntityFactory,
+		SerializerFactory $serializerFactory,
 		Serializer $entitySerializer,
 		EntityIdParser $idParser,
 		SiteLinkLookup $siteLinkLookup = null,
@@ -126,6 +132,7 @@ class ApiHelperFactory {
 		$this->summaryFormatter = $summaryFormatter;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->editEntityFactory = $editEntityFactory;
+		$this->serializerFactory = $serializerFactory;
 		$this->entitySerializer = $entitySerializer;
 		$this->idParser = $idParser;
 		$this->siteLinkLookup = $siteLinkLookup;
@@ -144,7 +151,7 @@ class ApiHelperFactory {
 		return new ResultBuilder(
 			$api->getResult(),
 			$this->titleLookup,
-			$this->newSerializerFactory(),
+			$this->serializerFactory,
 			$this->entitySerializer,
 			$this->siteLookup,
 			$this->dataTypeLookup,
@@ -164,19 +171,6 @@ class ApiHelperFactory {
 			$api,
 			$this->exceptionLocalizer,
 			$api->getLanguage()
-		);
-	}
-
-	/**
-	 * Returns a serializer factory to be used when constructing API results.
-	 *
-	 * @return SerializerFactory
-	 */
-	public function newSerializerFactory() {
-		return new SerializerFactory(
-			new DataValueSerializer(),
-			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
-			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
 		);
 	}
 

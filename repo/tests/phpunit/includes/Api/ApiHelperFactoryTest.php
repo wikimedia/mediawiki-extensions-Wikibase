@@ -8,6 +8,7 @@ use HashSiteStore;
 use Language;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\EditEntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -33,9 +34,16 @@ class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	private function newApiHelperFactory() {
 		$summaryFormatter = $this->getMockBuilder( SummaryFormatter::class )
-			->disableOriginalConstructor()->getMock();
+			->disableOriginalConstructor()
+			->getMock();
+
 		$editEntityFactory = $this->getMockBuilder( EditEntityFactory::class )
-			->disableOriginalConstructor()->getMock();
+			->disableOriginalConstructor()
+			->getMock();
+
+		$serializerFactory = $this->getMockBuilder( SerializerFactory::class )
+			->disableOriginalConstructor()
+			->getMock();
 
 		return new ApiHelperFactory(
 			$this->getMock( EntityTitleLookup::class ),
@@ -45,6 +53,7 @@ class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 			$summaryFormatter,
 			$this->getMock( EntityRevisionLookup::class ),
 			$editEntityFactory,
+			$serializerFactory,
 			$this->getMock( Serializer::class ),
 			new ItemIdParser(),
 			null
