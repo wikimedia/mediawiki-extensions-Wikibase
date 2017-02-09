@@ -14,8 +14,8 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\InternalSerialization\DeserializerFactory;
-use Wikibase\InternalSerialization\SerializerFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 
 /**
