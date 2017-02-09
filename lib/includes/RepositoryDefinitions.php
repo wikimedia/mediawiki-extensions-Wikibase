@@ -89,6 +89,14 @@ class RepositoryDefinitions {
 	}
 
 	/**
+	 * @return array[] Associative array (string => string[]) mapping repository names to lists of entity types
+	 * provided by each repository.
+	 */
+	public function getEntityTypesPerRepository() {
+		return $this->getMapForDefinitionField( 'entity-types' );
+	}
+
+	/**
 	 * @return string[] Associative array (string => string) mapping entity types to repository names which provide
 	 * entities of the given type.
 	 */
