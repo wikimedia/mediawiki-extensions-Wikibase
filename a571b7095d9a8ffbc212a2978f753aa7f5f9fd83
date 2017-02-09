@@ -22,6 +22,47 @@
       "revId": "a571b7095d9a8ffbc212a2978f753aa7f5f9fd83",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_cf7ed9e0",
+        "filename": "repo/tests/phpunit/includes/Api/MergeItemsTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-09T16:19:46Z",
+      "side": 1,
+      "message": "maybe. but it\u0027s a private method. not a big deal.",
+      "parentUuid": "2ef897d1_8f0c61f1",
+      "range": {
+        "startLine": 147,
+        "startChar": 18,
+        "endLine": 147,
+        "endChar": 30
+      },
+      "revId": "a571b7095d9a8ffbc212a2978f753aa7f5f9fd83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_6f624539",
+        "filename": "repo/tests/phpunit/includes/Api/MergeItemsTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-09T16:19:46Z",
+      "side": 1,
+      "message": "Just return a mock (or empty) ResultBuilder, no need for the APiHelperFactory.",
+      "revId": "a571b7095d9a8ffbc212a2978f753aa7f5f9fd83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
