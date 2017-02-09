@@ -25,7 +25,7 @@ class DescriptionsProviderFieldDefinitions implements FieldDefinitions {
 	public function getFields() {
 		$fields = [];
 
-		// TODO: nothing for now, will add later
+		$fields['descriptions'] = new DescriptionsField( $this->languageCodes );
 
 		return $fields;
 	}
