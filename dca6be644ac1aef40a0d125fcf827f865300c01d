@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "2ef897d1_0ff0718c",
+        "filename": "client/tests/phpunit/includes/Store/RepositoryServiceContainerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-09T16:22:15Z",
+      "side": 1,
+      "message": "use mocks in tests where repository definitions are irrelevant instead of providing such arbitrary definitions.",
+      "revId": "dca6be644ac1aef40a0d125fcf827f865300c01d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_8fb0e1f2",
         "filename": "lib/includes/RepositoryDefinitions.php",
         "patchSetId": 1
