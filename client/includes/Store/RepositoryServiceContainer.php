@@ -107,6 +107,8 @@ class RepositoryServiceContainer extends ServiceContainer implements EntityStore
 	 */
 	public function getEntityDeserializer() {
 		$deserializerFactory = new DeserializerFactory(
+			// TODO
+			[],
 			$this->dataValueDeserializer,
 			$this->entityIdParser
 		);

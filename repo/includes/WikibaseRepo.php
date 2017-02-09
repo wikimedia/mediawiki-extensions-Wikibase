@@ -1301,6 +1301,8 @@ class WikibaseRepo {
 	 */
 	public function getExternalFormatDeserializerFactory() {
 		return new DeserializerFactory(
+			// TODO
+			[],
 			$this->getDataValueDeserializer(),
 			$this->getEntityIdParser()
 		);
@@ -1323,7 +1325,12 @@ class WikibaseRepo {
 	 * @return SerializerFactory
 	 */
 	public function getSerializerFactory( $options = SerializerFactory::OPTION_DEFAULT ) {
-		return new SerializerFactory( new DataValueSerializer(), $options );
+		return new SerializerFactory(
+			// TODO
+			[],
+			new DataValueSerializer(),
+			$options
+		);
 	}
 
 	/**
@@ -1333,15 +1340,13 @@ class WikibaseRepo {
 	 */
 	public function getExternalFormatEntityDeserializer() {
 		if ( $this->entityDeserializer === null ) {
-			$deserializerFactoryCallbacks = $this->entityTypeDefinitions->getDeserializerFactoryCallbacks();
-			$deserializerFactory = $this->getExternalFormatDeserializerFactory();
-			$deserializers = array();
-
-			foreach ( $deserializerFactoryCallbacks as $callback ) {
-				$deserializers[] = call_user_func( $callback, $deserializerFactory );
-			}
-
-			$this->entityDeserializer = new DispatchingDeserializer( $deserializers );
+			// TODO: Use $this->getExternalFormatDeserializerFactory
+			$factory = new DeserializerFactory(
+				$this->entityTypeDefinitions->getDeserializerFactoryCallbacks(),
+				$this->getDataValueDeserializer(),
+				$this->getEntityIdParser()
+			);
+			$this->entityDeserializer = $factory->newEntityDeserializer();
 		}
 
 		return $this->entityDeserializer;
@@ -1362,16 +1367,15 @@ class WikibaseRepo {
 	 * @return Serializer
 	 */
 	public function getEntitySerializer( $options = SerializerFactory::OPTION_DEFAULT ) {
+		// TODO: Check callers and remove this caching layer if not needed
 		if ( !isset( $this->entitySerializers[$options] ) ) {
-			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
-			$serializerFactory = $this->getSerializerFactory( $options );
-			$serializers = array();
-
-			foreach ( $serializerFactoryCallbacks as $callback ) {
-				$serializers[] = call_user_func( $callback, $serializerFactory );
-			}
-
-			$this->entitySerializers[$options] = new DispatchingSerializer( $serializers );
+			// TODO: Use $this->getSerializerFactory
+			$factory = new SerializerFactory(
+				$this->entityTypeDefinitions->getSerializerFactoryCallbacks(),
+				new DataValueSerializer(),
+				$options
+			);
+			$this->entitySerializers[$options] = $factory->newEntitySerializer();
 		}
 
 		return $this->entitySerializers[$options];

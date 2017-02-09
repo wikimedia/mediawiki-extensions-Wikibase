@@ -100,6 +100,7 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 
 	public function assertSerializationEqualsEntity( EntityDocument $entity, $serialization ) {
 		$deserializerFactory = new DeserializerFactory(
+			[],
 			new DataValueDeserializer( array( 'string' => StringValue::class ) ),
 			new BasicEntityIdParser()
 		);
