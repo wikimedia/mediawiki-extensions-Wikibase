@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_52e3ae32",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-09T17:12:37Z",
+      "side": 1,
+      "message": "It\u0027s just that a method that is literally called a \"dummy\" method looks like something the developer forgot to remove while preparing a patch. \"getDummy\" would be much better.\n\nAnd yes,\n\n$this-\u003egetMockBuilder( … )\n    -\u003edisableOriginalConstructor()\n    -\u003egetMock();\n\nis better because this is what is used hundreds of times in our code base. People are very used to this, but not to $this-\u003edummy( … ).",
+      "parentUuid": "2ef897d1_fe25d856",
+      "range": {
+        "startLine": 152,
+        "startChar": 18,
+        "endLine": 152,
+        "endChar": 23
+      },
+      "revId": "c189fc52194e0f61d98aebca5b43f929d94c291e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_8ee36dd4",
         "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
         "patchSetId": 3
@@ -78,6 +102,24 @@
       "side": 1,
       "message": "No, I didn\u0027t.\nDo you think we should use it?",
       "parentUuid": "2ef897d1_8ee36dd4",
+      "revId": "c189fc52194e0f61d98aebca5b43f929d94c291e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_32c5d290",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-09T17:12:37Z",
+      "side": 1,
+      "message": "No, what you did here is fine.",
+      "parentUuid": "2ef897d1_3edb7056",
       "revId": "c189fc52194e0f61d98aebca5b43f929d94c291e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
