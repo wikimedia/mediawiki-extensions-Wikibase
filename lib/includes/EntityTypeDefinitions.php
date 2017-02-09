@@ -164,4 +164,12 @@ class EntityTypeDefinitions {
 		return $this->getMapForDefinitionField( 'changeop-deserializer-callback' );
 	}
 
+	/**
+	 * @return callable[] An array mapping entity type identifiers
+	 * to callables instantiating implementations of EntityRdfBuilderFactory.
+	 * Not guaranteed to contain all entity types.
+	 */
+	public function getRdfBuilderFactoryCallbacks() {
+		return $this->getMapForDefinitionField( 'rdf-builder-factory-callback' );
+	}
 }

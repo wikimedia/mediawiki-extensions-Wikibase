@@ -14,6 +14,7 @@ use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
@@ -94,6 +95,12 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	private $pageProps;
 
 	/**
+	 * Entity types that have their Rdf factories injected so we don't check it again
+	 * @var string[]
+	 */
+	private $entityFactories;
+
+	/**
 	 * @param SiteList                   $sites
 	 * @param RdfVocabulary              $vocabulary
 	 * @param ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory
@@ -140,8 +147,27 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 			$builder->setDedupeBag( $this->dedupeBag );
 			$this->builders[] = $builder;
 		}
+
+		$this->entityFactories = [];
 	}
 
+	/**
+	 * @param EntityDocument $entity
+	 */
+	private function addBuilderFactory( EntityDocument $entity ) {
+		$rdfBuilderFactories = WikibaseRepo::getDefaultInstance()->getRdfBuilderFactoryCallbacks();
+		if ( !isset( $rdfBuilderFactories[$entity->getType()] ) ) {
+			return;
+		}
+		$factory = call_user_func( $rdfBuilderFactories[$entity->getType()] );
+		$builders = $factory->getBuilders(
+			$entity,
+			$this->writer,
+			$this->vocabulary,
+			$this->produceWhat
+		);
+		$this->builders = array_merge( $this->builders, $builders );
+	}
 	/**
 	 * @param int $flavorFlags Flavor flags to use for this builder
 	 * @return SnakRdfBuilder
@@ -459,6 +485,10 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	public function addEntity( EntityDocument $entity ) {
 		$this->addEntityMetaData( $entity );
 
+		if ( !array_key_exists( $entity->getType(), $this->entityFactories ) ) {
+			$this->addBuilderFactory( $entity );
+			$this->entityFactories[] = $entity->getType();
+		}
 		foreach ( $this->builders as $builder ) {
 			$builder->addEntity( $entity );
 		}
