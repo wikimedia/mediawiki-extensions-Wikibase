@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Api;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
@@ -22,11 +23,6 @@ use Wikibase\TermIndexEntry;
 class EntitySearchHelper {
 
 	/**
-	 * @var EntityTitleLookup
-	 */
-	private $titleLookup;
-
-	/**
 	 * @var EntityIdParser
 	 */
 	private $idParser;
@@ -41,13 +37,18 @@ class EntitySearchHelper {
 	 */
 	private $labelDescriptionLookup;
 
+	/**
+	 * @var EntityLookup
+	 */
+	private $entityLookup;
+
 	public function __construct(
-		EntityTitleLookup $titleLookup,
+		EntityLookup $entityLookup,
 		EntityIdParser $idParser,
 		ConfigurableTermSearchInteractor $termSearchInteractor,
 		LabelDescriptionLookup $labelDescriptionLookup
 	) {
-		$this->titleLookup = $titleLookup;
+		$this->entityLookup = $entityLookup;
 		$this->idParser = $idParser;
 		$this->termSearchInteractor = $termSearchInteractor;
 		$this->labelDescriptionLookup = $labelDescriptionLookup;
@@ -140,8 +141,7 @@ class EntitySearchHelper {
 			return null;
 		}
 
-		$title = $this->titleLookup->getTitleForId( $entityId );
-		if ( !$title || !$title->exists() ) {
+		if ( !$this->entityLookup->hasEntity($entityId) ) {
 			return null;
 		}
 
