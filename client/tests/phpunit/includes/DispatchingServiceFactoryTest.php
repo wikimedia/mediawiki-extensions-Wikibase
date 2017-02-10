@@ -22,7 +22,10 @@ use Wikibase\EntityRevision;
 class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetServiceNames_ReturnsNameOfDefinedService() {
-		$factory = new DispatchingServiceFactory( $this->dummy( RepositoryServiceContainerFactory::class ), [] );
+		$factory = new DispatchingServiceFactory(
+			$this->getRepositoryServiceContainerFactory(),
+			[]
+		);
 
 		$factory->defineService(
 			'SomeService',
@@ -62,7 +65,10 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 	//TODO getServiceMap() - shouldn't it throw exception if the service with the given name found not for every repository?
 
 	public function testGetService_AlwaysReturnsTheSameService() {
-		$factory = new DispatchingServiceFactory( $this->dummy( RepositoryServiceContainerFactory::class ), [] );
+		$factory = new DispatchingServiceFactory(
+			$this->getRepositoryServiceContainerFactory(),
+			[]
+		);
 
 		$someService = $this->someService( 'some service instance' );
 		$factory->defineService(
@@ -80,46 +86,61 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testEntityUpdatedDelegatesEventToContainerOfRelevantRepository() {
+		$entityRevision = new EntityRevision( new Item( new ItemId( 'foo:Q123' ) ) );
+
 		$localContainer = $this->prophesize( RepositoryServiceContainer::class );
 		$fooContainer = $this->prophesize( RepositoryServiceContainer::class );
 		$factory = new DispatchingServiceFactory(
-			$this->createRepositoryServiceContainerFactory( [ '' => $localContainer->reveal(), 'foo' => $fooContainer->reveal() ] ),
+			$this->createRepositoryServiceContainerFactory( [
+				'' => $localContainer->reveal(),
+				'foo' => $fooContainer->reveal(),
+			] ),
 			[ '', 'foo' ]
 		);
 
-		$factory->entityUpdated( new EntityRevision( new Item( new ItemId( 'foo:Q123' ) ) ) );
+		$factory->entityUpdated( $entityRevision );
 
-		$fooContainer->entityUpdated( new EntityRevision( new Item( new ItemId( 'foo:Q123' ) ) ) )->shouldHaveBeenCalled();
+		$fooContainer->entityUpdated( $entityRevision )->shouldHaveBeenCalled();
 		$localContainer->entityUpdated( Argument::any() )->shouldNotHaveBeenCalled();
 	}
 
 	public function testEntityDeletedDelegatesEventToContainerOfRelevantRepository() {
+		$entityId = new ItemId( 'foo:Q123' );
+
 		$localContainer = $this->prophesize( RepositoryServiceContainer::class );
 		$fooContainer = $this->prophesize( RepositoryServiceContainer::class );
 		$factory = new DispatchingServiceFactory(
-			$this->createRepositoryServiceContainerFactory( [ '' => $localContainer->reveal(), 'foo' => $fooContainer->reveal() ] ),
+			$this->createRepositoryServiceContainerFactory( [
+				'' => $localContainer->reveal(),
+				'foo' => $fooContainer->reveal(),
+			] ),
 			[ '', 'foo' ]
 		);
 
-		$factory->entityDeleted( new ItemId( 'foo:Q123' ) );
+		$factory->entityDeleted( $entityId );
 
-		$fooContainer->entityDeleted( new ItemId( 'foo:Q123' ) )->shouldHaveBeenCalled();
+		$fooContainer->entityDeleted( $entityId )->shouldHaveBeenCalled();
 		$localContainer->entityDeleted( Argument::any() )->shouldNotHaveBeenCalled();
 	}
 
 	public function testRedirectUpdatedDelegatesEventToContainerOfRelevantRepository() {
+		$entityRedirect = new EntityRedirect( new ItemId( 'foo:Q1' ), new ItemId( 'foo:Q2' ) );
+
 		$localContainer = $this->prophesize( RepositoryServiceContainer::class );
 		$fooContainer = $this->prophesize( RepositoryServiceContainer::class );
 		$factory = new DispatchingServiceFactory(
-			$this->createRepositoryServiceContainerFactory( [ '' => $localContainer->reveal(), 'foo' => $fooContainer->reveal() ] ),
+			$this->createRepositoryServiceContainerFactory( [
+				'' => $localContainer->reveal(),
+				'foo' => $fooContainer->reveal(),
+			] ),
 			[ '', 'foo' ]
 		);
 
-		$factory->redirectUpdated( new EntityRedirect( new ItemId( 'foo:Q1' ), new ItemId( 'foo:Q2' ) ), 100 );
+		$factory->redirectUpdated( $entityRedirect, 100 );
 
-		$fooContainer->redirectUpdated( new EntityRedirect( new ItemId( 'foo:Q1' ), new ItemId( 'foo:Q2' ) ), 100 )
-			->shouldHaveBeenCalled();
-		$localContainer->redirectUpdated( Argument::any(), Argument::any() )->shouldNotHaveBeenCalled();
+		$fooContainer->redirectUpdated( $entityRedirect, 100 )->shouldHaveBeenCalled();
+		$localContainer->redirectUpdated( Argument::any(), Argument::any() )
+			->shouldNotHaveBeenCalled();
 	}
 
 	/**
@@ -131,26 +152,22 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 		$containerFactory = $this->getMockBuilder( RepositoryServiceContainerFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
+
 		$containerFactory->method( 'newContainer' )
-			->will(
-				$this->returnCallback(
-					function ( $container ) use ( $containers ) {
-						return $containers[ $container ];
-					}
-				)
-			);
+			->will( $this->returnCallback( function ( $container ) use ( $containers ) {
+				return $containers[$container];
+			} ) );
 
 		return $containerFactory;
 	}
 
 	/**
-	 * Creates test dummy
-	 * @param string $class
-	 *
-	 * @return object
+	 * @return RepositoryServiceContainerFactory
 	 */
-	private function dummy( $class ) {
-		return $this->prophesize( $class )->reveal();
+	private function getRepositoryServiceContainerFactory() {
+		return $this->getMockBuilder( RepositoryServiceContainerFactory::class )
+			->disableOriginalConstructor()
+			->getMock();
 	}
 
 	/**
