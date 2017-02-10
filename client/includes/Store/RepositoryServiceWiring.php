@@ -8,6 +8,7 @@ use Wikibase\Lib\Interactors\TermIndexSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
+use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
@@ -21,6 +22,18 @@ use Wikimedia\Assert\Assert;
  */
 
 return [
+
+	'EntityInfoBuilderFactory' => function(
+		RepositoryServiceContainer $services,
+		WikibaseClient $client
+	) {
+		return new SqlEntityInfoBuilderFactory(
+			$services->getEntityIdParser(),
+			$client->getEntityIdComposer(),
+			$services->getDatabaseName(),
+			$services->getRepositoryName()
+		);
+	},
 
 	'EntityPrefetcher' => function(
 		RepositoryServiceContainer $services,
