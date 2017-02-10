@@ -13,6 +13,7 @@ use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\RepositoryDefinitions;
+use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -139,6 +140,13 @@ class DispatchingServiceFactory extends ServiceContainer implements EntityDataRe
 	 */
 	public function getEntityTypeToRepoMapping() {
 		return $this->repositoryDefinitions->getEntityTypeToRepositoryMapping();
+	}
+
+	/**
+	 * @return EntityInfoBuilderFactory
+	 */
+	public function getEntityInfoBuilderFactory() {
+		return $this->getService( 'EntityInfoBuilderFactory' );
 	}
 
 	/**

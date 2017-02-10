@@ -155,9 +155,9 @@ class SqlStore implements Store {
 	private $entityNamespaceLookup;
 
 	/**
-	 * @var EntityDataRetrievalServiceFactory
+	 * @var EntityDataRetrievalServiceFactory|null
 	 */
-	private $entityDataRetrievalServiceFactory;
+	private $entityDataRetrievalServiceFactory = null;
 
 	/**
 	 * @var string
@@ -506,6 +506,10 @@ class SqlStore implements Store {
 	 * @return EntityInfoBuilderFactory
 	 */
 	private function newEntityInfoBuilderFactory() {
+		if ( $this->entityDataRetrievalServiceFactory !== null ) {
+			return $this->entityDataRetrievalServiceFactory->getEntityInfoBuilderFactory();
+		}
+
 		return new SqlEntityInfoBuilderFactory( $this->entityIdParser, $this->entityIdComposer );
 	}
 
