@@ -21,7 +21,7 @@
 		"irc": "irc://irc.freenode.net/wikidata"
 	},
 	"require": {
-		"php": ">=5.5.0",
+		"php": ">=5.5.9",
 		"data-values/data-values": "^1.0.0",
 		"data-values/common": "^0.3.0",
 		"data-values/geo": "^1.2.1",
