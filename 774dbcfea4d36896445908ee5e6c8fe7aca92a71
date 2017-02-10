@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_3bd926f9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-10T16:42:26Z",
+      "side": 1,
+      "message": "This is a scary commit message. Please try to be more specific and explain what the patch actually changes.\n\nAlso I wonder why you keep using Markdown syntax. Gerrit does not support it.",
+      "revId": "774dbcfea4d36896445908ee5e6c8fe7aca92a71",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
