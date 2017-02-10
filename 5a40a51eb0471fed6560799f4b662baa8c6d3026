@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_a4b3bc95",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-10T12:10:51Z",
+      "side": 1,
+      "message": "I\u0027m not convinced repository definitions should be in a separate global variable. \n\nThe different is that the entitytypes and datatypes arrays are extension points (registries to use by other extensions). They are not configuration. The list of foreign repos *is* configuration.",
+      "revId": "5a40a51eb0471fed6560799f4b662baa8c6d3026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_c46b58ed",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-10T12:10:51Z",
+      "side": 1,
+      "message": "Will these include an entry for \"this\" repository, i.e. the one defined by getRepositoryDefinitionsFromSettings()? If repo and client are active on the same wiki, WikibaseRepo and WikibaseClient should use the exact same RepositoryDefinitions, and I think they must include the an entry for the local repo. WikibaseClient could ask WikibaseRepo, but that gets a bit circular.",
+      "revId": "5a40a51eb0471fed6560799f4b662baa8c6d3026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
