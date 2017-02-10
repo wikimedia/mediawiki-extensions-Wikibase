@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_6400243a",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-10T11:55:00Z",
+      "side": 1,
+      "message": "Currently, DispatchingServiceFactory is defined to create the same services for all repos. However, this is not a requirement - it could be \"smart\" and only create a PropertyInfoLookup for repos from which we load properties, for example. Whether a service should exist for all repos really depends on the individual service.",
+      "parentUuid": "2ef897d1_69d91df8",
+      "range": {
+        "startLine": 62,
+        "startChar": 1,
+        "endLine": 62,
+        "endChar": 121
+      },
+      "revId": "c189fc52194e0f61d98aebca5b43f929d94c291e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_eebd41ae",
         "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
         "patchSetId": 3
