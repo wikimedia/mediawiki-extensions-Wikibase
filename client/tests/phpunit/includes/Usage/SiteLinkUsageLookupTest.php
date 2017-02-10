@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\HashSiteLinkStore;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Client\Usage\SiteLinkUsageLookup
@@ -62,7 +63,8 @@ class SiteLinkUsageLookupTest extends MediaWikiTestCase {
 		return new SiteLinkUsageLookup(
 			'testwiki',
 			$siteLinks,
-			$titleFactory
+			$titleFactory,
+			WikibaseRepo::getDefaultInstance()->getEntityIdComposer()
 		);
 	}
 

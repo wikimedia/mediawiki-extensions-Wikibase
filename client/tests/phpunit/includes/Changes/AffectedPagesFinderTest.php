@@ -21,6 +21,7 @@ use Wikibase\EntityChange;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Tests\Changes\TestChanges;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Client\Changes\AffectedPagesFinder
@@ -497,7 +498,12 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 
 		$titleFactory = new TitleFactory();
 
-		return new SiteLinkUsageLookup( 'enwiki', $siteLinkLookup, $titleFactory );
+		return new SiteLinkUsageLookup(
+			'enwiki',
+			$siteLinkLookup,
+			$titleFactory,
+			WikibaseRepo::getDefaultInstance()->getEntityIdComposer()
+		);
 	}
 
 	/**
