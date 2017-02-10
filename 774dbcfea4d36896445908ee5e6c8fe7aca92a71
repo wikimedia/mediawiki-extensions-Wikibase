@@ -16,6 +16,24 @@
       "revId": "774dbcfea4d36896445908ee5e6c8fe7aca92a71",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_ce2c9291",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-10T17:08:19Z",
+      "side": 1,
+      "message": "\u003e This is a scary commit message.\n\nLets change it later when we understand if it is really possible/makes sense to make this change.\n\n\u003e why you keep using Markdown syntax\n\nIt is subtle and readable. \nHtml would be much more cumbersome and hard to read.\n\n\u003e Gerrit does not support it.\n\nGithub does.",
+      "parentUuid": "2ef897d1_3bd926f9",
+      "revId": "774dbcfea4d36896445908ee5e6c8fe7aca92a71",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
