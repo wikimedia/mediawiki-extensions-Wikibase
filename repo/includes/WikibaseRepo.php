@@ -1322,7 +1322,7 @@ class WikibaseRepo {
 	 *
 	 * @return SerializerFactory
 	 */
-	public function getSerializerFactory( $options = 0 ) {
+	public function getSerializerFactory( $options = SerializerFactory::OPTION_DEFAULT ) {
 		return new SerializerFactory( new DataValueSerializer(), $options );
 	}
 
@@ -1361,7 +1361,7 @@ class WikibaseRepo {
 	 *
 	 * @return Serializer
 	 */
-	public function getEntitySerializer( $options = 0 ) {
+	public function getEntitySerializer( $options = SerializerFactory::OPTION_DEFAULT ) {
 		if ( !isset( $this->entitySerializers[$options] ) ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
 			$serializerFactory = $this->getSerializerFactory( $options );
