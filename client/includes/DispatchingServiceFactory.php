@@ -66,9 +66,7 @@ class DispatchingServiceFactory extends ServiceContainer implements EntityDataRe
 		$serviceMap = [];
 		foreach ( $this->repositoryDefinitions->getRepositoryNames() as $repositoryName ) {
 			$container = $this->getContainerForRepository( $repositoryName );
-			if ( $container !== null ) {
-				$serviceMap[$repositoryName] = $container->getService( $service );
-			}
+			$serviceMap[$repositoryName] = $container->getService( $service );
 		}
 		return $serviceMap;
 	}
@@ -76,16 +74,12 @@ class DispatchingServiceFactory extends ServiceContainer implements EntityDataRe
 	/**
 	 * @param string $repositoryName
 	 *
-	 * @return RepositoryServiceContainer|null
+	 * @return RepositoryServiceContainer
 	 */
 	private function getContainerForRepository( $repositoryName ) {
 		if ( !array_key_exists( $repositoryName, $this->repositoryServiceContainers ) ) {
-			try {
-				$this->repositoryServiceContainers[$repositoryName] =
-					$this->repositoryServiceContainerFactory->newContainer( $repositoryName );
-			} catch ( UnknownForeignRepositoryException $exception ) {
-				$this->repositoryServiceContainers[$repositoryName] = null;
-			}
+			$this->repositoryServiceContainers[$repositoryName] =
+				$this->repositoryServiceContainerFactory->newContainer( $repositoryName );
 		}
 
 		return $this->repositoryServiceContainers[$repositoryName];
@@ -101,9 +95,7 @@ class DispatchingServiceFactory extends ServiceContainer implements EntityDataRe
 			$entityRevision->getEntity()->getId()->getRepositoryName()
 		);
 
-		if ( $container !== null ) {
-			$container->entityUpdated( $entityRevision );
-		}
+		$container->entityUpdated( $entityRevision );
 	}
 
 	/**
@@ -114,9 +106,7 @@ class DispatchingServiceFactory extends ServiceContainer implements EntityDataRe
 	public function entityDeleted( EntityId $entityId ) {
 		$container = $this->getContainerForRepository( $entityId->getRepositoryName() );
 
-		if ( $container !== null ) {
-			$container->entityDeleted( $entityId );
-		}
+		$container->entityDeleted( $entityId );
 	}
 
 	/**
@@ -130,9 +120,7 @@ class DispatchingServiceFactory extends ServiceContainer implements EntityDataRe
 			$entityRedirect->getEntityId()->getRepositoryName()
 		);
 
-		if ( $container !== null ) {
-			$container->redirectUpdated( $entityRedirect, $revisionId );
-		}
+		$container->redirectUpdated( $entityRedirect, $revisionId );
 	}
 
 	/**
