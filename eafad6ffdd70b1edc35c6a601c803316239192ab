@@ -22,6 +22,30 @@
       "revId": "eafad6ffdd70b1edc35c6a601c803316239192ab",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_bb1d167a",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-10T17:01:49Z",
+      "side": 1,
+      "message": "I would agree to replace it with `createRepositoryServiceContainerFactory([])` if you don\u0027t like it so much.",
+      "parentUuid": "2ef897d1_7b40be5b",
+      "range": {
+        "startLine": 69,
+        "startChar": 3,
+        "endLine": 69,
+        "endChar": 48
+      },
+      "revId": "eafad6ffdd70b1edc35c6a601c803316239192ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
