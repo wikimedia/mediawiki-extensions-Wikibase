@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "2ef897d1_a95f1576",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-10T09:39:11Z",
+      "side": 1,
+      "message": "Given https://gerrit.wikimedia.org/r/#/c/335058/16/repo/Wikibase.php@310 I wonder whether the result builder here should be also injected using the callback?\nAnd doesn\u0027t this also apply to the ErrorReporter? (the other patch doesn\u0027t use the callback though, so I am getting confused).",
+      "revId": "559987712e5b6da3109022380c615736d36be77b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_0fc4f191",
         "filename": "repo/tests/phpunit/includes/Api/StatementModificationHelperTest.php",
         "patchSetId": 7
@@ -49,6 +66,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_c968111c",
+        "filename": "repo/tests/phpunit/includes/Api/StatementModificationHelperTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-10T09:39:11Z",
+      "side": 1,
+      "message": "\u003e \u003e Verb phrases are preferred: use getReturnText() instead of\n \u003e returnText()\n \u003e `From: https://www.mediawiki.org/wiki/Manual:Coding_conventions/PHP#Functions_and_parameters`\n \u003e \n \u003e Your preference contradicts core\u0027s coding conventions. :)\n \u003e BTW, do we follow this?\n\nMostly yes, I suppose. Do you think we don\u0027t?\nThere are obviously places where the names used do not comply, like the \"newX\" thing (especially in tests), or probably more than \"data provider\" in tests are also named in a different way.\nStill, it says \"are preferred\" which does not mean \"must be\". And then, even it said, I believe those kind of \"conventions\" are just \"best practice suggestions\" that should not be blindly followed. For instance should the method above be called \"newCreateClaimApiModule\" it wouldn\u0027t make it not clear IMO.",
+      "parentUuid": "2ef897d1_cfbff9cb",
+      "range": {
+        "startLine": 74,
+        "startChar": 18,
+        "endLine": 74,
+        "endChar": 30
+      },
+      "revId": "559987712e5b6da3109022380c615736d36be77b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_af371daa",
         "filename": "repo/tests/phpunit/includes/Api/StatementModificationHelperTest.php",
         "patchSetId": 7
@@ -60,6 +101,30 @@
       "writtenOn": "2017-02-09T15:19:06Z",
       "side": 1,
       "message": "Is there really no other way to do this?\n\nI also wonder if it\u0027s possible to simplify this test setup and not make it use all these actual production services.",
+      "range": {
+        "startLine": 94,
+        "startChar": 3,
+        "endLine": 94,
+        "endChar": 51
+      },
+      "revId": "559987712e5b6da3109022380c615736d36be77b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_692c7df2",
+        "filename": "repo/tests/phpunit/includes/Api/StatementModificationHelperTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-10T09:39:11Z",
+      "side": 1,
+      "message": "\u003e Is there really no other way to do this?\n\nAFAIK we\u0027ve been struggling to have it done other way and it turned out to be the only way without some bigger refactoring. I also don\u0027t like it but as there is now way at the moment, I guess we have to live with that\n\n \u003e I also wonder if it\u0027s possible to simplify this test setup and not make it use all these actual production services.\n\nI am not sure but it might be similar problem as with mocking ResultBuilder in I3c6009368b9fcb5a4e0fc2967bb8bfe546326b9e (no way to easily mock the whole service).",
+      "parentUuid": "2ef897d1_af371daa",
       "range": {
         "startLine": 94,
         "startChar": 3,
