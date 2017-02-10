@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_e43654ff",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-10T12:21:42Z",
+      "side": 1,
+      "message": "I agree. This is configuration and not more than that.\nI\u0027ll remove this note.",
+      "parentUuid": "2ef897d1_a4b3bc95",
+      "revId": "5a40a51eb0471fed6560799f4b662baa8c6d3026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_c46b58ed",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2017-02-10T12:10:51Z",
       "side": 1,
       "message": "Will these include an entry for \"this\" repository, i.e. the one defined by getRepositoryDefinitionsFromSettings()? If repo and client are active on the same wiki, WikibaseRepo and WikibaseClient should use the exact same RepositoryDefinitions, and I think they must include the an entry for the local repo. WikibaseClient could ask WikibaseRepo, but that gets a bit circular.",
+      "revId": "5a40a51eb0471fed6560799f4b662baa8c6d3026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_a4173c55",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-10T12:21:42Z",
+      "side": 1,
+      "message": "https://gerrit.wikimedia.org/r/#/c/336815/3/client/includes/WikibaseClient.php@672 creates an entry for repo \u0027\u0027 with database set to what client\u0027s setting \"repoDatabase\" is set.\n\nI am not sure if this is just theoretical or whether there are cases where it makes sense, but there could be a wiki with both repo and client enabled, and repo setting \"changesDatabase\" and client\u0027s \"repoDatabase\" not being the same. In this case, after above line is called, repo definition for \u0027\u0027 will use database from client\u0027s \"repoDatabase\", and not from repo\u0027s \"changesDatabase\".\n\nI am not sure what should happen in such cases. Sounds like a configuration issue but I am not sure.",
+      "parentUuid": "2ef897d1_c46b58ed",
       "revId": "5a40a51eb0471fed6560799f4b662baa8c6d3026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
