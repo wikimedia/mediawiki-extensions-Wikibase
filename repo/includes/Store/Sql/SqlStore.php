@@ -601,7 +601,7 @@ class SqlStore implements Store {
 	 * @return SiteLinkConflictLookup
 	 */
 	public function getSiteLinkConflictLookup() {
-		return new SqlSiteLinkConflictLookup();
+		return new SqlSiteLinkConflictLookup( $this->entityIdComposer );
 	}
 
 	/**
