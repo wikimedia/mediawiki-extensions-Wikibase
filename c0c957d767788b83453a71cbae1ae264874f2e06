@@ -152,6 +152,24 @@
       "revId": "c0c957d767788b83453a71cbae1ae264874f2e06",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_24358ced",
+        "filename": "repo/includes/ChangeOp/ChangeOpDescription.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-10T12:19:49Z",
+      "side": 1,
+      "message": "Oh, right, silly me!",
+      "parentUuid": "2ef897d1_8f17c155",
+      "revId": "c0c957d767788b83453a71cbae1ae264874f2e06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
