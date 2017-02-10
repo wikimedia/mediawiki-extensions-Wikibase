@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_69d91df8",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-10T09:44:30Z",
+      "side": 1,
+      "message": "So I\u0027ve made I comment some time ago, on PS1. Let me just copy it over here again:\n\n \u003e Good question. I haven\u0027t really think about it. But I guess it should be OK to have some services for not all repositories (e.g. we might not need PropertyInfoLookup for repos that don\u0027t provide properties). Dispatching services we\u0027ve implemented so far generally ignore entities from repositories they don\u0027t have a service configured for. So I believe it would fine if the factory also accept \"incomplete\" service maps. If this is right assumption DispatchingServiceFactory should be changed as currently does not allow this completely I think. But I will check with Daniel again about this.\n\nI haven\u0027t talked to Daniel about this yet but I am going to do this today!",
+      "parentUuid": "2ef897d1_f5fba4b8",
+      "range": {
+        "startLine": 62,
+        "startChar": 1,
+        "endLine": 62,
+        "endChar": 121
+      },
+      "revId": "c189fc52194e0f61d98aebca5b43f929d94c291e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_eebd41ae",
         "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
         "patchSetId": 3
