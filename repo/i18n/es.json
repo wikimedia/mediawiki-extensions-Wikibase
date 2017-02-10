@@ -499,7 +499,7 @@
 	"apihelp-wbsetsitelink-param-baserevid": "El identificador numérico de la revisión en la que basar la modificación.\nEste dato se utiliza para detectar conflictos al guardar.",
 	"apihelp-wbsetsitelink-param-summary": "Resumen de la edición.\nSerá precedido por un comentario generado automáticamente. La longitud máxima del autocomentario junto con el resumen es de 260 caracteres. Ten en cuenta que todo lo que sobrepase el límite se cortará.",
 	"apihelp-wbsetsitelink-param-bot": "Marcar esta edición como hecha por un robot. Este parámetro funcionará solo si el usuario pertenece al grupo «bot».",
-	"apihelp-wbsetsitelink-param-linktitle": "El título del artículo que se enlazará. Si este parámetro es una cadena vacía o no se define ni <var>linktitle</var> ni <var>badges</var>, el enlace se eliminará.",
+	"apihelp-wbsetsitelink-param-linktitle": "El título del artículo que se enlazará. Si este parámetro es una cadena vacía o no se definen ni <var>linktitle</var> ni <var>badges</var>, el enlace se eliminará.",
 	"apihelp-wbsetsitelink-param-badges": "Los identificadores de los elementos que se establecerán como insignias. Reemplazarán a los actuales. Si este parámetro no está definido, las insignias no se cambiarán",
 	"apihelp-wbsetsitelink-example-6": "Cambiar las insignias del enlace a la página polaca del elemento «Q42» a dos insignias hacia los elementos «Q2» y «Q149» sin proporcionar el título del enlace",
 	"apihelp-wbsetsitelink-example-7": "Cambiar el enlace a la página polaca del elemento «Q42» sin modificar las insignias",
