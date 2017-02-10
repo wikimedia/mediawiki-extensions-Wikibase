@@ -5,7 +5,7 @@ namespace Wikibase\ChangeOp;
 use InvalidArgumentException;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\Validators\TermValidatorFactory;
@@ -127,17 +127,17 @@ class ChangeOpLabel extends ChangeOpBase {
 			return $result;
 		}
 
-		// TODO: Don't bind against Fingerprint here, rather use general builders for validators
-		if ( $entity instanceof FingerprintProvider ) {
+		// TODO: Don't bind against DescriptionsProvider here, rather use general builders for validators
+		if ( $entity instanceof DescriptionsProvider ) {
 			$fingerprintValidator = $this->termValidatorFactory->getFingerprintValidator( $entity->getType() );
 
 			// Check if the new fingerprint of the entity is valid (e.g. if the label is unique)
-			$fingerprint = clone $entity->getFingerprint();
-			$this->updateLabels( $fingerprint->getLabels() );
+			$labels = clone $entity->getLabels();
+			$this->updateLabels( $labels );
 
 			$result = $fingerprintValidator->validateFingerprint(
-				$fingerprint->getLabels(),
-				$fingerprint->getDescriptions(),
+				$labels,
+				$entity->getDescriptions(),
 				$entity->getId(),
 				array( $this->languageCode )
 			);
