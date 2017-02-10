@@ -16,6 +16,24 @@
       "revId": "616cae682c70ee32fc92efe9c27cdbe84e5e45b6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_2ed44616",
+        "filename": "client/includes/Usage/SiteLinkUsageLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-10T17:57:22Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s helpful to quote an anonymous \"we\" and call a discussion on a specific Gerrit patch a \"decision\".\n\nPlease read the discussion at the end of I63421d7.",
+      "parentUuid": "2ef897d1_3b2b6695",
+      "revId": "616cae682c70ee32fc92efe9c27cdbe84e5e45b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
