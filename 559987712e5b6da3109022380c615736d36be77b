@@ -90,6 +90,30 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_1b7d4a17",
+        "filename": "repo/tests/phpunit/includes/Api/StatementModificationHelperTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-10T16:04:20Z",
+      "side": 1,
+      "message": "I don\u0027t understand the \"getReturn…\" example, What does it mean? Is \"returnText\" a type? What does it represent?\n\nIn my opinion \"newFoo\" is as obvious as \"createFoo\" is. I like it a bit more because it is so close to an actual \"new Foo()\". But \"createFoo\" is also fine for me.\n\nDogmatic, made up naming conventions are not helpful. What I care about is if a name is obvious.",
+      "parentUuid": "2ef897d1_c968111c",
+      "range": {
+        "startLine": 74,
+        "startChar": 18,
+        "endLine": 74,
+        "endChar": 30
+      },
+      "revId": "559987712e5b6da3109022380c615736d36be77b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_af371daa",
         "filename": "repo/tests/phpunit/includes/Api/StatementModificationHelperTest.php",
         "patchSetId": 7
