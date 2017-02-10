@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Specials;
 
-use DataValues\Serializers\DataValueSerializer;
 use HttpError;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
@@ -77,8 +76,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$entityIdParser = $wikibaseRepo->getEntityIdParser();
 
 		$entityDataFormatProvider = new EntityDataFormatProvider();
-		$serializerFactory = new SerializerFactory(
-			new DataValueSerializer(),
+		$serializerFactory = $wikibaseRepo->getSerializerFactory(
 			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
 			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
 		);

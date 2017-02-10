@@ -1318,10 +1318,12 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * @param int $options bitwise combination of the SerializerFactory::OPTION_ flags
+	 *
 	 * @return SerializerFactory
 	 */
-	public function getSerializerFactory() {
-		return new SerializerFactory( new DataValueSerializer() );
+	public function getSerializerFactory( $options = 0 ) {
+		return new SerializerFactory( new DataValueSerializer(), $options );
 	}
 
 	/**
@@ -1362,7 +1364,7 @@ class WikibaseRepo {
 	public function getEntitySerializer( $options = 0 ) {
 		if ( !isset( $this->entitySerializers[$options] ) ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
-			$serializerFactory = new SerializerFactory( new DataValueSerializer(), $options );
+			$serializerFactory = $this->getSerializerFactory( $options );
 			$serializers = array();
 
 			foreach ( $serializerFactoryCallbacks as $callback ) {
@@ -1528,6 +1530,9 @@ class WikibaseRepo {
 	 * @return ApiHelperFactory
 	 */
 	public function getApiHelperFactory( IContextSource $context ) {
+		$serializerOptions = SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH
+			+ SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH;
+
 		return new ApiHelperFactory(
 			$this->getEntityTitleLookup(),
 			$this->getExceptionLocalizer(),
@@ -1536,10 +1541,8 @@ class WikibaseRepo {
 			$this->getSummaryFormatter(),
 			$this->getEntityRevisionLookup( 'uncached' ),
 			$this->newEditEntityFactory( $context ),
-			$this->getEntitySerializer(
-				SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
-				SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
-			),
+			$this->getSerializerFactory( $serializerOptions ),
+			$this->getEntitySerializer( $serializerOptions ),
 			$this->getEntityIdParser(),
 			$this->getStore()->newSiteLinkStore(),
 			$this->getEntityFactory(),
