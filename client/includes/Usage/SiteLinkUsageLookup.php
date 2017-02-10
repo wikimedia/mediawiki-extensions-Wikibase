@@ -7,7 +7,9 @@ use InvalidArgumentException;
 use Traversable;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -36,13 +38,23 @@ class SiteLinkUsageLookup implements UsageLookup {
 	private $titleFactory;
 
 	/**
+	 * @var EntityIdComposer
+	 */
+	private $entityIdComposer;
+
+	/**
 	 * @param string $clientSiteId The local wiki's global site id
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param TitleFactory $titleFactory
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $clientSiteId, SiteLinkLookup $siteLinkLookup, TitleFactory $titleFactory ) {
+	public function __construct(
+		$clientSiteId,
+		SiteLinkLookup $siteLinkLookup,
+		TitleFactory $titleFactory,
+		EntityIdComposer $entityIdComposer
+	) {
 		if ( !is_string( $clientSiteId ) ) {
 			throw new InvalidArgumentException( '$clientSiteId must be a string' );
 		}
@@ -50,6 +62,7 @@ class SiteLinkUsageLookup implements UsageLookup {
 		$this->clientSiteId = $clientSiteId;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->titleFactory = $titleFactory;
+		$this->entityIdComposer = $entityIdComposer;
 	}
 
 	/**
@@ -125,7 +138,9 @@ class SiteLinkUsageLookup implements UsageLookup {
 		$pageEntityUsages = array_map(
 			function ( array $row ) use ( $titleFactory ) {
 				// $row = array( $siteId, $pageName, $numericItemId );
-				$itemId = ItemId::newFromNumber( $row[2] );
+				$itemId = $this->entityIdComposer
+					->composeEntityId( '', Item::ENTITY_TYPE, $row[2] )
+					->getSerialization();
 				$title = $titleFactory->newFromText( $row[1] );
 
 				if ( !$title ) {
@@ -177,7 +192,9 @@ class SiteLinkUsageLookup implements UsageLookup {
 	private function makeItemIds( array $numericIds ) {
 		return array_map(
 			function ( $numericId ) {
-				return ItemId::newFromNumber( $numericId );
+				return $this->entityIdComposer
+					->composeEntityId( '', Item::ENTITY_TYPE, $numericId )
+					->getSerialization();
 			},
 			$numericIds
 		);
