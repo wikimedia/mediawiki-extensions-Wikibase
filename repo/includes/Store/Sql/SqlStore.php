@@ -505,6 +505,10 @@ class SqlStore implements Store {
 	 * @return EntityInfoBuilderFactory
 	 */
 	private function newEntityInfoBuilderFactory() {
+		if ( $this->entityDataRetrievalServices !== null ) {
+			return $this->entityDataRetrievalServices->getEntityInfoBuilderFactory();
+		}
+
 		return new SqlEntityInfoBuilderFactory( $this->entityIdParser, $this->entityIdComposer );
 	}
 

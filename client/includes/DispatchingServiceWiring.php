@@ -2,6 +2,7 @@
 
 use Wikibase\Client\DispatchingServiceFactory;
 use Wikibase\Lib\Interactors\DispatchingTermSearchInteractorFactory;
+use Wikibase\Lib\Store\DispatchingEntityInfoBuilderFactory;
 use Wikibase\Lib\Store\DispatchingEntityPrefetcher;
 use Wikibase\Lib\Store\DispatchingEntityRevisionLookup;
 use Wikibase\Lib\Store\DispatchingPropertyInfoLookup;
@@ -12,6 +13,12 @@ use Wikibase\Lib\Store\DispatchingTermBuffer;
  */
 
 return [
+
+	'EntityInfoBuilderFactory' => function( DispatchingServiceFactory $dispatchingServiceFactory ) {
+		return new DispatchingEntityInfoBuilderFactory(
+			$dispatchingServiceFactory->getServiceMap( 'EntityInfoBuilderFactory' )
+		);
+	},
 
 	'EntityPrefetcher' => function( DispatchingServiceFactory $dispatchingServiceFactory ) {
 		return new DispatchingEntityPrefetcher(
