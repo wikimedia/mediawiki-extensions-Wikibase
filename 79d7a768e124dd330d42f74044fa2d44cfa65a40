@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_0e33caf4",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1349,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-10T17:07:28Z",
+      "side": 1,
+      "message": "I think there should be a public getSerializerFactory() method, so getEntitySerializer() can be deprecated and replaced by getSerializerFactory()-\u003enewEntitySerializer().\n\nI\u0027m a bit torn on the question whether $options should go into the factory\u0027s constructor. Probably yes...\n\n$this-\u003eentitySerializers should be replaced by $this-\u003eentitySerializerFactories, or removed alltogether.",
+      "revId": "79d7a768e124dd330d42f74044fa2d44cfa65a40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
