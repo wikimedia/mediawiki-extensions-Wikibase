@@ -44,7 +44,8 @@ class PopulateChangesSubscription extends LoggedUpdateMaintenance {
 			$this->error( "You need to have Wikibase enabled in order to use this maintenance script!", 1 );
 		}
 
-		$idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$idParser = $wikibaseRepo->getEntityIdParser();
 		$startItemOption = $this->getOption( 'start-item' );
 
 		$startItem = $startItemOption === null ? null : $idParser->parse( $startItemOption );
@@ -62,6 +63,7 @@ class PopulateChangesSubscription extends LoggedUpdateMaintenance {
 
 		$builder = new ChangesSubscriptionTableBuilder(
 			wfGetLB(),
+			$wikibaseRepo->getEntityIdComposer(),
 			'wb_changes_subscription',
 			$this->mBatchSize,
 			$verbose ? 'verbose' : 'standard'
