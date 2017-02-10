@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_3b2b6695",
+        "filename": "client/includes/Usage/SiteLinkUsageLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-02-10T17:00:38Z",
+      "side": 1,
+      "message": "Please see https://gerrit.wikimedia.org/r/#/c/335973/ and the suggestions made in early change sets. We decided to do Item::ENTITY_TYPE",
+      "revId": "616cae682c70ee32fc92efe9c27cdbe84e5e45b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
