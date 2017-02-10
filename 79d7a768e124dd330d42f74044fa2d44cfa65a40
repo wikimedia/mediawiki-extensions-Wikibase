@@ -16,6 +16,23 @@
       "revId": "79d7a768e124dd330d42f74044fa2d44cfa65a40",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_2ef7a6d1",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-10T17:45:43Z",
+      "side": 1,
+      "message": "The latest version of the patch for DataModelSerialization doesn\u0027t have a newDispatchingSerializer(). This should use newEntitySerializer, and pass the callbacks to the constructor.\n\ngetExternalFormatEntityDeserializer(), getExternalFormatDeserializerFactory(), etc should also be changed to use the new logic in EntityDeserialiezrFactory.",
+      "revId": "79d7a768e124dd330d42f74044fa2d44cfa65a40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
