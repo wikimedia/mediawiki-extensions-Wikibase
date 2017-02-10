@@ -89,7 +89,7 @@ class DerivedPropertyValueSnakTest extends PHPUnit_Framework_TestCase {
 		$hash = $snak->getHash();
 
 		// @codingStandardsIgnoreStart
-		$expected = sha1( 'C:48:"Wikibase\DataModel\Snak\DerivedPropertyValueSnak":53:{a:2:{i:0;i:1;i:1;C:22:"DataValues\StringValue":1:{a}}}' );
+		$expected = sha1( 'C:48:"Wikibase\DataModel\Snak\DerivedPropertyValueSnak":58:{a:2:{i:0;s:2:"P1";i:1;C:22:"DataValues\StringValue":1:{a}}}' );
 		// @codingStandardsIgnoreEnd
 		$this->assertSame( $expected, $hash );
 	}
@@ -129,7 +129,7 @@ class DerivedPropertyValueSnakTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$this->assertEquals(
-			'a:2:{i:0;i:9001;i:1;C:22:"DataValues\StringValue":2:{bc}}',
+			'a:2:{i:0;s:5:"P9001";i:1;C:22:"DataValues\StringValue":2:{bc}}',
 			$snak->serialize()
 		);
 	}

@@ -489,8 +489,8 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 		$list->addNewReference( new PropertyNoValueSnak( 1 ) );
 		$this->assertSame(
 			"a:1:{i:0;O:28:\"Wikibase\\DataModel\\Reference\":1:{s:35:\"\x00Wikibase\\DataModel\\"
-			. "Reference\x00snaks\";C:32:\"Wikibase\\DataModel\\Snak\\SnakList\":102:{a:2:{s:4:\""
-			. 'data";a:1:{i:0;C:43:"Wikibase\\DataModel\\Snak\\PropertyNoValueSnak":4:{i:1;}}s:5'
+			. "Reference\x00snaks\";C:32:\"Wikibase\\DataModel\\Snak\\SnakList\":100:{a:2:{s:4:\""
+			. 'data";a:1:{i:0;C:43:"Wikibase\\DataModel\\Snak\\PropertyNoValueSnak":2:{P1}}s:5'
 			. ':"index";i:0;}}}}',
 			$list->serialize()
 		);

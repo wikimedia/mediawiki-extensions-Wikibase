@@ -88,7 +88,7 @@ class PropertyValueSnakTest extends PHPUnit_Framework_TestCase {
 		$hash = $snak->getHash();
 
 		// @codingStandardsIgnoreStart
-		$expected = sha1( 'C:41:"Wikibase\DataModel\Snak\PropertyValueSnak":53:{a:2:{i:0;i:1;i:1;C:22:"DataValues\StringValue":1:{a}}}' );
+		$expected = sha1( 'C:41:"Wikibase\DataModel\Snak\PropertyValueSnak":58:{a:2:{i:0;s:2:"P1";i:1;C:22:"DataValues\StringValue":1:{a}}}' );
 		// @codingStandardsIgnoreEnd
 		$this->assertSame( $expected, $hash );
 	}
@@ -121,15 +121,62 @@ class PropertyValueSnakTest extends PHPUnit_Framework_TestCase {
 		];
 	}
 
-	public function testSerialize() {
-		$snak = new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) );
-		$this->assertSame( 'a:2:{i:0;i:1;i:1;C:22:"DataValues\StringValue":1:{a}}', $snak->serialize() );
+	public function provideDataToSerialize() {
+		$p2 = new PropertyId( 'P2' );
+		$p2foo = new PropertyId( 'foo:P2' );
+		$value = new StringValue( 'b' );
+
+		return [
+			'string' => [
+				'a:2:{i:0;s:2:"P2";i:1;C:22:"DataValues\StringValue":1:{b}}',
+				new PropertyValueSnak( $p2, $value ),
+			],
+			'foreign' => [
+				'a:2:{i:0;s:6:"foo:P2";i:1;C:22:"DataValues\StringValue":1:{b}}',
+				new PropertyValueSnak( $p2foo, $value ),
+			],
+		];
 	}
 
-	public function testUnserialize() {
+	/**
+	 * @dataProvider provideDataToSerialize
+	 */
+	public function testSerialize( $expected, Snak $snak ) {
+		$serialized = $snak->serialize();
+		$this->assertSame( $expected, $serialized );
+
+		$snak2 = new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) );
+		$snak2->unserialize( $serialized );
+		$this->assertTrue( $snak->equals( $snak2 ), 'round trip' );
+	}
+
+	public function provideDataToUnserialize() {
+		$p2 = new PropertyId( 'P2' );
+		$p2foo = new PropertyId( 'foo:P2' );
+		$value = new StringValue( 'b' );
+
+		return [
+			'legacy' => [
+				new PropertyValueSnak( $p2, $value ),
+				'a:2:{i:0;i:2;i:1;C:22:"DataValues\StringValue":1:{b}}'
+			],
+			'current' => [
+				new PropertyValueSnak( $p2, $value ),
+				'a:2:{i:0;s:2:"P2";i:1;C:22:"DataValues\StringValue":1:{b}}'
+			],
+			'foreign' => [
+				new PropertyValueSnak( $p2foo, $value ),
+				'a:2:{i:0;s:6:"foo:P2";i:1;C:22:"DataValues\StringValue":1:{b}}'
+			],
+		];
+	}
+
+	/**
+	 * @dataProvider provideDataToUnserialize
+	 */
+	public function testUnserialize( $expected, $serialized ) {
 		$snak = new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) );
-		$snak->unserialize( 'a:2:{i:0;i:2;i:1;C:22:"DataValues\StringValue":1:{b}}' );
-		$expected = new PropertyValueSnak( new PropertyId( 'P2' ), new StringValue( 'b' ) );
+		$snak->unserialize( $serialized );
 		$this->assertTrue( $snak->equals( $expected ) );
 	}
 

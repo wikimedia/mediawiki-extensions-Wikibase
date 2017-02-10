@@ -76,7 +76,7 @@ class PropertySomeValueSnakTest extends PHPUnit_Framework_TestCase {
 		$snak = new PropertySomeValueSnak( new PropertyId( 'P1' ) );
 		$hash = $snak->getHash();
 
-		$expected = sha1( 'C:45:"Wikibase\DataModel\Snak\PropertySomeValueSnak":4:{i:1;}' );
+		$expected = sha1( 'C:45:"Wikibase\DataModel\Snak\PropertySomeValueSnak":2:{P1}' );
 		$this->assertSame( $expected, $hash );
 	}
 
@@ -110,15 +110,51 @@ class PropertySomeValueSnakTest extends PHPUnit_Framework_TestCase {
 		];
 	}
 
-	public function testSerialize() {
-		$snak = new PropertySomeValueSnak( new PropertyId( 'P1' ) );
-		$this->assertSame( 'i:1;', $snak->serialize() );
+	public function provideDataToSerialize() {
+		$p2 = new PropertyId( 'P2' );
+		$p2foo = new PropertyId( 'foo:P2' );
+
+		return [
+			'string' => [
+				'P2',
+				new PropertySomeValueSnak( $p2 ),
+			],
+			'foreign' => [
+				'foo:P2',
+				new PropertySomeValueSnak( $p2foo ),
+			],
+		];
 	}
 
-	public function testUnserialize() {
+	/**
+	 * @dataProvider provideDataToSerialize
+	 */
+	public function testSerialize( $expected, Snak $snak ) {
+		$serialized = $snak->serialize();
+		$this->assertSame( $expected, $serialized );
+
+		$snak2 = new PropertySomeValueSnak( new PropertyId( 'P1' ) );
+		$snak2->unserialize( $serialized );
+		$this->assertTrue( $snak->equals( $snak2 ), 'round trip' );
+	}
+
+	public function provideDataToUnserialize() {
+		$p2 = new PropertyId( 'P2' );
+		$p2foo = new PropertyId( 'foo:P2' );
+
+		return [
+			'legacy' => [ new PropertySomeValueSnak( $p2 ), 'i:2;' ],
+			'current' => [ new PropertySomeValueSnak( $p2 ), 'P2' ],
+			'foreign' => [ new PropertySomeValueSnak( $p2foo ), 'foo:P2' ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideDataToUnserialize
+	 */
+	public function testUnserialize( $expected, $serialized ) {
 		$snak = new PropertySomeValueSnak( new PropertyId( 'P1' ) );
-		$snak->unserialize( 'i:2;' );
-		$expected = new PropertySomeValueSnak( new PropertyId( 'P2' ) );
+		$snak->unserialize( $serialized );
 		$this->assertTrue( $snak->equals( $expected ) );
 	}
 

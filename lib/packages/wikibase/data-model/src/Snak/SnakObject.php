@@ -97,12 +97,12 @@ abstract class SnakObject implements Snak {
 	/**
 	 * @see Serializable::serialize
 	 *
-	 * @since 0.1
+	 * @since 7.0
 	 *
 	 * @return string
 	 */
 	public function serialize() {
-		return serialize( $this->propertyId->getNumericId() );
+		return $this->propertyId->getSerialization();
 	}
 
 	/**
@@ -113,7 +113,12 @@ abstract class SnakObject implements Snak {
 	 * @param string $serialized
 	 */
 	public function unserialize( $serialized ) {
-		$this->propertyId = PropertyId::newFromNumber( unserialize( $serialized ) );
+		try {
+			$this->propertyId = new PropertyId( $serialized );
+		} catch ( InvalidArgumentException $ex ) {
+			// Backwards compatibility with the previous serialization format
+			$this->propertyId = PropertyId::newFromNumber( unserialize( $serialized ) );
+		}
 	}
 
 }

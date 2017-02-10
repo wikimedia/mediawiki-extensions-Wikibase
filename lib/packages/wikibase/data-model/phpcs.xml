@@ -7,7 +7,6 @@
     <rule ref="Generic.Arrays.DisallowLongArraySyntax" />
 
     <rule ref="Generic.Classes" />
-    <rule ref="Generic.CodeAnalysis" />
     <rule ref="Generic.ControlStructures" />
 
     <rule ref="Generic.Files.ByteOrderMark" />
