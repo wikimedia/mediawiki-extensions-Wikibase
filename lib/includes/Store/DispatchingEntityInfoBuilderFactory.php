@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Store;
 
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\RepositoryDefinitions;
 use Wikimedia\Assert\Assert;
 
 /**
