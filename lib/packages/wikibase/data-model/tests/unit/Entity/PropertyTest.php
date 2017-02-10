@@ -27,6 +27,9 @@ use Wikibase\DataModel\Term\TermList;
  */
 class PropertyTest extends PHPUnit_Framework_TestCase {
 
+	/**
+	 * @return Property
+	 */
 	private function getNewEmpty() {
 		return Property::newFromType( 'string' );
 	}
@@ -106,7 +109,7 @@ class PropertyTest extends PHPUnit_Framework_TestCase {
 
 	public function testPropertyWithFingerprintIsNotEmpty() {
 		$property = Property::newFromType( 'string' );
-		$property->getFingerprint()->setAliasGroup( 'en', [ 'foo' ] );
+		$property->setAliases( 'en', [ 'foo' ] );
 		$this->assertFalse( $property->isEmpty() );
 	}
 
@@ -166,9 +169,9 @@ class PropertyTest extends PHPUnit_Framework_TestCase {
 		$property = Property::newFromType( 'string' );
 
 		$property->setId( 42 );
-		$property->getFingerprint()->setLabel( 'en', 'Same' );
-		$property->getFingerprint()->setDescription( 'en', 'Same' );
-		$property->getFingerprint()->setAliasGroup( 'en', [ 'Same' ] );
+		$property->setLabel( 'en', 'Same' );
+		$property->setDescription( 'en', 'Same' );
+		$property->setAliases( 'en', [ 'Same' ] );
 		$property->setStatements( $this->newNonEmptyStatementList() );
 
 		return $property;
@@ -176,13 +179,13 @@ class PropertyTest extends PHPUnit_Framework_TestCase {
 
 	public function notEqualsProvider() {
 		$differentLabel = $this->getBaseProperty();
-		$differentLabel->getFingerprint()->setLabel( 'en', 'Different' );
+		$differentLabel->setLabel( 'en', 'Different' );
 
 		$differentDescription = $this->getBaseProperty();
-		$differentDescription->getFingerprint()->setDescription( 'en', 'Different' );
+		$differentDescription->setDescription( 'en', 'Different' );
 
 		$differentAlias = $this->getBaseProperty();
-		$differentAlias->getFingerprint()->setAliasGroup( 'en', [ 'Different' ] );
+		$differentAlias->setAliases( 'en', [ 'Different' ] );
 
 		$differentStatement = $this->getBaseProperty();
 		$differentStatement->setStatements( new StatementList() );
@@ -262,9 +265,9 @@ class PropertyTest extends PHPUnit_Framework_TestCase {
 		$clonedStatement->getQualifiers()->addSnak( new PropertyNoValueSnak( 1 ) );
 		$clonedStatement->getReferences()->addNewReference( new PropertyNoValueSnak( 1 ) );
 
-		$this->assertSame( 'original', $original->getFingerprint()->getLabel( 'en' )->getText() );
-		$this->assertFalse( $original->getFingerprint()->hasDescription( 'en' ) );
-		$this->assertFalse( $original->getFingerprint()->hasAliasGroup( 'en' ) );
+		$this->assertSame( 'original', $original->getLabels()->getByLanguage( 'en' )->getText() );
+		$this->assertFalse( $original->getDescriptions()->hasTermForLanguage( 'en' ) );
+		$this->assertFalse( $original->getAliasGroups()->hasGroupForLanguage( 'en' ) );
 		$this->assertNull( $originalStatement->getGuid() );
 		$this->assertSame( 'novalue', $originalStatement->getMainSnak()->getType() );
 		$this->assertSame( Statement::RANK_NORMAL, $originalStatement->getRank() );

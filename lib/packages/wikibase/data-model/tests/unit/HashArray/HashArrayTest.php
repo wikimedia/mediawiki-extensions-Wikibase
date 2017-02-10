@@ -2,9 +2,7 @@
 
 namespace Wikibase\DataModel\Tests\HashArray;
 
-use Hashable;
 use Wikibase\DataModel\HashArray;
-use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**
  * @covers Wikibase\DataModel\HashArray
