@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_5b84e25d",
+        "filename": "repo/includes/FingerprintSearchTextGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-10T15:19:08Z",
+      "side": 1,
+      "message": "I suggest to keep the old method, and add the new logic as a new method. This allows MediaInfo \u0026 co to be migrated to the new method without breaking. Once MediaInfo \u0026 co are using the new method, the old method can go.",
+      "revId": "ff500e1e2df2c1331c40d6d74e3451fc61b6a399",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
