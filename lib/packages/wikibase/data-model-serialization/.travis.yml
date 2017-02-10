@@ -7,9 +7,7 @@ matrix:
   fast_finish: true
   include:
     - env: DM=~6.0
-      php: 5.3
-    - env: DM=~6.0
-      php: 5.4
+      php: 7.1
     - env: DM=@dev
       php: 5.5
     - env: DM=~5.0
