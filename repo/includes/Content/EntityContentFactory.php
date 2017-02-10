@@ -344,7 +344,7 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup, En
 	 */
 	public function getPermissionStatusForEntityType( User $user, $permission, $entityType, $quick = '' ) {
 		$ns = $this->getNamespaceForType( $entityType );
-		$dummyTitle = Title::makeTitleSafe( $ns, '/' );
+		$dummyTitle = Title::makeTitle( $ns, '/' );
 
 		return $this->getPermissionStatus( $user, $permission, $dummyTitle, $quick );
 	}
