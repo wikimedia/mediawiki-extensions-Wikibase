@@ -34,6 +34,24 @@
       "revId": "774dbcfea4d36896445908ee5e6c8fe7aca92a71",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_8e745a97",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-10T17:14:17Z",
+      "side": 1,
+      "message": "How it GitHub relevant here?\n\nWhat is \"subtle\" about backquotes that don\u0027t do anything? It\u0027s not that they make the text between them better readable, the contrary.",
+      "parentUuid": "2ef897d1_ce2c9291",
+      "revId": "774dbcfea4d36896445908ee5e6c8fe7aca92a71",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
