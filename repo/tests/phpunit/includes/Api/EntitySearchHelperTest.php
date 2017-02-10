@@ -3,16 +3,17 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use Title;
-use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\Services\Lookup\DispatchingEntityLookup;
+use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchOptions;
-use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Lib\Interactors\TermSearchResult;
+use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\TermIndexEntry;
 
 /**
@@ -26,19 +27,12 @@ use Wikibase\TermIndexEntry;
  */
 class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 
-	/**
-	 * @return EntityTitleLookup
-	 */
-	private function getMockTitleLookup() {
-		$titleLookup = $this->getMock( EntityTitleLookup::class );
-		$titleLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $id ) {
-				$exists = $id->getSerialization() === 'Q111';
-				return $this->getMockTitle( $exists );
-			} ) );
-		return $titleLookup;
-	}
+	const EXISTING_LOCAL_ITEM = 'Q111';
+	const FOREIGN_REPO_PREFIX = 'foreign';
+	const EXISTING_FOREIGN_ITEM = 'foreign:Q2';
+	const DEFAULT_LANGUAGE = 'pt';
+	const DEFAULT_LABEL = 'ptLabel';
+	const DEFAULT_DESCRIPTION = 'ptDescription';
 
 	/**
 	 * @param bool $exists
@@ -63,7 +57,12 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @return ConfigurableTermSearchInteractor|\PHPUnit_Framework_MockObject_MockObject
 	 */
-	private function getMockSearchInteractor( $search, $language, $type, array $returnResults = array() ) {
+	private function getMockSearchInteractor(
+		$search,
+		$language,
+		$type,
+		array $returnResults = []
+	) {
 		$mock = $this->getMock( ConfigurableTermSearchInteractor::class );
 		$mock->expects( $this->atLeastOnce() )
 			->method( 'searchForEntities' )
@@ -71,14 +70,14 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 				$this->equalTo( $search ),
 				$this->equalTo( $language ),
 				$this->equalTo( $type ),
-				$this->equalTo( array( TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS ) )
+				$this->equalTo( [ TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS ] )
 			)
 			->will( $this->returnValue( $returnResults ) );
 		return $mock;
 	}
 
 	/**
-	 * Get a lookup that always returns a pt label and description suffixed by the entity ID
+	 * Get a lookup that always returns a pt label and description
 	 *
 	 * @return LabelDescriptionLookup
 	 */
@@ -86,18 +85,32 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 		$mock = $this->getMockBuilder( LabelDescriptionLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$mock->expects( $this->any() )
-			->method( 'getLabel' )
-			->will( $this->returnValue( new Term( 'pt', 'ptLabel' ) ) );
-		$mock->expects( $this->any() )
-			->method( 'getDescription' )
-			->will( $this->returnValue( new Term( 'pt', 'ptDescription' ) ) );
+		$mock->method( 'getLabel' )
+			->will( $this->returnValue( new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_LABEL ) ) );
+		$mock->method( 'getDescription' )
+			->will(
+				$this->returnValue( new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_DESCRIPTION ) )
+			);
 		return $mock;
 	}
 
 	private function newEntitySearchHelper( ConfigurableTermSearchInteractor $searchInteractor ) {
+
+		$localEntityLookup = new InMemoryEntityLookup();
+		$localEntityLookup->addEntity( new Item( new ItemId( self::EXISTING_LOCAL_ITEM ) ) );
+
+		$fooEntityLookup = new InMemoryEntityLookup();
+		$fooEntityLookup->addEntity( new Item( new ItemId( self::EXISTING_FOREIGN_ITEM ) ) );
+
+		$entityLookup = new DispatchingEntityLookup(
+			[
+				'' => $localEntityLookup,
+				self::FOREIGN_REPO_PREFIX => $fooEntityLookup,
+			]
+		);
+
 		return new EntitySearchHelper(
-			$this->getMockTitleLookup(),
+			$entityLookup,
 			new ItemIdParser(),
 			$searchInteractor,
 			$this->getMockLabelDescriptionLookup()
@@ -129,12 +142,12 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideTestGetRankedSearchResults() {
-		$q111Result = new TermSearchResult(
-			new Term( 'qid', 'Q111' ),
+		$existingLocalItemResult = new TermSearchResult(
+			new Term( 'qid', self::EXISTING_LOCAL_ITEM ),
 			'entityId',
-			new ItemId( 'Q111' ),
-			new Term( 'pt', 'ptLabel' ),
-			new Term( 'pt', 'ptDescription' )
+			new ItemId( self::EXISTING_LOCAL_ITEM ),
+			new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_LABEL ),
+			new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_DESCRIPTION )
 		);
 
 		$q222Result = new TermSearchResult(
@@ -152,38 +165,85 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 			new Term( 'fr', 'ADisplayLabel' )
 		);
 
-		return array(
-			'No exact match' => array(
-				'Q999', 10, array(), array()
-			),
-			'Exact EntityId match' => array(
-				'Q111', 10, array(), array( 'Q111' => $q111Result )
-			),
-			'EntityID plus term matches' => array(
-				'Q111', 10, array( $q222Result ), array( 'Q111' => $q111Result, 'Q222' => $q222Result )
-			),
-			'Trimming' => array(
-				' Q111 ', 10, array(), array( 'Q111' => $q111Result )
-			),
-			'Brackets are removed' => array(
-				'(Q111)', 10, array(), array( 'Q111' => $q111Result )
-			),
-			'URL prefixes are removed' => array(
-				'http://example.com/Q111', 10, array(), array( 'Q111' => $q111Result )
-			),
-			'Single characters are ignored' => array(
-				'w/Q111/w', 10, array(), array( 'Q111' => $q111Result )
-			),
-			'EntityID extraction plus term matches' => array(
-				'[id:Q111]', 10, array( $q222Result ), array( 'Q111' => $q111Result, 'Q222' => $q222Result )
-			),
-			'Multiple Results' => array(
-				'Foo', 10, array( $q222Result, $q333Result ), array( 'Q222' => $q222Result, 'Q333' => $q333Result )
-			),
-			'Multiple Results (limited)' => array(
-				'Foo', 1, array( $q222Result ), array( 'Q222' => $q222Result )
-			),
+		$existingForeignItemResult = new TermSearchResult(
+			new Term( 'qid', self::EXISTING_FOREIGN_ITEM ),
+			'entityId',
+			new ItemId( self::EXISTING_FOREIGN_ITEM ),
+			new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_LABEL ),
+			new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_DESCRIPTION )
 		);
+
+		$defaultLimit = 10;
+		$emptyInteractorResult = [];
+
+		return [
+			'No exact match' => [
+				'Q999',
+				$defaultLimit,
+				$emptyInteractorResult,
+				[],
+			],
+			'Exact EntityId match' => [
+				self::EXISTING_LOCAL_ITEM,
+				$defaultLimit,
+				$emptyInteractorResult,
+				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult ],
+			],
+			'Exact EntityId match in foreign repository' => [
+				self::EXISTING_FOREIGN_ITEM,
+				$defaultLimit,
+				$emptyInteractorResult,
+				[ self::EXISTING_FOREIGN_ITEM => $existingForeignItemResult ],
+			],
+			'EntityID plus term matches' => [
+				self::EXISTING_LOCAL_ITEM,
+				$defaultLimit,
+				[ $q222Result ],
+				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult, 'Q222' => $q222Result ],
+			],
+			'Trimming' => [
+				' ' . self::EXISTING_LOCAL_ITEM . ' ',
+				$defaultLimit,
+				$emptyInteractorResult,
+				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult ],
+			],
+			'Brackets are removed' => [
+				'(' . self::EXISTING_LOCAL_ITEM . ')',
+				$defaultLimit,
+				$emptyInteractorResult,
+				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult ],
+			],
+			'URL prefixes are removed' => [
+				'http://example.com/' . self::EXISTING_LOCAL_ITEM,
+				$defaultLimit,
+				$emptyInteractorResult,
+				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult ],
+			],
+			'Single characters are ignored' => [
+				'w/' . self::EXISTING_LOCAL_ITEM . '/w',
+				$defaultLimit,
+				$emptyInteractorResult,
+				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult ],
+			],
+			'EntityID extraction plus term matches' => [
+				'[id:' . self::EXISTING_LOCAL_ITEM . ']',
+				$defaultLimit,
+				[ $q222Result ],
+				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult, 'Q222' => $q222Result ],
+			],
+			'Multiple Results' => [
+				'Foo',
+				$defaultLimit,
+				[ $q222Result, $q333Result ],
+				[ 'Q222' => $q222Result, 'Q333' => $q333Result ],
+			],
+			'Multiple Results (limited)' => [
+				'Foo',
+				1,
+				[ $q222Result ],
+				[ 'Q222' => $q222Result ],
+			],
+		];
 	}
 
 	/**
