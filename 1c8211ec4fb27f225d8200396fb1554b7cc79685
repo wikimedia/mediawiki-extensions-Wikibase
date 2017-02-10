@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_1ba9ca21",
+        "filename": "client/includes/Usage/SiteLinkUsageLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-10T16:46:24Z",
+      "side": 1,
+      "message": "The oddly named Item::ENTITY_TYPE constant does not make this code better or safer. Just use the string \u0027item\u0027 and this dependency is not needed any more (as it should).",
+      "revId": "1c8211ec4fb27f225d8200396fb1554b7cc79685",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_dba2123b",
+        "filename": "client/includes/Usage/SiteLinkUsageLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-10T16:46:24Z",
+      "side": 1,
+      "message": "Oh. This returns a string, but the code expects an ItemId object. Same below.",
+      "range": {
+        "startLine": 143,
+        "startChar": 7,
+        "endLine": 143,
+        "endChar": 23
+      },
+      "revId": "1c8211ec4fb27f225d8200396fb1554b7cc79685",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
