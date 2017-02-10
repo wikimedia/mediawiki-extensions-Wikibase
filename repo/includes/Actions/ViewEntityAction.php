@@ -105,6 +105,7 @@ class ViewEntityAction extends ViewAction {
 		if ( isset( $meta['description'] ) ) {
 			$outputPage->addMeta( 'description', $meta['description'] );
 			$outputPage->addMeta( 'og:description', $meta['description'] );
+			$outputPage->addMeta( 'twitter:card', 'summary' );
 		}
 	}
 
