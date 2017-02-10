@@ -1,13 +1,10 @@
 # Wikibase DataModel Serialization release notes
 
-## 2.4.0 (dev)
-
-* Dropped support for PHP 5.3 and PHP 5.4
-
-## 2.3.0 (2017-02-07)
+## 2.3.0 (dev)
 
 * Improved performance of `StatementDeserializer`
 * Improved type safety throughout the code
+* Dropped support for PHP 5.3 and PHP 5.4
 
 ## 2.2.0 (2016-03-11)
 
