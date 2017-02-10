@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_510f23e4",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-02-10T21:11:09Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure ErrorReporter doesn\u0027t need the exact ApiModule because it only needs the context for the language and that can be obtained easily from $mainModule. Regarding $resultBuilder. it should fail in some cases (not super sure why and because of what) but I think it has something to do isWriteMode() method. Just to be sure, I\u0027d go with callback.",
+      "parentUuid": "2ef897d1_a95f1576",
+      "revId": "559987712e5b6da3109022380c615736d36be77b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_0fc4f191",
         "filename": "repo/tests/phpunit/includes/Api/StatementModificationHelperTest.php",
         "patchSetId": 7
