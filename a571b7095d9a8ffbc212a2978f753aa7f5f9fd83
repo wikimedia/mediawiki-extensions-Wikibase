@@ -105,6 +105,24 @@
       "revId": "a571b7095d9a8ffbc212a2978f753aa7f5f9fd83",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_893d792b",
+        "filename": "repo/tests/phpunit/includes/Api/MergeItemsTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-10T09:03:20Z",
+      "side": 1,
+      "message": "I think it might make sense to have some result builder for test only. You would pre-set it with results it should be returning (according to your test\u0027s data) and then use in tests.\nI don\u0027t mean it should be introduced here, it is beyond the scope of this patch. Mocking you\u0027re doing currently is OK. As it doesn\u0027t seem possible to have a mock ResultBuilder, I\u0027d be also fine with using \"real\" ResultBuilder instead of mocking n services the semi-mock requires. But yeah, it should simply be fixed at some point by having a why to properly mock ResultBuilder.",
+      "parentUuid": "2ef897d1_a9add581",
+      "revId": "a571b7095d9a8ffbc212a2978f753aa7f5f9fd83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
