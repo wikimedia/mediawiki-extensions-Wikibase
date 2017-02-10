@@ -94,6 +94,30 @@
       "revId": "c1aa726153d52e4d9a224da0e2ec4f134a9def2e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_899fb905",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-10T10:30:21Z",
+      "side": 1,
+      "message": "\u003e \u003e Nobody does a \"where is this used\" search.\n \u003e \n \u003e For now. Imagine if one day you will decide to change those values.\n \u003e How easier it would be?\n\nWhile I generally agree with you that using a class constant makes it all more clear, that point you make is purely theoretical. Those \"item\" etc strings are stored in database for each single entity, so changing those is very highly unlikely as all database entries of every Wikibase instance would need to be migrated.",
+      "parentUuid": "2ef897d1_9596b040",
+      "range": {
+        "startLine": 104,
+        "startChar": 33,
+        "endLine": 104,
+        "endChar": 39
+      },
+      "revId": "c1aa726153d52e4d9a224da0e2ec4f134a9def2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
