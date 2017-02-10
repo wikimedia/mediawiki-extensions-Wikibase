@@ -522,6 +522,11 @@ class WikibaseRepo {
 		// NOTE: we cannot inject $wgContLang in the constructor, because it may still be null
 		// when WikibaseRepo is initialized. In particular, the language object may not yet
 		// be there when the SetupAfterCache hook is run during bootstrapping.
+
+		if ( !$wgContLang ) {
+			throw new MWException( 'Premature access: $wgContLang is not yet initialized!' );
+		}
+
 		StubObject::unstub( $wgContLang );
 		return $wgContLang;
 	}
@@ -536,6 +541,11 @@ class WikibaseRepo {
 		// NOTE: we cannot inject $wgLang in the constructor, because it may still be null
 		// when WikibaseRepo is initialized. In particular, the language object may not yet
 		// be there when the SetupAfterCache hook is run during bootstrapping.
+
+		if ( !$wgLang ) {
+			throw new MWException( 'Premature access: $wgLang is not yet initialized!' );
+		}
+
 		StubObject::unstub( $wgLang );
 		return $wgLang;
 	}
