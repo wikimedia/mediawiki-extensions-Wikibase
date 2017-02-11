@@ -74,6 +74,7 @@ use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
+use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\LanguageNameLookup;
@@ -495,7 +496,7 @@ final class WikibaseClient {
 	 *
 	 * XXX: This is not used by client itself, but is used by ArticlePlaceholder!
 	 *
-	 * @return TermIndexSearchInteractor
+	 * @return TermSearchInteractor
 	 */
 	public function newTermSearchInteractor( $displayLanguageCode ) {
 		return $this->getEntityDataRetrievalServiceFactory()->getTermSearchInteractorFactory()
