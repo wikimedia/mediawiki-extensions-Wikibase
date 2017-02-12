@@ -1,0 +1,251 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_d2d55e48",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-12T17:19:03Z",
+      "side": 1,
+      "message": "not important for commit message",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 93
+      },
+      "revId": "125400f0cc6499f3c19301fe64faa4e47d9d70d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_92cfe6b4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-12T17:19:03Z",
+      "side": 1,
+      "message": "paste this above this line:\n\n Bug: T151717",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "125400f0cc6499f3c19301fe64faa4e47d9d70d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_a7cc6e39",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-12T17:19:03Z",
+      "side": 1,
+      "message": "add a space after the opening and before the closing parentheses",
+      "range": {
+        "startLine": 41,
+        "startChar": 31,
+        "endLine": 41,
+        "endChar": 35
+      },
+      "revId": "125400f0cc6499f3c19301fe64faa4e47d9d70d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_8755aa54",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-12T17:19:03Z",
+      "side": 1,
+      "message": "this should be local but it cannot be because you call it from above\n\nplease move this above the previous assignment and make it local",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 14
+      },
+      "revId": "125400f0cc6499f3c19301fe64faa4e47d9d70d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_07c8ba24",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-12T17:19:03Z",
+      "side": 1,
+      "message": "whitespace",
+      "range": {
+        "startLine": 59,
+        "startChar": 42,
+        "endLine": 59,
+        "endChar": 64
+      },
+      "revId": "125400f0cc6499f3c19301fe64faa4e47d9d70d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_c7d172d2",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-12T17:19:03Z",
+      "side": 1,
+      "message": "whitespace",
+      "range": {
+        "startLine": 68,
+        "startChar": 45,
+        "endLine": 68,
+        "endChar": 73
+      },
+      "revId": "125400f0cc6499f3c19301fe64faa4e47d9d70d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_67d746c5",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-12T17:19:03Z",
+      "side": 1,
+      "message": "whitespace",
+      "range": {
+        "startLine": 80,
+        "startChar": 14,
+        "endLine": 80,
+        "endChar": 44
+      },
+      "revId": "125400f0cc6499f3c19301fe64faa4e47d9d70d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_87d4cabf",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-12T17:19:03Z",
+      "side": 1,
+      "message": "whitespace",
+      "range": {
+        "startLine": 83,
+        "startChar": 42,
+        "endLine": 83,
+        "endChar": 52
+      },
+      "revId": "125400f0cc6499f3c19301fe64faa4e47d9d70d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_27e13e98",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-12T17:19:03Z",
+      "side": 1,
+      "message": "whitespace",
+      "range": {
+        "startLine": 87,
+        "startChar": 14,
+        "endLine": 87,
+        "endChar": 53
+      },
+      "revId": "125400f0cc6499f3c19301fe64faa4e47d9d70d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_f2be1af9",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-12T17:19:03Z",
+      "side": 1,
+      "message": "too much space",
+      "revId": "125400f0cc6499f3c19301fe64faa4e47d9d70d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_52496e35",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/LuaWikibaseEntityLibraryTests.lua",
+        "patchSetId": 5
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-12T17:19:03Z",
+      "side": 1,
+      "message": "whitespace",
+      "range": {
+        "startLine": 228,
+        "startChar": 13,
+        "endLine": 228,
+        "endChar": 33
+      },
+      "revId": "125400f0cc6499f3c19301fe64faa4e47d9d70d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
