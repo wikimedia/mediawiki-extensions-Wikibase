@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee375f69_2a33430c",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-12T23:59:08Z",
+      "side": 1,
+      "message": "this doesn\u0027t work with the automatic registration of MediaInfo namespace, and likely not with automatically registering Lexeme namespaces (done hackishly with onSetupAfterCache hook)",
+      "revId": "46245414273df15e23ee3a14b5d31bed71059614",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
