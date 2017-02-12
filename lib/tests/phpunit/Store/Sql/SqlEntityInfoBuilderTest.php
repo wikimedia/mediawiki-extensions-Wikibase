@@ -163,4 +163,25 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 		);
 	}
 
+	public function testConstructorIgnoresEntityIdsFromOtherRepositories() {
+		$itemId = new ItemId( 'Q1' );
+		$propertyId = new PropertyId( 'foo:P1' );
+
+		/** @var EntityIdComposer $entityIdComposer */
+		$entityIdComposer = $this->getMockBuilder( EntityIdComposer::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$builder = new SqlEntityInfoBuilder(
+			new ItemIdParser(),
+			$entityIdComposer,
+			[ $itemId, $propertyId ],
+			false,
+			''
+		);
+
+		$this->assertTrue( $builder->getEntityInfo()->hasEntityInfo( $itemId ) );
+		$this->assertFalse( $builder->getEntityInfo()->hasEntityInfo( $propertyId ) );
+	}
+
 }

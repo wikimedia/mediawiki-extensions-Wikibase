@@ -117,11 +117,17 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private $entityIdComposer;
 
 	/**
+	 * @var string
+	 */
+	private $repositoryName;
+
+	/**
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param EntityId[] $ids
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
+	 * @param string $repositoryName The name of the repository (use an empty string for the local repository)
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -129,7 +135,8 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		EntityIdParser $entityIdParser,
 		EntityIdComposer $entityIdComposer,
 		array $ids,
-		$wiki = false
+		$wiki = false,
+		$repositoryName = ''
 	) {
 		if ( !is_string( $wiki ) && $wiki !== false ) {
 			throw new InvalidArgumentException( '$wiki must be a string or false.' );
@@ -143,8 +150,28 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 
 		$this->idParser = $entityIdParser;
 		$this->entityIdComposer = $entityIdComposer;
+		$this->repositoryName = $repositoryName;
 
-		$this->setEntityIds( $ids );
+		$this->setEntityIds( $this->filterForeignEntityIds( $ids ) );
+	}
+
+	/**
+	 * Returns a list of EntityId objects belonging to the repository configured in the constructor.
+	 * In other words, this filters out foreign entity IDs, so the builder only processes relevant
+	 * EntityIds.
+	 *
+	 * @param EntityId[] $ids
+	 * @return EntityId[]
+	 */
+	private function filterForeignEntityIds( array $ids ) {
+		$repositoryName = $this->repositoryName;
+
+		return array_filter(
+			$ids,
+			function( EntityId $id ) use ( $repositoryName ) {
+				return $id->getRepositoryName() === $repositoryName;
+			}
+		);
 	}
 
 	/**
@@ -703,7 +730,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * @param EntityId[] $ids
 	 */
 	public function removeEntityInfo( array $ids ) {
-		$remove = $this->convertEntityIdsToStrings( $ids );
+		$remove = $this->convertEntityIdsToStrings( $this->filterForeignEntityIds( $ids ) );
 		$this->unsetEntityInfo( $remove );
 	}
 
@@ -715,7 +742,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * @param EntityId[] $ids
 	 */
 	public function retainEntityInfo( array $ids ) {
-		$retain = $this->convertEntityIdsToStrings( $ids );
+		$retain = $this->convertEntityIdsToStrings( $this->filterForeignEntityIds( $ids ) );
 		$remove = array_diff( array_keys( $this->entityInfo ), $retain );
 		$this->unsetEntityInfo( $remove );
 	}
