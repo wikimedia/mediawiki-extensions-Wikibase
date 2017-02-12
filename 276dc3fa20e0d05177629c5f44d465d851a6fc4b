@@ -46,6 +46,30 @@
       "revId": "276dc3fa20e0d05177629c5f44d465d851a6fc4b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_e766f625",
+        "filename": "client/includes/Specials/SpecialEntityUsage.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-12T17:44:39Z",
+      "side": 0,
+      "message": "I wonder whether non-existing pages can have entity usages...",
+      "parentUuid": "ee375f69_07ef5a83",
+      "range": {
+        "startLine": 176,
+        "startChar": 17,
+        "endLine": 176,
+        "endChar": 21
+      },
+      "revId": "276dc3fa20e0d05177629c5f44d465d851a6fc4b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
