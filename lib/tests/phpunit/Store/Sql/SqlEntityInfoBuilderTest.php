@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -161,6 +162,109 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 			] ),
 			$ids
 		);
+	}
+
+	/**
+	 * @return EntityIdComposer
+	 */
+	private function getIdComposer() {
+		return $this->getMockBuilder( EntityIdComposer::class )
+			->disableOriginalConstructor()
+			->getMock();
+	}
+
+	public function provideInvalidConstructorArguments() {
+		return [
+			'neither string nor false as database name (int)' => [ 100, '' ],
+			'neither string nor false as database name (null)' => [ null, '' ],
+			'neither string nor false as database name (true)' => [ true, '' ],
+			'not a string as a repository name' => [ false, 1000 ],
+			'string containing colon as a repository name' => [ false, 'foo:oo' ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideInvalidConstructorArguments
+	 */
+	public function testGivenInvalidArguments_constructorThrowsException( $databaseName, $repositoryName ) {
+		$this->setExpectedException( InvalidArgumentException::class );
+
+		new SqlEntityInfoBuilder(
+			new ItemIdParser(),
+			$this->getIdComposer(),
+			[],
+			$databaseName,
+			$repositoryName
+		);
+	}
+
+	public function testConstructorIgnoresEntityIdsFromOtherRepositories() {
+		$itemId = new ItemId( 'Q1' );
+		$propertyId = new PropertyId( 'foo:P1' );
+
+		$builder = new SqlEntityInfoBuilder(
+			new ItemIdParser(),
+			$this->getIdComposer(),
+			[ $itemId, $propertyId ],
+			false,
+			''
+		);
+
+		$this->assertTrue( $builder->getEntityInfo()->hasEntityInfo( $itemId ) );
+		$this->assertFalse( $builder->getEntityInfo()->hasEntityInfo( $propertyId ) );
+	}
+
+	public function testEntityIdsArePrefixedWithRepositoryName() {
+		$itemId = new ItemId( 'foo:Q1' );
+
+		// Inserting a dummy label for item with numeric ID part equal to 1.
+		// In this test local database is used to pretend to be a databse of
+		// repository "foo". Terms fetched from the database should be
+		// matched to entity IDs using correct repository prefixes (this
+		// builder's responsibility as this information is not stored in wb_terms table).
+
+		$label = 'dummy label';
+		$languageCode = 'en';
+
+		$this->insertRows(
+			'wb_terms',
+			[
+				'term_entity_type',
+				'term_entity_id',
+				'term_type',
+				'term_language',
+				'term_text',
+				'term_search_key'
+			],
+			[
+				[
+					$itemId->getEntityType(),
+					$itemId->getNumericId(),
+					'label',
+					$languageCode,
+					$label,
+					$label
+				]
+			]
+		);
+
+		$builder = new SqlEntityInfoBuilder(
+			new ItemIdParser(),
+			new EntityIdComposer( [
+				'item' => function( $repositoryName, $uniquePart ) {
+					return new ItemId( EntityId::joinSerialization( [ $repositoryName, '', 'Q' . $uniquePart ] ) );
+				},
+			] ),
+			[ $itemId ],
+			false,
+			'foo'
+		);
+
+		$builder->collectTerms();
+
+		$entityInfo = $builder->getEntityInfo()->getEntityInfo( $itemId );
+
+		$this->assertSame( $label, $entityInfo['labels'][$languageCode]['value'] );
 	}
 
 }
