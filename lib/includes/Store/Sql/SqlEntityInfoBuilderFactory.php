@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Store\Sql;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\EntityIdComposer;
@@ -35,25 +36,34 @@ class SqlEntityInfoBuilderFactory implements EntityInfoBuilderFactory {
 	private $wiki;
 
 	/**
+	 * @var string
+	 */
+	private $repositoryName;
+
+	/**
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
+	 * @param string $repositoryName The name of the repository (use an empty string for the local repository)
 	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		EntityIdParser $entityIdParser,
 		EntityIdComposer $entityIdComposer,
-		$wiki = false
+		$wiki = false,
+		$repositoryName = ''
 	) {
 		if ( !is_string( $wiki ) && $wiki !== false ) {
 			throw new InvalidArgumentException( '$wiki must be a string or false.' );
 		}
+		RepositoryNameAssert::assertParameterIsValidRepositoryName( $repositoryName, '$repositoryName' );
 
 		$this->entityIdParser = $entityIdParser;
 		$this->entityIdComposer = $entityIdComposer;
 		$this->wiki = $wiki;
+		$this->repositoryName = $repositoryName;
 	}
 
 	/**
@@ -68,7 +78,8 @@ class SqlEntityInfoBuilderFactory implements EntityInfoBuilderFactory {
 			$this->entityIdParser,
 			$this->entityIdComposer,
 			$entityIds,
-			$this->wiki
+			$this->wiki,
+			$this->repositoryName
 		);
 	}
 
