@@ -22,6 +22,30 @@
       "revId": "276dc3fa20e0d05177629c5f44d465d851a6fc4b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_07ef5a83",
+        "filename": "client/includes/Specials/SpecialEntityUsage.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 890
+      },
+      "writtenOn": "2017-02-12T17:25:04Z",
+      "side": 0,
+      "message": "Correct, Linker::link() figures out automatically, if the target exists (LinkTarget::isKnown()). This should be done here, too, with LinkRenderer::makeLink() instead of LinkRenderer::makeKnownLink().",
+      "parentUuid": "2ef897d1_d29448ec",
+      "range": {
+        "startLine": 176,
+        "startChar": 17,
+        "endLine": 176,
+        "endChar": 21
+      },
+      "revId": "276dc3fa20e0d05177629c5f44d465d851a6fc4b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
