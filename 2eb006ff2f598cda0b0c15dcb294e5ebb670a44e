@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee375f69_f0a46eb7",
+        "filename": "lib/includes/Store/DispatchingEntityInfoBuilderFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-13T11:56:56Z",
+      "side": 0,
+      "message": "not related, fix in the parent patch",
+      "revId": "2eb006ff2f598cda0b0c15dcb294e5ebb670a44e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
