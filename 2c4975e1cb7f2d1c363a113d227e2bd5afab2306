@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "ee375f69_b686dede",
+        "filename": "lib/includes/Store/DispatchingEntityInfoBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-13T17:18:07Z",
+      "side": 1,
+      "message": "Is it worth mentioning that the own repository should have an empty string as the array key?",
+      "revId": "2c4975e1cb7f2d1c363a113d227e2bd5afab2306",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_562192f5",
+        "filename": "lib/includes/Store/DispatchingEntityInfoBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-13T17:18:07Z",
+      "side": 1,
+      "message": "Maybe it\u0027s worth mentioning that the own repository will have an empty string as the array key?",
+      "revId": "2c4975e1cb7f2d1c363a113d227e2bd5afab2306",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee375f69_b0e266cf",
         "filename": "lib/tests/phpunit/Store/DispatchingEntityInfoBuilderTest.php",
         "patchSetId": 2
@@ -13,6 +47,30 @@
       "writtenOn": "2017-02-13T12:03:20Z",
       "side": 1,
       "message": "As I understood, these are not random strings.\n\nMay be it is not responsibility of this patch, but would be nice to have constants instead of strings.",
+      "range": {
+        "startLine": 83,
+        "startChar": 17,
+        "endLine": 83,
+        "endChar": 39
+      },
+      "revId": "2c4975e1cb7f2d1c363a113d227e2bd5afab2306",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_1669ca1d",
+        "filename": "lib/tests/phpunit/Store/DispatchingEntityInfoBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-13T17:18:07Z",
+      "side": 1,
+      "message": "Constants for this are in TermIndexEntry.",
+      "parentUuid": "ee375f69_b0e266cf",
       "range": {
         "startLine": 83,
         "startChar": 17,
