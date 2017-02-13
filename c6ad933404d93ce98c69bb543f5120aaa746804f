@@ -22,6 +22,30 @@
       "revId": "c6ad933404d93ce98c69bb543f5120aaa746804f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_70d29e2e",
+        "filename": "lib/includes/Store/DispatchingEntityInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-13T11:45:25Z",
+      "side": 1,
+      "message": "I\u0027ve found my answer, but only after 10 minutes of code traversing.\n\nCould you please add some info to documentation about the special meaning of `null`?",
+      "parentUuid": "ee375f69_30bdf616",
+      "range": {
+        "startLine": 63,
+        "startChar": 20,
+        "endLine": 63,
+        "endChar": 24
+      },
+      "revId": "c6ad933404d93ce98c69bb543f5120aaa746804f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
