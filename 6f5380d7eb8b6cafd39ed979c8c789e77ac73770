@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee375f69_70437eb7",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1261,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-13T12:26:38Z",
+      "side": 1,
+      "message": "This option probably should relate to factory, but not serializer.",
+      "range": {
+        "startLine": 1261,
+        "startChar": 31,
+        "endLine": 1261,
+        "endChar": 100
+      },
+      "revId": "6f5380d7eb8b6cafd39ed979c8c789e77ac73770",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
