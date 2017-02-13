@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee375f69_b5e258cf",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1823,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-13T08:53:51Z",
+      "side": 0,
+      "message": "Are you sure we want to remove this?\nNot that I\u0027d miss it. Also I couldn\u0027t see it being used/referenced in some docs so I was assuming it is something pretty legacy and it is not needed. It is now safe to be removed (code that introduced this is from mid-2016 so I\u0027d expect so), right?",
+      "revId": "8af51705c3c01d46dbabdc40f94c3f725c483490",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
