@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee375f69_b0e266cf",
+        "filename": "lib/tests/phpunit/Store/DispatchingEntityInfoBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-13T12:03:20Z",
+      "side": 1,
+      "message": "As I understood, these are not random strings.\n\nMay be it is not responsibility of this patch, but would be nice to have constants instead of strings.",
+      "range": {
+        "startLine": 83,
+        "startChar": 17,
+        "endLine": 83,
+        "endChar": 39
+      },
+      "revId": "2c4975e1cb7f2d1c363a113d227e2bd5afab2306",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
