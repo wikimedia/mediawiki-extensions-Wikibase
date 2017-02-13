@@ -19,5 +19,6 @@
 	"valueview-expertextender-calendarhint-julian": "(Juliaaninen kalenteri)",
 	"valueview-expertextender-languageselector-label": "Kieli (pakollinen):",
 	"valueview-preview-label": "näytetään muodossa:",
-	"valueview-preview-novalue": "kelvollista arvoa ei tunnistettu"
+	"valueview-preview-novalue": "kelvollista arvoa ei tunnistettu",
+	"valueview-listrotator-manually": "aseta manuaalisesti"
 }

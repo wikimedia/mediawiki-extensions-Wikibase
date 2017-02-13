@@ -9,10 +9,11 @@
 			"Urhixidur",
 			"Verdy p",
 			"Wladek92",
-			"Yasten"
+			"Yasten",
+			"Hashar"
 		]
 	},
-	"valueview-desc": "Composants graphiques d’interface utilisateur pour l’affichage et la modification des données",
+	"valueview-desc": "Composants graphiques de l'interface utilisateur pour l’affichage et la modification des données",
 	"valueview-expert-advancedadjustments": "réglages avancés",
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "La manipulation des valeurs de données « $1 » n’est pas encore prise en charge.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "La gestion des valeurs pour le type de données « $1 » n’est pas encore prise en charge.",
