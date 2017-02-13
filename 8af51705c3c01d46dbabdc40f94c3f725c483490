@@ -16,6 +16,24 @@
       "revId": "8af51705c3c01d46dbabdc40f94c3f725c483490",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_10f23204",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1823,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-13T11:09:09Z",
+      "side": 0,
+      "message": "at least not needed for Wikidata:\nhttps://github.com/wikimedia/operations-mediawiki-config/commit/81535563b1463d8c154a7dd10970c16706e0de19#diff-01f4cd9b9585049d676035224d9b5464\n\nand think it\u0027s safe to remove by now.",
+      "parentUuid": "ee375f69_b5e258cf",
+      "revId": "8af51705c3c01d46dbabdc40f94c3f725c483490",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
