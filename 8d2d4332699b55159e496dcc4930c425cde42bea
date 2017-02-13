@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee375f69_9027220d",
+        "filename": "repo/includes/Api/EntitySearchHelper.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-13T12:38:41Z",
+      "side": 1,
+      "message": "this seems no longer needed",
+      "revId": "8d2d4332699b55159e496dcc4930c425cde42bea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_30d736f4",
+        "filename": "repo/includes/Api/EntitySearchHelper.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-13T12:38:41Z",
+      "side": 1,
+      "message": "It is not essential but my pedantic nature says it should rather be first in the list of properties (where $titleLookup used to be).",
+      "revId": "8d2d4332699b55159e496dcc4930c425cde42bea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_50219af5",
+        "filename": "repo/tests/phpunit/includes/Api/EntitySearchHelperTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-13T12:38:41Z",
+      "side": 1,
+      "message": "This is no longer needed",
+      "revId": "8d2d4332699b55159e496dcc4930c425cde42bea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_d014caa2",
+        "filename": "repo/tests/phpunit/includes/Api/EntitySearchHelperTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-13T12:38:41Z",
+      "side": 1,
+      "message": "this is no longer needed",
+      "revId": "8d2d4332699b55159e496dcc4930c425cde42bea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_504afac9",
+        "filename": "repo/tests/phpunit/includes/Api/EntitySearchHelperTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-13T12:38:41Z",
+      "side": 1,
+      "message": "This variable name seems a bit odd (just looking at the method) now given you moved \u0027Q111\u0027 to a constant.",
+      "range": {
+        "startLine": 147,
+        "startChar": 2,
+        "endLine": 147,
+        "endChar": 13
+      },
+      "revId": "8d2d4332699b55159e496dcc4930c425cde42bea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_f0154ea0",
+        "filename": "repo/tests/phpunit/includes/Api/EntitySearchHelperTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-13T12:38:41Z",
+      "side": 1,
+      "message": "This is also not very critical but maybe this case would be more appropriate when moved a bit up (before \u0027Multiple Results\u0027 ones, possibly also before trimming etc magic). Basically it seems a variant of what \u0027Eact EntityId match\u0027 tests, so maybe it would make more sense to have those two together, and then all the other cases after?",
+      "revId": "8d2d4332699b55159e496dcc4930c425cde42bea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
