@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ee375f69_5b169b4e",
+        "filename": "lib/tests/phpunit/Store/DispatchingEntityInfoBuilderFactoryTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-13T13:38:40Z",
+      "side": 1,
+      "message": "Well it was checked relying on the fact each of per-repo factories was called \"at least once\" in the lines above. I agree it is a bit weak assertion. Added checking against the actual \"correct\" builder.",
+      "parentUuid": "ee375f69_70cdbe61",
+      "range": {
+        "startLine": 60,
+        "startChar": 2,
+        "endLine": 60,
+        "endChar": 75
+      },
+      "revId": "14d09b52b7ab382c8b2216864d2d5d54da0fbd2f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee375f69_50d43aec",
         "filename": "lib/tests/phpunit/Store/DispatchingEntityInfoBuilderFactoryTest.php",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2017-02-13T12:11:49Z",
       "side": 1,
       "message": "Test name states nothing about this check. Why is it needed?",
+      "range": {
+        "startLine": 68,
+        "startChar": 15,
+        "endLine": 69,
+        "endChar": 37
+      },
+      "revId": "14d09b52b7ab382c8b2216864d2d5d54da0fbd2f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_d01a8a7e",
+        "filename": "lib/tests/phpunit/Store/DispatchingEntityInfoBuilderFactoryTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-13T13:38:40Z",
+      "side": 1,
+      "message": "You\u0027re right, it was not needed to check how many times this method is called. Removed.",
+      "parentUuid": "ee375f69_50d43aec",
       "range": {
         "startLine": 68,
         "startChar": 15,
