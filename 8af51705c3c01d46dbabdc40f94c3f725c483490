@@ -34,6 +34,24 @@
       "revId": "8af51705c3c01d46dbabdc40f94c3f725c483490",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_db8b8be7",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1823,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-13T15:20:18Z",
+      "side": 0,
+      "message": "Please do not squish such unrelated things into a patch that\u0027s as critical as this one. Please split this of into a separate patch.",
+      "parentUuid": "ee375f69_10f23204",
+      "revId": "8af51705c3c01d46dbabdc40f94c3f725c483490",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

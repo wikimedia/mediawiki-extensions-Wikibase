@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee375f69_7b711f0b",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1251,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-13T15:20:18Z",
+      "side": 1,
+      "message": "This introduces caching for this setting. Is this relevant for the bugfix? I don\u0027t think so. Can you please split this of to a separate patch?",
+      "revId": "5689562c70e5520dbe4d40c7262f1fe25a5fb898",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
