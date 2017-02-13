@@ -78,7 +78,7 @@ use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
 
 /**
- * @covers Wikibase\Repo\WikibaseRepo
+ * @covers \Wikibase\Repo\WikibaseRepo
  *
  * @group Wikibase
  * @group Database
@@ -162,7 +162,8 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	}
 
 	public function testGetDefaultValueFormatterBuilders() {
-		$first = $this->getWikibaseRepo()->getDefaultValueFormatterBuilders();
+		$repo = $this->getWikibaseRepo();
+		$first = $repo->getDefaultValueFormatterBuilders();
 		$this->assertInstanceOf( WikibaseValueFormatterBuilders::class, $first );
 
 		$second = $this->getWikibaseRepo()->getDefaultValueFormatterBuilders();
@@ -353,6 +354,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 			$settings,
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
+			[ 'item' => 120, 'property' => 122 ],
 			null, // FIXME: providing no DataRetrievalServiceFactory but client settings does not make much sense
 			$clientSettings
 		);
@@ -482,20 +484,6 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 
 		$handler = $wikibaseRepo->newPropertyHandler();
 		$this->assertNotNull( $handler->getLegacyExportFormatDetector() );
-	}
-
-	/**
-	 * @param array[] $entityTypeDefinitions
-	 *
-	 * @return WikibaseRepo
-	 */
-	private function getWikibaseRepo( $entityTypeDefinitions = array() ) {
-		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
-		return new WikibaseRepo(
-			$settings,
-			new DataTypeDefinitions( array() ),
-			new EntityTypeDefinitions( $entityTypeDefinitions )
-		);
 	}
 
 	public function testGetApiHelperFactory() {
@@ -673,6 +661,21 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 			'foo' => 'new-changeop-deserializer-callback'
 		];
 		$this->assertSame( $expected, $changeOpsCallbacks );
+	}
+
+	/**
+	 * @param array[] $entityTypeDefinitions
+	 *
+	 * @return WikibaseRepo
+	 */
+	private function getWikibaseRepo( $entityTypeDefinitions = array() ) {
+		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
+		return new WikibaseRepo(
+			$settings,
+			new DataTypeDefinitions( array() ),
+			new EntityTypeDefinitions( $entityTypeDefinitions ),
+			[ 'item' => 120, 'property' => 122 ]
+		);
 	}
 
 }
