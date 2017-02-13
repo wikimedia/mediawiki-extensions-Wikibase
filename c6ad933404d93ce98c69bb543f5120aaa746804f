@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "ee375f69_16ef8a83",
+        "filename": "lib/includes/Store/DispatchingEntityInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-13T17:18:07Z",
+      "side": 1,
+      "message": "Null means all. Not even the interface explains that. Can you upload a patch that fixes this everywhere?",
+      "parentUuid": "ee375f69_70d29e2e",
+      "range": {
+        "startLine": 63,
+        "startChar": 20,
+        "endLine": 63,
+        "endChar": 24
+      },
+      "revId": "c6ad933404d93ce98c69bb543f5120aaa746804f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee375f69_50a0ba9a",
         "filename": "lib/tests/phpunit/Store/DispatchingEntityInfoBuilderTest.php",
         "patchSetId": 1
@@ -60,6 +84,30 @@
       "writtenOn": "2017-02-13T11:58:37Z",
       "side": 1,
       "message": "This call is redundant. Behavior won\u0027t change if you remove it.",
+      "range": {
+        "startLine": 40,
+        "startChar": 15,
+        "endLine": 40,
+        "endChar": 40
+      },
+      "revId": "c6ad933404d93ce98c69bb543f5120aaa746804f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_16c8ea24",
+        "filename": "lib/tests/phpunit/Store/DispatchingEntityInfoBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-13T17:18:07Z",
+      "side": 1,
+      "message": "We currently have this about 580 times in our code base. PHPStorm complains if I remove it. Not sure what to do about this. Should we set up a rule and remove this everywhere?",
+      "parentUuid": "ee375f69_50a0ba9a",
       "range": {
         "startLine": 40,
         "startChar": 15,
