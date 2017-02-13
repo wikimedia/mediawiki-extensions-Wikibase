@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee375f69_d0628a37",
+        "filename": "repo/includes/Parsers/DateFormatParser.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-13T13:11:08Z",
+      "side": 1,
+      "message": "Why not use `@preg_match( $pattern, $input, $matches )`?",
+      "range": {
+        "startLine": 322,
+        "startChar": 0,
+        "endLine": 324,
+        "endChar": 30
+      },
+      "revId": "6e42bb0e59f6c0c4542a552fa31659076260f1bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
