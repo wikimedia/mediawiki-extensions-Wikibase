@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ee375f69_956b9482",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-13T07:44:58Z",
+      "side": 1,
+      "message": "Thanks for this explanation. What you say about the ErrorReporter is reasonable and convincing. Thanks for adding a callback for ResultBuilder instantiation. Looks good to me now!",
+      "parentUuid": "2ef897d1_510f23e4",
+      "revId": "559987712e5b6da3109022380c615736d36be77b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_0fc4f191",
         "filename": "repo/tests/phpunit/includes/Api/StatementModificationHelperTest.php",
         "patchSetId": 7
