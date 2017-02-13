@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee375f69_3b94f78c",
+        "filename": "repo/includes/Api/GetClaims.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-13T14:11:13Z",
+      "side": 1,
+      "message": "I wonder how much value this @see comment has here. I\u0027d remove it.",
+      "revId": "94d3c7a70eaa09f294be59d06021e2a76928a305",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
