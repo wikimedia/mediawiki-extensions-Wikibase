@@ -137,7 +137,7 @@ class ItemDeserializerTest extends DispatchableDeserializerTest {
 		);
 
 		$item = new Item();
-		$item->getFingerprint()->setLabel( 'en', 'foo' );
+		$item->setLabel( 'en', 'foo' );
 		$provider[] = array(
 			$item,
 			array(
@@ -152,7 +152,7 @@ class ItemDeserializerTest extends DispatchableDeserializerTest {
 		);
 
 		$item = new Item();
-		$item->getFingerprint()->setDescription( 'en', 'foo' );
+		$item->setDescription( 'en', 'foo' );
 		$provider[] = array(
 			$item,
 			array(
@@ -167,7 +167,7 @@ class ItemDeserializerTest extends DispatchableDeserializerTest {
 		);
 
 		$item = new Item();
-		$item->getFingerprint()->setAliasGroup( 'en', array( 'foo', 'bar' ) );
+		$item->setAliases( 'en', [ 'foo', 'bar' ] );
 		$provider[] = array(
 			$item,
 			array(
