@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee375f69_1590e445",
+        "filename": "repo/includes/Api/SearchEntities.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-13T08:27:26Z",
+      "side": 1,
+      "message": "I wonder whether it would read \"better\" if the PropertyDataTypeLookup param came after EntityTitleLookup. Now it kind of comes out the sudden, there is a language list, list of entity types, a base URI, and suddenly, a property data type lookup. I\u0027d expect services coming togeter, then some other stuff. Or the other way round.\nJust a personal opinion, not saying it is generally better neither asking to change. And this can change later.\n\nThiemo, what do you think?",
+      "revId": "fd520bb992ebb39ab6f7204e2624fbc79bd6e3a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
