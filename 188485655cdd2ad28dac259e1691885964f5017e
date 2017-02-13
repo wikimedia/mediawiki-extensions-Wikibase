@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ee375f69_bbe247cf",
+        "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-02-13T14:57:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_cf87f964",
+      "range": {
+        "startLine": 10,
+        "startChar": 31,
+        "endLine": 10,
+        "endChar": 32
+      },
+      "revId": "188485655cdd2ad28dac259e1691885964f5017e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_6f84855e",
         "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
         "patchSetId": 8
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "ee375f69_7bcd9f61",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-02-13T14:57:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_6f84855e",
+      "range": {
+        "startLine": 26,
+        "startChar": 1,
+        "endLine": 26,
+        "endChar": 22
+      },
+      "revId": "188485655cdd2ad28dac259e1691885964f5017e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_ef90759a",
         "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
         "patchSetId": 8
@@ -59,6 +107,30 @@
       "writtenOn": "2017-02-09T15:13:49Z",
       "side": 1,
       "message": "I don\u0027t see this being used in the sub class, so why protected?",
+      "range": {
+        "startLine": 292,
+        "startChar": 1,
+        "endLine": 292,
+        "endChar": 39
+      },
+      "revId": "188485655cdd2ad28dac259e1691885964f5017e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_dbe70bde",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-02-13T14:57:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_ef90759a",
       "range": {
         "startLine": 292,
         "startChar": 1,
@@ -118,6 +190,24 @@
       "side": 1,
       "message": "This will cause a fatal error in PHP 5.5 if I read manual right:\n\n \u003e  PHP 5.6+ also allows aliasing or importing function and constant names. \n\nfrom: https://secure.php.net/manual/en/language.namespaces.importing.php\n\nIf your IDE cannot find MediaWiki global functions, you could try point it directly to where your MW code is (ie. add MW directory to include path). In phpstorm 10 it would be Settings/Languages \u0026 Frameworks/PHP and then \"Include path\" list.",
       "parentUuid": "2ef897d1_855fbe12",
+      "revId": "188485655cdd2ad28dac259e1691885964f5017e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_fbff6f63",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-02-13T14:57:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef897d1_d0b8bbe4",
       "revId": "188485655cdd2ad28dac259e1691885964f5017e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
