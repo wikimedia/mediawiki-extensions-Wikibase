@@ -22,6 +22,30 @@
       "revId": "63c41e612e0e31fbd8d09a2196d4681bd3e6cf40",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_bbab276d",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-13T14:46:02Z",
+      "side": 1,
+      "message": "I checked both files and the method name \"getSnakFormatterFactory\" does not appear anywhere.\n\nThere are a few calls to the same method in WikibaseRepo, but this here is WikibaseClient.",
+      "parentUuid": "ee375f69_f04d4e9f",
+      "range": {
+        "startLine": 810,
+        "startChar": 18,
+        "endLine": 810,
+        "endChar": 41
+      },
+      "revId": "63c41e612e0e31fbd8d09a2196d4681bd3e6cf40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
