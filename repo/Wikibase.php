@@ -209,7 +209,7 @@ call_user_func( function() {
 			$repo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
 
 			$entitySearchHelper = new Wikibase\Repo\Api\EntitySearchHelper(
-				$repo->getEntityTitleLookup(),
+				$repo->getEntityLookup(),
 				$repo->getEntityIdParser(),
 				$repo->newTermSearchInteractor( $repo->getUserLanguage()->getCode() ),
 				new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(

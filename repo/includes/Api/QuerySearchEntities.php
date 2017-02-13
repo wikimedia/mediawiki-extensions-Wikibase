@@ -51,7 +51,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 
 		$repo = WikibaseRepo::getDefaultInstance();
 		$entitySearchHelper = new EntitySearchHelper(
-			$repo->getEntityTitleLookup(),
+			$repo->getEntityLookup(),
 			$repo->getEntityIdParser(),
 			$repo->newTermSearchInteractor( $this->getLanguage()->getCode() ),
 			new LanguageFallbackLabelDescriptionLookup(

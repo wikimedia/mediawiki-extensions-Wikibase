@@ -5,11 +5,11 @@ namespace Wikibase\Repo\Api;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchOptions;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\TermIndexEntry;
 
@@ -20,11 +20,6 @@ use Wikibase\TermIndexEntry;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class EntitySearchHelper {
-
-	/**
-	 * @var EntityTitleLookup
-	 */
-	private $titleLookup;
 
 	/**
 	 * @var EntityIdParser
@@ -41,13 +36,18 @@ class EntitySearchHelper {
 	 */
 	private $labelDescriptionLookup;
 
+	/**
+	 * @var EntityLookup
+	 */
+	private $entityLookup;
+
 	public function __construct(
-		EntityTitleLookup $titleLookup,
+		EntityLookup $entityLookup,
 		EntityIdParser $idParser,
 		ConfigurableTermSearchInteractor $termSearchInteractor,
 		LabelDescriptionLookup $labelDescriptionLookup
 	) {
-		$this->titleLookup = $titleLookup;
+		$this->entityLookup = $entityLookup;
 		$this->idParser = $idParser;
 		$this->termSearchInteractor = $termSearchInteractor;
 		$this->labelDescriptionLookup = $labelDescriptionLookup;
@@ -65,7 +65,7 @@ class EntitySearchHelper {
 	 * @return TermSearchResult[] Key: string Serialized EntityId
 	 */
 	public function getRankedSearchResults( $text, $languageCode, $entityType, $limit, $strictLanguage ) {
-		$allSearchResults = array();
+		$allSearchResults = [];
 
 		// If $text is the ID of an existing item, include it in the result.
 		$entityId = $this->getExactMatchForEntityId( $text, $entityType );
@@ -140,8 +140,7 @@ class EntitySearchHelper {
 			return null;
 		}
 
-		$title = $this->titleLookup->getTitleForId( $entityId );
-		if ( !$title || !$title->exists() ) {
+		if ( !$this->entityLookup->hasEntity( $entityId ) ) {
 			return null;
 		}
 
@@ -154,7 +153,7 @@ class EntitySearchHelper {
 	 * @return Term[] array with keys 'label' and 'description'
 	 */
 	private function getDisplayTerms( EntityId $entityId ) {
-		$displayTerms = array();
+		$displayTerms = [];
 
 		$displayTerms['label'] = $this->labelDescriptionLookup->getLabel( $entityId );
 		$displayTerms['description'] = $this->labelDescriptionLookup->getDescription( $entityId );
@@ -216,7 +215,7 @@ class EntitySearchHelper {
 			$text,
 			$languageCode,
 			$entityType,
-			array( TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS )
+			[ TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS ]
 		);
 	}
 
