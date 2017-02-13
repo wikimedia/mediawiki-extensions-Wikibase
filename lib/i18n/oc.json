@@ -6,6 +6,7 @@
 	},
 	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-error-unexpected": "Error : $1",
+	"wikibase-error-autocomplete-response": "Lo servidor a respondut&nbsp;: $1",
 	"wikibase-sitelinks-wikipedia": "Wikipèdia",
 	"wikibase-sitelinks-sitename-columnheading": "Lenga",
 	"wikibase-snakview-snaktypeselector-somevalue": "valor desconeguda",
