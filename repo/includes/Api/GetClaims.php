@@ -55,24 +55,35 @@ class GetClaims extends ApiBase {
 	private $resultBuilder;
 
 	/**
+	 * @see ApiBase::__construct
+	 *
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
-	 * @param string $modulePrefix
-	 *
-	 * @see ApiBase::__construct
+	 * @param StatementGuidValidator $guidValidator
+	 * @param StatementGuidParser $guidParser
+	 * @param EntityIdParser $idParser
+	 * @param ApiErrorReporter $errorReporter
+	 * @param callable $resultBuilderInstantiator
+	 * @param callable $entityLoadingHelperInstantiator
 	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+	public function __construct(
+		ApiMain $mainModule,
+		$moduleName,
+		StatementGuidValidator $guidValidator,
+		StatementGuidParser $guidParser,
+		EntityIdParser $idParser,
+		ApiErrorReporter $errorReporter,
+		callable $resultBuilderInstantiator,
+		callable $entityLoadingHelperInstantiator
+	) {
+		parent::__construct( $mainModule, $moduleName );
 
-		//TODO: provide a mechanism to override the services
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
-		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
-		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
-		$this->entityLoadingHelper = $apiHelperFactory->getEntityLoadingHelper( $this );
-		$this->guidValidator = $wikibaseRepo->getStatementGuidValidator();
-		$this->guidParser = $wikibaseRepo->getStatementGuidParser();
-		$this->idParser = $wikibaseRepo->getEntityIdParser();
+		$this->guidValidator = $guidValidator;
+		$this->guidParser = $guidParser;
+		$this->idParser = $idParser;
+		$this->errorReporter = $errorReporter;
+		$this->resultBuilder = $resultBuilderInstantiator( $this );
+		$this->entityLoadingHelper = $entityLoadingHelperInstantiator( $this );
 	}
 
 	/**
