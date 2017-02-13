@@ -16,6 +16,47 @@
       "revId": "fd520bb992ebb39ab6f7204e2624fbc79bd6e3a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_9682baa8",
+        "filename": "repo/includes/Api/SearchEntities.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-13T17:25:32Z",
+      "side": 1,
+      "message": "This constructor is a \"mess\" anyway. It does not matter much. But I had the same idea: it would feel better to have this new parameter either before or after the title lookup.\n\nDon\u0027t forget to rearrange the assignment, PHPDoc line and property accordingly if you move this.",
+      "parentUuid": "ee375f69_1590e445",
+      "revId": "fd520bb992ebb39ab6f7204e2624fbc79bd6e3a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_368f2ed3",
+        "filename": "repo/tests/phpunit/includes/Api/SearchEntitiesTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-13T17:25:32Z",
+      "side": 1,
+      "message": "This is a bit confusing because it is identical to the key. Something like \u0027PropertyDataType\u0027 (see the line below) would be better in my opinion.",
+      "range": {
+        "startLine": 283,
+        "startChar": 18,
+        "endLine": 283,
+        "endChar": 26
+      },
+      "revId": "fd520bb992ebb39ab6f7204e2624fbc79bd6e3a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
