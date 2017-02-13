@@ -150,6 +150,13 @@ class SpecialEntityUsage extends QueryPage {
 
 	/**
 	 * @see QueryPage::formatResult
+	 */
+	function preprocessResults( $db, $res ) {
+		$this->executeLBFromResultWrapper( $res );
+	}
+
+	/**
+	 * @see QueryPage::formatResult
 	 *
 	 * @param Skin $skin
 	 * @param object $row
