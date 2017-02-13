@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ee375f69_8af5aac9",
+        "filename": "repo/includes/Search/Elastic/Fields/AllLabelsField.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-02-13T18:30:53Z",
+      "side": 1,
+      "message": "well, name here doesn\u0027t matter much, I didn\u0027t want to create coupling between the field and the name (since it can be called anything) but it\u0027s not too important, I can change it.",
+      "parentUuid": "ee375f69_3033b60c",
+      "range": {
+        "startLine": 13,
+        "startChar": 23,
+        "endLine": 13,
+        "endChar": 26
+      },
+      "revId": "d0a38572fefd7fae1313a308f8f102dd3d4552eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_22980dc3",
         "filename": "repo/includes/Search/Elastic/Fields/LabelsField.php",
         "patchSetId": 10
@@ -72,6 +96,24 @@
       "side": 1,
       "message": "Setting the similarity for these kind of fields is not very important imho, these are only prefix and lookup fields.\n\nMaybe it\u0027d be more consitent to call CirrusSearch\\Search\\TextIndexField::getSimilarity( $config, $this-\u003ename, $subField );\n\nNot sure how easy it is to call this method from here but when we\u0027ll work on fulltext we\u0027ll have to do this.",
       "parentUuid": "2ef897d1_17b9bfe6",
+      "revId": "d0a38572fefd7fae1313a308f8f102dd3d4552eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_2a2d7e41",
+        "filename": "repo/includes/Search/Elastic/Fields/LabelsField.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-02-13T18:30:53Z",
+      "side": 1,
+      "message": "We can create contained Text field to extract similarity if we wanted to.  But I\u0027d rather do it in the patch that deals with Descriptions as that\u0027s where it becomes important.",
+      "parentUuid": "ee375f69_db094b31",
       "revId": "d0a38572fefd7fae1313a308f8f102dd3d4552eb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
