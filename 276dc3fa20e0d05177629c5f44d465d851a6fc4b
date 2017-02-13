@@ -70,6 +70,30 @@
       "revId": "276dc3fa20e0d05177629c5f44d465d851a6fc4b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_56baf21f",
+        "filename": "client/includes/Specials/SpecialEntityUsage.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-13T16:16:51Z",
+      "side": 0,
+      "message": "Entity usage is tracked in a secondary table. It\u0027s perfectly possible to get a result from that table that refers to an entity that got deleted or turned into a redirect a second ago.",
+      "parentUuid": "ee375f69_e766f625",
+      "range": {
+        "startLine": 176,
+        "startChar": 17,
+        "endLine": 176,
+        "endChar": 21
+      },
+      "revId": "276dc3fa20e0d05177629c5f44d465d851a6fc4b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
