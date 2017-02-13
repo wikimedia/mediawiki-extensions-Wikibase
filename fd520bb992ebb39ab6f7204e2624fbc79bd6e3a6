@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ee375f69_16530a45",
+        "filename": "repo/includes/Api/SearchEntities.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-13T17:39:49Z",
+      "side": 1,
+      "message": "Done. It was worth looking into this again because I could discover the third parameter was not documented :-P",
+      "parentUuid": "ee375f69_9682baa8",
+      "revId": "fd520bb992ebb39ab6f7204e2624fbc79bd6e3a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee375f69_368f2ed3",
         "filename": "repo/tests/phpunit/includes/Api/SearchEntitiesTest.php",
         "patchSetId": 5
@@ -48,6 +66,30 @@
       "writtenOn": "2017-02-13T17:25:32Z",
       "side": 1,
       "message": "This is a bit confusing because it is identical to the key. Something like \u0027PropertyDataType\u0027 (see the line below) would be better in my opinion.",
+      "range": {
+        "startLine": 283,
+        "startChar": 18,
+        "endLine": 283,
+        "endChar": 26
+      },
+      "revId": "fd520bb992ebb39ab6f7204e2624fbc79bd6e3a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_b647be7b",
+        "filename": "repo/tests/phpunit/includes/Api/SearchEntitiesTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-02-13T17:39:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee375f69_368f2ed3",
       "range": {
         "startLine": 283,
         "startChar": 18,
