@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee375f69_f04d4e9f",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-13T13:19:34Z",
+      "side": 1,
+      "message": "Found usages in `Scribunto_LuaWikibaseEntityLibrary.php` and `Scribunto_LuaWikibaseLibrary.php`",
+      "range": {
+        "startLine": 810,
+        "startChar": 18,
+        "endLine": 810,
+        "endChar": 41
+      },
+      "revId": "63c41e612e0e31fbd8d09a2196d4681bd3e6cf40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
