@@ -2,8 +2,10 @@
 
 namespace Wikibase\Repo;
 
-use Wikibase\DataModel\Term\AliasGroup;
-use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Term\AliasesProvider;
+use Wikibase\DataModel\Term\DescriptionsProvider;
+use Wikibase\DataModel\Term\LabelsProvider;
 
 /**
  * @license GPL-2.0+
@@ -13,18 +15,25 @@ use Wikibase\DataModel\Term\Fingerprint;
 class FingerprintSearchTextGenerator {
 
 	/**
-	 * @param Fingerprint $fingerprint
+	 * @param EntityDocument $entity
 	 *
 	 * @return string
 	 */
-	public function generate( Fingerprint $fingerprint ) {
-		$text = implode( "\n", $fingerprint->getLabels()->toTextArray() );
+	public function generate( EntityDocument $entity ) {
+		$text = '';
 
-		$text .= "\n" . implode( "\n", $fingerprint->getDescriptions()->toTextArray() );
+		if ( $entity instanceof LabelsProvider ) {
+			$text .= implode( "\n", $entity->getLabels()->toTextArray() );
+		}
 
-		/** @var AliasGroup $aliasGroup */
-		foreach ( $fingerprint->getAliasGroups() as $aliasGroup ) {
-			$text .= "\n" . implode( "\n", $aliasGroup->getAliases() );
+		if ( $entity instanceof DescriptionsProvider ) {
+			$text .= "\n" . implode( "\n", $entity->getDescriptions()->toTextArray() );
+		}
+
+		if ( $entity instanceof AliasesProvider ) {
+			foreach ( $entity->getAliasGroups()->toArray() as $aliasGroup ) {
+				$text .= "\n" . implode( "\n", $aliasGroup->getAliases() );
+			}
 		}
 
 		return trim( $text, "\n" );

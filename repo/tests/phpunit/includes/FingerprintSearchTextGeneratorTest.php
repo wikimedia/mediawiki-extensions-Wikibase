@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
-use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\FingerprintSearchTextGenerator;
 
 /**
@@ -17,60 +17,37 @@ use Wikibase\Repo\FingerprintSearchTextGenerator;
  */
 class FingerprintSearchTextGeneratorTest extends \PHPUnit_Framework_TestCase {
 
-	public function generateProvider() {
-		$fingerprint = new Fingerprint();
+	public function testGenerate() {
+		$entity = new Item();
+		$entity->setLabel( 'en', 'Test' );
+		$entity->setLabel( 'de', 'Testen' );
+		$entity->setDescription( 'en', 'city in Spain' );
+		$entity->setAliases( 'en', [ 'abc', 'cde' ] );
+		$entity->setAliases( 'de', [ 'xyz', 'uvw' ] );
 
-		$fingerprint->setLabel( 'en', 'Test' );
-		$fingerprint->setLabel( 'de', 'Testen' );
-		$fingerprint->setDescription( 'en', 'city in Spain' );
-		$fingerprint->setAliasGroup( 'en', array( 'abc', 'cde' ) );
-		$fingerprint->setAliasGroup( 'de', array( 'xyz', 'uvw' ) );
-
-		$patterns = array(
-			'/^Test$/',
-			'/^Testen$/',
-			'/^city in Spain$/',
-			'/^abc$/',
-			'/^cde$/',
-			'/^uvw$/',
-			'/^xyz$/',
-			'/^(?!abcde).*$/',
-		);
-
-		return array(
-			array( $fingerprint, $patterns )
-		);
-	}
-
-	/**
-	 * @dataProvider generateProvider
-	 * @param Fingerprint $fingerprint
-	 * @param string[] $patterns
-	 */
-	public function testGenerate( Fingerprint $fingerprint, array $patterns ) {
 		$generator = new FingerprintSearchTextGenerator();
-		$text = $generator->generate( $fingerprint );
+		$text = $generator->generate( $entity );
 
-		foreach ( $patterns as $pattern ) {
-			$this->assertRegExp( $pattern . 'm', $text );
-		}
+		$this->assertSame( "Test\nTesten\ncity in Spain\nabc\ncde\nxyz\nuvw", $text );
 	}
 
 	public function testGivenEmptyEntity_emptyStringIsReturned() {
+		$entity = new Item();
+
 		$generator = new FingerprintSearchTextGenerator();
-		$fingerprint = new Fingerprint();
-		$text = $generator->generate( $fingerprint );
+		$text = $generator->generate( $entity );
 
 		$this->assertSame( '', $text );
 	}
 
 	public function testGivenUntrimmedLabel_generateDoesNotTrim() {
-		$fingerprint = new Fingerprint();
-		$fingerprint->setLabel( 'en', ' untrimmed label ' );
-		$generator = new FingerprintSearchTextGenerator();
-		$text = $generator->generate( $fingerprint );
+		$entity = new Item();
+		$entity->setLabel( 'en', ' untrimmed label ' );
 
-		$this->assertSame( " untrimmed label ", $text );
+		$generator = new FingerprintSearchTextGenerator();
+		$text = $generator->generate( $entity );
+
+		$this->assertSame( ' untrimmed label ', $text );
 	}
 
 }

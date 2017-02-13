@@ -27,7 +27,6 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Term\DescriptionsProvider;
-use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\FingerprintSearchTextGenerator;
@@ -308,13 +307,8 @@ abstract class EntityContent extends AbstractContent {
 			return '';
 		}
 
-		$text = '';
-		$entity = $this->getEntity();
-
-		if ( $entity instanceof FingerprintProvider ) {
-			$searchTextGenerator = new FingerprintSearchTextGenerator();
-			$text = $searchTextGenerator->generate( $entity->getFingerprint() );
-		}
+		$searchTextGenerator = new FingerprintSearchTextGenerator();
+		$text = $searchTextGenerator->generate( $this->getEntity() );
 
 		if ( !Hooks::run( 'WikibaseTextForSearchIndex', array( $this, &$text ) ) ) {
 			return '';
