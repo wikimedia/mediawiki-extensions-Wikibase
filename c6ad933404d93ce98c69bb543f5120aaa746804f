@@ -46,6 +46,52 @@
       "revId": "c6ad933404d93ce98c69bb543f5120aaa746804f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_50a0ba9a",
+        "filename": "lib/tests/phpunit/Store/DispatchingEntityInfoBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-13T11:58:37Z",
+      "side": 1,
+      "message": "This call is redundant. Behavior won\u0027t change if you remove it.",
+      "range": {
+        "startLine": 40,
+        "startChar": 15,
+        "endLine": 40,
+        "endChar": 40
+      },
+      "revId": "c6ad933404d93ce98c69bb543f5120aaa746804f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_50775a35",
+        "filename": "lib/tests/phpunit/Store/DispatchingEntityInfoBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-13T11:58:37Z",
+      "side": 1,
+      "message": "How about using Prophesy and moving call assertions to the bottom of the test?",
+      "range": {
+        "startLine": 71,
+        "startChar": 2,
+        "endLine": 73,
+        "endChar": 34
+      },
+      "revId": "c6ad933404d93ce98c69bb543f5120aaa746804f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
