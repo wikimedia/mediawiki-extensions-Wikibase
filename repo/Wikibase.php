@@ -284,7 +284,28 @@ call_user_func( function() {
 			);
 		}
 	];
-	$wgAPIModules['wbgetclaims'] = Wikibase\Repo\Api\GetClaims::class;
+	$wgAPIModules['wbgetclaims'] = [
+		'class' => Wikibase\Repo\Api\GetClaims::class,
+		'factory' => function( ApiMain $mainModule, $moduleName ) {
+			$wikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+			$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
+
+			return new Wikibase\Repo\Api\GetClaims(
+				$mainModule,
+				$moduleName,
+				$wikibaseRepo->getStatementGuidValidator(),
+				$wikibaseRepo->getStatementGuidParser(),
+				$wikibaseRepo->getEntityIdParser(),
+				$apiHelperFactory->getErrorReporter( $mainModule ),
+				function ( $module ) use ( $apiHelperFactory ) {
+					return $apiHelperFactory->getResultBuilder( $module );
+				},
+				function ( $module ) use ( $apiHelperFactory ) {
+					return $apiHelperFactory->getEntityLoadingHelper( $module );
+				}
+			);
+		}
+	];
 	$wgAPIModules['wbremoveclaims'] = Wikibase\Repo\Api\RemoveClaims::class;
 	$wgAPIModules['wbsetclaimvalue'] = Wikibase\Repo\Api\SetClaimValue::class;
 	$wgAPIModules['wbsetreference'] = Wikibase\Repo\Api\SetReference::class;
