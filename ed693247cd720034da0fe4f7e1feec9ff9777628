@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_4321d8f5",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-14T16:53:40Z",
+      "side": 1,
+      "message": "You are right… I thought we made it an empty table in case there are no claims.",
+      "parentUuid": "ce3c5b53_e0c26206",
+      "range": {
+        "startLine": 34,
+        "startChar": 21,
+        "endLine": 34,
+        "endChar": 24
+      },
+      "revId": "ed693247cd720034da0fe4f7e1feec9ff9777628",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee375f69_e3434166",
         "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
         "patchSetId": 7
@@ -158,6 +182,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_e37cacea",
+        "filename": "client/sql/property_usage.sql",
+        "patchSetId": 7
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-14T16:53:40Z",
+      "side": 1,
+      "message": "Can you give example queries which you want to run (might be better to do that on the ticket)?\n\nWhy are you interested at render time (despite for rendering purposes)?",
+      "parentUuid": "ce3c5b53_6062d208",
+      "revId": "ed693247cd720034da0fe4f7e1feec9ff9777628",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee375f69_de04d419",
         "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/LuaWikibaseEntityLibraryTests.lua",
         "patchSetId": 7
@@ -187,6 +229,24 @@
       "side": 1,
       "message": "Given that the test item has empty values associated with it, do you know how we test the values?",
       "parentUuid": "ee375f69_de04d419",
+      "revId": "ed693247cd720034da0fe4f7e1feec9ff9777628",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_0382f0cd",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/LuaWikibaseEntityLibraryTests.lua",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-14T16:53:40Z",
+      "side": 1,
+      "message": "Well, you can change it as you want (or even clone/ create your own) with whatever data you find useful for testing.",
+      "parentUuid": "ce3c5b53_233054e5",
       "revId": "ed693247cd720034da0fe4f7e1feec9ff9777628",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
