@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_e0c26206",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 4548
+      },
+      "writtenOn": "2017-02-14T15:59:40Z",
+      "side": 1,
+      "message": "Yes, it can be null if no claims are associated with the entity. I don\u0027t believe that that would necessarily be a bug, would it?",
+      "parentUuid": "ee375f69_8329159d",
+      "range": {
+        "startLine": 34,
+        "startChar": 21,
+        "endLine": 34,
+        "endChar": 24
+      },
+      "revId": "ed693247cd720034da0fe4f7e1feec9ff9777628",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee375f69_e3434166",
         "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
         "patchSetId": 7
@@ -116,6 +140,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_6062d208",
+        "filename": "client/sql/property_usage.sql",
+        "patchSetId": 7
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 4548
+      },
+      "writtenOn": "2017-02-14T15:59:40Z",
+      "side": 1,
+      "message": "I talked to Halfak about this and he was concerned about join performance. Additionally, he noted that at render time, we are interested in missing properties.",
+      "parentUuid": "ee375f69_3e006004",
+      "revId": "ed693247cd720034da0fe4f7e1feec9ff9777628",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee375f69_de04d419",
         "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/LuaWikibaseEntityLibraryTests.lua",
         "patchSetId": 7
@@ -127,6 +169,24 @@
       "writtenOn": "2017-02-14T07:32:32Z",
       "side": 1,
       "message": "(from PS3) If you use this local test item (and extend the \"claims\" below), you can also easily test that the actual values (k,v in pairs(…)) are correct.",
+      "revId": "ed693247cd720034da0fe4f7e1feec9ff9777628",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_233054e5",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/LuaWikibaseEntityLibraryTests.lua",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 4548
+      },
+      "writtenOn": "2017-02-14T15:59:40Z",
+      "side": 1,
+      "message": "Given that the test item has empty values associated with it, do you know how we test the values?",
+      "parentUuid": "ee375f69_de04d419",
       "revId": "ed693247cd720034da0fe4f7e1feec9ff9777628",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
