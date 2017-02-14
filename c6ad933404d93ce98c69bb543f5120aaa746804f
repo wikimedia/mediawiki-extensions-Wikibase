@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "ee375f69_7b36ffe5",
+        "filename": "lib/includes/Store/DispatchingEntityInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-14T08:00:38Z",
+      "side": 1,
+      "message": "@param documentation here in all other methods is just copied from the method documentation of the interface.\nWhile I am not disagreeing that the meaning of null could be explicitly stated, it should rather be added to the interface documentation, no just in some random implementation of it.",
+      "parentUuid": "ee375f69_70d29e2e",
+      "range": {
+        "startLine": 63,
+        "startChar": 20,
+        "endLine": 63,
+        "endChar": 24
+      },
+      "revId": "c6ad933404d93ce98c69bb543f5120aaa746804f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee375f69_50a0ba9a",
         "filename": "lib/tests/phpunit/Store/DispatchingEntityInfoBuilderTest.php",
         "patchSetId": 1
@@ -120,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "ee375f69_5b2d3b8a",
+        "filename": "lib/tests/phpunit/Store/DispatchingEntityInfoBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-14T08:00:38Z",
+      "side": 1,
+      "message": "It won\u0027t. I wonder why $this-\u003eany() is used throughout the whole Wikibase code base.",
+      "parentUuid": "ee375f69_50a0ba9a",
+      "range": {
+        "startLine": 40,
+        "startChar": 15,
+        "endLine": 40,
+        "endChar": 40
+      },
+      "revId": "c6ad933404d93ce98c69bb543f5120aaa746804f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee375f69_50775a35",
         "filename": "lib/tests/phpunit/Store/DispatchingEntityInfoBuilderTest.php",
         "patchSetId": 1
@@ -131,6 +179,30 @@
       "writtenOn": "2017-02-13T11:58:37Z",
       "side": 1,
       "message": "How about using Prophesy and moving call assertions to the bottom of the test?",
+      "range": {
+        "startLine": 71,
+        "startChar": 2,
+        "endLine": 73,
+        "endChar": 34
+      },
+      "revId": "c6ad933404d93ce98c69bb543f5120aaa746804f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_7b3d9fb7",
+        "filename": "lib/tests/phpunit/Store/DispatchingEntityInfoBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-14T08:00:38Z",
+      "side": 1,
+      "message": "Having assertions at the end of the test would be a plus but given the size of the test I am not sure how much we gain with this change (I am not sure whether it would be better to stick to PHPUnit-style mocks as they\u0027re used in 95% - number made up -  cases here). Others?",
+      "parentUuid": "ee375f69_50775a35",
       "range": {
         "startLine": 71,
         "startChar": 2,
