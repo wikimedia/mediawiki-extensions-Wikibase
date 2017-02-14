@@ -34,10 +34,6 @@ use Wikibase\Repo\Validators\UniquenessViolation;
  * @group Database
  *
  * @license GPL-2.0+
- * @author Bene* < benestar.wikimedia@gmail.com >
- * @author H. Snater < mediawiki@snater.com >
- * @author Daniel Kinzler
- * @author Thiemo Mättig
  */
 class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestBase {
 

@@ -25,10 +25,6 @@ use Wikibase\Lib\Store\PropertyOrderProvider;
  * Registers and defines functions to access Wikibase through the Scribunto extension
  *
  * @license GPL-2.0+
- * @author Jens Ohlig < jens.ohlig@wikimedia.de >
- * @author Marius Hoch < hoo@online.de >
- * @author Bene* < benestar.wikimedia@gmail.com >
- * @author Lucie-Aimée Kaffee
  */
 class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 

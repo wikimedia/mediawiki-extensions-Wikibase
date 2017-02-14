@@ -14,11 +14,6 @@ use Wikibase\Repo\WikibaseRepo;
  * API module to search for Wikibase entities.
  *
  * @license GPL-2.0+
- * @author John Erling Blad < jeblad@gmail.com >
- * @author Jens Ohlig < jens.ohlig@wikimedia.de >
- * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
- * @author Thiemo Mättig
- * @author Addshore
  */
 class SearchEntities extends ApiBase {
 

@@ -15,10 +15,6 @@ use Wikibase\Summary;
  * Class for sitelink change operation
  *
  * @license GPL-2.0+
- * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
- * @author Michał Łazowik
- * @author Bene* < benestar.wikimedia@gmail.com >
- * @author Thiemo Mättig
  */
 class ChangeOpSiteLink extends ChangeOpBase {
 

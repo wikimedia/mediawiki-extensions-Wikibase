@@ -14,10 +14,6 @@ use Wikibase\View\Template\TemplateFactory;
  * Generates HTML to display terms of an entity in a list.
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
- * @author Bene* < benestar.wikimedia@gmail.com >
- * @author H. Snater < mediawiki@snater.com >
- * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class TermsListView {
 

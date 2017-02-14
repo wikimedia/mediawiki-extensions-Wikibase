@@ -21,11 +21,6 @@ use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
  * Class for generating views of DiffOp objects.
  *
  * @license GPL-2.0+
- * @author Daniel Kinzler
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
- * @author Addshore
- * @author Thiemo Mättig
  */
 class DiffView extends ContextSource {
 

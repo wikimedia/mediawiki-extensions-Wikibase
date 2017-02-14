@@ -52,10 +52,6 @@ use Wikibase\StringNormalizer;
  * @group Database
  *
  * @license GPL-2.0+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Daniel Kinzler
- * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Thiemo Mättig
  */
 class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 

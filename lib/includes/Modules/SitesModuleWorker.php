@@ -12,10 +12,6 @@ use Xml;
 
 /**
  * @license GPL-2.0+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Daniel Werner < daniel.werner@wikimedia.de >
- * @author Marius Hoch < hoo@online.de >
- * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class SitesModuleWorker {
 

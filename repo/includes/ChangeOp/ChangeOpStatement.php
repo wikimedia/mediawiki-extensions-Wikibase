@@ -22,10 +22,6 @@ use Wikibase\Summary;
  * Class for statement modification operations
  *
  * @license GPL-2.0+
- * @author Addshore
- * @author H. Snater < mediawiki@snater.com >
- * @author Thiemo Mättig
- * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class ChangeOpStatement extends ChangeOpBase {
 

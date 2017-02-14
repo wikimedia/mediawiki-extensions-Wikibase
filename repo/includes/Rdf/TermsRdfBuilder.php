@@ -15,10 +15,6 @@ use Wikimedia\Purtle\RdfWriter;
  * RDF mapping for entity terms.
  *
  * @license GPL-2.0+
- * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >
- * @author Thomas Pellissier Tanon
- * @author Daniel Kinzler
- * @author Stas Malyshev
  */
 class TermsRdfBuilder implements EntityRdfBuilder {
 

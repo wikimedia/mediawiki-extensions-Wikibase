@@ -44,11 +44,6 @@ use WikiPage;
  * File defining the hook handlers for the Wikibase extension.
  *
  * @license GPL-2.0+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Nikola Smolenski
- * @author Daniel Werner
- * @author Michał Łazowik
- * @author Jens Ohlig
  */
 final class RepoHooks {
 

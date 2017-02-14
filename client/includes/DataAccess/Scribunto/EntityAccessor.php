@@ -17,10 +17,6 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
  * Functionality needed to expose Entities to Lua.
  *
  * @license GPL-2.0+
- * @author Marius Hoch < hoo@online.de >
- * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Jens Ohlig < jens.ohlig@wikimedia.de >
- * @author Addshore
  */
 class EntityAccessor {
 

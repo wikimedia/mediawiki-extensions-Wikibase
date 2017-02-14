@@ -22,10 +22,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @group medium
  *
  * @license GPL-2.0+
- * @author John Erling Blad < jeblad@gmail.com >
- * @author Daniel Kinzler < daniel.kinzler@wikimedia.de >
- * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >
- * @author Addshore
  */
 class BotEditTest extends WikibaseApiTestCase {
 

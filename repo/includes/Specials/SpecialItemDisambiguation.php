@@ -18,11 +18,6 @@ use Wikibase\TermIndexEntry;
  * A result page is shown, disambiguating between multiple results if necessary.
  *
  * @license GPL-2.0+
- * @author John Erling Blad < jeblad@gmail.com >
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Daniel Kinzler
- * @author Addshore
- * @author Amir Sarabadani
  */
 class SpecialItemDisambiguation extends SpecialWikibasePage {
 

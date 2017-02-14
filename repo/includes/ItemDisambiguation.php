@@ -13,11 +13,6 @@ use Wikibase\Lib\Interactors\TermSearchResult;
  * Class representing the disambiguation of a list of WikibaseItems.
  *
  * @license GPL-2.0+
- * @author Katie Filbert < aude.wiki@gmail.com >
- * @author John Erling Blad < jeblad@gmail.com >
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Daniel Kinzler
- * @author Addshore
  */
 class ItemDisambiguation {
 

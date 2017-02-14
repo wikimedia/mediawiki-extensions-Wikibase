@@ -11,10 +11,6 @@ use Wikibase\Lib\LanguageNameLookup;
  * @group Wikibase
  *
  * @license GPL-2.0+
- * @author John Erling Blad < jeblad@gmail.com >
- * @author Tobias Gritschacher
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Marius Hoch < hoo@online.sde >
  */
 class LanguageNameLookupTest extends PHPUnit_Framework_TestCase {
 
