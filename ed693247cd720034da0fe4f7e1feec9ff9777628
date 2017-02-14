@@ -200,6 +200,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_a347847b",
+        "filename": "client/sql/property_usage.sql",
+        "patchSetId": 7
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 4548
+      },
+      "writtenOn": "2017-02-14T17:32:22Z",
+      "side": 1,
+      "message": "Okay, I can list some queries on the ticket. Related to the second question, we are interested in knowing which properties associated with an entity were accessed but did not exist. See the sub-section \"Supply versus Demand\" in my research proposal on Meta: https://meta.wikimedia.org/wiki/Research:Understanding_Wikidata%27s_Value",
+      "parentUuid": "ce3c5b53_e37cacea",
+      "revId": "ed693247cd720034da0fe4f7e1feec9ff9777628",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee375f69_de04d419",
         "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/LuaWikibaseEntityLibraryTests.lua",
         "patchSetId": 7
@@ -247,6 +265,24 @@
       "side": 1,
       "message": "Well, you can change it as you want (or even clone/ create your own) with whatever data you find useful for testing.",
       "parentUuid": "ce3c5b53_233054e5",
+      "revId": "ed693247cd720034da0fe4f7e1feec9ff9777628",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_4359d85c",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/LuaWikibaseEntityLibraryTests.lua",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 4548
+      },
+      "writtenOn": "2017-02-14T17:32:22Z",
+      "side": 1,
+      "message": "Okay, I will change it",
+      "parentUuid": "ce3c5b53_0382f0cd",
       "revId": "ed693247cd720034da0fe4f7e1feec9ff9777628",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
