@@ -12,16 +12,10 @@ trait HtmlAssertionHelpers {
 	 * @param string $name
 	 */
 	protected function assertHtmlContainsInputWithName( $html, $name ) {
-		$matcher = [
-			'tag' => 'input',
-			'attributes' => [
-				'name' => $name,
-			],
-		];
-		$this->assertTag(
-			$matcher,
+
+		assertThat(
 			$html,
-			"Failed to find input element with name '{$name}'"
+			is( htmlPiece( havingChild( tagMatchingOutline( "<input name='$name'/>" ) ) ) )
 		);
 	}
 
@@ -31,18 +25,10 @@ trait HtmlAssertionHelpers {
 	 * @param string $value
 	 */
 	protected function assertHtmlContainsInputWithNameAndValue( $html, $name, $value ) {
-		$matcher = [
-			'tag' => 'input',
-			'attributes' => [
-				'name' => $name,
-				'value' => $value,
-			],
-		];
-		$this->assertTag(
-			$matcher,
+
+		assertThat(
 			$html,
-			"Failed to find input element with name '{$name}' and value '{$value}' in :\n{$html}"
-		);
+			is( htmlPiece( havingChild( tagMatchingOutline( "<input name='$name' value='$value'/>" ) ) ) ) );
 	}
 
 	/**
@@ -50,16 +36,11 @@ trait HtmlAssertionHelpers {
 	 * @param string $name
 	 */
 	protected function assertHtmlContainsSelectWithName( $html, $name ) {
-		$matcher = [
-			'tag' => 'select',
-			'attributes' => [
-				'name' => $name,
-			],
-		];
-		$this->assertTag(
-			$matcher,
+
+		assertThat(
 			$html,
-			"Failed to find select element with name '{$name}' in html:\n\n {$html}"
+			is( htmlPiece( havingChild(
+				tagMatchingOutline( "<select name='$name'/>" ) ) ) )
 		);
 	}
 
@@ -69,24 +50,21 @@ trait HtmlAssertionHelpers {
 	 * @param string $value
 	 */
 	protected function assertHtmlContainsSelectWithNameAndSelectedValue( $html, $name, $value ) {
-		$matcher = [
-			'tag' => 'select',
-			'attributes' => [
-				'name' => $name,
-			],
-			'child' => [
-				'tag' => 'option',
-				'attributes' => [
-					'value' => $value,
-					'selected' => 'selected',
-				],
-			],
-		];
-		$this->assertTag(
-			$matcher,
+
+		assertThat(
 			$html,
-			"Failed to find select element with name '{$name}' and selected value '{$value}'" .
-			" in html:\n\n {$html}"
+			is(
+				htmlPiece(
+					havingChild(
+						allOf(
+							tagMatchingOutline( "<select name='$name'/>" ),
+							havingDirectChild(
+								tagMatchingOutline( "<option value='$value' selected/>" )
+							)
+						)
+					)
+				)
+			)
 		);
 	}
 
@@ -94,97 +72,38 @@ trait HtmlAssertionHelpers {
 	 * @param string $html
 	 */
 	protected function assertHtmlContainsSubmitControl( $html ) {
-		$matchers = [
-			'button submit' => [
-				'tag' => 'button',
-				'attributes' => [
-					'type' => 'submit',
-				],
-			],
-			'input submit' => [
-				'tag' => 'input',
-				'attributes' => [
-					'type' => 'submit',
-				],
-			],
-		];
-
-		foreach ( $matchers as $matcher ) {
-			try {
-				$this->assertTag( $matcher, $html, "Failed to find submit element" );
-
-				return;
-			} catch ( \PHPUnit_Framework_ExpectationFailedException $exception ) {
-				continue;
-			}
-		}
-
-		$this->fail( "Failed to find submit element" );
+		assertThat(
+			$html,
+			is(
+				htmlPiece(
+					havingChild(
+						either(
+							both(
+								withTagName( 'button' )
+							)->andAlso(
+									either(
+										withAttribute( 'type' )->havingValue( 'submit' )
+									)->orElse(
+										not( withAttribute( 'type' ) )
+									)
+							)
+						)->orElse(
+							tagMatchingOutline( '<input type="submit"/>' )
+						)
+					)
+				)
+			)
+		);
 	}
 
 	protected function assertHtmlContainsErrorMessage( $html, $messageText ) {
-		$assertions = [
-			[ $this, 'assertHtmlContainsFormErrorMessage' ],
-			[ $this, 'assertHtmlContainsOOUiErrorMessage' ],
-		];
+		$formErrorMessage = tagMatchingOutline( '<div class="error"/>' );
+		$ooUiErrorMessage = tagMatchingOutline( '<li class="oo-ui-fieldLayout-messages-error"/>' );
 
-		foreach ( $assertions as $assertion ) {
-			try {
-				$assertion( $html, $messageText );
-
-				return;
-			} catch ( \PHPUnit_Framework_ExpectationFailedException $exception ) {
-				continue;
-			}
-		}
-
-		$this->fail(
-			"Failed to find error message with text '{$messageText}' in html:\n\n {$html}"
-		);
+		assertThat( $html, is( htmlPiece(
+			havingChild(
+				both( either( $formErrorMessage )->orElse( $ooUiErrorMessage ) )
+					->andAlso( havingTextContents( containsString( $messageText )->ignoringCase() ) ) ) ) ) );
 	}
-
-	protected function assertHtmlContainsFormErrorMessage( $html, $messageText ) {
-		$matcher = [
-			'tag' => 'div',
-			'class' => 'error',
-			'content' => 'regexp: /' . preg_quote( $messageText, '/' ) . '/ui',
-		];
-		$this->assertTag(
-			$matcher,
-			$html,
-			"Failed to find form error message with text '{$messageText}' in html:\n\n {$html}"
-		);
-	}
-
-	protected function assertHtmlContainsOOUiErrorMessage( $html, $messageText ) {
-		$matcher = [
-			'tag' => 'li',
-			'class' => 'oo-ui-fieldLayout-messages-error',
-			'content' => 'regexp: /' . preg_quote( $messageText, '/' ) . '/ui',
-		];
-		$this->assertTag(
-			$matcher,
-			$html,
-			"Failed to find OO-UI error message with text '{$messageText}' in html:\n\n {$html}"
-		);
-	}
-
-	/**
-	 * @param array $matcher Associative array of structure required by $options argument
-	 * 				of {@see \PHPUnit_Util_XML::findNodes}
-	 * @param string $htmlOrXml
-	 * @param string $message
-	 * @param bool $isHtml
-	 *
-	 *  @see \MediaWikiTestCase::assertTag
-	 */
-	abstract protected function assertTag( $matcher, $htmlOrXml, $message = '', $isHtml = true );
-
-	/**
-	 * @param string $message
-	 *
-	 * @see \PHPUnit_Framework_Assert::fail
-	 */
-	abstract public function fail( $message = '' );
 
 }
