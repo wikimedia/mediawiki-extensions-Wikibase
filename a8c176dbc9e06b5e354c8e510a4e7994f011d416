@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ee375f69_59bd3e15",
+        "filename": "repo/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-14T12:11:10Z",
+      "side": 1,
+      "message": "\u003e \u003cbutton\u003elabel\u003c/button\u003e\n\noh, this defaults to type\u003dsubmit if no type given. Fine! I was just a bit confused as this one is not used by our code, and no test fail without it.",
+      "parentUuid": "ee375f69_1e1c7c7b",
+      "revId": "a8c176dbc9e06b5e354c8e510a4e7994f011d416",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee375f69_7e7828ee",
         "filename": "repo/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php",
         "patchSetId": 16
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "Yes, a bit. I\u0027ve fixed it a bit.\n\nI\u0027m not sure how to do it better. If you have an idea - feel free to edit.",
       "parentUuid": "ee375f69_7e7828ee",
+      "revId": "a8c176dbc9e06b5e354c8e510a4e7994f011d416",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_b961ead2",
+        "filename": "repo/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-14T12:11:10Z",
+      "side": 1,
+      "message": "aaaa, it is getting difficult.\n\nso basically how I try to read code with multiple nested layers of parantheses is that my eyes expect the opening and the matching closing parenthesis to be on the same level of indentation. This was not the case, and was neither after your changed.\n\nThen extra bit here is that I case things like both() and andAlso(), or either() and orElse() should be on the same level of indentation. At least for me, with a more complex case like this one, it is important otherwise I get lost what predicates are join with AND and which OR.\n\nI\u0027ve submitted some changes PS18. Have a look if it makes sense (it is now spawn in much many lines than it used to).",
+      "parentUuid": "ee375f69_5919be7d",
       "revId": "a8c176dbc9e06b5e354c8e510a4e7994f011d416",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
