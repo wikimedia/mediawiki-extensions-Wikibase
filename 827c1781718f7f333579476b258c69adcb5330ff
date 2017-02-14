@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee375f69_19ed7622",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1371,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-14T12:15:51Z",
+      "side": 1,
+      "message": "Can you please either add class constants to the class remove dependency on string value any other way.",
+      "range": {
+        "startLine": 1371,
+        "startChar": 43,
+        "endLine": 1371,
+        "endChar": 70
+      },
+      "revId": "827c1781718f7f333579476b258c69adcb5330ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_7991229c",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1392,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-14T12:15:51Z",
+      "side": 1,
+      "message": "Doesn\u0027t take minify argument value into account. \nAfter first entity serializer is created, it will always be returned disregarding `$minifyDataValues` argument value.",
+      "range": {
+        "startLine": 1392,
+        "startChar": 3,
+        "endLine": 1392,
+        "endChar": 37
+      },
+      "revId": "827c1781718f7f333579476b258c69adcb5330ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
