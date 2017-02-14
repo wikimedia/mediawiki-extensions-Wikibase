@@ -41,7 +41,13 @@ end
 
 Given(/^I have an item with label "(.*)" and description "(.*)"$/) do |label, description|
   item_data = '{"labels":{"en":{"language":"en","value":"' + label + '"}},"descriptions":{"en":{"language":"en","value":"' + description + '"}}}'
-  @item_under_test = visit(ItemPage).create_item(item_data)
+
+  wb_api = MediawikiApi::Wikidata::WikidataClient.new URL.repo_api
+  as_user(:b) do
+    wb_api.log_in(user(:b), password(:b))
+  end
+
+  @item_under_test = visit(ItemPage).create_item(item_data, wb_api)
 end
 
 Given(/^I am on the page of the item to test$/) do
@@ -76,8 +82,8 @@ end
 
 Given(/^I have the following properties with datatype:$/) do |props|
   property_data = on(PropertyPage).create_property_data(props)
-  wb_api = MediawikiApi::Wikidata::WikidataClient.new URL.repo_api
 
+  wb_api = MediawikiApi::Wikidata::WikidataClient.new URL.repo_api
   as_user(:b) do
     wb_api.log_in(user(:b), password(:b))
   end
@@ -86,11 +92,21 @@ Given(/^I have the following properties with datatype:$/) do |props|
 end
 
 Given(/^I have the following items:$/) do |handles|
-  @items = visit(ItemPage).create_items(handles)
+  wb_api = MediawikiApi::Wikidata::WikidataClient.new URL.repo_api
+  as_user(:b) do
+    wb_api.log_in(user(:b), password(:b))
+	end
+
+  @items = visit(ItemPage).create_items(handles, wb_api)
 end
 
 Given(/^I have the following empty items:$/) do |handles|
-  @items = visit(ItemPage).create_items(handles, true)
+  wb_api = MediawikiApi::Wikidata::WikidataClient.new URL.repo_api
+  as_user(:b) do
+    wb_api.log_in(user(:b), password(:b))
+  end
+
+  @items = visit(ItemPage).create_items(handles, wb_api, true)
 end
 
 Given(/^The copyright warning has been dismissed$/) do

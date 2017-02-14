@@ -24,7 +24,7 @@ class ItemPage
     item_data
   end
 
-  def create_item(data)
+  def create_item(data, wb_api)
     wb_api = MediawikiApi::Wikidata::WikidataClient.new URL.repo_api
     resp = wb_api.create_item(data)
 
@@ -47,11 +47,11 @@ class ItemPage
     { 'id' => id, 'url' => url, 'label' => label_en, 'description' => description_en }
   end
 
-  def create_items(handles, empty = false)
+  def create_items(handles, wb_api, empty = false)
     item_data = create_item_data(handles, empty)
     items = {}
     item_data.each do |handle, data|
-      item = create_item(data)
+      item = create_item(data, wb_api)
       items[handle] = item
     end
 
