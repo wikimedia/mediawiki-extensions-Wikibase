@@ -305,6 +305,7 @@ class WikibaseRepo {
 		Hooks::run( 'WikibaseRepoEntityTypes', array( &$entityTypeDefinitions ) );
 
 		$settings = new SettingsArray( $wgWBRepoSettings );
+		$settings->setSetting( 'entityNamespaces', self::getEntityNamespacesSetting() );
 
 		$dataRetrievalServices = null;
 		$clientSettings = null;
@@ -1291,7 +1292,7 @@ class WikibaseRepo {
 	 *  $wgWBRepoSettings['entityNamespaces'] setting.
 	 */
 	public function getLocalEntityTypes() {
-		return array_keys( $this->getEntityNamespacesSetting() );
+		return array_keys( $this->settings->getSetting( 'entityNamespaces' ) );
 	}
 
 	/**
@@ -1605,14 +1606,20 @@ class WikibaseRepo {
 	/**
 	 * @return int[]
 	 */
-	private function getEntityNamespacesSetting() {
-		$namespaces = $this->fixLegacyContentModelSetting(
-			$this->settings->getSetting( 'entityNamespaces' ),
-			'entityNamespaces'
-		);
+	public static function getEntityNamespacesSetting() {
+		global $wgWBRepoSettings;
+
+		$namespaces = $wgWBRepoSettings['entityNamespaces'];
 
 		Hooks::run( 'WikibaseEntityNamespaces', array( &$namespaces ) );
 		return $namespaces;
+	}
+
+	/**
+	 * @return int[]
+	 */
+	public function getEntityNamespaces() {
+		return $this->settings->getSetting( 'entityNamespaces' );
 	}
 
 	/**
@@ -1621,7 +1628,7 @@ class WikibaseRepo {
 	public function getEntityNamespaceLookup() {
 		if ( $this->entityNamespaceLookup === null ) {
 			$this->entityNamespaceLookup = new EntityNamespaceLookup(
-				$this->getEntityNamespacesSetting()
+				$this->getEntityNamespaces()
 			);
 		}
 
@@ -1818,21 +1825,6 @@ class WikibaseRepo {
 
 	public function getEntityTypesConfigValueProvider() {
 		return new EntityTypesConfigValueProvider( $this->entityTypeDefinitions );
-	}
-
-	private function fixLegacyContentModelSetting( array $setting, $name ) {
-		if ( isset( $setting[ 'wikibase-item' ] ) || isset( $setting[ 'wikibase-property' ] ) ) {
-			wfWarn( "The specified value for the Wikibase setting '$name' uses content model ids as keys. This is deprecated. " .
-			        "Please update to plain entity types, e.g. 'item' instead of 'wikibase-item'." );
-			$oldSetting = $setting;
-			$setting = [];
-			$prefix = 'wikibase-';
-			foreach ( $oldSetting as $contentModel => $namespace ) {
-				$pos = strpos( $contentModel, $prefix );
-				$setting[ $pos === 0 ? substr( $contentModel, strlen( $prefix ) ) : $contentModel ] = $namespace;
-			}
-		}
-		return $setting;
 	}
 
 	/**
