@@ -8,6 +8,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup
@@ -45,7 +46,8 @@ class SqlSiteLinkConflictLookupTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetConflictsForItem() {
-		$siteLinkConflictLookup = new SqlSiteLinkConflictLookup();
+		$entityIdComposer = WikibaseRepo::getDefaultInstance()->getEntityIdComposer();
+		$siteLinkConflictLookup = new SqlSiteLinkConflictLookup( $entityIdComposer );
 
 		$expected = array(
 			array(
@@ -62,7 +64,8 @@ class SqlSiteLinkConflictLookupTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetConflictsForItem_noConflict() {
-		$siteLinkConflictLookup = new SqlSiteLinkConflictLookup();
+		$entityIdComposer = WikibaseRepo::getDefaultInstance()->getEntityIdComposer();
+		$siteLinkConflictLookup = new SqlSiteLinkConflictLookup( $entityIdComposer );
 
 		$this->assertSame(
 			array(),
