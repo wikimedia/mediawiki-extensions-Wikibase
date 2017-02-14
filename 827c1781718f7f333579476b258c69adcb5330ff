@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_408c6edb",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1371,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-14T15:27:19Z",
+      "side": 1,
+      "message": "Sorry, but no. This is how we do this in many other places instead of using boolean or integer flags. Named constants would not make this code easier to read or easier to understand.",
+      "parentUuid": "ee375f69_19ed7622",
+      "range": {
+        "startLine": 1371,
+        "startChar": 43,
+        "endLine": 1371,
+        "endChar": 70
+      },
+      "revId": "827c1781718f7f333579476b258c69adcb5330ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee375f69_7991229c",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2017-02-14T12:15:51Z",
       "side": 1,
       "message": "Doesn\u0027t take minify argument value into account. \nAfter first entity serializer is created, it will always be returned disregarding `$minifyDataValues` argument value.",
+      "range": {
+        "startLine": 1392,
+        "startChar": 3,
+        "endLine": 1392,
+        "endChar": 37
+      },
+      "revId": "827c1781718f7f333579476b258c69adcb5330ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_00bd0663",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1392,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-14T15:27:19Z",
+      "side": 1,
+      "message": "That was a mistake when I untangled the \"minimize\" option from the $options variable. Very valid concern. Thanks!",
+      "parentUuid": "ee375f69_7991229c",
       "range": {
         "startLine": 1392,
         "startChar": 3,
