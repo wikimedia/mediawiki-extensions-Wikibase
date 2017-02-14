@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "ee375f69_1901f6b9",
+        "filename": "repo/includes/Api/SearchEntities.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-14T12:38:39Z",
+      "side": 1,
+      "message": "Good catch!",
+      "parentUuid": "ee375f69_16530a45",
+      "revId": "fd520bb992ebb39ab6f7204e2624fbc79bd6e3a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee375f69_368f2ed3",
         "filename": "repo/tests/phpunit/includes/Api/SearchEntitiesTest.php",
         "patchSetId": 5
