@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_a35d4480",
+        "filename": "client/sql/statement_usage.sql",
+        "patchSetId": 9
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-14T16:58:58Z",
+      "side": 1,
+      "message": "This wont work as primary keys are always unique. You might want to have a look at https://dev.mysql.com/doc/refman/5.7/en/optimizing-primary-keys.html and https://en.wikipedia.org/wiki/Unique_key.\n\nThe su_entity_id index from the bottom of this file will probably make for a good PK.",
+      "range": {
+        "startLine": 2,
+        "startChar": 53,
+        "endLine": 2,
+        "endChar": 64
+      },
+      "revId": "d6c3496d1a1f605d328de3e2c493a5ad568b07e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
