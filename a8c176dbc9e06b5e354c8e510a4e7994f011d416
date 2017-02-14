@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "ee375f69_b9deca6e",
+        "filename": "repo/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-14T12:22:47Z",
+      "side": 1,
+      "message": "This is quiet generic method and I thought it would be nice if tests won\u0027t break if someone will decide to refactor HTML.",
+      "parentUuid": "ee375f69_59bd3e15",
+      "revId": "a8c176dbc9e06b5e354c8e510a4e7994f011d416",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee375f69_7e7828ee",
         "filename": "repo/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php",
         "patchSetId": 16
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "aaaa, it is getting difficult.\n\nso basically how I try to read code with multiple nested layers of parantheses is that my eyes expect the opening and the matching closing parenthesis to be on the same level of indentation. This was not the case, and was neither after your changed.\n\nThen extra bit here is that I case things like both() and andAlso(), or either() and orElse() should be on the same level of indentation. At least for me, with a more complex case like this one, it is important otherwise I get lost what predicates are join with AND and which OR.\n\nI\u0027ve submitted some changes PS18. Have a look if it makes sense (it is now spawn in much many lines than it used to).",
       "parentUuid": "ee375f69_5919be7d",
+      "revId": "a8c176dbc9e06b5e354c8e510a4e7994f011d416",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_39d95a84",
+        "filename": "repo/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-14T12:22:47Z",
+      "side": 1,
+      "message": "I think what you did is better. Thank you.",
+      "parentUuid": "ee375f69_b961ead2",
       "revId": "a8c176dbc9e06b5e354c8e510a4e7994f011d416",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
