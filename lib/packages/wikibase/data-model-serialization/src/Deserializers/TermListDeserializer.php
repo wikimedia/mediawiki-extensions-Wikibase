@@ -38,7 +38,10 @@ class TermListDeserializer implements Deserializer {
 	 * @return TermList
 	 */
 	public function deserialize( $serialization ) {
-		$this->assertCanDeserialize( $serialization );
+		if ( !is_array( $serialization ) ) {
+			throw new DeserializationException( 'The term list serialization should be an array' );
+		}
+
 		return $this->getDeserialized( $serialization );
 	}
 
@@ -50,29 +53,16 @@ class TermListDeserializer implements Deserializer {
 	private function getDeserialized( array $serialization ) {
 		$termList = new TermList();
 
-		foreach ( $serialization as $termSerialization ) {
+		foreach ( $serialization as $requestedLanguage => $termSerialization ) {
+			$this->assertAttributeIsArray( $serialization, $requestedLanguage );
+			$this->assertRequestedAndActualLanguageMatch( $termSerialization, $requestedLanguage );
+
 			/** @var Term $term */
 			$term = $this->termDeserializer->deserialize( $termSerialization );
 			$termList->setTerm( $term );
 		}
 
 		return $termList;
-	}
-
-	/**
-	 * @param array[] $serialization
-	 *
-	 * @throws DeserializationException
-	 */
-	private function assertCanDeserialize( $serialization ) {
-		if ( !is_array( $serialization ) ) {
-			throw new DeserializationException( 'The term list serialization should be an array' );
-		}
-
-		foreach ( $serialization as $requestedLanguage => $valueSerialization ) {
-			$this->assertAttributeIsArray( $serialization, $requestedLanguage );
-			$this->assertRequestedAndActualLanguageMatch( $valueSerialization, $requestedLanguage );
-		}
 	}
 
 	private function assertRequestedAndActualLanguageMatch(
