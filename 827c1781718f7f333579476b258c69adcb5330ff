@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_c01abe7e",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1371,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-14T15:44:02Z",
+      "side": 1,
+      "message": "Easier to read - may be not.\nEasier to understand - I would say yes.\n\nI wouldn\u0027t care about it if it was private method, but it is public and I wouldn\u0027t want to see string values all over the codebase which have special meaning.\n\nConstants is not the only option. You can just put it in another method like `getMinifyingEntitySerializer($options)`. And also it can be private as soon as it is used only in this class.",
+      "parentUuid": "ce3c5b53_408c6edb",
+      "range": {
+        "startLine": 1371,
+        "startChar": 43,
+        "endLine": 1371,
+        "endChar": 70
+      },
+      "revId": "827c1781718f7f333579476b258c69adcb5330ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee375f69_7991229c",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 2
