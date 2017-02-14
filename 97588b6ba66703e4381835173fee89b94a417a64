@@ -16,6 +16,24 @@
       "revId": "97588b6ba66703e4381835173fee89b94a417a64",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_009666f3",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/SqlSiteLinkConflictLookupTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-14T15:22:52Z",
+      "side": 1,
+      "message": "We could inline the implementation details from ItemId::newFromNumber here, but what would be the value of that? This code is bound to the ItemId class anyway. The method ItemId::newFromNumber will not go away.\n\nnewFromNumber is only a problem if it is called without knowing the entity type.",
+      "parentUuid": "ee375f69_3e4e2073",
+      "revId": "97588b6ba66703e4381835173fee89b94a417a64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
