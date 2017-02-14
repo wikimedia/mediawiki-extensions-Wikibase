@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee375f69_8329159d",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-14T07:32:32Z",
+      "side": 1,
+      "message": "Can this ever be nil? If so, that\u0027s probably a bug, isn\u0027t it?",
+      "range": {
+        "startLine": 34,
+        "startChar": 21,
+        "endLine": 34,
+        "endChar": 24
+      },
+      "revId": "ed693247cd720034da0fe4f7e1feec9ff9777628",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_e3434166",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-14T07:32:32Z",
+      "side": 1,
+      "message": "We usually use entity.claims by convention (this is very similar to JavaScript, you can use both table.member and table[\u0027member\u0027])",
+      "range": {
+        "startLine": 37,
+        "startChar": 28,
+        "endLine": 37,
+        "endChar": 44
+      },
+      "revId": "ed693247cd720034da0fe4f7e1feec9ff9777628",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_a32699c7",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-14T07:32:32Z",
+      "side": 1,
+      "message": "Could also be shortened to:\nlocal propertyExists \u003d actualEntityClaims[propertyID] ~\u003d nil",
+      "revId": "ed693247cd720034da0fe4f7e1feec9ff9777628",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_633091fd",
+        "filename": "client/sql/property_usage.sql",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-14T07:32:32Z",
+      "side": 1,
+      "message": "File name is no longer accurate (as the table name changed).",
+      "revId": "ed693247cd720034da0fe4f7e1feec9ff9777628",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_1efb1c13",
+        "filename": "client/sql/property_usage.sql",
+        "patchSetId": 7
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-14T07:32:32Z",
+      "side": 1,
+      "message": "Needs a primary key. Potentially the su_entity_id index could be made into a primary key?\nSee https://dev.mysql.com/doc/refman/5.7/en/optimizing-primary-keys.html",
+      "revId": "ed693247cd720034da0fe4f7e1feec9ff9777628",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_3e006004",
+        "filename": "client/sql/property_usage.sql",
+        "patchSetId": 7
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-14T07:32:32Z",
+      "side": 1,
+      "message": "(from PS3) Why do we need this? Can\u0027t this be derived from the state on the repo, if needed?",
+      "revId": "ed693247cd720034da0fe4f7e1feec9ff9777628",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_de04d419",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/LuaWikibaseEntityLibraryTests.lua",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-14T07:32:32Z",
+      "side": 1,
+      "message": "(from PS3) If you use this local test item (and extend the \"claims\" below), you can also easily test that the actual values (k,v in pairs(…)) are correct.",
+      "revId": "ed693247cd720034da0fe4f7e1feec9ff9777628",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
