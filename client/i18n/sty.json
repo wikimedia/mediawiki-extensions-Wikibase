@@ -4,13 +4,13 @@
 			"Khanmarat"
 		]
 	},
-	"tooltip-t-wikibase": "Мәғлүмәтле репозиторийтағы пәйләнкән элементҡа ссылка",
-	"wikibase-comment-update": "{{WBREPONAME}} элемент төсәтелгән",
+	"tooltip-t-wikibase": "Пелешмәле репозиторийтағы пәйләнкән элементҡа ссылка",
+	"wikibase-comment-update": "{{WBREPONAME}} элемент пашҡартылған",
 	"wikibase-dataitem": "{{WBREPONAME}}ның элементы",
 	"wikibase-editlinks": "Ссылкаларны төсәткәле",
 	"wikibase-editlinkstitle": "Пашҡа телләртәге ссылкаларны төсәткәле",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
-	"wikibase-rc-hide-wikidata-show": "Күрсәткәле",
+	"wikibase-rc-hide-wikidata-show": "Күргәскәле",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} төсәтеү"
 }
