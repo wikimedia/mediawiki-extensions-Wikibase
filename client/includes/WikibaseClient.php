@@ -94,6 +94,7 @@ use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\NamespaceChecker;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
 use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
 use Wikibase\StringNormalizer;
@@ -681,7 +682,7 @@ final class WikibaseClient {
 	 */
 	public function getRepoSettings() {
 		if ( defined( 'WB_VERSION' ) ) {
-			return \Wikibase\Repo\WikibaseRepo::getDefaultInstance()->getSettings();
+			return WikibaseRepo::getDefaultInstance()->getSettings();
 		} else {
 			return null;
 		}
