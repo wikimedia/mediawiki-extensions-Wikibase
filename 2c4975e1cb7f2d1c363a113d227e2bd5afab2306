@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee375f69_7e134806",
+        "filename": "lib/includes/Store/DispatchingEntityInfoBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-14T09:23:12Z",
+      "side": 1,
+      "message": "Yes! Added a note.",
+      "parentUuid": "ee375f69_b686dede",
+      "revId": "2c4975e1cb7f2d1c363a113d227e2bd5afab2306",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee375f69_562192f5",
         "filename": "lib/includes/Store/DispatchingEntityInfoBuilder.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2017-02-13T17:18:07Z",
       "side": 1,
       "message": "Maybe it\u0027s worth mentioning that the own repository will have an empty string as the array key?",
+      "revId": "2c4975e1cb7f2d1c363a113d227e2bd5afab2306",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_5ef524b4",
+        "filename": "lib/includes/Store/DispatchingEntityInfoBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-14T09:23:12Z",
+      "side": 1,
+      "message": "I think it is clear enough if the constructor mentions this. Also it is what generally happens, plus relevant parts of documentation we have also mention this (if not clear enough, this should be improved).\n\nBut this is my impression, I am quite deeply sunk in this dispatching service concept. Tell me if is not clear at this point.",
+      "parentUuid": "ee375f69_562192f5",
       "revId": "2c4975e1cb7f2d1c363a113d227e2bd5afab2306",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -71,6 +107,30 @@
       "side": 1,
       "message": "Constants for this are in TermIndexEntry.",
       "parentUuid": "ee375f69_b0e266cf",
+      "range": {
+        "startLine": 83,
+        "startChar": 17,
+        "endLine": 83,
+        "endChar": 39
+      },
+      "revId": "2c4975e1cb7f2d1c363a113d227e2bd5afab2306",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_5e1684f7",
+        "filename": "lib/tests/phpunit/Store/DispatchingEntityInfoBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-14T09:23:12Z",
+      "side": 1,
+      "message": "I don\u0027t think it is worth loading TermIndexEntry just to have constants that are irrelevant for the test actually. Switched to use null here.",
+      "parentUuid": "ee375f69_1669ca1d",
       "range": {
         "startLine": 83,
         "startChar": 17,
