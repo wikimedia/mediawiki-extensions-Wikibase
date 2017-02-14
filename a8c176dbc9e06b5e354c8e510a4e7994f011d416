@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee375f69_1ec31c0c",
+        "filename": "repo/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-14T11:38:09Z",
+      "side": 1,
+      "message": "Was assertTag also covering the \"no type\" attribute part?\n\nLooking at PHPUnit_Util_XML::findNodes it seems like the old code would fail if there is no attribute given in \u0027attributes\u0027. But maybe I read it wrong, I\u0027ve just skimmed it.",
+      "revId": "a8c176dbc9e06b5e354c8e510a4e7994f011d416",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_7e7828ee",
+        "filename": "repo/tests/phpunit/includes/Specials/HtmlAssertionHelpers.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-14T11:38:09Z",
+      "side": 1,
+      "message": "Indentation of this block is a bit off, isn\u0027t it?",
+      "revId": "a8c176dbc9e06b5e354c8e510a4e7994f011d416",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
