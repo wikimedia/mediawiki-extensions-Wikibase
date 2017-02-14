@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee375f69_3e4e2073",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/SqlSiteLinkConflictLookupTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-14T07:56:35Z",
+      "side": 1,
+      "message": "Couldn\u0027t it also do new ItemId( \u0027Q\u0027 . $uniquePart) so that newFromNumber is not used?\nI am fine with having this in tests I am just not sure if this is what we want.",
+      "revId": "97588b6ba66703e4381835173fee89b94a417a64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
