@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\ChangeOp;
 
 use Wikibase\ChangeOp\ChangeOp;
-use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 
 /**
  * Interface for services that can construct a ChangeOp from a JSON style array structure describing
@@ -25,7 +25,7 @@ interface ChangeOpDeserializer {
 	 *  but may contain additional array keys like "remove" or "add", for example:
 	 *  [ 'label' => [ 'zh' => [ 'remove' ], 'de' => [ 'value' => 'Foo' ] ] ]
 	 *
-	 * @throws ChangeOpException when the provided array is invalid.
+	 * @throws ChangeOpDeserializationException when the provided array is invalid.
 	 * @return ChangeOp
 	 *
 	 * @see NullChangeOp If no change needs to be applied
