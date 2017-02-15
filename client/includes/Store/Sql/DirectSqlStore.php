@@ -156,11 +156,6 @@ class DirectSqlStore implements ClientStore {
 	private $subscriptionManager = null;
 
 	/**
-	 * @var PrefetchingWikiPageEntityMetaDataAccessor|null
-	 */
-	private $entityPrefetcher = null;
-
-	/**
 	 * @var string
 	 */
 	private $siteId;

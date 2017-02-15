@@ -5,7 +5,6 @@ namespace Wikibase\Client\Tests\Hooks;
 use Parser;
 use PHPUnit_Framework_TestCase;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
-use Wikibase\Client\WikibaseClient;
 
 /**
  * @covers Wikibase\Client\Hooks\ParserFunctionRegistrant
