@@ -534,10 +534,7 @@ final class WikibaseClient {
 			$this->settings->getSetting( 'repoUrl' ),
 			$this->settings->getSetting( 'repoArticlePath' ),
 			$this->settings->getSetting( 'repoScriptPath' ),
-			$this->fixLegacyContentModelSetting(
-				$this->settings->getSetting( 'repoNamespaces' ),
-				'repoNamespaces'
-			)
+			$this->settings->getSetting( 'repoNamespaces' )
 		);
 	}
 
@@ -1303,11 +1300,7 @@ final class WikibaseClient {
 	 * @return int[]
 	 */
 	private function getEntityNamespacesSetting() {
-		$namespaces = $this->fixLegacyContentModelSetting(
-			$this->settings->getSetting( 'entityNamespaces' ),
-			'entityNamespaces'
-		);
-
+		$namespaces = $this->settings->getSetting( 'entityNamespaces' );
 		Hooks::run( 'WikibaseEntityNamespaces', array( &$namespaces ) );
 		return $namespaces;
 	}
@@ -1335,21 +1328,6 @@ final class WikibaseClient {
 			$language,
 			LanguageFallbackChainFactory::FALLBACK_ALL
 		);
-	}
-
-	private function fixLegacyContentModelSetting( array $setting, $name ) {
-		if ( isset( $setting[ 'wikibase-item' ] ) || isset( $setting[ 'wikibase-property' ] ) ) {
-			wfWarn( "The specified value for the Wikibase setting '$name' uses content model ids as keys. This is deprecated. " .
-				"Please update to plain entity types, e.g. 'item' instead of 'wikibase-item'." );
-			$oldSetting = $setting;
-			$setting = [];
-			$prefix = 'wikibase-';
-			foreach ( $oldSetting as $contentModel => $namespace ) {
-				$pos = strpos( $contentModel, $prefix );
-				$setting[ $pos === 0 ? substr( $contentModel, strlen( $prefix ) ) : $contentModel ] = $namespace;
-			}
-		}
-		return $setting;
 	}
 
 }
