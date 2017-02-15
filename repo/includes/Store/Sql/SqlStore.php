@@ -446,6 +446,7 @@ class SqlStore implements Store {
 		if ( $this->entityDataRetrievalServices !== null ) {
 			// Use $entityDataRetrievalServices as a watcher for entity changes,
 			// so that caches of services provided are updated when necessary.
+			// FIXME: How do we know this implements EntityStoreWatcher?????????????????????????????
 			$dispatcher->registerWatcher( $this->entityDataRetrievalServices );
 			$nonCachingLookup = $this->entityDataRetrievalServices->getEntityRevisionLookup();
 		} else {
