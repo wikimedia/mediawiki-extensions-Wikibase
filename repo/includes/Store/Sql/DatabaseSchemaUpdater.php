@@ -189,7 +189,7 @@ class DatabaseSchemaUpdater {
 		);
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer() );
+		$table = new PropertyInfoTable();
 
 		$contentCodec = $wikibaseRepo->getEntityContentDataCodec();
 		$propertyInfoBuilder = $wikibaseRepo->newPropertyInfoBuilder();
@@ -206,8 +206,7 @@ class DatabaseSchemaUpdater {
 		$builder = new PropertyInfoTableBuilder(
 			$table,
 			$entityLookup,
-			$propertyInfoBuilder,
-			$wikibaseRepo->getEntityIdComposer()
+			$propertyInfoBuilder
 		);
 		$builder->setReporter( $reporter );
 		$builder->setUseTransactions( false );

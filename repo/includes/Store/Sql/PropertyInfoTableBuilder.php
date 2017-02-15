@@ -7,7 +7,6 @@ use RuntimeException;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 
@@ -33,11 +32,6 @@ class PropertyInfoTableBuilder {
 	 * @var PropertyInfoBuilder
 	 */
 	private $propertyInfoBuilder;
-
-	/**
-	 * @var EntityIdComposer $entityIdComposer
-	 */
-	private $entityIdComposer;
 
 	/**
 	 * @var MessageReporter|null
@@ -78,13 +72,11 @@ class PropertyInfoTableBuilder {
 	public function __construct(
 		PropertyInfoTable $propertyInfoTable,
 		EntityLookup $entityLookup,
-		PropertyInfoBuilder $propertyInfoBuilder,
-		EntityIdComposer $entityIdComposer
+		PropertyInfoBuilder $propertyInfoBuilder
 	) {
 		$this->propertyInfoTable = $propertyInfoTable;
 		$this->entityLookup = $entityLookup;
 		$this->propertyInfoBuilder = $propertyInfoBuilder;
-		$this->entityIdComposer = $entityIdComposer;
 	}
 
 	/**
@@ -199,12 +191,8 @@ class PropertyInfoTableBuilder {
 			$c = 0;
 
 			foreach ( $props as $row ) {
-				$id = $this->entityIdComposer->composeEntityId(
-					'',
-					Property::ENTITY_TYPE,
-					(int)$row->epp_entity_id
-				);
-				$this->updatePropertyInfo( $id );
+				$propertyId = PropertyId::newFromNumber( (int)$row->epp_entity_id );
+				$this->updatePropertyInfo( $propertyId );
 
 				$rowId = $row->epp_entity_id;
 				$c++;

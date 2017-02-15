@@ -72,7 +72,6 @@ return [
 		WikibaseClient $client
 	) {
 		return new PropertyInfoTable(
-			$client->getEntityIdComposer(),
 			$services->getDatabaseName(),
 			$services->getRepositoryName()
 		);

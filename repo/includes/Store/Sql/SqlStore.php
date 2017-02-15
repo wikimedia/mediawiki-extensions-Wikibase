@@ -592,7 +592,7 @@ class SqlStore implements Store {
 	 */
 	private function getPropertyInfoTable() {
 		if ( $this->propertyInfoTable === null ) {
-			$this->propertyInfoTable = new PropertyInfoTable( $this->entityIdComposer );
+			$this->propertyInfoTable = new PropertyInfoTable();
 		}
 		return $this->propertyInfoTable;
 	}
@@ -601,7 +601,7 @@ class SqlStore implements Store {
 	 * @return SiteLinkConflictLookup
 	 */
 	public function getSiteLinkConflictLookup() {
-		return new SqlSiteLinkConflictLookup( $this->entityIdComposer );
+		return new SqlSiteLinkConflictLookup();
 	}
 
 	/**

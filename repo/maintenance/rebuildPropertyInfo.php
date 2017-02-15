@@ -48,10 +48,9 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$builder = new PropertyInfoTableBuilder(
-			new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer() ),
+			new PropertyInfoTable(),
 			$wikibaseRepo->getEntityLookup(),
-			$wikibaseRepo->newPropertyInfoBuilder(),
-			$wikibaseRepo->getEntityIdComposer()
+			$wikibaseRepo->newPropertyInfoBuilder()
 		);
 		$builder->setReporter( $reporter );
 

@@ -6,7 +6,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
-use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
 
@@ -46,7 +45,7 @@ class SqlSiteLinkConflictLookupTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetConflictsForItem() {
-		$siteLinkConflictLookup = $this->newSqlSiteLinkConflictLookup();
+		$lookup = new SqlSiteLinkConflictLookup();
 
 		$expected = [ [
 			'siteId' => 'enwiki',
@@ -56,16 +55,16 @@ class SqlSiteLinkConflictLookupTest extends \MediaWikiTestCase {
 
 		$this->assertEquals(
 			$expected,
-			$siteLinkConflictLookup->getConflictsForItem( $this->getItem( 'Kitten' ) )
+			$lookup->getConflictsForItem( $this->getItem( 'Kitten' ) )
 		);
 	}
 
 	public function testGetConflictsForItem_noConflict() {
-		$siteLinkConflictLookup = $this->newSqlSiteLinkConflictLookup();
+		$lookup = new SqlSiteLinkConflictLookup();
 
 		$this->assertSame(
 			[],
-			$siteLinkConflictLookup->getConflictsForItem( $this->getItem( 'Cat' ) )
+			$lookup->getConflictsForItem( $this->getItem( 'Cat' ) )
 		);
 	}
 
@@ -73,16 +72,6 @@ class SqlSiteLinkConflictLookupTest extends \MediaWikiTestCase {
 		$siteLinks = new SiteLinkList( [ new SiteLink( 'enwiki', $pageName ) ] );
 
 		return new Item( new ItemId( 'Q10' ), null, $siteLinks );
-	}
-
-	private function newSqlSiteLinkConflictLookup() {
-		$entityIdComposer = new EntityIdComposer( [
-			'item' => function ( $repositoryName, $uniquePart ) {
-				return ItemId::newFromNumber( $uniquePart );
-			},
-		] );
-
-		return new SqlSiteLinkConflictLookup( $entityIdComposer );
 	}
 
 }

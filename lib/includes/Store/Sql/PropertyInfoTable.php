@@ -7,9 +7,8 @@ use DBError;
 use InvalidArgumentException;
 use ResultWrapper;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
-use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikimedia\Assert\Assert;
@@ -29,32 +28,26 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 	private $tableName;
 
 	/**
-	 * @var EntityIdComposer
-	 */
-	private $entityIdComposer;
-
-	/**
 	 * @var string
 	 */
 	private $repositoryName;
 
 	/**
-	 * @param EntityIdComposer $entityIdComposer
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
 	 * @param string $repositoryName
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityIdComposer $entityIdComposer, $wiki = false, $repositoryName = '' ) {
+	public function __construct( $wiki = false, $repositoryName = '' ) {
 		if ( !is_string( $wiki ) && $wiki !== false ) {
 			throw new InvalidArgumentException( '$wiki must be a string or false.' );
 		}
 		RepositoryNameAssert::assertParameterIsValidRepositoryName( $repositoryName, '$repositoryName' );
 
 		parent::__construct( $wiki );
+
 		$this->tableName = 'wb_property_info';
-		$this->entityIdComposer = $entityIdComposer;
 		$this->repositoryName = $repositoryName;
 	}
 
@@ -99,12 +92,12 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 				continue;
 			}
 
-			$id = $this->entityIdComposer->composeEntityId(
+			$propertyId = new PropertyId( EntityId::joinSerialization( [
 				$this->repositoryName,
-				Property::ENTITY_TYPE,
-				$row->pi_property_id
-			);
-			$infos[$id->getSerialization()] = $info;
+				'',
+				'P' . $row->pi_property_id
+			] ) );
+			$infos[$propertyId->getSerialization()] = $info;
 		}
 
 		return $infos;
