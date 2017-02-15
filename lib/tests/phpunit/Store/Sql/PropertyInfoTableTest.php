@@ -4,10 +4,7 @@ namespace Wikibase\Lib\Tests\Store\Sql;
 
 use MediaWikiTestCase;
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 
@@ -35,7 +32,7 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 	}
 
 	private function newPropertyInfoTable( $repository = '' ) {
-		return new PropertyInfoTable( $this->getEntityComposer(), false, $repository );
+		return new PropertyInfoTable( false, $repository );
 	}
 
 	public function testGivenNoDataTypeInInfo_setPropertyInfoThrowsException() {
@@ -176,7 +173,7 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 	 */
 	public function testGivenInvalidRepositoryName_throwsException( $name ) {
 		$this->setExpectedException( InvalidArgumentException::class );
-		new PropertyInfoTable( $this->getEntityComposer(), false, $name );
+		new PropertyInfoTable( false, $name );
 	}
 
 	public function invalidRepositoryNameProvider() {
@@ -195,7 +192,7 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 	public function testGivenPropertyIdFromWrongRepository_setPropertyInfoThrowsException( $repositoryName, PropertyId $id ) {
 		$this->setExpectedException( InvalidArgumentException::class );
 
-		$infoTable = new PropertyInfoTable( $this->getEntityComposer(), false, $repositoryName );
+		$infoTable = new PropertyInfoTable( false, $repositoryName );
 		$infoTable->setPropertyInfo( $id, [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] );
 	}
 
@@ -205,7 +202,7 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 	public function testGivenPropertyIdFromWrongRepository_getPropertyInfoThrowsException( $repositoryName, PropertyId $id ) {
 		$this->setExpectedException( InvalidArgumentException::class );
 
-		$infoTable = new PropertyInfoTable( $this->getEntityComposer(), false, $repositoryName );
+		$infoTable = new PropertyInfoTable( false, $repositoryName );
 		$infoTable->getPropertyInfo( $id );
 	}
 
@@ -215,7 +212,7 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 	public function testGivenPropertyIdFromWrongRepository_removePropertyInfoThrowsException( $repositoryName, PropertyId $id ) {
 		$this->setExpectedException( InvalidArgumentException::class );
 
-		$infoTable = new PropertyInfoTable( $this->getEntityComposer(), false, $repositoryName );
+		$infoTable = new PropertyInfoTable( false, $repositoryName );
 		$infoTable->removePropertyInfo( $id );
 	}
 
@@ -274,14 +271,6 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 		foreach ( $infos as $id => $info ) {
 			$table->setPropertyInfo( new PropertyId( $id ), $info );
 		}
-	}
-
-	private function getEntityComposer() {
-		return new EntityIdComposer( [
-			Property::ENTITY_TYPE => function( $repository, $uniquePart ) {
-				return new PropertyId( EntityId::joinSerialization( [ $repository, '', "P$uniquePart" ] ) );
-			},
-		] );
 	}
 
 }
