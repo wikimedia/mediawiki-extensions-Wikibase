@@ -6,9 +6,8 @@ use InvalidArgumentException;
 use MWException;
 use RuntimeException;
 use User;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\AliasesProvider;
-use Wikibase\DataModel\Term\DescriptionsProvider;
-use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\LocalizedTextProvider;
@@ -38,19 +37,9 @@ class EntityViewPlaceholderExpander {
 	private $user;
 
 	/**
-	 * @var LabelsProvider
+	 * @var EntityDocument
 	 */
-	private $labelsProvider;
-
-	/**
-	 * @var DescriptionsProvider
-	 */
-	private $descriptionsProvider;
-
-	/**
-	 * @var AliasesProvider|null
-	 */
-	private $aliasesProvider;
+	private $entity;
 
 	/**
 	 * @var string[]
@@ -80,9 +69,7 @@ class EntityViewPlaceholderExpander {
 	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param User $user the current user
-	 * @param LabelsProvider $labelsProvider
-	 * @param DescriptionsProvider $descriptionsProvider
-	 * @param AliasesProvider|null $aliasesProvider
+	 * @param EntityDocument $entity
 	 * @param string[] $termsLanguages
 	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
 	 * @param LanguageNameLookup $languageNameLookup
@@ -92,9 +79,7 @@ class EntityViewPlaceholderExpander {
 	public function __construct(
 		TemplateFactory $templateFactory,
 		User $user,
-		LabelsProvider $labelsProvider,
-		DescriptionsProvider $descriptionsProvider,
-		AliasesProvider $aliasesProvider = null,
+		EntityDocument $entity,
 		array $termsLanguages,
 		LanguageDirectionalityLookup $languageDirectionalityLookup,
 		LanguageNameLookup $languageNameLookup,
@@ -102,9 +87,7 @@ class EntityViewPlaceholderExpander {
 		array $termsListItems = array()
 	) {
 		$this->user = $user;
-		$this->labelsProvider = $labelsProvider;
-		$this->descriptionsProvider = $descriptionsProvider;
-		$this->aliasesProvider = $aliasesProvider;
+		$this->entity = $entity;
 		$this->templateFactory = $templateFactory;
 		$this->termsLanguages = $termsLanguages;
 		$this->languageDirectionalityLookup = $languageDirectionalityLookup;
@@ -191,10 +174,11 @@ class EntityViewPlaceholderExpander {
 			if ( isset( $this->termsListItems[ $languageCode ] ) ) {
 				$contentHtml .= $this->termsListItems[ $languageCode ];
 			} else {
+				// FIXME: This still assumes all entity types do have labels and descriptions!
 				$contentHtml .= $termsListView->getListItemHtml(
-					$this->labelsProvider,
-					$this->descriptionsProvider,
-					$this->aliasesProvider,
+					$this->entity,
+					$this->entity,
+					$this->entity instanceof AliasesProvider ? $this->entity : null,
 					$languageCode
 				);
 			}

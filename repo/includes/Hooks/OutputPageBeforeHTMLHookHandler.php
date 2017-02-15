@@ -235,17 +235,10 @@ class OutputPageBeforeHTMLHookHandler {
 		array $termsListItemsHtml = null,
 		$languageCode
 	) {
-		// FIXME: This is not necessarily true for all entity types.
-		$labelsProvider = $entity;
-		$descriptionsProvider = $entity;
-		$aliasesProvider = $entity instanceof AliasesProvider ? $entity : null;
-
 		return new EntityViewPlaceholderExpander(
 			$this->templateFactory,
 			$user,
-			$labelsProvider,
-			$descriptionsProvider,
-			$aliasesProvider,
+			$entity,
 			array_unique( array_merge( [ $languageCode ], $termsLanguages ) ),
 			new MediaWikiLanguageDirectionalityLookup(),
 			$this->languageNameLookup,
