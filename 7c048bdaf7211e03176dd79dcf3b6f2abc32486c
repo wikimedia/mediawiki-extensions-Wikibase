@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_75acca32",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialItemByTitleTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-15T10:55:00Z",
+      "side": 1,
+      "message": "`$_` was intentional, because `list( , ...` looks weired in my opinion. \nBut anyway I\u0027m ok with that.",
+      "range": {
+        "startLine": 176,
+        "startChar": 2,
+        "endLine": 176,
+        "endChar": 21
+      },
+      "revId": "7c048bdaf7211e03176dd79dcf3b6f2abc32486c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_55a3c63f",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialSetLabelDescriptionAliasesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-15T10:55:00Z",
+      "side": 1,
+      "message": "+1",
+      "range": {
+        "startLine": 262,
+        "startChar": 2,
+        "endLine": 262,
+        "endChar": 87
+      },
+      "revId": "7c048bdaf7211e03176dd79dcf3b6f2abc32486c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
