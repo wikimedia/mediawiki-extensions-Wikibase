@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_caae5495",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-15T14:50:44Z",
+      "side": 1,
+      "message": "\u003ename attribute\n\nImplementation does not care about this. See: `SpecialModifyEntity.php:329`\n\nAs for class and id attributes (also in other elements), I can not understand why those should be checked. It really does not matter for backend if those have other values.\nThey might matter for some frontend component, but there should probably be another test then. \nBut most probably there are no frontend components depending on it because if you open `/Special:SetDescription`, the form is absolutely noninteractive.",
+      "parentUuid": "ce3c5b53_c715ed4e",
+      "revId": "b32da7472f3adf79be0a4be524a0d3f11b0ea839",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_67074120",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
         "patchSetId": 3
