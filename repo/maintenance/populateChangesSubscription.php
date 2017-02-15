@@ -63,7 +63,6 @@ class PopulateChangesSubscription extends LoggedUpdateMaintenance {
 
 		$builder = new ChangesSubscriptionTableBuilder(
 			wfGetLB(),
-			$wikibaseRepo->getEntityIdComposer(),
 			'wb_changes_subscription',
 			$this->mBatchSize,
 			$verbose ? 'verbose' : 'standard'

@@ -7,7 +7,6 @@ use RuntimeException;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
@@ -34,11 +33,6 @@ class PropertyInfoTableBuilder {
 	 * @var PropertyInfoBuilder
 	 */
 	private $propertyInfoBuilder;
-
-	/**
-	 * @var EntityIdComposer
-	 */
-	private $entityIdComposer;
 
 	/**
 	 * @var EntityNamespaceLookup
@@ -73,13 +67,11 @@ class PropertyInfoTableBuilder {
 		PropertyInfoTable $propertyInfoTable,
 		EntityLookup $entityLookup,
 		PropertyInfoBuilder $propertyInfoBuilder,
-		EntityIdComposer $entityIdComposer,
 		EntityNamespaceLookup $entityNamespaceLookup
 	) {
 		$this->propertyInfoTable = $propertyInfoTable;
 		$this->entityLookup = $entityLookup;
 		$this->propertyInfoBuilder = $propertyInfoBuilder;
-		$this->entityIdComposer = $entityIdComposer;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 	}
 

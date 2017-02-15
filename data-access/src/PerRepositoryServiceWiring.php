@@ -103,7 +103,6 @@ return [
 		GenericServices $genericServices
 	) {
 		return new PropertyInfoTable(
-			$services->getEntityIdComposer(),
 			$services->getDatabaseName(),
 			$services->getRepositoryName()
 		);
