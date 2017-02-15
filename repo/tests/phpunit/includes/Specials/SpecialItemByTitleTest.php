@@ -173,7 +173,7 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 		$subPage = self::EXISTING_WIKI . '/' . self::EXISTING_PAGE;
 
 		/* @var WebResponse $response */
-		list( $_, $response ) = $this->executeSpecialPage( $subPage );
+		list( , $response ) = $this->executeSpecialPage( $subPage );
 
 		$itemUrl = Title::newFromText( $itemId )->getFullURL();
 		$expectedUrl = wfExpandUrl( $itemUrl, PROTO_CURRENT );
