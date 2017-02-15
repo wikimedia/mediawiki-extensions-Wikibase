@@ -75,8 +75,7 @@ final class RepoHooks {
 		global $wgNamespaceContentModels;
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$entityNamespaceLookup = $wikibaseRepo->getEntityNamespaceLookup();
-		$namespaces = $entityNamespaceLookup->getEntityNamespaces();
+		$namespaces = $wikibaseRepo->getEntityNamespaces();
 
 		if ( empty( $namespaces ) ) {
 			throw new MWException( 'Wikibase: Incomplete configuration: '

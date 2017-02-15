@@ -305,6 +305,7 @@ class WikibaseRepo {
 		Hooks::run( 'WikibaseRepoEntityTypes', array( &$entityTypeDefinitions ) );
 
 		$settings = new SettingsArray( $wgWBRepoSettings );
+		$settings->setSetting( 'entityNamespaces', self::getEntityNamespacesSetting() );
 
 		$dataRetrievalServices = null;
 		$clientSettings = null;
@@ -1291,7 +1292,7 @@ class WikibaseRepo {
 	 *  $wgWBRepoSettings['entityNamespaces'] setting.
 	 */
 	public function getLocalEntityTypes() {
-		return array_keys( $this->getEntityNamespacesSetting() );
+		return array_keys( $this->settings->getSetting( 'entityNamespaces' ) );
 	}
 
 	/**
@@ -1605,11 +1606,20 @@ class WikibaseRepo {
 	/**
 	 * @return int[]
 	 */
-	private function getEntityNamespacesSetting() {
-		$namespaces = $this->settings->getSetting( 'entityNamespaces' );
+	public static function getEntityNamespacesSetting() {
+		global $wgWBRepoSettings;
+
+		$namespaces = $wgWBRepoSettings['entityNamespaces'];
 
 		Hooks::run( 'WikibaseEntityNamespaces', array( &$namespaces ) );
 		return $namespaces;
+	}
+
+	/**
+	 * @return int[]
+	 */
+	public function getEntityNamespaces() {
+		return $this->settings->getSetting( 'entityNamespaces' );
 	}
 
 	/**
@@ -1618,7 +1628,7 @@ class WikibaseRepo {
 	public function getEntityNamespaceLookup() {
 		if ( $this->entityNamespaceLookup === null ) {
 			$this->entityNamespaceLookup = new EntityNamespaceLookup(
-				$this->getEntityNamespacesSetting()
+				$this->getEntityNamespaces()
 			);
 		}
 
