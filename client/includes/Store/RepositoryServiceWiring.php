@@ -6,6 +6,7 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
@@ -96,10 +97,13 @@ return [
 	) {
 		/** @var TermIndex $termIndex */
 		$termIndex = $services->getService( 'TermIndex' );
+		/** @var PrefetchingTermLookup $prefetchingTermLookup */
+		$prefetchingTermLookup = $services->getService( 'PrefetchingTermLookup' );
+
 		return new TermIndexSearchInteractorFactory(
 			$termIndex,
 			$client->getLanguageFallbackChainFactory(),
-			$services->getService( 'PrefetchingTermLookup' )
+			$prefetchingTermLookup
 		);
 	},
 
