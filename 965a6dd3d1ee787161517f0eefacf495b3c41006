@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_560ae92a",
+        "filename": "repo/tests/phpunit/data/entitySearch/search_de-ch_strict.expected",
+        "patchSetId": 35
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-02-15T21:55:13Z",
+      "side": 1,
+      "message": "hmm good point. let me see why it\u0027s here...",
+      "parentUuid": "ce3c5b53_36c88525",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_d6ccb93a",
         "filename": "repo/tests/phpunit/data/entitySearch/search_de-ch_strict.expected",
         "patchSetId": 35
