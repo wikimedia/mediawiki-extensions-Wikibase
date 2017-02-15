@@ -13,7 +13,6 @@ use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Implements initial population (priming) for the wb_changes_subscription table,
