@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_55a0a69a",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialSetSiteLinkTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-15T10:34:11Z",
+      "side": 1,
+      "message": "fixed indentation here",
+      "revId": "d5268f542c858eae64e8c4cf427f67118d9e6a72",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
