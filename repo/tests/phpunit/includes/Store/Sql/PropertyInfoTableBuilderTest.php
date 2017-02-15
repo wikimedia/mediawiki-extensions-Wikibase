@@ -82,7 +82,8 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 
 	public function testRebuildPropertyInfo() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer() );
+		$table = new PropertyInfoTable();
+
 		$this->resetPropertyInfoTable( $table );
 		$properties = $this->initProperties();
 
@@ -98,7 +99,6 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 			$table,
 			$entityLookup,
 			$propertyInfoBuilder,
-			$wikibaseRepo->getEntityIdComposer(),
 			$wikibaseRepo->getEntityNamespaceLookup()
 		);
 		$builder->setBatchSize( 3 );
