@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Store\Sql;
 
 use DBAccessBase;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikimedia\Rdbms\IDatabase;
@@ -16,17 +16,6 @@ use Wikimedia\Rdbms\IDatabase;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class SqlSiteLinkConflictLookup extends DBAccessBase implements SiteLinkConflictLookup {
-
-	/**
-	 * @var EntityIdComposer
-	 */
-	private $entityIdComposer;
-
-	public function __construct( EntityIdComposer $entityIdComposer ) {
-		parent::__construct();
-
-		$this->entityIdComposer = $entityIdComposer;
-	}
 
 	/**
 	 * @see SiteLinkConflictLookup::getConflictsForItem
@@ -84,11 +73,7 @@ class SqlSiteLinkConflictLookup extends DBAccessBase implements SiteLinkConflict
 		foreach ( $conflictingLinks as $link ) {
 			$conflicts[] = [
 				'siteId' => $link->ips_site_id,
-				'itemId' => $this->entityIdComposer->composeEntityId(
-					'',
-					Item::ENTITY_TYPE,
-					$link->ips_item_id
-				),
+				'itemId' => ItemId::newFromNumber( $link->ips_item_id ),
 				'sitePage' => $link->ips_site_page,
 			];
 		}

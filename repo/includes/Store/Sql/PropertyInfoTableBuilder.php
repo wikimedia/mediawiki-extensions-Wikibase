@@ -36,11 +36,6 @@ class PropertyInfoTableBuilder {
 	private $propertyInfoBuilder;
 
 	/**
-	 * @var EntityIdComposer
-	 */
-	private $entityIdComposer;
-
-	/**
 	 * @var EntityNamespaceLookup
 	 */
 	private $entityNamespaceLookup;
@@ -73,13 +68,11 @@ class PropertyInfoTableBuilder {
 		PropertyInfoTable $propertyInfoTable,
 		EntityLookup $entityLookup,
 		PropertyInfoBuilder $propertyInfoBuilder,
-		EntityIdComposer $entityIdComposer,
 		EntityNamespaceLookup $entityNamespaceLookup
 	) {
 		$this->propertyInfoTable = $propertyInfoTable;
 		$this->entityLookup = $entityLookup;
 		$this->propertyInfoBuilder = $propertyInfoBuilder;
-		$this->entityIdComposer = $entityIdComposer;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 	}
 
