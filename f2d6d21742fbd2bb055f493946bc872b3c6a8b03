@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_8aaccc33",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialSetSiteLinkTest.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2017-02-15T15:38:21Z",
+      "side": 1,
+      "message": "It seems harder to match OOUI inputs with their labels due to unpredictable ids",
+      "revId": "f2d6d21742fbd2bb055f493946bc872b3c6a8b03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_4aa6c451",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialSetSiteLinkTest.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2017-02-15T15:38:21Z",
+      "side": 1,
+      "message": "Also here",
+      "revId": "f2d6d21742fbd2bb055f493946bc872b3c6a8b03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
