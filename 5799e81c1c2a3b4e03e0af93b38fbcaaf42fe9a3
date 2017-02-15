@@ -1,0 +1,214 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_75d7eac4",
+        "filename": "client/includes/Hooks/ParserFunctionRegistrant.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-15T10:50:26Z",
+      "side": 0,
+      "message": "confirmed",
+      "revId": "5799e81c1c2a3b4e03e0af93b38fbcaaf42fe9a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_95d4eebf",
+        "filename": "client/includes/Store/Sql/DirectSqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-15T10:50:26Z",
+      "side": 0,
+      "message": "+1",
+      "revId": "5799e81c1c2a3b4e03e0af93b38fbcaaf42fe9a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_55de66df",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-15T10:50:26Z",
+      "side": 0,
+      "message": "+1",
+      "revId": "5799e81c1c2a3b4e03e0af93b38fbcaaf42fe9a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_f5e9ba7f",
+        "filename": "lib/tests/phpunit/Interactors/TermIndexSearchInteractorFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-15T10:50:26Z",
+      "side": 0,
+      "message": "+1",
+      "revId": "5799e81c1c2a3b4e03e0af93b38fbcaaf42fe9a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_15ef7e83",
+        "filename": "repo/includes/Api/CreateRedirect.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-15T10:50:26Z",
+      "side": 0,
+      "message": "+1",
+      "revId": "5799e81c1c2a3b4e03e0af93b38fbcaaf42fe9a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_b5e3329c",
+        "filename": "repo/includes/Api/GetClaims.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-15T10:50:26Z",
+      "side": 0,
+      "message": "+1",
+      "revId": "5799e81c1c2a3b4e03e0af93b38fbcaaf42fe9a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_d5e8367a",
+        "filename": "repo/includes/Api/MergeItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-15T10:50:26Z",
+      "side": 0,
+      "message": "+1",
+      "revId": "5799e81c1c2a3b4e03e0af93b38fbcaaf42fe9a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_95fb8e44",
+        "filename": "repo/includes/Api/ParseValue.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-15T10:50:26Z",
+      "side": 0,
+      "message": "+1",
+      "range": {
+        "startLine": 25,
+        "startChar": 30,
+        "endLine": 25,
+        "endChar": 31
+      },
+      "revId": "5799e81c1c2a3b4e03e0af93b38fbcaaf42fe9a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_35f88246",
+        "filename": "repo/includes/Api/SearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-15T10:50:26Z",
+      "side": 0,
+      "message": "+1",
+      "revId": "5799e81c1c2a3b4e03e0af93b38fbcaaf42fe9a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_55f5064b",
+        "filename": "repo/includes/Api/SetQualifier.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-15T10:50:26Z",
+      "side": 0,
+      "message": "+1",
+      "revId": "5799e81c1c2a3b4e03e0af93b38fbcaaf42fe9a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_f590daf9",
+        "filename": "repo/includes/Store/Sql/ChangesSubscriptionTableBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-15T10:50:26Z",
+      "side": 0,
+      "message": "+1",
+      "revId": "5799e81c1c2a3b4e03e0af93b38fbcaaf42fe9a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_15969ef3",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityStoreTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-15T10:50:26Z",
+      "side": 0,
+      "message": "+1",
+      "revId": "5799e81c1c2a3b4e03e0af93b38fbcaaf42fe9a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
