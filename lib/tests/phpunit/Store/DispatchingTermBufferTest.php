@@ -55,7 +55,8 @@ class DispatchingTermBufferTest extends PHPUnit_Framework_TestCase {
 		$fooTermBuffer = $this->getMock( TermBuffer::class );
 		$fooTermBuffer->expects( $this->exactly( $callsPerRepo['foo'] ) )
 			->method( 'prefetchTerms' )
-			->with( $this->callback( function ( $ids ) {
+			->with( $this->callback( function ( array $ids ) {
+				/** @var EntityId[] $ids */
 				foreach ( $ids as $id ) {
 					if ( $id->getRepositoryName() !== 'foo' ) {
 						return false;
@@ -67,7 +68,8 @@ class DispatchingTermBufferTest extends PHPUnit_Framework_TestCase {
 		$localTermBuffer = $this->getMock( TermBuffer::class );
 		$localTermBuffer->expects( $this->exactly( $callsPerRepo[''] ) )
 			->method( 'prefetchTerms' )
-			->with( $this->callback( function ( $ids ) {
+			->with( $this->callback( function ( array $ids ) {
+				/** @var EntityId[] $ids */
 				foreach ( $ids as $id ) {
 					if ( $id->getRepositoryName() !== '' ) {
 						return false;
