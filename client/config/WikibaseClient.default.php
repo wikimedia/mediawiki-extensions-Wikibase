@@ -271,7 +271,7 @@ return call_user_func( function() {
 			// if Repo does depend on Client (leads to an infinite loop in Repo's constructor).
 			// This is a temporary workaround that should be rather replaced with something better
 			// than accessing a static function.
-			return \Wikibase\Repo\WikibaseRepo::getEntityNamespacesSetting();
+			return \Wikibase\Repo\WikibaseRepo::fetchEntityNamespaceConfigurations();
 		} else {
 			// XXX: Default to having Items in the main namespace, and properties in NS 120.
 			// That is the live setup at wikidata.org, it is NOT consistent with the example settings!
