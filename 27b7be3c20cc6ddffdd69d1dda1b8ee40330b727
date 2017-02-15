@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_a75f8943",
+        "filename": "client/tests/phpunit/includes/RecentChanges/ChangeLineFormatterTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-15T13:36:35Z",
+      "side": 1,
+      "message": "is this the same as tagMatchingOutline( \u0027\u003cspan class\u003d\"comment\"/\u003e\u0027 ) ?",
+      "revId": "27b7be3c20cc6ddffdd69d1dda1b8ee40330b727",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
