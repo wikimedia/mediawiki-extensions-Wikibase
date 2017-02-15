@@ -3,10 +3,9 @@
 namespace Wikibase\View\Tests;
 
 use PHPUnit_Framework_TestCase;
-use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\TermsListView;
@@ -62,31 +61,28 @@ class TermsListViewTest extends PHPUnit_Framework_TestCase {
 		);
 	}
 
-	private function getFingerprint( $languageCode = 'en' ) {
-		$fingerprint = new Fingerprint();
-		$fingerprint->setLabel( $languageCode, '<LABEL>' );
-		$fingerprint->setDescription( $languageCode, '<DESCRIPTION>' );
-		$fingerprint->setAliasGroup( $languageCode, array( '<ALIAS1>', '<ALIAS2>' ) );
-		return $fingerprint;
+	private function getTermList( $term, $languageCode = 'en' ) {
+		return new TermList( [ new Term( $languageCode, $term ) ] );
 	}
 
 	public function getTermsListViewProvider() {
-		$item = new Item(
-			new ItemId( 'Q1' ),
-			$this->getFingerprint( 'arc' )
-		);
+		$languageCode = 'arc';
+		$labels = $this->getTermList( '<LABEL>', $languageCode );
+		$descriptions = $this->getTermList( '<DESCRIPTION>', $languageCode );
+		$aliasGroups = new AliasGroupList();
+		$aliasGroups->setAliasesForLanguage( $languageCode, [ '<ALIAS1>', '<ALIAS2>' ] );
+
 		return [
 			[
-				$item, 'arc', true, true, true
+				$labels, $descriptions, $aliasGroups, $languageCode, true, true, true
 			],
 			[
-				new Item(), 'lkt', false, false, false
+				new TermList(), new TermList(), new AliasGroupList(), 'lkt', false, false, false
 			],
 			[
-				new Item(
-					new ItemId( 'Q1' ),
-					new Fingerprint()
-				),
+				new TermList(),
+				new TermList(),
+				new AliasGroupList(),
 				'en',
 				false,
 				false,
@@ -99,7 +95,9 @@ class TermsListViewTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider getTermsListViewProvider
 	 */
 	public function testGetTermsListView(
-		EntityDocument $entity,
+		TermList $labels,
+		TermList $descriptions,
+		AliasGroupList $aliasGroups,
 		$languageCode,
 		$hasLabel,
 		$hasDescription,
@@ -107,7 +105,7 @@ class TermsListViewTest extends PHPUnit_Framework_TestCase {
 	) {
 		$languageDirectionality = $languageCode === 'arc' ? 'rtl' : 'ltr';
 		$view = $this->getTermsListView( 1 );
-		$html = $view->getHtml( $entity, $entity, $entity, [ $languageCode ] );
+		$html = $view->getHtml( $labels, $descriptions, $aliasGroups, [ $languageCode ] );
 
 		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-language)', $html );
 		$this->assertContains( 'wikibase-entitytermsforlanguageview-' . $languageCode, $html );
@@ -165,24 +163,18 @@ class TermsListViewTest extends PHPUnit_Framework_TestCase {
 				return $key === 'wikibase-entitytermsforlanguagelistview-language' ? '"RAW"' : "($key)";
 			} ) );
 
-		$item = new Item(
-			new ItemId( 'Q1' ),
-			new Fingerprint()
-		);
 		$view = $this->getTermsListView( 0, $textProvider );
-		$html = $view->getHtml( $item, $item, $item, [] );
+		$html = $view->getHtml( new TermList(), new TermList(), new AliasGroupList(), [] );
 
 		$this->assertContains( '&quot;RAW&quot;', $html );
 		$this->assertNotContains( '"RAW"', $html );
 	}
 
 	public function testGetTermsListView_noAliasesProvider() {
-		$item = new Item(
-			new ItemId( 'Q1' ),
-			$this->getFingerprint()
-		);
+		$labels = $this->getTermList( '<LABEL>' );
+		$descriptions = $this->getTermList( '<DESCRIPTION>' );
 		$view = $this->getTermsListView( 1 );
-		$html = $view->getHtml( $item, $item, null, array( 'en' ) );
+		$html = $view->getHtml( $labels, $descriptions, null, array( 'en' ) );
 
 		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-language)', $html );
 		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-label)', $html );

@@ -127,9 +127,9 @@ abstract class EntityView {
 		if ( $entity instanceof LabelsProvider && $entity instanceof DescriptionsProvider ) {
 			return $this->entityTermsView->getHtml(
 				$this->languageCode,
-				$entity,
-				$entity,
-				$entity instanceof AliasesProvider ? $entity : null,
+				$entity->getLabels(),
+				$entity->getDescriptions(),
+				$entity instanceof AliasesProvider ? $entity->getAliasGroups() : null,
 				$id
 			);
 		}

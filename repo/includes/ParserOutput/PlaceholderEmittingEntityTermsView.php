@@ -4,9 +4,8 @@ namespace Wikibase\Repo\ParserOutput;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\DataModel\Term\AliasesProvider;
-use Wikibase\DataModel\Term\DescriptionsProvider;
-use Wikibase\DataModel\Term\LabelsProvider;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\HtmlTermRenderer;
 use Wikibase\View\LocalizedTextProvider;
@@ -71,26 +70,27 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView {
 	/**
 	 * @param string $mainLanguageCode Desired language of the label, description and aliases in the
 	 *  title and header section. Not necessarily identical to the interface language.
-	 * @param LabelsProvider $labelsProvider
-	 * @param DescriptionsProvider $descriptionsProvider
-	 * @param AliasesProvider|null $aliasesProvider
+	 * @param TermList $labels
+	 * @param TermList $descriptions
+	 * @param AliasGroupList|null $aliasGroups
 	 * @param EntityId|null $entityId the id of the entity
 	 *
 	 * @return string HTML
 	 */
 	public function getHtml(
 		$mainLanguageCode,
-		LabelsProvider $labelsProvider,
-		DescriptionsProvider $descriptionsProvider,
-		AliasesProvider $aliasesProvider = null,
+		TermList $labels,
+		TermList $descriptions,
+		AliasGroupList $aliasGroups = null,
 		EntityId $entityId = null
 	) {
 		$cssClasses = $this->textInjector->newMarker(
 			'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class'
 		);
 
-		return $this->templateFactory->render( 'wikibase-entitytermsview',
-			$this->getHeadingHtml( $mainLanguageCode, $entityId, $aliasesProvider ),
+		return $this->templateFactory->render(
+			'wikibase-entitytermsview',
+			$this->getHeadingHtml( $mainLanguageCode, $entityId, $aliasGroups ),
 			$this->textInjector->newMarker( 'termbox' ),
 			$cssClasses,
 			$this->getHtmlForLabelDescriptionAliasesEditSection( $mainLanguageCode, $entityId )
@@ -100,31 +100,32 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView {
 	/**
 	 * @param string $mainLanguageCode Desired language of the label, description and aliases in the
 	 *  title and header section. Not necessarily identical to the interface language.
-	 * @param LabelsProvider $labelsProvider
-	 * @param DescriptionsProvider $descriptionsProvider
-	 * @param AliasesProvider|null $aliasesProvider
+	 * @param TermList $labels
+	 * @param TermList $descriptions
+	 * @param AliasGroupList|null $aliasGroups
 	 *
 	 * @return string[] HTML snippets
 	 */
 	public function getTermsListItems(
 		$mainLanguageCode,
-		LabelsProvider $labelsProvider,
-		DescriptionsProvider $descriptionsProvider,
-		AliasesProvider $aliasesProvider = null
+		TermList $labels,
+		TermList $descriptions,
+		AliasGroupList $aliasGroups = null
 	) {
 		$termsListItems = [];
 
 		$termsListLanguages = $this->getTermsLanguageCodes(
 			$mainLanguageCode,
-			$labelsProvider,
-			$descriptionsProvider,
-			$aliasesProvider
+			$labels,
+			$descriptions,
+			$aliasGroups ?: new AliasGroupList()
 		);
+
 		foreach ( $termsListLanguages as $languageCode ) {
 			$termsListItems[ $languageCode ] = $this->termsListView->getListItemHtml(
-				$labelsProvider,
-				$descriptionsProvider,
-				$aliasesProvider,
+				$labels,
+				$descriptions,
+				$aliasGroups,
 				$languageCode
 			);
 		}

@@ -6,10 +6,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\DataModel\Term\AliasesProvider;
-use Wikibase\DataModel\Term\DescriptionsProvider;
-use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -76,31 +74,32 @@ class SimpleEntityTermsView implements EntityTermsView {
 	/**
 	 * @param string $mainLanguageCode Desired language of the label, description and aliases in the
 	 *  title and header section. Not necessarily identical to the interface language.
-	 * @param LabelsProvider $labelsProvider
-	 * @param DescriptionsProvider $descriptionsProvider
-	 * @param AliasesProvider|null $aliasesProvider
+	 * @param TermList $labels
+	 * @param TermList $descriptions
+	 * @param AliasGroupList|null $aliasGroups
 	 * @param EntityId|null $entityId the id of the entity
 	 *
 	 * @return string HTML
 	 */
 	public function getHtml(
 		$mainLanguageCode,
-		LabelsProvider $labelsProvider,
-		DescriptionsProvider $descriptionsProvider,
-		AliasesProvider $aliasesProvider = null,
+		TermList $labels,
+		TermList $descriptions,
+		AliasGroupList $aliasGroups = null,
 		EntityId $entityId = null
 	) {
-		return $this->templateFactory->render( 'wikibase-entitytermsview',
-			$this->getHeadingHtml( $mainLanguageCode, $entityId, $aliasesProvider ),
+		return $this->templateFactory->render(
+			'wikibase-entitytermsview',
+			$this->getHeadingHtml( $mainLanguageCode, $entityId, $aliasGroups ),
 			$this->termsListView->getHtml(
-				$labelsProvider,
-				$descriptionsProvider,
-				$aliasesProvider,
+				$labels,
+				$descriptions,
+				$aliasGroups,
 				$this->getTermsLanguageCodes(
 					$mainLanguageCode,
-					$labelsProvider,
-					$descriptionsProvider,
-					$aliasesProvider
+					$labels,
+					$descriptions,
+					$aliasGroups ?: new AliasGroupList()
 				)
 			),
 			'',
@@ -111,7 +110,7 @@ class SimpleEntityTermsView implements EntityTermsView {
 	protected function getHeadingHtml(
 		$languageCode,
 		EntityId $entityId = null,
-		AliasesProvider $aliasesProvider = null
+		AliasGroupList $aliasGroups = null
 	) {
 		$headingPartsHtml = '';
 
@@ -131,8 +130,7 @@ class SimpleEntityTermsView implements EntityTermsView {
 			$this->getDescriptionHtml( $description )
 		);
 
-		if ( $aliasesProvider !== null ) {
-			$aliasGroups = $aliasesProvider->getAliasGroups();
+		if ( $aliasGroups ) {
 			$headingPartsHtml .= $this->templateFactory->render(
 				'wikibase-entitytermsview-heading-part',
 				'aliases',
@@ -141,7 +139,8 @@ class SimpleEntityTermsView implements EntityTermsView {
 			);
 		}
 
-		return $this->templateFactory->render( 'wikibase-entitytermsview-heading',
+		return $this->templateFactory->render(
+			'wikibase-entitytermsview-heading',
 			$headingPartsHtml
 		);
 	}
@@ -149,30 +148,28 @@ class SimpleEntityTermsView implements EntityTermsView {
 	/**
 	 * @param string $mainLanguageCode Desired language of the label, description and aliases in the
 	 *  title and header section. Not necessarily identical to the interface language.
-	 * @param LabelsProvider $labelsProvider
-	 * @param DescriptionsProvider $descriptionsProvider
-	 * @param AliasesProvider|null $aliasesProvider
+	 * @param TermList $labels
+	 * @param TermList $descriptions
+	 * @param AliasGroupList $aliasGroups
 	 *
 	 * @return string[]
 	 */
 	protected function getTermsLanguageCodes(
 		$mainLanguageCode,
-		LabelsProvider $labelsProvider,
-		DescriptionsProvider $descriptionsProvider,
-		AliasesProvider $aliasesProvider = null
+		TermList $labels,
+		TermList $descriptions,
+		AliasGroupList $aliasGroups
 	) {
 		$allLanguages = [ $mainLanguageCode ];
 
-		$labelLanguages = array_keys( $labelsProvider->getLabels()->toTextArray() );
+		$labelLanguages = array_keys( $labels->toTextArray() );
 		$allLanguages = array_merge( $allLanguages, $labelLanguages );
 
-		$descriptionLanguages = array_keys( $descriptionsProvider->getDescriptions()->toTextArray() );
+		$descriptionLanguages = array_keys( $descriptions->toTextArray() );
 		$allLanguages = array_merge( $allLanguages, $descriptionLanguages );
 
-		if ( $aliasesProvider ) {
-			$aliasLanguages = array_keys( $aliasesProvider->getAliasGroups()->toTextArray() );
-			$allLanguages = array_merge( $allLanguages, $aliasLanguages );
-		}
+		$aliasLanguages = array_keys( $aliasGroups->toTextArray() );
+		$allLanguages = array_merge( $allLanguages, $aliasLanguages );
 
 		$allLanguages = array_unique( $allLanguages );
 		return $allLanguages;
@@ -203,7 +200,8 @@ class SimpleEntityTermsView implements EntityTermsView {
 			}
 		}
 
-		return $this->templateFactory->render( 'wikibase-title',
+		return $this->templateFactory->render(
+			'wikibase-title',
 			$isEmpty ? 'wb-empty' : '',
 			$isEmpty ? htmlspecialchars( $this->textProvider->get( 'wikibase-label-empty' ) ) : $labelHtml,
 			$idInParenthesesHtml
@@ -241,8 +239,8 @@ class SimpleEntityTermsView implements EntityTermsView {
 				htmlspecialchars( $alias )
 			);
 		}
-		$aliasesHtml = $this->templateFactory->render( 'wikibase-entitytermsview-aliases', $aliasesHtml );
-		return $aliasesHtml;
+
+		return $this->templateFactory->render( 'wikibase-entitytermsview-aliases', $aliasesHtml );
 	}
 
 	/**

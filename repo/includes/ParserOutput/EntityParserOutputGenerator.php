@@ -12,6 +12,7 @@ use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityInfo;
@@ -352,9 +353,9 @@ class EntityParserOutputGenerator {
 			'wikibase-terms-list-items',
 			$entityTermsView->getTermsListItems(
 				$this->languageCode,
-				$entity,
-				$entity,
-				$entity instanceof AliasesProvider ? $entity : null
+				$entity instanceof LabelsProvider ? $entity->getLabels() : new TermList(),
+				$entity instanceof DescriptionsProvider ? $entity->getDescriptions() : new TermList(),
+				$entity instanceof AliasesProvider ? $entity->getAliasGroups() : null
 			)
 		);
 	}

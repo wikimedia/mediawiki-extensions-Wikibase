@@ -6,8 +6,10 @@ use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\DummyLocalizedTextProvider;
 use Wikibase\View\HtmlTermRenderer;
@@ -77,50 +79,57 @@ class SimpleEntityTermsViewTest extends PHPUnit_Framework_TestCase {
 		);
 	}
 
-	private function getFingerprint( $languageCode = 'en' ) {
-		$fingerprint = new Fingerprint();
-		$fingerprint->setLabel( $languageCode, '<LABEL>' );
-		$fingerprint->setDescription( $languageCode, '<DESCRIPTION>' );
-		$fingerprint->setAliasGroup( $languageCode, [ '<ALIAS1>', '<ALIAS2>' ] );
-		return $fingerprint;
+	private function getTermList( $term, $languageCode = 'en' ) {
+		return new TermList( [ new Term( $languageCode, $term ) ] );
+	}
+
+	private function getAliasGroupList( array $aliases, $languageCode = 'en' ) {
+		return new AliasGroupList( [ new AliasGroup( $languageCode, $aliases ) ] );
 	}
 
 	public function testGetHtml_containsAliases() {
 		$entityTermsView = $this->getEntityTermsView( 1 );
-		$fingerprint = $this->getFingerprint();
-		$html = $entityTermsView->getHtml( 'en', $fingerprint, $fingerprint, $fingerprint, null );
+		$aliasGroups = $this->getAliasGroupList( [ '<ALIAS1>', '<ALIAS2>' ] );
+		$html = $entityTermsView->getHtml( 'en', new TermList(), new TermList(), $aliasGroups, null );
 
 		$this->assertContains( '&lt;ALIAS1&gt;', $html );
 		$this->assertContains( '&lt;ALIAS2&gt;', $html );
 	}
 
 	public function entityFingerprintProvider() {
-		$fingerprint = $this->getFingerprint();
+		$labels = $this->getTermList( '<LABEL>' );
+		$descriptions = $this->getTermList( '<DESCRIPTION>' );
+		$emptyAliases = new AliasGroupList();
 
 		return array(
-			'empty' => array( new Fingerprint(), new ItemId( 'Q42' ), 'en' ),
-			'other language' => array( $fingerprint, new ItemId( 'Q42' ), 'de' ),
-			'other id' => array( $fingerprint, new ItemId( 'Q12' ), 'en' ),
+			'empty' => array( new TermList(), new TermList(), $emptyAliases, new ItemId( 'Q42' ), 'en' ),
+			'other language' => array( $labels, $descriptions, $emptyAliases, new ItemId( 'Q42' ), 'de' ),
+			'other id' => array( $labels, $descriptions, $emptyAliases, new ItemId( 'Q12' ), 'en' ),
 		);
 	}
 
 	/**
 	 * @dataProvider entityFingerprintProvider
 	 */
-	public function testGetHtml_isEditable( Fingerprint $fingerprint, ItemId $entityId, $languageCode ) {
+	public function testGetHtml_isEditable(
+		TermList $labels,
+		TermList $descriptions,
+		AliasGroupList $aliasGroups,
+		ItemId $entityId,
+		$languageCode
+	) {
 		$entityTermsView = $this->getEntityTermsView( 1 );
-		$html = $entityTermsView->getHtml( $languageCode, $fingerprint, $fingerprint, $fingerprint, $entityId );
+		$html = $entityTermsView->getHtml( $languageCode, $labels, $descriptions, $aliasGroups, $entityId );
 
 		$this->assertContains( '<EDITSECTION>', $html );
 	}
 
 	public function testGetHtml_valuesAreEscaped() {
-		$fingerprint = new Fingerprint();
-		$fingerprint->setDescription( 'en', '<script>alert( "xss" );</script>' );
-		$fingerprint->setAliasGroup( 'en', array( '<a href="#">evil html</a>', '<b>bold</b>', '<i>italic</i>' ) );
+		$descriptions = $this->getTermList( '<script>alert( "xss" );</script>' );
+		$aliasGroups = $this->getAliasGroupList( [ '<a href="#">evil html</a>', '<b>bold</b>', '<i>italic</i>' ] );
 
 		$view = $this->getEntityTermsView( 1 );
-		$html = $view->getHtml( 'en', $fingerprint, $fingerprint, $fingerprint, null );
+		$html = $view->getHtml( 'en', new TermList(), $descriptions, $aliasGroups, null );
 
 		$this->assertContains( 'evil html', $html, 'make sure it works' );
 		$this->assertNotContains( 'href="#"', $html );
@@ -132,8 +141,7 @@ class SimpleEntityTermsViewTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetHtml_isMarkedAsEmptyValue() {
 		$entityTermsView = $this->getEntityTermsView( 1 );
-		$fingerprint = new Fingerprint();
-		$html = $entityTermsView->getHtml( 'en', $fingerprint, $fingerprint, $fingerprint, null );
+		$html = $entityTermsView->getHtml( 'en', new TermList(), new TermList(), new AliasGroupList(), null );
 
 		$this->assertContains( 'wb-empty', $html );
 		$this->assertContains( '(wikibase-description-empty)', $html );
@@ -142,8 +150,9 @@ class SimpleEntityTermsViewTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetHtml_isNotMarkedAsEmpty() {
 		$entityTermsView = $this->getEntityTermsView( 1 );
-		$fingerprint = $this->getFingerprint();
-		$html = $entityTermsView->getHtml( 'en', $fingerprint, $fingerprint, $fingerprint, new ItemId( 'Q111' ) );
+		$terms = $this->getTermList( 'not empty' );
+		$aliasGroups = $this->getAliasGroupList( [ 'not empty' ] );
+		$html = $entityTermsView->getHtml( 'en', $terms, $terms, $aliasGroups, new ItemId( 'Q111' ) );
 
 		$this->assertNotContains( 'wb-empty', $html );
 		$this->assertNotContains( '(wikibase-description-empty)', $html );
@@ -151,10 +160,11 @@ class SimpleEntityTermsViewTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetHtml_containsEmptyDescriptionPlaceholder() {
-		$fingerprint = $this->getFingerprint();
-
 		$view = $this->getEntityTermsView( 1 );
-		$html = $view->getHtml( 'en', $fingerprint, $fingerprint, $fingerprint, null );
+		$labels = $this->getTermList( 'not empty' );
+		$descriptions = new TermList();
+		$aliasGroups = $this->getAliasGroupList( [ 'not empty' ] );
+		$html = $view->getHtml( 'en', $labels, $descriptions, $aliasGroups, null );
 
 		$this->assertContains( 'wb-empty', $html );
 		$this->assertContains( '(wikibase-description-empty)', $html );
@@ -162,11 +172,8 @@ class SimpleEntityTermsViewTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetHtml_containsEmptyAliasesList() {
-		$fingerprint = $this->getFingerprint();
-		$fingerprint->removeAliasGroup( 'en' );
-
 		$view = $this->getEntityTermsView( 1 );
-		$html = $view->getHtml( 'en', $fingerprint, $fingerprint, $fingerprint );
+		$html = $view->getHtml( 'en', new TermList(), new TermList(), new AliasGroupList() );
 
 		$this->assertContains( 'wb-empty', $html );
 		$this->assertContains( '<div class="wikibase-entitytermsview-heading-aliases wb-empty"></div>', $html );
@@ -175,21 +182,27 @@ class SimpleEntityTermsViewTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider entityFingerprintProvider
 	 */
-	public function testGetHtml_containsAllTerms( Fingerprint $fingerprint, ItemId $entityId, $languageCode ) {
+	public function testGetHtml_containsAllTerms(
+		TermList $labels,
+		TermList $descriptions,
+		AliasGroupList $aliases,
+		ItemId $entityId,
+		$languageCode
+	) {
 		$termsListView = $this->getMockBuilder( TermsListView::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$termsListView->expects( $this->once() )
 			->method( 'getHtml' )
 			->with(
-				$fingerprint,
-				$fingerprint,
-				$fingerprint,
+				$labels,
+				$descriptions,
+				$aliases,
 				$this->equalTo( $languageCode === 'de' ? [ 'de', 'en' ] : [ 'en' ] )
 			)
 			->will( $this->returnValue( '<TERMSLISTVIEW>' ) );
 		$entityTermsView = $this->getEntityTermsView( 1, $termsListView );
-		$html = $entityTermsView->getHtml( $languageCode, $fingerprint, $fingerprint, $fingerprint, $entityId );
+		$html = $entityTermsView->getHtml( $languageCode, $labels, $descriptions, $aliases, $entityId );
 
 		$this->assertContains( '<TERMSLISTVIEW>', $html );
 	}
