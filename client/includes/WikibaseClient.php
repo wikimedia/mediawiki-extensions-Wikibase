@@ -1300,9 +1300,9 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return int[]
+	 * @return int[] An array mapping entity type identifiers to namespace numbers.
 	 */
-	private function getEntityNamespacesSetting() {
+	private function buildEntityNamespaceConfigurations() {
 		$namespaces = $this->fixLegacyContentModelSetting(
 			$this->settings->getSetting( 'entityNamespaces' ),
 			'entityNamespaces'
@@ -1318,7 +1318,7 @@ final class WikibaseClient {
 	public function getEntityNamespaceLookup() {
 		if ( $this->entityNamespaceLookup === null ) {
 			$this->entityNamespaceLookup = new EntityNamespaceLookup(
-				$this->getEntityNamespacesSetting()
+				$this->buildEntityNamespaceConfigurations()
 			);
 		}
 
