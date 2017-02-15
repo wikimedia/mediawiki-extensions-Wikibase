@@ -80,18 +80,9 @@ final class RepoHooks {
 		global $wgNamespaceContentModels;
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$namespaces = $wikibaseRepo->getEntityNamespaces();
-
-		if ( empty( $namespaces ) ) {
-			throw new MWException( 'Wikibase: Incomplete configuration: '
-				. '$wgWBRepoSettings[\'entityNamespaces\'] has to be set to an '
-				. 'array mapping entity types to namespace IDs. '
-				. 'See Wikibase.example.php for details and examples.' );
-		}
-
 		$contentModelIds = $wikibaseRepo->getContentModelMappings();
 
-		foreach ( $namespaces as $entityType => $namespace ) {
+		foreach ( $wikibaseRepo->getEntityNamespaces() as $entityType => $namespace ) {
 			if ( !isset( $wgNamespaceContentModels[$namespace] ) ) {
 				$wgNamespaceContentModels[$namespace] = $contentModelIds[$entityType];
 			}

@@ -305,7 +305,7 @@ class WikibaseRepo {
 		Hooks::run( 'WikibaseRepoEntityTypes', array( &$entityTypeDefinitions ) );
 
 		$settings = new SettingsArray( $wgWBRepoSettings );
-		$settings->setSetting( 'entityNamespaces', self::getEntityNamespacesSetting() );
+		$settings->setSetting( 'entityNamespaces', self::fetchEntityNamespaceConfigurations() );
 
 		$dataRetrievalServices = null;
 		$clientSettings = null;
@@ -1292,7 +1292,7 @@ class WikibaseRepo {
 	 *  $wgWBRepoSettings['entityNamespaces'] setting.
 	 */
 	public function getLocalEntityTypes() {
-		return array_keys( $this->settings->getSetting( 'entityNamespaces' ) );
+		return array_keys( $this->getEntityNamespaces() );
 	}
 
 	/**
@@ -1604,19 +1604,26 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return int[]
+	 * @throws MWException in case of a misconfiguration
+	 * @return int[] An array mapping entity type identifiers to namespace numbers.
 	 */
-	public static function getEntityNamespacesSetting() {
+	public static function fetchEntityNamespaceConfigurations() {
 		global $wgWBRepoSettings;
 
-		$namespaces = $wgWBRepoSettings['entityNamespaces'];
+		if ( !is_array( $wgWBRepoSettings['entityNamespaces'] ) ) {
+			throw new MWException( 'Wikibase: Incomplete configuration: '
+				. '$wgWBRepoSettings[\'entityNamespaces\'] has to be set to an '
+				. 'array mapping entity types to namespace IDs. '
+				. 'See Wikibase.example.php for details and examples.' );
+		}
 
+		$namespaces = $wgWBRepoSettings['entityNamespaces'];
 		Hooks::run( 'WikibaseEntityNamespaces', array( &$namespaces ) );
 		return $namespaces;
 	}
 
 	/**
-	 * @return int[]
+	 * @return int[] An array mapping entity type identifiers to namespace numbers.
 	 */
 	public function getEntityNamespaces() {
 		return $this->settings->getSetting( 'entityNamespaces' );
