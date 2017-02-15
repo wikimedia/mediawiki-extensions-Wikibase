@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_676501aa",
+        "filename": "repo/includes/Specials/HTMLForm/HTMLItemReferenceField.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-15T11:55:15Z",
+      "side": 1,
+      "message": "It is not imported. Full name is preferred.",
+      "range": {
+        "startLine": 45,
+        "startChar": 9,
+        "endLine": 45,
+        "endChar": 22
+      },
+      "revId": "74d97746fcbeb37ba7dea3117f6704b04ef8cd6d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
