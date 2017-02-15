@@ -2,12 +2,9 @@
 
 namespace Wikibase\Client\Tests;
 
-use DataValues\Deserializers\DataValueDeserializer;
 use Wikibase\Client\DispatchingServiceFactory;
 use Wikibase\Client\Store\RepositoryServiceContainer;
 use Wikibase\Client\Store\RepositoryServiceContainerFactory;
-use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -112,22 +109,6 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( EntityRevisionLookup::class, $serviceOne );
 		$this->assertInstanceOf( EntityRevisionLookup::class, $serviceTwo );
 		$this->assertSame( $serviceOne, $serviceTwo );
-	}
-
-	/**
-	 * @param string|false $dbName
-	 * @param string $repositoryName
-	 *
-	 * @return RepositoryServiceContainer
-	 */
-	private function getRepositoryServiceContainer( $dbName, $repositoryName ) {
-		return new RepositoryServiceContainer(
-			$dbName,
-			$repositoryName,
-			new BasicEntityIdParser(),
-			new DataValueDeserializer( [] ),
-			WikibaseClient::getDefaultInstance()
-		);
 	}
 
 	/**
