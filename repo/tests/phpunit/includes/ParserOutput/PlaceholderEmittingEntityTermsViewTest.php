@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use PHPUnit_Framework_TestCase;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
 use Wikibase\Repo\ParserOutput\TextInjector;
 use Wikibase\View\EditSectionGenerator;
@@ -41,11 +41,10 @@ class PlaceholderEmittingEntityTermsViewTest extends PHPUnit_Framework_TestCase 
 
 	public function testGetHtml() {
 		$textInjector = new TextInjector();
-		$property = new Property( null, null, 'string' );
 
 		$entityTermsView = $this->newEntityTermsView( $textInjector );
 
-		$html = $entityTermsView->getHtml( 'lkt', $property, $property );
+		$html = $entityTermsView->getHtml( 'lkt', new TermList(), new TermList() );
 		$markers = $textInjector->getMarkers();
 
 		foreach ( $markers as $marker => $name ) {
@@ -63,11 +62,10 @@ class PlaceholderEmittingEntityTermsViewTest extends PHPUnit_Framework_TestCase 
 
 	public function testGetTermsListItems() {
 		$textInjector = new TextInjector();
-		$property = new Property( null, null, 'string' );
 
 		$entityTermsView = $this->newEntityTermsView( $textInjector );
 
-		$termsListItems = $entityTermsView->getTermsListItems( 'lkt', $property, $property );
+		$termsListItems = $entityTermsView->getTermsListItems( 'lkt', new TermList(), new TermList() );
 
 		$this->assertSame( [ 'lkt' => null ], $termsListItems );
 	}
