@@ -22,7 +22,6 @@ use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\Validators\CompositeValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\ValueParserFactory;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for using value parsers.

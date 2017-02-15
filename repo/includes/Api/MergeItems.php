@@ -16,7 +16,6 @@ use Wikibase\EntityRevision;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationException;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @license GPL-2.0+

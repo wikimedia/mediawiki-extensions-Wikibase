@@ -5,7 +5,6 @@ namespace Wikibase\Client\Hooks;
 use Parser;
 use PPFrame;
 use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
-use Wikibase\Client\WikibaseClient;
 
 /**
  * @license GPL-2.0+

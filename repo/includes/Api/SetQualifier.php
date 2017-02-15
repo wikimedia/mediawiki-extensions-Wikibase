@@ -9,7 +9,6 @@ use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for creating a qualifier or setting the value of an existing one.
