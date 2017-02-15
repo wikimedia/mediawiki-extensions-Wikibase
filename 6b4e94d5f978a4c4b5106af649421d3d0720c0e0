@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_a778e9c0",
+        "filename": "client/includes/Changes/ChangeListTransformer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-15T13:23:22Z",
+      "side": 1,
+      "message": "It seems strange. \nAccording to docs this interface supposed to handle any change, but now only `EntityChange`.\n\nI think it needs discussion.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 26
+      },
+      "revId": "6b4e94d5f978a4c4b5106af649421d3d0720c0e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
