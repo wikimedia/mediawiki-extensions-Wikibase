@@ -46,6 +46,7 @@
 	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|запис|записа}}",
 	"wikibase-sitelinks-empty": "За този обект все още липсват междуезикови препратки.",
 	"wikibase-sitelinks-special": "Други сайтове",
+	"wikibase-badgeselector-badge-placeholder-title": "Щракнете за да установите значка.",
 	"wikibase-remove": "премахване",
 	"wikibase-restore-title": "Възстановяване на стара версия на \"$1\"",
 	"wikibase-propertypage-datatype": "Тип на данните",
@@ -75,6 +76,7 @@
 	"wikibase-newentity-description": "Описание:",
 	"wikibase-setdescription-label": "Описание:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Описание:",
+	"wikibase-setsitelink-not-badge": "Елемент $1 не е значка.",
 	"wikibase-modifyterm-language": "Езиков код:",
 	"wikibase-dispatchstats-oldest-change": "Най-старите",
 	"wikibase-dispatchstats-newest-change": "Най-новите",
@@ -94,5 +96,6 @@
 	"datatypes-type-url": "URL адрес",
 	"content-model-wikibase-item": "Обект в Уикиданни",
 	"content-model-wikibase-property": "Свойство в Уикиданни",
-	"content-model-wikibase-query": "Заявка към Уикиданни"
+	"content-model-wikibase-query": "Заявка към Уикиданни",
+	"apihelp-wbavailablebadges-description": "Търси налични значки."
 }
