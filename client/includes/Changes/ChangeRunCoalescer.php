@@ -12,7 +12,7 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 
 /**
- * ChangeListTransformer implementation that combines runs of changes into a single change.
+ * A transformer for lists of EntityChanges that combines runs of changes into a single change.
  * A "run" of changes is a sequence of consecutive changes performed by the same
  * user, and not interrupted by a "disruptive" change. Changes altering the association
  * between pages on the local wiki and items on the repo are considered disruptive.
@@ -20,7 +20,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
-class ChangeRunCoalescer implements ChangeListTransformer {
+class ChangeRunCoalescer {
 
 	/**
 	 * @var EntityRevisionLookup

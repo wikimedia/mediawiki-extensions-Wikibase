@@ -65,9 +65,9 @@ class ChangeHandler {
 	private $updater;
 
 	/**
-	 * @var ChangeListTransformer
+	 * @var ChangeRunCoalescer
 	 */
-	private $changeListTransformer;
+	private $changeRunCoalescer;
 
 	/**
 	 * @var SiteLookup
@@ -88,7 +88,7 @@ class ChangeHandler {
 	 * @param AffectedPagesFinder $affectedPagesFinder
 	 * @param TitleFactory $titleFactory
 	 * @param PageUpdater $updater
-	 * @param ChangeListTransformer $changeListTransformer
+	 * @param ChangeRunCoalescer $changeRunCoalescer
 	 * @param SiteLookup $siteLookup
 	 * @param string $repoId
 	 * @param bool $injectRecentChanges
@@ -99,7 +99,7 @@ class ChangeHandler {
 		AffectedPagesFinder $affectedPagesFinder,
 		TitleFactory $titleFactory,
 		PageUpdater $updater,
-		ChangeListTransformer $changeListTransformer,
+		ChangeRunCoalescer $changeRunCoalescer,
 		SiteLookup $siteLookup,
 		$repoId,
 		$injectRecentChanges = true
@@ -111,7 +111,7 @@ class ChangeHandler {
 		$this->affectedPagesFinder = $affectedPagesFinder;
 		$this->titleFactory = $titleFactory;
 		$this->updater = $updater;
-		$this->changeListTransformer = $changeListTransformer;
+		$this->changeRunCoalescer = $changeRunCoalescer;
 		$this->siteLookup = $siteLookup;
 		$this->repoId = $repoId;
 		$this->injectRecentChanges = $injectRecentChanges;
@@ -121,7 +121,7 @@ class ChangeHandler {
 	 * @param EntityChange[] $changes
 	 */
 	public function handleChanges( array $changes ) {
-		$changes = $this->changeListTransformer->transformChangeList( $changes );
+		$changes = $this->changeRunCoalescer->transformChangeList( $changes );
 
 		if ( !Hooks::run( 'WikibaseHandleChanges', array( $changes ) ) ) {
 			return;
