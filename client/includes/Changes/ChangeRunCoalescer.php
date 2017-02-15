@@ -56,9 +56,9 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 	 * Processes the given list of changes, combining any runs of changes into a single change.
 	 * See the class level documentation for more details on change runs.
 	 *
-	 * @param Change[] $changes
+	 * @param EntityChange[] $changes
 	 *
-	 * @return Change[]
+	 * @return EntityChange[]
 	 */
 	public function transformChangeList( array $changes ) {
 		$coalesced = array();
