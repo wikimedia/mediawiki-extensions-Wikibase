@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_4ae1e496",
+        "filename": "repo/includes/Store/Sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-15T15:26:20Z",
+      "side": 1,
+      "message": "I see two options:\n* Add another interface inheriting both `EntityStoreWatcher` and `EntityDataRetrievalServiceFactory`\n* Add another argument to constructor `EntityStoreWatcher $entityStoreWatcher` and pass the same instance of $entityDataRetrievalServices there",
+      "revId": "6768c5817fb3830578ee5745b66497750a5033dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
