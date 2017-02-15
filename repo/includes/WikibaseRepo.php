@@ -513,6 +513,7 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * @throws MWException when called to early
 	 * @return Language
 	 */
 	private function getContentLanguage() {
@@ -532,6 +533,7 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * @throws MWException when called to early
 	 * @return Language
 	 */
 	public function getUserLanguage() {

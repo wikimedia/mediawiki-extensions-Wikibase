@@ -74,6 +74,7 @@ class PropertyInfoTableBuilder {
 	 * @param PropertyInfoTable $propertyInfoTable
 	 * @param EntityLookup $entityLookup
 	 * @param PropertyInfoBuilder $propertyInfoBuilder
+	 * @param EntityIdComposer $entityIdComposer
 	 */
 	public function __construct(
 		PropertyInfoTable $propertyInfoTable,
