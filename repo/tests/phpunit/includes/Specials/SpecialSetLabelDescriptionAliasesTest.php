@@ -259,7 +259,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$this->mockRepository->putEntity( $inputEntity );
 		$id = $inputEntity->getId();
 
-		list( $output, $response ) = $this->executeSpecialPage( $id->getSerialization(), $request );
+		list( , $response ) = $this->executeSpecialPage( $id->getSerialization(), $request );
 
 		$redirect = $response instanceof FauxResponse ? $response->getHeader( 'Location' ) : null;
 		// TODO: Look for an error message in $output.

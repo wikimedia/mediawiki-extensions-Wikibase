@@ -113,7 +113,7 @@ class UsageTrackerContractTester {
 	}
 
 	public function testPruneUsages() {
-		list( $usagesT1, $usagesT2 ) = $this->getTestUsages();
+		list( $usagesT1, ) = $this->getTestUsages();
 
 		$this->tracker->addUsedEntities( 23, $usagesT1 );
 		$this->tracker->addUsedEntities( 24, $usagesT1 );
