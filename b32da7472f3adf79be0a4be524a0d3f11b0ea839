@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_6730a1fd",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-15T13:50:17Z",
+      "side": 1,
+      "message": "This does not check class neither id whereas the old version did. Why dropping this?",
+      "revId": "b32da7472f3adf79be0a4be524a0d3f11b0ea839",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_071c357b",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-15T13:50:17Z",
+      "side": 1,
+      "message": "This also does not check class neither id whereas the old version did.",
+      "revId": "b32da7472f3adf79be0a4be524a0d3f11b0ea839",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_e71a717e",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-15T13:50:17Z",
+      "side": 1,
+      "message": "This also does not check class (neither id) whereas the old version did.",
+      "revId": "b32da7472f3adf79be0a4be524a0d3f11b0ea839",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_c715ed4e",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-15T13:50:17Z",
+      "side": 1,
+      "message": "This does not check class neither name attribute (nor id) whereas the old version did. I don\u0027t know if those are relevant (maybe not) but I\u0027d rather saw them being dropped in another change.",
+      "revId": "b32da7472f3adf79be0a4be524a0d3f11b0ea839",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_67074120",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-15T13:50:17Z",
+      "side": 1,
+      "message": "This also does not check class neither id whereas the old version did.",
+      "revId": "b32da7472f3adf79be0a4be524a0d3f11b0ea839",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_2a002004",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-15T13:50:17Z",
+      "side": 1,
+      "message": "This also does not check class neither id whereas the old version did.",
+      "revId": "b32da7472f3adf79be0a4be524a0d3f11b0ea839",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_ca04141a",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-15T13:50:17Z",
+      "side": 1,
+      "message": "This also does not check class neither id whereas the old version did.",
+      "revId": "b32da7472f3adf79be0a4be524a0d3f11b0ea839",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_ea09d830",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-15T13:50:17Z",
+      "side": 1,
+      "message": "This also does not check class neither id (nor name) whereas the old version did.",
+      "revId": "b32da7472f3adf79be0a4be524a0d3f11b0ea839",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_8a0fec32",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialModifyTermTestCase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-15T13:50:17Z",
+      "side": 1,
+      "message": "This also does not check class neither id whereas the old version did.",
+      "revId": "b32da7472f3adf79be0a4be524a0d3f11b0ea839",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
