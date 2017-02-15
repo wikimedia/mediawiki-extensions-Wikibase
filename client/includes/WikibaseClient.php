@@ -626,6 +626,7 @@ final class WikibaseClient {
 	}
 
 	/**
+	 * @throws MWException when called to early
 	 * @return Language
 	 */
 	public function getContentLanguage() {
@@ -645,6 +646,7 @@ final class WikibaseClient {
 	}
 
 	/**
+	 * @throws MWException when called to early
 	 * @return Language
 	 */
 	private function getUserLanguage() {

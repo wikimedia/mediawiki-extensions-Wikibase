@@ -45,6 +45,7 @@ class SearchEntities extends ApiBase {
 	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
+	 * @param EntitySearchHelper $entitySearchHelper
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param ContentLanguages $termLanguages
 	 * @param string[] $entityTypes
