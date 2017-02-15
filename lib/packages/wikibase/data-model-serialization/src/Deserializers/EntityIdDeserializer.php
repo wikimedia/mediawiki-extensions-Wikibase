@@ -37,23 +37,14 @@ class EntityIdDeserializer implements Deserializer {
 	 * @return EntityId
 	 */
 	public function deserialize( $serialization ) {
-		$this->assertEntityIdIsString( $serialization );
+		if ( !is_string( $serialization ) ) {
+			throw new DeserializationException( 'The serialization of an entity ID should be a string' );
+		}
 
 		try {
 			return $this->entityIdParser->parse( $serialization );
 		} catch ( EntityIdParsingException $e ) {
 			throw new DeserializationException( "'$serialization' is not a valid entity ID", $e );
-		}
-	}
-
-	/**
-	 * @param string $serialization
-	 *
-	 * @throws DeserializationException
-	 */
-	private function assertEntityIdIsString( $serialization ) {
-		if ( !is_string( $serialization ) ) {
-			throw new DeserializationException( 'The serialization of an entity ID should be a string' );
 		}
 	}
 

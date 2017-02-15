@@ -53,11 +53,11 @@ class ReferenceDeserializer implements DispatchableDeserializer {
 	 * @return Reference
 	 */
 	public function deserialize( $serialization ) {
-		$this->assertCanDeserialize( $serialization );
+		if ( !$this->isValidSerialization( $serialization ) ) {
+			throw new DeserializationException( 'The serialization is invalid' );
+		}
 
-		$reference = $this->getDeserialized( $serialization );
-
-		return $reference;
+		return $this->getDeserialized( $serialization );
 	}
 
 	/**
@@ -86,12 +86,6 @@ class ReferenceDeserializer implements DispatchableDeserializer {
 		}
 
 		return $snaks;
-	}
-
-	private function assertCanDeserialize( $serialization ) {
-		if ( !$this->isValidSerialization( $serialization ) ) {
-			throw new DeserializationException( 'The serialization is invalid' );
-		}
 	}
 
 	private function assertSnaksOrderIsArray( array $serialization ) {

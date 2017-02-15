@@ -22,11 +22,11 @@ use Wikibase\DataModel\Statement\Statement;
  */
 class StatementDeserializer implements DispatchableDeserializer {
 
-	private $rankIds = array(
+	private static $rankIds = [
 		'deprecated' => Statement::RANK_DEPRECATED,
 		'normal' => Statement::RANK_NORMAL,
 		'preferred' => Statement::RANK_PREFERRED
-	);
+	];
 
 	/**
 	 * @var Deserializer
@@ -61,15 +61,18 @@ class StatementDeserializer implements DispatchableDeserializer {
 	 * @return bool
 	 */
 	public function isDeserializerFor( $serialization ) {
-		return $this->hasType( $serialization ) && $this->hasCorrectType( $serialization );
+		return is_array( $serialization )
+			&& array_key_exists( 'type', $serialization )
+			&& $this->isValidStatementType( $serialization['type'] );
 	}
 
-	private function hasType( $serialization ) {
-		return is_array( $serialization ) && array_key_exists( 'type', $serialization );
-	}
-
-	private function hasCorrectType( $serialization ) {
-		return in_array( $serialization['type'], array( 'claim', 'statement' ) );
+	/**
+	 * @param string $statementType
+	 *
+	 * @return bool
+	 */
+	private function isValidStatementType( $statementType ) {
+		return $statementType === 'statement' || $statementType === 'claim';
 	}
 
 	/**
@@ -86,14 +89,12 @@ class StatementDeserializer implements DispatchableDeserializer {
 			throw new MissingTypeException();
 		}
 
-		if ( $serialization['type'] !== 'claim' && $serialization['type'] !== 'statement' ) {
+		if ( !$this->isValidStatementType( $serialization['type'] ) ) {
 			throw new UnsupportedTypeException( $serialization['type'] );
 		}
 
 		if ( !array_key_exists( 'mainsnak', $serialization ) ) {
-			throw new MissingAttributeException(
-				'mainsnak'
-			);
+			throw new MissingAttributeException( 'mainsnak' );
 		}
 
 		return $this->getDeserialized( $serialization );
@@ -148,11 +149,11 @@ class StatementDeserializer implements DispatchableDeserializer {
 	}
 
 	private function setRankFromSerialization( array $serialization, Statement $statement ) {
-		if ( !array_key_exists( $serialization['rank'], $this->rankIds ) ) {
+		if ( !array_key_exists( $serialization['rank'], self::$rankIds ) ) {
 			throw new DeserializationException( 'The rank ' . $serialization['rank'] . ' is not a valid rank.' );
 		}
 
-		$statement->setRank( $this->rankIds[$serialization['rank']] );
+		$statement->setRank( self::$rankIds[$serialization['rank']] );
 	}
 
 	private function setReferencesFromSerialization( array $serialization, Statement $statement ) {
