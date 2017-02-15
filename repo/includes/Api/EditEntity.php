@@ -648,7 +648,8 @@ class EditEntity extends ModifyEntity {
 			'aliases',
 			'sitelinks',
 			'claims',
-			'datatype'
+			'datatype',
+			'lemmas'
 		);
 
 		$this->checkValidJson( $data, $allowedProps );
