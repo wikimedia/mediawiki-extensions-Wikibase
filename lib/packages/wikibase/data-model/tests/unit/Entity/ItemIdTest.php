@@ -156,4 +156,14 @@ class ItemIdTest extends PHPUnit_Framework_TestCase {
 		];
 	}
 
+	public function testNewFromRepositoryAndNumber() {
+		$id = ItemId::newFromRepositoryAndNumber( 'foo', 1 );
+		$this->assertSame( 'foo:Q1', $id->getSerialization() );
+	}
+
+	public function testNewFromRepositoryAndNumberWithInvalidNumericId() {
+		$this->setExpectedException( InvalidArgumentException::class );
+		ItemId::newFromRepositoryAndNumber( '', 'Q1' );
+	}
+
 }

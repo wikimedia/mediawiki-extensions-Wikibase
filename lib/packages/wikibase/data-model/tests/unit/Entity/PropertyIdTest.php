@@ -156,4 +156,14 @@ class PropertyIdTest extends PHPUnit_Framework_TestCase {
 		];
 	}
 
+	public function testNewFromRepositoryAndNumber() {
+		$id = PropertyId::newFromRepositoryAndNumber( 'foo', 1 );
+		$this->assertSame( 'foo:P1', $id->getSerialization() );
+	}
+
+	public function testNewFromRepositoryAndNumberWithInvalidNumericId() {
+		$this->setExpectedException( InvalidArgumentException::class );
+		PropertyId::newFromRepositoryAndNumber( '', 'P1' );
+	}
+
 }
