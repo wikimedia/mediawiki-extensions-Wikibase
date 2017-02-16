@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_d5334cf2",
+        "filename": "repo/includes/Actions/ViewEntityAction.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-16T10:40:12Z",
+      "side": 1,
+      "message": "as this both are local boolean flag-like variables it could be simplified to not have \"\u003d\u003d\u003d true\", I think. These are only true or false, any way.",
+      "revId": "d3e5bde719adba6cc8e857995aea24b3c7d80839",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
