@@ -11,6 +11,7 @@ use Wikibase\StringNormalizer;
  * @license GPL-2.0+
  */
 class HTMLAliasesField extends HTMLTextField {
+
 	const DELIMITER = '|';
 
 	/**
@@ -55,6 +56,7 @@ class HTMLAliasesField extends HTMLTextField {
 	/**
 	 * @param string $value
 	 * @param array $alldata
+	 *
 	 * @return array
 	 */
 	public function filter( $value, $alldata ) {
@@ -67,6 +69,7 @@ class HTMLAliasesField extends HTMLTextField {
 	/**
 	 * @param array $value
 	 * @param array $alldata
+	 *
 	 * @return bool|\Message|string
 	 */
 	public function validate( $value, $alldata ) {
@@ -82,6 +85,7 @@ class HTMLAliasesField extends HTMLTextField {
 
 	/**
 	 * @param array $value
+	 *
 	 * @return \OOUI\ActionFieldLayout|\OOUI\FieldLayout
 	 */
 	public function getOOUI( $value ) {
@@ -92,6 +96,7 @@ class HTMLAliasesField extends HTMLTextField {
 
 	/**
 	 * @param array $value
+	 *
 	 * @return string
 	 */
 	public function getTableRow( $value ) {
@@ -102,6 +107,7 @@ class HTMLAliasesField extends HTMLTextField {
 
 	/**
 	 * @param array $value
+	 *
 	 * @return string
 	 */
 	public function getDiv( $value ) {
@@ -112,6 +118,7 @@ class HTMLAliasesField extends HTMLTextField {
 
 	/**
 	 * @param array $value
+	 *
 	 * @return string
 	 */
 	public function getRaw( $value ) {
@@ -122,6 +129,7 @@ class HTMLAliasesField extends HTMLTextField {
 
 	/**
 	 * @param array $value
+	 *
 	 * @return string
 	 */
 	public function getVForm( $value ) {
@@ -132,6 +140,7 @@ class HTMLAliasesField extends HTMLTextField {
 
 	/**
 	 * @param array $value
+	 *
 	 * @return string
 	 */
 	public function getInline( $value ) {
@@ -142,6 +151,7 @@ class HTMLAliasesField extends HTMLTextField {
 
 	/**
 	 * @param array $value
+	 *
 	 * @return string
 	 */
 	private function arrayToString( $value ) {

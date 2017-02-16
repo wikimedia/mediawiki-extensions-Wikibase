@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Specials\HTMLForm;
 
+use Message;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Repo\WikibaseRepo;
@@ -12,6 +13,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0+
  */
 class HTMLItemReferenceField extends \HTMLTextField {
+
 	/**
 	 * @var EntityLookup
 	 */
@@ -42,6 +44,11 @@ class HTMLItemReferenceField extends \HTMLTextField {
 
 	/**
 	 * @see \HTMLFormField::validate
+	 *
+	 * @param string $value
+	 * @param array $alldata
+	 *
+	 * @return bool|string|Message
 	 */
 	public function validate( $value, $alldata ) {
 		$required = isset( $this->mParams['required'] ) && $this->mParams['required'] !== false;

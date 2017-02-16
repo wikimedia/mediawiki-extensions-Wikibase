@@ -43,7 +43,6 @@ class SpecialPagesWithBadges extends QueryPage {
 	/**
 	 * @see SpecialPage::__construct
 	 *
-	 * @param string $name
 	 * @param LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param string[] $badgeIds
 	 * @param string $siteId
@@ -53,12 +52,11 @@ class SpecialPagesWithBadges extends QueryPage {
 		array $badgeIds,
 		$siteId
 	) {
+		parent::__construct( 'PagesWithBadges' );
+
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->badgeIds = $badgeIds;
 		$this->siteId = $siteId;
-
-		parent::__construct( 'PagesWithBadges' );
-
 	}
 
 	/**

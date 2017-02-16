@@ -55,6 +55,7 @@ class HTMLContentLanguageField extends HTMLComboboxField {
 	/**
 	 * @param string[] $languageCodes
 	 * @param LanguageNameLookup $lookup
+	 *
 	 * @return array For details see {@see \HTMLForm} "options" parameter description
 	 */
 	private function constructOptions( array $languageCodes, LanguageNameLookup $lookup ) {

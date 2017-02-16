@@ -432,7 +432,8 @@ class SqlStore implements Store {
 	 * Creates a strongly connected pair of EntityRevisionLookup services, the first being the
 	 * non-caching lookup, the second being the caching lookup.
 	 *
-	 * @return [ EntityRevisionLookup, CachingEntityRevisionLookup ]
+	 * @return EntityRevisionLookup[] A two-element array with a "raw", non-caching and a caching
+	 *  EntityRevisionLookup.
 	 */
 	private function newEntityRevisionLookup() {
 		// NOTE: Keep cache key in sync with DirectSqlStore::newEntityRevisionLookup in WikibaseClient

@@ -118,6 +118,7 @@ class LinkBeginHookHandler {
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param LanguageFallbackChain $languageFallback
 	 * @param Language $pageLanguage
+	 * @param LinkRenderer $linkRenderer
 	 *
 	 * @todo: Would be nicer to take a LabelDescriptionLookup instead of TermLookup + FallbackChain.
 	 */
