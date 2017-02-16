@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_984adbc7",
+        "filename": "lib/includes/RepositoryDefinitions.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-16T15:56:20Z",
+      "side": 1,
+      "message": "It won\u0027t be that simple already, because of `wfWarn()` usage",
+      "parentUuid": "ce3c5b53_b8f55fc9",
+      "range": {
+        "startLine": 3,
+        "startChar": 10,
+        "endLine": 3,
+        "endChar": 22
+      },
+      "revId": "5d570475bc7ff9df509df15316c541a4ce9050eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_f80a07d5",
         "filename": "lib/includes/RepositoryDefinitions.php",
         "patchSetId": 9
