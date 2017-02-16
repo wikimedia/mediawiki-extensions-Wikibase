@@ -46,6 +46,30 @@
       "revId": "eafad6ffdd70b1edc35c6a601c803316239192ab",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_f57f7061",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-16T11:20:27Z",
+      "side": 1,
+      "message": "Both new… and create… naming schemes are fine for me.\n\nAs said a method that is just named \"dummy\" feels awkward. What does it do? Nothing? Void?",
+      "parentUuid": "2ef897d1_bb1d167a",
+      "range": {
+        "startLine": 69,
+        "startChar": 3,
+        "endLine": 69,
+        "endChar": 48
+      },
+      "revId": "eafad6ffdd70b1edc35c6a601c803316239192ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
