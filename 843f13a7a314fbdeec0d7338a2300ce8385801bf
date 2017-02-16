@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_328c0e3a",
+        "filename": "client/sql/statement_usage.sql",
+        "patchSetId": 11
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-16T07:38:33Z",
+      "side": 1,
+      "message": "This is not needed, you could just set the PK within the CREATE TABLE statement above: Just add PRIMARY KEY (n, m, …) to it, like a column definition.",
+      "revId": "843f13a7a314fbdeec0d7338a2300ce8385801bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
