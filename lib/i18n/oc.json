@@ -7,6 +7,7 @@
 	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-error-unexpected": "Error : $1",
 	"wikibase-error-autocomplete-response": "Lo servidor a respondut&nbsp;: $1",
+	"wikibase-error-ui-no-external-page": "Una pagina « $2 » a pas pogut èsser trobada sus « $1 ».",
 	"wikibase-sitelinks-wikipedia": "Wikipèdia",
 	"wikibase-sitelinks-sitename-columnheading": "Lenga",
 	"wikibase-snakview-snaktypeselector-somevalue": "valor desconeguda",

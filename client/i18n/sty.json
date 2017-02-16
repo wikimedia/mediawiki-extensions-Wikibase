@@ -10,7 +10,9 @@
 	"wikibase-editlinks": "Ссылкаларны төсәткәле",
 	"wikibase-editlinkstitle": "Пашҡа телләртәге ссылкаларны төсәткәле",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Йәшергәле",
 	"wikibase-rc-hide-wikidata-show": "Күргәскәле",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} төсәтеү"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} төсәтеү",
+	"wikibase-otherprojects": "Пашҡа проектларта"
 }

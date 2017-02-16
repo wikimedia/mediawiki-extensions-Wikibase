@@ -115,6 +115,7 @@
 	"wikibase-newitem-fieldset": "Crear un element novèl",
 	"wikibase-newitem-site": "Site de la primièra pagina ligada",
 	"wikibase-newitem-page": "Nom de la primièra pagina ligada",
+	"wikibase-newitem-no-external-page": "Una pagina « $2 » a pas pogut èsser trobada sus « $1 ».",
 	"wikibase-newitem-not-recognized-siteid": "L’identificant de site provesit es pas estat reconegut.",
 	"wikibase-newentity-label": "Labèl :",
 	"wikibase-newentity-description": "Descripcion :",
