@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_d827030c",
+        "filename": "lib/includes/RepositoryDefinitions.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-16T15:59:21Z",
+      "side": 1,
+      "message": "Generally, yes, dependencies on MediaWiki core features are a huge problem for almost everything in the Lib namespace, even if all Wikibase code tries hard to avoid it whenever possible. (Or in other words: it could be a million times worse.) But in this case it can easily be replaced with an exception.",
+      "parentUuid": "ce3c5b53_984adbc7",
+      "range": {
+        "startLine": 3,
+        "startChar": 10,
+        "endLine": 3,
+        "endChar": 22
+      },
+      "revId": "5d570475bc7ff9df509df15316c541a4ce9050eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_f80a07d5",
         "filename": "lib/includes/RepositoryDefinitions.php",
         "patchSetId": 9
