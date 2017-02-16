@@ -1155,7 +1155,7 @@ class WikibaseRepo {
 	/**
 	 * @return TermValidatorFactory
 	 */
-	protected function getTermValidatorFactory() {
+	public function getTermValidatorFactory() {
 		$constraints = $this->settings->getSetting( 'multilang-limits' );
 		$maxLength = $constraints['length'];
 
