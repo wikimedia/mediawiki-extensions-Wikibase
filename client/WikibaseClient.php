@@ -95,9 +95,6 @@ call_user_func( function() {
 		$wgWBClientDataTypes[$type] = array_merge( $baseDef, $clientDef );
 	}
 
-	// Registry and definition of entity types
-	$wgWBClientEntityTypes = require __DIR__ . '/../lib/WikibaseLib.entitytypes.php';
-
 	// i18n
 	$wgMessagesDirs['wikibaseclient'] = __DIR__ . '/i18n';
 	$wgExtensionMessagesFiles['Wikibaseclientalias'] = __DIR__ . '/WikibaseClient.i18n.alias.php';
