@@ -76,7 +76,7 @@ call_user_func( function() {
 	global $wgExtensionMessagesFiles, $wgMessagesDirs;
 	global $wgAPIModules, $wgAPIListModules, $wgSpecialPages, $wgHooks;
 	global $wgWBRepoSettings, $wgResourceModules, $wgValueParsers, $wgJobClasses;
-	global $wgWBRepoDataTypes, $wgWBRepoEntityTypes;
+	global $wgWBRepoDataTypes;
 
 	$wgExtensionCredits['wikibase'][] = array(
 		'path' => __DIR__,
@@ -104,17 +104,6 @@ call_user_func( function() {
 	// constants
 	define( 'CONTENT_MODEL_WIKIBASE_ITEM', "wikibase-item" );
 	define( 'CONTENT_MODEL_WIKIBASE_PROPERTY', "wikibase-property" );
-
-	// Registry and definition of entity types
-	$wgWBRepoEntityTypes = require __DIR__ . '/../lib/WikibaseLib.entitytypes.php';
-
-	$repoEntityTypes = require __DIR__ . '/WikibaseRepo.entitytypes.php';
-
-	// merge WikibaseRepo.entitytypes.php into $wgWBRepoEntityTypes
-	foreach ( $repoEntityTypes as $type => $repoDef ) {
-		$baseDef = isset( $wgWBRepoEntityTypes[$type] ) ? $wgWBRepoEntityTypes[$type] : array();
-		$wgWBRepoEntityTypes[$type] = array_merge( $baseDef, $repoDef );
-	}
 
 	// rights
 	// names should be according to other naming scheme
