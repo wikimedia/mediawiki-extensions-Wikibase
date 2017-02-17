@@ -56,6 +56,36 @@ class ViewEntityActionTest extends ActionTestCase {
 		$this->assertRegExp( $regex, $html );
 	}
 
+	public function testMetaTags_withoutDescription() {
+		$action = $this->createAction( 'view', $this->getTestItemPage( 'Berlin' ) );
+		$output = $action->getOutput();
+		$output->setProperty( 'wikibase-meta-tags', [ 'title' => 'testTitle' ] );
+
+		$action->show();
+
+		$metaTags = $output->getMetaTags();
+		$this->assertSame( [ [ 'og:title', 'testTitle' ] ], $metaTags );
+	}
+
+	public function testMetaTags_withTitleAndDescription() {
+		$action = $this->createAction( 'view', $this->getTestItemPage( 'Berlin' ) );
+		$output = $action->getOutput();
+		$output->setProperty( 'wikibase-meta-tags', [
+			'title' => 'testTitle',
+			'description' => 'testDescription',
+		] );
+
+		$action->show();
+
+		$metaTags = $output->getMetaTags();
+		$this->assertSame( [
+			[ 'og:title', 'testTitle' ],
+			[ 'description', 'testDescription' ],
+			[ 'og:description', 'testDescription' ],
+			[ 'twitter:card', 'summary' ],
+		], $metaTags );
+	}
+
 	public function testShowDiff() {
 		$page = $this->getTestItemPage( 'Berlin' );
 
