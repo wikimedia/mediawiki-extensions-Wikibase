@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_2faee0e4",
+        "filename": "lib/includes/Store/DispatchingEntityInfoBuilderFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-17T15:15:07Z",
+      "side": 1,
+      "message": "The fact that array keys must be repository names should be documented.",
+      "revId": "0fdc17497825c268278275f228814e585e899667",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_afbaf01c",
+        "filename": "lib/includes/Store/DispatchingEntityInfoBuilderFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-17T15:15:07Z",
+      "side": 1,
+      "message": "Should say \"Returns a new, dispatching EntityInfoBuilder …\".",
+      "range": {
+        "startLine": 37,
+        "startChar": 18,
+        "endLine": 37,
+        "endChar": 46
+      },
+      "revId": "0fdc17497825c268278275f228814e585e899667",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_efb0f840",
+        "filename": "lib/includes/Store/DispatchingEntityInfoBuilderFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-17T15:15:07Z",
+      "side": 1,
+      "message": "The fact that this is \"dispatching\" is of no value. This can be an implementation detail. Please change to \"EntityInfoBuilder\".",
+      "range": {
+        "startLine": 42,
+        "startChar": 12,
+        "endLine": 42,
+        "endChar": 40
+      },
+      "revId": "0fdc17497825c268278275f228814e585e899667",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_2f85805a",
+        "filename": "lib/includes/Store/DispatchingEntityInfoBuilderFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-17T15:15:07Z",
+      "side": 1,
+      "message": "No magic please! Please do not make this return a magic default when the user provides an empty array.",
+      "range": {
+        "startLine": 46,
+        "startChar": 75,
+        "endLine": 47,
+        "endChar": 51
+      },
+      "revId": "0fdc17497825c268278275f228814e585e899667",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
