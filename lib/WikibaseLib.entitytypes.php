@@ -1,9 +1,7 @@
 <?php
 
 /**
- * Definition of entity types for use with Wikibase.
- * The array returned by the code below is supposed to be merged into $wgWBRepoEntityTypes
- * resp. $wgWBClientEntityTypes.
+ * Definition of base entity types for use with Wikibase.
  *
  * @note: When adding entity types here, also add the corresponding information to
  * repo/WikibaseRepo.entitytypes.php
