@@ -337,7 +337,36 @@ call_user_func( function() {
 			);
 		}
 	];
-	$wgAPIModules['wbsetclaimvalue'] = Wikibase\Repo\Api\SetClaimValue::class;
+	$wgAPIModules['wbsetclaimvalue'] = [
+		'class' => Wikibase\Repo\Api\SetClaimValue::class,
+		'factory' => function( ApiMain $mainModule, $moduleName ) {
+			$wikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+			$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
+			$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
+
+			$modificationHelper = new Wikibase\Repo\Api\StatementModificationHelper(
+				$wikibaseRepo->getSnakFactory(),
+				$wikibaseRepo->getEntityIdParser(),
+				$wikibaseRepo->getStatementGuidValidator(),
+				$apiHelperFactory->getErrorReporter( $mainModule )
+			);
+
+			return new Wikibase\Repo\Api\SetClaimValue(
+				$mainModule,
+				$moduleName,
+				$apiHelperFactory->getErrorReporter( $mainModule ),
+				$changeOpFactoryProvider->getStatementChangeOpFactory(),
+				$modificationHelper,
+				$wikibaseRepo->getStatementGuidParser(),
+				function ( $module ) use ( $apiHelperFactory ) {
+					return $apiHelperFactory->getResultBuilder( $module );
+				},
+				function ( $module ) use ( $apiHelperFactory ) {
+					return $apiHelperFactory->getEntitySavingHelper( $module );
+				}
+			);
+		}
+	];
 	$wgAPIModules['wbsetreference'] = Wikibase\Repo\Api\SetReference::class;
 	$wgAPIModules['wbremovereferences'] = Wikibase\Repo\Api\RemoveReferences::class;
 	$wgAPIModules['wbsetclaim'] = Wikibase\Repo\Api\SetClaim::class;
