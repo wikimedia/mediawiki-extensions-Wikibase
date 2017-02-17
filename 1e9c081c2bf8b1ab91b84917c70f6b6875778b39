@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_4fd4844b",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-17T15:27:29Z",
+      "side": 1,
+      "message": "This is a bit overengeneering. PHPs build-in \"startsWith\" is called \"strncmp\". But the most straightforward and most widespread solution is strpos( $haystack, $needle ) \u003d\u003d\u003d 0.\n\nSee http://maettig.com/code/php/php-performance-benchmarks.php#startswith",
+      "revId": "1e9c081c2bf8b1ab91b84917c70f6b6875778b39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_0fce7cb9",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-17T15:27:29Z",
+      "side": 1,
+      "message": "Uh? Sorry, but I find this not acceptable. This code here does not know if $target really starts with this prefix, but still cuts it of at a fixed position.\n\nI can see this is only called after isForeignEntityPage, but there is no guarantee for this. This makes the code fragile.\n\nThe strlen is also pointless with a fixed string.",
+      "revId": "1e9c081c2bf8b1ab91b84917c70f6b6875778b39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
