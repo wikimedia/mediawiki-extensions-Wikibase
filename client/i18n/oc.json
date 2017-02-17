@@ -12,6 +12,7 @@
 	"wikibase-addlinkstitle": "Apondre los ligams interlengas",
 	"wikibase-linkitem-addlinks": "Apondre de ligams",
 	"wikibase-linkitem-alreadylinked": "La pagina a la quala vos volètz ligar es ja estacada a un [$1 element] del depaus de donadas central que se liga a $2 sus aqueste site. Los elements pòdon pas aver qu’una pagina estacada per site. Causissètz una autra pagina per vos i ligar.",
+	"wikibase-linkitem-close": "Tampar la bóstia de dialòg e recargar la pagina",
 	"wikibase-linkitem-title": "Se ligar amb la pagina",
 	"wikibase-linkitem-linkpage": "Ligam amb la pagina",
 	"wikibase-linkitem-input-site": "Lenga :",
