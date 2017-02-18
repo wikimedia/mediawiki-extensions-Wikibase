@@ -93,7 +93,7 @@
 	"wikibase-label-input-help-message": "Escribe la etiqueta de esta entidad en $1.",
 	"wikibase-entitytermsview-input-help-message": "Escribe una etiqueta de esta entidad, una breve descripción y los alias por idioma.",
 	"wikibase-statementsection-statements": "Declaraciones",
-	"wikibase-sitelinks": "Enlaces de sitio",
+	"wikibase-sitelinks": "Enlaces a sitios",
 	"wikibase-sitelinkgroupview-input-help-message": "Añadir un enlace de sitio mediante la especificación de un sitio web y una página de ese sitio, editar o eliminar enlaces de sitio existente.",
 	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|entrada|entradas}}",
 	"wikibase-sitelinks-empty": "Ninguna página está enlazada con este elemento.",

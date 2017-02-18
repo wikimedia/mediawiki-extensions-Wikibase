@@ -3,7 +3,8 @@
 		"authors": [
 			"George Animal",
 			"Macofe",
-			"Bikarhêner"
+			"Bikarhêner",
+			"Ghybu"
 		]
 	},
 	"wikibase-entity-item": "obje",
@@ -11,7 +12,7 @@
 	"wikibase-save": "tomar bike",
 	"wikibase-cancel": "betal bike",
 	"wikibase-add": "lê zêde bike",
-	"wikibase-addreference": "referansê lê zêde bike",
+	"wikibase-addreference": "çavkaniyê lê zêde bike",
 	"wikibase-save-inprogress": "Tê tomarkirin...",
 	"wikibase-remove-inprogress": "Tê jêbirin...",
 	"wikibase-statementlistview-add": "lê zêde bike",
