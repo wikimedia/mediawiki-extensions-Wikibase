@@ -123,6 +123,24 @@
       "revId": "e9fd2b85a7d67d1295a04507c3564509090898af",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_5ce9997a",
+        "filename": "repo/includes/Validators/InterWikiLinkExistsValidator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-19T08:56:01Z",
+      "side": 1,
+      "message": "no-such-media (aka \"wikibase-validator-no-such-media\") says \"The file \\\"$1\\\" does not exist on [https://commons.wikimedia.org/ Wikimedia Commons].\",\n\nseeing that this specifically refers to Wikimedia Commons is another issue with using that error code, as interwiki links can be on any wiki.\n\nhow about adding something like: \n\nwikibase-validator-page-not-exists\n\n\"The page \\\"$1\\\" does not exist\"",
+      "parentUuid": "2ef897d1_976da2c9",
+      "revId": "e9fd2b85a7d67d1295a04507c3564509090898af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
