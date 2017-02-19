@@ -346,6 +346,7 @@
 	"apihelp-wbmergeitems-example-1": "Łączy dane z <samp>Q42</samp> do <samp>Q222</samp>",
 	"apihelp-wbmergeitems-example-2": "Łączy dane z <samp>Q555</samp> do <samp>Q3</samp>",
 	"apihelp-wbparsevalue-description": "Parsuje wartości za pomocą <code>ValueParser</code>.",
+	"apihelp-wbparsevalue-param-values": "Wartości do parsowania",
 	"apihelp-wbremoveclaims-description": "Usuwa stwierdzenia Wikibase.",
 	"apihelp-wbremoveclaims-param-bot": "Oznacz tę zmianę jako wykonaną przez bota. Ten znacznik adresu URL będzie brany pod uwagę tylko, jeśli użytkownik należy do grupy „bot”.",
 	"apihelp-wbremovequalifiers-description": "Usuwa kwalifikator ze stwierdzenia.",

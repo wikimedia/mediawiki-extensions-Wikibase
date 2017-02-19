@@ -39,7 +39,7 @@
 	"wikibase-remove": "jê bibe",
 	"wikibase-propertypage-datatype": "Cureya daneyê",
 	"wikibase-statementview-rank-normal": "Normal rank",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|referans}}",
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|çavkanî}}",
 	"wikibase-snakview-variations-somevalue-label": "nirxê nenas",
 	"wikibase-entityselector-more": "bêhtir",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 beralîkirinek e.",
