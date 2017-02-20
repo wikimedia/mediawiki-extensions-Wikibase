@@ -46,7 +46,7 @@ use Wikibase\Client\Serializer\ForbiddenSerializer;
 use Wikibase\Client\Store\RepositoryServiceContainerFactory;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\ClientStore;
-use Wikibase\DataModel\DeserializerFactory;
+use Wikibase\DataModel\DeserializerFactory as BaseDataModelDeserializerFactory;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -63,7 +63,7 @@ use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\DirectSqlStore;
-use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
+use Wikibase\InternalSerialization\DeserializerFactory as InternalFormatDeserializerFactory;
 use Wikibase\ItemChange;
 use Wikibase\LangLinkHandler;
 use Wikibase\LanguageFallbackChain;
@@ -937,20 +937,20 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return DeserializerFactory
+	 * @return BaseDataModelDeserializerFactory
 	 */
 	public function getBaseDataModelDeserializerFactory() {
-		return new DeserializerFactory(
+		return new BaseDataModelDeserializerFactory(
 			$this->getDataValueDeserializer(),
 			$this->getEntityIdParser()
 		);
 	}
 
 	/**
-	 * @return InternalDeserializerFactory
+	 * @return InternalFormatDeserializerFactory
 	 */
 	public function getInternalFormatDeserializerFactory() {
-		return new InternalDeserializerFactory(
+		return new InternalFormatDeserializerFactory(
 			$this->getDataValueDeserializer(),
 			$this->getEntityIdParser(),
 			$this->getAllTypesEntityDeserializer()
@@ -963,11 +963,11 @@ final class WikibaseClient {
 	private function getAllTypesEntityDeserializer() {
 		if ( $this->entityDeserializer === null ) {
 			$deserializerFactoryCallbacks = $this->getEntityDeserializerFactoryCallbacks();
-			$deserializerFactory = $this->getBaseDataModelDeserializerFactory();
+			$baseDeserializerFactory = $this->getBaseDataModelDeserializerFactory();
 			$deserializers = array();
 
 			foreach ( $deserializerFactoryCallbacks as $callback ) {
-				$deserializers[] = call_user_func( $callback, $deserializerFactory );
+				$deserializers[] = call_user_func( $callback, $baseDeserializerFactory );
 			}
 
 			$this->entityDeserializer = new DispatchingDeserializer( $deserializers );
