@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_4b222d52",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/TermChangeOpDeserializationAssert.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-20T13:34:04Z",
+      "side": 1,
+      "message": "I just realized this is not really Term-specific, so should also not contain Term in name. Or is it term-specific?",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 39
+      },
+      "revId": "a55ace07a196f4554ef5aaf8100cb590a5f534fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
