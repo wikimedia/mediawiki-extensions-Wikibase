@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ce3c5b53_23b26d93",
+        "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-20T22:40:12Z",
+      "side": 1,
+      "message": "import is now missing for InterWikiLinkFormatter, now that it was moved/changed in previous patch in this chain:\n\nuse Wikibase\\Lib\\Formatters\\InterWikiLinkFormatter\n\nthough maybe WikibaseValueFormatterBuilders should be in use Wikibase\\Lib\\Formatters namespace",
+      "revId": "f1f846b8ca2812859cd51af78b727a28fe86ed8d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_19e56e9f",
         "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
         "patchSetId": 6
