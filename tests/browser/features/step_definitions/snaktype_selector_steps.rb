@@ -7,7 +7,7 @@
 # step implementations for snaktype selector
 
 When(/^I click the snaktype selector of claim (\d+) in group (\d+)$/) do |claim_index, group_index|
-  on(ItemPage).snaktype_selector(group_index, claim_index).when_visible.click
+  on(ItemPage).snaktype_selector(group_index, claim_index).when_present.click
 end
 
 When(/^I select (.+) snaktype for claim (\d+) in group (\d+)$/) do |snaktype, claim_index, group_index|
@@ -31,9 +31,9 @@ Then(/^Snaktype selector menu should not be visible$/) do
 end
 
 Then(/^Snaktype selector item for (.+) snaktype should be visible$/) do |snaktype|
-  expect(on(ItemPage).snaktype_list[snaktype].item_element.when_visible).to be_visible
+  expect(on(ItemPage).snaktype_list[snaktype].item_element.when_present).to be_visible
 end
 
 Then(/^Snaktype selector item for (.+) snaktype should not be visible$/) do |snaktype|
-  expect(on(ItemPage).snaktype_list[snaktype].item_element.when_not_visible).not_to be_visible
+  expect(on(ItemPage).snaktype_list[snaktype].item_element.when_not_present).not_to be_visible
 end

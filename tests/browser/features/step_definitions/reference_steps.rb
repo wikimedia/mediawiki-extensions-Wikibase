@@ -7,19 +7,19 @@
 # steps for references
 
 When(/^I click the reference add button$/) do
-  on(ItemPage).add_reference_element.when_visible.click
+  on(ItemPage).add_reference_element.when_present.click
 end
 
 When(/^I click the reference remove button$/) do
   on(ItemPage) do |page|
-    page.remove_reference_element.when_visible.click
+    page.remove_reference_element.when_present.click
     page.ajax_wait
     page.wait_for_statement_request_finished
   end
 end
 
 When(/^I remove reference snak (\d+)$/) do |snak_index|
-  on(ItemPage).remove_reference_snak(snak_index).when_visible.click
+  on(ItemPage).remove_reference_snak(snak_index).when_present.click
 end
 
 When /^I add the following reference snaks:$/ do |table|
@@ -33,35 +33,35 @@ end
 
 When(/^I click the toggle references link of statement (\d+)$/) do |statement_index|
   on(ItemPage) do |page|
-    page.toggle_references(statement_index).when_visible.click
+    page.toggle_references(statement_index).when_present.click
     page.wait_until_jquery_animation_finished
   end
 end
 
 Then(/^Reference add button should be there$/) do
-  expect(on(ItemPage).add_reference_element.when_visible).to be_visible
+  expect(on(ItemPage).add_reference_element.when_present).to be_visible
 end
 
 Then(/^Reference add button should not be there$/) do
-  expect(on(ItemPage).add_reference_element.when_not_visible).not_to be_visible
+  expect(on(ItemPage).add_reference_element.when_not_present).not_to be_visible
 end
 
 Then(/^Reference add button should be disabled$/) do
-  expect(on(ItemPage).add_reference_element.when_not_visible).not_to be_visible
-  expect(on(ItemPage).add_reference_disabled_element.when_visible).to be_visible
+  expect(on(ItemPage).add_reference_element.when_not_present).not_to be_visible
+  expect(on(ItemPage).add_reference_disabled_element.when_present).to be_visible
 end
 
 Then(/^Reference remove button should be there$/) do
-  expect(on(ItemPage).remove_reference_element.when_visible).to be_visible
+  expect(on(ItemPage).remove_reference_element.when_present).to be_visible
 end
 
 Then(/^Reference remove button should not be there$/) do
-  expect(on(ItemPage).remove_reference_element.when_not_visible).not_to be_visible
+  expect(on(ItemPage).remove_reference_element.when_not_present).not_to be_visible
 end
 
 Then(/^Reference remove button should be disabled$/) do
-  expect(on(ItemPage).remove_reference_element.when_not_visible).not_to be_visible
-  expect(on(ItemPage).remove_reference_disabled_element.when_visible).to be_visible
+  expect(on(ItemPage).remove_reference_element.when_not_present).not_to be_visible
+  expect(on(ItemPage).remove_reference_disabled_element.when_present).to be_visible
 end
 
 Then(/^Reference remove snak button should be there$/) do
@@ -78,20 +78,20 @@ Then(/^Reference remove snak button should be disabled$/) do
 end
 
 Then(/^Reference add snak button should be there$/) do
-  expect(on(ItemPage).add_reference_snak_element.when_visible).to be_visible
+  expect(on(ItemPage).add_reference_snak_element.when_present).to be_visible
 end
 
 Then(/^Reference add snak button should not be there$/) do
-  expect(on(ItemPage).add_reference_snak_element.when_not_visible).not_to be_visible
+  expect(on(ItemPage).add_reference_snak_element.when_not_present).not_to be_visible
 end
 
 Then(/^Reference add snak button should be disabled$/) do
-  expect(on(ItemPage).add_reference_snak_element.when_not_visible).not_to be_visible
-  expect(on(ItemPage).add_reference_snak_disabled_element.when_visible).to be_visible
+  expect(on(ItemPage).add_reference_snak_element.when_not_present).not_to be_visible
+  expect(on(ItemPage).add_reference_snak_disabled_element.when_present).to be_visible
 end
 
 Then(/^Reference counter should be there$/) do
-  expect(on(ItemPage).reference_counter_element.when_visible).to be_visible
+  expect(on(ItemPage).reference_counter_element.when_present).to be_visible
 end
 
 Then(/^Reference counter should show (.+)$/) do |value|

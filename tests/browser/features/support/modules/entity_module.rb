@@ -22,12 +22,12 @@ module EntityPage
   span(:entity_id_span, css: '.wikibase-title-id')
   span(:entity_label_span, css: '.wikibase-title-label')
   text_area(:label_input_field, css: '.wikibase-labelview-text textarea')
-  a(:edit_header_link, css: '.wikibase-entitytermsview span.wikibase-toolbar-button-edit:not(.wikibase-toolbarbutton-disabled) > a')
-  a(:edit_header_link_disabled, css: '.wikibase-entitytermsview  span.wikibase-toolbar-button-edit.wikibase-toolbarbutton-disabled > a')
-  a(:save_header_link, css: '.wikibase-entitytermsview  span.wikibase-toolbar-button-save:not(.wikibase-toolbarbutton-disabled) > a')
-  a(:save_header_link_disabled, css: '.wikibase-entitytermsview  span.wikibase-toolbar-button-save.wikibase-toolbarbutton-disabled > a')
-  a(:cancel_header_link, css: '.wikibase-entitytermsview  span.wikibase-toolbar-button-cancel:not(.wikibase-toolbarbutton-disabled) > a')
-  a(:cancel_header_link_disabled, css: '.wikibase-entitytermsview  span.wikibase-toolbar-button-cancel.wikibase-toolbarbutton-disabled > a')
+  link(:edit_header_link, css: '.wikibase-entitytermsview span.wikibase-toolbar-button-edit:not(.wikibase-toolbarbutton-disabled) > a')
+  link(:edit_header_link_disabled, css: '.wikibase-entitytermsview  span.wikibase-toolbar-button-edit.wikibase-toolbarbutton-disabled > a')
+  link(:save_header_link, css: '.wikibase-entitytermsview  span.wikibase-toolbar-button-save:not(.wikibase-toolbarbutton-disabled) > a')
+  link(:save_header_link_disabled, css: '.wikibase-entitytermsview  span.wikibase-toolbar-button-save.wikibase-toolbarbutton-disabled > a')
+  link(:cancel_header_link, css: '.wikibase-entitytermsview  span.wikibase-toolbar-button-cancel:not(.wikibase-toolbarbutton-disabled) > a')
+  link(:cancel_header_link_disabled, css: '.wikibase-entitytermsview  span.wikibase-toolbar-button-cancel.wikibase-toolbarbutton-disabled > a')
 
   # description UI
   div(:entity_description_div, class: 'wikibase-entitytermsview-heading-description')
@@ -48,7 +48,7 @@ module EntityPage
   div(:wb_tooltip, class: 'tipsy-inner')
   div(:wb_error_div, class: 'wikibase-wbtooltip-error')
   div(:wb_error_details_div, class: 'wikibase-wbtooltip-error-details')
-  a(:wb_error_details_link, class: 'wikibase-wbtooltip-error-details-link')
+  link(:wb_error_details_link, class: 'wikibase-wbtooltip-error-details-link')
 
   # mw notifications
   div(:mw_notification_content, xpath: "//div[@id='mw-notification-area']/div/div[contains(@class, 'mw-notification-content')]")
@@ -70,7 +70,7 @@ module EntityPage
 
   def wait_for_api_callback
     ajax_wait
-    api_call_waiting_message_element.when_not_visible
+    api_call_waiting_message_element.when_not_present
   end
 
   def wait_for_entity_to_load

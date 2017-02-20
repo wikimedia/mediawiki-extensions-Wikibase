@@ -9,12 +9,12 @@
 module ReferencePage
   include PageObject
   # references UI elements
-  a(:add_reference, css: 'div.wikibase-statementview-references > div.wikibase-addtoolbar-container span.wikibase-toolbar-button-add:not(.wikibase-toolbarbutton-disabled) > a')
-  a(:add_reference_disabled, css: 'div.wikibase-statementview-references span.wikibase-toolbar-button-add.wikibase-toolbarbutton-disabled > a')
-  a(:remove_reference, css: 'div.wikibase-statementview-references .wikibase-removetoolbar-container span.wikibase-toolbar-button-remove:not(.wikibase-toolbarbutton-disabled) > a')
-  a(:remove_reference_disabled, css: 'div.wikibase-statementview-references .wikibase-removetoolbar-container span.wikibase-toolbar-button-remove.wikibase-toolbarbutton-disabled > a')
-  a(:add_reference_snak, css: 'div.wikibase-statementview-references div.wikibase-referenceview span.wikibase-toolbar-button-add:not(.wikibase-toolbarbutton-disabled) > a')
-  a(:add_reference_snak_disabled, css: 'div.wikibase-statementview-references div.wikibase-referenceview span.wikibase-toolbar-button-add.wikibase-toolbarbutton-disabled > a')
+  link(:add_reference, css: 'div.wikibase-statementview-references > div.wikibase-addtoolbar-container span.wikibase-toolbar-button-add:not(.wikibase-toolbarbutton-disabled) > a')
+  link(:add_reference_disabled, css: 'div.wikibase-statementview-references span.wikibase-toolbar-button-add.wikibase-toolbarbutton-disabled > a')
+  link(:remove_reference, css: 'div.wikibase-statementview-references .wikibase-removetoolbar-container span.wikibase-toolbar-button-remove:not(.wikibase-toolbarbutton-disabled) > a')
+  link(:remove_reference_disabled, css: 'div.wikibase-statementview-references .wikibase-removetoolbar-container span.wikibase-toolbar-button-remove.wikibase-toolbarbutton-disabled > a')
+  link(:add_reference_snak, css: 'div.wikibase-statementview-references div.wikibase-referenceview span.wikibase-toolbar-button-add:not(.wikibase-toolbarbutton-disabled) > a')
+  link(:add_reference_snak_disabled, css: 'div.wikibase-statementview-references div.wikibase-referenceview span.wikibase-toolbar-button-add.wikibase-toolbarbutton-disabled > a')
   span(:reference_counter, css: 'div.wikibase-statementview-references-heading span.ui-toggler-label')
 
   def remove_reference_snak(snak_index = 1)
