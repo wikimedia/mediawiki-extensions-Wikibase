@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_9049406d",
+        "filename": "lib/includes/RepositoryDefinitions.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-20T10:14:21Z",
+      "side": 1,
+      "message": "I\u0027m thinking of a quite trivial Wikibase\\Lib\\Federation namespace. But we can do this later, no problem.",
+      "parentUuid": "ce3c5b53_256038fc",
+      "range": {
+        "startLine": 3,
+        "startChar": 10,
+        "endLine": 3,
+        "endChar": 22
+      },
+      "revId": "5d570475bc7ff9df509df15316c541a4ce9050eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_f80a07d5",
         "filename": "lib/includes/RepositoryDefinitions.php",
         "patchSetId": 9
