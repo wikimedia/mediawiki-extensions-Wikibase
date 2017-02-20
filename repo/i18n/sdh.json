@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kurdbuddha"
+			"Kurdbuddha",
+			"Paraw2"
 		]
 	},
+	"wikibase-edit": "وێراشتە",
 	"wikibase-sitelink-page-edit-placeholder": "پەڕە",
 	"wikibase-itembytitle-lookup-page": "پەڕە:",
 	"wikibase-itembytitle-submit": "مینە",

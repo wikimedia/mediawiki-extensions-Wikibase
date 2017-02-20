@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"George Animal",
-			"Bikarhêner"
+			"Bikarhêner",
+			"Ghybu"
 		]
 	},
 	"wikibase-timedetails-time": "Dem",
@@ -11,5 +12,6 @@
 	"wikibase-sitelinks-link-columnheading": "Rûpela girêdayî",
 	"wikibase-tooltip-error-details": "Detay",
 	"wikibase-validator-no-such-entity": "$1 nehat dîtin",
+	"wikibase-time-precision-century": "sedsala $1{{PLURAL:$1|ê|an}}",
 	"wikibase-entity-summary-wbsetsitelink-add": "Girêdanê li [$2] zêde bike"
 }
