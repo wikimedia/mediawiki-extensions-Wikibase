@@ -88,7 +88,7 @@ class DumpJson extends DumpScript {
 				$wikibaseRepo->getStore()->getEntityPrefetcher(),
 				$wikibaseRepo->getPropertyDataTypeLookup(),
 				new RevisionBasedEntityLookup( $revisionLookup ),
-				$wikibaseRepo->getEntitySerializer(
+				$wikibaseRepo->getAllTypesEntitySerializer(
 					SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
 					SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
 				)
