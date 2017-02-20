@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_963378c0",
+        "filename": "repo/includes/Validators/InterWikiLinkExistsValidator.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-20T15:54:56Z",
+      "side": 1,
+      "message": "I\u0027m not sure if this is a good name for this validator, because this class does not know anything about the concept of \"interwiki links\". All it knows is that there is a MediaWikiPageNameNormalizer, and an API URL.\n\nSuggestions: NormalizingPageNameValidator, ResolvingRemotePageNameValidator.\n\nI\u0027m not blocking the patch on the name because this class can also be renamed any time later.",
+      "range": {
+        "startLine": 20,
+        "startChar": 6,
+        "endLine": 20,
+        "endChar": 34
+      },
+      "revId": "45d807bbce440c46ef6c7cd3d97f41e08e67658e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
