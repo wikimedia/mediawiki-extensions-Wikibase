@@ -69,7 +69,7 @@ class TermChangeOpSerializationValidator {
 			$this->assertString(
 				$serialization['value'],
 				'A string was expected, but not found in the term serialization '
-					. "for the langauge code $languageCode and key 'value'"
+					. "for the language code $languageCode and key 'value'"
 			);
 		}
 	}
