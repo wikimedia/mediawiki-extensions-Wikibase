@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_3645cc18",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2017-02-20T16:37:35Z",
+      "side": 1,
+      "message": "I should have mentioned that the patch only updates documentation by matching arguments that are already null in practice.",
+      "parentUuid": "ce3c5b53_969ff8b8",
+      "range": {
+        "startLine": 7,
+        "startChar": 36,
+        "endLine": 7,
+        "endChar": 47
+      },
+      "revId": "b44e8e0c5ea36bf00eeab992690ba57d1f6ce39d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_b6a47c05",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-02-20T15:42:44Z",
       "side": 1,
       "message": "Who checked what, and how? \"Observed\" how? What was run? The tests? Manual tests? With which inputs?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 20
+      },
+      "revId": "b44e8e0c5ea36bf00eeab992690ba57d1f6ce39d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_d616e0f5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2017-02-20T16:37:35Z",
+      "side": 1,
+      "message": "I, the Author, Committer, and Creator of this Gerrit change, went past the sacred gates of PHP, casted the glorious spell of Echo, and the Subpages came to me. They introduced themselves as they were of String ancestry, but I suspected them to be Nulls, so I summoned the supreme power of Var_export. Their true nature was brought to light and I escaped, unharmed.",
+      "parentUuid": "ce3c5b53_b6a47c05",
       "range": {
         "startLine": 9,
         "startChar": 0,
