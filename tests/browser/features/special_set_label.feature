@@ -39,7 +39,7 @@ Feature: Special:SetLabel page
       And I am on the page of item item1
     Then Something should be displayed as label having the ID of item1
 
-  @integration @smoke
+  @smoke
   Scenario: Edit an existing label
     Given I have the following items:
         | item1 |

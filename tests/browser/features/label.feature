@@ -35,7 +35,7 @@ Feature: Edit label
       | click the header cancel button |
       | press the ESC key in the label input field |
 
-  @integration @modify_entity @save_label @smoke
+  @modify_entity @save_label @smoke
   Scenario Outline: Save label
     When I click the header edit button
       And I enter "MODIFIED LABEL" as label

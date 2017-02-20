@@ -9,15 +9,15 @@
 module ULSPage
   include PageObject
   # ULS UI elements
-  a(:uls_open, xpath: "//li[@id='pt-uls']/a")
+  link(:uls_open, xpath: "//li[@id='pt-uls']/a")
   text_field(:uls_language_filter, id: 'languagefilter')
-  a(:uls_language_link, xpath: "//div[contains(@class, 'uls-language-block')]/ul/li/a")
+  link(:uls_language_link, xpath: "//div[contains(@class, 'uls-language-block')]/ul/li/a")
   div(:uls_div, class: 'uls-menu')
 
-  a(:view_tab_link, xpath: "//li[@id='ca-view']/span/a")
-  a(:recent_changes_link, xpath: "//li[@id='n-recentchanges']/a")
-  a(:special_page_tab_link, xpath: "//li[@id='ca-nstab-special']/span/a")
-  a(:first_result_link, xpath: "//span[@class='mw-title']/a")
+  link(:view_tab_link, xpath: "//li[@id='ca-view']/span/a")
+  link(:recent_changes_link, xpath: "//li[@id='n-recentchanges']/a")
+  link(:special_page_tab_link, xpath: "//li[@id='ca-nstab-special']/span/a")
+  link(:first_result_link, xpath: "//span[@class='mw-title']/a")
   # ULS
   def uls_switch_language(code, name)
     if uls_open? == false
