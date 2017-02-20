@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_6bbdb1d0",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1612,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-20T13:49:35Z",
+      "side": 1,
+      "message": "`fetch` and `get` don\u0027t seem very different for me.\nI would suggest `build` in this case.",
+      "range": {
+        "startLine": 1612,
+        "startChar": 24,
+        "endLine": 1612,
+        "endChar": 29
+      },
+      "revId": "56da0c6c9fb1d923d8ceae3de4c7e5b936cecf44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
