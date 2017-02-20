@@ -124,11 +124,11 @@ class TermValidatorFactory {
 	/**
 	 * @return ValueValidator[]
 	 */
-	protected function getCommonTermValidators() {
+	private function getCommonTermValidators() {
 		$validators = array();
 		$validators[] = new TypeValidator( 'string' );
 		$validators[] = new StringLengthValidator( 1, $this->maxLength, 'mb_strlen' );
-		$validators[] = new RegexValidator( '/^\s|[\r\n\t]|\s$/', true ); // no leading/trailing whitespace, no line breaks.
+		$validators[] = new RegexValidator( '/^\s|[\v\t]|\s$/', true ); // no leading/trailing whitespace, no line breaks.
 
 		return $validators;
 	}
