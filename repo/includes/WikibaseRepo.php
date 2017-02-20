@@ -33,14 +33,14 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Client\EntityDataRetrievalServiceFactory;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\DeserializerFactory;
+use Wikibase\DataModel\DeserializerFactory as BaseDataModelDeserializerFactory;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\SerializerFactory as BaseDataModelSerializerFactory;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
@@ -55,7 +55,7 @@ use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\EditEntityFactory;
 use Wikibase\EntityFactory;
-use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
+use Wikibase\InternalSerialization\DeserializerFactory as InternalFormatDeserializerFactory;
 use Wikibase\ItemChange;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\LanguageFallbackChainFactory;
@@ -1341,27 +1341,27 @@ class WikibaseRepo {
 	public function getEntityContentDataCodec() {
 		return new EntityContentDataCodec(
 			$this->getEntityIdParser(),
-			$this->getEntitySerializer(),
+			$this->getAllTypesEntitySerializer(),
 			$this->getInternalFormatEntityDeserializer(),
 			$this->settings->getSetting( 'maxSerializedEntitySize' ) * 1024
 		);
 	}
 
 	/**
-	 * @return DeserializerFactory
+	 * @return BaseDataModelDeserializerFactory
 	 */
 	public function getBaseDataModelDeserializerFactory() {
-		return new DeserializerFactory(
+		return new BaseDataModelDeserializerFactory(
 			$this->getDataValueDeserializer(),
 			$this->getEntityIdParser()
 		);
 	}
 
 	/**
-	 * @return InternalDeserializerFactory
+	 * @return InternalFormatDeserializerFactory
 	 */
 	public function getInternalFormatDeserializerFactory() {
-		return new InternalDeserializerFactory(
+		return new InternalFormatDeserializerFactory(
 			$this->getDataValueDeserializer(),
 			$this->getEntityIdParser(),
 			$this->getAllTypesEntityDeserializer()
@@ -1369,12 +1369,14 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @param int $options bitwise combination of the SerializerFactory::OPTION_ flags
+	 * @param int $options bitwise combination of the BaseDataModelSerializerFactory::OPTION_ flags
 	 *
-	 * @return SerializerFactory
+	 * @return BaseDataModelSerializerFactory
 	 */
-	public function getSerializerFactory( $options = SerializerFactory::OPTION_DEFAULT ) {
-		return new SerializerFactory( new DataValueSerializer(), $options );
+	public function getBaseDataModelSerializerFactory(
+		$options = BaseDataModelSerializerFactory::OPTION_DEFAULT
+	) {
+		return new BaseDataModelSerializerFactory( new DataValueSerializer(), $options );
 	}
 
 	/**
@@ -1385,11 +1387,11 @@ class WikibaseRepo {
 	public function getAllTypesEntityDeserializer() {
 		if ( $this->entityDeserializer === null ) {
 			$deserializerFactoryCallbacks = $this->entityTypeDefinitions->getDeserializerFactoryCallbacks();
-			$deserializerFactory = $this->getBaseDataModelDeserializerFactory();
+			$baseDeserializerFactory = $this->getBaseDataModelDeserializerFactory();
 			$deserializers = array();
 
 			foreach ( $deserializerFactoryCallbacks as $callback ) {
-				$deserializers[] = call_user_func( $callback, $deserializerFactory );
+				$deserializers[] = call_user_func( $callback, $baseDeserializerFactory );
 			}
 
 			$this->entityDeserializer = new DispatchingDeserializer( $deserializers );
@@ -1408,18 +1410,20 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @param int $options bitwise combination of the SerializerFactory::OPTION_ flags
+	 * @param int $options bitwise combination of the BaseDataModelSerializerFactory::OPTION_ flags
 	 *
 	 * @return Serializer
 	 */
-	public function getEntitySerializer( $options = SerializerFactory::OPTION_DEFAULT ) {
+	public function getAllTypesEntitySerializer(
+		$options = BaseDataModelSerializerFactory::OPTION_DEFAULT
+	) {
 		if ( !isset( $this->entitySerializers[$options] ) ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
-			$serializerFactory = $this->getSerializerFactory( $options );
+			$baseSerializerFactory = $this->getBaseDataModelSerializerFactory( $options );
 			$serializers = array();
 
 			foreach ( $serializerFactoryCallbacks as $callback ) {
-				$serializers[] = call_user_func( $callback, $serializerFactory );
+				$serializers[] = call_user_func( $callback, $baseSerializerFactory );
 			}
 
 			$this->entitySerializers[$options] = new DispatchingSerializer( $serializers );
@@ -1450,7 +1454,7 @@ class WikibaseRepo {
 	 * @return Serializer
 	 */
 	public function getStatementSerializer() {
-		return $this->getSerializerFactory()->newStatementSerializer();
+		return $this->getBaseDataModelSerializerFactory()->newStatementSerializer();
 	}
 
 	/**
@@ -1617,8 +1621,8 @@ class WikibaseRepo {
 	 * @return ApiHelperFactory
 	 */
 	public function getApiHelperFactory( IContextSource $context ) {
-		$serializerOptions = SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH
-			+ SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH;
+		$serializerOptions = BaseDataModelSerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH
+			+ BaseDataModelSerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH;
 
 		return new ApiHelperFactory(
 			$this->getEntityTitleLookup(),
@@ -1628,8 +1632,8 @@ class WikibaseRepo {
 			$this->getSummaryFormatter(),
 			$this->getEntityRevisionLookup( 'uncached' ),
 			$this->newEditEntityFactory( $context ),
-			$this->getSerializerFactory( $serializerOptions ),
-			$this->getEntitySerializer( $serializerOptions ),
+			$this->getBaseDataModelSerializerFactory( $serializerOptions ),
+			$this->getAllTypesEntitySerializer( $serializerOptions ),
 			$this->getEntityIdParser(),
 			$this->getStore()->newSiteLinkStore(),
 			$this->getEntityFactory(),
@@ -1747,9 +1751,9 @@ class WikibaseRepo {
 			// CachingPropertyInfoLookup enough?
 			new InProcessCachingDataTypeLookup( $this->getPropertyDataTypeLookup() ),
 			$this->getLocalItemUriParser(),
-			$this->getEntitySerializer(
-				SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
-				SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
+			$this->getAllTypesEntitySerializer(
+				BaseDataModelSerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
+				BaseDataModelSerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
 			),
 			$this->settings->getSetting( 'preferredGeoDataProperties' ),
 			$this->settings->getSetting( 'preferredPageImagesProperties' ),
