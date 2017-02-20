@@ -69,6 +69,7 @@ use Wikibase\Repo\SnakFactory;
 use Wikibase\Repo\ValidatorBuilders;
 use Wikibase\Repo\Validators\CompositeValidator;
 use Wikibase\Repo\Validators\EntityExistsValidator;
+use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
@@ -304,6 +305,11 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	public function testGetSummaryFormatter() {
 		$returnValue = $this->getWikibaseRepo()->getSummaryFormatter();
 		$this->assertInstanceOf( SummaryFormatter::class, $returnValue );
+	}
+
+	public function testGetTermValidatorFactory() {
+		$factory = $this->getWikibaseRepo()->getTermValidatorFactory();
+		$this->assertInstanceOf( TermValidatorFactory::class, $factory );
 	}
 
 	public function testGetChangeOpFactory() {
