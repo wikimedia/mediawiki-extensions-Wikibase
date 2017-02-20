@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_256038fc",
+        "filename": "lib/includes/RepositoryDefinitions.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-20T09:58:50Z",
+      "side": 1,
+      "message": "I am going to switch wfWarn to the exception, to not be bound to MediaWiki here.\n\n \u003e Can we please start moving stuff to a more specific namespace? \n\nSo you\u0027re saying we should start moving things from this particular class?\n\nThis was added to Wikibase\\Lib only because EntityTypeDefinitions and DatatypeDefinitions classes, which are somewhat \"related\" to this one. And this was the only reason to do so.\n\nI\u0027m all for organizing namespaces and components in a better way. But I think this needs some discussion and strategy first.",
+      "parentUuid": "ce3c5b53_d827030c",
+      "range": {
+        "startLine": 3,
+        "startChar": 10,
+        "endLine": 3,
+        "endChar": 22
+      },
+      "revId": "5d570475bc7ff9df509df15316c541a4ce9050eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_f80a07d5",
         "filename": "lib/includes/RepositoryDefinitions.php",
         "patchSetId": 9
