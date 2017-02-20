@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_05f654d4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4548
+      },
+      "writtenOn": "2017-02-20T03:21:04Z",
+      "side": 1,
+      "message": "Would someone be willing to code the database writes (lines 43 and 54 in mw.entity.wikibase.lua)? The comments currently on those lines should indicate what the code should do. The rest of the code should be in place.",
+      "parentUuid": "ce3c5b53_ffc89fac",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 6
+      },
+      "revId": "21cb94d5231492394b5daf7020019185053bc9e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_ffe17f2a",
         "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
         "patchSetId": 15
