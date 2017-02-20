@@ -13,7 +13,7 @@ Feature: Using quantity properties in statements
       | quantprop | quantity |
       And I am not logged in to the repo
 
-  @ui_only @integration
+  @ui_only
   Scenario: Quantity UI should work properly
     Given I am on an item page
       And The copyright warning has been dismissed

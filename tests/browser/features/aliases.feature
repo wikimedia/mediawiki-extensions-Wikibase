@@ -126,7 +126,7 @@ Feature: Edit aliases
       And Header save button should not be there
       And Header cancel button should be there
 
-  @integration @modify_entity @save_aliases
+  @modify_entity @save_aliases
   Scenario: Edit multiple aliases
     When I click the header edit button
       And I enter "alias1", "alias2" as new aliases

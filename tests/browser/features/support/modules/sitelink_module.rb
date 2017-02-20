@@ -15,7 +15,7 @@ module SitelinkPage
   div(:sitelink_table, css: "div[data-wb-sitelinks-group='wikipedia']")
   span(:sitelink_siteid, css: "div[data-wb-sitelinks-group='wikipedia'] ul.wikibase-sitelinklistview-listview span.wikibase-sitelinkview-siteid")
   ul(:sitelink_list, css: "div[data-wb-sitelinks-group='wikipedia'] ul.wikibase-sitelinklistview-listview")
-  a(:sitelink_link, css: "div[data-wb-sitelinks-group='wikipedia'] ul.wikibase-sitelinklistview-listview span.wikibase-sitelinkview-page a")
+  link(:sitelink_link, css: "div[data-wb-sitelinks-group='wikipedia'] ul.wikibase-sitelinklistview-listview span.wikibase-sitelinkview-page a")
   span(:sitelink_counter, class: 'wikibase-sitelinkgroupview-counter')
   text_field(:page_input_field_disabled, xpath: "//div[contains(@data-wb-sitelinks-group, 'wikipedia')]//table//td[contains(@class, 'wikibase-sitelinkview-link')]//input[@disabled]")
   ul(:site_id_dropdown, xpath: "//ul[contains(@class, 'wikibase-siteselector-list')]")
@@ -23,15 +23,15 @@ module SitelinkPage
   ul(:page_name_dropdown, css: 'ul.ui-suggester-list:not(.ui-entityselector-list):not(.wikibase-siteselector-list)')
   li(:page_name_dropdown_first_element, css: 'ul.ui-suggester-list:not(.ui-entityselector-list):not(.wikibase-siteselector-list) li')
 
-  a(:remove_sitelink_link, css: "div[data-wb-sitelinks-group='wikipedia'] ul span.wikibase-toolbar-button-remove:not(.wikibase-toolbarbutton-disabled) > a")
-  a(:remove_sitelink_link_disabled, css: "div[data-wb-sitelinks-group='wikipedia'] ul span.wikibase-toolbar-button-remove.wikibase-toolbarbutton-disabled > a")
-  a(:save_sitelink_link, css: "div[data-wb-sitelinks-group='wikipedia'] .wikibase-toolbar-container span.wikibase-toolbar-button-save:not(.wikibase-toolbarbutton-disabled) > a")
-  a(:save_sitelink_link_disabled, css: "div[data-wb-sitelinks-group='wikipedia'] .wikibase-toolbar-container span.wikibase-toolbar-button-save.wikibase-toolbarbutton-disabled > a")
-  a(:cancel_sitelink_link, css: "div[data-wb-sitelinks-group='wikipedia'] .wikibase-toolbar-container span.wikibase-toolbar-button-cancel:not(.wikibase-toolbarbutton-disabled) > a")
-  a(:edit_sitelink_link, css: "div[data-wb-sitelinks-group='wikipedia'] .wikibase-toolbar-container span.wikibase-toolbar-button-edit:not(.wikibase-toolbarbutton-disabled) > a")
-  a(:edit_sitelink_link_disabled, css: "div[data-wb-sitelinks-group='wikipedia'] .wikibase-toolbar-container wikibase-toolbar-button-edit.wikibase-toolbarbutton-disabled > a")
-  a(:edit_sitelink_link_en, css: "div[data-wb-sitelinks-group='wikipedia'] table tr.wikibase-sitelinkview-enwiki span.wikibase-toolbar-button-edit:not(.wikibase-toolbarbutton-disabled) > a")
-  a(:edit_sitelink_link_en_disabled, css: "div[data-wb-sitelinks-group='wikipedia'] table tr.wikibase-sitelinkview-enwiki span.wikibase-toolbar-button-edit.wikibase-toolbarbutton-disabled > a")
+  link(:remove_sitelink_link, css: "div[data-wb-sitelinks-group='wikipedia'] ul span.wikibase-toolbar-button-remove:not(.wikibase-toolbarbutton-disabled) > a")
+  link(:remove_sitelink_link_disabled, css: "div[data-wb-sitelinks-group='wikipedia'] ul span.wikibase-toolbar-button-remove.wikibase-toolbarbutton-disabled > a")
+  link(:save_sitelink_link, css: "div[data-wb-sitelinks-group='wikipedia'] .wikibase-toolbar-container span.wikibase-toolbar-button-save:not(.wikibase-toolbarbutton-disabled) > a")
+  link(:save_sitelink_link_disabled, css: "div[data-wb-sitelinks-group='wikipedia'] .wikibase-toolbar-container span.wikibase-toolbar-button-save.wikibase-toolbarbutton-disabled > a")
+  link(:cancel_sitelink_link, css: "div[data-wb-sitelinks-group='wikipedia'] .wikibase-toolbar-container span.wikibase-toolbar-button-cancel:not(.wikibase-toolbarbutton-disabled) > a")
+  link(:edit_sitelink_link, css: "div[data-wb-sitelinks-group='wikipedia'] .wikibase-toolbar-container span.wikibase-toolbar-button-edit:not(.wikibase-toolbarbutton-disabled) > a")
+  link(:edit_sitelink_link_disabled, css: "div[data-wb-sitelinks-group='wikipedia'] .wikibase-toolbar-container wikibase-toolbar-button-edit.wikibase-toolbarbutton-disabled > a")
+  link(:edit_sitelink_link_en, css: "div[data-wb-sitelinks-group='wikipedia'] table tr.wikibase-sitelinkview-enwiki span.wikibase-toolbar-button-edit:not(.wikibase-toolbarbutton-disabled) > a")
+  link(:edit_sitelink_link_en_disabled, css: "div[data-wb-sitelinks-group='wikipedia'] table tr.wikibase-sitelinkview-enwiki span.wikibase-toolbar-button-edit.wikibase-toolbarbutton-disabled > a")
   h1(:article_title, xpath: "//h1[contains(@class, 'firstHeading')]")
   span(:sitelink_help_field, css: "div[data-wb-sitelinks-group='wikipedia'] .wikibase-toolbar-container span.wb-help-field-hint")
 
@@ -86,7 +86,7 @@ module SitelinkPage
       insert_page(index, sitelink[1])
       index += 1
     end
-    save_sitelink_link_element.when_visible.click
+    save_sitelink_link_element.when_present.click
     wait_for_api_callback
   end
 

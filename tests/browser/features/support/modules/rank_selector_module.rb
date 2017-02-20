@@ -28,14 +28,14 @@ module RankSelectorPage
   ])
 
   def select_rank(group_index, claim_index, rank)
-    rank_selector(group_index, claim_index).when_visible.click
+    rank_selector(group_index, claim_index).when_present.click
     rank_selector_menu_element.when_visible
     # the following is to work around an issue where webdriver does behaves
     # differently when doing element.click and element.fire_event('onClick')
     # in (at least) firefox.
     # see also https://groups.google.com/forum/#!topic/watir-general/iYH-_OX1PPg
     rank_list[rank].item_element.when_visible.fire_event('onClick')
-    rank_list[rank].item_element.when_visible.click
+    rank_list[rank].item_element.when_present.click
     ajax_wait
   end
 end
