@@ -15,7 +15,6 @@ require 'mediawiki_selenium/step_definitions'
 require 'mediawiki_selenium'
 require 'mediawiki_api/wikidata'
 require 'net/http'
-require 'active_support/all'
 require 'require_all'
 
 lenv = MediawikiSelenium::Environment.load_default
