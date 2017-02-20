@@ -92,27 +92,28 @@ class ViewEntityAction extends ViewAction {
 	 */
 	private function overridePageMetaTags( OutputPage $outputPage ) {
 		$meta = $this->getOutput()->getProperty( 'wikibase-meta-tags' );
-		$openGraphTitleAdded = false;
-		$openGraphDescriptionAdded = false;
+
+		if ( $this->isDiff() ) {
+			if ( isset( $meta['title'] ) ) {
+				$this->setPageTitle( $outputPage, $meta['title'] );
+			}
+
+			// No description, social media tags, or any search engine optimization for diffs
+			return;
+		}
 
 		if ( isset( $meta['title'] ) ) {
-			if ( $this->isDiff() ) {
-				$this->setPageTitle( $outputPage, $meta['title'] );
-			} else {
-				$this->setHTMLTitle( $outputPage, $meta['title'] );
-				$outputPage->addMeta( 'og:title', $meta['title'] );
-				$openGraphTitleAdded = true;
-			}
+			$this->setHTMLTitle( $outputPage, $meta['title'] );
+			$outputPage->addMeta( 'og:title', $meta['title'] );
 		}
 
 		if ( isset( $meta['description'] ) ) {
 			$outputPage->addMeta( 'description', $meta['description'] );
 			$outputPage->addMeta( 'og:description', $meta['description'] );
-			$openGraphDescriptionAdded = true;
-		}
 
-		if ( $openGraphTitleAdded === true && $openGraphDescriptionAdded === true ) {
-			$outputPage->addMeta( 'twitter:card', 'summary' );
+			if ( isset( $meta['title'] ) ) {
+				$outputPage->addMeta( 'twitter:card', 'summary' );
+			}
 		}
 	}
 
