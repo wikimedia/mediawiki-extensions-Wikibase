@@ -37,7 +37,7 @@ class SpecialSetDescription extends SpecialModifyTerm {
 	}
 
 	/**
-	 * @see SpecialSetEntity::getPostedValue()
+	 * @see SpecialModifyTerm::getPostedValue()
 	 *
 	 * @return string
 	 */
@@ -46,7 +46,7 @@ class SpecialSetDescription extends SpecialModifyTerm {
 	}
 
 	/**
-	 * @see SpecialSetEntity::getValue()
+	 * @see SpecialModifyTerm::getValue()
 	 *
 	 * @param EntityDocument $entity
 	 * @param string $languageCode
@@ -69,7 +69,7 @@ class SpecialSetDescription extends SpecialModifyTerm {
 	}
 
 	/**
-	 * @see SpecialSetEntity::setValue()
+	 * @see SpecialModifyTerm::setValue()
 	 *
 	 * @param EntityDocument $entity
 	 * @param string $languageCode
