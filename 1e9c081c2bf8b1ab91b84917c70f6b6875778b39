@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_b0bd6465",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-20T12:23:40Z",
+      "side": 1,
+      "message": "Switched to use strncmp. I can make it use strpos if you say it fits better in this case (I am not sure as we assume in most cases it is not going to start with the given prefix).\n\n \u003e This is a bit overengeneering. \n\nI was asked to put in the private method (to be accurate it was a substr code before). I guess I can only satisfy only one of the preferred ways :)",
+      "parentUuid": "ce3c5b53_4fd4844b",
+      "revId": "1e9c081c2bf8b1ab91b84917c70f6b6875778b39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_0fce7cb9",
         "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_108690be",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-20T12:23:40Z",
+      "side": 1,
+      "message": "\u003e Uh? Sorry, but I find this not acceptable. This code here does not know if $target really starts with this prefix, but still cuts it of at a fixed position.\n \u003e I can see this is only called after isForeignEntityPage, but there is no guarantee for this. This makes the code fragile.\n\nSo it checks the prefix is there in a line before. What better guarantee could there be? What else could it check before grabbing the part of the id from the title text?\n\n \u003e The strlen is also pointless with a fixed string.\n\nIt is a fixed string indeed. I didn\u0027t put a number there as it would be a bit confusing IMO to suddenly see 19 in there. Do you think it should use a number and explain what happens in the comment?",
+      "parentUuid": "ce3c5b53_0fce7cb9",
+      "revId": "1e9c081c2bf8b1ab91b84917c70f6b6875778b39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_b0efa481",
         "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
         "patchSetId": 4
@@ -47,6 +83,24 @@
       "writtenOn": "2017-02-20T12:11:06Z",
       "side": 1,
       "message": "I guess it would be better to use EntityIdComposer here instead of EntityIfParser. Why did I do it like this?",
+      "revId": "1e9c081c2bf8b1ab91b84917c70f6b6875778b39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_70a03c3f",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-20T12:23:40Z",
+      "side": 1,
+      "message": "meh, silly me. Composer is for other use case.",
+      "parentUuid": "ce3c5b53_b0efa481",
       "revId": "1e9c081c2bf8b1ab91b84917c70f6b6875778b39",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
