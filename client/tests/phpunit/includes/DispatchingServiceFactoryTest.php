@@ -2,14 +2,15 @@
 
 namespace Wikibase\Client\Tests;
 
+use Prophecy\Argument;
 use Wikibase\Client\DispatchingServiceFactory;
 use Wikibase\Client\Store\RepositoryServiceContainer;
 use Wikibase\Client\Store\RepositoryServiceContainerFactory;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityRevision;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 
 /**
  * @covers Wikibase\Client\DispatchingServiceFactory
@@ -21,149 +22,198 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
  */
 class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 
-	/**
-	 * @return RepositoryServiceContainerFactory
-	 */
-	private function getRepositoryServiceContainerFactory() {
-		$entityRevisionLookup = $this->getMock( EntityRevisionLookup::class );
-
-		$container = $this->getMockBuilder( RepositoryServiceContainer::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$container->expects( $this->any() )
-			->method( 'getService' )
-			->will(
-				$this->returnCallback( function ( $service ) use ( $entityRevisionLookup ) {
-					return $service === 'EntityRevisionLookup' ? $entityRevisionLookup : null;
-				} )
-			);
-
-		$containerFactory = $this->getMockBuilder( RepositoryServiceContainerFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$containerFactory->expects( $this->any() )
-			->method( 'newContainer' )
-			->will( $this->returnValue( $container ) );
-
-		return $containerFactory;
-	}
-
-	/**
-	 * @param RepositoryServiceContainerFactory $containerFactory
-	 *
-	 * @return DispatchingServiceFactory
-	 */
-	private function getDispatchingServiceFactory( RepositoryServiceContainerFactory $containerFactory ) {
+	public function testGetServiceNames_ReturnsNameOfDefinedService() {
 		$factory = new DispatchingServiceFactory(
-			$containerFactory,
-			[ '', 'foo' ],
-			[ 'item' => '', 'property' => 'foo' ]
+			$this->dummy( RepositoryServiceContainerFactory::class ),
+			[],
+			[]
 		);
 
-		$factory->defineService( 'EntityRevisionLookup', function() {
-			return $this->getMock( EntityRevisionLookup::class );
-		} );
+		$factory->defineService(
+			'SomeService',
+			function () {
+				return $this->someService( 'does not matter' );
+			}
+		);
 
-		return $factory;
+		$this->assertContains( 'SomeService', $factory->getServiceNames() );
+	}
+
+	public function testGetServiceMap_ReturnsArrayMappingNameOfRepositoryToServiceForThatRepository(
+	) {
+		$someServiceName = 'some-service';
+		$localService = $this->someService( 'local' );
+		$fooService = $this->someService( 'foo' );
+
+		$localContainer = $this->prophesize( RepositoryServiceContainer::class );
+		$localContainer->getService( $someServiceName )->willReturn( $localService );
+
+		$fooContainer = $this->prophesize( RepositoryServiceContainer::class );
+		$fooContainer->getService( $someServiceName )->willReturn( $fooService );
+
+		$rscFactory = $this->prophesize( RepositoryServiceContainerFactory::class );
+		$rscFactory->newContainer( '' )->willReturn( $localContainer );
+		$rscFactory->newContainer( 'foo' )->willReturn( $fooContainer );
+		$dispatchingFactory = new DispatchingServiceFactory(
+			$rscFactory->reveal(),
+			[ '', 'foo' ],
+			[]
+		);
+
+		$serviceMap = $dispatchingFactory->getServiceMap( $someServiceName );
+
+		$expectedServiceMap = [
+			'' => $localService,
+			'foo' => $fooService,
+		];
+		$this->assertEquals( $expectedServiceMap, $serviceMap );
+	}
+
+	public function testGetService_AlwaysReturnsTheSameService() {
+		$factory = new DispatchingServiceFactory(
+			$this->dummy( RepositoryServiceContainerFactory::class ),
+			[],
+			[]
+		);
+
+		$someService = $this->someService( 'some service instance' );
+		$factory->defineService(
+			'some-service',
+			function () use ( $someService ) {
+				return $someService;
+			}
+		);
+
+		$serviceOne = $factory->getService( 'some-service' );
+		$serviceTwo = $factory->getService( 'some-service' );
+
+		$this->assertSame( $someService, $serviceOne );
+		$this->assertSame( $someService, $serviceTwo );
+	}
+
+	public function testEntityUpdatedDelegatesEventToContainerOfRelevantRepository() {
+		$localContainer = $this->prophesize( RepositoryServiceContainer::class );
+		$fooContainer = $this->prophesize( RepositoryServiceContainer::class );
+		$factory = new DispatchingServiceFactory(
+			$this->createRepositoryServiceContainerFactory(
+				[ '' => $localContainer->reveal(), 'foo' => $fooContainer->reveal() ]
+			),
+			[ '', 'foo' ],
+			[ Item::ENTITY_TYPE => 'foo' ]
+		);
+
+		$factory->entityUpdated( new EntityRevision( new Item( new ItemId( 'foo:Q123' ) ) ) );
+
+		$fooContainer->entityUpdated(
+			new EntityRevision( new Item( new ItemId( 'foo:Q123' ) ) )
+		)->shouldHaveBeenCalled();
+		$localContainer->entityUpdated( Argument::any() )->shouldNotHaveBeenCalled();
+	}
+
+	public function testEntityDeletedDelegatesEventToContainerOfRelevantRepository() {
+		$localContainer = $this->prophesize( RepositoryServiceContainer::class );
+		$fooContainer = $this->prophesize( RepositoryServiceContainer::class );
+		$factory = new DispatchingServiceFactory(
+			$this->createRepositoryServiceContainerFactory(
+				[ '' => $localContainer->reveal(), 'foo' => $fooContainer->reveal() ]
+			),
+			[ '', 'foo' ],
+			[ Item::ENTITY_TYPE => 'foo' ]
+		);
+
+		$factory->entityDeleted( new ItemId( 'foo:Q123' ) );
+
+		$fooContainer->entityDeleted( new ItemId( 'foo:Q123' ) )->shouldHaveBeenCalled();
+		$localContainer->entityDeleted( Argument::any() )->shouldNotHaveBeenCalled();
+	}
+
+	public function testRedirectUpdatedDelegatesEventToContainerOfRelevantRepository() {
+		$localContainer = $this->prophesize( RepositoryServiceContainer::class );
+		$fooContainer = $this->prophesize( RepositoryServiceContainer::class );
+		$factory = new DispatchingServiceFactory(
+			$this->createRepositoryServiceContainerFactory(
+				[ '' => $localContainer->reveal(), 'foo' => $fooContainer->reveal() ]
+			),
+			[ '', 'foo' ],
+			[ Item::ENTITY_TYPE => 'foo' ]
+		);
+
+		$factory->redirectUpdated(
+			new EntityRedirect( new ItemId( 'foo:Q1' ), new ItemId( 'foo:Q2' ) ),
+			100
+		);
+
+		$fooContainer->redirectUpdated(
+			new EntityRedirect( new ItemId( 'foo:Q1' ), new ItemId( 'foo:Q2' ) ),
+			100
+		)
+			->shouldHaveBeenCalled();
+		$localContainer->redirectUpdated(
+			Argument::any(),
+			Argument::any()
+		)->shouldNotHaveBeenCalled();
 	}
 
 	public function testGetEntityTypeToRepoMapping() {
-		$factory = $this->getDispatchingServiceFactory( $this->getRepositoryServiceContainerFactory() );
+		$factory = new DispatchingServiceFactory(
+			$this->dummy( RepositoryServiceContainerFactory::class ),
+			[ '', 'foo' ],
+			[ Item::ENTITY_TYPE => '', Property::ENTITY_TYPE => 'foo' ]
+		);
 
 		$this->assertEquals(
 			[
-				'item' => '',
-				'property' => 'foo',
+				Item::ENTITY_TYPE => '',
+				Property::ENTITY_TYPE => 'foo',
 			],
 			$factory->getEntityTypeToRepoMapping()
 		);
 	}
 
-	public function testGetServiceNames() {
-		$factory = $this->getDispatchingServiceFactory( $this->getRepositoryServiceContainerFactory() );
-
-		$this->assertEquals(
-			[ 'EntityRevisionLookup' ],
-			$factory->getServiceNames()
-		);
-	}
-
-	public function testGetServiceMap() {
-		$factory = $this->getDispatchingServiceFactory( $this->getRepositoryServiceContainerFactory() );
-
-		$serviceMap = $factory->getServiceMap( 'EntityRevisionLookup' );
-
-		$this->assertEquals(
-			[ '', 'foo' ],
-			array_keys( $serviceMap )
-		);
-		$this->assertContainsOnlyInstancesOf( EntityRevisionLookup::class, $serviceMap );
-	}
-
-	public function testGetService() {
-		$factory = $this->getDispatchingServiceFactory( $this->getRepositoryServiceContainerFactory() );
-
-		$serviceOne = $factory->getService( 'EntityRevisionLookup' );
-		$serviceTwo = $factory->getService( 'EntityRevisionLookup' );
-
-		$this->assertInstanceOf( EntityRevisionLookup::class, $serviceOne );
-		$this->assertInstanceOf( EntityRevisionLookup::class, $serviceTwo );
-		$this->assertSame( $serviceOne, $serviceTwo );
-	}
-
 	/**
-	 * @param string $event
+	 * @param array $containers Assoc array [ '<repo name>' => RepositoryServiceContainer, ... ]
 	 *
 	 * @return RepositoryServiceContainerFactory
 	 */
-	private function getRepositoryServiceContainerFactoryForEventTest( $event ) {
-		$localServiceContainer = $this->getMockBuilder( RepositoryServiceContainer::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$localServiceContainer->expects( $this->never() )->method( $event );
-
-		$fooServiceContainer = $this->getMockBuilder( RepositoryServiceContainer::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$fooServiceContainer->expects( $this->atLeastOnce() )->method( $event );
-
+	private function createRepositoryServiceContainerFactory( array $containers ) {
 		$containerFactory = $this->getMockBuilder( RepositoryServiceContainerFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
-
-		$containerFactory->expects( $this->any() )
-			->method( 'newContainer' )
+		$containerFactory->method( 'newContainer' )
 			->will(
-				$this->returnCallback( function ( $container ) use ( $localServiceContainer, $fooServiceContainer ) {
-					return $container === '' ? $localServiceContainer : $fooServiceContainer;
-				} )
+				$this->returnCallback(
+					function ( $container ) use ( $containers ) {
+						return $containers[ $container ];
+					}
+				)
 			);
 
 		return $containerFactory;
 	}
 
-	public function testEntityUpdatedDelegatesEventToContainerOfRelevantRepository() {
-		$factory = $this->getDispatchingServiceFactory(
-			$this->getRepositoryServiceContainerFactoryForEventTest( 'entityUpdated' )
-		);
-
-		$factory->entityUpdated( new EntityRevision( new Item( new ItemId( 'foo:Q123' ) ) ) );
+	/**
+	 * Creates test dummy
+	 *
+	 * @param string $class
+	 *
+	 * @return object
+	 */
+	private function dummy( $class ) {
+		return $this->prophesize( $class )->reveal();
 	}
 
-	public function testEntityDeletedDelegatesEventToContainerOfRelevantRepository() {
-		$factory = $this->getDispatchingServiceFactory(
-			$this->getRepositoryServiceContainerFactoryForEventTest( 'entityDeleted' )
-		);
+	/**
+	 * Creates dummy object (in context of this text to represent some service)
+	 *
+	 * @param $description
+	 *
+	 * @return object
+	 */
+	private function someService( $description ) {
+		$result = new \stdClass();
+		$result->description = $description;
 
-		$factory->entityDeleted( new ItemId( 'foo:Q123' ) );
-	}
-
-	public function testRedirectUpdatedDelegatesEventToContainerOfRelevantRepository() {
-		$factory = $this->getDispatchingServiceFactory(
-			$this->getRepositoryServiceContainerFactoryForEventTest( 'redirectUpdated' )
-		);
-
-		$factory->redirectUpdated( new EntityRedirect( new ItemId( 'foo:Q123' ), new ItemId( 'foo:Q321' ) ), 100 );
+		return $result;
 	}
 
 }
