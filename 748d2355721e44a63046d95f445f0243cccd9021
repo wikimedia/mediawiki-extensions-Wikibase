@@ -83,6 +83,41 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_433e9127",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-20T22:32:59Z",
+      "side": 1,
+      "message": "easier to read the code, and will end up sorted later when the imports are optimized",
+      "parentUuid": "2ef897d1_176412ad",
+      "revId": "748d2355721e44a63046d95f445f0243cccd9021",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_c34aa1c8",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-20T22:32:59Z",
+      "side": 1,
+      "message": "please add documentation here for MediaWikiPageNameNormalizer",
+      "revId": "748d2355721e44a63046d95f445f0243cccd9021",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_681b8983",
         "filename": "repo/includes/ValidatorBuilders.php",
         "patchSetId": 3
