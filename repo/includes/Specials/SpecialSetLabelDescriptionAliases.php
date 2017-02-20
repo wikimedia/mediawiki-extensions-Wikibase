@@ -246,7 +246,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	/**
 	 * @see SpecialModifyEntity::prepareArguments
 	 *
-	 * @param string $subPage
+	 * @param string|null $subPage
 	 */
 	protected function prepareArguments( $subPage ) {
 		$this->extractInput( $subPage );
@@ -274,7 +274,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	}
 
 	/**
-	 * @param string $subPage
+	 * @param string|null $subPage
 	 */
 	private function extractInput( $subPage ) {
 		$request = $this->getRequest();

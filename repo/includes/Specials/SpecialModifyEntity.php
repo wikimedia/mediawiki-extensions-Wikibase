@@ -150,7 +150,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	/**
 	 * Prepares the arguments.
 	 *
-	 * @param string $subPage
+	 * @param string|null $subPage
 	 */
 	protected function prepareArguments( $subPage ) {
 		$parts = $subPage === '' ? array() : explode( '/', $subPage, 2 );
