@@ -7,7 +7,7 @@
 # basic steps for properties
 
 Then(/^Property datatype heading should be there$/) do
-  expect(on(PropertyPage).property_datatype_heading_element.when_visible).to be_visible
+  expect(on(PropertyPage).property_datatype_heading_element.when_present).to be_visible
 end
 
 Then(/^Property datatype should display (.*)$/) do |datatype|

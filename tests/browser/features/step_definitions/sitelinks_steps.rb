@@ -7,15 +7,15 @@
 # tests for item sitelinks
 
 When(/^I click the sitelink remove button$/) do
-  on(ItemPage).remove_sitelink_link_element.when_visible.click
+  on(ItemPage).remove_sitelink_link_element.when_present.click
 end
 
 When(/^I click the sitelink edit button$/) do
-  on(ItemPage).edit_sitelink_link_element.when_visible.click
+  on(ItemPage).edit_sitelink_link_element.when_present.click
 end
 
 When(/^I click the sitelink cancel button$/) do
-  on(ItemPage).cancel_sitelink_link_element.when_visible.click
+  on(ItemPage).cancel_sitelink_link_element.when_present.click
 end
 
 When(/^I click the sitelink save button$/) do
@@ -57,7 +57,7 @@ When(/^I add the following sitelinks:$/) do |table|
 end
 
 When(/^I order the sitelinks by languagename$/) do
-  on(ItemPage).sitelink_sort_language_element.when_visible.click
+  on(ItemPage).sitelink_sort_language_element.when_present.click
 end
 
 When(/^I mock that the list of sitelinks is complete$/) do
@@ -73,7 +73,7 @@ Then(/^Sitelink heading should be there$/) do
 end
 
 Then(/^Sitelink heading should not be there$/) do
-  on(ItemPage).sitelink_heading_element.when_not_visible
+  on(ItemPage).sitelink_heading_element.when_not_present
 end
 
 Then(/^Sitelink remove button should be there$/) do
@@ -81,11 +81,11 @@ Then(/^Sitelink remove button should be there$/) do
 end
 
 Then(/^Sitelink remove button should not be there$/) do
-  on(ItemPage).remove_sitelink_link_element.when_not_visible
+  on(ItemPage).remove_sitelink_link_element.when_not_present
 end
 
 Then(/^Sitelink remove button should be disabled$/) do
-  on(ItemPage).remove_sitelink_link_element.when_not_visible
+  on(ItemPage).remove_sitelink_link_element.when_not_present
   on(ItemPage).remove_sitelink_link_disabled_element.when_visible
 end
 
@@ -94,11 +94,11 @@ Then(/^Sitelink edit button should be there$/) do
 end
 
 Then(/^Sitelink edit button should not be there$/) do
-  on(ItemPage).edit_sitelink_link_element.when_not_visible
+  on(ItemPage).edit_sitelink_link_element.when_not_present
 end
 
 Then(/^Sitelink edit button should be disabled$/) do
-  on(ItemPage).edit_sitelink_link_element.when_not_visible
+  on(ItemPage).edit_sitelink_link_element.when_not_present
   on(ItemPage).edit_sitelink_link_disabled_element.when_visible
 end
 
@@ -107,11 +107,11 @@ Then(/^Sitelink save button should be there$/) do
 end
 
 Then(/^Sitelink save button should not be there$/) do
-  on(ItemPage).save_sitelink_link_element.when_not_visible
+  on(ItemPage).save_sitelink_link_element.when_not_present
 end
 
 Then(/^Sitelink save button should be disabled$/) do
-  on(ItemPage).save_sitelink_link_element.when_not_visible
+  on(ItemPage).save_sitelink_link_element.when_not_present
   on(ItemPage).save_sitelink_link_disabled_element.when_visible
 end
 
@@ -120,7 +120,7 @@ Then(/^Sitelink cancel button should be there$/) do
 end
 
 Then(/^Sitelink cancel button should not be there$/) do
-  on(ItemPage).cancel_sitelink_link_element.when_not_visible
+  on(ItemPage).cancel_sitelink_link_element.when_not_present
 end
 
 Then(/^Sitelink counter should be there$/) do
@@ -167,7 +167,7 @@ Then(/^Sitelink siteid dropdown should be there$/) do
 end
 
 Then(/^Sitelink siteid dropdown should not be there$/) do
-  on(ItemPage).site_id_dropdown_element.when_not_visible
+  on(ItemPage).site_id_dropdown_element.when_not_present
 end
 
 Then(/^Sitelink siteid first suggestion should be (.+)$/) do |value|
@@ -183,7 +183,7 @@ Then(/^Sitelink pagename dropdown should be there$/) do
 end
 
 Then(/^Sitelink pagename dropdown should not be there$/) do
-  on(ItemPage).page_name_dropdown_element.when_not_visible
+  on(ItemPage).page_name_dropdown_element.when_not_present
 end
 
 Then(/^Sitelink pagename first suggestion should be (.+)$/) do |value|

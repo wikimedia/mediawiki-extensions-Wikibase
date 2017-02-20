@@ -24,11 +24,11 @@ When(/^I press the ESC key in the claim entity selector input field$/) do
 end
 
 Then(/^Snak entity selector input element should be there$/) do
-  expect(on(ItemPage).snak_entity_selector_input.when_visible).to be_visible
+  expect(on(ItemPage).snak_entity_selector_input.when_present).to be_visible
 end
 
 Then(/^Snak entity selector input element should not be there$/) do
-  expect(on(ItemPage).snak_entity_selector_input.when_not_visible).not_to be_visible
+  expect(on(ItemPage).snak_entity_selector_input.when_not_present).not_to be_visible
 end
 
 Then(/^Claim entity selector input element should be there$/) do
@@ -36,5 +36,5 @@ Then(/^Claim entity selector input element should be there$/) do
 end
 
 Then(/^Claim entity selector input element should not be there$/) do
-  expect(on(ItemPage).claim_entity_selector_input_element.when_not_visible).not_to be_visible
+  expect(on(ItemPage).claim_entity_selector_input_element.when_not_present).not_to be_visible
 end

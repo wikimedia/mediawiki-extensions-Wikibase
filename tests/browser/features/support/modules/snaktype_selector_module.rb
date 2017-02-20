@@ -20,14 +20,14 @@ module SnaktypeSelectorPage
   ])
 
   def select_snaktype(group_index, claim_index, snaktype)
-    snaktype_selector(group_index, claim_index).when_visible.click
+    snaktype_selector(group_index, claim_index).when_present.click
     snaktype_selector_menu_element.when_visible
     # the following is to work around an issue where webdriver does behaves
     # differently when doing element.click and element.fire_event('onClick')
     # in (at least) firefox.
     # see also https://groups.google.com/forum/#!topic/watir-general/iYH-_OX1PPg
     snaktype_list[snaktype].item_element.when_visible.fire_event('onClick')
-    snaktype_list[snaktype].item_element.when_visible.click
+    snaktype_list[snaktype].item_element.when_present.click
     ajax_wait
   end
 end

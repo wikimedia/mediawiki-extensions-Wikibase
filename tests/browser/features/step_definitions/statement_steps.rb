@@ -21,20 +21,20 @@ When(/^I have statements with the following properties and values:$/) do |statem
 end
 
 When /^I click the statement add button$/ do
-  on(ItemPage).add_statement_element.when_visible.click
+  on(ItemPage).add_statement_element.when_present.click
 end
 
 When /^I click the statement edit button$/ do
-  on(ItemPage).edit_statement_element.when_visible.click
+  on(ItemPage).edit_statement_element.when_present.click
 end
 
 When /^I click the statement cancel button$/ do
-  on(ItemPage).cancel_statement_element.when_visible.click
+  on(ItemPage).cancel_statement_element.when_present.click
 end
 
 When(/^I click the statement save button$/) do
   on(ItemPage) do |page|
-    page.save_statement_element.when_visible.click
+    page.save_statement_element.when_present.click
     page.ajax_wait
     page.wait_for_statement_request_finished
   end
@@ -56,7 +56,7 @@ end
 
 When(/^I enter (.+) in the claim property input field$/) do |value|
   on(ItemPage) do |page|
-    page.claim_entity_selector_input_element.when_visible.click
+    page.claim_entity_selector_input_element.when_present.click
     page.claim_entity_selector_input = value
     page.ajax_wait
   end
@@ -64,7 +64,7 @@ end
 
 When(/^I enter (.+) in the claim value input field$/) do |value|
   on(ItemPage) do |page|
-    page.claim_value_input_field_element.when_visible.click
+    page.claim_value_input_field_element.when_present.click
     page.claim_value_input_field = value
     page.ajax_wait
   end
@@ -72,7 +72,7 @@ end
 
 When(/^I enter (.+) in the InputExtender input field$/) do |value|
   on(ItemPage) do |page|
-    page.inputextender_input_element.when_visible.click
+    page.inputextender_input_element.when_present.click
     page.inputextender_input = value
     page.ajax_wait
   end
@@ -91,7 +91,7 @@ When(/^I press the RETURN key in the InputExtender input field$/) do
 end
 
 When(/^I click the InputExtender dropdown first element$/) do
-  on(ItemPage).inputextender_dropdown_first_element.when_visible.click
+  on(ItemPage).inputextender_dropdown_first_element.when_present.click
   on(ItemPage).ajax_wait
 end
 
@@ -149,7 +149,7 @@ end
 
 When(/^I edit claim (\d+) in group (\d+)$/) do |claim_index, group_index|
   on(ItemPage) do |page|
-    page.edit_claim_element(group_index, claim_index).when_visible.click
+    page.edit_claim_element(group_index, claim_index).when_present.click
     page.ajax_wait
   end
 end
@@ -159,23 +159,23 @@ When(/^I memorize the value of the the claim value input field$/) do
 end
 
 Then(/^Statements heading should be there$/) do
-  expect(on(ItemPage).statements_heading_element.when_visible).to be_visible
+  expect(on(ItemPage).statements_heading_element.when_present).to be_visible
 end
 
 Then(/^Statements heading should not be there$/) do
-  expect(on(ItemPage).statements_heading_element.when_not_visible).not_to be_visible
+  expect(on(ItemPage).statements_heading_element.when_not_present).not_to be_visible
 end
 
 Then(/^Statement help field should be there$/) do
-  expect(on(ItemPage).statement_help_field_element.when_visible).to be_visible
+  expect(on(ItemPage).statement_help_field_element.when_present).to be_visible
 end
 
 Then(/^Statement add button should be there$/) do
-  expect(on(ItemPage).add_statement_element.when_visible).to be_visible
+  expect(on(ItemPage).add_statement_element.when_present).to be_visible
 end
 
 Then(/^Statement add button should not be there$/) do
-  expect(on(ItemPage).add_statement_element.when_not_visible).not_to be_visible
+  expect(on(ItemPage).add_statement_element.when_not_present).not_to be_visible
 end
 
 Then(/^Statement edit button for claim (.+) in group (.+) should be there$/) do |claim_index, group_index|
@@ -187,42 +187,42 @@ Then(/^Statement add button for group (.+) should be there$/) do |group_index|
 end
 
 Then(/^Statement save button should be there$/) do
-  expect(on(ItemPage).save_statement_element.when_visible).to be_visible
+  expect(on(ItemPage).save_statement_element.when_present).to be_visible
 end
 
 Then(/^Statement save button should not be there$/) do
-  expect(on(ItemPage).save_statement_element.when_not_visible).not_to be_visible
+  expect(on(ItemPage).save_statement_element.when_not_present).not_to be_visible
 end
 
 Then(/^Statement save button should be disabled$/) do
   on(ItemPage) do |page|
-    expect(page.save_statement_element.when_not_visible).not_to be_visible
-    expect(page.save_statement_disabled_element.when_visible).to be_visible
+    expect(page.save_statement_element.when_not_present).not_to be_visible
+    expect(page.save_statement_disabled_element.when_present).to be_visible
   end
 end
 
 Then(/^Statement cancel button should be there$/) do
-  expect(on(ItemPage).cancel_statement_element.when_visible).to be_visible
+  expect(on(ItemPage).cancel_statement_element.when_present).to be_visible
 end
 
 Then(/^Statement cancel button should not be there$/) do
-  expect(on(ItemPage).cancel_statement_element.when_not_visible).not_to be_visible
+  expect(on(ItemPage).cancel_statement_element.when_not_present).not_to be_visible
 end
 
 Then(/^Claim value input element should be there$/) do
-  expect(on(ItemPage).claim_value_input_field_element.when_visible).to be_visible
+  expect(on(ItemPage).claim_value_input_field_element.when_present).to be_visible
 end
 
 Then(/^Claim value input element should not be there$/) do
-  expect(on(ItemPage).claim_value_input_field_element.when_not_visible).not_to be_visible
+  expect(on(ItemPage).claim_value_input_field_element.when_not_present).not_to be_visible
 end
 
 Then(/^Snak value input element should be there$/) do
-  expect(on(ItemPage).snak_value_input_field.when_visible).to be_visible
+  expect(on(ItemPage).snak_value_input_field.when_present).to be_visible
 end
 
 Then(/^Snak value input element should not be there$/) do
-  expect(on(ItemPage).snak_value_input_field.when_not_visible).not_to be_visible
+  expect(on(ItemPage).snak_value_input_field.when_not_present).not_to be_visible
 end
 
 Then(/^Statement name of group (.+) should be the label of (.+)$/) do |group_index, handle|
@@ -270,23 +270,23 @@ Then(/^(.*) should be the time calendar setting$/) do |calendar|
 end
 
 Then(/^Time precision chooser should be there$/) do
-  expect(on(ItemPage).time_precision_element.when_visible).to be_visible
+  expect(on(ItemPage).time_precision_element.when_present).to be_visible
 end
 
 Then(/^Time calendar chooser should be there$/) do
-  expect(on(ItemPage).time_calendar_element.when_visible).to be_visible
+  expect(on(ItemPage).time_calendar_element.when_present).to be_visible
 end
 
 Then(/^InputExtender preview should be there$/) do
-  expect(on(ItemPage).inputextender_preview_element.when_visible).to be_visible
+  expect(on(ItemPage).inputextender_preview_element.when_present).to be_visible
 end
 
 Then(/^InputExtender input should be there$/) do
-  expect(on(ItemPage).inputextender_input_element.when_visible).to be_visible
+  expect(on(ItemPage).inputextender_input_element.when_present).to be_visible
 end
 
 Then(/^Geo precision chooser should be there$/) do
-  expect(on(ItemPage).geo_precision_element.when_visible).to be_visible
+  expect(on(ItemPage).geo_precision_element.when_present).to be_visible
 end
 
 Then(/^(.*) should be the geo precision setting$/) do |precision|
@@ -294,9 +294,9 @@ Then(/^(.*) should be the geo precision setting$/) do |precision|
 end
 
 Then(/^InputExtender dropdown should be there$/) do
-  expect(on(ItemPage).inputextender_dropdown_element.when_visible).to be_visible
+  expect(on(ItemPage).inputextender_dropdown_element.when_present).to be_visible
 end
 
 Then(/^Unit suggester should be there$/) do
-  expect(on(ItemPage).inputextender_unitsuggester_element.when_visible).to be_visible
+  expect(on(ItemPage).inputextender_unitsuggester_element.when_present).to be_visible
 end

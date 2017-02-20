@@ -10,7 +10,7 @@ module EntitySelectorPage
   include PageObject
   # entity selector widget UI elements
   ul(:entity_selector_list, css: '.ui-entityselector-list:not(.wikibase-entitysearch-list)')
-  a(:first_entity_selector_link, css: '.ui-entityselector-list:not(.wikibase-entitysearch-list) li a')
+  link(:first_entity_selector_link, css: '.ui-entityselector-list:not(.wikibase-entitysearch-list) li a')
   span(:first_entity_selector_label, xpath: "//ul[contains(@class, 'ui-entityselector-list')]/li/a/span/span[contains(@class, 'ui-entityselector-label')]")
   span(:first_entity_selector_description, xpath: "//ul[contains(@class, 'ui-entityselector-list')]/li/a/span/span[contains(@class, 'ui-entityselector-description')]")
   text_field(:claim_entity_selector_input, css: 'div.wikibase-statementview-mainsnak input.ui-entityselector-input')
