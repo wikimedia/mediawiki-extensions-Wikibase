@@ -76,7 +76,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$entityIdParser = $wikibaseRepo->getEntityIdParser();
 
 		$entityDataFormatProvider = new EntityDataFormatProvider();
-		$serializerFactory = $wikibaseRepo->getSerializerFactory(
+		$serializerFactory = $wikibaseRepo->getBaseDataModelSerializerFactory(
 			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
 			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
 		);

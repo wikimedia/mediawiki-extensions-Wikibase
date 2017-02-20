@@ -289,7 +289,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetExternalFormatDeserializerFactory() {
-		$deserializerFactory = $this->getWikibaseClient()->getExternalFormatDeserializerFactory();
+		$deserializerFactory = $this->getWikibaseClient()->getBaseDataModelDeserializerFactory();
 		$this->assertInstanceOf( DeserializerFactory::class, $deserializerFactory );
 	}
 
