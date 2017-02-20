@@ -30,7 +30,7 @@ Then(/^Rank selector for claim (\d+) in group (\d+) should be disabled/) do |cla
 end
 
 Then(/^Rank selector menu should be visible$/) do
-  expect(on(ItemPage).rank_selector_menu_element.when_visible).to be_visible
+  expect(on(ItemPage).rank_selector_menu_element.when_present).to be_visible
 end
 
 Then(/^Rank selector menu should not be visible$/) do
@@ -38,7 +38,7 @@ Then(/^Rank selector menu should not be visible$/) do
 end
 
 Then(/^Rank selector item for (.+) rank should be visible$/) do |rank|
-  expect(on(ItemPage).rank_list[rank].item_element.when_visible).to be_visible
+  expect(on(ItemPage).rank_list[rank].item_element.when_present).to be_visible
 end
 
 Then(/^Rank selector item for (.+) rank should not be visible$/) do |rank|

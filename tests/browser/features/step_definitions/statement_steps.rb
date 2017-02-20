@@ -159,7 +159,7 @@ When(/^I memorize the value of the the claim value input field$/) do
 end
 
 Then(/^Statements heading should be there$/) do
-  expect(on(ItemPage).statements_heading_element.when_visible).to be_visible
+  expect(on(ItemPage).statements_heading_element.when_present).to be_visible
 end
 
 Then(/^Statements heading should not be there$/) do
@@ -167,11 +167,11 @@ Then(/^Statements heading should not be there$/) do
 end
 
 Then(/^Statement help field should be there$/) do
-  expect(on(ItemPage).statement_help_field_element.when_visible).to be_visible
+  expect(on(ItemPage).statement_help_field_element.when_present).to be_visible
 end
 
 Then(/^Statement add button should be there$/) do
-  expect(on(ItemPage).add_statement_element.when_visible).to be_visible
+  expect(on(ItemPage).add_statement_element.when_present).to be_visible
 end
 
 Then(/^Statement add button should not be there$/) do
@@ -187,7 +187,7 @@ Then(/^Statement add button for group (.+) should be there$/) do |group_index|
 end
 
 Then(/^Statement save button should be there$/) do
-  expect(on(ItemPage).save_statement_element.when_visible).to be_visible
+  expect(on(ItemPage).save_statement_element.when_present).to be_visible
 end
 
 Then(/^Statement save button should not be there$/) do
@@ -197,12 +197,12 @@ end
 Then(/^Statement save button should be disabled$/) do
   on(ItemPage) do |page|
     expect(page.save_statement_element.when_not_visible).not_to be_visible
-    expect(page.save_statement_disabled_element.when_visible).to be_visible
+    expect(page.save_statement_disabled_element.when_present).to be_visible
   end
 end
 
 Then(/^Statement cancel button should be there$/) do
-  expect(on(ItemPage).cancel_statement_element.when_visible).to be_visible
+  expect(on(ItemPage).cancel_statement_element.when_present).to be_visible
 end
 
 Then(/^Statement cancel button should not be there$/) do
@@ -210,7 +210,7 @@ Then(/^Statement cancel button should not be there$/) do
 end
 
 Then(/^Claim value input element should be there$/) do
-  expect(on(ItemPage).claim_value_input_field_element.when_visible).to be_visible
+  expect(on(ItemPage).claim_value_input_field_element.when_present).to be_visible
 end
 
 Then(/^Claim value input element should not be there$/) do
@@ -218,7 +218,7 @@ Then(/^Claim value input element should not be there$/) do
 end
 
 Then(/^Snak value input element should be there$/) do
-  expect(on(ItemPage).snak_value_input_field.when_visible).to be_visible
+  expect(on(ItemPage).snak_value_input_field.when_present).to be_visible
 end
 
 Then(/^Snak value input element should not be there$/) do
@@ -270,23 +270,23 @@ Then(/^(.*) should be the time calendar setting$/) do |calendar|
 end
 
 Then(/^Time precision chooser should be there$/) do
-  expect(on(ItemPage).time_precision_element.when_visible).to be_visible
+  expect(on(ItemPage).time_precision_element.when_present).to be_visible
 end
 
 Then(/^Time calendar chooser should be there$/) do
-  expect(on(ItemPage).time_calendar_element.when_visible).to be_visible
+  expect(on(ItemPage).time_calendar_element.when_present).to be_visible
 end
 
 Then(/^InputExtender preview should be there$/) do
-  expect(on(ItemPage).inputextender_preview_element.when_visible).to be_visible
+  expect(on(ItemPage).inputextender_preview_element.when_present).to be_visible
 end
 
 Then(/^InputExtender input should be there$/) do
-  expect(on(ItemPage).inputextender_input_element.when_visible).to be_visible
+  expect(on(ItemPage).inputextender_input_element.when_present).to be_visible
 end
 
 Then(/^Geo precision chooser should be there$/) do
-  expect(on(ItemPage).geo_precision_element.when_visible).to be_visible
+  expect(on(ItemPage).geo_precision_element.when_present).to be_visible
 end
 
 Then(/^(.*) should be the geo precision setting$/) do |precision|
@@ -294,9 +294,9 @@ Then(/^(.*) should be the geo precision setting$/) do |precision|
 end
 
 Then(/^InputExtender dropdown should be there$/) do
-  expect(on(ItemPage).inputextender_dropdown_element.when_visible).to be_visible
+  expect(on(ItemPage).inputextender_dropdown_element.when_present).to be_visible
 end
 
 Then(/^Unit suggester should be there$/) do
-  expect(on(ItemPage).inputextender_unitsuggester_element.when_visible).to be_visible
+  expect(on(ItemPage).inputextender_unitsuggester_element.when_present).to be_visible
 end

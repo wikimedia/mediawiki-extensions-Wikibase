@@ -39,7 +39,7 @@ When(/^I click the toggle references link of statement (\d+)$/) do |statement_in
 end
 
 Then(/^Reference add button should be there$/) do
-  expect(on(ItemPage).add_reference_element.when_visible).to be_visible
+  expect(on(ItemPage).add_reference_element.when_present).to be_visible
 end
 
 Then(/^Reference add button should not be there$/) do
@@ -48,11 +48,11 @@ end
 
 Then(/^Reference add button should be disabled$/) do
   expect(on(ItemPage).add_reference_element.when_not_visible).not_to be_visible
-  expect(on(ItemPage).add_reference_disabled_element.when_visible).to be_visible
+  expect(on(ItemPage).add_reference_disabled_element.when_present).to be_visible
 end
 
 Then(/^Reference remove button should be there$/) do
-  expect(on(ItemPage).remove_reference_element.when_visible).to be_visible
+  expect(on(ItemPage).remove_reference_element.when_present).to be_visible
 end
 
 Then(/^Reference remove button should not be there$/) do
@@ -61,7 +61,7 @@ end
 
 Then(/^Reference remove button should be disabled$/) do
   expect(on(ItemPage).remove_reference_element.when_not_visible).not_to be_visible
-  expect(on(ItemPage).remove_reference_disabled_element.when_visible).to be_visible
+  expect(on(ItemPage).remove_reference_disabled_element.when_present).to be_visible
 end
 
 Then(/^Reference remove snak button should be there$/) do
@@ -78,7 +78,7 @@ Then(/^Reference remove snak button should be disabled$/) do
 end
 
 Then(/^Reference add snak button should be there$/) do
-  expect(on(ItemPage).add_reference_snak_element.when_visible).to be_visible
+  expect(on(ItemPage).add_reference_snak_element.when_present).to be_visible
 end
 
 Then(/^Reference add snak button should not be there$/) do
@@ -87,11 +87,11 @@ end
 
 Then(/^Reference add snak button should be disabled$/) do
   expect(on(ItemPage).add_reference_snak_element.when_not_visible).not_to be_visible
-  expect(on(ItemPage).add_reference_snak_disabled_element.when_visible).to be_visible
+  expect(on(ItemPage).add_reference_snak_disabled_element.when_present).to be_visible
 end
 
 Then(/^Reference counter should be there$/) do
-  expect(on(ItemPage).reference_counter_element.when_visible).to be_visible
+  expect(on(ItemPage).reference_counter_element.when_present).to be_visible
 end
 
 Then(/^Reference counter should show (.+)$/) do |value|

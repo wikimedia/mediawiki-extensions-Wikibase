@@ -31,7 +31,7 @@ Then(/^Snaktype selector menu should not be visible$/) do
 end
 
 Then(/^Snaktype selector item for (.+) snaktype should be visible$/) do |snaktype|
-  expect(on(ItemPage).snaktype_list[snaktype].item_element.when_visible).to be_visible
+  expect(on(ItemPage).snaktype_list[snaktype].item_element.when_present).to be_visible
 end
 
 Then(/^Snaktype selector item for (.+) snaktype should not be visible$/) do |snaktype|
