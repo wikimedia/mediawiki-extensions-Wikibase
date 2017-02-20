@@ -398,17 +398,17 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	}
 
 	public function testGetExternalFormatDeserializerFactory() {
-		$deserializerFactory = $this->getWikibaseRepo()->getExternalFormatDeserializerFactory();
+		$deserializerFactory = $this->getWikibaseRepo()->getBaseDataModelDeserializerFactory();
 		$this->assertInstanceOf( DeserializerFactory::class, $deserializerFactory );
 	}
 
 	public function testGetSerializerFactory() {
-		$serializerFactory = $this->getWikibaseRepo()->getSerializerFactory();
+		$serializerFactory = $this->getWikibaseRepo()->getBaseDataModelSerializerFactory();
 		$this->assertInstanceOf( SerializerFactory::class, $serializerFactory );
 	}
 
 	public function testGetExternalFormatEntityDeserializer() {
-		$deserializer = $this->getWikibaseRepo()->getExternalFormatEntityDeserializer();
+		$deserializer = $this->getWikibaseRepo()->getAllTypesEntityDeserializer();
 		$this->assertInstanceOf( Deserializer::class, $deserializer );
 	}
 
@@ -418,7 +418,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	}
 
 	public function testGetEntitySerializer() {
-		$serializer = $this->getWikibaseRepo()->getEntitySerializer();
+		$serializer = $this->getWikibaseRepo()->getAllTypesEntitySerializer();
 		$this->assertInstanceOf( Serializer::class, $serializer );
 	}
 

@@ -38,7 +38,7 @@ class EditPageTest extends WikibaseApiTestCase {
 
 		$item->setLabel( "de", "EditPageTest" );
 
-		$data = $wikibaseRepo->getEntitySerializer()->serialize( $item );
+		$data = $wikibaseRepo->getAllTypesEntitySerializer()->serialize( $item );
 		$text = json_encode( $data );
 
 		$title = $wikibaseRepo->getEntityTitleLookup()->getTitleForId( $item->getId() );
