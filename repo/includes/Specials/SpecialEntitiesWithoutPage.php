@@ -108,7 +108,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	/**
 	 * Prepare the arguments
 	 *
-	 * @param string $subPage
+	 * @param string|null $subPage
 	 */
 	private function prepareArguments( $subPage ) {
 		$request = $this->getRequest();

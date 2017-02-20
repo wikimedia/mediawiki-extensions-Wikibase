@@ -77,7 +77,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	}
 
 	/**
-	 * @param string $subPage
+	 * @param string|null $subPage
 	 *
 	 * @return array array( string $site, string $itemString )
 	 */

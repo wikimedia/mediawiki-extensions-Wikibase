@@ -110,6 +110,11 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 		}
 	}
 
+	/**
+	 * Prepares the arguments.
+	 *
+	 * @param string|null $subPage
+	 */
 	private function prepareArguments( $subPage ) {
 		$request = $this->getRequest();
 
