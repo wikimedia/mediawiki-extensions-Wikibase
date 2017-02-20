@@ -86,7 +86,7 @@ module SitelinkPage
       insert_page(index, sitelink[1])
       index += 1
     end
-    save_sitelink_link_element.when_visible.click
+    save_sitelink_link_element.when_present.click
     wait_for_api_callback
   end
 
