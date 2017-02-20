@@ -65,7 +65,7 @@ Feature: Use header
     | click the header cancel button |
     | press the ESC key in the label input field |
 
-  @integration @modify_entity @save_description @save_aliases @save_label
+  @modify_entity @save_description @save_aliases @save_label
   Scenario Outline: Save label, description and aliases
     When I click the header edit button
       And I enter random string as label

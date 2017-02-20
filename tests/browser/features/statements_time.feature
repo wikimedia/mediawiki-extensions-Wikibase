@@ -74,7 +74,7 @@ Feature: Using time properties in statements
     | 100000000 | 100 million years CE | Gregorian | hundred million years |
     | 1000000000 BCE | 1 billion years BCE | Julian | billion years |
 
-  @integration @modify_entity
+  @modify_entity
   Scenario Outline: Adding a statement of type time
     Given I am logged in to the repo
       And I am on an item page
