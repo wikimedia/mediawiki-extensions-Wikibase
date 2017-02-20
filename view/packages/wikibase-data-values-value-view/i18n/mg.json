@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jagwar"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "tsy misy",
+	"valueview-expert-globecoordinateinput-precision": "Fahatsikoana:",
+	"valueview-expert-globecoordinateinput-nullprecision": "tsy voalaza",
+	"valueview-expert-globecoordinateinput-customprecision": "manokana ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "Gregôrianina",
+	"valueview-expert-timevalue-calendar-julian": "Jolianina",
+	"valueview-expert-timeinput-precision": "Fahatsikoana:",
+	"valueview-expert-timeinput-calendar": "Kalandrie:",
+	"valueview-expertextender-calendarhint-gregorian": "(Kalandrie gregôrianina)",
+	"valueview-expertextender-calendarhint-julian": "(Kalandrie jolianina)",
+	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr; ovaina ho gregôrianina",
+	"valueview-expertextender-calendarhint-switch-julian": "&rarr; ovaina ho jolianina",
+	"valueview-expertextender-languageselector-languagetemplate": "\n$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Fiteny (ilaina fenoina):",
+	"valueview-expertextender-unitsuggester-label": "Anaran-drefy (azo tsy fenoina):",
+	"valueview-preview-label": "aseho ho:",
+	"valueview-preview-novalue": "tsy misy sanda fantatra",
+	"valueview-listrotator-manually": "atao tanana"
+}

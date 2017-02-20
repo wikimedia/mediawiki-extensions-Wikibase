@@ -1,15 +1,27 @@
 {
-    "@metadata": {
-        "authors": [
-            "Fohanno",
-            "Y-M D"
-        ]
-    },
-    "valueview-expert-emptyvalue-empty": "goullo",
-    "valueview-expert-timevalue-calendar-gregorian": "Gregorian",
-    "valueview-expert-timevalue-calendar-julian": "Juluan",
-    "valueview-expert-timeinput-calendar": "Deiziadur :",
-    "valueview-expert-timeinput-calendarhint-gregorian": "(Deiziadur gregorian)",
-    "valueview-expert-timeinput-calendarhint-julian": "(Deiziadur julian)",
-    "valueview-preview-label": "diskwelet evel :"
+	"@metadata": {
+		"authors": [
+			"Fohanno",
+			"Y-M D",
+			"Fulup"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "goullo",
+	"valueview-expert-globecoordinateinput-precision": "Resisted :",
+	"valueview-expert-globecoordinateinput-nullprecision": "Anspisaet",
+	"valueview-expert-globecoordinateinput-customprecision": "dibar($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "Gregorian",
+	"valueview-expert-timevalue-calendar-julian": "Juluan",
+	"valueview-expert-timeinput-precision": "Resisted :",
+	"valueview-expert-timeinput-calendar": "Deiziadur :",
+	"valueview-expertextender-calendarhint-gregorian": "(Deiziadur gregorian)",
+	"valueview-expertextender-calendarhint-julian": "(Deiziadur juluan)",
+	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr; cheñch evit gregorian",
+	"valueview-expertextender-calendarhint-switch-julian": "&rarr; cheñch evit juluan",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Yezh (ret) :",
+	"valueview-expertextender-unitsuggester-label": "Unanenn(diret) :",
+	"valueview-preview-label": "diskwelet evel :",
+	"valueview-preview-novalue": "N'eus bet anavezet talvoud reizh ebet",
+	"valueview-listrotator-manually": "resisaat gant an dorn"
 }
