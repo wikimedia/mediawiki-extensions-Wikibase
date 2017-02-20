@@ -7,15 +7,15 @@
 # tests for item sitelinks
 
 When(/^I click the sitelink remove button$/) do
-  on(ItemPage).remove_sitelink_link_element.when_visible.click
+  on(ItemPage).remove_sitelink_link_element.when_present.click
 end
 
 When(/^I click the sitelink edit button$/) do
-  on(ItemPage).edit_sitelink_link_element.when_visible.click
+  on(ItemPage).edit_sitelink_link_element.when_present.click
 end
 
 When(/^I click the sitelink cancel button$/) do
-  on(ItemPage).cancel_sitelink_link_element.when_visible.click
+  on(ItemPage).cancel_sitelink_link_element.when_present.click
 end
 
 When(/^I click the sitelink save button$/) do
@@ -57,7 +57,7 @@ When(/^I add the following sitelinks:$/) do |table|
 end
 
 When(/^I order the sitelinks by languagename$/) do
-  on(ItemPage).sitelink_sort_language_element.when_visible.click
+  on(ItemPage).sitelink_sort_language_element.when_present.click
 end
 
 When(/^I mock that the list of sitelinks is complete$/) do
