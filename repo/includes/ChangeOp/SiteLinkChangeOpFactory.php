@@ -14,6 +14,18 @@ use Wikibase\DataModel\Entity\ItemId;
 class SiteLinkChangeOpFactory {
 
 	/**
+	 * @var string[]
+	 */
+	private $badgeItemIds;
+
+	/**
+	 * @param string[] $badgeItemIds
+	 */
+	public function __construct( array $badgeItemIds ) {
+		$this->badgeItemIds = $badgeItemIds;
+	}
+
+	/**
 	 * @param string $siteId
 	 * @param string $pageName
 	 * @param ItemId[]|null $badges
@@ -22,7 +34,7 @@ class SiteLinkChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newSetSiteLinkOp( $siteId, $pageName, array $badges = null ) {
-		return new ChangeOpSiteLink( $siteId, $pageName, $badges );
+		return new ChangeOpSiteLink( $siteId, $pageName, $badges, $this->badgeItemIds );
 	}
 
 	/**

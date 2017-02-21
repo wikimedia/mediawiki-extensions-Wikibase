@@ -825,7 +825,8 @@ class WikibaseRepo {
 			$this->getStatementGuidParser(),
 			$this->getSnakValidator(),
 			$this->getTermValidatorFactory(),
-			$this->getSiteLookup()
+			$this->getSiteLookup(),
+			array_keys( $this->settings->getSetting( 'badgeItems' ) )
 		);
 	}
 
