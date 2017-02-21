@@ -1002,7 +1002,7 @@ class WikibaseRepo {
 	/**
 	 * @return OutputFormatValueFormatterFactory
 	 */
-	protected function newValueFormatterFactory() {
+	private function newValueFormatterFactory() {
 		return new OutputFormatValueFormatterFactory(
 			$this->dataTypeDefinitions->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ),
 			$this->getContentLanguage(),
@@ -1093,7 +1093,7 @@ class WikibaseRepo {
 	/**
 	 * @return SummaryFormatter
 	 */
-	protected function newSummaryFormatter() {
+	private function newSummaryFormatter() {
 		// This needs to use an EntityIdPlainLinkFormatter as we want to mangle
 		// the links created in LinkBeginHookHandler afterwards (the links must not
 		// contain a display text: [[Item:Q1]] is fine but [[Item:Q1|Q1]] isn't).
@@ -1211,7 +1211,7 @@ class WikibaseRepo {
 	 *
 	 * @return ValueFormatter
 	 */
-	protected function getMessageParameterFormatter() {
+	private function getMessageParameterFormatter() {
 		$formatterOptions = new FormatterOptions();
 		$valueFormatterFactory = $this->getValueFormatterFactory();
 
