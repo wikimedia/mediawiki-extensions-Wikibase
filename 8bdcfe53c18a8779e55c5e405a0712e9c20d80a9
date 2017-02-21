@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_97536f43",
+        "filename": "view/tests/qunit/wikibase/entityChangers/EntityTermsChanger.tests.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-21T16:08:32Z",
+      "side": 1,
+      "message": "What is the benefit of using \"then\" here? Identical code above uses \"done\".",
+      "range": {
+        "startLine": 471,
+        "startChar": 4,
+        "endLine": 471,
+        "endChar": 8
+      },
+      "revId": "8bdcfe53c18a8779e55c5e405a0712e9c20d80a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
