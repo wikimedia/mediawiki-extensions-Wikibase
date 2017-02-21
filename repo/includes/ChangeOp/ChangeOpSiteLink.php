@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLinkList;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**
@@ -37,10 +36,11 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	 * @param string $siteId
 	 * @param string|null $pageName Null to remove the sitelink (if $badges are also null)
 	 * @param ItemId[]|null $badges Null for no-op
+	 * @param string[] $allowedBadgeItemIds
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $siteId, $pageName, array $badges = null ) {
+	public function __construct( $siteId, $pageName, array $badges = null, array $allowedBadgeItemIds = [] ) {
 		if ( !is_string( $siteId ) ) {
 			throw new InvalidArgumentException( '$siteId needs to be a string' );
 		}
@@ -49,8 +49,15 @@ class ChangeOpSiteLink extends ChangeOpBase {
 			throw new InvalidArgumentException( '$linkPage needs to be a string or null' );
 		}
 
+		// TODO: Consider using Assert for checking this and other arguments
+		foreach ( $allowedBadgeItemIds as $id ) {
+			if ( !is_string( $id ) ) {
+				throw new InvalidArgumentException( '$allowedBadgeItemIds must be an array of strings' );
+			}
+		}
+
 		if ( $badges !== null ) {
-			$badges = $this->validateBadges( $badges );
+			$badges = $this->validateBadges( $badges, $allowedBadgeItemIds );
 		}
 
 		$this->siteId = $siteId;
@@ -60,12 +67,12 @@ class ChangeOpSiteLink extends ChangeOpBase {
 
 	/**
 	 * @param ItemId[] $badges
+	 * @param string[] $allowedBadgeItemIds
 	 *
 	 * @throws InvalidArgumentException
 	 * @return ItemId[]
 	 */
-	private function validateBadges( array $badges ) {
-		$badgeItems = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'badgeItems' );
+	private function validateBadges( array $badges, array $allowedBadgeItemIds ) {
 		$uniqueBadges = array();
 
 		foreach ( $badges as $id ) {
@@ -73,8 +80,8 @@ class ChangeOpSiteLink extends ChangeOpBase {
 				throw new InvalidArgumentException( '$badges needs to be an array of ItemId instances' );
 			}
 
-			if ( !array_key_exists( $id->getSerialization(), $badgeItems ) ) {
-				throw new InvalidArgumentException( 'Only items specified in the badgeItems setting can be badges' );
+			if ( !in_array( $id->getSerialization(), $allowedBadgeItemIds ) ) {
+				throw new InvalidArgumentException( 'Item ID is not allowed as a badge: ' . $id->getSerialization() );
 			}
 
 			$uniqueBadges[$id->getSerialization()] = $id;
