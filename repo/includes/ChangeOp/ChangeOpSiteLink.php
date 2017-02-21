@@ -157,6 +157,9 @@ class ChangeOpSiteLink extends ChangeOpBase {
 
 			if ( $this->pageName === null ) {
 				if ( !$siteLinks->hasLinkWithSiteId( $this->siteId ) ) {
+					// FIXME: Code in Api\EditEntity processing the site link change request used to call
+					// ApiErrorReporter::dieMessage( 'no-such-sitelink', $globalSiteId ) in this case.
+					// Should the following exception result in the similar behaviour?
 					throw new InvalidArgumentException( 'The sitelink does not exist' );
 				}
 
