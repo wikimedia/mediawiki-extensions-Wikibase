@@ -264,7 +264,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	/**
 	 * Returning the posted value of the request.
 	 *
-	 * @return string
+	 * @return string|null
 	 */
 	abstract protected function getPostedValue();
 

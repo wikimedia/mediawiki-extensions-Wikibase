@@ -39,7 +39,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	/**
 	 * @see SpecialModifyTerm::getPostedValue()
 	 *
-	 * @return string
+	 * @return string|null
 	 */
 	protected function getPostedValue() {
 		return $this->getRequest()->getVal( 'aliases' );
