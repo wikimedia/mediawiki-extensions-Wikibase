@@ -36,19 +36,19 @@ The overall syntax of the JSON "data" blob you must provide in an edit request i
 ==== "labels" and "descriptions" ====
 * To add or edit a label or description, simply provide it's "language" and "value".
 * There are two ways to remove a label or description:
-** You can add the key "remove", e.g. <code>{ "language": "en", "remove": "" }</code>. The content of the "remove" element can be whatever you want, typically an empty string.
+** You can add the key "remove", e.g. <code>{ "language": "en", "remove": 1 }</code>. The content of the "remove" element can be whatever you want, typically 1.
 ** You can set the "value" to an empty string, e.g. <code>{ "language": "en", "value": "" }</code>.
 
 ==== "aliases" ====
 * You can either add or remove aliases individually, or send the full set of aliases for a language.
-* To remove an alias, provide the old "language" and "value" of the alias you want to remove, as well as the key "remove", e.g. <code>{ "language": "en", "value": "…", "remove": "" }</code>. The content of the "remove" element can be whatever you want, typically an empty string.
-* To add an alias without touching the existing ones, provide a single alias and add the key "add", e.g. <code>{ "language": "en", "value": "…", "add": "" }</code>. The content of the "add" element can be whatever you want, typically an empty string.
+* To remove an alias, provide the old "language" and "value" of the alias you want to remove, as well as the key "remove", e.g. <code>{ "language": "en", "value": "…", "remove": 1 }</code>. The content of the "remove" element can be whatever you want, typically 1.
+* To add an alias without touching the existing ones, provide a single alias and add the key "add", e.g. <code>{ "language": "en", "value": "…", "add": 1 }</code>. The content of the "add" element can be whatever you want, typically 1.
 
 === Statements ("claims") ===
 Statements must be provided via the element key "claims". This is for compatibility with older versions of the Wikibase software.
 * To add a statement, provide a full statement serialization as supported by the StatementDeserializer in the [//github.com/wmde/WikibaseDataModelSerialization Wikibase DataModel Serialization component]. See docs/json.wiki.
 * To edit an existing statement, do as above and make sure to include the "id" of the existing statement.
-* To remove a statement, you must provide it's "id" and the key "remove". The content of the "remove" element can be whatever you want, typically an empty string.
+* To remove a statement, you must provide it's "id" and the key "remove". The content of the "remove" element can be whatever you want, typically 1.
 
 == Property specific elements ==
 The only element specific for properties, their data type, can not be edited.
@@ -56,11 +56,11 @@ The only element specific for properties, their data type, can not be edited.
 == Item specific elements ==
 
 === "sitelinks" ===
-* To add a new sitelink, provide it's "site" ID, "title" and optional "badges", e.g. <code>{ "site": "enwiki", "title": "…", "badges": [] }</code>.
+* To add a new sitelink, provide its "site" ID, "title" and optional "badges", e.g. <code>{ "site": "enwiki", "title": "…", "badges": [] }</code>.
 * Editing the "site" ID of an existing sitelink is not possible. You must remove the old sitelink and add the new sitelink instead.
 * To edit the page name of an existing sitelink, provide the "site" ID with the new "title", e.g. <code>{ "site": "enwiki", "title": "…" }</code>.
 * There are three ways to remove a sitelink:
-** You can add the key "remove". The "title" is optional in this case. The content of the "remove" element can be whatever you want, typically an empty string.
+** You can add the key "remove". The "title" is optional in this case. The content of the "remove" element can be whatever you want, typically 1.
 ** You can provide a sitelink with no title and no badges, e.g. <code>{ "site": "enwiki" }</code>.
 ** You can set the "title" to an empty string, e.g. <code>{ "site": "enwiki", "title": "" }</code>.
 
