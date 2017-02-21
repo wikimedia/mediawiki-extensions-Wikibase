@@ -22,6 +22,30 @@
       "revId": "8bdcfe53c18a8779e55c5e405a0712e9c20d80a9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_28e1e4fb",
+        "filename": "view/tests/qunit/wikibase/entityChangers/EntityTermsChanger.tests.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2017-02-21T21:48:11Z",
+      "side": 1,
+      "message": "Either is fine.\n\nOur semantic intent is not for QUnit to wait for save(), it is for QUnit to wait for the assertion below. As such, then() provides that intended behaviour. save, then assert, then qunit async test done. \n\n.done() merely adds a callback to the existing save() deferred, at which point qunit\u0027s handler and the assertion maker callback are peers. While we know that deferred\u0027s Callbacks() list is fifo, it feels wrong to depend on that. I didn\u0027t mean to change it here, though. I\u0027ll change it back :)",
+      "parentUuid": "ce3c5b53_97536f43",
+      "range": {
+        "startLine": 471,
+        "startChar": 4,
+        "endLine": 471,
+        "endChar": 8
+      },
+      "revId": "8bdcfe53c18a8779e55c5e405a0712e9c20d80a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
