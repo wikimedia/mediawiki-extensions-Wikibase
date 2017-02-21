@@ -20,7 +20,7 @@ class SiteLinkChangeOpFactoryTest extends \PHPUnit_Framework_TestCase {
 	 * @return SiteLinkChangeOpFactory
 	 */
 	protected function newChangeOpFactory() {
-		return new SiteLinkChangeOpFactory();
+		return new SiteLinkChangeOpFactory( [] );
 	}
 
 	public function testNewSetSiteLinkOp() {
