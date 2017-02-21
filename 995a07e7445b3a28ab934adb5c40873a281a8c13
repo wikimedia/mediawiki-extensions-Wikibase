@@ -83,6 +83,30 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_5c22eea3",
+        "filename": "view/resources/wikibase/view/ControllerViewFactory.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-21T10:17:04Z",
+      "side": 1,
+      "message": "looks to me that we can remove this block of code and just call focus() below",
+      "parentUuid": "2ef897d1_9316f658",
+      "range": {
+        "startLine": 104,
+        "startChar": 59,
+        "endLine": 104,
+        "endChar": 64
+      },
+      "revId": "995a07e7445b3a28ab934adb5c40873a281a8c13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_9348368e",
         "filename": "view/resources/wikibase/view/ControllerViewFactory.js",
         "patchSetId": 1
