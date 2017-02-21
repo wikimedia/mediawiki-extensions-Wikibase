@@ -48,7 +48,7 @@ The overall syntax of the JSON "data" blob you must provide in an edit request i
 Statements must be provided via the element key "claims". This is for compatibility with older versions of the Wikibase software.
 * To add a statement, provide a full statement serialization as supported by the StatementDeserializer in the [//github.com/wmde/WikibaseDataModelSerialization Wikibase DataModel Serialization component]. See docs/json.wiki.
 * To edit an existing statement, do as above and make sure to include the "id" of the existing statement.
-* To remove a statement, you must provide it's "id" and the key "remove". The content of the "remove" element can be whatever you want, typically an empty string.
+* To remove a statement, you must provide its "id" and the key "remove". The content of the "remove" element can be whatever you want, typically an empty string.
 
 == Property specific elements ==
 The only element specific for properties, their data type, can not be edited.
