@@ -365,7 +365,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			return '';
 		}
 
-		return $item->getSitelink( $siteId )->getPageName();
+		return $item->getSiteLink( $siteId )->getPageName();
 	}
 
 	/**

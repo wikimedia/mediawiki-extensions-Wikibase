@@ -236,7 +236,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			$this->assertRegExp( $expectedOutput, $text, 'output' );
 
 			foreach ( $expectedHeaders as $name => $exp ) {
-				$value = $response->getheader( $name );
+				$value = $response->getHeader( $name );
 				$this->assertNotNull( $value, "header: $name" );
 				$this->assertInternalType( 'string', $value, "header: $name" );
 				$this->assertRegExp( $exp, $value, "header: $name" );

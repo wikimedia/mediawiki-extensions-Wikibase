@@ -203,7 +203,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 			->will( $this->returnValue( $ns ) );
 
 		$title->expects( $this->any() )
-			->method( 'getDBKey' )
+			->method( 'getDBkey' )
 			->will( $this->returnValue( $text ) );
 
 		return $title;

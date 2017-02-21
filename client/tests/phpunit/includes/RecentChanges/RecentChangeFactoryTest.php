@@ -84,7 +84,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( $ns ) );
 
 		$title->expects( $this->any() )
-			->method( 'getDBKey' )
+			->method( 'getDBkey' )
 			->will( $this->returnValue( str_replace( ' ', '_', $text ) ) );
 
 		// XXX: This assumes NS_MAIN. Getting namespace names right nicely is hard, they depend on the lang.

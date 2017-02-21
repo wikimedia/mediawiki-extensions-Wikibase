@@ -384,7 +384,7 @@ final class RepoHooks {
 		$rev = new Revision( $row );
 
 		if ( $entityContentFactory->isEntityContentModel( $history->getTitle()->getContentModel() )
-			&& $wikiPage->getLatest() !== $rev->getID()
+			&& $wikiPage->getLatest() !== $rev->getId()
 			&& $rev->getTitle()->quickUserCan( 'edit', $history->getUser() )
 			&& !$rev->isDeleted( Revision::DELETED_TEXT )
 		) {
@@ -980,7 +980,7 @@ final class RepoHooks {
 		$baseUri = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'conceptBaseUri' );
 		$navigationUrls['wb-concept-uri'] = array(
 			'text' => $skinTemplate->msg( 'wikibase-concept-uri' ),
-			'href' => $baseUri . $title->getDBKey(),
+			'href' => $baseUri . $title->getDBkey(),
 			'title' => $skinTemplate->msg( 'wikibase-concept-uri-tooltip' )
 		);
 
