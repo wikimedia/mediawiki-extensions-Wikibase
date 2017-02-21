@@ -9,7 +9,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**
@@ -25,27 +24,19 @@ use Wikibase\Summary;
  */
 class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
-	private function applySettings() {
-		// Allow some badges for testing
-		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', array(
-			'Q42' => '',
-			'Q149' => '',
-		) );
-	}
+	private $allowedBadgeItemIds = [ 'Q42', 'Q149' ];
 
 	public function invalidConstructorProvider() {
-		$this->applySettings();
-
-		$argLists = array();
-
-		$argLists[] = array( 'enwiki', 1234 );
-		$argLists[] = array( 1234, 'Berlin' );
-		$argLists[] = array( 'plwiki', 'Warszawa', array( 'FA', 'GA' ) );
-		$argLists[] = array( 'plwiki', 'Warszawa', array( new ItemId( 'Q42' ), 'FA' ) );
-		$argLists[] = array( 'plwiki', 'Warszawa', array( new PropertyId( 'P42' ) ) );
-		$argLists[] = array( 'plwiki', 'Warszawa', array( new ItemId( 'Q2147483647' ) ) );
-
-		return $argLists;
+		return [
+			'not a string as a page name' => [ 'enwiki', 1234 ],
+			'not a string as a site ID' => [ 1234, 'Berlin' ],
+			'not a string in the allowed badge item ID list (int)' => [ 'plwiki', 'Warszawa', null, [ 42 ] ],
+			'not a string in the allowed badge item ID list (item ID)' => [ 'plwiki', 'Warszawa', null, [ new ItemId( 'Q42' ) ] ],
+			'list of strings as a badge list' => [ 'plwiki', 'Warszawa', [ 'FA', 'GA' ] ],
+			'not an Item Id in the badge list (string)'  => [ 'plwiki', 'Warszawa', [ new ItemId( 'Q42' ), 'FA' ] ],
+			'not an Item ID in the badge list (property ID)' => [ 'plwiki', 'Warszawa', [ new PropertyId( 'P42' ) ] ],
+			'invalid Item ID in the badge list' => [ 'plwiki', 'Warszawa',  [ new ItemId( 'Q2147483647' ) ] ],
+		];
 	}
 
 	/**
@@ -53,13 +44,16 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @expectedException InvalidArgumentException
 	 */
-	public function testConstructorWithInvalidArguments( $siteId, $linkPage, array $badges = null ) {
-		new ChangeOpSiteLink( $siteId, $linkPage, $badges );
+	public function testConstructorWithInvalidArguments(
+		$siteId,
+		$linkPage,
+		array $badges = null,
+		array $allowedBadgeItemIds = []
+	) {
+		new ChangeOpSiteLink( $siteId, $linkPage, $badges, $allowedBadgeItemIds );
 	}
 
 	public function changeOpSiteLinkProvider() {
-		$this->applySettings();
-
 		$deSiteLink = new SiteLink( 'dewiki', 'Berlin' );
 		$enSiteLink = new SiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q149' ) ) );
 		$plSiteLink = new SiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ) ) );
@@ -74,7 +68,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		// adding sitelink with badges
 		$args[] = array(
 			$existingSiteLinks,
-			new ChangeOpSiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q149' ) ) ),
+			new ChangeOpSiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q149' ) ), $this->allowedBadgeItemIds ),
 			array_merge( $existingSiteLinks, array( $enSiteLink ) )
 		);
 
@@ -88,7 +82,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		// setting badges on existing sitelink
 		$args[] = array(
 			$existingSiteLinks,
-			new ChangeOpSiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ), new ItemId( 'Q149' ) ) ),
+			new ChangeOpSiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ), new ItemId( 'Q149' ) ), $this->allowedBadgeItemIds ),
 			array(
 				$deSiteLink,
 				new SiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ), new ItemId( 'Q149' ) ) )
@@ -108,7 +102,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		// change badges without modifying title
 		$args[] = array(
 			$existingSiteLinks,
-			new ChangeOpSiteLink( 'plwiki', null, array( new ItemId( 'Q149' ) ) ),
+			new ChangeOpSiteLink( 'plwiki', null, array( new ItemId( 'Q149' ) ), $this->allowedBadgeItemIds ),
 			array(
 				$deSiteLink,
 				new SiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q149' ) ) )
@@ -118,7 +112,12 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		// add duplicate badges
 		$args[] = array(
 			$existingSiteLinks,
-			new ChangeOpSiteLink( 'plwiki', null, array( new ItemId( 'q42' ), new ItemId( 'Q149' ), new ItemId( 'Q42' ) ) ),
+			new ChangeOpSiteLink(
+				'plwiki',
+				null,
+				array( new ItemId( 'q42' ), new ItemId( 'Q149' ), new ItemId( 'Q42' ) ),
+				$this->allowedBadgeItemIds
+			),
 			array(
 				$deSiteLink,
 				new SiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ), new ItemId( 'Q149' ) ) )
@@ -144,8 +143,6 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidChangeOpSiteLinkProvider() {
-		$this->applySettings();
-
 		$deSiteLink = new SiteLink( 'dewiki', 'Berlin' );
 		$plSiteLink = new SiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ) ) );
 
@@ -159,7 +156,12 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		// cannot change badges of non-existing sitelink
 		$args[] = array(
 			$existingSitelinks,
-			new ChangeOpSiteLink( 'enwiki', null, array( new ItemId( 'Q149' ) ) ),
+			new ChangeOpSiteLink(
+				'enwiki',
+				null,
+				array( new ItemId( 'Q149' ) ),
+				$this->allowedBadgeItemIds
+			),
 		);
 
 		return $args;
@@ -180,8 +182,6 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function summaryTestProvider() {
-		$this->applySettings();
-
 		$sitelinks = array(
 			new SiteLink( 'dewiki', 'Berlin' ),
 			new SiteLink( 'ruwiki', 'Берлин', array( new ItemId( 'Q42' ) ) )
@@ -203,7 +203,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 			'add-both',
 			array( 'Berlin', array( $badge ) ),
 			$sitelinks,
-			new ChangeOpSiteLink( 'enwiki', 'Berlin', array( $badge ) )
+			new ChangeOpSiteLink( 'enwiki', 'Berlin', array( $badge ), $this->allowedBadgeItemIds )
 		);
 
 		// Set page name only for existing sitelink
@@ -219,7 +219,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 			'set-badges',
 			array( array( $badge ) ),
 			$sitelinks,
-			new ChangeOpSiteLink( 'dewiki', null, array( $badge ) )
+			new ChangeOpSiteLink( 'dewiki', null, array( $badge ), $this->allowedBadgeItemIds )
 		);
 
 		// Set page name and badges for existing sitelink
@@ -227,7 +227,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 			'set-both',
 			array( 'London', array( $badge ) ),
 			$sitelinks,
-			new ChangeOpSiteLink( 'dewiki', 'London', array( $badge ) ),
+			new ChangeOpSiteLink( 'dewiki', 'London', array( $badge ), $this->allowedBadgeItemIds ),
 		);
 
 		// Changes badges for existing sitelink
@@ -235,7 +235,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 			'set-badges',
 			array( array( $badge ) ),
 			$sitelinks,
-			new ChangeOpSiteLink( 'ruwiki', null, array( $badge ) )
+			new ChangeOpSiteLink( 'ruwiki', null, array( $badge ), $this->allowedBadgeItemIds )
 		);
 
 		return $cases;
