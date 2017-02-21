@@ -344,7 +344,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			->will( $this->returnValue( $text ) );
 
 		$title->expects( $this->any() )
-			->method( 'getDBKey' )
+			->method( 'getDBkey' )
 			->will( $this->returnValue( str_replace( ' ', '_', $text ) ) );
 
 		$title->expects( $this->any() )

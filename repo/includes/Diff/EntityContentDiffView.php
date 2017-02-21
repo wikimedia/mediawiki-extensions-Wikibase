@@ -156,13 +156,13 @@ class EntityContentDiffView extends DifferenceEngine {
 		$title = $rev->getTitle();
 
 		$header = Linker::linkKnown( $title, $header, array(),
-			array( 'oldid' => $rev->getID() ) );
+			array( 'oldid' => $rev->getId() ) );
 
 		if ( $rev->userCan( Revision::DELETED_TEXT, $user ) ) {
 			if ( $title->quickUserCan( 'edit', $user ) && !$rev->isCurrent() ) {
 				$editQuery = array(
 					'action' => 'edit',
-					'restore' => $rev->getID()
+					'restore' => $rev->getId()
 				);
 				$msg = $this->msg( 'wikibase-restoreold' )->escaped();
 				$header .= ' ' . $this->msg( 'parentheses' )->rawParams(

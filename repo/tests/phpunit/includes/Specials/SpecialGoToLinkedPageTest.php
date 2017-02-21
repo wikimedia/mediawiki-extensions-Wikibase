@@ -154,7 +154,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 		/* @var FauxResponse $response */
 		list( $output, $response ) = $this->executeSpecialPage( $sub, null, self::DUMMY_LANGUAGE );
 
-		$this->assertEquals( $target, $response->getheader( 'Location' ), 'Redirect' );
+		$this->assertEquals( $target, $response->getHeader( 'Location' ), 'Redirect' );
 
 		$this->assertHtmlContainsInputWithNameAndValue( $output, 'site', $site );
 		$this->assertHtmlContainsInputWithNameAndValue( $output, 'itemid', $item );
@@ -181,7 +181,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 		/* @var FauxResponse $response */
 		list( $output, $response ) = $this->executeSpecialPage( $sub );
 
-		$this->assertEquals( $target, $response->getheader( 'Location' ), 'Redirect' );
+		$this->assertEquals( $target, $response->getHeader( 'Location' ), 'Redirect' );
 		$this->assertEquals( '', $output );
 	}
 

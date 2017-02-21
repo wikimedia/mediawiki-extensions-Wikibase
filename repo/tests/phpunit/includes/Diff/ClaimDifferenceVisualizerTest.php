@@ -295,7 +295,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 	public function testVisualizeClaimChange( $difference, $baseClaim, $expectedHtml ) {
 		$visualizer = $this->newClaimDifferenceVisualizer();
 		$html = $visualizer->visualizeClaimChange( $difference, $baseClaim );
-		$this->assertHtmlEquals( $expectedHtml, $html );
+		$this->assertHTMLEquals( $expectedHtml, $html );
 	}
 
 	public function testVisualizeNewClaim() {
@@ -335,7 +335,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 					) ) ) ) ) );
 		$html = $visualizer->visualizeNewClaim( $claim );
 
-		$this->assertHtmlEquals( $expect, $html );
+		$this->assertHTMLEquals( $expect, $html );
 	}
 
 	public function testVisualizeRemovedClaim() {
@@ -379,7 +379,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 					) ) ) ) ) );
 		$html = $visualizer->visualizeRemovedClaim( $claim );
 
-		$this->assertHtmlEquals( $expect, $html );
+		$this->assertHTMLEquals( $expect, $html );
 	}
 
 }

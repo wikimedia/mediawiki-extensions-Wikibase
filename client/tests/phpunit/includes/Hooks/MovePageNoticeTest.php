@@ -63,7 +63,7 @@ class MovePageNoticeTest extends \MediaWikiTestCase {
 				->getMock();
 
 		$outputPage->expects( $this->once() )
-				->method( 'addHtml' )
+				->method( 'addHTML' )
 				->with( $expected );
 
 		$outputPage->expects( $this->once() )
