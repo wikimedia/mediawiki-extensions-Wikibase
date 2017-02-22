@@ -16,6 +16,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
@@ -83,7 +84,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 
 		$changeOpFactoryProvider = new ChangeOpFactoryProvider(
 			$constraintProvider,
-			$this->mockProvider->getMockGuidGenerator(),
+			new GuidGenerator(),
 			$this->mockProvider->getMockGuidValidator(),
 			$this->mockProvider->getMockGuidParser( $toItem->getId() ),
 			$this->mockProvider->getMockSnakValidator(),

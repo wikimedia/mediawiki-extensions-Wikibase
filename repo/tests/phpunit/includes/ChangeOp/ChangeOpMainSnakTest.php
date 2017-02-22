@@ -66,7 +66,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		new ChangeOpMainSnak(
 			$guid,
 			$snak,
-			$this->mockProvider->getGuidGenerator(),
+			new GuidGenerator(),
 			$this->mockProvider->getMockSnakValidator()
 		);
 	}
@@ -81,7 +81,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		return new ChangeOpMainSnak(
 			$guid,
 			$snak,
-			$this->mockProvider->getGuidGenerator(),
+			new GuidGenerator(),
 			$this->mockProvider->getMockSnakValidator()
 		);
 	}
@@ -177,12 +177,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 	private function makeNewItemWithClaim( $itemIdString, $snak ) {
 		$item = new Item( new ItemId( $itemIdString ) );
 
-		$item->getStatements()->addNewStatement(
-			$snak,
-			null,
-			null,
-			$this->mockProvider->getGuidGenerator()->newGuid( $item->getId() )
-		);
+		$item->getStatements()->addNewStatement( $snak, null, null, 'GUID' );
 
 		return $item;
 	}

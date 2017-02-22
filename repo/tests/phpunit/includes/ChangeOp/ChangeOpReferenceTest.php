@@ -266,11 +266,10 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$q17 = new ItemId( 'Q17' );
 
 		$item = new Item( $q17 );
-		$goodGuid = $this->mockProvider->getGuidGenerator()->newGuid( $q17 );
-		$badGuid = $this->mockProvider->getGuidGenerator()->newGuid( $q17 );
+		$goodGuid = 'GUID';
+		$badGuid = 'UNKNOWN-GUID';
 
 		$oldSnak = new PropertyValueSnak( $p11, new StringValue( "old reference" ) );
-		$oldReference = new Reference( new SnakList( array( $oldSnak ) ) );
 
 		$snak = new PropertyNoValueSnak( $p11 );
 		$qualifiers = new SnakList( array( $oldSnak ) );
@@ -280,12 +279,10 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 
 		$goodReference = new Reference( new SnakList( array( $goodSnak ) ) );
 
-		$refHash = $oldReference->getHash();
 		$badRefHash = sha1( 'baosdfhasdfj' );
 
 		return [
-			'malformed statement guid' => [ $item, 'NotAGuid', $goodReference, '' ],
-			'unknown statement guid' => [ $item, $badGuid, $goodReference, $refHash ],
+			'unknown statement guid' => [ $item, $badGuid, $goodReference, '' ],
 			'unknown reference hash' => [ $item, $goodGuid, $goodReference, $badRefHash ],
 		];
 	}
@@ -316,7 +313,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$q17 = new ItemId( 'Q17' );
 
 		$item = new Item( $q17 );
-		$guid = $this->mockProvider->getGuidGenerator()->newGuid( $q17 );
+		$guid = 'GUID';
 
 		$oldSnak = new PropertyValueSnak( $p11, new StringValue( "old reference" ) );
 		$oldReference = new Reference( new SnakList( array( $oldSnak ) ) );

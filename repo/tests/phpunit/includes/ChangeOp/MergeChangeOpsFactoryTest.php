@@ -10,6 +10,7 @@ use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 
 /**
@@ -39,7 +40,7 @@ class MergeChangeOpsFactoryTest extends PHPUnit_Framework_TestCase {
 
 		$changeOpFactoryProvider = new ChangeOpFactoryProvider(
 			$constraintProvider,
-			$mockProvider->getMockGuidGenerator(),
+			new GuidGenerator(),
 			$mockProvider->getMockGuidValidator(),
 			$mockProvider->getMockGuidParser( $toItemId ),
 			$mockProvider->getMockSnakValidator(),

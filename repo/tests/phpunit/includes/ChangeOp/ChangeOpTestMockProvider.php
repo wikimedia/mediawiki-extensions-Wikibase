@@ -19,7 +19,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -109,15 +108,6 @@ class ChangeOpTestMockProvider {
 		}
 
 		return new Statement( $snak );
-	}
-
-	/**
-	 * Returns a normal GuidGenerator.
-	 *
-	 * @return GuidGenerator
-	 */
-	public function getGuidGenerator() {
-		return new GuidGenerator();
 	}
 
 	/**
@@ -435,13 +425,6 @@ class ChangeOpTestMockProvider {
 			} ) );
 
 		return $mock;
-	}
-
-	/**
-	 * @return GuidGenerator
-	 */
-	public function getMockGuidGenerator() {
-		return new GuidGenerator();
 	}
 
 	/**
