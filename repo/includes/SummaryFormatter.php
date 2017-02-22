@@ -48,6 +48,11 @@ class SummaryFormatter {
 	private $idParser;
 
 	/**
+	 * @var StringNormalizer
+	 */
+	private $stringNormalizer;
+
+	/**
 	 * @param EntityIdFormatter $idFormatter Please note that the magic label substitution we apply
 	 *     on top of this only works in case this returns links without display text.
 	 * @param ValueFormatter $valueFormatter
