@@ -122,12 +122,17 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 		$diff = $this->makeDiff( $values['object_id'], $values['info']['metadata']['parent_id'], $values[ 'revision_id' ] );
 		$values['info'] = serialize( $values['info'] );
 
-		if ( $values['type'] === 'wikibase-item~add' || $values['type'] === 'wikibase-item~update' ) {
+		$entityId = new ItemId( $values['object_id'] );
+		$action = explode( '~', $values['type'] )[1];
+		unset( $values['object_id'] );
+		unset( $values['type'] );
+		if ( $action === 'add' || $action === 'update' ) {
 			$change = new ItemChange( $values );
 		} else {
 			$change = new EntityChange( $values );
 		}
-		$change->setEntityId( new ItemId( $values['object_id'] ) );
+		$change->setEntityId( $entityId );
+		$change->setAction( $action );
 
 		$change->setDiff( $diff );
 
@@ -140,9 +145,9 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 
 		return $this->makeChange( array(
 			'id' => null,
-			'type' => $first->getField( 'type' ), // because the first change has no parent
+			'type' => $first->getType(), // because the first change has no parent
 			'time' => $last->getField( 'time' ), // last change's timestamp
-			'object_id' => $last->getField( 'object_id' ),
+			'object_id' => $last->getObjectId(),
 			'revision_id' => $last->getField( 'revision_id' ), // last changes rev id
 			'user_id' => $last->getField( 'user_id' ),
 			'info' => array(

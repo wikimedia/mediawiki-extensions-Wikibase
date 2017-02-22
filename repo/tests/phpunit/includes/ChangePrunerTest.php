@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests;
 
 use InvalidArgumentException;
 use MediaWikiTestCase;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityChange;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
@@ -69,22 +70,23 @@ class ChangePrunerTest extends MediaWikiTestCase {
 	private function addTestChanges() {
 		$changeStore = new SqlChangeStore( wfGetLB() );
 
-		$change = new EntityChange( $this->getChangeRowData( '20150101000005' ) );
+		$change = $this->getEntityChange( '20150101000005' );
 		$changeStore->saveChange( $change );
 
-		$change = new EntityChange( $this->getChangeRowData( '20150101000300' ) );
+		$change = $this->getEntityChange( '20150101000300' );
 		$changeStore->saveChange( $change );
 	}
 
-	private function getChangeRowData( $timestamp ) {
-		return array(
-			'type' => 'wikibase-item~update',
+	private function getEntityChange( $timestamp ) {
+		$change = new EntityChange( [
 			'time' => $timestamp,
 			'user_id' => 0,
 			'revision_id' => 9002,
-			'object_id' => 'Q9000',
-			'info' => array( 'diff' => array() )
-		);
+			'info' => [ 'diff' => [] ]
+		] );
+		$change->setEntityId( new ItemId( 'Q9000' ) );
+		$change->setAction( 'update' );
+		return $change;
 	}
 
 	/**

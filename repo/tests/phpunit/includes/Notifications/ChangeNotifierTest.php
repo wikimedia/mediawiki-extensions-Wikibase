@@ -10,6 +10,7 @@ use User;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\EntityChange;
 use Wikibase\ItemContent;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Notifications\ChangeTransmitter;
@@ -97,7 +98,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$notifier = $this->getChangeNotifier();
 		$change = $notifier->notifyOnPageDeleted( $content, $user, $timestamp );
 
-		$this->assertFields(
+		$this->assertChange(
 			array(
 				'object_id' => strtolower( $content->getEntityId()->getSerialization() ),
 				'user_id' => $user->getId(),
@@ -110,7 +111,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 					)
 				)
 			),
-			$change->getFields()
+			$change
 		);
 	}
 
@@ -139,7 +140,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$change = $notifier->notifyOnPageUndeleted( $revision );
 		$fields = $change->getFields();
 
-		$this->assertFields(
+		$this->assertChange(
 			array(
 				'object_id' => strtolower( $content->getEntityId()->getSerialization() ),
 				'user_id' => $user->getId(),
@@ -152,7 +153,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 					)
 				)
 			),
-			$fields
+			$change
 		);
 
 		$this->assertTrue(
@@ -188,7 +189,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$notifier = $this->getChangeNotifier();
 		$change = $notifier->notifyOnPageCreated( $revision );
 
-		$this->assertFields(
+		$this->assertChange(
 			array(
 				'object_id' => strtolower( $content->getEntityId()->getSerialization() ),
 				'user_id' => $user->getId(),
@@ -196,7 +197,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 				'time' => $timestamp,
 				'type' => 'wikibase-item~add',
 			),
-			$change->getFields()
+			$change
 		);
 	}
 
@@ -232,7 +233,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$notifier = $this->getChangeNotifier();
 		$change = $notifier->notifyOnPageModified( $revision, $parent );
 
-		$this->assertFields(
+		$this->assertChange(
 			array(
 				'object_id' => strtolower( $content->getEntityId()->getSerialization() ),
 				'user_id' => $user->getId(),
@@ -240,7 +241,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 				'time' => $timestamp,
 				'type' => 'wikibase-item~update',
 			),
-			$change->getFields()
+			$change
 		);
 	}
 
@@ -277,7 +278,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$notifier = $this->getChangeNotifier();
 		$change = $notifier->notifyOnPageModified( $revision, $parent );
 
-		$this->assertFields(
+		$this->assertChange(
 			array(
 				'object_id' => strtolower( $content->getEntityId()->getSerialization() ),
 				'user_id' => $user->getId(),
@@ -285,7 +286,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 				'time' => $timestamp,
 				'type' => 'wikibase-item~restore',
 			),
-			$change->getFields()
+			$change
 		);
 	}
 
@@ -304,7 +305,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$notifier = $this->getChangeNotifier();
 		$change = $notifier->notifyOnPageModified( $revision, $parent );
 
-		$this->assertFields(
+		$this->assertChange(
 			array(
 				'object_id' => strtolower( $content->getEntityId()->getSerialization() ),
 				'user_id' => $user->getId(),
@@ -312,8 +313,22 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 				'time' => $timestamp,
 				'type' => 'wikibase-item~remove',
 			),
-			$change->getFields()
+			$change
 		);
+	}
+
+	private function assertChange( $expected, EntityChange $actual ) {
+		if ( isset( $expected['type'] ) ) {
+			$this->assertSame( $expected['type'], $actual->getType() );
+			unset( $expected['type'] );
+		}
+
+		if ( isset( $expected['object_id'] ) ) {
+			$this->assertSame( $expected['object_id'], $actual->getObjectId() );
+			unset( $expected['object_id'] );
+		}
+
+		$this->assertFields( $expected, $actual->getFields() );
 	}
 
 	private function assertFields( $expected, $actual ) {

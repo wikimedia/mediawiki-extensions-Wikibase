@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql;
 
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\EntityChange;
@@ -178,37 +179,33 @@ class EntityChangeLookupTest extends \MediaWikiTestCase {
 	}
 
 	private function getEntityChanges() {
-		$changeOne = array(
-			'type' => 'wikibase-item~remove',
+		$changeOne = new EntityChange( [
 			'time' => '20121026200049',
-			'object_id' => 'q42',
 			'revision_id' => '0',
 			'user_id' => '0',
 			'info' => '{"diff":{"type":"diff","isassoc":null,"operations":[]}}',
-		);
+		] );
+		$changeOne->setEntityId( new ItemId( 'q42' ) );
+		$changeOne->setAction( 'remove' );
 
-		$changeTwo = array(
-			'type' => 'wikibase-item~remove',
+		$changeTwo = new EntityChange( [
 			'time' => '20151008161232',
-			'object_id' => 'q4662',
 			'revision_id' => '0',
 			'user_id' => '0',
 			'info' => '{"diff":{"type":"diff","isassoc":null,"operations":[]}}',
-		);
+		] );
+		$changeTwo->setEntityId( new ItemId( 'q4662' ) );
+		$changeTwo->setAction( 'remove' );
 
-		$changeThree = array(
-			'type' => 'wikibase-item~remove',
+		$changeThree = new EntityChange( [
 			'time' => '20141008161232',
-			'object_id' => 'q123',
 			'revision_id' => '343',
 			'user_id' => '34',
 			'info' => '{"metadata":{"user_text":"BlackMagicIsEvil","bot":0,"page_id":2354,"rev_id":343,' .
 				'"parent_id":897,"comment":"Fake data!"}}',
-		);
-
-		$changeOne = new EntityChange( $changeOne );
-		$changeTwo = new EntityChange( $changeTwo );
-		$changeThree = new EntityChange( $changeThree );
+		] );
+		$changeThree->setEntityId( new ItemId( 'q123' ) );
+		$changeThree->setAction( 'remove' );
 
 		return array( $changeOne, $changeTwo, $changeThree );
 	}

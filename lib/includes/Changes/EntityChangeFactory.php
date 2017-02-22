@@ -57,24 +57,18 @@ class EntityChangeFactory {
 		$entityType = $entityId->getEntityType();
 
 		if ( isset( $this->changeClasses[ $entityType ] ) ) {
-			$class = $this->changeClasses[$entityType];
+			/** @var EntityChange $instance */
+			$instance = new $this->changeClasses[$entityType]( $fields );
 		} else {
-			$class = EntityChange::class;
+			$instance = new EntityChange( $fields );
 		}
 
-		/** @var EntityChange $instance */
-		$instance = new $class( $fields );
-
 		$instance->setEntityId( $entityId );
+		$instance->setAction( $action );
 
 		if ( !$instance->hasField( 'info' ) ) {
 			$instance->setField( 'info', [] );
 		}
-
-		// Note: the change type determines how newForChangeType will
-		// instantiate and handle the change
-		$type = 'wikibase-' . $entityId->getEntityType() . '~' . $action;
-		$instance->setField( 'type', $type );
 
 		return $instance;
 	}
