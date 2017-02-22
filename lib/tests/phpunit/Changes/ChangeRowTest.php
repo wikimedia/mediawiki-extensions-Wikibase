@@ -42,11 +42,6 @@ class ChangeRowTest extends MediaWikiTestCase {
 		$change->getTime();
 	}
 
-	public function testGetTypeReturnsChange() {
-		$change = new ChangeRow();
-		$this->assertSame( 'change', $change->getType() );
-	}
-
 	public function testReturnsObjectId() {
 		$change = new ChangeRow( array( 'object_id' => 'Q1' ) );
 		$this->assertSame( 'Q1', $change->getObjectId() );

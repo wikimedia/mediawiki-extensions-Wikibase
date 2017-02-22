@@ -135,6 +135,7 @@ class ExternalChangeFactory {
 			throw new UnexpectedValueException( '$type must be a string.' );
 		}
 
+		// FIXME: This encodes knowledge from EntityChangeFactory::newForEntity.
 		list( , $changeType ) = explode( '~', $type, 2 );
 
 		return $changeType;

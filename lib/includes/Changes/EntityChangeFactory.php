@@ -87,7 +87,8 @@ class EntityChangeFactory {
 	 * @return EntityChange
 	 */
 	public function newForChangeType( $changeType, EntityId $entityId, array $fields ) {
-		$action = explode( '~', $changeType )[1];
+		list( , $action ) = explode( '~', $changeType, 2 );
+
 		return $this->newForEntity( $action, $entityId, $fields );
 	}
 

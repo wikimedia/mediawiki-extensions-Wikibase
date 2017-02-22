@@ -56,13 +56,6 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getType() {
-		return $this->getField( 'type' );
-	}
-
-	/**
 	 * @return EntityId
 	 */
 	public function getEntityId() {
@@ -89,7 +82,9 @@ class EntityChange extends DiffChange {
 	 * @return string
 	 */
 	public function getAction() {
-		list( , $action ) = explode( '~', $this->getType(), 2 );
+		// FIXME: This encodes knowledge from EntityChangeFactory::newForEntity.
+		$type = $this->getField( 'type' );
+		list( , $action ) = explode( '~', $type, 2 );
 
 		return $action;
 	}

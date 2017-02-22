@@ -24,9 +24,7 @@ class ItemChange extends EntityChange {
 
 			$cls = $diff === null ? 'null' : get_class( $diff );
 
-			wfLogWarning(
-				'Cannot get sitelink diff from ' . $cls . '. Change #' . $this->getId()
-				. ", type " . $this->getType() );
+			wfLogWarning( 'Cannot get sitelink diff from ' . $cls . '. Change #' . $this->getId() );
 
 			return new Diff();
 		} else {
