@@ -92,7 +92,7 @@ class MessageParameterFormatter implements ValueFormatter {
 	/**
 	 * @param array $values
 	 *
-	 * @return string[]
+	 * @return string
 	 */
 	private function formatValueList( array $values ) {
 		$formatted = array();
