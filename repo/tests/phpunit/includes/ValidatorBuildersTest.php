@@ -96,6 +96,40 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 		return $fileNameLookup;
 	}
 
+	public function provideStringValueValidation() {
+		return [
+			'Space' => [ 'x x', true ],
+			'Unicode support' => [ 'Äöü', true ],
+
+			// Length checks
+			'To short' => [ '', false ],
+			'Minimum length' => [ 'x', true ],
+			'Maximum length' => [ str_repeat( 'x', 400 ), true ],
+			'Too long' => [ str_repeat( 'x', 401 ), false ],
+
+			// Enforced trimming
+			'Leading space' => [ ' x', false ],
+			'Leading newline' => [ "\nx", false ],
+			'Trailing space' => [ 'x ', false ],
+			'Trailing newline' => [ "x\n", false ],
+
+			// Disallowed whitespace characters
+			'Tabulator' => [ "x\tx", false ],
+			'Return' => [ "x\rx", false ],
+			'Newline' => [ "x\nx", false ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideStringValueValidation
+	 */
+	public function testStringValueValidation( $string, $expected ) {
+		$value = new StringValue( $string );
+		$validators = $this->newValidatorBuilders()->buildStringValidators();
+
+		$this->assertValidation( $expected, $validators, $value );
+	}
+
 	public function provideDataTypeValidation() {
 		$latLonValue = new LatLongValue( 0, 0 );
 		$wikidataUri = 'http://www.wikidata.org/entity/';
@@ -147,13 +181,6 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			//string
 			'String expects StringValue, got string' => [ 'string', 'Foo', false ],
 			'String expects StringValue' => [ 'string', new NumberValue( 7 ), false ],
-			'String can not be empty' => [ 'string', new StringValue( '' ), false ],
-			'Simple string' => [ 'string', new StringValue( 'Foo' ), true ],
-			'String Unicode support' => [ 'string', new StringValue( 'Äöü' ), true ],
-			'Long, but not too long' => [ 'string', new StringValue( str_repeat( 'x', 400 ) ), true ],
-			'Too long' => [ 'string', new StringValue( str_repeat( 'x', 401 ) ), false ],
-			'String with leading space' => [ 'string', new StringValue( ' Foo' ), false ],
-			'String with trailing space' => [ 'string', new StringValue( 'Foo ' ), false ],
 
 			//time
 			'TimeValue expected, string supplied' => [ 'time', 'Foo', false ],
