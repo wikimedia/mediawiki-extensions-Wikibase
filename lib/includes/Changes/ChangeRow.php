@@ -44,15 +44,6 @@ abstract class ChangeRow implements Change {
 	}
 
 	/**
-	 * @see Change::getType
-	 *
-	 * @return string
-	 */
-	public function getType() {
-		return 'change';
-	}
-
-	/**
 	 * @see Change::getObjectId
 	 *
 	 * @return string
