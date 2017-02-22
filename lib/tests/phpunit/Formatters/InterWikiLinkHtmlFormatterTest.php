@@ -50,9 +50,7 @@ class InterWikiLinkHtmlFormatterTest extends \MediaWikiTestCase {
 	 */
 	public function testFormat( StringValue $value, $pattern ) {
 
-		$options = new FormatterOptions();
-		$options->setOption( InterWikiLinkHtmlFormatter::OPTION_BASE_URL, 'http://base.url/' );
-		$formatter = new InterWikiLinkHtmlFormatter( $options );
+		$formatter = new InterWikiLinkHtmlFormatter( 'http://base.url/' );
 
 		$html = $formatter->format( $value );
 		$this->assertRegExp( $pattern, $html );
