@@ -14,7 +14,7 @@ use ValueFormatters\ValueFormatter;
  * @license GPL-2.0+
  * @author Jonas Kress
  */
-class InterWikiLinkFormatter implements ValueFormatter {
+class InterWikiLinkHtmlFormatter implements ValueFormatter {
 
 	const OPTION_BASE_URL = 'baseUrl';
 
