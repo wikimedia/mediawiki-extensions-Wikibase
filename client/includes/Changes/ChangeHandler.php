@@ -151,8 +151,7 @@ class ChangeHandler {
 	 */
 	public function handleChange( Change $change ) {
 		$changeId = $this->getChangeIdForLog( $change );
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": handling change #$changeId"
-			. ' (' . $change->getType() . ')' );
+		wfDebugLog( __CLASS__, __FUNCTION__ . ": handling change #$changeId" );
 
 		$usagesPerPage = $this->affectedPagesFinder->getAffectedUsagesByPage( $change );
 

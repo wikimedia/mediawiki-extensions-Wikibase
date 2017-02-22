@@ -83,7 +83,6 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$change = $factory->newForChangeType( $type, $entityId, [] );
 		$this->assertInstanceOf( $expectedClass, $change );
-		$this->assertEquals( $type, $change->getType() );
 		$this->assertEquals( $action, $change->getAction() );
 		$this->assertEquals( $entityId, $change->getEntityId() );
 	}
@@ -104,7 +103,7 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals( $itemId, $change->getEntityId(), 'entity id' );
 		$this->assertEquals( 'q1', $change->getObjectId(), 'object id' );
-		$this->assertEquals( 'wikibase-item~update', $change->getType(), 'type' );
+		$this->assertEquals( 'update', $change->getAction(), 'action' );
 
 		$this->assertEquals(
 			new Diff( array( 'es' => new DiffOpAdd( 'gato' ) ) ),
@@ -124,7 +123,7 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals( $itemId, $change->getEntityId(), 'entity id' );
 		$this->assertEquals( 'q1', $change->getObjectId(), 'object id' );
-		$this->assertEquals( 'wikibase-item~add', $change->getType(), 'type' );
+		$this->assertEquals( 'add', $change->getAction(), 'action' );
 
 		$this->assertEquals(
 			new Diff( array( 'en' => new DiffOpAdd( 'kitten' ) ) ),
@@ -144,7 +143,7 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals( $propertyId, $change->getEntityId(), 'entity id' );
 		$this->assertEquals( 'p2', $change->getObjectId(), 'object id' );
-		$this->assertEquals( 'wikibase-property~remove', $change->getType(), 'type' );
+		$this->assertEquals( 'remove', $change->getAction(), 'action' );
 
 		$this->assertEquals(
 			new Diff( array( 'de' => new DiffOpRemove( 'Katze' ) ) ),
@@ -164,7 +163,7 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals( $itemId, $change->getEntityId(), 'entity id' );
 		$this->assertEquals( 'q4', $change->getObjectId(), 'object id' );
-		$this->assertEquals( 'wikibase-item~restore', $change->getType(), 'type' );
+		$this->assertEquals( 'restore', $change->getAction(), 'action' );
 
 		$this->assertEquals(
 			new Diff( array(

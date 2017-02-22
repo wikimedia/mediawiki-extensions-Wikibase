@@ -21,6 +21,24 @@ abstract class ChangeRow implements Change {
 	 */
 	private $fields = array( 'id' => null );
 
+	public function __construct( array $fields = [] ) {
+		$this->setFields( $fields );
+	}
+
+	public function setFields( array $fields ) {
+		foreach ( $fields as $name => $value ) {
+			$this->setField( $name, $value );
+		}
+	}
+
+	/**
+	 * @param string $name
+	 * @param mixed $value
+	 */
+	public function setField( $name, $value ) {
+		$this->fields[$name] = $value;
+	}
+
 	/**
 	 * @see Change::getAge
 	 *
@@ -37,10 +55,6 @@ abstract class ChangeRow implements Change {
 	 */
 	public function getTime() {
 		return $this->getField( 'time' );
-	}
-
-	public function __construct( array $fields = array() ) {
-		$this->setFields( $fields );
 	}
 
 	/**
@@ -165,29 +179,6 @@ abstract class ChangeRow implements Change {
 		}
 
 		return $info;
-	}
-
-	/**
-	 * Sets the value of a field.
-	 * Strings can be provided for other types,
-	 * so this method can be called from unserialization handlers.
-	 *
-	 * @param string $name
-	 * @param mixed $value
-	 */
-	public function setField( $name, $value ) {
-		$this->fields[$name] = $value;
-	}
-
-	/**
-	 * Sets multiple fields.
-	 *
-	 * @param array $fields The fields to set
-	 */
-	public function setFields( array $fields ) {
-		foreach ( $fields as $name => $value ) {
-			$this->setField( $name, $value );
-		}
 	}
 
 	/**
