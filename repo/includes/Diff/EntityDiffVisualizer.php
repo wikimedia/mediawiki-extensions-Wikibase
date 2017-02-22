@@ -168,11 +168,9 @@ class EntityDiffVisualizer {
 	}
 
 	/**
-	 * Returns the HTML for a single claim DiffOp.
-	 *
 	 * @param DiffOp $claimDiffOp
 	 *
-	 * @return string
+	 * @return string HTML
 	 * @throws MWException
 	 */
 	protected function getClaimDiffHtml( DiffOp $claimDiffOp ) {

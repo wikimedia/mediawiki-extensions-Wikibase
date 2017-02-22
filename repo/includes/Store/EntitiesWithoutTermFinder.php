@@ -14,8 +14,6 @@ use Wikibase\DataModel\Entity\EntityId;
 interface EntitiesWithoutTermFinder {
 
 	/**
-	 * Return all entities without a specify term
-	 *
 	 * @param string $termType Can be any member of the TermIndexEntry::TYPE_ enum
 	 * @param string|null $language Restrict the search for one language. By default the search is done for all languages.
 	 * @param string[]|null $entityTypes Array containing the entity types to search for, typically

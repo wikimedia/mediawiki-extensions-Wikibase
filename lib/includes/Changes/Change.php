@@ -8,7 +8,6 @@ namespace Wikibase;
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-
 interface Change {
 
 	/**
@@ -33,9 +32,7 @@ interface Change {
 	public function getTime();
 
 	/**
-	 * Returns the id of the change.
-	 *
-	 * @return int|null
+	 * @return int|null Number to be used as an identifier when persisting the change.
 	 */
 	public function getId();
 

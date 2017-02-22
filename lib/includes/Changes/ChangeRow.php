@@ -200,9 +200,7 @@ class ChangeRow implements Change {
 	}
 
 	/**
-	 * Returns the objects database id.
-	 *
-	 * @return int|null
+	 * @return int|null Number to be used as an identifier when persisting the change.
 	 */
 	public function getId() {
 		return $this->getField( 'id' );
