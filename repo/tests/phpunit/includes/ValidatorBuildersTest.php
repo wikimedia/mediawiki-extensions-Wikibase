@@ -39,6 +39,8 @@ use MediaWiki\Site\MediaWikiPageNameNormalizer;
  */
 class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 
+	const GEO_SHAPE_STORAGE_API_URL = 'http://some.wiki/api.php';
+
 	private function newValidatorBuilders() {
 		return new ValidatorBuilders(
 			$this->getEntityLookup(),
@@ -51,7 +53,8 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 				'' => [ Item::ENTITY_TYPE, Property::ENTITY_TYPE ],
 				'foo' => [ Item::ENTITY_TYPE ]
 			],
-			$this->getMediaWikiPageNameNormalizer()
+			$this->getMediaWikiPageNameNormalizer(),
+			self::GEO_SHAPE_STORAGE_API_URL
 		);
 	}
 
