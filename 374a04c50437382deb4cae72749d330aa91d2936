@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_bd644d46",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-02-22T17:42:23Z",
+      "side": 1,
+      "message": "We might want to have a different name here.\nAlso I think we need two settings:\n1. setting used for formatting the link\n2. setting used for defining API endpoint ( this must then be passed to valueview expert suggester )",
+      "revId": "374a04c50437382deb4cae72749d330aa91d2936",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
