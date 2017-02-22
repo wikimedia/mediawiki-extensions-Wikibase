@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_5d3bc1c4",
+        "filename": "lib/includes/Formatters/InterWikiLinkWikitextFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-22T15:58:48Z",
+      "side": 1,
+      "message": "The default could be here. I would find this easier to read.",
+      "range": {
+        "startLine": 23,
+        "startChar": 1,
+        "endLine": 23,
+        "endChar": 18
+      },
+      "revId": "b020a0afcefa2148c7b5a332a7c9f8a46405c510",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_bd70cda4",
+        "filename": "lib/includes/Formatters/InterWikiLinkWikitextFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-22T15:58:48Z",
+      "side": 1,
+      "message": "What if the configuration contained spaces? Spaces are allowed in URLs, but must be encoded in Wikitext.",
+      "range": {
+        "startLine": 52,
+        "startChar": 3,
+        "endLine": 52,
+        "endChar": 17
+      },
+      "revId": "b020a0afcefa2148c7b5a332a7c9f8a46405c510",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_fd5e5516",
+        "filename": "lib/includes/Formatters/InterWikiLinkWikitextFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-22T15:58:48Z",
+      "side": 1,
+      "message": "Similar to above, what if this contains a character that must be encoded in Wikitext? These are %\u003c\u003e[]{|} (%25, %3C, %3E, %5B, %5D, %7B, %7C, %7D). Some of them are not allowed by the validator, but some are. Would be good to encode them all here – not manually but by calling the appropriate function from core.",
+      "range": {
+        "startLine": 54,
+        "startChar": 3,
+        "endLine": 54,
+        "endChar": 21
+      },
+      "revId": "b020a0afcefa2148c7b5a332a7c9f8a46405c510",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_3d3efdb5",
+        "filename": "lib/tests/phpunit/Formatters/WikibaseValueFormatterBuildersTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-22T15:58:48Z",
+      "side": 1,
+      "message": "I wonder why you went for the \"external\" link format, instead of the \"internal\" [[commons:Data:GeoShape.map|Data:GeoShape.map]]?",
+      "range": {
+        "startLine": 307,
+        "startChar": 6,
+        "endLine": 307,
+        "endChar": 72
+      },
+      "revId": "b020a0afcefa2148c7b5a332a7c9f8a46405c510",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
