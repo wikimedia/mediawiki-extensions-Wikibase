@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_b4b1cade",
+        "filename": "repo/includes/LinkedData/EntityDataUriManager.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-22T08:28:51Z",
+      "side": 1,
+      "message": "Missed this.",
+      "range": {
+        "startLine": 169,
+        "startChar": 14,
+        "endLine": 169,
+        "endChar": 19
+      },
+      "revId": "cd57e756b4284659a27c4b5c0fe1569929198a52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
