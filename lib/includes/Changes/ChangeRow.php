@@ -11,7 +11,7 @@ use MWException;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class ChangeRow implements Change {
+abstract class ChangeRow implements Change {
 
 	/**
 	 * The fields of the object.
