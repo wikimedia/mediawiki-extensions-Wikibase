@@ -63,15 +63,6 @@ class EntityChangeTest extends ChangeRowTest {
 		return $cases;
 	}
 
-	/**
-	 * @dataProvider changeProvider
-	 *
-	 * @param EntityChange $entityChange
-	 */
-	public function testGetType( EntityChange $entityChange ) {
-		$this->assertInternalType( 'string', $entityChange->getType() );
-	}
-
 	public function testMetadata() {
 		$entityChange = $this->newEntityChange( new ItemId( 'Q13' ) );
 
@@ -127,10 +118,8 @@ class EntityChangeTest extends ChangeRowTest {
 		$string = $entityChange->__toString();
 
 		$id = strtolower( $entityChange->getEntityId()->getSerialization() );
-		$type = $entityChange->getType();
 
 		$this->assertContains( "'object_id' => '$id'", $string, "missing entity ID $id" );
-		$this->assertContains( "'type' => '$type'", $string, "missing type $type" );
 	}
 
 	public function testGetComment() {
