@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_b4e8eab0",
+        "filename": "repo/includes/Specials/SpecialRedirectEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-22T09:17:54Z",
+      "side": 1,
+      "message": "I very much encourage people to remove cruft like this. Such comments do not tell anything that\u0027s not obvious from the method name anyway.\n\nRemoved in I8d8228c.",
+      "range": {
+        "startLine": 186,
+        "startChar": 4,
+        "endLine": 186,
+        "endChar": 30
+      },
+      "revId": "f2a5479e99d49703e1388fdd598998769f0f50f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_94e366d4",
+        "filename": "repo/includes/Specials/SpecialRedirectEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-22T09:17:54Z",
+      "side": 1,
+      "message": "array[] would have been a bit more precise.\n\nFixed in I8d8228c.",
+      "range": {
+        "startLine": 188,
+        "startChar": 12,
+        "endLine": 188,
+        "endChar": 17
+      },
+      "revId": "f2a5479e99d49703e1388fdd598998769f0f50f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
