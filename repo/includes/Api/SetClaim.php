@@ -21,7 +21,6 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Repo\Diff\ClaimDiffer;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**
@@ -72,29 +71,34 @@ class SetClaim extends ApiBase {
 	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
-	 * @param string $modulePrefix
+	 * @param ApiErrorReporter $errorReporter
+	 * @param Deserializer $statementDeserializer
+	 * @param StatementChangeOpFactory $statementChangeOpFactory
+	 * @param StatementModificationHelper $modificationHelper
+	 * @param StatementGuidParser $guidParser
+	 * @param callable $resultBuilderInstantiator
+	 * @param callable $entitySavingHelperInstantiator
 	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+	public function __construct(
+		ApiMain $mainModule,
+		$moduleName,
+		ApiErrorReporter $errorReporter,
+		Deserializer $statementDeserializer,
+		StatementChangeOpFactory $statementChangeOpFactory,
+		StatementModificationHelper $modificationHelper,
+		StatementGuidParser $guidParser,
+		callable $resultBuilderInstantiator,
+		callable $entitySavingHelperInstantiator
+	) {
+		parent::__construct( $mainModule, $moduleName );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
-		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
-
-		$this->statementDeserializer = $wikibaseRepo->getExternalFormatStatementDeserializer();
-		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
-		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
-
-		$this->modificationHelper = new StatementModificationHelper(
-			$wikibaseRepo->getSnakFactory(),
-			$wikibaseRepo->getEntityIdParser(),
-			$wikibaseRepo->getStatementGuidValidator(),
-			$apiHelperFactory->getErrorReporter( $this )
-		);
-
-		$this->guidParser = $wikibaseRepo->getStatementGuidParser();
-		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
-		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
+		$this->errorReporter = $errorReporter;
+		$this->statementDeserializer = $statementDeserializer;
+		$this->statementChangeOpFactory = $statementChangeOpFactory;
+		$this->modificationHelper = $modificationHelper;
+		$this->guidParser = $guidParser;
+		$this->resultBuilder = $resultBuilderInstantiator( $this );
+		$this->entitySavingHelper = $entitySavingHelperInstantiator( $this );
 	}
 
 	/**
