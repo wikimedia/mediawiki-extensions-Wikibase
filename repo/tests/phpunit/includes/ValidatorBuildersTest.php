@@ -193,194 +193,199 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 
 		$cases = array(
 			//wikibase-item
-			array( 'wikibase-item', 'q8', false, 'Expected EntityId, string supplied' ),
-			array( 'wikibase-item', new StringValue( 'q8' ), false, 'Expected EntityId, StringValue supplied' ),
-			array( 'wikibase-item', new EntityIdValue( new ItemId( 'q8' ) ), true, 'existing entity' ),
-			array( 'wikibase-item', new EntityIdValue( new ItemId( 'q3' ) ), false, 'missing entity' ),
-			array( 'wikibase-item', new EntityIdValue( new PropertyId( 'p8' ) ), false, 'not an item' ),
+			'Expected item, string supplied' => [ 'wikibase-item', 'q8', false ],
+			'Expected item, StringValue supplied' => [ 'wikibase-item', new StringValue( 'q8' ), false ],
+			'Existing item' => [ 'wikibase-item', new EntityIdValue( new ItemId( 'q8' ) ), true ],
+			'Missing item' => [ 'wikibase-item', new EntityIdValue( new ItemId( 'q3' ) ), false ],
+			'Not an item' => [ 'wikibase-item', new EntityIdValue( new PropertyId( 'p8' ) ), false ],
 
 			// wikibase-property
-			array( 'wikibase-property', new EntityIdValue( new PropertyId( 'p8' ) ), true, 'existing entity' ),
-			array( 'wikibase-property', new EntityIdValue( new ItemId( 'q8' ) ), false, 'not a property' ),
+			'Existing entity' => [ 'wikibase-property', new EntityIdValue( new PropertyId( 'p8' ) ), true ],
+			'Not a property' => [ 'wikibase-property', new EntityIdValue( new ItemId( 'q8' ) ), false ],
 
 			// generic wikibase entity
-			array( 'wikibase-entity', new EntityIdValue( new PropertyId( 'p8' ) ), true, 'existing entity' ),
-			array( 'wikibase-entity', new EntityIdValue( new ItemId( 'q8' ) ), true, 'existing entity' ),
-			array( 'wikibase-entity', new EntityIdValue( new ItemId( 'q3' ) ), false, 'missing entity' ),
-			array( 'wikibase-entity', new EntityIdValue( new ItemId( 'bar:Q123' ) ), false, 'unknown repository' ),
-			array( 'wikibase-entity', new EntityIdValue( new ItemId( 'foo:Q123' ) ), true, 'foreign entity' ),
-			array( 'wikibase-entity', new EntityIdValue( new PropertyId( 'foo:P42' ) ), false, 'unsupported foreign entity type' ),
-			array( 'wikibase-entity', new StringValue( 'q8' ), false, 'Expected EntityId, StringValue supplied' ),
+			'Existing property' => [ 'wikibase-entity', new EntityIdValue( new PropertyId( 'p8' ) ), true ],
+			'Existing item entity' => [ 'wikibase-entity', new EntityIdValue( new ItemId( 'q8' ) ), true ],
+			'Missing item entity' => [ 'wikibase-entity', new EntityIdValue( new ItemId( 'q3' ) ), false ],
+			'Unknown repository' => [ 'wikibase-entity', new EntityIdValue( new ItemId( 'bar:Q123' ) ), false ],
+			'Foreign entity' => [ 'wikibase-entity', new EntityIdValue( new ItemId( 'foo:Q123' ) ), true ],
+			'Unsupported foreign entity type' => [ 'wikibase-entity', new EntityIdValue( new PropertyId( 'foo:P42' ) ), false ],
+			'Expected EntityId, StringValue supplied' => [ 'wikibase-entity', new StringValue( 'q8' ), false ],
 
 			//commonsMedia
-			array( 'commonsMedia', 'Foo.jpg', false, 'StringValue expected, string supplied' ),
-			array( 'commonsMedia', new NumberValue( 7 ), false, 'StringValue expected' ),
+			'Commons expects StringValue, got string' => [ 'commonsMedia', 'Foo.jpg', false ],
+			'Commons expects StringValue' => [ 'commonsMedia', new NumberValue( 7 ), false ],
+			'Commons can not be empty' => [ 'commonsMedia', new StringValue( '' ), false ],
+			'Name too long' => [ 'commonsMedia', new StringValue( str_repeat( 'x', 237 ) . '.jpg' ), false ],
+			'No file extension' => [ 'commonsMedia', new StringValue( 'Foo' ), false ],
+			'File extension to short' => [ 'commonsMedia', new StringValue( 'Foo.a' ), false ],
+			'This should be good' => [ 'commonsMedia', new StringValue( 'Foo.jpg' ), true ],
+			'Illegal character: newline' => [ 'commonsMedia', new StringValue( "a\na.jpg" ), false ],
+			'Illegal character: open square bracket' => [ 'commonsMedia', new StringValue( 'a[a.jpg' ), false ],
+			'Illegal character: close square bracket' => [ 'commonsMedia', new StringValue( 'a]a.jpg' ), false ],
+			'Illegal character: open curly bracket' => [ 'commonsMedia', new StringValue( 'a{a.jpg' ), false ],
+			'Illegal character: close curly bracket' => [ 'commonsMedia', new StringValue( 'a}a.jpg' ), false ],
+			'Illegal character: pipe' => [ 'commonsMedia', new StringValue( 'a|a.jpg' ), false ],
+			'Illegal character: hash' => [ 'commonsMedia', new StringValue( 'Foo#bar.jpg' ), false ],
+			'Illegal character: colon' => [ 'commonsMedia', new StringValue( 'Foo:bar.jpg' ), false ],
+			'Illegal character: slash' => [ 'commonsMedia', new StringValue( 'Foo/bar.jpg' ), false ],
+			'Illegal character: backslash' => [ 'commonsMedia', new StringValue( 'Foo\bar.jpg' ), false ],
+			'Commons Unicode support' => [ 'commonsMedia', new StringValue( 'Äöü.jpg' ), true ],
+			'Media name with leading space' => [ 'commonsMedia', new StringValue( ' Foo.jpg' ), false ],
+			'Media name with trailing space' => [ 'commonsMedia', new StringValue( 'Foo.jpg ' ), false ],
+			'File not found' => [ 'commonsMedia', new StringValue( 'Foo-NOT-FOUND.jpg' ), false ],
 
 			//geo-shape
-			array( 'geo-shape', 'Foo.map', false, 'StringValue expected, string supplied' ),
-			array( 'geo-shape', new NumberValue( 7 ), false, 'StringValue expected' ),
+			'GeoShape expected StringValue, string supplied' => [ 'geo-shape', 'Foo.map', false ],
+			'GeoShape expected StringValue, NumberValue supplied' => [ 'geo-shape', new NumberValue( 7 ), false ],
+
 
 			//string
-			array( 'string', 'Foo', false, 'StringValue expected, string supplied' ),
-			array( 'string', new NumberValue( 7 ), false, 'StringValue expected' ),
-			array( 'string', new StringValue( '' ), false, 'empty string should be invalid' ),
-			array( 'string', new StringValue( 'Foo' ), true, 'simple string' ),
-			array( 'string', new StringValue( 'Äöü' ), true, 'Unicode support' ),
-			array( 'string', new StringValue( str_repeat( 'x', 400 ) ), true, 'long, but not too long' ),
-			array( 'string', new StringValue( str_repeat( 'x', 401 ) ), false, 'too long' ),
-			array( 'string', new StringValue( ' Foo' ), false, 'string with leading space' ),
-			array( 'string', new StringValue( 'Foo ' ), false, 'string with trailing space' ),
+			'String expects StringValue, got string' => [ 'string', 'Foo', false ],
+			'String expects StringValue' => [ 'string', new NumberValue( 7 ), false ],
+			'String can not be empty' => [ 'string', new StringValue( '' ), false ],
+			'Simple string' => [ 'string', new StringValue( 'Foo' ), true ],
+			'String Unicode support' => [ 'string', new StringValue( 'Äöü' ), true ],
+			'Long, but not too long' => [ 'string', new StringValue( str_repeat( 'x', 400 ) ), true ],
+			'Too long' => [ 'string', new StringValue( str_repeat( 'x', 401 ) ), false ],
+			'String with leading space' => [ 'string', new StringValue( ' Foo' ), false ],
+			'String with trailing space' => [ 'string', new StringValue( 'Foo ' ), false ],
 
 			//time
-			array( 'time', 'Foo', false, 'TimeValue expected, string supplied' ),
-			array( 'time', new NumberValue( 7 ), false, 'TimeValue expected' ),
+			'TimeValue expected, string supplied' => [ 'time', 'Foo', false ],
+			'TimeValue expected' => [ 'time', new NumberValue( 7 ), false ],
 
 			//time['calendar-model']
-			array(
+			'Calendar: too short' => [
 				'time',
 				new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, '1' ),
-				false,
-				'calendar: too short'
-			),
-			array(
+				false
+			],
+			'Calendar: too long' => [
 				'time',
 				new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY,
 					$wikidataUri . 'Q' . str_repeat( '6', 224 ) ),
-				false,
-				'calendar: too long'
-			),
-			array(
+				false
+			],
+			'Calendar: URL' => [
 				'time',
 				new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY,
 					$wikidataUri . 'Q1985727' ),
-				true,
-				'calendar: URL'
-			),
-			array(
+				true
+			],
+			'Calendar: untrimmed' => [
 				'time',
 				new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY,
 					' ' . $wikidataUri . 'Q1985727 ' ),
-				false,
-				'calendar: untrimmed'
-			),
-			array(
+				false
+			],
+			'Calendar: bad URL' => [
 				'time',
 				new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY,
 					' javascript:alert(1)' ),
-				false,
-				'calendar: bad URL'
-			),
+				false
+			],
 
 			//precision to the second (currently not allowed)
-			array(
+			'Time given to the second' => [
 				'time',
 				new TimeValue( '+2013-06-06T11:22:33Z', 0, 0, 0, TimeValue::PRECISION_DAY,
 					$wikidataUri . 'Q1985727' ),
-				false,
-				'time given to the second'
-			),
-			array(
+				false
+			],
+			'Precision: second' => [
 				'time',
 				new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_SECOND,
 					$wikidataUri . 'Q1985727' ),
-				false,
-				'precision: second'
-			),
+				false
+			],
 
 			//TODO: calendar must be an item reference
 			//TODO: calendar must be from a list of configured values
 
 			//globe-coordinate
-			array( 'globe-coordinate', 'Foo', false, 'GlobeCoordinateValue expected, string supplied' ),
-			array( 'globe-coordinate', new NumberValue( 7 ), false, 'GlobeCoordinateValue expected' ),
+			'GlobeCoordinateValue expected, string supplied' => [ 'globe-coordinate', 'Foo', false ],
+			'GlobeCoordinateValue expected' => [ 'globe-coordinate', new NumberValue( 7 ), false ],
 
 			//globe-coordinate[precision]
-			array(
+			'Integer precision is valid' => [
 				'globe-coordinate',
 				new GlobeCoordinateValue( $latLonValue, 1, $wikidataUri . 'Q2' ),
-				true,
-				'integer precision is valid'
-			),
-			array(
+				true
+			],
+			'Float precision is valid' => [
 				'globe-coordinate',
 				new GlobeCoordinateValue( $latLonValue, 0.2, $wikidataUri . 'Q2' ),
-				true,
-				'float precision is valid'
-			),
-			array(
+				true
+			],
+			'Null precision is invalid' => [
 				'globe-coordinate',
 				new GlobeCoordinateValue( $latLonValue, null, $wikidataUri . 'Q2' ),
-				false,
-				'null precision is invalid'
-			),
+				false
+			],
 
 			//globe-coordinate[globe]
 			// FIXME: this is testing unimplemented behaviour? Probably broken...
-			array(
+			'Globe can not be empty' => [
 				'globe-coordinate',
 				new GlobeCoordinateValue( $latLonValue, 1, '' ),
-				false,
-				'globe: empty string should be invalid'
-			),
-			array(
+				false
+			],
+			'Globe: too long' => [
 				'globe-coordinate',
 				new GlobeCoordinateValue( $latLonValue, 1, $wikidataUri . 'Q' . str_repeat( '6', 224 ) ),
-				false,
-				'globe: too long'
-			),
-			array(
+				false
+			],
+			'Globe: URL' => [
 				'globe-coordinate',
 				new GlobeCoordinateValue( $latLonValue, 1, $wikidataUri . 'Q2' ),
-				true,
-				'globe: URL'
-			),
-			array(
+				true
+			],
+			'Globe: untrimmed' => [
 				'globe-coordinate',
 				new GlobeCoordinateValue( $latLonValue, 1, ' ' . $wikidataUri . 'Q2 ' ),
-				false,
-				'globe: untrimmed'
-			),
-			array(
+				false
+			],
+			'Globe: bad URL scheme' => [
 				'globe-coordinate',
 				new GlobeCoordinateValue( $latLonValue, 1, ' javascript:alert(1) ' ),
-				false,
-				'globe: bad URL scheme'
-			),
+				false
+			],
 			//TODO: globe must be an item reference
 			//TODO: globe must be from a list of configured values
 
 			// url
-			array( 'url', 'Foo', false, 'StringValue expected, string supplied' ),
-			array( 'url', new NumberValue( 7 ), false, 'StringValue expected' ),
+			'URL expects StringValue, got string' => [ 'url', 'Foo', false ],
+			'URL expects StringValue' => [ 'url', new NumberValue( 7 ), false ],
 
-			array( 'url', new StringValue( 'http://acme.com' ), true, 'Simple HTTP URL' ),
-			array( 'url', new StringValue( 'https://acme.com' ), true, 'Simple HTTPS URL' ),
-			array( 'url', new StringValue( 'ftp://acme.com' ), true, 'Simple FTP URL' ),
-			array( 'url', new StringValue( 'http://acme.com/foo/bar?some=stuff#fragment' ), true, 'Complex HTTP URL' ),
+			'Simple HTTP URL' => [ 'url', new StringValue( 'http://acme.com' ), true ],
+			'Simple HTTPS URL' => [ 'url', new StringValue( 'https://acme.com' ), true ],
+			'Simple FTP URL' => [ 'url', new StringValue( 'ftp://acme.com' ), true ],
+			'Complex HTTP URL' => [ 'url', new StringValue( 'http://acme.com/foo/bar?some=stuff#fragment' ), true ],
 
 			// evil url
-			array( 'url', new StringValue( '//bla' ), false, 'Protocol-relative' ),
-			array( 'url', new StringValue( '/bla/bla' ), false, 'relative path' ),
-			array( 'url', new StringValue( 'just stuff' ), false, 'just words' ),
-			array( 'url', new StringValue( 'javascript:alert("evil")' ), false, 'JavaScript URL' ),
-			array( 'url', new StringValue( 'http://' ), false, 'bad http URL' ),
-			array( 'url', new StringValue( 'http://' . str_repeat( 'x', 494 ) ), false, 'URL too long' ),
+			'Protocol-relative' => [ 'url', new StringValue( '//bla' ), false ],
+			'Relative path' => [ 'url', new StringValue( '/bla/bla' ), false ],
+			'Just words' => [ 'url', new StringValue( 'just stuff' ), false ],
+			'JavaScript URL' => [ 'url', new StringValue( 'javascript:alert("evil")' ), false ],
+			'Bad http URL' => [ 'url', new StringValue( 'http://' ), false ],
+			'URL too long' => [ 'url', new StringValue( 'http://' . str_repeat( 'x', 494 ) ), false ],
 
-			array( 'url', new StringValue( ' http://acme.com' ), false, 'URL with leading space' ),
-			array( 'url', new StringValue( 'http://acme.com ' ), false, 'URL with trailing space' ),
+			'URL with leading space' => [ 'url', new StringValue( ' http://acme.com' ), false ],
+			'URL with trailing space' => [ 'url', new StringValue( 'http://acme.com ' ), false ],
 
 			//quantity
-			array( 'quantity', UnboundedQuantityValue::newFromNumber( 5 ), true, 'Unbounded' ),
-			array( 'quantity', QuantityValue::newFromNumber( 5 ), true, 'Simple integer' ),
-			array( 'quantity', QuantityValue::newFromNumber( 5, 'http://qudt.org/vocab/unit#Meter' ), true, 'Vocabulary URI' ),
-			array( 'quantity', QuantityValue::newFromNumber( 5, $wikidataUri . 'Q11573' ), false, 'Wikidata URI' ),
-			array( 'quantity', QuantityValue::newFromNumber( 5, '1' ), true, '1 means unitless' ),
-			array( 'quantity', QuantityValue::newFromNumber( 5, 'kittens' ), false, 'Bad unit URI' ),
-			array( 'quantity', QuantityValue::newFromNumber( '-11.234', '1', '-10', '-12' ), true, 'decimal strings' ),
+			'Unbounded' => [ 'quantity', UnboundedQuantityValue::newFromNumber( 5 ), true ],
+			'Simple integer' => [ 'quantity', QuantityValue::newFromNumber( 5 ), true ],
+			'Vocabulary URI' => [ 'quantity', QuantityValue::newFromNumber( 5, 'http://qudt.org/vocab/unit#Meter' ), true ],
+			'Wikidata URI' => [ 'quantity', QuantityValue::newFromNumber( 5, $wikidataUri . 'Q11573' ), false ],
+			'1 means unitless' => [ 'quantity', QuantityValue::newFromNumber( 5, '1' ), true ],
+			'Bad unit URI' => [ 'quantity', QuantityValue::newFromNumber( 5, 'kittens' ), false ],
+			'Decimal strings' => [ 'quantity', QuantityValue::newFromNumber( '-11.234', '1', '-10', '-12' ), true ],
 
 			//monolingual text
-			array( 'monolingualtext', new MonolingualTextValue( 'contentlanguage', 'text' ), true, 'Simple value' ),
-			array( 'monolingualtext', new MonolingualTextValue( 'en', 'text' ), false, 'Not a valid language' ),
+			'Simple value' => [ 'monolingualtext', new MonolingualTextValue( 'contentlanguage', 'text' ), true ],
+			'Not a valid language' => [ 'monolingualtext', new MonolingualTextValue( 'en', 'text' ), false ],
 		);
 
 		return $cases;
@@ -389,7 +394,7 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideDataTypeValidation
 	 */
-	public function testDataTypeValidation( $typeId, $value, $expected, $message ) {
+	public function testDataTypeValidation( $typeId, $value, $expected ) {
 		$builders = $this->newValidatorBuilders();
 
 		$validatorMap = array(
@@ -408,16 +413,15 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 
 		$validators = call_user_func( $validatorMap[$typeId] );
 
-		$this->assertValidation( $expected, $validators, $value, $message );
+		$this->assertValidation( $expected, $validators, $value );
 	}
 
 	/**
 	 * @param bool $expected
 	 * @param ValueValidator[] $validators
 	 * @param mixed $value
-	 * @param string $message
 	 */
-	protected function assertValidation( $expected, array $validators, $value, $message = '' ) {
+	protected function assertValidation( $expected, array $validators, $value ) {
 		$result = Result::newSuccess();
 		foreach ( $validators as $validator ) {
 			$result = $validator->validate( $value );
@@ -430,12 +434,12 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 		if ( $expected ) {
 			$errors = $result->getErrors();
 			if ( !empty( $errors ) ) {
-				$this->fail( $message . "\n" . $errors[0]->getText() );
+				$this->fail( $errors[0]->getText() );
 			}
 
-			$this->assertEquals( $expected, $result->isValid(), $message );
+			$this->assertEquals( $expected, $result->isValid() );
 		} else {
-			$this->assertEquals( $expected, $result->isValid(), $message );
+			$this->assertEquals( $expected, $result->isValid() );
 		}
 	}
 
