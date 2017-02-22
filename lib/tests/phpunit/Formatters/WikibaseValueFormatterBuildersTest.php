@@ -44,6 +44,8 @@ use Wikibase\Lib\WikibaseValueFormatterBuilders;
  */
 class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 
+	const GEO_SHAPE_STORAGE_FRONTEND_URL = '//commons.wikimedia.org/wiki/';
+
 	protected function setUp() {
 		parent::setUp();
 
@@ -88,6 +90,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			new FormatterLabelDescriptionLookupFactory( $termLookup ),
 			$languageNameLookup,
 			new ItemIdParser(),
+			self::GEO_SHAPE_STORAGE_FRONTEND_URL,
 			$entityTitleLookup
 		);
 	}
