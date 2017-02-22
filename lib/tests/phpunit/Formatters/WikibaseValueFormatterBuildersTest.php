@@ -297,6 +297,17 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				new StringValue( 'Data:GeoShape.map' ),
 				'@^<a class="extiw" href="//commons\\.wikimedia\\.org/wiki/Data%3AGeoShape\\.map">Data:GeoShape\\.map</a>$@',
 			),
+			'wikitext geo-shape' => array(
+				'GeoShape',
+				SnakFormatter::FORMAT_WIKI,
+				$this->newFormatterOptions(),
+				new StringValue( 'Data:GeoShape.map' ),
+				'@' .
+				preg_quote(
+					'[//commons.wikimedia.org/wiki/Data:GeoShape.map Data:GeoShape.map]',
+					'@') .
+				'@',
+			),
 			// GlobeCoordinate
 			'plain coordinate' => array(
 				'GlobeCoordinate',

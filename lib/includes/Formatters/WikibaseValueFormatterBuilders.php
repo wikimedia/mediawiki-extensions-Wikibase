@@ -18,7 +18,8 @@ use Wikibase\Formatters\MonolingualHtmlFormatter;
 use Wikibase\Formatters\MonolingualTextFormatter;
 use Wikibase\Lib\Formatters\CommonsThumbnailFormatter;
 use Wikibase\Lib\Formatters\EntityIdSiteLinkFormatter;
-use Wikibase\Lib\Formatters\InterWikiLinkFormatter;
+use Wikibase\Lib\Formatters\InterWikiLinkHtmlFormatter;
+use Wikibase\Lib\Formatters\InterWikiLinkWikitextFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
@@ -241,7 +242,9 @@ class WikibaseValueFormatterBuilders {
 	public function newGeoShapeFormatter( $format, FormatterOptions $options ) {
 		switch ( $this->getBaseFormat( $format ) ) {
 			case SnakFormatter::FORMAT_HTML:
-				return new InterWikiLinkFormatter( $options );
+				return new InterWikiLinkHtmlFormatter( $options );
+			case SnakFormatter::FORMAT_WIKI:
+				return new InterWikiLinkWikitextFormatter( $options );
 			default:
 				return $this->newStringFormatter( $format, $options );
 		}
