@@ -331,5 +331,10 @@ return call_user_func( function() {
 		return $otherProjectsSitesProvider->getOtherProjectsSiteIds( $settings->getSetting( 'siteLinkGroups' ) );
 	};
 
+	// URL of geo shape storage frontend. Used primarily to build links to the geo shapes.
+	// URL will be concatenated with the page title, so should end up with '/' or 'title='
+	// Special characters (e.g. space, percent, etc.) in URL should NOT be encoded
+	$defaults['geoShapeStorageFrontendUrl'] = 'https://commons.wikimedia.org/wiki/';
+
 	return $defaults;
 } );
