@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_9780484d",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/ClaimsChangeOpDeserializerTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-22T10:17:58Z",
+      "side": 1,
+      "message": "I wonder whether it would be \"cleaner\" to have Item and Property (plus the statement etc) created in the actual test, not in the test case provider method.\nThis could also remove the $item-\u003ecopy issue in the provider here.\n\nBut then I guess there is a problem provider and the test case share the knowledge about the guid which is not super nice. Maybe having \u0027test-guid\u0027 as a class constant here would solve this?",
+      "revId": "02d45428484584c527cad13d4872868aac496ea7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
