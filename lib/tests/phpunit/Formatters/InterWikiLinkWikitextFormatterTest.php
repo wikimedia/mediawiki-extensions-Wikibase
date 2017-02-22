@@ -78,14 +78,7 @@ class InterWikiLinkWikitextFormatterTest extends \PHPUnit_Framework_TestCase {
 	 * @return InterWikiLinkWikitextFormatter
 	 */
 	private function createFormatter( $baseUrl ) {
-		$options = new FormatterOptions();
-		$options->setOption(
-			InterWikiLinkWikitextFormatter::OPTION_BASE_URL,
-			$baseUrl
-		);
-		$formatter = new InterWikiLinkWikitextFormatter( $options );
-
-		return $formatter;
+		return new InterWikiLinkWikitextFormatter( $baseUrl );
 	}
 
 	/**
