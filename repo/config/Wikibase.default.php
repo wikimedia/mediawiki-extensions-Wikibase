@@ -199,6 +199,9 @@ return [
 	// List of entity types for Special:EntitiesWithoutLabel and …Description, or null for all.
 	'supportedEntityTypesForEntitiesWithoutTermListings' => null,
 
+	// URL of geo shape storage API endpoint
+	'geoShapeStorageApiEndpointUrl' => 'https://commons.wikimedia.org/w/api.php',
+
 	// URL of geo shape storage frontend. Used primarily to build links to the geo shapes.
 	// URL will be concatenated with the page title, so should end up with '/' or 'title='
 	// Special characters (e.g. space, percent, etc.) in URL should NOT be encoded

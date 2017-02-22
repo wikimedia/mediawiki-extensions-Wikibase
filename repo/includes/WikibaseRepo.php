@@ -395,7 +395,8 @@ class WikibaseRepo {
 			$this->getMonolingualTextLanguages(),
 			$this->getCachingCommonsMediaFileNameLookup(),
 			$entityTypesPerRepo,
-			new MediaWikiPageNameNormalizer()
+			new MediaWikiPageNameNormalizer(),
+			$this->settings->getSetting( 'geoShapeStorageApiEndpointUrl' )
 		);
 	}
 
