@@ -252,7 +252,7 @@ class EntityChangeTest extends ChangeRowTest {
 			->method( 'getContent' )
 			->will( $this->returnValue( $content ) );
 
-		$change = new EntityChange( array( 'info' => array(), 'type' => '~' ) );
+		$change = new EntityChange( [ 'info' => [] ] );
 		$this->assertFalse( $change->hasField( 'object_id' ), 'precondition' );
 		$change->setRevisionInfo( $revision );
 		$this->assertSame( 'q1', $change->getObjectId() );

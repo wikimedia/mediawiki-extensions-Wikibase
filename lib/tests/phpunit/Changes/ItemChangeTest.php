@@ -72,7 +72,7 @@ class ItemChangeTest extends EntityChangeTest {
 
 			$diff = new Diff();
 
-			$change = new ItemChange( array( 'type' => 'test' ) );
+			$change = new ItemChange();
 			$change->setDiff( $diff );
 
 			$cases['plain-diff'] = array( $change );
@@ -93,7 +93,7 @@ class ItemChangeTest extends EntityChangeTest {
 			assert( $diff->getSiteLinkDiff() !== null );
 
 			//NOTE: ItemChange's constructor may or may not already fix the bad diff.
-			$change = new ItemChange( array( 'type' => 'test' ) );
+			$change = new ItemChange();
 			$change->setDiff( $diff );
 
 			$cases['atomic-sitelink-diff'] = array( $change );
