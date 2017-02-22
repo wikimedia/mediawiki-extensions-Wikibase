@@ -30,7 +30,7 @@ class ChangeOpAliases extends ChangeOpBase {
 	private $aliases;
 
 	/**
-	 * @var array
+	 * @var string
 	 */
 	private $action;
 
