@@ -23,14 +23,10 @@ class InterWikiLinkWikitextFormatter implements ValueFormatter {
 	private $baseUrl;
 
 	/**
-	 * @param FormatterOptions $options
+	 * @param string $baseUrl
 	 */
-	public function __construct( FormatterOptions $options ) {
-		if ( $options->hasOption( self::OPTION_BASE_URL ) ) {
-			$this->baseUrl = $options->getOption( self::OPTION_BASE_URL );
-		} else {
-			$this->baseUrl = '//commons.wikimedia.org/wiki/';
-		}
+	public function __construct( $baseUrl ) {
+		$this->baseUrl = $baseUrl;
 	}
 
 	/**
@@ -53,7 +49,6 @@ class InterWikiLinkWikitextFormatter implements ValueFormatter {
 			' ' .
 			$value->getValue() .
 			']';
-
 	}
 
 	private function getPathFromTitle( $title ) {
