@@ -166,8 +166,8 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		$q17 = new ItemId( 'Q17' );
 
 		$item = new Item( $q17 );
-		$goodGuid = $this->mockProvider->getGuidGenerator()->newGuid( $q17 );
-		$badGuid = $this->mockProvider->getGuidGenerator()->newGuid( $q17 );
+		$goodGuid = 'GUID';
+		$badGuid = 'UNKNOWN-GUID';
 
 		$oldSnak = new PropertyValueSnak( $p11, new StringValue( "old qualifier" ) );
 
@@ -175,15 +175,12 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		$qualifiers = new SnakList( array( $oldSnak ) );
 		$item->getStatements()->addNewStatement( $snak, $qualifiers, null, $goodGuid );
 
-		//NOTE: the mock validator will consider the string "INVALID" to be invalid.
 		$goodSnak = new PropertyValueSnak( $p11, new StringValue( 'good' ) );
 
-		$snakHash = $oldSnak->getHash();
 		$badSnakHash = sha1( "dummy" );
 
 		return [
-			'malformed statement guid' => [ $item, 'NotAGuid', $goodSnak, '' ],
-			'unknown statement guid' => [ $item, $badGuid, $goodSnak, $snakHash ],
+			'unknown statement guid' => [ $item, $badGuid, $goodSnak, '' ],
 			'unknown snak hash' => [ $item, $goodGuid, $goodSnak, $badSnakHash ],
 		];
 	}
@@ -213,7 +210,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		$q17 = new ItemId( 'Q17' );
 
 		$item = new Item( $q17 );
-		$guid = $this->mockProvider->getGuidGenerator()->newGuid( $q17 );
+		$guid = 'GUID';
 
 		$oldSnak = new PropertyValueSnak( $p11, new StringValue( "old qualifier" ) );
 

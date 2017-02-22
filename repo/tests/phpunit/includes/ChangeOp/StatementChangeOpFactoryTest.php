@@ -6,6 +6,7 @@ use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 
@@ -28,7 +29,7 @@ class StatementChangeOpFactoryTest extends \PHPUnit_Framework_TestCase {
 		$entityId = new PropertyId( 'P7' );
 
 		return new StatementChangeOpFactory(
-			$mockProvider->getMockGuidGenerator(),
+			new GuidGenerator(),
 			$mockProvider->getMockGuidValidator(),
 			$mockProvider->getMockGuidParser( $entityId ),
 			$mockProvider->getMockSnakValidator(),
