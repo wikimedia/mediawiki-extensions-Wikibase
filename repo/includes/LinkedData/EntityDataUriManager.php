@@ -172,7 +172,7 @@ class EntityDataUriManager {
 	 * @param string|null $format   The (normalized) format name, or ''
 	 * @param int         $revision
 	 *
-	 * @return Title
+	 * @return string
 	 */
 	public function getDocUrl( EntityId $id, $format = '', $revision = 0 ) {
 		$params = '';
