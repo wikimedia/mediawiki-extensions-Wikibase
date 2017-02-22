@@ -15,6 +15,7 @@ use Wikibase\SettingsArray;
 
 return call_user_func( function() {
 	global $wgLanguageCode;
+	global $wgCanonicalNamespaceNames;
 
 	$defaults = [
 		'namespaces' => [], // by default, include all namespaces; deprecated as of 0.4
