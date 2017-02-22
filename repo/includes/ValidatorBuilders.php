@@ -93,6 +93,11 @@ class ValidatorBuilders {
 	private $mediaWikiPageNameNormalizer;
 
 	/**
+	 * @var string
+	 */
+	private $geoShapeStorageApiUrl;
+
+	/**
 	 * @param EntityLookup $lookup
 	 * @param EntityIdParser $idParser
 	 * @param string[] $urlSchemes
@@ -101,6 +106,7 @@ class ValidatorBuilders {
 	 * @param CachingCommonsMediaFileNameLookup $cachingCommonsMediaFileNameLookup
 	 * @param array $supportedEntityTypes map of repository names to lists of supported entity types
 	 * @param MediaWikiPageNameNormalizer $mediaWikiPageNameNormalizer
+	 * @param string $geoShapeStorageApiUrl
 	 */
 	public function __construct(
 		EntityLookup $lookup,
@@ -110,7 +116,8 @@ class ValidatorBuilders {
 		ContentLanguages $contentLanguages,
 		CachingCommonsMediaFileNameLookup $cachingCommonsMediaFileNameLookup,
 		array $supportedEntityTypes,
-		MediaWikiPageNameNormalizer $mediaWikiPageNameNormalizer
+		MediaWikiPageNameNormalizer $mediaWikiPageNameNormalizer,
+		$geoShapeStorageApiUrl
 	) {
 		$this->entityLookup = $lookup;
 		$this->entityIdParser = $idParser;
@@ -120,6 +127,7 @@ class ValidatorBuilders {
 		$this->mediaFileNameLookup = $cachingCommonsMediaFileNameLookup;
 		$this->supportedEntityTypes = $supportedEntityTypes;
 		$this->mediaWikiPageNameNormalizer = $mediaWikiPageNameNormalizer;
+		$this->geoShapeStorageApiUrl = $geoShapeStorageApiUrl;
 	}
 
 	/**
@@ -220,7 +228,7 @@ class ValidatorBuilders {
 		if ( $checkExistence === 'checkExistence' ) {
 			$validators[] = new InterWikiLinkExistsValidator(
 				$this->mediaWikiPageNameNormalizer,
-				'https://commons.wikimedia.org/w/api.php'
+				$this->geoShapeStorageApiUrl
 			);
 		}
 
