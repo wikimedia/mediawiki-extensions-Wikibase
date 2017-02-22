@@ -16,12 +16,10 @@ use ValueFormatters\ValueFormatter;
  */
 class InterWikiLinkHtmlFormatter implements ValueFormatter {
 
-	const OPTION_BASE_URL = 'baseUrl';
-
 	/**
 	 * @var array HTML attributes to use on the generated <a> tags.
 	 */
-	private $attributes;
+	private $attributes = [ 'class' => 'extiw' ];
 
 	/**
 	 * @var string
@@ -29,20 +27,10 @@ class InterWikiLinkHtmlFormatter implements ValueFormatter {
 	private $baseUrl;
 
 	/**
-	 * @param FormatterOptions $options
+	 * @param string $baseUrl
 	 */
-	public function __construct( FormatterOptions $options ) {
-		// @todo configure from options
-		$this->attributes = array(
-			'class' => 'extiw'
-		);
-
-		if ( $options->hasOption( self::OPTION_BASE_URL ) ) {
-			$this->baseUrl = $options->getOption( self::OPTION_BASE_URL );
-		} else {
-			$this->baseUrl = '//commons.wikimedia.org/wiki/';
-		}
-
+	public function __construct( $baseUrl ) {
+		$this->baseUrl = $baseUrl;
 	}
 
 	/**
