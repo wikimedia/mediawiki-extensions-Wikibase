@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_542b9edb",
+        "filename": "lib/includes/Store/DispatchingEntityInfoBuilderFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-22T09:09:53Z",
+      "side": 1,
+      "message": "True. Added.",
+      "parentUuid": "ce3c5b53_2faee0e4",
+      "revId": "0fdc17497825c268278275f228814e585e899667",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_afbaf01c",
         "filename": "lib/includes/Store/DispatchingEntityInfoBuilderFactory.php",
         "patchSetId": 5
@@ -30,6 +48,30 @@
       "writtenOn": "2017-02-17T15:15:07Z",
       "side": 1,
       "message": "Should say \"Returns a new, dispatching EntityInfoBuilder …\".",
+      "range": {
+        "startLine": 37,
+        "startChar": 18,
+        "endLine": 37,
+        "endChar": 46
+      },
+      "revId": "0fdc17497825c268278275f228814e585e899667",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_d416ceab",
+        "filename": "lib/includes/Store/DispatchingEntityInfoBuilderFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-22T09:09:53Z",
+      "side": 1,
+      "message": "The adjective \"dispatching\" means several different concepts throughout Wikibase, so I don\u0027t see it being very helpful. This factory is meant to construct instances of DispatchingEntityInfoBuilder, not any other possible kind of \"dispatching\" implementations of EntityInfoBuilder interface.\nI\u0027ve added more words to the method docs though, hopefully it is more clear now.",
+      "parentUuid": "ce3c5b53_afbaf01c",
       "range": {
         "startLine": 37,
         "startChar": 18,
@@ -89,6 +131,30 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_742822de",
+        "filename": "lib/includes/Store/DispatchingEntityInfoBuilderFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-22T09:09:53Z",
+      "side": 1,
+      "message": "It does not seem to bring any value now, so removed for now.",
+      "parentUuid": "ce3c5b53_2b6c8998",
+      "range": {
+        "startLine": 42,
+        "startChar": 12,
+        "endLine": 42,
+        "endChar": 40
+      },
+      "revId": "0fdc17497825c268278275f228814e585e899667",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_2f85805a",
         "filename": "lib/includes/Store/DispatchingEntityInfoBuilderFactory.php",
         "patchSetId": 5
@@ -100,6 +166,30 @@
       "writtenOn": "2017-02-17T15:15:07Z",
       "side": 1,
       "message": "No magic please! Please do not make this return a magic default when the user provides an empty array.",
+      "range": {
+        "startLine": 46,
+        "startChar": 75,
+        "endLine": 47,
+        "endChar": 51
+      },
+      "revId": "0fdc17497825c268278275f228814e585e899667",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_b48c6a00",
+        "filename": "lib/includes/Store/DispatchingEntityInfoBuilderFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-22T09:09:53Z",
+      "side": 1,
+      "message": "Removed this part of the comment, it was suggesting some wrong things (which I wouldn\u0027t like to do, to be clear).\n\nThis note in general still remains valid I believe, therefore I kept it. This is about potential optimization: not having factory for repo A have to deal (ie. skip) entities from repos B, C and X. Current behaviour is not wrong and should not be causing any errors.",
+      "parentUuid": "ce3c5b53_2f85805a",
       "range": {
         "startLine": 46,
         "startChar": 75,
