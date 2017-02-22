@@ -114,9 +114,12 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			'Trailing newline' => [ "x\n", false ],
 
 			// Disallowed whitespace characters
-			'Tabulator' => [ "x\tx", false ],
-			'Return' => [ "x\rx", false ],
-			'Newline' => [ "x\nx", false ],
+			'U+0009: Tabulator' => [ "x\tx", false ],
+			'U+000A: Newline' => [ "x\nx", false ],
+			'U+000B: Vertical tab' => [ "x\x0Bx", false ],
+			'U+000C: Form feed' => [ "x\fx", false ],
+			'U+000D: Return' => [ "x\rx", false ],
+			'U+0085: Next line' => [ "x\x85x", false ],
 		];
 	}
 
