@@ -13,7 +13,6 @@ use Serializers\Serializer;
 use User;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Diff\EntityTypeAwareDiffOpFactory;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\WikibaseRepo;
@@ -39,54 +38,73 @@ class EntityChange extends DiffChange {
 	private $entityId = null;
 
 	/**
-	 * @todo FIXME use uppecase ID, like everywhere else!
-	 *
+	 * @var string|null One of the self::… constants.
+	 */
+	private $action = null;
+
+	/**
 	 * @param string $name
 	 * @param mixed $value
 	 *
 	 * @throws MWException
 	 */
 	public function setField( $name, $value ) {
-		if ( $name === 'object_id' && is_string( $value ) ) {
-			//NOTE: for compatibility with earlier versions, use lower case IDs in the database.
-			$value = strtolower( $value );
+		if ( $name === 'object_id' || $name === 'type' ) {
+			throw new RuntimeException( 'Use setEntityId and setAction!' );
 		}
 
 		parent::setField( $name, $value );
 	}
 
 	/**
-	 * @return EntityId
+	 * @return EntityId|null
 	 */
 	public function getEntityId() {
-		if ( !$this->entityId && $this->hasField( 'object_id' ) ) {
-			// FIXME: this should not happen
-			wfWarn( "object_id set in EntityChange, but not entityId" );
-			$idParser = new BasicEntityIdParser();
-			$this->entityId = $idParser->parse( $this->getObjectId() );
-		}
-
 		return $this->entityId;
 	}
 
-	/**
-	 * Set the Change's entity id (as returned by getEntityId) and the object_id field
-	 * @param EntityId $entityId
-	 */
 	public function setEntityId( EntityId $entityId ) {
 		$this->entityId = $entityId;
-		$this->setField( 'object_id', $entityId->getSerialization() );
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
 	public function getAction() {
-		// FIXME: This encodes knowledge from EntityChangeFactory::newForEntity.
-		$type = $this->getField( 'type' );
-		list( , $action ) = explode( '~', $type, 2 );
+		return $this->action;
+	}
 
-		return $action;
+	/**
+	 * @param string $action One of the self::… constants.
+	 */
+	public function setAction( $action ) {
+		$this->action = $action;
+	}
+
+	/**
+	 * @throws RuntimeException if one of the required fields was not set before
+	 * @return string
+	 */
+	public function getType() {
+		if ( !$this->entityId || $this->action === null ) {
+			throw new RuntimeException( 'Forgot to call setEntityId and setAction!' );
+		}
+
+		$entityType = $this->entityId->getEntityType();
+		$this->setField( 'type', 'wikibase-' . $entityType . '~' . $this->action );
+	}
+
+	/**
+	 * @see Change::getObjectId
+	 *
+	 * @return string
+	 */
+	public function getObjectId() {
+		if ( !$this->entityId ) {
+			throw new RuntimeException( 'Forgot to call setEntityId!' );
+		}
+
+		return $this->entityId->getSerialization();
 	}
 
 	/**
@@ -147,7 +165,7 @@ class EntityChange extends DiffChange {
 		if ( !isset( $metadata['comment'] ) ) {
 			// Messages: wikibase-comment-add, wikibase-comment-remove, wikibase-comment-linked,
 			// wikibase-comment-unlink, wikibase-comment-restore, wikibase-comment-update
-			$metadata['comment'] = 'wikibase-comment-' . $this->getAction();
+			$metadata['comment'] = 'wikibase-comment-' . $this->action;
 		}
 
 		return $metadata['comment'];
@@ -209,14 +227,10 @@ class EntityChange extends DiffChange {
 			'time' => $revision->getTimestamp(),
 		) );
 
-		if ( !$this->hasField( 'object_id' ) ) {
+		if ( !$this->entityId ) {
 			/* @var EntityContent $content */
 			$content = $revision->getContent(); // potentially expensive!
-			$entityId = $content->getEntityId();
-
-			$this->setFields( array(
-				'object_id' => $entityId->getSerialization(),
-			) );
+			$this->entityId = $content->getEntityId();
 		}
 
 		$this->setMetadata( array(
