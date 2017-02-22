@@ -198,4 +198,7 @@ return [
 
 	// List of entity types for Special:EntitiesWithoutLabel and …Description, or null for all.
 	'supportedEntityTypesForEntitiesWithoutTermListings' => null,
+
+	// URL of geo shape storage frontend. Used primarily to build links to the geo shape files
+	'geoShapeStorageFrontendUrl' => '//commons.wikimedia.org/wiki/'
 ];
