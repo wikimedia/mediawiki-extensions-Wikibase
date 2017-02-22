@@ -72,10 +72,16 @@ class WikibaseValueFormatterBuilders {
 	);
 
 	/**
+	 * @var string
+	 */
+	private $geoShapeStorageUrl;
+
+	/**
 	 * @param Language $defaultLanguage
 	 * @param FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param EntityIdParser $repoItemUriParser
+	 * @param string $geoShapeStorageFrontendUrl
 	 * @param EntityTitleLookup|null $entityTitleLookup
 	 */
 	public function __construct(
@@ -83,12 +89,14 @@ class WikibaseValueFormatterBuilders {
 		FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		LanguageNameLookup $languageNameLookup,
 		EntityIdParser $repoItemUriParser,
+		$geoShapeStorageFrontendUrl,
 		EntityTitleLookup $entityTitleLookup = null
 	) {
 		$this->defaultLanguage = $defaultLanguage;
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->repoItemUriParser = $repoItemUriParser;
+		$this->geoShapeStorageUrl = $geoShapeStorageFrontendUrl;
 		$this->entityTitleLookup = $entityTitleLookup;
 	}
 
@@ -242,9 +250,9 @@ class WikibaseValueFormatterBuilders {
 	public function newGeoShapeFormatter( $format, FormatterOptions $options ) {
 		switch ( $this->getBaseFormat( $format ) ) {
 			case SnakFormatter::FORMAT_HTML:
-				return new InterWikiLinkHtmlFormatter( $options );
+				return new InterWikiLinkHtmlFormatter( $this->geoShapeStorageUrl );
 			case SnakFormatter::FORMAT_WIKI:
-				return new InterWikiLinkWikitextFormatter( $options );
+				return new InterWikiLinkWikitextFormatter( $this->geoShapeStorageUrl );
 			default:
 				return $this->newStringFormatter( $format, $options );
 		}

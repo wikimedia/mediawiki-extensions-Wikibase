@@ -256,9 +256,10 @@ final class WikibaseClient {
 	 * @return WikibaseValueFormatterBuilders
 	 */
 	private function newWikibaseValueFormatterBuilders() {
+		$settings = $this->getSettings();
 		$entityTitleLookup = new ClientSiteLinkTitleLookup(
 			$this->getStore()->getSiteLinkLookup(),
-			$this->getSettings()->getSetting( 'siteGlobalID' )
+			$settings->getSetting( 'siteGlobalID' )
 		);
 
 		return new WikibaseValueFormatterBuilders(
@@ -266,6 +267,7 @@ final class WikibaseClient {
 			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
 			new LanguageNameLookup( $this->getUserLanguage()->getCode() ),
 			$this->getRepoItemUriParser(),
+			$settings->getSetting( 'geoShapeStorageFrontendUrl' ),
 			$entityTitleLookup
 		);
 	}
