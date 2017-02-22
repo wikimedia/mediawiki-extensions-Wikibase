@@ -18,13 +18,6 @@ interface Change {
 	public function getAge();
 
 	/**
-	 * Returns the type of change.
-	 *
-	 * @return string
-	 */
-	public function getType();
-
-	/**
 	 * Returns the time on which the change was made as a timestamp in TS_MW format.
 	 *
 	 * @return string TS_MW

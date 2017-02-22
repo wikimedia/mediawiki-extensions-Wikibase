@@ -181,7 +181,6 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 
 		$this->assertEquals( $expected->getObjectId(), $actual->getObjectId(), 'change.ObjectId' );
 		$this->assertEquals( $expected->getTime(), $actual->getTime(), 'change.Time' );
-		$this->assertEquals( $expected->getType(), $actual->getType(), 'change.Type' );
 
 		if ( $expected instanceof EntityChange && $actual instanceof EntityChange ) {
 			$this->assertEquals( $expected->getAction(), $actual->getAction(), 'change.Action' );
