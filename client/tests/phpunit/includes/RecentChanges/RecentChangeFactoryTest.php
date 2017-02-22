@@ -58,8 +58,8 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		// Note: the change type determines how the client will
 		// instantiate and handle the change
-		$type = 'wikibase-' . $entityId->getEntityType() . '~' . $action;
-		$instance->setField( 'type', $type );
+		$instance->setEntityId( $entityId );
+		$instance->setAction( $action );
 		$instance->setDiff( $diff );
 
 		return $instance;

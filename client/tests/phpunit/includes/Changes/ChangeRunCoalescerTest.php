@@ -142,7 +142,7 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 			'id' => null,
 			'type' => $first->getField( 'type' ), // because the first change has no parent
 			'time' => $last->getField( 'time' ), // last change's timestamp
-			'object_id' => $last->getField( 'object_id' ),
+			'object_id' => $last->getObjectId(),
 			'revision_id' => $last->getField( 'revision_id' ), // last changes rev id
 			'user_id' => $last->getField( 'user_id' ),
 			'info' => array(

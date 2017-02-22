@@ -149,7 +149,6 @@ final class TestChanges {
 			$defaults = array(
 				'user_id' => 0,
 				'time' => '20130101000000',
-				'type' => 'test',
 			);
 
 			$rev = 1000;

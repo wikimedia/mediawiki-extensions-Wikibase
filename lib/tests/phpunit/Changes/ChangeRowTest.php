@@ -2,11 +2,15 @@
 
 namespace Wikibase\Lib\Tests\Changes;
 
+use LogicException;
 use MediaWikiTestCase;
 use MWException;
 use Wikibase\ChangeRow;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\EntityChange;
 
 /**
+ * @covers Wikibase\EntityChange
  * @covers Wikibase\ChangeRow
  *
  * @group Database
@@ -43,13 +47,14 @@ class ChangeRowTest extends MediaWikiTestCase {
 	}
 
 	public function testReturnsObjectId() {
-		$change = new ChangeRow( array( 'object_id' => 'Q1' ) );
-		$this->assertSame( 'Q1', $change->getObjectId() );
+		$change = new EntityChange();
+		$change->setEntityId( new ItemId( 'Q1' ) );
+		$this->assertSame( 'q1', $change->getObjectId() );
 	}
 
 	public function testCanNotReturnDefaultObjectId() {
 		$change = new ChangeRow();
-		$this->setExpectedException( MWException::class );
+		$this->setExpectedException( LogicException::class );
 		$change->getObjectId();
 	}
 
@@ -113,12 +118,13 @@ class ChangeRowTest extends MediaWikiTestCase {
 
 	public function testCanNotUnserializeWithoutObjectId() {
 		$change = new ChangeRow();
-		$this->setExpectedException( MWException::class );
+		$this->setExpectedException( LogicException::class );
 		$change->unserializeInfo( 's:5:"value";' );
 	}
 
 	public function testCanNotUnserializeNonArrays() {
-		$change = new ChangeRow( array( 'object_id' => 'Q1' ) );
+		$change = new EntityChange();
+		$change->setEntityId( new ItemId( 'Q1' ) );
 
 		\MediaWiki\suppressWarnings();
 		$info = $change->unserializeInfo( 's:5:"value";' );
