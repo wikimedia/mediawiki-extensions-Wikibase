@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Validators;
 
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
+use Wikimedia\Assert\Assert;
 
 /**
  * A CompositeValidator uses a list of sub-validators to validate the data.
@@ -29,7 +30,7 @@ class CompositeValidator implements ValueValidator {
 	 * @param bool $failFast If true, validation will be aborted after the first sub validator fails.
 	 */
 	public function __construct( array $validators, $failFast = true ) {
-		//TODO: make sure they are all instances of ValueValidator
+		Assert::parameterElementType( ValueValidator::class, $validators, '$validators' );
 		$this->validators = $validators;
 		$this->failFast = $failFast;
 	}
