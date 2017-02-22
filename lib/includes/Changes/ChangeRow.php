@@ -40,6 +40,13 @@ class ChangeRow implements Change {
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getType() {
+		throw new \LogicException( 'This should be abstract' );
+	}
+
+	/**
 	 * @see Change::getAge
 	 *
 	 * @return integer
@@ -63,7 +70,7 @@ class ChangeRow implements Change {
 	 * @return string
 	 */
 	public function getObjectId() {
-		return $this->getField( 'object_id' );
+		throw new \LogicException( 'This should be abstract' );
 	}
 
 	/**
