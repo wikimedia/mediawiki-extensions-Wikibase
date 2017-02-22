@@ -113,7 +113,7 @@ class ChangeRow implements Change {
 	 * @return array
 	 */
 	protected function getInfo( $cache = 'no' ) {
-		$info = $this->getField( 'info' );
+		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : [];
 
 		if ( $cache === 'cache' ) {
 			$this->setField( 'info', $info );
