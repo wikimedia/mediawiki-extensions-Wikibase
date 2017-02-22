@@ -291,8 +291,6 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	}
 
 	/**
-	 * Returns the form elements.
-	 *
 	 * @param EntityDocument|null $entity
 	 *
 	 * @return string HTML

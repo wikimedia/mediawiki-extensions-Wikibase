@@ -183,9 +183,7 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	}
 
 	/**
-	 * Returns the form elements.
-	 *
-	 * @return array
+	 * @return array[]
 	 */
 	protected function getFormElements() {
 		return array(

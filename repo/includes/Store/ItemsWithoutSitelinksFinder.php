@@ -14,7 +14,6 @@ use Wikibase\DataModel\Entity\EntityId;
 interface ItemsWithoutSitelinksFinder {
 
 	/**
-	 * Return all items without sitelinks
 	 * TODO: In the future, we probably want a non-numeric offset here, see T67333.
 	 *
 	 * @param integer $limit Limit of the query.

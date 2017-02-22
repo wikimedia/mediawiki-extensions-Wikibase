@@ -29,8 +29,6 @@ class SqlItemsWithoutSitelinksFinder implements ItemsWithoutSitelinksFinder {
 	}
 
 	/**
-	 * Return all items without sitelinks.
-	 *
 	 * @param integer $limit Limit of the query.
 	 * @param integer $offset Offset of the query.
 	 *

@@ -55,8 +55,6 @@ class ClaimDifference implements Comparable {
 	}
 
 	/**
-	 * Returns the set of reference changes.
-	 *
 	 * @return Diff
 	 */
 	public function getReferenceChanges() {
@@ -64,8 +62,6 @@ class ClaimDifference implements Comparable {
 	}
 
 	/**
-	 * Returns the main snak change.
-	 *
 	 * @return DiffOpChange|null
 	 */
 	public function getMainSnakChange() {
@@ -73,8 +69,6 @@ class ClaimDifference implements Comparable {
 	}
 
 	/**
-	 * Returns the rank change.
-	 *
 	 * @return DiffOpChange|null
 	 */
 	public function getRankChange() {
@@ -82,8 +76,6 @@ class ClaimDifference implements Comparable {
 	}
 
 	/**
-	 * Returns the set of qualifier changes.
-	 *
 	 * @return Diff
 	 */
 	public function getQualifierChanges() {

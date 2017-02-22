@@ -284,8 +284,6 @@ class EditEntity {
 	}
 
 	/**
-	 * Returns the latest revision ID.
-	 *
 	 * @return int 0 if the entity doesn't exist
 	 */
 	private function getLatestRevisionId() {
@@ -319,7 +317,6 @@ class EditEntity {
 	}
 
 	/**
-	 * Returns the base revision ID.
 	 * If no base revision was supplied to the constructor, this will return false.
 	 * In the trivial non-conflicting case, this will be the same as $this->getLatestRevisionId().
 	 *

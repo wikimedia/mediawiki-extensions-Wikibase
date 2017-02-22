@@ -97,8 +97,6 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	abstract protected function getLegend();
 
 	/**
-	 * Returns any warnings.
-	 *
 	 * @return string[] Warnings that should be presented to the user
 	 */
 	abstract protected function getWarnings();

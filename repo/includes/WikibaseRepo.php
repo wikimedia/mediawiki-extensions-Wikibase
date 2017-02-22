@@ -1078,8 +1078,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * Returns a SummaryFormatter.
-	 *
 	 * @return SummaryFormatter
 	 */
 	public function getSummaryFormatter() {
