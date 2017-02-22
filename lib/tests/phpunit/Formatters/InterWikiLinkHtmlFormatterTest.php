@@ -7,10 +7,10 @@ use DataValues\StringValue;
 use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Lib\CommonsLinkFormatter;
-use Wikibase\Lib\Formatters\InterWikiLinkFormatter;
+use Wikibase\Lib\Formatters\InterWikiLinkHtmlFormatter;
 
 /**
- * @covers Wikibase\Lib\InterWikiLinkFormatter
+ * @covers Wikibase\Lib\InterWikiLinkHtmlFormatter
  *
  * @group Wikibase
  * @group Database
@@ -18,7 +18,7 @@ use Wikibase\Lib\Formatters\InterWikiLinkFormatter;
  * @license GPL-2.0+
  * @author Jonas Kress
  */
-class InterWikiLinkFormatterTest extends \MediaWikiTestCase {
+class InterWikiLinkHtmlFormatterTest extends \MediaWikiTestCase {
 
 	public function linkFormatProvider() {
 		return [
@@ -51,8 +51,8 @@ class InterWikiLinkFormatterTest extends \MediaWikiTestCase {
 	public function testFormat( StringValue $value, $pattern ) {
 
 		$options = new FormatterOptions();
-		$options->setOption( InterWikiLinkFormatter::OPTION_BASE_URL, 'http://base.url/' );
-		$formatter = new InterWikiLinkFormatter( $options );
+		$options->setOption( InterWikiLinkHtmlFormatter::OPTION_BASE_URL, 'http://base.url/' );
+		$formatter = new InterWikiLinkHtmlFormatter( $options );
 
 		$html = $formatter->format( $value );
 		$this->assertRegExp( $pattern, $html );
