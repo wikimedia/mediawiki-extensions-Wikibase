@@ -56,29 +56,36 @@ class LinkTitles extends ApiBase {
 	private $entitySavingHelper;
 
 	/**
+	 * @see ApiBase::__construct
+	 *
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
-	 * @param string $modulePrefix
-	 *
-	 * @see ApiBase::__construct
+	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
+	 * @param ApiErrorReporter $errorReporter
+	 * @param array $siteLinkGroups
+	 * @param EntityRevisionLookup $revisionLookup
+	 * @param callable $resultBuilderInstantiator
+	 * @param callable $entitySavingHelperInstantiator
 	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+	public function __construct(
+		ApiMain $mainModule,
+		$moduleName,
+		SiteLinkTargetProvider $siteLinkTargetProvider,
+		ApiErrorReporter $errorReporter,
+		array $siteLinkGroups,
+		EntityRevisionLookup $revisionLookup,
+		callable $resultBuilderInstantiator,
+		callable $entitySavingHelperInstantiator
+	) {
+		parent::__construct( $mainModule, $moduleName );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$settings = $wikibaseRepo->getSettings();
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
+		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
+		$this->errorReporter = $errorReporter;
+		$this->siteLinkGroups = $siteLinkGroups;
+		$this->revisionLookup = $revisionLookup;
+		$this->resultBuilder = $resultBuilderInstantiator( $this );
+		$this->entitySavingHelper = $entitySavingHelperInstantiator( $this );
 
-		$this->revisionLookup = $wikibaseRepo->getEntityRevisionLookup( 'uncached' );
-		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
-		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
-		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
-		$this->siteLinkTargetProvider = new SiteLinkTargetProvider(
-			$wikibaseRepo->getSiteLookup(),
-			$settings->getSetting( 'specialSiteLinkGroups' )
-		);
-
-		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
 	}
 
 	/**

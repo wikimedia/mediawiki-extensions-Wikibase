@@ -243,7 +243,34 @@ call_user_func( function() {
 		}
 	];
 	$wgAPIModules['wbeditentity'] = Wikibase\Repo\Api\EditEntity::class;
-	$wgAPIModules['wblinktitles'] = Wikibase\Repo\Api\LinkTitles::class;
+	$wgAPIModules['wblinktitles'] = [
+		'class' => Wikibase\Repo\Api\LinkTitles::class,
+		'factory' => function ( ApiMain $mainModule, $moduleName ) {
+			$wikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+			$settings = $wikibaseRepo->getSettings();
+			$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
+
+			$siteLinkTargetProvider = new \Wikibase\Repo\SiteLinkTargetProvider(
+				$wikibaseRepo->getSiteLookup(),
+				$settings->getSetting( 'specialSiteLinkGroups' )
+			);
+
+			return new Wikibase\Repo\Api\LinkTitles(
+				$mainModule,
+				$moduleName,
+				$siteLinkTargetProvider,
+				$apiHelperFactory->getErrorReporter( $mainModule ),
+				$settings->getSetting( 'siteLinkGroups' ),
+				$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
+				function ( $module ) use ( $apiHelperFactory ) {
+					return $apiHelperFactory->getResultBuilder( $module );
+				},
+				function ( $module ) use ( $apiHelperFactory ) {
+					return $apiHelperFactory->getEntitySavingHelper( $module );
+				}
+			);
+		}
+	];
 	$wgAPIModules['wbsetsitelink'] = [
 		'class' => Wikibase\Repo\Api\SetSiteLink::class,
 		'factory' => function ( ApiMain $mainModule, $moduleName ) {
