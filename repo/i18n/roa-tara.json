@@ -50,6 +50,7 @@
 	"wikibase-snakview-variations-novalue-label": "nisciune valore",
 	"wikibase-snakview-snaktypeselector-value": "valore personalizzate",
 	"wikibase-entityselector-more": "de cchiù",
+	"wikibase-validator-page-not-exists": "'A pàgene \"$1\" non g'esiste.",
 	"special-itembytitle": "Vôsce pe titole",
 	"wikibase-itembytitle-lookup-site": "Site:",
 	"wikibase-itembytitle-lookup-page": "Pàgene:",

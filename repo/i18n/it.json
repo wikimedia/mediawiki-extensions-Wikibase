@@ -137,6 +137,7 @@
 	"wikibase-validator-label-no-entityid": "L'etichetta non può essere un ID entità valido.",
 	"wikibase-validator-illegal-file-chars": "I nomi dei file non possono contenere alcuni caratteri come due punti o barre. Incolla solo il nome del file dopo \"File:\", grazie.",
 	"wikibase-validator-no-such-media": "Il file \"$1\" non esiste su [https://commons.wikimedia.org/ Wikimedia Commons].",
+	"wikibase-validator-page-not-exists": "La pagina \"$1\" non esiste.",
 	"wikibase-validator-not-a-language": "\"$1\" non è un codice di lingua conosciuto.",
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" non è un ID elemento valido.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Il codice di lingua \"$1\" è sconosciuto. Utilizza un codice di lingua conosciuto al sistema, ad esempio \"it\".",

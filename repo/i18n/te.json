@@ -39,6 +39,7 @@
 	"wikibase-snakview-variations-somevalue-label": "తెలియని విలువ",
 	"wikibase-snakview-variations-novalue-label": "విలువ లేదు",
 	"wikibase-entityselector-more": "మరిన్ని",
+	"wikibase-validator-page-not-exists": "\"$1\" అనే పేజీ లేనే లేదు.",
 	"wikibase-itembytitle-submit": "వెతుకు",
 	"wikibase-gotolinkedpage-submit": "వెళ్ళు",
 	"wikibase-itemdisambiguation-lookup-language": "భాష సంకేతం:",

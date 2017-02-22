@@ -143,6 +143,7 @@
 	"wikibase-validator-label-no-entityid": "Die Bezeichnung darf keine gültige Objektkennung sein.",
 	"wikibase-validator-illegal-file-chars": "Dateinamen dürfen bestimmte Zeichen wie Doppelpunkte oder Schrägstriche nicht enthalten. Bitte nur den Dateinamen nach „Datei:“ einfügen.",
 	"wikibase-validator-no-such-media": "Die Datei „$1“ ist nicht auf [https://commons.wikimedia.org/ Wikimedia Commons] vorhanden.",
+	"wikibase-validator-page-not-exists": "Die Seite „$1“ ist nicht vorhanden.",
 	"wikibase-validator-not-a-language": "„$1“ ist kein bekannter Sprachcode.",
 	"wikibase-item-reference-edit-placeholder": "Objektkennung eingeben, z.&nbsp;B. Q10",
 	"wikibase-item-reference-edit-invalid-format": "Die eingegebene Objektkennung hat ein ungültiges Format",

@@ -150,6 +150,7 @@
 	"wikibase-validator-label-no-entityid": "La etiqueta no debe ser un identificador de entidad válido.",
 	"wikibase-validator-illegal-file-chars": "Los nombres de archivo no pueden contener caracteres como dos puntos o barras. Por favor, pega solo el nombre del archivo que va después de «File:».",
 	"wikibase-validator-no-such-media": "El archivo \"$1\" no existe en [https://commons.wikimedia.org/ Wikimedia Commons].",
+	"wikibase-validator-page-not-exists": "La página «$1» no existe.",
 	"wikibase-validator-not-a-language": "«$1» no es un código de idioma conocido.",
 	"wikibase-item-reference-edit-placeholder": "Introduce el identificador del elemento, por ejemplo, Q10",
 	"wikibase-item-reference-edit-invalid-format": "El identificador de elemento introducido tiene un formato no válido",

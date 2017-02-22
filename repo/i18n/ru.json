@@ -28,7 +28,8 @@
 			"Lockal",
 			"Irus",
 			"Kareyac",
-			"MaxBioHazard"
+			"MaxBioHazard",
+			"Redredsonia"
 		]
 	},
 	"wikibase-desc": "Хранилище структурированных данных",
@@ -143,6 +144,7 @@
 	"wikibase-validator-label-with-description-conflict": "У элемента $3 уже есть название «$1», связанное с кодом языка «$2» и использующее в качестве описания тот же самый текст.",
 	"wikibase-validator-label-no-entityid": "Метка не должна совпадать с действительным идентификатором сущности.",
 	"wikibase-validator-no-such-media": "Файла «$1» на [https://commons.wikimedia.org/ Викискладе] не существует.",
+	"wikibase-validator-page-not-exists": "Страница «$1» не существует.",
 	"wikibase-validator-not-a-language": "«$1» не является корректным кодом языка.",
 	"wikibase-item-reference-edit-invalid-format": "Введенный идентификатор элемента имеет недопустимый Формат",
 	"wikibase-item-reference-edit-nonexistent-item": "Элемент с таким идентификатором не существует",

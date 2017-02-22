@@ -90,6 +90,7 @@
 	"wikibase-validator-label-conflict": "D'Eegeschaft $3 huet schonn d'Etikett \"$1\" associéiert mam Sproochcode $2.",
 	"wikibase-validator-label-with-description-conflict": "D'Element $3 huet schonn d'Etikett \"$1\" associéiert mam Sproochecode $2, mam selwechten Text fir d'Beschreiwung",
 	"wikibase-validator-no-such-media": "De Fichier \"$1\" gëtt et net op [https://commons.wikimedia.org/ Wikimedia Commons].",
+	"wikibase-validator-page-not-exists": "D'Säit \"$1\" gëtt et net.",
 	"wikibase-validator-not-a-language": "\"$1\" ass kee bekannte Sproochecode",
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" ass keng valabel ID vun engem Element.",
 	"wikibase-wikibaserepopage-invalid-langcode": "De Sproochcode \"$1\" ass onbekannt. Benotzt w.e.g. e Sproochcode deen dem System bekannt ass, wéi z. Bsp. \"en\".",

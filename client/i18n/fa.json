@@ -83,7 +83,7 @@
 	"wikibase-entityusage-entity": "موجودیت:",
 	"wikibase-pageinfo-entity-id": "شناسه مورد {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "هیچ‌کدام",
-	"wikibase-pageinfo-entity-usage": "ماهیت {{WBREPONAME}}های استفاده شده در این صفحه",
+	"wikibase-pageinfo-entity-usage": "ماهیت‌های {{WBREPONAME}} استفاده شده در این صفحه",
 	"wikibase-pageinfo-entity-usage-S": "پیوند پایگاه",
 	"wikibase-pageinfo-entity-usage-L": "برچسب: $1",
 	"wikibase-pageinfo-entity-usage-T": "عنوان",
