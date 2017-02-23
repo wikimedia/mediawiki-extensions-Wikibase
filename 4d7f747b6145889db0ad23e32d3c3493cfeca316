@@ -16,6 +16,24 @@
       "revId": "4d7f747b6145889db0ad23e32d3c3493cfeca316",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_a9be4ccf",
+        "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-23T12:29:10Z",
+      "side": 1,
+      "message": "We\u0027ll be able to change it as soon as we need it. \nFor now I would like to have this class not knowing about settings concept at all.\n\n\u003e $geoShapeStorageFrontendUrl might be too specific as a parameter for WikibaseValueFormatterBuilders\n\nThis class already knows about geo-shape existence and it supposed to know how to create it. I don\u0027t see any harm in its knowledge about url.",
+      "parentUuid": "ce3c5b53_1d2219fc",
+      "revId": "4d7f747b6145889db0ad23e32d3c3493cfeca316",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
