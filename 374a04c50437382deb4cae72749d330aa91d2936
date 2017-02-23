@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_49e9c0e0",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-23T12:29:10Z",
+      "side": 1,
+      "message": "\u003e setting used for defining API endpoint ( this must then be passed to valueview expert suggester )\n\nSee Ia5c6f2901fb0ad8bf720c68630ead3108b67d6b2",
+      "parentUuid": "ce3c5b53_0992d8a1",
+      "revId": "374a04c50437382deb4cae72749d330aa91d2936",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_c9a4f006",
         "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "writtenOn": "2017-02-23T11:21:00Z",
       "side": 1,
       "message": "I find it helpful if the declarations are in the same order as the constructor parameters. This should be above $entityTitleLookup.",
+      "revId": "374a04c50437382deb4cae72749d330aa91d2936",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_a9164caa",
+        "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-23T12:29:10Z",
+      "side": 1,
+      "message": "I followed \"rule\" someone else mentioned in one of other patches: services first, data last.\n\nPersonally, I don\u0027t care (neither about order of: class imports, fields, constructor parameters and assignment statements in constructor\u0027s body). I use code navigation and order does not matter for me at all. If you think that it is important, lets come up with a single consistent rule, otherwise order will always be the topic to argue about.\n\nPS: The only order I would like to have is: `public` first, `private` last. Also, I won\u0027t mind if fields will be at the bottom of class definition. But it\u0027s off topic.",
+      "parentUuid": "ce3c5b53_c9a4f006",
       "revId": "374a04c50437382deb4cae72749d330aa91d2936",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
