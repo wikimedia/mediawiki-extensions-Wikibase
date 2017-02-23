@@ -35,7 +35,6 @@ class ElasticTermResult implements ResultsType {
 	/**
 	 * ElasticTermResult constructor.
 	 * @param EntityIdParser $idParser
-	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param string[] $searchLanguageCodes Language fallback chain for search
 	 * @param string[] $displayLanguageCodes Language fallback chain for display
 	 */

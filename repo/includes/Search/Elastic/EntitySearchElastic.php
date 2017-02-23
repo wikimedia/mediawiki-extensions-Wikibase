@@ -214,10 +214,13 @@ class EntitySearchElastic implements EntitySearchHelper {
 			$this->languageChainFactory->newFromLanguage( $this->userLang )->getFetchLanguageCodes()
 		) );
 
+		// FIXME: this needs to be refactored to happen inside Searcher or SearchContext
 		$dumpQuery = $this->request && $this->request->getVal( 'cirrusDumpQuery' ) !== null;
 		$searcher->setReturnQuery( $dumpQuery );
 		$dumpResult = $this->request && $this->request->getVal( 'cirrusDumpResult' ) !== null;
 		$searcher->setDumpResult( $dumpResult );
+		$returnExplain = $this->request && $this->request->getVal( 'cirrusExplain' ) !== null;
+		$searcher->setReturnExplain( $returnExplain );
 
 		$searcher->setRescoreProfile( $this->getRescoreProfile() );
 

@@ -20,6 +20,9 @@ class WikibasePrefixSearcher extends Searcher {
 	 */
 	private $query;
 
+	// FIXME: needs to be refactored
+	protected $returnExplain = false;
+
 	/**
 	 * @param int $offset Search offset.
 	 * @param int $limit Search limit.
@@ -55,6 +58,9 @@ class WikibasePrefixSearcher extends Searcher {
 			$searchQuery->setHighlight( $highlight );
 		}
 		$searchQuery->setParam( 'rescore', $this->searchContext->getRescore() );
+		if ( $this->returnExplain ) {
+			$searchQuery->setExplain( true );
+		}
 
 		return $pageType->createSearch( $searchQuery, $queryOptions );
 	}
@@ -91,6 +97,14 @@ class WikibasePrefixSearcher extends Searcher {
 	 */
 	public function addWarning( $message /*, parameters... */ ) {
 		call_user_func_array( [ $this->searchContext, 'addWarning' ], func_get_args() );
+	}
+
+	/**
+	 * HACK: will be refactored.
+	 * @param boolean $returnExplain return query explanation
+	 */
+	public function setReturnExplain( $returnExplain ) {
+		$this->returnExplain = $returnExplain;
 	}
 
 }
