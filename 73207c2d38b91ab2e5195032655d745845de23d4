@@ -344,6 +344,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_58f665c3",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialSetSiteLinkTest.php",
+        "patchSetId": 42
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-23T19:37:42Z",
+      "side": 1,
+      "message": "I would rather suggest not to test presence of id attributes at all. They are irrelevant for backend part, so why test them? Also, as I understood, they managed by OOUI, so if we test that label\u0027s \"for\" has the same value as input\u0027s id we test that OOUI is working properly, but I guess it should be OOUI\u0027s problem and tested there. \nHere we can safely assume that it\u0027s working correctly until proven otherwise.\n\nTest with labels is ok for me for now.",
+      "parentUuid": "ce3c5b53_18345da6",
+      "revId": "73207c2d38b91ab2e5195032655d745845de23d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_989b8dc1",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialSetSiteLinkTest.php",
         "patchSetId": 42
