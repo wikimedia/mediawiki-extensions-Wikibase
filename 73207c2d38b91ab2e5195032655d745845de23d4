@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_3a0ef83e",
+        "filename": "repo/includes/Specials/SpecialModifyEntity.php",
+        "patchSetId": 42
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-23T19:23:52Z",
+      "side": 1,
+      "message": "It is form\u0027s design. It is null by default and if it is not set exception will be thrown.",
+      "parentUuid": "ce3c5b53_9fa5b6b3",
+      "revId": "73207c2d38b91ab2e5195032655d745845de23d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_5f22ce51",
         "filename": "repo/includes/Specials/SpecialModifyTerm.php",
         "patchSetId": 42
@@ -71,6 +89,30 @@
       "writtenOn": "2017-02-23T19:19:30Z",
       "side": 1,
       "message": "T38210",
+      "parentUuid": "ce3c5b53_5f22ce51",
+      "range": {
+        "startLine": 190,
+        "startChar": 4,
+        "endLine": 190,
+        "endChar": 10
+      },
+      "revId": "73207c2d38b91ab2e5195032655d745845de23d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_1871bda7",
+        "filename": "repo/includes/Specials/SpecialModifyTerm.php",
+        "patchSetId": 42
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-23T19:23:52Z",
+      "side": 1,
+      "message": "This setting tells Form to skip the field when processing submit, so this field won\u0027t present in resulting array that is passed to submit callback.\n\nAs soon as this class doesn\u0027t utilize this functionality, it doesn\u0027t matter, but might lead to unexpected behavior when someone decide to use it.\n\nI would rather remove it.",
       "parentUuid": "ce3c5b53_5f22ce51",
       "range": {
         "startLine": 190,
@@ -270,6 +312,29 @@
       "writtenOn": "2017-02-23T19:19:30Z",
       "side": 1,
       "message": "From Patch Set 41:\n\n\u003e Also here",
+      "revId": "73207c2d38b91ab2e5195032655d745845de23d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_d8cef5b8",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialSetSiteLinkTest.php",
+        "patchSetId": 42
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-23T19:23:52Z",
+      "side": 1,
+      "message": "For the future:\nToo specific tests might be bad (especially when some complex thing is tested). I would say in this case it is good to test that there is a field with name we expect (may be type also) and to test that it has some prefilled value when page rendered.\n\nBut when we try to test that it has some classes that are there just to apply some CSS to that element it is not that useful, because we cannot really test that those classes will be applied (may be they are deleted form CSS file) and, what more important, even if class described in CSS file we cannot guarantee that element looks like it supposed to look. But when someone will try to change markup to change look of these elements, tests will break, but form will be still be working, and we can consider it false negative test result, which in a long run results in developers\u0027 tendency of ignoring test failures.",
+      "range": {
+        "startLine": 293,
+        "startChar": 13,
+        "endLine": 295,
+        "endChar": 4
+      },
       "revId": "73207c2d38b91ab2e5195032655d745845de23d4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
