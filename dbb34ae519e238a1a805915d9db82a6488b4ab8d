@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_3f56ea5f",
+        "filename": "repo/includes/ChangeOp/Deserialization/ChangeOpDeserializerFactory.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-23T17:03:25Z",
+      "side": 1,
+      "message": "\"Sitelink\" usually is 1 word.",
+      "range": {
+        "startLine": 15,
+        "startChar": 48,
+        "endLine": 15,
+        "endChar": 57
+      },
+      "revId": "dbb34ae519e238a1a805915d9db82a6488b4ab8d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_1f59a690",
+        "filename": "repo/includes/ChangeOp/Deserialization/ChangeOpDeserializerFactory.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-23T17:03:25Z",
+      "side": 1,
+      "message": "You could remove these all (note that the last method doesn\u0027t have it), because this is so obvious from the code that most tools should be able to figure it out.",
+      "range": {
+        "startLine": 107,
+        "startChar": 1,
+        "endLine": 109,
+        "endChar": 4
+      },
+      "revId": "dbb34ae519e238a1a805915d9db82a6488b4ab8d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
