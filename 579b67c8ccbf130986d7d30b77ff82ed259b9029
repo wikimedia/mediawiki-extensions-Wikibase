@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_6ece0abb",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/ItemChangeOpDeserializerTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-23T08:46:08Z",
+      "side": 1,
+      "message": "Test name does not exactly match what the test is actually checking.",
+      "revId": "579b67c8ccbf130986d7d30b77ff82ed259b9029",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_eeebfa07",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/ItemChangeOpDeserializerTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-23T08:46:08Z",
+      "side": 1,
+      "message": "This method seems to be currently not used. Is this intended or do you want to use it in tests?",
+      "revId": "579b67c8ccbf130986d7d30b77ff82ed259b9029",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
