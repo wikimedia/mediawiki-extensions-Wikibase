@@ -22,6 +22,30 @@
       "revId": "dfa2ce78a54f996d2147e72bf8222f6bafa2a67f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_dabd8c17",
+        "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-23T17:44:26Z",
+      "side": 1,
+      "message": "Also, provider will look like:\n```\n\u0027\u003ctest case description\u003e\u0027 \u003d\u003e [\u0027\u003craw value\u003e\u0027]\n```\nand reader won\u0027t need to bother switching between test and provider to understand what is the first element and what is second. In this case it is not that big deal, but there are tests that have 5 arguments in provider and there it would make much more sense.",
+      "parentUuid": "ce3c5b53_3a6278d6",
+      "range": {
+        "startLine": 100,
+        "startChar": 2,
+        "endLine": 120,
+        "endChar": 4
+      },
+      "revId": "dfa2ce78a54f996d2147e72bf8222f6bafa2a67f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
