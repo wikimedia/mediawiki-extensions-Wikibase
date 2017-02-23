@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_eb852ca0",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/ClaimsChangeOpDeserializerTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-23T08:06:11Z",
+      "side": 1,
+      "message": "This should probably go to I76918f47a9043ef383c219c7982036a781874c80\nEvil chains of patches! Gonna move it back there",
+      "revId": "e37fbab08cc6e16350386a1bf0b81d554eefb6cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
