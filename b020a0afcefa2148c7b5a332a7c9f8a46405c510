@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_4e0d4638",
+        "filename": "lib/includes/Formatters/InterWikiLinkWikitextFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-23T08:18:57Z",
+      "side": 1,
+      "message": "The \"base URL\" must end with a slash. This should be described in the doc file explaining the setting.\n\nI\u0027m not sure which encoding is the correct one, but I believe this should be encoded (and not expect the setting to provide an already encoded string). The most trivial example is a base URL that contains square brackets.",
+      "parentUuid": "ce3c5b53_1dd539e8",
+      "range": {
+        "startLine": 52,
+        "startChar": 3,
+        "endLine": 52,
+        "endChar": 17
+      },
+      "revId": "b020a0afcefa2148c7b5a332a7c9f8a46405c510",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_fd5e5516",
         "filename": "lib/includes/Formatters/InterWikiLinkWikitextFormatter.php",
         "patchSetId": 3
@@ -155,6 +179,30 @@
       "side": 1,
       "message": "What I have found out is that `[//localhost/ it\u0027s link, yo! {}]` is rendered correctly, so what to escape then? \nAnd why?\n\nCan anyone provide usecases for parser to fail with rendering?",
       "parentUuid": "ce3c5b53_1da779a4",
+      "range": {
+        "startLine": 54,
+        "startChar": 3,
+        "endLine": 54,
+        "endChar": 21
+      },
+      "revId": "b020a0afcefa2148c7b5a332a7c9f8a46405c510",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_6b16fc5b",
+        "filename": "lib/includes/Formatters/InterWikiLinkWikitextFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-23T08:18:57Z",
+      "side": 1,
+      "message": "Sure, wfEscapeWikiText it is. We both found this yesterday, so I wonder what\u0027s missing?\n\nThe most trivial example is a value that contains sequences of single quotes. These have a special meaning in Wikitext (italics and bold). Test case: \"Data:This should \u0027\u0027not\u0027\u0027 become italics.map\".",
+      "parentUuid": "ce3c5b53_5d7981c2",
       "range": {
         "startLine": 54,
         "startChar": 3,
