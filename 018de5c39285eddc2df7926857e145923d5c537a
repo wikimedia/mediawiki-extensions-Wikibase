@@ -16,6 +16,24 @@
       "revId": "018de5c39285eddc2df7926857e145923d5c537a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_5a5e5c7c",
+        "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-23T18:34:41Z",
+      "side": 1,
+      "message": "It\u0027s really cool that you noticed it. Thank you. Fixed",
+      "parentUuid": "ce3c5b53_5a809c4b",
+      "revId": "018de5c39285eddc2df7926857e145923d5c537a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
