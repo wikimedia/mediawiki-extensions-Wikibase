@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_1f3e86b5",
+        "filename": "repo/includes/ChangeOp/Deserialization/SiteLinksChangeOpDeserializer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-23T16:08:09Z",
+      "side": 1,
+      "message": "Yeah, something should be done about this. I am not sure what would be the nicest way to deal with this.",
+      "parentUuid": "ce3c5b53_e95e9416",
+      "revId": "ff90b9623e00891a63f592f0989908d99e4b6f6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_095c181c",
         "filename": "repo/includes/ChangeOp/Deserialization/SiteLinksChangeOpDeserializer.php",
         "patchSetId": 8
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_ff2de28b",
+        "filename": "repo/includes/ChangeOp/Deserialization/SiteLinksChangeOpDeserializer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-23T16:08:09Z",
+      "side": 1,
+      "message": "again I am confused how did I end up submitting this. I am pretty sure I was removing this comment.\nNow removed again.",
+      "parentUuid": "ce3c5b53_095c181c",
+      "revId": "ff90b9623e00891a63f592f0989908d99e4b6f6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_89426812",
         "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/SiteLinksChangeOpDeserializerTest.php",
         "patchSetId": 8
@@ -47,6 +83,30 @@
       "writtenOn": "2017-02-23T12:00:04Z",
       "side": 1,
       "message": "W",
+      "range": {
+        "startLine": 203,
+        "startChar": 37,
+        "endLine": 203,
+        "endChar": 38
+      },
+      "revId": "ff90b9623e00891a63f592f0989908d99e4b6f6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_ffbac21d",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/SiteLinksChangeOpDeserializerTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-23T16:08:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3c5b53_89426812",
       "range": {
         "startLine": 203,
         "startChar": 37,
