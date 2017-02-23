@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_dfa6de4f",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpSiteLinkTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-02-23T17:16:08Z",
+      "side": 1,
+      "message": "New array mode. Nice!",
+      "revId": "dbe06f4895ebe7aabb06297db591a2c7d7555c7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_9f67f621",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpSiteLinkTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-02-23T17:16:08Z",
+      "side": 1,
+      "message": "Can you make this multi-line?",
+      "revId": "dbe06f4895ebe7aabb06297db591a2c7d7555c7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_bf6c3a06",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/SiteLinkChangeOpFactoryTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-02-23T17:16:08Z",
+      "side": 1,
+      "message": "Maybe SiteLinkChangeOpFactory should have [] as default value?",
+      "revId": "dbe06f4895ebe7aabb06297db591a2c7d7555c7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
