@@ -91,6 +91,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$this->contentModelMap = $contentModelMap;
 		$this->settings = $settings;
 		$this->userLang = $userLang;
+		$this->request = new \FauxRequest();
 	}
 
 	/**
