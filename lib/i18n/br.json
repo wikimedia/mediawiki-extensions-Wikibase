@@ -12,5 +12,8 @@
 	"wikibase-tooltip-error-details": "Munudoù",
 	"wikibase-validator-no-validators": "Difennet",
 	"wikibase-entity-summary-wbsetlabel-add": "Skridennad [$2] ouzhpennet",
-	"wikibase-entity-summary-wbsetlabel-set": "Skridennad [$2] kemmet"
+	"wikibase-entity-summary-wbsetlabel-set": "Skridennad [$2] kemmet",
+	"wikibase-entity-summary-wbsetaliases-add-remove": "Ouzhpennet ha dilamet {{PLURAL:$1|un alias|aliasoù}} [$2]",
+	"wikibase-entity-summary-wbsetaliases-remove": "Dilamet {{PLURAL:$1|un alias|aliasoù}} [$2]",
+	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "Cheñchet skridennad, deskrivadur hag alias [$2]"
 }

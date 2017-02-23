@@ -142,6 +142,7 @@
 	"wikibase-validator-label-with-description-conflict": "Das Datenobjekt $3 hat bereits die Bezeichnung „$1“, die dem Sprachcode $2 zugeordnet ist, verwendet den gleichen Beschreibungstext.",
 	"wikibase-validator-label-no-entityid": "Die Bezeichnung darf keine gültige Objektkennung sein.",
 	"wikibase-validator-illegal-file-chars": "Dateinamen dürfen bestimmte Zeichen wie Doppelpunkte oder Schrägstriche nicht enthalten. Bitte nur den Dateinamen nach „Datei:“ einfügen.",
+	"wikibase-validator-illegal-geo-shape-title": "Der Wert muss mit „Data:“ beginnen und mit „.map“ enden. Zusätzlich sollte der Titel bestimmte Zeichen wie Doppelpunkte, Rauten oder senkrechte Striche nicht enthalten.",
 	"wikibase-validator-no-such-media": "Die Datei „$1“ ist nicht auf [https://commons.wikimedia.org/ Wikimedia Commons] vorhanden.",
 	"wikibase-validator-page-not-exists": "Die Seite „$1“ ist nicht vorhanden.",
 	"wikibase-validator-not-a-language": "„$1“ ist kein bekannter Sprachcode.",

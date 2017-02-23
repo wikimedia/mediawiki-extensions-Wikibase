@@ -94,6 +94,7 @@
 	"datatypes-type-wikibase-item": "Élément",
 	"datatypes-type-wikibase-property": "Propriété",
 	"datatypes-type-commonsMedia": "Fichier multimédia de Commons",
+	"datatypes-type-geo-shape": "Couche géographique",
 	"datatypes-type-external-id": "Identifiant externe",
 	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-Gannum": "$1 milliards d’années EC",

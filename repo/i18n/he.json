@@ -128,6 +128,7 @@
 	"wikibase-validator-label-with-description-conflict": "לפיט $3 כבר יש תווית \"$1\" שמשויכת לקוד השפה $2, שמשתמשת באותו הטקסט בתיאור.",
 	"wikibase-validator-label-no-entityid": "התווית הזאת אינה צריכה להיות מזהה ישות תקין.",
 	"wikibase-validator-illegal-file-chars": "שמות קבצים לא יכולים להכיל תווים מסוימים, כמו נקודתיים וקווים נטויים. יש להדביק את שם הקובץ רק אחרי \"File:\".",
+	"wikibase-validator-illegal-geo-shape-title": "ערכים צריכים להתחיל ב־\"Data:\" ולהסתיים ב־\".map\". בנוסף, הכותרת צריכה לא להכיל תווים כמו נקודתיים, סולמית, או מקל.",
 	"wikibase-validator-no-such-media": "הקובץ \"$1\" אינו קיים ב־[https://commons.wikimedia.org/ ויקישיתוף]",
 	"wikibase-validator-page-not-exists": "הדף \"$1\" אינו קיים.",
 	"wikibase-validator-not-a-language": "\"$1\" הוא לא קוד שפה ידוע.",
