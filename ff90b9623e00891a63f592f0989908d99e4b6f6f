@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_e95e9416",
+        "filename": "repo/includes/ChangeOp/Deserialization/SiteLinksChangeOpDeserializer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2017-02-23T12:00:04Z",
+      "side": 1,
+      "message": "That\u0027s a lot of constructor arguments! Not saying that this needs to be changed but at what number do we consider using builders or alternatives?",
+      "revId": "ff90b9623e00891a63f592f0989908d99e4b6f6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_095c181c",
+        "filename": "repo/includes/ChangeOp/Deserialization/SiteLinksChangeOpDeserializer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2017-02-23T12:00:04Z",
+      "side": 1,
+      "message": "This comment can probably be removed",
+      "revId": "ff90b9623e00891a63f592f0989908d99e4b6f6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_89426812",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/SiteLinksChangeOpDeserializerTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2017-02-23T12:00:04Z",
+      "side": 1,
+      "message": "W",
+      "range": {
+        "startLine": 203,
+        "startChar": 37,
+        "endLine": 203,
+        "endChar": 38
+      },
+      "revId": "ff90b9623e00891a63f592f0989908d99e4b6f6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
