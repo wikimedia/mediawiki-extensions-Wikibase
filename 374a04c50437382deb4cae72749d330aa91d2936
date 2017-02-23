@@ -16,6 +16,23 @@
       "revId": "374a04c50437382deb4cae72749d330aa91d2936",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_c9a4f006",
+        "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-23T11:21:00Z",
+      "side": 1,
+      "message": "I find it helpful if the declarations are in the same order as the constructor parameters. This should be above $entityTitleLookup.",
+      "revId": "374a04c50437382deb4cae72749d330aa91d2936",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
