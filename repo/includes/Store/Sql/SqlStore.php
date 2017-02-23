@@ -157,7 +157,7 @@ class SqlStore implements Store {
 	/**
 	 * @var EntityDataRetrievalServiceFactory
 	 */
-	private $entityDataRetrievalServices;
+	private $entityDataRetrievalServiceFactory;
 
 	/**
 	 * @var string
@@ -187,8 +187,8 @@ class SqlStore implements Store {
 	 * @param EntityIdLookup $entityIdLookup
 	 * @param EntityTitleStoreLookup $entityTitleLookup
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
-	 * @param EntityDataRetrievalServiceFactory|null $entityDataRetrievalServiceFactory Optional service factory
-	 *        providing services configured for the configured repositories
+	 * @param EntityDataRetrievalServiceFactory|null $entityDataRetrievalServiceFactory Optional
+	 *        service factory providing services configured for the configured repositories
 	 */
 	public function __construct(
 		EntityChangeFactory $entityChangeFactory,
@@ -207,7 +207,7 @@ class SqlStore implements Store {
 		$this->entityIdLookup = $entityIdLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
-		$this->entityDataRetrievalServices = $entityDataRetrievalServiceFactory;
+		$this->entityDataRetrievalServiceFactory = $entityDataRetrievalServiceFactory;
 
 		//TODO: inject settings
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
@@ -444,11 +444,11 @@ class SqlStore implements Store {
 		/** @var WikiPageEntityStore $dispatcher */
 		$dispatcher = $this->getEntityStoreWatcher();
 
-		if ( $this->entityDataRetrievalServices !== null ) {
-			// Use $entityDataRetrievalServices as a watcher for entity changes,
+		if ( $this->entityDataRetrievalServiceFactory !== null ) {
+			// Use entityDataRetrievalServiceFactory as a watcher for entity changes,
 			// so that caches of services provided are updated when necessary.
-			$dispatcher->registerWatcher( $this->entityDataRetrievalServices );
-			$nonCachingLookup = $this->entityDataRetrievalServices->getEntityRevisionLookup();
+			$dispatcher->registerWatcher( $this->entityDataRetrievalServiceFactory );
+			$nonCachingLookup = $this->entityDataRetrievalServiceFactory->getEntityRevisionLookup();
 		} else {
 			// Watch for entity changes
 			$metaDataFetcher = $this->getEntityPrefetcher();
@@ -530,8 +530,8 @@ class SqlStore implements Store {
 	 * @return PropertyInfoLookup
 	 */
 	private function newPropertyInfoLookup() {
-		if ( $this->entityDataRetrievalServices !== null ) {
-			$table = $this->entityDataRetrievalServices->getPropertyInfoLookup();
+		if ( $this->entityDataRetrievalServiceFactory !== null ) {
+			$table = $this->entityDataRetrievalServiceFactory->getPropertyInfoLookup();
 		} else {
 			$table = $this->getPropertyInfoTable();
 		}
@@ -620,8 +620,8 @@ class SqlStore implements Store {
 	 * @return EntityPrefetcher
 	 */
 	private function newEntityPrefetcher() {
-		if ( $this->entityDataRetrievalServices !== null ) {
-			return $this->entityDataRetrievalServices->getEntityPrefetcher();
+		if ( $this->entityDataRetrievalServiceFactory !== null ) {
+			return $this->entityDataRetrievalServiceFactory->getEntityPrefetcher();
 		}
 		return new PrefetchingWikiPageEntityMetaDataAccessor(
 			new WikiPageEntityMetaDataLookup( $this->entityNamespaceLookup )
