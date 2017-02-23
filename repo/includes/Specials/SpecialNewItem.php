@@ -126,7 +126,6 @@ class SpecialNewItem extends SpecialNewEntity {
 		if ( $this->isSiteLinkProvided( $this->getRequest() ) ) {
 			$formFields[ self::FIELD_SITE ] = [
 				'name' => self::FIELD_SITE,
-				'default' => $this->getRequest()->getVal( self::FIELD_SITE ),
 				'type' => 'text',
 				'id' => 'wb-newitem-site',
 				'readonly' => 'readonly',
@@ -144,7 +143,6 @@ class SpecialNewItem extends SpecialNewEntity {
 
 			$formFields[ self::FIELD_PAGE ] = [
 				'name' => self::FIELD_PAGE,
-				'default' => $this->getRequest()->getVal( self::FIELD_PAGE ),
 				'type' => 'text',
 				'id' => 'wb-newitem-page',
 				'readonly' => 'readonly',

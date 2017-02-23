@@ -227,8 +227,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 				'name' => 'page',
 				'label-message' => 'wikibase-setsitelink-label',
 				'type' => 'text',
-				'default' => $this->getRequest()->getVal( 'page' ) ?: $this->page,
-				'nodata' => true,
+				'default' => $this->page,
 				'cssclass' => 'wb-input wb-input-text',
 				'id' => 'wb-setsitelink-page'
 			)
@@ -276,7 +275,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 				'name' => 'site',
 				'label-message' => 'wikibase-setsitelink-site',
 				'type' => 'text',
-				'default' => $this->getRequest()->getVal( 'site' ) ?: $this->site,
+				'default' => $this->site,
 				'cssclass' => 'wb-input',
 				'id' => 'wb-setsitelink-site'
 			);

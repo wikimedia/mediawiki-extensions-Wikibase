@@ -233,14 +233,12 @@ class SpecialMergeItems extends SpecialWikibasePage {
 		return array(
 			'fromid' => array(
 				'name' => 'fromid',
-				'default' => $this->getRequest()->getVal( 'fromid' ),
 				'type' => 'text',
 				'id' => 'wb-mergeitems-fromid',
 				'label-message' => 'wikibase-mergeitems-fromid'
 			),
 			'toid' => array(
 				'name' => 'toid',
-				'default' => $this->getRequest()->getVal( 'toid' ),
 				'type' => 'text',
 				'id' => 'wb-mergeitems-toid',
 				'label-message' => 'wikibase-mergeitems-toid'
