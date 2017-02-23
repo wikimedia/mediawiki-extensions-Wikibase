@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_d8f7d5f0",
+        "filename": "repo/includes/Specials/SpecialModifyEntity.php",
+        "patchSetId": 42
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2017-02-23T19:19:30Z",
+      "side": 1,
+      "message": "Cargo cult programming. I planned to do a follow-up to better integrate submit callbacks into special page classes but I\u0027m not sure how...",
+      "parentUuid": "ce3c5b53_9fa5b6b3",
+      "revId": "73207c2d38b91ab2e5195032655d745845de23d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_5f22ce51",
         "filename": "repo/includes/Specials/SpecialModifyTerm.php",
         "patchSetId": 42
@@ -30,6 +48,30 @@
       "writtenOn": "2017-02-23T16:35:55Z",
       "side": 1,
       "message": "I looked this up, but don\u0027t fully understand it. Why do you added this here?",
+      "range": {
+        "startLine": 190,
+        "startChar": 4,
+        "endLine": 190,
+        "endChar": 10
+      },
+      "revId": "73207c2d38b91ab2e5195032655d745845de23d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_b839b1cd",
+        "filename": "repo/includes/Specials/SpecialModifyTerm.php",
+        "patchSetId": 42
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2017-02-23T19:19:30Z",
+      "side": 1,
+      "message": "T38210",
+      "parentUuid": "ce3c5b53_5f22ce51",
       "range": {
         "startLine": 190,
         "startChar": 4,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_9865cddf",
+        "filename": "repo/includes/Specials/SpecialModifyTerm.php",
+        "patchSetId": 42
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2017-02-23T19:19:30Z",
+      "side": 1,
+      "message": "I actually don\u0027t remember why I changed it :|",
+      "parentUuid": "ce3c5b53_ffc9627c",
+      "range": {
+        "startLine": 234,
+        "startChar": 16,
+        "endLine": 235,
+        "endChar": 31
+      },
+      "revId": "73207c2d38b91ab2e5195032655d745845de23d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_df51fede",
         "filename": "repo/includes/Specials/SpecialSetSiteLink.php",
         "patchSetId": 42
@@ -76,6 +142,30 @@
       "writtenOn": "2017-02-23T16:35:55Z",
       "side": 1,
       "message": "We are trying to use the short array syntax in all new code.\n\nJust a note, not meant as an edit request.",
+      "range": {
+        "startLine": 145,
+        "startChar": 33,
+        "endLine": 145,
+        "endChar": 40
+      },
+      "revId": "73207c2d38b91ab2e5195032655d745845de23d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_38a361ff",
+        "filename": "repo/includes/Specials/SpecialSetSiteLink.php",
+        "patchSetId": 42
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2017-02-23T19:19:30Z",
+      "side": 1,
+      "message": "I asked it in a comment on Patch Set 35 ;)",
+      "parentUuid": "ce3c5b53_df51fede",
       "range": {
         "startLine": 145,
         "startChar": 33,
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_78900999",
+        "filename": "repo/includes/Specials/SpecialSetSiteLink.php",
+        "patchSetId": 42
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2017-02-23T19:19:30Z",
+      "side": 1,
+      "message": "T38210",
+      "parentUuid": "ce3c5b53_bf5f5ae7",
+      "range": {
+        "startLine": 231,
+        "startChar": 5,
+        "endLine": 231,
+        "endChar": 11
+      },
+      "revId": "73207c2d38b91ab2e5195032655d745845de23d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_dfc25e88",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialSetSiteLinkTest.php",
         "patchSetId": 42
@@ -122,6 +236,40 @@
       "writtenOn": "2017-02-23T16:35:55Z",
       "side": 1,
       "message": "Aleksey, I would love to have your +1 on these changes, or upload a follow up if you think Ricordisamoa missed a detail. Thank you!",
+      "revId": "73207c2d38b91ab2e5195032655d745845de23d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_989b8dc1",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialSetSiteLinkTest.php",
+        "patchSetId": 42
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2017-02-23T19:19:30Z",
+      "side": 1,
+      "message": "From Patch Set 41:\n\n\u003e It seems harder to match OOUI inputs with their labels due to\n\u003e unpredictable ids",
+      "revId": "73207c2d38b91ab2e5195032655d745845de23d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_b8969195",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialSetSiteLinkTest.php",
+        "patchSetId": 42
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2017-02-23T19:19:30Z",
+      "side": 1,
+      "message": "From Patch Set 41:\n\n\u003e Also here",
       "revId": "73207c2d38b91ab2e5195032655d745845de23d4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
