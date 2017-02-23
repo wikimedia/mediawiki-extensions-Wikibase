@@ -22,6 +22,30 @@
       "revId": "6ee4e5cdad21b925206352f6d2fd1846da7eae04",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_7881e991",
+        "filename": "repo/includes/Search/Elastic/Fields/DescriptionsField.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-02-23T20:54:28Z",
+      "side": 1,
+      "message": "I see what you mean. Yes, we probably don\u0027t need mapping yet here, since descriptions are now for retrieval only. Will change it.",
+      "parentUuid": "ce3c5b53_cb94fd8f",
+      "range": {
+        "startLine": 29,
+        "startChar": 17,
+        "endLine": 29,
+        "endChar": 32
+      },
+      "revId": "6ee4e5cdad21b925206352f6d2fd1846da7eae04",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
