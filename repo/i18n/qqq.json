@@ -407,6 +407,8 @@
 	"wikibase-listdatatypes-commonsmedia-body": "{{Wikibase-datatype-body|Commons media}}\n\nFor information about \"Iri\" and related terms, see [[:w:Internationalized resource identifier|Internationalized resource identifier]] and [[:w:URI scheme|URI scheme]].",
 	"wikibase-listdatatypes-globe-coordinate-head": "{{Wikibase-datatype-head|Globe coordinate|globe-coordinate}}",
 	"wikibase-listdatatypes-globe-coordinate-body": "{{Wikibase-datatype-body|Globe coordinate}}",
+	"wikibase-listdatatypes-geo-shape-head": "{{Wikibase-datatype-head|Geo shape|geo-shape}}\n{{Identical|Geographic shape}}",
+	"wikibase-listdatatypes-geo-shape-body": "{{Wikibase-datatype-body|Geo shape}},
 	"wikibase-listdatatypes-quantity-head": "{{Wikibase-datatype-head|Quantity}}\n{{Identical|Quantity}}",
 	"wikibase-listdatatypes-quantity-body": "{{Wikibase-datatype-body|Quantity}}",
 	"wikibase-listdatatypes-monolingualtext-head": "{{Wikibase-datatype-head|Monolingual text|monolingualtext}}\n{{Identical|Monolingual text}}",
