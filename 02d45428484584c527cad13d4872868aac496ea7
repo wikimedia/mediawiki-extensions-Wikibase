@@ -16,6 +16,24 @@
       "revId": "02d45428484584c527cad13d4872868aac496ea7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_c975d093",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/ClaimsChangeOpDeserializerTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2017-02-23T11:06:07Z",
+      "side": 1,
+      "message": "It might be cleaner but I\u0027m leaning towards leaving this as is anyway. The other two tests follow a similar approach and would definitely be more fiddly than this one. I could still change it though if you strongly object :)",
+      "parentUuid": "ce3c5b53_9780484d",
+      "revId": "02d45428484584c527cad13d4872868aac496ea7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
