@@ -109,6 +109,21 @@ return call_user_func( function() {
 				return new CommonsMediaRdfBuilder( $vocab );
 			},
 		),
+		'PT:geo-shape' => array(
+			'validator-factory-callback' => function() {
+				$factory = WikibaseRepo::getDefaultValidatorBuilders();
+				// Don't go for commons during unit tests.
+				return $factory->buildGeoShapeValidators(
+					defined( 'MW_PHPUNIT_TEST' ) ? 'doNotCheckExistence' : 'checkExistence'
+				);
+			},
+			'parser-factory-callback' => $newStringParser,
+			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
+				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
+				return $factory->newGeoShapeFormatter( $format, $options );
+			},
+			// TODO: RDF mapping
+		),
 		'VT:globecoordinate' => array(
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
