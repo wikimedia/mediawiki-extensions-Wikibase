@@ -34,6 +34,24 @@
       "revId": "44ae14c877e628f0fdb4ef6182849e40106628fb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_4e3b06c5",
+        "filename": "repo/includes/ChangeOp/ChangeOpSiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-23T08:20:18Z",
+      "side": 1,
+      "message": "Cool, thanks! But upload this as a separate patch, please.",
+      "parentUuid": "ce3c5b53_eb0a0c29",
+      "revId": "44ae14c877e628f0fdb4ef6182849e40106628fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
