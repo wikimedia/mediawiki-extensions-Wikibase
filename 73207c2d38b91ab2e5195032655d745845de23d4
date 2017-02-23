@@ -168,6 +168,30 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_d8b835e5",
+        "filename": "repo/includes/Specials/SpecialModifyTerm.php",
+        "patchSetId": 42
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-23T19:39:32Z",
+      "side": 1,
+      "message": "Ok. I\u0027ll look at it tomorrow.",
+      "parentUuid": "ce3c5b53_1829bd36",
+      "range": {
+        "startLine": 190,
+        "startChar": 4,
+        "endLine": 190,
+        "endChar": 10
+      },
+      "revId": "73207c2d38b91ab2e5195032655d745845de23d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_ffc9627c",
         "filename": "repo/includes/Specials/SpecialModifyTerm.php",
         "patchSetId": 42
@@ -431,6 +455,30 @@
       "side": 1,
       "message": "As you can see CSS classes are already checked in the current test :)",
       "parentUuid": "ce3c5b53_d8cef5b8",
+      "range": {
+        "startLine": 293,
+        "startChar": 13,
+        "endLine": 295,
+        "endChar": 4
+      },
+      "revId": "73207c2d38b91ab2e5195032655d745845de23d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_b8ce9184",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialSetSiteLinkTest.php",
+        "patchSetId": 42
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-23T19:39:32Z",
+      "side": 1,
+      "message": "It\u0027s even code written by me, I suppose :)",
+      "parentUuid": "ce3c5b53_5800a5af",
       "range": {
         "startLine": 293,
         "startChar": 13,
