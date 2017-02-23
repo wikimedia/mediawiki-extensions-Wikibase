@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_fa13b003",
+        "filename": "repo/includes/ChangeOp/Deserialization/ItemChangeOpDeserializer.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-23T18:15:59Z",
+      "side": 1,
+      "message": "Why not require all those little deserializers as constructor dependencies?",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 38
+      },
+      "revId": "b7dc378849078e24bc26a443d3d2f918e2e54d24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_1a81b4fd",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/ItemChangeOpDeserializerTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-23T18:15:59Z",
+      "side": 1,
+      "message": "IMO, test is hard to understand and feels super-magic because of dynamic passing of method names.\n\nIt also doesn\u0027t test return value of `createEntityChangeOp` which is, as I see it, what should be tested but not calls to the factory.\n\nCan you please create separate test for each case?",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 2
+      },
+      "revId": "b7dc378849078e24bc26a443d3d2f918e2e54d24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
