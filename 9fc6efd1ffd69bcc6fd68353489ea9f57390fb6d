@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_e4f8f948",
+        "filename": "docs/change-op-serializations.wiki",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-23T15:23:40Z",
+      "side": 1,
+      "message": "oops, I didn\u0027t notice what I submitted. I didn\u0027t intend to change those at all. I must have messed something when rebasing a chain or so.",
+      "parentUuid": "ce3c5b53_a2442c6f",
+      "range": {
+        "startLine": 39,
+        "startChar": 74,
+        "endLine": 39,
+        "endChar": 75
+      },
+      "revId": "9fc6efd1ffd69bcc6fd68353489ea9f57390fb6d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_5df3c1e3",
         "filename": "repo/includes/ChangeOp/Deserialization/SiteLinkBadgeChangeOpSerializationValidator.php",
         "patchSetId": 7
