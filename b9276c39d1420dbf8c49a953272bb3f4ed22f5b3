@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_9a5aa4f8",
+        "filename": "repo/tests/phpunit/includes/Validators/TermValidatorFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-23T17:58:23Z",
+      "side": 1,
+      "message": "Could you replace it with class constant? And also use it in provider.\n\nCurrently it took me a while to understand why \u002712345678\u0027 is ok and \u0027123456789\u0027 is not (9 characters doesn\u0027t look like very long string that should not be allowed for terms)\n\nAlso you can not see that `8` is max length form the test itself. I usually do like this:\n```\n$this-\u003enewFactory( $maxLength \u003d 8, [] );\n```\nBut if constant will be in place, then you won\u0027t need it.",
+      "range": {
+        "startLine": 95,
+        "startChar": 32,
+        "endLine": 95,
+        "endChar": 33
+      },
+      "revId": "b9276c39d1420dbf8c49a953272bb3f4ed22f5b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_bad9a885",
+        "filename": "repo/tests/phpunit/includes/Validators/TermValidatorFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-23T17:58:23Z",
+      "side": 1,
+      "message": "Could you remove the loop and replace with three different calls?\n\nCurrently, if the test will fail it will be hard to understand which one of validators failed and debugging will be required.",
+      "range": {
+        "startLine": 104,
+        "startChar": 2,
+        "endLine": 107,
+        "endChar": 3
+      },
+      "revId": "b9276c39d1420dbf8c49a953272bb3f4ed22f5b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
