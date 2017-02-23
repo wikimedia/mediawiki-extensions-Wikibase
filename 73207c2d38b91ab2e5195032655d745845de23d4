@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_9fa5b6b3",
+        "filename": "repo/includes/Specials/SpecialModifyEntity.php",
+        "patchSetId": 42
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-23T16:35:55Z",
+      "side": 1,
+      "message": "Just curious: why is this needed?",
+      "revId": "73207c2d38b91ab2e5195032655d745845de23d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_5f22ce51",
+        "filename": "repo/includes/Specials/SpecialModifyTerm.php",
+        "patchSetId": 42
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-23T16:35:55Z",
+      "side": 1,
+      "message": "I looked this up, but don\u0027t fully understand it. Why do you added this here?",
+      "range": {
+        "startLine": 190,
+        "startChar": 4,
+        "endLine": 190,
+        "endChar": 10
+      },
+      "revId": "73207c2d38b91ab2e5195032655d745845de23d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_ffc9627c",
+        "filename": "repo/includes/Specials/SpecialModifyTerm.php",
+        "patchSetId": 42
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-23T16:35:55Z",
+      "side": 1,
+      "message": "I found the old style better readable. Not a big deal, obviously.",
+      "range": {
+        "startLine": 234,
+        "startChar": 16,
+        "endLine": 235,
+        "endChar": 31
+      },
+      "revId": "73207c2d38b91ab2e5195032655d745845de23d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_df51fede",
+        "filename": "repo/includes/Specials/SpecialSetSiteLink.php",
+        "patchSetId": 42
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-23T16:35:55Z",
+      "side": 1,
+      "message": "We are trying to use the short array syntax in all new code.\n\nJust a note, not meant as an edit request.",
+      "range": {
+        "startLine": 145,
+        "startChar": 33,
+        "endLine": 145,
+        "endChar": 40
+      },
+      "revId": "73207c2d38b91ab2e5195032655d745845de23d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_bf5f5ae7",
+        "filename": "repo/includes/Specials/SpecialSetSiteLink.php",
+        "patchSetId": 42
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-23T16:35:55Z",
+      "side": 1,
+      "message": "I looked this up, but don\u0027t fully understand it. Why do you added this here?",
+      "range": {
+        "startLine": 231,
+        "startChar": 5,
+        "endLine": 231,
+        "endChar": 11
+      },
+      "revId": "73207c2d38b91ab2e5195032655d745845de23d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_dfc25e88",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialSetSiteLinkTest.php",
+        "patchSetId": 42
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-23T16:35:55Z",
+      "side": 1,
+      "message": "Aleksey, I would love to have your +1 on these changes, or upload a follow up if you think Ricordisamoa missed a detail. Thank you!",
+      "revId": "73207c2d38b91ab2e5195032655d745845de23d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_3f982ac3",
+        "filename": "tests/browser/features/support/pages/special_set_label_page.rb",
+        "patchSetId": 42
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-23T16:35:55Z",
+      "side": 1,
+      "message": "Are you sure this is necessary? It should be guaranteed there is no second id\u003d\"wb-setlabel-submit\" on the page. I tried and found that the selector\n\n#wb-setlabel-submit .oo-ui-buttonElement-button\n\nis enough.\n\nSame for the selectors in the other files.\n\nNo need to change it in this patch, I will upload a follow up.",
+      "range": {
+        "startLine": 15,
+        "startChar": 34,
+        "endLine": 15,
+        "endChar": 56
+      },
+      "revId": "73207c2d38b91ab2e5195032655d745845de23d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
