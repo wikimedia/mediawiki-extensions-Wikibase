@@ -394,7 +394,8 @@ class WikibaseRepo {
 			$this->getVocabularyBaseUri(),
 			$this->getMonolingualTextLanguages(),
 			$this->getCachingCommonsMediaFileNameLookup(),
-			$entityTypesPerRepo
+			$entityTypesPerRepo,
+			new MediaWikiPageNameNormalizer()
 		);
 	}
 
