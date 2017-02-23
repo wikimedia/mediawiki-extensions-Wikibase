@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_a2442c6f",
+        "filename": "docs/change-op-serializations.wiki",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2017-02-23T12:00:04Z",
+      "side": 1,
+      "message": "Didn\u0027t we decide to use \u0027\u0027 instead of 1/true/whatever? I feel like I changed these to empty strings everywhere recently",
+      "range": {
+        "startLine": 39,
+        "startChar": 74,
+        "endLine": 39,
+        "endChar": 75
+      },
+      "revId": "9fc6efd1ffd69bcc6fd68353489ea9f57390fb6d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_5df3c1e3",
+        "filename": "repo/includes/ChangeOp/Deserialization/SiteLinkBadgeChangeOpSerializationValidator.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2017-02-23T12:00:04Z",
+      "side": 1,
+      "message": "It looks like this should be reused for SetSiteLink so we should probably create a ticket to remember to remove it from ModifyEntity in a later patch.",
+      "revId": "9fc6efd1ffd69bcc6fd68353489ea9f57390fb6d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_5de981e0",
+        "filename": "repo/includes/ChangeOp/Deserialization/SiteLinkChangeOpSerializationValidator.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2017-02-23T12:00:04Z",
+      "side": 1,
+      "message": "\u0026 not needed",
+      "range": {
+        "startLine": 30,
+        "startChar": 84,
+        "endLine": 30,
+        "endChar": 85
+      },
+      "revId": "9fc6efd1ffd69bcc6fd68353489ea9f57390fb6d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
