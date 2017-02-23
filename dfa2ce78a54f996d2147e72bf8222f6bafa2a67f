@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_3a6278d6",
+        "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-23T17:39:22Z",
+      "side": 1,
+      "message": "I would prefer to have two different tests with two different providers: one describing valid cases, another for invalid. \n\nThat way, in my opinion, tests would look more like specification and it would be easier to see that these are accepted and here are list of forbidden characters and/or formats.",
+      "range": {
+        "startLine": 100,
+        "startChar": 2,
+        "endLine": 120,
+        "endChar": 4
+      },
+      "revId": "dfa2ce78a54f996d2147e72bf8222f6bafa2a67f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
