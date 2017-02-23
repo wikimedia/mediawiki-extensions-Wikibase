@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_e968d486",
+        "filename": "lib/includes/Formatters/InterWikiLinkWikitextFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-23T12:01:26Z",
+      "side": 1,
+      "message": "Fixed encoding issue with baseUrl. Will add docs in follow-up patch.",
+      "parentUuid": "ce3c5b53_4e0d4638",
+      "range": {
+        "startLine": 52,
+        "startChar": 3,
+        "endLine": 52,
+        "endChar": 17
+      },
+      "revId": "b020a0afcefa2148c7b5a332a7c9f8a46405c510",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_fd5e5516",
         "filename": "lib/includes/Formatters/InterWikiLinkWikitextFormatter.php",
         "patchSetId": 3
@@ -203,6 +227,30 @@
       "side": 1,
       "message": "Sure, wfEscapeWikiText it is. We both found this yesterday, so I wonder what\u0027s missing?\n\nThe most trivial example is a value that contains sequences of single quotes. These have a special meaning in Wikitext (italics and bold). Test case: \"Data:This should \u0027\u0027not\u0027\u0027 become italics.map\".",
       "parentUuid": "ce3c5b53_5d7981c2",
+      "range": {
+        "startLine": 54,
+        "startChar": 3,
+        "endLine": 54,
+        "endChar": 21
+      },
+      "revId": "b020a0afcefa2148c7b5a332a7c9f8a46405c510",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_496c6099",
+        "filename": "lib/includes/Formatters/InterWikiLinkWikitextFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-23T12:01:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3c5b53_6b16fc5b",
       "range": {
         "startLine": 54,
         "startChar": 3,
