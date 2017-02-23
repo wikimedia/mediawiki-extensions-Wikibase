@@ -22,23 +22,26 @@ use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
+
+	const MAX_LENGTH = 8;
 
 	/**
 	 * @dataProvider invalidConstructorArgumentProvider
 	 */
 	public function testInvalidConstructorArgument( $maxLength ) {
 		$this->setExpectedException( InvalidArgumentException::class );
-		$this->newFactory( $maxLength, array() );
+		$this->newFactory( $maxLength );
 	}
 
 	public function invalidConstructorArgumentProvider() {
-		return array(
-			array( null ),
-			array( 1.0 ),
-			array( 0 ),
-		);
+		return [
+			[ null ],
+			[ 1.0 ],
+			[ 0 ],
+		];
 	}
 
 	/**
@@ -47,7 +50,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @return TermValidatorFactory
 	 */
-	private function newFactory( $maxLength, array $languageCodes ) {
+	private function newFactory( $maxLength = self::MAX_LENGTH, array $languageCodes = [] ) {
 		$mockProvider = new ChangeOpTestMockProvider( $this );
 
 		return new TermValidatorFactory(
@@ -59,7 +62,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetFingerprintValidator() {
-		$builders = $this->newFactory( 20, array( 'ja', 'ru' ) );
+		$builders = $this->newFactory();
 
 		$validator = $builders->getFingerprintValidator( Item::ENTITY_TYPE );
 
@@ -77,7 +80,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetLanguageValidator() {
-		$builders = $this->newFactory( 20, array( 'ja', 'ru' ) );
+		$builders = $this->newFactory( 20, [ 'ja', 'ru' ] );
 
 		$validator = $builders->getLanguageValidator();
 
@@ -87,55 +90,56 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse( $validator->validate( 'xx' )->isValid() );
 	}
 
-	public function testGetLabelValidator() {
-		$builders = $this->newFactory( 8, array( 'en' ) );
+	/**
+	 * @dataProvider provideCommonTerms
+	 */
+	public function testCommonTermValidation( $string, $expected ) {
+		$builders = $this->newFactory( self::MAX_LENGTH );
+		$entityType = 'does not matter';
 
-		$validator = $builders->getLabelValidator( Item::ENTITY_TYPE );
+		$result = $builders->getLabelValidator( $entityType )->validate( $string );
+		$this->assertSame( $expected, $result->isValid() );
 
-		$this->assertInstanceOf( ValueValidator::class, $validator );
+		$result = $builders->getDescriptionValidator()->validate( $string );
+		$this->assertSame( $expected, $result->isValid() );
 
-		$this->assertTrue( $validator->validate( 'foo' )->isValid() );
-		$this->assertFalse( $validator->validate( '' )->isValid() );
-		$this->assertFalse( $validator->validate( '0123456789' )->isValid() );
+		$result = $builders->getAliasValidator( $entityType )->validate( $string );
+		$this->assertSame( $expected, $result->isValid() );
+	}
+
+	public function provideCommonTerms() {
+		return [
+			'Space' => [ 'x x', true ],
+			'Unicode support' => [ 'Äöü', true ],
+
+			// Length checks
+			'To short' => [ '', false ],
+			'Minimum length' => [ 'x', true ],
+			'Maximum length' => [ str_repeat( 'x', self::MAX_LENGTH ), true ],
+			'Too long' => [ str_repeat( 'x', self::MAX_LENGTH + 1 ), false ],
+
+			// Enforced trimming
+			'Leading space' => [ ' x', false ],
+			'Leading newline' => [ "\nx", false ],
+			'Trailing space' => [ 'x ', false ],
+			'Trailing newline' => [ "x\n", false ],
+
+			// Disallowed whitespace characters
+			'U+0009: Tabulator' => [ "x\tx", false ],
+			'U+000A: Newline' => [ "x\nx", false ],
+			'U+000D: Return' => [ "x\rx", false ],
+		];
 	}
 
 	public function testGetLabelValidator_property() {
-		$builders = $this->newFactory( 8, array( 'en' ) );
+		$builders = $this->newFactory();
 
 		$validator = $builders->getLabelValidator( Property::ENTITY_TYPE );
 
 		$this->assertInstanceOf( ValueValidator::class, $validator );
 
-		$this->assertTrue( $validator->validate( 'foo' )->isValid() );
-		$this->assertFalse( $validator->validate( '' )->isValid() );
-		$this->assertFalse( $validator->validate( '0123456789' )->isValid() );
-
 		$this->assertFalse( $validator->validate( 'P12' )->isValid() );
 		$this->assertTrue( $validator->validate( 'Q12' )->isValid() );
-	}
-
-	public function testGetDescriptionValidator() {
-		$builders = $this->newFactory( 8, array( 'en' ) );
-
-		$validator = $builders->getDescriptionValidator();
-
-		$this->assertInstanceOf( ValueValidator::class, $validator );
-
-		$this->assertTrue( $validator->validate( 'foo' )->isValid() );
-		$this->assertFalse( $validator->validate( '' )->isValid() );
-		$this->assertFalse( $validator->validate( '0123456789' )->isValid() );
-	}
-
-	public function testGetAliasValidator() {
-		$builders = $this->newFactory( 8, array( 'en' ) );
-
-		$validator = $builders->getAliasValidator( Item::ENTITY_TYPE );
-
-		$this->assertInstanceOf( ValueValidator::class, $validator );
-
-		$this->assertTrue( $validator->validate( 'foo' )->isValid() );
-		$this->assertFalse( $validator->validate( '' )->isValid() );
-		$this->assertFalse( $validator->validate( '0123456789' )->isValid() );
 	}
 
 }
