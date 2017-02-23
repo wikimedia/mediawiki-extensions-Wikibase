@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_29723c11",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-23T12:32:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3c5b53_0992d8a1",
+      "revId": "374a04c50437382deb4cae72749d330aa91d2936",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_c9a4f006",
         "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
         "patchSetId": 2
@@ -101,6 +119,24 @@
       "writtenOn": "2017-02-23T11:28:54Z",
       "side": 1,
       "message": "minor nitpick... geo shapes are not files. I would just say:\n\n\"Used primarily to build links to the geo shapes\"",
+      "revId": "374a04c50437382deb4cae72749d330aa91d2936",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_e97bf4e9",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-02-23T12:32:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3c5b53_299b1cc3",
       "revId": "374a04c50437382deb4cae72749d330aa91d2936",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
