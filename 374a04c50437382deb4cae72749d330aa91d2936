@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_0992d8a1",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-23T11:28:54Z",
+      "side": 1,
+      "message": "suggest to make the link use https instead of a relative url\n\n(also nitpick, geo shapes are not files, just \"build links to the geo shapes\" or something is ok)",
+      "parentUuid": "ce3c5b53_bd644d46",
+      "revId": "374a04c50437382deb4cae72749d330aa91d2936",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_c9a4f006",
         "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
         "patchSetId": 2
@@ -30,6 +48,40 @@
       "writtenOn": "2017-02-23T11:21:00Z",
       "side": 1,
       "message": "I find it helpful if the declarations are in the same order as the constructor parameters. This should be above $entityTitleLookup.",
+      "revId": "374a04c50437382deb4cae72749d330aa91d2936",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_299b1cc3",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-23T11:28:54Z",
+      "side": 1,
+      "message": "minor nitpick... geo shapes are not files. I would just say:\n\n\"Used primarily to build links to the geo shapes\"",
+      "revId": "374a04c50437382deb4cae72749d330aa91d2936",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_49b1c041",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-02-23T11:28:54Z",
+      "side": 1,
+      "message": "suggest we make this https://commons.wikimedia.org/wiki/ instead of a relative url, as we use https only now.",
       "revId": "374a04c50437382deb4cae72749d330aa91d2936",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
