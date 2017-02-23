@@ -186,14 +186,16 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			'cssclass' => 'wb-input',
 			'id' => 'wb-modifyterm-value',
 			'type' => 'text',
-			'default' => $this->getRequest()->getVal( 'value' ) ? $this->getRequest()->getVal( 'value' ) : $this->value,
+			'default' => $this->getRequest()->getVal( 'value' ) ?: $this->value,
 			'nodata' => true
 		);
 
 		$languageName = Language::fetchLanguageName( $this->languageCode, $this->getLanguage()->getCode() );
 
 		if ( $entity !== null && $this->languageCode !== null && $languageName !== '' ) {
-			// Messages: wikibase-setlabel-introfull, wikibase-setdescription-introfull,
+			// Messages:
+			// wikibase-setlabel-introfull
+			// wikibase-setdescription-introfull
 			// wikibase-setaliases-introfull
 			$intro = $this->msg(
 				'wikibase-' . strtolower( $this->getName() ) . '-introfull',
@@ -219,7 +221,9 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 				'value' => $valueinput
 			);
 		} else {
-			// Messages: wikibase-setlabel-intro, wikibase-setdescription-intro,
+			// Messages:
+			// wikibase-setlabel-intro
+			// wikibase-setdescription-intro
 			// wikibase-setaliases-intro
 			$intro = $this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-intro' )->parse();
 			$formDescriptor = $this->getFormElements( $entity );
@@ -231,7 +235,9 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 				'cssclass' => 'wb-input',
 				'id' => 'wb-modifyterm-language'
 			);
-			// Messages: wikibase-setlabel-label, wikibase-setdescription-label,
+			// Messages:
+			// wikibase-setlabel-label
+			// wikibase-setdescription-label
 			// wikibase-setaliases-label
 			$valueinput['label-message'] = 'wikibase-' . strtolower( $this->getName() ) . '-label';
 			$formDescriptor['value'] = $valueinput;

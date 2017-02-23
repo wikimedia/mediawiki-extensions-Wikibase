@@ -11,5 +11,5 @@ module SpecialModifyEntityModule
 
   p(:anonymous_edit_warning, class: 'warning')
   p(:error_message, class: 'error')
-  text_field(:id_input_field, css: 'div.wb-input#wb-modifyentity-id input.oo-ui-inputWidget-input')
+  text_field(:id_input_field, css: '#wb-modifyentity-id .oo-ui-inputWidget-input')
 end
