@@ -66,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_bf00ba05",
+        "filename": "repo/includes/ChangeOp/Deserialization/SiteLinkBadgeChangeOpSerializationValidator.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-23T16:08:09Z",
+      "side": 1,
+      "message": "good point. I\u0027ve noticed that too but filed T158864 now so it is not missed.",
+      "parentUuid": "ce3c5b53_5df3c1e3",
+      "revId": "9fc6efd1ffd69bcc6fd68353489ea9f57390fb6d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_5de981e0",
         "filename": "repo/includes/ChangeOp/Deserialization/SiteLinkChangeOpSerializationValidator.php",
         "patchSetId": 7
@@ -77,6 +95,30 @@
       "writtenOn": "2017-02-23T12:00:04Z",
       "side": 1,
       "message": "\u0026 not needed",
+      "range": {
+        "startLine": 30,
+        "startChar": 84,
+        "endLine": 30,
+        "endChar": 85
+      },
+      "revId": "9fc6efd1ffd69bcc6fd68353489ea9f57390fb6d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_df301ee8",
+        "filename": "repo/includes/ChangeOp/Deserialization/SiteLinkChangeOpSerializationValidator.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-23T16:08:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3c5b53_5de981e0",
       "range": {
         "startLine": 30,
         "startChar": 84,
