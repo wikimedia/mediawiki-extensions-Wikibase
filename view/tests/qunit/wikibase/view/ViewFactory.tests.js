@@ -29,7 +29,8 @@
 			messageProvider || { getMessage: 'I am a getter' },
 			parserStore,
 			userLanguages || [],
-			vocabularyLookupApiUrl
+			vocabularyLookupApiUrl,
+			'http://commons-api.url/'
 		);
 	}
 
