@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_2c1d6378",
+        "filename": "docs/change-propagation.wiki",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-24T10:21:13Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be saying simply \"item\" and \"property\", without the \"wikibase-\" prefix?\nGiven the sentence above it would make more sense, plus \"wikibase-item\" and \"wikibase-property\" are no longer used as entity type names in other places, as far as I know.",
+      "revId": "c8523becb4d08231fbdcf886118888b12816fbdb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
