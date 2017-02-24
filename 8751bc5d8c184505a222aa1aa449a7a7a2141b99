@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_725d8049",
+        "filename": "lib/tests/phpunit/Formatters/InterWikiLinkWikitextFormatterTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-24T16:35:11Z",
+      "side": 1,
+      "message": "In my opinion this is a bit overengeneered. I would find a trivial assertStartsWith( \u0027[//base.url/100%25wiki/Namespace:Title \u0027, $link ) more readable.",
+      "range": {
+        "startLine": 70,
+        "startChar": 17,
+        "endLine": 70,
+        "endChar": 51
+      },
+      "revId": "8751bc5d8c184505a222aa1aa449a7a7a2141b99",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_52395cee",
+        "filename": "lib/tests/phpunit/Formatters/InterWikiLinkWikitextFormatterTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-24T16:35:11Z",
+      "side": 1,
+      "message": "substr( …, 0, -1 )",
+      "range": {
+        "startLine": 98,
+        "startChar": 10,
+        "endLine": 98,
+        "endChar": 49
+      },
+      "revId": "8751bc5d8c184505a222aa1aa449a7a7a2141b99",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
