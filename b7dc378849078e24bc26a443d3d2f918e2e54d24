@@ -45,6 +45,30 @@
       "revId": "b7dc378849078e24bc26a443d3d2f918e2e54d24",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_ac9ad373",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/ItemChangeOpDeserializerTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-24T08:18:06Z",
+      "side": 1,
+      "message": "\u003e It also doesn\u0027t test return value of `createEntityChangeOp` which\n \u003e is, as I see it, what should be tested but not calls to the\n \u003e factory.\n\nSo we\u0027ve been talking about this with Jakob and decided to take such shortcuts. As with other ChangeOpDeserializers, we don\u0027t want to test what exact ChangeOp instance this one here returns but we more what changes those ChangeOps actually have on the entity once applied.\nSo having and item in each test, and applying different kind of change requests on it would be the best we could do in those tests, we thought. But then we thought there are different combinations being tested in per-field ChangeOp class tests, similar ones in per-field ChangeOpDeserializer tests, and then tests of API\\EditEntity test even more variants and combinations. Therefore we were a bit lazy and thought it might be fine to take a shortcut and just check that right thing on the factory is called and tests for single bits give a guarantee all works as supposed.\n\nA very arguable argumentation, I know. And also the more I think of it, the more problematic this approach seems. We cannot really assume particular factory calls result in this or that ChangeOp. Also, unit tests of the factory do not test the actual effect of change ops (which I think is OK). That means those test here do not really verify what we want. Also, if we decided to change how Item\u0027s deserializer works internally (ie. decided to inject single deserializers not the factory) the whole suite test would be of no value. Given all that, I am sorry to say that but I tend to think we should have tests here as done for per-field deserializers: have a pre-configured, get a change op from the serialized change request, apply it on item, and then verify relevant parts of the item has changed as expected. What do you think Jakob?\n\nAlso, I second opinion it would be better to have a test method per test case. This is what I initially was doing for PropertyChangeOpDeserializer but then wrapped it in a single test with a test case provider to be consistent. Generally I think pulling too many things in provider methods makes tests less clear and more entangled, although it this case it seemed more or less fine.",
+      "parentUuid": "ce3c5b53_1a81b4fd",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 2
+      },
+      "revId": "b7dc378849078e24bc26a443d3d2f918e2e54d24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
