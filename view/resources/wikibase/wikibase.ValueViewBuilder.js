@@ -23,15 +23,20 @@
 		language,
 		messageProvider,
 		contentLanguages,
-		vocabularyLookupApiUrl
+		vocabularyLookupApiUrl,
+		commonsApiUrl
 	) {
+		if (!commonsApiUrl) {
+			throw new Error('No commonsApiUrl');
+		}
 		this._baseOptions = {
 			expertStore: expertStore,
 			parserStore: parserStore,
 			language: language,
 			messageProvider: messageProvider,
 			contentLanguages: contentLanguages,
-			vocabularyLookupApiUrl: vocabularyLookupApiUrl || null
+			vocabularyLookupApiUrl: vocabularyLookupApiUrl || null,
+			commonsApiUrl: commonsApiUrl
 		};
 		this._formatterFactory = formatterFactory;
 	};
