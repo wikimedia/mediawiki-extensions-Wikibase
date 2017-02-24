@@ -29,7 +29,7 @@
 			$input.commonssuggester( {
 				namespace: 'Data',
 				contentModel: 'Map.JsonConfig',
-				apiUrl: 'https://commons.wikimedia.org/w/api.php'
+				apiUrl: this._options.commonsApiUrl
 			} );
 
 			// Using the inputautoexpand plugin, the position of the dropdown needs to be updated

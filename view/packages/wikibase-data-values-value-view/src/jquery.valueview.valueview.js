@@ -187,7 +187,8 @@ $.widget( 'valueview.valueview', PARENT, {
 		autoStartEditing: false,
 		parseDelay: 300,
 		messageProvider: null,
-		contentLanguages: null
+		contentLanguages: null,
+        commonsApiUrl: 'https://commons.wikimedia.org/w/api.php'
 	},
 
 	/**
@@ -558,6 +559,7 @@ $.widget( 'valueview.valueview', PARENT, {
 					language: this.options.language,
 					vocabularyLookupApiUrl: this.options.vocabularyLookupApiUrl || null,
 					contentLanguages: this.options.contentLanguages,
+					commonsApiUrl: this.options.commonsApiUrl,
 					messageProvider: this.options.messageProvider
 				}
 			);
