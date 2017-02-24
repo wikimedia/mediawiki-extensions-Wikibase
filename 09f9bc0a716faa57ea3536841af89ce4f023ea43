@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_e7cd5435",
+        "filename": "repo/maintenance/searchEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-24T13:00:33Z",
+      "side": 1,
+      "message": "\"defaults to 5\".",
+      "range": {
+        "startLine": 31,
+        "startChar": 65,
+        "endLine": 31,
+        "endChar": 66
+      },
+      "revId": "09f9bc0a716faa57ea3536841af89ce4f023ea43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_6753846f",
+        "filename": "repo/maintenance/searchEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-24T13:00:33Z",
+      "side": 1,
+      "message": "I find this \"options\" option very suspicious. Why JSON? What \"test\"?\n\nMy minimal edit request is to give it a much more specific name, not just \"options\".",
+      "range": {
+        "startLine": 39,
+        "startChar": 36,
+        "endLine": 39,
+        "endChar": 46
+      },
+      "revId": "09f9bc0a716faa57ea3536841af89ce4f023ea43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_07d158d0",
+        "filename": "repo/maintenance/searchEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-24T13:00:33Z",
+      "side": 1,
+      "message": "No default for this one?",
+      "range": {
+        "startLine": 89,
+        "startChar": 22,
+        "endLine": 89,
+        "endChar": 30
+      },
+      "revId": "09f9bc0a716faa57ea3536841af89ce4f023ea43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_47c76015",
+        "filename": "repo/maintenance/searchEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-24T13:00:33Z",
+      "side": 1,
+      "message": "string",
+      "range": {
+        "startLine": 119,
+        "startChar": 4,
+        "endLine": 119,
+        "endChar": 18
+      },
+      "revId": "09f9bc0a716faa57ea3536841af89ce4f023ea43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
