@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_32d5b847",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseEntityLibrary.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-24T14:49:30Z",
+      "side": 1,
+      "message": "\"addStatementUsage\" would be more appropriate, because this only adds certain information, ever.",
+      "range": {
+        "startLine": 125,
+        "startChar": 17,
+        "endLine": 125,
+        "endChar": 23
+      },
+      "revId": "218dd10395ee31770ba53bd21ab01ab344c581a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_b2e2282d",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 19
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-24T14:49:30Z",
+      "side": 1,
+      "message": "Just say that you track this, not how exactly (\"to DB if propertyExists has changed or entry for entity and property did not exist\")",
+      "revId": "218dd10395ee31770ba53bd21ab01ab344c581a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_d2dd6c74",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 19
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-02-24T14:49:30Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "218dd10395ee31770ba53bd21ab01ab344c581a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
