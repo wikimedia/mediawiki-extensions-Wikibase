@@ -118,6 +118,7 @@ use Wikibase\Repo\Notifications\HookChangeTransmitter;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\Store\ForbiddenDeserializer;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
@@ -1303,7 +1304,7 @@ class WikibaseRepo {
 		return new EntityContentDataCodec(
 			$this->getEntityIdParser(),
 			$this->getEntitySerializer(),
-			$this->getInternalFormatEntityDeserializer(),
+			new ForbiddenDeserializer(),
 			$this->settings->getSetting( 'maxSerializedEntitySize' ) * 1024
 		);
 	}
