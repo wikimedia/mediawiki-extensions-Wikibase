@@ -8,6 +8,7 @@ var SELF = util.inherit(
 	function( toolbarFactory, entityChangersFactory ) { // Actually there are more parmeters see ViewFactory.js
 		this._toolbarFactory = toolbarFactory;
 		this._entityChangersFactory = entityChangersFactory;
+		this._commonsApiUrl = arguments[14];
 		PARENT.apply( this, Array.prototype.slice.call( arguments, 2 ) ); // Forward other parameters to parent constructor
 	}
 );
