@@ -27,7 +27,8 @@
 		options: {
 			ajax: $.ajax,
 			namespace: null,
-			contentModel: null
+			contentModel: null,
+			apiUrl: null
 		},
 
 		/**
@@ -54,7 +55,7 @@
 				var deferred = $.Deferred();
 
 				self.options.ajax( {
-					url: 'https://commons.wikimedia.org/w/api.php',
+					url: self.options.apiUrl,
 					dataType: 'jsonp',
 					data: {
 						action: 'query',
