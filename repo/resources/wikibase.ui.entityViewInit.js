@@ -103,7 +103,8 @@
 				},
 				parserStore,
 				userLanguages,
-				repoApiUrl
+				repoApiUrl,
+				mw.config.get( 'wbGeoShapeStorageApiEndpoint' )
 			],
 			startEditingCallback = function() {
 				return $.Deferred().resolve().promise();

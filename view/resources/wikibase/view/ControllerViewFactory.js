@@ -5,10 +5,43 @@ var PARENT = wikibase.view.ViewFactory;
 
 var SELF = util.inherit(
 	PARENT,
-	function( toolbarFactory, entityChangersFactory ) { // Actually there are more parmeters see ViewFactory.js
+    function (
+		toolbarFactory,
+		entityChangersFactory,
+		structureEditorFactory,
+		contentLanguages,
+		dataTypeStore,
+		entityIdHtmlFormatter,
+		entityIdPlainFormatter,
+		entityStore,
+		expertStore,
+		formatterFactory,
+		messageProvider,
+		parserStore,
+		userLanguages,
+		vocabularyLookupApiUrl,
+		commonsApiUrl
+	) {
 		this._toolbarFactory = toolbarFactory;
 		this._entityChangersFactory = entityChangersFactory;
-		PARENT.apply( this, Array.prototype.slice.call( arguments, 2 ) ); // Forward other parameters to parent constructor
+		PARENT.apply(
+			this,
+			[
+                structureEditorFactory,
+                contentLanguages,
+                dataTypeStore,
+                entityIdHtmlFormatter,
+                entityIdPlainFormatter,
+                entityStore,
+                expertStore,
+                formatterFactory,
+                messageProvider,
+                parserStore,
+                userLanguages,
+                vocabularyLookupApiUrl,
+				commonsApiUrl
+            ]
+		);
 	}
 );
 
