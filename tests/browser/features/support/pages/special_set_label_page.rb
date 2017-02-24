@@ -12,5 +12,5 @@ class SpecialSetLabelPage
 
   page_url URL.repo_url('Special:SetLabel')
 
-  button(:set_label_button, css: 'div.mw-htmlform-submit#wb-setlabel-submit button.oo-ui-buttonElement-button')
+  button(:set_label_button, css: '#wb-setlabel-submit .oo-ui-buttonElement-button')
 end
