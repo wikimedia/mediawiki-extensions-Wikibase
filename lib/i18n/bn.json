@@ -7,7 +7,8 @@
 			"Leemon2010",
 			"Aftabuzzaman",
 			"TMg",
-			"আজিজ"
+			"আজিজ",
+			"Elias Ahmmad"
 		]
 	},
 	"specialpages-group-wikibase": "উইকিবেজ",
@@ -62,6 +63,7 @@
 	"datatypes-type-wikibase-item": "আইটেম",
 	"datatypes-type-wikibase-property": "বৈশিষ্ট্য",
 	"datatypes-type-commonsMedia": "কমন্স মিডিয়া ফাইল",
+	"datatypes-type-geo-shape": "ভৌগোলিক আকৃতি",
 	"datatypes-type-external-id": "বহিঃস্থ শনাক্তকারক",
 	"version-wikibase": "উইকিবেজ",
 	"wikibase-time-precision-Gannum": "$1 বিলিয়ন বছর",

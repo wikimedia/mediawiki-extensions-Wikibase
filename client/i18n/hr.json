@@ -13,12 +13,12 @@
 	"wikibase-after-page-move-queued": "[$1 Stavka na Wikidati] povezana s ovom stranicom uskoro će biti automatski ažurirana.",
 	"wikibase-after-page-delete": "Trebali biste izbrisati i poveznicu na ovu stranicu na pripadajućoj stavci [$1 {{WBREPONAME}}].",
 	"wikibase-after-page-delete-queued": "[$1 Stavka na Wikidati] povezana s ovom stranicom uskoro će biti automatski ažurirana.",
-	"wikibase-comment-update": "{{WBREPONAME}} predmet se promijenio",
+	"wikibase-comment-update": "stavka se promijenila ({{WBREPONAME}})",
 	"wikibase-comment-sitelink-add": "Dodana jezična poveznica: $1",
 	"wikibase-comment-sitelink-change": "Jezična poveznica je promjenjena iz $1 u $2",
 	"wikibase-comment-sitelink-remove": "Uklonjena jezična poveznica: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|promjena|promjene|promjena}}",
-	"wikibase-dataitem": "{{WBREPONAME}} stavka",
+	"wikibase-dataitem": "stavka ({{WBREPONAME}})",
 	"wikibase-editlinks": "Uredi međuwikije",
 	"wikibase-editlinkstitle": "Uredi poveznice na druge jezike",
 	"wikibase-addlinkstitle": "Dodaj poveznice na druge jezike",
@@ -41,7 +41,7 @@
 	"wikibase-rc-hide-wikidata-show": "prikaži",
 	"wikibase-rc-show-wikidata-pref": "Prikaži promjene projekta {{WBREPONAME}} na popisu nedavnih promjena",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} uređivanje",
+	"wikibase-rc-wikibase-edit-title": "uređivanje ({{WBREPONAME}})",
 	"wikibase-replicationnote": "Molimo Vas, vodite računa da može proći nekoliko minuta dok izmjene ne budu vidljive na svim wikijima.",
 	"wikibase-watchlist-show-changes-pref": "Prikaži {{WBREPONAME}} promjene na mom popisu praćenja",
 	"unconnectedpages": "Stranice koje nisu povezane sa stavkama",
@@ -55,5 +55,6 @@
 	"wikibase-pageinfo-entity-id-none": "ništa",
 	"wikibase-otherprojects": "Na drugim projektima",
 	"wikibase-otherprojects-beta-message": "Drugi projekti na bočnoj traci",
-	"wikibase-otherprojects-beta-description": "Dodaje odlomak \"{{int:wikibase-otherprojects}}\" na bočnoj traci s poveznicama na ostale Wikimedijine projekte na osnovi podataka s projekta {{WBREPONAME}}."
+	"wikibase-otherprojects-beta-description": "Dodaje odlomak \"{{int:wikibase-otherprojects}}\" na bočnoj traci s poveznicama na ostale Wikimedijine projekte na osnovi podataka s projekta {{WBREPONAME}}.",
+	"unresolved-property-category": "Stranice s nerazjašnjenim stavkama na wikipodatcima"
 }

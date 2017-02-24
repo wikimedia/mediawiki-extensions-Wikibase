@@ -77,6 +77,7 @@
 	"wikibase-entityusage-submit": "문서 보기",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} 항목 ID",
 	"wikibase-pageinfo-entity-id-none": "없음",
+	"wikibase-pageinfo-entity-usage": "이 문서에 사용된 {{WBREPONAME}} 항목들",
 	"wikibase-pageinfo-entity-usage-S": "사이트링크",
 	"wikibase-pageinfo-entity-usage-L": "레이블: $1",
 	"wikibase-pageinfo-entity-usage-T": "제목",

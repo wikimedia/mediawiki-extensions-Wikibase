@@ -85,6 +85,7 @@
 	"datatypes-type-wikibase-item": "عنصر",
 	"datatypes-type-wikibase-property": "خاصية",
 	"datatypes-type-commonsMedia": "ملف وسائط من كومنز",
+	"datatypes-type-geo-shape": "شكل جغرافي",
 	"datatypes-type-external-id": "معرف خارجي",
 	"version-wikibase": "قاعدة ويكي",
 	"wikibase-time-precision-Gannum": "$1 مليار سنة بعد الميلاد",
