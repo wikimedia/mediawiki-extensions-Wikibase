@@ -616,7 +616,8 @@
 			this._userLanguages && this._userLanguages[0],
 			this._messageProvider,
 			this._contentLanguages,
-			this._vocabularyLookupApiUrl
+			this._vocabularyLookupApiUrl,
+			this._commonsApiUrl
 		);
 	};
 
