@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_21232ca8",
+        "filename": "repo/includes/Specials/SpecialModifyEntity.php",
+        "patchSetId": 42
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2017-02-24T00:14:50Z",
+      "side": 1,
+      "message": "I see what you did in f861af50a5b463573982f0f561365ab1c2851524. A lot nicer!",
+      "parentUuid": "ce3c5b53_d854b5cb",
+      "revId": "73207c2d38b91ab2e5195032655d745845de23d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_5f22ce51",
         "filename": "repo/includes/Specials/SpecialModifyTerm.php",
         "patchSetId": 42
@@ -380,6 +398,24 @@
       "side": 1,
       "message": "I would rather suggest not to test presence of id attributes at all. They are irrelevant for backend part, so why test them? Also, as I understood, they managed by OOUI, so if we test that label\u0027s \"for\" has the same value as input\u0027s id we test that OOUI is working properly, but I guess it should be OOUI\u0027s problem and tested there. \nHere we can safely assume that it\u0027s working correctly until proven otherwise.\n\nTest with labels is ok for me for now.",
       "parentUuid": "ce3c5b53_18345da6",
+      "revId": "73207c2d38b91ab2e5195032655d745845de23d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_5e5ded48",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialSetSiteLinkTest.php",
+        "patchSetId": 42
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2017-02-24T00:14:50Z",
+      "side": 1,
+      "message": "Testing \"for\" would help ensuring that the input element is the label element\u0027s labeled control for accessibility purposes\nhttps://www.w3.org/TR/html5/forms.html#the-label-element\nhttps://html.spec.whatwg.org/multipage/forms.html#the-label-element\nbut you\u0027re right in assuming that OOUI tests should be better equipped at catching failures.\n\nI felt guilty of making tests less robust but then you gave me hope :)",
+      "parentUuid": "ce3c5b53_58f665c3",
       "revId": "73207c2d38b91ab2e5195032655d745845de23d4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
