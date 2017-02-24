@@ -54,6 +54,16 @@ return call_user_func( function() {
 			}
 		],
 
+		'mw.config.values.wbGeoShapeStorageApiEndpoint' => $moduleTemplate + [
+			'class' => MediaWikiConfigModule::class,
+			'getconfigvalueprovider' => function () {
+				return WikibaseRepo::getDefaultInstance()->getSettingsValueProvider(
+					'wbGeoShapeStorageApiEndpoint',
+					'geoShapeStorageApiEndpoint'
+				);
+			},
+		],
+
 		'wikibase.dataTypeStore' => $moduleTemplate + array(
 			'scripts' => array(
 				'dataTypes/wikibase.dataTypeStore.js',
@@ -76,6 +86,7 @@ return call_user_func( function() {
 				'mediawiki.user',
 				'mw.config.values.wbEntityTypes',
 				'mw.config.values.wbRepo',
+				'mw.config.values.wbGeoShapeStorageApiEndpoint',
 				'jquery.wikibase.wbtooltip',
 				'jquery.cookie',
 				'wikibase',

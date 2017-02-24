@@ -84,6 +84,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikibase\Repo\Modules\SettingsValueProvider;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
@@ -1829,6 +1830,10 @@ class WikibaseRepo {
 
 	public function getEntityTypesConfigValueProvider() {
 		return new EntityTypesConfigValueProvider( $this->entityTypeDefinitions );
+	}
+
+	public function getSettingsValueProvider( $jsSetting, $phpSetting ) {
+		return new SettingsValueProvider( $this->getSettings(), $jsSetting, $phpSetting );
 	}
 
 	/**
