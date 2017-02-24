@@ -70,7 +70,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 		return new EntityAccessor(
 			new ItemIdParser(),
 			$entityLookup ?: new MockRepository(),
-			$usageAccumulator ? $usageAccumulator : new HashUsageAccumulator(),
+			$usageAccumulator ?: new HashUsageAccumulator(),
 			$entitySerializer,
 			$propertyDataTypeLookup,
 			$fallbackChain,

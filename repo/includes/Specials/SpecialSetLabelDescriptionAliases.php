@@ -184,7 +184,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		} else {
 			$intro = $this->msg( 'wikibase-setlabeldescriptionaliases-intro' )->parse();
 			$fieldId = 'wikibase-setlabeldescriptionaliases-language';
-			$languageCode = $this->languageCode ? : $this->getLanguage()->getCode();
+			$languageCode = $this->languageCode ?: $this->getLanguage()->getCode();
 
 			$formDescriptor = $this->getFormElements( $entity );
 			$formDescriptor['language'] = array(

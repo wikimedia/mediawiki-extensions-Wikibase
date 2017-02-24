@@ -186,7 +186,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			'cssclass' => 'wb-input',
 			'id' => 'wb-modifyterm-value',
 			'type' => 'text',
-			'default' => $this->getRequest()->getVal( 'value' ) ? $this->getRequest()->getVal( 'value' ) : $this->value,
+			'default' => $this->getRequest()->getVal( 'value' ) ?: $this->value,
 			'nodata' => true
 		);
 
