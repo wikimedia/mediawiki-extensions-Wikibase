@@ -50,12 +50,14 @@
 		messageProvider,
 		parserStore,
 		userLanguages,
-		vocabularyLookupApiUrl
+		vocabularyLookupApiUrl,
+		commonsApiUrl
 	) {
 		if ( ( !structureEditorFactory || !structureEditorFactory.getAdder )
 			|| ( !messageProvider || !messageProvider.getMessage )
 			|| !$.isArray( userLanguages )
-			|| ( vocabularyLookupApiUrl && typeof vocabularyLookupApiUrl !== 'string' )
+			|| ( vocabularyLookupApiUrl && typeof vocabularyLookupApiUrl !== 'string'
+			|| !commonsApiUrl )
 		) {
 			throw new Error( 'Required parameter(s) not specified properly' );
 		}
@@ -74,6 +76,7 @@
 		this._userLanguages = userLanguages;
 		this._vocabularyLookupApiUrl = vocabularyLookupApiUrl || null;
 		this._eventSingletonManager = new $.util.EventSingletonManager();
+		this._commonsApiUrl = commonsApiUrl;
 	};
 
 	/**
@@ -153,6 +156,12 @@
 	 * @private
 	 */
 	SELF.prototype._vocabularyLookupApiUrl = null;
+
+	/**
+	 * @property {string}
+	 * @private
+	 */
+	SELF.prototype._commonsApiUrl = null;
 
 	/**
 	 * Construct a suitable view for the given entity on the given DOM element
@@ -616,7 +625,8 @@
 			this._userLanguages && this._userLanguages[0],
 			this._messageProvider,
 			this._contentLanguages,
-			this._vocabularyLookupApiUrl
+			this._vocabularyLookupApiUrl,
+			this._commonsApiUrl
 		);
 	};
 
