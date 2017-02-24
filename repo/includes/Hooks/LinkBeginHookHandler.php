@@ -171,10 +171,11 @@ class LinkBeginHookHandler {
 		$out = $context->getOutput();
 		$outTitle = $out->getTitle();
 
-		$targetIsForeignEntityPage = $this->isForeignEntityPage( $target );
+		$foreignEntityId = $this->parseForeignEntityId( $target );
+		$isLocal = !$foreignEntityId;
 
-		if ( !$targetIsForeignEntityPage &&
-			!$this->entityNamespaceLookup->isEntityNamespace( $target->getNamespace() )
+		if ( $isLocal
+			&& !$this->entityNamespaceLookup->isEntityNamespace( $target->getNamespace() )
 		) {
 			return;
 		}
@@ -204,7 +205,7 @@ class LinkBeginHookHandler {
 			return;
 		}
 
-		if ( !$targetIsForeignEntityPage && !$target->exists() ) {
+		if ( $isLocal && !$target->exists() ) {
 			// The link points to a non-existing item.
 			return;
 		}
@@ -215,7 +216,7 @@ class LinkBeginHookHandler {
 			return;
 		}
 
-		$entityId = $this->getEntityIdFromTarget( $target );
+		$entityId = $foreignEntityId ?: $this->entityIdLookup->getEntityIdForTitle( $target );
 
 		if ( !$entityId ) {
 			return;
@@ -252,51 +253,30 @@ class LinkBeginHookHandler {
 	/**
 	 * @param LinkTarget $target
 	 *
-	 * @return bool
+	 * @return EntityId|null
 	 */
-	private function isForeignEntityPage( LinkTarget $target ) {
+	private function parseForeignEntityId( LinkTarget $target ) {
 		$interwiki = $target->getInterwiki();
-		if ( $interwiki === '' ) {
-			return false;
+
+		if ( $interwiki === '' || !$this->interwikiLookup->isValidInterwiki( $interwiki ) ) {
+			return null;
 		}
 
-		if ( !$this->interwikiLookup->isValidInterwiki( $interwiki ) ) {
-			return false;
-		}
+		// This encodes knowledge from EntityContentFactory::getTitleForId
+		list( , $idPart ) = explode( 'Special:EntityPage/', $target->getText() );
 
-		return $this->startsWith( $target->getText(), 'Special:EntityPage/' );
-	}
-
-	/**
-	 * @param string $haystack
-	 * @param string $needle
-	 *
-	 * @return bool
-	 */
-	private function startsWith( $haystack, $needle ) {
-		return strncmp( $haystack, $needle, strlen( $needle ) ) === 0;
-	}
-
-	/**
-	 * @param Title $target
-	 *
-	 * @return null|EntityId
-	 */
-	private function getEntityIdFromTarget( Title $target ) {
-		if ( $this->isForeignEntityPage( $target ) ) {
-			$idPart = substr( $target->getText(), strlen( 'Special:EntityPage/' ) );
-			// FIXME: This assumes repository name is equal to interwiki. This assumption might become invalid
+		if ( $idPart ) {
 			try {
+				// FIXME: This assumes repository name is equal to interwiki. This assumption might
+				// become invalid
 				return $this->entityIdParser->parse(
-					EntityId::joinSerialization( [ $target->getInterwiki(), '', $idPart ] )
+					EntityId::joinSerialization( [ $interwiki, '', $idPart ] )
 				);
 			} catch ( EntityIdParsingException $ex ) {
 			}
-			return null;
-
 		}
 
-		return $this->entityIdLookup->getEntityIdForTitle( $target );
+		return null;
 	}
 
 	/**
