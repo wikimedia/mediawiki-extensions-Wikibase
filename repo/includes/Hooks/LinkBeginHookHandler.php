@@ -171,8 +171,8 @@ class LinkBeginHookHandler {
 		$out = $context->getOutput();
 		$outTitle = $out->getTitle();
 
-		$targetIsForeignEntityPage = $this->isForeignEntityPage( $target );
-		$isLocal = !$targetIsForeignEntityPage;
+		$foreignEntityId = $this->parseForeignEntityId( $target );
+		$isLocal = !$foreignEntityId;
 
 		if ( $isLocal
 			&& !$this->entityNamespaceLookup->isEntityNamespace( $target->getNamespace() )
@@ -215,7 +215,7 @@ class LinkBeginHookHandler {
 			return;
 		}
 
-		$entityId = $this->getEntityIdFromTarget( $target );
+		$entityId = $foreignEntityId ?: $this->entityIdLookup->getEntityIdForTitle( $target );
 
 		if ( !$entityId ) {
 			return;
@@ -252,37 +252,19 @@ class LinkBeginHookHandler {
 	/**
 	 * @param LinkTarget $target
 	 *
-	 * @return bool
+	 * @return EntityId|null
 	 */
-	private function isForeignEntityPage( LinkTarget $target ) {
+	private function parseForeignEntityId( LinkTarget $target ) {
 		$interwiki = $target->getInterwiki();
 
 		if ( $interwiki === '' || !$this->interwikiLookup->isValidInterwiki( $interwiki ) ) {
-			return false;
+			return null;
 		}
 
-		return $this->startsWith( $target->getText(), 'Special:EntityPage/' );
-	}
-
-	/**
-	 * @param string $haystack
-	 * @param string $needle
-	 *
-	 * @return bool
-	 */
-	private function startsWith( $haystack, $needle ) {
-		return strncmp( $haystack, $needle, strlen( $needle ) ) === 0;
-	}
-
-	/**
-	 * @param Title $target
-	 *
-	 * @return null|EntityId
-	 */
-	private function getEntityIdFromTarget( Title $target ) {
-		if ( $this->isForeignEntityPage( $target ) ) {
-			$interwiki = $target->getInterwiki();
-			$idPart = substr( $target->getText(), strlen( 'Special:EntityPage/' ) );
+		// FIXME: This encodes knowledge from EntityContentFactory::getTitleForId
+		$parts = explode( 'Special:EntityPage/', $target->getText(), 2 );
+		if ( isset( $parts[1] ) && $parts[0] === '' ) {
+			$idPart = $parts[1];
 
 			try {
 				// FIXME: This assumes repository name is equal to interwiki. This assumption might
@@ -292,11 +274,9 @@ class LinkBeginHookHandler {
 				);
 			} catch ( EntityIdParsingException $ex ) {
 			}
-
-			return null;
 		}
 
-		return $this->entityIdLookup->getEntityIdForTitle( $target );
+		return null;
 	}
 
 	/**
