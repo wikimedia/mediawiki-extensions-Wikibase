@@ -18,7 +18,8 @@
 			"Gi25ni",
 			"一個正常人",
 			"Kanashimi",
-			"Alexsh"
+			"Alexsh",
+			"烈羽"
 		]
 	},
 	"wikibase-desc": "結構化資料儲存庫",
@@ -126,6 +127,7 @@
 	"wikibase-validator-label-with-description-conflict": "項目 $3 已有標籤 \"$1\" 關聯語言代碼 $2，使用相同的描述內容。",
 	"wikibase-validator-label-no-entityid": "此標籤必須不是一個有效的實體 ID。",
 	"wikibase-validator-no-such-media": "文件\"$1\"在[https://commons.wikimedia.org/ Wikimedia Commons]中不存在",
+	"wikibase-validator-page-not-exists": "頁面 \"$1\" 不存在。",
 	"wikibase-itemlink-id-wrapper": "（$1）",
 	"wikibase-wikibaserepopage-not-itemid": "''$1'' 不是一個有效的項目 ID。",
 	"wikibase-wikibaserepopage-invalid-langcode": "語言代碼 \"$1\" 不明。 請使用系統能夠辨識的語言代碼，如 \"en\"。",

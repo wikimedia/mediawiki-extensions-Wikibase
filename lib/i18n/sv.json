@@ -76,6 +76,7 @@
 	"datatypes-type-wikibase-item": "Objekt",
 	"datatypes-type-wikibase-property": "Egenskap",
 	"datatypes-type-commonsMedia": "Mediefil från Commons",
+	"datatypes-type-geo-shape": "Geografisk form",
 	"datatypes-type-external-id": "Extern identifikator",
 	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-Gannum": "$1 {{PLURAL:$1|miljard|miljarder}} år e.v.t.",
