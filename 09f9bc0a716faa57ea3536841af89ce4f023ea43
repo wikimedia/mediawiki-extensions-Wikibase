@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_95b90b2c",
+        "filename": "repo/maintenance/searchEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-02-25T00:42:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3c5b53_e7cd5435",
+      "range": {
+        "startLine": 31,
+        "startChar": 65,
+        "endLine": 31,
+        "endChar": 66
+      },
+      "revId": "09f9bc0a716faa57ea3536841af89ce4f023ea43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_6753846f",
         "filename": "repo/maintenance/searchEntities.php",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2017-02-24T13:00:33Z",
       "side": 1,
       "message": "I find this \"options\" option very suspicious. Why JSON? What \"test\"?\n\nMy minimal edit request is to give it a much more specific name, not just \"options\".",
+      "range": {
+        "startLine": 39,
+        "startChar": 36,
+        "endLine": 39,
+        "endChar": 46
+      },
+      "revId": "09f9bc0a716faa57ea3536841af89ce4f023ea43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_d560f3ce",
+        "filename": "repo/maintenance/searchEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-02-25T00:42:40Z",
+      "side": 1,
+      "message": "JSON because it\u0027s easiest way to represent data as string. These options are meant for experiments - such as relforge - where we could run same search query with different globals settings. These globals are encoded into options array.",
+      "parentUuid": "ce3c5b53_6753846f",
       "range": {
         "startLine": 39,
         "startChar": 36,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_15adfbe6",
+        "filename": "repo/maintenance/searchEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-02-25T00:42:40Z",
+      "side": 1,
+      "message": "nope, this is a mandatory option. There\u0027s not really a default for search language.",
+      "parentUuid": "ce3c5b53_07d158d0",
+      "range": {
+        "startLine": 89,
+        "startChar": 22,
+        "endLine": 89,
+        "endChar": 30
+      },
+      "revId": "09f9bc0a716faa57ea3536841af89ce4f023ea43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_47c76015",
         "filename": "repo/maintenance/searchEntities.php",
         "patchSetId": 2
@@ -82,6 +154,30 @@
       "writtenOn": "2017-02-24T13:00:33Z",
       "side": 1,
       "message": "string",
+      "range": {
+        "startLine": 119,
+        "startChar": 4,
+        "endLine": 119,
+        "endChar": 18
+      },
+      "revId": "09f9bc0a716faa57ea3536841af89ce4f023ea43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_3587df67",
+        "filename": "repo/maintenance/searchEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-02-25T00:42:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3c5b53_47c76015",
       "range": {
         "startLine": 119,
         "startChar": 4,
