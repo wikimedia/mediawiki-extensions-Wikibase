@@ -11,6 +11,7 @@
 	"wikibase-sitelinks-sitename-columnheading": "Yezh",
 	"wikibase-tooltip-error-details": "Munudoù",
 	"wikibase-validator-no-validators": "Difennet",
+	"datatypes-type-geo-shape": "Gwiskad douaroniel",
 	"wikibase-entity-summary-wbsetlabel-add": "Skridennad [$2] ouzhpennet",
 	"wikibase-entity-summary-wbsetlabel-set": "Skridennad [$2] kemmet",
 	"wikibase-entity-summary-wbsetaliases-add-remove": "Ouzhpennet ha dilamet {{PLURAL:$1|un alias|aliasoù}} [$2]",
