@@ -99,7 +99,7 @@ class SimpleEntityTermsView implements EntityTermsView {
 					$mainLanguageCode,
 					$labels,
 					$descriptions,
-					$aliasGroups ?: new AliasGroupList()
+					$aliasGroups
 				)
 			),
 			'',
@@ -150,7 +150,7 @@ class SimpleEntityTermsView implements EntityTermsView {
 	 *  title and header section. Not necessarily identical to the interface language.
 	 * @param TermList $labels
 	 * @param TermList $descriptions
-	 * @param AliasGroupList $aliasGroups
+	 * @param AliasGroupList|null $aliasGroups
 	 *
 	 * @return string[]
 	 */
@@ -158,7 +158,7 @@ class SimpleEntityTermsView implements EntityTermsView {
 		$mainLanguageCode,
 		TermList $labels,
 		TermList $descriptions,
-		AliasGroupList $aliasGroups
+		AliasGroupList $aliasGroups = null
 	) {
 		$allLanguages = [ $mainLanguageCode ];
 
@@ -168,8 +168,10 @@ class SimpleEntityTermsView implements EntityTermsView {
 		$descriptionLanguages = array_keys( $descriptions->toTextArray() );
 		$allLanguages = array_merge( $allLanguages, $descriptionLanguages );
 
-		$aliasLanguages = array_keys( $aliasGroups->toTextArray() );
-		$allLanguages = array_merge( $allLanguages, $aliasLanguages );
+		if ( $aliasGroups ) {
+			$aliasLanguages = array_keys( $aliasGroups->toTextArray() );
+			$allLanguages = array_merge( $allLanguages, $aliasLanguages );
+		}
 
 		$allLanguages = array_unique( $allLanguages );
 		return $allLanguages;

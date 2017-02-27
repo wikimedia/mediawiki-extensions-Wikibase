@@ -6,7 +6,6 @@ use PHPUnit_Framework_TestCase;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Repo\ParserOutput\EntityViewPlaceholderExpander;
 use Wikibase\View\DummyLocalizedTextProvider;
@@ -31,12 +30,10 @@ class EntityViewPlaceholderExpanderTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @param User $user
 	 * @param Item $item
-	 * @param ItemId $itemId
-	 * @param AliasesProvider|null $aliasesProvider
 	 *
 	 * @return EntityViewPlaceholderExpander
 	 */
-	private function newExpander( User $user, Item $item, ItemId $itemId, AliasesProvider $aliasesProvider = null ) {
+	private function newExpander( User $user, Item $item ) {
 		$templateFactory = TemplateFactory::getDefaultInstance();
 
 		$termsLanguages = [ 'de', 'en', 'ru' ];
@@ -54,23 +51,14 @@ class EntityViewPlaceholderExpanderTest extends PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function provideEntityAndAliases() {
+	public function provideEntity() {
 		$item = new Item( new ItemId( 'Q23' ) );
-
 		$item->setLabel( 'en', 'Moskow' );
 		$item->setLabel( 'de', 'Moskau' );
-
 		$item->setDescription( 'de', 'Hauptstadt Russlands' );
 
 		return [
-			[
-				$item,
-				$item
-			],
-			[
-				$item,
-				null
-			]
+			[ $item ],
 		];
 	}
 
@@ -94,20 +82,20 @@ class EntityViewPlaceholderExpanderTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider provideEntityAndAliases
+	 * @dataProvider provideEntity
 	 */
-	public function testGetHtmlForPlaceholder( Item $item, AliasesProvider $aliasesProvider = null ) {
-		$expander = $this->newExpander( $this->newUser(), $item, $item->getId(), $aliasesProvider );
+	public function testGetHtmlForPlaceholder( Item $item ) {
+		$expander = $this->newExpander( $this->newUser(), $item );
 
 		$html = $expander->getHtmlForPlaceholder( 'termbox' );
 		$this->assertInternalType( 'string', $html );
 	}
 
 	/**
-	 * @dataProvider provideEntityAndAliases
+	 * @dataProvider provideEntity
 	 */
-	public function testRenderTermBox( Item $item, AliasesProvider $aliasesProvider = null ) {
-		$expander = $this->newExpander( $this->newUser(), $item, $item->getId(), $aliasesProvider );
+	public function testRenderTermBox( Item $item ) {
+		$expander = $this->newExpander( $this->newUser(), $item );
 
 		// According to the mock objects, this should generate a term box for
 		// 'de' and 'ru', since 'en' is already covered by the interface language.
