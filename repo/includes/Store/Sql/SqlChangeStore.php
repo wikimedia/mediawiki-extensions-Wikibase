@@ -83,7 +83,7 @@ class SqlChangeStore implements ChangeStore {
 		$objectId = $change->hasField( 'object_id' ) ? $change->getObjectId() : '';
 		$revisionId = $change->hasField( 'revision_id' ) ? $change->getField( 'revision_id' ) : '0';
 		$userId = $change->hasField( 'user_id' ) ? $change->getField( 'user_id' ) : '0';
-		$info = $change->getField( 'info' );
+		$info = $change->getInfo();
 
 		return array(
 			'change_type' => $type,
