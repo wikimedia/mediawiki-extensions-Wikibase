@@ -48,7 +48,7 @@ class HTMLContentLanguageFieldTest extends \MediaWikiTestCase {
 
 		$field = $this->createField( $params );
 
-		self::assertEquals( 'some-language', $field->getDefault() );
+		$this->assertSame( 'some-language', $field->getDefault() );
 	}
 
 	public function testUsesDefaultValue_WhenDefaultIsDefined() {
@@ -58,7 +58,7 @@ class HTMLContentLanguageFieldTest extends \MediaWikiTestCase {
 
 		$field = $this->createField( $params );
 
-		self::assertEquals( 'default-language', $field->getDefault() );
+		$this->assertSame( 'default-language', $field->getDefault() );
 	}
 
 	private function createNewContextSourceWithLanguage( $langCode ) {
