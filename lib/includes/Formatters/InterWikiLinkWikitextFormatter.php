@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Formatters;
 
 use DataValues\StringValue;
 use InvalidArgumentException;
-use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 
 /**
@@ -15,15 +14,13 @@ use ValueFormatters\ValueFormatter;
  */
 class InterWikiLinkWikitextFormatter implements ValueFormatter {
 
-	const OPTION_BASE_URL = 'baseUrl';
-
 	/**
 	 * @var string
 	 */
 	private $baseUrl;
 
 	/**
-	 * @param string $baseUrl
+	 * @param string $baseUrl Base URL, used to build links to the geo shape storage.
 	 */
 	public function __construct( $baseUrl ) {
 		$this->baseUrl = $baseUrl;
@@ -45,14 +42,19 @@ class InterWikiLinkWikitextFormatter implements ValueFormatter {
 		}
 
 		return '[' .
-			wfUrlencode( $this->baseUrl . $this->getPathFromTitle( $value->getValue() ) ) .
+			wfUrlencode( $this->baseUrl . $this->encodeSpaces( $value->getValue() ) ) .
 			' ' .
 			wfEscapeWikiText( $value->getValue() ) .
 			']';
 	}
 
-	private function getPathFromTitle( $title ) {
-		return str_replace( ' ', '_', $title );
+	/**
+	 * @param string $pageName
+	 *
+	 * @return string
+	 */
+	private function encodeSpaces( $pageName ) {
+		return str_replace( ' ', '_', $pageName );
 	}
 
 }

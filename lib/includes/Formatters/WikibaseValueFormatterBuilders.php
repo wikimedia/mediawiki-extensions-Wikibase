@@ -56,6 +56,11 @@ class WikibaseValueFormatterBuilders {
 	private $repoItemUriParser;
 
 	/**
+	 * @var string
+	 */
+	private $geoShapeStorageFrontendUrl;
+
+	/**
 	 * @var EntityTitleLookup|null
 	 */
 	private $entityTitleLookup;
@@ -71,11 +76,6 @@ class WikibaseValueFormatterBuilders {
 		'http://www.wikidata.org/entity/Q199',
 		'http://qudt.org/vocab/unit#Unitless',
 	);
-
-	/**
-	 * @var string
-	 */
-	private $geoShapeStorageUrl;
 
 	/**
 	 * @param Language $defaultLanguage
@@ -98,11 +98,12 @@ class WikibaseValueFormatterBuilders {
 			$geoShapeStorageFrontendUrl,
 			'$geoShapeStorageFrontendUrl'
 		);
+
 		$this->defaultLanguage = $defaultLanguage;
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->repoItemUriParser = $repoItemUriParser;
-		$this->geoShapeStorageUrl = $geoShapeStorageFrontendUrl;
+		$this->geoShapeStorageFrontendUrl = $geoShapeStorageFrontendUrl;
 		$this->entityTitleLookup = $entityTitleLookup;
 	}
 
@@ -256,9 +257,9 @@ class WikibaseValueFormatterBuilders {
 	public function newGeoShapeFormatter( $format, FormatterOptions $options ) {
 		switch ( $this->getBaseFormat( $format ) ) {
 			case SnakFormatter::FORMAT_HTML:
-				return new InterWikiLinkHtmlFormatter( $this->geoShapeStorageUrl );
+				return new InterWikiLinkHtmlFormatter( $this->geoShapeStorageFrontendUrl );
 			case SnakFormatter::FORMAT_WIKI:
-				return new InterWikiLinkWikitextFormatter( $this->geoShapeStorageUrl );
+				return new InterWikiLinkWikitextFormatter( $this->geoShapeStorageFrontendUrl );
 			default:
 				return $this->newStringFormatter( $format, $options );
 		}
