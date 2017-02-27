@@ -2,6 +2,261 @@
   "comments": [
     {
       "key": {
+        "uuid": "ce3c5b53_9eacc385",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-27T19:25:26Z",
+      "side": 1,
+      "message": "This is repeated below, perhaps factor it out of this block.",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_5ec71b4a",
+        "filename": "repo/config/ElasticSearchRescoreFunctions.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-27T19:25:26Z",
+      "side": 1,
+      "message": "This emulates what we currently have. It\u0027s not really what we want. In-degree is probably a much better weight.",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_7ec21f3b",
+        "filename": "repo/config/EntityPrefixSearchProfiles.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-27T19:25:26Z",
+      "side": 1,
+      "message": "odd indent",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_3ebc97b0",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-27T19:25:26Z",
+      "side": 1,
+      "message": "please leave a blank line above.",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_1ec19333",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-27T19:25:26Z",
+      "side": 1,
+      "message": "odd indent",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_9ee363d4",
+        "filename": "repo/includes/Api/EntitySearchHelper.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-27T19:25:26Z",
+      "side": 1,
+      "message": "Using the old class name for the new interface, and renaming the actual implementation to something else, is usually easier.",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_fe038f77",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-27T19:25:26Z",
+      "side": 1,
+      "message": "Injecting a service into a value object is icky. But I see it\u0027s temporary, so ok. Maybe it could also be optional?",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_de000b70",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-27T19:25:26Z",
+      "side": 1,
+      "message": "Yes, please",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_5e44fbbc",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-27T19:25:26Z",
+      "side": 1,
+      "message": "please declare the type - and the structure of the array",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_7e3f7f20",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-27T19:25:26Z",
+      "side": 1,
+      "message": "please say something about the structure, well known keys, etc",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_1e4e73dd",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-27T19:25:26Z",
+      "side": 1,
+      "message": "Please check $settings and $contentModelMap using Assert::parameterElementType",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_3e49f7d3",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-27T19:25:26Z",
+      "side": 1,
+      "message": "This is a developer warning, invisible in production. We probably want to be more noisy about a configuration error. Mistyping your profile name and getting no errors, but results that are not what you expect, is confusing.",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_7e269f12",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-27T19:25:26Z",
+      "side": 1,
+      "message": "This is a pretty hard failure - raw Exception is typically not caught. Where does $entityType come from? Should we really cause a status 500 if it\u0027s wrong?\n\nA more specific exception would be better. But really - why fail? It\u0027s only used for a filter; searching for an unknown entity type should just yield no results.",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_5e72bb11",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-27T19:25:26Z",
+      "side": 1,
+      "message": "why?",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_fe670f47",
+        "filename": "repo/includes/Search/Elastic/WikibasePrefixSearcher.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-27T19:25:26Z",
+      "side": 1,
+      "message": "This should at least go to the error log!",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_36c88525",
         "filename": "repo/tests/phpunit/data/entitySearch/search_de-ch_strict.expected",
         "patchSetId": 35
@@ -48,6 +303,40 @@
       "writtenOn": "2017-02-15T21:47:59Z",
       "side": 1,
       "message": "should the strict query still fallback for highlights?",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_be618734",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/EntitySearchElasticTest.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-27T19:25:26Z",
+      "side": 1,
+      "message": "Needs to be skipped if Cirrus is not available",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_5e595b8f",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/EntitySearchElasticTest.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-27T19:25:26Z",
+      "side": 1,
+      "message": "Do we want to force this, or just skip the test?",
       "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
