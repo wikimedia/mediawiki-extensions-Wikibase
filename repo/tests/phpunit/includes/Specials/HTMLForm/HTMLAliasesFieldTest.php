@@ -46,7 +46,7 @@ class HTMLAliasesFieldTest extends \MediaWikiTestCase {
 			]
 		);
 
-		self::assertEquals( 'text', $field->mParams['type'] );
+		$this->assertSame( 'text', $field->mParams['type'] );
 	}
 
 	public function testConvertsToArrayAndRemovesExtraSpaces_WhenFilters() {
@@ -54,7 +54,7 @@ class HTMLAliasesFieldTest extends \MediaWikiTestCase {
 
 		$result = $field->filter( ' a | b ', [] );
 
-		self::assertEquals( [ 'a', 'b' ], $result );
+		$this->assertSame( [ 'a', 'b' ], $result );
 	}
 
 	public function testRemovesEmptyValues_WhenFilters() {
@@ -62,7 +62,7 @@ class HTMLAliasesFieldTest extends \MediaWikiTestCase {
 
 		$result = $field->filter( 'a| |b', [] );
 
-		self::assertEquals( [ 'a', 'b' ], $result );
+		$this->assertSame( [ 'a', 'b' ], $result );
 	}
 
 	public function testValidationFailsWithGenericMessage_WhenRequiredAndEmptyArrayGivenAsValue() {
@@ -71,7 +71,7 @@ class HTMLAliasesFieldTest extends \MediaWikiTestCase {
 		/** @var \Message $failureMessage */
 		$failureMessage = $field->validate( [], [] );
 
-		self::assertEquals( 'htmlform-required', $failureMessage->getKey() );
+		$this->assertSame( 'htmlform-required', $failureMessage->getKey() );
 	}
 
 	public function testValidationPasses_WhenRequiredAndNonEmptyArrayGivenAsValue() {
@@ -79,7 +79,7 @@ class HTMLAliasesFieldTest extends \MediaWikiTestCase {
 
 		$result = $field->validate( [ 'a' ], [] );
 
-		self::assertTrue( $result );
+		$this->assertTrue( $result );
 	}
 
 	public function testValidationPasses_WhenNotRequiredAndEmptyArrayGivenAsValue() {
@@ -87,7 +87,7 @@ class HTMLAliasesFieldTest extends \MediaWikiTestCase {
 
 		$result = $field->validate( [], [] );
 
-		self::assertTrue( $result );
+		$this->assertTrue( $result );
 	}
 
 	/**

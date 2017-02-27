@@ -49,7 +49,6 @@ class InterWikiLinkHtmlFormatterTest extends \MediaWikiTestCase {
 	 * @dataProvider linkFormatProvider
 	 */
 	public function testFormat( StringValue $value, $pattern ) {
-
 		$options = new FormatterOptions();
 		$options->setOption( InterWikiLinkHtmlFormatter::OPTION_BASE_URL, 'http://base.url/' );
 		$formatter = new InterWikiLinkHtmlFormatter( $options );

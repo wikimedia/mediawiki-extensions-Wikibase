@@ -20,7 +20,7 @@ class InterWikiLinkWikitextFormatterTest extends \PHPUnit_Framework_TestCase {
 
 		$link = $formatter->format( new StringValue( 'Namespace:Title' ) );
 
-		self::assertEquals(
+		$this->assertSame(
 			'[//site.org/wiki/Namespace:Title Namespace:Title]',
 			$link
 		);
@@ -31,22 +31,21 @@ class InterWikiLinkWikitextFormatterTest extends \PHPUnit_Framework_TestCase {
 
 		$link = $formatter->format( new StringValue( 'Namespace:Title with spaces' ) );
 
-		$url = $this->extractUrlFromExternalWikitextLink( $link );
-		self::assertEquals(
-			'//site.org/wiki/Namespace:Title_with_spaces',
-			$url
+		$this->assertSame(
+			'[//site.org/wiki/Namespace:Title_with_spaces Namespace:Title with spaces]',
+			$link
 		);
 	}
 
-	public function testTitleDoubleSingleQuotes_HtmlencodesThemInTitleWhenFormats() {
+	public function testTitleDoubleSingleQuotes_EncodesThemWhenFormats() {
 		$formatter = $this->createFormatter( '//base.url/' );
 
 		$link = $formatter->format( new StringValue( "Namespace:Title ''with'' quotes" ) );
 
-		$text = $this->extractLinkTextFromExternalWikitextLink( $link );
-		self::assertEquals(
-			'Namespace:Title &#39;&#39;with&#39;&#39; quotes',
-			$text
+		$this->assertSame(
+			'[//base.url/Namespace:Title_%27%27with%27%27_quotes '
+				. 'Namespace:Title &#39;&#39;with&#39;&#39; quotes]',
+			$link
 		);
 	}
 
@@ -55,10 +54,9 @@ class InterWikiLinkWikitextFormatterTest extends \PHPUnit_Framework_TestCase {
 
 		$link = $formatter->format( new StringValue( 'Namespace:Title' ) );
 
-		$text = $this->extractUrlFromExternalWikitextLink( $link );
-		self::assertEquals(
-			'//base.url/some+wiki/Namespace:Title',
-			$text
+		$this->assertStringStartsWith(
+			'[//base.url/some+wiki/',
+			$link
 		);
 	}
 
@@ -67,49 +65,22 @@ class InterWikiLinkWikitextFormatterTest extends \PHPUnit_Framework_TestCase {
 
 		$link = $formatter->format( new StringValue( 'Namespace:Title' ) );
 
-		$text = $this->extractUrlFromExternalWikitextLink( $link );
-		self::assertEquals(
-			'//base.url/100%25wiki/Namespace:Title',
-			$text
+		$this->assertStringStartsWith(
+			'[//base.url/100%25wiki/',
+			$link
 		);
 	}
 
 	/**
+	 * @param string $baseUrl
+	 *
 	 * @return InterWikiLinkWikitextFormatter
 	 */
 	private function createFormatter( $baseUrl ) {
 		$options = new FormatterOptions();
-		$options->setOption(
-			InterWikiLinkWikitextFormatter::OPTION_BASE_URL,
-			$baseUrl
-		);
-		$formatter = new InterWikiLinkWikitextFormatter( $options );
+		$options->setOption( InterWikiLinkWikitextFormatter::OPTION_BASE_URL, $baseUrl );
 
-		return $formatter;
-	}
-
-	/**
-	 * @param $link
-	 *
-	 * @return string
-	 */
-	private function extractLinkTextFromExternalWikitextLink( $link ) {
-		list( , $text ) = explode( ' ', $link, 2 );
-		$text = substr( $text, 0, strlen( $text ) - 1 );
-
-		return $text;
-	}
-
-	/**
-	 * @param $link
-	 *
-	 * @return string
-	 */
-	private function extractUrlFromExternalWikitextLink( $link ) {
-		list( $url ) = explode( ' ', $link, 2 );
-		$url = substr( $url, 1 );
-
-		return $url;
+		return new InterWikiLinkWikitextFormatter( $options );
 	}
 
 }

@@ -21,7 +21,7 @@ class NullChangeOpTest extends \PHPUnit_Framework_TestCase {
 
 		$result = $nullChangeOp->validate( $entityDocument );
 
-		self::assertTrue( $result->isValid() );
+		$this->assertTrue( $result->isValid() );
 	}
 
 	public function testDoesNotCallAnyMethodOnEntity_WhenApplied() {
