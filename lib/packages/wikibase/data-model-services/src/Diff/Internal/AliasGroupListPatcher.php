@@ -7,7 +7,6 @@ use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use Diff\Patcher\MapPatcher;
 use Diff\Patcher\PatcherException;
 use Wikibase\DataModel\Term\AliasGroupList;
 
@@ -37,7 +36,7 @@ class AliasGroupListPatcher {
 	}
 
 	/**
-	 * @see MapPatcher
+	 * @see Diff\Patcher\MapPatcher
 	 *
 	 * @param AliasGroupList $groups
 	 * @param string $lang

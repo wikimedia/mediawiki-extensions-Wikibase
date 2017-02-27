@@ -90,9 +90,9 @@ class PropertyDiffer implements EntityDifferStrategy {
 	private function toDiffArray( Property $property ) {
 		$array = [];
 
-		$array['aliases'] = $property->getFingerprint()->getAliasGroups()->toTextArray();
-		$array['label'] = $property->getFingerprint()->getLabels()->toTextArray();
-		$array['description'] = $property->getFingerprint()->getDescriptions()->toTextArray();
+		$array['aliases'] = $property->getAliasGroups()->toTextArray();
+		$array['label'] = $property->getLabels()->toTextArray();
+		$array['description'] = $property->getDescriptions()->toTextArray();
 
 		return $array;
 	}
