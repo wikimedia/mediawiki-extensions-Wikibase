@@ -11,6 +11,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\Interactors\TermSearchResult;
+use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\TermIndexEntry;
 
 /**
@@ -41,16 +42,23 @@ class EntitySearchHelper {
 	 */
 	private $entityLookup;
 
+	/**
+	 * @var RepositoryDefinitions
+	 */
+	private $repositoryDefinitions;
+
 	public function __construct(
 		EntityLookup $entityLookup,
 		EntityIdParser $idParser,
 		ConfigurableTermSearchInteractor $termSearchInteractor,
-		LabelDescriptionLookup $labelDescriptionLookup
+		LabelDescriptionLookup $labelDescriptionLookup,
+		RepositoryDefinitions $repositoryDefinitions
 	) {
 		$this->entityLookup = $entityLookup;
 		$this->idParser = $idParser;
 		$this->termSearchInteractor = $termSearchInteractor;
 		$this->labelDescriptionLookup = $labelDescriptionLookup;
+		$this->repositoryDefinitions = $repositoryDefinitions;
 	}
 
 	/**
@@ -67,9 +75,9 @@ class EntitySearchHelper {
 	public function getRankedSearchResults( $text, $languageCode, $entityType, $limit, $strictLanguage ) {
 		$allSearchResults = [];
 
-		// If $text is the ID of an existing item, include it in the result.
-		$entityId = $this->getExactMatchForEntityId( $text, $entityType );
-		if ( $entityId !== null ) {
+		// If $text is the ID of an existing item (with repository prefix or without), include it in the result.
+		$entityIds = $this->getExactMatchesForEntityId( $text, $entityType );
+		foreach ( $entityIds as $entityId ) {
 			// This is nothing to do with terms, but make it look a normal result so everything is easier
 			$displayTerms = $this->getDisplayTerms( $entityId );
 			$allSearchResults[$entityId->getSerialization()] = new TermSearchResult(
@@ -113,38 +121,81 @@ class EntitySearchHelper {
 	}
 
 	/**
-	 * Gets exact match for the search term as an EntityId if it can be found.
+	 * Gets exact matches for the search term as an EntityId (possibly with some repository prefix) if it can be found.
+	 * If search term is a serialized entity id of the requested type, and multiple repositories provide
+	 * entities of the type, prefixes of each of repositories are added to the search term and those repositories
+	 * are searched for the result entity ID. If such concatenated entity IDs are found in several respective
+	 * repositories, this returns all relevant matches.
 	 *
 	 * @param string $term
 	 * @param string $entityType
 	 *
-	 * @return EntityId|null
+	 * @return EntityId[]
 	 */
-	private function getExactMatchForEntityId( $term, $entityType ) {
+	private function getExactMatchesForEntityId( $term, $entityType ) {
 		try {
 			$entityId = $this->idParser->parse( trim( $term ) );
 		} catch ( EntityIdParsingException $ex ) {
 			// Extract the last (ASCII-only) word. This covers URIs and input strings like "(Q42)".
 			if ( !preg_match( '/.*(\b\w{2,})/s', $term, $matches ) ) {
-				return null;
+				return [];
 			}
 
 			try {
 				$entityId = $this->idParser->parse( $matches[1] );
 			} catch ( EntityIdParsingException $ex ) {
-				return null;
+				return [];
 			}
 		}
 
 		if ( $entityId->getEntityType() !== $entityType ) {
-			return null;
+			return [];
 		}
 
-		if ( !$this->entityLookup->hasEntity( $entityId ) ) {
-			return null;
+		return $this->getMatchesForEntityId( $entityId );
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 *
+	 * @return EntityId[]
+	 */
+	private function getMatchesForEntityId( EntityId $entityId ) {
+		$entityIds = [];
+
+		if ( $this->entityLookup->hasEntity( $entityId ) ) {
+			$entityIds[] = $entityId;
 		}
 
-		return $entityId;
+		// Entity ID without repository prefix, let's try prepending known prefixes
+		$entityType = $entityId->getEntityType();
+		$unprefixedIdPart = $entityId->getLocalPart();
+		$entityTypeToRepositoryMapping = $this->repositoryDefinitions->getEntityTypeToRepositoryMapping();
+
+		if ( !array_key_exists( $entityType, $entityTypeToRepositoryMapping ) ) {
+			return $entityIds;
+		}
+
+		$repositoryPrefix = $entityTypeToRepositoryMapping[$entityType];
+		if ( $repositoryPrefix === $entityId->getRepositoryName() ) {
+			return $entityIds;
+		}
+
+		try {
+			$id = $this->idParser->parse( EntityId::joinSerialization( [
+				$repositoryPrefix,
+				'',
+				$unprefixedIdPart
+			] ) );
+		} catch ( EntityIdParsingException $ex ) {
+			return [];
+		}
+
+		if ( $this->entityLookup->hasEntity( $id ) ) {
+			$entityIds[] = $id;
+		}
+
+		return $entityIds;
 	}
 
 	/**

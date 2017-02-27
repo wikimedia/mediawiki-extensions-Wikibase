@@ -58,7 +58,8 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 				$repo->getTermLookup(),
 				$repo->getLanguageFallbackChainFactory()
 					->newFromLanguage( $this->getLanguage() )
-			)
+			),
+			$repo->getRepositoryDefinitions()
 		);
 
 		$this->setServices(
