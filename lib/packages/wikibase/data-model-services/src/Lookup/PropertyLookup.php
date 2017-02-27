@@ -16,8 +16,6 @@ interface PropertyLookup {
 	/**
 	 * @since 2.0
 	 *
-	 * Returns the Property of which the id is given.
-	 *
 	 * @param PropertyId $propertyId
 	 *
 	 * @return Property|null
