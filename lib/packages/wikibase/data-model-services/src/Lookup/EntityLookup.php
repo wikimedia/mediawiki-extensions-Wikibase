@@ -17,8 +17,6 @@ use Wikibase\DataModel\Entity\EntityId;
 interface EntityLookup {
 
 	/**
-	 * Returns the entity with the provided id.
-	 *
 	 * @note Implementations of this method may or may not resolve redirects.
 	 * Code that needs control over redirect resolution should use an
 	 * EntityRevisionLookup instead.
