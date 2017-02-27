@@ -112,7 +112,7 @@ class ChangeRow implements Change {
 	 *
 	 * @return array
 	 */
-	protected function getInfo( $cache = 'no' ) {
+	public function getInfo( $cache = 'no' ) {
 		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : [];
 
 		if ( $cache === 'cache' ) {

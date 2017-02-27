@@ -180,12 +180,9 @@ class RecentChangeFactory {
 
 		$changesForComment = [ $change ];
 
-		if ( $change->hasField( 'info' ) ) {
-			$info = $change->getField( 'info' );
-
-			if ( isset( $info['changes'] ) ) {
-				$changesForComment = $info['changes'];
-			}
+		$info = $change->getInfo();
+		if ( isset( $info['changes'] ) ) {
+			$changesForComment = $info['changes'];
 		}
 
 		return $this->getEditCommentMulti( $changesForComment, $target );
