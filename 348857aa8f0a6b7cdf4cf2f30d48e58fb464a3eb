@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_502f0a9c",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/EntityViewPlaceholderExpanderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-27T15:34:53Z",
+      "side": 1,
+      "message": "This class could be adjusted further I suppose.\n$aliasesProvider parameter is not really relevant of those few methods.\nLooks like it might have been behaviour for case of item with aliases, and item without aliases, so I believe it would be best to do some refactoring here in the follow up.",
+      "revId": "348857aa8f0a6b7cdf4cf2f30d48e58fb464a3eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_b048d68d",
+        "filename": "view/src/SimpleEntityTermsView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-27T15:34:53Z",
+      "side": 1,
+      "message": "This method could have been also kept the optional null value for this, couldn\u0027t it?",
+      "revId": "348857aa8f0a6b7cdf4cf2f30d48e58fb464a3eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_d019da8a",
+        "filename": "view/tests/phpunit/SimpleEntityTermsViewTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-27T15:34:53Z",
+      "side": 1,
+      "message": "Is this test now different than testGetHtml_isMarkedAsEmptyValue ?",
+      "revId": "348857aa8f0a6b7cdf4cf2f30d48e58fb464a3eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
