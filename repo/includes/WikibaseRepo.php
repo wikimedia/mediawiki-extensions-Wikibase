@@ -909,7 +909,12 @@ class WikibaseRepo {
 	 */
 	public function getSnakFormatterFactory() {
 		if ( $this->snakFormatterFactory === null ) {
-			$this->snakFormatterFactory = $this->newSnakFormatterFactory();
+			$this->snakFormatterFactory = new OutputFormatSnakFormatterFactory(
+				$this->dataTypeDefinitions->getSnakFormatterFactoryCallbacks(),
+				$this->getValueFormatterFactory(),
+				$this->getPropertyDataTypeLookup(),
+				$this->getDataTypeFactory()
+			);
 		}
 
 		return $this->snakFormatterFactory;
@@ -970,20 +975,6 @@ class WikibaseRepo {
 		//@todo: We currently use the local repo concept URI here. This should be configurable,
 		// to e.g. allow 3rd parties to use Wikidata as their vocabulary repo.
 		return $this->settings->getSetting( 'conceptBaseUri' );
-	}
-
-	/**
-	 * @return OutputFormatSnakFormatterFactory
-	 */
-	protected function newSnakFormatterFactory() {
-		$factory = new OutputFormatSnakFormatterFactory(
-			$this->dataTypeDefinitions->getSnakFormatterFactoryCallbacks(),
-			$this->getValueFormatterFactory(),
-			$this->getPropertyDataTypeLookup(),
-			$this->getDataTypeFactory()
-		);
-
-		return $factory;
 	}
 
 	/**
