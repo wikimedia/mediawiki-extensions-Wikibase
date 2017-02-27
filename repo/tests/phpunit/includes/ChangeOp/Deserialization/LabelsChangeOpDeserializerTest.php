@@ -3,14 +3,12 @@
 namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\Deserialization\LabelsChangeOpDeserializer;
 use Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator;
 use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
 use Wikibase\StringNormalizer;
-use Wikibase\Summary;
 
 /**
  * @covers Wikibase\Repo\ChangeOp\Deserialization\LabelsChangeOpDeserializer
@@ -19,7 +17,9 @@ use Wikibase\Summary;
  *
  * @license GPL-2.0+
  */
-class LabelsChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase {
+class LabelsChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase implements ChangeOpDeserializerTest {
+
+	use LabelsChangeOpDeserializationTest;
 
 	public function testGivenLabelsFieldNotAnArray_createEntityChangeOpThrowsError() {
 		ChangeOpDeserializationAssert::assertThrowsChangeOpDeserializationException(
@@ -54,61 +54,12 @@ class LabelsChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testGivenChangeRequestWithLabel_addsLabel() {
-		$item = $this->getItemWithoutEnLabel();
-		$label = 'foo';
-		$changeOp = $this->newLabelsChangeOpDeserializer( $this->getTermChangeOpValidator() )
-			->createEntityChangeOp( [ 'labels' => [ 'en' => [ 'language' => 'en', 'value' => $label ] ] ] );
-
-		$changeOp->apply( $item, new Summary() );
-		$this->assertSame( $label, $item->getLabels()->getByLanguage( 'en' )->getText() );
-	}
-
-	public function testGivenChangeRequestWithNewLabel_overridesExistingLabel() {
-		$item = $this->getItemWithEnLabel();
-		$newLabel = 'foo';
-		$changeOp = $this->newLabelsChangeOpDeserializer( $this->getTermChangeOpValidator() )
-			->createEntityChangeOp( [ 'labels' => [ 'en' => [ 'language' => 'en', 'value' => $newLabel ] ] ] );
-
-		$changeOp->apply( $item, new Summary() );
-		$this->assertSame( $newLabel, $item->getLabels()->getByLanguage( 'en' )->getText() );
-	}
-
-	public function testGivenChangeRequestWithRemove_removesLabel() {
-		$item = $this->getItemWithEnLabel();
-		$changeOp = $this->newLabelsChangeOpDeserializer( $this->getTermChangeOpValidator() )
-			->createEntityChangeOp( [ 'labels' => [ 'en' => [ 'language' => 'en', 'remove' => '' ] ] ] );
-
-		$changeOp->apply( $item, new Summary() );
-		$this->assertFalse( $item->getLabels()->hasTermForLanguage( 'en' ) );
-	}
-
-	public function testGivenChangeRequestWithEmptyLabel_removesLabel() {
-		$item = $this->getItemWithEnLabel();
-		$changeOp = $this->newLabelsChangeOpDeserializer( $this->getTermChangeOpValidator() )
-			->createEntityChangeOp( [ 'labels' => [ 'en' => [ 'language' => 'en', 'value' => '' ] ] ] );
-
-		$changeOp->apply( $item, new Summary() );
-		$this->assertFalse( $item->getLabels()->hasTermForLanguage( 'en' ) );
-	}
-
 	private function newLabelsChangeOpDeserializer( TermChangeOpSerializationValidator $validator ) {
 		return new LabelsChangeOpDeserializer(
 			$this->getFingerPrintChangeOpFactory(),
 			$this->getStringNormalizer(),
 			$validator
 		);
-	}
-
-	private function getItemWithoutEnLabel() {
-		return new Item();
-	}
-
-	private function getItemWithEnLabel() {
-		$item = new Item();
-		$item->setLabel( 'en', 'en-label' );
-
-		return $item;
 	}
 
 	private function getStringNormalizer() {
@@ -122,6 +73,10 @@ class LabelsChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 	private function getTermChangeOpValidator() {
 		return new TermChangeOpSerializationValidator( new StaticContentLanguages( [ 'en' ] ) );
+	}
+
+	public function getChangeOpDeserializer() {
+		return $this->newLabelsChangeOpDeserializer( $this->getTermChangeOpValidator() );
 	}
 
 }
