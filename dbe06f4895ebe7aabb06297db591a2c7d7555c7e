@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_703eceb6",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpSiteLinkTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-27T12:59:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3c5b53_9f67f621",
+      "revId": "dbe06f4895ebe7aabb06297db591a2c7d7555c7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_bf6c3a06",
         "filename": "repo/tests/phpunit/includes/ChangeOp/SiteLinkChangeOpFactoryTest.php",
         "patchSetId": 3
@@ -47,6 +65,24 @@
       "writtenOn": "2017-02-23T17:16:08Z",
       "side": 1,
       "message": "Maybe SiteLinkChangeOpFactory should have [] as default value?",
+      "revId": "dbe06f4895ebe7aabb06297db591a2c7d7555c7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_b053f619",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/SiteLinkChangeOpFactoryTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-27T12:59:40Z",
+      "side": 1,
+      "message": "It wouldn\u0027t hurt but I am not sure.\nAs this class is not really using the values from the array at the moment but only passes it to the ChangeOpSiteLink object, it would be OK I guess. But, as discussed in previous comments, we would rather like to move checks using the array to the factory, it would not be any more OK to have a default value IMO. Therefore I\u0027d not set the default value now.",
+      "parentUuid": "ce3c5b53_bf6c3a06",
       "revId": "dbe06f4895ebe7aabb06297db591a2c7d7555c7e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
