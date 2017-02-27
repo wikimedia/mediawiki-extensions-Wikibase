@@ -13,6 +13,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\Interactors\TermSearchResult;
+use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\TermIndexEntry;
 
@@ -30,6 +31,7 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 	const EXISTING_LOCAL_ITEM = 'Q111';
 	const FOREIGN_REPO_PREFIX = 'foreign';
 	const EXISTING_FOREIGN_ITEM = 'foreign:Q2';
+	const EXISTING_FOREIGN_ITEM_WITHOUT_REPOSITORY_PREFIX = 'Q2';
 	const DEFAULT_LANGUAGE = 'pt';
 	const DEFAULT_LABEL = 'ptLabel';
 	const DEFAULT_DESCRIPTION = 'ptDescription';
@@ -94,8 +96,16 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 		return $mock;
 	}
 
-	private function newEntitySearchHelper( ConfigurableTermSearchInteractor $searchInteractor ) {
+	private function getRepositoryDefinitions() {
+		return new RepositoryDefinitions( [
+			'' => [ 'database' => '', 'entity-types' => [], 'prefix-mapping' => [] ],
+		] );
+	}
 
+	private function newEntitySearchHelper(
+		ConfigurableTermSearchInteractor $searchInteractor,
+		RepositoryDefinitions $repositoryDefinitions
+	) {
 		$localEntityLookup = new InMemoryEntityLookup();
 		$localEntityLookup->addEntity( new Item( new ItemId( self::EXISTING_LOCAL_ITEM ) ) );
 
@@ -113,7 +123,8 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 			$entityLookup,
 			new ItemIdParser(),
 			$searchInteractor,
-			$this->getMockLabelDescriptionLookup()
+			$this->getMockLabelDescriptionLookup(),
+			$repositoryDefinitions
 		);
 	}
 
@@ -137,7 +148,7 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 				}
 			) );
 
-		$entitySearchHelper = $this->newEntitySearchHelper( $searchInteractor );
+		$entitySearchHelper = $this->newEntitySearchHelper( $searchInteractor, $this->getRepositoryDefinitions() );
 		$entitySearchHelper->getRankedSearchResults( 'Foo', 'de-ch', 'item', 10, $strictLanguage );
 	}
 
@@ -251,10 +262,45 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testGetRankedSearchResults( $search, $limit, array $interactorReturn, array $expected ) {
 		$searchInteractor = $this->getMockSearchInteractor( $search, 'en', 'item', $interactorReturn );
-		$entitySearchHelper = $this->newEntitySearchHelper( $searchInteractor );
+		$entitySearchHelper = $this->newEntitySearchHelper( $searchInteractor, $this->getRepositoryDefinitions() );
 
 		$results = $entitySearchHelper->getRankedSearchResults( $search, 'en', 'item', $limit, false );
 		$this->assertEquals( $expected, $results );
+	}
+
+	public function testGivenEntityIdWithoutRepositoryPrefix_entityIsFound() {
+		$expectedResults = [
+			self::EXISTING_FOREIGN_ITEM => new TermSearchResult(
+				new Term( 'qid', self::EXISTING_FOREIGN_ITEM ),
+				'entityId',
+				new ItemId( self::EXISTING_FOREIGN_ITEM ),
+				new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_LABEL ),
+				new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_DESCRIPTION )
+			)
+		];
+
+		$mockSearchInteractor = $this->getMock( ConfigurableTermSearchInteractor::class );
+		$mockSearchInteractor->method( 'searchForEntities' )
+			->will( $this->returnValue( [] ) );
+
+		$entitySearchHelper = $this->newEntitySearchHelper(
+			$mockSearchInteractor,
+			new RepositoryDefinitions( [
+				'' => [ 'database' => '', 'entity-types' => [], 'prefix-mapping' => [] ],
+				'foreign' => [ 'database' => 'foreignwiki', 'entity-types' => [ 'item' ], 'prefix-mapping' => [] ],
+			] )
+		);
+
+		$this->assertEquals(
+			$expectedResults,
+			$entitySearchHelper->getRankedSearchResults(
+				self::EXISTING_FOREIGN_ITEM_WITHOUT_REPOSITORY_PREFIX,
+				'en',
+				'item',
+				10,
+				false
+			)
+		);
 	}
 
 }
