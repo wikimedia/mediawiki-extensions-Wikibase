@@ -216,7 +216,8 @@ call_user_func( function() {
 					$repo->getTermLookup(),
 					$repo->getLanguageFallbackChainFactory()
 						->newFromLanguage( $repo->getUserLanguage() )
-				)
+				),
+				$repo->getRepositoryDefinitions()
 			);
 
 			return new Wikibase\Repo\Api\SearchEntities(
