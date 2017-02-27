@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sfic",
+			"Shyamal"
+		]
+	},
+	"valueview-expert-advancedadjustments": "उच्च नियंत्रण",
+	"valueview-expert-emptyvalue-empty": "खाली",
+	"valueview-expert-globecoordinateinput-precision": "सूक्ष्मता",
+	"valueview-expert-globecoordinateinput-nullprecision": "अविनिर्दिष्ट",
+	"valueview-expert-globecoordinateinput-customprecision": "विशेष ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "ग्रेगोरियन",
+	"valueview-expert-timevalue-calendar-julian": "जूलियन",
+	"valueview-expert-timeinput-precision": "सूक्ष्मता",
+	"valueview-expert-timeinput-calendar": "दिनदर्शिका",
+	"valueview-expertextender-calendarhint-gregorian": "(ग्रेगोरियन दिनदर्शिका)",
+	"valueview-expertextender-calendarhint-julian": "(जूलियन दिनदर्शिका)",
+	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr; ग्रेगोरियन में बदले",
+	"valueview-expertextender-calendarhint-switch-julian": "&rarr; जुलियन में बदले",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "भाषा (आवश्यक):",
+	"valueview-expertextender-unitsuggester-label": "मात्रक (निवार्य)",
+	"valueview-preview-label": "तरह दिखाई देगा"
+}
