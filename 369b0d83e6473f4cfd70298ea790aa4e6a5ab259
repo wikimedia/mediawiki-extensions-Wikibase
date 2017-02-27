@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_f3b8a876",
+        "filename": "lib/includes/Formatters/InterWikiLinkHtmlFormatter.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-27T18:10:40Z",
+      "side": 1,
+      "message": "Should explain what this is.",
+      "revId": "369b0d83e6473f4cfd70298ea790aa4e6a5ab259",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_93811ca7",
+        "filename": "lib/includes/Formatters/InterWikiLinkWikitextFormatter.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-27T18:10:40Z",
+      "side": 1,
+      "message": "This is not used any more, right?",
+      "revId": "369b0d83e6473f4cfd70298ea790aa4e6a5ab259",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_538b94c4",
+        "filename": "lib/includes/Formatters/InterWikiLinkWikitextFormatter.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-27T18:10:40Z",
+      "side": 1,
+      "message": "Should explain what this is.",
+      "revId": "369b0d83e6473f4cfd70298ea790aa4e6a5ab259",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_7386d8bf",
+        "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-27T18:10:40Z",
+      "side": 1,
+      "message": "Should move up, before $entityTitleLookup.",
+      "revId": "369b0d83e6473f4cfd70298ea790aa4e6a5ab259",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
