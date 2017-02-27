@@ -10,7 +10,6 @@ use Wikibase\Repo\ChangeOp\Deserialization\DescriptionsChangeOpDeserializer;
 use Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator;
 use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
 use Wikibase\StringNormalizer;
-use Wikibase\Summary;
 
 /**
  * @covers Wikibase\Repo\ChangeOp\Deserialization\DescriptionsChangeOpDeserializer
@@ -19,7 +18,9 @@ use Wikibase\Summary;
  *
  * @license GPL-2.0+
  */
-class DescriptionsChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase {
+class DescriptionsChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase implements ChangeOpDeserializerTest {
+
+	use DescriptionsChangeOpDeserializationTester;
 
 	public function testGivenDescriptionsFieldNotAnArray_createEntityChangeOpThrowsError() {
 		ChangeOpDeserializationAssert::assertThrowsChangeOpDeserializationException(
@@ -54,65 +55,12 @@ class DescriptionsChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testGivenChangeRequestWithDescription_addsDescription() {
-		$item = $this->getItemWithoutEnDescription();
-		$description = 'foo';
-		$changeOp = $this->newDescriptionsChangeOpDeserializer( $this->getTermChangeOpValidator() )
-			->createEntityChangeOp( [
-				'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => $description ] ]
-			] );
-
-		$changeOp->apply( $item, new Summary() );
-		$this->assertSame( $description, $item->getDescriptions()->getByLanguage( 'en' )->getText() );
-	}
-
-	public function testGivenChangeRequestWithNewDescription_overridesExistingDescription() {
-		$item = $this->getItemWithEnDescription();
-		$newDescription = 'foo';
-		$changeOp = $this->newDescriptionsChangeOpDeserializer( $this->getTermChangeOpValidator() )
-			->createEntityChangeOp( [
-				'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => $newDescription ] ]
-			] );
-
-		$changeOp->apply( $item, new Summary() );
-		$this->assertSame( $newDescription, $item->getDescriptions()->getByLanguage( 'en' )->getText() );
-	}
-
-	public function testGivenChangeRequestWithRemove_removesDescription() {
-		$item = $this->getItemWithEnDescription();
-		$changeOp = $this->newDescriptionsChangeOpDeserializer( $this->getTermChangeOpValidator() )
-			->createEntityChangeOp( [ 'descriptions' => [ 'en' => [ 'language' => 'en', 'remove' => '' ] ] ] );
-
-		$changeOp->apply( $item, new Summary() );
-		$this->assertFalse( $item->getDescriptions()->hasTermForLanguage( 'en' ) );
-	}
-
-	public function testGivenChangeRequestWithEmptyValue_removesDescription() {
-		$item = $this->getItemWithEnDescription();
-		$changeOp = $this->newDescriptionsChangeOpDeserializer( $this->getTermChangeOpValidator() )
-			->createEntityChangeOp( [ 'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => '' ] ] ] );
-
-		$changeOp->apply( $item, new Summary() );
-		$this->assertFalse( $item->getDescriptions()->hasTermForLanguage( 'en' ) );
-	}
-
 	private function newDescriptionsChangeOpDeserializer( TermChangeOpSerializationValidator $validator ) {
 		return new DescriptionsChangeOpDeserializer(
 			$this->getFingerPrintChangeOpFactory(),
 			$this->getStringNormalizer(),
 			$validator
 		);
-	}
-
-	private function getItemWithoutEnDescription() {
-		return new Item();
-	}
-
-	private function getItemWithEnDescription() {
-		$item = new Item();
-		$item->setDescription( 'en', 'en-description' );
-
-		return $item;
 	}
 
 	private function getStringNormalizer() {
@@ -126,6 +74,14 @@ class DescriptionsChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 	private function getTermChangeOpValidator() {
 		return new TermChangeOpSerializationValidator( new StaticContentLanguages( [ 'en' ] ) );
+	}
+
+	public function getChangeOpDeserializer() {
+		return $this->newDescriptionsChangeOpDeserializer( $this->getTermChangeOpValidator() );
+	}
+
+	public function getEntity() {
+		return new Item();
 	}
 
 }
