@@ -37,7 +37,7 @@ class HTMLItemReferenceFieldTest extends \PHPUnit_Framework_TestCase {
 	public function testSetsTypeToText_WhenCreated() {
 		$field = $this->createField();
 
-		self::assertEquals( 'text', $field->mParams['type'] );
+		$this->assertSame( 'text', $field->mParams['type'] );
 	}
 
 	public function testValidationPasses_WhenEmptyStringGivenAndFieldIsNotRequired() {
@@ -45,7 +45,7 @@ class HTMLItemReferenceFieldTest extends \PHPUnit_Framework_TestCase {
 
 		$result = $field->validate( '', [] );
 
-		self::assertTrue( $result );
+		$this->assertTrue( $result );
 	}
 
 	public function testValidationFailsWithInvalidFormatMessage_WhenEnteredTextDoesNotMatchItemIdFormat() {
@@ -54,7 +54,7 @@ class HTMLItemReferenceFieldTest extends \PHPUnit_Framework_TestCase {
 		/** @var \Message $failureMessage */
 		$failureMessage = $field->validate( 'x', [] );
 
-		self::assertEquals( 'wikibase-item-reference-edit-invalid-format', $failureMessage->getKey() );
+		$this->assertSame( 'wikibase-item-reference-edit-invalid-format', $failureMessage->getKey() );
 	}
 
 	public function testValidationFailsWithNonexistentItemMessage_WhenItemHavingEnteredIdDoesNotExist() {
@@ -63,7 +63,7 @@ class HTMLItemReferenceFieldTest extends \PHPUnit_Framework_TestCase {
 		/** @var \Message $failureMessage */
 		$failureMessage = $field->validate( 'Q2', [] );
 
-		self::assertEquals( 'wikibase-item-reference-edit-nonexistent-item', $failureMessage->getKey() );
+		$this->assertSame( 'wikibase-item-reference-edit-nonexistent-item', $failureMessage->getKey() );
 	}
 
 	public function testValidationCallbackExecuted_WhenReferencedItemExists() {
@@ -79,7 +79,7 @@ class HTMLItemReferenceFieldTest extends \PHPUnit_Framework_TestCase {
 		/** @var \Message $failureMessage */
 		$failureMessage = $field->validate( $existingItemId, [] );
 
-		self::assertEquals( 'some-message', $failureMessage->getKey() );
+		$this->assertSame( 'some-message', $failureMessage->getKey() );
 	}
 
 	/**
