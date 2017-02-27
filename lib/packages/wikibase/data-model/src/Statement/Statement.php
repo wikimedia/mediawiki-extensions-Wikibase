@@ -81,8 +81,6 @@ class Statement implements Hashable, Comparable, PropertyIdProvider {
 	}
 
 	/**
-	 * Returns the GUID of this statement.
-	 *
 	 * @since 0.2
 	 *
 	 * @return string|null

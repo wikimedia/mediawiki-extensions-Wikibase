@@ -358,8 +358,6 @@ abstract class HashArray extends ArrayObject implements Hashable, Comparable {
 	}
 
 	/**
-	 * Returns if the ArrayObject has no elements.
-	 *
 	 * @return bool
 	 */
 	public function isEmpty() {
