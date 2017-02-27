@@ -15,8 +15,6 @@ use Wikibase\DataModel\Entity\PropertyId;
 interface PropertyIdProvider {
 
 	/**
-	 * Returns the property id of this object.
-	 *
 	 * @since 1.1
 	 *
 	 * @return PropertyId
