@@ -21,14 +21,15 @@
 	},
 	"require": {
 		"php": ">=5.5.0",
-		"wikibase/data-model": "~6.3",
+		"wikibase/data-model": "~7.0|~6.3",
 		"data-values/data-values": "~0.1|~1.0",
 		"diff/diff": "~2.0|~1.0",
 		"wikimedia/assert": "~0.2.2"
 	},
 	"require-dev": {
 		"mediawiki/mediawiki-codesniffer": "~0.7",
-		"phpmd/phpmd": "~2.3"
+		"phpmd/phpmd": "~2.3",
+		"phpunit/phpunit": "~4.8"
 	},
 	"autoload": {
 		"psr-4": {
@@ -37,21 +38,21 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-master": "3.7.x-dev"
+			"dev-master": "3.8.x-dev"
 		}
 	},
 	"scripts": {
 		"test": [
-			"composer validate --no-interaction",
-			"phpunit --coverage-php /dev/null"
+			"@validate --no-interaction",
+			"vendor/bin/phpunit --coverage-php /dev/null"
 		],
 		"cs": [
-			"composer phpcs",
-			"composer phpmd"
+			"@phpcs",
+			"@phpmd"
 		],
 		"ci": [
-			"composer test",
-			"composer cs"
+			"@test",
+			"@cs"
 		],
 		"phpcs": [
 			"vendor/bin/phpcs src/* tests/* --standard=phpcs.xml --extensions=php -sp"
