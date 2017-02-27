@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_b3054015",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/EntityViewPlaceholderExpanderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-27T15:55:10Z",
+      "side": 1,
+      "message": "That\u0027s right. A lot here is unused now. I really wanted this patch to be as small as possible, that\u0027s why I did not piled up changes here.",
+      "parentUuid": "ce3c5b53_502f0a9c",
+      "revId": "348857aa8f0a6b7cdf4cf2f30d48e58fb464a3eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_b048d68d",
         "filename": "view/src/SimpleEntityTermsView.php",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_13266cb5",
+        "filename": "view/src/SimpleEntityTermsView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-27T15:55:10Z",
+      "side": 1,
+      "message": "Yes. I did this because I wanted to avoid having a nullable parameter all over the place. But I realized this is required: Having an empty list of aliases is different from null. Null will disable rendering one of the sub-templates.\n\nWill revert.",
+      "parentUuid": "ce3c5b53_b048d68d",
+      "revId": "348857aa8f0a6b7cdf4cf2f30d48e58fb464a3eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_d019da8a",
         "filename": "view/tests/phpunit/SimpleEntityTermsViewTest.php",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2017-02-27T15:34:53Z",
       "side": 1,
       "message": "Is this test now different than testGetHtml_isMarkedAsEmptyValue ?",
+      "revId": "348857aa8f0a6b7cdf4cf2f30d48e58fb464a3eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_73101854",
+        "filename": "view/tests/phpunit/SimpleEntityTermsViewTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-27T15:55:10Z",
+      "side": 1,
+      "message": "Indeed, it\u0027s the same now.",
+      "parentUuid": "ce3c5b53_d019da8a",
       "revId": "348857aa8f0a6b7cdf4cf2f30d48e58fb464a3eb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
