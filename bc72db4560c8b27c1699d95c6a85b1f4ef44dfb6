@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_3ea2573c",
+        "filename": "repo/includes/ChangeOp/ChangeOpSiteLink.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-27T19:37:06Z",
+      "side": 1,
+      "message": "This is odd - $allowedBadgeItemIds is only used for validation during construction, and then thrown away.\n\nPerhaps it would be better to leave this check to the caller.",
+      "revId": "bc72db4560c8b27c1699d95c6a85b1f4ef44dfb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_9eb28391",
+        "filename": "repo/includes/ChangeOp/ChangeOpSiteLink.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-27T19:37:06Z",
+      "side": 1,
+      "message": "Assert::parameterElementType( \u0027string\u0027, $allowedBadgeItemIds, \u0027$allowedBadgeItemIds\u0027 )",
+      "revId": "bc72db4560c8b27c1699d95c6a85b1f4ef44dfb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_7ea8df1d",
+        "filename": "repo/includes/ChangeOp/ChangeOpSiteLink.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-27T19:37:06Z",
+      "side": 1,
+      "message": "This is not validation applied when the change op is applied, it\u0027s a check used during construction. Maybe rename to avoid confusion.",
+      "revId": "bc72db4560c8b27c1699d95c6a85b1f4ef44dfb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_9e7123e0",
+        "filename": "repo/includes/ChangeOp/SiteLinkChangeOpFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-02-27T19:37:06Z",
+      "side": 1,
+      "message": "Perhaps $badges can be checked against $this-\u003ebadgeItemIdsc here, instead of inside the ChangeOp constructor.",
+      "revId": "bc72db4560c8b27c1699d95c6a85b1f4ef44dfb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
