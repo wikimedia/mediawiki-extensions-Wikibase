@@ -615,7 +615,31 @@ call_user_func( function() {
 			);
 		}
 	];
-	$wgAPIListModules['wbsearch'] = Wikibase\Repo\Api\QuerySearchEntities::class;
+	$wgAPIListModules['wbsearch'] = [
+		'class' => Wikibase\Repo\Api\QuerySearchEntities::class,
+		'factory' => function( ApiQuery $apiQuery, $moduleName ) {
+			$repo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+			$entitySearchHelper = new Wikibase\Repo\Api\EntitySearchHelper(
+				$repo->getEntityLookup(),
+				$repo->getEntityIdParser(),
+				$repo->newTermSearchInteractor( $apiQuery->getLanguage()->getCode() ),
+				new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
+					$repo->getTermLookup(),
+					$repo->getLanguageFallbackChainFactory()
+						->newFromLanguage( $apiQuery->getLanguage() )
+				)
+			);
+
+			return new Wikibase\Repo\Api\QuerySearchEntities(
+				$apiQuery,
+				$moduleName,
+				$entitySearchHelper,
+				$repo->getEntityTitleLookup(),
+				$repo->getTermsLanguages(),
+				$repo->getEnabledEntityTypes()
+			);
+		}
+	];
 	$wgAPIListModules['wbsubscribers'] = [
 		'class' => Wikibase\Repo\Api\ListSubscribers::class,
 		'factory' => function( ApiQuery $apiQuery, $moduleName ) {

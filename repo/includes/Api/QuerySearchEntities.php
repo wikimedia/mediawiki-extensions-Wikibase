@@ -42,47 +42,21 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	/**
 	 * @param ApiQuery $apiQuery
 	 * @param string $moduleName
-	 * @param string $modulePrefix
-	 *
-	 * @see ApiBase::__construct
-	 */
-	public function __construct( ApiQuery $apiQuery, $moduleName, $modulePrefix = 'wbs' ) {
-		parent::__construct( $apiQuery, $moduleName, $modulePrefix );
-
-		$repo = WikibaseRepo::getDefaultInstance();
-		$entitySearchHelper = new EntitySearchHelper(
-			$repo->getEntityLookup(),
-			$repo->getEntityIdParser(),
-			$repo->newTermSearchInteractor( $this->getLanguage()->getCode() ),
-			new LanguageFallbackLabelDescriptionLookup(
-				$repo->getTermLookup(),
-				$repo->getLanguageFallbackChainFactory()
-					->newFromLanguage( $this->getLanguage() )
-			)
-		);
-
-		$this->setServices(
-			$entitySearchHelper,
-			$repo->getEntityTitleLookup(),
-			$repo->getTermsLanguages(),
-			$repo->getEnabledEntityTypes()
-		);
-	}
-
-	/**
-	 * Override services, for use for testing.
-	 *
 	 * @param EntitySearchHelper $entitySearchHelper
 	 * @param EntityTitleLookup $titleLookup
 	 * @param ContentLanguages $termsLanguages
 	 * @param array $entityTypes
 	 */
-	public function setServices(
+	public function __construct(
+		ApiQuery $apiQuery,
+		$moduleName,
 		EntitySearchHelper $entitySearchHelper,
 		EntityTitleLookup $titleLookup,
 		ContentLanguages $termsLanguages,
 		array $entityTypes
 	) {
+		parent::__construct( $apiQuery, $moduleName, 'wbs' );
+
 		$this->entitySearchHelper = $entitySearchHelper;
 		$this->titleLookup = $titleLookup;
 		$this->termsLanguages = $termsLanguages;
