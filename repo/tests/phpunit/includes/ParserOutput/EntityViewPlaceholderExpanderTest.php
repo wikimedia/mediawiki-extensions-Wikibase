@@ -47,8 +47,6 @@ class EntityViewPlaceholderExpanderTest extends PHPUnit_Framework_TestCase {
 			$templateFactory,
 			$user,
 			$item,
-			$item,
-			$aliasesProvider,
 			$termsLanguages,
 			$this->getMock( LanguageDirectionalityLookup::class ),
 			$languageNameLookup,

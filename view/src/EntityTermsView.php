@@ -3,9 +3,8 @@
 namespace Wikibase\View;
 
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Term\AliasesProvider;
-use Wikibase\DataModel\Term\DescriptionsProvider;
-use Wikibase\DataModel\Term\LabelsProvider;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\TermList;
 
 /**
  * Generates HTML to display the terms of an entity.
@@ -18,18 +17,18 @@ interface EntityTermsView {
 	/**
 	 * @param string $mainLanguageCode Desired language of the label, description and aliases in the
 	 *  title and header section. Not necessarily identical to the interface language.
-	 * @param LabelsProvider $labelsProvider
-	 * @param DescriptionsProvider $descriptionsProvider
-	 * @param AliasesProvider|null $aliasesProvider
+	 * @param TermList $labels
+	 * @param TermList $descriptions
+	 * @param AliasGroupList|null $aliasGroups
 	 * @param EntityId|null $entityId the id of the entity
 	 *
 	 * @return string HTML
 	 */
 	public function getHtml(
 		$mainLanguageCode,
-		LabelsProvider $labelsProvider,
-		DescriptionsProvider $descriptionsProvider,
-		AliasesProvider $aliasesProvider = null,
+		TermList $labels,
+		TermList $descriptions,
+		AliasGroupList $aliasGroups = null,
 		EntityId $entityId = null
 	);
 
@@ -38,8 +37,6 @@ interface EntityTermsView {
 	 *
 	 * @return string HTML
 	 */
-	public function getTitleHtml(
-		EntityId $entityId = null
-	);
+	public function getTitleHtml( EntityId $entityId = null );
 
 }
