@@ -144,18 +144,16 @@ class QuerySearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 
 		$api = new QuerySearchEntities(
 			$this->getApiQuery( $params ),
-			'wbsearch'
-		);
-
-		$continuationManager = new ApiContinuationManager( $api, array( $api ) );
-
-		$api->setContinuationManager( $continuationManager );
-		$api->setServices(
+			'wbsearch',
 			$this->getMockEntitySearchHelper( $params, $matches ),
 			$this->getMockTitleLookup(),
 			$this->getContentLanguages(),
-			array( 'item', 'property' )
+			[ 'item', 'property' ]
 		);
+
+		$continuationManager = new ApiContinuationManager( $api, [ $api ] );
+
+		$api->setContinuationManager( $continuationManager );
 
 		if ( $resultPageSet !== null ) {
 			$api->executeGenerator( $resultPageSet );
