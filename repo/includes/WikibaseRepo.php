@@ -264,7 +264,7 @@ class WikibaseRepo {
 	/**
 	 * @var RepositoryDefinitions
 	 */
-	private $repositoryDefinitons;
+	private $repositoryDefinitions;
 
 	/**
 	 * @var ValueSnakRdfBuilderFactory
@@ -401,7 +401,7 @@ class WikibaseRepo {
 			$this->getVocabularyBaseUri(),
 			$this->getMonolingualTextLanguages(),
 			$this->getCachingCommonsMediaFileNameLookup(),
-			$this->repositoryDefinitons->getEntityTypesPerRepository(),
+			$this->repositoryDefinitions->getEntityTypesPerRepository(),
 			new MediaWikiPageNameNormalizer(),
 			$this->settings->getSetting( 'geoShapeStorageApiEndpointUrl' )
 		);
@@ -514,7 +514,7 @@ class WikibaseRepo {
 		$this->settings = $settings;
 		$this->dataTypeDefinitions = $dataTypeDefinitions;
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
-		$this->repositoryDefinitons = $repositoryDefinitions;
+		$this->repositoryDefinitions = $repositoryDefinitions;
 		$this->entityDataRetrievalServiceFactory = $entityDataRetrievalServiceFactory;
 	}
 
@@ -1262,7 +1262,7 @@ class WikibaseRepo {
 	 *  entity types from the configured foreign repositories.
 	 */
 	public function getEnabledEntityTypes() {
-		return $this->repositoryDefinitons->getAllEntityTypes();
+		return $this->repositoryDefinitions->getAllEntityTypes();
 	}
 
 	/**
@@ -1864,6 +1864,16 @@ class WikibaseRepo {
 		}
 
 		return $this->entityRdfBuilderFactory;
+	}
+
+	/**
+	 * @return string[] Associative array mapping names of known entity types (strings) to names of
+	 *         repositories providing entities of those types.
+	 *         Note: Currently entities of a given type are only provided by single repository. This
+	 *         assumption can be changed in the future.
+	 */
+	public function getEntityTypeToRepositoryMapping() {
+		return $this->repositoryDefinitions->getEntityTypeToRepositoryMapping();
 	}
 
 }

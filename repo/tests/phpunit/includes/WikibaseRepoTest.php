@@ -706,4 +706,22 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertSame( $expected, $changeOpsCallbacks );
 	}
 
+	public function testGetEntityTypeToRepositoryMapping() {
+		$wikibaseRepo = $this->getWikibaseRepoWithCustomRepositoryDefinitions( array_merge(
+			$this->getRepositoryDefinition( '', [ 'entity-types' => [ 'foo', 'bar' ] ] ),
+			$this->getRepositoryDefinition( 'repo1', [ 'entity-types' => [ 'baz' ] ] ),
+			$this->getRepositoryDefinition( 'repo2', [ 'entity-types' => [ 'foobar' ] ] )
+		) );
+
+		$this->assertEquals(
+			[
+				'foo' => '',
+				'bar' => '',
+				'baz' => 'repo1',
+				'foobar' => 'repo2',
+			],
+			$wikibaseRepo->getEntityTypeToRepositoryMapping()
+		);
+	}
+
 }

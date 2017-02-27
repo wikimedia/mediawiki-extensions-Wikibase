@@ -216,7 +216,8 @@ call_user_func( function() {
 					$repo->getTermLookup(),
 					$repo->getLanguageFallbackChainFactory()
 						->newFromLanguage( $repo->getUserLanguage() )
-				)
+				),
+				$repo->getEntityTypeToRepositoryMapping()
 			);
 
 			return new Wikibase\Repo\Api\SearchEntities(
@@ -627,7 +628,8 @@ call_user_func( function() {
 					$repo->getTermLookup(),
 					$repo->getLanguageFallbackChainFactory()
 						->newFromLanguage( $apiQuery->getLanguage() )
-				)
+				),
+				$repo->getEntityTypeToRepositoryMapping()
 			);
 
 			return new Wikibase\Repo\Api\QuerySearchEntities(
