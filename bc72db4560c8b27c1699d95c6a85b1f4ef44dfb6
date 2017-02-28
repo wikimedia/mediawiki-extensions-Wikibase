@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_b426830f",
+        "filename": "repo/includes/ChangeOp/ChangeOpSiteLink.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-28T10:58:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3c5b53_3ea2573c",
+      "revId": "bc72db4560c8b27c1699d95c6a85b1f4ef44dfb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_9eb28391",
         "filename": "repo/includes/ChangeOp/ChangeOpSiteLink.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2017-02-27T19:37:06Z",
       "side": 1,
       "message": "Assert::parameterElementType( \u0027string\u0027, $allowedBadgeItemIds, \u0027$allowedBadgeItemIds\u0027 )",
+      "revId": "bc72db4560c8b27c1699d95c6a85b1f4ef44dfb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_544e17de",
+        "filename": "repo/includes/ChangeOp/ChangeOpSiteLink.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-28T10:58:15Z",
+      "side": 1,
+      "message": "As TODO above says. The only reason I haven\u0027t done it here was the it seems like no ChangeOp class is using Assert stuff (yet). But yeah, there must be a first step done at some point, so done now.",
+      "parentUuid": "ce3c5b53_9eb28391",
       "revId": "bc72db4560c8b27c1699d95c6a85b1f4ef44dfb6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_942b3fdb",
+        "filename": "repo/includes/ChangeOp/ChangeOpSiteLink.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-28T10:58:15Z",
+      "side": 1,
+      "message": "Good point, I didn\u0027t think about it. As this got moved to SiteLinkChangeOpFactory name is no longer an issue, I believe.\nThis class only does a sanity check (in the constructor) that $badges only contain ItemIDs, rest is done in the factory.",
+      "parentUuid": "ce3c5b53_7ea8df1d",
+      "revId": "bc72db4560c8b27c1699d95c6a85b1f4ef44dfb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_9e7123e0",
         "filename": "repo/includes/ChangeOp/SiteLinkChangeOpFactory.php",
         "patchSetId": 5
@@ -64,6 +118,24 @@
       "writtenOn": "2017-02-27T19:37:06Z",
       "side": 1,
       "message": "Perhaps $badges can be checked against $this-\u003ebadgeItemIdsc here, instead of inside the ChangeOp constructor.",
+      "revId": "bc72db4560c8b27c1699d95c6a85b1f4ef44dfb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_5425b701",
+        "filename": "repo/includes/ChangeOp/SiteLinkChangeOpFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-02-28T10:58:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3c5b53_9e7123e0",
       "revId": "bc72db4560c8b27c1699d95c6a85b1f4ef44dfb6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
