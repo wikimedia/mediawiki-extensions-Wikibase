@@ -2,9 +2,11 @@
 
 namespace Wikibase\DataModel\Services\Lookup;
 
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Term\DescriptionsProvider;
+use Wikibase\DataModel\Term\LabelsProvider;
+use Wikibase\DataModel\Term\TermList;
 
 /**
  * @since 1.1
@@ -21,9 +23,14 @@ class EntityRetrievingTermLookup implements TermLookup {
 	private $entityLookup;
 
 	/**
-	 * @var Fingerprint[]
+	 * @var TermList[] Labels in all languages, indexed by entity ID serialization.
 	 */
-	private $fingerprints;
+	private $labels;
+
+	/**
+	 * @var TermList[] Descriptions in all languages, indexed by entity ID serialization.
+	 */
+	private $descriptions;
 
 	/**
 	 * @param EntityLookup $entityLookup
@@ -42,10 +49,10 @@ class EntityRetrievingTermLookup implements TermLookup {
 	 * @throws TermLookupException
 	 */
 	public function getLabel( EntityId $entityId, $languageCode ) {
-		$fingerprint = $this->getFingerprint( $entityId, [ $languageCode ] );
+		$labels = $this->getAllLabels( $entityId, [ $languageCode ] );
 
-		if ( $fingerprint->hasLabel( $languageCode ) ) {
-			return $fingerprint->getLabel( $languageCode )->getText();
+		if ( $labels->hasTermForLanguage( $languageCode ) ) {
+			return $labels->getByLanguage( $languageCode )->getText();
 		}
 
 		return null;
@@ -61,8 +68,7 @@ class EntityRetrievingTermLookup implements TermLookup {
 	 * @return string[]
 	 */
 	public function getLabels( EntityId $entityId, array $languages ) {
-		$fingerprint = $this->getFingerprint( $entityId, $languages );
-		$labels = $fingerprint->getLabels()->toTextArray();
+		$labels = $this->getAllLabels( $entityId, $languages )->toTextArray();
 
 		return array_intersect_key( $labels, array_flip( $languages ) );
 	}
@@ -77,10 +83,10 @@ class EntityRetrievingTermLookup implements TermLookup {
 	 * @return string|null
 	 */
 	public function getDescription( EntityId $entityId, $languageCode ) {
-		$fingerprint = $this->getFingerprint( $entityId, [ $languageCode ] );
+		$descriptions = $this->getAllDescriptions( $entityId, [ $languageCode ] );
 
-		if ( $fingerprint->hasDescription( $languageCode ) ) {
-			return $fingerprint->getDescription( $languageCode )->getText();
+		if ( $descriptions->hasTermForLanguage( $languageCode ) ) {
+			return $descriptions->getByLanguage( $languageCode )->getText();
 		}
 
 		return null;
@@ -96,37 +102,59 @@ class EntityRetrievingTermLookup implements TermLookup {
 	 * @return string[]
 	 */
 	public function getDescriptions( EntityId $entityId, array $languages ) {
-		$fingerprint = $this->getFingerprint( $entityId, $languages );
-		$descriptions = $fingerprint->getDescriptions()->toTextArray();
+		$descriptions = $this->getAllDescriptions( $entityId, $languages )->toTextArray();
 
 		return array_intersect_key( $descriptions, array_flip( $languages ) );
 	}
 
 	/**
 	 * @param EntityId $entityId
-	 * @param array $languages used in thrown exceptions
+	 * @param string[] $languageCodes Not used for filtering but in thrown exceptions.
 	 *
 	 * @throws TermLookupException
-	 * @return Fingerprint
+	 * @return TermList
 	 */
-	private function getFingerprint( EntityId $entityId, array $languages ) {
-		$idSerialization = $entityId->getSerialization();
+	private function getAllLabels( EntityId $entityId, array $languageCodes ) {
+		$id = $entityId->getSerialization();
 
-		if ( !isset( $this->fingerprints[$idSerialization] ) ) {
-			$this->fingerprints[$idSerialization] = $this->fetchFingerprint( $entityId, $languages );
+		if ( !isset( $this->labels[$id] ) ) {
+			$entity = $this->fetchEntity( $entityId, $languageCodes );
+			$this->labels[$id] = $entity instanceof LabelsProvider
+				? $entity->getLabels()
+				: new TermList();
 		}
 
-		return $this->fingerprints[$idSerialization];
+		return $this->labels[$id];
 	}
 
 	/**
 	 * @param EntityId $entityId
-	 * @param array $languages used in thrown exceptions
+	 * @param string[] $languageCodes Not used for filtering but in thrown exceptions.
 	 *
 	 * @throws TermLookupException
-	 * @return Fingerprint
+	 * @return TermList
 	 */
-	private function fetchFingerprint( EntityId $entityId, array $languages ) {
+	private function getAllDescriptions( EntityId $entityId, array $languageCodes ) {
+		$id = $entityId->getSerialization();
+
+		if ( !isset( $this->descriptions[$id] ) ) {
+			$entity = $this->fetchEntity( $entityId, $languageCodes );
+			$this->descriptions[$id] = $entity instanceof DescriptionsProvider
+				? $entity->getDescriptions()
+				: new TermList();
+		}
+
+		return $this->descriptions[$id];
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 * @param string[] $languages Not used for filtering but in thrown exceptions.
+	 *
+	 * @throws TermLookupException
+	 * @return EntityDocument
+	 */
+	private function fetchEntity( EntityId $entityId, array $languages ) {
 		try {
 			$entity = $this->entityLookup->getEntity( $entityId );
 		} catch ( EntityLookupException $ex ) {
@@ -137,7 +165,7 @@ class EntityRetrievingTermLookup implements TermLookup {
 			throw new TermLookupException( $entityId, $languages, 'The entity could not be loaded' );
 		}
 
-		return $entity instanceof FingerprintProvider ? $entity->getFingerprint() : new Fingerprint();
+		return $entity;
 	}
 
 }
