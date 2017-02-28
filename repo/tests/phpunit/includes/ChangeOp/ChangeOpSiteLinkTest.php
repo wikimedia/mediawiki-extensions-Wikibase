@@ -25,17 +25,7 @@ use Wikibase\Summary;
  */
 class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
-	private function applySettings() {
-		// Allow some badges for testing
-		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', array(
-			'Q42' => '',
-			'Q149' => '',
-		) );
-	}
-
 	public function invalidConstructorProvider() {
-		$this->applySettings();
-
 		$argLists = array();
 
 		$argLists[] = array( 'enwiki', 1234 );
@@ -43,7 +33,6 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		$argLists[] = array( 'plwiki', 'Warszawa', array( 'FA', 'GA' ) );
 		$argLists[] = array( 'plwiki', 'Warszawa', array( new ItemId( 'Q42' ), 'FA' ) );
 		$argLists[] = array( 'plwiki', 'Warszawa', array( new PropertyId( 'P42' ) ) );
-		$argLists[] = array( 'plwiki', 'Warszawa', array( new ItemId( 'Q2147483647' ) ) );
 
 		return $argLists;
 	}
@@ -58,8 +47,6 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function changeOpSiteLinkProvider() {
-		$this->applySettings();
-
 		$deSiteLink = new SiteLink( 'dewiki', 'Berlin' );
 		$enSiteLink = new SiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q149' ) ) );
 		$plSiteLink = new SiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ) ) );
@@ -144,8 +131,6 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidChangeOpSiteLinkProvider() {
-		$this->applySettings();
-
 		$deSiteLink = new SiteLink( 'dewiki', 'Berlin' );
 		$plSiteLink = new SiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ) ) );
 
@@ -180,8 +165,6 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function summaryTestProvider() {
-		$this->applySettings();
-
 		$sitelinks = array(
 			new SiteLink( 'dewiki', 'Berlin' ),
 			new SiteLink( 'ruwiki', 'Берлин', array( new ItemId( 'Q42' ) ) )

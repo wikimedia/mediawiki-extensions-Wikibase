@@ -56,6 +56,11 @@ class ChangeOpFactoryProvider {
 	private $siteLookup;
 
 	/**
+	 * @var string[]
+	 */
+	private $allowedBadgeItemIds;
+
+	/**
 	 * @param EntityConstraintProvider $constraintProvider
 	 * @param GuidGenerator $guidGenerator
 	 * @param StatementGuidValidator $guidValidator
@@ -63,6 +68,7 @@ class ChangeOpFactoryProvider {
 	 * @param SnakValidator $snakValidator
 	 * @param TermValidatorFactory $termValidatorFactory
 	 * @param SiteLookup $siteLookup
+	 * @param string[] $allowedBadgeItemIds
 	 */
 	public function __construct(
 		EntityConstraintProvider $constraintProvider,
@@ -71,7 +77,8 @@ class ChangeOpFactoryProvider {
 		StatementGuidParser $guidParser,
 		SnakValidator $snakValidator,
 		TermValidatorFactory $termValidatorFactory,
-		SiteLookup $siteLookup
+		SiteLookup $siteLookup,
+		array $allowedBadgeItemIds
 	) {
 		$this->constraintProvider = $constraintProvider;
 
@@ -83,6 +90,8 @@ class ChangeOpFactoryProvider {
 		$this->termValidatorFactory = $termValidatorFactory;
 
 		$this->siteLookup = $siteLookup;
+
+		$this->allowedBadgeItemIds = $allowedBadgeItemIds;
 	}
 
 	/**
@@ -112,7 +121,7 @@ class ChangeOpFactoryProvider {
 	 */
 	public function getSiteLinkChangeOpFactory() {
 		//@todo: inject validators instead of hardcoding checks in the ChangeOp.
-		return new SiteLinkChangeOpFactory();
+		return new SiteLinkChangeOpFactory( $this->allowedBadgeItemIds );
 	}
 
 	/**
