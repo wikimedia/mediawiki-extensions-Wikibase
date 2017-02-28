@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_8ab47a34",
+        "filename": "repo/includes/Api/EntitySearchHelper.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-28T15:10:57Z",
+      "side": 1,
+      "message": "What is the difference between getExactMatchesForEntityId and this method? Can you please try to find a better name?",
+      "range": {
+        "startLine": 163,
+        "startChar": 18,
+        "endLine": 163,
+        "endChar": 39
+      },
+      "revId": "48ac476f00447f7f352cea90c8da3660ddf1e285",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_4abe7214",
+        "filename": "repo/includes/Api/EntitySearchHelper.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-02-28T15:10:57Z",
+      "side": 1,
+      "message": "A comment explaining this shorten out code path would be nice.",
+      "revId": "48ac476f00447f7f352cea90c8da3660ddf1e285",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
