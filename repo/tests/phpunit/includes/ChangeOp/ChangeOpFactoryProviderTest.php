@@ -58,7 +58,8 @@ class ChangeOpFactoryProviderTest extends \PHPUnit_Framework_TestCase {
 			$this->mockProvider->getMockGuidParser( $entityId ),
 			$this->mockProvider->getMockSnakValidator(),
 			$this->mockProvider->getMockTermValidatorFactory(),
-			new HashSiteStore( TestSites::getSites() )
+			new HashSiteStore( TestSites::getSites() ),
+			[]
 		);
 	}
 
