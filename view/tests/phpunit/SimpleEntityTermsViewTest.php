@@ -140,12 +140,12 @@ class SimpleEntityTermsViewTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetHtml_isMarkedAsEmptyValue() {
-		$entityTermsView = $this->getEntityTermsView( 1 );
-		$html = $entityTermsView->getHtml( 'en', new TermList(), new TermList(), new AliasGroupList(), null );
+		$view = $this->getEntityTermsView( 1 );
+		$html = $view->getHtml( 'en', new TermList(), new TermList() );
 
 		$this->assertContains( 'wb-empty', $html );
 		$this->assertContains( '(wikibase-description-empty)', $html );
-		$this->assertContains( '<div class="wikibase-entitytermsview-heading-aliases wb-empty"></div>', $html );
+		$this->assertNotContains( 'wikibase-entitytermsview-heading-aliases', $html );
 	}
 
 	public function testGetHtml_isNotMarkedAsEmpty() {
@@ -175,7 +175,6 @@ class SimpleEntityTermsViewTest extends PHPUnit_Framework_TestCase {
 		$view = $this->getEntityTermsView( 1 );
 		$html = $view->getHtml( 'en', new TermList(), new TermList(), new AliasGroupList() );
 
-		$this->assertContains( 'wb-empty', $html );
 		$this->assertContains( '<div class="wikibase-entitytermsview-heading-aliases wb-empty"></div>', $html );
 	}
 
