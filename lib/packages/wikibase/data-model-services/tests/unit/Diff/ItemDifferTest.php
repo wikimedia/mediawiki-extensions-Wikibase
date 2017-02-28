@@ -30,8 +30,8 @@ class ItemDifferTest extends \PHPUnit_Framework_TestCase {
 
 	public function testFingerprintIsDiffed() {
 		$firstItem = new Item();
-		$firstItem->getFingerprint()->setLabel( 'en', 'kittens' );
-		$firstItem->getFingerprint()->setAliasGroup( 'en', [ 'cats' ] );
+		$firstItem->setLabel( 'en', 'kittens' );
+		$firstItem->setAliases( 'en', [ 'cats' ] );
 
 		$secondItem = new Item();
 		$secondItem->getFingerprint()->setLabel( 'en', 'nyan' );
