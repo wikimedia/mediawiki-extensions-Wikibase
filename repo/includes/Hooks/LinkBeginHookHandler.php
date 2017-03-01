@@ -172,9 +172,10 @@ class LinkBeginHookHandler {
 		$outTitle = $out->getTitle();
 
 		$targetIsForeignEntityPage = $this->isForeignEntityPage( $target );
+		$isLocal = !$targetIsForeignEntityPage;
 
-		if ( !$targetIsForeignEntityPage &&
-			!$this->entityNamespaceLookup->isEntityNamespace( $target->getNamespace() )
+		if ( $isLocal
+			&& !$this->entityNamespaceLookup->isEntityNamespace( $target->getNamespace() )
 		) {
 			return;
 		}
@@ -200,11 +201,10 @@ class LinkBeginHookHandler {
 		if ( SpecialPageFactory::exists( $targetText ) ) {
 			$target = Title::makeTitle( NS_SPECIAL, $targetText );
 			$html = $this->linkRenderer->makeKnownLink( $target );
-
 			return;
 		}
 
-		if ( !$targetIsForeignEntityPage && !$target->exists() ) {
+		if ( $isLocal && !$target->exists() ) {
 			// The link points to a non-existing item.
 			return;
 		}
@@ -256,11 +256,8 @@ class LinkBeginHookHandler {
 	 */
 	private function isForeignEntityPage( LinkTarget $target ) {
 		$interwiki = $target->getInterwiki();
-		if ( $interwiki === '' ) {
-			return false;
-		}
 
-		if ( !$this->interwikiLookup->isValidInterwiki( $interwiki ) ) {
+		if ( $interwiki === '' || !$this->interwikiLookup->isValidInterwiki( $interwiki ) ) {
 			return false;
 		}
 
@@ -284,16 +281,19 @@ class LinkBeginHookHandler {
 	 */
 	private function getEntityIdFromTarget( Title $target ) {
 		if ( $this->isForeignEntityPage( $target ) ) {
+			$interwiki = $target->getInterwiki();
 			$idPart = substr( $target->getText(), strlen( 'Special:EntityPage/' ) );
-			// FIXME: This assumes repository name is equal to interwiki. This assumption might become invalid
+
 			try {
+				// FIXME: This assumes repository name is equal to interwiki. This assumption might
+				// become invalid
 				return $this->entityIdParser->parse(
-					EntityId::joinSerialization( [ $target->getInterwiki(), '', $idPart ] )
+					EntityId::joinSerialization( [ $interwiki, '', $idPart ] )
 				);
 			} catch ( EntityIdParsingException $ex ) {
 			}
-			return null;
 
+			return null;
 		}
 
 		return $this->entityIdLookup->getEntityIdForTitle( $target );
