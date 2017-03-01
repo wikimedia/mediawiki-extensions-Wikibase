@@ -430,6 +430,7 @@ class WikibaseRepo {
 			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
 			$this->getLanguageNameLookup(),
 			$this->getLocalItemUriParser(),
+			$this->getSettings()->getSetting( 'geoShapeStorageFrontendUrl' ),
 			$this->getEntityTitleLookup()
 		);
 	}
