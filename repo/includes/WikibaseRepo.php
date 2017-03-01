@@ -849,6 +849,13 @@ class WikibaseRepo {
 		);
 	}
 
+	public function getSiteLinkBadgeChangeOpSerializationValidator() {
+		return new SiteLinkBadgeChangeOpSerializationValidator(
+			$this->getEntityTitleLookup(),
+			array_keys( $this->settings->getSetting( 'badgeItems' ) )
+		);
+	}
+
 	/**
 	 * @return EntityChangeOpProvider
 	 */
@@ -869,10 +876,7 @@ class WikibaseRepo {
 			$changeOpFactoryProvider->getStatementChangeOpFactory(),
 			$changeOpFactoryProvider->getSiteLinkChangeOpFactory(),
 			new TermChangeOpSerializationValidator( $this->getTermsLanguages() ),
-			new SiteLinkBadgeChangeOpSerializationValidator(
-				$this->getEntityTitleLookup(),
-				array_keys( $this->settings->getSetting( 'badgeItems' ) )
-			),
+			$this->getSiteLinkBadgeChangeOpSerializationValidator(),
 			$this->getExternalFormatStatementDeserializer(),
 			new SiteLinkTargetProvider(
 				$this->getSiteLookup(),
