@@ -89,7 +89,8 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			$this->mockProvider->getMockGuidParser( $toItem->getId() ),
 			$this->mockProvider->getMockSnakValidator(),
 			$this->mockProvider->getMockTermValidatorFactory(),
-			$siteLookup
+			$siteLookup,
+			[]
 		);
 
 		return new ChangeOpsMerge(

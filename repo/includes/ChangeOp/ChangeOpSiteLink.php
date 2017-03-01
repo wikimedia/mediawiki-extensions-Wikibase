@@ -8,8 +8,8 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLinkList;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
+use Wikimedia\Assert\Assert;
 
 /**
  * Class for sitelink change operation
@@ -50,37 +50,12 @@ class ChangeOpSiteLink extends ChangeOpBase {
 		}
 
 		if ( $badges !== null ) {
-			$badges = $this->validateBadges( $badges );
+			Assert::parameterElementType( ItemId::class, $badges, '$badges' );
 		}
 
 		$this->siteId = $siteId;
 		$this->pageName = $pageName;
 		$this->badges = $badges;
-	}
-
-	/**
-	 * @param ItemId[] $badges
-	 *
-	 * @throws InvalidArgumentException
-	 * @return ItemId[]
-	 */
-	private function validateBadges( array $badges ) {
-		$badgeItems = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'badgeItems' );
-		$uniqueBadges = array();
-
-		foreach ( $badges as $id ) {
-			if ( !( $id instanceof ItemId ) ) {
-				throw new InvalidArgumentException( '$badges needs to be an array of ItemId instances' );
-			}
-
-			if ( !array_key_exists( $id->getSerialization(), $badgeItems ) ) {
-				throw new InvalidArgumentException( 'Only items specified in the badgeItems setting can be badges' );
-			}
-
-			$uniqueBadges[$id->getSerialization()] = $id;
-		}
-
-		return array_values( $uniqueBadges );
 	}
 
 	/**
