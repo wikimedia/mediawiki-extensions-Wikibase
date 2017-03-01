@@ -846,6 +846,13 @@ class WikibaseRepo {
 		);
 	}
 
+	public function getSiteLinkBadgeChangeOpSerializationValidator() {
+		return new SiteLinkBadgeChangeOpSerializationValidator(
+			$this->getEntityTitleLookup(),
+			array_keys( $this->settings->getSetting( 'badgeItems' ) )
+		);
+	}
+
 	/**
 	 * TODO: this should be probably cached?
 	 *
@@ -859,12 +866,7 @@ class WikibaseRepo {
 			$changeOpFactoryProvider->getStatementChangeOpFactory(),
 			$changeOpFactoryProvider->getSiteLinkChangeOpFactory(),
 			new TermChangeOpSerializationValidator( $this->getTermsLanguages() ),
-			new SiteLinkChangeOpSerializationValidator(
-				new SiteLinkBadgeChangeOpSerializationValidator(
-					$this->getEntityTitleLookup(),
-					array_keys( $this->settings->getSetting( 'badgeItems' ) )
-				)
-			),
+			new SiteLinkChangeOpSerializationValidator( $this->getSiteLinkBadgeChangeOpSerializationValidator() ),
 			$this->getExternalFormatStatementDeserializer(),
 			new SiteLinkTargetProvider(
 				$this->getSiteLookup(),
