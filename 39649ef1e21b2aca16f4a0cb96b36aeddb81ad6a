@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_b7651e43",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/ItemChangeOpDeserializerTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-01T10:59:17Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the name of the interface include \"Entity\" or something? There are LabelsChangeOpDeserializerTest and so on that are not meant to have this interface, so name is a bit misleading.",
+      "range": {
+        "startLine": 30,
+        "startChar": 82,
+        "endLine": 30,
+        "endChar": 106
+      },
+      "revId": "39649ef1e21b2aca16f4a0cb96b36aeddb81ad6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
