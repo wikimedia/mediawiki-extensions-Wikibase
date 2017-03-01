@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_08538be7",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/AliasChangeOpDeserializationTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-01T17:24:42Z",
+      "side": 1,
+      "message": "\"...should implement ChangeOpDeserializerTest\".\n\nThat makes the documentation less brittle against changes to the requirements.",
+      "revId": "089e0ad9634d8413226da8b7c7bb8c106f23b74e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_883ebb85",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/ChangeOpDeserializerTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-01T17:24:42Z",
+      "side": 1,
+      "message": "What is this interface needed for?\nIt would be nice for traits to declare what interface (or base class, or other traits) a class using the trait should provide. But that\u0027s not how traits work in php...",
+      "revId": "089e0ad9634d8413226da8b7c7bb8c106f23b74e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
