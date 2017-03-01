@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_bafc2509",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-01T11:56:05Z",
+      "side": 1,
+      "message": "Per consistency with \"geoShapeStorageFrontendUrl\" introduced in Ifdcfbf561eed890de5e48737486a5509bbc3e915 maybe this one should be \"geoShapeStorageApiEndpoint*Url*\"?",
+      "revId": "dafb4671815babac719f12cfdee6434574748ee6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
