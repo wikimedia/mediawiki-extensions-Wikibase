@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_a8993f73",
+        "filename": "docs/change-op-serializations.wiki",
+        "patchSetId": 11
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-01T18:11:17Z",
+      "side": 1,
+      "message": "unrelated. but whatever, just leave it here.",
+      "revId": "175c1b9b73e69980205955e35ba17ced9f698a09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_e88187c9",
+        "filename": "repo/includes/ChangeOp/ChangeOpSiteLink.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-01T18:11:17Z",
+      "side": 1,
+      "message": "Throwing an exception is The Right Thing (that\u0027s what dieMessage eventually does, too). The exception needs to be specific enouogh to provide a meaningful error message to the caller of the API. InvalidArgumentException may be too generic, try it out.",
+      "revId": "175c1b9b73e69980205955e35ba17ced9f698a09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
