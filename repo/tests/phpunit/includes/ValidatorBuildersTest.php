@@ -115,6 +115,75 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 		return $fileNameLookup;
 	}
 
+	public function provideCommonsMediaValidation() {
+		return [
+			'Should not be empty' => [ '', false ],
+			'Too long' => [ str_repeat( 'x', 237 ) . '.jpg', false ],
+			'Should have extension' => [ 'Foo', false ],
+			'Extension to short' => [ 'Foo.a', false ],
+			'This should be good' => [ 'Foo.jpg', true ],
+			'Illegal character: newline' => [ "a\na.jpg", false ],
+			'Illegal character: open square bracket' => [ 'a[a.jpg', false ],
+			'Illegal character: close square bracket' => [ 'a]a.jpg', false ],
+			'Illegal character: open curly bracket' => [ 'a{a.jpg', false ],
+			'Illegal character: close curly bracket' => [ 'a}a.jpg', false ],
+			'Illegal character: pipe' => [ 'a|a.jpg', false ],
+			'Illegal character: hash' => [ 'Foo#bar.jpg', false ],
+			'Illegal character: colon' => [ 'Foo:bar.jpg', false ],
+			'Illegal character: slash' => [ 'Foo/bar.jpg', false ],
+			'Illegal character: backslash' => [ 'Foo\bar.jpg', false ],
+			'Unicode support' => [ 'Äöü.jpg', true ],
+			'Leading space' => [ ' Foo.jpg', false ],
+			'Trailing space' => [ 'Foo.jpg ', false ],
+			'Not found' => [ 'Foo-NOT-FOUND.jpg', false ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideCommonsMediaValidation
+	 */
+	public function testCommonsMediaValidation( $fileName, $expected ) {
+		$value = new StringValue( $fileName );
+		$validators = $this->newValidatorBuilders()->buildMediaValidators( 'doNotCheckExistence' );
+
+		$this->assertValidation( $expected, $validators, $value );
+	}
+
+	public function provideGeoShapeValidation() {
+		return [
+			'Should not be empty' => [ '', false ],
+			'Too long' => [ 'Data:' . str_repeat( 'x', 232 ) . '.map', false ],
+			'Should have extension' => [ 'Data:Foo', false ],
+			'Extension too short' => [ 'Data:Foo.a', false ],
+			'This should be good' => [ 'Data:Foo.map', true ],
+			'Should have Data namespace' => [ 'Foo.map', false ],
+			'Illegal character: newline' => [ "Data:a\na.map", false ],
+			'Illegal character: open square bracket' => [ 'Data:a[a.map', false ],
+			'Illegal character: close square bracket' => [ 'Data:a]a.map', false ],
+			'Illegal character: open curly bracket' => [ 'Data:a{a.map', false ],
+			'Illegal character: close curly bracket' => [ 'Data:a}a.map', false ],
+			'Illegal character: pipe' => [ 'Data:a|a.map', false ],
+			'Illegal character: hash' => [ 'Data:Foo#bar.map', false ],
+			'Illegal character: colon' => [ 'Data:Foo:bar.map', false ],
+			'Allowed character: slash' => [ 'Data:Foo/bar.map', true ],
+			'Illegal character: backslash' => [ 'Data:Foo\bar.map', false ],
+			'Unicode support' => [ 'Data:Äöü.map', true ],
+			'Leading space' => [ ' Data:Foo.map', false ],
+			'Trailing space' => [ 'Data:Foo.map ', false ],
+			'Not found' => [ 'Data:Foo-NOT-FOUND.map', false ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideGeoShapeValidation
+	 */
+	public function testGeoShapeValidation( $geoShapeTitle, $expected ) {
+		$value = new StringValue( $geoShapeTitle );
+		$validators = $this->newValidatorBuilders()->buildGeoShapeValidators( 'doNotCheckExistence' );
+
+		$this->assertValidation( $expected, $validators, $value );
+	}
+
 	public function provideDataTypeValidation() {
 		$latLonValue = new LatLongValue( 0, 0 );
 		$wikidataUri = 'http://www.wikidata.org/entity/';
@@ -143,49 +212,10 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			//commonsMedia
 			array( 'commonsMedia', 'Foo.jpg', false, 'StringValue expected, string supplied' ),
 			array( 'commonsMedia', new NumberValue( 7 ), false, 'StringValue expected' ),
-			array( 'commonsMedia', new StringValue( '' ), false, 'empty string should be invalid' ),
-			array( 'commonsMedia', new StringValue( str_repeat( 'x', 237 ) . '.jpg' ), false, 'name too long' ),
-			array( 'commonsMedia', new StringValue( 'Foo' ), false, 'no file extension' ),
-			array( 'commonsMedia', new StringValue( 'Foo.a' ), false, 'file extension to short' ),
-			array( 'commonsMedia', new StringValue( 'Foo.jpg' ), true, 'this should be good' ),
-			array( 'commonsMedia', new StringValue( "a\na.jpg" ), false, 'illegal character: newline' ),
-			array( 'commonsMedia', new StringValue( 'a[a.jpg' ), false, 'illegal character: square bracket' ),
-			array( 'commonsMedia', new StringValue( 'a]a.jpg' ), false, 'illegal character: square bracket' ),
-			array( 'commonsMedia', new StringValue( 'a{a.jpg' ), false, 'illegal character: curly bracket' ),
-			array( 'commonsMedia', new StringValue( 'a}a.jpg' ), false, 'illegal character: curly bracket' ),
-			array( 'commonsMedia', new StringValue( 'a|a.jpg' ), false, 'illegal character: pipe' ),
-			array( 'commonsMedia', new StringValue( 'Foo#bar.jpg' ), false, 'illegal character: hash' ),
-			array( 'commonsMedia', new StringValue( 'Foo:bar.jpg' ), false, 'illegal character: colon' ),
-			array( 'commonsMedia', new StringValue( 'Foo/bar.jpg' ), false, 'illegal character: slash' ),
-			array( 'commonsMedia', new StringValue( 'Foo\bar.jpg' ), false, 'illegal character: backslash' ),
-			array( 'commonsMedia', new StringValue( 'Äöü.jpg' ), true, 'Unicode support' ),
-			array( 'commonsMedia', new StringValue( ' Foo.jpg' ), false, 'media name with leading space' ),
-			array( 'commonsMedia', new StringValue( 'Foo.jpg ' ), false, 'media name with trailing space' ),
-			array( 'commonsMedia', new StringValue( 'Foo-NOT-FOUND.jpg' ), false, 'file not found' ),
 
 			//geo-shape
 			array( 'geo-shape', 'Foo.map', false, 'StringValue expected, string supplied' ),
 			array( 'geo-shape', new NumberValue( 7 ), false, 'StringValue expected' ),
-			array( 'geo-shape', new StringValue( '' ), false, 'empty string should be invalid' ),
-			array( 'geo-shape', new StringValue( str_repeat( 'x', 237 ) . '.map' ), false, 'name too long' ),
-			array( 'geo-shape', new StringValue( 'Data:Foo' ), false, 'no file extension' ),
-			array( 'geo-shape', new StringValue( 'Data:Foo.a' ), false, 'file extension to short' ),
-			array( 'geo-shape', new StringValue( 'Data:Foo.map' ), true, 'this should be good' ),
-			array( 'geo-shape', new StringValue( 'Foo.map' ), false, 'Should have data namespace' ),
-			array( 'geo-shape', new StringValue( "Data:a\na.map" ), false, 'illegal character: newline' ),
-			array( 'geo-shape', new StringValue( 'Data:a[a.map' ), false, 'illegal character: square bracket' ),
-			array( 'geo-shape', new StringValue( 'Data:a]a.map' ), false, 'illegal character: square bracket' ),
-			array( 'geo-shape', new StringValue( 'Data:a{a.map' ), false, 'illegal character: curly bracket' ),
-			array( 'geo-shape', new StringValue( 'Data:a}a.map' ), false, 'illegal character: curly bracket' ),
-			array( 'geo-shape', new StringValue( 'Data:a|a.map' ), false, 'illegal character: pipe' ),
-			array( 'geo-shape', new StringValue( 'Data:Foo#bar.map' ), false, 'illegal character: hash' ),
-			array( 'geo-shape', new StringValue( 'Data:Foo:bar.map' ), false, 'illegal character: colon' ),
-			array( 'geo-shape', new StringValue( 'Data:Foo/bar.map' ), true, 'allowed character: slash' ),
-			array( 'geo-shape', new StringValue( 'Data:Foo\bar.map' ), false, 'illegal character: backslash' ),
-			array( 'geo-shape', new StringValue( 'Data:Äöü.map' ), true, 'Unicode support' ),
-			array( 'geo-shape', new StringValue( ' Data:Foo.map' ), false, 'media name with leading space' ),
-			array( 'geo-shape', new StringValue( 'Data:Foo.map ' ), false, 'media name with trailing space' ),
-			array( 'geo-shape', new StringValue( 'Data:Foo-NOT-FOUND.map' ), false, 'file not found' ),
 
 			//string
 			array( 'string', 'Foo', false, 'StringValue expected, string supplied' ),
@@ -384,7 +414,7 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 	 * @param mixed $value
 	 * @param string $message
 	 */
-	protected function assertValidation( $expected, array $validators, $value, $message ) {
+	protected function assertValidation( $expected, array $validators, $value, $message = '' ) {
 		$result = Result::newSuccess();
 		foreach ( $validators as $validator ) {
 			$result = $validator->validate( $value );
