@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_5ac3993d",
+        "filename": "repo/includes/Actions/EditEntityAction.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-03-01T14:01:23Z",
+      "side": 1,
+      "message": "can we have the LinkRenderer set in the constructor?  (maybe in one of the base action classes?)\n\nthat\u0027s where I would expect find it and it would make it easier if we need to use it for something else in the class",
+      "revId": "7fd3fa187ba9b763f09b14715b942542f8654479",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
