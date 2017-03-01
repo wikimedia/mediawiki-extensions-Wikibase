@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_771d5665",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-01T09:51:11Z",
+      "side": 1,
+      "message": "I fixed the comment.",
+      "parentUuid": "ce3c5b53_cc54f758",
+      "revId": "6965f8d67542c40563307bf12b8bea26e80863b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_8ca26f3a",
         "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
         "patchSetId": 9
@@ -30,6 +48,24 @@
       "writtenOn": "2017-02-24T10:08:25Z",
       "side": 1,
       "message": "Should be Wikibase\\Repo\\Store\\Sql",
+      "revId": "6965f8d67542c40563307bf12b8bea26e80863b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_97201a98",
+        "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-01T09:51:11Z",
+      "side": 1,
+      "message": "It seems you already did it.",
+      "parentUuid": "ce3c5b53_8ca26f3a",
       "revId": "6965f8d67542c40563307bf12b8bea26e80863b6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_b74afe5d",
+        "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-01T09:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3c5b53_cca87720",
+      "revId": "6965f8d67542c40563307bf12b8bea26e80863b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_ccc2b739",
         "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
         "patchSetId": 9
@@ -64,6 +118,24 @@
       "writtenOn": "2017-02-24T10:08:25Z",
       "side": 1,
       "message": "I know PhpStorm likes to adds those but this is clutter, please remove them. There was a setting somewhere so it does not add such comments.\nBTW: the name here is no longer a class name :)",
+      "revId": "6965f8d67542c40563307bf12b8bea26e80863b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_9757ba04",
+        "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-01T09:51:11Z",
+      "side": 1,
+      "message": "You did this too :D",
+      "parentUuid": "ce3c5b53_ccc2b739",
       "revId": "6965f8d67542c40563307bf12b8bea26e80863b6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_373fceb2",
+        "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-01T09:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3c5b53_8cea6f9b",
+      "revId": "6965f8d67542c40563307bf12b8bea26e80863b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_ec10dbaf",
         "filename": "repo/maintenance/dispatchChanges.php",
         "patchSetId": 9
@@ -98,6 +188,24 @@
       "writtenOn": "2017-02-24T10:08:25Z",
       "side": 1,
       "message": "Maybe it would be worth putting this whole block in some private method?",
+      "revId": "6965f8d67542c40563307bf12b8bea26e80863b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_97b33afd",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-01T09:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3c5b53_ec10dbaf",
       "revId": "6965f8d67542c40563307bf12b8bea26e80863b6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
