@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_881d5b68",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-01T16:57:22Z",
+      "side": 1,
+      "message": "I don\u0027t quite get it. So it is done so the \"decoding\" here is kind of reverting what EntityContentFactory::getTitleForId does? But how explode is the counterpart of string concatenation happening there?",
+      "revId": "51eed107d556a9fa6010f68a8ce38891d11ecd8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
