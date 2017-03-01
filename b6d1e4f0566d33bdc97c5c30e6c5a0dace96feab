@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_3d648f10",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-01T17:03:54Z",
+      "side": 1,
+      "message": "Please note that $targetIsForeignEntityPage being false can also happen when $target is a Title with some interwiki but referring to page other than \"Special:EntityPage/XYZ\", possibly also some rubbish with invalid interwiki.\n\nIt does not hurt much as the way $isLocal is used further in the code does not do any wrong things. As long it is not used as a base for wrong assumptions it\u0027s fine.",
+      "revId": "b6d1e4f0566d33bdc97c5c30e6c5a0dace96feab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
