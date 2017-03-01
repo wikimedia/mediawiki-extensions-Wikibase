@@ -282,7 +282,9 @@ class LinkBeginHookHandler {
 	private function getEntityIdFromTarget( Title $target ) {
 		if ( $this->isForeignEntityPage( $target ) ) {
 			$interwiki = $target->getInterwiki();
-			$idPart = substr( $target->getText(), strlen( 'Special:EntityPage/' ) );
+
+			// This encodes knowledge from EntityContentFactory::getTitleForId
+			list( , $idPart ) = explode( 'Special:EntityPage/', $target->getText(), 2 );
 
 			try {
 				// FIXME: This assumes repository name is equal to interwiki. This assumption might
