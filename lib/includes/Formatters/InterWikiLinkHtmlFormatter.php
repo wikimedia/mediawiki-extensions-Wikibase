@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Formatters;
 use DataValues\StringValue;
 use Html;
 use InvalidArgumentException;
-use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 
 /**
@@ -17,17 +16,12 @@ use ValueFormatters\ValueFormatter;
 class InterWikiLinkHtmlFormatter implements ValueFormatter {
 
 	/**
-	 * @var array HTML attributes to use on the generated <a> tags.
-	 */
-	private $attributes = [ 'class' => 'extiw' ];
-
-	/**
 	 * @var string
 	 */
 	private $baseUrl;
 
 	/**
-	 * @param string $baseUrl
+	 * @param string $baseUrl Base URL, used to build links to the geo shape storage.
 	 */
 	public function __construct( $baseUrl ) {
 		$this->baseUrl = $baseUrl;
@@ -48,17 +42,19 @@ class InterWikiLinkHtmlFormatter implements ValueFormatter {
 			throw new InvalidArgumentException( 'Data value type mismatch. Expected a StringValue.' );
 		}
 
-		$attributes = array_merge( $this->attributes, array(
-			'href' => $this->baseUrl . $this->getPathFromTitle( $value->getValue() )
-		) );
-
-		return Html::element( 'a', $attributes, $value->getValue() );
-
+		return Html::element( 'a', [
+			'class' => 'extiw',
+			'href' => wfUrlencode( $this->baseUrl . $this->encodeSpaces( $value->getValue() ) ),
+		], $value->getValue() );
 	}
 
-	private function getPathFromTitle( $title ) {
-		return urlencode( str_replace( ' ', '_', $title ) );
-
+	/**
+	 * @param string $pageName
+	 *
+	 * @return string
+	 */
+	private function encodeSpaces( $pageName ) {
+		return str_replace( ' ', '_', $pageName );
 	}
 
 }

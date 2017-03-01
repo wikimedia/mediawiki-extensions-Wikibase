@@ -5,12 +5,11 @@ namespace Wikibase\Lib\Tests\Formatters;
 use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
-use ValueFormatters\FormatterOptions;
 use Wikibase\Lib\CommonsLinkFormatter;
 use Wikibase\Lib\Formatters\InterWikiLinkHtmlFormatter;
 
 /**
- * @covers Wikibase\Lib\InterWikiLinkHtmlFormatter
+ * @covers Wikibase\Lib\Formatters\InterWikiLinkHtmlFormatter
  *
  * @group Wikibase
  * @group Database
@@ -49,7 +48,6 @@ class InterWikiLinkHtmlFormatterTest extends \MediaWikiTestCase {
 	 * @dataProvider linkFormatProvider
 	 */
 	public function testFormat( StringValue $value, $pattern ) {
-
 		$formatter = new InterWikiLinkHtmlFormatter( 'http://base.url/' );
 
 		$html = $formatter->format( $value );
@@ -62,6 +60,14 @@ class InterWikiLinkHtmlFormatterTest extends \MediaWikiTestCase {
 
 		$this->setExpectedException( InvalidArgumentException::class );
 		$formatter->format( $value );
+	}
+
+	public function testBasePathContainsSpace_EncodesSpaceWhenFormats() {
+		$formatter = new InterWikiLinkHtmlFormatter( '//base.url/some wiki/' );
+
+		$html = $formatter->format( new StringValue( 'LINK' ) );
+
+		$this->assertSame( '<a class="extiw" href="//base.url/some+wiki/LINK">LINK</a>', $html );
 	}
 
 }

@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\StringValue;
-use ValueFormatters\FormatterOptions;
 use Wikibase\Lib\Formatters\InterWikiLinkWikitextFormatter;
 
 /**
