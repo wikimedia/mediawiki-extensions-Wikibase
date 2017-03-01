@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_57ca924b",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/AliasChangeOpDeserializationTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-01T10:45:03Z",
+      "side": 1,
+      "message": "I think it would make sense to say here (and in other traits) that it is assumed here that this trait will be used in classes that provide getEntity, and getChangeOpDeserializer methods.",
+      "revId": "636e0c28a557bf2220eb79b0f4ceceb9c5c5d818",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_17d40aeb",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/ChangeOpDeserializerTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-01T10:45:03Z",
+      "side": 1,
+      "message": "Oh, when we were discussing that using those traits would require to test classes to have an interface providing entity object and the change op deserializer object I didn\u0027t think of having the actual PHP interface :) But it doesn\u0027t hurt to have it guess.\n\nI wonder how clear the intention of this interface is for people not really knowing the context. I can get what\u0027s going on here but I\u0027d leave it for others to comment on this.",
+      "revId": "636e0c28a557bf2220eb79b0f4ceceb9c5c5d818",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
