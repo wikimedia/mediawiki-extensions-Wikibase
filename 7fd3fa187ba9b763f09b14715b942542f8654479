@@ -16,6 +16,24 @@
       "revId": "7fd3fa187ba9b763f09b14715b942542f8654479",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_087dcbdd",
+        "filename": "repo/includes/Actions/EditEntityAction.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-03-01T18:10:57Z",
+      "side": 1,
+      "message": "I made it set from this class\u0027 constructor. If it\u0027s to be introduced in the parent classes as well, then it will propably be provided by a method like getLinkRenderer(), so this shouldn\u0027t cause a conflict.",
+      "parentUuid": "ce3c5b53_5ac3993d",
+      "revId": "7fd3fa187ba9b763f09b14715b942542f8654479",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
