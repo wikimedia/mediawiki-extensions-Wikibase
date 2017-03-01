@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_17fc0ab0",
+        "filename": "lib/includes/Formatters/InterWikiLinkHtmlFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-01T09:28:30Z",
+      "side": 1,
+      "message": "To be super nitpicky saying that $baseUrl is the base URL is a bit of recursion :)",
+      "revId": "8d462253750457250d7408a3a9809c9251871052",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
