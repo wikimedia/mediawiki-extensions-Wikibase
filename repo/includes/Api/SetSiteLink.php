@@ -7,7 +7,10 @@ use Wikibase\ChangeOp\ChangeOpSiteLink;
 use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLinkList;
+use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
+use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
 use Wikibase\Summary;
 
 /**
@@ -24,6 +27,11 @@ class SetSiteLink extends ModifyEntity {
 	private $siteLinkChangeOpFactory;
 
 	/**
+	 * @var SiteLinkBadgeChangeOpSerializationValidator
+	 */
+	private $badgeSerializationValidator;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param SiteLinkChangeOpFactory $siteLinkChangeOpFactory
@@ -31,11 +39,13 @@ class SetSiteLink extends ModifyEntity {
 	public function __construct(
 		ApiMain $mainModule,
 		$moduleName,
-		SiteLinkChangeOpFactory $siteLinkChangeOpFactory
+		SiteLinkChangeOpFactory $siteLinkChangeOpFactory,
+		SiteLinkBadgeChangeOpSerializationValidator $badgeSerializationValidator
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
 		$this->siteLinkChangeOpFactory = $siteLinkChangeOpFactory;
+		$this->badgeSerializationValidator = $badgeSerializationValidator;
 	}
 
 	/**
@@ -154,6 +164,22 @@ class SetSiteLink extends ModifyEntity {
 
 			return $this->siteLinkChangeOpFactory->newSetSiteLinkOp( $linksite, $page, $badges );
 		}
+	}
+
+	private function parseSiteLinkBadges( array $badges ) {
+		try {
+			$this->badgeSerializationValidator->validateBadgeSerialization( $badges );
+		} catch ( ChangeOpDeserializationException $exception ) {
+			$this->errorReporter->dieError( $exception->getMessage(), $exception->getMessageKey() );
+		}
+
+		return $this->getBadgeItemIds( $badges );
+	}
+
+	private function getBadgeItemIds( array $badges ) {
+		return array_map( function( $badge ) {
+			return new ItemId( $badge );
+		}, $badges );
 	}
 
 	/**

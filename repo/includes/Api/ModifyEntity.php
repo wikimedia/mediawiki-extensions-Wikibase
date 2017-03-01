@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
-use InvalidArgumentException;
 use LogicException;
 use Status;
 use User;
@@ -12,7 +11,6 @@ use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpValidationException;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\SiteLinkTargetProvider;
@@ -138,47 +136,6 @@ abstract class ModifyEntity extends ApiBase {
 	 */
 	protected function getResultBuilder() {
 		return $this->resultBuilder;
-	}
-
-	/**
-	 * Validates badges from params and turns them into an array of ItemIds.
-	 *
-	 * @todo: extract this into a SiteLinkBadgeHelper
-	 *
-	 * @param string[] $badgesParams
-	 *
-	 * @return ItemId[]
-	 */
-	protected function parseSiteLinkBadges( array $badgesParams ) {
-		$badges = array();
-
-		foreach ( $badgesParams as $badgeSerialization ) {
-			try {
-				$badgeId = new ItemId( $badgeSerialization );
-			} catch ( InvalidArgumentException $ex ) {
-				$this->errorReporter->dieError( 'Badges: could not parse "' . $badgeSerialization
-					. '", the id is invalid', 'invalid-entity-id' );
-				continue;
-			}
-
-			if ( !array_key_exists( $badgeId->getSerialization(), $this->badgeItems ) ) {
-				$this->errorReporter->dieError( 'Badges: item "' . $badgeSerialization . '" is not a badge',
-					'not-badge' );
-			}
-
-			$itemTitle = $this->titleLookup->getTitleForId( $badgeId );
-
-			if ( is_null( $itemTitle ) || !$itemTitle->exists() ) {
-				$this->errorReporter->dieError(
-					'Badges: no item found matching id "' . $badgeSerialization . '"',
-					'no-such-entity'
-				);
-			}
-
-			$badges[] = $badgeId;
-		}
-
-		return $badges;
 	}
 
 	/**
