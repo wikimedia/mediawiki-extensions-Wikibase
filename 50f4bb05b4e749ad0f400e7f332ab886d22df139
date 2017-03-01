@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_3af7b5d1",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2017-03-01T13:12:28Z",
+      "side": 1,
+      "message": "It is a bit hacky, but FIXME seems a bit of a strong indicator. A NOTE is probably fine assuming that this doesn\u0027t have any negative consequences at the moment and we\u0027ll soon get rid of this ApiErrorReporter mess.",
+      "revId": "50f4bb05b4e749ad0f400e7f332ab886d22df139",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_da37a9a9",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2017-03-01T13:12:28Z",
+      "side": 1,
+      "message": "This method can be removed now too!",
+      "revId": "50f4bb05b4e749ad0f400e7f332ab886d22df139",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_1abf51f7",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2017-03-01T13:12:28Z",
+      "side": 1,
+      "message": "This method can be removed now too!",
+      "revId": "50f4bb05b4e749ad0f400e7f332ab886d22df139",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
