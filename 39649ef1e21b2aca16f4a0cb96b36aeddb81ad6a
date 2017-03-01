@@ -46,6 +46,30 @@
       "revId": "39649ef1e21b2aca16f4a0cb96b36aeddb81ad6a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_b71d1e7a",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/ItemChangeOpDeserializerTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-01T11:51:33Z",
+      "side": 1,
+      "message": "oh dear, sure. Sorry for the noise.\n\nBut yet another thing about the names that came to my mind. Catching the difference between the trait and the actual class might not be simple. I mean you have to read all this LabelsChangeOpDeserializ.. to finally get to \"zer/zation\" that makes a difference.\n\nBut as I don\u0027t have any good name suggestions, I\u0027d happily leave this for others to figure out.",
+      "parentUuid": "ce3c5b53_d79542e7",
+      "range": {
+        "startLine": 30,
+        "startChar": 82,
+        "endLine": 30,
+        "endChar": 106
+      },
+      "revId": "39649ef1e21b2aca16f4a0cb96b36aeddb81ad6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
