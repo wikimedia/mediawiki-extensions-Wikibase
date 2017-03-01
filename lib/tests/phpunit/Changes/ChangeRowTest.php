@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Tests\Changes;
 use MediaWikiTestCase;
 use MWException;
 use Wikibase\ChangeRow;
+use Wikibase\EntityChange;
 
 /**
  * @covers Wikibase\ChangeRow
@@ -42,14 +43,9 @@ class ChangeRowTest extends MediaWikiTestCase {
 		$change->getTime();
 	}
 
-	public function testGetTypeReturnsChange() {
-		$change = $this->newChangeRow();
-		$this->assertSame( 'change', $change->getType() );
-	}
-
 	public function testReturnsObjectId() {
-		$change = $this->newChangeRow( [ 'object_id' => 'Q1' ] );
-		$this->assertSame( 'Q1', $change->getObjectId() );
+		$change = $this->newChangeRow( [ 'object_id' => 'q1' ] );
+		$this->assertSame( 'q1', $change->getObjectId() );
 	}
 
 	public function testCanNotReturnDefaultObjectId() {
@@ -181,7 +177,7 @@ class ChangeRowTest extends MediaWikiTestCase {
 	 * @return ChangeRow
 	 */
 	private function newChangeRow( array $fields = [] ) {
-		return $this->getMockForAbstractClass( ChangeRow::class, [ $fields ] );
+		return new EntityChange( $fields );
 	}
 
 }
