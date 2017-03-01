@@ -53,6 +53,7 @@
 	"wikibase-unconnectedpages-submit": "გვერდების ჩვენება",
 	"wikibase-pageinfo-entity-id": "{{grammar:genitive|{{WBREPONAME}}}} ელემენტის ID",
 	"wikibase-pageinfo-entity-id-none": "არაფერი",
+	"wikibase-pageinfo-entity-usage": "{{WBREPONAME}}-ს ობიექტები გამოყენებული ამ გვერდზე",
 	"wikibase-otherprojects": "სხვა პროექტებში",
 	"wikibase-otherprojects-beta-message": "სხვა პროექტების გვერდითი პანელი",
 	"wikibase-otherprojects-beta-description": "გვერდით პანელზე ამატებს განყოფილებას „{{int:wikibase-otherprojects}}“, რომელიც შეიცავს ფონდ ვიკიმედიის სხვა პროექტების ბმულებს Wikidata-ის მონაცემების საფუძველზე."

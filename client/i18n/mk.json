@@ -15,7 +15,7 @@
 	"apihelp-query+wbentityusage-example-simple": "Дај единици што се користат на страницата <kbd>Main Page</kbd>.",
 	"apihelp-query+wblistentityusage-description": "Ги дава ситге страници што користат единица со оваа назнака.",
 	"apihelp-query+wblistentityusage-param-prop": "Својства што ќе се додадат во исходот.",
-	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Ако е овозможено, URL на единицата што ќе се придодаде кон резултатот.",
+	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Ако е овозможено, URL на единицата што ќе се придодаде кон исходот.",
 	"apihelp-query+wblistentityusage-param-aspect": "Давај само назнаки на единици што го користат дадениов аспект.",
 	"apihelp-query+wblistentityusage-param-entities": "Употребени единици.",
 	"apihelp-query+wblistentityusage-param-limit": "Колку примени на единици да има во изводот.",

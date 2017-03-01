@@ -205,7 +205,7 @@
 	"wikibase-tokencheck-missingtoken": "সম্পাদনা টোকেন প্রয়োজন।",
 	"special-dispatchstats": "ডিসপ্যাচ পরিসংখ্যান পরিবর্তন",
 	"wikibase-dispatchstats-no-stats": "বর্তমানে কোন পরিসংখ্যান প্রাপ্তিসাধ্য নয়।",
-	"wikibase-dispatchstats-changes": "লগ পরিসংখ্যান পরবর্তন",
+	"wikibase-dispatchstats-changes": "পরিবর্তন লগের পরিসংখ্যান",
 	"wikibase-dispatchstats-stats": "ডিসপ্যাচ পরিসংখ্যান",
 	"wikibase-dispatchstats-change-id": "আইডি",
 	"wikibase-dispatchstats-change-timestamp": "সময়বার্তা",

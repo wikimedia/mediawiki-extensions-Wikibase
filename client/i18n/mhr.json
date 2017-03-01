@@ -5,7 +5,11 @@
 			"Санюн Вадик"
 		]
 	},
+	"tooltip-t-wikibase": "Ссылка на связанный элемент репозитория данных",
+	"wikibase-comment-update": "{{WBREPONAME}} элемент вашталтын",
 	"wikibase-editlinks": "Кылверым тӧрлаташ",
 	"wikibase-editlinkstitle": "Йылмыла кокласе кылвер-влакым тӧрлаташ",
-	"wikibase-rc-hide-wikidata-show": "ончыкташ"
+	"wikibase-rc-hide-wikidata-show": "ончыкташ",
+	"wikibase-rc-wikibase-edit-letter": "д",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} тӧрлатымаш"
 }
