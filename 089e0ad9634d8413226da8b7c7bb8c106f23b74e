@@ -33,6 +33,24 @@
       "revId": "089e0ad9634d8413226da8b7c7bb8c106f23b74e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_11cacfa3",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/ChangeOpDeserializerTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2017-03-02T11:36:34Z",
+      "side": 1,
+      "message": "It\u0027s only meant as a description of methods that test classes using the traits require to implement to reduce the magic that is going on.\n\nI wasn\u0027t sure either whether it makes sense to actually have it considering that it\u0027s not going to be used anywhere in the code. If you think it creates more confusion than clarity then I\u0027m perfectly fine with removing it. Happy to hear an opinion on this!",
+      "parentUuid": "ce3c5b53_883ebb85",
+      "revId": "089e0ad9634d8413226da8b7c7bb8c106f23b74e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
