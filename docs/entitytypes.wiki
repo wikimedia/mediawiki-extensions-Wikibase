@@ -65,6 +65,9 @@ associated with a function having the dedicated signature:
 ; js-deserializer-factory-function (repo only)
 : a string representing a resource loader module that, when `require`d, returns a function returning
   a `wikibase.serialization.Deserializer` instance supporting this entity type
+; rdf-builder-factory-callback (repo only)
+: a a callable that returns a EntityRdfBuilder instance. See EntityRdfBuilderFactory::getEntityRdfBuilder
+  for arguments in the callback
 
 Extensions that wish to register an entity type should use the WikibaseRepoEntityTypes and/or
 WikibaseClientEntityTypes hooks to provide additional entity type definitions.

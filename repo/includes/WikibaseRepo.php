@@ -84,6 +84,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikibase\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
@@ -283,6 +284,11 @@ class WikibaseRepo {
 	 * @var SettingsArray|null
 	 */
 	private $clientSettings = null;
+
+	/**
+	 * @var EntityRdfBuilderFactory|null
+	 */
+	private $entityRdfBuilderFactory = null;
 
 	/**
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
@@ -1866,6 +1872,19 @@ class WikibaseRepo {
 	 */
 	public function getChangeOpDeserializerCallbacks() {
 		return $this->entityTypeDefinitions->getChangeOpDeserializerCallbacks();
+	}
+
+	/**
+	 * @return EntityRdfBuilderFactory
+	 */
+	public function getEntityRdfBuilderFactory() {
+		if ( $this->entityRdfBuilderFactory === null ) {
+			$this->entityRdfBuilderFactory = new EntityRdfBuilderFactory(
+				$this->entityTypeDefinitions->getRdfBuilderFactoryCallbacks()
+			);
+		}
+
+		return $this->entityRdfBuilderFactory;
 	}
 
 }
