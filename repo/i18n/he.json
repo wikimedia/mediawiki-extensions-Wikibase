@@ -331,6 +331,8 @@
 	"wikibase-listdatatypes-commonsmedia-body": "קישור לקבצים שמאוחסנים בוויקישיתוף. בעת הזנת ערך, ייערך חיפוש קבצים מתאימים במרחב קובץ (File) בוויקישיתוף.",
 	"wikibase-listdatatypes-globe-coordinate-head": "נקודת ציון של גלובוס",
 	"wikibase-listdatatypes-globe-coordinate-body": "נתונים מפורשים על מיקום גאוגרפי בתור זוג קו־רוחב–קו־אורך ב־gms או במעלות עשרוניות לגוף השמימי הנתון. בררת המחדל היא להשתמש בכדור הארץ ובמערכת גאודזית עולמית (WGS84). מתווספים רזולוציה וטווח.\n* latitude – החלק המשתמע הראשון (float, dms, dm, dd) של מחרוזת נקודות הציון, הכיוון ניתן בסימן בהתחלה או ב־N/S בסוף\n* longitude – החלק המשתמע השני (float, dms, dm, dd) של מחרוזת נקודות הציון, הכיוון ניתן בסימן בהתחלה או ב־E/W בסוף\n* globe ערך נתונים מפורש (?), נתון כגוף שמימי כאשר בררת המחדל היא \"Earth\" (\"כדור הארץ\"), \"http://www.wikidata.org/entity/Q2\"\n* precision – הדיוק המספרי של נקודת הציון",
+	"wikibase-listdatatypes-geo-shape-head": "צורה גאוגרפית",
+	"wikibase-listdatatypes-geo-shape-body": "קישור לנתוני מפה גאוגרפית שמאוחסנת בוויקישיתוף (או ויקי אחר עם הגדרות מתאימות). ר' https://www.mediawiki.org/wiki/Help:Map_Data לתיעוד נוסף על נתוני מפה.",
 	"wikibase-listdatatypes-quantity-head": "כמות",
 	"wikibase-listdatatypes-quantity-body": "שדה נתונים מפורשים שמתייחס ליחידה כלשהי שמודרת היטב. היחידה האמתית אמורה להיות בערכי הנתונים המוזנים.\n* amount – חלק משתמע של המחרוזת (מיפוי של תחילית היחידה אינו ברור)\n* unit – חלק משתמע של המחרוזת, בררת המחדל – \"1\" (מיפוי לגוף התקינה אינו ברור)\n* upperbound – הגבול העליון של הכמות\n* lowerbound – הגבול התחתון של הכמות",
 	"wikibase-listdatatypes-monolingualtext-head": "טקסט חד־לשוני",

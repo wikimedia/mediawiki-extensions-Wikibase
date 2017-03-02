@@ -264,6 +264,7 @@
 	"wikibase-listdatatypes-wikibase-property-head": "বৈশিষ্ট্য",
 	"wikibase-listdatatypes-commonsmedia-head": "কমন্স মিডিয়া",
 	"wikibase-listdatatypes-globe-coordinate-head": "ভৌগলিক স্থানাংক",
+	"wikibase-listdatatypes-geo-shape-head": "জিওগ্রাফিক আকৃতি",
 	"wikibase-listdatatypes-quantity-head": "পরিমাণ",
 	"wikibase-listdatatypes-monolingualtext-head": "বহুভাষিক টেক্সট",
 	"wikibase-listdatatypes-multilingualtext-head": "বহুভাষিক টেক্সট",

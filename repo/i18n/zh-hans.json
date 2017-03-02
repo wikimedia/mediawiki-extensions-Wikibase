@@ -347,6 +347,8 @@
 	"wikibase-listdatatypes-commonsmedia-body": "储存在维基共享资源的文件的链接。输入值后将搜索共享资源的“文件”名字空间以匹配对应文件。",
 	"wikibase-listdatatypes-globe-coordinate-head": "地球坐标",
 	"wikibase-listdatatypes-globe-coordinate-body": "由gms或十进制经纬度度指定的地理位置的原始数据代码。默认为“地球”其次是“WGS84”。其加入一解析度及范围。\n* 纬度——隐藏地理位置代码的第一部分，包含float、dms、dm及dd，方向由前缀符号或后缀N或S提供\n* 经度——隐藏地理位置代码的第二部分，包含float、dms、dm及dd，方向由前缀符号或后缀E或W提供\n* 星球——精确（？）的数据值，作为恒星主体，默认为地球“http://www.wikidata.org/entity/Q2”\n* 精度——数值化的坐标精度",
+	"wikibase-listdatatypes-geo-shape-head": "地理形状",
+	"wikibase-listdatatypes-geo-shape-body": "链接到存储在维基共享资源（或其他配置的wiki）上的地理图数据。参见“https://www.mediawiki.org/wiki/Help:Map_Data ”获取更多有关地图数据的文档。",
 	"wikibase-listdatatypes-quantity-head": "数量",
 	"wikibase-listdatatypes-quantity-body": "一些精确定义单位的数值的原始数据字段。实际单位也输入到数据中。\n* 数额——字符串的暗示部分（单位前缀的映射未知）\n* 单位——默认为“1”字符串的暗示部分（映射的规范实体未知）\n* 上限——量的最高界限\n* 下限——量的最低界限",
 	"wikibase-listdatatypes-monolingualtext-head": "单语文本",
