@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_7b0f7ce4",
+        "filename": "repo/config/EntityPrefixSearchProfiles.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-02T01:49:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3c5b53_7ec21f3b",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_3ebc97b0",
         "filename": "repo/config/Wikibase.default.php",
         "patchSetId": 35
@@ -106,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_3bf254e0",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-02T01:49:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3c5b53_3ebc97b0",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_1ec19333",
         "filename": "repo/config/Wikibase.default.php",
         "patchSetId": 35
@@ -117,6 +153,24 @@
       "writtenOn": "2017-02-27T19:25:26Z",
       "side": 1,
       "message": "odd indent",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_db0008b2",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-02T01:49:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3c5b53_1ec19333",
       "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -151,6 +205,24 @@
       "writtenOn": "2017-03-01T22:42:58Z",
       "side": 1,
       "message": "can do.",
+      "parentUuid": "ce3c5b53_9ee363d4",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_5b239854",
+        "filename": "repo/includes/Api/EntitySearchHelper.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-02T01:49:50Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "ce3c5b53_9ee363d4",
       "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
@@ -227,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_7b269c64",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-02T01:49:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3c5b53_5e44fbbc",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_7e3f7f20",
         "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
         "patchSetId": 35
@@ -244,6 +334,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_1b1e7011",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-02T01:49:50Z",
+      "side": 1,
+      "message": "added reference to wikibase.default.php where it is described.",
+      "parentUuid": "ce3c5b53_7e3f7f20",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_1e4e73dd",
         "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
         "patchSetId": 35
@@ -255,6 +363,24 @@
       "writtenOn": "2017-02-27T19:25:26Z",
       "side": 1,
       "message": "Please check $settings and $contentModelMap using Assert::parameterElementType",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_3b19f427",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-02T01:49:50Z",
+      "side": 1,
+      "message": "I don\u0027t know types for settings, and for content map it comes directly from system configs, why would I re-check it here specifically?",
+      "parentUuid": "ce3c5b53_1e4e73dd",
       "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -290,6 +416,24 @@
       "side": 1,
       "message": "Good point, but I\u0027m not sure what to do here instead. It looks to me like mistyping search query, etc. - maybe use the same mechanism Elastic uses to report problems with keywords? I\u0027m not sure I can access it from here but I could try.",
       "parentUuid": "ce3c5b53_3e49f7d3",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_db17a8f0",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-02T01:49:50Z",
+      "side": 1,
+      "message": "The problem here is that right now EntitySearchHelper API does not have any way of providing warnings, etc. So I can log them to the error log, but I can not return them as part of the API. I can make a patch to do this, but I really don\u0027t want to make this patch even bigger. It probably will require refactoring EntitySearchHelper to return Status instead of array.",
+      "parentUuid": "ce3c5b53_09d94d26",
       "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -395,6 +539,24 @@
       "side": 1,
       "message": "can do that.",
       "parentUuid": "ce3c5b53_fe670f47",
+      "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_bbb664d5",
+        "filename": "repo/includes/Search/Elastic/WikibasePrefixSearcher.php",
+        "patchSetId": 35
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-02T01:49:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3c5b53_89fb1d77",
       "revId": "965a6dd3d1ee787161517f0eefacf495b3c41006",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
