@@ -16,6 +16,24 @@
       "revId": "b6d1e4f0566d33bdc97c5c30e6c5a0dace96feab",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_cf33625e",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-02T17:42:51Z",
+      "side": 1,
+      "message": "I\u0027m afraid I don\u0027t get what you want to say with this comment.\n\nWhat the two lines of code that are using this actually do is *assuming* this entity exists locally. So naming this \"isLocal\" is much closer to what actually happens.\n\nAlso this is only a step in a chain of patches. The line we are arguing about here will change.",
+      "parentUuid": "ce3c5b53_3d648f10",
+      "revId": "b6d1e4f0566d33bdc97c5c30e6c5a0dace96feab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
