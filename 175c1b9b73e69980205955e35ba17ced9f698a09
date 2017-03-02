@@ -33,6 +33,24 @@
       "revId": "175c1b9b73e69980205955e35ba17ced9f698a09",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_3ec3223f",
+        "filename": "repo/includes/ChangeOp/ChangeOpSiteLink.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-02T09:04:32Z",
+      "side": 1,
+      "message": "Yes, I am quite sure InvalidArgumentException would be too general.\nWhen actually plugging ChangeOpDeserializers in API\\EditEntity in I2977607b4b02bc56183cfa5a9a9a0dc57432964d I ended up doing some quite hacky things with those exception, so that the result in the API error response is (hopefully) unchanged.\nFor instance, this bit was changed as in https://gerrit.wikimedia.org/r/#/c/331882/5/repo/includes/ChangeOp/ChangeOpSiteLink.php@157\n\nThis thing about the exception should probably not be part of I2977607b4b02bc56183cfa5a9a9a0dc57432964d  to make review of it easier but I am not sure if it should be done before all the deserializer patches, or afterwards.",
+      "parentUuid": "ce3c5b53_e88187c9",
+      "revId": "175c1b9b73e69980205955e35ba17ced9f698a09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
