@@ -103,4 +103,21 @@ class PropertyId extends EntityId implements Int32EntityId {
 		return new self( 'P' . $numericId );
 	}
 
+	/**
+	 * CAUTION: Use the full string serialization whenever you can and avoid using numeric IDs.
+	 *
+	 * @param string $repositoryName
+	 * @param int|float|string $numericId
+	 *
+	 * @return self
+	 * @throws InvalidArgumentException
+	 */
+	public static function newFromRepositoryAndNumber( $repositoryName, $numericId ) {
+		if ( !is_numeric( $numericId ) ) {
+			throw new InvalidArgumentException( '$numericId must be numeric' );
+		}
+
+		return new self( self::joinSerialization( [ $repositoryName, '', 'P' . $numericId ] ) );
+	}
+
 }
