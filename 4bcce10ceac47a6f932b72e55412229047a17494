@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_9bdb5154",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2017-03-03T23:54:05Z",
+      "side": 1,
+      "message": "I think this line should be part of the description instead of the summary",
+      "revId": "4bcce10ceac47a6f932b72e55412229047a17494",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
