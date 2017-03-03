@@ -142,8 +142,11 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 			}
 		) );
 
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		// Note: we test against the actual RDF bindings here, so we get actual RDF.
-		$rdfBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
+		$rdfBuilderFactory = $wikibaseRepo->getValueSnakRdfBuilderFactory();
+
+		$entityRdfBuilderFactory = $wikibaseRepo->getEntityRdfBuilderFactory();
 
 		return RdfDumpGenerator::createDumpGenerator(
 			'ntriples',
@@ -152,6 +155,7 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 			$entityRevisionLookup,
 			$dataTypeLookup,
 			$rdfBuilderFactory,
+			$entityRdfBuilderFactory,
 			new NullEntityPrefetcher(),
 			new RdfVocabulary(
 				self::URI_BASE,
