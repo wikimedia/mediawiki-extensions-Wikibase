@@ -88,12 +88,19 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		// Note: using the actual factory here makes this an integration test!
 		$valueBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
 
+		$entityRdfBuilderFactory = WikibaseRepo::getDefaultInstance()->getEntityRdfBuilderFactory();
 		$emitter = new NTriplesRdfWriter();
-		$builder =
-			new RdfBuilder( $this->getTestData()->getSiteList(),
-				$vocabulary ?: $this->getTestData()->getVocabulary(), $valueBuilderFactory,
-				$this->getTestData()->getMockRepository(), $produce, $emitter, $dedup,
-				$this->getEntityTitleLookup() );
+		$builder = new RdfBuilder(
+			$this->getTestData()->getSiteList(),
+			$vocabulary ?: $this->getTestData()->getVocabulary(),
+			$valueBuilderFactory,
+			$this->getTestData()->getMockRepository(),
+			$entityRdfBuilderFactory,
+			$produce,
+			$emitter,
+			$dedup,
+			$this->getEntityTitleLookup()
+		);
 
 		$builder->startDocument();
 		return $builder;
