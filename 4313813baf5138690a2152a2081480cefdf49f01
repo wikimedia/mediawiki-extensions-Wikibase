@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_099b837a",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-03T08:32:33Z",
+      "side": 1,
+      "message": "Do we know for sure (and do we need to require) to have an DisptchingEntityRdfBuilder here? Wouldn\u0027t EntityRdfBuilder be sufficient?\n\nGenerally, use the most narrow and general interface possible.",
+      "revId": "4313813baf5138690a2152a2081480cefdf49f01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_09a14391",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-03T08:32:33Z",
+      "side": 1,
+      "message": "Note for later: we will need custom terms builders too, to handle lemma etc. Perhaps EntityRdfBuilderFactory can have a second factory method, getTermsRdfBuilder.",
+      "revId": "4313813baf5138690a2152a2081480cefdf49f01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_a990574f",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-03T08:32:33Z",
+      "side": 1,
+      "message": "This should now probably go into entitytypes.php, for the item type; See comment about $this-\u003edispatchingEntityRdfBuilder below.\n\nIdeally, the functionality of newTruthyStatementRdfBuilder and newFullStatementRdfBuilder would also be moved to entitytypes.php. But that\u0027s a bit annoying, since it should be the same for all entities that support Statements, so let\u0027s leave them here for now.",
+      "revId": "4313813baf5138690a2152a2081480cefdf49f01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_c9a4bbb1",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-03T08:32:33Z",
+      "side": 1,
+      "message": "We already have $this-\u003ebuilders, which is a list of EntityRdfBuilders. So just do:\n\n  $this-\u003ebuilders[] \u003d $entityRdfBuilderFactory-\u003egetEntityRdfBuilder().\n\nThat way, $this-\u003edispatchingEntityRdfBuilder isn\u0027t needed. \n\nActually, this makes it seem like the EntityRdfBuilderFactory could just return a list of EntityRdfBuilders, instead of a dispatching one. When I originally thought about it, I did not realize we already have this list here.\n\nAnyway - either we have a $this-\u003edispatchingEntityRdfBuilder that does everything, or we have $this-\u003ebuilders, and no $this-\u003edispatchingEntityRdfBuilder. Having both is confusing, since they serve the same purpose.",
+      "revId": "4313813baf5138690a2152a2081480cefdf49f01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_299c475e",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-03T08:32:33Z",
+      "side": 1,
+      "message": "Not needed if we put everything into $this-\u003ebuilders.",
+      "revId": "4313813baf5138690a2152a2081480cefdf49f01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
