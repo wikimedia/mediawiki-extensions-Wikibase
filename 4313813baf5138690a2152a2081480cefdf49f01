@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_c9c11b35",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-03T08:46:36Z",
+      "side": 1,
+      "message": "I think it should stay DispatchingEntityRdfBuilder. I explain in more detail below.",
+      "parentUuid": "ce3c5b53_099b837a",
+      "revId": "4313813baf5138690a2152a2081480cefdf49f01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_09a14391",
         "filename": "repo/includes/Rdf/RdfBuilder.php",
         "patchSetId": 1
@@ -64,6 +82,24 @@
       "writtenOn": "2017-03-03T08:32:33Z",
       "side": 1,
       "message": "We already have $this-\u003ebuilders, which is a list of EntityRdfBuilders. So just do:\n\n  $this-\u003ebuilders[] \u003d $entityRdfBuilderFactory-\u003egetEntityRdfBuilder().\n\nThat way, $this-\u003edispatchingEntityRdfBuilder isn\u0027t needed. \n\nActually, this makes it seem like the EntityRdfBuilderFactory could just return a list of EntityRdfBuilders, instead of a dispatching one. When I originally thought about it, I did not realize we already have this list here.\n\nAnyway - either we have a $this-\u003edispatchingEntityRdfBuilder that does everything, or we have $this-\u003ebuilders, and no $this-\u003edispatchingEntityRdfBuilder. Having both is confusing, since they serve the same purpose.",
+      "revId": "4313813baf5138690a2152a2081480cefdf49f01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_e9d3bf03",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-03T08:46:36Z",
+      "side": 1,
+      "message": "My long-term plan is to deprecate $this-\u003ebuilders and use $this-\u003edispatchingEntityRdfBuilder because it will have a map of entities to their proper builders. So, for example sitelink builder won\u0027t be used at all in other types. I think this is cleaner and more maintainable in long-term.",
+      "parentUuid": "ce3c5b53_c9a4bbb1",
       "revId": "4313813baf5138690a2152a2081480cefdf49f01",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
