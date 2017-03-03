@@ -82,20 +82,22 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	private $pageProps;
 
 	/**
-	 * @param SiteList                   $sites
-	 * @param RdfVocabulary              $vocabulary
+	 * @param SiteList $sites
+	 * @param RdfVocabulary $vocabulary
 	 * @param ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory
-	 * @param PropertyDataTypeLookup     $propertyLookup
-	 * @param int                        $flavor
-	 * @param RdfWriter                  $writer
-	 * @param DedupeBag                  $dedupeBag
-	 * @param EntityTitleLookup          $titleLookup
+	 * @param PropertyDataTypeLookup $propertyLookup
+	 * @param EntityRdfBuilderFactory $entityRdfBuilderFactory
+	 * @param int $flavor
+	 * @param RdfWriter $writer
+	 * @param DedupeBag $dedupeBag
+	 * @param EntityTitleLookup $titleLookup
 	 */
 	public function __construct(
 		SiteList $sites,
 		RdfVocabulary $vocabulary,
 		ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory,
 		PropertyDataTypeLookup $propertyLookup,
+		EntityRdfBuilderFactory $entityRdfBuilderFactory,
 		$flavor,
 		RdfWriter $writer,
 		DedupeBag $dedupeBag,
@@ -127,6 +129,17 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 			$builder->setDedupeBag( $this->dedupeBag );
 			$this->builders[] = $builder;
 		}
+
+		$entityRdfBuilders = $entityRdfBuilderFactory->getEntityRdfBuilder(
+			$flavor,
+			$vocabulary,
+			$writer,
+			$this,
+			$dedupeBag
+		);
+
+		$this->builders = array_merge( $this->builders, $entityRdfBuilders );
+
 	}
 
 	/**
