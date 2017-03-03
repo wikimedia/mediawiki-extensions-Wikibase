@@ -22,6 +22,30 @@
       "revId": "d84a45f1ef90faf0eafd38efd1190c0e41b13800",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_c90b5b2c",
+        "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-03T09:45:42Z",
+      "side": 1,
+      "message": "This comes from RdfBuilder, the flags are defined in RdfProducer. Yea, the documentation should probably say so. This is also missing in RdfBuilder...",
+      "parentUuid": "2ef897d1_eb386aed",
+      "range": {
+        "startLine": 23,
+        "startChar": 28,
+        "endLine": 23,
+        "endChar": 60
+      },
+      "revId": "d84a45f1ef90faf0eafd38efd1190c0e41b13800",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
