@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Tests;
 
 use OutOfBoundsException;
 use PHPUnit_Framework_TestCase;
-use ValueValidators\NullValidator;
 use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
+use Wikibase\Repo\Validators\CompositeValidator;
 use Wikimedia\Assert\ParameterElementTypeException;
 use Wikimedia\Assert\PostconditionException;
 
@@ -54,7 +54,7 @@ class BuilderBasedDataTypeValidatorFactoryTest extends PHPUnit_Framework_TestCas
 	}
 
 	public function testGetValidators() {
-		$validators = array( new NullValidator() );
+		$validators = [ new CompositeValidator( [] ) ];
 		$factory = new BuilderBasedDataTypeValidatorFactory( array(
 			'id' => function() use ( $validators ) {
 				return $validators;

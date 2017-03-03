@@ -15,7 +15,6 @@ use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
 use ValueValidators\Error;
-use ValueValidators\NullValidator;
 use ValueValidators\ValueValidator;
 use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
@@ -167,13 +166,11 @@ class ParseValue extends ApiBase {
 	 * @return ValueValidator
 	 */
 	private function wrapValidators( array $validators ) {
-		if ( count( $validators ) === 0 ) {
-			return new NullValidator();
-		} elseif ( count( $validators ) === 1 ) {
+		if ( count( $validators ) === 1 ) {
 			return reset( $validators );
-		} else {
-			return new CompositeValidator( $validators, true );
 		}
+
+		return new CompositeValidator( $validators, true );
 	}
 
 	/**
