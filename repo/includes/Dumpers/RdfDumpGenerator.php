@@ -16,6 +16,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfBuilder;
@@ -192,6 +193,7 @@ class RdfDumpGenerator extends DumpGenerator {
 	 * @param EntityRevisionLookup       $entityRevisionLookup
 	 * @param PropertyDataTypeLookup     $propertyLookup
 	 * @param ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory
+	 * @param EntityRdfBuilderFactory    $entityRdfBuilderFactory
 	 * @param EntityPrefetcher           $entityPrefetcher
 	 * @param RdfVocabulary              $vocabulary
 	 * @param EntityTitleLookup          $titleLookup
@@ -205,6 +207,7 @@ class RdfDumpGenerator extends DumpGenerator {
 		EntityRevisionLookup $entityRevisionLookup,
 		PropertyDataTypeLookup $propertyLookup,
 		ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory,
+		EntityRdfBuilderFactory $entityRdfBuilderFactory,
 		EntityPrefetcher $entityPrefetcher,
 		RdfVocabulary $vocabulary,
 		EntityTitleLookup $titleLookup
@@ -225,6 +228,7 @@ class RdfDumpGenerator extends DumpGenerator {
 			$vocabulary,
 			$valueSnakRdfBuilderFactory,
 			$propertyLookup,
+			$entityRdfBuilderFactory,
 			$flavor,
 			$rdfWriter,
 			new HashDedupeBag(),

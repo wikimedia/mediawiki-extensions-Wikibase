@@ -9,6 +9,7 @@ use Wikibase\Dumpers\DumpGenerator;
 use Wikibase\Dumpers\RdfDumpGenerator;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
@@ -50,6 +51,11 @@ class DumpRdf extends DumpScript {
 	private $valueSnakRdfBuilderFactory;
 
 	/**
+	 * @var EntityRdfBuilderFactory
+	 */
+	private $entityRdfBuilderFactory;
+
+	/**
 	 * @var RdfVocabulary
 	 */
 	private $rdfVocabulary;
@@ -70,14 +76,15 @@ class DumpRdf extends DumpScript {
 	}
 
 	/**
-	 * @param SqlEntityIdPagerFactory    $sqlEntityIdPagerFactory
-	 * @param EntityPrefetcher           $entityPrefetcher
-	 * @param SiteLookup                  $siteLookup
-	 * @param PropertyDataTypeLookup     $propertyDataTypeLookup
+	 * @param SqlEntityIdPagerFactory $sqlEntityIdPagerFactory
+	 * @param EntityPrefetcher $entityPrefetcher
+	 * @param SiteLookup $siteLookup
+	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory
-	 * @param EntityRevisionLookup       $entityRevisionLookup
-	 * @param RdfVocabulary              $rdfVocabulary
-	 * @param EntityTitleLookup          $titleLookup
+	 * @param EntityRdfBuilderFactory $entityRdfBuilderFactory
+	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param RdfVocabulary $rdfVocabulary
+	 * @param EntityTitleLookup $titleLookup
 	 */
 	public function setServices(
 		SqlEntityIdPagerFactory $sqlEntityIdPagerFactory,
@@ -85,6 +92,7 @@ class DumpRdf extends DumpScript {
 		SiteLookup $siteLookup,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory,
+		EntityRdfBuilderFactory $entityRdfBuilderFactory,
 		EntityRevisionLookup $entityRevisionLookup,
 		RdfVocabulary $rdfVocabulary,
 		EntityTitleLookup $titleLookup
@@ -94,6 +102,7 @@ class DumpRdf extends DumpScript {
 		$this->siteLookup = $siteLookup;
 		$this->propertyDatatypeLookup = $propertyDataTypeLookup;
 		$this->valueSnakRdfBuilderFactory = $valueSnakRdfBuilderFactory;
+		$this->entityRdfBuilderFactory = $entityRdfBuilderFactory;
 		$this->revisionLookup = $entityRevisionLookup;
 		$this->rdfVocabulary = $rdfVocabulary;
 		$this->titleLookup = $titleLookup;
@@ -114,6 +123,7 @@ class DumpRdf extends DumpScript {
 				$wikibaseRepo->getSiteLookup(),
 				$wikibaseRepo->getPropertyDataTypeLookup(),
 				$wikibaseRepo->getValueSnakRdfBuilderFactory(),
+				$wikibaseRepo->getEntityRdfBuilderFactory(),
 				$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
 				$wikibaseRepo->getRdfVocabulary(),
 				$wikibaseRepo->getEntityContentFactory()
@@ -146,6 +156,7 @@ class DumpRdf extends DumpScript {
 			$this->revisionLookup,
 			$this->propertyDatatypeLookup,
 			$this->valueSnakRdfBuilderFactory,
+			$this->entityRdfBuilderFactory,
 			$this->entityPrefetcher,
 			$this->rdfVocabulary,
 			$this->titleLookup
