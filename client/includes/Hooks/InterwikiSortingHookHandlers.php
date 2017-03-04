@@ -4,6 +4,7 @@ namespace Wikibase\Client\Hooks;
 
 use Config;
 use Content;
+use ExtensionRegistry;
 use MediaWiki\MediaWikiServices;
 use ParserOutput;
 use Title;
@@ -108,8 +109,10 @@ class InterwikiSortingHookHandlers {
 		Title $title,
 		ParserOutput $parserOutput
 	) {
-		$handler = self::newFromGlobalState();
-		$handler->doContentAlterParserOutput( $title, $parserOutput );
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'InterwikiSorting' ) ) {
+			$handler = self::newFromGlobalState();
+			$handler->doContentAlterParserOutput( $title, $parserOutput );
+		}
 
 		return true;
 	}
