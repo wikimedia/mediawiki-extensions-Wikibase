@@ -49,7 +49,7 @@
 	"wikibase-comment-sitelink-change": "Liamm yezh cheñchet eus $1 da $2",
 	"wikibase-comment-sitelink-remove": "Liamm yezh dilamet : $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|c'hemm|kemm}}",
-	"wikibase-dataitem": "Elfenn Wikiroadennoù",
+	"wikibase-dataitem": "Elfenn {{WBREPONAME}}",
 	"wikibase-editlinks": "Kemmañ al liammoù",
 	"wikibase-editlinkstitle": "Kemmañ al liammoù etreyezhel",
 	"wikibase-addlinkstitle": "Ouzhpennañ al liammoù etreyezhel",

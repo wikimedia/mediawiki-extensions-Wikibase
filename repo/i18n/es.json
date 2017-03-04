@@ -345,6 +345,7 @@
 	"wikibase-listdatatypes-commonsmedia-head": "Archivos multimedia de Commons",
 	"wikibase-listdatatypes-commonsmedia-body": "Enlace hacia archivos almacenados en Wikimedia Commons. Cuando se ingresa un valor, se buscan archivos coincidentes en el espacio de nombres \"Archivo\" de Commons.",
 	"wikibase-listdatatypes-globe-coordinate-head": "Coordenadas geográficas",
+	"wikibase-listdatatypes-geo-shape-head": "Forma geográfica",
 	"wikibase-listdatatypes-quantity-head": "Cantidad",
 	"wikibase-listdatatypes-monolingualtext-head": "Texto monolingüe",
 	"wikibase-listdatatypes-multilingualtext-head": "Texto multilingüe",

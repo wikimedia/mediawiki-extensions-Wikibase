@@ -29,5 +29,6 @@
 	"wikibase-tooltip-error-details": "Detalji",
 	"datatypes-type-wikibase-item": "Stavka",
 	"datatypes-type-commonsMedia": "Commons medijska datoteka",
-	"version-wikibase": "Wikibase"
+	"version-wikibase": "Wikibase",
+	"wikibase-entity-summary-wbsetsitelink-remove": "Uklonjen link ka [$2]"
 }

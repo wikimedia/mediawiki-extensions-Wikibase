@@ -4,6 +4,11 @@
 			"Csisc"
 		]
 	},
+	"wikibase-comment-update": "عنصر {{WBREPONAME}} تبدّل",
 	"wikibase-editlinkstitle": "بدّل الليانات إلّي يهزّوا لنفس الپاج في لغات أخرين",
-	"wikibase-rc-hide-wikidata-hide": "خبّي"
+	"wikibase-rc-hide-wikidata-hide": "خبّي",
+	"wikibase-rc-hide-wikidata-show": "ورّي",
+	"wikibase-rc-wikibase-edit-letter": "د",
+	"wikibase-rc-wikibase-edit-title": "تبديل {{WBREPONAME}}",
+	"wikibase-otherprojects": "في مشاريع أخرين"
 }
