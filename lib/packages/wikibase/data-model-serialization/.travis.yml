@@ -1,8 +1,5 @@
 language: php
 
-env:
-  - THENEEDFORTHIS=FAIL
-
 matrix:
   fast_finish: true
   include:
@@ -16,17 +13,20 @@ matrix:
       php: 7
     - env: DM=~4.2
       php: hhvm
-  exclude:
-    - env: THENEEDFORTHIS=FAIL
   allow_failures:
     - env: DM=@dev
 
 sudo: false
 
-before_script:
-  - travis_retry composer require "wikibase/data-model=$DM" --prefer-source
+install: travis_retry composer require "wikibase/data-model=$DM" --prefer-source
 
 script: composer ci
+
+after_success:
+  - if [[ "`phpenv version-name`" != "7.1" ]]; then exit 0; fi
+  - vendor/bin/phpunit --coverage-clover coverage.clover
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
 
 notifications:
   irc:
