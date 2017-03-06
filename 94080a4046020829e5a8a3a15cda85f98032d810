@@ -1,0 +1,277 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_01190f27",
+        "filename": "docs/entitytypes.wiki",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-06T10:15:22Z",
+      "side": 1,
+      "message": "too many a\u0027s :)",
+      "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_a169438a",
+        "filename": "repo/includes/Rdf/DispatchingEntityRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-06T10:15:22Z",
+      "side": 1,
+      "message": "I know other RDF code doesn\u0027t do it but this could possibly also be Wikibase\\Repo\\Rdf, no?",
+      "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_c16487b0",
+        "filename": "repo/includes/Rdf/DispatchingEntityRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-06T10:15:22Z",
+      "side": 1,
+      "message": "Minor\u0026nitpick: this description could possibly also say what does \"dispatching\" means here (ie. that it \"delegates\" the RDF building to builders specified for the entity type). It is pretty clear while looking at code but \"dispatching\" does mean few slightly different things in Wikibase so it might be worth adding three more words to make it super obvious.",
+      "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_21f8d3e1",
+        "filename": "repo/includes/Rdf/DispatchingEntityRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-06T10:15:22Z",
+      "side": 1,
+      "message": "I believe EntityRdfBuilder[] is not fully accurate, as each value of $rdfBuilders is supposed to be a list of EntityRdfBuilder not the \"single\" EntityRdfBuilder object.\nAlso description of the parameter is not really explaining this very clear IMO.",
+      "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_c14d6740",
+        "filename": "repo/includes/Rdf/DispatchingEntityRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-06T10:15:22Z",
+      "side": 1,
+      "message": "This will generate exception message: Bad value for parameter $rdfBuilders: all elements must be Wikibase\\Rdf\\EntityRdfBuilder.\nAs said in the comment above, this is not 100% accurate.",
+      "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_a1ece320",
+        "filename": "repo/includes/Rdf/DispatchingEntityRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-06T10:15:22Z",
+      "side": 1,
+      "message": "The null check might not really be needed I think. Is it even possible $entityType is null here?",
+      "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_81051fc6",
+        "filename": "repo/includes/Rdf/DispatchingEntityRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-06T10:15:22Z",
+      "side": 1,
+      "message": "This could possibly also throw some exception, so this code is not bound to MW core.\nOn the other hand, is it intended that this class does not let addEntity to be called with entity of some unknown/unconfigured type? Shouldn\u0027t it just ignore it if it happens?",
+      "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_81c2ff5b",
+        "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-06T10:15:22Z",
+      "side": 1,
+      "message": "As in the other class: could also be Wikibase\\Repo\\Rdf",
+      "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_e1f66bd3",
+        "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-06T10:15:22Z",
+      "side": 1,
+      "message": "cope\u0026paste error?",
+      "range": {
+        "startLine": 9,
+        "startChar": 15,
+        "endLine": 9,
+        "endChar": 34
+      },
+      "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_e1ec2bf4",
+        "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-06T10:15:22Z",
+      "side": 1,
+      "message": "and this one",
+      "range": {
+        "startLine": 10,
+        "startChar": 16,
+        "endLine": 10,
+        "endChar": 35
+      },
+      "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_c1fb27b9",
+        "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-06T10:15:22Z",
+      "side": 1,
+      "message": "copy\u0026paste error?\nThere seems to be more parameters (and of different type) when callbacks are actually fired below.\n\nAnd also: shouldn\u0027t callbacks be returning array of EntityRdfBuilder objects?",
+      "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_6129fb35",
+        "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-06T10:15:22Z",
+      "side": 1,
+      "message": "Not sure but constructor docs say callback can also return null. If this is true, shouldn\u0027t nulls be skipped here then? If I get it right, if you then pass null to DispatchingEntityRdfBuilder it will break. This might be fine but seems odd to have DispatchingEntityRdfBuilder break in case data (callbacks) meet requirements specified.\n\nAnd more general, I wonder what would be right place to check that callback doesn\u0027t return some other random object/value. Shouldn\u0027t it be here?",
+      "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_410f17e4",
+        "filename": "repo/tests/phpunit/includes/Rdf/DispatchingEntityRdfBuilderTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-06T10:15:22Z",
+      "side": 1,
+      "message": "Those tests are pretty modest.\n\nPossibly it might make sense to also test cases where there are multiple builders for an entity type (all are fired), and that dispatching builder only uses builder configured for the entity type (ie. when there are builders for properties but item given, ones for property are not used).",
+      "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_21b9b3e6",
+        "filename": "repo/tests/phpunit/includes/Rdf/EntityRdfBuilderFactoryTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-06T10:15:22Z",
+      "side": 1,
+      "message": "data provider method could also use \"provide\" verb so its purpose is more evident. Not a big deal in a small test class like this one, though.",
+      "range": {
+        "startLine": 29,
+        "startChar": 17,
+        "endLine": 29,
+        "endChar": 32
+      },
+      "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_e1d3cb2e",
+        "filename": "repo/tests/phpunit/includes/Rdf/EntityRdfBuilderFactoryTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-06T10:15:22Z",
+      "side": 1,
+      "message": "This test is not really beautiful but I see it is a bit tricky to test due to callbacks involved etc.\n\nCouldn\u0027t this at least test that factory creates on object of the expected class? This is the primary contract of the factory, I\u0027d say.",
+      "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
