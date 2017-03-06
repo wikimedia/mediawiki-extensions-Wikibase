@@ -114,4 +114,13 @@ class RepositoryDefinitionsTest extends \PHPUnit_Framework_TestCase {
 		] );
 	}
 
+	public function testGetAllEntityTypes() {
+		$definitions = new RepositoryDefinitions( $this->getCompleteRepositoryDefinitionArray() );
+
+		$this->assertEquals(
+			[ 'item', 'property', 'mediainfo', 'lexeme' ],
+			$definitions->getAllEntityTypes()
+		);
+	}
+
 }

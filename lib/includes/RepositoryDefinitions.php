@@ -105,6 +105,13 @@ class RepositoryDefinitions {
 	}
 
 	/**
+	 * @return string[] List of entity type names provided by all defined repositories.
+	 */
+	public function getAllEntityTypes() {
+		return array_keys( $this->entityTypeToRepositoryMapping );
+	}
+
+	/**
 	 * @param array $definition
 	 * @param array $requiredFields
 	 * @return bool
