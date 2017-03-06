@@ -34,6 +34,24 @@
       "revId": "b6d1e4f0566d33bdc97c5c30e6c5a0dace96feab",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_e6ad212f",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-06T08:42:01Z",
+      "side": 1,
+      "message": "What I meant is that $target can be any title as this is a hook fired for each link, also including e.g. external links.\nisForeignEntityPage returns false for external links as well. I believe you can \"assume this entity exists\" just based on the fact this private method returned false.",
+      "parentUuid": "ce3c5b53_cf33625e",
+      "revId": "b6d1e4f0566d33bdc97c5c30e6c5a0dace96feab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
