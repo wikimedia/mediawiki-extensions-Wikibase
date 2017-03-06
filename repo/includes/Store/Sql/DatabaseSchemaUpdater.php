@@ -352,6 +352,13 @@ class DatabaseSchemaUpdater {
 			'term_search',
 			$this->getUpdateScriptPath( 'UpdateTermIndexes', $db->getType() )
 		);
+
+		// T159851
+		$updater->addExtensionField(
+			'wb_terms',
+			'term_entity_id_s',
+			$this->getUpdateScriptPath( 'AddTermsFullEntityId', $db->getType() )
+		);
 	}
 
 }

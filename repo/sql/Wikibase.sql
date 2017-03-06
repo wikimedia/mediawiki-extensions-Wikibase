@@ -35,6 +35,7 @@ CREATE INDEX /*i*/wb_ips_item_id ON /*_*/wb_items_per_site (ips_item_id);
 CREATE TABLE IF NOT EXISTS /*_*/wb_terms (
   term_row_id                BIGINT unsigned     NOT NULL PRIMARY KEY AUTO_INCREMENT, -- row ID
   term_entity_id             INT unsigned        NOT NULL, -- Id of the entity
+  term_entity_id_s           VARBINARY(32)       DEFAULT NULL, -- Full id of the entity (not only numeric part)
   term_entity_type           VARBINARY(32)       NOT NULL, -- Type of the entity
   term_language              VARBINARY(32)       NOT NULL, -- Language code
   term_type                  VARBINARY(32)       NOT NULL, -- Term type
@@ -51,6 +52,9 @@ CREATE TABLE IF NOT EXISTS /*_*/wb_terms (
 -- Some wb_terms queries use term_entity_id=N which is good selectivity.
 CREATE INDEX /*i*/term_entity ON /*_*/wb_terms (term_entity_id);
 
+-- Some wb_terms queries use term_entity_id_s=X which is good selectivity.
+CREATE INDEX /*i*/term_entity_s ON /*_*/wb_terms (term_entity_id_s);
+
 -- When any wb_terms query includes a search on term_text greater than
 -- four or five leading characters a simple index on term_text and
 -- language is often better than the proposed composite indexes. Note
@@ -63,6 +67,8 @@ CREATE INDEX /*i*/term_search_key ON /*_*/wb_terms (term_search_key, term_langua
 -- This index has good selectivity while still allowing ICP for short string values.
 CREATE INDEX /*i*/term_search ON /*_*/wb_terms (term_language, term_entity_id, term_type, term_search_key(16));
 
+-- This index has good selectivity while still allowing ICP for short string values.
+CREATE INDEX /*i*/term_search_s ON /*_*/wb_terms (term_language, term_entity_id_s, term_type, term_search_key(16));
 
 -- Links id+type to page ids.
 CREATE TABLE IF NOT EXISTS /*_*/wb_entity_per_page (
