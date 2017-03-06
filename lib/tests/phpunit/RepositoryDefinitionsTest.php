@@ -103,8 +103,8 @@ class RepositoryDefinitionsTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testGivenSameEntityTypeDefinedForMultitpleRepos_languageLevelErrorIsRaised() {
-		$this->setExpectedException( \PHPUnit_Framework_Error::class );
+	public function testGivenSameEntityTypeDefinedForMultitpleRepos_exceptionIsThrown() {
+		$this->setExpectedException( InvalidArgumentException::class );
 
 		$irrelevantDefinitions = [ 'database' => 'foo', 'prefix-mapping' => [] ];
 

@@ -123,6 +123,8 @@ class RepositoryDefinitions {
 	/**
 	 * @param array $repositoryDefinitions
 	 *
+	 * @throws InvalidArgumentException
+	 *
 	 * @return string[]
 	 */
 	private function buildEntityTypeToRepositoryMapping( array $repositoryDefinitions ) {
@@ -135,11 +137,11 @@ class RepositoryDefinitions {
 
 			foreach ( $definition['entity-types'] as $entityType ) {
 				if ( isset( $mapping[$entityType] ) ) {
-					wfWarn( 'Using same entity types on multiple repositories is not supported yet. '
+					throw new InvalidArgumentException(
+						'Using same entity types on multiple repositories is not supported yet. '
 						. '"' . $entityType . '" has already be defined for repository '
 						. '"' . $mapping[$entityType] .'"'
 					);
-					continue;
 				}
 
 				$mapping[$entityType] = $repositoryName;
