@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_57a035f1",
+        "filename": "repo/includes/Api/EntitySearchHelper.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-06T14:43:56Z",
+      "side": 1,
+      "message": "redundant?",
+      "range": {
+        "startLine": 188,
+        "startChar": 4,
+        "endLine": 188,
+        "endChar": 7
+      },
+      "revId": "f94d27a2338970af4c1976111cd2c0854a4e8dd5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_b790a199",
+        "filename": "repo/tests/phpunit/includes/Api/EntitySearchHelperTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-06T14:43:56Z",
+      "side": 1,
+      "message": "Purpose of dummy is just to fulfill constructor (or method) arguments requirements. No method should be called on dummy during the tests (see: https://martinfowler.com/bliki/TestDouble.html and https://en.wikipedia.org/wiki/Test_double). Is it really dummy?\n\nI would suggest to use mocking framework in case if it is really dummy.",
+      "range": {
+        "startLine": 99,
+        "startChar": 21,
+        "endLine": 99,
+        "endChar": 26
+      },
+      "revId": "f94d27a2338970af4c1976111cd2c0854a4e8dd5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_b7b9812b",
+        "filename": "repo/tests/phpunit/includes/Api/EntitySearchHelperTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-06T14:43:56Z",
+      "side": 1,
+      "message": "Should it be `Item::ENTITY_TYPE` or it can be any random string?",
+      "range": {
+        "startLine": 101,
+        "startChar": 49,
+        "endLine": 101,
+        "endChar": 55
+      },
+      "revId": "f94d27a2338970af4c1976111cd2c0854a4e8dd5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
