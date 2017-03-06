@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_26878915",
+        "filename": "repo/includes/Actions/EditEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-03-06T00:26:12Z",
+      "side": 1,
+      "message": "i think cancel is a safe action so not sure about setting destructive flag here",
+      "revId": "b73fcc9a794a504daa08f680a4d3c45f6c8c75ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
