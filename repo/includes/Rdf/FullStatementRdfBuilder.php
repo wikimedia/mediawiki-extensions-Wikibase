@@ -227,4 +227,15 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 		}
 	}
 
+	/**
+	 * Does nothing, since Statements should not be part of entity stubs.
+	 *
+	 * @see EntityRdfBuilder::addEntityStub
+	 *
+	 * @param EntityDocument $entity the entity to output.
+	 */
+	public function addEntityStub( EntityDocument $entity ) {
+		// noop
+	}
+
 }
