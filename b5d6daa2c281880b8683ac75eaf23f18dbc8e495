@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_5c713ca6",
+        "filename": "repo/includes/Api/SetSiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-06T12:42:48Z",
+      "side": 1,
+      "message": "Could be that using the Entity ID Parser would be needed here (if we say we want to apply some prefix mapping etc).",
+      "revId": "b5d6daa2c281880b8683ac75eaf23f18dbc8e495",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_7c744096",
+        "filename": "repo/includes/Api/SetSiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-06T12:42:48Z",
+      "side": 1,
+      "message": "Indentation seems a bit odd to me here. But as long as PHPCS allows it I am fine.",
+      "revId": "b5d6daa2c281880b8683ac75eaf23f18dbc8e495",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
