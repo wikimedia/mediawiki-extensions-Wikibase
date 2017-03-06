@@ -19,7 +19,8 @@
 			"一個正常人",
 			"Kanashimi",
 			"Alexsh",
-			"烈羽"
+			"烈羽",
+			"和平奮鬥救地球"
 		]
 	},
 	"wikibase-desc": "結構化資料儲存庫",
@@ -309,6 +310,7 @@
 	"wikibase-listdatatypes-commonsmedia-body": "連結至儲存於維基共享資源上的檔案。當輸入數值時，將會搜尋專案的 \"檔案\" 命名空間尋找符合的項目。",
 	"wikibase-listdatatypes-globe-coordinate-head": "地理座標",
 	"wikibase-listdatatypes-globe-coordinate-body": "地理位置的文字資料由緯度-經度所組成，使用 gms 或十進位角度來表示星球上的位置。 通常指 \"地球\" 且使用 \"WGS84\" 座標系統。 該座標系統增加了解析度與範圍。\n* 緯度 – 座標字串內的第一部分 (float, dms, dm, dd)，方向在字首或字尾使用 N 或 S 來表示\n* 經度 – 座標字串內的第二部分 (float, dms, dm, dd)，方向在字首或字尾使用 E 或 W 來表示\n* 星球 – 明確 (?) 的數值，預設指定的星球為 \"地球\" \"http://www.wikidata.org/entity/Q2\" \n* 精確度 – 座標的數字精確度",
+	"wikibase-listdatatypes-geo-shape-head": "地理形狀",
 	"wikibase-listdatatypes-quantity-head": "數量",
 	"wikibase-listdatatypes-quantity-body": "與一些己明確定義的單位相關的數量文字資料欄位。 實際的單位包含在輸入的資料數值當中。\n\n* 數量 - 字串內含的一部份 (對應的單位字首不明) \n* 單位 - 字串內含的一部份，預設為  \"1\" (對應的標準化機構不明) \n* 上限值 - 數量的上限\n* 下限值 - 數量的下限",
 	"wikibase-listdatatypes-monolingualtext-head": "單語言內容",

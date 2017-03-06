@@ -343,6 +343,8 @@
 	"wikibase-listdatatypes-commonsmedia-body": "وصلة للملفات المخزنة في ويكيميديا كومنز. Wعندما يتم إدخال قيمة، فنطاق \"File\" على كومنز سيتم البحث فيه عن ملفات مطابقة.",
 	"wikibase-listdatatypes-globe-coordinate-head": "الإحداثيات على الكرة الأرضية",
 	"wikibase-listdatatypes-globe-coordinate-body": "بيانات حرفية لموقع جغرافي معطاة كزوج من latitude-longitude في درجات gms أو decimal للجرم السماوي المعطى. القيمة الافتراضية هي \"Earth\" ثم \"WGS84\". هي تضيف قيمة توضيح ونطاق.\n* latitude – الجزء الأول المضمن (float, dms, dm, dd) من سلسلة حروف الإحداثيات، الاتجاه معطى إما بواسطة إشارة بادئة أو بواسطة اتجاه N/S ثابت\n* longitude – الجزء الثاني المضمن (float, dms, dm, dd) لسلسلة حروف الإحداثيات، الاتجاه معطى إما بواسطة إشارة بادئة أو بواسطة اتجاه E/W ثابت\n* globe – قيمة بيانات (?) صريحة, معطاة كجرم سماوي والقيمة الافتراضية هي الأرض \"http://www.wikidata.org/entity/Q2\"\n* precision - الدقة الرقمية للإحداثيات",
+	"wikibase-listdatatypes-geo-shape-head": "شكل جغرافي",
+	"wikibase-listdatatypes-geo-shape-body": "وصلة لبيانات الخريطة الجغرافية المخزنة على ويكيميديا كومنز (أو ويكي مضبوطة أخرى). انظر \"https://www.mediawiki.org/wiki/Help:Map_Data\" للمزيد من المعلومات حول بيانات الخريطة.",
 	"wikibase-listdatatypes-quantity-head": "كمية",
 	"wikibase-listdatatypes-quantity-body": "حقل بيانات حرفي لكمية مرتبطة بوحدة معرفة جيدا. الوحدة الفعلية تدخل في قيم البيانات التي يتم إدخالها.\n* amount – جزء مضمن من سلسلة الحروف (رسم بادئة الوحدة غير واضح)\n* unit – جزء مضمن من سلسلة الحروف قيمته الافتراضية هي \"1\" (الرسم لهيئة المقاييس غير واضح)\n* upperbound - الحد الأعلى للكمية\n* lowerbound - الحد الأدنى للكمية",
 	"wikibase-listdatatypes-monolingualtext-head": "نص بلغة وحيدة",
