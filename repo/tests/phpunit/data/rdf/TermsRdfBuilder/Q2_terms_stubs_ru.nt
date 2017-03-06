@@ -1,0 +1,4 @@
+<http://acme.test/Q2> <http://schema.org/description> "\u0441\u0442\u043E\u043B\u0438\u0446\u0430 \u0438 \u043E\u0434\u043D\u043E\u0432\u0440\u0435\u043C\u0435\u043D\u043D\u043E \u0437\u0435\u043C\u043B\u044F \u0413\u0435\u0440\u043C\u0430\u043D\u0438\u0438"@ru .
+<http://acme.test/Q2> <http://schema.org/name> "\u0411\u0435\u0440\u043B\u0438\u043D"@ru .
+<http://acme.test/Q2> <http://www.w3.org/2000/01/rdf-schema#label> "\u0411\u0435\u0440\u043B\u0438\u043D"@ru .
+<http://acme.test/Q2> <http://www.w3.org/2004/02/skos/core#prefLabel> "\u0411\u0435\u0440\u043B\u0438\u043D"@ru .

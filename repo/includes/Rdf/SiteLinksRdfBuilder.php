@@ -140,4 +140,15 @@ class SiteLinksRdfBuilder implements EntityRdfBuilder {
 		}
 	}
 
+	/**
+	 * Does nothing, since SiteLinks should not be part of entity stubs.
+	 *
+	 * @see EntityRdfBuilder::addEntityStub
+	 *
+	 * @param EntityDocument $entity the entity to output.
+	 */
+	public function addEntityStub( EntityDocument $entity ) {
+		// noop
+	}
+
 }

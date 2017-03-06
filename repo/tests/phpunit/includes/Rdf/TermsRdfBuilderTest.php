@@ -99,6 +99,25 @@ class TermsRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}
 
+	public function provideAddEntityStub() {
+		return array(
+			array( 'Q2', 'Q2_terms_stubs' ),
+			array( 'Q2', 'Q2_terms_stubs_ru', array( 'ru' ) ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideAddEntityStub
+	 */
+	public function testAddEntityStub( $entityName, $dataSetName, array $languages = null ) {
+		$entity = $this->getTestData()->getEntity( $entityName );
+
+		$writer = $this->getTestData()->getNTriplesWriter();
+		$this->newBuilder( $writer, $languages )->addEntityStub( $entity );
+
+		$this->assertOrCreateNTriples( $dataSetName, $writer );
+	}
+
 	public function provideAddLabels() {
 		return array(
 			array( 'Q2', 'Q2_terms_labels' ),
