@@ -104,7 +104,9 @@ class TermsRdfBuilder implements EntityRdfBuilder {
 	}
 
 	/**
-	 * Add the entity's terms to the RDF graph.
+	 * Add the entity's labels, descriptions, and aliases to the RDF graph.
+	 *
+	 * @see EntityRdfBuilder::addEntity
 	 *
 	 * @param EntityDocument $entity the entity to output.
 	 */
@@ -121,6 +123,25 @@ class TermsRdfBuilder implements EntityRdfBuilder {
 
 		if ( $entity instanceof AliasesProvider ) {
 			$this->addAliases( $entityLName, $entity->getAliasGroups() );
+		}
+	}
+
+	/**
+	 * Add the entity's labels and descriptions to the RDF graph.
+	 *
+	 * @see EntityRdfBuilder::addEntityStub
+	 *
+	 * @param EntityDocument $entity the entity to output.
+	 */
+	public function addEntityStub( EntityDocument $entity ) {
+		$entityLName = $this->vocabulary->getEntityLName( $entity->getId() );
+
+		if ( $entity instanceof LabelsProvider ) {
+			$this->addLabels( $entityLName, $entity->getLabels() );
+		}
+
+		if ( $entity instanceof DescriptionsProvider ) {
+			$this->addDescriptions( $entityLName, $entity->getDescriptions() );
 		}
 	}
 
