@@ -15,7 +15,6 @@ use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Special page for merging one item to another.
@@ -46,35 +45,28 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	 */
 	private $tokenCheck;
 
-	public function __construct() {
-		parent::__construct( 'MergeItems', 'item-merge' );
-
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-		$this->initServices(
-			$wikibaseRepo->getEntityIdParser(),
-			$wikibaseRepo->getExceptionLocalizer(),
-			new TokenCheckInteractor(
-				$this->getUser()
-			),
-			$wikibaseRepo->newItemMergeInteractor( $this->getContext() )
-		);
-	}
-
-	public function doesWrites() {
-		return true;
-	}
-
-	public function initServices(
+	/**
+	 * @param EntityIdParser $idParser
+	 * @param ExceptionLocalizer $exceptionLocalizer
+	 * @param TokenCheckInteractor $tokenCheck
+	 * @param ItemMergeInteractor $interactor
+	 */
+	public function __construct(
 		EntityIdParser $idParser,
 		ExceptionLocalizer $exceptionLocalizer,
 		TokenCheckInteractor $tokenCheck,
 		ItemMergeInteractor $interactor
 	) {
+		parent::__construct( 'MergeItems', 'item-merge' );
+
 		$this->idParser = $idParser;
 		$this->exceptionLocalizer = $exceptionLocalizer;
 		$this->tokenCheck = $tokenCheck;
 		$this->interactor = $interactor;
+	}
+
+	public function doesWrites() {
+		return true;
 	}
 
 	/**

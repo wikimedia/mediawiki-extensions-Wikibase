@@ -801,7 +801,16 @@ call_user_func( function() {
 			\Wikibase\Repo\WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory()
 		);
 	};
-	$wgSpecialPages['MergeItems'] = Wikibase\Repo\Specials\SpecialMergeItems::class;
+	$wgSpecialPages['MergeItems'] = function() {
+		global $wgUser;
+		$wikibaseRepo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+		return new Wikibase\Repo\Specials\SpecialMergeItems(
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getExceptionLocalizer(),
+			new \Wikibase\Repo\Interactors\TokenCheckInteractor( $wgUser ),
+			$wikibaseRepo->newItemMergeInteractor( RequestContext::getMain() )
+		);
+	};
 	$wgSpecialPages['RedirectEntity'] = Wikibase\Repo\Specials\SpecialRedirectEntity::class;
 
 	// Jobs

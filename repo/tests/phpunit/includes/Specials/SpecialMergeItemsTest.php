@@ -84,13 +84,6 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		) );
 	}
 
-	protected function newSpecialPage() {
-		$specialMergeItems = new SpecialMergeItems();
-		$this->overrideServices( $specialMergeItems, $this->user );
-
-		return $specialMergeItems;
-	}
-
 	/**
 	 * @return EditFilterHookRunner
 	 */
@@ -121,10 +114,9 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	}
 
 	/**
-	 * @param SpecialMergeItems $page
-	 * @param User $user
+	 * @return SpecialMergeItems
 	 */
-	private function overrideServices( SpecialMergeItems $page, User $user ) {
+	protected function newSpecialPage() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$summaryFormatter = $wikibaseRepo->getSummaryFormatter();
 
@@ -157,23 +149,23 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 				return new RawMessage( '(@' . $text . '@)' );
 			} ) );
 
-		$page->initServices(
+		return new SpecialMergeItems(
 			$wikibaseRepo->getEntityIdParser(),
 			$exceptionLocalizer,
-			new TokenCheckInteractor( $user ),
+			new TokenCheckInteractor( $this->user ),
 			new ItemMergeInteractor(
 				$changeOpsFactory,
 				$this->mockRepository,
 				$this->mockRepository,
 				$this->getPermissionCheckers(),
 				$summaryFormatter,
-				$user,
+				$this->user,
 				new RedirectCreationInteractor(
 						$this->mockRepository,
 						$this->mockRepository,
 						$this->getPermissionCheckers(),
 						$summaryFormatter,
-						$user,
+						$this->user,
 						$this->getMockEditFilterHookRunner(),
 						$this->mockRepository,
 						$this->getMockEntityTitleLookup()
