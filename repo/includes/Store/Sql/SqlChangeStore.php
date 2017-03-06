@@ -3,11 +3,11 @@
 namespace Wikibase\Repo\Store\Sql;
 
 use DBQueryError;
-use LoadBalancer;
 use Wikibase\Change;
 use Wikibase\ChangeRow;
 use Wikibase\Repo\Store\ChangeStore;
 use Wikimedia\Assert\Assert;
+use Wikimedia\Rdbms\LoadBalancer;
 
 /**
  * @license GPL-2.0+

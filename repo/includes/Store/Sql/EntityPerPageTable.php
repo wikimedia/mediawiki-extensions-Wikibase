@@ -3,11 +3,11 @@
 namespace Wikibase\Repo\Store\Sql;
 
 use InvalidArgumentException;
-use LoadBalancer;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\Repo\Store\EntityPerPage;
+use Wikimedia\Rdbms\LoadBalancer;
 
 /**
  * Represents a lookup database table that makes the link between entities and pages.

@@ -3,8 +3,8 @@
 namespace Wikibase;
 
 use Database;
-use LoadBalancer;
 use MWException;
+use Wikimedia\Rdbms\LoadBalancer;
 
 /**
  * Unique Id generator implemented using an SQL table.

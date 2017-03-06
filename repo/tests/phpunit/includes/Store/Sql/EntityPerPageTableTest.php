@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use IDatabase;
-use LoadBalancer;
 use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -11,6 +10,7 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Repo\Store\Sql\EntityPerPageTable;
+use Wikimedia\Rdbms\LoadBalancer;
 
 /**
  * @covers Wikibase\Repo\Store\Sql\EntityPerPageTable

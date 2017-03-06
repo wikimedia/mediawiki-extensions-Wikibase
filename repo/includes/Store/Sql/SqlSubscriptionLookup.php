@@ -3,9 +3,9 @@
 namespace Wikibase\Store\Sql;
 
 use Database;
-use LoadBalancer;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Store\SubscriptionLookup;
+use Wikimedia\Rdbms\LoadBalancer;
 
 /**
  * Implementation of SubscriptionLookup based on a database table.
