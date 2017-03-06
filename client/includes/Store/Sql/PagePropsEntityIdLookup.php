@@ -2,11 +2,11 @@
 
 namespace Wikibase\Client\Store\Sql;
 
-use LoadBalancer;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Store\EntityIdLookup;
+use Wikimedia\Rdbms\LoadBalancer;
 
 /**
  * Lookup of EntityIds based on wikibase_item entries in the page_props table.

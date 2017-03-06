@@ -5,7 +5,6 @@ namespace Wikibase\Client\Hooks;
 use ChangesListSpecialPage;
 use FormOptions;
 use IContextSource;
-use LoadBalancer;
 use MediaWiki\MediaWikiServices;
 use RequestContext;
 use User;
@@ -13,6 +12,7 @@ use WebRequest;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\WikibaseClient;
 use Wikimedia\Assert\Assert;
+use Wikimedia\Rdbms\LoadBalancer;
 
 /**
  * @license GPL-2.0+

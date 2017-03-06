@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
-use LoadBalancer;
 use MWException;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
@@ -10,6 +9,7 @@ use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Store\EntityIdLookup;
+use Wikimedia\Rdbms\LoadBalancer;
 
 /**
  * @license GPL-2.0+
