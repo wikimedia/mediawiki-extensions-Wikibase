@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"BAB ZAA"
+		]
+	},
+	"valueview-expert-globecoordinateinput-precision": "الدقة:",
+	"valueview-expert-globecoordinateinput-nullprecision": "غير محدد",
+	"valueview-expert-timevalue-calendar-gregorian": "ميلادي",
+	"valueview-expert-timevalue-calendar-julian": "يولياني",
+	"valueview-expert-timeinput-precision": "الدقة:",
+	"valueview-expert-timeinput-calendar": "التقويم:",
+	"valueview-expertextender-calendarhint-gregorian": "(تقويم ميلادي)",
+	"valueview-expertextender-calendarhint-julian": "(تقويم يولياني)",
+	"valueview-preview-label": "سيعرض كـ:"
+}
