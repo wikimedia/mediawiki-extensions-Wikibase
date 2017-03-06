@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_5cee1c20",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-06T12:49:42Z",
+      "side": 1,
+      "message": "I\u0027ve looked at the current code a bit (it changed quite a bit until this note was first written) and it seems that given current order of method calls in newInstance (in particular calls of buildEntityNamespaceConfigurations - BTW a bit unfortunate method name IMO - and getRepositoryDefinitionsFromSettings), entityNamespaces settings should contain data of all known entity types.\nSo FIXME is fixed now, although it is all quite fragile.",
+      "parentUuid": "ce3c5b53_4c067921",
+      "revId": "042e8b56b605f626fabe7b08c87c155eaf7f75af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_6c09fd2e",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 10
@@ -30,6 +48,24 @@
       "writtenOn": "2017-03-03T09:54:16Z",
       "side": 1,
       "message": "Yes, see also the comment above. Looks like a blocker to me, unless there is already a patch up for this.",
+      "revId": "042e8b56b605f626fabe7b08c87c155eaf7f75af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_dce22c2e",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 1259,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-06T12:49:42Z",
+      "side": 1,
+      "message": "Will add a method for this.",
+      "parentUuid": "ce3c5b53_6c09fd2e",
       "revId": "042e8b56b605f626fabe7b08c87c155eaf7f75af",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
