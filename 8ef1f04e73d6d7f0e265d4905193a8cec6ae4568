@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_17e4edd9",
+        "filename": "repo/tests/phpunit/includes/Rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-06T15:53:14Z",
+      "side": 1,
+      "message": "this could just return the array",
+      "revId": "8ef1f04e73d6d7f0e265d4905193a8cec6ae4568",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
