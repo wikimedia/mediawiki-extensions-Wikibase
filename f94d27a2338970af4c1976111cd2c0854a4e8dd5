@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_170cedee",
+        "filename": "repo/tests/phpunit/includes/Api/EntitySearchHelperTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-06T14:57:16Z",
+      "side": 1,
+      "message": "If it is really dummy, then it would be nice if any method call throws an exception when called.\nFor prophecy it will be:\n`$mock-\u003eunexpectedCall()-\u003eshouldNotBeCalled()`\nFor phpunit-mock:\n`$mock-\u003eexpects($this-\u003enever())-\u003emethod($this-\u003eanything())`",
+      "parentUuid": "ce3c5b53_b790a199",
+      "range": {
+        "startLine": 99,
+        "startChar": 21,
+        "endLine": 99,
+        "endChar": 26
+      },
+      "revId": "f94d27a2338970af4c1976111cd2c0854a4e8dd5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_b7b9812b",
         "filename": "repo/tests/phpunit/includes/Api/EntitySearchHelperTest.php",
         "patchSetId": 3
