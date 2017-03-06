@@ -16,6 +16,24 @@
       "revId": "b4ea3ddd73c061006397b0120184c037e0344e68",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_9790fdf2",
+        "filename": "composer.json",
+        "patchSetId": 17
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-06T16:19:45Z",
+      "side": 1,
+      "message": "So I simply messed something up at some point as I am pretty sure PHPCS run was failing even with those tags there. But it was some few weeks ago and I don\u0027t really remember details. Now it doesn\u0027t seem needed, so removed it. Good catch!",
+      "parentUuid": "ce3c5b53_fc6050ce",
+      "revId": "b4ea3ddd73c061006397b0120184c037e0344e68",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
