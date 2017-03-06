@@ -52,6 +52,24 @@
       "revId": "b6d1e4f0566d33bdc97c5c30e6c5a0dace96feab",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_41b077d8",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-06T10:49:26Z",
+      "side": 1,
+      "message": "I still don\u0027t fully understand if this is meant as an edit request, and if so, what should I change? I\u0027m aware this line is awkward. It is already removed in the next patch in this chain. I can merge both patches if that helps.",
+      "parentUuid": "ce3c5b53_e6ad212f",
+      "revId": "b6d1e4f0566d33bdc97c5c30e6c5a0dace96feab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
