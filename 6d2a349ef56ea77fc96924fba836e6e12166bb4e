@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ae41e7d8_8555a654",
+        "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-07T13:58:50Z",
+      "side": 1,
+      "message": "Fixed description. Fixed name.",
+      "parentUuid": "ae41e7d8_65f42284",
+      "range": {
+        "startLine": 44,
+        "startChar": 17,
+        "endLine": 44,
+        "endChar": 36
+      },
+      "revId": "6d2a349ef56ea77fc96924fba836e6e12166bb4e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae41e7d8_05343645",
         "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
         "patchSetId": 9
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "ae41e7d8_e5c27206",
+        "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-07T13:58:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae41e7d8_05343645",
+      "revId": "6d2a349ef56ea77fc96924fba836e6e12166bb4e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae41e7d8_25ee1ab2",
         "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
         "patchSetId": 9
@@ -53,6 +95,24 @@
       "writtenOn": "2017-03-07T12:51:23Z",
       "side": 1,
       "message": "I\u0027d still suggest to have instanceof check or something. Docs still say callbacks can return null. If this is allowed at least !\u003d\u003d null check should be here IMO. But generally it seems to me it is no point in allow null to be returned. Instead, you could say callbacks must return EntityRdfBuilder, and have instanceof check here leading to big error if callback returns something else.",
+      "revId": "6d2a349ef56ea77fc96924fba836e6e12166bb4e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae41e7d8_05c8b624",
+        "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-07T13:58:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae41e7d8_25ee1ab2",
       "revId": "6d2a349ef56ea77fc96924fba836e6e12166bb4e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
