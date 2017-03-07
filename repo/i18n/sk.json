@@ -4,7 +4,8 @@
 			"KuboF",
 			"Sudo77(new)",
 			"Macofe",
-			"TomášPolonec"
+			"TomášPolonec",
+			"Lexected"
 		]
 	},
 	"wikibase-desc": "Úložisko štruktúrovaných údajov",
@@ -27,7 +28,6 @@
 	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|položka|položky|položiek}}",
 	"wikibase-sitelinks-special": "Iné projekty",
 	"wikibase-remove": "odstrániť",
-	"wikibase-aliases-empty": "Žiadne iné názvy neboli definované",
 	"wikibase-propertypage-datatype": "Typ údaju",
 	"wikibase-statementview-rank-normal": "Normálne hodnoty",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|referencia|referencie|referencií}}",
@@ -43,5 +43,6 @@
 	"wikibase-newproperty-datatype": "Typ údaju:",
 	"special-newitem": "Vytvoriť novú položku",
 	"wikibase-modifyterm-language": "Kód jazyka:",
-	"wikibase-entitieswithoutlabel-label-language": "Kód jazyka:"
+	"wikibase-entitieswithoutlabel-label-language": "Kód jazyka:",
+	"wikibase-listdatatypes-geo-shape-head": "Geografický tvar"
 }

@@ -49,6 +49,7 @@
 	"wikibase-validator-not-allowed": "Недапушчальнае значэньне: $1",
 	"datatypes-type-wikibase-item": "Аб’ект",
 	"datatypes-type-commonsMedia": "Мэдыяфайл зь Вікісховішча",
+	"datatypes-type-external-id": "Вонкавы ідэнтыфікатар",
 	"version-wikibase": "Wikibase",
 	"wikibase-entity-summary-wbsetitem": "Створаны новы прадмет",
 	"wikibase-entity-summary-wbcreateredirect": "Перанакіраваны на $4",

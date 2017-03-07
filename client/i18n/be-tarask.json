@@ -70,6 +70,7 @@
 	"wikibase-entityusage-legend": "Сьпіс старонак, што выкарыстоўваюць дадзены элемэнт",
 	"wikibase-pageinfo-entity-id": "Ідэнтыфікатар аб’екта {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Няма",
+	"wikibase-pageinfo-entity-usage": "Аб’екты {{WBREPONAME}}, якія ўжываюцца на гэтай старонцы",
 	"wikibase-property-render-error": "Не ўдалося адлюстраваць уласьцівасьць $1: $2",
 	"wikibase-otherprojects": "У іншых праектах",
 	"wikibase-otherprojects-beta-message": "Бакавая панэль іншых праектаў",
