@@ -188,6 +188,30 @@
       "revId": "f94d27a2338970af4c1976111cd2c0854a4e8dd5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae41e7d8_b3f91081",
+        "filename": "repo/tests/phpunit/includes/Api/EntitySearchHelperTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-07T17:24:46Z",
+      "side": 1,
+      "message": "How about using string like \u0027some entity type\u0027 ? \n\nOr pass it as an argument for each test to define what it wants?",
+      "parentUuid": "ce3c5b53_f75e2947",
+      "range": {
+        "startLine": 101,
+        "startChar": 49,
+        "endLine": 101,
+        "endChar": 55
+      },
+      "revId": "f94d27a2338970af4c1976111cd2c0854a4e8dd5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
