@@ -702,4 +702,14 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testClear() {
+		$statement1 = $this->getStatement( 'P1', null );
+		$statement2 = $this->getStatement( 'P2', null );
+		$statements = new StatementList( $statement1, $statement2 );
+
+		$statements->clear();
+
+		$this->assertEquals( new StatementList(), $statements );
+	}
+
 }

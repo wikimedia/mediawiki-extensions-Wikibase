@@ -396,4 +396,14 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testClear() {
+		$list = new TermList();
+		$list->setTextForLanguage( 'en', 'foo' );
+		$list->setTextForLanguage( 'de', 'bar' );
+
+		$list->clear();
+
+		$this->assertEquals( new TermList(), $list );
+	}
+
 }

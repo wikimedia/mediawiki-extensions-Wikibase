@@ -187,4 +187,13 @@ class TermList implements Countable, IteratorAggregate, Comparable {
 			&& $this->terms[$term->getLanguageCode()]->equals( $term );
 	}
 
+	/**
+	 * Removes all terms from this list.
+	 *
+	 * @since 6.0
+	 */
+	public function clear() {
+		$this->terms = [];
+	}
+
 }
