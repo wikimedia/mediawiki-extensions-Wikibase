@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae41e7d8_f37c78ea",
+        "filename": "repo/resources/Resources.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-07T17:39:23Z",
+      "side": 1,
+      "message": "This is super nitpicky (and also easy to change later), but shouldn\u0027t these names be the same?",
+      "range": {
+        "startLine": 61,
+        "startChar": 8,
+        "endLine": 62,
+        "endChar": 35
+      },
+      "revId": "cadd2b0f9005536510e46be9cc3c914d073fa14c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
