@@ -21,7 +21,6 @@
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-	margin-bottom: 1em;
 	max-width: 65em; /* similar to .wikibase-entityview */
 	width: 100%;
 }
