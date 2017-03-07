@@ -154,6 +154,9 @@ return call_user_func( function() {
 			'scripts' => array(
 				'jquery.ui/jquery.ui.commonssuggester.js',
 			),
+			'styles' => array(
+				'jquery.ui/jquery.ui.commonssuggester.css',
+			),
 			'dependencies' => array(
 				'jquery.ui.suggester',
 				'jquery.ui.widget',
