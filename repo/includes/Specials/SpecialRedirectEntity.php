@@ -42,30 +42,20 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	 */
 	private $tokenCheck;
 
-	public function __construct() {
-		parent::__construct( 'RedirectEntity' );
-
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-		$this->initServices(
-			$wikibaseRepo->getEntityIdParser(),
-			$wikibaseRepo->getExceptionLocalizer(),
-			new TokenCheckInteractor(
-				$this->getUser()
-			),
-			$wikibaseRepo->newRedirectCreationInteractor(
-				$this->getUser(),
-				$this->getContext()
-			)
-		);
-	}
-
-	public function initServices(
+	/**
+	 * @param EntityIdParser $idParser
+	 * @param ExceptionLocalizer $exceptionLocalizer
+	 * @param TokenCheckInteractor $tokenCheck
+	 * @param RedirectCreationInteractor $interactor
+	 */
+	public function __construct(
 		EntityIdParser $idParser,
 		ExceptionLocalizer $exceptionLocalizer,
 		TokenCheckInteractor $tokenCheck,
 		RedirectCreationInteractor $interactor
 	) {
+		parent::__construct( 'RedirectEntity' );
+
 		$this->idParser = $idParser;
 		$this->exceptionLocalizer = $exceptionLocalizer;
 		$this->tokenCheck = $tokenCheck;

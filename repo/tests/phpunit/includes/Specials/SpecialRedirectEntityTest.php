@@ -72,13 +72,6 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		) );
 	}
 
-	protected function newSpecialPage() {
-		$specialPage = new SpecialRedirectEntity();
-		$this->overrideServices( $specialPage, $this->user );
-
-		return $specialPage;
-	}
-
 	/**
 	 * @return EditFilterHookRunner
 	 */
@@ -113,10 +106,9 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 	}
 
 	/**
-	 * @param SpecialRedirectEntity $page
-	 * @param User $user
+	 * @return SpecialRedirectEntity
 	 */
-	private function overrideServices( SpecialRedirectEntity $page, User $user ) {
+	protected function newSpecialPage() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$exceptionLocalizer = $this->getMock( ExceptionLocalizer::class );
@@ -142,16 +134,16 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 				return new RawMessage( '(@' . $text . '@)' );
 			} ) );
 
-		$page->initServices(
+		return new SpecialRedirectEntity(
 			$wikibaseRepo->getEntityIdParser(),
 			$exceptionLocalizer,
-			new TokenCheckInteractor( $user ),
+			new TokenCheckInteractor( $this->user ),
 			new RedirectCreationInteractor(
 				$this->mockRepository,
 				$this->mockRepository,
 				$this->getPermissionCheckers(),
 				$wikibaseRepo->getSummaryFormatter(),
-				$user,
+				$this->user,
 				$this->getMockEditFilterHookRunner(),
 				$this->mockRepository,
 				$this->getMockEntityTitleLookup()
