@@ -811,7 +811,22 @@ call_user_func( function() {
 			$wikibaseRepo->newItemMergeInteractor( RequestContext::getMain() )
 		);
 	};
-	$wgSpecialPages['RedirectEntity'] = Wikibase\Repo\Specials\SpecialRedirectEntity::class;
+	$wgSpecialPages['RedirectEntity'] = function() {
+		global $wgUser;
+		$wikibaseRepo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+
+		return new Wikibase\Repo\Specials\SpecialRedirectEntity(
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getExceptionLocalizer(),
+			new \Wikibase\Repo\Interactors\TokenCheckInteractor(
+				$wgUser
+			),
+			$wikibaseRepo->newRedirectCreationInteractor(
+				$wgUser,
+				RequestContext::getMain()
+			)
+		);
+	};
 
 	// Jobs
 	$wgJobClasses['UpdateRepoOnMove'] = Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob::class;
