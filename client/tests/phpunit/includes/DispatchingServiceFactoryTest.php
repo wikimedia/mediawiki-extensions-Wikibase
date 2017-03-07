@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityRevision;
+use Wikibase\Lib\RepositoryDefinitions;
 
 /**
  * @covers Wikibase\Client\DispatchingServiceFactory
@@ -22,11 +23,17 @@ use Wikibase\EntityRevision;
  */
 class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 
+	private function getRepositoryDefinition( $repositoryName, array $customSettings ) {
+		return [ $repositoryName => array_merge(
+			[ 'database' => '', 'entity-types' => [], 'prefix-mapping' => [] ],
+			$customSettings
+		) ];
+	}
+
 	public function testGetServiceNames_ReturnsNameOfDefinedService() {
 		$factory = new DispatchingServiceFactory(
 			$this->dummy( RepositoryServiceContainerFactory::class ),
-			[],
-			[]
+			new RepositoryDefinitions( $this->getRepositoryDefinition( '', [] ) )
 		);
 
 		$factory->defineService(
@@ -37,6 +44,16 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$this->assertContains( 'SomeService', $factory->getServiceNames() );
+	}
+
+	private function newDispatchingServiceFactory( RepositoryServiceContainerFactory $containerFactory ) {
+		return new DispatchingServiceFactory(
+			$containerFactory,
+			new RepositoryDefinitions( array_merge(
+				$this->getRepositoryDefinition( '', [ 'entity-types' => [ Item::ENTITY_TYPE ] ] ),
+				$this->getRepositoryDefinition( 'foo', [ 'entity-types' => [ Property::ENTITY_TYPE ] ] )
+			) )
+		);
 	}
 
 	public function testGetServiceMap_ReturnsArrayMappingNameOfRepositoryToServiceForThatRepository(
@@ -54,11 +71,7 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 		$rscFactory = $this->prophesize( RepositoryServiceContainerFactory::class );
 		$rscFactory->newContainer( '' )->willReturn( $localContainer );
 		$rscFactory->newContainer( 'foo' )->willReturn( $fooContainer );
-		$dispatchingFactory = new DispatchingServiceFactory(
-			$rscFactory->reveal(),
-			[ '', 'foo' ],
-			[]
-		);
+		$dispatchingFactory = $this->newDispatchingServiceFactory( $rscFactory->reveal() );
 
 		$serviceMap = $dispatchingFactory->getServiceMap( $someServiceName );
 
@@ -72,8 +85,7 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testGetService_AlwaysReturnsTheSameService() {
 		$factory = new DispatchingServiceFactory(
 			$this->dummy( RepositoryServiceContainerFactory::class ),
-			[],
-			[]
+			new RepositoryDefinitions( $this->getRepositoryDefinition( '', [] ) )
 		);
 
 		$someService = $this->someService( 'some service instance' );
@@ -94,12 +106,10 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testEntityUpdatedDelegatesEventToContainerOfRelevantRepository() {
 		$localContainer = $this->prophesize( RepositoryServiceContainer::class );
 		$fooContainer = $this->prophesize( RepositoryServiceContainer::class );
-		$factory = new DispatchingServiceFactory(
+		$factory = $this->newDispatchingServiceFactory(
 			$this->createRepositoryServiceContainerFactory(
 				[ '' => $localContainer->reveal(), 'foo' => $fooContainer->reveal() ]
-			),
-			[ '', 'foo' ],
-			[ Item::ENTITY_TYPE => 'foo' ]
+			)
 		);
 
 		$factory->entityUpdated( new EntityRevision( new Item( new ItemId( 'foo:Q123' ) ) ) );
@@ -113,12 +123,10 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testEntityDeletedDelegatesEventToContainerOfRelevantRepository() {
 		$localContainer = $this->prophesize( RepositoryServiceContainer::class );
 		$fooContainer = $this->prophesize( RepositoryServiceContainer::class );
-		$factory = new DispatchingServiceFactory(
+		$factory = $this->newDispatchingServiceFactory(
 			$this->createRepositoryServiceContainerFactory(
 				[ '' => $localContainer->reveal(), 'foo' => $fooContainer->reveal() ]
-			),
-			[ '', 'foo' ],
-			[ Item::ENTITY_TYPE => 'foo' ]
+			)
 		);
 
 		$factory->entityDeleted( new ItemId( 'foo:Q123' ) );
@@ -130,12 +138,10 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testRedirectUpdatedDelegatesEventToContainerOfRelevantRepository() {
 		$localContainer = $this->prophesize( RepositoryServiceContainer::class );
 		$fooContainer = $this->prophesize( RepositoryServiceContainer::class );
-		$factory = new DispatchingServiceFactory(
+		$factory = $this->newDispatchingServiceFactory(
 			$this->createRepositoryServiceContainerFactory(
 				[ '' => $localContainer->reveal(), 'foo' => $fooContainer->reveal() ]
-			),
-			[ '', 'foo' ],
-			[ Item::ENTITY_TYPE => 'foo' ]
+			)
 		);
 
 		$factory->redirectUpdated(
@@ -155,10 +161,8 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetEntityTypeToRepoMapping() {
-		$factory = new DispatchingServiceFactory(
-			$this->dummy( RepositoryServiceContainerFactory::class ),
-			[ '', 'foo' ],
-			[ Item::ENTITY_TYPE => '', Property::ENTITY_TYPE => 'foo' ]
+		$factory = $this->newDispatchingServiceFactory(
+			$this->dummy( RepositoryServiceContainerFactory::class )
 		);
 
 		$this->assertEquals(
