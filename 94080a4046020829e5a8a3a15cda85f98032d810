@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae41e7d8_02dc2c4a",
+        "filename": "docs/entitytypes.wiki",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-07T09:59:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3c5b53_01190f27",
+      "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_a169438a",
         "filename": "repo/includes/Rdf/DispatchingEntityRdfBuilder.php",
         "patchSetId": 6
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ae41e7d8_22f5b0b5",
+        "filename": "repo/includes/Rdf/DispatchingEntityRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-07T09:59:12Z",
+      "side": 1,
+      "message": "I don\u0027t think so. The namespace of almost everything is Wikibase\\Rdf (Which should be fixed but out of scope of this patch)",
+      "parentUuid": "ce3c5b53_a169438a",
+      "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_c16487b0",
         "filename": "repo/includes/Rdf/DispatchingEntityRdfBuilder.php",
         "patchSetId": 6
@@ -47,6 +83,24 @@
       "writtenOn": "2017-03-06T10:15:22Z",
       "side": 1,
       "message": "Minor\u0026nitpick: this description could possibly also say what does \"dispatching\" means here (ie. that it \"delegates\" the RDF building to builders specified for the entity type). It is pretty clear while looking at code but \"dispatching\" does mean few slightly different things in Wikibase so it might be worth adding three more words to make it super obvious.",
+      "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae41e7d8_e2bd88d5",
+        "filename": "repo/includes/Rdf/DispatchingEntityRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-07T09:59:12Z",
+      "side": 1,
+      "message": "By dispatching we mean https://en.wikipedia.org/wiki/Dynamic_dispatch but since we are dropping this file :( I see no point of fixing things",
+      "parentUuid": "ce3c5b53_c16487b0",
       "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -161,6 +215,30 @@
     },
     {
       "key": {
+        "uuid": "ae41e7d8_a2b780f1",
+        "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-07T09:59:12Z",
+      "side": 1,
+      "message": "Yes :P",
+      "parentUuid": "ce3c5b53_e1f66bd3",
+      "range": {
+        "startLine": 9,
+        "startChar": 15,
+        "endLine": 9,
+        "endChar": 34
+      },
+      "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_e1ec2bf4",
         "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
         "patchSetId": 6
@@ -172,6 +250,30 @@
       "writtenOn": "2017-03-06T10:15:22Z",
       "side": 1,
       "message": "and this one",
+      "range": {
+        "startLine": 10,
+        "startChar": 16,
+        "endLine": 10,
+        "endChar": 35
+      },
+      "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae41e7d8_82cfdc81",
+        "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-07T09:59:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3c5b53_e1ec2bf4",
       "range": {
         "startLine": 10,
         "startChar": 16,
@@ -201,6 +303,24 @@
     },
     {
       "key": {
+        "uuid": "ae41e7d8_02918c52",
+        "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-07T09:59:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3c5b53_c1fb27b9",
+      "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_6129fb35",
         "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
         "patchSetId": 6
@@ -212,6 +332,24 @@
       "writtenOn": "2017-03-06T10:15:22Z",
       "side": 1,
       "message": "Not sure but constructor docs say callback can also return null. If this is true, shouldn\u0027t nulls be skipped here then? If I get it right, if you then pass null to DispatchingEntityRdfBuilder it will break. This might be fine but seems odd to have DispatchingEntityRdfBuilder break in case data (callbacks) meet requirements specified.\n\nAnd more general, I wonder what would be right place to check that callback doesn\u0027t return some other random object/value. Shouldn\u0027t it be here?",
+      "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae41e7d8_827d9c19",
+        "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-07T09:59:12Z",
+      "side": 1,
+      "message": "$this-\u003efactoryCallbacks won\u0027t have all callbacks in it, only the ones it has in entitytypes definition. So It won\u0027t break (I tested it in my localhost)",
+      "parentUuid": "ce3c5b53_6129fb35",
       "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -258,6 +396,30 @@
     },
     {
       "key": {
+        "uuid": "ae41e7d8_e28a6817",
+        "filename": "repo/tests/phpunit/includes/Rdf/EntityRdfBuilderFactoryTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-07T09:59:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3c5b53_21b9b3e6",
+      "range": {
+        "startLine": 29,
+        "startChar": 17,
+        "endLine": 29,
+        "endChar": 32
+      },
+      "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_e1d3cb2e",
         "filename": "repo/tests/phpunit/includes/Rdf/EntityRdfBuilderFactoryTest.php",
         "patchSetId": 6
@@ -269,6 +431,24 @@
       "writtenOn": "2017-03-06T10:15:22Z",
       "side": 1,
       "message": "This test is not really beautiful but I see it is a bit tricky to test due to callbacks involved etc.\n\nCouldn\u0027t this at least test that factory creates on object of the expected class? This is the primary contract of the factory, I\u0027d say.",
+      "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae41e7d8_a294603a",
+        "filename": "repo/tests/phpunit/includes/Rdf/EntityRdfBuilderFactoryTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-07T09:59:12Z",
+      "side": 1,
+      "message": "Done I think.",
+      "parentUuid": "ce3c5b53_e1d3cb2e",
       "revId": "94080a4046020829e5a8a3a15cda85f98032d810",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
