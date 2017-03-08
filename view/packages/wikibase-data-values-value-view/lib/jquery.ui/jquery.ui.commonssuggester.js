@@ -1,8 +1,8 @@
 ( function( $, util ) {
 	'use strict';
 
-	// TODO: Avoid using namespaces here instead use filters within opensearch
 	var NAMESPACE = {
+		ALL: '*',
 		File: 6,
 		Data: 486
 	};
@@ -26,7 +26,8 @@
 		 */
 		options: {
 			ajax: $.ajax,
-			namespace: null
+			namespace: null,
+			contentModel: null
 		},
 
 		/**
@@ -56,14 +57,17 @@
 					url: 'https://commons.wikimedia.org/w/api.php',
 					dataType: 'jsonp',
 					data: {
-						search: self._grepFileTitleFromTerm( term ),
-						action: 'opensearch',
-						namespace: NAMESPACE[self.options.namespace] || NAMESPACE.File
+						action: 'query',
+						list: 'search',
+						srsearch: self._getSearchString( term ),
+						srnamespace: NAMESPACE[self.options.namespace] || NAMESPACE.ALL,
+						srlimit: 10,
+						format: 'json'
 					},
 					timeout: 8000
 				} )
 				.done( function( response ) {
-					deferred.resolve( response[1], term );
+					deferred.resolve( response.query.search, term );
 				} )
 				.fail( function( jqXHR, textStatus ) {
 					// Since this is a JSONP request, this will always fail with a timeout...
@@ -72,6 +76,22 @@
 
 				return deferred.promise();
 			};
+		},
+
+		/**
+		 * @private
+		 *
+		 * @param {string} term
+		 * @return {string}
+		 */
+		_getSearchString: function( term ) {
+			var searchString = this._grepFileTitleFromTerm( term );
+
+			if ( this.options.contentModel ) {
+				searchString += ' contentmodel:' + this.options.contentModel;
+			}
+
+			return searchString;
 		},
 
 		/**
@@ -97,18 +117,18 @@
 		 * @see jQuery.ui.suggester._createMenuItemFromSuggestion
 		 * @protected
 		 *
-		 * @param {string} suggestion
+		 * @param {Object} suggestion
 		 * @param {string} requestTerm
 		 * @return {jQuery.ui.ooMenu.Item}
 		 */
 		_createMenuItemFromSuggestion: function( suggestion, requestTerm ) {
-			suggestion = suggestion.replace( /^File:/, '' );
+			suggestion = suggestion.title.replace( /^File:/, '' );
 
-			var label = suggestion;
-
-			if ( requestTerm ) {
-				label = util.highlightSubstring( requestTerm, suggestion );
-			}
+			var label = util.highlightSubstring(
+				requestTerm,
+				suggestion,
+				{ withinString: true }
+			);
 
 			return new $.ui.ooMenu.Item( label, suggestion );
 		}
