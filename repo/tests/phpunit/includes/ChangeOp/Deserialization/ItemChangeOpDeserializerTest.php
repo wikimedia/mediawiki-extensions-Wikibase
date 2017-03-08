@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 
 use HashSiteStore;
 use Site;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -25,7 +26,15 @@ use Wikibase\Summary;
  *
  * @license GPL-2.0+
  */
-class ItemChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase {
+class ItemChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase implements ChangeOpDeserializerTest {
+
+	use LabelsChangeOpDeserializationTester;
+
+	use DescriptionsChangeOpDeserializationTester;
+
+	use AliasChangeOpDeserializationTester;
+
+	use ClaimsChangeOpDeserializationTester;
 
 	const SITE_ID = 'some-wiki';
 
@@ -60,7 +69,7 @@ class ItemChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase {
 			'sitelinks' => [ self::SITE_ID => [ 'site' => self::SITE_ID, 'title' => $pageTitle ] ]
 		];
 
-		$changeOp = $this->newChangeOpDeserializer()->createEntityChangeOp( $changeRequest );
+		$changeOp = $this->newItemChangeOpDeserializer()->createEntityChangeOp( $changeRequest );
 
 		$changeOp->apply( $item, new Summary() );
 
@@ -76,7 +85,7 @@ class ItemChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	private function newChangeOpDeserializer() {
+	private function newItemChangeOpDeserializer() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 
@@ -109,6 +118,14 @@ class ItemChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase {
 		$wiki->setGroup( self::SITELINK_GROUP );
 
 		return new SiteLinkTargetProvider( new HashSiteStore( [ $wiki ] ) );
+	}
+
+	public function getChangeOpDeserializer() {
+		return $this->newItemChangeOpDeserializer();
+	}
+
+	public function getEntity() {
+		return new Item( new ItemId( 'Q23' ) );
 	}
 
 }
