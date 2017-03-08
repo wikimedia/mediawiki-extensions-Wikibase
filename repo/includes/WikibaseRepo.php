@@ -287,8 +287,6 @@ class WikibaseRepo {
 	private $entityDataRetrievalServiceFactory = null;
 
 	/**
-
-	/**
 	 * @var EntityRdfBuilderFactory|null
 	 */
 	private $entityRdfBuilderFactory = null;
