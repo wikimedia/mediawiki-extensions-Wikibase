@@ -206,7 +206,7 @@ final class TestChanges {
 			/* @var ChangeRow $change */
 			foreach ( $changes as $change ) {
 				if ( $change->hasField( 'info' ) ) {
-					$info = $change->getField( 'info' );
+					$info = $change->getInfo();
 
 					$info = array_intersect_key( $info, $infoFilter );
 

@@ -187,7 +187,7 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 		//FIXME: size before & size after
 		) );
 
-		$info = $change->hasField( 'info' ) ? $change->getField( 'info' ) : array();
+		$info = $change->getInfo();
 		$info['change-ids'] = $ids;
 		$info['changes'] = $changes;
 		$change->setField( 'info', $info );

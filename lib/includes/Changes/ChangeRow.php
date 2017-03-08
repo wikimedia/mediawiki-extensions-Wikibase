@@ -53,25 +53,21 @@ abstract class ChangeRow implements Change {
 	}
 
 	/**
-	 * Overwritten to unserialize the info field on the fly.
-	 *
-	 * @param string $name Field name
+	 * @param string $name
 	 *
 	 * @throws MWException
 	 * @return mixed
 	 */
 	public function getField( $name ) {
-		if ( $this->hasField( $name ) ) {
-			$value = $this->fields[$name];
-		} else {
+		if ( !$this->hasField( $name ) ) {
 			throw new MWException( 'Attempted to get not-set field ' . $name );
 		}
 
-		if ( $name === 'info' && is_string( $value ) ) {
-			$value = $this->unserializeInfo( $value );
+		if ( $name === 'info' ) {
+			throw new MWException( 'Use getInfo instead' );
 		}
 
-		return $value;
+		return $this->fields[$name];
 	}
 
 	/**
@@ -90,7 +86,7 @@ abstract class ChangeRow implements Change {
 	}
 
 	/**
-	 * Returns the info array. The array is deserialized on the fly by getField().
+	 * Returns the info array. The array is deserialized on the fly.
 	 * If $cache is set to 'cache', the deserialized version is stored for
 	 * later re-use.
 	 *
@@ -103,11 +99,15 @@ abstract class ChangeRow implements Change {
 	 *
 	 * @return array
 	 */
-	protected function getInfo( $cache = 'no' ) {
-		$info = $this->getField( 'info' );
+	public function getInfo( $cache = 'no' ) {
+		$info = $this->hasField( 'info' ) ? $this->fields['info'] : [];
 
-		if ( $cache === 'cache' ) {
-			$this->setField( 'info', $info );
+		if ( is_string( $info ) ) {
+			$info = $this->unserializeInfo( $info );
+
+			if ( $cache === 'cache' ) {
+				$this->setField( 'info', $info );
+			}
 		}
 
 		return $info;

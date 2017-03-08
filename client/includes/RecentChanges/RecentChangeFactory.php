@@ -83,8 +83,9 @@ class RecentChangeFactory {
 		$fields = $change->getFields();
 		$fields['entity_type'] = $change->getEntityId()->getEntityType();
 
-		if ( isset( $fields['info']['changes'] ) ) {
-			$changesForComment = $fields['info']['changes'];
+		$info = $change->getInfo();
+		if ( isset( $info['changes'] ) ) {
+			$changesForComment = $info['changes'];
 		} else {
 			$changesForComment = array( $change );
 		}
@@ -178,10 +179,10 @@ class RecentChangeFactory {
 			return null;
 		}
 
-		$fields = $change->getFields();
+		$info = $change->getInfo();
 
-		if ( isset( $fields['info']['changes'] ) ) {
-			$changesForComment = $fields['info']['changes'];
+		if ( isset( $info['changes'] ) ) {
+			$changesForComment = $info['changes'];
 		} else {
 			$changesForComment = array( $change );
 		}

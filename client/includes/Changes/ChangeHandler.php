@@ -289,11 +289,10 @@ class ChangeHandler {
 	 */
 	private function getChangeIdForLog( Change $change ) {
 		if ( $change instanceof EntityChange ) {
-			//@todo: add getFields() to the Change interface, or provide getters!
-			$fields = $change->getFields();
+			$info = $change->getInfo();
 
-			if ( isset( $fields['info']['change-ids'] ) ) {
-				return implode( '|', $fields['info']['change-ids'] );
+			if ( isset( $info['change-ids'] ) ) {
+				return implode( '|', $info['change-ids'] );
 			}
 		}
 
