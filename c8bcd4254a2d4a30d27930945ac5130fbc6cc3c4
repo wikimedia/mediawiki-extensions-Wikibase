@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_121b1cd6",
+        "filename": "docs/federation.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-08T16:45:01Z",
+      "side": 1,
+      "message": "For me it seems unclear what \"cluster\" is (also there is no cluster in sqlite, for example).\n\nI would suggest \"accessible through the same connection\", but I\u0027m not totally happy about it.\n\nOr may be instead \"database\" use \"schema\" and instead \"cluster\" use \"database instance\".",
+      "range": {
+        "startLine": 8,
+        "startChar": 265,
+        "endLine": 8,
+        "endChar": 301
+      },
+      "revId": "c8bcd4254a2d4a30d27930945ac5130fbc6cc3c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
