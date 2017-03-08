@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_24d7f6f3",
+        "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-08T09:24:42Z",
+      "side": 1,
+      "message": "IMO string-index array containing EntityRdfBuilder instances could still be referred to as EntityRdfBuilder[] but nevermind.",
+      "revId": "108c6d7f279ad239e57930461c2bb1c87d764a03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_c4e732de",
+        "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-08T09:24:42Z",
+      "side": 1,
+      "message": "Old thing was fine too, just the fact that returned array is indexed by entity type could be also mentioned somehow. But this is not super crucial IMO, as this is a private method, and docs of public method mention that fact.\n\nWhether it is important/needed/good to have those builders per entity type is still a question to me but it is fine for now I guess.",
+      "revId": "108c6d7f279ad239e57930461c2bb1c87d764a03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_a4e226cf",
+        "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-08T09:24:42Z",
+      "side": 1,
+      "message": "This should not be needed as there is assertion in the constructor that all elements of factoryCallbacks are actually callables?\n\nI might not have made myself clear. When talking about having null/instanceof check here I was referring to the thing the $callback returns (i.e. to thing call_user_func below returns).",
+      "revId": "108c6d7f279ad239e57930461c2bb1c87d764a03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
