@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_b25d8880",
+        "filename": "repo/includes/Api/EntitySearchHelper.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-08T16:58:20Z",
+      "side": 1,
+      "message": "Probably redundant. I removed it and tests still pass.",
+      "parentUuid": "ce3c5b53_d7ad252f",
+      "range": {
+        "startLine": 188,
+        "startChar": 4,
+        "endLine": 188,
+        "endChar": 7
+      },
+      "revId": "f94d27a2338970af4c1976111cd2c0854a4e8dd5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_b790a199",
         "filename": "repo/tests/phpunit/includes/Api/EntitySearchHelperTest.php",
         "patchSetId": 3
