@@ -1581,7 +1581,7 @@ class WikibaseRepo {
 	public static function buildEntityNamespaceConfigurations() {
 		global $wgWBRepoSettings;
 
-		if ( !is_array( $wgWBRepoSettings['entityNamespaces'] ) ) {
+		if ( empty( $wgWBRepoSettings['entityNamespaces'] ) ) {
 			throw new MWException( 'Wikibase: Incomplete configuration: '
 				. '$wgWBRepoSettings[\'entityNamespaces\'] has to be set to an '
 				. 'array mapping entity types to namespace IDs. '
