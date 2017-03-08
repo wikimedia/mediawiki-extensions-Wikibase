@@ -66,7 +66,7 @@ associated with a function having the dedicated signature:
 : a string representing a resource loader module that, when `require`d, returns a function returning
   a `wikibase.serialization.Deserializer` instance supporting this entity type
 ; rdf-builder-factory-callback (repo only)
-: a callable that returns a EntityRdfBuilder instance. See EntityRdfBuilderFactory::getEntityRdfBuilder
+: a callable that returns a EntityRdfBuilder instance. See EntityRdfBuilderFactory::getEntityRdfBuilders
   for arguments in the callback
 
 Extensions that wish to register an entity type should use the WikibaseRepoEntityTypes and/or
