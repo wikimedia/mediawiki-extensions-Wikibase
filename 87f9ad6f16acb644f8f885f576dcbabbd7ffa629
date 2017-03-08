@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_0d6c5d04",
+        "filename": "repo/includes/Rdf/EntityRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-08T18:59:33Z",
+      "side": 1,
+      "message": "What is the definition of a \"stub\" in this context? I\u0027m afraid the documentation here does not explain this.",
+      "range": {
+        "startLine": 25,
+        "startChar": 78,
+        "endLine": 26,
+        "endChar": 18
+      },
+      "revId": "87f9ad6f16acb644f8f885f576dcbabbd7ffa629",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_2d85999f",
+        "filename": "repo/includes/Rdf/EntityRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-08T18:59:33Z",
+      "side": 1,
+      "message": "It appears this sentence tries to answer my question above, but I can not make sense of it. What are \"basic type information\"? What kind of \"modeling tools\"?",
+      "range": {
+        "startLine": 30,
+        "startChar": 4,
+        "endLine": 30,
+        "endChar": 69
+      },
+      "revId": "87f9ad6f16acb644f8f885f576dcbabbd7ffa629",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_8da94d24",
+        "filename": "repo/includes/Rdf/TermsRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-08T18:59:33Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be replaces with $this-\u003eaddEntityStub( $entity )?",
+      "range": {
+        "startLine": 116,
+        "startChar": 2,
+        "endLine": 122,
+        "endChar": 3
+      },
+      "revId": "87f9ad6f16acb644f8f885f576dcbabbd7ffa629",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
