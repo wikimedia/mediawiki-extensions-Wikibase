@@ -5,12 +5,12 @@ namespace Wikibase\Store\Sql;
 use Database;
 use DBUnexpectedError;
 use Exception;
-use LoadBalancer;
 use MWException;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
 use Wikibase\Store\ChangeDispatchCoordinator;
 use Wikimedia\Assert\Assert;
+use Wikimedia\Rdbms\LoadBalancer;
 
 /**
  * SQL based implementation of ChangeDispatchCoordinator;

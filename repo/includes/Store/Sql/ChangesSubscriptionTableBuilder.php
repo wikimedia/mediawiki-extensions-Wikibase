@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Store\Sql;
 
 use Database;
 use InvalidArgumentException;
-use LoadBalancer;
 use ResultWrapper;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -13,6 +12,7 @@ use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
+use Wikimedia\Rdbms\LoadBalancer;
 
 /**
  * Implements initial population (priming) for the wb_changes_subscription table,
