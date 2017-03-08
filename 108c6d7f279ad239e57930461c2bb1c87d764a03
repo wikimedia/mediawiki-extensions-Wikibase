@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_4791e49b",
+        "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-08T11:21:30Z",
+      "side": 1,
+      "message": "I added something. Hope that helps.",
+      "parentUuid": "8e46e3ee_a415464f",
+      "revId": "108c6d7f279ad239e57930461c2bb1c87d764a03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_c4e732de",
         "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
         "patchSetId": 10
@@ -48,6 +66,24 @@
       "writtenOn": "2017-03-08T09:24:42Z",
       "side": 1,
       "message": "Old thing was fine too, just the fact that returned array is indexed by entity type could be also mentioned somehow. But this is not super crucial IMO, as this is a private method, and docs of public method mention that fact.\n\nWhether it is important/needed/good to have those builders per entity type is still a question to me but it is fine for now I guess.",
+      "revId": "108c6d7f279ad239e57930461c2bb1c87d764a03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_07f2fc03",
+        "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-08T11:21:30Z",
+      "side": 1,
+      "message": "Copy-pasted stuff.",
+      "parentUuid": "8e46e3ee_c4e732de",
       "revId": "108c6d7f279ad239e57930461c2bb1c87d764a03",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -83,6 +119,24 @@
       "side": 1,
       "message": "Yea - the object returned by the callback should be checked using Assert::postcondition. The type of the elements of  $this-\u003efactoryCallbacks is already checked in the constructor and does not need checking here.",
       "parentUuid": "8e46e3ee_a4e226cf",
+      "revId": "108c6d7f279ad239e57930461c2bb1c87d764a03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_67e18029",
+        "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-08T11:21:30Z",
+      "side": 1,
+      "message": "Added this. Hope that\u0027s fine for you.",
+      "parentUuid": "8e46e3ee_e7fa700d",
       "revId": "108c6d7f279ad239e57930461c2bb1c87d764a03",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
