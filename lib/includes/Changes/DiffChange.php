@@ -35,7 +35,7 @@ abstract class DiffChange extends ChangeRow {
 	 * @param Diff $diff
 	 */
 	public function setDiff( Diff $diff ) {
-		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
+		$info = $this->getInfo();
 		$info['diff'] = $diff;
 		$this->setField( 'info', $info );
 	}

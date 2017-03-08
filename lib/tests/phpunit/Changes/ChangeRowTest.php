@@ -65,11 +65,11 @@ class ChangeRowTest extends MediaWikiTestCase {
 		$change->getField( 'field' );
 	}
 
-	public function testGetFieldUnserializesInfo() {
+	public function testGetInfoUnserializesInfo() {
 		$json = '{"field":"value"}';
 		$expected = array( 'field' => 'value' );
 		$change = $this->newChangeRow( [ 'info' => $json ] );
-		$this->assertSame( $expected, $change->getField( 'info' ) );
+		$this->assertSame( $expected, $change->getInfo() );
 	}
 
 	public function testReturnsFields() {
