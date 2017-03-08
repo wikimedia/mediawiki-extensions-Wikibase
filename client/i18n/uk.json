@@ -123,5 +123,7 @@
 	"notification-header-page-connection": "Сторінку <strong>$3</strong> {{GENDER:$2|поєднано}} з елементом {{GRAMMAR:genitive|{{WBREPONAME}}}}.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> та {{PLURAL:$4|одна інша сторінка|$4 інші сторінки|$4 інших сторінок|100=99+ інших сторінок}} {{GENDER:$2|поєднано}} з елементом {{GRAMMAR:genitive|{{WBREPONAME}}}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|Переглянути}} елемент",
-	"notification-subject-page-connection": "Сторінка у {{GRAMMAR:locative|{{SITENAME}}}}, яку Ви {{GENDER:$3|створили}}, {{GENDER:$2|приєднана}} до елемента {{GRAMMAR:genitive|{{WBREPONAME}}}}"
+	"notification-subject-page-connection": "Сторінка у {{GRAMMAR:locative|{{SITENAME}}}}, яку Ви {{GENDER:$3|створили}}, {{GENDER:$2|приєднана}} до елемента {{GRAMMAR:genitive|{{WBREPONAME}}}}",
+	"unresolved-property-category": "Сторінки з нерозв'язаними властивостями",
+	"unresolved-property-category-desc": "Ця сторінка містить сторінки, які посилаються на властивості {{WBREPONAME}}, які не вдається знайти ані за ідентифікатором, ані за назвою."
 }
