@@ -7,6 +7,8 @@ use HTMLForm;
 use OutputPage;
 use Status;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**
@@ -29,18 +31,29 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	private $copyrightView;
 
 	/**
+	 * @var EntityNamespaceLookup
+	 */
+	protected $entityNamespaceLookup;
+
+	/**
 	 * @param string $name Name of the special page, as seen in links and URLs.
 	 * @param string $restriction User right required,
 	 * @param SpecialPageCopyrightView $copyrightView
+	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 */
 	public function __construct(
 		$name,
 		$restriction,
-		SpecialPageCopyrightView $copyrightView
+		SpecialPageCopyrightView $copyrightView,
+		EntityNamespaceLookup $entityNamespaceLookup = null
 	) {
 		parent::__construct( $name, $restriction );
 
 		$this->copyrightView = $copyrightView;
+		if (!$entityNamespaceLookup) {
+			$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		}
+		$this->entityNamespaceLookup = $entityNamespaceLookup;
 	}
 
 	/**
@@ -50,6 +63,23 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 */
 	public function doesWrites() {
 		return true;
+	}
+
+	public function isListed() {
+		//For BC
+		if ($this->getEntityType() === null) {
+			return true;
+		}
+
+		return (bool)$this->entityNamespaceLookup->getEntityNamespace( $this->getEntityType() );
+	}
+
+	/**
+	 * @return string Type id of the entity that will be created (eg: Item::ENTITY_TYPE value)
+	 */
+	protected function getEntityType() {
+		//TODO Make abstract as soon as SpecialNewLexeme overrides this method
+		return null;
 	}
 
 	/**
