@@ -8,6 +8,7 @@ use Status;
 use WebRequest;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLTrimmedTextField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField;
@@ -36,12 +37,14 @@ class SpecialNewItem extends SpecialNewEntity {
 	/**
 	 * @param SiteLookup $siteLookup
 	 * @param SpecialPageCopyrightView $copyrightView
+	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 */
 	public function __construct(
 		SiteLookup $siteLookup,
-		SpecialPageCopyrightView $copyrightView
+		SpecialPageCopyrightView $copyrightView,
+		EntityNamespaceLookup $entityNamespaceLookup
 	) {
-		parent::__construct( 'NewItem', 'createpage', $copyrightView );
+		parent::__construct( 'NewItem', 'createpage', $copyrightView, $entityNamespaceLookup );
 		$this->siteLookup = $siteLookup;
 	}
 
@@ -240,6 +243,13 @@ class SpecialNewItem extends SpecialNewEntity {
 	protected function displayBeforeForm( OutputPage $output ) {
 		parent::displayBeforeForm( $output );
 		$output->addModules( 'wikibase.special.languageLabelDescriptionAliases' );
+	}
+
+	/**
+	 * @see SpecialNewEntity::getEntityType
+	 */
+	protected function getEntityType() {
+		return Item::ENTITY_TYPE;
 	}
 
 }
