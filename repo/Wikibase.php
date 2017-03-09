@@ -668,8 +668,7 @@ call_user_func( function() {
 		);
 
 		return new Wikibase\Repo\Specials\SpecialNewItem(
-			$wikibaseRepo->getSiteLookup(),
-			$copyrightView
+			$wikibaseRepo->getSiteLookup(), $copyrightView, $wikibaseRepo->getEntityNamespaceLookup()
 		);
 	};
 	$wgSpecialPages['NewProperty'] = function () {
@@ -683,6 +682,7 @@ call_user_func( function() {
 		);
 
 		return new Wikibase\Repo\Specials\SpecialNewProperty(
+			$wikibaseRepo->getEntityNamespaceLookup(),
 			$copyrightView
 		);
 	};
