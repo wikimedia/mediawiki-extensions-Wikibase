@@ -27,9 +27,9 @@
 				$input = this.$input;
 
 			$input.commonssuggester( {
+				apiUrl: this._options.commonsApiUrl,
 				namespace: 'Data',
-				contentModel: 'Map.JsonConfig',
-				apiUrl: this._options.commonsApiUrl
+				contentModel: 'Map.JsonConfig'
 			} );
 
 			// Using the inputautoexpand plugin, the position of the dropdown needs to be updated

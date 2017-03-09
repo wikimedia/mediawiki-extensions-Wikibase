@@ -49,6 +49,7 @@ function expertProxy( fnName ) {
  * @param {string} options.language
  *        Language code of the language the `valueview` shall interact with parsers
  * @param {string|null} [options.vocabularyLookupApiUrl=null]
+ * @param {string} [options.commonsApiUrl='https://commons.wikimedia.org/w/api.php']
  * @param {string|null} [options.dataTypeId=null]
  *        If set, an expert (`jQuery.valueview.Expert`) and a parser (`valueParsers.ValueParser`)
  *        will be determined from the provided stores according to the specified data type id.
@@ -191,11 +192,11 @@ $.widget( 'valueview.valueview', PARENT, {
 		value: null,
 		language: null,
 		vocabularyLookupApiUrl: null,
+		commonsApiUrl: 'https://commons.wikimedia.org/w/api.php',
 		autoStartEditing: false,
 		parseDelay: 300,
 		messageProvider: null,
-		contentLanguages: null,
-        commonsApiUrl: 'https://commons.wikimedia.org/w/api.php'
+		contentLanguages: null
 	},
 
 	/**
@@ -559,8 +560,8 @@ $.widget( 'valueview.valueview', PARENT, {
 				{
 					language: this.options.language,
 					vocabularyLookupApiUrl: this.options.vocabularyLookupApiUrl || null,
-					contentLanguages: this.options.contentLanguages,
 					commonsApiUrl: this.options.commonsApiUrl,
+					contentLanguages: this.options.contentLanguages,
 					messageProvider: this.options.messageProvider
 				}
 			);

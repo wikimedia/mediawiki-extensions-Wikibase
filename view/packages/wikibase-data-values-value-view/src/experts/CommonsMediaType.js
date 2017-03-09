@@ -26,7 +26,10 @@
 			var notifier = this._viewNotifier,
 				$input = this.$input;
 
-			$input.commonssuggester( { namespace: 'File', apiUrl: 'https://commons.wikimedia.org/w/api.php' } );
+			$input.commonssuggester( {
+				apiUrl: 'https://commons.wikimedia.org/w/api.php',
+				namespace: 'File'
+			} );
 
 			// Using the inputautoexpand plugin, the position of the dropdown needs to be updated
 			// whenever the input box expands vertically:

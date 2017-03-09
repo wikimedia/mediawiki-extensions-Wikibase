@@ -6,10 +6,21 @@
 	'use strict';
 
 	/**
-	 * @param {Object} [options]
 	 * @return {jQuery}
 	 */
-	var newTestSuggester = function( options ) {
+	var newTestSuggester = function() {
+		var options = {
+			ajax: function( options ) {
+				var response = { query: { search: [] } };
+
+				// This uses the search results array as a spy, and appends _requestTerm
+				response.query.search._requestTerm = options.data.srsearch;
+
+				return $.Deferred().resolve( response ).promise();
+			},
+			apiUrl: 'can not be empty'
+		};
+
 		return $( '<input>' )
 			.addClass( 'test_suggester' )
 			.appendTo( 'body' )
@@ -91,14 +102,7 @@
 
 	QUnit.test( 'search integration', function( assert ) {
 		assert.expect( 2 );
-		var $suggester = newTestSuggester( { ajax: function( options ) {
-				var response = { query: { search: [] } };
-
-				// This uses the search results array as a spy, and appends _requestTerm
-				response.query.search._requestTerm = options.data.srsearch;
-
-				return $.Deferred().resolve( response ).promise();
-			} } ),
+		var $suggester = newTestSuggester(),
 			suggester = $suggester.data( 'commonssuggester' ),
 			input = 'title=Foo/Bar',
 			done = assert.async();

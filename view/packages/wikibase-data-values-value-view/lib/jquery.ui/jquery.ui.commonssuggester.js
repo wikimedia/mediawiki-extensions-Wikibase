@@ -26,9 +26,9 @@
 		 */
 		options: {
 			ajax: $.ajax,
+			apiUrl: null,
 			namespace: null,
-			contentModel: null,
-			apiUrl: null
+			contentModel: null
 		},
 
 		/**
@@ -36,6 +36,10 @@
 		 * @protected
 		 */
 		_create: function() {
+			if ( !this.options.apiUrl ) {
+				throw new Error( 'apiUrl option required' );
+			}
+
 			if ( !this.options.source ) {
 				this.options.source = this._initDefaultSource();
 			}
