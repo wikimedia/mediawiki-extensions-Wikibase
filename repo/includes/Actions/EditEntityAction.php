@@ -8,6 +8,11 @@ use Html;
 use IContextSource;
 use Linker;
 use MWException;
+use OOUI\ButtonInputWidget;
+use OOUI\ButtonWidget;
+use OOUI\FieldLayout;
+use OOUI\HtmlSnippet;
+use OOUI\TextInputWidget;
 use Page;
 use Revision;
 use Status;
@@ -259,6 +264,7 @@ class EditEntityAction extends ViewEntityAction {
 	}
 
 	private function showUndoForm() {
+		$this->getOutput()->enableOOUI();
 		$req = $this->getRequest();
 
 		if ( $this->showPermissionError( 'read' ) || $this->showPermissionError( 'edit' ) ) {
@@ -359,11 +365,13 @@ class EditEntityAction extends ViewEntityAction {
 	 * @return string
 	 */
 	private function getCancelLink() {
-		return Linker::linkKnown(
-			$this->getContext()->getTitle(),
-			$this->msg( 'cancel' )->parse(),
-			array( 'id' => 'mw-editform-cancel' )
-		);
+		return ( new ButtonWidget( [
+			'id' => 'mw-editform-cancel',
+			'href' => $this->getContext()->getTitle()->getLocalURL(),
+			'label' => $this->msg( 'cancel' )->parse(),
+			'framed' => false,
+			'flags' => 'destructive'
+		] ) )->toString();
 	}
 
 	/**
@@ -378,31 +386,24 @@ class EditEntityAction extends ViewEntityAction {
 	 *
 	 * @param string $labelText The html to place inside the label
 	 *
-	 * @return array An array in the format array( $label, $input )
+	 * @return string HTML
 	 */
 	private function getSummaryInput( $labelText ) {
-		// Note: the maxlength is overriden in JS to 255 and to make it use UTF-8 bytes, not characters.
-		$inputAttrs = array(
-			'id' => 'wpSummary',
-			'maxlength' => 200,
+		$inputAttrs = [
+			'name' => 'wpSummary',
+			'maxLength' => 200,
 			'size' => 60,
 			'spellcheck' => 'true',
-		) + Linker::tooltipAndAccesskeyAttribs( 'summary' );
-
-		$spanLabelAttrs = array(
-			'class' => 'mw-summary',
-			'id' => 'wpSummaryLabel',
-		);
-
-		$label = null;
-		if ( $labelText ) {
-			$label = Html::label( $labelText, $inputAttrs['id'] );
-			$label = Html::rawElement( 'span', $spanLabelAttrs, $label );
-		}
-
-		$input = Html::input( 'wpSummary', '', 'text', $inputAttrs );
-
-		return array( $label, $input );
+		] + Linker::tooltipAndAccesskeyAttribs( 'summary' );
+		return ( new FieldLayout(
+			new TextInputWidget( $inputAttrs ),
+			[
+				'label' => new HtmlSnippet( $labelText ),
+				'align' => 'top',
+				'id' => 'wpSummaryLabel',
+				'classes' => [ 'mw-summary' ],
+			]
+		) )->toString();
 	}
 
 	/**
@@ -447,16 +448,15 @@ class EditEntityAction extends ViewEntityAction {
 	 * @return string HTML
 	 */
 	private function getEditButton() {
-		return Html::input(
-			'wpSave',
-			$this->msg( 'savearticle' )->text(),
-			'submit',
-			array(
-				'id' => 'wpSave',
+		return ( new ButtonInputWidget( [
+				'name' => 'wpSave',
+				'value' => $this->msg( 'savearticle' )->text(),
+				'label' => $this->msg( 'savearticle' )->text(),
 				'accesskey' => $this->msg( 'accesskey-save' )->text(),
+				'flags' => [ 'primary', 'progressive' ],
+				'type' => 'submit',
 				'title' => $this->msg( 'tooltip-save' )->text() . ' [' . $this->msg( 'accesskey-save' )->text() . ']',
-			)
-		);
+			] ) )->toString();
 	}
 
 	/**
@@ -494,18 +494,24 @@ class EditEntityAction extends ViewEntityAction {
 			'action' => $actionUrl,
 			'enctype' => 'multipart/form-data' ) ) );
 
-		$this->getOutput()->addHTML( "<p class='editOptions'>\n" );
+		$this->getOutput()->addHTML( "<div class='editOptions'>\n" );
 
 		$labelText = $this->msg( 'wikibase-summary-generated' )->text();
-		list( $label, $field ) = $this->getSummaryInput( $labelText );
-		$this->getOutput()->addHTML( $label . "\n" . Html::rawElement( 'br' ) . "\n" . $field );
-		$this->getOutput()->addHTML( "<p class='editButtons'>\n" );
+		$this->getOutput()->addHTML( $this->getSummaryInput( $labelText ) );
+		$this->getOutput()->addHTML( Html::rawElement( 'br' ) );
+		$this->getOutput()->addHTML( "<div class='editButtons'>\n" );
 		$this->getOutput()->addHTML( $this->getEditButton() . "\n" );
 
-		$this->getOutput()->addHTML( $this->msg( 'pipe-separator' )->escaped() );
+		$this->getOutput()->addHTML(
+			Html::element(
+				'span',
+				[ 'class' => 'mw-editButtons-pipe-separator' ],
+				$this->msg( 'pipe-separator' )->text()
+			)
+		);
 		$this->getOutput()->addHTML( $this->getCancelLink() );
 
-		$this->getOutput()->addHTML( "</p><!-- editButtons -->\n</p><!-- editOptions -->\n" );
+		$this->getOutput()->addHTML( "</div><!-- editButtons -->\n</div><!-- editOptions -->\n" );
 
 		$hidden = array(
 			'wpEditToken' => $this->getUser()->getEditToken(),
