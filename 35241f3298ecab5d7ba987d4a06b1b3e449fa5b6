@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_7e2a66d9",
+        "filename": "view/resources/wikibase/view/ControllerViewFactory.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-09T13:35:39Z",
+      "side": 1,
+      "message": "Move to parent",
+      "range": {
+        "startLine": 23,
+        "startChar": 2,
+        "endLine": 23,
+        "endChar": 15
+      },
+      "revId": "35241f3298ecab5d7ba987d4a06b1b3e449fa5b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
