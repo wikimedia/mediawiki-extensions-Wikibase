@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_b4556d54",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-09T17:37:35Z",
+      "side": 1,
+      "message": "Please stick to one parameter order. Either the lookup is always before or always after the copyrightView. Same in SpecialNewProperty.",
+      "range": {
+        "startLine": 44,
+        "startChar": 2,
+        "endLine": 47,
+        "endChar": 86
+      },
+      "revId": "d50c6680d68c50564a309a517d3928131a76d078",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_747845ee",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-09T17:37:35Z",
+      "side": 1,
+      "message": "Please prefer assertSame, especially because this is a falsy value.\n\nAlso please do not call this statically, because literally all other code uses $this, including the PHPUnit website: https://phpunit.de/getting-started.html. I find it really confusing to see these styles mixed.",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 20
+      },
+      "revId": "d50c6680d68c50564a309a517d3928131a76d078",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_d45d997f",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewItemTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-09T17:37:35Z",
+      "side": 1,
+      "message": "I think this variable name should say that it represents a namespace number.",
+      "range": {
+        "startLine": 46,
+        "startChar": 9,
+        "endLine": 46,
+        "endChar": 12
+      },
+      "revId": "d50c6680d68c50564a309a517d3928131a76d078",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_f4621537",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewPropertyTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-09T17:37:35Z",
+      "side": 1,
+      "message": "Same here.",
+      "revId": "d50c6680d68c50564a309a517d3928131a76d078",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
