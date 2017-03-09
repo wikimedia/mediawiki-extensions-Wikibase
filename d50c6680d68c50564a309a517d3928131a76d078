@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_0ffbea12",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-09T17:58:29Z",
+      "side": 1,
+      "message": "\u003e Please prefer assertSame, especially because this is a falsy value.\n\nI remember we already had this discussion. PhpUnit assert handles `assertEquals` not as just `\u003d\u003d`, so it does not matter much for scalars.\n\nAnyway, I commited these lines accidentally so they are removed now.",
+      "parentUuid": "8e46e3ee_747845ee",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 20
+      },
+      "revId": "d50c6680d68c50564a309a517d3928131a76d078",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_d45d997f",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialNewItemTest.php",
         "patchSetId": 1
