@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_cf04221a",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-09T17:58:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e46e3ee_b4556d54",
+      "range": {
+        "startLine": 44,
+        "startChar": 2,
+        "endLine": 47,
+        "endChar": 86
+      },
+      "revId": "d50c6680d68c50564a309a517d3928131a76d078",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_747845ee",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialNewEntityTest.php",
         "patchSetId": 1
@@ -95,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_ef09de30",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewItemTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-09T17:58:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e46e3ee_d45d997f",
+      "range": {
+        "startLine": 46,
+        "startChar": 9,
+        "endLine": 46,
+        "endChar": 12
+      },
+      "revId": "d50c6680d68c50564a309a517d3928131a76d078",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_f4621537",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialNewPropertyTest.php",
         "patchSetId": 1
@@ -106,6 +154,24 @@
       "writtenOn": "2017-03-09T17:37:35Z",
       "side": 1,
       "message": "Same here.",
+      "revId": "d50c6680d68c50564a309a517d3928131a76d078",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_8f0ffa32",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewPropertyTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-09T17:58:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e46e3ee_f4621537",
       "revId": "d50c6680d68c50564a309a517d3928131a76d078",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
