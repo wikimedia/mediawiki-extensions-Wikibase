@@ -42,8 +42,9 @@ abstract class SpecialNewEntityTest extends SpecialPageTestBase {
 		$request = new FauxRequest( $formData, true );
 
 		/** @var \FauxResponse $webResponse */
-		list( , $webResponse ) = $this->executeSpecialPage( '', $request );
+		list( $output, $webResponse ) = $this->executeSpecialPage( '', $request );
 
+		self::assertEquals('', $output );
 		$entityId = $this->extractEntityIdFromUrl( $webResponse->getHeader( 'location' ) );
 		/* @var $entity EntityDocument */
 		$entity = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entityId );
