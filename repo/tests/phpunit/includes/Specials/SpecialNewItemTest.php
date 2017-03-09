@@ -9,6 +9,7 @@ use SiteStore;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Specials\SpecialNewItem;
 
 /**
@@ -42,7 +43,12 @@ class SpecialNewItemTest extends SpecialNewEntityTest {
 	}
 
 	protected function newSpecialPage() {
-		return new SpecialNewItem( $this->siteStore, $this->copyrightView );
+		$randomInt = 123;
+		return new SpecialNewItem(
+			$this->siteStore,
+			new EntityNamespaceLookup( [Item::ENTITY_TYPE => $randomInt] ),
+			$this->copyrightView
+		);
 	}
 
 	//TODO: Add test testing site link addition

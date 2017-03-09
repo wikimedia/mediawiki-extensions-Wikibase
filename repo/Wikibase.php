@@ -669,6 +669,7 @@ call_user_func( function() {
 
 		return new Wikibase\Repo\Specials\SpecialNewItem(
 			$wikibaseRepo->getSiteLookup(),
+			$wikibaseRepo->getEntityNamespaceLookup(),
 			$copyrightView
 		);
 	};
@@ -683,6 +684,7 @@ call_user_func( function() {
 		);
 
 		return new Wikibase\Repo\Specials\SpecialNewProperty(
+			$wikibaseRepo->getEntityNamespaceLookup(),
 			$copyrightView
 		);
 	};

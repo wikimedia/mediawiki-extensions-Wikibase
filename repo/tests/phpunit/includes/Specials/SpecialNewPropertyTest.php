@@ -6,6 +6,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Specials\SpecialNewProperty;
 
 /**
@@ -28,7 +29,11 @@ use Wikibase\Repo\Specials\SpecialNewProperty;
 class SpecialNewPropertyTest extends SpecialNewEntityTest {
 
 	protected function newSpecialPage() {
-		return new SpecialNewProperty( $this->copyrightView );
+		$randomInt = 123;
+		return new SpecialNewProperty(
+			new EntityNamespaceLookup( [Property::ENTITY_TYPE => $randomInt] ),
+			$this->copyrightView
+		);
 	}
 
 	public function testAllNecessaryFormFieldsArePresent_WhenRendered() {
