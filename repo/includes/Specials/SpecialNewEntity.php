@@ -45,14 +45,11 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		$name,
 		$restriction,
 		SpecialPageCopyrightView $copyrightView,
-		EntityNamespaceLookup $entityNamespaceLookup = null
+		EntityNamespaceLookup $entityNamespaceLookup
 	) {
 		parent::__construct( $name, $restriction );
 
 		$this->copyrightView = $copyrightView;
-		if (!$entityNamespaceLookup) {
-			$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
-		}
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 	}
 
@@ -66,21 +63,13 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	}
 
 	public function isListed() {
-		//For BC
-		if ($this->getEntityType() === null) {
-			return true;
-		}
-
 		return (bool)$this->entityNamespaceLookup->getEntityNamespace( $this->getEntityType() );
 	}
 
 	/**
 	 * @return string Type id of the entity that will be created (eg: Item::ENTITY_TYPE value)
 	 */
-	protected function getEntityType() {
-		//TODO Make abstract as soon as SpecialNewLexeme overrides this method
-		return null;
-	}
+	abstract protected function getEntityType();
 
 	/**
 	 * @see SpecialWikibasePage::execute
