@@ -7,6 +7,7 @@ use Status;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataTypeSelector;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLTrimmedTextField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField;
@@ -26,8 +27,11 @@ class SpecialNewProperty extends SpecialNewEntity {
 	const FIELD_DESCRIPTION = 'description';
 	const FIELD_ALIASES = 'aliases';
 
-	public function __construct( SpecialPageCopyrightView $specialPageCopyrightView ) {
-		parent::__construct( 'NewProperty', 'property-create', $specialPageCopyrightView );
+	public function __construct(
+		SpecialPageCopyrightView $specialPageCopyrightView,
+		EntityNamespaceLookup $entityNamespaceLookup
+	) {
+		parent::__construct( 'NewProperty', 'property-create', $specialPageCopyrightView, $entityNamespaceLookup );
 	}
 
 	/**
@@ -198,4 +202,10 @@ class SpecialNewProperty extends SpecialNewEntity {
 		$output->addModules( 'wikibase.special.languageLabelDescriptionAliases' );
 	}
 
+	/**
+	 * @see SpecialNewEntity::getEntityType
+	 */
+	protected function getEntityType() {
+		return Property::ENTITY_TYPE;
+	}
 }
