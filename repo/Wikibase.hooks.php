@@ -73,7 +73,7 @@ final class RepoHooks {
 		global $wgContentHandlers;
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$namespaces = WikibaseRepo::buildEntityNamespaceConfigurations();
+		$namespaces = $wikibaseRepo->getEntityNamespaces();
 
 		// Register entity namespaces.
 		// Note that $wgExtraNamespaces and $wgNamespaceAliases have already been processed at this

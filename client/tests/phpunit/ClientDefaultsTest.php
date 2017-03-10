@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\Client\WikibaseClient;
 use Wikibase\SettingsArray;
+use Wikibase\WikibaseSettings;
 
 /**
  * Copyright © 02.07.13 by the authors listed below.
@@ -162,22 +163,20 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 			),
 		);
 
-		if ( defined( 'WB_VERSION' ) ) {
-			$repoSettings = WikibaseClient::getDefaultInstance()->getRepoSettings();
+		if ( WikibaseSettings::isRepoEnabled() ) {
+			$repoSettings = WikibaseSettings::getRepoSettings();
 			$entityNamespaces = $repoSettings->getSetting( 'entityNamespaces' );
 			$namespaceNames = array_map( 'MWNamespace::getCanonicalName', $entityNamespaces );
 
-			$cases[] = array( // #7: default repoNamespaces and entityNamespaces
-				array( // $settings
-				),
-				array( // $wg
-				),
+			$cases[] = [ // #7: default repoNamespaces and entityNamespaces
+				[], // $settings
+				[], // $wg
 				true, // $repoIsLocal
-				array( // $expected
+				[ // $expected
 					'repoNamespaces' => $namespaceNames,
 					'entityNamespaces' => $entityNamespaces,
-				)
-			);
+				]
+			];
 		}
 
 		return $cases;
