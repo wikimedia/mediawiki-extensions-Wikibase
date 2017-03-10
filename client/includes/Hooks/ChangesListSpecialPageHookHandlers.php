@@ -191,8 +191,6 @@ class ChangesListSpecialPageHookHandlers {
 	 * @return array
 	 */
 	public function addWikibaseConditions( array &$conds, FormOptions $opts ) {
-		// do not include wikibase changes for activated enhanced watchlist
-		// since we do not support that format yet
 		if ( $this->shouldHideWikibaseChanges( $opts ) ) {
 			$dbr = $this->loadBalancer->getConnection( DB_REPLICA );
 			$conds[] = 'rc_source != ' . $dbr->addQuotes( RecentChangeFactory::SRC_WIKIBASE );
@@ -225,6 +223,8 @@ class ChangesListSpecialPageHookHandlers {
 	 * @return bool
 	 */
 	private function hasWikibaseChangesEnabled() {
+		// do not include wikibase changes for activated enhanced watchlist
+		// since we do not support that format yet (T46222)
 		return $this->showExternalChanges && !$this->isEnhancedChangesEnabled();
 	}
 
