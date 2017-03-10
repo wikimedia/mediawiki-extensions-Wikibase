@@ -2,6 +2,7 @@
 
 use Wikibase\Client\WikibaseClient;
 use Wikibase\SettingsArray;
+use Wikibase\WikibaseSettings;
 
 /**
  * This file assigns the default values to all Wikibase Client settings.
@@ -108,7 +109,7 @@ return call_user_func( function() {
 
 	$defaults['thisWikiIsTheRepo'] = function ( SettingsArray $settings ) {
 		// determine whether the repo extension is present
-		return defined( 'WB_VERSION' );
+		return WikibaseSettings::isRepoEnabled();
 	};
 
 	$defaults['repoSiteName'] = function ( SettingsArray $settings ) {
@@ -145,15 +146,11 @@ return call_user_func( function() {
 
 	$defaults['entityNamespaces'] = function ( SettingsArray $settings ) {
 		if ( $settings->getSetting( 'thisWikiIsTheRepo' ) ) {
-			// if this is the repo wiki, use the repo setting
-			// FIXME: this used to be using WikibaseClient::getRepoSettings() which cannot be used
-			// if Repo does depend on Client (leads to an infinite loop in Repo's constructor).
-			// This is a temporary workaround that should be rather replaced with something better
-			// than accessing a static function.
-			return \Wikibase\Repo\WikibaseRepo::buildEntityNamespaceConfigurations();
+			return WikibaseSettings::getRepoSettings()->getSetting( 'entityNamespaces' );
 		} else {
 			// XXX: Default to having Items in the main namespace, and properties in NS 120.
 			// That is the live setup at wikidata.org, it is NOT consistent with the example settings!
+			// FIXME: throw an exception, instead of making assumptions that may brak the site in strange ways!
 			return [
 				'item' => 0,
 				'property' => 120
@@ -172,6 +169,7 @@ return call_user_func( function() {
 		} else {
 			// XXX: Default to having Items in the main namespace, and properties in the 'Property' namespace.
 			// That is the live setup at wikidata.org, it is NOT consistent with the example settings!
+			// FIXME: throw an exception, instead of making assumptions that may brak the site in strange ways!
 			return [
 				'item' => '',
 				'property' => 'Property'

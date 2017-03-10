@@ -80,6 +80,7 @@ use Wikibase\Store\EntityIdLookup;
 use Wikibase\Store;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
+use Wikibase\WikibaseSettings;
 
 /**
  * @covers Wikibase\Repo\WikibaseRepo
@@ -407,7 +408,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	}
 
 	public function testGetEnabledEntityTypes() {
-		if ( !defined( 'WBC_VERSION' ) ) {
+		if ( !WikibaseSettings::isClientEnabled() ) {
 			$this->markTestSkipped( 'WikibaseClient must be enabled to run this test' );
 		}
 
