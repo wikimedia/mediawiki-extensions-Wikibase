@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_952dc88d",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-10T12:40:08Z",
+      "side": 1,
+      "message": "It feels strange to have the deserializer created here inline. I\u0027d be more happy with an EntityChangeOpProvider or some such, that has a newEntityChangeOp( $type, $data ) method. The EntityChangeOpProvider would be managed as a service, and injected into EditEntity.\n\nIntroducing EntityChangeOpProvider should be done in a separate patch, either before or after this one. \n\nNote that there is also ChangeOpFactoryProvider - oh yay, confusing names.",
+      "revId": "b24d2af3d79c9143cd551a490ce0676ad5a22b53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_1558d834",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-10T12:40:08Z",
+      "side": 1,
+      "message": "Please encapsulate this hack, in a private method at least.",
+      "revId": "b24d2af3d79c9143cd551a490ce0676ad5a22b53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_f5cd2cbd",
+        "filename": "repo/includes/ChangeOp/ChangeOpException.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-10T12:40:08Z",
+      "side": 1,
+      "message": "Encoding a message key and args in an exception isn\u0027t very nice semantically.\n\nI can see the need here, but please have a look at ExceptionLocalizer, which is used in ApiErrorReporter. That\u0027s the place where Exceptions should be mapped to messages.",
+      "revId": "b24d2af3d79c9143cd551a490ce0676ad5a22b53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_15d3f862",
+        "filename": "repo/includes/ChangeOp/Deserialization/ClaimsChangeOpDeserializer.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-10T12:40:08Z",
+      "side": 1,
+      "message": "Have a look at ExceptionLocalizer",
+      "revId": "b24d2af3d79c9143cd551a490ce0676ad5a22b53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_b5c804ac",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-10T12:40:08Z",
+      "side": 1,
+      "message": "How often would this be called during a request that uses ChangeOpDeserializers?",
+      "revId": "b24d2af3d79c9143cd551a490ce0676ad5a22b53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
