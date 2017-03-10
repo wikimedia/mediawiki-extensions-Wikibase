@@ -117,7 +117,6 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$metadata = array(
 			'rev_id' => 2,
 			'parent_id' => 3,
-			'bot' => false,
 			'user_text' => 'RecentChangeFactoryTestUser',
 			'comment' => 'Actual Comment'
 		);
@@ -127,16 +126,9 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$change->setMetadata( $metadata );
 
 		$diffOp = new Diff( array( 'testwiki' => new DiffOpChange( 'RecentChangeFactoryTest', 'Bar' ) ) );
-
 		$siteLinkDiff = new ItemDiff( array( 'links' => $diffOp ) );
 		$siteLinkChange = $this->newEntityChange( 'change', new ItemId( 'Q17' ), $siteLinkDiff, $fields );
 		$siteLinkChange->setMetadata( $metadata );
-
-		$fields = $change->getFields();
-		unset( $fields['info'] );
-
-		$metadata = array_merge( $fields, $change->getMetadata() );
-		$metadata['entity_type'] = 'item';
 
 		$targetAttr = array(
 			'rc_namespace' => $target->getNamespace(),
@@ -153,14 +145,18 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 			'rc_user_text' => 'RecentChangeFactoryTestUser',
 			'rc_type' => RC_EXTERNAL,
 			'rc_minor' => true, // for now, always consider these minor
-			'rc_bot' => $metadata['bot'],
+			'rc_bot' => false,
 			'rc_patrolled' => true,
 			'rc_params' => serialize( array(
-				'wikibase-repo-change' => $metadata,
+				'wikibase-repo-change' => $metadata + $fields + [
+					'object_id' => 'q17',
+					'type' => 'wikibase-item~change',
+					'entity_type' => 'item',
+				],
 				//'comment-html' => 'Generated Comment HTML', // later
 			) ),
 			'rc_comment' => $metadata['comment'],
-			'rc_timestamp' => $metadata['time'],
+			'rc_timestamp' => $fields['time'],
 			'rc_log_action' => '',
 			'rc_log_type' => null,
 			'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
