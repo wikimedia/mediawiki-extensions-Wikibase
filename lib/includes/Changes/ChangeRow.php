@@ -24,7 +24,7 @@ abstract class ChangeRow implements Change {
 	/**
 	 * @see Change::getAge
 	 *
-	 * @return integer
+	 * @return int Seconds
 	 */
 	public function getAge() {
 		return time() - (int)wfTimestamp( TS_UNIX, $this->getField( 'time' ) );
