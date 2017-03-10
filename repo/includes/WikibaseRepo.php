@@ -135,6 +135,7 @@ use Wikibase\SummaryFormatter;
 use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
+use Wikibase\WikibaseSettings;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -298,7 +299,7 @@ class WikibaseRepo {
 	 * @return self
 	 */
 	private static function newInstance() {
-		global $wgWBRepoDataTypes, $wgWBRepoEntityTypes, $wgWBRepoSettings;
+		global $wgWBRepoDataTypes, $wgWBRepoEntityTypes;
 
 		if ( !is_array( $wgWBRepoDataTypes ) || !is_array( $wgWBRepoEntityTypes ) ) {
 			throw new MWException( '$wgWBRepoDataTypes and $wgWBRepoEntityTypes must be arrays. '
@@ -306,20 +307,19 @@ class WikibaseRepo {
 		}
 
 		$dataTypeDefinitions = $wgWBRepoDataTypes;
-		Hooks::run( 'WikibaseRepoDataTypes', array( &$dataTypeDefinitions ) );
+		Hooks::run( 'WikibaseRepoDataTypes', [ &$dataTypeDefinitions ] );
 
 		$entityTypeDefinitions = $wgWBRepoEntityTypes;
-		Hooks::run( 'WikibaseRepoEntityTypes', array( &$entityTypeDefinitions ) );
+		Hooks::run( 'WikibaseRepoEntityTypes', [ &$entityTypeDefinitions ] );
 
-		$settings = new SettingsArray( $wgWBRepoSettings );
-		$settings->setSetting( 'entityNamespaces', self::buildEntityNamespaceConfigurations() );
+		$settings = WikibaseSettings::getRepoSettings();
 
 		$repositoryDefinitions = self::getRepositoryDefinitionsFromSettings( $settings );
 
 		$dataRetrievalServices = null;
 
 		// If client functionality is enabled, use it to enable federation.
-		if ( defined( 'WBC_VERSION' ) ) {
+		if ( WikibaseSettings::isClientEnabled() ) {
 			$dataRetrievalServices = WikibaseClient::getDefaultInstance()->getEntityDataRetrievalServiceFactory();
 			$repositoryDefinitions = WikibaseClient::getDefaultInstance()->getRepositoryDefinitions();
 		}
@@ -1578,25 +1578,6 @@ class WikibaseRepo {
 			$this->newRedirectCreationInteractor( $user, $context ),
 			$this->getEntityTitleLookup()
 		);
-	}
-
-	/**
-	 * @throws MWException in case of a misconfiguration
-	 * @return int[] An array mapping entity type identifiers to namespace numbers.
-	 */
-	public static function buildEntityNamespaceConfigurations() {
-		global $wgWBRepoSettings;
-
-		if ( empty( $wgWBRepoSettings['entityNamespaces'] ) ) {
-			throw new MWException( 'Wikibase: Incomplete configuration: '
-				. '$wgWBRepoSettings[\'entityNamespaces\'] has to be set to an '
-				. 'array mapping entity types to namespace IDs. '
-				. 'See Wikibase.example.php for details and examples.' );
-		}
-
-		$namespaces = $wgWBRepoSettings['entityNamespaces'];
-		Hooks::run( 'WikibaseEntityNamespaces', array( &$namespaces ) );
-		return $namespaces;
 	}
 
 	/**
