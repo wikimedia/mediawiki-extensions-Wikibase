@@ -96,6 +96,7 @@ use Wikibase\NamespaceChecker;
 use Wikibase\SettingsArray;
 use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
 use Wikibase\StringNormalizer;
+use Wikibase\WikibaseSettings;
 
 /**
  * Top level factory for the WikibaseClient extension.
@@ -623,23 +624,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * Returns the repo's settings array IF the local wiki also acts as a repository.
-	 * If the local wiki is not a repository, this method returns null.
-	 *
-	 * This is intended to be used ONLY to allow client settings to default to local repo
-	 * settings in WikibaseClient.default.php.
-	 *
-	 * @return SettingsArray|null
-	 */
-	public function getRepoSettings() {
-		if ( defined( 'WB_VERSION' ) ) {
-			return \Wikibase\Repo\WikibaseRepo::getDefaultInstance()->getSettings();
-		} else {
-			return null;
-		}
-	}
-
-	/**
 	 * Returns a new instance constructed from global settings.
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
@@ -647,7 +631,7 @@ final class WikibaseClient {
 	 * @return WikibaseClient
 	 */
 	private static function newInstance() {
-		global $wgWBClientSettings, $wgWBClientDataTypes;
+		global $wgWBClientDataTypes;
 
 		if ( !is_array( $wgWBClientDataTypes ) ) {
 			throw new MWException( '$wgWBClientDataTypes must be array. '
@@ -660,7 +644,7 @@ final class WikibaseClient {
 		$entityTypeDefinitions = self::getDefaultEntityTypes();
 		Hooks::run( 'WikibaseClientEntityTypes', array( &$entityTypeDefinitions ) );
 
-		$settings = new SettingsArray( $wgWBClientSettings );
+		$settings = WikibaseSettings::getClientSettings();
 
 		return new self(
 			$settings,
@@ -1246,21 +1230,12 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return int[] An array mapping entity type identifiers to namespace numbers.
-	 */
-	private function buildEntityNamespaceConfigurations() {
-		$namespaces = $this->settings->getSetting( 'entityNamespaces' );
-		Hooks::run( 'WikibaseEntityNamespaces', array( &$namespaces ) );
-		return $namespaces;
-	}
-
-	/**
 	 * @return EntityNamespaceLookup
 	 */
 	public function getEntityNamespaceLookup() {
 		if ( $this->entityNamespaceLookup === null ) {
 			$this->entityNamespaceLookup = new EntityNamespaceLookup(
-				$this->buildEntityNamespaceConfigurations()
+				$this->settings->getSetting( 'entityNamespaces' )
 			);
 		}
 
