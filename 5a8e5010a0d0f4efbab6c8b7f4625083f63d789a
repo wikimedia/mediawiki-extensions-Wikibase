@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_f247827a",
+        "filename": "docs/extending-entities.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-10T11:02:14Z",
+      "side": 1,
+      "message": "I really hate using \"Foo\" in this case. What does this mean? People will search for a file with this name and not fine it. So where should I add what? I have no idea.",
+      "range": {
+        "startLine": 16,
+        "startChar": 17,
+        "endLine": 16,
+        "endChar": 20
+      },
+      "revId": "5a8e5010a0d0f4efbab6c8b7f4625083f63d789a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
