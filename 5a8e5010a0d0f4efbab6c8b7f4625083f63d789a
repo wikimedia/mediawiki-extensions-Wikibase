@@ -22,6 +22,30 @@
       "revId": "5a8e5010a0d0f4efbab6c8b7f4625083f63d789a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_b536c4e2",
+        "filename": "docs/extending-entities.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-10T11:34:44Z",
+      "side": 1,
+      "message": "\"Foo\" is a standard meta-syntactic variable. I know you don\u0027t like it, but it\u0027s pretty much universally understood as a placeholder.\n\nHowever, I agree that the list above doesn\u0027t really say how or where to add support. We should change that. And \"add support to\" is misleading - it\u0027s really \"create class\".",
+      "parentUuid": "8e46e3ee_f247827a",
+      "range": {
+        "startLine": 16,
+        "startChar": 17,
+        "endLine": 16,
+        "endChar": 20
+      },
+      "revId": "5a8e5010a0d0f4efbab6c8b7f4625083f63d789a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
