@@ -46,6 +46,30 @@
       "revId": "5a8e5010a0d0f4efbab6c8b7f4625083f63d789a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_3549546b",
+        "filename": "docs/extending-entities.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-10T11:40:14Z",
+      "side": 1,
+      "message": "I thought about \"create class\" but it\u0027s not just creating class es. The fallback also needs to be added to entitytypes page.",
+      "parentUuid": "8e46e3ee_b536c4e2",
+      "range": {
+        "startLine": 16,
+        "startChar": 17,
+        "endLine": 16,
+        "endChar": 20
+      },
+      "revId": "5a8e5010a0d0f4efbab6c8b7f4625083f63d789a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
