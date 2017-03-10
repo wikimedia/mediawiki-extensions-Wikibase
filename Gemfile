@@ -1,6 +1,3 @@
-# ruby=ruby-2.1.1
-# ruby-gemset=Wikibase
-
 source 'https://rubygems.org'
 
 gem 'activesupport', '~> 4.2', '>= 4.2.6'
