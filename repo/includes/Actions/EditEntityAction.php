@@ -501,14 +501,6 @@ class EditEntityAction extends ViewEntityAction {
 		$this->getOutput()->addHTML( Html::rawElement( 'br' ) );
 		$this->getOutput()->addHTML( "<div class='editButtons'>\n" );
 		$this->getOutput()->addHTML( $this->getEditButton() . "\n" );
-
-		$this->getOutput()->addHTML(
-			Html::element(
-				'span',
-				[ 'class' => 'mw-editButtons-pipe-separator' ],
-				$this->msg( 'pipe-separator' )->text()
-			)
-		);
 		$this->getOutput()->addHTML( $this->getCancelLink() );
 
 		$this->getOutput()->addHTML( "</div><!-- editButtons -->\n</div><!-- editOptions -->\n" );
