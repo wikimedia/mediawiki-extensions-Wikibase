@@ -70,6 +70,30 @@
       "revId": "5a8e5010a0d0f4efbab6c8b7f4625083f63d789a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_e05d687f",
+        "filename": "docs/extending-entities.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-10T16:19:54Z",
+      "side": 1,
+      "message": "This is not about me not liking \"Foo\" (which is true). Let\u0027s say I consider the first paragraph in this document and understand that \"Foo\" is the name of an entity type. I can find, for example, …Differ, …Serializer, …View, and so on for all existing entity types. But I can not find any …ValidatorFactory for any of the existing entity types.\n\nI strongly believe that all these \"add support to\" lines are bad. For example, to add a new \"Foo\" entity type, I need to \"add support\" to FooSerializer? What does this mean? Add \"support\" for what? Where? It probably means I need to *create* a FooSerializer, because I can see other …Serializer exist. But where do I need to add my new serializer then?",
+      "parentUuid": "8e46e3ee_3549546b",
+      "range": {
+        "startLine": 16,
+        "startChar": 17,
+        "endLine": 16,
+        "endChar": 20
+      },
+      "revId": "5a8e5010a0d0f4efbab6c8b7f4625083f63d789a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
