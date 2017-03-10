@@ -44,6 +44,7 @@ use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\SettingsArray;
 use Wikibase\StringNormalizer;
+use Wikibase\WikibaseSettings;
 
 /**
  * @covers Wikibase\Client\WikibaseClient
@@ -125,16 +126,6 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	public function testGetSettingsReturnType() {
 		$returnValue = $this->getWikibaseClient()->getSettings();
 		$this->assertInstanceOf( SettingsArray::class, $returnValue );
-	}
-
-	public function testGetRepoSettingsReturnType() {
-		$returnValue = $this->getWikibaseClient()->getRepoSettings();
-
-		if ( defined( 'WB_VERSION' ) ) {
-			$this->assertInstanceOf( SettingsArray::class, $returnValue );
-		} else {
-			$this->assertNull( $returnValue );
-		}
 	}
 
 	public function testGetSiteReturnType() {

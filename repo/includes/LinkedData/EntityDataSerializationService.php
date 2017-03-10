@@ -10,6 +10,7 @@ use DerivativeRequest;
 use MWException;
 use PageProps;
 use RequestContext;
+use Serializers\Serializer;
 use SiteList;
 use SiteLookup;
 use Wikibase\DataModel\Entity\EntityId;
@@ -101,6 +102,11 @@ class EntityDataSerializationService {
 	private $entityRdfBuilderFactory;
 
 	/**
+	 * @var Serializer
+	 */
+	private $entitySerializer;
+
+	/**
 	 * @param EntityLookup $entityLookup
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param PropertyDataTypeLookup $propertyLookup
@@ -109,6 +115,7 @@ class EntityDataSerializationService {
 	 * @param SiteList $sites
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
 	 * @param SerializerFactory $serializerFactory
+	 * @param Serializer $entitySerializer
 	 * @param SiteLookup $siteLookup
 	 * @param RdfVocabulary $rdfVocabulary
 	 */
@@ -121,12 +128,14 @@ class EntityDataSerializationService {
 		SiteList $sites,
 		EntityDataFormatProvider $entityDataFormatProvider,
 		SerializerFactory $serializerFactory,
+		Serializer $entitySerializer,
 		SiteLookup $siteLookup,
 		RdfVocabulary $rdfVocabulary
 	) {
 		$this->entityLookup = $entityLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->serializerFactory = $serializerFactory;
+		$this->entitySerializer = $entitySerializer;
 		$this->propertyLookup = $propertyLookup;
 		$this->valueSnakRdfBuilderFactory = $valueSnakRdfBuilderFactory;
 		$this->entityRdfBuilderFactory = $entityRdfBuilderFactory;
@@ -407,7 +416,7 @@ class EntityDataSerializationService {
 			$res,
 			$this->entityTitleLookup,
 			$this->serializerFactory,
-			$this->serializerFactory->newEntitySerializer(),
+			$this->entitySerializer,
 			$this->siteLookup,
 			$this->propertyLookup,
 			false // Never add meta data for this service

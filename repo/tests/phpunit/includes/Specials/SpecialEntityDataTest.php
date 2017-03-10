@@ -92,6 +92,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			new SiteList(),
 			$entityDataFormatProvider,
 			$serializerFactory,
+			$serializerFactory->newEntitySerializer(),
 			new HashSiteStore(),
 			new RdfVocabulary( self::URI_BASE, self::URI_DATA )
 		);
