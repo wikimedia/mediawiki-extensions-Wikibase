@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_323098e5",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-10T13:16:28Z",
+      "side": 1,
+      "message": "Injecting the entire definitions object seems like a code smell. It\u0027s quite a kitchen sink...",
+      "revId": "dd2178dfe5c9c8c27c8b620ccea0934c7b23d03e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_72cdc061",
+        "filename": "repo/includes/Api/EntitySearchHelper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-10T13:16:28Z",
+      "side": 1,
+      "message": "\"outline\" is a strange word",
+      "revId": "dd2178dfe5c9c8c27c8b620ccea0934c7b23d03e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_124ebc72",
+        "filename": "repo/includes/Api/EntitySearchHelper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-10T13:16:28Z",
+      "side": 1,
+      "message": "This is the only thing that the RepositoryDefinitions are used for. According to the Gaia-Principle, this means the constructor should be asking for $entityTypeToRepositoryMapping, instead of searching for it in RepositoryDefinitions. That would remove an unnecessary dependency, and makes mocking easier.",
+      "revId": "dd2178dfe5c9c8c27c8b620ccea0934c7b23d03e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
