@@ -342,52 +342,6 @@ final class ClientHooks {
 	}
 
 	/**
-	 * Register the magic word.
-	 *
-	 * @param string[] &$aCustomVariableIds
-	 *
-	 * @return bool
-	 */
-	public static function onMagicWordwgVariableIDs( &$aCustomVariableIds ) {
-		$aCustomVariableIds[] = 'noexternallanglinks';
-		$aCustomVariableIds[] = 'wbreponame';
-
-		return true;
-	}
-
-	/**
-	 * Apply the magic word.
-	 *
-	 * @param Parser &$parser
-	 * @param array &$cache
-	 * @param string &$magicWordId
-	 * @param string &$ret
-	 *
-	 * @return bool
-	 */
-	public static function onParserGetVariableValueSwitch( Parser &$parser, &$cache, &$magicWordId, &$ret ) {
-		if ( $magicWordId === 'noexternallanglinks' ) {
-			NoLangLinkHandler::handle( $parser, '*' );
-		} elseif ( $magicWordId === 'wbreponame' ) {
-			// @todo factor out, with tests
-			$wikibaseClient = WikibaseClient::getDefaultInstance();
-			$settings = $wikibaseClient->getSettings();
-			$repoSiteName = $settings->getSetting( 'repoSiteName' );
-
-			$message = new Message( $repoSiteName );
-
-			if ( $message->exists() ) {
-				$lang = $parser->getTargetLanguage();
-				$ret = $message->inLanguage( $lang )->parse();
-			} else {
-				$ret = $repoSiteName;
-			}
-		}
-
-		return true;
-	}
-
-	/**
 	 * Adds the Entity ID of the corresponding Wikidata item in action=info
 	 *
 	 * @param IContextSource $context
@@ -502,10 +456,18 @@ final class ClientHooks {
 	 */
 	public static function onExtensionLoad() {
 		global $wgHooks;
+
 		if ( class_exists( EchoEvent::class ) ) {
 			$wgHooks['UserGetDefaultOptions'][] = EchoNotificationsHandlers::class . '::onUserGetDefaultOptions';
 			$wgHooks['WikibaseHandleChange'][] = EchoNotificationsHandlers::class . '::onWikibaseHandleChange';
 		}
+
+		// It's in onExtensionLoad is to ensure we register our
+		// ChangesListSpecialPageStructuredFilters after ORES's.
+		//
+		// recent changes / watchlist hooks
+		$wgHooks['ChangesListSpecialPageStructuredFilters'][] =
+			'\Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers::onChangesListSpecialPageStructuredFilters';
 	}
 
 }
