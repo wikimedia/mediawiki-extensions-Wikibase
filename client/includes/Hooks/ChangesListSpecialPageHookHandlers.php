@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Hooks;
 
+use ChangesListBooleanFilter;
 use ChangesListSpecialPage;
 use FormOptions;
 use IContextSource;
@@ -113,110 +114,62 @@ class ChangesListSpecialPageHookHandlers {
 
 	/**
 	 * Modifies recent changes and watchlist options to show a toggle for Wikibase changes
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ChangesListSpecialPageFilters
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ChangesListSpecialPageStructuredFilters
 	 *
 	 * @param ChangesListSpecialPage $specialPage
-	 * @param array &$filters
 	 *
 	 * @return bool
 	 */
-	public static function onChangesListSpecialPageFilters(
-		ChangesListSpecialPage $specialPage,
-		array &$filters
+	public static function onChangesListSpecialPageStructuredFilters(
+		ChangesListSpecialPage $specialPage
 	) {
 		$hookHandler = self::getInstance(
 			$specialPage->getContext(),
 			$specialPage->getName()
 		);
 
-		$hookHandler->addFilterIfEnabled( $filters );
+		$hookHandler->addFilterIfEnabled( $specialPage );
 
 		return true;
 	}
 
 	/**
-	 * Modifies watchlist and recent changes query to include external changes
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ChangesListSpecialPageQuery
-	 *
-	 * @param string $specialPageName
-	 * @param array &$tables
-	 * @param array &$fields
-	 * @param array &$conds
-	 * @param array &$query_options
-	 * @param array &$join_conds
-	 * @param FormOptions $opts
-	 *
-	 * @return bool
+	 * @param ChangesListSpecialPage $specialPage
 	 */
-	public static function onChangesListSpecialPageQuery(
-		$specialPageName,
-		array &$tables,
-		array &$fields,
-		array &$conds,
-		array &$query_options,
-		array &$join_conds,
-		FormOptions $opts
-	) {
-		$hookHandler = self::getInstance(
-			RequestContext::getMain(),
-			$specialPageName
-		);
-
-		$conds = $hookHandler->addWikibaseConditions( $conds, $opts );
-
-		return true;
-	}
-
-	/**
-	 * @param array &$filters
-	 */
-	public function addFilterIfEnabled( array &$filters ) {
+	public function addFilterIfEnabled( ChangesListSpecialPage $specialPage ) {
 		if ( $this->hasWikibaseChangesEnabled() ) {
 			$filterName = $this->getFilterName();
-
-			// the toggle needs to be the inverse to invoke the inverse display status.
-			// e.g. if Wikibase changes currently hidden, then when the user
-			// clicks the toggle, then Wikibase changes are displayed.
-			$filters[$filterName] = array(
-				'msg' => 'wikibase-rc-hide-wikidata',
-				'default' => !$this->hasWikibaseChangesDisplayed()
-			);
+			$changeTypeGroup = $specialPage->getFilterGroup( 'changeType' );
+			$wikidataFilter = new ChangesListBooleanFilter( [
+				'name' => $filterName,
+				'group' => $changeTypeGroup,
+				'priority' => -4,
+				'label' => 'wikibase-rcfilters-hideWikibase-label',
+				'description' => 'wikibase-rcfilters-hideWikibase-description',
+				'showHide' => 'wikibase-rc-hide-wikidata',
+				// If the preference is enabled, then don't hide Wikidata edits
+				'default' => !$this->hasShowWikibaseEditsPrefEnabled(),
+				'queryCallable' => function ( $specialClassName, $ctx, $dbr, &$tables, &$fields,
+						&$conds, &$query_options, &$join_conds ) {
+					$this->addWikibaseConditions( $conds );
+				},
+				'cssClassSuffix' => 'src-mw-wikibase',
+				'isRowApplicableCallable' => function ( $ctx, $rc ) {
+					return $rc->getAttribute( 'rc_source' ) === RecentChangeFactory::SRC_WIKIBASE;
+				}
+			] );
+			// TODO add conflict with ORES groups, somehow
+			$changeTypeGroup->registerFilter( $wikidataFilter );
 		}
 	}
 
 	/**
 	 * @param array &$conds
-	 * @param FormOptions $opts
-	 *
-	 * @return array
 	 */
-	public function addWikibaseConditions( array &$conds, FormOptions $opts ) {
-		if ( $this->shouldHideWikibaseChanges( $opts ) ) {
-			$dbr = $this->loadBalancer->getConnection( DB_REPLICA );
-			$conds[] = 'rc_source != ' . $dbr->addQuotes( RecentChangeFactory::SRC_WIKIBASE );
-			$this->loadBalancer->reuseConnection( $dbr );
-		}
-
-		return $conds;
-	}
-
-	/**
-	 * @param FormOptions $opts
-	 *
-	 * @return boolean
-	 */
-	private function shouldHideWikibaseChanges( FormOptions $opts ) {
-		if ( !$this->hasWikibaseChangesEnabled() ) {
-			return true;
-		}
-
-		$filterName = $this->getFilterName();
-
-		if ( !$opts->offsetExists( $filterName ) ) {
-			return true;
-		}
-
-		return $opts->getValue( $filterName ) === true;
+	public function addWikibaseConditions( array &$conds ) {
+		$dbr = $this->loadBalancer->getConnection( DB_REPLICA );
+		$conds[] = 'rc_source != ' . $dbr->addQuotes( RecentChangeFactory::SRC_WIKIBASE );
+		$this->loadBalancer->reuseConnection( $dbr );
 	}
 
 	/**
@@ -226,19 +179,6 @@ class ChangesListSpecialPageHookHandlers {
 		// do not include wikibase changes for activated enhanced watchlist
 		// since we do not support that format yet (T46222)
 		return $this->showExternalChanges && !$this->isEnhancedChangesEnabled();
-	}
-
-	/**
-	 * @return bool
-	 */
-	private function hasWikibaseChangesDisplayed() {
-		if ( $this->request->getVal( 'action' ) === 'submit' ) {
-			return !$this->request->getBool( $this->getFilterName() );
-		}
-
-		// if preference enabled, then Wikibase edits are included by default and
-		// the toggle default value needs to be the inverse to hide them, and vice versa.
-		return $this->hasShowWikibaseEditsPrefEnabled();
 	}
 
 	/**
