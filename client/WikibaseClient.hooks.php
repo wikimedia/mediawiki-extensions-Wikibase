@@ -502,10 +502,18 @@ final class ClientHooks {
 	 */
 	public static function onExtensionLoad() {
 		global $wgHooks;
+
 		if ( class_exists( EchoEvent::class ) ) {
 			$wgHooks['UserGetDefaultOptions'][] = EchoNotificationsHandlers::class . '::onUserGetDefaultOptions';
 			$wgHooks['WikibaseHandleChange'][] = EchoNotificationsHandlers::class . '::onWikibaseHandleChange';
 		}
+
+		// It's in onExtensionLoad is to ensure we register our
+		// ChangesListSpecialPageStructuredFilters after ORES's.
+		//
+		// recent changes / watchlist hooks
+		$wgHooks['ChangesListSpecialPageStructuredFilters'][] =
+			'\Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers::onChangesListSpecialPageStructuredFilters';
 	}
 
 }
