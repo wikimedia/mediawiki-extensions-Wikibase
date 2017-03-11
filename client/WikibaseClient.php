@@ -162,7 +162,6 @@ call_user_func( function() {
 	}
 
 	// recent changes / watchlist hooks
-	$wgHooks['ChangesListSpecialPageFilters'][] = '\Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers::onChangesListSpecialPageFilters';
 	$wgHooks['ChangesListSpecialPageQuery'][] = '\Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers::onChangesListSpecialPageQuery';
 
 	// update hooks
