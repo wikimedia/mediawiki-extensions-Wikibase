@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_81590660",
+        "filename": "repo/tests/TestDispatchCoordinator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-11T19:32:49Z",
+      "side": 1,
+      "message": "This is an executable script, so traditionally, it should start with a lower-case letter, like scripts in maintenance/. \n\nBy convention, a lower case letter indicates a verb (e.g. method names), an upper case letter indicates a noun (e.g. class names). To me that\u0027s very intuitive, since in German, all nouns are written with a capital letter :)",
+      "revId": "36ae08bb7663933aadc03b3eee3e00fdbd533a8c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_413a1ee6",
+        "filename": "repo/tests/TestDispatchCoordinator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-11T19:32:49Z",
+      "side": 1,
+      "message": "I\u0027d prefer the test to run on a fixed list of two or three fake clients. The databases do not actually need to exist for this test, right? Tests should only ever touch one database anyway.",
+      "revId": "36ae08bb7663933aadc03b3eee3e00fdbd533a8c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_0144166d",
+        "filename": "repo/tests/TestDispatchCoordinator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-11T19:32:49Z",
+      "side": 1,
+      "message": "It would be nice if this could be overwritten from the command line. That way, it would be easy to test different lock managers without changing the configuration.",
+      "revId": "36ae08bb7663933aadc03b3eee3e00fdbd533a8c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_e13ecad6",
+        "filename": "repo/tests/TestDispatchCoordinator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-11T19:32:49Z",
+      "side": 1,
+      "message": "This will write dispatch state to the *actual* database, not a fake, right? That\u0027s not good... Look into how MediaWikiTestCase makes fake databases. It\u0027s a bit messy, I have some patches lying around for cleaning that up. Let me know if you run into trouble.\n\nOn the other hand, we could also use a fake ChangeDispatchCoordinator. The objective of this test is to test the lock manager, not the coordinator.",
+      "revId": "36ae08bb7663933aadc03b3eee3e00fdbd533a8c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
