@@ -75,6 +75,8 @@
 	"wikibase-rc-show-wikidata-pref": "Show {{WBREPONAME}} edits in recent changes",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} edit",
+	"wikibase-rcfilters-hideWikibase-label": "{{WBREPONAME}} edits",
+	"wikibase-rcfilters-hideWikibase-description": "Edits that originate on {{WBREPONAME}}.",
 	"wikibase-replicationnote": "Please notice that it can take several minutes until the changes are visible on all wikis.",
 	"wikibase-watchlist-show-changes-pref": "Show {{WBREPONAME}} edits in your watchlist",
 	"wikibase-error-deserialize-error": "Failed to deserialize data.",
