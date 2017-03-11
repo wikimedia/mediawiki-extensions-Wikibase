@@ -1,5 +1,6 @@
 <?php
 
+use Wikibase\JQueryMsgModule;
 use Wikibase\SiteModule;
 
 return call_user_func( function() {
@@ -34,6 +35,9 @@ return call_user_func( function() {
 		),
 		'wikibase.client.currentSite' => $moduleTemplate + array(
 			'class' => SiteModule::class
+		),
+		'wikibase.client.jqueryMsg' => $moduleTemplate + array(
+			'class' => JQueryMsgModule::class,
 		),
 		'wikibase.client.page-move' => $moduleTemplate + array(
 			'position' => 'top',
