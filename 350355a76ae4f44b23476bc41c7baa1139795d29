@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_d6d2732c",
+        "filename": "repo/includes/Search/Elastic/Fields/WikibaseNumericField.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-03-12T21:22:38Z",
+      "side": 1,
+      "message": "this appears to to use long numeric data type, which indeed still is a type of integer.\n\nbut when updating my mapping (with elasticsearch 5), I get an error:\n\nillegal_argument_exception: mapper [label_count] cannot be changed from type [integer] to [long]\n\nsuppose we would need to entirely recreate the mapping and index in this case.",
+      "revId": "350355a76ae4f44b23476bc41c7baa1139795d29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
