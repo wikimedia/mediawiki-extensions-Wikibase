@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bentong Isles"
+		]
+	},
+	"tooltip-t-wikibase": "Sumpay ngadto sa aytem sa konektadong tipiganan sa datos",
+	"wikibase-comment-update": "Nausab ang aytem sa {{WBREPONAME}}",
+	"wikibase-dataitem": "Aytem sa {{WBREPONAME}}",
+	"wikibase-editlinks": "Usba ang mga sumpay",
+	"wikibase-editlinkstitle": "Usba ang mga sumpay sa ubang pinulongan",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-show": "Ipakita",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} usba"
+}

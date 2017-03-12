@@ -65,12 +65,18 @@
 	"wikibase-pageswithbadges-legend": "Luettelo sivuista tietyn arvomerkin mukaan",
 	"wikibase-pageswithbadges-badge": "Arvomerkki:",
 	"wikibase-pageswithbadges-submit": "Näytä sivut",
+	"entityusage": "Yksikön käyttö",
+	"wikibase-entityusage-submit": "Näytä sivut",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}-kohteen tunniste",
 	"wikibase-pageinfo-entity-id-none": "Ei mitään",
 	"wikibase-pageinfo-entity-usage": "Tällä sivulla käytetyt {{WBREPONAME}}-kohteet",
+	"wikibase-pageinfo-entity-usage-S": "Sivulinkki",
 	"wikibase-pageinfo-entity-usage-T": "Otsikko",
+	"wikibase-pageinfo-entity-usage-X": "Kaikki yksikkötiedot",
+	"wikibase-pageinfo-entity-usage-O": "Muut (Julkilausumat)",
 	"wikibase-property-render-error": "Ominaisuuden $1 näyttäminen epäonnistui: $2",
 	"wikibase-otherprojects": "Muissa projekteissa",
 	"wikibase-otherprojects-beta-message": "Muut projektit -sivupalkki",
-	"wikibase-otherprojects-beta-description": "Lisää sivupalkkiin osion \"{{int:wikibase-otherprojects}}\", joka tarjoaa linkit muihin Wikimedia-projekteihin perustuen dataan sivustolla {{WBREPONAME}}."
+	"wikibase-otherprojects-beta-description": "Lisää sivupalkkiin osion \"{{int:wikibase-otherprojects}}\", joka tarjoaa linkit muihin Wikimedia-projekteihin perustuen dataan sivustolla {{WBREPONAME}}.",
+	"unresolved-property-category": "Sivut, joissa ratkaisemattomia ominaisuuksia"
 }
