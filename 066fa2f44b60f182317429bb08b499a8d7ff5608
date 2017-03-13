@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_a75bef25",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-13T12:58:29Z",
+      "side": 1,
+      "message": "can be `private` as I understood",
+      "range": {
+        "startLine": 32,
+        "startChar": 1,
+        "endLine": 32,
+        "endChar": 7
+      },
+      "revId": "066fa2f44b60f182317429bb08b499a8d7ff5608",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_67a40705",
+        "filename": "lib/tests/phpunit/WikibaseSettingsTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-13T12:58:29Z",
+      "side": 1,
+      "message": "If `getSettings` were private, then two other tests would fully cover functionality and this test wouldn\u0027t be needed.",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 2
+      },
+      "revId": "066fa2f44b60f182317429bb08b499a8d7ff5608",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
