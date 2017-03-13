@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_e2dec56f",
+        "filename": "repo/includes/ChangeOp/ChangeOpException.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-13T15:21:42Z",
+      "side": 1,
+      "message": "I think I possibly managed to avoid problem with ChangeOpException by having I24d21605045355520675f79ff293392741051301.\nThat approach is not super nice, though.",
+      "parentUuid": "8e46e3ee_f5cd2cbd",
+      "revId": "b24d2af3d79c9143cd551a490ce0676ad5a22b53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_15d3f862",
         "filename": "repo/includes/ChangeOp/Deserialization/ClaimsChangeOpDeserializer.php",
         "patchSetId": 12
