@@ -15,7 +15,8 @@
 			"Alirezaaa",
 			"Mjbmr",
 			"Huji",
-			"Dejavu"
+			"Dejavu",
+			"Mahdy Saffar"
 		]
 	},
 	"wikibase-client-desc": "کارخواه برای افزونهٔ ویکی‌بیس",
@@ -89,6 +90,7 @@
 	"wikibase-pageswithbadges-submit": "نمایش صفحات",
 	"entityusage": "استفادهٔ موجودیت",
 	"wikibase-entityusage-entity": "موجودیت:",
+	"wikibase-entityusage-submit": "نمایش صفحات",
 	"wikibase-pageinfo-entity-id": "شناسه مورد {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "هیچ‌کدام",
 	"wikibase-pageinfo-entity-usage": "ماهیت‌های {{WBREPONAME}} استفاده شده در این صفحه",
@@ -100,5 +102,6 @@
 	"wikibase-property-render-error": "خطا در ارائهٔ خصوصیت  $1: $2",
 	"wikibase-otherprojects": "در دیگر پروژه‌ها",
 	"wikibase-otherprojects-beta-message": "نوار کناری سایر پروژه‌ها",
-	"wikibase-otherprojects-beta-description": "یک قسمت «{{int:wikibase-otherprojects}}» به نوار کناری می‌افزاید که پیوندهایی به دیگر پروژه‌های ویکی‌مدیا واقع‌شده در داده‌های {{WBREPONAME}} می‌دهد."
+	"wikibase-otherprojects-beta-description": "یک قسمت «{{int:wikibase-otherprojects}}» به نوار کناری می‌افزاید که پیوندهایی به دیگر پروژه‌های ویکی‌مدیا واقع‌شده در داده‌های {{WBREPONAME}} می‌دهد.",
+	"echo-category-title-wikibase-action": "تماس با {{WBREPONAME}}"
 }
