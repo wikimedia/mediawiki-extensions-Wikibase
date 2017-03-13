@@ -241,39 +241,6 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
-	 * Returns a human readable string representation of the change. Useful for logging and debugging.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		$string = get_class( $this );
-		$string .= ': ';
-
-		$fields = $this->getFields();
-		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
-		$meta = $this->getMetadata();
-
-		if ( is_array( $info ) ) {
-			$fields = array_merge( $fields, $info );
-		}
-
-		if ( is_array( $meta ) ) {
-			$fields = array_merge( $fields, $meta );
-		}
-
-		foreach ( $fields as $key => $value ) {
-			if ( is_array( $value ) || is_object( $value ) ) {
-				unset( $fields[$key] );
-			}
-		}
-
-		ksort( $fields );
-
-		$string .= preg_replace( '/\s+/s', ' ', var_export( $fields, true ) );
-		return $string;
-	}
-
-	/**
 	 * @see ChangeRow::serializeInfo
 	 *
 	 * Overwritten to use the array representation of the diff.

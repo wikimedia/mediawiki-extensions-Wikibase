@@ -120,19 +120,6 @@ class EntityChangeTest extends ChangeRowTest {
 		);
 	}
 
-	/**
-	 * @dataProvider changeProvider
-	 */
-	public function testToString( EntityChange $entityChange ) {
-		$string = $entityChange->__toString();
-
-		$id = strtolower( $entityChange->getEntityId()->getSerialization() );
-		$type = $entityChange->getType();
-
-		$this->assertContains( "'object_id' => '$id'", $string, "missing entity ID $id" );
-		$this->assertContains( "'type' => '$type'", $string, "missing type $type" );
-	}
-
 	public function testGetComment() {
 		$entityChange = $this->newEntityChange( new ItemId( 'Q13' ) );
 
