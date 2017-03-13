@@ -210,6 +210,30 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_e70d7742",
+        "filename": "repo/includes/Api/EntitySearchHelper.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-13T14:49:44Z",
+      "side": 1,
+      "message": "No. It is about ItemId::callMeSomehow( \u0027foo\u0027, \u0027Q123\u0027 ) returning same as new ItemId( \u0027foo:Q123\u0027 )",
+      "parentUuid": "8e46e3ee_471c6b7c",
+      "range": {
+        "startLine": 188,
+        "startChar": 4,
+        "endLine": 188,
+        "endChar": 7
+      },
+      "revId": "f94d27a2338970af4c1976111cd2c0854a4e8dd5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_b790a199",
         "filename": "repo/tests/phpunit/includes/Api/EntitySearchHelperTest.php",
         "patchSetId": 3
