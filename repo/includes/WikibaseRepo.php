@@ -86,6 +86,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Rdf\EntityRdfBuilderFactory;
+use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
@@ -842,6 +843,13 @@ class WikibaseRepo {
 			$this->getDataTypeFactory(),
 			$this->getDataTypeValidatorFactory()
 		);
+	}
+
+	/**
+	 * @return EntityChangeOpProvider
+	 */
+	public function getEntityChangeOpProvider() {
+		return new EntityChangeOpProvider( $this->entityTypeDefinitions->getChangeOpDeserializerCallbacks() );
 	}
 
 	/**
