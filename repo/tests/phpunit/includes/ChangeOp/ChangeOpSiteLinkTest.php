@@ -130,38 +130,16 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function invalidChangeOpSiteLinkProvider() {
-		$deSiteLink = new SiteLink( 'dewiki', 'Berlin' );
-		$plSiteLink = new SiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ) ) );
-
-		$existingSitelinks = array(
-			$deSiteLink,
-			$plSiteLink
-		);
-
-		$args = array();
-
-		// cannot change badges of non-existing sitelink
-		$args[] = array(
-			$existingSitelinks,
-			new ChangeOpSiteLink( 'enwiki', null, array( new ItemId( 'Q149' ) ) ),
-		);
-
-		return $args;
-	}
-
-	/**
-	 * @dataProvider invalidChangeOpSiteLinkProvider
-	 * @param SiteLink[] $existingSitelinks
-	 * @param ChangeOpSiteLink $changeOpSiteLink
-	 *
-	 * @expectedException InvalidArgumentException
-	 */
-	public function testApplyWithInvalidData( array $existingSitelinks, ChangeOpSiteLink $changeOpSiteLink ) {
+	public function testGivenNoSitelinkOnSiteAndBadgeChangeRequested_validateReturnsError() {
 		$item = new Item();
-		$item->setSiteLinkList( new SiteLinkList( $existingSitelinks ) );
+		$item->setSiteLinkList( new SiteLinkList( [ new SiteLink( 'plwiki', 'Berlin', [ new ItemId( 'Q42' ) ] ) ] ) );
 
-		$changeOpSiteLink->apply( $item );
+		$changeOp = new ChangeOpSiteLink( 'enwiki', null, [ new ItemId( 'Q149' ) ] );
+
+		$result = $changeOp->validate( $item );
+
+		$this->assertFalse( $result->isValid() );
+		$this->assertEquals( 'no-such-sitelink', $result->getErrors()[0]->getCode() );
 	}
 
 	public function summaryTestProvider() {
