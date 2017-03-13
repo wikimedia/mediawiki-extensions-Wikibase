@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_87a9137b",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-13T13:42:55Z",
+      "side": 1,
+      "message": "The idea here is to provide access to settings object for other extensions, e.g. \u0027Lexeme\u0027 for wgWBLexemeSettings, \u0027MediaInfo\u0027 for wgWBMediaInfoSettings, etc.\n\nWe don\u0027t have these yet, but I expect that we will need them soon.",
+      "parentUuid": "8e46e3ee_a75bef25",
+      "range": {
+        "startLine": 32,
+        "startChar": 1,
+        "endLine": 32,
+        "endChar": 7
+      },
+      "revId": "066fa2f44b60f182317429bb08b499a8d7ff5608",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_67a40705",
         "filename": "lib/tests/phpunit/WikibaseSettingsTest.php",
         "patchSetId": 2
