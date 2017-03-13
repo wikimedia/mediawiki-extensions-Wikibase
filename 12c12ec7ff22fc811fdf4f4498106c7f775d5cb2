@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_026f2e90",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-13T22:39:04Z",
+      "side": 1,
+      "message": "do we need to add commons-geoshape here?",
+      "revId": "12c12ec7ff22fc811fdf4f4498106c7f775d5cb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_c2686687",
+        "filename": "repo/tests/phpunit/data/rdf/PropertyRdfBuilder/P2_all.nt",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-13T22:39:04Z",
+      "side": 1,
+      "message": "We need a property with statements to see that they get added to the rdf here.",
+      "revId": "12c12ec7ff22fc811fdf4f4498106c7f775d5cb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_e26562ab",
+        "filename": "repo/tests/phpunit/data/rdf/entities/P2.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-13T22:39:04Z",
+      "side": 1,
+      "message": "We need some statements to test full output",
+      "revId": "12c12ec7ff22fc811fdf4f4498106c7f775d5cb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_a2067acf",
+        "filename": "repo/tests/phpunit/includes/Rdf/PropertyRdfBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-13T22:39:04Z",
+      "side": 1,
+      "message": "This is a pretty nifty/nasty hack, btw. It lets you create the expected output from the current actual output.",
+      "revId": "12c12ec7ff22fc811fdf4f4498106c7f775d5cb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
