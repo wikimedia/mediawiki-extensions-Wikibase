@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_099bdc1c",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-13T07:36:25Z",
+      "side": 1,
+      "message": "As it might not immediately obvious about what listing this is about @see SpecialPage::isListed could be possibly added.",
+      "revId": "38dea9eb0eac9b2a6a7bc9f9d00453ac9140cd0c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
