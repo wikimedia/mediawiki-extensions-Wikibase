@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_7d333a0b",
+        "filename": "repo/includes/Api/EntitySearchHelper.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-13T19:40:10Z",
+      "side": 1,
+      "message": "If all we need is $entityTypeToRepositoryMapping, all we should ask for is $entityTypeToRepositoryMapping!\n\nRepositoryDefinitions is a kitchen sink that wraps an extension mechanism. Please don\u0027t pass it around unless we REALLY need to.",
+      "revId": "ee42b829f42d02fc0b339f24ef0399526f21c2d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_dd260ec9",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 1872,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-13T19:40:10Z",
+      "side": 1,
+      "message": "Do we really need to expose them? RepositoryDefinitions are generally for use inside the top level factory.",
+      "revId": "ee42b829f42d02fc0b339f24ef0399526f21c2d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
