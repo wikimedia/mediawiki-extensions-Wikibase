@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_cc8502b3",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-13T11:41:23Z",
+      "side": 1,
+      "message": "Add `@see` tag",
+      "range": {
+        "startLine": 65,
+        "startChar": 1,
+        "endLine": 65,
+        "endChar": 26
+      },
+      "revId": "0ab3ea180d55150420489990263fc12af4ffc585",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
