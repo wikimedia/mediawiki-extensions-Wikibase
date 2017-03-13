@@ -94,6 +94,30 @@
       "revId": "5a8e5010a0d0f4efbab6c8b7f4625083f63d789a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_a930a8fd",
+        "filename": "docs/extending-entities.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-13T08:33:44Z",
+      "side": 1,
+      "message": "\u003e I strongly believe that all these \"add support to\" lines are bad. For example, to add a new \"Foo\" entity type, I need to \"add support\" to FooSerializer? What does this mean? Add \"support\" for what? Where? It probably means I need to *create* a FooSerializer, because I can see other …Serializer exist. But where do I need to add my new serializer then?\n\nIt means \"Add support for the new field to FooSerializer\".\nThis document assumes services specific to entity type Foo, such us FooSerializer, do already exist.\nShould it happen they are not present yet for whatever reason, it shouldn\u0027t be surprising such service needs to probably be created.\nFor the actual phrase, although I agree \"add support\" might not be the best possibly wording (feel free to suggest better one!) I\u0027d opt for keeping it short and not repeating \"the new field\" or similar phrase over and over again. It should be clear that the new field is meant here unless stated otherwise.",
+      "parentUuid": "8e46e3ee_e05d687f",
+      "range": {
+        "startLine": 16,
+        "startChar": 17,
+        "endLine": 16,
+        "endChar": 20
+      },
+      "revId": "5a8e5010a0d0f4efbab6c8b7f4625083f63d789a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
