@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_9dbde6af",
+        "filename": "docs/entitytypes.wiki",
+        "patchSetId": 16
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-13T18:27:18Z",
+      "side": 1,
+      "message": "These are now actually instantiator (or factory) functions returning a ChangeOpDeserializer, no?",
+      "revId": "4d65415a30f7be152e26173f7bcf309d3e116da0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_fd38aa3c",
+        "filename": "repo/includes/Localizer/ChangeOpDeserializationExceptionLocalizer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-13T18:27:18Z",
+      "side": 1,
+      "message": "This needs to be hooked up in WikibaseRepo::getExceptionLocalizers if I am not mistaking.",
+      "revId": "4d65415a30f7be152e26173f7bcf309d3e116da0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
