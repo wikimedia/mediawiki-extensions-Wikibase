@@ -20,9 +20,12 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\Rdf\PropertyRdfBuilder;
+use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityTermsView;
+use Wikimedia\Purtle\RdfWriter;
 
 return array(
 	'item' => array(
@@ -76,5 +79,17 @@ return array(
 		'entity-factory-callback' => function() {
 			return Property::newFromType( '' );
 		},
+		'rdf-builder-factory-callback' => function(
+			$flavorFlags,
+			RdfVocabulary $vocabulary,
+			RdfWriter $writer,
+			$mentionedEntityTracker,
+			$dedupe
+		) {
+			return new PropertyRdfBuilder(
+				$vocabulary,
+				$writer
+			);
+		}
 	)
 );

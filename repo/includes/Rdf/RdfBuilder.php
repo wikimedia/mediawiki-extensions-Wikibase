@@ -365,69 +365,6 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	}
 
 	/**
-	 * Write definition for wdno:P123 class to use as novalue
-	 * @param string $id
-	 */
-	private function writeNovalueClass( $id ) {
-		$this->writer->about( RdfVocabulary::NSP_NOVALUE, $id )->say( 'a' )->is( 'owl', 'Class' );
-		$internalClass = $this->writer->blank();
-		$this->writer->say( 'owl', 'complementOf' )->is( '_', $internalClass );
-		$this->writer->about( '_', $internalClass )->say( 'a' )->is( 'owl', 'Restriction' );
-		$this->writer->say( 'owl', 'onProperty' )->is( RdfVocabulary::NSP_DIRECT_CLAIM, $id );
-		$this->writer->say( 'owl', 'someValuesFrom' )->is( 'owl', 'Thing' );
-	}
-
-	/**
-	 * Write predicates linking property entity to property predicates
-	 * @param string $id
-	 * @param boolean $isObjectProperty Is the property data or object property?
-	 */
-	private function writePropertyPredicates( $id, $isObjectProperty ) {
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'directClaim' )->is( RdfVocabulary::NSP_DIRECT_CLAIM, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'claim' )->is( RdfVocabulary::NSP_CLAIM, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementProperty' )->is( RdfVocabulary::NSP_CLAIM_STATEMENT, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementValue' )->is( RdfVocabulary::NSP_CLAIM_VALUE, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementValueNormalized' )->is( RdfVocabulary::NSP_CLAIM_VALUE_NORM, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'qualifier' )->is( RdfVocabulary::NSP_QUALIFIER, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'qualifierValue' )->is( RdfVocabulary::NSP_QUALIFIER_VALUE, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'qualifierValueNormalized' )->is( RdfVocabulary::NSP_QUALIFIER_VALUE_NORM, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'reference' )->is( RdfVocabulary::NSP_REFERENCE, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'referenceValue' )->is( RdfVocabulary::NSP_REFERENCE_VALUE, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'referenceValueNormalized' )->is( RdfVocabulary::NSP_REFERENCE_VALUE_NORM, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'novalue' )->is( RdfVocabulary::NSP_NOVALUE, $id );
-		// Always object properties
-		$this->writer->about( RdfVocabulary::NSP_CLAIM, $id )->a( 'owl', 'ObjectProperty' );
-		$this->writer->about( RdfVocabulary::NSP_CLAIM_VALUE, $id )->a( 'owl', 'ObjectProperty' );
-		$this->writer->about( RdfVocabulary::NSP_QUALIFIER_VALUE, $id )->a( 'owl', 'ObjectProperty' );
-		$this->writer->about( RdfVocabulary::NSP_REFERENCE_VALUE, $id )->a( 'owl', 'ObjectProperty' );
-		$this->writer->about( RdfVocabulary::NSP_CLAIM_VALUE_NORM, $id )->a( 'owl', 'ObjectProperty' );
-		$this->writer->about( RdfVocabulary::NSP_QUALIFIER_VALUE_NORM, $id )->a( 'owl', 'ObjectProperty' );
-		$this->writer->about( RdfVocabulary::NSP_REFERENCE_VALUE_NORM, $id )->a( 'owl', 'ObjectProperty' );
-		// Depending on property type
-		if ( $isObjectProperty ) {
-			$datatype = 'ObjectProperty';
-		} else {
-			$datatype = 'DatatypeProperty';
-		}
-		$this->writer->about( RdfVocabulary::NSP_DIRECT_CLAIM, $id )->a( 'owl', $datatype );
-		$this->writer->about( RdfVocabulary::NSP_CLAIM_STATEMENT, $id )->a( 'owl', $datatype );
-		$this->writer->about( RdfVocabulary::NSP_QUALIFIER, $id )->a( 'owl', $datatype );
-		$this->writer->about( RdfVocabulary::NSP_REFERENCE, $id )->a( 'owl', $datatype );
-	}
-
-	/**
-	 * Check if the property describes link between objects
-	 * or just data item.
-	 *
-	 * @param Property $property
-	 * @return boolean
-	 */
-	private function propertyIsLink( Property $property ) {
-		// For now, it's very simple but can be more complex later
-		return in_array( $property->getDataTypeId(), array( 'wikibase-item', 'wikibase-property', 'url', 'commonsMedia' ) );
-	}
-
-	/**
 	 * Adds meta-information about an entity (such as the ID and type) to the RDF graph.
 	 *
 	 * @todo: extract into MetaDataRdfBuilder
@@ -439,15 +376,6 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 
 		$this->writer->about( RdfVocabulary::NS_ENTITY, $entityLName )
 			->a( RdfVocabulary::NS_ONTOLOGY, $this->vocabulary->getEntityTypeName( $entity->getType() ) );
-
-		if ( $entity instanceof Property ) {
-			$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'propertyType' )
-				->is( $this->vocabulary->getDataTypeURI( $entity ) );
-
-			$id = $entity->getId()->getSerialization();
-			$this->writePropertyPredicates( $id, $this->propertyIsLink( $entity ) );
-			$this->writeNovalueClass( $id );
-		}
 	}
 
 	/**
