@@ -1,0 +1,14 @@
+{
+	"type": "property",
+	"datatype": "string",
+	"id": "P2",
+	"labels": {
+		"en": {
+			"language": "en",
+			"value": "Instance of"
+		}
+	},
+	"descriptions": {},
+	"aliases": {},
+	"claims": {}
+}
