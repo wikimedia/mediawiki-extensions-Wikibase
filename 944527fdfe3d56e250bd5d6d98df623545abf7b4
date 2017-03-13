@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_422219a4",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-13T15:00:39Z",
+      "side": 1,
+      "message": "Docs missing.",
+      "revId": "944527fdfe3d56e250bd5d6d98df623545abf7b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_e20c853f",
+        "filename": "view/resources/wikibase/wikibase.ValueViewBuilder.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-13T15:00:39Z",
+      "side": 1,
+      "message": "Docs missing.",
+      "revId": "944527fdfe3d56e250bd5d6d98df623545abf7b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
