@@ -19,7 +19,7 @@
 	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr; ग्रेगोरियन में बदले",
 	"valueview-expertextender-calendarhint-switch-julian": "&rarr; जुलियन में बदले",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
-	"valueview-expertextender-languageselector-label": "भाषा (आवश्यक):",
-	"valueview-expertextender-unitsuggester-label": "मात्रक (निवार्य)",
+	"valueview-expertextender-languageselector-label": "भाषा (अनिवार्य):",
+	"valueview-expertextender-unitsuggester-label": "मात्रक (वैकल्पिक):",
 	"valueview-preview-label": "तरह दिखाई देगा"
 }
