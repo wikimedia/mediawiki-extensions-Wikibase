@@ -3,7 +3,9 @@
 namespace Wikibase\Repo\Api;
 
 use ApiMain;
+use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpSiteLink;
+use Wikibase\ChangeOp\ChangeOpValidationException;
 use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -99,8 +101,14 @@ class SetSiteLink extends ModifyEntity {
 				$resultBuilder->addRemovedSiteLinks( new SiteLinkList( array( $siteLink ) ), 'entity' );
 			}
 		} else {
-			if ( isset( $params['linktitle'] ) || $hasLinkWithSiteId ) {
+			try {
 				$changeOp = $this->getChangeOp( $params );
+
+				$result = $changeOp->validate( $entity );
+				if ( !$result->isValid() ) {
+					throw new ChangeOpValidationException( $result );
+				}
+
 				$this->applyChangeOp( $changeOp, $entity, $summary );
 
 				$link = $item->getSiteLinkList()->getBySiteId( $linksite );
@@ -109,8 +117,8 @@ class SetSiteLink extends ModifyEntity {
 					'entity',
 					true // always add the URL
 				);
-			} else {
-				$this->errorReporter->dieMessage( 'no-such-sitelink', $params['linktitle'] );
+			} catch ( ChangeOpException $ex ) {
+				$this->errorReporter->dieException( $ex, 'modification-failed' );
 			}
 		}
 
