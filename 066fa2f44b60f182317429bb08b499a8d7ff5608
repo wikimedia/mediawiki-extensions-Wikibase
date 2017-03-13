@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_e76ed729",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-13T14:11:31Z",
+      "side": 1,
+      "message": "Then I would at least suggest to throw an exception instead of returning `null`. \nIs there a case in which `null` is \"normal\" expected value when we ask for settings of some extension?",
+      "parentUuid": "8e46e3ee_87a9137b",
+      "range": {
+        "startLine": 32,
+        "startChar": 1,
+        "endLine": 32,
+        "endChar": 7
+      },
+      "revId": "066fa2f44b60f182317429bb08b499a8d7ff5608",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_67a40705",
         "filename": "lib/tests/phpunit/WikibaseSettingsTest.php",
         "patchSetId": 2
