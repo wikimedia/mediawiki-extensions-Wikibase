@@ -3,6 +3,7 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
+use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -120,13 +121,6 @@ class ChangeOpSiteLink extends ChangeOpBase {
 			$commentArgs = array();
 
 			if ( $this->pageName === null ) {
-				if ( !$siteLinks->hasLinkWithSiteId( $this->siteId ) ) {
-					// FIXME: Code in Api\EditEntity processing the site link change request used to call
-					// ApiErrorReporter::dieMessage( 'no-such-sitelink', $globalSiteId ) in this case.
-					// Should the following exception result in the similar behaviour?
-					throw new InvalidArgumentException( 'The sitelink does not exist' );
-				}
-
 				// If page name is not set (but badges are) make sure that it remains intact
 				$pageName = $siteLinks->getBySiteId( $this->siteId )->getPageName();
 			} else {
@@ -150,10 +144,23 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	 *
 	 * @param EntityDocument $entity
 	 *
-	 * @return Result Always successful.
+	 * @throws InvalidArgumentException
+	 *
+	 * @return Result
 	 */
 	public function validate( EntityDocument $entity ) {
-		//TODO: move validation logic from apply() here.
+		if ( !( $entity instanceof Item ) ) {
+			throw new InvalidArgumentException( 'ChangeOpSiteLink can only be applied to Item instances' );
+		}
+
+		if ( $this->pageName === null && $this->badges !== null ) {
+			if ( !$entity->getSiteLinkList()->hasLinkWithSiteId( $this->siteId ) ) {
+				return Result::newError( [
+					Error::newError( 'The sitelink does not exist', null, 'no-such-sitelink', [ $this->siteId ] )
+				] );
+			}
+		}
+
 		return Result::newSuccess();
 	}
 
