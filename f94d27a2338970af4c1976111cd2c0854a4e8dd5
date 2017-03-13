@@ -186,6 +186,30 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_471c6b7c",
+        "filename": "repo/includes/Api/EntitySearchHelper.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-13T14:44:13Z",
+      "side": 1,
+      "message": "Could it be that you guys are waiting for a release of https://github.com/wmde/WikibaseDataModel/pull/720 ? I believe this is the convenience function you are looking for.",
+      "parentUuid": "8e46e3ee_67bde762",
+      "range": {
+        "startLine": 188,
+        "startChar": 4,
+        "endLine": 188,
+        "endChar": 7
+      },
+      "revId": "f94d27a2338970af4c1976111cd2c0854a4e8dd5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_b790a199",
         "filename": "repo/tests/phpunit/includes/Api/EntitySearchHelperTest.php",
         "patchSetId": 3
