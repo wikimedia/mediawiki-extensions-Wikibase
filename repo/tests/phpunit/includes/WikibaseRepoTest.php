@@ -58,6 +58,7 @@ use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
 use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
+use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
@@ -279,6 +280,11 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	public function testGetStatementGuidParser() {
 		$returnValue = $this->getWikibaseRepo()->getStatementGuidParser();
 		$this->assertInstanceOf( StatementGuidParser::class, $returnValue );
+	}
+
+	public function testGetEntityChangeOpProvider() {
+		$provider = $this->getWikibaseRepo()->getEntityChangeOpProvider();
+		$this->assertInstanceOf( EntityChangeOpProvider::class, $provider );
 	}
 
 	public function testGetLanguageFallbackChainFactory() {
