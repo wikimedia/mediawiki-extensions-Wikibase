@@ -602,4 +602,18 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		wfDebugLog( __CLASS__, $message );
 	}
 
+	/**
+	 * @param string $stateTable
+	 */
+	public function setStateTable( $stateTable ) {
+		$this->stateTable = $stateTable;
+	}
+
+	/**
+	 * @param string $changesTable
+	 */
+	public function setChangesTable( $changesTable ) {
+		$this->changesTable = $changesTable;
+	}
+
 }
