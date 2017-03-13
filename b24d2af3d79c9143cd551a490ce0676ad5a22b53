@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_629635f5",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-13T17:06:56Z",
+      "side": 1,
+      "message": "So by introducing the ExceptionLocalizer for ChangeOpDeserializationException this code can be simply doing errorReporter-\u003edieException.\n\nMost of exceptions are not localized, so dieError will be done as ithas been done here previously.\n\nNasty bit is currently the only localized exception is the one for a case when there is no page requested to be used as a sitelink on the given site. This case is covered in SiteLinksCahngeOpDeserializer\u0027s unit tests but Api\\EditEntity tests do not cover this. Seems it is quite complex to test. Relevant part here is page name normalization done in MediaWikiSite which in test context is different than the way it is done on production, and the issue in question is not visible there. Alternative would probably be using custom site lookup in the test but this kind of spoils the idea of API module test as it would be using different service(s) than the actual class uses.\nSo this is currently not tests in this EditEntity integration-like tests and I am out of ideas here.\n\nLocalization is also done quite a hacky way by just putting \u0027wikibase-api-\u0027 before the error code of the deserialization exception. That way there is not need to change existing i18n messages but it is not very nice.",
+      "parentUuid": "8e46e3ee_1558d834",
+      "revId": "b24d2af3d79c9143cd551a490ce0676ad5a22b53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_f5cd2cbd",
         "filename": "repo/includes/ChangeOp/ChangeOpException.php",
         "patchSetId": 12
@@ -106,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_82682186",
+        "filename": "repo/includes/ChangeOp/Deserialization/ClaimsChangeOpDeserializer.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-13T17:06:56Z",
+      "side": 1,
+      "message": "I had, and I could not really see how I could use it here.\n\nOnly option I could think of would be:\n1. Get ExceptionLocalizer from WikibaseRepo to this ChangeOpDeserializer\n2. If exception during statement deserialization happens, check if it could be localized (ie. if localizer throws InvalidArgumentException)\n3. If exception was localized, use the localized message as a message of ChangeOpDeserializationException.\n\nThis could possibly work. On the other hand it seems that DeserializationException are not localized, so having it the way it is now should not change existing behaviour of the API.",
+      "parentUuid": "8e46e3ee_15d3f862",
+      "revId": "b24d2af3d79c9143cd551a490ce0676ad5a22b53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_b5c804ac",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 12
@@ -117,6 +153,24 @@
       "writtenOn": "2017-03-10T12:40:08Z",
       "side": 1,
       "message": "How often would this be called during a request that uses ChangeOpDeserializers?",
+      "revId": "b24d2af3d79c9143cd551a490ce0676ad5a22b53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_a24f5dbf",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-13T17:06:56Z",
+      "side": 1,
+      "message": "With EntityChangeOpProvider this will now only be called once per deserializer-instantiating callback (ie. once for item input, once for property). I believe it still would make sense to have ItemChangeOpDeserializer and PropertyChangeOpDeserializer use the same ChangeOpDeserializerFactory instance.",
+      "parentUuid": "8e46e3ee_b5c804ac",
       "revId": "b24d2af3d79c9143cd551a490ce0676ad5a22b53",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
