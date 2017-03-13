@@ -162,6 +162,30 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_67bde762",
+        "filename": "repo/includes/Api/EntitySearchHelper.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-13T14:25:57Z",
+      "side": 1,
+      "message": "I don\u0027t like calling joinSerialization from here either. I still have used it as:\n* we don\u0027t have service for this (EntityIdParser is for something else, as is EntityIdComposer). Also it is not really something some service should be doing.\n* while adding convenience method would help, a) it would require change in another component (not saying it is a problem, it just makes few patches more), b) a new thing requires a good name I failed to come up with in five minutes I had to spend on it :)\n\nI might change as I am going to amend this patch any way, so stay tuned.",
+      "parentUuid": "8e46e3ee_87eef3af",
+      "range": {
+        "startLine": 188,
+        "startChar": 4,
+        "endLine": 188,
+        "endChar": 7
+      },
+      "revId": "f94d27a2338970af4c1976111cd2c0854a4e8dd5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_b790a199",
         "filename": "repo/tests/phpunit/includes/Api/EntitySearchHelperTest.php",
         "patchSetId": 3
