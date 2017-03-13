@@ -38,7 +38,10 @@
 			if ( !this.options.source ) {
 				this.options.source = this._initDefaultSource();
 			}
+
 			$.ui.suggester.prototype._create.call( this );
+
+			this.options.menu.element.addClass( 'ui-commonssuggester-list' );
 		},
 
 		/**
@@ -122,15 +125,59 @@
 		 * @return {jQuery.ui.ooMenu.Item}
 		 */
 		_createMenuItemFromSuggestion: function( suggestion, requestTerm ) {
-			suggestion = suggestion.title.replace( /^File:/, '' );
+			suggestion = suggestion.title;
+
+			var isFile = /^File:/.test( suggestion );
+
+			if ( isFile ) {
+				suggestion = suggestion.replace( /^File:/, '' );
+			}
 
 			var label = util.highlightSubstring(
-				requestTerm,
-				suggestion,
-				{ withinString: true }
-			);
+					requestTerm,
+					suggestion,
+					{
+						caseSensitive: false,
+						withinString: true
+					}
+				),
+				$label = $( '<span>' )
+					.attr( { dir: 'ltr', title: suggestion } )
+					.append( label );
 
-			return new $.ui.ooMenu.Item( label, suggestion );
+			if ( isFile ) {
+				$label.prepend( this._createThumbnail( suggestion ) );
+			}
+
+			return new $.ui.ooMenu.Item( $label, suggestion );
+		},
+
+		/**
+		 * @private
+		 *
+		 * @param {string} fileName Must be a file name without the File: namespace.
+		 * @return {jQuery}
+		 */
+		_createThumbnail: function( fileName ) {
+			return $( '<span>' )
+				.attr( 'class', 'ui-commonssuggester-thumbnail' )
+				.css( 'background-image', this._createBackgroundImage( fileName ) );
+		},
+
+		/**
+		 * @private
+		 *
+		 * @param {string} fileName Must be a file name without the File: namespace.
+		 * @return {string} CSS
+		 */
+		_createBackgroundImage: function ( fileName ) {
+			// Height alone is ignored, width must be set to something.
+			// We accept to truncate 50% and only show the center 50% of the images area.
+			return 'url(https://commons.wikimedia.org/wiki/Special:Filepath/'
+				+ encodeURIComponent( fileName )
+					.replace( /\(/g, '%28' )
+					.replace( /\)/g, '%29' )
+				+ '?width=100&height=50)';
 		}
 
 	} );
