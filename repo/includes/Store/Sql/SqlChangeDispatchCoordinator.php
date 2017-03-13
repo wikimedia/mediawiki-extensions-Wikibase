@@ -208,6 +208,20 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	}
 
 	/**
+	 * @param string $stateTable
+	 */
+	public function setStateTable( $stateTable ) {
+		$this->stateTable = $stateTable;
+	}
+
+	/**
+	 * @param string $changesTable
+	 */
+	public function setChangesTable( $changesTable ) {
+		$this->changesTable = $changesTable;
+	}
+
+	/**
 	 * @return LoadBalancer the repo's database load balancer.
 	 */
 	private function getRepoLB() {
