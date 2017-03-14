@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_312876dd",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-14T18:47:17Z",
+      "side": 1,
+      "message": "`$this-\u003estartsWith()` is much more readable...",
+      "range": {
+        "startLine": 266,
+        "startChar": 5,
+        "endLine": 266,
+        "endChar": 47
+      },
+      "revId": "fba6af64c428572b89a59b42a66336c17a80dcd7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
