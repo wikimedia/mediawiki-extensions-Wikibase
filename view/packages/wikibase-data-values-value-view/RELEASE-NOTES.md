@@ -1,7 +1,20 @@
 # ValueView release notes
 
-## 0.18.3 (2017-02-08)
+## 0.19.0 (2017-03-14)
+* Major changes to `jQuery.ui.commonssuggester`:
+  * Now uses MediaWiki `search` API instead of OpenSearch.
+  * Now searches all namespaces by default, instead of only the File namespace.
+  * Now shows thumbnails when searching the File namespace.
+  * Added required `apiUrl` option.
+  * Added optional `contentModel` option.
+  * Added `ui-commonssuggester-list` CSS class.
+* `GeoShape` expert now only suggests GeoJSON pages.
+* Changes to `jQuery.valueview.valueview`:
+  * Fixed a bug where certain consecutive changes were considered invalid.
+  * `getTextValue` and `getFormattedValue` never return null any more, but empty strings when not up
+    to date, and the formatter API failed or did not responded yet.
 * Maximized developer dependency ranges.
+* Tests do not use `CompletenessTest` any more.
 
 ## 0.18.2 (2017-02-02)
 * Fixed `jQuery.ui.ooMenu`'s `customItems` initialization.
