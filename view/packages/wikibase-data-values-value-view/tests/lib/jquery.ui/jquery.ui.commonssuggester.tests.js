@@ -92,9 +92,10 @@
 	QUnit.test( 'search integration', function( assert ) {
 		assert.expect( 2 );
 		var $suggester = newTestSuggester( { ajax: function( options ) {
-				var response = [ '', [] ];
+				var response = { query: { search: [] } };
 
-				response[1]._requestTerm = options.data.search;
+				// This uses the search results array as a spy, and appends _requestTerm
+				response.query.search._requestTerm = options.data.srsearch;
 
 				return $.Deferred().resolve( response ).promise();
 			} } ),
