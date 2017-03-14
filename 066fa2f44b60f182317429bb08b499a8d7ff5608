@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_316076fc",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-14T19:03:24Z",
+      "side": 1,
+      "message": "It would be a way to check whether the a given extension is enabled. But you are right, it\u0027s not so nice.",
+      "parentUuid": "8e46e3ee_e76ed729",
+      "range": {
+        "startLine": 32,
+        "startChar": 1,
+        "endLine": 32,
+        "endChar": 7
+      },
+      "revId": "066fa2f44b60f182317429bb08b499a8d7ff5608",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_67a40705",
         "filename": "lib/tests/phpunit/WikibaseSettingsTest.php",
         "patchSetId": 2
