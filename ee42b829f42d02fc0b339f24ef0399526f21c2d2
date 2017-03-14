@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_c5d710f1",
+        "filename": "repo/includes/Api/EntitySearchHelper.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-14T08:46:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e46e3ee_7d333a0b",
+      "revId": "ee42b829f42d02fc0b339f24ef0399526f21c2d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_dd260ec9",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 9
@@ -30,6 +48,24 @@
       "writtenOn": "2017-03-13T19:40:10Z",
       "side": 1,
       "message": "Do we really need to expose them? RepositoryDefinitions are generally for use inside the top level factory.",
+      "revId": "ee42b829f42d02fc0b339f24ef0399526f21c2d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_05f5f87e",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 1872,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-14T08:46:10Z",
+      "side": 1,
+      "message": "Switched to expose \"entity type to repository mapping\" for now",
+      "parentUuid": "8e46e3ee_dd260ec9",
       "revId": "ee42b829f42d02fc0b339f24ef0399526f21c2d2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
