@@ -41,6 +41,15 @@
 			"Wikibase\\DataModel\\": "src/"
 		}
 	},
+	"autoload-dev": {
+		"psr-4": {
+			"Wikibase\\DataModel\\Fixtures\\": "tests/fixtures",
+			"Wikibase\\DataModel\\Tests\\": [
+				"tests/unit",
+				"tests/component"
+			]
+		}
+	},
 	"extra": {
 		"branch-alias": {
 			"dev-master": "7.0.x-dev"
