@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_252834dd",
+        "filename": "repo/includes/ChangeOp/EntityChangeOpProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-14T09:01:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e46e3ee_dd7dae18",
+      "revId": "9c59c7885384e79ac5bd22da99195d2b856f2ffe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_3d8b721d",
         "filename": "repo/includes/ChangeOp/EntityChangeOpProvider.php",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_e521ecf7",
+        "filename": "repo/includes/ChangeOp/EntityChangeOpProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-14T09:01:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e46e3ee_3d8b721d",
+      "revId": "9c59c7885384e79ac5bd22da99195d2b856f2ffe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_3d00526d",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2017-03-13T18:14:46Z",
       "side": 1,
       "message": "I\u0027m confused - Documentation for the \u0027changeop-deserializer-callback\u0027 key is only added in I2977607b4b02b, but support for it was already added in Id1e5a8f7192. But the actual *use* of these callbacks is added here. Huh...",
+      "revId": "9c59c7885384e79ac5bd22da99195d2b856f2ffe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_e54a4cc8",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 852,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-14T09:01:49Z",
+      "side": 1,
+      "message": "Moved docs to this patch.",
+      "parentUuid": "8e46e3ee_3d00526d",
       "revId": "9c59c7885384e79ac5bd22da99195d2b856f2ffe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
