@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_4886b719",
+        "filename": "view/tests/qunit/wikibase/view/ViewFactory.tests.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-14T11:40:34Z",
+      "side": 1,
+      "message": "This is a really lovely dummy value for a variable with the name \"commonsApiUrl\". :-)",
+      "range": {
+        "startLine": 33,
+        "startChar": 11,
+        "endLine": 33,
+        "endChar": 26
+      },
+      "revId": "1446e7dc9e4c75da052847c5b54b5b424c37d3ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
