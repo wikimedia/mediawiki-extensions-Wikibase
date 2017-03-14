@@ -274,11 +274,14 @@ call_user_func( function() {
 	$wgAPIModules['wbsetsitelink'] = [
 		'class' => Wikibase\Repo\Api\SetSiteLink::class,
 		'factory' => function ( ApiMain $mainModule, $moduleName ) {
+			$wikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+
 			return new Wikibase\Repo\Api\SetSiteLink(
 				$mainModule,
 				$moduleName,
-				Wikibase\Repo\WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider()
-					->getSiteLinkChangeOpFactory()
+				$wikibaseRepo->getChangeOpFactoryProvider()
+					->getSiteLinkChangeOpFactory(),
+				$wikibaseRepo->getSiteLinkBadgeChangeOpSerializationValidator()
 			);
 		}
 	];
