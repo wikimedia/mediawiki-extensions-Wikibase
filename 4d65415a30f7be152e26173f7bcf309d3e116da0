@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_8516e8aa",
+        "filename": "docs/entitytypes.wiki",
+        "patchSetId": 16
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-14T09:20:51Z",
+      "side": 1,
+      "message": "Oh dear, sure. I don\u0027t remember where this text is coming from. Obviously it is completely wrong.\nFixed now. Note that docs are now changed in the earlier patch: I594ce1de1576525c884875e28443c8836e164174",
+      "parentUuid": "8e46e3ee_9dbde6af",
+      "revId": "4d65415a30f7be152e26173f7bcf309d3e116da0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_fd38aa3c",
         "filename": "repo/includes/Localizer/ChangeOpDeserializationExceptionLocalizer.php",
         "patchSetId": 16
@@ -30,6 +48,24 @@
       "writtenOn": "2017-03-13T18:27:18Z",
       "side": 1,
       "message": "This needs to be hooked up in WikibaseRepo::getExceptionLocalizers if I am not mistaking.",
+      "revId": "4d65415a30f7be152e26173f7bcf309d3e116da0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_256fd427",
+        "filename": "repo/includes/Localizer/ChangeOpDeserializationExceptionLocalizer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-14T09:20:51Z",
+      "side": 1,
+      "message": "How did I manage to not commit this change?\nSee my longer inline comment in Api\\EditEntity (PS12) if wondering why no tests failed without this being plugged in.\nDone now.",
+      "parentUuid": "8e46e3ee_fd38aa3c",
       "revId": "4d65415a30f7be152e26173f7bcf309d3e116da0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
