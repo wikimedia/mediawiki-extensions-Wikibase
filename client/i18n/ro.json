@@ -5,7 +5,8 @@
 			"Stelistcristi",
 			"Metalhead64",
 			"XXN",
-			"ANDROBETA"
+			"ANDROBETA",
+			"Strainu"
 		]
 	},
 	"wikibase-client-desc": "Client pentru extensia Wikibase",
@@ -48,7 +49,7 @@
 	"unconnectedpages": "Pagini neasociate cu un element",
 	"unconnectedpages-summary": "Această pagină enumeră paginile care nu sunt asociate unui element Wikidata (din spațiile de nume care suportă asocierea elementelor). Lista este ordonată descrescător după ID-ul paginii, astfel încât paginile noi sunt listate primele.",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|legătură interlinguală|legături interlinguale|de legături interlinguale}} în pagină)",
-	"wikibase-unconnectedpages-submit": "Du-te",
+	"wikibase-unconnectedpages-submit": "Arată paginile",
 	"wikibase-pageinfo-entity-id": "ID element {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Nimic",
 	"wikibase-property-render-error": "Nu s-a putut reda proprietatea $1: $2",

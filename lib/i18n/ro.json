@@ -4,16 +4,17 @@
 			"Minisarm",
 			"Stelistcristi",
 			"Rsocol",
-			"Macofe"
+			"Macofe",
+			"Strainu"
 		]
 	},
 	"wikibase-lib-desc": "Grupează funcționalități comune pentru extensiile Wikibase și Client Wikibase",
-	"specialpages-group-wikibase": "Depozitul Wikibase",
+	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-deletedentity-item": "Element șters",
 	"wikibase-deletedentity-property": "Proprietate ștearsă",
 	"wikibase-deletedentity-query": "Interogare ștearsă",
 	"wikibase-error-unexpected": "Eroare: $1.",
-	"wikibase-error-save-generic": "A intervenit o eroare în timpul salvării. Modificările dumneavoastră nu au putut fi finalizate.",
+	"wikibase-error-save-generic": "A intervenit o eroare în timpul salvării.",
 	"wikibase-error-remove-generic": "A intervenit o eroare în timpul eliminării. Modificările dumneavoastră nu au putut fi finalizate.",
 	"wikibase-error-save-connection": "A intervenit o eroare de conexiune în timpul salvării. Modificările dumneavoastră nu au putut fi finalizate. Verificați-vă conexiunea la internet.",
 	"wikibase-error-remove-connection": "A intervenit o eroare de conexiune în timpul eliminării. Modificările dumneavoastră nu au putut fi finalizate. Verificați-vă conexiunea la internet.",

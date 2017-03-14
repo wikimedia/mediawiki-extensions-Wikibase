@@ -6,7 +6,8 @@
 			"Stelistcristi",
 			"Danutz",
 			"Macofe",
-			"Wintereu"
+			"Wintereu",
+			"Strainu"
 		]
 	},
 	"wikibase-desc": "Depozit de date structurate",
@@ -37,7 +38,7 @@
 	"wikibase-diffview-alias": "aliasuri",
 	"wikibase-diffview-description": "descriere",
 	"wikibase-diffview-link": "legături",
-	"wikibase-sitelink-site-edit-placeholder": "site",
+	"wikibase-sitelink-site-edit-placeholder": "wiki",
 	"wikibase-sitelink-page-edit-placeholder": "pagină",
 	"wikibase-alias-edit-placeholder": "introduceți un alias",
 	"wikibase-label-input-help-message": "Introduceți eticheta acestei entități în $1.",
