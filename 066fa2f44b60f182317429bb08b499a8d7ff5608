@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_1c3791e1",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-14T19:14:45Z",
+      "side": 1,
+      "message": "I\u0027ve found `\\ExtensionRegistry::isLoaded($name)` to check if extension is enabled. Will it work?",
+      "parentUuid": "8e46e3ee_316076fc",
+      "range": {
+        "startLine": 32,
+        "startChar": 1,
+        "endLine": 32,
+        "endChar": 7
+      },
+      "revId": "066fa2f44b60f182317429bb08b499a8d7ff5608",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_67a40705",
         "filename": "lib/tests/phpunit/WikibaseSettingsTest.php",
         "patchSetId": 2
