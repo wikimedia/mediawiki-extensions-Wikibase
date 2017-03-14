@@ -15,6 +15,7 @@
 	 * @param {util.MessageProvider} messageProvider
 	 * @param {util.ContentLanguages} contentLanguages
 	 * @param {string|null} [vocabularyLookupApiUrl=null]
+	 * @param {string} commonsApiUrl
 	 */
 	var SELF = wb.ValueViewBuilder = function WbValueViewBuilder(
 		expertStore,
@@ -23,7 +24,8 @@
 		language,
 		messageProvider,
 		contentLanguages,
-		vocabularyLookupApiUrl
+		vocabularyLookupApiUrl,
+		commonsApiUrl
 	) {
 		this._baseOptions = {
 			expertStore: expertStore,
@@ -31,7 +33,8 @@
 			language: language,
 			messageProvider: messageProvider,
 			contentLanguages: contentLanguages,
-			vocabularyLookupApiUrl: vocabularyLookupApiUrl || null
+			vocabularyLookupApiUrl: vocabularyLookupApiUrl || null,
+			commonsApiUrl: commonsApiUrl
 		};
 		this._formatterFactory = formatterFactory;
 	};
