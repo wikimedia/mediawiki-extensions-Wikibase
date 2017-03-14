@@ -7,7 +7,6 @@ use Comparable;
 use Hashable;
 use InvalidArgumentException;
 use Traversable;
-use Wikibase\DataModel\Internal\MapValueHasher;
 
 /**
  * Generic array object with lookups based on hashes of the elements.
@@ -27,7 +26,7 @@ use Wikibase\DataModel\Internal\MapValueHasher;
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class HashArray extends ArrayObject implements Hashable, Comparable {
+abstract class HashArray extends ArrayObject implements Comparable {
 
 	/**
 	 * Maps element hashes to their offsets.
@@ -230,20 +229,6 @@ abstract class HashArray extends ArrayObject implements Hashable, Comparable {
 
 			parent::offsetUnset( $index );
 		}
-	}
-
-	/**
-	 * @see Hashable::getHash
-	 *
-	 * The hash is purely valuer based. Order of the elements in the array is not held into account.
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getHash() {
-		$hasher = new MapValueHasher();
-		return $hasher->hash( $this );
 	}
 
 	/**

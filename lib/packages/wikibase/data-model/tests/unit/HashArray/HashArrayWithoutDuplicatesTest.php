@@ -129,26 +129,4 @@ class HashArrayWithoutDuplicatesTest extends HashArrayTest {
 		$this->assertTrue( true );
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 * @param HashArray $array
-	 */
-	public function testGetHash( HashArray $array ) {
-		$hash = $array->getHash();
-
-		$this->assertSame( $hash, $array->getHash() );
-
-		$elements = $this->elementInstancesProvider();
-		$element = array_shift( $elements );
-		$element = $element[0][0];
-
-		$array->addElement( $element );
-
-		if ( $array->hasElement( $element ) ) {
-			$this->assertSame( $hash, $array->getHash() );
-		} else {
-			$this->assertNotSame( $hash, $array->getHash() );
-		}
-	}
-
 }

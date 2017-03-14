@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Snak;
 
+use Hashable;
 use InvalidArgumentException;
 use Traversable;
 use Wikibase\DataModel\HashArray;
@@ -17,7 +18,7 @@ use Wikibase\DataModel\Internal\MapValueHasher;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Addshore
  */
-class SnakList extends HashArray {
+class SnakList extends HashArray implements Hashable {
 
 	/**
 	 * @param Snak[]|Traversable $snaks
@@ -110,7 +111,9 @@ class SnakList extends HashArray {
 	/**
 	 * @see HashArray::getHash
 	 *
-	 * @since 0.5
+	 * The hash is purely value based. Order of the elements in the array is not held into account.
+	 *
+	 * @since 0.1
 	 *
 	 * @return string
 	 */
