@@ -3,6 +3,8 @@
 namespace Wikibase\DataModel\Snak;
 
 use Hashable;
+use InvalidArgumentException;
+use Traversable;
 use Wikibase\DataModel\HashArray;
 use Wikibase\DataModel\Internal\MapValueHasher;
 
@@ -17,6 +19,21 @@ use Wikibase\DataModel\Internal\MapValueHasher;
  * @author Addshore
  */
 class SnakList extends HashArray implements Hashable {
+
+	/**
+	 * @param Snak[]|Traversable $snaks
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	public function __construct( $snaks = [] ) {
+		if ( !is_array( $snaks ) && !( $snaks instanceof Traversable ) ) {
+			throw new InvalidArgumentException( '$snaks must be an array or an instance of Traversable' );
+		}
+
+		foreach ( $snaks as $index => $snak ) {
+			$this->setElement( $index, $snak );
+		}
+	}
 
 	/**
 	 * @see GenericArrayObject::getObjectType
