@@ -6,5 +6,6 @@ This file is currently a STUB, referencing existing documentation on some aspect
 * Foreign EntityIds and mappings are documented in the file docs/foreign-entity-ids.wiki in the wikibase/data-model component.
 
 As of March 2017, in order to enable access to entities from federated repositories both Repo and Client components must be enabled. Also as of March 2017, accessing data of foreign entities relies on the shared database access (databases of federated repositories must be in the same database cluster).
-* Local repository is configured as documented in docs/options.wiki. Note that as of March 2017, database of the local repository is configured based on Client's settings.
+* Local repository is configured as documented in docs/options.wiki. Note that as of March 2017, database of the local repository is configured based on Client's settings (''repoDatabase'' setting).
 * Configuration of foreign repositories is done using the ''foreignRepositories'' setting in $wgWBClientSettings, as documented in the file docs/options.wiki.
+* In order to correctly link entities from foreign repositories, local wiki must have MediaWiki interwiki prefix configured for each foreign repository. As of March 2017, interwiki prefix must be the same as the name used for the foreign repository.
