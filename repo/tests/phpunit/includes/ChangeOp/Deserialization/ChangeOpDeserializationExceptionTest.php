@@ -39,4 +39,10 @@ class ChangeOpDeserializationExceptionTest extends \PHPUnit_Framework_TestCase {
 		return [ [ 'error-foo' ], [ 'error-bar' ] ];
 	}
 
+	public function testGetParams() {
+		$exception = new ChangeOpDeserializationException( 'foo', 'error-foo', [ 'bar', 'baz' ] );
+
+		$this->assertEquals( [ 'bar', 'baz' ], $exception->getParams() );
+	}
+
 }
