@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_117c5ab3",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-14T18:59:25Z",
+      "side": 1,
+      "message": "local variables shouldn\u0027t look like global variables. \"wg\" stands for \"wiki global\".",
+      "revId": "de6b4729810acdfff1613006f092775f2b8a65d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
