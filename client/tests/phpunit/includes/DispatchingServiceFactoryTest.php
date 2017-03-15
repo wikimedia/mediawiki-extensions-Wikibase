@@ -53,19 +53,14 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testGetEntityInfoBuilderFactory_AlwaysReturnsTheSameService() {
+	public function testGetEntityPrefetcher_AlwaysReturnsTheSameService() {
 		$factory = $this->createFactoryWithRepositoryContainerReturningDummyObjectFor(
-			'EntityInfoBuilderFactory',
-			EntityInfoBuilderFactory::class
+			'EntityPrefetcher',
+			EntityPrefetcher::class
 		);
 
-		$this->assertInstanceOf(
-			DispatchingEntityInfoBuilderFactory::class,
-			$factory->getEntityInfoBuilderFactory()
-		);
-
-		$serviceOne = $factory->getEntityInfoBuilderFactory();
-		$serviceTwo = $factory->getEntityInfoBuilderFactory();
+		$serviceOne = $factory->getEntityPrefetcher();
+		$serviceTwo = $factory->getEntityPrefetcher();
 
 		$this->assertSame( $serviceOne, $serviceTwo );
 	}
