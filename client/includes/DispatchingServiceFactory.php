@@ -53,6 +53,7 @@ class DispatchingServiceFactory extends ServiceContainer implements EntityDataRe
 		RepositoryDefinitions $repositoryDefinitions
 	) {
 		parent::__construct();
+		parent::loadWiringFiles( [ __DIR__ . '/DispatchingServiceWiring.php' ] );
 
 		$this->repositoryServiceContainerFactory = $repositoryServiceContainerFactory;
 		$this->repositoryDefinitions = $repositoryDefinitions;
@@ -182,6 +183,10 @@ class DispatchingServiceFactory extends ServiceContainer implements EntityDataRe
 	 */
 	public function getTermSearchInteractorFactory() {
 		return $this->getService( 'TermSearchInteractorFactory' );
+	}
+
+	public function loadWiringFiles( array $wiringFiles ) {
+		throw new \RuntimeException( 'Should not be called' );
 	}
 
 }

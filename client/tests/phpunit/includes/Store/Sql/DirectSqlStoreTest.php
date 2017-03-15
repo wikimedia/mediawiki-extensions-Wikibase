@@ -61,13 +61,13 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			$repositoryDefinitions
 		);
 
-		$dispatchingServiceFactory->defineService( 'EntityPrefetcher', function() {
+		$dispatchingServiceFactory->redefineService( 'EntityPrefetcher', function() {
 			return new NullEntityPrefetcher();
 		} );
-		$dispatchingServiceFactory->defineService( 'EntityRevisionLookup', function() {
+		$dispatchingServiceFactory->redefineService( 'EntityRevisionLookup', function() {
 			return $this->getMock( EntityRevisionLookup::class );
 		} );
-		$dispatchingServiceFactory->defineService( 'PropertyInfoLookup', function() {
+		$dispatchingServiceFactory->redefineService( 'PropertyInfoLookup', function() {
 			return new MockPropertyInfoLookup();
 		} );
 
