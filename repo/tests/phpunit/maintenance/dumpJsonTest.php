@@ -138,7 +138,7 @@ class DumpJsonTest extends MediaWikiTestCase {
 			new NullEntityPrefetcher(),
 			$this->getMockPropertyDataTypeLookup(),
 			$mockRepo,
-			$serializerFactory->newEntitySerializer()
+			$serializerFactory->newItemSerializer()
 		);
 
 		$logFileName = tempnam( sys_get_temp_dir(), "Wikibase-DumpJsonTest" );

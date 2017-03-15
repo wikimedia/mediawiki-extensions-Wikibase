@@ -35,7 +35,7 @@ class EntityContentDataCodecTest extends MediaWikiTestCase {
 
 		return new EntityContentDataCodec(
 			$idParser,
-			$serializerFactory->newEntitySerializer(),
+			$serializerFactory->newItemSerializer(),
 			$deserializerFactory->newEntityDeserializer(),
 			$maxBlobSize
 		);
