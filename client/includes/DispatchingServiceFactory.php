@@ -71,21 +71,6 @@ class DispatchingServiceFactory implements EntityDataRetrievalServiceFactory, En
 	}
 
 	/**
-	 * @param string $service
-	 * @return array An associative array mapping repository names to service instances configured for the repository
-	 */
-	public function getServiceMap( $service ) {
-		$serviceMap = [];
-		foreach ( $this->repositoryDefinitions->getRepositoryNames() as $repositoryName ) {
-			$container = $this->getContainerForRepository( $repositoryName );
-			if ( $container !== null ) {
-				$serviceMap[$repositoryName] = $container->getService( $service );
-			}
-		}
-		return $serviceMap;
-	}
-
-	/**
 	 * @param string $repositoryName
 	 *
 	 * @return RepositoryServiceContainer|null
@@ -194,6 +179,21 @@ class DispatchingServiceFactory implements EntityDataRetrievalServiceFactory, En
 	 */
 	public function getTermSearchInteractorFactory() {
 		return $this->container->getService( 'TermSearchInteractorFactory' );
+	}
+
+	/**
+	 * @param string $service
+	 * @return array An associative array mapping repository names to service instances configured for the repository
+	 */
+	private function getServiceMap( $service ) {
+		$serviceMap = [];
+		foreach ( $this->repositoryDefinitions->getRepositoryNames() as $repositoryName ) {
+			$container = $this->getContainerForRepository( $repositoryName );
+			if ( $container !== null ) {
+				$serviceMap[$repositoryName] = $container->getService( $service );
+			}
+		}
+		return $serviceMap;
 	}
 
 	/**
