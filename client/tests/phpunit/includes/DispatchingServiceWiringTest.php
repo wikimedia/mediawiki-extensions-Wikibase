@@ -54,7 +54,6 @@ class DispatchingServiceWiringTest extends \PHPUnit_Framework_TestCase {
 			] ] )
 		);
 
-		$factory->loadWiringFiles( [ __DIR__ . '/../../../includes/DispatchingServiceWiring.php' ] );
 		return $factory;
 	}
 
