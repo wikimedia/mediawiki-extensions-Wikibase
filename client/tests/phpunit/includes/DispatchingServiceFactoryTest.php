@@ -43,22 +43,6 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 		) ];
 	}
 
-	public function testGetServiceNames_ReturnsNameOfDefinedService() {
-		$factory = new DispatchingServiceFactory(
-			$this->dummy( RepositoryServiceContainerFactory::class ),
-			new RepositoryDefinitions( $this->getRepositoryDefinition( '', [] ) )
-		);
-
-		$factory->defineService(
-			'SomeService',
-			function () {
-				return $this->someService( 'does not matter' );
-			}
-		);
-
-		$this->assertContains( 'SomeService', $factory->getServiceNames() );
-	}
-
 	private function newDispatchingServiceFactory( RepositoryServiceContainerFactory $containerFactory ) {
 		return new DispatchingServiceFactory(
 			$containerFactory,
