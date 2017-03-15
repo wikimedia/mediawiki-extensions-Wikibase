@@ -143,7 +143,9 @@ class DispatchingServiceFactory implements EntityDataRetrievalServiceFactory, En
 	 * @return EntityInfoBuilderFactory
 	 */
 	public function getEntityInfoBuilderFactory() {
-		return $this->container->getService( 'EntityInfoBuilderFactory' );
+		return new DispatchingEntityInfoBuilderFactory(
+			$this->getServiceMap( 'EntityInfoBuilderFactory' )
+		);
 	}
 
 	/**
@@ -201,12 +203,6 @@ class DispatchingServiceFactory implements EntityDataRetrievalServiceFactory, En
 	 */
 	private function getWiring() {
 		return [
-			'EntityInfoBuilderFactory' => function () {
-				return new DispatchingEntityInfoBuilderFactory(
-					$this->getServiceMap( 'EntityInfoBuilderFactory' )
-				);
-			},
-
 			'EntityPrefetcher' => function () {
 				return new DispatchingEntityPrefetcher(
 					$this->getServiceMap( 'EntityPrefetcher' )
