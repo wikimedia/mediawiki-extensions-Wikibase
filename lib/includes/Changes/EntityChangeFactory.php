@@ -6,8 +6,6 @@ use MWException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
-use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\DataModel\Statement\StatementListHolder;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\FingerprintProvider;
@@ -144,14 +142,8 @@ class EntityChangeFactory {
 	 * @param EntityDocument|null $entity
 	 */
 	private function minimizeEntityForDiffing( EntityDocument $entity = null ) {
-		if ( $entity instanceof StatementListHolder ) {
-			$entity->setStatements( new StatementList() );
-		} elseif ( $entity instanceof StatementListProvider ) {
-			$statements = $entity->getStatements();
-
-			foreach ( $statements->toArray() as $statement ) {
-				$statements->removeStatementsWithGuid( $statement->getGuid() );
-			}
+		if ( $entity instanceof StatementListProvider ) {
+			$entity->getStatements()->clear();
 		}
 
 		if ( $entity instanceof FingerprintProvider ) {

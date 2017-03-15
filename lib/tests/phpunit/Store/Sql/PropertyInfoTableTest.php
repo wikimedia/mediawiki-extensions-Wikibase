@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Tests\Store\Sql;
 
 use MediaWikiTestCase;
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityIdComposer;
@@ -279,7 +278,7 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 	private function getEntityComposer() {
 		return new EntityIdComposer( [
 			Property::ENTITY_TYPE => function( $repository, $uniquePart ) {
-				return new PropertyId( EntityId::joinSerialization( [ $repository, '', "P$uniquePart" ] ) );
+				return PropertyId::newFromRepositoryAndNumber( $repository, $uniquePart );
 			},
 		] );
 	}
