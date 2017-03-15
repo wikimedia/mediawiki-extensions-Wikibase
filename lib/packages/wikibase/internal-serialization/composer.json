@@ -24,13 +24,14 @@
 	},
 	"require": {
 		"php": ">=5.3.0",
-		"wikibase/data-model": "~6.0|~5.0|~4.2",
+		"wikibase/data-model": "~7.0|~6.0|~5.0|~4.2",
 		"wikibase/data-model-serialization": "~2.0",
 		"serialization/serialization": "~3.2"
 	},
 	"require-dev": {
 		"squizlabs/php_codesniffer": "~2.3",
 		"phpmd/phpmd": "~2.3",
+		"phpunit/phpunit": "~4.8",
 		"data-values/common": "~0.3.0|~0.2.0",
 		"data-values/geo": "~1.1",
 		"data-values/number": ">=0.1 <0.9",
@@ -51,16 +52,16 @@
 	},
 	"scripts": {
 		"test": [
-			"composer validate --no-interaction",
-			"phpunit"
+			"@validate --no-interaction",
+			"vendor/bin/phpunit"
 		],
 		"cs": [
-			"composer phpcs",
-			"composer phpmd"
+			"@phpcs",
+			"@phpmd"
 		],
 		"ci": [
-			"composer test",
-			"composer cs"
+			"@test",
+			"@cs"
 		],
 		"phpcs": [
 			"vendor/bin/phpcs src/* tests/* --standard=phpcs.xml --extensions=php -sp"

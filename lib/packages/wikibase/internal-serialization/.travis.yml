@@ -16,7 +16,7 @@ matrix:
       php: 5.6
     - env: DM=~4.2
       php: 7
-    - env: DM=~4.2
+    - env: DM=~7.0
       php: hhvm
   exclude:
     - env: THENEEDFORTHIS=FAIL
