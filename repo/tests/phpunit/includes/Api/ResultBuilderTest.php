@@ -248,7 +248,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 								'qualifiers' => array(
 									'P65' => array(
 										array(
-											'hash' => 'e95e866e7fa1c18bd06dae9b712cb99545107eb8',
+											'hash' => '3ea0f5404dd4e631780b3386d17a15a583e499a6',
 											'snaktype' => 'value',
 											'property' => 'P65',
 											'datavalue' => array(
@@ -258,7 +258,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 											'datatype' => 'DtIdFor_P65',
 										),
 										array(
-											'hash' => '210b00274bf03247a89de918f15b12142ebf9e56',
+											'hash' => 'aa9a5f05e20d7fa5cda7d98371e44c0bdd5de35e',
 											'snaktype' => 'somevalue',
 											'property' => 'P65',
 											'datatype' => 'DtIdFor_P65',
@@ -276,7 +276,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 								),
 								'references' => array(
 									array(
-										'hash' => 'bdc5f7185904d6d3219e13b7443571dda8c4bee8',
+										'hash' => '8445204eb74e636cb53687e2f947c268d5186075',
 										'snaks' => array(
 											'P65' => array(
 												array(
@@ -1150,7 +1150,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			),
 			'references' => array(
 				array(
-					'hash' => '2f543336756784850a310cbc52a9307e467c7c42',
+					'hash' => '4db26028db87a994581ef9cd832e60635321bca9',
 					'snaks' => array(
 						'P12' => array(
 							array(
@@ -1185,7 +1185,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 							'value' => 'qualiferVal',
 							'type' => 'string',
 						),
-						'hash' => '67423e8a140238decaa9156be1e3ba23513b3b19',
+						'hash' => '16c37f4d851c37f7495a31ebc539e52227918a5e',
 					),
 					'_element' => 'qualifiers',
 				),
@@ -1206,7 +1206,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function provideAddReference() {
 		$expected = array(
 			'reference' => array(
-				'hash' => 'de52176deca6dd967b2a4122c96766089c1f793a',
+				'hash' => '27ff8ea8cc011639f959481465c175fe7f07ecbd',
 				'snaks' => array(
 					'P12' => array(
 						array(
