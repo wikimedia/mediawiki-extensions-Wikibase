@@ -17,6 +17,12 @@ use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\Lib\Interactors\DispatchingTermSearchInteractorFactory;
+use Wikibase\Lib\Store\DispatchingEntityInfoBuilderFactory;
+use Wikibase\Lib\Store\DispatchingEntityPrefetcher;
+use Wikibase\Lib\Store\DispatchingEntityRevisionLookup;
+use Wikibase\Lib\Store\DispatchingPropertyInfoLookup;
+use Wikibase\Lib\Store\DispatchingTermBuffer;
 
 /**
  * A factory/locator of services dispatching the action to services configured for the
@@ -27,7 +33,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
  *
  * @license GPL-2.0+
  */
-class DispatchingServiceFactory extends ServiceContainer implements EntityDataRetrievalServiceFactory, EntityStoreWatcher {
+class DispatchingServiceFactory implements EntityDataRetrievalServiceFactory, EntityStoreWatcher {
 
 	/**
 	 * @var RepositoryServiceContainerFactory
@@ -45,6 +51,11 @@ class DispatchingServiceFactory extends ServiceContainer implements EntityDataRe
 	private $repositoryServiceContainers = [];
 
 	/**
+	 * @var ServiceContainer
+	 */
+	private $container;
+
+	/**
 	 * @param RepositoryServiceContainerFactory $repositoryServiceContainerFactory
 	 * @param RepositoryDefinitions $repositoryDefinitions
 	 */
@@ -52,8 +63,8 @@ class DispatchingServiceFactory extends ServiceContainer implements EntityDataRe
 		RepositoryServiceContainerFactory $repositoryServiceContainerFactory,
 		RepositoryDefinitions $repositoryDefinitions
 	) {
-		parent::__construct();
-		parent::loadWiringFiles( [ __DIR__ . '/DispatchingServiceWiring.php' ] );
+		$this->container = new ServiceContainer();
+		$this->container->applyWiring( $this->getWiring() );
 
 		$this->repositoryServiceContainerFactory = $repositoryServiceContainerFactory;
 		$this->repositoryDefinitions = $repositoryDefinitions;
@@ -147,46 +158,92 @@ class DispatchingServiceFactory extends ServiceContainer implements EntityDataRe
 	 * @return EntityInfoBuilderFactory
 	 */
 	public function getEntityInfoBuilderFactory() {
-		return $this->getService( 'EntityInfoBuilderFactory' );
+		return $this->container->getService( 'EntityInfoBuilderFactory' );
 	}
 
 	/**
 	 * @return EntityPrefetcher
 	 */
 	public function getEntityPrefetcher() {
-		return $this->getService( 'EntityPrefetcher' );
+		return $this->container->getService( 'EntityPrefetcher' );
 	}
 
 	/**
 	 * @return EntityRevisionLookup
 	 */
 	public function getEntityRevisionLookup() {
-		return $this->getService( 'EntityRevisionLookup' );
+		return $this->container->getService( 'EntityRevisionLookup' );
 	}
 
 	/**
 	 * @return PropertyInfoLookup
 	 */
 	public function getPropertyInfoLookup() {
-		return $this->getService( 'PropertyInfoLookup' );
+		return $this->container->getService( 'PropertyInfoLookup' );
 	}
 
 	/**
 	 * @return TermBuffer
 	 */
 	public function getTermBuffer() {
-		return $this->getService( 'TermBuffer' );
+		return $this->container->getService( 'TermBuffer' );
 	}
 
 	/**
 	 * @return TermSearchInteractorFactory
 	 */
 	public function getTermSearchInteractorFactory() {
-		return $this->getService( 'TermSearchInteractorFactory' );
+		return $this->container->getService( 'TermSearchInteractorFactory' );
 	}
 
-	public function loadWiringFiles( array $wiringFiles ) {
-		throw new \RuntimeException( 'Should not be called' );
+	/**
+	 * @return array
+	 */
+	private function getWiring() {
+		return [
+			'EntityInfoBuilderFactory' => function () {
+				return new DispatchingEntityInfoBuilderFactory(
+					$this->getServiceMap( 'EntityInfoBuilderFactory' )
+				);
+			},
+
+			'EntityPrefetcher' => function () {
+				return new DispatchingEntityPrefetcher(
+					$this->getServiceMap( 'EntityPrefetcher' )
+				);
+			},
+
+			'EntityRevisionLookup' => function () {
+				return new DispatchingEntityRevisionLookup(
+					$this->getServiceMap( 'EntityRevisionLookup' )
+				);
+			},
+
+			'PropertyInfoLookup' => function () {
+				return new DispatchingPropertyInfoLookup(
+					$this->getServiceMap( 'PropertyInfoLookup' )
+				);
+			},
+
+			'TermBuffer' => function () {
+				return new DispatchingTermBuffer(
+					$this->getServiceMap( 'PrefetchingTermLookup' )
+				);
+			},
+
+			'TermSearchInteractorFactory' => function () {
+				$repoSpecificFactories = $this->getServiceMap( 'TermSearchInteractorFactory' );
+				$entityTypeToRepoMapping = $this->getEntityTypeToRepoMapping();
+
+				$factories = [];
+				foreach ( $entityTypeToRepoMapping as $entityType => $repositoryName ) {
+					$factories[$entityType] = $repoSpecificFactories[$repositoryName];
+				}
+
+				return new DispatchingTermSearchInteractorFactory( $factories );
+			},
+
+		];
 	}
 
 }
