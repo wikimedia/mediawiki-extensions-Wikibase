@@ -16,6 +16,24 @@
       "revId": "350355a76ae4f44b23476bc41c7baa1139795d29",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_10d8ca21",
+        "filename": "repo/includes/Search/Elastic/Fields/WikibaseNumericField.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-15T21:48:27Z",
+      "side": 1,
+      "message": "hmmm this is probably when migrating from ES2 to ES5. I think by the time we\u0027ll merge it migration will be done. So it should be OK. But I\u0027ll double-check on my Vagrant.",
+      "parentUuid": "8e46e3ee_d6d2732c",
+      "revId": "350355a76ae4f44b23476bc41c7baa1139795d29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
