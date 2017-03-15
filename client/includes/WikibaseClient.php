@@ -382,7 +382,6 @@ final class WikibaseClient {
 				$this->getRepositoryServiceContainerFactory(),
 				$this->repositoryDefinitions
 			);
-			$factory->loadWiringFiles( $this->settings->getSetting( 'dispatchingServiceWiringFiles' ) );
 
 			$this->entityDataRetrievalServiceFactory = $factory;
 		}

@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests;
 
 use Prophecy\Argument;
+use Prophecy\Prophecy\ObjectProphecy;
 use Wikibase\Client\DispatchingServiceFactory;
 use Wikibase\Client\Store\RepositoryServiceContainer;
 use Wikibase\Client\Store\RepositoryServiceContainerFactory;
@@ -10,8 +11,20 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
+use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\EntityRevision;
+use Wikibase\Lib\Interactors\DispatchingTermSearchInteractorFactory;
+use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\RepositoryDefinitions;
+use Wikibase\Lib\Store\DispatchingEntityInfoBuilderFactory;
+use Wikibase\Lib\Store\DispatchingEntityPrefetcher;
+use Wikibase\Lib\Store\DispatchingEntityRevisionLookup;
+use Wikibase\Lib\Store\DispatchingPropertyInfoLookup;
+use Wikibase\Lib\Store\DispatchingTermBuffer;
+use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
  * @covers Wikibase\Client\DispatchingServiceFactory
@@ -56,8 +69,7 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testGetServiceMap_ReturnsArrayMappingNameOfRepositoryToServiceForThatRepository(
-	) {
+	public function testGetServiceMap_ReturnsArrayMappingNameOfRepositoryToServiceForThatRepository() {
 		$someServiceName = 'some-service';
 		$localService = $this->someService( 'local' );
 		$fooService = $this->someService( 'foo' );
@@ -82,25 +94,21 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedServiceMap, $serviceMap );
 	}
 
-	public function testGetService_AlwaysReturnsTheSameService() {
-		$factory = new DispatchingServiceFactory(
-			$this->dummy( RepositoryServiceContainerFactory::class ),
-			new RepositoryDefinitions( $this->getRepositoryDefinition( '', [] ) )
+	public function testGetEntityInfoBuilderFactory_AlwaysReturnsTheSameService() {
+		$factory = $this->createFactoryWithRepositoryContainerReturningDummyObjectFor(
+			'EntityInfoBuilderFactory',
+			EntityInfoBuilderFactory::class
 		);
 
-		$someService = $this->someService( 'some service instance' );
-		$factory->defineService(
-			'some-service',
-			function () use ( $someService ) {
-				return $someService;
-			}
+		$this->assertInstanceOf(
+			DispatchingEntityInfoBuilderFactory::class,
+			$factory->getEntityInfoBuilderFactory()
 		);
 
-		$serviceOne = $factory->getService( 'some-service' );
-		$serviceTwo = $factory->getService( 'some-service' );
+		$serviceOne = $factory->getEntityInfoBuilderFactory();
+		$serviceTwo = $factory->getEntityInfoBuilderFactory();
 
-		$this->assertSame( $someService, $serviceOne );
-		$this->assertSame( $someService, $serviceTwo );
+		$this->assertSame( $serviceOne, $serviceTwo );
 	}
 
 	public function testEntityUpdatedDelegatesEventToContainerOfRelevantRepository() {
@@ -174,6 +182,78 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testGetEntityInfoBuilderFactory_ReturnsDispatchingEntityInfoBuilderFactory() {
+		$factory = $this->createFactoryWithRepositoryContainerReturningDummyObjectFor(
+			'EntityInfoBuilderFactory',
+			EntityInfoBuilderFactory::class
+		);
+
+		$this->assertInstanceOf(
+			DispatchingEntityInfoBuilderFactory::class,
+			$factory->getEntityInfoBuilderFactory()
+		);
+	}
+
+	public function testGetEntityPrefetcher_ReturnsDispatchingEntityInfoBuilderFactory() {
+		$factory = $this->createFactoryWithRepositoryContainerReturningDummyObjectFor(
+			'EntityPrefetcher',
+			EntityPrefetcher::class
+		);
+
+		$this->assertInstanceOf(
+			DispatchingEntityPrefetcher::class,
+			$factory->getEntityPrefetcher()
+		);
+	}
+
+	public function testGetEntityRevisionLookup_ReturnsDispatchingEntityRevisionLookup() {
+		$factory = $this->createFactoryWithRepositoryContainerReturningDummyObjectFor(
+			'EntityRevisionLookup',
+			EntityRevisionLookup::class
+		);
+
+		$this->assertInstanceOf(
+			DispatchingEntityRevisionLookup::class,
+			$factory->getEntityRevisionLookup()
+		);
+	}
+
+	public function testGetPropertyInfoLookup_ReturnsDispatchingPropertyInfoLookup() {
+		$factory = $this->createFactoryWithRepositoryContainerReturningDummyObjectFor(
+			'PropertyInfoLookup',
+			PropertyInfoLookup::class
+		);
+
+		$this->assertInstanceOf(
+			DispatchingPropertyInfoLookup::class,
+			$factory->getPropertyInfoLookup()
+		);
+	}
+
+	public function testGetTermBuffer_ReturnsDispatchingTermBuffer() {
+		$factory = $this->createFactoryWithRepositoryContainerReturningDummyObjectFor(
+			'PrefetchingTermLookup',
+			TermBuffer::class
+		);
+
+		$this->assertInstanceOf(
+			DispatchingTermBuffer::class,
+			$factory->getTermBuffer()
+		);
+	}
+
+	public function testGetTermSearchInteractorFactory_ReturnsDispatchingTermSearchInteractorFactory() {
+		$factory = $this->createFactoryWithRepositoryContainerReturningDummyObjectFor(
+			'TermSearchInteractorFactory',
+			TermSearchInteractorFactory::class
+		);
+
+		$this->assertInstanceOf(
+			DispatchingTermSearchInteractorFactory::class,
+			$factory->getTermSearchInteractorFactory()
+		);
+	}
+
 	/**
 	 * @param array $containers Assoc array [ '<repo name>' => RepositoryServiceContainer, ... ]
 	 *
@@ -183,11 +263,13 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 		$containerFactory = $this->getMockBuilder( RepositoryServiceContainerFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$containerFactory->method( 'newContainer' )
+
+		$containerFactory
+			->method( 'newContainer' )
 			->will(
 				$this->returnCallback(
 					function ( $container ) use ( $containers ) {
-						return $containers[ $container ];
+						return $containers[$container];
 					}
 				)
 			);
@@ -218,6 +300,36 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 		$result->description = $description;
 
 		return $result;
+	}
+
+	/**
+	 * @param string $repositoryServiceContainerKey
+	 * @param string $classOfObjectToReturn
+	 * @return DispatchingServiceFactory
+	 */
+	private function createFactoryWithRepositoryContainerReturningDummyObjectFor(
+		$repositoryServiceContainerKey,
+		$classOfObjectToReturn
+	) {
+		/** @var RepositoryServiceContainer|ObjectProphecy $localRepositoryServiceContainer */
+		$localRepositoryServiceContainer = $this->prophesize( RepositoryServiceContainer::class );
+		$localRepositoryServiceContainer->getService( $repositoryServiceContainerKey )->willReturn(
+			$this->dummy( $classOfObjectToReturn )
+		);
+
+		/** @var RepositoryServiceContainerFactory|ObjectProphecy $rscf */
+		$rscf = $this->prophesize( RepositoryServiceContainerFactory::class );
+		$rscf->newContainer( '' )->willReturn( $localRepositoryServiceContainer );
+
+		$factory = new DispatchingServiceFactory(
+			$rscf->reveal(),
+			new RepositoryDefinitions(
+				array_merge(
+					$this->getRepositoryDefinition( '', [] )
+				)
+			)
+		);
+		return $factory;
 	}
 
 }
