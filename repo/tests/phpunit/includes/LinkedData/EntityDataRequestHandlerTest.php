@@ -109,7 +109,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			new SiteList(),
 			$entityDataFormatProvider,
 			$serializerFactory,
-			$serializerFactory->newEntitySerializer(),
+			$serializerFactory->newItemSerializer(),
 			new HashSiteStore(),
 			new RdfVocabulary(
 				EntityDataSerializationServiceTest::URI_BASE,

@@ -112,7 +112,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 			new SiteList(),
 			new EntityDataFormatProvider(),
 			$serializerFactory,
-			$serializerFactory->newEntitySerializer(),
+			$serializerFactory->newItemSerializer(),
 			new HashSiteStore(),
 			new RdfVocabulary( self::URI_BASE, self::URI_DATA )
 		);
