@@ -181,8 +181,6 @@ class SnakListTest extends HashArrayTest {
 	}
 
 	public function orderByPropertyProvider() {
-		$class = $this->getInstanceClass();
-
 		$id1 = new PropertyId( 'P1' );
 		$id2 = new PropertyId( 'P2' );
 		$id3 = new PropertyId( 'P3' );
@@ -265,8 +263,8 @@ class SnakListTest extends HashArrayTest {
 
 		foreach ( $rawArguments as $key => $rawArgument ) {
 			$arguments[$key] = [
-				new $class( $rawArgument[0] ),
-				new $class( $rawArgument[1] ),
+				new SnakList( $rawArgument[0] ),
+				new SnakList( $rawArgument[1] ),
 				array_key_exists( 2, $rawArgument ) ? $rawArgument[2] : []
 			];
 		}
