@@ -1,5 +1,9 @@
 # Wikibase DataModel Serialization release notes
 
+## 2.4.0 (2017-03-16)
+
+* Added compatibility with Wikibase DataModel 7.x
+
 ## 2.3.0 (2017-02-15)
 
 * Improved performance of `StatementDeserializer` as well as other deserializers

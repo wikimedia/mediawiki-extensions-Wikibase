@@ -221,10 +221,7 @@ class SerializerFactory {
 	 * @return Serializer
 	 */
 	public function newSnakSerializer( $serializeWithHash = true ) {
-		return new SnakSerializer(
-			$this->dataValueSerializer,
-			$serializeWithHash
-		);
+		return new SnakSerializer( $this->dataValueSerializer, $serializeWithHash );
 	}
 
 	/**

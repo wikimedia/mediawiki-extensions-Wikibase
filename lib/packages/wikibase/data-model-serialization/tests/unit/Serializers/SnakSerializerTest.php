@@ -19,7 +19,8 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 class SnakSerializerTest extends DispatchableSerializerTest {
 
 	protected function buildSerializer() {
-		return new SnakSerializer( new DataValueSerializer() );
+		$serializeWithHash = false;
+		return new SnakSerializer( new DataValueSerializer(), $serializeWithHash );
 	}
 
 	public function serializableProvider() {
@@ -56,7 +57,6 @@ class SnakSerializerTest extends DispatchableSerializerTest {
 				array(
 					'snaktype' => 'novalue',
 					'property' => 'P42',
-					'hash' => '5c33520fbfb522444868b4168a35d4b919370018'
 				),
 				new PropertyNoValueSnak( 42 )
 			),
@@ -64,7 +64,6 @@ class SnakSerializerTest extends DispatchableSerializerTest {
 				array(
 					'snaktype' => 'somevalue',
 					'property' => 'P42',
-					'hash' => '1c5c4a30999292cd6592a7a6530322d095fc62d4'
 				),
 				new PropertySomeValueSnak( 42 )
 			),
@@ -72,7 +71,6 @@ class SnakSerializerTest extends DispatchableSerializerTest {
 				array(
 					'snaktype' => 'value',
 					'property' => 'P42',
-					'hash' => 'f39228cb4e94174c87e966c32b02ad93b3512fce',
 					'datavalue' => array(
 						'value' => 'hax',
 						'type' => 'string',
@@ -83,13 +81,15 @@ class SnakSerializerTest extends DispatchableSerializerTest {
 		);
 	}
 
-	public function testSnakSerializationWithoutHash() {
-		$serializer = new SnakSerializer( new DataValueSerializer(), false );
+	public function testSnakSerializationWithHash() {
+		$serializer = new SnakSerializer( new DataValueSerializer() );
 
 		$snak = new PropertyValueSnak( 42, new StringValue( 'hax' ) );
 		$serialization = $serializer->serialize( $snak );
 
-		$this->assertArrayNotHasKey( 'hash', $serialization );
+		$this->assertArrayHasKey( 'hash', $serialization );
+		$this->assertInternalType( 'string', $serialization['hash'] );
+		$this->assertNotEmpty( $serialization['hash'] );
 	}
 
 }
