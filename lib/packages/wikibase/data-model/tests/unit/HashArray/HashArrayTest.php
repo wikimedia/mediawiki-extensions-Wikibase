@@ -2,8 +2,6 @@
 
 namespace Wikibase\DataModel\Tests\HashArray;
 
-use Wikibase\DataModel\HashArray;
-
 /**
  * @covers Wikibase\DataModel\HashArray
  *
@@ -37,15 +35,6 @@ abstract class HashArrayTest extends \PHPUnit_Framework_TestCase {
 		}
 
 		return $instances;
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 * @param HashArray $array
-	 */
-	public function testEquals( HashArray $array ) {
-		$this->assertTrue( $array->equals( $array ) );
-		$this->assertFalse( $array->equals( 42 ) );
 	}
 
 	/**

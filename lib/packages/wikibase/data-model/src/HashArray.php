@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel;
 
 use ArrayObject;
-use Comparable;
 use Hashable;
 use InvalidArgumentException;
 use Traversable;
@@ -26,7 +25,7 @@ use Traversable;
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class HashArray extends ArrayObject implements Comparable {
+abstract class HashArray extends ArrayObject {
 
 	/**
 	 * Maps element hashes to their offsets.
@@ -229,26 +228,6 @@ abstract class HashArray extends ArrayObject implements Comparable {
 
 			parent::offsetUnset( $index );
 		}
-	}
-
-	/**
-	 * @see Comparable::equals
-	 *
-	 * The comparison is done purely value based, ignoring the order of the elements in the array.
-	 *
-	 * @since 0.3
-	 *
-	 * @param mixed $target
-	 *
-	 * @return bool
-	 */
-	public function equals( $target ) {
-		if ( $this === $target ) {
-			return true;
-		}
-
-		return $target instanceof self
-			&& $this->getHash() === $target->getHash();
 	}
 
 	/**
