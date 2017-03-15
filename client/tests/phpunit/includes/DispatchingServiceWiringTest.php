@@ -59,40 +59,24 @@ class DispatchingServiceWiringTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideServices() {
 		return [
-			[ 'EntityInfoBuilderFactory', EntityInfoBuilderFactory::class ],
-			[ 'EntityPrefetcher', EntityPrefetcher::class ],
-			[ 'EntityRevisionLookup', EntityRevisionLookup::class ],
-			[ 'PropertyInfoLookup', PropertyInfoLookup::class ],
-			[ 'TermBuffer', TermBuffer::class ],
-			[ 'TermSearchInteractorFactory', TermSearchInteractorFactory::class ],
+			[ 'getEntityInfoBuilderFactory', EntityInfoBuilderFactory::class ],
+			[ 'getEntityPrefetcher', EntityPrefetcher::class ],
+			[ 'getEntityRevisionLookup', EntityRevisionLookup::class ],
+			[ 'getPropertyInfoLookup', PropertyInfoLookup::class ],
+			[ 'getTermBuffer', TermBuffer::class ],
+			[ 'getTermSearchInteractorFactory', TermSearchInteractorFactory::class ],
 		];
 	}
 
 	/**
 	 * @dataProvider provideServices
 	 */
-	public function testGetService( $serviceName, $expectedClass ) {
+	public function testGetService( $method, $expectedClass ) {
 		$factory = $this->getDispatchingServiceFactory();
 
-		$service = $factory->getService( $serviceName );
+		$service = $factory->$method();
 
 		$this->assertInstanceOf( $expectedClass, $service );
-	}
-
-	public function testGetServiceNames() {
-		$factory = $this->getDispatchingServiceFactory();
-
-		$this->assertEquals(
-			[
-				'EntityInfoBuilderFactory',
-				'EntityPrefetcher',
-				'EntityRevisionLookup',
-				'PropertyInfoLookup',
-				'TermBuffer',
-				'TermSearchInteractorFactory',
-			],
-			$factory->getServiceNames()
-		);
 	}
 
 }
