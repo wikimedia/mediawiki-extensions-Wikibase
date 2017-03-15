@@ -280,7 +280,7 @@ class EntityChangeTest extends ChangeRowTest {
 			'mainsnak' => array(
 				'snaktype' => 'novalue',
 				'property' => 'P1',
-				'hash' => '2d7ef41c913ec99eb249645e154e77670090db68',
+				'hash' => 'any hash',
 			),
 			'type' => 'statement',
 			'rank' => 'normal',
@@ -295,6 +295,7 @@ class EntityChangeTest extends ChangeRowTest {
 
 		$json = $change->serializeInfo( $info );
 		$array = json_decode( $json, true );
+		$array['diff']['newvalue']['mainsnak']['hash'] = 'any hash';
 		$this->assertSame( $expected, $array['diff']['newvalue'] );
 	}
 
