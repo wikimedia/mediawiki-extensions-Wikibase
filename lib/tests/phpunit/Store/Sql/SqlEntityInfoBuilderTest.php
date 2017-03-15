@@ -252,7 +252,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 			new ItemIdParser(),
 			new EntityIdComposer( [
 				'item' => function( $repositoryName, $uniquePart ) {
-					return new ItemId( EntityId::joinSerialization( [ $repositoryName, '', 'Q' . $uniquePart ] ) );
+					return ItemId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
 				},
 			] ),
 			[ $itemId ],

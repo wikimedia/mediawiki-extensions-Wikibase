@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Tests\Store\Sql;
 
 use MWException;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -133,10 +132,10 @@ class TermSqlIndexTest extends TermIndexTest {
 			new StringNormalizer(),
 			new EntityIdComposer( [
 				'item' => function( $repositoryName, $uniquePart ) {
-					return new ItemId( EntityId::joinSerialization( [ $repositoryName, '', 'Q' . $uniquePart ] ) );
+					return ItemId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
 				},
 				'property' => function( $repositoryName, $uniquePart ) {
-					return new PropertyId( EntityId::joinSerialization( [ $repositoryName, '', 'P' . $uniquePart ] ) );
+					return PropertyId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
 				},
 			] ),
 			false,
