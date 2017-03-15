@@ -53,31 +53,6 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testGetServiceMap_ReturnsArrayMappingNameOfRepositoryToServiceForThatRepository() {
-		$someServiceName = 'some-service';
-		$localService = $this->someService( 'local' );
-		$fooService = $this->someService( 'foo' );
-
-		$localContainer = $this->prophesize( RepositoryServiceContainer::class );
-		$localContainer->getService( $someServiceName )->willReturn( $localService );
-
-		$fooContainer = $this->prophesize( RepositoryServiceContainer::class );
-		$fooContainer->getService( $someServiceName )->willReturn( $fooService );
-
-		$rscFactory = $this->prophesize( RepositoryServiceContainerFactory::class );
-		$rscFactory->newContainer( '' )->willReturn( $localContainer );
-		$rscFactory->newContainer( 'foo' )->willReturn( $fooContainer );
-		$dispatchingFactory = $this->newDispatchingServiceFactory( $rscFactory->reveal() );
-
-		$serviceMap = $dispatchingFactory->getServiceMap( $someServiceName );
-
-		$expectedServiceMap = [
-			'' => $localService,
-			'foo' => $fooService,
-		];
-		$this->assertEquals( $expectedServiceMap, $serviceMap );
-	}
-
 	public function testGetEntityInfoBuilderFactory_AlwaysReturnsTheSameService() {
 		$factory = $this->createFactoryWithRepositoryContainerReturningDummyObjectFor(
 			'EntityInfoBuilderFactory',
