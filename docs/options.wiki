@@ -116,4 +116,3 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 Settings mentioned in this section are not really configuration. They are used to pass definitions of services to service locators. Wiring files should generally not be replaced with other files, neither should be their content (PHP code) editted by users, as the usual configuration.
 The way location of wiring files is defined is subject to change (see T153437).
 ;repositoryServiceWiringFiles: A list of wiring files used by RepositoryServiceContainer. Defaults to only use <code>client/includes/Store/RepositoryServiceWiring.php</code>.
-;dispatchingServiceWiringFiles: A list of wiring files used by DispatchingServiceFactory. Defaults to only use <code>client/includes/DispatchingServiceWiring.php</code>.
