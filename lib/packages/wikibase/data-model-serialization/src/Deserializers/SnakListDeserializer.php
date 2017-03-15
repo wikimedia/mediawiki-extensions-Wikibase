@@ -61,12 +61,12 @@ class SnakListDeserializer implements Deserializer {
 				foreach ( $snakArray as $snakSerialization ) {
 					/** @var Snak $snak */
 					$snak = $this->snakDeserializer->deserialize( $snakSerialization );
-					$snakList->addElement( $snak );
+					$snakList->addSnak( $snak );
 				}
 			} else {
 				/** @var Snak $snak */
 				$snak = $this->snakDeserializer->deserialize( $snakArray );
-				$snakList->addElement( $snak );
+				$snakList->addSnak( $snak );
 			}
 		}
 
