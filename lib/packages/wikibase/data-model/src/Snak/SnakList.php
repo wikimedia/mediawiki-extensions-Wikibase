@@ -126,11 +126,11 @@ class SnakList extends HashArray implements Comparable, Hashable {
 		}
 
 		return $target instanceof self
-		&& $this->getHash() === $target->getHash();
+			&& $this->getHash() === $target->getHash();
 	}
 
 	/**
-	 * @see HashArray::getHash
+	 * @see Hashable::getHash
 	 *
 	 * The hash is purely value based. Order of the elements in the array is not held into account.
 	 *
