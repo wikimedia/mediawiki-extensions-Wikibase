@@ -37,7 +37,7 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
 		);
 
-		return $serializerFactory->newEntitySerializer();
+		return $serializerFactory->newItemSerializer();
 	}
 
 	public function testBuildConfigItem() {

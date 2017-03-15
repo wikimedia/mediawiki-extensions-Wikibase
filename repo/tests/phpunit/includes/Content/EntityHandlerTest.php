@@ -384,7 +384,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 
 		// make new style blob
 		$newSerializerFactory = new SerializerFactory( new DataValueSerializer() );
-		$newSerializer = $newSerializerFactory->newEntitySerializer();
+		$newSerializer = $newSerializerFactory->newItemSerializer();
 		$newBlob = json_encode( $newSerializer->serialize( $entity ) );
 
 		return array(
