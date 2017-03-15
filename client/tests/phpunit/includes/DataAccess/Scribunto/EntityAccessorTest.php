@@ -256,7 +256,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 						'qualifiers' => array(
 							'P65' => array(
 								1 => array(
-									'hash' => 'e95e866e7fa1c18bd06dae9b712cb99545107eb8',
+									'hash' => '3ea0f5404dd4e631780b3386d17a15a583e499a6',
 									'snaktype' => 'value',
 									'property' => 'P65',
 									'datavalue' => array(
@@ -266,7 +266,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 									'datatype' => 'structured-cat',
 								),
 								2 => array(
-									'hash' => '210b00274bf03247a89de918f15b12142ebf9e56',
+									'hash' => 'aa9a5f05e20d7fa5cda7d98371e44c0bdd5de35e',
 									'snaktype' => 'somevalue',
 									'property' => 'P65',
 									'datatype' => 'structured-cat',
@@ -279,7 +279,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 						),
 						'references' => array(
 							1 => array(
-								'hash' => 'bdc5f7185904d6d3219e13b7443571dda8c4bee8',
+								'hash' => '8445204eb74e636cb53687e2f947c268d5186075',
 								'snaks' => array(
 									'P65' => array(
 										1 => array(
