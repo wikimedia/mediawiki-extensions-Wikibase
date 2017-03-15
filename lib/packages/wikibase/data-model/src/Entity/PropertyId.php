@@ -67,6 +67,8 @@ class PropertyId extends EntityId implements Int32EntityId {
 	/**
 	 * @see Serializable::serialize
 	 *
+	 * @since 7.0 serialization format changed in an incompatible way
+	 *
 	 * @return string
 	 */
 	public function serialize() {
@@ -105,6 +107,8 @@ class PropertyId extends EntityId implements Int32EntityId {
 
 	/**
 	 * CAUTION: Use the full string serialization whenever you can and avoid using numeric IDs.
+	 *
+	 * @since 7.0
 	 *
 	 * @param string $repositoryName
 	 * @param int|float|string $numericId

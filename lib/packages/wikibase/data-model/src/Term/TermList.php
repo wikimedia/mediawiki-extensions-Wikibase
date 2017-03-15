@@ -190,7 +190,7 @@ class TermList implements Countable, IteratorAggregate, Comparable {
 	/**
 	 * Removes all terms from this list.
 	 *
-	 * @since 6.0
+	 * @since 7.0
 	 */
 	public function clear() {
 		$this->terms = [];

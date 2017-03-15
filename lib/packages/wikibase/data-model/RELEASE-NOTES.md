@@ -1,21 +1,52 @@
 # Wikibase DataModel release notes
 
-## Version 7.0.0 (dev)
+## Version 7.0.0 (2017-03-15)
 
-* Removed `FingerprintHolder`
+This release adds support for custom entity types to `EntityIdValue`, and thus changes the hashes of
+snaks, qualifiers, and references.
+
+* Changed the internal `serialize()` format of several `EntityId` related classes. In all cases
+  `unserialize()` still supports the previous format.
+	* Serialization of `SnakObject` (includes `PropertyNoValueSnak` and `PropertySomeValueSnak`)
+	  does not use numeric IDs any more
+	* Serialization of `PropertyValueSnak` (includes `DerivedPropertyValueSnak`) does not use
+	  numeric IDs any more
+	* Serialization of `EntityIdValue` does not use numeric IDs any more
+	* `EntityIdValue` can now serialize and unserialize `EntityId`s other than `ItemId` and
+	  `PropertyId`
+	* Minimized serialization of `ItemId` and `PropertyId` to not include the entity type any more
+
+#### Other breaking changes
+
+* Removed `FingerprintHolder`. Use `TermList::clear` and `AliasGroupList::clear` instead. `Item` and
+  `Property` also still implement `setFingerprint`.
 * Removed class aliases deprecated since 3.0:
 	* `Wikibase\DataModel\Claim\Claim`
 	* `Wikibase\DataModel\Claim\ClaimGuid`
 	* `Wikibase\DataModel\StatementListProvider`
+* Added a `SnakList` constructor that is not compatible with the `ArrayList` constructor any more,
+  and does not accept null any more.
+* Removed `HashArray::equals`, and `HashArray` does not implement `Comparable` any more
+* Removed `HashArray::getHash`, and `HashArray` does not implement `Hashable` any more
 * Removed `HashArray::rebuildIndices`
 * Removed `HashArray::indicesAreUpToDate`
 * Removed `HashArray::removeDuplicates`
 * Removed `$acceptDuplicates` feature from `HashArray`
+
+#### Additions
+
 * Added `clear` to `TermList`, `AliasGroupList` and `StatementList`
+* Added `newFromRepositoryAndNumber` to `ItemId` and `PropertyId`
+
+#### Other changes
+
+* Fixed `ReferenceList::addReference` sometimes moving existing references around
+* Fixed exceptions in `DispatchingEntityIdParser` and `ItemIdParser` not forwarding the previous
+  exception
 
 ## Version 6.3.1 (2016-11-30)
 
-* `ItemId::getNumericId` and `PropertyId::getNumericId` no longer throw exceptions for foreign ids
+* `ItemId::getNumericId` and `PropertyId::getNumericId` no longer throw exceptions for foreign IDs
 
 ## Version 6.3.0 (2016-11-03)
 

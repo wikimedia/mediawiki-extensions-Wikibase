@@ -344,7 +344,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	/**
 	 * Removes all statements from this list.
 	 *
-	 * @since 6.0
+	 * @since 7.0
 	 */
 	public function clear() {
 		$this->statements = [];

@@ -207,7 +207,7 @@ class AliasGroupList implements Countable, IteratorAggregate {
 	/**
 	 * Removes all alias groups from this list.
 	 *
-	 * @since 6.0
+	 * @since 7.0
 	 */
 	public function clear() {
 		$this->groups = [];

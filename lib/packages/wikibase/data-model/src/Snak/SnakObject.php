@@ -97,7 +97,7 @@ abstract class SnakObject implements Snak {
 	/**
 	 * @see Serializable::serialize
 	 *
-	 * @since 7.0
+	 * @since 7.0 serialization format changed in an incompatible way
 	 *
 	 * @return string
 	 */
