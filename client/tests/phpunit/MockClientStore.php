@@ -9,13 +9,13 @@ use Wikibase\Client\Usage\NullUsageTracker;
 use Wikibase\ClientStore;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\Edrsf\PropertyInfoLookup;
+use Wikibase\Edrsf\TermIndex;
 use Wikibase\Lib\Tests\MockPropertyLabelResolver;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikibase\Lib\Tests\Store\MockTermIndex;
 use Wikibase\Store\EntityIdLookup;
-use Wikibase\TermIndex;
 
 /**
  * (Incomplete) ClientStore mock
@@ -192,7 +192,7 @@ class MockClientStore implements ClientStore {
 	}
 
 	/**
-	 * @param PropertyInfoLookup $propertyInfoLookup
+	 * @param \Wikibase\Edrsf\PropertyInfoLookup $propertyInfoLookup
 	 */
 	public function setPropertyInfoLookup( PropertyInfoLookup $propertyInfoLookup ) {
 		self::$propertyInfoLookup = $propertyInfoLookup;

@@ -7,10 +7,10 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityRevision;
-use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
-use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
+use Wikibase\Edrsf\EntityRevision;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\PrefetchingWikiPageEntityMetaDataAccessor;
+use Wikibase\Edrsf\WikiPageEntityMetaDataAccessor;
 
 /**
  * @covers Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor
@@ -24,7 +24,7 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_TestCase {
 
 	public function testPrefetch() {
-		$fromSlave = EntityRevisionLookup::LATEST_FROM_SLAVE;
+		$fromSlave = \Wikibase\Edrsf\EntityRevisionLookup::LATEST_FROM_SLAVE;
 		$q1 = new ItemId( 'Q1' );
 		$q2 = new ItemId( 'Q2' );
 		$q3 = new ItemId( 'Q3' );
@@ -139,7 +139,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 		$q5 = new ItemId( 'Q5' );
 
 		$fromMaster = EntityRevisionLookup::LATEST_FROM_MASTER;
-		$fromSlave = EntityRevisionLookup::LATEST_FROM_SLAVE;
+		$fromSlave = \Wikibase\Edrsf\EntityRevisionLookup::LATEST_FROM_SLAVE;
 
 		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->exactly( 3 ) )

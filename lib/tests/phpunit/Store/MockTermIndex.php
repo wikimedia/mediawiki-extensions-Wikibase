@@ -6,10 +6,10 @@ use Exception;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Edrsf\TermIndex;
+use Wikibase\Edrsf\TermIndexEntry;
+use Wikibase\Edrsf\TermIndexSearchCriteria;
 use Wikibase\Lib\Store\LabelConflictFinder;
-use Wikibase\Lib\Store\TermIndexSearchCriteria;
-use Wikibase\TermIndex;
-use Wikibase\TermIndexEntry;
 
 /**
  * Mock implementation of TermIndex.
@@ -133,7 +133,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 
 			foreach ( $texts as $text ) {
 				foreach ( $types as $type ) {
-					$terms[] = new TermIndexSearchCriteria( array(
+					$terms[] = new \Wikibase\Edrsf\TermIndexSearchCriteria( array(
 						'termText' => $text,
 						'termLanguage' => $lang,
 						'termType' => $type,
@@ -279,7 +279,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 * @param string|string[]|null $entityType
 	 * @param array $options
 	 *
-	 * @return TermIndexEntry[]
+	 * @return \Wikibase\Edrsf\TermIndexEntry[]
 	 */
 	public function getMatchingTerms(
 		array $criteria,
@@ -315,7 +315,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 * is returned per EntityId. This is the first term.
 	 * Weighting does not affect the order of return by this method.
 	 *
-	 * @param TermIndexSearchCriteria[] $criteria
+	 * @param \Wikibase\Edrsf\TermIndexSearchCriteria[] $criteria
 	 * @param string|string[]|null $termType
 	 * @param string|string[]|null $entityType
 	 * @param array $options
@@ -385,7 +385,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 
 	/**
 	 * @param TermIndexEntry $term
-	 * @param TermIndexSearchCriteria[] $templates
+	 * @param \Wikibase\Edrsf\TermIndexSearchCriteria[] $templates
 	 * @param array $options
 	 *
 	 * @return bool

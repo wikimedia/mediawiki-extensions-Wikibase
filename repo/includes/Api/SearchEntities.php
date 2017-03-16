@@ -6,8 +6,8 @@ use ApiBase;
 use ApiMain;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\Edrsf\TermSearchResult;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**

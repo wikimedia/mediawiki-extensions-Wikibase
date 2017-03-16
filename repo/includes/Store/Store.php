@@ -5,18 +5,17 @@ namespace Wikibase;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\PropertyInfoLookup;
+use Wikibase\Edrsf\PropertyInfoStore;
+use Wikibase\Edrsf\TermIndex;
 use Wikibase\Lib\Store\EntityChangeLookup;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\LabelConflictFinder;
-use Wikibase\Lib\Store\PropertyInfoLookup;
-use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Repo\Store\ChangeStore;
-use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\EntitiesWithoutTermFinder;
+use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 
@@ -105,12 +104,12 @@ interface Store {
 	 * Returns an EntityStoreWatcher that should be notified of changes to
 	 * entities, in order to keep any caches updated.
 	 *
-	 * @return EntityStoreWatcher
+	 * @return \Wikibase\Edrsf\EntityStoreWatcher
 	 */
 	public function getEntityStoreWatcher();
 
 	/**
-	 * @return EntityInfoBuilderFactory
+	 * @return \Wikibase\Edrsf\EntityInfoBuilderFactory
 	 */
 	public function getEntityInfoBuilderFactory();
 

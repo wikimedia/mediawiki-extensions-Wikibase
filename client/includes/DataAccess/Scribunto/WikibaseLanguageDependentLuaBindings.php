@@ -5,9 +5,9 @@ namespace Wikibase\Client\DataAccess\Scribunto;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
-use Wikibase\Lib\Store\StorageException;
+use Wikibase\Edrsf\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Edrsf\StorageException;
 
 /**
  * Actual implementations of various functions to access Wikibase functionality

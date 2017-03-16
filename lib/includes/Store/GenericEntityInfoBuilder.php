@@ -4,14 +4,18 @@ namespace Wikibase\Lib\Store;
 
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Edrsf\EntityInfo;
+use Wikibase\Edrsf\EntityInfoBuilder;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\RevisionedUnresolvedRedirectException;
 
 /**
  * EntityInfoBuilder based on an EntityLookup.

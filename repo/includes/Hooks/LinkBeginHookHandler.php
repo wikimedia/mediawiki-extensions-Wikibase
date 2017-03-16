@@ -16,9 +16,9 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\Lib\Store\StorageException;
+use Wikibase\Edrsf\EntityNamespaceLookup;
+use Wikibase\Edrsf\LanguageFallbackChain;
+use Wikibase\Edrsf\StorageException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\EntityIdLookup;
 
@@ -58,7 +58,7 @@ class LinkBeginHookHandler {
 	private $entityNamespaceLookup;
 
 	/**
-	 * @var LanguageFallbackChain
+	 * @var \Wikibase\Edrsf\LanguageFallbackChain
 	 */
 	private $languageFallback;
 
@@ -133,7 +133,7 @@ class LinkBeginHookHandler {
 	 * @param EntityIdLookup $entityIdLookup
 	 * @param EntityIdParser $entityIdParser
 	 * @param TermLookup $termLookup
-	 * @param EntityNamespaceLookup $entityNamespaceLookup
+	 * @param \Wikibase\Edrsf\EntityNamespaceLookup $entityNamespaceLookup
 	 * @param LanguageFallbackChain $languageFallback
 	 * @param Language $pageLanguage
 	 * @param LinkRenderer $linkRenderer

@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Specials;
 
-use HTMLForm;
 use Html;
+use HTMLForm;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpValidationException;
@@ -11,12 +11,12 @@ use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EditEntityFactory;
-use Wikibase\EntityRevision;
+use Wikibase\Edrsf\EntityRevision;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\RevisionedUnresolvedRedirectException;
+use Wikibase\Edrsf\StorageException;
 use Wikibase\Lib\MessageException;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
@@ -32,12 +32,12 @@ use Wikibase\SummaryFormatter;
 abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 
 	/**
-	 * @var EntityRevisionLookup
+	 * @var \Wikibase\Edrsf\EntityRevisionLookup
 	 */
 	private $entityRevisionLookup;
 
 	/**
-	 * @var EntityRevision|null
+	 * @var \Wikibase\Edrsf\EntityRevision|null
 	 */
 	protected $entityRevision = null;
 
@@ -76,7 +76,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 * Override services (for testing).
 	 *
 	 * @param SummaryFormatter $summaryFormatter
-	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param \Wikibase\Edrsf\EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EditEntityFactory $editEntityFactory
 	 */

@@ -5,10 +5,10 @@ namespace Wikibase\Lib\Tests\Store;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermFallback;
-use Wikibase\LanguageFallbackChain;
+use Wikibase\Edrsf\LanguageFallbackChain;
+use Wikibase\Edrsf\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Edrsf\TermIndexEntry;
 use Wikibase\Lib\Store\EntityTermLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
-use Wikibase\TermIndexEntry;
 
 /**
  * @covers Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup

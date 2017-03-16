@@ -4,7 +4,6 @@ namespace Wikibase\Store;
 
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Store\StorageException;
 
 /**
  * Service interface for looking up EntityIds given local wiki pages.
@@ -23,7 +22,7 @@ interface EntityIdLookup {
 	 *
 	 * @param Title[] $titles
 	 *
-	 * @throws StorageException
+	 * @throws \Wikibase\Edrsf\StorageException
 	 * @return EntityId[] Entity IDs, keyed by page IDs.
 	 */
 	public function getEntityIds( array $titles );

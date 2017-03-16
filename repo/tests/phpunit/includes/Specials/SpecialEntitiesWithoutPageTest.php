@@ -4,11 +4,11 @@ namespace Wikibase\Repo\Tests\Specials;
 
 use FauxRequest;
 use SpecialPageTestBase;
+use Wikibase\Edrsf\TermIndexEntry;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Repo\Specials\SpecialEntitiesWithoutPage;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\TermIndexEntry;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialEntitiesWithoutPage

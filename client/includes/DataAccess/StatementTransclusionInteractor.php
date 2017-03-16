@@ -8,8 +8,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\StatementListProvider;
+use Wikibase\Edrsf\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 
 /**
  * Renders the main Snaks associated with a given Property on an Entity.

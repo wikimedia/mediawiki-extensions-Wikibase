@@ -17,8 +17,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\EntityAccessLimitException;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Edrsf\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 
 /**
@@ -49,7 +48,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	private $snakSerializationRenderers = [];
 
 	/**
-	 * @var LanguageFallbackChain|null
+	 * @var \Wikibase\Edrsf\LanguageFallbackChain|null
 	 */
 	private $fallbackChain = null;
 
@@ -125,7 +124,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * @return LanguageFallbackChain
+	 * @return \Wikibase\Edrsf\LanguageFallbackChain
 	 */
 	private function getLanguageFallbackChain() {
 		if ( $this->fallbackChain === null ) {

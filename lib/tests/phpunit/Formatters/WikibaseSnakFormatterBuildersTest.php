@@ -11,11 +11,11 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\Edrsf\PropertyInfoLookup;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
-use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 
 /**
  * @covers Wikibase\Lib\WikibaseSnakFormatterBuilders
