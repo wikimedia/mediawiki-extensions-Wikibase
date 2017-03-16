@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_ca35c9f4",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-16T17:32:47Z",
+      "side": 1,
+      "message": "That\u0027s a bit misleading, that\u0027s not what a base URI would typically look like. I\u0027d suggest \u0027http://acme.test/concept/\u0027",
+      "revId": "e42861142bafc083c461b6b56dbd31f3de85271a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_ca4e299b",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-16T17:32:47Z",
+      "side": 1,
+      "message": "technically, uris don\u0027t have protocols, they have \"schemas\". Which is the protocol when you red the uri as a url. But whatever ;)",
+      "revId": "e42861142bafc083c461b6b56dbd31f3de85271a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_ea53e541",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-16T17:32:47Z",
+      "side": 1,
+      "message": "long line",
+      "revId": "e42861142bafc083c461b6b56dbd31f3de85271a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
