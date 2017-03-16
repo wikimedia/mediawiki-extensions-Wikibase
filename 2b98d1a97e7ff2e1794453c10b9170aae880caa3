@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_ca86296a",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-16T15:31:13Z",
+      "side": 1,
+      "message": "Oh, you meant changing the constructor of the SiteLinksRdfBuilder. I thought you meant just changing it here. I agree we should change that. Let\u0027s do it in a followup",
+      "parentUuid": "8e46e3ee_0a48915f",
+      "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_8471f8df",
         "filename": "repo/WikibaseRepo.entitytypes.php",
         "patchSetId": 1
