@@ -28,7 +28,7 @@
 	},
 	"require": {
 		"php": ">=5.5.0",
-		"wikibase/data-model": "~6.0|~5.0|~4.2",
+		"wikibase/data-model": "~7.0|~6.0|~5.0|~4.2",
 		"serialization/serialization": "~3.1",
 		"data-values/serialization": "~1.0"
 	},
@@ -53,7 +53,7 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-master": "2.3.x-dev"
+			"dev-master": "2.4.x-dev"
 		}
 	},
 	"scripts": {
