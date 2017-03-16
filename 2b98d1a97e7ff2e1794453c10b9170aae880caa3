@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_df3a6de4",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-16T15:21:13Z",
+      "side": 1,
+      "message": "I actively checked for that. It\u0027s not possible.",
+      "parentUuid": "8e46e3ee_1fec55b6",
+      "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_8471f8df",
         "filename": "repo/WikibaseRepo.entitytypes.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2017-03-16T14:49:42Z",
       "side": 1,
       "message": "else branch not really needed, can be simply omitted.",
+      "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_8a058115",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-16T15:21:13Z",
+      "side": 1,
+      "message": "It makes the EntityRdfBuilderFactory to fail (the post condition) because it says the callback isn\u0027t returning an instance of EntityRdfBuilder. I can change to return NullEntityRdfBuilder only (and cut the else part) if that\u0027s what you mean.",
+      "parentUuid": "8e46e3ee_8471f8df",
       "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
