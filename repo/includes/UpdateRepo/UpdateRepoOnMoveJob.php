@@ -8,7 +8,7 @@ use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\EditEntityFactory;
-use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Edrsf\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;

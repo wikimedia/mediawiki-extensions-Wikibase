@@ -6,7 +6,7 @@ use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\Lib\Interactors\TermSearchResult;
+use Wikibase\Edrsf\TermSearchResult;
 
 /**
  * @covers Wikibase\Lib\Interactors\TermSearchResult

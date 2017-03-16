@@ -7,13 +7,13 @@ use InvalidArgumentException;
 use SpecialPageTestBase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Edrsf\ConfigurableTermSearchInteractor;
+use Wikibase\Edrsf\TermIndexEntry;
+use Wikibase\Edrsf\TermSearchOptions;
 use Wikibase\ItemDisambiguation;
-use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
-use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Repo\Specials\SpecialItemDisambiguation;
-use Wikibase\TermIndexEntry;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialItemDisambiguation

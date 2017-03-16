@@ -32,22 +32,22 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\EditEntityFactory;
+use Wikibase\Edrsf\EntityContentDataCodec;
+use Wikibase\Edrsf\EntityNamespaceLookup;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\EntityStoreWatcher;
+use Wikibase\Edrsf\LanguageFallbackChainFactory;
+use Wikibase\Edrsf\RepositoryDefinitions;
+use Wikibase\Edrsf\TermIndexSearchInteractor;
 use Wikibase\EntityFactory;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
-use Wikibase\Lib\RepositoryDefinitions;
-use Wikibase\Lib\Store\EntityContentDataCodec;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
@@ -76,8 +76,8 @@ use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
-use Wikibase\Store\EntityIdLookup;
 use Wikibase\Store;
+use Wikibase\Store\EntityIdLookup;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
 
@@ -527,7 +527,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	 * @return WikibaseRepo
 	 */
 	private function getWikibaseRepo( $entityTypeDefinitions = array() ) {
-		/** @var RepositoryDefinitions $repositoryDefinitions */
+		/** @var \Wikibase\Edrsf\RepositoryDefinitions $repositoryDefinitions */
 		$repositoryDefinitions = $this->getMockBuilder( RepositoryDefinitions::class )
 			->disableOriginalConstructor()
 			->getMock();

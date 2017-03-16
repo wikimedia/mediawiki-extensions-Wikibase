@@ -8,9 +8,9 @@ use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Edrsf\EntityInfoBuilderFactory;
+use Wikibase\Edrsf\LanguageFallbackChain;
+use Wikibase\Edrsf\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\MediaWikiLocalizedTextProvider;
@@ -33,7 +33,7 @@ class EntityParserOutputGeneratorFactory {
 	private $entityViewFactory;
 
 	/**
-	 * @var EntityInfoBuilderFactory
+	 * @var \Wikibase\Edrsf\EntityInfoBuilderFactory
 	 */
 	private $entityInfoBuilderFactory;
 
@@ -85,9 +85,9 @@ class EntityParserOutputGeneratorFactory {
 
 	/**
 	 * @param DispatchingEntityViewFactory $entityViewFactory
-	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
+	 * @param \Wikibase\Edrsf\EntityInfoBuilderFactory $entityInfoBuilderFactory
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
+	 * @param \Wikibase\Edrsf\LanguageFallbackChainFactory $languageFallbackChainFactory
 	 * @param TemplateFactory $templateFactory
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
@@ -162,7 +162,7 @@ class EntityParserOutputGeneratorFactory {
 	/**
 	 * @param Language $language
 	 *
-	 * @return LanguageFallbackChain
+	 * @return \Wikibase\Edrsf\LanguageFallbackChain
 	 */
 	private function getLanguageFallbackChain( Language $language ) {
 		// Language fallback must depend ONLY on the target language,

@@ -17,9 +17,11 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Lib\EntityIdComposer;
+use Wikibase\Edrsf\EntityIdComposer;
+use Wikibase\Edrsf\TermIndex;
+use Wikibase\Edrsf\TermIndexEntry;
+use Wikibase\Edrsf\TermIndexSearchCriteria;
 use Wikibase\Lib\Store\LabelConflictFinder;
-use Wikibase\Lib\Store\TermIndexSearchCriteria;
 
 /**
  * Term lookup cache.
@@ -106,8 +108,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$newTerms = $this->getEntityTerms( $entity );
 		$oldTerms = $this->getTermsOfEntity( $entityId );
 
-		$termsToInsert = array_udiff( $newTerms, $oldTerms, 'Wikibase\TermIndexEntry::compare' );
-		$termsToDelete = array_udiff( $oldTerms, $newTerms, 'Wikibase\TermIndexEntry::compare' );
+		$termsToInsert = array_udiff( $newTerms, $oldTerms, TermIndexEntry::class . '::compare' );
+		$termsToDelete = array_udiff( $oldTerms, $newTerms, TermIndexEntry::class . '::compare' );
 
 		if ( !$termsToInsert && !$termsToDelete ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ': terms did not change, returning.' );
@@ -712,7 +714,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 	/**
 	 * @param Database $db
-	 * @param TermIndexSearchCriteria $mask
+	 * @param \Wikibase\Edrsf\TermIndexSearchCriteria $mask
 	 * @param string|string[]|null $termType
 	 * @param string|string[]|null $entityType
 	 * @param array $options

@@ -4,12 +4,12 @@ namespace Wikibase\Repo;
 
 use DataTypes\DataTypeFactory;
 use InvalidArgumentException;
+use User;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\StorageException;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\StorageException;
-use User;
 
 /**
  * Class for changing a property's data type.
@@ -26,7 +26,7 @@ class PropertyDataTypeChanger {
 	private $entityStore;
 
 	/**
-	 * @var EntityRevisionLookup
+	 * @var \Wikibase\Edrsf\EntityRevisionLookup
 	 */
 	private $entityRevisionLookup;
 
@@ -36,7 +36,7 @@ class PropertyDataTypeChanger {
 	private $dataTypeFactory;
 
 	/**
-	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param \Wikibase\Edrsf\EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityStore $entityStore
 	 * @param DataTypeFactory $dataTypeFactory
 	 */
@@ -56,7 +56,7 @@ class PropertyDataTypeChanger {
 	 * @param string $dataTypeId
 	 *
 	 * @throws InvalidArgumentException
-	 * @throws StorageException
+	 * @throws \Wikibase\Edrsf\StorageException
 	 */
 	public function changeDataType( PropertyId $propertyId, User $user, $dataTypeId ) {
 		$entityRevision = $this->entityRevisionLookup->getEntityRevision(

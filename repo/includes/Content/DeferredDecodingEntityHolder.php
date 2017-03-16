@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use RuntimeException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Edrsf\EntityContentDataCodec;
 
 /**
  * EntityHolder implementing deferred deserialization.
@@ -23,7 +23,7 @@ class DeferredDecodingEntityHolder implements EntityHolder {
 	private $entity = null;
 
 	/**
-	 * @var EntityContentDataCodec
+	 * @var \Wikibase\Edrsf\EntityContentDataCodec
 	 */
 	private $codec;
 

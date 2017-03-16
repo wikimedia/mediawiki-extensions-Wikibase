@@ -7,7 +7,7 @@ use PHPUnit_Framework_TestCase;
 use UnexpectedValueException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\EntityIdComposer;
+use Wikibase\Edrsf\EntityIdComposer;
 
 /**
  * @covers Wikibase\Lib\EntityIdComposer

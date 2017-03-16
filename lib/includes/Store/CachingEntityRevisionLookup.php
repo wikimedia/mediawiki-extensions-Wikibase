@@ -5,7 +5,10 @@ namespace Wikibase\Lib\Store;
 use BagOStuff;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
-use Wikibase\EntityRevision;
+use Wikibase\Edrsf\EntityRevision;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\EntityStoreWatcher;
+use Wikibase\Edrsf\StorageException;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -147,7 +150,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 * @param string $mode
 	 *
 	 * @throws StorageException
-	 * @return EntityRevision|null
+	 * @return \Wikibase\Edrsf\EntityRevision|null
 	 */
 	private function fetchEntityRevision( EntityId $entityId, $revisionId, $mode ) {
 		$key = $this->getCacheKey( $entityId );
@@ -197,7 +200,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	/**
 	 * Notifies the cache that an Entity was created or updated.
 	 *
-	 * @param EntityRevision $entityRevision
+	 * @param \Wikibase\Edrsf\EntityRevision $entityRevision
 	 */
 	public function entityUpdated( EntityRevision $entityRevision ) {
 		$key = $this->getCacheKey( $entityRevision->getEntity()->getId() );

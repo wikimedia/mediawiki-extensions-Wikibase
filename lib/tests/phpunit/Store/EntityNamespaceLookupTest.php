@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use PHPUnit_Framework_TestCase;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
 
 /**
  * @covers Wikibase\Lib\Store\EntityNamespaceLookup
@@ -18,7 +17,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 class EntityNamespaceLookupTest extends PHPUnit_Framework_TestCase {
 
 	private function newInstance() {
-		return new EntityNamespaceLookup( [
+		return new \Wikibase\Edrsf\EntityNamespaceLookup( [
 			'item' => 120,
 			'property' => 122,
 		] );

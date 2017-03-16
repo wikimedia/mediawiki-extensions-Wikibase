@@ -4,10 +4,10 @@ namespace Wikibase\Repo\ParserOutput;
 
 use OutOfBoundsException;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\LanguageFallbackChain;
+use Wikibase\Edrsf\LanguageFallbackChain;
 use Wikibase\View\EditSectionGenerator;
-use Wikibase\View\EntityView;
 use Wikibase\View\EntityTermsView;
+use Wikibase\View\EntityView;
 use Wikimedia\Assert\Assert;
 
 /**

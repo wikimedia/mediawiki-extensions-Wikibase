@@ -6,6 +6,8 @@ use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
+use Wikibase\Edrsf\EntityInfo;
+use Wikibase\Edrsf\EntityInfoBuilder;
 
 /**
  * TermLookup based on plain array data structures.

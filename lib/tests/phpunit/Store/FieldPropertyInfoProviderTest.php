@@ -4,8 +4,8 @@ namespace Wikibase\Lib\Tests\Store;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Edrsf\PropertyInfoLookup;
 use Wikibase\Lib\FieldPropertyInfoProvider;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
  * @covers Wikibase\Lib\FieldPropertyInfoProvider

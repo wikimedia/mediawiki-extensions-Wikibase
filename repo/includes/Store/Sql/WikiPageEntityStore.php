@@ -12,12 +12,12 @@ use WatchAction;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
+use Wikibase\Edrsf\EntityRevision;
+use Wikibase\Edrsf\EntityStoreWatcher;
+use Wikibase\Edrsf\StorageException;
 use Wikibase\EntityContent;
-use Wikibase\EntityRevision;
 use Wikibase\IdGenerator;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\GenericEventDispatcher;
 use WikiPage;
@@ -58,7 +58,7 @@ class WikiPageEntityStore implements EntityStore {
 		$this->contentFactory = $contentFactory;
 		$this->idGenerator = $idGenerator;
 
-		$this->dispatcher = new GenericEventDispatcher( EntityStoreWatcher::class );
+		$this->dispatcher = new GenericEventDispatcher( \Wikibase\Edrsf\EntityStoreWatcher::class );
 	}
 
 	/**
@@ -88,7 +88,7 @@ class WikiPageEntityStore implements EntityStore {
 		$handler = $this->contentFactory->getContentHandlerForType( $type );
 
 		if ( !$handler->allowAutomaticIds() ) {
-			throw new StorageException( $type . ' entities do not support automatic IDs!' );
+			throw new \Wikibase\Edrsf\StorageException( $type . ' entities do not support automatic IDs!' );
 		}
 
 		// TODO: move this into EntityHandler!
@@ -104,7 +104,7 @@ class WikiPageEntityStore implements EntityStore {
 	 *
 	 * @param EntityId $id
 	 *
-	 * @throws StorageException
+	 * @throws \Wikibase\Edrsf\StorageException
 	 * @return bool
 	 */
 	public function canCreateWithCustomId( EntityId $id ) {
@@ -122,9 +122,9 @@ class WikiPageEntityStore implements EntityStore {
 	 * Registers a watcher that will be notified whenever an entity is
 	 * updated or deleted.
 	 *
-	 * @param EntityStoreWatcher $watcher
+	 * @param \Wikibase\Edrsf\EntityStoreWatcher $watcher
 	 */
-	public function registerWatcher( EntityStoreWatcher $watcher ) {
+	public function registerWatcher( \Wikibase\Edrsf\EntityStoreWatcher $watcher ) {
 		$this->dispatcher->registerWatcher( $watcher );
 	}
 
@@ -142,7 +142,7 @@ class WikiPageEntityStore implements EntityStore {
 
 		$title = $this->getTitleForEntity( $entityId );
 		if ( !$title ) {
-			throw new StorageException( 'Entity could not be mapped to a page title!' );
+			throw new \Wikibase\Edrsf\StorageException( 'Entity could not be mapped to a page title!' );
 		}
 
 		return new WikiPage( $title );
@@ -160,7 +160,7 @@ class WikiPageEntityStore implements EntityStore {
 	 *
 	 * @throws InvalidArgumentException
 	 * @throws StorageException
-	 * @return EntityRevision
+	 * @return \Wikibase\Edrsf\EntityRevision
 	 */
 	public function saveEntity(
 		EntityDocument $entity,
@@ -204,7 +204,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @param int|bool $baseRevId
 	 *
 	 * @throws InvalidArgumentException
-	 * @throws StorageException
+	 * @throws \Wikibase\Edrsf\StorageException
 	 * @return int The new revision ID
 	 */
 	public function saveRedirect(
@@ -247,7 +247,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @param int $flags Flags as used by WikiPage::doEditContent, use EDIT_XXX constants.
 	 * @param int|bool $baseRevId
 	 *
-	 * @throws StorageException
+	 * @throws \Wikibase\Edrsf\StorageException
 	 * @return Revision The new revision (or the latest one, in case of a null edit).
 	 */
 	private function saveEntityContent(
@@ -286,7 +286,7 @@ class WikiPageEntityStore implements EntityStore {
 		);
 
 		if ( !$status->isOK() ) {
-			throw new StorageException( $status );
+			throw new \Wikibase\Edrsf\StorageException( $status );
 		}
 
 		// As per convention defined by WikiPage, the new revision is in the status value:
@@ -330,7 +330,7 @@ class WikiPageEntityStore implements EntityStore {
 		$ok = $page->doDeleteArticle( $reason, false, 0, true, $error, $user );
 
 		if ( !$ok ) {
-			throw new StorageException(
+			throw new \Wikibase\Edrsf\StorageException(
 				'Failed to delete ' . $entityId->getSerialization(). ': ' . $error
 			);
 		}
