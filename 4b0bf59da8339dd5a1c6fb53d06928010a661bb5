@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_456f6a8f",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-16T18:19:36Z",
+      "side": 1,
+      "message": "If it is supposed to be URL, can you use URLs in examples?",
+      "range": {
+        "startLine": 732,
+        "startChar": 10,
+        "endLine": 732,
+        "endChar": 19
+      },
+      "revId": "4b0bf59da8339dd5a1c6fb53d06928010a661bb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
