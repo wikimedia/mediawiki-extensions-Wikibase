@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_1fec55b6",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-16T14:49:42Z",
+      "side": 1,
+      "message": "I know it is copied over but DedupeBag could also be injected in SiteLinksRdfBuilder\u0027s constructor, couldn\u0027t it? But this should be in a separate patch if at all.",
+      "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_8471f8df",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-16T14:49:42Z",
+      "side": 1,
+      "message": "else branch not really needed, can be simply omitted.",
+      "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_7ffa3975",
+        "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-16T14:49:42Z",
+      "side": 1,
+      "message": "Missing from the @param docs above.\n\nAdding SiteList to argument list is not very nice as it is only relevant for site-specific builder, or maybe item builder. But I guess there no really nice way around it.\nOr would we prefer to call WikibaseRepo::getSiteLookup()-\u003egetSites() in item\u0027s entity type definition file?",
+      "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_dfdeed13",
+        "filename": "repo/includes/Rdf/NullEntityRdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-16T14:49:42Z",
+      "side": 1,
+      "message": "Minor: Wouldn\u0027t we want this to be in Wikibase\\Repo\\Rdf?",
+      "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
