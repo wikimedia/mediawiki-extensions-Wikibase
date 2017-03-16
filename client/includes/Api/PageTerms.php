@@ -8,9 +8,9 @@ use ApiResult;
 use InvalidArgumentException;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Edrsf\TermIndex;
+use Wikibase\Edrsf\TermIndexEntry;
 use Wikibase\Store\EntityIdLookup;
-use Wikibase\TermIndex;
-use Wikibase\TermIndexEntry;
 
 /**
  * Provides wikibase terms (labels, descriptions, aliases, etc.) for local pages.
@@ -26,7 +26,7 @@ class PageTerms extends ApiQueryBase {
 
 	/**
 	 * @todo: Use LabelDescriptionLookup for labels/descriptions, so we can apply language fallback.
-	 * @var TermIndex
+	 * @var \Wikibase\Edrsf\TermIndex
 	 */
 	private $termIndex;
 
@@ -246,7 +246,7 @@ class PageTerms extends ApiQueryBase {
 				self::PARAM_TYPE => 'integer',
 			),
 			'terms' => array(
-				// XXX: Ought to get this list from Wikibase\TermIndexEntry, its setType() also hardcodes it.
+				// XXX: Ought to get this list from Wikibase\Edrsf\TermIndexEntry, its setType() also hardcodes it.
 				self::PARAM_TYPE => array(
 					TermIndexEntry::TYPE_ALIAS,
 					TermIndexEntry::TYPE_DESCRIPTION,

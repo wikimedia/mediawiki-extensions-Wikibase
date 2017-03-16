@@ -9,10 +9,10 @@ use PHPUnit_Framework_TestCase;
 use User;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\EntityRevision;
-use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Edrsf\EntityRevision;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\StorageException;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\PropertyDataTypeChanger;
 
 /**

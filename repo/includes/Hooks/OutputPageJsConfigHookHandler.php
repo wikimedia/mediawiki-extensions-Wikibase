@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Hooks;
 
 use OutputPage;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Edrsf\EntityNamespaceLookup;
 use Wikibase\OutputPageJsConfigBuilder;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -15,7 +15,7 @@ use Wikibase\Repo\WikibaseRepo;
 class OutputPageJsConfigHookHandler {
 
 	/**
-	 * @var EntityNamespaceLookup
+	 * @var \Wikibase\Edrsf\EntityNamespaceLookup
 	 */
 	private $entityNamespaceLookup;
 
@@ -40,7 +40,7 @@ class OutputPageJsConfigHookHandler {
 	private $badgeItems;
 
 	/**
-	 * @param EntityNamespaceLookup $entityNamespaceLookup
+	 * @param \Wikibase\Edrsf\EntityNamespaceLookup $entityNamespaceLookup
 	 * @param string $dataRightsUrl
 	 * @param string $dataRightsText
 	 * @param string[] $badgeItems

@@ -31,7 +31,6 @@ use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
-use Wikibase\Client\EntityDataRetrievalServiceFactory;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
@@ -54,47 +53,40 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\EditEntityFactory;
+use Wikibase\Edrsf\EntityContentDataCodec;
+use Wikibase\Edrsf\EntityDataRetrievalServiceFactory;
+use Wikibase\Edrsf\EntityIdComposer;
+use Wikibase\Edrsf\EntityNamespaceLookup;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\EntityStoreWatcher;
+use Wikibase\Edrsf\LanguageFallbackChainFactory;
+use Wikibase\Edrsf\PrefetchingTermLookup;
+use Wikibase\Edrsf\RepositoryDefinitions;
+use Wikibase\Edrsf\TermIndexSearchInteractor;
 use Wikibase\EntityFactory;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\ItemChange;
 use Wikibase\LabelDescriptionDuplicateDetector;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DifferenceContentLanguages;
-use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\EntityIdPlainLinkFormatter;
 use Wikibase\Lib\EntityIdValueFormatter;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
-use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\MediaWikiContentLanguages;
 use Wikibase\Lib\MediaWikiNumberLocalizer;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
-use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
-use Wikibase\Lib\Store\EntityContentDataCodec;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Repo\Modules\SettingsValueProvider;
-use Wikibase\Rdf\EntityRdfBuilderFactory;
-use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializerFactory;
-use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
-use Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator;
-use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
-use Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer;
-use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
-use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\UnionContentLanguages;
 use Wikibase\Lib\UnitConverter;
@@ -102,9 +94,14 @@ use Wikibase\Lib\UnitStorage;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\PropertyInfoBuilder;
+use Wikibase\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Api\ApiHelperFactory;
+use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializerFactory;
+use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
+use Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator;
+use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Content\PropertyHandler;
@@ -112,6 +109,7 @@ use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
+use Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer;
 use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
 use Wikibase\Repo\Localizer\DispatchingExceptionLocalizer;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
@@ -120,12 +118,14 @@ use Wikibase\Repo\Localizer\MessageExceptionLocalizer;
 use Wikibase\Repo\Localizer\MessageParameterFormatter;
 use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
 use Wikibase\Repo\Modules\EntityTypesConfigValueProvider;
+use Wikibase\Repo\Modules\SettingsValueProvider;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\HookChangeTransmitter;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
@@ -203,7 +203,7 @@ class WikibaseRepo {
 	private $entityIdParser = null;
 
 	/**
-	 * @var EntityIdComposer|null
+	 * @var \Wikibase\Edrsf\EntityIdComposer|null
 	 */
 	private $entityIdComposer = null;
 
@@ -502,7 +502,7 @@ class WikibaseRepo {
 	 * @param DataTypeDefinitions $dataTypeDefinitions
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 * @param RepositoryDefinitions $repositoryDefinitions
-	 * @param EntityDataRetrievalServiceFactory|null $entityDataRetrievalServiceFactory optional factory
+	 * @param \Wikibase\Edrsf\EntityDataRetrievalServiceFactory|null $entityDataRetrievalServiceFactory optional factory
 	 *        of entity data retrieval services that will be used by the Repo instead of it creating
 	 *        instances of those services itself.
 	 *        This factory could be provided in order to allow Repo make use of Dispatching services
@@ -650,7 +650,7 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return EntityStoreWatcher
+	 * @return \Wikibase\Edrsf\EntityStoreWatcher
 	 */
 	public function getEntityStoreWatcher() {
 		return $this->getStore()->getEntityStoreWatcher();
@@ -673,7 +673,7 @@ class WikibaseRepo {
 	/**
 	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
 	 *
-	 * @return EntityRevisionLookup
+	 * @return \Wikibase\Edrsf\EntityRevisionLookup
 	 */
 	public function getEntityRevisionLookup( $uncached = '' ) {
 		return $this->getStore()->getEntityRevisionLookup( $uncached );
@@ -804,7 +804,7 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return EntityIdComposer
+	 * @return \Wikibase\Edrsf\EntityIdComposer
 	 */
 	public function getEntityIdComposer() {
 		if ( $this->entityIdComposer === null ) {

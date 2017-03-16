@@ -4,18 +4,14 @@ namespace Wikibase\Client\Tests\Store;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use LogicException;
-use Wikibase\Client\Store\RepositoryServiceContainer;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParser;
-use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
-use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\PrefetchingTermLookup;
-use Wikibase\Lib\Store\PropertyInfoLookup;
-use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
-use Wikibase\TermIndex;
+use Wikibase\Edrsf\RepositoryServiceContainer;
+use Wikibase\Edrsf\TermIndex;
+use Wikibase\Edrsf\TermSearchInteractorFactory;
+use Wikibase\Edrsf\WikiPageEntityMetaDataAccessor;
 
 /**
  * @group Wikibase
@@ -37,18 +33,18 @@ class RepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 			WikibaseClient::getDefaultInstance()
 		);
 
-		$container->loadWiringFiles( [ __DIR__ . '/../../../../includes/Store/RepositoryServiceWiring.php' ] );
+		$container->loadWiringFiles( [ __DIR__ . '/../../../../../edrsf/RepositoryServiceWiring.php' ] );
 
 		return $container;
 	}
 
 	public function provideServices() {
 		return [
-			[ 'EntityInfoBuilderFactory', EntityInfoBuilderFactory::class ],
+			[ 'EntityInfoBuilderFactory', \Wikibase\Edrsf\EntityInfoBuilderFactory::class ],
 			[ 'EntityPrefetcher', EntityPrefetcher::class ],
-			[ 'EntityRevisionLookup', EntityRevisionLookup::class ],
-			[ 'PrefetchingTermLookup', PrefetchingTermLookup::class ],
-			[ 'PropertyInfoLookup', PropertyInfoLookup::class ],
+			[ 'EntityRevisionLookup', \Wikibase\Edrsf\EntityRevisionLookup::class ],
+			[ 'PrefetchingTermLookup', \Wikibase\Edrsf\PrefetchingTermLookup::class ],
+			[ 'PropertyInfoLookup', \Wikibase\Edrsf\PropertyInfoLookup::class ],
 			[ 'TermIndex', TermIndex::class ],
 			[ 'TermSearchInteractorFactory', TermSearchInteractorFactory::class ],
 			[ 'WikiPageEntityMetaDataAccessor', WikiPageEntityMetaDataAccessor::class ],

@@ -7,13 +7,13 @@ use ApiMain;
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\EntityRevision;
-use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
+use Wikibase\Edrsf\EntityRevision;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\LanguageFallbackChainFactory;
+use Wikibase\Edrsf\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StringNormalizer;
@@ -31,7 +31,7 @@ class GetEntities extends ApiBase {
 	private $stringNormalizer;
 
 	/**
-	 * @var LanguageFallbackChainFactory
+	 * @var \Wikibase\Edrsf\LanguageFallbackChainFactory
 	 */
 	private $languageFallbackChainFactory;
 
@@ -61,7 +61,7 @@ class GetEntities extends ApiBase {
 	private $resultBuilder;
 
 	/**
-	 * @var EntityRevisionLookup
+	 * @var \Wikibase\Edrsf\EntityRevisionLookup
 	 */
 	private $entityRevisionLookup;
 
@@ -74,13 +74,13 @@ class GetEntities extends ApiBase {
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param StringNormalizer $stringNormalizer
-	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
+	 * @param \Wikibase\Edrsf\LanguageFallbackChainFactory $languageFallbackChainFactory
 	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
 	 * @param EntityPrefetcher $entityPrefetcher
 	 * @param string[] $siteLinkGroups
 	 * @param ApiErrorReporter $errorReporter
 	 * @param ResultBuilder $resultBuilder
-	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param \Wikibase\Edrsf\EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityIdParser $idParser
 	 *
 	 * @see ApiBase::__construct
@@ -280,7 +280,7 @@ class GetEntities extends ApiBase {
 	 * Adds the given EntityRevision to the API result.
 	 *
 	 * @param string|null $sourceEntityId
-	 * @param EntityRevision|null $entityRevision
+	 * @param \Wikibase\Edrsf\EntityRevision|null $entityRevision
 	 * @param array $params
 	 */
 	private function handleEntity(

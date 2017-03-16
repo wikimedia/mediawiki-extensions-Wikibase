@@ -8,7 +8,7 @@ use SiteLookup;
 use ValueFormatters\NumberLocalizer;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
-use Wikibase\LanguageFallbackChain;
+use Wikibase\Edrsf\LanguageFallbackChain;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\PropertyOrderProvider;
@@ -184,7 +184,7 @@ class ViewFactory {
 	 *
 	 * @param string $languageCode UI language
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
-	 * @param LanguageFallbackChain $fallbackChain
+	 * @param \Wikibase\Edrsf\LanguageFallbackChain $fallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
 	 * @param EntityTermsView $entityTermsView
 	 *

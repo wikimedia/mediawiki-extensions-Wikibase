@@ -17,9 +17,9 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\Edrsf\StorageException;
 use Wikibase\EntityChange;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Tests\Changes\TestChanges;
 
 /**

@@ -3,19 +3,19 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiBase;
+use ApiUsageException;
 use Exception;
 use PHPUnit_Framework_MockObject_MockObject;
-use ApiUsageException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\EntityRevision;
-use Wikibase\Lib\Store\BadRevisionException;
-use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Edrsf\BadRevisionException;
+use Wikibase\Edrsf\EntityRevision;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\RevisionedUnresolvedRedirectException;
+use Wikibase\Edrsf\StorageException;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\EntityLoadingHelper;
 
@@ -50,10 +50,10 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param EntityId|null $entityId Entity ID getEntityRevision() should expect.
-	 * @param EntityRevision|null $entityRevision The EntityRevision getEntityRevision() should return.
+	 * @param \Wikibase\Edrsf\EntityRevision|null $entityRevision The EntityRevision getEntityRevision() should return.
 	 * @param Exception|null $exception The Exception getEntityRevision() should throw.
 	 *
-	 * @return EntityRevisionLookup|PHPUnit_Framework_MockObject_MockObject
+	 * @return \Wikibase\Edrsf\EntityRevisionLookup|PHPUnit_Framework_MockObject_MockObject
 	 */
 	protected function getMockEntityRevisionLookup(
 		EntityId $entityId = null,

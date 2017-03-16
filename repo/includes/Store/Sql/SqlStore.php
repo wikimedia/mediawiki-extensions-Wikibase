@@ -6,7 +6,6 @@ use DBQueryError;
 use HashBagOStuff;
 use ObjectCache;
 use Revision;
-use Wikibase\Client\EntityDataRetrievalServiceFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -14,39 +13,40 @@ use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
+use Wikibase\Edrsf\EntityContentDataCodec;
+use Wikibase\Edrsf\EntityDataRetrievalServiceFactory;
+use Wikibase\Edrsf\EntityIdComposer;
+use Wikibase\Edrsf\EntityInfoBuilderFactory;
+use Wikibase\Edrsf\EntityNamespaceLookup;
+use Wikibase\Edrsf\EntityStoreWatcher;
+use Wikibase\Edrsf\PrefetchingWikiPageEntityMetaDataAccessor;
+use Wikibase\Edrsf\PropertyInfoLookup;
+use Wikibase\Edrsf\PropertyInfoStore;
+use Wikibase\Edrsf\PropertyInfoTable;
+use Wikibase\Edrsf\SqlEntityInfoBuilderFactory;
+use Wikibase\Edrsf\TermIndex;
+use Wikibase\Edrsf\WikiPageEntityMetaDataAccessor;
+use Wikibase\Edrsf\WikiPageEntityMetaDataLookup;
+use Wikibase\Edrsf\WikiPageEntityRevisionLookup;
 use Wikibase\Lib\Changes\EntityChangeFactory;
-use Wikibase\Lib\EntityIdComposer;
-use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\CacheAwarePropertyInfoStore;
+use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\EntityChangeLookup;
-use Wikibase\Lib\Store\EntityContentDataCodec;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
-use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Lib\Store\PropertyInfoStore;
-use Wikibase\Lib\Store\Sql\PropertyInfoTable;
-use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LabelConflictFinder;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\SiteLinkTable;
-use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
-use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
-use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
-use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
-use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
-use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\EntitiesWithoutTermFinder;
+use Wikibase\Repo\Store\EntityPerPage;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Store\Sql\EntityPerPageTable;
-use Wikibase\Repo\Store\Sql\SqlEntitiesWithoutTermFinder;
 use Wikibase\Repo\Store\Sql\SqlChangeStore;
+use Wikibase\Repo\Store\Sql\SqlEntitiesWithoutTermFinder;
 use Wikibase\Repo\Store\Sql\SqlItemsWithoutSitelinksFinder;
 use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
 use Wikibase\Repo\Store\Sql\WikiPageEntityRedirectLookup;
@@ -85,12 +85,12 @@ class SqlStore implements Store {
 	private $entityIdComposer;
 
 	/**
-	 * @var EntityRevisionLookup|null
+	 * @var \Wikibase\Edrsf\EntityRevisionLookup|null
 	 */
 	private $entityRevisionLookup = null;
 
 	/**
-	 * @var EntityRevisionLookup|null
+	 * @var \Wikibase\Edrsf\EntityRevisionLookup|null
 	 */
 	private $rawEntityRevisionLookup = null;
 
@@ -105,7 +105,7 @@ class SqlStore implements Store {
 	private $entityStoreWatcher = null;
 
 	/**
-	 * @var EntityInfoBuilderFactory|null
+	 * @var \Wikibase\Edrsf\EntityInfoBuilderFactory|null
 	 */
 	private $entityInfoBuilderFactory = null;
 
@@ -115,7 +115,7 @@ class SqlStore implements Store {
 	private $propertyInfoLookup = null;
 
 	/**
-	 * @var PropertyInfoStore|null
+	 * @var \Wikibase\Edrsf\PropertyInfoStore|null
 	 */
 	private $propertyInfoStore = null;
 
@@ -150,7 +150,7 @@ class SqlStore implements Store {
 	private $entityTitleLookup;
 
 	/**
-	 * @var EntityNamespaceLookup
+	 * @var \Wikibase\Edrsf\EntityNamespaceLookup
 	 */
 	private $entityNamespaceLookup;
 
@@ -186,7 +186,7 @@ class SqlStore implements Store {
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param EntityIdLookup $entityIdLookup
 	 * @param EntityTitleStoreLookup $entityTitleLookup
-	 * @param EntityNamespaceLookup $entityNamespaceLookup
+	 * @param \Wikibase\Edrsf\EntityNamespaceLookup $entityNamespaceLookup
 	 * @param EntityDataRetrievalServiceFactory|null $entityDataRetrievalServiceFactory Optional
 	 *        service factory providing services configured for the configured repositories
 	 */
@@ -414,7 +414,7 @@ class SqlStore implements Store {
 	 *
 	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
 	 *
-	 * @return EntityRevisionLookup
+	 * @return \Wikibase\Edrsf\EntityRevisionLookup
 	 */
 	public function getEntityRevisionLookup( $uncached = '' ) {
 		if ( !$this->entityRevisionLookup ) {
@@ -432,7 +432,7 @@ class SqlStore implements Store {
 	 * Creates a strongly connected pair of EntityRevisionLookup services, the first being the
 	 * non-caching lookup, the second being the caching lookup.
 	 *
-	 * @return EntityRevisionLookup[] A two-element array with a "raw", non-caching and a caching
+	 * @return \Wikibase\Edrsf\EntityRevisionLookup[] A two-element array with a "raw", non-caching and a caching
 	 *  EntityRevisionLookup.
 	 */
 	private function newEntityRevisionLookup() {
@@ -503,7 +503,7 @@ class SqlStore implements Store {
 	/**
 	 * Creates a new EntityInfoBuilderFactory
 	 *
-	 * @return EntityInfoBuilderFactory
+	 * @return \Wikibase\Edrsf\EntityInfoBuilderFactory
 	 */
 	private function newEntityInfoBuilderFactory() {
 		if ( $this->entityDataRetrievalServiceFactory !== null ) {
@@ -531,7 +531,7 @@ class SqlStore implements Store {
 	 * Note: cache key used by the lookup should be the same as the cache key used
 	 * by CachedPropertyInfoStore.
 	 *
-	 * @return PropertyInfoLookup
+	 * @return \Wikibase\Edrsf\PropertyInfoLookup
 	 */
 	private function newPropertyInfoLookup() {
 		if ( $this->entityDataRetrievalServiceFactory !== null ) {
@@ -553,7 +553,7 @@ class SqlStore implements Store {
 	/**
 	 * @see Store::getPropertyInfoStore
 	 *
-	 * @return PropertyInfoStore
+	 * @return \Wikibase\Edrsf\PropertyInfoStore
 	 */
 	public function getPropertyInfoStore() {
 		if ( !$this->propertyInfoStore ) {
@@ -610,7 +610,7 @@ class SqlStore implements Store {
 	}
 
 	/**
-	 * @return PrefetchingWikiPageEntityMetaDataAccessor
+	 * @return \Wikibase\Edrsf\PrefetchingWikiPageEntityMetaDataAccessor
 	 */
 	public function getEntityPrefetcher() {
 		if ( $this->entityPrefetcher === null ) {

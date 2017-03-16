@@ -4,9 +4,9 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\TermIndexSearchCriteria;
+use Wikibase\Edrsf\TermIndexEntry;
+use Wikibase\Edrsf\TermIndexSearchCriteria;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\TermIndexEntry;
 use Wikibase\TermSearchKeyBuilder;
 use Wikibase\TermSqlIndex;
 

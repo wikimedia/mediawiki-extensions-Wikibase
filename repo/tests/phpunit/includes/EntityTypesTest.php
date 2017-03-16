@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\LanguageFallbackChain;
+use Wikibase\Edrsf\LanguageFallbackChain;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityTermsView;

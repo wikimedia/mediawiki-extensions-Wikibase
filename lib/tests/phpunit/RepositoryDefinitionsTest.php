@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Tests;
 
 use InvalidArgumentException;
-use Wikibase\Lib\RepositoryDefinitions;
+use Wikibase\Edrsf\RepositoryDefinitions;
 
 /**
  * @covers Wikibase\Lib\RepositoryDefinitions

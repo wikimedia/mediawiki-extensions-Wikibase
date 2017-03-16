@@ -13,13 +13,13 @@ use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\LanguageFallbackChain;
+use Wikibase\Edrsf\EntityInfo;
+use Wikibase\Edrsf\EntityInfoBuilderFactory;
+use Wikibase\Edrsf\LanguageFallbackChain;
+use Wikibase\Edrsf\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\Store\EntityInfo;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityInfoTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
 use Wikibase\Repo\MediaWikiLocalizedTextProvider;
@@ -61,7 +61,7 @@ class EntityParserOutputGenerator {
 	private $entityInfoBuilderFactory;
 
 	/**
-	 * @var LanguageFallbackChain
+	 * @var \Wikibase\Edrsf\LanguageFallbackChain
 	 */
 	private $languageFallbackChain;
 
@@ -99,8 +99,8 @@ class EntityParserOutputGenerator {
 	 * @param DispatchingEntityViewFactory $entityViewFactory
 	 * @param ParserOutputJsConfigBuilder $configBuilder
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
-	 * @param LanguageFallbackChain $languageFallbackChain
+	 * @param \Wikibase\Edrsf\EntityInfoBuilderFactory $entityInfoBuilderFactory
+	 * @param \Wikibase\Edrsf\LanguageFallbackChain $languageFallbackChain
 	 * @param TemplateFactory $templateFactory
 	 * @param LocalizedTextProvider $textProvider
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
@@ -195,7 +195,7 @@ class EntityParserOutputGenerator {
 	 *
 	 * @param ParserOutput $parserOutput
 	 *
-	 * @return EntityInfo
+	 * @return \Wikibase\Edrsf\EntityInfo
 	 */
 	private function getEntityInfo( ParserOutput $parserOutput ) {
 		/**
@@ -281,7 +281,7 @@ class EntityParserOutputGenerator {
 	/**
 	 * @param ParserOutput $parserOutput
 	 * @param EntityDocument $entity
-	 * @param EntityInfo $entityInfo
+	 * @param \Wikibase\Edrsf\EntityInfo $entityInfo
 	 */
 	private function addHtmlToParserOutput(
 		ParserOutput $parserOutput,

@@ -21,9 +21,9 @@ use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
+use Wikibase\Edrsf\StorageException;
 use Wikibase\EntityChange;
 use Wikibase\ItemChange;
-use Wikibase\Lib\Store\StorageException;
 
 /**
  * @license GPL-2.0+

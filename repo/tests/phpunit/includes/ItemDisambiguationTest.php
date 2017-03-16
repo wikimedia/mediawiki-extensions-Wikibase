@@ -6,8 +6,8 @@ use MediaWikiTestCase;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Edrsf\TermSearchResult;
 use Wikibase\ItemDisambiguation;
-use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 

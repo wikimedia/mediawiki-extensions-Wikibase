@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
-use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 
 /**
  * @covers Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory
@@ -27,14 +26,14 @@ class RepositorySpecificDataValueDeserializerFactoryTest extends \PHPUnit_Framew
 	}
 
 	public function testGetDeserializerReturnsInstanceOfDataValueDeserializer() {
-		$factory = new RepositorySpecificDataValueDeserializerFactory( $this->getDummyIdParserFactory() );
+		$factory = new \Wikibase\Edrsf\RepositorySpecificDataValueDeserializerFactory( $this->getDummyIdParserFactory() );
 
 		$this->assertInstanceOf( DataValueDeserializer::class, $factory->getDeserializer( '' ) );
 		$this->assertInstanceOf( DataValueDeserializer::class, $factory->getDeserializer( 'foo' ) );
 	}
 
 	public function testGetDeserializerReusesInstanceOverMultipleCalls() {
-		$factory = new RepositorySpecificDataValueDeserializerFactory( $this->getDummyIdParserFactory() );
+		$factory = new \Wikibase\Edrsf\RepositorySpecificDataValueDeserializerFactory( $this->getDummyIdParserFactory() );
 
 		$deserializerOne = $factory->getDeserializer( 'foo' );
 		$deserializerTwo = $factory->getDeserializer( 'foo' );
@@ -43,7 +42,7 @@ class RepositorySpecificDataValueDeserializerFactoryTest extends \PHPUnit_Framew
 	}
 
 	public function testGivenLocalRepository_getDeserializerReturnsDeserializerReturningUnchangedEntityIdValue() {
-		$factory = new RepositorySpecificDataValueDeserializerFactory(
+		$factory = new \Wikibase\Edrsf\RepositorySpecificDataValueDeserializerFactory(
 			new PrefixMappingEntityIdParserFactory( new ItemIdParser(), [] )
 		);
 
@@ -57,7 +56,7 @@ class RepositorySpecificDataValueDeserializerFactoryTest extends \PHPUnit_Framew
 	}
 
 	public function testGivenForeignRepository_getDeserializerReturnsDeserializerPrefixingTheEntityIdValue() {
-		$factory = new RepositorySpecificDataValueDeserializerFactory(
+		$factory = new \Wikibase\Edrsf\RepositorySpecificDataValueDeserializerFactory(
 			new PrefixMappingEntityIdParserFactory( new ItemIdParser(), [] )
 		);
 
@@ -71,7 +70,7 @@ class RepositorySpecificDataValueDeserializerFactoryTest extends \PHPUnit_Framew
 	}
 
 	public function testGivenLocalRepository_getDeserializerReturnsDeserializerParsingNumericEntityIdValue() {
-		$factory = new RepositorySpecificDataValueDeserializerFactory(
+		$factory = new \Wikibase\Edrsf\RepositorySpecificDataValueDeserializerFactory(
 			new PrefixMappingEntityIdParserFactory( new ItemIdParser(), [] )
 		);
 
@@ -85,7 +84,7 @@ class RepositorySpecificDataValueDeserializerFactoryTest extends \PHPUnit_Framew
 	}
 
 	public function testGivenForeignRepository_getDeserializerReturnsDeserializerThrowingExceptionOnNumericEntityIdValues() {
-		$factory = new RepositorySpecificDataValueDeserializerFactory(
+		$factory = new \Wikibase\Edrsf\RepositorySpecificDataValueDeserializerFactory(
 			new PrefixMappingEntityIdParserFactory( new ItemIdParser(), [] )
 		);
 
