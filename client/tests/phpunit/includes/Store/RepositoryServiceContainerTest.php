@@ -5,19 +5,19 @@ namespace Wikibase\Client\Tests\Store;
 use DataValues\Deserializers\DataValueDeserializer;
 use HashSiteStore;
 use stdClass;
-use Wikibase\Client\Store\RepositoryServiceContainer;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParser;
-use Wikibase\EntityRevision;
+use Wikibase\Edrsf\EntityRevision;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\EntityStoreWatcher;
+use Wikibase\Edrsf\RepositoryDefinitions;
+use Wikibase\Edrsf\RepositoryServiceContainer;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\RepositoryDefinitions;
-use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityStoreWatcher;
 
 /**
  * @covers Wikibase\Client\Store\RepositoryServiceContainer
@@ -33,7 +33,7 @@ class RepositoryServiceContainerTest extends \PHPUnit_Framework_TestCase {
 	 * @return WikibaseClient
 	 */
 	private function getWikibaseClient() {
-		/** @var RepositoryDefinitions $repositoryDefinitions */
+		/** @var \Wikibase\Edrsf\RepositoryDefinitions $repositoryDefinitions */
 		$repositoryDefinitions = $this->getMockBuilder( RepositoryDefinitions::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -48,13 +48,13 @@ class RepositoryServiceContainerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return RepositoryServiceContainer
+	 * @return \Wikibase\Edrsf\RepositoryServiceContainer
 	 */
 	private function newRepositoryServiceContainer() {
 		/** @var EntityIdParser $idParser */
 		$idParser = $this->getMock( EntityIdParser::class );
 
-		return new RepositoryServiceContainer(
+		return new \Wikibase\Edrsf\RepositoryServiceContainer(
 			'foowiki',
 			'foo',
 			new PrefixMappingEntityIdParser( [ '' => 'foo' ], $idParser ),
@@ -70,7 +70,7 @@ class RepositoryServiceContainerTest extends \PHPUnit_Framework_TestCase {
 		$container = $this->newRepositoryServiceContainer();
 
 		$container->defineService( 'EntityRevisionLookup', function() {
-			return $this->getMock( EntityRevisionLookup::class );
+			return $this->getMock( \Wikibase\Edrsf\EntityRevisionLookup::class );
 		} );
 
 		return $container;
@@ -83,7 +83,7 @@ class RepositoryServiceContainerTest extends \PHPUnit_Framework_TestCase {
 		$serviceTwo = $repositoryServiceContainer->getService( 'EntityRevisionLookup' );
 
 		$this->assertInstanceOf( EntityRevisionLookup::class, $serviceOne );
-		$this->assertInstanceOf( EntityRevisionLookup::class, $serviceTwo );
+		$this->assertInstanceOf( \Wikibase\Edrsf\EntityRevisionLookup::class, $serviceTwo );
 
 		$this->assertSame( $serviceOne, $serviceTwo );
 	}
@@ -128,7 +128,7 @@ class RepositoryServiceContainerTest extends \PHPUnit_Framework_TestCase {
 		$watcherService = $this->getMock( EntityStoreWatcher::class );
 		$watcherService->expects( $this->atLeastOnce() )->method( $event );
 
-		$unusedWatcherService = $this->getMock( EntityStoreWatcher::class );
+		$unusedWatcherService = $this->getMock( \Wikibase\Edrsf\EntityStoreWatcher::class );
 		$unusedWatcherService->expects( $this->never() )->method( $event );
 
 		$nonWatcherService = $this->getMock( stdClass::class );

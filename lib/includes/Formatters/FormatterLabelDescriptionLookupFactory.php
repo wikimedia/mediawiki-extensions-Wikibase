@@ -8,8 +8,8 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LanguageLabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Edrsf\LanguageFallbackChain;
+use Wikibase\Edrsf\LanguageFallbackLabelDescriptionLookup;
 
 /**
  * Factory for LabelDescriptionLookup objects based on FormatterOptions.

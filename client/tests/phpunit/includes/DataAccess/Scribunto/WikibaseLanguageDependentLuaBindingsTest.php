@@ -10,8 +10,8 @@ use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\DataModel\Term\TermFallback;
+use Wikibase\Edrsf\LanguageFallbackLabelDescriptionLookup;
 
 /**
  * @covers Wikibase\Client\DataAccess\Scribunto\WikibaseLanguageDependentLuaBindings
@@ -53,7 +53,7 @@ class WikibaseLanguageDependentLuaBindingsTest extends PHPUnit_Framework_TestCas
 	}
 
 	/**
-	 * @return LanguageFallbackLabelDescriptionLookup
+	 * @return \Wikibase\Edrsf\LanguageFallbackLabelDescriptionLookup
 	 */
 	private function getLabelDescriptionLookup() {
 		$labelDescriptionLookup = $this->getMockBuilder( LanguageFallbackLabelDescriptionLookup::class )

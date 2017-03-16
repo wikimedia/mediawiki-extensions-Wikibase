@@ -7,10 +7,10 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\Client\Usage\UsageTrackingSnakFormatter;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Formatters\BinaryOptionDispatchingSnakFormatter;
+use Wikibase\Edrsf\LanguageFallbackChainFactory;
 use Wikibase\Lib\EscapingSnakFormatter;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
+use Wikibase\Lib\Formatters\BinaryOptionDispatchingSnakFormatter;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 
@@ -40,7 +40,7 @@ class DataAccessSnakFormatterFactory {
 	private $propertyDataTypeLookup;
 
 	/**
-	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
+	 * @param \Wikibase\Edrsf\LanguageFallbackChainFactory $languageFallbackChainFactory
 	 * @param OutputFormatSnakFormatterFactory $snakFormatterFactory
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 */

@@ -5,6 +5,8 @@ namespace Wikibase\Lib\Store;
 use BagOStuff;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Edrsf\PropertyInfoLookup;
+use Wikibase\Edrsf\PropertyInfoStore;
 
 /**
  * Implementation of PropertyInfoStore wrapping the instance modifying the local

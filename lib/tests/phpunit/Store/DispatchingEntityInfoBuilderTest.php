@@ -4,12 +4,11 @@ namespace Wikibase\Lib\Tests\Store;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\DispatchingEntityInfoBuilder;
-use Wikibase\Lib\Store\EntityInfo;
-use Wikibase\Lib\Store\EntityInfoBuilder;
+use Wikibase\Edrsf\DispatchingEntityInfoBuilder;
+use Wikibase\Edrsf\EntityInfoBuilder;
 
 /**
- * @class Wikibase\Lib\Store\DispatchingEntityInfoBuilder
+ * @class Wikibase\Edrsf\DispatchingEntityInfoBuilder
  *
  * @group Wikibase
  * @group WikibaseStore
@@ -32,21 +31,21 @@ class DispatchingEntityInfoBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenInvalidArguments_constructorThrowsException( array $args ) {
 		$this->setExpectedException( InvalidArgumentException::class );
 
-		new DispatchingEntityInfoBuilder( $args );
+		new \Wikibase\Edrsf\DispatchingEntityInfoBuilder( $args );
 	}
 
 	public function testGetEntityInfoMergesEntityInfoFromAllBuilders() {
 		$localBuilder = $this->getMock( EntityInfoBuilder::class );
 		$localBuilder->expects( $this->any() )
 			->method( 'getEntityInfo' )
-			->will( $this->returnValue( new EntityInfo( [
+			->will( $this->returnValue( new \Wikibase\Edrsf\EntityInfo( [
 				'Q11' => [ 'id' => 'Q11', 'type' => 'item' ],
 			] ) ) );
 
 		$otherBuilder = $this->getMock( EntityInfoBuilder::class );
 		$otherBuilder->expects( $this->any() )
 			->method( 'getEntityInfo' )
-			->will( $this->returnValue( new EntityInfo( [
+			->will( $this->returnValue( new \Wikibase\Edrsf\EntityInfo( [
 				'other:Q22' => [ 'id' => 'other:Q22', 'type' => 'item' ],
 			] ) ) );
 
@@ -55,7 +54,7 @@ class DispatchingEntityInfoBuilderTest extends \PHPUnit_Framework_TestCase {
 		] );
 
 		$this->assertEquals(
-			new EntityInfo( [
+			new \Wikibase\Edrsf\EntityInfo( [
 				'Q11' => [ 'id' => 'Q11', 'type' => 'item' ],
 				'other:Q22' => [ 'id' => 'other:Q22', 'type' => 'item' ],
 			] ),
@@ -104,11 +103,11 @@ class DispatchingEntityInfoBuilderTest extends \PHPUnit_Framework_TestCase {
 		$localBuilder->expects( $this->atLeastOnce() )
 			->method( 'collectDataTypes' );
 
-		$otherBuilder = $this->getMock( EntityInfoBuilder::class );
+		$otherBuilder = $this->getMock( \Wikibase\Edrsf\EntityInfoBuilder::class );
 		$otherBuilder->expects( $this->atLeastOnce() )
 			->method( 'collectDataTypes' );
 
-		$dispatchingBuilder = new DispatchingEntityInfoBuilder( [
+		$dispatchingBuilder = new \Wikibase\Edrsf\DispatchingEntityInfoBuilder( [
 			'' => $localBuilder, 'other' => $otherBuilder
 		] );
 

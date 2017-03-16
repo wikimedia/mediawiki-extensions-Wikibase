@@ -2,16 +2,16 @@
 
 namespace Wikibase\Repo\Specials;
 
-use HTMLForm;
 use Html;
+use HTMLForm;
 use WebRequest;
+use Wikibase\Edrsf\ConfigurableTermSearchInteractor;
+use Wikibase\Edrsf\TermIndexEntry;
+use Wikibase\Edrsf\TermSearchOptions;
+use Wikibase\Edrsf\TermSearchResult;
 use Wikibase\ItemDisambiguation;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
-use Wikibase\Lib\Interactors\TermSearchOptions;
-use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\TermIndexEntry;
 
 /**
  * Enables accessing items by providing the label of the item and the language of the label.
@@ -37,7 +37,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	private $itemDisambiguation;
 
 	/**
-	 * @var ConfigurableTermSearchInteractor
+	 * @var \Wikibase\Edrsf\ConfigurableTermSearchInteractor
 	 */
 	private $searchInteractor = null;
 
@@ -50,7 +50,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	 * @param ContentLanguages $contentLanguages
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param ItemDisambiguation $itemDisambiguation
-	 * @param ConfigurableTermSearchInteractor $searchInteractor
+	 * @param \Wikibase\Edrsf\ConfigurableTermSearchInteractor $searchInteractor
 	 * @param int $limit
 	 */
 	public function __construct(
@@ -154,7 +154,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	 * @param string $label
 	 * @param string $languageCode
 	 *
-	 * @return TermSearchResult[]
+	 * @return \Wikibase\Edrsf\TermSearchResult[]
 	 */
 	private function getSearchResults( $label, $languageCode ) {
 		$searchOptions = new TermSearchOptions();

@@ -8,10 +8,9 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\EntityRevision;
-use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
-use Wikibase\Lib\Store\StorageException;
+use Wikibase\Edrsf\EntityRevision;
+use Wikibase\Edrsf\RevisionedUnresolvedRedirectException;
+use Wikibase\Edrsf\StorageException;
 
 /**
  * Base class for testing EntityRevisionLookup implementations
@@ -24,7 +23,7 @@ use Wikibase\Lib\Store\StorageException;
 abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 
 	/**
-	 * @return EntityRevision[]
+	 * @return \Wikibase\Edrsf\EntityRevision[]
 	 */
 	protected function getTestRevisions() {
 		$entities = array();
@@ -62,7 +61,7 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return EntityRevisionLookup
+	 * @return \Wikibase\Edrsf\EntityRevisionLookup
 	 */
 	protected function getEntityRevisionLookup() {
 		$revisions = $this->getTestRevisions();
@@ -77,7 +76,7 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 	 * @param EntityRevision[] $entityRevisions
 	 * @param EntityRedirect[] $entityRedirects
 	 *
-	 * @return EntityRevisionLookup
+	 * @return \Wikibase\Edrsf\EntityRevisionLookup
 	 */
 	abstract protected function newEntityRevisionLookup( array $entityRevisions, array $entityRedirects );
 

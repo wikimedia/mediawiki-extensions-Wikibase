@@ -14,15 +14,15 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Dumpers\RdfDumpGenerator;
-use Wikibase\EntityRevision;
-use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Edrsf\EntityRevision;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\Tests\Rdf\RdfBuilderTest;
 use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Dumpers\RdfDumpGenerator

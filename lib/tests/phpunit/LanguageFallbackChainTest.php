@@ -3,9 +3,9 @@
 namespace Wikibase\Lib\Tests;
 
 use Language;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\LanguageWithConversion;
+use Wikibase\Edrsf\LanguageFallbackChain;
+use Wikibase\Edrsf\LanguageFallbackChainFactory;
+use Wikibase\Edrsf\LanguageWithConversion;
 
 /**
  * @covers Wikibase\LanguageFallbackChain

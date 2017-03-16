@@ -15,12 +15,13 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
-use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Edrsf\EntityRevision;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\StorageException;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Repo\Store\EntityTitleStoreLookup;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 
 /**
  * Handler for editing activity, providing a unified interface for saving modified entities while performing
@@ -34,7 +35,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 class EditEntity {
 
 	/**
-	 * @var EntityRevisionLookup
+	 * @var \Wikibase\Edrsf\EntityRevisionLookup
 	 */
 	private $entityRevisionLookup;
 
@@ -169,7 +170,7 @@ class EditEntity {
 
 	/**
 	 * @param EntityTitleStoreLookup $titleLookup
-	 * @param EntityRevisionLookup $entityLookup
+	 * @param \Wikibase\Edrsf\EntityRevisionLookup $entityLookup
 	 * @param EntityStore $entityStore
 	 * @param EntityPermissionChecker $permissionChecker
 	 * @param EntityDiffer $entityDiffer

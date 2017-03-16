@@ -9,7 +9,7 @@ use SiteStore;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Edrsf\EntityNamespaceLookup;
 use Wikibase\Repo\Specials\SpecialNewItem;
 
 /**

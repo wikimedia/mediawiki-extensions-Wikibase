@@ -4,27 +4,27 @@ namespace Wikibase\Client\Tests;
 
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
-use Wikibase\Client\DispatchingServiceFactory;
-use Wikibase\Client\Store\RepositoryServiceContainer;
-use Wikibase\Client\Store\RepositoryServiceContainerFactory;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Term\TermBuffer;
-use Wikibase\EntityRevision;
-use Wikibase\Lib\Interactors\DispatchingTermSearchInteractorFactory;
-use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
-use Wikibase\Lib\RepositoryDefinitions;
-use Wikibase\Lib\Store\DispatchingEntityInfoBuilderFactory;
-use Wikibase\Lib\Store\DispatchingEntityPrefetcher;
-use Wikibase\Lib\Store\DispatchingEntityRevisionLookup;
-use Wikibase\Lib\Store\DispatchingPropertyInfoLookup;
-use Wikibase\Lib\Store\DispatchingTermBuffer;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
-use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\Edrsf\DispatchingEntityInfoBuilderFactory;
+use Wikibase\Edrsf\DispatchingEntityPrefetcher;
+use Wikibase\Edrsf\DispatchingEntityRevisionLookup;
+use Wikibase\Edrsf\DispatchingPropertyInfoLookup;
+use Wikibase\Edrsf\DispatchingServiceFactory;
+use Wikibase\Edrsf\DispatchingTermBuffer;
+use Wikibase\Edrsf\DispatchingTermSearchInteractorFactory;
+use Wikibase\Edrsf\EntityInfoBuilderFactory;
+use Wikibase\Edrsf\EntityRevision;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\PropertyInfoLookup;
+use Wikibase\Edrsf\RepositoryDefinitions;
+use Wikibase\Edrsf\RepositoryServiceContainer;
+use Wikibase\Edrsf\RepositoryServiceContainerFactory;
+use Wikibase\Edrsf\TermSearchInteractorFactory;
 
 /**
  * @covers Wikibase\Client\DispatchingServiceFactory
@@ -211,7 +211,7 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @param array $containers Assoc array [ '<repo name>' => RepositoryServiceContainer, ... ]
 	 *
-	 * @return RepositoryServiceContainerFactory
+	 * @return \Wikibase\Edrsf\RepositoryServiceContainerFactory
 	 */
 	private function createRepositoryServiceContainerFactory( array $containers ) {
 		$containerFactory = $this->getMockBuilder( RepositoryServiceContainerFactory::class )
@@ -259,7 +259,7 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @param string $repositoryServiceContainerKey
 	 * @param string $classOfObjectToReturn
-	 * @return DispatchingServiceFactory
+	 * @return \Wikibase\Edrsf\DispatchingServiceFactory
 	 */
 	private function createFactoryWithRepositoryContainerReturningDummyObjectFor(
 		$repositoryServiceContainerKey,
@@ -271,7 +271,7 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 			$this->dummy( $classOfObjectToReturn )
 		);
 
-		/** @var RepositoryServiceContainerFactory|ObjectProphecy $rscf */
+		/** @var \Wikibase\Edrsf\RepositoryServiceContainerFactory|ObjectProphecy $rscf */
 		$rscf = $this->prophesize( RepositoryServiceContainerFactory::class );
 		$rscf->newContainer( '' )->willReturn( $localRepositoryServiceContainer );
 

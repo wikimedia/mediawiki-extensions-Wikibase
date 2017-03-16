@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Edrsf\LanguageFallbackChainFactory;
 use Wikibase\Lib\DispatchingSnakFormatter;
 use Wikibase\Lib\Formatters\ErrorHandlingSnakFormatter;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;

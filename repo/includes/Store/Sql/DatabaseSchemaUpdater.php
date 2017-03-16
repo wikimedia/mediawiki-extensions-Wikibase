@@ -6,17 +6,16 @@ use Database;
 use DatabaseUpdater;
 use HashBagOStuff;
 use MWException;
-use Wikibase\RebuildTermsSearchKey;
-use Wikibase\Repo\Maintenance\RebuildEntityPerPage;
-use Wikibase\Store;
-use Wikibase\Lib\Store\Sql\PropertyInfoTable;
-use Wikibase\PropertyInfoTableBuilder;
+use Wikibase\Edrsf\WikiPageEntityMetaDataLookup;
+use Wikibase\Edrsf\WikiPageEntityRevisionLookup;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
-use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
-use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
+use Wikibase\PropertyInfoTableBuilder;
+use Wikibase\RebuildTermsSearchKey;
+use Wikibase\Repo\Maintenance\RebuildEntityPerPage;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Store;
 
 /**
  * @license GPL-2.0+
@@ -189,7 +188,7 @@ class DatabaseSchemaUpdater {
 		);
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer() );
+		$table = new \Wikibase\Edrsf\PropertyInfoTable( $wikibaseRepo->getEntityIdComposer() );
 
 		$contentCodec = $wikibaseRepo->getEntityContentDataCodec();
 		$propertyInfoBuilder = $wikibaseRepo->newPropertyInfoBuilder();

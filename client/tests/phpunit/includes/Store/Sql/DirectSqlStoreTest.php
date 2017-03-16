@@ -2,9 +2,7 @@
 
 namespace Wikibase\Client\Tests\Store\Sql;
 
-use Wikibase\Client\DispatchingServiceFactory;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
-use Wikibase\Client\Store\RepositoryServiceContainerFactory;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
@@ -15,17 +13,19 @@ use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\DirectSqlStore;
+use Wikibase\Edrsf\DispatchingServiceFactory;
+use Wikibase\Edrsf\EntityIdComposer;
+use Wikibase\Edrsf\EntityNamespaceLookup;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\PropertyInfoLookup;
+use Wikibase\Edrsf\RepositoryDefinitions;
+use Wikibase\Edrsf\RepositoryServiceContainerFactory;
+use Wikibase\Edrsf\TermIndex;
 use Wikibase\Lib\Changes\EntityChangeFactory;
-use Wikibase\Lib\EntityIdComposer;
-use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\Store\EntityChangeLookup;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikibase\Store\EntityIdLookup;
-use Wikibase\TermIndex;
 
 /**
  * @covers Wikibase\DirectSqlStore
@@ -51,25 +51,28 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		/** @var RepositoryDefinitions $repositoryDefinitions */
+		/** @var \Wikibase\Edrsf\RepositoryDefinitions $repositoryDefinitions */
 		$repositoryDefinitions = $this->getMockBuilder( RepositoryDefinitions::class )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$dispatchingServiceFactory = new DispatchingServiceFactory(
-			$containerFactory,
-			$repositoryDefinitions
+		$dispatchingServiceFactory = $this->getMock(
+			DispatchingServiceFactory::class,
+			[],
+			[ $containerFactory, $repositoryDefinitions ]
 		);
 
-		$dispatchingServiceFactory->redefineService( 'EntityPrefetcher', function() {
-			return new NullEntityPrefetcher();
-		} );
-		$dispatchingServiceFactory->redefineService( 'EntityRevisionLookup', function() {
-			return $this->getMock( EntityRevisionLookup::class );
-		} );
-		$dispatchingServiceFactory->redefineService( 'PropertyInfoLookup', function() {
-			return new MockPropertyInfoLookup();
-		} );
+		$dispatchingServiceFactory
+			->method( 'getEntityPrefetcher' )
+			->willReturn( new NullEntityPrefetcher() );
+
+		$dispatchingServiceFactory
+			->method( 'getEntityRevisionLookup' )
+			->willReturn( $this->getMock( EntityRevisionLookup::class ) );
+
+		$dispatchingServiceFactory
+			->method( 'getPropertyInfoLookup' )
+			->willReturn( new MockPropertyInfoLookup() );
 
 		return new DirectSqlStore(
 			$entityChangeFactory,

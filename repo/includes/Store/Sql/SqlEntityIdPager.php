@@ -6,8 +6,8 @@ use ResultWrapper;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
+use Wikibase\Edrsf\EntityNamespaceLookup;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -21,7 +21,7 @@ use Wikimedia\Assert\Assert;
 class SqlEntityIdPager implements EntityIdPager {
 
 	/**
-	 * @var EntityNamespaceLookup
+	 * @var \Wikibase\Edrsf\EntityNamespaceLookup
 	 */
 	private $entityNamespaceLookup;
 
@@ -48,7 +48,7 @@ class SqlEntityIdPager implements EntityIdPager {
 	private $position = 0;
 
 	/**
-	 * @param EntityNamespaceLookup $entityNamespaceLookup
+	 * @param \Wikibase\Edrsf\EntityNamespaceLookup $entityNamespaceLookup
 	 * @param EntityIdParser $entityIdParser
 	 * @param null|string $entityType The desired entity type, or null for any type.
 	 * @param string $redirectMode A EntityIdPager::XXX_REDIRECTS constant (default is NO_REDIRECTS).

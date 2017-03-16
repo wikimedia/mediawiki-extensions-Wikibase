@@ -2,11 +2,11 @@
 
 namespace Wikibase\Repo\Specials;
 
+use Wikibase\Edrsf\TermIndexEntry;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Repo\Store\EntitiesWithoutTermFinder;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\TermIndexEntry;
 
 /**
  * Factory to create special pages.

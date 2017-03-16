@@ -7,8 +7,8 @@ use MediaWikiTestCase;
 use MWException;
 use RequestContext;
 use User;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Edrsf\LanguageFallbackChain;
+use Wikibase\Edrsf\LanguageFallbackChainFactory;
 
 /**
  * @covers Wikibase\LanguageFallbackChainFactory
@@ -22,7 +22,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiTestCase {
 
 	/**
 	 * @param array $expectedItems
-	 * @param \Wikibase\LanguageWithConversion[] $chain
+	 * @param \Wikibase\Edrsf\LanguageWithConversion[] $chain
 	 */
 	private function assertChainEquals( array $expectedItems, array $chain ) {
 		$this->assertSame( count( $expectedItems ), count( $chain ) );

@@ -3,18 +3,18 @@
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
+use ApiUsageException;
 use InvalidArgumentException;
 use LogicException;
 use OutOfBoundsException;
 use Status;
-use ApiUsageException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EditEntity as EditEntityHandler;
 use Wikibase\EditEntityFactory;
+use Wikibase\Edrsf\EntityRevisionLookup;
 use Wikibase\EntityFactory;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
