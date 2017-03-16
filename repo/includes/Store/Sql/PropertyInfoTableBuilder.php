@@ -7,9 +7,9 @@ use RuntimeException;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\Lib\EntityIdComposer;
+use Wikibase\Edrsf\EntityIdComposer;
+use Wikibase\Edrsf\PropertyInfoTable;
 use Wikibase\Lib\Reporting\MessageReporter;
-use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 
 /**
  * Utility class for rebuilding the wb_property_info table.
@@ -35,7 +35,7 @@ class PropertyInfoTableBuilder {
 	private $propertyInfoBuilder;
 
 	/**
-	 * @var EntityIdComposer $entityIdComposer
+	 * @var \Wikibase\Edrsf\EntityIdComposer $entityIdComposer
 	 */
 	private $entityIdComposer;
 
@@ -74,7 +74,7 @@ class PropertyInfoTableBuilder {
 	 * @param PropertyInfoTable $propertyInfoTable
 	 * @param EntityLookup $entityLookup
 	 * @param PropertyInfoBuilder $propertyInfoBuilder
-	 * @param EntityIdComposer $entityIdComposer
+	 * @param \Wikibase\Edrsf\EntityIdComposer $entityIdComposer
 	 */
 	public function __construct(
 		PropertyInfoTable $propertyInfoTable,

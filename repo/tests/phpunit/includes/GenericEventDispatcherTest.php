@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikibase\Edrsf\EntityStoreWatcher;
 use Wikibase\Repo\GenericEventDispatcher;
 
 /**

@@ -11,8 +11,8 @@ use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Edrsf\TermSearchResult;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
@@ -86,7 +86,7 @@ class QuerySearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param array $params
-	 * @param TermSearchResult[] $matches
+	 * @param \Wikibase\Edrsf\TermSearchResult[] $matches
 	 *
 	 * @return EntitySearchHelper
 	 */

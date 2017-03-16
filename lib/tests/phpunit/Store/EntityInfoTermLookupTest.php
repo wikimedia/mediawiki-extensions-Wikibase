@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Tests\Store;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
-use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoTermLookup;
 
 /**
@@ -165,7 +164,7 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 			),
 		);
 
-		return new EntityInfo( $entityInfo );
+		return new \Wikibase\Edrsf\EntityInfo( $entityInfo );
 	}
 
 }

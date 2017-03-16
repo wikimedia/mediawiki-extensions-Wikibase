@@ -4,7 +4,7 @@ namespace Wikibase\Client\Tests\Store;
 
 use Title;
 use Wikibase\Client\Store\TitleFactory;
-use Wikibase\Lib\Store\StorageException;
+use Wikibase\Edrsf\StorageException;
 use WikiPage;
 use WikitextContent;
 

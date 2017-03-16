@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Store;
 
-use Wikibase\TermIndexEntry;
+use Wikibase\Edrsf\TermIndexEntry;
 
 /**
  * Service interface for detecting label conflicts.

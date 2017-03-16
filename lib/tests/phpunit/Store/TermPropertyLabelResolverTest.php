@@ -6,7 +6,7 @@ use HashBagOStuff;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
-use Wikibase\TermIndexEntry;
+use Wikibase\Edrsf\TermIndexEntry;
 use Wikibase\TermPropertyLabelResolver;
 
 /**

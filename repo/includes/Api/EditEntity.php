@@ -3,11 +3,11 @@
 namespace Wikibase\Repo\Api;
 
 use ApiMain;
+use ApiUsageException;
 use Deserializers\Deserializer;
 use InvalidArgumentException;
 use MWException;
 use Title;
-use ApiUsageException;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
@@ -21,9 +21,9 @@ use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
+use Wikibase\Edrsf\EntityRevisionLookup;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\WikibaseRepo;

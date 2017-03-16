@@ -4,7 +4,6 @@ namespace Wikibase\Client\Tests\Serializer;
 
 use PHPUnit_Framework_TestCase;
 use RuntimeException;
-use Wikibase\Client\Serializer\ForbiddenSerializer;
 
 /**
  * @covers Wikibase\Client\Serializer\ForbiddenSerializer
@@ -18,7 +17,7 @@ use Wikibase\Client\Serializer\ForbiddenSerializer;
 class ForbiddenSerializerTest extends PHPUnit_Framework_TestCase {
 
 	public function test() {
-		$serializer = new ForbiddenSerializer( 'customMessage' );
+		$serializer = new \Wikibase\Edrsf\ForbiddenSerializer( 'customMessage' );
 
 		$this->setExpectedException( RuntimeException::class, 'customMessage' );
 		$serializer->serialize( null );

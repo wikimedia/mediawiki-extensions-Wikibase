@@ -12,19 +12,18 @@ use TestSites;
 use Title;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
-use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\PlainEntityIdFormatter;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Repo\Store\EntityTitleStoreLookup;
-use Wikibase\Repo\Store\EntityPermissionChecker;
-use Wikibase\SummaryFormatter;
 use Wikibase\Lib\Tests\MockRepository;
+use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
+use Wikibase\SummaryFormatter;
 
 /**
  * @license GPL-2.0+
@@ -54,7 +53,7 @@ abstract class SpecialWikibaseRepoPageTestBase extends SpecialPageTestBase {
 	}
 
 	/**
-	 * @return EntityRevisionLookup
+	 * @return \Wikibase\Edrsf\EntityRevisionLookup
 	 */
 	protected function getEntityRevisionLookup() {
 		return $this->mockRepository;

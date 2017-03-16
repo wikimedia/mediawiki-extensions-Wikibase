@@ -14,9 +14,9 @@ use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\Repo\Store\EntityTitleStoreLookup;
+use Wikibase\Edrsf\EntityNamespaceLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use WikiPage;
 
 /**
@@ -27,7 +27,7 @@ use WikiPage;
 class EditFilterHookRunner {
 
 	/**
-	 * @var EntityNamespaceLookup
+	 * @var \Wikibase\Edrsf\EntityNamespaceLookup
 	 */
 	private $namespaceLookup;
 
@@ -47,7 +47,7 @@ class EditFilterHookRunner {
 	private $context;
 
 	/**
-	 * @param EntityNamespaceLookup $namespaceLookup
+	 * @param \Wikibase\Edrsf\EntityNamespaceLookup $namespaceLookup
 	 * @param EntityTitleStoreLookup $titleLookup
 	 * @param EntityContentFactory $entityContentFactory
 	 * @param IContextSource $context

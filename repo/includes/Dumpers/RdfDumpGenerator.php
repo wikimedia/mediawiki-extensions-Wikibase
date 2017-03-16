@@ -8,20 +8,20 @@ use MWException;
 use PageProps;
 use SiteList;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
+use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\RevisionedUnresolvedRedirectException;
+use Wikibase\Edrsf\StorageException;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Rdf\EntityRdfBuilderFactory;
-use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfBuilder;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\RdfVocabulary;
+use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikimedia\Purtle\RdfWriterFactory;
 
 /**

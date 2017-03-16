@@ -7,11 +7,11 @@ use RequestContext;
 use ResultWrapper;
 use Title;
 use Wikibase\Client\Store\TitleFactory;
-use Wikibase\Lib\Store\StorageException;
+use Wikibase\DataModel\Services\Term\TermBuffer;
+use Wikibase\Edrsf\StorageException;
+use Wikibase\Edrsf\TermIndexEntry;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\EntityIdLookup;
-use Wikibase\DataModel\Services\Term\TermBuffer;
-use Wikibase\TermIndexEntry;
 
 /**
  * Hook handlers for triggering prefetching of labels.

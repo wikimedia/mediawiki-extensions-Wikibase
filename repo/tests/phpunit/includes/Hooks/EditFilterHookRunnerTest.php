@@ -14,11 +14,11 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Edrsf\EntityNamespaceLookup;
 use Wikibase\ItemContent;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 
 /**
  * @covers Wikibase\Repo\Hooks\EditFilterHookRunner

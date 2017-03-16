@@ -7,7 +7,6 @@ use TestSites;
 use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityRevision;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 use WikitextContent;
@@ -28,7 +27,7 @@ class ItemMoveTest extends \MediaWikiTestCase {
 	//@todo: make this a baseclass to use with all types of entities.
 
 	/**
-	 * @var EntityRevision
+	 * @var \Wikibase\Edrsf\EntityRevision
 	 */
 	protected $entityRevision;
 

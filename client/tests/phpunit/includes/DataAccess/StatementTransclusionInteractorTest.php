@@ -16,11 +16,11 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\EntityRevision;
+use Wikibase\Edrsf\EntityRevision;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 
 /**
  * @covers Wikibase\Client\DataAccess\StatementTransclusionInteractor
@@ -168,7 +168,7 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return EntityRevisionLookup
+	 * @return \Wikibase\Edrsf\EntityRevisionLookup
 	 */
 	private function getEntityRevisionLookup() {
 		$lookup = $this->getMock( EntityRevisionLookup::class );
