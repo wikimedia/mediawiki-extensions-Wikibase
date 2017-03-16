@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Rdf;
 
 use Closure;
+use SiteList;
 use PHPUnit_Framework_TestCase;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\EntityRdfBuilder;
@@ -48,7 +49,15 @@ class EntityRdfBuilderFactoryTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$factory = new EntityRdfBuilderFactory( [ 'test' => $constructor ] );
-		$rdfBuilder = $factory->getEntityRdfBuilders( $flags, $vocab, $writer, $tracker, $dedupe );
+		$sites = new SiteList();
+		$rdfBuilder = $factory->getEntityRdfBuilders(
+			$flags,
+			$vocab,
+			$writer,
+			$tracker,
+			$dedupe,
+			$sites
+		);
 		$this->assertTrue( $called );
 		$this->assertInstanceOf( EntityRdfBuilder::class, $rdfBuilder['test'] );
 	}

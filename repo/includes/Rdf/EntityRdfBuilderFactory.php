@@ -2,6 +2,7 @@
 
 namespace Wikibase\Rdf;
 
+use SiteList;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Purtle\RdfWriter;
 
@@ -46,14 +47,16 @@ class EntityRdfBuilderFactory {
 		RdfVocabulary $vocabulary,
 		RdfWriter $writer,
 		EntityMentionListener $mentionedEntityTracker,
-		DedupeBag $dedupe
+		DedupeBag $dedupe,
+		SiteList $sites
 	) {
 		return $this->createEntityRdfBuilders(
 			$flavorFlags,
 			$vocabulary,
 			$writer,
 			$mentionedEntityTracker,
-			$dedupe
+			$dedupe,
+			$sites
 		);
 
 	}
@@ -72,7 +75,8 @@ class EntityRdfBuilderFactory {
 		RdfVocabulary $vocabulary,
 		RdfWriter $writer,
 		EntityMentionListener $mentionedEntityTracker,
-		DedupeBag $dedupe
+		DedupeBag $dedupe,
+		SiteList $sites
 	) {
 		$builders = [];
 
@@ -83,7 +87,8 @@ class EntityRdfBuilderFactory {
 				$vocabulary,
 				$writer,
 				$mentionedEntityTracker,
-				$dedupe
+				$dedupe,
+				$sites
 			);
 
 			Assert::postcondition(
