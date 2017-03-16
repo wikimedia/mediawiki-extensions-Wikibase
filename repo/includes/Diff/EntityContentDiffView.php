@@ -142,22 +142,22 @@ class EntityContentDiffView extends DifferenceEngine {
 		$dateofrev = $lang->userDate( $revtimestamp, $user );
 		$timeofrev = $lang->userTime( $revtimestamp, $user );
 
-		$header = $this->msg(
+		$headerMsg = $this->msg(
 			$rev->isCurrent() ? 'currentrev-asof' : 'revisionasof',
 			$timestamp,
 			$dateofrev,
 			$timeofrev
-		)->text();
+		);
 
 		if ( $complete !== 'complete' ) {
-			return $header;
+			return $headerMsg->escaped();
 		}
 
 		$title = $rev->getTitle();
 
 		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
 
-		$header = $linkRenderer->makeKnownLink( $title, $header, array(),
+		$header = $linkRenderer->makeKnownLink( $title, $headerMsg->text(), array(),
 			array( 'oldid' => $rev->getId() ) );
 
 		if ( $rev->userCan( Revision::DELETED_TEXT, $user ) ) {
