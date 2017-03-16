@@ -125,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_ea752593",
+        "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-16T15:27:33Z",
+      "side": 1,
+      "message": "It would be great but also it would make the $sites arguments in the RdfBuilder constructor completely unused (and needs lots of cleanup) + I guess we need to rewrite some tests here.",
+      "parentUuid": "8e46e3ee_7ffa3975",
+      "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_dfdeed13",
         "filename": "repo/includes/Rdf/NullEntityRdfBuilder.php",
         "patchSetId": 1
@@ -136,6 +154,24 @@
       "writtenOn": "2017-03-16T14:49:42Z",
       "side": 1,
       "message": "Minor: Wouldn\u0027t we want this to be in Wikibase\\Repo\\Rdf?",
+      "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_4a6539dc",
+        "filename": "repo/includes/Rdf/NullEntityRdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-16T15:27:33Z",
+      "side": 1,
+      "message": "I\u0027d love to but it seems all of php files in the Rdf folder are in Wikibase\\Rdf namespace (which needs fixing but it will be really big patch)",
+      "parentUuid": "8e46e3ee_dfdeed13",
       "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
