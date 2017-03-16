@@ -393,7 +393,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	 */
 	private function getRepositoryDefinitions() {
 		return new RepositoryDefinitions(
-			[ '' => [ 'database' => '', 'entity-types' => [], 'prefix-mapping' => [] ] ]
+			[ '' => [ 'database' => '', 'base-uri' => '', 'entity-types' => [], 'prefix-mapping' => [] ] ]
 		);
 	}
 

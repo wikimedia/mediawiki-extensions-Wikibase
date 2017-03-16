@@ -18,10 +18,19 @@ class RepositoryDefinitionsTest extends \PHPUnit_Framework_TestCase {
 		return [
 			'repository name containing colon' => [ [ 'fo:o' => [] ] ],
 			'repository definition not an array' => [ [ '' => 'string' ] ],
+			'no database key in repository definition' => [
+				[ '' => [ 'base-uri' => 'concept:' ], 'entity-types' => [], 'prefix-mapping' => [] ]
+			],
+			'no entity-types key in repository definition' => [
+				[ '' => [ 'database' => 'xyz', 'base-uri' => 'concept:' ], 'prefix-mapping' => [] ]
+			],
+			'no prefix-mapping key in repository definition' => [
+				[ '' => [ 'database' => 'xyz', 'base-uri' => 'concept:' ], 'entity-types' => [] ]
+			],
+			'no base-uri key in repository definition' => [
+				[ '' => [ 'database' => 'xyz', 'entity-types' => [], 'prefix-mapping' => [] ] ]
+			],
 			'no settings for the local repository' => [ [ 'foo' => [ 'database' => 'foodb' ] ] ],
-			'no database key in repository definition' => [ [ '' => [ 'entity-types' => [], 'prefix-mapping' => [] ] ] ],
-			'no entity-types key in repository definition' => [ [ '' => [ 'database' => 'xyz', 'prefix-mapping' => [] ] ] ],
-			'no prefix-mapping key in repository definition' => [ [ '' => [ 'database' => 'xyz', 'entity-types' => [] ] ] ],
 		];
 	}
 
@@ -41,16 +50,19 @@ class RepositoryDefinitionsTest extends \PHPUnit_Framework_TestCase {
 		return [
 			'' => [
 				'database' => false,
+				'base-uri' => 'http://concept/',
 				'entity-types' => [ 'item', 'property' ],
 				'prefix-mapping' => [],
 			],
 			'media' => [
 				'database' => 'foowiki',
+				'base-uri' => 'http://foo/',
 				'entity-types' => [ 'mediainfo' ],
 				'prefix-mapping' => [],
 			],
 			'lexeme' => [
 				'database' => 'bazwiki',
+				'base-uri' => 'http://baz/',
 				'entity-types' => [ 'lexeme' ],
 				'prefix-mapping' => [ 'foo' => 'media' ],
 			],
@@ -69,6 +81,15 @@ class RepositoryDefinitionsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals(
 			[ '' => false, 'media' => 'foowiki', 'lexeme' => 'bazwiki' ],
 			$definitions->getDatabaseNames()
+		);
+	}
+
+	public function testGetConceptBaseUris() {
+		$definitions = new RepositoryDefinitions( $this->getCompleteRepositoryDefinitionArray() );
+
+		$this->assertEquals(
+			[ '' => 'http://concept/', 'media' => 'http://foo/', 'lexeme' => 'http://baz/' ],
+			$definitions->getConceptBaseUris()
 		);
 	}
 
@@ -106,7 +127,7 @@ class RepositoryDefinitionsTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenSameEntityTypeDefinedForMultitpleRepos_exceptionIsThrown() {
 		$this->setExpectedException( InvalidArgumentException::class );
 
-		$irrelevantDefinitions = [ 'database' => 'foo', 'prefix-mapping' => [] ];
+		$irrelevantDefinitions = [ 'database' => 'foo', 'base-uri' => 'concept:', 'prefix-mapping' => [] ];
 
 		new RepositoryDefinitions( [
 			'' => array_merge( $irrelevantDefinitions, [ 'entity-types' => [ 'item', 'property' ] ] ),
