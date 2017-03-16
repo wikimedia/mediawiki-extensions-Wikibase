@@ -104,6 +104,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;foreignRepositories: An associative array mapping foreign repository names to settings relevant to the particular repository. Each repository's settings are an associative array containing the following keys:
 :;'supportedEntityTypes': list of entity types (strings) that the local wiki supports from the foreign repository
 :;'repoDatabase': value should be a symbolic database name,
+:;'baseUri': value should be base URI for concept URIs. It should contain scheme and authority part of the URI.
 :;'prefixMapping': value should be a prefix mapping array, see also: docs/foreign-entity-ids.wiki in the DataModel component.
 
 === Expert Settings ===

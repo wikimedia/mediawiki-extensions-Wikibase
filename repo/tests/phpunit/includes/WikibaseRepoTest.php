@@ -382,7 +382,12 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	 */
 	private function getRepositoryDefinition( $repositoryName, array $customSettings = [] ) {
 		return [ $repositoryName => array_merge(
-			[ 'database' => '', 'entity-types' => [ 'item', 'property' ], 'prefix-mapping' => [] ],
+			[
+				'database' => '',
+				'base-uri' => 'http://acme.test/concept/',
+				'entity-types' => [ 'item', 'property' ],
+				'prefix-mapping' => []
+			],
 			$customSettings
 		) ];
 	}
