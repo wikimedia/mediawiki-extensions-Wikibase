@@ -22,6 +22,30 @@
       "revId": "050b847f772744f7d386622938d94716a81c5cf1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_c5229aa2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-16T17:45:43Z",
+      "side": 1,
+      "message": "EntityDataRetrievalServiceFactory :)\n\nDon\u0027t worry, it is just an experiment",
+      "parentUuid": "8e46e3ee_8a16e158",
+      "range": {
+        "startLine": 7,
+        "startChar": 22,
+        "endLine": 7,
+        "endChar": 27
+      },
+      "revId": "050b847f772744f7d386622938d94716a81c5cf1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
