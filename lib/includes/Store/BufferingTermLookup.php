@@ -4,17 +4,14 @@ namespace Wikibase\Store;
 
 use MapCacheLRU;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Store\EntityTermLookupBase;
-use Wikibase\Lib\Store\PrefetchingTermLookup;
-use Wikibase\Lib\Store\StorageException;
-use Wikibase\TermIndexEntry;
-use Wikibase\TermIndex;
+use Wikibase\Edrsf\StorageException;
+use Wikibase\Edrsf\TermIndex;
 
 /**
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
-class BufferingTermLookup extends EntityTermLookupBase implements PrefetchingTermLookup {
+class BufferingTermLookup extends \Wikibase\Edrsf\EntityTermLookupBase implements \Wikibase\Edrsf\PrefetchingTermLookup {
 
 	/**
 	 * @var MapCacheLRU
@@ -174,7 +171,7 @@ class BufferingTermLookup extends EntityTermLookupBase implements PrefetchingTer
 	}
 
 	/**
-	 * @param TermIndexEntry[] $terms
+	 * @param \Wikibase\Edrsf\TermIndexEntry[] $terms
 	 *
 	 * @return string[] The buffer keys to which the terms were assigned.
 	 */

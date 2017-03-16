@@ -12,11 +12,11 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Lib\EntityIdComposer;
-use Wikibase\Lib\Store\TermIndexSearchCriteria;
+use Wikibase\Edrsf\EntityIdComposer;
+use Wikibase\Edrsf\TermIndexEntry;
+use Wikibase\Edrsf\TermIndexSearchCriteria;
 use Wikibase\Lib\Tests\Store\TermIndexTest;
 use Wikibase\StringNormalizer;
-use Wikibase\TermIndexEntry;
 use Wikibase\TermSqlIndex;
 use Wikimedia\Assert\ParameterAssertionException;
 

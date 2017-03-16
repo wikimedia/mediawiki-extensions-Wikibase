@@ -11,13 +11,13 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\RevisionedUnresolvedRedirectException;
+use Wikibase\Edrsf\StorageException;
 use Wikibase\EntityContent;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Repo\Store\EntityTitleStoreLookup;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
 
@@ -71,7 +71,7 @@ class ItemMergeInteractor {
 
 	/**
 	 * @param MergeChangeOpsFactory $changeOpFactory
-	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param \Wikibase\Edrsf\EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityStore $entityStore
 	 * @param EntityPermissionChecker $permissionChecker
 	 * @param SummaryFormatter $summaryFormatter

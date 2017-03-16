@@ -6,10 +6,10 @@ use Exception;
 use MWException;
 use Wikibase\Change;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Edrsf\EntityRevisionLookup;
 use Wikibase\EntityChange;
 use Wikibase\ItemChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 
 /**
  * ChangeListTransformer implementation that combines runs of changes into a single change.

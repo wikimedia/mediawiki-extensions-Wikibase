@@ -6,9 +6,9 @@ use DataValues\StringValue;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\Edrsf\PropertyInfoLookup;
+use Wikibase\Edrsf\PropertyInfoTable;
 use Wikibase\PropertyInfoBuilder;
-use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\PropertyInfoTableBuilder;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -63,7 +63,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 
 	public function testRebuildPropertyInfo() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer() );
+		$table = new \Wikibase\Edrsf\PropertyInfoTable( $wikibaseRepo->getEntityIdComposer() );
 
 		$this->resetPropertyInfoTable( $table );
 		$properties = $this->initProperties();

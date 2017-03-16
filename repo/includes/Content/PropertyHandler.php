@@ -11,19 +11,19 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EditEntityAction;
+use Wikibase\Edrsf\EntityContentDataCodec;
+use Wikibase\Edrsf\PropertyInfoStore;
+use Wikibase\Edrsf\TermIndex;
 use Wikibase\EntityContent;
 use Wikibase\HistoryEntityAction;
-use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\PropertyContent;
 use Wikibase\PropertyInfoBuilder;
-use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\SubmitEntityAction;
-use Wikibase\TermIndex;
 use Wikibase\ViewEntityAction;
 
 /**
@@ -66,8 +66,8 @@ class PropertyHandler extends EntityHandler {
 
 	/**
 	 * @param EntityPerPage $entityPerPage
-	 * @param TermIndex $termIndex
-	 * @param EntityContentDataCodec $contentCodec
+	 * @param \Wikibase\Edrsf\TermIndex $termIndex
+	 * @param \Wikibase\Edrsf\EntityContentDataCodec $contentCodec
 	 * @param EntityConstraintProvider $constraintProvider
 	 * @param ValidatorErrorLocalizer $errorLocalizer
 	 * @param EntityIdParser $entityIdParser

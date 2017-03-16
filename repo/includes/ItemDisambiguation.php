@@ -5,9 +5,9 @@ namespace Wikibase;
 use Html;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Edrsf\TermSearchResult;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Interactors\TermSearchResult;
 
 /**
  * Class representing the disambiguation of a list of WikibaseItems.
@@ -49,7 +49,7 @@ class ItemDisambiguation {
 	/**
 	 * Builds and returns the HTML to represent the WikibaseItem.
 	 *
-	 * @param TermSearchResult[] $searchResults
+	 * @param \Wikibase\Edrsf\TermSearchResult[] $searchResults
 	 *
 	 * @return string HTML
 	 */

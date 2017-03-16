@@ -4,8 +4,8 @@ namespace Wikibase\Lib\Tests\Store;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\Lib\Store\TermIndexSearchCriteria;
-use Wikibase\TermIndexEntry;
+use Wikibase\Edrsf\TermIndexEntry;
+use Wikibase\Edrsf\TermIndexSearchCriteria;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
@@ -91,7 +91,7 @@ class TermIndexSearchCriteriaTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testClone() {
-		$mask = new TermIndexSearchCriteria( [ 'termText' => 'Foo' ] );
+		$mask = new \Wikibase\Edrsf\TermIndexSearchCriteria( [ 'termText' => 'Foo' ] );
 
 		$clone = clone $mask;
 		$this->assertEquals( $mask, $clone, 'clone must be equal to original' );

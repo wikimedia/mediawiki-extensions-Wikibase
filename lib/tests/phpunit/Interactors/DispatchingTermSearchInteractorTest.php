@@ -6,12 +6,11 @@ use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
-use Wikibase\Lib\Interactors\DispatchingTermSearchInteractor;
-use Wikibase\Lib\Interactors\TermSearchInteractor;
-use Wikibase\Lib\Interactors\TermSearchOptions;
-use Wikibase\Lib\Interactors\TermSearchResult;
-use Wikibase\TermIndexEntry;
+use Wikibase\Edrsf\ConfigurableTermSearchInteractor;
+use Wikibase\Edrsf\DispatchingTermSearchInteractor;
+use Wikibase\Edrsf\TermIndexEntry;
+use Wikibase\Edrsf\TermSearchOptions;
+use Wikibase\Edrsf\TermSearchResult;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
@@ -43,7 +42,7 @@ class DispatchingTermSearchInteractorTest extends PHPUnit_Framework_TestCase  {
 	}
 
 	private function getTermSearchInteractor( array $resultsByEntityType ) {
-		$interactor = $this->getMockBuilder( TermSearchInteractor::class )->getMock();
+		$interactor = $this->getMockBuilder( \Wikibase\Edrsf\TermSearchInteractor::class )->getMock();
 		$interactor->expects( $this->any() )
 			->method( 'searchForEntities' )
 			->will( $this->returnCallback(
@@ -118,7 +117,7 @@ class DispatchingTermSearchInteractorTest extends PHPUnit_Framework_TestCase  {
 					'label',
 					new PropertyId( 'baz:P322' )
 				),
-				new TermSearchResult(
+				new \Wikibase\Edrsf\TermSearchResult(
 					new Term( 'en', 'followed by' ),
 					'label',
 					new PropertyId( 'baz:P567' )

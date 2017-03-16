@@ -10,9 +10,10 @@ use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\PropertyInfoLookup;
+use Wikibase\Edrsf\TermIndex;
 use Wikibase\Lib\Store\EntityChangeLookup;
-use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Store\EntityIdLookup;
 
@@ -56,7 +57,7 @@ interface ClientStore {
 	public function getEntityLookup();
 
 	/**
-	 * @return EntityRevisionLookup
+	 * @return \Wikibase\Edrsf\EntityRevisionLookup
 	 */
 	public function getEntityRevisionLookup();
 

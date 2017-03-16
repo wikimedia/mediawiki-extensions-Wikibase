@@ -8,8 +8,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\EntityIdComposer;
-use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
+use Wikibase\Edrsf\EntityIdComposer;
+use Wikibase\Edrsf\SqlEntityInfoBuilder;
 use Wikibase\Lib\Tests\Store\EntityInfoBuilderTest;
 
 /**
@@ -150,7 +150,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 	 * @return SqlEntityInfoBuilder
 	 */
 	protected function newEntityInfoBuilder( array $ids ) {
-		return new SqlEntityInfoBuilder(
+		return new \Wikibase\Edrsf\SqlEntityInfoBuilder(
 			new ItemIdParser(),
 			new EntityIdComposer( [
 				'item' => function( $repositoryName, $uniquePart ) {

@@ -4,10 +4,10 @@ namespace Wikibase\Lib\Tests\Store;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityRevision;
-use Wikibase\Lib\Store\DispatchingEntityRevisionLookup;
-use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\StorageException;
+use Wikibase\Edrsf\DispatchingEntityRevisionLookup;
+use Wikibase\Edrsf\EntityRevision;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\StorageException;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
@@ -46,7 +46,7 @@ class DispatchingEntityRevisionLookupTest extends \PHPUnit_Framework_TestCase {
 			->with( $foreignItemId )
 			->willReturn( new EntityRevision( $foreignItem, 100 ) );
 
-		$dispatchingLookup = new DispatchingEntityRevisionLookup(
+		$dispatchingLookup = new \Wikibase\Edrsf\DispatchingEntityRevisionLookup(
 			array( '' => $localLookup, 'foo' => $fooLookup, )
 		);
 

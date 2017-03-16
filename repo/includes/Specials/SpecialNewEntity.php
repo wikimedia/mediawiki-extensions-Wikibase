@@ -7,7 +7,7 @@ use HTMLForm;
 use OutputPage;
 use Status;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Edrsf\EntityNamespaceLookup;
 use Wikibase\Summary;
 
 /**
@@ -30,7 +30,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	private $copyrightView;
 
 	/**
-	 * @var EntityNamespaceLookup
+	 * @var \Wikibase\Edrsf\EntityNamespaceLookup
 	 */
 	protected $entityNamespaceLookup;
 
@@ -38,7 +38,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 * @param string $name Name of the special page, as seen in links and URLs.
 	 * @param string $restriction User right required,
 	 * @param SpecialPageCopyrightView $copyrightView
-	 * @param EntityNamespaceLookup $entityNamespaceLookup
+	 * @param \Wikibase\Edrsf\EntityNamespaceLookup $entityNamespaceLookup
 	 */
 	public function __construct(
 		$name,
