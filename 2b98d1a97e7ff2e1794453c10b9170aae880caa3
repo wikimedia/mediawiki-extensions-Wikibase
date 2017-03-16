@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_0a48915f",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-16T15:26:13Z",
+      "side": 1,
+      "message": "Discussing off topic as I think this potential change should not be part of this patch: why it is not possible?\nI don\u0027t know this part of the code but this seems to be the only place SiteLinksRdfBuilder is instantiated, and we have $dedupe here, so why it cannot be another constructor parameter? What does break?",
+      "parentUuid": "8e46e3ee_df3a6de4",
+      "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_8471f8df",
         "filename": "repo/WikibaseRepo.entitytypes.php",
         "patchSetId": 1
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "It makes the EntityRdfBuilderFactory to fail (the post condition) because it says the callback isn\u0027t returning an instance of EntityRdfBuilder. I can change to return NullEntityRdfBuilder only (and cut the else part) if that\u0027s what you mean.",
       "parentUuid": "8e46e3ee_8471f8df",
+      "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_ca49496c",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-16T15:26:13Z",
+      "side": 1,
+      "message": "Yeah, sorry for not being clear.\nI meant:\n\nif ( foo ) {\n    return X;\n}\n\nreturn Y;",
+      "parentUuid": "8e46e3ee_8a058115",
       "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
