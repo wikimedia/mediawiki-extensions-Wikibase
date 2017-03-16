@@ -1916,4 +1916,11 @@ class WikibaseRepo {
 		return $this->repositoryDefinitions->getEntityTypeToRepositoryMapping();
 	}
 
+	/**
+	 * @return string[] Associative array mapping repository names to base URIs of concept URIs.
+	 */
+	public function getConceptBaseUris() {
+		return $this->repositoryDefinitions->getConceptBaseUris();
+	}
+
 }
