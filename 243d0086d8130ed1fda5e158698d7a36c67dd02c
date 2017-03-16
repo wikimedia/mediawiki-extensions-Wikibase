@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_dfa4ad06",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-16T13:31:07Z",
+      "side": 1,
+      "message": "Uh, … moving code around makes diffs and blames not happy. :-( But I understand why you did it.",
+      "revId": "243d0086d8130ed1fda5e158698d7a36c67dd02c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
