@@ -721,4 +721,19 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		);
 	}
 
+	public function testGetConceptBaseUris() {
+		$wikibaseRepo = $this->getWikibaseRepoWithCustomRepositoryDefinitions( array_merge(
+			$this->getRepositoryDefinition( '', [ 'base-uri' => 'concept:' ] ),
+			$this->getRepositoryDefinition( 'other', [ 'base-uri' => 'otherconcept:', 'entity-types' => [ 'foo' ] ] )
+		) );
+
+		$this->assertEquals(
+			[
+				'' => 'concept:',
+				'other' => 'otherconcept:',
+			],
+			$wikibaseRepo->getConceptBaseUris()
+		);
+	}
+
 }

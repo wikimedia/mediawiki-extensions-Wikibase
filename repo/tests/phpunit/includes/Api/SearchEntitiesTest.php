@@ -146,7 +146,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			$this->getMockPropertyDataTypeLookup(),
 			$this->getContentLanguages(),
 			[ 'item', 'property' ],
-			'concept:'
+			[ '' => 'concept:', 'foreign' => 'foreignconcept:' ]
 		);
 
 		$module->execute();
@@ -261,7 +261,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		$foreignItemResult = [
 			'repository' => 'foreign',
 			'id' => 'foreign:Q333',
-			'concepturi' => 'concept:foreign:Q333',
+			'concepturi' => 'foreignconcept:Q333',
 			'url' => 'http://fullTitleUrl',
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
