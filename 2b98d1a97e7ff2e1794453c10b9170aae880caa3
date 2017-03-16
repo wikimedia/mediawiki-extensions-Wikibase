@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e46e3ee_0a25f102",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-16T16:42:29Z",
+      "side": 1,
+      "message": "It\u0027s not necessary to pass the sites object here. It might actually be better to get it from global state, since it\u0027s a service. Getting services from the global service factory is expected in wiring code. The caller of the wiring code does not know what dependencies the wiring code may have. That\u0027S actually the point of having callbacks for wiring.",
+      "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_6a4115ac",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-16T16:42:29Z",
+      "side": 1,
+      "message": "It seems a bit strange to me to use the SiteLinksRdfBuilder as *the* builder of Items. This works \"by accident\", because Items only need one non-standard bit to be mapped to RDF. \n\nIt\u0027s ok for now, but it deserves a comment, I think. Afterall, a SiteLinksRdfBuilder does *not* provide the RDF mapping for Items.",
+      "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_1fec55b6",
         "filename": "repo/WikibaseRepo.entitytypes.php",
         "patchSetId": 1
@@ -73,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_aae87db0",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-16T16:42:29Z",
+      "side": 1,
+      "message": "To avoid overloading constructors, I find it a good approach to use setter injection for anything that is optional or has a sensible default. The dedupe bag is optional, so it doesn\u0027t need to be in the constructor.\n\nWe can add it there anyway, but as a general rule, it\u0027s fine for optional things to use setters instead of the constructor.",
+      "parentUuid": "8e46e3ee_ca86296a",
+      "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_8471f8df",
         "filename": "repo/WikibaseRepo.entitytypes.php",
         "patchSetId": 1
@@ -126,6 +178,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_ca006970",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-16T16:42:29Z",
+      "side": 1,
+      "message": "This is very much a matter of taste. Some prefer the full if/else pair. Some prefer if-for-the-special-case, and fall-through for the \"happy path\". \n\nI have gone back and forth myself on this a couple of times. I no longer care :)",
+      "parentUuid": "8e46e3ee_ca49496c",
+      "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_7ffa3975",
         "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
         "patchSetId": 1
@@ -161,6 +231,23 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_0a4e51dd",
+        "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-16T16:42:29Z",
+      "side": 1,
+      "message": "It\u0027s not necessary to inject all services that any RdfBuilder might need. In fact, we cannot know here what they might need. \n\nThe wikibase.entitytypes.php file is a wiring file; as such, it can us global state to get the service instances it needs.",
+      "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_dfdeed13",
         "filename": "repo/includes/Rdf/NullEntityRdfBuilder.php",
         "patchSetId": 1
@@ -190,6 +277,41 @@
       "side": 1,
       "message": "I\u0027d love to but it seems all of php files in the Rdf folder are in Wikibase\\Rdf namespace (which needs fixing but it will be really big patch)",
       "parentUuid": "8e46e3ee_dfdeed13",
+      "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_aaff1d61",
+        "filename": "repo/includes/Rdf/NullEntityRdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-16T16:42:29Z",
+      "side": 1,
+      "message": "Instead of putting the Rdf stuff into repo, I\u0027d rather move it into a separate component that *doesn\u0027t* depend on repo.",
+      "parentUuid": "8e46e3ee_4a6539dc",
+      "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_ca2f09f2",
+        "filename": "repo/tests/phpunit/includes/Rdf/EntityRdfBuilderFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-16T16:42:29Z",
+      "side": 1,
+      "message": "Do we not need to define some sites, so we can see sites in the test output?",
       "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
