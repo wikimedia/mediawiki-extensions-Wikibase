@@ -6,7 +6,7 @@ use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Term\TermBuffer;
-use Wikibase\Lib\Store\DispatchingTermBuffer;
+use Wikibase\Edrsf\DispatchingTermBuffer;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**

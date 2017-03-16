@@ -3,11 +3,10 @@
 namespace Wikibase\Lib\Tests\Store\Sql;
 
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\Lib\EntityIdComposer;
-use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
-use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
+use Wikibase\Edrsf\EntityIdComposer;
+use Wikibase\Edrsf\SqlEntityInfoBuilder;
+use Wikibase\Edrsf\SqlEntityInfoBuilderFactory;
 
 /**
  * @covers Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory

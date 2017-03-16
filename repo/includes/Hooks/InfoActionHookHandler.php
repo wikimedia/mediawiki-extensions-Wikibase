@@ -6,9 +6,9 @@ use Html;
 use IContextSource;
 use SiteLookup;
 use Title;
-use Wikibase\Store\SubscriptionLookup;
+use Wikibase\Edrsf\EntityNamespaceLookup;
 use Wikibase\Store\EntityIdLookup;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Store\SubscriptionLookup;
 
 /**
  * @license GPL-2.0+

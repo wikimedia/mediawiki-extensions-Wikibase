@@ -2,19 +2,19 @@
 
 namespace Wikibase\Client\Tests;
 
-use Wikibase\Client\DispatchingServiceFactory;
-use Wikibase\Client\Store\RepositoryServiceContainerFactory;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Term\TermBuffer;
-use Wikibase\Lib\RepositoryDefinitions;
-use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
-use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
-use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\Edrsf\DispatchingServiceFactory;
+use Wikibase\Edrsf\EntityInfoBuilderFactory;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\PropertyInfoLookup;
+use Wikibase\Edrsf\RepositoryDefinitions;
+use Wikibase\Edrsf\RepositoryServiceContainerFactory;
+use Wikibase\Edrsf\RepositorySpecificDataValueDeserializerFactory;
+use Wikibase\Edrsf\TermSearchInteractorFactory;
 
 /**
  * @group Wikibase
@@ -25,7 +25,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 class DispatchingServiceWiringTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @return RepositoryServiceContainerFactory
+	 * @return \Wikibase\Edrsf\RepositoryServiceContainerFactory
 	 */
 	private function getRepositoryServiceContainerFactory() {
 		$idParser = new PrefixMappingEntityIdParserFactory(
@@ -36,7 +36,7 @@ class DispatchingServiceWiringTest extends \PHPUnit_Framework_TestCase {
 			$idParser,
 			new RepositorySpecificDataValueDeserializerFactory( $idParser ),
 			[ '' => false ],
-			[ __DIR__ . '/../../../includes/Store/RepositoryServiceWiring.php' ],
+			[],
 			WikibaseClient::getDefaultInstance()
 		);
 	}

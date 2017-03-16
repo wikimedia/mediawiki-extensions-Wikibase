@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Tests\Store;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\Edrsf\PropertyInfoLookup;
 
 /**
  * Class MockPropertyInfoLockup is an implementation of PropertyInfoLookup based on a local array.
@@ -29,7 +29,7 @@ class MockPropertyInfoLookup implements PropertyInfoLookup {
 	}
 
 	/**
-	 * @see PropertyInfoLookup::getPropertyInfo
+	 * @see \Wikibase\Edrsf\PropertyInfoLookup::getPropertyInfo
 	 *
 	 * @param PropertyId $propertyId
 	 *
@@ -68,7 +68,7 @@ class MockPropertyInfoLookup implements PropertyInfoLookup {
 	}
 
 	/**
-	 * @see PropertyInfoLookup::getAllPropertyInfo
+	 * @see \Wikibase\Edrsf\PropertyInfoLookup::getAllPropertyInfo
 	 *
 	 * @return array[]
 	 */

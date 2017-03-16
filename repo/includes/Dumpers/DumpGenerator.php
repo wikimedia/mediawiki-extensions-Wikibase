@@ -5,14 +5,14 @@ namespace Wikibase\Dumpers;
 use InvalidArgumentException;
 use LogicException;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
+use Wikibase\DataModel\Services\EntityId\EntityIdPager;
+use Wikibase\DataModel\Services\Lookup\EntityLookupException;
+use Wikibase\Edrsf\StorageException;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
 use Wikibase\Lib\Reporting\RethrowingExceptionHandler;
-use Wikibase\Lib\Store\StorageException;
-use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 
 /**
  * DumpGenerator generates a dump of a given set of entities, excluding
@@ -313,7 +313,7 @@ abstract class DumpGenerator {
 	 * @param EntityId $entityId
 	 *
 	 * @throws EntityLookupException
-	 * @throws StorageException
+	 * @throws \Wikibase\Edrsf\StorageException
 	 * @return string|null
 	 */
 	abstract protected function generateDumpForEntityId( EntityId $entityId );

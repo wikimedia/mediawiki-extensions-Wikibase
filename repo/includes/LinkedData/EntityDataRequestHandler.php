@@ -8,17 +8,17 @@ use SquidUpdate;
 use WebRequest;
 use WebResponse;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
-use Wikibase\EntityRevision;
-use Wikibase\Lib\Store\BadRevisionException;
-use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Edrsf\BadRevisionException;
+use Wikibase\Edrsf\EntityRevision;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\RevisionedUnresolvedRedirectException;
+use Wikibase\Edrsf\StorageException;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\RedirectRevision;
 
 /**

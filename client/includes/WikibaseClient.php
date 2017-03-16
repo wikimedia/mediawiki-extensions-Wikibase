@@ -32,70 +32,70 @@ use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\Changes\ChangeRunCoalescer;
 use Wikibase\Client\Changes\WikiPageUpdater;
-use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\ClientSiteLinkTitleLookup;
+use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
-use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory;
 use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
-use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
-use Wikibase\Client\RecentChanges\RecentChangeFactory;
-use Wikibase\Client\Serializer\ForbiddenSerializer;
-use Wikibase\Client\Store\RepositoryServiceContainerFactory;
-use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\SerializerFactory;
-use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
-use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
+use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
+use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
+use Wikibase\Client\RecentChanges\RecentChangeFactory;
+use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\ClientStore;
 use Wikibase\DataModel\DeserializerFactory;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Services\Diff\EntityDiffer;
+use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\DirectSqlStore;
+use Wikibase\Edrsf\DispatchingServiceFactory;
+use Wikibase\Edrsf\EntityContentDataCodec;
+use Wikibase\Edrsf\EntityDataRetrievalServiceFactory;
+use Wikibase\Edrsf\EntityIdComposer;
+use Wikibase\Edrsf\EntityNamespaceLookup;
+use Wikibase\Edrsf\ForbiddenSerializer;
+use Wikibase\Edrsf\LanguageFallbackChainFactory;
+use Wikibase\Edrsf\PrefetchingTermLookup;
+use Wikibase\Edrsf\RepositoryDefinitions;
+use Wikibase\Edrsf\RepositoryServiceContainerFactory;
+use Wikibase\Edrsf\RepositorySpecificDataValueDeserializerFactory;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\ItemChange;
 use Wikibase\LangLinkHandler;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\DataTypeDefinitions;
-use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
-use Wikibase\Lib\Interactors\TermSearchInteractor;
-use Wikibase\Lib\RepositoryDefinitions;
-use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\MediaWikiContentLanguages;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
-use Wikibase\Lib\Store\EntityContentDataCodec;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
 use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
-use Wikibase\Lib\Store\PrefetchingTermLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\NamespaceChecker;
 use Wikibase\SettingsArray;
-use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
 use Wikibase\StringNormalizer;
 
 /**
@@ -361,7 +361,7 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return EntityIdComposer
+	 * @return \Wikibase\Edrsf\EntityIdComposer
 	 */
 	public function getEntityIdComposer() {
 		if ( $this->entityIdComposer === null ) {
@@ -399,7 +399,7 @@ final class WikibaseClient {
 			$idParserFactory,
 			new RepositorySpecificDataValueDeserializerFactory( $idParserFactory ),
 			$this->repositoryDefinitions->getDatabaseNames(),
-			$this->getSettings()->getSetting( 'repositoryServiceWiringFiles' ),
+			[],
 			$this
 		);
 	}
@@ -441,7 +441,7 @@ final class WikibaseClient {
 	 *
 	 * XXX: This is not used by client itself, but is used by ArticlePlaceholder!
 	 *
-	 * @return TermSearchInteractor
+	 * @return \Wikibase\Edrsf\TermSearchInteractor
 	 */
 	public function newTermSearchInteractor( $displayLanguageCode ) {
 		return $this->getEntityDataRetrievalServiceFactory()->getTermSearchInteractorFactory()
@@ -485,7 +485,7 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return LanguageFallbackChainFactory
+	 * @return \Wikibase\Edrsf\LanguageFallbackChainFactory
 	 */
 	public function getLanguageFallbackChainFactory() {
 		if ( $this->languageFallbackChainFactory === null ) {
@@ -669,7 +669,7 @@ final class WikibaseClient {
 	/**
 	 * @param SettingsArray $settings
 	 *
-	 * @return RepositoryDefinitions
+	 * @return \Wikibase\Edrsf\RepositoryDefinitions
 	 */
 	private static function getRepositoryDefinitionsFromSettings( SettingsArray $settings ) {
 		// FIXME: It might no longer be needed to check different settings (repoDatabase vs foreignRepositories)
@@ -1252,7 +1252,7 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return EntityNamespaceLookup
+	 * @return \Wikibase\Edrsf\EntityNamespaceLookup
 	 */
 	public function getEntityNamespaceLookup() {
 		if ( $this->entityNamespaceLookup === null ) {
@@ -1267,7 +1267,7 @@ final class WikibaseClient {
 	/**
 	 * @param Language $language
 	 *
-	 * @return LanguageFallbackChain
+	 * @return \Wikibase\Edrsf\LanguageFallbackChain
 	 */
 	public function getDataAccessLanguageFallbackChain( Language $language ) {
 		return $this->getLanguageFallbackChainFactory()->newFromLanguage(
@@ -1277,7 +1277,7 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return RepositoryDefinitions
+	 * @return \Wikibase\Edrsf\RepositoryDefinitions
 	 */
 	public function getRepositoryDefinitions() {
 		return $this->repositoryDefinitions;

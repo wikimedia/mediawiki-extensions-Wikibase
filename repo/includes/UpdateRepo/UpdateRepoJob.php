@@ -9,9 +9,9 @@ use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EditEntityFactory;
-use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\StorageException;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
@@ -25,7 +25,7 @@ use Wikibase\SummaryFormatter;
 abstract class UpdateRepoJob extends Job {
 
 	/**
-	 * @var EntityRevisionLookup
+	 * @var \Wikibase\Edrsf\EntityRevisionLookup
 	 */
 	protected $entityRevisionLookup;
 

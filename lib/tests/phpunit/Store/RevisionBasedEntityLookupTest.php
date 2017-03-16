@@ -6,9 +6,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
-use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Edrsf\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
@@ -41,11 +40,11 @@ class RevisionBasedEntityLookupTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getEntityProvider
 	 *
-	 * @param EntityRevisionLookup $revisionLookup
+	 * @param \Wikibase\Edrsf\EntityRevisionLookup $revisionLookup
 	 * @param EntityId $id
 	 * @param EntityId|null $expected
 	 */
-	public function testGetEntity( EntityRevisionLookup $revisionLookup, EntityId $id, EntityId $expected = null ) {
+	public function testGetEntity( \Wikibase\Edrsf\EntityRevisionLookup $revisionLookup, EntityId $id, EntityId $expected = null ) {
 		$entityLookup = new RevisionBasedEntityLookup( $revisionLookup );
 		$entity = $entityLookup->getEntity( $id );
 
@@ -72,11 +71,11 @@ class RevisionBasedEntityLookupTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider hasEntityProvider
 	 *
-	 * @param EntityRevisionLookup $revisionLookup
+	 * @param \Wikibase\Edrsf\EntityRevisionLookup $revisionLookup
 	 * @param EntityId $id
 	 * @param bool $exists
 	 */
-	public function testHasEntity( EntityRevisionLookup $revisionLookup, EntityId $id, $exists ) {
+	public function testHasEntity( \Wikibase\Edrsf\EntityRevisionLookup $revisionLookup, EntityId $id, $exists ) {
 		$entityLookup = new RevisionBasedEntityLookup( $revisionLookup );
 		$actual = $entityLookup->hasEntity( $id );
 
@@ -91,10 +90,10 @@ class RevisionBasedEntityLookupTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return EntityRevisionLookup
+	 * @return \Wikibase\Edrsf\EntityRevisionLookup
 	 */
 	private function newEntityLookupExceptionThrowingRevisionLookup() {
-		$revisionLookup = $this->getMock( EntityRevisionLookup::class );
+		$revisionLookup = $this->getMock( \Wikibase\Edrsf\EntityRevisionLookup::class );
 
 		$revisionLookup->expects( $this->any() )
 			->method( 'getEntityRevision' )
@@ -105,7 +104,7 @@ class RevisionBasedEntityLookupTest extends \PHPUnit_Framework_TestCase {
 
 		$revisionLookup->expects( $this->any() )
 			->method( 'getLatestRevisionId' )
-			->will( $this->throwException( new RevisionedUnresolvedRedirectException(
+			->will( $this->throwException( new \Wikibase\Edrsf\RevisionedUnresolvedRedirectException(
 				new ItemId( 'Q1' ),
 				new ItemId( 'Q2' )
 			) ) );
@@ -116,7 +115,7 @@ class RevisionBasedEntityLookupTest extends \PHPUnit_Framework_TestCase {
 	public function testWhenEntityLookupExceptionIsThrown_hasEntityPassesItAlong() {
 		$entityLookup = new RevisionBasedEntityLookup( $this->newEntityLookupExceptionThrowingRevisionLookup() );
 
-		$this->setExpectedException( RevisionedUnresolvedRedirectException::class );
+		$this->setExpectedException( \Wikibase\Edrsf\RevisionedUnresolvedRedirectException::class );
 		$entityLookup->hasEntity( new ItemId( 'Q1' ) );
 	}
 
@@ -128,10 +127,10 @@ class RevisionBasedEntityLookupTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return EntityRevisionLookup
+	 * @return \Wikibase\Edrsf\EntityRevisionLookup
 	 */
 	private function newBadExceptionThrowingRevisionLookup() {
-		$revisionLookup = $this->getMock( EntityRevisionLookup::class );
+		$revisionLookup = $this->getMock( \Wikibase\Edrsf\EntityRevisionLookup::class );
 
 		$revisionLookup->expects( $this->any() )
 			->method( 'getEntityRevision' )

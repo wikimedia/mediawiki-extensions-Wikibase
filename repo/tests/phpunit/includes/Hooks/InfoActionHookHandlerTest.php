@@ -5,14 +5,14 @@ namespace Wikibase\Repo\Tests\Hooks;
 use Html;
 use IContextSource;
 use RequestContext;
-use SiteLookup;
 use Site;
+use SiteLookup;
 use Title;
-use Wikibase\Store\EntityIdLookup;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Edrsf\EntityNamespaceLookup;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
+use Wikibase\Store\EntityIdLookup;
 use Wikibase\Store\SubscriptionLookup;
 
 /**

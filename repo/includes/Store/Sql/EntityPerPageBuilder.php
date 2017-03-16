@@ -6,8 +6,8 @@ use ResultWrapper;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\Edrsf\EntityNamespaceLookup;
 use Wikibase\Lib\Reporting\MessageReporter;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Store\EntityPerPage;
 
 /**
@@ -60,7 +60,7 @@ class EntityPerPageBuilder {
 	/**
 	 * @param EntityPerPage $entityPerPageTable
 	 * @param EntityIdParser $entityIdParser
-	 * @param EntityNamespaceLookup $entityNamespaceLookup
+	 * @param \Wikibase\Edrsf\EntityNamespaceLookup $entityNamespaceLookup
 	 * @param array $contentModels
 	 */
 	public function __construct(

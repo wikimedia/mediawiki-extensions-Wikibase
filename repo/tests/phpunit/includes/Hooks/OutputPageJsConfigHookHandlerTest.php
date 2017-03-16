@@ -7,7 +7,7 @@ use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Edrsf\EntityNamespaceLookup;
 use Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler;
 
 /**

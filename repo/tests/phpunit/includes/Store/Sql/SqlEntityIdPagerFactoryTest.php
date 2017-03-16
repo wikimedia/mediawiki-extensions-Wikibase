@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Edrsf\EntityNamespaceLookup;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 

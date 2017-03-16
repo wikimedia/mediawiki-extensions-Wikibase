@@ -5,7 +5,7 @@ namespace Wikibase\Lib;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
-use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\Edrsf\PropertyInfoLookup;
 
 /**
  * PropertyDataTypeLookup that uses an PropertyInfoLookup to find
@@ -27,7 +27,7 @@ class PropertyInfoDataTypeLookup implements PropertyDataTypeLookup {
 	private $infoLookup;
 
 	/**
-	 * @param PropertyInfoLookup $infoLookup
+	 * @param \Wikibase\Edrsf\PropertyInfoLookup $infoLookup
 	 * @param PropertyDataTypeLookup|null $fallbackLookup
 	 */
 	public function __construct( PropertyInfoLookup $infoLookup, PropertyDataTypeLookup $fallbackLookup = null ) {

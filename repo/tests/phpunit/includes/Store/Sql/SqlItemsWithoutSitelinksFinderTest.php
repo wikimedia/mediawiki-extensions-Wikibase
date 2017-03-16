@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Edrsf\EntityNamespaceLookup;
 use Wikibase\Repo\Store\Sql\SqlItemsWithoutSitelinksFinder;
 
 /**
