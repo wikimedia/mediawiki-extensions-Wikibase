@@ -170,6 +170,7 @@
 	"wikibase-validator-illegal-file-chars": "Les noms de fichier ne doivent pas contenir certains caractères comme les virgules ou les barres obliques. Merci de bien vouloir coller uniquement le nom de fichier après «&nbsp;File:&nbsp;».",
 	"wikibase-validator-illegal-geo-shape-title": "La valeur doit commencer par \"Data:\" et finir par \".map\". En outre, le titre ne doit pas contenir de caractères comme la virgule, le dièse(#) ou la barre verticale(|).",
 	"wikibase-validator-no-such-media": "Le fichier «&nbsp;$1&nbsp;» n'existe pas sur [https://commons.wikimedia.org/Wikimedia Commons].",
+	"wikibase-validator-no-such-sitelink": "Impossible de trouver un lien de site vers « $1 » en essayant de modifier les badges.",
 	"wikibase-validator-page-not-exists": "La page « $1 » n’existe pas.",
 	"wikibase-validator-not-a-language": "«&nbsp;$1&nbsp;» n’est pas un code de langue connu.",
 	"wikibase-item-reference-edit-placeholder": "Saisir l’identifiant de l’élément, par ex. Q10",

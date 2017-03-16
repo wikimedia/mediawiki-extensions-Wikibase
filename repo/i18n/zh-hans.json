@@ -143,6 +143,7 @@
 	"wikibase-validator-illegal-file-chars": "文件名不允许保护冒号或斜杠字符。请只粘贴“File:”之后的文件名。",
 	"wikibase-validator-illegal-geo-shape-title": "值必须以“Data:”开头，并以“.map”结尾。另外标题不应包含冒号、哈希或管道字符。",
 	"wikibase-validator-no-such-media": "文件“$1”在[https://commons.wikimedia.org/ 维基共享资源]不存在。",
+	"wikibase-validator-no-such-sitelink": "尝试编辑徽章时无法找到至“$1”的网站链接。",
 	"wikibase-validator-page-not-exists": "页面“$1”不存在。",
 	"wikibase-validator-not-a-language": "“$1”不是已知的语言代码。",
 	"wikibase-itemlink": "$1$2",

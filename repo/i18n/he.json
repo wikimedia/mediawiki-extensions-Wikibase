@@ -130,6 +130,7 @@
 	"wikibase-validator-illegal-file-chars": "שמות קבצים לא יכולים להכיל תווים מסוימים, כמו נקודתיים וקווים נטויים. יש להדביק את שם הקובץ רק אחרי \"File:\".",
 	"wikibase-validator-illegal-geo-shape-title": "ערכים צריכים להתחיל ב־\"Data:\" ולהסתיים ב־\".map\". בנוסף, הכותרת צריכה לא להכיל תווים כמו נקודתיים, סולמית, או מקל.",
 	"wikibase-validator-no-such-media": "הקובץ \"$1\" אינו קיים ב־[https://commons.wikimedia.org/ ויקישיתוף]",
+	"wikibase-validator-no-such-sitelink": "לא היה אפשר למצוא קישור אתר אל \"$1\" בלי לנסות לערוך סמלים.",
 	"wikibase-validator-page-not-exists": "הדף \"$1\" אינו קיים.",
 	"wikibase-validator-not-a-language": "\"$1\" הוא לא קוד שפה ידוע.",
 	"wikibase-item-reference-edit-placeholder": "נא להזין מזהה פריט, למשל Q10",

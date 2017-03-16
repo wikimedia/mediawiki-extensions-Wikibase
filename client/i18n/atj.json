@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Amqui",
-			"Benoit Rochon"
+			"Benoit Rochon",
+			"Jean-paul echaquan"
 		]
 	},
 	"tooltip-t-wikibase": "Ite ke ispitatc",
@@ -10,5 +11,7 @@
 	"wikibase-editlinks": "Meckotona e ici tapitik",
 	"wikibase-editlinkstitle": "Meckotcita arimowewinik ka tapitiki",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
-	"wikibase-rc-wikibase-edit-letter": "D"
+	"wikibase-rc-hide-wikidata-show": "Wapata",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} meckotcita"
 }

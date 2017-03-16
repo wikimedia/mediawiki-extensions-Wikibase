@@ -1,9 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"Benoit Rochon"
+			"Benoit Rochon",
+			"Jeannette Coocoo"
 		]
 	},
 	"wikibase-edit": "meckotcita",
-	"wikibase-add": "acta"
+	"wikibase-add": "acta",
+	"wikibase-entitytermsforlanguagelistview-description": "E witcikemakak",
+	"wikibase-diffview-description": "e witcikemakak",
+	"wikibase-sitelinks-special": "Kotak tipatcimosinihikana",
+	"wikibase-newentity-description": "E witcikemakak:",
+	"wikibase-setlabeldescriptionaliases-description-label": "E witcikemakak:"
 }
