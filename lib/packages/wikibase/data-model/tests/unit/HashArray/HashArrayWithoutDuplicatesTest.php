@@ -4,6 +4,7 @@ namespace Wikibase\DataModel\Tests\HashArray;
 
 use Hashable;
 use Wikibase\DataModel\Fixtures\HashArrayElement;
+use Wikibase\DataModel\Fixtures\HashArrayWithoutDuplicates;
 use Wikibase\DataModel\HashArray;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
@@ -19,17 +20,10 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
  */
 class HashArrayWithoutDuplicatesTest extends HashArrayTest {
 
-	public function constructorProvider() {
-		$argLists = [];
-
-		$argLists[] = [ HashArrayElement::getInstances() ];
-		$argLists[] = [ array_merge( HashArrayElement::getInstances(), HashArrayElement::getInstances() ) ];
-
-		return $argLists;
-	}
-
-	public function getInstanceClass() {
-		return 'Wikibase\DataModel\Fixtures\HashArrayWithoutDuplicates';
+	public function instanceProvider() {
+		return [
+			[ new HashArrayWithoutDuplicates( HashArrayElement::getInstances() ) ],
+		];
 	}
 
 	public function elementInstancesProvider() {

@@ -33,13 +33,6 @@ use Wikibase\DataModel\Tests\HashArray\HashArrayTest;
  */
 class SnakListTest extends HashArrayTest {
 
-	/**
-	 * @see HashArrayTest::getInstanceClass
-	 */
-	public function getInstanceClass() {
-		return 'Wikibase\DataModel\Snak\SnakList';
-	}
-
 	public function elementInstancesProvider() {
 		$id42 = new PropertyId( 'P42' );
 
@@ -52,25 +45,24 @@ class SnakListTest extends HashArrayTest {
 		return $argLists;
 	}
 
-	public function constructorProvider() {
+	public function instanceProvider() {
 		$id42 = new PropertyId( 'P42' );
 		$id9001 = new PropertyId( 'P9001' );
 
 		return [
-			[],
-			[ [] ],
-			[ [
+			[ new SnakList() ],
+			[ new SnakList( [
 				new PropertyNoValueSnak( $id42 )
-			] ],
-			[ [
+			] ) ],
+			[ new SnakList( [
 				new PropertyNoValueSnak( $id42 ),
 				new PropertyNoValueSnak( $id9001 ),
-			] ],
-			[ [
+			] ) ],
+			[ new SnakList( [
 				new PropertyNoValueSnak( $id42 ),
 				new PropertyNoValueSnak( $id9001 ),
 				new PropertyValueSnak( $id42, new StringValue( 'a' ) ),
-			] ],
+			] ) ],
 		];
 	}
 
