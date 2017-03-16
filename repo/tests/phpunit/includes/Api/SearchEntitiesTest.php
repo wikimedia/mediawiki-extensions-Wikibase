@@ -146,7 +146,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			$this->getMockPropertyDataTypeLookup(),
 			$this->getContentLanguages(),
 			[ 'item', 'property' ],
-			'concept:'
+			[ '' => 'http://acme.test/concept/', 'foreign' => 'http://foreign.wiki/concept/' ]
 		);
 
 		$module->execute();
@@ -212,7 +212,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		$q111Result = array(
 			'repository' => '',
 			'id' => 'Q111',
-			'concepturi' => 'concept:Q111',
+			'concepturi' => 'http://acme.test/concept/Q111',
 			'url' => 'http://fullTitleUrl',
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
@@ -228,7 +228,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		$q222Result = array(
 			'repository' => '',
 			'id' => 'Q222',
-			'concepturi' => 'concept:Q222',
+			'concepturi' => 'http://acme.test/concept/Q222',
 			'url' => 'http://fullTitleUrl',
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
@@ -245,7 +245,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		$q333Result = array(
 			'repository' => '',
 			'id' => 'Q333',
-			'concepturi' => 'concept:Q333',
+			'concepturi' => 'http://acme.test/concept/Q333',
 			'url' => 'http://fullTitleUrl',
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
@@ -261,7 +261,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		$foreignItemResult = [
 			'repository' => 'foreign',
 			'id' => 'foreign:Q333',
-			'concepturi' => 'concept:foreign:Q333',
+			'concepturi' => 'http://foreign.wiki/concept/Q333',
 			'url' => 'http://fullTitleUrl',
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
@@ -276,7 +276,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		$propertyResult = [
 			'repository' => '',
 			'id' => 'P123',
-			'concepturi' => 'concept:P123',
+			'concepturi' => 'http://acme.test/concept/P123',
 			'url' => 'http://fullTitleUrl',
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
