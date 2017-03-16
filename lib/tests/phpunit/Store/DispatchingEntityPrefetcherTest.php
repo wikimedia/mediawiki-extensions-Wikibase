@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Tests\Store;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
-use Wikibase\Lib\Store\DispatchingEntityPrefetcher;
 
 /**
  * @covers Wikibase\Lib\Store\DispatchingEntityPrefetcher
@@ -32,7 +31,7 @@ class DispatchingEntityPrefetcherTest extends \PHPUnit_Framework_TestCase {
 			->method( 'prefetch' )
 			->with( [ $foreignIdOne ] );
 
-		$dispatchingPrefetcher = new DispatchingEntityPrefetcher( [
+		$dispatchingPrefetcher = new \Wikibase\Edrsf\DispatchingEntityPrefetcher( [
 			'' => $localPrefetcher,
 			'foo' => $fooPrefetcher,
 		] );
@@ -49,7 +48,7 @@ class DispatchingEntityPrefetcherTest extends \PHPUnit_Framework_TestCase {
 			->method( 'prefetch' )
 			->with( [ $localId ] );
 
-		$dispatchingPrefetcher = new DispatchingEntityPrefetcher( [
+		$dispatchingPrefetcher = new \Wikibase\Edrsf\DispatchingEntityPrefetcher( [
 			'' => $localPrefetcher,
 		] );
 
@@ -67,7 +66,7 @@ class DispatchingEntityPrefetcherTest extends \PHPUnit_Framework_TestCase {
 			->method( 'purge' )
 			->with( $foreignId );
 
-		$dispatchingPrefetcher = new DispatchingEntityPrefetcher( [
+		$dispatchingPrefetcher = new \Wikibase\Edrsf\DispatchingEntityPrefetcher( [
 			'' => $localPrefetcher,
 			'foo' => $fooPrefetcher,
 		] );
@@ -81,7 +80,7 @@ class DispatchingEntityPrefetcherTest extends \PHPUnit_Framework_TestCase {
 		$localPrefetcher = $this->getMock( EntityPrefetcher::class );
 		$localPrefetcher->expects( $this->never() )->method( 'purge' );
 
-		$dispatchingPrefetcher = new DispatchingEntityPrefetcher( [
+		$dispatchingPrefetcher = new \Wikibase\Edrsf\DispatchingEntityPrefetcher( [
 			'' => $localPrefetcher,
 		] );
 
@@ -95,7 +94,7 @@ class DispatchingEntityPrefetcherTest extends \PHPUnit_Framework_TestCase {
 		$fooPrefetcher = $this->getMock( EntityPrefetcher::class );
 		$fooPrefetcher->expects( $this->atLeastOnce() )->method( 'purgeAll' );
 
-		$dispatchingPrefetcher = new DispatchingEntityPrefetcher( [
+		$dispatchingPrefetcher = new \Wikibase\Edrsf\DispatchingEntityPrefetcher( [
 			'' => $localPrefetcher,
 			'foo' => $fooPrefetcher,
 		] );
@@ -118,7 +117,7 @@ class DispatchingEntityPrefetcherTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenInvalidArgumentsConstructorThrowsException( $args ) {
 		$this->setExpectedException( InvalidArgumentException::class );
 
-		new DispatchingEntityPrefetcher( $args );
+		new \Wikibase\Edrsf\DispatchingEntityPrefetcher( $args );
 	}
 
 }

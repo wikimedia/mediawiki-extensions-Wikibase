@@ -3,7 +3,8 @@
 namespace Wikibase\Lib\Store;
 
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\TermIndex;
+use Wikibase\Edrsf\EntityTermLookupBase;
+use Wikibase\Edrsf\TermIndex;
 
 /**
  * @license GPL-2.0+
@@ -13,7 +14,7 @@ use Wikibase\TermIndex;
 class EntityTermLookup extends EntityTermLookupBase {
 
 	/**
-	 * @var TermIndex
+	 * @var \Wikibase\Edrsf\TermIndex
 	 */
 	private $termIndex;
 

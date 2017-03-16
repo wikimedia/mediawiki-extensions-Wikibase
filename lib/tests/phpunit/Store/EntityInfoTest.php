@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\Lib\Store\EntityInfo;
+use Wikibase\Edrsf\EntityInfo;
 use Wikibase\Lib\Store\GenericEntityInfoBuilder;
 use Wikibase\Lib\Tests\MockRepository;
 
@@ -27,7 +27,7 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @param EntityDocument[] $entities
 	 *
-	 * @return EntityInfo
+	 * @return \Wikibase\Edrsf\EntityInfo
 	 */
 	private function getEntityInfo( array $entities ) {
 		$entityRevisionLookup = new MockRepository();
@@ -102,7 +102,7 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider asArrayProvider
 	 */
 	public function testAsArray( array $records ) {
-		$entityInfo = new EntityInfo( $records );
+		$entityInfo = new \Wikibase\Edrsf\EntityInfo( $records );
 
 		$actual = $entityInfo->asArray();
 		$this->assertEquals( $records, $actual );
@@ -204,7 +204,7 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider provideBlankInfo
 	 */
 	public function testGetLabel_exception( $data ) {
-		$info = new EntityInfo( $data );
+		$info = new \Wikibase\Edrsf\EntityInfo( $data );
 		$this->setExpectedException( OutOfBoundsException::class );
 		$info->getLabel( new ItemId( 'Q99' ), 'en' );
 	}
@@ -222,7 +222,7 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider provideBlankInfo
 	 */
 	public function testGetDescription_exception( $data ) {
-		$info = new EntityInfo( $data );
+		$info = new \Wikibase\Edrsf\EntityInfo( $data );
 		$this->setExpectedException( OutOfBoundsException::class );
 		$info->getDescription( new ItemId( 'Q99' ), 'en' );
 	}
@@ -231,7 +231,7 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider provideBlankInfo
 	 */
 	public function testGetDescriptions_exception( $data ) {
-		$info = new EntityInfo( $data );
+		$info = new \Wikibase\Edrsf\EntityInfo( $data );
 		$this->setExpectedException( OutOfBoundsException::class );
 		$info->getDescriptions( new ItemId( 'Q99' ) );
 	}
@@ -257,7 +257,7 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidArrayProvider
 	 */
 	public function testGetLabelWithInvalidArray_throwsRuntimeException( $array ) {
-		$info = new EntityInfo( $array );
+		$info = new \Wikibase\Edrsf\EntityInfo( $array );
 		$this->setExpectedException( RuntimeException::class );
 		$info->getLabel( new ItemId( 'Q99' ), 'en' );
 	}
@@ -266,7 +266,7 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidArrayProvider
 	 */
 	public function testGetLabelsWithInvalidArray_throwsRuntimeException( $array ) {
-		$info = new EntityInfo( $array );
+		$info = new \Wikibase\Edrsf\EntityInfo( $array );
 		$this->setExpectedException( RuntimeException::class );
 		$info->getLabels( new ItemId( 'Q99' ) );
 	}
@@ -275,7 +275,7 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidArrayProvider
 	 */
 	public function testGetDescriptionWithInvalidArray_throwsRuntimeException( $array ) {
-		$info = new EntityInfo( $array );
+		$info = new \Wikibase\Edrsf\EntityInfo( $array );
 		$this->setExpectedException( RuntimeException::class );
 		$info->getDescription( new ItemId( 'Q99' ), 'en' );
 	}
@@ -284,7 +284,7 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidArrayProvider
 	 */
 	public function testGetDescriptionsWithInvalidArray_throwsRuntimeException( $array ) {
-		$info = new EntityInfo( $array );
+		$info = new \Wikibase\Edrsf\EntityInfo( $array );
 		$this->setExpectedException( RuntimeException::class );
 		$info->getDescriptions( new ItemId( 'Q99' ) );
 	}

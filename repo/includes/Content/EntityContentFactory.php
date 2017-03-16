@@ -15,9 +15,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\EntityContent;
-use Wikibase\Repo\Store\EntityTitleStoreLookup;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Store\EntityIdLookup;
 use Wikimedia\Assert\Assert;
 
@@ -156,7 +155,7 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup, En
 	 *
 	 * @param Title[] $titles
 	 *
-	 * @throws StorageException
+	 * @throws \Wikibase\Edrsf\StorageException
 	 * @return EntityId[] Entity IDs, keyed by page IDs.
 	 */
 	public function getEntityIds( array $titles ) {

@@ -8,14 +8,13 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
-use Wikibase\Lib\Interactors\TermSearchOptions;
-use Wikibase\Lib\Interactors\TermSearchResult;
-use Wikibase\Store\BufferingTermLookup;
-use Wikibase\TermIndexEntry;
+use Wikibase\Edrsf\LanguageFallbackChain;
+use Wikibase\Edrsf\LanguageFallbackChainFactory;
+use Wikibase\Edrsf\TermIndexEntry;
+use Wikibase\Edrsf\TermIndexSearchInteractor;
+use Wikibase\Edrsf\TermSearchOptions;
 use Wikibase\Lib\Tests\Store\MockTermIndex;
+use Wikibase\Store\BufferingTermLookup;
 
 /**
  * @covers Wikibase\Lib\Interactors\TermIndexSearchInteractor
@@ -58,7 +57,7 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 	 * @param string $termType
 	 * @param EntityId|ItemId|PropertyId $entityId
 	 *
-	 * @return TermIndexEntry
+	 * @return \Wikibase\Edrsf\TermIndexEntry
 	 */
 	private function getTermIndexEntry( $text, $languageCode, $termType, EntityId $entityId ) {
 		return new TermIndexEntry( array(
@@ -109,7 +108,7 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return LanguageFallbackChainFactory
+	 * @return \Wikibase\Edrsf\LanguageFallbackChainFactory
 	 */
 	private function getMockLanguageFallbackChainFactory() {
 		$mockFactory = $this->getMockBuilder( LanguageFallbackChainFactory::class )
@@ -349,7 +348,7 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 			'Incorrect number of search results'
 		);
 
-		/** @var TermSearchResult $result */
+		/** @var \Wikibase\Edrsf\TermSearchResult $result */
 		foreach ( $results as $key => $result ) {
 			$expectedTermDetails = $expectedTermsDetails[$key];
 

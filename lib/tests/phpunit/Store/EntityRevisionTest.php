@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Tests\Store;
 use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\EntityRevision;
+use Wikibase\Edrsf\EntityRevision;
 
 /**
  * @covers Wikibase\EntityRevision

@@ -25,15 +25,15 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityRedirect;
+use Wikibase\Edrsf\EntityContentDataCodec;
+use Wikibase\Edrsf\TermIndex;
 use Wikibase\EntityContent;
-use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Repo\Diff\EntityContentDiffView;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\EntityValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\TermIndex;
 
 /**
  * Base handler class for Entity content classes.
@@ -59,7 +59,7 @@ abstract class EntityHandler extends ContentHandler {
 	private $entityPerPage;
 
 	/**
-	 * @var TermIndex
+	 * @var \Wikibase\Edrsf\TermIndex
 	 */
 	private $termIndex;
 
@@ -93,7 +93,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @param string $modelId
 	 * @param EntityPerPage $entityPerPage
 	 * @param TermIndex $termIndex
-	 * @param EntityContentDataCodec $contentCodec
+	 * @param \Wikibase\Edrsf\EntityContentDataCodec $contentCodec
 	 * @param EntityConstraintProvider $constraintProvider
 	 * @param ValidatorErrorLocalizer $errorLocalizer
 	 * @param EntityIdParser $entityIdParser

@@ -11,8 +11,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Edrsf\TermSearchResult;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
@@ -89,7 +89,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param array $params
-	 * @param TermSearchResult[] $returnResults
+	 * @param \Wikibase\Edrsf\TermSearchResult[] $returnResults
 	 *
 	 * @return EntitySearchHelper
 	 */

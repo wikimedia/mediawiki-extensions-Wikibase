@@ -4,12 +4,8 @@ namespace Wikibase;
 
 use HashBagOStuff;
 use ObjectCache;
-use Wikibase\Client\EntityDataRetrievalServiceFactory;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
-use Wikibase\Lib\Store\CachingPropertyInfoLookup;
-use Wikibase\Lib\Store\PropertyInfoLookup;
-use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\Sql\SqlSubscriptionManager;
 use Wikibase\Client\Usage\Sql\SqlUsageTracker;
@@ -21,19 +17,22 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
+use Wikibase\Edrsf\EntityContentDataCodec;
+use Wikibase\Edrsf\EntityDataRetrievalServiceFactory;
+use Wikibase\Edrsf\EntityIdComposer;
+use Wikibase\Edrsf\EntityNamespaceLookup;
+use Wikibase\Edrsf\PrefetchingWikiPageEntityMetaDataAccessor;
+use Wikibase\Edrsf\TermIndex;
 use Wikibase\Lib\Changes\EntityChangeFactory;
-use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
+use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\CachingSiteLinkLookup;
 use Wikibase\Lib\Store\EntityChangeLookup;
-use Wikibase\Lib\Store\EntityContentDataCodec;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkTable;
-use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Store\EntityIdLookup;
+use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 /**
  * Implementation of the client store interface using direct access to the repository's
@@ -46,7 +45,7 @@ use Wikibase\Store\EntityIdLookup;
 class DirectSqlStore implements ClientStore {
 
 	/**
-	 * @var EntityContentDataCodec
+	 * @var \Wikibase\Edrsf\EntityContentDataCodec
 	 */
 	private $contentCodec;
 
@@ -131,7 +130,7 @@ class DirectSqlStore implements ClientStore {
 	private $entityNamespaceLookup = null;
 
 	/**
-	 * @var PropertyInfoLookup|null
+	 * @var \Wikibase\Edrsf\PropertyInfoLookup|null
 	 */
 	private $propertyInfoLookup = null;
 
@@ -164,8 +163,8 @@ class DirectSqlStore implements ClientStore {
 	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityIdParser $entityIdParser
-	 * @param EntityIdComposer $entityIdComposer
-	 * @param EntityNamespaceLookup $entityNamespaceLookup
+	 * @param \Wikibase\Edrsf\EntityIdComposer $entityIdComposer
+	 * @param \Wikibase\Edrsf\EntityNamespaceLookup $entityNamespaceLookup
 	 * @param EntityDataRetrievalServiceFactory $entityDataRetrievalServiceFactory
 	 * @param string|bool $repoWiki The symbolic database name of the repo wiki or false for the
 	 * local wiki.
@@ -312,7 +311,7 @@ class DirectSqlStore implements ClientStore {
 	/**
 	 * @see ClientStore::getEntityRevisionLookup
 	 *
-	 * @return EntityRevisionLookup
+	 * @return \Wikibase\Edrsf\EntityRevisionLookup
 	 */
 	public function getEntityRevisionLookup() {
 		if ( $this->entityRevisionLookup === null ) {
@@ -323,7 +322,7 @@ class DirectSqlStore implements ClientStore {
 	}
 
 	/**
-	 * @return EntityRevisionLookup
+	 * @return \Wikibase\Edrsf\EntityRevisionLookup
 	 */
 	private function newEntityRevisionLookup() {
 		// NOTE: Keep cache key in sync with SqlStore::newEntityRevisionLookup in WikibaseRepo
@@ -426,7 +425,7 @@ class DirectSqlStore implements ClientStore {
 	/**
 	 * @see ClientStore::getPropertyInfoLookup
 	 *
-	 * @return PropertyInfoLookup
+	 * @return \Wikibase\Edrsf\PropertyInfoLookup
 	 */
 	public function getPropertyInfoLookup() {
 		if ( $this->propertyInfoLookup === null ) {

@@ -4,15 +4,15 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
+use ApiUsageException;
 use Exception;
 use InvalidArgumentException;
 use LogicException;
-use ApiUsageException;
 use Wikibase\ChangeOp\ChangeOpsMerge;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\EntityRevision;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Edrsf\EntityRevision;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationException;

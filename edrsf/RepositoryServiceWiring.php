@@ -1,0 +1,136 @@
+<?php
+
+use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
+use Wikibase\Edrsf\EntityContentDataCodec;
+use Wikibase\Edrsf\ForbiddenSerializer;
+use Wikibase\Edrsf\PrefetchingTermLookup;
+use Wikibase\Edrsf\PrefetchingWikiPageEntityMetaDataAccessor;
+use Wikibase\Edrsf\PropertyInfoTable;
+use Wikibase\Edrsf\RepositoryServiceContainer;
+use Wikibase\Edrsf\SqlEntityInfoBuilderFactory;
+use Wikibase\Edrsf\TermIndex;
+use Wikibase\Edrsf\TermIndexSearchInteractorFactory;
+use Wikibase\Edrsf\WikiPageEntityMetaDataAccessor;
+use Wikibase\Edrsf\WikiPageEntityMetaDataLookup;
+use Wikibase\Edrsf\WikiPageEntityRevisionLookup;
+use Wikibase\Store\BufferingTermLookup;
+use Wikibase\TermSqlIndex;
+use Wikimedia\Assert\Assert;
+
+/**
+ * @license GPL-2.0+
+ */
+
+return [
+
+	'EntityInfoBuilderFactory' => function(
+		RepositoryServiceContainer $services,
+		WikibaseClient $client
+	) {
+		return new SqlEntityInfoBuilderFactory(
+			$services->getEntityIdParser(),
+			$client->getEntityIdComposer(),
+			$services->getDatabaseName(),
+			$services->getRepositoryName()
+		);
+	},
+
+	'EntityPrefetcher' => function(
+		RepositoryServiceContainer $services,
+		WikibaseClient $client
+	) {
+		$prefetcher = $services->getService( 'WikiPageEntityMetaDataAccessor' );
+
+		Assert::postcondition(
+			$prefetcher instanceof EntityPrefetcher,
+			'The WikiPageEntityMetaDataAccessor service is expected to implement EntityPrefetcher interface.'
+		);
+
+		return $prefetcher;
+	},
+
+	'EntityRevisionLookup' => function(
+		RepositoryServiceContainer $services,
+		WikibaseClient $client
+	) {
+		$codec = new EntityContentDataCodec(
+			$services->getEntityIdParser(),
+			new ForbiddenSerializer( 'Entity serialization is not supported on the client!' ),
+			$services->getEntityDeserializer(),
+			$client->getSettings()->getSetting( 'maxSerializedEntitySize' ) * 1024
+		);
+
+		/** @var \Wikibase\Edrsf\WikiPageEntityMetaDataAccessor $metaDataAccessor */
+		$metaDataAccessor = $services->getService( 'WikiPageEntityMetaDataAccessor' );
+
+		return new WikiPageEntityRevisionLookup(
+			$codec,
+			$metaDataAccessor,
+			$services->getDatabaseName()
+		);
+	},
+
+	'PrefetchingTermLookup' => function(
+		RepositoryServiceContainer $services,
+		WikibaseClient $client
+	) {
+		/** @var TermIndex $termIndex */
+		$termIndex = $services->getService( 'TermIndex' );
+
+		return new BufferingTermLookup( $termIndex, 1000 ); // TODO: customize buffer sizes
+	},
+
+	'PropertyInfoLookup' => function(
+		RepositoryServiceContainer $services,
+		WikibaseClient $client
+	) {
+		return new PropertyInfoTable(
+			$client->getEntityIdComposer(),
+			$services->getDatabaseName(),
+			$services->getRepositoryName()
+		);
+	},
+
+	'TermIndex' => function(
+		RepositoryServiceContainer $services,
+		WikibaseClient $client
+	) {
+		return new TermSqlIndex(
+			$client->getStringNormalizer(),
+			$client->getEntityIdComposer(),
+			$services->getDatabaseName(),
+			$services->getRepositoryName()
+		);
+	},
+
+	'TermSearchInteractorFactory' => function(
+		RepositoryServiceContainer $services,
+		WikibaseClient $client
+	) {
+		/** @var TermIndex $termIndex */
+		$termIndex = $services->getService( 'TermIndex' );
+		/** @var PrefetchingTermLookup $prefetchingTermLookup */
+		$prefetchingTermLookup = $services->getService( 'PrefetchingTermLookup' );
+
+		return new TermIndexSearchInteractorFactory(
+			$termIndex,
+			$client->getLanguageFallbackChainFactory(),
+			$prefetchingTermLookup
+		);
+	},
+
+	'WikiPageEntityMetaDataAccessor' => function(
+		RepositoryServiceContainer $services,
+		WikibaseClient $client
+	) {
+		return new PrefetchingWikiPageEntityMetaDataAccessor(
+			new WikiPageEntityMetaDataLookup(
+				$client->getEntityNamespaceLookup(),
+				$services->getDatabaseName(),
+				$services->getRepositoryName()
+			)
+		);
+	},
+
+];

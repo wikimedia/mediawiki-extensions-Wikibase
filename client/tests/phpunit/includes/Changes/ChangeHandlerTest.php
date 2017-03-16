@@ -17,11 +17,11 @@ use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Edrsf\StorageException;
 use Wikibase\EntityChange;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Lib\Tests\Changes\TestChanges;
+use Wikibase\Lib\Tests\MockRepository;
 
 /**
  * @covers Wikibase\Client\Changes\ChangeHandler

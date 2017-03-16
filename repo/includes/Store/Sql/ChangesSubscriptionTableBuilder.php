@@ -7,7 +7,7 @@ use InvalidArgumentException;
 use ResultWrapper;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\EntityIdComposer;
+use Wikibase\Edrsf\EntityIdComposer;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
@@ -30,7 +30,7 @@ class ChangesSubscriptionTableBuilder {
 	private $loadBalancer;
 
 	/**
-	 * @var EntityIdComposer
+	 * @var \Wikibase\Edrsf\EntityIdComposer
 	 */
 	private $entityIdComposer;
 
@@ -61,7 +61,7 @@ class ChangesSubscriptionTableBuilder {
 
 	/**
 	 * @param LoadBalancer $loadBalancer
-	 * @param EntityIdComposer $entityIdComposer
+	 * @param \Wikibase\Edrsf\EntityIdComposer $entityIdComposer
 	 * @param string $tableName
 	 * @param int $batchSize
 	 * @param string $verbosity Either 'standard' or 'verbose'
