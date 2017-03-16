@@ -3,18 +3,17 @@
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
-use LogicException;
 use ApiUsageException;
+use LogicException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\EntityRevision;
-use Wikibase\Lib\Store\BadRevisionException;
-use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Edrsf\BadRevisionException;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\RevisionedUnresolvedRedirectException;
+use Wikibase\Edrsf\StorageException;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -37,7 +36,7 @@ class EntityLoadingHelper {
 	private $idParser;
 
 	/**
-	 * @var EntityRevisionLookup
+	 * @var \Wikibase\Edrsf\EntityRevisionLookup
 	 */
 	protected $entityRevisionLookup;
 
@@ -134,7 +133,7 @@ class EntityLoadingHelper {
 	 *
 	 * @throws ApiUsageException
 	 * @throws LogicException
-	 * @return EntityRevision|null
+	 * @return \Wikibase\Edrsf\EntityRevision|null
 	 */
 	protected function loadEntityRevision(
 		EntityId $entityId,

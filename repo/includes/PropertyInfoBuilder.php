@@ -7,7 +7,8 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\Edrsf\PropertyInfoLookup;
+use Wikibase\Edrsf\PropertyInfoTable;
 
 /**
  * Class to build the information about a property.

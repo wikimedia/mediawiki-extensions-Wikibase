@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Tests;
 
 use Language;
 use MWException;
-use Wikibase\LanguageWithConversion;
+use Wikibase\Edrsf\LanguageWithConversion;
 
 /**
  * @covers Wikibase\LanguageWithConversion

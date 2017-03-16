@@ -5,6 +5,7 @@ namespace Wikibase;
 use InvalidArgumentException;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Edrsf\TermIndexEntry;
 use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Repo\Validators\UniquenessViolation;
 

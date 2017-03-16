@@ -8,7 +8,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;
-use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Edrsf\LanguageFallbackChainFactory;
+use Wikibase\Edrsf\LanguageFallbackLabelDescriptionLookup;
 
 /**
  * Factory to provide an LabelDescriptionLookup which does automatic prefetching
@@ -40,7 +41,7 @@ class LanguageFallbackLabelDescriptionLookupFactory {
 	private $fallbackMode;
 
 	/**
-	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
+	 * @param \Wikibase\Edrsf\LanguageFallbackChainFactory $languageFallbackChainFactory
 	 * @param TermLookup $termLookup
 	 * @param TermBuffer|null $termBuffer
 	 * @param int $fallbackMode Either 0 or a combination of the

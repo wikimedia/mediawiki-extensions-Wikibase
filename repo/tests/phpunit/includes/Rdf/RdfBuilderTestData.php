@@ -11,10 +11,9 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Lib\Tests\MockRepository;
 use Wikimedia\Purtle\NTriplesRdfWriter;
 
 /**
@@ -33,7 +32,7 @@ class RdfBuilderTestData {
 	const URI_DATA = 'http://data.acme.test/';
 
 	/**
-	 * @var EntityContentDataCodec|null
+	 * @var \Wikibase\Edrsf\EntityContentDataCodec|null
 	 */
 	private $codec = null;
 
@@ -57,7 +56,7 @@ class RdfBuilderTestData {
 	}
 
 	/**
-	 * @return EntityContentDataCodec
+	 * @return \Wikibase\Edrsf\EntityContentDataCodec
 	 */
 	private function getCodec() {
 		if ( $this->codec === null ) {

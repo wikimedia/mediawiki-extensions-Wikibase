@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Specials;
 
-use HTMLForm;
 use Html;
+use HTMLForm;
 use InvalidArgumentException;
 use Language;
 use Wikibase\ChangeOp\ChangeOp;
@@ -14,8 +14,8 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\EditEntityFactory;
+use Wikibase\Edrsf\EntityRevisionLookup;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;

@@ -2,11 +2,11 @@
 
 namespace Wikibase\Lib\Tests\Interactors;
 
-use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
-use Wikibase\Lib\Interactors\TermIndexSearchInteractorFactory;
-use Wikibase\Lib\Store\PrefetchingTermLookup;
-use Wikibase\TermIndex;
+use Wikibase\Edrsf\LanguageFallbackChainFactory;
+use Wikibase\Edrsf\PrefetchingTermLookup;
+use Wikibase\Edrsf\TermIndex;
+use Wikibase\Edrsf\TermIndexSearchInteractor;
+use Wikibase\Edrsf\TermIndexSearchInteractorFactory;
 
 /**
  * @covers Wikibase\Lib\Interactors\TermIndexSearchInteractorFactory
@@ -29,7 +29,7 @@ class TermIndexSearchInteractorFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testNewInteractorReturnsFreshInstanceOnMultipleCalls() {
-		$factory = new TermIndexSearchInteractorFactory(
+		$factory = new \Wikibase\Edrsf\TermIndexSearchInteractorFactory(
 			$this->getMock( TermIndex::class ),
 			new LanguageFallbackChainFactory(),
 			$this->getMock( PrefetchingTermLookup::class )

@@ -6,12 +6,12 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\TermIndexSearchCriteria;
-use Wikibase\TermIndex;
-use Wikibase\TermIndexEntry;
+use Wikibase\Edrsf\TermIndex;
+use Wikibase\Edrsf\TermIndexEntry;
+use Wikibase\Edrsf\TermIndexSearchCriteria;
 
 /**
- * Base class for tests for classes implementing Wikibase\TermIndex.
+ * Base class for tests for classes implementing Wikibase\Edrsf\TermIndex.
  *
  * @group Wikibase
  *
@@ -80,20 +80,20 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 					$item0, $item1
 				),
 				array( // $criteria
-					new TermIndexSearchCriteria( array(
+					new \Wikibase\Edrsf\TermIndexSearchCriteria( array(
 						'termText' => 'mittens', // should match
 					) ),
 					new TermIndexSearchCriteria( array(
 						'termText' => 'Kittens', // case doesn't match
 					) ),
-					new TermIndexSearchCriteria( array(
+					new \Wikibase\Edrsf\TermIndexSearchCriteria( array(
 						'termText' => 'Mitt', // prefix isn't sufficient
 					) ),
-					new TermIndexSearchCriteria( array(
+					new \Wikibase\Edrsf\TermIndexSearchCriteria( array(
 						'termLanguage' => 'en', // language mismatch
 						'termText' => 'Mittens',
 					) ),
-					new TermIndexSearchCriteria( array(
+					new \Wikibase\Edrsf\TermIndexSearchCriteria( array(
 						'termType' => 'alias', // type mismatch
 						'termText' => 'Mittens',
 					) ),
@@ -110,7 +110,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 					$item0, $item1
 				),
 				array( // $criteria
-					new TermIndexSearchCriteria( array(
+					new \Wikibase\Edrsf\TermIndexSearchCriteria( array(
 						'termLanguage' => 'de', // language mismatch
 						'termText' => 'kitt',
 					) ),
@@ -134,7 +134,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 					$item0, $item1
 				),
 				array( // $criteria
-					new TermIndexSearchCriteria( array(
+					new \Wikibase\Edrsf\TermIndexSearchCriteria( array(
 						'termText' => 'mittens',
 					) ),
 				),
@@ -148,7 +148,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 					$item0, $item1
 				),
 				array( // $criteria
-					new TermIndexSearchCriteria( array(
+					new \Wikibase\Edrsf\TermIndexSearchCriteria( array(
 						'termText' => 'mittens',
 					) ),
 				),
@@ -164,7 +164,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 					$item0, $item1
 				),
 				array( // $criteria
-					new TermIndexSearchCriteria( array(
+					new \Wikibase\Edrsf\TermIndexSearchCriteria( array(
 						'termText' => 'mittens',
 					) ),
 				),
@@ -258,7 +258,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 					$item0, $item1, $item2
 				),
 				array( // $criteria
-					new TermIndexSearchCriteria( array(
+					new \Wikibase\Edrsf\TermIndexSearchCriteria( array(
 						'termText' => 'Mittens',
 					) ),
 				),
@@ -277,7 +277,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 					$item0, $item1, $item2
 				),
 				array( // $criteria
-					new TermIndexSearchCriteria( array(
+					new \Wikibase\Edrsf\TermIndexSearchCriteria( array(
 						'termText' => 'KiTTeNS',
 					) ),
 				),
@@ -300,7 +300,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 					$item0, $item1, $item2
 				),
 				array( // $criteria
-					new TermIndexSearchCriteria( array(
+					new \Wikibase\Edrsf\TermIndexSearchCriteria( array(
 						'termText' => 'KiTTeNS',
 					) ),
 				),
@@ -363,7 +363,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 
 		$this->assertNotTermExists( $lookup, 'testDeleteTermsForEntity' );
 
-		$abc = new TermIndexSearchCriteria( array( 'termType' => TermIndexEntry::TYPE_LABEL, 'termText' => 'abc' ) );
+		$abc = new \Wikibase\Edrsf\TermIndexSearchCriteria( array( 'termType' => TermIndexEntry::TYPE_LABEL, 'termText' => 'abc' ) );
 		$matchedTerms = $lookup->getMatchingTerms( array( $abc ), array( TermIndexEntry::TYPE_LABEL ), Item::ENTITY_TYPE );
 		foreach ( $matchedTerms as $matchedTerm ) {
 			if ( $matchedTerm->getEntityId() === $id ) {
@@ -493,8 +493,8 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$expectedTerms = $lookup->getEntityTerms( $item );
 		$actualTerms = $lookup->getTermsOfEntity( $item->getId() );
 
-		$missingTerms = array_udiff( $expectedTerms, $actualTerms, 'Wikibase\TermIndexEntry::compare' );
-		$extraTerms = array_udiff( $actualTerms, $expectedTerms, 'Wikibase\TermIndexEntry::compare' );
+		$missingTerms = array_udiff( $expectedTerms, $actualTerms, 'Wikibase\Edrsf\TermIndexEntry::compare' );
+		$extraTerms = array_udiff( $actualTerms, $expectedTerms, 'Wikibase\Edrsf\TermIndexEntry::compare' );
 
 		$this->assertEquals( array(), $missingTerms, 'Missing terms' );
 		$this->assertEquals( array(), $extraTerms, 'Extra terms' );
@@ -827,7 +827,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param TermIndex $termIndex
+	 * @param \Wikibase\Edrsf\TermIndex $termIndex
 	 * @param string $text
 	 */
 	private function assertNotTermExists( TermIndex $termIndex, $text ) {
@@ -838,7 +838,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param TermIndex $termIndex
+	 * @param \Wikibase\Edrsf\TermIndex $termIndex
 	 * @param string $text
 	 * @param string|null $termType
 	 * @param string|null $language
@@ -861,7 +861,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		}
 
 		$matches = $termIndex->getMatchingTerms(
-			array( new TermIndexSearchCriteria( $criteria ) ),
+			array( new \Wikibase\Edrsf\TermIndexSearchCriteria( $criteria ) ),
 			$termType,
 			$entityType
 		);

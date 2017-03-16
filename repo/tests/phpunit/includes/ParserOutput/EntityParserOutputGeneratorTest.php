@@ -15,10 +15,10 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\Lib\EntityIdComposer;
+use Wikibase\Edrsf\EntityIdComposer;
+use Wikibase\Edrsf\LanguageFallbackChain;
+use Wikibase\Edrsf\SqlEntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
@@ -211,7 +211,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @return LanguageFallbackChain
+	 * @return \Wikibase\Edrsf\LanguageFallbackChain
 	 */
 	private function newLanguageFallbackChain() {
 		$fallbackChain = $this->getMockBuilder( LanguageFallbackChain::class )

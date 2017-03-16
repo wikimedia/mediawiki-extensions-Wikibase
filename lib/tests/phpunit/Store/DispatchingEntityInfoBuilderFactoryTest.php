@@ -5,10 +5,9 @@ namespace Wikibase\Lib\Tests\Store;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\DispatchingEntityInfoBuilder;
-use Wikibase\Lib\Store\DispatchingEntityInfoBuilderFactory;
-use Wikibase\Lib\Store\EntityInfoBuilder;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Edrsf\DispatchingEntityInfoBuilder;
+use Wikibase\Edrsf\EntityInfoBuilder;
+use Wikibase\Edrsf\EntityInfoBuilderFactory;
 
 /**
  * @covers Wikibase\Lib\Store\DispatchingEntityInfoBuilderFactory
@@ -34,11 +33,11 @@ class DispatchingEntityInfoBuilderFactoryTest extends \PHPUnit_Framework_TestCas
 	public function testGivenInvalidFactoryList_constructorThrowsException( $factories ) {
 		$this->setExpectedException( InvalidArgumentException::class );
 
-		new DispatchingEntityInfoBuilderFactory( $factories );
+		new \Wikibase\Edrsf\DispatchingEntityInfoBuilderFactory( $factories );
 	}
 
 	public function testNewEntityInfoBuilderCreatesDispatchingBuilderUsingKnownBuilders() {
-		$localBuilder = $this->getMock( EntityInfoBuilder::class );
+		$localBuilder = $this->getMock( \Wikibase\Edrsf\EntityInfoBuilder::class );
 		$otherBuilder = $this->getMock( EntityInfoBuilder::class );
 
 		$localFactory = $this->getMock( EntityInfoBuilderFactory::class );
@@ -51,7 +50,7 @@ class DispatchingEntityInfoBuilderFactoryTest extends \PHPUnit_Framework_TestCas
 			->method( 'newEntityInfoBuilder' )
 			->will( $this->returnValue( $otherBuilder ) );
 
-		$dispatchingFactory = new DispatchingEntityInfoBuilderFactory(
+		$dispatchingFactory = new \Wikibase\Edrsf\DispatchingEntityInfoBuilderFactory(
 			[
 				'' => $localFactory,
 				'other' => $otherFactory
@@ -75,7 +74,7 @@ class DispatchingEntityInfoBuilderFactoryTest extends \PHPUnit_Framework_TestCas
 		$localFactory->method( 'newEntityInfoBuilder' )
 			->will( $this->returnValue( $this->getMock( EntityInfoBuilder::class ) ) );
 
-		$dispatchingFactory = new DispatchingEntityInfoBuilderFactory(
+		$dispatchingFactory = new \Wikibase\Edrsf\DispatchingEntityInfoBuilderFactory(
 			[ '' => $localFactory ]
 		);
 

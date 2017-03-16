@@ -7,7 +7,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 
 /**
  * Base class for tests of EntityInfoBuilder implementation.
@@ -69,7 +68,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * @param EntityId[] $ids
 	 *
-	 * @return SqlEntityInfoBuilder
+	 * @return \Wikibase\Edrsf\SqlEntityInfoBuilder
 	 */
 	abstract protected function newEntityInfoBuilder( array $ids );
 

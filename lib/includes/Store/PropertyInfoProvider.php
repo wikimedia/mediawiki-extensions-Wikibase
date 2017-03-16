@@ -3,7 +3,6 @@
 namespace Wikibase\Lib;
 
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\StorageException;
 
 /**
  * Service for providing a specific information about properties.
@@ -24,7 +23,7 @@ interface PropertyInfoProvider {
 	 *
 	 * @return mixed|null
 	 *
-	 * @throws StorageException
+	 * @throws \Wikibase\Edrsf\StorageException
 	 */
 	public function getPropertyInfo( PropertyId $propertyId );
 

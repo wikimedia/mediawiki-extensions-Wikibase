@@ -6,7 +6,7 @@ use Serializers\Exceptions\SerializationException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\LanguageFallbackChain;
+use Wikibase\Edrsf\LanguageFallbackChain;
 use Wikibase\Lib\Serialization\CallbackFactory;
 use Wikibase\Lib\Serialization\SerializationModifier;
 
@@ -42,7 +42,7 @@ class ClientEntitySerializer implements Serializer {
 	private $filterLangCodes;
 
 	/**
-	 * @var LanguageFallbackChain[]
+	 * @var \Wikibase\Edrsf\LanguageFallbackChain[]
 	 */
 	private $fallbackChains;
 

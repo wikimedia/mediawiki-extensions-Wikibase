@@ -3,8 +3,8 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Edrsf\TermIndexEntry;
 use Wikibase\Lib\Store\EntityTermLookup;
-use Wikibase\TermIndexEntry;
 
 /**
  * @covers Wikibase\Lib\Store\EntityTermLookup

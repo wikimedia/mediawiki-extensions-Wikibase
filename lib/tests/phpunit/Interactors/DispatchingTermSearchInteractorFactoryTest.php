@@ -3,10 +3,9 @@
 namespace Wikibase\Lib\Tests\Interactors;
 
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Interactors\DispatchingTermSearchInteractor;
-use Wikibase\Lib\Interactors\DispatchingTermSearchInteractorFactory;
-use Wikibase\Lib\Interactors\TermSearchInteractor;
-use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
+use Wikibase\Edrsf\DispatchingTermSearchInteractorFactory;
+use Wikibase\Edrsf\TermSearchInteractor;
+use Wikibase\Edrsf\TermSearchInteractorFactory;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
@@ -22,7 +21,7 @@ class DispatchingTermSearchInteractorFactoryTest extends \PHPUnit_Framework_Test
 	public function provideInvalidConstructorArguments() {
 		return [
 			'non-string keys' => [
-				[ 0 => $this->getMock( TermSearchInteractorFactory::class ) ]
+				[ 0 => $this->getMock( \Wikibase\Edrsf\TermSearchInteractorFactory::class ) ]
 			],
 			'not a TermSearchInteractorFactory as a value' => [
 				[ 'item' => new ItemId( 'Q123' ) ]
@@ -44,7 +43,7 @@ class DispatchingTermSearchInteractorFactoryTest extends \PHPUnit_Framework_Test
 		$fooInteractorFactory->expects( $this->any() )
 			->method( 'newInteractor' )
 			->will(
-				$this->returnValue( $this->getMock( TermSearchInteractor::class ) )
+				$this->returnValue( $this->getMock( \Wikibase\Edrsf\TermSearchInteractor::class ) )
 			);
 
 		$localInteractorFactory = $this->getMock( TermSearchInteractorFactory::class );
@@ -59,7 +58,7 @@ class DispatchingTermSearchInteractorFactoryTest extends \PHPUnit_Framework_Test
 			'property' => $localInteractorFactory,
 		] );
 
-		$this->assertInstanceOf( DispatchingTermSearchInteractor::class, $dispatchingFactory->newInteractor( 'en' ) );
+		$this->assertInstanceOf( \Wikibase\Edrsf\DispatchingTermSearchInteractor::class, $dispatchingFactory->newInteractor( 'en' ) );
 	}
 
 }

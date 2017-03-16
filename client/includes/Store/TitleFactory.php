@@ -5,7 +5,7 @@ namespace Wikibase\Client\Store;
 use InvalidArgumentException;
 use MalformedTitleException;
 use Title;
-use Wikibase\Lib\Store\StorageException;
+use Wikibase\Edrsf\StorageException;
 
 /**
  * Service for constructing Title objects from page IDs or title strings.

@@ -7,10 +7,8 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\EntityRevision;
+use Wikibase\Edrsf\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
-use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Tests\EntityRevisionLookupTest;
 use Wikibase\Lib\Tests\MockRepository;
 
@@ -28,7 +26,7 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 	/**
 	 * @see EntityLookupTest::newEntityLoader(newEntityLookup
 	 *
-	 * @param EntityRevision[] $entityRevisions
+	 * @param \Wikibase\Edrsf\EntityRevision[] $entityRevisions
 	 * @param EntityRedirect[] $entityRedirects
 	 *
 	 * @return EntityLookup
@@ -51,7 +49,7 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		$id = new ItemId( 'Q123' );
 		$item = new Item( $id );
 
-		$mock = $this->getMock( EntityRevisionLookup::class );
+		$mock = $this->getMock( \Wikibase\Edrsf\EntityRevisionLookup::class );
 		$mock->expects( $this->once() )
 			->method( 'getEntityRevision' )
 			->with( $id, 1234, 'load-mode' )

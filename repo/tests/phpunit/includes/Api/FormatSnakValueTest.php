@@ -3,18 +3,18 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiTestCase;
+use ApiUsageException;
 use DataValues\DataValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
-use ApiUsageException;
 use DataValues\UnboundedQuantityValue;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Edrsf\StorageException;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

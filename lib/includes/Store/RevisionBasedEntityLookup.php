@@ -6,6 +6,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
+use Wikibase\Edrsf\EntityRevisionLookup;
 
 /**
  * An implementation of EntityLookup based on an EntityRevisionLookup.

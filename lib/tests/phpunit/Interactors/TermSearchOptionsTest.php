@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Interactors;
 
 use PHPUnit_Framework_TestCase;
-use Wikibase\Lib\Interactors\TermSearchOptions;
 
 /**
  * @covers Wikibase\Lib\Interactors\TermSearchOptions
@@ -28,7 +27,7 @@ class TermSearchOptionsTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider provideLimitInputAndExpected
 	 */
 	public function testSetLimit( $input, $expected ) {
-		$options = new TermSearchOptions();
+		$options = new \Wikibase\Edrsf\TermSearchOptions();
 		$options->setLimit( $input );
 		$this->assertEquals( $expected, $options->getLimit() );
 	}
@@ -44,7 +43,7 @@ class TermSearchOptionsTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider provideBooleanOptions
 	 */
 	public function testSetIsCaseSensitive( $booleanValue ) {
-		$options = new TermSearchOptions();
+		$options = new \Wikibase\Edrsf\TermSearchOptions();
 		$options->setIsCaseSensitive( $booleanValue );
 		$this->assertEquals( $booleanValue, $options->getIsCaseSensitive() );
 	}
@@ -53,7 +52,7 @@ class TermSearchOptionsTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider provideBooleanOptions
 	 */
 	public function testSetIsPrefixSearch( $booleanValue ) {
-		$options = new TermSearchOptions();
+		$options = new \Wikibase\Edrsf\TermSearchOptions();
 		$options->setIsPrefixSearch( $booleanValue );
 		$this->assertEquals( $booleanValue, $options->getIsPrefixSearch() );
 	}
@@ -62,7 +61,7 @@ class TermSearchOptionsTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider provideBooleanOptions
 	 */
 	public function testSetUseLanguageFallback( $booleanValue ) {
-		$options = new TermSearchOptions();
+		$options = new \Wikibase\Edrsf\TermSearchOptions();
 		$options->setUseLanguageFallback( $booleanValue );
 		$this->assertEquals( $booleanValue, $options->getUseLanguageFallback() );
 	}

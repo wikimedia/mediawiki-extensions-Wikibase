@@ -4,9 +4,9 @@ namespace Wikibase\Lib\Tests\Store;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Edrsf\TermIndex;
+use Wikibase\Edrsf\TermIndexEntry;
 use Wikibase\Store\BufferingTermLookup;
-use Wikibase\TermIndex;
-use Wikibase\TermIndexEntry;
 
 /**
  * @covers Wikibase\Store\BufferingTermLookup

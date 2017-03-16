@@ -3,8 +3,8 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\DataValue;
-use DataValues\Geo\Values\LatLongValue;
 use DataValues\Geo\Values\GlobeCoordinateValue;
+use DataValues\Geo\Values\LatLongValue;
 use DataValues\MonolingualTextValue;
 use DataValues\QuantityValue;
 use DataValues\StringValue;
@@ -24,7 +24,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Edrsf\LanguageFallbackChainFactory;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;

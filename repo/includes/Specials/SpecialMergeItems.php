@@ -3,13 +3,13 @@
 namespace Wikibase\Repo\Specials;
 
 use Exception;
-use HTMLForm;
 use Html;
-use Wikibase\DataModel\Entity\ItemId;
+use HTMLForm;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\EntityRevision;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Edrsf\EntityRevision;
+use Wikibase\Edrsf\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;

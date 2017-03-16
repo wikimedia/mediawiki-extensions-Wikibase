@@ -4,8 +4,8 @@ namespace Wikibase\Lib\Tests\Store;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\DispatchingPropertyInfoLookup;
-use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\Edrsf\DispatchingPropertyInfoLookup;
+use Wikibase\Edrsf\PropertyInfoLookup;
 
 /**
  * @covers Wikibase\Lib\Store\DispatchingPropertyInfoLookup
@@ -32,7 +32,7 @@ class DispatchingPropertyInfoLookupTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenUnknownRepository_getPropertyInfoReturnsNull() {
-		$lookup = new DispatchingPropertyInfoLookup( [
+		$lookup = new \Wikibase\Edrsf\DispatchingPropertyInfoLookup( [
 			'' => $this->getPropertyInfoLookup( $this->localPropertyInfo ),
 			'foo' => $this->getPropertyInfoLookup( $this->fooPropertyInfo ),
 		] );
@@ -93,7 +93,7 @@ class DispatchingPropertyInfoLookupTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testGivenInvalidPropertyInfoLookup_exceptionIsThrown( $lookups ) {
 		$this->setExpectedException( InvalidArgumentException::class );
-		new DispatchingPropertyInfoLookup( $lookups );
+		new \Wikibase\Edrsf\DispatchingPropertyInfoLookup( $lookups );
 	}
 
 	public function provideInvalidForeignLookups() {

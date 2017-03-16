@@ -10,13 +10,13 @@ use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
+use Wikibase\Edrsf\RevisionedUnresolvedRedirectException;
+use Wikibase\Edrsf\StorageException;
 use Wikibase\Lib\Serialization\CallbackFactory;
 use Wikibase\Lib\Serialization\SerializationModifier;
-use Wikibase\DataModel\Services\Lookup\EntityLookupException;
-use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
-use Wikibase\Lib\Store\StorageException;
 
 /**
  * JsonDumpGenerator generates an JSON dump of a given set of entities, excluding
