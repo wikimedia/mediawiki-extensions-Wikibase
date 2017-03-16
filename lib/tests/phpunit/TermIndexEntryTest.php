@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\TermIndexEntry;
+use Wikibase\Edrsf\TermIndexEntry;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**

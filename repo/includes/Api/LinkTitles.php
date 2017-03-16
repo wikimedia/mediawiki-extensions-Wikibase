@@ -10,7 +10,7 @@ use Status;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
-use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Edrsf\EntityRevisionLookup;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;

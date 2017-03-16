@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Edrsf\EntityContentDataCodec;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

@@ -9,9 +9,9 @@ use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\LanguageFallbackChain;
+use Wikibase\Edrsf\LanguageFallbackChain;
+use Wikibase\Edrsf\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 
 /**
  * Functionality needed to expose Entities to Lua.
@@ -66,7 +66,7 @@ class EntityAccessor {
 	 * @param UsageAccumulator $usageAccumulator
 	 * @param Serializer $entitySerializer
 	 * @param PropertyDataTypeLookup $dataTypeLookup
-	 * @param LanguageFallbackChain $fallbackChain
+	 * @param \Wikibase\Edrsf\LanguageFallbackChain $fallbackChain
 	 * @param Language $language
 	 * @param ContentLanguages $termsLanguages
 	 */

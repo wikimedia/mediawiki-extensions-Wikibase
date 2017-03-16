@@ -5,9 +5,8 @@ namespace Wikibase\Lib\Tests\Store;
 use BagOStuff;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Edrsf\PropertyInfoLookup;
 use Wikibase\Lib\Store\CacheAwarePropertyInfoStore;
-use Wikibase\Lib\Store\PropertyInfoLookup;
-use Wikibase\Lib\Store\PropertyInfoStore;
 
 /**
  * @covers Wikibase\Lib\Store\CacheAwarePropertyInfoStore;
@@ -21,7 +20,7 @@ use Wikibase\Lib\Store\PropertyInfoStore;
 class CacheAwarePropertyInfoStoreTest extends \PHPUnit_Framework_TestCase {
 
 	private function newCacheAwarePropertyInfoStore( BagOStuff $cache ) {
-		$mockStore = $this->getMock( PropertyInfoStore::class );
+		$mockStore = $this->getMock( \Wikibase\Edrsf\PropertyInfoStore::class );
 		$mockStore->expects( $this->any() )->method( 'setPropertyInfo' );
 		$mockStore->expects( $this->any() )
 			->method( 'removePropertyInfo' )
@@ -34,7 +33,7 @@ class CacheAwarePropertyInfoStoreTest extends \PHPUnit_Framework_TestCase {
 				} )
 			);
 
-		/** @var PropertyInfoStore $mockStore */
+		/** @var \Wikibase\Edrsf\PropertyInfoStore $mockStore */
 		return new CacheAwarePropertyInfoStore( $mockStore, $cache, 3600, __CLASS__ );
 	}
 
@@ -87,7 +86,7 @@ class CacheAwarePropertyInfoStoreTest extends \PHPUnit_Framework_TestCase {
 			->method( 'set' )
 			->with(
 				__CLASS__,
-				[ 'P111' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] ],
+				[ 'P111' => [ \Wikibase\Edrsf\PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] ],
 				$this->isType( 'int' )
 			);
 

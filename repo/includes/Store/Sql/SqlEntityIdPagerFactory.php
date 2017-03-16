@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Store\Sql;
 
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
+use Wikibase\Edrsf\EntityNamespaceLookup;
 
 /**
  * Factory for SqlEntityIdPager objects.
@@ -15,7 +15,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 class SqlEntityIdPagerFactory {
 
 	/**
-	 * @var EntityNamespaceLookup
+	 * @var \Wikibase\Edrsf\EntityNamespaceLookup
 	 */
 	private $entityNamespaceLookup;
 
@@ -25,7 +25,7 @@ class SqlEntityIdPagerFactory {
 	private $entityIdParser;
 
 	/**
-	 * @param EntityNamespaceLookup $entityNamespaceLookup
+	 * @param \Wikibase\Edrsf\EntityNamespaceLookup $entityNamespaceLookup
 	 * @param EntityIdParser $entityIdParser
 	 */
 	public function __construct(

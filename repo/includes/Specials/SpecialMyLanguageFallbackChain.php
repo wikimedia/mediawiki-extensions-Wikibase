@@ -7,8 +7,8 @@ use Html;
 use IContextSource;
 use Language;
 use SpecialPage;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Edrsf\LanguageFallbackChain;
+use Wikibase\Edrsf\LanguageFallbackChainFactory;
 
 /**
  * Page for displaying the current language fallback chain for debugging.
@@ -24,12 +24,12 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 	private $chain;
 
 	/**
-	 * @var LanguageFallbackChainFactory
+	 * @var \Wikibase\Edrsf\LanguageFallbackChainFactory
 	 */
 	private $languageFallbackChainFactory;
 
 	/**
-	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
+	 * @param \Wikibase\Edrsf\LanguageFallbackChainFactory $languageFallbackChainFactory
 	 */
 	public function __construct(
 		LanguageFallbackChainFactory $languageFallbackChainFactory

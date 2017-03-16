@@ -4,15 +4,15 @@ namespace Wikibase;
 
 use SiteLookup;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
+use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Dumpers\DumpGenerator;
 use Wikibase\Dumpers\RdfDumpGenerator;
-use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Edrsf\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
-use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -26,7 +26,7 @@ require_once __DIR__ . '/dumpEntities.php';
 class DumpRdf extends DumpScript {
 
 	/**
-	 * @var EntityRevisionLookup
+	 * @var \Wikibase\Edrsf\EntityRevisionLookup
 	 */
 	private $revisionLookup;
 

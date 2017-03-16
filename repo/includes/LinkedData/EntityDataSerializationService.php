@@ -18,14 +18,14 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\EntityRevision;
+use Wikibase\Edrsf\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Rdf\EntityRdfBuilderFactory;
-use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfBuilder;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\RdfVocabulary;
+use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\RedirectRevision;
 use Wikibase\Repo\Api\ResultBuilder;
 use Wikimedia\Purtle\RdfWriterFactory;
@@ -195,7 +195,7 @@ class EntityDataSerializationService {
 	}
 
 	/**
-	 * @param EntityRevision $entityRevision
+	 * @param \Wikibase\Edrsf\EntityRevision $entityRevision
 	 * @param RedirectRevision|null $followedRedirect a redirect leading to the entity for use in the output
 	 * @param EntityId[] $incomingRedirects Incoming redirects to include in the output
 	 * @param RdfBuilder $rdfBuilder

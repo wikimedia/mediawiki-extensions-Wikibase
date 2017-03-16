@@ -8,15 +8,15 @@ use SpecialPageTestBase;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Edrsf\LanguageFallbackChainFactory;
+use Wikibase\Edrsf\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Edrsf\PropertyInfoLookup;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
-use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Repo\Specials\SpecialListProperties;
 use Wikibase\Store\BufferingTermLookup;
-use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialListProperties

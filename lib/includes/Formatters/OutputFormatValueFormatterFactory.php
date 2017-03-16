@@ -6,8 +6,8 @@ use InvalidArgumentException;
 use Language;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Edrsf\LanguageFallbackChain;
+use Wikibase\Edrsf\LanguageFallbackChainFactory;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -39,7 +39,7 @@ class OutputFormatValueFormatterFactory {
 	private $defaultLanguage;
 
 	/**
-	 * @var LanguageFallbackChainFactory
+	 * @var \Wikibase\Edrsf\LanguageFallbackChainFactory
 	 */
 	private $languageFallbackChainFactory;
 
@@ -54,7 +54,7 @@ class OutputFormatValueFormatterFactory {
 	 * format, or null if no formatter for the requested target format is known.
 	 *
 	 * @param Language $defaultLanguage
-	 * @param LanguageFallbackChainFactory $fallbackChainFactory
+	 * @param \Wikibase\Edrsf\LanguageFallbackChainFactory $fallbackChainFactory
 	 */
 	public function __construct(
 		array $factoryFunctions,

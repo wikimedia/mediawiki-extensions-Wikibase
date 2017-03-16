@@ -13,9 +13,9 @@ use Wikibase\Client\Api\PageTerms;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Edrsf\TermIndex;
+use Wikibase\Edrsf\TermIndexEntry;
 use Wikibase\Store\EntityIdLookup;
-use Wikibase\TermIndex;
-use Wikibase\TermIndexEntry;
 
 /**
  * @covers Wikibase\Client\Api\PageTerms
@@ -172,7 +172,7 @@ class PageTermsTest extends MediaWikiLangTestCase {
 	 * @param EntityId $entityId
 	 * @param array[] $termGroups
 	 *
-	 * @return TermIndexEntry[]
+	 * @return \Wikibase\Edrsf\TermIndexEntry[]
 	 */
 	private function makeTermsFromGroups( EntityId $entityId, array $termGroups ) {
 		$terms = array();
