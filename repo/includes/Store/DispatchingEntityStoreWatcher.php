@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Store;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
-use Wikibase\EntityRevision;
-use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikibase\Edrsf\EntityRevision;
+use Wikibase\Edrsf\EntityStoreWatcher;
 use Wikibase\Repo\GenericEventDispatcher;
 
 /**
@@ -30,7 +30,7 @@ class DispatchingEntityStoreWatcher extends GenericEventDispatcher implements En
 	}
 
 	/**
-	 * @see EntityStoreWatcher::redirectUpdated
+	 * @see \Wikibase\Edrsf\EntityStoreWatcher::redirectUpdated
 	 *
 	 * @param EntityRedirect $entityRedirect
 	 * @param int $revisionId

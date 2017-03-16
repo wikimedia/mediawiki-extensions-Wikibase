@@ -8,7 +8,8 @@ use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
-use Wikibase\EntityRevision;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\StorageException;
 
 /**
  * Storage interface for Entities.
@@ -60,7 +61,7 @@ interface EntityStore {
 	 *
 	 * @see WikiPage::doEditContent
 	 *
-	 * @return EntityRevision
+	 * @return \Wikibase\Edrsf\EntityRevision
 	 * @throws StorageException
 	 * @throws PermissionsError
 	 */

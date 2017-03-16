@@ -3,8 +3,7 @@
 namespace Wikibase\Lib;
 
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\PropertyInfoLookup;
-use Wikibase\Lib\Store\StorageException;
+use Wikibase\Edrsf\PropertyInfoLookup;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -17,7 +16,7 @@ use Wikimedia\Assert\Assert;
 class FieldPropertyInfoProvider implements PropertyInfoProvider {
 
 	/**
-	 * @var PropertyInfoLookup
+	 * @var \Wikibase\Edrsf\PropertyInfoLookup
 	 */
 	private $infoLookup;
 
@@ -27,7 +26,7 @@ class FieldPropertyInfoProvider implements PropertyInfoProvider {
 	private $propertyInfoKey;
 
 	/**
-	 * @param PropertyInfoLookup $infoLookup
+	 * @param \Wikibase\Edrsf\PropertyInfoLookup $infoLookup
 	 * @param string $propertyInfoKey Name of the desired field in the PropertyInfo array.
 	 *        Use one of the PropertyInfoStore::KEY_XXX constants.
 	 */
@@ -45,7 +44,7 @@ class FieldPropertyInfoProvider implements PropertyInfoProvider {
 	 *
 	 * @return mixed|null
 	 *
-	 * @throws StorageException
+	 * @throws \Wikibase\Edrsf\StorageException
 	 */
 	public function getPropertyInfo( PropertyId $propertyId ) {
 		$info = $this->infoLookup->getPropertyInfo( $propertyId );

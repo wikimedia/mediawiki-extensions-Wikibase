@@ -6,28 +6,27 @@ use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
+use Wikibase\Edrsf\EntityContentDataCodec;
+use Wikibase\Edrsf\EntityIdComposer;
+use Wikibase\Edrsf\EntityInfoBuilderFactory;
+use Wikibase\Edrsf\EntityNamespaceLookup;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\EntityStoreWatcher;
+use Wikibase\Edrsf\PropertyInfoLookup;
+use Wikibase\Edrsf\PropertyInfoStore;
+use Wikibase\Edrsf\TermIndex;
 use Wikibase\IdGenerator;
 use Wikibase\Lib\Changes\EntityChangeFactory;
-use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\EntityChangeLookup;
-use Wikibase\Lib\Store\EntityContentDataCodec;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LabelConflictFinder;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\SiteLinkStore;
-use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
-use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Repo\Store\EntityPerPage;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Store\Sql\SqlChangeStore;
 use Wikibase\SqlStore;
 use Wikibase\Store\EntityIdLookup;
-use Wikibase\TermIndex;
 
 /**
  * @covers Wikibase\SqlStore
@@ -136,7 +135,7 @@ class SqlStoreTest extends MediaWikiTestCase {
 
 	public function testGetEntityPrefetcher() {
 		$service = $this->newInstance()->getEntityPrefetcher();
-		$this->assertInstanceOf( PrefetchingWikiPageEntityMetaDataAccessor::class, $service );
+		$this->assertInstanceOf( \Wikibase\Edrsf\PrefetchingWikiPageEntityMetaDataAccessor::class, $service );
 	}
 
 	public function testGetEntityChangeLookup() {

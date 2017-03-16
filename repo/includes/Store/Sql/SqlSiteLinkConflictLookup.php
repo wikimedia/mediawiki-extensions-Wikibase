@@ -6,7 +6,7 @@ use Database;
 use DBAccessBase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Lib\EntityIdComposer;
+use Wikibase\Edrsf\EntityIdComposer;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 
 /**

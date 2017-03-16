@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Tests;
 use InvalidArgumentException;
 use Status;
 use User;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -13,7 +14,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
@@ -21,16 +21,16 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Term\LabelsProvider;
-use Wikibase\EntityRevision;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
-use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Edrsf\EntityInfoBuilderFactory;
+use Wikibase\Edrsf\EntityRevision;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\RevisionedUnresolvedRedirectException;
+use Wikibase\Edrsf\StorageException;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\GenericEntityInfoBuilder;
 use Wikibase\Lib\Store\HashSiteLinkStore;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkStore;
-use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\RedirectRevision;
 
 /**
@@ -107,7 +107,7 @@ class MockRepository implements
 	 * @param EntityId $entityId
 	 *
 	 * @return EntityDocument|null
-	 * @throws StorageException
+	 * @throws \Wikibase\Edrsf\StorageException
 	 */
 	public function getEntity( EntityId $entityId ) {
 		$revision = $this->getEntityRevision( $entityId );
@@ -116,16 +116,16 @@ class MockRepository implements
 	}
 
 	/**
-	 * @see EntityRevisionLookup::getEntityRevision
+	 * @see \Wikibase\Edrsf\EntityRevisionLookup::getEntityRevision
 	 *
 	 * @param EntityId $entityId
 	 * @param int $revisionId The desired revision id, or 0 for the latest revision.
 	 * @param string $mode LATEST_FROM_SLAVE, LATEST_FROM_SLAVE_WITH_FALLBACK or
 	 *        LATEST_FROM_MASTER.
 	 *
-	 * @throws RevisionedUnresolvedRedirectException
-	 * @throws StorageException
-	 * @return EntityRevision|null
+	 * @throws \Wikibase\Edrsf\RevisionedUnresolvedRedirectException
+	 * @throws \Wikibase\Edrsf\StorageException
+	 * @return \Wikibase\Edrsf\EntityRevision|null
 	 */
 	public function getEntityRevision(
 		EntityId $entityId,
@@ -235,7 +235,7 @@ class MockRepository implements
 	 * @param int|string $timestamp
 	 * @param User|string|null $user
 	 *
-	 * @throws StorageException
+	 * @throws \Wikibase\Edrsf\StorageException
 	 * @return EntityRevision
 	 */
 	public function putEntity( EntityDocument $entity, $revisionId = 0, $timestamp = 0, $user = null ) {
@@ -297,7 +297,7 @@ class MockRepository implements
 	 * @param int $revisionId
 	 * @param string|int $timestamp
 	 *
-	 * @throws StorageException
+	 * @throws \Wikibase\Edrsf\StorageException
 	 */
 	public function putRedirect( EntityRedirect $redirect, $revisionId = 0, $timestamp = 0 ) {
 		$key = $redirect->getEntityId()->getSerialization();
@@ -486,8 +486,8 @@ class MockRepository implements
 	 *
 	 * @see WikiPage::doEditContent
 	 *
-	 * @return EntityRevision
-	 * @throws StorageException
+	 * @return \Wikibase\Edrsf\EntityRevision
+	 * @throws \Wikibase\Edrsf\StorageException
 	 */
 	public function saveEntity( EntityDocument $entity, $summary, User $user, $flags = 0, $baseRevisionId = false ) {
 		$entityId = $entity->getId();
@@ -530,7 +530,7 @@ class MockRepository implements
 	 * @param int $flags
 	 * @param int|bool $baseRevisionId
 	 *
-	 * @throws StorageException If the given type of entity does not support redirects
+	 * @throws \Wikibase\Edrsf\StorageException If the given type of entity does not support redirects
 	 * @return int The revision id created by storing the redirect
 	 */
 	public function saveRedirect( EntityRedirect $redirect, $summary, User $user, $flags = 0, $baseRevisionId = false ) {
@@ -575,7 +575,7 @@ class MockRepository implements
 			return false;
 		}
 
-		/** @var EntityRevision $revision */
+		/** @var \Wikibase\Edrsf\EntityRevision $revision */
 		foreach ( $this->entities[$key] as $revision ) {
 			if ( $revision->getRevisionId() >= $lastRevisionId ) {
 				if ( isset( $revision->user ) && $revision->user !== $user->getName() ) {
@@ -617,7 +617,7 @@ class MockRepository implements
 	/**
 	 * @param EntityId $id
 	 *
-	 * @throws StorageException
+	 * @throws \Wikibase\Edrsf\StorageException
 	 */
 	private function updateMaxNumericId( EntityId $id ) {
 		if ( !( $id instanceof Int32EntityId ) ) {

@@ -10,11 +10,12 @@ use ValueFormatters\BasicNumberLocalizer;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
-use Wikibase\LanguageFallbackChain;
+use Wikibase\Edrsf\LanguageFallbackChain;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\View\EditSectionGenerator;
+use Wikibase\View\EntityIdFormatterFactory;
 use Wikibase\View\EntityTermsView;
 use Wikibase\View\HtmlSnakFormatterFactory;
 use Wikibase\View\ItemView;
@@ -22,10 +23,9 @@ use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\PropertyView;
 use Wikibase\View\StatementSectionsView;
-use Wikibase\View\ViewFactory;
-use Wikibase\View\EntityIdFormatterFactory;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\Template\TemplateRegistry;
+use Wikibase\View\ViewFactory;
 
 /**
  * @covers Wikibase\View\ViewFactory

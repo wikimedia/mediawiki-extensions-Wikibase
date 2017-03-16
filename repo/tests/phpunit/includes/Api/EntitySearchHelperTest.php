@@ -10,11 +10,11 @@ use Wikibase\DataModel\Services\Lookup\DispatchingEntityLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
-use Wikibase\Lib\Interactors\TermSearchOptions;
-use Wikibase\Lib\Interactors\TermSearchResult;
+use Wikibase\Edrsf\ConfigurableTermSearchInteractor;
+use Wikibase\Edrsf\TermIndexEntry;
+use Wikibase\Edrsf\TermSearchOptions;
+use Wikibase\Edrsf\TermSearchResult;
 use Wikibase\Repo\Api\EntitySearchHelper;
-use Wikibase\TermIndexEntry;
 
 /**
  * @covers Wikibase\Repo\Api\EntitySearchHelper
@@ -55,7 +55,7 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 	 * @param string $type
 	 * @param TermSearchResult[] $returnResults
 	 *
-	 * @return ConfigurableTermSearchInteractor|\PHPUnit_Framework_MockObject_MockObject
+	 * @return \Wikibase\Edrsf\ConfigurableTermSearchInteractor|\PHPUnit_Framework_MockObject_MockObject
 	 */
 	private function getMockSearchInteractor(
 		$search,

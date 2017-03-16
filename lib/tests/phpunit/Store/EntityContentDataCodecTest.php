@@ -16,7 +16,6 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\InternalSerialization\DeserializerFactory;
-use Wikibase\Lib\Store\EntityContentDataCodec;
 
 /**
  * @covers Wikibase\Lib\Store\EntityContentDataCodec
@@ -33,7 +32,7 @@ class EntityContentDataCodecTest extends MediaWikiTestCase {
 		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
 		$deserializerFactory = new DeserializerFactory( new DataValueDeserializer(), $idParser );
 
-		return new EntityContentDataCodec(
+		return new \Wikibase\Edrsf\EntityContentDataCodec(
 			$idParser,
 			$serializerFactory->newEntitySerializer(),
 			$deserializerFactory->newEntityDeserializer(),

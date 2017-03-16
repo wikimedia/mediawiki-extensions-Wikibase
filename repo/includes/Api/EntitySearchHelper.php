@@ -8,10 +8,11 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
-use Wikibase\Lib\Interactors\TermSearchOptions;
-use Wikibase\Lib\Interactors\TermSearchResult;
-use Wikibase\TermIndexEntry;
+use Wikibase\Edrsf\ConfigurableTermSearchInteractor;
+use Wikibase\Edrsf\TermIndexEntry;
+use Wikibase\Edrsf\TermSearchInteractor;
+use Wikibase\Edrsf\TermSearchOptions;
+use Wikibase\Edrsf\TermSearchResult;
 
 /**
  * Helper class to search for entities.
@@ -27,7 +28,7 @@ class EntitySearchHelper {
 	private $idParser;
 
 	/**
-	 * @var ConfigurableTermSearchInteractor
+	 * @var \Wikibase\Edrsf\ConfigurableTermSearchInteractor
 	 */
 	private $termSearchInteractor;
 

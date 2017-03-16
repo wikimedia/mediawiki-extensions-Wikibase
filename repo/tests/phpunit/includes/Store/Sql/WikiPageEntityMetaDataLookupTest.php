@@ -9,10 +9,9 @@ use MediaWikiTestCase;
 use stdClass;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityRevision;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
+use Wikibase\Edrsf\EntityNamespaceLookup;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\WikiPageEntityMetaDataLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -31,7 +30,7 @@ use Wikibase\Repo\WikibaseRepo;
 class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 
 	/**
-	 * @var EntityRevision[]
+	 * @var \Wikibase\Edrsf\EntityRevision[]
 	 */
 	private $data = array();
 

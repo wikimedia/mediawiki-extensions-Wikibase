@@ -7,7 +7,7 @@ use InvalidArgumentException;
 use ResultWrapper;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Edrsf\EntityNamespaceLookup;
 use Wikibase\Repo\Store\EntitiesWithoutTermFinder;
 use Wikimedia\Assert\Assert;
 

@@ -2,13 +2,12 @@
 
 namespace Wikibase\Client\Tests\Store;
 
-use Wikibase\Client\Store\RepositoryServiceContainer;
-use Wikibase\Client\Store\RepositoryServiceContainerFactory;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Lookup\UnknownForeignRepositoryException;
-use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
+use Wikibase\Edrsf\RepositoryServiceContainer;
+use Wikibase\Edrsf\RepositorySpecificDataValueDeserializerFactory;
 
 /**
  * @covers Wikibase\Client\Store\RepositoryServiceContainerFactory
@@ -25,7 +24,7 @@ class RepositoryServiceContainerFactoryTest extends \PHPUnit_Framework_TestCase 
 			new ItemIdParser(), []
 		);
 
-		return new RepositoryServiceContainerFactory(
+		return new \Wikibase\Edrsf\RepositoryServiceContainerFactory(
 			$idParserFactory,
 			new RepositorySpecificDataValueDeserializerFactory( $idParserFactory ),
 			[ '' => false ],

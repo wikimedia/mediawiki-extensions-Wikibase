@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\Edrsf\PropertyInfoLookup;
 
 /**
  * @covers Wikibase\Lib\Tests\Store\MockPropertyInfoLookup
@@ -28,7 +28,7 @@ class MockPropertyInfoLookupTest extends \MediaWikiTestCase {
 		$lookup = $this->newMockPropertyInfoLookup();
 
 		$this->assertSame(
-			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
+			[ \Wikibase\Edrsf\PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
 			$lookup->getPropertyInfo( new PropertyId( 'P23' ) )
 		);
 	}
@@ -44,8 +44,8 @@ class MockPropertyInfoLookupTest extends \MediaWikiTestCase {
 
 		$this->assertSame(
 			[
-				'P23' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
-				'P42' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ],
+				'P23' => [ \Wikibase\Edrsf\PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
+				'P42' => [ \Wikibase\Edrsf\PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ],
 			],
 			$lookup->getAllPropertyInfo()
 		);

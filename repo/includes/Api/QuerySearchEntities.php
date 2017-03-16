@@ -5,11 +5,9 @@ namespace Wikibase\Repo\Api;
 use ApiPageSet;
 use ApiQuery;
 use ApiQueryGeneratorBase;
+use Wikibase\Edrsf\TermSearchResult;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module to search for Wikibase entities that can be used as a generator.

@@ -212,7 +212,7 @@ call_user_func( function() {
 				$repo->getEntityLookup(),
 				$repo->getEntityIdParser(),
 				$repo->newTermSearchInteractor( $repo->getUserLanguage()->getCode() ),
-				new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
+				new \Wikibase\Edrsf\LanguageFallbackLabelDescriptionLookup(
 					$repo->getTermLookup(),
 					$repo->getLanguageFallbackChainFactory()
 						->newFromLanguage( $repo->getUserLanguage() )
@@ -626,7 +626,7 @@ call_user_func( function() {
 				$repo->getEntityLookup(),
 				$repo->getEntityIdParser(),
 				$repo->newTermSearchInteractor( $apiQuery->getLanguage()->getCode() ),
-				new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
+				new \Wikibase\Edrsf\LanguageFallbackLabelDescriptionLookup(
 					$repo->getTermLookup(),
 					$repo->getLanguageFallbackChainFactory()
 						->newFromLanguage( $apiQuery->getLanguage() )
@@ -777,8 +777,8 @@ call_user_func( function() {
 		$wikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
 		$prefetchingTermLookup = $wikibaseRepo->getPrefetchingTermLookup();
 		$languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
-		$fallbackMode = Wikibase\LanguageFallbackChainFactory::FALLBACK_ALL;
-		$labelDescriptionLookup = new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
+		$fallbackMode = \Wikibase\Edrsf\LanguageFallbackChainFactory::FALLBACK_ALL;
+		$labelDescriptionLookup = new \Wikibase\Edrsf\LanguageFallbackLabelDescriptionLookup(
 			$prefetchingTermLookup,
 			$languageFallbackChainFactory->newFromLanguage( $wgContLang, $fallbackMode )
 		);

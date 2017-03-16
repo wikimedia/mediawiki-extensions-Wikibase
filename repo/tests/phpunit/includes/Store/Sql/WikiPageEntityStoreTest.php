@@ -15,11 +15,10 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
-use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
+use Wikibase\Edrsf\EntityRevisionLookup;
+use Wikibase\Edrsf\EntityStoreWatcher;
+use Wikibase\Edrsf\StorageException;
+use Wikibase\Edrsf\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Store\WikiPageEntityStore;
@@ -85,7 +84,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 		$lookup = new WikiPageEntityRevisionLookup(
 			$contentCodec,
-			new WikiPageEntityMetaDataLookup( $wikibaseRepo->getEntityNamespaceLookup(), false ),
+			new \Wikibase\Edrsf\WikiPageEntityMetaDataLookup( $wikibaseRepo->getEntityNamespaceLookup(), false ),
 			false
 		);
 
@@ -134,7 +133,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	 */
 	public function testSaveEntity( EntityDocument $entity, EntityDocument $empty ) {
 		/* @var WikiPageEntityStore $store */
-		/* @var EntityRevisionLookup $lookup */
+		/* @var \Wikibase\Edrsf\EntityRevisionLookup $lookup */
 		list( $store, $lookup ) = $this->createStoreAndLookup();
 		$user = $GLOBALS['wgUser'];
 
@@ -567,7 +566,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	 */
 	public function testDeleteEntity( EntityDocument $entity ) {
 		/* @var WikiPageEntityStore $store */
-		/* @var EntityRevisionLookup $lookup */
+		/* @var \Wikibase\Edrsf\EntityRevisionLookup $lookup */
 		list( $store, $lookup ) = $this->createStoreAndLookup();
 		$user = $GLOBALS['wgUser'];
 
