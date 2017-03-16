@@ -225,7 +225,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	private function getJsonDumperWithExceptionHandler( array $ids, Exception $ex ) {
 		$entityLookup = $this->getEntityLookupThrows( $ex );
 		$out = fopen( 'php://output', 'w' );
-		$serializer = $this->serializerFactory->newEntitySerializer();
+		$serializer = $this->serializerFactory->newItemSerializer();
 
 		$jsonDumper = new JsonDumpGenerator(
 			$out,

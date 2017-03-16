@@ -55,7 +55,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
 			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
 		);
-		$entitySerializer = $serializerFactory->newEntitySerializer();
+		$entitySerializer = $serializerFactory->newItemSerializer();
 
 		$propertyDataTypeLookup = $this->getMock( PropertyDataTypeLookup::class );
 		$propertyDataTypeLookup->expects( $this->any() )
