@@ -122,6 +122,7 @@
 	"wikibase-validator-illegal-file-chars": "Los nomes de ficheru nun pueden tener carácteres como dos puntos o barres inclinaes. Pega sólo'l nome de ficheru que vien tres \"File:\".",
 	"wikibase-validator-illegal-geo-shape-title": "El valor tien de principiar con \"Data:\" y acabar con \".map\". Amás, el títulu nun puede tener caráuteres como dos puntos, almuhadina o tubería («:» «#» «|»).",
 	"wikibase-validator-no-such-media": "El ficheru «$1» nun esiste'n [https://commons.wikimedia.org/ Wikimedia Commons].",
+	"wikibase-validator-no-such-sitelink": "Nun pudo alcontrase l'enllaz a «$1» al intentar editar insinies.",
 	"wikibase-validator-page-not-exists": "La páxina «$1» nun esiste.",
 	"wikibase-validator-not-a-language": "«$1» nun ye un códigu d'idioma conocíu.",
 	"wikibase-item-reference-edit-placeholder": "Escribir la ID del elementu p.ex. Q10",

@@ -142,6 +142,7 @@
 	"wikibase-validator-illegal-file-chars": "أسماء الملفات غير مسموح لها أن تحتوي على الحروف مثل colons أو slashes. من فضلك اكتب اسم الملف ما بعد \"File:\" فقط.",
 	"wikibase-validator-illegal-geo-shape-title": "القيمة يجب أن تبدأ ب \"Data:\" وتنتهي ب \".map\". بالإضافة العنوان ينبغي ألا يحتوي على الحروف مثل النقطتين الرأسيتين، الهاش أو البايب.",
 	"wikibase-validator-no-such-media": "الملف \"$1\" غير موجود على [https://commons.wikimedia.org/ ويكيميديا كومنز].",
+	"wikibase-validator-no-such-sitelink": "لم يمكن العثور على وصلة موقع إلى \"$1\" عند محاولة تعديل البادجات.",
 	"wikibase-validator-page-not-exists": "الصفحة \"$1\" غير موجودة.",
 	"wikibase-validator-not-a-language": "\"$1\" ليس كود لغة معروف.",
 	"wikibase-item-reference-edit-placeholder": "أدخل رقم العنصر مثل Q10",
