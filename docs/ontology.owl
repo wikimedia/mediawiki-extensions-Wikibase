@@ -136,7 +136,13 @@
 
   <owl:NamedIndividual rdf:about="&wikibase;CommonsMedia">
       <rdfs:label>CommonsMedia</rdfs:label>
-      <rdfs:comment>Wikimedia Commons reference type.</rdfs:comment>
+      <rdfs:comment>Media reference type.</rdfs:comment>
+      <rdf:type rdf:resource="&wikibase;PropertyType"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="&wikibase;GeoShape">
+      <rdfs:label>GeoShape</rdfs:label>
+      <rdfs:comment>Geo shape data reference type</rdfs:comment>
       <rdf:type rdf:resource="&wikibase;PropertyType"/>
   </owl:NamedIndividual>
 

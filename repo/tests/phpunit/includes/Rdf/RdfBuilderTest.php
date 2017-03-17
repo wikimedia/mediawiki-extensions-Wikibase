@@ -59,6 +59,18 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		return $this->testData;
 	}
 
+	private function assertOrCreateNTriples( $dataSetName, $actual ) {
+		$expected = $this->getTestData()->getNTriples( $dataSetName );
+
+		if ( $expected === null ) {
+			$this->getTestData()->putTestData( $dataSetName, $actual, '.actual' );
+			$this->fail( "Data set $dataSetName not found! Created file with the current data using"
+				. " the suffix .actual" );
+		}
+
+		$this->helper->assertNTriplesEquals( $expected, $actual, "Data set $dataSetName" );
+	}
+
 	/**
 	 * @return EntityTitleLookup
 	 */
@@ -137,7 +149,6 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	 */
 	public function testAddEntity( $entityName, $dataSetName ) {
 		$entity = $this->getEntityData( $entityName );
-		$expected = $this->getTestData()->getNTriples( $dataSetName );
 
 		$builder =
 			$this->newRdfBuilder( RdfProducer::PRODUCE_ALL_STATEMENTS |
@@ -149,7 +160,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$builder->addEntity( $entity );
 		$builder->addEntityRevisionInfo( $entity->getId(), 42, "2014-11-04T03:11:05Z" );
 
-		$this->helper->assertNTriplesEquals( $expected, $builder->getRDF() );
+		$this->assertOrCreateNTriples( $dataSetName, $builder->getRDF() );
 	}
 
 	public function provideAddEntityStub() {
@@ -161,7 +172,6 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	 */
 	public function testAddEntityStub( $entityName, $dataSetName ) {
 		$entity = $this->getEntityData( $entityName );
-		$expected = $this->getTestData()->getNTriples( $dataSetName );
 
 		$builder =
 			$this->newRdfBuilder( RdfProducer::PRODUCE_ALL_STATEMENTS |
@@ -172,7 +182,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			                      RdfProducer::PRODUCE_FULL_VALUES );
 		$builder->addEntityStub( $entity );
 
-		$this->helper->assertNTriplesEquals( $expected, $builder->getRDF() );
+		$this->assertOrCreateNTriples( $dataSetName, $builder->getRDF() );
 	}
 
 	public function testAddEntityRedirect() {
@@ -235,20 +245,19 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	 */
 	public function testRdfOptions( $entityName, $produceOption, $dataSetName ) {
 		$entity = $this->getEntityData( $entityName );
-		$expected = $this->getTestData()->getNTriples( $dataSetName );
 
 		$builder = $this->newRdfBuilder( $produceOption );
 		$builder->addEntity( $entity );
 		$builder->addEntityRevisionInfo( $entity->getId(), 42, "2013-10-04T03:31:05Z" );
 		$builder->resolveMentionedEntities( $this->getTestData()->getMockRepository() );
-		$this->helper->assertNTriplesEquals( $expected, $builder->getRDF() );
+
+		$this->assertOrCreateNTriples( $dataSetName, $builder->getRDF() );
 	}
 
 	public function testDumpHeader() {
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_VERSION_INFO );
 		$builder->addDumpHeader( 1426110695 );
-		$expected = $this->getTestData()->getNTriples( 'dumpheader' );
-		$this->helper->assertNTriplesEquals( $expected, $builder->getRDF() );
+		$this->assertOrCreateNTriples( 'dumpheader', $builder->getRDF() );
 	}
 
 	public function testDeduplication() {
@@ -262,8 +271,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$builder->addEntity( $this->getEntityData( 'Q9' ) );
 		$data2 = $builder->getRDF();
 
-		$expected = $this->getTestData()->getNTriples( 'Q7_Q9_dedup' );
-		$this->helper->assertNTriplesEquals( $expected, $data1 . $data2 );
+		$this->assertOrCreateNTriples( 'Q7_Q9_dedup', $data1 . $data2 );
 	}
 
 	public function getProps() {
@@ -332,8 +340,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$builder->addEntityPageProps( $this->getEntityData( 'Q9' )->getId() );
 		$data = $builder->getRDF();
 
-		$expected = $this->getTestData()->getNTriples( $name );
-		$this->helper->assertNTriplesEquals( $expected, $data );
+		$this->assertOrCreateNTriples( $name, $data );
 	}
 
 	public function testPagePropsNone() {
