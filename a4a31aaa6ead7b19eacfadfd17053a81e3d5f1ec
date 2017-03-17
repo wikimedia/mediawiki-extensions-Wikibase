@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_868c9500",
+        "filename": "repo/tests/testDispatchCoordinator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-17T14:06:41Z",
+      "side": 1,
+      "message": "I do not understand this part. The coordinators have to run *concurrently* to actually test the locking mechanism. The easiest way to do that is to just test one coordinator in this script, over and over, in a loop. To test multiple concurrent coordinators, just run multiple instances of this script in parallel.\n\nDo test parallel/concurrent access to the lock from a single script, you\u0027d have to use fork().",
+      "revId": "a4a31aaa6ead7b19eacfadfd17053a81e3d5f1ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_067965f1",
+        "filename": "repo/tests/testDispatchCoordinator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-17T14:06:41Z",
+      "side": 1,
+      "message": "whut?",
+      "revId": "a4a31aaa6ead7b19eacfadfd17053a81e3d5f1ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_46568d60",
+        "filename": "repo/tests/testDispatchCoordinator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-17T14:06:41Z",
+      "side": 1,
+      "message": "This will break when running multiple instances of this script at once. Use temp tables instead, see below.",
+      "revId": "a4a31aaa6ead7b19eacfadfd17053a81e3d5f1ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_e6e1d998",
+        "filename": "repo/tests/testDispatchCoordinator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-17T14:06:41Z",
+      "side": 1,
+      "message": "Please set the third param ($temporary) to true. Temporary tables should be sufficient here. Each instance of this script will see their own copy of the temp tables, but that\u0027s not relevant. We don\u0027t actually care about these tables, we only care about the lock.\n\nIf we want to fully test coordinator functionality, we\u0027d indeed need real tables. But to test concurrently, these tables need to be permanent, not dropped and re-created by each script instance. For that case, I\u0027d suggest to pass a table prefix as a parameter to the test script, and just expect the tables to exist.",
+      "revId": "a4a31aaa6ead7b19eacfadfd17053a81e3d5f1ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_8663353b",
+        "filename": "repo/tests/testDispatchCoordinator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-17T14:06:41Z",
+      "side": 1,
+      "message": "If you run mutiple instances of this script at once, this will  break the other script. The solution is to use temp tables (see above). No need to drop them.",
+      "revId": "a4a31aaa6ead7b19eacfadfd17053a81e3d5f1ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
