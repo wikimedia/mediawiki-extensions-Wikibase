@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_864d759d",
+        "filename": "repo/tests/testDispatchCoordinator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-17T14:24:23Z",
+      "side": 1,
+      "message": "There are two instances, not one but I\u0027m guessing they are not concurrent (why did I think that way? I though it\u0027s javascript? :D)\nI fix it using fork()",
+      "parentUuid": "8e46e3ee_868c9500",
+      "revId": "a4a31aaa6ead7b19eacfadfd17053a81e3d5f1ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_067965f1",
         "filename": "repo/tests/testDispatchCoordinator.php",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_a6b8b175",
+        "filename": "repo/tests/testDispatchCoordinator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-17T14:24:23Z",
+      "side": 1,
+      "message": "My mistake. Removed it later :D",
+      "parentUuid": "8e46e3ee_067965f1",
+      "revId": "a4a31aaa6ead7b19eacfadfd17053a81e3d5f1ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_46568d60",
         "filename": "repo/tests/testDispatchCoordinator.php",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2017-03-17T14:06:41Z",
       "side": 1,
       "message": "This will break when running multiple instances of this script at once. Use temp tables instead, see below.",
+      "revId": "a4a31aaa6ead7b19eacfadfd17053a81e3d5f1ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_4679adc2",
+        "filename": "repo/tests/testDispatchCoordinator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-17T14:24:23Z",
+      "side": 1,
+      "message": "I thought about temp tables but afaik mysql temp tables can\u0027t be selected several times and that can cause issues (maybe SqlChangeDispatchingCoordinator changes over time). That\u0027s why I went with real tables.\nAre you sure this feature won\u0027t be needed and we should go with temp tables?",
+      "parentUuid": "8e46e3ee_46568d60",
       "revId": "a4a31aaa6ead7b19eacfadfd17053a81e3d5f1ec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
