@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_74e789df",
+        "filename": "repo/includes/Search/Elastic/WikibasePrefixSearcher.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-03-17T09:43:08Z",
+      "side": 1,
+      "message": "I think we\u0027re not very far from not needing this class\nWhat we would just need is to do a small refactor in cirrus to allow prefixSearch to accept a profile to build the query",
+      "range": {
+        "startLine": 16,
+        "startChar": 6,
+        "endLine": 16,
+        "endChar": 28
+      },
+      "revId": "5e6372208a11c5de2a05b1ae3d9a36dddbb1bc12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_54e4c5da",
+        "filename": "repo/includes/Search/Elastic/WikibasePrefixSearcher.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-03-17T09:43:08Z",
+      "side": 1,
+      "message": "yes in cirrus we now always return Status",
+      "range": {
+        "startLine": 92,
+        "startChar": 5,
+        "endLine": 92,
+        "endChar": 9
+      },
+      "revId": "5e6372208a11c5de2a05b1ae3d9a36dddbb1bc12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
