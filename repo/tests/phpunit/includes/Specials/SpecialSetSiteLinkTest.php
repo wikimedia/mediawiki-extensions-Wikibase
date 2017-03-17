@@ -293,7 +293,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 			'page' => both( tagMatchingOutline( '<div id="wb-setsitelink-page" class="wb-input"/>' ) )->andAlso(
 				havingChild( tagMatchingOutline( '<input name="page"/>' ) )
 			),
-			'submit' => both( tagMatchingOutline( '<div id="wb-setsitelink-submit"/>' ) )->andAlso(
+			'submit' => both( withAttribute( 'id' )->havingValue( 'wb-setsitelink-submit' ) )->andAlso(
 				havingChild( tagMatchingOutline( '<button type="submit" name="wikibase-setsitelink-submit"/>' ) )
 			),
 		];
