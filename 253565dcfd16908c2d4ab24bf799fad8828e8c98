@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_ebcc448e",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 50
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-03-17T09:43:08Z",
+      "side": 1,
+      "message": "duplicated: bad conflict resolution?",
+      "revId": "253565dcfd16908c2d4ab24bf799fad8828e8c98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_2b81ccfd",
+        "filename": "repo/includes/Api/EntitySearchTermIndex.php",
+        "patchSetId": 50
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-03-17T09:43:08Z",
+      "side": 1,
+      "message": "Did we implement this fallback on elastic side?",
+      "revId": "253565dcfd16908c2d4ab24bf799fad8828e8c98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_2ba0ec8c",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 50
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-03-17T09:43:08Z",
+      "side": 1,
+      "message": "should we borrow some logic from the other implementation?\nI mean all the code to deal with entityId matches?",
+      "revId": "253565dcfd16908c2d4ab24bf799fad8828e8c98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_cbb708d2",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 50
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-03-17T09:43:08Z",
+      "side": 1,
+      "message": "what\u0027s the purpose of this one?",
+      "range": {
+        "startLine": 234,
+        "startChar": 61,
+        "endLine": 234,
+        "endChar": 79
+      },
+      "revId": "253565dcfd16908c2d4ab24bf799fad8828e8c98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_8bb100df",
+        "filename": "repo/includes/Search/Elastic/WikibasePrefixSearcher.php",
+        "patchSetId": 50
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-03-17T09:43:08Z",
+      "side": 1,
+      "message": "The two branches do the same I think you can now remove this compat code.",
+      "revId": "253565dcfd16908c2d4ab24bf799fad8828e8c98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_4bf21899",
+        "filename": "repo/includes/Search/Elastic/WikibasePrefixSearcher.php",
+        "patchSetId": 50
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-03-17T09:43:08Z",
+      "side": 1,
+      "message": "I think you can return $status from here and move this comment into the EntitySearchHelper implementation no?\nYou\u0027re still one level behind upstream here.",
+      "revId": "253565dcfd16908c2d4ab24bf799fad8828e8c98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
