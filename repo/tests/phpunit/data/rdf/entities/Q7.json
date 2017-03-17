@@ -162,6 +162,17 @@
                                         "type": "string"
                                     }
                                 }
+                            ],
+                            "P10": [
+                                {
+                                    "snaktype": "value",
+                                    "property": "P10",
+                                    "datatype": "geo-shape",
+                                    "datavalue": {
+                                        "value": "Data:Springfield.map",
+                                        "type": "string"
+                                    }
+                                }
                             ]
                         },
                         "snaks-order": [

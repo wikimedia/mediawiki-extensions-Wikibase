@@ -124,6 +124,11 @@ class RdfVocabulary {
 	private $pagePropertyDefs;
 
 	/**
+	 * @var string Base URI for expanding geo-shape values to URIs.
+	 */
+	private $geoShapeBaseUri = 'http://commons.wikimedia.org/wiki/';
+
+	/**
 	 * @param string   $baseUri Base URI for entity concept URIs.
 	 * @param string   $dataUri Base URI for entity description URIs.
 	 * @param string[] $canonicalLanguageCodes Mapping of non-standard to canonical language codes.
@@ -185,6 +190,20 @@ class RdfVocabulary {
 				self::NS_GEO => self::GEO_URI,
 				self::NS_PROV => self::PROV_URI,
 		);
+	}
+
+	/**
+	 * @return string The base URI for expanding geo-shape values to URIs.
+	 */
+	public function getGeoShapeBaseUri() {
+		return $this->geoShapeBaseUri;
+	}
+
+	/**
+	 * @param string $geoShapeBaseUri The base URI for expanding geo-shape values to URIs.
+	 */
+	public function setGeoShapeBaseUri( $geoShapeBaseUri ) {
+		$this->geoShapeBaseUri = $geoShapeBaseUri;
 	}
 
 	/**
@@ -285,6 +304,17 @@ class RdfVocabulary {
 	 */
 	public function getCommonsURI( $file ) {
 		return self::COMMONS_URI . rawurlencode( $file );
+	}
+
+	/**
+	 * Create Commons URL from filename value
+	 *
+	 * @param string $file
+	 *
+	 * @return string
+	 */
+	public function getGeoShapeURI( $file ) {
+		return $this->geoShapeBaseUri . wfUrlencode( $file );
 	}
 
 	/**

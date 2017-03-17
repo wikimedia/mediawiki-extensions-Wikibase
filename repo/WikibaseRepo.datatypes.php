@@ -38,6 +38,7 @@ use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\Values\CommonsMediaRdfBuilder;
 use Wikibase\Rdf\Values\ComplexValueRdfHelper;
 use Wikibase\Rdf\Values\EntityIdRdfBuilder;
+use Wikibase\Rdf\Values\GeoShapeRdfBuilder;
 use Wikibase\Rdf\Values\GlobeCoordinateRdfBuilder;
 use Wikibase\Rdf\Values\LiteralValueRdfBuilder;
 use Wikibase\Rdf\Values\MonolingualTextRdfBuilder;
@@ -122,7 +123,15 @@ return call_user_func( function() {
 				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
 				return $factory->newGeoShapeFormatter( $format, $options );
 			},
-			// TODO: RDF mapping
+			'rdf-builder-factory-callback' => function (
+				$flags,
+				RdfVocabulary $vocab,
+				RdfWriter $writer,
+				EntityMentionListener $tracker,
+				DedupeBag $dedupe
+			) {
+				return new GeoShapeRdfBuilder( $vocab );
+			},
 		),
 		'VT:globecoordinate' => array(
 			'validator-factory-callback' => function() {

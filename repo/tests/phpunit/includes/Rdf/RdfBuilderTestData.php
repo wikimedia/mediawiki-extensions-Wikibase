@@ -189,6 +189,7 @@ class RdfBuilderTestData {
 			array( 7, 'string' ),
 			array( 8, 'time' ),
 			array( 9, 'url' ),
+			array( 10, 'geo-shape' ),
 		);
 	}
 
