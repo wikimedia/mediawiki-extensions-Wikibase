@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_a63511f5",
+        "filename": "repo/tests/testDispatchCoordinator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-17T14:32:53Z",
+      "side": 1,
+      "message": "If you use fork, you should need command line params for specifying how many forks should run, and how many times each fork should run.\n\nI find it much easier to just start multiple instances of this script on the shell. But maybe that\u0027s just me. For some reason, I never liked the semantics of fork. It just feels... wrong.\n\nAnyway - if you use fork, don\u0027t forget to call MediaWikiServices::resetChildProcessServices() on any child process. Among other things, this will make sure each client has a separate working DB connection. Note that also means they cannot share temp tables.",
+      "parentUuid": "8e46e3ee_864d759d",
+      "revId": "a4a31aaa6ead7b19eacfadfd17053a81e3d5f1ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_067965f1",
         "filename": "repo/tests/testDispatchCoordinator.php",
         "patchSetId": 2
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "I thought about temp tables but afaik mysql temp tables can\u0027t be selected several times and that can cause issues (maybe SqlChangeDispatchingCoordinator changes over time). That\u0027s why I went with real tables.\nAre you sure this feature won\u0027t be needed and we should go with temp tables?",
       "parentUuid": "8e46e3ee_46568d60",
+      "revId": "a4a31aaa6ead7b19eacfadfd17053a81e3d5f1ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_c63a9de4",
+        "filename": "repo/tests/testDispatchCoordinator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-17T14:32:53Z",
+      "side": 1,
+      "message": "Temp tables don\u0027t support self-joins. I\u0027m pretty sure that will not be needed, yes. Self joins are rare, we use temp tables in all the database related unit tests.\n\nBut temp tables cannot be shared among multiple processes (no matter if they come from fork, or are started manually). So we can\u0027t use temp tables to test coordinator behavior, only lock behavior.",
+      "parentUuid": "8e46e3ee_4679adc2",
       "revId": "a4a31aaa6ead7b19eacfadfd17053a81e3d5f1ec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
