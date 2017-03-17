@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_6180534c",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-17T15:29:45Z",
+      "side": 1,
+      "message": "I don\u0027t think that adding a FIXME on top of an XXX is going to help us in any way. Also what this comment says is not really actionable: Which \"site\"? \"Break\" how? \"Strange\" how?",
+      "revId": "20d9f356728353986563d0068619775de1446ea3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_4198b7c3",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-17T15:29:45Z",
+      "side": 1,
+      "message": "Unused.",
+      "revId": "20d9f356728353986563d0068619775de1446ea3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_81d31f61",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-17T15:29:45Z",
+      "side": 1,
+      "message": "This is not really doable because this depends on knowledge about Wikibase.git, and uses core.",
+      "range": {
+        "startLine": 18,
+        "startChar": 3,
+        "endLine": 18,
+        "endChar": 43
+      },
+      "revId": "20d9f356728353986563d0068619775de1446ea3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_21e24b2f",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-17T15:29:45Z",
+      "side": 1,
+      "message": "Can\u0027t be null.",
+      "range": {
+        "startLine": 31,
+        "startChar": 26,
+        "endLine": 31,
+        "endChar": 30
+      },
+      "revId": "20d9f356728353986563d0068619775de1446ea3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_0192afa1",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-17T15:29:45Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be private?",
+      "range": {
+        "startLine": 33,
+        "startChar": 1,
+        "endLine": 33,
+        "endChar": 7
+      },
+      "revId": "20d9f356728353986563d0068619775de1446ea3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_e1eb0308",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-17T15:29:45Z",
+      "side": 1,
+      "message": "Can you please either make this a\n\nswitch ( $component ) {\n    case \u0027repo\u0027:\n        $settings \u003d $GLOBALS[\u0027wgWBRepoSettings\u0027];\n        break;\n    default:\n        throw …\n}\n\nor simply pass in the full name of the global instead of concatenating strings here? This is just not necessary and makes the code hard to read. The later should only be done if the method is private.",
+      "range": {
+        "startLine": 34,
+        "startChar": 9,
+        "endLine": 34,
+        "endChar": 30
+      },
+      "revId": "20d9f356728353986563d0068619775de1446ea3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_c1d92785",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-17T15:29:45Z",
+      "side": 1,
+      "message": "This is a side-effect that should be documented.",
+      "revId": "20d9f356728353986563d0068619775de1446ea3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
