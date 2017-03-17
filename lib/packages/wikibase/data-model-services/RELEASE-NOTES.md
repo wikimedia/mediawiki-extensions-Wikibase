@@ -1,11 +1,11 @@
 # Wikibase DataModel Services release notes
 
-## Version 3.8.0 (2017-03-16)
+## Version 3.8.0 (2017-03-17)
 
 * Fixed `EntityRetrievingTermLookup` silently failing for entities that do not implement
   `FingerprintProvider` (#171).
 * Introduced caching in `PrefixMappingEntityIdParserFactory` (#162).
-* Added compatibility with Wikibase DataModel 7.x
+* Added compatibility with Wikibase DataModel 7.x.
 
 ## Version 3.7.0 (2016-11-14)
 
