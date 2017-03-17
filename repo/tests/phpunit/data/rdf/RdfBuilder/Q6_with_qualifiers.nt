@@ -1,5 +1,6 @@
 <http://acme.test/Q6> <http://acme.test/prop/P7> <http://acme.test/statement/TEST-Qualifiers> .
 <http://acme.test/Q6> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#Item> .
+<http://acme.test/statement/TEST-Qualifiers> <http://acme.test/prop/qualifier/P10> <http://commons.wikimedia.org/wiki/Data:Springfield.map> .
 <http://acme.test/statement/TEST-Qualifiers> <http://acme.test/prop/qualifier/P2> <http://acme.test/Q42> .
 <http://acme.test/statement/TEST-Qualifiers> <http://acme.test/prop/qualifier/P2> <http://acme.test/Q666> .
 <http://acme.test/statement/TEST-Qualifiers> <http://acme.test/prop/qualifier/P3> <http://commons.wikimedia.org/wiki/Special:FilePath/Universe.svg> .

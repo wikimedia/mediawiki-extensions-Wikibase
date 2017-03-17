@@ -204,6 +204,22 @@
                 "type": "statement",
                 "rank": "normal"
             }
+        ],
+        "P10": [
+            {
+                "id": "TEST-Statement-10-foobar",
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P10",
+                    "datatype": "geo-shape",
+                    "datavalue": {
+                        "value": "Data:Springfield.map",
+                        "type": "string"
+                    }
+                },
+                "type": "statement",
+                "rank": "normal"
+            }
         ]
     }
 }

@@ -22,6 +22,7 @@
 <http://acme.test/statement/TEST-Statement-3-12914044e0dbab210aa9d81168bd50471bbde12d> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#BestRank> .
 <http://acme.test/statement/TEST-Statement-3-12914044e0dbab210aa9d81168bd50471bbde12d> <http://wikiba.se/ontology-beta#rank> <http://wikiba.se/ontology-beta#NormalRank> .
 <http://acme.test/statement/TEST-Statement-3-b181ddac61642fe80bbf8e4a8eaa1da425cb0ac9> <http://acme.test/prop/statement/P3> <http://commons.wikimedia.org/wiki/Special:FilePath/Universe.svg> .
+<http://acme.test/statement/TEST-Statement-10-foobar> <http://acme.test/prop/statement/P10> <http://commons.wikimedia.org/wiki/Data:Springfield.map> .
 <http://acme.test/statement/TEST-Statement-3-b181ddac61642fe80bbf8e4a8eaa1da425cb0ac9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#Statement> .
 <http://acme.test/statement/TEST-Statement-3-b181ddac61642fe80bbf8e4a8eaa1da425cb0ac9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#BestRank> .
 <http://acme.test/statement/TEST-Statement-3-b181ddac61642fe80bbf8e4a8eaa1da425cb0ac9> <http://wikiba.se/ontology-beta#rank> <http://wikiba.se/ontology-beta#NormalRank> .

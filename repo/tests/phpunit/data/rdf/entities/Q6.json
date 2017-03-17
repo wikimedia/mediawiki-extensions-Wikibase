@@ -179,6 +179,18 @@
                                 "type": "string"
                             }
                         }
+                    ],
+                    "P10": [
+                        {
+                            "hash": "foobar",
+                            "snaktype": "value",
+                            "property": "P10",
+                            "datatype": "geo-shape",
+                            "datavalue": {
+                                "value": "Data:Springfield.map",
+                                "type": "string"
+                            }
+                        }
                     ]
                 },
                 "qualifiers-order": [
