@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_6b87d4dc",
+        "filename": "tests/phan/config.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-17T10:21:35Z",
+      "side": 1,
+      "message": "I think we should get these fixed at some point in the future.",
+      "range": {
+        "startLine": 353,
+        "startChar": 5,
+        "endLine": 353,
+        "endChar": 32
+      },
+      "revId": "093dc49d2a96ed7410e621ed4323377df0c5d44c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
