@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_6b227452",
+        "filename": "repo/includes/Content/EntityHandler.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-03-17T09:01:59Z",
+      "side": 1,
+      "message": "Because we use the noop script if you don\u0027t pass an empty array or null you may be unable to remove the field data on updates as the updater would not be aware that this field exists and needs to be nulled.",
+      "revId": "46efdc6e76ba3630efc8fca06baa0c8398441e26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_4b1a181e",
+        "filename": "repo/includes/Search/Elastic/Fields/TermIndexField.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-03-17T09:01:59Z",
+      "side": 1,
+      "message": "for elastic5 this is now text",
+      "range": {
+        "startLine": 19,
+        "startChar": 14,
+        "endLine": 19,
+        "endChar": 20
+      },
+      "revId": "46efdc6e76ba3630efc8fca06baa0c8398441e26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_abd71c27",
+        "filename": "repo/includes/Search/Elastic/Fields/TermIndexField.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-03-17T09:01:59Z",
+      "side": 1,
+      "message": "elastic5: \u0027index\u0027 \u003d\u003e false",
+      "revId": "46efdc6e76ba3630efc8fca06baa0c8398441e26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_eb1684f5",
+        "filename": "repo/includes/Search/Elastic/Fields/TermIndexField.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-03-17T09:01:59Z",
+      "side": 1,
+      "message": "elastic5: text",
+      "range": {
+        "startLine": 33,
+        "startChar": 14,
+        "endLine": 33,
+        "endChar": 20
+      },
+      "revId": "46efdc6e76ba3630efc8fca06baa0c8398441e26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_0b1410eb",
+        "filename": "repo/includes/Search/Elastic/Fields/TermIndexField.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-03-17T09:01:59Z",
+      "side": 1,
+      "message": "elastic5: \u0027norms\u0027 \u003d\u003e false",
+      "revId": "46efdc6e76ba3630efc8fca06baa0c8398441e26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
