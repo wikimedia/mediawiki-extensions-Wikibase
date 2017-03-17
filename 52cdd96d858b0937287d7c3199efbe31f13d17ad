@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_6bcd9433",
+        "filename": "repo/includes/Search/Elastic/Fields/DescriptionsField.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2017-03-17T10:43:22Z",
+      "side": 1,
+      "message": "forwarding aude\u0027s comment: array",
+      "range": {
+        "startLine": 20,
+        "startChar": 29,
+        "endLine": 20,
+        "endChar": 30
+      },
+      "revId": "52cdd96d858b0937287d7c3199efbe31f13d17ad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
