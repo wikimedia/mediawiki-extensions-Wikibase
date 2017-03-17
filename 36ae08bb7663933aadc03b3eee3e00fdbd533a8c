@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_e6eb1908",
+        "filename": "repo/tests/TestDispatchCoordinator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-17T14:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e46e3ee_81590660",
+      "revId": "36ae08bb7663933aadc03b3eee3e00fdbd533a8c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_413a1ee6",
         "filename": "repo/tests/TestDispatchCoordinator.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2017-03-11T19:32:49Z",
       "side": 1,
       "message": "I\u0027d prefer the test to run on a fixed list of two or three fake clients. The databases do not actually need to exist for this test, right? Tests should only ever touch one database anyway.",
+      "revId": "36ae08bb7663933aadc03b3eee3e00fdbd533a8c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_66ce29bb",
+        "filename": "repo/tests/TestDispatchCoordinator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-17T14:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e46e3ee_413a1ee6",
       "revId": "36ae08bb7663933aadc03b3eee3e00fdbd533a8c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_e616b9f5",
+        "filename": "repo/tests/TestDispatchCoordinator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-17T14:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e46e3ee_0144166d",
+      "revId": "36ae08bb7663933aadc03b3eee3e00fdbd533a8c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_e13ecad6",
         "filename": "repo/tests/TestDispatchCoordinator.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2017-03-11T19:32:49Z",
       "side": 1,
       "message": "This will write dispatch state to the *actual* database, not a fake, right? That\u0027s not good... Look into how MediaWikiTestCase makes fake databases. It\u0027s a bit messy, I have some patches lying around for cleaning that up. Let me know if you run into trouble.\n\nOn the other hand, we could also use a fake ChangeDispatchCoordinator. The objective of this test is to test the lock manager, not the coordinator.",
+      "revId": "36ae08bb7663933aadc03b3eee3e00fdbd533a8c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_c634dd48",
+        "filename": "repo/tests/TestDispatchCoordinator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-17T14:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e46e3ee_e13ecad6",
       "revId": "36ae08bb7663933aadc03b3eee3e00fdbd533a8c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
