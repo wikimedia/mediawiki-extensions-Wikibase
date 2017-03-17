@@ -6,7 +6,7 @@
  */
 
 .wikibase-title-id {
-	color: gray;
+	color: #72777d;
 	font-size: 0.6em;
 	margin-left: 0.4em;
 }
@@ -37,7 +37,7 @@
 }
 
 .wikibase-entitytermsview-heading-aliases ul {
-	color: gray;
+	color: #72777d;
 	margin: 0;
 	word-wrap: break-word;
 }
@@ -70,8 +70,8 @@
 
 .wikibase-statementgroupview {
 	/* Same as toc */
-	background-color: #f9f9f9;
-	border: 1px solid #eee;
+	background-color: #f8f9fa;
+	border: 1px solid #eaecf0;
 	/* Prevent statementgroupview to be split among columns */
 	display: inline-block;
 	margin: 0 0 10px;
