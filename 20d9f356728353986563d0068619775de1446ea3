@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_56695c87",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-17T22:04:02Z",
+      "side": 1,
+      "message": "Your client site. The site using this code. If your repo has properties in a namespace other than 120, your client site will choke, unless you override this default.\n\nThere is NO reason to assume 120 is the correct number. We simply need this to be configured explicitly, or complain immediately.",
+      "parentUuid": "8e46e3ee_6180534c",
+      "revId": "20d9f356728353986563d0068619775de1446ea3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_4198b7c3",
         "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
         "patchSetId": 4
@@ -47,6 +65,30 @@
       "writtenOn": "2017-03-17T15:29:45Z",
       "side": 1,
       "message": "This is not really doable because this depends on knowledge about Wikibase.git, and uses core.",
+      "range": {
+        "startLine": 18,
+        "startChar": 3,
+        "endLine": 18,
+        "endChar": 43
+      },
+      "revId": "20d9f356728353986563d0068619775de1446ea3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_d6224c50",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-17T22:04:02Z",
+      "side": 1,
+      "message": "Yes, it depends on core, so what?  So does lib, and so does view. Both are separate components.\n\nHow and where does it depend on Wikibase.lib?",
+      "parentUuid": "8e46e3ee_81d31f61",
       "range": {
         "startLine": 18,
         "startChar": 3,
@@ -105,6 +147,30 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_d6e1ecfc",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-17T22:04:02Z",
+      "side": 1,
+      "message": "No, see me reply to Aleksey in an earlier patch set. The idea is that we can use this to get the config for MediaInfo or Lexeme, as well.",
+      "parentUuid": "8e46e3ee_0192afa1",
+      "range": {
+        "startLine": 33,
+        "startChar": 1,
+        "endLine": 33,
+        "endChar": 7
+      },
+      "revId": "20d9f356728353986563d0068619775de1446ea3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_e1eb0308",
         "filename": "lib/includes/WikibaseSettings.php",
         "patchSetId": 4
@@ -128,6 +194,30 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_f6bbc8dc",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-17T22:04:02Z",
+      "side": 1,
+      "message": "You pass in the name of a component, and you get out a SettingsArray. The code does not know all possible components, and the caller should not know the names of the variables.",
+      "parentUuid": "8e46e3ee_e1eb0308",
+      "range": {
+        "startLine": 34,
+        "startChar": 9,
+        "endLine": 34,
+        "endChar": 30
+      },
+      "revId": "20d9f356728353986563d0068619775de1446ea3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_c1d92785",
         "filename": "lib/includes/WikibaseSettings.php",
         "patchSetId": 4
@@ -139,6 +229,24 @@
       "writtenOn": "2017-03-17T15:29:45Z",
       "side": 1,
       "message": "This is a side-effect that should be documented.",
+      "revId": "20d9f356728353986563d0068619775de1446ea3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_96d36430",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-17T22:04:02Z",
+      "side": 1,
+      "message": "True, will do",
+      "parentUuid": "8e46e3ee_c1d92785",
       "revId": "20d9f356728353986563d0068619775de1446ea3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
