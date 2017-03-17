@@ -67,7 +67,7 @@ class EntityIdValue extends DataValueObject {
 		try {
 			$entityId = LegacyIdInterpreter::newIdFromTypeAndNumber( $entityType, $numericId );
 		} catch ( InvalidArgumentException $ex ) {
-			throw new IllegalValueException( 'Invalid EntityIdValue serialization.' );
+			throw new IllegalValueException( 'Invalid EntityIdValue serialization.', 0, $ex );
 		}
 
 		$this->__construct( $entityId );
