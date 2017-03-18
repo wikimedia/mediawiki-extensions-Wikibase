@@ -22,6 +22,7 @@ use Wikibase\Store\EntityIdLookup;
  * @covers Wikibase\HistoryEntityAction
  *
  * @group Action
+ * @group Database
  * @group Wikibase
  * @group WikibaseAction
  *

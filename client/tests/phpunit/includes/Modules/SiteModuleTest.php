@@ -9,6 +9,7 @@ use Wikibase\SiteModule;
 /**
  * @covers Wikibase\SiteModule
  *
+ * @group Database
  * @group Wikibase
  * @group WikibaseClient
  *

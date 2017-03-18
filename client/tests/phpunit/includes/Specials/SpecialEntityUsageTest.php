@@ -14,8 +14,9 @@ use WikiPage;
 /**
  * @covers Wikibase\Client\Specials\SpecialEntityUsage
  *
- * @group WikibaseClient
+ * @group Database
  * @group SpecialPage
+ * @group WikibaseClient
  * @group WikibaseSpecialPage
  * @group Wikibase
  *

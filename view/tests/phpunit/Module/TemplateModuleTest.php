@@ -12,6 +12,7 @@ use Wikibase\View\Module\TemplateModule;
  * @uses Wikibase\View\Template\TemplateFactory
  * @uses Wikibase\View\Template\TemplateRegistry
  *
+ * @group Database
  * @group Wikibase
  * @group WikibaseView
  *

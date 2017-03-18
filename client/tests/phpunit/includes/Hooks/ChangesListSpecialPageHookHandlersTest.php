@@ -13,6 +13,7 @@ use Wikimedia\Rdbms\LoadBalancer;
 /**
  * @covers Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers
  *
+ * @group Database
  * @group WikibaseClient
  * @group Wikibase
  *

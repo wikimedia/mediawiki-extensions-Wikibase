@@ -17,6 +17,7 @@ use Wikibase\SettingsArray;
 /**
  * @covers Wikibase\Client\Hooks\InterwikiSortingHookHandlers
  *
+ * @group Database
  * @group WikibaseClient
  * @group Wikibase
  * @group WikibaseHooks

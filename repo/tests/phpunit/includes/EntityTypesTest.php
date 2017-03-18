@@ -11,6 +11,7 @@ use Wikibase\View\EntityTermsView;
 use Wikibase\View\EntityView;
 
 /**
+ * @group Database
  * @group Wikibase
  *
  * @licence GNU GPL v2+
