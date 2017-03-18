@@ -12,7 +12,7 @@
 
 .ui-entityselector-list li,
 .ui-entityselector-list li.ui-state-hover {
-	border-top: 1px dotted #C9C9C9;
+	border-top: 1px dotted #c8ccd1;
 }
 
 .ui-entityselector-list li:first-child {
@@ -57,7 +57,7 @@
 
 .ui-entityselector-list .ui-entityselector-more{
 	border-top-style: solid;
-	background-color: #F8F8F8;
+	background-color: #f8f9fa;
 }
 
 .ui-entityselector-list .ui-entityselector-more.ui-state-hover {

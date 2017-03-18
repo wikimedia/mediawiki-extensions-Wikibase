@@ -12,7 +12,7 @@ are also triggered down the document */
 }
 
 h1 .wikibase-title .wikibase-title-id {
-	color: gray;
+	color: #72777d;
 	font-size: 0.6em;
 	margin-left: 0.4em;
 	unicode-bidi: embed;
@@ -59,9 +59,9 @@ h1 .wikibase-title .wikibase-title-id:before {
 }
 
 .ui-closeable {
-	background-color: #FFFFFF;
-	border-bottom: 1px solid #C9C9C9;
-	border-top: 1px solid #C9C9C9;
+	background-color: #fff;
+	border-bottom: 1px solid #c8ccd1;
+	border-top: 1px solid #c8ccd1;
 	padding: 0.2em 10px;
 	font-size: 0.9em;
 }
@@ -110,7 +110,7 @@ h2.wb-section-heading {
 
 .wikibase-entityview input {
 	/* prevent browsers from applying their default styles */
-	border: 1px solid #AAA;
+	border: 1px solid #a2a9b1;
 	border-radius: 0;
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
@@ -143,11 +143,11 @@ h2.wb-section-heading {
 }
 
 .wb-empty {
-	color: #A1A1A1;
+	color: #a2a9b1;
 }
 
 .wb-entity-undefinedinfo {
-	color: #505050;
+	color: #54595d;
 	font-style: italic;
 }
 
@@ -169,13 +169,13 @@ div.wikibase-statementview textarea {
 	background-color: #FFF;
 	float: left;
 	width: 100%;
-	border: 1px solid #C9C9C9;
+	border: 1px solid #c8ccd1;
 }
 
 /* Container for the section title */
 .wikibase-statementgrouplistview .wikibase-statementgroupview-property {
 	width: 15em;
-	background: #E8E8E8;
+	background: #eaecf0;
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -240,7 +240,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 }
 
 .wikibase-statementlistview > .wikibase-toolbar-wrapper {
-	background-color: #E8E8E8;
+	background-color: #eaecf0;
 	display: block;
 	float: left;
 	position: relative;
@@ -304,7 +304,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 }
 
 .wikibase-statementgrouplistview .wikibase-statementlistview.wb-new .wikibase-statementview {
-	border: 1px solid #C9C9C9;
+	border: 1px solid #c8ccd1;
 	width: 100%;
 	margin-bottom: 1em;
 }
@@ -344,7 +344,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 .wikibase-snakview-variation-valuesnak-nonewvaluefordeletedproperty,
 .wikibase-snakview-variation-somevaluesnak,
 .wikibase-snakview-variation-novaluesnak {
-	color: #565656;
+	color: #54595d;
 	font-style: italic;
 	line-height: 1.2;
 }
@@ -447,7 +447,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 
 /* Container for a single statement */
 .wikibase-statementview {
-	border-bottom: 1px solid #E8E8E8;
+	border-bottom: 1px solid #eaecf0;
 	float: left;
 	width: 100%;
 	position: relative;
@@ -482,7 +482,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 /***** REFERENCES *****/
 
 .wikibase-statementview-references-heading {
-	color: gray;
+	color: #72777d;
 	margin-top: 0.5em;
 }
 
@@ -498,7 +498,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 
 .wikibase-referenceview {
 	position: relative;
-	background: #F8F8F8;
+	background: #f8f9fa;
 	overflow: hidden;
 	margin-bottom: 0.5em;
 }
@@ -510,7 +510,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 .wikibase-referenceview .wikibase-referenceview-heading {
 	min-height: 1.5em;
 	padding: 5px;
-	background-color: #F0F0F0;
+	background-color: #eaecf0;
 	display: none;
 }
 
@@ -634,8 +634,8 @@ div .wikibase-snakview-value span.error.wb-format-error {
 /********** PROPERTY PAGE **********/
 
 .wb-propertypage .wikibase-propertyview-datatype {
-	background-color: #f8f8f8;
-	border: 1px solid #c9c9c9;
+	background-color: #f8f9fa;
+	border: 1px solid #c8ccd1;
 	border-collapse: separate;
 	float: left;
 	width: 100%;
@@ -681,7 +681,7 @@ table.diff table.wb-details td {
 
 .wikibase-pageImage {
 	display: none;
-	border: 1px solid #C9C9C9;
+	border: 1px solid #c8ccd1;
 	position: relative;
 	width: 100%;
 	margin: 0 2em 2em 0;
