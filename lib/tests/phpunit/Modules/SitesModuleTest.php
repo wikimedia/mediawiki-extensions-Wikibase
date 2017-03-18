@@ -10,6 +10,7 @@ use Wikibase\SitesModule;
 /**
  * @covers Wikibase\SitesModule
  *
+ * @group Database
  * @group Wikibase
  *
  * @license GPL-2.0+
