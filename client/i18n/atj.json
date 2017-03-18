@@ -3,10 +3,12 @@
 		"authors": [
 			"Amqui",
 			"Benoit Rochon",
-			"Jean-paul echaquan"
+			"Jean-paul echaquan",
+			"Nehirowisiw"
 		]
 	},
 	"tooltip-t-wikibase": "Ite ke ispitatc",
+	"wikibase-comment-update": "Kekwan{{WBREPONAME}}ka ki meckotcitakiniwok",
 	"wikibase-dataitem": "{{WBREPONAME}} ka apatak",
 	"wikibase-editlinks": "Meckotona e ici tapitik",
 	"wikibase-editlinkstitle": "Meckotcita arimowewinik ka tapitiki",
