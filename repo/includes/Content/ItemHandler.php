@@ -6,6 +6,7 @@ use DataUpdate;
 use IContextSource;
 use Page;
 use Title;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -194,7 +195,7 @@ class ItemHandler extends EntityHandler {
 	/**
 	 * @see EntityHandler::makeEmptyEntity()
 	 *
-	 * @return EntityContent
+	 * @return EntityDocument
 	 */
 	public function makeEmptyEntity() {
 		return new Item();
