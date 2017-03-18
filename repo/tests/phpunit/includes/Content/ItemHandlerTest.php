@@ -67,24 +67,24 @@ class ItemHandlerTest extends EntityHandlerTest {
 	public function provideGetUndoContent() {
 		$cases = parent::provideGetUndoContent();
 
-		$e1 = $this->newEntity();
-		$e1->setLabel( 'en', 'Foo' );
-		$r1 = $this->fakeRevision( $this->newEntityContent( $e1 ), 11 );
+		$item1 = $this->newEntity();
+		$item1->setLabel( 'en', 'Foo' );
 
-		$e2 = $this->newRedirectContent( $e1->getId(), new ItemId( 'Q112' ) );
-		$r2 = $this->fakeRevision( $e2, 12 );
+		$item2 = $this->newEntity();
+		$item2->setLabel( 'en', 'Bar' );
 
-		$e3 = $this->newRedirectContent( $e1->getId(), new ItemId( 'Q113' ) );
-		$r3 = $this->fakeRevision( $e3, 13 );
+		$itemContent1 = $this->newRedirectContent( $item1->getId(), new ItemId( 'Q112' ) );
+		$itemContent2 = $this->newRedirectContent( $item1->getId(), new ItemId( 'Q113' ) );
 
-		$e4 = $this->newEntity();
-		$e4->setLabel( 'en', 'Bar' );
-		$r4 = $this->fakeRevision( $this->newEntityContent( $e4 ), 14 );
+		$rev1 = $this->fakeRevision( $this->newEntityContent( $item1 ), 11 );
+		$rev2 = $this->fakeRevision( $itemContent1, 12 );
+		$rev3 = $this->fakeRevision( $itemContent2, 13 );
+		$rev4 = $this->fakeRevision( $this->newEntityContent( $item2 ), 14 );
 
-		$cases[] = array( $r2, $r2, $r1, $this->newEntityContent( $e1 ), "undo redirect" );
-		$cases[] = array( $r3, $r3, $r2, $e2, "undo redirect change" );
-		$cases[] = array( $r3, $r2, $r1, null, "undo redirect conflict" );
-		$cases[] = array( $r4, $r4, $r3, $e3, "redo redirect" );
+		$cases[] = [ $rev2, $rev2, $rev1, $this->newEntityContent( $item1 ), "undo redirect" ];
+		$cases[] = [ $rev3, $rev3, $rev2, $itemContent1, "undo redirect change" ];
+		$cases[] = [ $rev3, $rev2, $rev1, null, "undo redirect conflict" ];
+		$cases[] = [ $rev4, $rev4, $rev3, $itemContent2, "redo redirect" ];
 
 		return $cases;
 	}
