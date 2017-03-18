@@ -95,6 +95,22 @@ class ItemHandlerTest extends EntityHandlerTest {
 	}
 
 	/**
+	 * @param ItemId $id
+	 * @param ItemId $targetId
+	 *
+	 * @return ItemContent
+	 */
+	protected function newRedirectItemContent( ItemId $id, ItemId $targetId ) {
+		$redirect = new EntityRedirect( $id, $targetId );
+
+		$handler = $this->getHandler();
+		$title = $handler->getTitleForId( $redirect->getTargetId() );
+		$title->setContentModel( $handler->getModelID() );
+
+		return ItemContent::newFromRedirect( $redirect, $title );
+	}
+
+	/**
 	 * @param EntityDocument|null $entity
 	 *
 	 * @return EntityContent
