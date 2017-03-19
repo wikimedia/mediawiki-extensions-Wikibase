@@ -136,7 +136,7 @@ class EntityChange extends DiffChange {
 			$metadata['comment'] = $this->getComment();
 		}
 
-		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
+		$info = $this->getInfo();
 		$info['metadata'] = $metadata;
 		$this->setField( 'info', $info );
 	}
