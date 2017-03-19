@@ -16,6 +16,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater
@@ -30,11 +31,17 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 
 	const UNIT_PREFIX = 'unit:';
 
-	protected function setUp() {
-		parent::setUp();
+	public function addDBData() {
+		$itemNamespace = $this->getEntityNamespace( 'item' );
 
-		foreach ( array( 'P1', 'Q1', 'Q20', 'Q21', 'Q22' ) as $pageName ) {
-			$this->insertPage( $pageName, '{ "type": "item", "id": "Q1" }' );
+		foreach ( [ 'P1', 'Q1', 'Q20', 'Q21', 'Q22' ] as $pageName ) {
+			if ( $pageName === 'P1' ) {
+				$content = '{ "type": "property", "datatype": "string", "id": "P1" }';
+				$this->insertPage( $pageName, $content, $this->getEntityNamespace( 'property' ) );
+			} else {
+				$content = '{ "type": "item", "id": "Q1" }';
+				$this->insertPage( $pageName, $content, $itemNamespace );
+			}
 		}
 	}
 
@@ -50,7 +57,8 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 		$entityTitleLookup->expects( $this->exactly( $count ) )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
-				return Title::newFromText( $id->getSerialization() );
+				$namespace = $this->getEntityNamespace( $id->getEntityType() );
+				return Title::makeTitle( $namespace, $id->getSerialization() );
 			} ) );
 
 		$entityidParser = $this->getMockBuilder( EntityIdParser::class )
@@ -65,16 +73,6 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 			} ) );
 
 		return new ReferencedEntitiesDataUpdater( $entityTitleLookup, $entityidParser );
-	}
-
-	/**
-	 * @param StatementList $statements
-	 * @param string $itemId
-	 */
-	private function addStatement( StatementList $statements, $itemId ) {
-		$statements->addNewStatement(
-			new PropertyValueSnak( 1, new EntityIdValue( new ItemId( $itemId ) ) )
-		);
 	}
 
 	/**
@@ -139,16 +137,16 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 	}
 
 	public function entityIdProvider() {
-		$set1 = new StatementList();
-		$this->addStatement( $set1, 'Q1' );
+		$statementList1 = new StatementList();
+		$this->addStatement( $statementList1, 'Q1' );
 
-		$set2 = new StatementList();
-		$this->addStatement( $set2, 'Q20' );
-		$set2->addNewStatement( new PropertyValueSnak(
+		$statementList2 = new StatementList();
+		$this->addStatement( $statementList2, 'Q20' );
+		$statementList2->addNewStatement( new PropertyValueSnak(
 			1,
 			UnboundedQuantityValue::newFromNumber( 1, self::UNIT_PREFIX . 'Q21' )
 		) );
-		$set2->addNewStatement( new PropertyValueSnak(
+		$statementList2->addNewStatement( new PropertyValueSnak(
 			1,
 			QuantityValue::newFromNumber( 1, self::UNIT_PREFIX . 'Q22' )
 		) );
@@ -156,34 +154,34 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 		$siteLinks = new SiteLinkList();
 		$siteLinks->addNewSiteLink( 'siteId', 'pageName', array( new ItemId( 'Q1' ) ) );
 
-		return array(
-			array( new StatementList(), null, array(
-			) ),
-			array( $set1, null, array(
-				'P1',
-				'Q1',
-			) ),
-			array( new StatementList(), $siteLinks, array(
-				'Q1',
-			) ),
-			array( $set1, $siteLinks, array(
-				'P1',
-				'Q1',
-			) ),
-			array( $set2, null, array(
-				'P1',
-				'Q20',
-				'Q21',
-				'Q22',
-			) ),
-			array( $set2, $siteLinks, array(
-				'P1',
-				'Q20',
-				'Q21',
-				'Q22',
-				'Q1',
-			) ),
+		return [
+			[ new StatementList(), null, [] ],
+			[ $statementList1, null, [ 'P1', 'Q1' ] ],
+			[ new StatementList(), $siteLinks, [ 'Q1' ] ],
+			[ $statementList1, $siteLinks, [ 'P1', 'Q1' ] ],
+			[ $statementList2, null, [ 'P1', 'Q20', 'Q21', 'Q22' ] ],
+			[ $statementList2, $siteLinks, [ 'P1', 'Q20', 'Q21', 'Q22', 'Q1' ] ]
+		];
+	}
+
+	/**
+	 * @param StatementList $statements
+	 * @param string $itemId
+	 */
+	private function addStatement( StatementList $statements, $itemId ) {
+		$statements->addNewStatement(
+			new PropertyValueSnak( 1, new EntityIdValue( new ItemId( $itemId ) ) )
 		);
+	}
+
+	/**
+	 * @param string $entityType
+	 * @return int|null
+	 */
+	private function getEntityNamespace( $entityType ) {
+		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+
+		return $entityNamespaceLookup->getEntityNamespace( $entityType );
 	}
 
 }
