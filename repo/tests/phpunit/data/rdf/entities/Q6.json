@@ -17,7 +17,6 @@
                 "qualifiers": {
                     "P2": [
                         {
-                            "hash": "423614cd831ed4e8da1138c9229cb65cf96f9366",
                             "snaktype": "value",
                             "property": "P2",
                             "datatype": "wikibase-entityid",
@@ -30,7 +29,6 @@
                             }
                         },
                         {
-                            "hash": "475ae31b07cff4f0e33531030b1ba58f004fcd4b",
                             "snaktype": "value",
                             "property": "P2",
                             "datatype": "wikibase-entityid",
@@ -45,7 +43,6 @@
                     ],
                     "P3": [
                         {
-                            "hash": "b181ddac61642fe80bbf8e4a8eaa1da425cb0ac9",
                             "snaktype": "value",
                             "property": "P3",
                             "datatype": "commonsMedia",
@@ -55,14 +52,12 @@
                             }
                         },
                         {
-                            "hash": "12914044e0dbab210aa9d81168bd50471bbde12d",
                             "snaktype": "novalue",
                             "property": "P3"
                         }
                     ],
                     "P4": [
                         {
-                            "hash": "8749fa158a249e1befa6ed077f648c56197a2b2d",
                             "snaktype": "value",
                             "property": "P4",
                             "datatype": "globecoordinate",
@@ -79,7 +74,6 @@
                     ],
                     "P5": [
                         {
-                            "hash": "93da31338cb80c2eb0f92a5459a186bd59579180",
                             "snaktype": "value",
                             "property": "P5",
                             "datatype": "monolingualtext",
@@ -92,12 +86,10 @@
                             }
                         },
                         {
-                            "hash": "8c5d9fe1bfe1fe52e5ab706ae3e5d62f4aaa8d5b",
                             "snaktype": "somevalue",
                             "property": "P5"
                         },
                         {
-                            "hash": "b27fe5a95fa506ca99acebd9e97c9c5a81e14f99",
                             "snaktype": "value",
                             "property": "P5",
                             "datatype": "monolingualtext",
@@ -112,7 +104,6 @@
                     ],
                     "P6": [
                         {
-                            "hash": "9ae284048af6d9ab0f2815ef104216cb8b22e8bc",
                             "snaktype": "value",
                             "property": "P6",
                             "datatype": "quantity",
@@ -129,7 +120,6 @@
                     ],
                     "P7": [
                         {
-                            "hash": "6063d202e584b79a2e9f89ab92b51e7f22ef9886",
                             "snaktype": "value",
                             "property": "P7",
                             "datatype": "string",
@@ -141,7 +131,6 @@
                     ],
                     "P8": [
                         {
-                            "hash": "5dd0f6624a7545401bc306a068ac1bbe8148bfac",
                             "snaktype": "value",
                             "property": "P8",
                             "datatype": "time",
@@ -160,7 +149,6 @@
                     ],
                     "P9": [
                         {
-                            "hash": "2669d541dfd2d6cc0105927bff02bbe0eec0e921",
                             "snaktype": "value",
                             "property": "P9",
                             "datatype": "url",
@@ -170,7 +158,6 @@
                             }
                         },
                         {
-                            "hash": "42669d541dfd2d6cc0105927bff02bbe0eec0e921",
                             "snaktype": "value",
                             "property": "P9",
                             "datatype": "url",
