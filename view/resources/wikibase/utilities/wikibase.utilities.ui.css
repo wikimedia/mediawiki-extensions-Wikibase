@@ -55,7 +55,7 @@ body.rtl .wb-toggle-collapsed span.ui-icon.wb-toggle-icon3dtrans {
 }
 .wb-ui-pendingcounter span { /* the +1 part in the counter */
 	margin-left: .25em;
-	color: #57a7b9;
+	color: #36c;
 	font-weight: bold;
 }
 
