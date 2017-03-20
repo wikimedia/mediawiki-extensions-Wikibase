@@ -241,14 +241,13 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
-	 * @see ChangeRow::serializeInfo
+	 * @see ChangeRow::getSerializedInfo
 	 *
-	 * Overwritten to use the array representation of the diff.
-	 *
-	 * @param array $info
-	 * @return string
+	 * @return string JSON
 	 */
-	public function serializeInfo( array $info ) {
+	public function getSerializedInfo() {
+		$info = $this->getInfo();
+
 		if ( isset( $info['diff'] ) ) {
 			$diff = $info['diff'];
 
@@ -266,7 +265,22 @@ class EntityChange extends DiffChange {
 			}
 		}
 
-		return parent::serializeInfo( $info );
+		// Make sure we never serialize objects.
+		// This is a lot of overhead, so we only do it during testing.
+		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+			array_walk_recursive(
+				$info,
+				function ( $v ) {
+					if ( is_object( $v ) ) {
+						throw new MWException( "Refusing to serialize PHP object of type "
+							. get_class( $v ) );
+					}
+				}
+			);
+		}
+
+		//XXX: we could JSON_UNESCAPED_UNICODE here, perhaps.
+		return json_encode( $info );
 	}
 
 	/**

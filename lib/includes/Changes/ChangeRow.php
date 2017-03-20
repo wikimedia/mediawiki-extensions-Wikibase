@@ -114,33 +114,9 @@ abstract class ChangeRow implements Change {
 	}
 
 	/**
-	 * Serialized the info field using json_encode.
-	 * This may be overridden by subclasses to implement special handling
-	 * for information in the info field.
-	 *
-	 * @param array $info
-	 *
-	 * @throws MWException
-	 * @return string
+	 * @return string JSON
 	 */
-	public function serializeInfo( array $info ) {
-		// Make sure we never serialize objects.
-		// This is a lot of overhead, so we only do it during testing.
-		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
-			array_walk_recursive(
-				$info,
-				function ( $v ) {
-					if ( is_object( $v ) ) {
-						throw new MWException( "Refusing to serialize PHP object of type "
-							. get_class( $v ) );
-					}
-				}
-			);
-		}
-
-		//XXX: we could JSON_UNESCAPED_UNICODE here, perhaps.
-		return json_encode( $info );
-	}
+	abstract public function getSerializedInfo();
 
 	/**
 	 * Unserializes the info field using json_decode.
