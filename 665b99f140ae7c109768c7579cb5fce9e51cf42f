@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_1dd20c5e",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-20T16:09:55Z",
+      "side": 1,
+      "message": "Oh, for MediaInfo injecting wiring, see WikibaseMediaInfoHooks::onMediaWikiServices",
+      "parentUuid": "8e46e3ee_dddd8474",
+      "revId": "665b99f140ae7c109768c7579cb5fce9e51cf42f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_506b9cee",
         "filename": "client/includes/DispatchingServiceFactory.php",
         "patchSetId": 7
