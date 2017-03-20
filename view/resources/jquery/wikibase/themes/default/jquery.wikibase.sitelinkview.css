@@ -48,8 +48,8 @@
 }
 
 .wikibase-sitelinkview input:focus {
-	border-color: #0b0080;
-	background-color: #D6F3FF;
+	border-color: #2a4b8d;
+	background-color: #eaf3ff;
 }
 
 .wikibase-sitelinkview .wikibase-removetoolbar {

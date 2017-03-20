@@ -67,7 +67,7 @@ h1 .wikibase-title .wikibase-title-id:before {
 }
 
 .ui-closeable.wb-edit {
-	background-color: #D6F3FF;
+	background-color: #eaf3ff;
 }
 
 .ui-closeable.wb-error {
@@ -286,7 +286,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 
 .wikibase-statementgrouplistview .wikibase-statementgroupview-property.wb-edit,
 .wikibase-statementgroupview-property.wb-edit + .wikibase-statementlistview > .wikibase-toolbar-wrapper {
-	background-color: #C0DAE5;
+	background-color: #b6c8ec;
 }
 
 .wikibase-statementgrouplistview .wikibase-statementgroupview-property.wb-error {
@@ -519,11 +519,11 @@ div .wikibase-snakview-value span.error.wb-format-error {
 }
 
 .wikibase-referenceview.wb-edit {
-	background-color: #D6F3FF;
+	background-color: #eaf3ff;
 }
 
 .wikibase-referenceview.wb-edit > .wikibase-referenceview-heading {
-	background-color: #C0DAE5;
+	background-color: #b6c8ec;
 	display: block;
 }
 
