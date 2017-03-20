@@ -242,6 +242,30 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_10b3d4fe",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-20T12:19:17Z",
+      "side": 1,
+      "message": "I don\u0027t understand how this is a response to what I wrote. All I\u0027m asking for is to avoid the not needed string concatenation.\n\nHow does the code not know the components? It should. I had the impression this is the whole point of this class: to extract existing code from repo and client. Repo and client. Nothing more. By introducing a method that can access any global configuration it wants this code is obscuring the dependencies we do have a problem with. This does not remove any dependency, it does not even make them \"soft\". As long as there is a hard coded \"Repo\" in client that accesses the repo config we are in the exact same situation as before.\n\nObscuring this makes the situation worse.\n\nI\u0027m afraid this public method is a major problem, and a major source of confusion and misunderstanding between team members. I\u0027m going to set a temporary -2 until this is resolved.",
+      "parentUuid": "8e46e3ee_f6bbc8dc",
+      "range": {
+        "startLine": 34,
+        "startChar": 9,
+        "endLine": 34,
+        "endChar": 30
+      },
+      "revId": "20d9f356728353986563d0068619775de1446ea3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_c1d92785",
         "filename": "lib/includes/WikibaseSettings.php",
         "patchSetId": 4
