@@ -18,6 +18,6 @@
 	/* on some host-client combinations the background image is propagated to the inner tooltip
 	container creating a background pattern; this broken behavior is suppressed by implicitly
 	resetting the background image. */
-	background: #FFDFC9;
-	border-color: #B27631;
+	background: #fee7e6;
+	border-color: #b32424;
 }

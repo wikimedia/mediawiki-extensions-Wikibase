@@ -48,7 +48,7 @@
 
 .ui-entityselector-list .ui-entityselector-notfound {
 	/* Common bright red .wb-error color */
-	background-color: #FFDFC9;
+	background-color: #fee7e6;
 }
 
 .ui-entityselector-list .ui-entityselector-notfound.ui-state-hover a {
