@@ -171,6 +171,30 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_3034d0a6",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-20T11:32:33Z",
+      "side": 1,
+      "message": "I would suggest to make it private for now.\n\nFor me it is not obvious that these extensions really need this helper method. \nI would feel much better if other extensions would only depend on Wikibase\u0027s interfaces, but not concrete classes and not reused the way (algorithm) to define settings. \nIt is quiet small piece of code and I would rather had it copy-pasted (if it is needed at all) then add another coupling.",
+      "parentUuid": "8e46e3ee_d6e1ecfc",
+      "range": {
+        "startLine": 33,
+        "startChar": 1,
+        "endLine": 33,
+        "endChar": 7
+      },
+      "revId": "20d9f356728353986563d0068619775de1446ea3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_e1eb0308",
         "filename": "lib/includes/WikibaseSettings.php",
         "patchSetId": 4
