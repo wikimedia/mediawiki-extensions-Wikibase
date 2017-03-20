@@ -16,6 +16,24 @@
       "revId": "05fde113d76ef4210ba21e8d73a81763051fbcb4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_ddf02491",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-20T16:45:26Z",
+      "side": 1,
+      "message": "Agree, but now it is closer to the place where it is used.",
+      "parentUuid": "8e46e3ee_d00c8c47",
+      "revId": "05fde113d76ef4210ba21e8d73a81763051fbcb4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
