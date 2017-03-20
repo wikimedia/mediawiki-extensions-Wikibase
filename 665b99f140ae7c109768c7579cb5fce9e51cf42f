@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_dddd8474",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-20T16:08:34Z",
+      "side": 1,
+      "message": "\u003e it is not container as soon as container should be configurable, but this class has only one configuration always.\n\nI\u0027d call it \"extensible\", not \"configurable\".\n\nIt\u0027s not true that this only has one wiring always. As soon as there is an extension like MediaInfo that needs to provide a multi-repo service, it will need to somehow inject wiring into the DispatchingServiceFactory (as well as into the per-repo wiring).\n\nCurrently MediaInfo only injects wiring into MediaWikiServices (partially because it cannot inject anything into WikibaseRepo, because it\u0027s not a service container). \n\n\u003e It is a step to remove Wiring as a seprate thing and encapsulate it.\n\nBefore moving to do so, we should perhaps discuss and agree whether that is actually wanted. I\u0027m currently not convinced, primarily because of the need of extensibility of the service containers, but also because the container logic seems to be a separate concern from the wiring, so they shouldn\u0027t be in the same class.",
+      "parentUuid": "8e46e3ee_3d7108a8",
+      "revId": "665b99f140ae7c109768c7579cb5fce9e51cf42f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_506b9cee",
         "filename": "client/includes/DispatchingServiceFactory.php",
         "patchSetId": 7
