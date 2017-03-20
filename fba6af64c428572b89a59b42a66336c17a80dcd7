@@ -22,6 +22,30 @@
       "revId": "fba6af64c428572b89a59b42a66336c17a80dcd7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_8bd33505",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-20T15:22:05Z",
+      "side": 1,
+      "message": "Such a method does not exist. Getting rid of it is the entire reason for this patch. What you talked about last week is actually very relevant here. Look at the old code. It checked if the string starts with a specific substring, and then truncates some characters from the string in completely different code.\n\nLiterally:\n\nif ( $this-\u003eisForeignEntityPage( $title ) ) {\n    … \u003d substr( $title-\u003egetText(), 19 );\n}\n\nHow does the fact that a title is a \"foreign\" page (whatever this means) mean the following code can truncate it at this position?\n\nThe two places in the code that are supposed to do one thing are split into two places that are communicating with each other over an insufficient interface. This is what I\u0027m fixing in this patch.\n\nPlease remove your -1 or provide a better solution.",
+      "parentUuid": "8e46e3ee_312876dd",
+      "range": {
+        "startLine": 266,
+        "startChar": 5,
+        "endLine": 266,
+        "endChar": 47
+      },
+      "revId": "fba6af64c428572b89a59b42a66336c17a80dcd7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
