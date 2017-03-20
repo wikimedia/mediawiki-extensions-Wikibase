@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_c5ce0c86",
+        "filename": "repo/tests/phpunit/includes/Content/ItemHandlerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-20T08:01:05Z",
+      "side": 1,
+      "message": "This is unused. The parent does have a newRedirectContent with a different signature. Did you wanted to override that?",
+      "range": {
+        "startLine": 103,
+        "startChar": 20,
+        "endLine": 103,
+        "endChar": 42
+      },
+      "revId": "092e4ec3e481f0d9ee158f98d5be6039515c9180",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_65cdb887",
+        "filename": "repo/tests/phpunit/includes/Content/ItemHandlerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-20T08:01:05Z",
+      "side": 1,
+      "message": "After reading your commit message, I think this line should have a comment that explains what\u0027s done here and why.",
+      "range": {
+        "startLine": 108,
+        "startChar": 10,
+        "endLine": 108,
+        "endChar": 25
+      },
+      "revId": "092e4ec3e481f0d9ee158f98d5be6039515c9180",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
