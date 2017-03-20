@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_f0b8a8e4",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-20T12:16:07Z",
+      "side": 1,
+      "message": "Yea, I forgot to add the code for using it. \nHowever, as it turns out, we don\u0027t know what to set it to at the moment. There is no good data interface.",
+      "parentUuid": "8e46e3ee_100f54e5",
+      "revId": "46a9ff9e62153b7ff1a061e2fd5b600d78ac9607",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_b0f6a0d2",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 3
@@ -48,6 +66,30 @@
       "writtenOn": "2017-03-20T11:59:37Z",
       "side": 1,
       "message": "Setter is not necessary. Can be set in the constructor.",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 207,
+        "endChar": 2
+      },
+      "revId": "46a9ff9e62153b7ff1a061e2fd5b600d78ac9607",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_30bff0ce",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-20T12:16:07Z",
+      "side": 1,
+      "message": "Yes, it could. But things that are optional or have a sane default can use setter-based injection. That avoids cluttering the constructor.\n\nI believe it makes sense to hard-code a default value for this here *and* in Wikibase.defaults.php: one is the default for the class, the other is the default for the application. They do not need to be the same.",
+      "parentUuid": "8e46e3ee_b0f6a0d2",
       "range": {
         "startLine": 202,
         "startChar": 0,
@@ -83,6 +125,30 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_50c2bc5e",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-20T12:16:07Z",
+      "side": 1,
+      "message": "I see your point.\n\nHowever, it\u0027s useful to have a single place that knows all the base URIs and associated prefixes, so we can declare them all in the beginning of Turtle or XML files.",
+      "parentUuid": "8e46e3ee_d0f1ecdb",
+      "range": {
+        "startLine": 316,
+        "startChar": 17,
+        "endLine": 316,
+        "endChar": 31
+      },
+      "revId": "46a9ff9e62153b7ff1a061e2fd5b600d78ac9607",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_10e51406",
         "filename": "repo/tests/phpunit/data/rdf/RdfBuilder/Q4_props.nt",
         "patchSetId": 3
@@ -100,6 +166,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_90c84479",
+        "filename": "repo/tests/phpunit/data/rdf/RdfBuilder/Q4_props.nt",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-20T12:16:07Z",
+      "side": 1,
+      "message": "Yes, brittleness and redundancy of the test data is a problem. My only idea is to consolidate the tests first, before doing the other changes. See the mail I wrote about this today.",
+      "parentUuid": "8e46e3ee_10e51406",
+      "revId": "46a9ff9e62153b7ff1a061e2fd5b600d78ac9607",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_d0180c26",
         "filename": "repo/tests/phpunit/data/rdf/RdfBuilder/Q7_refs.nt",
         "patchSetId": 3
@@ -111,6 +195,30 @@
       "writtenOn": "2017-03-20T11:59:37Z",
       "side": 1,
       "message": "Just a question: Is it necessary to encode unicode symbols instead of using their UTF-8 representation?",
+      "range": {
+        "startLine": 23,
+        "startChar": 107,
+        "endLine": 23,
+        "endChar": 133
+      },
+      "revId": "46a9ff9e62153b7ff1a061e2fd5b600d78ac9607",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_70cd7887",
+        "filename": "repo/tests/phpunit/data/rdf/RdfBuilder/Q7_refs.nt",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-20T12:16:07Z",
+      "side": 1,
+      "message": "Good question... for some reason I thought so. But at least in the 2014 version of the n-triples spec, that doesn\u0027t seem to be the case at a glance: \u003chttps://www.w3.org/TR/n-triples/#canonical-ntriples\u003e. I\u0027ll have another look.",
+      "parentUuid": "8e46e3ee_d0180c26",
       "range": {
         "startLine": 23,
         "startChar": 107,
