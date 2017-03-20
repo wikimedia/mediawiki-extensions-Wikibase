@@ -126,6 +126,30 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_7d955088",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-20T16:03:13Z",
+      "side": 1,
+      "message": "\u003e I would say that cluttered constructor is not only the problem but also a symptom which shows that this class operates on too many things. \n\nI agree if we are talking about the number of services being injected. I disagree wrt options.\n\nFor class default vs. application default, I can\u0027t give you an example for this use case. I think here, they would be the same. But in principle, they can be different: \n\nFor example, DecimalFormatter defaults to using BasicNumberLocalizer; But Wikibase defaults to injecting MediaWikiNumberLocalizer for DecimalFormatter.\n\nNot a very good example, because the number formatter is currently not configurable. But it illustrates that defaults can exist on several levels, and they need to be the same.\n\nAnyway, I\u0027m not totally opposed to requiring this in the constructor. I just think it makes life more difficult overall. Note that we\u0027ll want to also inject the prefix for commonsMedia the same way.",
+      "parentUuid": "8e46e3ee_0bfe4566",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 207,
+        "endChar": 2
+      },
+      "revId": "46a9ff9e62153b7ff1a061e2fd5b600d78ac9607",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_d0f1ecdb",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 3
@@ -185,6 +209,30 @@
       "side": 1,
       "message": "I don\u0027t understand what are you talking about. Can you point me to some place in the code where it is being done?",
       "parentUuid": "8e46e3ee_50c2bc5e",
+      "range": {
+        "startLine": 316,
+        "startChar": 17,
+        "endLine": 316,
+        "endChar": 31
+      },
+      "revId": "46a9ff9e62153b7ff1a061e2fd5b600d78ac9607",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_5d741496",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-20T16:03:13Z",
+      "side": 1,
+      "message": "RdfBuilder::startDocument -\u003e RdfBuilder::getNamespaces -\u003e RdfVocabulary::getNamespaces.\n\nWe currently don\u0027t treat the prefixes for commonsMedia and geo-shape as namepsaces, and we don\u0027t declare prefixes for them. But we could and we should. And whether we do should be encapsulated in this class.",
+      "parentUuid": "8e46e3ee_2b7ea1e1",
       "range": {
         "startLine": 316,
         "startChar": 17,
