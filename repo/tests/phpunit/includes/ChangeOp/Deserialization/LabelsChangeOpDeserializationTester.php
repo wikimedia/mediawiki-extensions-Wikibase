@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 
+use Wikibase\DataModel\Term\Term;
 use Wikibase\Summary;
 
 /**
@@ -57,7 +58,7 @@ trait LabelsChangeOpDeserializationTester {
 
 	private function getEntityWithEnLabel() {
 		$entity = $this->getEntity();
-		$entity->setLabel( 'en', 'en-label' );
+		$entity->getLabels()->setTerm( new Term( 'en', 'en-label' ) );
 
 		return $entity;
 	}

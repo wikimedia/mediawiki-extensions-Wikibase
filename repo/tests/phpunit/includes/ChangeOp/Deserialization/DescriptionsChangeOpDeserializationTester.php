@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 
+use Wikibase\DataModel\Term\Term;
 use Wikibase\Summary;
 
 /**
@@ -59,7 +60,7 @@ trait DescriptionsChangeOpDeserializationTester {
 
 	private function getEntityWithEnDescription() {
 		$entity = $this->getEntity();
-		$entity->setDescription( 'en', 'en-description' );
+		$entity->getDescriptions()->setTerm( new Term( 'en', 'en-description' ) );
 
 		return $entity;
 	}
