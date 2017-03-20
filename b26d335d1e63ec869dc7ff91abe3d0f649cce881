@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_908b64c4",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-20T13:51:15Z",
+      "side": 1,
+      "message": "Even if not currently needed, I\u0027d prefer to not drop consistency here. It\u0027s good if calling code can assume to get singletons, or fresh instances, from all methods uniformely. Maybe even more importantly, it\u0027s good to have a single file where wiring is defined.",
+      "revId": "b26d335d1e63ec869dc7ff91abe3d0f649cce881",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_10b67485",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-20T13:51:15Z",
+      "side": 1,
+      "message": "So where did the test for getEntityInfoBuilderFactory() go?",
+      "revId": "b26d335d1e63ec869dc7ff91abe3d0f649cce881",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
