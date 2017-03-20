@@ -323,7 +323,7 @@ class EntityChange extends DiffChange {
 	 * @param string $serialization
 	 * @return array the info array
 	 */
-	public function unserializeInfo( $serialization ) {
+	protected function unserializeInfo( $serialization ) {
 		static $factory = null;
 
 		$info = parent::unserializeInfo( $serialization );

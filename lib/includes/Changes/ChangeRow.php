@@ -127,7 +127,7 @@ abstract class ChangeRow implements Change {
 	 *
 	 * @return array the info array
 	 */
-	public function unserializeInfo( $str ) {
+	protected function unserializeInfo( $str ) {
 		if ( $str[0] === '{' ) { // json
 			$info = json_decode( $str, true );
 		} else {

@@ -285,7 +285,8 @@ class EntityChangeTest extends ChangeRowTest {
 	public function testSerializeAndUnserializeInfo() {
 		$info = array( 'diff' => new DiffOpAdd( '' ) );
 		$change = new EntityChange( [ 'info' => $info ] );
-		$this->assertEquals( $info, $change->unserializeInfo( $change->getSerializedInfo() ) );
+		$change->setField( 'info', $change->getSerializedInfo() );
+		$this->assertEquals( $info, $change->getInfo() );
 	}
 
 	public function testGivenStatement_serializeInfoSerializesStatement() {
@@ -313,7 +314,7 @@ class EntityChangeTest extends ChangeRowTest {
 		$this->assertSame( $expected, $array['diff']['newvalue'] );
 	}
 
-	public function testGivenStatementSerialization_unserializeInfoDeserializesStatement() {
+	public function testGivenStatementSerialization_getInfoDeserializesStatement() {
 		$data = array(
 			'mainsnak' => array(
 				'snaktype' => 'novalue',
@@ -324,8 +325,8 @@ class EntityChangeTest extends ChangeRowTest {
 		);
 		$json = json_encode( array( 'diff' => array( 'type' => 'add', 'newvalue' => $data ) ) );
 
-		$change = new EntityChange();
-		$info = $change->unserializeInfo( $json );
+		$change = new EntityChange( [ 'info' => $json ] );
+		$info = $change->getInfo();
 		$statement = $info['diff']->getNewValue();
 		$this->assertInstanceOf( Statement::class, $statement );
 	}
