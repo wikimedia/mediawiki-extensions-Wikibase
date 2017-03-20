@@ -366,6 +366,23 @@
       "revId": "46a9ff9e62153b7ff1a061e2fd5b600d78ac9607",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_f1ce6785",
+        "filename": "repo/tests/phpunit/includes/Rdf/RdfBuilderTestData.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-20T22:06:39Z",
+      "side": 1,
+      "message": "Am I the only one that feels weird that commonsMedia and geo-shape are using two different naming schemes?",
+      "revId": "46a9ff9e62153b7ff1a061e2fd5b600d78ac9607",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
