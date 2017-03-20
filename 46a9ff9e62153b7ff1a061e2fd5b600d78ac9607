@@ -16,6 +16,110 @@
       "revId": "46a9ff9e62153b7ff1a061e2fd5b600d78ac9607",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_100f54e5",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-20T11:59:37Z",
+      "side": 1,
+      "message": "`geoShapeStorageFrontendUrl` config variable is exactly what\u0027s needed, I guess.",
+      "parentUuid": "8e46e3ee_bfc99357",
+      "revId": "46a9ff9e62153b7ff1a061e2fd5b600d78ac9607",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_b0f6a0d2",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-20T11:59:37Z",
+      "side": 1,
+      "message": "Setter is not necessary. Can be set in the constructor.",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 207,
+        "endChar": 2
+      },
+      "revId": "46a9ff9e62153b7ff1a061e2fd5b600d78ac9607",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_d0f1ecdb",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-20T11:59:37Z",
+      "side": 1,
+      "message": "This method is only used in the `GeoShapeRdfBuilder::getValueUri()`. \nHow about instead of defining it here put all this logic into `GeoShapeRdfBuilder` together with `geoShapeBaseUri` field?\nThen you also won\u0027t need `RdfVocabulary` instance in the `GeoShapeRdfBuilder`, just `geoShapeBaseUri` setting.\nI beleive it will make this code more pluggable.",
+      "range": {
+        "startLine": 316,
+        "startChar": 17,
+        "endLine": 316,
+        "endChar": 31
+      },
+      "revId": "46a9ff9e62153b7ff1a061e2fd5b600d78ac9607",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_10e51406",
+        "filename": "repo/tests/phpunit/data/rdf/RdfBuilder/Q4_props.nt",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-20T11:59:37Z",
+      "side": 1,
+      "message": "Seems like there is a problem with these tests if it is required to touch 600+ lines to introduce single type\u0027s mapping.\n\nSorry I don\u0027t have any constructive suggestions, but I don\u0027t understand what these changes do.",
+      "revId": "46a9ff9e62153b7ff1a061e2fd5b600d78ac9607",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_d0180c26",
+        "filename": "repo/tests/phpunit/data/rdf/RdfBuilder/Q7_refs.nt",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-20T11:59:37Z",
+      "side": 1,
+      "message": "Just a question: Is it necessary to encode unicode symbols instead of using their UTF-8 representation?",
+      "range": {
+        "startLine": 23,
+        "startChar": 107,
+        "endLine": 23,
+        "endChar": 133
+      },
+      "revId": "46a9ff9e62153b7ff1a061e2fd5b600d78ac9607",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
