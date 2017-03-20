@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_ca25bbbd",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 50
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-20T00:20:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e46e3ee_ebcc448e",
+      "revId": "253565dcfd16908c2d4ab24bf799fad8828e8c98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_2b81ccfd",
         "filename": "repo/includes/Api/EntitySearchTermIndex.php",
         "patchSetId": 50
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_aa2aaf8d",
+        "filename": "repo/includes/Api/EntitySearchTermIndex.php",
+        "patchSetId": 50
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-20T00:20:51Z",
+      "side": 1,
+      "message": "No. Not sure whether we should, but good point.",
+      "parentUuid": "8e46e3ee_2b81ccfd",
+      "revId": "253565dcfd16908c2d4ab24bf799fad8828e8c98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_2ba0ec8c",
         "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
         "patchSetId": 50
@@ -47,6 +83,24 @@
       "writtenOn": "2017-03-17T09:43:08Z",
       "side": 1,
       "message": "should we borrow some logic from the other implementation?\nI mean all the code to deal with entityId matches?",
+      "revId": "253565dcfd16908c2d4ab24bf799fad8828e8c98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_6a34a7f1",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 50
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-20T00:20:51Z",
+      "side": 1,
+      "message": "Not sure whether we should (or can). Will look into it.",
+      "parentUuid": "8e46e3ee_2ba0ec8c",
       "revId": "253565dcfd16908c2d4ab24bf799fad8828e8c98",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -76,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_4a20cba8",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 50
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-20T00:20:51Z",
+      "side": 1,
+      "message": "being able to get the query, e.g. for tests.",
+      "parentUuid": "8e46e3ee_cbb708d2",
+      "range": {
+        "startLine": 234,
+        "startChar": 61,
+        "endLine": 234,
+        "endChar": 79
+      },
+      "revId": "253565dcfd16908c2d4ab24bf799fad8828e8c98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_8bb100df",
         "filename": "repo/includes/Search/Elastic/WikibasePrefixSearcher.php",
         "patchSetId": 50
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_ea167759",
+        "filename": "repo/includes/Search/Elastic/WikibasePrefixSearcher.php",
+        "patchSetId": 50
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-20T00:20:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e46e3ee_8bb100df",
+      "revId": "253565dcfd16908c2d4ab24bf799fad8828e8c98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_4bf21899",
         "filename": "repo/includes/Search/Elastic/WikibasePrefixSearcher.php",
         "patchSetId": 50
@@ -104,6 +200,24 @@
       "writtenOn": "2017-03-17T09:43:08Z",
       "side": 1,
       "message": "I think you can return $status from here and move this comment into the EntitySearchHelper implementation no?\nYou\u0027re still one level behind upstream here.",
+      "revId": "253565dcfd16908c2d4ab24bf799fad8828e8c98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_ca0cdb47",
+        "filename": "repo/includes/Search/Elastic/WikibasePrefixSearcher.php",
+        "patchSetId": 50
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-20T00:20:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e46e3ee_4bf21899",
       "revId": "253565dcfd16908c2d4ab24bf799fad8828e8c98",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
