@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_5052bc40",
+        "filename": "docs/options.wiki",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-20T14:01:15Z",
+      "side": 0,
+      "message": "I\u0027m honestly not sure about making the wiring files configurable. In general, this can be used as an extension point, allowing extensions to register additional services.  I\u0027m not sure how useful that is here.",
+      "revId": "38aec5e97766ebca444817a41ff65ff82e80b667",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

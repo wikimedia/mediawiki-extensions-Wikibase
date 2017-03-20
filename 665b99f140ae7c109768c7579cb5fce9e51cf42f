@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_107514c8",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-20T14:01:15Z",
+      "side": 1,
+      "message": "This could be considered \"doing work in a constructor\". I don\u0027t think it\u0027s a huge problem, but I do not see the point.\n\nAlso, in general, a container class should not know the concrete wiring. But I again see no big harm here, either.",
+      "revId": "665b99f140ae7c109768c7579cb5fce9e51cf42f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_506b9cee",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-20T14:01:15Z",
+      "side": 1,
+      "message": "Why? What problem does this fix?",
+      "revId": "665b99f140ae7c109768c7579cb5fce9e51cf42f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
