@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_ec6a0c7e",
+        "filename": "repo/tests/testDispatchCoordinator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-20T23:27:50Z",
+      "side": 1,
+      "message": "I decided not to go with fork and let\u0027s run this script several times at the same time.",
+      "parentUuid": "8e46e3ee_a63511f5",
+      "revId": "a4a31aaa6ead7b19eacfadfd17053a81e3d5f1ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_067965f1",
         "filename": "repo/tests/testDispatchCoordinator.php",
         "patchSetId": 2
@@ -143,6 +161,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_2c58f4fc",
+        "filename": "repo/tests/testDispatchCoordinator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-20T23:27:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e46e3ee_c63a9de4",
+      "revId": "a4a31aaa6ead7b19eacfadfd17053a81e3d5f1ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_e6e1d998",
         "filename": "repo/tests/testDispatchCoordinator.php",
         "patchSetId": 2
@@ -160,6 +196,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_0c55f8c4",
+        "filename": "repo/tests/testDispatchCoordinator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-20T23:27:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e46e3ee_e6e1d998",
+      "revId": "a4a31aaa6ead7b19eacfadfd17053a81e3d5f1ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_8663353b",
         "filename": "repo/tests/testDispatchCoordinator.php",
         "patchSetId": 2
@@ -171,6 +225,24 @@
       "writtenOn": "2017-03-17T14:06:41Z",
       "side": 1,
       "message": "If you run mutiple instances of this script at once, this will  break the other script. The solution is to use temp tables (see above). No need to drop them.",
+      "revId": "a4a31aaa6ead7b19eacfadfd17053a81e3d5f1ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_6c5efced",
+        "filename": "repo/tests/testDispatchCoordinator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-20T23:27:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e46e3ee_8663353b",
       "revId": "a4a31aaa6ead7b19eacfadfd17053a81e3d5f1ec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
