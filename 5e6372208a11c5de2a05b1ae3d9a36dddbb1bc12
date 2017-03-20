@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_0509542f",
+        "filename": "repo/includes/Search/Elastic/WikibasePrefixSearcher.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-20T00:29:15Z",
+      "side": 1,
+      "message": "Would be glad to eliminate it... but I feel like buildSearch right now does a lot of things that are not relevant here. Maybe if we refactor it carefully it\u0027d be unnecessary. See also https://gerrit.wikimedia.org/r/#/c/281077/19/includes/Searcher.php where we also do custom query building. If we could eliminate some of that code by refactoring, would be great.",
+      "parentUuid": "ce3c5b53_74e789df",
+      "range": {
+        "startLine": 16,
+        "startChar": 6,
+        "endLine": 16,
+        "endChar": 28
+      },
+      "revId": "5e6372208a11c5de2a05b1ae3d9a36dddbb1bc12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_54e4c5da",
         "filename": "repo/includes/Search/Elastic/WikibasePrefixSearcher.php",
         "patchSetId": 41
