@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_5db654d8",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-20T16:41:32Z",
+      "side": 1,
+      "message": "Can you define what is bad about those?\n\nBad things I see are:\n* It is not clear when those are instantiated - they are singletons (not the case here)\n* Access global variables which might not be instantiated yet (not the case here)\n* Depend on global constants (not the case here)\n* Very big (I wouldn\u0027t say that this class is small, but definitely smaller)",
+      "parentUuid": "8e46e3ee_50395cee",
+      "revId": "7767b12f9257c59d6e174fc820aa5fbe288ee0b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_b02a208e",
         "filename": "client/includes/DispatchingServiceFactory.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2017-03-20T14:06:00Z",
       "side": 1,
       "message": "Can do, but why? Abusing inheritance for code re-use is a bad thing. But that\u0027s not the case here. The Dispatching Service Factory conceptually IS A ServiceContainer. Is there any aspect of ServiceContainer that we should not expose here?",
+      "revId": "7767b12f9257c59d6e174fc820aa5fbe288ee0b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_1db3ecfe",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-20T16:41:32Z",
+      "side": 1,
+      "message": "Can you clarify what does `ServiceContainer` mean to you?\n\nFor me it seems like it is not, because:\n* It should not be configurable. At least for now we don\u0027t have a use-case for it.\n* Method `getService`, which is the main method for service container is never used outside of this class.\n* Services referenced in this class (eg: \u0027EntityRevisionLookup\u0027) should ALWAYS be defined, otherwise methods like `getEntityRevisionLookup` will throw exception which is not defined in it\u0027s interface so clients don\u0027t expect it. \n* Minor, but also, services should not be redefined, but `ServiceContainer` allows it by default.",
+      "parentUuid": "8e46e3ee_b02a208e",
       "revId": "7767b12f9257c59d6e174fc820aa5fbe288ee0b7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
