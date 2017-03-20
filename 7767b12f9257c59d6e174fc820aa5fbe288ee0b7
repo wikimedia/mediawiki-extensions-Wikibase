@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_50395cee",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-20T14:06:00Z",
+      "side": 1,
+      "message": "This is one of the reasons why the concrete wiring should generally not be in the container class. We are doing it that way in \"old style\" top level factories, Wikibaserepo and WikibaseClient, but I consider that a Bad Thing.",
+      "revId": "7767b12f9257c59d6e174fc820aa5fbe288ee0b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_b02a208e",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-20T14:06:00Z",
+      "side": 1,
+      "message": "Can do, but why? Abusing inheritance for code re-use is a bad thing. But that\u0027s not the case here. The Dispatching Service Factory conceptually IS A ServiceContainer. Is there any aspect of ServiceContainer that we should not expose here?",
+      "revId": "7767b12f9257c59d6e174fc820aa5fbe288ee0b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_9058445b",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-20T14:06:00Z",
+      "side": 1,
+      "message": "The concrete wiring should generally not be bound to the container class.",
+      "revId": "7767b12f9257c59d6e174fc820aa5fbe288ee0b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
