@@ -16,6 +16,24 @@
       "revId": "38aec5e97766ebca444817a41ff65ff82e80b667",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_3d87c867",
+        "filename": "docs/options.wiki",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-20T16:01:01Z",
+      "side": 0,
+      "message": "As soon as we don\u0027t have any concrete usecases for this I would prefer not to have this feature.\n\nEvery extension point means less control of the state (more variables -\u003e more checks).",
+      "parentUuid": "8e46e3ee_5052bc40",
+      "revId": "38aec5e97766ebca444817a41ff65ff82e80b667",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

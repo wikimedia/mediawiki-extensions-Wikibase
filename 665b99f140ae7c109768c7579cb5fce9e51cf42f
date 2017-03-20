@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_3d7108a8",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-20T16:01:01Z",
+      "side": 1,
+      "message": "I don\u0027t want this class to extend `ServiceContainer` because it is not container as soon as container should be configurable, but this class has only one configuration always.\n\nIt is a step to remove Wiring as a seprate thing and encapsulate it.",
+      "parentUuid": "8e46e3ee_107514c8",
+      "revId": "665b99f140ae7c109768c7579cb5fce9e51cf42f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_506b9cee",
         "filename": "client/includes/DispatchingServiceFactory.php",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2017-03-20T14:01:15Z",
       "side": 1,
       "message": "Why? What problem does this fix?",
+      "revId": "665b99f140ae7c109768c7579cb5fce9e51cf42f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_5d4df473",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-20T16:01:01Z",
+      "side": 1,
+      "message": "Just a step towards removing inheritance of `ServiceContainer`. Guard to ensure that no calls are there.",
+      "parentUuid": "8e46e3ee_506b9cee",
       "revId": "665b99f140ae7c109768c7579cb5fce9e51cf42f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
