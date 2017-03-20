@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_3dfca807",
+        "filename": "client/includes/DispatchingServiceFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-20T15:47:33Z",
+      "side": 1,
+      "message": "\u003e  It\u0027s good if calling code can assume to get singletons, or fresh instances, from all methods uniformely.\n\nI would say that it is bad. If calling code really needs to work with the single instance, then let it handle this problem without knowing if it gets the same instance or the new one.\nThe only reason to have same instance all the time is performance, which is not the case here.",
+      "parentUuid": "8e46e3ee_908b64c4",
+      "revId": "b26d335d1e63ec869dc7ff91abe3d0f649cce881",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_10b67485",
         "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2017-03-20T13:51:15Z",
       "side": 1,
       "message": "So where did the test for getEntityInfoBuilderFactory() go?",
+      "revId": "b26d335d1e63ec869dc7ff91abe3d0f649cce881",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_7d1a3075",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-20T15:47:33Z",
+      "side": 1,
+      "message": "Well, it is bad naming. What test does is basically tests that call was delegated to Container.\nFor `getEntityInfoBuilderFactory` it is not true anymore, so I picked another method...",
+      "parentUuid": "8e46e3ee_10b67485",
       "revId": "b26d335d1e63ec869dc7ff91abe3d0f649cce881",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
