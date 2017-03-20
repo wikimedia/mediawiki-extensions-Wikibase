@@ -150,6 +150,30 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_71c2575f",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-20T22:04:52Z",
+      "side": 1,
+      "message": "Maybe we should make the ctor take config array instead of ending up with 20-argument ctor. Also, not sure whether we should have Wikimedia-specific default here. This class should be pretty generic and useable for non-wikimedia customers, which means if they miss some setting that makes them unknowingly using wikimedia-bound default, they should be able to easily detect this.",
+      "parentUuid": "8e46e3ee_7d955088",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 207,
+        "endChar": 2
+      },
+      "revId": "46a9ff9e62153b7ff1a061e2fd5b600d78ac9607",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_d0f1ecdb",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 3
