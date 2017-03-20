@@ -102,6 +102,30 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_0bfe4566",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-20T15:33:13Z",
+      "side": 1,
+      "message": "I can understand what \"default setting\" means, but it is not clear what is \"default for the class\".\n\n\u003e They do not need to be the same.\n\nCan you give an example of a valid usecase when those will not be the same?\n\n\u003e That avoids cluttering the constructor.\n\nI would say that cluttered constructor is not only the problem but also a symptom which shows that this class operates on too many things. Introduction of a setter just hides it.\nAlso, as I wrote below, it seems that this value is not needed in this class at all.",
+      "parentUuid": "8e46e3ee_30bff0ce",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 207,
+        "endChar": 2
+      },
+      "revId": "46a9ff9e62153b7ff1a061e2fd5b600d78ac9607",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_d0f1ecdb",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 3
@@ -149,6 +173,30 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_2b7ea1e1",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-20T15:33:13Z",
+      "side": 1,
+      "message": "I don\u0027t understand what are you talking about. Can you point me to some place in the code where it is being done?",
+      "parentUuid": "8e46e3ee_50c2bc5e",
+      "range": {
+        "startLine": 316,
+        "startChar": 17,
+        "endLine": 316,
+        "endChar": 31
+      },
+      "revId": "46a9ff9e62153b7ff1a061e2fd5b600d78ac9607",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_10e51406",
         "filename": "repo/tests/phpunit/data/rdf/RdfBuilder/Q4_props.nt",
         "patchSetId": 3
@@ -178,6 +226,24 @@
       "side": 1,
       "message": "Yes, brittleness and redundancy of the test data is a problem. My only idea is to consolidate the tests first, before doing the other changes. See the mail I wrote about this today.",
       "parentUuid": "8e46e3ee_10e51406",
+      "revId": "46a9ff9e62153b7ff1a061e2fd5b600d78ac9607",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_cb54dd58",
+        "filename": "repo/tests/phpunit/data/rdf/RdfBuilder/Q4_props.nt",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-20T15:33:13Z",
+      "side": 1,
+      "message": "Got it. Wrote it before I saw the email.",
+      "parentUuid": "8e46e3ee_90c84479",
       "revId": "46a9ff9e62153b7ff1a061e2fd5b600d78ac9607",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
