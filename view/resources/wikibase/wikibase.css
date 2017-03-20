@@ -27,7 +27,7 @@ h1 .wikibase-title .wikibase-title-id {
 	/* 0.8 (.wb-language-fallback-indicator) * 0.875 (.mw-body-content) / 1.875 (.mw-body h1) */
 	font-size: 0.3888em;
 	font-family: sans-serif;
-	color: #252525;
+	color: #222;
 }
 
 h1 .wikibase-title .wikibase-title-id:before {
@@ -42,8 +42,8 @@ h1 .wikibase-title .wikibase-title-id:before {
 .wb-entitypage .ui-state-disabled input,
 .wb-entitypage input.ui-state-disabled,
 .wb-entitypage .ui-state-disabled textarea {
-	background-color: #F0F0F0;
-	color: #565656;
+	background-color: #f8f9fa;
+	color: #54595d;
 }
 
 /* Overwrite colour for element that are in edit mode although their container element is not */
