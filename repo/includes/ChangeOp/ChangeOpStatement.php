@@ -13,7 +13,6 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\DataModel\Statement\StatementListHolder;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Summary;
@@ -95,28 +94,29 @@ class ChangeOpStatement extends ChangeOpBase {
 	 * @throws ChangeOpException
 	 */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
-		$entityId = $entity->getId();
-
 		if ( !( $entity instanceof StatementListProvider ) ) {
 			throw new InvalidArgumentException( '$entity must be a StatementListProvider' );
 		}
+
+		$entityId = $entity->getId();
 
 		if ( $this->statement->getGuid() === null ) {
 			$this->statement->setGuid( $this->guidGenerator->newGuid( $entityId ) );
 		}
 
 		$this->validateStatementGuid( $entityId );
-		$oldIndex = $this->removeStatement( $entity->getStatements() );
+
+		$entityStatements = $entity->getStatements();
+		$oldIndex = $this->removeStatement( $entityStatements );
 
 		if ( $this->index !== null ) {
-			if ( !( $entity instanceof StatementListHolder ) ) {
-				throw new ChangeOpException( 'Setting an index is not supported on this entity type' );
+			$entityStatements->clear();
+			$statements = $this->addStatementToGroup( $entityStatements, $this->index );
+			foreach ( $statements as $statement ) {
+				$entityStatements->addStatement( $statement );
 			}
-
-			$statements = $this->addStatementToGroup( $entity->getStatements(), $this->index );
-			$entity->setStatements( new StatementList( $statements ) );
 		} else {
-			$entity->getStatements()->addStatement( $this->statement, $oldIndex );
+			$entityStatements->addStatement( $this->statement, $oldIndex );
 		}
 
 		$this->updateSummary( $summary, $oldIndex === null ? 'create' : 'update' );
