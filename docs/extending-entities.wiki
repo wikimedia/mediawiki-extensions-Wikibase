@@ -16,11 +16,11 @@ For example if you want to add "NewThingy" part to entity type called "Foo":
   e.g. NewThingyChangeOpDeserializer
 * Add support in FooValidatorFactory
 * Add support in FooChangeOpDeserializer
+* Add support in FooRdfBuilder
 
 CAVEAT (as of January 2017): For the below parts of Wikibase, there are no extension
 interfaces yet for handling additional fields of entities. Fields of entity types known
 to Wikibase itself can be hardcoded here, but for supporting entity types defined in
 other extensions, plug-in interfaces still need to be added.
 
-* Add to RDF mapping (not currently pluggable!)
 * Add handling (or suppression) to EntityChangeFactory (not currently pluggable)
