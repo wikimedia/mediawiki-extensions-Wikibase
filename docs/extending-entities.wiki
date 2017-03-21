@@ -24,3 +24,4 @@ to Wikibase itself can be hardcoded here, but for supporting entity types define
 other extensions, plug-in interfaces still need to be added.
 
 * Add handling (or suppression) to EntityChangeFactory (not currently pluggable)
+* Add handling to EntityDiffVisualizer (not currently pluggable)
