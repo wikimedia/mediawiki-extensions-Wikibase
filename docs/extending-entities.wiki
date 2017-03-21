@@ -24,3 +24,4 @@ other extensions, plug-in interfaces still need to be added.
 
 * Add to RDF mapping (not currently pluggable!)
 * Add handling (or suppression) to EntityChangeFactory (not currently pluggable)
+* Add handling to EntityDiffVisualizer (not currently pluggable)
