@@ -22,6 +22,30 @@
       "revId": "4b0bf59da8339dd5a1c6fb53d06928010a661bb5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_424f4797",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-21T10:08:07Z",
+      "side": 1,
+      "message": "Note that this is not supposed to be URL but URI.\n\nBut per changes in the parent patch, URL-like things are used in tests now, so I guess your concern is addressed now as well.",
+      "parentUuid": "8e46e3ee_456f6a8f",
+      "range": {
+        "startLine": 732,
+        "startChar": 10,
+        "endLine": 732,
+        "endChar": 19
+      },
+      "revId": "4b0bf59da8339dd5a1c6fb53d06928010a661bb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
