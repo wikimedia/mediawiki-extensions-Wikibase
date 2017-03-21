@@ -20,8 +20,11 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\Rdf\NullEntityRdfBuilder;
 use Wikibase\Rdf\PropertyRdfBuilder;
+use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\RdfVocabulary;
+use Wikibase\Rdf\SiteLinksRdfBuilder;
 use Wikibase\Repo\ChangeOp\Deserialization\ItemChangeOpDeserializer;
 use Wikibase\Repo\ChangeOp\Deserialization\PropertyChangeOpDeserializer;
 use Wikibase\Repo\WikibaseRepo;
@@ -60,6 +63,24 @@ return array(
 				WikibaseRepo::getDefaultInstance()->getChangeOpDeserializerFactory()
 			);
 		},
+		'rdf-builder-factory-callback' => function(
+			$flavorFlags,
+			RdfVocabulary $vocabulary,
+			RdfWriter $writer,
+			$mentionedEntityTracker,
+			$dedupe
+		) {
+			if ( ( $flavorFlags & RdfProducer::PRODUCE_SITELINKS ) !== 0 ) {
+				$sites = WikibaseRepo::getDefaultInstance()->getSiteLookup()->getSites();
+				// Since the only extra mapping needed for Items are site links,
+				// we just return the SiteLinksRdfBuilder directly,
+				// instead of defining an ItemRdfBuilder
+				$builder = new SiteLinksRdfBuilder( $vocabulary, $writer, $sites );
+				$builder->setDedupeBag( $dedupe );
+				return $builder;
+			}
+			return new NullEntityRdfBuilder();
+		}
 	),
 	'property' => array(
 		'view-factory-callback' => function(

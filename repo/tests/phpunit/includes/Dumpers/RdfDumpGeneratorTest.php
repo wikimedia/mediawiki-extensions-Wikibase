@@ -2,10 +2,11 @@
 
 namespace Wikibase\Repo\Tests\Dumpers;
 
+use HashSiteStore;
 use MediaWikiTestCase;
 use MWException;
 use Site;
-use SiteList;
+use SiteLookup;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -18,11 +19,17 @@ use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Rdf\EntityRdfBuilderFactory;
+use Wikibase\Rdf\NullEntityRdfBuilder;
+use Wikibase\Rdf\PropertyRdfBuilder;
+use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\RdfVocabulary;
+use Wikibase\Rdf\SiteLinksRdfBuilder;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\Tests\Rdf\RdfBuilderTest;
 use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
+use Wikimedia\Purtle\RdfWriter;
 
 /**
  * @covers Wikibase\Dumpers\RdfDumpGenerator
@@ -56,10 +63,10 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @return SiteList
+	 * @return SiteLookup
 	 */
-	public function getSiteList() {
-		$list = new SiteList();
+	public function getSiteLookup() {
+		$list = [];
 
 		$wiki = new Site();
 		$wiki->setGlobalId( 'enwiki' );
@@ -80,7 +87,7 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 		$wiki->setLinkPath( 'http://test.acme.test/$1' );
 		$list['test'] = $wiki;
 
-		return $list;
+		return new HashSiteStore( $list );
 	}
 
 	private function getTestData() {
@@ -99,6 +106,48 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 			} ) );
 
 		return $entityTitleLookup;
+	}
+
+	/**
+	 * Returns the mapping of entity types used in tests to callbacks instantiating EntityRdfBuilder
+	 * instances, that are configured to use services configured for test purposes (e.g. SiteLookup).
+	 *
+	 * @see EntityTypeDefinitions::getRdfBuilderFactoryCallbacks
+	 *
+	 * TODO: move to RdfBuilderTestData?
+	 *
+	 * @param SiteLookup $siteLookup
+	 *
+	 * @return callable[]
+	 */
+	private function getRdfBuilderFactoryCallbacks( SiteLookup $siteLookup ) {
+		return [
+			'item' => function(
+				$flavorFlags,
+				RdfVocabulary $vocabulary,
+				RdfWriter $writer,
+				$mentionedEntityTracker,
+				$dedupe
+			) use ( $siteLookup ) {
+				if ( ( $flavorFlags & RdfProducer::PRODUCE_SITELINKS ) !== 0 ) {
+					$sites = $siteLookup->getSites();
+					$builder = new SiteLinksRdfBuilder( $vocabulary, $writer, $sites );
+					$builder->setDedupeBag( $dedupe );
+					return $builder;
+				}
+				return new NullEntityRdfBuilder();
+			},
+			'property' => function(
+				$flavorFlags,
+				RdfVocabulary $vocabulary,
+				RdfWriter $writer
+			) {
+				return new PropertyRdfBuilder(
+					$vocabulary,
+					$writer
+				);
+			}
+		];
 	}
 
 	/**
@@ -145,17 +194,19 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 			}
 		) );
 
+		$siteLookup = $this->getSiteLookup();
+
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
 		// Note: we test against the actual RDF bindings here, so we get actual RDF.
 		$rdfBuilderFactory = $wikibaseRepo->getValueSnakRdfBuilderFactory();
-
-		$entityRdfBuilderFactory = $wikibaseRepo->getEntityRdfBuilderFactory();
+		$entityRdfBuilderFactory = new EntityRdfBuilderFactory( $this->getRdfBuilderFactoryCallbacks( $siteLookup ) );
 
 		return RdfDumpGenerator::createDumpGenerator(
 			'ntriples',
 			$out,
 			$flavor,
-			$this->getSiteList(),
+			$siteLookup->getSites(),
 			$entityRevisionLookup,
 			$dataTypeLookup,
 			$rdfBuilderFactory,

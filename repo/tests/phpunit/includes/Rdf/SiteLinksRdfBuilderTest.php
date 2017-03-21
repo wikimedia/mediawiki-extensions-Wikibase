@@ -54,7 +54,7 @@ class SiteLinksRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$builder = new SiteLinksRdfBuilder(
 			$vocabulary,
 			$writer,
-			$this->getTestData()->getSiteList(),
+			$this->getTestData()->getSiteLookup()->getSites(),
 			$sites
 		);
 
