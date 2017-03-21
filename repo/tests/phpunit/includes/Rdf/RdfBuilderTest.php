@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Rdf;
 
 use PageProps;
+use SiteList;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -90,8 +91,9 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 
 		$entityRdfBuilderFactory = WikibaseRepo::getDefaultInstance()->getEntityRdfBuilderFactory();
 		$emitter = new NTriplesRdfWriter();
+		$this->setService( 'SiteLookup', $this->getTestData()->getSiteLookup() );
 		$builder = new RdfBuilder(
-			$this->getTestData()->getSiteList(),
+			new SiteList(),
 			$vocabulary ?: $this->getTestData()->getVocabulary(),
 			$valueBuilderFactory,
 			$this->getTestData()->getMockRepository(),
