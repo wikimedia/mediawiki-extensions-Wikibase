@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Specials;
 
 use Exception;
 use HashSiteStore;
+use MediaWiki\Linker\LinkRenderer;
 use PermissionsError;
 use PHPUnit_Framework_Error;
 use RawMessage;
@@ -15,7 +16,7 @@ use User;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\MessageException;
-use Wikibase\Repo\Store\EntityTitleStoreLookup;
+use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
@@ -25,9 +26,9 @@ use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\Specials\SpecialMergeItems;
 use Wikibase\Repo\Store\EntityPermissionChecker;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Tests\EntityModificationTestHelper;
-use Wikibase\Lib\Tests\MockRepository;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialMergeItems
@@ -94,7 +95,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 
 		$mock->expects( $this->any() )
 			->method( 'run' )
-			 ->will( $this->returnValue( Status::newGood() ) );
+			->will( $this->returnValue( Status::newGood() ) );
 
 		return $mock;
 	}
@@ -149,7 +150,8 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 				return new RawMessage( '(@' . $text . '@)' );
 			} ) );
 
-		return new SpecialMergeItems(
+		$titleLookup = $this->getEntityTitleLookup();
+		$specialPage = new SpecialMergeItems(
 			$wikibaseRepo->getEntityIdParser(),
 			$exceptionLocalizer,
 			new TokenCheckInteractor( $this->user ),
@@ -170,9 +172,23 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 						$this->mockRepository,
 						$this->getMockEntityTitleLookup()
 				),
-				$this->getEntityTitleLookup()
-			)
+				$titleLookup
+			),
+			$titleLookup
 		);
+
+		$linkRenderer = $this->getMockBuilder( LinkRenderer::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$linkRenderer->expects( $this->any() )
+			->method( 'makeKnownLink' )
+			->will( $this->returnArgument( 1 ) );
+		$linkRenderer->expects( $this->any() )
+			->method( 'makePreloadedLink' )
+			->will( $this->returnArgument( 1 ) );
+		$specialPage->setLinkRenderer( $linkRenderer );
+
+		return $specialPage;
 	}
 
 	/**
