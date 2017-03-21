@@ -269,6 +269,30 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_a40bb8d8",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-21T10:56:28Z",
+      "side": 1,
+      "message": "Can we implement it when we finally decide to do it and leave code more simple for now?",
+      "parentUuid": "8e46e3ee_5d741496",
+      "range": {
+        "startLine": 316,
+        "startChar": 17,
+        "endLine": 316,
+        "endChar": 31
+      },
+      "revId": "46a9ff9e62153b7ff1a061e2fd5b600d78ac9607",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_10e51406",
         "filename": "repo/tests/phpunit/data/rdf/RdfBuilder/Q4_props.nt",
         "patchSetId": 3
