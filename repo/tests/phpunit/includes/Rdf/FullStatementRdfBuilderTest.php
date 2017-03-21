@@ -126,7 +126,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideAddEntity() {
-		$props = array( 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P8', 'P9' );
+		$props = [ 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P8', 'P9', 'P10' ];
 
 		return array(
 			array( 'Q4', 0, 'Q4_minimal', array() ),
