@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_0254dfff",
+        "filename": "view/resources/wikibase/utilities/wikibase.utilities.ui.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 2604
+      },
+      "writtenOn": "2017-03-21T05:29:26Z",
+      "side": 1,
+      "message": "That seems to be the only “big“ change in this patch. A screenshot will help to understand sensitivity.",
+      "revId": "7b1eecf44525fe8a5b4cc4bf29c7a23b6b9a588d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
