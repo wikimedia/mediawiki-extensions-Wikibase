@@ -125,7 +125,7 @@
 	"wikibase-snakformat-invalid-value": "Неприпустиме значення.",
 	"wikibase-snakformat-propertynotfound": "Властивість не знайдено.",
 	"wikibase-shortcopyrightwarning": "Натиснувши «$1», Ви погоджуєтесь із [[$2|умовами використання]], і погоджуєтесь поширювати Ваше редагування на умовах $3.",
-	"wikibase-copyrighttooltip-acknowledge": "Я згідний редагувати дальше на цих умовах. Більше не показувати це повідомлення.",
+	"wikibase-copyrighttooltip-acknowledge": "Я погоджуюся редагувати далі на цих умовах. Більше не показувати це повідомлення.",
 	"wikibase-entityselector-more": "більше",
 	"wikibase-entityselector-notfound": "Не знайдено збігу",
 	"wikibase-anonymouseditwarning": "Увага: Ви не увійшли до системи.\nВашу IP-адресу буде записано у історії редагування цього запису.",

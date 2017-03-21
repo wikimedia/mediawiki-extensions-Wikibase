@@ -4,7 +4,8 @@
 			"Amqui",
 			"Benoit Rochon",
 			"Jean-paul echaquan",
-			"Nehirowisiw"
+			"Nehirowisiw",
+			"Jeannette Coocoo"
 		]
 	},
 	"tooltip-t-wikibase": "Ite ke ispitatc",
@@ -14,6 +15,7 @@
 	"wikibase-editlinkstitle": "Meckotcita arimowewinik ka tapitiki",
 	"wikibase-linkitem-input-page": "Masinhikan:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "katcictew",
 	"wikibase-rc-hide-wikidata-show": "Wapata",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} meckotcita"
