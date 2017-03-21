@@ -85,13 +85,17 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			$dedup = new HashDedupeBag();
 		}
 
-		// Note: using the actual factory here makes this an integration test!
-		$valueBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
+		$siteLookup = $this->getTestData()->getSiteLookup();
+		$this->setService( 'SiteLookup', $siteLookup );
 
-		$entityRdfBuilderFactory = WikibaseRepo::getDefaultInstance()->getEntityRdfBuilderFactory();
+		// Note: using the actual factory here makes this an integration test!
+		$repo = WikibaseRepo::getTestInstance();
+
+		$valueBuilderFactory = $repo->getValueSnakRdfBuilderFactory();
+		$entityRdfBuilderFactory = $repo->getEntityRdfBuilderFactory();
 		$emitter = new NTriplesRdfWriter();
 		$builder = new RdfBuilder(
-			$this->getTestData()->getSiteList(),
+			$siteLookup->getSites(),
 			$vocabulary ?: $this->getTestData()->getVocabulary(),
 			$valueBuilderFactory,
 			$this->getTestData()->getMockRepository(),
