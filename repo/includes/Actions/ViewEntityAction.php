@@ -54,13 +54,15 @@ class ViewEntityAction extends ViewAction {
 	}
 
 	/**
-	 * Returns true if this view action is performing a plain view (not a diff, etc)
+	 * Returns true if this view action is performing a plain view (not a diff, print version, etc.)
 	 * of the page's current revision.
 	 *
 	 * @return bool
 	 */
 	private function isEditable() {
-		return !$this->isDiff() && $this->page->isCurrent();
+		return !$this->isDiff()
+			&& !$this->getOutput()->isPrintable()
+			&& $this->page->isCurrent();
 	}
 
 	/**
@@ -70,9 +72,6 @@ class ViewEntityAction extends ViewAction {
 		return $this->getRequest()->getCheck( 'diff' );
 	}
 
-	/**
-	 * Displays the entity page.
-	 */
 	private function showEntityPage() {
 		$outputPage = $this->getOutput();
 		$editable = $this->isEditable();
