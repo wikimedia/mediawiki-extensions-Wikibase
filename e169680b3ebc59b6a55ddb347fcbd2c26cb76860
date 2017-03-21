@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_8d0c9f46",
+        "filename": "docs/extending-entities.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-21T19:18:17Z",
+      "side": 1,
+      "message": "Hm? I thought this was fixed? I remember seeing this line move up to the other section in this document...",
+      "revId": "e169680b3ebc59b6a55ddb347fcbd2c26cb76860",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
