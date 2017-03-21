@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_588177fc",
+        "filename": "lib/includes/Changes/Change.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-21T20:13:30Z",
+      "side": 1,
+      "message": "unrelated. no other change in this file. should be a separate patch, right?...",
+      "revId": "f5598d485928be6910c458012b843f9a81e71452",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_787c731b",
+        "filename": "lib/includes/Changes/ChangeRow.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-21T20:13:30Z",
+      "side": 1,
+      "message": "Unrelated. no other change in this file. Shouldn\u0027t this be a separate patch, then?....\n\nJust kidding.",
+      "revId": "f5598d485928be6910c458012b843f9a81e71452",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
