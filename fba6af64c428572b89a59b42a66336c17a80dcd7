@@ -46,6 +46,30 @@
       "revId": "fba6af64c428572b89a59b42a66336c17a80dcd7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_8426bc0f",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-21T12:41:15Z",
+      "side": 1,
+      "message": "if ( $this-\u003estartsWith( $target-\u003egetText(), \u0027Special:EntityPage/\u0027 ) {\n    $idPart \u003d substr( $target-\u003egetText(), \u0027Special:EntityPage/\u0027 ) );\n     ....\n}\n\nis in my opinion more readable than:\n\n$parts \u003d explode( \u0027Special:EntityPage/\u0027, $target-\u003egetText(), 2 );\n    if ( isset( $parts[1] ) \u0026\u0026 $parts[0] \u003d\u003d\u003d \u0027\u0027 ) {\n        $idPart \u003d $parts[1];\n    }\n    ...\n}\n\nI guess, that\u0027s also what Aleksey meant.\n\nIf you don\u0027t like having the string literal repeated twice in the former version, it could be hidden into $entityPageTitlePrefix or something similar.",
+      "parentUuid": "8e46e3ee_8bd33505",
+      "range": {
+        "startLine": 266,
+        "startChar": 5,
+        "endLine": 266,
+        "endChar": 47
+      },
+      "revId": "fba6af64c428572b89a59b42a66336c17a80dcd7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
