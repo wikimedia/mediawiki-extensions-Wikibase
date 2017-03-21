@@ -121,14 +121,6 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 			$this->builders[] = $this->newFullStatementRdfBuilder();
 		}
 
-		// placing this last produces more readable output since all entity things are together
-		if ( $this->shouldProduce( RdfProducer::PRODUCE_SITELINKS ) ) {
-			$builder = new SiteLinksRdfBuilder( $vocabulary, $writer, $sites );
-			// We can use the same bag since namespaces are different
-			$builder->setDedupeBag( $this->dedupeBag );
-			$this->builders[] = $builder;
-		}
-
 		$entityRdfBuilders = $entityRdfBuilderFactory->getEntityRdfBuilders(
 			$flavor,
 			$vocabulary,

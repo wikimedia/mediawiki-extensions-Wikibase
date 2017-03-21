@@ -22,6 +22,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use MWException;
 use RequestContext;
+use RuntimeException;
 use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
 use SiteLookup;
@@ -373,6 +374,19 @@ class WikibaseRepo {
 		}
 
 		return $instance;
+	}
+
+	/**
+	 * Get a new instance for use in unit tests.
+	 *
+	 * @return self
+	 */
+	public static function getTestInstance() {
+		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
+			throw new RuntimeException( 'getTestInstance() can only be used in unit tests' );
+		}
+
+		return self::newInstance();
 	}
 
 	/**
