@@ -13,7 +13,6 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\DataModel\Statement\StatementListHolder;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Summary;
@@ -109,12 +108,13 @@ class ChangeOpStatement extends ChangeOpBase {
 		$oldIndex = $this->removeStatement( $entity->getStatements() );
 
 		if ( $this->index !== null ) {
-			if ( !( $entity instanceof StatementListHolder ) ) {
-				throw new ChangeOpException( 'Setting an index is not supported on this entity type' );
-			}
+			$statementList = $entity->getStatements();
+			$statementList->clear();
 
 			$statements = $this->addStatementToGroup( $entity->getStatements(), $this->index );
-			$entity->setStatements( new StatementList( $statements ) );
+			foreach ( $statements as $statement ) {
+				$statementList->addStatement( $statement );
+			}
 		} else {
 			$entity->getStatements()->addStatement( $this->statement, $oldIndex );
 		}
