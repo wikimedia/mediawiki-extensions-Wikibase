@@ -96,22 +96,14 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 
 		$notifier = $this->getChangeNotifier();
 		$change = $notifier->notifyOnPageDeleted( $content, $user, $timestamp );
+		$metadata = $change->getMetadata();
 
-		$this->assertFields(
-			array(
-				'object_id' => strtolower( $content->getEntityId()->getSerialization() ),
-				'user_id' => $user->getId(),
-				'time' => $timestamp,
-				'type' => 'wikibase-item~remove',
-				'info' => array(
-					'metadata' => array(
-						'user_text' => $user->getName(),
-						'comment' => 'wikibase-comment-remove',
-					)
-				)
-			),
-			$change->getFields()
-		);
+		$this->assertSame( 'q12', $change->getObjectId() );
+		$this->assertSame( $user->getId(), $change->getField( 'user_id' ) );
+		$this->assertSame( $timestamp, $change->getTime() );
+		$this->assertSame( 'wikibase-item~remove', $change->getType() );
+		$this->assertSame( $user->getName(), $metadata['user_text'] );
+		$this->assertSame( 'wikibase-comment-remove', $metadata['comment'] );
 	}
 
 	public function testNotifyOnPageDeleted_redirect() {
@@ -137,26 +129,17 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 
 		$notifier = $this->getChangeNotifier();
 		$change = $notifier->notifyOnPageUndeleted( $revision );
-		$fields = $change->getFields();
+		$metadata = $change->getMetadata();
 
-		$this->assertFields(
-			array(
-				'object_id' => strtolower( $content->getEntityId()->getSerialization() ),
-				'user_id' => $user->getId(),
-				'revision_id' => $revisionId,
-				'type' => 'wikibase-item~restore',
-				'info' => array(
-					'metadata' => array(
-						'user_text' => $user->getName(),
-						'comment' => 'wikibase-comment-restore',
-					)
-				)
-			),
-			$fields
-		);
+		$this->assertSame( 'q12', $change->getObjectId() );
+		$this->assertSame( $user->getId(), $change->getField( 'user_id' ) );
+		$this->assertSame( $revisionId, $change->getField( 'revision_id' ) );
+		$this->assertSame( 'wikibase-item~restore', $change->getType() );
+		$this->assertSame( $user->getName(), $metadata['user_text'] );
+		$this->assertSame( 'wikibase-comment-restore', $metadata['comment'] );
 
 		$this->assertTrue(
-			wfTimestamp() - $fields['time'] < 10,
+			$change->getAge() < 10,
 			"Page undeletions should use the current timestamp, not the one from the revision"
 		);
 	}
@@ -188,16 +171,11 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$notifier = $this->getChangeNotifier();
 		$change = $notifier->notifyOnPageCreated( $revision );
 
-		$this->assertFields(
-			array(
-				'object_id' => strtolower( $content->getEntityId()->getSerialization() ),
-				'user_id' => $user->getId(),
-				'revision_id' => $revisionId,
-				'time' => $timestamp,
-				'type' => 'wikibase-item~add',
-			),
-			$change->getFields()
-		);
+		$this->assertSame( 'q12', $change->getObjectId() );
+		$this->assertSame( $user->getId(), $change->getField( 'user_id' ) );
+		$this->assertSame( $revisionId, $change->getField( 'revision_id' ) );
+		$this->assertSame( $timestamp, $change->getTime() );
+		$this->assertSame( 'wikibase-item~add', $change->getType() );
 	}
 
 	public function testNotifyOnPageCreated_redirect() {
@@ -232,16 +210,11 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$notifier = $this->getChangeNotifier();
 		$change = $notifier->notifyOnPageModified( $revision, $parent );
 
-		$this->assertFields(
-			array(
-				'object_id' => strtolower( $content->getEntityId()->getSerialization() ),
-				'user_id' => $user->getId(),
-				'revision_id' => $revisionId,
-				'time' => $timestamp,
-				'type' => 'wikibase-item~update',
-			),
-			$change->getFields()
-		);
+		$this->assertSame( 'q12', $change->getObjectId() );
+		$this->assertSame( $user->getId(), $change->getField( 'user_id' ) );
+		$this->assertSame( $revisionId, $change->getField( 'revision_id' ) );
+		$this->assertSame( $timestamp, $change->getTime() );
+		$this->assertSame( 'wikibase-item~update', $change->getType() );
 	}
 
 	public function testNotifyOnPageModified_redirect() {
@@ -277,16 +250,11 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$notifier = $this->getChangeNotifier();
 		$change = $notifier->notifyOnPageModified( $revision, $parent );
 
-		$this->assertFields(
-			array(
-				'object_id' => strtolower( $content->getEntityId()->getSerialization() ),
-				'user_id' => $user->getId(),
-				'revision_id' => $revisionId,
-				'time' => $timestamp,
-				'type' => 'wikibase-item~restore',
-			),
-			$change->getFields()
-		);
+		$this->assertSame( 'q12', $change->getObjectId() );
+		$this->assertSame( $user->getId(), $change->getField( 'user_id' ) );
+		$this->assertSame( $revisionId, $change->getField( 'revision_id' ) );
+		$this->assertSame( $timestamp, $change->getTime() );
+		$this->assertSame( 'wikibase-item~restore', $change->getType() );
 	}
 
 	public function testNotifyOnPageModified_to_redirect() {
@@ -304,28 +272,11 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$notifier = $this->getChangeNotifier();
 		$change = $notifier->notifyOnPageModified( $revision, $parent );
 
-		$this->assertFields(
-			array(
-				'object_id' => strtolower( $content->getEntityId()->getSerialization() ),
-				'user_id' => $user->getId(),
-				'revision_id' => $revisionId,
-				'time' => $timestamp,
-				'type' => 'wikibase-item~remove',
-			),
-			$change->getFields()
-		);
-	}
-
-	private function assertFields( $expected, $actual ) {
-		foreach ( $expected as $name => $value ) {
-			$this->assertArrayHasKey( $name, $actual );
-
-			if ( is_array( $value ) ) {
-				$this->assertFields( $value, $actual[$name] );
-			} else {
-				$this->assertEquals( $value, $actual[$name] );
-			}
-		}
+		$this->assertSame( 'q12', $change->getObjectId() );
+		$this->assertSame( $user->getId(), $change->getField( 'user_id' ) );
+		$this->assertSame( $revisionId, $change->getField( 'revision_id' ) );
+		$this->assertSame( $timestamp, $change->getTime() );
+		$this->assertSame( 'wikibase-item~remove', $change->getType() );
 	}
 
 }

@@ -11,9 +11,7 @@ namespace Wikibase;
 interface Change {
 
 	/**
-	 * Returns the age of the change in seconds.
-	 *
-	 * @return integer
+	 * @return int Seconds
 	 */
 	public function getAge();
 
