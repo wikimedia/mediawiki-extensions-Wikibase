@@ -187,7 +187,7 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 		$this->assertValidation( $expected, $validators, $value );
 	}
 
-	public function provideGlobeCoordinateValidation() {
+	public function provideGlobeCoordinateValueValidation() {
 		$wikidataUri = 'http://www.wikidata.org/entity/';
 
 		return [
@@ -208,38 +208,50 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider provideGlobeCoordinateValidation
+	 * @dataProvider provideGlobeCoordinateValueValidation
 	 */
-	public function testGlobeCoordinateValidation( $precision, $globe, $expected ) {
+	public function testGlobeCoordinateValueValidation( $precision, $globe, $expected ) {
 		$value = new GlobeCoordinateValue( new LatLongValue( 0, 0 ), $precision, $globe );
 		$validators = $this->newValidatorBuilders()->buildCoordinateValidators();
 
 		$this->assertValidation( $expected, $validators, $value );
 	}
 
-	public function provideStringValidation() {
+	public function provideStringValueValidation() {
 		return [
-			'Should not be empty' => [ '', false ],
-			'Simple string' => [ 'Foo', true ],
+			'Space' => [ 'x x', true ],
 			'Unicode support' => [ 'Äöü', true ],
-			'Long, but not too long' => [ str_repeat( 'x', 400 ), true ],
+
+			// Length checks
+			'To short' => [ '', false ],
+			'Minimum length' => [ 'x', true ],
+			'Maximum length' => [ str_repeat( 'x', 400 ), true ],
 			'Too long' => [ str_repeat( 'x', 401 ), false ],
-			'Leading space' => [ ' Foo', false ],
-			'Trailing space' => [ 'Foo ', false ],
+
+			// Enforced trimming
+			'Leading space' => [ ' x', false ],
+			'Leading newline' => [ "\nx", false ],
+			'Trailing space' => [ 'x ', false ],
+			'Trailing newline' => [ "x\n", false ],
+
+			// Disallowed whitespace characters
+			'Tabulator' => [ "x\tx", false ],
+			'Return' => [ "x\rx", false ],
+			'Newline' => [ "x\nx", false ],
 		];
 	}
 
 	/**
-	 * @dataProvider provideStringValidation
+	 * @dataProvider provideStringValueValidation
 	 */
-	public function testStringValidation( $string, $expected ) {
+	public function testStringValueValidation( $string, $expected ) {
 		$value = new StringValue( $string );
 		$validators = $this->newValidatorBuilders()->buildStringValidators();
 
 		$this->assertValidation( $expected, $validators, $value );
 	}
 
-	public function provideTimeValidation() {
+	public function provideTimeValueValidation() {
 		$wikidataUri = 'http://www.wikidata.org/entity/';
 
 		return [
@@ -293,9 +305,9 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider provideTimeValidation
+	 * @dataProvider provideTimeValueValidation
 	 */
-	public function testTimeValidation( $timestamp, $precision, $calendarModel, $expected ) {
+	public function testTimeValueValidation( $timestamp, $precision, $calendarModel, $expected ) {
 		$value = new TimeValue( $timestamp, 0, 0, 0, $precision, $calendarModel );
 		$validators = $this->newValidatorBuilders()->buildTimeValidators();
 
