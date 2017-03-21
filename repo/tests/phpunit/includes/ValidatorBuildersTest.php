@@ -337,61 +337,61 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 
 		$cases = array(
 			//wikibase-item
-			array( 'wikibase-item', 'q8', false, 'Expected EntityId, string supplied' ),
-			array( 'wikibase-item', new StringValue( 'q8' ), false, 'Expected EntityId, StringValue supplied' ),
-			array( 'wikibase-item', new EntityIdValue( new ItemId( 'q8' ) ), true, 'existing entity' ),
-			array( 'wikibase-item', new EntityIdValue( new ItemId( 'q3' ) ), false, 'missing entity' ),
-			array( 'wikibase-item', new EntityIdValue( new PropertyId( 'p8' ) ), false, 'not an item' ),
+			'Expected item, string supplied' => [ 'wikibase-item', 'q8', false ],
+			'Expected item, StringValue supplied' => [ 'wikibase-item', new StringValue( 'q8' ), false ],
+			'Existing item' => [ 'wikibase-item', new EntityIdValue( new ItemId( 'q8' ) ), true ],
+			'Missing item' => [ 'wikibase-item', new EntityIdValue( new ItemId( 'q3' ) ), false ],
+			'Not an item' => [ 'wikibase-item', new EntityIdValue( new PropertyId( 'p8' ) ), false ],
 
 			// wikibase-property
-			array( 'wikibase-property', new EntityIdValue( new PropertyId( 'p8' ) ), true, 'existing entity' ),
-			array( 'wikibase-property', new EntityIdValue( new ItemId( 'q8' ) ), false, 'not a property' ),
+			'Existing entity' => [ 'wikibase-property', new EntityIdValue( new PropertyId( 'p8' ) ), true ],
+			'Not a property' => [ 'wikibase-property', new EntityIdValue( new ItemId( 'q8' ) ), false ],
 
 			// generic wikibase entity
-			array( 'wikibase-entity', new EntityIdValue( new PropertyId( 'p8' ) ), true, 'existing entity' ),
-			array( 'wikibase-entity', new EntityIdValue( new ItemId( 'q8' ) ), true, 'existing entity' ),
-			array( 'wikibase-entity', new EntityIdValue( new ItemId( 'q3' ) ), false, 'missing entity' ),
-			array( 'wikibase-entity', new EntityIdValue( new ItemId( 'bar:Q123' ) ), false, 'unknown repository' ),
-			array( 'wikibase-entity', new EntityIdValue( new ItemId( 'foo:Q123' ) ), true, 'foreign entity' ),
-			array( 'wikibase-entity', new EntityIdValue( new PropertyId( 'foo:P42' ) ), false, 'unsupported foreign entity type' ),
-			array( 'wikibase-entity', new StringValue( 'q8' ), false, 'Expected EntityId, StringValue supplied' ),
+			'Existing property' => [ 'wikibase-entity', new EntityIdValue( new PropertyId( 'p8' ) ), true ],
+			'Existing item entity' => [ 'wikibase-entity', new EntityIdValue( new ItemId( 'q8' ) ), true ],
+			'Missing item entity' => [ 'wikibase-entity', new EntityIdValue( new ItemId( 'q3' ) ), false ],
+			'Unknown repository' => [ 'wikibase-entity', new EntityIdValue( new ItemId( 'bar:Q123' ) ), false ],
+			'Foreign entity' => [ 'wikibase-entity', new EntityIdValue( new ItemId( 'foo:Q123' ) ), true ],
+			'Unsupported foreign entity type' => [ 'wikibase-entity', new EntityIdValue( new PropertyId( 'foo:P42' ) ), false ],
+			'Expected EntityId, StringValue supplied' => [ 'wikibase-entity', new StringValue( 'q8' ), false ],
 
 			//commonsMedia
-			array( 'commonsMedia', 'Foo.jpg', false, 'StringValue expected, string supplied' ),
-			array( 'commonsMedia', new NumberValue( 7 ), false, 'StringValue expected' ),
+			'Commons expects StringValue, got string' => [ 'commonsMedia', 'Foo.jpg', false ],
+			'Commons expects StringValue' => [ 'commonsMedia', new NumberValue( 7 ), false ],
 
 			//geo-shape
-			array( 'geo-shape', 'Foo.map', false, 'StringValue expected, string supplied' ),
-			array( 'geo-shape', new NumberValue( 7 ), false, 'StringValue expected' ),
+			'GeoShape expected StringValue, string supplied' => [ 'geo-shape', 'Foo.map', false ],
+			'GeoShape expected StringValue, NumberValue supplied' => [ 'geo-shape', new NumberValue( 7 ), false ],
 
 			//string
-			array( 'string', 'Foo', false, 'StringValue expected, string supplied' ),
-			array( 'string', new NumberValue( 7 ), false, 'StringValue expected' ),
+			'String expects StringValue, got string' => [ 'string', 'Foo', false ],
+			'String expects StringValue' => [ 'string', new NumberValue( 7 ), false ],
 
 			//time
-			array( 'time', 'Foo', false, 'TimeValue expected, string supplied' ),
-			array( 'time', new NumberValue( 7 ), false, 'TimeValue expected' ),
+			'TimeValue expected, string supplied' => [ 'time', 'Foo', false ],
+			'TimeValue expected' => [ 'time', new NumberValue( 7 ), false ],
 
 			//globe-coordinate
-			array( 'globe-coordinate', 'Foo', false, 'GlobeCoordinateValue expected, string supplied' ),
-			array( 'globe-coordinate', new NumberValue( 7 ), false, 'GlobeCoordinateValue expected' ),
+			'GlobeCoordinateValue expected, string supplied' => [ 'globe-coordinate', 'Foo', false ],
+			'GlobeCoordinateValue expected' => [ 'globe-coordinate', new NumberValue( 7 ), false ],
 
 			// url
-			array( 'url', 'Foo', false, 'StringValue expected, string supplied' ),
-			array( 'url', new NumberValue( 7 ), false, 'StringValue expected' ),
+			'URL expects StringValue, got string' => [ 'url', 'Foo', false ],
+			'URL expects StringValue' => [ 'url', new NumberValue( 7 ), false ],
 
 			//quantity
-			array( 'quantity', UnboundedQuantityValue::newFromNumber( 5 ), true, 'Unbounded' ),
-			array( 'quantity', QuantityValue::newFromNumber( 5 ), true, 'Simple integer' ),
-			array( 'quantity', QuantityValue::newFromNumber( 5, 'http://qudt.org/vocab/unit#Meter' ), true, 'Vocabulary URI' ),
-			array( 'quantity', QuantityValue::newFromNumber( 5, $wikidataUri . 'Q11573' ), false, 'Wikidata URI' ),
-			array( 'quantity', QuantityValue::newFromNumber( 5, '1' ), true, '1 means unitless' ),
-			array( 'quantity', QuantityValue::newFromNumber( 5, 'kittens' ), false, 'Bad unit URI' ),
-			array( 'quantity', QuantityValue::newFromNumber( '-11.234', '1', '-10', '-12' ), true, 'decimal strings' ),
+			'Unbounded' => [ 'quantity', UnboundedQuantityValue::newFromNumber( 5 ), true ],
+			'Simple integer' => [ 'quantity', QuantityValue::newFromNumber( 5 ), true ],
+			'Vocabulary URI' => [ 'quantity', QuantityValue::newFromNumber( 5, 'http://qudt.org/vocab/unit#Meter' ), true ],
+			'Wikidata URI' => [ 'quantity', QuantityValue::newFromNumber( 5, $wikidataUri . 'Q11573' ), false ],
+			'1 means unitless' => [ 'quantity', QuantityValue::newFromNumber( 5, '1' ), true ],
+			'Bad unit URI' => [ 'quantity', QuantityValue::newFromNumber( 5, 'kittens' ), false ],
+			'Decimal strings' => [ 'quantity', QuantityValue::newFromNumber( '-11.234', '1', '-10', '-12' ), true ],
 
 			//monolingual text
-			array( 'monolingualtext', new MonolingualTextValue( 'contentlanguage', 'text' ), true, 'Simple value' ),
-			array( 'monolingualtext', new MonolingualTextValue( 'en', 'text' ), false, 'Not a valid language' ),
+			'Simple value' => [ 'monolingualtext', new MonolingualTextValue( 'contentlanguage', 'text' ), true ],
+			'Not a valid language' => [ 'monolingualtext', new MonolingualTextValue( 'en', 'text' ), false ],
 		);
 
 		return $cases;
@@ -400,7 +400,7 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideDataTypeValidation
 	 */
-	public function testDataTypeValidation( $typeId, $value, $expected, $message ) {
+	public function testDataTypeValidation( $typeId, $value, $expected ) {
 		$builders = $this->newValidatorBuilders();
 
 		$validatorMap = array(
@@ -419,16 +419,15 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 
 		$validators = call_user_func( $validatorMap[$typeId] );
 
-		$this->assertValidation( $expected, $validators, $value, $message );
+		$this->assertValidation( $expected, $validators, $value );
 	}
 
 	/**
 	 * @param bool $expected
 	 * @param ValueValidator[] $validators
 	 * @param mixed $value
-	 * @param string $message
 	 */
-	protected function assertValidation( $expected, array $validators, $value, $message = '' ) {
+	protected function assertValidation( $expected, array $validators, $value ) {
 		$result = Result::newSuccess();
 		foreach ( $validators as $validator ) {
 			$result = $validator->validate( $value );
@@ -441,12 +440,12 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 		if ( $expected ) {
 			$errors = $result->getErrors();
 			if ( !empty( $errors ) ) {
-				$this->fail( $message . "\n" . $errors[0]->getText() );
+				$this->fail( $errors[0]->getText() );
 			}
 
-			$this->assertEquals( $expected, $result->isValid(), $message );
+			$this->assertEquals( $expected, $result->isValid() );
 		} else {
-			$this->assertEquals( $expected, $result->isValid(), $message );
+			$this->assertEquals( $expected, $result->isValid() );
 		}
 	}
 
