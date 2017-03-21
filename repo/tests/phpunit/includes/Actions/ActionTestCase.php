@@ -162,6 +162,12 @@ class ActionTestCase extends \MediaWikiTestCase {
 		$context->setLanguage( $wgLang ); // qqx as per setUp()
 		$context->setTitle( $article->getTitle() );
 
+		// Must be set separately, similar to what MediaWiki::performRequest() does.
+		// Currently used in ViewEntityActionTest.
+		if ( !empty( $params['printable'] ) ) {
+			$context->getOutput()->setPrintable();
+		}
+
 		$article->setContext( $context );
 
 		if ( preg_match( '/^[a-z]+$/', $action ) ) {

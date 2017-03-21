@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Actions;
 
+use OutputPage;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ViewEntityAction;
@@ -41,19 +42,19 @@ class ViewEntityActionTest extends ActionTestCase {
 
 	public function provideShow() {
 		return [
-			[ 'Berlin', '/Hauptstadt von Deutschland/' ],
-			[ 'Berlin2', '/redirectMsg/' ]
+			[ 'Berlin', 'Hauptstadt von Deutschland' ],
+			[ 'Berlin2', 'redirectMsg' ],
 		];
 	}
 
 	/**
 	 * @dataProvider provideShow
 	 */
-	public function testShow( $handle, $regex ) {
+	public function testShow( $handle, $expected ) {
 		$page = $this->getTestItemPage( $handle );
-		$html = $this->executeViewAction( $page, array() );
+		$output = $this->executeViewAction( $page );
 
-		$this->assertRegExp( $regex, $html );
+		$this->assertContains( $expected, $output->getHTML() );
 	}
 
 	public function testMetaTags_withoutDescription() {
@@ -97,10 +98,10 @@ class ViewEntityActionTest extends ActionTestCase {
 			'oldid' => $previous->getId()
 		);
 
-		$html = $this->executeViewAction( $page, $params );
+		$output = $this->executeViewAction( $page, $params );
 
-		$this->assertContains( 'diff-currentversion-title', $html, 'is diff view' );
-		$this->assertNotContains( 'wikibase-edittoolbar-container', $html, 'no edit toolbar' );
+		$this->assertContains( 'diff-currentversion-title', $output->getHTML(), 'is diff view' );
+		$this->assertNotEditable( $output );
 	}
 
 	public function testShowOldRevision_hasNoEditLinks() {
@@ -113,30 +114,39 @@ class ViewEntityActionTest extends ActionTestCase {
 			'oldid' => $previous->getId()
 		);
 
-		$html = $this->executeViewAction( $page, $params );
+		$output = $this->executeViewAction( $page, $params );
 
-		$this->assertNotRegExp( '/wikibase-edittoolbar-container/', $html, 'no edit toolbar' );
+		$this->assertNotEditable( $output );
+	}
+
+	public function testShowPrintableVersion_hasNoEditLinks() {
+		$page = $this->getTestItemPage( 'Berlin' );
+		$requestParams = [ 'printable' => 'yes' ];
+
+		$output = $this->executeViewAction( $page, $requestParams );
+
+		$this->assertNotEditable( $output );
 	}
 
 	public function testShowNonExistingRevision() {
 		$page = $this->getTestItemPage( 'Berlin' );
 		$params = array( 'oldid' => 2147483647 );
 
-		$html = $this->executeViewAction( $page, $params );
-		$this->assertContains( 'Die Version 2147483647', $html, 'non-existing revision' );
+		$output = $this->executeViewAction( $page, $params );
+		$this->assertContains( 'Die Version 2147483647', $output->getHTML() );
 	}
 
 	/**
 	 * @param WikiPage $page
-	 * @param string[] $params
+	 * @param string[] $requestParams
 	 *
-	 * @return string
+	 * @return OutputPage
 	 */
-	private function executeViewAction( WikiPage $page, array $params ) {
-		$action = $this->createAction( 'view', $page, $params );
+	private function executeViewAction( WikiPage $page, array $requestParams = [] ) {
+		$action = $this->createAction( 'view', $page, $requestParams );
 		$action->show();
 
-		return $action->getOutput()->getHTML();
+		return $action->getOutput();
 	}
 
 	/**
@@ -164,6 +174,16 @@ class ViewEntityActionTest extends ActionTestCase {
 
 		$action->show();
 		$this->assertEquals( 404, $response->getStatusCode(), "response code" );
+	}
+
+	private function assertNotEditable( OutputPage $output ) {
+		$html = $output->getHTML();
+		$this->assertNotContains( 'wikibase-edittoolbar-container', $html );
+		$this->assertNotContains( 'wikibase-toolbar-button-edit', $html );
+
+		$jsConfigVars = $output->getJsConfigVars();
+		$this->assertArrayHasKey( 'wbIsEditView', $jsConfigVars );
+		$this->assertFalse( $jsConfigVars['wbIsEditView'], 'wbIsEditView is disabled' );
 	}
 
 }
