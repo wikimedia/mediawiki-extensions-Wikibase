@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_a73f3ad2",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-21T15:50:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e46e3ee_0a25f102",
+      "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_6a4115ac",
         "filename": "repo/WikibaseRepo.entitytypes.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2017-03-16T16:42:29Z",
       "side": 1,
       "message": "It seems a bit strange to me to use the SiteLinksRdfBuilder as *the* builder of Items. This works \"by accident\", because Items only need one non-standard bit to be mapped to RDF. \n\nIt\u0027s ok for now, but it deserves a comment, I think. Afterall, a SiteLinksRdfBuilder does *not* provide the RDF mapping for Items.",
+      "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_672a9291",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-21T15:50:56Z",
+      "side": 1,
+      "message": "I agree but making an ItemRdfBuilder that just returns this makes the code overly complicated. I can make it happen if you think it\u0027s worth it.",
+      "parentUuid": "8e46e3ee_6a4115ac",
       "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -242,6 +278,24 @@
       "writtenOn": "2017-03-16T16:42:29Z",
       "side": 1,
       "message": "It\u0027s not necessary to inject all services that any RdfBuilder might need. In fact, we cannot know here what they might need. \n\nThe wikibase.entitytypes.php file is a wiring file; as such, it can us global state to get the service instances it needs.",
+      "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_27348af0",
+        "filename": "repo/includes/Rdf/EntityRdfBuilderFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-21T15:50:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e46e3ee_0a4e51dd",
       "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
