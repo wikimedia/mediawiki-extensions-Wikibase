@@ -49,6 +49,7 @@ use Wikibase\Repo\Parsers\MediaWikiNumberUnlocalizer;
 use Wikibase\Repo\Parsers\MonolingualTextParser;
 use Wikibase\Repo\Parsers\TimeParserFactory;
 use Wikibase\Repo\Parsers\WikibaseStringValueNormalizer;
+use Wikibase\Repo\Rdf\Values\GeoShapeRdfBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\RdfWriter;
 
@@ -122,7 +123,16 @@ return call_user_func( function() {
 				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
 				return $factory->newGeoShapeFormatter( $format, $options );
 			},
-			// TODO: RDF mapping
+			'rdf-builder-factory-callback' => function (
+				$flags,
+				RdfVocabulary $vocab,
+				RdfWriter $writer,
+				EntityMentionListener $tracker,
+				DedupeBag $dedupe
+			) {
+				// TODO: Implement proper RDF mapping, see T159517 and T160535
+				return new GeoShapeRdfBuilder();
+			},
 		),
 		'VT:globecoordinate' => array(
 			'validator-factory-callback' => function() {
