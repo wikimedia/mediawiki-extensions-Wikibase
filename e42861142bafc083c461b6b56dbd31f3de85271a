@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_e2fa1340",
+        "filename": "client/tests/phpunit/includes/DispatchingServiceFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-21T09:58:05Z",
+      "side": 1,
+      "message": "True. Changed here and in other places, so it is clear.",
+      "parentUuid": "8e46e3ee_ca35c9f4",
+      "revId": "e42861142bafc083c461b6b56dbd31f3de85271a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_ca4e299b",
         "filename": "docs/options.wiki",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_22d1dbd0",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-21T09:58:05Z",
+      "side": 1,
+      "message": "Sure. I\u0027ve copied it from somewhere, I\u0027m sure. But to be right, I\u0027ve changed the description to use terms from RFC 3986.",
+      "parentUuid": "8e46e3ee_ca4e299b",
+      "revId": "e42861142bafc083c461b6b56dbd31f3de85271a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_ea53e541",
         "filename": "repo/tests/phpunit/includes/WikibaseRepoTest.php",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2017-03-16T17:32:47Z",
       "side": 1,
       "message": "long line",
+      "revId": "e42861142bafc083c461b6b56dbd31f3de85271a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_22e8fb76",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-21T09:58:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e46e3ee_ea53e541",
       "revId": "e42861142bafc083c461b6b56dbd31f3de85271a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
