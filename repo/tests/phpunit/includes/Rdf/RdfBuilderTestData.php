@@ -2,8 +2,9 @@
 
 namespace Wikibase\Repo\Tests\Rdf;
 
+use HashSiteStore;
 use Site;
-use SiteList;
+use SiteLookup;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -154,10 +155,10 @@ class RdfBuilderTestData {
 	/**
 	 * Get site definitions matching the test data.
 	 *
-	 * @return SiteList
+	 * @return SiteLookup
 	 */
-	public function getSiteList() {
-		$list = new SiteList();
+	public function getSiteLookup() {
+		$list = [];
 
 		$wiki = new Site();
 		$wiki->setGlobalId( 'enwiki' );
@@ -172,7 +173,7 @@ class RdfBuilderTestData {
 		$wiki->setLinkPath( 'http://ruwiki.acme.test/$1' );
 		$list['ruwiki'] = $wiki;
 
-		return $list;
+		return new HashSiteStore( $list );
 	}
 
 	/**

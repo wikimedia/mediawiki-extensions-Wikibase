@@ -2,10 +2,11 @@
 
 namespace Wikibase\Repo\Tests\Dumpers;
 
+use HashSiteStore;
 use MediaWikiTestCase;
 use MWException;
 use Site;
-use SiteList;
+use SiteLookup;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -51,10 +52,10 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @return SiteList
+	 * @return SiteLookup
 	 */
-	public function getSiteList() {
-		$list = new SiteList();
+	public function getSiteLookup() {
+		$list = [];
 
 		$wiki = new Site();
 		$wiki->setGlobalId( 'enwiki' );
@@ -75,7 +76,7 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 		$wiki->setLinkPath( 'http://test.acme.test/$1' );
 		$list['test'] = $wiki;
 
-		return $list;
+		return new HashSiteStore( $list );
 	}
 
 	private function getTestData() {
@@ -148,10 +149,12 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 
 		$entityRdfBuilderFactory = $wikibaseRepo->getEntityRdfBuilderFactory();
 
+		$siteLookup = $this->getSiteLookup();
+		$this->setService( 'SiteLookup', $siteLookup );
 		return RdfDumpGenerator::createDumpGenerator(
 			'ntriples',
 			$out,
-			$this->getSiteList(),
+			$siteLookup->getSites(),
 			$entityRevisionLookup,
 			$dataTypeLookup,
 			$rdfBuilderFactory,

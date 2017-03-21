@@ -90,8 +90,10 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 
 		$entityRdfBuilderFactory = WikibaseRepo::getDefaultInstance()->getEntityRdfBuilderFactory();
 		$emitter = new NTriplesRdfWriter();
+		$siteLookup = $this->getTestData()->getSiteLookup();
+		$this->setService( 'SiteLookup', $siteLookup );
 		$builder = new RdfBuilder(
-			$this->getTestData()->getSiteList(),
+			$siteLookup->getSites(),
 			$vocabulary ?: $this->getTestData()->getVocabulary(),
 			$valueBuilderFactory,
 			$this->getTestData()->getMockRepository(),
