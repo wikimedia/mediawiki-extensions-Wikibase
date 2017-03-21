@@ -16,6 +16,24 @@
       "revId": "e169680b3ebc59b6a55ddb347fcbd2c26cb76860",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_58109753",
+        "filename": "docs/extending-entities.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-21T19:22:26Z",
+      "side": 1,
+      "message": "Not merged yet: https://gerrit.wikimedia.org/r/#/c/342092/",
+      "parentUuid": "8e46e3ee_8d0c9f46",
+      "revId": "e169680b3ebc59b6a55ddb347fcbd2c26cb76860",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
