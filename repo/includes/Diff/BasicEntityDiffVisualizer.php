@@ -10,6 +10,7 @@ use Diff\DiffOp\DiffOpRemove;
 use IContextSource;
 use MWException;
 use SiteLookup;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
@@ -23,7 +24,7 @@ use Wikibase\Repo\Content\EntityContentDiff;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Daniel kinzler
  */
-class BasicEntityDiffVisualizer {
+class BasicEntityDiffVisualizer implements EntityDiffVisualizer {
 
 	/**
 	 * @var IContextSource
@@ -75,10 +76,11 @@ class BasicEntityDiffVisualizer {
 	 * Generates and returns an HTML visualization of the provided EntityContentDiff.
 	 *
 	 * @param EntityContentDiff $diff
+	 * @param EntityDocument $entity
 	 *
 	 * @return string
 	 */
-	public function visualizeEntityContentDiff( EntityContentDiff $diff ) {
+	public function visualizeEntityContentDiff( EntityContentDiff $diff, EntityDocument $entity ) {
 		$html = '';
 		$html .= $this->visualizeRedirectDiff( $diff->getRedirectDiff() );
 		$html .= $this->visualizeEntityDiff( $diff->getEntityDiff() );

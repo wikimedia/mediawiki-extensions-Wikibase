@@ -194,7 +194,7 @@ class EntityContentDiffView extends DifferenceEngine {
 	public function generateContentDiffBody( Content $old, Content $new ) {
 		if ( ( $old instanceof EntityContent ) && ( $new instanceof EntityContent ) ) {
 			$diff = $old->getDiff( $new );
-			return $this->diffVisualizer->visualizeEntityContentDiff( $diff );
+			return $this->diffVisualizer->visualizeEntityContentDiff( $diff, $old->getEntity() );
 		}
 
 		return parent::generateContentDiffBody( $old, $new );

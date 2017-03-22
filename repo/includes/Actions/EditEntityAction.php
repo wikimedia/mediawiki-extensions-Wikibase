@@ -19,6 +19,7 @@ use Status;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use WebRequest;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
@@ -338,7 +339,7 @@ class EditEntityAction extends ViewEntityAction {
 			return;
 		}
 
-		$this->displayUndoDiff( $appDiff );
+		$this->displayUndoDiff( $appDiff, $newerContent->getEntity() );
 
 		if ( $restore ) {
 			$this->showConfirmationForm();
@@ -408,8 +409,9 @@ class EditEntityAction extends ViewEntityAction {
 
 	/**
 	 * @param EntityContentDiff $diff
+	 * @param EntityDocument $entity
 	 */
-	private function displayUndoDiff( EntityContentDiff $diff ) {
+	private function displayUndoDiff( EntityContentDiff $diff, EntityDocument $entity ) {
 		$tableClass = 'diff diff-contentalign-' . htmlspecialchars( $this->getTitle()->getPageLanguage()->alignStart() );
 
 		$this->getOutput()->addHTML( Html::openElement( 'table', array( 'class' => $tableClass ) ) );
@@ -436,7 +438,9 @@ class EditEntityAction extends ViewEntityAction {
 		);
 		$this->getOutput()->addHTML( Html::closeElement( 'tr' ) );
 
-		$this->getOutput()->addHTML( $this->entityDiffVisualizer->visualizeEntityContentDiff( $diff ) );
+		$this->getOutput()->addHTML(
+			$this->entityDiffVisualizer->visualizeEntityContentDiff( $diff, $entity )
+		);
 
 		$this->getOutput()->addHTML( Html::closeElement( 'tbody' ) );
 		$this->getOutput()->addHTML( Html::closeElement( 'table' ) );
