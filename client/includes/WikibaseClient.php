@@ -413,6 +413,13 @@ final class WikibaseClient {
 	}
 
 	/**
+	 * @return array[]
+	 */
+	private static function getDefaultEntityTypes() {
+		return require __DIR__ . '/../../lib/WikibaseLib.entitytypes.php';
+	}
+
+	/**
 	 * @return TermBuffer
 	 */
 	public function getTermBuffer() {
@@ -640,17 +647,17 @@ final class WikibaseClient {
 	 * @return WikibaseClient
 	 */
 	private static function newInstance() {
-		global $wgWBClientSettings, $wgWBClientDataTypes, $wgWBClientEntityTypes;
+		global $wgWBClientSettings, $wgWBClientDataTypes;
 
-		if ( !is_array( $wgWBClientDataTypes ) || !is_array( $wgWBClientEntityTypes ) ) {
-			throw new MWException( '$wgWBClientDataTypes and $wgWBClientEntityTypes must be arrays. '
+		if ( !is_array( $wgWBClientDataTypes ) ) {
+			throw new MWException( '$wgWBClientDataTypes must be array. '
 				. 'Maybe you forgot to require WikibaseClient.php in your LocalSettings.php?' );
 		}
 
 		$dataTypeDefinitions = $wgWBClientDataTypes;
 		Hooks::run( 'WikibaseClientDataTypes', array( &$dataTypeDefinitions ) );
 
-		$entityTypeDefinitions = $wgWBClientEntityTypes;
+		$entityTypeDefinitions = self::getDefaultEntityTypes();
 		Hooks::run( 'WikibaseClientEntityTypes', array( &$entityTypeDefinitions ) );
 
 		$settings = new SettingsArray( $wgWBClientSettings );

@@ -70,7 +70,7 @@ call_user_func( function() {
 	global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgHooks, $wgExtensionFunctions;
 	global $wgAPIListModules, $wgAPIMetaModules, $wgAPIPropModules, $wgSpecialPages;
 	global $wgResourceModules, $wgWBClientSettings, $wgRecentChangesFlags, $wgMessagesDirs;
-	global $wgJobClasses, $wgTrackingCategories, $wgWBClientDataTypes, $wgWBClientEntityTypes;
+	global $wgJobClasses, $wgTrackingCategories, $wgWBClientDataTypes;
 	global $wgWikibaseInterwikiSorting;
 
 	$wgExtensionCredits['wikibase'][] = array(
@@ -94,9 +94,6 @@ call_user_func( function() {
 		$baseDef = isset( $wgWBClientDataTypes[$type] ) ? $wgWBClientDataTypes[$type] : array();
 		$wgWBClientDataTypes[$type] = array_merge( $baseDef, $clientDef );
 	}
-
-	// Registry and definition of entity types
-	$wgWBClientEntityTypes = require __DIR__ . '/../lib/WikibaseLib.entitytypes.php';
 
 	// i18n
 	$wgMessagesDirs['wikibaseclient'] = __DIR__ . '/i18n';

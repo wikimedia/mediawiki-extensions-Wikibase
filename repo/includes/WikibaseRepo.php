@@ -304,17 +304,17 @@ class WikibaseRepo {
 	 * @return self
 	 */
 	private static function newInstance() {
-		global $wgWBRepoDataTypes, $wgWBRepoEntityTypes, $wgWBRepoSettings;
+		global $wgWBRepoDataTypes, $wgWBRepoSettings;
 
-		if ( !is_array( $wgWBRepoDataTypes ) || !is_array( $wgWBRepoEntityTypes ) ) {
-			throw new MWException( '$wgWBRepoDataTypes and $wgWBRepoEntityTypes must be arrays. '
+		if ( !is_array( $wgWBRepoDataTypes ) ) {
+			throw new MWException( '$wgWBRepoDataTypes must be array. '
 				. 'Maybe you forgot to require Wikibase.php in your LocalSettings.php?' );
 		}
 
 		$dataTypeDefinitions = $wgWBRepoDataTypes;
 		Hooks::run( 'WikibaseRepoDataTypes', array( &$dataTypeDefinitions ) );
 
-		$entityTypeDefinitions = $wgWBRepoEntityTypes;
+		$entityTypeDefinitions = self::getDefaultEntityTypes();
 		Hooks::run( 'WikibaseRepoEntityTypes', array( &$entityTypeDefinitions ) );
 
 		$settings = new SettingsArray( $wgWBRepoSettings );
@@ -571,6 +571,16 @@ class WikibaseRepo {
 		}
 
 		return $this->dataTypeFactory;
+	}
+
+	/**
+	 * @return array[]
+	 */
+	private static function getDefaultEntityTypes() {
+		$baseEntityTypes = require __DIR__ . '/../../lib/WikibaseLib.entitytypes.php';
+		$repoEntityTypes = require __DIR__ . '/../WikibaseRepo.entitytypes.php';
+
+		return array_merge_recursive( $baseEntityTypes, $repoEntityTypes );
 	}
 
 	/**
