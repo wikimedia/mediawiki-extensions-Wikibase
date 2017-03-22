@@ -110,5 +110,7 @@
 	"notification-header-page-connection": "A páxina <strong>$3</strong> foi {{GENDER:$2|conectada}} a un elemento de {{WBREPONAME}} .",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> e {{PLURAL:$4|outra páxina|outras $4 páxinas|100=+99 outras páxinas}} foron {{GENDER:$2|conectadas}} a items de {{WBREPONAME}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|Ver}} elemento",
-	"notification-subject-page-connection": "Unha páxina de {{SITENAME}} que {{GENDER:$3|creaches}} foi {{GENDER:$2|conectada}} cun obxecto {{WBREPONAME}}"
+	"notification-subject-page-connection": "Unha páxina de {{SITENAME}} que {{GENDER:$3|creaches}} foi {{GENDER:$2|conectada}} cun obxecto {{WBREPONAME}}",
+	"unresolved-property-category": "Páxinas con propiedades non resoltas",
+	"unresolved-property-category-desc": "Esta categoría mostra páxinas que referencian propiedades {{WBREPONAME}} que non  se poden atopar polo seu identificador de propiedade nin pola súa etiqueta."
 }

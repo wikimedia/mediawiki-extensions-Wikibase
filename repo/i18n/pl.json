@@ -16,7 +16,8 @@
 			"Darellur",
 			"Devwebtel",
 			"PiotrAntosz",
-			"Woytecr"
+			"Woytecr",
+			"Pawel Niemczuk"
 		]
 	},
 	"wikibase-desc": "Repozytorium danych strukturalnych",
@@ -145,7 +146,7 @@
 	"wikibase-itembytitle-lookup-site": "Witryna:",
 	"wikibase-itembytitle-lookup-page": "Strona:",
 	"wikibase-itembytitle-submit": "Szukaj",
-	"wikibase-itembytitle-error-site": "Użyj istniejącego identyfikator projektu, np. „plwiki” dla polskojęzycznej Wikipedii.",
+	"wikibase-itembytitle-error-site": "Użyj istniejącego identyfikatora projektu, np. „plwiki” dla polskojęzycznej Wikipedii.",
 	"wikibase-itembytitle-create": "Możesz także [$1 utworzyć element].",
 	"special-gotolinkedpage": "Przejście do linkującej strony",
 	"wikibase-gotolinkedpage-lookup-fieldset": "Przejdź do linkującej strony zgodnie z podaną witryną i elementem",
