@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_448669ad",
+        "filename": "repo/tests/testDispatchCoordinator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-22T17:39:46Z",
+      "side": 1,
+      "message": "The class is in another castle, err, package.",
+      "revId": "b1834dde325682e08f2a16ba9dea239d3ebaf337",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_64812592",
+        "filename": "repo/tests/testDispatchCoordinator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-22T17:39:46Z",
+      "side": 1,
+      "message": "Would be nice to have something like $this-\u003elog( \"Pass $i/$number\" ) here, so it\u0027s possible to observer progress.",
+      "revId": "b1834dde325682e08f2a16ba9dea239d3ebaf337",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_df56c608",
+        "filename": "repo/tests/testDispatchCoordinator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-22T17:39:46Z",
+      "side": 1,
+      "message": "The following needs to be added here to make sure we keep dispatching to (fake) clients that we have already dispatched to very recently. \n\n    $coordinator-\u003esetLockGraceInterval( 0 );\n    $coordinator-\u003esetDispatchInterval( 0 );\n\nSee also the next comment.",
+      "revId": "b1834dde325682e08f2a16ba9dea239d3ebaf337",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_24523d40",
+        "filename": "repo/tests/testDispatchCoordinator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-22T17:39:46Z",
+      "side": 1,
+      "message": "Trying to run the test, I see that this branch is hit always after the first two iterations. That is, no patter what I set --number to, only two steps are actually executed.\n\nThe reason is that dispatching is skipped if dispatching has happened very recently. See comment above.",
+      "revId": "b1834dde325682e08f2a16ba9dea239d3ebaf337",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_bf05fa14",
+        "filename": "repo/tests/testDispatchCoordinator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-22T17:39:46Z",
+      "side": 1,
+      "message": "change_id needs to be set to something that is larger than --number.",
+      "revId": "b1834dde325682e08f2a16ba9dea239d3ebaf337",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
