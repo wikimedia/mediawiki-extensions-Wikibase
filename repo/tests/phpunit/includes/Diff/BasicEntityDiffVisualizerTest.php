@@ -10,6 +10,9 @@ use IContextSource;
 use MediaWikiTestCase;
 use RawMessage;
 use Site;
+use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Repo\Content\EntityContentDiff;
@@ -30,12 +33,13 @@ class BasicEntityDiffVisualizerTest extends MediaWikiTestCase {
 
 	public function testVisualizingEmptyDiff() {
 		$emptyDiff = new EntityContentDiff( new EntityDiff(), new Diff() );
-		$html = $this->getVisualizer()->visualizeEntityContentDiff( $emptyDiff );
+		$html = $this->getVisualizer()->visualizeEntityContentDiff( $emptyDiff, new ItemId() );
 
 		$this->assertSame( '', $html );
 	}
 
 	public function diffProvider() {
+		$entity = new Item( new ItemId( 'Q1' ) );
 		$fingerprintDiff = new EntityContentDiff(
 			new EntityDiff( array(
 				'label' => new Diff( array(
@@ -79,10 +83,10 @@ class BasicEntityDiffVisualizerTest extends MediaWikiTestCase {
 			'has <ins>Q1234</ins>' => '>Q1234</ins>',
 		);
 
-		return array(
-			'fingerprint changed' => array( $fingerprintDiff, $fingerprintTags ),
-			'redirect changed' => array( $redirectDiff, $redirectTags ),
-		);
+		return [
+			'fingerprint changed' => [ $fingerprintDiff, $fingerprintTags, $entity ],
+			'redirect changed' => [ $redirectDiff, $redirectTags, $entity ],
+		];
 	}
 
 	/**
@@ -139,8 +143,12 @@ class BasicEntityDiffVisualizerTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider diffProvider
 	 */
-	public function testGenerateEntityContentDiffBody( EntityContentDiff $diff, array $matchers ) {
-		$html = $this->getVisualizer()->visualizeEntityContentDiff( $diff );
+	public function testGenerateEntityContentDiffBody(
+		EntityContentDiff $diff,
+		array $matchers,
+		EntityDocument $entity
+	) {
+		$html = $this->getVisualizer()->visualizeEntityContentDiff( $diff, $entity );
 
 		$this->assertInternalType( 'string', $html );
 		foreach ( $matchers as $name => $matcher ) {
