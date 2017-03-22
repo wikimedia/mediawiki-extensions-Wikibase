@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_956d7d2f",
+        "filename": "repo/includes/Diff/EntityDiffVisualizer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-22T22:29:43Z",
+      "side": 1,
+      "message": "Why is the EntityId needed here? It does not seem to be used anywhere. \n\nIf it\u0027s needed, could it become part of EntityContentDiff?",
+      "revId": "efb9f8c044fc53b0fbf8cb33441b4ee2eaf9effe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
