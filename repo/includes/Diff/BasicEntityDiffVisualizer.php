@@ -23,7 +23,7 @@ use Wikibase\Repo\Content\EntityContentDiff;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Daniel kinzler
  */
-class EntityDiffVisualizer {
+class BasicBasicEntityDiffVisualizer {
 
 	/**
 	 * @var IContextSource
