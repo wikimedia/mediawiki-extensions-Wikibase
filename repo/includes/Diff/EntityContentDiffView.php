@@ -34,7 +34,7 @@ use WikiPage;
 class EntityContentDiffView extends DifferenceEngine {
 
 	/**
-	 * @var EntityDiffVisualizer
+	 * @var BasicEntityDiffVisualizer
 	 */
 	private $diffVisualizer;
 
@@ -94,7 +94,7 @@ class EntityContentDiffView extends DifferenceEngine {
 		$this->terseSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML, $options );
 
 		// @fixme inject!
-		$this->diffVisualizer = new EntityDiffVisualizer(
+		$this->diffVisualizer = new BasicEntityDiffVisualizer(
 			$this->getContext(),
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
 			new ClaimDifferenceVisualizer(

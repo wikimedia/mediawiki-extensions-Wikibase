@@ -15,10 +15,10 @@ use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
-use Wikibase\Repo\Diff\EntityDiffVisualizer;
+use Wikibase\Repo\Diff\BasicEntityDiffVisualizer;
 
 /**
- * @covers Wikibase\Repo\Diff\EntityDiffVisualizer
+ * @covers Wikibase\Repo\Diff\BasicEntityDiffVisualizer
  *
  * @group Wikibase
  *
@@ -26,7 +26,7 @@ use Wikibase\Repo\Diff\EntityDiffVisualizer;
  * @author Daniel Kinzler
  * @author Thiemo Mättig
  */
-class EntityDiffVisualizerTest extends MediaWikiTestCase {
+class BasicEntityDiffVisualizerTest extends MediaWikiTestCase {
 
 	public function testVisualizingEmptyDiff() {
 		$emptyDiff = new EntityContentDiff( new EntityDiff(), new Diff() );
@@ -121,13 +121,13 @@ class EntityDiffVisualizerTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @return EntityDiffVisualizer
+	 * @return BasicEntityDiffVisualizer
 	 */
 	private function getVisualizer() {
 		$enwiki = new Site();
 		$enwiki->setGlobalId( 'enwiki' );
 
-		return new EntityDiffVisualizer(
+		return new BasicEntityDiffVisualizer(
 			$this->getMockContext(),
 			$this->getMockClaimDiffer(),
 			$this->getMockClaimDiffVisualizer(),
