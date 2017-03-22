@@ -16,6 +16,24 @@
       "revId": "efb9f8c044fc53b0fbf8cb33441b4ee2eaf9effe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_d561c533",
+        "filename": "repo/includes/Diff/EntityDiffVisualizer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-22T22:41:00Z",
+      "side": 1,
+      "message": "My plan is to use it in dispatching but this will be the future plan not for now. I\u0027m a little bit afraid adding it to EntityContentDiff would need lots of refactoring but I don\u0027t know codebase good enough to judge. What do you think?",
+      "parentUuid": "8e46e3ee_956d7d2f",
+      "revId": "efb9f8c044fc53b0fbf8cb33441b4ee2eaf9effe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
