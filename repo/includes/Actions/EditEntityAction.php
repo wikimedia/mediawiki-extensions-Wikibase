@@ -19,6 +19,7 @@ use Status;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use WebRequest;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
@@ -307,6 +308,12 @@ class EditEntityAction extends ViewEntityAction {
 		// diff from newer to older
 		$diff = $newerContent->getDiff( $olderContent );
 
+		if ( $newerContent->getEntityRedirect() === null ) {
+			$entityId = $newerContent->getEntity()->getId();
+		} else {
+			$entityId = $newerContent->getEntityRedirect()->getTargetId();
+		}
+
 		if ( $newerRevision->getId() == $latestRevision->getId() ) {
 			// if the revision to undo is the latest revision, then there can be no conflicts
 			$appDiff = $diff;
@@ -338,7 +345,7 @@ class EditEntityAction extends ViewEntityAction {
 			return;
 		}
 
-		$this->displayUndoDiff( $appDiff );
+		$this->displayUndoDiff( $appDiff, $entityId );
 
 		if ( $restore ) {
 			$this->showConfirmationForm();
@@ -408,8 +415,9 @@ class EditEntityAction extends ViewEntityAction {
 
 	/**
 	 * @param EntityContentDiff $diff
+	 * @param EntityId $entityId
 	 */
-	private function displayUndoDiff( EntityContentDiff $diff ) {
+	private function displayUndoDiff( EntityContentDiff $diff, EntityId $entityId ) {
 		$tableClass = 'diff diff-contentalign-' . htmlspecialchars( $this->getTitle()->getPageLanguage()->alignStart() );
 
 		$this->getOutput()->addHTML( Html::openElement( 'table', array( 'class' => $tableClass ) ) );
@@ -436,7 +444,9 @@ class EditEntityAction extends ViewEntityAction {
 		);
 		$this->getOutput()->addHTML( Html::closeElement( 'tr' ) );
 
-		$this->getOutput()->addHTML( $this->entityDiffVisualizer->visualizeEntityContentDiff( $diff ) );
+		$this->getOutput()->addHTML(
+			$this->entityDiffVisualizer->visualizeEntityContentDiff( $diff, $entityId )
+		);
 
 		$this->getOutput()->addHTML( Html::closeElement( 'tbody' ) );
 		$this->getOutput()->addHTML( Html::closeElement( 'table' ) );
