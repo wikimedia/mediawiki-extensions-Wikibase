@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_9f603ece",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-03-22T17:42:25Z",
+      "side": 1,
+      "message": "You removed the registration for ChangesListSpecialPageFilters, but you didn\u0027t add one for ChangesListSpecialPageStructuredFilters",
+      "revId": "a7f4aec75ee8ad24e252fd33804e3de9f5eb2485",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
