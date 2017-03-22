@@ -39,22 +39,20 @@ class EntityIdValueTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function instanceProvider() {
+		/** @var EntityId[] $ids */
 		$ids = [
-			'Q1' => new ItemId( 'Q1' ),
-			'Q42' => new ItemId( 'Q42' ),
-			'Q31337' => new ItemId( 'Q31337' ),
-			'Q2147483647' => new ItemId( 'Q2147483647' ),
-			'P1' => new PropertyId( 'P1' ),
-			'P42' => new PropertyId( 'P42' ),
-			'P31337' => new PropertyId( 'P31337' ),
-			'X567' => new CustomEntityId( 'X567' ),
-			'foo:P678' => new PropertyId( 'foo:P678' ),
+			new ItemId( 'Q1' ),
+			new ItemId( 'Q2147483647' ),
+			new PropertyId( 'P1' ),
+			new PropertyId( 'P31337' ),
+			new CustomEntityId( 'X567' ),
+			new PropertyId( 'foo:P678' ),
 		];
 
 		$argLists = [];
 
-		foreach ( $ids as $k => $id ) {
-			$argLists[$k] = [ new EntityIdValue( $id ) ];
+		foreach ( $ids as $id ) {
+			$argLists[$id->getSerialization()] = [ new EntityIdValue( $id ) ];
 		}
 
 		return $argLists;
