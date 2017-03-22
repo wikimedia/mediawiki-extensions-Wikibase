@@ -13,6 +13,7 @@ use Wikibase\DataModel\LegacyIdInterpreter;
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thiemo Mättig
+ * @author Daniel Kinzler
  */
 class EntityIdValue extends DataValueObject {
 
@@ -27,22 +28,12 @@ class EntityIdValue extends DataValueObject {
 	 *
 	 * @since 7.0 serialization format changed in an incompatible way
 	 *
+	 * @note Do not use PHP serialization for persistence! Use a DataValueSerializer instead.
+	 *
 	 * @return string
 	 */
 	public function serialize() {
 		return serialize( $this->entityId );
-	}
-
-	/**
-	 * This method gets the numeric id from the serialization.
-	 * It makes assumptions we do not want to make about the id format,
-	 * though cannot be removed until we ditch the "numeric id" part
-	 * from the serialization.
-	 *
-	 * @return float Numeric id as a whole number. Can not be int because of 32-bit PHP.
-	 */
-	private function getNumericId() {
-		return floatval( substr( $this->entityId->getSerialization(), 1 ) );
 	}
 
 	/**
@@ -123,11 +114,16 @@ class EntityIdValue extends DataValueObject {
 	 * @return array
 	 */
 	public function getArrayValue() {
-		return [
+		$array = [
 			'entity-type' => $this->entityId->getEntityType(),
-			'numeric-id' => $this->getNumericId(),
-			'id' => $this->entityId->getSerialization(),
 		];
+
+		if ( $this->entityId instanceof Int32EntityId ) {
+			$array['numeric-id'] = $this->entityId->getNumericId();
+		}
+
+		$array['id'] = $this->entityId->getSerialization();
+		return $array;
 	}
 
 	/**

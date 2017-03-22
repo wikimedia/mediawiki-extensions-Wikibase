@@ -3,9 +3,11 @@
 namespace Wikibase\DataModel\Tests\Entity;
 
 use PHPUnit_Framework_TestCase;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Fixtures\CustomEntityId;
 
 /**
  * @covers Wikibase\DataModel\Entity\EntityIdValue
@@ -16,6 +18,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thiemo Mättig
+ * @author Daniel Kinzler
  */
 class EntityIdValueTest extends PHPUnit_Framework_TestCase {
 
@@ -29,26 +32,29 @@ class EntityIdValueTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider instanceProvider
 	 */
 	public function testSerialzationRoundtrip( EntityIdValue $id ) {
-		$newId = unserialize( serialize( $id ) );
+		$serialized = serialize( $id );
+		$newId = unserialize( $serialized );
 
 		$this->assertEquals( $id, $newId );
 	}
 
 	public function instanceProvider() {
 		$ids = [
-			new ItemId( 'Q1' ),
-			new ItemId( 'Q42' ),
-			new ItemId( 'Q31337' ),
-			new ItemId( 'Q2147483647' ),
-			new PropertyId( 'P1' ),
-			new PropertyId( 'P42' ),
-			new PropertyId( 'P31337' ),
+			'Q1' => new ItemId( 'Q1' ),
+			'Q42' => new ItemId( 'Q42' ),
+			'Q31337' => new ItemId( 'Q31337' ),
+			'Q2147483647' => new ItemId( 'Q2147483647' ),
+			'P1' => new PropertyId( 'P1' ),
+			'P42' => new PropertyId( 'P42' ),
+			'P31337' => new PropertyId( 'P31337' ),
+			'X567' => new CustomEntityId( 'X567' ),
+			'foo:P678' => new PropertyId( 'foo:P678' ),
 		];
 
 		$argLists = [];
 
-		foreach ( $ids as $id ) {
-			$argLists[] = [ new EntityIdValue( $id ) ];
+		foreach ( $ids as $k => $id ) {
+			$argLists[$k] = [ new EntityIdValue( $id ) ];
 		}
 
 		return $argLists;
@@ -75,41 +81,96 @@ class EntityIdValueTest extends PHPUnit_Framework_TestCase {
 		$this->assertInternalType( 'string', $id->getSortKey() );
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testGetArrayValueRoundtrip( EntityIdValue $id ) {
-		$newId = EntityIdValue::newFromArray( $id->getArrayValue() );
-
-		$this->assertEquals( $id, $newId );
-	}
-
-	public function testSerializationCompatibility() {
-		$id = new EntityIdValue( new ItemId( 'Q31337' ) );
-
-		$this->assertEquals( 'C:32:"Wikibase\DataModel\Entity\ItemId":6:{Q31337}', $id->serialize() );
-	}
-
-	public function testDeserializationCompatibility() {
-		$expected = new EntityIdValue( new ItemId( 'Q31337' ) );
-
-		// This is the serialization format from f5b8b64823ff215c3796a79d916b6eaa65f4be33, version 0.5 alpha.
-		$id = unserialize( 'C:39:"Wikibase\DataModel\Entity\EntityIdValue":14:{["item",31337]}' );
-		$this->assertEquals( $expected, $id );
-	}
-
-	public function testGetArrayValueCompatibility() {
-		$id = new EntityIdValue( new ItemId( 'Q31337' ) );
-
-		$this->assertSame(
-			// This is the serialization format from when the EntityIdValue was still together with EntityId.
-			[
-				'entity-type' => 'item',
-				'numeric-id' => (float)31337,
-				'id' => 'Q31337',
+	public function provideGetArrayValue() {
+		return [
+			'Q2147483647' => [
+				new ItemId( 'Q2147483647' ),
+				[
+					'entity-type' => 'item',
+					'numeric-id' => 2147483647,
+					'id' => 'Q2147483647'
+				],
 			],
-			$id->getArrayValue()
-		);
+			'P31337' => [
+				new PropertyId( 'P31337' ),
+				[
+					'entity-type' => 'property',
+					'numeric-id' => 31337,
+					'id' => 'P31337',
+				],
+			],
+			'X567' => [
+				new CustomEntityId( 'X567' ),
+				[
+					'entity-type' => 'custom',
+					'id' => 'X567',
+				],
+			],
+			'foo:P678' => [
+				new PropertyId( 'foo:P678' ),
+				[
+					'entity-type' => 'property',
+					'numeric-id' => 678,
+					'id' => 'foo:P678',
+				],
+			],
+		];
+	}
+
+	/**
+	 * @dataProvider provideGetArrayValue
+	 */
+	public function testGetArrayValue( EntityId $id, array $expected ) {
+		$value = new EntityIdValue( $id );
+		$array = $value->getArrayValue();
+
+		$this->assertSame( $expected, $array );
+	}
+
+	public function testSerialize() {
+		$id = new EntityIdValue( new ItemId( 'Q31337' ) );
+
+		$this->assertSame( 'C:32:"Wikibase\DataModel\Entity\ItemId":6:{Q31337}', $id->serialize() );
+	}
+
+	public function provideDeserializationCompatibility() {
+		$local = new EntityIdValue( new ItemId( 'Q31337' ) );
+		$foreign = new EntityIdValue( new PropertyId( 'foo:P678' ) );
+		$custom = new EntityIdValue( new CustomEntityId( 'X567' ) );
+
+		return [
+			'local: Version 0.5 alpha (f5b8b64)' => [
+				'C:39:"Wikibase\DataModel\Entity\EntityIdValue":14:{["item",31337]}',
+				$local
+			],
+			'local: Version 7.0 (7fcddfc)' => [
+				'C:39:"Wikibase\DataModel\Entity\EntityIdValue":'
+					. '50:{C:32:"Wikibase\DataModel\Entity\ItemId":6:{Q31337}}',
+				$local
+			],
+			'foreign: Version 7.0 (7fcddfc)' => [
+				'C:39:"Wikibase\DataModel\Entity\EntityIdValue":'
+					. '56:{C:36:"Wikibase\DataModel\Entity\PropertyId":8:{foo:P678}}',
+				$foreign
+			],
+			'custom: Version 7.0 (7fcddfc): custom' => [
+				'C:39:"Wikibase\DataModel\Entity\EntityIdValue":'
+					. '58:{C:42:"Wikibase\DataModel\Fixtures\CustomEntityId":4:{X567}}',
+				$custom
+			],
+		];
+	}
+
+	/**
+	 * @dataProvider provideDeserializationCompatibility
+	 *
+	 * @param string $serialized
+	 * @param EntityIdValue $expected
+	 */
+	public function testDeserializationCompatibility( $serialized, EntityIdValue $expected ) {
+		$id = unserialize( $serialized );
+
+		$this->assertEquals( $expected, $id );
 	}
 
 	/**
