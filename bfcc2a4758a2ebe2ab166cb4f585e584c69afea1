@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_57bd14ac",
+        "filename": "repo/tests/phpunit/data/rdf/entities/Q4.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-23T18:43:40Z",
+      "side": 1,
+      "message": "This potentially has the same problem",
+      "revId": "bfcc2a4758a2ebe2ab166cb4f585e584c69afea1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
