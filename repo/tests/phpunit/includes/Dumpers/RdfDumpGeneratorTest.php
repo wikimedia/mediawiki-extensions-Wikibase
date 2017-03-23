@@ -9,10 +9,13 @@ use SiteList;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Dumpers\RdfDumpGenerator;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -182,7 +185,7 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider idProvider
 	 */
-	public function testGenerateDump( array $ids, $dumpname ) {
+	public function _testGenerateDump( array $ids, $dumpname ) {
 		$jsonTest = new JsonDumpGeneratorTest();
 		$entities = $jsonTest->makeEntities( $ids );
 		$redirects = array( 'Q4242' => new ItemId( 'Q42' ) );
@@ -210,6 +213,7 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 	 * @param string $dumpname
 	 */
 	public function testReferenceDedup( array $ids, $dumpname ) {
+		/** @var Item[] $entities */
 		$entities = array();
 		$rdfTest = new RdfBuilderTest();
 
@@ -217,6 +221,15 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 			$id = $id->getSerialization();
 			$entities[$id] = $rdfTest->getEntityData( $id );
 		}
+		/** @var Item $q7 */
+		$q7 = $entities['Q7'];
+		$q7Statements = $q7->getStatements()->toArray();
+		/** @var Statement $q7a */
+		$q7a = reset( $q7Statements );
+		/** @var ReferenceList $refs */
+		$refs = iterator_to_array( $q7a->getReferences() );
+		$ref = reset( $refs );
+//var_dump( $ref->getHash() );die();
 
 		$dumper = $this->newDumpGenerator( $entities );
 		$dumper->setTimestamp( 1000000 );

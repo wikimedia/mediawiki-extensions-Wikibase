@@ -1,7 +1,7 @@
 <http://acme.test/Q4> <http://acme.test/prop/direct/P2> <http://acme.test/Q42> .
 <http://acme.test/Q4> <http://acme.test/prop/direct/P3> <http://commons.wikimedia.org/wiki/Special:FilePath/Universe.svg> .
 <http://acme.test/Q4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://acme.test/prop/novalue/P3> .
-<http://acme.test/Q4> <http://acme.test/prop/direct/P4> "Point(67.89 12.345)"^^<http://www.opengis.net/ont/geosparql#wktLiteral> .
+<http://acme.test/Q4> <http://acme.test/prop/direct/P4> "Point(67 12)"^^<http://www.opengis.net/ont/geosparql#wktLiteral> .
 <http://acme.test/Q4> <http://acme.test/prop/direct/P5> "\u043F\u0440\u0435\u0432\u0435\u0434"@ru .
 <http://acme.test/Q4> <http://acme.test/prop/direct/P5> _:genid1 .
 <http://acme.test/Q4> <http://acme.test/prop/direct/P6> "+19.768000000000000682121026329696178436279296875"^^<http://www.w3.org/2001/XMLSchema#decimal> .
