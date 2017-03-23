@@ -16,6 +16,24 @@
       "revId": "2d7f3de496f51016c25eb76173f914f713e41ebf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_778050fa",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-23T18:44:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e436fe2_17d9cc83",
+      "revId": "2d7f3de496f51016c25eb76173f914f713e41ebf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
