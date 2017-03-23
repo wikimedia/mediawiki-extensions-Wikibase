@@ -38,7 +38,12 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->helper = new NTriplesRdfTestHelper();
+		$this->helper = new NTriplesRdfTestHelper(
+			new RdfBuilderTestData(
+				__DIR__ . '/../../data/rdf/entities',
+				__DIR__ . '/../../data/rdf/FullStatementRdfBuilder'
+			)
+		);
 	}
 
 	/**
@@ -47,14 +52,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	 * @return RdfBuilderTestData
 	 */
 	private function getTestData() {
-		if ( $this->testData === null ) {
-			$this->testData = new RdfBuilderTestData(
-				__DIR__ . '/../../data/rdf/entities',
-				__DIR__ . '/../../data/rdf/FullStatementRdfBuilder'
-			);
-		}
-
-		return $this->testData;
+		return $this->helper->getTestData();
 	}
 
 	/**
@@ -114,15 +112,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	private function assertOrCreateNTriples( $dataSetName, RdfWriter $writer ) {
 		$actual = $writer->drain();
-		$expected = $this->getTestData()->getNTriples( $dataSetName );
-
-		if ( $expected === null ) {
-			$this->getTestData()->putTestData( $dataSetName, $actual, '.actual' );
-			$this->fail( "Data set $dataSetName not found! Created file with the current data using"
-				. " the suffix .actual" );
-		}
-
-		$this->helper->assertNTriplesEquals( $expected, $actual, "Data set $dataSetName" );
+		$this->helper->assertNTriplesEqualsDataset( $dataSetName, $actual );
 	}
 
 	public function provideAddEntity() {

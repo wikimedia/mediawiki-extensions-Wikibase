@@ -2,10 +2,13 @@
 
 namespace Wikibase\Repo\Tests\Rdf;
 
+use InvalidArgumentException;
+use LogicException;
 use PHPUnit_Framework_Assert;
+use PHPUnit_Framework_AssertionFailedError;
 
 /**
- * Utility class to load, normalize and compare N-Triples in RDF builder tests.
+ * Utility class to normalize and compare N-Triples in RDF builder tests.
  *
  * @see https://en.wikipedia.org/wiki/N-Triples
  *
@@ -14,6 +17,45 @@ use PHPUnit_Framework_Assert;
  * @author Thiemo Mättig
  */
 class NTriplesRdfTestHelper {
+
+	/**
+	 * @var RdfBuilderTestData|null
+	 */
+	private $testData;
+
+	/**
+	 * @var bool
+	 */
+	private $forceActual = false;
+
+	public function __construct( RdfBuilderTestData $testData = null ) {
+		$this->testData = $testData;
+	}
+
+	/**
+	 * @return boolean whether expected data will be overwritten by actual data.
+	 */
+	public function isForceActual() {
+		return $this->forceActual;
+	}
+
+	/**
+	 * Setting this to true allows expected to be updated from actual data, in situations where
+	 * the actual data is known to be correct. This may be helpful for updating test data after
+	 * changing the RDF mapping.
+	 *
+	 * @param boolean $forceActual If set to true, expected data will be overwritten by actual data.
+	 */
+	public function setForceActual( $forceActual ) {
+		$this->forceActual = $forceActual;
+	}
+
+	/**
+	 * @return RdfBuilderTestData|null
+	 */
+	public function getTestData() {
+		return $this->testData;
+	}
 
 	/**
 	 * @param string[]|string $nTriples
@@ -50,6 +92,47 @@ class NTriplesRdfTestHelper {
 		// directly looks a bit odd in code, but produces meaningful output, especially if the input
 		// was sorted.
 		PHPUnit_Framework_Assert::assertEquals( $missing, $extra, $message );
+	}
+
+	/**
+	 * @param string $dataSetName
+	 * @param string|string[] $actual
+	 * @param string $message
+	 */
+	public function assertNTriplesEqualsDataset( $dataSetName, $actual, $message = null ) {
+		if ( !is_string( $dataSetName ) ) {
+			throw new InvalidArgumentException( '$dataSetName must be a string' );
+		}
+
+		if ( !$this->testData ) {
+			throw new LogicException( 'No RdfBuilderTestData provided to constructor' );
+		}
+
+		if ( !$this->testData->hasDataSet( $dataSetName ) ) {
+			$this->testData->putTestData( $dataSetName, $actual, '.actual' );
+
+			PHPUnit_Framework_Assert::fail(
+				"Data set $dataSetName not found!"
+			    . " Created file with the current data with the suffix .actual"
+			);
+		}
+
+		if ( $message === null ) {
+			$message = "Data set $dataSetName";
+		}
+
+		$expected = $this->testData->getNTriples( $dataSetName );
+
+		try {
+			$this->assertNTriplesEquals( $expected, $actual, $message );
+		} catch ( PHPUnit_Framework_AssertionFailedError $ex ) {
+			if ( $this->forceActual ) {
+				$this->testData->putTestData( $dataSetName, $actual );
+				PHPUnit_Framework_Assert::fail( "Updated data set $dataSetName!\n" );
+			} else {
+				throw $ex;
+			}
+		}
 	}
 
 }
