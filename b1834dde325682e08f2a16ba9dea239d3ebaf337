@@ -70,6 +70,23 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_c6fbb8dd",
+        "filename": "repo/tests/testDispatchCoordinator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-23T12:32:39Z",
+      "side": 1,
+      "message": "Oh, I completely ignored the fact that this is using native PHP assert! That won\u0027t work - for one thing, assert() takes a string, like eval(). And also, it does nothing per default, you have to enable it.",
+      "revId": "b1834dde325682e08f2a16ba9dea239d3ebaf337",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_bf05fa14",
         "filename": "repo/tests/testDispatchCoordinator.php",
         "patchSetId": 5
