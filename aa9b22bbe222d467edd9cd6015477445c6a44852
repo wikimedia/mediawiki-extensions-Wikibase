@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_234daee0",
+        "filename": "repo/includes/ChangeOp/ChangeOpStatement.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-23T10:57:16Z",
+      "side": 1,
+      "message": "Can you rename it to `entityStatements`?\n\nIt took me a while to understand what is happening, although code is really simple.",
+      "range": {
+        "startLine": 111,
+        "startChar": 3,
+        "endLine": 111,
+        "endChar": 17
+      },
+      "revId": "aa9b22bbe222d467edd9cd6015477445c6a44852",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
