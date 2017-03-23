@@ -38,7 +38,12 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->helper = new NTriplesRdfTestHelper();
+		$this->helper = new NTriplesRdfTestHelper(
+			new RdfBuilderTestData(
+				__DIR__ . '/../../data/rdf/entities',
+				__DIR__ . '/../../data/rdf/RdfBuilder'
+			)
+		);
 	}
 
 	/**
@@ -47,14 +52,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	 * @return RdfBuilderTestData
 	 */
 	private function getTestData() {
-		if ( $this->testData === null ) {
-			$this->testData = new RdfBuilderTestData(
-				__DIR__ . '/../../data/rdf/entities',
-				__DIR__ . '/../../data/rdf/FullStatementRdfBuilder'
-			);
-		}
-
-		return $this->testData;
+		return $this->helper->getTestData();
 	}
 
 	/**
@@ -114,30 +112,31 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	private function assertOrCreateNTriples( $dataSetName, RdfWriter $writer ) {
 		$actual = $writer->drain();
-		$expected = $this->getTestData()->getNTriples( $dataSetName );
-
-		if ( $expected === null ) {
-			$this->getTestData()->putTestData( $dataSetName, $actual, '.actual' );
-			$this->fail( "Data set $dataSetName not found! Created file with the current data using"
-				. " the suffix .actual" );
-		}
-
-		$this->helper->assertNTriplesEquals( $expected, $actual, "Data set $dataSetName" );
+		$this->helper->assertNTriplesEqualsDataset( $dataSetName, $actual );
 	}
 
 	public function provideAddEntity() {
 		$props = [ 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P8', 'P9', 'P10' ];
 
+		$q4_minimal =       [ 'Q4_meta', 'Q4_statements' ];
+		$q4_all =           [ 'Q4_meta', 'Q4_statements', 'Q4_values' ];
+		$q4_statements =    [ 'Q4_meta', 'Q4_direct', 'Q4_statements' ];
+		$q4_values =        [ 'Q4_meta', 'Q4_statements', 'Q4_values' ];
+		$q6_no_qualifiers = [ 'Q6_meta', 'Q6_statements' ];
+		$q6_qualifiers =    [ 'Q6_meta', 'Q6_statements', 'Q6_qualifiers' ];
+		$q7_no_refs =       [ 'Q7_meta', 'Q7_statements' ];
+		$q7_refs =          [ 'Q7_meta', 'Q7_statements', 'Q7_references' ];
+
 		return array(
-			array( 'Q4', 0, 'Q4_minimal', array() ),
-			array( 'Q4', RdfProducer::PRODUCE_ALL, 'Q4_all', $props ),
-			array( 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS, 'Q4_statements', array() ),
-			array( 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS, 'Q6_no_qualifiers', array() ),
-			array( 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS, 'Q6_with_qualifiers', array() ),
-			array( 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS , 'Q7_no_refs', array() ),
-			array( 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_REFERENCES, 'Q7_refs', array() ),
-			array( 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_PROPERTIES, 'Q4_minimal', $props ),
-			array( 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_FULL_VALUES, 'Q4_values', array() ),
+			array( 'Q4', 0, $q4_minimal, array() ),
+			array( 'Q4', RdfProducer::PRODUCE_ALL, $q4_all, $props ),
+			array( 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS, $q4_statements, array() ),
+			array( 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS, $q6_no_qualifiers, array() ),
+			array( 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS, $q6_qualifiers, array() ),
+			array( 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS , $q7_no_refs, array() ),
+			array( 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_REFERENCES, $q7_refs, array() ),
+			array( 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_PROPERTIES, $q4_minimal, $props ),
+			array( 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_FULL_VALUES, $q4_values, array() ),
 		);
 	}
 
@@ -183,17 +182,17 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideAddStatements() {
 		return array(
-			array( 'Q4', 'Q4_all' ),
+			array( 'Q4', [ 'Q4_statements', 'Q4_values', 2 ] ),
 		);
 	}
 
 	/**
 	 * @dataProvider provideAddStatements
 	 */
-	public function testAddStatements( $entityName, $dataSetName ) {
+	public function testAddStatements( $entityName, $dataSetName, $genidOffset = 1 ) {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
-		$writer = $this->getTestData()->getNTriplesWriter();
+		$writer = $this->getTestData()->getNTriplesWriter( true, $genidOffset );
 		$this->newBuilder( $writer, RdfProducer::PRODUCE_ALL )
 			->addStatements( $entity->getId(), $entity->getStatements() );
 
