@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_17d9cc83",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-23T18:16:57Z",
+      "side": 1,
+      "message": "PLease use $vocabulary-\u003egetEntityLName instead of ucfirst.",
+      "revId": "2d7f3de496f51016c25eb76173f914f713e41ebf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
