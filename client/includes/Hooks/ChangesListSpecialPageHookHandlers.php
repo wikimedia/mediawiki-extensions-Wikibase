@@ -229,8 +229,16 @@ class ChangesListSpecialPageHookHandlers {
 			}
 		] );
 
-		$extensionRegistry = ExtensionRegistry::getInstance();
+		$significanceGroup = $specialPage->getFilterGroup( 'significance' );
+		$hideMinorFilter = $significanceGroup->getFilter( 'hideminor' );
+		$hideMinorFilter->conflictsWith(
+			$wikidataFilter,
+			'rcfilters-hideminor-conflicts-typeofchange-global',
+			'rcfilters-hideminor-conflicts-typeofchange',
+			'rcfilters-typeofchange-conflicts-hideminor'
+		);
 
+		$extensionRegistry = ExtensionRegistry::getInstance();
 		if ( $extensionRegistry->isLoaded( 'ORES' ) ) {
 			$damagingGroup = $specialPage->getFilterGroup( 'damaging' );
 			if ( $damagingGroup ) {
