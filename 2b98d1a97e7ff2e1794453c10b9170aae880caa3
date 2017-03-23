@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_d7fb64dd",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-23T18:12:31Z",
+      "side": 1,
+      "message": "Or just rename SiteLinkRdfBuilder to ItemRdfBuilder?",
+      "parentUuid": "8e46e3ee_672a9291",
+      "revId": "2b98d1a97e7ff2e1794453c10b9170aae880caa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_1fec55b6",
         "filename": "repo/WikibaseRepo.entitytypes.php",
         "patchSetId": 1
