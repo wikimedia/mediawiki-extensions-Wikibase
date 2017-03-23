@@ -26,7 +26,7 @@
 <http://acme.test/statement/TEST-Statement-3-b181ddac61642fe80bbf8e4a8eaa1da425cb0ac9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#Statement> .
 <http://acme.test/statement/TEST-Statement-3-b181ddac61642fe80bbf8e4a8eaa1da425cb0ac9> <http://wikiba.se/ontology-beta#rank> <http://wikiba.se/ontology-beta#NormalRank> .
 <http://acme.test/statement/TEST-Statement-3-b181ddac61642fe80bbf8e4a8eaa1da425cb0ac9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#BestRank> .
-<http://acme.test/statement/TEST-Statement-4-8749fa158a249e1befa6ed077f648c56197a2b2d> <http://acme.test/prop/statement/P4> "Point(67.89 12.345)"^^<http://www.opengis.net/ont/geosparql#wktLiteral> .
+<http://acme.test/statement/TEST-Statement-4-8749fa158a249e1befa6ed077f648c56197a2b2d> <http://acme.test/prop/statement/P4> "Point(67 12)"^^<http://www.opengis.net/ont/geosparql#wktLiteral> .
 <http://acme.test/statement/TEST-Statement-4-8749fa158a249e1befa6ed077f648c56197a2b2d> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#Statement> .
 <http://acme.test/statement/TEST-Statement-4-8749fa158a249e1befa6ed077f648c56197a2b2d> <http://wikiba.se/ontology-beta#rank> <http://wikiba.se/ontology-beta#NormalRank> .
 <http://acme.test/statement/TEST-Statement-4-8749fa158a249e1befa6ed077f648c56197a2b2d> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#BestRank> .
