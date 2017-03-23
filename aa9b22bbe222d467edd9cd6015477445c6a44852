@@ -22,6 +22,30 @@
       "revId": "aa9b22bbe222d467edd9cd6015477445c6a44852",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_03ef5283",
+        "filename": "repo/includes/ChangeOp/ChangeOpStatement.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-23T11:14:12Z",
+      "side": 1,
+      "message": "Good idea. I also was not happy with having $statements and $statementList so close to each other.",
+      "parentUuid": "6e436fe2_234daee0",
+      "range": {
+        "startLine": 111,
+        "startChar": 3,
+        "endLine": 111,
+        "endChar": 17
+      },
+      "revId": "aa9b22bbe222d467edd9cd6015477445c6a44852",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
