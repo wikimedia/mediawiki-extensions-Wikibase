@@ -34,6 +34,24 @@
       "revId": "efb9f8c044fc53b0fbf8cb33441b4ee2eaf9effe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_31689884",
+        "filename": "repo/includes/Diff/EntityDiffVisualizer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-23T18:10:40Z",
+      "side": 1,
+      "message": "For dispatching, you would only need the entity type, not the ID, right? Then why ask for the ID?\n\nAs to making the ID (or the type) part of EntityContentDiff: I don\u0027t see the need for much refactoring. Add a constructor argument. There is only one place in production ocde where EntityContentDiff is instantiated: in EntityContent::getDiff. And EntityContent knows the type and ID.\n\nThere is 13 calls to the constructor in tests, in 5 classes. A bit anyoing, but not horrible. And no actual refactoring needed to introduce the information.",
+      "parentUuid": "8e46e3ee_d561c533",
+      "revId": "efb9f8c044fc53b0fbf8cb33441b4ee2eaf9effe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
