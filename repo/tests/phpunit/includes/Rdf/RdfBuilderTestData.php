@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Rdf;
 
+use InvalidArgumentException;
 use Site;
 use SiteList;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -83,18 +84,48 @@ class RdfBuilderTestData {
 	}
 
 	/**
+	 * @param $dataSetName
+	 * @return string
+	 */
+	private function getDataSetFileName( $dataSetName ) {
+		return $filename = "{$this->dataDir}/$dataSetName.nt";
+	}
+
+	/**
+	 * @param $dataSetName
+	 * @return bool
+	 */
+	public function hasDataSet( $dataSetName ) {
+		$filename = $this->getDataSetFileName( $dataSetName );
+		return file_exists( $filename );
+	}
+
+	/**
 	 * Load serialized ntriples.
 	 *
-	 * @param string $dataSetName
-	 * @return string|null N-Triples, or null if no data file was found with the given name.
+	 * @param string|string[] $dataSetName one or more data set names
+	 * @param string ... more data set names
+	 * @return string N-Triples
 	 */
 	public function getNTriples( $dataSetName ) {
-		$filename = "{$this->dataDir}/$dataSetName.nt";
-		if ( !file_exists( $filename ) ) {
-			return null;
+		$dataSets =  is_array( $dataSetName ) ? $dataSetName : func_get_args();
+		$triples = [];
+
+		foreach ( $dataSets as $dataSetName ) {
+			$filename = $this->getDataSetFileName( $dataSetName );
+
+			if ( !file_exists( $filename ) || !is_readable( $filename ) ) {
+				throw new InvalidArgumentException( 'No such file: ' . $filename );
+			}
+
+			$lines = file( $filename );
+			$lines = array_map( 'trim', $lines );
+			$triples = array_merge( $triples,  $lines );
 		}
 
-		return file_get_contents( $filename );
+		$triples = array_unique( $triples );
+
+		return $triples;
 	}
 
 	/**
@@ -108,17 +139,16 @@ class RdfBuilderTestData {
 	 * @param string[]|string $lines
 	 * @param string $suffix File name suffix
 	 *
-	 * @return bool|int the number of bytes that were written to the file, or
-	 *         false on failure.
+	 * @return string The filename the data was written to, or false if no data was written.
 	 */
 	public function putTestData( $dataSetName, $lines, $suffix = '' ) {
-		$filename = "{$this->dataDir}/$dataSetName.nt$suffix";
-		if ( file_exists( $filename ) ) {
-			return false;
-		}
+		$filename = $this->getDataSetFileName( $dataSetName ) . $suffix;
+
 
 		$data = join( "\n", (array)$lines );
-		return file_put_contents( $filename, $data );
+		file_put_contents( $filename, $data );
+
+		return $filename;
 	}
 
 	/**

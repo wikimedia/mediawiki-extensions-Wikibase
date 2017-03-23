@@ -1,0 +1,5 @@
+<http://acme.test/Q2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#Item> .
+<http://data.acme.test/Q2> <http://schema.org/about> <http://acme.test/Q2> .
+<http://data.acme.test/Q2> <http://schema.org/dateModified> "2013-10-04T03:31:05Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://data.acme.test/Q2> <http://schema.org/version> "42"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://data.acme.test/Q2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Dataset> .
