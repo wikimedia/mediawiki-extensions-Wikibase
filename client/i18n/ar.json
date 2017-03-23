@@ -85,6 +85,7 @@
 	"wikibase-rc-show-wikidata-pref": "إظهار تعديلات {{WBREPONAME}} في صفحة أحدث التغييرات",
 	"wikibase-rc-wikibase-edit-letter": "د",
 	"wikibase-rc-wikibase-edit-title": "تعديل {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-label": "تعديلات {{WBREPONAME}}",
 	"wikibase-replicationnote": "قد يلزم وقت لتظهر التعديلات في جميع الويكيات.",
 	"wikibase-watchlist-show-changes-pref": "إظهار تعديلات {{WBREPONAME}} في قائمة مراقبتك",
 	"wikibase-error-deserialize-error": "فشل إلغاء تسلسل البيانات.",
