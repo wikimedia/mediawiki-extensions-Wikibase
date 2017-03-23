@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_4c2107f6",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-23T17:22:08Z",
+      "side": 1,
+      "message": "What for?",
+      "range": {
+        "startLine": 287,
+        "startChar": 2,
+        "endLine": 287,
+        "endChar": 8
+      },
+      "revId": "9be5db91265bc03bc91d90f183779857e2621a01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
