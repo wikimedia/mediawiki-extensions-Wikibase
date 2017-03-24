@@ -76,6 +76,12 @@
 	"wikibase-rc-show-wikidata-pref": "Pokazuj edycje w Wikidanych w ostatnich zmianach",
 	"wikibase-rc-wikibase-edit-letter": "d",
 	"wikibase-rc-wikibase-edit-title": "Edycja w Wikidanych",
+	"wikibase-rcfilters-hide-wikibase-label": "Edycje w Wikidanych",
+	"wikibase-rcfilters-hide-wikibase-description": "Edycje pochodzące z {{WBREPONAME}}.",
+	"wikibase-rcfilters-hide-wikibase-conflicts-ores": "Ten filtr koliduje z jednym lub kilkoma filtrami Jakości edycji lub Intencji użytkowników. Ocena jakości i edycji nie jest dostępna dla edycji z Wikidanych.",
+	"wikibase-rcfilters-hide-wikibase-conflicts-ores-global": "Filtr \"Edycje w Wikidanych\" koliduje z jednym lub kilkoma filtrami Jakości edycji lub intencji użytkowników. Ocena jakości i intencji nie jest dostępna dla edycji z Wikidanych. Kolidujące filtry zostały odpowiednio oznaczone na pasku Aktywnych filtrów.",
+	"wikibase-rcfilters-damaging-conflicts-hide-wikibase": "Ocena jakości edycji nie działa dla niektórych rodzajów zmian, więc występuje konflikt między tym filtrem, a {{PLURAL:$2|filtrem|filtrami}} rodzaju zmian: $1",
+	"wikibase-rcfilters-goodfaith-conflicts-hide-wikibase": "Ocena zamiarów użytkowników nie działa dla niektórych rodzajów zmian, więc występuje konflikt między tym filtrem, a {{PLURAL:$2|filtrem|filtrami}} rodzaju zmian: $1",
 	"wikibase-replicationnote": "Zwróć uwagę, że może upłynąć kilka minut, zanim zmiany staną się widoczne na wszystkich wiki",
 	"wikibase-watchlist-show-changes-pref": "Pokazuj edycje w Wikidanych na liście obserwowanych",
 	"wikibase-error-deserialize-error": "Nieudana serializacja danych.",
@@ -116,5 +122,6 @@
 	"notification-bundle-header-page-connection": "<strong>$3</strong> i {{PLURAL:$4|jedna inna strona zostały|$4 inne strony zostały|100=99+ innych stron zostało}} {{GENDER:$2|powiązanych}} z elementami Wikidanych.",
 	"notification-link-text-view-item": "{{GENDER:$1|Zobacz}} element",
 	"notification-subject-page-connection": "Strona na {{SITENAME}}, którą {{GENDER:$3|utworzyłeś|utworzyłaś}} została {{GENDER:$2|powiązana}} z elementem Wikidanych",
-	"unresolved-property-category": "Strony z nierozwiązanymi właściwościami"
+	"unresolved-property-category": "Strony z nierozwiązanymi właściwościami",
+	"unresolved-property-category-desc": "Ta kategoria zawiera strony, które odwołują się do właściwości Wikidanych, których nie można było odnaleźć ani po numerze właściwości, ani po etykiecie."
 }

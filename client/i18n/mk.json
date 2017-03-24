@@ -69,6 +69,8 @@
 	"wikibase-rc-show-wikidata-pref": "Прикажувај ги уредувањата на {{WBREPONAME}} во скорешните промени",
 	"wikibase-rc-wikibase-edit-letter": "ВП",
 	"wikibase-rc-wikibase-edit-title": "Уредување на {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-label": "Уредувања на {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-description": "Уредувања што потекнуваат од {{WBREPONAME}}.",
 	"wikibase-replicationnote": "Имајте предвид дека се потребни неколку минути за промените да станат видливи на сите викија",
 	"wikibase-watchlist-show-changes-pref": "Прикажи уредувања на {{WBREPONAME}} во набљудуваните",
 	"wikibase-error-deserialize-error": "Не успеав да ги децентрализирам податоците",

@@ -56,6 +56,7 @@
 	"wikibase-rc-show-wikidata-pref": "{{WBREPONAME}}-এর সম্পাদনাগুলো সাম্প্রতিক পরিবর্তনে দেখানো হোক",
 	"wikibase-rc-wikibase-edit-letter": "উ",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} সম্পাদনা",
+	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} সম্পাদনা",
 	"wikibase-replicationnote": "দয়া করে লক্ষ্য করুন যে এই পরিবর্তনগুলি সকল উইকিতে দৃশ্যমান হতে কয়েক মিনিট পর্যন্ত সময় লাগতে পারে।",
 	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}ের সম্পাদনাগুলো নজরতালিকায় দেখাও",
 	"wikibase-error-invalid-entity-id": "প্রবেশ করানো আইডিটি সিস্টেমের অজানা। দয়া করে একটি বৈধ ভুক্তি আইডি ব্যবহার করুন।",

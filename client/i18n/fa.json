@@ -16,7 +16,8 @@
 			"Mjbmr",
 			"Huji",
 			"Dejavu",
-			"Mahdy Saffar"
+			"Mahdy Saffar",
+			"4nn1l2"
 		]
 	},
 	"wikibase-client-desc": "کارخواه برای افزونهٔ ویکی‌بیس",
@@ -82,8 +83,8 @@
 	"unconnectedpages": "صفحات متصل نشده به آیتم‌ها",
 	"wikibase-unconnectedpages-format-row": "($1  {{PLURAL:$1|پیوند میان‌ویکی|پیوند میان‌ویکی}} در صفحه)",
 	"wikibase-unconnectedpages-submit": "نمایش صفحات",
-	"pageswithbadges": "صفحات با درجه‌هایشان",
-	"pageswithbadges-summary": "در این صفحه مقالاتی دارای درجه‌بندی مانند مقالات خوب، مقالات برگزیده فهرست شده‌است. این صفحه بر پایهٔ شمارهٔ آیتم ویکی داده مرتب شده‌است در نتیجه آیتم‌هایی که جدیداً ساخته شده‌اند بالاتر قرار دارند.",
+	"pageswithbadges": "صفحه‌های درجه‌دار",
+	"pageswithbadges-summary": "در این صفحه می‌توان صفحات درجه‌دار (مانند مقاله‌های خوب یا برگزیده) را فهرست کرد. فهرست بر پایهٔ شناسهٔ رقمی صفحات مرتب می‌شود، در نتیجه صفحاتی که جدیدتر ایجاد شده‌اند بالاتر قرار می‌گیرند.",
 	"wikibase-pageswithbadges-invalid-id": "\"$1\" یک شناسهٔ آیتم معتبر نیست.",
 	"wikibase-pageswithbadges-legend": "فهرست صفحات با درجه‌های داده شده",
 	"wikibase-pageswithbadges-badge": "نشان:",
