@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_55d747f2",
+        "filename": "repo/tests/phpunit/data/rdf/PropertyRdfBuilder/P2_stubs.nt",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-24T17:31:33Z",
+      "side": 1,
+      "message": "Same as P2_all. Is this intended \u0026 correct? If so, please just use the same file for both tests. Redundant RDF test data is proving a major annoyance.",
+      "revId": "b356abbd7fa351a85bb5ad50ce9578b58a269f84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_f5fe9365",
+        "filename": "repo/tests/phpunit/data/rdf/entities/P2.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-24T17:31:33Z",
+      "side": 1,
+      "message": "You can add claims, so the difference between P2_all and P2_stubs is visible.\n\nOn the other hand, output of claims is not (yet?) managed by the PropertyRdfBuilder, so they perhaps are not needed in this test. Up to you.",
+      "revId": "b356abbd7fa351a85bb5ad50ce9578b58a269f84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
