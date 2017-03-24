@@ -187,6 +187,168 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 		$this->assertValidation( $expected, $validators, $value );
 	}
 
+	public function provideGlobeCoordinateValueValidation() {
+		$wikidataUri = 'http://www.wikidata.org/entity/';
+
+		return [
+			'Integer precision is valid' => [ 1, $wikidataUri . 'Q2', true ],
+			'Float precision is valid' => [ 0.2, $wikidataUri . 'Q2', true ],
+			'Null precision is invalid' => [ null, $wikidataUri . 'Q2', false ],
+
+			// FIXME: This is testing unimplemented behaviour? Probably broken...
+			'Globe should not be empty' => [ 1, '', false ],
+			'Globe too long' => [ 1, $wikidataUri . 'Q' . str_repeat( '6', 224 ), false ],
+			'Valid globe' => [ 1, $wikidataUri . 'Q2', true ],
+			'Untrimmed globe' => [ 1, ' ' . $wikidataUri . 'Q2 ', false ],
+			'Bad URL scheme' => [ 1, ' javascript:alert(1) ', false ],
+
+			// TODO: Globe must be an item reference
+			// TODO: Globe must be from a list of configured values
+		];
+	}
+
+	/**
+	 * @dataProvider provideGlobeCoordinateValueValidation
+	 */
+	public function testGlobeCoordinateValueValidation( $precision, $globe, $expected ) {
+		$value = new GlobeCoordinateValue( new LatLongValue( 0, 0 ), $precision, $globe );
+		$validators = $this->newValidatorBuilders()->buildCoordinateValidators();
+
+		$this->assertValidation( $expected, $validators, $value );
+	}
+
+	public function provideStringValueValidation() {
+		return [
+			'Space' => [ 'x x', true ],
+			'Unicode support' => [ 'Äöü', true ],
+			'T161263' => [ 'Ӆ', true ],
+
+			// Length checks
+			'To short' => [ '', false ],
+			'Minimum length' => [ 'x', true ],
+			'Maximum length' => [ str_repeat( 'x', 400 ), true ],
+			'Too long' => [ str_repeat( 'x', 401 ), false ],
+
+			// Enforced trimming
+			'Leading space' => [ ' x', false ],
+			'Leading newline' => [ "\nx", false ],
+			'Trailing space' => [ 'x ', false ],
+			'Trailing newline' => [ "x\n", false ],
+
+			// Disallowed whitespace characters
+			'U+0009: Tabulator' => [ "x\tx", false ],
+			'U+000A: Newline' => [ "x\nx", false ],
+			'U+000B: Vertical tab' => [ "x\x0Bx", false ],
+			'U+000C: Form feed' => [ "x\fx", false ],
+			'U+000D: Return' => [ "x\rx", false ],
+			'U+0085: Next line' => [ "x\xC2\x85x", false ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideStringValueValidation
+	 */
+	public function testStringValueValidation( $string, $expected ) {
+		$value = new StringValue( $string );
+		$validators = $this->newValidatorBuilders()->buildStringValidators();
+
+		$this->assertValidation( $expected, $validators, $value );
+	}
+
+	public function provideTimeValueValidation() {
+		$wikidataUri = 'http://www.wikidata.org/entity/';
+
+		return [
+			'Calendar model is not a URL' => [
+				'+2013-06-06T00:00:00Z',
+				TimeValue::PRECISION_DAY,
+				'1',
+				false
+			],
+			'Calendar model too long' => [
+				'+2013-06-06T00:00:00Z',
+				TimeValue::PRECISION_DAY,
+				$wikidataUri . 'Q' . str_repeat( '6', 224 ),
+				false
+			],
+			'Valid calendar model' => [
+				'+2013-06-06T00:00:00Z',
+				TimeValue::PRECISION_DAY,
+				$wikidataUri . 'Q1985727',
+				true
+			],
+			'Untrimmed calendar model' => [
+				'+2013-06-06T00:00:00Z',
+				TimeValue::PRECISION_DAY,
+				' ' . $wikidataUri . 'Q1985727 ',
+				false
+			],
+			'Bad URL scheme' => [
+				'+2013-06-06T00:00:00Z',
+				TimeValue::PRECISION_DAY,
+				' javascript:alert(1)',
+				false
+			],
+
+			'Values more precise than a day are currently not allowed' => [
+				'+2013-06-06T11:22:33Z',
+				TimeValue::PRECISION_DAY,
+				$wikidataUri . 'Q1985727',
+				false
+			],
+			'Precisions more fine-grained than a day are currently not allowed' => [
+				'+2013-06-06T00:00:00Z',
+				TimeValue::PRECISION_SECOND,
+				$wikidataUri . 'Q1985727',
+				false
+			],
+
+			// TODO: Calendar must be an item reference
+			// TODO: Calendar must be from a list of configured values
+		];
+	}
+
+	/**
+	 * @dataProvider provideTimeValueValidation
+	 */
+	public function testTimeValueValidation( $timestamp, $precision, $calendarModel, $expected ) {
+		$value = new TimeValue( $timestamp, 0, 0, 0, $precision, $calendarModel );
+		$validators = $this->newValidatorBuilders()->buildTimeValidators();
+
+		$this->assertValidation( $expected, $validators, $value );
+	}
+
+	public function provideUrlValidation() {
+		return [
+			'Simple HTTP URL' => [ 'http://acme.com', true ],
+			'Simple HTTPS URL' => [ 'https://acme.com', true ],
+			'Simple FTP URL' => [ 'ftp://acme.com', true ],
+			'Complex HTTP URL' => [ 'http://acme.com/foo/bar?some=stuff#fragment', true ],
+
+			// Evil URLs
+			'Protocol-relative' => [ '//bla', false ],
+			'Relative path' => [ '/bla/bla', false ],
+			'Just words' => [ 'just stuff', false ],
+			'JavaScript' => [ 'javascript:alert("evil")', false ],
+			'Bad HTTP URL' => [ 'http://', false ],
+			'Too long' => [ 'http://' . str_repeat( 'x', 494 ), false ],
+
+			'Leading space' => [ ' http://acme.com', false ],
+			'Trailing space' => [ 'http://acme.com ', false ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideUrlValidation
+	 */
+	public function testUrlValidation( $string, $expected ) {
+		$value = new StringValue( $string );
+		$validators = $this->newValidatorBuilders()->buildUrlValidators();
+
+		$this->assertValidation( $expected, $validators, $value );
+	}
+
+>>>>>>> bd57dce... Change bad ASCII to UTF-8 validation in terms/value validators
 	public function provideDataTypeValidation() {
 		$latLonValue = new LatLongValue( 0, 0 );
 		$wikidataUri = 'http://www.wikidata.org/entity/';
