@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_b5556b54",
+        "filename": "repo/includes/Api/SearchEntities.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-24T17:42:53Z",
+      "side": 1,
+      "message": "Potentially needs urlescape",
+      "revId": "dec72ca381df6fa382cdbb400522a4e5f876c81b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_95586f8e",
+        "filename": "repo/includes/Api/SearchEntities.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-24T17:42:53Z",
+      "side": 1,
+      "message": "LogicException means we die with status 500. Do we really want to fail this hard? I\u0027m not saying we shouldn\u0027t. I\u0027m just wondering.\n\nAlso, long line.",
+      "revId": "dec72ca381df6fa382cdbb400522a4e5f876c81b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
