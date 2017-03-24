@@ -4,6 +4,8 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
+use LogicException;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\ContentLanguages;
@@ -43,9 +45,9 @@ class SearchEntities extends ApiBase {
 	private $entityTypes;
 
 	/**
-	 * @var string
+	 * @var string[]
 	 */
-	private $conceptBaseUri;
+	private $conceptBaseUris;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -55,7 +57,7 @@ class SearchEntities extends ApiBase {
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param ContentLanguages $termLanguages
 	 * @param string[] $entityTypes
-	 * @param string $conceptBaseUri
+	 * @param string[] $conceptBaseUris Associative array mapping repository names to base URIs of concept URIs
 	 *
 	 * @see ApiBase::__construct
 	 */
@@ -67,7 +69,7 @@ class SearchEntities extends ApiBase {
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		ContentLanguages $termLanguages,
 		array $entityTypes,
-		$conceptBaseUri
+		array $conceptBaseUris
 	) {
 		parent::__construct( $mainModule, $moduleName, '' );
 
@@ -76,7 +78,7 @@ class SearchEntities extends ApiBase {
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->termsLanguages = $termLanguages;
 		$this->entityTypes = $entityTypes;
-		$this->conceptBaseUri = $conceptBaseUri;
+		$this->conceptBaseUris = $conceptBaseUris;
 	}
 
 	/**
@@ -120,7 +122,7 @@ class SearchEntities extends ApiBase {
 		$entry = array(
 			'repository' => $entityId->getRepositoryName(),
 			'id' => $entityId->getSerialization(),
-			'concepturi' => $this->conceptBaseUri . $entityId->getSerialization(),
+			'concepturi' => $this->getConceptUri( $entityId ),
 			'url' => $title->getFullURL(),
 			'title' => $title->getPrefixedText(),
 			'pageid' => $title->getArticleID()
@@ -166,6 +168,31 @@ class SearchEntities extends ApiBase {
 		}
 
 		return $entry;
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 *
+	 * @return string
+	 */
+	private function getConceptUri( EntityId $entityId ) {
+		$baseUri = $this->getConceptBaseUri( $entityId );
+		return $baseUri . $entityId->getLocalPart();
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 *
+	 * @throws LogicException when there is no base URI for the repository $entityId belongs to
+	 *
+	 * @return string
+	 */
+	private function getConceptBaseUri( EntityId $entityId ) {
+		if ( !isset( $this->conceptBaseUris[$entityId->getRepositoryName()] ) ) {
+			throw new LogicException( 'No base URI for for concept URI for repository: ' . $entityId->getRepositoryName() );
+		}
+
+		return $this->conceptBaseUris[$entityId->getRepositoryName()];
 	}
 
 	/**
