@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_7aa0309b",
+        "filename": "repo/includes/Diff/EntityDiffVisualizer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-24T15:36:15Z",
+      "side": 1,
+      "message": "I have a hard time understanding this working. Maybe the class level documentation can say something like \"Interface for implementations capable of rendering the EntityContentDiff of a specific entity type into HTML. Used for dependency inversion in ….entitytypes.php wiring files.\"",
+      "range": {
+        "startLine": 9,
+        "startChar": 17,
+        "endLine": 9,
+        "endChar": 44
+      },
+      "revId": "ccdeb89101cf808fb27bb2680c615f29a1731c8f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_fab3e0fb",
+        "filename": "repo/includes/Diff/EntityDiffVisualizer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-24T15:36:15Z",
+      "side": 1,
+      "message": "To what does this comment refer to?",
+      "range": {
+        "startLine": 18,
+        "startChar": 4,
+        "endLine": 18,
+        "endChar": 91
+      },
+      "revId": "ccdeb89101cf808fb27bb2680c615f29a1731c8f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
