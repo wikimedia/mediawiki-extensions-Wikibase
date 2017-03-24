@@ -111,6 +111,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 		return [
 			'Space' => [ 'x x', true ],
 			'Unicode support' => [ 'Äöü', true ],
+			'T161263' => [ 'Ӆ', true ],
 
 			// Length checks
 			'To short' => [ '', false ],
@@ -130,7 +131,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 			'U+000B: Vertical tab' => [ "x\x0Bx", false ],
 			'U+000C: Form feed' => [ "x\fx", false ],
 			'U+000D: Return' => [ "x\rx", false ],
-			'U+0085: Next line' => [ "x\x85x", false ],
+			'U+0085: Next line' => [ "x\xC2\x85x", false ],
 		];
 	}
 
