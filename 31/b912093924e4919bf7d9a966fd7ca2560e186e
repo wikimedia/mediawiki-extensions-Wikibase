@@ -1,0 +1,8 @@
+Code-Review+1: VolkerE <volker.e@wikimedia.org>
+Code-Review+2: Thiemo Mättig (WMDE) <thiemo.maettig@wikimedia.de>
+Verified+2: jenkins-bot
+Submitted-by: jenkins-bot
+Submitted-at: Fri, 24 Mar 2017 15:46:45 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/343760
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
