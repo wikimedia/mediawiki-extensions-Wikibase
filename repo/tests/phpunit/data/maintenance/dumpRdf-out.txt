@@ -114,7 +114,7 @@ _:genid2 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://www.w3.org/2002/
 <fooUri/statement/GUID2> <fooUri/prop/statement/P12> _:genid8 .
 <fooUri/statement/GUID2> <fooUri/prop/qualifier/P12> _:genid9 .
 <fooUri/statement/GUID2> <fooUri/prop/qualifier/P12> "stringVal" .
-<fooUri/statement/GUID2> <http://www.w3.org/ns/prov#wasDerivedFrom> <fooUri/reference/2d8eac3c95db6407b057e9883971cbdb562d6473> .
+<fooUri/statement/GUID2> <http://www.w3.org/ns/prov#wasDerivedFrom> <fooUri/reference/b5b571fa1958348766229bd0987a370771e91ec0> .
 <https://en.wikipedia.org/wiki/Berlin> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Article> .
 <https://en.wikipedia.org/wiki/Berlin> <http://schema.org/about> <fooUri/Q2> .
 <https://en.wikipedia.org/wiki/Berlin> <http://schema.org/inLanguage> "en" .
@@ -128,9 +128,9 @@ _:genid2 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://www.w3.org/2002/
 <https://de.wikipedia.org/wiki/England> <http://schema.org/name> "England"@de .
 <https://de.wikipedia.org/wiki/England> <http://wikiba.se/ontology-beta#badge> <fooUri/Q1> .
 <https://de.wikipedia.org/> <http://wikiba.se/ontology-beta#wikiGroup> "wikipedia" .
-<fooUri/reference/2d8eac3c95db6407b057e9883971cbdb562d6473> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#Reference> .
-<fooUri/reference/2d8eac3c95db6407b057e9883971cbdb562d6473> <fooUri/prop/reference/P12> "refSnakVal" .
-<fooUri/reference/2d8eac3c95db6407b057e9883971cbdb562d6473> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <fooUri/prop/novalue/P12> .
+<fooUri/reference/b5b571fa1958348766229bd0987a370771e91ec0> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#Reference> .
+<fooUri/reference/b5b571fa1958348766229bd0987a370771e91ec0> <fooUri/prop/reference/P12> "refSnakVal" .
+<fooUri/reference/b5b571fa1958348766229bd0987a370771e91ec0> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <fooUri/prop/novalue/P12> .
 <acme/EntityData/Q4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Dataset> .
 <acme/EntityData/Q4> <http://schema.org/about> <fooUri/Q4> .
 <acme/EntityData/Q4> <http://schema.org/version> "4"^^<http://www.w3.org/2001/XMLSchema#integer> .

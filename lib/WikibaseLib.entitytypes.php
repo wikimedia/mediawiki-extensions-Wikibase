@@ -16,7 +16,6 @@
  */
 
 use Wikibase\DataModel\DeserializerFactory;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
@@ -38,11 +37,7 @@ return array(
 			return new ItemId( $serialization );
 		},
 		'entity-id-composer-callback' => function( $repositoryName, $uniquePart ) {
-			return new ItemId( EntityId::joinSerialization( [
-				$repositoryName,
-				'',
-				'Q' . $uniquePart
-			] ) );
+			return ItemId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
 		},
 		'entity-differ-strategy-builder' => function() {
 			return new ItemDiffer();
@@ -63,11 +58,7 @@ return array(
 			return new PropertyId( $serialization );
 		},
 		'entity-id-composer-callback' => function( $repositoryName, $uniquePart ) {
-			return new PropertyId( EntityId::joinSerialization( [
-				$repositoryName,
-				'',
-				'P' . $uniquePart
-			] ) );
+			return PropertyId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
 		},
 		'entity-differ-strategy-builder' => function() {
 			return new PropertyDiffer();
