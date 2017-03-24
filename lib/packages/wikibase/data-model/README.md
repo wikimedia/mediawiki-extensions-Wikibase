@@ -66,11 +66,9 @@ run style checks use `composer cs`.
 ### Development
 
 Wikibase DataModel has been written by [Jeroen De Dauw](https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw)
-and Thiemo Mättig as [Wikimedia Germany](https://wikimedia.de) employees for the [Wikidata project]
-(https://wikidata.org/).
+and Thiemo Mättig as [Wikimedia Germany](https://wikimedia.de) employees for the [Wikidata project](https://wikidata.org/).
 
-Contributions were also made by [several other people]
-(https://www.ohloh.net/p/wikibasedatamodel/contributors?sort=commits).
+Contributions were also made by [several other people](https://www.ohloh.net/p/wikibasedatamodel/contributors?sort=commits).
 
 ### Concept
 
