@@ -157,7 +157,7 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 		} )
 		.on( 'keydown.' + this.widgetName, function( event ) {
 			if ( event.keyCode === $.ui.keyCode.BACKSPACE ) {
-				var $sitelinkview = $( event.target ).parentsUntil( this ).andSelf().filter( '.listview-item' ),
+				var $sitelinkview = $( event.target ).parentsUntil( this ).addBack().filter( '.listview-item' ),
 					sitelinkview = listItemAdapter.liInstance( $sitelinkview );
 
 				if ( sitelinkview ) {
