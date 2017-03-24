@@ -83,6 +83,7 @@ Daniel Kinzler and Jeroen De Dauw.
 * [Wikibase DataModel on Ohloh](https://www.ohloh.net/p/wikibasedatamodel/)
 * [Wikibase DataModel on TravisCI](https://travis-ci.org/wmde/WikibaseDataModel)
 * [Wikibase DataModel on ScrutinizerCI](https://scrutinizer-ci.com/g/wmde/WikibaseDataModel)
+* [Wikibase DataModel on Wikimedia's Phabricator](https://phabricator.wikimedia.org/project/view/920/)
  
 ## See also
 
@@ -90,7 +91,3 @@ Daniel Kinzler and Jeroen De Dauw.
 * [Wikibase DataModel Services](https://github.com/wmde/WikibaseDataModelServices)
 * [Wikibase DataModel Serialization](https://github.com/wmde/WikibaseDataModelSerialization)
 * [Wikibase Internal Serialization](https://github.com/wmde/WikibaseInternalSerialization)
-
-# Bugs on Phabricator
-
-https://phabricator.wikimedia.org/project/view/920/
