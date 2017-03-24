@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_b5c32b3d",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-24T17:23:57Z",
+      "side": 1,
+      "message": "Maybe instead of renaming SiteLinksRdfBuilder, it would be enough to add a comment here. Something like:\n\n\"Since the only extra mapping needed for Items are site links, we just return the SiteLinksRdfBuilder directly, instead of defining an ItemRdfBuilder\".",
+      "revId": "9f2600351ccd7894d84a01aa83f9f8e4a51a0c7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_f58a131c",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-24T17:23:57Z",
+      "side": 1,
+      "message": "Should probably say SiteLookup.",
+      "revId": "9f2600351ccd7894d84a01aa83f9f8e4a51a0c7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_7577e335",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-24T17:23:57Z",
+      "side": 1,
+      "message": "This parameter will go away in the future, since it\u0027s no longer needed. But for now, it should get our fake sites, for consistency. If you had the result of $this-\u003egetSiteLookup() in a variable valled $siteLookup, you could use $siteLookup-\u003egetSites() here.",
+      "revId": "9f2600351ccd7894d84a01aa83f9f8e4a51a0c7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_f599b372",
+        "filename": "repo/tests/phpunit/includes/Rdf/RdfBuilderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-24T17:23:57Z",
+      "side": 1,
+      "message": "See my comment in RdfDumpGeneratorTest",
+      "revId": "9f2600351ccd7894d84a01aa83f9f8e4a51a0c7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_959f0f55",
+        "filename": "repo/tests/phpunit/includes/Rdf/RdfBuilderTestData.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-24T17:23:57Z",
+      "side": 1,
+      "message": "SiteLookup is the relevant interface here.",
+      "revId": "9f2600351ccd7894d84a01aa83f9f8e4a51a0c7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
