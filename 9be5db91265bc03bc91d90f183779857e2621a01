@@ -22,6 +22,30 @@
       "revId": "9be5db91265bc03bc91d90f183779857e2621a01",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_9ccf3c82",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-24T09:05:23Z",
+      "side": 1,
+      "message": "Because it\u0027s not actually a variable. \"final const\" would be more correct, but does not exist in PHP.",
+      "parentUuid": "6e436fe2_4c2107f6",
+      "range": {
+        "startLine": 287,
+        "startChar": 2,
+        "endLine": 287,
+        "endChar": 8
+      },
+      "revId": "9be5db91265bc03bc91d90f183779857e2621a01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
