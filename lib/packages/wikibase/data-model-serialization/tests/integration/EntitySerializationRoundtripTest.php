@@ -6,7 +6,6 @@ use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -16,56 +15,79 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 /**
  * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
+ * @author Thiemo Mättig
  */
 class EntitySerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 
-	/**
-	 * @dataProvider entityProvider
-	 */
-	public function testEntitySerializationRoundtrips( EntityDocument $entity ) {
-		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
-		$deserializerFactory = new DeserializerFactory(
-			new DataValueDeserializer(),
-			new BasicEntityIdParser()
-		);
+	public function itemProvider() {
+		$empty = new Item( new ItemId( 'Q42' ) );
 
-		$serialization = $serializerFactory->newEntitySerializer()->serialize( $entity );
-		$newEntity = $deserializerFactory->newEntityDeserializer()->deserialize( $serialization );
-		$this->assertTrue( $entity->equals( $newEntity ) );
+		$withLabels = new Item();
+		$withLabels->setLabel( 'en', 'Nyan Cat' );
+		$withLabels->setLabel( 'fr', 'Nyan Cat' );
+
+		$withDescriptions = new Item();
+		$withDescriptions->setDescription( 'en', 'Nyan Cat' );
+		$withDescriptions->setDescription( 'fr', 'Nyan Cat' );
+
+		$withAliases = new Item();
+		$withAliases->setAliases( 'en', [ 'Cat', 'My cat' ] );
+		$withAliases->setAliases( 'fr', [ 'Cat' ] );
+
+		$withStatements = new Item();
+		$withStatements->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ), null, null, 'guid' );
+
+		$withSiteLinks = new Item();
+		$withSiteLinks->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Nyan Cat' );
+
+		return [
+			[ $empty ],
+			[ $withLabels ],
+			[ $withDescriptions ],
+			[ $withAliases ],
+			[ $withStatements ],
+			[ $withSiteLinks ],
+		];
 	}
 
-	public function entityProvider() {
-		$entities = [];
+	/**
+	 * @dataProvider itemProvider
+	 */
+	public function testItemSerializationRoundtrips( Item $item ) {
+		$serializer = $this->newSerializerFactory()->newItemSerializer();
+		$deserializer = $this->newDeserializerFactory()->newItemDeserializer();
 
-		$entity = new Item( new ItemId( 'Q42' ) );
-		$entities[] = [ $entity ];
+		$serialization = $serializer->serialize( $item );
+		$newEntity = $deserializer->deserialize( $serialization );
 
-		$entity = new Item();
-		$entity->setLabel( 'en', 'Nyan Cat' );
-		$entity->setLabel( 'fr', 'Nyan Cat' );
-		$entities[] = [ $entity ];
+		$this->assertTrue( $item->equals( $newEntity ) );
+	}
 
-		$entity = new Item();
-		$entity->setDescription( 'en', 'Nyan Cat' );
-		$entity->setDescription( 'fr', 'Nyan Cat' );
-		$entities[] = [ $entity ];
+	public function propertyProvider() {
+		return [
+			[ Property::newFromType( 'string' ) ],
+		];
+	}
 
-		$entity = new Item();
-		$entity->setAliases( 'en', [ 'Cat', 'My cat' ] );
-		$entity->setAliases( 'fr', [ 'Cat' ] );
-		$entities[] = [ $entity ];
+	/**
+	 * @dataProvider propertyProvider
+	 */
+	public function testPropertySerializationRoundtrips( Property $property ) {
+		$serializer = $this->newSerializerFactory()->newPropertySerializer();
+		$deserializer = $this->newDeserializerFactory()->newPropertyDeserializer();
 
-		$entity = new Item();
-		$entity->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ), null, null, 'guid' );
-		$entities[] = [ $entity ];
+		$serialization = $serializer->serialize( $property );
+		$newEntity = $deserializer->deserialize( $serialization );
 
-		$item = new Item();
-		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Nyan Cat' );
-		$entities[] = [ $item ];
+		$this->assertTrue( $property->equals( $newEntity ) );
+	}
 
-		$entities[] = [ Property::newFromType( 'string' ) ];
+	private function newSerializerFactory() {
+		return new SerializerFactory( new DataValueSerializer() );
+	}
 
-		return $entities;
+	private function newDeserializerFactory() {
+		return new DeserializerFactory( new DataValueDeserializer(), new BasicEntityIdParser() );
 	}
 
 }
