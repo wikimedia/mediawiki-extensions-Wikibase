@@ -247,11 +247,7 @@
 					$.cookie( cookieKey, copyRightVersion, { expires: 365 * 3, path: '/' } );
 				} else {
 					var api = new mw.Api();
-					api.postWithToken( 'csrf', {
-						action: 'options',
-						optionname: optionsKey,
-						optionvalue: copyRightVersion
-					} );
+					api.saveOption( optionsKey, copyRightVersion );
 				}
 			} );
 			return;
@@ -285,11 +281,7 @@
 				$.cookie( cookieKey, copyRightVersion, { expires: 365 * 3, path: '/' } );
 			} else {
 				var api = new mw.Api();
-				api.postWithToken( 'csrf', {
-					action: 'options',
-					optionname: optionsKey,
-					optionvalue: copyRightVersion
-				} );
+				api.saveOption( optionsKey, copyRightVersion );
 			}
 		} );
 

@@ -226,11 +226,10 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 						{ expires: 365, path: '/' }
 					);
 				} else {
-					api.postWithToken( 'csrf', {
-						action: 'options',
-						optionname: 'wikibase-entitytermsview-showEntitytermslistview',
-						optionvalue: params.visible ? '1' : '0'
-					} )
+					api.saveOption(
+						'wikibase-entitytermsview-showEntitytermslistview',
+						params.visible ? '1' : '0'
+					)
 					.done( function() {
 						mw.user.options.set(
 							'wikibase-entitytermsview-showEntitytermslistview',
