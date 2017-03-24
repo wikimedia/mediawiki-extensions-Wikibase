@@ -48,10 +48,10 @@
 	margin: 0.2em 12px 0.2em 0;
 	display: inline;
 	list-style-type: none;
-	border: 1px solid #CCC;
+	border: 1px solid #c8ccd1;
 	padding: 0 12px 0 7px;
 	line-height: 136%;
-	background-color: #F8F8F8;
+	background-color: #f8f9fa;
 }
 
 .wikibase-aliasesview ul.tagadata li {
