@@ -10,7 +10,9 @@
 [![Latest Stable Version](https://poser.pugx.org/wikibase/data-model-serialization/version.png)](https://packagist.org/packages/wikibase/data-model-serialization)
 [![Latest Unstable Version](https://poser.pugx.org/wikibase/data-model-serialization/v/unstable.svg)](//packagist.org/packages/wikibase/data-model-serialization)
 
-Library containing serializers and deserializers for the [Wikibase DataModel](https://github.com/wmde/WikibaseDataModel).
+Library containing serializers and deserializers for the basic
+[Wikibase DataModel](https://github.com/wmde/WikibaseDataModel) entity types and components they are
+made of.
 The supported formats are limited to public ones, ie those used by a web API.
 Serialization code for private formats, such as the format used by the Wikibase
 Repo data access layer, belongs in other components.
@@ -44,19 +46,19 @@ Then take care of autoloading the classes defined in the src directory.
 
 ## Library usage
 
-Construct an instance of the deserializer or serializer you need via the appropriate factory.
+Construct an instance of the specific deserializer or serializer you need via the appropriate factory.
 
 ```php
 use Wikibase\DataModel\DeserializerFactory;
 
 $deserializerFactory = new DeserializerFactory( /* ... */ );
-$entityDeserializer = $deserializerFactory->newEntityDeserializer();
+$itemDeserializer = $deserializerFactory->newItemDeserializer();
 ```
 
-The use the deserialize or serialize method.
+Then use the `deserialize` or `serialize` method.
 
 ```php
-$entity = $entityDeserializer->deserialize( $myEntitySerialization );
+$item = $itemDeserializer->deserialize( $myItemSerialization );
 ```
 
 In case of deserialization, guarding against failures is good practice.
@@ -64,9 +66,8 @@ So it is typically better to use the slightly more verbose try-catch approach.
 
 ```php
 try {
-	$entity = $entityDeserializer->deserialize( $myEntitySerialization );
-}
-catch ( DeserializationException $ex ) {
+	$item = $itemDeserializer->deserialize( $myItemSerialization );
+} catch ( DeserializationException $ex ) {
 	// Handling of the exception
 }
 ```
@@ -88,7 +89,7 @@ Serializers can be obtained via an instance of `SerializerFactory` and deseriali
 via an instance of `DeserializerFactory`. You are not allowed to construct these serializers and
 deserializers directly yourself or to have any kind of knowledge of them (ie type hinting). These
 objects are internal to this component and might change name or structure at any time. All you
-are allowed to know when calling `$serializerFactory->newEntitySerializer()` is that you get back
+are allowed to know when calling `$serializerFactory->newItemDeserializer()` is that you get back
 an instance of `Serializers\Serializer`.
 
 ## Tests
