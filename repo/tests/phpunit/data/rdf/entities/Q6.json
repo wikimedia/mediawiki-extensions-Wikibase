@@ -63,9 +63,9 @@
                             "datatype": "globecoordinate",
                             "datavalue": {
                                 "value": {
-                                    "latitude": 12.345,
-                                    "longitude": 67.89,
-                                    "precision": 0.1,
+                                    "latitude": 12.125,
+                                    "longitude": 67.25,
+                                    "precision": 0.0625,
                                     "globe": "http:\/\/www.wikidata.org\/entity\/Q2"
                                 },
                                 "type": "globecoordinate"
