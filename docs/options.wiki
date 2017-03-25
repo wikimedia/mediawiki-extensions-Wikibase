@@ -52,6 +52,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;pagePropertiesRdf: Array that maps between page properties and Wikibase predicates for RDF dumps. Maps from database property name to an array that contains a key <code>'name'</code> (RDF property name, which will be prefixed by <code>wikibase:</code>) and an optional key <code>'type'</code>.
 ;unitStorage: Definition for unit conversion storage. Should be in in the format <code>ObjectFactory</code> understands, example: <code>array( 'class' => 'Wikibase\\Lib\\JsonUnitStorage',  'args' => array( 'myUnits.json' ) )</code>.
 ;supportedEntityTypesForEntitiesWithoutTermListings: Array of entity types that are supported on Special:EntitiesWithoutLabel and …Description, typically <code>'item'</code> and <code>'property'</code>. Defaults to <code>null</code>, which enables all numeric entity types.
+;dispatchingLockManager: If you want to use another lock mechanism for dispatching changes to clients instead of database locking (which can occupy too many connections to the master database), set its name in this config. See $wgLockManagers documentation in mediawiki core for more information on configuring a locking mechanism inside core.
 
 == Client Settings ==
 
