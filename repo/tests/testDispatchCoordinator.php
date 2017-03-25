@@ -7,6 +7,7 @@ use LogicException;
 use Maintenance;
 use MediaWiki\MediaWikiServices;
 use MWException;
+use RuntimeException;
 use WANObjectCache;
 use Wikibase\Repo\Store\Sql\LockManagerSqlChangeDispatchCoordinator;
 use Wikibase\Repo\WikibaseRepo;
@@ -147,6 +148,9 @@ class TestDispatchCoordinator extends Maintenance {
 	private function readTestValue( $key ) {
 		$memcKey = wfMemcKey( 'test-dispatch-coordinator-' . $key );
 		$value = $this->cache->get( $memcKey );
+		if ( $value === null ) {
+			throw new RuntimeException( "Caching mechanism doesn't work as expected." );
+		}
 		$this->log( "Got cache key $key: $value" );
 		return is_string( $value ) ? (int)$value : $value;
 	}
