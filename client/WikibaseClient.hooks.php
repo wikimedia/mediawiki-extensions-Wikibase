@@ -8,7 +8,6 @@ use ChangesList;
 use EchoEvent;
 use EditPage;
 use IContextSource;
-use Message;
 use OutputPage;
 use Parser;
 use RecentChange;

@@ -20,7 +20,6 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\EntityContent;
-use Wikibase\ItemContent;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\RepositoryDefinitions;

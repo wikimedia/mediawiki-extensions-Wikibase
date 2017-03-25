@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Content;
 
 use MWException;
-use Title;
 use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -15,9 +14,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\Repo\Content\ItemHandler;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
-use WikiPage;
 
 /**
  * @covers Wikibase\Repo\Content\ItemHandler

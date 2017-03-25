@@ -9,7 +9,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**

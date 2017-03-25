@@ -10,7 +10,6 @@ use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for removing one or more references of the same statement.

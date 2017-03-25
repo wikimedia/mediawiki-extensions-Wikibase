@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 
-use Wikibase\DataModel\Term\Term;
 use Wikibase\Summary;
 
 /**

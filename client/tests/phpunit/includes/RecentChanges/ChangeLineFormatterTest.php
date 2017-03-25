@@ -4,7 +4,6 @@ namespace Wikibase\Client\Tests\RecentChanges;
 
 use ChangesList;
 use DerivativeContext;
-use Hamcrest\Matcher;
 use Language;
 use MediaWikiLangTestCase;
 use RecentChange;
