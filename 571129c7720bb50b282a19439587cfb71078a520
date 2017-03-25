@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_0e58c934",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-25T11:13:52Z",
+      "side": 1,
+      "message": "Is this the property ID string?",
+      "range": {
+        "startLine": 41,
+        "startChar": 18,
+        "endLine": 41,
+        "endChar": 21
+      },
+      "revId": "571129c7720bb50b282a19439587cfb71078a520",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_ce3ae1c0",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-25T11:13:52Z",
+      "side": 1,
+      "message": "Is there a way to avoid hard coding this?",
+      "range": {
+        "startLine": 88,
+        "startChar": 3,
+        "endLine": 88,
+        "endChar": 66
+      },
+      "revId": "571129c7720bb50b282a19439587cfb71078a520",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
