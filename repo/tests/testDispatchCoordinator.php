@@ -7,6 +7,7 @@ use LogicException;
 use Maintenance;
 use MediaWiki\MediaWikiServices;
 use MWException;
+use RuntimeException;
 use WANObjectCache;
 use Wikibase\Repo\Store\Sql\LockManagerSqlChangeDispatchCoordinator;
 use Wikibase\Repo\WikibaseRepo;
@@ -179,6 +180,10 @@ class TestDispatchCoordinator extends Maintenance {
 	}
 
 	private function assertSame( $expected, $actual ) {
+		if ( $actual === null ) {
+			throw new RuntimeException( "Caching mechanism doesn't work as expected." );
+		}
+
 		if ( $expected !== $actual ) {
 			throw new LogicException( "Test failed: $actual is not the same as expected $expected" );
 		}
