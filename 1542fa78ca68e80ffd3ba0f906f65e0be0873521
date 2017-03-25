@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_6e306de6",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-25T11:08:36Z",
+      "side": 1,
+      "message": "MediaWiki",
+      "range": {
+        "startLine": 55,
+        "startChar": 260,
+        "endLine": 55,
+        "endChar": 269
+      },
+      "revId": "1542fa78ca68e80ffd3ba0f906f65e0be0873521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
