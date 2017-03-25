@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_abfe6733",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-25T08:47:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e436fe2_b5c32b3d",
+      "revId": "9f2600351ccd7894d84a01aa83f9f8e4a51a0c7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_f58a131c",
         "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2017-03-24T17:23:57Z",
       "side": 1,
       "message": "Should probably say SiteLookup.",
+      "revId": "9f2600351ccd7894d84a01aa83f9f8e4a51a0c7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_cbfbb343",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-25T08:47:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e436fe2_f58a131c",
       "revId": "9f2600351ccd7894d84a01aa83f9f8e4a51a0c7a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_8bf5ab4e",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-25T08:47:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e436fe2_7577e335",
+      "revId": "9f2600351ccd7894d84a01aa83f9f8e4a51a0c7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_f599b372",
         "filename": "repo/tests/phpunit/includes/Rdf/RdfBuilderTest.php",
         "patchSetId": 5
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_2b91f7fb",
+        "filename": "repo/tests/phpunit/includes/Rdf/RdfBuilderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-25T08:47:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e436fe2_f599b372",
+      "revId": "9f2600351ccd7894d84a01aa83f9f8e4a51a0c7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_959f0f55",
         "filename": "repo/tests/phpunit/includes/Rdf/RdfBuilderTestData.php",
         "patchSetId": 5
@@ -81,6 +153,24 @@
       "writtenOn": "2017-03-24T17:23:57Z",
       "side": 1,
       "message": "SiteLookup is the relevant interface here.",
+      "revId": "9f2600351ccd7894d84a01aa83f9f8e4a51a0c7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_4b96c3f4",
+        "filename": "repo/tests/phpunit/includes/Rdf/RdfBuilderTestData.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-25T08:47:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e436fe2_959f0f55",
       "revId": "9f2600351ccd7894d84a01aa83f9f8e4a51a0c7a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
