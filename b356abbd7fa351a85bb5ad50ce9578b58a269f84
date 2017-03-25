@@ -33,6 +33,24 @@
       "revId": "b356abbd7fa351a85bb5ad50ce9578b58a269f84",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_abd747c3",
+        "filename": "repo/tests/phpunit/data/rdf/entities/P2.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-25T08:14:40Z",
+      "side": 1,
+      "message": "It will be complex to make PropertyRdfBuilder output for claims, specially since it\u0027s not its job and that should be taken care of in RdfBuidler. I don\u0027t think we should do it here.",
+      "parentUuid": "6e436fe2_f5fe9365",
+      "revId": "b356abbd7fa351a85bb5ad50ce9578b58a269f84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
