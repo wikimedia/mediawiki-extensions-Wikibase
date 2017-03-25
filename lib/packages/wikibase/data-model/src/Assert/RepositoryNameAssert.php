@@ -10,7 +10,7 @@ use Wikimedia\Assert\ParameterAssertionException;
  * names in Wikibase.
  *
  * @see docs/foreign-entity-ids.wiki
- * @see Wikimedia\Assert\Assert
+ * @see \Wikimedia\Assert\Assert
  *
  * @since 6.3
  *
