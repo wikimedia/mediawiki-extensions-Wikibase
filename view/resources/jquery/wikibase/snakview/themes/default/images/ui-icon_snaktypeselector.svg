@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="20">
-<rect width="10" height="6" x="0" y="0" fill="#666"/>
-<rect width="9" height="5" x="0.5" y="7.5" fill="none" stroke="#666"/>
-<path d="m0.5,15 0,4.5 9,0 0,-4.5" fill="none" stroke="#666"/>
-<rect width="10" height="6" x="13" y="0" fill="#3d80b3"/>
-<rect width="9" height="5" x="13.5" y="7.5" fill="none" stroke="#3d80b3"/>
-<path d="m13.5,15 0,4.5 9,0 0,-4.5" fill="none" stroke="#3d80b3"/>
-<rect width="10" height="6" x="26" y="0" fill="#2694e8"/>
-<rect width="9" height="5" x="26.5" y="7.5" fill="none" stroke="#2694e8"/>
-<path d="m26.5,15 0,4.5 9,0 0,-4.5" fill="none" stroke="#2694e8"/>
+<rect width="10" height="6" x="0" y="0" fill="#54595d"/>
+<rect width="9" height="5" x="0.5" y="7.5" fill="none" stroke="#54595d"/>
+<path d="m0.5,15 0,4.5 9,0 0,-4.5" fill="none" stroke="#54595d"/>
+<rect width="10" height="6" x="13" y="0" fill="#447ff5"/>
+<rect width="9" height="5" x="13.5" y="7.5" fill="none" stroke="#447ff5"/>
+<path d="m13.5,15 0,4.5 9,0 0,-4.5" fill="none" stroke="#447ff5"/>
+<rect width="10" height="6" x="26" y="0" fill="#36c"/>
+<rect width="9" height="5" x="26.5" y="7.5" fill="none" stroke="#36c"/>
+<path d="m26.5,15 0,4.5 9,0 0,-4.5" fill="none" stroke="#36c"/>
 </svg>

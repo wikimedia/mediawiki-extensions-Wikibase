@@ -6,10 +6,10 @@
 </defs>
 <use fill="#000" x="0" y="0" xlink:href="#a"/>
 <use stroke="#000" x="0" y="0" xlink:href="#b"/>
-<use fill="#9c9c9c" x="27" y="0" xlink:href="#a"/>
-<use stroke="#9c9c9c" x="27" y="0" xlink:href="#b"/>
-<use fill="#3b80b3" x="54" y="0" xlink:href="#a"/>
-<use stroke="#3b80b3" x="54" y="0" xlink:href="#b"/>
-<use fill="#2694e8" x="81" y="0" xlink:href="#a"/>
-<use stroke="#2694e8" x="81" y="0" xlink:href="#b"/>
+<use fill="#54595d" x="27" y="0" xlink:href="#a"/>
+<use stroke="#54595d" x="27" y="0" xlink:href="#b"/>
+<use fill="#447ff5" x="54" y="0" xlink:href="#a"/>
+<use stroke="#447ff5" x="54" y="0" xlink:href="#b"/>
+<use fill="#36c" x="81" y="0" xlink:href="#a"/>
+<use stroke="#36c" x="81" y="0" xlink:href="#b"/>
 </svg>
