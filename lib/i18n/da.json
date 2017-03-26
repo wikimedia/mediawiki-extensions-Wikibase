@@ -73,6 +73,7 @@
 	"wikibase-time-precision-millennium": "$1. årtusind",
 	"wikibase-time-precision-century": "$1. århundrede",
 	"wikibase-time-precision-10annum": "$1. årti",
+	"wikibase-snakformatter-formatting-exception": "Formateringsfejl: $1.",
 	"wikibase-entity-summary-wbsetitem": "Oprettede et nyt emne",
 	"wikibase-entity-summary-wbsetreference": "Angav en reference",
 	"wikibase-entity-summary-wbsetreference-add": "Tilføjede reference til en påstand",

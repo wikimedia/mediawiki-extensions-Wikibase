@@ -121,6 +121,7 @@
 	"wikibase-validator-label-conflict": "속성($3)은 이미 $2 언어 코드와 관련된 \"$1\" 레이블이 있습니다.",
 	"wikibase-validator-label-with-description-conflict": "항목($3)은 이미 같은 설명을 사용하는 $2 언어 코드와 관련된 \"$1\" 레이블이 있습니다.",
 	"wikibase-validator-label-no-entityid": "레이블은 유효한 항목 id가 아니어야 합니다.",
+	"wikibase-validator-no-such-sitelink": "배지 편집을 시도할 때 \"$1\"에 대한 사이트링크를 찾을 수 없었습니다.",
 	"wikibase-validator-page-not-exists": "\"$1\" 문서가 존재하지 않습니다.",
 	"wikibase-validator-not-a-language": "\"$1\"은(는) 알려진 언어 코드가 아닙니다.",
 	"wikibase-item-reference-edit-placeholder": "항목 ID를 입력하십시오 (예: Q10)",
