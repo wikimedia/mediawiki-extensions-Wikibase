@@ -32,15 +32,15 @@ class SnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	 */
 	private $helper;
 
-	/**
-	 * @var RdfBuilderTestData|null
-	 */
-	private $testData = null;
-
 	protected function setUp() {
 		parent::setUp();
 
-		$this->helper = new NTriplesRdfTestHelper();
+		$this->helper = new NTriplesRdfTestHelper(
+			new RdfBuilderTestData(
+				__DIR__ . '/../../data/rdf/entities',
+				__DIR__ . '/../../data/rdf/SnakRdfBuilder'
+			)
+		);
 	}
 
 	/**
@@ -49,14 +49,7 @@ class SnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	 * @return RdfBuilderTestData
 	 */
 	private function getTestData() {
-		if ( $this->testData === null ) {
-			$this->testData = new RdfBuilderTestData(
-				__DIR__ . '/../../data/rdf/entities',
-				__DIR__ . '/../../data/rdf/SnakRdfBuilder'
-			);
-		}
-
-		return $this->testData;
+		return $this->helper->getTestData();
 	}
 
 	/**
