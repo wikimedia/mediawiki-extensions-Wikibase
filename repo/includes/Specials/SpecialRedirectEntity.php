@@ -80,8 +80,8 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 		} catch ( EntityIdParsingException $ex ) {
 			throw new UserInputException(
 				'wikibase-wikibaserepopage-invalid-id',
-				array( $rawId ),
-				'Entity id is not valid'
+				[ $rawId ],
+				"$name \"$rawId\" is not valid"
 			);
 		}
 	}

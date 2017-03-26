@@ -22,7 +22,8 @@ class MessageException extends Exception {
 
 	/**
 	 * @param string $key
-	 * @param array $params
+	 * @param array $params List of parameters, depending on the message. Calling code must make
+	 *  sure these parameters are properly escaped.
 	 * @param string $message
 	 * @param Exception|null $previous
 	 */

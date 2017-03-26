@@ -183,21 +183,21 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 			if ( $entity === null ) {
 				throw new UserInputException(
 					'wikibase-wikibaserepopage-invalid-id',
-					array( $id->getSerialization() ),
-					'Entity id is unknown'
+					[ $id->getSerialization() ],
+					'Entity ID "' . $id->getSerialization() . '" is unknown'
 				);
 			}
 		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			throw new UserInputException(
 				'wikibase-wikibaserepopage-unresolved-redirect',
-				array( $id->getSerialization() ),
-				'Entity id refers to a redirect'
+				[ $id->getSerialization() ],
+				'Entity ID "' . $id->getSerialization() . '"" refers to a redirect'
 			);
 		} catch ( StorageException $ex ) {
-			throw new MessageException(
+			throw new UserInputException(
 				'wikibase-wikibaserepopage-storage-exception',
-				array( $id->getSerialization(), $ex->getMessage() ),
-				'Entity could not be loaded'
+				[ $id->getSerialization(), $ex->getMessage() ],
+				'Entity "' . $id->getSerialization() . '" could not be loaded'
 			);
 		}
 
@@ -257,7 +257,8 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 			->setSubmitName( $submitKey )
 			->setSubmitTextMsg( $submitKey )
 			->setWrapperLegendMsg( 'special-' . strtolower( $this->getName() ) )
-			->setSubmitCallback( function () {// no-op
+			->setSubmitCallback( function () {
+				// no-op
 			} )->show();
 	}
 

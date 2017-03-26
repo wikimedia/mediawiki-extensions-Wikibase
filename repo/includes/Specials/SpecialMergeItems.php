@@ -98,8 +98,8 @@ class SpecialMergeItems extends SpecialWikibasePage {
 			if ( !( $id instanceof ItemId ) ) {
 				throw new UserInputException(
 					'wikibase-itemmerge-not-item',
-					array( $name ),
-					'Id does not refer to an item: ' . $name
+					[],
+					"$name \"$rawId\" does not refer to an Item"
 				);
 			}
 
@@ -107,8 +107,8 @@ class SpecialMergeItems extends SpecialWikibasePage {
 		} catch ( EntityIdParsingException $ex ) {
 			throw new UserInputException(
 				'wikibase-wikibaserepopage-invalid-id',
-				array( $rawId ),
-				'Entity id is not valid'
+				[ $rawId ],
+				"$name \"$rawId\" is not valid"
 			);
 		}
 	}
