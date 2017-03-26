@@ -30,15 +30,17 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	 */
 	private $helper;
 
-	/**
-	 * @var RdfBuilderTestData|null
-	 */
-	private $testData = null;
+	public function __construct( $name = null, array $data = array(), $dataName = '' ) {
+		parent::__construct( $name, $data, $dataName );
 
-	protected function setUp() {
-		parent::setUp();
+		$this->helper = new NTriplesRdfTestHelper(
+			new RdfBuilderTestData(
+				__DIR__ . '/../../data/rdf/entities',
+				__DIR__ . '/../../data/rdf/FullStatementRdfBuilder'
+			)
+		);
 
-		$this->helper = new NTriplesRdfTestHelper();
+		$this->helper->setAllBlanksEqual( true );
 	}
 
 	/**
@@ -47,14 +49,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	 * @return RdfBuilderTestData
 	 */
 	private function getTestData() {
-		if ( $this->testData === null ) {
-			$this->testData = new RdfBuilderTestData(
-				__DIR__ . '/../../data/rdf/entities',
-				__DIR__ . '/../../data/rdf/FullStatementRdfBuilder'
-			);
-		}
-
-		return $this->testData;
+		return $this->helper->getTestData();
 	}
 
 	/**
@@ -114,19 +109,16 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	private function assertOrCreateNTriples( $dataSetName, RdfWriter $writer ) {
 		$actual = $writer->drain();
-		$expected = $this->getTestData()->getNTriples( $dataSetName );
-
-		if ( $expected === null ) {
-			$this->getTestData()->putTestData( $dataSetName, $actual, '.actual' );
-			$this->fail( "Data set $dataSetName not found! Created file with the current data using"
-				. " the suffix .actual" );
-		}
-
-		$this->helper->assertNTriplesEquals( $expected, $actual, "Data set $dataSetName" );
+		$this->helper->assertNTriplesEqualsDataset( $dataSetName, $actual );
 	}
 
 	public function provideAddEntity() {
-		$props = [ 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P8', 'P9', 'P10' ];
+		$props = array_map(
+			function ( $row ) {
+				return $row[0];
+			},
+			$this->getTestData()->getTestProperties()
+		);
 
 		return array(
 			array( 'Q4', 0, 'Q4_minimal', array() ),
@@ -183,7 +175,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideAddStatements() {
 		return array(
-			array( 'Q4', 'Q4_all' ),
+			array( 'Q4', [ 'Q4_statements', 'Q4_values' ] ),
 		);
 	}
 

@@ -46,13 +46,11 @@ class AddUnitsTest extends MediaWikiLangTestCase {
 			$this->getMockBuilder( UnitConverter::class )->disableOriginalConstructor()->getMock();
 		$this->script->setUnitConverter( $this->uc );
 		$this->script->initializeBuilder();
-		$this->helper = new NTriplesRdfTestHelper();
-	}
-
-	private function getTestData() {
-		return new RdfBuilderTestData(
-			__DIR__ . '/../data/maintenance',
-			__DIR__ . '/../data/maintenance'
+		$this->helper = new NTriplesRdfTestHelper(
+			new RdfBuilderTestData(
+				__DIR__ . '/../data/maintenance',
+				__DIR__ . '/../data/maintenance'
+			)
 		);
 	}
 
@@ -167,12 +165,7 @@ class AddUnitsTest extends MediaWikiLangTestCase {
 
 		$values = 'Q1';
 		$this->script->processUnit( $values );
-		$expected = $this->getTestData()->getNTriples( $result );
-		if ( !$expected ) {
-			$this->getTestData()->putTestData( $result, $this->script->output, '.actual' );
-		} else {
-			$this->helper->assertNTriplesEquals( $expected, $this->script->output );
-		}
+		$this->helper->assertNTriplesEqualsDataset( $result, $this->script->output );
 	}
 
 }
