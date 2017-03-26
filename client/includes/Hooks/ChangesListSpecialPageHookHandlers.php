@@ -233,24 +233,20 @@ class ChangesListSpecialPageHookHandlers {
 
 		if ( $extensionRegistry->isLoaded( 'ORES' ) ) {
 			$damagingGroup = $specialPage->getFilterGroup( 'damaging' );
-			if ( $damagingGroup ) {
-				$wikidataFilter->conflictsWith(
-					$damagingGroup,
-					'wikibase-rcfilters-hide-wikibase-conflicts-ores-global',
-					'wikibase-rcfilters-hide-wikibase-conflicts-ores',
-					'wikibase-rcfilters-damaging-conflicts-hide-wikibase'
-				);
-			}
+			$wikidataFilter->conflictsWith(
+				$damagingGroup,
+				'wikibase-rcfilters-hide-wikibase-conflicts-ores-global',
+				'wikibase-rcfilters-hide-wikibase-conflicts-ores',
+				'wikibase-rcfilters-damaging-conflicts-hide-wikibase'
+			);
 
 			$goodfaithGroup = $specialPage->getFilterGroup( 'goodfaith' );
-			if ( $goodfaithGroup ) {
-				$wikidataFilter->conflictsWith(
-					$goodfaithGroup,
-					'wikibase-rcfilters-hide-wikibase-conflicts-ores-global',
-					'wikibase-rcfilters-hide-wikibase-conflicts-ores',
-					'wikibase-rcfilters-goodfaith-conflicts-hide-wikibase'
-				);
-			}
+			$wikidataFilter->conflictsWith(
+				$goodfaithGroup,
+				'wikibase-rcfilters-hide-wikibase-conflicts-ores-global',
+				'wikibase-rcfilters-hide-wikibase-conflicts-ores',
+				'wikibase-rcfilters-goodfaith-conflicts-hide-wikibase'
+			);
 		}
 	}
 
