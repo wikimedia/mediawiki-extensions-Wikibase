@@ -67,6 +67,7 @@
 	"wikibase-pageswithbadges-legend": "バッジを受け取ったページ一覧",
 	"wikibase-pageswithbadges-badge": "バッヂ:",
 	"wikibase-pageswithbadges-submit": "ページを示す",
+	"wikibase-entityusage-submit": "ページを表示",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}項目 ID",
 	"wikibase-pageinfo-entity-id-none": "なし",
 	"wikibase-pageinfo-entity-usage": "このページで使われている{{WBREPONAME}}エンティティ",
