@@ -83,11 +83,6 @@ class EditEntity extends ModifyEntity {
 	private $entityChangeOpProvider;
 
 	/**
-	 * @var callable[]
-	 */
-	private $changeOpDeserializerCallbacks;
-
-	/**
 	 * @see ModifyEntity::__construct
 	 *
 	 * @param ApiMain $mainModule
