@@ -2,12 +2,10 @@
 
 namespace Wikibase\Client\Tests\Hooks;
 
-use ExtensionRegistry;
 use FauxRequest;
 use FormOptions;
 use IDatabase;
 use SpecialPageFactory;
-use TestingAccessWrapper;
 use User;
 use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers;
 use Wikimedia\Rdbms\LoadBalancer;
@@ -20,90 +18,35 @@ use Wikimedia\Rdbms\LoadBalancer;
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Matthew Flaschen < mflaschen@wikimedia.org >
  */
 class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase {
-	protected $extensionRegistry;
 
-	protected $oldExtensionRegistryLoaded;
-
-	public function setUp() {
-		parent::setUp();
-
-		$this->extensionRegistry = TestingAccessWrapper::newFromObject(
-			ExtensionRegistry::getInstance()
-		);
-
-		$this->oldExtensionRegistryLoaded = $this->extensionRegistry->loaded;
-
-		// Forget about the other extensions.  Although ORES may be loaded,
-		// since this is only unit-testing *our* listener, ORES's listener
-		// hasn't run, so for all intents and purposes it's not loaded.
-		$this->extensionRegistry->loaded = [ 'Wikibase' ];
-	}
-
-	public function tearDown() {
-		parent::tearDown();
-
-		$this->extensionRegistry->loaded = $this->oldExtensionRegistryLoaded;
-	}
-
-	public function testAddFilter() {
+	public function testOnChangesListSpecialPageFilters() {
 		$user = $this->getUser(
 			array(
-				array( 'usenewrc' => 0 )
+				array( 'usernewrc' => 0 )
 			)
 		);
 
 		/** @var \ChangesListSpecialPage $specialPage */
 		$specialPage = SpecialPageFactory::getPage( 'Recentchanges' );
-
-		$wrappedSpecialPage = TestingAccessWrapper::newFromObject(
-			$specialPage
-		);
-
-		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
-			$this->getRequest( array() ),
-			$this->getUser( [] ),
-			$this->getLoadBalancer(),
-			'Recentchanges',
-			true
-		) );
-
 		$specialPage->getContext()->setUser( $user );
 
-		// Register built-in filters, since the Wikidata one uses its group
-		$wrappedSpecialPage->registerFiltersFromDefinitions(
-			$wrappedSpecialPage->filterGroupDefinitions
+		$filters = array();
+
+		ChangesListSpecialPageHookHandlers::onChangesListSpecialPageFilters(
+			$specialPage,
+			$filters
 		);
 
-		$hookHandler->addFilter(
-			$specialPage
+		$expected = array(
+			'hideWikibase' => array(
+				'msg' => 'wikibase-rc-hide-wikidata',
+				'default' => true
+			)
 		);
 
-		$changeType = $specialPage->getFilterGroup( 'changeType' );
-		$filter = $changeType->getFilter( 'hideWikibase' );
-
-		// I could do all of getJsData(), but that would make it brittle to
-		// unrelated changes.
-		$expectedFields = [
-			'label' => 'wikibase-rcfilters-hide-wikibase-label',
-			'description' => 'wikibase-rcfilters-hide-wikibase-description',
-			'showHide' => 'wikibase-rc-hide-wikidata',
-			'default' => true,
-		];
-
-		$actualFields = [
-			'label' => $filter->getLabel(),
-			'description' => $filter->getDescription(),
-			'showHide' => $filter->getShowHide(),
-			'default' => $filter->getDefault(),
-		];
-
-		$this->assertSame(
-			$expectedFields,
-			$actualFields
-		);
+		$this->assertSame( $expected, $filters );
 	}
 
 	public function testOnChangesListSpecialPageQuery() {
@@ -130,138 +73,86 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @dataProvider addWikibaseConditionsIfFilterUnavailableProvider
+	 * @dataProvider addWikibaseConditionsProvider
 	 */
-	public function testAddWikibaseConditionsIfFilterUnavailable( $expectedAddConditionsCalls, $hasWikibaseChangesEnabled ) {
-		$hookHandlerMock = $this->getMockBuilder( ChangesListSpecialPageHookHandlers::class )
-			->setConstructorArgs(
-				[
-					$this->getRequest( array() ),
-					$this->getUser( [] ),
-					$this->getLoadBalancer(),
-					'Recentchanges',
-					true
-				]
-			)
-			->setMethods( [
-					'hasWikibaseChangesEnabled',
-					'addWikibaseConditions'
-				] )
-			->getMock();
-
-		$hookHandlerMock->method( 'hasWikibaseChangesEnabled' )->will(
-			$this->returnValue( $hasWikibaseChangesEnabled )
-		);
-
-		$hookHandlerMock->expects( $this->exactly( $expectedAddConditionsCalls ) )
-			->method( 'addWikibaseConditions' )
-			->with(
-				$this->isInstanceOf( IDatabase::class ),
-				$this->equalTo( [] )
-			);
-
-		$conds = [];
-
-		$hookHandlerMock = TestingAccessWrapper::newFromObject( $hookHandlerMock );
-		$hookHandlerMock->__call( 'addWikibaseConditionsIfFilterUnavailable', [ &$conds ] );
-	}
-
-	public function addWikibaseConditionsIfFilterUnavailableProvider() {
-		return [
-			[
-				0,
-				true
-			],
-
-			[
-				1,
-				false
-			],
-		];
-	}
-
-	/**
-	 * @dataProvider getOptionNameProvider
-	 */
-	public function testGetOptionName( $expected, $pageName ) {
-		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
-			$this->getRequest( array() ),
-			$this->getUser( [] ),
-			$this->getLoadBalancer(),
-			$pageName,
-			true
-		) );
-
-		$this->assertSame(
-			$expected,
-			$hookHandler->getOptionName()
-		);
-	}
-
-	public function getOptionNameProvider() {
-		return [
-			[
-				'wlshowwikibase',
-				'Watchlist'
-			],
-
-			[
-				'rcshowwikidata',
-				'Recentchanges',
-			],
-
-			[
-				'rcshowwikidata',
-				'Recentchangeslinked'
-			],
-		];
-	}
-
-	public function testAddWikibaseConditions() {
+	public function testAddWikibaseConditions(
+		array $expected,
+		array $userOptions,
+		$optionDefault
+	) {
 		$hookHandler = new ChangesListSpecialPageHookHandlers(
 			$this->getRequest( array() ),
-			$this->getUser( [] ),
+			$this->getUser( $userOptions ),
 			$this->getLoadBalancer(),
 			'Watchlist',
 			true
 		);
 
-		$conds = array();
-		$hookHandler->addWikibaseConditions(
-			wfGetDB( DB_REPLICA ),
-			$conds
-		);
+		$opts = new FormOptions();
+		$opts->add( 'hideWikibase', $optionDefault );
 
-		$expected = [ "rc_source != 'wb'" ];
+		$conds = array();
+		$hookHandler->addWikibaseConditions( $conds, $opts );
 
 		$this->assertEquals( $expected, $conds );
 	}
 
+	public function addWikibaseConditionsProvider() {
+		return array(
+			array(
+				array(),
+				array( 'usenewrc' => 0, 'wlshowwikibase' => 1 ),
+				false
+			),
+			array(
+				array( "rc_source != 'wb'" ),
+				array( 'usenewrc' => 0 ),
+				true
+			)
+		);
+	}
+
+	public function testAddWikibaseConditions_wikibaseChangesDisabled() {
+		$hookHandler = new ChangesListSpecialPageHookHandlers(
+			$this->getRequest( array() ),
+			$this->getUser( array( 'usenewrc' => 1 ) ),
+			$this->getLoadBalancer(),
+			'Watchlist',
+			true
+		);
+
+		$opts = new FormOptions();
+
+		$conds = array();
+		$hookHandler->addWikibaseConditions( $conds, $opts );
+
+		$this->assertEquals( array( "rc_source != 'wb'" ), $conds );
+	}
+
 	/**
-	 * @dataProvider hasWikibaseChangesEnabledWhenUsingEnhancedChangesProvider
+	 * @dataProvider filterNotAddedWhenUsingEnhancedChangesProvider
 	 */
-	public function testHasWikibaseChangesEnabledWhenUsingEnhancedChanges(
+	public function testFilterNotAddedWhenUsingEnhancedChanges(
 		array $requestParams,
 		array $userOptions,
 		$pageName,
 		$message
 	) {
-		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
+		$hookHandler = new ChangesListSpecialPageHookHandlers(
 			$this->getRequest( $requestParams ),
 			$this->getUser( $userOptions ),
 			$this->getLoadBalancer(),
 			$pageName,
 			true
-		) );
-
-		$this->assertSame(
-			false,
-			$hookHandler->hasWikibaseChangesEnabled(),
-			$message
 		);
+
+		$filters = array();
+		$hookHandler->addFilterIfEnabled( $filters );
+
+		$this->assertSame( array(), $filters, $message );
 	}
 
-	public function hasWikibaseChangesEnabledWhenUsingEnhancedChangesProvider() {
+	public function filterNotAddedWhenUsingEnhancedChangesProvider() {
 		return array(
 			array(
 				array(),
@@ -303,30 +194,37 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @dataProvider hasWikibaseChangesEnabled_withoutShowWikibaseEditsByDefaultPreferenceProvider
+	 * @dataProvider filter_withoutShowWikibaseEditsByDefaultPreference
 	 */
-	public function testHasWikibaseChangesEnabled_withoutShowWikibaseEditsByDefaultPreference(
+	public function testFilter_withoutShowWikibaseEditsByDefaultPreference(
 		array $requestParams,
 		array $userOptions,
 		$expectedFilterName,
 		$expectedToggleDefault,
 		$specialPageName
 	) {
-		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
+		$hookHandler = new ChangesListSpecialPageHookHandlers(
 			$this->getRequest( $requestParams ),
 			$this->getUser( $userOptions ),
 			$this->getLoadBalancer(),
 			$specialPageName,
 			true
-		) );
-
-		$this->assertSame(
-			true,
-			$hookHandler->hasWikibaseChangesEnabled()
 		);
+
+		$filters = array();
+		$hookHandler->addFilterIfEnabled( $filters );
+
+		$expected = array(
+			$expectedFilterName => array(
+				'msg' => 'wikibase-rc-hide-wikidata',
+				'default' => $expectedToggleDefault
+			)
+		);
+
+		$this->assertSame( $expected, $filters );
 	}
 
-	public function hasWikibaseChangesEnabled_withoutShowWikibaseEditsByDefaultPreferenceProvider() {
+	public function filter_withoutShowWikibaseEditsByDefaultPreference() {
 		return array(
 			array(
 				array(),
@@ -374,30 +272,37 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @dataProvider hasWikibaseChangesEnabled_withShowWikibaseEditsByDefaultPreferenceProvider
+	 * @dataProvider filter_withShowWikibaseEditsByDefaultPreference
 	 */
-	public function testHasWikibaseChangesEnabled_withShowWikibaseEditsByDefaultPreference(
+	public function testFilter_withShowWikibaseEditsByDefaultPreference(
 		array $requestParams,
 		array $userOptions,
 		$expectedFilterName,
 		$expectedToggleDefault,
 		$specialPageName
 	) {
-		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
+		$hookHandler = new ChangesListSpecialPageHookHandlers(
 			$this->getRequest( $requestParams ),
 			$this->getUser( $userOptions ),
 			$this->getLoadBalancer(),
 			$specialPageName,
 			true
-		) );
-
-		$this->assertSame(
-			true,
-			$hookHandler->hasWikibaseChangesEnabled()
 		);
+
+		$filters = array();
+		$hookHandler->addFilterIfEnabled( $filters );
+
+		$expected = array(
+			$expectedFilterName => array(
+				'msg' => 'wikibase-rc-hide-wikidata',
+				'default' => $expectedToggleDefault
+			)
+		);
+
+		$this->assertSame( $expected, $filters );
 	}
 
-	public function hasWikibaseChangesEnabled_withShowWikibaseEditsByDefaultPreferenceProvider() {
+	public function filter_withShowWikibaseEditsByDefaultPreference() {
 		return array(
 			array(
 				array(),
@@ -438,28 +343,28 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @dataProvider hasWikibaseChangesEnabledWhenExternalRecentChangesDisabledProvider() {
+	 * @dataProvider filterNotAddedWhenExternalRecentChangesDisabledProvider() {
 	 */
-	public function testHasWikibaseChangesEnabledWhenExternalRecentChangesDisabled( $specialPageName ) {
-		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
+	public function testFilterNotAddedWhenExternalRecentChangesDisabled( $specialPageName ) {
+		$hookHandler = new ChangesListSpecialPageHookHandlers(
 			$this->getRequest( array() ),
 			$this->getUser( array( 'usenewrc' => 0 ) ),
 			$this->getLoadBalancer(),
 			$specialPageName,
-			/* $showExternalChanges= */ false
-		) );
-
-		$this->assertSame(
-			false,
-			$hookHandler->hasWikibaseChangesEnabled()
+			false
 		);
+
+		$filters = array();
+		$hookHandler->addFilterIfEnabled( $filters );
+
+		$this->assertSame( array(), $filters );
 	}
 
-	public function hasWikibaseChangesEnabledWhenExternalRecentChangesDisabledProvider() {
+	public function filterNotAddedWhenExternalRecentChangesDisabledProvider() {
 		return array(
 			array( 'Watchlist' ),
-			array( 'Recentchanges' ),
-			array( 'Recentchangeslinked' )
+			array( 'RecentChanges' ),
+			array( 'RecentChangesLinked' )
 		);
 	}
 
