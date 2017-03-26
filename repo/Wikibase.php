@@ -764,14 +764,12 @@ call_user_func( function() {
 	);
 	$wgSpecialPages['ListDatatypes'] = Wikibase\Repo\Specials\SpecialListDatatypes::class;
 	$wgSpecialPages['ListProperties'] = function () {
-		global $wgContLang;
 		$wikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
 		$prefetchingTermLookup = $wikibaseRepo->getPrefetchingTermLookup();
-		$languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
-		$fallbackMode = Wikibase\LanguageFallbackChainFactory::FALLBACK_ALL;
 		$labelDescriptionLookup = new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
 			$prefetchingTermLookup,
-			$languageFallbackChainFactory->newFromLanguage( $wgContLang, $fallbackMode )
+			$wikibaseRepo->getLanguageFallbackChainFactory()
+				->newFromLanguage( $wikibaseRepo->getUserLanguage() )
 		);
 		$entityIdFormatter = $wikibaseRepo->getEntityIdHtmlLinkFormatterFactory()
 			->getEntityIdFormatter( $labelDescriptionLookup );
