@@ -550,7 +550,7 @@ abstract class EntityContent extends AbstractContent {
 		$entityDiffer = WikibaseRepo::getDefaultInstance()->getEntityDiffer();
 		$entityDiff = $entityDiffer->diffEntities( $fromEntity, $toEntity );
 
-		return new EntityContentDiff( $entityDiff, $redirectDiff );
+		return new EntityContentDiff( $entityDiff, $redirectDiff, $fromEntity );
 	}
 
 	/**

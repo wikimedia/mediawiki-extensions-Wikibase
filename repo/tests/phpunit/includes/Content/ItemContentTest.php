@@ -46,6 +46,14 @@ class ItemContentTest extends EntityContentTest {
 	}
 
 	/**
+	 * @param EntityId $entityId
+	 * @return Item
+	 */
+	protected function newEntity( EntityId $entityId ) {
+		return new Item( $entityId );
+	}
+
+	/**
 	 * @param ItemId|null $itemId
 	 *
 	 * @throws InvalidArgumentException
@@ -204,6 +212,7 @@ class ItemContentTest extends EntityContentTest {
 
 		$q10 = new ItemId( 'Q10' );
 		$empty = $this->newEmpty( $q10 );
+		$item = new Item( $q10 );
 
 		$spam = $this->newEmpty( $q10 );
 		$spam->getEntity()->setLabel( 'en', 'Spam' );
@@ -215,7 +224,8 @@ class ItemContentTest extends EntityContentTest {
 			new EntityDiff( array() ),
 			new Diff( array(
 				'redirect' => new DiffOpAdd( $redirTarget ),
-			), true )
+			), true ),
+			$item
 		);
 
 		$spamToRedirDiff = new EntityContentDiff(
@@ -226,7 +236,8 @@ class ItemContentTest extends EntityContentTest {
 			) ),
 			new Diff( array(
 				'redirect' => new DiffOpAdd( $redirTarget ),
-			), true )
+			), true ),
+			$item
 		);
 
 		$redirToSpamDiff = new EntityContentDiff(
@@ -237,12 +248,14 @@ class ItemContentTest extends EntityContentTest {
 			) ),
 			new Diff( array(
 				'redirect' => new DiffOpRemove( $redirTarget ),
-			), true )
+			), true ),
+			$item
 		);
 
 		$cases['same redir'] = array( $redir, $redir, new EntityContentDiff(
 			new EntityDiff(),
-			new Diff()
+			new Diff(),
+			$item
 		) );
 		$cases['empty to redir'] = array( $empty, $redir, $emptyToRedirDiff );
 		$cases['entity to redir'] = array( $spam, $redir, $spamToRedirDiff );
@@ -256,6 +269,7 @@ class ItemContentTest extends EntityContentTest {
 
 		$q10 = new ItemId( 'Q10' );
 		$empty = $this->newEmpty( $q10 );
+		$item = new Item( $q10 );
 
 		$spam = $this->newEmpty( $q10 );
 		$spam->getEntity()->setLabel( 'en', 'Spam' );
@@ -267,7 +281,8 @@ class ItemContentTest extends EntityContentTest {
 			new EntityDiff( array() ),
 			new Diff( array(
 				'redirect' => new DiffOpAdd( $redirTarget ),
-			), true )
+			), true ),
+			$item
 		);
 
 		$spamToRedirDiff = new EntityContentDiff(
@@ -278,7 +293,8 @@ class ItemContentTest extends EntityContentTest {
 			) ),
 			new Diff( array(
 				'redirect' => new DiffOpAdd( $redirTarget ),
-			), true )
+			), true ),
+			$item
 		);
 
 		$redirToSpamDiff = new EntityContentDiff(
@@ -289,7 +305,8 @@ class ItemContentTest extends EntityContentTest {
 			) ),
 			new Diff( array(
 				'redirect' => new DiffOpRemove( $redirTarget ),
-			), true )
+			), true ),
+			$item
 		);
 
 		$cases['empty to redir'] = array( $empty, $emptyToRedirDiff, $redir );
