@@ -135,7 +135,10 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		}
 
 		if ( $this->site !== null && !$this->isValidSiteId( $this->site ) ) {
-			$this->showErrorHTML( $this->msg( 'wikibase-setsitelink-invalid-site', $this->site )->parse() );
+			$this->showErrorHTML( $this->msg(
+				'wikibase-setsitelink-invalid-site',
+				wfEscapeWikiText( $this->site )
+			)->parse() );
 		}
 
 		$this->page = $request->getVal( 'page' );
