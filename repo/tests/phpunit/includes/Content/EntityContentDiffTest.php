@@ -5,6 +5,9 @@ namespace Wikibase\Repo\Tests\Content;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
+use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\Repo\Content\EntityContentDiff;
 
@@ -19,10 +22,12 @@ use Wikibase\Repo\Content\EntityContentDiff;
 class EntityContentDiffTest extends \MediaWikiTestCase {
 
 	public function provideConstruction() {
+		$entity = new Item( new ItemId( 'Q1' ) );
 		return array(
 			'empty' => array(
 				new EntityDiff(),
-				new Diff()
+				new Diff(),
+				$entity
 			),
 			'entity diff' => array(
 				new EntityDiff( array(
@@ -30,13 +35,15 @@ class EntityContentDiffTest extends \MediaWikiTestCase {
 						'en' => new DiffOpAdd( 'Spam' ),
 					) )
 				) ),
-				new Diff()
+				new Diff(),
+				$entity
 			),
 			'redirect diff' => array(
 				new EntityDiff(),
 				new Diff( array(
 					'redirect' => new DiffOpAdd( 'Spam' ),
-				) )
+				) ),
+				$entity
 			),
 			'entity and redirect diff' => array(
 				new EntityDiff( array(
@@ -46,7 +53,8 @@ class EntityContentDiffTest extends \MediaWikiTestCase {
 				) ),
 				new Diff( array(
 					'redirect' => new DiffOpRemove( 'Spam' ),
-				) )
+				) ),
+				$entity
 			),
 		);
 	}
@@ -57,8 +65,12 @@ class EntityContentDiffTest extends \MediaWikiTestCase {
 	 * @param EntityDiff $entityDiff
 	 * @param Diff $redirectDiff
 	 */
-	public function testConstruction( EntityDiff $entityDiff, Diff $redirectDiff ) {
-		$diff = new EntityContentDiff( $entityDiff, $redirectDiff );
+	public function testConstruction(
+		EntityDiff $entityDiff,
+		Diff $redirectDiff,
+		EntityDocument $entity
+	) {
+		$diff = new EntityContentDiff( $entityDiff, $redirectDiff, $entity );
 
 		$this->assertArrayEquals(
 			$entityDiff->getOperations(),

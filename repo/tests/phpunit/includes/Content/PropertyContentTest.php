@@ -30,6 +30,14 @@ class PropertyContentTest extends EntityContentTest {
 	}
 
 	/**
+	 * @param EntityId $entityId
+	 * @return Property
+	 */
+	protected function newEntity( EntityId $entityId ) {
+		return new Property( $entityId, null, 'string' );
+	}
+
+	/**
 	 * @param PropertyId|null $propertyId
 	 *
 	 * @throws InvalidArgumentException
