@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_97470950",
+        "filename": "repo/includes/Content/EntityContentDiff.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-27T17:50:26Z",
+      "side": 1,
+      "message": "My comment was a rhetorical question to explain my edit request: change the $entity variable name, add documentation, and possibly change it to contain an EntityId instead of a full entity. What you are explaining does make this even more important.",
+      "parentUuid": "6e436fe2_f4d44bc0",
+      "revId": "a164d3320aa3649fe05bbdcbe1dea71b60f1f1c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_f4b0cb40",
         "filename": "repo/includes/Content/EntityContentDiff.php",
         "patchSetId": 3
