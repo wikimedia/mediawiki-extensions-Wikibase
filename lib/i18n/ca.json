@@ -73,6 +73,7 @@
 	"wikibase-entity-summary-wbsetsitelink-add": "S'ha afegit un enllaç a [$2]",
 	"wikibase-entity-summary-wbsetsitelink-set": "S'ha canviat l'enllaç a [$2]",
 	"wikibase-entity-summary-wbsetsitelink-remove": "S'ha eliminat l'enllaç a [$2]",
+	"wikibase-entity-summary-wblinktitles-connect": "S'ha afegit un enllaç de llengua per connectar les pàgines",
 	"wikibase-entity-summary-wbcreateclaim-value": "S'ha creat {{PLURAL:$1|una afirmació|afirmacions}}",
 	"wikibase-entity-summary-wbcreateclaim-novalue": "S'ha creat {{PLURAL:$1|una afirmació|afirmacions}}",
 	"wikibase-entity-summary-wbcreateclaim-somevalue": "{{PLURAL:$1|Afirmació creada|Afirmacions creades}}",
@@ -92,6 +93,7 @@
 	"wikibase-item-summary-wbeditentity-create": "Nou element creat",
 	"wikibase-item-summary-wbeditentity-update": "S'ha actualitzat l'element",
 	"wikibase-item-summary-wbeditentity-override": "Element sobreescrit",
+	"wikibase-item-summary-wblinktitles-connect": "S'ha afegit un enllaç de llengua per connectar les pàgines",
 	"wikibase-property-summary-wbcreate-new": "S’ha creat una propietat nova",
 	"wikibase-property-summary-wbeditentity-create": "S’ha creat una propietat nova",
 	"wikibase-property-summary-wbeditentity-update": "S’ha modificat una propietat"

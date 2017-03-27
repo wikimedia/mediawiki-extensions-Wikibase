@@ -131,6 +131,7 @@
 	"wikibase-validator-illegal-file-chars": "Filnamn tillåts inte till innehålla tecken som kolon eller snedstreck. Klistra endast in filnamnet efter \"File:\".",
 	"wikibase-validator-illegal-geo-shape-title": "Värden måste börja med \"Data:\" och sluta med \".map\". Dessutom bör titeln inte innehålla tecken som kolon, nummertecken eller vertikala streck.",
 	"wikibase-validator-no-such-media": "Filen \"$1\" finns inte på [https://commons.wikimedia.org/ Wikimedia Commons].",
+	"wikibase-validator-no-such-sitelink": "Kunde inte hitta en webbplatslänk till \"$1\" när emblem försökte redigeras.",
 	"wikibase-validator-page-not-exists": "Sidan \"$1\" finns inte.",
 	"wikibase-validator-not-a-language": "\"$1\" är inte en känd språkkod.",
 	"wikibase-item-reference-edit-placeholder": "Ange objekt-ID, t.ex. Q10",

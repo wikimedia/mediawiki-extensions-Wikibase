@@ -3,7 +3,8 @@
 		"authors": [
 			"Jeblad",
 			"Njardarlogar",
-			"Roarjo"
+			"Roarjo",
+			"Neuraxıs"
 		]
 	},
 	"wikibase-client-desc": "Klient for Wikibase-utvidinga",
@@ -70,5 +71,6 @@
 	"wikibase-pageinfo-entity-usage-X": "Alle einingsdata",
 	"wikibase-pageinfo-entity-usage-O": "Anna (utsegner)",
 	"wikibase-property-render-error": "Kunne ikkje visa eigenskapen $1: $2",
-	"wikibase-otherprojects": "På andre prosjekt"
+	"wikibase-otherprojects": "På andre prosjekt",
+	"unresolved-property-category": "Sider med uavklara eigenskapar"
 }
