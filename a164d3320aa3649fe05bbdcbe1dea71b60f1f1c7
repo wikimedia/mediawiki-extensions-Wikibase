@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_f4d44bc0",
+        "filename": "repo/includes/Content/EntityContentDiff.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-27T17:04:22Z",
+      "side": 1,
+      "message": "It represents the difference between two EntityContent objects. That\u0027s all this class knows or cares about.\n\nTypically, that would be revisions of the same entity. But that is not necessary. You can request a diff between two different entities, e.g. \u003chttps://www.wikidata.org/w/index.php?title\u003dQ24\u0026oldid\u003d424284430\u0026diff\u003d466451207\u003e. You can also make \"reverse\" diffs by editing the URL, so the \"old\" and \"new\" version are swapped.\n\nNone of that should matter for this class.",
+      "parentUuid": "6e436fe2_d4434fb5",
+      "revId": "a164d3320aa3649fe05bbdcbe1dea71b60f1f1c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_f4b0cb40",
         "filename": "repo/includes/Content/EntityContentDiff.php",
         "patchSetId": 3
