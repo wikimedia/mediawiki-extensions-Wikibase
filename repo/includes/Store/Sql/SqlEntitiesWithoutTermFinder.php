@@ -7,6 +7,7 @@ use InvalidArgumentException;
 use ResultWrapper;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Store\EntitiesWithoutTermFinder;
 use Wikimedia\Assert\Assert;
@@ -165,7 +166,11 @@ class SqlEntitiesWithoutTermFinder implements EntitiesWithoutTermFinder {
 		$entities = [];
 
 		foreach ( $rows as $row ) {
-			$entities[] = $this->entityIdParser->parse( $row->entity_id_serialization );
+			try {
+				$entities[] = $this->entityIdParser->parse( $row->entity_id_serialization );
+			} catch ( EntityIdParsingException $ex ) {
+				
+			}
 		}
 
 		return $entities;
