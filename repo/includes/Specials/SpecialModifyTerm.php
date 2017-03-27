@@ -98,7 +98,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		if ( $this->languageCode !== null && !$this->termsLanguages->hasLanguage( $this->languageCode ) ) {
 			$errorMessage = $this->msg(
 				'wikibase-wikibaserepopage-invalid-langcode',
-				$this->languageCode
+				wfEscapeWikiText( $this->languageCode )
 			)->parse();
 
 			$this->showErrorHTML( $errorMessage );

@@ -125,7 +125,10 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 
 		$this->language = $request->getText( 'language', $this->language );
 		if ( $this->language !== '' && !$this->termsLanguages->hasLanguage( $this->language ) ) {
-			$this->showErrorHTML( $this->msg( 'wikibase-entitieswithoutlabel-invalid-language', $this->language )->parse() );
+			$this->showErrorHTML( $this->msg(
+				'wikibase-entitieswithoutlabel-invalid-language',
+				wfEscapeWikiText( $this->language )
+			)->parse() );
 			$this->language = '';
 		}
 
@@ -134,7 +137,10 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 			$this->type = null;
 		}
 		if ( $this->type !== null && !in_array( $this->type, $this->entityTypes ) ) {
-			$this->showErrorHTML( $this->msg( 'wikibase-entitieswithoutlabel-invalid-type', $this->type )->parse() );
+			$this->showErrorHTML( $this->msg(
+				'wikibase-entitieswithoutlabel-invalid-type',
+				wfEscapeWikiText( $this->type )
+			)->parse() );
 			$this->type = null;
 		}
 	}
