@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Content;
 
 use Diff\DiffOp\Diff\Diff;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 
 /**
@@ -24,14 +25,25 @@ class EntityContentDiff extends Diff {
 	private $redirectDiff;
 
 	/**
+	 * @var string
+	 */
+	private $entityType;
+
+	/**
 	 * @param EntityDiff $entityDiff
 	 * @param Diff $redirectDiff
+	 * @param string $entityType
 	 */
-	public function __construct( EntityDiff $entityDiff, Diff $redirectDiff ) {
+	public function __construct(
+		EntityDiff $entityDiff,
+		Diff $redirectDiff,
+		$entityType
+	) {
 		$operations = array();
 
 		$this->entityDiff = $entityDiff;
 		$this->redirectDiff = $redirectDiff;
+		$this->entityType = $entityType;
 
 		$operations = array_merge( $operations, $this->entityDiff->getOperations() );
 		$operations = array_merge( $operations, $this->redirectDiff->getOperations() );
@@ -51,6 +63,13 @@ class EntityContentDiff extends Diff {
 	 */
 	public function getRedirectDiff() {
 		return $this->redirectDiff;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getEntityType() {
+		return $this->entityType;
 	}
 
 }
