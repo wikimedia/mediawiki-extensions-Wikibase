@@ -2,6 +2,7 @@
 Introduction to Wikibase
 ====================
 
+
 [Travis Build Status](http://travis-ci.org/wikimedia/mediawiki-extensions-Wikibase/):
 ![Build Status](https://travis-ci.org/wikimedia/mediawiki-extensions-Wikibase.svg)
 [Scrutinizer Code Quality](https://scrutinizer-ci.com/g/wikimedia/mediawiki-extensions-Wikibase/):
