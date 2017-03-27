@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Rdf;
 
 use InvalidArgumentException;
+use LogicException;
 use PHPUnit_Framework_Assert;
 use PHPUnit_Framework_AssertionFailedError;
 use RuntimeException;

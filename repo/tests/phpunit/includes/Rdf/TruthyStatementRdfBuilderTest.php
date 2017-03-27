@@ -35,7 +35,7 @@ class TruthyStatementRdfBuilderTest extends PHPUnit_Framework_TestCase {
 		$this->helper = new NTriplesRdfTestHelper(
 			new RdfBuilderTestData(
 				__DIR__ . '/../../data/rdf/entities',
-				__DIR__ . '/../../data/rdf/TruthyStatementRdfBuilder'
+				__DIR__ . '/../../data/rdf/RdfBuilder'
 			)
 		);
 	}
@@ -88,7 +88,7 @@ class TruthyStatementRdfBuilderTest extends PHPUnit_Framework_TestCase {
 
 	public function provideAddEntity() {
 		return array(
-			array( 'Q4', 'Q4_statements' ),
+			array( 'Q4', [ 'Q4_direct' ] ),
 		);
 	}
 
