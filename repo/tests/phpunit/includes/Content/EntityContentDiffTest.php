@@ -5,6 +5,9 @@ namespace Wikibase\Repo\Tests\Content;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
+use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\Repo\Content\EntityContentDiff;
 
@@ -58,7 +61,7 @@ class EntityContentDiffTest extends \MediaWikiTestCase {
 	 * @param Diff $redirectDiff
 	 */
 	public function testConstruction( EntityDiff $entityDiff, Diff $redirectDiff ) {
-		$diff = new EntityContentDiff( $entityDiff, $redirectDiff );
+		$diff = new EntityContentDiff( $entityDiff, $redirectDiff, Item::ENTITY_TYPE );
 
 		$this->assertArrayEquals(
 			$entityDiff->getOperations(),

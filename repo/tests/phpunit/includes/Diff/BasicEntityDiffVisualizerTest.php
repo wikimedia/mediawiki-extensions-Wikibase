@@ -10,6 +10,7 @@ use IContextSource;
 use MediaWikiTestCase;
 use RawMessage;
 use Site;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Repo\Content\EntityContentDiff;
@@ -29,7 +30,7 @@ use Wikibase\Repo\Diff\BasicEntityDiffVisualizer;
 class BasicEntityDiffVisualizerTest extends MediaWikiTestCase {
 
 	public function testVisualizingEmptyDiff() {
-		$emptyDiff = new EntityContentDiff( new EntityDiff(), new Diff() );
+		$emptyDiff = new EntityContentDiff( new EntityDiff(), new Diff(), 'item' );
 		$html = $this->getVisualizer()->visualizeEntityContentDiff( $emptyDiff );
 
 		$this->assertSame( '', $html );
@@ -54,7 +55,8 @@ class BasicEntityDiffVisualizerTest extends MediaWikiTestCase {
 					) )
 				), true ),
 			) ),
-			new Diff()
+			new Diff(),
+			'item'
 		);
 
 		$fingerprintTags = array(
@@ -70,9 +72,11 @@ class BasicEntityDiffVisualizerTest extends MediaWikiTestCase {
 			'has <del>ohi there</del>' => '>ohi there</del>',
 		);
 
-		$redirectDiff = new EntityContentDiff( new EntityDiff(), new Diff( array(
-			'redirect' => new DiffOpAdd( 'Q1234' )
-		), true ) );
+		$redirectDiff = new EntityContentDiff(
+			new EntityDiff(),
+			new Diff( [ 'redirect' => new DiffOpAdd( 'Q1234' ) ], true ),
+			'item'
+		);
 
 		$redirectTags = array(
 			'has <td>redirect</td>' => '>redirect</td>',

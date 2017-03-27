@@ -74,6 +74,11 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	abstract protected function getDummyId();
 
 	/**
+	 * @return string
+	 */
+	abstract protected function getEntityType();
+
+	/**
 	 * @param EntityId|null $entityId
 	 *
 	 * @return EntityContent
@@ -246,6 +251,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 	public function diffProvider() {
 		$empty = $this->newEmpty( $this->getDummyId() );
+		$entityType = $this->getEntityType();
 
 		$spam = $this->newEmpty( $this->getDummyId() );
 		$this->setLabel( $spam->getEntity(), 'en', 'Spam' );
@@ -258,11 +264,23 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 			'label' => new Diff( array( 'en' => $spamToHam ) ),
 		) );
 
-		return array(
-			'empty' => array( $empty, $empty, new EntityContentDiff( new EntityDiff(), new Diff() ) ),
-			'same' => array( $ham, $ham, new EntityContentDiff( new EntityDiff(), new Diff() ) ),
-			'spam to ham' => array( $spam, $ham, new EntityContentDiff( $spamToHamDiff, new Diff() ) ),
-		);
+		return [
+			'empty' => [
+				$empty,
+				$empty,
+				new EntityContentDiff( new EntityDiff(), new Diff(), $entityType )
+			],
+			'same' => [
+				$ham,
+				$ham,
+				new EntityContentDiff( new EntityDiff(), new Diff(), $entityType )
+			],
+			'spam to ham' => [
+				$spam,
+				$ham,
+				new EntityContentDiff( $spamToHamDiff, new Diff(), $entityType )
+			],
+		];
 	}
 
 	/**
@@ -291,6 +309,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 	public function patchedCopyProvider() {
 		$spam = $this->newEmpty( $this->getDummyId() );
+		$entityType = $this->getEntityType();
 		$this->setLabel( $spam->getEntity(), 'en', 'Spam' );
 
 		$ham = $this->newEmpty( $this->getDummyId() );
@@ -302,8 +321,16 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		) );
 
 		return array(
-			'empty' => array( $spam, new EntityContentDiff( new EntityDiff(), new Diff() ), $spam ),
-			'spam to ham' => array( $spam, new EntityContentDiff( $spamToHamDiff, new Diff() ), $ham ),
+			'empty' => [
+				$spam,
+				new EntityContentDiff( new EntityDiff(), new Diff(), $entityType ),
+				$spam
+			],
+			'spam to ham' => [
+				$spam,
+				new EntityContentDiff( $spamToHamDiff, new Diff(), $entityType ),
+				$ham
+			],
 		);
 	}
 

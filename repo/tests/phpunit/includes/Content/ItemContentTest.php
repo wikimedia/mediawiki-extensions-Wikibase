@@ -46,6 +46,13 @@ class ItemContentTest extends EntityContentTest {
 	}
 
 	/**
+	 * @return string
+	 */
+	protected function getEntityType() {
+		return Item::ENTITY_TYPE;
+	}
+
+	/**
 	 * @param ItemId|null $itemId
 	 *
 	 * @throws InvalidArgumentException
@@ -215,7 +222,8 @@ class ItemContentTest extends EntityContentTest {
 			new EntityDiff( array() ),
 			new Diff( array(
 				'redirect' => new DiffOpAdd( $redirTarget ),
-			), true )
+			), true ),
+			$this->getEntityType()
 		);
 
 		$spamToRedirDiff = new EntityContentDiff(
@@ -226,7 +234,8 @@ class ItemContentTest extends EntityContentTest {
 			) ),
 			new Diff( array(
 				'redirect' => new DiffOpAdd( $redirTarget ),
-			), true )
+			), true ),
+			$this->getEntityType()
 		);
 
 		$redirToSpamDiff = new EntityContentDiff(
@@ -237,12 +246,14 @@ class ItemContentTest extends EntityContentTest {
 			) ),
 			new Diff( array(
 				'redirect' => new DiffOpRemove( $redirTarget ),
-			), true )
+			), true ),
+			$this->getEntityType()
 		);
 
 		$cases['same redir'] = array( $redir, $redir, new EntityContentDiff(
 			new EntityDiff(),
-			new Diff()
+			new Diff(),
+			$this->getEntityType()
 		) );
 		$cases['empty to redir'] = array( $empty, $redir, $emptyToRedirDiff );
 		$cases['entity to redir'] = array( $spam, $redir, $spamToRedirDiff );
@@ -267,7 +278,8 @@ class ItemContentTest extends EntityContentTest {
 			new EntityDiff( array() ),
 			new Diff( array(
 				'redirect' => new DiffOpAdd( $redirTarget ),
-			), true )
+			), true ),
+			$this->getEntityType()
 		);
 
 		$spamToRedirDiff = new EntityContentDiff(
@@ -278,7 +290,8 @@ class ItemContentTest extends EntityContentTest {
 			) ),
 			new Diff( array(
 				'redirect' => new DiffOpAdd( $redirTarget ),
-			), true )
+			), true ),
+			$this->getEntityType()
 		);
 
 		$redirToSpamDiff = new EntityContentDiff(
@@ -289,7 +302,8 @@ class ItemContentTest extends EntityContentTest {
 			) ),
 			new Diff( array(
 				'redirect' => new DiffOpRemove( $redirTarget ),
-			), true )
+			), true ),
+			$this->getEntityType()
 		);
 
 		$cases['empty to redir'] = array( $empty, $emptyToRedirDiff, $redir );
