@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_40ef7a82",
+        "filename": "repo/includes/Content/EntityContentDiff.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-27T14:00:34Z",
+      "side": 1,
+      "message": "Method is not used anywhere. \n\nIt is quiet difficult to evaluate technical decision if I cannot see the reason for this change.",
+      "range": {
+        "startLine": 67,
+        "startChar": 1,
+        "endLine": 72,
+        "endChar": 2
+      },
+      "revId": "75570748c9bc2c1db0058e501e08d649e441a283",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
