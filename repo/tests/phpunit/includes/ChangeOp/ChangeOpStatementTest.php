@@ -314,10 +314,6 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 
 		$args['wrong main snak property'] = array( $item, $changeOp );
 
-		$statementListProvider = new StatementListProviderDummy( 'Q777' );
-		$changeOp = $this->newChangeOpStatement( $newStatement, 0 );
-		$args['index on unsupported entity type'] = [ $statementListProvider, $changeOp ];
-
 		return $args;
 	}
 
