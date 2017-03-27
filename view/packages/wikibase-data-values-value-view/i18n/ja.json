@@ -3,7 +3,8 @@
 		"authors": [
 			"Fryed-peach",
 			"Shirayuki",
-			"Otokoume"
+			"Otokoume",
+			"Endres"
 		]
 	},
 	"valueview-desc": "データ値を表示/編集するユーザーインターフェイスコンポーネント",
@@ -16,7 +17,9 @@
 	"valueview-expert-timevalue-calendar-julian": "ユリウス暦",
 	"valueview-expert-timeinput-precision": "精度:",
 	"valueview-expert-timeinput-calendar": "暦:",
+	"valueview-expertextender-calendarhint-julian": "(ユリウス暦)",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-preview-label": "プレビュー:",
-	"valueview-preview-novalue": "有効な値を認識できませんでした"
+	"valueview-preview-novalue": "有効な値を認識できませんでした",
+	"valueview-listrotator-manually": "手動設定"
 }
