@@ -1,0 +1,4 @@
+<http://acme.test/Q42> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#Item> .
+<http://acme.test/Q42> <http://www.w3.org/2000/01/rdf-schema#label> "Item42"@en .
+<http://acme.test/Q42> <http://www.w3.org/2004/02/skos/core#prefLabel> "Item42"@en .
+<http://acme.test/Q42> <http://schema.org/name> "Item42"@en .
