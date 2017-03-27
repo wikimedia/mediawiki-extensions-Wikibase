@@ -62,23 +62,23 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 
 	public function testRequestParameters() {
 		$request = new FauxRequest( array(
-			'language' => '<LANGUAGE>',
-			'type' => '<TYPE>',
+			'language' => "''LANGUAGE''",
+			'type' => "''TYPE''",
 		) );
 		list( $html, ) = $this->executeSpecialPage( '', $request );
 
-		$this->assertContains( '&lt;LANGUAGE&gt;', $html );
-		$this->assertContains( '&lt;TYPE&gt;', $html );
-		$this->assertNotContains( '<LANGUAGE>', $html );
-		$this->assertNotContains( '<TYPE>', $html );
+		$this->assertContains( '&#39;&#39;LANGUAGE&#39;&#39;', $html );
+		$this->assertContains( '&#39;&#39;TYPE&#39;&#39;', $html );
+		$this->assertNotContains( "''LANGUAGE''", $html );
+		$this->assertNotContains( "''TYPE''", $html );
 		$this->assertNotContains( '&amp;', $html, 'no double escaping' );
 	}
 
 	public function testSubPageParts() {
-		list( $html, ) = $this->executeSpecialPage( '<LANGUAGE>/<TYPE>' );
+		list( $html, ) = $this->executeSpecialPage( "''LANGUAGE''/''TYPE''" );
 
-		$this->assertContains( '&lt;LANGUAGE&gt;', $html );
-		$this->assertContains( '&lt;TYPE&gt;', $html );
+		$this->assertContains( '&#39;&#39;LANGUAGE&#39;&#39;', $html );
+		$this->assertContains( '&#39;&#39;TYPE&#39;&#39;', $html );
 	}
 
 	public function testNoLanguage() {
@@ -88,10 +88,10 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 	}
 
 	public function testInvalidLanguage() {
-		list( $html, ) = $this->executeSpecialPage( '<INVALID>', null, 'qqx' );
+		list( $html, ) = $this->executeSpecialPage( "''INVALID''", null, 'qqx' );
 
 		$this->assertContains(
-			'(wikibase-entitieswithoutlabel-invalid-language: &lt;INVALID&gt;)',
+			'(wikibase-entitieswithoutlabel-invalid-language: &#39;&#39;INVALID&#39;&#39;)',
 			$html
 		);
 	}
@@ -104,10 +104,10 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 	}
 
 	public function testInvalidType() {
-		list( $html, ) = $this->executeSpecialPage( 'acceptedlanguage/<INVALID>', null, 'qqx' );
+		list( $html, ) = $this->executeSpecialPage( "acceptedlanguage/''INVALID''", null, 'qqx' );
 
 		$this->assertContains(
-			'(wikibase-entitieswithoutlabel-invalid-type: &lt;INVALID&gt;)',
+			'(wikibase-entitieswithoutlabel-invalid-type: &#39;&#39;INVALID&#39;&#39;)',
 			$html
 		);
 	}
