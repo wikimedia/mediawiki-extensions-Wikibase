@@ -1,0 +1,2 @@
+<http://data.acme.test/Q7> <http://creativecommons.org/ns#license> <http://creativecommons.org/publicdomain/zero/1.0/> .
+<http://data.acme.test/Q7> <http://schema.org/softwareVersion> "0.0.5" .
