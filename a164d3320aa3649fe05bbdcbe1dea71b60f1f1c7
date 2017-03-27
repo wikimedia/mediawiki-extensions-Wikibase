@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e436fe2_d4434fb5",
+        "filename": "repo/includes/Content/EntityContentDiff.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-27T16:15:46Z",
+      "side": 1,
+      "message": "This class represents a diff between two revisions of an entity, doesn\u0027t it? The variable name as well as documentation should be very clear about which exact entity in which version is expected, and why it is expected.",
+      "revId": "a164d3320aa3649fe05bbdcbe1dea71b60f1f1c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_f4b0cb40",
         "filename": "repo/includes/Content/EntityContentDiff.php",
         "patchSetId": 3
