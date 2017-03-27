@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_0d868618",
+        "filename": "repo/includes/Content/EntityContentDiff.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-27T22:43:34Z",
+      "side": 1,
+      "message": "Yes, I agree. I wrote my comment to make sure that if the name is changed and documentation added, it is not misleading.",
+      "parentUuid": "6e436fe2_97470950",
+      "revId": "a164d3320aa3649fe05bbdcbe1dea71b60f1f1c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_f4b0cb40",
         "filename": "repo/includes/Content/EntityContentDiff.php",
         "patchSetId": 3
