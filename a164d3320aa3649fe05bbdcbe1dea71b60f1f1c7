@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_f4b0cb40",
+        "filename": "repo/includes/Content/EntityContentDiff.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-27T14:59:22Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be an EntityContent object? After all, this is an EntityContentDiff. The main difference is that a EntityCotnent can represent a redirect, while an EntityDocument cannot.\n\nAlso: is the entity given the \"old\" or the \"new\" entity? Typically, a diff is between different revisions of an entity, but it is possible to create a diff between different entities, too.\n\nFor now, I recommend to include on the information we actually need: the entity type.",
+      "revId": "a164d3320aa3649fe05bbdcbe1dea71b60f1f1c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
