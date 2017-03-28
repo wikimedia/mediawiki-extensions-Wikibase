@@ -94,7 +94,9 @@ class EntityContentDiffView extends DifferenceEngine {
 		$this->terseSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML, $options );
 
 		// @fixme inject!
-		$this->diffVisualizer = new BasicEntityDiffVisualizer(
+		$entityDiffVisualizerFactory = $wikibaseRepo->getEntityDiffVisualizerFactory();
+		$this->diffVisualizer = new DispatchingEntityDiffVisualizer(
+			$entityDiffVisualizerFactory,
 			$this->getContext(),
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
 			new ClaimDifferenceVisualizer(

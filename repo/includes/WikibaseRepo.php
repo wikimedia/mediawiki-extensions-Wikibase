@@ -85,6 +85,9 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikibase\Repo\Diff\DispatchingEntityDiffVisualizer;
+use Wikibase\Repo\Diff\EntityDiffVisualizer;
+use Wikibase\Repo\Diff\EntityDiffVisualizerFactory;
 use Wikibase\Repo\Modules\SettingsValueProvider;
 use Wikibase\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializerFactory;
@@ -296,6 +299,11 @@ class WikibaseRepo {
 	 * @var EntityRdfBuilderFactory|null
 	 */
 	private $entityRdfBuilderFactory = null;
+
+	/**
+	 * @var EntityDiffVisualizerFactory|null
+	 */
+	private $entityDiffVisualizerFactory;
 
 	/**
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
@@ -1914,6 +1922,19 @@ class WikibaseRepo {
 		}
 
 		return $this->entityRdfBuilderFactory;
+	}
+
+	/**
+	 * @return EntityDiffVisualizerFactory
+	 */
+	public function getEntityDiffVisualizerFactory() {
+		if ( $this->entityDiffVisualizerFactory === null ) {
+			$this->entityDiffVisualizerFactory = new EntityDiffVisualizerFactory(
+				$this->entityTypeDefinitions->getEntityDiffVisualizerCallbacks()
+			);
+		}
+
+		return $this->entityDiffVisualizerFactory;
 	}
 
 	/**
