@@ -73,6 +73,47 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_a45f68e7",
+        "filename": "repo/includes/Diff/DispatchingEntityDiffVisualizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T18:57:06Z",
+      "side": 1,
+      "message": "Yea, can be instantiated right away.",
+      "parentUuid": "6e436fe2_7ebd7215",
+      "range": {
+        "startLine": 84,
+        "startChar": 3,
+        "endLine": 90,
+        "endChar": 5
+      },
+      "revId": "d5ecf0438b2dc96bd6155ceaacffb29bf45ef6ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_445464c9",
+        "filename": "repo/includes/Diff/DispatchingEntityDiffVisualizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T18:57:06Z",
+      "side": 1,
+      "message": "The point of using a factory is to *avoid* knowledge about which services are needed for construction. If the factory needs all these parameters in the factory method, something is wrong.",
+      "revId": "d5ecf0438b2dc96bd6155ceaacffb29bf45ef6ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_838587a1",
         "filename": "repo/includes/Diff/EntityDiffVisualizerFactory.php",
         "patchSetId": 1
@@ -138,6 +179,47 @@
         "endLine": 47,
         "endChar": 37
       },
+      "revId": "d5ecf0438b2dc96bd6155ceaacffb29bf45ef6ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_64596001",
+        "filename": "repo/includes/Diff/EntityDiffVisualizerFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T18:57:06Z",
+      "side": 1,
+      "message": "Yes, I think it should.",
+      "parentUuid": "6e436fe2_fe7f4261",
+      "range": {
+        "startLine": 47,
+        "startChar": 12,
+        "endLine": 47,
+        "endChar": 37
+      },
+      "revId": "d5ecf0438b2dc96bd6155ceaacffb29bf45ef6ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_e46570ab",
+        "filename": "repo/includes/Diff/EntityDiffVisualizerFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T18:57:06Z",
+      "side": 1,
+      "message": "The factory method signature should not encode knowledge about what services are needed. These should better be injected in the factory\u0027s constructor. Or better yet, this class should know nothing about these services at all. If I\u0027m not mistaking, only the callback closures can know about them.\n\nOne major point of having a factory is to hide these details from the code that needs to instantiate EntityDiffVisualizers.",
       "revId": "d5ecf0438b2dc96bd6155ceaacffb29bf45ef6ef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
