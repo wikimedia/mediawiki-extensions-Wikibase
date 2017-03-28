@@ -46,6 +46,30 @@
       "revId": "b8d56d0f21fed490ebf85de6b9e111d89968c2ac",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_e12d628c",
+        "filename": "repo/includes/Api/SearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-28T15:57:03Z",
+      "side": 1,
+      "message": "I didn\u0027t find where is it encoded. Can you point to the file:line ?",
+      "parentUuid": "6e436fe2_1e9a2e67",
+      "range": {
+        "startLine": 180,
+        "startChar": 20,
+        "endLine": 180,
+        "endChar": 29
+      },
+      "revId": "b8d56d0f21fed490ebf85de6b9e111d89968c2ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
