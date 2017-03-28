@@ -320,7 +320,6 @@
 	"wikibase-entitieswithoutlabel-legend": "Legend of the form that allow to change the language.",
 	"wikibase-entitieswithoutlabel-label-language": "Label for the input field to change the language code.\n{{Identical|Language code}}",
 	"wikibase-entitieswithoutlabel-label-type": "Label of the entity type selector that allows to restrict the request to one type.\n{{Identical|Type}}",
-	"wikibase-entitieswithoutlabel-label-alltypes": "Label of the entity type selector entry that allows to output missing labels for all entity types.\n{{Identical|All}}",
 	"wikibase-entitieswithoutlabel-submit": "Label for the button that activate the action.\n{{Identical|Find}}",
 	"wikibase-entitieswithoutlabel-invalid-language": "Error message shown when the language code passed in parameter is invalid.\n\nParameters:\n* $1 - language code\nSee also:\n* {{msg-mw|Wikibase-unconnectedpages-invalid-language}}",
 	"wikibase-entitieswithoutlabel-invalid-type": "Parameters:\n* $1 - an invalid entity type. Valid entity types are: item, property and query.",
