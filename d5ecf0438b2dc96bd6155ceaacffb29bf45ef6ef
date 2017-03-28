@@ -117,6 +117,30 @@
       "revId": "d5ecf0438b2dc96bd6155ceaacffb29bf45ef6ef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_fe7f4261",
+        "filename": "repo/includes/Diff/EntityDiffVisualizerFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-28T10:45:50Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this method then return instance of `BasicEntityDiffVisualizer`?",
+      "parentUuid": "6e436fe2_e35fab42",
+      "range": {
+        "startLine": 47,
+        "startChar": 12,
+        "endLine": 47,
+        "endChar": 37
+      },
+      "revId": "d5ecf0438b2dc96bd6155ceaacffb29bf45ef6ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
