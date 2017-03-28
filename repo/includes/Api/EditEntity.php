@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Api;
 
 use ApiMain;
+use DataTypes\DataTypeFactory;
 use Deserializers\Deserializer;
 use InvalidArgumentException;
 use MWException;
@@ -68,6 +69,11 @@ class EditEntity extends ModifyEntity {
 	private $statementDeserializer;
 
 	/**
+	 * @var DataTypeFactory
+	 */
+	private $dataTypeFactory;
+
+	/**
 	 * @var EntityIdParser
 	 */
 	private $idParser;
@@ -100,6 +106,7 @@ class EditEntity extends ModifyEntity {
 		$this->idParser = $wikibaseRepo->getEntityIdParser();
 		$this->entityFactory = $wikibaseRepo->getEntityFactory();
 		$this->statementDeserializer = $wikibaseRepo->getExternalFormatStatementDeserializer();
+		$this->dataTypeFactory = $wikibaseRepo->getDataTypeFactory();
 
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
@@ -230,6 +237,8 @@ class EditEntity extends ModifyEntity {
 		if ( !$exists && $entity instanceof Property ) {
 			if ( !isset( $data['datatype'] ) ) {
 				$this->errorReporter->dieError( 'No datatype given', 'param-illegal' );
+			} elseif ( !in_array( $data['datatype'], $this->dataTypeFactory->getTypeIds() ) ) {
+				$this->errorReporter->dieError( 'Invalid datatype given', 'param-illegal' );
 			} else {
 				$entity->setDataTypeId( $data['datatype'] );
 			}

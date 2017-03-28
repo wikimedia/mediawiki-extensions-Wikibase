@@ -849,6 +849,15 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'code' => 'not-supported',
 					'message' => 'The requested feature is not supported by the given entity'
 				) ) ),
+			'property with invalid datatype' => array(
+				'p' => array(
+					'new' => 'property',
+					'data' => '{"datatype":"invalid"}',
+				),
+				'e' => array( 'exception' => array(
+					'type' => ApiUsageException::class,
+					'code' => 'param-illegal'
+				) ) ),
 			'create mediainfo with automatic id' => array(
 				'p' => array( 'new' => 'mediainfo', 'data' => '{}' ),
 				'e' => array( 'exception' => array(
