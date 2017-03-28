@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_b9f47484",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T15:03:41Z",
+      "side": 1,
+      "message": "IF you don\u0027t need the factory, don\u0027t ask for the factory. The idea is that a class should declare all its dependencies in the constructor, but should take care to minimize dependencies. This is sometimes called the Gaia Principle: \"Ask exactly for what you need\".",
+      "parentUuid": "6e436fe2_f9f67cf5",
+      "range": {
+        "startLine": 109,
+        "startChar": 42,
+        "endLine": 109,
+        "endChar": 60
+      },
+      "revId": "76c911cfe8f7dc134a27a2dba8af48774c428ed9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_9991789f",
         "filename": "repo/includes/Api/EditEntity.php",
         "patchSetId": 2
