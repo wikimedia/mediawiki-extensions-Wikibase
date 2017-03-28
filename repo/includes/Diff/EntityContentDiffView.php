@@ -39,21 +39,6 @@ class EntityContentDiffView extends DifferenceEngine {
 	private $diffVisualizer;
 
 	/**
-	 * @var SnakFormatter
-	 */
-	private $detailedSnakFormatter;
-
-	/**
-	 * @var SnakFormatter
-	 */
-	private $terseSnakFormatter;
-
-	/**
-	 * @var EntityIdFormatter
-	 */
-	private $entityIdFormatter;
-
-	/**
 	 * @see DifferenceEngine::__construct
 	 *
 	 * @param IContextSource|null $context
@@ -66,49 +51,10 @@ class EntityContentDiffView extends DifferenceEngine {
 	public function __construct( $context = null, $old = 0, $new = 0, $rcid = 0, $refreshCache = false, $unhide = false ) {
 		parent::__construct( $context, $old, $new, $rcid, $refreshCache, $unhide );
 
-		$langCode = $this->getLanguage()->getCode();
-
-		//TODO: proper injection
-		$options = new FormatterOptions( array(
-			//TODO: fallback chain
-			ValueFormatter::OPT_LANG => $langCode
-		) );
-
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$termLookup = new EntityRetrievingTermLookup( $wikibaseRepo->getEntityLookup() );
-		$labelDescriptionLookupFactory = new LanguageFallbackLabelDescriptionLookupFactory(
-			$wikibaseRepo->getLanguageFallbackChainFactory(),
-			$termLookup
-		);
-		$labelDescriptionLookup = $labelDescriptionLookupFactory->newLabelDescriptionLookup(
-			$this->getLanguage(),
-			array() // TODO: populate ids of entities to prefetch
-		);
-
-		$htmlFormatterFactory = $wikibaseRepo->getEntityIdHtmlLinkFormatterFactory();
-		$this->entityIdFormatter = $htmlFormatterFactory->getEntityIdFormatter( $labelDescriptionLookup );
-
-		$formatterFactory = $wikibaseRepo->getSnakFormatterFactory();
-		$this->detailedSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML_DIFF, $options );
-		$this->terseSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML, $options );
-
-		// @fixme inject!
-		$this->diffVisualizer = new BasicEntityDiffVisualizer(
-			$this->getContext(),
-			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
-			new ClaimDifferenceVisualizer(
-				new DifferencesSnakVisualizer(
-					$this->entityIdFormatter,
-					$this->detailedSnakFormatter,
-					$this->terseSnakFormatter,
-					$langCode
-				),
-				$langCode
-			),
-			$wikibaseRepo->getSiteLookup(),
-			$this->entityIdFormatter
-		);
+		$entityDiffVisualizerFactory = $wikibaseRepo->getEntityDiffVisualizerFactory( $context );
+		$this->diffVisualizer = new DispatchingEntityDiffVisualizer( $entityDiffVisualizerFactory );
 	}
 
 	/**
