@@ -94,6 +94,30 @@
       "revId": "b8d56d0f21fed490ebf85de6b9e111d89968c2ac",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_01d3ae31",
+        "filename": "repo/includes/Api/SearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-28T16:37:50Z",
+      "side": 1,
+      "message": "Then `options.wiki:108` should state that spaces and special symbols should be encoded beforehand.",
+      "parentUuid": "6e436fe2_61595201",
+      "range": {
+        "startLine": 180,
+        "startChar": 20,
+        "endLine": 180,
+        "endChar": 29
+      },
+      "revId": "b8d56d0f21fed490ebf85de6b9e111d89968c2ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
