@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_872fcef2",
+        "filename": "repo/includes/Content/EntityHandler.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T21:21:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e436fe2_84beeccf",
+      "revId": "a123cb11ad256c59e9345f523b0438ec5054a8fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_a4c3e860",
         "filename": "repo/includes/Content/PropertyHandler.php",
         "patchSetId": 18
@@ -30,6 +48,24 @@
       "writtenOn": "2017-03-28T19:18:35Z",
       "side": 1,
       "message": "IDE artifact, please remove",
+      "revId": "a123cb11ad256c59e9345f523b0438ec5054a8fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_673e4228",
+        "filename": "repo/includes/Content/PropertyHandler.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T21:21:03Z",
+      "side": 1,
+      "message": "Done\nphpstorm is helpful, but sometimes it\u0027s *too* helpful.",
+      "parentUuid": "6e436fe2_a4c3e860",
       "revId": "a123cb11ad256c59e9345f523b0438ec5054a8fc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_e74a52c8",
+        "filename": "repo/includes/Search/Elastic/Fields/DescriptionProviderFieldDefinitions.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T21:21:03Z",
+      "side": 1,
+      "message": "yeah we\u0027ll need them later.",
+      "parentUuid": "6e436fe2_44b8e4e2",
+      "revId": "a123cb11ad256c59e9345f523b0438ec5054a8fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_24d03822",
         "filename": "repo/includes/Search/Elastic/Fields/ItemFieldDefinitions.php",
         "patchSetId": 18
@@ -64,6 +118,24 @@
       "writtenOn": "2017-03-28T19:18:35Z",
       "side": 1,
       "message": "Would it be sensible to use FiledDefinition here?",
+      "revId": "a123cb11ad256c59e9345f523b0438ec5054a8fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_8716eeaa",
+        "filename": "repo/includes/Search/Elastic/Fields/ItemFieldDefinitions.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T21:21:03Z",
+      "side": 1,
+      "message": "Well, we know it will be specific type, since we assign them in the ctor, so I am not sure what would be the reason to use more generic type.",
+      "parentUuid": "6e436fe2_24d03822",
       "revId": "a123cb11ad256c59e9345f523b0438ec5054a8fc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_8764ae46",
+        "filename": "repo/includes/Search/Elastic/Fields/LabelsProviderFieldDefinitons.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T21:21:03Z",
+      "side": 1,
+      "message": "One thing that stops me is that there are like 800 language codes, and scanning through them would take non-negligible time.",
+      "parentUuid": "6e436fe2_44af8491",
+      "revId": "a123cb11ad256c59e9345f523b0438ec5054a8fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_e4a0109d",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 18
@@ -115,6 +205,24 @@
       "writtenOn": "2017-03-28T19:18:35Z",
       "side": 1,
       "message": "Instead of adding N such services here, it might make sense to have a dedicated factory class for these. Can have exactly these methods. That wouldn\u0027t change any dependencies, it\u0027s just a level of indirection that will hopefully prevent further bloat in this class. It\u0027s already too big.",
+      "revId": "a123cb11ad256c59e9345f523b0438ec5054a8fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_a7820acc",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 1505,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T21:21:03Z",
+      "side": 1,
+      "message": "Maybe, but I\u0027d prefer to refactor it after, when we\u0027re 100% clear on what we will need for search.",
+      "parentUuid": "6e436fe2_e4a0109d",
       "revId": "a123cb11ad256c59e9345f523b0438ec5054a8fc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -138,6 +246,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_276fda27",
+        "filename": "repo/tests/phpunit/includes/Content/EntityHandlerTest.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T21:21:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e436fe2_4486a419",
+      "revId": "a123cb11ad256c59e9345f523b0438ec5054a8fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_c47ab41f",
         "filename": "repo/tests/phpunit/includes/Content/EntityHandlerTest.php",
         "patchSetId": 18
@@ -149,6 +275,24 @@
       "writtenOn": "2017-03-28T19:18:35Z",
       "side": 1,
       "message": "So exposing additional fields is ok?",
+      "revId": "a123cb11ad256c59e9345f523b0438ec5054a8fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_678c0200",
+        "filename": "repo/tests/phpunit/includes/Content/EntityHandlerTest.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T21:21:03Z",
+      "side": 1,
+      "message": "Generally it should be OK - we could have extensions, etc.",
+      "parentUuid": "6e436fe2_c47ab41f",
       "revId": "a123cb11ad256c59e9345f523b0438ec5054a8fc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
