@@ -7,6 +7,7 @@ use FauxRequest;
 use PHPUnit_Framework_TestCase;
 use RequestContext;
 use Title;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -361,6 +362,53 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			$this->assertArrayHasKey( 'title', $searchresult );
 			$this->assertArrayHasKey( 'pageid', $searchresult );
 		}
+	}
+
+	public function testGivenEntityIdContainsUriUnsafeCharacters_conceptUriContainsEncodedCharacters() {
+		$nyanId = $this->getMockBuilder( EntityId::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$nyanId->method( 'getLocalPart' )
+			->will( $this->returnValue( '[,,_,,];3' ) );
+		$nyanId->method( 'getEntityType' )
+			->will( $this->returnValue( 'kitten' ) );
+
+		$params = [
+			'action' => 'wbsearchentities',
+			'search' => 'nyan',
+			'type' => 'kitten',
+			'language' => 'en'
+		];
+
+		$match = new TermSearchResult(
+			new Term( 'en', 'nyan' ),
+			'label',
+			$nyanId,
+			new Term( 'en', 'nyan' )
+		);
+
+		$searchHelper = $this->getMockEntitySearchHelper( $params, [ $match ] );
+
+		$module = new SearchEntities(
+			$this->getApiMain( $params ),
+			'wbsearchentities',
+			$searchHelper,
+			$this->getMockTitleLookup(),
+			$this->getMockPropertyDataTypeLookup(),
+			$this->getContentLanguages(),
+			[ 'kitten' ],
+			[ '' => 'http://acme.test/concept/', 'foreign' => 'http://foreign.wiki/concept/' ]
+		);
+
+		$module->execute();
+
+		$result = $module->getResult()->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
+
+		$this->assertEquals( 'http://acme.test/concept/%5B,,_,,%5D;3', $result['search'][0]['concepturi'] );
 	}
 
 }
