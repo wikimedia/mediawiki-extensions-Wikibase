@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_63539b44",
+        "filename": "repo/includes/Diff/DispatchingEntityDiffVisualizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-28T09:44:09Z",
+      "side": 1,
+      "message": "Lazy loading. I have no strong feeling about this though.",
+      "parentUuid": "6e436fe2_03b2d792",
+      "range": {
+        "startLine": 84,
+        "startChar": 3,
+        "endLine": 90,
+        "endChar": 5
+      },
+      "revId": "d5ecf0438b2dc96bd6155ceaacffb29bf45ef6ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_838587a1",
         "filename": "repo/includes/Diff/EntityDiffVisualizerFactory.php",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-03-28T09:38:13Z",
       "side": 1,
       "message": "IMO, super weird signature for factory method.\n\nIs there actual use-case where new entity type shouldn\u0027t have diff visualizer?",
+      "range": {
+        "startLine": 47,
+        "startChar": 12,
+        "endLine": 47,
+        "endChar": 37
+      },
+      "revId": "d5ecf0438b2dc96bd6155ceaacffb29bf45ef6ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_e35fab42",
+        "filename": "repo/includes/Diff/EntityDiffVisualizerFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-28T09:44:09Z",
+      "side": 1,
+      "message": "Yeah.. Let me think what can I do. Regarding your question, yes. It can happen when there is no specific part of that entity type needing diff (for example properties) because BasicEntityDiffVisualizer can handle that.",
+      "parentUuid": "6e436fe2_838587a1",
       "range": {
         "startLine": 47,
         "startChar": 12,
