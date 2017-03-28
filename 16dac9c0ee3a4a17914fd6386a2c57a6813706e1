@@ -37,6 +37,40 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_c4f5d4b6",
+        "filename": "repo/includes/Content/PropertyHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:18:35Z",
+      "side": 1,
+      "message": "IDE artifact, please remove",
+      "revId": "16dac9c0ee3a4a17914fd6386a2c57a6813706e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_e4f250cd",
+        "filename": "repo/includes/Search/Elastic/Fields/DescriptionProviderFieldDefinitions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:18:35Z",
+      "side": 1,
+      "message": "I\u0027ll trust you that these are actually needed.",
+      "revId": "16dac9c0ee3a4a17914fd6386a2c57a6813706e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_072bfadc",
         "filename": "repo/includes/Search/Elastic/Fields/FieldDefinitions.php",
         "patchSetId": 6
