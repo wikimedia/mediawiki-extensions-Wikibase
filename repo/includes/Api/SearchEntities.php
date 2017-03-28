@@ -177,7 +177,7 @@ class SearchEntities extends ApiBase {
 	 */
 	private function getConceptUri( EntityId $entityId ) {
 		$baseUri = $this->getConceptBaseUri( $entityId );
-		return $baseUri . $entityId->getLocalPart();
+		return $baseUri . urlencode( $entityId->getLocalPart() );
 	}
 
 	/**
@@ -189,7 +189,9 @@ class SearchEntities extends ApiBase {
 	 */
 	private function getConceptBaseUri( EntityId $entityId ) {
 		if ( !isset( $this->conceptBaseUris[$entityId->getRepositoryName()] ) ) {
-			throw new LogicException( 'No base URI for for concept URI for repository: ' . $entityId->getRepositoryName() );
+			throw new LogicException(
+				'No base URI for for concept URI for repository: ' . $entityId->getRepositoryName()
+			);
 		}
 
 		return $this->conceptBaseUris[$entityId->getRepositoryName()];
