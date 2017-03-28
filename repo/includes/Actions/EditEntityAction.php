@@ -27,6 +27,7 @@ use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
 use Wikibase\Repo\Diff\DifferencesSnakVisualizer;
 use Wikibase\Repo\Diff\BasicEntityDiffVisualizer;
+use Wikibase\Repo\Diff\DispatchingEntityDiffVisualizer;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -55,47 +56,8 @@ class EditEntityAction extends ViewEntityAction {
 	public function __construct( Page $page, IContextSource $context = null ) {
 		parent::__construct( $page, $context );
 
-		$languageCode = $this->getContext()->getLanguage()->getCode();
-
-		//TODO: proper injection
-		$options = new FormatterOptions( array(
-			//TODO: fallback chain
-			ValueFormatter::OPT_LANG => $languageCode
-		) );
-
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-		$termLookup = new EntityRetrievingTermLookup( $wikibaseRepo->getEntityLookup() );
-		$labelDescriptionLookupFactory = new LanguageFallbackLabelDescriptionLookupFactory(
-			$wikibaseRepo->getLanguageFallbackChainFactory(),
-			$termLookup
-		);
-		$labelDescriptionLookup = $labelDescriptionLookupFactory->newLabelDescriptionLookup(
-			$this->getContext()->getLanguage(),
-			array() // TODO: populate ids of entities to prefetch
-		);
-
-		$htmlFormatterFactory = $wikibaseRepo->getEntityIdHtmlLinkFormatterFactory();
-		$entityIdFormatter = $htmlFormatterFactory->getEntityIdFormatter( $labelDescriptionLookup );
-
-		$formatterFactory = $wikibaseRepo->getSnakFormatterFactory();
-		$snakDetailsFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML_DIFF, $options );
-		$snakBreadCrumbFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML, $options );
-
-		$this->entityDiffVisualizer = new BasicEntityDiffVisualizer(
-			$this->getContext(),
-			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
-			new ClaimDifferenceVisualizer(
-				new DifferencesSnakVisualizer(
-					$entityIdFormatter,
-					$snakDetailsFormatter,
-					$snakBreadCrumbFormatter,
-					$languageCode
-				),
-				$languageCode
-			),
-			$wikibaseRepo->getSiteLookup(),
-			$entityIdFormatter
+		$this->entityDiffVisualizer = new DispatchingEntityDiffVisualizer(
+			WikibaseRepo::getDefaultInstance()->getEntityDiffVisualizerFactory( $context )
 		);
 	}
 

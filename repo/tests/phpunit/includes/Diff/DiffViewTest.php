@@ -8,6 +8,7 @@ use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use HashSiteStore;
 use PHPUnit_Framework_TestCase;
+use RequestContext;
 use TestSites;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Repo\Diff\DiffView;
@@ -101,7 +102,8 @@ class DiffViewTest extends PHPUnit_Framework_TestCase {
 			$path,
 			$diff,
 			$siteStore,
-			$entityIdFormatter
+			$entityIdFormatter,
+			new RequestContext()
 		);
 
 		return $diffView;
