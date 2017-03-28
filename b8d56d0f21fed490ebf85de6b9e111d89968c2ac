@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_3ed4ca4a",
+        "filename": "repo/includes/Api/SearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-28T10:57:30Z",
+      "side": 1,
+      "message": "There is also `wfUrlencode()`. It produces more beautiful (but still valid) output. \n\n* May be we should use `wfUrlencode`?\n* Shuldn\u0027t we encode also base path or is it encoded elsewhere?\n* How about the test?",
+      "range": {
+        "startLine": 180,
+        "startChar": 20,
+        "endLine": 180,
+        "endChar": 29
+      },
+      "revId": "b8d56d0f21fed490ebf85de6b9e111d89968c2ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
