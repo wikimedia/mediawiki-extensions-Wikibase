@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_7ebd7215",
+        "filename": "repo/includes/Diff/DispatchingEntityDiffVisualizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-28T10:43:52Z",
+      "side": 1,
+      "message": "I would say \"Lazy loading\" is answer to \"What?\" but not \"Why?\"\n\nDo we really need this? \n`BasicEntityDiffVisualizer` doesn\u0027t do anything in it\u0027s constructor, so I don\u0027t see a reason to add this logic.",
+      "parentUuid": "6e436fe2_63539b44",
+      "range": {
+        "startLine": 84,
+        "startChar": 3,
+        "endLine": 90,
+        "endChar": 5
+      },
+      "revId": "d5ecf0438b2dc96bd6155ceaacffb29bf45ef6ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_838587a1",
         "filename": "repo/includes/Diff/EntityDiffVisualizerFactory.php",
         "patchSetId": 1
