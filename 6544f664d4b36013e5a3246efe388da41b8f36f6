@@ -333,6 +333,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_ca52bb6a",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T23:16:46Z",
+      "side": 1,
+      "message": "I looked into it, and we need the request for debug features. We don\u0027t have to do much with it, but we have to pass it to Cirrus functions.",
+      "parentUuid": "6e436fe2_0a10a352",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_c4f87449",
         "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
         "patchSetId": 54
@@ -379,6 +397,24 @@
       "side": 1,
       "message": "I\u0027m sure I had a reason for this, I have no idea now what it was :)",
       "parentUuid": "6e436fe2_a4bd2865",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_2afc7f3a",
+        "filename": "repo/includes/Search/Elastic/WikibasePrefixSearcher.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T23:16:46Z",
+      "side": 1,
+      "message": "OK, now I remember. $warning is not just a warning, it is set of parameters for $status-\u003ewarning() which needs to be unpacked.",
+      "parentUuid": "6e436fe2_2a9d5f5b",
       "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
