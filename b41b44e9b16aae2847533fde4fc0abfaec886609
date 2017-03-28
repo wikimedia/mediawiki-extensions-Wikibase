@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_44954434",
+        "filename": "repo/includes/Content/EntityHandler.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:31:48Z",
+      "side": 1,
+      "message": "I think !\u003d\u003d null is preferred to is_null.",
+      "revId": "b41b44e9b16aae2847533fde4fc0abfaec886609",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_84b26ce3",
+        "filename": "repo/includes/Search/Elastic/Fields/AllLabelsField.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:31:48Z",
+      "side": 1,
+      "message": "For this implementation, the documentation should be:\n\n  @return always null",
+      "revId": "b41b44e9b16aae2847533fde4fc0abfaec886609",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_04c73c4b",
+        "filename": "repo/includes/Search/Elastic/Fields/FieldDefinitions.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:31:48Z",
+      "side": 1,
+      "message": "This is now inconsistent with SearchIndexField mentioned at the end of this line.",
+      "revId": "b41b44e9b16aae2847533fde4fc0abfaec886609",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_64e880b0",
+        "filename": "repo/includes/Search/Elastic/Fields/ItemFieldDefinitions.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:31:48Z",
+      "side": 1,
+      "message": "Splitting the rename to a separate change would make this much easier to review. This clutters the diff.",
+      "revId": "b41b44e9b16aae2847533fde4fc0abfaec886609",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_c4d714f1",
+        "filename": "repo/includes/Search/Elastic/Fields/LabelsField.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:31:48Z",
+      "side": 1,
+      "message": "What should happen if $language is not in $this-\u003elanguages? Skip? Log? Add it anyway?",
+      "revId": "b41b44e9b16aae2847533fde4fc0abfaec886609",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_24f27898",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Fields/AllLabelsFieldTest.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:31:48Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this also test getMapping()?",
+      "revId": "b41b44e9b16aae2847533fde4fc0abfaec886609",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_84002c6f",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Fields/AllLabelsFieldTest.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:31:48Z",
+      "side": 1,
+      "message": "I prefer the provideFieldData convention. getFieldDataProvider sounds like a getter for a FieldDataProvider.",
+      "revId": "b41b44e9b16aae2847533fde4fc0abfaec886609",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_44fa2475",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Fields/AllLabelsFieldTest.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:31:48Z",
+      "side": 1,
+      "message": "by convention, this would be called testGetFieldData",
+      "revId": "b41b44e9b16aae2847533fde4fc0abfaec886609",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_e4eb309f",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Fields/LabelsFieldTest.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:31:48Z",
+      "side": 1,
+      "message": "shouldn\u0027t this also test getMapping()?",
+      "revId": "b41b44e9b16aae2847533fde4fc0abfaec886609",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
