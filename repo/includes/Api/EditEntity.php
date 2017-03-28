@@ -23,6 +23,7 @@ use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
@@ -68,6 +69,11 @@ class EditEntity extends ModifyEntity {
 	private $statementDeserializer;
 
 	/**
+	 * @var DataTypeDefinitions
+	 */
+	private $dataTypeDefinitions;
+
+	/**
 	 * @var EntityIdParser
 	 */
 	private $idParser;
@@ -100,6 +106,7 @@ class EditEntity extends ModifyEntity {
 		$this->idParser = $wikibaseRepo->getEntityIdParser();
 		$this->entityFactory = $wikibaseRepo->getEntityFactory();
 		$this->statementDeserializer = $wikibaseRepo->getExternalFormatStatementDeserializer();
+		$this->dataTypeDefinitions = $wikibaseRepo->getDataTypeDefinitions();
 
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
@@ -230,6 +237,8 @@ class EditEntity extends ModifyEntity {
 		if ( !$exists && $entity instanceof Property ) {
 			if ( !isset( $data['datatype'] ) ) {
 				$this->errorReporter->dieError( 'No datatype given', 'param-illegal' );
+			} elseif ( !in_array( $data['datatype'], $this->dataTypeDefinitions->getTypeIds() ) ) {
+				$this->errorReporter->dieError( 'Invalid datatype given', 'param-illegal' );
 			} else {
 				$entity->setDataTypeId( $data['datatype'] );
 			}
