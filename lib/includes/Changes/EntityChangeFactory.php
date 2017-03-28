@@ -95,7 +95,6 @@ class EntityChangeFactory {
 	 * @param string      $action The action name
 	 * @param EntityDocument|null $oldEntity
 	 * @param EntityDocument|null $newEntity
-	 * @param array $fields additional fields to set
 	 *
 	 * @return EntityChange
 	 * @throws MWException
@@ -103,8 +102,7 @@ class EntityChangeFactory {
 	public function newFromUpdate(
 		$action,
 		EntityDocument $oldEntity = null,
-		EntityDocument $newEntity = null,
-		array $fields = array()
+		EntityDocument $newEntity = null
 	) {
 		if ( $oldEntity === null && $newEntity === null ) {
 			throw new MWException( 'Either $oldEntity or $newEntity must be given' );
@@ -127,7 +125,7 @@ class EntityChangeFactory {
 		}
 
 		/** @var EntityChange $instance */
-		$instance = self::newForEntity( $action, $id, $fields );
+		$instance = self::newForEntity( $action, $id );
 		$instance->setDiff( $diff );
 
 		return $instance;
