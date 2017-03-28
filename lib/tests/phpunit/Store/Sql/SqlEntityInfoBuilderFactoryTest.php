@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Store\Sql;
 
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;

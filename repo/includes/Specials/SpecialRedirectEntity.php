@@ -12,7 +12,6 @@ use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Special page for creating redirects between entities

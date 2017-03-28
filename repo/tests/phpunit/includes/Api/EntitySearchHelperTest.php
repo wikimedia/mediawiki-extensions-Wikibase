@@ -13,7 +13,6 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\Interactors\TermSearchResult;
-use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\TermIndexEntry;
 

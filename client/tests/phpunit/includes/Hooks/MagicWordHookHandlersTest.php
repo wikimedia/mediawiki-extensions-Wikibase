@@ -4,13 +4,10 @@ namespace Wikibase\Client\Tests\Hooks;
 
 use Language;
 use Wikibase\Client\Hooks\MagicWordHookHandlers;
-use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use Parser;
 use Wikibase\SettingsArray;
-use Title;
 use TestingAccessWrapper;
-use Wikibase\Client\WikibaseClient;
 
 /**
  * @covers Wikibase\Client\Hooks\MagicWordHookHandlers

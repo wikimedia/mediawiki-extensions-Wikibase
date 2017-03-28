@@ -12,7 +12,6 @@ use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for creating a reference or setting the value of an existing one.

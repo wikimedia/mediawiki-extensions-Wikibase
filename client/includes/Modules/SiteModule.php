@@ -2,7 +2,6 @@
 
 namespace Wikibase;
 
-use FormatJson;
 use MediaWikiSite;
 use ResourceLoader;
 use ResourceLoaderContext;

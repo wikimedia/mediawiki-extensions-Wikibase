@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Diff;
 
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\Content\EntityContentDiff;
 
 /**

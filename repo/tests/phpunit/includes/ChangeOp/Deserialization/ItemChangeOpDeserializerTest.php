@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 
 use HashSiteStore;
 use Site;
-use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;

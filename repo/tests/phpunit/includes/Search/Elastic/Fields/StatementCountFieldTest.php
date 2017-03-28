@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Search\Elastic\Fields;
 
-use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;

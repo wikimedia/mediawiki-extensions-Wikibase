@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
-use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;

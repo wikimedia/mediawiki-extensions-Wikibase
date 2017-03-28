@@ -6,7 +6,6 @@ use ApiBase;
 use ApiMain;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for setting the DataValue contained by the main snak of a claim.
