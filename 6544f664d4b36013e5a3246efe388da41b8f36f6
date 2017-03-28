@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_2a623fd6",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 914,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T22:46:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e436fe2_e421f0f7",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_246fd827",
         "filename": "repo/Wikibase.php",
         "patchSetId": 54
@@ -87,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_8a7033a5",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T22:46:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e436fe2_8464ac46",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_6463a03c",
         "filename": "repo/i18n/qqq.json",
         "patchSetId": 54
@@ -98,6 +134,24 @@
       "writtenOn": "2017-03-28T19:56:26Z",
       "side": 1,
       "message": "when? where?",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_8abef3cf",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 54
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T22:46:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e436fe2_6463a03c",
       "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +175,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_4ab8ebe2",
+        "filename": "repo/includes/Api/EntitySearchHelper.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T22:46:09Z",
+      "side": 1,
+      "message": "I named it otherwise in previous patches but you told me to keep it so that the type stays the same :)",
+      "parentUuid": "6e436fe2_2456f85f",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_a4c8c826",
         "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
         "patchSetId": 54
@@ -132,6 +204,24 @@
       "writtenOn": "2017-03-28T19:56:26Z",
       "side": 1,
       "message": "Where is the fallback chain? Is it just the order of language codes? LanguageFallbackChain is more powerful than that, applying transliteration when needed.",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_caccfb8e",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T22:46:09Z",
+      "side": 1,
+      "message": "Yes, right now it\u0027s just finding the right label by order of codes. I\u0027m not sure where there\u0027s a place for applying transliteration, could you please elaborate?",
+      "parentUuid": "6e436fe2_a4c8c826",
       "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +245,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_8aa593b3",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T22:46:09Z",
+      "side": 1,
+      "message": "I could walk you through if you\u0027d like. Ping me on IRC. I\u0027ll add some more comments too.",
+      "parentUuid": "6e436fe2_24d598ba",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_e4ded0dd",
         "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
         "patchSetId": 54
@@ -172,6 +280,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_8a8b531b",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T22:46:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e436fe2_e4ded0dd",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_64a0803f",
         "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
         "patchSetId": 54
@@ -183,6 +309,24 @@
       "writtenOn": "2017-03-28T19:56:26Z",
       "side": 1,
       "message": "I\u0027m a bit unhappy about this for two reasons:\n- user input should be avoided in a service constructor.\n- WebRequest is a kitchen sink, it also contains the response.",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_0a10a352",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T22:46:09Z",
+      "side": 1,
+      "message": "We need it for debugging, but with recent refactoring there might be a better way to do the same.",
+      "parentUuid": "6e436fe2_64a0803f",
       "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -217,6 +361,24 @@
       "writtenOn": "2017-03-28T19:56:26Z",
       "side": 1,
       "message": "Why not $status-\u003ewarning( $warning )?",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_2a9d5f5b",
+        "filename": "repo/includes/Search/Elastic/WikibasePrefixSearcher.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T22:46:09Z",
+      "side": 1,
+      "message": "I\u0027m sure I had a reason for this, I have no idea now what it was :)",
+      "parentUuid": "6e436fe2_a4bd2865",
       "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
