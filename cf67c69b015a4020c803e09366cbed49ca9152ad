@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_c494f48f",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T18:38:05Z",
+      "side": 1,
+      "message": "Do you actually need the DataTypeDefinitions? It seems like all you need is the list of defined data type IDs. So just ask for those.\n\nAt the moment, this does not make much of a difference. But ideally, all these services should be injected as constructor parameter. Ladsgroup has made several patches lately for moving API modules to proper injection, e.g. I3c6009368b9. With proper injection, it becomes clear why this makes a difference: this class then will not have to know about WikibaseRepo or DataTypeDefinitions.",
+      "revId": "cf67c69b015a4020c803e09366cbed49ca9152ad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
