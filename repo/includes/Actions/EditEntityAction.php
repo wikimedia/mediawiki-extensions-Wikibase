@@ -27,6 +27,7 @@ use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
 use Wikibase\Repo\Diff\DifferencesSnakVisualizer;
 use Wikibase\Repo\Diff\BasicEntityDiffVisualizer;
+use Wikibase\Repo\Diff\DispatchingEntityDiffVisualizer;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -82,7 +83,9 @@ class EditEntityAction extends ViewEntityAction {
 		$snakDetailsFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML_DIFF, $options );
 		$snakBreadCrumbFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML, $options );
 
-		$this->entityDiffVisualizer = new BasicEntityDiffVisualizer(
+		$entityDiffVisualizerFactory = $wikibaseRepo->getEntityDiffVisualizerFactory();
+		$this->entityDiffVisualizer = new DispatchingEntityDiffVisualizer(
+			$entityDiffVisualizerFactory,
 			$this->getContext(),
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
 			new ClaimDifferenceVisualizer(
