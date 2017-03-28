@@ -70,6 +70,30 @@
       "revId": "b8d56d0f21fed490ebf85de6b9e111d89968c2ac",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_61595201",
+        "filename": "repo/includes/Api/SearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T16:25:09Z",
+      "side": 1,
+      "message": "It\u0027s not. The base URI is something like \u0027http://www.wikidata.org/entity/\u0027. Encoding it would result in \u0027http%3A%2F%2Fwww.wikidata.org%2Fentity%2F\u0027, which is not a valid url.",
+      "parentUuid": "6e436fe2_e12d628c",
+      "range": {
+        "startLine": 180,
+        "startChar": 20,
+        "endLine": 180,
+        "endChar": 29
+      },
+      "revId": "b8d56d0f21fed490ebf85de6b9e111d89968c2ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
