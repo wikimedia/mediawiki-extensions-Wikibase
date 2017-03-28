@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_7e94928d",
+        "filename": "repo/includes/Api/SearchEntities.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-28T10:50:58Z",
+      "side": 1,
+      "message": "True. Added in Ief0e63d027ae7f92f95555dd4ff3c09f01a4328f.",
+      "parentUuid": "6e436fe2_b5556b54",
+      "revId": "dec72ca381df6fa382cdbb400522a4e5f876c81b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_95586f8e",
         "filename": "repo/includes/Api/SearchEntities.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2017-03-24T17:42:53Z",
       "side": 1,
       "message": "LogicException means we die with status 500. Do we really want to fail this hard? I\u0027m not saying we shouldn\u0027t. I\u0027m just wondering.\n\nAlso, long line.",
+      "revId": "dec72ca381df6fa382cdbb400522a4e5f876c81b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_3eedaa22",
+        "filename": "repo/includes/Api/SearchEntities.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-28T10:50:58Z",
+      "side": 1,
+      "message": "Yeah, I am not sure either. It could also result in API error. I don\u0027t really know what fits better. I\u0027d be happy to change it.\n\nLong line chopped down in Ief0e63d027ae7f92f95555dd4ff3c09f01a4328f.",
+      "parentUuid": "6e436fe2_95586f8e",
       "revId": "dec72ca381df6fa382cdbb400522a4e5f876c81b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
