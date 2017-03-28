@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_83e1079a",
+        "filename": "repo/tests/phpunit/includes/Content/ItemContentTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-28T09:22:17Z",
+      "side": 1,
+      "message": "Please, use constant instead of strings",
+      "range": {
+        "startLine": 52,
+        "startChar": 9,
+        "endLine": 52,
+        "endChar": 15
+      },
+      "revId": "eeb76b2f29c8ff0421fd9d74d946aa7251561481",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
