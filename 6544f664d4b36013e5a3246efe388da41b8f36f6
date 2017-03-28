@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_448784dc",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:56:26Z",
+      "side": 1,
+      "message": "This should be documented in docs/options.wiki",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_648c0000",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 912,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:56:26Z",
+      "side": 1,
+      "message": "This should be documented in docs/options.wiki",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_e421f0f7",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 914,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:56:26Z",
+      "side": 1,
+      "message": "If cirrus is loaded after Wikibase, this gets lost. Better do this in RepoHooks::onSetupAfterCache or similar. and only if $settings[\u0027useCirrus\u0027] is set.",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_246fd827",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:56:26Z",
+      "side": 1,
+      "message": "dito",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_8464ac46",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:56:26Z",
+      "side": 1,
+      "message": "This should be documented in docs/options.wiki",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_6463a03c",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 54
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:56:26Z",
+      "side": 1,
+      "message": "when? where?",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_2456f85f",
+        "filename": "repo/includes/Api/EntitySearchHelper.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:56:26Z",
+      "side": 1,
+      "message": "Maybe it should be called EntitySearcher? EntityFinder?",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_a4c8c826",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:56:26Z",
+      "side": 1,
+      "message": "Where is the fallback chain? Is it just the order of language codes? LanguageFallbackChain is more powerful than that, applying transliteration when needed.",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_24d598ba",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:56:26Z",
+      "side": 1,
+      "message": "i have no idea what\u0027s happening here.",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_e4ded0dd",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:56:26Z",
+      "side": 1,
+      "message": "blank lines or no blank lines, please pick one :)",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_64a0803f",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:56:26Z",
+      "side": 1,
+      "message": "I\u0027m a bit unhappy about this for two reasons:\n- user input should be avoided in a service constructor.\n- WebRequest is a kitchen sink, it also contains the response.",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_c4f87449",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:56:26Z",
+      "side": 1,
+      "message": "Perhaps this could take an amorphous $options array, or a EntitySearchOptions object.\n\nIndeed, TermSearchOptions exists. It\u0027s used with the ConfigurableTermSearchInteractor interface. Perhaps it can be re-used here. \n\nOn a related note, perhaps the boundaries between TermSearchInteractor and EntitySearchHelper should be re-thought, their interaction seems awkward.",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_a4bd2865",
+        "filename": "repo/includes/Search/Elastic/WikibasePrefixSearcher.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:56:26Z",
+      "side": 1,
+      "message": "Why not $status-\u003ewarning( $warning )?",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
