@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_a43a08e3",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T20:03:24Z",
+      "side": 1,
+      "message": "FIXMES should generally not be merged, at least not until a fix is at least on gerrit. Do you plan to address this soon?",
+      "revId": "788eda579e53bf1e2d1aa7551c4c3e91f7e587da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_443f84d3",
+        "filename": "repo/includes/Search/Elastic/WikibasePrefixSearcher.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T20:03:24Z",
+      "side": 1,
+      "message": "why? seems straight forward.",
+      "revId": "788eda579e53bf1e2d1aa7551c4c3e91f7e587da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
