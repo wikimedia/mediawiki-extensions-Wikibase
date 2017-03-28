@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_67d2c2d7",
+        "filename": "repo/includes/Content/EntityHandler.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T21:44:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e436fe2_44954434",
+      "revId": "b41b44e9b16aae2847533fde4fc0abfaec886609",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_84b26ce3",
         "filename": "repo/includes/Search/Elastic/Fields/AllLabelsField.php",
         "patchSetId": 23
@@ -30,6 +48,24 @@
       "writtenOn": "2017-03-28T19:31:48Z",
       "side": 1,
       "message": "For this implementation, the documentation should be:\n\n  @return always null",
+      "revId": "b41b44e9b16aae2847533fde4fc0abfaec886609",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_87ea6e72",
+        "filename": "repo/includes/Search/Elastic/Fields/AllLabelsField.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T21:44:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e436fe2_84b26ce3",
       "revId": "b41b44e9b16aae2847533fde4fc0abfaec886609",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_07ff3e32",
+        "filename": "repo/includes/Search/Elastic/Fields/FieldDefinitions.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T21:44:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e436fe2_04c73c4b",
+      "revId": "b41b44e9b16aae2847533fde4fc0abfaec886609",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_64e880b0",
         "filename": "repo/includes/Search/Elastic/Fields/ItemFieldDefinitions.php",
         "patchSetId": 23
@@ -64,6 +118,24 @@
       "writtenOn": "2017-03-28T19:31:48Z",
       "side": 1,
       "message": "Splitting the rename to a separate change would make this much easier to review. This clutters the diff.",
+      "revId": "b41b44e9b16aae2847533fde4fc0abfaec886609",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_27fcba3a",
+        "filename": "repo/includes/Search/Elastic/Fields/ItemFieldDefinitions.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T21:44:30Z",
+      "side": 1,
+      "message": "True but given I already had half-dozen patches... Will try to separate refactoring in further ones.",
+      "parentUuid": "6e436fe2_64e880b0",
       "revId": "b41b44e9b16aae2847533fde4fc0abfaec886609",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_479b061c",
+        "filename": "repo/includes/Search/Elastic/Fields/LabelsField.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T21:44:30Z",
+      "side": 1,
+      "message": "Well, if the language is not in the list, that means we don\u0027t have a field for it. Which means, we can send it to Elastic, but it will not be indexed. So basically right now it\u0027s \"add it anyway, but it will be useless\". We do have (or at least had) data with weird languages in labels, we can\u0027t really do much but ignore them I think...",
+      "parentUuid": "6e436fe2_c4d714f1",
+      "revId": "b41b44e9b16aae2847533fde4fc0abfaec886609",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_24f27898",
         "filename": "repo/tests/phpunit/includes/Search/Elastic/Fields/AllLabelsFieldTest.php",
         "patchSetId": 23
@@ -98,6 +188,24 @@
       "writtenOn": "2017-03-28T19:31:48Z",
       "side": 1,
       "message": "Shouldn\u0027t this also test getMapping()?",
+      "revId": "b41b44e9b16aae2847533fde4fc0abfaec886609",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_c785d6a0",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Fields/AllLabelsFieldTest.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T21:44:30Z",
+      "side": 1,
+      "message": "EntityHandlerTest.php kinda does rudimentary testing for it. I can\u0027t add too much more to it without creating strong binding to specific ElasticSearch structures, which I\u0027m not sure I want to do, but I\u0027ll try to add something.",
+      "parentUuid": "6e436fe2_24f27898",
       "revId": "b41b44e9b16aae2847533fde4fc0abfaec886609",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_a7bd2a65",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Fields/AllLabelsFieldTest.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T21:44:30Z",
+      "side": 1,
+      "message": "Done\ntoo many providers...",
+      "parentUuid": "6e436fe2_84002c6f",
+      "revId": "b41b44e9b16aae2847533fde4fc0abfaec886609",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_44fa2475",
         "filename": "repo/tests/phpunit/includes/Search/Elastic/Fields/AllLabelsFieldTest.php",
         "patchSetId": 23
@@ -138,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_e7a3323e",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Fields/AllLabelsFieldTest.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T21:44:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e436fe2_44fa2475",
+      "revId": "b41b44e9b16aae2847533fde4fc0abfaec886609",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_e4eb309f",
         "filename": "repo/tests/phpunit/includes/Search/Elastic/Fields/LabelsFieldTest.php",
         "patchSetId": 23
@@ -149,6 +293,24 @@
       "writtenOn": "2017-03-28T19:31:48Z",
       "side": 1,
       "message": "shouldn\u0027t this also test getMapping()?",
+      "revId": "b41b44e9b16aae2847533fde4fc0abfaec886609",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_072ade8f",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Fields/LabelsFieldTest.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-28T21:44:30Z",
+      "side": 1,
+      "message": "kind of tested in LabelsProviderFieldDefinitionsTest but I add something here too.",
+      "parentUuid": "6e436fe2_e4eb309f",
       "revId": "b41b44e9b16aae2847533fde4fc0abfaec886609",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
