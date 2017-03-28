@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_f97f5c61",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-28T13:55:36Z",
+      "side": 1,
+      "message": "As far as I can see the code below does not use this factory. Please change this to use getDataTypeDefinitions.",
+      "range": {
+        "startLine": 109,
+        "startChar": 42,
+        "endLine": 109,
+        "endChar": 60
+      },
+      "revId": "76c911cfe8f7dc134a27a2dba8af48774c428ed9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
