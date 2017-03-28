@@ -118,6 +118,30 @@
       "revId": "b8d56d0f21fed490ebf85de6b9e111d89968c2ac",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_81ea5e72",
+        "filename": "repo/includes/Api/SearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T17:32:10Z",
+      "side": 1,
+      "message": "It\u0027s a URI. It has to conform to URI syntax. Anything that needs to be escaped in a URI needs to be escaped.\n\nI don\u0027t think it makes sense to say for every URI \"this must conform to the URI syntax specification\". That\u0027s implied by it being a URI.",
+      "parentUuid": "6e436fe2_01d3ae31",
+      "range": {
+        "startLine": 180,
+        "startChar": 20,
+        "endLine": 180,
+        "endChar": 29
+      },
+      "revId": "b8d56d0f21fed490ebf85de6b9e111d89968c2ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
