@@ -2,15 +2,14 @@
 
 namespace Wikibase\Repo\Diff;
 
-use ContextSource;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use Html;
-use IContextSource;
 use InvalidArgumentException;
+use MessageLocalizer;
 use MWException;
 use Site;
 use SiteLookup;
@@ -22,7 +21,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
  *
  * @license GPL-2.0+
  */
-class DiffView extends ContextSource {
+class DiffView {
 
 	/**
 	 * @var string[]
@@ -45,6 +44,11 @@ class DiffView extends ContextSource {
 	private $entityIdFormatter;
 
 	/**
+	 * @var MessageLocalizer
+	 */
+	private $messageLocalizer;
+
+	/**
 	 * @var string
 	 */
 	private $siteLinkPath;
@@ -54,25 +58,22 @@ class DiffView extends ContextSource {
 	 * @param Diff $diff
 	 * @param SiteLookup $siteLookup
 	 * @param EntityIdFormatter $entityIdFormatter that must return only HTML! otherwise injections might be possible
-	 * @param IContextSource|null $contextSource
+	 * @param MessageLocalizer $messageLocalizer
 	 */
 	public function __construct(
 		array $path,
 		Diff $diff,
 		SiteLookup $siteLookup,
 		EntityIdFormatter $entityIdFormatter,
-		IContextSource $contextSource = null
+		MessageLocalizer $messageLocalizer
 	) {
 		$this->path = $path;
 		$this->diff = $diff;
 		$this->siteLookup = $siteLookup;
 		$this->entityIdFormatter = $entityIdFormatter;
+		$this->messageLocalizer = $messageLocalizer;
 
-		if ( !is_null( $contextSource ) ) {
-			$this->setContext( $contextSource );
-		}
-
-		$this->siteLinkPath = $this->msg( 'wikibase-diffview-link' )->text();
+		$this->siteLinkPath = $this->messageLocalizer->msg( 'wikibase-diffview-link' )->text();
 	}
 
 	/**
@@ -98,7 +99,9 @@ class DiffView extends ContextSource {
 			$localizedPath = $path;
 
 			if ( $this->isSiteLinkPath( $path ) && isset( $path[2] ) ) {
-				$translatedLinkSubPath = $this->msg( 'wikibase-diffview-link-' . $path[2] );
+				$translatedLinkSubPath = $this->messageLocalizer->msg(
+					'wikibase-diffview-link-' . $path[2]
+				);
 
 				if ( !$translatedLinkSubPath->isDisabled() ) {
 					$localizedPath[2] = $translatedLinkSubPath->text();
