@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_84beeccf",
+        "filename": "repo/includes/Content/EntityHandler.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:18:35Z",
+      "side": 1,
+      "message": "plank line, please, for consistency.",
+      "revId": "a123cb11ad256c59e9345f523b0438ec5054a8fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_a4c3e860",
+        "filename": "repo/includes/Content/PropertyHandler.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:18:35Z",
+      "side": 1,
+      "message": "IDE artifact, please remove",
+      "revId": "a123cb11ad256c59e9345f523b0438ec5054a8fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_44b8e4e2",
+        "filename": "repo/includes/Search/Elastic/Fields/DescriptionProviderFieldDefinitions.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:18:35Z",
+      "side": 1,
+      "message": "I\u0027ll trust you that these are actually needed.",
+      "revId": "a123cb11ad256c59e9345f523b0438ec5054a8fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_24d03822",
+        "filename": "repo/includes/Search/Elastic/Fields/ItemFieldDefinitions.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:18:35Z",
+      "side": 1,
+      "message": "Would it be sensible to use FiledDefinition here?",
+      "revId": "a123cb11ad256c59e9345f523b0438ec5054a8fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_e4c9f07c",
+        "filename": "repo/includes/Search/Elastic/Fields/ItemFieldDefinitions.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:18:35Z",
+      "side": 1,
+      "message": "Would it be sensible to use FiledDefinition here?",
+      "revId": "a123cb11ad256c59e9345f523b0438ec5054a8fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_44af8491",
+        "filename": "repo/includes/Search/Elastic/Fields/LabelsProviderFieldDefinitons.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:18:35Z",
+      "side": 1,
+      "message": "Perhaps add Assert::parameterElementType. Passing the wrong thing here will fail hard later, with a useless stack trace.",
+      "revId": "a123cb11ad256c59e9345f523b0438ec5054a8fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_e4a0109d",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 1505,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:18:35Z",
+      "side": 1,
+      "message": "Instead of adding N such services here, it might make sense to have a dedicated factory class for these. Can have exactly these methods. That wouldn\u0027t change any dependencies, it\u0027s just a level of indirection that will hopefully prevent further bloat in this class. It\u0027s already too big.",
+      "revId": "a123cb11ad256c59e9345f523b0438ec5054a8fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_4486a419",
+        "filename": "repo/tests/phpunit/includes/Content/EntityHandlerTest.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:18:35Z",
+      "side": 1,
+      "message": "getExpectedSearchIndexFields would be more descriptive",
+      "revId": "a123cb11ad256c59e9345f523b0438ec5054a8fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_c47ab41f",
+        "filename": "repo/tests/phpunit/includes/Content/EntityHandlerTest.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-28T19:18:35Z",
+      "side": 1,
+      "message": "So exposing additional fields is ok?",
+      "revId": "a123cb11ad256c59e9345f523b0438ec5054a8fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
