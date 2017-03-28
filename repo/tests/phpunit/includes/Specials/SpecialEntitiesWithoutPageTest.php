@@ -54,7 +54,7 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 		$this->assertContains( '(wikibase-entitieswithoutlabel-label-type)', $html );
 		$this->assertContains( 'name=\'type\'', $html );
 		$this->assertContains( 'id=\'wb-entitieswithoutpage-type\'', $html );
-		$this->assertContains( '(wikibase-entitieswithoutlabel-label-alltypes)', $html );
+		$this->assertContains( '(wikibase-entity-item)', $html );
 
 		$this->assertContains( '(wikibase-entitieswithoutlabel-submit)', $html );
 		$this->assertContains( 'id=\'wikibase-entitieswithoutpage-submit\'', $html );
@@ -81,10 +81,26 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 		$this->assertContains( '&#39;&#39;TYPE&#39;&#39;', $html );
 	}
 
-	public function testNoLanguage() {
+	public function testNoParams() {
 		list( $html, ) = $this->executeSpecialPage( '', null, 'qqx' );
 
 		$this->assertNotContains( 'class="mw-spcontent"', $html );
+		$this->assertNotContains( '(htmlform-invalid-input)', $html );
+	}
+
+	public function testNoLanguage() {
+		$request = new FauxRequest( [ 'type' => 'item' ] );
+		list( $html, ) = $this->executeSpecialPage( '', $request, 'qqx' );
+
+		$this->assertNotContains( 'class="mw-spcontent"', $html );
+		$this->assertNotContains( '(htmlform-invalid-input)', $html );
+	}
+
+	public function testNoType() {
+		list( $html, ) = $this->executeSpecialPage( 'acceptedlanguage', null, 'qqx' );
+
+		$this->assertNotContains( 'class="mw-spcontent"', $html );
+		$this->assertNotContains( '(htmlform-invalid-input)', $html );
 	}
 
 	public function testInvalidLanguage() {
@@ -97,7 +113,8 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 	}
 
 	public function testValidLanguage() {
-		list( $html, ) = $this->executeSpecialPage( 'acceptedlanguage', null, 'qqx' );
+		$request = new FauxRequest( [ 'type' => 'item' ] );
+		list( $html, ) = $this->executeSpecialPage( 'acceptedlanguage', $request, 'qqx' );
 
 		$this->assertContains( 'value=\'acceptedlanguage\'', $html );
 		$this->assertContains( 'class="mw-spcontent"', $html );

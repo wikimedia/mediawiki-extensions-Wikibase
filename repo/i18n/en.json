@@ -288,7 +288,6 @@
 	"wikibase-entitieswithoutlabel-legend": "Get list of entities without label",
 	"wikibase-entitieswithoutlabel-label-language": "Language code:",
 	"wikibase-entitieswithoutlabel-label-type": "Type:",
-	"wikibase-entitieswithoutlabel-label-alltypes": "all",
 	"wikibase-entitieswithoutlabel-submit": "Find",
 	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" is not a valid language code.",
 	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" is not a valid entity type.",

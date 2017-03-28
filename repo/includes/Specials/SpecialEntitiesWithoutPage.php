@@ -100,7 +100,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		$this->prepareArguments( $subPage );
 		$this->setForm();
 
-		if ( $this->language !== '' ) {
+		if ( $this->language !== '' && $this->type !== '' ) {
 			$this->showQuery();
 		}
 	}
@@ -133,15 +133,12 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		}
 
 		$this->type = $request->getText( 'type', $this->type );
-		if ( $this->type === '' ) {
-			$this->type = null;
-		}
-		if ( $this->type !== null && !in_array( $this->type, $this->entityTypes ) ) {
+		if ( $this->type !== '' && !in_array( $this->type, $this->entityTypes ) ) {
 			$this->showErrorHTML( $this->msg(
 				'wikibase-entitieswithoutlabel-invalid-type',
 				wfEscapeWikiText( $this->type )
 			)->parse() );
-			$this->type = null;
+			$this->type = '';
 		}
 	}
 
@@ -163,13 +160,17 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * Build the HTML form
 	 */
 	private function setForm() {
-		$options = array(
-			$this->msg( 'wikibase-entitieswithoutlabel-label-alltypes' )->text() => ''
-		);
+		$options = array();
 
 		foreach ( $this->entityTypes as $type ) {
-			// Messages: wikibase-entity-item, wikibase-entity-property, wikibase-entity-query
+			// Messages: wikibase-entity-item, wikibase-entity-property
 			$options[$this->msg( 'wikibase-entity-' . $type )->text()] = $type;
+		}
+
+		if ( empty( $this->termType ) ) {
+			$defaultType = $this->termType;
+		} else {
+			$defaultType = reset( $this->entityTypes );
 		}
 
 		$formDescriptor = array(
@@ -185,7 +186,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 			'type' => array(
 				'name' => 'type',
 				'options' => $options,
-				'default' => $this->type,
+				'default' => $defaultType,
 				'type' => 'select',
 				'id' => 'wb-entitieswithoutpage-type',
 				'label-message' => 'wikibase-entitieswithoutlabel-label-type'
@@ -219,7 +220,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		return $this->entitiesWithoutTerm->getEntitiesWithoutTerm(
 			$this->termType,
 			$this->language,
-			$this->type === null ? null : [ $this->type ],
+			[ $this->type ],
 			$limit,
 			$offset
 		);
