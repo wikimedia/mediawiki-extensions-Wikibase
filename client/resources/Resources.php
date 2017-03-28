@@ -110,7 +110,7 @@ return call_user_func( function() {
 			'scripts' => 'wikibase.client.action.edit.collapsibleFooter.js',
 			'dependencies' => [
 				'jquery.makeCollapsible',
-				'mediawiki.cookie',
+				'mediawiki.storage',
 				'mediawiki.icon',
 			],
 		]

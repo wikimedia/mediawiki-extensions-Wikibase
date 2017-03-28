@@ -1,4 +1,4 @@
-// Copied from mediawiki.action.edit.collapsibleFooter
+// Copied from mediawiki-core's mediawiki.action.edit.collapsibleFooter.js
 ( function ( mw ) {
 	'use strict';
 
@@ -9,13 +9,15 @@
 		{
 			listSel: '.wikibase-entity-usage ul',
 			togglerSel: '.wikibase-entityusage-explanation',
-			cookieName: 'wikibase-entity-usage-list'
+			storeKey: 'mwedit-state-wikibaseEntityUsage'
 		}
 	];
 
-	handleOne = function ( $list, $toggler, cookieName ) {
-		// Collapsed by default
-		var isCollapsed = mw.cookie.get( cookieName ) !== 'expanded';
+	handleOne = function ( $list, $toggler, storeKey ) {
+		var collapsedVal = '0',
+			expandedVal = '1',
+			// Default to collapsed if not set
+			isCollapsed = mw.storage.get( storeKey ) !== expandedVal;
 
 		// Style the toggler with an arrow icon and add a tabIndex and a role for accessibility
 		$toggler.addClass( 'mw-editfooter-toggler' ).prop( 'tabIndex', 0 ).attr( 'role', 'button' );
@@ -32,12 +34,12 @@
 
 		$list.on( 'beforeExpand.mw-collapsible', function () {
 			$toggler.removeClass( 'mw-icon-arrow-collapsed' ).addClass( 'mw-icon-arrow-expanded' );
-			mw.cookie.set( cookieName, 'expanded' );
+			mw.storage.set( storeKey, expandedVal );
 		} );
 
 		$list.on( 'beforeCollapse.mw-collapsible', function () {
 			$toggler.removeClass( 'mw-icon-arrow-expanded' ).addClass( 'mw-icon-arrow-collapsed' );
-			mw.cookie.set( cookieName, 'collapsed' );
+			mw.storage.set( storeKey, collapsedVal );
 		} );
 	};
 
@@ -48,7 +50,7 @@
 			handleOne(
 				$editForm.find( collapsibleLists[ i ].listSel ),
 				$editForm.find( collapsibleLists[ i ].togglerSel ),
-				collapsibleLists[ i ].cookieName
+				collapsibleLists[ i ].storeKey
 			);
 		}
 	} );
