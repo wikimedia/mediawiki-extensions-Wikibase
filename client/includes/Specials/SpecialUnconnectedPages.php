@@ -3,15 +3,15 @@
 namespace Wikibase\Client\Specials;
 
 use Database;
-use FakeResultWrapper;
 use Html;
 use MWNamespace;
 use QueryPage;
-use ResultWrapper;
 use Skin;
 use Title;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\NamespaceChecker;
+use Wikimedia\Rdbms\FakeResultWrapper;
+use Wikimedia\Rdbms\ResultWrapper;
 
 /**
  * List client pages that are not connected to repository items.

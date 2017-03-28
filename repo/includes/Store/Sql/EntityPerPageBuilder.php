@@ -2,13 +2,13 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
-use ResultWrapper;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Store\EntityPerPage;
+use Wikimedia\Rdbms\ResultWrapper;
 
 /**
  * Utility class for rebuilding the wb_entity_per_page table.

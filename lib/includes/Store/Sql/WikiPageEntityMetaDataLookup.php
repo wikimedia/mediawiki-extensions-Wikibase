@@ -6,12 +6,12 @@ use Database;
 use DBAccessBase;
 use DBQueryError;
 use InvalidArgumentException;
-use ResultWrapper;
 use stdClass;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikimedia\Rdbms\ResultWrapper;
 
 /**
  * Service for looking up meta data about one or more entities as needed for

@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Hooks;
 
 use ChangesList;
 use RequestContext;
-use ResultWrapper;
 use Title;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Lib\Store\StorageException;
@@ -12,6 +11,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\TermIndexEntry;
+use Wikimedia\Rdbms\ResultWrapper;
 
 /**
  * Hook handlers for triggering prefetching of labels.
@@ -81,7 +81,7 @@ class LabelPrefetchHookHandlers {
 	 * Static handler for the ChangesListInitRows hook.
 	 *
 	 * @param ChangesList $list
-	 * @param ResultWrapper|array $rows
+	 * @param ResultWrapper|object[] $rows
 	 *
 	 * @return bool
 	 */
@@ -121,7 +121,7 @@ class LabelPrefetchHookHandlers {
 
 	/**
 	 * @param ChangesList $list
-	 * @param ResultWrapper|array $rows
+	 * @param ResultWrapper|object[] $rows
 	 *
 	 * @return bool
 	 */
@@ -138,7 +138,7 @@ class LabelPrefetchHookHandlers {
 	}
 
 	/**
-	 * @param ResultWrapper|array $rows
+	 * @param ResultWrapper|object[] $rows
 	 *
 	 * @return Title[]
 	 */

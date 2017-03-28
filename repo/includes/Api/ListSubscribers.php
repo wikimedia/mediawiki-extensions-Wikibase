@@ -6,11 +6,11 @@ use ApiBase;
 use ApiQueryBase;
 use ApiQuery;
 use ApiResult;
-use ResultWrapper;
 use SiteLookup;
 use stdClass;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikimedia\Rdbms\ResultWrapper;
 
 /**
  * API module for getting wikis subscribed to changes to given entities.

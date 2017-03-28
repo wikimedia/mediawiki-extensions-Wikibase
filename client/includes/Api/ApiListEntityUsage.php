@@ -7,10 +7,10 @@ use ApiPageSet;
 use ApiQuery;
 use ApiQueryGeneratorBase;
 use ApiResult;
-use ResultWrapper;
 use Title;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikimedia\Rdbms\ResultWrapper;
 
 /**
  * API module to get the usage of entities.

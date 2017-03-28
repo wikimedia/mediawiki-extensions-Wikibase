@@ -3,13 +3,13 @@
 namespace Wikibase\Client\Store\Sql;
 
 use InvalidArgumentException;
-use ResultWrapper;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
+use Wikimedia\Rdbms\ResultWrapper;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 /**
