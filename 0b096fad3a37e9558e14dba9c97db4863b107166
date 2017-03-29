@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_cd2170f8",
+        "filename": "repo/tests/phpunit/includes/Rdf/RdfBuilderTestData.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-29T17:23:39Z",
+      "side": 1,
+      "message": "How about removing lines `WikibaseLib.php:51-53` and `WikibaseView.php:11-13` instead?",
+      "range": {
+        "startLine": 62,
+        "startChar": 3,
+        "endLine": 62,
+        "endChar": 80
+      },
+      "revId": "0b096fad3a37e9558e14dba9c97db4863b107166",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
