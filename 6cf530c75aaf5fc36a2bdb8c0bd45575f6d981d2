@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_db8fefcf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-03-29T13:23:16Z",
+      "side": 1,
+      "message": "also of course fix all CS issues",
+      "revId": "6cf530c75aaf5fc36a2bdb8c0bd45575f6d981d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
