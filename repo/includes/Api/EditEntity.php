@@ -93,26 +93,45 @@ class EditEntity extends ModifyEntity {
 	 *
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
-	 * @param string $modulePrefix
+	 * @param ContentLanguages $termsLanguages
+	 * @param EntityRevisionLookup $revisionLookup
+	 * @param EntityIdParser $idParser
+	 * @param EntityFactory $entityFactory
+	 * @param Deserializer $statementDeserializer
+	 * @param DataTypeDefinitions $dataTypeDefinitions
+	 * @param FingerprintChangeOpFactory $termChangeOpFactory
+	 * @param StatementChangeOpFactory $statementChangeOpFactory
+	 * @param SiteLinkChangeOpFactory $siteLinkChangeOpFactory
+	 * @param EntityChangeOpProvider $entityChangeOpProvider
 	 *
-	 * @throws MWException
 	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+	public function __construct(
+		ApiMain $mainModule,
+		$moduleName,
+		ContentLanguages $termsLanguages,
+		EntityRevisionLookup $revisionLookup,
+		EntityIdParser $idParser,
+		EntityFactory $entityFactory,
+		Deserializer $statementDeserializer,
+		DataTypeDefinitions $dataTypeDefinitions,
+		FingerprintChangeOpFactory $termChangeOpFactory,
+		StatementChangeOpFactory $statementChangeOpFactory,
+		SiteLinkChangeOpFactory $siteLinkChangeOpFactory,
+		EntityChangeOpProvider $entityChangeOpProvider
+	) {
+		parent::__construct( $mainModule, $moduleName );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$this->termsLanguages = $wikibaseRepo->getTermsLanguages();
-		$this->revisionLookup = $wikibaseRepo->getEntityRevisionLookup( 'uncached' );
-		$this->idParser = $wikibaseRepo->getEntityIdParser();
-		$this->entityFactory = $wikibaseRepo->getEntityFactory();
-		$this->statementDeserializer = $wikibaseRepo->getExternalFormatStatementDeserializer();
-		$this->dataTypeDefinitions = $wikibaseRepo->getDataTypeDefinitions();
+		$this->termsLanguages = $termsLanguages;
+		$this->revisionLookup = $revisionLookup;
+		$this->idParser = $idParser;
+		$this->entityFactory = $entityFactory;
+		$this->statementDeserializer = $statementDeserializer;
+		$this->dataTypeDefinitions = $dataTypeDefinitions;
 
-		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
-		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
-		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
-		$this->siteLinkChangeOpFactory = $changeOpFactoryProvider->getSiteLinkChangeOpFactory();
-		$this->entityChangeOpProvider = $wikibaseRepo->getEntityChangeOpProvider();
+		$this->termChangeOpFactory = $termChangeOpFactory;
+		$this->statementChangeOpFactory = $statementChangeOpFactory;
+		$this->siteLinkChangeOpFactory = $siteLinkChangeOpFactory;
+		$this->entityChangeOpProvider = $entityChangeOpProvider;
 	}
 
 	/**
