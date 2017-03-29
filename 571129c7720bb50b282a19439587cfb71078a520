@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_20b81be2",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-29T19:17:41Z",
+      "side": 1,
+      "message": "I don\u0027t think the property object should know about that. It\u0027s an Entity, and should have no knowledge of what is or isn\u0027t a link in the context of RDF.\n\nI guess the best thing is to just fetch the list from DataTypeDefinitions and inject it here.",
+      "parentUuid": "6e436fe2_0d7e7814",
+      "range": {
+        "startLine": 88,
+        "startChar": 3,
+        "endLine": 88,
+        "endChar": 66
+      },
+      "revId": "571129c7720bb50b282a19439587cfb71078a520",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_e8cf8880",
         "filename": "repo/tests/phpunit/data/maintenance/dumpRdf-out.txt",
         "patchSetId": 5
