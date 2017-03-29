@@ -22,6 +22,30 @@
       "revId": "0b096fad3a37e9558e14dba9c97db4863b107166",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_8defe881",
+        "filename": "repo/tests/phpunit/includes/Rdf/RdfBuilderTestData.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-29T17:33:29Z",
+      "side": 1,
+      "message": "That doesn\u0027t help if you just fail to run composer update between checkous. My confusion wasn\u0027t caused by having multiple vendor directories. It was caused by failing to update when going between gerrit changes (or even patch sets of the same change).",
+      "parentUuid": "6e436fe2_cd2170f8",
+      "range": {
+        "startLine": 62,
+        "startChar": 3,
+        "endLine": 62,
+        "endChar": 80
+      },
+      "revId": "0b096fad3a37e9558e14dba9c97db4863b107166",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
