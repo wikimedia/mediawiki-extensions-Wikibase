@@ -323,7 +323,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	 * @param array $props Property config
 	 */
 	public function testPageProps( $name, $props ) {
-		$vocab = new RdfVocabulary( RdfBuilderTestData::URI_BASE, RdfBuilderTestData::URI_DATA,
+		$vocab = new RdfVocabulary( [ '' => RdfBuilderTestData::URI_BASE ], [ '' => RdfBuilderTestData::URI_DATA ],
 				[], [], $props );
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL, null, $vocab );
 
@@ -341,7 +341,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$props = [
 			'claims' => [ 'name' => 'rdf-claims' ]
 		];
-		$vocab = new RdfVocabulary( RdfBuilderTestData::URI_BASE, RdfBuilderTestData::URI_DATA,
+		$vocab = new RdfVocabulary( [ '' => RdfBuilderTestData::URI_BASE ], [ '' => RdfBuilderTestData::URI_DATA ],
 				[], [], $props );
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL & ~RdfProducer::PRODUCE_PAGE_PROPS, null, $vocab );
 
@@ -359,6 +359,88 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$builder->addEntityPageProps( $this->getEntityData( 'Q9' )->getId() );
 		$data = $builder->getRDF();
 		$this->assertEquals( "", $data, "Should return empty string" );
+	}
+
+	public function testAddEntityForeignEntity() {
+		$entity = $this->getEntityData( 'Q11' );
+		$expected = $this->getTestData()->getNTriples( 'Q11' );
+
+		$builder =
+			$this->newRdfBuilder(
+				RdfProducer::PRODUCE_ALL_STATEMENTS |
+					RdfProducer::PRODUCE_TRUTHY_STATEMENTS |
+					RdfProducer::PRODUCE_QUALIFIERS |
+					RdfProducer::PRODUCE_REFERENCES | RdfProducer::PRODUCE_SITELINKS |
+					RdfProducer::PRODUCE_VERSION_INFO |
+					RdfProducer::PRODUCE_FULL_VALUES,
+				null,
+				new RdfVocabulary(
+					[
+						'' => RdfBuilderTestData::URI_BASE,
+						'foreign' => 'http://foreign.test/',
+					],
+					[
+						'' => RdfBuilderTestData::URI_DATA,
+						'foreign' => 'http://data.foreign.test/',
+					]
+				)
+			);
+		$builder->addEntity( $entity );
+		$builder->addEntityRevisionInfo( $entity->getId(), 42, "2014-11-04T03:11:05Z" );
+
+		$this->helper->assertNTriplesEquals( $expected, $builder->getRDF() );
+	}
+
+	public function testAddEntityForeignEntityInQualifiers() {
+		$entity = $this->getEntityData( 'Q12' );
+		$expected = $this->getTestData()->getNTriples( 'Q12' );
+
+		$builder =
+			$this->newRdfBuilder(
+				RdfProducer::PRODUCE_ALL_STATEMENTS |
+				RdfProducer::PRODUCE_QUALIFIERS,
+				null,
+				new RdfVocabulary(
+					[
+						'' => RdfBuilderTestData::URI_BASE,
+						'foreign' => 'http://foreign.test/',
+					],
+					[
+						'' => RdfBuilderTestData::URI_DATA,
+						'foreign' => 'http://data.foreign.test/',
+					]
+				)
+			);
+		$builder->addEntity( $entity );
+		$builder->addEntityRevisionInfo( $entity->getId(), 42, "2014-11-04T03:11:05Z" );
+
+		$this->helper->assertNTriplesEquals( $expected, $builder->getRDF() );
+	}
+
+	public function testAddEntityForeignEntityInReferences() {
+		$entity = $this->getEntityData( 'Q13' );
+		$expected = $this->getTestData()->getNTriples( 'Q13' );
+
+		$builder =
+			$this->newRdfBuilder(
+				RdfProducer::PRODUCE_ALL_STATEMENTS |
+				RdfProducer::PRODUCE_QUALIFIERS,
+				null,
+				new RdfVocabulary(
+					[
+						'' => RdfBuilderTestData::URI_BASE,
+						'foreign' => 'http://foreign.test/',
+					],
+					[
+						'' => RdfBuilderTestData::URI_DATA,
+						'foreign' => 'http://data.foreign.test/',
+					]
+				)
+			);
+		$builder->addEntity( $entity );
+		$builder->addEntityRevisionInfo( $entity->getId(), 42, "2014-11-04T03:11:05Z" );
+
+		$this->helper->assertNTriplesEquals( $expected, $builder->getRDF() );
 	}
 
 }

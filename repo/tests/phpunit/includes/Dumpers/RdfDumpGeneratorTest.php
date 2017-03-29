@@ -158,8 +158,8 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 			$entityRdfBuilderFactory,
 			new NullEntityPrefetcher(),
 			new RdfVocabulary(
-				self::URI_BASE,
-				self::URI_DATA,
+				[ '' => self::URI_BASE ],
+				[ '' => self::URI_DATA ],
 				array( 'test' => 'en-x-test' )
 			),
 			$this->getEntityTitleLookup()

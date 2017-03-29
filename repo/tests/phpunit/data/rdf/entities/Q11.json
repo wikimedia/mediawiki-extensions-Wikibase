@@ -1,0 +1,25 @@
+{
+	"id": "Q11",
+	"type": "item",
+	"claims": {
+		"foreign:P2": [
+			{
+				"id": "TEST-Statement-Foreign-Entities",
+				"mainsnak": {
+					"snaktype": "value",
+					"property": "foreign:P2",
+					"datatype": "wikibase-entityid",
+					"datavalue": {
+						"value": {
+							"entity-type": "item",
+							"id": "foreign:Q2"
+						},
+						"type": "wikibase-entityid"
+					}
+				},
+				"type": "statement",
+				"rank": "normal"
+			}
+		]
+	}
+}

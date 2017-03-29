@@ -350,7 +350,7 @@ class WikibaseRepo {
 	private static function getRepositoryDefinitionsFromSettings( SettingsArray $settings ) {
 		return new RepositoryDefinitions( [ '' => [
 			'database' => $settings->getSetting( 'changesDatabase' ),
-			'base-uri' => $settings->getSetting( 'conceptBaseUri' ),
+			'base-concept-uri' => $settings->getSetting( 'conceptBaseUri' ),
 			'prefix-mapping' => [ '' => '' ],
 			'entity-types' => array_keys( $settings->getSetting( 'entityNamespaces' ) ),
 		] ] );
@@ -1086,11 +1086,16 @@ class WikibaseRepo {
 				$this->settings->getSetting( 'canonicalLanguageCodes' )
 			);
 
-			$entityDataTitle = Title::makeTitle( NS_SPECIAL, 'EntityData' );
+			// TODO: get these from RepositoryDefinitions
+			$rdfDescriptionBaseUris = [];
+			foreach ( $this->repositoryDefinitions->getRepositoryNames() as $repositoryName ) {
+				$entityDataTitle = Title::makeTitle( NS_SPECIAL, 'EntityData', '', $repositoryName );
+				$rdfDescriptionBaseUris[$repositoryName] = $entityDataTitle->getCanonicalURL() . '/';
+			}
 
 			$this->rdfVocabulary = new RdfVocabulary(
-				$this->getVocabularyBaseUri(),
-				$entityDataTitle->getCanonicalURL() . '/',
+				$this->repositoryDefinitions->getRdfVocabularyBaseUris(),
+				$rdfDescriptionBaseUris,
 				$languageCodes,
 				$this->dataTypeDefinitions->getRdfTypeUris(),
 				$this->settings->getSetting( 'pagePropertiesRdf' ) ?: []

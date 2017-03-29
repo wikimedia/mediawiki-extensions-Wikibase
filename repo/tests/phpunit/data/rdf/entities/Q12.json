@@ -1,0 +1,53 @@
+{
+	"id": "Q12",
+	"type": "item",
+	"claims": {
+		"foreign:P2": [
+			{
+				"id": "TEST-Qualifiers-Foreign-Entity",
+				"mainsnak": {
+					"snaktype": "value",
+					"property": "foreign:P2",
+					"datatype": "string",
+					"datavalue": {
+						"value": "string",
+						"type": "string"
+					}
+				},
+				"qualifiers": {
+					"foreign:P2": [
+						{
+							"snaktype": "value",
+							"property": "foreign:P2",
+							"datatype": "string",
+							"datavalue": {
+								"value": "simplestring",
+								"type": "string"
+							}
+						}
+					],
+					"foreign:P3": [
+						{
+							"snaktype": "value",
+							"property": "foreign:P3",
+							"datatype": "wikibase-entityid",
+							"datavalue": {
+								"value": {
+									"entity-type": "item",
+									"id": "foreign:Q1234"
+								},
+								"type": "wikibase-entityid"
+							}
+						}
+					]
+				},
+				"qualifiers-order": [
+					"foreign:P2",
+					"foreign:P3"
+				],
+				"type": "statement",
+				"rank": "normal"
+			}
+		]
+	}
+}

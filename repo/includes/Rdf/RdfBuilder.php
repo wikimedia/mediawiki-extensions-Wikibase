@@ -303,7 +303,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		$timestamp = wfTimestamp( TS_ISO_8601, $timestamp );
 		$entityLName = $this->vocabulary->getEntityLName( $entityId );
 
-		$this->writer->about( RdfVocabulary::NS_DATA, $entityId )
+		$this->writer->about( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NS_DATA, $entityId ), $entityId )
 			->a( RdfVocabulary::NS_SCHEMA_ORG, "Dataset" )
 			->say( RdfVocabulary::NS_SCHEMA_ORG, 'about' )->is( RdfVocabulary::NS_ENTITY, $entityLName );
 
@@ -358,7 +358,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 				settype( $value, $props[$name]['type'] );
 			}
 
-			$this->writer->about( RdfVocabulary::NS_DATA, $entityId )
+			$this->writer->about( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NS_DATA, $entityId ), $entityId )
 				->say( RdfVocabulary::NS_ONTOLOGY, $props[$name]['name'] )
 				->value( $value );
 		}
@@ -366,10 +366,10 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 
 	/**
 	 * Write definition for wdno:P123 class to use as novalue
-	 * @param string $id
+	 * @param EntityId $id
 	 */
-	private function writeNovalueClass( $id ) {
-		$this->writer->about( RdfVocabulary::NSP_NOVALUE, $id )->say( 'a' )->is( 'owl', 'Class' );
+	private function writeNovalueClass( EntityId $id ) {
+		$this->writer->about( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NSP_NOVALUE, $id), $id->getSerialization() )->say( 'a' )->is( 'owl', 'Class' );
 		$internalClass = $this->writer->blank();
 		$this->writer->say( 'owl', 'complementOf' )->is( '_', $internalClass );
 		$this->writer->about( '_', $internalClass )->say( 'a' )->is( 'owl', 'Restriction' );
@@ -379,40 +379,41 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 
 	/**
 	 * Write predicates linking property entity to property predicates
-	 * @param string $id
+	 * @param EntityId $id
 	 * @param boolean $isObjectProperty Is the property data or object property?
 	 */
-	private function writePropertyPredicates( $id, $isObjectProperty ) {
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'directClaim' )->is( RdfVocabulary::NSP_DIRECT_CLAIM, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'claim' )->is( RdfVocabulary::NSP_CLAIM, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementProperty' )->is( RdfVocabulary::NSP_CLAIM_STATEMENT, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementValue' )->is( RdfVocabulary::NSP_CLAIM_VALUE, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementValueNormalized' )->is( RdfVocabulary::NSP_CLAIM_VALUE_NORM, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'qualifier' )->is( RdfVocabulary::NSP_QUALIFIER, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'qualifierValue' )->is( RdfVocabulary::NSP_QUALIFIER_VALUE, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'qualifierValueNormalized' )->is( RdfVocabulary::NSP_QUALIFIER_VALUE_NORM, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'reference' )->is( RdfVocabulary::NSP_REFERENCE, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'referenceValue' )->is( RdfVocabulary::NSP_REFERENCE_VALUE, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'referenceValueNormalized' )->is( RdfVocabulary::NSP_REFERENCE_VALUE_NORM, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'novalue' )->is( RdfVocabulary::NSP_NOVALUE, $id );
+	private function writePropertyPredicates( EntityId $id, $isObjectProperty ) {
+		$idSerialization = $id->getSerialization();
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'directClaim' )->is( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NSP_DIRECT_CLAIM, $id) , $idSerialization );
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'claim' )->is( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NSP_CLAIM, $id ), $idSerialization );
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementProperty' )->is( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NSP_CLAIM_STATEMENT, $id ), $idSerialization );
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementValue' )->is( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NSP_CLAIM_VALUE, $id ), $idSerialization );
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementValueNormalized' )->is( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NSP_CLAIM_VALUE_NORM, $id ), $idSerialization );
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'qualifier' )->is( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NSP_QUALIFIER, $id ), $idSerialization );
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'qualifierValue' )->is( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NSP_QUALIFIER_VALUE, $id ), $idSerialization );
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'qualifierValueNormalized' )->is( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NSP_QUALIFIER_VALUE_NORM, $id ), $idSerialization );
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'reference' )->is( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NSP_REFERENCE, $id ), $idSerialization );
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'referenceValue' )->is( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NSP_REFERENCE_VALUE, $id ), $idSerialization );
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'referenceValueNormalized' )->is( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NSP_REFERENCE_VALUE_NORM, $id ), $idSerialization );
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'novalue' )->is( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NSP_NOVALUE, $id ), $idSerialization );
 		// Always object properties
-		$this->writer->about( RdfVocabulary::NSP_CLAIM, $id )->a( 'owl', 'ObjectProperty' );
-		$this->writer->about( RdfVocabulary::NSP_CLAIM_VALUE, $id )->a( 'owl', 'ObjectProperty' );
-		$this->writer->about( RdfVocabulary::NSP_QUALIFIER_VALUE, $id )->a( 'owl', 'ObjectProperty' );
-		$this->writer->about( RdfVocabulary::NSP_REFERENCE_VALUE, $id )->a( 'owl', 'ObjectProperty' );
-		$this->writer->about( RdfVocabulary::NSP_CLAIM_VALUE_NORM, $id )->a( 'owl', 'ObjectProperty' );
-		$this->writer->about( RdfVocabulary::NSP_QUALIFIER_VALUE_NORM, $id )->a( 'owl', 'ObjectProperty' );
-		$this->writer->about( RdfVocabulary::NSP_REFERENCE_VALUE_NORM, $id )->a( 'owl', 'ObjectProperty' );
+		$this->writer->about( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NSP_CLAIM, $id ), $idSerialization )->a( 'owl', 'ObjectProperty' );
+		$this->writer->about( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NSP_CLAIM_VALUE, $id ), $idSerialization )->a( 'owl', 'ObjectProperty' );
+		$this->writer->about( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NSP_QUALIFIER_VALUE, $id ), $idSerialization )->a( 'owl', 'ObjectProperty' );
+		$this->writer->about( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NSP_REFERENCE_VALUE, $id ), $idSerialization )->a( 'owl', 'ObjectProperty' );
+		$this->writer->about( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NSP_CLAIM_VALUE_NORM, $id ), $idSerialization )->a( 'owl', 'ObjectProperty' );
+		$this->writer->about( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NSP_QUALIFIER_VALUE_NORM, $id ), $idSerialization )->a( 'owl', 'ObjectProperty' );
+		$this->writer->about( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NSP_REFERENCE_VALUE_NORM, $id ), $idSerialization )->a( 'owl', 'ObjectProperty' );
 		// Depending on property type
 		if ( $isObjectProperty ) {
 			$datatype = 'ObjectProperty';
 		} else {
 			$datatype = 'DatatypeProperty';
 		}
-		$this->writer->about( RdfVocabulary::NSP_DIRECT_CLAIM, $id )->a( 'owl', $datatype );
-		$this->writer->about( RdfVocabulary::NSP_CLAIM_STATEMENT, $id )->a( 'owl', $datatype );
-		$this->writer->about( RdfVocabulary::NSP_QUALIFIER, $id )->a( 'owl', $datatype );
-		$this->writer->about( RdfVocabulary::NSP_REFERENCE, $id )->a( 'owl', $datatype );
+		$this->writer->about( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NSP_DIRECT_CLAIM, $id ), $idSerialization )->a( 'owl', $datatype );
+		$this->writer->about( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NSP_CLAIM_STATEMENT, $id ), $idSerialization )->a( 'owl', $datatype );
+		$this->writer->about( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NSP_QUALIFIER, $id ), $idSerialization )->a( 'owl', $datatype );
+		$this->writer->about( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NSP_REFERENCE, $id ), $idSerialization )->a( 'owl', $datatype );
 	}
 
 	/**
@@ -435,18 +436,18 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 * @param EntityDocument $entity
 	 */
 	private function addEntityMetaData( EntityDocument $entity ) {
-		$entityLName = $this->vocabulary->getEntityLName( $entity->getId() );
+		$entityId = $entity->getId();
+		$entityLName = $this->vocabulary->getEntityLName( $entityId );
 
-		$this->writer->about( RdfVocabulary::NS_ENTITY, $entityLName )
+		$this->writer->about( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NS_ENTITY, $entityId ), $entityLName )
 			->a( RdfVocabulary::NS_ONTOLOGY, $this->vocabulary->getEntityTypeName( $entity->getType() ) );
 
 		if ( $entity instanceof Property ) {
 			$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'propertyType' )
 				->is( $this->vocabulary->getDataTypeURI( $entity ) );
 
-			$id = $entity->getId()->getSerialization();
-			$this->writePropertyPredicates( $id, $this->propertyIsLink( $entity ) );
-			$this->writeNovalueClass( $id );
+			$this->writePropertyPredicates( $entityId, $this->propertyIsLink( $entity ) );
+			$this->writeNovalueClass( $entityId );
 		}
 	}
 

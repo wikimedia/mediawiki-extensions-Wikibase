@@ -2,6 +2,7 @@
 
 namespace Wikibase\Rdf\Values;
 
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Rdf\ValueSnakRdfBuilder;
 use Wikibase\Rdf\EntityMentionListener;
@@ -58,7 +59,8 @@ class EntityIdRdfBuilder implements ValueSnakRdfBuilder {
 		$value = $snak->getDataValue();
 		$entityId = $value->getValue()->getEntityId();
 		$entityLName = $this->vocabulary->getEntityLName( $entityId );
-		$writer->say( $propertyValueNamespace, $propertyValueLName )->is( RdfVocabulary::NS_ENTITY, $entityLName );
+
+		$writer->say( $propertyValueNamespace, $propertyValueLName )->is( $this->vocabulary->getSuffixedNamespaceName( RdfVocabulary::NS_ENTITY, $entityId ), $entityLName );
 
 		$this->mentionedEntityTracker->entityReferenceMentioned( $entityId );
 	}

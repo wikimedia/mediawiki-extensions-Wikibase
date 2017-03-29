@@ -50,19 +50,19 @@ class RepositoryDefinitionsTest extends \PHPUnit_Framework_TestCase {
 		return [
 			'' => [
 				'database' => false,
-				'base-uri' => 'http://acme.test/concept/',
+				'base-concept-uri' => 'http://acme.test/concept/',
 				'entity-types' => [ 'item', 'property' ],
 				'prefix-mapping' => [],
 			],
 			'media' => [
 				'database' => 'foowiki',
-				'base-uri' => 'http://foo.test/concept/',
+				'base-concept-uri' => 'http://foo.test/concept/',
 				'entity-types' => [ 'mediainfo' ],
 				'prefix-mapping' => [],
 			],
 			'lexeme' => [
 				'database' => 'bazwiki',
-				'base-uri' => 'http://baz.test/concept/',
+				'base-concept-uri' => 'http://baz.test/concept/',
 				'entity-types' => [ 'lexeme' ],
 				'prefix-mapping' => [ 'foo' => 'media' ],
 			],
@@ -131,7 +131,7 @@ class RepositoryDefinitionsTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenSameEntityTypeDefinedForMultitpleRepos_exceptionIsThrown() {
 		$this->setExpectedException( InvalidArgumentException::class );
 
-		$irrelevantDefinitions = [ 'database' => 'foo', 'base-uri' => 'http://acme.test/concept/', 'prefix-mapping' => [] ];
+		$irrelevantDefinitions = [ 'database' => 'foo', 'base-concept-uri' => 'http://acme.test/concept/', 'prefix-mapping' => [] ];
 
 		new RepositoryDefinitions( [
 			'' => array_merge( $irrelevantDefinitions, [ 'entity-types' => [ 'item', 'property' ] ] ),

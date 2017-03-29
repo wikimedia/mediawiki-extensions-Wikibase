@@ -24,8 +24,8 @@ class RdfVocabularyTest extends PHPUnit_Framework_TestCase {
 
 	private function newInstance() {
 		return new RdfVocabulary(
-			'<BASE>',
-			'<DATA>',
+			[ '' => '<BASE>' ],
+			[ '' => '<DATA>' ],
 			array( 'German' => 'de' ),
 			array( 'acme' => 'http://acme.test/vocab/ACME' )
 		);
