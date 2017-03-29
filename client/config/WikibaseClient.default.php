@@ -248,6 +248,10 @@ return call_user_func( function() {
 		return $settings->getSetting( 'repoUrl' ) . '/entity/';
 	};
 
+	$defaults['repoCanonicalDataUriBase'] = function ( SettingsArray $settings ) {
+		return $settings->getSetting( 'repoUrl' ) . '/data/';
+	};
+
 	$defaults['repoArticlePath'] = function ( SettingsArray $settings ) {
 		// use $wgArticlePath if this wiki is the repo, otherwise default to /wiki/$1
 		return $settings->getSetting( 'thisWikiIsTheRepo' ) ? $GLOBALS['wgArticlePath'] : '/wiki/$1';

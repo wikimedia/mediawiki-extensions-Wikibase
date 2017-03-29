@@ -15,8 +15,8 @@
 <http://acme.test/value/ba4fa68a0979e663277b08d93f93705c> <http://wikiba.se/ontology-beta#timePrecision> "9"^^<http://www.w3.org/2001/XMLSchema#integer> .
 <http://acme.test/value/ba4fa68a0979e663277b08d93f93705c> <http://wikiba.se/ontology-beta#timeTimezone> "0"^^<http://www.w3.org/2001/XMLSchema#integer> .
 <http://acme.test/value/ba4fa68a0979e663277b08d93f93705c> <http://wikiba.se/ontology-beta#timeCalendarModel> <http://www.wikidata.org/entity/Q1985727> .
-<http://acme.test/reference/d2412760c57cacd8c8f24d9afde3b20c87161cca> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://acme.test/prop/novalue/P3> .
-<http://acme.test/reference/d2412760c57cacd8c8f24d9afde3b20c87161cca> <http://acme.test/prop/reference/P4> "Point(67.25 12.125)"^^<http://www.opengis.net/ont/geosparql#wktLiteral> .
-<http://acme.test/reference/d2412760c57cacd8c8f24d9afde3b20c87161cca> <http://acme.test/prop/reference/value/P4> <http://acme.test/value/ac1467067614b363f5efff379d71cf7a> .
-<http://acme.test/reference/d2412760c57cacd8c8f24d9afde3b20c87161cca> <http://acme.test/prop/reference/value/P6> <http://acme.test/value/1e09d673624819aacd170165aae555a1> .
-<http://acme.test/reference/d2412760c57cacd8c8f24d9afde3b20c87161cca> <http://acme.test/prop/reference/value/P8> <http://acme.test/value/ba4fa68a0979e663277b08d93f93705c> .
+<http://acme.test/reference/f2693d55e4237eed12e76c87e54f6ae0f3d7080f> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://acme.test/prop/novalue/P3> .
+<http://acme.test/reference/f2693d55e4237eed12e76c87e54f6ae0f3d7080f> <http://acme.test/prop/reference/P4> "Point(67.25 12.125)"^^<http://www.opengis.net/ont/geosparql#wktLiteral> .
+<http://acme.test/reference/f2693d55e4237eed12e76c87e54f6ae0f3d7080f> <http://acme.test/prop/reference/value/P4> <http://acme.test/value/ac1467067614b363f5efff379d71cf7a> .
+<http://acme.test/reference/f2693d55e4237eed12e76c87e54f6ae0f3d7080f> <http://acme.test/prop/reference/value/P6> <http://acme.test/value/1e09d673624819aacd170165aae555a1> .
+<http://acme.test/reference/f2693d55e4237eed12e76c87e54f6ae0f3d7080f> <http://acme.test/prop/reference/value/P8> <http://acme.test/value/ba4fa68a0979e663277b08d93f93705c> .

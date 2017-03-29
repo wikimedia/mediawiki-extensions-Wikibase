@@ -384,7 +384,8 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		return [ $repositoryName => array_merge(
 			[
 				'database' => '',
-				'base-uri' => 'http://acme.test/concept/',
+				'base-concept-uri' => 'http://acme.test/concept/',
+				'base-data-uri' => 'http://acme.test/data/',
 				'entity-types' => [ 'item', 'property' ],
 				'prefix-mapping' => []
 			],
@@ -532,17 +533,12 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	 * @return WikibaseRepo
 	 */
 	private function getWikibaseRepo( $entityTypeDefinitions = array() ) {
-		/** @var RepositoryDefinitions $repositoryDefinitions */
-		$repositoryDefinitions = $this->getMockBuilder( RepositoryDefinitions::class )
-			->disableOriginalConstructor()
-			->getMock();
-
 		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
 		return new WikibaseRepo(
 			$settings,
 			new DataTypeDefinitions( array() ),
 			new EntityTypeDefinitions( $entityTypeDefinitions ),
-			$repositoryDefinitions
+			new RepositoryDefinitions( $this->getRepositoryDefinition( '' ) )
 		);
 	}
 
@@ -728,8 +724,8 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 
 	public function testGetConceptBaseUris() {
 		$wikibaseRepo = $this->getWikibaseRepoWithCustomRepositoryDefinitions( array_merge(
-			$this->getRepositoryDefinition( '', [ 'base-uri' => 'http://acme.test/concept/' ] ),
-			$this->getRepositoryDefinition( 'other', [ 'base-uri' => 'http://other.wiki/concept/', 'entity-types' => [ 'foo' ] ] )
+			$this->getRepositoryDefinition( '', [ 'base-concept-uri' => 'http://acme.test/concept/' ] ),
+			$this->getRepositoryDefinition( 'other', [ 'base-concept-uri' => 'http://other.wiki/concept/', 'entity-types' => [ 'foo' ] ] )
 		) );
 
 		$this->assertEquals(

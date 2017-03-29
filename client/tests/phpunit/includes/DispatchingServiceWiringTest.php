@@ -49,7 +49,7 @@ class DispatchingServiceWiringTest extends \PHPUnit_Framework_TestCase {
 			$this->getRepositoryServiceContainerFactory(),
 			new RepositoryDefinitions( [ '' => [
 				'database' => false,
-				'base-uri' => '',
+				'base-concept-uri' => '',
 				'entity-types' => [],
 				'prefix-mapping' => [],
 			] ] )

@@ -37,7 +37,7 @@ class EntityRdfBuilderFactoryTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider provideBuilderFlags
 	 */
 	public function testGetEntityRdfBuilder( $flags ) {
-		$vocab = new RdfVocabulary( RdfBuilderTestData::URI_BASE, RdfBuilderTestData::URI_DATA );
+		$vocab = new RdfVocabulary( [ '' => RdfBuilderTestData::URI_BASE ], [ '' => RdfBuilderTestData::URI_DATA ] );
 		$writer = new NTriplesRdfWriter();
 		$tracker = new NullEntityMentionListener();
 		$dedupe = new NullDedupeBag();
