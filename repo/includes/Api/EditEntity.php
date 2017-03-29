@@ -69,11 +69,6 @@ class EditEntity extends ModifyEntity {
 	private $statementDeserializer;
 
 	/**
-	 * @var DataTypeDefinitions
-	 */
-	private $dataTypeDefinitions;
-
-	/**
 	 * @var EntityIdParser
 	 */
 	private $idParser;
@@ -82,6 +77,11 @@ class EditEntity extends ModifyEntity {
 	 * @var EntityFactory
 	 */
 	private $entityFactory;
+
+	/**
+	 * @var string[]
+	 */
+	private $propertyDataTypes;
 
 	/**
 	 * @var EntityChangeOpProvider
@@ -105,8 +105,8 @@ class EditEntity extends ModifyEntity {
 		$this->revisionLookup = $wikibaseRepo->getEntityRevisionLookup( 'uncached' );
 		$this->idParser = $wikibaseRepo->getEntityIdParser();
 		$this->entityFactory = $wikibaseRepo->getEntityFactory();
+		$this->propertyDataTypes = $wikibaseRepo->getDataTypeDefinitions()->getTypeIds();
 		$this->statementDeserializer = $wikibaseRepo->getExternalFormatStatementDeserializer();
-		$this->dataTypeDefinitions = $wikibaseRepo->getDataTypeDefinitions();
 
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
@@ -237,7 +237,7 @@ class EditEntity extends ModifyEntity {
 		if ( !$exists && $entity instanceof Property ) {
 			if ( !isset( $data['datatype'] ) ) {
 				$this->errorReporter->dieError( 'No datatype given', 'param-illegal' );
-			} elseif ( !in_array( $data['datatype'], $this->dataTypeDefinitions->getTypeIds() ) ) {
+			} elseif ( !in_array( $data['datatype'], $this->propertyDataTypes ) ) {
 				$this->errorReporter->dieError( 'Invalid datatype given', 'param-illegal' );
 			} else {
 				$entity->setDataTypeId( $data['datatype'] );
