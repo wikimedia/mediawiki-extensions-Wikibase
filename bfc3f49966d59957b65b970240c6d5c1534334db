@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_43fc51d5",
+        "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.siteselector.tests.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2017-03-29T20:26:18Z",
+      "side": 1,
+      "message": "It looks like this calls stop/async once, but calls start/done() twice. That\u0027s a problem (but not a new one, and if it works, then meh).\n\nYou can call async() multiple times to create e.g. done1 and done2 (the test will proceed with all allocated async handles have been returned).",
+      "range": {
+        "startLine": 141,
+        "startChar": 2,
+        "endLine": 141,
+        "endChar": 20
+      },
+      "revId": "bfc3f49966d59957b65b970240c6d5c1534334db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
