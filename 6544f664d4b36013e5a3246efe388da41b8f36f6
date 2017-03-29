@@ -228,6 +228,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_761b5283",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-29T14:54:55Z",
+      "side": 1,
+      "message": "If the user wants cyrillic serbian, but we only have a label in roman serbian, we could still show cyrillic serbian, because we can transliterate. LanguageFallbackChain takes care of that.",
+      "parentUuid": "6e436fe2_caccfb8e",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_24d598ba",
         "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
         "patchSetId": 54
@@ -415,6 +433,24 @@
       "side": 1,
       "message": "OK, now I remember. $warning is not just a warning, it is set of parameters for $status-\u003ewarning() which needs to be unpacked.",
       "parentUuid": "6e436fe2_2a9d5f5b",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_f630c2fe",
+        "filename": "repo/includes/Search/Elastic/WikibasePrefixSearcher.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-29T14:54:55Z",
+      "side": 1,
+      "message": "ah, i see",
+      "parentUuid": "6e436fe2_2afc7f3a",
       "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
