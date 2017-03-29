@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_f6a3e23d",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-29T14:39:56Z",
+      "side": 1,
+      "message": "This info should indeed come from WikibaseRepo.datatypes.php somehow. I don\u0027t see how it would fit into the Property class.",
+      "parentUuid": "6e436fe2_48a55cb0",
+      "range": {
+        "startLine": 88,
+        "startChar": 3,
+        "endLine": 88,
+        "endChar": 66
+      },
+      "revId": "571129c7720bb50b282a19439587cfb71078a520",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_e8cf8880",
         "filename": "repo/tests/phpunit/data/maintenance/dumpRdf-out.txt",
         "patchSetId": 5
