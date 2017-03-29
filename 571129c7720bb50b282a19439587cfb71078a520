@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_0d7e7814",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-03-29T17:12:21Z",
+      "side": 1,
+      "message": "I meant the info comes from WikibaseRepo.datatypes.php  but Property has some API that uses this info like $property-\u003eisLink() or something.",
+      "parentUuid": "6e436fe2_f6a3e23d",
+      "range": {
+        "startLine": 88,
+        "startChar": 3,
+        "endLine": 88,
+        "endChar": 66
+      },
+      "revId": "571129c7720bb50b282a19439587cfb71078a520",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_e8cf8880",
         "filename": "repo/tests/phpunit/data/maintenance/dumpRdf-out.txt",
         "patchSetId": 5
