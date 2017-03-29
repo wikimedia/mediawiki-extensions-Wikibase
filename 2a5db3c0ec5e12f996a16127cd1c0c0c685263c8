@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_35c4e443",
+        "filename": "repo/includes/Specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-03-29T04:12:08Z",
+      "side": 1,
+      "message": "looks like this makes $this-\u003etype default to an empty string, when loading Special:EntitiesWithoutDescription (without any parameters).\n\nthen we set the default below in the $formDescriptor to empty string which is not one of the $options.  This to causes the form to display an error, even though I didn\u0027t select anything in the form yet nor pass parameters in my request.\n\nthink we need to default to one of the valid entity types.\n\n(for language, it\u0027s a combobox, so empty string is okay in that case but not for select)",
+      "revId": "2a5db3c0ec5e12f996a16127cd1c0c0c685263c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
