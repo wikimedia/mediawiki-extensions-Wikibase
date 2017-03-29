@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_aa196a80",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 63
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-29T14:54:55Z",
+      "side": 1,
+      "message": "If $request is only needed for debugging, can it be optional? Then it cal also be moved from the constructor to a setter.",
+      "revId": "e4e761f97b4552d71842169702950110ff7e3e58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
