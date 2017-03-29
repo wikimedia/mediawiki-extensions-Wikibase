@@ -24,7 +24,7 @@ use Wikibase\Summary;
  *
  * @license GPL-2.0+
  */
-class PropertyChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase implements ChangeOpDeserializerTest {
+class PropertyChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 	use AliasChangeOpDeserializationTester;
 	use ClaimsChangeOpDeserializationTester;
