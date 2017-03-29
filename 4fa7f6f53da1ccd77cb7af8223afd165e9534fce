@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_d0a90e7a",
+        "filename": "repo/includes/Specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-29T09:41:22Z",
+      "side": 0,
+      "message": "The message needs to be removed from en.json as well as qqq.json, I believe.",
+      "range": {
+        "startLine": 167,
+        "startChar": 16,
+        "endLine": 167,
+        "endChar": 60
+      },
+      "revId": "4fa7f6f53da1ccd77cb7af8223afd165e9534fce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
