@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Rdf;
 
 use InvalidArgumentException;
+use RuntimeException;
 use Site;
 use SiteList;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -54,6 +55,13 @@ class RdfBuilderTestData {
 	 * @param string $dataDir directory containing RDF data (n-triples files)
 	 */
 	public function __construct( $entityDir, $dataDir ) {
+		// NOTE: this is a sanity check to avoid confusion when manually running unit tests
+		// in an environment that may have inconsistent library versions, such as a development
+		// setup.
+		if ( !preg_match( '/^7\./', WIKIBASE_DATAMODEL_VERSION ) ) {
+			throw new RuntimeException( 'RDF test data requires data-model version 7!' );
+		}
+
 		$this->entityDir = $entityDir;
 		$this->dataDir = $dataDir;
 	}
