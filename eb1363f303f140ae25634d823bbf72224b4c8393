@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_ca5b9625",
+        "filename": "repo/includes/Search/Elastic/Fields/DescriptionsField.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-29T14:59:03Z",
+      "side": 1,
+      "message": "I see your point. A sanity check wouold",
+      "parentUuid": "6e436fe2_aabdef64",
+      "revId": "eb1363f303f140ae25634d823bbf72224b4c8393",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_647640d7",
         "filename": "repo/includes/Search/Elastic/Fields/DescriptionsField.php",
         "patchSetId": 19
