@@ -69,6 +69,30 @@
       "revId": "a72b651e82e447fdf63a3394156739eaa0198424",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_af7ad41d",
+        "filename": "repo/includes/Specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-30T13:08:34Z",
+      "side": 1,
+      "message": "Wooops! thanks!",
+      "parentUuid": "6e436fe2_f4999581",
+      "range": {
+        "startLine": 171,
+        "startChar": 25,
+        "endLine": 171,
+        "endChar": 33
+      },
+      "revId": "a72b651e82e447fdf63a3394156739eaa0198424",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
