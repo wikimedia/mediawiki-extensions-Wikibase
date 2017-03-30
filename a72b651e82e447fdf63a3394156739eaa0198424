@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_74a585b0",
+        "filename": "repo/includes/Specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-30T09:56:36Z",
+      "side": 1,
+      "message": "I, personally, like to use empty(). But in this case it scares me. This line will not complain if the property does not exist for whatever reason.",
+      "range": {
+        "startLine": 170,
+        "startChar": 7,
+        "endLine": 170,
+        "endChar": 12
+      },
+      "revId": "a72b651e82e447fdf63a3394156739eaa0198424",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_f4999581",
+        "filename": "repo/includes/Specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-30T09:56:36Z",
+      "side": 1,
+      "message": "The term type is one of the strings \"label\" or \"description\". But the $defaultType is fed into the \"type\" field below, which is for the entity type.",
+      "range": {
+        "startLine": 171,
+        "startChar": 25,
+        "endLine": 171,
+        "endChar": 33
+      },
+      "revId": "a72b651e82e447fdf63a3394156739eaa0198424",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
