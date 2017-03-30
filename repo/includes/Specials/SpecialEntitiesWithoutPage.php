@@ -14,25 +14,22 @@ use Wikibase\Repo\Store\EntitiesWithoutTermFinder;
  * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Thiemo Mättig
  */
 class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 
 	/**
-	 * The language used
-	 *
-	 * @var string
+	 * @var string Language code as requested by the user.
 	 */
-	private $language = '';
+	private $requestedLanguageCode = '';
 
 	/**
-	 * The type used
-	 *
-	 * @var string|null
+	 * @var string|null Entity type identifier as requested by the user.
 	 */
-	private $type = null;
+	private $requestedEntityType = '';
 
 	/**
-	 * @var string One of the TermIndexEntry::TYPE_... constants.
+	 * @var string One of the TermIndexEntry::TYPE_... constants, provided on construction time.
 	 */
 	private $termType;
 
@@ -47,9 +44,10 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	private $entitiesWithoutTerm;
 
 	/**
-	 * @var string[]
+	 * @var string[] List of entity type identifiers the special page should accept, provided on
+	 *  construction time.
 	 */
-	private $entityTypes;
+	private $acceptableEntityTypes;
 
 	/**
 	 * @var ContentLanguages
@@ -66,7 +64,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * @param string $termType One of the TermIndexEntry::TYPE_... constants.
 	 * @param string $legendMsg
 	 * @param EntitiesWithoutTermFinder $entitiesWithoutTerm
-	 * @param string[] $entityTypes
+	 * @param string[] $acceptableEntityTypes
 	 * @param ContentLanguages $termsLanguages
 	 * @param LanguageNameLookup $languageNameLookup
 	 */
@@ -75,7 +73,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		$termType,
 		$legendMsg,
 		EntitiesWithoutTermFinder $entitiesWithoutTerm,
-		array $entityTypes,
+		array $acceptableEntityTypes,
 		ContentLanguages $termsLanguages,
 		LanguageNameLookup $languageNameLookup
 	) {
@@ -84,7 +82,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		$this->termType = $termType;
 		$this->legendMsg = $legendMsg;
 		$this->entitiesWithoutTerm = $entitiesWithoutTerm;
-		$this->entityTypes = $entityTypes;
+		$this->acceptableEntityTypes = $acceptableEntityTypes;
 		$this->termsLanguages = $termsLanguages;
 		$this->languageNameLookup = $languageNameLookup;
 	}
@@ -100,7 +98,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		$this->prepareArguments( $subPage );
 		$this->setForm();
 
-		if ( $this->language !== '' && $this->type !== '' ) {
+		if ( $this->requestedLanguageCode !== '' && $this->requestedEntityType !== '' ) {
 			$this->showQuery();
 		}
 	}
@@ -111,48 +109,60 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * @param string|null $subPage
 	 */
 	private function prepareArguments( $subPage ) {
-		$request = $this->getRequest();
+		$this->requestedLanguageCode = '';
+		$this->requestedEntityType = '';
 
-		$this->language = '';
-		$this->type = null;
 		if ( $subPage !== null ) {
-			$parts = explode( '/', $subPage );
+			$parts = explode( '/', $subPage, 2 );
+			$this->requestedLanguageCode = $parts[0];
 			if ( isset( $parts[1] ) ) {
-				$this->type = $parts[1];
+				$this->requestedEntityType = $parts[1];
 			}
-			$this->language = $parts[0];
 		}
 
-		$this->language = $request->getText( 'language', $this->language );
-		if ( $this->language !== '' && !$this->termsLanguages->hasLanguage( $this->language ) ) {
+		$request = $this->getRequest();
+		$this->requestedLanguageCode = $request->getText( 'language', $this->requestedLanguageCode );
+		$this->requestedEntityType = $request->getText( 'type', $this->requestedEntityType );
+
+		if ( $this->requestedLanguageCode !== ''
+			&& !$this->termsLanguages->hasLanguage( $this->requestedLanguageCode )
+		) {
 			$this->showErrorHTML( $this->msg(
 				'wikibase-entitieswithoutlabel-invalid-language',
-				wfEscapeWikiText( $this->language )
+				wfEscapeWikiText( $this->requestedLanguageCode )
 			)->parse() );
-			$this->language = '';
+			$this->requestedLanguageCode = '';
 		}
 
-		$this->type = $request->getText( 'type', $this->type );
-		if ( $this->type !== '' && !in_array( $this->type, $this->entityTypes ) ) {
+		if ( $this->requestedEntityType !== '' && !$this->isAcceptableEntityType() ) {
 			$this->showErrorHTML( $this->msg(
 				'wikibase-entitieswithoutlabel-invalid-type',
-				wfEscapeWikiText( $this->type )
+				wfEscapeWikiText( $this->requestedEntityType )
 			)->parse() );
-			$this->type = '';
+			$this->requestedEntityType = '';
 		}
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function isAcceptableEntityType() {
+		return in_array( $this->requestedEntityType, $this->acceptableEntityTypes );
 	}
 
 	/**
 	 * Return options for the language input field.
 	 *
-	 * @return array
+	 * @return string[]
 	 */
 	private function getLanguageOptions() {
 		$options = array();
+
 		foreach ( $this->termsLanguages->getLanguages() as $languageCode ) {
 			$languageName = $this->languageNameLookup->getName( $languageCode );
 			$options["$languageName ($languageCode)"] = $languageCode;
 		}
+
 		return $options;
 	}
 
@@ -160,23 +170,24 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * Build the HTML form
 	 */
 	private function setForm() {
-		$options = array();
-
-		foreach ( $this->entityTypes as $type ) {
-			// Messages: wikibase-entity-item, wikibase-entity-property
-			$options[$this->msg( 'wikibase-entity-' . $type )->text()] = $type;
+		$entityTypeOptions = [];
+		foreach ( $this->acceptableEntityTypes as $type ) {
+			// Messages:
+			// wikibase-entity-item
+			// wikibase-entity-property
+			$msg = $this->msg( 'wikibase-entity-' . $type );
+			$text = $msg->isDisabled() ? $type : $msg->text();
+			$entityTypeOptions[$text] = $type;
 		}
 
-		if ( empty( $this->termType ) ) {
-			$defaultType = $this->termType;
-		} else {
-			$defaultType = reset( $this->entityTypes );
-		}
+		$defaultEntityType = $this->isAcceptableEntityType()
+			? $this->requestedEntityType
+			: reset( $this->acceptableEntityTypes );
 
 		$formDescriptor = array(
 			'language' => array(
 				'name' => 'language',
-				'default' => $this->language,
+				'default' => $this->requestedLanguageCode,
 				'type' => 'combobox',
 				'options' => $this->getLanguageOptions(),
 				'cssclass' => 'wb-language-suggester',
@@ -185,8 +196,8 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 			),
 			'type' => array(
 				'name' => 'type',
-				'options' => $options,
-				'default' => $defaultType,
+				'options' => $entityTypeOptions,
+				'default' => $defaultEntityType,
 				'type' => 'select',
 				'id' => 'wb-entitieswithoutpage-type',
 				'label-message' => 'wikibase-entitieswithoutlabel-label-type'
@@ -204,8 +215,10 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 			->setMethod( 'get' )
 			->setWrapperLegendMsg( $this->legendMsg )
 			->suppressDefaultSubmit()
-			->setSubmitCallback( function () {// no-op
-			} )->show();
+			->setSubmitCallback( function () {
+				// no-op
+			} )
+			->show();
 	}
 
 	/**
@@ -219,8 +232,8 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	protected function getResult( $offset = 0, $limit = 0 ) {
 		return $this->entitiesWithoutTerm->getEntitiesWithoutTerm(
 			$this->termType,
-			$this->language,
-			[ $this->type ],
+			$this->requestedLanguageCode,
+			[ $this->requestedEntityType ],
 			$limit,
 			$offset
 		);
@@ -230,7 +243,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * @see SpecialWikibaseQueryPage::getTitleForNavigation
 	 */
 	protected function getTitleForNavigation() {
-		return $this->getPageTitle( $this->language . '/' . $this->type );
+		return $this->getPageTitle( $this->requestedLanguageCode . '/' . $this->requestedEntityType );
 	}
 
 }
