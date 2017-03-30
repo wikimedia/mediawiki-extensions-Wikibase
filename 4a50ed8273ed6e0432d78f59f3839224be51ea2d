@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_af197480",
+        "filename": "repo/includes/Diff/DispatchingEntityDiffVisualizer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-03-30T12:08:46Z",
+      "side": 1,
+      "message": "What I still don\u0027t get is why do we need this logic.\n`EntityDiffVisualizerFactory` already returns `BasicEntityDiffVisualizer` if entity type description doesn\u0027t contain one.\n\nBut if it does why do we need to get output from `BasicEntityDiffVisualizer`? Can\u0027t we let type itself define what visualizer it actually wants to provide?\nIf it needs custom + basic, then lets alow to compose them how developer of the type thinks would be right. May be he/she wants first to display output from basic and then from custom.",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 81
+      },
+      "revId": "4a50ed8273ed6e0432d78f59f3839224be51ea2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
