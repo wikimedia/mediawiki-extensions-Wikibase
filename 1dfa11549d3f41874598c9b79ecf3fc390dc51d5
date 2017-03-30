@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_8f80374d",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-30T13:59:17Z",
+      "side": 1,
+      "message": "wonky ident",
+      "revId": "1dfa11549d3f41874598c9b79ecf3fc390dc51d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_6f984bc4",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-30T13:59:17Z",
+      "side": 1,
+      "message": "Injecting so many specialized ChangeOpFactories here seems like a code smell. But not something that should be fixed in this patch.",
+      "revId": "1dfa11549d3f41874598c9b79ecf3fc390dc51d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
