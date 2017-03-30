@@ -373,7 +373,6 @@ abstract class EntityHandler extends ContentHandler {
 	public function makeEntityContent( EntityHolder $entityHolder ) {
 		$contentClass = $this->getContentClass();
 
-		/* EntityContent $content */
 		$content = new $contentClass( $entityHolder );
 
 		//TODO: make sure the entity is valid/complete!
