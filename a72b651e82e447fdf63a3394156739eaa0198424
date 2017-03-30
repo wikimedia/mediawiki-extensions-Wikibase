@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_f410b55d",
+        "filename": "repo/includes/Specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-03-30T11:59:00Z",
+      "side": 1,
+      "message": "yeah, think we want to look at $this-\u003etype here?",
+      "parentUuid": "6e436fe2_74a585b0",
+      "range": {
+        "startLine": 170,
+        "startChar": 7,
+        "endLine": 170,
+        "endChar": 12
+      },
+      "revId": "a72b651e82e447fdf63a3394156739eaa0198424",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_f4999581",
         "filename": "repo/includes/Specials/SpecialEntitiesWithoutPage.php",
         "patchSetId": 3
