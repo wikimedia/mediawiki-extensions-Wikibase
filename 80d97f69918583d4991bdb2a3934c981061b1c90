@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_cfb2bfe4",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntitiesWithoutPageTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-30T14:48:32Z",
+      "side": 1,
+      "message": "So now we are no longer checking for HTML injection?",
+      "revId": "80d97f69918583d4991bdb2a3934c981061b1c90",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
