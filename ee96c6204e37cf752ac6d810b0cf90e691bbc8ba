@@ -16,6 +16,24 @@
       "revId": "ee96c6204e37cf752ac6d810b0cf90e691bbc8ba",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_6fc36c0b",
+        "filename": "repo/includes/Specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-03-30T13:24:52Z",
+      "side": 1,
+      "message": "That\u0027s not what this line does. This is only for providing the initial default value. The error handling you are asking for is done by OOUI and is not affected by this line.",
+      "parentUuid": "6e436fe2_0fcbc84f",
+      "revId": "ee96c6204e37cf752ac6d810b0cf90e691bbc8ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
