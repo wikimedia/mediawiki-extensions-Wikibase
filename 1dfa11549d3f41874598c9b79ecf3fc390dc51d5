@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_4f48ef32",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-30T14:08:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e436fe2_8f80374d",
+      "revId": "1dfa11549d3f41874598c9b79ecf3fc390dc51d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_6f984bc4",
         "filename": "repo/includes/Api/EditEntity.php",
         "patchSetId": 3
