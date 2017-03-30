@@ -12,7 +12,7 @@ class TemplateFactory {
 	/**
 	 * @var self
 	 */
-	private static $instance;
+	protected static $instance;
 
 	/**
 	 * @var TemplateRegistry
