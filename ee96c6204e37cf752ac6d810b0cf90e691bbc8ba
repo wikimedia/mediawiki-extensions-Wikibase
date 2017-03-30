@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_0fcbc84f",
+        "filename": "repo/includes/Specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-30T13:19:39Z",
+      "side": 1,
+      "message": "If a wrong type is entered, should we really \"fix\" this by falling back to a \"good\" type? This is a change in behavior that does not belong into a code cleanup patch, and should be discussed separately.",
+      "revId": "ee96c6204e37cf752ac6d810b0cf90e691bbc8ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
