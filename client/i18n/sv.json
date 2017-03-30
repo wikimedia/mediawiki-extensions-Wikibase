@@ -63,6 +63,7 @@
 	"wikibase-rc-show-wikidata-pref": "Visa {{WBREPONAME}}redigeringar i senaste ändringar",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}redigering",
+	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} redigeringar",
 	"wikibase-replicationnote": "Observera att det kan ta flera minuter innan ändringarna är synliga på alla wikier.",
 	"wikibase-watchlist-show-changes-pref": "Visa {{WBREPONAME}}redigeringar i din bevakningslista",
 	"wikibase-error-deserialize-error": "Misslyckades med att avserialisera data.",
