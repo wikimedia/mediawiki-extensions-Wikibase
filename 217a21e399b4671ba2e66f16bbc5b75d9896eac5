@@ -16,6 +16,24 @@
       "revId": "217a21e399b4671ba2e66f16bbc5b75d9896eac5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_b9522669",
+        "filename": "repo/sql/AddTermsFullEntityId.sql",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-03-30T07:20:50Z",
+      "side": 1,
+      "message": "hmm, What about \"term_full_entity_id\"?",
+      "parentUuid": "6e436fe2_b6deba12",
+      "revId": "217a21e399b4671ba2e66f16bbc5b75d9896eac5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
