@@ -16,7 +16,7 @@ class CachingOtherProjectsSitesProvider implements OtherProjectsSitesProvider {
 	/**
 	 * @var OtherProjectsSitesProvider
 	 */
-	private $otherProjectsSitesProvider;
+	private $provider;
 
 	/**
 	 * @var BagOStuff
@@ -24,23 +24,23 @@ class CachingOtherProjectsSitesProvider implements OtherProjectsSitesProvider {
 	private $cache;
 
 	/**
-	 * @var int
+	 * @var int Time-to-live (in seconds)
 	 */
-	private $duration;
+	private $ttl;
 
 	/**
-	 * @param OtherProjectsSitesProvider $otherProjectsSitesProvider
+	 * @param OtherProjectsSitesProvider $provider
 	 * @param BagOStuff $cache
-	 * @param int $duration Cache duration
+	 * @param int $ttl Cache duration
 	 */
 	public function __construct(
-		OtherProjectsSitesProvider $otherProjectsSitesProvider,
+		OtherProjectsSitesProvider $provider,
 		BagOStuff $cache,
-		$duration
+		$ttl
 	) {
-		$this->otherProjectsSitesProvider = $otherProjectsSitesProvider;
+		$this->provider = $provider;
 		$this->cache = $cache;
-		$this->duration = $duration;
+		$this->ttl = $ttl;
 	}
 
 	/**
@@ -50,35 +50,15 @@ class CachingOtherProjectsSitesProvider implements OtherProjectsSitesProvider {
 	 * @return string[]
 	 */
 	public function getOtherProjectsSiteIds( array $siteLinkGroups ) {
-		$cacheKey = $this->getCacheKey( $siteLinkGroups );
-		$siteIds = $this->cache->get( $cacheKey );
-
-		if ( $siteIds === false ) {
-			$siteIds = $this->generateAndCache( $cacheKey, $siteLinkGroups );
-		}
-
-		return $siteIds;
-	}
-
-	/**
-	 * @param string $cacheKey
-	 * @param string[] $siteLinkGroups
-	 * @return string[]
-	 */
-	private function generateAndCache( $cacheKey, array $siteLinkGroups ) {
-		$siteIds = $this->otherProjectsSitesProvider->getOtherProjectsSiteIds( $siteLinkGroups );
-		$this->cache->set( $cacheKey, $siteIds, $this->duration );
-
-		return $siteIds;
-	}
-
-	/**
-	 * @param string[] $siteLinkGroups
-	 * @return string
-	 */
-	private function getCacheKey( array $siteLinkGroups ) {
 		$settingsHash = sha1( implode( '|', $siteLinkGroups ) );
-		return wfMemcKey( 'OtherProjectsSites', $settingsHash );
+
+		return $this->cache->getWithSetCallback(
+			$this->cache->makeKey( 'OtherProjectsSites', $settingsHash ),
+			$this->ttl,
+			function () use ( $siteLinkGroups ) {
+				return $this->provider->getOtherProjectsSiteIds( $siteLinkGroups );
+			}
+		);
 	}
 
 }
