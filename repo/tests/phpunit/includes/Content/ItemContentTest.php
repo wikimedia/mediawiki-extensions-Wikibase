@@ -177,6 +177,7 @@ class ItemContentTest extends EntityContentTest {
 		// expect wb-sitelinks => 0 for all inherited cases
 		foreach ( $cases as &$case ) {
 			$case[1]['wb-sitelinks'] = 0;
+			$case[1]['wb-identifiers'] = 0;
 		}
 
 		$cases['redirect'] = array(
@@ -191,6 +192,7 @@ class ItemContentTest extends EntityContentTest {
 			$this->getItemContentWithClaim(),
 			array(
 				'wb-claims' => 1,
+				'wb-identifiers' => 0,
 				'wb-sitelinks' => 0,
 			)
 		);
@@ -199,6 +201,7 @@ class ItemContentTest extends EntityContentTest {
 			$this->getItemContentWithSiteLink(),
 			array(
 				'wb-claims' => 0,
+				'wb-identifiers' => 0,
 				'wb-sitelinks' => 1,
 			)
 		);

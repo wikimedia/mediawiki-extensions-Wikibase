@@ -191,6 +191,7 @@ return [
 	'pagePropertiesRdf' => [
 		'wb-sitelinks' => [ 'name' => 'sitelinks', 'type' => 'integer' ],
 		'wb-claims' => [ 'name' => 'statements', 'type' => 'integer' ],
+		'wb-identifiers' => [ 'name' => 'identifiers', 'type' => 'integer' ],
 	],
 
 	// Map of foreign repository names to repository-specific settings such as "supportedEntityTypes"
