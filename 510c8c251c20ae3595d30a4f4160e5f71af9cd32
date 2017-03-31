@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_78a9eedb",
+        "filename": "repo/tests/phpunit/includes/Content/ItemContentTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-03-31T12:30:15Z",
+      "side": 1,
+      "message": "please add a test case in which wb-identifiers is not null.",
+      "revId": "510c8c251c20ae3595d30a4f4160e5f71af9cd32",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
