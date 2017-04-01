@@ -322,7 +322,6 @@
 	"wikibase-entitieswithoutlabel-legend": "Récupérer la liste des entités sans libellé",
 	"wikibase-entitieswithoutlabel-label-language": "Code de langue :",
 	"wikibase-entitieswithoutlabel-label-type": "Type :",
-	"wikibase-entitieswithoutlabel-label-alltypes": "tous",
 	"wikibase-entitieswithoutlabel-submit": "Rechercher",
 	"wikibase-entitieswithoutlabel-invalid-language": "« $1 » n'est pas un code de langue valide.",
 	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" n’est pas un type d’entité valide.",

@@ -273,7 +273,6 @@
 	"wikibase-entitieswithoutlabel-legend": "Wyświetl listę encji bez etykiety",
 	"wikibase-entitieswithoutlabel-label-language": "Kod języka:",
 	"wikibase-entitieswithoutlabel-label-type": "Typ:",
-	"wikibase-entitieswithoutlabel-label-alltypes": "wszystkie",
 	"wikibase-entitieswithoutlabel-submit": "Znajdź",
 	"wikibase-entitieswithoutlabel-invalid-language": "„$1” jest nie prawidłowym kodem języka.",
 	"wikibase-entitieswithoutlabel-invalid-type": "„$1” jest nie prawidłowym typem encji.",

@@ -283,7 +283,6 @@
 	"wikibase-entitieswithoutlabel-legend": "Hämta listan över enheter utan etikett",
 	"wikibase-entitieswithoutlabel-label-language": "Språkkod:",
 	"wikibase-entitieswithoutlabel-label-type": "Typ:",
-	"wikibase-entitieswithoutlabel-label-alltypes": "alla",
 	"wikibase-entitieswithoutlabel-submit": "Hitta",
 	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" är inte en giltig språkkod.",
 	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" är inte en giltig entitetstyp.",

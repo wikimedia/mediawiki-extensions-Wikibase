@@ -203,7 +203,6 @@
 	"wikibase-entitieswithoutlabel-legend": "Få en liste over entiteter uden etiket",
 	"wikibase-entitieswithoutlabel-label-language": "Sprogkode:",
 	"wikibase-entitieswithoutlabel-label-type": "Type:",
-	"wikibase-entitieswithoutlabel-label-alltypes": "alle",
 	"wikibase-entitieswithoutlabel-submit": "Søg",
 	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" er ikke en gyldig sprogkode.",
 	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" er ikke en gyldig entitetstype.",

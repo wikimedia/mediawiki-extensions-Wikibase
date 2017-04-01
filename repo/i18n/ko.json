@@ -254,7 +254,6 @@
 	"wikibase-entitieswithoutlabel-legend": "레이블이 없는 항목 목록 가져오기",
 	"wikibase-entitieswithoutlabel-label-language": "언어 코드:",
 	"wikibase-entitieswithoutlabel-label-type": "유형:",
-	"wikibase-entitieswithoutlabel-label-alltypes": "모두",
 	"wikibase-entitieswithoutlabel-submit": "찾기",
 	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\"은(는) 올바른 언어 코드가 아닙니다.",
 	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\"(은)은 올바른 개체 유형이 아닙니다.",
