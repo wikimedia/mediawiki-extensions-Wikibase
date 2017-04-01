@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Content;
 
+use DataValues\StringValue;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
@@ -13,9 +14,11 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\Repo\Content\EntityContentDiff;
@@ -109,6 +112,7 @@ class ItemContentTest extends EntityContentTest {
 		$itemContent->getEntity()->setLabel( 'en', "cake" );
 		$itemContent->getEntity()->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Berlin' );
 
+
 		return array(
 			array( $itemContent, "cake\nBerlin" ),
 		);
@@ -155,6 +159,25 @@ class ItemContentTest extends EntityContentTest {
 		);
 
 		return $itemContent;
+	}
+
+	private function getItemContentWithIdentifierClaims() {
+		$itemContent = $this->newEmpty( new ItemId( 'Q2' ) );
+		$item = $itemContent->getItem();
+
+		$snak = new PropertyValueSnak( new PropertyId( 'P11' ), new StringValue( 'Tehran' ) );
+		$guid = $item->getId()->getSerialization() . '$D8404CDA-25E4-4334-AG93-A3290BCD9C0P';
+		$item->getStatements()->addNewStatement( $snak, null, null, $guid );
+
+		return $itemContent;
+	}
+
+	private function getPropertyDataTypeLookup() {
+		$dataTypeLookup = new InMemoryDataTypeLookup();
+
+		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P11' ), 'external-id' );
+
+		return $dataTypeLookup;
 	}
 
 	/**
@@ -205,6 +228,15 @@ class ItemContentTest extends EntityContentTest {
 				'wb-sitelinks' => 1,
 			)
 		);
+
+		$cases['identifiers'] = [
+			$this->getItemContentWithIdentifierClaims(),
+			[
+				'wb-claims' => 1,
+				'wb-identifiers' => 1,
+				'wb-sitelinks' => 0,
+			]
+		];
 
 		return $cases;
 	}
