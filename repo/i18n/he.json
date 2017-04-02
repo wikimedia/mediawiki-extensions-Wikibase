@@ -11,7 +11,8 @@
 			"פוילישער",
 			"Guycn2",
 			"LaG roiL",
-			"Esh77"
+			"Esh77",
+			"שמזן"
 		]
 	},
 	"wikibase-desc": "מאגר נתונים מובְנים",
@@ -125,7 +126,7 @@
 	"wikibase-move-error": "לא ניתן להעביר דפים במרחב נתונים, ולא ניתן להעביר דפים אליו.",
 	"wikibase-validator-sitelink-conflict": "הקישור $1 כבר משמש בפריט $2. אפשר להסיר אותו מהדף $2 אם אינו שייך לשם או אם זה בדיוק אותו הנושא.",
 	"wikibase-validator-label-conflict": "למאפיין $3 כבר יש תווית \"$1\" שמשויכת לקוד השפה $2.",
-	"wikibase-validator-label-with-description-conflict": "לפיט $3 כבר יש תווית \"$1\" שמשויכת לקוד השפה $2, שמשתמשת באותו הטקסט בתיאור.",
+	"wikibase-validator-label-with-description-conflict": "לפריט $3 כבר יש תווית \"$1\" שמשויכת לקוד השפה $2, שמשתמשת באותו הטקסט בתיאור.",
 	"wikibase-validator-label-no-entityid": "התווית הזאת אינה צריכה להיות מזהה ישות תקין.",
 	"wikibase-validator-illegal-file-chars": "שמות קבצים לא יכולים להכיל תווים מסוימים, כמו נקודתיים וקווים נטויים. יש להדביק את שם הקובץ רק אחרי \"File:\".",
 	"wikibase-validator-illegal-geo-shape-title": "ערכים צריכים להתחיל ב־\"Data:\" ולהסתיים ב־\".map\". בנוסף, הכותרת צריכה לא להכיל תווים כמו נקודתיים, סולמית, או מקל.",
@@ -282,7 +283,6 @@
 	"wikibase-entitieswithoutlabel-legend": "לקבל רשימת ישויות ללא תווית",
 	"wikibase-entitieswithoutlabel-label-language": "קוד שפה:",
 	"wikibase-entitieswithoutlabel-label-type": "סוג:",
-	"wikibase-entitieswithoutlabel-label-alltypes": "הכול",
 	"wikibase-entitieswithoutlabel-submit": "למצוא",
 	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" אינו קוד שפה תקין.",
 	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" הוא לא סוג ישות תקין.",
