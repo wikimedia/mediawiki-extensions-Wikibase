@@ -31,7 +31,7 @@ class MediaWikiConfigModuleTest extends PHPUnit_Framework_TestCase {
 			->method( $this->anything() );
 
 		$script = $this->newInstance()->getScript( $context );
-		$this->assertStringStartsWith( 'mediaWiki.config.set(', $script );
+		$this->assertStringStartsWith( 'mw.config.set({', $script );
 		$this->assertContains( 'dummyKey', $script );
 		$this->assertContains( 'dummyValue', $script );
 	}

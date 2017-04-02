@@ -7,7 +7,6 @@ use ResourceLoader;
 use ResourceLoaderContext;
 use ResourceLoaderModule;
 use Wikibase\Client\WikibaseClient;
-use Xml;
 
 /**
  * Provides information about the current (client) site
@@ -43,11 +42,7 @@ class SiteModule extends ResourceLoaderModule {
 			);
 		}
 
-		return Xml::encodeJsCall(
-			'mw.config.set',
-			[ 'wbCurrentSite', $currentSite ],
-			ResourceLoader::inDebugMode()
-		);
+		return ResourceLoader::makeConfigSetScript( [ 'wbCurrentSite' => $currentSite ] );
 	}
 
 }
