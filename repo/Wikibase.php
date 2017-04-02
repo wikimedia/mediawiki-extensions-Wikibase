@@ -232,7 +232,27 @@ call_user_func( function() {
 			);
 		}
 	];
-	$wgAPIModules['wbeditentity'] = Wikibase\Repo\Api\EditEntity::class;
+	$wgAPIModules['wbeditentity'] = [
+		'class' => Wikibase\Repo\Api\EditEntity::class,
+		'factory' => function ( ApiMain $mainModule, $moduleName ) {
+			$wikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+			$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
+			return new Wikibase\Repo\Api\EditEntity(
+				$mainModule,
+				$moduleName,
+				$wikibaseRepo->getTermsLanguages(),
+				$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
+				$wikibaseRepo->getEntityIdParser(),
+				$wikibaseRepo->getEntityFactory(),
+				$wikibaseRepo->getExternalFormatStatementDeserializer(),
+				$wikibaseRepo->getDataTypeDefinitions()->getTypeIds(),
+				$changeOpFactoryProvider->getFingerprintChangeOpFactory(),
+				$changeOpFactoryProvider->getStatementChangeOpFactory(),
+				$changeOpFactoryProvider->getSiteLinkChangeOpFactory(),
+				$wikibaseRepo->getEntityChangeOpProvider()
+			);
+		}
+	];
 	$wgAPIModules['wblinktitles'] = [
 		'class' => Wikibase\Repo\Api\LinkTitles::class,
 		'factory' => function ( ApiMain $mainModule, $moduleName ) {

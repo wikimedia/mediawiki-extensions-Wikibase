@@ -266,7 +266,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 			'data' => $json,
 		);
 
-		$module = $this->getApiModule( EditEntity::class, 'wbeditEntity', $params, true );
+		$module = $this->getApiModule( EditEntity::class, 'wbeditentity', $params, true );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 		$actual = $this->replaceHashWithMock( $actual );
