@@ -120,7 +120,7 @@ class SitesModuleWorker {
 			}
 		}
 
-		return Xml::encodeJsCall( 'mediaWiki.config.set', array( 'wbSiteDetails', $siteDetails ) );
+		return ResourceLoader::makeConfigSetScript( array( 'wbSiteDetails' => $siteDetails ) );
 	}
 
 	/**
