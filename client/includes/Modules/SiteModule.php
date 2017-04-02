@@ -43,11 +43,7 @@ class SiteModule extends ResourceLoaderModule {
 			);
 		}
 
-		return Xml::encodeJsCall(
-			'mw.config.set',
-			[ 'wbCurrentSite', $currentSite ],
-			ResourceLoader::inDebugMode()
-		);
+		return ResourceLoader::makeConfigSetScript( [ 'wbCurrentSite' => $currentSite ] );
 	}
 
 }

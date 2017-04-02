@@ -29,7 +29,7 @@ class SiteModuleTest extends PHPUnit_Framework_TestCase {
 	public function testGetScript() {
 		$module = new SiteModule();
 		$script = $module->getScript( $this->getContext() );
-		$this->assertStringStartsWith( 'mw.config.set("wbCurrentSite",', $script );
+		$this->assertStringStartsWith( 'mw.config.set({"wbCurrentSite":', $script );
 		$this->assertStringEndsWith( ');', $script );
 	}
 
