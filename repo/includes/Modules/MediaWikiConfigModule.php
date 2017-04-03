@@ -5,11 +5,10 @@ namespace Wikibase\Repo\Modules;
 use ResourceLoader;
 use ResourceLoaderContext;
 use ResourceLoaderModule;
-use Xml;
 
 /**
  * Generic, reusable ResourceLoader module to set a JavaScript configuration variable via
- * mediaWiki.config.set.
+ * mw.config.set.
  *
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
@@ -40,14 +39,9 @@ class MediaWikiConfigModule extends ResourceLoaderModule {
 		/** @var MediaWikiConfigValueProvider $configValueProvider */
 		$configValueProvider = call_user_func( $this->getConfigValueProvider );
 
-		return Xml::encodeJsCall(
-			'mediaWiki.config.set',
-			[
-				$configValueProvider->getKey(),
-				$configValueProvider->getValue()
-			],
-			ResourceLoader::inDebugMode()
-		);
+		return ResourceLoader::makeConfigSetScript( [
+			$configValueProvider->getKey() => $configValueProvider->getValue()
+		] );
 	}
 
 	/**

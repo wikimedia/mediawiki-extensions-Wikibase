@@ -28,8 +28,8 @@ class RepoAccessModuleTest extends PHPUnit_Framework_TestCase {
 	public function testGetScript() {
 		$module = new RepoAccessModule();
 		$script = $module->getScript( $this->getContext() );
-		$this->assertStringStartsWith( 'mediaWiki.config.set("wbRepo",', $script );
-		$this->assertStringEndsWith( ');', $script );
+		$this->assertStringStartsWith( 'mw.config.set({"wbRepo":', $script );
+		$this->assertStringEndsWith( '});', $script );
 	}
 
 }

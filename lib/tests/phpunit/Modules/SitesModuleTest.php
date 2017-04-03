@@ -37,8 +37,8 @@ class SitesModuleTest extends PHPUnit_Framework_TestCase {
 	public function testGetScript() {
 		$module = new SitesModule();
 		$script = $module->getScript( $this->getContext() );
-		$this->assertStringStartsWith( 'mediaWiki.config.set("wbSiteDetails",', $script );
-		$this->assertStringEndsWith( ');', $script );
+		$this->assertStringStartsWith( 'mw.config.set({"wbSiteDetails":', $script );
+		$this->assertStringEndsWith( '});', $script );
 	}
 
 	public function testGetDefinitionSummary() {

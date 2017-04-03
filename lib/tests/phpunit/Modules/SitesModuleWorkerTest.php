@@ -67,7 +67,7 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 
 		$result = $worker->getScript( $languageCode );
 
-		$this->assertEquals( $result, 'mediaWiki.config.set("wbSiteDetails",' . $expected . ');' );
+		$this->assertEquals( $result, 'mw.config.set({"wbSiteDetails":' . $expected . '});' );
 	}
 
 	public function getScriptProvider() {

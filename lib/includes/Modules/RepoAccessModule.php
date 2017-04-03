@@ -2,9 +2,9 @@
 
 namespace Wikibase;
 
+use ResourceLoader;
 use ResourceLoaderContext;
 use ResourceLoaderModule;
-use Xml;
 
 /**
  * JavaScript variables needed to access the repo independent from the current
@@ -45,7 +45,7 @@ class RepoAccessModule extends ResourceLoaderModule {
 			);
 		}
 
-		return Xml::encodeJsCall( 'mediaWiki.config.set', array( 'wbRepo', $wbRepo ) );
+		return ResourceLoader::makeConfigSetScript( array( 'wbRepo' => $wbRepo ) );
 	}
 
 }

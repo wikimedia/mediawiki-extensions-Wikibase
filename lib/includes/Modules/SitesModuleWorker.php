@@ -4,11 +4,11 @@ namespace Wikibase\Lib;
 
 use BagOStuff;
 use MediaWikiSite;
+use ResourceLoader;
 use Site;
 use SiteList;
 use SiteLookup;
 use Wikibase\SettingsArray;
-use Xml;
 
 /**
  * @license GPL-2.0+
@@ -120,7 +120,7 @@ class SitesModuleWorker {
 			}
 		}
 
-		return Xml::encodeJsCall( 'mediaWiki.config.set', array( 'wbSiteDetails', $siteDetails ) );
+		return ResourceLoader::makeConfigSetScript( array( 'wbSiteDetails' => $siteDetails ) );
 	}
 
 	/**
