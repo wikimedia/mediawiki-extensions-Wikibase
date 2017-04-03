@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_9b814b00",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-03T16:04:42Z",
+      "side": 1,
+      "message": "This needs a feature switch. We cannot rely on code changes being deployed in sync with schema updates. In particular, we have to be prepared that the schema update happens much later than the roll-out of the code, and we must be prepared that wither one, the code change or the schema change, may be reverted.\n\nThis means that all code must be compatible with both the old and the new schema, until the change has been deployed and has been in production for a while.\n\nYes, this is very annoying. It\u0027s one reason we try to avoid schema changes.",
+      "revId": "4b1bd08d5f06f20a1f5583358bdcd930870ae9ad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
