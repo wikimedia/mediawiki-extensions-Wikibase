@@ -49,6 +49,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	private $entityIdComposer;
 
 	/**
+	 * @var bool
+	 */
+	private $hasFullEntityIdColumn;
+
+	/**
 	 * @var int
 	 */
 	private $maxConflicts = 500;
@@ -58,12 +63,14 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param string|bool $wikiDb
 	 * @param string $repositoryName
+	 * @param bool $hasFullEntityIdColumn Allow use (e.g. writing) of column.
 	 */
 	public function __construct(
 		StringNormalizer $stringNormalizer,
 		EntityIdComposer $entityIdComposer,
 		$wikiDb = false,
-		$repositoryName = ''
+		$repositoryName = '',
+		$hasFullEntityIdColumn = true
 	) {
 		RepositoryNameAssert::assertParameterIsValidRepositoryName( $repositoryName, '$repositoryName' );
 		parent::__construct( $wikiDb );
@@ -168,14 +175,17 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	private function insertTerms( EntityDocument $entity, array $terms, Database $dbw ) {
 		$entityId = $entity->getId();
 		$this->assertIsNumericEntityId( $entityId );
-		/** @var Int32EntityId $entityId */
+		/** @var EntityId|Int32EntityId $entityId */
 
 		$entityIdentifiers = array(
-			// FIXME: this will fail for IDs that do not have a numeric form
 			'term_entity_id' => $entityId->getNumericId(),
 			'term_entity_type' => $entity->getType(),
 			'term_weight' => $this->getWeight( $entity ),
 		);
+
+		if ( $this->hasFullEntityIdColumn === true ) {
+			$entityIdentifiers['term_full_entity_id'] = $entityId->getSerialization();
+		}
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': inserting terms for ' . $entity->getId()->getSerialization() );
 
