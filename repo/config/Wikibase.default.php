@@ -209,4 +209,7 @@ return [
 
 	// Name of the lock manager for dispatch changes coordinator
 	'dispatchingLockManager' => null,
+
+	// Enable use (e.g. writing) of term_full_entity_id column in wb_terms table.
+	'hasFullEntityIdColumn' => true,
 ];

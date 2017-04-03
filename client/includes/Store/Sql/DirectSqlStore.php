@@ -161,6 +161,11 @@ class DirectSqlStore implements ClientStore {
 	private $siteId;
 
 	/**
+	 * @var bool
+	 */
+	private $hasFullEntityIdColumn;
+
+	/**
 	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityIdParser $entityIdParser
@@ -196,6 +201,7 @@ class DirectSqlStore implements ClientStore {
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$this->siteId = $settings->getSetting( 'siteGlobalID' );
+		$this->hasFullEntityIdColumn = $settings->getSetting( 'hasFullEntityIdColumn' );
 	}
 
 	/**
@@ -361,7 +367,13 @@ class DirectSqlStore implements ClientStore {
 		if ( $this->termIndex === null ) {
 			// TODO: Get StringNormalizer from WikibaseClient?
 			// Can't really pass this via the constructor...
-			$this->termIndex = new TermSqlIndex( new StringNormalizer(), $this->entityIdComposer, $this->repoWiki );
+			$this->termIndex = new TermSqlIndex(
+				new StringNormalizer(),
+				$this->entityIdComposer,
+				$this->repoWiki,
+				'',
+				$this->hasFullEntityIdColumn
+			);
 		}
 
 		return $this->termIndex;

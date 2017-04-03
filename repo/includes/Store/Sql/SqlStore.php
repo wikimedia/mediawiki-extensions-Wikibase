@@ -180,6 +180,11 @@ class SqlStore implements Store {
 	private $idBlacklist;
 
 	/**
+	 * @var bool
+	 */
+	private $hasFullEntityIdColumn;
+
+	/**
 	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityIdParser $entityIdParser
@@ -216,6 +221,7 @@ class SqlStore implements Store {
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$this->idBlacklist = $settings->getSetting( 'idBlacklist' );
+		$this->hasFullEntityIdColumn = $settings->getSetting( 'hasFullEntityIdColumn' );
 	}
 
 	/**
@@ -247,7 +253,13 @@ class SqlStore implements Store {
 		//TODO: Get $stringNormalizer from WikibaseRepo?
 		//      Can't really pass this via the constructor...
 		$stringNormalizer = new StringNormalizer();
-		return new TermSqlIndex( $stringNormalizer, $this->entityIdComposer );
+		return new TermSqlIndex(
+			$stringNormalizer,
+			$this->entityIdComposer,
+			false,
+			'',
+			$this->hasFullEntityIdColumn
+		);
 	}
 
 	/**
