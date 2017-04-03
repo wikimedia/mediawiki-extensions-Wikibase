@@ -16,6 +16,24 @@
       "revId": "4b1bd08d5f06f20a1f5583358bdcd930870ae9ad",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_7bbc7fb1",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-04-03T16:11:12Z",
+      "side": 1,
+      "message": "Is there a defined way for implementing feature switches?",
+      "parentUuid": "6e436fe2_9b814b00",
+      "revId": "4b1bd08d5f06f20a1f5583358bdcd930870ae9ad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
