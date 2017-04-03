@@ -7,7 +7,7 @@
 			"Jerrykim306"
 		]
 	},
-	"valueview-desc": "데이터 값 보이기와 편집을 위한 사용자 인터페이스 구성 요소",
+	"valueview-desc": "데이터 값 표시와 편집을 위한 사용자 인터페이스 구성 요소",
 	"valueview-expert-advancedadjustments": "고급 조정",
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "\"$1\" 값의 처리는 아직 지원하지 않습니다.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "\"$1\" 데이터 유형에 대한 값의 처리는 아직 지원하지 않습니다.",
@@ -26,7 +26,7 @@
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "언어 (필수):",
 	"valueview-expertextender-unitsuggester-label": "단위 (선택 사항):",
-	"valueview-preview-label": "다음과 같이 보이기:",
+	"valueview-preview-label": "다음과 같이 표시됩니다:",
 	"valueview-preview-novalue": "올바른 값이 인식되지 않음",
 	"valueview-listrotator-manually": "수동 설정"
 }
