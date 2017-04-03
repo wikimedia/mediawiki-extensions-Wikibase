@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_7881e591",
+        "filename": "repo/tests/phpunit/includes/Content/ItemContentTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-04-03T14:22:56Z",
+      "side": 1,
+      "message": "Where does this value come from?\nIs it some calculated hash?\nIf so, then we will again have problems with random tests failing because of hash algorithm change in data-model.\n\nIs it possible to avoid this?",
+      "range": {
+        "startLine": 169,
+        "startChar": 49,
+        "endLine": 169,
+        "endChar": 85
+      },
+      "revId": "8e4a7f0a06ae2cf55a4ca3c4029da61b35816875",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
