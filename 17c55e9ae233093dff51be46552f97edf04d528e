@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_dd24ac09",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-04-03T08:35:25Z",
+      "side": 1,
+      "message": "This sounds weird to me. Maybe word it like \"On this Wiki, all … edits are … minor …\"? This feature is not active on the repo, even if it\u0027s a client.\n\nAlso below.",
+      "range": {
+        "startLine": 84,
+        "startChar": 64,
+        "endLine": 84,
+        "endChar": 94
+      },
+      "revId": "17c55e9ae233093dff51be46552f97edf04d528e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
