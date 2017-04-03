@@ -22,6 +22,30 @@
       "revId": "17c55e9ae233093dff51be46552f97edf04d528e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_1ebf69ce",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-04-03T18:28:06Z",
+      "side": 1,
+      "message": "I agree that we should remove the \"On the Recent Changes page (only)\" bit. If anything, we could rearrange the sentence and just use the word \"here\".",
+      "parentUuid": "6e436fe2_dd24ac09",
+      "range": {
+        "startLine": 84,
+        "startChar": 64,
+        "endLine": 84,
+        "endChar": 94
+      },
+      "revId": "17c55e9ae233093dff51be46552f97edf04d528e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
