@@ -318,7 +318,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 				'e' => array( 'exception' => array(
 					'type' => ApiUsageException::class,
 					'code' => 'modification-failed',
-					'message' => wfMessage( 'wikibase-validator-no-such-sitelink', 'svwiki' )->text(),
+					'message' => wfMessage( 'wikibase-validator-no-such-sitelink', 'svwiki' )->inLanguage( 'en' )->text(),
 				) )
 			),
 		);
