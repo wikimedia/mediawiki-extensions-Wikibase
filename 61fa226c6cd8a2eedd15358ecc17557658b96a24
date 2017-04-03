@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_f8e4150c",
+        "filename": "repo/tests/phpunit/includes/Rdf/RdfBuilderTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-03T13:40:28Z",
+      "side": 1,
+      "message": "Is this intended here (and in testRdfOptions) below? I wonder why it is called in those two particular test methods and not in (some) others?",
+      "revId": "61fa226c6cd8a2eedd15358ecc17557658b96a24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
