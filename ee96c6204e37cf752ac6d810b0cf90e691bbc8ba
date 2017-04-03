@@ -34,6 +34,41 @@
       "revId": "ee96c6204e37cf752ac6d810b0cf90e691bbc8ba",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_5bbe6314",
+        "filename": "repo/includes/Specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-03T15:10:51Z",
+      "side": 1,
+      "message": "Well, it\u0027s also triggered when providing an invalid type. But the error reporting is working as expected anyway, so all is good.",
+      "parentUuid": "6e436fe2_6fc36c0b",
+      "revId": "ee96c6204e37cf752ac6d810b0cf90e691bbc8ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_9b9b8bc1",
+        "filename": "repo/includes/Specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-03T15:10:51Z",
+      "side": 1,
+      "message": "Providing an invalid language does not trigger an OOUI error. Is that because we use a \"combobox\" here, not a \"select\"? Or is it because we default to the bad value in that case?",
+      "revId": "ee96c6204e37cf752ac6d810b0cf90e691bbc8ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
