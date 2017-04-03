@@ -34,6 +34,24 @@
       "revId": "4b1bd08d5f06f20a1f5583358bdcd930870ae9ad",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_fb13afb7",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-03T16:23:27Z",
+      "side": 1,
+      "message": "So far, we have used configuration variables or globals. Sometimes even constants. That works OK, but I have ideas for a saner system that doesn\u0027t clutter config. We can discuss it some time. \n\nFor now, the class should have a flag, set from a config variable by the wiring code.",
+      "parentUuid": "6e436fe2_7bbc7fb1",
+      "revId": "4b1bd08d5f06f20a1f5583358bdcd930870ae9ad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
