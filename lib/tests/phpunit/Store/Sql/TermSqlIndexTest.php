@@ -437,4 +437,55 @@ class TermSqlIndexTest extends TermIndexTest {
 		$fooTermIndex->deleteTermsOfEntity( new ItemId( 'Q300' ) );
 	}
 
+	public function testSaveTermsOfEntity_withoutFullEntityId() {
+		$item = new Item( new ItemId( 'Q11116325' ) );
+		$item->setLabel( 'en', 'kitten-Q11116325' );
+
+		$termIndex = new TermSqlIndex(
+			new StringNormalizer(),
+			new EntityIdComposer( [
+				'item' => function( $repositoryName, $uniquePart ) {
+					return new ItemId( 'Q' . $uniquePart );
+				},
+				'property' => function( $repositoryName, $uniquePart ) {
+					return new PropertyId( 'P' . $uniquePart );
+				},
+			] ),
+			false,
+			'',
+			false
+		);
+
+		$result = $termIndex->saveTermsOfEntity( $item );
+		$this->assertTrue( $result );
+
+		$row = $this->db->selectRow(
+			'wb_terms',
+			[ 'term_entity_id', 'term_entity_type', 'term_full_entity_id' ],
+			[ 'term_entity_id' => '11116325', 'term_entity_type' => 'item' ],
+			__METHOD__
+		);
+
+		$this->assertNull( $row->term_full_entity_id );
+	}
+
+	public function testSaveTermsOfEntity_withFullEntityId() {
+		$item = new Item( new ItemId( 'Q1112362' ) );
+		$item->setLabel( 'en', 'kitten-Q1112362' );
+
+		$termIndex = $this->getTermIndex();
+
+		$result = $termIndex->saveTermsOfEntity( $item );
+		$this->assertTrue( $result );
+
+		$row = $this->db->selectRow(
+			'wb_terms',
+			[ 'term_entity_id', 'term_entity_type', 'term_full_entity_id' ],
+			[ 'term_entity_id' => '1112362', 'term_entity_type' => 'item' ],
+			__METHOD__
+		);
+
+		$this->assertSame( 'Q1112362', $row->term_full_entity_id );
+	}
+
 }
