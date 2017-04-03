@@ -89,6 +89,9 @@ return call_user_func( function() {
 		'repositoryServiceWiringFiles' => [ __DIR__ . '/../includes/Store/RepositoryServiceWiring.php' ],
 		'dispatchingServiceWiringFiles' => [ __DIR__ . '/../includes/DispatchingServiceWiring.php' ],
 		'foreignRepositories' => [],
+
+		// Enable use of term_full_entity_id column in wb_terms table.
+		'hasFullEntityIdColumn' => true,
 	];
 
 	// Some defaults depend on information not available at this time.
