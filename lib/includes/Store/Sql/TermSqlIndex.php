@@ -168,10 +168,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	private function insertTerms( EntityDocument $entity, array $terms, Database $dbw ) {
 		$entityId = $entity->getId();
 		$this->assertIsNumericEntityId( $entityId );
-		/** @var Int32EntityId $entityId */
+		/** @var EntityId|Int32EntityId $entityId */
 
 		$entityIdentifiers = array(
-			// FIXME: this will fail for IDs that do not have a numeric form
+			'term_entity_id_s' => $entityId->getSerialization(),
 			'term_entity_id' => $entityId->getNumericId(),
 			'term_entity_type' => $entity->getType(),
 			'term_weight' => $this->getWeight( $entity ),
