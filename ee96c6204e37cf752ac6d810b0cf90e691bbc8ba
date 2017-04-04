@@ -69,6 +69,24 @@
       "revId": "ee96c6204e37cf752ac6d810b0cf90e691bbc8ba",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_0f209195",
+        "filename": "repo/includes/Specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-04T06:55:23Z",
+      "side": 1,
+      "message": "I believe OOUI doesn\u0027t do much magic on top of what you would expect:\n* You can either select one of the predefined options or type whatever you want in a \"combobox\". Validation is done later, on submit.\n* An invalid default on a \"select\" is just ignored. This is what the browser does and not an OOUI feature, as far as I can tell.",
+      "parentUuid": "6e436fe2_9b9b8bc1",
+      "revId": "ee96c6204e37cf752ac6d810b0cf90e691bbc8ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
