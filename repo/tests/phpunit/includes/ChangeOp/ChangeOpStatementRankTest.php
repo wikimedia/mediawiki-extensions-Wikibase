@@ -72,7 +72,7 @@ class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 		/** @var Statement $statement */
 		$statement = reset( $statements );
 		$rank = $statement->getRank();
-		$this->assertEquals( $rank, $expectedRank, "No reference with expected hash" );
+		$this->assertEquals( $expectedRank, $rank, "No reference with expected hash" );
 	}
 
 	private function newItemWithClaim( $itemIdString, $mainSnak ) {
