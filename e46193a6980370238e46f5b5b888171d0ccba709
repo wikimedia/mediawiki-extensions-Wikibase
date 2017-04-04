@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_6f483561",
+        "filename": "client/tests/phpunit/includes/DataAccess/DataAccessSnakFormatterOutputFormatTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-04T07:04:32Z",
+      "side": 1,
+      "message": "This is a date. Why not use something like \"Data:Shape.map\"?",
+      "range": {
+        "startLine": 338,
+        "startChar": 5,
+        "endLine": 338,
+        "endChar": 15
+      },
+      "revId": "e46193a6980370238e46f5b5b888171d0ccba709",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
