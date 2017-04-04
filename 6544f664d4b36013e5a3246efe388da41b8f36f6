@@ -264,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_925285e1",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-04-04T21:00:27Z",
+      "side": 1,
+      "message": "See the update, I\u0027ve implemented the lookup via chain, hopefully did it right, I haven\u0027t much experience with using the chains.",
+      "parentUuid": "6e436fe2_14fbc5df",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_24d598ba",
         "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
         "patchSetId": 54
