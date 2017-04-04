@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_14b3c5fe",
+        "filename": "repo/maintenance/searchEntities.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-04T18:54:58Z",
+      "side": 1,
+      "message": "Ick, is this really necessary? I feel dirty after reading this...",
+      "revId": "7e9bcdd436e647aeeae32b53203809325c8e0c4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_949fd561",
+        "filename": "repo/maintenance/searchEntities.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-04T18:54:58Z",
+      "side": 1,
+      "message": "Use an EntityTitleLookup if you want the actual title.",
+      "revId": "7e9bcdd436e647aeeae32b53203809325c8e0c4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_f4865917",
+        "filename": "repo/maintenance/searchEntities.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-04T18:54:58Z",
+      "side": 1,
+      "message": "You may also want to get the term language.",
+      "revId": "7e9bcdd436e647aeeae32b53203809325c8e0c4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_d47c7d1d",
+        "filename": "repo/maintenance/searchEntities.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-04T18:54:58Z",
+      "side": 1,
+      "message": "You may also want to get the term language.\nAlso, are you sure getDisplayLabel() can\u0027t return null?",
+      "revId": "7e9bcdd436e647aeeae32b53203809325c8e0c4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
