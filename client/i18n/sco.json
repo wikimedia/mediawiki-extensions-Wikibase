@@ -47,7 +47,6 @@
 	"wikibase-linkitem-not-loggedin-title": "Ye need tae be loggit in",
 	"wikibase-linkitem-not-loggedin": "Ye need tae be loggit in oan this wiki n in the [$1 central data reposeeterie] tae uise this feature.",
 	"wikibase-linkitem-success-link": "The pages hae been airtit. Ye can find the item conteenin the airtins in oor [$1 central data repository].",
-	"wikibase-limitreport-entities-accessed": "Nummer o Wikibase entities laidit",
 	"wikibase-property-notfound": "$1 propertie naw foond.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Skauk",
@@ -76,5 +75,6 @@
 	"wikibase-property-render-error": "Failed tae render propertie $1: $2",
 	"wikibase-otherprojects": "In ither projects",
 	"wikibase-otherprojects-beta-message": "Ither projects sidebar",
-	"wikibase-otherprojects-beta-description": "Adds an \"{{int:wikibase-otherprojects}}\" section tae the sidebar that provides airtins tae the ither Wikimedia projects based on {{WBREPONAME}} data."
+	"wikibase-otherprojects-beta-description": "Adds an \"{{int:wikibase-otherprojects}}\" section tae the sidebar that provides airtins tae the ither Wikimedia projects based on {{WBREPONAME}} data.",
+	"unresolved-property-category": "Pages wi unresolved properties"
 }

@@ -65,5 +65,6 @@
 	"wikibase-property-render-error": "Neizvršeno izražavanje osobine $1: $2",
 	"wikibase-otherprojects": "Na drugim projektima",
 	"wikibase-otherprojects-beta-message": "Drugi projekti na bočnoj traci",
-	"wikibase-otherprojects-beta-description": "Dodaje odlomak \"{{int:wikibase-otherprojects}}\" na bočnoj traci s linkovima na ostale Wikimedijine projekte na osnovu podataka s projekta {{WBREPONAME}}."
+	"wikibase-otherprojects-beta-description": "Dodaje odlomak \"{{int:wikibase-otherprojects}}\" na bočnoj traci s linkovima na ostale Wikimedijine projekte na osnovu podataka s projekta {{WBREPONAME}}.",
+	"notification-header-page-connection": "Stranica <strong>$3</strong> {{GENDER:$2|povezana je}} sa stavkom na {{GRAMMAR:dativ|{{WBREPONAME}}}}."
 }
