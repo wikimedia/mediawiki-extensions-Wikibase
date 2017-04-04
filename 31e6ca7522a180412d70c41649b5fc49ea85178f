@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_b4ec51f3",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-04T18:47:33Z",
+      "side": 1,
+      "message": "This introduces coupling to a specific implementation. Avoiding that was the reason for having an interface.\nBut it\u0027s not a big deal, I agree.",
+      "revId": "31e6ca7522a180412d70c41649b5fc49ea85178f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
