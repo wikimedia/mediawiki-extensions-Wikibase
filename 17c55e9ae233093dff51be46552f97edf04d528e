@@ -46,6 +46,30 @@
       "revId": "17c55e9ae233093dff51be46552f97edf04d528e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_fee398d2",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 4680
+      },
+      "writtenOn": "2017-04-04T15:49:38Z",
+      "side": 1,
+      "message": "Sounds good to me.",
+      "parentUuid": "6e436fe2_1ebf69ce",
+      "range": {
+        "startLine": 84,
+        "startChar": 64,
+        "endLine": 84,
+        "endChar": 94
+      },
+      "revId": "17c55e9ae233093dff51be46552f97edf04d528e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
