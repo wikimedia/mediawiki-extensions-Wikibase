@@ -70,6 +70,24 @@
       "revId": "217a21e399b4671ba2e66f16bbc5b75d9896eac5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_94bef5f8",
+        "filename": "repo/sql/AddTermsFullEntityId.sql",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-04T18:41:06Z",
+      "side": 1,
+      "message": "+1 for term_full_entity_id. It\u0027s long and clunky, but it\u0027s clear.",
+      "parentUuid": "6e436fe2_2a29bb36",
+      "revId": "217a21e399b4671ba2e66f16bbc5b75d9896eac5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
