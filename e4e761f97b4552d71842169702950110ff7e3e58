@@ -16,6 +16,24 @@
       "revId": "e4e761f97b4552d71842169702950110ff7e3e58",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_745fa913",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 63
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-04-04T18:33:45Z",
+      "side": 1,
+      "message": "Well, it\u0027s possible to move, but the thing is you\u0027d need to call the setter all the time - because the way it works is that you just add a parameter to the request, like cirrusDumpQuery\u003dyes, and that produces the query. For it to work, we need to always have the request.\nThat said, I do not object to moving it to setter, if you prefer, just be aware that this setter will be called in mainline scenario at least. And probably is some tests too.",
+      "parentUuid": "6e436fe2_aa196a80",
+      "revId": "e4e761f97b4552d71842169702950110ff7e3e58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
