@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_e13219ef",
+        "filename": "repo/tests/phpunit/includes/Rdf/FullStatementRdfBuilderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-04-04T16:22:23Z",
+      "side": 1,
+      "message": "$dataSetName is an array? Please change the name and add a type hint (if this is only taking arrays).",
+      "range": {
+        "startLine": 110,
+        "startChar": 42,
+        "endLine": 110,
+        "endChar": 54
+      },
+      "revId": "e66454bd14fb13473035c5a8c0285b182c22661a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_c137ddde",
+        "filename": "repo/tests/phpunit/includes/Rdf/FullStatementRdfBuilderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-04-04T16:22:23Z",
+      "side": 1,
+      "message": "$dataSetName is an array? Please change the name and add a type hint.",
+      "range": {
+        "startLine": 185,
+        "startChar": 49,
+        "endLine": 185,
+        "endChar": 61
+      },
+      "revId": "e66454bd14fb13473035c5a8c0285b182c22661a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
