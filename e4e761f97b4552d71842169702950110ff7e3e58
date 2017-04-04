@@ -52,6 +52,24 @@
       "revId": "e4e761f97b4552d71842169702950110ff7e3e58",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_b7b45334",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 63
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-04-04T21:00:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e436fe2_b49bf1c0",
+      "revId": "e4e761f97b4552d71842169702950110ff7e3e58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
