@@ -246,6 +246,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_14fbc5df",
+        "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-04T18:39:15Z",
+      "side": 1,
+      "message": "What about this? Would it make sense to use a LanguageFallbackChain object here? Or at least add a TODO? Or am I missing something?",
+      "parentUuid": "6e436fe2_761b5283",
+      "revId": "6544f664d4b36013e5a3246efe388da41b8f36f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_24d598ba",
         "filename": "repo/includes/Search/Elastic/ElasticTermResult.php",
         "patchSetId": 54
