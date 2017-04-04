@@ -52,6 +52,24 @@
       "revId": "217a21e399b4671ba2e66f16bbc5b75d9896eac5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_2a29bb36",
+        "filename": "repo/sql/AddTermsFullEntityId.sql",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-04-04T12:33:10Z",
+      "side": 1,
+      "message": "_s is confusing and vague to me",
+      "parentUuid": "6e436fe2_5d3f3cd3",
+      "revId": "217a21e399b4671ba2e66f16bbc5b75d9896eac5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
