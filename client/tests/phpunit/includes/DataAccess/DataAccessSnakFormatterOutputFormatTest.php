@@ -43,7 +43,9 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 	/**
 	 * Makes sure WikibaseClient uses our ClientStore mock
 	 */
-	public function setUp() {
+	protected function setUp() {
+		parent::setUp();
+
 		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
 
 		$store = new MockClientStore( 'de' );
@@ -54,7 +56,10 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 			new EntityRetrievingTermLookup( $store->getEntityLookup() )
 		);
 
-		$siteId = $wikibaseClient->getSettings()->getSetting( 'siteGlobalID' );
+		$settings = $wikibaseClient->getSettings();
+		$siteId = $settings->getSetting( 'siteGlobalID' );
+
+		$settings->setSetting( 'geoShapeStorageFrontendUrl', 'https://media.something/view/' );
 		$this->setUpDummyData( $store, $siteId );
 	}
 
@@ -71,6 +76,7 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 			'P8' => 'external-id',
 			'P9' => 'wikibase-item',
 			'P10' => 'external-id', // with formatter
+			'P11' => 'geo-shape',
 		];
 
 		foreach ( $dataTypeIds as $id => $dataTypeId ) {
@@ -105,6 +111,8 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function tearDown() {
+		parent::tearDown();
+
 		WikibaseClient::getDefaultInstance( 'reset' );
 	}
 
@@ -271,6 +279,13 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 					new EntityIdValue( new ItemId( 'Q13' ) )
 				)
 			],
+			'geo-shape' => [
+				'<span>[https://media.something/view/April_2017 April 2017]</span>',
+				new PropertyValueSnak(
+					new PropertyId( 'P11' ),
+					new StringValue( 'April 2017' )
+				)
+			]
 		];
 
 		foreach ( $genericSnaks as $testName => $case ) {
@@ -319,6 +334,13 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 					new EntityIdValue( new ItemId( 'Q13' ) )
 				)
 			],
+			'geo-shape' => [
+				'April 2017',
+				new PropertyValueSnak(
+					new PropertyId( 'P11' ),
+					new StringValue( 'April 2017' )
+				)
+			]
 		];
 
 		return $cases + $this->getGenericSnaks();
