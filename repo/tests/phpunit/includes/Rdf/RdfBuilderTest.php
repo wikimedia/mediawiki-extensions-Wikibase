@@ -340,7 +340,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	 * @param array $props Property config
 	 */
 	public function testPageProps( $name, $props ) {
-		$vocab = new RdfVocabulary( RdfBuilderTestData::URI_BASE, RdfBuilderTestData::URI_DATA,
+		$vocab = new RdfVocabulary( [ '' => RdfBuilderTestData::URI_BASE ], [ '' => RdfBuilderTestData::URI_DATA ],
 				[], [], $props );
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL, null, $vocab );
 
@@ -357,7 +357,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$props = [
 			'claims' => [ 'name' => 'rdf-claims' ]
 		];
-		$vocab = new RdfVocabulary( RdfBuilderTestData::URI_BASE, RdfBuilderTestData::URI_DATA,
+		$vocab = new RdfVocabulary( [ '' => RdfBuilderTestData::URI_BASE ], [ '' => RdfBuilderTestData::URI_DATA ],
 				[], [], $props );
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL & ~RdfProducer::PRODUCE_PAGE_PROPS, null, $vocab );
 

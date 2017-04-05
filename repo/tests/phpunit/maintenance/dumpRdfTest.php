@@ -153,7 +153,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 			$rdfBuilder,
 			$wikibaseRepo->getEntityRdfBuilderFactory(),
 			$mockRepo,
-			new RdfVocabulary( 'fooUri/', 'acme/EntityData/' ),
+			new RdfVocabulary( [ '' => 'fooUri/' ], [ '' => 'acme/EntityData/' ] ),
 			$this->getEntityTitleLookup()
 		);
 
