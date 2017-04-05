@@ -1091,11 +1091,9 @@ class WikibaseRepo {
 				$this->settings->getSetting( 'canonicalLanguageCodes' )
 			);
 
-			$entityDataTitle = Title::makeTitle( NS_SPECIAL, 'EntityData' );
-
 			$this->rdfVocabulary = new RdfVocabulary(
-				$this->getVocabularyBaseUri(),
-				$entityDataTitle->getCanonicalURL() . '/',
+				$this->repositoryDefinitions->getConceptBaseUris(),
+				$this->repositoryDefinitions->getDataBaseUris(),
 				$languageCodes,
 				$this->dataTypeDefinitions->getRdfTypeUris(),
 				$this->settings->getSetting( 'pagePropertiesRdf' ) ?: []
