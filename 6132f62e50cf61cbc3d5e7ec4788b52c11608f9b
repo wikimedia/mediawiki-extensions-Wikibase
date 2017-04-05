@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_43642cae",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-04-05T12:18:04Z",
+      "side": 1,
+      "message": "I find this name very weird, is this a lock manager which does dispatching?\n\n\"changeDispatchLockManager\" or something like that would have been better IMO.",
+      "range": {
+        "startLine": 208,
+        "startChar": 2,
+        "endLine": 208,
+        "endChar": 24
+      },
+      "revId": "6132f62e50cf61cbc3d5e7ec4788b52c11608f9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
