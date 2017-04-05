@@ -4,7 +4,6 @@ namespace Wikibase\Dumpers;
 
 use InvalidArgumentException;
 use MWContentSerializationException;
-use MWException;
 use PageProps;
 use SiteList;
 use Wikibase\DataModel\Entity\EntityId;
@@ -187,8 +186,41 @@ class RdfDumpGenerator extends DumpGenerator {
 	}
 
 	/**
+	 * Get the producer setting for the given flavor.
+	 *
+	 * @param string|null $flavorName
+	 *
+	 * @return int
+	 * @throws InvalidArgumentException
+	 */
+	private static function getFlavor( $flavorName ) {
+		//Note: RdfProducer::PRODUCE_VERSION_INFO is not needed here as dumps
+		// include that per default.
+
+		switch ( $flavorName ) {
+			case 'full':
+				return RdfProducer::PRODUCE_ALL_STATEMENTS
+					| RdfProducer::PRODUCE_TRUTHY_STATEMENTS
+					| RdfProducer::PRODUCE_QUALIFIERS
+					| RdfProducer::PRODUCE_REFERENCES
+					| RdfProducer::PRODUCE_SITELINKS
+					| RdfProducer::PRODUCE_FULL_VALUES
+					| RdfProducer::PRODUCE_PAGE_PROPS
+					| RdfProducer::PRODUCE_NORMALIZED_VALUES;
+			case 'truthy':
+				return RdfProducer::PRODUCE_TRUTHY_STATEMENTS
+					| RdfProducer::PRODUCE_PROPERTIES
+					| RdfProducer::PRODUCE_NORMALIZED_VALUES
+					| RdfProducer::PRODUCE_RESOLVED_ENTITIES;
+		}
+
+		throw new InvalidArgumentException( "Unsupported flavor: $flavorName" );
+	}
+
+	/**
 	 * @param string                     $format
 	 * @param resource                   $output
+	 * @param string                     $flavor Either "full" or "truthy"
 	 * @param SiteList                   $sites
 	 * @param EntityRevisionLookup       $entityRevisionLookup
 	 * @param PropertyDataTypeLookup     $propertyLookup
@@ -198,11 +230,12 @@ class RdfDumpGenerator extends DumpGenerator {
 	 * @param RdfVocabulary              $vocabulary
 	 * @param EntityTitleLookup          $titleLookup
 	 * @return static
-	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 */
 	public static function createDumpGenerator(
 		$format,
 		$output,
+		$flavor,
 		SiteList $sites,
 		EntityRevisionLookup $entityRevisionLookup,
 		PropertyDataTypeLookup $propertyLookup,
@@ -214,14 +247,8 @@ class RdfDumpGenerator extends DumpGenerator {
 	) {
 		$rdfWriter = self::getRdfWriter( $format );
 		if ( !$rdfWriter ) {
-			throw new MWException( "Unknown format: $format" );
+			throw new InvalidArgumentException( "Unknown format: $format" );
 		}
-
-		$flavor =
-			RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_TRUTHY_STATEMENTS |
-			RdfProducer::PRODUCE_QUALIFIERS | RdfProducer::PRODUCE_REFERENCES |
-			RdfProducer::PRODUCE_SITELINKS | RdfProducer::PRODUCE_FULL_VALUES |
-			RdfProducer::PRODUCE_PAGE_PROPS | RdfProducer::PRODUCE_NORMALIZED_VALUES;
 
 		$rdfBuilder = new RdfBuilder(
 			$sites,
@@ -229,7 +256,7 @@ class RdfDumpGenerator extends DumpGenerator {
 			$valueSnakRdfBuilderFactory,
 			$propertyLookup,
 			$entityRdfBuilderFactory,
-			$flavor,
+			self::getFlavor( $flavor ),
 			$rdfWriter,
 			new HashDedupeBag(),
 			$titleLookup
