@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_06687218",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-05T15:21:19Z",
+      "side": 1,
+      "message": "long line",
+      "revId": "2d30eaeb9d7122085df07d258050d48a89a02f93",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_06c71216",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-05T15:21:19Z",
+      "side": 1,
+      "message": "would be nice to document the default.",
+      "revId": "2d30eaeb9d7122085df07d258050d48a89a02f93",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_46775afd",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-05T15:21:19Z",
+      "side": 1,
+      "message": "This should probably depend on $wgArticlePath. Perhaps use Title::getFullUrl().",
+      "revId": "2d30eaeb9d7122085df07d258050d48a89a02f93",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
