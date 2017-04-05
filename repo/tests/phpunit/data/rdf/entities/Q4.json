@@ -220,6 +220,41 @@
                 "type": "statement",
                 "rank": "normal"
             }
+        ],
+        "foreign:P11": [
+            {
+                "id": "TEST-Statement-11-foreign-property",
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "foreign:P11",
+                    "datatype": "string",
+                    "datavalue": {
+                        "value": "foo",
+                        "type": "string"
+                    }
+                },
+                "type": "statement",
+                "rank": "normal"
+            }
+        ],
+        "foreign:P12": [
+            {
+                "id": "TEST-Statement-12-foreign-entities",
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "foreign:P12",
+                    "datatype": "wikibase-entityid",
+                    "datavalue": {
+                        "value": {
+                            "entity-type": "item",
+                            "id": "foreign:Q200"
+                        },
+                        "type": "wikibase-entityid"
+                    }
+                },
+                "type": "statement",
+                "rank": "normal"
+            }
         ]
     }
 }
