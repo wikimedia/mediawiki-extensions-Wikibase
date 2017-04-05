@@ -8,3 +8,5 @@
 <http://acme.test/Q4> <http://acme.test/prop/direct/P7> "simplestring" .
 <http://acme.test/Q4> <http://acme.test/prop/direct/P8> "-0199-01-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
 <http://acme.test/Q4> <http://acme.test/prop/direct/P9> <http://url.acme.test%5Cbadurl?chars=%5Cпривет%3C%20%3E%22> .
+<http://acme.test/Q4> <http://foreign.test/prop/direct/P11> "foo" .
+<http://acme.test/Q4> <http://foreign.test/prop/direct/P12> <http://foreign.test/Q200> .
