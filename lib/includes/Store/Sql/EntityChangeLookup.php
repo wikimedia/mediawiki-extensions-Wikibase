@@ -3,12 +3,12 @@
 namespace Wikibase\Lib\Store;
 
 use DBAccessBase;
-use ResultWrapper;
 use Wikibase\ChunkAccess;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikimedia\Assert\Assert;
+use Wikimedia\Rdbms\ResultWrapper;
 
 /**
  * Allows accessing changes stored in a database.
@@ -150,8 +150,14 @@ class EntityChangeLookup extends DBAccessBase implements ChunkAccess {
 		return $this->changesFromRows( $rows );
 	}
 
+	/**
+	 * @param ResultWrapper $rows
+	 *
+	 * @return EntityChange[]
+	 */
 	private function changesFromRows( ResultWrapper $rows ) {
 		$changes = [];
+
 		foreach ( $rows as $row ) {
 			$data = [
 				'id' => (int)$row->change_id,

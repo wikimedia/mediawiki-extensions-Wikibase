@@ -5,7 +5,6 @@ namespace Wikibase\Client\Usage\Sql;
 use Database;
 use Exception;
 use InvalidArgumentException;
-use ResultWrapper;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -14,6 +13,7 @@ use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
 use Wikimedia\Rdbms\LoadBalancer;
+use Wikimedia\Rdbms\ResultWrapper;
 
 /**
  * Implements initial population (priming) for the wbc_entity_usage table,

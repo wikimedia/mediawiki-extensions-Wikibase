@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
 use InvalidArgumentException;
-use ResultWrapper;
 use RuntimeException;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
@@ -15,6 +14,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoBuilder;
+use Wikimedia\Rdbms\ResultWrapper;
 
 /**
  * Class EntityInfoBuilder implementation relying on database access.
