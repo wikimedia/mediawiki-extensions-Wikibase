@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_e61c667e",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-05T16:11:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e436fe2_06687218",
+      "revId": "2d30eaeb9d7122085df07d258050d48a89a02f93",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_06c71216",
         "filename": "docs/options.wiki",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2017-04-05T15:21:19Z",
       "side": 1,
       "message": "This should probably depend on $wgArticlePath. Perhaps use Title::getFullUrl().",
+      "revId": "2d30eaeb9d7122085df07d258050d48a89a02f93",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_69102754",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-05T16:11:58Z",
+      "side": 1,
+      "message": "Yeah, I\u0027ve initially wanted to do something like this.\nBut when get*URL gets called, InterwikiLookup is involved and all explodes when I try to run tests:\n\nPHP Catchable fatal error:  Argument 1 passed to MediaWiki\\Interwiki\\ClassicInterwikiLookup::__construct() must be an instance of Language, null given, called in mediawiki/core/includes/ServiceWiring.php on line 110 and defined in mediawiki/core/includes/interwiki/ClassicInterwikiLookup.php on line 106\n\nI guess this is because of the entangled order of what is initialized when. This can be probably sorted out but I failed to do it fast, that\u0027s why I ended up submitting the nasty solution above.",
+      "parentUuid": "6e436fe2_46775afd",
       "revId": "2d30eaeb9d7122085df07d258050d48a89a02f93",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
