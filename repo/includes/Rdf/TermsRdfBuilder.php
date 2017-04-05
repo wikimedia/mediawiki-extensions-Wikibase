@@ -3,6 +3,7 @@
 namespace Wikibase\Rdf;
 
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
@@ -47,16 +48,17 @@ class TermsRdfBuilder implements EntityRdfBuilder {
 	/**
 	 * Adds the labels of the given entity to the RDF graph
 	 *
+	 * @param string $entityNamespace
 	 * @param string $entityLName
 	 * @param TermList $labels
 	 */
-	public function addLabels( $entityLName, TermList $labels ) {
+	public function addLabels( $entityNamespace, $entityLName, TermList $labels ) {
 		foreach ( $labels->toTextArray() as $languageCode => $labelText ) {
 			if ( $this->languages !== null && !isset( $this->languages[$languageCode] ) ) {
 				continue;
 			}
 
-			$this->writer->about( RdfVocabulary::NS_ENTITY, $entityLName )
+			$this->writer->about( $entityNamespace, $entityLName )
 				->say( 'rdfs', 'label' )->text( $labelText, $languageCode )
 				->say( RdfVocabulary::NS_SKOS, 'prefLabel' )->text( $labelText, $languageCode )
 				->say( RdfVocabulary::NS_SCHEMA_ORG, 'name' )->text( $labelText, $languageCode );
@@ -68,16 +70,17 @@ class TermsRdfBuilder implements EntityRdfBuilder {
 	/**
 	 * Adds the descriptions of the given entity to the RDF graph.
 	 *
+	 * @param string $entityNamespace
 	 * @param string $entityLName
 	 * @param TermList $descriptions
 	 */
-	public function addDescriptions( $entityLName, TermList $descriptions ) {
+	public function addDescriptions( $entityNamespace, $entityLName, TermList $descriptions ) {
 		foreach ( $descriptions->toTextArray() as $languageCode => $description ) {
 			if ( $this->languages !== null && !isset( $this->languages[$languageCode] ) ) {
 				continue;
 			}
 
-			$this->writer->about( RdfVocabulary::NS_ENTITY, $entityLName )
+			$this->writer->about( $entityNamespace, $entityLName )
 				->say( RdfVocabulary::NS_SCHEMA_ORG, 'description' )->text( $description, $languageCode );
 		}
 	}
@@ -85,10 +88,11 @@ class TermsRdfBuilder implements EntityRdfBuilder {
 	/**
 	 * Adds the aliases of the given entity to the RDF graph.
 	 *
+	 * @param string $entityNamespace
 	 * @param string $entityLName
 	 * @param AliasGroupList $aliases
 	 */
-	public function addAliases( $entityLName, AliasGroupList $aliases ) {
+	public function addAliases( $entityNamespace, $entityLName, AliasGroupList $aliases ) {
 		/** @var AliasGroup $aliasGroup */
 		foreach ( $aliases as $aliasGroup ) {
 			$languageCode = $aliasGroup->getLanguageCode();
@@ -97,8 +101,10 @@ class TermsRdfBuilder implements EntityRdfBuilder {
 			}
 
 			foreach ( $aliasGroup->getAliases() as $alias ) {
-				$this->writer->about( RdfVocabulary::NS_ENTITY, $entityLName )
-					->say( RdfVocabulary::NS_SKOS, 'altLabel' )->text( $alias, $languageCode );
+				$this->writer->about(
+					$entityNamespace,
+					$entityLName
+				)->say( RdfVocabulary::NS_SKOS, 'altLabel' )->text( $alias, $languageCode );
 			}
 		}
 	}
@@ -111,18 +117,20 @@ class TermsRdfBuilder implements EntityRdfBuilder {
 	 * @param EntityDocument $entity the entity to output.
 	 */
 	public function addEntity( EntityDocument $entity ) {
-		$entityLName = $this->vocabulary->getEntityLName( $entity->getId() );
+		$entityId = $entity->getId();
+		$entityNamespace = $this->vocabulary->entityNamespaceNames[$entityId->getRepositoryName()];
+		$entityLName = $this->vocabulary->getEntityLName( $entityId );
 
 		if ( $entity instanceof LabelsProvider ) {
-			$this->addLabels( $entityLName, $entity->getLabels() );
+			$this->addLabels( $entityNamespace, $entityLName, $entity->getLabels() );
 		}
 
 		if ( $entity instanceof DescriptionsProvider ) {
-			$this->addDescriptions( $entityLName, $entity->getDescriptions() );
+			$this->addDescriptions( $entityNamespace, $entityLName, $entity->getDescriptions() );
 		}
 
 		if ( $entity instanceof AliasesProvider ) {
-			$this->addAliases( $entityLName, $entity->getAliasGroups() );
+			$this->addAliases( $entityNamespace, $entityLName, $entity->getAliasGroups() );
 		}
 	}
 
@@ -134,14 +142,16 @@ class TermsRdfBuilder implements EntityRdfBuilder {
 	 * @param EntityDocument $entity the entity to output.
 	 */
 	public function addEntityStub( EntityDocument $entity ) {
-		$entityLName = $this->vocabulary->getEntityLName( $entity->getId() );
+		$entityId = $entity->getId();
+		$entityNamespace = $this->vocabulary->entityNamespaceNames[$entityId->getRepositoryName()];
+		$entityLName = $this->vocabulary->getEntityLName( $entityId );
 
 		if ( $entity instanceof LabelsProvider ) {
-			$this->addLabels( $entityLName, $entity->getLabels() );
+			$this->addLabels( $entityNamespace, $entityLName, $entity->getLabels() );
 		}
 
 		if ( $entity instanceof DescriptionsProvider ) {
-			$this->addDescriptions( $entityLName, $entity->getDescriptions() );
+			$this->addDescriptions( $entityNamespace, $entityLName, $entity->getDescriptions() );
 		}
 	}
 

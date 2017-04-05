@@ -344,7 +344,7 @@ QUERY;
 	private function createRdfVocabulary( $baseUri, $typeUris ) {
 		$entityDataTitle = Title::makeTitle( NS_SPECIAL, 'EntityData' );
 
-		return new RdfVocabulary( $baseUri, $entityDataTitle->getCanonicalURL() . '/', [],
+		return new RdfVocabulary( [ '' => $baseUri ], $entityDataTitle->getCanonicalURL() . '/', [],
 			$typeUris, [] );
 	}
 
