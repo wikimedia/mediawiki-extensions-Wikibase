@@ -165,7 +165,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideAddEntity_seen() {
 		return [
-			[ 'Q7', [ 'Q7_statements', 'Q7_reference_refs' ], [ 'd2412760c57cacd8c8f24d9afde3b20c87161cca' ] ],
+			[ 'Q7', [ 'Q7_statements', 'Q7_reference_refs' ], [ 'f2693d55e4237eed12e76c87e54f6ae0f3d7080f' ] ],
 		];
 	}
 

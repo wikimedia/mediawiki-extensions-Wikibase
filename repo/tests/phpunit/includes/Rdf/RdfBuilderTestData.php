@@ -35,6 +35,8 @@ class RdfBuilderTestData {
 	const URI_BASE = 'http://acme.test/';
 	const URI_DATA = 'http://data.acme.test/';
 
+	const URI_BASE_FOREIGN = 'http://foreign.test/';
+
 	/**
 	 * @var EntityContentDataCodec|null
 	 */
@@ -168,7 +170,10 @@ class RdfBuilderTestData {
 	 * @return RdfVocabulary
 	 */
 	public function getVocabulary() {
-		return new RdfVocabulary( self::URI_BASE, self::URI_DATA );
+		return new RdfVocabulary(
+			[ '' => self::URI_BASE, 'foreign' => self::URI_BASE_FOREIGN ],
+			self::URI_DATA
+		);
 	}
 
 	/**
@@ -233,6 +238,8 @@ class RdfBuilderTestData {
 			[ new PropertyId( 'P9' ), 'url' ],
 			[ new PropertyId( 'P10' ), 'geo-shape' ],
 			[ new PropertyId( 'P11' ), 'external-id' ],
+			[ new PropertyId( 'foreign:P12' ), 'string' ],
+			[ new PropertyId( 'foreign:P13' ), 'wikibase-item' ],
 		];
 	}
 
