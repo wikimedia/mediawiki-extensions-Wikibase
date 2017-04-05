@@ -100,13 +100,14 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 	}
 
 	/**
+	 * @param string $flavor
 	 * @param EntityDocument[] $entities
 	 * @param EntityId[] $redirects
 	 *
 	 * @return RdfDumpGenerator
 	 * @throws MWException
 	 */
-	protected function newDumpGenerator( array $entities = array(), array $redirects = array() ) {
+	protected function newDumpGenerator( $flavor, array $entities = [], array $redirects = [] ) {
 		$out = fopen( 'php://output', 'w' );
 
 		$entityLookup = $this->getMock( EntityLookup::class );
@@ -151,6 +152,7 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 		return RdfDumpGenerator::createDumpGenerator(
 			'ntriples',
 			$out,
+			$flavor,
 			$this->getSiteList(),
 			$entityRevisionLookup,
 			$dataTypeLookup,
@@ -160,7 +162,7 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 			new RdfVocabulary(
 				self::URI_BASE,
 				self::URI_DATA,
-				array( 'test' => 'en-x-test' )
+				[ 'test' => 'en-x-test' ]
 			),
 			$this->getEntityTitleLookup()
 		);
@@ -172,21 +174,24 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 		$q40 = new ItemId( 'Q40' );
 		$q4242 = new ItemId( 'Q4242' ); // hardcoded to be a redirect
 
-		return array(
-			'empty' => array( array(), 'empty' ),
-			'some entities' => array( array( $p10, $q30, $q40 ), 'entities' ),
-			'redirect' => array( array( $p10, $q4242 ), 'redirect' ),
-		);
+		return [
+			'full empty' => [ [], 'full', 'empty' ],
+			'full some entities' => [ [ $p10, $q30, $q40 ], 'full', 'entities' ],
+			'full redirect' => [ [ $p10, $q4242 ], 'full', 'redirect' ],
+			'truthy empty' => [ [], 'truthy', 'empty' ],
+			'truthy some entities' => [ [ $p10, $q30, $q40 ], 'truthy', 'entities' ],
+			'truthy redirect' => [ [ $p10, $q4242 ], 'truthy', 'redirect' ],
+		];
 	}
 
 	/**
 	 * @dataProvider idProvider
 	 */
-	public function testGenerateDump( array $ids, $dumpname ) {
+	public function testGenerateDump( array $ids, $flavor, $dumpname ) {
 		$jsonTest = new JsonDumpGeneratorTest();
 		$entities = $jsonTest->makeEntities( $ids );
-		$redirects = array( 'Q4242' => new ItemId( 'Q42' ) );
-		$dumper = $this->newDumpGenerator( $entities, $redirects );
+		$redirects = [ 'Q4242' => new ItemId( 'Q42' ) ];
+		$dumper = $this->newDumpGenerator( $flavor . '-dump', $entities, $redirects );
 		$dumper->setTimestamp( 1000000 );
 		$jsonTest = new JsonDumpGeneratorTest();
 		$pager = $jsonTest->makeIdPager( $ids );
@@ -194,14 +199,15 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 		ob_start();
 		$dumper->generateDump( $pager );
 		$actual = ob_get_clean();
-		$expected = $this->getTestData()->getNTriples( $dumpname );
+		$expected = $this->getTestData()->getNTriples( $flavor . '-' . $dumpname );
+
 		$this->helper->assertNTriplesEquals( $expected, $actual );
 	}
 
 	public function loadDataProvider() {
-		return array(
-			'references' => array( array( new ItemId( 'Q7' ), new ItemId( 'Q9' ) ), 'refs' ),
-		);
+		return [
+			'references' => [ [ new ItemId( 'Q7' ), new ItemId( 'Q9' ) ], 'refs' ],
+		];
 	}
 
 	/**
@@ -210,7 +216,7 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 	 * @param string $dumpname
 	 */
 	public function testReferenceDedup( array $ids, $dumpname ) {
-		$entities = array();
+		$entities = [];
 		$rdfTest = new RdfBuilderTest();
 
 		foreach ( $ids as $id ) {
@@ -218,7 +224,7 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 			$entities[$id] = $rdfTest->getEntityData( $id );
 		}
 
-		$dumper = $this->newDumpGenerator( $entities );
+		$dumper = $this->newDumpGenerator( 'full-dump', $entities );
 		$dumper->setTimestamp( 1000000 );
 		$jsonTest = new JsonDumpGeneratorTest();
 		$pager = $jsonTest->makeIdPager( $ids );

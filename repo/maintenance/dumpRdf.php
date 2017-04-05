@@ -72,7 +72,8 @@ class DumpRdf extends DumpScript {
 
 	public function __construct() {
 		parent::__construct();
-		$this->addOption( 'format', "Set the dump format.", false, true );
+		$this->addOption( 'format', 'Set the dump format, such as "nt" or "ttl". Defaults to "ttl".', false, true );
+		$this->addOption( 'flavor', 'Set the flavor to produce. Can be either "full-dump" or "truthy-dump". Defaults to "full-dump".', false, true );
 	}
 
 	/**
@@ -149,9 +150,12 @@ class DumpRdf extends DumpScript {
 	 * @return DumpGenerator
 	 */
 	protected function createDumper( $output ) {
+		$flavor = $this->getOption( 'flavor', 'full-dump' );
+
 		return RdfDumpGenerator::createDumpGenerator(
 			$this->getOption( 'format', 'ttl' ),
 			$output,
+			$flavor,
 			$this->siteLookup->getSites(),
 			$this->revisionLookup,
 			$this->propertyDatatypeLookup,
