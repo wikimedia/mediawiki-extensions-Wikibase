@@ -5,6 +5,7 @@
 			"9.sinistra"
 		]
 	},
+	"tooltip-t-wikibase": "ဒေတာအချက်အလက်နှင့် ချိတ်ဆက်ရန်လင့်ခ်",
 	"wikibase-comment-update": "{{WBREPONAME}} item ပြောင်းလဲခဲ့သည်",
 	"wikibase-dataitem": "{{WBREPONAME}} item",
 	"wikibase-editlinks": "လင့်ခ်များကို တည်းဖြတ်ရန်",
