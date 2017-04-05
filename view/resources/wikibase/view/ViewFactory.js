@@ -56,7 +56,7 @@
 	) {
 		if ( ( !structureEditorFactory || !structureEditorFactory.getAdder )
 			|| ( !messageProvider || !messageProvider.getMessage )
-			|| !$.isArray( userLanguages )
+			|| !Array.isArray( userLanguages )
 			|| ( vocabularyLookupApiUrl && typeof vocabularyLookupApiUrl !== 'string'
 			|| !commonsApiUrl )
 		) {

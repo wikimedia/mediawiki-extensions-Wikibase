@@ -177,7 +177,7 @@
 				return string.replace( /</g, '&lt;' ).replace( />/g, '&gt;' );
 			}
 
-			if ( !$.isArray( params ) ) {
+			if ( !Array.isArray( params ) ) {
 				params = [ params ];
 			}
 
@@ -195,7 +195,7 @@
 				}
 			} );
 
-			if ( $.isArray( expected ) ) {
+			if ( Array.isArray( expected ) ) {
 				expected = ( $.client.profile().name === 'msie' ) ? expected[1] : expected[0];
 			}
 

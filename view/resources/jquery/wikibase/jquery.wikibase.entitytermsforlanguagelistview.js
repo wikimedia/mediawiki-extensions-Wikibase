@@ -70,7 +70,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	 */
 	_create: function() {
 		if ( !( this.options.value instanceof wb.datamodel.Fingerprint )
-			|| !$.isArray( this.options.userLanguages )
+			|| !Array.isArray( this.options.userLanguages )
 		) {
 			throw new Error( 'Required option(s) missing' );
 		}
