@@ -236,7 +236,7 @@
 			delayedParams = [];
 
 		if ( parameter1 !== undefined ) {
-			if ( $.isArray( parameter1 ) ) {
+			if ( Array.isArray( parameter1 ) ) {
 				params = parameter1;
 			} else { // support variadic arguments
 				params = Array.prototype.slice.call( arguments );
