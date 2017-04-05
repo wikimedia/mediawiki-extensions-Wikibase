@@ -120,9 +120,7 @@ class ChangeHandler {
 	}
 
 	/**
-	 * Handle the provided changes.
-	 *
-	 * @param Change[] $changes
+	 * @param EntityChange[] $changes
 	 */
 	public function handleChanges( array $changes ) {
 		$changes = $this->changeListTransformer->transformChangeList( $changes );
@@ -145,11 +143,11 @@ class ChangeHandler {
 	 *
 	 * @todo: process multiple changes at once!
 	 *
-	 * @param Change $change
+	 * @param EntityChange $change
 	 *
 	 * @throws MWException
 	 */
-	public function handleChange( Change $change ) {
+	public function handleChange( EntityChange $change ) {
 		$changeId = $this->getChangeIdForLog( $change );
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": handling change #$changeId"
 			. ' (' . $change->getType() . ')' );

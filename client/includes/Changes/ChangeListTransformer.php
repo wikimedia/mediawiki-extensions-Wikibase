@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Changes;
 
-use Wikibase\Change;
+use Wikibase\EntityChange;
 
 /**
  * Interface for service objects implementing some transformation on a list of Change objects.
@@ -16,9 +16,9 @@ interface ChangeListTransformer {
 	 * Processes the given list of changes, possibly merging, filtering or otherwise modifying
 	 * changes and/or the list of changes.
 	 *
-	 * @param Change[] $changes
+	 * @param EntityChange[] $changes
 	 *
-	 * @return Change[]
+	 * @return EntityChange[]
 	 */
 	public function transformChangeList( array $changes );
 

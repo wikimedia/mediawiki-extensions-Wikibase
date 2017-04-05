@@ -19,7 +19,7 @@ use Wikimedia\Assert\Assert;
 class ChangeNotificationJob extends Job {
 
 	/**
-	 * @var Change[]|null Initialized lazily by getChanges.
+	 * @var EntityChange[]|null Initialized lazily by getChanges.
 	 */
 	private $changes = null;
 
@@ -61,7 +61,7 @@ class ChangeNotificationJob extends Job {
 	 *
 	 * EntityChange objects are loaded using a EntityChangeLookup.
 	 *
-	 * @return Change[] the changes to process.
+	 * @return EntityChange[] the changes to process.
 	 */
 	private function getChanges() {
 		if ( $this->changes === null ) {
