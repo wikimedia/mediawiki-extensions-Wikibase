@@ -119,7 +119,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function provideAddEntity() {
 		$props = array_map(
 			function ( $row ) {
-				return $row[0];
+				return $row[0]->getSerialization();
 			},
 			$this->getTestData()->getTestProperties()
 		);
@@ -162,7 +162,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideAddEntity_seen() {
 		return array(
-			array( 'Q7', [ 'Q7_statements', 'Q7_reference_refs' ], array( 'd2412760c57cacd8c8f24d9afde3b20c87161cca' ) ),
+			array( 'Q7', [ 'Q7_statements', 'Q7_reference_refs' ], array( 'f2693d55e4237eed12e76c87e54f6ae0f3d7080f' ) ),
 		);
 	}
 

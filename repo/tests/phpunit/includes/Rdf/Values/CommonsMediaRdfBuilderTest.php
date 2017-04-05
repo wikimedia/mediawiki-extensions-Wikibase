@@ -33,7 +33,7 @@ class CommonsMediaRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testAddValue() {
-		$vocab = new RdfVocabulary( 'http://test/item/', 'http://test/data/' );
+		$vocab = new RdfVocabulary( [ '' => 'http://test/item/' ], 'http://test/data/' );
 		$builder = new CommonsMediaRdfBuilder( $vocab );
 
 		$writer = new NTriplesRdfWriter();
