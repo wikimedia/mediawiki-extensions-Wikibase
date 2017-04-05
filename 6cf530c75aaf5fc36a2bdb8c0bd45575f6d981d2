@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_bea0b08e",
+        "filename": "repo/includes/Rdf/FullStatementRdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-05T09:58:23Z",
+      "side": 1,
+      "message": "Added bunch of methods to RdfVocabulary",
+      "parentUuid": "6e436fe2_96705ea5",
+      "revId": "6cf530c75aaf5fc36a2bdb8c0bd45575f6d981d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_16652edd",
         "filename": "repo/includes/Rdf/FullStatementRdfBuilder.php",
         "patchSetId": 1
@@ -70,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_3eda6022",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-05T09:58:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e436fe2_b6a47a05",
+      "revId": "6cf530c75aaf5fc36a2bdb8c0bd45575f6d981d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_36b14a43",
         "filename": "repo/includes/Rdf/RdfBuilder.php",
         "patchSetId": 1
@@ -81,6 +117,24 @@
       "writtenOn": "2017-03-29T14:04:36Z",
       "side": 1,
       "message": "Lots of long lines... dedicated method names would help.",
+      "revId": "6cf530c75aaf5fc36a2bdb8c0bd45575f6d981d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_75f1f0c7",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-05T09:58:23Z",
+      "side": 1,
+      "message": "I\u0027ve added a bunch of methods to RdfVocabulary.",
+      "parentUuid": "6e436fe2_36b14a43",
       "revId": "6cf530c75aaf5fc36a2bdb8c0bd45575f6d981d2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +158,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_1efe8466",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-05T09:58:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e436fe2_b68b1a72",
+      "revId": "6cf530c75aaf5fc36a2bdb8c0bd45575f6d981d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_76859259",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 1
@@ -115,6 +187,24 @@
       "writtenOn": "2017-03-29T14:04:36Z",
       "side": 1,
       "message": "please move the body of this loop into a separate method.",
+      "revId": "6cf530c75aaf5fc36a2bdb8c0bd45575f6d981d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_fefab872",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-05T09:58:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e436fe2_76859259",
       "revId": "6cf530c75aaf5fc36a2bdb8c0bd45575f6d981d2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -138,6 +228,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_a3be51f8",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-05T09:58:23Z",
+      "side": 1,
+      "message": "Right, I mixed it up with \"XML namespaces\". Should be fine now.",
+      "parentUuid": "6e436fe2_b6f23a02",
+      "revId": "6cf530c75aaf5fc36a2bdb8c0bd45575f6d981d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_56ce56ba",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 1
@@ -149,6 +257,24 @@
       "writtenOn": "2017-03-29T14:04:36Z",
       "side": 1,
       "message": "I think we shoul drop the ucfirst. So we can always use  $entityId-\u003egetLocalPart(). But we still need to replace any \":\" in the local part with somethign lese, e.g. \"--\".",
+      "revId": "6cf530c75aaf5fc36a2bdb8c0bd45575f6d981d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_03870515",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-05T09:58:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e436fe2_56ce56ba",
       "revId": "6cf530c75aaf5fc36a2bdb8c0bd45575f6d981d2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -172,6 +298,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_638fe926",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1089,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-05T09:58:23Z",
+      "side": 1,
+      "message": "Done: I6754c2eeb8a5c30cdd8b5b58b9a60f3c37f379b9",
+      "parentUuid": "6e436fe2_d6682687",
+      "revId": "6cf530c75aaf5fc36a2bdb8c0bd45575f6d981d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_b65f9ae7",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 1
@@ -189,6 +333,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_e37c591d",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1093,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-05T09:58:23Z",
+      "side": 1,
+      "message": "Changed now. I am not sure though if this is really nice.",
+      "parentUuid": "6e436fe2_b65f9ae7",
+      "revId": "6cf530c75aaf5fc36a2bdb8c0bd45575f6d981d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_b606bacf",
         "filename": "repo/tests/phpunit/data/rdf/entities/Q11.json",
         "patchSetId": 1
@@ -200,6 +362,24 @@
       "writtenOn": "2017-03-29T14:04:36Z",
       "side": 1,
       "message": "It may be better to add a foreign entity reference to the existing test items Q4, Q6 and Q7, for statements, qualifiers, and references, respectively.",
+      "revId": "6cf530c75aaf5fc36a2bdb8c0bd45575f6d981d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_9ea5b49c",
+        "filename": "repo/tests/phpunit/data/rdf/entities/Q11.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-05T09:58:23Z",
+      "side": 1,
+      "message": "true, moved to those",
+      "parentUuid": "6e436fe2_b606bacf",
       "revId": "6cf530c75aaf5fc36a2bdb8c0bd45575f6d981d2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
