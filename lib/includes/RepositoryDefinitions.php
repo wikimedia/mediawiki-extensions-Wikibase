@@ -13,7 +13,9 @@ use Wikimedia\Assert\Assert;
  *
  * Each repository definition is an associative array with following keys:
  *  - database: symbolic name of the database (string or false),
- *  - base-uri: Base URI of concept URIs (e.g. used in RDF output). This should include
+ *  - base-concept-uri: Base URI of concept URIs (e.g. used in RDF output). This should include
+ *    scheme and authority part of the URI. Only entity ID will be added to the base URI.
+ *  - base-data-uri: Base URI of data URIs (e.g. used in RDF output). This should include
  *    scheme and authority part of the URI. Only entity ID will be added to the base URI.
  *  - entity-types: list of entity names the repository provides (array of strings).
  *  - prefix-mapping: map of repository prefixes used in the repository (@see docs/foreign-entity-ids.wiki
@@ -47,7 +49,7 @@ class RepositoryDefinitions {
 	 * @throws InvalidArgumentException if $repositoryDefinitions has invalid format
 	 */
 	public function __construct( array $repositoryDefinitions ) {
-		$requiredFields = [ 'database', 'base-uri', 'entity-types', 'prefix-mapping' ];
+		$requiredFields = [ 'database', 'base-concept-uri', 'base-data-uri', 'entity-types', 'prefix-mapping' ];
 
 		RepositoryNameAssert::assertParameterKeysAreValidRepositoryNames( $repositoryDefinitions, '$repositoryDefinitions' );
 		Assert::parameterElementType( 'array', $repositoryDefinitions, '$repositoryDefinitions' );
@@ -87,7 +89,14 @@ class RepositoryDefinitions {
 	 * @return string[] Associative array (string => string) mapping repository names to base URIs of concept URIs.
 	 */
 	public function getConceptBaseUris() {
-		return $this->getMapForDefinitionField( 'base-uri' );
+		return $this->getMapForDefinitionField( 'base-concept-uri' );
+	}
+
+	/**
+	 * @return string[] Associative array (string => string) mapping repository names to base URIs of data URIs.
+	 */
+	public function getDataBaseUris() {
+		return $this->getMapForDefinitionField( 'base-data-uri' );
 	}
 
 	/**

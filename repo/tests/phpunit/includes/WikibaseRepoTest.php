@@ -384,7 +384,8 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		return [ $repositoryName => array_merge(
 			[
 				'database' => '',
-				'base-uri' => 'http://acme.test/concept/',
+				'base-concept-uri' => 'http://acme.test/concept/',
+				'base-data-uri' => 'http://acme.test/data/',
 				'entity-types' => [ 'item', 'property' ],
 				'prefix-mapping' => []
 			],
@@ -728,8 +729,8 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 
 	public function testGetConceptBaseUris() {
 		$wikibaseRepo = $this->getWikibaseRepoWithCustomRepositoryDefinitions( array_merge(
-			$this->getRepositoryDefinition( '', [ 'base-uri' => 'http://acme.test/concept/' ] ),
-			$this->getRepositoryDefinition( 'other', [ 'base-uri' => 'http://other.wiki/concept/', 'entity-types' => [ 'foo' ] ] )
+			$this->getRepositoryDefinition( '', [ 'base-concept-uri' => 'http://acme.test/concept/' ] ),
+			$this->getRepositoryDefinition( 'other', [ 'base-concept-uri' => 'http://other.wiki/concept/', 'entity-types' => [ 'foo' ] ] )
 		) );
 
 		$this->assertEquals(

@@ -19,16 +19,44 @@ class RepositoryDefinitionsTest extends \PHPUnit_Framework_TestCase {
 			'repository name containing colon' => [ [ 'fo:o' => [] ] ],
 			'repository definition not an array' => [ [ '' => 'string' ] ],
 			'no database key in repository definition' => [
-				[ '' => [ 'base-uri' => 'http://acme.test/concept/' ], 'entity-types' => [], 'prefix-mapping' => [] ]
+				[ '' => [
+					'base-concept-uri' => 'http://acme.test/concept/',
+					'base-data-uri' => 'http://acme.test/data/',
+					'entity-types' => [],
+					'prefix-mapping' => []
+				] ]
 			],
 			'no entity-types key in repository definition' => [
-				[ '' => [ 'database' => 'xyz', 'base-uri' => 'http://acme.test/concept/' ], 'prefix-mapping' => [] ]
+				[ '' => [
+					'database' => 'xyz',
+					'base-concept-uri' => 'http://acme.test/concept/',
+					'base-data-uri' => 'http://acme.test/data/',
+					'prefix-mapping' => []
+				] ]
 			],
 			'no prefix-mapping key in repository definition' => [
-				[ '' => [ 'database' => 'xyz', 'base-uri' => 'http://acme.test/concept/' ], 'entity-types' => [] ]
+				[ '' => [
+					'database' => 'xyz',
+					'base-concept-uri' => 'http://acme.test/concept/',
+					'base-data-uri' => 'http://acme.test/data/',
+					'entity-types' => []
+				] ]
 			],
-			'no base-uri key in repository definition' => [
-				[ '' => [ 'database' => 'xyz', 'entity-types' => [], 'prefix-mapping' => [] ] ]
+			'no base-concept-uri key in repository definition' => [
+				[ '' => [
+					'database' => 'xyz',
+					'base-data-uri' => 'http://acme.test/data/',
+					'entity-types' => [],
+					'prefix-mapping' => []
+				] ]
+			],
+			'no base-data-uri key in repository definition' => [
+				[ '' => [
+					'database' => 'xyz',
+					'base-concept-uri' => 'http://acme.test/concept/',
+					'entity-types' => [],
+					'prefix-mapping' => []
+				] ]
 			],
 			'no settings for the local repository' => [ [ 'foo' => [ 'database' => 'foodb' ] ] ],
 		];
@@ -50,19 +78,22 @@ class RepositoryDefinitionsTest extends \PHPUnit_Framework_TestCase {
 		return [
 			'' => [
 				'database' => false,
-				'base-uri' => 'http://acme.test/concept/',
+				'base-concept-uri' => 'http://acme.test/concept/',
+				'base-data-uri' => 'http://acme.test/data/',
 				'entity-types' => [ 'item', 'property' ],
 				'prefix-mapping' => [],
 			],
 			'media' => [
 				'database' => 'foowiki',
-				'base-uri' => 'http://foo.test/concept/',
+				'base-concept-uri' => 'http://foo.test/concept/',
+				'base-data-uri' => 'http://foo.test/data/',
 				'entity-types' => [ 'mediainfo' ],
 				'prefix-mapping' => [],
 			],
 			'lexeme' => [
 				'database' => 'bazwiki',
-				'base-uri' => 'http://baz.test/concept/',
+				'base-concept-uri' => 'http://baz.test/concept/',
+				'base-data-uri' => 'http://baz.test/data/',
 				'entity-types' => [ 'lexeme' ],
 				'prefix-mapping' => [ 'foo' => 'media' ],
 			],
@@ -94,6 +125,19 @@ class RepositoryDefinitionsTest extends \PHPUnit_Framework_TestCase {
 				'lexeme' => 'http://baz.test/concept/'
 			],
 			$definitions->getConceptBaseUris()
+		);
+	}
+
+	public function testGetDataBaseUris() {
+		$definitions = new RepositoryDefinitions( $this->getCompleteRepositoryDefinitionArray() );
+
+		$this->assertEquals(
+			[
+				'' => 'http://acme.test/data/',
+				'media' => 'http://foo.test/data/',
+				'lexeme' => 'http://baz.test/data/'
+			],
+			$definitions->getDataBaseUris()
 		);
 	}
 
@@ -131,7 +175,12 @@ class RepositoryDefinitionsTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenSameEntityTypeDefinedForMultitpleRepos_exceptionIsThrown() {
 		$this->setExpectedException( InvalidArgumentException::class );
 
-		$irrelevantDefinitions = [ 'database' => 'foo', 'base-uri' => 'http://acme.test/concept/', 'prefix-mapping' => [] ];
+		$irrelevantDefinitions = [
+			'database' => 'foo',
+			'base-concept-uri' => 'http://acme.test/concept/',
+			'base-data-uri' => 'http://acme.test/data/',
+			'prefix-mapping' => []
+		];
 
 		new RepositoryDefinitions( [
 			'' => array_merge( $irrelevantDefinitions, [ 'entity-types' => [ 'item', 'property' ] ] ),
