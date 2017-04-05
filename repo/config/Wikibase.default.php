@@ -83,6 +83,11 @@ return [
 		return $uri . '/entity/';
 	},
 
+	'canonicalDataUriBase' => function() {
+		$uri = preg_replace( '!^//!', 'http://', $GLOBALS['wgServer'] );
+		return $uri . '/wiki/Special:EntityData/';
+	},
+
 	// Property used as formatter to link identifiers
 	'formatterUrlProperty' => null,
 
