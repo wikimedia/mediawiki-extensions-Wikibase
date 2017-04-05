@@ -166,7 +166,7 @@ class TimeRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideAddValue
 	 */
 	public function testAddValue( PropertyValueSnak $snak, $complex, array $expected ) {
-		$vocab = new RdfVocabulary( 'http://acme.com/item/', 'http://acme.com/data/' );
+		$vocab = new RdfVocabulary( [ '' => 'http://acme.com/item/' ], 'http://acme.com/data/' );
 
 		$snakWriter = new NTriplesRdfWriter();
 		$snakWriter->prefix( 'www', "http://www/" );
