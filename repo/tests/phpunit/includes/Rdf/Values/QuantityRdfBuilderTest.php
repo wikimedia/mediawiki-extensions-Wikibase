@@ -272,7 +272,7 @@ class QuantityRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testAddValue( PropertyValueSnak $snak, $complex, array $expected,
 	                              array $units = null ) {
-		$vocab = new RdfVocabulary( 'http://acme.com/item/', 'http://acme.com/data/' );
+		$vocab = new RdfVocabulary( [ '' => 'http://acme.com/item/' ], [ '' => 'http://acme.com/data/' ] );
 		$snakWriter = $this->newSnakWriter();
 		$builder = $this->newQuantityRdfBuilder( $snakWriter->sub(), $vocab, $complex, $units );
 
@@ -295,7 +295,7 @@ class QuantityRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$unitId = new ItemId( 'Q2' );
 		$value = QuantityValue::newFromNumber( '+23.5', 'http://acme/' . $unitId->getSerialization(), '+23.6', '+23.4' );
 
-		$vocab = new RdfVocabulary( 'http://acme.com/item/', 'http://acme.com/data/' );
+		$vocab = new RdfVocabulary( [ '' => 'http://acme.com/item/' ], [ '' => 'http://acme.com/data/' ] );
 		$snakWriter = $this->newSnakWriter();
 		$valueWriter = $snakWriter->sub();
 		$builder = $this->newQuantityRdfBuilder( $valueWriter, $vocab, true, null );
@@ -337,7 +337,7 @@ class QuantityRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$unboundedSnak = new PropertyValueSnak( new PropertyId( 'P7' ), $unboundedValue );
 		$unboundedSnak2 = new PropertyValueSnak( new PropertyId( 'P9' ), $unboundedValue );
 
-		$vocab = new RdfVocabulary( 'http://acme.com/item/', 'http://acme.com/data/' );
+		$vocab = new RdfVocabulary( [ '' => 'http://acme.com/item/' ], [ '' => 'http://acme.com/data/' ] );
 		$snakWriter = $this->newSnakWriter();
 		$builder = $this->newQuantityRdfBuilder( $snakWriter->sub(), $vocab, true,
 				[ 'factor' => 1, 'unit' => 'Q2' ] );

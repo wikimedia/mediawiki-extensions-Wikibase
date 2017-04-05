@@ -32,7 +32,7 @@ class ComplexValueRdfHelperTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testAttachValueNode() {
-		$vocab = new RdfVocabulary( 'http://acme.com/item/', 'http://acme.com/data/' );
+		$vocab = new RdfVocabulary( [ '' => 'http://acme.com/item/' ], [ '' => 'http://acme.com/data/' ] );
 
 		$snakWriter = new NTriplesRdfWriter();
 		$snakWriter->prefix( 'www', "http://www/" );
