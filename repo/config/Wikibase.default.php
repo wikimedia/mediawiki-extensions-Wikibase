@@ -200,6 +200,10 @@ return [
 		'wb-identifiers' => [ 'name' => 'identifiers', 'type' => 'integer' ],
 	],
 
+	// Maximum number of elements in entity name (repository name and local name) caches
+	// used when generating RDF output.
+	'rdfMaxNameCacheKeys' => 1000, // TODO: what would be a reasonably big default?
+
 	// Map of foreign repository names to repository-specific settings such as "supportedEntityTypes"
 	'foreignRepositories' => [],
 

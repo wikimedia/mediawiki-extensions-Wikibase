@@ -89,8 +89,12 @@ class SnakRdfBuilder {
 				break;
 			case 'novalue':
 				$propertyValueLName = $this->vocabulary->getEntityLName( $propertyId );
+				$propertyRepositoryName = $this->vocabulary->getEntityRepositoryName( $propertyId );
 
-				$writer->say( 'a' )->is( RdfVocabulary::NSP_NOVALUE, $propertyValueLName );
+				$writer->say( 'a' )->is(
+					$this->vocabulary->propertyNamespaceNames[$propertyRepositoryName][RdfVocabulary::NSP_NOVALUE],
+					$propertyValueLName
+				);
 				break;
 			default:
 				throw new InvalidArgumentException( 'Unknown snak type: ' . $snak->getType() );

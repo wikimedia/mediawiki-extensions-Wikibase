@@ -75,7 +75,9 @@ class SiteLinksRdfBuilder implements EntityRdfBuilder {
 	 * @param Item $item
 	 */
 	public function addSiteLinks( Item $item ) {
-		$entityLName = $this->vocabulary->getEntityLName( $item->getId() );
+		$id = $item->getId();
+		$entityLName = $this->vocabulary->getEntityLName( $id );
+		$entityRepoName = $this->vocabulary->getEntityRepositoryName( $id );
 
 		/** @var SiteLink $siteLink */
 		foreach ( $item->getSiteLinkList() as $siteLink ) {
@@ -104,15 +106,20 @@ class SiteLinksRdfBuilder implements EntityRdfBuilder {
 
 			$this->writer->about( $url )
 				->a( RdfVocabulary::NS_SCHEMA_ORG, 'Article' )
-				->say( RdfVocabulary::NS_SCHEMA_ORG, 'about' )->is( RdfVocabulary::NS_ENTITY, $entityLName )
+				->say( RdfVocabulary::NS_SCHEMA_ORG, 'about' )
+				->is( $this->vocabulary->entityNamespaceNames[$entityRepoName], $entityLName )
 				->say( RdfVocabulary::NS_SCHEMA_ORG, 'inLanguage' )->text( $lang )
 				->say( RdfVocabulary::NS_SCHEMA_ORG, 'isPartOf' )->is( $siteUrl )
 				->say( RdfVocabulary::NS_SCHEMA_ORG, 'name' )->text( $siteLink->getPageName(), $lang );
 
 			foreach ( $siteLink->getBadges() as $badge ) {
+				$badgeRepoName = $this->vocabulary->getEntityRepositoryName( $badge );
 				$this->writer
 					->say( RdfVocabulary::NS_ONTOLOGY, 'badge' )
-						->is( RdfVocabulary::NS_ENTITY, $this->vocabulary->getEntityLName( $badge ) );
+					->is(
+						$this->vocabulary->entityNamespaceNames[$badgeRepoName],
+						$this->vocabulary->getEntityLName( $badge )
+					);
 			}
 
 			/* Write group of the site only once.

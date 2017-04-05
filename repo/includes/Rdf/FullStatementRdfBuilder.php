@@ -143,7 +143,12 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 		if ( $this->produceQualifiers ) {
 			// this assumes statement was added by addMainSnak
 			foreach ( $statement->getQualifiers() as $q ) {
-				$this->snakBuilder->addSnak( $this->statementWriter, $q, RdfVocabulary::NSP_QUALIFIER );
+				$propertyRepository = $this->vocabulary->getEntityRepositoryName( $q->getPropertyId() );
+				$this->snakBuilder->addSnak(
+					$this->statementWriter,
+					$q,
+					$this->vocabulary->propertyNamespaceNames[$propertyRepository][RdfVocabulary::NSP_QUALIFIER]
+				);
 			}
 		}
 
@@ -164,7 +169,12 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 					->a( RdfVocabulary::NS_ONTOLOGY, 'Reference' );
 
 				foreach ( $reference->getSnaks() as $refSnak ) {
-					$this->snakBuilder->addSnak( $this->referenceWriter, $refSnak, RdfVocabulary::NSP_REFERENCE );
+					$propertyRepository = $this->vocabulary->getEntityRepositoryName( $refSnak->getPropertyId() );
+					$this->snakBuilder->addSnak(
+						$this->referenceWriter,
+						$refSnak,
+						$this->vocabulary->propertyNamespaceNames[$propertyRepository][RdfVocabulary::NSP_REFERENCE]
+					);
 				}
 			}
 		}
@@ -182,10 +192,20 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 		$snak = $statement->getMainSnak();
 
 		$entityLName = $this->vocabulary->getEntityLName( $entityId );
-		$propertyLName = $this->vocabulary->getEntityLName( $snak->getPropertyId() );
+		$entityRepository = $this->vocabulary->getEntityRepositoryName( $entityId );
+		$propertyId = $snak->getPropertyId();
+		$propertyLName = $this->vocabulary->getEntityLName( $propertyId );
+		$propertyRepository = $this->vocabulary->getEntityRepositoryName( $propertyId );
 
-		$this->statementWriter->about( RdfVocabulary::NS_ENTITY, $entityLName )
-			->say( RdfVocabulary::NSP_CLAIM, $propertyLName )->is( RdfVocabulary::NS_STATEMENT, $statementLName );
+		$this->statementWriter->about(
+			$this->vocabulary->entityNamespaceNames[$entityRepository],
+			$entityLName
+		)
+			->say(
+				$this->vocabulary->propertyNamespaceNames[$propertyRepository][RdfVocabulary::NSP_CLAIM],
+				$propertyLName
+			)
+			->is( RdfVocabulary::NS_STATEMENT, $statementLName );
 
 		$this->statementWriter->about( RdfVocabulary::NS_STATEMENT, $statementLName )
 			->a( RdfVocabulary::NS_ONTOLOGY, 'Statement' );
@@ -201,7 +221,11 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 			wfLogWarning( "Unknown rank $rank encountered for $entityId:{$statement->getGuid()}" );
 		}
 
-		$this->snakBuilder->addSnak( $this->statementWriter, $snak, RdfVocabulary::NSP_CLAIM_STATEMENT );
+		$this->snakBuilder->addSnak(
+			$this->statementWriter,
+			$snak,
+			$this->vocabulary->propertyNamespaceNames[$propertyRepository][RdfVocabulary::NSP_CLAIM_STATEMENT]
+		);
 	}
 
 	/**
