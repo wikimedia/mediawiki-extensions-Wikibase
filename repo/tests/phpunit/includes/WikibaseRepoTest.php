@@ -532,17 +532,12 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	 * @return WikibaseRepo
 	 */
 	private function getWikibaseRepo( $entityTypeDefinitions = array() ) {
-		/** @var RepositoryDefinitions $repositoryDefinitions */
-		$repositoryDefinitions = $this->getMockBuilder( RepositoryDefinitions::class )
-			->disableOriginalConstructor()
-			->getMock();
-
 		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
 		return new WikibaseRepo(
 			$settings,
 			new DataTypeDefinitions( array() ),
 			new EntityTypeDefinitions( $entityTypeDefinitions ),
-			$repositoryDefinitions
+			new RepositoryDefinitions( $this->getRepositoryDefinition( '' ) )
 		);
 	}
 

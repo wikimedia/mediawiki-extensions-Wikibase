@@ -303,9 +303,10 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		$timestamp = wfTimestamp( TS_ISO_8601, $timestamp );
 		$entityLName = $this->vocabulary->getEntityLName( $entityId );
 
-		$this->writer->about( RdfVocabulary::NS_DATA, $entityId )
+		$this->writer->about( RdfVocabulary::NS_DATA, $entityLName )
 			->a( RdfVocabulary::NS_SCHEMA_ORG, "Dataset" )
-			->say( RdfVocabulary::NS_SCHEMA_ORG, 'about' )->is( RdfVocabulary::NS_ENTITY, $entityLName );
+			->say( RdfVocabulary::NS_SCHEMA_ORG, 'about' )
+			->is( $this->vocabulary->entityNamespaceNames[$entityId->getRepositoryName()], $entityLName );
 
 		if ( $this->shouldProduce( RdfProducer::PRODUCE_VERSION_INFO ) ) {
 			// Dumps don't need version/license info for each entity, since it is included in the dump header
@@ -358,7 +359,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 				settype( $value, $props[$name]['type'] );
 			}
 
-			$this->writer->about( RdfVocabulary::NS_DATA, $entityId )
+			$this->writer->about( RdfVocabulary::NS_DATA, $entityId->getLocalPart() )
 				->say( RdfVocabulary::NS_ONTOLOGY, $props[$name]['name'] )
 				->value( $value );
 		}
@@ -372,9 +373,13 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 * @param EntityDocument $entity
 	 */
 	private function addEntityMetaData( EntityDocument $entity ) {
-		$entityLName = $this->vocabulary->getEntityLName( $entity->getId() );
+		$entityId = $entity->getId();
+		$entityLName = $this->vocabulary->getEntityLName( $entityId );
 
-		$this->writer->about( RdfVocabulary::NS_ENTITY, $entityLName )
+		$this->writer->about(
+			$this->vocabulary->entityNamespaceNames[$entityId->getRepositoryName()],
+			$entityLName
+		)
 			->a( RdfVocabulary::NS_ONTOLOGY, $this->vocabulary->getEntityTypeName( $entity->getType() ) );
 	}
 
@@ -462,9 +467,9 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		$fromLName = $this->vocabulary->getEntityLName( $from );
 		$toLName = $this->vocabulary->getEntityLName( $to );
 
-		$this->writer->about( RdfVocabulary::NS_ENTITY, $fromLName )
+		$this->writer->about( $this->vocabulary->entityNamespaceNames[$from->getRepositoryName()], $fromLName )
 			->say( 'owl', 'sameAs' )
-			->is( RdfVocabulary::NS_ENTITY, $toLName );
+			->is( $this->vocabulary->entityNamespaceNames[$to->getRepositoryName()], $toLName );
 
 		$this->entityResolved( $from );
 
