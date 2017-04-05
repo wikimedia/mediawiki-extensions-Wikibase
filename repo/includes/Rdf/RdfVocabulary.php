@@ -6,6 +6,7 @@ use DataValues\DataValue;
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
@@ -93,14 +94,10 @@ class RdfVocabulary {
 	private $namespaces = array();
 
 	/**
-	 * @var string
+	 * @var array Associative array mapping repository names to maps, each mapping the "general"
+	 * namespace name to the name specific to the particular repository (ie. containing repository suffix).
 	 */
-	private $baseUri;
-
-	/**
-	 * @var string
-	 */
-	private $dataUri;
+	private $repositorySpecificNamespaceNames = [];
 
 	/**
 	 * @var string[] Mapping of non-standard to canonical language codes.
@@ -124,8 +121,8 @@ class RdfVocabulary {
 	private $pagePropertyDefs;
 
 	/**
-	 * @param string   $baseUri Base URI for entity concept URIs.
-	 * @param string   $dataUri Base URI for entity description URIs.
+	 * @param string[] $conceptUris Associative array mapping repository names to base URIs for entity concept URIs.
+	 * @param string $dataUri Base URI for entity description URIs.
 	 * @param string[] $canonicalLanguageCodes Mapping of non-standard to canonical language codes.
 	 * @param string[] $dataTypeUris Mapping of property data type IDs to their URIs,
 	 *                 if different from the default mapping.
@@ -133,58 +130,121 @@ class RdfVocabulary {
 	 *                 All predicates will be prefixed with wikibase:
 	 */
 	public function __construct(
-		$baseUri,
+		array $conceptUris,
 		$dataUri,
 		array $canonicalLanguageCodes = array(),
 		array $dataTypeUris = array(),
 		array $pagePropertyDefs = array()
 	) {
-		$this->baseUri = $baseUri;
-		$this->dataUri = $dataUri;
 		$this->canonicalLanguageCodes = $canonicalLanguageCodes;
 		$this->dataTypeUris = $dataTypeUris;
 		$this->pagePropertyDefs = $pagePropertyDefs;
 
-		if ( substr( $this->baseUri, -7 ) === 'entity/' ) {
-			$topUri = substr( $this->baseUri, 0, -7 );
-		} else {
-			$topUri = $this->baseUri;
-		}
-		$propUri = $topUri."prop/";
-
 		$this->namespaces = array(
-				'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
-				'rdfs' => 'http://www.w3.org/2000/01/rdf-schema#',
-				'xsd' => 'http://www.w3.org/2001/XMLSchema#',
-				'owl' => 'http://www.w3.org/2002/07/owl#',
-				// TODO: drop beta once we have stable ontology
-				self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI . "-beta#",
-				// nodes
-				self::NS_DATA => $this->dataUri,
-				self::NS_ENTITY => $this->baseUri,
-				self::NS_STATEMENT => $this->baseUri . 'statement/',
-				self::NS_REFERENCE => $topUri . 'reference/',
-				self::NS_VALUE => $topUri . 'value/',
-				// predicates
-				self::NSP_DIRECT_CLAIM => $propUri . 'direct/',
-				self::NSP_CLAIM => $propUri,
-				self::NSP_CLAIM_STATEMENT => $propUri . 'statement/',
-				self::NSP_CLAIM_VALUE => $propUri . 'statement/value/',
-				self::NSP_CLAIM_VALUE_NORM => $propUri . 'statement/value-normalized/',
-				self::NSP_QUALIFIER => $propUri . 'qualifier/',
-				self::NSP_QUALIFIER_VALUE => $propUri . 'qualifier/value/',
-				self::NSP_QUALIFIER_VALUE_NORM => $propUri . 'qualifier/value-normalized/',
-				self::NSP_REFERENCE => $propUri . 'reference/',
-				self::NSP_REFERENCE_VALUE => $propUri . 'reference/value/',
-				self::NSP_REFERENCE_VALUE_NORM => $propUri . 'reference/value-normalized/',
-				self::NSP_NOVALUE => $propUri . 'novalue/',
-				// external
+			'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+			'rdfs' => 'http://www.w3.org/2000/01/rdf-schema#',
+			'xsd' => 'http://www.w3.org/2001/XMLSchema#',
+			'owl' => 'http://www.w3.org/2002/07/owl#',
+			// TODO: drop beta once we have stable ontology
+			self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI . "-beta#",
+		);
+
+		$this->namespaces[self::NS_STATEMENT] = $conceptUris[''] . 'statement/';
+		$topUri = $this->getConceptUriBase( $conceptUris[''] );
+
+		$this->namespaces[self::NS_REFERENCE] = $topUri . 'reference/';
+		$this->namespaces[self::NS_VALUE] = $topUri . 'value/';
+
+		foreach ( $conceptUris as $repositoryName => $baseUri ) {
+			$this->repositorySpecificNamespaceNames[$repositoryName] =
+				$this->getRepositorySpecificNames( $repositoryName );
+
+			$this->namespaces = array_merge(
+				$this->namespaces,
+				$this->getConceptNamespaces( $repositoryName, $baseUri )
+			);
+		}
+
+		// nodes
+		$this->namespaces[self::NS_DATA] = $dataUri;
+
+		// external
+		$this->namespaces = array_merge(
+			$this->namespaces,
+			[
 				self::NS_SKOS => self::SKOS_URI,
 				self::NS_SCHEMA_ORG => self::SCHEMA_ORG_URI,
 				self::NS_CC => self::CC_URI,
 				self::NS_GEO => self::GEO_URI,
 				self::NS_PROV => self::PROV_URI,
+			]
 		);
+	}
+
+	/**
+	 * @param string $repositoryName
+	 * @return string[]
+	 */
+	private function getRepositorySpecificNames( $repositoryName ) {
+		$namespaceSuffix = '';
+		if ( $repositoryName !== '' ) {
+			$namespaceSuffix = '-' . $repositoryName;
+		}
+
+		return [
+			self::NS_ENTITY => self::NS_ENTITY . $namespaceSuffix,
+			self::NSP_DIRECT_CLAIM => self::NSP_DIRECT_CLAIM . $namespaceSuffix,
+			self::NSP_CLAIM => self::NSP_CLAIM . $namespaceSuffix,
+			self::NSP_CLAIM_STATEMENT => self::NSP_CLAIM_STATEMENT . $namespaceSuffix,
+			self::NSP_CLAIM_VALUE => self::NSP_CLAIM_VALUE . $namespaceSuffix,
+			self::NSP_CLAIM_VALUE_NORM => self::NSP_CLAIM_VALUE_NORM . $namespaceSuffix,
+			self::NSP_QUALIFIER => self::NSP_QUALIFIER . $namespaceSuffix,
+			self::NSP_QUALIFIER_VALUE => self::NSP_QUALIFIER_VALUE . $namespaceSuffix,
+			self::NSP_QUALIFIER_VALUE_NORM => self::NSP_QUALIFIER_VALUE_NORM . $namespaceSuffix,
+			self::NSP_REFERENCE => self::NSP_REFERENCE . $namespaceSuffix,
+			self::NSP_REFERENCE_VALUE => self::NSP_REFERENCE_VALUE . $namespaceSuffix,
+			self::NSP_REFERENCE_VALUE_NORM => self::NSP_REFERENCE_VALUE_NORM . $namespaceSuffix,
+			self::NSP_NOVALUE => self::NSP_NOVALUE . $namespaceSuffix,
+		];
+	}
+
+	private function getConceptNamespaces( $repositoryName, $baseUri ) {
+		$topUri = $this->getConceptUriBase( $baseUri );
+
+		$propUri = $topUri . 'prop/';
+
+		$namespaceSuffix = '';
+		if ( $repositoryName !== '' ) {
+			$namespaceSuffix = '-' . $repositoryName;
+		}
+
+		return [
+			self::NS_ENTITY . $namespaceSuffix => $baseUri,
+			// predicates
+			self::NSP_DIRECT_CLAIM . $namespaceSuffix => $propUri . 'direct/',
+			self::NSP_CLAIM . $namespaceSuffix => $propUri,
+			self::NSP_CLAIM_STATEMENT . $namespaceSuffix => $propUri . 'statement/',
+			self::NSP_CLAIM_VALUE . $namespaceSuffix => $propUri . 'statement/value/',
+			self::NSP_CLAIM_VALUE_NORM . $namespaceSuffix => $propUri . 'statement/value-normalized/',
+			self::NSP_QUALIFIER . $namespaceSuffix => $propUri . 'qualifier/',
+			self::NSP_QUALIFIER_VALUE . $namespaceSuffix => $propUri . 'qualifier/value/',
+			self::NSP_QUALIFIER_VALUE_NORM . $namespaceSuffix => $propUri . 'qualifier/value-normalized/',
+			self::NSP_REFERENCE . $namespaceSuffix => $propUri . 'reference/',
+			self::NSP_REFERENCE_VALUE . $namespaceSuffix => $propUri . 'reference/value/',
+			self::NSP_REFERENCE_VALUE_NORM . $namespaceSuffix => $propUri . 'reference/value-normalized/',
+			self::NSP_NOVALUE . $namespaceSuffix => $propUri . 'novalue/',
+		];
+	}
+
+	/**
+	 * @param string $baseUri
+	 * @return string
+	 */
+	private function getConceptUriBase( $baseUri ) {
+		if ( substr( $baseUri, -7 ) === 'entity/' ) {
+			return substr( $baseUri, 0, -7 );
+		}
+		return $baseUri;
 	}
 
 	/**
@@ -213,6 +273,123 @@ class RdfVocabulary {
 	}
 
 	/**
+	 * @param EntityId $entityId
+	 *
+	 * @return string
+	 */
+	public function getEntityNamespace( EntityId $entityId ) {
+		return $this->repositorySpecificNamespaceNames[$entityId->getRepositoryName()][self::NS_ENTITY];
+	}
+
+	/**
+	 * @param PropertyId $propertyId
+	 *
+	 * @return string
+	 */
+	public function getClaimPropertyNamespace( PropertyId $propertyId ) {
+		return $this->repositorySpecificNamespaceNames[$propertyId->getRepositoryName()][self::NSP_CLAIM];
+	}
+
+	/**
+	 * @param PropertyId $propertyId
+	 *
+	 * @return string
+	 */
+	public function getClaimStatementPropertyNamespace( PropertyId $propertyId ) {
+		return $this->repositorySpecificNamespaceNames[$propertyId->getRepositoryName()][self::NSP_CLAIM_STATEMENT];
+	}
+
+	/**
+	 * @param PropertyId $propertyId
+	 *
+	 * @return string
+	 */
+	public function getClaimValuePropertyNamespace( PropertyId $propertyId ) {
+		return $this->repositorySpecificNamespaceNames[$propertyId->getRepositoryName()][self::NSP_CLAIM_VALUE];
+	}
+
+	/**
+	 * @param PropertyId $propertyId
+	 *
+	 * @return string
+	 */
+	public function getClaimNormalizedValuePropertyNamespace( PropertyId $propertyId ) {
+		return $this->repositorySpecificNamespaceNames[$propertyId->getRepositoryName()][self::NSP_CLAIM_VALUE_NORM];
+	}
+
+	/**
+	 * @param PropertyId $propertyId
+	 *
+	 * @return string
+	 */
+	public function getDirectClaimPropertyNamespace( PropertyId $propertyId ) {
+		return $this->repositorySpecificNamespaceNames[$propertyId->getRepositoryName()][self::NSP_DIRECT_CLAIM];
+	}
+
+	/**
+	 * @param PropertyId $propertyId
+	 *
+	 * @return string
+	 */
+	public function getQualifierPropertyNamespace( PropertyId $propertyId ) {
+		return $this->repositorySpecificNamespaceNames[$propertyId->getRepositoryName()][self::NSP_QUALIFIER];
+	}
+
+	/**
+	 * @param PropertyId $propertyId
+	 *
+	 * @return string
+	 */
+	public function getQualifierValuePropertyNamespace( PropertyId $propertyId ) {
+		return $this->repositorySpecificNamespaceNames[$propertyId->getRepositoryName()][self::NSP_QUALIFIER_VALUE];
+	}
+
+	/**
+	 * @param PropertyId $propertyId
+	 *
+	 * @return string
+	 */
+	public function getQualifierNormalizedValuePropertyNamespace( PropertyId $propertyId ) {
+		return $this->repositorySpecificNamespaceNames[$propertyId->getRepositoryName()][self::NSP_QUALIFIER_VALUE_NORM];
+	}
+
+	/**
+	 * @param PropertyId $propertyId
+	 *
+	 * @return string
+	 */
+	public function getReferencePropertyNamespace( PropertyId $propertyId ) {
+		return $this->repositorySpecificNamespaceNames[$propertyId->getRepositoryName()][self::NSP_REFERENCE];
+	}
+
+	/**
+	 * @param PropertyId $propertyId
+	 *
+	 * @return string
+	 */
+	public function getReferenceValuePropertyNamespace( PropertyId $propertyId ) {
+		return $this->repositorySpecificNamespaceNames[$propertyId->getRepositoryName()][self::NSP_REFERENCE_VALUE];
+	}
+
+	/**
+	 * @param PropertyId $propertyId
+	 *
+	 * @return string
+	 */
+	public function getReferenceNormalizedValuePropertyNamespace( PropertyId $propertyId ) {
+		return $this->repositorySpecificNamespaceNames[$propertyId->getRepositoryName()][self::NSP_REFERENCE_VALUE_NORM];
+	}
+
+	/**
+	 * @param PropertyId $propertyId
+	 *
+	 * @return string
+	 */
+	public function getNoValuePropertyNamespace( PropertyId $propertyId ) {
+		return $this->repositorySpecificNamespaceNames[$propertyId->getRepositoryName()][self::NSP_NOVALUE];
+	}
+
+	/**
 	 * Returns a local name for the given entity using the given prefix.
 	 *
 	 * @param EntityId $entityId
@@ -220,7 +397,9 @@ class RdfVocabulary {
 	 * @return string
 	 */
 	public function getEntityLName( EntityId $entityId ) {
-		return ucfirst( $entityId->getSerialization() );
+		return strpos( $entityId->getLocalPart(), ':' ) ?
+			str_replace( ':', '.', $entityId->getLocalPart() ) :
+			$entityId->getLocalPart();
 	}
 
 	/**
