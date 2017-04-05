@@ -27,7 +27,8 @@ class DispatchingServiceFactoryTest extends \PHPUnit_Framework_TestCase {
 		return [ $repositoryName => array_merge(
 			[
 				'database' => '',
-				'base-uri' => 'http://acme.test/concept/',
+				'base-concept-uri' => 'http://acme.test/concept/',
+				'base-data-uri' => 'http://acme.test/data/',
 				'entity-types' => [],
 				'prefix-mapping' => []
 			],

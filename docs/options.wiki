@@ -36,6 +36,8 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;badgeItems: Items allowed to be used as badges. This setting expects an array of serialized item IDs pointing to their CSS class names, like <code>array( 'Q101' => 'wb-badge-goodarticle' )</code>. With this class name it is possible to change the icon of a specific badge.
 ;preferredPageImagesProperties: List of image property ID strings, in order of preference, that should be considered for the <code>page_image</code> page property. Defaults to an empty array.
 ;conceptBaseUri: Base URI for building concept URIs (for example used in Rdf output). This has to include the protocol and domain, only an entity identifier will be appended.
+;canonicalDataUriBase: The base fur building canonical data URIs. This has to include scheme and authority part of the URI, only an entity identifier will be appended.
+:'''Note:''' This may be removed once we can get this information from the sites table.
 ;preferredGeoDataProperties: List of properties (by ID string), in order of preference, that are considered when finding primary coordinates for the GeoData extension on an entity. Defaults to an empty array.
 
 === Expert Settings ===
@@ -62,6 +64,8 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;repoUrl: The repository's base URL, including the schema (protocol) and domain; This URL can be protocol-relative. Default is <code>'//wikidata.org'</code>.
 :'''Note:''' This may be removed once we can get this information from the sites table.
 ;repoConceptBaseUri: The base of the repository's concept URIs. Default is <code>'<i>repoUrl</i>/entity/'</code>.
+:'''Note:''' This may be removed once we can get this information from the sites table.
+;repoCanonicalDataUriBase: The base of the repository's canonical data URIs. Default is <code>'<i>repoUrl</i>/wiki/Special:EntityData/'</code>
 :'''Note:''' This may be removed once we can get this information from the sites table.
 ;repoScriptPath: The repository's script path. Default is $wgScriptPath, assuming that the repo's script path is the same as this wiki's script path.
 :'''Note:''' This may be removed once we can get this information from the sites table.
@@ -96,7 +100,8 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;foreignRepositories: An associative array mapping foreign repository names to settings relevant to the particular repository. Each repository's settings are an associative array containing the following keys:
 :;'supportedEntityTypes': list of entity types (strings) that the local wiki supports from the foreign repository
 :;'repoDatabase': value should be a symbolic database name,
-:;'baseUri': value should be base URI for concept URIs. It should contain scheme and authority part of the URI.
+:;'baseConceptUri': value should be base URI for concept URIs. It should contain scheme and authority part of the URI.
+:;'baseDataUri': value should be base URI for canonical data URIs. It should contain scheme and authority part of the URI.
 :;'prefixMapping': value should be a prefix mapping array, see also: docs/foreign-entity-ids.wiki in the DataModel component.
 
 === Expert Settings ===

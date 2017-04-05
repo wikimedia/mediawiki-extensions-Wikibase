@@ -354,7 +354,8 @@ class WikibaseRepo {
 	private static function getRepositoryDefinitionsFromSettings( SettingsArray $settings ) {
 		return new RepositoryDefinitions( [ '' => [
 			'database' => $settings->getSetting( 'changesDatabase' ),
-			'base-uri' => $settings->getSetting( 'conceptBaseUri' ),
+			'base-concept-uri' => $settings->getSetting( 'conceptBaseUri' ),
+			'base-data-uri' => $settings->getSetting( 'canonicalDataUriBase' ),
 			'prefix-mapping' => [ '' => '' ],
 			'entity-types' => array_keys( $settings->getSetting( 'entityNamespaces' ) ),
 		] ] );

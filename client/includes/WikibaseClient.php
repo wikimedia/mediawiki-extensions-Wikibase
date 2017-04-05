@@ -684,7 +684,8 @@ final class WikibaseClient {
 		// once repository settings are unified, see: T153767.
 		$definitions = [ '' => [
 			'database' => $settings->getSetting( 'repoDatabase' ),
-			'base-uri' => $settings->getSetting( 'repoConceptBaseUri' ),
+			'base-concept-uri' => $settings->getSetting( 'repoConceptBaseUri' ),
+			'base-data-uri' => $settings->getSetting( 'repoCanonicalDataUriBase' ),
 			'prefix-mapping' => [ '' => '' ],
 			'entity-types' => array_keys( $settings->getSetting( 'repoNamespaces' ) ),
 		] ];
@@ -692,7 +693,8 @@ final class WikibaseClient {
 		foreach ( $settings->getSetting( 'foreignRepositories' ) as $repository => $repositorySettings ) {
 			$definitions[$repository] = [
 				'database' => $repositorySettings['repoDatabase'],
-				'base-uri' => $repositorySettings['baseUri'],
+				'base-concept-uri' => $repositorySettings['baseConceptUri'],
+				'base-data-uri' => $repositorySettings['baseDataUri'],
 				'entity-types' => $repositorySettings['supportedEntityTypes'],
 				'prefix-mapping' => $repositorySettings['prefixMapping'],
 			];
