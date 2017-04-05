@@ -35,119 +35,121 @@ class PropertyRdfBuilder implements EntityRdfBuilder {
 
 	/**
 	 * Write predicates linking property entity to property predicates
-	 *
-	 * @param string $id The serialized property ID string
-	 * @param string $propertyRdfType Is the property data or object property?
+	 * @param string $localName
+	 * @param string $repositoryName
+	 * @param boolean $propertyRdfType Is the property data or object property?
 	 * @param string|null $normalizedPropertyRdfType Does the property have normalized predicates,
 	 *  and if so does the property normalize to data or objects?
 	 */
-	private function writePropertyPredicates( $id, $propertyRdfType, $normalizedPropertyRdfType ) {
+	private function writePropertyPredicates( $localName, $repositoryName, $propertyRdfType, $normalizedPropertyRdfType ) {
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'directClaim' )->is(
-			RdfVocabulary::NSP_DIRECT_CLAIM,
-			$id
+			$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_DIRECT_CLAIM],
+			$localName
 		);
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'claim' )->is(
-			RdfVocabulary::NSP_CLAIM,
-			$id
+			$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_CLAIM],
+			$localName
 		);
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementProperty' )->is( RdfVocabulary::NSP_CLAIM_STATEMENT, $id
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementProperty' )->is(
+			$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_CLAIM_STATEMENT],
+			$localName
 		);
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementValue' )->is(
-			RdfVocabulary::NSP_CLAIM_VALUE,
-			$id
+			$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_CLAIM_VALUE],
+			$localName
 		);
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'qualifier' )->is(
-			RdfVocabulary::NSP_QUALIFIER,
-			$id
+			$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_QUALIFIER],
+			$localName
 		);
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'qualifierValue' )->is(
-			RdfVocabulary::NSP_QUALIFIER_VALUE,
-			$id
+			$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_QUALIFIER_VALUE],
+			$localName
 		);
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'reference' )->is(
-			RdfVocabulary::NSP_REFERENCE,
-			$id
+			$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_REFERENCE],
+			$localName
 		);
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'referenceValue' )->is(
-			RdfVocabulary::NSP_REFERENCE_VALUE,
-			$id
+			$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_REFERENCE_VALUE],
+			$localName
 		);
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'novalue' )->is(
-			RdfVocabulary::NSP_NOVALUE,
-			$id
+			$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_NOVALUE],
+			$localName
 		);
 
 		if ( $normalizedPropertyRdfType !== self::NO_NORMALIZATION ) {
 			$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'directClaimNormalized' )->is(
-				RdfVocabulary::NSP_DIRECT_CLAIM_NORM,
-				$id
+				$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_DIRECT_CLAIM_NORM],
+				$localName
 			);
 			$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementValueNormalized' )->is(
-				RdfVocabulary::NSP_CLAIM_VALUE_NORM,
-				$id
+				$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_CLAIM_VALUE_NORM],
+				$localName
 			);
 			$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'qualifierValueNormalized' )->is(
-				RdfVocabulary::NSP_QUALIFIER_VALUE_NORM,
-				$id
+				$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_QUALIFIER_VALUE_NORM],
+				$localName
 			);
 			$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'referenceValueNormalized' )->is(
-				RdfVocabulary::NSP_REFERENCE_VALUE_NORM,
-				$id
+				$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_REFERENCE_VALUE_NORM],
+				$localName
 			);
 		}
 
 		// Always object properties
 		$this->writer->about(
-			RdfVocabulary::NSP_CLAIM,
-			$id
+			$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_CLAIM],
+			$localName
 		)->a( 'owl', 'ObjectProperty' );
 		$this->writer->about(
-			RdfVocabulary::NSP_CLAIM_VALUE,
-			$id
+			$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_CLAIM_VALUE],
+			$localName
 		)->a( 'owl', 'ObjectProperty' );
 		$this->writer->about(
-			RdfVocabulary::NSP_QUALIFIER_VALUE,
-			$id
+			$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_QUALIFIER_VALUE],
+			$localName
 		)->a( 'owl', 'ObjectProperty' );
 		$this->writer->about(
-			RdfVocabulary::NSP_REFERENCE_VALUE,
-			$id
+			$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_REFERENCE_VALUE],
+			$localName
 		)->a( 'owl', 'ObjectProperty' );
 
 		$this->writer->about(
-			RdfVocabulary::NSP_DIRECT_CLAIM,
-			$id
+			$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_DIRECT_CLAIM],
+			$localName
 		)->a( 'owl', $propertyRdfType );
 		$this->writer->about(
-			RdfVocabulary::NSP_CLAIM_STATEMENT,
-			$id
+			$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_CLAIM_STATEMENT],
+			$localName
 		)->a( 'owl', $propertyRdfType );
 		$this->writer->about(
-			RdfVocabulary::NSP_QUALIFIER,
-			$id
+			$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_QUALIFIER],
+			$localName
 		)->a( 'owl', $propertyRdfType );
 		$this->writer->about(
-			RdfVocabulary::NSP_REFERENCE,
-			$id
+			$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_REFERENCE],
+			$localName
 		)->a( 'owl', $propertyRdfType );
 
 		if ( $normalizedPropertyRdfType !== self::NO_NORMALIZATION ) {
 			$this->writer->about(
-				RdfVocabulary::NSP_CLAIM_VALUE_NORM,
-				$id
+				$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_CLAIM_VALUE_NORM],
+				$localName
 			)->a( 'owl', 'ObjectProperty' );
 			$this->writer->about(
-				RdfVocabulary::NSP_QUALIFIER_VALUE_NORM,
-				$id
+				$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_QUALIFIER_VALUE_NORM],
+				$localName
 			)->a( 'owl', 'ObjectProperty' );
 			$this->writer->about(
-				RdfVocabulary::NSP_REFERENCE_VALUE_NORM,
-				$id
+				$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_REFERENCE_VALUE_NORM],
+				$localName
 			)->a( 'owl', 'ObjectProperty' );
 
 			$this->writer->about(
-				RdfVocabulary::NSP_DIRECT_CLAIM_NORM,
-				$id
+				$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_DIRECT_CLAIM_NORM],
+				$localName
 			)->a( 'owl', $normalizedPropertyRdfType );
 		}
 	}
@@ -195,33 +197,44 @@ class PropertyRdfBuilder implements EntityRdfBuilder {
 
 	/**
 	 * Write definition for wdno:P123 class to use as novalue
-	 * @param string $id
+	 * @param string $localName
+	 * @param string $repositoryName
 	 */
-	private function writeNovalueClass( $id ) {
-		$this->writer->about( RdfVocabulary::NSP_NOVALUE, $id )->say( 'a' )->is( 'owl', 'Class' );
+	private function writeNovalueClass( $localName, $repositoryName ) {
+		$this->writer->about(
+			$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_NOVALUE],
+			$localName
+		)->a( 'owl', 'Class' );
 		$internalClass = $this->writer->blank();
 		$this->writer->say( 'owl', 'complementOf' )->is( '_', $internalClass );
 		$this->writer->about( '_', $internalClass )->say( 'a' )->is( 'owl', 'Restriction' );
-		$this->writer->say( 'owl', 'onProperty' )->is( RdfVocabulary::NSP_DIRECT_CLAIM, $id );
+		$this->writer->say( 'owl', 'onProperty' )->is(
+			$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_DIRECT_CLAIM],
+			$localName
+		);
 		$this->writer->say( 'owl', 'someValuesFrom' )->is( 'owl', 'Thing' );
 	}
 
 	private function addProperty( Property $property ) {
+		$id = $property->getId();
+		$propertyLName = $this->vocabulary->getEntityLName( $id );
+		$repositoryName = $this->vocabulary->getEntityRepositoryName( $id );
+
 		$this->writer->about(
-			RdfVocabulary::NS_ENTITY,
-			$this->vocabulary->getEntityLName( $property->getId() )
+			$this->vocabulary->entityNamespaceNames[$repositoryName],
+			$propertyLName
 		)->a( RdfVocabulary::NS_ONTOLOGY, $this->vocabulary->getEntityTypeName( $property->getType() ) );
 
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'propertyType' )
 			->is( $this->vocabulary->getDataTypeURI( $property ) );
 
-		$propertyId = $property->getId()->getSerialization();
 		$this->writePropertyPredicates(
-			$propertyId,
+			$propertyLName,
+			$repositoryName,
 			$this->getPropertyRdfType( $property ),
 			$this->getNormalizedPropertyRdfType( $property )
 		);
-		$this->writeNovalueClass( $propertyId );
+		$this->writeNovalueClass( $propertyLName, $repositoryName );
 	}
 
 	/**

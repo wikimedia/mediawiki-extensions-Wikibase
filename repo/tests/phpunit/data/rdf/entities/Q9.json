@@ -161,6 +161,31 @@
                                         "type": "string"
                                     }
                                 }
+                            ],
+                            "foreign:P11": [
+                                {
+                                    "snaktype": "value",
+                                    "property": "foreign:P11",
+                                    "datatype": "string",
+                                    "datavalue": {
+                                        "value": "simplestring",
+                                        "type": "string"
+                                    }
+                                }
+                            ],
+                            "foreign:P12": [
+                                {
+                                    "snaktype": "value",
+                                    "property": "foreign:P12",
+                                    "datatype": "wikibase-entityid",
+                                    "datavalue": {
+                                        "value": {
+                                            "entity-type": "item",
+                                            "id": "foreign:Q303"
+                                        },
+                                        "type": "wikibase-entityid"
+                                    }
+                                }
                             ]
                         },
                         "snaks-order": [
@@ -171,7 +196,9 @@
                             "P6",
                             "P7",
                             "P8",
-                            "P9"
+                            "P9",
+                            "foreign:P11",
+                            "foreign:P12"
                         ]
                     }
                 ]
@@ -334,6 +361,31 @@
                                         "type": "string"
                                     }
                                 }
+                            ],
+                            "foreign:P11": [
+                                {
+                                    "snaktype": "value",
+                                    "property": "foreign:P11",
+                                    "datatype": "string",
+                                    "datavalue": {
+                                        "value": "simplestring",
+                                        "type": "string"
+                                    }
+                                }
+                            ],
+                            "foreign:P12": [
+                                {
+                                    "snaktype": "value",
+                                    "property": "foreign:P12",
+                                    "datatype": "wikibase-entityid",
+                                    "datavalue": {
+                                        "value": {
+                                            "entity-type": "item",
+                                            "id": "foreign:Q303"
+                                        },
+                                        "type": "wikibase-entityid"
+                                    }
+                                }
                             ]
                         },
                         "snaks-order": [
@@ -344,7 +396,9 @@
                             "P6",
                             "P7",
                             "P8",
-                            "P9"
+                            "P9",
+                            "foreign:P11",
+                            "foreign:P12"
                         ]
                     }
                 ]

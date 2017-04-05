@@ -24,7 +24,7 @@ class RdfVocabularyTest extends PHPUnit_Framework_TestCase {
 
 	private function newInstance() {
 		return new RdfVocabulary(
-			'<BASE>',
+			[ '' => '<BASE>', 'foo' => '<BASE-foo>' ],
 			'<DATA>',
 			[ 'German' => 'de' ],
 			[ 'acme' => 'http://acme.test/vocab/ACME' ]
@@ -67,6 +67,18 @@ class RdfVocabularyTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame( 'P1', $actual );
 	}
 
+	public function testGetEntityLName_foreignEntity() {
+		$entityId = new PropertyId( 'foo:P1' );
+		$actual = $this->newInstance()->getEntityLName( $entityId );
+		$this->assertSame( 'P1', $actual );
+	}
+
+	public function testGetEntityLName_foreignEntityMultiplePrefixes() {
+		$entityId = new PropertyId( 'foo:bar:P1' );
+		$actual = $this->newInstance()->getEntityLName( $entityId );
+		$this->assertSame( 'bar.P1', $actual );
+	}
+
 	public function testGetEntityTypeName() {
 		$actual = $this->newInstance()->getEntityTypeName( 'type' );
 		$this->assertSame( 'Type', $actual );
@@ -78,6 +90,7 @@ class RdfVocabularyTest extends PHPUnit_Framework_TestCase {
 		$this->assertContainsOnly( 'string', $actual );
 		$this->assertContains( '<BASE>', $actual );
 		$this->assertContains( '<DATA>', $actual );
+		$this->assertContains( '<BASE-foo>', $actual );
 	}
 
 	public function testGetNamespaceURI() {
@@ -93,6 +106,52 @@ class RdfVocabularyTest extends PHPUnit_Framework_TestCase {
 
 		$this->setExpectedException( OutOfBoundsException::class );
 		$vocab->getNamespaceURI( 'NonExistingNamespaceForGetNamespaceUriTest' );
+	}
+
+	public function testEntityNamespaceNames() {
+		$vocabulary = $this->newInstance();
+
+		$this->assertEquals( [ '' => 'wd', 'foo' => 'wd-foo' ], $vocabulary->entityNamespaceNames );
+	}
+
+	public function testPropertyNamespaceNames() {
+		$vocabulary = $this->newInstance();
+
+		$this->assertEquals(
+			[
+				'' => [
+					'wdt' => 'wdt',
+					'p' => 'p',
+					'ps' => 'ps',
+					'psv' => 'psv',
+					'psn' => 'psn',
+					'pq' => 'pq',
+					'pqv' => 'pqv',
+					'pqn' => 'pqn',
+					'pr' => 'pr',
+					'prv' => 'prv',
+					'prn' => 'prn',
+					'wdno' => 'wdno',
+					'wdtn' => 'wdtn',
+				],
+				'foo' => [
+					'wdt' => 'wdt-foo',
+					'p' => 'p-foo',
+					'ps' => 'ps-foo',
+					'psv' => 'psv-foo',
+					'psn' => 'psn-foo',
+					'pq' => 'pq-foo',
+					'pqv' => 'pqv-foo',
+					'pqn' => 'pqn-foo',
+					'pr' => 'pr-foo',
+					'prv' => 'prv-foo',
+					'prn' => 'prn-foo',
+					'wdno' => 'wdno-foo',
+					'wdtn' => 'wdtn-foo',
+				],
+			],
+			$vocabulary->propertyNamespaceNames
+		);
 	}
 
 	public function testGetOntologyURI() {

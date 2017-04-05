@@ -1037,7 +1037,7 @@ class WikibaseRepo {
 			$entityDataTitle = Title::makeTitle( NS_SPECIAL, 'EntityData' );
 
 			$this->rdfVocabulary = new RdfVocabulary(
-				$this->getVocabularyBaseUri(),
+				$this->repositoryDefinitions->getConceptBaseUris(),
 				$entityDataTitle->getCanonicalURL() . '/',
 				$languageCodes,
 				$this->dataTypeDefinitions->getRdfTypeUris(),
