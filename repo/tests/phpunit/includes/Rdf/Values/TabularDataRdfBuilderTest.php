@@ -33,7 +33,7 @@ class TabularDataRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testAddValue() {
-		$vocab = new RdfVocabulary( 'http://test/item/', 'http://test/data/' );
+		$vocab = new RdfVocabulary( [ '' => 'http://test/item/' ], 'http://test/data/' );
 		$builder = new TabularDataRdfBuilder( $vocab );
 
 		$writer = new NTriplesRdfWriter();
