@@ -10,4 +10,6 @@
 <http://acme.test/statement/TEST-Qualifiers> <http://acme.test/prop/qualifier/P8> "-0199-01-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
 <http://acme.test/statement/TEST-Qualifiers> <http://acme.test/prop/qualifier/P9> <http://url.acme.test/> .
 <http://acme.test/statement/TEST-Qualifiers> <http://acme.test/prop/qualifier/P9> <http://url.acme2.test/> .
+<http://acme.test/statement/TEST-Qualifiers> <http://foreign.test/prop/qualifier/P11> "simplestring" .
+<http://acme.test/statement/TEST-Qualifiers> <http://foreign.test/prop/qualifier/P12> <http://foreign.test/Q1234> .
 <http://acme.test/statement/TEST-Qualifiers> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://acme.test/prop/novalue/P3> .
