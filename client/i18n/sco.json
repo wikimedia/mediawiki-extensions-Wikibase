@@ -70,7 +70,7 @@
 	"wikibase-pageswithbadges-legend": "Leet o pages wi a gien badge",
 	"wikibase-pageswithbadges-badge": "Badge:",
 	"wikibase-pageswithbadges-submit": "Shaw pages",
-	"wikibase-pageinfo-entity-id": "{{WBRENAME}} eetem ID",
+	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} eetem ID",
 	"wikibase-pageinfo-entity-id-none": "Nane",
 	"wikibase-property-render-error": "Failed tae render propertie $1: $2",
 	"wikibase-otherprojects": "In ither projects",
