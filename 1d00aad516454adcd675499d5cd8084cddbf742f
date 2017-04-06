@@ -1,0 +1,293 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_0282eecd",
+        "filename": "repo/includes/Rdf/FullStatementRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-06T14:05:04Z",
+      "side": 1,
+      "message": "long line; also, perhaps it makes sense to push that lookup into addSnak().",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_02c8ae24",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-06T14:05:04Z",
+      "side": 1,
+      "message": "long line...",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_c2e8867a",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-06T14:05:04Z",
+      "side": 1,
+      "message": "Perhaps do this only once.\nKeep in mind that this code is a performance hotspot. We are calling it millions of times when generating a dump (well ok, maybe not this method for novalue snaks). \n\nAnyway - performance trumps elegance here.",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_02ef4e83",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-06T14:05:04Z",
+      "side": 1,
+      "message": "-\u003ea( \u0027owl\u0027, \u0027Class\u0027 );",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_22f84a46",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-06T14:05:04Z",
+      "side": 1,
+      "message": "long line",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_a2b1ba8f",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-06T14:05:04Z",
+      "side": 1,
+      "message": "long line",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_a2477a7b",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-06T14:05:04Z",
+      "side": 1,
+      "message": "good point... yes, i think that should be local repo only.",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_8226fec7",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-06T14:05:04Z",
+      "side": 1,
+      "message": "Is this needed/used for foreign entities?",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_853a88bf",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-06T14:05:04Z",
+      "side": 1,
+      "message": "This is a performance hotspot; it will be called millions of times when we generate a dump, so string manipulation should be avoided, and even method calls should be considered not entirely free of cost. \n\nI\u0027d prefer a lookup map, more or less what getConceptNamespaces() does, but with keys. Then this method would not be needed.",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_05751892",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-06T14:05:04Z",
+      "side": 1,
+      "message": "it may be worth to first check if the string contains \u0027:\u0027 for  performance reasons.",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_a569c4be",
+        "filename": "repo/includes/Rdf/SiteLinksRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-06T14:05:04Z",
+      "side": 1,
+      "message": "long line; also, I don\u0027t think we need this for foreign entities. We\u0027d still need to catch that case somehow.",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_e59eecbc",
+        "filename": "repo/includes/Rdf/SiteLinksRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-06T14:05:04Z",
+      "side": 1,
+      "message": "long line.",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_05d99883",
+        "filename": "repo/includes/Rdf/TermsRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-06T14:05:04Z",
+      "side": 1,
+      "message": "I wonder how much slower it is to always pass the EntityId, and re-calculate the namespace and lname. It\u0027s nicer of course, but performance is an issue here. It may be better to pass namespace and lname as separate string params.",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_a5cd44be",
+        "filename": "repo/includes/Rdf/TermsRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-06T14:05:04Z",
+      "side": 1,
+      "message": "long line",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_65c89cab",
+        "filename": "repo/includes/Rdf/TruthyStatementRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-06T14:05:04Z",
+      "side": 1,
+      "message": "long line",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_85c5a892",
+        "filename": "repo/includes/Rdf/Values/EntityIdRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-06T14:05:04Z",
+      "side": 1,
+      "message": "long line",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_a53c648f",
+        "filename": "repo/tests/phpunit/includes/Rdf/ValueSnakRdfBuilderFactoryTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-06T14:05:04Z",
+      "side": 1,
+      "message": "please break line for readability",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
