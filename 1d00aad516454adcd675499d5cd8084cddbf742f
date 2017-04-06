@@ -138,6 +138,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_f048e868",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-06T15:18:49Z",
+      "side": 1,
+      "message": "Looks like it is not used. I am taking this away. That also means that I6754c2eeb8a5c30cdd8b5b58b9a60f3c37f379b9 is actually needed.\nI\u0027ll rebase this patch and abandon the other one.",
+      "parentUuid": "4e506ba4_8226fec7",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_853a88bf",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 6
