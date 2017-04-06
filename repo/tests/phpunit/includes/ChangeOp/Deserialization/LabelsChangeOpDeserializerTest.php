@@ -18,7 +18,7 @@ use Wikibase\StringNormalizer;
  *
  * @license GPL-2.0+
  */
-class LabelsChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase implements ChangeOpDeserializerTest {
+class LabelsChangeOpDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 	use LabelsChangeOpDeserializationTester;
 

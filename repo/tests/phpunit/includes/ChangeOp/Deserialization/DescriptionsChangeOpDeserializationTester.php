@@ -2,12 +2,14 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 
+use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Term\DescriptionsProvider;
+use Wikibase\Repo\ChangeOp\ChangeOpDeserializer;
 use Wikibase\Summary;
 
 /**
  * Set of test methods that can be reused in DescriptionsChangeOpDeserializerTest and tests for
  * ChangeOpDeserializers of entities that have descriptions.
- * Using this trait requires classes to implement getEntity and getChangeOpDeserializer methods.
  *
  * @license GPL-2.0+
  */
@@ -63,5 +65,15 @@ trait DescriptionsChangeOpDeserializationTester {
 
 		return $entity;
 	}
+
+	/**
+	 * @return DescriptionsProvider|EntityDocument
+	 */
+	protected abstract function getEntity();
+
+	/**
+	 * @return ChangeOpDeserializer
+	 */
+	protected abstract function getChangeOpDeserializer();
 
 }

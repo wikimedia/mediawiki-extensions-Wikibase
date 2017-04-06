@@ -10,13 +10,14 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\Statement\StatementListProvider;
+use Wikibase\Repo\ChangeOp\ChangeOpDeserializer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**
  * Set of test methods that can be reused in ClaimsChangeOpDeserializerTest and tests for
  * ChangeOpDeserializers of entities that have claims.
- * Using this trait requires classes to implement getEntity and getChangeOpDeserializer methods.
  *
  * @license GPL-2.0+
  */
@@ -122,5 +123,15 @@ trait ClaimsChangeOpDeserializationTester {
 	private function getStatementSerializer() {
 		return WikibaseRepo::getDefaultInstance()->getStatementSerializer();
 	}
+
+	/**
+	 * @return StatementListProvider|EntityDocument
+	 */
+	protected abstract function getEntity();
+
+	/**
+	 * @return ChangeOpDeserializer
+	 */
+	protected abstract function getChangeOpDeserializer();
 
 }

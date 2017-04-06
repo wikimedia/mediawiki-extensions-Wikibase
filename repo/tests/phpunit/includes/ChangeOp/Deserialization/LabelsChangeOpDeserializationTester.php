@@ -2,12 +2,14 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 
+use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Term\LabelsProvider;
+use Wikibase\Repo\ChangeOp\ChangeOpDeserializer;
 use Wikibase\Summary;
 
 /**
  * Set of test methods that can be reused in LabelsChangeOpDeserializerTest and tests for
  * ChangeOpDeserializers of entities that have labels.
- * Using this trait requires classes to implement getEntity and getChangeOpDeserializer methods.
  *
  * @license GPL-2.0+
  */
@@ -61,5 +63,15 @@ trait LabelsChangeOpDeserializationTester {
 
 		return $entity;
 	}
+
+	/**
+	 * @return LabelsProvider|EntityDocument
+	 */
+	protected abstract function getEntity();
+
+	/**
+	 * @return ChangeOpDeserializer
+	 */
+	protected abstract function getChangeOpDeserializer();
 
 }
