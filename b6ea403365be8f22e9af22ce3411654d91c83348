@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_257b74ed",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-04-06T14:42:52Z",
+      "side": 1,
+      "message": "Changed, but didn\u0027t move this to the dumper in order to keep the logic here where it\u0027s testable in an easy manner.",
+      "parentUuid": "4e506ba4_a2abfa6c",
+      "revId": "b6ea403365be8f22e9af22ce3411654d91c83348",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_02b74ed4",
         "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2017-04-06T13:27:20Z",
       "side": 1,
       "message": "PRODUCE_NORMALIZED_VALUES is pointless here, it only applies to full values.\n\nPRODUCE_PROPERTIES may be useful for an item-only dump.",
+      "revId": "b6ea403365be8f22e9af22ce3411654d91c83348",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_0569981d",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-04-06T14:42:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_02b74ed4",
       "revId": "b6ea403365be8f22e9af22ce3411654d91c83348",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_457800ee",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-04-06T14:42:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_62c65250",
+      "revId": "b6ea403365be8f22e9af22ce3411654d91c83348",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_82c35e3d",
         "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2017-04-06T13:27:20Z",
       "side": 1,
       "message": "That\u0027s a pretty harsh failure mode for user input.",
+      "revId": "b6ea403365be8f22e9af22ce3411654d91c83348",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_65589c8d",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-04-06T14:42:52Z",
+      "side": 1,
+      "message": "Indeed, but that\u0027s for another change",
+      "parentUuid": "4e506ba4_82c35e3d",
       "revId": "b6ea403365be8f22e9af22ce3411654d91c83348",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -105,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_8555a854",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-04-06T14:42:52Z",
+      "side": 1,
+      "message": "I was wrong here, changed the comment a bit.",
+      "parentUuid": "4e506ba4_25c29489",
+      "revId": "b6ea403365be8f22e9af22ce3411654d91c83348",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_c2e726de",
         "filename": "repo/tests/phpunit/data/rdf/RdfDumpGenerator/full-empty.nt",
         "patchSetId": 2
@@ -122,6 +212,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_a5cc6439",
+        "filename": "repo/tests/phpunit/data/rdf/RdfDumpGenerator/full-empty.nt",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-04-06T14:42:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_c2e726de",
+      "revId": "b6ea403365be8f22e9af22ce3411654d91c83348",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_e2ffc263",
         "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
         "patchSetId": 2
@@ -133,6 +241,24 @@
       "writtenOn": "2017-04-06T13:27:20Z",
       "side": 1,
       "message": "just include the -dump suffix in the test case data. makes it easier to see what is going on.",
+      "revId": "b6ea403365be8f22e9af22ce3411654d91c83348",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_25f85446",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-04-06T14:42:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_e2ffc263",
       "revId": "b6ea403365be8f22e9af22ce3411654d91c83348",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
