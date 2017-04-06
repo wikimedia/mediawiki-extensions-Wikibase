@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_a2abfa6c",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-06T13:27:20Z",
+      "side": 1,
+      "message": "getFlavorFlags would be more descriptive. Also, I\u0027d say this  belongs in the maintenance script; RdfDumpGenerator should perhaps not know about the names used in the CLI.",
+      "revId": "b6ea403365be8f22e9af22ce3411654d91c83348",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_02b74ed4",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-06T13:27:20Z",
+      "side": 1,
+      "message": "PRODUCE_NORMALIZED_VALUES is pointless here, it only applies to full values.\n\nPRODUCE_PROPERTIES may be useful for an item-only dump.",
+      "revId": "b6ea403365be8f22e9af22ce3411654d91c83348",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_62c65250",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-06T13:27:20Z",
+      "side": 1,
+      "message": "That\u0027s a pretty harsh failure mode for user input.",
+      "revId": "b6ea403365be8f22e9af22ce3411654d91c83348",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_82c35e3d",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-06T13:27:20Z",
+      "side": 1,
+      "message": "That\u0027s a pretty harsh failure mode for user input.",
+      "revId": "b6ea403365be8f22e9af22ce3411654d91c83348",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_22c04a2f",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-06T13:27:20Z",
+      "side": 1,
+      "message": "PRODUCE_VERSION_INFO is used for per-entity information. It also includes the page modification date I think. It\u0027s conceptually similar, but not the same thing.",
+      "revId": "b6ea403365be8f22e9af22ce3411654d91c83348",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_c2e726de",
+        "filename": "repo/tests/phpunit/data/rdf/RdfDumpGenerator/full-empty.nt",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-06T13:27:20Z",
+      "side": 1,
+      "message": "full-empty is a very confusing name ;)",
+      "revId": "b6ea403365be8f22e9af22ce3411654d91c83348",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_e2ffc263",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-06T13:27:20Z",
+      "side": 1,
+      "message": "just include the -dump suffix in the test case data. makes it easier to see what is going on.",
+      "revId": "b6ea403365be8f22e9af22ce3411654d91c83348",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
