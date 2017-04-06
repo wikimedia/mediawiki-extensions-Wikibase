@@ -87,6 +87,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_25c29489",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-04-06T14:01:33Z",
+      "side": 1,
+      "message": "It doesn\u0027t (at least currently), see line 312 for that",
+      "parentUuid": "4e506ba4_22c04a2f",
+      "revId": "b6ea403365be8f22e9af22ce3411654d91c83348",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_c2e726de",
         "filename": "repo/tests/phpunit/data/rdf/RdfDumpGenerator/full-empty.nt",
         "patchSetId": 2
