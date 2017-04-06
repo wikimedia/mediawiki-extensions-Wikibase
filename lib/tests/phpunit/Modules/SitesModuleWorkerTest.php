@@ -67,7 +67,7 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 
 		$result = $worker->getScript( $languageCode );
 
-		$this->assertEquals( 'mw.config.set({"wbSiteDetails":' . $expected . '});', $result );
+		$this->assertContains( '.config.set({"wbSiteDetails":' . $expected . '});', $result );
 	}
 
 	public function getScriptProvider() {
