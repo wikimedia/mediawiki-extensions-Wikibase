@@ -474,7 +474,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	}
 
 	/**
-	 * Create header structure for the dump
+	 * Create header structure for the dump (this makes RdfProducer::PRODUCE_VERSION_INFO redundant)
 	 *
 	 * @param int $timestamp Timestamp (for testing)
 	 */
