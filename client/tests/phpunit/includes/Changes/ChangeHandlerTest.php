@@ -9,7 +9,7 @@ use Title;
 use Wikibase\Change;
 use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Changes\ChangeHandler;
-use Wikibase\Client\Changes\ChangeListTransformer;
+use Wikibase\Client\Changes\ChangeRunCoalescer;
 use Wikibase\Client\Changes\PageUpdater;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Usage\EntityUsage;
@@ -50,10 +50,12 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @return ChangeListTransformer
+	 * @return ChangeRunCoalescer
 	 */
-	private function getChangeListTransformer() {
-		$transformer = $this->getMock( ChangeListTransformer::class );
+	private function getChangeRunCoalescer() {
+		$transformer = $this->getMockBuilder( ChangeRunCoalescer::class )
+			->disableOriginalConstructor()
+			->getMock();
 
 		$transformer->expects( $this->any() )
 			->method( 'transformChangeList' )
@@ -70,13 +72,12 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 		$usageLookup = $this->getUsageLookup( $siteLinkLookup );
 		$titleFactory = $this->getTitleFactory( $pageNamesPerItemId );
 		$affectedPagesFinder = $this->getAffectedPagesFinder( $usageLookup, $titleFactory );
-		$changeListTransformer = $this->getChangeListTransformer();
 
 		$handler = new ChangeHandler(
 			$affectedPagesFinder,
 			$titleFactory,
 			$updater ?: new MockPageUpdater(),
-			$changeListTransformer,
+			$this->getChangeRunCoalescer(),
 			$this->getMock( SiteLookup::class ),
 			'repowiki',
 			true
