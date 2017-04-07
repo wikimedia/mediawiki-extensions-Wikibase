@@ -1,0 +1,3 @@
+<http://acme.test/Q2> <http://www.w3.org/2004/02/skos/core#altLabel> "Berlin"@ru .
+<http://acme.test/Q2> <http://www.w3.org/2004/02/skos/core#altLabel> "Berlin, Germany"@en .
+<http://acme.test/Q2> <http://www.w3.org/2004/02/skos/core#altLabel> "Land Berlin"@en .
