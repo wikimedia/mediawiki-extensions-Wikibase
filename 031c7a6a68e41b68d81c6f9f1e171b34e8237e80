@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_b719ef29",
+        "filename": "repo/sql/AddTermsFullEntityId.sql",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-07T15:43:35Z",
+      "side": 1,
+      "message": "Intuitively, these indexes don\u0027t match our query patterns very well. But they match exactly what we have for the numeric IDs, which was vetted using investigation on the live system. So I guess this should be fine.",
+      "revId": "031c7a6a68e41b68d81c6f9f1e171b34e8237e80",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
