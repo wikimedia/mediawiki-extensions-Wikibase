@@ -380,10 +380,10 @@ final class ClientHooks {
 	 * Adds the Entity usage data in ActionEdit
 	 *
 	 * @param EditPage $editor
-	 * @param string[] $checkboxes
+	 * @param OutputPage $output
 	 * @param int $tabindex
 	 */
-	public static function onEditAction( EditPage &$editor, array &$checkboxes, &$tabindex ) {
+	public static function onEditAction( EditPage $editor, OutputPage $output, &$tabindex ) {
 		if ( $editor->preview || $editor->section ) {
 			// Shorten out, like template transclusion in core
 			return;
@@ -394,8 +394,7 @@ final class ClientHooks {
 		);
 		$editActionHookHandler->handle( $editor );
 
-		$out = $editor->getContext()->getOutput();
-		$out->addModules( 'wikibase.client.action.edit.collapsibleFooter' );
+		$output->addModules( 'wikibase.client.action.edit.collapsibleFooter' );
 	}
 
 	/**

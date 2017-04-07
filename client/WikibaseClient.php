@@ -120,7 +120,7 @@ call_user_func( function() {
 	$wgHooks['BeforePageDisplay'][] = '\Wikibase\ClientHooks::onBeforePageDisplayAddJsConfig';
 	$wgHooks['ScribuntoExternalLibraries'][] = '\Wikibase\ClientHooks::onScribuntoExternalLibraries';
 	$wgHooks['InfoAction'][] = '\Wikibase\ClientHooks::onInfoAction';
-	$wgHooks['EditPageBeforeEditChecks'][] = '\Wikibase\ClientHooks::onEditAction';
+	$wgHooks['EditPage::showStandardInputs:options'][] = '\Wikibase\ClientHooks::onEditAction';
 	$wgHooks['BaseTemplateAfterPortlet'][] = '\Wikibase\ClientHooks::onBaseTemplateAfterPortlet';
 	$wgHooks['GetBetaFeaturePreferences'][] = '\Wikibase\ClientHooks::onGetBetaFeaturePreferences';
 	$wgHooks['ArticleDeleteAfterSuccess'][] = '\Wikibase\ClientHooks::onArticleDeleteAfterSuccess';
