@@ -386,7 +386,7 @@ class ChangeDispatcher {
 			$entitySet[$idString] = $id;
 		}
 
-		$this->trace( "Checking sitelinks to $siteID for " . count( $entitySet ) . " entities." );
+		$this->trace( "Checking subscription of " . count( $entitySet ) . " entities on $siteID." );
 
 		$subscribedEntities = $this->subscriptionLookup->getSubscriptions( $siteID, $entitySet );
 		$subscribedEntities = $this->reIndexEntityIds( $subscribedEntities );
@@ -406,7 +406,7 @@ class ChangeDispatcher {
 			$idString = $change->getEntityId()->getSerialization();
 
 			// The change is relevant if it alters any sitelinks referring to $siteID,
-			// or the item currently links to $siteID.
+			// or the Wiki is subscribed to the Entity changed.
 			if ( isset( $subscribedEntities[$idString] )
 				|| $this->isRelevantChange( $change, $siteID )
 			) {
@@ -419,7 +419,7 @@ class ChangeDispatcher {
 			}
 		}
 
-		$this->trace( "Found " . count( $filteredChanges ) . " changes for items with relevant sitelinks." );
+		$this->trace( "Found $numberOfChangesFound relevant Entity changes." );
 
 		return array( $filteredChanges, $lastIdSeen );
 	}
