@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_5959c45c",
+        "filename": "repo/includes/Rdf/FullStatementRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-07T13:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_0282eecd",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_02c8ae24",
         "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2017-04-06T14:05:04Z",
       "side": 1,
       "message": "long line...",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_9c33baf3",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-07T13:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_02c8ae24",
       "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_3c470652",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-07T13:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_c2e8867a",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_02ef4e83",
         "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
         "patchSetId": 6
@@ -64,6 +118,24 @@
       "writtenOn": "2017-04-06T14:05:04Z",
       "side": 1,
       "message": "-\u003ea( \u0027owl\u0027, \u0027Class\u0027 );",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_5c2d328a",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-07T13:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_02ef4e83",
       "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_b93ec8d5",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-07T13:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_22f84a46",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_a2b1ba8f",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 6
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_dc586200",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-07T13:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_a2b1ba8f",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_a2477a7b",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 6
@@ -115,6 +223,24 @@
       "writtenOn": "2017-04-06T14:05:04Z",
       "side": 1,
       "message": "good point... yes, i think that should be local repo only.",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_3cf5c6b5",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-07T13:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_a2477a7b",
       "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -173,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_fcc2fe05",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-07T13:45:04Z",
+      "side": 1,
+      "message": "I\u0027m not 100% if this was the way you had in mind, but I\u0027ve change the code to have a lookup map, and this method became not needed.",
+      "parentUuid": "4e506ba4_853a88bf",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_05751892",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 6
@@ -184,6 +328,24 @@
       "writtenOn": "2017-04-06T14:05:04Z",
       "side": 1,
       "message": "it may be worth to first check if the string contains \u0027:\u0027 for  performance reasons.",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_bcaeb693",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-07T13:45:04Z",
+      "side": 1,
+      "message": "Done. But then: doesn\u0027t having a check, and then possibly doing replacement mean that in cases needing replacement the string will be \"scanned\" twice? I admit I have no idea how PHP does it internally but at least this what I\u0027d expect if common sense applied.",
+      "parentUuid": "4e506ba4_05751892",
       "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -207,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_dc094231",
+        "filename": "repo/includes/Rdf/SiteLinksRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-07T13:45:04Z",
+      "side": 1,
+      "message": "Long line broken down. And actually you might be right about this not really being needed for foreign entities. At least it seems to only sitelinks of local items are going to be exported. So I guess I should simply take changes in this class back?",
+      "parentUuid": "4e506ba4_a569c4be",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_e59eecbc",
         "filename": "repo/includes/Rdf/SiteLinksRdfBuilder.php",
         "patchSetId": 6
@@ -218,6 +398,24 @@
       "writtenOn": "2017-04-06T14:05:04Z",
       "side": 1,
       "message": "long line.",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_3c19467f",
+        "filename": "repo/includes/Rdf/SiteLinksRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-07T13:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_e59eecbc",
       "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -241,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_bc5316e2",
+        "filename": "repo/includes/Rdf/TermsRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-07T13:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_05d99883",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_a5cd44be",
         "filename": "repo/includes/Rdf/TermsRdfBuilder.php",
         "patchSetId": 6
@@ -252,6 +468,24 @@
       "writtenOn": "2017-04-06T14:05:04Z",
       "side": 1,
       "message": "long line",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_1c756a92",
+        "filename": "repo/includes/Rdf/TermsRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-07T13:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_a5cd44be",
       "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -275,6 +509,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_fc219e9e",
+        "filename": "repo/includes/Rdf/TruthyStatementRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-07T13:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_65c89cab",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_85c5a892",
         "filename": "repo/includes/Rdf/Values/EntityIdRdfBuilder.php",
         "patchSetId": 6
@@ -292,6 +544,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_1c27aab2",
+        "filename": "repo/includes/Rdf/Values/EntityIdRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-07T13:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_85c5a892",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_a53c648f",
         "filename": "repo/tests/phpunit/includes/Rdf/ValueSnakRdfBuilderFactoryTest.php",
         "patchSetId": 6
@@ -303,6 +573,24 @@
       "writtenOn": "2017-04-06T14:05:04Z",
       "side": 1,
       "message": "please break line for readability",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_bc1b1673",
+        "filename": "repo/tests/phpunit/includes/Rdf/ValueSnakRdfBuilderFactoryTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-07T13:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_a53c648f",
       "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
