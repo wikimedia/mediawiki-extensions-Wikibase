@@ -225,4 +225,22 @@
 
 	} );
 
+	QUnit.test( '$element.applyTemplate() adds classes from the template', function ( assert ) {
+		assert.ok( false, "TODO Implement" );
+	} );
+
+	QUnit.test(
+		'$element.applyTemplate() copies all attributes except "class" from the template',
+		function ( assert ) {
+			assert.ok( false, "TODO Implement" );
+		}
+	);
+
+	QUnit.test(
+		'$element.applyTemplate() replaces contents from the template',
+		function ( assert ) {
+			assert.ok( false, "TODO Implement" );
+		}
+	);
+
 }( mediaWiki, jQuery, QUnit ) );
