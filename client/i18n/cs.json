@@ -48,6 +48,8 @@
 	"wikibase-rc-show-wikidata-pref": "Zobrazit změny {{grammar:2sg|{{WBREPONAME}}}} v posledních změnách",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Editace {{grammar:2sg|{{WBREPONAME}}}}",
+	"wikibase-rcfilters-hide-wikibase-label": "Editace {{GRAMMAR:2sg|{{WBREPONAME}}}}",
+	"wikibase-rcfilters-hide-wikibase-description": "Editace pocházející z {{GRAMMAR:2sg|{{WBREPONAME}}}}.",
 	"wikibase-replicationnote": "Vezměte prosím na vědomí, že než se změny projeví na všech wiki, může to trvat pár minut.",
 	"wikibase-watchlist-show-changes-pref": "Zobrazit změny {{grammar:2sg|{{WBREPONAME}}}} ve sledovaných stránkách",
 	"wikibase-error-deserialize-error": "Nepodařilo se deserializovat data.",

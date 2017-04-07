@@ -1,13 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kandar"
+			"Kandar",
+			"Uchup19"
 		]
 	},
 	"wikibase-edit": "édit",
 	"wikibase-add": "tambah",
+	"wikibase-label-empty": "Taya labélan",
+	"wikibase-description-empty": "Taya déskripsian",
 	"wikibase-sitelinks-special": "Loka lianna",
-	"wikibase-aliases-empty": "Alias teu ditangtukeun",
 	"wikibase-statementview-rank-normal": "Urutan normal",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|rujukan}}",
 	"wikibase-setsitelink-submit": "Atur tutumbu loka",
