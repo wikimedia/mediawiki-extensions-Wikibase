@@ -10,7 +10,7 @@
 ( function( mw, $, QUnit ) {
 	'use strict';
 
-	QUnit.module( 'templates', QUnit.newMwEnvironment() );
+	QUnit.module( 'wikibase.templates', QUnit.newMwEnvironment() );
 
 	QUnit.test( 'mw.wbTemplate()', function( assert ) {
 		assert.expect( 74 );
@@ -224,5 +224,42 @@
 		} );
 
 	} );
+
+	var templateName = 'wikibase-some-test-template';
+
+	QUnit.test( '$element.applyTemplate() adds classes from the template', function ( assert ) {
+		mw.wbTemplates.store.set( templateName, '<div class="class-from-template"></div>' );
+
+		var $div = $( '<div class="my-class"/>' );
+		$div.applyTemplate( templateName );
+
+		assert.assertTrue( $div.hasClass( 'my-class' ) );
+		assert.assertTrue( $div.hasClass( 'class-from-template' ) );
+	} );
+
+	QUnit.test(
+		'$element.applyTemplate() copies all attributes (except "class") from the template',
+		function ( assert ) {
+			mw.wbTemplates.store.set( templateName, '<div attr1="val1" attr2="val2"></div>' );
+
+			var $div = $( '<div/>' );
+			$div.applyTemplate( templateName );
+
+			assert.equal( $div.attr( 'attr1' ), 'val1' );
+			assert.equal( $div.attr( 'attr2' ), 'val2' );
+		}
+	);
+
+	QUnit.test(
+		'$element.applyTemplate() replaces contents from the template',
+		function ( assert ) {
+			mw.wbTemplates.store.set( templateName, '<div>template contents</div>' );
+
+			var $div = $( '<div>some contents</div>' );
+			$div.applyTemplate( templateName );
+
+			assert.equal( $div.html(), 'template contents' );
+		}
+	);
 
 }( mediaWiki, jQuery, QUnit ) );
