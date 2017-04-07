@@ -310,12 +310,18 @@
 		// Copy template's root node children and classes to given root:
 		this.addClass( $template.prop( 'class' ) );
 
-		// Copy dir attribute if set:
-		if ( $template.prop( 'dir' ) !== '' ) {
-			this.prop( 'dir', $template.prop( 'dir' ) );
+		var templateAttrs = $template.getAttrs();
+		for (var attrName in templateAttrs) {
+			if (templateAttrs.hasOwnProperty(attrName)) {
+				if (attrName === 'class') {
+					continue;
+				}
+
+				this.attr( attrName, templateAttrs[attrName] );
+			}
 		}
 
-		this.empty().append( $template.children() );
+		this.html( $template.html() );
 
 		return this;
 	};

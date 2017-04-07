@@ -62,6 +62,9 @@ return call_user_func( function() {
 		'wikibase.templates' => $moduleTemplate + array(
 			'class' => TemplateModule::class,
 			'scripts' => 'templates.js',
+			'dependencies' => [
+				'jquery.getAttrs'
+			]
 		),
 
 		'wikibase.ValueViewBuilder' => $moduleTemplate + array(
