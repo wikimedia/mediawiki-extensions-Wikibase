@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_fce99e7f",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-07T13:45:04Z",
+      "side": 1,
+      "message": "I guess this and $claimToValueNormalized should be getting entries with \"-repo\" suffix for each non-local repo, shouldn\u0027t they? But then they probably shouldn\u0027t be static.",
+      "revId": "75a1d6ee0487b61fc1b2a156bb614ac3f0d82a95",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
