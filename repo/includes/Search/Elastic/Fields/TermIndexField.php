@@ -1,6 +1,7 @@
 <?php
 namespace Wikibase\Repo\Search\Elastic\Fields;
 
+use CirrusSearch;
 use SearchEngine;
 use SearchIndexField;
 
@@ -59,10 +60,10 @@ abstract class TermIndexField extends \SearchIndexFieldDefinition implements Wik
 	 * Produce specific field mapping
 	 * @param SearchEngine $engine
 	 * @param string $name
-	 * @return \SearchIndexField
+	 * @return SearchIndexField
 	 */
 	public function getMappingField( SearchEngine $engine, $name ) {
-		if ( !( $engine instanceof \CirrusSearch ) ) {
+		if ( !( $engine instanceof CirrusSearch ) ) {
 			// For now only Cirrus/Elastic is supported
 			return null;
 		}

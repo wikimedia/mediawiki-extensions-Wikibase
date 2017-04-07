@@ -1,6 +1,7 @@
 <?php
 namespace Wikibase\Repo\Search\Elastic\Fields;
 
+use CirrusSearch;
 use SearchEngine;
 use Wikibase\DataModel\Entity\EntityDocument;
 
@@ -20,7 +21,7 @@ class AllLabelsField extends TermIndexField {
 	public function getMapping( SearchEngine $engine ) {
 		// Since we need a specially tuned field, we can not use
 		// standard search engine types.
-		if ( !( $engine instanceof \CirrusSearch ) ) {
+		if ( !( $engine instanceof CirrusSearch ) ) {
 			// For now only Cirrus/Elastic is supported
 			return [];
 		}

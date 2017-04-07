@@ -2,7 +2,9 @@
 
 namespace Wikibase\Repo\Tests\Search\Elastic\Fields;
 
+use CirrusSearch;
 use PHPUnit_Framework_TestCase;
+use SearchEngine;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -43,9 +45,13 @@ class AllLabelsFieldTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetMapping() {
+		if ( !class_exists( CirrusSearch::class ) ) {
+			$this->markTestSkipped( 'CirrusSearch needed.' );
+		}
+
 		$labels = new AllLabelsField();
 
-		$searchEngine = $this->getMockBuilder( 'CirrusSearch' )->getMock();
+		$searchEngine = $this->getMockBuilder( CirrusSearch::class )->getMock();
 		$searchEngine->expects( $this->never() )->method( 'makeSearchFieldMapping' );
 
 		$mapping = $labels->getMapping( $searchEngine );
@@ -53,6 +59,15 @@ class AllLabelsFieldTest extends PHPUnit_Framework_TestCase {
 		$this->assertCount( 2, $mapping['fields'] );
 		$this->assertEquals( 'text', $mapping['type'] );
 		$this->assertEquals( 'false', $mapping['index'] );
+	}
+
+	public function testGetMappingOtherSearchEngine() {
+		$labels = new AllLabelsField();
+
+		$searchEngine = $this->getMockBuilder( SearchEngine::class )->getMock();
+		$searchEngine->expects( $this->never() )->method( 'makeSearchFieldMapping' );
+
+		$this->assertSame( [], $labels->getMapping( $searchEngine ) );
 	}
 
 }

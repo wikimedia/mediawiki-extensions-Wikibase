@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Search\Elastic\Fields;
 
+use CirrusSearch;
 use PHPUnit_Framework_TestCase;
 use Wikibase\Repo\Search\Elastic\Fields\AllLabelsField;
 use Wikibase\Repo\Search\Elastic\Fields\LabelCountField;
@@ -31,7 +32,10 @@ class LabelsProviderFieldDefinitionsTest extends PHPUnit_Framework_TestCase {
 		$this->assertArrayHasKey( 'labels_all', $fields );
 		$this->assertInstanceOf( AllLabelsField::class, $fields['labels_all'] );
 
-		$searchEngine = $this->getMockBuilder( 'CirrusSearch' )->getMock();
+		if ( !class_exists( CirrusSearch::class ) ) {
+			$this->markTestSkipped( 'CirrusSearch needed.' );
+		}
+		$searchEngine = $this->getMockBuilder( CirrusSearch::class )->getMock();
 		$searchEngine->expects( $this->never() )->method( 'makeSearchFieldMapping' );
 
 		$mapping = $fields['labels']->getMapping( $searchEngine );
