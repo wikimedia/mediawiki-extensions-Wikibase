@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Rdf;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\TermsRdfBuilder;
 use Wikimedia\Purtle\RdfWriter;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers Wikibase\Rdf\TermsRdfBuilder
@@ -118,7 +119,7 @@ class TermsRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
 		$writer = $this->getTestData()->getNTriplesWriter();
-		$this->newBuilder( $writer, $languages )
+		TestingAccessWrapper::newFromObject( $this->newBuilder( $writer, $languages ) )
 			->addLabels(
 				RdfVocabulary::NS_ENTITY,
 				$entity->getId()->getLocalPart(),
@@ -142,7 +143,7 @@ class TermsRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
 		$writer = $this->getTestData()->getNTriplesWriter();
-		$this->newBuilder( $writer, $languages )
+		TestingAccessWrapper::newFromObject( $this->newBuilder( $writer, $languages ) )
 			->addDescriptions(
 				RdfVocabulary::NS_ENTITY,
 				$entity->getId()->getLocalPart(),
@@ -166,7 +167,7 @@ class TermsRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
 		$writer = $this->getTestData()->getNTriplesWriter();
-		$this->newBuilder( $writer, $languages )
+		TestingAccessWrapper::newFromObject( $this->newBuilder( $writer, $languages ) )
 			->addAliases(
 				RdfVocabulary::NS_ENTITY,
 				$entity->getId()->getLocalPart(),
