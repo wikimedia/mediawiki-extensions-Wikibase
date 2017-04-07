@@ -52,7 +52,7 @@ class TermsRdfBuilder implements EntityRdfBuilder {
 	 * @param string $entityLName
 	 * @param TermList $labels
 	 */
-	public function addLabels( $entityNamespace, $entityLName, TermList $labels ) {
+	private function addLabels( $entityNamespace, $entityLName, TermList $labels ) {
 		foreach ( $labels->toTextArray() as $languageCode => $labelText ) {
 			if ( $this->languages !== null && !isset( $this->languages[$languageCode] ) ) {
 				continue;
@@ -74,7 +74,7 @@ class TermsRdfBuilder implements EntityRdfBuilder {
 	 * @param string $entityLName
 	 * @param TermList $descriptions
 	 */
-	public function addDescriptions( $entityNamespace, $entityLName, TermList $descriptions ) {
+	private function addDescriptions( $entityNamespace, $entityLName, TermList $descriptions ) {
 		foreach ( $descriptions->toTextArray() as $languageCode => $description ) {
 			if ( $this->languages !== null && !isset( $this->languages[$languageCode] ) ) {
 				continue;
@@ -92,7 +92,7 @@ class TermsRdfBuilder implements EntityRdfBuilder {
 	 * @param string $entityLName
 	 * @param AliasGroupList $aliases
 	 */
-	public function addAliases( $entityNamespace, $entityLName, AliasGroupList $aliases ) {
+	private function addAliases( $entityNamespace, $entityLName, AliasGroupList $aliases ) {
 		/** @var AliasGroup $aliasGroup */
 		foreach ( $aliases as $aliasGroup ) {
 			$languageCode = $aliasGroup->getLanguageCode();
