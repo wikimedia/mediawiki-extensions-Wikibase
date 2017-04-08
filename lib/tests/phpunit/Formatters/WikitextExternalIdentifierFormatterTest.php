@@ -29,13 +29,13 @@ class WikitextExternalIdentifierFormatterTest extends \PHPUnit_Framework_TestCas
 		$formatterUrlExpander->expects( $this->any() )
 			->method( 'expandUrl' )
 			->will( $this->returnCallback( function( PropertyValueSnak $snak ) {
-				$id = $snak->getDataValue()->getValue();
+				$value = $snak->getDataValue()->getValue();
 
 				switch ( $snak->getPropertyId()->getSerialization() ) {
 					case 'P1':
-						return 'http://acme.test/stuff/' . urlencode( $id );
+						return 'http://acme.test/stuff/' . wfUrlencode( $value );
 					case 'P2':
-						return 'http://acme.test/[other stuff]/<' . urlencode( $id ) . '>';
+						return 'http://acme.test/[other stuff]/<' . wfUrlencode( $value ) . '>';
 					default:
 						return null;
 				}

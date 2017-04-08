@@ -29,13 +29,12 @@ class HtmlExternalIdentifierFormatterTest extends \PHPUnit_Framework_TestCase {
 		$formatterUrlExpander->expects( $this->any() )
 			->method( 'expandUrl' )
 			->will( $this->returnCallback( function( PropertyValueSnak $snak ) {
-				$id = $snak->getDataValue()->getValue();
-
 				if ( $snak->getPropertyId()->getSerialization() === 'P1' ) {
-					return 'http://acme.test/stuff/' . urlencode( $id );
-				} else {
-					return null;
+					$value = $snak->getDataValue()->getValue();
+					return 'http://acme.test/stuff/' . wfUrlencode( $value );
 				}
+
+				return null;
 			} ) );
 
 		return array(
