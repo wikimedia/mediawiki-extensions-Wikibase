@@ -38,11 +38,10 @@
 		assert.expect( 2 );
 		var done = assert.async();
 		var api = {
-			setLabel: sinon.spy( function () {
-				var result = apiResponseForRevision( REVISION_ID )
-					.withLabel( 'some-lang', 'some label' );
-				return $.Deferred().resolve( result ).promise();
-			} )
+			setLabel: sinon.spy(
+				functionReturningSuccessfulResponse( REVISION_ID )
+					.withLabel( 'some-lang', 'some label' )
+			)
 		};
 		var entityTermsChanger = new EntityTermsChanger(
 			api,
@@ -71,12 +70,8 @@
 		assert.expect( 2 );
 		var done = assert.async();
 		var api = {
-			setLabel: sinon.spy( function() {
-				var result = apiResponseForRevision( REVISION_ID )
-					.withLabel( 'some-lang', 'new label' );
-
-				return $.Deferred().resolve( result ).promise();
-			} )
+			setLabel: sinon.spy( functionReturningSuccessfulResponse( REVISION_ID )
+				.withLabel( 'some-lang', 'new label' ) )
 		};
 		var entityTermsChanger = new EntityTermsChanger(
 			api,
@@ -104,6 +99,7 @@
 					entity: {
 						lastrevid: REVISION_ID,
 						labels: {
+							// FIXME Check real API response! Seems strange...
 							language: {}
 						}
 					}
@@ -128,18 +124,10 @@
 	QUnit.test( 'save correctly handles API response for labels', function( assert ) {
 		assert.expect( 1 );
 		var api = {
-			setLabel: sinon.spy( function() {
-				return $.Deferred().resolve( {
-					entity: {
-						labels: {
-							language: {
-								value: 'normalized label'
-							},
-							lastrevid: 'lastrevid'
-						}
-					}
-				} ).promise();
-			} )
+			setLabel: sinon.spy(
+				functionReturningSuccessfulResponse( 'lastrevid' )
+					.withLabel( 'language', 'normalized label' )
+			)
 		};
 		var entityTermsChanger = new EntityTermsChanger(
 			api,
@@ -189,17 +177,10 @@
 		var done = assert.async();
 		var revisionId = 9;
 		var api = {
-			setDescription: sinon.spy( function() {
-				var result = {
-					entity: {
-						lastrevid: revisionId,
-						descriptions: {
-							'some-lang': {value: 'description'}
-						}
-					}
-				};
-				return $.Deferred().resolve( result ).promise();
-			} )
+			setDescription: sinon.spy(
+				functionReturningSuccessfulResponse( REVISION_ID )
+					.withDescription( 'some-lang', 'description' )
+			)
 		};
 		var entityTermsChanger = new EntityTermsChanger(
 			api,
@@ -227,11 +208,10 @@
 		var done = assert.async();
 
 		var api = {
-			setDescription: sinon.spy( function() {
-				var apiResponse = apiResponseForRevision( REVISION_ID )
-					.withDescription( 'some-lang', 'new description' );
-				return $.Deferred().resolve( apiResponse ).promise();
-			} )
+			setDescription: sinon.spy(
+				functionReturningSuccessfulResponse( REVISION_ID )
+					.withDescription( 'some-lang', 'new description' )
+			)
 		};
 		var entityTermsChanger = new EntityTermsChanger(
 			api,
@@ -262,6 +242,7 @@
 				return $.Deferred().resolve( {
 					entity: {
 						descriptions: {
+							// FIXME Check real API response! Seems strange...
 							language: {}
 						}
 					}
@@ -286,18 +267,10 @@
 	QUnit.test( 'save correctly handles API response for descriptions', function( assert ) {
 		assert.expect( 1 );
 		var api = {
-			setDescription: sinon.spy( function() {
-				return $.Deferred().resolve( {
-					entity: {
-						descriptions: {
-							language: {
-								value: 'normalized description'
-							},
-							lastrevid: 'lastrevid'
-						}
-					}
-				} ).promise();
-			} )
+			setDescription: sinon.spy(
+				functionReturningSuccessfulResponse( 'lastrevid' )
+					.withDescription( 'language', 'normalized description' )
+			)
 		};
 		var entityTermsChanger = new EntityTermsChanger(
 			api,
@@ -346,14 +319,13 @@
 
 	QUnit.test( 'save performs correct API calls for new aliases', function( assert ) {
 		assert.expect( 2 );
-		var revisionId = 9;
+		var revisionId = REVISION_ID;
 		var done = assert.async();
 		var api = {
-			setAliases: sinon.spy( function() {
-				var result = apiResponseForRevision( revisionId )
-					.withAliases( 'language', ['alias'] );
-				return $.Deferred().resolve( result ).promise();
-			} )
+			setAliases: sinon.spy(
+				functionReturningSuccessfulResponse( revisionId )
+					.withAliases( 'language', ['alias'] )
+			)
 		};
 		var entityTermsChanger = new EntityTermsChanger(
 			api,
@@ -374,11 +346,10 @@
 		assert.expect( 2 );
 		var done = assert.async();
 		var api = {
-			setAliases: sinon.spy( function() {
-				var result = apiResponseForRevision( REVISION_ID )
-					.withAliases( 'language', ['new alias'] );
-				return $.Deferred().resolve( result ).promise();
-			} )
+			setAliases: sinon.spy(
+				functionReturningSuccessfulResponse( REVISION_ID )
+					.withAliases( 'language', ['new alias'] )
+			)
 		};
 		var entityTermsChanger = new EntityTermsChanger(
 			api,
@@ -406,9 +377,7 @@
 		assert.expect( 2 );
 		var done = assert.async();
 		var api = {
-			setAliases: sinon.spy( function() {
-				return $.Deferred().resolve( apiResponseForRevision( REVISION_ID ) ).promise();
-			} )
+			setAliases: sinon.spy( functionReturningSuccessfulResponse( REVISION_ID ) )
 		};
 		var entityTermsChanger = new EntityTermsChanger(
 			api,
@@ -436,11 +405,10 @@
 		assert.expect( 1 );
 		var done = assert.async();
 		var api = {
-			setAliases: sinon.spy( function() {
-				var result = apiResponseForRevision( 'lastrevid' )
-					.withAliases( 'language', ['normalized alias'] );
-				return $.Deferred().resolve( result ).promise();
-			} )
+			setAliases: sinon.spy(
+				functionReturningSuccessfulResponse( 'lastrevid' )
+					.withAliases( 'language', ['normalized alias'] )
+			)
 		};
 		var entityTermsChanger = new EntityTermsChanger(
 			api,
@@ -587,6 +555,35 @@
 		return new FingerprintBuilder();
 	}
 
+	/**
+	 * @param revisionId
+	 * @returns {SuccessfulCallbackBuilder}
+	 */
+	function functionReturningSuccessfulResponse( revisionId ) {
+		var result = apiResponseForRevision( revisionId );
+		/**
+		 * @class SuccessfulCallbackBuilder
+		 */
+		var callback = function () {
+			return $.Deferred().resolve( result ).promise();
+		};
 
+		callback.withLabel = function callbackWithLabel( language, value ) {
+			result.withLabel( language, value );
+			return callback;
+		};
+
+		callback.withDescription = function callbackWithDescription( language, value ) {
+			result.withDescription( language, value );
+			return callback;
+		};
+
+		callback.withAliases = function callbackWithAliases( language, aliases ) {
+			result.withAliases( language, aliases );
+			return callback;
+		};
+
+		return callback;
+	}
 
 } )( sinon, wikibase, jQuery );
