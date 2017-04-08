@@ -8,10 +8,15 @@
 	QUnit.module( 'wikibase.entityChangers.EntityTermsChanger', QUnit.newMwEnvironment() );
 
 	var EntityTermsChanger = wb.entityChangers.EntityTermsChanger;
-	var Fingerprint = wb.datamodel.Fingerprint;
-	var TermMap = wb.datamodel.TermMap;
 	var Term = wb.datamodel.Term;
 	var Item = wb.datamodel.Item;
+
+	/**
+	 * Syntactic sugar for readability
+	 * @type {createFingerprint}
+	 */
+	var newFingerprint = createFingerprint;
+	var currentFingerprint = createFingerprint;
 
 	var REVISION_ID = 9;
 
@@ -46,10 +51,8 @@
 		);
 
 		entityTermsChanger.save(
-			new Fingerprint( new TermMap( {
-				language: new Term( 'some-lang', 'some label' )
-			} ) ),
-			new Fingerprint()
+			newFingerprint().withLabel( 'some-lang', 'some label' ),
+			currentFingerprint().empty()
 		).then( function () {
 			assert.ok( api.setLabel.calledOnce );
 			sinon.assert.calledWith(
@@ -68,7 +71,7 @@
 		assert.expect( 2 );
 		var done = assert.async();
 		var api = {
-			setLabel: sinon.spy( function() {
+			setLabel: sinon.spy( function () {
 				var result = apiResponseForRevision( REVISION_ID )
 					.withLabel( 'some-lang', 'new label' );
 
@@ -82,12 +85,8 @@
 		);
 
 		entityTermsChanger.save(
-			new Fingerprint( new TermMap( {
-				language: new Term( 'some-lang', 'new label' )
-			} ) ),
-			new Fingerprint( new TermMap( {
-				language: new Term( 'some-lang', 'old label' )
-			} ) )
+			newFingerprint().withLabel( 'some-lang', 'new label' ),
+			currentFingerprint().withLabel( 'some-lang', 'old label' )
 		).then( function () {
 			assert.ok( api.setLabel.calledOnce );
 			sinon.assert.calledWith( api.setLabel, 'Q1', REVISION_ID, 'new label', 'some-lang' );
@@ -100,7 +99,7 @@
 		assert.expect( 2 );
 		var done = assert.async();
 		var api = {
-			setLabel: sinon.spy( function() {
+			setLabel: sinon.spy( function () {
 				return $.Deferred().resolve( {
 					entity: {
 						lastrevid: REVISION_ID,
@@ -118,10 +117,8 @@
 		);
 
 		entityTermsChanger.save(
-			new Fingerprint(),
-			new Fingerprint( new TermMap( {
-				language: new Term( 'language', 'old label' )
-			} ) )
+			newFingerprint().empty(),
+			currentFingerprint().withLabel( 'language', 'old label' )
 		).then( function () {
 			assert.ok( api.setLabel.calledOnce );
 			sinon.assert.calledWith( api.setLabel, 'Q1', REVISION_ID, '', 'language' );
@@ -131,7 +128,7 @@
 	QUnit.test( 'save correctly handles API response for labels', function( assert ) {
 		assert.expect( 1 );
 		var api = {
-			setLabel: sinon.spy( function() {
+			setLabel: sinon.spy( function () {
 				return $.Deferred().resolve( {
 					entity: {
 						labels: {
@@ -151,10 +148,8 @@
 		);
 
 		return entityTermsChanger.save(
-			new Fingerprint( new TermMap( {
-				language: new Term( 'language', 'label' )
-			} ) ),
-			new Fingerprint()
+			newFingerprint().withLabel( 'language', 'label' ),
+			currentFingerprint().empty()
 		).done( function( savedFingerprint ) {
 			assert.equal( savedFingerprint.getLabelFor( 'language' ).getText(), 'normalized label' );
 		} );
@@ -164,7 +159,7 @@
 		var done = assert.async();
 		assert.expect( 4 );
 		var api = {
-			setLabel: sinon.spy( function() {
+			setLabel: sinon.spy( function () {
 				return $.Deferred().reject( 'errorCode', { error: { code: 'errorCode' } } ).promise();
 			} )
 		};
@@ -175,10 +170,8 @@
 		);
 
 		entityTermsChanger.save(
-			new Fingerprint( new TermMap( {
-				language: new Term( 'language', 'label' )
-			} ) ),
-			new Fingerprint()
+			newFingerprint().withLabel( 'language', 'label' ),
+			currentFingerprint().empty()
 		).done( function( savedFingerprint ) {
 			assert.ok( false, 'save should have failed' );
 		} )
@@ -196,7 +189,7 @@
 		var done = assert.async();
 		var revisionId = 9;
 		var api = {
-			setDescription: sinon.spy( function() {
+			setDescription: sinon.spy( function () {
 				var result = {
 					entity: {
 						lastrevid: revisionId,
@@ -215,13 +208,8 @@
 		);
 
 		entityTermsChanger.save(
-			new Fingerprint(
-				null,
-				new TermMap( {
-					language: new Term( 'some-lang', 'description' )
-				} )
-			),
-			new Fingerprint()
+			newFingerprint().withDescription( 'some-lang', 'description' ),
+			currentFingerprint().empty()
 		).then( function () {
 			assert.ok( api.setDescription.calledOnce );
 			sinon.assert.calledWith(
@@ -239,7 +227,7 @@
 		var done = assert.async();
 
 		var api = {
-			setDescription: sinon.spy( function() {
+			setDescription: sinon.spy( function () {
 				var apiResponse = apiResponseForRevision( REVISION_ID )
 					.withDescription( 'some-lang', 'new description' );
 				return $.Deferred().resolve( apiResponse ).promise();
@@ -252,18 +240,8 @@
 		);
 
 		entityTermsChanger.save(
-			new Fingerprint(
-				null,
-				new TermMap( {
-					language: new Term( 'some-lang', 'new description' )
-				} )
-			),
-			new Fingerprint(
-				null,
-				new TermMap( {
-					language: new Term( 'some-lang', 'old description' )
-				} )
-			)
+			newFingerprint().withDescription( 'some-lang', 'new description' ),
+			currentFingerprint().withDescription( 'some-lang', 'old description' )
 		).then( function () {
 			assert.ok( api.setDescription.calledOnce );
 			sinon.assert.calledWith(
@@ -280,7 +258,7 @@
 		assert.expect( 2 );
 		var done = assert.async();
 		var api = {
-			setDescription: sinon.spy( function() {
+			setDescription: sinon.spy( function () {
 				return $.Deferred().resolve( {
 					entity: {
 						descriptions: {
@@ -297,13 +275,8 @@
 		);
 
 		entityTermsChanger.save(
-			new Fingerprint(),
-			new Fingerprint(
-				null,
-				new TermMap( {
-					language: new Term( 'language', 'old description' )
-				} )
-			)
+			newFingerprint().empty(),
+			currentFingerprint().withDescription( 'language', 'old description' )
 		).then( function () {
 			assert.ok( api.setDescription.calledOnce );
 			sinon.assert.calledWith( api.setDescription, 'Q1', REVISION_ID, '', 'language' );
@@ -313,7 +286,7 @@
 	QUnit.test( 'save correctly handles API response for descriptions', function( assert ) {
 		assert.expect( 1 );
 		var api = {
-			setDescription: sinon.spy( function() {
+			setDescription: sinon.spy( function () {
 				return $.Deferred().resolve( {
 					entity: {
 						descriptions: {
@@ -335,13 +308,8 @@
 		var done = assert.async();
 
 		entityTermsChanger.save(
-			new Fingerprint(
-				null,
-				new TermMap( {
-					language: new Term( 'language', 'description' )
-				} )
-			),
-			new Fingerprint()
+			newFingerprint().withDescription( 'language', 'description' ),
+			currentFingerprint().empty()
 		).done( function( savedFingerprint ) {
 			assert.equal( savedFingerprint.getDescriptionFor( 'language' ).getText(), 'normalized description' );
 		} ).fail( failOnError( assert ) ).always( done );
@@ -350,7 +318,7 @@
 	QUnit.test( 'save correctly handles API failures for descriptions', function( assert ) {
 		assert.expect( 4 );
 		var api = {
-			setDescription: sinon.spy( function() {
+			setDescription: sinon.spy( function () {
 				return $.Deferred().reject( 'errorCode', { error: { code: 'errorCode' } } ).promise();
 			} )
 		};
@@ -363,13 +331,8 @@
 		var done = assert.async();
 
 		entityTermsChanger.save(
-			new Fingerprint(
-				null,
-				new TermMap( {
-					language: new Term( 'language', 'description' )
-				} )
-			),
-			new Fingerprint()
+			newFingerprint().withDescription( 'language', 'description' ),
+			currentFingerprint().empty()
 		).done( function( savedFingerprint ) {
 			assert.ok( false, 'save should have failed' );
 		} )
@@ -386,9 +349,9 @@
 		var revisionId = 9;
 		var done = assert.async();
 		var api = {
-			setAliases: sinon.spy( function() {
+			setAliases: sinon.spy( function () {
 				var result = apiResponseForRevision( revisionId )
-					.withAliases( 'language', ['alias'] );
+					.withAliases( 'language', [ 'alias' ] );
 				return $.Deferred().resolve( result ).promise();
 			} )
 		};
@@ -399,17 +362,11 @@
 		);
 
 		entityTermsChanger.save(
-			new Fingerprint(
-				null,
-				null,
-				new wb.datamodel.MultiTermMap( {
-					language: new wb.datamodel.MultiTerm( 'language', [ 'alias' ] )
-				} )
-			),
-			new Fingerprint()
+			newFingerprint().withAliases( 'language', [ 'alias' ] ),
+			currentFingerprint().empty()
 		).then( function () {
 			assert.ok( api.setAliases.calledOnce );
-			sinon.assert.calledWith( api.setAliases, 'Q1', revisionId, ['alias'], [], 'language' );
+			sinon.assert.calledWith( api.setAliases, 'Q1', revisionId, [ 'alias' ], [], 'language' );
 		} ).fail( failOnError( assert ) ).always( done );
 	} );
 
@@ -417,9 +374,9 @@
 		assert.expect( 2 );
 		var done = assert.async();
 		var api = {
-			setAliases: sinon.spy( function() {
+			setAliases: sinon.spy( function () {
 				var result = apiResponseForRevision( REVISION_ID )
-					.withAliases( 'language', ['new alias'] );
+					.withAliases( 'language', [ 'new alias' ] );
 				return $.Deferred().resolve( result ).promise();
 			} )
 		};
@@ -430,28 +387,16 @@
 		);
 
 		entityTermsChanger.save(
-			new Fingerprint(
-				null,
-				null,
-				new wb.datamodel.MultiTermMap( {
-					language: new wb.datamodel.MultiTerm( 'language', [ 'new alias' ] )
-				} )
-			),
-			new Fingerprint(
-				null,
-				null,
-				new wb.datamodel.MultiTermMap( {
-					language: new wb.datamodel.MultiTerm( 'language', [ 'old alias' ] )
-				} )
-			)
+			newFingerprint().withAliases( 'language', [ 'new alias' ] ),
+			currentFingerprint().withAliases( 'language', [ 'old alias' ] )
 		).then( function () {
 			assert.ok( api.setAliases.calledOnce );
 			sinon.assert.calledWith(
 				api.setAliases,
 				'Q1',
 				REVISION_ID,
-				['new alias'],
-				['old alias'],
+				[ 'new alias' ],
+				[ 'old alias' ],
 				'language'
 			);
 		} ).fail( failOnError( assert ) ).always( done );
@@ -461,7 +406,7 @@
 		assert.expect( 2 );
 		var done = assert.async();
 		var api = {
-			setAliases: sinon.spy( function() {
+			setAliases: sinon.spy( function () {
 				return $.Deferred().resolve( apiResponseForRevision( REVISION_ID ) ).promise();
 			} )
 		};
@@ -472,14 +417,8 @@
 		);
 
 		entityTermsChanger.save(
-			new Fingerprint(),
-			new Fingerprint(
-				null,
-				null,
-				new wb.datamodel.MultiTermMap( {
-					language: new wb.datamodel.MultiTerm( 'language', [ 'old alias' ] )
-				} )
-			)
+			newFingerprint().empty(),
+			currentFingerprint().withAliases( 'language', [ 'old alias' ] )
 		).then( function () {
 			assert.ok( api.setAliases.calledOnce );
 			sinon.assert.calledWith(
@@ -487,7 +426,7 @@
 				'Q1',
 				REVISION_ID,
 				[],
-				['old alias'],
+				[ 'old alias' ],
 				'language'
 			);
 		} ).fail( failOnError( assert ) ).always( done );
@@ -497,9 +436,9 @@
 		assert.expect( 1 );
 		var done = assert.async();
 		var api = {
-			setAliases: sinon.spy( function() {
+			setAliases: sinon.spy( function () {
 				var result = apiResponseForRevision( 'lastrevid' )
-					.withAliases( 'language', ['normalized alias'] );
+					.withAliases( 'language', [ 'normalized alias' ] );
 				return $.Deferred().resolve( result ).promise();
 			} )
 		};
@@ -510,14 +449,8 @@
 		);
 
 		return entityTermsChanger.save(
-			new Fingerprint(
-				null,
-				null,
-				new wb.datamodel.MultiTermMap( {
-					language: new wb.datamodel.MultiTerm( 'language', [ 'alias' ] )
-				} )
-			),
-			new Fingerprint()
+			newFingerprint().withAliases( 'language', [ 'alias' ] ),
+			currentFingerprint().empty()
 		).done( function( savedFingerprint ) {
 			assert.deepEqual( savedFingerprint.getAliasesFor( 'language' ).getTexts(), [ 'normalized alias' ] );
 		} ).fail( failOnError( assert ) ).always( done );
@@ -526,7 +459,7 @@
 	QUnit.test( 'save correctly handles API failures for aliases', function( assert ) {
 		assert.expect( 4 );
 		var api = {
-			setAliases: sinon.spy( function() {
+			setAliases: sinon.spy( function () {
 				return $.Deferred().reject( 'errorCode', { error: { code: 'errorCode' } } ).promise();
 			} )
 		};
@@ -539,14 +472,8 @@
 		var done = assert.async();
 
 		entityTermsChanger.save(
-			new Fingerprint(
-				null,
-				null,
-				new wb.datamodel.MultiTermMap( {
-					language: new wb.datamodel.MultiTerm( 'language', [ 'alias' ] )
-				} )
-			),
-			new Fingerprint()
+			newFingerprint().withAliases( 'language', [ 'alias' ] ),
+			currentFingerprint().empty()
 		).done( function( savedFingerprint ) {
 			assert.ok( false, 'save should have failed' );
 		} )
@@ -559,7 +486,7 @@
 	} );
 
 	function failOnError( assert ) {
-		return function ( error ) {
+		return function( error ) {
 			assert.ok( false, error.stack || error );
 		};
 	}
@@ -591,33 +518,74 @@
 			};
 		}
 
-		ApiResponse.prototype.withLabel = function ( language, value ) {
+		ApiResponse.prototype.withLabel = function( language, value ) {
 			if ( !this.entity.labels ) {
 				this.entity.labels = {};
 			}
-			this.entity.labels[language] = { value: value };
+			this.entity.labels[ language ] = { value: value };
 			return this;
 		};
 
-		ApiResponse.prototype.withDescription = function ( language, value ) {
+		ApiResponse.prototype.withDescription = function( language, value ) {
 			if ( !this.entity.descriptions ) {
 				this.entity.descriptions = {};
 			}
-			this.entity.descriptions[language] = { value: value };
+			this.entity.descriptions[ language ] = { value: value };
 			return this;
 		};
 
-		ApiResponse.prototype.withAliases = function ( language, aliases ) {
+		ApiResponse.prototype.withAliases = function( language, aliases ) {
 			if ( !this.entity.aliases ) {
 				this.entity.aliases = {};
 			}
-			this.entity.aliases[language] = aliases.map( function ( alias ) {
+			this.entity.aliases[ language ] = aliases.map( function( alias ) {
 				return { value: alias };
 			} );
 			return this;
 		};
 
 		return new ApiResponse( revisionId );
+	}
+
+	/**
+	 * @return {FingerprintBuilder}
+	 */
+	function createFingerprint() {
+		/**
+		 * @class FingerprintBuilder
+		 * @constructor
+		 */
+		function FingerprintBuilder() {
+			wb.datamodel.Fingerprint.call( this );
+		}
+
+		jQuery.extend( FingerprintBuilder.prototype, wb.datamodel.Fingerprint.prototype );
+
+		FingerprintBuilder.prototype.withLabel = function withLabel( language, value ) {
+			this.setLabel( language, new Term( language, value ) );
+			return this;
+		};
+
+		FingerprintBuilder.prototype.withDescription = function withDescription( language, value ) {
+			this.setDescription( language, new Term( language, value ) );
+			return this;
+		};
+
+		FingerprintBuilder.prototype.withAliases = function withDescription( language, aliases ) {
+			this.setAliases( language, new wb.datamodel.MultiTerm( language, aliases ) );
+			return this;
+		};
+
+		/**
+		 * Syntactic sugar for readability
+		 *
+		 * @return {FingerprintBuilder}
+		 */
+		FingerprintBuilder.prototype.empty = function empty() {
+			return this;
+		};
+
+		return new FingerprintBuilder();
 	}
 
 } )( sinon, wikibase, jQuery );
