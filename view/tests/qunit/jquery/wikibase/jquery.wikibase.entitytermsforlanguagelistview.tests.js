@@ -92,6 +92,8 @@ QUnit.test( 'Create & destroy', function( assert ) {
 
 QUnit.test( 'setError()', function( assert ) {
 	assert.expect( 1 );
+	var done = assert.async();
+
 	var $entitytermsforlanguagelistview = createEntitytermsforlanguagelistview(),
 		entitytermsforlanguagelistview
 			= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
@@ -102,6 +104,7 @@ QUnit.test( 'setError()', function( assert ) {
 			true,
 			'Triggered "toggleerror" event.'
 		);
+		done();
 	} );
 
 	entitytermsforlanguagelistview.setError();

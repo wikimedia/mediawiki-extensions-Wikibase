@@ -286,7 +286,7 @@
 			new wb.datamodel.Item( 'Q1' )
 		);
 
-		QUnit.stop();
+		var done = assert.async();
 
 		entityTermsChanger.save(
 			new wb.datamodel.Fingerprint(
@@ -297,12 +297,12 @@
 			),
 			new wb.datamodel.Fingerprint()
 		).done( function( savedFingerprint ) {
-			QUnit.start();
 			assert.equal( savedFingerprint.getDescriptionFor( 'language' ).getText(), 'normalized description' );
+			done();
 		} )
 		.fail( function() {
-			QUnit.start();
 			assert.ok( false, 'save failed' );
+			done();
 		} );
 	} );
 
@@ -319,7 +319,7 @@
 			new wb.datamodel.Item( 'Q1' )
 		);
 
-		QUnit.stop();
+		var done = assert.async();
 
 		entityTermsChanger.save(
 			new wb.datamodel.Fingerprint(
@@ -330,15 +330,15 @@
 			),
 			new wb.datamodel.Fingerprint()
 		).done( function( savedFingerprint ) {
-			QUnit.start();
 			assert.ok( false, 'save should have failed' );
+			done();
 		} )
 		.fail( function( error ) {
-			QUnit.start();
 			assert.ok( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
 			assert.equal( error.code, 'errorCode' );
 			assert.equal( error.context.type, 'description' );
 			assert.ok( error.context.value.equals( new wb.datamodel.Term( 'language', 'description' ) ) );
+			done();
 		} );
 	} );
 
@@ -486,7 +486,7 @@
 			new wb.datamodel.Item( 'Q1' )
 		);
 
-		QUnit.stop();
+		var done = assert.async();
 
 		entityTermsChanger.save(
 			new wb.datamodel.Fingerprint(
@@ -498,15 +498,15 @@
 			),
 			new wb.datamodel.Fingerprint()
 		).done( function( savedFingerprint ) {
-			QUnit.start();
 			assert.ok( false, 'save should have failed' );
+			done();
 		} )
 		.fail( function( error ) {
-			QUnit.start();
 			assert.ok( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
 			assert.equal( error.code, 'errorCode' );
 			assert.equal( error.context.type, 'aliases' );
 			assert.ok( error.context.value.equals( new wb.datamodel.MultiTerm( 'language', [ 'alias' ] ) ) );
+			done();
 		} );
 	} );
 

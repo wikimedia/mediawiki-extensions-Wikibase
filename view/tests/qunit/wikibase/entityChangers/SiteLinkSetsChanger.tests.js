@@ -66,17 +66,18 @@
 			new wb.datamodel.Item( 'Q1' )
 		);
 
-		QUnit.stop();
+		var done = assert.async();
 
 		siteLinksChanger.save(
 			new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'siteId', 'pageName' ) ] ),
 			new wb.datamodel.SiteLinkSet()
 		).done( function( savedSiteLinkSet ) {
-			QUnit.start();
 			assert.ok( savedSiteLinkSet instanceof wb.datamodel.SiteLinkSet );
+			done();
 		} )
 		.fail( function() {
 			assert.ok( false, 'save failed' );
+			done();
 		} );
 	} );
 
@@ -103,17 +104,18 @@
 			new wb.datamodel.Item( 'Q1' )
 		);
 
-		QUnit.stop();
+		var done = assert.async();
 
 		siteLinksChanger.save(
 			new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'siteId', 'pageName', [ 'Q2' ] ) ] ),
 			new wb.datamodel.SiteLinkSet()
 		).done( function( savedSiteLinkSet ) {
-			QUnit.start();
 			assert.deepEqual( savedSiteLinkSet.getItemByKey( 'siteId' ).getBadges(), [ 'Q2' ] );
+			done();
 		} )
 		.fail( function() {
 			assert.ok( false, 'save failed' );
+			done();
 		} );
 	} );
 
@@ -130,19 +132,19 @@
 			new wb.datamodel.Item( 'Q1' )
 		);
 
-		QUnit.stop();
+		var done = assert.async();
 
 		siteLinksChanger.save(
 			new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'siteId', 'pageName' ) ] ),
 			new wb.datamodel.SiteLinkSet()
 		).done( function( savedSiteLinkSet ) {
-			QUnit.start();
 			assert.ok( false, 'save should have failed' );
+			done();
 		} )
 		.fail( function( error ) {
-			QUnit.start();
 			assert.ok( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
 			assert.equal( error.code, 'errorCode' );
+			done();
 		} );
 	} );
 
@@ -189,17 +191,18 @@
 			new wb.datamodel.Item( 'Q1' )
 		);
 
-		QUnit.stop();
+		var done = assert.async();
 
 		siteLinksChanger.save(
 			new wb.datamodel.SiteLinkSet(),
 			new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'siteId', 'pageName' ) ] )
 		).done( function( savedSiteLinkSet ) {
-			QUnit.start();
 			assert.ok( savedSiteLinkSet instanceof wb.datamodel.SiteLinkSet );
+			done();
 		} )
 		.fail( function() {
 			assert.ok( false, 'save failed' );
+			done();
 		} );
 	} );
 
@@ -225,17 +228,18 @@
 			new wb.datamodel.Item( 'Q1' )
 		);
 
-		QUnit.stop();
+		var done = assert.async();
 
 		siteLinksChanger.save(
 			new wb.datamodel.SiteLinkSet(),
 			new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'siteId', 'pageName', [ 'Q2' ] ) ] )
 		).done( function( savedSiteLinkSet ) {
-			QUnit.start();
 			assert.strictEqual( savedSiteLinkSet.getItemByKey( 'siteId' ), null );
+			done();
 		} )
 		.fail( function() {
 			assert.ok( false, 'save failed' );
+			done();
 		} );
 	} );
 
@@ -252,19 +256,19 @@
 			new wb.datamodel.Item( 'Q1' )
 		);
 
-		QUnit.stop();
+		var done = assert.async();
 
 		siteLinksChanger.save(
 			new wb.datamodel.SiteLinkSet(),
 			new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'siteId', 'pageName' ) ] )
 		).done( function( savedSiteLinkSet ) {
-			QUnit.start();
 			assert.ok( false, 'save should have failed' );
+			done();
 		} )
 		.fail( function( error ) {
-			QUnit.start();
 			assert.ok( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
 			assert.equal( error.code, 'errorCode' );
+			done();
 		} );
 	} );
 
