@@ -8,10 +8,15 @@
 	QUnit.module( 'wikibase.entityChangers.EntityTermsChanger', QUnit.newMwEnvironment() );
 
 	var EntityTermsChanger = wb.entityChangers.EntityTermsChanger;
-	var Fingerprint = wb.datamodel.Fingerprint;
-	var TermMap = wb.datamodel.TermMap;
 	var Term = wb.datamodel.Term;
 	var Item = wb.datamodel.Item;
+
+	/**
+	 * Syntactic sugar for readability
+	 * @type {createFingerprint}
+	 */
+	var newFingerprint = createFingerprint;
+	var oldFingerprint = createFingerprint;
 
 	var REVISION_ID = 9;
 
@@ -46,10 +51,8 @@
 		);
 
 		entityTermsChanger.save(
-			new Fingerprint( new TermMap( {
-				language: new Term( 'some-lang', 'some label' )
-			} ) ),
-			new Fingerprint()
+			newFingerprint().withLabel( 'some-lang', 'some label' ),
+			oldFingerprint().empty()
 		).then( function () {
 			assert.ok( api.setLabel.calledOnce );
 			sinon.assert.calledWith(
@@ -82,12 +85,8 @@
 		);
 
 		entityTermsChanger.save(
-			new Fingerprint( new TermMap( {
-				language: new Term( 'some-lang', 'new label' )
-			} ) ),
-			new Fingerprint( new TermMap( {
-				language: new Term( 'some-lang', 'old label' )
-			} ) )
+			newFingerprint().withLabel( 'some-lang', 'new label' ),
+			oldFingerprint().withLabel( 'some-lang', 'old label' )
 		).then( function () {
 			assert.ok( api.setLabel.calledOnce );
 			sinon.assert.calledWith( api.setLabel, 'Q1', REVISION_ID, 'new label', 'some-lang' );
@@ -118,10 +117,8 @@
 		);
 
 		entityTermsChanger.save(
-			new Fingerprint(),
-			new Fingerprint( new TermMap( {
-				language: new Term( 'language', 'old label' )
-			} ) )
+			newFingerprint().empty(),
+			oldFingerprint().withLabel( 'language', 'old label' )
 		).then( function () {
 			assert.ok( api.setLabel.calledOnce );
 			sinon.assert.calledWith( api.setLabel, 'Q1', REVISION_ID, '', 'language' );
@@ -151,10 +148,8 @@
 		);
 
 		return entityTermsChanger.save(
-			new Fingerprint( new TermMap( {
-				language: new Term( 'language', 'label' )
-			} ) ),
-			new Fingerprint()
+			newFingerprint().withLabel( 'language', 'label' ),
+			oldFingerprint().empty()
 		).done( function( savedFingerprint ) {
 			assert.equal( savedFingerprint.getLabelFor( 'language' ).getText(), 'normalized label' );
 		} );
@@ -175,10 +170,8 @@
 		);
 
 		entityTermsChanger.save(
-			new Fingerprint( new TermMap( {
-				language: new Term( 'language', 'label' )
-			} ) ),
-			new Fingerprint()
+			newFingerprint().withLabel( 'language', 'label' ),
+			oldFingerprint().empty()
 		).done( function( savedFingerprint ) {
 			assert.ok( false, 'save should have failed' );
 		} )
@@ -215,13 +208,8 @@
 		);
 
 		entityTermsChanger.save(
-			new Fingerprint(
-				null,
-				new TermMap( {
-					language: new Term( 'some-lang', 'description' )
-				} )
-			),
-			new Fingerprint()
+			newFingerprint().withDescription( 'some-lang', 'description' ),
+			oldFingerprint().empty()
 		).then( function () {
 			assert.ok( api.setDescription.calledOnce );
 			sinon.assert.calledWith(
@@ -252,18 +240,8 @@
 		);
 
 		entityTermsChanger.save(
-			new Fingerprint(
-				null,
-				new TermMap( {
-					language: new Term( 'some-lang', 'new description' )
-				} )
-			),
-			new Fingerprint(
-				null,
-				new TermMap( {
-					language: new Term( 'some-lang', 'old description' )
-				} )
-			)
+			newFingerprint().withDescription( 'some-lang', 'new description' ),
+			oldFingerprint().withDescription( 'some-lang', 'old description' )
 		).then( function () {
 			assert.ok( api.setDescription.calledOnce );
 			sinon.assert.calledWith(
@@ -297,13 +275,8 @@
 		);
 
 		entityTermsChanger.save(
-			new Fingerprint(),
-			new Fingerprint(
-				null,
-				new TermMap( {
-					language: new Term( 'language', 'old description' )
-				} )
-			)
+			newFingerprint().empty(),
+			oldFingerprint().withDescription( 'language', 'old description' )
 		).then( function () {
 			assert.ok( api.setDescription.calledOnce );
 			sinon.assert.calledWith( api.setDescription, 'Q1', REVISION_ID, '', 'language' );
@@ -335,13 +308,8 @@
 		var done = assert.async();
 
 		entityTermsChanger.save(
-			new Fingerprint(
-				null,
-				new TermMap( {
-					language: new Term( 'language', 'description' )
-				} )
-			),
-			new Fingerprint()
+			newFingerprint().withDescription( 'language', 'description' ),
+			oldFingerprint().empty()
 		).done( function( savedFingerprint ) {
 			assert.equal( savedFingerprint.getDescriptionFor( 'language' ).getText(), 'normalized description' );
 		} ).fail( failOnError( assert ) ).always( done );
@@ -363,13 +331,8 @@
 		var done = assert.async();
 
 		entityTermsChanger.save(
-			new Fingerprint(
-				null,
-				new TermMap( {
-					language: new Term( 'language', 'description' )
-				} )
-			),
-			new Fingerprint()
+			newFingerprint().withDescription( 'language', 'description' ),
+			oldFingerprint().empty()
 		).done( function( savedFingerprint ) {
 			assert.ok( false, 'save should have failed' );
 		} )
@@ -399,14 +362,8 @@
 		);
 
 		entityTermsChanger.save(
-			new Fingerprint(
-				null,
-				null,
-				new wb.datamodel.MultiTermMap( {
-					language: new wb.datamodel.MultiTerm( 'language', [ 'alias' ] )
-				} )
-			),
-			new Fingerprint()
+			newFingerprint().withAliases( 'language', ['alias'] ),
+			oldFingerprint().empty()
 		).then( function () {
 			assert.ok( api.setAliases.calledOnce );
 			sinon.assert.calledWith( api.setAliases, 'Q1', revisionId, ['alias'], [], 'language' );
@@ -430,20 +387,8 @@
 		);
 
 		entityTermsChanger.save(
-			new Fingerprint(
-				null,
-				null,
-				new wb.datamodel.MultiTermMap( {
-					language: new wb.datamodel.MultiTerm( 'language', [ 'new alias' ] )
-				} )
-			),
-			new Fingerprint(
-				null,
-				null,
-				new wb.datamodel.MultiTermMap( {
-					language: new wb.datamodel.MultiTerm( 'language', [ 'old alias' ] )
-				} )
-			)
+			newFingerprint().withAliases( 'language', ['new alias'] ),
+			oldFingerprint().withAliases( 'language', ['old alias'] )
 		).then( function () {
 			assert.ok( api.setAliases.calledOnce );
 			sinon.assert.calledWith(
@@ -472,14 +417,8 @@
 		);
 
 		entityTermsChanger.save(
-			new Fingerprint(),
-			new Fingerprint(
-				null,
-				null,
-				new wb.datamodel.MultiTermMap( {
-					language: new wb.datamodel.MultiTerm( 'language', [ 'old alias' ] )
-				} )
-			)
+			newFingerprint().empty(),
+			oldFingerprint().withAliases( 'language', ['old alias'] )
 		).then( function () {
 			assert.ok( api.setAliases.calledOnce );
 			sinon.assert.calledWith(
@@ -510,14 +449,8 @@
 		);
 
 		return entityTermsChanger.save(
-			new Fingerprint(
-				null,
-				null,
-				new wb.datamodel.MultiTermMap( {
-					language: new wb.datamodel.MultiTerm( 'language', [ 'alias' ] )
-				} )
-			),
-			new Fingerprint()
+			newFingerprint().withAliases( 'language', ['alias'] ),
+			oldFingerprint().empty()
 		).done( function( savedFingerprint ) {
 			assert.deepEqual( savedFingerprint.getAliasesFor( 'language' ).getTexts(), [ 'normalized alias' ] );
 		} ).fail( failOnError( assert ) ).always( done );
@@ -539,14 +472,8 @@
 		var done = assert.async();
 
 		entityTermsChanger.save(
-			new Fingerprint(
-				null,
-				null,
-				new wb.datamodel.MultiTermMap( {
-					language: new wb.datamodel.MultiTerm( 'language', [ 'alias' ] )
-				} )
-			),
-			new Fingerprint()
+			newFingerprint().withAliases( 'language', ['alias'] ),
+			oldFingerprint().empty()
 		).done( function( savedFingerprint ) {
 			assert.ok( false, 'save should have failed' );
 		} )
@@ -618,6 +545,47 @@
 		};
 
 		return new ApiResponse( revisionId );
+	}
+
+	/**
+	 * @return {FingerprintBuilder}
+	 */
+	function createFingerprint() {
+		/**
+		 * @class FingerprintBuilder
+		 * @constructor
+		 */
+		function FingerprintBuilder() {
+			wb.datamodel.Fingerprint.call( this );
+		}
+
+		jQuery.extend( FingerprintBuilder.prototype, wb.datamodel.Fingerprint.prototype );
+
+		FingerprintBuilder.prototype.withLabel = function withLabel( language, value ) {
+			this.setLabel( language, new Term( language, value ) );
+			return this;
+		};
+
+		FingerprintBuilder.prototype.withDescription = function withDescription( language, value ) {
+			this.setDescription( language, new Term( language, value ) );
+			return this;
+		};
+
+		FingerprintBuilder.prototype.withAliases = function withDescription( language, aliases ) {
+			this.setAliases( language, new wb.datamodel.MultiTerm( language, aliases ) );
+			return this;
+		};
+
+		/**
+		 * Syntactic sugar for readability
+		 *
+		 * @return {FingerprintBuilder}
+		 */
+		FingerprintBuilder.prototype.empty = function empty() {
+			return this;
+		};
+
+		return new FingerprintBuilder();
 	}
 
 } )( sinon, wikibase, jQuery );
