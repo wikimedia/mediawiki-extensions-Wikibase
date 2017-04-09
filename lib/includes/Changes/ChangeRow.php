@@ -128,12 +128,7 @@ abstract class ChangeRow implements Change {
 	 * @return array the info array
 	 */
 	protected function unserializeInfo( $str ) {
-		if ( $str[0] === '{' ) { // json
-			$info = json_decode( $str, true );
-		} else {
-			// we may still have legacy stuff in the database for a while!
-			$info = unserialize( $str );
-		}
+		$info = json_decode( $str, true );
 
 		if ( !is_array( $info ) ) {
 			wfLogWarning( "Failed to unserializeInfo of id: " . $this->getObjectId() );
