@@ -18,7 +18,8 @@
 			"Tpt",
 			"McAang",
 			"Nemo bis",
-			"HakanIST"
+			"HakanIST",
+			"Vito Genovese"
 		]
 	},
 	"wikibase-desc": "Yapılandırılmış veri deposu",
@@ -26,7 +27,7 @@
 	"wikibase-entity-item": "öge",
 	"wikibase-entity-property": "özellik",
 	"wikibase-entity-query": "sorgu",
-	"wikibase-edit": "değiştir",
+	"wikibase-edit": "düzenle",
 	"wikibase-save": "kaydet",
 	"wikibase-cancel": "iptal",
 	"wikibase-add": "ekle",
@@ -172,7 +173,6 @@
 	"wikibase-listproperties-submit": "Bul",
 	"wikibase-entitieswithoutlabel-label-language": "Dil kodu:",
 	"wikibase-entitieswithoutlabel-label-type": "Tür:",
-	"wikibase-entitieswithoutlabel-label-alltypes": "hepsi",
 	"wikibase-entitydata-not-found": "$1 kimliğiyle hiçbir varlık bulunamadı.",
 	"wikibase-entitydata-not-acceptable": "Eşleşen hiçbir biçim bulunamadı. Desteklenen MIME türleri: $1",
 	"wikibase-entitydata-bad-id": "Geçersiz kimlik: $1.",

@@ -11,7 +11,8 @@
 			"KorkmazO",
 			"HakanIST",
 			"Alpkant",
-			"Incelemeelemani"
+			"Incelemeelemani",
+			"Vito Genovese"
 		]
 	},
 	"tooltip-t-wikibase": "Veri havuzundaki ilgili ögeye bağlantı",
@@ -40,7 +41,7 @@
 	"wikibase-rc-hide-wikidata-show": "göster",
 	"wikibase-rc-show-wikidata-pref": "{{WBREPONAME}} değişikliklerini son değişikliklerde göster",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} değişikliği",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} düzenlemesi",
 	"wikibase-watchlist-show-changes-pref": "İzleme listemde {{WBREPONAME}} değişikliklerini göster",
 	"unconnectedpages": "Öğelerine bağlanmamış sayfalar",
 	"wikibase-unconnectedpages-submit": "Sayfaları göster",
