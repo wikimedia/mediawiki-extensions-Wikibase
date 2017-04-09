@@ -684,4 +684,27 @@ class SqlStore implements Store {
 		return new SqlChangeStore( wfGetLB() );
 	}
 
+	public function getTermSqlIndexBuilder( $batchSize = 1000 ) {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$idParser = $wikibaseRepo->getEntityIdParser();
+		$entityIdComposer = $wikibaseRepo->getEntityIdComposer();
+
+		$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
+			$wikibaseRepo->getEntityNamespaceLookup(),
+			$idParser
+		);
+
+
+
+		return new TermSqlIndexBuilder(
+			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			$this->newTermIndex(),
+			$sqlEntityIdPagerFactory,
+			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
+			$this->getEntityTypes(),
+			$this->getReporter(),
+			$this->getErrorReporter(),
+			$batchSize
+		);
+	}
 }
