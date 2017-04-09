@@ -103,7 +103,7 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$change = $factory->newFromUpdate( EntityChange::UPDATE, $item, $updatedItem );
 
 		$this->assertEquals( $itemId, $change->getEntityId(), 'entity id' );
-		$this->assertEquals( 'q1', $change->getObjectId(), 'object id' );
+		$this->assertEquals( 'Q1', $change->getObjectId(), 'object id' );
 		$this->assertEquals( 'wikibase-item~update', $change->getType(), 'type' );
 
 		$this->assertEquals(
@@ -123,7 +123,7 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$change = $factory->newFromUpdate( EntityChange::ADD, null, $item );
 
 		$this->assertEquals( $itemId, $change->getEntityId(), 'entity id' );
-		$this->assertEquals( 'q1', $change->getObjectId(), 'object id' );
+		$this->assertEquals( 'Q1', $change->getObjectId(), 'object id' );
 		$this->assertEquals( 'wikibase-item~add', $change->getType(), 'type' );
 
 		$this->assertEquals(
@@ -143,7 +143,7 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$change = $factory->newFromUpdate( EntityChange::REMOVE, $property, null );
 
 		$this->assertEquals( $propertyId, $change->getEntityId(), 'entity id' );
-		$this->assertEquals( 'p2', $change->getObjectId(), 'object id' );
+		$this->assertEquals( 'P2', $change->getObjectId(), 'object id' );
 		$this->assertEquals( 'wikibase-property~remove', $change->getType(), 'type' );
 
 		$this->assertEquals(
@@ -163,7 +163,7 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$change = $factory->newFromUpdate( EntityChange::RESTORE, null, $item );
 
 		$this->assertEquals( $itemId, $change->getEntityId(), 'entity id' );
-		$this->assertEquals( 'q4', $change->getObjectId(), 'object id' );
+		$this->assertEquals( 'Q4', $change->getObjectId(), 'object id' );
 		$this->assertEquals( 'wikibase-item~restore', $change->getType(), 'type' );
 
 		$this->assertEquals(

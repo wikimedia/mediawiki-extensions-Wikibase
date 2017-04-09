@@ -149,7 +149,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 			'rc_patrolled' => true,
 			'rc_params' => serialize( array(
 				'wikibase-repo-change' => $metadata + $fields + [
-					'object_id' => 'q17',
+					'object_id' => 'Q17',
 					'type' => 'wikibase-item~change',
 					'entity_type' => 'item',
 				],

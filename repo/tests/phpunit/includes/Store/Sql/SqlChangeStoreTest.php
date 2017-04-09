@@ -55,7 +55,7 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 				array(
 					'change_type' => 'wikibase-item~add',
 					'change_time' => $time,
-					'change_object_id' => 'q21389475',
+					'change_object_id' => 'Q21389475',
 					'change_revision_id' => '0',
 					'change_user_id' => '0',
 					'change_info' => '[]',
@@ -66,7 +66,7 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 				array(
 					'change_type' => 'wikibase-item~remove',
 					'change_time' => $time,
-					'change_object_id' => 'q42',
+					'change_object_id' => 'Q42',
 					'change_revision_id' => '0',
 					'change_user_id' => '0',
 					'change_info' => '{"diff":{"type":"diff","isassoc":null,"operations":[]}}',
@@ -77,7 +77,7 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 				array(
 					'change_type' => 'wikibase-item~remove',
 					'change_time' => $time,
-					'change_object_id' => 'q123',
+					'change_object_id' => 'Q123',
 					'change_revision_id' => '343',
 					'change_user_id' => '34',
 					'change_info' => '{"metadata":{"user_text":"BlackMagicIsEvil","bot":0,"page_id":2354,"rev_id":343,' .
@@ -142,7 +142,7 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 			'change_id' => (string)$change->getId(),
 			'change_type' => 'wikibase-item~add',
 			'change_time' => '20121026200049',
-			'change_object_id' => 'q21389475',
+			'change_object_id' => 'Q21389475',
 			'change_revision_id' => '0',
 			'change_user_id' => '0',
 			'change_info' => '[]',
