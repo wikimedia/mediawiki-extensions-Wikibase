@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_825b4c26",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-04-09T20:56:59Z",
+      "side": 1,
+      "message": "This should very rarely no be set (if at all), given we already check that the context has a title in onLinkBegin.",
+      "revId": "1bf00e8e7b1c331b83f643df66d0ee7ee802ba1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_625e4019",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-04-09T20:56:59Z",
+      "side": 1,
+      "message": "$html was written to on line 209.",
+      "revId": "1bf00e8e7b1c331b83f643df66d0ee7ee802ba1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
