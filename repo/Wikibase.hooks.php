@@ -850,8 +850,8 @@ final class RepoHooks {
 	}
 
 	/**
-	 * Adds a list of data value types, sparql endpoint and concept base URI to
-	 * the action=query&meta=siteinfo API.
+	 * Exposes configuration values to the action=query&meta=siteinfo API, including lists of
+	 * property and data value types, sparql endpoint, and several base URLs and URIs.
 	 *
 	 * @param ApiQuerySiteinfo $api
 	 * @param array &$data
@@ -869,6 +869,9 @@ final class RepoHooks {
 
 		$conceptBaseUri = $wikibaseRepo->getSettings()->getSetting( 'conceptBaseUri' );
 		$data['wikibase-conceptbaseuri'] = $conceptBaseUri;
+
+		$geoShapeStorageBaseUrl = $wikibaseRepo->getSettings()->getSetting( 'geoShapeStorageFrontendUrl' );
+		$data['wikibase-geoshapestoragebaseurl'] = $geoShapeStorageBaseUrl;
 
 		$sparqlEndpoint = $wikibaseRepo->getSettings()->getSetting( 'sparqlEndpoint' );
 		if ( is_string( $sparqlEndpoint ) ) {
