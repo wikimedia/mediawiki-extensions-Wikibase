@@ -92,13 +92,6 @@ class ChangeRowTest extends MediaWikiTestCase {
 		$this->assertSame( $expected, $change->getInfo() );
 	}
 
-	public function testUnserializesPhpSerializations() {
-		$serialization = 'a:1:{s:5:"field";s:5:"value";}';
-		$expected = array( 'field' => 'value' );
-		$change = $this->newChangeRow( [ 'info' => $serialization ] );
-		$this->assertSame( $expected, $change->getInfo() );
-	}
-
 	public function testCanNotUnserializeWithoutObjectId() {
 		$change = $this->newChangeRow( [ 'info' => 's:5:"value";' ] );
 		$this->setExpectedException( MWException::class );

@@ -120,7 +120,7 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 		}
 
 		$diff = $this->makeDiff( $values['object_id'], $values['info']['metadata']['parent_id'], $values[ 'revision_id' ] );
-		$values['info'] = serialize( $values['info'] );
+		$values['info'] = json_encode( $values['info'] );
 
 		if ( $values['type'] === 'wikibase-item~add' || $values['type'] === 'wikibase-item~update' ) {
 			$change = new ItemChange( $values );
