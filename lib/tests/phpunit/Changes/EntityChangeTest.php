@@ -154,7 +154,7 @@ class EntityChangeTest extends ChangeRowTest {
 
 		$this->assertEquals( 5, $entityChange->getField( 'revision_id' ), 'revision_id' );
 		$this->assertEquals( 7, $entityChange->getField( 'user_id' ), 'user_id' );
-		$this->assertEquals( 'q7', $entityChange->getObjectId(), 'object_id' );
+		$this->assertEquals( 'Q7', $entityChange->getObjectId(), 'object_id' );
 		$this->assertEquals( $timestamp, $entityChange->getTime(), 'timestamp' );
 		$this->assertEquals( 'Test!', $entityChange->getComment(), 'comment' );
 
@@ -225,7 +225,7 @@ class EntityChangeTest extends ChangeRowTest {
 
 		$this->assertEquals( 5, $entityChange->getField( 'revision_id' ), 'revision_id' );
 		$this->assertEquals( 7, $entityChange->getField( 'user_id' ), 'user_id' );
-		$this->assertEquals( 'q7', $entityChange->getObjectId(), 'object_id' );
+		$this->assertEquals( 'Q7', $entityChange->getObjectId(), 'object_id' );
 		$this->assertEquals( $timestamp, $entityChange->getTime(), 'timestamp' );
 		$this->assertEquals( 'Test!', $entityChange->getComment(), 'comment' );
 
@@ -254,7 +254,7 @@ class EntityChangeTest extends ChangeRowTest {
 		$change = new EntityChange( array( 'info' => array(), 'type' => '~' ) );
 		$this->assertFalse( $change->hasField( 'object_id' ), 'precondition' );
 		$change->setRevisionInfo( $revision );
-		$this->assertSame( 'q1', $change->getObjectId() );
+		$this->assertSame( 'Q1', $change->getObjectId() );
 	}
 
 	public function testSetTimestamp() {
