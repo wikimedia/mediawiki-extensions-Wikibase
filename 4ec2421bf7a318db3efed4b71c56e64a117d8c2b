@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_9dd72dc4",
+        "filename": "view/tests/qunit/wikibase/entityChangers/EntityTermsChanger.tests.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-10T09:30:38Z",
+      "side": 1,
+      "message": "A lower case \"create…\" sounds more like a helper function, not like a type.",
+      "range": {
+        "startLine": 16,
+        "startChar": 11,
+        "endLine": 16,
+        "endChar": 28
+      },
+      "revId": "4ec2421bf7a318db3efed4b71c56e64a117d8c2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_bdd469bf",
+        "filename": "view/tests/qunit/wikibase/entityChangers/EntityTermsChanger.tests.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-10T09:30:38Z",
+      "side": 1,
+      "message": "What is the benefit of this aliasing? Why do you need two? Why not simply call \"createFingerprint()\" when needed?",
+      "range": {
+        "startLine": 18,
+        "startChar": 1,
+        "endLine": 19,
+        "endChar": 40
+      },
+      "revId": "4ec2421bf7a318db3efed4b71c56e64a117d8c2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_5de1a596",
+        "filename": "view/tests/qunit/wikibase/entityChangers/EntityTermsChanger.tests.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-10T09:30:38Z",
+      "side": 1,
+      "message": "I find this odd. This line looks like it creates a non-empty objects, and empties it afterwards. But why? You can omit this entirely and nothing will change. Just call \"createFingerprint()\".",
+      "range": {
+        "startLine": 55,
+        "startChar": 19,
+        "endLine": 55,
+        "endChar": 27
+      },
+      "revId": "4ec2421bf7a318db3efed4b71c56e64a117d8c2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_7ddee1df",
+        "filename": "view/tests/qunit/wikibase/entityChangers/EntityTermsChanger.tests.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-10T09:30:38Z",
+      "side": 1,
+      "message": "Please do not remove the spaces in these array brackets.\n\nSame multiple times below.",
+      "range": {
+        "startLine": 365,
+        "startChar": 45,
+        "endLine": 365,
+        "endChar": 54
+      },
+      "revId": "4ec2421bf7a318db3efed4b71c56e64a117d8c2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
