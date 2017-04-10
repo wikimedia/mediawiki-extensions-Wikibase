@@ -51,9 +51,7 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 	 * @return ReferencedEntitiesDataUpdater
 	 */
 	private function newInstance( $count = 0 ) {
-		$entityTitleLookup = $this->getMockBuilder( EntityTitleLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
 		$entityTitleLookup->expects( $this->exactly( $count ) )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
@@ -61,9 +59,7 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 				return Title::makeTitle( $namespace, $id->getSerialization() );
 			} ) );
 
-		$entityIdParser = $this->getMockBuilder( EntityIdParser::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$entityIdParser = $this->getMock( EntityIdParser::class );
 		$entityIdParser->expects( $this->any() )
 			->method( 'parse' )
 			->will( $this->returnCallback( function( $id ) {

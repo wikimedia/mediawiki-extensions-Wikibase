@@ -42,9 +42,7 @@ class MediaWikiConfigModuleTest extends PHPUnit_Framework_TestCase {
 
 	private function newInstance() {
 		return new MediaWikiConfigModule( [ 'getconfigvalueprovider' => function () {
-			$provider = $this->getMockBuilder( MediaWikiConfigValueProvider::class )
-				->disableOriginalConstructor()
-				->getMock();
+			$provider = $this->getMock( MediaWikiConfigValueProvider::class );
 
 			$provider->expects( $this->any() )
 				->method( 'getKey' )

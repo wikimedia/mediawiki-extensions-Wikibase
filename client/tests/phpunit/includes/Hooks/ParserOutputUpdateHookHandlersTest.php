@@ -179,9 +179,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 	}
 
 	private function getBadgeDisplay() {
-		$labelDescriptionLookup = $this->getMockBuilder( LabelDescriptionLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
 
 		$labelDescriptionLookup->expects( $this->any() )
 			->method( 'getLabel' )

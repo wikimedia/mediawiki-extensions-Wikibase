@@ -158,9 +158,7 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 	public function testValidate_() {
 		$item = new Item();
 
-		$changeOp = $this->getMockBuilder( ChangeOp::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$changeOp = $this->getMock( ChangeOp::class );
 		$changeOp->expects( $this->any() )
 			->method( 'validate' )
 			->will( $this->returnCallback( function( Item $item ) {

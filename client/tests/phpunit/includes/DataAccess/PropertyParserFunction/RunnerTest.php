@@ -227,8 +227,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 	 * @return SiteLinkLookup
 	 */
 	private function getSiteLinkLookup( ItemId $itemId ) {
-		$siteLinkLookup = $this->getMockBuilder( SiteLinkLookup::class )
-			->getMock();
+		$siteLinkLookup = $this->getMock( SiteLinkLookup::class );
 
 		$siteLinkLookup->expects( $this->once() )
 			->method( 'getItemIdForLink' )
@@ -293,9 +292,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 	 * @return StatementGroupRenderer
 	 */
 	private function getRenderer( EntityId $entityId, $propertyLabelOrId ) {
-		$renderer = $this->getMockBuilder( StatementGroupRenderer::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$renderer = $this->getMock( StatementGroupRenderer::class );
 
 		$renderer->expects( $this->any() )
 			->method( 'render' )

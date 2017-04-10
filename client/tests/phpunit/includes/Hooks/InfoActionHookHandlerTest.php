@@ -145,9 +145,7 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 				], $text ?: $entityId );
 			} ) );
 
-		$siteLinkLookup = $this->getMockBuilder( SiteLinkLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$siteLinkLookup = $this->getMock( SiteLinkLookup::class );
 
 		$siteLinkLookup->expects( $this->any() )
 			->method( 'getItemIdForLink' )
@@ -174,9 +172,7 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 			->method( 'newLabelDescriptionLookup' )
 			->will( $this->returnCallback( [ $this, 'newLabelDescriptionLookup' ] ) );
 
-		$idParser = $this->getMockBuilder( EntityIdParser::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$idParser = $this->getMock( EntityIdParser::class );
 
 		$idParser->expects( $this->any() )
 			->method( 'parse' )
@@ -229,9 +225,7 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 	 * @return LabelDescriptionLookup
 	 */
 	public function newLabelDescriptionLookup() {
-		$lookup = $this->getMockBuilder( LabelDescriptionLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$lookup = $this->getMock( LabelDescriptionLookup::class );
 
 		$lookup->expects( $this->any() )
 			->method( 'getLabel' )

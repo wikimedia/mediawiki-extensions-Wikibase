@@ -43,7 +43,7 @@ class DispatchingTermSearchInteractorTest extends PHPUnit_Framework_TestCase  {
 	}
 
 	private function getTermSearchInteractor( array $resultsByEntityType ) {
-		$interactor = $this->getMockBuilder( TermSearchInteractor::class )->getMock();
+		$interactor = $this->getMock( TermSearchInteractor::class );
 		$interactor->expects( $this->any() )
 			->method( 'searchForEntities' )
 			->will( $this->returnCallback(

@@ -71,9 +71,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 	 * @return SiteLinkLookup
 	 */
 	private function getSiteLinkLookupMock( $itemId ) {
-		$siteLinkLookupMock = $this->getMockBuilder( SiteLinkLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$siteLinkLookupMock = $this->getMock( SiteLinkLookup::class );
 
 		$siteLinkLookupMock->expects( $this->any() )
 			->method( 'getItemIdForLink' )
