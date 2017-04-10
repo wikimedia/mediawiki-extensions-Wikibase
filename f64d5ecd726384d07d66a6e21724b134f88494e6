@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_e870f1db",
+        "filename": "repo/includes/Content/ItemContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-10T12:35:18Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this rather be injected? setDataTypeLookup when then also be not needed to use custom lookup in tests (as far as I see this is the only reason to have this setter).",
+      "revId": "f64d5ecd726384d07d66a6e21724b134f88494e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
