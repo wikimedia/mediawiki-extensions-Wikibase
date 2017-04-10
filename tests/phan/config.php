@@ -347,16 +347,12 @@ return [
 		"PhanTypeMissingReturn",
 		// approximate error count: 2
 		"PhanUndeclaredClassConstant",
-		// approximate error count: 14
-		"PhanUndeclaredClassMethod",
 		// approximate error count: 54
 		"PhanUndeclaredConstant",
 		// approximate error count: 139
 		"PhanUndeclaredMethod",
 		// approximate error count: 25
 		"PhanUndeclaredProperty",
-		// approximate error count: 3
-		"PhanUndeclaredTypeParameter",
 		// approximate error count: 4
 		"PhanUndeclaredTypeProperty",
 		// approximate error count: 3
