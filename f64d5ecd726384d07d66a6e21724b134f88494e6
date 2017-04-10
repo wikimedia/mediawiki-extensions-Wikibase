@@ -70,6 +70,24 @@
       "revId": "f64d5ecd726384d07d66a6e21724b134f88494e6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_9585c1a1",
+        "filename": "repo/includes/Content/ItemContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-10T15:58:32Z",
+      "side": 1,
+      "message": "hmm, It doesn\u0027t look bad but how we can inject the service to ItemHandler? It never gets constructed directly and it only works with WikibaseRepo-\u003enewItemHandler(). In production code, it\u0027s okay and super clean but in tests it becomes messy. I can think of this option: we mock WikibaseRepo that gives out ItemHandler. But I\u0027m not sure if that\u0027s the only way.",
+      "parentUuid": "4e506ba4_35b14ddd",
+      "revId": "f64d5ecd726384d07d66a6e21724b134f88494e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
