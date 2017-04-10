@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_2eb49ee3",
+        "filename": "view/tests/qunit/wikibase/entityChangers/SiteLinkSetsChanger.tests.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2017-04-10T20:20:07Z",
+      "side": 1,
+      "message": "This fails because setSiteLink() expects api. setSiteLink() to return a certain object when resolved, containing a structure with e.g. \u0027result.entity.sitelinks\u0027 in it. Previously it worked because this test seems to only be intended to cover the code before it, and left the promise hanging to be dereferenced I guess.",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 40,
+        "endChar": 24
+      },
+      "revId": "daa76215e3fbfee7f44786e0f05a04b147ccaf59",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
