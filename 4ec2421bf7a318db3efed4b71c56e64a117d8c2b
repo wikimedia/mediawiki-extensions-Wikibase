@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_c827350c",
+        "filename": "view/tests/qunit/wikibase/entityChangers/EntityTermsChanger.tests.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-10T12:14:18Z",
+      "side": 1,
+      "message": "That partly convinced me, especially because the current comes *before* the previous version. o_O\n\nMy remaining nitpick is that \"new\" and \"old\" are not the best variable names. What about \"new\" and \"cur\"?",
+      "parentUuid": "4e506ba4_dd9a9517",
+      "range": {
+        "startLine": 18,
+        "startChar": 1,
+        "endLine": 19,
+        "endChar": 40
+      },
+      "revId": "4ec2421bf7a318db3efed4b71c56e64a117d8c2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_5de1a596",
         "filename": "view/tests/qunit/wikibase/entityChangers/EntityTermsChanger.tests.js",
         "patchSetId": 4
@@ -143,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_088c3dfe",
+        "filename": "view/tests/qunit/wikibase/entityChangers/EntityTermsChanger.tests.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-10T12:14:18Z",
+      "side": 1,
+      "message": "I see that, but still have a fundamental problem with this approach. See, you are aliasing a function name that does nothing but returning an empty object, but you name it like it represents two different variables. I find this extremely confusing. It\u0027s not like \"newFingerprint()\" creates something \"new\" and \"oldFingerprint()\" creates something \"old\". This is the same function call, just aliased to encode a meaning that has nothing to do with what the function actually does. Same problem with \"empty()\".\n\nTL;DR: This is intentionally mislabeling functions.",
+      "parentUuid": "4e506ba4_bd8229a8",
+      "range": {
+        "startLine": 55,
+        "startChar": 19,
+        "endLine": 55,
+        "endChar": 27
+      },
+      "revId": "4ec2421bf7a318db3efed4b71c56e64a117d8c2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_7ddee1df",
         "filename": "view/tests/qunit/wikibase/entityChangers/EntityTermsChanger.tests.js",
         "patchSetId": 4
@@ -178,6 +226,30 @@
       "side": 1,
       "message": "JSCS doesn\u0027t complain, so I guess it is ok.\n\nIf you think that we should have this in our codestyle, please introduce the rule in `.jscsrc`",
       "parentUuid": "4e506ba4_7ddee1df",
+      "range": {
+        "startLine": 365,
+        "startChar": 45,
+        "endLine": 365,
+        "endChar": 54
+      },
+      "revId": "4ec2421bf7a318db3efed4b71c56e64a117d8c2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_e8cc713a",
+        "filename": "view/tests/qunit/wikibase/entityChangers/EntityTermsChanger.tests.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-10T12:14:18Z",
+      "side": 1,
+      "message": "We are slowly moving our PHP code to use spaces inside array declarations. My only issue with this path is that it removes spaces. All I\u0027m asking for is that this patch does not touch this syntactic detail.",
+      "parentUuid": "4e506ba4_7d8ca1db",
       "range": {
         "startLine": 365,
         "startChar": 45,
