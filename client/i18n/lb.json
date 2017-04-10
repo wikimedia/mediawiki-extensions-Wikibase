@@ -48,6 +48,7 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-Ännerung",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}}-Ännerungen",
 	"wikibase-rcfilters-hide-wikibase-conflicts-major-global": "All {{WBREPONAME}}-Ännerunge sinn als \"kleng\" markéiert, esou ass de Filter {{WBREPONAME}}-Ännerunge a Konflikt mam Filter \"Keng kleng Ännerungen\".",
+	"wikibase-rcfilters-major-conflicts-hide-wikibase": "All {{WBREPONAME}}-Ännerunge sinn als \"kleng\" markéiert, esou ass de Filter {{WBREPONAME}}-Ännerunge a Konflikt mam Filter \"Keng kleng Ännerungen\".",
 	"wikibase-rcfilters-hide-wikibase-conflicts-major": "All {{WBREPONAME}}-Ännerunge sinn als \"kleng\" markéiert, esou ass de Filter {{WBREPONAME}}-Ännerunge a Konflikt mam Filter \"Keng kleng Ännerungen\".",
 	"wikibase-replicationnote": "Denkt w.e.g. dorun datt et e puer Minutten dauere ka bis d'Ännerungen op alle Wikien ze gesi sinn.",
 	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}-Ännerungen an Ärer Iwwerwaachungslëscht weisen",

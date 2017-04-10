@@ -78,6 +78,7 @@
 	"wikibase-pageinfo-entity-usage-S": "সাইট সংযোগ",
 	"wikibase-pageinfo-entity-usage-L": "লেভেল: $1",
 	"wikibase-pageinfo-entity-usage-T": "শিরোনাম",
+	"wikibase-pageinfo-entity-usage-X": "সকল সত্তার উপাত্ত",
 	"wikibase-pageinfo-entity-usage-O": "অন্যান্য (বিবৃতি)",
 	"wikibase-property-render-error": "বৈশিষ্ট্য $1 রেন্ডার করতে ব্যর্থ: $2",
 	"wikibase-otherprojects": "অন্যান্য প্রকল্পে",

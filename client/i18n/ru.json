@@ -103,5 +103,7 @@
 	"wikibase-otherprojects": "В других проектах",
 	"wikibase-otherprojects-beta-message": "Боковая панель других проектов",
 	"wikibase-otherprojects-beta-description": "Добавляет на боковую панель раздел «{{int:wikibase-otherprojects}}», который содержит ссылки на другие проекты Фонда Викимедиа на основе данных {{WBREPONAME}}.",
-	"notification-link-text-view-item": "{{GENDER:$1|Посмотреть}} элемент"
+	"notification-link-text-view-item": "{{GENDER:$1|Посмотреть}} элемент",
+	"unresolved-property-category": "Страницы с недоступными свойствами",
+	"unresolved-property-category-desc": "В эту категорию попадают страницы, которые ссылаются на свойства {{WBREPONAME}}, которые не могут быть найдены ни по ID свойства, ни по имени."
 }
