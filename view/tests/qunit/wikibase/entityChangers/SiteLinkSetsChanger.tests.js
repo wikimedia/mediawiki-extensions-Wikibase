@@ -35,13 +35,16 @@
 			{ getSitelinksRevision: function() { return 0; } },
 			new wb.datamodel.Item( 'Q1' )
 		);
+		var done = assert.async();
 
 		siteLinksChanger.save(
 			new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'siteId', 'pageName' ) ] ),
 			new wb.datamodel.SiteLinkSet()
-		);
+		).done( function( savedFingerprint ) {
+			assert.ok( api.setSitelink.calledOnce );
+			done();
+		} )
 
-		assert.ok( api.setSitelink.calledOnce );
 	} );
 
 	QUnit.test( 'save correctly handles API response', function( assert ) {
