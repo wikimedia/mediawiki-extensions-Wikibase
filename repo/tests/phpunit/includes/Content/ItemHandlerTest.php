@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Content;
 
+use DataValues\StringValue;
 use MWException;
 use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -10,10 +11,17 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\Repo\Content\ItemHandler;
+use Wikibase\Repo\Search\Elastic\Fields\ItemFieldDefinitions;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
 
 /**
@@ -187,6 +195,84 @@ class ItemHandlerTest extends EntityHandlerTest {
 
 	protected function getExpectedSearchIndexFields() {
 		return [ 'label_count', 'statement_count', 'sitelink_count' ];
+	}
+
+	/**
+	 * @return PropertyDataTypeLookup
+	 */
+	private function getPropertyDataTypeLookup() {
+		$dataTypeLookup = new InMemoryDataTypeLookup();
+
+		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P11' ), 'external-id' );
+		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P12' ), 'string' );
+		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P13' ), 'item' );
+
+		return $dataTypeLookup;
+	}
+
+	/**
+	 * @return ItemHandler
+	 */
+	private function getItemHandlerWithMockedPropertyDataTypeLookup() {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$itemFieldDefinitions = $this->getMockBuilder( ItemFieldDefinitions::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		return new ItemHandler(
+			$wikibaseRepo->getStore()->newEntityPerPage(),
+			$wikibaseRepo->getStore()->getTermIndex(),
+			$wikibaseRepo->getEntityContentDataCodec(),
+			$wikibaseRepo->getEntityConstraintProvider(),
+			$wikibaseRepo->getValidatorErrorLocalizer(),
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getStore()->newSiteLinkStore(),
+			$wikibaseRepo->getEntityIdLookup(),
+			$wikibaseRepo->getLanguageFallbackLabelDescriptionLookupFactory(),
+			$itemFieldDefinitions,
+			$this->getPropertyDataTypeLookup()
+		);
+	}
+
+	/**
+	 * @dataProvider provideGetIdentifiersCount
+	 */
+	public function testGetIdentifiersCount( StatementList $statementList, $expected ) {
+		$handler = $this->getMockedItemHandlerForPropertyDataTypeLookup();
+
+		$this->assertSame( $expected, $handler->getIdentifiersCount( $statementList ) );
+	}
+
+	public function provideGetIdentifiersCount() {
+
+		$statementIdentifier = new Statement(
+			new PropertyValueSnak( new PropertyId( 'P11' ), new StringValue( 'xyz123' ) )
+		);
+		$statementString = new Statement(
+			new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'Athena' ) )
+		);
+		$statementItem = new Statement( new PropertyNoValueSnak( new PropertyId( 'P13' ) ) );
+
+		$statementListNoIdentifier = new StatementList( [ $statementString ] );
+		$statementListOneIdentifier = new StatementList( [ $statementIdentifier ] );
+		$statementListOneIdentifierAndMore = new StatementList(
+			[ $statementIdentifier, $statementString, $statementItem ]
+		);
+		$statementListTwoIdentifiers = new StatementList(
+			[ $statementIdentifier, $statementIdentifier ]
+		);
+		$statementListTwoIdentifiersAndMore = new StatementList(
+			[ $statementIdentifier, $statementIdentifier, $statementString, $statementItem ]
+		);
+
+		return [
+			'empty' => [ new StatementList(), 0 ],
+			'no identifier' => [ $statementListNoIdentifier, 0 ],
+			'one identifier' => [ $statementListOneIdentifier, 1 ],
+			'one identifier and more statements' => [ $statementListOneIdentifierAndMore, 1 ],
+			'two identifiers' => [ $statementListTwoIdentifiers, 2 ],
+			'two identifiers and more statements' => [ $statementListTwoIdentifiersAndMore, 2 ],
+		];
 	}
 
 }
