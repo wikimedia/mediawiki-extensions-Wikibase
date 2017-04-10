@@ -52,6 +52,24 @@
       "revId": "f64d5ecd726384d07d66a6e21724b134f88494e6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_35b14ddd",
+        "filename": "repo/includes/Content/ItemContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-10T15:30:13Z",
+      "side": 1,
+      "message": "I propose to inject it into ItemHandler instead. ItemHandler can then expose a getIdentifierCount method, or the whole getEntityPageProperties method could be moved there.\n\nYou can get the ItemHandler by calling the getHandler() method.",
+      "parentUuid": "4e506ba4_15af7192",
+      "revId": "f64d5ecd726384d07d66a6e21724b134f88494e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
