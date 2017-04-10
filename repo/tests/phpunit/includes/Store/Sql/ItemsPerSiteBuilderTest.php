@@ -58,9 +58,7 @@ class ItemsPerSiteBuilderTest extends \MediaWikiTestCase {
 	 * @return EntityLookup
 	 */
 	private function getEntityLookup() {
-		$mock = $this->getMockBuilder( EntityLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mock = $this->getMock( EntityLookup::class );
 
 		$item = $this->getTestItem();
 		$mock->expects( $this->exactly( 10 ) )

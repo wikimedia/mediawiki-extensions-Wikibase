@@ -241,9 +241,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	 * @return OutputFormatSnakFormatterFactory
 	 */
 	private function getSnakFormatterFactory() {
-		$snakFormatter = $this->getMockBuilder( SnakFormatter::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$snakFormatter = $this->getMock( SnakFormatter::class );
 
 		$snakFormatter->expects( $this->any() )
 			->method( 'formatSnak' )
@@ -264,9 +262,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityLookup
 	 */
 	private function getEntityLookup() {
-		$entityLookup = $this->getMockBuilder( EntityLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$entityLookup = $this->getMock( EntityLookup::class );
 
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntity' )

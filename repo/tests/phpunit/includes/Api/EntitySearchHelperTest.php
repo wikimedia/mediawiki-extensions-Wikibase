@@ -83,9 +83,8 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 	 * @return LabelDescriptionLookup
 	 */
 	private function getMockLabelDescriptionLookup() {
-		$mock = $this->getMockBuilder( LabelDescriptionLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mock = $this->getMock( LabelDescriptionLookup::class );
+
 		$mock->method( 'getLabel' )
 			->will( $this->returnValue( new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_LABEL ) ) );
 		$mock->method( 'getDescription' )

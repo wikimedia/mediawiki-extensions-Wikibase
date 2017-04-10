@@ -30,9 +30,7 @@ class LanguageLinkBadgeDisplayTest extends PHPUnit_Framework_TestCase {
 	 * @return LanguageLinkBadgeDisplay
 	 */
 	private function getLanguageLinkBadgeDisplay() {
-		$labelLookup = $this->getMockBuilder( LabelDescriptionLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$labelLookup = $this->getMock( LabelDescriptionLookup::class );
 
 		$labelLookup->expects( $this->any() )
 			->method( 'getLabel' )
