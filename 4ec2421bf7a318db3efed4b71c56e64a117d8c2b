@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_3d9619f4",
+        "filename": "view/tests/qunit/wikibase/entityChangers/EntityTermsChanger.tests.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-04-10T09:46:17Z",
+      "side": 1,
+      "message": "Sure, it is a function. Each function is a type, so you can reference it as a type.",
+      "parentUuid": "4e506ba4_9dd72dc4",
+      "range": {
+        "startLine": 16,
+        "startChar": 11,
+        "endLine": 16,
+        "endChar": 28
+      },
+      "revId": "4ec2421bf7a318db3efed4b71c56e64a117d8c2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_bdd469bf",
         "filename": "view/tests/qunit/wikibase/entityChangers/EntityTermsChanger.tests.js",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2017-04-10T09:30:38Z",
       "side": 1,
       "message": "What is the benefit of this aliasing? Why do you need two? Why not simply call \"createFingerprint()\" when needed?",
+      "range": {
+        "startLine": 18,
+        "startChar": 1,
+        "endLine": 19,
+        "endChar": 40
+      },
+      "revId": "4ec2421bf7a318db3efed4b71c56e64a117d8c2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_dd9a9517",
+        "filename": "view/tests/qunit/wikibase/entityChangers/EntityTermsChanger.tests.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-04-10T09:46:17Z",
+      "side": 1,
+      "message": "For test readability. Now reader not required to know what is the order of the arguments in `save()` method. \n\nEven after working with this test for several hours for me it was hard to read `save()` calls correctly as soon as both arguments have the same type.",
+      "parentUuid": "4e506ba4_bdd469bf",
       "range": {
         "startLine": 18,
         "startChar": 1,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_bd8229a8",
+        "filename": "view/tests/qunit/wikibase/entityChangers/EntityTermsChanger.tests.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-04-10T09:46:17Z",
+      "side": 1,
+      "message": "Readability will change. Code will become less symmetric.\n\nNow from these three lines you get all the description of the tested case:\n\"new fingerprint is with label, and old fingerprint was empty\"",
+      "parentUuid": "4e506ba4_5de1a596",
+      "range": {
+        "startLine": 55,
+        "startChar": 19,
+        "endLine": 55,
+        "endChar": 27
+      },
+      "revId": "4ec2421bf7a318db3efed4b71c56e64a117d8c2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_7ddee1df",
         "filename": "view/tests/qunit/wikibase/entityChangers/EntityTermsChanger.tests.js",
         "patchSetId": 4
@@ -82,6 +154,30 @@
       "writtenOn": "2017-04-10T09:30:38Z",
       "side": 1,
       "message": "Please do not remove the spaces in these array brackets.\n\nSame multiple times below.",
+      "range": {
+        "startLine": 365,
+        "startChar": 45,
+        "endLine": 365,
+        "endChar": 54
+      },
+      "revId": "4ec2421bf7a318db3efed4b71c56e64a117d8c2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_7d8ca1db",
+        "filename": "view/tests/qunit/wikibase/entityChangers/EntityTermsChanger.tests.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-04-10T09:46:17Z",
+      "side": 1,
+      "message": "JSCS doesn\u0027t complain, so I guess it is ok.\n\nIf you think that we should have this in our codestyle, please introduce the rule in `.jscsrc`",
+      "parentUuid": "4e506ba4_7ddee1df",
       "range": {
         "startLine": 365,
         "startChar": 45,
