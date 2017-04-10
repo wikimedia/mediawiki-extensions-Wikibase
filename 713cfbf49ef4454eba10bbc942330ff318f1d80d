@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_48aa4584",
+        "filename": "view/tests/qunit/wikibase/entityChangers/SiteLinkSetsChanger.tests.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-04-10T11:26:45Z",
+      "side": 1,
+      "message": "There is a problem here:\nif, for some reason promise returned by `save()` is rejected, then `done()` will not be called and test will be hanging for some time (currently 1 minute I guess). After that you\u0027ll get error with message like \"Test timeout...\" which is not helpful.\n\nI would suggest to add `fail()` handler like\n```\n.fail(function (error) {\n    assert.ok(false, error.stack || error);\n})\n```\nit will display error trace if there is one, and\neither duplicate `done()` call in fail clause or do something like:\n```\n.always(done);\n```",
+      "range": {
+        "startLine": 43,
+        "startChar": 3,
+        "endLine": 46,
+        "endChar": 5
+      },
+      "revId": "713cfbf49ef4454eba10bbc942330ff318f1d80d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
