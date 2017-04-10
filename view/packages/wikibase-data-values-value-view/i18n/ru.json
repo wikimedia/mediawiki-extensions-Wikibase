@@ -3,7 +3,8 @@
 		"authors": [
 			"Okras",
 			"Alexandr Efremov",
-			"Putnik"
+			"Putnik",
+			"Mailman"
 		]
 	},
 	"valueview-desc": "Компоненты пользовательского интерфейса для отображения и редактирования значений",
@@ -12,6 +13,7 @@
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Обработка значений для типа данных «$1» пока не поддерживается.",
 	"valueview-expert-emptyvalue-empty": "пусто",
 	"valueview-expert-globecoordinateinput-precision": "Точность:",
+	"valueview-expert-globecoordinateinput-nullprecision": "Не определено",
 	"valueview-expert-globecoordinateinput-customprecision": "специальные ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "Григорианский",
 	"valueview-expert-timevalue-calendar-julian": "Юлианский",
