@@ -11,6 +11,9 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\EditEntityAction;
 use Wikibase\EntityContent;
 use Wikibase\HistoryEntityAction;
@@ -53,6 +56,11 @@ class ItemHandler extends EntityHandler {
 	private $labelLookupFactory;
 
 	/**
+	 * @var PropertyDataTypeLookup
+	 */
+	private $dataTypeLookup;
+
+	/**
 	 * @param EntityPerPage $entityPerPage
 	 * @param TermIndex $termIndex
 	 * @param EntityContentDataCodec $contentCodec
@@ -63,6 +71,7 @@ class ItemHandler extends EntityHandler {
 	 * @param EntityIdLookup $entityIdLookup
 	 * @param LanguageFallbackLabelDescriptionLookupFactory $labelLookupFactory
 	 * @param ItemFieldDefinitions $itemFieldDefinitions
+	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 * @param callable|null $legacyExportFormatDetector
 	 */
 	public function __construct(
@@ -76,6 +85,7 @@ class ItemHandler extends EntityHandler {
 		EntityIdLookup $entityIdLookup,
 		LanguageFallbackLabelDescriptionLookupFactory $labelLookupFactory,
 		ItemFieldDefinitions $itemFieldDefinitions,
+		PropertyDataTypeLookup $dataTypeLookup,
 		$legacyExportFormatDetector = null
 	) {
 		parent::__construct(
@@ -93,6 +103,7 @@ class ItemHandler extends EntityHandler {
 		$this->entityIdLookup = $entityIdLookup;
 		$this->labelLookupFactory = $labelLookupFactory;
 		$this->siteLinkStore = $siteLinkStore;
+		$this->dataTypeLookup = $dataTypeLookup;
 	}
 
 	/**
@@ -214,6 +225,27 @@ class ItemHandler extends EntityHandler {
 	 */
 	public function makeEntityId( $id ) {
 		return new ItemId( $id );
+	}
+
+	/**
+	 * @param StatementList $statementList
+	 * @return int
+	 */
+	public function getIdentifiersCount( StatementList $statementList ) {
+		$identifiers = 0;
+		foreach ( $statementList->getPropertyIds() as $propertyIdSerialization => $propertyId ) {
+			try {
+				$dataType = $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );
+			} catch ( PropertyDataTypeLookupException $e ) {
+				continue;
+			}
+
+			if ( $dataType === 'external-id' ) {
+				$identifiers += $statementList->getByPropertyId( $propertyId )->count();
+			}
+		}
+
+		return $identifiers;
 	}
 
 }
