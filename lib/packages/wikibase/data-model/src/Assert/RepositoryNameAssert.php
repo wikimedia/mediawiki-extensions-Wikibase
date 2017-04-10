@@ -28,7 +28,7 @@ class RepositoryNameAssert {
 	 */
 	public static function assertParameterIsValidRepositoryName( $value, $name ) {
 		if ( !self::isValidRepositoryName( $value ) ) {
-			throw new ParameterAssertionException( $name, 'must be a string not including colons' );
+			throw new ParameterAssertionException( $name, 'must be a string not including colons nor periods' );
 		}
 	}
 
@@ -51,7 +51,7 @@ class RepositoryNameAssert {
 			if ( !self::isValidRepositoryName( $key ) ) {
 				throw new ParameterAssertionException(
 					"array_keys( $name )",
-					'must not contain strings including colons'
+					'must not contain strings including colons or periods'
 				);
 			}
 		}
@@ -62,7 +62,7 @@ class RepositoryNameAssert {
 	 * @return bool
 	 */
 	private static function isValidRepositoryName( $value ) {
-		return is_string( $value ) && strpos( $value, ':' ) === false;
+		return is_string( $value ) && strpos( $value, ':' ) === false && strpos( $value, '.' ) === false;
 	}
 
 }
