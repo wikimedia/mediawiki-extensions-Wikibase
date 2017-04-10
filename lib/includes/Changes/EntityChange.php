@@ -39,23 +39,6 @@ class EntityChange extends DiffChange {
 	private $entityId = null;
 
 	/**
-	 * @todo FIXME use uppecase ID, like everywhere else!
-	 *
-	 * @param string $name
-	 * @param mixed $value
-	 *
-	 * @throws MWException
-	 */
-	public function setField( $name, $value ) {
-		if ( $name === 'object_id' && is_string( $value ) ) {
-			//NOTE: for compatibility with earlier versions, use lower case IDs in the database.
-			$value = strtolower( $value );
-		}
-
-		parent::setField( $name, $value );
-	}
-
-	/**
 	 * @return string
 	 */
 	public function getType() {

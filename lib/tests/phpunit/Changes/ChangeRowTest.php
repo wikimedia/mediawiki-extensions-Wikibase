@@ -45,8 +45,8 @@ class ChangeRowTest extends MediaWikiTestCase {
 	}
 
 	public function testReturnsObjectId() {
-		$change = $this->newChangeRow( [ 'object_id' => 'q1' ] );
-		$this->assertSame( 'q1', $change->getObjectId() );
+		$change = $this->newChangeRow( [ 'object_id' => 'Q1' ] );
+		$this->assertSame( 'Q1', $change->getObjectId() );
 	}
 
 	public function testCanNotReturnDefaultObjectId() {

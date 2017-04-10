@@ -181,7 +181,7 @@ class EntityChangeLookupTest extends \MediaWikiTestCase {
 		$changeOne = array(
 			'type' => 'wikibase-item~remove',
 			'time' => '20121026200049',
-			'object_id' => 'q42',
+			'object_id' => 'Q42',
 			'revision_id' => '0',
 			'user_id' => '0',
 			'info' => '{"diff":{"type":"diff","isassoc":null,"operations":[]}}',
@@ -190,7 +190,7 @@ class EntityChangeLookupTest extends \MediaWikiTestCase {
 		$changeTwo = array(
 			'type' => 'wikibase-item~remove',
 			'time' => '20151008161232',
-			'object_id' => 'q4662',
+			'object_id' => 'Q4662',
 			'revision_id' => '0',
 			'user_id' => '0',
 			'info' => '{"diff":{"type":"diff","isassoc":null,"operations":[]}}',
@@ -199,7 +199,7 @@ class EntityChangeLookupTest extends \MediaWikiTestCase {
 		$changeThree = array(
 			'type' => 'wikibase-item~remove',
 			'time' => '20141008161232',
-			'object_id' => 'q123',
+			'object_id' => 'Q123',
 			'revision_id' => '343',
 			'user_id' => '34',
 			'info' => '{"metadata":{"user_text":"BlackMagicIsEvil","bot":0,"page_id":2354,"rev_id":343,' .
