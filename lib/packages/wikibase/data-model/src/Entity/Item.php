@@ -267,16 +267,6 @@ class Item implements EntityDocument, FingerprintProvider, StatementListHolder,
 	}
 
 	/**
-	 * @deprecated since 0.8, use getSiteLinkList()->isEmpty() instead.
-	 * @since 0.5
-	 *
-	 * @return bool
-	 */
-	public function hasSiteLinks() {
-		return !$this->siteLinks->isEmpty();
-	}
-
-	/**
 	 * @deprecated since 2.5, use new Item() instead.
 	 *
 	 * @return self
