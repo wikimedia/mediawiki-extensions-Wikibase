@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_354dcd9b",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-10T16:07:14Z",
+      "side": 1,
+      "message": "It still seems like we should have all the data URIs for all the repos here, for symmetry and future use. But I really can\u0027t think of a use case right now. So perhaps later.",
+      "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_b58c7ddc",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-10T16:07:14Z",
+      "side": 1,
+      "message": "this is a nasty hack, any idea why it exists?",
+      "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
