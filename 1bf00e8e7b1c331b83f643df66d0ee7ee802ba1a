@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_9d716d0e",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-10T09:17:28Z",
+      "side": 1,
+      "message": "Do you suggest to remove this check? Is this the reason for the -1?",
+      "parentUuid": "4e506ba4_825b4c26",
+      "revId": "1bf00e8e7b1c331b83f643df66d0ee7ee802ba1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_625e4019",
         "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2017-04-09T20:56:59Z",
       "side": 1,
       "message": "$html was written to on line 209.",
+      "revId": "1bf00e8e7b1c331b83f643df66d0ee7ee802ba1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_3d8299ce",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-10T09:17:28Z",
+      "side": 1,
+      "message": "There is a return in line 210, which means these two code paths are entirely unrelated.",
+      "parentUuid": "4e506ba4_625e4019",
       "revId": "1bf00e8e7b1c331b83f643df66d0ee7ee802ba1a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
