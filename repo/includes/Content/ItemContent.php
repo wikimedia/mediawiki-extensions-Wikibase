@@ -47,8 +47,6 @@ class ItemContent extends EntityContent {
 	 * @param EntityHolder|null $itemHolder
 	 * @param EntityRedirect|null $entityRedirect
 	 * @param Title|null $redirectTitle Title of the redirect target.
-	 *
-	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		EntityHolder $itemHolder = null,
@@ -229,6 +227,8 @@ class ItemContent extends EntityContent {
 			$item = $this->getItem();
 			$properties['wb-claims'] = $item->getStatements()->count();
 			$properties['wb-sitelinks'] = $item->getSiteLinkList()->count();
+			$properties['wb-identifiers'] = $this->getContentHandler()
+				->getIdentifiersCount( $item->getStatements() );
 		}
 
 		return $properties;
