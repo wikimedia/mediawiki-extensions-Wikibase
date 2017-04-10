@@ -5,11 +5,11 @@ namespace Wikibase\Client\Tests\Hooks;
 use ExtensionRegistry;
 use FauxRequest;
 use FormOptions;
-use IDatabase;
 use SpecialPageFactory;
 use TestingAccessWrapper;
 use User;
 use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers;
+use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\LoadBalancer;
 
 /**

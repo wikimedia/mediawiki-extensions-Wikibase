@@ -4,12 +4,12 @@ namespace Wikibase\Client\Usage\Sql;
 
 use DBError;
 use Exception;
-use IDatabase;
 use InvalidArgumentException;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageTrackerException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * SubscriptionManager implementation backed by an SQL table.

@@ -7,7 +7,6 @@ use ChangesListSpecialPage;
 use ExtensionRegistry;
 use FormOptions;
 use IContextSource;
-use IDatabase;
 use MediaWiki\MediaWikiServices;
 use RequestContext;
 use User;
@@ -15,6 +14,7 @@ use WebRequest;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\WikibaseClient;
 use Wikimedia\Assert\Assert;
+use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\LoadBalancer;
 
 /**

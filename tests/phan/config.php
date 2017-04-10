@@ -348,14 +348,10 @@ return [
 		"PhanTypeMismatchReturn",
 		// approximate error count: 3
 		"PhanTypeMissingReturn",
-		// approximate error count: 8
-		"PhanUndeclaredClassMethod",
 		// approximate error count: 139
 		"PhanUndeclaredMethod",
 		// approximate error count: 25
 		"PhanUndeclaredProperty",
-		// approximate error count: 6
-		"PhanUndeclaredTypeParameter",
 		// approximate error count: 3
 		"PhanUndeclaredVariable",
 	],
