@@ -8,6 +8,16 @@
 	QUnit.module( 'wikibase.entityChangers.SiteLinkSetsChanger', QUnit.newMwEnvironment() );
 
 	var SUBJECT = wikibase.entityChangers.SiteLinkSetsChanger;
+	var API_RESPONSE = {
+		entity: {
+			sitelinks: {
+				siteId: {
+					title: 'pageName'
+				},
+				lastrevid: 'lastrevid'
+			}
+		}
+	};
 
 	QUnit.test( 'is a function', function( assert ) {
 		assert.expect( 1 );
@@ -27,7 +37,7 @@
 		assert.expect( 1 );
 		var api = {
 			setSitelink: sinon.spy( function() {
-				return $.Deferred().promise();
+				return $.Deferred().promise().resolve( API_RESPONSE );
 			} )
 		};
 		var siteLinksChanger = new SUBJECT(
@@ -36,28 +46,22 @@
 			new wb.datamodel.Item( 'Q1' )
 		);
 
+		var done = assert.async();
 		siteLinksChanger.save(
 			new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'siteId', 'pageName' ) ] ),
 			new wb.datamodel.SiteLinkSet()
-		);
+		).always( function() {
+			assert.ok( api.setSitelink.calledOnce );
+			done();
+		} );
 
-		assert.ok( api.setSitelink.calledOnce );
 	} );
 
 	QUnit.test( 'save correctly handles API response', function( assert ) {
 		assert.expect( 1 );
 		var api = {
 			setSitelink: sinon.spy( function() {
-				return $.Deferred().resolve( {
-					entity: {
-						sitelinks: {
-							siteId: {
-								title: 'pageName'
-							},
-							lastrevid: 'lastrevid'
-						}
-					}
-				} ).promise();
+				return $.Deferred().resolve( API_RESPONSE ).promise();
 			} )
 		};
 		var siteLinksChanger = new SUBJECT(
@@ -152,7 +156,7 @@
 		assert.expect( 1 );
 		var api = {
 			setSitelink: sinon.spy( function() {
-				return $.Deferred().promise();
+				return $.Deferred().promise().resolve( API_RESPONSE );
 			} )
 		};
 		var siteLinksChanger = new SUBJECT(
@@ -161,12 +165,14 @@
 			new wb.datamodel.Item( 'Q1' )
 		);
 
+		var done = assert.async();
 		siteLinksChanger.save(
 			new wb.datamodel.SiteLinkSet(),
 			new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'siteId', 'pageName' ) ] )
-		);
-
-		assert.ok( api.setSitelink.calledOnce );
+		).always( function() {
+			assert.ok( api.setSitelink.calledOnce );
+			done();
+		} );
 	} );
 
 	QUnit.test( 'save correctly handles API response for removal', function( assert ) {
