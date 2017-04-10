@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Api;
 use ApiMain;
 use Deserializers\Deserializer;
 use InvalidArgumentException;
-use MWException;
 use Title;
 use ApiUsageException;
 use Wikibase\ChangeOp\ChangeOp;
@@ -23,11 +22,9 @@ use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**

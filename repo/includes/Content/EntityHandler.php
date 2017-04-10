@@ -31,7 +31,6 @@ use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Repo\Diff\EntityContentDiffView;
 use Wikibase\Repo\Search\Elastic\Fields\FieldDefinitions;
-use Wikibase\Repo\Search\Elastic\Fields\WikibaseFieldDefinitions;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\EntityValidator;

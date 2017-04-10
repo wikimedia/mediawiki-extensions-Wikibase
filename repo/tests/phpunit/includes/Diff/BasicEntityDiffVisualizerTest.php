@@ -10,7 +10,6 @@ use IContextSource;
 use MediaWikiTestCase;
 use RawMessage;
 use Site;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Repo\Content\EntityContentDiff;

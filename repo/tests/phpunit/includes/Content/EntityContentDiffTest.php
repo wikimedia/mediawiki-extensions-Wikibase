@@ -5,9 +5,7 @@ namespace Wikibase\Repo\Tests\Content;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
-use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\Repo\Content\EntityContentDiff;
 
