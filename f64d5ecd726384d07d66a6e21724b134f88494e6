@@ -16,6 +16,24 @@
       "revId": "f64d5ecd726384d07d66a6e21724b134f88494e6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_15ce91b9",
+        "filename": "repo/includes/Content/ItemContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-10T14:54:29Z",
+      "side": 1,
+      "message": "I actually tried to do it but then I saw this class says the constructor should not be used directly (\"Do not use to construct new stuff from outside of this class\") so I need to pass on the PropertyDataTypeLookup object around in some  methods to get it injected properly which is not nice.",
+      "parentUuid": "4e506ba4_e870f1db",
+      "revId": "f64d5ecd726384d07d66a6e21724b134f88494e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
