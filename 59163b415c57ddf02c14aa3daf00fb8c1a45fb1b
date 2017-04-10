@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_5d7be5eb",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 874,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-10T09:22:10Z",
+      "side": 1,
+      "message": "\"Base\" for what? I\u0027m not sure this is a good name for a concept that\u0027s called \"storage frontend URL\" in code. Why change it\u0027s name when exposing it?",
+      "range": {
+        "startLine": 874,
+        "startChar": 26,
+        "endLine": 874,
+        "endChar": 30
+      },
+      "revId": "59163b415c57ddf02c14aa3daf00fb8c1a45fb1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
