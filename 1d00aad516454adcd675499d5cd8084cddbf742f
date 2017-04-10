@@ -317,6 +317,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_958f01d1",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-10T16:07:14Z",
+      "side": 1,
+      "message": "Yes, this is indeed what I head in mind, thank you!",
+      "parentUuid": "4e506ba4_fcc2fe05",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_05751892",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 6
@@ -352,6 +370,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_d58589b2",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-10T16:07:14Z",
+      "side": 1,
+      "message": "Yes, it does. I\u0027m assuming that in most cases, there will be no \":\". But it\u0027s quite possible that this really does not make a difference, and str_replace would be fine. Stas would know ;)",
+      "parentUuid": "4e506ba4_bcaeb693",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_a569c4be",
         "filename": "repo/includes/Rdf/SiteLinksRdfBuilder.php",
         "patchSetId": 6
@@ -381,6 +417,24 @@
       "side": 1,
       "message": "Long line broken down. And actually you might be right about this not really being needed for foreign entities. At least it seems to only sitelinks of local items are going to be exported. So I guess I should simply take changes in this class back?",
       "parentUuid": "4e506ba4_a569c4be",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_756cb505",
+        "filename": "repo/includes/Rdf/SiteLinksRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-10T16:07:14Z",
+      "side": 1,
+      "message": "I think we can assume for now that foreign entities may be referenced or used as predicates, and we may even produce stubs for them. But I currently see no used case for producing any statements or sitelinks for foreign entities.",
+      "parentUuid": "4e506ba4_dc094231",
       "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -451,6 +505,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "4e506ba4_05d99883",
+      "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_f578c5c1",
+        "filename": "repo/includes/Rdf/TermsRdfBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-10T16:07:14Z",
+      "side": 1,
+      "message": "Thanks. That makes the parameter list longer, but the code is now much more readable.",
+      "parentUuid": "4e506ba4_bc5316e2",
       "revId": "1d00aad516454adcd675499d5cd8084cddbf742f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
