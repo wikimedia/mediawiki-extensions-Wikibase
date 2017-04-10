@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_1dd9dd2c",
+        "filename": "view/resources/wikibase/templates.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-10T08:16:06Z",
+      "side": 1,
+      "message": "I wonder whether (any why) it makes a difference in case of \"class\" here? Ie. why it is copied using $template.prop in line 311, not simply copied with all other attrs in the loop here?",
+      "revId": "dc49d77b875cd68caf594b62dc7b5609c4898878",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
