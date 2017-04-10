@@ -22,6 +22,115 @@
       "revId": "4a50ed8273ed6e0432d78f59f3839224be51ea2d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_28649944",
+        "filename": "repo/includes/Diff/DispatchingEntityDiffVisualizer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-10T12:07:28Z",
+      "side": 1,
+      "message": "I agree: this should not be here. The factory supplies one visualizer, and we call one visualizer here. It should be left to that visualizer to use composition or subclassing or magic bunnies for code re-use.",
+      "parentUuid": "6e436fe2_af197480",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 81
+      },
+      "revId": "4a50ed8273ed6e0432d78f59f3839224be51ea2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_48348546",
+        "filename": "repo/includes/Diff/EntityDiffVisualizerFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-10T12:07:28Z",
+      "side": 1,
+      "message": "Please avoid passing IContextSource, it\u0027s a horrible kitchen sink *and* it uses global state. I\u0027d really like to get rid of it, see https://phabricator.wikimedia.org/T162594",
+      "revId": "4a50ed8273ed6e0432d78f59f3839224be51ea2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_68ee21b3",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1977,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-10T12:07:28Z",
+      "side": 1,
+      "message": "If the getter takes a parameter (like $contextSource), we cannot cache the instance. The next call max have a different context, and the old cached instance would not match that context.\n\nSo, either we rely on one canonical request context that will always be the same for all services; or we don\u0027t cache.",
+      "revId": "4a50ed8273ed6e0432d78f59f3839224be51ea2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_88eb6da0",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1978,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-10T12:07:28Z",
+      "side": 1,
+      "message": "Why can\u0027t we use $this-\u003egetUserLanguage()?",
+      "revId": "4a50ed8273ed6e0432d78f59f3839224be51ea2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_e886b1df",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1981,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-10T12:07:28Z",
+      "side": 1,
+      "message": "we are accessing $this-\u003egetLanguageFallbackChainFactory() below, so why not just get the fallback chain here?",
+      "revId": "4a50ed8273ed6e0432d78f59f3839224be51ea2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_c86e552a",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1992,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-10T12:07:28Z",
+      "side": 1,
+      "message": "That\u0027s not possible here. BasicEntityDiffVisualizer could implement prefetching of all labels needed i9n the diff.",
+      "revId": "4a50ed8273ed6e0432d78f59f3839224be51ea2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
