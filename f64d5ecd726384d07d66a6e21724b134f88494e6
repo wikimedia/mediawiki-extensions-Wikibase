@@ -34,6 +34,24 @@
       "revId": "f64d5ecd726384d07d66a6e21724b134f88494e6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_15af7192",
+        "filename": "repo/includes/Content/ItemContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-10T15:18:58Z",
+      "side": 1,
+      "message": "Oh, right, I completely missed the context here. Injecting in the constructor would not be nice here indeed.\nOh dear. I don\u0027t have a reasonable suggestion for this now.",
+      "parentUuid": "4e506ba4_15ce91b9",
+      "revId": "f64d5ecd726384d07d66a6e21724b134f88494e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
