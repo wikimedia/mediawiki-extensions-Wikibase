@@ -11,7 +11,11 @@ use Wikibase\Content\EntityHolder;
 use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Repo\ItemSearchTextGenerator;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Content object for articles representing Wikibase items.
@@ -38,6 +42,11 @@ class ItemContent extends EntityContent {
 	private $redirectTitle;
 
 	/**
+	 * @var PropertyDataTypeLookup
+	 */
+	private $dataTypeLookup;
+
+	/**
 	 * Do not use to construct new stuff from outside of this class,
 	 * use the static newFoobar methods.
 	 *
@@ -47,8 +56,6 @@ class ItemContent extends EntityContent {
 	 * @param EntityHolder|null $itemHolder
 	 * @param EntityRedirect|null $entityRedirect
 	 * @param Title|null $redirectTitle Title of the redirect target.
-	 *
-	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		EntityHolder $itemHolder = null,
@@ -84,6 +91,7 @@ class ItemContent extends EntityContent {
 		$this->itemHolder = $itemHolder;
 		$this->redirect = $entityRedirect;
 		$this->redirectTitle = $redirectTitle;
+		$this->dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
 	}
 
 	/**
@@ -166,6 +174,13 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
+	 * @param PropertyDataTypeLookup $dataTypeLookup
+	 */
+	public function setDataTypeLookup( $dataTypeLookup ) {
+		$this->dataTypeLookup = $dataTypeLookup;
+	}
+
+	/**
 	 * @see EntityContent::getEntityHolder
 	 *
 	 * @return EntityHolder
@@ -215,6 +230,27 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
+	 * @param StatementList $statementList
+	 * @return int
+	 */
+	private function getIdentifiersCount( StatementList $statementList ) {
+		$identifiers = 0;
+		foreach ( $statementList->getPropertyIds() as $propertyIdSerialization => $propertyId ) {
+			try {
+				$dataType = $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );
+			} catch ( PropertyDataTypeLookupException $e ) {
+				continue;
+			}
+
+			if ( $dataType === 'external-id' ) {
+				$identifiers += $statementList->getByPropertyId( $propertyId )->count();
+			}
+		}
+
+		return $identifiers;
+	}
+
+	/**
 	 * @see EntityContent::getEntityPageProperties
 	 *
 	 * Records the number of statements in the 'wb-claims' key
@@ -229,6 +265,7 @@ class ItemContent extends EntityContent {
 			$item = $this->getItem();
 			$properties['wb-claims'] = $item->getStatements()->count();
 			$properties['wb-sitelinks'] = $item->getSiteLinkList()->count();
+			$properties['wb-identifiers'] = $this->getIdentifiersCount( $item->getStatements() );
 		}
 
 		return $properties;
