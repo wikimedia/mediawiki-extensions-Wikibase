@@ -88,6 +88,24 @@
       "revId": "f64d5ecd726384d07d66a6e21724b134f88494e6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_690a9926",
+        "filename": "repo/includes/Content/ItemContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-11T16:28:08Z",
+      "side": 1,
+      "message": "If I understand correctly, the problem is that test code calls WikibaseRepo-\u003enewItemHandler() instead of constructing the ItemHandler directly. This makes it impossible to inject a mock DataTypeLookup.\n\nI would not recommend to mock WikibaseRepo. We can probably do the same we are already doing for all the other services that are injected into ItemHandler: don\u0027t mock the service, run the test with the \"live\" service.\n\nIf this is a problem for any of the tests in question, the test can be changed to call new ItemHandler instead of WikibaseRepo-\u003enewItemHandler().",
+      "parentUuid": "4e506ba4_9585c1a1",
+      "revId": "f64d5ecd726384d07d66a6e21724b134f88494e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
