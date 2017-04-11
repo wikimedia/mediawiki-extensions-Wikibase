@@ -47,7 +47,12 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->helper = new NTriplesRdfTestHelper();
+		$this->helper = new NTriplesRdfTestHelper(
+			new RdfBuilderTestData(
+				__DIR__ . '/../../data/rdf/entities',
+				__DIR__ . '/../../data/rdf/RdfDumpGenerator'
+			)
+		);
 	}
 
 	/**
@@ -79,10 +84,7 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 	}
 
 	private function getTestData() {
-		return new RdfBuilderTestData(
-			__DIR__ . '/../../data/rdf/entities',
-			__DIR__ . '/../../data/rdf/RdfDumpGenerator'
-		);
+		return $this->helper->getTestData();
 	}
 
 	/**
@@ -217,11 +219,10 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 	 */
 	public function testReferenceDedup( array $ids, $dumpname ) {
 		$entities = [];
-		$rdfTest = new RdfBuilderTest();
 
 		foreach ( $ids as $id ) {
 			$id = $id->getSerialization();
-			$entities[$id] = $rdfTest->getEntityData( $id );
+			$entities[$id] = $this->getTestData()->getEntity( $id );
 		}
 
 		$dumper = $this->newDumpGenerator( 'full-dump', $entities );
@@ -232,8 +233,7 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 		ob_start();
 		$dumper->generateDump( $pager );
 		$actual = ob_get_clean();
-		$expected = $this->getTestData()->getNTriples( $dumpname );
-		$this->helper->assertNTriplesEquals( $expected, $actual );
+		$this->helper->assertNTriplesEqualsDataset( $dumpname, $actual );
 	}
 
 }
