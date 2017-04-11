@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_1a8b1822",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-11T08:11:22Z",
+      "side": 1,
+      "message": "This seems OK for the write operations, I have some remarks though:\n1. (minor) maybe name of the feature flag should be somehow hinting it is about the column in the terms table?\n2. (more important IMO) I was about to take a stab at adjusting the code reading from wb_terms, and I started to wonder whether it should be using the same feature flag or some other? In case of reading there are actually three states to consider (as also Daniel said in https://phabricator.wikimedia.org/T159851#3140376): always read 1) numeric id, 2) read full id, if null, try numeric id (transition period), 3) always read full id. Such boolean flag as introduced here is not sufficient. Should there been another flag, or should this become a three-state flag? Thoughts?",
+      "revId": "4ca7f3f01dd29be980f3443012b6e899e5a436b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
