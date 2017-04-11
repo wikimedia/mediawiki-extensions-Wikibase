@@ -4,7 +4,7 @@ namespace Wikibase\DataModel\Snak;
 
 /**
  * Class representing a property some value snak.
- * See https://www.mediawiki.org/wiki/Wikibase/DataModel#PropertyNoValueSnak
+ * See https://www.mediawiki.org/wiki/Wikibase/DataModel#PropertySomeValueSnak
  *
  * @since 0.1
  *
