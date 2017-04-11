@@ -33,6 +33,24 @@
       "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_06c982ae",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-11T15:10:01Z",
+      "side": 1,
+      "message": "I believe this is because the $baseUri is the value coming from settings (conceptBaseUri/repoConceptBaseUri). Default values of the setting are suffixed with \u0027/entity/\u0027. I believe the same is with value in the settings of the instance running wikidata.org (if it does not just use the default).\n\nStill, we want to have things like https://www.wikidata.org/prop/Pxyz generated. That\u0027s why this drops the entity/ suffix. This is a hack, and does not cover cases where conceptBaseUri is something that does not end with entity/ (probably there is no such cases).\n\nThis class should be probably changed so it assumes it always gets the URI base without the \"entity/\" part in the constructor, and add it explicitly in URIs requiring it. As the setting mentioned above is used by other classes as well, the suffix shouldn\u0027t be simply dropped from the default value of the setting. Or maybe it actually should be removed, and all parts of code using it should make sure they get suffixed or unsuffixed form, depending on the case? Should I make a follow up?",
+      "parentUuid": "4e506ba4_b58c7ddc",
+      "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
