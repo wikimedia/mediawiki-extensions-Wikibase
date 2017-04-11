@@ -14,6 +14,7 @@ use User;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Diff\EntityTypeAwareDiffOpFactory;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\WikibaseRepo;
@@ -236,14 +237,18 @@ class EntityChange extends DiffChange {
 
 			if ( $diff instanceof DiffOp ) {
 				$info['diff'] = $diff->toArray( function ( $data ) {
-					if ( !( $data instanceof Statement ) ) {
-						return $data;
+					if ( $data instanceof Statement ) {
+						$array = $this->getStatementSerializer()->serialize( $data );
+						$array['_claimclass_'] = get_class( $data );
+
+						return $array;
 					}
 
-					$array = $this->getStatementSerializer()->serialize( $data );
-					$array['_claimclass_'] = get_class( $data );
+					if ( $data instanceof EntityId ) {
+						return [ '_entityid_' => $data->getSerialization() ];
+					}
 
-					return $array;
+					return $data;
 				} );
 			}
 		}
@@ -299,6 +304,22 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
+	 * @throws RuntimeException
+	 * @return EntityIdParser
+	 */
+	private function getEntityIdParser() {
+		// FIXME: the change row system needs to be reworked to either allow for sane injection
+		// or to avoid this kind of configuration dependent tasks.
+		if ( defined( 'WB_VERSION' ) ) {
+			return WikibaseRepo::getDefaultInstance()->getEntityIdParser();
+		} elseif ( defined( 'WBC_VERSION' ) ) {
+			return WikibaseClient::getDefaultInstance()->getEntityIdParser();
+		} else {
+			throw new RuntimeException( 'Need either client or repo loaded' );
+		}
+	}
+
+	/**
 	 * @see ChangeRow::unserializeInfo
 	 *
 	 * Overwritten to use the array representation of the diff.
@@ -336,6 +357,10 @@ class EntityChange extends DiffChange {
 					unset( $data['_claimclass_'] );
 					return $this->getStatementDeserializer()->deserialize( $data );
 				}
+			}
+
+			if ( is_array( $data ) && isset( $data['_entityid_'] ) ) {
+				return $this->getEntityIdParser()->parse( $data['_entityid_'] );
 			}
 
 			return $data;

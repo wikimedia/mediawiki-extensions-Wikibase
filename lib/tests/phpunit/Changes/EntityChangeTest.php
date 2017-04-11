@@ -332,4 +332,27 @@ class EntityChangeTest extends ChangeRowTest {
 		$this->assertInstanceOf( Statement::class, $statement );
 	}
 
+	public function testGivenStatement_serializeInfoSerializesEntityId() {
+		$id = new ItemId( 'Q7' );
+		$info = [ 'diff' => new DiffOpAdd( $id ) ];
+
+		$change = new EntityChange( [ 'info' => $info ] );
+
+		$json = $change->getSerializedInfo();
+		$array = json_decode( $json, true );
+
+		$this->assertSame( [ '_entityid_' => 'Q7' ], $array['diff']['newvalue'] );
+	}
+
+	public function testGivenStatementSerialization_getInfoDeserializesEntityId() {
+		$data = [ '_entityid_' => 'Q7' ];
+		$json = json_encode( [ 'diff' => [ 'type' => 'add', 'newvalue' => $data ] ] );
+
+		$change = new EntityChange( [ 'info' => $json ] );
+		$info = $change->getInfo();
+		$id = $info['diff']->getNewValue();
+		$this->assertInstanceOf( ItemId::class, $id );
+		$this->assertSame( 'Q7', $id->getSerialization() );
+	}
+
 }
