@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Api;
 use ApiBase;
 use ApiMain;
 use LogicException;
+use MWContentSerializationException;
 use Status;
 use User;
 use Wikibase\ChangeOp\ChangeOp;
@@ -246,10 +247,16 @@ abstract class ModifyEntity extends ApiBase {
 			$this->errorReporter->dieError( 'Attempted modification of the item failed', 'failed-modify' );
 		}
 
-		$status = $this->entitySavingHelper->attemptSaveEntity(
-			$entity,
-			$summary
-		);
+		try {
+			$status = $this->entitySavingHelper->attemptSaveEntity(
+				$entity,
+				$summary
+			);
+		} catch ( MWContentSerializationException $ex ) {
+			// This happens if the $entity created via modifyEntity() above (possibly cleared
+			// before) is not sufficiently initialized and failed serialization.
+			$this->errorReporter->dieError( $ex->getMessage(), 'failed-save' );
+		}
 
 		$this->addToOutput( $entity, $status, $entityRevId );
 	}
