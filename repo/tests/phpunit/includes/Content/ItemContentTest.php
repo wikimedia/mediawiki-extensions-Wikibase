@@ -168,14 +168,17 @@ class ItemContentTest extends EntityContentTest {
 	 * @return EntityContent
 	 */
 	private function getItemContentWithIdentifierClaims() {
+		$itemContent = $this->newEmpty();
+		$item = $itemContent->getItem();
 
-		$item = new Item( new ItemId( 'Q2' ) );
-		$snak = new PropertyValueSnak( new PropertyId( 'P11' ), new StringValue( 'Tehran' ) );
-		$guid = $item->getId()->getSerialization() . '$D8404CDA-25E4-4334-AG93-A3290BCD9C0P';
-		$item->getStatements()->addNewStatement( $snak, null, null, $guid );
+		$item->getStatements()->addNewStatement(
+			new PropertyNoValueSnak( new PropertyId( 'P111' ) ),
+			null,
+			null,
+			'Whatever'
+		);
 
-		$handler = $this->getItemHandler();
-		return $handler->makeEntityContent( new EntityInstanceHolder( $item ) );
+		return $itemContent;
 	}
 
 	/**
@@ -184,7 +187,7 @@ class ItemContentTest extends EntityContentTest {
 	private function getPropertyDataTypeLookup() {
 		$dataTypeLookup = new InMemoryDataTypeLookup();
 
-		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P11' ), 'external-id' );
+		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P111' ), 'external-id' );
 
 		return $dataTypeLookup;
 	}
@@ -262,16 +265,31 @@ class ItemContentTest extends EntityContentTest {
 			)
 		);
 
-		$cases['identifiers'] = [
-			$this->getItemContentWithIdentifierClaims(),
+		return $cases;
+	}
+
+	public function testFoo() {
+		$itemHandler = $this->getItemHandler();
+		$this->setMwGlobals(
+			'wgContentHandlers',
 			[
-				'wb-claims' => 1,
-				'wb-identifiers' => 1,
-				'wb-sitelinks' => 0,
+				'wikibase-item' => function () use ( $itemHandler ) {
+					return $itemHandler;
+				}
 			]
+		);
+
+		$expectedPageProps = [
+			'wb-claims' => 1,
+			'wb-identifiers' => 1,
+			'wb-sitelinks' => 0,
 		];
 
-		return $cases;
+		$content = $this->getItemContentWithIdentifierClaims();
+
+		$pageProps = $content->getEntityPageProperties();
+
+		$this->assertEquals( $expectedPageProps, $pageProps );
 	}
 
 	public function diffProvider() {
