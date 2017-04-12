@@ -216,11 +216,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	protected function getResult( $offset = 0, $limit = 0 ) {
 		$propertyInfo = array_slice( $this->getPropertyInfo(), $offset, $limit, true );
 
-		$propertyIds = array();
-
-		foreach ( $propertyInfo as $serialization => $info ) {
-			$propertyIds[] = new PropertyId( $serialization );
-		}
+		$propertyIds = array_values( $propertyInfo );
 
 		$this->prefetchingTermLookup->prefetchTerms( $propertyIds );
 
@@ -228,7 +224,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	}
 
 	/**
-	 * @return array[] An associative array mapping property IDs to info arrays.
+	 * @return PropertyId[] A sorted array mapping numeric id to its PropertyId
 	 */
 	private function getPropertyInfo() {
 		if ( $this->dataType === '' ) {
@@ -239,9 +235,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 			);
 		}
 
-		// NOTE: $propertyInfo uses serialized property IDs as keys!
-		ksort( $propertyInfo );
-		return $propertyInfo;
+		return $this->getOrderedProperties( $propertyInfo );
 	}
 
 	/**
@@ -256,6 +250,21 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	 */
 	protected function getSubpagesForPrefixSearch() {
 		return $this->dataTypeFactory->getTypeIds();
+	}
+
+	/**
+	 * @param $propertyInfo
+	 * @return PropertyId[]
+	 */
+	private function getOrderedProperties( $propertyInfo ) {
+		$propertiesById = [];
+		foreach ( $propertyInfo as $serialization => $info ) {
+			$propertyId = new PropertyId( $serialization );
+			$propertiesById[$propertyId->getNumericId()] = $propertyId;
+		}
+		ksort( $propertiesById );
+
+		return $propertiesById;
 	}
 
 }
