@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_b53a2ee3",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 69
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-04-12T00:59:24Z",
+      "side": 1,
+      "message": "think these and the ones in en.json should be \"wikibase-search-bad-entity-type\" and \"wikibase-search-bad-profile-name\" (to be consistent with the other message keys here)",
+      "revId": "bdf6bde9f44d7d60df218be1213582286fa2d858",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
