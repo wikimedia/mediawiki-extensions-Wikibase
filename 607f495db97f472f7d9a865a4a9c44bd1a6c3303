@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_aa4dece1",
+        "filename": "lib/includes/Changes/EntityChange.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-12T12:28:29Z",
+      "side": 1,
+      "message": "There is a very nice hack for this:\n\nswitch ( true ) {\n    case $data instanceof EntityId:\n        …\n    case $data instanceof Statement:\n        …\n    default:\n        …\n}",
+      "revId": "607f495db97f472f7d9a865a4a9c44bd1a6c3303",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_ca4ab8c8",
+        "filename": "lib/includes/Changes/EntityChange.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-12T12:28:29Z",
+      "side": 1,
+      "message": "A more \"compatible\" array structure would be:\n\n[\n    \u0027id\u0027 \u003d\u003e …,\n    \u0027_entityidclass_\u0027 \u003d\u003e get_class( … ),\n]\n\nSuch \"compatibility\" does not matter that much. It\u0027s just nice that serializations using the \"id\" key look similar.\n\n*But* by doing so we can remove the need to have an EntityId parser entirely. The only guarantee we need then is that all EntityId classes have a default constructor that accepts the ID string – and I\u0027m sure this will always be the case.",
+      "range": {
+        "startLine": 248,
+        "startChar": 13,
+        "endLine": 248,
+        "endChar": 58
+      },
+      "revId": "607f495db97f472f7d9a865a4a9c44bd1a6c3303",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_2a10fcac",
+        "filename": "lib/includes/Changes/EntityChange.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-12T12:28:29Z",
+      "side": 1,
+      "message": "Not sure if it matters much performance-wise, but this is_array check is now duplicated. I would like to avoid this. Should be quite trivial to refactor this code to achieve this.",
+      "range": {
+        "startLine": 365,
+        "startChar": 8,
+        "endLine": 365,
+        "endChar": 25
+      },
+      "revId": "607f495db97f472f7d9a865a4a9c44bd1a6c3303",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
