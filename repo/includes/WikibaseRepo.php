@@ -1853,6 +1853,9 @@ class WikibaseRepo {
 
 						// T151129
 						'moe',
+
+						// T160531
+						'umu',
 					) )
 				),
 
