@@ -47,7 +47,7 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	private function getPropertyInfoStore() {
 		$propertyInfoLookup = new MockPropertyInfoLookup( [
 			'P789' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
-			'P456' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'wikibase-item' ],
+			'P45' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'wikibase-item' ],
 			'P123' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'wikibase-item' ],
 		] );
 
@@ -134,15 +134,15 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 		$this->assertContains( 'wikibase-listproperties-summary', $output );
 		$this->assertContains( 'wikibase-listproperties-legend', $output );
 		$this->assertNotContains( 'wikibase-listproperties-invalid-datatype', $output );
-		$this->assertRegExp( '/P123.*P456.*P789/', $output ); // order is relevant
+		$this->assertRegExp( '/P45.*P123.*P789/', $output ); // order is relevant
 	}
 
 	public function testOffsetAndLimit() {
 		$request = new \FauxRequest( array( 'limit' => '1', 'offset' => '1' ) );
 		list( $output, ) = $this->executeSpecialPage( '', $request, 'qqx' );
 
+		$this->assertContains( 'P45', $output );
 		$this->assertNotContains( 'P123', $output );
-		$this->assertContains( 'P456', $output );
 		$this->assertNotContains( 'P789', $output );
 	}
 
@@ -163,8 +163,8 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 		// Use en-gb as language to test language fallback
 		list( $output, ) = $this->executeSpecialPage( 'wikibase-item', null, 'en-gb' );
 
+		$this->assertContains( 'Property with label P45', $output );
 		$this->assertContains( 'Property with label P123', $output );
-		$this->assertContains( 'Property with label P456', $output );
 		$this->assertNotContains( 'P789', $output );
 
 		$this->assertContains( 'lang="en"', $output );
@@ -174,8 +174,8 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	public function testExecute_string() {
 		list( $output, ) = $this->executeSpecialPage( 'string', null, 'en-gb' );
 
+		$this->assertNotContains( 'P45', $output );
 		$this->assertNotContains( 'P123', $output );
-		$this->assertNotContains( 'P456', $output );
 		$this->assertContains( 'Property with label P789', $output );
 	}
 
