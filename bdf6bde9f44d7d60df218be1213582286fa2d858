@@ -16,6 +16,24 @@
       "revId": "bdf6bde9f44d7d60df218be1213582286fa2d858",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_ac198480",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 69
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-04-12T22:38:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_b53a2ee3",
+      "revId": "bdf6bde9f44d7d60df218be1213582286fa2d858",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
