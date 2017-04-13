@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_c164d247",
+        "filename": "lib/includes/LanguageFallbackChainFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2017-04-13T20:09:03Z",
+      "side": 1,
+      "message": "The API here is not the best.  It would really be better to use $language-\u003ehasVariants() consistently instead of looking at $languagesWithVariants, since variants can be disabled by local configuration ($wgDisabledVariants, etc).  But as I understand it we\u0027re trying to avoid actually using Language::factory() for performance reasons?  In that case, I think it\u0027s fine to use $languagesWithVariants as a \"conservative approximation\" to the set of languages which *might* have variants, but you should probably double-check with $language-\u003ehasVariants() before believing it.",
+      "revId": "c542dea50d39aecb75b62025764e286f33d5754e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_a163c63a",
+        "filename": "lib/includes/LanguageFallbackChainFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2017-04-13T20:09:03Z",
+      "side": 1,
+      "message": "Wrap this so that $language-\u003ehasVariants() is treated as the fundamental truth:\n\nif ($language-\u003ehasVariants()) {\n  $parentLanguage \u003d $language-\u003egetParentLanguage();\n}",
+      "range": {
+        "startLine": 133,
+        "startChar": 4,
+        "endLine": 133,
+        "endChar": 19
+      },
+      "revId": "c542dea50d39aecb75b62025764e286f33d5754e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
