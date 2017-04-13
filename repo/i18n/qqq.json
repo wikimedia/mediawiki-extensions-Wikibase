@@ -332,7 +332,7 @@
 	"wikibase-entitydata-unsupported-format": "Error shown when the requested output format is not supported for entity data (HTTP error 415).\n\nParameters:\n* $1 - the specified data format name",
 	"wikibase-entitydata-storage-error": "Error shown when the requested entity could not be loaded.\n\nParameters:\n* $1 - entity ID\n* $2 - (Unused) revision ID\nSee also:\n* {{msg-mw|Wikibase-entitydata-bad-revision}}",
 	"wikibase-entitydata-title": "Title shown on the special page when a form or text is presented",
-	"wikibase-entitydata-text": "Explanatory text shown on the special page.",
+	"wikibase-entitydata-text": "Explanatory text shown on the special page.\n* $1: List of supported formats",
 	"special-entitypage": "{{doc-special|EntityPage}}\nThis special page redirects to the actual entity page on the repository the entity belongs to.",
 	"wikibase-entitypage-title": "Title shown on Special:EntityPage when the explanatory text is presented",
 	"wikibase-entitypage-text": "Explanatory text shown on Special:EntityPage when no ID has been provided.",
