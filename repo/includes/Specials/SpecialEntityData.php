@@ -30,6 +30,11 @@ class SpecialEntityData extends SpecialWikibasePage {
 	 */
 	private $requestHandler = null;
 
+	/**
+	 * @var EntityDataFormatProvider|null
+	 */
+	private $entityDataFormatProvider = null;
+
 	public function __construct() {
 		parent::__construct( 'EntityData' );
 	}
@@ -121,6 +126,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$titleLookup
 		);
 
+		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		return new EntityDataRequestHandler(
 			$uriManager,
 			$titleLookup,
@@ -162,7 +168,24 @@ class SpecialEntityData extends SpecialWikibasePage {
 	public function showForm() {
 		//TODO: show input form with selector for format and field for ID. Add some explanation,
 		//      point to meta-info like schema and license, and generally be a helpful data endpoint.
-		$this->getOutput()->showErrorPage( 'wikibase-entitydata-title', 'wikibase-entitydata-text' );
+		$supportedFormats = $this->entityDataFormatProvider->getSupportedFormats();
+		$supportedFormats[] = 'html';
+		$this->getOutput()->showErrorPage(
+			'wikibase-entitydata-title',
+			'wikibase-entitydata-text',
+			[ $this->getOutput()->getLanguage()->commaList( $supportedFormats ) ]
+		);
+	}
+
+	/**
+	 * @param EntityDataFormatProvider $entityDataFormatProvider
+	 *
+	 * TODO: Inject them
+	 */
+	public function setEntityDataFormatProvider(
+		EntityDataFormatProvider $entityDataFormatProvider
+	) {
+		$this->entityDataFormatProvider = $entityDataFormatProvider;
 	}
 
 }

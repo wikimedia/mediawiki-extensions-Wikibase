@@ -52,6 +52,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		$page->getContext()->setOutput( new OutputPage( $page->getContext() ) );
 
 		$page->setRequestHandler( $this->newRequestHandler() );
+		$page->setEntityDataFormatProvider( $this->newEntityDataFormatProvider() );
 
 		return $page;
 	}
@@ -187,6 +188,13 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$this->assertEquals( $expCode, $e->getStatusCode(), "status code" );
 			$this->assertRegExp( $expRegExp, $e->getHTML(), "error output" );
 		}
+	}
+
+	private function newEntityDataFormatProvider() {
+		$entityDataFormatProvider = new EntityDataFormatProvider();
+		$entityDataFormatProvider->setFormatWhiteList( [ 'json', 'rdfxml', 'ntriples' ] );
+
+		return $entityDataFormatProvider;
 	}
 
 }
