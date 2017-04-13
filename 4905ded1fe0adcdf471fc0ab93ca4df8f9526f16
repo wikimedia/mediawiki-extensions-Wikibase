@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_2ce494a2",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-04-13T00:21:04Z",
+      "side": 0,
+      "message": "I think maybe we should have some kind of flag for generating these for foreign properties. Not sure yet but it may be that we have some scenarios when we don\u0027t want to generate full definitions for non-local properties.",
+      "revId": "4905ded1fe0adcdf471fc0ab93ca4df8f9526f16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

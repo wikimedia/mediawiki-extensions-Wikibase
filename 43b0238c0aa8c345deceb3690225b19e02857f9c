@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4e506ba4_ace18499",
+        "filename": "repo/includes/Rdf/PropertyRdfBuilder.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-04-13T00:21:04Z",
+      "side": 1,
+      "message": "It also looks very wasteful here that we call those functions repeatedly which all will call getRepositoryName inside despite it all being the same name. Maybe we should have a version where we can supply the repository name (in addition to making those 20 functions one function).",
+      "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_354dcd9b",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 10
@@ -13,6 +30,131 @@
       "writtenOn": "2017-04-10T16:07:14Z",
       "side": 1,
       "message": "It still seems like we should have all the data URIs for all the repos here, for symmetry and future use. But I really can\u0027t think of a use case right now. So perhaps later.",
+      "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_ecf46c85",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-04-13T00:21:04Z",
+      "side": 1,
+      "message": "Not super-happy with magic \u0027\u0027 value here. At least should be prominently described in the comments that this is what is going on here. Also may be worth checking $conceptUris[\u0027\u0027] actually exists.",
+      "range": {
+        "startLine": 152,
+        "startChar": 54,
+        "endLine": 152,
+        "endChar": 58
+      },
+      "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_4c8c80ff",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-04-13T00:21:04Z",
+      "side": 1,
+      "message": "can be part of the table above",
+      "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_2c87b4dd",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-04-13T00:21:04Z",
+      "side": 1,
+      "message": "these can be moved to the static table above.",
+      "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_8c05a87e",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-04-13T00:21:04Z",
+      "side": 1,
+      "message": "Some documentation about what this function actually does?",
+      "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_8c692820",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-04-13T00:21:04Z",
+      "side": 1,
+      "message": "we need to be very careful here so that name+suffix would not clash with another name. I.e. if we have prefix \"wd\" and repository named \"ref\" then combined prefix \"wdref\" would clash with original NS_REFERENCE.",
+      "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_ccebb09f",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-04-13T00:21:04Z",
+      "side": 1,
+      "message": "This function looks suspiciously like the previous one, and on top of that doesn\u0027t have any docs. Please add the docs and explain why we have two of them.",
+      "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_2c5ed47b",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-04-13T00:21:04Z",
+      "side": 1,
+      "message": "real phpdoc please",
       "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -48,6 +190,74 @@
       "side": 1,
       "message": "I believe this is because the $baseUri is the value coming from settings (conceptBaseUri/repoConceptBaseUri). Default values of the setting are suffixed with \u0027/entity/\u0027. I believe the same is with value in the settings of the instance running wikidata.org (if it does not just use the default).\n\nStill, we want to have things like https://www.wikidata.org/prop/Pxyz generated. That\u0027s why this drops the entity/ suffix. This is a hack, and does not cover cases where conceptBaseUri is something that does not end with entity/ (probably there is no such cases).\n\nThis class should be probably changed so it assumes it always gets the URI base without the \"entity/\" part in the constructor, and add it explicitly in URIs requiring it. As the setting mentioned above is used by other classes as well, the suffix shouldn\u0027t be simply dropped from the default value of the setting. Or maybe it actually should be removed, and all parts of code using it should make sure they get suffixed or unsuffixed form, depending on the case? Should I make a follow up?",
       "parentUuid": "4e506ba4_b58c7ddc",
+      "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_ec430cb5",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-04-13T00:21:04Z",
+      "side": 1,
+      "message": "Do we really need 20 functions doing exactly the same thing with one parameter varied? The constants are descriptive enough, I think these all should be one function with two parameters. Or maybe two functions if you need to distinguish between EntityId and PropertyId (though I\u0027m not really sure why).\n\nAlso I\u0027m concerned about performance impact - we\u0027re converting a constant to 2 function calls here. Maybe we should make repositorySpecificNamespaceNames public instead. Not as clean but we can save tons of fcalls this way.",
+      "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_cc4ad0c8",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-04-13T00:21:04Z",
+      "side": 1,
+      "message": "Would be nice to describe what is the significance of \u0027:\u0027 here.",
+      "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_ac5c244f",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-04-13T00:21:04Z",
+      "side": 1,
+      "message": "Also, looking into how getLocalPart is implemented, there\u0027s a number of splitting and joining going on, and I wonder if we can\u0027t do the same thing simpler and with less effort. This function is going to be called a lot, and doing two splits and two joins each time is not a good idea. \n\nAlso, we\u0027re calling getLocalPart() twice here, should be only once.",
+      "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_2cb25493",
+        "filename": "repo/includes/Rdf/SiteLinksRdfBuilder.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-04-13T00:21:04Z",
+      "side": 1,
+      "message": "Not happy we have 2 separate fcalls here for the same thing. If NS_ENTITY is not constant, maybe we should have one fcall that produces the full name here? We could make is() handle array argument or something like that.\n\nSame complaint in many other places where combined name is produced. Won\u0027t write each time specifically, but would like to see comprehensive solution for all those.",
       "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
