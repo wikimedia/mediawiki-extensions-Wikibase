@@ -7,6 +7,7 @@ use FauxRequest;
 use FauxResponse;
 use HashSiteStore;
 use HttpError;
+use Language;
 use OutputPage;
 use SiteList;
 use SpecialPage;
@@ -52,6 +53,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		$page->getContext()->setOutput( new OutputPage( $page->getContext() ) );
 
 		$page->setRequestHandler( $this->newRequestHandler() );
+		$page->setEntityDataFormatProvider( $this->newEntityDataFormatProvider() );
 
 		return $page;
 	}
@@ -140,6 +142,10 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 				$cases[$n][4] = 200; // http code
 				$cases[$n][5] = array(); // response headers
 			}
+
+			// When no param is provided, special page must show supported formats
+			$this->setContentLang( Language::factory( 'en' ) );
+			$cases[] = [ '', [], [], '/json, nt, rdf, html/', 200, [] ];
 		}
 
 		return $cases;
@@ -187,6 +193,13 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$this->assertEquals( $expCode, $e->getStatusCode(), "status code" );
 			$this->assertRegExp( $expRegExp, $e->getHTML(), "error output" );
 		}
+	}
+
+	private function newEntityDataFormatProvider() {
+		$entityDataFormatProvider = new EntityDataFormatProvider();
+		$entityDataFormatProvider->setFormatWhiteList( [ 'json', 'rdfxml', 'ntriples' ] );
+
+		return $entityDataFormatProvider;
 	}
 
 }
