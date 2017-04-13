@@ -218,7 +218,21 @@ class LanguageFallbackChainFactoryTest extends MediaWikiTestCase {
 					[ 'zh', 'zh-sg' ],
 					[ 'zh', 'zh-mo' ],
 					[ 'zh', 'zh-my' ],
-					[ 'zh', 'zh' ],
+				]
+			],
+			[
+				'languageCode' => 'zh',
+				'mode' => LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS,
+				'expected' => [
+					'zh', // This should be the only difference to the test case above
+					[ 'zh', 'zh-hans' ],
+					[ 'zh', 'zh-hant' ],
+					[ 'zh', 'zh-cn' ],
+					[ 'zh', 'zh-tw' ],
+					[ 'zh', 'zh-hk' ],
+					[ 'zh', 'zh-sg' ],
+					[ 'zh', 'zh-mo' ],
+					[ 'zh', 'zh-my' ],
 				]
 			],
 			[
