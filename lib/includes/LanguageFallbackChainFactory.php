@@ -123,16 +123,22 @@ class LanguageFallbackChainFactory {
 		}
 
 		if ( $mode & self::FALLBACK_VARIANTS ) {
-			/** @var Language $parentLanguage */
-			$pieces = explode( '-', $languageCode );
-			if ( !in_array( $pieces[0], LanguageConverter::$languagesWithVariants ) ) {
-				$parentLanguage = null;
-			} else {
+			$parentLanguage = null;
+			$pieces = explode( '-', $languageCode, 2 );
+
+			if ( in_array( $pieces[0], LanguageConverter::$languagesWithVariants ) ) {
 				if ( is_string( $language ) ) {
 					$language = Language::factory( $language );
 				}
 				$parentLanguage = $language->getParentLanguage();
+
+				// A language may be parent of itself (see T156280). We must consider and skip this
+				// to not have loops in our chain.
+				if ( $parentLanguage && $parentLanguage->getCode() === $languageCode ) {
+					$parentLanguage = null;
+				}
 			}
+
 			if ( $parentLanguage ) {
 				// It's less likely to trigger conversion mistakes by converting
 				// zh-tw to zh-hk first instead of converting zh-cn to zh-tw.
