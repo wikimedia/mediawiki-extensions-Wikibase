@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_fb2dfd41",
+        "filename": "repo/includes/Specials/SpecialListProperties.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-13T15:51:45Z",
+      "side": 1,
+      "message": "It won\u0027t be needed anymore :)",
+      "parentUuid": "4e506ba4_558640bf",
+      "range": {
+        "startLine": 222,
+        "startChar": 32,
+        "endLine": 222,
+        "endChar": 69
+      },
+      "revId": "386f71639cfccf7f9bd01c749022c21c3ca6ef7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_75833cae",
         "filename": "repo/includes/Specials/SpecialListProperties.php",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2017-04-13T11:22:44Z",
       "side": 1,
       "message": "This should either be\n\n$this-\u003eorderProperties( $propertyInfo );\nreturn $propertyInfo;\n\nor named getOrderedProperties.",
+      "range": {
+        "startLine": 242,
+        "startChar": 16,
+        "endLine": 242,
+        "endChar": 31
+      },
+      "revId": "386f71639cfccf7f9bd01c749022c21c3ca6ef7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_bb27755e",
+        "filename": "repo/includes/Specials/SpecialListProperties.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-13T15:51:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_75833cae",
       "range": {
         "startLine": 242,
         "startChar": 16,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_78f25399",
+        "filename": "repo/includes/Specials/SpecialListProperties.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-13T15:51:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_1590b8f0",
+      "range": {
+        "startLine": 266,
+        "startChar": 3,
+        "endLine": 266,
+        "endChar": 79
+      },
+      "revId": "386f71639cfccf7f9bd01c749022c21c3ca6ef7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_358db4d7",
         "filename": "repo/includes/Specials/SpecialListProperties.php",
         "patchSetId": 2
@@ -82,6 +154,30 @@
       "writtenOn": "2017-04-13T11:22:44Z",
       "side": 1,
       "message": "I would build an array that maps numeric IDs to PropertyId objects, and ksort it. This will make the rest of the code much simpler, I believe.",
+      "range": {
+        "startLine": 269,
+        "startChar": 2,
+        "endLine": 269,
+        "endChar": 6
+      },
+      "revId": "386f71639cfccf7f9bd01c749022c21c3ca6ef7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_b8ff7b61",
+        "filename": "repo/includes/Specials/SpecialListProperties.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-13T15:51:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_358db4d7",
       "range": {
         "startLine": 269,
         "startChar": 2,
