@@ -14,10 +14,7 @@ use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\SidebarHookHandlers;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\DataModel\SiteLink;
 use Wikibase\NamespaceChecker;
 use Wikibase\SettingsArray;
 
@@ -33,23 +30,11 @@ use Wikibase\SettingsArray;
  */
 class SidebarHookHandlersTest extends \MediaWikiTestCase {
 
-	private function getBadgeItem() {
-		$item = new Item( new ItemId( 'Q17' ) );
-		$item->setLabel( 'de', 'exzellent' );
-		$item->setLabel( 'en', 'featured' );
-
-		return $item;
-	}
-
 	/**
-	 * @param array[] $siteLinksPerItem
-	 *
 	 * @return LabelDescriptionLookup
 	 */
-	private function getLabelDescriptionLookup( array $siteLinksPerItem ) {
-		$labelLookup = $this->getMockBuilder( LabelDescriptionLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+	private function getLabelDescriptionLookup() {
+		$labelLookup = $this->getMock( LabelDescriptionLookup::class );
 
 		$labelLookup->expects( $this->any() )
 			  ->method( 'getLabel' )
@@ -115,21 +100,6 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	private function newSidebarHookHandlers( array $settings = array() ) {
-		$badgeId = $this->getBadgeItem()->getId();
-
-		$siteLinksPerItem = array(
-			'Q1' => array(
-				new SiteLink( 'dewiki', 'Sauerstoff', array( $badgeId ) ),
-				new SiteLink( 'enwiki', 'Oxygen' ),
-				new SiteLink( 'commonswiki', 'Oxygen' ),
-			),
-			'Q7' => array(
-				new SiteLink( 'dewiki', 'User:Foo' ),
-				new SiteLink( 'enwiki', 'User:Foo' ),
-				new SiteLink( 'commonswiki', 'User:Foo' ),
-			),
-		);
-
 		$en = Language::factory( 'en' );
 		$settings = $this->newSettings( $settings );
 
@@ -137,7 +107,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$namespaceChecker = new NamespaceChecker( array(), $namespaces );
 
 		$badgeDisplay = new LanguageLinkBadgeDisplay(
-			$this->getLabelDescriptionLookup( $siteLinksPerItem ),
+			$this->getLabelDescriptionLookup(),
 			array( 'Q17' => 'featured' ),
 			$en
 		);
