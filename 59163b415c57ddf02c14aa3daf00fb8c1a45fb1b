@@ -22,6 +22,30 @@
       "revId": "59163b415c57ddf02c14aa3daf00fb8c1a45fb1b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_522ad690",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 874,
+      "author": {
+        "id": 1762
+      },
+      "writtenOn": "2017-04-13T07:22:12Z",
+      "side": 1,
+      "message": "As mentioned in T162561 I\u0027m not super happy with my variable name. My thinking was that it is the url base which you append the filename to (the \"Data:\" being part of the filename).\n\nThe original \"storage frontend\" would for me not be very clear what is being referred to if it showed up in the api.\n\nThat said I\u0027m happy to change to either \u0027wikibase-geoshapestoragefrontendurl\u0027 or a third alternative though.",
+      "parentUuid": "4e506ba4_5d7be5eb",
+      "range": {
+        "startLine": 874,
+        "startChar": 26,
+        "endLine": 874,
+        "endChar": 30
+      },
+      "revId": "59163b415c57ddf02c14aa3daf00fb8c1a45fb1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
