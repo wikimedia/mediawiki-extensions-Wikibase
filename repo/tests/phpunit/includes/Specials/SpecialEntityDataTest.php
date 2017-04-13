@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Specials;
 use DataValues\Serializers\DataValueSerializer;
 use FauxRequest;
 use FauxResponse;
+use Language;
 use HashSiteStore;
 use HttpError;
 use OutputPage;
@@ -52,6 +53,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		$page->getContext()->setOutput( new OutputPage( $page->getContext() ) );
 
 		$page->setRequestHandler( $this->newRequestHandler() );
+		$page->setEntityDataFormatProvider( $this->newEntityDataFormatProvider() );
 
 		return $page;
 	}
@@ -141,7 +143,6 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 				$cases[$n][5] = array(); // response headers
 			}
 		}
-
 		return $cases;
 	}
 
@@ -187,6 +188,24 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$this->assertEquals( $expCode, $e->getStatusCode(), "status code" );
 			$this->assertRegExp( $expRegExp, $e->getHTML(), "error output" );
 		}
+	}
+
+	private function newEntityDataFormatProvider() {
+		$entityDataFormatProvider = new EntityDataFormatProvider();
+		$entityDataFormatProvider->setFormatWhiteList( [ 'json', 'rdfxml', 'ntriples' ] );
+
+		return $entityDataFormatProvider;
+	}
+
+	public function testEntityDataFormatProvider() {
+		$this->setContentLang( Language::factory( 'en' ) );
+		$request = new FauxRequest();
+		$request->response()->header( 'Status: 200 OK', true, 200 ); // init/reset
+
+		list( $output, ) = $this->executeSpecialPage( '', $request );
+
+		$this->assertRegExp( '/Supported formats are: json, nt, rdf, html/', $output, "output" );
+
 	}
 
 }
