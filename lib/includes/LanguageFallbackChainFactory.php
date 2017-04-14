@@ -130,7 +130,12 @@ class LanguageFallbackChainFactory {
 				if ( is_string( $language ) ) {
 					$language = Language::factory( $language );
 				}
-				$parentLanguage = $language->getParentLanguage();
+				// $languagesWithVariants is just an approximation; variants
+				// can be disabled via $wgDisabledVariants, etc.  The
+				// $language->hasVariants() API is authoritative.
+				if ( $language->hasVariants() ) {
+					$parentLanguage = $language->getParentLanguage();
+				}
 			}
 
 			if ( $parentLanguage ) {
