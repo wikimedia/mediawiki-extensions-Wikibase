@@ -4,6 +4,7 @@ namespace Wikibase\Client\DataAccess;
 
 use InvalidArgumentException;
 use Wikibase\Client\PropertyLabelNotResolvedException;
+use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
@@ -26,15 +27,23 @@ class PropertyIdResolver {
 	private $propertyLabelResolver;
 
 	/**
+	 * @var UsageAccumulator
+	 */
+	private $usageAccumulator;
+
+	/**
 	 * @param EntityLookup $entityLookup
 	 * @param PropertyLabelResolver $propertyLabelResolver
+	 * @param UsageAccumulator $usageAccumulator
 	 */
 	public function __construct(
 		EntityLookup $entityLookup,
-		PropertyLabelResolver $propertyLabelResolver
+		PropertyLabelResolver $propertyLabelResolver,
+		UsageAccumulator $usageAccumulator
 	) {
 		$this->entityLookup = $entityLookup;
 		$this->propertyLabelResolver = $propertyLabelResolver;
+		$this->usageAccumulator = $usageAccumulator;
 	}
 
 	/**
@@ -82,6 +91,7 @@ class PropertyIdResolver {
 		}
 
 		$propertyId = $propertyIds[$propertyLabel];
+		$this->usageAccumulator->addLabelUsage( $propertyId, $languageCode );
 
 		return $propertyId;
 	}
