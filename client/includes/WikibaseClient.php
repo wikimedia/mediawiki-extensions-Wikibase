@@ -34,33 +34,32 @@ use Wikibase\Client\Changes\ChangeRunCoalescer;
 use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\ClientSiteLinkTitleLookup;
-use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory;
 use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
-use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
-use Wikibase\Client\RecentChanges\RecentChangeFactory;
-use Wikibase\Client\Serializer\ForbiddenSerializer;
-use Wikibase\Client\Store\RepositoryServiceContainerFactory;
-use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\SerializerFactory;
-use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
-use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
+use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
+use Wikibase\Client\RecentChanges\RecentChangeFactory;
+use Wikibase\Client\Serializer\ForbiddenSerializer;
+use Wikibase\Client\Store\RepositoryServiceContainerFactory;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\ClientStore;
 use Wikibase\DataModel\DeserializerFactory;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Services\Diff\EntityDiffer;
+use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\DirectSqlStore;
@@ -75,19 +74,19 @@ use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
-use Wikibase\Lib\RepositoryDefinitions;
-use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\MediaWikiContentLanguages;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
+use Wikibase\Lib\RepositoryDefinitions;
+use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
 use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
@@ -1093,17 +1092,10 @@ final class WikibaseClient {
 	 * @return StatementGroupRendererFactory
 	 */
 	private function getStatementGroupRendererFactory() {
-		$entityLookup = $this->getRestrictedEntityLookup();
-
-		$propertyIdResolver = new PropertyIdResolver(
-			$entityLookup,
-			$this->getStore()->getPropertyLabelResolver()
-		);
-
 		return new StatementGroupRendererFactory(
-			$propertyIdResolver,
+			$this->getStore()->getPropertyLabelResolver(),
 			new SnaksFinder(),
-			$entityLookup,
+			$this->getRestrictedEntityLookup(),
 			$this->getDataAccessSnakFormatterFactory(),
 			$this->getSettings()->getSetting( 'allowDataAccessInUserLanguage' )
 		);
