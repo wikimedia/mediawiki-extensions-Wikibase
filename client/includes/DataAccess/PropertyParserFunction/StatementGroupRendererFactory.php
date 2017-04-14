@@ -13,6 +13,7 @@ use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 
 /**
  * @license GPL-2.0+
@@ -22,9 +23,9 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 class StatementGroupRendererFactory {
 
 	/**
-	 * @var PropertyIdResolver
+	 * @var PropertyLabelResolver
 	 */
-	private $propertyIdResolver;
+	private $propertyLabelResolver;
 
 	/**
 	 * @var SnaksFinder
@@ -52,20 +53,20 @@ class StatementGroupRendererFactory {
 	private $allowDataAccessInUserLanguage;
 
 	/**
-	 * @param PropertyIdResolver $propertyIdResolver
+	 * @param PropertyLabelResolver $propertyLabelResolver
 	 * @param SnaksFinder $snaksFinder
 	 * @param EntityLookup $entityLookup
 	 * @param DataAccessSnakFormatterFactory $dataAccessSnakFormatterFactory
 	 * @param bool $allowDataAccessInUserLanguage
 	 */
 	public function __construct(
-		PropertyIdResolver $propertyIdResolver,
+		PropertyLabelResolver $propertyLabelResolver,
 		SnaksFinder $snaksFinder,
 		EntityLookup $entityLookup,
 		DataAccessSnakFormatterFactory $dataAccessSnakFormatterFactory,
 		$allowDataAccessInUserLanguage
 	) {
-		$this->propertyIdResolver = $propertyIdResolver;
+		$this->propertyLabelResolver = $propertyLabelResolver;
 		$this->snaksFinder = $snaksFinder;
 		$this->entityLookup = $entityLookup;
 		$this->dataAccessSnakFormatterFactory = $dataAccessSnakFormatterFactory;
@@ -135,9 +136,15 @@ class StatementGroupRendererFactory {
 			$type
 		);
 
+		$propertyIdResolver = new PropertyIdResolver(
+			$this->entityLookup,
+			$this->propertyLabelResolver,
+			$usageAccumulator
+		);
+
 		$entityStatementsRenderer = new StatementTransclusionInteractor(
 			$language,
-			$this->propertyIdResolver,
+			$propertyIdResolver,
 			$this->snaksFinder,
 			$snakFormatter,
 			$this->entityLookup
