@@ -99,7 +99,7 @@ class LanguageFallbackChainFactory {
 	 * @param Language|string $language Language object or language code as string
 	 * @param int $mode Bitfield of self::FALLBACK_*
 	 * @param LanguageFallbackChain[] $chain for recursive calls
-	 * @param array $fetched for recursive calls
+	 * @param bool[] $fetched for recursive calls
 	 *
 	 * @throws InvalidArgumentException
 	 * @return LanguageWithConversion[]
@@ -123,16 +123,16 @@ class LanguageFallbackChainFactory {
 		}
 
 		if ( $mode & self::FALLBACK_VARIANTS ) {
-			/** @var Language $parentLanguage */
-			$pieces = explode( '-', $languageCode );
-			if ( !in_array( $pieces[0], LanguageConverter::$languagesWithVariants ) ) {
-				$parentLanguage = null;
-			} else {
+			$parentLanguage = null;
+			$pieces = explode( '-', $languageCode, 2 );
+
+			if ( in_array( $pieces[0], LanguageConverter::$languagesWithVariants ) ) {
 				if ( is_string( $language ) ) {
 					$language = Language::factory( $language );
 				}
 				$parentLanguage = $language->getParentLanguage();
 			}
+
 			if ( $parentLanguage ) {
 				// It's less likely to trigger conversion mistakes by converting
 				// zh-tw to zh-hk first instead of converting zh-cn to zh-tw.
@@ -147,12 +147,14 @@ class LanguageFallbackChainFactory {
 				}
 
 				foreach ( $variants as $variant ) {
-					if ( isset( $fetched[$variant] ) || !$parentLanguage->hasVariant( $variant ) ) {
-						continue;
+					if ( !isset( $fetched[$variant] )
+						// The self::FALLBACK_SELF mode is already responsible for self-references.
+						&& $variant !== $languageCode
+						&& $parentLanguage->hasVariant( $variant )
+					) {
+						$chain[] = LanguageWithConversion::factory( $language, $variant );
+						$fetched[$variant] = true;
 					}
-
-					$chain[] = LanguageWithConversion::factory( $language, $variant );
-					$fetched[$variant] = true;
 				}
 			}
 		}
