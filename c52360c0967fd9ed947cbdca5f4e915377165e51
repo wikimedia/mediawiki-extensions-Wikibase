@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_8d63583b",
+        "filename": "repo/includes/Content/ItemHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-15T12:07:23Z",
+      "side": 1,
+      "message": "needs a unit test",
+      "revId": "c52360c0967fd9ed947cbdca5f4e915377165e51",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
