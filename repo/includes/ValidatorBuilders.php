@@ -98,6 +98,11 @@ class ValidatorBuilders {
 	private $geoShapeStorageApiUrl;
 
 	/**
+	 * @var string
+	 */
+	private $tabularDataStorageApiUrl;
+
+	/**
 	 * @param EntityLookup $lookup
 	 * @param EntityIdParser $idParser
 	 * @param string[] $urlSchemes
@@ -107,6 +112,7 @@ class ValidatorBuilders {
 	 * @param array $supportedEntityTypes map of repository names to lists of supported entity types
 	 * @param MediaWikiPageNameNormalizer $mediaWikiPageNameNormalizer
 	 * @param string $geoShapeStorageApiUrl
+	 * @param string $tabularDataStorageApiUrl
 	 */
 	public function __construct(
 		EntityLookup $lookup,
@@ -117,7 +123,8 @@ class ValidatorBuilders {
 		CachingCommonsMediaFileNameLookup $cachingCommonsMediaFileNameLookup,
 		array $supportedEntityTypes,
 		MediaWikiPageNameNormalizer $mediaWikiPageNameNormalizer,
-		$geoShapeStorageApiUrl
+		$geoShapeStorageApiUrl,
+		$tabularDataStorageApiUrl
 	) {
 		$this->entityLookup = $lookup;
 		$this->entityIdParser = $idParser;
@@ -128,6 +135,7 @@ class ValidatorBuilders {
 		$this->supportedEntityTypes = $supportedEntityTypes;
 		$this->mediaWikiPageNameNormalizer = $mediaWikiPageNameNormalizer;
 		$this->geoShapeStorageApiUrl = $geoShapeStorageApiUrl;
+		$this->tabularDataStorageApiUrl = $tabularDataStorageApiUrl;
 	}
 
 	/**
@@ -234,6 +242,32 @@ class ValidatorBuilders {
 
 		$topValidator = new DataValueValidator(
 			new CompositeValidator( $validators ) //Note: each validator is fatal
+		);
+
+		return array( new TypeValidator( DataValue::class ), $topValidator );
+	}
+
+	/**
+	 * @param string $checkExistence Either 'checkExistence' or 'doNotCheckExistence'
+	 *
+	 * @return ValueValidator[]
+	 */
+	public function buildTabularDataValidators( $checkExistence = 'checkExistence' ) {
+		$validators = $this->getCommonStringValidators( 240 );
+		$validators[] = new RegexValidator(
+			'/^Data:[^\\[\\]#\\\:{|}]+\.tab$/u',
+			false,
+			'illegal-tabular-data-title'
+		);
+		if ( $checkExistence === 'checkExistence' ) {
+			$validators[] = new InterWikiLinkExistsValidator(
+				$this->mediaWikiPageNameNormalizer,
+				$this->tabularDataStorageApiUrl
+			);
+		}
+
+		$topValidator = new DataValueValidator(
+			new CompositeValidator( $validators )
 		);
 
 		return array( new TypeValidator( DataValue::class ), $topValidator );
