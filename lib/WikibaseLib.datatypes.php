@@ -22,6 +22,7 @@ return array(
 	'PT:monolingualtext'   => array( 'value-type' => 'monolingualtext' ),
 	'PT:quantity'          => array( 'value-type' => 'quantity' ),
 	'PT:string'            => array( 'value-type' => 'string' ),
+	'PT:tabular-data'      => array( 'value-type' => 'string' ),
 	'PT:time'              => array( 'value-type' => 'time' ),
 	'PT:url'               => array( 'value-type' => 'string' ),
 	'PT:external-id'       => array( 'value-type' => 'string' ),
