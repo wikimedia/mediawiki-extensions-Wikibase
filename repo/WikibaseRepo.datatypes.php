@@ -50,6 +50,7 @@ use Wikibase\Repo\Parsers\MonolingualTextParser;
 use Wikibase\Repo\Parsers\TimeParserFactory;
 use Wikibase\Repo\Parsers\WikibaseStringValueNormalizer;
 use Wikibase\Repo\Rdf\Values\GeoShapeRdfBuilder;
+use Wikibase\Repo\Rdf\Values\TabularDataRdfBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\RdfWriter;
 
@@ -132,6 +133,30 @@ return call_user_func( function() {
 			) {
 				// TODO: Implement proper RDF mapping, see T159517 and T160535
 				return new GeoShapeRdfBuilder();
+			},
+		),
+		'PT:tabular-data' => array(
+			'validator-factory-callback' => function() {
+				$factory = WikibaseRepo::getDefaultValidatorBuilders();
+				// Don't go for commons during unit tests.
+				return $factory->buildTabularDataValidators(
+					defined( 'MW_PHPUNIT_TEST' ) ? 'doNotCheckExistence' : 'checkExistence'
+				);
+			},
+			'parser-factory-callback' => $newStringParser,
+			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
+				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
+				return $factory->newTabularDataFormatter( $format, $options );
+			},
+			'rdf-builder-factory-callback' => function (
+				$flags,
+				RdfVocabulary $vocab,
+				RdfWriter $writer,
+				EntityMentionListener $tracker,
+				DedupeBag $dedupe
+			) {
+				// TODO: Implement proper RDF mapping, see T159517
+				return new TabularDataRdfBuilder();
 			},
 		),
 		'VT:globecoordinate' => array(

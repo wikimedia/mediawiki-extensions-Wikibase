@@ -41,6 +41,8 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 
 	const GEO_SHAPE_STORAGE_API_URL = 'http://some.wiki/api.php';
 
+	const TABULAR_DATA_STORAGE_API_URL = 'http://another.wiki/api.php';
+
 	private function newValidatorBuilders() {
 		return new ValidatorBuilders(
 			$this->getEntityLookup(),
@@ -54,7 +56,8 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 				'foo' => [ Item::ENTITY_TYPE ]
 			],
 			$this->getMediaWikiPageNameNormalizer(),
-			self::GEO_SHAPE_STORAGE_API_URL
+			self::GEO_SHAPE_STORAGE_API_URL,
+			self::TABULAR_DATA_STORAGE_API_URL
 		);
 	}
 
@@ -183,6 +186,41 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 	public function testGeoShapeValidation( $geoShapeTitle, $expected ) {
 		$value = new StringValue( $geoShapeTitle );
 		$validators = $this->newValidatorBuilders()->buildGeoShapeValidators();
+
+		$this->assertValidation( $expected, $validators, $value );
+	}
+
+	public function provideTabularDataValidation() {
+		return [
+			'Should not be empty' => [ '', false ],
+			'Too long' => [ 'Data:' . str_repeat( 'x', 232 ) . '.tab', false ],
+			'Should have extension' => [ 'Data:Foo', false ],
+			'Extension too short' => [ 'Data:Foo.a', false ],
+			'This should be good' => [ 'Data:Foo.tab', true ],
+			'Should have Data namespace' => [ 'Foo.tab', false ],
+			'Illegal character: newline' => [ "Data:a\na.tab", false ],
+			'Illegal character: open square bracket' => [ 'Data:a[a.tab', false ],
+			'Illegal character: close square bracket' => [ 'Data:a]a.tab', false ],
+			'Illegal character: open curly bracket' => [ 'Data:a{a.tab', false ],
+			'Illegal character: close curly bracket' => [ 'Data:a}a.tab', false ],
+			'Illegal character: pipe' => [ 'Data:a|a.tab', false ],
+			'Illegal character: hash' => [ 'Data:Foo#bar.tab', false ],
+			'Illegal character: colon' => [ 'Data:Foo:bar.tab', false ],
+			'Allowed character: slash' => [ 'Data:Foo/bar.tab', true ],
+			'Illegal character: backslash' => [ 'Data:Foo\bar.tab', false ],
+			'Unicode support' => [ 'Data:Äöü.tab', true ],
+			'Leading space' => [ ' Data:Foo.tab', false ],
+			'Trailing space' => [ 'Data:Foo.tab ', false ],
+			'Not found' => [ 'Data:Foo-NOT-FOUND.tab', false ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideTabularDataValidation
+	 */
+	public function testTabularDataValidation( $tabularDataTitle, $expected ) {
+		$value = new StringValue( $tabularDataTitle );
+		$validators = $this->newValidatorBuilders()->buildTabularDataValidators();
 
 		$this->assertValidation( $expected, $validators, $value );
 	}
@@ -380,6 +418,18 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			'GeoShape expected StringValue, string supplied' => [ 'geo-shape', 'Foo.map', false ],
 			'GeoShape expected StringValue, NumberValue supplied' => [ 'geo-shape', new NumberValue( 7 ), false ],
 
+			//tabular-data
+			'TabularData expected StringValue, string supplied' => [
+				'tabular-data',
+				'Foo.tab',
+				false
+			],
+			'TabularData expected StringValue, NumberValue supplied' => [
+				'tabular-data',
+				new NumberValue( 7 ),
+				false
+			],
+
 			//string
 			'String expects StringValue, got string' => [ 'string', 'Foo', false ],
 			'String expects StringValue' => [ 'string', new NumberValue( 7 ), false ],
@@ -426,6 +476,7 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			'monolingualtext'   => array( $builders, 'buildMonolingualTextValidators' ),
 			'quantity'          => array( $builders, 'buildQuantityValidators' ),
 			'string'            => array( $builders, 'buildStringValidators' ),
+			'tabular-data'      => array( $builders, 'buildTabularDataValidators' ),
 			'time'              => array( $builders, 'buildTimeValidators' ),
 			'url'               => array( $builders, 'buildUrlValidators' ),
 			'wikibase-entity'   => array( $builders, 'buildEntityValidators' ),

@@ -412,7 +412,8 @@ class WikibaseRepo {
 			$this->getCachingCommonsMediaFileNameLookup(),
 			$this->repositoryDefinitions->getEntityTypesPerRepository(),
 			new MediaWikiPageNameNormalizer(),
-			$this->settings->getSetting( 'geoShapeStorageApiEndpointUrl' )
+			$this->settings->getSetting( 'geoShapeStorageApiEndpointUrl' ),
+			$this->settings->getSetting( 'tabularDataStorageApiEndpointUrl' )
 		);
 	}
 
@@ -448,6 +449,7 @@ class WikibaseRepo {
 			$this->getLanguageNameLookup(),
 			$this->getLocalItemUriParser(),
 			$this->getSettings()->getSetting( 'geoShapeStorageFrontendUrl' ),
+			$this->getSettings()->getSetting( 'tabularDataStorageFrontendUrl' ),
 			$this->getEntityTitleLookup()
 		);
 	}

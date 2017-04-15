@@ -38,6 +38,7 @@ return call_user_func( function() {
 				'jquery.valueview.experts.MonolingualText',
 				'jquery.valueview.experts.QuantityInput',
 				'jquery.valueview.experts.StringValue',
+				'jquery.valueview.experts.TabularData',
 				'jquery.valueview.experts.TimeInput',
 				'jquery.valueview.experts.UnDeserializableValue',
 				'jquery.valueview.experts.UnsupportedValue',
