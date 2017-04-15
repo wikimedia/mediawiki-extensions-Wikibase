@@ -44,6 +44,7 @@ MODULE.getStore = function( dataTypeStore ) {
 	var dataTypeIdToExpertConstructor = {
 		commonsMedia: vv.experts.CommonsMediaType,
 		'geo-shape': vv.experts.GeoShape,
+		'tabular-data': vv.experts.TabularData,
 		'external-id': vv.experts.StringValue,
 		monolingualtext: vv.experts.MonolingualText,
 		url: vv.experts.StringValue,

@@ -60,6 +60,7 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 		$siteId = $settings->getSetting( 'siteGlobalID' );
 
 		$settings->setSetting( 'geoShapeStorageFrontendUrl', 'https://media.something/view/' );
+		$settings->setSetting( 'tabularDataStorageFrontendUrl', 'https://tabular.data/view/' );
 		$this->setUpDummyData( $store, $siteId );
 	}
 
@@ -77,6 +78,7 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 			'P9' => 'wikibase-item',
 			'P10' => 'external-id', // with formatter
 			'P11' => 'geo-shape',
+		    'P12' => 'tabular-data',
 		];
 
 		foreach ( $dataTypeIds as $id => $dataTypeId ) {
@@ -285,7 +287,14 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 					new PropertyId( 'P11' ),
 					new StringValue( 'April 2017' )
 				)
-			]
+			],
+			'tabular-data' => [
+				'<span>[https://tabular.data/view/In_data_we_trust In data we trust]</span>',
+				new PropertyValueSnak(
+					new PropertyId( 'P12' ),
+					new StringValue( 'In data we trust' )
+				)
+			],
 		];
 
 		foreach ( $genericSnaks as $testName => $case ) {
@@ -339,6 +348,13 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 				new PropertyValueSnak(
 					new PropertyId( 'P11' ),
 					new StringValue( 'April 2017' )
+				)
+			],
+			'tabular-data' => [
+				'In data we trust',
+				new PropertyValueSnak(
+					new PropertyId( 'P12' ),
+					new StringValue( 'In data we trust' )
 				)
 			]
 		];

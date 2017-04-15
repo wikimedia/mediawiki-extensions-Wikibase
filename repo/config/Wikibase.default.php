@@ -212,4 +212,12 @@ return [
 
 	// Enable use (e.g. writing) of term_full_entity_id column in wb_terms table.
 	'hasFullEntityIdColumn' => true,
+
+	// URL of tabular data storage API endpoint
+	'tabularDataStorageApiEndpointUrl' => 'https://commons.wikimedia.org/w/api.php',
+
+	// URL of tabular data storage frontend. Used primarily to build links to the data.
+	// URL will be concatenated with the page title, so should end up with '/' or 'title='
+	// Special characters (e.g. space, percent, etc.) in URL should NOT be encoded
+	'tabularDataStorageFrontendUrl' => 'https://commons.wikimedia.org/wiki/',
 ];
