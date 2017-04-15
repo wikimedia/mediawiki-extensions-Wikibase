@@ -46,6 +46,8 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 
 	const GEO_SHAPE_STORAGE_FRONTEND_URL = '//commons.wikimedia.org/wiki/';
 
+	const TABULAR_DATA_STORAGE_FRONTEND_URL = '//commons2.wikimedia.org/wiki/';
+
 	protected function setUp() {
 		parent::setUp();
 
@@ -91,6 +93,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			$languageNameLookup,
 			new ItemIdParser(),
 			self::GEO_SHAPE_STORAGE_FRONTEND_URL,
+			self::TABULAR_DATA_STORAGE_FRONTEND_URL,
 			$entityTitleLookup
 		);
 	}
@@ -156,6 +159,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			'newUrlFormatter',
 			'newCommonsMediaFormatter',
 			'newGeoShapeFormatter',
+			'newTabularDataFormatter',
 			'newEntityIdFormatter',
 			'newMonolingualFormatter',
 			'newTimeFormatter',
@@ -310,6 +314,31 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 					'[//commons.wikimedia.org/wiki/Data:GeoShape.map Data:GeoShape.map]',
 					'@' ) .
 				'@',
+			),
+			// tabular-data
+			'plain tabular-data' => array(
+				'TabularData',
+				SnakFormatter::FORMAT_PLAIN,
+				$this->newFormatterOptions(),
+				new StringValue( 'Data:TabularData.tab' ),
+				'@^Data:TabularData.tab$@',
+			),
+			'html tabular-data' => array(
+				'TabularData',
+				SnakFormatter::FORMAT_HTML,
+				$this->newFormatterOptions(),
+				new StringValue( 'Data:TabularData.tab' ),
+				'@^<a class="extiw" href="//commons2\.wikimedia\.org/wiki/Data:TabularData\.tab">Data:TabularData\.tab</a>$@',
+			),
+			'wikitext tabular-data' => array(
+				'TabularData',
+				SnakFormatter::FORMAT_WIKI,
+				$this->newFormatterOptions(),
+				new StringValue( 'Data:TabularData.tab' ),
+				'@' . preg_quote(
+					'[//commons2.wikimedia.org/wiki/Data:TabularData.tab Data:TabularData.tab]',
+					'@'
+				) . '@',
 			),
 			// GlobeCoordinate
 			'plain coordinate' => array(

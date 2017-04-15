@@ -104,7 +104,8 @@
 				parserStore,
 				userLanguages,
 				repoApiUrl,
-				mw.config.get( 'wbGeoShapeStorageApiEndpoint' )
+				mw.config.get( 'wbGeoShapeStorageApiEndpoint' ),
+				mw.config.get( 'wbTabularDataStorageApiEndpoint' )
 			],
 			startEditingCallback = function() {
 				return $.Deferred().resolve().promise();

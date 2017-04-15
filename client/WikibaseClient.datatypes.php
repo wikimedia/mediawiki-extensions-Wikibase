@@ -84,6 +84,12 @@ return call_user_func( function() {
 				return $factory->newGeoShapeFormatter( $format, $options );
 			},
 		],
+		'PT:tabular-data' => [
+			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
+				$factory = WikibaseClient::getDefaultValueFormatterBuilders();
+				return $factory->newTabularDataFormatter( $format, $options );
+			},
+		],
 		'VT:time' => [
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseClient::getDefaultValueFormatterBuilders();
