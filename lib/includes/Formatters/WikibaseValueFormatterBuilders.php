@@ -61,6 +61,11 @@ class WikibaseValueFormatterBuilders {
 	private $geoShapeStorageFrontendUrl;
 
 	/**
+	 * @var string
+	 */
+	private $tabularDataStorageFrontendUrl;
+
+	/**
 	 * @var EntityTitleLookup|null
 	 */
 	private $entityTitleLookup;
@@ -83,6 +88,7 @@ class WikibaseValueFormatterBuilders {
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param EntityIdParser $repoItemUriParser
 	 * @param string $geoShapeStorageFrontendUrl
+	 * @param string $tabularDataStorageFrontendUrl
 	 * @param EntityTitleLookup|null $entityTitleLookup
 	 */
 	public function __construct(
@@ -91,6 +97,7 @@ class WikibaseValueFormatterBuilders {
 		LanguageNameLookup $languageNameLookup,
 		EntityIdParser $repoItemUriParser,
 		$geoShapeStorageFrontendUrl,
+		$tabularDataStorageFrontendUrl,
 		EntityTitleLookup $entityTitleLookup = null
 	) {
 		Assert::parameterType(
@@ -99,12 +106,19 @@ class WikibaseValueFormatterBuilders {
 			'$geoShapeStorageFrontendUrl'
 		);
 
+		Assert::parameterType(
+			'string',
+			$tabularDataStorageFrontendUrl,
+			'$tabularDataStorageFrontendUrl'
+		);
+
 		$this->defaultLanguage = $defaultLanguage;
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->repoItemUriParser = $repoItemUriParser;
 		$this->geoShapeStorageFrontendUrl = $geoShapeStorageFrontendUrl;
 		$this->entityTitleLookup = $entityTitleLookup;
+		$this->tabularDataStorageFrontendUrl = $tabularDataStorageFrontendUrl;
 	}
 
 	private function newPlainEntityIdFormatter( FormatterOptions $options ) {
@@ -260,6 +274,23 @@ class WikibaseValueFormatterBuilders {
 				return new InterWikiLinkHtmlFormatter( $this->geoShapeStorageFrontendUrl );
 			case SnakFormatter::FORMAT_WIKI:
 				return new InterWikiLinkWikitextFormatter( $this->geoShapeStorageFrontendUrl );
+			default:
+				return $this->newStringFormatter( $format, $options );
+		}
+	}
+
+	/**
+	 * @param string $format The desired target format, see SnakFormatter::FORMAT_XXX
+	 * @param FormatterOptions $options
+	 *
+	 * @return ValueFormatter
+	 */
+	public function newTabularDataFormatter( $format, FormatterOptions $options ) {
+		switch ( $this->getBaseFormat( $format ) ) {
+			case SnakFormatter::FORMAT_HTML:
+				return new InterWikiLinkHtmlFormatter( $this->tabularDataStorageFrontendUrl );
+			case SnakFormatter::FORMAT_WIKI:
+				return new InterWikiLinkWikitextFormatter( $this->tabularDataStorageFrontendUrl );
 			default:
 				return $this->newStringFormatter( $format, $options );
 		}
