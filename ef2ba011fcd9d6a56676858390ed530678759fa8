@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_03ecf7b5",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-16T08:50:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ed34346_970b94d9",
+      "range": {
+        "startLine": 32,
+        "startChar": 2,
+        "endLine": 32,
+        "endChar": 51
+      },
+      "revId": "ef2ba011fcd9d6a56676858390ed530678759fa8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ed34346_9754b4ca",
         "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2016-12-07T16:18:46Z",
       "side": 1,
       "message": "this duplicates $this-\u003erepo but see my previous comment first",
+      "range": {
+        "startLine": 44,
+        "startChar": 16,
+        "endLine": 44,
+        "endChar": 50
+      },
+      "revId": "ef2ba011fcd9d6a56676858390ed530678759fa8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_a32f43f2",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-16T08:50:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ed34346_9754b4ca",
       "range": {
         "startLine": 44,
         "startChar": 16,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_c334cf48",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-16T08:50:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aebe47e0_ad33f5bf",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 13
+      },
+      "revId": "ef2ba011fcd9d6a56676858390ed530678759fa8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ed34346_b9f91b81",
         "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
         "patchSetId": 3
@@ -82,6 +154,30 @@
       "writtenOn": "2016-11-30T19:19:38Z",
       "side": 1,
       "message": "here you can just have \"ItemId\"",
+      "range": {
+        "startLine": 73,
+        "startChar": 11,
+        "endLine": 73,
+        "endChar": 44
+      },
+      "revId": "ef2ba011fcd9d6a56676858390ed530678759fa8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_63393b3e",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-16T08:50:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ed34346_b9f91b81",
       "range": {
         "startLine": 73,
         "startChar": 11,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_833ec724",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-16T08:50:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ed34346_376cc098",
+      "range": {
+        "startLine": 78,
+        "startChar": 2,
+        "endLine": 78,
+        "endChar": 20
+      },
+      "revId": "ef2ba011fcd9d6a56676858390ed530678759fa8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ed34346_19d48feb",
         "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
         "patchSetId": 3
@@ -128,6 +248,30 @@
       "writtenOn": "2016-11-30T19:19:38Z",
       "side": 1,
       "message": "this function is deprecated and is being migrated from\n\ninstead you can use methods of LinkRenderer class which you can get via $this-\u003egetLinkRenderer()\n\nyou can find its code here: https://phabricator.wikimedia.org/diffusion/MW/browse/master/includes/linker/LinkRenderer.php",
+      "range": {
+        "startLine": 90,
+        "startChar": 17,
+        "endLine": 90,
+        "endChar": 29
+      },
+      "revId": "ef2ba011fcd9d6a56676858390ed530678759fa8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_234493bc",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-16T08:50:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ed34346_19d48feb",
       "range": {
         "startLine": 90,
         "startChar": 17,
