@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_be82f8cb",
+        "filename": "repo/includes/Specials/SpecialListProperties.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-17T04:25:16Z",
+      "side": 1,
+      "message": "$propertyInfo is an associative array mapping numeric property id number to PropertyId objects ( [ 1 \u003d\u003e PropertyId( \u0027P1\u0027) ] for example)\nWe only need the object to continue.",
+      "parentUuid": "4e506ba4_4360bffc",
+      "revId": "f6853c8fbc926881d5541faf0e17030cc68850a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_2363330c",
         "filename": "repo/includes/Specials/SpecialListProperties.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2017-04-16T15:26:04Z",
       "side": 1,
       "message": "now this isn\u0027t returning property info... it\u0027s returning ordered array of PropertyId.\n\nmaybe we can just return $propertyInfo here and call $this-\u003egetOrderedProperties above?",
+      "revId": "f6853c8fbc926881d5541faf0e17030cc68850a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_7e8c70ff",
+        "filename": "repo/includes/Specials/SpecialListProperties.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-17T04:25:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_2363330c",
       "revId": "f6853c8fbc926881d5541faf0e17030cc68850a2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
