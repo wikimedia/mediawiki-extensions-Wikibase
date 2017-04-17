@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"StanProg"
+		]
+	},
+	"valueview-expert-advancedadjustments": "разширени настройки",
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Обработката на стойност „$1“ все още не се поддържа.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Обработката на стойности от тип на данните „$1“ все още не се поддържа.",
+	"valueview-expert-emptyvalue-empty": "празно",
+	"valueview-expert-globecoordinateinput-precision": "Точност:",
+	"valueview-expert-globecoordinateinput-nullprecision": "неуказано",
+	"valueview-expert-globecoordinateinput-customprecision": "специална ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "Григориански",
+	"valueview-expert-timevalue-calendar-julian": "Юлиански",
+	"valueview-expert-timeinput-precision": "Точност:",
+	"valueview-expert-timeinput-calendar": "Календар:",
+	"valueview-expertextender-calendarhint-gregorian": "(Григориански календар)",
+	"valueview-expertextender-calendarhint-julian": "(Юлиански календар)",
+	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr; промени на Грегориански",
+	"valueview-expertextender-calendarhint-switch-julian": "&rarr; промени на Юлиански",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Език (задължително):",
+	"valueview-expertextender-unitsuggester-label": "Единица (незадължително):",
+	"valueview-preview-label": "ще бъде показано като:",
+	"valueview-preview-novalue": "не е разпозната валидна стойност",
+	"valueview-listrotator-manually": "задаване ръчно"
+}
