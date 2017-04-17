@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Milicevic01",
-			"Srdjan m"
+			"Srdjan m",
+			"Сербијана"
 		]
 	},
 	"wikibase-client-desc": "Klijent za proširenje Vikibaza",
@@ -53,6 +54,7 @@
 	"wikibase-pageswithbadges-legend": "Spisak stranica sa datom značkom",
 	"wikibase-pageswithbadges-badge": "Značka:",
 	"wikibase-pageswithbadges-submit": "Prikaži stranice",
+	"entityusage": "Upotreba jedinica",
 	"wikibase-pageinfo-entity-id": "ID stavke na Vikipodacima",
 	"wikibase-pageinfo-entity-id-none": "Nema",
 	"wikibase-otherprojects": "Ostali projekti",

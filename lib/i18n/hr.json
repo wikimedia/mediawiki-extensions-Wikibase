@@ -18,6 +18,7 @@
 	"wikibase-entity-summary-wbsetitem": "Stvorena nova stavka",
 	"wikibase-entity-summary-wbcreateredirect": "Preusmjereno na $4",
 	"wikibase-entity-summary-wbsetlabel-add": "Dodana [$2] oznaka",
+	"wikibase-entity-summary-wbsetdescription-add": "Dodan [$2] opis",
 	"wikibase-entity-summary-wbsetaliases-add": "{{PLURAL:$1|Dodan [$2] sinonim|Dodani [$2] sinonimi}}",
 	"wikibase-entity-summary-wbsetsitelink-add": "Dodana poveznica na [$2]",
 	"wikibase-entity-summary-wbsetsitelink-set-both": "Promijenjena poveznica i značke za [$2]",

@@ -7,5 +7,7 @@
 	},
 	"wikibase-edit": "دچينواچين",
 	"wikibase-add": "بچربؤن",
-	"wikibase-sitelinks-special": "باخي ساىتؤن"
+	"wikibase-label-empty": "نؤمي تعريف نۊبؤ.",
+	"wikibase-sitelinks-special": "باخي ساىتؤن",
+	"wikibase-statementview-rank-normal": "معمۊلي رۊتبه"
 }

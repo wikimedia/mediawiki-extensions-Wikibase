@@ -16,7 +16,8 @@
 			"TheEduGobi",
 			"Almondega",
 			"Peter Fernando",
-			"Hamilton Abreu"
+			"Hamilton Abreu",
+			"Felipe L. Ewald"
 		]
 	},
 	"wikibase-desc": "Repositório de dados estruturados",
@@ -49,6 +50,7 @@
 	"wikibase-description-edit-placeholder-language-aware": "insira uma descrição em $1",
 	"wikibase-aliases-edit-placeholder": "insira alguns nomes alternativos",
 	"wikibase-aliases-edit-placeholder-language-aware": "insira alguns nomes alternativos em $1",
+	"wikibase-aliases-edit-label": "Nomes alternativos, separados por barras retas (|):",
 	"wikibase-diffview-reference": "referência",
 	"wikibase-diffview-rank": "rank",
 	"wikibase-diffview-rank-preferred": "Classificação prefererida",
@@ -112,6 +114,7 @@
 	"wikibase-move-error": "Você não pode mover páginas que estão em um espaço nominal de dados nem mover páginas para dentro desse espaço nominal.",
 	"wikibase-validator-label-conflict": "Propriedade ($3) já possui o rótulo \"$1\" associado com o código de idioma $2.",
 	"wikibase-validator-label-with-description-conflict": "Item ($3) já possui o rótulo \"$1\" associado ao código de idioma $2, usando o mesmo texto de descrição.",
+	"wikibase-validator-not-a-language": "\"$1\" não é um código de idioma conhecido.",
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" não é um ID de um item válido.",
 	"wikibase-wikibaserepopage-invalid-langcode": "O código de idioma \"$1\" é desconhecido. Utilize um código de idioma reconhecido pelo sistema, tal como \"en\".",
 	"wikibase-wikibaserepopage-invalid-id": "O ID \"$1\" não foi reconhecido pelo sistema. Utilize um ID válido para a entidade.",
@@ -152,7 +155,6 @@
 	"wikibase-newentity-language": "Idioma:",
 	"wikibase-newentity-label": "Rótulo:",
 	"wikibase-newentity-description": "Descrição:",
-	"wikibase-newentity-aliases": "Nomes alternativos, separados por barras retas (|):",
 	"wikibase-newentity-submit": "Criar",
 	"special-setlabel": "Definir um rótulo",
 	"wikibase-setlabel-introfull": "Você está definindo o rótulo em $2 como [[$1]].",
@@ -166,6 +168,7 @@
 	"special-setaliases": "Adicionar nomes alternativos",
 	"wikibase-setaliases-label": "Nomes alternativos:",
 	"wikibase-setaliases-submit": "Adicionar nomes alternativos",
+	"wikibase-setlabeldescriptionaliases-description-label": "Descrição:",
 	"wikibase-setsitelink-site": "Identificador do site:",
 	"wikibase-setsitelink-label": "Ligação do site:",
 	"wikibase-setsitelink-badges": "Emblemas:",
@@ -193,11 +196,11 @@
 	"wikibase-listdatatypes-intro": "Esta é uma lista de todos os tipos de dados disponíveis nessa instalação:",
 	"wikibase-history-title-with-label": "Histórico de revisões de \"$2\" ($1)",
 	"wikibase-history-title-without-label": "Histórico de revisões de ($1)",
+	"wikibase-listproperties-invalid-datatype": "\"$1\" não é um tipo de dado válido.",
 	"special-entitieswithoutlabel": "Entidades sem rótulo",
 	"wikibase-entitieswithoutlabel-legend": "Listar entidades sem rótulo",
 	"wikibase-entitieswithoutlabel-label-language": "Código do idioma:",
 	"wikibase-entitieswithoutlabel-label-type": "Tipo:",
-	"wikibase-entitieswithoutlabel-label-alltypes": "todos",
 	"wikibase-entitieswithoutlabel-submit": "Buscar",
 	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" não é um código de idioma válido.",
 	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" não é um tipo de entidade válido.",
@@ -234,7 +237,12 @@
 	"right-item-redirect": "Criar redirecionamentos de item",
 	"right-property-term": "Alterar termos de propriedade (rótulos, descrições, nomes alternativos)",
 	"right-property-create": "criar propriedades",
+	"wikibase-entity-not-viewable": "O conteúdo fornecido do tipo \"$1\" não é uma Entidade e não pode ser exibido pelo Wikibase.",
 	"action-item-merge": "fundir itens",
 	"action-property-create": "criar propriedades",
-	"apihelp-wbeditentity-param-new": "Se definido, uma nova entidade será criada.\nDefinir o tipo de entidade que você deseja criar.\nNão é permitido ter isso definido quando o <var>id</var> é também definido."
+	"apihelp-wbeditentity-param-new": "Se definido, uma nova entidade será criada.\nDefina isso com o tipo de entidade que deseja criar.\nNão é permitido ter isso definido quando <var>id</var> também está definido.",
+	"apihelp-wbsetaliases-param-new": "Se definido, uma nova entidade será criada.\nDefina isso com o tipo da entidade que você deseja criar.",
+	"apihelp-wbsetdescription-param-new": "Se definido, uma nova entidade será criada.\nDefina isso com o tipo da entidade que você deseja criar.",
+	"apihelp-wbsetlabel-param-new": "Se definido, uma nova entidade será criada.\nDefina isso com o tipo da entidade que você deseja criar.",
+	"apihelp-wbsetsitelink-param-new": "Se definido, uma nova entidade será criada.\nDefina isso com o tipo da entidade que você deseja criar."
 }
