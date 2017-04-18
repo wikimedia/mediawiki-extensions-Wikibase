@@ -24,7 +24,7 @@
 
 .wikibase-toolbar-button-edit a {
 	/* @embed */
-	background-image: url(pencil.svg);
+	background-image: url( pencil.svg );
 	display: block;
 	height: 24px;
 	width: 24px;
@@ -46,7 +46,6 @@
 	display: inline;
 }
 
-.wikibase-entitytermsview-heading-aliases li::before,
 .wikibase-entitytermsview-heading-aliases li:before {
 	content: '|';
 	padding: 0 0.4em;

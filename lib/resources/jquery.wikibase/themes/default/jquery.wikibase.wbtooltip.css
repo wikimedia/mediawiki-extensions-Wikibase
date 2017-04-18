@@ -11,7 +11,7 @@
 
 .wikibase-wbtooltip-tip.wb-error .tipsy-arrow {
 	/* @embed */
-	background-image: url(images/tipsy-error.png);
+	background-image: url( images/tipsy-error.png );
 }
 
 .wikibase-wbtooltip-tip.wb-error .tipsy-inner {

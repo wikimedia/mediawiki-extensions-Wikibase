@@ -9,44 +9,44 @@
 
 .wb-toggle {
 	display: block;
-	margin-top: .5em;
+	margin-top: 0.5em;
 	white-space: nowrap;
 }
-.wb-toggle > span.ui-icon, .wb-toggle-label {
+.wb-toggle > span.ui-icon,
+.wb-toggle-label {
 	display: inline-block;
 	vertical-align: middle;
 }
 .wb-toggle span.ui-icon.wb-toggle-icon3dtrans {
-	-webkit-transition: .25s ease-out;
-	   -moz-transition: .25s ease-out;
-	     -o-transition: .25s ease-out;
-	        transition: .25s ease-out;
+	-webkit-transition: 0.25s ease-out;
+	-moz-transition: 0.25s ease-out;
+	-o-transition: 0.25s ease-out;
+	transition: 0.25s ease-out;
 }
 
 /** rotate toggle icon in ltr languages */
 .wb-toggle-collapsed span.ui-icon.wb-toggle-icon3dtrans {
-	-webkit-transition: .25s ease-out;
-	   -moz-transition: .25s ease-out;
-	     -o-transition: .25s ease-out;
-	        transition: .25s ease-out;
+	-webkit-transition: 0.25s ease-out;
+	-moz-transition: 0.25s ease-out;
+	-o-transition: 0.25s ease-out;
+	transition: 0.25s ease-out;
 
-	-webkit-transform: rotate(-90deg);
-	   -moz-transform: rotate(-90deg);
-	    -ms-transform: rotate(-90deg);
-	     -o-transform: rotate(-90deg);
-	        transform: rotate(-90deg);
+	-webkit-transform: rotate( -90deg );
+	-moz-transform: rotate( -90deg );
+	-ms-transform: rotate( -90deg );
+	-o-transform: rotate( -90deg );
+	transform: rotate( -90deg );
 }
 /** rotate toggle icon in rtl languages (overwrite above) */
 body.rtl .wb-toggle-collapsed span.ui-icon.wb-toggle-icon3dtrans {
-	-webkit-transform: rotate(90deg);
-	   -moz-transform: rotate(90deg);
-	    -ms-transform: rotate(90deg);
-	     -o-transform: rotate(90deg);
-	        transform: rotate(90deg);
+	-webkit-transform: rotate( 90deg );
+	-moz-transform: rotate( 90deg );
+	-ms-transform: rotate( 90deg );
+	-o-transform: rotate( 90deg );
+	transform: rotate( 90deg );
 }
 
 /****** /TOGGLE ******/
-
 
 /****** PENDING-COUNTER: wb.utilities.ui.buildPendingCounter ******/
 
@@ -54,7 +54,7 @@ body.rtl .wb-toggle-collapsed span.ui-icon.wb-toggle-icon3dtrans {
 	white-space: nowrap;
 }
 .wb-ui-pendingcounter span { /* the +1 part in the counter */
-	margin-left: .25em;
+	margin-left: 0.25em;
 	color: #36c;
 	font-weight: bold;
 }

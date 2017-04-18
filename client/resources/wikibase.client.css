@@ -7,7 +7,7 @@
 .wb-langlinks-link {
 	list-style: none none;
 	text-align: right;
-	padding-right: .5em !important;
+	padding-right: 0.5em !important;
 }
 
 .wb-langlinks-link > a {
@@ -15,14 +15,15 @@
 	background: no-repeat left center;
 }
 
-.wb-langlinks-link > a:link, .wb-langlinks-link > a:visited {
+.wb-langlinks-link > a:link,
+.wb-langlinks-link > a:visited {
 	/* @embed */
-	background-image: url(images/WBC-Asset-Pencil.png);
+	background-image: url( images/WBC-Asset-Pencil.png );
 	color: #797979 !important;
 }
 
 .wb-langlinks-link > a:hover {
 	/* @embed */
-	background-image: url(images/WBC-Asset-Pencil-Hover.png);
-	color: #0645AD !important;
+	background-image: url( images/WBC-Asset-Pencil-Hover.png );
+	color: #0645ad !important;
 }
