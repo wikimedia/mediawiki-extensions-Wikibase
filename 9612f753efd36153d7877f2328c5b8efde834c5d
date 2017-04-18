@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_f15e677a",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-18T16:26:54Z",
+      "side": 1,
+      "message": "I am wondering whether there will be ever a need to use some more specialized id parser (ie. so this would become injected in the constructor). The only case I could think of was a case when a prefix of a federated wiki was added, and prefix mapping should be applied. In such case we\u0027d rather need PrefixMappingEntityIdParser. But such case does not seem muc realistic (using foreign items as badges sounds a bit iffy), so I guess this is fine. Making the comment, as maybe others have some thoughts on this.",
+      "revId": "9612f753efd36153d7877f2328c5b8efde834c5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_d1c9eb56",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-18T16:26:54Z",
+      "side": 1,
+      "message": "Could also be !empty( $itemIds ) but might be just matter of the personal taste.\nThis is not requesting to change anything, just noticing.",
+      "revId": "9612f753efd36153d7877f2328c5b8efde834c5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_11e8b376",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-18T16:26:54Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this \" - \" be localized?\nApparently MW core does not such \"separator\" message in its palette of messages. Doing something like \"word-separator + hyphen/dash + word-separator\" seems silly.\nAnother option would be to have a message that contains both the \"separator part\" and the description (as the message parameter) but this does not seem super smart either.\nThoughts?",
+      "revId": "9612f753efd36153d7877f2328c5b8efde834c5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_71257702",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialAvailableBadgesTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-18T16:26:54Z",
+      "side": 1,
+      "message": "Just having a glance at the code this \"Whatever\" strikes a bit confusing. Test class is small enough that remembering \"Whetever\" is the item description of the badge item is not really hard, but this could also say \"Test badge item\", \"Some badge\", etc.\nI don\u0027t see it as a must for this patch, but it would make it even nicer imo. Similar remark regarding \"unknown-type\" - this could also be \"test-badge\" or basically anything more class to real-case use.",
+      "range": {
+        "startLine": 61,
+        "startChar": 26,
+        "endLine": 61,
+        "endChar": 34
+      },
+      "revId": "9612f753efd36153d7877f2328c5b8efde834c5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
