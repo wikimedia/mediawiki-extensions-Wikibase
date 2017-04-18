@@ -30,6 +30,13 @@ interface Change {
 	public function getTime();
 
 	/**
+	 * Original (repository) user id, or 0 for logged out users.
+	 *
+	 * @return int
+	 */
+	public function getUserId();
+
+	/**
 	 * @return int|null Number to be used as an identifier when persisting the change.
 	 */
 	public function getId();
