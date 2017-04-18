@@ -118,7 +118,11 @@
 					entity
 				);
 
-			viewFactoryClass = wb.view.ControllerViewFactory;
+			var entityNamespace = entity.getType();
+			viewFactoryClass = wb[ entityNamespace ] && wb[ entityNamespace ].view
+				&& wb[ entityNamespace ].view.ControllerViewFactory // extension
+				|| wb.view.ControllerViewFactory; // default factory
+
 			viewFactoryArguments.unshift(
 				toolbarFactory,
 				entityChangersFactory
