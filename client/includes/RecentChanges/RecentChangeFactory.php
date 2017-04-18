@@ -35,12 +35,18 @@ class RecentChangeFactory {
 	private $siteLinkCommentCreator;
 
 	/**
+	 * @var CentralIdLookup
+	 */
+	private $centralIdLookup;
+
+	/**
 	 * @param Language $language
 	 * @param SiteLinkCommentCreator $siteLinkCommentCreator
 	 */
-	public function __construct( Language $language, SiteLinkCommentCreator $siteLinkCommentCreator ) {
+	public function __construct( Language $language, SiteLinkCommentCreator $siteLinkCommentCreator, CentralIdLookup $centralIdLookup ) {
 		$this->language = $language;
 		$this->siteLinkCommentCreator = $siteLinkCommentCreator;
+		$this->centralIdLookup = $centralIdLookup;
 	}
 
 	/**
@@ -115,8 +121,43 @@ class RecentChangeFactory {
 			'wikibase-repo-change' => $metadata,
 		);
 
+		$repoUserId = $fields['user_id'];
+
+		if ( $repoUserId === 0 ) {
+			// Logged out on repo just copied to client
+			$clientUserId = 0;
+		} else {
+			// Use -1 as client RC user ID, if we know they're logged in, but
+			// we can't determine their client user ID.  That will at least
+			// properly filter them as logged in.
+
+			// Temporary compatibility until Ie7b9c482cf6a0dd7215b34841efd86fb51be651a
+			// has been deployed long enough that all rows have it.
+			if ( array_key_exists( 'central_user_id', $metadata ) ) {
+				// See change-propagation.wiki for why it can be 0 other than pre-deploy
+				// rows.
+				$centralUserId = $metadata['central_user_id'];
+			} else {
+				$centralUserId = 0;
+			}
+
+			if ( $centralUserId === 0 ) {
+				$clientUserId = -1;
+			} else {
+				$clientUser = $this->centralIdLookup->localUserFromCentralId(
+					$centralUserId
+				);
+
+				if ( $clientUser === null ) {
+					$clientUserId = -1;
+				} else {
+					$clientUserId = $clientUser->getId();
+				}
+			}
+		}
+
 		return array(
-			'rc_user' => 0,
+			'rc_user' => $clientUserId,
 			'rc_user_text' => $userText,
 			'rc_comment' => $comment,
 			'rc_type' => RC_EXTERNAL,

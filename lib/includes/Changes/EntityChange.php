@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use CentralIdLookup;
 use Deserializers\Deserializer;
 use Diff\DiffOp\DiffOp;
 use Diff\DiffOpFactory;
@@ -37,6 +38,22 @@ class EntityChange extends DiffChange {
 	 * @var EntityId|null
 	 */
 	private $entityId = null;
+
+	protected function getCentralIdLookup() {
+		$centralIdLookup = CentralIdLookup::factory();
+
+		if ( $centralIdLookup !== null &&
+
+			// LocalIdLookup is the default for standalone wikis.  However,
+			// it will map to the wrong user unless repo and client
+			// are both using it, and using the same shared user tables.
+			!( $centralIdLookup instanceof LocalIdLookup )
+		) {
+			return $centralIdLookup;
+		}
+
+		return null;
+	}
 
 	/**
 	 * @return string
@@ -104,6 +121,7 @@ class EntityChange extends DiffChange {
 			'bot',
 			'rev_id',
 			'parent_id',
+			'central_user_id',
 			'user_text',
 			'comment'
 		);
@@ -149,29 +167,78 @@ class EntityChange extends DiffChange {
 	public function setMetadataFromRC( RecentChange $rc ) {
 		$this->setFields( array(
 			'revision_id' => $rc->getAttribute( 'rc_this_oldid' ),
-			'user_id' => $rc->getAttribute( 'rc_user' ),
 			'time' => $rc->getAttribute( 'rc_timestamp' ),
 		) );
 
 		$this->setMetadata( array(
-			'user_text' => $rc->getAttribute( 'rc_user_text' ),
 			'bot' => $rc->getAttribute( 'rc_bot' ),
 			'page_id' => $rc->getAttribute( 'rc_cur_id' ),
 			'rev_id' => $rc->getAttribute( 'rc_this_oldid' ),
 			'parent_id' => $rc->getAttribute( 'rc_last_oldid' ),
 			'comment' => $rc->getAttribute( 'rc_comment' ),
 		) );
+
+		$this->addUserMetadata(
+			$rc->getAttribute( 'rc_user' ),
+			$rc->getAttribute( 'rc_user_text' )
+		);
 	}
 
 	/**
-	 * @param User $user
+	 * Add fields and metadata related to the user.
 	 *
+	 * This does not touch other fields or metadata.
+	 *
+	 * @param int $repoUserId User ID on wiki where change was made, or 0 for anon
+	 * @param string $repoUserText User text on wiki where change was made, for either
+	 *   logged in user or anon
+	 */
+	protected function addUserMetadata( $repoUserId, $repoUserText ) {
+		static $centralIdLookup = null;
+
+		// CentralIdLookup::factory can already return null, plus we then
+		// filter it.  So this distinguishes between "uninitalized" and
+		// "initialized to something unusable".
+		static $isCentralIdLookupInitialized = false;
+
+		$this->setFields( array(
+			'user_id' => $repoUserId,
+		) );
+
+		$metadata = [
+			'user_text' => $repoUserText,
+		];
+
+		$centralUserId = 0;
+
+		if ( $repoUserId !== 0 ) {
+			$repoUser = User::newFromId( $repoUserId );
+
+			if ( !$isCentralIdLookupInitialized ) {
+				$centralIdLookup = $this->getCentralIdLookup();
+
+				$isCentralIdLookupInitialized = true;
+			}
+
+			if ( $centralIdLookup !== null ) {
+				$centralUserId = $centralIdLookup->centralIdFromLocalUser(
+					$repoUser
+				);
+			}
+		}
+		$metadata['central_user_id'] = $centralUserId;
+
+		$this->setMetadata( $metadata );
+	}
+
+	/**
 	 * @todo rename to setUserInfo
 	 */
 	public function setMetadataFromUser( User $user ) {
-		$this->setFields( array(
-			'user_id' => $user->getId(),
-		) );
+		$this->addUserMetadata(
+			$user->getId(),
+			$user->getName()
+		);
 
 		// TODO: init page_id etc in getMetadata, not here!
 		$metadata = array_merge( array(
@@ -182,8 +249,6 @@ class EntityChange extends DiffChange {
 			$this->getMetadata()
 		);
 
-		$metadata['user_text'] = $user->getName();
-
 		$this->setMetadata( $metadata );
 	}
 
@@ -193,7 +258,6 @@ class EntityChange extends DiffChange {
 	public function setRevisionInfo( Revision $revision ) {
 		$this->setFields( array(
 			'revision_id' => $revision->getId(),
-			'user_id' => $revision->getUser(),
 			'time' => $revision->getTimestamp(),
 		) );
 
@@ -208,12 +272,16 @@ class EntityChange extends DiffChange {
 		}
 
 		$this->setMetadata( array(
-			'user_text' => $revision->getUserText(),
 			'page_id' => $revision->getPage(),
 			'parent_id' => $revision->getParentId(),
 			'comment' => $revision->getComment(),
 			'rev_id' => $revision->getId(),
 		) );
+
+		$this->addUserMetadata(
+			$revision->getUser(),
+			$revision->getUserText()
+		);
 	}
 
 	/**
