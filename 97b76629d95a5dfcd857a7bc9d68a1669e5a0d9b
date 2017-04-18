@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_745fa513",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-18T16:55:31Z",
+      "side": 1,
+      "message": "\"tabular data storage frontend\". But I honestly think this description is a bit to long and repeats stuff that does not need to be repeated.",
+      "range": {
+        "startLine": 218,
+        "startChar": 11,
+        "endLine": 218,
+        "endChar": 35
+      },
+      "revId": "97b76629d95a5dfcd857a7bc9d68a1669e5a0d9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_f4a975dd",
+        "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-18T16:55:31Z",
+      "side": 1,
+      "message": "You missed to declare this property.",
+      "range": {
+        "startLine": 116,
+        "startChar": 2,
+        "endLine": 116,
+        "endChar": 38
+      },
+      "revId": "97b76629d95a5dfcd857a7bc9d68a1669e5a0d9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_94b9112c",
+        "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-18T16:55:31Z",
+      "side": 1,
+      "message": "This introduces quite some code duplication with the newGeoShapeFormatter above. We might want to merge some methods in this class. But this should be done in later patches.",
+      "range": {
+        "startLine": 283,
+        "startChar": 17,
+        "endLine": 283,
+        "endChar": 40
+      },
+      "revId": "97b76629d95a5dfcd857a7bc9d68a1669e5a0d9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_3487dd67",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-18T16:55:31Z",
+      "side": 1,
+      "message": "Can you please move the new options up, next to these?",
+      "range": {
+        "startLine": 208,
+        "startChar": 2,
+        "endLine": 208,
+        "endChar": 28
+      },
+      "revId": "97b76629d95a5dfcd857a7bc9d68a1669e5a0d9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_b4c9adb0",
+        "filename": "repo/resources/experts/resources.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-18T16:55:31Z",
+      "side": 1,
+      "message": "Alphabetical order please.",
+      "revId": "97b76629d95a5dfcd857a7bc9d68a1669e5a0d9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_54d8697f",
+        "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-18T16:55:31Z",
+      "side": 1,
+      "message": "Alphabetical order please.",
+      "revId": "97b76629d95a5dfcd857a7bc9d68a1669e5a0d9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
