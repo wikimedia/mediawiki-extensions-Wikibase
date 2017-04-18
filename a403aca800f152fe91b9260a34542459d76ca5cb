@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_5e6baaee",
+        "filename": "repo/includes/Content/ItemContent.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-18T14:40:12Z",
+      "side": 1,
+      "message": "both imports not needed according to my IDE. But as there is some more refactoring coming up, might be those will be needed soon.",
+      "revId": "a403aca800f152fe91b9260a34542459d76ca5cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_7e0b062e",
+        "filename": "repo/tests/phpunit/includes/Content/ItemHandlerTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-18T14:40:12Z",
+      "side": 1,
+      "message": "minor: what I see here is more \"Item handler with mocked property data type lookup\" :)",
+      "range": {
+        "startLine": 216,
+        "startChar": 18,
+        "endLine": 216,
+        "endChar": 63
+      },
+      "revId": "a403aca800f152fe91b9260a34542459d76ca5cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_1e1a027f",
+        "filename": "repo/tests/phpunit/includes/Content/ItemHandlerTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-18T14:40:12Z",
+      "side": 1,
+      "message": "I was a bit confused how this is different than $statementString for a second.\nI know P11 is defined above as property with data type \"external id\" but maybe, for the sake of clarity, some more id-like value than \"Tehran\" could be used in the test? Even \"xyz123\" would suffice, wouldn\u0027t it?",
+      "revId": "a403aca800f152fe91b9260a34542459d76ca5cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_7e3466f1",
+        "filename": "repo/tests/phpunit/includes/Content/ItemHandlerTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-18T14:40:12Z",
+      "side": 1,
+      "message": "indentation went wild here",
+      "revId": "a403aca800f152fe91b9260a34542459d76ca5cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
