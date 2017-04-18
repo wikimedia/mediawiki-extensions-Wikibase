@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\DataAccess;
 
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\PropertyLabelNotResolvedException;
+use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Tests\MockPropertyLabelResolver;
@@ -21,11 +22,18 @@ use Wikibase\Lib\Tests\MockRepository;
  */
 class PropertyIdResolverTest extends \PHPUnit_Framework_TestCase {
 
-	private function getPropertyIdResolver() {
+	private function getPropertyIdResolver( $times = 0 ) {
 		$mockRepository = $this->getMockRepository();
 		$propertyLabelResolver = new MockPropertyLabelResolver( 'en', $mockRepository );
+		$usageAccumulator = $this->getMock( UsageAccumulator::class );
+		$usageAccumulator->expects( $this->exactly( $times ) )
+			->method( 'addLabelUsage' );
 
-		return new PropertyIdResolver( $mockRepository, $propertyLabelResolver );
+		return new PropertyIdResolver(
+			$mockRepository,
+			$propertyLabelResolver,
+			$usageAccumulator
+		);
 	}
 
 	private function getMockRepository() {
@@ -44,8 +52,8 @@ class PropertyIdResolverTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider resolvePropertyIdProvider
 	 */
-	public function testResolvePropertyId( PropertyId $expected, $propertyLabelOrId ) {
-		$propertyIdResolver = $this->getPropertyIdResolver();
+	public function testResolvePropertyId( PropertyId $expected, $propertyLabelOrId, $times = 0 ) {
+		$propertyIdResolver = $this->getPropertyIdResolver( $times );
 
 		$propertyId = $propertyIdResolver->resolvePropertyId( $propertyLabelOrId, 'en' );
 		$this->assertEquals( $expected, $propertyId );
@@ -53,7 +61,7 @@ class PropertyIdResolverTest extends \PHPUnit_Framework_TestCase {
 
 	public function resolvePropertyIdProvider() {
 		return array(
-			array( new PropertyId( 'P1337' ), 'a kitten!' ),
+			array( new PropertyId( 'P1337' ), 'a kitten!', 1 ),
 			array( new PropertyId( 'P1337' ), 'p1337' ),
 			array( new PropertyId( 'P1337' ), 'P1337' ),
 		);

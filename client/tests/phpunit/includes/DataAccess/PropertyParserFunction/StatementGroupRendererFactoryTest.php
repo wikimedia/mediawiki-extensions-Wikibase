@@ -10,7 +10,6 @@ use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
-use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer;
 use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory;
 use Wikibase\Client\DataAccess\PropertyParserFunction\VariantsAwareRenderer;
@@ -23,6 +22,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\LanguageFallbackChainFactory;
@@ -141,7 +141,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider allowDataAccessInUserLanguageProvider
 	 */
 	public function testNewRendererFromParser_languageOption( $allowDataAccessInUserLanguage ) {
-		$idResolver = $this->getMockBuilder( PropertyIdResolver::class )
+		$labelResolver = $this->getMockBuilder( PropertyLabelResolver::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -161,7 +161,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 			) );
 
 		$factory = new StatementGroupRendererFactory(
-			$idResolver,
+			$labelResolver,
 			new SnaksFinder(),
 			$this->getMock( EntityLookup::class ),
 			new DataAccessSnakFormatterFactory(
@@ -182,8 +182,12 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getStatementGroupRendererFactory( $allowDataAccessInUserLanguage = false ) {
+		$labelResolver = $this->getMockBuilder( PropertyLabelResolver::class )
+			->disableOriginalConstructor()
+			->getMock();
+
 		return new StatementGroupRendererFactory(
-			$this->getPropertyIdResolver(),
+			$labelResolver,
 			$this->getSnaksFinder(),
 			$this->getEntityLookup(),
 			new DataAccessSnakFormatterFactory(
@@ -193,23 +197,6 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 			),
 			$allowDataAccessInUserLanguage
 		);
-	}
-
-	/**
-	 * @return PropertyIdResolver
-	 */
-	private function getPropertyIdResolver() {
-		$propertyIdResolver = $this->getMockBuilder( PropertyIdResolver::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$propertyIdResolver->expects( $this->any() )
-			->method( 'resolvePropertyId' )
-			->will( $this->returnCallback( function ( $name, $lang ) {
-				return new PropertyId( $name );
-			} ) );
-
-		return $propertyIdResolver;
 	}
 
 	/**
@@ -269,6 +256,10 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 			->will( $this->returnCallback( function ( EntityId $id ) {
 				return new Item( $id );
 			} ) );
+
+		$entityLookup->expects( $this->any() )
+			->method( 'hasEntity' )
+			->will( $this->returnValue( true ) );
 
 		return $entityLookup;
 	}
