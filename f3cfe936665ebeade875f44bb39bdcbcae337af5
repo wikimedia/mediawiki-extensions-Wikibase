@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_3b011072",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-18T10:32:27Z",
+      "side": 1,
+      "message": "I\u0027m afraid this comment does not really explain why the \"undelete-cantcreate\" error is set, and why it is ok to simply unset it. More importantly: There is no explanation why this hack was not necessary as of last week, but is necessary now. I believe this should be added here, for reference reference.",
+      "range": {
+        "startLine": 675,
+        "startChar": 4,
+        "endLine": 676,
+        "endChar": 62
+      },
+      "revId": "f3cfe936665ebeade875f44bb39bdcbcae337af5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_7bd8f822",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-18T10:32:27Z",
+      "side": 1,
+      "message": "As said in the other patch: All related code in Title uses \"Permissions\" in plural form. Why did you decided to use singular here?",
+      "range": {
+        "startLine": 684,
+        "startChar": 34,
+        "endLine": 684,
+        "endChar": 44
+      },
+      "revId": "f3cfe936665ebeade875f44bb39bdcbcae337af5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_9bd38405",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-18T10:32:27Z",
+      "side": 1,
+      "message": "Should be upper case.\n\nBut given the short scope (only 3 lines, directly following each other) a much shorter variable name like $index would make the code even easier to read.",
+      "range": {
+        "startLine": 692,
+        "startChar": 16,
+        "endLine": 692,
+        "endChar": 17
+      },
+      "revId": "f3cfe936665ebeade875f44bb39bdcbcae337af5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_bbf52081",
+        "filename": "repo/tests/phpunit/includes/RepoHooksTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-18T10:32:27Z",
+      "side": 1,
+      "message": "In my opinion this test case does not add anything new to what was already tested before. But it\u0027s cheap and does not hurt, as far as I can tell.",
+      "range": {
+        "startLine": 292,
+        "startChar": 3,
+        "endLine": 296,
+        "endChar": 4
+      },
+      "revId": "f3cfe936665ebeade875f44bb39bdcbcae337af5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
