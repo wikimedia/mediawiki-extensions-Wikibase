@@ -22,6 +22,30 @@
       "revId": "5023d440478a34e76a10d6a9458044a9f1a7d2cb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_fb3f28d1",
+        "filename": "repo/includes/Specials/SpecialListProperties.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-18T12:18:20Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "4e506ba4_fbcde834",
+      "range": {
+        "startLine": 231,
+        "startChar": 12,
+        "endLine": 231,
+        "endChar": 77
+      },
+      "revId": "5023d440478a34e76a10d6a9458044a9f1a7d2cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

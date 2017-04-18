@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_db5eec47",
+        "filename": "repo/includes/Specials/SpecialListProperties.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-18T12:18:20Z",
+      "side": 1,
+      "message": "Unfortunately, It\u0027s not possible to strip them because outputResults in SpecialWikibaseQueryPage would gets confused about the array keys and ends up in fatal error (try it yourself)",
+      "parentUuid": "4e506ba4_3bc4b010",
+      "range": {
+        "startLine": 220,
+        "startChar": 17,
+        "endLine": 220,
+        "endChar": 29
+      },
+      "revId": "f39ed6a5d600c7d906690e17c1b590cda77b9fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_bbd8c0f5",
         "filename": "repo/includes/Specials/SpecialListProperties.php",
         "patchSetId": 6
@@ -36,6 +60,30 @@
       "writtenOn": "2017-04-18T11:05:48Z",
       "side": 1,
       "message": "array[] $propertyInfo",
+      "range": {
+        "startLine": 228,
+        "startChar": 11,
+        "endLine": 228,
+        "endChar": 24
+      },
+      "revId": "f39ed6a5d600c7d906690e17c1b590cda77b9fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_1b43f468",
+        "filename": "repo/includes/Specials/SpecialListProperties.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-18T12:18:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_bbd8c0f5",
       "range": {
         "startLine": 228,
         "startChar": 11,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_bb2a008e",
+        "filename": "repo/includes/Specials/SpecialListProperties.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-18T12:18:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_1bd1b4d0",
+      "range": {
+        "startLine": 231,
+        "startChar": 40,
+        "endLine": 231,
+        "endChar": 53
+      },
+      "revId": "f39ed6a5d600c7d906690e17c1b590cda77b9fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_5bc73c15",
         "filename": "repo/includes/Specials/SpecialListProperties.php",
         "patchSetId": 6
@@ -82,6 +154,30 @@
       "writtenOn": "2017-04-18T11:05:48Z",
       "side": 1,
       "message": "It looks like this comment was accidentally added to the wrong method.",
+      "range": {
+        "startLine": 243,
+        "startChar": 25,
+        "endLine": 243,
+        "endChar": 76
+      },
+      "revId": "f39ed6a5d600c7d906690e17c1b590cda77b9fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_db258cbd",
+        "filename": "repo/includes/Specials/SpecialListProperties.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-18T12:18:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_5bc73c15",
       "range": {
         "startLine": 243,
         "startChar": 25,
