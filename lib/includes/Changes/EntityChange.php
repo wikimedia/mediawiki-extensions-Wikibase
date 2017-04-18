@@ -2,9 +2,11 @@
 
 namespace Wikibase;
 
+use CentralIdLookup;
 use Deserializers\Deserializer;
 use Diff\DiffOp\DiffOp;
 use Diff\DiffOpFactory;
+use LocalIdLookup;
 use MWException;
 use RecentChange;
 use Revision;
@@ -25,6 +27,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
+ * @author Matthew Flaschen < mflaschen@wikimedia.org >
  */
 class EntityChange extends DiffChange {
 
@@ -104,6 +107,7 @@ class EntityChange extends DiffChange {
 			'bot',
 			'rev_id',
 			'parent_id',
+			'central_user_id',
 			'user_text',
 			'comment'
 		];
@@ -143,35 +147,69 @@ class EntityChange extends DiffChange {
 
 	/**
 	 * @param RecentChange $rc
+	 * @param int $centralUserId Central user ID, or 0 if unknown or not applicable
+	 *   (see docs/change-propagation.wiki)
 	 *
 	 * @todo rename to setRecentChangeInfo
 	 */
-	public function setMetadataFromRC( RecentChange $rc ) {
+	public function setMetadataFromRC( RecentChange $rc, $centralUserId ) {
 		$this->setFields( [
 			'revision_id' => $rc->getAttribute( 'rc_this_oldid' ),
-			'user_id' => $rc->getAttribute( 'rc_user' ),
 			'time' => $rc->getAttribute( 'rc_timestamp' ),
 		] );
 
 		$this->setMetadata( [
-			'user_text' => $rc->getAttribute( 'rc_user_text' ),
 			'bot' => $rc->getAttribute( 'rc_bot' ),
 			'page_id' => $rc->getAttribute( 'rc_cur_id' ),
 			'rev_id' => $rc->getAttribute( 'rc_this_oldid' ),
 			'parent_id' => $rc->getAttribute( 'rc_last_oldid' ),
 			'comment' => $rc->getAttribute( 'rc_comment' ),
 		] );
+
+		$this->addUserMetadata(
+			$rc->getAttribute( 'rc_user' ),
+			$rc->getAttribute( 'rc_user_text' ),
+			$centralUserId
+		);
 	}
 
 	/**
-	 * @param User $user
+	 * Add fields and metadata related to the user.
 	 *
-	 * @todo rename to setUserInfo
+	 * This does not touch other fields or metadata.
+	 *
+	 * @param int $repoUserId User ID on wiki where change was made, or 0 for anon
+	 * @param string $repoUserText User text on wiki where change was made, for either
+	 *   logged in user or anon
+	 * @param int $centralUserId Central user ID, or 0 if unknown or not applicable
+	 *   (see docs/change-propagation.wiki)
 	 */
-	public function setMetadataFromUser( User $user ) {
+	private function addUserMetadata( $repoUserId, $repoUserText, $centralUserId ) {
 		$this->setFields( [
-			'user_id' => $user->getId(),
+			'user_id' => $repoUserId,
 		] );
+
+		$metadata = [
+			'user_text' => $repoUserText,
+			'central_user_id' => $centralUserId,
+		];
+
+		$this->setMetadata( $metadata );
+	}
+
+	/**
+	 * @todo rename to setUserInfo
+	 *
+	 * @param User $user User that made change
+	 * @param int $centralUserId Central user ID, or 0 if unknown or not applicable
+	 *   (see docs/change-propagation.wiki)
+	 */
+	public function setMetadataFromUser( User $user, $centralUserId ) {
+		$this->addUserMetadata(
+			$user->getId(),
+			$user->getName(),
+			$centralUserId
+		);
 
 		// TODO: init page_id etc in getMetadata, not here!
 		$metadata = array_merge( [
@@ -182,15 +220,17 @@ class EntityChange extends DiffChange {
 			$this->getMetadata()
 		);
 
-		$metadata['user_text'] = $user->getName();
-
 		$this->setMetadata( $metadata );
 	}
 
-	public function setRevisionInfo( Revision $revision ) {
+	/**
+	 * @param Revision $revision Revision to populate EntityChange from
+	 * @param int $centralUserId Central user ID, or 0 if unknown or not applicable
+	 *   (see docs/change-propagation.wiki)
+	 */
+	public function setRevisionInfo( Revision $revision, $centralUserId ) {
 		$this->setFields( [
 			'revision_id' => $revision->getId(),
-			'user_id' => $revision->getUser(),
 			'time' => $revision->getTimestamp(),
 		] );
 
@@ -205,12 +245,17 @@ class EntityChange extends DiffChange {
 		}
 
 		$this->setMetadata( [
-			'user_text' => $revision->getUserText(),
 			'page_id' => $revision->getPage(),
 			'parent_id' => $revision->getParentId(),
 			'comment' => $revision->getComment(),
 			'rev_id' => $revision->getId(),
 		] );
+
+		$this->addUserMetadata(
+			$revision->getUser(),
+			$revision->getUserText(),
+			$centralUserId
+		);
 	}
 
 	/**

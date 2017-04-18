@@ -29,6 +29,7 @@ use StubUserLang;
 use Title;
 use User;
 use Wikibase\Lib\AutoCommentFormatter;
+use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Repo\Content\EntityHandler;
@@ -323,7 +324,17 @@ final class RepoHooks {
 			if ( $change ) {
 				$changeStore = WikibaseRepo::getDefaultInstance()->getStore()->getChangeStore();
 
-				$change->setMetadataFromRC( $recentChange );
+				$centralIdLookup = CentralIdLookupFactory::getInstance()->getCentralIdLookup();
+				if ( $centralIdLookup === null ) {
+					$centralUserId = 0;
+				} else {
+					$repoUser = $recentChange->getPerformer();
+					$centralUserId = $centralIdLookup->centralIdFromLocalUser(
+						$repoUser
+					);
+				}
+
+				$change->setMetadataFromRC( $recentChange, $centralUserId );
 				$changeStore->saveChange( $change );
 			}
 		}
