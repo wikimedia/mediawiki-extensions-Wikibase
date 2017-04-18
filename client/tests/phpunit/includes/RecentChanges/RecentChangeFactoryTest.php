@@ -2,11 +2,14 @@
 
 namespace Wikibase\Client\Tests\RecentChanges;
 
+use CentralIdLookup;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
 use Diff\MapDiffer;
 use Language;
+use Wikibase\Lib\Tests\Changes\MockRepoClientCentralIdLookup;
 use SiteLookup;
+use TestingAccessWrapper;
 use Title;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\DataModel\Entity\EntityId;
@@ -35,7 +38,8 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$lang = Language::factory( 'qqx' );
 		$siteLinkCommentCreator = new SiteLinkCommentCreator( $lang, $siteLookup, 'testwiki' );
-		return new RecentChangeFactory( $lang, $siteLinkCommentCreator );
+		$centralIdLookup = new MockRepoClientCentralIdLookup( /** isRepo= */ false );
+		return new RecentChangeFactory( $lang, $siteLinkCommentCreator, $centralIdLookup );
 	}
 
 	/**
@@ -112,6 +116,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$fields = array(
 			'id' => '13',
+			'user_id' => 3,
 			'time' => '20150202030303',
 		);
 		$metadata = array(
@@ -141,7 +146,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$changeAttr = array(
-			'rc_user' => 0,
+			'rc_user' => -1,
 			'rc_user_text' => 'RecentChangeFactoryTestUser',
 			'rc_type' => RC_EXTERNAL,
 			'rc_minor' => true, // for now, always consider these minor
@@ -165,7 +170,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$preparedAttr = array(
-			'rc_user' => 0,
+			'rc_user' => -1,
 			'rc_user_text' => 'HungryKitten',
 			'rc_type' => RC_EXTERNAL,
 			'rc_minor' => true, // for now, always consider these minor
@@ -369,7 +374,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				'/* set-de-label:1| */ bla bla',
 				'change',
 				$emptyDiff,
-				array(),
+				array( 'user_id' => 1 ),
 				array(
 					'comment' => '/* set-de-label:1| */ bla bla',
 				)
@@ -378,7 +383,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				'(wikibase-comment-sitelink-change: dewiki:Dummy, dewiki:Bummy)',
 				'change',
 				$this->makeItemDiff( $linksDewikiDummy, $linksDewikiBummy ),
-				array(),
+				array( 'user_id' => 1 ),
 				array(
 					'comment' => '/* IGNORE-KITTENS:1| */ SILLY KITTENS',
 				)
@@ -387,7 +392,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				'(wikibase-comment-sitelink-add: dewiki:Bummy)',
 				'change',
 				$this->makeItemDiff( $linksEmpty, $linksDewikiBummy ),
-				array(),
+				array( 'user_id' => 1 ),
 				array(
 					'comment' => '/* IGNORE-KITTENS:1| */ SILLY KITTENS',
 				)
@@ -396,7 +401,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				'(wikibase-comment-sitelink-remove: dewiki:Dummy)',
 				'change',
 				$this->makeItemDiff( $linksDewikiDummy, $linksEmpty ),
-				array(),
+				array( 'user_id' => 1 ),
 				array(
 					'comment' => '/* IGNORE-KITTENS:1| */ SILLY KITTENS',
 				)
@@ -419,7 +424,8 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 								'comment' => '/* set-en-description:1| */ Foo',
 							),
 						),
-					) )
+					) ),
+					'user_id' => 1,
 				),
 				array()
 			),
@@ -448,4 +454,63 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedComment, $rc->getAttribute( 'rc_comment' ) );
 	}
 
+	/**
+	 * @dataProvider provideGetClientUserId
+	 */
+	public function testGetClientUserId( $expectedClientUserId, $repoUserId, $metadata ) {
+		$recentChangeFactory = $this->newRecentChangeFactory();
+
+		$recentChangeFactory = TestingAccessWrapper::newFromObject( $recentChangeFactory );
+		$clientUserId = $recentChangeFactory->getClientUserId( $repoUserId, $metadata );
+		$this->assertSame(
+			$expectedClientUserId,
+			$clientUserId
+		);
+	}
+
+	//  * central = -1, repo = 1, client = 2
+	public function provideGetClientUserId() {
+		return [
+			// Logged out on repo
+			[
+				0,
+				0,
+				[ 'central_user_id' => 0 ],
+			],
+
+			// 0 central user ID although there is a repo user ID, e.g.
+			// Wikibase repo user not attached.
+			[
+				-1,
+				5,
+				[ 'central_user_id' => 0 ],
+			],
+
+			// No central user ID because it is from a row created
+			// before central_user_id was saved
+			[
+				-1,
+				7,
+				[],
+			],
+
+			// Invalid central ID so client user is null
+			[
+				-1,
+				8,
+				[ 'central_user_id' => 3 ],
+			],
+
+			// Happy path
+			[
+				8,
+
+				// Would be 4 for mock, but it doesn't use
+				// this other than == or != 0.
+				9,
+
+				[ 'central_user_id' => -4 ]
+			],
+		];
+	}
 }
