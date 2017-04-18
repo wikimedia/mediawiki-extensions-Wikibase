@@ -14,6 +14,7 @@ use Wikibase\ItemContent;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Notifications\ChangeTransmitter;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Lib\Tests\Changes\MockRepoClientCentralIdLookup;
 
 /**
  * @covers Wikibase\Repo\Notifications\ChangeNotifier
@@ -34,7 +35,13 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 			->method( 'transmitChange' );
 
 		$changeFactory = WikibaseRepo::getDefaultInstance()->getEntityChangeFactory();
-		return new ChangeNotifier( $changeFactory, [ $changeTransmitter ] );
+		return new ChangeNotifier(
+			$changeFactory,
+			[ $changeTransmitter ],
+			new MockRepoClientCentralIdLookup(
+				/** isRepo= */ true
+			)
+		);
 	}
 
 	/**

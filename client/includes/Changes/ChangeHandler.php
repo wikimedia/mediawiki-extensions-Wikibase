@@ -26,28 +26,28 @@ use Wikibase\EntityChange;
 class ChangeHandler {
 
 	/**
-	 * The change requites any rendered version of the page to be purged from the parser cache.
+	 * The change requires any rendered version of the page to be purged from the parser cache.
 	 */
 	const PARSER_PURGE_ACTION = 'parser';
 
 	/**
-	 * The change requites a LinksUpdate job to be scheduled to update any links
+	 * The change requires a LinksUpdate job to be scheduled to update any links
 	 * associated with the page.
 	 */
 	const LINKS_UPDATE_ACTION = 'links';
 
 	/**
-	 * The change requites any HTML output generated from the page to be purged from web cached.
+	 * The change requires any HTML output generated from the page to be purged from web cached.
 	 */
 	const WEB_PURGE_ACTION = 'web';
 
 	/**
-	 * The change requites an entry to be injected into the recentchanges table.
+	 * The change requires an entry to be injected into the recentchanges table.
 	 */
 	const RC_ENTRY_ACTION = 'rc';
 
 	/**
-	 * The change requites an entry to be injected into the revision table.
+	 * The change requires an entry to be injected into the revision table.
 	 */
 	const HISTORY_ENTRY_ACTION = 'history';
 
