@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_be1d0e16",
+        "filename": "repo/includes/Specials/SpecialListProperties.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-18T13:08:23Z",
+      "side": 1,
+      "message": "array_values \"strips\" the custom keys and replaces them with 0-based integer keys. ;-) All is fine here.",
+      "parentUuid": "4e506ba4_db5eec47",
+      "range": {
+        "startLine": 220,
+        "startChar": 17,
+        "endLine": 220,
+        "endChar": 29
+      },
+      "revId": "f39ed6a5d600c7d906690e17c1b590cda77b9fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_bbd8c0f5",
         "filename": "repo/includes/Specials/SpecialListProperties.php",
         "patchSetId": 6
