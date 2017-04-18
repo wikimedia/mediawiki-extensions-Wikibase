@@ -8,7 +8,8 @@
 			"Macofe",
 			"Fasouzafreitas",
 			"TheEduGobi",
-			"Dianakc"
+			"Dianakc",
+			"Felipe L. Ewald"
 		]
 	},
 	"wikibase-lib-desc": "Mantém a funcionalidade comum para as extensões Wikibase e Wikibase Client",
@@ -24,6 +25,11 @@
 	"wikibase-error-autocomplete-response": "O servidor respondeu: $1",
 	"wikibase-error-ui-no-external-page": "O artigo especificado não pôde ser encontrado no site correspondente.",
 	"wikibase-error-ui-edit-conflict": "Há um conflito de edição. Por favor, recarregue a página e salve novamente.",
+	"wikibase-timedetails-timezone": "Fuso horário",
+	"wikibase-timedetails-precision": "Precisão",
+	"wikibase-timedetails-after": "Depois",
+	"wikibase-globedetails-latitude": "Latitude",
+	"wikibase-globedetails-precision": "Precisão",
 	"wikibase-sitelinks-wikipedia": "Wikipédia",
 	"wikibase-sitelinks-sitename-columnheading": "Idioma",
 	"wikibase-sitelinks-link-columnheading": "Página ligada",

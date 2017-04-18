@@ -89,5 +89,6 @@
 	"wikibase-otherprojects": "In andere projecten",
 	"wikibase-otherprojects-beta-message": "Zijbalk andere projecten",
 	"wikibase-otherprojects-beta-description": "Voegt een \"{{int:wikibase-otherprojects}}\"-sectie toe aan de zijbalk welke toegang biedt tot andere Wikimedia-projecten op basis van gegevens van {{WBREPONAME}}.",
-	"notification-link-text-view-item": "Item {{GENDER:$1|bekijken}}"
+	"notification-link-text-view-item": "Item {{GENDER:$1|bekijken}}",
+	"unresolved-property-category": "Pagina's met onopgeloste eigenschappen"
 }
