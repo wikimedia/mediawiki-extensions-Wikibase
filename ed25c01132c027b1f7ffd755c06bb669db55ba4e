@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_fb8728da",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.entitytermsview.css",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-18T10:50:23Z",
+      "side": 0,
+      "message": "Introduced in I21c7d4a. It\u0027s ok to remove this because it\u0027s a duplicate, but note that the double colon was not a mistake. As far as I understand ::before is the more expressive \"pseudo element\" syntax we should aim to use in the future (in contrast to :first-child and such which selects a real DOM element, not a pseudo one). But current browser support still says we should prefer :before with a single colon.",
+      "range": {
+        "startLine": 20,
+        "startChar": 104,
+        "endLine": 20,
+        "endChar": 106
+      },
+      "revId": "ed25c01132c027b1f7ffd755c06bb669db55ba4e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
