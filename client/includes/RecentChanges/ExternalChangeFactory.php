@@ -111,6 +111,10 @@ class ExternalChangeFactory {
 			throw new UnexpectedValueException( 'Invalid Wikibase change' );
 		}
 
+		// TODO: Add central_user_id after
+		// Ie7b9c482cf6a0dd7215b34841efd86fb51be651a has been deployed long
+		// enough that there are no rows without this.
+		// Bug: T51315
 		$keys = array( 'type', 'page_id', 'rev_id', 'parent_id', 'object_id' );
 
 		foreach ( $keys as $key ) {

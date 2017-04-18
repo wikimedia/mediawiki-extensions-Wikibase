@@ -70,6 +70,17 @@ class RevisionData {
 	}
 
 	/**
+	 * Gets the central user ID.  This should be from CentralIdLookup,
+	 * with the repo wiki and client wiki being part of the same central
+	 * system.
+	 *
+	 * @return int
+	 */
+	public function getCentralUserId() {
+		return $this->changeParams['central_user_id'];
+	}
+
+	/**
 	 * @return int
 	 */
 	public function getPageId() {

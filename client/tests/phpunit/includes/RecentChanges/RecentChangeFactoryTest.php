@@ -2,11 +2,14 @@
 
 namespace Wikibase\Client\Tests\RecentChanges;
 
+use CentralIdLookup;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
 use Diff\MapDiffer;
 use Language;
+use Wikibase\Lib\Tests\Changes\MockRepoClientCentralIdLookup;
 use SiteLookup;
+use TestingAccessWrapper;
 use Title;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\DataModel\Entity\EntityId;
@@ -35,7 +38,8 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$lang = Language::factory( 'qqx' );
 		$siteLinkCommentCreator = new SiteLinkCommentCreator( $lang, $siteLookup, 'testwiki' );
-		return new RecentChangeFactory( $lang, $siteLinkCommentCreator );
+		$centralIdLookup = new MockRepoClientCentralIdLookup( /** isRepo= */ false );
+		return new RecentChangeFactory( $lang, $siteLinkCommentCreator, $centralIdLookup );
 	}
 
 	/**
@@ -53,7 +57,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$instance->setEntityId( $entityId );
 
 		if ( !$instance->hasField( 'info' ) ) {
-			$instance->setField( 'info', array() );
+			$instance->setField( 'info', [] );
 		}
 
 		// Note: the change type determines how the client will
@@ -110,27 +114,28 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function provideNewRecentChange() {
 		$target = $this->newTitle( NS_MAIN, 'RecentChangeFactoryTest', 7, 77, 210 );
 
-		$fields = array(
+		$fields = [
 			'id' => '13',
+			'user_id' => 3,
 			'time' => '20150202030303',
-		);
-		$metadata = array(
+		];
+		$metadata = [
 			'rev_id' => 2,
 			'parent_id' => 3,
 			'user_text' => 'RecentChangeFactoryTestUser',
 			'comment' => 'Actual Comment'
-		);
+		];
 
 		$emptyDiff = new ItemDiff();
 		$change = $this->newEntityChange( 'change', new ItemId( 'Q17' ), $emptyDiff, $fields );
 		$change->setMetadata( $metadata );
 
-		$diffOp = new Diff( array( 'testwiki' => new DiffOpChange( 'RecentChangeFactoryTest', 'Bar' ) ) );
-		$siteLinkDiff = new ItemDiff( array( 'links' => $diffOp ) );
+		$diffOp = new Diff( [ 'testwiki' => new DiffOpChange( 'RecentChangeFactoryTest', 'Bar' ) ] );
+		$siteLinkDiff = new ItemDiff( [ 'links' => $diffOp ] );
 		$siteLinkChange = $this->newEntityChange( 'change', new ItemId( 'Q17' ), $siteLinkDiff, $fields );
 		$siteLinkChange->setMetadata( $metadata );
 
-		$targetAttr = array(
+		$targetAttr = [
 			'rc_namespace' => $target->getNamespace(),
 			'rc_title' => $target->getDBkey(),
 			'rc_old_len' => $target->getLength(),
@@ -138,23 +143,23 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 			'rc_this_oldid' => $target->getLatestRevID(),
 			'rc_last_oldid' => $target->getLatestRevID(),
 			'rc_cur_id' => $target->getArticleID(),
-		);
+		];
 
-		$changeAttr = array(
-			'rc_user' => 0,
+		$changeAttr = [
+			'rc_user' => -1,
 			'rc_user_text' => 'RecentChangeFactoryTestUser',
 			'rc_type' => RC_EXTERNAL,
 			'rc_minor' => true, // for now, always consider these minor
 			'rc_bot' => false,
 			'rc_patrolled' => true,
-			'rc_params' => serialize( array(
+			'rc_params' => serialize( [
 				'wikibase-repo-change' => $metadata + $fields + [
 					'object_id' => 'Q17',
 					'type' => 'wikibase-item~change',
 					'entity_type' => 'item',
 				],
-				//'comment-html' => 'Generated Comment HTML', // later
-			) ),
+				// 'comment-html' => 'Generated Comment HTML', // later
+			] ),
 			'rc_comment' => $metadata['comment'],
 			'rc_timestamp' => $fields['time'],
 			'rc_log_action' => '',
@@ -162,30 +167,30 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 			'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
 			'rc_deleted' => false,
 			'rc_new' => false,
-		);
+		];
 
-		$preparedAttr = array(
-			'rc_user' => 0,
+		$preparedAttr = [
+			'rc_user' => -1,
 			'rc_user_text' => 'HungryKitten',
 			'rc_type' => RC_EXTERNAL,
 			'rc_minor' => true, // for now, always consider these minor
 			'rc_bot' => false,
 			'rc_patrolled' => true,
-			'rc_params' => serialize( array(
-				'wikibase-repo-change' => array(
+			'rc_params' => serialize( [
+				'wikibase-repo-change' => [
 					'rev_id' => 7,
 					'parent_id' => 5,
 					'time' => '20150606050505',
-				),
+				],
 				'comment-html' => 'Override Comment HTML',
-			) ),
+			] ),
 			'rc_comment' => 'prepared Comment',
 			'rc_timestamp' => '20150606050505',
 			'rc_log_action' => '',
 			'rc_log_type' => null,
 			'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
 			'rc_deleted' => false,
-		);
+		];
 
 		$siteLinkChangeExpected_currentPage = array_merge( $preparedAttr, $targetAttr );
 		$siteLinkChangeExpected_currentPage['rc_comment'] = '(wikibase-comment-unlink)';
@@ -193,37 +198,37 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$siteLinkChangeExpected_otherPage = array_merge( $preparedAttr, $targetAttr );
 		$siteLinkChangeExpected_otherPage['rc_title'] = 'RecentChangeFactoryTest-OtherPage';
 
-		return array(
-			'no prepared' => array(
+		return [
+			'no prepared' => [
 				array_merge( $changeAttr, $targetAttr ),
 				$change,
 				$target,
 				null
-			),
+			],
 
-			'use prepared' => array(
+			'use prepared' => [
 				array_merge( $preparedAttr, $targetAttr ),
 				$change,
 				$target,
 				$preparedAttr
-			),
+			],
 
-			'sitelink change, affects current page' => array(
+			'sitelink change, affects current page' => [
 				$siteLinkChangeExpected_currentPage,
 				$siteLinkChange,
 				$target,
 				$preparedAttr
-			),
+			],
 
-			'sitelink change, does not affect current page' => array(
+			'sitelink change, does not affect current page' => [
 				$siteLinkChangeExpected_otherPage,
 				$siteLinkChange,
 				$this->newTitle( NS_MAIN, 'RecentChangeFactoryTest-OtherPage', 7, 77, 210 ),
 				$preparedAttr
-			),
+			],
 
-			//'composite change' => array(),
-		);
+			// 'composite change' => array(),
+		];
 	}
 
 	/**
@@ -273,18 +278,18 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		array $fields,
 		array $metadata
 	) {
-		$fields = array_merge( array(
+		$fields = array_merge( [
 			'id' => '13',
 			'time' => '20150202030303',
-		), $fields );
+		], $fields );
 
-		$metadata = array_merge( array(
+		$metadata = array_merge( [
 			'rev_id' => 2,
 			'parent_id' => 3,
 			'bot' => false,
 			'user_text' => 'RecentChangeFactoryTestUser',
 			'comment' => 'Actual Comment'
-		), $metadata );
+		], $metadata );
 
 		if ( isset( $fields['info']['changes'] ) ) {
 			foreach ( $fields['info']['changes'] as &$innerChange ) {
@@ -316,7 +321,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		array $fields,
 		array $metadata
 	) {
-		//@todo: also check pre-generated HTML when I5439a76c is merged
+		// @todo: also check pre-generated HTML when I5439a76c is merged
 
 		$change = $this->makeItemChangeFromMetaData( $action, $diff, $fields, $metadata );
 
@@ -348,92 +353,93 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		//   page disconnected by edit
 		//   page disconnected by deletion
 
-		$linksEmpty = array(
-			'links' => array()
-		);
+		$linksEmpty = [
+			'links' => []
+		];
 
-		$linksDewikiDummy = array(
-			'links' => array(
-				'dewiki' => array( 'name' => 'Dummy' )
-			)
-		);
+		$linksDewikiDummy = [
+			'links' => [
+				'dewiki' => [ 'name' => 'Dummy' ]
+			]
+		];
 
-		$linksDewikiBummy = array(
-			'links' => array(
-				'dewiki' => array( 'name' => 'Bummy' )
-			)
-		);
+		$linksDewikiBummy = [
+			'links' => [
+				'dewiki' => [ 'name' => 'Bummy' ]
+			]
+		];
 
-		return array(
-			'repo comment' => array(
+		return [
+			'repo comment' => [
 				'/* set-de-label:1| */ bla bla',
 				'change',
 				$emptyDiff,
-				array(),
-				array(
+				[ 'user_id' => 1 ],
+				[
 					'comment' => '/* set-de-label:1| */ bla bla',
-				)
-			),
-			'sitelink update' => array(
+				]
+			],
+			'sitelink update' => [
 				'(wikibase-comment-sitelink-change: dewiki:Dummy, dewiki:Bummy)',
 				'change',
 				$this->makeItemDiff( $linksDewikiDummy, $linksDewikiBummy ),
-				array(),
-				array(
+				[ 'user_id' => 1 ],
+				[
 					'comment' => '/* IGNORE-KITTENS:1| */ SILLY KITTENS',
-				)
-			),
-			'sitelink added' => array(
+				]
+			],
+			'sitelink added' => [
 				'(wikibase-comment-sitelink-add: dewiki:Bummy)',
 				'change',
 				$this->makeItemDiff( $linksEmpty, $linksDewikiBummy ),
-				array(),
-				array(
+				[ 'user_id' => 1 ],
+				[
 					'comment' => '/* IGNORE-KITTENS:1| */ SILLY KITTENS',
-				)
-			),
-			'sitelink removed' => array(
+				]
+			],
+			'sitelink removed' => [
 				'(wikibase-comment-sitelink-remove: dewiki:Dummy)',
 				'change',
 				$this->makeItemDiff( $linksDewikiDummy, $linksEmpty ),
-				array(),
-				array(
+				[ 'user_id' => 1 ],
+				[
 					'comment' => '/* IGNORE-KITTENS:1| */ SILLY KITTENS',
-				)
-			),
-			'composite change' => array(
+				]
+			],
+			'composite change' => [
 				'/* set-de-description:1| */ Fuh(semicolon-separator)/* set-en-description:1| */ Foo',
 				'change',
 				$emptyDiff,
-				array(
-					'info' => array( 'changes' => array(
-						array(
-							'fields' => array(),
-							'metadata' => array(
+				[
+					'info' => [ 'changes' => [
+						[
+							'fields' => [],
+							'metadata' => [
 								'comment' => '/* set-de-description:1| */ Fuh',
-							),
-						),
-						array(
-							'fields' => array(),
-							'metadata' => array(
+							],
+						],
+						[
+							'fields' => [],
+							'metadata' => [
 								'comment' => '/* set-en-description:1| */ Foo',
-							),
-						),
-					) )
-				),
-				array()
-			),
-		);
+							],
+						],
+					] ],
+					'user_id' => 1,
+				],
+				[]
+			],
+		];
 	}
 
 	public function testNewRecentChange_no_summary() {
 		$change = $this->makeItemChangeFromMetaData(
 			'change',
 			new ItemDiff(),
-			array(),
-			array(
+			[],
+			[
 				'comment' => ''  // repo sent no comment
-			)
+			]
 		);
 
 		$target = $this->newTitle( NS_MAIN, 'RecentChangeFactoryTest', 7, 77, 210 );
@@ -446,6 +452,67 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$expectedComment = '(wikibase-comment-update)';
 		$this->assertEquals( $expectedComment, $rc->getAttribute( 'rc_comment' ) );
+	}
+
+	/**
+	 * @dataProvider provideGetClientUserId
+	 */
+	public function testGetClientUserId( $expectedClientUserId, $repoUserId, $metadata ) {
+		$recentChangeFactory = $this->newRecentChangeFactory();
+
+		$recentChangeFactory = TestingAccessWrapper::newFromObject( $recentChangeFactory );
+		$clientUserId = $recentChangeFactory->getClientUserId( $repoUserId, $metadata );
+		$this->assertSame(
+			$expectedClientUserId,
+			$clientUserId
+		);
+	}
+
+	//  * central = -1, repo = 1, client = 2
+
+	public function provideGetClientUserId() {
+		return [
+			// Logged out on repo
+			[
+				0,
+				0,
+				[ 'central_user_id' => 0 ],
+			],
+
+			// 0 central user ID although there is a repo user ID, e.g.
+			// Wikibase repo user not attached.
+			[
+				-1,
+				5,
+				[ 'central_user_id' => 0 ],
+			],
+
+			// No central user ID because it is from a row created
+			// before central_user_id was saved
+			[
+				-1,
+				7,
+				[],
+			],
+
+			// Invalid central ID so client user is null
+			[
+				-1,
+				8,
+				[ 'central_user_id' => 3 ],
+			],
+
+			// Happy path
+			[
+				8,
+
+				// Would be 4 for mock, but it doesn't use
+				// this other than == or != 0.
+				9,
+
+				[ 'central_user_id' => -4 ]
+			],
+		];
 	}
 
 }
