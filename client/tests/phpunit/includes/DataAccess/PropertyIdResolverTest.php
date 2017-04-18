@@ -2,8 +2,11 @@
 
 namespace Wikibase\Client\Tests\DataAccess;
 
+use PHPUnit_Framework_TestCase;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\PropertyLabelNotResolvedException;
+use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -20,14 +23,13 @@ use Wikibase\Lib\Tests\MockRepository;
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class PropertyIdResolverTest extends \PHPUnit_Framework_TestCase {
+class PropertyIdResolverTest extends PHPUnit_Framework_TestCase {
 
-	private function getPropertyIdResolver( $times = 0 ) {
+	private function getPropertyIdResolver( UsageAccumulator $usageAccumulator = null ) {
 		$mockRepository = $this->getMockRepository();
 		$propertyLabelResolver = new MockPropertyLabelResolver( 'en', $mockRepository );
-		$usageAccumulator = $this->getMock( UsageAccumulator::class );
-		$usageAccumulator->expects( $this->exactly( $times ) )
-			->method( 'addLabelUsage' );
+
+		$usageAccumulator = $usageAccumulator ?: new HashUsageAccumulator();
 
 		return new PropertyIdResolver(
 			$mockRepository,
@@ -52,19 +54,29 @@ class PropertyIdResolverTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider resolvePropertyIdProvider
 	 */
-	public function testResolvePropertyId( PropertyId $expected, $propertyLabelOrId, $times = 0 ) {
-		$propertyIdResolver = $this->getPropertyIdResolver( $times );
+	public function testResolvePropertyId( PropertyId $expected, $propertyLabelOrId, array $expectedUsages = [] ) {
+		$usageAccumulator = new HashUsageAccumulator();
+		$propertyIdResolver = $this->getPropertyIdResolver( $usageAccumulator );
 
 		$propertyId = $propertyIdResolver->resolvePropertyId( $propertyLabelOrId, 'en' );
 		$this->assertEquals( $expected, $propertyId );
+		$this->assertEquals( $expectedUsages, $usageAccumulator->getUsages() );
 	}
 
 	public function resolvePropertyIdProvider() {
-		return array(
-			array( new PropertyId( 'P1337' ), 'a kitten!', 1 ),
-			array( new PropertyId( 'P1337' ), 'p1337' ),
-			array( new PropertyId( 'P1337' ), 'P1337' ),
-		);
+		$p1337 = new PropertyId( 'P1337' );
+
+		return [
+			[
+				$p1337,
+				'a kitten!',
+				[
+					'P1337#L.en' => new EntityUsage( $p1337, EntityUsage::LABEL_USAGE, 'en' )
+				]
+			],
+			[ $p1337, 'p1337' ],
+			[ $p1337, 'P1337' ],
+		];
 	}
 
 	/**
@@ -79,11 +91,11 @@ class PropertyIdResolverTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function resolvePropertyIdWithInvalidInput_throwsExceptionProvider() {
-		return array(
-			array( 'hedgehog' ),
-			array( 'Q100' ),
-			array( 'P1444' )
-		);
+		return [
+			[ 'hedgehog' ],
+			[ 'Q100' ],
+			[ 'P1444' ]
+		];
 	}
 
 }
