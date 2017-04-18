@@ -21,16 +21,16 @@
 	width: 12px;
 }
 
-.wb-badge:not(:last-child) {
+.wb-badge:not( :last-child ) {
 	margin-right: 4px;
 }
 
 .wb-badge-empty {
-	background-image: url(images/wb-badges-empty.png);
+	background-image: url( images/wb-badges-empty.png );
 	/* @embed */
-	background-image: -webkit-linear-gradient(transparent, transparent), url(images/wb-badges-empty.svg);
+	background-image: -webkit-linear-gradient( transparent, transparent ), url( images/wb-badges-empty.svg );
 	/* @embed */
-	background-image: linear-gradient(transparent, transparent), url(images/wb-badges-empty.svg);
+	background-image: linear-gradient( transparent, transparent ), url( images/wb-badges-empty.svg );
 }
 
 .wikibase-sitelinkview input {
@@ -44,7 +44,7 @@
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
-	outline: none;
+	outline: 0;
 }
 
 .wikibase-sitelinkview input:focus {

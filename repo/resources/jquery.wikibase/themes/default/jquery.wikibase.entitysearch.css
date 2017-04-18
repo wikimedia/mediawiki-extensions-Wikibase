@@ -4,16 +4,15 @@
  */
 
 .wikibase-entitysearch-list .wb-entitysearch-suggestions {
-	background-color: #FFFFFF;
+	background-color: #fff;
 	border-top-style: solid;
 }
 
 .wikibase-entitysearch-list .wb-entitysearch-suggestions.ui-state-hover {
-	background-color: #4C59A6;
+	background-color: #4c59a6;
 	border-top-style: solid;
-	color: #FFFFFF;
+	color: #fff;
 }
-
 
 .wikibase-entitysearch-list .wb-entitysearch-suggestions .suggestions-special {
 	background-color: transparent;
@@ -31,5 +30,5 @@
 }
 
 .wikibase-entitysearch-list .wb-entitysearch-suggestions.ui-state-hover div {
-	color: #FFF;
+	color: #fff;
 }

@@ -7,7 +7,10 @@
 
 /********** Create item/property page **********/
 
-.wb-label, .wb-input, .wb-button, .wb-select {
+.wb-label,
+.wb-input,
+.wb-button,
+.wb-select {
 	display: block;
 	float: left;
 	clear: both;
@@ -17,7 +20,8 @@
 	margin-top: 0.5em;
 }
 
-.wb-input, .wb-select {
+.wb-input,
+.wb-select {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;

@@ -8,16 +8,16 @@
 }
 .wbclient-linkItem-column-site,
 .wbclient-linkItem-column-page {
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid #000;
 	text-align: center;
 }
 .wbclient-linkItem-column-site {
-	border-right: 1px solid black;
+	border-right: 1px solid #000;
 }
 
 #wbclient-linkItem-dialog a,
 .wbclient-linkItem-not-loggedin-message a {
-	color: #0645AD;
+	color: #0645ad;
 }
 .wbclient-linkItem-input {
 	margin: 20px;
