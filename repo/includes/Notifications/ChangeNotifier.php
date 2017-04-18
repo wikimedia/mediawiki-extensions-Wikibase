@@ -30,10 +30,18 @@ class ChangeNotifier {
 	private $changeTransmitters;
 
 	/**
+	 * @var CentralIdLookup|null
+	 */
+	private $centralIdLookup;
+
+	/**
 	 * @param EntityChangeFactory $changeFactory
 	 * @param ChangeTransmitter[] $changeTransmitters
+	 * @param CentralIdLookup|null $centralIdLookup CentralIdLookup, or null if
+	 *   this repository is not connected to a central user system (see
+	 *   Wikibase\CentralIdLookupFactory).
 	 */
-	public function __construct( EntityChangeFactory $changeFactory, array $changeTransmitters ) {
+	public function __construct( EntityChangeFactory $changeFactory, array $changeTransmitters, $centralIdLookup ) {
 		Assert::parameterElementType(
 			ChangeTransmitter::class,
 			$changeTransmitters,
@@ -42,6 +50,10 @@ class ChangeNotifier {
 
 		$this->changeFactory = $changeFactory;
 		$this->changeTransmitters = $changeTransmitters;
+
+		// There is no type hint because it is a required parameter that allows
+		// nulls.
+		$this->centralIdLookup = $centralIdLookup;
 	}
 
 	/**
@@ -64,7 +76,10 @@ class ChangeNotifier {
 
 		$change = $this->changeFactory->newFromUpdate( EntityChange::REMOVE, $content->getEntity() );
 		$change->setTimestamp( $timestamp );
-		$change->setMetadataFromUser( $user );
+		$change->setMetadataFromUser(
+			$user,
+			$this->getCentralUserId( $user )
+		);
 
 		$this->transmitChange( $change );
 
@@ -89,13 +104,21 @@ class ChangeNotifier {
 		}
 
 		$change = $this->changeFactory->newFromUpdate( EntityChange::RESTORE, null, $content->getEntity() );
-		$change->setRevisionInfo( $revision );
+
+		$change->setRevisionInfo(
+			$revision,
+			/* Will get set below in setMetadataFromUser */ 0
+		);
+
 		// We don't want the change entries of newly undeleted pages to have
 		// the timestamp of the original change.
 		$change->setTimestamp( wfTimestampNow() );
 
 		$user = User::newFromId( $revision->getUser() );
-		$change->setMetadataFromUser( $user );
+		$change->setMetadataFromUser(
+			$user,
+			$this->getCentralUserId( $user )
+		);
 
 		$this->transmitChange( $change );
 
@@ -123,7 +146,10 @@ class ChangeNotifier {
 		}
 
 		$change = $this->changeFactory->newFromUpdate( EntityChange::ADD, null, $content->getEntity() );
-		$change->setRevisionInfo( $revision );
+		$change->setRevisionInfo(
+			$revision,
+			$this->getCentralUserId( User::newFromId( $revision->getUser() ) )
+		);
 
 		// FIXME: RepoHooks::onRecentChangeSave currently adds to the change later!
 		$this->transmitChange( $change );
@@ -154,12 +180,31 @@ class ChangeNotifier {
 			return null;
 		}
 
-		$change->setRevisionInfo( $current );
+		$change->setRevisionInfo(
+			$current,
+			$this->getCentralUserId( User::newFromId( $current->getUser() ) )
+		);
 
 		// FIXME: RepoHooks::onRecentChangeSave currently adds to the change later!
 		$this->transmitChange( $change );
 
 		return $change;
+	}
+
+	/**
+	 * Gets central user ID, or 0, from user
+	 *
+	 * @param User $user Repository user
+	 * @return int Central user ID, or 0
+	 */
+	protected function getCentralUserId( User $user ) {
+		if ( $this->centralIdLookup === null ) {
+			return 0;
+		} else {
+			return $this->centralIdLookup->centralIdFromLocalUser(
+				$user
+			);
+		}
 	}
 
 	/**
