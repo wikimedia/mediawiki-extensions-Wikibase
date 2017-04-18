@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_3bc4b010",
+        "filename": "repo/includes/Specials/SpecialListProperties.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-18T11:05:48Z",
+      "side": 1,
+      "message": "I would argue this is not needed because the prefetchingTermLookup does not care about array keys. But this array is also what getResult returns. Not sure what array keys may do when they are returned, so it\u0027s indeed better to strip them.",
+      "range": {
+        "startLine": 220,
+        "startChar": 17,
+        "endLine": 220,
+        "endChar": 29
+      },
+      "revId": "f39ed6a5d600c7d906690e17c1b590cda77b9fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_bbd8c0f5",
+        "filename": "repo/includes/Specials/SpecialListProperties.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-18T11:05:48Z",
+      "side": 1,
+      "message": "array[] $propertyInfo",
+      "range": {
+        "startLine": 228,
+        "startChar": 11,
+        "endLine": 228,
+        "endChar": 24
+      },
+      "revId": "f39ed6a5d600c7d906690e17c1b590cda77b9fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_1bd1b4d0",
+        "filename": "repo/includes/Specials/SpecialListProperties.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-18T11:05:48Z",
+      "side": 1,
+      "message": "array $propertyInfo",
+      "range": {
+        "startLine": 231,
+        "startChar": 40,
+        "endLine": 231,
+        "endChar": 53
+      },
+      "revId": "f39ed6a5d600c7d906690e17c1b590cda77b9fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_5bc73c15",
+        "filename": "repo/includes/Specials/SpecialListProperties.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-18T11:05:48Z",
+      "side": 1,
+      "message": "It looks like this comment was accidentally added to the wrong method.",
+      "range": {
+        "startLine": 243,
+        "startChar": 25,
+        "endLine": 243,
+        "endChar": 76
+      },
+      "revId": "f39ed6a5d600c7d906690e17c1b590cda77b9fc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
