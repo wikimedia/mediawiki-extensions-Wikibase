@@ -114,6 +114,7 @@ return call_user_func( function() {
 				'wikibase.view.ReadModeViewFactory',
 				'wikibase.view.StructureEditorFactory',
 				'wikibase.view.ToolbarFactory',
+				'wikibase.lexeme.view.LexemeViewFactory',
 				'wikibase.WikibaseContentLanguages'
 			),
 			'messages' => array(

@@ -118,7 +118,7 @@
 					entity
 				);
 
-			viewFactoryClass = wb.view.ControllerViewFactory;
+			viewFactoryClass = wb.lexeme.view.LexemeViewFactory;
 			viewFactoryArguments.unshift(
 				toolbarFactory,
 				entityChangersFactory
