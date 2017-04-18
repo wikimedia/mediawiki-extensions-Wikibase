@@ -12,6 +12,7 @@ use OutputPage;
 use ParserOutput;
 use RequestContext;
 use Title;
+use User;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\RepoHooks;
 use Wikibase\SettingsArray;
@@ -244,6 +245,56 @@ XML
 		$this->assertSame( 'wikibase-view-chunks', $out->getProperty( 'wikibase-view-chunks' ) );
 		$this->assertSame( 'wikibase-meta-tags', $out->getProperty( 'wikibase-meta-tags' ) );
 		$this->assertSame( $altLinks, $out->getLinkTags() );
+	}
+
+	/**
+	 * @dataProvider undeletePermissionErrorsProvider
+	 */
+	public function testOnUndeletePermissionErrors( array $expectedErrors, array $errors, Title $title ) {
+		RepoHooks::onUndeletePermissionErrors(
+			$title,
+			$this->getMock( User::class ),
+			$errors
+		);
+
+		$this->assertSame( $expectedErrors, $errors );
+	}
+
+	public function undeletePermissionErrorsProvider() {
+		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+
+		$nonEntityTitle = $this->getMock( Title::class );
+		$nonEntityTitle->expects( $this->any() )
+			->method( 'getNamespace' )
+			->will( $this->returnValue( -1 ) );
+
+		$entityTitle = $this->getMock( Title::class );
+		$entityTitle->expects( $this->any() )
+			->method( 'getNamespace' )
+			->will( $this->returnValue( $namespaceLookup->getEntityNamespace( 'item' ) ) );
+
+		return [
+			'No errors' => [
+				[],
+				[],
+				$nonEntityTitle
+			],
+			'No changes if not an Entity' => [
+				[ [ 'undelete-cantcreate' ], [ 'whatever' ] ],
+				[ [ 'undelete-cantcreate' ], [ 'whatever' ] ],
+				$nonEntityTitle
+			],
+			'Only undelete-cantcreate removed on Entity' => [
+				[ 1 => [ 'whatever' ] ],
+				[ [ 'undelete-cantcreate' ], [ 'whatever' ] ],
+				$entityTitle
+			],
+			'Undelete-cantcreate removed on Entity' => [
+				[],
+				[ [ 'undelete-cantcreate' ] ],
+				$entityTitle
+			],
+		];
 	}
 
 }

@@ -886,6 +886,7 @@ call_user_func( function() {
 	$wgHooks['ResourceLoaderRegisterModules'][] = 'Wikibase\RepoHooks::onResourceLoaderRegisterModules';
 	$wgHooks['BeforeDisplayNoArticleText'][] = 'Wikibase\ViewEntityAction::onBeforeDisplayNoArticleText';
 	$wgHooks['InfoAction'][] = '\Wikibase\RepoHooks::onInfoAction';
+	$wgHooks['UndeletePermissionErrors'][] = '\Wikibase\RepoHooks::onUndeletePermissionErrors';
 
 	// update hooks
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Repo\Store\Sql\ChangesSubscriptionSchemaUpdater::onSchemaUpdate';

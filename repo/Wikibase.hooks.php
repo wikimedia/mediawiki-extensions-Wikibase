@@ -672,6 +672,31 @@ final class RepoHooks {
 	}
 
 	/**
+	 * Handler for the UndeletePermissionErrors hook, implemented to make sure entities can
+	 * be restored, even though they can't be (manually created).
+	 *
+	 * @param Title $title The Title being checked
+	 * @param User $user The User performing the action
+	 * @param array[] &$errors
+	 *
+	 * @return bool
+	 */
+	public static function onUndeletePermissionErrors(
+		Title $title,
+		User $user,
+		&$errors
+	) {
+		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+
+		if ( $namespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
+			$undeleteCantcreateIndex = array_search( [ 'undelete-cantcreate' ], $errors, true );
+			if ( $undeleteCantcreateIndex !== false ) {
+				unset( $errors[$undeleteCantcreateIndex] );
+			}
+		}
+	}
+
+	/**
 	 * Handler for the TitleQuickPermissions hook, implemented to point out that entity pages cannot
 	 * be "created" normally.
 	 *
