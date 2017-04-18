@@ -8,6 +8,7 @@ use RecentChange;
 use Revision;
 use RuntimeException;
 use stdClass;
+use Wikimedia\TestingAccessWrapper;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -31,7 +32,6 @@ use Wikibase\WikibaseSettings;
  * @author Daniel Kinzler
  */
 class EntityChangeTest extends ChangeRowTest {
-
 	/**
 	 * @return string
 	 */
@@ -151,7 +151,7 @@ class EntityChangeTest extends ChangeRowTest {
 		$rc = RecentChange::newFromRow( $row );
 
 		$entityChange = $this->newEntityChange( new ItemId( 'Q7' ) );
-		$entityChange->setMetadataFromRC( $rc );
+		$entityChange->setMetadataFromRC( $rc, 8 );
 
 		$this->assertEquals( 5, $entityChange->getField( 'revision_id' ), 'revision_id' );
 		$this->assertEquals( 7, $entityChange->getField( 'user_id' ), 'user_id' );
@@ -160,11 +160,66 @@ class EntityChangeTest extends ChangeRowTest {
 		$this->assertEquals( 'Test!', $entityChange->getComment(), 'comment' );
 
 		$metadata = $entityChange->getMetadata();
+		$this->assertEquals( 8, $metadata['central_user_id'], 'central_user_id' );
 		$this->assertEquals( 3, $metadata['parent_id'], 'parent_id' );
 		$this->assertEquals( 6, $metadata['page_id'], 'page_id' );
 		$this->assertEquals( 5, $metadata['rev_id'], 'rev_id' );
 		$this->assertEquals( 1, $metadata['bot'], 'bot' );
 		$this->assertEquals( 'Mr. Kittens', $metadata['user_text'], 'user_text' );
+	}
+
+	/**
+	 * @dataProvider provideTestAddUserMetadata
+	 */
+	public function testAddUserMetadata( $repoUserId, $repoUserText, $centralUserId ) {
+		$entityChange = $this->getMockBuilder( EntityChange::class )
+			->setMethods( [
+				'getCentralIdLookup',
+				'getType',
+				'setFields',
+				'setMetadata',
+			] )
+			->getMock();
+
+		$entityChange->expects( $this->once() )
+			->method( 'setFields' )
+			->with( [
+				'user_id' => $repoUserId,
+			] );
+
+		$entityChange->expects( $this->once() )
+			->method( 'setMetadata' )
+			->with( [
+				'user_text' => $repoUserText,
+				'central_user_id' => $centralUserId,
+			] );
+
+		$entityChange->expects( $this->any() )
+			->method( 'getType' )
+			->will( $this->returnValue(
+				'wikibase-item~update'
+			) );
+
+		$entityChange = TestingAccessWrapper::newFromObject( $entityChange );
+		$entityChange->addUserMetadata( $repoUserId, $repoUserText, $centralUserId );
+	}
+
+	// See MockRepoClientCentralIdLookup
+
+	public function provideTestAddUserMetadata() {
+		return [
+			[
+				3,
+				'Foo',
+				-3,
+			],
+
+			[
+				0,
+				'10.11.12.13',
+				0,
+			],
+		];
 	}
 
 	public function testSetMetadataFromUser() {
@@ -187,13 +242,14 @@ class EntityChangeTest extends ChangeRowTest {
 			'page_id' => 5, // will NOT be overwritten
 		] );
 
-		$entityChange->setMetadataFromUser( $user );
+		$entityChange->setMetadataFromUser( $user, 3 );
 
 		$this->assertEquals( 7, $entityChange->getField( 'user_id' ), 'user_id' );
 
 		$metadata = $entityChange->getMetadata();
 		$this->assertEquals( 'Mr. Kittens', $metadata['user_text'], 'user_text' );
 		$this->assertEquals( 5, $metadata['page_id'], 'page_id should be preserved' );
+		$this->assertArrayHasKey( 'central_user_id', $metadata, 'central_user_id should be initialized' );
 		$this->assertArrayHasKey( 'rev_id', $metadata, 'rev_id should be initialized' );
 	}
 
@@ -222,7 +278,7 @@ class EntityChangeTest extends ChangeRowTest {
 			'comment' => 'Test!',
 		] );
 
-		$entityChange->setRevisionInfo( $revision );
+		$entityChange->setRevisionInfo( $revision, 8 );
 
 		$this->assertEquals( 5, $entityChange->getField( 'revision_id' ), 'revision_id' );
 		$this->assertEquals( 7, $entityChange->getField( 'user_id' ), 'user_id' );
@@ -231,6 +287,7 @@ class EntityChangeTest extends ChangeRowTest {
 		$this->assertEquals( 'Test!', $entityChange->getComment(), 'comment' );
 
 		$metadata = $entityChange->getMetadata();
+		$this->assertEquals( 8, $metadata['central_user_id'], 'central_user_id' );
 		$this->assertEquals( 3, $metadata['parent_id'], 'parent_id' );
 		$this->assertEquals( 6, $metadata['page_id'], 'page_id' );
 		$this->assertEquals( 5, $metadata['rev_id'], 'rev_id' );
@@ -254,7 +311,7 @@ class EntityChangeTest extends ChangeRowTest {
 
 		$change = new EntityChange( [ 'info' => [], 'type' => '~' ] );
 		$this->assertFalse( $change->hasField( 'object_id' ), 'precondition' );
-		$change->setRevisionInfo( $revision );
+		$change->setRevisionInfo( $revision, 3 );
 		$this->assertSame( 'Q1', $change->getObjectId() );
 	}
 

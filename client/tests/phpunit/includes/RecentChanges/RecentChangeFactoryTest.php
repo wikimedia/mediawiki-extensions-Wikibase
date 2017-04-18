@@ -2,11 +2,14 @@
 
 namespace Wikibase\Client\Tests\RecentChanges;
 
+use CentralIdLookup;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
 use Diff\MapDiffer;
 use Language;
+use Wikibase\Lib\Tests\Changes\MockRepoClientCentralIdLookup;
 use SiteLookup;
+use Wikimedia\TestingAccessWrapper;
 use Title;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\DataModel\Entity\EntityId;
@@ -30,12 +33,18 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @return RecentChangeFactory
 	 */
-	private function newRecentChangeFactory() {
+	private function newRecentChangeFactoryHelper( $centralIdLookup ) {
 		$siteLookup = $this->getMock( SiteLookup::class );
 
 		$lang = Language::factory( 'qqx' );
 		$siteLinkCommentCreator = new SiteLinkCommentCreator( $lang, $siteLookup, 'testwiki' );
-		return new RecentChangeFactory( $lang, $siteLinkCommentCreator );
+		return new RecentChangeFactory( $lang, $siteLinkCommentCreator, $centralIdLookup );
+	}
+
+	private function newRecentChangeFactory() {
+		return $this->newRecentChangeFactoryHelper(
+			new MockRepoClientCentralIdLookup( /** isRepo= */ false )
+		);
 	}
 
 	/**
@@ -112,6 +121,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$fields = [
 			'id' => '13',
+			'user_id' => 3,
 			'time' => '20150202030303',
 		];
 		$metadata = [
@@ -153,7 +163,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 					'type' => 'wikibase-item~change',
 					'entity_type' => 'item',
 				],
-				//'comment-html' => 'Generated Comment HTML', // later
+				// 'comment-html' => 'Generated Comment HTML', // later
 			] ),
 			'rc_comment' => $metadata['comment'],
 			'rc_timestamp' => $fields['time'],
@@ -222,7 +232,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				$preparedAttr
 			],
 
-			//'composite change' => array(),
+			// 'composite change' => array(),
 		];
 	}
 
@@ -316,7 +326,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		array $fields,
 		array $metadata
 	) {
-		//@todo: also check pre-generated HTML when I5439a76c is merged
+		// @todo: also check pre-generated HTML when I5439a76c is merged
 
 		$change = $this->makeItemChangeFromMetaData( $action, $diff, $fields, $metadata );
 
@@ -369,7 +379,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				'/* set-de-label:1| */ bla bla',
 				'change',
 				$emptyDiff,
-				[],
+				[ 'user_id' => 1 ],
 				[
 					'comment' => '/* set-de-label:1| */ bla bla',
 				]
@@ -378,7 +388,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				'(wikibase-comment-sitelink-change: dewiki:Dummy, dewiki:Bummy)',
 				'change',
 				$this->makeItemDiff( $linksDewikiDummy, $linksDewikiBummy ),
-				[],
+				[ 'user_id' => 1 ],
 				[
 					'comment' => '/* IGNORE-KITTENS:1| */ SILLY KITTENS',
 				]
@@ -387,7 +397,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				'(wikibase-comment-sitelink-add: dewiki:Bummy)',
 				'change',
 				$this->makeItemDiff( $linksEmpty, $linksDewikiBummy ),
-				[],
+				[ 'user_id' => 1 ],
 				[
 					'comment' => '/* IGNORE-KITTENS:1| */ SILLY KITTENS',
 				]
@@ -396,7 +406,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				'(wikibase-comment-sitelink-remove: dewiki:Dummy)',
 				'change',
 				$this->makeItemDiff( $linksDewikiDummy, $linksEmpty ),
-				[],
+				[ 'user_id' => 1 ],
 				[
 					'comment' => '/* IGNORE-KITTENS:1| */ SILLY KITTENS',
 				]
@@ -419,7 +429,8 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 								'comment' => '/* set-en-description:1| */ Foo',
 							],
 						],
-					] ]
+					] ],
+					'user_id' => 1,
 				],
 				[]
 			],
@@ -446,6 +457,80 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$expectedComment = '(wikibase-comment-update)';
 		$this->assertEquals( $expectedComment, $rc->getAttribute( 'rc_comment' ) );
+	}
+
+	/**
+	 * @dataProvider provideGetClientUserId
+	 */
+	public function testGetClientUserId( $expectedClientUserId, $centralIdLookup, $repoUserId, $metadata ) {
+		$recentChangeFactory = $this->newRecentChangeFactoryHelper( $centralIdLookup );
+
+		$recentChangeFactory = TestingAccessWrapper::newFromObject( $recentChangeFactory );
+		$clientUserId = $recentChangeFactory->getClientUserId( $repoUserId, $metadata );
+		$this->assertSame(
+			$expectedClientUserId,
+			$clientUserId
+		);
+	}
+
+	//  * central = -1, repo = 1, client = 2
+
+	public function provideGetClientUserId() {
+		$centralIdLookup = new MockRepoClientCentralIdLookup(
+			/** isRepo= */ false
+		);
+
+		return [
+			'Logged out on repo' => [
+				0,
+				$centralIdLookup,
+				0,
+				[ 'central_user_id' => 0 ],
+			],
+
+			'No central ID lookup (client wiki is not connected to central ' .
+			'user system' => [
+				0,
+				null,
+				3,
+				[ 'central_user_id' => -3 ],
+			],
+
+			'0 central user ID although there is a repo user ID, e.g.' .
+			' Wikibase repo user not attached' => [
+				0,
+				$centralIdLookup,
+				5,
+				[ 'central_user_id' => 0 ],
+			],
+
+			'No central user ID because it is from a row created before ' .
+			'central_user_id was saved' =>
+			[
+				0,
+				$centralIdLookup,
+				7,
+				[],
+			],
+
+			'Invalid central ID so client user ID is 0' => [
+				0,
+				$centralIdLookup,
+				8,
+				[ 'central_user_id' => 3 ],
+			],
+
+			'Happy path; user ID is fully mapped' => [
+				8,
+				$centralIdLookup,
+
+				// Would be 4 for mock, but it doesn't use
+				// this other than == or != 0.
+				9,
+
+				[ 'central_user_id' => -4 ]
+			],
+		];
 	}
 
 }
