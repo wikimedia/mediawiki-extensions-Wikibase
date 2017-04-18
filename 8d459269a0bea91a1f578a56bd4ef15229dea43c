@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_b1b45f34",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyIdResolverTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-18T14:58:59Z",
+      "side": 1,
+      "message": "Do we care about this array key? I believe we do. The assertion above should be an assertSame then.",
+      "range": {
+        "startLine": 74,
+        "startChar": 6,
+        "endLine": 74,
+        "endChar": 16
+      },
+      "revId": "8d459269a0bea91a1f578a56bd4ef15229dea43c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
