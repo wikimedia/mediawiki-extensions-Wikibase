@@ -1,5 +1,9 @@
 # ValueView release notes
 
+## 0.19.1 (2017-04-18)
+* Added support for the `tabular-data` data type.
+* Adjusted `jQuery.ui.listrotator` to obey the Wikimedia color scheme.
+
 ## 0.19.0 (2017-03-14)
 * Major changes to `jQuery.ui.commonssuggester`:
   * Now uses MediaWiki `search` API instead of OpenSearch.
