@@ -8,6 +8,7 @@ use RecentChange;
 use Revision;
 use RuntimeException;
 use stdClass;
+use TestingAccessWrapper;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -30,6 +31,13 @@ use Wikibase\ItemContent;
  * @author Daniel Kinzler
  */
 class EntityChangeTest extends ChangeRowTest {
+	public function setUp() {
+		parent::setUp();
+
+		$wrappedStatic = TestingAccessWrapper::newFromClass( EntityChange::class );
+		$wrappedStatic->centralIdLookup = null;
+		$wrappedStatic->isCentralIdLookupInitialized = false;
+	}
 
 	/**
 	 * @return string
@@ -57,7 +65,7 @@ class EntityChangeTest extends ChangeRowTest {
 
 		$cases = array_map(
 			function( EntityChange $change ) {
-				return array( $change );
+				return [ $change ];
 			},
 			$changes );
 
@@ -76,31 +84,31 @@ class EntityChangeTest extends ChangeRowTest {
 	public function testMetadata() {
 		$entityChange = $this->newEntityChange( new ItemId( 'Q13' ) );
 
-		$entityChange->setMetadata( array(
+		$entityChange->setMetadata( [
 			'kittens' => 3,
 			'rev_id' => 23,
 			'user_text' => '171.80.182.208',
-		) );
+		] );
 		$this->assertEquals(
-			array(
+			[
 				'rev_id' => 23,
 				'user_text' => '171.80.182.208',
 				'comment' => $entityChange->getComment(), // the comment field is magically initialized
-			),
+			],
 			$entityChange->getMetadata()
 		);
 
 		// override some fields, keep others
-		$entityChange->setMetadata( array(
+		$entityChange->setMetadata( [
 			'rev_id' => 25,
 			'comment' => 'foo',
-		) );
+		] );
 		$this->assertEquals(
-			array(
+			[
 				'rev_id' => 25,
 				'user_text' => '171.80.182.208',
 				'comment' => 'foo', // the comment field is not magically initialized
-			),
+			],
 			$entityChange->getMetadata()
 		);
 	}
@@ -108,15 +116,15 @@ class EntityChangeTest extends ChangeRowTest {
 	public function testGetEmptyMetadata() {
 		$entityChange = $this->newEntityChange( new ItemId( 'Q13' ) );
 
-		$entityChange->setMetadata( array(
+		$entityChange->setMetadata( [
 			'kittens' => 3,
 			'rev_id' => 23,
 			'user_text' => '171.80.182.208',
-		) );
+		] );
 
-		$entityChange->setField( 'info', array() );
+		$entityChange->setField( 'info', [] );
 		$this->assertEquals(
-			array(),
+			[],
 			$entityChange->getMetadata()
 		);
 	}
@@ -126,9 +134,9 @@ class EntityChangeTest extends ChangeRowTest {
 
 		$this->assertEquals( 'wikibase-comment-update', $entityChange->getComment(), 'comment' );
 
-		$entityChange->setMetadata( array(
+		$entityChange->setMetadata( [
 			'comment' => 'Foo!',
-		) );
+		] );
 
 		$this->assertEquals( 'Foo!', $entityChange->getComment(), 'comment' );
 	}
@@ -166,6 +174,65 @@ class EntityChangeTest extends ChangeRowTest {
 		$this->assertEquals( 'Mr. Kittens', $metadata['user_text'], 'user_text' );
 	}
 
+	/**
+	 * @dataProvider provideTestAddUserMetadata
+	 */
+	public function testAddUserMetadata( $expectedCentralId, $repoUserId, $repoUserText ) {
+		$entityChange = $this->getMockBuilder( EntityChange::class )
+			->setMethods( [
+				'getCentralIdLookup',
+				'getType',
+				'setFields',
+				'setMetadata',
+			] )
+			->getMock();
+
+		$entityChange->expects( $this->once() )
+			->method( 'setFields' )
+			->with( [
+				'user_id' => $repoUserId,
+			] );
+
+		$entityChange->expects( $this->once() )
+			->method( 'setMetadata' )
+			->with( [
+				'user_text' => $repoUserText,
+				'central_user_id' => $expectedCentralId,
+			] );
+
+		$entityChange->expects( $this->any() )
+			->method( 'getType' )
+			->will( $this->returnValue(
+				'wikibase-item~update'
+			) );
+
+		$entityChange->expects( $this->any() )
+			->method( 'getCentralIdLookup' )
+			->will( $this->returnValue(
+				new MockRepoClientCentralIdLookup( /** isRepo= */ true )
+			) );
+
+		$entityChange = TestingAccessWrapper::newFromObject( $entityChange );
+		$entityChange->addUserMetadata( $repoUserId, $repoUserText );
+	}
+
+	// See MockRepoClientCentralIdLookup
+	public function provideTestAddUserMetadata() {
+		return [
+			[
+				-3,
+				3,
+				'Foo'
+			],
+
+			[
+				0,
+				0,
+				'10.11.12.13'
+			],
+		];
+	}
+
 	public function testSetMetadataFromUser() {
 		$user = $this->getMockBuilder( User::class )
 			->disableOriginalConstructor()
@@ -181,10 +248,10 @@ class EntityChangeTest extends ChangeRowTest {
 
 		$entityChange = $this->newEntityChange( new ItemId( 'Q7' ) );
 
-		$entityChange->setMetadata( array(
+		$entityChange->setMetadata( [
 			'user_text' => 'Dobby', // will be overwritten
 			'page_id' => 5, // will NOT be overwritten
-		) );
+		] );
 
 		$entityChange->setMetadataFromUser( $user );
 
@@ -210,7 +277,7 @@ class EntityChangeTest extends ChangeRowTest {
 
 		$timestamp = '20140523' . '174422';
 
-		$revision = new Revision( array(
+		$revision = new Revision( [
 			'id' => 5,
 			'page' => 6,
 			'user' => 7,
@@ -219,7 +286,7 @@ class EntityChangeTest extends ChangeRowTest {
 			'timestamp' => $timestamp,
 			'content' => ItemContent::newFromItem( $item ),
 			'comment' => 'Test!',
-		) );
+		] );
 
 		$entityChange->setRevisionInfo( $revision );
 
@@ -251,7 +318,7 @@ class EntityChangeTest extends ChangeRowTest {
 			->method( 'getContent' )
 			->will( $this->returnValue( $content ) );
 
-		$change = new EntityChange( array( 'info' => array(), 'type' => '~' ) );
+		$change = new EntityChange( [ 'info' => [], 'type' => '~' ] );
 		$this->assertFalse( $change->hasField( 'object_id' ), 'precondition' );
 		$change->setRevisionInfo( $revision );
 		$this->assertSame( 'Q1', $change->getObjectId() );
@@ -269,21 +336,21 @@ class EntityChangeTest extends ChangeRowTest {
 	}
 
 	public function testSerializes() {
-		$info = array( 'field' => 'value' );
+		$info = [ 'field' => 'value' ];
 		$expected = '{"field":"value"}';
 		$change = new EntityChange( [ 'info' => $info ] );
 		$this->assertSame( $expected, $change->getSerializedInfo() );
 	}
 
 	public function testDoesNotSerializeObjects() {
-		$info = array( 'array' => array( 'object' => new EntityChange() ) );
+		$info = [ 'array' => [ 'object' => new EntityChange() ] ];
 		$change = new EntityChange( [ 'info' => $info ] );
 		$this->setExpectedException( MWException::class );
 		$change->getSerializedInfo();
 	}
 
 	public function testSerializeAndUnserializeInfo() {
-		$info = array( 'diff' => new DiffOpAdd( '' ) );
+		$info = [ 'diff' => new DiffOpAdd( '' ) ];
 		$change = new EntityChange( [ 'info' => $info ] );
 		$change->setField( 'info', $change->getSerializedInfo() );
 		$this->assertEquals( $info, $change->getInfo() );
@@ -291,17 +358,17 @@ class EntityChangeTest extends ChangeRowTest {
 
 	public function testGivenStatement_serializeInfoSerializesStatement() {
 		$statement = new Statement( new PropertyNoValueSnak( 1 ) );
-		$info = array( 'diff' => new DiffOpAdd( $statement ) );
-		$expected = array(
-			'mainsnak' => array(
+		$info = [ 'diff' => new DiffOpAdd( $statement ) ];
+		$expected = [
+			'mainsnak' => [
 				'snaktype' => 'novalue',
 				'property' => 'P1',
 				'hash' => 'any hash',
-			),
+			],
 			'type' => 'statement',
 			'rank' => 'normal',
 			'_claimclass_' => Statement::class,
-		);
+		];
 
 		$change = new EntityChange( [ 'info' => $info ] );
 
@@ -316,20 +383,19 @@ class EntityChangeTest extends ChangeRowTest {
 	}
 
 	public function testGivenStatementSerialization_getInfoDeserializesStatement() {
-		$data = array(
-			'mainsnak' => array(
+		$data = [
+			'mainsnak' => [
 				'snaktype' => 'novalue',
 				'property' => 'P1',
-			),
+			],
 			'type' => 'statement',
 			'_claimclass_' => Statement::class,
-		);
-		$json = json_encode( array( 'diff' => array( 'type' => 'add', 'newvalue' => $data ) ) );
+		];
+		$json = json_encode( [ 'diff' => [ 'type' => 'add', 'newvalue' => $data ] ] );
 
 		$change = new EntityChange( [ 'info' => $json ] );
 		$info = $change->getInfo();
 		$statement = $info['diff']->getNewValue();
 		$this->assertInstanceOf( Statement::class, $statement );
 	}
-
 }

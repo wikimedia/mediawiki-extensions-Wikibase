@@ -2,7 +2,9 @@
 
 namespace Wikibase\Client\RecentChanges;
 
+use CentralIdLookup;
 use Language;
+use LocalIdLookup;
 use Message;
 use MWException;
 use RecentChange;
@@ -35,12 +37,22 @@ class RecentChangeFactory {
 	private $siteLinkCommentCreator;
 
 	/**
+	 * @var CentralIdLookup
+	 */
+	private $centralIdLookup;
+
+	/**
 	 * @param Language $language
 	 * @param SiteLinkCommentCreator $siteLinkCommentCreator
 	 */
-	public function __construct( Language $language, SiteLinkCommentCreator $siteLinkCommentCreator ) {
+	public function __construct( Language $language, SiteLinkCommentCreator $siteLinkCommentCreator, CentralIdLookup $centralIdLookup ) {
 		$this->language = $language;
 		$this->siteLinkCommentCreator = $siteLinkCommentCreator;
+
+		// Same exclude as EntityChange->getCentralIdLookup; see explanation there.
+		if ( !( $centralIdLookup instanceof LocalIdLookup ) ) {
+			$this->centralIdLookup = $centralIdLookup;
+		}
 	}
 
 	/**
@@ -115,8 +127,11 @@ class RecentChangeFactory {
 			'wikibase-repo-change' => $metadata,
 		);
 
+		$repoUserId = $fields['user_id'];
+		$clientUserId = $this->getClientUserId( $repoUserId, $metadata );
+
 		return array(
-			'rc_user' => 0,
+			'rc_user' => $clientUserId,
 			'rc_user_text' => $userText,
 			'rc_comment' => $comment,
 			'rc_type' => RC_EXTERNAL,
@@ -131,6 +146,51 @@ class RecentChangeFactory {
 			'rc_deleted' => false,
 			'rc_new' => false,
 		);
+	}
+
+	/**
+	 * Gets the client's user ID from the repo user ID and EntityChange's metadata
+	 *
+	 * @param int $repoUserId Original user ID from the repository
+	 * @param array $metadata EntityChange metadata
+	 */
+	protected function getClientUserId( $repoUserId, array $metadata ) {
+		if ( $repoUserId === 0 ) {
+			// Logged out on repo just copied to client
+			return 0;
+		} else {
+			// Use -1 as client RC user ID, if we know they're logged in, but
+			// we can't determine their client user ID.  That will at least
+			// properly filter them as logged in.
+			//
+			// We don't currently auto-create the local account if they've
+			// never logged into the client.  This can be done with
+			// CentralAuth, but AFAIK there is not a portable way to do this.
+
+			// Temporary compatibility until Ie7b9c482cf6a0dd7215b34841efd86fb51be651a
+			// has been deployed long enough that all rows have it.
+			if ( array_key_exists( 'central_user_id', $metadata ) ) {
+				// See change-propagation.wiki for why it can be 0 other than pre-deploy
+				// rows.
+				$centralUserId = $metadata['central_user_id'];
+			} else {
+				$centralUserId = 0;
+			}
+
+			if ( $centralUserId === 0 || $this->centralIdLookup === null ) {
+				return -1;
+			} else {
+				$clientUser = $this->centralIdLookup->localUserFromCentralId(
+					$centralUserId
+				);
+
+				if ( $clientUser === null ) {
+					return -1;
+				} else {
+					return $clientUser->getId();
+				}
+			}
+		}
 	}
 
 	/**

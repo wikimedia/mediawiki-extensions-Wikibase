@@ -38,10 +38,11 @@ The change buffer holds information about each change, stored in the wb_changes 
 * change_time, a varbinary(14) the time at which the edit was made
 * change_object_id, a varbinary(14) containing the entity ID
 * change_revision_id, a int(10) containing the revision ID
-* change_user_id, a int(10) containing the user id
+* change_user_id, a int(10) containing the original (repository) user id, or 0 for logged out users.
 * change_info, a mediumblob containing a JSON structure with additional information about the change. Well known top level fields are:
 ** "diff": a serialized diff, as produced by EntityDiffer
 ** "metadata", a JSON object representing essential revision meta data, using the following fields:
+*** "central_user_id": the central user ID (int).  0 if the repo is not connected to a central store, the action was by a logged out user, the particular user is not attached on the repo, or the user is restricted (uses AUDIENCE_PUBLIC)
 *** "user_text": the user name (string)
 *** "page_id": the id of the wiki page containing the entity on the repo (int)
 *** "rev_id": the id of the revision created by this change on the repo (int)

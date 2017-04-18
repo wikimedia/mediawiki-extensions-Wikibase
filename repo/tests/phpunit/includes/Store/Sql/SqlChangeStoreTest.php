@@ -80,8 +80,8 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 					'change_object_id' => 'Q123',
 					'change_revision_id' => '343',
 					'change_user_id' => '34',
-					'change_info' => '{"metadata":{"user_text":"BlackMagicIsEvil","bot":0,"page_id":2354,"rev_id":343,' .
-						'"parent_id":897,"comment":"Fake data!"}}',
+					'change_info' => '{"metadata":{"bot":0,"page_id":2354,"rev_id":343,' .
+						'"parent_id":897,"comment":"Fake data!","user_text":"BlackMagicIsEvil","central_user_id":0}}',
 				),
 				$changeWithDataFromRC
 			)
