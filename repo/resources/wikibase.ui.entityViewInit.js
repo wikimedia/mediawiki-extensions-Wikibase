@@ -118,7 +118,11 @@
 					entity
 				);
 
-			viewFactoryClass = wb.view.ControllerViewFactory;
+			viewFactoryClass = wb[entity.getType()] &&
+					wb[entity.getType()].view[entity.getType().charAt( 0 ).toUpperCase() +
+							entity.getType().slice( 1 ) + 'ViewFactory'] ||
+					wb.view.ControllerViewFactory;
+
 			viewFactoryArguments.unshift(
 				toolbarFactory,
 				entityChangersFactory
