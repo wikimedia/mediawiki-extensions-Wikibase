@@ -323,7 +323,17 @@ final class RepoHooks {
 			if ( $change ) {
 				$changeStore = WikibaseRepo::getDefaultInstance()->getStore()->getChangeStore();
 
-				$change->setMetadataFromRC( $recentChange );
+				$centralIdLookup = CentralIdLookupFactory::getInstance()->getCentralIdLookup();
+				if ( $centralIdLookup === null ) {
+					$centralUserId = 0;
+				} else {
+					$repoUser = $recentChange->getPerformer();
+					$centralUserId = $centralIdLookup->centralIdFromLocalUser(
+						$repoUser
+					);
+				}
+
+				$change->setMetadataFromRC( $recentChange, $centralUserId );
 				$changeStore->saveChange( $change );
 			}
 		}
