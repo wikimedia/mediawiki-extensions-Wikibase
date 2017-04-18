@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_51395bee",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-18T16:28:31Z",
+      "side": 1,
+      "message": "And one thing more: do we care to format the text a bit different in case there is no description on the item? Currently it would just show \"Foo (Q123) - \" which is odd.\n\nThis is an extreme edge case, I admit.",
+      "parentUuid": "4e506ba4_11e8b376",
+      "revId": "9612f753efd36153d7877f2328c5b8efde834c5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_71257702",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialAvailableBadgesTest.php",
         "patchSetId": 5
