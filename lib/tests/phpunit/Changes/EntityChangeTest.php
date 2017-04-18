@@ -8,6 +8,7 @@ use RecentChange;
 use Revision;
 use RuntimeException;
 use stdClass;
+use TestingAccessWrapper;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -31,6 +32,14 @@ use Wikibase\WikibaseSettings;
  * @author Daniel Kinzler
  */
 class EntityChangeTest extends ChangeRowTest {
+
+	public function setUp() {
+		parent::setUp();
+
+		$wrappedStatic = TestingAccessWrapper::newFromClass( EntityChange::class );
+		$wrappedStatic->centralIdLookup = null;
+		$wrappedStatic->isCentralIdLookupInitialized = false;
+	}
 
 	/**
 	 * @return string
@@ -165,6 +174,66 @@ class EntityChangeTest extends ChangeRowTest {
 		$this->assertEquals( 5, $metadata['rev_id'], 'rev_id' );
 		$this->assertEquals( 1, $metadata['bot'], 'bot' );
 		$this->assertEquals( 'Mr. Kittens', $metadata['user_text'], 'user_text' );
+	}
+
+	/**
+	 * @dataProvider provideTestAddUserMetadata
+	 */
+	public function testAddUserMetadata( $expectedCentralId, $repoUserId, $repoUserText ) {
+		$entityChange = $this->getMockBuilder( EntityChange::class )
+			->setMethods( [
+				'getCentralIdLookup',
+				'getType',
+				'setFields',
+				'setMetadata',
+			] )
+			->getMock();
+
+		$entityChange->expects( $this->once() )
+			->method( 'setFields' )
+			->with( [
+				'user_id' => $repoUserId,
+			] );
+
+		$entityChange->expects( $this->once() )
+			->method( 'setMetadata' )
+			->with( [
+				'user_text' => $repoUserText,
+				'central_user_id' => $expectedCentralId,
+			] );
+
+		$entityChange->expects( $this->any() )
+			->method( 'getType' )
+			->will( $this->returnValue(
+				'wikibase-item~update'
+			) );
+
+		$entityChange->expects( $this->any() )
+			->method( 'getCentralIdLookup' )
+			->will( $this->returnValue(
+				new MockRepoClientCentralIdLookup( /** isRepo= */ true )
+			) );
+
+		$entityChange = TestingAccessWrapper::newFromObject( $entityChange );
+		$entityChange->addUserMetadata( $repoUserId, $repoUserText );
+	}
+
+	// See MockRepoClientCentralIdLookup
+
+	public function provideTestAddUserMetadata() {
+		return [
+			[
+				-3,
+				3,
+				'Foo'
+			],
+
+			[
+				0,
+				0,
+				'10.11.12.13'
+			],
+		];
 	}
 
 	public function testSetMetadataFromUser() {

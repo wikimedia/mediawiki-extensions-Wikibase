@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client;
 
+use CentralIdLookup;
 use DataTypes\DataTypeFactory;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Geo\Values\GlobeCoordinateValue;
@@ -1193,7 +1194,8 @@ final class WikibaseClient {
 				$this->getContentLanguage(),
 				$this->siteLookup,
 				$this->settings->getSetting( 'siteGlobalID' )
-			)
+			),
+			CentralIdLookup::factory()
 		);
 	}
 
