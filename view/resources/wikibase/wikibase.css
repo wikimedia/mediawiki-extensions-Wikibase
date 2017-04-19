@@ -47,9 +47,9 @@ h1 .wikibase-title .wikibase-title-id:before {
 }
 
 /* Overwrite colour for element that are in edit mode although their container element is not */
-.wb-entitypage .ui-state-disabled .wb-edit input:not(.ui-state-disabled),
+.wb-entitypage .ui-state-disabled .wb-edit input:not( .ui-state-disabled ),
 .wb-entitypage .ui-state-disabled .wb-edit textarea {
-	background-color: #FFFFFF;
+	background-color: #fff;
 	color: inherit;
 }
 
@@ -83,10 +83,9 @@ h1 .wikibase-title .wikibase-title-id:before {
 }
 
 span.wb-itemlink-id { /* item id within a link to an item (especially on special pages) */
-	font-size: .85em;
+	font-size: 0.85em;
 	unicode-bidi: embed;
 }
-
 
 /********** BASIC LAYOUT **********/
 
@@ -104,7 +103,7 @@ h2.wb-section-heading {
 	margin-bottom: 0.2em;
 	margin-top: 1em;
 	padding-left: 10px;
-	border-bottom: none;
+	border-bottom: 0;
 	width: 100%;
 }
 
@@ -115,7 +114,6 @@ h2.wb-section-heading {
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
-
 }
 
 .wikibase-entityview textarea {
@@ -153,7 +151,6 @@ h2.wb-section-heading {
 
 /********** /BASIC LAYOUT **********/
 
-
 /********** CLAIMS **********/
 
 div.wikibase-statementview textarea {
@@ -166,7 +163,7 @@ div.wikibase-statementview textarea {
 /* Section of claims referring to one property */
 .wikibase-statementgrouplistview .wikibase-statementlistview {
 	position: relative;
-	background-color: #FFF;
+	background-color: #fff;
 	float: left;
 	width: 100%;
 	border: 1px solid #c8ccd1;
@@ -234,7 +231,7 @@ div.wikibase-snakview .wikibase-snakview-value-container {
 
 div .wikibase-snakview-value span.error.wb-format-error {
 	display: block;
-	color: red;
+	color: #f00;
 	font-size: inherit;
 	font-style: italic;
 }
@@ -300,7 +297,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 
 .wikibase-statementlistview.wb-new {
 	margin-bottom: 0;
-	border: none;
+	border: 0;
 }
 
 .wikibase-statementgrouplistview .wikibase-statementlistview.wb-new .wikibase-statementview {
@@ -351,7 +348,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 
 .wikibase-snakview-variation-valuesnak-datavaluetypemismatch,
 .wikibase-snakview-variation-valuesnak-nonewvaluefordeletedproperty {
-	color: red;
+	color: #f00;
 }
 .wikibase-snakview-variation-valuesnak-datavaluetypemismatch-message div {
 	font-size: 84%;
@@ -442,7 +439,6 @@ div .wikibase-snakview-value span.error.wb-format-error {
 
 /********** /CLAIMS **********/
 
-
 /********** STATEMENTS **********/
 
 /* Container for a single statement */
@@ -486,7 +482,8 @@ div .wikibase-snakview-value span.error.wb-format-error {
 	margin-top: 0.5em;
 }
 
-.wikibase-statementview-references-heading, .wikibase-statementview-references {
+.wikibase-statementview-references-heading,
+.wikibase-statementview-references {
 	padding-left: 17em;
 	clear: both;
 }
@@ -615,7 +612,6 @@ div .wikibase-snakview-value span.error.wb-format-error {
 
 /********** /STATEMENTS **********/
 
-
 /********** SITE LINKS **********/
 
 .wikibase-sitelinks {
@@ -629,7 +625,6 @@ div .wikibase-snakview-value span.error.wb-format-error {
 }
 
 /********** /SITE LINKS **********/
-
 
 /********** PROPERTY PAGE **********/
 
@@ -656,7 +651,7 @@ table.diff h4.wb-details {
 table.diff table.wb-details {
 	margin-left: 2em;
 	line-height: 1em;
-	border: none;
+	border: 0;
 	padding: 0;
 }
 
@@ -665,7 +660,7 @@ table.diff table.wb-details th {
 	font-weight: bold;
 	text-align: left;
 	padding: 0;
-	border: none;
+	border: 0;
 }
 
 table.diff table.wb-details td {
@@ -673,7 +668,7 @@ table.diff table.wb-details td {
 	font-weight: normal;
 	text-align: left;
 	margin: 0;
-	border: none;
+	border: 0;
 }
 /***** /DIFF VIEW *****/
 

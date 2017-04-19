@@ -16,7 +16,7 @@
 }
 
 .ui-entityselector-list li:first-child {
-	border-top: none;
+	border-top: 0;
 }
 
 .ui-entityselector-list .ui-entityselector-label,
@@ -34,7 +34,7 @@
 }
 
 .ui-entityselector-list .ui-ooMenu-item a {
-	padding: .4em .2em;
+	padding: 0.4em 0.2em;
 }
 
 .ui-entityselector-label {
@@ -62,7 +62,7 @@
 
 .ui-entityselector-list .ui-entityselector-more.ui-state-hover {
 	border-top-style: solid;
-	background-color: #4C59A6;
+	background-color: #4c59a6;
 }
 
 .ui-entityselector-list .ui-entityselector-more a {

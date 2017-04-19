@@ -61,11 +61,11 @@
 	/* SVG support using a transparent gradient to guarantee cross-browser
 	 * compatibility (browsers able to understand gradient syntax support also SVG).
 	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
-	background-image: url(images/icons/oojs-ui/edit-ltr.png);
+	background-image: url( images/icons/oojs-ui/edit-ltr.png );
 	/* @embed */
-	background-image: -webkit-linear-gradient(transparent, transparent), url(images/icons/oojs-ui/edit-ltr.svg);
+	background-image: -webkit-linear-gradient( transparent, transparent ), url( images/icons/oojs-ui/edit-ltr.svg );
 	/* @embed */
-	background-image: linear-gradient(transparent, transparent), url(images/icons/oojs-ui/edit-ltr.svg);
+	background-image: linear-gradient( transparent, transparent ), url( images/icons/oojs-ui/edit-ltr.svg );
 	background-position: 0 40%;
 }
 
@@ -73,42 +73,42 @@
 	/* SVG support using a transparent gradient to guarantee cross-browser
 	 * compatibility (browsers able to understand gradient syntax support also SVG).
 	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
-	background-image: url(images/icons/oojs-ui/check.png);
+	background-image: url( images/icons/oojs-ui/check.png );
 	/* @embed */
-	background-image: -webkit-linear-gradient(transparent, transparent), url(images/icons/oojs-ui/check.svg);
+	background-image: -webkit-linear-gradient( transparent, transparent ), url( images/icons/oojs-ui/check.svg );
 	/* @embed */
-	background-image: linear-gradient(transparent, transparent), url(images/icons/oojs-ui/check.svg);
+	background-image: linear-gradient( transparent, transparent ), url( images/icons/oojs-ui/check.svg );
 }
 
 .wikibase-toolbar-button-remove .wb-icon {
 	/* SVG support using a transparent gradient to guarantee cross-browser
 	 * compatibility (browsers able to understand gradient syntax support also SVG).
 	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
-	background-image: url(images/icons/oojs-ui/remove.png);
+	background-image: url( images/icons/oojs-ui/remove.png );
 	/* @embed */
-	background-image: -webkit-linear-gradient(transparent, transparent), url(images/icons/oojs-ui/remove.svg);
+	background-image: -webkit-linear-gradient( transparent, transparent ), url( images/icons/oojs-ui/remove.svg );
 	/* @embed */
-	background-image: linear-gradient(transparent, transparent), url(images/icons/oojs-ui/remove.svg);
+	background-image: linear-gradient( transparent, transparent ), url( images/icons/oojs-ui/remove.svg );
 }
 
 .wikibase-toolbar-button-cancel .wb-icon {
 	/* SVG support using a transparent gradient to guarantee cross-browser
 	 * compatibility (browsers able to understand gradient syntax support also SVG).
 	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
-	background-image: url(images/icons/oojs-ui/close-ltr.png);
+	background-image: url( images/icons/oojs-ui/close-ltr.png );
 	/* @embed */
-	background-image: -webkit-linear-gradient(transparent, transparent), url(images/icons/oojs-ui/close-ltr.svg);
+	background-image: -webkit-linear-gradient( transparent, transparent ), url( images/icons/oojs-ui/close-ltr.svg );
 	/* @embed */
-	background-image: linear-gradient(transparent, transparent), url(images/icons/oojs-ui/close-ltr.svg);
+	background-image: linear-gradient( transparent, transparent ), url( images/icons/oojs-ui/close-ltr.svg );
 }
 
 .wikibase-toolbar-button-add .wb-icon {
 	/* SVG support using a transparent gradient to guarantee cross-browser
 	 * compatibility (browsers able to understand gradient syntax support also SVG).
 	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
-	background-image: url(images/icons/oojs-ui/add.png);
+	background-image: url( images/icons/oojs-ui/add.png );
 	/* @embed */
-	background-image: -webkit-linear-gradient(transparent, transparent), url(images/icons/oojs-ui/add.svg);
+	background-image: -webkit-linear-gradient( transparent, transparent ), url( images/icons/oojs-ui/add.svg );
 	/* @embed */
-	background-image: linear-gradient(transparent, transparent), url(images/icons/oojs-ui/add.svg);
+	background-image: linear-gradient( transparent, transparent ), url( images/icons/oojs-ui/add.svg );
 }
