@@ -27,7 +27,9 @@
 	</rule>
 	<rule ref="Generic.Files.OneInterfacePerFile" />
 	<rule ref="Generic.Files.OneTraitPerFile" />
-
+	<rule ref="Generic.Functions.CallTimePassByReference">
+		<exclude name="Generic.Functions.CallTimePassByReference.NotAllowed" />
+	</rule>
 	<rule ref="Generic.Metrics.CyclomaticComplexity">
 		<properties>
 			<property name="complexity" value="16" />
@@ -71,5 +73,6 @@
 		<properties>
 			<property name="ignoreNewlines" value="true" />
 		</properties>
+		<exclude name="Squiz.WhiteSpace.OperatorSpacing.NoSpaceAfterAmp" />
 	</rule>
 </ruleset>
