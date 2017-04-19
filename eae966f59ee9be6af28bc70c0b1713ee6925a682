@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_29cd4388",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-19T11:13:41Z",
+      "side": 1,
+      "message": "qqq.json needs documentation for this new parameter.",
+      "range": {
+        "startLine": 303,
+        "startChar": 639,
+        "endLine": 303,
+        "endChar": 641
+      },
+      "revId": "eae966f59ee9be6af28bc70c0b1713ee6925a682",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_c9bb7fdd",
+        "filename": "repo/includes/Specials/SpecialEntityData.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-19T11:13:41Z",
+      "side": 1,
+      "message": "I find the placement of this line very confusing. I would expect this in the constructor, and replace all occurrences of $entityDataFormatProvider with $this-\u003eentityDataFormatProvider. As far as I can see this service is always needed: when the special page is called with parameters, as well as when called without.\n\nThe dependency injection can be done in a later patch, but the placement of this line should be fixed in this patch.",
+      "revId": "eae966f59ee9be6af28bc70c0b1713ee6925a682",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
