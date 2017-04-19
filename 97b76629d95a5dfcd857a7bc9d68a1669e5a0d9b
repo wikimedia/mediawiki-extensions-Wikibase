@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_a6a980de",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-19T05:27:17Z",
+      "side": 1,
+      "message": "Done. Regarding long comments, I thought about it too but I think documentation of different should not depend on each other. Especially since they are different functionalities.",
+      "parentUuid": "4e506ba4_745fa513",
+      "range": {
+        "startLine": 218,
+        "startChar": 11,
+        "endLine": 218,
+        "endChar": 35
+      },
+      "revId": "97b76629d95a5dfcd857a7bc9d68a1669e5a0d9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_f4a975dd",
         "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2017-04-18T16:55:31Z",
       "side": 1,
       "message": "You missed to declare this property.",
+      "range": {
+        "startLine": 116,
+        "startChar": 2,
+        "endLine": 116,
+        "endChar": 38
+      },
+      "revId": "97b76629d95a5dfcd857a7bc9d68a1669e5a0d9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_c6accced",
+        "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-19T05:27:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_f4a975dd",
       "range": {
         "startLine": 116,
         "startChar": 2,
@@ -94,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_66b4d833",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-19T05:27:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_3487dd67",
+      "range": {
+        "startLine": 208,
+        "startChar": 2,
+        "endLine": 208,
+        "endChar": 28
+      },
+      "revId": "97b76629d95a5dfcd857a7bc9d68a1669e5a0d9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_b4c9adb0",
         "filename": "repo/resources/experts/resources.php",
         "patchSetId": 3
@@ -111,6 +183,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_86afa4dd",
+        "filename": "repo/resources/experts/resources.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-19T05:27:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_b4c9adb0",
+      "revId": "97b76629d95a5dfcd857a7bc9d68a1669e5a0d9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_54d8697f",
         "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
         "patchSetId": 3
@@ -122,6 +212,24 @@
       "writtenOn": "2017-04-18T16:55:31Z",
       "side": 1,
       "message": "Alphabetical order please.",
+      "revId": "97b76629d95a5dfcd857a7bc9d68a1669e5a0d9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_26bed013",
+        "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-19T05:27:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_54d8697f",
       "revId": "97b76629d95a5dfcd857a7bc9d68a1669e5a0d9b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
