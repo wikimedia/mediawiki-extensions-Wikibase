@@ -145,6 +145,30 @@
       "revId": "9612f753efd36153d7877f2328c5b8efde834c5d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_a6e180fd",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialAvailableBadgesTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-19T06:56:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_71257702",
+      "range": {
+        "startLine": 61,
+        "startChar": 26,
+        "endLine": 61,
+        "endChar": 34
+      },
+      "revId": "9612f753efd36153d7877f2328c5b8efde834c5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
