@@ -34,6 +34,9 @@
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "اگر نشانی اینترنتی موجودیت فعال شود، به نتایج افزوده می‌شود.",
 	"apihelp-query+wblistentityusage-param-aspect": "فقط شناسه‌های موجودیتی که در این زمینه استفاده شده‌اند، بازگردانده شود.",
 	"apihelp-query+wblistentityusage-param-entities": "موجودیت‌هایی که استقاده شده‌اند.",
+	"apihelp-query+wblistentityusage-param-limit": "تعداد کاربردهای مورد که می‌خواهید بازگردانده شود.",
+	"apihelp-query+wblistentityusage-example-simple": "دریافت صفحه‌هایی که از مورد <kbd>Q2</kbd> استفاده می‌کنند.",
+	"apihelp-query+wblistentityusage-example-url": "دریافت صفحه‌هایی که از مورد <kbd>Q2</kbd> استفاده می‌کنند، به همراه نشانی وب آن‌ها.",
 	"apihelp-query+pageterms-description": "اصطلاحات مرتبط با یک صفحه را که با آیتم مربوطه مرتبط شده است را دریافت کن.\nدر صفحهٔ ورودی ویکی‌بیس اصطلاح‌های ورودی به صورت مستقبم استفاده می‌شوند.",
 	"apihelp-query+pageterms-example-simple": "گرفتن همهٔ آیتم‌های مرتبط با صفحهٔ «لندن» به زبان کاربر.",
 	"apihelp-query+pageterms-example-label-en": "برچسب‌ها و نام‌های مستعار مرتبط شده با صفحه 'London' در انگلیسی را دریافت کن",
@@ -110,5 +113,8 @@
 	"wikibase-otherprojects": "در دیگر پروژه‌ها",
 	"wikibase-otherprojects-beta-message": "نوار کناری سایر پروژه‌ها",
 	"wikibase-otherprojects-beta-description": "یک قسمت «{{int:wikibase-otherprojects}}» به نوار کناری می‌افزاید که پیوندهایی به دیگر پروژه‌های ویکی‌مدیا واقع‌شده در داده‌های {{WBREPONAME}} می‌دهد.",
-	"echo-category-title-wikibase-action": "تماس با {{WBREPONAME}}"
+	"echo-category-title-wikibase-action": "تماس با {{WBREPONAME}}",
+	"notification-link-text-view-item": "{{GENDER:$1|نمایش}} آیتم",
+	"notification-subject-page-connection": "صفحه‌ای در {{SITENAME}} که شما {{GENDER:$3|ایجاد کردید}} به آیتم {{WBREPONAME}} {{GENDER:$2|متصل بود}}",
+	"unresolved-property-category": "صفحات با خصوصیات نامشخص"
 }

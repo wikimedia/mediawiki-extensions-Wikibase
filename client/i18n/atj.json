@@ -5,11 +5,12 @@
 			"Benoit Rochon",
 			"Jean-paul echaquan",
 			"Nehirowisiw",
-			"Jeannette Coocoo"
+			"Jeannette Coocoo",
+			"Ninmeka"
 		]
 	},
 	"tooltip-t-wikibase": "Ite ke ispitatc",
-	"wikibase-comment-update": "Kekwan{{WBREPONAME}}ka ki meckotcitakiniwok",
+	"wikibase-comment-update": "Kekwan{{WBREPONAME}}ka ki meckotcitakaniwok",
 	"wikibase-dataitem": "{{WBREPONAME}} ka apatak",
 	"wikibase-editlinks": "Meckotona e ici tapitik",
 	"wikibase-editlinkstitle": "Meckotcita arimowewinik ka tapitiki",

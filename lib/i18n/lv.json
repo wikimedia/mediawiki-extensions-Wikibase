@@ -51,6 +51,9 @@
 	"wikibase-entity-summary-wbsetlabel-set": "Izmainīja [$2] nosaukumu",
 	"wikibase-entity-summary-wbsetdescription-set": "Izmainīja [$2] aprakstu",
 	"wikibase-entity-summary-wbsetdescription-remove": "Nodzēsa [$2] aprakstu",
+	"wikibase-entity-summary-wbsetsitelink-add": "Pievienota saite uz [$2]",
+	"wikibase-entity-summary-wbsetsitelink-set": "Mainīta saite uz [$2]",
+	"wikibase-entity-summary-wbsetsitelink-remove": "Noņemta saite uz [$2]",
 	"wikibase-item-summary-wbeditentity-create": "Izveidots jauns ieraksts",
 	"wikibase-item-summary-wblinktitles-connect": "Pievienoja valodas saiti, lai savienotu lapas"
 }

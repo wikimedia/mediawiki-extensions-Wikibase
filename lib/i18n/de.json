@@ -82,6 +82,7 @@
 	"datatypes-type-wikibase-property": "Eigenschaft",
 	"datatypes-type-commonsMedia": "Mediendatei auf Commons",
 	"datatypes-type-geo-shape": "Geografische Form",
+	"datatypes-type-tabular-data": "Tabellarische Daten",
 	"datatypes-type-external-id": "Externer Identifikator",
 	"version-wikibase": "Wikibase-Erweiterungen",
 	"wikibase-time-precision-Gannum": "$1 Milliarden Jahre n. Chr.",

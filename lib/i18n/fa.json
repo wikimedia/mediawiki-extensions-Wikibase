@@ -14,7 +14,8 @@
 			"Pouyana",
 			"Alirezaaa",
 			"Macofe",
-			"Nojan Madinehi"
+			"Nojan Madinehi",
+			"Huji"
 		]
 	},
 	"wikibase-lib-desc": "نگهداری قابلیت‌های اساسی برای ویکی‌بیس و افزونه‌های کارخواه ویکی‌بیس",
@@ -29,7 +30,7 @@
 	"wikibase-error-remove-connection": "هنگام حذف‌کردن خطایی رخ داد. به این خاطر تغییراتتان کامل نشد. خواهشمندیم اتصال اینترنتی خود را بررسی کنید.",
 	"wikibase-error-save-timeout": "در حال حاضر با مشکلات فنی‌ای روبه‌رو شده‌ایم. «ذخیره‌سازی» شما کامل نشد.",
 	"wikibase-error-remove-timeout": "در حال حاضر با مشکلات فنیی‌ای روبه‌رو شده‌ایم. «حذف‌کردن» شما کامل نشد.",
-	"wikibase-error-autocomplete-connection": "امکان پرسمان از واسط برنامه‌نویسی کاربردی  وب‌گاه وجود نداشت. لطفاً بعداً امتحان کنید.",
+	"wikibase-error-autocomplete-connection": "امکان پرسمان از واسط برنامه‌نویسی وب‌گاه وجود نداشت. لطفاً بعداً امتحان کنید.",
 	"wikibase-error-autocomplete-response": "پاسخ سرور: $1",
 	"wikibase-error-ui-no-external-page": "مقالهٔ یادشده در وب‌گاه مربوطه پیدا نشد.",
 	"wikibase-error-ui-edit-conflict": "تعارض ویرایشی رخ داده است. خواهشمندیم تغییراتتان را به صورت محلی ذخیره کنید از نو صفحه بارگذاری و ذخیره کنید.",
