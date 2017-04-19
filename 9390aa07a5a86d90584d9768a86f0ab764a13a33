@@ -186,6 +186,29 @@
       "revId": "9390aa07a5a86d90584d9768a86f0ab764a13a33",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_acac0185",
+        "filename": "repo/includes/Rdf/Values/TabularDataRdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-19T14:01:10Z",
+      "side": 1,
+      "message": "uh, right. Sorry, I just scanned the beginning of the task title and then was pretending to be a smart ass.\nSeems fine to use this particular ticket as reference for now.",
+      "range": {
+        "startLine": 29,
+        "startChar": 45,
+        "endLine": 29,
+        "endChar": 52
+      },
+      "revId": "9390aa07a5a86d90584d9768a86f0ab764a13a33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
