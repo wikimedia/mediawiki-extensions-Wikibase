@@ -1493,6 +1493,7 @@ class WikibaseRepo {
 			$this->getEntityIdLookup(),
 			$this->getLanguageFallbackLabelDescriptionLookupFactory(),
 			$this->getItemFieldDefinitions(),
+			$this->getPropertyDataTypeLookup(),
 			$legacyFormatDetector
 		);
 
