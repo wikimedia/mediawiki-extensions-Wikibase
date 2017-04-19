@@ -59,6 +59,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_2cec711f",
+        "filename": "repo/includes/Rdf/Values/TabularDataRdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-19T13:26:34Z",
+      "side": 1,
+      "message": "Yea, I was also wondering. ;-) Personally I find it important to keep previous author names when code is *moved*. But this is a new class. The fact that it was build based on an other class is not that important, in my opinion.\n\nBut I don\u0027t mind.",
+      "parentUuid": "4e506ba4_291783f3",
+      "revId": "9390aa07a5a86d90584d9768a86f0ab764a13a33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_a9e153fd",
         "filename": "repo/includes/Rdf/Values/TabularDataRdfBuilder.php",
         "patchSetId": 5
@@ -70,6 +88,30 @@
       "writtenOn": "2017-04-19T10:59:33Z",
       "side": 1,
       "message": "note that this ticket seems to be explicitly about geo shapes. Should the ticket be expanded to cover tabular data as well?\n\nThere is also T160535 related to geo shapes. Do we want/need something similar for tabular data?\nOr is tabular data something totally different, and its RDF mapping should be considered separately? It occurs to me we want to have a dedicated ticket for this.",
+      "range": {
+        "startLine": 29,
+        "startChar": 45,
+        "endLine": 29,
+        "endChar": 52
+      },
+      "revId": "9390aa07a5a86d90584d9768a86f0ab764a13a33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_6c6fd98f",
+        "filename": "repo/includes/Rdf/Values/TabularDataRdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-19T13:26:34Z",
+      "side": 1,
+      "message": "This depends on the two RDF mappings and how similar they will be. They might be the exact same, or not. From what I understand only people with very good RDF knowledge can tell that. I think it\u0027s better to have separate tickets.",
+      "parentUuid": "4e506ba4_a9e153fd",
       "range": {
         "startLine": 29,
         "startChar": 45,
