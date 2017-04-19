@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_2948e35f",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-19T09:37:35Z",
+      "side": 1,
+      "message": "With \"repeats stuff\" I did not meant to make this depend on the geo-shape documentation above. This would indeed be bad. What I meant is that a setting with the name \"tabularDataStorageFrontendUrl\" is explained to be the \"URL of the tabular data storage frontend\". This sentence adds zero information.",
+      "parentUuid": "4e506ba4_a6a980de",
+      "range": {
+        "startLine": 218,
+        "startChar": 11,
+        "endLine": 218,
+        "endChar": 35
+      },
+      "revId": "97b76629d95a5dfcd857a7bc9d68a1669e5a0d9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_f4a975dd",
         "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
         "patchSetId": 3
