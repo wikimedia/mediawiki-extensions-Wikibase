@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_2986a3ac",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-04-19T12:36:05Z",
+      "side": 1,
+      "message": "agree... think this is redundant now. (tried via api sandbox)",
+      "revId": "3ac3e853a9dc25eefc28d0db40bee442bb36ba40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
