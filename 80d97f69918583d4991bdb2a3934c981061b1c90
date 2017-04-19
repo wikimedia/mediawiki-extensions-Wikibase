@@ -16,6 +16,24 @@
       "revId": "80d97f69918583d4991bdb2a3934c981061b1c90",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_2fd8e321",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntitiesWithoutPageTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-19T16:21:34Z",
+      "side": 1,
+      "message": "Technically no, but by using two single quotes we are checking for wikitext escaping, which we know *includes* HTML escaping. I think this is perfectly fine and already much better than the majority of similar tests we have in our code base. Almost all of them are doing such tests with plain ASCII text and neither testing HTML nor wikitext escaping.",
+      "parentUuid": "6e436fe2_cfb2bfe4",
+      "revId": "80d97f69918583d4991bdb2a3934c981061b1c90",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
