@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_8c434515",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-19T13:34:23Z",
+      "side": 1,
+      "message": "Just noticed that the last sentence should also be finished with the full stop.",
+      "parentUuid": "4e506ba4_29cd4388",
+      "range": {
+        "startLine": 303,
+        "startChar": 639,
+        "endLine": 303,
+        "endChar": 641
+      },
+      "revId": "eae966f59ee9be6af28bc70c0b1713ee6925a682",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_c9bb7fdd",
         "filename": "repo/includes/Specials/SpecialEntityData.php",
         "patchSetId": 2
@@ -36,6 +60,41 @@
       "writtenOn": "2017-04-19T11:13:41Z",
       "side": 1,
       "message": "I find the placement of this line very confusing. I would expect this in the constructor, and replace all occurrences of $entityDataFormatProvider with $this-\u003eentityDataFormatProvider. As far as I can see this service is always needed: when the special page is called with parameters, as well as when called without.\n\nThe dependency injection can be done in a later patch, but the placement of this line should be fixed in this patch.",
+      "revId": "eae966f59ee9be6af28bc70c0b1713ee6925a682",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_0c3735ac",
+        "filename": "repo/includes/Specials/SpecialEntityData.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-19T13:34:23Z",
+      "side": 1,
+      "message": "The place this happens is indeed odd.\nIt does not lead to errors, though, as the line is called from execute(), which, as I get it, happens always, no matter if special page is accessed with the parameter or not.\n\nI also don\u0027t like the way it is done now, but I agree this would be improved once the whole special page is refactored. \n\nPossibly showForm could also call initDependencies to make it even more clear that entityDataFormatProvider is set in all cases. I am not sure it improves much, though.\n\nIf we say this patch does not introduce DI of any dependencies of this class in its constructor, I believe changes you suggest could not actually be done in this patch.",
+      "parentUuid": "4e506ba4_c9bb7fdd",
+      "revId": "eae966f59ee9be6af28bc70c0b1713ee6925a682",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_ac22c14e",
+        "filename": "repo/includes/Specials/SpecialEntityData.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-19T13:34:23Z",
+      "side": 1,
+      "message": "I was wondering whether this shouldn\u0027t rather be using getSupportedExtensions?\n\nOn my local setup, when getSupportedFormats is used, the message on the special says: \"Supported formats are: json, php, n3, turtle, ntriples, rdfxml, html\".\nWith getSupportedExtensions I get \"Supported formats are: json, php, n3, ttl, nt, rdf, html\".\n\nI believe the latter is more accurate, see the sentence before  saying \"(...) Q23.ttl will return RDF/Turtle (...)\" - it says \"ttl\" not \"turtle\".\n\nThe code is smart enough to handle input using both the file extension, and file format \"name\" but I believe the message should stick to file extensions.",
       "revId": "eae966f59ee9be6af28bc70c0b1713ee6925a682",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
