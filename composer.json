@@ -44,7 +44,8 @@
 	},
 	"require-dev": {
 		"jakub-onderka/php-parallel-lint": ">=0.3 <0.10",
-		"mediawiki/mediawiki-codesniffer": ">=0.7 <0.8"
+		"mediawiki/mediawiki-codesniffer": ">=0.7 <0.8",
+		"wikimedia/testing-access-wrapper": "~1.0"
 	},
 	"conflict": {
 		"mediawiki/mediawiki": "<1.25"
