@@ -125,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_66c7f84a",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-19T07:36:51Z",
+      "side": 1,
+      "message": "Thanks. Doing i18n separately might be a good way forward. Let\u0027s have i18n folks have a look at this issue in its own small patch, and move forward with what we have now. Of course unless somebody has a good suggestion immediately.",
+      "parentUuid": "4e506ba4_c60e0ce8",
+      "revId": "9612f753efd36153d7877f2328c5b8efde834c5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_71257702",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialAvailableBadgesTest.php",
         "patchSetId": 5
