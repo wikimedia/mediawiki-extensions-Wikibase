@@ -7,10 +7,10 @@ use FauxRequest;
 use FormOptions;
 use IDatabase;
 use SpecialPageFactory;
-use TestingAccessWrapper;
 use User;
 use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers;
 use Wikimedia\Rdbms\LoadBalancer;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers
