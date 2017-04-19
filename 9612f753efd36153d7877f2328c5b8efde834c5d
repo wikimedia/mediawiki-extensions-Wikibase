@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_063714ac",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-19T06:52:49Z",
+      "side": 1,
+      "message": "I added a comment. I don\u0027t know if that would be the case any time soon but let\u0027s keep this tracked.",
+      "parentUuid": "4e506ba4_f15e677a",
+      "revId": "9612f753efd36153d7877f2328c5b8efde834c5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_d1c9eb56",
         "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2017-04-18T16:26:54Z",
       "side": 1,
       "message": "Could also be !empty( $itemIds ) but might be just matter of the personal taste.\nThis is not requesting to change anything, just noticing.",
+      "revId": "9612f753efd36153d7877f2328c5b8efde834c5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_a63d008c",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-19T06:52:49Z",
+      "side": 1,
+      "message": "While I was there, I changed it too.",
+      "parentUuid": "4e506ba4_d1c9eb56",
       "revId": "9612f753efd36153d7877f2328c5b8efde834c5d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -65,6 +101,24 @@
       "side": 1,
       "message": "And one thing more: do we care to format the text a bit different in case there is no description on the item? Currently it would just show \"Foo (Q123) - \" which is odd.\n\nThis is an extreme edge case, I admit.",
       "parentUuid": "4e506ba4_11e8b376",
+      "revId": "9612f753efd36153d7877f2328c5b8efde834c5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_c60e0ce8",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-19T06:52:49Z",
+      "side": 1,
+      "message": "hmm, I can\u0027t think of any good way to handle i18n for \"-\". I checked separator messages and couldn\u0027t come up with something good either.\n\nRegarding when there is no description. That\u0027s actually a very valid point and can happen more than you think (just change the interface to a small language. Lots of the badges also doesn\u0027t have description in middle-sized lanaguages too. I fixed it.",
+      "parentUuid": "4e506ba4_51395bee",
       "revId": "9612f753efd36153d7877f2328c5b8efde834c5d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
