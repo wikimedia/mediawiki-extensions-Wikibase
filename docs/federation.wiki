@@ -1,11 +1,29 @@
-This file describes the concept of federated wikibase repositories.
+This file describes the concept of federated Wikibase repositories.
 
-This file is currently a STUB, referencing existing documentation on some aspects of federation. More comprehensive documentation of the concept should be added here.
-
-* "Foreign" is used to mean that something refers to and comes from another wikibase repository.
+* "Foreign" is used to mean that something refers to and comes from another Wikibase repository.
 * Foreign EntityIds and mappings are documented in the file docs/foreign-entity-ids.wiki in the wikibase/data-model component.
 
 As of March 2017, in order to enable access to entities from federated repositories both Repo and Client components must be enabled. Also as of March 2017, accessing data of foreign entities relies on the shared database access (databases of federated repositories must be in the same database cluster).
 * Local repository is configured as documented in docs/options.wiki. Note that as of March 2017, database of the local repository is configured based on Client's settings (''repoDatabase'' setting).
 * Configuration of foreign repositories is done using the ''foreignRepositories'' setting in $wgWBClientSettings, as documented in the file docs/options.wiki.
-* In order to correctly link entities from foreign repositories, local wiki must have MediaWiki interwiki prefix configured for each foreign repository. As of March 2017, interwiki prefix must be the same as the name used for the foreign repository.
+* In order to correctly link entities from foreign repositories, the local wiki must have MediaWiki interwiki prefixes configured for each foreign repository. As of March 2017, the interwiki prefix must be the same as the name used for the foreign repository. If there is no interwiki prefix configured for the wiki containing the foreign repository, it can be added e.g. by adding a row to the <code>interwiki</code> database table, or by using [[Special:Interwiki]] if the Interwiki extension is enabled on the local wiki.
+
+Note that as of March 2017 it is only possible for Wikibase to use entities from a single, either local or foreign repository. For instance, it is not possible to use both local and foreign items in statements.
+
+== Example ==
+
+Below is an excerpt of some configuration of a Wikibase instance providing items, and using properties provided by a foreign repository identified as "prop". It is assumed that the repository "prop" uses a database identified as "propwiki", and the "prop:" interwiki prefix has been configured already. There is no repository prefix mapping configured.
+
+Note that as only foreign properties from the repository "prop" are to be used, this example configuration only enables local items explicitly.
+
+<pre>
+$wgWBClientSettings['foreignRepositories'] = [
+	'prop' => [
+		'repoDatabase' => 'propwiki',
+		'supportedEntityTypes' => [ 'property' ],
+		'prefixMapping' => [],
+		'baseUri' => 'http://prop.wiki/entity/',
+	],
+];
+$wgWBClientSettings['repoNamespaces'] = [ 'item' => WB_NS_DATA ];
+</pre>
