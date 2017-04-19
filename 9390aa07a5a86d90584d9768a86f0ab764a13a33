@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_49fbefba",
+        "filename": "client/tests/phpunit/includes/DataAccess/DataAccessSnakFormatterOutputFormatTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-19T10:59:33Z",
+      "side": 1,
+      "message": "mixed indentation",
+      "revId": "9390aa07a5a86d90584d9768a86f0ab764a13a33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_c9e4df0c",
+        "filename": "repo/WikibaseRepo.datatypes.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-19T10:59:33Z",
+      "side": 1,
+      "message": "same remark about tickets as in the RDF Builder class.",
+      "range": {
+        "startLine": 158,
+        "startChar": 47,
+        "endLine": 158,
+        "endChar": 54
+      },
+      "revId": "9390aa07a5a86d90584d9768a86f0ab764a13a33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_291783f3",
+        "filename": "repo/includes/Rdf/Values/TabularDataRdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-19T10:59:33Z",
+      "side": 1,
+      "message": "I know it is because of copy\u0026paste but is the person in question fine with this :) ?",
+      "revId": "9390aa07a5a86d90584d9768a86f0ab764a13a33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_a9e153fd",
+        "filename": "repo/includes/Rdf/Values/TabularDataRdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-19T10:59:33Z",
+      "side": 1,
+      "message": "note that this ticket seems to be explicitly about geo shapes. Should the ticket be expanded to cover tabular data as well?\n\nThere is also T160535 related to geo shapes. Do we want/need something similar for tabular data?\nOr is tabular data something totally different, and its RDF mapping should be considered separately? It occurs to me we want to have a dedicated ticket for this.",
+      "range": {
+        "startLine": 29,
+        "startChar": 45,
+        "endLine": 29,
+        "endChar": 52
+      },
+      "revId": "9390aa07a5a86d90584d9768a86f0ab764a13a33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
