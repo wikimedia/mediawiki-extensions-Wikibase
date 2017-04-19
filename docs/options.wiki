@@ -94,8 +94,8 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;otherProjectsLinksBeta: If this is set to true links to other projects will be available as beta feature, enabling every user to turn them on/off if wanted. (Only applies if other project links aren't enabled per default and the BetaFeatures extension is installed)
 ;propertyOrderUrl: URL to use for retrieving the property order used for sorting properties by property ID. Will be ignored if set to null.
 ;foreignRepositories: An associative array mapping foreign repository names to settings relevant to the particular repository. Each repository's settings are an associative array containing the following keys:
-:;'supportedEntityTypes': list of entity types (strings) that the local wiki supports from the foreign repository
-:;'repoDatabase': value should be a symbolic database name,
+:;'supportedEntityTypes': list of entity type IDs (strings) that the local wiki supports from the foreign repository
+:;'repoDatabase': value should be a symbolic database identifier that MediaWiki's LBFactory class understands,
 :;'baseUri': value should be base URI for concept URIs. It should contain scheme and authority part of the URI.
 :;'prefixMapping': value should be a prefix mapping array, see also: docs/foreign-entity-ids.wiki in the DataModel component.
 
