@@ -74,6 +74,7 @@
 	"datatypes-type-wikibase-property": "Property",
 	"datatypes-type-commonsMedia": "Commons media file",
 	"datatypes-type-geo-shape": "Geographic shape",
+	"datatypes-type-tabular-data": "Tabular data",
 	"datatypes-type-external-id": "External identifier",
 	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-Gannum": "$1 billion years CE",

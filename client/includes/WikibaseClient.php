@@ -273,6 +273,7 @@ final class WikibaseClient {
 			new LanguageNameLookup( $this->getUserLanguage()->getCode() ),
 			$this->getRepoItemUriParser(),
 			$settings->getSetting( 'geoShapeStorageFrontendUrl' ),
+			$settings->getSetting( 'tabularDataStorageFrontendUrl' ),
 			$entityTitleLookup
 		);
 	}

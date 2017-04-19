@@ -59,6 +59,14 @@ wb.parsers.getStore = function( api ) {
 	parserStore.registerDataTypeParser(
 		util.inherit(
 			ApiBasedValueParser,
+			{ API_VALUE_PARSER_ID: 'tabular-data' }
+		),
+		'tabular-data'
+	);
+
+	parserStore.registerDataTypeParser(
+		util.inherit(
+			ApiBasedValueParser,
 			{ API_VALUE_PARSER_ID: 'url' }
 		),
 		'url'

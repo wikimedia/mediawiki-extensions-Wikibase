@@ -84,6 +84,7 @@
 	"datatypes-type-wikibase-property": "The name of a data type for properties in Wikibase.\n{{Identical|Property}}",
 	"datatypes-type-commonsMedia": "The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).\n\n{{related|Datatypes-type}}",
 	"datatypes-type-geo-shape": "The name of a data type for geo-shapes\n{{Identical|Geographic shape}}",
+	"datatypes-type-tabular-data": "The name of a data type for tabular-data\n{{Identical|Tabular data}}",
 	"datatypes-type-external-id": "The name of a data type for external identifiers in Wikibase.",
 	"version-wikibase": "Name of the Wikibase extension collection, used on [[Special:Version]]",
 	"wikibase-time-precision-Gannum": "Used to present a point in time with the precession of 1 billion of years. $1 is the point in time in billion years, rounded to billion years.\n{{Related|Wikibase-time-precision}}",
