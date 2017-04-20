@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_90f58f81",
+        "filename": "docs/federation.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-04-20T07:43:09Z",
+      "side": 1,
+      "message": "I think \u003cpre\u003e is better for multiline demonstrations",
+      "range": {
+        "startLine": 19,
+        "startChar": 1,
+        "endLine": 19,
+        "endChar": 5
+      },
+      "revId": "7fae51b107b4512266d597b244d4bf94268daaec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
