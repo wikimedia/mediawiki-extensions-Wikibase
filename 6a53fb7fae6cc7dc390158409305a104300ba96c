@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_266b25f0",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-20T13:49:16Z",
+      "side": 1,
+      "message": "I think the use of comma-separator message is a bit odd.\nIn English this is odd, and using a dash was better (although not perfect, and completely bad in terms of i18n).\n\nAs discussed in the patch that introduced this new special page, I was considering a dedicated message for the whole \"badge line\", where title (or link), and description would be passed as parameters. That way we would ensure that the list looks fine in all languages, using separators specific to a particular language, or any other specific things if there were any.\nThat was only the rough idea. I was about to implement it soon. I can base on top of other changes you\u0027ve done here. But I think changing \" - \" to colon-separator does not change much regarding i18n issues here, to be honest.",
+      "revId": "6a53fb7fae6cc7dc390158409305a104300ba96c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
