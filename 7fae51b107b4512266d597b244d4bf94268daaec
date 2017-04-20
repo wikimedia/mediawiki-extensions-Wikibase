@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_03d5bb46",
+        "filename": "docs/federation.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-20T09:31:28Z",
+      "side": 1,
+      "message": "Even better, thanks! Changed.",
+      "parentUuid": "4e506ba4_a3dde774",
+      "range": {
+        "startLine": 11,
+        "startChar": 91,
+        "endLine": 11,
+        "endChar": 125
+      },
+      "revId": "7fae51b107b4512266d597b244d4bf94268daaec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_90f58f81",
         "filename": "docs/federation.wiki",
         "patchSetId": 2
