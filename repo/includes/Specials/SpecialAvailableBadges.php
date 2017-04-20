@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
 
@@ -32,6 +31,11 @@ class SpecialAvailableBadges extends SpecialWikibasePage {
 	 */
 	private $badgeItems;
 
+	/**
+	 * @param PrefetchingTermLookup $prefetchingTermLookup
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param string[] $badgeItems
+	 */
 	public function __construct(
 		PrefetchingTermLookup $prefetchingTermLookup,
 		EntityTitleLookup $entityTitleLookup,
@@ -47,61 +51,60 @@ class SpecialAvailableBadges extends SpecialWikibasePage {
 	public function execute( $subPage ) {
 		parent::execute( $subPage );
 
-		$this->displayResult();
-	}
-
-	private function displayResult() {
-		$out = $this->getOutput();
-		// XXX: Maybe we should use PrefixMappingEntityIdParser for federation?
-		$itemIdParser = new ItemIdParser();
-
-		$itemIds = array_map( function( $item ) use ( $itemIdParser ) {
-			return $itemIdParser->parse( $item );
-		}, array_keys( $this->badgeItems ) );
-
-		if ( empty( $itemIds ) ) {
-			$out->addHTML( Html::element(
-				'p',
-				[],
-				$this->msg( 'wikibase-availablebadges-emptylist' )->text()
-			) );
-
-			return;
-		}
-
-		$this->prefetchingTermLookup->prefetchTerms( $itemIds );
-
-		$out->addHTML( Html::openElement( 'ol' ) );
-		foreach ( $itemIds as $item ) {
-			$this->displayRow( $item, $this->badgeItems[$item->getSerialization()] );
-		}
-		$out->addHTML( Html::closeElement( 'ol' ) );
+		$this->getOutput()->addHTML( $this->makeAllBadgesHtml() );
 	}
 
 	/**
-	 * Render one badge.
-	 *
-	 * @param ItemId $item Item ID to render
-	 * @param string $badgeClass The given badge class
+	 * @return string HTML
 	 */
-	private function displayRow( ItemId $item, $badgeClass ) {
-		$out = $this->getOutput();
+	private function makeAllBadgesHtml() {
+		if ( empty( $this->badgeItems ) ) {
+			return Html::element(
+				'p',
+				[],
+				$this->msg( 'wikibase-availablebadges-emptylist' )->text()
+			);
+		}
 
-		$title = $this->entityTitleLookup->getTitleForId( $item );
+		/** @var ItemId[] $itemIds */
+		$itemIds = array_map( function( $idString ) {
+			// XXX: Maybe we should use PrefixMappingEntityIdParser for federation?
+			return new ItemId( $idString );
+		}, array_keys( $this->badgeItems ) );
+
+		$this->prefetchingTermLookup->prefetchTerms( $itemIds );
+
+		$html = Html::openElement( 'ol' );
+		foreach ( $itemIds as $id ) {
+			$html .= $this->makeBadgeHtml( $id, $this->badgeItems[$id->getSerialization()] );
+		}
+		$html .= Html::closeElement( 'ol' );
+
+		return $html;
+	}
+
+	/**
+	 * @param ItemId $badgeId
+	 * @param string $badgeClass
+	 *
+	 * @return string HTML
+	 */
+	private function makeBadgeHtml( ItemId $badgeId, $badgeClass ) {
+		$title = $this->entityTitleLookup->getTitleForId( $badgeId );
 		$description = $this->prefetchingTermLookup->getDescription(
-			$item,
+			$badgeId,
 			$this->getLanguage()->getCode()
 		);
 
-		$out->addHTML( Html::openElement( 'li' ) );
-		$out->addHTML( Html::element( 'span', [
-			'class' => 'wb-badge ' . $badgeClass,
-		] ) );
-		$out->addHTML( $this->getLinkRenderer()->makeLink( $title ) );
+		$html = Html::openElement( 'li' );
+		$html .= Html::element( 'span', [ 'class' => 'wb-badge ' . $badgeClass ] );
+		$html .= $this->getLinkRenderer()->makeLink( $title );
 		if ( $description !== null ) {
-			$out->addHTML( ' - ' . $description );
+			$html .= $this->msg( 'comma-separator' )->escaped() . htmlspecialchars( $description );
 		}
-		$out->addHTML( Html::closeElement( 'li' ) );
+		$html .= Html::closeElement( 'li' );
+
+		return $html;
 	}
 
 }
