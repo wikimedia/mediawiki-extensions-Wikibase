@@ -59,6 +59,30 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_dc257057",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-20T16:46:42Z",
+      "side": 1,
+      "message": "I am not happy about this either. Not sure how to make it nicer, though.\n\nFor what it\u0027s worth, added a check that it is defined.",
+      "parentUuid": "4e506ba4_ecf46c85",
+      "range": {
+        "startLine": 152,
+        "startChar": 54,
+        "endLine": 152,
+        "endChar": 58
+      },
+      "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_4c8c80ff",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 10
@@ -76,6 +100,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_61435744",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-20T16:46:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_4c8c80ff",
+      "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_2c87b4dd",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 10
@@ -87,6 +129,24 @@
       "writtenOn": "2017-04-13T00:21:04Z",
       "side": 1,
       "message": "these can be moved to the static table above.",
+      "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_017133a7",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-20T16:46:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_2c87b4dd",
       "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -127,6 +187,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_862a398e",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-20T16:46:42Z",
+      "side": 1,
+      "message": "True. But in the example it would be \"wd-ref\". Although hyphens should not be part of repository names as this might lead to possible issues. We\u0027re going to disallow this as far as I know, so hopefully there should be no clashes?",
+      "parentUuid": "4e506ba4_8c692820",
+      "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_ccebb09f",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 10
@@ -144,6 +222,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_7cc9bcad",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-20T16:46:42Z",
+      "side": 1,
+      "message": "Added some description. The other method is gone in the new patch set.",
+      "parentUuid": "4e506ba4_ccebb09f",
+      "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_2c5ed47b",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 10
@@ -155,6 +251,24 @@
       "writtenOn": "2017-04-13T00:21:04Z",
       "side": 1,
       "message": "real phpdoc please",
+      "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_9c6a887d",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-20T16:46:42Z",
+      "side": 1,
+      "message": "Added some descriptio. I would like to actually make this method not needed, but preferably not in this patch. Will make a follow up to show what I mean (basically what I\u0027ve described in the comment below, answering to Daniel\u0027s comment).",
+      "parentUuid": "4e506ba4_2c5ed47b",
       "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -213,6 +327,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_01a053f0",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-20T16:46:42Z",
+      "side": 1,
+      "message": "Yeah, they all could be a single function like getSomeDescriptiveAdjectiveNamespace( $namespace, $reponame)\n\nBut I went further for the public array approach. Not sure how \"bad\" it is. I can make it a single function if preferred. Then it could be benchmarked to see how it performs.",
+      "parentUuid": "4e506ba4_ec430cb5",
+      "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_cc4ad0c8",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 10
@@ -230,6 +362,24 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_3c5254e3",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-20T16:46:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e506ba4_cc4ad0c8",
+      "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_ac5c244f",
         "filename": "repo/includes/Rdf/RdfVocabulary.php",
         "patchSetId": 10
@@ -241,6 +391,24 @@
       "writtenOn": "2017-04-13T00:21:04Z",
       "side": 1,
       "message": "Also, looking into how getLocalPart is implemented, there\u0027s a number of splitting and joining going on, and I wonder if we can\u0027t do the same thing simpler and with less effort. This function is going to be called a lot, and doing two splits and two joins each time is not a good idea. \n\nAlso, we\u0027re calling getLocalPart() twice here, should be only once.",
+      "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_1c5e78ec",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-20T16:46:42Z",
+      "side": 1,
+      "message": "True. Fixed.",
+      "parentUuid": "4e506ba4_ac5c244f",
       "revId": "43b0238c0aa8c345deceb3690225b19e02857f9c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
