@@ -16,6 +16,24 @@
       "revId": "6a53fb7fae6cc7dc390158409305a104300ba96c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_465d1149",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-20T13:55:35Z",
+      "side": 1,
+      "message": "I was looking for an existing message with a proper \" – \" en-dash, but could not find one. I did not wanted to introduce one just for this case, when there are already so many we can pick from. I\u0027m fine with using \"colon-separator\", but found a comma a little more appealing, and more in symmetry with existing code.",
+      "parentUuid": "4e506ba4_266b25f0",
+      "revId": "6a53fb7fae6cc7dc390158409305a104300ba96c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
