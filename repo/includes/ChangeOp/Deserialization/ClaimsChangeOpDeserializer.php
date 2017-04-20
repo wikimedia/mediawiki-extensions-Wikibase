@@ -11,7 +11,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\ChangeOp\ChangeOpDeserializer;
 
 /**
- * Constructs ChangeOps for claim change requests
+ * Constructs ChangeOps for statement change requests (referred to as "claims" for legacy reasons).
  *
  * @license GPL-2.0+
  */
@@ -41,7 +41,6 @@ class ClaimsChangeOpDeserializer implements ChangeOpDeserializer {
 	 * @param array[] $changeRequest
 	 *
 	 * @return ChangeOp
-	 *
 	 * @throws ChangeOpDeserializationException
 	 */
 	public function createEntityChangeOp( array $changeRequest ) {
@@ -52,14 +51,24 @@ class ClaimsChangeOpDeserializer implements ChangeOpDeserializer {
 		//check if the array is associative or in arrays by property
 		if ( array_keys( $changeRequest['claims'] ) !== range( 0, count( $changeRequest['claims'] ) - 1 ) ) {
 			foreach ( $changeRequest['claims'] as $subClaims ) {
-				$changeOps = array_merge( $changeOps,
+				$this->assertIsArray( $subClaims );
+
+				$changeOps = array_merge(
+					$changeOps,
 					$this->getRemoveStatementChangeOps( $subClaims ),
-					$this->getModifyStatementChangeOps( $subClaims ) );
+					$this->getModifyStatementChangeOps( $subClaims )
+				);
 			}
 		} else {
-			$changeOps = array_merge( $changeOps,
+			$changeOps = array_merge(
+				$changeOps,
 				$this->getRemoveStatementChangeOps( $changeRequest['claims'] ),
-				$this->getModifyStatementChangeOps( $changeRequest['claims'] ) );
+				$this->getModifyStatementChangeOps( $changeRequest['claims'] )
+			);
+		}
+
+		if ( count( $changeOps ) === 1 ) {
+			return reset( $changeOps );
 		}
 
 		return new ChangeOps( $changeOps );
@@ -69,7 +78,6 @@ class ClaimsChangeOpDeserializer implements ChangeOpDeserializer {
 	 * @param array[] $statements array of serialized statements
 	 *
 	 * @return ChangeOp[]
-	 *
 	 * @throws ChangeOpDeserializationException
 	 */
 	private function getModifyStatementChangeOps( array $statements ) {
@@ -90,6 +98,7 @@ class ClaimsChangeOpDeserializer implements ChangeOpDeserializer {
 				}
 			}
 		}
+
 		return $opsToReturn;
 	}
 
@@ -102,6 +111,7 @@ class ClaimsChangeOpDeserializer implements ChangeOpDeserializer {
 	 */
 	private function getRemoveStatementChangeOps( array $statements ) {
 		$opsToReturn = [];
+
 		foreach ( $statements as $statementArray ) {
 			if ( array_key_exists( 'remove', $statementArray ) ) {
 				if ( array_key_exists( 'id', $statementArray ) ) {
@@ -111,6 +121,7 @@ class ClaimsChangeOpDeserializer implements ChangeOpDeserializer {
 				}
 			}
 		}
+
 		return $opsToReturn;
 	}
 
