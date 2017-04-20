@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_66060d25",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityDataTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-20T14:13:03Z",
+      "side": 1,
+      "message": "The test is pretty sparse but might be OK for now.\nI am wondering whether this will be passing if language was set to some language using colon-separator other than \", \"?\n\nIf it turned out we want to make this test always be run with English as language, then probably the longer message got be matched. But I\u0027d first like to confirm if this is actually anything to be concerned about first.",
+      "revId": "825022c755c77fccba2e91b36befa55796f779f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
