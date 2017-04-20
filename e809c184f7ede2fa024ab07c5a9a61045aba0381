@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_9cce0885",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityDataTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-20T16:45:03Z",
+      "side": 1,
+      "message": "Shouldn\u0027t setting the language happen in the actual test method, not in the \"data provider\"?\nAlso I wonder, as the English-specific message is only relevant for this single test case, maybe it would also make sense to make it a separate test, not add another case to the provider?\nAnd finally, as we are already enforcing english here, maybe it would make sense to test the whole \"Supported formats are: json, nt, rdf, html.\" is displayed, not just be happy with the list of formats?",
+      "revId": "e809c184f7ede2fa024ab07c5a9a61045aba0381",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
