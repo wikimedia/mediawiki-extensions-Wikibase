@@ -115,13 +115,19 @@ class SpecialNewProperty extends SpecialNewEntity {
 			$this->getLanguage()->getCode()
 		);
 
+		$options = [
+			$this->msg( 'wikibase-newproperty-pick-data-type' )->text() => ''
+		];
 		$formFields[ self::FIELD_DATATYPE ] = [
 			'name' => self::FIELD_DATATYPE,
 			'type' => 'select',
-			'default' => isset( $this->parts[2] ) ? $this->parts[2] : 'string',
-			'options' => $selector->getOptionsArray(),
+			'default' => isset( $this->parts[2] ) ? $this->parts[2] : '',
+			'options' => array_merge( $options, $selector->getOptionsArray() ),
 			'id' => 'wb-newproperty-datatype',
 			'validation-callback' => function ( $dataType, $formData, $form ) {
+				if ( $dataType === '' ) {
+					return false;
+				}
 				if ( !$this->dataTypeExists( $dataType ) ) {
 					return [ $this->msg( 'wikibase-newproperty-invalid-datatype' )->text() ];
 				}
