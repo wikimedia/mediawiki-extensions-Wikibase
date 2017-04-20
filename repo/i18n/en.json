@@ -186,6 +186,7 @@
 	"wikibase-newproperty-datatype": "Data type:",
 	"wikibase-newproperty-invalid-datatype": "Invalid data type specified.",
 	"wikibase-newproperty-insufficient-data": "You need to fill at least either label, description or aliases.",
+	"wikibase-newproperty-pick-data-type": "Pick a data type",
 	"wikibase-description-helppage": "Help:Description",
 	"wikibase-label-helppage": "Help:Label",
 	"special-newitem": "Create a new item",
