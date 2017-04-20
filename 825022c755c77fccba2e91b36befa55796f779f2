@@ -16,6 +16,24 @@
       "revId": "825022c755c77fccba2e91b36befa55796f779f2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_bc5424ca",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityDataTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-20T16:33:30Z",
+      "side": 1,
+      "message": "Since it\u0027s not easily possible to do something like\n$this-\u003egetLanguage()\nI had to set the language to en to be sure it will work all the time.",
+      "parentUuid": "4e506ba4_66060d25",
+      "revId": "825022c755c77fccba2e91b36befa55796f779f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
