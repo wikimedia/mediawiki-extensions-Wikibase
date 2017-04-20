@@ -43,8 +43,7 @@ class TermsListViewTest extends PHPUnit_Framework_TestCase {
 			} ) );
 
 		$languageDirectionalityLookup = $this->getMock( LanguageDirectionalityLookup::class );
-		$languageDirectionalityLookup->expects( $this->any() )
-			->method( 'getDirectionality' )
+		$languageDirectionalityLookup->method( 'getDirectionality' )
 			->will( $this->returnCallback( function( $languageCode ) {
 				return [
 					'en' => 'ltr',
@@ -157,8 +156,7 @@ class TermsListViewTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetTermsListView_isEscaped() {
 		$textProvider = $this->getMock( LocalizedTextProvider::class );
-		$textProvider->expects( $this->any() )
-			->method( 'get' )
+		$textProvider->method( 'get' )
 			->will( $this->returnCallback( function( $key ) {
 				return $key === 'wikibase-entitytermsforlanguagelistview-language' ? '"RAW"' : "($key)";
 			} ) );

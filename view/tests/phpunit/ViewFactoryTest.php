@@ -154,12 +154,10 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 
 		$formatterFactory = $this->getMock( EntityIdFormatterFactory::class );
 
-		$formatterFactory->expects( $this->any() )
-			->method( 'getOutputFormat' )
+		$formatterFactory->method( 'getOutputFormat' )
 			->will( $this->returnValue( $format ) );
 
-		$formatterFactory->expects( $this->any() )
-			->method( 'getEntityIdFormatter' )
+		$formatterFactory->method( 'getEntityIdFormatter' )
 			->will( $this->returnValue( $entityIdFormatter ) );
 
 		return $formatterFactory;
@@ -171,14 +169,12 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 	private function getSnakFormatterFactory() {
 		$snakFormatter = $this->getMock( SnakFormatter::class );
 
-		$snakFormatter->expects( $this->any() )
-			->method( 'getFormat' )
+		$snakFormatter->method( 'getFormat' )
 			->will( $this->returnValue( SnakFormatter::FORMAT_HTML ) );
 
 		$snakFormatterFactory = $this->getMock( HtmlSnakFormatterFactory::class );
 
-		$snakFormatterFactory->expects( $this->any() )
-			->method( 'getSnakFormatter' )
+		$snakFormatterFactory->method( 'getSnakFormatter' )
 			->will( $this->returnValue( $snakFormatter ) );
 
 		return $snakFormatterFactory;

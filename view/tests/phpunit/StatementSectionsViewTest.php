@@ -34,15 +34,13 @@ class StatementSectionsViewTest extends PHPUnit_Framework_TestCase {
 		) ) );
 
 		$statementGrouper = $this->getMock( StatementGrouper::class );
-		$statementGrouper->expects( $this->any() )
-			->method( 'groupStatements' )
+		$statementGrouper->method( 'groupStatements' )
 			->will( $this->returnValue( $statementLists ) );
 
 		$statementListView = $this->getMockBuilder( StatementGroupListView::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$statementListView->expects( $this->any() )
-			->method( 'getHtml' )
+		$statementListView->method( 'getHtml' )
 			->will( $this->returnValue( '<LIST>' ) );
 
 		return new StatementSectionsView(
