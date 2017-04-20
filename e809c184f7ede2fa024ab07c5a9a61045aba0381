@@ -16,6 +16,24 @@
       "revId": "e809c184f7ede2fa024ab07c5a9a61045aba0381",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_5ca2c03c",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityDataTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-20T17:34:34Z",
+      "side": 1,
+      "message": "You are absolutely right, my work here was very sloppy. Let me do a proper test :)",
+      "parentUuid": "4e506ba4_9cce0885",
+      "revId": "e809c184f7ede2fa024ab07c5a9a61045aba0381",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
