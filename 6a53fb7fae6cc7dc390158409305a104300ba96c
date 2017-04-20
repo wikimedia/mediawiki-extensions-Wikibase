@@ -52,6 +52,24 @@
       "revId": "6a53fb7fae6cc7dc390158409305a104300ba96c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_b253eb19",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-20T19:53:12Z",
+      "side": 1,
+      "message": "I talked to Amir about it, he was on phone so couldn\u0027t write here but he suggested using a definition list (in HTML)",
+      "parentUuid": "4e506ba4_262005a8",
+      "revId": "6a53fb7fae6cc7dc390158409305a104300ba96c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
