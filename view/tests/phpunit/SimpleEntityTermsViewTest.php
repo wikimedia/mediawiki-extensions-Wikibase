@@ -47,15 +47,13 @@ class SimpleEntityTermsViewTest extends PHPUnit_Framework_TestCase {
 			->getMock();
 
 		$htmlTermRenderer = $this->getMock( HtmlTermRenderer::class );
-		$htmlTermRenderer->expects( $this->any() )
-			->method( 'renderTerm' )
+		$htmlTermRenderer->method( 'renderTerm' )
 			->will( $this->returnCallback( function( Term $term ) {
 				return htmlspecialchars( $term->getText() );
 			} ) );
 
 		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
-		$labelDescriptionLookup->expects( $this->any() )
-			->method( 'getLabel' )
+		$labelDescriptionLookup->method( 'getLabel' )
 			->will( $this->returnCallback( function( EntityId $entityId ) {
 				$terms = [
 					'Q111' => new Term( 'language', '<LABEL>' ),
@@ -63,8 +61,7 @@ class SimpleEntityTermsViewTest extends PHPUnit_Framework_TestCase {
 				];
 				return isset( $terms[ $entityId->getSerialization() ] ) ? $terms[ $entityId->getSerialization() ] : null;
 			} ) );
-		$labelDescriptionLookup->expects( $this->any() )
-			->method( 'getDescription' )
+		$labelDescriptionLookup->method( 'getDescription' )
 			->will( $this->returnCallback( function( EntityId $entityId ) {
 				return $entityId->getSerialization() === 'Q111' ? new Term( 'language', '<DESCRIPTION>' ) : null;
 			} ) );

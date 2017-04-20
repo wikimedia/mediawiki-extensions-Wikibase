@@ -139,8 +139,7 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 		) ) );
 
 		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
-		$languageNameLookup->expects( $this->any() )
-			->method( 'getName' )
+		$languageNameLookup->method( 'getName' )
 			->will( $this->returnValue( '<LANG>' ) );
 
 		return new SiteLinksView(
@@ -161,8 +160,7 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 
 	private function newNumberLocalizer() {
 		$numberLocalizer = $this->getMock( NumberLocalizer::class );
-		$numberLocalizer->expects( $this->any() )
-			->method( 'localizeNumber' )
+		$numberLocalizer->method( 'localizeNumber' )
 			->will( $this->returnCallback( 'strval' ) );
 		return $numberLocalizer;
 	}
@@ -198,8 +196,7 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 	private function newEntityIdFormatter() {
 		$formatter = $this->getMock( EntityIdFormatter::class );
 
-		$formatter->expects( $this->any() )
-			->method( 'formatEntityId' )
+		$formatter->method( 'formatEntityId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				if ( $id->getSerialization() === 'Q42' ) {
 					return 'Featured article';
