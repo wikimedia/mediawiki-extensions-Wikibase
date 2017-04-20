@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_86ec79f3",
+        "filename": "repo/includes/ChangeOp/Deserialization/ClaimsChangeOpDeserializer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-20T12:23:31Z",
+      "side": 1,
+      "message": "This is too much nesting, It would be great if you keep the method but refactor it to keep the performance boost you have in mind.",
+      "revId": "a0631543ab532a2a6112c35fb9468ee56ca05367",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
