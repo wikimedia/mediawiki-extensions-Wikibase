@@ -21,7 +21,6 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Repo\Tests\Rdf\RdfBuilderTest;
 use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
 
 /**
