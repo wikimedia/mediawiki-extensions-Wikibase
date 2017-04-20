@@ -34,6 +34,24 @@
       "revId": "6a53fb7fae6cc7dc390158409305a104300ba96c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_262005a8",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-20T14:01:18Z",
+      "side": 1,
+      "message": "sorry, I meant comma-separator.\n\nBut yeah, colon probably slipped through as I can see it fitting better than comma-space combination in some languages.\n\nThe general problem with deciding to use a particular separator here (be it comma, colon, dash, does not matter) I see is that this is assuming a particular type of separator is universal among languages. I don\u0027t think this is valid assumption.\nOn the other hand, as you say, there are places in Wikibase that already do use comma-separator, so doing something special for this special page would not solve the issue as a whole.",
+      "parentUuid": "4e506ba4_465d1149",
+      "revId": "6a53fb7fae6cc7dc390158409305a104300ba96c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
