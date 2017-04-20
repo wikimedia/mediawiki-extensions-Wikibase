@@ -180,6 +180,8 @@
 	"wikibase-wikibaserepopage-invalid-id": "Response informing that the selected entity ID is not valid.\n\nParameters:\n* $1 - the invalid ID",
 	"wikibase-wikibaserepopage-unresolved-redirect": "Error message shown when the user supplied an entity ID that refers to a redirect.\nParameters:\n* $1 - the entity ID",
 	"wikibase-wikibaserepopage-storage-exception": "Error message shown when an entity could not be loaded due to a storage layer exception.\nParameters:\n* $1 - the entity ID\n* $2 - the (unlocalized and possibly technical) error message.",
+	"special-availablebadges": "{{doc-special|AvailableBadges}}\nTitle of the page containing a list of all available badges",
+	"wikibase-availablebadges-emptylist": "Message indicating that there are no available badges.",
 	"special-itembytitle": "{{doc-special|ItemByTitle}}\nThe item is identified through use of the site and title, but the lookup failed and further qualification must be done. See also the Wikidata glossary for [[d:Wikidata:Glossary#languageattribute-label|label]] and [[d:Wikidata:Glossary#Items|items]].",
 	"wikibase-itembytitle-lookup-fieldset": "This is the title for the fieldset on the special page for further refining the search. This is the search by site and title.",
 	"wikibase-itembytitle-lookup-site": "Label for the textfield holding the site id. See also the Wikidata glossary for [[d:Wikidata:Glossary#sitelinks|sitelinks]].\n{{Identical|Site}}",

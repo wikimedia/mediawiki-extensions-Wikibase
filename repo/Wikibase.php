@@ -842,6 +842,15 @@ call_user_func( function() {
 			)
 		);
 	};
+	$wgSpecialPages['AvailableBadges'] = function() {
+		$wikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+
+		return new Wikibase\Repo\Specials\SpecialAvailableBadges(
+			$wikibaseRepo->getPrefetchingTermLookup(),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->getSettings()->getSetting( 'badgeItems' )
+		);
+	};
 
 	// Jobs
 	$wgJobClasses['UpdateRepoOnMove'] = Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob::class;

@@ -12,6 +12,7 @@ $specialPageAliases = array();
 
 /** English (English) */
 $specialPageAliases['en'] = array(
+	'AvailableBadges' => array( 'AvailableBadges' ),
 	'DispatchStats' => array( 'DispatchStats' ),
 	'EntitiesWithoutDescription' => array( 'EntitiesWithoutDescription' ),
 	'EntitiesWithoutLabel' => array( 'EntitiesWithoutLabel' ),
