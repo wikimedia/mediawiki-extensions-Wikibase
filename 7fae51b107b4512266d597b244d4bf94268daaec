@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_a3dde774",
+        "filename": "docs/federation.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-04-20T09:29:34Z",
+      "side": 1,
+      "message": "I think Leszek is right, but a comma so shortly before the end of the sentence sounds weird to me… how about “a single repository, either local or foreign”?",
+      "parentUuid": "4e506ba4_435f4313",
+      "range": {
+        "startLine": 11,
+        "startChar": 91,
+        "endLine": 11,
+        "endChar": 125
+      },
+      "revId": "7fae51b107b4512266d597b244d4bf94268daaec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_90f58f81",
         "filename": "docs/federation.wiki",
         "patchSetId": 2
