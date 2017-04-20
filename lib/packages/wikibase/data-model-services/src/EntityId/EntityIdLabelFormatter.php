@@ -3,8 +3,8 @@
 namespace Wikibase\DataModel\Services\EntityId;
 
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
+use Wikibase\DataModel\Services\Lookup\LabelLookup;
 use Wikibase\DataModel\Term\Term;
 
 /**
@@ -18,12 +18,12 @@ use Wikibase\DataModel\Term\Term;
 class EntityIdLabelFormatter implements EntityIdFormatter {
 
 	/**
-	 * @var LabelDescriptionLookup
+	 * @var LabelLookup
 	 */
-	private $labelDescriptionLookup;
+	private $labelLookup;
 
-	public function __construct( LabelDescriptionLookup $labelDescriptionLookup ) {
-		$this->labelDescriptionLookup = $labelDescriptionLookup;
+	public function __construct( LabelLookup $labelLookup ) {
+		$this->labelLookup = $labelLookup;
 	}
 
 	/**
@@ -44,15 +44,13 @@ class EntityIdLabelFormatter implements EntityIdFormatter {
 	}
 
 	/**
-	 * Lookup a label for an entity
-	 *
 	 * @param EntityId $entityId
 	 *
 	 * @return Term|null Null if no label was found or the entity does not exist
 	 */
 	protected function lookupEntityLabel( EntityId $entityId ) {
 		try {
-			return $this->labelDescriptionLookup->getLabel( $entityId );
+			return $this->labelLookup->getLabel( $entityId );
 		} catch ( LabelDescriptionLookupException $e ) {
 			return null;
 		}
