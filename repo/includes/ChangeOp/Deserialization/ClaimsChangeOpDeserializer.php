@@ -46,25 +46,20 @@ class ClaimsChangeOpDeserializer implements ChangeOpDeserializer {
 	public function createEntityChangeOp( array $changeRequest ) {
 		$this->assertIsArray( $changeRequest['claims'] );
 
-		$changeOps = [];
-
 		//check if the array is associative or in arrays by property
 		if ( array_keys( $changeRequest['claims'] ) !== range( 0, count( $changeRequest['claims'] ) - 1 ) ) {
+			$changeOps = [];
+
 			foreach ( $changeRequest['claims'] as $subClaims ) {
 				$this->assertIsArray( $subClaims );
 
 				$changeOps = array_merge(
 					$changeOps,
-					$this->getRemoveStatementChangeOps( $subClaims ),
-					$this->getModifyStatementChangeOps( $subClaims )
+					$this->getStatementChangeOps( $subClaims )
 				);
 			}
 		} else {
-			$changeOps = array_merge(
-				$changeOps,
-				$this->getRemoveStatementChangeOps( $changeRequest['claims'] ),
-				$this->getModifyStatementChangeOps( $changeRequest['claims'] )
-			);
+			$changeOps = $this->getStatementChangeOps( $changeRequest['claims'] );
 		}
 
 		if ( count( $changeOps ) === 1 ) {
@@ -80,11 +75,17 @@ class ClaimsChangeOpDeserializer implements ChangeOpDeserializer {
 	 * @return ChangeOp[]
 	 * @throws ChangeOpDeserializationException
 	 */
-	private function getModifyStatementChangeOps( array $statements ) {
-		$opsToReturn = [];
+	private function getStatementChangeOps( array $statements ) {
+		$changeOps = [];
 
 		foreach ( $statements as $statementArray ) {
-			if ( !array_key_exists( 'remove', $statementArray ) ) {
+			if ( array_key_exists( 'remove', $statementArray ) ) {
+				if ( !array_key_exists( 'id', $statementArray ) ) {
+					$this->throwException( 'Cannot remove a claim with no GUID', 'invalid-claim' );
+				}
+
+				$changeOps[] = $this->statementChangeOpFactory->newRemoveStatementOp( $statementArray['id'] );
+			} else {
 				try {
 					$statement = $this->statementDeserializer->deserialize( $statementArray );
 
@@ -92,37 +93,14 @@ class ClaimsChangeOpDeserializer implements ChangeOpDeserializer {
 						throw new Exception( 'Statement serialization did not contain a Statement.' );
 					}
 
-					$opsToReturn[] = $this->statementChangeOpFactory->newSetStatementOp( $statement );
+					$changeOps[] = $this->statementChangeOpFactory->newSetStatementOp( $statement );
 				} catch ( Exception $ex ) {
 					$this->throwException( $ex->getMessage(), 'invalid-claim' );
 				}
 			}
 		}
 
-		return $opsToReturn;
-	}
-
-	/**
-	 * Get changeops that remove all claims that have the 'remove' key in the array
-	 *
-	 * @param array[] $statements array of serialized claims
-	 *
-	 * @return ChangeOp[]
-	 */
-	private function getRemoveStatementChangeOps( array $statements ) {
-		$opsToReturn = [];
-
-		foreach ( $statements as $statementArray ) {
-			if ( array_key_exists( 'remove', $statementArray ) ) {
-				if ( array_key_exists( 'id', $statementArray ) ) {
-					$opsToReturn[] = $this->statementChangeOpFactory->newRemoveStatementOp( $statementArray['id'] );
-				} else {
-					$this->throwException( 'Cannot remove a claim with no GUID', 'invalid-claim' );
-				}
-			}
-		}
-
-		return $opsToReturn;
+		return $changeOps;
 	}
 
 	/**
