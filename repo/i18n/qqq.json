@@ -218,6 +218,7 @@
 	"wikibase-newproperty-datatype": "Label for the data-type-dropdown holding the data type of the new property.\n{{Identical|Data type}}",
 	"wikibase-newproperty-invalid-datatype": "Error message shown when the page gets an invalid datatype",
 	"wikibase-newproperty-insufficient-data": "Error message shown when a user tries to create a property and didn't fill in enough data",
+	"wikibase-newproperty-pick-data-type": "Label for default value of data type selector asking user to pick a data type",
 	"wikibase-description-helppage": "{{doc-important|Do not change the <code>Help:</code> part.}}\nThe name of the local help page about using and editing labels.",
 	"wikibase-label-helppage": "{{doc-important|Do not change the <code>Help:</code> part.}}\nThe name of the local help page about using and editing descriptions.",
 	"special-newitem": "{{doc-special|NewItem}}\nThe special page is for creating new items.\n{{Identical|Create new item}}",
