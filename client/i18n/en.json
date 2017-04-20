@@ -28,7 +28,7 @@
 	"apihelp-query+wblistentityusage-example-simple": "Get pages that use the entity <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Get pages that use the entity <kbd>Q2</kbd> with URL included.",
 	"apihelp-query+wblistentityusage-example-aspect": "Get pages that use the entity <kbd>Q2</kbd> and the aspect was sitelink or statement.",
-	"apihelp-query+pageterms-description": "Get terms associated with a page via an associated data item. On a wikibase entity page, the entity terms are used directly.\nCaveat: On a repo wiki, pageterms only works directly on entity pages, not on pages connected to an item. This may change in the future.",
+	"apihelp-query+pageterms-description": "Get the {{WBREPONAME}} terms (typically labels, descriptions and aliases) associated with a page via a sitelink. On the entity page itself, the terms are used directly. Caveat: On a repo wiki, this module only works directly on entity pages, not on pages connected to an entity via a sitelink. This may change in the future.",
 	"apihelp-query+pageterms-example-simple": "Get all terms associated with the page 'London', in the user language.",
 	"apihelp-query+pageterms-example-label-en": "Get labels and aliases associated with the page 'London', in English.",
 	"apihelp-query+pageterms-example-item": "Get labels and aliases of item Q84.",
