@@ -421,7 +421,7 @@
 	"wikibase-listdatatypes-multilingualtext-head": "{{Wikibase-datatype-head|Multilingual text|multilingualtext}}\n{{Identical|Multilingual text}}",
 	"wikibase-listdatatypes-multilingualtext-body": "{{Wikibase-datatype-body|Multilingual text}}\n\nSee also:\n* {{msg-mw|Wikibase-listdatatypes-multilingualtext-head}}",
 	"wikibase-listdatatypes-string-head": "{{Wikibase-datatype-head|String}}\n{{Identical|String}}",
-	"wikibase-listdatatypes-string-body": "{{doc-important|Do not translate <code>language</code> and <code>text</code> (before \"-\").}}\n{{Wikibase-datatype-body|String}}",
+	"wikibase-listdatatypes-string-body": "{{Wikibase-datatype-body|String}}",
 	"wikibase-listdatatypes-time-head": "{{Wikibase-datatype-head|Time}}\n{{Identical|Time}}",
 	"wikibase-listdatatypes-time-body": "{{Wikibase-datatype-body|Time}}",
 	"wikibase-listdatatypes-url-head": "{{Wikibase-datatype-head|Url}}\n{{Identical|URL}}",

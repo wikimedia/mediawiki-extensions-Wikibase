@@ -80,6 +80,8 @@
 	"datatypes-type-wikibase-item": "Položka",
 	"datatypes-type-wikibase-property": "Vlastnost",
 	"datatypes-type-commonsMedia": "Mediální soubor na Commons",
+	"datatypes-type-geo-shape": "Geografický tvar",
+	"datatypes-type-tabular-data": "Tabulková data",
 	"datatypes-type-external-id": "Externí identifikátor",
 	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-Gannum": "$1 {{PLURAL:$1|miliarda|miliardy|miliard}} let",

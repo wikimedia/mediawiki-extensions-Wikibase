@@ -23,7 +23,8 @@
 			"Orlodrim",
 			"Zolo",
 			"Wladek92",
-			"Urhixidur"
+			"Urhixidur",
+			"AntonierCH"
 		]
 	},
 	"wikibase-lib-desc": "Regroupe des fonctionnalités communes aux extensions Wikibase et Wikibase Client",
@@ -95,6 +96,7 @@
 	"datatypes-type-wikibase-property": "Propriété",
 	"datatypes-type-commonsMedia": "Fichier multimédia de Commons",
 	"datatypes-type-geo-shape": "Couche géographique",
+	"datatypes-type-tabular-data": "Données tabulaires",
 	"datatypes-type-external-id": "Identifiant externe",
 	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-Gannum": "$1 milliards d’années EC",

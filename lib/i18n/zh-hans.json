@@ -84,6 +84,7 @@
 	"datatypes-type-wikibase-property": "属性",
 	"datatypes-type-commonsMedia": "共享资源媒体文件",
 	"datatypes-type-geo-shape": "地理形状",
+	"datatypes-type-tabular-data": "表格数据",
 	"datatypes-type-external-id": "外部标识符",
 	"version-wikibase": "维基数据库",
 	"wikibase-time-precision-Gannum": "公元$1十亿年",

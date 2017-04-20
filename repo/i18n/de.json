@@ -156,6 +156,8 @@
 	"wikibase-wikibaserepopage-invalid-id": "Die Kennung „$1“ ist unbekannt. Bitte nutze eine gültige Objektkennung.",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 ist eine Weiterleitung.",
 	"wikibase-wikibaserepopage-storage-exception": "Beim Laden von $1 ist ein Fehler aufgetreten: $2.",
+	"special-availablebadges": "Verfügbare Auszeichnungen",
+	"wikibase-availablebadges-emptylist": "Auf diesem Wiki gibt es keine konfigurierten Auszeichnungen.",
 	"special-itembytitle": "Datenobjekte nach Titel",
 	"wikibase-itembytitle-lookup-fieldset": "Suche Datenobjekte nach Website und Titel",
 	"wikibase-itembytitle-lookup-site": "Website:",

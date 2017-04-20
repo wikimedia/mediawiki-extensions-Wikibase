@@ -37,6 +37,7 @@
 	"wikibase-snakview-snaktypeselector-novalue": "nenhum valor",
 	"wikibase-tooltip-error-details": "Detalhes",
 	"datatypes-type-wikibase-item": "Item",
+	"datatypes-type-wikibase-property": "Propriedade",
 	"datatypes-type-commonsMedia": "Arquivo de mídia do Commons",
 	"wikibase-entity-summary-wbsetitem": "Criado um novo item",
 	"wikibase-entity-summary-wbsetreference-add": "Incluída referência para a afirmação",

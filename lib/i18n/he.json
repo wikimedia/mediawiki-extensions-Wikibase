@@ -77,6 +77,7 @@
 	"datatypes-type-wikibase-property": "מאפיין",
 	"datatypes-type-commonsMedia": "קובץ מדיה בוויקישיתוף",
 	"datatypes-type-geo-shape": "צורה גאוגרפית",
+	"datatypes-type-tabular-data": "נתונים טבלאיים",
 	"datatypes-type-external-id": "מזהה חיצוני",
 	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-Gannum": "$1 מיליארד שנים לספירה",

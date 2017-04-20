@@ -83,6 +83,7 @@
 	"datatypes-type-wikibase-item": "Element",
 	"datatypes-type-wikibase-property": "Właściwość",
 	"datatypes-type-commonsMedia": "Plik multimedialny na Commons",
+	"datatypes-type-tabular-data": "Dane tabelaryczne",
 	"datatypes-type-external-id": "Identyfikator zewnętrzny",
 	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-Gannum": "$1 mld lat C#",

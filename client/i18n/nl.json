@@ -60,6 +60,7 @@
 	"wikibase-rc-show-wikidata-pref": "Bewerkingen van {{WBREPONAME}} weergeven in recente wijzigingen",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Bewerking van {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-label": "Bewerkingen van {{WBREPONAME}}",
 	"wikibase-replicationnote": "Het kan een aantal minuten duren voor alle wijzigingen op alle wiki's zichtbaar zijn",
 	"wikibase-watchlist-show-changes-pref": "Bewerkingen van {{WBREPONAME}} op mijn volglijst weergeven",
 	"wikibase-error-serialize-error": "De gegevens konden niet geserialiseerd worden",

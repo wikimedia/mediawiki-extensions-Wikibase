@@ -309,6 +309,7 @@
 	"wikibase-listdatatypes-commonsmedia-head": "Plik multimedialny z Commons",
 	"wikibase-listdatatypes-commonsmedia-body": "Odwołuje się do plików przechowywanych na Wikimedia Commons. Podczas wprowadzania będzie przeszukiwana przestrzeń nazw „File” na Commons, aby odnaleźć pasujące wpisy.",
 	"wikibase-listdatatypes-globe-coordinate-head": "Współrzędne geograficzne",
+	"wikibase-listdatatypes-tabular-data-head": "Dane tabelaryczne",
 	"wikibase-listdatatypes-quantity-head": "Ilość",
 	"wikibase-listdatatypes-monolingualtext-head": "Tekst jednojęzyczny",
 	"wikibase-listdatatypes-multilingualtext-head": "Tekst wielojęzyczny",

@@ -14,7 +14,8 @@
 			"Maroen1990",
 			"Sonic N800",
 			"Mr. Ibrahem",
-			"ديفيد"
+			"ديفيد",
+			"محمد أحمد عبد الفتاح"
 		]
 	},
 	"wikibase-lib-desc": "يمسك بالوظيفة المشتركة لامتدادات Wikibase و Wikibase Client",
@@ -86,6 +87,7 @@
 	"datatypes-type-wikibase-property": "خاصية",
 	"datatypes-type-commonsMedia": "ملف وسائط من كومنز",
 	"datatypes-type-geo-shape": "شكل جغرافي",
+	"datatypes-type-tabular-data": "بيانات مجدولة",
 	"datatypes-type-external-id": "معرف خارجي",
 	"version-wikibase": "قاعدة ويكي",
 	"wikibase-time-precision-Gannum": "$1 مليار سنة بعد الميلاد",
