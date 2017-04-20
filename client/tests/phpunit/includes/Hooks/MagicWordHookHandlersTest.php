@@ -7,7 +7,7 @@ use Wikibase\Client\Hooks\MagicWordHookHandlers;
 use MediaWikiTestCase;
 use Parser;
 use Wikibase\SettingsArray;
-use TestingAccessWrapper;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers Wikibase\Client\Hooks\MagicWordHookHandlers
