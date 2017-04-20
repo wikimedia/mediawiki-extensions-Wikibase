@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "4e506ba4_435f4313",
+        "filename": "docs/federation.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-20T09:24:57Z",
+      "side": 1,
+      "message": "Thanks for changes Thiemo. I believe there should be a comma here, like \"from a single, either local or foreign_,_ repository\". Or what are the English punctuation rules on this?",
+      "range": {
+        "startLine": 11,
+        "startChar": 91,
+        "endLine": 11,
+        "endChar": 125
+      },
+      "revId": "7fae51b107b4512266d597b244d4bf94268daaec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_90f58f81",
         "filename": "docs/federation.wiki",
         "patchSetId": 2
@@ -13,6 +36,30 @@
       "writtenOn": "2017-04-20T07:43:09Z",
       "side": 1,
       "message": "I think \u003cpre\u003e is better for multiline demonstrations",
+      "range": {
+        "startLine": 19,
+        "startChar": 1,
+        "endLine": 19,
+        "endChar": 5
+      },
+      "revId": "7fae51b107b4512266d597b244d4bf94268daaec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_a36087cd",
+        "filename": "docs/federation.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-20T09:24:57Z",
+      "side": 1,
+      "message": "Good call! Changed.",
+      "parentUuid": "4e506ba4_90f58f81",
       "range": {
         "startLine": 19,
         "startChar": 1,
