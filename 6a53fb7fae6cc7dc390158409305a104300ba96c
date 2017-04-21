@@ -88,6 +88,24 @@
       "revId": "6a53fb7fae6cc7dc390158409305a104300ba96c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_9b8b6be8",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-21T06:50:32Z",
+      "side": 1,
+      "message": "Definition list could work, although yeah, it is a bit different from what was here originally. But might be OK. I am not sure.\n\n@Thiemo:\n\nWell, I believe it is matter of opinion. To me making a UI that is accessible for all people, and not English-centered (or any-other-language/culture-centered) is worth any trouble. I don\u0027t expect everyone to share my view, though.\n\nI was just raising concerns, that we might be replacing one way of displaying the data that might be not natural for some users, with another way having a similar problem. As stated, the issue is not trivial, and I don\u0027t expect we\u0027ll find a perfect solution here.\n\n\u003e replace a hard coded \" - \" with a localizable message, whatever that message is. That\u0027s really all that is needed to do here, and really all we should do at the moment. \n\nThis is an arguable statement.\n\n\u003e Should I split this patch?\n\nI am fine with what\u0027s here now.\n\n\u003e Should I remove the message and add the hard coded \" - \" back?\n\nI\u0027d be fine either way. I don\u0027t think none of those two is significantly \"better\". Whatever stays would be fine for now.\n\nI didn\u0027t have time to look at the whole patch yet. While briefly looking at this, I\u0027ve spotted this, and thus commented. I will look at other changes and review the whole patch when I have time.",
+      "parentUuid": "4e506ba4_5b4083a8",
+      "revId": "6a53fb7fae6cc7dc390158409305a104300ba96c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
