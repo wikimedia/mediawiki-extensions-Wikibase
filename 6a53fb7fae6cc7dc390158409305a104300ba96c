@@ -70,6 +70,24 @@
       "revId": "6a53fb7fae6cc7dc390158409305a104300ba96c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_5b4083a8",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-21T06:21:57Z",
+      "side": 1,
+      "message": "I don\u0027t think this is worth the trouble. I don\u0027t think this special page is worth *any* trouble.\n\nThe default styling of a definition list is quite odd: a line break, the first line bold, the second line indented for no obvious reason. This is very uncommon for a special page and will need custom CSS to make it fit the users expectations. And the moment we go this route we need to update other special pages and other places in our code that also display descriptions the same way.\n\nAll I really wanted to do is to fix an actual HTML injection, and to replace a hard coded \" - \" with a localizable message, whatever that message is. That\u0027s really all that is needed to do here, and really all we should do at the moment. Can we please merge this patch and invest our precious time on more important stuff?\n\nShould I split this patch?\n\nShould I remove the message and add the hard coded \" - \" back?",
+      "parentUuid": "4e506ba4_b253eb19",
+      "revId": "6a53fb7fae6cc7dc390158409305a104300ba96c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
