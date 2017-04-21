@@ -171,17 +171,23 @@ class LinkBeginHookHandler {
 		$out = $context->getOutput();
 		$outTitle = $out->getTitle();
 
+		// For good measure: Don't do anything in case the OutputPage has no Title set.
+		if ( !$outTitle ) {
+			return;
+		}
+
+		// if custom link text is given, there is no point in overwriting it
+		// but not if it is similar to the plain title
+		if ( $html !== null && $target->getFullText() !== $html ) {
+			return;
+		}
+
 		$foreignEntityId = $this->parseForeignEntityId( $target );
 		$isLocal = !$foreignEntityId;
 
 		if ( $isLocal
 			&& !$this->entityNamespaceLookup->isEntityNamespace( $target->getNamespace() )
 		) {
-			return;
-		}
-
-		// For good measure: Don't do anything in case the OutputPage has no Title set.
-		if ( !$outTitle ) {
 			return;
 		}
 
@@ -206,12 +212,6 @@ class LinkBeginHookHandler {
 
 		if ( $isLocal && !$target->exists() ) {
 			// The link points to a non-existing item.
-			return;
-		}
-
-		// if custom link text is given, there is no point in overwriting it
-		// but not if it is similar to the plain title
-		if ( $html !== null && $target->getFullText() !== $html ) {
 			return;
 		}
 
