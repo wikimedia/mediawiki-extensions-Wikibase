@@ -51,7 +51,7 @@ class EchoNotificationsHandlersTestCase extends MediaWikiTestCase {
 			$this->repoLinker,
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'sendEchoNotification' ),
-			$settings->getSetting( 'repoIcon' ),
+			$settings->getSetting( 'echoIcon' ),
 			'repoSiteName'
 		);
 	}
@@ -63,7 +63,7 @@ class EchoNotificationsHandlersTestCase extends MediaWikiTestCase {
 		$settings = new SettingsArray();
 		$settings->setSetting( 'siteGlobalID', 'enwiki' );
 		$settings->setSetting( 'sendEchoNotification', true );
-		$settings->setSetting( 'repoIcon', false );
+		$settings->setSetting( 'echoIcon', false );
 
 		$handlers = $this->getHandlers( $settings );
 
@@ -163,7 +163,7 @@ class EchoNotificationsHandlersTestCase extends MediaWikiTestCase {
 		$settings = new SettingsArray();
 		$settings->setSetting( 'siteGlobalID', 'enwiki' );
 		$settings->setSetting( 'sendEchoNotification', false );
-		$settings->setSetting( 'repoIcon', false );
+		$settings->setSetting( 'echoIcon', false );
 
 		$handlers = $this->getHandlers( $settings );
 		$handlers->doBeforeCreateEchoEvent(
@@ -199,22 +199,22 @@ class EchoNotificationsHandlersTestCase extends MediaWikiTestCase {
 		$this->assertEquals(
 			$wgEchoNotificationIcons['placeholder'],
 			$wgEchoNotificationIcons[$handlers::NOTIFICATION_TYPE],
-			"Failed asserting that missing repoIcon setting defaults to Echo's default"
+			"Failed asserting that missing echoIcon setting defaults to Echo's default"
 		);
 
 		unset( $wgEchoNotifications[$handlers::NOTIFICATION_TYPE] );
 		unset( $wgEchoNotificationCategories['wikibase-action'] );
 		unset( $wgEchoNotificationIcons[$handlers::NOTIFICATION_TYPE] );
 
-		$repoIcon = [ 'url' => 'some_url_here' ];
-		$settings->setSetting( 'repoIcon', $repoIcon );
+		$echoIcon = [ 'url' => 'some_url_here' ];
+		$settings->setSetting( 'echoIcon', $echoIcon );
 		$handlers = $this->getHandlers( $settings );
 
 		$handlers->doBeforeCreateEchoEvent(
 			$wgEchoNotifications, $wgEchoNotificationCategories, $wgEchoNotificationIcons
 		);
 		$this->assertEquals(
-			$repoIcon,
+			$echoIcon,
 			$wgEchoNotificationIcons[$handlers::NOTIFICATION_TYPE],
 			"Failed asserting that the notification icon is correctly registered to Echo"
 		);

@@ -26,7 +26,7 @@ return call_user_func( function() {
 		'injectRecentChanges' => true,
 		'showExternalRecentChanges' => true,
 		'sendEchoNotification' => false,
-		'repoIcon' => false,
+		'echoIcon' => false,
 		'allowDataTransclusion' => true,
 		'propagateChangesToRepo' => true,
 		'otherProjectsLinksByDefault' => false,

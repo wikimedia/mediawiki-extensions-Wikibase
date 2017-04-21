@@ -48,7 +48,7 @@ class EchoNotificationsHandlers {
 	/**
 	 * @var array|false
 	 */
-	private $repoIcon;
+	private $echoIcon;
 
 	/**
 	 * @var string
@@ -59,20 +59,20 @@ class EchoNotificationsHandlers {
 	 * @param RepoLinker $repoLinker
 	 * @param string $siteId
 	 * @param bool $sendEchoNotification
-	 * @param array|false $repoIcon
+	 * @param array|false $echoIcon
 	 * @param string $repoSiteName
 	 */
 	public function __construct(
 		RepoLinker $repoLinker,
 		$siteId,
 		$sendEchoNotification,
-		$repoIcon,
+		$echoIcon,
 		$repoSiteName
 	) {
 		$this->repoLinker = $repoLinker;
 		$this->siteId = $siteId;
 		$this->sendEchoNotification = $sendEchoNotification;
-		$this->repoIcon = $repoIcon;
+		$this->echoIcon = $echoIcon;
 		$this->repoSiteName = $repoSiteName;
 	}
 
@@ -87,7 +87,7 @@ class EchoNotificationsHandlers {
 			$wikibaseClient->newRepoLinker(),
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'sendEchoNotification' ),
-			$settings->getSetting( 'repoIcon' ),
+			$settings->getSetting( 'echoIcon' ),
 			$settings->getSetting( 'repoSiteName' )
 		);
 	}
@@ -142,8 +142,8 @@ class EchoNotificationsHandlers {
 			'bundle' => [ 'web' => true, 'email' => false ],
 		];
 
-		if ( !empty( $this->repoIcon ) ) {
-			$icons[self::NOTIFICATION_TYPE] = $this->repoIcon;
+		if ( !empty( $this->echoIcon ) ) {
+			$icons[self::NOTIFICATION_TYPE] = $this->echoIcon;
 		} else {
 			$icons[self::NOTIFICATION_TYPE] = $icons['placeholder'];
 		}
