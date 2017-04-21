@@ -124,6 +124,24 @@
       "revId": "6a53fb7fae6cc7dc390158409305a104300ba96c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_7e176d56",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-21T11:34:01Z",
+      "side": 1,
+      "message": "Let\u0027s make a phab card to track this discussion (It would reach to more people and we can keep track of it much easier than here. Also the discussion platform is way better) once the phab card is made, I +2 this patch.",
+      "parentUuid": "4e506ba4_7e49ad8f",
+      "revId": "6a53fb7fae6cc7dc390158409305a104300ba96c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
