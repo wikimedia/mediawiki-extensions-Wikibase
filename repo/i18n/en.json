@@ -303,7 +303,7 @@
 	"wikibase-entitydata-unsupported-format": "The data format $1 is not supported by this interface.",
 	"wikibase-entitydata-storage-error": "Failed to load entity $1.",
 	"wikibase-entitydata-title": "Entity Data",
-	"wikibase-entitydata-text": "This page provides a linked data interface to entity values. Please provide the entity ID in the URL, using subpage syntax.\n* Content negotiation applies based on you client's Accept header. This means that the entity data will be provided in the format preferred by your client. For a web browser, this will be HTML, causing your browser to be redirected to the regular entity page.\n* You can explicitly request a specific data format by adding the appropriate file extension to the entity ID: Q23.json will return data in the JSON format, Q23.ttl will return RDF/Turtle, and so on.",
+	"wikibase-entitydata-text": "This page provides a linked data interface to entity values. Please provide the entity ID in the URL, using subpage syntax.\n* Content negotiation applies based on you client's Accept header. This means that the entity data will be provided in the format preferred by your client. For a web browser, this will be HTML, causing your browser to be redirected to the regular entity page.\n* You can explicitly request a specific data format by adding the appropriate file extension to the entity ID: Q23.json will return data in the JSON format, Q23.ttl will return RDF/Turtle, and so on. Supported formats are: $1.",
 	"special-entitypage": "Entity page",
 	"wikibase-entitypage-title": "Entity Page",
 	"wikibase-entitypage-text": "This page redirects to the entity page on the repository it belongs to. Please provide the entity ID in the URL, using subpage syntax.",

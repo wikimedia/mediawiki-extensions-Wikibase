@@ -30,8 +30,15 @@ class SpecialEntityData extends SpecialWikibasePage {
 	 */
 	private $requestHandler = null;
 
+	/**
+	 * @var EntityDataFormatProvider|null
+	 */
+	private $entityDataFormatProvider = null;
+
 	public function __construct() {
 		parent::__construct( 'EntityData' );
+
+		$this->entityDataFormatProvider = new EntityDataFormatProvider();
 	}
 
 	/**
@@ -75,8 +82,6 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$titleLookup = $wikibaseRepo->getEntityTitleLookup();
 		$entityIdParser = $wikibaseRepo->getEntityIdParser();
 
-		$entityDataFormatProvider = new EntityDataFormatProvider();
-
 		$serializerFactoryOptions = SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
 			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH;
 
@@ -91,7 +96,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$wikibaseRepo->getValueSnakRdfBuilderFactory(),
 			$wikibaseRepo->getEntityRdfBuilderFactory(),
 			$wikibaseRepo->getSiteLookup()->getSites(),
-			$entityDataFormatProvider,
+			$this->entityDataFormatProvider,
 			$serializerFactory,
 			$wikibaseRepo->getEntitySerializer( $serializerFactoryOptions ),
 			$wikibaseRepo->getSiteLookup(),
@@ -100,15 +105,15 @@ class SpecialEntityData extends SpecialWikibasePage {
 
 		$maxAge = $wikibaseRepo->getSettings()->getSetting( 'dataSquidMaxage' );
 		$formats = $wikibaseRepo->getSettings()->getSetting( 'entityDataFormats' );
-		$entityDataFormatProvider->setFormatWhiteList( $formats );
+		$this->entityDataFormatProvider->setFormatWhiteList( $formats );
 
 		$defaultFormat = empty( $formats ) ? 'html' : $formats[0];
 
 		// build a mapping of formats to file extensions and include HTML
 		$supportedExtensions = array();
 		$supportedExtensions['html'] = 'html';
-		foreach ( $entityDataFormatProvider->getSupportedFormats() as $format ) {
-			$ext = $entityDataFormatProvider->getExtension( $format );
+		foreach ( $this->entityDataFormatProvider->getSupportedFormats() as $format ) {
+			$ext = $this->entityDataFormatProvider->getExtension( $format );
 
 			if ( $ext !== null ) {
 				$supportedExtensions[$format] = $ext;
@@ -128,7 +133,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$entityRevisionLookup,
 			$entityRedirectLookup,
 			$serializationService,
-			$entityDataFormatProvider,
+			$this->entityDataFormatProvider,
 			$defaultFormat,
 			$maxAge,
 			$wgUseSquid,
@@ -162,7 +167,24 @@ class SpecialEntityData extends SpecialWikibasePage {
 	public function showForm() {
 		//TODO: show input form with selector for format and field for ID. Add some explanation,
 		//      point to meta-info like schema and license, and generally be a helpful data endpoint.
-		$this->getOutput()->showErrorPage( 'wikibase-entitydata-title', 'wikibase-entitydata-text' );
+		$supportedFormats = $this->entityDataFormatProvider->getSupportedExtensions();
+		$supportedFormats[] = 'html';
+		$this->getOutput()->showErrorPage(
+			'wikibase-entitydata-title',
+			'wikibase-entitydata-text',
+			[ $this->getOutput()->getLanguage()->commaList( $supportedFormats ) ]
+		);
+	}
+
+	/**
+	 * @param EntityDataFormatProvider $entityDataFormatProvider
+	 *
+	 * TODO: Inject them
+	 */
+	public function setEntityDataFormatProvider(
+		EntityDataFormatProvider $entityDataFormatProvider
+	) {
+		$this->entityDataFormatProvider = $entityDataFormatProvider;
 	}
 
 }
