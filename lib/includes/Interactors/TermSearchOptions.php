@@ -11,7 +11,7 @@ use Wikimedia\Assert\Assert;
  */
 class TermSearchOptions {
 
-	const HARD_LIMIT = 5000;
+	const HARD_LIMIT = 2500;
 
 	/**
 	 * @var bool do a case sensitive search
@@ -62,7 +62,7 @@ class TermSearchOptions {
 	}
 
 	/**
-	 * @param int $limit Hard upper limit of 5000
+	 * @param int $limit Hard upper limit of 2500
 	 */
 	public function setLimit( $limit ) {
 		Assert::parameterType( 'integer', $limit, '$limit' );

@@ -610,7 +610,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param string|string[]|null $termType
 	 * @param string|string[]|null $entityType
 	 * @param array $options
-	 *           In this implementation at most 5000 terms will be retreived.
+	 *           In this implementation at most 2500 terms will be retreived.
 	 *           As we only return a single TermIndexEntry per Entity the return count may be lower.
 	 *
 	 * @return TermIndexEntry[]
@@ -625,7 +625,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		if ( array_key_exists( 'LIMIT', $options ) ) {
 			$requestedLimit = $options['LIMIT'];
 		}
-		$options['LIMIT'] = 5000;
+		$options['LIMIT'] = 2500;
 		$options['orderByWeight'] = true;
 
 		$matchingTermIndexEntries = $this->getMatchingTerms(
@@ -674,7 +674,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 		// this is a post-search sorting by weight. This allows us to not require an additional
 		// index on the wb_terms table that is very big already. This is also why we have
-		// the internal limit of 5000, since SQL's index would explode in size if we added the
+		// the internal limit of 2500, since SQL's index would explode in size if we added the
 		// weight to it here (which would allow us to delegate the sorting to SQL itself)
 		uasort( $sortData, function( $a, $b ) {
 			if ( $a['weight'] === $b['weight'] ) {
