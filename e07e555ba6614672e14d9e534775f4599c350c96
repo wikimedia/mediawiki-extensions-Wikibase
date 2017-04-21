@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_3b2c97f1",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialEntityDataTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-21T06:40:30Z",
+      "side": 1,
+      "message": "Could also be assertContains I think, as there is no real regular expression involved here.",
+      "revId": "e07e555ba6614672e14d9e534775f4599c350c96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
