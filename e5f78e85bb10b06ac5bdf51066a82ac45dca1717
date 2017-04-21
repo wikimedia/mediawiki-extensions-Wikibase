@@ -22,6 +22,30 @@
       "revId": "e5f78e85bb10b06ac5bdf51066a82ac45dca1717",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_ec743798",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2017-04-21T14:48:30Z",
+      "side": 1,
+      "message": "Yes, we should rename to wb.view.lexeme.ControllerViewFactory good idea!",
+      "parentUuid": "4e506ba4_412bb493",
+      "range": {
+        "startLine": 121,
+        "startChar": 25,
+        "endLine": 121,
+        "endChar": 41
+      },
+      "revId": "e5f78e85bb10b06ac5bdf51066a82ac45dca1717",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
