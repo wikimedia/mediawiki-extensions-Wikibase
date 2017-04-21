@@ -106,6 +106,24 @@
       "revId": "6a53fb7fae6cc7dc390158409305a104300ba96c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_7e49ad8f",
+        "filename": "repo/includes/Specials/SpecialAvailableBadges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-21T11:22:16Z",
+      "side": 1,
+      "message": "You say your goal is \"making a UI that is accessible for all people\" like this is something I disagree with. Did I created this impression? You stress \"not language/culture-centered\" like this patch would hard code an English string, and not the other way around. I honestly don\u0027t understand what the intention of such comments is.\n\nIt even appears you disagree with a localized message being better than a hard coded string, which leaves me puzzled.\n\nI do have a more and more massive problem with discussions like this blocking any incremental improvement. Even worse: we are not fixing an actual HTML injection because of this. \nI would love to find a way out of such utterly frustrating loops that does not involve self-merges.",
+      "parentUuid": "4e506ba4_9b8b6be8",
+      "revId": "6a53fb7fae6cc7dc390158409305a104300ba96c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
