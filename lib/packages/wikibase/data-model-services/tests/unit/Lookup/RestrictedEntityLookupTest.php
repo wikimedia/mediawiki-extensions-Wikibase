@@ -19,7 +19,7 @@ class RestrictedEntityLookupTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityLookup
 	 */
 	private function getEntityLookup() {
-		$entityLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' );
+		$entityLookup = $this->getMock( EntityLookup::class );
 
 		$entityLookup->expects( $this->any() )
 			->method( 'hasEntity' )
