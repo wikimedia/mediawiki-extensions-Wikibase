@@ -204,7 +204,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 
 		list( $output, ) = $this->executeSpecialPage( '', $request );
 
-		$this->assertRegExp( '/Supported formats are: json, nt, rdf, html/', $output, "output" );
+		$this->assertContains( 'Supported formats are: json, nt, rdf, html', $output, "output" );
 
 	}
 
