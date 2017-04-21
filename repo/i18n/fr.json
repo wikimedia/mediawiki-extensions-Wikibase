@@ -182,6 +182,8 @@
 	"wikibase-wikibaserepopage-invalid-id": "L’identifiant «&nbsp;$1&nbsp;» est inconnu du système. Veuillez utiliser un identifiant d’entité valide.",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 est une redirection.",
 	"wikibase-wikibaserepopage-storage-exception": "Une erreur s’est produite lors d’un essai de chargement de $1&nbsp;: $2.",
+	"special-availablebadges": "Insignes disponibles",
+	"wikibase-availablebadges-emptylist": "Il n’y a pas d’insignes configurés sur ce wiki.",
 	"special-itembytitle": "Élément par titre",
 	"wikibase-itembytitle-lookup-fieldset": "Rechercher des éléments par site et par titre",
 	"wikibase-itembytitle-lookup-site": "Site&nbsp;:&nbsp;",
