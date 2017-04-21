@@ -16,7 +16,6 @@ use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Tests\MockRepository;
-use Wikimedia\Purtle\BNodeLabeler;
 use Wikimedia\Purtle\NTriplesRdfWriter;
 
 /**
