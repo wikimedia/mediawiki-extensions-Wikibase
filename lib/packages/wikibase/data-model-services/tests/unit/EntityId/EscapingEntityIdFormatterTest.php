@@ -4,6 +4,7 @@ namespace Wikibase\DataModel\Services\Tests\EntityId;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\EntityId\EscapingEntityIdFormatter;
 
 /**
@@ -15,7 +16,7 @@ use Wikibase\DataModel\Services\EntityId\EscapingEntityIdFormatter;
 class EscapingEntityIdFormatterTest extends PHPUnit_Framework_TestCase {
 
 	public function testFormat() {
-		$entityIdFormatter = $this->getMock( 'Wikibase\DataModel\Services\EntityId\EntityIdFormatter' );
+		$entityIdFormatter = $this->getMock( EntityIdFormatter::class );
 		$entityIdFormatter->expects( $this->once() )
 			->method( 'formatEntityId' )
 			->will( $this->returnValue( 'Q1 is &%$;§ > Q2' ) );

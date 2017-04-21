@@ -42,7 +42,7 @@ class RedirectResolvingEntityLookupTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityLookup
 	 */
 	public function getLookupDouble() {
-		$mock = $this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' );
+		$mock = $this->getMock( EntityLookup::class );
 
 		$mock->expects( $this->any() )
 			->method( 'getEntity' )
