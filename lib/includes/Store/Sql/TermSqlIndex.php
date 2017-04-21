@@ -462,7 +462,18 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			$this->assertEntityIdFromRightRepository( $id );
 		}
 
-		return $this->fetchTerms( $entityIds, $termTypes, $languageCodes );
+		// Fetch up to 9 (as suggested by the DBA) terms each time: T163544
+		$entityIdBatches = array_chunk( $entityIds, 9 );
+		$terms = [];
+
+		foreach ( $entityIdBatches as $entityIdBatch ) {
+			$terms = array_merge(
+				$terms,
+				$this->fetchTerms( $entityIdBatch, $termTypes, $languageCodes )
+			);
+		}
+
+		return $terms;
 	}
 
 	/**
