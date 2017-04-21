@@ -220,7 +220,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	public function getEntityTerms( EntityDocument $entity ) {
 		$id = $entity->getId();
 		$this->assertEntityIdFromRightRepository( $id );
-		$this->assertIsNumericEntityId( $id );
 
 		$terms = [];
 
@@ -309,9 +308,9 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		//      That would allow us to do the deletion in a single query, based on a set of ids.
 
 		$this->assertIsNumericEntityId( $entityId );
+		/** @var EntityId|Int32EntityId $entityId */
 
 		$entityIdentifiers = array(
-			// FIXME: this will fail for IDs that do not have a numeric form
 			'term_entity_id' => $entityId->getNumericId(),
 			'term_entity_type' => $entityId->getEntityType()
 		);
@@ -395,13 +394,13 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	public function deleteTermsOfEntity( EntityId $entityId ) {
 		$this->assertEntityIdFromRightRepository( $entityId );
 		$this->assertIsNumericEntityId( $entityId );
+		/** @var EntityId|Int32EntityId $entityId */
 
 		$dbw = $this->getConnection( DB_MASTER );
 
 		$success = $dbw->delete(
 			$this->tableName,
 			array(
-				// FIXME: this will fail for IDs that do not have a numeric form
 				'term_entity_id' => $entityId->getNumericId(),
 				'term_entity_type' => $entityId->getEntityType()
 			),
@@ -478,11 +477,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		array $termTypes = null,
 		array $languageCodes = null
 	) {
-		if ( empty( $entityIds )
-			|| ( is_array( $termTypes ) && empty( $termTypes ) )
-			|| ( is_array( $languageCodes ) && empty( $languageCodes ) )
-		) {
-			return array();
+		if ( $entityIds === [] || $termTypes === [] || $languageCodes === [] ) {
+			return [];
 		}
 
 		$entityType = null;
@@ -496,8 +492,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			}
 
 			$this->assertIsNumericEntityId( $id );
-
-			// FIXME: this will fail for IDs that do not have a numeric form
+			/** @var Int32EntityId $id */
 			$numericIds[] = $id->getNumericId();
 		}
 
