@@ -38,11 +38,55 @@ entity.create = function( data )
 		error( 'mw.wikibase.entity must not be constructed using legacy data' )
 	end
 
-	local entity = data
+	local entity = logTableAccess(data)
 	setmetatable( entity, metatable )
 
 	return entity
 end
+
+-- Wrapper function to log access to claims of an entity
+-- Code for logging based on: http://www.lua.org/pil/13.4.4.html
+--
+-- @param {table} entity
+logTableAccess = function(entity)
+	if entity.claims == nil then
+		return entity
+	end
+	actualEntityClaims = entity['claims']
+	entity['claims'] = {}
+
+	pseudoClaimsMetatable = {}
+	pseudoClaimsMetatable.__index = function(emptyTable, propertyID)
+		-- Need entity id: Is it entity['id']?
+		-- If entry for entity and property does not already exist, write entity id and property id to DB, set flag if actualEntityClaims.propertyID is not nil. 
+		return actualEntityClaims[propertyID]
+	end
+
+	pseudoClaimsMetatable.__newindex = function(emptyTable, propertyID, data)
+		-- Need entity id: Is it entity['id']?
+		-- Write entity id and property id to DB. Also flag as user specified value.
+		actualEntityClaims[propertyID] = data
+	end
+
+	logNext = function(emptyTable, propertyID)
+		if propertyID ~= nil then
+			-- Need entity id: Is it entity['id']?
+			-- If entry for entity and property does not already exist, write entity id and property id to DB, set flag if actualEntityClaims.propertyID is not nil. 
+		end
+		return next(actualEntityClaims, propertyID)
+	end
+
+	pseudoClaimsMetatable.__pairs = function(emptyTable)
+		return logNext, {}, nil
+	end
+
+	setmetatable(entity['claims'], pseudoClaimsMetatable)
+	return entity
+end
+
+
+
+
 
 -- Get a term of a given type for a given language code or the content language (on monolingual wikis)
 -- or the user's language (on multilingual wikis).
