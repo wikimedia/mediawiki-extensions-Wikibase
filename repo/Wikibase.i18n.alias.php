@@ -116,6 +116,30 @@ $specialPageAliases['bxr'] = array(
 	'NewProperty' => array( 'Шэнэ_шэнжэ_шанар' ),
 );
 
+/** Bengali (বাংলা) */
+$specialPageAliases['bn'] = array(
+	'DispatchStats' => array( 'ডিসপ্যাচ_পরিসংখ্যান' ),
+	'EntitiesWithoutDescription' => array( 'বিবরণহীন_সত্তা' ),
+	'EntitiesWithoutLabel' => array( 'লেভেলহীন_সত্তা' ),
+	'EntityData' => array( 'সত্তার_উপাত্ত' ),
+	'GoToLinkedPage' => array( 'সংযুক্ত_পাতায়_যান' ),
+	'ItemByTitle' => array( 'শিরোনাম_অনুযায়ী_আইটেম' ),
+	'ItemDisambiguation' => array( 'আইটেম_দ্ব্যর্থতা_নিরসন' ),
+	'ItemsWithoutSitelinks' => array( 'সাইট_সংযোগহীন_আইটেম' ),
+	'ListDatatypes' => array( 'উপাত্তের_ধরনের_তালিকা' ),
+	'ListProperties' => array( 'বৈশিষ্ট্যের_তালিকা' ),
+	'MergeItems' => array( 'আইটেম_একত্রীকরণ', 'আইটেমসমূহ_একত্রীকরণ' ),
+	'MyLanguageFallbackChain' => array( 'আমার_ভাষার_পশ্চাদপসরণ_চেইন' ),
+	'NewItem' => array( 'নতুন_আইটেম', 'আইটেম_তৈরি' ),
+	'NewProperty' => array( 'নতুন_বৈশিষ্ট্য', 'বৈশিষ্ট্য_তৈরি' ),
+	'RedirectEntity' => array( 'সত্তা_পুনর্নির্দেশ', 'পুনর্নির্দেশ_সত্তা', 'আইটেম_পুনর্নির্দেশ', 'পুনর্নির্দেশ_আইটেম' ),
+	'SetAliases' => array( 'উপনাম_নির্ধারণ' ),
+	'SetDescription' => array( 'বিবরণ_নির্ধারণ' ),
+	'SetLabel' => array( 'লেভেল_নির্ধারণ' ),
+	'SetLabelDescriptionAliases' => array( 'লেভেল_বিবরণ_উপনাম_নির্ধারণ' ),
+	'SetSiteLink' => array( 'সাইট_সংযোগ_নির্ধারণ' ),
+);
+
 /** Min Dong Chinese (Mìng-dĕ̤ng-ngṳ̄) */
 $specialPageAliases['cdo'] = array(
 	'DispatchStats' => array( '特派統計' ),
