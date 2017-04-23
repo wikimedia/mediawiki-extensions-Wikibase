@@ -52,6 +52,8 @@
 	"wikibase-rc-show-wikidata-pref": "Näita viimastes muudatustes Vikiandmete muudatusi",
 	"wikibase-rc-wikibase-edit-letter": "A",
 	"wikibase-rc-wikibase-edit-title": "Vikiandmete muudatus",
+	"wikibase-rcfilters-hide-wikibase-label": "Vikiandmete muudatus",
+	"wikibase-rcfilters-hide-wikibase-description": "Muudatused, mis on tehtud Vikiandmetes.",
 	"wikibase-replicationnote": "Palun pane tähele, et võib kuluda mitu minutit, enne kui muudatused on kõigis vikides nähtavad.",
 	"wikibase-watchlist-show-changes-pref": "Näita jälgimisloendis Vikiandmete muudatusi",
 	"wikibase-error-deserialize-error": "Andmejadastuse tagasipööramine ebaõnnestus.",
@@ -84,5 +86,7 @@
 	"wikibase-property-render-error": "Omaduse $1 viimistlemine ebaõnnestus: $2",
 	"wikibase-otherprojects": "Teistes projektides",
 	"wikibase-otherprojects-beta-message": "Teiste projektide külgriba",
-	"wikibase-otherprojects-beta-description": "Lisab külgribale alaosa \"{{int:wikibase-otherprojects}}\", mis sisaldab Vikiandmetest pärit linke teistesse Wikimedia projektidesse."
+	"wikibase-otherprojects-beta-description": "Lisab külgribale alaosa \"{{int:wikibase-otherprojects}}\", mis sisaldab Vikiandmetest pärit linke teistesse Wikimedia projektidesse.",
+	"unresolved-property-category": "Lahendamata omadustega leheküljed",
+	"unresolved-property-category-desc": "Selles kategoorias on leheküljed, mis viitavad Vikiandmete omadusele, mida ei õnnestu leida ei omaduse identifikaatori ega sildi järgi."
 }

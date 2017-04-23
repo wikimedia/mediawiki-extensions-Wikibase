@@ -5,7 +5,8 @@
 			"TheStefan12345",
 			"Милан Јелисавчић",
 			"Rancher",
-			"Сербијана"
+			"Сербијана",
+			"Obsuser"
 		]
 	},
 	"wikibase-lib-desc": "Садржи заједничке функционалности за Викибазу и проширења за клијента Викибазе",
@@ -50,6 +51,7 @@
 	"datatypes-type-wikibase-item": "Ставка",
 	"datatypes-type-wikibase-property": "Својство",
 	"datatypes-type-commonsMedia": "Датотека са Оставе",
+	"datatypes-type-tabular-data": "Табеларни подаци",
 	"version-wikibase": "Викибаза",
 	"wikibase-time-precision-millennium": "$1. миленијум",
 	"wikibase-time-precision-century": "$1. век",

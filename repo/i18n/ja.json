@@ -17,7 +17,8 @@
 			"Higa4",
 			"ネイ",
 			"おはぐろ蜻蛉",
-			"Dgstranz"
+			"Dgstranz",
+			"Omotecho"
 		]
 	},
 	"wikibase-desc": "構造化データのリポジトリ",
@@ -267,7 +268,6 @@
 	"wikibase-entitieswithoutlabel-legend": "ラベルがない実体一覧の取得",
 	"wikibase-entitieswithoutlabel-label-language": "言語コード:",
 	"wikibase-entitieswithoutlabel-label-type": "種類:",
-	"wikibase-entitieswithoutlabel-label-alltypes": "すべて",
 	"wikibase-entitieswithoutlabel-submit": "検索",
 	"wikibase-entitieswithoutlabel-invalid-language": "「$1」は有効な言語コードではありません。",
 	"wikibase-entitieswithoutlabel-invalid-type": "「$1」は実体型として有効なものではありません。",
@@ -280,7 +280,7 @@
 	"wikibase-entitydata-unsupported-format": "このインターフェイスはデータ形式 $1 に対応していません。",
 	"wikibase-entitydata-storage-error": "エンティティ $1 を読み込めませんでした。",
 	"wikibase-entitydata-title": "実体のデータ",
-	"wikibase-entitydata-text": "このページではエンティティの値にリンクされたデータ インターフェイスを提供します。下位ページの構文を使用して、URL にエンティティ ID を指定してください。\n* コンテンツ ネゴシエーションは、あなたのクライアントのアクセプト ヘッダに基づき適用されます。これの意味するところは、実体データはクライアントによって好まれるフォーマットで提供されるという事です。ウェブブラウザでは、これはHTMLになるでしょう。原因として、お使いのブラウザが、正規の実体ページにリダイレクトされるため。\n* 適切なファイル拡張子を実体ID に追加することで、特定のデータフォーマットを明示的にリクエストできます: Q23.json は JSON フォーマットを返し、Q23.ttl RDF/Turtle を返します、など。",
+	"wikibase-entitydata-text": "このページではエンティティの値にリンクされたデータ インターフェイスを提供します。下位ページの構文を使用して、URL にエンティティ ID を指定してください。\n* コンテンツ ネゴシエーションは、あなたのクライアントのアクセプト ヘッダに基づき適用されます。これの意味するところは、実体データはクライアントによって好まれるフォーマットで提供されるという事です。ウェブブラウザでは、これはHTMLになるでしょう。原因として、お使いのブラウザが、正規の実体ページにリダイレクトされるため。\n* 適切なファイル拡張子を実体ID に追加することで、特定のデータフォーマットを明示的にリクエストできます: Q23.json は JSON フォーマットを返し、Q23.ttl RDF/Turtle を返します、など。サポートされるフォーマットは $1 です。",
 	"special-redirectentity": "エンティティをリダイレクト",
 	"wikibase-redirectentity-success": "$1 の $2 へのリダイレクトです。",
 	"wikibase-redirectentity-fromid": "リダイレクト元のID",

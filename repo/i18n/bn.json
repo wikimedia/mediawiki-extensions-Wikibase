@@ -119,6 +119,7 @@
 	"wikibase-wikibaserepopage-invalid-id": "সিস্টেমের কাছে আইডি \"$1\" অজানা। দয়া করে একটি বৈধ সত্তার আইডি ব্যবহার করুন।",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 একটি পুনর্নির্দেশ।",
 	"wikibase-wikibaserepopage-storage-exception": "$1 লোড করার চেষ্টা করার সময় একটি ত্রুটি ঘটেছে: $2",
+	"special-availablebadges": "উপলব্ধ ব্যাজ",
 	"special-itembytitle": "শিরোনাম অনুযায়ী আইটেম",
 	"wikibase-itembytitle-lookup-fieldset": "সাইট এবং শিরোনাম অনুযায়ী আইটেমের জন্য অনুসন্ধান",
 	"wikibase-itembytitle-lookup-site": "সাইট:",
