@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_d0345ef3",
+        "filename": "repo/includes/ChangeOp/Deserialization/ClaimsChangeOpDeserializer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-04-24T13:27:32Z",
+      "side": 1,
+      "message": "As I understood this call will produce error with text \"List of claims must be an array\" which is not the correct in this case.",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 39
+      },
+      "revId": "8291c843c6de16aea1f6f6730b4f50930f8b46d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_f02f1a9a",
+        "filename": "repo/includes/ChangeOp/Deserialization/ClaimsChangeOpDeserializer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-04-24T13:27:32Z",
+      "side": 1,
+      "message": "Why is it needed?",
+      "range": {
+        "startLine": 70,
+        "startChar": 2,
+        "endLine": 72,
+        "endChar": 3
+      },
+      "revId": "8291c843c6de16aea1f6f6730b4f50930f8b46d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
