@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_f012ba00",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-24T12:41:31Z",
+      "side": 1,
+      "message": "I think this should be lowercase if it is in brackets.",
+      "range": {
+        "startLine": 189,
+        "startChar": 42,
+        "endLine": 189,
+        "endChar": 43
+      },
+      "revId": "87a4030fc9ea9dbff17182cea1816a51cb6386f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
