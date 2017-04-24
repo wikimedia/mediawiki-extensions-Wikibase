@@ -523,9 +523,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 		$dbr = $this->getReadDb();
 
+		// Select all columns T162673
 		$res = $dbr->select(
 			$this->tableName,
-			[ 'term_entity_type', 'term_type', 'term_language', 'term_text', 'term_entity_id' ],
+			'*',
 			$conditions,
 			__METHOD__
 		);

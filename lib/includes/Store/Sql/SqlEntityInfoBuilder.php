@@ -389,10 +389,11 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$dbw = $this->getConnection( DB_REPLICA );
 
 		// Do one query per term type here, this is way faster on MySQL: T147748
+		// Select all columns for b/c T162673
 		foreach ( $termTypes as $termType ) {
 			$res = $dbw->select(
 				$this->termTable,
-				array( 'term_entity_type', 'term_entity_id', 'term_type', 'term_language', 'term_text' ),
+				'*',
 				array_merge( $where, $termType !== null ? [ 'term_type' => $termType ] : [] ),
 				__METHOD__
 			);
