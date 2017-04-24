@@ -307,15 +307,17 @@
 			throw new Error( 'Can not apply a template with more or less than one root node.' );
 		}
 
-		// Copy template's root node children and classes to given root:
-		this.addClass( $template.prop( 'class' ) );
+		var attributes = $template.getAttrs();
 
-		// Copy dir attribute if set:
-		if ( $template.prop( 'dir' ) !== '' ) {
-			this.prop( 'dir', $template.prop( 'dir' ) );
+		for ( var name in attributes ) {
+			if ( name === 'class' ) {
+				this.addClass( attributes[name] );
+			} else if ( attributes.hasOwnProperty( name ) ) {
+				this.attr( name, attributes[name] );
+			}
 		}
 
-		this.empty().append( $template.children() );
+		this.empty().append( $template.contents() );
 
 		return this;
 	};
