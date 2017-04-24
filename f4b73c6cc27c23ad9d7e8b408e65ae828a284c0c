@@ -16,6 +16,24 @@
       "revId": "f4b73c6cc27c23ad9d7e8b408e65ae828a284c0c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_7320f496",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-04-24T13:47:30Z",
+      "side": 1,
+      "message": "we can instead wrap the message in localized parenthesis:\nhttps://www.mediawiki.org/wiki/Localisation#Symbols.2C_colons.2C_brackets.2C_etc._are_parts_of_messages",
+      "parentUuid": "4e506ba4_f315e440",
+      "revId": "f4b73c6cc27c23ad9d7e8b408e65ae828a284c0c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
