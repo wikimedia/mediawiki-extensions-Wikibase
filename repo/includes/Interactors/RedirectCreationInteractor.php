@@ -255,7 +255,10 @@ class RedirectCreationInteractor {
 		if ( $bot ) {
 			$flags = $flags | EDIT_FORCE_BOT;
 		}
-		if ( $this->entityTitleLookup->getTitleForId( $redirect->getEntityId() )->isDeleted() ) {
+		$title = $this->entityTitleLookup->getTitleForId( $redirect->getEntityId() );
+
+		if ( !$title->exists() && $title->isDeletedQuick() ) {
+			// Allow creating new pages as redirects, but only if they existed before.
 			$flags = $flags | EDIT_NEW;
 		} else {
 			$flags = $flags | EDIT_UPDATE;
