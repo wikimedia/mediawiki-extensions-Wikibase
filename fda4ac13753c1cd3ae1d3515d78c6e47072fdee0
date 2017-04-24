@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_53ce1832",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-24T15:04:21Z",
+      "side": 1,
+      "message": "So I failed to dig deeper into the problem so far, but what I believe is causing the issues in tests is this line.\n\nItem entity type definition is loaded once WikibaseRepo is created. There must be some code somewhere, called before test related to this patch, that calls getSiteLookup on the \"default\" WikibaseRepo instance. Default instance than \"remembers\" the generic site lookup, and even if tests override the site lookup service, the \"default\" WikibaseRepo remembers the \"original\" lookup, and simply ignore the new service.\n\nI am not sure if this diagnosis makes any sense but this is how it occurred to me.",
+      "revId": "fda4ac13753c1cd3ae1d3515d78c6e47072fdee0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
