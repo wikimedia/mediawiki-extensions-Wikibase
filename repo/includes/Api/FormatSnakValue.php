@@ -15,10 +15,10 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\Lib\Formatters\TypedValueFormatter;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\TypedValueFormatter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
