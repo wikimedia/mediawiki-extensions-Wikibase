@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_0aa13991",
+        "filename": "view/tests/qunit/wikibase/templates.tests.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-24T08:58:58Z",
+      "side": 1,
+      "message": "I am a bit confused what is the tested behaviour here. Class attribute would also be copied (but added to existing classes, if any, not \"overriding\" them). So how about removing class from the test name/description, as it is kind of confusing to have it mentioned there, and then have no \"class\" in the actual test at all?\n\nAnd maybe there would be a need for test where there are \"class\" and some other attribute in the template, and the element the template is applied to already has a class attribute too. I am not sure if such a test is needed if there are two tests for the underlying behaviour.",
+      "revId": "cfaca2815119e56a47089ee0a2ccdb56e7cb0d1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
