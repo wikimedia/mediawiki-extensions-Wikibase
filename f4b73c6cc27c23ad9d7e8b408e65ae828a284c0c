@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_f315e440",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-04-24T13:46:12Z",
+      "side": 1,
+      "message": "not sure the parenthesis should be part of the i18n message.",
+      "revId": "f4b73c6cc27c23ad9d7e8b408e65ae828a284c0c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
