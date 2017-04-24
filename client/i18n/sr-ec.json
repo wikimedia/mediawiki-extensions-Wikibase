@@ -6,7 +6,8 @@
 			"Rancher",
 			"Милан Јелисавчић",
 			"Srdjan m",
-			"Сербијана"
+			"Сербијана",
+			"Obsuser"
 		]
 	},
 	"wikibase-client-desc": "Клијент за проширење Викибаза",
@@ -50,6 +51,15 @@
 	"wikibase-rc-show-wikidata-pref": "Прикажи измене на Википодацима у скорашњим изменама",
 	"wikibase-rc-wikibase-edit-letter": "д",
 	"wikibase-rc-wikibase-edit-title": "Измена на Википодацима",
+	"wikibase-rcfilters-hide-wikibase-label": "Измене на {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-description": "Измене које потичу са {{WBREPONAME}}.",
+	"wikibase-rcfilters-hide-wikibase-conflicts-ores": "Овај филтер је у сукобу са једним или више филтера за Квалитет доприноса или Намеру корисника. Предвиђања квалитета или намерет нису доступна за измене {{WBREPONAME}}.",
+	"wikibase-rcfilters-hide-wikibase-conflicts-ores-global": "Филтер „{{WBREPONAME}} edits” је у сукобу са једним или више филтера за Квалитет доприноса или Намеру корисника. Предвиђања квалитета и намере нису доступна за измене {{WBREPONAME}}. Сукобљени филтери су означени у подручју Активни филтери, изнад.",
+	"wikibase-rcfilters-damaging-conflicts-hide-wikibase": "Предвиђања квалитета доприноса нису доступна за одређене типове измена, тако да је овај филтер у сукобу са следећим {{PLURAL:$2|филтером|филтерима}} типа измене: $1",
+	"wikibase-rcfilters-goodfaith-conflicts-hide-wikibase": "Предвиђања намере корисника нису доступна за одређене типове измена, тако да је овај филтер у сукобу са следећим {{PLURAL:$2|филтером|филтерима}} типа промене: $1",
+	"wikibase-rcfilters-hide-wikibase-conflicts-major-global": "Све {{WBREPONAME}} измене су означене као „мање”, тако да је „{{WBREPONAME}} edits” филтер у сукобу са филтером „Non-minor edits”.",
+	"wikibase-rcfilters-major-conflicts-hide-wikibase": "Све {{WBREPONAME}} измене су означене као „мање”, тако да је „{{WBREPONAME}} edits” филтер у сукобу са филтером „Non-minor edits”.",
+	"wikibase-rcfilters-hide-wikibase-conflicts-major": "Све {{WBREPONAME}} измене су означене као „мање”, тако да је „{{WBREPONAME}} edits” филтер у сукобу са филтером „Non-minor edits”.",
 	"wikibase-replicationnote": "Имајте на уму да је потребно и до неколико минута да промене постану видљиве на свим викијима.",
 	"wikibase-watchlist-show-changes-pref": "Прикажи измене на Википодацима у списку надгледања",
 	"wikibase-error-serialize-error": "Неуспешна серијализација података",

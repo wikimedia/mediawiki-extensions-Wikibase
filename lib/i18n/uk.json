@@ -82,6 +82,7 @@
 	"datatypes-type-wikibase-property": "Властивість",
 	"datatypes-type-commonsMedia": "Медіафайл з Вікісховища",
 	"datatypes-type-geo-shape": "Географічна форма",
+	"datatypes-type-tabular-data": "Табличні дані",
 	"datatypes-type-external-id": "Зовнішній ідентифікатор",
 	"version-wikibase": "Вікібаза",
 	"wikibase-time-precision-Gannum": "$1 мільярд{{PLURAL:$1||ів|и}} років н.е.",

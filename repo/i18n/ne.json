@@ -4,7 +4,8 @@
 			"बिप्लब आनन्द",
 			"Nirjal stha",
 			"NehalDaveND",
-			"राम प्रसाद जोशी"
+			"राम प्रसाद जोशी",
+			"सरोज कुमार ढकाल"
 		]
 	},
 	"wikibase-entity-property": "गुणधर्म",
@@ -18,7 +19,7 @@
 	"wikibase-remove-inprogress": "हटाउँदै...",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "अरु भाषामा",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "कन्फिगर",
-	"wikibase-entitytermsforlanguagelistview-aliases": "पनि ज्ञात",
+	"wikibase-entitytermsforlanguagelistview-aliases": "यस नामले पनि चिनिन्छ",
 	"wikibase-entitytermsforlanguagelistview-description": "विवरण",
 	"wikibase-entitytermsforlanguagelistview-label": "नामपत्र",
 	"wikibase-entitytermsforlanguagelistview-language": "भाषा",
@@ -69,7 +70,6 @@
 	"wikibase-dispatchstats-lag-time": "विलम्ब",
 	"wikibase-listproperties-submit": "खोज्ने",
 	"wikibase-entitieswithoutlabel-label-type": "प्रकार:",
-	"wikibase-entitieswithoutlabel-label-alltypes": "सबै",
 	"wikibase-entitieswithoutlabel-submit": "खोज्ने",
 	"wikibase-restoreold": "पूर्वावस्थामा ल्याउनुहोस्",
 	"wikibase-listdatatypes-wikibase-property-head": "गुणधर्म",
