@@ -16,6 +16,24 @@
       "revId": "cfaca2815119e56a47089ee0a2ccdb56e7cb0d1a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_ea208df4",
+        "filename": "view/tests/qunit/wikibase/templates.tests.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-24T09:25:35Z",
+      "side": 1,
+      "message": "I removed the \"except class\", because there is no assertion or anything working with the class attribute in this test case.\n\nI may have misunderstood you, but I think what you are asking for is already here, in the test case directly above this one.",
+      "parentUuid": "4e506ba4_0aa13991",
+      "revId": "cfaca2815119e56a47089ee0a2ccdb56e7cb0d1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
