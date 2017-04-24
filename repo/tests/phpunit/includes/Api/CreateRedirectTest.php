@@ -108,10 +108,12 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 	/**
 	 * @param array $params
 	 * @param User|null $user
+	 * @param RedirectCreationInteractor|null $interactor RedirectCreationInteractor to use, mock interactor
+	 * will be used if null provided.
 	 *
 	 * @return CreateRedirect
 	 */
-	private function newApiModule( array $params, User $user = null ) {
+	private function newApiModule( array $params, User $user = null, RedirectCreationInteractor $interactor = null ) {
 		if ( !$user ) {
 			$user = $GLOBALS['wgUser'];
 		}
@@ -130,12 +132,8 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest() );
 
-		return new CreateRedirect(
-			$main,
-			'wbcreateredirect',
-			new BasicEntityIdParser(),
-			$errorReporter,
-			new RedirectCreationInteractor(
+		if ( $interactor === null ) {
+			$interactor = new RedirectCreationInteractor(
 				$this->mockRepository,
 				$this->mockRepository,
 				$this->getPermissionCheckers(),
@@ -144,7 +142,15 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 				$this->getMockEditFilterHookRunner(),
 				$this->mockRepository,
 				$this->getMockEntityTitleLookup()
-			)
+			);
+		}
+
+		return new CreateRedirect(
+			$main,
+			'wbcreateredirect',
+			new BasicEntityIdParser(),
+			$errorReporter,
+			$interactor
 		);
 	}
 
@@ -236,6 +242,87 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 		} catch ( ApiUsageException $ex ) {
 			$this->assertEquals( $expectedCode, $ex->getCodeString() );
 		}
+	}
+
+	public function testGivenSourceHasDeletedRevisionsButExists_sourcePageIsUpdatedAsRedirect() {
+		global $wgUser;
+
+		$sourceId = new ItemId( 'Q11' );
+		$sourceItem = new Item( $sourceId );
+		$targetId = new ItemId( 'Q12' );
+		$targetItem = new Item( $targetId );
+
+		$params = array( 'from' => $sourceId->getSerialization(), 'to' => $targetId->getSerialization() );
+
+		$params['token'] = $wgUser->getToken();
+
+		$request = new FauxRequest( $params, true );
+
+		$main = new ApiMain( $request, true );
+		$main->getContext()->setUser( $wgUser );
+
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$interactor = $wikibaseRepo->newRedirectCreationInteractor( $wgUser, $main->getContext() );
+		$store = $wikibaseRepo->getEntityStore();
+
+		$store->saveEntity( $sourceItem, 'Created the source item', $wgUser );
+		$store->deleteEntity( $sourceId, 'test reason', $wgUser );
+		$store->saveEntity( $sourceItem, 'Recreated the source item', $wgUser );
+
+		$store->saveEntity( $targetItem, 'Created the target item', $wgUser );
+
+		$module = $this->newApiModule( $params, $wgUser, $interactor );
+
+		$module->execute();
+		$result = $module->getResult();
+
+		$resultData = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
+
+		$this->assertSuccess( $resultData );
+	}
+
+	public function testGivenSourceHasDeletedRevisionsAndDoesNotExist_sourcePageIsCreatedAsRedirect() {
+		global $wgUser;
+
+		$sourceId = new ItemId( 'Q11' );
+		$sourceItem = new Item( $sourceId );
+		$targetId = new ItemId( 'Q12' );
+		$targetItem = new Item( $targetId );
+
+		$params = array( 'from' => $sourceId->getSerialization(), 'to' => $targetId->getSerialization() );
+
+		$params['token'] = $wgUser->getToken();
+
+		$request = new FauxRequest( $params, true );
+
+		$main = new ApiMain( $request, true );
+		$main->getContext()->setUser( $wgUser );
+
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$interactor = $wikibaseRepo->newRedirectCreationInteractor( $wgUser, $main->getContext() );
+		$store = $wikibaseRepo->getEntityStore();
+
+		$store->saveEntity( $sourceItem, 'Created the source item', $wgUser );
+		$store->deleteEntity( $sourceId, 'test reason', $wgUser );
+
+		$store->saveEntity( $targetItem, 'Created the target item', $wgUser );
+
+		$module = $this->newApiModule( $params, $wgUser, $interactor );
+
+		$module->execute();
+		$result = $module->getResult();
+
+		$resultData = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
+
+		$this->assertSuccess( $resultData );
 	}
 
 	public function testSetRedirect_noPermission() {
