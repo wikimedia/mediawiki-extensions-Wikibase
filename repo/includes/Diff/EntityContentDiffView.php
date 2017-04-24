@@ -195,6 +195,9 @@ class EntityContentDiffView extends DifferenceEngine {
 		if ( ( $old instanceof EntityContent ) && ( $new instanceof EntityContent ) ) {
 			$diff = $old->getDiff( $new );
 			return $this->diffVisualizer->visualizeEntityContentDiff( $diff );
+		} elseif ( ( $old instanceof EntityContent ) !== ( $new instanceof EntityContent ) ) {
+			$this->getOutput()->showErrorPage( 'errorpagetitle', 'wikibase-non-entity-diff' );
+			return '';
 		}
 
 		return parent::generateContentDiffBody( $old, $new );
