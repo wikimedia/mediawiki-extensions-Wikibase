@@ -38,7 +38,8 @@ $report: A closure that can be called with a string to report that messages.
 
 'WikibaseChangeNotification': triggered from ChangeNotifier via a HookChangeTransmitter
 to notify any listeners of changes to entities.
-$change: the Change object representing the change
+$change: The Change object representing the change.
+  For performance reasons, does not include statement, description and alias diffs (see T113468, T163465).
 
 
 == Client ==
