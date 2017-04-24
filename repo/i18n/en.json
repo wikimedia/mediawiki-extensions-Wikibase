@@ -366,6 +366,7 @@
 	"wikibase-restoreold": "restore",
 	"wikibase-entity-summary-restore": "Restore revision $3 by [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "Undo revision $3 by [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|talk]])",
+	"wikibase-non-entity-diff": "Can not diff an entity with a non-entity content.",
 	"wikibase-no-direct-editing": "Direct editing is disabled in namespace $1",
 	"wikibase-noentity": "This entity does not exist. You can [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} search the related logs] to find out where it went.",
 	"wikibase-noentity-createone": "You can also [[$1|create a new one]].",
