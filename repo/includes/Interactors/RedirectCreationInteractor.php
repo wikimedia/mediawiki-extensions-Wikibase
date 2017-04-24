@@ -255,7 +255,7 @@ class RedirectCreationInteractor {
 		if ( $bot ) {
 			$flags = $flags | EDIT_FORCE_BOT;
 		}
-		if ( $this->entityTitleLookup->getTitleForId( $redirect->getEntityId() )->isDeleted() ) {
+		if ( !$this->entityTitleLookup->getTitleForId( $redirect->getEntityId() )->exists() ) {
 			$flags = $flags | EDIT_NEW;
 		} else {
 			$flags = $flags | EDIT_UPDATE;
