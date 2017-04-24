@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4e506ba4_33610cd1",
+        "filename": "repo/includes/ChangeOp/Deserialization/ClaimsChangeOpDeserializer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-24T14:10:10Z",
+      "side": 1,
+      "message": "I\u0027m aware of what this method throws. $subClaims is expected to be a list of claims.",
+      "parentUuid": "4e506ba4_d0345ef3",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 39
+      },
+      "revId": "8291c843c6de16aea1f6f6730b4f50930f8b46d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e506ba4_f02f1a9a",
         "filename": "repo/includes/ChangeOp/Deserialization/ClaimsChangeOpDeserializer.php",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-04-24T13:27:32Z",
       "side": 1,
       "message": "Why is it needed?",
+      "range": {
+        "startLine": 70,
+        "startChar": 2,
+        "endLine": 72,
+        "endChar": 3
+      },
+      "revId": "8291c843c6de16aea1f6f6730b4f50930f8b46d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_93a020f3",
+        "filename": "repo/includes/ChangeOp/Deserialization/ClaimsChangeOpDeserializer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-24T14:10:10Z",
+      "side": 1,
+      "message": "Is this really meant as a question, or more a \"this is not needed, why did you put this here\"? In any case: I already explained this in the commit message. What are you missing?",
+      "parentUuid": "4e506ba4_f02f1a9a",
       "range": {
         "startLine": 70,
         "startChar": 2,
