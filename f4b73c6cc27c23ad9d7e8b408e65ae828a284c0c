@@ -34,6 +34,24 @@
       "revId": "f4b73c6cc27c23ad9d7e8b408e65ae828a284c0c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_73ad54e6",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-24T14:09:57Z",
+      "side": 1,
+      "message": "I think the parenthesis should be in the message. This gives translators more control. The semantics and conventions of parenthesis may differ; there may be a better way to convey the fact that this isn\u0027t an actual data type.",
+      "parentUuid": "4e506ba4_7320f496",
+      "revId": "f4b73c6cc27c23ad9d7e8b408e65ae828a284c0c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
