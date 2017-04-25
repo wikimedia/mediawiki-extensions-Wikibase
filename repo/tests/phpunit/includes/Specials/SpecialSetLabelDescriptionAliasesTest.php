@@ -8,6 +8,7 @@ use Status;
 use ValueValidators\Result;
 use WebRequest;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
+use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -18,9 +19,11 @@ use Wikibase\EditEntityFactory;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\Specials\SpecialPageCopyrightView;
 use Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\Validators\UniquenessViolation;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases
@@ -55,14 +58,17 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	 * @return SpecialSetLabelDescriptionAliases
 	 */
 	protected function newSpecialPage() {
-		$page = new SpecialSetLabelDescriptionAliases();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$page->setServices(
+		$copyrightView = new SpecialPageCopyrightView( new CopyrightMessageBuilder(), '', '' );
+
+		return new SpecialSetLabelDescriptionAliases(
+			$this->getFingerprintChangeOpsFactory(),
+			new StaticContentLanguages( self::$languageCodes ),
+			$copyrightView,
 			$this->getSummaryFormatter(),
 			$this->getEntityRevisionLookup(),
 			$this->getEntityTitleLookup(),
-			$this->getFingerprintChangeOpsFactory(),
-			new StaticContentLanguages( self::$languageCodes ),
 			new EditEntityFactory(
 				$this->getEntityTitleLookup(),
 				$this->getEntityRevisionLookup(),
@@ -73,8 +79,6 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				$this->getMockEditFitlerHookRunner()
 			)
 		);
-
-		return $page;
 	}
 
 	/**
