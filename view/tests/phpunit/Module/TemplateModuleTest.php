@@ -59,8 +59,7 @@ class TemplateModuleTest extends PHPUnit_Framework_TestCase {
 		$context = $this->getMockBuilder( ResourceLoaderContext::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$context->expects( $this->any() )
-			->method( 'getLanguage' )
+		$context->method( 'getLanguage' )
 			->will( $this->returnValue( 'en' ) );
 
 		return $context;

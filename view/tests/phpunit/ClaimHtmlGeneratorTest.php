@@ -40,8 +40,7 @@ class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$snakHtmlGenerator->expects( $this->any() )
-			->method( 'getSnakHtml' )
+		$snakHtmlGenerator->method( 'getSnakHtml' )
 			->will( $this->returnValue( 'SNAK HTML' ) );
 
 		return $snakHtmlGenerator;

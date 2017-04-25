@@ -156,8 +156,7 @@ class StatementGroupListViewTest extends PHPUnit_Framework_TestCase {
 	private function getPropertyOrderProvider() {
 		$propertyOrderProvider = $this->getMock( PropertyOrderProvider::class );
 
-		$propertyOrderProvider->expects( $this->any() )
-			->method( 'getPropertyOrder' )
+		$propertyOrderProvider->method( 'getPropertyOrder' )
 			->will( $this->returnValue( [
 				'P101' => 0,
 				'P102' => 1,
@@ -175,8 +174,7 @@ class StatementGroupListViewTest extends PHPUnit_Framework_TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$claimHtmlGenerator->expects( $this->any() )
-			->method( 'getHtmlForClaim' )
+		$claimHtmlGenerator->method( 'getHtmlForClaim' )
 			->will( $this->returnCallback( function( Statement $statement, $editSectionHtml = null ) {
 				return $statement->getGuid() . "\n";
 			} ) );
@@ -190,8 +188,7 @@ class StatementGroupListViewTest extends PHPUnit_Framework_TestCase {
 	private function getEntityIdFormatter() {
 		$entityIdFormatter = $this->getMock( EntityIdFormatter::class );
 
-		$entityIdFormatter->expects( $this->any() )
-			->method( 'formatEntityId' )
+		$entityIdFormatter->method( 'formatEntityId' )
 			->will( $this->returnValue( '<ID>' ) );
 
 		return $entityIdFormatter;
