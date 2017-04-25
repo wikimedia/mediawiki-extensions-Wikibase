@@ -214,7 +214,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTest {
 					SpecialNewProperty::FIELD_LABEL => 'empty datatype label',
 					SpecialNewProperty::FIELD_DESCRIPTION => 'desc',
 					SpecialNewProperty::FIELD_ALIASES => 'a1|a2',
-					SpecialNewProperty::FIELD_DATATYPE => ' ',
+					SpecialNewProperty::FIELD_DATATYPE => '',
 				],
 				'Invalid data type specified',
 			],

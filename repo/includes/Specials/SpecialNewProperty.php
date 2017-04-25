@@ -125,9 +125,6 @@ class SpecialNewProperty extends SpecialNewEntity {
 			'options' => array_merge( $options, $selector->getOptionsArray() ),
 			'id' => 'wb-newproperty-datatype',
 			'validation-callback' => function ( $dataType, $formData, $form ) {
-				if ( $dataType === '' ) {
-					return false;
-				}
 				if ( !$this->dataTypeExists( $dataType ) ) {
 					return [ $this->msg( 'wikibase-newproperty-invalid-datatype' )->text() ];
 				}
