@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_20ce8931",
+        "filename": "repo/includes/Specials/SpecialModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-04-25T16:31:08Z",
+      "side": 0,
+      "message": "This @todo is now gone. Is it still relevant? Should I add it to SpecialWikibaseRepoPage::getCopyrightText()?",
+      "revId": "0792c82b205eb00c9b943a73d8c5c33e94b2c004",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
