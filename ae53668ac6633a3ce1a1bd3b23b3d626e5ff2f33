@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_40fb95de",
+        "filename": "repo/includes/Specials/SpecialModifyEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-25T15:45:02Z",
+      "side": 1,
+      "message": "Injecting a SettingsArray should be avoided. Better inject the individual settings. If the settings have sane defaults, you can use a setter instead of constructor arguments.\n\nAlso, is this even needed? Can\u0027t we just use a SpecialPageCopyrightView?",
+      "revId": "ae53668ac6633a3ce1a1bd3b23b3d626e5ff2f33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
