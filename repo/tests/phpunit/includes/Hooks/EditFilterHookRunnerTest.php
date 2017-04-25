@@ -9,6 +9,7 @@ use RequestContext;
 use Status;
 use Title;
 use User;
+use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -57,11 +58,11 @@ class EditFilterHookRunnerTest extends \MediaWikiTestCase {
 		$entityContentFactory->expects( $this->any() )
 			->method( 'newFromEntity' )
 			->with( $this->isInstanceOf( EntityDocument::class ) )
-			->will( $this->returnValue( ItemContent::newEmpty() ) );
+			->will( $this->returnValue( new ItemContent( new EntityInstanceHolder( new Item() ) ) ) );
 		$entityContentFactory->expects( $this->any() )
 			->method( 'newFromRedirect' )
 			->with( $this->isInstanceOf( EntityRedirect::class ) )
-			->will( $this->returnValue( ItemContent::newEmpty() ) );
+			->will( $this->returnValue( new ItemContent( new EntityInstanceHolder( new Item() ) ) ) );
 
 		return new EditFilterHookRunner(
 			$namespaceLookup,
@@ -168,7 +169,7 @@ class EditFilterHookRunnerTest extends \MediaWikiTestCase {
 				$this->assertEquals( $expected['title'], $context->getTitle()->getFullText() );
 				$this->assertSame( $context->getTitle(), $context->getWikiPage()->getTitle() );
 				$this->assertEquals( $expected['namespace'], $context->getTitle()->getNamespace() );
-				$this->assertEquals( ItemContent::newEmpty(), $content );
+				$this->assertEquals( new ItemContent( new EntityInstanceHolder( new Item() ) ), $content );
 				$this->assertTrue( $status->isGood() );
 				$this->assertTrue( is_string( $summary ) );
 				$this->assertEquals( 'EditFilterHookRunnerTestUser', $user->getName() );

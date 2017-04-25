@@ -66,7 +66,7 @@ class ItemContentTest extends EntityContentTest {
 	 * @return ItemContent
 	 */
 	protected function newEmpty( EntityId $itemId = null ) {
-		$empty = ItemContent::newEmpty();
+		$empty = new ItemContent( new EntityInstanceHolder( new Item() ) );
 
 		if ( $itemId !== null ) {
 			$empty->getItem()->setId( $itemId );

@@ -147,13 +147,6 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
-	 * @return self
-	 */
-	public static function newEmpty() {
-		return new static( new EntityInstanceHolder( new Item() ) );
-	}
-
-	/**
 	 * @see EntityContent::getEntity
 	 *
 	 * @throws MWException when it's a redirect (targets will never be resolved)

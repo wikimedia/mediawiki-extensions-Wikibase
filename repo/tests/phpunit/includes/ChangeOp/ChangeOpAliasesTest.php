@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpAliases;
 use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\ItemContent;
@@ -55,7 +56,7 @@ class ChangeOpAliasesTest extends \PHPUnit_Framework_TestCase {
 
 		$enAliases = array( 'en-alias1', 'en-alias2', 'en-alias3' );
 		$existingEnAliases = array( 'en-existingAlias1', 'en-existingAlias2' );
-		$itemContent = ItemContent::newEmpty();
+		$itemContent = new ItemContent( new EntityInstanceHolder( new Item() ) );
 		$item = $itemContent->getEntity();
 		$item->setAliases( 'en', $existingEnAliases );
 
