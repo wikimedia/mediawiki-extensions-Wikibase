@@ -38,6 +38,7 @@
 	"datatypes-type-wikibase-item": "Ieraksts",
 	"datatypes-type-wikibase-property": "Īpašība",
 	"datatypes-type-commonsMedia": "Commons multivides fails",
+	"datatypes-type-tabular-data": "Tabulāri dati",
 	"datatypes-type-external-id": "Ārējais identifikators",
 	"wikibase-time-precision-millennium": "$1. tūkstošgade",
 	"wikibase-time-precision-century": "$1. gadsimts",

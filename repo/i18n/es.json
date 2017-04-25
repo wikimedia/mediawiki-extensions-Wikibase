@@ -34,7 +34,8 @@
 			"AlvaroMolina",
 			"Lemondoge",
 			"Rubentl134",
-			"Dgstranz"
+			"Dgstranz",
+			"Luzcaru"
 		]
 	},
 	"wikibase-desc": "Repositorio de datos estructurados",
@@ -149,6 +150,8 @@
 	"wikibase-validator-label-with-description-conflict": "El elemento $3 ya tiene la etiqueta \"$1\" asociada con el código de idioma $2, usando el mismo texto de descripción.",
 	"wikibase-validator-label-no-entityid": "La etiqueta no debe ser un identificador de entidad válido.",
 	"wikibase-validator-illegal-file-chars": "Los nombres de archivo no pueden contener caracteres como dos puntos o barras. Por favor, pega solo el nombre del archivo que va después de «File:».",
+	"wikibase-validator-illegal-geo-shape-title": "El valor debe comenzar <code>Data:</code> y terminar con <code>.map</ code>. Además, el título no debe contener caracteres especiales como coma, barra inclinada o vertical.",
+	"wikibase-validator-illegal-tabular-data-title": "El valor debe comenzar con <code>Data:</code> y terminar con <code>.map</code>. Además, el título no debe contener caracteres especiales como coma, barra inclinada ó vertical.",
 	"wikibase-validator-no-such-media": "El archivo \"$1\" no existe en [https://commons.wikimedia.org/ Wikimedia Commons].",
 	"wikibase-validator-page-not-exists": "La página «$1» no existe.",
 	"wikibase-validator-not-a-language": "«$1» no es un código de idioma conocido.",
@@ -197,6 +200,7 @@
 	"wikibase-newproperty-datatype": "Tipo de dato:",
 	"wikibase-newproperty-invalid-datatype": "El tipo de datos especificado no es válido.",
 	"wikibase-newproperty-insufficient-data": "Necesitas indicar al menos la etiqueta, la descripción o los alias.",
+	"wikibase-newproperty-pick-data-type": "(elegir un tipo de datos)",
 	"wikibase-description-helppage": "Help:Descripción",
 	"wikibase-label-helppage": "Help:Etiqueta",
 	"special-newitem": "Crear un elemento nuevo",
@@ -312,7 +316,7 @@
 	"wikibase-entitydata-unsupported-format": "El formato de datos $1 no es compatible con esta interfaz.",
 	"wikibase-entitydata-storage-error": "No se pudo cargar la entidad $1.",
 	"wikibase-entitydata-title": "Datos de la entidad",
-	"wikibase-entitydata-text": "Esta página proporciona una interfaz de datos enlazados con valores de entidades. Proporciona el identificador de la entidad en el URL mediante la sintaxis de subpáginas.\n* Se aplicará la negociación de contenidos según la cabecera «Accept» de tu cliente. En otras palabras, los datos de la entidad se proporcionarán en el formato que tu cliente prefiera. Para un navegador web, este será HTML, que provocará que el navegador se redirija a la página normal de la entidad.\n* Es posible solicitar explícitamente un formato de datos específico si añades la extensión de archivo apropiada al identificador de entidad: «Q23.json» devolverá los datos en el formato JSON, «Q23.ttl» lo hará en RDF/Turtle, etcétera.",
+	"wikibase-entitydata-text": "Esta página proporciona una interfaz de datos vinculada a los valores de entidad. Proporcione el ID de la entidad en la URL, utilizando la sintaxis de la subpágina.\n* La negociación de contenido se aplica en función del encabezado de Aceptación del cliente. Esto significa que los datos de la entidad serán proporcionados en el formato preferido por su cliente. Para un navegador web, esto será HTML, haciendo que su navegador sea redirigido a la página regular de la entidad.\n* Puede solicitar explícitamente un formato de datos específico agregando la extensión de archivo apropiada al ID de entidad: Q23.json retornará datos en el formato JSON, Q23.ttl retornará RDF/Turtle, y así sucesivamente. Los formatos admitidos son: $1.",
 	"special-entitypage": "Página de entidad",
 	"wikibase-entitypage-title": "Página de entidad",
 	"wikibase-entitypage-bad-id": "Identificador no válido: $1.",
@@ -335,6 +339,7 @@
 	"wikibase-restoreold": "restaurar",
 	"wikibase-entity-summary-restore": "Se restauró la revisión $3 de [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "Se ha deshecho la revisión $3 de [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|disc.]])",
+	"wikibase-non-entity-diff": "No se puede comparar una entidad con un contenido distinto de la entidad.",
 	"wikibase-no-direct-editing": "La edición directa está desactivada en el espacio de nombres $1",
 	"wikibase-noentity": "Esta entidad no existe. Puedes [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} buscar en los registros relacionados] para encontrarla.",
 	"wikibase-noentity-createone": "También puedes [[$1|crear una nueva]].",
