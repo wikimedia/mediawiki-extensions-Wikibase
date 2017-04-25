@@ -5,7 +5,12 @@ namespace Wikibase\Repo\Specials;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\AliasesProvider;
+use Wikibase\EditEntityFactory;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\SettingsArray;
 use Wikibase\Summary;
+use Wikibase\SummaryFormatter;
 
 /**
  * Special page for setting the aliases of a Wikibase entity.
@@ -15,8 +20,29 @@ use Wikibase\Summary;
  */
 class SpecialSetAliases extends SpecialModifyTerm {
 
-	public function __construct() {
-		parent::__construct( 'SetAliases' );
+	/**
+	 * @param SettingsArray $settings
+	 * @param SummaryFormatter $summaryFormatter
+	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EditEntityFactory $editEntityFactory
+	 */
+	public function __construct(
+		SettingsArray $settings,
+		SummaryFormatter $summaryFormatter,
+		EntityRevisionLookup $entityRevisionLookup,
+		EntityTitleLookup $entityTitleLookup,
+		EditEntityFactory $editEntityFactory
+	) {
+		parent::__construct(
+			'SetAliases',
+			'edit',
+			$settings,
+			$summaryFormatter,
+			$entityRevisionLookup,
+			$entityTitleLookup,
+			$editEntityFactory
+		);
 	}
 
 	public function doesWrites() {

@@ -77,7 +77,12 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 			$settings->getSetting( 'siteLinkGroups' ),
 			$settings->getSetting( 'badgeItems' ),
 			$labelDescriptionLookupFactory,
-			$siteLinkChangeOpFactory
+			$siteLinkChangeOpFactory,
+			$settings,
+			$wikibaseRepo->getSummaryFormatter(),
+			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->newEditEntityFactory()
 		);
 	}
 

@@ -13,9 +13,14 @@ use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\EditEntityFactory;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\SiteLinkTargetProvider;
+use Wikibase\SettingsArray;
 use Wikibase\Summary;
+use Wikibase\SummaryFormatter;
 
 /**
  * Special page for setting the sitepage of a Wikibase entity.
@@ -83,6 +88,11 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @param string[] $badgeItems
 	 * @param LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param SiteLinkChangeOpFactory $siteLinkChangeOpFactory
+	 * @param SettingsArray $settings
+	 * @param SummaryFormatter $summaryFormatter
+	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EditEntityFactory $editEntityFactory
 	 */
 	public function __construct(
 		SiteLookup $siteLookup,
@@ -90,9 +100,22 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		array $siteLinkGroups,
 		array $badgeItems,
 		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
-		SiteLinkChangeOpFactory $siteLinkChangeOpFactory
+		SiteLinkChangeOpFactory $siteLinkChangeOpFactory,
+		SettingsArray $settings,
+		SummaryFormatter $summaryFormatter,
+		EntityRevisionLookup $entityRevisionLookup,
+		EntityTitleLookup $entityTitleLookup,
+		EditEntityFactory $editEntityFactory
 	) {
-		parent::__construct( 'SetSiteLink' );
+		parent::__construct(
+			'SetSiteLink',
+			'edit',
+			$settings,
+			$summaryFormatter,
+			$entityRevisionLookup,
+			$entityTitleLookup,
+			$editEntityFactory
+		);
 
 		$this->siteLookup = $siteLookup;
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;

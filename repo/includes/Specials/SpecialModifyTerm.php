@@ -10,9 +10,14 @@ use PermissionsError;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\EditEntityFactory;
 use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\SettingsArray;
 use Wikibase\Summary;
+use Wikibase\SummaryFormatter;
 
 /**
  * Abstract special page for setting a value of a Wikibase entity.
@@ -49,10 +54,31 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 
 	/**
 	 * @param string $title The title of the special page
-	 * @param string $restriction The required user right, 'edit' per default.
+	 * @param string $restriction The required user right
+	 * @param SettingsArray $settings
+	 * @param SummaryFormatter $summaryFormatter
+	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EditEntityFactory $editEntityFactory
 	 */
-	public function __construct( $title, $restriction = 'edit' ) {
-		parent::__construct( $title, $restriction );
+	public function __construct(
+		$title,
+		$restriction,
+		SettingsArray $settings,
+		SummaryFormatter $summaryFormatter,
+		EntityRevisionLookup $entityRevisionLookup,
+		EntityTitleLookup $entityTitleLookup,
+		EditEntityFactory $editEntityFactory
+	) {
+		parent::__construct(
+			$title,
+			$restriction,
+			$settings,
+			$summaryFormatter,
+			$entityRevisionLookup,
+			$entityTitleLookup,
+			$editEntityFactory
+		);
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();

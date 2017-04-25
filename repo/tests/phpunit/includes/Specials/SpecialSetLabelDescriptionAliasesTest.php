@@ -21,6 +21,7 @@ use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\Validators\UniquenessViolation;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases
@@ -55,14 +56,13 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	 * @return SpecialSetLabelDescriptionAliases
 	 */
 	protected function newSpecialPage() {
-		$page = new SpecialSetLabelDescriptionAliases();
-
-		$page->setServices(
+		return new SpecialSetLabelDescriptionAliases(
+			$this->getFingerprintChangeOpsFactory(),
+			new StaticContentLanguages( self::$languageCodes ),
+			WikibaseRepo::getDefaultInstance()->getSettings(),
 			$this->getSummaryFormatter(),
 			$this->getEntityRevisionLookup(),
 			$this->getEntityTitleLookup(),
-			$this->getFingerprintChangeOpsFactory(),
-			new StaticContentLanguages( self::$languageCodes ),
 			new EditEntityFactory(
 				$this->getEntityTitleLookup(),
 				$this->getEntityRevisionLookup(),
@@ -73,8 +73,6 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				$this->getMockEditFitlerHookRunner()
 			)
 		);
-
-		return $page;
 	}
 
 	/**

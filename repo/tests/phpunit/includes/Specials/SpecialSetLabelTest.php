@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 use Wikibase\Repo\Specials\SpecialSetLabel;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialSetLabel
@@ -25,7 +26,14 @@ use Wikibase\Repo\Specials\SpecialSetLabel;
 class SpecialSetLabelTest extends SpecialModifyTermTestCase {
 
 	protected function newSpecialPage() {
-		return new SpecialSetLabel();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		return new SpecialSetLabel(
+			$wikibaseRepo->getSettings(),
+			$wikibaseRepo->getSummaryFormatter(),
+			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->newEditEntityFactory()
+		);
 	}
 
 }

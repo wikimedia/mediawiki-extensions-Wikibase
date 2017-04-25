@@ -19,6 +19,7 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\SettingsArray;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
 
@@ -53,45 +54,32 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 
 	/**
 	 * @param string $title The title of the special page
-	 * @param string $restriction The required user right, 'edit' per default.
-	 */
-	public function __construct( $title, $restriction = 'edit' ) {
-		parent::__construct( $title, $restriction );
-
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$settings = $wikibaseRepo->getSettings();
-
-		$this->rightsUrl = $settings->getSetting( 'dataRightsUrl' );
-		$this->rightsText = $settings->getSetting( 'dataRightsText' );
-
-		$this->setSpecialModifyEntityServices(
-			$wikibaseRepo->getSummaryFormatter(),
-			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
-			$wikibaseRepo->getEntityTitleLookup(),
-			$wikibaseRepo->newEditEntityFactory( $this->getContext() )
-		);
-	}
-
-	/**
-	 * Override services (for testing).
-	 *
+	 * @param string $restriction The required user right
+	 * @param SettingsArray $settings
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EditEntityFactory $editEntityFactory
 	 */
-	public function setSpecialModifyEntityServices(
+	public function __construct(
+		$title,
+		$restriction,
+		SettingsArray $settings,
 		SummaryFormatter $summaryFormatter,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleLookup $entityTitleLookup,
 		EditEntityFactory $editEntityFactory
 	) {
-		$this->entityRevisionLookup = $entityRevisionLookup;
-		$this->setSpecialWikibaseRepoPageServices(
+		parent::__construct(
+			$title,
+			$restriction,
 			$summaryFormatter,
 			$entityTitleLookup,
 			$editEntityFactory
 		);
+		$this->entityRevisionLookup = $entityRevisionLookup;
+		$this->rightsUrl = $settings->getSetting( 'dataRightsUrl' );
+		$this->rightsText = $settings->getSetting( 'dataRightsText' );
 	}
 
 	public function doesWrites() {

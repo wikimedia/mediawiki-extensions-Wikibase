@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 use Wikibase\Repo\Specials\SpecialSetDescription;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialSetDescription
@@ -25,7 +26,14 @@ use Wikibase\Repo\Specials\SpecialSetDescription;
 class SpecialSetDescriptionTest extends SpecialModifyTermTestCase {
 
 	protected function newSpecialPage() {
-		return new SpecialSetDescription();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		return new SpecialSetDescription(
+			$wikibaseRepo->getSettings(),
+			$wikibaseRepo->getSummaryFormatter(),
+			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->newEditEntityFactory()
+		);
 	}
 
 }

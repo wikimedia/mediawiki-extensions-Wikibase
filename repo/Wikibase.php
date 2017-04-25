@@ -684,7 +684,10 @@ call_user_func( function() {
 		return new Wikibase\Repo\Specials\SpecialNewItem(
 			$wikibaseRepo->getSiteLookup(),
 			$copyrightView,
-			$wikibaseRepo->getEntityNamespaceLookup()
+			$wikibaseRepo->getEntityNamespaceLookup(),
+			$wikibaseRepo->getSummaryFormatter(),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->newEditEntityFactory()
 		);
 	};
 	$wgSpecialPages['NewProperty'] = function () {
@@ -699,7 +702,10 @@ call_user_func( function() {
 
 		return new Wikibase\Repo\Specials\SpecialNewProperty(
 			$copyrightView,
-			$wikibaseRepo->getEntityNamespaceLookup()
+			$wikibaseRepo->getEntityNamespaceLookup(),
+			$wikibaseRepo->getSummaryFormatter(),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->newEditEntityFactory()
 		);
 	};
 	$wgSpecialPages['ItemByTitle'] = function () {
@@ -748,13 +754,50 @@ call_user_func( function() {
 	};
 	$wgSpecialPages['ItemsWithoutSitelinks']
 		= Wikibase\Repo\Specials\SpecialItemsWithoutSitelinks::class;
-	$wgSpecialPages['SetLabel'] = Wikibase\Repo\Specials\SpecialSetLabel::class;
-	$wgSpecialPages['SetDescription'] = Wikibase\Repo\Specials\SpecialSetDescription::class;
-	$wgSpecialPages['SetAliases'] = Wikibase\Repo\Specials\SpecialSetAliases::class;
-	$wgSpecialPages['SetLabelDescriptionAliases']
-		= Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases::class;
-	$wgSpecialPages['SetSiteLink'] = function() {
+	$wgSpecialPages['SetLabel'] = function() {
 		$wikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+		return new Wikibase\Repo\Specials\SpecialSetLabel(
+			$wikibaseRepo->getSettings(),
+			$wikibaseRepo->getSummaryFormatter(),
+			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->newEditEntityFactory()
+		);
+	};
+	$wgSpecialPages['SetDescription'] = function() {
+		$wikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+		return new Wikibase\Repo\Specials\SpecialSetDescription(
+			$wikibaseRepo->getSettings(),
+			$wikibaseRepo->getSummaryFormatter(),
+			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->newEditEntityFactory()
+		);
+	};
+	$wgSpecialPages['SetAliases'] = function() {
+		$wikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+		return new Wikibase\Repo\Specials\SpecialSetAliases(
+			$wikibaseRepo->getSettings(),
+			$wikibaseRepo->getSummaryFormatter(),
+			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->newEditEntityFactory()
+		);
+	};
+	$wgSpecialPages['SetLabelDescriptionAliases'] = function() {
+		$wikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+		return new Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases(
+			$wikibaseRepo->getChangeOpFactoryProvider()->getFingerprintChangeOpFactory(),
+			$wikibaseRepo->getTermsLanguages(),
+			$wikibaseRepo->getSettings(),
+			$wikibaseRepo->getSummaryFormatter(),
+			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->newEditEntityFactory()
+		);
+	};
+	$wgSpecialPages['SetSiteLink'] = function() {
+		$wlikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
 		$siteLookup = $wikibaseRepo->getSiteLookup();
 		$settings = $wikibaseRepo->getSettings();
 
@@ -771,7 +814,12 @@ call_user_func( function() {
 			$settings->getSetting( 'siteLinkGroups' ),
 			$settings->getSetting( 'badgeItems' ),
 			$labelDescriptionLookupFactory,
-			$siteLinkChangeOpFactory
+			$siteLinkChangeOpFactory,
+			$settings,
+			$wikibaseRepo->getSummaryFormatter(),
+			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->newEditEntityFactory()
 		);
 	};
 	$wgSpecialPages['EntitiesWithoutLabel'] = array(

@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 use Wikibase\Repo\Specials\SpecialSetAliases;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialSetAliases
@@ -25,7 +26,14 @@ use Wikibase\Repo\Specials\SpecialSetAliases;
 class SpecialSetAliasesTest extends SpecialModifyTermTestCase {
 
 	protected function newSpecialPage() {
-		return new SpecialSetAliases();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		return new SpecialSetAliases(
+			$wikibaseRepo->getSettings(),
+			$wikibaseRepo->getSummaryFormatter(),
+			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->newEditEntityFactory()
+		);
 	}
 
 }
