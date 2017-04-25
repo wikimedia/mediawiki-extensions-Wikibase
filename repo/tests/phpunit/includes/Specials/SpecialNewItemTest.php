@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Specials\SpecialNewItem;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialNewItem
@@ -44,10 +45,14 @@ class SpecialNewItemTest extends SpecialNewEntityTest {
 
 	protected function newSpecialPage() {
 		$namespaceNumber = 123;
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		return new SpecialNewItem(
-			$this->siteStore,
 			$this->copyrightView,
-			new EntityNamespaceLookup( [ Item::ENTITY_TYPE => $namespaceNumber ] )
+			new EntityNamespaceLookup( [ Item::ENTITY_TYPE => $namespaceNumber ] ),
+			$wikibaseRepo->getSummaryFormatter(),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->newEditEntityFactory(),
+			$this->siteStore
 		);
 	}
 

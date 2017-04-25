@@ -13,9 +13,13 @@ use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\EditEntityFactory;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Summary;
+use Wikibase\SummaryFormatter;
 
 /**
  * Special page for setting the sitepage of a Wikibase entity.
@@ -77,6 +81,11 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	private $badges;
 
 	/**
+	 * @param SpecialPageCopyrightView $copyrightView
+	 * @param SummaryFormatter $summaryFormatter
+	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EditEntityFactory $editEntityFactory
 	 * @param SiteLookup $siteLookup
 	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
 	 * @param string[] $siteLinkGroups
@@ -85,6 +94,11 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @param SiteLinkChangeOpFactory $siteLinkChangeOpFactory
 	 */
 	public function __construct(
+		SpecialPageCopyrightView $copyrightView,
+		SummaryFormatter $summaryFormatter,
+		EntityRevisionLookup $entityRevisionLookup,
+		EntityTitleLookup $entityTitleLookup,
+		EditEntityFactory $editEntityFactory,
 		SiteLookup $siteLookup,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		array $siteLinkGroups,
@@ -92,7 +106,15 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		SiteLinkChangeOpFactory $siteLinkChangeOpFactory
 	) {
-		parent::__construct( 'SetSiteLink' );
+		parent::__construct(
+			'SetSiteLink',
+			'edit',
+			$copyrightView,
+			$summaryFormatter,
+			$entityRevisionLookup,
+			$entityTitleLookup,
+			$editEntityFactory
+		);
 
 		$this->siteLookup = $siteLookup;
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;

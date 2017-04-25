@@ -7,8 +7,11 @@ use HTMLForm;
 use OutputPage;
 use Status;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\EditEntityFactory;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Summary;
+use Wikibase\SummaryFormatter;
 
 /**
  * Page for creating new Wikibase entities that contain a Fingerprint.
@@ -25,11 +28,6 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	protected $parts = null;
 
 	/**
-	 * @var SpecialPageCopyrightView
-	 */
-	private $copyrightView;
-
-	/**
 	 * @var EntityNamespaceLookup
 	 */
 	protected $entityNamespaceLookup;
@@ -39,16 +37,28 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 * @param string $restriction User right required,
 	 * @param SpecialPageCopyrightView $copyrightView
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
+	 * @param SummaryFormatter $summaryFormatter
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EditEntityFactory $editEntityFactory
 	 */
 	public function __construct(
 		$name,
 		$restriction,
 		SpecialPageCopyrightView $copyrightView,
-		EntityNamespaceLookup $entityNamespaceLookup
+		EntityNamespaceLookup $entityNamespaceLookup,
+		SummaryFormatter $summaryFormatter,
+		EntityTitleLookup $entityTitleLookup,
+		EditEntityFactory $editEntityFactory
 	) {
-		parent::__construct( $name, $restriction );
+		parent::__construct(
+			$name,
+			$restriction,
+			$copyrightView,
+			$summaryFormatter,
+			$entityTitleLookup,
+			$editEntityFactory
+		);
 
-		$this->copyrightView = $copyrightView;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 	}
 
@@ -181,19 +191,12 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	abstract protected function createSummary( $entity );
 
 	/**
-	 * @return string
-	 */
-	private function getCopyrightText() {
-		return $this->copyrightView->getHtml( $this->getLanguage(), 'wikibase-newentity-submit' );
-	}
-
-	/**
 	 * @param OutputPage $output
 	 */
 	protected function displayBeforeForm( OutputPage $output ) {
 		$output->addModules( 'wikibase.special.newEntity' );
 
-		$output->addHTML( $this->getCopyrightText() );
+		$output->addHTML( $this->getCopyrightHTML() );
 
 		foreach ( $this->getWarnings() as $warning ) {
 			$output->addHTML( Html::element( 'div', [ 'class' => 'warning' ], $warning ) );
