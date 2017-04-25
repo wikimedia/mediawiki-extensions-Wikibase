@@ -7,12 +7,15 @@ use Status;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataTypeSelector;
+use Wikibase\EditEntityFactory;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLTrimmedTextField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
+use Wikibase\SummaryFormatter;
 
 /**
  * Page for creating new Wikibase properties.
@@ -27,11 +30,29 @@ class SpecialNewProperty extends SpecialNewEntity {
 	const FIELD_DESCRIPTION = 'description';
 	const FIELD_ALIASES = 'aliases';
 
+	/**
+	 * @param SpecialPageCopyrightView $copyrightView
+	 * @param EntityNamespaceLookup $entityNamespaceLookup
+	 * @param SummaryFormatter $summaryFormatter
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EditEntityFactory $editEntityFactory
+	 */
 	public function __construct(
 		SpecialPageCopyrightView $specialPageCopyrightView,
-		EntityNamespaceLookup $entityNamespaceLookup
+		EntityNamespaceLookup $entityNamespaceLookup,
+		SummaryFormatter $summaryFormatter,
+		EntityTitleLookup $entityTitleLookup,
+		EditEntityFactory $editEntityFactory
 	) {
-		parent::__construct( 'NewProperty', 'property-create', $specialPageCopyrightView, $entityNamespaceLookup );
+		parent::__construct(
+			'NewProperty',
+			'property-create',
+			$specialPageCopyrightView,
+			$entityNamespaceLookup,
+			$summaryFormatter,
+			$entityTitleLookup,
+			$editEntityFactory
+		);
 	}
 
 	/**

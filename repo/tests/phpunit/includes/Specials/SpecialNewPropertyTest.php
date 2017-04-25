@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Specials\SpecialNewProperty;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialNewProperty
@@ -30,9 +31,13 @@ class SpecialNewPropertyTest extends SpecialNewEntityTest {
 
 	protected function newSpecialPage() {
 		$namespaceNumber = 123;
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		return new SpecialNewProperty(
 			$this->copyrightView,
-			new EntityNamespaceLookup( [ Property::ENTITY_TYPE => $namespaceNumber ] )
+			new EntityNamespaceLookup( [ Property::ENTITY_TYPE => $namespaceNumber ] ),
+			$wikibaseRepo->getSummaryFormatter(),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->newEditEntityFactory()
 		);
 	}
 

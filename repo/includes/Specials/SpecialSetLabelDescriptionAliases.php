@@ -60,39 +60,28 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 */
 	private $aliases = array();
 
-	public function __construct() {
-		parent::__construct( 'SetLabelDescriptionAliases', 'edit' );
-
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-		$this->changeOpFactory = $wikibaseRepo->getChangeOpFactoryProvider()
-			->getFingerprintChangeOpFactory();
-		$this->termsLanguages = $wikibaseRepo->getTermsLanguages();
-	}
-
-	public function doesWrites() {
-		return true;
-	}
-
 	/**
-	 * @see SpecialWikibaseRepoPage::setSpecialWikibaseRepoPageServices
-	 *
+	 * @param FingerprintChangeOpFactory $changeOpFactory
+	 * @param ContentLanguages $termsLanguages
+	 * @param SpecialPageCopyrightView $copyrightView
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param FingerprintChangeOpFactory $changeOpFactory
-	 * @param ContentLanguages $termsLanguages
 	 * @param EditEntityFactory $editEntityFactory
 	 */
-	public function setServices(
+	public function __construct(
+		FingerprintChangeOpFactory $changeOpFactory,
+		ContentLanguages $termsLanguages,
+		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleLookup $entityTitleLookup,
-		FingerprintChangeOpFactory $changeOpFactory,
-		ContentLanguages $termsLanguages,
 		EditEntityFactory $editEntityFactory
 	) {
-		$this->setSpecialModifyEntityServices(
+		parent::__construct(
+			'SetLabelDescriptionAliases',
+			'edit',
+			$copyrightView,
 			$summaryFormatter,
 			$entityRevisionLookup,
 			$entityTitleLookup,
@@ -101,6 +90,10 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 
 		$this->changeOpFactory = $changeOpFactory;
 		$this->termsLanguages = $termsLanguages;
+	}
+
+	public function doesWrites() {
+		return true;
 	}
 
 	/**

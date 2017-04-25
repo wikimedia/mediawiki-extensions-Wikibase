@@ -2,7 +2,10 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
+use Wikibase\CopyrightMessageBuilder;
+use Wikibase\Repo\Specials\SpecialPageCopyrightView;
 use Wikibase\Repo\Specials\SpecialSetDescription;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialSetDescription
@@ -25,7 +28,22 @@ use Wikibase\Repo\Specials\SpecialSetDescription;
 class SpecialSetDescriptionTest extends SpecialModifyTermTestCase {
 
 	protected function newSpecialPage() {
-		return new SpecialSetDescription();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		$settings = $wikibaseRepo->getSettings();
+		$copyrightView = new SpecialPageCopyrightView(
+			new CopyrightMessageBuilder(),
+			$settings->getSetting( 'dataRightsUrl' ),
+			$settings->getSetting( 'dataRightsText' )
+		);
+
+		return new SpecialSetDescription(
+			$copyrightView,
+			$wikibaseRepo->getSummaryFormatter(),
+			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->newEditEntityFactory()
+		);
 	}
 
 }

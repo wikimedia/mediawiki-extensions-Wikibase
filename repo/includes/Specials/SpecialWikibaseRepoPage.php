@@ -25,6 +25,11 @@ use Wikibase\SummaryFormatter;
 abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 
 	/**
+	 * @var SpecialPageCopyrightView
+	 */
+	private $copyrightView;
+
+	/**
 	 * @var SummaryFormatter
 	 */
 	protected $summaryFormatter;
@@ -42,30 +47,21 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	/**
 	 * @param string $title The title of the special page
 	 * @param string $restriction The required user right
-	 */
-	public function __construct( $title, $restriction ) {
-		parent::__construct( $title, $restriction );
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-		$this->setSpecialWikibaseRepoPageServices(
-			$wikibaseRepo->getSummaryFormatter(),
-			$wikibaseRepo->getEntityTitleLookup(),
-			$wikibaseRepo->newEditEntityFactory( $this->getContext() )
-		);
-	}
-
-	/**
-	 * Override services (for testing).
-	 *
+	 * @param SpecialPageCopyrightView $copyrightView
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EditEntityFactory $editEntityFactory
 	 */
-	public function setSpecialWikibaseRepoPageServices(
+	public function __construct(
+		$title,
+		$restriction,
+		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
 		EditEntityFactory $editEntityFactory
 	) {
+		parent::__construct( $title, $restriction );
+		$this->copyrightView = $copyrightView;
 		$this->summaryFormatter = $summaryFormatter;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->editEntityFactory = $editEntityFactory;
@@ -158,6 +154,14 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		);
 
 		return $status;
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function getCopyrightText() {
+		$submitKey = 'wikibase-' . strtolower( $this->getName() ) . '-submit';
+		return $this->copyrightView->getHtml( $this->getLanguage(), $submitKey );
 	}
 
 }

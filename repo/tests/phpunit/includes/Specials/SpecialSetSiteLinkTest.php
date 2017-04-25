@@ -8,10 +8,12 @@ use Hamcrest\Matcher;
 use MediaWiki\MediaWikiServices;
 use SpecialPageTestBase;
 use TestSites;
+use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\SiteLinkTargetProvider;
+use Wikibase\Repo\Specials\SpecialPageCopyrightView;
 use Wikibase\Repo\Specials\SpecialSetSiteLink;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -70,6 +72,12 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 			$settings->getSetting( 'specialSiteLinkGroups' )
 		);
 
+		$copyrightView = new SpecialPageCopyrightView(
+			new CopyrightMessageBuilder(),
+			$settings->getSetting( 'dataRightsUrl' ),
+			$settings->getSetting( 'dataRightsText' )
+		);
+
 		$labelDescriptionLookupFactory = $wikibaseRepo->getLanguageFallbackLabelDescriptionLookupFactory();
 		return new SpecialSetSiteLink(
 			$siteLookup,
@@ -77,7 +85,12 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 			$settings->getSetting( 'siteLinkGroups' ),
 			$settings->getSetting( 'badgeItems' ),
 			$labelDescriptionLookupFactory,
-			$siteLinkChangeOpFactory
+			$siteLinkChangeOpFactory,
+			$copyrightView,
+			$wikibaseRepo->getSummaryFormatter(),
+			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->newEditEntityFactory()
 		);
 	}
 

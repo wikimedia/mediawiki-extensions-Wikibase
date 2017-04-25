@@ -42,56 +42,32 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	protected $entityRevision = null;
 
 	/**
-	 * @var string
-	 */
-	private $rightsUrl;
-
-	/**
-	 * @var string
-	 */
-	private $rightsText;
-
-	/**
 	 * @param string $title The title of the special page
-	 * @param string $restriction The required user right, 'edit' per default.
-	 */
-	public function __construct( $title, $restriction = 'edit' ) {
-		parent::__construct( $title, $restriction );
-
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$settings = $wikibaseRepo->getSettings();
-
-		$this->rightsUrl = $settings->getSetting( 'dataRightsUrl' );
-		$this->rightsText = $settings->getSetting( 'dataRightsText' );
-
-		$this->setSpecialModifyEntityServices(
-			$wikibaseRepo->getSummaryFormatter(),
-			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
-			$wikibaseRepo->getEntityTitleLookup(),
-			$wikibaseRepo->newEditEntityFactory( $this->getContext() )
-		);
-	}
-
-	/**
-	 * Override services (for testing).
-	 *
+	 * @param string $restriction The required user right
+	 * @param SpecialPageCopyrightView $copyrightView
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EditEntityFactory $editEntityFactory
 	 */
-	public function setSpecialModifyEntityServices(
+	public function __construct(
+		$title,
+		$restriction,
+		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleLookup $entityTitleLookup,
 		EditEntityFactory $editEntityFactory
 	) {
-		$this->entityRevisionLookup = $entityRevisionLookup;
-		$this->setSpecialWikibaseRepoPageServices(
+		parent::__construct(
+			$title,
+			$restriction,
+			$copyrightView,
 			$summaryFormatter,
 			$entityTitleLookup,
 			$editEntityFactory
 		);
+		$this->entityRevisionLookup = $entityRevisionLookup;
 	}
 
 	public function doesWrites() {
@@ -205,21 +181,6 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	}
 
 	/**
-	 * @todo could factor this out into a special page form builder and renderer
-	 */
-	private function addCopyrightText() {
-		$copyrightView = new SpecialPageCopyrightView(
-			new CopyrightMessageBuilder(),
-			$this->rightsUrl,
-			$this->rightsText
-		);
-
-		$submitKey = 'wikibase-' . strtolower( $this->getName() ) . '-submit';
-		$html = $copyrightView->getHtml( $this->getLanguage(), $submitKey );
-		$this->getOutput()->addHTML( $html );
-	}
-
-	/**
 	 * Return the HTML form.
 	 *
 	 * @param EntityDocument|null $entity
@@ -234,7 +195,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 * @param EntityDocument|null $entity
 	 */
 	private function setForm( EntityDocument $entity = null ) {
-		$this->addCopyrightText();
+		$this->getOutput()->addHTML( $this->getCopyrightText() );
 
 		$this->getOutput()->addModuleStyles( array( 'wikibase.special' ) );
 
