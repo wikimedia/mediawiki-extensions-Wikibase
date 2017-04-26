@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4df70f_950cf43e",
+        "filename": "repo/includes/Interactors/RedirectCreationInteractor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-26T13:47:35Z",
+      "side": 1,
+      "message": "This seems to be the correct logic now, thank you.",
+      "revId": "b422a3c340095014d6db997ff66a2724feaa1314",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
