@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoBuilder;
+use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Rdbms\ResultWrapper;
 
 /**
@@ -578,42 +579,42 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		if ( isset( $this->pageInfoByType[$entityType] ) ) {
 			return $this->pageInfoByType[$entityType];
 		}
+		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
 		$entityIds = $this->numericIdsByType[$entityType];
-
-		$dbw = $this->getConnection( DB_REPLICA );
-
-		$fields = array(
-			'epp_entity_type',
-			'epp_entity_id',
-			'epp_page_id',
-			'epp_redirect_target'
-		);
-
-		$res = $dbw->select(
-			$this->entityPerPageTable,
-			$fields,
-			array(
-				'epp_entity_type' => $entityType,
-				'epp_entity_id' => $entityIds,
-			),
-			__METHOD__
-		);
-
 		$idStrings = array_flip( $entityIds );
 
-		$this->pageInfoByType[$entityType] = array();
+		$dbr = $this->getConnection( DB_REPLICA );
+
+		$fields = [
+			'page_namespace',
+			'page_title',
+			'page_id',
+			'rd_title'
+		];
+
+		$res = $dbr->select(
+			[ 'page', 'redirect' ],
+			$fields,
+			[
+				'page_namespace' => $entityNamespaceLookup->getEntityNamespace( $entityType ),
+				'page_title' => array_values( $idStrings ),
+			],
+			__METHOD__,
+			[],
+			[ 'redirect' => [ 'LEFT JOIN', [ 'page_id=rd_from' ] ] ]
+		);
+
+		$this->pageInfoByType[$entityType] = [];
 
 		foreach ( $res as $row ) {
-			$key = $idStrings[$row->epp_entity_id];
-
-			$this->pageInfoByType[$entityType][$key] = array(
-				'page_id' => $row->epp_page_id,
-				'redirect_target' => $row->epp_redirect_target,
-			);
+			$this->pageInfoByType[$entityType][$row->page_title] = [
+				'page_id' => $row->page_id,
+				'redirect_target' => $row->rd_title,
+			];
 		}
 
-		$this->releaseConnection( $dbw );
+		$this->releaseConnection( $dbr );
 
 		return $this->pageInfoByType[$entityType];
 	}

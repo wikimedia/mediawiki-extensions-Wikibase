@@ -2,8 +2,12 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql;
 
+use ContentHandler;
 use InvalidArgumentException;
+use Title;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
@@ -11,6 +15,8 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 use Wikibase\Lib\Tests\Store\EntityInfoBuilderTest;
+use Wikibase\Repo\WikibaseRepo;
+use Wikipage;
 
 /**
  * @covers Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder
@@ -34,24 +40,18 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 
 		$this->tablesUsed[] = 'wb_property_info';
 		$this->tablesUsed[] = 'wb_terms';
-		$this->tablesUsed[] = 'wb_entity_per_page';
+		$this->tablesUsed[] = 'page';
+		$this->tablesUsed[] = 'redirect';
+		$this->tablesUsed[] = 'revision';
 
 		$termRows = [];
 		$infoRows = [];
-		$eppRows = [];
+		$redirectRows = [];
 
-		$pageId = 1000;
-
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$namespaceLookup = $wikibaseRepo->getEntityNamespaceLookup();
 		foreach ( $this->getKnownEntities() as $entity ) {
 			$id = $entity->getId();
-
-			$eppRows[] = [
-				$entity->getType(),
-				$id->getNumericId(),
-				$pageId++,
-				null
-			];
-
 			$labels = $entity->getLabels()->toTextArray();
 			$descriptions = $entity->getDescriptions()->toTextArray();
 			$aliases = $entity->getAliasGroups()->toTextArray();
@@ -67,15 +67,17 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 					'{"type":"' . $entity->getDataTypeId() . '"}'
 				];
 			}
+
+			$this->createPage( $entity );
 		}
 
 		foreach ( $this->getKnownRedirects() as $from => $toId ) {
 			$fromId = new ItemId( $from );
 
-			$eppRows[] = [
-				$fromId->getEntityType(),
-				$fromId->getNumericId(),
-				$pageId++,
+			$page = $this->createPage( new Item( $fromId ) );
+			$redirectRows[] = [
+				$page->getId(),
+				$namespaceLookup->getEntityNamespace( $fromId->getEntityType() ),
 				$toId->getSerialization()
 			];
 		}
@@ -97,12 +99,12 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 			[ 'pi_property_id', 'pi_type', 'pi_info' ],
 			$infoRows );
 
-		$eppColumns = [ 'epp_entity_type', 'epp_entity_id', 'epp_page_id', 'epp_redirect_target' ];
+		$redirectColumns = [ 'rd_from', 'rd_namespace', 'rd_title' ];
 
 		$this->insertRows(
-			'wb_entity_per_page',
-			$eppColumns,
-			$eppRows );
+			'redirect',
+			$redirectColumns,
+			$redirectRows );
 	}
 
 	private function getTermRows( EntityId $id, $termType, $terms ) {
@@ -124,6 +126,28 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 		}
 
 		return $rows;
+	}
+
+	/**
+	 * @param EntityDocument $entity
+	 *
+	 * @return Wikipage
+	 */
+	private function createPage( EntityDocument $entity ) {
+
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$namespaceLookup = $wikibaseRepo->getEntityNamespaceLookup();
+		$serializer = $wikibaseRepo->getEntitySerializer();
+
+		$text = json_encode( $serializer->serialize( $entity ) );
+		$page = WikiPage::factory( Title::newFromText(
+			$entity->getId()->getSerialization(),
+			$namespaceLookup->getEntityNamespace( $entity->getType() )
+		) );
+		$content = ContentHandler::makeContent( $text, $page->getTitle() );
+		$page->doEditContent( $content, "testing", EDIT_NEW );
+
+		return $page;
 	}
 
 	private function insertRows( $table, array $fields, array $rows ) {
