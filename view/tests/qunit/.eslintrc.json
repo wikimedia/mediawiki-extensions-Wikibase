@@ -1,0 +1,18 @@
+{
+	"extends": "../../../.eslintrc.json",
+	"env": {
+		"qunit": true
+	},
+	"globals": {
+		"sinon": false
+	},
+	"rules": {
+		"no-use-before-define": [
+			"error",
+			{
+				"functions": false
+			}
+		],
+		"space-unary-ops": "off"
+	}
+}
