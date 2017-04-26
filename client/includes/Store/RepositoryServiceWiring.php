@@ -31,6 +31,7 @@ return [
 		return new SqlEntityInfoBuilderFactory(
 			$services->getEntityIdParser(),
 			$client->getEntityIdComposer(),
+			$client->getEntityNamespaceLookup(),
 			$services->getDatabaseName(),
 			$services->getRepositoryName()
 		);
