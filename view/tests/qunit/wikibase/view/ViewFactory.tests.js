@@ -446,7 +446,7 @@
 				singleProperty: true,
 				value: value || undefined
 			} )
-		) ;
+		);
 
 		stub.restore();
 	} );
