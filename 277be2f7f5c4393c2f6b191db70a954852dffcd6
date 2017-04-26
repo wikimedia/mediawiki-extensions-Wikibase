@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4df70f_cf266d63",
+        "filename": "repo/includes/Store/Sql/TermFullEntityIdBuilder.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-26T09:27:09Z",
+      "side": 1,
+      "message": "Could use phpdocs to say what types of all these are.",
+      "revId": "277be2f7f5c4393c2f6b191db70a954852dffcd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_4f133d06",
+        "filename": "repo/includes/Store/Sql/TermFullEntityIdBuilder.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-26T09:27:09Z",
+      "side": 1,
+      "message": "not needed?",
+      "range": {
+        "startLine": 49,
+        "startChar": 44,
+        "endLine": 49,
+        "endChar": 49
+      },
+      "revId": "277be2f7f5c4393c2f6b191db70a954852dffcd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_0fc3f562",
+        "filename": "repo/includes/Store/Sql/TermFullEntityIdBuilder.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-26T09:27:09Z",
+      "side": 1,
+      "message": "indentation\u0027s off",
+      "revId": "277be2f7f5c4393c2f6b191db70a954852dffcd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_0faa1583",
+        "filename": "repo/includes/Store/Sql/TermFullEntityIdBuilder.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-26T09:27:09Z",
+      "side": 1,
+      "message": "Is this intended? Don\u0027t we want to populate the column for all the entities (so in practice include properties too)?",
+      "revId": "277be2f7f5c4393c2f6b191db70a954852dffcd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_6f995980",
+        "filename": "repo/maintenance/populateTermFullEntityId.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-26T09:27:09Z",
+      "side": 1,
+      "message": "not used?",
+      "revId": "277be2f7f5c4393c2f6b191db70a954852dffcd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_0f2d3541",
+        "filename": "repo/maintenance/populateTermFullEntityId.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-26T09:27:09Z",
+      "side": 1,
+      "message": "This will now die with the exception if user input is not valid ID. The script could be also catching the exception and providing an error message. I believe it is not critical in this case, so just mentioning.",
+      "revId": "277be2f7f5c4393c2f6b191db70a954852dffcd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
