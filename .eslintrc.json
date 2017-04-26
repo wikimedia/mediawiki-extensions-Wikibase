@@ -1,0 +1,14 @@
+{
+	"extends": "wikimedia",
+	"env": {
+		"qunit": true
+	},
+	"globals": {
+
+	},
+	"rules": {
+		"no-underscore-dangle": "off",
+		"one-var": "off",
+		"vars-on-top": "off"
+	}
+}
