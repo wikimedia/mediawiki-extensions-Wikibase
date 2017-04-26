@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4df70f_95fb9444",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-26T15:27:44Z",
+      "side": 1,
+      "message": "In this case the hook is not run any more, which means custom entity types might be missing now.",
+      "range": {
+        "startLine": 78,
+        "startChar": 31,
+        "endLine": 78,
+        "endChar": 50
+      },
+      "revId": "ce9fcddcedc7ba68dcae5daca85059b7befd44ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
