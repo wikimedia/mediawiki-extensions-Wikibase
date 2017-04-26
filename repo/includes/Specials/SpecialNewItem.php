@@ -8,11 +8,14 @@ use Status;
 use WebRequest;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\EditEntityFactory;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLTrimmedTextField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField;
 use Wikibase\Summary;
+use Wikibase\SummaryFormatter;
 
 /**
  * Page for creating new Wikibase items.
@@ -35,16 +38,30 @@ class SpecialNewItem extends SpecialNewEntity {
 	private $siteLookup;
 
 	/**
-	 * @param SiteLookup $siteLookup
 	 * @param SpecialPageCopyrightView $copyrightView
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
+	 * @param SummaryFormatter $summaryFormatter
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EditEntityFactory $editEntityFactory
+	 * @param SiteLookup $siteLookup
 	 */
 	public function __construct(
-		SiteLookup $siteLookup,
 		SpecialPageCopyrightView $copyrightView,
-		EntityNamespaceLookup $entityNamespaceLookup
+		EntityNamespaceLookup $entityNamespaceLookup,
+		SummaryFormatter $summaryFormatter,
+		EntityTitleLookup $entityTitleLookup,
+		EditEntityFactory $editEntityFactory,
+		SiteLookup $siteLookup
 	) {
-		parent::__construct( 'NewItem', 'createpage', $copyrightView, $entityNamespaceLookup );
+		parent::__construct(
+			'NewItem',
+			'createpage',
+			$copyrightView,
+			$entityNamespaceLookup,
+			$summaryFormatter,
+			$entityTitleLookup,
+			$editEntityFactory
+		);
 		$this->siteLookup = $siteLookup;
 	}
 
