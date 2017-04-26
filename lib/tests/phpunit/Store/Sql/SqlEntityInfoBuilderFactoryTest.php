@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory
@@ -54,7 +55,8 @@ class SqlEntityInfoBuilderFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testNewEntityInfoBuilder_returnsSqlEntityInfoBuilderInstance() {
 		$factory = new SqlEntityInfoBuilderFactory(
 			new ItemIdParser(),
-			$this->getIdComposer()
+			$this->getIdComposer(),
+			WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup()
 		);
 
 		$this->assertInstanceOf( SqlEntityInfoBuilder::class, $factory->newEntityInfoBuilder( [] ) );
@@ -63,7 +65,8 @@ class SqlEntityInfoBuilderFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testNewEntityInfoBuilder_returnsNewInstanceOnEachCal() {
 		$factory = new SqlEntityInfoBuilderFactory(
 			new ItemIdParser(),
-			$this->getIdComposer()
+			$this->getIdComposer(),
+			WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup()
 		);
 
 		$builderOne = $factory->newEntityInfoBuilder( [] );

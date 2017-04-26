@@ -26,6 +26,7 @@ use Wikibase\Repo\ParserOutput\ExternalLinksDataUpdater;
 use Wikibase\Repo\ParserOutput\ImageLinksDataUpdater;
 use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
 use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EntityView;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
@@ -199,7 +200,11 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			$this->getEntityViewFactory( $createView ),
 			$this->getConfigBuilderMock(),
 			$entityTitleLookup,
-			new SqlEntityInfoBuilderFactory( $entityIdParser, new EntityIdComposer( [] ) ),
+			new SqlEntityInfoBuilderFactory(
+				$entityIdParser,
+				new EntityIdComposer( [] ),
+				WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup()
+			),
 			$this->newLanguageFallbackChain(),
 			TemplateFactory::getDefaultInstance(),
 			$this->getMock( LocalizedTextProvider::class ),
