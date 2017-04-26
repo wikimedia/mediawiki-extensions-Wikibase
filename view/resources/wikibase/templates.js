@@ -300,7 +300,7 @@
 	 *        arguments, an array may be passed as first parameter.
 	 * @return {jQuery}
 	 */
-	$.fn.applyTemplate = function( template, parameter1 /*[, parameter2[, ...]] */ ) {
+	$.fn.applyTemplate = function( template, parameter1 /* [, parameter2[, ...]] */ ) {
 		var $template = mw.wbTemplate.apply( null, arguments );
 
 		if ( $template.length !== 1 ) {
