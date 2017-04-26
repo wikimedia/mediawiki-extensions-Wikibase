@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4df70f_efd32963",
+        "filename": "repo/includes/Specials/SpecialModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-26T08:47:44Z",
+      "side": 1,
+      "message": "This method obviously returns HTML, but is named \"get…Text\". I know \"add…Text\" was the old name, but since you are touching this code anyway, can we rename this to \"getCopyrightHtml\" please?",
+      "range": {
+        "startLine": 198,
+        "startChar": 38,
+        "endLine": 198,
+        "endChar": 54
+      },
+      "revId": "2dacffb0ae0b09694dc57480fe7b766a7ee20afd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_0f38d59a",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-26T08:47:44Z",
+      "side": 1,
+      "message": "The new dependencies confuse me quite a lot. It looks like this class is not using them at all. Why do we need to inject all this if it is not used?\n\nSame for some other classes in this patch.",
+      "revId": "2dacffb0ae0b09694dc57480fe7b766a7ee20afd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_8f44e51d",
+        "filename": "repo/includes/Specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-26T08:47:44Z",
+      "side": 1,
+      "message": "Personally I find it better to have common parameters required by the parent constructor first, and class-specific parameters (these two) last.",
+      "range": {
+        "startLine": 73,
+        "startChar": 2,
+        "endLine": 74,
+        "endChar": 35
+      },
+      "revId": "2dacffb0ae0b09694dc57480fe7b766a7ee20afd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_2f5111de",
+        "filename": "repo/includes/Specials/SpecialWikibaseRepoPage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-26T08:47:44Z",
+      "side": 1,
+      "message": "@return string HTML",
+      "range": {
+        "startLine": 160,
+        "startChar": 4,
+        "endLine": 160,
+        "endChar": 18
+      },
+      "revId": "2dacffb0ae0b09694dc57480fe7b766a7ee20afd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_ef59e905",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialSetLabelDescriptionAliasesTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-26T08:47:44Z",
+      "side": 1,
+      "message": "Please use dummy strings in tests, not the real settings. Personally I prefer empty strings.",
+      "range": {
+        "startLine": 66,
+        "startChar": 3,
+        "endLine": 67,
+        "endChar": 44
+      },
+      "revId": "2dacffb0ae0b09694dc57480fe7b766a7ee20afd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_4f4edd3d",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialSetLabelTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-26T08:47:44Z",
+      "side": 1,
+      "message": "Please use dummy strings in tests, not the real settings. Personally I prefer empty strings.",
+      "range": {
+        "startLine": 36,
+        "startChar": 3,
+        "endLine": 37,
+        "endChar": 44
+      },
+      "revId": "2dacffb0ae0b09694dc57480fe7b766a7ee20afd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
