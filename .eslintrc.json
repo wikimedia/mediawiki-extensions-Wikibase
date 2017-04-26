@@ -1,0 +1,18 @@
+{
+	"extends": "wikimedia",
+	"env": {
+	},
+	"globals": {
+		"dataTypes": false,
+		"dataValues": false,
+		"wikibase": false
+	},
+	"rules": {
+		"array-bracket-spacing": "off",
+		"computed-property-spacing": "off",
+		"no-underscore-dangle": "off",
+		"no-unused-vars": "off",
+		"one-var": "off",
+		"vars-on-top": "off"
+	}
+}
