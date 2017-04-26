@@ -17,7 +17,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Lib\DispatchingValueFormatter;
+use Wikibase\Lib\Formatters\DispatchingValueFormatter;
 use Wikibase\Lib\PropertyValueSnakFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\UnDeserializableValueFormatter;

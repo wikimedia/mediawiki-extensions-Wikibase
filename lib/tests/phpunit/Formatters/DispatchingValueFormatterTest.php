@@ -9,10 +9,10 @@ use ValueFormatters\StringFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\DispatchingValueFormatter;
+use Wikibase\Lib\Formatters\DispatchingValueFormatter;
 
 /**
- * @covers Wikibase\Lib\DispatchingValueFormatter
+ * @covers Wikibase\Lib\Formatters\DispatchingValueFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions
