@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "2e4df70f_6f62b908",
+        "filename": "repo/includes/Store/Sql/TermFullEntityIdBuilder.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-26T11:08:10Z",
+      "side": 1,
+      "message": "This does not really use id parser if I see right. Parsing happens in the maintenance script.",
+      "revId": "277be2f7f5c4393c2f6b191db70a954852dffcd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_4f133d06",
         "filename": "repo/includes/Store/Sql/TermFullEntityIdBuilder.php",
         "patchSetId": 12
@@ -42,6 +59,40 @@
     },
     {
       "key": {
+        "uuid": "2e4df70f_6ab3874d",
+        "filename": "repo/includes/Store/Sql/TermFullEntityIdBuilder.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-26T11:08:10Z",
+      "side": 1,
+      "message": "I am getting in the infinite loop when I run the script with --rebuild-all.\nHere is I believe why:\n\n1. I run script without setting the start id. So $selectFromId is initially null.\n\n2. updateBatch updates rows and sets $selectFromId to full id of the last entity in the batch. As I have only few entities locally it also the last entity that needs to be updated.\n\n3. In the next loop cycle $selectFromId is passed to selectBatch. Therefore condition in SQL query looks like term_entity_id\u003e\u003d123. Such query always returns a single result, for Q123. Update then updates it (although the full id has been already set in the previous iteration), returns Q123 again, and the loop goes on and on.\n\nI wonder, shouldn\u0027t the condition in line 151 also include the \"full id is not null\" part? This is a bit contradicting the idea of \"rebuilding all\". So maybe the condition should be \"greater or equal the numeric id, and entity type is different\"? Or something along these lines?",
+      "revId": "277be2f7f5c4393c2f6b191db70a954852dffcd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_af3e81d5",
+        "filename": "repo/includes/Store/Sql/TermFullEntityIdBuilder.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-26T11:08:10Z",
+      "side": 1,
+      "message": "So this reports the last generated full id of the batch. It is fine as some kind of report, I just wonder was this what was intended, or was it meant to report all generated full IDs?",
+      "revId": "277be2f7f5c4393c2f6b191db70a954852dffcd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_0fc3f562",
         "filename": "repo/includes/Store/Sql/TermFullEntityIdBuilder.php",
         "patchSetId": 12
@@ -59,6 +110,40 @@
     },
     {
       "key": {
+        "uuid": "2e4df70f_2abd7f16",
+        "filename": "repo/includes/Store/Sql/TermFullEntityIdBuilder.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-26T11:08:10Z",
+      "side": 1,
+      "message": "Not the most common case but this will result in an error when there are not rows matching the condition (e.g. running script once, and then running it again with --force).",
+      "revId": "277be2f7f5c4393c2f6b191db70a954852dffcd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_4a448b4a",
+        "filename": "repo/includes/Store/Sql/TermFullEntityIdBuilder.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-26T11:08:10Z",
+      "side": 1,
+      "message": "minor but: this could also document as IDatabase, right? And the type hint could be used in the parameter list I guess.",
+      "revId": "277be2f7f5c4393c2f6b191db70a954852dffcd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_0faa1583",
         "filename": "repo/includes/Store/Sql/TermFullEntityIdBuilder.php",
         "patchSetId": 12
@@ -70,6 +155,29 @@
       "writtenOn": "2017-04-26T09:27:09Z",
       "side": 1,
       "message": "Is this intended? Don\u0027t we want to populate the column for all the entities (so in practice include properties too)?",
+      "revId": "277be2f7f5c4393c2f6b191db70a954852dffcd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_cf750dca",
+        "filename": "repo/maintenance/populateTermFullEntityId.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-26T11:08:10Z",
+      "side": 1,
+      "message": "this could possibly say more explicitly it is about entity id, not the term_row_id",
+      "range": {
+        "startLine": 28,
+        "startChar": 44,
+        "endLine": 28,
+        "endChar": 46
+      },
       "revId": "277be2f7f5c4393c2f6b191db70a954852dffcd6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
