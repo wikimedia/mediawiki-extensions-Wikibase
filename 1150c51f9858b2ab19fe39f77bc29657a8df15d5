@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2e4df70f_6fe15929",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-26T08:59:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e4df70f_2f19117f",
+      "range": {
+        "startLine": 52,
+        "startChar": 9,
+        "endLine": 52,
+        "endChar": 28
+      },
+      "revId": "1150c51f9858b2ab19fe39f77bc29657a8df15d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_4f16dd4e",
         "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-04-26T08:13:08Z",
       "side": 1,
       "message": "This seems to be unused now.",
+      "range": {
+        "startLine": 152,
+        "startChar": 2,
+        "endLine": 152,
+        "endChar": 27
+      },
+      "revId": "1150c51f9858b2ab19fe39f77bc29657a8df15d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_0f8bf573",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-26T08:59:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e4df70f_4f16dd4e",
       "range": {
         "startLine": 152,
         "startChar": 2,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "2e4df70f_aff681f4",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-26T08:59:49Z",
+      "side": 1,
+      "message": "Overall I need to replace WikibaseRepo with something else. It causes jenkins to fail :/",
+      "parentUuid": "2e4df70f_ef21e99e",
+      "range": {
+        "startLine": 582,
+        "startChar": 2,
+        "endLine": 582,
+        "endChar": 24
+      },
+      "revId": "1150c51f9858b2ab19fe39f77bc29657a8df15d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_0f2775b2",
         "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
         "patchSetId": 1
@@ -82,6 +154,30 @@
       "writtenOn": "2017-04-26T08:13:08Z",
       "side": 1,
       "message": "These two fields are part of the WHERE and don\u0027t need to be selected.",
+      "range": {
+        "startLine": 590,
+        "startChar": 3,
+        "endLine": 591,
+        "endChar": 15
+      },
+      "revId": "1150c51f9858b2ab19fe39f77bc29657a8df15d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_6f9ab9bf",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-26T08:59:49Z",
+      "side": 1,
+      "message": "No, they are arrays so we can\u0027t easily get the page_title and stuff out of it. If you check, the old query is like this too.",
+      "parentUuid": "2e4df70f_0f2775b2",
       "range": {
         "startLine": 590,
         "startChar": 3,
