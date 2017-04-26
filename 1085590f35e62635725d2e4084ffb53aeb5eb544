@@ -16,6 +16,24 @@
       "revId": "1085590f35e62635725d2e4084ffb53aeb5eb544",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_aaae6f93",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-26T12:13:57Z",
+      "side": 1,
+      "message": "Injecting it wasn\u0027t quite as fun as I expected :/",
+      "parentUuid": "2e4df70f_ef1569a0",
+      "revId": "1085590f35e62635725d2e4084ffb53aeb5eb544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
