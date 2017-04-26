@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4df70f_aa3e6fd5",
+        "filename": "lib/tests/phpunit/NoBadDependencyUsageTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-26T13:43:47Z",
+      "side": 1,
+      "message": "Uh, why? This shouldn\u0027t be needed now, should it?",
+      "revId": "868dd02112e97a45f1b093a38eb1dc9722b89ae6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_1500e403",
+        "filename": "lib/tests/phpunit/Store/Sql/SqlEntityInfoBuilderTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-26T13:43:47Z",
+      "side": 1,
+      "message": "I don\u0027t think this is worth the pain (see comments below). Just insert directly into the page and redirect (and maybe revision) tables.",
+      "revId": "868dd02112e97a45f1b093a38eb1dc9722b89ae6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_ca1adb7e",
+        "filename": "lib/tests/phpunit/Store/Sql/SqlEntityInfoBuilderTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-26T13:43:47Z",
+      "side": 1,
+      "message": "Using an EntityStore would be a lot easier. But I guess that only works in repo. Is that the reason you do all this manually?",
+      "revId": "868dd02112e97a45f1b093a38eb1dc9722b89ae6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_2a0a5f2a",
+        "filename": "lib/tests/phpunit/Store/Sql/SqlEntityInfoBuilderTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-26T13:43:47Z",
+      "side": 1,
+      "message": "Serialization is usualyl the jo of the Content object...",
+      "revId": "868dd02112e97a45f1b093a38eb1dc9722b89ae6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_8a0db343",
+        "filename": "lib/tests/phpunit/Store/Sql/SqlEntityInfoBuilderTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-26T13:43:47Z",
+      "side": 1,
+      "message": "Does this even work if the repo extension is not active?",
+      "revId": "868dd02112e97a45f1b093a38eb1dc9722b89ae6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
