@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoBuilder;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikimedia\Rdbms\ResultWrapper;
 
 /**
@@ -44,11 +45,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * @var string The name of the database table holding property info.
 	 */
 	private $propertyInfoTable;
-
-	/**
-	 * @var string The name of the database table connecting entities to pages.
-	 */
-	private $entityPerPageTable;
 
 	/**
 	 * EntityId objects indexed by serialized ID. This allows us to re-use
@@ -118,6 +114,11 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private $entityIdComposer;
 
 	/**
+	 * @var EntityNamespaceLookup
+	 */
+	private $entityNamespaceLookup;
+
+	/**
 	 * @var string
 	 */
 	private $repositoryName;
@@ -125,16 +126,17 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	/**
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdComposer $entityIdComposer
+	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param EntityId[] $ids
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
 	 * @param string $repositoryName The name of the repository (use an empty string for the local repository)
 	 *
-	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		EntityIdParser $entityIdParser,
 		EntityIdComposer $entityIdComposer,
+		EntityNamespaceLookup $entityNamespaceLookup,
 		array $ids,
 		$wiki = false,
 		$repositoryName = ''
@@ -148,11 +150,11 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 
 		$this->termTable = 'wb_terms';
 		$this->propertyInfoTable = 'wb_property_info';
-		$this->entityPerPageTable = 'wb_entity_per_page';
 
 		$this->idParser = $entityIdParser;
 		$this->entityIdComposer = $entityIdComposer;
 		$this->repositoryName = $repositoryName;
+		$this->entityNamespaceLookup = $entityNamespaceLookup;
 
 		$this->setEntityIds( $this->filterForeignEntityIds( $ids ) );
 	}
@@ -578,42 +580,40 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		if ( isset( $this->pageInfoByType[$entityType] ) ) {
 			return $this->pageInfoByType[$entityType];
 		}
-
 		$entityIds = $this->numericIdsByType[$entityType];
-
-		$dbw = $this->getConnection( DB_REPLICA );
-
-		$fields = array(
-			'epp_entity_type',
-			'epp_entity_id',
-			'epp_page_id',
-			'epp_redirect_target'
-		);
-
-		$res = $dbw->select(
-			$this->entityPerPageTable,
-			$fields,
-			array(
-				'epp_entity_type' => $entityType,
-				'epp_entity_id' => $entityIds,
-			),
-			__METHOD__
-		);
-
 		$idStrings = array_flip( $entityIds );
 
-		$this->pageInfoByType[$entityType] = array();
+		$dbr = $this->getConnection( DB_REPLICA );
+
+		$fields = [
+			'page_namespace',
+			'page_title',
+			'page_id',
+			'rd_title'
+		];
+
+		$res = $dbr->select(
+			[ 'page', 'redirect' ],
+			$fields,
+			[
+				'page_namespace' => $this->entityNamespaceLookup->getEntityNamespace( $entityType ),
+				'page_title' => array_values( $idStrings ),
+			],
+			__METHOD__,
+			[],
+			[ 'redirect' => [ 'LEFT JOIN', [ 'page_id=rd_from' ] ] ]
+		);
+
+		$this->pageInfoByType[$entityType] = [];
 
 		foreach ( $res as $row ) {
-			$key = $idStrings[$row->epp_entity_id];
-
-			$this->pageInfoByType[$entityType][$key] = array(
-				'page_id' => $row->epp_page_id,
-				'redirect_target' => $row->epp_redirect_target,
-			);
+			$this->pageInfoByType[$entityType][$row->page_title] = [
+				'page_id' => $row->page_id,
+				'redirect_target' => $row->rd_title,
+			];
 		}
 
-		$this->releaseConnection( $dbw );
+		$this->releaseConnection( $dbr );
 
 		return $this->pageInfoByType[$entityType];
 	}

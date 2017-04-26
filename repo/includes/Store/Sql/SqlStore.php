@@ -522,7 +522,11 @@ class SqlStore implements Store {
 			return $this->entityDataRetrievalServiceFactory->getEntityInfoBuilderFactory();
 		}
 
-		return new SqlEntityInfoBuilderFactory( $this->entityIdParser, $this->entityIdComposer );
+		return new SqlEntityInfoBuilderFactory(
+			$this->entityIdParser,
+			$this->entityIdComposer,
+			$this->entityNamespaceLookup
+		);
 	}
 
 	/**
