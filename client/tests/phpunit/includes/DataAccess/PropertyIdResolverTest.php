@@ -5,7 +5,6 @@ namespace Wikibase\Client\Tests\DataAccess;
 use PHPUnit_Framework_TestCase;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\PropertyLabelNotResolvedException;
-use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\Property;
@@ -54,28 +53,21 @@ class PropertyIdResolverTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider resolvePropertyIdProvider
 	 */
-	public function testResolvePropertyId( PropertyId $expected, $propertyLabelOrId, array $expectedUsages = [] ) {
+	public function testResolvePropertyId( $propertyLabelOrId, $expectedId, array $expectedUsages ) {
 		$usageAccumulator = new HashUsageAccumulator();
 		$propertyIdResolver = $this->getPropertyIdResolver( $usageAccumulator );
 
-		$propertyId = $propertyIdResolver->resolvePropertyId( $propertyLabelOrId, 'en' );
-		$this->assertEquals( $expected, $propertyId );
-		$this->assertEquals( $expectedUsages, $usageAccumulator->getUsages() );
+		$id = $propertyIdResolver->resolvePropertyId( $propertyLabelOrId, 'en' );
+
+		$this->assertSame( $expectedId, $id->getSerialization() );
+		$this->assertSame( $expectedUsages, array_keys( $usageAccumulator->getUsages() ) );
 	}
 
 	public function resolvePropertyIdProvider() {
-		$p1337 = new PropertyId( 'P1337' );
-
 		return [
-			[
-				$p1337,
-				'a kitten!',
-				[
-					'P1337#L.en' => new EntityUsage( $p1337, EntityUsage::LABEL_USAGE, 'en' )
-				]
-			],
-			[ $p1337, 'p1337' ],
-			[ $p1337, 'P1337' ],
+			[ 'a kitten!', 'P1337', [ 'P1337#L.en' ] ],
+			[ 'p1337', 'P1337', [] ],
+			[ 'P1337', 'P1337', [] ],
 		];
 	}
 
