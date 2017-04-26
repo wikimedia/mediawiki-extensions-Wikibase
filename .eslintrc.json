@@ -1,0 +1,36 @@
+{
+	"extends": "wikimedia",
+	"env": {
+		"browser": true,
+		"jquery": true
+	},
+	"globals": {
+		"mediaWiki": false,
+		"dataTypes": false,
+		"dataValues": false,
+		"OO": false,
+		"util": false,
+		"valueFormatters": false,
+		"valueParsers": false,
+		"wikibase": false
+	},
+	"rules": {
+		"array-bracket-spacing": "off",
+		"computed-property-spacing": "off",
+		"dot-notation": "off",
+		"indent": "off",
+		"new-cap": "off",
+		"new-parens": "off",
+		"no-extra-boolean-cast": "off",
+		"no-multi-spaces": "off",
+		"no-underscore-dangle": "off",
+		"no-unused-vars": "off",
+		"one-var": "off",
+		"operator-linebreak": "off",
+		"space-in-parens": "off",
+		"spaced-comment": "off",
+		"valid-jsdoc": "off",
+		"wrap-iife": "off",
+		"vars-on-top": "off"
+	}
+}
