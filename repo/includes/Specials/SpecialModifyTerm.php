@@ -49,10 +49,9 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 
 	/**
 	 * @param string $title The title of the special page
-	 * @param string $restriction The required user right, 'edit' per default.
 	 */
-	public function __construct( $title, $restriction = 'edit' ) {
-		parent::__construct( $title, $restriction );
+	public function __construct( $title ) {
+		parent::__construct( $title );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();

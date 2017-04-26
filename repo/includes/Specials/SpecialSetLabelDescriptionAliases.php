@@ -61,7 +61,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	private $aliases = array();
 
 	public function __construct() {
-		parent::__construct( 'SetLabelDescriptionAliases', 'edit' );
+		parent::__construct( 'SetLabelDescriptionAliases' );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
