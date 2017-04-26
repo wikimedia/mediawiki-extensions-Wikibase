@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 
 /**
  * A factory for SqlEntityInfoBuilder instances.
@@ -29,6 +30,11 @@ class SqlEntityInfoBuilderFactory implements EntityInfoBuilderFactory {
 	 * @var EntityIdComposer
 	 */
 	private $entityIdComposer;
+
+	/**
+	 * @var EntityNamespaceLookup
+	 */
+	private $entityNamespaceLookup;
 
 	/**
 	 * @var string|bool
@@ -52,6 +58,7 @@ class SqlEntityInfoBuilderFactory implements EntityInfoBuilderFactory {
 	public function __construct(
 		EntityIdParser $entityIdParser,
 		EntityIdComposer $entityIdComposer,
+		EntityNamespaceLookup $entityNamespaceLookup,
 		$wiki = false,
 		$repositoryName = ''
 	) {
@@ -64,6 +71,7 @@ class SqlEntityInfoBuilderFactory implements EntityInfoBuilderFactory {
 		$this->entityIdComposer = $entityIdComposer;
 		$this->wiki = $wiki;
 		$this->repositoryName = $repositoryName;
+		$this->entityNamespaceLookup = $entityNamespaceLookup;
 	}
 
 	/**
@@ -77,6 +85,7 @@ class SqlEntityInfoBuilderFactory implements EntityInfoBuilderFactory {
 		return new SqlEntityInfoBuilder(
 			$this->entityIdParser,
 			$this->entityIdComposer,
+			$this->entityNamespaceLookup,
 			$entityIds,
 			$this->wiki,
 			$this->repositoryName

@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Tests\Store\Sql;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Lib\EntityIdComposer;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
 
@@ -27,6 +28,13 @@ class SqlEntityInfoBuilderFactoryTest extends \PHPUnit_Framework_TestCase {
 			->getMock();
 	}
 
+	/**
+	 * @return EntityNamespaceLookup
+	 */
+	private function getEntityNamespaceLookup() {
+		return new EntityNamespaceLookup( [ 'item' => 0, 'property' => 120 ] );
+	}
+
 	public function provideInvalidConstructorArguments() {
 		return [
 			'neither string nor false as database name (int)' => [ 100, '' ],
@@ -46,6 +54,7 @@ class SqlEntityInfoBuilderFactoryTest extends \PHPUnit_Framework_TestCase {
 		new SqlEntityInfoBuilderFactory(
 			new ItemIdParser(),
 			$this->getIdComposer(),
+			$this->getEntityNamespaceLookup(),
 			$databaseName,
 			$repositoryName
 		);
@@ -54,7 +63,8 @@ class SqlEntityInfoBuilderFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testNewEntityInfoBuilder_returnsSqlEntityInfoBuilderInstance() {
 		$factory = new SqlEntityInfoBuilderFactory(
 			new ItemIdParser(),
-			$this->getIdComposer()
+			$this->getIdComposer(),
+			$this->getEntityNamespaceLookup()
 		);
 
 		$this->assertInstanceOf( SqlEntityInfoBuilder::class, $factory->newEntityInfoBuilder( [] ) );
@@ -63,7 +73,8 @@ class SqlEntityInfoBuilderFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testNewEntityInfoBuilder_returnsNewInstanceOnEachCal() {
 		$factory = new SqlEntityInfoBuilderFactory(
 			new ItemIdParser(),
-			$this->getIdComposer()
+			$this->getIdComposer(),
+			$this->getEntityNamespaceLookup()
 		);
 
 		$builderOne = $factory->newEntityInfoBuilder( [] );
