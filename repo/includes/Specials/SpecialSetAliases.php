@@ -35,7 +35,6 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	) {
 		parent::__construct(
 			'SetAliases',
-			'edit',
 			$copyrightView,
 			$summaryFormatter,
 			$entityRevisionLookup,

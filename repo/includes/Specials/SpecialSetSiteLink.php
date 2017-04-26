@@ -108,7 +108,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	) {
 		parent::__construct(
 			'SetSiteLink',
-			'edit',
 			$copyrightView,
 			$summaryFormatter,
 			$entityRevisionLookup,

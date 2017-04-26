@@ -35,7 +35,6 @@ class SpecialSetDescription extends SpecialModifyTerm {
 	) {
 		parent::__construct(
 			'SetDescription',
-			'edit',
 			$copyrightView,
 			$summaryFormatter,
 			$entityRevisionLookup,

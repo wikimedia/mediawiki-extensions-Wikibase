@@ -53,7 +53,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 
 	/**
 	 * @param string $title The title of the special page
-	 * @param string $restriction The required user right
 	 * @param SpecialPageCopyrightView $copyrightView
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityRevisionLookup $entityRevisionLookup
@@ -62,7 +61,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 */
 	public function __construct(
 		$title,
-		$restriction,
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
 		EntityRevisionLookup $entityRevisionLookup,
@@ -71,7 +69,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	) {
 		parent::__construct(
 			$title,
-			$restriction,
 			$copyrightView,
 			$summaryFormatter,
 			$entityRevisionLookup,

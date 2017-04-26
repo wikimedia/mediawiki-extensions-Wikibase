@@ -35,7 +35,6 @@ class SpecialSetLabel extends SpecialModifyTerm {
 	) {
 		parent::__construct(
 			'SetLabel',
-			'edit',
 			$copyrightView,
 			$summaryFormatter,
 			$entityRevisionLookup,

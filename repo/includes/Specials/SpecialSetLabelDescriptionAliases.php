@@ -80,7 +80,6 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	) {
 		parent::__construct(
 			'SetLabelDescriptionAliases',
-			'edit',
 			$copyrightView,
 			$summaryFormatter,
 			$entityRevisionLookup,
