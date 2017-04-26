@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2e4df70f_4ff57d4b",
+        "filename": "repo/includes/Specials/SpecialModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-04-26T10:33:40Z",
+      "side": 1,
+      "message": "Good point, thanks. Done.",
+      "parentUuid": "2e4df70f_efd32963",
+      "range": {
+        "startLine": 198,
+        "startChar": 38,
+        "endLine": 198,
+        "endChar": 54
+      },
+      "revId": "2dacffb0ae0b09694dc57480fe7b766a7ee20afd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_0f38d59a",
         "filename": "repo/includes/Specials/SpecialNewItem.php",
         "patchSetId": 2
@@ -130,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "2e4df70f_ef9009fa",
+        "filename": "repo/includes/Specials/SpecialWikibaseRepoPage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-04-26T10:33:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e4df70f_2f5111de",
+      "range": {
+        "startLine": 160,
+        "startChar": 4,
+        "endLine": 160,
+        "endChar": 18
+      },
+      "revId": "2dacffb0ae0b09694dc57480fe7b766a7ee20afd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_ef59e905",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialSetLabelDescriptionAliasesTest.php",
         "patchSetId": 2
@@ -153,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "2e4df70f_0f9695f3",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialSetLabelDescriptionAliasesTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-04-26T10:33:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e4df70f_ef59e905",
+      "range": {
+        "startLine": 66,
+        "startChar": 3,
+        "endLine": 67,
+        "endChar": 44
+      },
+      "revId": "2dacffb0ae0b09694dc57480fe7b766a7ee20afd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_4f4edd3d",
         "filename": "repo/tests/phpunit/includes/Specials/SpecialSetLabelTest.php",
         "patchSetId": 2
@@ -164,6 +236,30 @@
       "writtenOn": "2017-04-26T08:47:44Z",
       "side": 1,
       "message": "Please use dummy strings in tests, not the real settings. Personally I prefer empty strings.",
+      "range": {
+        "startLine": 36,
+        "startChar": 3,
+        "endLine": 37,
+        "endChar": 44
+      },
+      "revId": "2dacffb0ae0b09694dc57480fe7b766a7ee20afd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_af9a0116",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialSetLabelTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-04-26T10:33:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e4df70f_4f4edd3d",
       "range": {
         "startLine": 36,
         "startChar": 3,
