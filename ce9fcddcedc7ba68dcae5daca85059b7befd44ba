@@ -22,6 +22,30 @@
       "revId": "ce9fcddcedc7ba68dcae5daca85059b7befd44ba",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_c98660e0",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-27T17:44:26Z",
+      "side": 1,
+      "message": "WikibaseSettings now runs the hook, and places the result in the entityNamespaces setting.",
+      "parentUuid": "2e4df70f_95fb9444",
+      "range": {
+        "startLine": 78,
+        "startChar": 31,
+        "endLine": 78,
+        "endChar": 50
+      },
+      "revId": "ce9fcddcedc7ba68dcae5daca85059b7befd44ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
