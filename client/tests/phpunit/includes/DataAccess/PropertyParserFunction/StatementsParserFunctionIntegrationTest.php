@@ -128,6 +128,9 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 	 */
 	private function parseWikitextToHtml( $wikiText, $title = 'WikibaseClientDataAccessTest' ) {
 		$popt = new ParserOptions( User::newFromId( 0 ), Language::factory( 'en' ) );
+		if ( is_callable( [ $popt, 'setWrapOutputClass' ] ) ) {
+			$popt->setWrapOutputClass( false );
+		}
 
 		$parser = new Parser( [ 'class' => 'Parser' ] );
 		$pout = $parser->parse( $wikiText, Title::newFromText( $title ), $popt, Parser::OT_HTML );
