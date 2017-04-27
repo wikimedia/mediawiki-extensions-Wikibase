@@ -126,6 +126,7 @@
 	"wikibase-validator-label-no-entityid": "A etiqueta non pode ser un identificador de entidade válido.",
 	"wikibase-validator-illegal-file-chars": "Os nomes de ficheiro non poden levar caracteres como comas ou barras inclinadas. Por favor, engada só o nome despois de \"File:\".",
 	"wikibase-validator-illegal-geo-shape-title": "O valor debe comezar con <code>Data:</code> e rematar con <code>.map</code>. Adicionalmente o título non debería conter caracteres como coma, # ou a barra vertical(|).",
+	"wikibase-validator-illegal-tabular-data-title": "O valor debe comezar con <code>Data:</code> rematar con <code>.tab</code>. Ademais, o título non debe conter caracteres especiais como coma, barra inclinada ou vertical.",
 	"wikibase-validator-no-such-media": "O ficheiro \"$1\" non existe en [https://commons.wikimedia.org/ Wikimedia Commons].",
 	"wikibase-validator-no-such-sitelink": "Non se puido atopar a ligazón de sitio a \"$1\" ó tentar editar identificacións.",
 	"wikibase-validator-page-not-exists": "A páxina \"$1\" non existe.",

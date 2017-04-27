@@ -53,6 +53,8 @@
 	"wikibase-rc-show-wikidata-pref": "最近の更新に{{WBREPONAME}}の編集を表示",
 	"wikibase-rc-wikibase-edit-letter": "デ",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}の編集",
+	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}}の編集",
+	"wikibase-rcfilters-hide-wikibase-description": "{{WBREPONAME}}で行われた編集",
 	"wikibase-replicationnote": "変更内容をすべてのウィキに反映させるのに時間がかかる場合があることにご注意ください。",
 	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}の編集をウォッチリストに表示",
 	"wikibase-error-serialize-error": "データをシリアライズできませんでした。",

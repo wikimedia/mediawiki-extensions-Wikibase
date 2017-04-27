@@ -73,6 +73,8 @@
 	"wikibase-rc-show-wikidata-pref": "Vis {{WBREPONAME}}-redigeringer i siste endringer",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-redigering",
+	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} redigeringer",
+	"wikibase-rcfilters-hide-wikibase-description": "Redigeringer som kommer fra {{WBREPONAME}}.",
 	"wikibase-replicationnote": "Vær oppmerksom på at det kan ta flere minutter før endringene er synlig på alle wikier",
 	"wikibase-watchlist-show-changes-pref": "Vis {{WBREPONAME}}-redigeringer i overvåkningslisten din",
 	"wikibase-error-deserialize-error": "Klarte ikke å pakke ut data.",
