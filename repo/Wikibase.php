@@ -829,7 +829,7 @@ call_user_func( function() {
 		);
 	};
 	$wgSpecialPages['SetSiteLink'] = function() {
-		$wlikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
 		$siteLookup = $wikibaseRepo->getSiteLookup();
 		$settings = $wikibaseRepo->getSettings();
 
