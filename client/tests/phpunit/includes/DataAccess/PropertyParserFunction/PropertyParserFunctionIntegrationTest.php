@@ -129,6 +129,11 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 	private function parseWikitextToHtml( $wikiText, $title = 'WikibaseClientDataAccessTest' ) {
 		$popt = new ParserOptions( User::newFromId( 0 ), Language::factory( 'en' ) );
 
+		// FIXME: The conditional is a temporary workaround, remove when done! See T37247.
+		if ( is_callable( [ $popt, 'setWrapOutputClass' ] ) ) {
+			$popt->setWrapOutputClass( false );
+		}
+
 		$parser = new Parser( [ 'class' => 'Parser' ] );
 		$pout = $parser->parse( $wikiText, Title::newFromText( $title ), $popt, Parser::OT_HTML );
 
