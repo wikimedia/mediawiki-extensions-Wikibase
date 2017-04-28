@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4df70f_a73d38ba",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-04-28T10:40:02Z",
+      "side": 1,
+      "message": "I suggest to introduce some caching in this class, so this hook is not run multiple times.",
+      "range": {
+        "startLine": 107,
+        "startChar": 2,
+        "endLine": 107,
+        "endChar": 12
+      },
+      "revId": "7a530358b9c7120420806c577bceb1c2816062fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
