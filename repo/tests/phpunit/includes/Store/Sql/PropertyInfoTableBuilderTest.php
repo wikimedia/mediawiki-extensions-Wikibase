@@ -26,6 +26,11 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 
+	protected function setUp() {
+		parent::setUp();
+		$this->tablesUsed[] = 'wb_property_info';
+	}
+
 	private function initProperties() {
 		$infos = array(
 			array( PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'test' => 'one' ),
@@ -58,13 +63,12 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 
 	private function resetPropertyInfoTable( PropertyInfoTable $table ) {
 		$dbw = $table->getWriteConnection();
-		$dbw->delete( 'wb_entity_per_page', '*' );
+		$dbw->delete( 'wb_property_info', '*' );
 	}
 
 	public function testRebuildPropertyInfo() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer() );
-
 		$this->resetPropertyInfoTable( $table );
 		$properties = $this->initProperties();
 		$propertyIds = array_keys( $properties );
@@ -78,12 +82,13 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 			$table,
 			$entityLookup,
 			$propertyInfoBuilder,
-			$wikibaseRepo->getEntityIdComposer()
+			$wikibaseRepo->getEntityIdComposer(),
+			$wikibaseRepo->getEntityNamespaceLookup()
 		);
 		$builder->setBatchSize( 3 );
 
 		// rebuild all ----
-		$builder->setFromId( 0 );
+		$builder->setFromPageId( 0 );
 		$builder->setRebuildAll( true );
 
 		$builder->rebuildPropertyInfo();
@@ -95,7 +100,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		$table->removePropertyInfo( $propId1 );
 
 		// rebuild from offset, with no effect ----
-		$builder->setFromId( $propId1->getNumericId() + 1 );
+		$builder->setFromPageId( $builder->getFromPageId() + 2 );
 		$builder->setRebuildAll( false );
 
 		$builder->rebuildPropertyInfo();
@@ -104,7 +109,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		$this->assertNull( $info, "rebuild missing from offset should have skipped this" );
 
 		// rebuild all from offset, with no effect ----
-		$builder->setFromId( $propId1->getNumericId() + 1 );
+		$builder->setFromPageId( $builder->getFromPageId() + 2 );
 		$builder->setRebuildAll( false );
 
 		$builder->rebuildPropertyInfo();
@@ -113,7 +118,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		$this->assertNull( $info, "rebuild all from offset should have skipped this" );
 
 		// rebuild missing  ----
-		$builder->setFromId( 0 );
+		$builder->setFromPageId( 0 );
 		$builder->setRebuildAll( false );
 
 		$builder->rebuildPropertyInfo();
@@ -121,7 +126,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		$this->assertTableHasProperties( $properties, $table );
 
 		// rebuild again ----
-		$builder->setFromId( 0 );
+		$builder->setFromPageId( 0 );
 		$builder->setRebuildAll( false );
 
 		$c = $builder->rebuildPropertyInfo();
