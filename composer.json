@@ -44,7 +44,7 @@
 	},
 	"require-dev": {
 		"jakub-onderka/php-parallel-lint": ">=0.3 <0.10",
-		"mediawiki/mediawiki-codesniffer": ">=0.7 <0.8"
+		"wikibase/wikibase-codesniffer": "^0.1.0"
 	},
 	"conflict": {
 		"mediawiki/mediawiki": "<1.25"
@@ -74,11 +74,12 @@
 	},
 	"scripts": {
 		"test": [
+			"@validate --no-interaction",
 			"parallel-lint . --exclude vendor",
-			"composer cs"
+			"@cs"
 		],
 		"cs": [
-			"composer phpcs"
+			"@phpcs"
 		],
 		"phpcs": "vendor/bin/phpcs -sp --standard=phpcs.xml --extensions=php --ignore=extensions/ValueView,vendor,.git ."
 	}
