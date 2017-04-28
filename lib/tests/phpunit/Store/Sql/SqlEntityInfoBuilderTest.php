@@ -3,14 +3,21 @@
 namespace Wikibase\Lib\Tests\Store\Sql;
 
 use InvalidArgumentException;
+use Title;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\ItemContent;
 use Wikibase\Lib\EntityIdComposer;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 use Wikibase\Lib\Tests\Store\EntityInfoBuilderTest;
+use Wikibase\PropertyContent;
+use Wikipage;
 
 /**
  * @covers Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder
@@ -34,24 +41,18 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 
 		$this->tablesUsed[] = 'wb_property_info';
 		$this->tablesUsed[] = 'wb_terms';
-		$this->tablesUsed[] = 'wb_entity_per_page';
+		$this->tablesUsed[] = 'page';
+		$this->tablesUsed[] = 'redirect';
+		$this->tablesUsed[] = 'revision';
 
 		$termRows = [];
 		$infoRows = [];
-		$eppRows = [];
-
-		$pageId = 1000;
+		$redirectRows = [];
 
 		foreach ( $this->getKnownEntities() as $entity ) {
+			$this->createPage( $entity );
+
 			$id = $entity->getId();
-
-			$eppRows[] = [
-				$entity->getType(),
-				$id->getNumericId(),
-				$pageId++,
-				null
-			];
-
 			$labels = $entity->getLabels()->toTextArray();
 			$descriptions = $entity->getDescriptions()->toTextArray();
 			$aliases = $entity->getAliasGroups()->toTextArray();
@@ -72,10 +73,10 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 		foreach ( $this->getKnownRedirects() as $from => $toId ) {
 			$fromId = new ItemId( $from );
 
-			$eppRows[] = [
-				$fromId->getEntityType(),
-				$fromId->getNumericId(),
-				$pageId++,
+			$page = $this->createPage( new Item( $fromId ) );
+			$redirectRows[] = [
+				$page->getId(),
+				$this->getEntityNamespaceLookup()->getEntityNamespace( $fromId->getEntityType() ),
 				$toId->getSerialization()
 			];
 		}
@@ -97,12 +98,12 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 			[ 'pi_property_id', 'pi_type', 'pi_info' ],
 			$infoRows );
 
-		$eppColumns = [ 'epp_entity_type', 'epp_entity_id', 'epp_page_id', 'epp_redirect_target' ];
+		$redirectColumns = [ 'rd_from', 'rd_namespace', 'rd_title' ];
 
 		$this->insertRows(
-			'wb_entity_per_page',
-			$eppColumns,
-			$eppRows );
+			'redirect',
+			$redirectColumns,
+			$redirectRows );
 	}
 
 	private function getTermRows( EntityId $id, $termType, $terms ) {
@@ -124,6 +125,31 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 		}
 
 		return $rows;
+	}
+
+	/**
+	 * @param EntityDocument $entity
+	 *
+	 * @return Wikipage|null
+	 */
+	private function createPage( EntityDocument $entity ) {
+
+		if ( $entity->getType() == Item::ENTITY_TYPE ) {
+			$empty = new Item( $entity->getId() );
+			$content = ItemContent::newFromItem( $empty );
+		} elseif ( $entity->getType() == Property::ENTITY_TYPE ) {
+			$empty = new Property( $entity->getId(), null, $entity->getDataTypeId() );
+			$content = PropertyContent::newFromProperty( $empty );
+		} else {
+			return null;
+		}
+		$page = WikiPage::factory( Title::newFromText(
+			$entity->getId()->getSerialization(),
+			$this->getEntityNamespaceLookup()->getEntityNamespace( $entity->getType() )
+		) );
+		$page->doEditContent( $content, 'testing', EDIT_NEW );
+
+		return $page;
 	}
 
 	private function insertRows( $table, array $fields, array $rows ) {
@@ -160,6 +186,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 					return new PropertyId( 'P' . $uniquePart );
 				},
 			] ),
+			$this->getEntityNamespaceLookup(),
 			$ids
 		);
 	}
@@ -171,6 +198,13 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 		return $this->getMockBuilder( EntityIdComposer::class )
 			->disableOriginalConstructor()
 			->getMock();
+	}
+
+	/**
+	 * @return EntityNamespaceLookup
+	 */
+	private function getEntityNamespaceLookup() {
+		return new EntityNamespaceLookup( [ 'item' => 120, 'property' => 122 ] );
 	}
 
 	public function provideInvalidConstructorArguments() {
@@ -192,6 +226,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 		new SqlEntityInfoBuilder(
 			new ItemIdParser(),
 			$this->getIdComposer(),
+			$this->getEntityNamespaceLookup(),
 			[],
 			$databaseName,
 			$repositoryName
@@ -205,6 +240,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 		$builder = new SqlEntityInfoBuilder(
 			new ItemIdParser(),
 			$this->getIdComposer(),
+			$this->getEntityNamespaceLookup(),
 			[ $itemId, $propertyId ],
 			false,
 			''
@@ -255,6 +291,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 					return ItemId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
 				},
 			] ),
+			$this->getEntityNamespaceLookup(),
 			[ $itemId ],
 			false,
 			'foo'
