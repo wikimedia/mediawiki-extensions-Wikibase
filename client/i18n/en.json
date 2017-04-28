@@ -74,6 +74,7 @@
 	"wikibase-rc-hide-wikidata-show": "Show",
 	"wikibase-rc-show-wikidata-pref": "Show {{WBREPONAME}} edits in recent changes",
 	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-legend": "{{int:wikibase-rc-wikibase-edit-title}}",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} edit",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} edits",
 	"wikibase-rcfilters-hide-wikibase-description": "Edits that originate on {{WBREPONAME}}.",

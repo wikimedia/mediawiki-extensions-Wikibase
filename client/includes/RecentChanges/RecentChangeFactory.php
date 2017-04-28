@@ -248,6 +248,14 @@ class RecentChangeFactory {
 	}
 
 	/**
+	 * @param RecentChange $rc
+	 * @return bool
+	 */
+	public static function isWikibaseChange( RecentChange $rc ) {
+		return $rc->getAttribute( 'rc_source' ) === self::SRC_WIKIBASE;
+	}
+
+	/**
 	 * @param string $key
 	 *
 	 * @return Message
