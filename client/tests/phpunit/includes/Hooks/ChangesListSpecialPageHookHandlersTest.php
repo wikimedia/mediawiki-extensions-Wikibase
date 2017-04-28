@@ -254,8 +254,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 			true
 		) );
 
-		$this->assertSame(
-			false,
+		$this->assertTrue(
 			$hookHandler->hasWikibaseChangesEnabled(),
 			$message
 		);
