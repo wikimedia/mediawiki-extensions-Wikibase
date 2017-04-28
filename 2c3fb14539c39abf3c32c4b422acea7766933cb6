@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4df70f_1cc31f0c",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-28T10:35:15Z",
+      "side": 1,
+      "message": "I wonder whether $idStrings is actually even need now? As it is only used here, couldn\u0027t this become array_keys( $entityIds ), so the array_flip and array_values combo is avoided?",
+      "range": {
+        "startLine": 600,
+        "startChar": 34,
+        "endLine": 600,
+        "endChar": 44
+      },
+      "revId": "2c3fb14539c39abf3c32c4b422acea7766933cb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_7c07c31f",
+        "filename": "lib/tests/phpunit/NoBadDependencyUsageTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-28T10:35:15Z",
+      "side": 1,
+      "message": "so with the current version those don\u0027t need to be raised, no?",
+      "revId": "2c3fb14539c39abf3c32c4b422acea7766933cb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_e71b4072",
+        "filename": "lib/tests/phpunit/Store/Sql/SqlEntityInfoBuilderTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-28T10:35:15Z",
+      "side": 1,
+      "message": "this could use single quotes",
+      "range": {
+        "startLine": 150,
+        "startChar": 34,
+        "endLine": 150,
+        "endChar": 43
+      },
+      "revId": "2c3fb14539c39abf3c32c4b422acea7766933cb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
