@@ -116,7 +116,15 @@ call_user_func( function() {
 	// Hooks
 	$wgHooks['UnitTestsList'][] = '\Wikibase\ClientHooks::registerUnitTests';
 	$wgHooks['BaseTemplateToolbox'][] = '\Wikibase\ClientHooks::onBaseTemplateToolbox';
-	$wgHooks['OldChangesListRecentChangesLine'][] = '\Wikibase\ClientHooks::onOldChangesListRecentChangesLine';
+	$wgHooks['ChangesListInitRows'][] = '\Wikibase\Client\Hooks\ChangesListLinesHandler::onChangesListInitRows';
+	$wgHooks['OldChangesListRecentChangesLine'][] =
+		'\Wikibase\Client\Hooks\ChangesListLinesHandler::onOldChangesListRecentChangesLine';
+	$wgHooks['EnhancedChangesListModifyLineData'][] =
+		'\Wikibase\Client\Hooks\ChangesListLinesHandler::onEnhancedChangesListModifyLineData';
+	$wgHooks['EnhancedChangesListModifyBlockLineData'][] =
+		'\Wikibase\Client\Hooks\ChangesListLinesHandler::onEnhancedChangesListModifyBlockLineData';
+	$wgHooks['EnhancedChangesList::getLogText'][] =
+		'\Wikibase\Client\Hooks\ChangesListLinesHandler::onEnhancedChangesListGetLogText';
 	$wgHooks['OutputPageParserOutput'][] = '\Wikibase\Client\Hooks\SidebarHookHandlers::onOutputPageParserOutput';
 	$wgHooks['SkinTemplateGetLanguageLink'][] = '\Wikibase\Client\Hooks\SidebarHookHandlers::onSkinTemplateGetLanguageLink';
 	$wgHooks['ContentAlterParserOutput'][] = '\Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers::onContentAlterParserOutput';
@@ -276,6 +284,8 @@ call_user_func( function() {
 
 	$wgRecentChangesFlags['wikibase-edit'] = array(
 		'letter' => 'wikibase-rc-wikibase-edit-letter',
-		'title' => 'wikibase-rc-wikibase-edit-title'
+		'title' => 'wikibase-rc-wikibase-edit-title',
+		'legend' => 'wikibase-rc-wikibase-edit-legend',
+		'grouping' => 'all',
 	);
 } );
