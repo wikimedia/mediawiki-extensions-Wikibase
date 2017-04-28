@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4df70f_07b42ce3",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-28T12:10:13Z",
+      "side": 1,
+      "message": "That seems like a major code smell to me. Why not accept a LocalIdLookup? And if we want to ignore LocalIdLookup, why should this constructor decide this, instead of the caller? When I provide an ID lookup to the constructor, It\u0027s rather surprising to have that ignored, based on the concrete type.",
+      "revId": "169e66d8d5f42e7015ddb2fe305eac04eee1c2d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_67cc108d",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-28T12:10:13Z",
+      "side": 1,
+      "message": "How do other parts of MediaWiki react to -1 as the user ID? It would be bad if -1 was assumed to be a valid user ID, just because it\u0027s !\u003d 0. IRC, other code generally uses 0 for unknown users, e.g. when importing revisions. \n\nIt would indeed be nice to be able to distinguish between anons and unknown users, but introducing this distinction here will not work, if it is not done in the same way in the rest of the code base. \n\nAm I missing something?",
+      "revId": "169e66d8d5f42e7015ddb2fe305eac04eee1c2d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_87f27ccc",
+        "filename": "lib/includes/Changes/EntityChange.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-28T12:10:13Z",
+      "side": 1,
+      "message": "Please declare the type.",
+      "revId": "169e66d8d5f42e7015ddb2fe305eac04eee1c2d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_67f5f0b4",
+        "filename": "lib/includes/Changes/EntityChange.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-28T12:10:13Z",
+      "side": 1,
+      "message": "This makes it impossible to test with a fake CentralIdLookup.",
+      "revId": "169e66d8d5f42e7015ddb2fe305eac04eee1c2d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_27be08d2",
+        "filename": "lib/includes/Changes/EntityChange.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-28T12:10:13Z",
+      "side": 1,
+      "message": "We are currently trying to refactor EntityCHange and friends to a true value object. That means it should not know about any services. Any data transformation will need to be done by the code that constructs or modifies the EntityChange object from the outside.",
+      "revId": "169e66d8d5f42e7015ddb2fe305eac04eee1c2d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_67a3b0a9",
+        "filename": "lib/includes/Changes/EntityChange.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-28T12:10:13Z",
+      "side": 1,
+      "message": "So, the idea here is to say \"if we are using LocalIdLookup, we don\u0027t set the central_user_id, instead of setting it to the local id\"?\n\nBut that means this feature isn\u0027t usable with a \"shared user table\" setup. I see the problem, but it\u0027s still a bit sad...",
+      "revId": "169e66d8d5f42e7015ddb2fe305eac04eee1c2d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_07bd0cd1",
+        "filename": "lib/includes/Changes/EntityChange.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-28T12:10:13Z",
+      "side": 1,
+      "message": "This entire function should move to the (oddly named) ChangeNotifier class. For now, I suggest to supply the global user ID here as an optional parameter, so it can be determined by the caller.",
+      "revId": "169e66d8d5f42e7015ddb2fe305eac04eee1c2d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_e785800c",
+        "filename": "lib/tests/phpunit/Changes/EntityChangeTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-28T12:10:13Z",
+      "side": 1,
+      "message": "This black magic would not be needed if the central ID lookup was done in the factory code (resp in ChangeNotifier).",
+      "revId": "169e66d8d5f42e7015ddb2fe305eac04eee1c2d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
