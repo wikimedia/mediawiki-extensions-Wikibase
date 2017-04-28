@@ -207,7 +207,8 @@ class DatabaseSchemaUpdater {
 			$table,
 			$entityLookup,
 			$propertyInfoBuilder,
-			$wikibaseRepo->getEntityIdComposer()
+			$wikibaseRepo->getEntityIdComposer(),
+			$wikibaseRepo->getEntityNamespaceLookup()
 		);
 		$builder->setReporter( $reporter );
 		$builder->setUseTransactions( false );
