@@ -4,13 +4,11 @@ namespace Wikibase;
 
 use Action;
 use BaseTemplate;
-use ChangesList;
 use EchoEvent;
 use EditPage;
 use IContextSource;
 use OutputPage;
 use Parser;
-use RecentChange;
 use Skin;
 use StubObject;
 use Title;
@@ -24,8 +22,6 @@ use Wikibase\Client\Hooks\DeletePageNoticeCreator;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\EditActionHookHandler;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
-use Wikibase\Client\RecentChanges\ChangeLineFormatter;
-use Wikibase\Client\RecentChanges\ExternalChangeFactory;
 use Wikibase\Client\Specials\SpecialPagesWithBadges;
 use Wikibase\Client\Specials\SpecialUnconnectedPages;
 use Wikibase\Client\Specials\SpecialEntityUsage;
@@ -79,59 +75,6 @@ final class ClientHooks {
 			$extraLibraries['mw.wikibase'] = Scribunto_LuaWikibaseLibrary::class;
 			$extraLibraries['mw.wikibase.entity'] = Scribunto_LuaWikibaseEntityLibrary::class;
 		}
-
-		return true;
-	}
-
-	/**
-	 * Hook for formatting recent changes linkes
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/OldChangesListRecentChangesLine
-	 *
-	 * @param ChangesList $changesList
-	 * @param string $s
-	 * @param RecentChange $rc
-	 * @param string[] &$classes
-	 *
-	 * @return bool
-	 */
-	public static function onOldChangesListRecentChangesLine( ChangesList &$changesList, &$s,
-		RecentChange $rc, &$classes = array() ) {
-
-		$type = $rc->getAttribute( 'rc_type' );
-
-		if ( $type == RC_EXTERNAL ) {
-			$wikibaseClient = WikibaseClient::getDefaultInstance();
-			$changeFactory = new ExternalChangeFactory(
-				$wikibaseClient->getSettings()->getSetting( 'repoSiteId' ),
-				$wikibaseClient->getContentLanguage()
-			);
-
-			try {
-				$externalChange = $changeFactory->newFromRecentChange( $rc );
-			} catch ( UnexpectedValueException $ex ) {
-				// @fixme use rc_source column to better distinguish
-				// Wikibase changes vs. non-wikibase, and unexpected
-				// stuff in Wikibase changes.
-				wfWarn( 'Invalid or not a Wikibase change.' );
-				return false;
-			}
-
-			// fixme: inject formatter and flags into a changes list formatter
-			$formatter = new ChangeLineFormatter(
-				$changesList->getUser(),
-				$changesList->getLanguage(),
-				$wikibaseClient->newRepoLinker()
-			);
-
-			$flag = $changesList->recentChangesFlags( array( 'wikibase-edit' => true ), '' );
-			$line = $formatter->format( $externalChange, $rc->getTitle(), $rc->counter, $flag );
-
-			$classes[] = 'wikibase-edit';
-			$s = $line;
-		}
-
-		// OutputPage will ignore multiple calls
-		$changesList->getOutput()->addModuleStyles( 'wikibase.client.changeslist.css' );
 
 		return true;
 	}
