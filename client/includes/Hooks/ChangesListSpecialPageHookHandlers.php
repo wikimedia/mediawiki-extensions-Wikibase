@@ -192,7 +192,7 @@ class ChangesListSpecialPageHookHandlers {
 	 */
 	public function addFilterIfEnabled( ChangesListSpecialPage $specialPage ) {
 		// The *user-facing* filter is only registered if external changes
-		// are enabled, and the user does not have enhanced recent changes.
+		// are enabled.
 		//
 		// If the user-facing filter is not registered, it's always *hidden*.
 		// (See ChangesListSpecialPageQuery).
@@ -209,6 +209,7 @@ class ChangesListSpecialPageHookHandlers {
 		$changeTypeGroup = $specialPage->getFilterGroup( 'changeType' );
 
 		$specialPage->getOutput()->addModules( 'wikibase.client.jqueryMsg' );
+		$specialPage->getOutput()->addModuleStyles( 'wikibase.client.changeslist.css' );
 
 		$wikidataFilter = new ChangesListBooleanFilter( [
 			'name' => $filterName,
@@ -225,7 +226,7 @@ class ChangesListSpecialPageHookHandlers {
 			},
 			'cssClassSuffix' => 'src-mw-wikibase',
 			'isRowApplicableCallable' => function ( $ctx, $rc ) {
-				return $rc->getAttribute( 'rc_source' ) === RecentChangeFactory::SRC_WIKIBASE;
+				return RecentChangeFactory::isWikibaseChange( $rc );
 			}
 		] );
 
@@ -274,9 +275,7 @@ class ChangesListSpecialPageHookHandlers {
 	 * @return bool
 	 */
 	protected function hasWikibaseChangesEnabled() {
-		// do not include wikibase changes for activated enhanced watchlist
-		// since we do not support that format yet (T46222)
-		return $this->showExternalChanges && !$this->isEnhancedChangesEnabled();
+		return $this->showExternalChanges;
 	}
 
 	/**
@@ -284,15 +283,6 @@ class ChangesListSpecialPageHookHandlers {
 	 */
 	private function hasShowWikibaseEditsPrefEnabled() {
 		return (bool)$this->user->getOption( $this->getOptionName() );
-	}
-
-	/**
-	 * @return bool
-	 */
-	private function isEnhancedChangesEnabled() {
-		$enhancedChangesUserOption = $this->user->getOption( 'usenewrc' );
-
-		return $this->request->getBool( 'enhanced', $enhancedChangesUserOption );
 	}
 
 	/**
