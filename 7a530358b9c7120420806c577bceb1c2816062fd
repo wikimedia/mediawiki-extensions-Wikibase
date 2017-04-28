@@ -96,6 +96,30 @@
       "revId": "7a530358b9c7120420806c577bceb1c2816062fd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_62515edd",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-04-28T13:51:36Z",
+      "side": 1,
+      "message": "You need to run every time, otherwise you\u0027ll end up with different namespaces each time you call `buildEntityNamespaceConfigurations()`",
+      "parentUuid": "2e4df70f_a73d38ba",
+      "range": {
+        "startLine": 107,
+        "startChar": 2,
+        "endLine": 107,
+        "endChar": 12
+      },
+      "revId": "7a530358b9c7120420806c577bceb1c2816062fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
