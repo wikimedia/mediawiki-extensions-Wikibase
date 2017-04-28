@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4df70f_f96be080",
+        "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-28T19:09:04Z",
+      "side": 1,
+      "message": "You can use $dbw-\u003ebuildConcat().\nAlso, this can go into the conditional. It\u0027s not used anywhere else, is it?",
+      "revId": "53283205b15d66398dbd230dea9c17754acf7d66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
