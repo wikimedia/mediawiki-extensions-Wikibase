@@ -5,6 +5,7 @@ namespace Wikibase\Client\Tests\RecentChanges;
 use ChangesList;
 use DerivativeContext;
 use Language;
+use Linker;
 use MediaWikiLangTestCase;
 use RecentChange;
 use RequestContext;
@@ -83,6 +84,160 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 				$formattedLine,
 				is( htmlPiece( havingChild( $tagMatcher ) ) )
 			);
+		}
+
+		foreach ( $patterns as $pattern ) {
+			$this->assertRegExp( $pattern, $formattedLine );
+		}
+	}
+
+	/**
+	 * @dataProvider formatProvider
+	 */
+	public function testFormatDataForEnhancedLine( array $expectedTags, array $patterns, RecentChange $recentChange ) {
+		$formatter = new ChangeLineFormatter(
+			$this->getTestContext()->getUser(),
+			Language::factory( 'en' ),
+			$this->repoLinker
+		);
+
+		// Use the actual setting, because out handler for the FormatAutocomment hook will check
+		// the wiki id against this setting.
+		$repoWikiId = WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'repoSiteId' );
+
+		$changeFactory = new ExternalChangeFactory( $repoWikiId, Language::factory( 'en' ) );
+		$externalChange = $changeFactory->newFromRecentChange( $recentChange );
+
+		$data = [
+			'untouchedKey' => 'foo',
+			'characterDiff' => '(0)',
+			'separatorAfterCharacterDiff' => '. .',
+		];
+
+		$formatter->formatDataForEnhancedLine(
+			$data,
+			$externalChange,
+			$recentChange->getTitle(),
+			$recentChange->counter
+		);
+
+		$this->assertArrayNotHasKey( 'characterDiff', $data );
+		$this->assertArrayNotHasKey( 'separatorAfterCharacterDiff', $data );
+		$this->assertArrayHasKey( 'untouchedKey', $data );
+		$this->assertArrayHasKey( 'recentChangesFlags', $data );
+		$this->assertArrayHasKey( 'timestampLink', $data );
+		$this->assertEquals( $data['untouchedKey'], 'foo' );
+		$this->assertEquals( [ 'wikibase-edit' => true ], $data['recentChangesFlags'] );
+
+		$map = [
+			'difflink' => 'currentAndLastLinks',
+			'histlink' => 'currentAndLastLinks',
+			'entitylink' => 'currentAndLastLinks',
+			'deletionlog' => 'currentAndLastLinks',
+			'changeslist-separator' => 'separatorAfterCurrentAndLastLinks',
+			'userlink' => 'userLink',
+			'usertoollinks' => 'userTalkLink',
+			'usertalk' => 'userTalkLink',
+			'usercontribs' => 'userTalkLink',
+			'comment' => 'comment',
+		];
+
+		foreach ( $expectedTags as $key => $tagMatcher ) {
+			$part = explode( '-', $key, 2 )[1];
+			if ( isset( $map[$part] ) ) {
+				$this->assertArrayHasKey( $map[$part], $data );
+				$message = $key . "\n\t" . $data[$map[$part]];
+				assertThat(
+					$message,
+					$data[$map[$part]],
+					is( htmlPiece( havingChild( $tagMatcher ) ) )
+				);
+			}
+		}
+
+		$formattedLine = '';
+		foreach ( array_unique( array_values( $map ) ) as $key ) {
+			if ( isset( $data[$key] ) ) {
+				$formattedLine .= $data[$key];
+			}
+		}
+
+		foreach ( $patterns as $pattern ) {
+			$this->assertRegExp( $pattern, $formattedLine );
+		}
+	}
+
+	/**
+	 * @dataProvider formatProvider
+	 */
+	public function testFormatDataForEnhancedBlockLine( array $expectedTags, array $patterns, RecentChange $recentChange ) {
+		$formatter = new ChangeLineFormatter(
+			$this->getTestContext()->getUser(),
+			Language::factory( 'en' ),
+			$this->repoLinker
+		);
+
+		// Use the actual setting, because out handler for the FormatAutocomment hook will check
+		// the wiki id against this setting.
+		$repoWikiId = WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'repoSiteId' );
+
+		$changeFactory = new ExternalChangeFactory( $repoWikiId, Language::factory( 'en' ) );
+		$externalChange = $changeFactory->newFromRecentChange( $recentChange );
+
+		$data = [
+			'untouchedKey' => 'foo',
+			'articleLink' => Linker::link( $recentChange->getTitle() ),
+			'characterDiff' => '(0)',
+			'separatorAftercharacterDiff' => '. .',
+		];
+
+		$formatter->formatDataForEnhancedBlockLine(
+			$data,
+			$externalChange,
+			$recentChange->getTitle(),
+			$recentChange->counter
+		);
+
+		$this->assertArrayNotHasKey( 'separatorAftercharacterDiff', $data );
+		$this->assertArrayNotHasKey( 'characterDiff', $data );
+		$this->assertArrayHasKey( 'untouchedKey', $data );
+		$this->assertArrayHasKey( 'recentChangesFlags', $data );
+		$this->assertArrayHasKey( 'timestampLink', $data );
+		$this->assertEquals( $data['untouchedKey'], 'foo' );
+		$this->assertEquals( [ 'wikibase-edit' => true ], $data['recentChangesFlags'] );
+
+		$map = [
+			'entitylink' => 'articleLink',
+			'deletionlog' => 'articleLink',
+			'titlelink' => 'articleLink',
+			'difflink' => 'historyLink',
+			'histlink' => 'historyLink',
+			'changeslist-separator' => 'separatorAfterLinks',
+			'userlink' => 'userLink',
+			'usertoollinks' => 'userTalkLink',
+			'usertalk' => 'userTalkLink',
+			'usercontribs' => 'userTalkLink',
+			'comment' => 'comment',
+		];
+
+		foreach ( $expectedTags as $key => $tagMatcher ) {
+			$part = explode( '-', $key, 2 )[1];
+			if ( isset( $map[$part] ) ) {
+				$this->assertArrayHasKey( $map[$part], $data );
+				$message = $key . "\n\t" . $data[$map[$part]];
+				assertThat(
+					$message,
+					$data[$map[$part]],
+					is( htmlPiece( havingChild( $tagMatcher ) ) )
+				);
+			}
+		}
+
+		$formattedLine = '';
+		foreach ( array_unique( array_values( $map ) ) as $key ) {
+			if ( isset( $data[$key] ) ) {
+				$formattedLine .= $data[$key];
+			}
 		}
 
 		foreach ( $patterns as $pattern ) {
