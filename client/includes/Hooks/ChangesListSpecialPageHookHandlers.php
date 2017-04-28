@@ -225,6 +225,7 @@ class ChangesListSpecialPageHookHandlers {
 			},
 			'cssClassSuffix' => 'src-mw-wikibase',
 			'isRowApplicableCallable' => function ( $ctx, $rc ) {
+				// ChangesListLinesHandler::isWikibaseChange
 				return $rc->getAttribute( 'rc_source' ) === RecentChangeFactory::SRC_WIKIBASE;
 			}
 		] );
@@ -274,9 +275,7 @@ class ChangesListSpecialPageHookHandlers {
 	 * @return bool
 	 */
 	protected function hasWikibaseChangesEnabled() {
-		// do not include wikibase changes for activated enhanced watchlist
-		// since we do not support that format yet (T46222)
-		return $this->showExternalChanges && !$this->isEnhancedChangesEnabled();
+		return $this->showExternalChanges;
 	}
 
 	/**
@@ -284,15 +283,6 @@ class ChangesListSpecialPageHookHandlers {
 	 */
 	private function hasShowWikibaseEditsPrefEnabled() {
 		return (bool)$this->user->getOption( $this->getOptionName() );
-	}
-
-	/**
-	 * @return bool
-	 */
-	private function isEnhancedChangesEnabled() {
-		$enhancedChangesUserOption = $this->user->getOption( 'usenewrc' );
-
-		return $this->request->getBool( 'enhanced', $enhancedChangesUserOption );
 	}
 
 	/**

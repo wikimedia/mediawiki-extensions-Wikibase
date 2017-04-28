@@ -71,7 +71,7 @@ class ChangeLineFormatter {
 		}
 
 		$line .= $this->formatTimestamp( $rev->getTimestamp() );
-		$line .= $this->formatUserLinks( $rev->getUserName() );
+		$line .= implode( '', $this->formatUserLinks( $rev->getUserName() ) );
 
 		$commentHtml = $rev->getCommentHtml();
 
@@ -82,6 +82,72 @@ class ChangeLineFormatter {
 		$line .= $this->wrapCommentBlock( $commentHtml );
 
 		return $line;
+	}
+
+	/**
+	 * @param array &$data
+	 * @param ExternalChange $externalChange
+	 * @param Title $title
+	 */
+	private function formatCommonDataForEnhancedLine( array &$data, ExternalChange $externalChange, Title $title ) {
+		$entityId = $externalChange->getEntityId();
+		$rev = $externalChange->getRev();
+
+		$data['recentChangesFlags']['wikibase-edit'] = true;
+		$data['timestampLink'] = $this->buildPermanentLink( $entityId, $rev );
+
+		list( $data['userLink'], $data['userTalkLink'] ) = $this->formatUserLinks( $rev->getUserName() );
+
+		$commentHtml = $rev->getCommentHtml();
+		if ( $commentHtml === null || $commentHtml === '' ) {
+			$commentHtml = Linker::formatComment( $rev->getComment(), $title, false, $externalChange->getSiteId() );
+		}
+		$data['comment'] = $this->wrapCommentBlock( $commentHtml );
+	}
+
+	/**
+	 * @param array &$data
+	 * @param ExternalChange $externalChange
+	 * @param Title $title
+	 * @param int $count
+	 */
+	public function formatDataForEnhancedLine( array &$data, ExternalChange $externalChange, Title $title, $count ) {
+		$this->formatCommonDataForEnhancedLine( $data, $externalChange, $title );
+
+		$entityId = $externalChange->getEntityId();
+		$rev = $externalChange->getRev();
+
+		$data['currentAndLastLinks'] = ''
+			. $this->repoLinker->buildEntityLink( $entityId )
+			. wfMessage( 'word-separator' )->escaped()
+			. $this->formatDiffHist( $entityId, $rev, $count );
+
+		$data['separatorAfterCurrentAndLastLinks'] = $this->changeSeparator();
+
+		unset( $data['characterDiff'] );
+		unset( $data['separatorAfterCharacterDiff'] );
+	}
+
+	/**
+	 * @param array &$data
+	 * @param ExternalChange $externalChange
+	 * @param Title $title
+	 * @param int $count
+	 */
+	public function formatDataForEnhancedBlockLine( array &$data, ExternalChange $externalChange, Title $title, $count ) {
+		$this->formatCommonDataForEnhancedLine( $data, $externalChange, $title );
+
+		$entityId = $externalChange->getEntityId();
+		$rev = $externalChange->getRev();
+
+		$data['articleLink'] .= $this->formatEntityLink( $entityId );
+		$data['historyLink'] = ''
+			. wfMessage( 'word-separator' )->escaped()
+			. $this->formatDiffHist( $entityId, $rev, $count );
+
+		unset( $data['characterDiff'] );
+		// @fixme: this has different case than in formatDataForEnhancedLine
+		unset( $data['separatorAftercharacterDiff'] );
 	}
 
 	/**
@@ -117,7 +183,7 @@ class ChangeLineFormatter {
 	/**
 	 * @param string $userName
 	 *
-	 * @return string HTML
+	 * @return HTML[]
 	 */
 	private function formatUserLinks( $userName ) {
 		$links = $this->buildUserLinks( $userName );
@@ -134,17 +200,18 @@ class ChangeLineFormatter {
 	 *
 	 * @param string[] $links
 	 *
-	 * @return string HTML
+	 * @return HTML[]
 	 */
 	private function formatIpUserLinks( array $links ) {
-		$userlinks = $links['contribs'];
+		$ret = [];
 
-		$userlinks .= wfMessage( 'word-separator' )->plain()
+		$ret[] = $links['contribs'];
+		$ret[] .= wfMessage( 'word-separator' )->plain()
 			. wfMessage( 'parentheses' )->rawParams(
 				$links['usertalk']
 			)->text();
 
-		return $userlinks;
+		return $ret;
 	}
 
 	/**
@@ -152,24 +219,26 @@ class ChangeLineFormatter {
 	 *
 	 * @param string[] $links
 	 *
-	 * @return string HTML
+	 * @return HTML[]
 	 */
 	private function formatRegisteredUserLinks( array $links ) {
-		$userlinks = $links['user'];
+		$ret = [];
+
+		$ret[] = $links['user'];
 
 		$usertools = array(
 			$links['usertalk'],
 			$links['contribs']
 		);
 
-		$userlinks .= wfMessage( 'word-separator' )->plain()
+		$ret[] = wfMessage( 'word-separator' )->plain()
 			. '<span class="mw-usertoollinks">'
 			. wfMessage( 'parentheses' )->rawParams(
 				$this->lang->pipeList( $usertools )
 			)->text()
 			. '</span>';
 
-		return $userlinks;
+		return $ret;
 	}
 
 	/**
@@ -210,6 +279,21 @@ class ChangeLineFormatter {
 		return wfMessage( 'parentheses' )->rawParams(
 			$this->lang->pipeList( array( $diffLink, $historyLink ) )
 		)->text();
+	}
+
+	private function buildPermanentLink( EntityId $entityId, RevisionData $rev ) {
+		$params = array(
+			'title' => $this->repoLinker->getEntityTitle( $entityId ),
+			'curid' => $rev->getPageId(),
+			'oldid' => $rev->getRevId()
+		);
+
+		$url = $this->repoLinker->addQueryParams( $this->repoLinker->getIndexUrl(), $params );
+
+		return $this->repoLinker->formatLink(
+			$url,
+			$this->lang->userTime( $rev->getTimestamp(), $this->user )
+		);
 	}
 
 	/**
