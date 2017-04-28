@@ -2,6 +2,80 @@
   "comments": [
     {
       "key": {
+        "uuid": "2e4df70f_67a65052",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-28T13:40:43Z",
+      "side": 1,
+      "message": "just wondering: so having this class introduced does not help with the issue described in the NOTE above, right? In other words, we are going to keep \"thisWikiIsTheRepo\" pseudo-setting in multiple places below, correct?",
+      "revId": "7a530358b9c7120420806c577bceb1c2816062fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_42754291",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-28T13:40:43Z",
+      "side": 1,
+      "message": "there\u0027s no such method (yet). Did you mean WikibaseRepo::getSettings or WikibaseSettings::getRepoSettings?",
+      "range": {
+        "startLine": 15,
+        "startChar": 41,
+        "endLine": 15,
+        "endChar": 72
+      },
+      "revId": "7a530358b9c7120420806c577bceb1c2816062fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_476c7405",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-28T13:40:43Z",
+      "side": 1,
+      "message": "yes yes yes!",
+      "revId": "7a530358b9c7120420806c577bceb1c2816062fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_e2048e19",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-04-28T13:40:43Z",
+      "side": 1,
+      "message": "also may throw OutOfBoundsException",
+      "revId": "7a530358b9c7120420806c577bceb1c2816062fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_a73d38ba",
         "filename": "lib/includes/WikibaseSettings.php",
         "patchSetId": 9
