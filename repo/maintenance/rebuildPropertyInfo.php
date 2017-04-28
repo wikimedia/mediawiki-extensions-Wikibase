@@ -25,7 +25,6 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 		$this->addDescription( 'Rebuild the property info table.' );
 
 		$this->addOption( 'rebuild-all', "Update property info for all properties (per default, only missing entries are created)" );
-		$this->addOption( 'start-row', "The ID of the first row to update (useful for continuing aborted runs)", false, true );
 		$this->addOption( 'batch-size', "Number of rows to update per database transaction (100 per default)", false, true );
 	}
 
@@ -51,13 +50,13 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 			new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer() ),
 			$wikibaseRepo->getEntityLookup(),
 			$wikibaseRepo->newPropertyInfoBuilder(),
-			$wikibaseRepo->getEntityIdComposer()
+			$wikibaseRepo->getEntityIdComposer(),
+			$wikibaseRepo->getEntityNamespaceLookup()
 		);
 		$builder->setReporter( $reporter );
 
 		$builder->setBatchSize( (int)$this->getOption( 'batch-size', 100 ) );
 		$builder->setRebuildAll( $this->getOption( 'rebuild-all', false ) );
-		$builder->setFromId( (int)$this->getOption( 'start-row', 1 ) );
 
 		$n = $builder->rebuildPropertyInfo();
 
