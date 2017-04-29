@@ -4,7 +4,8 @@
 			"Дзяніс Тутэйшы",
 			"Чаховіч Уладзіслаў",
 			"Maksim L.",
-			"Mikalai Udodau"
+			"Mikalai Udodau",
+			"Artsiom91"
 		]
 	},
 	"wikibase-client-desc": "Кліент для пашырэння Wikibase",
@@ -43,5 +44,7 @@
 	"wikibase-rc-wikibase-edit-letter": "д",
 	"wikibase-rc-wikibase-edit-title": "Праўка {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-replicationnote": "Калі ласка, звернеце ўвагу, што можа прайсці некалькі хвілін, пакуль змены стануць бачнымі ва ўсіх вікі-праектах",
-	"wikibase-otherprojects": "У іншых праектах"
+	"wikibase-otherprojects": "У іншых праектах",
+	"unresolved-property-category": "Старонкі з недаступнымі уласцівасцямі Вікідадзеных",
+	"unresolved-property-category-desc": "Старонка, якая спасылаецца на ўласцівасць Вікідадзеных, што не можа быць знойдзена па ID або подпісу"
 }

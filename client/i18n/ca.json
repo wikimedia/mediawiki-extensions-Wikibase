@@ -21,6 +21,7 @@
 	"tooltip-t-wikibase": "Enllaç a l'element del repositori de dades connectades",
 	"apihelp-query+wbentityusage-param-prop": "Propietats que s'afegiran al resultat.",
 	"apihelp-query+wbentityusage-paramvalue-prop-url": "Si s’habilita, s’hi afegirà l’URL de l’entitat",
+	"apihelp-query+wblistentityusage-param-prop": "Propietats per afegir al resultat.",
 	"apihelp-query+wblistentityusage-param-entities": "Entitats que s'han utilitzat.",
 	"apihelp-query+pageterms-description": "Aconsegueix termes associats amb una pàgina a través d'un element de dades associades.",
 	"apihelp-query+pageterms-example-simple": "Aconsegueix tots els termes associats amb la pàgina 'London', en la llengua de l'usuari.",

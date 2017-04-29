@@ -64,6 +64,7 @@
 	"entityusage": "Upotreba jedinica",
 	"wikibase-pageinfo-entity-id": "ID stavke na {{GRAMMAR:dativ|{{WBREPONAME}}}}",
 	"wikibase-pageinfo-entity-id-none": "Ništa",
+	"wikibase-pageinfo-entity-usage": "Stavke na {{GRAMMAR:dativ|{{WBREPONAME}}}} koje se koriste na ovoj stranici",
 	"wikibase-property-render-error": "Neizvršeno izražavanje osobine $1: $2",
 	"wikibase-otherprojects": "Na drugim projektima",
 	"wikibase-otherprojects-beta-message": "Drugi projekti na bočnoj traci",
