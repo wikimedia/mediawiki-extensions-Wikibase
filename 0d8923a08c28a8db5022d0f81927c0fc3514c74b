@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4df70f_e50c933f",
+        "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-29T18:27:01Z",
+      "side": 1,
+      "message": "The meaning of this changed completely, probably warranting a name change: this used to be a numeric property id. Now it\u0027s a page ID. This is set from the --start-row parameter of the  rebuildPropertyInfo script. Maybe we can just drop this. But if we keep it, documentation should be improved so it is clear that this setter, and the script option, refer to page IDs.",
+      "revId": "0d8923a08c28a8db5022d0f81927c0fc3514c74b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_85190f81",
+        "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-29T18:27:01Z",
+      "side": 1,
+      "message": "No, $rowId isn\u0027t the page ID, it\u0027s a (numeric) property ID!",
+      "revId": "0d8923a08c28a8db5022d0f81927c0fc3514c74b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_452227a4",
+        "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-29T18:27:01Z",
+      "side": 1,
+      "message": "perhaps we can set $this-\u003efromId to $rowId+1 here. That would allow rebuildPropertyInfo() to always just continue where it left off. We could also have a getter for $this-\u003efromId, e.g. for constructing a continuation for use in an API response.",
+      "revId": "0d8923a08c28a8db5022d0f81927c0fc3514c74b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_c50f1732",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/PropertyInfoTableBuilderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-29T18:27:01Z",
+      "side": 1,
+      "message": "hm, strange, this method doesn\u0027t do what the name implies.",
+      "revId": "0d8923a08c28a8db5022d0f81927c0fc3514c74b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_45fb0712",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/PropertyInfoTableBuilderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-29T18:27:01Z",
+      "side": 1,
+      "message": "This needs to change now. Perhaps the entire method can be removed. Or maybe it should reset the property_info table, instead entity_per_page?",
+      "revId": "0d8923a08c28a8db5022d0f81927c0fc3514c74b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_a5168b4b",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/PropertyInfoTableBuilderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-04-29T18:27:01Z",
+      "side": 1,
+      "message": "This is why the test fails: this calculates a property ID, but setFromId now expects a page ID. I can\u0027t think of a good way to get the page ID here, unless rebuildPropertyInfo() could remember or return it.",
+      "revId": "0d8923a08c28a8db5022d0f81927c0fc3514c74b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
