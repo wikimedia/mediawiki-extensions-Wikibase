@@ -16,6 +16,24 @@
       "revId": "53283205b15d66398dbd230dea9c17754acf7d66",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_aac9787d",
+        "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-04-29T11:52:54Z",
+      "side": 1,
+      "message": "Done. I swear I searched for that functionality several months ago when I was building another query.",
+      "parentUuid": "2e4df70f_f96be080",
+      "revId": "53283205b15d66398dbd230dea9c17754acf7d66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
