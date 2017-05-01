@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2e4df70f_5b1be4d4",
+        "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-01T12:32:21Z",
+      "side": 1,
+      "message": "It was my bad, I get it fixed.",
+      "parentUuid": "2e4df70f_bbcd4864",
+      "range": {
+        "startLine": 44,
+        "startChar": 31,
+        "endLine": 44,
+        "endChar": 53
+      },
+      "revId": "0d8923a08c28a8db5022d0f81927c0fc3514c74b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_e50c933f",
         "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
         "patchSetId": 5
@@ -36,6 +60,42 @@
       "writtenOn": "2017-04-29T18:27:01Z",
       "side": 1,
       "message": "The meaning of this changed completely, probably warranting a name change: this used to be a numeric property id. Now it\u0027s a page ID. This is set from the --start-row parameter of the  rebuildPropertyInfo script. Maybe we can just drop this. But if we keep it, documentation should be improved so it is clear that this setter, and the script option, refer to page IDs.",
+      "revId": "0d8923a08c28a8db5022d0f81927c0fc3514c74b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_fb8670df",
+        "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-01T12:32:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e4df70f_e50c933f",
+      "revId": "0d8923a08c28a8db5022d0f81927c0fc3514c74b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_1b155c9c",
+        "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-01T12:32:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e4df70f_e50c933f",
       "revId": "0d8923a08c28a8db5022d0f81927c0fc3514c74b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -110,6 +170,24 @@
     },
     {
       "key": {
+        "uuid": "2e4df70f_5b8204cf",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/PropertyInfoTableBuilderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-01T12:32:21Z",
+      "side": 1,
+      "message": "I removed it.",
+      "parentUuid": "2e4df70f_45fb0712",
+      "revId": "0d8923a08c28a8db5022d0f81927c0fc3514c74b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_a5168b4b",
         "filename": "repo/tests/phpunit/includes/Store/Sql/PropertyInfoTableBuilderTest.php",
         "patchSetId": 5
@@ -121,6 +199,24 @@
       "writtenOn": "2017-04-29T18:27:01Z",
       "side": 1,
       "message": "This is why the test fails: this calculates a property ID, but setFromId now expects a page ID. I can\u0027t think of a good way to get the page ID here, unless rebuildPropertyInfo() could remember or return it.",
+      "revId": "0d8923a08c28a8db5022d0f81927c0fc3514c74b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_5bc8c425",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/PropertyInfoTableBuilderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-01T12:32:21Z",
+      "side": 1,
+      "message": "Thanks for pointing out. I fixed it.",
+      "parentUuid": "2e4df70f_a5168b4b",
       "revId": "0d8923a08c28a8db5022d0f81927c0fc3514c74b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
