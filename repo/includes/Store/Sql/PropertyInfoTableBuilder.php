@@ -35,7 +35,7 @@ class PropertyInfoTableBuilder {
 	private $propertyInfoBuilder;
 
 	/**
-	 * @var EntityIdComposer $entityIdComposer
+	 * @var EntityIdComposer
 	 */
 	private $entityIdComposer;
 
