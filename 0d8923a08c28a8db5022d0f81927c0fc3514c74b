@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "2e4df70f_bbcd4864",
+        "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-01T11:17:49Z",
+      "side": 1,
+      "message": "Repeating the variable name in a @var PHPDoc line is not necessary.",
+      "range": {
+        "startLine": 44,
+        "startChar": 31,
+        "endLine": 44,
+        "endChar": 53
+      },
+      "revId": "0d8923a08c28a8db5022d0f81927c0fc3514c74b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_e50c933f",
         "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
         "patchSetId": 5
