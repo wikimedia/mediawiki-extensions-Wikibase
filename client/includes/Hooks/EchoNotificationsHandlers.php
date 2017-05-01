@@ -145,7 +145,7 @@ class EchoNotificationsHandlers {
 		if ( !empty( $this->echoIcon ) ) {
 			$icons[self::NOTIFICATION_TYPE] = $this->echoIcon;
 		} else {
-			$icons[self::NOTIFICATION_TYPE] = $icons['placeholder'];
+			$icons[self::NOTIFICATION_TYPE] = [ 'path' => 'Wikibase/client/resources/images/echoIcon.svg' ];
 		}
 	}
 
