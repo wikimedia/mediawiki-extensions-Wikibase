@@ -15,14 +15,12 @@ use Wikibase\Client\WikibaseClient;
  * @license GPL-2.0+
  */
 class MagicWordHookHandlers {
+
 	/**
-	 * @var SettingsArray $settings
+	 * @var SettingsArray
 	 */
 	protected $settings;
 
-	/**
-	 * WikibaseClient $wikibaseClient
-	 */
 	public function __construct( SettingsArray $settings ) {
 		$this->settings = $settings;
 	}
@@ -36,7 +34,7 @@ class MagicWordHookHandlers {
 	}
 
 	/**
-	* Register the magic word.
+	 * Register all magic words.
 	 *
 	 * @param string[] &$aCustomVariableIds
 	 *

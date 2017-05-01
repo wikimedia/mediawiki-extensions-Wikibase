@@ -18,13 +18,10 @@ use Wikibase\Repo\Store\SiteLinkConflictLookup;
 class SqlSiteLinkConflictLookup extends DBAccessBase implements SiteLinkConflictLookup {
 
 	/**
-	 * @var EntityIdComposer $entityIdComposer
+	 * @var EntityIdComposer
 	 */
 	private $entityIdComposer;
 
-	/**
-	 * @param EntityIdComposer $entityIdComposer
-	 */
 	public function __construct( EntityIdComposer $entityIdComposer ) {
 		parent::__construct();
 

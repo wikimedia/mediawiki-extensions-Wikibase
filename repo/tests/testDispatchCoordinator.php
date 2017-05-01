@@ -29,7 +29,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
 class TestDispatchCoordinator extends Maintenance {
 
 	/**
-	 * @var WANObjectCache $cache
+	 * @var WANObjectCache
 	 */
 	private $cache;
 
