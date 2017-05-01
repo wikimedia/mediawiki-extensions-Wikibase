@@ -49,6 +49,7 @@ class SqlEntityInfoBuilderFactory implements EntityInfoBuilderFactory {
 	/**
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdComposer $entityIdComposer
+	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
 	 * @param string $repositoryName The name of the repository (use an empty string for the local repository)

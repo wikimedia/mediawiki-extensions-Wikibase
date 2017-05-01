@@ -31,7 +31,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 	const FIELD_ALIASES = 'aliases';
 
 	/**
-	 * @param SpecialPageCopyrightView $copyrightView
+	 * @param SpecialPageCopyrightView $specialPageCopyrightView
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityTitleLookup $entityTitleLookup

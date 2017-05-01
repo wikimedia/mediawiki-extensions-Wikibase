@@ -37,6 +37,7 @@ class SetSiteLink extends ModifyEntity {
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param SiteLinkChangeOpFactory $siteLinkChangeOpFactory
+	 * @param SiteLinkBadgeChangeOpSerializationValidator $badgeSerializationValidator
 	 */
 	public function __construct(
 		ApiMain $mainModule,

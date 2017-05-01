@@ -56,6 +56,8 @@ class MagicWordHookHandlers {
 	 * settings if that is not a message
 	 *
 	 * @param Language $lang Language to get text in
+	 *
+	 * @return string
 	 */
 	protected function getRepoName( Language $lang ) {
 		$repoSiteName = $this->settings->getSetting( 'repoSiteName' );
@@ -109,7 +111,8 @@ class MagicWordHookHandlers {
 	/**
 	 * Static handler for the ResourceLoaderJqueryMsgModuleMagicWords hook
 	 *
-	 * @param array $magicWords
+	 * @param ResourceLoaderContext $context
+	 * @param string[] &$magicWords
 	 */
 	public static function onResourceLoaderJqueryMsgModuleMagicWords( ResourceLoaderContext $context, array &$magicWords ) {
 		$handler = self::newFromGlobalState();
@@ -119,7 +122,8 @@ class MagicWordHookHandlers {
 	/**
 	 * Adds magic word constant(s) for use by jQueryMsg
 	 *
-	 * @param array $magicWords Associative array mapping all-caps magic
+	 * @param ResourceLoaderContext $context
+	 * @param string[] &$magicWords Associative array mapping all-caps magic
 	 *  words to string values
 	 */
 	protected function doResourceLoaderJqueryMsgModuleMagicWords( ResourceLoaderContext $context, array &$magicWords ) {
