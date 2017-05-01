@@ -19,6 +19,7 @@ use MWExceptionHandler;
 use OutputPage;
 use ParserOutput;
 use RecentChange;
+use RequestContext;
 use ResourceLoader;
 use Revision;
 use SearchResult;
@@ -93,8 +94,13 @@ final class RepoHooks {
 				return $entityContentFactory->getContentHandlerForType( $entityType );
 			};
 		}
-
-		$searchSettings = $wikibaseRepo->getSettings()->getSetting( 'entitySearch' );
+		$request = RequestContext::getMain()->getRequest();
+		$settings = $wikibaseRepo->getSettings();
+		$searchSettings = $settings->getSetting( 'entitySearch' );
+		if ( $searchSettings['useCirrus'] === null && $request->getVal( 'useCirrus' ) ) {
+			$searchSettings['useCirrus'] = true;
+			$settings->setSetting( 'entitySearch', $searchSettings );
+		}
 		if ( $searchSettings['useCirrus'] ) {
 			global $wgCirrusSearchRescoreFunctionScoreChains, $wgCirrusSearchExtraIndexSettings;
 			// ElasticSearch function for entity weight

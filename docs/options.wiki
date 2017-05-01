@@ -54,7 +54,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;supportedEntityTypesForEntitiesWithoutTermListings: Array of entity types that are supported on Special:EntitiesWithoutLabel and …Description, typically <code>'item'</code> and <code>'property'</code>. Defaults to <code>null</code>, which enables all numeric entity types.
 ;dispatchingLockManager: If you want to use another lock mechanism for dispatching changes to clients instead of database locking (which can occupy too many connections to the master database), set its name in this config. See $wgLockManagers documentation in MediaWiki core for more information on configuring a locking mechanism inside core.
 ;entitySearch: Set of settings controlling how we search for entities. Has following subsettings:
-:;useCirrus: boolean, whether we should use CirrusSearch extension. Settings marked with (Cirrus) are relevant only when this setting is enabled.
+:;useCirrus: boolean|null, whether we should use CirrusSearch extension. Settings marked with (Cirrus) are relevant only when this setting is enabled. If set to null, CirrusSearch is not used unless the request has useCirrus=1.
 :;defaultPrefixProfile: name of the label scoring profile to use for prefix search. The profile should be defined like examples in <code>config/EntityPrefixSearchProfiles.php</code>. (Cirrus)
 :;prefixSearchProfiles: Loaded from <code>config/EntityPrefixSearchProfiles.php</code>, does not need to be defined manually. (Cirrus)
 :;defaultPrefixRescoreProfile: name of the rescoring profile to use for prefix search. The profile should be defined in <code>config/ElasticSearchRescoreProfiles.php</code>. (Cirrus)
