@@ -46,6 +46,30 @@
       "revId": "905aa73b095e37c05d6b599627ad9886ae3d2baf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_3f860319",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-01T16:00:58Z",
+      "side": 0,
+      "message": "No, a @throws with no explanation is not worth much anyway. I was just wondering.",
+      "parentUuid": "2e4df70f_9b4accc7",
+      "range": {
+        "startLine": 133,
+        "startChar": 4,
+        "endLine": 133,
+        "endChar": 36
+      },
+      "revId": "905aa73b095e37c05d6b599627ad9886ae3d2baf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

@@ -46,6 +46,30 @@
       "revId": "f09fbce59dcbf26d55551246146a9c99ff1608a3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_df77df33",
+        "filename": "lib/tests/phpunit/Store/Sql/SqlEntityInfoBuilderTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-01T16:00:58Z",
+      "side": 1,
+      "message": "Sure, not a big deal.",
+      "parentUuid": "2e4df70f_3b1618ad",
+      "range": {
+        "startLine": 144,
+        "startChar": 3,
+        "endLine": 144,
+        "endChar": 15
+      },
+      "revId": "f09fbce59dcbf26d55551246146a9c99ff1608a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
