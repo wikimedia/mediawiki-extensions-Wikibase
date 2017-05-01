@@ -16,6 +16,24 @@
       "revId": "5070336cc3a617be03ca88c7632e93b22c5e92be",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_023730e1",
+        "filename": "client/includes/Hooks/MagicWordHookHandlers.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-01T17:49:38Z",
+      "side": 1,
+      "message": "If all parameters have strong type hints on the code level, there is no need to add a PHPDoc block. That doc block will not add any new information.",
+      "parentUuid": "2e4df70f_a200bc05",
+      "revId": "5070336cc3a617be03ca88c7632e93b22c5e92be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
