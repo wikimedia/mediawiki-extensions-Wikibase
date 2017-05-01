@@ -145,7 +145,9 @@ class EchoNotificationsHandlers {
 		if ( !empty( $this->echoIcon ) ) {
 			$icons[self::NOTIFICATION_TYPE] = $this->echoIcon;
 		} else {
-			$icons[self::NOTIFICATION_TYPE] = $icons['placeholder'];
+			preg_match( '+/(?:vendor|extensions)/.*+', __DIR__, $remoteExtPath );
+			$iconPath = $remoteExtPath[0] . '/../../resources/images/echoIcon.svg';
+			$icons[self::NOTIFICATION_TYPE] = [ 'url' => $iconPath ];
 		}
 	}
 
