@@ -1364,7 +1364,7 @@ class WikibaseRepo {
 		return new InternalDeserializerFactory(
 			$this->getDataValueDeserializer(),
 			$this->getEntityIdParser(),
-			$this->getExternalFormatEntityDeserializer()
+			$this->getAllTypesEntityDeserializer()
 		);
 	}
 
@@ -1382,7 +1382,7 @@ class WikibaseRepo {
 	 *
 	 * @return Deserializer
 	 */
-	public function getExternalFormatEntityDeserializer() {
+	public function getAllTypesEntityDeserializer() {
 		if ( $this->entityDeserializer === null ) {
 			$deserializerFactoryCallbacks = $this->entityTypeDefinitions->getDeserializerFactoryCallbacks();
 			$deserializerFactory = $this->getExternalFormatDeserializerFactory();

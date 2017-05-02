@@ -953,14 +953,14 @@ final class WikibaseClient {
 		return new InternalDeserializerFactory(
 			$this->getDataValueDeserializer(),
 			$this->getEntityIdParser(),
-			$this->getExternalFormatEntityDeserializer()
+			$this->getAllTypesEntityDeserializer()
 		);
 	}
 
 	/**
 	 * @return DispatchingDeserializer
 	 */
-	private function getExternalFormatEntityDeserializer() {
+	private function getAllTypesEntityDeserializer() {
 		if ( $this->entityDeserializer === null ) {
 			$deserializerFactoryCallbacks = $this->getEntityDeserializerFactoryCallbacks();
 			$deserializerFactory = $this->getExternalFormatDeserializerFactory();

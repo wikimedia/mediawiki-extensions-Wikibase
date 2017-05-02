@@ -450,7 +450,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	}
 
 	public function testGetExternalFormatEntityDeserializer() {
-		$deserializer = $this->getWikibaseRepo()->getExternalFormatEntityDeserializer();
+		$deserializer = $this->getWikibaseRepo()->getAllTypesEntityDeserializer();
 		$this->assertInstanceOf( Deserializer::class, $deserializer );
 	}
 
