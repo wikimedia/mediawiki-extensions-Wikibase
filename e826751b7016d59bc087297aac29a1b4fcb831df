@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4df70f_4ee1dffa",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/PropertyInfoTableBuilderTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-02T08:56:17Z",
+      "side": 1,
+      "message": "This \"+ 2\" is rather not obvious here in the test.\n\nAlso tests fail for me locally same as on Jenkins, and I believe this line here is the reason.\n\nCurrently getFromPageId returns the page id from which the builder started generating property info. That might be fine although does not help with the continuation (mentioned in some of the comments on one of the previous patch sets).\nAlso here we don\u0027t know what is the page id of the property page, and just assuming if is now bigger than 1 or 2 is making the test fragile (see test failures here).\n\nI believe that to allow continuation, and to have it possible to run this test with the new code the builder class should either:\n1. Update its fromPageId property after each batch, so that getFromPageId actually returns the \"start row id\" for the next batch\n2. Or have another property for \"last process page id\" and expose it.\n\nI am not sure which one would be better. 2 means making a class slightly more complex, whereas an argument against 1 would that it changes the semantics of $fromPageId.\n\nI guess both approaches might be OK here, just need clear documentation.",
+      "revId": "e826751b7016d59bc087297aac29a1b4fcb831df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

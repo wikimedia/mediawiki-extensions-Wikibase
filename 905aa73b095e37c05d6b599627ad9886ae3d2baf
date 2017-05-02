@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4df70f_ae0663cf",
+        "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-02T08:56:17Z",
+      "side": 0,
+      "message": "Just wondering, probably not much of an issue, if at all: shouldn\u0027t for consistency the new code also have a condition to skip redirects (e.g. page_is_redirect\u003d0)?",
+      "revId": "905aa73b095e37c05d6b599627ad9886ae3d2baf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
