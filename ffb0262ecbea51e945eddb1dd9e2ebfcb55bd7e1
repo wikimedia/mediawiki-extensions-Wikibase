@@ -22,6 +22,30 @@
       "revId": "ffb0262ecbea51e945eddb1dd9e2ebfcb55bd7e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_88a4ba05",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-05-02T17:22:34Z",
+      "side": 1,
+      "message": "oh, you\u0027re right, it should be extracting array, no idea what I was thinking :(",
+      "parentUuid": "2e4df70f_ce472f4f",
+      "range": {
+        "startLine": 102,
+        "startChar": 44,
+        "endLine": 102,
+        "endChar": 56
+      },
+      "revId": "ffb0262ecbea51e945eddb1dd9e2ebfcb55bd7e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
