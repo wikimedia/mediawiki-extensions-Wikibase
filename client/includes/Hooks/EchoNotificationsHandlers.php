@@ -169,7 +169,17 @@ class EchoNotificationsHandlers {
 	 * @param bool[] &$defaultOptions Array of preference keys and their default values.
 	 */
 	public static function onUserGetDefaultOptions( array &$defaultOptions ) {
-		$defaultOptions['echo-subscriptions-web-wikibase-action'] = true;
+		$self = self::newFromGlobalState();
+		$self->doUserGetDefaultOptions( $defaultOptions );
+	}
+
+	/**
+	 * @param bool[] &$defaultOptions
+	 */
+	public function doUserGetDefaultOptions( array &$defaultOptions ) {
+		if ( $this->sendEchoNotification === true ) {
+			$defaultOptions['echo-subscriptions-web-wikibase-action'] = true;
+		}
 	}
 
 	/**
