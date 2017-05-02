@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4df70f_ce472f4f",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-02T07:59:08Z",
+      "side": 1,
+      "message": "This looks like \"entitySearch\" is an array that contains a key \"useCirrus\". But the code you are adding above does not set this array key, but sets a separate boolean setting instead. It just happens to have the same name.\n\nIf this is intended, how is this supposed to work? Am I confusing something here?",
+      "range": {
+        "startLine": 102,
+        "startChar": 44,
+        "endLine": 102,
+        "endChar": 56
+      },
+      "revId": "ffb0262ecbea51e945eddb1dd9e2ebfcb55bd7e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
