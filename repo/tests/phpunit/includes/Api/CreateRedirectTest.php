@@ -96,28 +96,29 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 	 */
 	public function getMockEditFilterHookRunner() {
 		$mock = $this->getMockBuilder( EditFilterHookRunner::class )
-			->setMethods( array( 'run' ) )
 			->disableOriginalConstructor()
 			->getMock();
+
 		$mock->expects( $this->any() )
 			->method( 'run' )
 			->will( $this->returnValue( Status::newGood() ) );
+
 		return $mock;
 	}
 
 	/**
 	 * @param array $params
-	 * @param User|null $user
+	 * @param User $user
 	 * @param RedirectCreationInteractor|null $interactor RedirectCreationInteractor to use, mock interactor
 	 * will be used if null provided.
 	 *
 	 * @return CreateRedirect
 	 */
-	private function newApiModule( array $params, User $user = null, RedirectCreationInteractor $interactor = null ) {
-		if ( !$user ) {
-			$user = $GLOBALS['wgUser'];
-		}
-
+	private function newApiModule(
+		array $params,
+		User $user,
+		RedirectCreationInteractor $interactor = null
+	) {
 		$request = new FauxRequest( $params, true );
 		$main = new ApiMain( $request, true );
 		$main->getContext()->setUser( $user );
@@ -132,7 +133,7 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest() );
 
-		if ( $interactor === null ) {
+		if ( !$interactor ) {
 			$interactor = new RedirectCreationInteractor(
 				$this->mockRepository,
 				$this->mockRepository,
@@ -173,24 +174,29 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 		return $titleLookup;
 	}
 
-	private function callApiModule( array $params, User $user = null ) {
+	private function callApiModule(
+		array $params,
+		User $user = null,
+		RedirectCreationInteractor $interactor = null
+	) {
 		global $wgUser;
 
-		if ( !isset( $params['token'] ) ) {
-			$params['token'] = $wgUser->getToken();
+		if ( !$user ) {
+			$user = $wgUser;
 		}
 
-		$module = $this->newApiModule( $params, $user );
+		if ( !isset( $params['token'] ) ) {
+			$params['token'] = $user->getToken();
+		}
 
+		$module = $this->newApiModule( $params, $user, $interactor );
 		$module->execute();
-		$result = $module->getResult();
 
-		$data = $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
+		return $module->getResult()->getResultData( null, [
+			'BC' => [],
+			'Types' => [],
 			'Strip' => 'all',
-		) );
-		return $data;
+		] );
 	}
 
 	private function assertSuccess( $result ) {
@@ -199,42 +205,42 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 	}
 
 	public function setRedirectProvider_success() {
-		return array(
-			'redirect empty entity' => array( 'Q11', 'Q12' ),
-			'update redirect' => array( 'Q22', 'Q11' ),
-		);
+		return [
+			'redirect empty entity' => [ 'Q11', 'Q12' ],
+			'update redirect' => [ 'Q22', 'Q11' ],
+		];
 	}
 
 	/**
 	 * @dataProvider setRedirectProvider_success
 	 */
 	public function testSetRedirect_success( $from, $to ) {
-		$params = array( 'from' => $from, 'to' => $to );
+		$params = [ 'from' => $from, 'to' => $to ];
 		$result = $this->callApiModule( $params );
 
 		$this->assertSuccess( $result );
 	}
 
 	public function setRedirectProvider_failure() {
-		return array(
-			'bad source id' => array( 'xyz', 'Q12', 'invalid-entity-id' ),
-			'bad target id' => array( 'Q11', 'xyz', 'invalid-entity-id' ),
+		return [
+			'bad source id' => [ 'xyz', 'Q12', 'invalid-entity-id' ],
+			'bad target id' => [ 'Q11', 'xyz', 'invalid-entity-id' ],
 
-			'source not found' => array( 'Q77', 'Q12', 'no-such-entity' ),
-			'target not found' => array( 'Q11', 'Q77', 'no-such-entity' ),
-			'target is a redirect' => array( 'Q11', 'Q22', 'target-is-redirect' ),
-			'target is incompatible' => array( 'Q11', 'P11', 'target-is-incompatible' ),
+			'source not found' => [ 'Q77', 'Q12', 'no-such-entity' ],
+			'target not found' => [ 'Q11', 'Q77', 'no-such-entity' ],
+			'target is a redirect' => [ 'Q11', 'Q22', 'target-is-redirect' ],
+			'target is incompatible' => [ 'Q11', 'P11', 'target-is-incompatible' ],
 
-			'source not empty' => array( 'Q12', 'Q11', 'origin-not-empty' ),
-			'can\'t redirect' => array( 'P11', 'P12', 'cant-redirect' ),
-		);
+			'source not empty' => [ 'Q12', 'Q11', 'origin-not-empty' ],
+			'can\'t redirect' => [ 'P11', 'P12', 'cant-redirect' ],
+		];
 	}
 
 	/**
 	 * @dataProvider setRedirectProvider_failure
 	 */
 	public function testSetRedirect_failure( $from, $to, $expectedCode ) {
-		$params = array( 'from' => $from, 'to' => $to );
+		$params = [ 'from' => $from, 'to' => $to ];
 
 		try {
 			$this->callApiModule( $params );
@@ -252,13 +258,9 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 		$targetId = new ItemId( 'Q12' );
 		$targetItem = new Item( $targetId );
 
-		$params = array( 'from' => $sourceId->getSerialization(), 'to' => $targetId->getSerialization() );
+		$params = [ 'from' => $sourceId->getSerialization(), 'to' => $targetId->getSerialization() ];
 
-		$params['token'] = $wgUser->getToken();
-
-		$request = new FauxRequest( $params, true );
-
-		$main = new ApiMain( $request, true );
+		$main = new ApiMain( new FauxRequest( $params, true ), true );
 		$main->getContext()->setUser( $wgUser );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -271,18 +273,9 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 
 		$store->saveEntity( $targetItem, 'Created the target item', $wgUser );
 
-		$module = $this->newApiModule( $params, $wgUser, $interactor );
+		$result = $this->callApiModule( $params, $wgUser, $interactor );
 
-		$module->execute();
-		$result = $module->getResult();
-
-		$resultData = $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
-			'Strip' => 'all',
-		) );
-
-		$this->assertSuccess( $resultData );
+		$this->assertSuccess( $result );
 	}
 
 	public function testGivenSourceHasDeletedRevisionsAndDoesNotExist_sourcePageIsCreatedAsRedirect() {
@@ -293,13 +286,9 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 		$targetId = new ItemId( 'Q12' );
 		$targetItem = new Item( $targetId );
 
-		$params = array( 'from' => $sourceId->getSerialization(), 'to' => $targetId->getSerialization() );
+		$params = [ 'from' => $sourceId->getSerialization(), 'to' => $targetId->getSerialization() ];
 
-		$params['token'] = $wgUser->getToken();
-
-		$request = new FauxRequest( $params, true );
-
-		$main = new ApiMain( $request, true );
+		$main = new ApiMain( new FauxRequest( $params, true ), true );
 		$main->getContext()->setUser( $wgUser );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -311,18 +300,9 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 
 		$store->saveEntity( $targetItem, 'Created the target item', $wgUser );
 
-		$module = $this->newApiModule( $params, $wgUser, $interactor );
+		$result = $this->callApiModule( $params, $wgUser, $interactor );
 
-		$module->execute();
-		$result = $module->getResult();
-
-		$resultData = $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
-			'Strip' => 'all',
-		) );
-
-		$this->assertSuccess( $resultData );
+		$this->assertSuccess( $result );
 	}
 
 	public function testSetRedirect_noPermission() {
@@ -330,12 +310,14 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 
 		$user = User::newFromName( 'UserWithoutPermission' );
 
-		$params = array( 'from' => 'Q11', 'to' => 'Q12' );
+		$params = [ 'from' => 'Q11', 'to' => 'Q12' ];
 		$this->callApiModule( $params, $user );
 	}
 
 	public function testModuleFlags() {
-		$module = $this->newApiModule( array() );
+		global $wgUser;
+
+		$module = $this->newApiModule( [], $wgUser );
 
 		$this->assertTrue( $module->mustBePosted(), 'mustBePosted' );
 		$this->assertTrue( $module->isWriteMode(), 'isWriteMode' );
