@@ -939,7 +939,7 @@ final class WikibaseClient {
 	/**
 	 * @return DeserializerFactory
 	 */
-	public function getExternalFormatDeserializerFactory() {
+	public function getBaseDataModelDeserializerFactory() {
 		return new DeserializerFactory(
 			$this->getDataValueDeserializer(),
 			$this->getEntityIdParser()
@@ -963,7 +963,7 @@ final class WikibaseClient {
 	private function getAllTypesEntityDeserializer() {
 		if ( $this->entityDeserializer === null ) {
 			$deserializerFactoryCallbacks = $this->getEntityDeserializerFactoryCallbacks();
-			$deserializerFactory = $this->getExternalFormatDeserializerFactory();
+			$deserializerFactory = $this->getBaseDataModelDeserializerFactory();
 			$deserializers = array();
 
 			foreach ( $deserializerFactoryCallbacks as $callback ) {

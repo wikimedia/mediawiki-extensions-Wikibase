@@ -424,7 +424,7 @@ call_user_func( function() {
 			return new Wikibase\Repo\Api\SetReference(
 				$mainModule,
 				$moduleName,
-				$wikibaseRepo->getExternalFormatDeserializerFactory(),
+				$wikibaseRepo->getBaseDataModelDeserializerFactory(),
 				$apiHelperFactory->getErrorReporter( $mainModule ),
 				$changeOpFactoryProvider->getStatementChangeOpFactory(),
 				$modificationHelper,

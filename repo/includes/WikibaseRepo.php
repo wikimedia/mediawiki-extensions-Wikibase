@@ -1350,7 +1350,7 @@ class WikibaseRepo {
 	/**
 	 * @return DeserializerFactory
 	 */
-	public function getExternalFormatDeserializerFactory() {
+	public function getBaseDataModelDeserializerFactory() {
 		return new DeserializerFactory(
 			$this->getDataValueDeserializer(),
 			$this->getEntityIdParser()
@@ -1385,7 +1385,7 @@ class WikibaseRepo {
 	public function getAllTypesEntityDeserializer() {
 		if ( $this->entityDeserializer === null ) {
 			$deserializerFactoryCallbacks = $this->entityTypeDefinitions->getDeserializerFactoryCallbacks();
-			$deserializerFactory = $this->getExternalFormatDeserializerFactory();
+			$deserializerFactory = $this->getBaseDataModelDeserializerFactory();
 			$deserializers = array();
 
 			foreach ( $deserializerFactoryCallbacks as $callback ) {
@@ -1443,7 +1443,7 @@ class WikibaseRepo {
 	 * @return Deserializer
 	 */
 	public function getExternalFormatStatementDeserializer() {
-		return $this->getExternalFormatDeserializerFactory()->newStatementDeserializer();
+		return $this->getBaseDataModelDeserializerFactory()->newStatementDeserializer();
 	}
 
 	/**
