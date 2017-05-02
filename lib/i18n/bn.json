@@ -8,7 +8,8 @@
 			"Aftabuzzaman",
 			"TMg",
 			"আজিজ",
-			"Elias Ahmmad"
+			"Elias Ahmmad",
+			"Bodhisattwa"
 		]
 	},
 	"specialpages-group-wikibase": "উইকিবেজ",
@@ -24,6 +25,7 @@
 	"wikibase-error-autocomplete-response": "সার্ভারের প্রতিক্রিয়া: $1",
 	"wikibase-error-ui-no-external-page": "\"$2\" পাতাটি \"$1\"-এ পাওয়া যায়নি।",
 	"wikibase-error-ui-edit-conflict": "এখানে একটি সম্পাদনা দ্বন্দ্ব হয়েছে। দয়া করে স্থানীয়ভাবে আপনার পরিবর্তনগুলি সংরক্ষণ করুন, এই পাতা পুনঃলোড করুন এবং আবার তাঁদের সংরক্ষণ করুন।",
+	"wikibase-language-fallback-transliteration-hint": "$1 (প্রতিলিপিকৃত)",
 	"wikibase-quantitydetails-amount": "পরিমাণ",
 	"wikibase-quantitydetails-unit": "একক",
 	"wikibase-timedetails-time": "সময়",

@@ -19,7 +19,8 @@
 			"Alexmar983",
 			"Statix64",
 			"Matteocng",
-			"Anto"
+			"Anto",
+			"Ontsed"
 		]
 	},
 	"wikibase-desc": "Archivio di dati strutturati",
@@ -181,6 +182,7 @@
 	"wikibase-newproperty-fieldset": "Crea una nuova proprietà",
 	"wikibase-newproperty-datatype": "Tipo di dato:",
 	"wikibase-newproperty-invalid-datatype": "Specificato un tipo di dato non valido.",
+	"wikibase-newproperty-pick-data-type": "(scegliere un tipo di dato)",
 	"wikibase-description-helppage": "Help:Description/it",
 	"wikibase-label-helppage": "Help:Label/it",
 	"special-newitem": "Crea un nuovo elemento",

@@ -470,7 +470,7 @@
 	"apihelp-query+wbsearch-param-type": "Buscar este tipo de entidad.",
 	"apihelp-query+wbsearch-param-limit": "Número máximo de resultados",
 	"apihelp-query+wbsearch-example-2": "Buscar \"abc\" en el idioma inglés con un límite de 50",
-	"apihelp-query+wbsearch-example-3": "De la búsqueda para \"alphabet\" en el idioma inglés para el tipo de propiedad",
+	"apihelp-query+wbsearch-example-3": "Buscar «alphabet» en inglés para la propiedad Tipo",
 	"apihelp-query+wbsubscribers-description": "Obtener suscripciones a entidades dadas.",
 	"apihelp-query+wbsubscribers-param-prop": "Propiedades que añadir al resultado",
 	"apihelp-query+wbsubscribers-param-limit": "Número máximo de resultados",

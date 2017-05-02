@@ -114,6 +114,7 @@
 	"wikibase-move-error": "No podeu desplaçar pàgines d'un espai de noms de dades, i tampoc no podeu desplaçar-hi pàgines.",
 	"wikibase-validator-label-conflict": "Una altra propietat ($3) ja té l'etiqueta \"$1\" associada amb el codi d'idioma $2.",
 	"wikibase-validator-label-with-description-conflict": "Una altre element ($3) ja té l'etiqueta \"$1\" i la descripció \"$4\" associada amb el codi d'idioma $2.",
+	"wikibase-validator-page-not-exists": "La pàgina «$1» no existeix.",
 	"wikibase-wikibaserepopage-invalid-langcode": "El codi de llengua «$1» és desconegut. Utilitzeu un codi de llengua conegut en el sistema, com «ca».",
 	"wikibase-wikibaserepopage-invalid-id": "L'ID «$1» és desconeguda al sistema. Utilitzeu un ID d'entitat vàlid.",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 és una redirecció.",
