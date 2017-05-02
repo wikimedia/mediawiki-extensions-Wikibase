@@ -98,7 +98,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$wikibaseRepo->getSiteLookup()->getSites(),
 			$this->entityDataFormatProvider,
 			$serializerFactory,
-			$wikibaseRepo->getEntitySerializer( $serializerFactoryOptions ),
+			$wikibaseRepo->getAllTypesEntitySerializer( $serializerFactoryOptions ),
 			$wikibaseRepo->getSiteLookup(),
 			$wikibaseRepo->getRdfVocabulary()
 		);

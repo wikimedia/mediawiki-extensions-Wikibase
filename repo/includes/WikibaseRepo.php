@@ -1341,7 +1341,7 @@ class WikibaseRepo {
 	public function getEntityContentDataCodec() {
 		return new EntityContentDataCodec(
 			$this->getEntityIdParser(),
-			$this->getEntitySerializer(),
+			$this->getAllTypesEntitySerializer(),
 			$this->getInternalFormatEntityDeserializer(),
 			$this->settings->getSetting( 'maxSerializedEntitySize' ) * 1024
 		);
@@ -1412,7 +1412,7 @@ class WikibaseRepo {
 	 *
 	 * @return Serializer
 	 */
-	public function getEntitySerializer( $options = SerializerFactory::OPTION_DEFAULT ) {
+	public function getAllTypesEntitySerializer( $options = SerializerFactory::OPTION_DEFAULT ) {
 		if ( !isset( $this->entitySerializers[$options] ) ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
 			$serializerFactory = $this->getSerializerFactory( $options );
@@ -1629,7 +1629,7 @@ class WikibaseRepo {
 			$this->getEntityRevisionLookup( 'uncached' ),
 			$this->newEditEntityFactory( $context ),
 			$this->getSerializerFactory( $serializerOptions ),
-			$this->getEntitySerializer( $serializerOptions ),
+			$this->getAllTypesEntitySerializer( $serializerOptions ),
 			$this->getEntityIdParser(),
 			$this->getStore()->newSiteLinkStore(),
 			$this->getEntityFactory(),
@@ -1747,7 +1747,7 @@ class WikibaseRepo {
 			// CachingPropertyInfoLookup enough?
 			new InProcessCachingDataTypeLookup( $this->getPropertyDataTypeLookup() ),
 			$this->getLocalItemUriParser(),
-			$this->getEntitySerializer(
+			$this->getAllTypesEntitySerializer(
 				SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
 				SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
 			),
