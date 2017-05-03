@@ -72,10 +72,10 @@ class TermSqlIndexTest extends TermIndexTest {
 			new StringNormalizer(),
 			new EntityIdComposer( [
 				'item' => function( $repositoryName, $uniquePart ) {
-					return new ItemId( 'Q' . $uniquePart );
+					return new ItemId( $uniquePart );
 				},
 				'property' => function( $repositoryName, $uniquePart ) {
-					return new PropertyId( 'P' . $uniquePart );
+					return new PropertyId( $uniquePart );
 				},
 			] )
 		);
@@ -132,10 +132,12 @@ class TermSqlIndexTest extends TermIndexTest {
 			new StringNormalizer(),
 			new EntityIdComposer( [
 				'item' => function( $repositoryName, $uniquePart ) {
-					return ItemId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
+				$numericId = ltrim( $uniquePart, 'Q' );
+					return ItemId::newFromRepositoryAndNumber( $repositoryName, $numericId );
 				},
 				'property' => function( $repositoryName, $uniquePart ) {
-					return PropertyId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
+					$numericId = ltrim( $uniquePart, 'P' );
+					return PropertyId::newFromRepositoryAndNumber( $repositoryName, $numericId );
 				},
 			] ),
 			false,
