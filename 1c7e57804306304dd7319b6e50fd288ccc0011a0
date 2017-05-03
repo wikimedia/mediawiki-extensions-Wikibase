@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2e4df70f_97905348",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-03T07:50:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e4df70f_2e9813c3",
+      "range": {
+        "startLine": 148,
+        "startChar": 50,
+        "endLine": 148,
+        "endChar": 65
+      },
+      "revId": "1c7e57804306304dd7319b6e50fd288ccc0011a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_ce940f90",
         "filename": "client/tests/phpunit/includes/Hooks/EchoNotificationsHandlersTest.php",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2017-05-02T08:23:53Z",
       "side": 1,
       "message": "I suggest to do an \"ends with\" assertion with this substring.",
+      "range": {
+        "startLine": 200,
+        "startChar": 31,
+        "endLine": 200,
+        "endChar": 61
+      },
+      "revId": "1c7e57804306304dd7319b6e50fd288ccc0011a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_778b471c",
+        "filename": "client/tests/phpunit/includes/Hooks/EchoNotificationsHandlersTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-03T07:50:20Z",
+      "side": 1,
+      "message": "I disagree, I think we should have something exact otherwise if the code is broken and prepends something weird, we might not notice and that\u0027s a real breakage (a 404 in icons)",
+      "parentUuid": "2e4df70f_ce940f90",
       "range": {
         "startLine": 200,
         "startChar": 31,
