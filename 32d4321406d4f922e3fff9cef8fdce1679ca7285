@@ -22,6 +22,30 @@
       "revId": "32d4321406d4f922e3fff9cef8fdce1679ca7285",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_5a6f4b8f",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2017-05-03T20:04:32Z",
+      "side": 1,
+      "message": "hmm not sure. If we want to keep it post final merge to allow using non-default DB search with useCirrus\u003d0, we may want to keep getVal. Otherwise, shouldn\u0027t matter too much, either will be ok.",
+      "parentUuid": "2e4df70f_b43ea824",
+      "range": {
+        "startLine": 100,
+        "startChar": 17,
+        "endLine": 100,
+        "endChar": 23
+      },
+      "revId": "32d4321406d4f922e3fff9cef8fdce1679ca7285",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
