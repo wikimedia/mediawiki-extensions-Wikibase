@@ -3,18 +3,24 @@
 namespace Wikibase\Repo\Tests\Rdf;
 
 use PageProps;
+use SiteLookup;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Rdf\DedupeBag;
+use Wikibase\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Rdf\HashDedupeBag;
+use Wikibase\Rdf\NullEntityRdfBuilder;
+use Wikibase\Rdf\PropertyRdfBuilder;
 use Wikibase\Rdf\RdfBuilder;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\RdfVocabulary;
+use Wikibase\Rdf\SiteLinksRdfBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\NTriplesRdfWriter;
+use Wikimedia\Purtle\RdfWriter;
 
 /**
  * @covers Wikibase\Rdf\RdfBuilder
@@ -70,6 +76,48 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
+	 * Returns the mapping of entity types used in tests to callbacks instantiating EntityRdfBuilder
+	 * instances, that are configured to use services configured for test purposes (e.g. SiteLookup).
+	 *
+	 * @see EntityTypeDefinitions::getRdfBuilderFactoryCallbacks
+	 *
+	 * TODO: move to RdfBuilderTestData?
+	 *
+	 * @param SiteLookup $siteLookup
+	 *
+	 * @return callable[]
+	 */
+	private function getRdfBuilderFactoryCallbacks( SiteLookup $siteLookup ) {
+		return [
+			'item' => function(
+				$flavorFlags,
+				RdfVocabulary $vocabulary,
+				RdfWriter $writer,
+				$mentionedEntityTracker,
+				$dedupe
+			) use ( $siteLookup ) {
+				if ( ( $flavorFlags & RdfProducer::PRODUCE_SITELINKS ) !== 0 ) {
+					$sites = $siteLookup->getSites();
+					$builder = new SiteLinksRdfBuilder( $vocabulary, $writer, $sites );
+					$builder->setDedupeBag( $dedupe );
+					return $builder;
+				}
+				return new NullEntityRdfBuilder();
+			},
+			'property' => function(
+				$flavorFlags,
+				RdfVocabulary $vocabulary,
+				RdfWriter $writer
+			) {
+				return new PropertyRdfBuilder(
+					$vocabulary,
+					$writer
+				);
+			}
+		];
+	}
+
+	/**
 	 * @param int           $produce One of the RdfProducer::PRODUCE_... constants.
 	 * @param DedupeBag     $dedup
 	 * @param RdfVocabulary $vocabulary
@@ -81,13 +129,14 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			$dedup = new HashDedupeBag();
 		}
 
+		$siteLookup = $this->getTestData()->getSiteLookup();
+
 		// Note: using the actual factory here makes this an integration test!
 		$valueBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
-
-		$entityRdfBuilderFactory = WikibaseRepo::getDefaultInstance()->getEntityRdfBuilderFactory();
+		$entityRdfBuilderFactory = new EntityRdfBuilderFactory( $this->getRdfBuilderFactoryCallbacks( $siteLookup ) );
 		$emitter = new NTriplesRdfWriter();
 		$builder = new RdfBuilder(
-			$this->getTestData()->getSiteList(),
+			$siteLookup->getSites(),
 			$vocabulary ?: $this->getTestData()->getVocabulary(),
 			$valueBuilderFactory,
 			$this->getTestData()->getMockRepository(),
