@@ -3,10 +3,12 @@
 namespace Wikibase\Lib\Tests\Store\Sql;
 
 use MWException;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParser;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
@@ -59,6 +61,7 @@ class TermSqlIndexTest extends TermIndexTest {
 		new TermSqlIndex(
 			new StringNormalizer(),
 			new EntityIdComposer( [] ),
+			new BasicEntityIdParser(),
 			false,
 			$repositoryName
 		);
@@ -72,12 +75,13 @@ class TermSqlIndexTest extends TermIndexTest {
 			new StringNormalizer(),
 			new EntityIdComposer( [
 				'item' => function( $repositoryName, $uniquePart ) {
-					return new ItemId( 'Q' . $uniquePart );
+					return ItemId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
 				},
 				'property' => function( $repositoryName, $uniquePart ) {
-					return new PropertyId( 'P' . $uniquePart );
+					return PropertyId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
 				},
-			] )
+			] ),
+			new BasicEntityIdParser()
 		);
 	}
 
@@ -138,6 +142,7 @@ class TermSqlIndexTest extends TermIndexTest {
 					return PropertyId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
 				},
 			] ),
+			new BasicEntityIdParser(),
 			false,
 			$repository
 		);
@@ -451,6 +456,7 @@ class TermSqlIndexTest extends TermIndexTest {
 					return new PropertyId( 'P' . $uniquePart );
 				},
 			] ),
+			new BasicEntityIdParser(),
 			false,
 			'',
 			false
