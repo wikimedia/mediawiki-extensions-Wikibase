@@ -16,6 +16,24 @@
       "revId": "e826751b7016d59bc087297aac29a1b4fcb831df",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_12b1b142",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/PropertyInfoTableBuilderTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-03T09:59:27Z",
+      "side": 1,
+      "message": "Thanks for pointing out, my biggest mistake was that I thought $this-\u003efromPageId gets updated after each batch.",
+      "parentUuid": "2e4df70f_4ee1dffa",
+      "revId": "e826751b7016d59bc087297aac29a1b4fcb831df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

@@ -16,6 +16,24 @@
       "revId": "905aa73b095e37c05d6b599627ad9886ae3d2baf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_777d87e3",
+        "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-03T09:59:27Z",
+      "side": 0,
+      "message": "Properties can\u0027t be redirects AFAIK. That\u0027s why",
+      "parentUuid": "2e4df70f_ae0663cf",
+      "revId": "905aa73b095e37c05d6b599627ad9886ae3d2baf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
