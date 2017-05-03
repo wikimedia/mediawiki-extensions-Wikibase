@@ -838,6 +838,9 @@ final class RepoHooks {
 		$geoShapeStorageBaseUrl = $wikibaseRepo->getSettings()->getSetting( 'geoShapeStorageFrontendUrl' );
 		$data['wikibase-geoshapestoragebaseurl'] = $geoShapeStorageBaseUrl;
 
+		$tabularDataStorageBaseUrl = $wikibaseRepo->getSettings()->getSetting( 'tabularDataStorageFrontendUrl' );
+		$data['wikibase-tabulardatastoragebaseurl'] = $tabularDataStorageBaseUrl;
+
 		$sparqlEndpoint = $wikibaseRepo->getSettings()->getSetting( 'sparqlEndpoint' );
 		if ( is_string( $sparqlEndpoint ) ) {
 			$data['wikibase-sparql'] = $sparqlEndpoint;

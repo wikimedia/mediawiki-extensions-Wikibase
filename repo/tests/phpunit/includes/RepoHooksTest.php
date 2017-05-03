@@ -69,6 +69,8 @@ class RepoHooksTest extends MediaWikiTestCase {
 
 		$this->assertInternalType( 'string', $actual['wikibase-geoshapestoragebaseurl'] );
 
+		$this->assertInternalType( 'string', $actual['wikibase-tabulardatastoragebaseurl'] );
+
 		if ( array_key_exists( 'wikibase-sparql', $actual ) ) {
 			$this->assertInternalType( 'string', $actual['wikibase-sparql'] );
 		}
