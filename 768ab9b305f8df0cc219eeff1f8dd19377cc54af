@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2e4df70f_54ade42c",
+        "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-03T17:17:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e4df70f_749d805a",
+      "range": {
+        "startLine": 150,
+        "startChar": 29,
+        "endLine": 150,
+        "endChar": 32
+      },
+      "revId": "768ab9b305f8df0cc219eeff1f8dd19377cc54af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_54ec04f2",
         "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
         "patchSetId": 9
@@ -36,6 +60,30 @@
       "writtenOn": "2017-05-03T16:40:29Z",
       "side": 1,
       "message": "I find \"\u0027P\u0027\" a little easier to read.",
+      "range": {
+        "startLine": 167,
+        "startChar": 26,
+        "endLine": 167,
+        "endChar": 33
+      },
+      "revId": "768ab9b305f8df0cc219eeff1f8dd19377cc54af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_34a4d845",
+        "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-03T17:17:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e4df70f_54ec04f2",
       "range": {
         "startLine": 167,
         "startChar": 26,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "2e4df70f_94712ce0",
+        "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-03T17:17:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e4df70f_b4b468e5",
+      "range": {
+        "startLine": 168,
+        "startChar": 6,
+        "endLine": 168,
+        "endChar": 20
+      },
+      "revId": "768ab9b305f8df0cc219eeff1f8dd19377cc54af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_f4919053",
         "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
         "patchSetId": 9
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "2e4df70f_94484c8e",
+        "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-03T17:17:28Z",
+      "side": 1,
+      "message": "I removed it from the WHERE condition (here)",
+      "parentUuid": "2e4df70f_f4919053",
+      "range": {
+        "startLine": 191,
+        "startChar": 6,
+        "endLine": 191,
+        "endChar": 20
+      },
+      "revId": "768ab9b305f8df0cc219eeff1f8dd19377cc54af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_747ee015",
         "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
         "patchSetId": 9
@@ -105,6 +201,30 @@
       "writtenOn": "2017-05-03T16:40:29Z",
       "side": 1,
       "message": "Please rename this variable to $pageId.\n\nMight be done in a later patch to not make this one bigger.",
+      "range": {
+        "startLine": 194,
+        "startChar": 26,
+        "endLine": 194,
+        "endChar": 32
+      },
+      "revId": "768ab9b305f8df0cc219eeff1f8dd19377cc54af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_f43af0e3",
+        "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-03T17:17:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e4df70f_747ee015",
       "range": {
         "startLine": 194,
         "startChar": 26,
