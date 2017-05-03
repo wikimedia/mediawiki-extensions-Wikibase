@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests\Store\Sql;
 
 use MWException;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -59,6 +60,7 @@ class TermSqlIndexTest extends TermIndexTest {
 		new TermSqlIndex(
 			new StringNormalizer(),
 			new EntityIdComposer( [] ),
+			new BasicEntityIdParser(),
 			false,
 			$repositoryName
 		);
@@ -77,7 +79,8 @@ class TermSqlIndexTest extends TermIndexTest {
 				'property' => function( $repositoryName, $uniquePart ) {
 					return new PropertyId( 'P' . $uniquePart );
 				},
-			] )
+			] ),
+			new BasicEntityIdParser()
 		);
 	}
 
@@ -138,6 +141,7 @@ class TermSqlIndexTest extends TermIndexTest {
 					return PropertyId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
 				},
 			] ),
+			new BasicEntityIdParser(),
 			false,
 			$repository
 		);
@@ -451,6 +455,7 @@ class TermSqlIndexTest extends TermIndexTest {
 					return new PropertyId( 'P' . $uniquePart );
 				},
 			] ),
+			new BasicEntityIdParser(),
 			false,
 			'',
 			false

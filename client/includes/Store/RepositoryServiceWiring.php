@@ -100,6 +100,7 @@ return [
 		return new TermSqlIndex(
 			$client->getStringNormalizer(),
 			$client->getEntityIdComposer(),
+			$client->getEntityIdParser(),
 			$services->getDatabaseName(),
 			$services->getRepositoryName()
 		);

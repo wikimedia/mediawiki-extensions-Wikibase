@@ -256,6 +256,7 @@ class SqlStore implements Store {
 		return new TermSqlIndex(
 			$stringNormalizer,
 			$this->entityIdComposer,
+			$this->entityIdParser,
 			false,
 			'',
 			$this->hasFullEntityIdColumn

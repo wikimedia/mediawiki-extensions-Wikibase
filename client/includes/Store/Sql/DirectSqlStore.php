@@ -370,6 +370,7 @@ class DirectSqlStore implements ClientStore {
 			$this->termIndex = new TermSqlIndex(
 				new StringNormalizer(),
 				$this->entityIdComposer,
+				$this->entityIdParser,
 				$this->repoWiki,
 				'',
 				$this->hasFullEntityIdColumn

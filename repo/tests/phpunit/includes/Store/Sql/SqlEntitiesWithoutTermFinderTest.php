@@ -59,13 +59,13 @@ class SqlEntitiesWithoutTermFinderTest extends MediaWikiTestCase {
 			);
 
 			$termsRows = [];
-			$termsRows[] = $this->getTermRow( 100, 'item', 'en', 'label' );
-			$termsRows[] = $this->getTermRow( 100, 'item', 'en', 'description' );
-			$termsRows[] = $this->getTermRow( 102, 'item', 'es', 'label' );
-			$termsRows[] = $this->getTermRow( 102, 'item', 'en', 'alias' );
-			$termsRows[] = $this->getTermRow( 102, 'item', 'es', 'alias' );
-			$termsRows[] = $this->getTermRow( 102, 'property', 'de', 'description' );
-			$termsRows[] = $this->getTermRow( 103, 'property', 'de', 'label' );
+			$termsRows[] = $this->getTermRow( 100, 'Q100', 'item', 'en', 'label' );
+			$termsRows[] = $this->getTermRow( 100, 'Q100', 'item', 'en', 'description' );
+			$termsRows[] = $this->getTermRow( 102, 'Q102', 'item', 'es', 'label' );
+			$termsRows[] = $this->getTermRow( 102, 'Q102', 'item', 'en', 'alias' );
+			$termsRows[] = $this->getTermRow( 102, 'Q102', 'item', 'es', 'alias' );
+			$termsRows[] = $this->getTermRow( 102, 'P102', 'property', 'de', 'description' );
+			$termsRows[] = $this->getTermRow( 103, 'P103', 'property', 'de', 'label' );
 
 			$dbw->insert(
 				'wb_terms',
@@ -211,9 +211,16 @@ class SqlEntitiesWithoutTermFinderTest extends MediaWikiTestCase {
 		];
 	}
 
-	private function getTermRow( $numericEntityId, $entityType, $languageCode, $termType ) {
+	private function getTermRow(
+		$numericEntityId,
+		$fullEntityId,
+		$entityType,
+		$languageCode,
+		$termType
+	) {
 		return [
 			'term_entity_id' => $numericEntityId,
+			'term_full_entity_id' => $fullEntityId,
 			'term_entity_type' => $entityType,
 			'term_language' => $languageCode,
 			'term_type' => $termType,
