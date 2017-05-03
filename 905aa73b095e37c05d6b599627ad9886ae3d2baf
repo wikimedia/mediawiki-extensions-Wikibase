@@ -34,6 +34,29 @@
       "revId": "905aa73b095e37c05d6b599627ad9886ae3d2baf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_74c4a044",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/PropertyInfoTableBuilderTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-03T16:40:29Z",
+      "side": 0,
+      "message": "I guess this should have been 1, because of the -1 that is done internally.",
+      "range": {
+        "startLine": 116,
+        "startChar": 23,
+        "endLine": 116,
+        "endChar": 24
+      },
+      "revId": "905aa73b095e37c05d6b599627ad9886ae3d2baf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

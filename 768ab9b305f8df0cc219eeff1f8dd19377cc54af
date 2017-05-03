@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4df70f_749d805a",
+        "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-03T16:40:29Z",
+      "side": 1,
+      "message": "With this offset this variable does not actually reflect the \"start from this page ID\". It\u0027s not 0-based but 1-based, and therefor more a \"start with row number x\".",
+      "range": {
+        "startLine": 150,
+        "startChar": 29,
+        "endLine": 150,
+        "endChar": 32
+      },
+      "revId": "768ab9b305f8df0cc219eeff1f8dd19377cc54af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_54ec04f2",
+        "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-03T16:40:29Z",
+      "side": 1,
+      "message": "I find \"\u0027P\u0027\" a little easier to read.",
+      "range": {
+        "startLine": 167,
+        "startChar": 26,
+        "endLine": 167,
+        "endChar": 33
+      },
+      "revId": "768ab9b305f8df0cc219eeff1f8dd19377cc54af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_b4b468e5",
+        "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-03T16:40:29Z",
+      "side": 1,
+      "message": "I would feel better if these two columns are in the same order as in the index that is going to be used here:\n\n CREATE UNIQUE INDEX /*i*/name_title ON /*_*/page (page_namespace,page_title);",
+      "range": {
+        "startLine": 168,
+        "startChar": 6,
+        "endLine": 168,
+        "endChar": 20
+      },
+      "revId": "768ab9b305f8df0cc219eeff1f8dd19377cc54af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_f4919053",
+        "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-03T16:40:29Z",
+      "side": 1,
+      "message": "Huh? This is duplicated. The exact same condition appears in the JOIN and in the WHERE. This does not change the output of this query, but is a possible performance issue. Unfortunately I can\u0027t tell which one is going to result in a faster query.\n\nFrom the perspective of having readably code I find it better to have this condition in the WHERE, because it does not involve both tables.\n\nOn the other hand, there is this index that combines the two fields, so it\u0027s probably better to have both in the JOIN.",
+      "range": {
+        "startLine": 191,
+        "startChar": 6,
+        "endLine": 191,
+        "endChar": 20
+      },
+      "revId": "768ab9b305f8df0cc219eeff1f8dd19377cc54af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_747ee015",
+        "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-03T16:40:29Z",
+      "side": 1,
+      "message": "Please rename this variable to $pageId.\n\nMight be done in a later patch to not make this one bigger.",
+      "range": {
+        "startLine": 194,
+        "startChar": 26,
+        "endLine": 194,
+        "endChar": 32
+      },
+      "revId": "768ab9b305f8df0cc219eeff1f8dd19377cc54af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_94accc85",
+        "filename": "repo/maintenance/rebuildPropertyInfo.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-03T16:40:29Z",
+      "side": 1,
+      "message": "This is not correct, I\u0027m afraid.",
+      "range": {
+        "startLine": 28,
+        "startChar": 38,
+        "endLine": 28,
+        "endChar": 42
+      },
+      "revId": "768ab9b305f8df0cc219eeff1f8dd19377cc54af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_f4b750d1",
+        "filename": "repo/maintenance/rebuildPropertyInfo.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-03T16:40:29Z",
+      "side": 1,
+      "message": "As said in other comments: The \"start-row\" is 1-based. It\u0027s used as a page ID internally, but 0-based and with an offset of -1. By naming the method \"setFromPageId\" these two things are confused now.\n\nI suggest to name the method \"setStartRow\" and document it to be 1-based. Name the internal property $this-\u003estartRow, but make sure to switch to variables named $pageId the moment the -1 offset is applied.",
+      "range": {
+        "startLine": 61,
+        "startChar": 12,
+        "endLine": 61,
+        "endChar": 25
+      },
+      "revId": "768ab9b305f8df0cc219eeff1f8dd19377cc54af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
