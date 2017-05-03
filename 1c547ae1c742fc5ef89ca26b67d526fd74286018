@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4df70f_126211d6",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-03T09:50:05Z",
+      "side": 1,
+      "message": "I think this code can never be in a \"vendor\" directory. Please simplify this to \u0027+/extensions/.*+\u0027.",
+      "range": {
+        "startLine": 148,
+        "startChar": 18,
+        "endLine": 148,
+        "endChar": 39
+      },
+      "revId": "1c547ae1c742fc5ef89ca26b67d526fd74286018",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_52ae59e5",
+        "filename": "client/tests/phpunit/includes/Hooks/EchoNotificationsHandlersTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-03T09:50:05Z",
+      "side": 1,
+      "message": "All other examples I found don\u0027t start with this, but with the name of the extension.",
+      "range": {
+        "startLine": 200,
+        "startChar": 15,
+        "endLine": 200,
+        "endChar": 27
+      },
+      "revId": "1c547ae1c742fc5ef89ca26b67d526fd74286018",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
