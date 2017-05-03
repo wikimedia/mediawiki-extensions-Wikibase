@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4df70f_b268fd85",
+        "filename": "repo/tests/phpunit/includes/Api/CreateRedirectTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-05-03T10:24:35Z",
+      "side": 1,
+      "message": "Not introduced here, but I\u0027m fairly sure this should be using $user",
+      "range": {
+        "startLine": 185,
+        "startChar": 22,
+        "endLine": 185,
+        "endChar": 29
+      },
+      "revId": "9e833ee21a8ca9c13b3f35a2b65887e56f89e49a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
