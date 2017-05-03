@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4df70f_adff40a6",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-03T12:29:06Z",
+      "side": 1,
+      "message": "I was about to suggest a more specific name, but this is not introduced with this patch. My problem is that the code below does not return a full RDF builder, but only one that supports a few additional parts of the entity. The fact that this is \"partial\" and assumes there are default RDF builders for labels, descriptions, aliases, and statements build in the RdfBuilder\u0027s class constructor should either be made much more visible, or all factored out. Not all entity types are going to have the same entity types. Not all entity types are going to have statements, even.\n\nAll this additional refactoring should be done in later patches, obviously.",
+      "range": {
+        "startLine": 66,
+        "startChar": 3,
+        "endLine": 66,
+        "endChar": 31
+      },
+      "revId": "3292b004e7ffea5ac3df50e1ff61d31165d34afb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_cd916c9e",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-03T12:29:06Z",
+      "side": 1,
+      "message": "Could also be\n\n if ( $flavorFlags \u0026 RdfProducer::PRODUCE_SITELINKS ) {",
+      "range": {
+        "startLine": 73,
+        "startChar": 8,
+        "endLine": 73,
+        "endChar": 63
+      },
+      "revId": "3292b004e7ffea5ac3df50e1ff61d31165d34afb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_2df7b0f3",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-03T12:29:06Z",
+      "side": 1,
+      "message": "This is not correct. Labels, descriptions, and aliases are also specific for Items and Properties, and will not appear on other entity types. This must be factored out as well, but should be done in a later patch to not make this one bigger.",
+      "range": {
+        "startLine": 75,
+        "startChar": 13,
+        "endLine": 75,
+        "endChar": 67
+      },
+      "revId": "3292b004e7ffea5ac3df50e1ff61d31165d34afb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_4dfc7cd5",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-03T12:29:06Z",
+      "side": 1,
+      "message": "Here is the labels/descriptions/aliases thing that is specific for Items and Properties and must be factored out as well. This should be done in a later patch to not make this one bigger.",
+      "range": {
+        "startLine": 114,
+        "startChar": 26,
+        "endLine": 114,
+        "endChar": 41
+      },
+      "revId": "3292b004e7ffea5ac3df50e1ff61d31165d34afb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_cdbf2cf5",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-03T12:29:06Z",
+      "side": 1,
+      "message": "Is this even necessary in this test?",
+      "range": {
+        "startLine": 135,
+        "startChar": 5,
+        "endLine": 135,
+        "endChar": 39
+      },
+      "revId": "3292b004e7ffea5ac3df50e1ff61d31165d34afb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

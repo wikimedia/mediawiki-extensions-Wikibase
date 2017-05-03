@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4df70f_ede1c82a",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-03T12:29:06Z",
+      "side": 0,
+      "message": "I was wondering where I can find the replacement for this removal, but found it literally two lines below. ;-)",
+      "range": {
+        "startLine": 129,
+        "startChar": 3,
+        "endLine": 129,
+        "endChar": 20
+      },
+      "revId": "f5276941e892797039280b3208b13102eba67b8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
