@@ -49,6 +49,29 @@
     },
     {
       "key": {
+        "uuid": "2e4df70f_b2c0fd30",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-03T10:59:56Z",
+      "side": 1,
+      "message": "Add brackets here and use $remoteExtPath[1].",
+      "range": {
+        "startLine": 148,
+        "startChar": 40,
+        "endLine": 148,
+        "endChar": 42
+      },
+      "revId": "1c547ae1c742fc5ef89ca26b67d526fd74286018",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_52ae59e5",
         "filename": "client/tests/phpunit/includes/Hooks/EchoNotificationsHandlersTest.php",
         "patchSetId": 6
@@ -84,6 +107,30 @@
       "side": 1,
       "message": "Because they are \"path\" and relative to $wgAssetsPath but this is \"url\" and relative to $wgScriptPath. We can go with path too but that doesn\u0027t really matter.",
       "parentUuid": "2e4df70f_52ae59e5",
+      "range": {
+        "startLine": 200,
+        "startChar": 15,
+        "endLine": 200,
+        "endChar": 27
+      },
+      "revId": "1c547ae1c742fc5ef89ca26b67d526fd74286018",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_f2c6854d",
+        "filename": "client/tests/phpunit/includes/Hooks/EchoNotificationsHandlersTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-03T10:59:56Z",
+      "side": 1,
+      "message": "I would feel much better with \"path\". The current solution means we are assuming the user-facing URL starts with this absolute http://localhost/extensions/Wikibase/… path, which must not be true depending on the installation.",
+      "parentUuid": "2e4df70f_92f2a102",
       "range": {
         "startLine": 200,
         "startChar": 15,
