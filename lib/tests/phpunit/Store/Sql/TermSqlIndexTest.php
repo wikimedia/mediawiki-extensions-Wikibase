@@ -3,10 +3,12 @@
 namespace Wikibase\Lib\Tests\Store\Sql;
 
 use MWException;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParser;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
@@ -59,6 +61,7 @@ class TermSqlIndexTest extends TermIndexTest {
 		new TermSqlIndex(
 			new StringNormalizer(),
 			new EntityIdComposer( [] ),
+			new BasicEntityIdParser(),
 			false,
 			$repositoryName
 		);
@@ -72,12 +75,13 @@ class TermSqlIndexTest extends TermIndexTest {
 			new StringNormalizer(),
 			new EntityIdComposer( [
 				'item' => function( $repositoryName, $uniquePart ) {
-					return new ItemId( 'Q' . $uniquePart );
+					return ItemId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
 				},
 				'property' => function( $repositoryName, $uniquePart ) {
-					return new PropertyId( 'P' . $uniquePart );
+					return PropertyId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
 				},
-			] )
+			] ),
+			new BasicEntityIdParser()
 		);
 	}
 
@@ -122,6 +126,43 @@ class TermSqlIndexTest extends TermIndexTest {
 	}
 
 	/**
+	 * @dataProvider termProvider
+	 */
+	public function testGetMatchingTerms2_withFullEntityId(
+		$languageCode,
+		$termText,
+		$searchText,
+		$matches
+	) {
+		$termIndex = $this->getTermIndex();
+		$termIndex->clear();
+		$termIndex->setReadFullEntityIdColumn( true );
+
+		$item = new Item( new ItemId( 'Q42' ) );
+		$item->setLabel( $languageCode, $termText );
+
+		$termIndex->saveTermsOfEntity( $item );
+
+		$term = new TermIndexSearchCriteria( [ 'termLanguage' => $languageCode, 'termText' => $searchText ] );
+
+		//FIXME: test with arrays for term types and entity types!
+		$obtainedTerms = $termIndex->getMatchingTerms(
+			[ $term ],
+			TermIndexEntry::TYPE_LABEL,
+			Item::ENTITY_TYPE,
+			[ 'caseSensitive' => false ]
+		);
+
+		$this->assertEquals( $matches ? 1 : 0, count( $obtainedTerms ) );
+
+		if ( $matches ) {
+			$obtainedTerm = array_shift( $obtainedTerms );
+
+			$this->assertEquals( $termText, $obtainedTerm->getText() );
+		}
+	}
+
+	/**
 	 * Returns a fake term index configured for the given repository which uses the local database.
 	 *
 	 * @param string $repository
@@ -138,6 +179,7 @@ class TermSqlIndexTest extends TermIndexTest {
 					return PropertyId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
 				},
 			] ),
+			new PrefixMappingEntityIdParser( [ '' => $repository ], new BasicEntityIdParser() ),
 			false,
 			$repository
 		);
@@ -152,6 +194,28 @@ class TermSqlIndexTest extends TermIndexTest {
 		$localTermIndex->saveTermsOfEntity( $item );
 
 		$fooTermIndex = $this->getTermIndexForRepository( 'foo' );
+
+		$results = $fooTermIndex->getMatchingTerms( [ new TermIndexSearchCriteria( [ 'termText' => 'Foo' ] ) ] );
+
+		$this->assertCount( 1, $results );
+
+		$termIndexEntry = $results[0];
+
+		$this->assertTrue( $termIndexEntry->getEntityId()->equals( new ItemId( 'foo:Q300' ) ) );
+		$this->assertEquals( 'Foo', $termIndexEntry->getText() );
+	}
+
+	public function testGivenForeignRepositoryName_getMatchingTermsReturnsEntityIdWithTheRepositoryPrefixFullEntityId() {
+		$localTermIndex = $this->getTermIndex();
+		$localTermIndex->setReadFullEntityIdColumn( true );
+
+		$item = new Item( new ItemId( 'Q300' ) );
+		$item->setLabel( 'en', 'Foo' );
+
+		$localTermIndex->saveTermsOfEntity( $item );
+
+		$fooTermIndex = $this->getTermIndexForRepository( 'foo' );
+		$fooTermIndex->setReadFullEntityIdColumn( true );
 
 		$results = $fooTermIndex->getMatchingTerms( [ new TermIndexSearchCriteria( [ 'termText' => 'Foo' ] ) ] );
 
@@ -256,6 +320,44 @@ class TermSqlIndexTest extends TermIndexTest {
 		}
 	}
 
+	/**
+	 * @dataProvider getMatchingTermsOptionsProvider
+	 *
+	 * @param Fingerprint $fingerprint
+	 * @param TermIndexEntry[] $queryTerms
+	 * @param array $options
+	 * @param TermIndexEntry[] $expected
+	 */
+	public function testGetMatchingTerms_options_withFullEntityId(
+		Fingerprint $fingerprint,
+		array $queryTerms,
+		array $options,
+		array $expected
+	) {
+		$termIndex = $this->getTermIndex();
+		$termIndex->clear();
+		$termIndex->setReadFullEntityIdColumn( true );
+
+		$item = new Item( new ItemId( 'Q42' ) );
+		$item->setFingerprint( $fingerprint );
+
+		$termIndex->saveTermsOfEntity( $item );
+
+		$actual = $termIndex->getMatchingTerms( $queryTerms, null, null, $options );
+
+		$this->assertSameSize( $expected, $actual );
+
+		foreach ( $expected as $key => $expectedTerm ) {
+			$this->assertArrayHasKey( $key, $actual );
+			if ( $expectedTerm instanceof TermIndexEntry ) {
+				$actualTerm = $actual[$key];
+				$this->assertEquals( $expectedTerm->getTermType(), $actualTerm->getTermType(), 'termType' );
+				$this->assertEquals( $expectedTerm->getLanguage(), $actualTerm->getLanguage(), 'termLanguage' );
+				$this->assertEquals( $expectedTerm->getText(), $actualTerm->getText(), 'termText' );
+			}
+		}
+	}
+
 	public function provideGetSearchKey() {
 		return [
 			'basic' => [
@@ -314,10 +416,32 @@ class TermSqlIndexTest extends TermIndexTest {
 	}
 
 	/**
+	 * @dataProvider provideGetSearchKey
+	 */
+	public function testGetSearchKey_withFullEntityId( $raw, $normalized ) {
+		$index = $this->getTermIndex();
+		$index->setReadFullEntityIdColumn( true );
+
+		$key = $index->getSearchKey( $raw );
+		$this->assertEquals( $normalized, $key );
+	}
+
+	/**
 	 * @dataProvider getEntityTermsProvider
 	 */
 	public function testGetEntityTerms( $expectedTerms, EntityDocument $entity ) {
 		$termIndex = $this->getTermIndex();
+		$wikibaseTerms = $termIndex->getEntityTerms( $entity );
+
+		$this->assertEquals( $expectedTerms, $wikibaseTerms );
+	}
+
+	/**
+	 * @dataProvider getEntityTermsProvider
+	 */
+	public function testGetEntityTerms_withFullEntityId( $expectedTerms, EntityDocument $entity ) {
+		$termIndex = $this->getTermIndex();
+		$termIndex->setReadFullEntityIdColumn( true );
 		$wikibaseTerms = $termIndex->getEntityTerms( $entity );
 
 		$this->assertEquals( $expectedTerms, $wikibaseTerms );
@@ -451,6 +575,7 @@ class TermSqlIndexTest extends TermIndexTest {
 					return new PropertyId( 'P' . $uniquePart );
 				},
 			] ),
+			new BasicEntityIdParser(),
 			false,
 			'',
 			false
@@ -474,6 +599,26 @@ class TermSqlIndexTest extends TermIndexTest {
 		$item->setLabel( 'en', 'kitten-Q1112362' );
 
 		$termIndex = $this->getTermIndex();
+
+		$result = $termIndex->saveTermsOfEntity( $item );
+		$this->assertTrue( $result );
+
+		$row = $this->db->selectRow(
+			'wb_terms',
+			[ 'term_entity_id', 'term_entity_type', 'term_full_entity_id' ],
+			[ 'term_entity_id' => '1112362', 'term_entity_type' => 'item' ],
+			__METHOD__
+		);
+
+		$this->assertSame( 'Q1112362', $row->term_full_entity_id );
+	}
+
+	public function testSaveTermsOfEntity_withReadFullEntityId() {
+		$item = new Item( new ItemId( 'Q1112362' ) );
+		$item->setLabel( 'en', 'kitten-Q1112362' );
+
+		$termIndex = $this->getTermIndex();
+		$termIndex->setReadFullEntityIdColumn( true );
 
 		$result = $termIndex->saveTermsOfEntity( $item );
 		$this->assertTrue( $result );
