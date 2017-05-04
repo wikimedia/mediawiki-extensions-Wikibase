@@ -6,7 +6,10 @@
 			"KHMELNYTSKYIA"
 		]
 	},
+	"tooltip-t-wikibase": "Посилання на пов’язаний елемент сховища даних",
+	"wikibase-dataitem": "Елемент {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-editlinks": "Едітовати одказы",
+	"wikibase-editlinkstitle": "Редагувати міжмовні посилання",
 	"wikibase-linkitem-addlinks": "Придати одказы",
 	"wikibase-linkitem-close": "Заперти діалоґ і обновити сторінку",
 	"wikibase-linkitem-title": "Звязати зо сторінков",

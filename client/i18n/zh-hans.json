@@ -38,7 +38,7 @@
 	"apihelp-query+wblistentityusage-example-simple": "获取使用实体<kbd>Q2</kbd>的页面。",
 	"apihelp-query+wblistentityusage-example-url": "获取使用实体<kbd>Q2</kbd>的页面，包含URL。",
 	"apihelp-query+wblistentityusage-example-aspect": "获取使用实体<kbd>Q2</kbd>，并且方面是网站链接或声明的页面。",
-	"apihelp-query+pageterms-description": "通过相关的数据项获取与页面相关的术语。在wikibase实体页面，实体术语会被直接使用。\n敬告：在存储库wiki上，页面术语只直接工作于实体页面，而不是链接至项的页面。这可能在将来更新。",
+	"apihelp-query+pageterms-description": "通过网站链接获取与页面相关的{{WBREPONAME}}术语（代表的标签、描述和别名）。在实体页面本身，术语会被直接使用。敬告：在存储库wiki上，此模块只能直接工作于实体页面，而不是通过网站链接连接到实体的页面。这可能在将来更新。",
 	"apihelp-query+pageterms-example-simple": "获取与页面“London”相关的所有术语，在用户语言中。",
 	"apihelp-query+pageterms-example-label-en": "获取与页面“London”相关的英语标签和别名。",
 	"apihelp-query+pageterms-example-item": "获取项Q84的标签和别名。",

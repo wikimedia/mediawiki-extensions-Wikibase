@@ -47,6 +47,8 @@
 	"wikibase-rc-show-wikidata-pref": "ბოლო ცვლილებების სიაში {{grammar:genitive|{{WBREPONAME}}}} რედაქტირებების ჩვენება",
 	"wikibase-rc-wikibase-edit-letter": "ვ",
 	"wikibase-rc-wikibase-edit-title": "{{grammar:genitive|{{WBREPONAME}}}} რედაქტირება",
+	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}}ს რედაქტირებები",
+	"wikibase-rcfilters-hide-wikibase-description": "რედაქტირებები, რომლებიც შექმნილია {{WBREPONAME}}-ში.",
 	"wikibase-replicationnote": "გთხოვთ, მიაქციოთ ყურადღება, რომ შეიძლება გავიდეს რამდენიმე წუთი, სანამ ცვლილებები ხილული გახდება ყველა ვიკი-პროექტში",
 	"wikibase-watchlist-show-changes-pref": "თქვენი კონტროლის სიაში {{grammar:genitive|{{WBREPONAME}}}} რედაქტირებების ჩვენება",
 	"wikibase-error-invalid-entity-id": "მითითებული ID სისტემისთვის უცნობია. გთხოვთ, გამოიყენოთ მოქმედი ID.",

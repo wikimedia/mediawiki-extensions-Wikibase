@@ -26,7 +26,7 @@
 	"apihelp-query+wblistentityusage-example-simple": "Ruft Seiten ab, die das Objekt <kbd>Q2</kbd> verwenden.",
 	"apihelp-query+wblistentityusage-example-url": "Ruft Seiten ab, die das Objekt <kbd>Q2</kbd> verwenden, inklusive der URL.",
 	"apihelp-query+wblistentityusage-example-aspect": "Ruft Seiten ab, die das Objekt <kbd>Q2</kbd> verwenden und der Aspekt war Websitelink oder Aussage.",
-	"apihelp-query+pageterms-description": "Ruft Begriffe im Zusammenhang mit einer Seite über ein damit verbundenes Datenelement ab. Auf einer Wikibase-Objektseite werden die Objektbegriffe direkt verwendet.\nWarnung: Auf einem Repositoriums-Wiki funktionieren Seitenbegriffe nur auf Objektseiten und nicht auf Seiten, die mit einem Objekt verbunden sind. Dies könnte sich in Zukunft ändern.",
+	"apihelp-query+pageterms-description": "Ruft die {{WBREPONAME}}-Begriffe ab (typischerweise Bezeichnungen, Beschreibungen und Aliasse), die mit einer Seite über einen Websitelink verknüpft sind. Auf der Objektseite selber werden die Begriffe direkt verwendet. Vorbehalt: Auf einem Repositoriumswiki funktioniert dieses Modul nur auf Objektseiten direkt, nicht auf Seiten, die mit einem Objekt über einen Websitelink verbunden sind. Dies kann sich in Zukunft ändern.",
 	"apihelp-query+pageterms-example-simple": "Ruft alle Begriffe im Zusammenhang mit der Seite „London“ in der Benutzersprache ab.",
 	"apihelp-query+pageterms-example-label-en": "Ruft Bezeichnungen und Aliasse im Zusammenhang mit der Seite „London“ in Englisch ab.",
 	"apihelp-query+pageterms-example-item": "Ruft Bezeichnungen und Aliasse des Objektes Q84 auf.",

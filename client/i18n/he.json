@@ -28,7 +28,7 @@
 	"apihelp-query+wblistentityusage-example-simple": "קבלת דפים שמשתמשים בישות <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "קבלת דפים שמשתמשים בישות <kbd>Q2</kbd> עם ה־URL כלול.",
 	"apihelp-query+wblistentityusage-example-aspect": "קבלת דפים שמשתמשים בישות <kbd>Q2</kbd> וההיבט היה קישור או קביעה.",
-	"apihelp-query+pageterms-description": "קבלת מונחים שמשויכים לדף דרך פריט נתונים משויך. בדף ישות של ויקיבייס, מושגי הישות משמשים ישירות.\nאזהרה: בוויקי המאגר pageterms עובד רק ישירת על דפי ישות ולא על דפים שמקושרים לפריט. זה יכול להשתנות בעתיד.",
+	"apihelp-query+pageterms-description": "קבלת מושגי {{WBREPONAME}} (בדרך־כלל תוויות, תיאורים, וכינויים) שמשויכים לדף דרך קישור אתר. בדף הישות עצמו, המושגים משמשים באופן ישיר. לתשומת לבך: בוויקי המאגר, המודול הזה יעבוד ישירות רק על דפי ישויות, ולא על דפים שמקושרים לישות דרך קישור אתר. זה יכול להשתנות בעתיד.",
 	"apihelp-query+pageterms-example-simple": "קבלת כל הפריטים המשויכים לדף 'London', בשפה של המשתמש.",
 	"apihelp-query+pageterms-example-label-en": "קבלת תוויות וכינויים שמשויעכים לדף 'London', באנגלית.",
 	"apihelp-query+pageterms-example-item": "קבלת תוויות וכינויים של הפריט Q84.",

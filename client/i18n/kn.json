@@ -3,9 +3,11 @@
 		"authors": [
 			"VASANTH S.N.",
 			"Omshivaprakash",
-			"Shushruth"
+			"Shushruth",
+			"Anoop rao"
 		]
 	},
+	"tooltip-t-wikibase": "ಸಂಪರ್ಕ ಮಾಹಿತಿ ಸಂಗ್ರಹ ಐಟಂಗೆ ಲಿಂಕ್ ಮಾಡಿ",
 	"wikibase-comment-update": "{{WBREPONAME}} ವಸ್ತು ಬದಲಾಗಿದೆ",
 	"wikibase-dataitem": "{{WBREPONAME}} ವಸ್ತು",
 	"wikibase-editlinks": "ಕೊಂಡಿಗಳನ್ನು ಸಂಪಾದಿಸಿ",
