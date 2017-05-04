@@ -70,6 +70,20 @@ class WikibaseSettings {
 	}
 
 	/**
+	 * Returns a SettingsArray that contains at least the settings that are shared
+	 * between repo and client.
+	 *
+	 * @returns SettingsArray
+	 */
+	public static function getSharedSettings() {
+		if ( self::isClientEnabled() ) {
+			return self::getClientSettings();
+		} else {
+			return self::getRepoSettings();
+		}
+	}
+
+	/**
 	 * Returns settings for a wikibase component based on global state.
 	 * This is intended to be used to access settings specified in LocalSettings.php.
 	 *

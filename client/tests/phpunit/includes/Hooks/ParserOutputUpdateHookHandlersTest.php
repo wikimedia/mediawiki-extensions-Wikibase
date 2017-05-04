@@ -25,7 +25,6 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\LangLinkHandler;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\NamespaceChecker;
-use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\Lib\Tests\MockRepository;
 
@@ -115,9 +114,9 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 	/**
 	 * @param array $settings
 	 *
-	 * @return Settings
+	 * @return SettingsArray
 	 */
-	private function newSettings( array $settings ) {
+	private function newSettingsArray( array $settings ) {
 		$defaults = array(
 			'siteGlobalID' => 'enwiki',
 			'languageLinkSiteGroup' => 'wikipedia',
@@ -146,7 +145,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 			),
 		);
 
-		$settings = $this->newSettings( $settings );
+		$settings = $this->newSettingsArray( $settings );
 
 		$namespaces = $settings->getSetting( 'namespaces' );
 		$namespaceChecker = new NamespaceChecker( array(), $namespaces );

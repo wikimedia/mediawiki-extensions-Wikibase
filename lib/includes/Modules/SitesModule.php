@@ -22,7 +22,7 @@ class SitesModule extends ResourceLoaderModule {
 
 	public function __construct() {
 		$this->worker = new SitesModuleWorker(
-			Settings::singleton(),
+			WikibaseSettings::getSharedSettings(),
 			MediaWikiServices::getInstance()->getSiteStore(),
 			wfGetCache( wfIsHHVM() ? CACHE_ACCEL : CACHE_ANYTHING )
 		);
