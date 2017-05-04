@@ -1006,7 +1006,7 @@ final class WikibaseClient {
 	 *
 	 * @return Serializer
 	 */
-	public function getEntitySerializer( $options = SerializerFactory::OPTION_DEFAULT ) {
+	public function getAllTypesEntitySerializer( $options = SerializerFactory::OPTION_DEFAULT ) {
 		if ( !isset( $this->entitySerializers[$options] ) ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
 			$serializerFactory = new SerializerFactory( new DataValueSerializer(), $options );
