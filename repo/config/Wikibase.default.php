@@ -203,18 +203,18 @@ return [
 	// URL of geo shape storage API endpoint
 	'geoShapeStorageApiEndpointUrl' => 'https://commons.wikimedia.org/w/api.php',
 
-	// URL of geo shape storage frontend. Used primarily to build links to the geo shapes.
-	// URL will be concatenated with the page title, so should end up with '/' or 'title='
-	// Special characters (e.g. space, percent, etc.) in URL should NOT be encoded
-	'geoShapeStorageFrontendUrl' => 'https://commons.wikimedia.org/wiki/',
+	// Base URL of geo shape storage frontend. Used primarily to build links to the geo shapes. Will
+	// be concatenated with the page title, so should end with "/" or "title=". Special characters
+	// (e.g. space, percent, etc.) should NOT be encoded.
+	'geoShapeStorageBaseUrl' => 'https://commons.wikimedia.org/wiki/',
 
 	// URL of tabular data storage API endpoint
 	'tabularDataStorageApiEndpointUrl' => 'https://commons.wikimedia.org/w/api.php',
 
-	// URL of tabular data storage frontend. Used primarily to build links to the data.
-	// URL will be concatenated with the page title, so should end up with '/' or 'title='
-	// Special characters (e.g. space, percent, etc.) in URL should NOT be encoded
-	'tabularDataStorageFrontendUrl' => 'https://commons.wikimedia.org/wiki/',
+	// Base URL of tabular data storage frontend. Used primarily to build links to the tabular data
+	// pages. Will be concatenated with the page title, so should end with "/" or "title=". Special
+	// characters (e.g. space, percent, etc.) should NOT be encoded.
+	'tabularDataStorageBaseUrl' => 'https://commons.wikimedia.org/wiki/',
 
 	// Name of the lock manager for dispatch changes coordinator
 	'dispatchingLockManager' => null,

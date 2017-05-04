@@ -210,15 +210,15 @@ return call_user_func( function() {
 		return $otherProjectsSitesProvider->getOtherProjectsSiteIds( $settings->getSetting( 'siteLinkGroups' ) );
 	};
 
-	// URL of geo shape storage frontend. Used primarily to build links to the geo shapes.
-	// URL will be concatenated with the page title, so should end up with '/' or 'title='
-	// Special characters (e.g. space, percent, etc.) in URL should NOT be encoded
-	$defaults['geoShapeStorageFrontendUrl'] = 'https://commons.wikimedia.org/wiki/';
+	// Base URL of geo shape storage frontend. Used primarily to build links to the geo shapes. Will
+	// be concatenated with the page title, so should end with "/" or "title=". Special characters
+	// (e.g. space, percent, etc.) should NOT be encoded.
+	$defaults['geoShapeStorageBaseUrl'] = 'https://commons.wikimedia.org/wiki/';
 
-	// URL of tabular data storage frontend. Used primarily to build links to the tabular data pages.
-	// URL will be concatenated with the page title, so should end up with '/' or 'title='
-	// Special characters (e.g. space, percent, etc.) in URL should NOT be encoded
-	$defaults['tabularDataStorageFrontendUrl'] = 'https://commons.wikimedia.org/wiki/';
+	// Base URL of tabular data storage frontend. Used primarily to build links to the tabular data
+	// pages. Will be concatenated with the page title, so should end with "/" or "title=". Special
+	// characters (e.g. space, percent, etc.) should NOT be encoded.
+	$defaults['tabularDataStorageBaseUrl'] = 'https://commons.wikimedia.org/wiki/';
 
 	return $defaults;
 } );

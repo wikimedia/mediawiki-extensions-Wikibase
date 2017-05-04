@@ -272,8 +272,8 @@ final class WikibaseClient {
 			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
 			new LanguageNameLookup( $this->getUserLanguage()->getCode() ),
 			$this->getRepoItemUriParser(),
-			$settings->getSetting( 'geoShapeStorageFrontendUrl' ),
-			$settings->getSetting( 'tabularDataStorageFrontendUrl' ),
+			$settings->getSetting( 'geoShapeStorageBaseUrl' ),
+			$settings->getSetting( 'tabularDataStorageBaseUrl' ),
 			$entityTitleLookup
 		);
 	}

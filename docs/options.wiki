@@ -24,7 +24,8 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 :'''Note''' that if this is <code>true</code>, the <code>pruneChanges.php</code> script should be run periodically to remove old changes from the database table.
 ;disabledDataTypes: Array listing of disabled data types on a wiki. This setting is intended to be used in a new Wikibase installation without items yet, or to control deployment of new data types. This setting should be set to the same value in both client and repo settings. Defaults to an empty array.
 ;maxSerializedEntitySize: The maximum serialized size of entities, in KB. Loading and storing will fail if this size is exceeded. This is intended as a hard limit that prevents very large chunks of data being stored or processed due to abuse or erroneous code. Defaults to MediaWiki core's <code>$wgMaxArticleSize</code> setting.
-;geoShapeStorageFrontendUrl: URL of geo shape storage frontend. Used primarily to build links to the geo shapes. URL will be concatenated with the page title, so should end up with '/' or 'title='. Special characters (e.g. space, percent, etc.) in URL should NOT be encoded
+;geoShapeStorageBaseUrl: Base URL of geo shape storage frontend. Used primarily to build links to the geo shapes. Will be concatenated with the page title, so should end with <code>/</code> or <code>title=</code>. Special characters (e.g. space, percent, etc.) should ''not'' be encoded.
+;tabularDataStorageBaseUrl: Base URL of tabular data storage frontend. Used primarily to build links to the tabular data pages. Will be concatenated with the page title, so should end with <code>/</code> or <code>title=</code>. Special characters (e.g. space, percent, etc.) should ''not'' be encoded.
 
 == Repository Settings ==
 
