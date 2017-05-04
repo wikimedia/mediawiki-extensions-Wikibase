@@ -58,7 +58,7 @@ class WikibaseValueFormatterBuilders {
 	/**
 	 * @var string
 	 */
-	private $geoShapeStorageFrontendUrl;
+	private $geoShapeStorageBaseUrl;
 
 	/**
 	 * @var EntityTitleLookup|null
@@ -80,15 +80,15 @@ class WikibaseValueFormatterBuilders {
 	/**
 	 * @var string
 	 */
-	private $tabularDataStorageFrontendUrl;
+	private $tabularDataStorageBaseUrl;
 
 	/**
 	 * @param Language $defaultLanguage
 	 * @param FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param EntityIdParser $repoItemUriParser
-	 * @param string $geoShapeStorageFrontendUrl
-	 * @param string $tabularDataStorageFrontendUrl
+	 * @param string $geoShapeStorageBaseUrl
+	 * @param string $tabularDataStorageBaseUrl
 	 * @param EntityTitleLookup|null $entityTitleLookup
 	 */
 	public function __construct(
@@ -96,29 +96,29 @@ class WikibaseValueFormatterBuilders {
 		FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		LanguageNameLookup $languageNameLookup,
 		EntityIdParser $repoItemUriParser,
-		$geoShapeStorageFrontendUrl,
-		$tabularDataStorageFrontendUrl,
+		$geoShapeStorageBaseUrl,
+		$tabularDataStorageBaseUrl,
 		EntityTitleLookup $entityTitleLookup = null
 	) {
 		Assert::parameterType(
 			'string',
-			$geoShapeStorageFrontendUrl,
-			'$geoShapeStorageFrontendUrl'
+			$geoShapeStorageBaseUrl,
+			'$geoShapeStorageBaseUrl'
 		);
 
 		Assert::parameterType(
 			'string',
-			$tabularDataStorageFrontendUrl,
-			'$tabularDataStorageFrontendUrl'
+			$tabularDataStorageBaseUrl,
+			'$tabularDataStorageBaseUrl'
 		);
 
 		$this->defaultLanguage = $defaultLanguage;
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->repoItemUriParser = $repoItemUriParser;
-		$this->geoShapeStorageFrontendUrl = $geoShapeStorageFrontendUrl;
+		$this->geoShapeStorageBaseUrl = $geoShapeStorageBaseUrl;
+		$this->tabularDataStorageBaseUrl = $tabularDataStorageBaseUrl;
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->tabularDataStorageFrontendUrl = $tabularDataStorageFrontendUrl;
 	}
 
 	private function newPlainEntityIdFormatter( FormatterOptions $options ) {
@@ -271,9 +271,9 @@ class WikibaseValueFormatterBuilders {
 	public function newGeoShapeFormatter( $format, FormatterOptions $options ) {
 		switch ( $this->getBaseFormat( $format ) ) {
 			case SnakFormatter::FORMAT_HTML:
-				return new InterWikiLinkHtmlFormatter( $this->geoShapeStorageFrontendUrl );
+				return new InterWikiLinkHtmlFormatter( $this->geoShapeStorageBaseUrl );
 			case SnakFormatter::FORMAT_WIKI:
-				return new InterWikiLinkWikitextFormatter( $this->geoShapeStorageFrontendUrl );
+				return new InterWikiLinkWikitextFormatter( $this->geoShapeStorageBaseUrl );
 			default:
 				return $this->newStringFormatter( $format, $options );
 		}
@@ -288,9 +288,9 @@ class WikibaseValueFormatterBuilders {
 	public function newTabularDataFormatter( $format, FormatterOptions $options ) {
 		switch ( $this->getBaseFormat( $format ) ) {
 			case SnakFormatter::FORMAT_HTML:
-				return new InterWikiLinkHtmlFormatter( $this->tabularDataStorageFrontendUrl );
+				return new InterWikiLinkHtmlFormatter( $this->tabularDataStorageBaseUrl );
 			case SnakFormatter::FORMAT_WIKI:
-				return new InterWikiLinkWikitextFormatter( $this->tabularDataStorageFrontendUrl );
+				return new InterWikiLinkWikitextFormatter( $this->tabularDataStorageBaseUrl );
 			default:
 				return $this->newStringFormatter( $format, $options );
 		}
