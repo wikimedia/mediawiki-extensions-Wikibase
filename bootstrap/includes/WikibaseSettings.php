@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Bootstrap;
 
 use Hooks;
 use MWException;

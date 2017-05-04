@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Tests;
+namespace Wikibase\Bootstrap\Tests;
 
 use MWException;
 use OutOfBoundsException;
@@ -13,7 +13,7 @@ use Wikibase\WikibaseSettings;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
- * @covers Wikibase\WikibaseSettings
+ * @covers Wikibase\Bootstrap/WikibaseSettings
  *
  * @group Wikibase
  *
