@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_7d3353f4",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-04T07:16:02Z",
+      "side": 1,
+      "message": "I believe the idea indeed is to move it all step by step, and this patch intentionally moves SiteLinkRdfBuilder only.\nThat patch itself did not made the context clear enough, that\u0027s true.\nName of this key should not be changed.",
+      "parentUuid": "2e4df70f_adff40a6",
+      "range": {
+        "startLine": 66,
+        "startChar": 3,
+        "endLine": 66,
+        "endChar": 31
+      },
+      "revId": "3292b004e7ffea5ac3df50e1ff61d31165d34afb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_cd916c9e",
         "filename": "repo/WikibaseRepo.entitytypes.php",
         "patchSetId": 11
