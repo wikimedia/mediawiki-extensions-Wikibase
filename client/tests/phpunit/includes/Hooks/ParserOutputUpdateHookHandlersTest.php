@@ -25,7 +25,6 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\LangLinkHandler;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\NamespaceChecker;
-use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\Lib\Tests\MockRepository;
 
@@ -115,7 +114,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 	/**
 	 * @param array $settings
 	 *
-	 * @return Settings
+	 * @return SettingsArray
 	 */
 	private function newSettings( array $settings ) {
 		$defaults = array(
