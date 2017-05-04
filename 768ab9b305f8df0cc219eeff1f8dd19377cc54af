@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_fd2683b4",
+        "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-04T07:09:39Z",
+      "side": 1,
+      "message": "I am bit confused now.\n\nSo I run the rebuildPropertInfo script with --start-row\u003d666, meaning I want to have property info rebuild for properties with pages with page id starting from 666.\nIf I get it right, what the changed version of the class does is running the query selecting pages with page id greater than 666. As a result all properties with pages with ID greater than 666 will be rebuild, but if page ID 666 was the page of the property, this one will be skipped.\n\nI think this is wrong. Or did I get this incorrect?\n\n\u003e With this offset this variable does not actually reflect the \"start from this page ID\".\n\nI believe it did reflect, given what comparison is used in the qurey.\n$pageId is the local variable only used in the query condition. Either its initial value is \"start from the page ID\" minus one, and greater-than operator is used in the query, OR the initial value is \"start from the page ID\", and the comparison in the query is greather-than-or-equal, and in each loop iteration $pageId is the ID of the last processed page row plus one, so it does not get in the loop because of processing the same row again and again.\n\nI wonder why unit tests did not pick it up. Could someone check if I am just not spreading confusion here?",
+      "parentUuid": "2e4df70f_54ade42c",
+      "range": {
+        "startLine": 150,
+        "startChar": 29,
+        "endLine": 150,
+        "endChar": 32
+      },
+      "revId": "768ab9b305f8df0cc219eeff1f8dd19377cc54af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_54ec04f2",
         "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
         "patchSetId": 9
