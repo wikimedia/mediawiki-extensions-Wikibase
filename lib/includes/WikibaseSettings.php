@@ -42,7 +42,12 @@ class WikibaseSettings {
 			throw new MWException( 'Cannot access repo settings: Wikibase Repository component is not enabled!' );
 		}
 
-		$settings = self::getSettings( 'wgWBRepoSettings' );
+		$defaults = array_merge(
+			require __DIR__ . '/../../lib/config/WikibaseLib.default.php',
+			require __DIR__ . '/../../repo/config/Wikibase.default.php'
+		);
+
+		$settings = self::getSettings( 'wgWBRepoSettings', $defaults );
 		$settings->setSetting( 'entityNamespaces', self::buildEntityNamespaceConfigurations( $settings ) );
 		return $settings;
 	}
@@ -64,7 +69,12 @@ class WikibaseSettings {
 			throw new MWException( 'Cannot access client settings: Wikibase Client component is not enabled!' );
 		}
 
-		$settings = self::getSettings( 'wgWBClientSettings' );
+		$defaults = array_merge(
+			require __DIR__ . '/../../lib/config/WikibaseLib.default.php',
+			require __DIR__ . '/../../client/config/WikibaseClient.default.php'
+		);
+
+		$settings = self::getSettings( 'wgWBClientSettings', $defaults );
 		$settings->setSetting( 'entityNamespaces', self::buildEntityNamespaceConfigurations( $settings ) );
 		return $settings;
 	}
@@ -88,10 +98,11 @@ class WikibaseSettings {
 	 * This is intended to be used to access settings specified in LocalSettings.php.
 	 *
 	 * @param string $var The name of a global variable.
+	 * @param array $defaults
 	 *
 	 * @return SettingsArray
 	 */
-	private static function getSettings( $var ) {
+	private static function getSettings( $var, array $defaults = [] ) {
 		if ( !isset( $GLOBALS[$var] ) ) {
 			throw new OutOfBoundsException( 'No such global configuration variable: ' . $var );
 		}
@@ -100,8 +111,7 @@ class WikibaseSettings {
 			throw new OutOfBoundsException( 'Not a Wikibase configuration array: ' . $var );
 		}
 
-		$settings = $GLOBALS[$var];
-
+		$settings = array_merge( $defaults, $GLOBALS[$var] );
 		return new SettingsArray( $settings );
 	}
 

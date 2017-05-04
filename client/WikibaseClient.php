@@ -258,10 +258,7 @@ call_user_func( function() {
 		include __DIR__ . '/resources/Resources.php'
 	);
 
-	$wgWBClientSettings = array_merge(
-		require __DIR__ . '/../lib/config/WikibaseLib.default.php',
-		require __DIR__ . '/config/WikibaseClient.default.php'
-	);
+	$wgWBClientSettings = [];
 
 	$wgRecentChangesFlags['wikibase-edit'] = array(
 		'letter' => 'wikibase-rc-wikibase-edit-letter',
