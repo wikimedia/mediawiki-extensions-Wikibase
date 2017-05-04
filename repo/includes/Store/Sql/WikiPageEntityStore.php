@@ -170,7 +170,7 @@ class WikiPageEntityStore implements EntityStore {
 		$baseRevId = false
 	) {
 		if ( $entity->getId() === null ) {
-			if ( ( $flags & EDIT_NEW ) !== EDIT_NEW ) {
+			if ( !( $flags & EDIT_NEW ) ) {
 				throw new StorageException( Status::newFatal( 'edit-gone-missing' ) );
 			}
 
@@ -259,7 +259,7 @@ class WikiPageEntityStore implements EntityStore {
 	) {
 		$page = $this->getWikiPageForEntity( $entityContent->getEntityId() );
 
-		if ( ( $flags & EDIT_NEW ) === EDIT_NEW ) {
+		if ( $flags & EDIT_NEW ) {
 			$title = $page->getTitle();
 			if ( $title->exists() ) {
 				throw new StorageException( Status::newFatal( 'edit-already-exists' ) );

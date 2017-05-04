@@ -494,11 +494,11 @@ class MockRepository implements
 
 		$status = Status::newGood();
 
-		if ( ( $flags & EDIT_NEW ) > 0 && $entityId && $this->hasEntity( $entityId ) ) {
+		if ( ( $flags & EDIT_NEW ) && $entityId && $this->hasEntity( $entityId ) ) {
 			$status->fatal( 'edit-already-exists' );
 		}
 
-		if ( ( $flags & EDIT_UPDATE ) > 0 && !$this->hasEntity( $entityId ) ) {
+		if ( ( $flags & EDIT_UPDATE ) && !$this->hasEntity( $entityId ) ) {
 			$status->fatal( 'edit-gone-missing' );
 		}
 

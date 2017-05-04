@@ -659,10 +659,10 @@ abstract class EntityContent extends AbstractContent {
 		$status = parent::prepareSave( $page, $flags, $baseRevId, $user );
 
 		if ( $status->isOK() ) {
-			if ( !$this->isRedirect() && ( $flags & self::EDIT_IGNORE_CONSTRAINTS ) === 0 ) {
+			if ( !$this->isRedirect() && !( $flags & self::EDIT_IGNORE_CONSTRAINTS ) ) {
 				/* @var EntityHandler $handler */
 				$handler = $this->getContentHandler();
-				$validators = $handler->getOnSaveValidators( ( $flags & EDIT_NEW ) > 0 );
+				$validators = $handler->getOnSaveValidators( ( $flags & EDIT_NEW ) !== 0 );
 				$status = $this->applyValidators( $validators );
 			}
 		}
