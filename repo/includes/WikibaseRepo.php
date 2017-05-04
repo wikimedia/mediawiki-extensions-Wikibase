@@ -145,7 +145,7 @@ use Wikibase\SummaryFormatter;
 use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
-use Wikibase\WikibaseSettings;
+use Wikibase\Bootstrap\WikibaseSettings;
 
 /**
  * Top level factory for the WikibaseRepo extension.

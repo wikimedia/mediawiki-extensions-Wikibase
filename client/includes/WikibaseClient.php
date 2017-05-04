@@ -96,7 +96,7 @@ use Wikibase\NamespaceChecker;
 use Wikibase\SettingsArray;
 use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
 use Wikibase\StringNormalizer;
-use Wikibase\WikibaseSettings;
+use Wikibase\Bootstrap\WikibaseSettings;
 
 /**
  * Top level factory for the WikibaseClient extension.

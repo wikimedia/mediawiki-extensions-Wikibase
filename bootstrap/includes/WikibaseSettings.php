@@ -1,10 +1,11 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Bootstrap;
 
 use Hooks;
 use MWException;
 use OutOfBoundsException;
+use Wikibase\SettingsArray;
 
 /**
  * WikibaseSettings is a static access point to Wikibase settings defined as global state
@@ -15,7 +16,12 @@ use OutOfBoundsException;
  * use top level factory methods such as WikibaseRepo::getRepoSettings() and
  * WikibaseClient::getClientSettings().
  *
- * @todo Move this to a separate component.
+ * @todo TBD: This class depends on SettingsArray, which lives in the lib component.
+ *       We could move SettingsArray into bootstrap, but SettingsArray is used in
+ *       several places in application logic. Application logic shouldn't depend on bootstrap.
+ *       Is it ok for bootstrap to depend on lib? Can we sidestep this by switching from
+ *       SiteArray to core's Config objects? Can we remove the need for application logic to
+ *       use SiteArray?
  *
  * @license GPL 2+
  * @author Daniel Kinzler
@@ -43,8 +49,8 @@ class WikibaseSettings {
 		}
 
 		$defaults = array_merge(
-			require __DIR__ . '/../../lib/config/WikibaseLib.default.php',
-			require __DIR__ . '/../../repo/config/Wikibase.default.php'
+			require __DIR__ . '/../config/Wikibase.default.php',
+			require __DIR__ . '/../config/WikibaseRepo.default.php'
 		);
 
 		$settings = self::getSettings( 'wgWBRepoSettings', $defaults );
@@ -70,8 +76,8 @@ class WikibaseSettings {
 		}
 
 		$defaults = array_merge(
-			require __DIR__ . '/../../lib/config/WikibaseLib.default.php',
-			require __DIR__ . '/../../client/config/WikibaseClient.default.php'
+			require __DIR__ . '/../config/Wikibase.default.php',
+			require __DIR__ . '/../config/WikibaseClient.default.php'
 		);
 
 		$settings = self::getSettings( 'wgWBClientSettings', $defaults );

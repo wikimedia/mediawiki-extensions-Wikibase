@@ -4,7 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\Client\WikibaseClient;
 use Wikibase\SettingsArray;
-use Wikibase\WikibaseSettings;
+use Wikibase\Bootstrap\WikibaseSettings;
 
 /**
  * Copyright © 02.07.13 by the authors listed below.

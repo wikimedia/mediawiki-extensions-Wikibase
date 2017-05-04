@@ -80,7 +80,7 @@ use Wikibase\Store\EntityIdLookup;
 use Wikibase\Store;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
-use Wikibase\WikibaseSettings;
+use Wikibase\Bootstrap\WikibaseSettings;
 
 /**
  * @covers Wikibase\Repo\WikibaseRepo

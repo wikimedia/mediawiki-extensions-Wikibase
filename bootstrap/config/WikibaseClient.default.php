@@ -2,7 +2,7 @@
 
 use Wikibase\Client\WikibaseClient;
 use Wikibase\SettingsArray;
-use Wikibase\WikibaseSettings;
+use Wikibase\Bootstrap\WikibaseSettings;
 
 /**
  * This file assigns the default values to all Wikibase Client settings.
@@ -87,8 +87,8 @@ return call_user_func( function() {
 		// repo and clients for multiwiki setups.
 		'sharedCacheType' => $GLOBALS['wgMainCacheType'],
 
-		'repositoryServiceWiringFiles' => [ __DIR__ . '/../includes/Store/RepositoryServiceWiring.php' ],
-		'dispatchingServiceWiringFiles' => [ __DIR__ . '/../includes/DispatchingServiceWiring.php' ],
+		'repositoryServiceWiringFiles' => [ __DIR__ . '/../../client/includes/Store/RepositoryServiceWiring.php' ],
+		'dispatchingServiceWiringFiles' => [ __DIR__ . '/../../client/includes/DispatchingServiceWiring.php' ],
 		'foreignRepositories' => [],
 
 		// Enable use of term_full_entity_id column in wb_terms table.

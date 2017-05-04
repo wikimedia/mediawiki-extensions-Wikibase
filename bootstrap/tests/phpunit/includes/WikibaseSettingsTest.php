@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Tests;
+namespace Wikibase\Bootstrap\Tests;
 
 use MWException;
 use OutOfBoundsException;
@@ -9,11 +9,11 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\WikibaseSettings;
+use Wikibase\Bootstrap\WikibaseSettings;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
- * @covers Wikibase\WikibaseSettings
+ * @covers Wikibase\Bootstrap/WikibaseSettings
  *
  * @group Wikibase
  *
