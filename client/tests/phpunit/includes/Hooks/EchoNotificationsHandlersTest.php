@@ -197,7 +197,7 @@ class EchoNotificationsHandlersTestCase extends MediaWikiTestCase {
 			"Failed asserting that the notification icon is registered to Echo"
 		);
 		$this->assertEquals(
-			$wgEchoNotificationIcons['placeholder'],
+			[ 'path' => 'Wikibase/client/includes/Hooks/../../resources/images/echoIcon.svg' ],
 			$wgEchoNotificationIcons[$handlers::NOTIFICATION_TYPE],
 			"Failed asserting that missing echoIcon setting defaults to Echo's default"
 		);
