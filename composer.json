@@ -62,6 +62,8 @@
 			"repo/Wikibase.hooks.php"
 		],
 		"psr-4": {
+			"Wikibase\\Bootstrap\\": "bootstrap/includes",
+			"Wikibase\\Bootstrap\\Tests\\": "bootstrap/tests/phpunit/includes",
 			"Wikibase\\Client\\": "client/includes",
 			"Wikibase\\Client\\Tests\\": "client/tests/phpunit/includes",
 			"Wikibase\\Lib\\": "lib/includes",
