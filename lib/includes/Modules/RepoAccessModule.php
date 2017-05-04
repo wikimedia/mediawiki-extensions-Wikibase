@@ -27,17 +27,15 @@ class RepoAccessModule extends ResourceLoaderModule {
 	public function getScript( ResourceLoaderContext $context ) {
 		global $wgServer, $wgScriptPath, $wgArticlePath;
 
-		$settings = Settings::singleton();
-
-		if ( $settings->hasSetting( 'repoUrl' ) ) {
-			// We're on a client (or at least the client configuration is available)
+		if ( WikibaseSettings::isClientEnabled() ) {
+			$settings = WikibaseSettings::getClientSettings();
 			$wbRepo = array(
 				'url' => $settings->getSetting( 'repoUrl' ),
 				'scriptPath' => $settings->getSetting( 'repoScriptPath' ),
 				'articlePath' => $settings->getSetting( 'repoArticlePath' )
 			);
 		} else {
-			// Client configuration isn't available... just assume we're the repo
+			// Client isn't enabled... assume we're on the repo.
 			$wbRepo = array(
 				'url' => $wgServer,
 				'scriptPath' => $wgScriptPath,
