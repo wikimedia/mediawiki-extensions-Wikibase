@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_0053ca44",
+        "filename": "repo/includes/Store/Sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-04T12:32:11Z",
+      "side": 1,
+      "message": "Ideally, this should use an EntityIdLookup. But I guess it\u0027s ok to hard-code this, since we know that we are always dealing Properties here.",
+      "revId": "39c07a326b724cbee39299609265ee29046b2f3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
