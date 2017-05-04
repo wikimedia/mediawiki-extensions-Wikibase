@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_9df98781",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-04T09:23:11Z",
+      "side": 1,
+      "message": "Sure, all fine. Keep the name, continue factoring specific builders out. I just wanted to document my observations.",
+      "parentUuid": "0e1cb3f9_7d3353f4",
+      "range": {
+        "startLine": 66,
+        "startChar": 3,
+        "endLine": 66,
+        "endChar": 31
+      },
+      "revId": "3292b004e7ffea5ac3df50e1ff61d31165d34afb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_cd916c9e",
         "filename": "repo/WikibaseRepo.entitytypes.php",
         "patchSetId": 11
@@ -83,6 +107,30 @@
       "writtenOn": "2017-05-03T12:29:06Z",
       "side": 1,
       "message": "This is not correct. Labels, descriptions, and aliases are also specific for Items and Properties, and will not appear on other entity types. This must be factored out as well, but should be done in a later patch to not make this one bigger.",
+      "range": {
+        "startLine": 75,
+        "startChar": 13,
+        "endLine": 75,
+        "endChar": 67
+      },
+      "revId": "3292b004e7ffea5ac3df50e1ff61d31165d34afb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_1df81746",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-04T09:23:11Z",
+      "side": 1,
+      "message": "I tried to rewrite this comment, but figured it says exactly what is needed for now. This will obviously change later when we move term builders over here.\n\nSorry, Amir.",
+      "parentUuid": "2e4df70f_2df7b0f3",
       "range": {
         "startLine": 75,
         "startChar": 13,
