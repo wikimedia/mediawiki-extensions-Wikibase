@@ -25,6 +25,23 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_90472122",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-05T12:28:50Z",
+      "side": 1,
+      "message": "Renaming a configuration settings is always dangerous: any system that has the old field set will lose that setting when this code is deployed. I.e. if we merge this and forget to add a value for the new setting to the config of the live system, we break the site.\n\nOne way to avoid this is to make the default for the new setting a callback that checks for the old setting:\n\n  \u0027writeFullEntityIdColumn\u0027 \u003d\u003e function ( SettingsArray $settings ) {\n      return $settings-\u003ehasSetting( \u0027hasFullEntityIdColumn\u0027 ) ? $settings-\u003egetSetting( \u0027hasFullEntityIdColumn\u0027 ) : true;\n  }",
+      "revId": "cb4939275097995ef8bce91f327aebfea8d1678d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_1086b16a",
         "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
         "patchSetId": 1
