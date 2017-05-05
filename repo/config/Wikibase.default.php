@@ -1,5 +1,7 @@
 <?php
 
+use Wikibase\SettingsArray;
+
 /**
  * This file assigns the default values to all Wikibase Repo settings.
  *
@@ -219,6 +221,9 @@ return [
 	// Name of the lock manager for dispatch changes coordinator
 	'dispatchingLockManager' => null,
 
-	// Enable use (e.g. writing) of term_full_entity_id column in wb_terms table.
-	'hasFullEntityIdColumn' => true,
+	// Enable writing of term_full_entity_id column in wb_terms table.
+	'writeFullEntityIdColumn' => function ( SettingsArray $settings ) {
+		return $settings->hasSetting( 'hasFullEntityIdColumn' ) ?
+			$settings->getSetting( 'hasFullEntityIdColumn' ) : true;
+	},
 ];
