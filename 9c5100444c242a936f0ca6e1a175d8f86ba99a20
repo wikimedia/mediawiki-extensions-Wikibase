@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_3a0ab62a",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-05T09:57:21Z",
+      "side": 1,
+      "message": "It has \"OR\" in the condition so it shouldn\u0027t be a problem",
+      "parentUuid": "2e4df70f_91805e4d",
+      "range": {
+        "startLine": 324,
+        "startChar": 7,
+        "endLine": 324,
+        "endChar": 35
+      },
+      "revId": "9c5100444c242a936f0ca6e1a175d8f86ba99a20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_91f7fef1",
         "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
         "patchSetId": 1
@@ -59,6 +83,30 @@
       "writtenOn": "2017-05-03T14:11:09Z",
       "side": 1,
       "message": "Isn\u0027t it easier to make sure the numeric column is always populated, as long as it exists? Then you do not need any of these possibly expensive OR operations.",
+      "range": {
+        "startLine": 421,
+        "startChar": 27,
+        "endLine": 421,
+        "endChar": 29
+      },
+      "revId": "9c5100444c242a936f0ca6e1a175d8f86ba99a20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_35008704",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-05T09:57:21Z",
+      "side": 1,
+      "message": "I disagree, in the database it won\u0027t be fully populated anytime soon.",
+      "parentUuid": "2e4df70f_91f7fef1",
       "range": {
         "startLine": 421,
         "startChar": 27,
@@ -94,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_1549c36a",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 871,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-05T09:57:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e4df70f_719832c4",
+      "range": {
+        "startLine": 871,
+        "startChar": 35,
+        "endLine": 871,
+        "endChar": 50
+      },
+      "revId": "9c5100444c242a936f0ca6e1a175d8f86ba99a20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_b1fc7ad6",
         "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
         "patchSetId": 1
@@ -105,6 +177,24 @@
       "writtenOn": "2017-05-03T14:11:09Z",
       "side": 1,
       "message": "Uh, this is not how an EntityIdComposer is supposed to work. Please use an EntityIdParser.",
+      "revId": "9c5100444c242a936f0ca6e1a175d8f86ba99a20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_95c873ac",
+        "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-05T09:57:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e4df70f_b1fc7ad6",
       "revId": "9c5100444c242a936f0ca6e1a175d8f86ba99a20",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
