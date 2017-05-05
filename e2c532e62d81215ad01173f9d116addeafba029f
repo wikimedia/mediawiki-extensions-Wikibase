@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_308bb574",
+        "filename": "client/WikibaseClient.servicewiring.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-05T12:20:59Z",
+      "side": 1,
+      "message": "Adding an extra level of nesting here is a bit unexpected. Maybe two registration variables would be better?",
+      "revId": "e2c532e62d81215ad01173f9d116addeafba029f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
