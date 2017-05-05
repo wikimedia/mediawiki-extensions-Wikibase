@@ -51,7 +51,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	/**
 	 * @var bool
 	 */
-	private $hasFullEntityIdColumn;
+	private $writeFullEntityIdColumn;
 
 	/**
 	 * @var int
@@ -63,21 +63,21 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param string|bool $wikiDb
 	 * @param string $repositoryName
-	 * @param bool $hasFullEntityIdColumn Allow use (e.g. writing) of column.
+	 * @param bool $writeFullEntityIdColumn Allow writing of the column.
 	 */
 	public function __construct(
 		StringNormalizer $stringNormalizer,
 		EntityIdComposer $entityIdComposer,
 		$wikiDb = false,
 		$repositoryName = '',
-		$hasFullEntityIdColumn = true
+		$writeFullEntityIdColumn = true
 	) {
 		RepositoryNameAssert::assertParameterIsValidRepositoryName( $repositoryName, '$repositoryName' );
 		parent::__construct( $wikiDb );
 		$this->repositoryName = $repositoryName;
 		$this->stringNormalizer = $stringNormalizer;
 		$this->entityIdComposer = $entityIdComposer;
-		$this->hasFullEntityIdColumn = $hasFullEntityIdColumn;
+		$this->writeFullEntityIdColumn = $writeFullEntityIdColumn;
 
 		$this->tableName = 'wb_terms';
 	}
@@ -185,7 +185,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			'term_weight' => $this->getWeight( $entity ),
 		);
 
-		if ( $this->hasFullEntityIdColumn === true ) {
+		if ( $this->writeFullEntityIdColumn === true ) {
 			$entityIdentifiers['term_full_entity_id'] = $entityId->getSerialization();
 		}
 

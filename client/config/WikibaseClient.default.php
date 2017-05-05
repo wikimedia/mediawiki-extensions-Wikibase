@@ -91,7 +91,7 @@ return call_user_func( function() {
 		'foreignRepositories' => [],
 
 		// Enable use of term_full_entity_id column in wb_terms table.
-		'hasFullEntityIdColumn' => true,
+		'writeFullEntityIdColumn' => true,
 	];
 
 	// Some defaults depend on information not available at this time.
