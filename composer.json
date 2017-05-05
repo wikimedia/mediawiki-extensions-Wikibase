@@ -44,7 +44,8 @@
 	},
 	"require-dev": {
 		"jakub-onderka/php-parallel-lint": ">=0.3 <0.10",
-		"wikibase/wikibase-codesniffer": "^0.1.0"
+		"wikibase/wikibase-codesniffer": "^0.1.0",
+		"jakub-onderka/php-console-highlighter": "0.3.2"
 	},
 	"conflict": {
 		"mediawiki/mediawiki": "<1.25"
