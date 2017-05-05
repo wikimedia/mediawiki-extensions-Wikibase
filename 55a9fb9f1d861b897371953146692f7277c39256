@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_866e0792",
+        "filename": "repo/includes/Store/Sql/SqlEntitiesWithoutTermFinder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-05T15:32:44Z",
+      "side": 1,
+      "message": "This is a string conversion, because addQuotes() might return an int.\n\nAlso note this code is not introduced with this patch. If there is need to change this (which I think is not, because this was going through a very expensive review before) this should be done in a later patch.",
+      "parentUuid": "0e1cb3f9_46eb0f0a",
+      "revId": "55a9fb9f1d861b897371953146692f7277c39256",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_c6cddfbd",
         "filename": "repo/tests/phpunit/includes/Store/Sql/SqlEntitiesWithoutTermFinderTest.php",
         "patchSetId": 2
