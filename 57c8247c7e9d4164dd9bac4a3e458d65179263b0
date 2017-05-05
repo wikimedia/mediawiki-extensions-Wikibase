@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e1cb3f9_c63cff90",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-05T15:29:56Z",
+      "side": 1,
+      "message": "Consider using a setter instead.",
+      "revId": "57c8247c7e9d4164dd9bac4a3e458d65179263b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_0b4e829b",
         "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
         "patchSetId": 1
@@ -59,6 +76,23 @@
         "endLine": 437,
         "endChar": 38
       },
+      "revId": "57c8247c7e9d4164dd9bac4a3e458d65179263b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_c6539fe1",
+        "filename": "lib/tests/phpunit/Store/Sql/SqlEntityInfoBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-05T15:29:56Z",
+      "side": 1,
+      "message": "The test should cover both cases, with and without the new column",
       "revId": "57c8247c7e9d4164dd9bac4a3e458d65179263b0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
