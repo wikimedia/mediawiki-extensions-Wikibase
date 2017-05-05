@@ -159,69 +159,62 @@ class EchoNotificationsHandlersTestCase extends MediaWikiTestCase {
 	}
 
 	public function testBeforeCreateEchoEvent() {
-		global $wgEchoNotifications, $wgEchoNotificationCategories, $wgEchoNotificationIcons;
 		$settings = new SettingsArray();
 		$settings->setSetting( 'siteGlobalID', 'enwiki' );
 		$settings->setSetting( 'sendEchoNotification', false );
 		$settings->setSetting( 'echoIcon', false );
 
+		$notifications = [];
+		$categories = [];
+		$icons = [];
+
 		$handlers = $this->getHandlers( $settings );
-		$handlers->doBeforeCreateEchoEvent(
-			$wgEchoNotifications, $wgEchoNotificationCategories, $wgEchoNotificationIcons
-		);
+		$handlers->doBeforeCreateEchoEvent( $notifications, $categories, $icons );
 
 		$this->assertFalse(
-			isset( $wgEchoNotifications[$handlers::NOTIFICATION_TYPE] ),
+			isset( $notifications[$handlers::NOTIFICATION_TYPE] ),
 			"Failed asserting that the notification type is registered to Echo"
 		);
 
 		$settings->setSetting( 'sendEchoNotification', true );
 		$handlers = $this->getHandlers( $settings );
-		$handlers->doBeforeCreateEchoEvent(
-			$wgEchoNotifications, $wgEchoNotificationCategories, $wgEchoNotificationIcons
-		);
+		$handlers->doBeforeCreateEchoEvent( $notifications, $categories, $icons );
 
 		$this->assertArrayHasKey(
 			$handlers::NOTIFICATION_TYPE,
-			$wgEchoNotifications,
+			$notifications,
 			"Failed asserting that the notification type is registered to Echo"
 		);
 		$this->assertArrayHasKey(
 			'wikibase-action',
-			$wgEchoNotificationCategories,
+			$categories,
 			"Failed asserting that the notification category is registered to Echo"
 		);
 		$this->assertArrayHasKey(
 			$handlers::NOTIFICATION_TYPE,
-			$wgEchoNotificationIcons,
+			$icons,
 			"Failed asserting that the notification icon is registered to Echo"
 		);
 		$this->assertEquals(
 			[ 'path' => 'Wikibase/client/includes/Hooks/../../resources/images/echoIcon.svg' ],
-			$wgEchoNotificationIcons[$handlers::NOTIFICATION_TYPE],
+			$icons[$handlers::NOTIFICATION_TYPE],
 			"Failed asserting that missing echoIcon setting defaults to Echo's default"
 		);
 
-		unset( $wgEchoNotifications[$handlers::NOTIFICATION_TYPE] );
-		unset( $wgEchoNotificationCategories['wikibase-action'] );
-		unset( $wgEchoNotificationIcons[$handlers::NOTIFICATION_TYPE] );
+		$notifications = [];
+		$categories = [];
+		$icons = [];
 
 		$echoIcon = [ 'url' => 'some_url_here' ];
 		$settings->setSetting( 'echoIcon', $echoIcon );
 		$handlers = $this->getHandlers( $settings );
 
-		$handlers->doBeforeCreateEchoEvent(
-			$wgEchoNotifications, $wgEchoNotificationCategories, $wgEchoNotificationIcons
-		);
+		$handlers->doBeforeCreateEchoEvent( $notifications, $categories, $icons );
 		$this->assertEquals(
 			$echoIcon,
-			$wgEchoNotificationIcons[$handlers::NOTIFICATION_TYPE],
+			$icons[$handlers::NOTIFICATION_TYPE],
 			"Failed asserting that the notification icon is correctly registered to Echo"
 		);
-
-		unset( $wgEchoNotifications[$handlers::NOTIFICATION_TYPE] );
-		unset( $wgEchoNotificationCategories['wikibase-action'] );
-		unset( $wgEchoNotificationIcons[$handlers::NOTIFICATION_TYPE] );
 	}
 
 }
