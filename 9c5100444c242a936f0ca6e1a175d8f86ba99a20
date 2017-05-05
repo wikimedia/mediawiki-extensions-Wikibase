@@ -119,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_0649976a",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-05T15:16:57Z",
+      "side": 1,
+      "message": "I mean the other way around.\n\nSure, the …_full_… column will not be fully populated any time soon. I understand this.\n\nBut we can make sure the numeric \"term_entity_id\" column is always fully populated, as long as it exists. As long as we can guarantee this (which I think we can), there is no need for a possibly expensive OR here. I think this query can always select by the numeric column, as long as it exists.",
+      "parentUuid": "0e1cb3f9_35008704",
+      "range": {
+        "startLine": 421,
+        "startChar": 27,
+        "endLine": 421,
+        "endChar": 29
+      },
+      "revId": "9c5100444c242a936f0ca6e1a175d8f86ba99a20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_719832c4",
         "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
         "patchSetId": 1
