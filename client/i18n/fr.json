@@ -43,7 +43,7 @@
 	"apihelp-query+wblistentityusage-example-simple": "Obtenir les pages qui utilisent l'entité <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Obtenir les pages qui utilisent l’entité <kbd>Q2</kbd> avec l’URL incluse.",
 	"apihelp-query+wblistentityusage-example-aspect": "Obtenir les pages qui utilisent l'entité <kbd>Q2</kbd> et dont l'aspect était sitelink ou déclaration.",
-	"apihelp-query+pageterms-description": "Obtenir les conditions associées avec une page via un élément de donnée associé. Sur une page d’entité de wikibase, les conditions de l’entité sont utilisées directement.\nMise en garde : Sur un wiki de dépôt, les conditions de page ne fonctionnent directement que sur les pages d’entité, pas sur les pages connectées à un élément. Cela pourrait changer plus tard.",
+	"apihelp-query+pageterms-description": "Obtenir les termes de {{WBREPONAME}} (typiquement, les libellés, les descriptions et les alias) associés avec une page via un lien de site. Sur la page propre de l’entité, les termes sont utilisés directement. Mise en garde : Sur un wiki de dépôt, ce module ne fonctionne directement que sur les pages d’entité, pas sur les pages connectées à un élément via un lien de site. Cela pourrait changer plus tard.",
 	"apihelp-query+pageterms-example-simple": "Obtenir tous les termes associés avec la page 'London', dans la langue de l’utilisateur.",
 	"apihelp-query+pageterms-example-label-en": "Obtenir les libellés et les alias associés avec la page 'London', en anglais.",
 	"apihelp-query+pageterms-example-item": "Obtenir les libellés et les alias de l’élément Q84.",

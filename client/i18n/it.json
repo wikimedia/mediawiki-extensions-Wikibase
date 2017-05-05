@@ -37,7 +37,7 @@
 	"apihelp-query+wblistentityusage-example-simple": "Ottieni pagine che usano l'entità <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Ottieni pagine che usano l'entità <kbd>Q2</kbd> con URL incluso.",
 	"apihelp-query+wblistentityusage-example-aspect": "Ottieni pagine che utilizzano l'entità <kbd>Q2</kbd> e l'aspetto era un collegamento al sito o una dichiarazione.",
-	"apihelp-query+pageterms-description": "Ottieni termini associati a una pagina tramite un elemento dati associato. Su una pagina di un'entità wikibase, i termini dell'entità sono usati direttamente.\nAttenzione: su un repository wiki, i termini sono usati direttamente sulle pagine dell'entità, non sulle pagine connesse a un elemento. Questa cosa potrebbe cambiare in futuro.",
+	"apihelp-query+pageterms-description": "Ottieni i termini {{WBREPONAME}} (tipicamente etichette, descrizioni e alias) associati a una pagina tramite un collegamento al sito. Sulla pagina di un'entità wikibase, questi termini sono usati direttamente.\nAttenzione: su un repository wiki, questo modulo funziona solo se usato direttamente sulle pagine dell'entità, non sulle pagine connesse a un'entità tramite un collegamento al sito. Questa cosa potrebbe cambiare in futuro.",
 	"apihelp-query+pageterms-example-simple": "Ottieni tutti i termini associati alla pagina 'London', nella lingua dell'utente.",
 	"apihelp-query+pageterms-example-label-en": "Ottieni etichette ed alias associati alla pagina 'London', in inglese.",
 	"apihelp-query+pageterms-example-item": "Ottieni le etichette e gli alias dell'elemento Q84.",
