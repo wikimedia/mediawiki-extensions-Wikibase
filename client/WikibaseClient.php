@@ -70,7 +70,7 @@ call_user_func( function() {
 	global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgHooks, $wgExtensionFunctions;
 	global $wgAPIListModules, $wgAPIMetaModules, $wgAPIPropModules, $wgSpecialPages;
 	global $wgResourceModules, $wgWBClientSettings, $wgRecentChangesFlags, $wgMessagesDirs;
-	global $wgJobClasses, $wgTrackingCategories, $wgWBClientDataTypes;
+	global $wgJobClasses, $wgTrackingCategories, $wgWBClientDataTypes, $wgWBClientServiceWiring;
 
 	$wgExtensionCredits['wikibase'][] = array(
 		'path' => __DIR__,
@@ -93,6 +93,9 @@ call_user_func( function() {
 		$baseDef = isset( $wgWBClientDataTypes[$type] ) ? $wgWBClientDataTypes[$type] : array();
 		$wgWBClientDataTypes[$type] = array_merge( $baseDef, $clientDef );
 	}
+
+	// Register service wiring files
+	$wgWBClientServiceWiring = require __DIR__ . '/WikibaseClient.servicewiring.php';
 
 	// i18n
 	$wgMessagesDirs['wikibaseclient'] = __DIR__ . '/i18n';

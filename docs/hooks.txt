@@ -2,6 +2,8 @@ This file describes hooks defined by the Wikibase extensions.
 See docs/hooks.txt in the MediaWiki installation root for
 general information on hooks.
 
+TODO: document WikibaseServiceWiring if it actually gets to be implemented
+TODO: would it be Repo or Client hook? Not really any of these?
 
 == Repo ==
 

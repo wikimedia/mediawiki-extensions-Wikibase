@@ -43,7 +43,8 @@ class RepositoryServiceContainerTest extends \PHPUnit_Framework_TestCase {
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
 			$repositoryDefinitions,
-			new HashSiteStore()
+			new HashSiteStore(),
+			[]
 		);
 	}
 
