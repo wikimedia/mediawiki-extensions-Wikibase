@@ -158,63 +158,65 @@ class EchoNotificationsHandlersTest extends MediaWikiTestCase {
 		);
 	}
 
-	public function testBeforeCreateEchoEvent() {
-		$settings = new SettingsArray();
-		$settings->setSetting( 'siteGlobalID', 'enwiki' );
-		$settings->setSetting( 'sendEchoNotification', false );
-		$settings->setSetting( 'echoIcon', false );
+	public function beforeCreateEchoEventProvider() {
+		return [
+			'no registration' => [
+				'register' => false,
+				'icon' => false,
+				'expectedIcon' => false,
+			],
+			'registered with optional icon' => [
+				'register' => true,
+				'icon' => [ 'url' => 'some_url_here' ],
+				'expectedIcon' => [ 'url' => 'some_url_here' ],
+			],
+			'registered with default icon' => [
+				'register' => true,
+				'icon' => false,
+				'expectedIcon' => [ 'path' => 'Wikibase/client/includes/Hooks/../../resources/images/echoIcon.svg' ],
+			]
+		];
+	}
 
+	/**
+	 * @dataProvider beforeCreateEchoEventProvider
+	 */
+	public function testBeforeCreateEchoEvent( $register, $icon, $expectedIcon ) {
 		$notifications = [];
 		$categories = [];
 		$icons = [];
 
-		$handlers = $this->getHandlers( $settings );
+		$handlers = new EchoNotificationsHandlers(
+			$this->repoLinker,
+			'enwiki',
+			$register,
+			$icon,
+			'repoSiteName'
+		);
+
 		$handlers->doBeforeCreateEchoEvent( $notifications, $categories, $icons );
 
-		$this->assertFalse(
-			isset( $notifications[$handlers::NOTIFICATION_TYPE] ),
-			"Failed asserting that the notification type is registered to Echo"
-		);
+		$this->assertSame( $register, isset( $notifications[$handlers::NOTIFICATION_TYPE] ) );
+		$this->assertSame( $register, isset( $categories['wikibase-action'] ) );
+		$this->assertSame( $register, isset( $icons[$handlers::NOTIFICATION_TYPE] ) );
 
-		$settings->setSetting( 'sendEchoNotification', true );
-		$handlers = $this->getHandlers( $settings );
-		$handlers->doBeforeCreateEchoEvent( $notifications, $categories, $icons );
-
-		$this->assertArrayHasKey(
-			$handlers::NOTIFICATION_TYPE,
-			$notifications,
-			"Failed asserting that the notification type is registered to Echo"
-		);
-		$this->assertArrayHasKey(
-			'wikibase-action',
-			$categories,
-			"Failed asserting that the notification category is registered to Echo"
-		);
-		$this->assertArrayHasKey(
-			$handlers::NOTIFICATION_TYPE,
-			$icons,
-			"Failed asserting that the notification icon is registered to Echo"
-		);
-		$this->assertStringEndsWith(
-			'Wikibase/client/includes/Hooks/../../resources/images/echoIcon.svg',
-			$icons[$handlers::NOTIFICATION_TYPE]['path'],
-			"Failed asserting that missing echoIcon setting defaults to Echo's default"
-		);
-
-		$notifications = [];
-		$categories = [];
-		$icons = [];
-
-		$echoIcon = [ 'url' => 'some_url_here' ];
-		$settings->setSetting( 'echoIcon', $echoIcon );
-		$handlers = $this->getHandlers( $settings );
-
-		$handlers->doBeforeCreateEchoEvent( $notifications, $categories, $icons );
-		$this->assertEquals(
-			$echoIcon,
-			$icons[$handlers::NOTIFICATION_TYPE],
-			"Failed asserting that the notification icon is correctly registered to Echo"
-		);
+		if ( $register ) {
+			if ( isset( $expectedIcon['path'] ) ) {
+				$this->assertSame(
+					array_keys( $expectedIcon ),
+					array_keys( $icons[$handlers::NOTIFICATION_TYPE] )
+				);
+				$this->assertStringEndsWith(
+					$expectedIcon['path'],
+					$icons[$handlers::NOTIFICATION_TYPE]['path']
+				);
+			} else {
+				$this->assertSame(
+					$expectedIcon,
+					$icons[$handlers::NOTIFICATION_TYPE]
+				);
+			}
+		}
 	}
 
 }
