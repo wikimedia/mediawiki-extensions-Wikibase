@@ -4,10 +4,7 @@
 # Author:: Tobias Gritschacher (tobias.gritschacher@wikimedia.de)
 # License:: GNU GPL v2+
 #
-# Reused and modified from https://github.com/wikimedia/qa-browsertests/blob/master/features/support/modules/url_module.rb
-#
 # module for URLs
-
 module URL
   def self.client_url(name)
     url = ENV['WIKIDATA_CLIENT_URL']
