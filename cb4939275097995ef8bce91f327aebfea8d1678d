@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_1028f131",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-05T12:53:32Z",
+      "side": 1,
+      "message": "I fixed that part.",
+      "parentUuid": "0e1cb3f9_30f2d504",
+      "range": {
+        "startLine": 93,
+        "startChar": 12,
+        "endLine": 93,
+        "endChar": 18
+      },
+      "revId": "cb4939275097995ef8bce91f327aebfea8d1678d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_90472122",
         "filename": "client/config/WikibaseClient.default.php",
         "patchSetId": 1
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_302df541",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-05T12:53:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_90472122",
+      "revId": "cb4939275097995ef8bce91f327aebfea8d1678d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_1086b16a",
         "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
         "patchSetId": 1
@@ -53,6 +95,30 @@
       "writtenOn": "2017-05-05T12:23:55Z",
       "side": 1,
       "message": "to",
+      "range": {
+        "startLine": 66,
+        "startChar": 55,
+        "endLine": 66,
+        "endChar": 57
+      },
+      "revId": "cb4939275097995ef8bce91f327aebfea8d1678d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_f0e53d07",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-05T12:53:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_1086b16a",
       "range": {
         "startLine": 66,
         "startChar": 55,
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_90eba1db",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-05T12:53:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_f0845d60",
+      "range": {
+        "startLine": 188,
+        "startChar": 38,
+        "endLine": 188,
+        "endChar": 46
+      },
+      "revId": "cb4939275097995ef8bce91f327aebfea8d1678d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_b097c592",
         "filename": "repo/config/Wikibase.default.php",
         "patchSetId": 1
@@ -99,6 +189,30 @@
       "writtenOn": "2017-05-05T12:23:55Z",
       "side": 1,
       "message": "Should this be updated too?",
+      "range": {
+        "startLine": 222,
+        "startChar": 11,
+        "endLine": 222,
+        "endChar": 29
+      },
+      "revId": "cb4939275097995ef8bce91f327aebfea8d1678d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_70f28dcf",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-05T12:53:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_b097c592",
       "range": {
         "startLine": 222,
         "startChar": 11,
