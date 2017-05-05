@@ -124,6 +124,11 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private $repositoryName;
 
 	/**
+	 * @var bool
+	 */
+	private $readFullEntityIdColumn = false;
+
+	/**
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
@@ -131,7 +136,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
 	 * @param string $repositoryName The name of the repository (use an empty string for the local repository)
-	 *
 	 */
 	public function __construct(
 		EntityIdParser $entityIdParser,
@@ -375,10 +379,14 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private function collectTermsForEntities( $entityType, array $termTypes = null, array $languages = null ) {
 		$entityIds = $this->numericIdsByType[$entityType];
 
-		$where = array(
-			'term_entity_type' => $entityType,
-			'term_entity_id' => $entityIds,
-		);
+		$where = [];
+
+		if ( $this->readFullEntityIdColumn === true ) {
+			$where['term_full_entity_id'] = array_keys( $entityIds );
+		} else {
+			$where['term_entity_id'] = $entityIds;
+			$where['term_entity_type'] = $entityType;
+		}
 
 		if ( $termTypes === null ) {
 			$termTypes = [ null ];
@@ -388,13 +396,21 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 			$where['term_language'] = $languages;
 		}
 
-		$dbw = $this->getConnection( DB_REPLICA );
+		$fields = [ 'term_type', 'term_language', 'term_text' ];
+		if ( $this->readFullEntityIdColumn === true ) {
+			$fields[] = 'term_full_entity_id';
+		} else {
+			$fields[] = 'term_entity_id';
+			$fields[] = 'term_entity_type';
+		}
+
+		$dbr = $this->getConnection( DB_REPLICA );
 
 		// Do one query per term type here, this is way faster on MySQL: T147748
 		foreach ( $termTypes as $termType ) {
-			$res = $dbw->select(
+			$res = $dbr->select(
 				$this->termTable,
-				array( 'term_entity_type', 'term_entity_id', 'term_type', 'term_language', 'term_text' ),
+				$fields,
 				array_merge( $where, $termType !== null ? [ 'term_type' => $termType ] : [] ),
 				__METHOD__
 			);
@@ -402,7 +418,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 			$this->injectTerms( $res );
 		}
 
-		$this->releaseConnection( $dbw );
+		$this->releaseConnection( $dbr );
 	}
 
 	/**
@@ -416,16 +432,23 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 */
 	private function injectTerms( ResultWrapper $dbResult ) {
 		foreach ( $dbResult as $row ) {
-			try {
-				$entityId = $this->entityIdComposer->composeEntityId(
-					$this->repositoryName,
-					$row->term_entity_type,
-					$row->term_entity_id
-				);
-			} catch ( InvalidArgumentException $ex ) {
-				wfLogWarning( 'Unsupported entity type "' . $row->term_entity_type . '"' );
-				continue;
-			}
+				try {
+					if ( $this->readFullEntityIdColumn === true ) {
+						$entityId = $this->idParser->parse( $row->term_full_entity_id );
+					} else {
+						$entityId = $this->entityIdComposer->composeEntityId(
+							$this->repositoryName,
+							$row->term_entity_type,
+							$row->term_entity_id
+						);
+					}
+				} catch ( EntityIdParsingException $ex ) {
+					wfLogWarning( 'Unsupported entity serialization "' . $row->term_full_entity_id . '"' );
+					continue;
+				} catch ( InvalidArgumentException $ex ) {
+					wfLogWarning( 'Unsupported entity type "' . $row->term_entity_type . '"' );
+					continue;
+				}
 
 			$key = $entityId->getSerialization();
 
@@ -746,6 +769,13 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$retain = $this->convertEntityIdsToStrings( $this->filterForeignEntityIds( $ids ) );
 		$remove = array_diff( array_keys( $this->entityInfo ), $retain );
 		$this->unsetEntityInfo( $remove );
+	}
+
+	/**
+	 * @param bool $readFullEntityIdColumn
+	 */
+	public function setReadFullEntityIdColumn( $readFullEntityIdColumn ) {
+		$this->readFullEntityIdColumn = $readFullEntityIdColumn;
 	}
 
 }
