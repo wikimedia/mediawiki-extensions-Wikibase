@@ -124,6 +124,11 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private $repositoryName;
 
 	/**
+	 * @var bool
+	 */
+	private $readFullEntityIdColumn;
+
+	/**
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
@@ -131,7 +136,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
 	 * @param string $repositoryName The name of the repository (use an empty string for the local repository)
-	 *
+	 * @param bool $readFullEntityIdColumn use of term_full_entity_id column in wb_terms table.
 	 */
 	public function __construct(
 		EntityIdParser $entityIdParser,
@@ -139,7 +144,8 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		EntityNamespaceLookup $entityNamespaceLookup,
 		array $ids,
 		$wiki = false,
-		$repositoryName = ''
+		$repositoryName = '',
+		$readFullEntityIdColumn = true
 	) {
 		if ( !is_string( $wiki ) && $wiki !== false ) {
 			throw new InvalidArgumentException( '$wiki must be a string or false.' );
@@ -155,6 +161,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$this->entityIdComposer = $entityIdComposer;
 		$this->repositoryName = $repositoryName;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
+		$this->readFullEntityIdColumn = $readFullEntityIdColumn;
 
 		$this->setEntityIds( $this->filterForeignEntityIds( $ids ) );
 	}
@@ -375,10 +382,13 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private function collectTermsForEntities( $entityType, array $termTypes = null, array $languages = null ) {
 		$entityIds = $this->numericIdsByType[$entityType];
 
-		$where = array(
-			'term_entity_type' => $entityType,
-			'term_entity_id' => $entityIds,
-		);
+		$where = [ 'term_entity_type' => $entityType ];
+
+		if ( $this->readFullEntityIdColumn ) {
+			$where['term_full_entity_id'] = array_keys( $entityIds );
+		} else {
+			$where['term_entity_id'] = $entityIds;
+		}
 
 		if ( $termTypes === null ) {
 			$termTypes = [ null ];
@@ -388,13 +398,20 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 			$where['term_language'] = $languages;
 		}
 
-		$dbw = $this->getConnection( DB_REPLICA );
+		$fields = [ 'term_entity_type', 'term_type', 'term_language', 'term_text' ];
+		if ( $this->readFullEntityIdColumn ) {
+			$fields[] = 'term_full_entity_id';
+		} else {
+			$fields[] = 'term_entity_id';
+		}
+
+		$dbr = $this->getConnection( DB_REPLICA );
 
 		// Do one query per term type here, this is way faster on MySQL: T147748
 		foreach ( $termTypes as $termType ) {
-			$res = $dbw->select(
+			$res = $dbr->select(
 				$this->termTable,
-				array( 'term_entity_type', 'term_entity_id', 'term_type', 'term_language', 'term_text' ),
+				$fields,
 				array_merge( $where, $termType !== null ? [ 'term_type' => $termType ] : [] ),
 				__METHOD__
 			);
@@ -402,7 +419,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 			$this->injectTerms( $res );
 		}
 
-		$this->releaseConnection( $dbw );
+		$this->releaseConnection( $dbr );
 	}
 
 	/**
@@ -417,11 +434,15 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private function injectTerms( ResultWrapper $dbResult ) {
 		foreach ( $dbResult as $row ) {
 			try {
-				$entityId = $this->entityIdComposer->composeEntityId(
-					$this->repositoryName,
-					$row->term_entity_type,
-					$row->term_entity_id
-				);
+				if ( $this->readFullEntityIdColumn ) {
+					$entityId = $this->idParser->parse( $row->term_full_entity_id );
+				} else {
+					$entityId = $this->entityIdComposer->composeEntityId(
+						$this->repositoryName,
+						$row->term_entity_type,
+						$row->term_entity_id
+					);
+				}
 			} catch ( InvalidArgumentException $ex ) {
 				wfLogWarning( 'Unsupported entity type "' . $row->term_entity_type . '"' );
 				continue;

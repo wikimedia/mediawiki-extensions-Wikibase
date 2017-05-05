@@ -4,11 +4,11 @@ namespace Wikibase\Lib\Tests\Store\Sql;
 
 use InvalidArgumentException;
 use Title;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\ItemContent;
@@ -86,6 +86,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 			[
 				'term_entity_type',
 				'term_entity_id',
+				'term_full_entity_id',
 				'term_type',
 				'term_language',
 				'term_text',
@@ -116,6 +117,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 				$rows[] = [
 					$id->getEntityType(),
 					$id->getNumericId(),
+					$id->getSerialization(),
 					$termType,
 					$lang,
 					$term,
@@ -177,7 +179,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 	 */
 	protected function newEntityInfoBuilder( array $ids ) {
 		return new SqlEntityInfoBuilder(
-			new ItemIdParser(),
+			new BasicEntityIdParser(),
 			new EntityIdComposer( [
 				'item' => function( $repositoryName, $uniquePart ) {
 					return new ItemId( 'Q' . $uniquePart );
@@ -224,7 +226,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 		$this->setExpectedException( InvalidArgumentException::class );
 
 		new SqlEntityInfoBuilder(
-			new ItemIdParser(),
+			new BasicEntityIdParser(),
 			$this->getIdComposer(),
 			$this->getEntityNamespaceLookup(),
 			[],
@@ -238,7 +240,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 		$propertyId = new PropertyId( 'foo:P1' );
 
 		$builder = new SqlEntityInfoBuilder(
-			new ItemIdParser(),
+			new BasicEntityIdParser(),
 			$this->getIdComposer(),
 			$this->getEntityNamespaceLookup(),
 			[ $itemId, $propertyId ],
@@ -285,7 +287,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 		);
 
 		$builder = new SqlEntityInfoBuilder(
-			new ItemIdParser(),
+			new BasicEntityIdParser(),
 			new EntityIdComposer( [
 				'item' => function( $repositoryName, $uniquePart ) {
 					return ItemId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
