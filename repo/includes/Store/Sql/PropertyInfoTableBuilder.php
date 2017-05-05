@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Reporting\MessageReporter;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 
 /**
@@ -40,6 +41,11 @@ class PropertyInfoTableBuilder {
 	private $entityIdComposer;
 
 	/**
+	 * @var EntityNamespaceLookup
+	 */
+	private $entityNamespaceLookup;
+
+	/**
 	 * @var MessageReporter|null
 	 */
 	private $reporter = null;
@@ -57,13 +63,6 @@ class PropertyInfoTableBuilder {
 	private $shouldUpdateAllEntities = false;
 
 	/**
-	 * Starting point
-	 *
-	 * @var int
-	 */
-	private $fromId = 1;
-
-	/**
 	 * The batch size, giving the number of rows to be updated in each database transaction.
 	 *
 	 * @var int
@@ -75,17 +74,20 @@ class PropertyInfoTableBuilder {
 	 * @param EntityLookup $entityLookup
 	 * @param PropertyInfoBuilder $propertyInfoBuilder
 	 * @param EntityIdComposer $entityIdComposer
+	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 */
 	public function __construct(
 		PropertyInfoTable $propertyInfoTable,
 		EntityLookup $entityLookup,
 		PropertyInfoBuilder $propertyInfoBuilder,
-		EntityIdComposer $entityIdComposer
+		EntityIdComposer $entityIdComposer,
+		EntityNamespaceLookup $entityNamespaceLookup
 	) {
 		$this->propertyInfoTable = $propertyInfoTable;
 		$this->entityLookup = $entityLookup;
 		$this->propertyInfoBuilder = $propertyInfoBuilder;
 		$this->entityIdComposer = $entityIdComposer;
+		$this->entityNamespaceLookup = $entityNamespaceLookup;
 	}
 
 	/**
@@ -100,13 +102,6 @@ class PropertyInfoTableBuilder {
 	 */
 	public function setBatchSize( $batchSize ) {
 		$this->batchSize = $batchSize;
-	}
-
-	/**
-	 * @param int $fromId
-	 */
-	public function setFromId( $fromId ) {
-		$this->fromId = $fromId;
 	}
 
 	/**
@@ -139,12 +134,10 @@ class PropertyInfoTableBuilder {
 	public function rebuildPropertyInfo() {
 		$dbw = $this->propertyInfoTable->getWriteConnection();
 
-		$rowId = $this->fromId - 1;
-
 		$total = 0;
 
 		$join = array();
-		$tables = array( 'wb_entity_per_page' );
+		$tables = [ 'page' ];
 
 		if ( !$this->shouldUpdateAllEntities ) {
 			// Find properties in wb_entity_per_page with no corresponding
@@ -153,16 +146,19 @@ class PropertyInfoTableBuilder {
 			$piTable = $this->propertyInfoTable->getTableName();
 
 			$tables[] = $piTable;
-			$join[$piTable] = array( 'LEFT JOIN',
-				array(
-					'pi_property_id = epp_entity_id',
-				)
-			);
+			$join[$piTable] = [
+				'LEFT JOIN',
+				[
+					$dbw->buildConcat( [ "'P'", 'pi_property_id' ] ) . ' = page_title',
+				]
+			];
 		}
 
 		// @TODO: Inject the LBFactory
 		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 		$ticket = $lbFactory->getEmptyTransactionTicket( __METHOD__ );
+		$pageId = 1;
+
 		while ( true ) {
 			// Make sure we are not running too far ahead of the slaves,
 			// as that would cause the site to be rendered read only.
@@ -172,26 +168,20 @@ class PropertyInfoTableBuilder {
 				$dbw->startAtomic( __METHOD__ );
 			}
 
-			//FIXME: use an EntityIdPager from EntityPerPage
 			$props = $dbw->select(
 				$tables,
-				array(
-					'epp_entity_id',
-				),
-				array(
-					'epp_entity_type = ' . $dbw->addQuotes( Property::ENTITY_TYPE ),
-					'epp_entity_id > ' . (int) $rowId,
-					'epp_redirect_target IS NULL',
+				[ 'page_title', 'page_id' ],
+				[
+					'page_id > ' . (int) $pageId,
+					'page_namespace = ' . $this->entityNamespaceLookup->getEntityNamespace(
+						Property::ENTITY_TYPE
+					),
 					$this->shouldUpdateAllEntities ? '1' : 'pi_property_id IS NULL', // if not $all, only add missing entries
-				),
+				],
 				__METHOD__,
 				array(
 					'LIMIT' => $this->batchSize,
-					// XXX: We currently have a unique key defined as `wb_epp_entity` (`epp_entity_id`,`epp_entity_type`).
-					//      This SHOULD be the other way around:  `wb_epp_entity` (`epp_entity_type`, `epp_entity_id`).
-					//      Once this is fixed, the below should probable be changed to:
-					//      'ORDER BY' => 'epp_entity_type ASC, epp_entity_id ASC'
-					'ORDER BY' => 'epp_entity_id ASC',
+					'ORDER BY' => 'page_id ASC',
 					'FOR UPDATE'
 				),
 				$join
@@ -200,14 +190,8 @@ class PropertyInfoTableBuilder {
 			$c = 0;
 
 			foreach ( $props as $row ) {
-				$id = $this->entityIdComposer->composeEntityId(
-					'',
-					Property::ENTITY_TYPE,
-					(int)$row->epp_entity_id
-				);
-				$this->updatePropertyInfo( $id );
-
-				$rowId = $row->epp_entity_id;
+				$this->updatePropertyInfo( new PropertyId( $row->page_title ) );
+				$pageId = $row->page_id;
 				$c++;
 			}
 
@@ -215,7 +199,7 @@ class PropertyInfoTableBuilder {
 				$dbw->endAtomic( __METHOD__ );
 			}
 
-			$this->reportMessage( "Updated $c properties, up to ID $rowId." );
+			$this->reportMessage( "Updated $c properties, up to page ID $pageId." );
 			$total += $c;
 
 			if ( $c < $this->batchSize ) {
