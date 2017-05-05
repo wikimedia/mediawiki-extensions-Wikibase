@@ -122,6 +122,11 @@ final class WikibaseClient {
 	private $entityDataRetrievalServiceFactory;
 
 	/**
+	 * @var array
+	 */
+	private $serviceWiringFiles;
+
+	/**
 	 * @var PropertyDataTypeLookup|null
 	 */
 	private $propertyDataTypeLookup = null;
@@ -321,19 +326,26 @@ final class WikibaseClient {
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 * @param RepositoryDefinitions $repositoryDefinitions
 	 * @param SiteLookup $siteLookup
+	 * @param array $serviceWiringFiles List of arrays containing paths to service wiring files.
+	 * Should contain keys:
+	 *  - 'repositoryServiceWiringFiles': a list of files defining instantiation of repository-specific services,
+	 *  - 'dispatchingServiceWiringFiles': a list of files defining instantiation of services dispatching their
+	 *                                     action to repository-specific service instances,
 	 */
 	public function __construct(
 		SettingsArray $settings,
 		DataTypeDefinitions $dataTypeDefinitions,
 		EntityTypeDefinitions $entityTypeDefinitions,
 		RepositoryDefinitions $repositoryDefinitions,
-		SiteLookup $siteLookup
+		SiteLookup $siteLookup,
+		array $serviceWiringFiles
 	) {
 		$this->settings = $settings;
 		$this->dataTypeDefinitions = $dataTypeDefinitions;
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
 		$this->repositoryDefinitions = $repositoryDefinitions;
 		$this->siteLookup = $siteLookup;
+		$this->serviceWiringFiles = $serviceWiringFiles;
 	}
 
 	/**
@@ -382,7 +394,7 @@ final class WikibaseClient {
 				$this->getRepositoryServiceContainerFactory(),
 				$this->repositoryDefinitions
 			);
-			$factory->loadWiringFiles( $this->settings->getSetting( 'dispatchingServiceWiringFiles' ) );
+			$factory->loadWiringFiles( $this->serviceWiringFiles[ 'dispatchingServiceWiringFiles'] );
 
 			$this->entityDataRetrievalServiceFactory = $factory;
 		}
@@ -400,7 +412,7 @@ final class WikibaseClient {
 			$idParserFactory,
 			new RepositorySpecificDataValueDeserializerFactory( $idParserFactory ),
 			$this->repositoryDefinitions->getDatabaseNames(),
-			$this->getSettings()->getSetting( 'repositoryServiceWiringFiles' ),
+			$this->serviceWiringFiles['repositoryServiceWiringFiles'],
 			$this
 		);
 	}
@@ -647,7 +659,7 @@ final class WikibaseClient {
 	 * @return WikibaseClient
 	 */
 	private static function newInstance() {
-		global $wgWBClientSettings, $wgWBClientDataTypes;
+		global $wgWBClientSettings, $wgWBClientDataTypes, $wgWBClientServiceWiring;
 
 		if ( !is_array( $wgWBClientDataTypes ) ) {
 			throw new MWException( '$wgWBClientDataTypes must be array. '
@@ -660,6 +672,8 @@ final class WikibaseClient {
 		$entityTypeDefinitions = self::getDefaultEntityTypes();
 		Hooks::run( 'WikibaseClientEntityTypes', array( &$entityTypeDefinitions ) );
 
+		Hooks::run( 'WikibaseServiceWiring', [ &$wgWBClientServiceWiring ] );
+
 		$settings = new SettingsArray( $wgWBClientSettings );
 
 		return new self(
@@ -670,7 +684,8 @@ final class WikibaseClient {
 			),
 			new EntityTypeDefinitions( $entityTypeDefinitions ),
 			self::getRepositoryDefinitionsFromSettings( $settings ),
-			MediaWikiServices::getInstance()->getSiteLookup()
+			MediaWikiServices::getInstance()->getSiteLookup(),
+			$wgWBClientServiceWiring
 		);
 	}
 

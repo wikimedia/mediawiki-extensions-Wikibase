@@ -149,12 +149,15 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$settings->setSetting( 'siteGlobalID', 'enwiki' );
 		$settings->setSetting( 'languageLinkSiteGroup', 'wikipedia' );
 
+		$serviceWiring = require __DIR__ . '/../../../WikibaseClient.servicewiring.php';
+
 		$wikibaseClient = new WikibaseClient(
 			$settings,
 			new DataTypeDefinitions( array() ),
 			new EntityTypeDefinitions( array() ),
 			$this->getRepositoryDefinitions(),
-			$this->getSiteLookup()
+			$this->getSiteLookup(),
+			$serviceWiring
 		);
 
 		$handler = $wikibaseClient->getLangLinkHandler();
@@ -170,12 +173,15 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider getLangLinkSiteGroupProvider
 	 */
 	public function testGetLangLinkSiteGroup( $expected, SettingsArray $settings, SiteLookup $siteLookup ) {
+		$serviceWiring = require __DIR__ . '/../../../WikibaseClient.servicewiring.php';
+
 		$client = new WikibaseClient(
 			$settings,
 			new DataTypeDefinitions( array() ),
 			new EntityTypeDefinitions( array() ),
 			$this->getRepositoryDefinitions(),
-			$siteLookup
+			$siteLookup,
+			$serviceWiring
 		);
 
 		$this->assertEquals( $expected, $client->getLangLinkSiteGroup() );
@@ -205,12 +211,15 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider getSiteGroupProvider
 	 */
 	public function testGetSiteGroup( $expected, SettingsArray $settings, SiteLookup $siteLookup ) {
+		$serviceWiring = require __DIR__ . '/../../../WikibaseClient.servicewiring.php';
+
 		$client = new WikibaseClient(
 			$settings,
 			new DataTypeDefinitions( array() ),
 			new EntityTypeDefinitions( array() ),
 			$this->getRepositoryDefinitions(),
-			$siteLookup
+			$siteLookup,
+			$serviceWiring
 		);
 
 		$this->assertEquals( $expected, $client->getSiteGroup() );
@@ -379,12 +388,15 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	 * @return WikibaseClient
 	 */
 	private function getWikibaseClient() {
+		$serviceWiring = require __DIR__ . '/../../../WikibaseClient.servicewiring.php';
+
 		return new WikibaseClient(
 			new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() ),
 			new DataTypeDefinitions( array() ),
 			new EntityTypeDefinitions( array() ),
 			$this->getRepositoryDefinitions(),
-			new HashSiteStore()
+			new HashSiteStore(),
+			$serviceWiring
 		);
 	}
 
