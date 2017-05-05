@@ -163,7 +163,7 @@ class DirectSqlStore implements ClientStore {
 	/**
 	 * @var bool
 	 */
-	private $hasFullEntityIdColumn;
+	private $writeFullEntityIdColumn;
 
 	/**
 	 * @param EntityChangeFactory $entityChangeFactory
@@ -201,7 +201,7 @@ class DirectSqlStore implements ClientStore {
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$this->siteId = $settings->getSetting( 'siteGlobalID' );
-		$this->hasFullEntityIdColumn = $settings->getSetting( 'hasFullEntityIdColumn' );
+		$this->writeFullEntityIdColumn = $settings->getSetting( 'writeFullEntityIdColumn' );
 	}
 
 	/**
@@ -372,7 +372,7 @@ class DirectSqlStore implements ClientStore {
 				$this->entityIdComposer,
 				$this->repoWiki,
 				'',
-				$this->hasFullEntityIdColumn
+				$this->writeFullEntityIdColumn
 			);
 		}
 

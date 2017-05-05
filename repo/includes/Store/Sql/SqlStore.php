@@ -182,7 +182,7 @@ class SqlStore implements Store {
 	/**
 	 * @var bool
 	 */
-	private $hasFullEntityIdColumn;
+	private $writeFullEntityIdColumn;
 
 	/**
 	 * @param EntityChangeFactory $entityChangeFactory
@@ -221,7 +221,7 @@ class SqlStore implements Store {
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$this->idBlacklist = $settings->getSetting( 'idBlacklist' );
-		$this->hasFullEntityIdColumn = $settings->getSetting( 'hasFullEntityIdColumn' );
+		$this->writeFullEntityIdColumn = $settings->getSetting( 'writeFullEntityIdColumn' );
 	}
 
 	/**
@@ -258,7 +258,7 @@ class SqlStore implements Store {
 			$this->entityIdComposer,
 			false,
 			'',
-			$this->hasFullEntityIdColumn
+			$this->writeFullEntityIdColumn
 		);
 	}
 
