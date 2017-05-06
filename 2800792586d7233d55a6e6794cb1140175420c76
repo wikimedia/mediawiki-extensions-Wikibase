@@ -22,6 +22,30 @@
       "revId": "2800792586d7233d55a6e6794cb1140175420c76",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_1c8b271d",
+        "filename": "client/tests/phpunit/includes/Hooks/EchoNotificationsHandlersTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2017-05-06T18:45:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_bc96bb4d",
+      "range": {
+        "startLine": 180,
+        "startChar": 54,
+        "endLine": 180,
+        "endChar": 99
+      },
+      "revId": "2800792586d7233d55a6e6794cb1140175420c76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
