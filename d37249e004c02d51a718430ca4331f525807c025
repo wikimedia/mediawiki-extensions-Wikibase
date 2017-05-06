@@ -16,6 +16,24 @@
       "revId": "d37249e004c02d51a718430ca4331f525807c025",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_91772035",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-06T09:52:59Z",
+      "side": 1,
+      "message": "I requested this change. The property is *guaranteed* to be bool, according to the documentations. There is just no point in comparing a bool with \"\u003d\u003d\u003d true\".",
+      "parentUuid": "0e1cb3f9_116f90c1",
+      "revId": "d37249e004c02d51a718430ca4331f525807c025",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
