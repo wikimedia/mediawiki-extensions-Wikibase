@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_116f90c1",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-05-06T01:27:19Z",
+      "side": 1,
+      "message": "don\u0027t think we need to change this, unless we really want to allow users to set this to whatever that evaluates here as true/false",
+      "revId": "d37249e004c02d51a718430ca4331f525807c025",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
