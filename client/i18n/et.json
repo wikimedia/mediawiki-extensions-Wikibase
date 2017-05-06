@@ -6,7 +6,7 @@
 	},
 	"wikibase-client-desc": "Vikibaasi-lisa klient",
 	"tooltip-t-wikibase": "Link andmehoidla seonduva üksuse juurde",
-	"apihelp-query+pageterms-description": "Leheküljega seotud termide hankimine seotud andmeüksusest. Vikibaasi olemileheküljel pöördutakse otse olemi termide poole.\nPane tähele, et hoidlavikis töötavad lehekülje termid ainult otse olemilehekülgedel, mitte üksusega ühendatud lehekülgedel. Seda võidakse tulevikus muuta.",
+	"apihelp-query+pageterms-description": "Võrgukohalingi vahendusel leheküljega seotud termide (harilikult sildid, kirjeldused ja rööpkujud) hankimine Vikiandmetest. Olemileheküljel pöördutakse otse termide poole. Pane tähele, et hoidlavikis töötab see moodul ainult otse olemilehekülgedel, mitte võrgukohalingi vahendusel olemiga ühendatud lehekülgedel. Seda võidakse tulevikus muuta.",
 	"apihelp-query+pageterms-example-simple": "Hangi kasutaja keeles kõik leheküljega \"London\" seotud termid.",
 	"apihelp-query+pageterms-example-label-en": "Hangi inglise keeles leheküljega \"London\" seotud sildid ja rööpkujud.",
 	"apihelp-query+pageterms-param-terms": "Millist tüüpi termid hankida, nt 'description' (kirjeldused). Kui määramata, tagastatakse kõik tüübid.",
@@ -95,6 +95,12 @@
 	"wikibase-otherprojects": "Teistes projektides",
 	"wikibase-otherprojects-beta-message": "Teiste projektide külgriba",
 	"wikibase-otherprojects-beta-description": "Lisab külgribale alaosa \"{{int:wikibase-otherprojects}}\", mis sisaldab Vikiandmetest pärit linke teistesse Wikimedia projektidesse.",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Ühendamine|Ühendamised}} Vikiandmetega",
+	"echo-pref-tooltip-wikibase-action": "Teavita mind, kui keegi ühendab minu alustatud lehekülje Vikiandmete üksusega.",
+	"notification-header-page-connection": "Lehekülg \"<strong>$3</strong>\" {{GENDER:$2|ühendati}} Vikiandmete üksusega.",
+	"notification-bundle-header-page-connection": "\"<strong>$3</strong>\" ja {{PLURAL:$4|veel üks lehekülg|veel $4 lehekülge|100=üle 99 muu lehekülje}} {{GENDER:$2|ühendati}} Vikiandmete üksustega.",
+	"notification-link-text-view-item": "{{GENDER:$1|Vaata}} üksust",
+	"notification-subject-page-connection": "Lehekülg, mida {{GRAMMAR:inessive|{{SITENAME}}}} {{GENDER:$3|alustasid}}, {{GENDER:$2|ühendati}} Vikiandmete üksusega.",
 	"unresolved-property-category": "Lahendamata omadustega leheküljed",
 	"unresolved-property-category-desc": "Selles kategoorias on leheküljed, mis viitavad Vikiandmete omadusele, mida ei õnnestu leida ei omaduse identifikaatori ega sildi järgi."
 }
