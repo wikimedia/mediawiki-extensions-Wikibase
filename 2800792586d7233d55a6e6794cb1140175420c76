@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_bc96bb4d",
+        "filename": "client/tests/phpunit/includes/Hooks/EchoNotificationsHandlersTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-06T16:54:44Z",
+      "side": 1,
+      "message": "Can you please remove these defaults in favor of having them in the provider? That makes it easier to understand the three test cases.",
+      "range": {
+        "startLine": 180,
+        "startChar": 54,
+        "endLine": 180,
+        "endChar": 99
+      },
+      "revId": "2800792586d7233d55a6e6794cb1140175420c76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
