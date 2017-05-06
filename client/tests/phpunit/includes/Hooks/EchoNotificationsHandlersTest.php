@@ -18,7 +18,7 @@ use Wikibase\SettingsArray;
  * @group WikibaseClient
  * @group Wikibase
  */
-class EchoNotificationsHandlersTestCase extends MediaWikiTestCase {
+class EchoNotificationsHandlersTest extends MediaWikiTestCase {
 
 	/**
 	 * @var RepoLinker
@@ -195,9 +195,9 @@ class EchoNotificationsHandlersTestCase extends MediaWikiTestCase {
 			$icons,
 			"Failed asserting that the notification icon is registered to Echo"
 		);
-		$this->assertEquals(
-			[ 'path' => 'Wikibase/client/includes/Hooks/../../resources/images/echoIcon.svg' ],
-			$icons[$handlers::NOTIFICATION_TYPE],
+		$this->assertStringEndsWith(
+			'Wikibase/client/includes/Hooks/../../resources/images/echoIcon.svg',
+			$icons[$handlers::NOTIFICATION_TYPE]['path'],
 			"Failed asserting that missing echoIcon setting defaults to Echo's default"
 		);
 
