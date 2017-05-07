@@ -1833,8 +1833,8 @@ class WikibaseRepo {
 						// Special ISO 639-2 codes
 						'und', 'mis', 'mul', 'zxx',
 
-						// T150633
-						'abe',
+						// T98314
+						'tzl',
 
 						// T125066
 						'ett', 'fkv', 'koy', 'lkt', 'lld', 'smj',
@@ -1842,17 +1842,17 @@ class WikibaseRepo {
 						// T137115
 						'non',
 
-						// T138131
-						'hai',
-
 						// T137808
 						'mnc',
 
 						// T137809
 						'otk',
 
-						// T98314
-						'tzl',
+						// T138131
+						'hai',
+
+						// T150633
+						'abe',
 
 						// T151129
 						'moe',
