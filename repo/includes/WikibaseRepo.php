@@ -1859,6 +1859,9 @@ class WikibaseRepo {
 
 						// T160531
 						'umu',
+
+						// T155430
+						'nr'
 					) )
 				),
 
