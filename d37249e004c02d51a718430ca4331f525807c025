@@ -34,6 +34,24 @@
       "revId": "d37249e004c02d51a718430ca4331f525807c025",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_42aa1484",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-05-07T15:33:34Z",
+      "side": 1,
+      "message": "documentation does not guarantee anything here, since there is no type hint for boolean.  \n\nwhere do we guarantee this?\n\nthough hopefully people setting this configuration will read / follow the documentation, but not sure we can be certain in this case that it\u0027s boolean.",
+      "parentUuid": "0e1cb3f9_91772035",
+      "revId": "d37249e004c02d51a718430ca4331f525807c025",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
