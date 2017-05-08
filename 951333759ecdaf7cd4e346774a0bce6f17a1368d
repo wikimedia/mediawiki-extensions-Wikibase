@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_afa0b89b",
+        "filename": "repo/includes/Store/Sql/SqlEntitiesWithoutTermFinder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-08T09:05:27Z",
+      "side": 1,
+      "message": "Does not seem to be used. I get reasons why Daniel mentioned adding this, so might be OK to have it.\nI hope this duality is going to be removed soon, so whatever.",
+      "revId": "951333759ecdaf7cd4e346774a0bce6f17a1368d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
