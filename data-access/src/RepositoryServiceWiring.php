@@ -1,8 +1,8 @@
 <?php
 
 use Wikibase\Client\Serializer\ForbiddenSerializer;
-use Wikibase\Client\Store\RepositoryServiceContainer;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataAccess\RepositoryServiceContainer;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;

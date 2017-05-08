@@ -1,12 +1,12 @@
 <?php
 
-namespace Wikibase\Client\Tests\Store;
+namespace Wikibase\DataAccess\Tests;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use HashSiteStore;
 use stdClass;
-use Wikibase\Client\Store\RepositoryServiceContainer;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataAccess\RepositoryServiceContainer;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -20,10 +20,9 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 
 /**
- * @covers Wikibase\Client\Store\RepositoryServiceContainer
+ * @covers Wikibase\DataAccess\RepositoryServiceContainer
  *
  * @group Wikibase
- * @group WikibaseClient
  *
  * @license GPL-2.0+
  */

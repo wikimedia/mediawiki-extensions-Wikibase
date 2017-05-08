@@ -4,7 +4,6 @@ namespace Wikibase;
 
 use HashBagOStuff;
 use ObjectCache;
-use Wikibase\Client\EntityDataRetrievalServiceFactory;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
@@ -17,6 +16,7 @@ use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataAccess\EntityDataRetrievalServiceFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;

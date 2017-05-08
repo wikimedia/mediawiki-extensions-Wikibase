@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Store;
+namespace Wikibase\DataAccess;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
