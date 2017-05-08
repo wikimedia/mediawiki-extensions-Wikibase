@@ -154,6 +154,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_e519ef28",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-08T14:16:52Z",
+      "side": 1,
+      "message": "If self::isClientEnabled() returns true but wgWBClientSettings is not defines, something is seriously broken. It could be checked by isClientEnabled(), but should result in an (informative) error there too.\n\nIt\u0027s not something that can happen if Wikibase is functioning normally.",
+      "parentUuid": "0e1cb3f9_e5332ff2",
+      "revId": "7a530358b9c7120420806c577bceb1c2816062fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_a73d38ba",
         "filename": "lib/includes/WikibaseSettings.php",
         "patchSetId": 9
