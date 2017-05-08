@@ -1,6 +1,6 @@
 <?php
 
-use Wikibase\Client\DispatchingServiceFactory;
+use Wikibase\DataAccess\DispatchingServiceFactory;
 use Wikibase\Lib\Interactors\DispatchingTermSearchInteractorFactory;
 use Wikibase\Lib\Store\DispatchingEntityInfoBuilderFactory;
 use Wikibase\Lib\Store\DispatchingEntityPrefetcher;
