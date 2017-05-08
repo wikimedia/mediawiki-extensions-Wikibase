@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_cf296c9c",
+        "filename": "bootstrap/includes/WikibaseSettings.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-08T10:35:12Z",
+      "side": 1,
+      "message": "You are depending on the entirety of core then, which is not better than depending on a tiny component we maintain.\n\nI would move the SettingsArray to this component for now. We can split it later.\n\nI imaging a component that contains nothing but an interface. That interface is build in a way that allows us to either use core\u0027s Config class or our own.",
+      "range": {
+        "startLine": 22,
+        "startChar": 57,
+        "endLine": 23,
+        "endChar": 35
+      },
+      "revId": "ce2e2e83bd2d15a9aa47f6f48dc149e97f20eec1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_2f44a86d",
+        "filename": "bootstrap/includes/WikibaseSettings.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-08T10:35:12Z",
+      "side": 1,
+      "message": "This and the removal of \"Lib\" is a nice rename. Can we do this as a separate patch before all others?",
+      "range": {
+        "startLine": 53,
+        "startChar": 41,
+        "endLine": 53,
+        "endChar": 45
+      },
+      "revId": "ce2e2e83bd2d15a9aa47f6f48dc149e97f20eec1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_0f3f64d4",
+        "filename": "bootstrap/tests/phpunit/includes/WikibaseSettingsTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-08T10:35:12Z",
+      "side": 1,
+      "message": "\\ please.",
+      "range": {
+        "startLine": 16,
+        "startChar": 29,
+        "endLine": 16,
+        "endChar": 30
+      },
+      "revId": "ce2e2e83bd2d15a9aa47f6f48dc149e97f20eec1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
