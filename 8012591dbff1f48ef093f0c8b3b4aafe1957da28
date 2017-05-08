@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e1cb3f9_6fbdc062",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-08T10:19:42Z",
+      "side": 1,
+      "message": "Typo.",
+      "range": {
+        "startLine": 10,
+        "startChar": 79,
+        "endLine": 10,
+        "endChar": 80
+      },
+      "revId": "8012591dbff1f48ef093f0c8b3b4aafe1957da28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_6f906047",
         "filename": "client/tests/phpunit/includes/Hooks/ParserOutputUpdateHookHandlersTest.php",
         "patchSetId": 2
@@ -18,6 +41,99 @@
         "startChar": 18,
         "endLine": 119,
         "endChar": 29
+      },
+      "revId": "8012591dbff1f48ef093f0c8b3b4aafe1957da28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_4fb8fc74",
+        "filename": "client/tests/phpunit/includes/Hooks/ParserOutputUpdateHookHandlersTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-08T10:19:42Z",
+      "side": 1,
+      "message": "Yea. But doesn\u0027t matter much, it\u0027s private anyway.",
+      "parentUuid": "0e1cb3f9_6f906047",
+      "range": {
+        "startLine": 119,
+        "startChar": 18,
+        "endLine": 119,
+        "endChar": 29
+      },
+      "revId": "8012591dbff1f48ef093f0c8b3b4aafe1957da28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_cf85ecb2",
+        "filename": "lib/includes/Modules/RepoAccessModule.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-08T10:19:42Z",
+      "side": 1,
+      "message": "This is not correct any more, I believe. This describes what the old code did. But the new code checks if a constant exists.",
+      "range": {
+        "startLine": 31,
+        "startChar": 37,
+        "endLine": 31,
+        "endChar": 74
+      },
+      "revId": "8012591dbff1f48ef093f0c8b3b4aafe1957da28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_8fa6144f",
+        "filename": "lib/includes/Modules/RepoAccessModule.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-08T10:19:42Z",
+      "side": 1,
+      "message": "As above.",
+      "range": {
+        "startLine": 39,
+        "startChar": 6,
+        "endLine": 39,
+        "endChar": 42
+      },
+      "revId": "8012591dbff1f48ef093f0c8b3b4aafe1957da28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_2f76e8d5",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-08T10:19:42Z",
+      "side": 1,
+      "message": "This wording confuses me, even if I know what \"shared\" refers to. But it sounds like the code would do an array_intersect with the two settings arrays. Can we avoid this somehow?",
+      "range": {
+        "startLine": 73,
+        "startChar": 42,
+        "endLine": 73,
+        "endChar": 79
       },
       "revId": "8012591dbff1f48ef093f0c8b3b4aafe1957da28",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
