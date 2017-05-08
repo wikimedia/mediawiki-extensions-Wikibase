@@ -14,7 +14,6 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\PropertyInfoTableBuilder;
 use Wikibase\RebuildTermsSearchKey;
 use Wikibase\Repo\Maintenance\PopulateTermFullEntityId;
-use Wikibase\Repo\Maintenance\RebuildEntityPerPage;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store;
 use Wikimedia\Rdbms\Database;
@@ -82,7 +81,6 @@ class DatabaseSchemaUpdater {
 			$this->store->rebuild();
 		}
 
-		$this->updateEntityPerPageTable( $updater, $db );
 		$this->updateTermsTable( $updater, $db );
 		$this->updateItemsPerSiteTable( $updater, $db );
 		$this->updateChangesTable( $updater, $db );
@@ -263,30 +261,6 @@ class DatabaseSchemaUpdater {
 		// we already know that the generic file exists
 		$path = "$dir/$name.sql";
 		return $path;
-	}
-
-	/**
-	 * Applies updates to the wb_entity_per_page table.
-	 *
-	 * @param DatabaseUpdater $updater
-	 * @param Database $db
-	 */
-	private function updateEntityPerPageTable( DatabaseUpdater $updater, Database $db ) {
-		// Update from 0.1. or 0.2.
-		if ( !$db->tableExists( 'wb_entity_per_page' ) ) {
-			$updater->addExtensionTable(
-				'wb_entity_per_page',
-				$this->getUpdateScriptPath( 'AddEntityPerPage', $db->getType() )
-			);
-
-			$updater->addPostDatabaseUpdateMaintenance( RebuildEntityPerPage::class );
-		} else {
-			$updater->addExtensionField(
-				'wb_entity_per_page',
-				'epp_redirect_target',
-				$this->getUpdateScriptPath( 'AddEppRedirectTarget', $db->getType() )
-			);
-		}
 	}
 
 	/**

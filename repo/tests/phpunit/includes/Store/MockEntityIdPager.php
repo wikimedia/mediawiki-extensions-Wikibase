@@ -5,13 +5,12 @@ namespace Wikibase\Repo\Tests\Store;
 use BadMethodCallException;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 
 /**
  * @author Addshore
  */
-class MockEntityIdPager implements EntityPerPage, EntityIdPager {
+class MockEntityIdPager implements EntityIdPager {
 
 	/**
 	 * @var EntityId[]
@@ -103,27 +102,6 @@ class MockEntityIdPager implements EntityPerPage, EntityIdPager {
 		$entityIds = array_slice( array_values( $entityIds ), 0, $limit );
 
 		return array_values( $entityIds );
-	}
-
-	/**
-	 * @throws BadMethodCallException always
-	 */
-	public function deleteEntityPage( EntityId $entityId, $pageId ) {
-		throw new BadMethodCallException( 'Mock method not yet implemented' );
-	}
-
-	/**
-	 * @throws BadMethodCallException always
-	 */
-	public function deleteEntity( EntityId $entityId ) {
-		throw new BadMethodCallException( 'Mock method not yet implemented' );
-	}
-
-	/**
-	 * @throws BadMethodCallException always
-	 */
-	public function clear() {
-		throw new BadMethodCallException( 'Mock method not yet implemented' );
 	}
 
 }

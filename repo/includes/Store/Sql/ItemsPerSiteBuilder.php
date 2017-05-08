@@ -84,8 +84,6 @@ class ItemsPerSiteBuilder {
 	}
 
 	/**
-	 * Rebuilds EntityPerPageTable for specified pages
-	 *
 	 * @param ItemId[] $itemIds
 	 *
 	 * @return int
