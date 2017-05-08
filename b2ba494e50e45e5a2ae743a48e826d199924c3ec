@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_effb1043",
+        "filename": "repo/tests/phpunit/includes/Interactors/ItemMergeInteractorTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-08T09:55:16Z",
+      "side": 0,
+      "message": "Why is this static in the base class? I think this is similar to the PHPUNit assert… methods being static, and we call them with $this-\u003e… anyway.",
+      "range": {
+        "startLine": 344,
+        "startChar": 11,
+        "endLine": 344,
+        "endChar": 30
+      },
+      "revId": "b2ba494e50e45e5a2ae743a48e826d199924c3ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
