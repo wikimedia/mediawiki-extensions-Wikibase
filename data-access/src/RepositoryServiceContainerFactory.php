@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Store;
+namespace Wikibase\DataAccess;
 
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;

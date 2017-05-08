@@ -1,10 +1,8 @@
 <?php
 
-namespace Wikibase\Client;
+namespace Wikibase\DataAccess;
 
 use MediaWiki\Services\ServiceContainer;
-use Wikibase\Client\Store\RepositoryServiceContainer;
-use Wikibase\Client\Store\RepositoryServiceContainerFactory;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\UnknownForeignRepositoryException;
 use Wikibase\DataModel\Entity\EntityId;

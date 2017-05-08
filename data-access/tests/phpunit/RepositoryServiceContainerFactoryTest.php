@@ -1,20 +1,19 @@
 <?php
 
-namespace Wikibase\Client\Tests\Store;
+namespace Wikibase\DataAccess\Tests;
 
-use Wikibase\Client\Store\RepositoryServiceContainer;
-use Wikibase\Client\Store\RepositoryServiceContainerFactory;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataAccess\RepositoryServiceContainer;
+use Wikibase\DataAccess\RepositoryServiceContainerFactory;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Lookup\UnknownForeignRepositoryException;
 use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 
 /**
- * @covers Wikibase\Client\Store\RepositoryServiceContainerFactory
+ * @covers Wikibase\DataAccess\RepositoryServiceContainerFactory
  *
  * @group Wikibase
- * @group WikibaseClient
  *
  * @license GPL-2.0+
  */

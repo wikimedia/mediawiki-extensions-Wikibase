@@ -6,7 +6,7 @@ use DBQueryError;
 use HashBagOStuff;
 use ObjectCache;
 use Revision;
-use Wikibase\Client\EntityDataRetrievalServiceFactory;
+use Wikibase\DataAccess\EntityDataRetrievalServiceFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;

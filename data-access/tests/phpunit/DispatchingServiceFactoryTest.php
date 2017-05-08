@@ -1,11 +1,11 @@
 <?php
 
-namespace Wikibase\Client\Tests;
+namespace Wikibase\DataAccess\Tests;
 
 use Prophecy\Argument;
-use Wikibase\Client\DispatchingServiceFactory;
-use Wikibase\Client\Store\RepositoryServiceContainer;
-use Wikibase\Client\Store\RepositoryServiceContainerFactory;
+use Wikibase\DataAccess\DispatchingServiceFactory;
+use Wikibase\DataAccess\RepositoryServiceContainer;
+use Wikibase\DataAccess\RepositoryServiceContainerFactory;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -14,10 +14,9 @@ use Wikibase\EntityRevision;
 use Wikibase\Lib\RepositoryDefinitions;
 
 /**
- * @covers Wikibase\Client\DispatchingServiceFactory
+ * @covers Wikibase\DataAccess\DispatchingServiceFactory
  *
  * @group Wikibase
- * @group WikibaseClient
  *
  * @license GPL-2.0+
  */
