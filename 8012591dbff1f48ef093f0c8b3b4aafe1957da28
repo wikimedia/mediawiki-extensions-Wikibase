@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_1216ab5a",
+        "filename": "client/tests/phpunit/includes/Hooks/ParserOutputUpdateHookHandlersTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-08T13:48:04Z",
+      "side": 1,
+      "message": "This isn\u0027t new, it was already returning a SettingsArray. I just fixed the documentation. I could rename it, but does this really belong in this patch? Maybe I shouldn\u0027t have fixed the documentation :P",
+      "parentUuid": "0e1cb3f9_4fb8fc74",
+      "range": {
+        "startLine": 119,
+        "startChar": 18,
+        "endLine": 119,
+        "endChar": 29
+      },
+      "revId": "8012591dbff1f48ef093f0c8b3b4aafe1957da28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_cf85ecb2",
         "filename": "lib/includes/Modules/RepoAccessModule.php",
         "patchSetId": 2
@@ -83,6 +107,30 @@
       "writtenOn": "2017-05-08T10:19:42Z",
       "side": 1,
       "message": "This is not correct any more, I believe. This describes what the old code did. But the new code checks if a constant exists.",
+      "range": {
+        "startLine": 31,
+        "startChar": 37,
+        "endLine": 31,
+        "endChar": 74
+      },
+      "revId": "8012591dbff1f48ef093f0c8b3b4aafe1957da28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_45fbfb11",
+        "filename": "lib/includes/Modules/RepoAccessModule.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-08T13:48:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_cf85ecb2",
       "range": {
         "startLine": 31,
         "startChar": 37,
@@ -118,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_65007f05",
+        "filename": "lib/includes/Modules/RepoAccessModule.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-08T13:48:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_8fa6144f",
+      "range": {
+        "startLine": 39,
+        "startChar": 6,
+        "endLine": 39,
+        "endChar": 42
+      },
+      "revId": "8012591dbff1f48ef093f0c8b3b4aafe1957da28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_2f76e8d5",
         "filename": "lib/includes/WikibaseSettings.php",
         "patchSetId": 2
@@ -129,6 +201,30 @@
       "writtenOn": "2017-05-08T10:19:42Z",
       "side": 1,
       "message": "This wording confuses me, even if I know what \"shared\" refers to. But it sounds like the code would do an array_intersect with the two settings arrays. Can we avoid this somehow?",
+      "range": {
+        "startLine": 73,
+        "startChar": 42,
+        "endLine": 73,
+        "endChar": 79
+      },
+      "revId": "8012591dbff1f48ef093f0c8b3b4aafe1957da28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_c5362be4",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-08T13:48:04Z",
+      "side": 1,
+      "message": "The method *guarantees* to return at least all settings that are defined for both repo and client (which will also hopefully have the same value, if repo and client are both enabled). \n\nThis method *may* return additional settings.\n\nIn other words, it does not guarantee that the SettingsArray will not contain any settings that are not shared. It does guarantee that the SettingsArray will return all settings that are shared.\n\nHow would you write that?",
+      "parentUuid": "0e1cb3f9_2f76e8d5",
       "range": {
         "startLine": 73,
         "startChar": 42,
