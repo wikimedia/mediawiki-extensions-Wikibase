@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_6f906047",
+        "filename": "client/tests/phpunit/includes/Hooks/ParserOutputUpdateHookHandlersTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2017-05-08T09:06:38Z",
+      "side": 1,
+      "message": "newSettingsArray?",
+      "range": {
+        "startLine": 119,
+        "startChar": 18,
+        "endLine": 119,
+        "endChar": 29
+      },
+      "revId": "8012591dbff1f48ef093f0c8b3b4aafe1957da28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
