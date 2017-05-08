@@ -8,7 +8,8 @@
 			"E.coli",
 			"Macofe",
 			"Fraxinus",
-			"MaGa"
+			"MaGa",
+			"Srdjan m"
 		]
 	},
 	"wikibase-desc": "Repozitorij strukturiranih podataka",
@@ -64,7 +65,7 @@
 	"wikibase-statementview-rank-normal": "Normalni raspon",
 	"wikibase-statementview-rank-deprecated": "Zastarjeli raspon",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|izvor|izvora}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Izvor još nije spremljen|$1 izvora još nije spremljeno}}",
+	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Izvor još nije spremljen|$1 izvora još nisu spremljena|$1 izvora još nije spremljeno}}",
 	"wikibase-snakview-property-input-placeholder": "svojstvo",
 	"wikibase-snakview-choosesnaktype": "Odaberite vrstu vrijednosti.",
 	"wikibase-snakview-variations-somevalue-label": "nepoznata vrijednost",

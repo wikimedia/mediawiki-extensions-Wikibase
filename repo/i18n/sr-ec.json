@@ -76,7 +76,7 @@
 	"wikibase-claimview-snak-new-tooltip": "После навођења својства можете унети одговарајућу вредност. Ако својство нема одређену вредност или тачна вредност није позната, уместо навођења прилагођене вредности можете изабрати алтернативну врсту вредности кликом на икону пре поља за унос вредности.",
 	"wikibase-statementview-rank-normal": "Нормални ранг",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|референца|референце}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Једна референца|$1 референци}} није {{PLURAL:$1|сачуван|сачувано}}",
+	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Једна референца није сачувана|$1 референце нису сачуване|$1 референци није сачувано}}",
 	"wikibase-snakview-property-input-placeholder": "својство",
 	"wikibase-snakview-choosesnaktype": "Изаберите врсту вредности.",
 	"wikibase-snakview-variation-datavaluetypemismatch": "Вредност није у складу са дефиницијом својства.",

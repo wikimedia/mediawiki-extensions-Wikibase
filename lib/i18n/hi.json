@@ -3,11 +3,13 @@
 		"authors": [
 			"Siddhartha Ghai",
 			"NehalDaveND",
-			"Vivek Rai"
+			"Vivek Rai",
+			"Sfic"
 		]
 	},
 	"wikibase-error-unexpected": "त्रुटि : $1",
 	"wikibase-quantitydetails-amount": "राशि",
+	"wikibase-quantitydetails-unit": "इकाई",
 	"wikibase-timedetails-time": "समय",
 	"wikibase-timedetails-isotime": "समय मुहर",
 	"wikibase-timedetails-timezone": "समयवलय (time zone)",
@@ -26,6 +28,7 @@
 	"wikibase-validator-no-such-entity": "$1 प्रप्त नहीं हुआ",
 	"datatypes-type-wikibase-item": "वस्तु",
 	"datatypes-type-wikibase-property": "गुणधर्म",
+	"version-wikibase": "विकिबैस",
 	"wikibase-time-precision-century": "$1. देश",
 	"wikibase-time-precision-10annum": "$1s",
 	"wikibase-entity-summary-wbsetitem": "नई वस्तु बनाएँ",

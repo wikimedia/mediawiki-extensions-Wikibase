@@ -18,7 +18,7 @@
 	"wikibase-error-remove-connection": "Ne mogu ukloniti zbog mrežne greške. Provjerite internetsku vezu.",
 	"wikibase-error-save-timeout": "Trenutno imamo tehničkih poteškoća. Pokušajte ponovo.",
 	"wikibase-error-remove-timeout": "Trenutno imamo tehničkih poteškoća. Pokušajte ponovo.",
-	"wikibase-error-autocomplete-connection": "Nije bilo moguće poslati upit prema Wikipedija API. Pokušajte kasnije ponovo.",
+	"wikibase-error-autocomplete-connection": "Ne mogu poslati upit API-u sajta. Pokušajte ponovo kasnije.",
 	"wikibase-error-autocomplete-response": "Odgovor servera: $1",
 	"wikibase-error-ui-no-external-page": "Stranica \"$2\" nije pronađena na \"$1\".",
 	"wikibase-error-ui-edit-conflict": "Došlo je do sukoba između izmjena. Osvježite stranicu i pokušajte ponovo sačuvati vaše izmjene.",

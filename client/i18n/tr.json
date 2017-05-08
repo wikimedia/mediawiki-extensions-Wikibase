@@ -52,6 +52,7 @@
 	"wikibase-pageswithbadges-legend": "Belirtilen rozete göre sayfaların listesi",
 	"wikibase-pageswithbadges-badge": "Rozet:",
 	"wikibase-pageswithbadges-submit": "Sayfaları göster",
+	"wikibase-pageinfo-entity-usage": "Bu sayfada kullanılan {{WBREPONAME}} varlıkları",
 	"wikibase-pageinfo-entity-usage-L": "Etiket: $1",
 	"wikibase-pageinfo-entity-usage-T": "Başlık",
 	"wikibase-otherprojects": "Diğer projelerde",

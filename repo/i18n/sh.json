@@ -4,7 +4,8 @@
 			"Kolega2357",
 			"OC Ripper",
 			"Macofe",
-			"Conquistador"
+			"Conquistador",
+			"Srdjan m"
 		]
 	},
 	"wikibase-desc": "Strukturirano skladište podataka",
@@ -46,7 +47,7 @@
 	"wikibase-claimview-snak-new-tooltip": "Nakon što se odredili stavku možete unijeti odgovarajuću vrijednost. Ako stavka nema odgovarajuću vrijednost ili ona nije poznata, možete odabrati alternativu specificirajući uobičajenu vrijednost kliknuvši ikonu kraj kutijice za unos vrijednosti.",
 	"wikibase-statementview-rank-normal": "Normalni rang",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|referenca|reference}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Jedan izvor nije snimljen|$1 izvora nisu snimljeni}}",
+	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Jedna referenca nije spremljena|$1 reference nisu spremljene|$1 referenci nije spremljeno}}",
 	"wikibase-snakview-property-input-placeholder": "polje",
 	"wikibase-snakview-unsupportedsnaktype": "Snak (veza) tipa \"$1\". Korištenje ove vrste Snaka (veze) još nije podržano.",
 	"wikibase-snakview-choosesnaktype": "Odaberite tip vrijednosti.",
