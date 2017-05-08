@@ -20,6 +20,7 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
+use Wikimedia\Assert\Assert;
 
 /**
  * Term lookup cache.
@@ -51,7 +52,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	/**
 	 * @var bool
 	 */
-	private $hasFullEntityIdColumn;
+	private $writeFullEntityIdColumn;
 
 	/**
 	 * @var int
@@ -63,21 +64,24 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param string|bool $wikiDb
 	 * @param string $repositoryName
-	 * @param bool $hasFullEntityIdColumn Allow use (e.g. writing) of column.
+	 * @param bool $writeFullEntityIdColumn Allow writing to the column.
 	 */
 	public function __construct(
 		StringNormalizer $stringNormalizer,
 		EntityIdComposer $entityIdComposer,
 		$wikiDb = false,
 		$repositoryName = '',
-		$hasFullEntityIdColumn = true
+		$writeFullEntityIdColumn = true
 	) {
 		RepositoryNameAssert::assertParameterIsValidRepositoryName( $repositoryName, '$repositoryName' );
+		Assert::parameterType( 'boolean', $writeFullEntityIdColumn, '$writeFullEntityIdColumn' );
+
 		parent::__construct( $wikiDb );
+
 		$this->repositoryName = $repositoryName;
 		$this->stringNormalizer = $stringNormalizer;
 		$this->entityIdComposer = $entityIdComposer;
-		$this->hasFullEntityIdColumn = $hasFullEntityIdColumn;
+		$this->writeFullEntityIdColumn = $writeFullEntityIdColumn;
 
 		$this->tableName = 'wb_terms';
 	}
@@ -185,7 +189,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			'term_weight' => $this->getWeight( $entity ),
 		);
 
-		if ( $this->hasFullEntityIdColumn === true ) {
+		if ( $this->writeFullEntityIdColumn ) {
 			$entityIdentifiers['term_full_entity_id'] = $entityId->getSerialization();
 		}
 
