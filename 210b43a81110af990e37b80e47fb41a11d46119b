@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_6f914052",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-08T09:05:11Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_4f28fc32",
+      "range": {
+        "startLine": 292,
+        "startChar": 33,
+        "endLine": 292,
+        "endChar": 49
+      },
+      "revId": "210b43a81110af990e37b80e47fb41a11d46119b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_af13d804",
         "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2017-05-08T08:56:59Z",
       "side": 0,
       "message": "This refers to a .sql file that should be deleted.",
+      "range": {
+        "startLine": 300,
+        "startChar": 33,
+        "endLine": 300,
+        "endChar": 53
+      },
+      "revId": "210b43a81110af990e37b80e47fb41a11d46119b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_0f868418",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-08T09:05:11Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_af13d804",
       "range": {
         "startLine": 300,
         "startChar": 33,

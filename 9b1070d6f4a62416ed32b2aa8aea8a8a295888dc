@@ -22,6 +22,30 @@
       "revId": "9b1070d6f4a62416ed32b2aa8aea8a8a295888dc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_cf808cfc",
+        "filename": "repo/includes/Store/Sql/ItemsPerSiteBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-08T09:05:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_cf1c0c1b",
+      "range": {
+        "startLine": 95,
+        "startChar": 41,
+        "endLine": 95,
+        "endChar": 46
+      },
+      "revId": "9b1070d6f4a62416ed32b2aa8aea8a8a295888dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
