@@ -109,9 +109,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 */
 	public function saveTermsOfEntity( EntityDocument $entity ) {
 		$entityId = $entity->getId();
-		if ( $entityId === null ) {
-			throw new InvalidArgumentException( '$entity must have an ID' );
-		}
+		Assert::parameterType( EntityId::class, $entityId, '$entityId' );
 
 		$this->assertEntityIdFromRightRepository( $entityId );
 
@@ -863,9 +861,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return TermIndexEntry[]
 	 */
 	public function getLabelConflicts( $entityType, array $labels, array $aliases = null ) {
-		if ( !is_string( $entityType ) ) {
-			throw new InvalidArgumentException( '$entityType must be a string' );
-		}
+		Assert::parameterType( 'string', $entityType, '$entityType' );
 
 		if ( empty( $labels ) && empty( $aliases ) ) {
 			return array();
@@ -987,9 +983,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			$texts = (array)$texts;
 
 			foreach ( $texts as $text ) {
-				if ( !is_string( $text ) ) {
-					throw new InvalidArgumentException( '$textsByLanguage must contain string values only' );
-				}
+				Assert::parameterType( 'string', $text, '$text' );
 
 				foreach ( $types as $type ) {
 					$criteria[] = new TermIndexSearchCriteria( [
