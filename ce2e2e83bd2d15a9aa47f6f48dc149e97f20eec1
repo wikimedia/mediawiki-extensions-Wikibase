@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_d20fd331",
+        "filename": "bootstrap/includes/WikibaseSettings.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-08T10:55:04Z",
+      "side": 1,
+      "message": "\u003e You are depending on the entirety of core then, which is not better than depending on a tiny component we maintain.\n\nThis component depends on core anyway.\n\n\u003e I would move the SettingsArray to this component for now. We can split it later.\n\nThen our application logic depends on the boostrap component. I think that\u0027s worse than having the bootstrap component depend on lib.\n\nOr we don\u0027t think of this as a \"boostrap\" component, but rather a \"config\" component. Then it\u0027s fine to move SettingsArray here, I think.\n\n\u003e I imaging a component that contains nothing but an interface. That interface is build in a way that allows us to either use core\u0027s Config class or our own.\n\nWhile this level of granularity is nice in theory, it has proven quite painful in the past. If you follow this logic rigorously, you end up with one component per class.",
+      "parentUuid": "0e1cb3f9_cf296c9c",
+      "range": {
+        "startLine": 22,
+        "startChar": 57,
+        "endLine": 23,
+        "endChar": 35
+      },
+      "revId": "ce2e2e83bd2d15a9aa47f6f48dc149e97f20eec1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_2f44a86d",
         "filename": "bootstrap/includes/WikibaseSettings.php",
         "patchSetId": 3
