@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_8fc29487",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2017-05-08T08:43:52Z",
+      "side": 1,
+      "message": "I would either use $entityId here, or move the assert above the first line.",
+      "range": {
+        "startLine": 112,
+        "startChar": 42,
+        "endLine": 112,
+        "endChar": 58
+      },
+      "revId": "2dd506c01068592776022ee451696253037a1182",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
