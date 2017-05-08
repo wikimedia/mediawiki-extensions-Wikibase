@@ -15,7 +15,6 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Repo\Store\ChangeStore;
-use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\EntitiesWithoutTermFinder;
 use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
@@ -61,11 +60,6 @@ interface Store {
 	 * @return IdGenerator
 	 */
 	public function newIdGenerator();
-
-	/**
-	 * @return EntityPerPage
-	 */
-	public function newEntityPerPage();
 
 	/**
 	 * @return EntitiesWithoutTermFinder
