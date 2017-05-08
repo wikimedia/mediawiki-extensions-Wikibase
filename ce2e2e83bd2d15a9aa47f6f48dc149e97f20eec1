@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_721b67d5",
+        "filename": "bootstrap/includes/WikibaseSettings.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-05-08T13:13:12Z",
+      "side": 1,
+      "message": "If we are really worried about dependency on core, then I think it\u0027s possible that the config stuff in core could be split into a library that core uses.  I\u0027m not that worried about the dependency though since wikibase depends on other stuff in core.",
+      "parentUuid": "0e1cb3f9_cf296c9c",
+      "range": {
+        "startLine": 22,
+        "startChar": 57,
+        "endLine": 23,
+        "endChar": 35
+      },
+      "revId": "ce2e2e83bd2d15a9aa47f6f48dc149e97f20eec1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_2f44a86d",
         "filename": "bootstrap/includes/WikibaseSettings.php",
         "patchSetId": 3
