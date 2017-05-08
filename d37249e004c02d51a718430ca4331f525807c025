@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e1cb3f9_4ffb1c12",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-08T07:35:26Z",
+      "side": 1,
+      "message": "to?",
+      "range": {
+        "startLine": 93,
+        "startChar": 20,
+        "endLine": 93,
+        "endChar": 22
+      },
+      "revId": "d37249e004c02d51a718430ca4331f525807c025",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_116f90c1",
         "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
         "patchSetId": 3
@@ -49,6 +72,47 @@
       "side": 1,
       "message": "documentation does not guarantee anything here, since there is no type hint for boolean.  \n\nwhere do we guarantee this?\n\nthough hopefully people setting this configuration will read / follow the documentation, but not sure we can be certain in this case that it\u0027s boolean.",
       "parentUuid": "0e1cb3f9_91772035",
+      "revId": "d37249e004c02d51a718430ca4331f525807c025",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_bd0d5543",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-08T07:35:26Z",
+      "side": 1,
+      "message": "I\u0027m also having doubts here.\n\nThiemo, why do you think it is better to allow PHP boolean magic than strictly require the boolean value?",
+      "parentUuid": "0e1cb3f9_42aa1484",
+      "revId": "d37249e004c02d51a718430ca4331f525807c025",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_7d07bd1f",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-08T07:35:26Z",
+      "side": 1,
+      "message": "to?",
+      "range": {
+        "startLine": 224,
+        "startChar": 19,
+        "endLine": 224,
+        "endChar": 21
+      },
       "revId": "d37249e004c02d51a718430ca4331f525807c025",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
