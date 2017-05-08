@@ -340,11 +340,7 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 			'Q2' => $toData,
 		) );
 
-		if ( method_exists( $this, 'getTestSysop' ) ) {
-			$user = $this->getTestSysop()->getUser();
-		} else {
-			$user = User::newFromName( 'UTSysop' );
-		}
+		$user = $this->getTestSysop()->getUser();
 		$user->addWatch( $entityTitleLookup->getTitleForId( $fromId ) );
 
 		$interactor->mergeItems( $fromId, $toId, $ignoreConflicts, 'CustomSummary' );
