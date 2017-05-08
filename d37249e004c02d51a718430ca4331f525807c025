@@ -114,6 +114,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_cf640ce4",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-08T08:24:58Z",
+      "side": 1,
+      "message": "\u003e With a relaxed truthy comparison as it is now a user might pass in the string \"false\" and accidentally enable the thing.\n\nThis exactly seems to me to be a reason NOT to have a boolean magic here.\nAnd yes, 1 would not turn the feature on. It might be difficult to weigh which of \"side effects\" it worse.\nFor me \u0027false\u0027 or \u0027asdsadasdsa\u0027 meaning true is way worse.",
+      "parentUuid": "0e1cb3f9_ef3a30c0",
+      "revId": "d37249e004c02d51a718430ca4331f525807c025",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_7d07bd1f",
         "filename": "repo/config/Wikibase.default.php",
         "patchSetId": 3
