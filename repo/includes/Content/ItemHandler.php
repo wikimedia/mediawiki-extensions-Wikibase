@@ -22,7 +22,6 @@ use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Repo\Search\Elastic\Fields\ItemFieldDefinitions;
-use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Store\EntityIdLookup;
@@ -61,7 +60,6 @@ class ItemHandler extends EntityHandler {
 	private $dataTypeLookup;
 
 	/**
-	 * @param EntityPerPage $entityPerPage
 	 * @param TermIndex $termIndex
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityConstraintProvider $constraintProvider
@@ -75,7 +73,6 @@ class ItemHandler extends EntityHandler {
 	 * @param callable|null $legacyExportFormatDetector
 	 */
 	public function __construct(
-		EntityPerPage $entityPerPage,
 		TermIndex $termIndex,
 		EntityContentDataCodec $contentCodec,
 		EntityConstraintProvider $constraintProvider,
@@ -90,7 +87,6 @@ class ItemHandler extends EntityHandler {
 	) {
 		parent::__construct(
 			CONTENT_MODEL_WIKIBASE_ITEM,
-			$entityPerPage,
 			$termIndex,
 			$contentCodec,
 			$constraintProvider,
