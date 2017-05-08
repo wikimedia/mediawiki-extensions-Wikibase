@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_9285dba1",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-08T13:40:34Z",
+      "side": 1,
+      "message": "Yes, the problem persists.\nWe could however remove this peudo-setting, and call WikibaseSettings::isRepoEnabled() directly everywhere, instead of checking thisWikiIsTheRepo.",
+      "parentUuid": "2e4df70f_67a65052",
+      "revId": "7a530358b9c7120420806c577bceb1c2816062fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_42754291",
         "filename": "lib/includes/WikibaseSettings.php",
         "patchSetId": 9
@@ -30,6 +48,30 @@
       "writtenOn": "2017-04-28T13:40:43Z",
       "side": 1,
       "message": "there\u0027s no such method (yet). Did you mean WikibaseRepo::getSettings or WikibaseSettings::getRepoSettings?",
+      "range": {
+        "startLine": 15,
+        "startChar": 41,
+        "endLine": 15,
+        "endChar": 72
+      },
+      "revId": "7a530358b9c7120420806c577bceb1c2816062fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_524e639c",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-08T13:40:34Z",
+      "side": 1,
+      "message": "getSettings(). Sorry.",
+      "parentUuid": "2e4df70f_42754291",
       "range": {
         "startLine": 15,
         "startChar": 41,
@@ -76,6 +118,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_b259ff5f",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-08T13:40:34Z",
+      "side": 1,
+      "message": "Not under any forseeable circumstances, since we know that the entityNamespaces setting is defined. Or did you mean something else?",
+      "parentUuid": "2e4df70f_e2048e19",
+      "revId": "7a530358b9c7120420806c577bceb1c2816062fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_a73d38ba",
         "filename": "lib/includes/WikibaseSettings.php",
         "patchSetId": 9
@@ -111,6 +171,30 @@
       "side": 1,
       "message": "You need to run every time, otherwise you\u0027ll end up with different namespaces each time you call `buildEntityNamespaceConfigurations()`",
       "parentUuid": "2e4df70f_a73d38ba",
+      "range": {
+        "startLine": 107,
+        "startChar": 2,
+        "endLine": 107,
+        "endChar": 12
+      },
+      "revId": "7a530358b9c7120420806c577bceb1c2816062fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_123f8bd4",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-08T13:40:34Z",
+      "side": 1,
+      "message": "I think caching would indeed work, but I don\u0027t see how it\u0027s necessary. Running hooks is not very expensive, and it\u0027s not like we are calling this method in a lookp.",
+      "parentUuid": "2e4df70f_62515edd",
       "range": {
         "startLine": 107,
         "startChar": 2,
