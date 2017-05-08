@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_1d1c817b",
+        "filename": "repo/includes/Store/Sql/SqlEntitiesWithoutTermFinder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-08T07:43:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_6691739c",
+      "revId": "55a9fb9f1d861b897371953146692f7277c39256",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_46eb0f0a",
         "filename": "repo/includes/Store/Sql/SqlEntitiesWithoutTermFinder.php",
         "patchSetId": 2
@@ -65,6 +83,24 @@
       "writtenOn": "2017-05-05T15:26:53Z",
       "side": 1,
       "message": "The test should cover both settings - with and without the new column.",
+      "revId": "55a9fb9f1d861b897371953146692f7277c39256",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_2f0a6825",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/SqlEntitiesWithoutTermFinderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-08T07:43:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_c6cddfbd",
       "revId": "55a9fb9f1d861b897371953146692f7277c39256",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
