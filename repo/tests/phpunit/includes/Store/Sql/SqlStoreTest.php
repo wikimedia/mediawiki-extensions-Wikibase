@@ -22,7 +22,6 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\PropertyInfoStore;
-use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Store\Sql\SqlChangeStore;
 use Wikibase\SqlStore;
@@ -82,11 +81,6 @@ class SqlStoreTest extends MediaWikiTestCase {
 	public function testNewSiteLinkStore() {
 		$service = $this->newInstance()->newSiteLinkStore();
 		$this->assertInstanceOf( SiteLinkStore::class, $service );
-	}
-
-	public function testNewEntityPerPage() {
-		$service = $this->newInstance()->newEntityPerPage();
-		$this->assertInstanceOf( EntityPerPage::class, $service );
 	}
 
 	public function testGetEntityRedirectLookup() {
