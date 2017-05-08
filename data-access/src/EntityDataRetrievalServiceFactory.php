@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client;
+namespace Wikibase\DataAccess;
 
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Term\TermBuffer;

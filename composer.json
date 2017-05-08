@@ -65,6 +65,8 @@
 		"psr-4": {
 			"Wikibase\\Client\\": "client/includes",
 			"Wikibase\\Client\\Tests\\": "client/tests/phpunit/includes",
+			"Wikibase\\DataAccess\\": "data-access/src",
+			"Wikibase\\DataAccess\\Tests\\": "data-access/tests/phpunit",
 			"Wikibase\\Lib\\": "lib/includes",
 			"Wikibase\\Lib\\Tests\\": "lib/tests/phpunit",
 			"Wikibase\\Repo\\": "repo/includes",
