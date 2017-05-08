@@ -136,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_e5332ff2",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-08T13:56:46Z",
+      "side": 1,
+      "message": "I was more about the case where $wgWBClientSettings is not defined. Then getSettings would throw OutOfBoundsException.\n\nOr should this be also checked in isClientEnabled?",
+      "parentUuid": "0e1cb3f9_b259ff5f",
+      "revId": "7a530358b9c7120420806c577bceb1c2816062fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_a73d38ba",
         "filename": "lib/includes/WikibaseSettings.php",
         "patchSetId": 9
