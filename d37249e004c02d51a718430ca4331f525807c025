@@ -96,6 +96,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_ef3a30c0",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-08T08:16:00Z",
+      "side": 1,
+      "message": "This classes documentation clearly says boolean. If we don\u0027t have trust in our own documentation, why do we even bother to add documentation?\n\nThis can lead to bad situations with and without a strict comparison.\n\nWith a strict \"\u003d\u003d\u003d true\" a user might write \"1\" in LocalSettings.php, and not get what he wants.\n\nWith a relaxed truthy comparison as it is now a user might pass in the string \"false\" and accidentally enable the thing.\n\nBoth is equally bad, and can not be solved on the line of code we are arguing about right now.",
+      "parentUuid": "0e1cb3f9_bd0d5543",
+      "revId": "d37249e004c02d51a718430ca4331f525807c025",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_7d07bd1f",
         "filename": "repo/config/Wikibase.default.php",
         "patchSetId": 3
