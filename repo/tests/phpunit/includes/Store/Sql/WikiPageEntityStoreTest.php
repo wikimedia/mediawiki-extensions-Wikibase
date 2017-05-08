@@ -173,8 +173,6 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		// check that the term index got updated (via a DataUpdate).
 		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
 		$this->assertNotEmpty( $termIndex->getTermsOfEntity( $entityId ), 'getTermsOfEntity()' );
-
-		$this->assertEntityPerPage( true, $entityId );
 	}
 
 	public function provideSaveEntityError() {
@@ -265,7 +263,6 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$this->assertTrue( $revision->getContent()->isRedirect(), 'EntityContent::isRedirect()' );
 		$this->assertTrue( $revision->getContent()->getEntityRedirect()->equals( $redirect ), 'getEntityRedirect()' );
 
-		$this->assertEntityPerPage( true, $oneId );
 		$this->assertRedirectPerPage( $q33, $oneId );
 
 		// check that the term index got updated (via a DataUpdate).
@@ -280,8 +277,6 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 		$this->assertFalse( $revision->getTitle()->isRedirect(), 'Title::isRedirect' );
 		$this->assertFalse( $revision->getContent()->isRedirect(), 'EntityContent::isRedirect()' );
-
-		$this->assertEntityPerPage( true, $oneId );
 	}
 
 	private function assertRedirectPerPage( EntityId $expected, EntityId $entityId ) {
@@ -600,38 +595,6 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$this->assertEmpty( $termIndex->getTermsOfEntity( $entityId ), 'getTermsOfEntity' );
 
 		// TODO: check notifications in wb_changes table!
-
-		$this->assertEntityPerPage( false, $entityId );
-	}
-
-	private function assertEntityPerPage( $expected, EntityId $entityId ) {
-		$pageId = $this->getPageId( $entityId );
-
-		if ( $expected === true ) {
-			$this->assertGreaterThan( 0, $pageId );
-		} else {
-			$this->assertEquals( $expected, $pageId );
-		}
-	}
-
-	private function getPageId( EntityId $entityId ) {
-		$dbr = wfGetDB( DB_REPLICA );
-
-		$row = $dbr->selectRow(
-			'wb_entity_per_page',
-			array( 'epp_page_id' ),
-			array(
-				'epp_entity_type' => $entityId->getEntityType(),
-				'epp_entity_id' => $entityId->getNumericId()
-			),
-			__METHOD__
-		);
-
-		if ( !$row ) {
-			return false;
-		}
-
-		return $pageId = (int)$row->epp_page_id;
 	}
 
 	public function provideCanCreateWithCustomId() {

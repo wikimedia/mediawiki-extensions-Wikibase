@@ -92,7 +92,7 @@ class ItemsPerSiteBuilder {
 	}
 
 	/**
-	 * Rebuilds EntityPerPageTable for specified pages
+	 * Rebuilds SiteLinkTable for specified pages
 	 *
 	 * @param ItemId[] $itemIds
 	 *
