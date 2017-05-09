@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_9975fb94",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-09T14:04:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_c63cff90",
+      "revId": "57c8247c7e9d4164dd9bac4a3e458d65179263b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_0b4e829b",
         "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2017-05-05T15:06:12Z",
       "side": 1,
       "message": "The type shouldn\u0027t be needed any more with full entity ID. But this depends heavily on the table indexes.",
+      "revId": "57c8247c7e9d4164dd9bac4a3e458d65179263b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_799fc7b9",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-09T14:04:13Z",
+      "side": 1,
+      "message": "Per the indexes, I think this is not needed",
+      "parentUuid": "0e1cb3f9_0b4e829b",
       "revId": "57c8247c7e9d4164dd9bac4a3e458d65179263b0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_b95ebf15",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-09T14:04:13Z",
+      "side": 1,
+      "message": "It seems this will be needed in line 447 (when it errors out) How to work around that, IDK",
+      "parentUuid": "0e1cb3f9_8b29329d",
+      "range": {
+        "startLine": 401,
+        "startChar": 15,
+        "endLine": 401,
+        "endChar": 31
+      },
+      "revId": "57c8247c7e9d4164dd9bac4a3e458d65179263b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_6b593e5d",
         "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
         "patchSetId": 1
@@ -70,6 +130,30 @@
       "writtenOn": "2017-05-05T15:06:12Z",
       "side": 1,
       "message": "This could also check isset( $row-\u003eterm_full_entity_id ). Probably not better because it makes it harder to find this code place later.",
+      "range": {
+        "startLine": 437,
+        "startChar": 9,
+        "endLine": 437,
+        "endChar": 38
+      },
+      "revId": "57c8247c7e9d4164dd9bac4a3e458d65179263b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_396aafb2",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-09T14:04:13Z",
+      "side": 1,
+      "message": "Yeah, let\u0027s stick with $this-\u003ereadFullEntityIdColumn",
+      "parentUuid": "0e1cb3f9_6b593e5d",
       "range": {
         "startLine": 437,
         "startChar": 9,
@@ -110,6 +194,30 @@
       "writtenOn": "2017-05-05T15:06:12Z",
       "side": 1,
       "message": "I don\u0027t think this change is needed. The only difference this makes is that properties are supported, but as long as this test does not use properties for testing, a more trivial ItemIdParser should be enough.\n\nI guess you want this to support other entity types. The Basic… parser can\u0027t do this.",
+      "range": {
+        "startLine": 182,
+        "startChar": 7,
+        "endLine": 182,
+        "endChar": 26
+      },
+      "revId": "57c8247c7e9d4164dd9bac4a3e458d65179263b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_b951dfdf",
+        "filename": "lib/tests/phpunit/Store/Sql/SqlEntityInfoBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-09T14:04:13Z",
+      "side": 1,
+      "message": "No, it actually fails if you use ItemIdParser because in old ways it was using it for small things and now it uses them to parse database results.",
+      "parentUuid": "0e1cb3f9_eb1a2e7e",
       "range": {
         "startLine": 182,
         "startChar": 7,
