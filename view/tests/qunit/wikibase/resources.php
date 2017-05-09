@@ -13,8 +13,7 @@ return call_user_func( function() {
 		'remoteExtPath' => $remoteExtPathParts[1],
 	);
 
-	$modules = array(
-
+	return array(
 		'wikibase.getLanguageNameByCode.tests' => $moduleBase + array(
 			'scripts' => array(
 				'wikibase.getLanguageNameByCode.tests.js'
@@ -42,9 +41,5 @@ return call_user_func( function() {
 				'wikibase.ValueViewBuilder'
 			)
 		),
-
 	);
-
-	return $modules;
-
 } );

@@ -21,7 +21,6 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 	const USER_LANGUAGE = 'en';
 
 	protected function setUp() {
-
 		parent::setUp();
 
 		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [ 'edit' => true, 'item-term' => true ] ] );
@@ -35,7 +34,6 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 	 * @return string
 	 */
 	private function createNewItemWithTerms( $language, $termValue ) {
-
 		$item = new Item();
 		// add data and check if it is shown in the form
 		$item->setLabel( $language, $termValue );
@@ -51,7 +49,6 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 	}
 
 	public function testRenderWithoutSubPage_AllInputFieldsPresent() {
-
 		list( $output, ) = $this->executeSpecialPage( '', null, self::USER_LANGUAGE );
 
 		$expectedLanguage = self::USER_LANGUAGE;
@@ -64,8 +61,8 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 		assertThat( $output, is( htmlPiece( havingChild(
 			tagMatchingOutline( "<input name='value'/>" )
 		) ) ) );
-		$this->assertHtmlContainsSubmitControl( $output );
 
+		$this->assertHtmlContainsSubmitControl( $output );
 	}
 
 	public function testRenderWithOneSubpageValue_TreatsValueAsItemIdAndShowsOnlyTermInputField() {

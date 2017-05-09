@@ -130,7 +130,6 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		);
 
 		$this->builders = array_merge( $this->builders, $entityRdfBuilders );
-
 	}
 
 	/**

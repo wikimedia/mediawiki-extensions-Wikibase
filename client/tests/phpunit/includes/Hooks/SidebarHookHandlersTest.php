@@ -119,7 +119,6 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 			$settings->getSetting( 'otherProjectsLinksBeta' ),
 			$settings->getSetting( 'otherProjectsLinksByDefault' )
 		);
-
 	}
 
 	private function primeParserOutput( ParserOutput $parserOutput, array $pageProps, array $extensionData ) {

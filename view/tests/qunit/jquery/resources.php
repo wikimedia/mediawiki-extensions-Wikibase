@@ -15,7 +15,6 @@ return call_user_func( function() {
 	);
 
 	return array(
-
 		'jquery.removeClassByRegex.tests' => $moduleBase + array(
 			'scripts' => array(
 				'jquery.removeClassByRegex.tests.js',
@@ -51,7 +50,5 @@ return call_user_func( function() {
 				'jquery.util.getDirectionality',
 			),
 		),
-
 	);
-
 } );

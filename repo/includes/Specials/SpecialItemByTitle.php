@@ -79,7 +79,6 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
 		$this->groups = $siteLinkGroups;
-
 	}
 
 	/**

@@ -15,8 +15,7 @@ return call_user_func( function() {
 		'remoteExtPath' => $remoteExtPathParts[1],
 	);
 
-	$modules = array(
-
+	return array(
 		'jquery.wikibase.entitysearch.tests' => $moduleBase + array(
 			'scripts' => array(
 				'jquery.wikibase/jquery.wikibase.entitysearch.tests.js',
@@ -57,9 +56,5 @@ return call_user_func( function() {
 				'wikibase.tests.qunit.testrunner',
 			),
 		),
-
 	);
-
-	return $modules;
-
 } );

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
@@ -15,7 +16,6 @@ return call_user_func( function() {
 	);
 
 	return array(
-
 		'wikibase.formatters.ApiValueFormatter' => $moduleTemplate + array(
 			'scripts' => array(
 				'ApiValueFormatter.js',
@@ -37,7 +37,5 @@ return call_user_func( function() {
 				'wikibase.ValueFormatterFactory'
 			),
 		),
-
 	);
-
 } );

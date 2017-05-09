@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
@@ -12,7 +13,7 @@ return call_user_func( function() {
 		'remoteExtPath' => '..' . $remoteExtPath[0],
 	);
 
-	$modules = array(
+	return array(
 		'wikibase.RepoApi' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.RepoApi.js',
@@ -22,6 +23,7 @@ return call_user_func( function() {
 				'wikibase.api.RepoApi',
 			),
 		),
+
 		'wikibase.RepoApiError' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.RepoApiError.js',
@@ -32,7 +34,4 @@ return call_user_func( function() {
 			),
 		),
 	);
-
-	return $modules;
-
 } );

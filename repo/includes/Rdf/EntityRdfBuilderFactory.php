@@ -55,7 +55,6 @@ class EntityRdfBuilderFactory {
 			$mentionedEntityTracker,
 			$dedupe
 		);
-
 	}
 
 	/**

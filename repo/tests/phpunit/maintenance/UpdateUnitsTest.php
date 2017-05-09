@@ -148,7 +148,6 @@ class UpdateUnitsTest extends MediaWikiLangTestCase {
 
 		$convertedUnit = $this->script->convertDerivedUnit( $reconverted, $converted );
 		$this->assertEquals( $expected, $convertedUnit );
-
 	}
 
 }

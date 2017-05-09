@@ -15,8 +15,7 @@ return call_user_func( function() {
 		'remoteExtPath' => $remoteExtPathParts[1],
 	);
 
-	$modules = array(
-
+	return array(
 		'jquery.wikibase.siteselector.tests' => $moduleBase + array(
 			'scripts' => array(
 				'jquery.wikibase.siteselector.tests.js',
@@ -35,9 +34,5 @@ return call_user_func( function() {
 				'jquery.wikibase.wbtooltip',
 			),
 		),
-
 	);
-
-	return $modules;
-
 } );
