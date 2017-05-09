@@ -82,17 +82,14 @@ class MovePageNotice {
 	 *
 	 * @return bool
 	 */
-	public function doSpecialMovepageAfterMove( MovePageForm $movePage, Title &$oldTitle,
-		Title &$newTitle ) {
-
-		$html = $this->getPageMoveNoticeHtml(
-			$oldTitle,
-			$newTitle
-		);
-
+	public function doSpecialMovepageAfterMove(
+		MovePageForm $movePage,
+		Title &$oldTitle,
+		Title &$newTitle
+	) {
 		$out = $movePage->getOutput();
 		$out->addModules( 'wikibase.client.page-move' );
-		$out->addHTML( $html );
+		$out->addHTML( $this->getPageMoveNoticeHtml( $oldTitle, $newTitle ) );
 	}
 
 	/**
