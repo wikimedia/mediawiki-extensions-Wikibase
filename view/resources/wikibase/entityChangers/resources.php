@@ -14,7 +14,6 @@ return call_user_func( function() {
 	);
 
 	return array(
-
 		'wikibase.entityChangers.__namespace' => $moduleTemplate + array(
 			'scripts' => array(
 				'namespace.js',
@@ -112,7 +111,5 @@ return call_user_func( function() {
 				'wikibase.api.RepoApiError',
 			)
 		),
-
 	);
-
 } );

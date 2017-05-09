@@ -50,7 +50,6 @@ class EditActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 
 		$handler = EditActionHookHandler::newFromGlobalState( $context );
 		$this->assertInstanceOf( EditActionHookHandler::class, $handler );
-
 	}
 
 	public function handleProvider() {

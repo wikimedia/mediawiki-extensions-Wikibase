@@ -44,7 +44,6 @@ class TestDispatchCoordinator extends Maintenance {
 		);
 		$this->addOption( 'lock', 'Name of the lock manager to test', false, true, 'l' );
 		$this->addOption( 'number', 'Number of tries for a lock manager', false, true, 'n' );
-
 	}
 
 	/**

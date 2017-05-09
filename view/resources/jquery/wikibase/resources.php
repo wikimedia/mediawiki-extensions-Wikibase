@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
@@ -15,7 +16,6 @@ return call_user_func( function() {
 	);
 
 	$modules = array(
-
 		'jquery.wikibase.aliasesview' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase.aliasesview.js',
@@ -444,7 +444,6 @@ return call_user_func( function() {
 			),
 			'targets' => array( 'desktop', 'mobile' ),
 		),
-
 	);
 
 	return array_merge(
@@ -452,5 +451,4 @@ return call_user_func( function() {
 		include __DIR__ . '/snakview/resources.php',
 		include __DIR__ . '/toolbar/resources.php'
 	);
-
 } );

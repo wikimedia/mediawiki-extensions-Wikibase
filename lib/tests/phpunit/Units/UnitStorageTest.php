@@ -50,7 +50,6 @@ class UnitStorageTest extends MediaWikiTestCase {
 		$this->assertArraySubset( [ 'factor' => '0.0000000000000000000243885945', 'unit' => 'Q3' ],
 			$storage->getConversion( 'Q4' ) );
 		$this->assertNull( $storage->getConversion( 'Q5' ) );
-
 	}
 
 	/**

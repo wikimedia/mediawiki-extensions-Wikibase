@@ -15,8 +15,7 @@ return call_user_func( function() {
 		'remoteExtPath' => $remoteExtPathParts[1],
 	);
 
-	$modules = array(
-
+	return array(
 		'wikibase.store.CachingEntityStore.tests' => $moduleBase + array(
 			'scripts' => array(
 				'store.CachingEntityStore.tests.js',
@@ -36,9 +35,5 @@ return call_user_func( function() {
 				'wikibase.store.EntityStore',
 			),
 		),
-
 	);
-
-	return $modules;
-
 } );

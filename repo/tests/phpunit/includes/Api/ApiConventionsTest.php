@@ -142,7 +142,6 @@ class ApiConventionsTest extends \MediaWikiTestCase {
 				);
 			}
 		}
-
 	}
 
 }

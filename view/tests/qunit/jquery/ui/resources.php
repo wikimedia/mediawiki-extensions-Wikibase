@@ -13,8 +13,7 @@ return call_user_func( function() {
 		'remoteExtPath' => $remoteExtPathParts[1],
 	);
 
-	$modules = array(
-
+	return array(
 		'jquery.ui.closeable.tests' => $moduleBase + array(
 			'scripts' => array(
 				'jquery.ui.closeable.tests.js',
@@ -52,9 +51,5 @@ return call_user_func( function() {
 				'wikibase.templates',
 			),
 		),
-
 	);
-
-	return $modules;
-
 } );

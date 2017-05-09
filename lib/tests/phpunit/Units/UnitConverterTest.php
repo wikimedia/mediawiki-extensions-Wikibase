@@ -74,7 +74,6 @@ class UnitConverterTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertStringStartsWith( '+13.70295', $qConverted->getAmount()->getValue(), 'Wrong amount' );
 		$this->assertEquals( 'http://acme.test/Q345', $qConverted->getUnit(), 'Wrong unit' );
-
 	}
 
 	public function testBounds() {

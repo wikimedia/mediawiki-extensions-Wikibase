@@ -13,8 +13,7 @@ return call_user_func( function() {
 		'remoteExtPath' => '..' . $remoteExtPath[0]
 	);
 
-	$modules = array(
-
+	return array(
 		'wikibase.entityIdFormatter.testEntityIdHtmlFormatter' => $moduleTemplate + array(
 			'scripts' => array(
 				'testEntityIdHtmlFormatter.js',
@@ -43,9 +42,5 @@ return call_user_func( function() {
 				'wikibase.entityIdFormatter.DataValueBasedEntityIdPlainFormatter',
 			),
 		),
-
 	);
-
-	return $modules;
-
 } );

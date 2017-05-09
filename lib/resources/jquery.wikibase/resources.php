@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
@@ -14,8 +15,7 @@ return call_user_func( function() {
 		'remoteExtPath' => '..' . $remoteExtPath[0],
 	);
 
-	$modules = array(
-
+	return array(
 		'jquery.wikibase.siteselector' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase.siteselector.js',
@@ -41,9 +41,5 @@ return call_user_func( function() {
 				'wikibase.buildErrorOutput',
 			),
 		),
-
 	);
-
-	return $modules;
-
 } );

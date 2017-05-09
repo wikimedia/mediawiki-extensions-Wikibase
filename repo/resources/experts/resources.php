@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
@@ -15,7 +16,6 @@ return call_user_func( function() {
 	);
 
 	return array(
-
 		'wikibase.experts.__namespace' => $moduleTemplate + array(
 			'scripts' => array(
 				'__namespace.js'
@@ -86,5 +86,4 @@ return call_user_func( function() {
 			),
 		),
 	);
-
 } );

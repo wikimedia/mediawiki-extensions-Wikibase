@@ -150,7 +150,6 @@ class AddUnitConversions extends Maintenance {
 			$this->processUnit( $unit );
 			$this->writeOut();
 		}
-
 	}
 
 	/**
@@ -347,7 +346,6 @@ QUERY;
 
 		return new RdfVocabulary( $baseUri, $entityDataTitle->getCanonicalURL() . '/', [],
 			$typeUris, [] );
-
 	}
 
 	/**
