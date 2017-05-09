@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_99697b20",
+        "filename": "repo/includes/Specials/SpecialWikibaseRepoPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-09T13:46:59Z",
+      "side": 1,
+      "message": "I would feel a bit better if we could extract this string to a protected \"getCopyrightMessageName\" method, and override this in the subclass, instead of allowing subclasses to use the $copyrightView directly.",
+      "range": {
+        "startLine": 163,
+        "startChar": 15,
+        "endLine": 163,
+        "endChar": 71
+      },
+      "revId": "768f22481b48720829da147d059c64a71b16dc29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
