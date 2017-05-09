@@ -114,6 +114,7 @@
 	"wikibase-otherprojects-beta-message": "نوار کناری سایر پروژه‌ها",
 	"wikibase-otherprojects-beta-description": "یک قسمت «{{int:wikibase-otherprojects}}» به نوار کناری می‌افزاید که پیوندهایی به دیگر پروژه‌های ویکی‌مدیا واقع‌شده در داده‌های {{WBREPONAME}} می‌دهد.",
 	"echo-category-title-wikibase-action": "تماس با {{WBREPONAME}}",
+	"notification-header-page-connection": "صفحه <strong>$3</strong> به یک آیتم در {{WBREPONAME}} {{GENDER:$2|متصل شد}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|نمایش}} آیتم",
 	"notification-subject-page-connection": "صفحه‌ای در {{SITENAME}} که شما {{GENDER:$3|ایجاد کردید}} به آیتم {{WBREPONAME}} {{GENDER:$2|متصل بود}}",
 	"unresolved-property-category": "صفحات با خصوصیات نامشخص"

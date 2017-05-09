@@ -12,6 +12,7 @@
 	"tooltip-t-wikibase": "Link na povezane podatke spremišnih stavki",
 	"wikibase-after-page-move": "Također biste trebali ažurirati [$1 pridruženu stavku na {{GRAMMAR:dativ|{{WBREPONAME}}}}] radi održavanja jezičkih veza na premještenoj stranici.",
 	"wikibase-after-page-move-queued": "[$1 {{WBREPONAME}} stavka] povezana s ovom stranicom bit će automatski ažurirana. Imajte na umu da se ovo ponekad ne dogodi momentalno.",
+	"wikibase-after-page-delete": "Također biste trebali ukloniti link ka ovoj stranici s [$1 povezane stavke na {{GRAMMAR:dativ|{{WBREPONAME}}}}] radi održavanja jezičkih linkova.",
 	"wikibase-after-page-delete-queued": "[$1 {{WBREPONAME}} stavka] povezana s ovom stranicom bit će automatski ažurirana. Imajte na umu da se ovo ponekad ne dogodi momentalno.",
 	"wikibase-comment-remove": "Pridružena stavka na {{GRAMMAR:dativ|{{WBREPONAME}}}} je obrisana. Jezičke veze su uklonjene.",
 	"wikibase-comment-linked": "Stavka na {{GRAMMAR:dativ|{{WBREPONAME}}}} je povezana s ovom stranicom.",
