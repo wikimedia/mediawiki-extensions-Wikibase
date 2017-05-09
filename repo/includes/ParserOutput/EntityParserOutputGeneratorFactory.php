@@ -135,8 +135,8 @@ class EntityParserOutputGeneratorFactory {
 	 * @return EntityParserOutputGenerator
 	 */
 	public function getEntityParserOutputGenerator( $userLanguageCode, $editable ) {
-
 		$userLanguage = Language::factory( $userLanguageCode );
+
 		return new EntityParserOutputGenerator(
 			$this->entityViewFactory,
 			$this->newParserOutputJsConfigBuilder(),

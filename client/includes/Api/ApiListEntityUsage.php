@@ -69,7 +69,6 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		self::addTitleInfo( $pageData, $title );
 		$pageData['pageid'] = (int)$row->page_id;
 		return $pageData;
-
 	}
 
 	/**

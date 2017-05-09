@@ -67,7 +67,6 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 	 * @return string[] wiki IDs of wikis subscribed to the given entity
 	 */
 	public function getSubscribers( EntityId $idToCheck ) {
-
 		$where = [ 'cs_entity_id' => $idToCheck->getSerialization() ];
 		$dbr = $this->dbLoadBalancer->getConnection( DB_REPLICA );
 

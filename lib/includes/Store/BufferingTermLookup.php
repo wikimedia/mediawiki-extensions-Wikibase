@@ -160,8 +160,8 @@ class BufferingTermLookup extends EntityTermLookupBase implements PrefetchingTer
 	 *         Use stripUndefinedTerms() to remove these.
 	 */
 	private function getBufferedTerms( EntityId $entityId, $termType, array $languageCodes ) {
-
 		$terms = array();
+
 		foreach ( $languageCodes as $lang ) {
 			$term = $this->getPrefetchedTerm( $entityId, $termType, $lang );
 
