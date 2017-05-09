@@ -400,11 +400,12 @@ abstract class EntityContent extends AbstractContent {
 	 * @return string
 	 */
 	public function getTextForSummary( $maxLength = 250 ) {
+		global $wgLang;
+
 		if ( $this->isRedirect() ) {
 			return $this->getRedirectText();
 		}
 
-		global $wgLang;
 		$entity = $this->getEntity();
 
 		if ( $entity instanceof DescriptionsProvider ) {

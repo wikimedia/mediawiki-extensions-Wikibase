@@ -36,8 +36,8 @@ class ParserOutputUpdateHookHandlers {
 	 */
 	public static function newFromGlobalState() {
 		global $wgLang;
-		StubUserLang::unstub( $wgLang );
 
+		StubUserLang::unstub( $wgLang );
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		return new self(

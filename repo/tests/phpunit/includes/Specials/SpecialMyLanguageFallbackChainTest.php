@@ -27,6 +27,7 @@ class SpecialMyLanguageFallbackChainTest extends SpecialPageTestBase {
 
 	public function testExecute() {
 		global $wgLanguageCode;
+
 		list( $output, ) = $this->executeSpecialPage( '' );
 
 		$expectedString = $wgLanguageCode . ' - ';

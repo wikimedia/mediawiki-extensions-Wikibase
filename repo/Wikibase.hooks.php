@@ -69,8 +69,8 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onSetupAfterCache() {
-		global $wgNamespaceContentModels;
-		global $wgContentHandlers;
+		global $wgContentHandlers,
+			$wgNamespaceContentModels;
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$namespaces = WikibaseRepo::buildEntityNamespaceConfigurations();

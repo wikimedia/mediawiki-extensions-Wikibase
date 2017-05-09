@@ -67,10 +67,21 @@ if ( !defined( 'WBL_VERSION' ) ) {
 }
 
 call_user_func( function() {
-	global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgHooks, $wgExtensionFunctions;
-	global $wgAPIListModules, $wgAPIMetaModules, $wgAPIPropModules, $wgSpecialPages;
-	global $wgResourceModules, $wgWBClientSettings, $wgRecentChangesFlags, $wgMessagesDirs;
-	global $wgJobClasses, $wgTrackingCategories, $wgWBClientDataTypes;
+	global $wgAPIListModules,
+		$wgAPIMetaModules,
+		$wgAPIPropModules,
+		$wgExtensionCredits,
+		$wgExtensionFunctions,
+		$wgExtensionMessagesFiles,
+		$wgHooks,
+		$wgJobClasses,
+		$wgMessagesDirs,
+		$wgRecentChangesFlags,
+		$wgResourceModules,
+		$wgSpecialPages,
+		$wgTrackingCategories,
+		$wgWBClientDataTypes,
+		$wgWBClientSettings;
 
 	$wgExtensionCredits['wikibase'][] = array(
 		'path' => __DIR__,

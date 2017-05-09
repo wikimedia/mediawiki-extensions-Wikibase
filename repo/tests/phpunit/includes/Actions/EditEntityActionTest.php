@@ -888,6 +888,7 @@ class EditEntityActionTest extends ActionTestCase {
 
 	private function getEditToken() {
 		global $wgUser;
+
 		return $wgUser->getEditToken();
 	}
 

@@ -139,14 +139,15 @@ class ActionTestCase extends \MediaWikiTestCase {
 	 * @return Action
 	 */
 	protected function createAction( $action, WikiPage $page, array $params = null, $post = false, $session = null ) {
-		global $wgUser,$wgLang;
+		global $wgLang,
+			$wgRequest,
+			$wgUser;
 
 		if ( $params == null ) {
 			$params = array();
 		}
 
 		if ( $session == null ) {
-			global $wgRequest;
 			$session = $wgRequest->getSessionArray();
 		}
 
@@ -213,8 +214,8 @@ class ActionTestCase extends \MediaWikiTestCase {
 	 * @param array|null $session optional session data
 	 */
 	protected function setUser( User $user, array $session = null ) {
-		global $wgUser;
-		global $wgRequest;
+		global $wgRequest,
+			$wgUser;
 
 		if ( $user->getName() != $wgUser->getName() ) {
 			$wgUser = $user;

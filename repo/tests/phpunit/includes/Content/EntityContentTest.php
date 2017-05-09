@@ -51,8 +51,8 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	protected function tearDown() {
-		global $wgGroupPermissions;
-		global $wgUser;
+		global $wgGroupPermissions,
+			$wgUser;
 
 		$wgGroupPermissions = $this->originalGroupPermissions;
 

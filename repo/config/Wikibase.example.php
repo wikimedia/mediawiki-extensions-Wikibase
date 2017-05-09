@@ -17,8 +17,11 @@ if ( !defined( 'WB_VERSION' ) ) {
 }
 
 call_user_func( function() {
-	global $wgContentHandlerUseDB, $wgExtraNamespaces, $wgWBRepoSettings;
-	global $wgDBname, $wgNamespacesToBeSearchedDefault;
+	global $wgContentHandlerUseDB,
+		$wgDBname,
+		$wgExtraNamespaces,
+		$wgNamespacesToBeSearchedDefault,
+		$wgWBRepoSettings;
 
 	$wgContentHandlerUseDB = true;
 

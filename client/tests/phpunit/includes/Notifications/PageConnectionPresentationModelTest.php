@@ -75,6 +75,7 @@ class PageConnectionPresentationModelTest extends MediaWikiTestCase {
 
 	public function testPresentationModel() {
 		global $wgEchoNotifications, $wgEchoNotificationCategories, $wgEchoNotificationIcons;
+
 		$handlers = new EchoNotificationsHandlers(
 			$this->repoLinker, 'enwiki', true, false, 'repoSiteName'
 		);

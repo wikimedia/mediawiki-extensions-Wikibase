@@ -72,11 +72,21 @@ if ( !defined( 'WIKIBASE_VIEW_VERSION' ) ) {
 }
 
 call_user_func( function() {
-	global $wgExtensionCredits, $wgGroupPermissions, $wgGrantPermissions, $wgAvailableRights;
-	global $wgExtensionMessagesFiles, $wgMessagesDirs;
-	global $wgAPIModules, $wgAPIListModules, $wgSpecialPages, $wgHooks;
-	global $wgWBRepoSettings, $wgResourceModules, $wgValueParsers, $wgJobClasses;
-	global $wgWBRepoDataTypes;
+	global $wgAPIListModules,
+		$wgAPIModules,
+		$wgAvailableRights,
+		$wgExtensionCredits,
+		$wgExtensionMessagesFiles,
+		$wgGrantPermissions,
+		$wgGroupPermissions,
+		$wgHooks,
+		$wgJobClasses,
+		$wgMessagesDirs,
+		$wgResourceModules,
+		$wgSpecialPages,
+		$wgValueParsers,
+		$wgWBRepoDataTypes,
+		$wgWBRepoSettings;
 
 	$wgExtensionCredits['wikibase'][] = array(
 		'path' => __DIR__,
@@ -737,6 +747,7 @@ call_user_func( function() {
 	};
 	$wgSpecialPages['ItemDisambiguation'] = function() {
 		global $wgLang;
+
 		$languageCode = $wgLang->getCode();
 		$wikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
 		$languageNameLookup = new Wikibase\Lib\LanguageNameLookup( $languageCode );
@@ -903,7 +914,9 @@ call_user_func( function() {
 	};
 	$wgSpecialPages['MergeItems'] = function() {
 		global $wgUser;
+
 		$wikibaseRepo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+
 		return new Wikibase\Repo\Specials\SpecialMergeItems(
 			$wikibaseRepo->getEntityIdParser(),
 			$wikibaseRepo->getExceptionLocalizer(),
@@ -914,6 +927,7 @@ call_user_func( function() {
 	};
 	$wgSpecialPages['RedirectEntity'] = function() {
 		global $wgUser;
+
 		$wikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
 
 		return new Wikibase\Repo\Specials\SpecialRedirectEntity(
