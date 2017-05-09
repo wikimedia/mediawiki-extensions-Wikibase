@@ -75,7 +75,6 @@ class ParserOutputUpdateHookHandlers {
 		LangLinkHandler $langLinkHandler,
 		ClientParserOutputDataUpdater $parserOutputDataUpdater
 	) {
-
 		$this->namespaceChecker = $namespaceChecker;
 		$this->langLinkHandler = $langLinkHandler;
 		$this->parserOutputDataUpdater = $parserOutputDataUpdater;

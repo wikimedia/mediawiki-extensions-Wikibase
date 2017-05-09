@@ -90,7 +90,6 @@ class ListSubscribers extends ApiQueryBase {
 	 * @return ResultWrapper
 	 */
 	public function doQuery( array $idStrings, $continue, $limit ) {
-
 		$this->addFields( [
 			'cs_entity_id',
 			'cs_subscriber_id',

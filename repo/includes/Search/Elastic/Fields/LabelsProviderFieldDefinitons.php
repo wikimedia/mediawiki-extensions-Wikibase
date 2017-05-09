@@ -22,7 +22,6 @@ class LabelsProviderFieldDefinitions implements FieldDefinitions {
 	 * @return WikibaseIndexField[]
 	 */
 	public function getFields() {
-
 		$fields['label_count'] = new LabelCountField();
 		$fields['labels'] = new LabelsField( $this->languageCodes );
 		$fields['labels_all'] = new AllLabelsField();

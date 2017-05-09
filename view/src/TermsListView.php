@@ -94,7 +94,6 @@ class TermsListView {
 			htmlspecialchars( $this->textProvider->get( 'wikibase-entitytermsforlanguagelistview-aliases' ) ),
 			$contentHtml
 		);
-
 	}
 
 	/**

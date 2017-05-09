@@ -34,7 +34,6 @@ class TermsListViewTest extends PHPUnit_Framework_TestCase {
 		$languageNameCalls = 0,
 		LocalizedTextProvider $textProvider = null
 	) {
-
 		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->exactly( $languageNameCalls ) )
 			->method( 'getName' )
