@@ -27,7 +27,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	/**
 	 * @var SpecialPageCopyrightView
 	 */
-	private $copyrightView;
+	protected $copyrightView;
 
 	/**
 	 * @var SummaryFormatter
