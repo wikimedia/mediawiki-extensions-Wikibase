@@ -303,5 +303,4 @@ return call_user_func( function() {
 		include __DIR__ . '/snakview/resources.php',
 		include __DIR__ . '/toolbar/resources.php'
 	);
-
 } );

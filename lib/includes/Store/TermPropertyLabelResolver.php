@@ -118,7 +118,6 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 		$this->cache->set( $this->cacheKey, $this->propertiesByLabel, $this->cacheDuration );
 
 		return $this->propertiesByLabel;
-
 	}
 
 	protected function loadProperties() {

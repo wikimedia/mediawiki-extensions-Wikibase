@@ -178,7 +178,6 @@ class ListSubscribers extends ApiQueryBase {
 			$currentEntity = $row->cs_entity_id;
 
 		}
-
 	}
 
 	/**

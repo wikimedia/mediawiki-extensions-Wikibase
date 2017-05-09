@@ -122,7 +122,6 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 		$usageTable->pruneUsages( 23 );
 
 		$this->assertUsageTableDoesNotContain( $rows );
-
 	}
 
 	public function testRemoveUsages() {

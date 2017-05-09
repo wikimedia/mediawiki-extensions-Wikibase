@@ -54,12 +54,10 @@ return call_user_func( function() {
 				'wikibase',
 			),
 		),
-
 	);
 
 	return array_merge(
 		$modules,
 		include __DIR__ . '/jquery.wikibase/resources.php'
 	);
-
 } );

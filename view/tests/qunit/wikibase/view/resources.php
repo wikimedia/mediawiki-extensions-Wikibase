@@ -13,8 +13,7 @@ return call_user_func( function() {
 		'remoteExtPath' => '..' . $remoteExtPath[0]
 	);
 
-	$modules = array(
-
+	return array(
 		'wikibase.view.testViewController' => $moduleTemplate + array(
 			'scripts' => array(
 				'testViewController.js',
@@ -62,9 +61,5 @@ return call_user_func( function() {
 				'wikibase.view.ToolbarFactory',
 			)
 		),
-
 	);
-
-	return $modules;
-
 } );

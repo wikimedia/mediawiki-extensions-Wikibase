@@ -65,7 +65,6 @@ class EmptyEditSectionGeneratorTest extends PHPUnit_Framework_TestCase {
 			'',
 			$generator->getSiteLinksEditSection( $entityId )
 		);
-
 	}
 
 	public function getSiteLinksEditSectionProvider() {
@@ -84,7 +83,6 @@ class EmptyEditSectionGeneratorTest extends PHPUnit_Framework_TestCase {
 			'',
 			$generator->getStatementEditSection( $statement )
 		);
-
 	}
 
 	public function getStatementEditSection() {

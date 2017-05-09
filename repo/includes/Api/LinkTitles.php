@@ -85,7 +85,6 @@ class LinkTitles extends ApiBase {
 		$this->revisionLookup = $revisionLookup;
 		$this->resultBuilder = $resultBuilderInstantiator( $this );
 		$this->entitySavingHelper = $entitySavingHelperInstantiator( $this );
-
 	}
 
 	/**

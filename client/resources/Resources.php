@@ -21,6 +21,7 @@ return call_user_func( function() {
 				'wikibase.api.getLocationAgnosticMwApi',
 			)
 		),
+
 		'wikibase.client.init' => $moduleTemplate + array(
 			'position' => 'top',
 			'skinStyles' => array(
@@ -32,17 +33,21 @@ return call_user_func( function() {
 				)
 			),
 		),
+
 		'wikibase.client.currentSite' => $moduleTemplate + array(
 			'class' => SiteModule::class
 		),
+
 		'wikibase.client.page-move' => $moduleTemplate + array(
 			'position' => 'top',
 			'styles' => 'wikibase.client.page-move.css'
 		),
+
 		'wikibase.client.changeslist.css' => $moduleTemplate + array(
 			'position' => 'top',
 			'styles' => 'wikibase.client.changeslist.css'
 		),
+
 		'wikibase.client.linkitem.init' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.client.linkitem.init.js'
@@ -55,6 +60,7 @@ return call_user_func( function() {
 				'mediawiki.notify'
 			),
 		),
+
 		'wikibase.client.PageConnector' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.client.PageConnector.js'
@@ -63,6 +69,7 @@ return call_user_func( function() {
 				'wikibase.sites'
 			),
 		),
+
 		'jquery.wikibase.linkitem' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase/jquery.wikibase.linkitem.js'
@@ -106,6 +113,7 @@ return call_user_func( function() {
 				'wikibase-sitelinks-link-columnheading'
 			),
 		),
+
 		'wikibase.client.action.edit.collapsibleFooter' => $moduleTemplate + [
 			'scripts' => 'wikibase.client.action.edit.collapsibleFooter.js',
 			'dependencies' => [
@@ -115,5 +123,4 @@ return call_user_func( function() {
 			],
 		]
 	);
-
 } );
