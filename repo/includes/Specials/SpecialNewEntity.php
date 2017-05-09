@@ -207,7 +207,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 * @return string HTML
 	 */
 	protected function getCopyrightHTML() {
-		return $this->copyrightView->getHtml( $this->getLanguage(), 'wikibase-newentity-submit' );
+		parent::getCopyrightHTML( 'wikibase-newentity-submit' );
 	}
 
 	/**
