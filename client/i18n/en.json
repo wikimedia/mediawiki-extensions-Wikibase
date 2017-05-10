@@ -112,6 +112,7 @@
 	"wikibase-pageinfo-entity-usage-S": "Sitelink",
 	"wikibase-pageinfo-entity-usage-L": "Label: $1",
 	"wikibase-pageinfo-entity-usage-T": "Title",
+	"wikibase-pageinfo-entity-usage-C": "Statement: $1",
 	"wikibase-pageinfo-entity-usage-X": "All entity data",
 	"wikibase-pageinfo-entity-usage-O": "Other (Statements)",
 	"wikibase-property-render-error": "Failed to render property $1: $2",
