@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e1cb3f9_872d8543",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-10T18:36:20Z",
+      "side": 1,
+      "message": "Please use setters instead of optional boolean parameters.",
+      "revId": "6384acf172c6f97660759fdcd07f344db1fc989e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_27e119fc",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-10T18:36:20Z",
+      "side": 1,
+      "message": "This check can and should be dropped if we read and write full IDs!",
+      "revId": "6384acf172c6f97660759fdcd07f344db1fc989e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_e7eb21da",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-10T18:36:20Z",
+      "side": 1,
+      "message": "This should use the full ID if possible (that is, if readFullEntityIdColumn is enabled).",
+      "revId": "6384acf172c6f97660759fdcd07f344db1fc989e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_006c0398",
         "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
         "patchSetId": 4
@@ -42,6 +93,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_27b839e2",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-10T18:36:20Z",
+      "side": 1,
+      "message": "Yes, \"read\" means \"use in where\" as well as \"use in select\". That includes deletion. \"write\" means \"set field on insert\".",
+      "parentUuid": "0e1cb3f9_00f3a3e4",
+      "range": {
+        "startLine": 420,
+        "startChar": 14,
+        "endLine": 420,
+        "endChar": 37
+      },
+      "revId": "6384acf172c6f97660759fdcd07f344db1fc989e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_93d70ff2",
         "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
         "patchSetId": 4
@@ -53,6 +128,24 @@
       "writtenOn": "2017-05-10T13:14:03Z",
       "side": 1,
       "message": "Also I wonder whether the condition for the \"flag is on\" case shouldn\u0027t rather just check the full id? As in, flag is on, so we assume it is set for all rows, so we don\u0027t bother with the fallback to numeric id.",
+      "revId": "6384acf172c6f97660759fdcd07f344db1fc989e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_e7d2412c",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-10T18:36:20Z",
+      "side": 1,
+      "message": "Even more: if the read flag is on, the old fields may no longer exist in the database!",
+      "parentUuid": "0e1cb3f9_93d70ff2",
       "revId": "6384acf172c6f97660759fdcd07f344db1fc989e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -76,6 +169,23 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_87bd8565",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-10T18:36:20Z",
+      "side": 1,
+      "message": "Please add a blank line here, to make the indent less confusing visually.",
+      "revId": "6384acf172c6f97660759fdcd07f344db1fc989e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_f3f1ab93",
         "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
         "patchSetId": 4
@@ -87,6 +197,41 @@
       "writtenOn": "2017-05-10T13:14:03Z",
       "side": 1,
       "message": "Shouldn\u0027t this avoid to directly call EntityId::joinSerialization? Shouldn\u0027t the class assume the id parser injected in the constructor is configured so it would add the required prefix?\nIt might get tricky, I guess. Might need some further thought.",
+      "revId": "6384acf172c6f97660759fdcd07f344db1fc989e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_47768dd6",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 875,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-10T18:36:20Z",
+      "side": 1,
+      "message": "Hm... my inclination is to say that this should just parse $termRow-\u003eterm_full_entity_id, and not add the repo name, because the IdParser should have the correct knowledge about prefix mappings.\n\nThat\u0027S a bit confusing, because the EntityIdComposer does *not* have that knowledge, and needs the repo name to be passed in. Maybe that should be changed?...\n\nWe should take good care not to introduce the possibility of nasty inconsistencies here.",
+      "parentUuid": "0e1cb3f9_f3f1ab93",
+      "revId": "6384acf172c6f97660759fdcd07f344db1fc989e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_474d2d9a",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-10T18:36:20Z",
+      "side": 1,
+      "message": "only needed when $this-\u003ereadFullEntityIdColumn is false",
       "revId": "6384acf172c6f97660759fdcd07f344db1fc989e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
