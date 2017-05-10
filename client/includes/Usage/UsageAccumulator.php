@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Usage;
 
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * Interface and base class for objects accumulating usage tracking information for a given page.
@@ -47,6 +48,16 @@ abstract class UsageAccumulator {
 	 */
 	public function addSiteLinksUsage( EntityId $id ) {
 		$this->addUsage( new EntityUsage( $id, EntityUsage::SITELINK_USAGE ) );
+	}
+
+	/**
+	 * Registers the usage of statements from an entity (identified by their property id).
+	 *
+	 * @param EntityId $id
+	 * @param PropertyId $propertyId The PropertyId of Statements that are used.
+	 */
+	public function addStatementUsage( EntityId $id, PropertyId $propertyId ) {
+		$this->addUsage( new EntityUsage( $id, EntityUsage::STATEMENT_USAGE, $propertyId->getSerialization() ) );
 	}
 
 	/**
