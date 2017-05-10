@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_006c0398",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-10T13:14:03Z",
+      "side": 1,
+      "message": "deleteTermsOfEntity has a flag check, shouldn\u0027t this too have a conditional to pick right column(s) to WHERE?",
+      "revId": "6384acf172c6f97660759fdcd07f344db1fc989e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_00f3a3e4",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-10T13:14:03Z",
+      "side": 1,
+      "message": "shouldn\u0027t this check the other flag?\nI mean, write flag only means \"there is full id column, fill it when writing new data\". Even if the flag is on, there might be rows with the numeric column set only, in this case delete would skip them (which is wrong). Therefore I\u0027d rather check the other flag here, as it means \"there is data in full id column for all rows, so use it when reading term data\". Does it sounds about correct?",
+      "range": {
+        "startLine": 420,
+        "startChar": 14,
+        "endLine": 420,
+        "endChar": 37
+      },
+      "revId": "6384acf172c6f97660759fdcd07f344db1fc989e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_93d70ff2",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-10T13:14:03Z",
+      "side": 1,
+      "message": "Also I wonder whether the condition for the \"flag is on\" case shouldn\u0027t rather just check the full id? As in, flag is on, so we assume it is set for all rows, so we don\u0027t bother with the fallback to numeric id.",
+      "revId": "6384acf172c6f97660759fdcd07f344db1fc989e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_a047574f",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-10T13:14:03Z",
+      "side": 1,
+      "message": "you might have wanted to use $id-\u003egetLocalPart() ?",
+      "revId": "6384acf172c6f97660759fdcd07f344db1fc989e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_f3f1ab93",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 875,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-10T13:14:03Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this avoid to directly call EntityId::joinSerialization? Shouldn\u0027t the class assume the id parser injected in the constructor is configured so it would add the required prefix?\nIt might get tricky, I guess. Might need some further thought.",
+      "revId": "6384acf172c6f97660759fdcd07f344db1fc989e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_60d4df4b",
+        "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-10T13:14:03Z",
+      "side": 1,
+      "message": "import not needed?",
+      "revId": "6384acf172c6f97660759fdcd07f344db1fc989e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_80d9f385",
+        "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-10T13:14:03Z",
+      "side": 1,
+      "message": "is it needed to change this for this test?",
+      "revId": "6384acf172c6f97660759fdcd07f344db1fc989e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
