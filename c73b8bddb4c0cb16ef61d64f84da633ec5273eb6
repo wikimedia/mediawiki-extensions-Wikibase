@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_cba63150",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-10T09:02:38Z",
+      "side": 1,
+      "message": "As discussed in the other patch maybe it would be worth either having a strict \u003d\u003d\u003d true check here, or check that the value passed in the constructor is the boolean, to avoid magic.",
+      "revId": "c73b8bddb4c0cb16ef61d64f84da633ec5273eb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_eb821597",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-10T09:02:38Z",
+      "side": 1,
+      "message": "Does not matter much but this is also not needed for the full id case, is it?",
+      "range": {
+        "startLine": 401,
+        "startChar": 14,
+        "endLine": 401,
+        "endChar": 31
+      },
+      "revId": "c73b8bddb4c0cb16ef61d64f84da633ec5273eb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_4b71c1dc",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-10T09:02:38Z",
+      "side": 1,
+      "message": "This is not going to catch EntityIdParsingException (extending RuntimeException not InvalidArgumentException) if I get it right. I believe it should, although, yeah, I believe we can to far extent assume there is no invalid ids in the DB.\n\nIt is getting nastier here... Maybe have two try-catch blocks, each in the relevant if-else branch? That might be easier to see which exception is relevant to which case I think?",
+      "revId": "c73b8bddb4c0cb16ef61d64f84da633ec5273eb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_7d000c05",
+        "filename": "lib/tests/phpunit/Store/Sql/SqlEntityInfoBuilderTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-10T09:02:38Z",
+      "side": 1,
+      "message": "I am a bit confused by the use of PrefixMappingEntityIdParser here. Why is it needed? Is this the bit copied over from some other place?\n\nI\u0027ve changed all places in the test class to use BasicEntityIdParser instead of the prefix mapping one, and all seems OK (which is also what I would expect).\n\nI guess you could avoid using that parser and just use the simple one?",
+      "revId": "c73b8bddb4c0cb16ef61d64f84da633ec5273eb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_6ba0453f",
+        "filename": "lib/tests/phpunit/Store/Sql/SqlEntityInfoBuilderTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-10T09:02:38Z",
+      "side": 1,
+      "message": "? This parser would e.g. map en:Q123 to foo:Q123. Why this is needed here?",
+      "revId": "c73b8bddb4c0cb16ef61d64f84da633ec5273eb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
