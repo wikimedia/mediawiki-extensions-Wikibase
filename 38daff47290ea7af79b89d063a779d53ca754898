@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_d3990782",
+        "filename": "lib/tests/phpunit/Store/Sql/SqlEntityInfoBuilderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-10T13:02:37Z",
+      "side": 1,
+      "message": "That use is still left, is this intended? Seems also not needed to me.",
+      "revId": "38daff47290ea7af79b89d063a779d53ca754898",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
