@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_2780394b",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-10T17:54:23Z",
+      "side": 1,
+      "message": "boolean parameters are generally a thing to be avoided. Use strings, or constants, or setters... otherwise you end up with new Foo( true, false, false, true, false ). That very readable.",
+      "revId": "2e98d45036015adbdd697b24aee4ce3fe7453dd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_87f26502",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-10T17:54:23Z",
+      "side": 1,
+      "message": "This is missing \u0027term_entity_type\u0027 \u003d\u003e $entityType, I think.",
+      "revId": "2e98d45036015adbdd697b24aee4ce3fe7453dd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_47d3ed61",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-10T17:54:23Z",
+      "side": 1,
+      "message": "I\u0027d swap the nesting, putting the if/then/else into a single try with two catch clauses.\n\nIn general, try/catch blocks should be as *big* (and as far up the stack) as is sensible. For instance, since each catch contains a continue, you could just wrap the entire body of the for loop in a try/catch.\n\nSince the body is big, consider factoring it into a separate function, though. The try/catch can be inside the function or outside, around the call, depending on where you have better information for reporting. In general, I\u0027d go for having the try/catch outside the function, in the calling code, inside the loop.",
+      "revId": "2e98d45036015adbdd697b24aee4ce3fe7453dd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_675ab1fb",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-10T17:54:23Z",
+      "side": 1,
+      "message": "If you have a setter, you don\u0027t need the optional constructor argument.",
+      "revId": "2e98d45036015adbdd697b24aee4ce3fe7453dd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
