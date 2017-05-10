@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_2b56cd5f",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-10T08:00:04Z",
+      "side": 1,
+      "message": "no return?",
+      "revId": "0b8f86e4da1b318dd5d48c6e0e88b2ba1777ef2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
