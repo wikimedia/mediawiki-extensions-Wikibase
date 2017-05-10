@@ -16,6 +16,24 @@
       "revId": "0b8f86e4da1b318dd5d48c6e0e88b2ba1777ef2d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_6b7605d7",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-10T08:23:22Z",
+      "side": 1,
+      "message": "Whoops. Good catch!",
+      "parentUuid": "0e1cb3f9_2b56cd5f",
+      "revId": "0b8f86e4da1b318dd5d48c6e0e88b2ba1777ef2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
