@@ -84,7 +84,6 @@ class ToolbarEditSectionGenerator implements EditSectionGenerator {
 		$specialPageName,
 		array $specialPageUrlParams
 	) {
-
 		$editUrl = $this->getEditUrl( $specialPageName, $specialPageUrlParams );
 		$toolbarButton = $this->getToolbarButton( 'edit', $this->textProvider->get( 'wikibase-edit' ), $editUrl );
 

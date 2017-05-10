@@ -84,7 +84,7 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidNamespaceProvider
 	 */
 	public function testGetNamespaceWithInvalid_ThrowsException( array $settings, $entityType ) {
-	 	$repoLinker = $this->getRepoLinkerForSettings( $settings );
+		$repoLinker = $this->getRepoLinkerForSettings( $settings );
 		$this->setExpectedException( InvalidArgumentException::class );
 		$repoLinker->getNamespace( $entityType );
 	}

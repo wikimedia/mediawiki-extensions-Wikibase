@@ -93,7 +93,6 @@ class UnitConverter {
 	 * @return DecimalValue
 	 */
 	private function makeDecimalValue( $number ) {
-
 		if ( is_string( $number ) && $number !== '' ) {
 			if ( $number[0] !== '-' && $number[0] !== '+' ) {
 				$number = '+' . $number;

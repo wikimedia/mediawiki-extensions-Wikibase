@@ -93,7 +93,6 @@ class EditActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 	 * @return EditActionHookHandler
 	 */
 	private function newHookHandler( $entityId, IContextSource $context ) {
-
 		$repoLinker = $this->getMockBuilder( RepoLinker::class )
 			->disableOriginalConstructor()
 			->setMethods( [ 'buildEntityLink' ] )

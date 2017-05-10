@@ -89,7 +89,6 @@ class ItemMergeInteractor {
 		RedirectCreationInteractor $interactorRedirect,
 		EntityTitleStoreLookup $entityTitleLookup
 	) {
-
 		$this->changeOpFactory = $changeOpFactory;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityStore = $entityStore;
