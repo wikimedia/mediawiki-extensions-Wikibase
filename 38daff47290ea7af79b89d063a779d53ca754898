@@ -16,6 +16,24 @@
       "revId": "38daff47290ea7af79b89d063a779d53ca754898",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_13ac5f83",
+        "filename": "lib/tests/phpunit/Store/Sql/SqlEntityInfoBuilderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-10T13:07:49Z",
+      "side": 1,
+      "message": "I just forgot it, thanks for spotting.",
+      "parentUuid": "0e1cb3f9_d3990782",
+      "revId": "38daff47290ea7af79b89d063a779d53ca754898",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
