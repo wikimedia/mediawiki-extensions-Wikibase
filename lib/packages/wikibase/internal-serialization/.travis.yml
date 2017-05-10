@@ -15,7 +15,7 @@ matrix:
     - env: DM=~5.0
       php: 5.6
     - env: DM=~4.2
-      php: 7
+      php: 7.1
     - env: DM=~7.0
       php: hhvm
   exclude:
@@ -28,6 +28,12 @@ sudo: false
 install: travis_retry composer require "wikibase/data-model=$DM" --prefer-source
 
 script: composer ci
+
+after_success:
+  - if [[ "`phpenv version-name`" != "7.1" ]]; then exit 0; fi
+  - vendor/bin/phpunit --coverage-clover coverage.clover
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
 
 notifications:
   irc:
