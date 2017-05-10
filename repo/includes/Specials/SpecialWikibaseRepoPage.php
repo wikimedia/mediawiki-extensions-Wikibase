@@ -27,7 +27,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	/**
 	 * @var SpecialPageCopyrightView
 	 */
-	protected $copyrightView;
+	private $copyrightView;
 
 	/**
 	 * @var SummaryFormatter
@@ -157,11 +157,16 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	}
 
 	/**
+	 * @param string|null $saveMessageKey Defaults to "wikibase-<special page name>-submit".
+	 *
 	 * @return string HTML
 	 */
-	protected function getCopyrightHTML() {
-		$submitKey = 'wikibase-' . strtolower( $this->getName() ) . '-submit';
-		return $this->copyrightView->getHtml( $this->getLanguage(), $submitKey );
+	protected function getCopyrightHTML( $saveMessageKey = null ) {
+		if ( $saveMessageKey === null ) {
+			$saveMessageKey = 'wikibase-' . strtolower( $this->getName() ) . '-submit';
+		}
+
+		return $this->copyrightView->getHtml( $this->getLanguage(), $saveMessageKey );
 	}
 
 }
