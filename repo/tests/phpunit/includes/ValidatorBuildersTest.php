@@ -233,8 +233,7 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			'Float precision is valid' => [ 0.2, $wikidataUri . 'Q2', true ],
 			'Null precision is invalid' => [ null, $wikidataUri . 'Q2', false ],
 
-			// FIXME: This is testing unimplemented behaviour? Probably broken...
-			'Globe should not be empty' => [ 1, '', false ],
+			'Globe must be a URI' => [ 1, 'Earth', false ],
 			'Globe too long' => [ 1, $wikidataUri . 'Q' . str_repeat( '6', 224 ), false ],
 			'Valid globe' => [ 1, $wikidataUri . 'Q2', true ],
 			'Untrimmed globe' => [ 1, ' ' . $wikidataUri . 'Q2 ', false ],

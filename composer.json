@@ -24,7 +24,7 @@
 		"php": ">=5.5.9",
 		"data-values/data-values": "^1.0.0",
 		"data-values/common": "^0.3.0",
-		"data-values/geo": "^1.2.1",
+		"data-values/geo": "^2.0.0",
 		"data-values/interfaces": "^0.2.0|^0.1.5",
 		"data-values/number": "^0.8.2",
 		"data-values/time": "^0.8.4",
