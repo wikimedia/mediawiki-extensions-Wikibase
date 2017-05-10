@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_20cee7b9",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-10T10:27:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_cba63150",
+      "revId": "c73b8bddb4c0cb16ef61d64f84da633ec5273eb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_eb821597",
         "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
         "patchSetId": 3
@@ -30,6 +48,30 @@
       "writtenOn": "2017-05-10T09:02:38Z",
       "side": 1,
       "message": "Does not matter much but this is also not needed for the full id case, is it?",
+      "range": {
+        "startLine": 401,
+        "startChar": 14,
+        "endLine": 401,
+        "endChar": 31
+      },
+      "revId": "c73b8bddb4c0cb16ef61d64f84da633ec5273eb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_40d3db61",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-10T10:27:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_eb821597",
       "range": {
         "startLine": 401,
         "startChar": 14,
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_a068b785",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-10T10:27:44Z",
+      "side": 1,
+      "message": "You are completely right, I split it to two try and catch.",
+      "parentUuid": "0e1cb3f9_4b71c1dc",
+      "revId": "c73b8bddb4c0cb16ef61d64f84da633ec5273eb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_7d000c05",
         "filename": "lib/tests/phpunit/Store/Sql/SqlEntityInfoBuilderTest.php",
         "patchSetId": 3
@@ -76,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_4010bb04",
+        "filename": "lib/tests/phpunit/Store/Sql/SqlEntityInfoBuilderTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-10T10:27:44Z",
+      "side": 1,
+      "message": "This was one of my tests to get the CI tests pass, I forgot to remove it. Done now.",
+      "parentUuid": "0e1cb3f9_7d000c05",
+      "revId": "c73b8bddb4c0cb16ef61d64f84da633ec5273eb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_6ba0453f",
         "filename": "lib/tests/phpunit/Store/Sql/SqlEntityInfoBuilderTest.php",
         "patchSetId": 3
@@ -87,6 +165,24 @@
       "writtenOn": "2017-05-10T09:02:38Z",
       "side": 1,
       "message": "? This parser would e.g. map en:Q123 to foo:Q123. Why this is needed here?",
+      "revId": "c73b8bddb4c0cb16ef61d64f84da633ec5273eb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_a0ff57a6",
+        "filename": "lib/tests/phpunit/Store/Sql/SqlEntityInfoBuilderTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-10T10:27:44Z",
+      "side": 1,
+      "message": "Same here",
+      "parentUuid": "0e1cb3f9_6ba0453f",
       "revId": "c73b8bddb4c0cb16ef61d64f84da633ec5273eb6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
