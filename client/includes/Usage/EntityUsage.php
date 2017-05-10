@@ -41,6 +41,12 @@ class EntityUsage {
 	const TITLE_USAGE = 'T';
 
 	/**
+	 * Usage flag indicating that a Statement from the entity was used.
+	 * This currently implies OTHER_USAGE or ALL_USAGE.
+	 */
+	const STATEMENT_USAGE = 'C';
+
+	/**
 	 * Usage flag indicating that any and all aspects of the entity
 	 * were (or may have been) used.
 	 */
@@ -63,6 +69,7 @@ class EntityUsage {
 		self::SITELINK_USAGE => null,
 		self::LABEL_USAGE => null,
 		self::TITLE_USAGE => null,
+		self::STATEMENT_USAGE => null,
 		self::OTHER_USAGE => null,
 		self::ALL_USAGE => null,
 	);

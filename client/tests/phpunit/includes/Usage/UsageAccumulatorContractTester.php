@@ -6,6 +6,7 @@ use PHPUnit_Framework_Assert as Assert;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * Contract tester for implementations of the UsageAccumulator interface.
@@ -35,6 +36,7 @@ class UsageAccumulatorContractTester {
 		$this->testAddAndGetLabelUsage();
 		$this->testAddAndGetTitleUsage();
 		$this->testAddAndGetSiteLinksUsage();
+		$this->testAddAndGetStatementUsage();
 		$this->testAddAndGetOtherUsage();
 		$this->testAddAndGetAllUsage();
 
@@ -44,6 +46,7 @@ class UsageAccumulatorContractTester {
 			new EntityUsage( $q2, EntityUsage::LABEL_USAGE, 'xx' ),
 			new EntityUsage( $q2, EntityUsage::TITLE_USAGE ),
 			new EntityUsage( $q2, EntityUsage::SITELINK_USAGE ),
+			new EntityUsage( $q3, EntityUsage::STATEMENT_USAGE, 'P42' ),
 			new EntityUsage( $q2, EntityUsage::OTHER_USAGE ),
 			new EntityUsage( $q3, EntityUsage::ALL_USAGE ),
 		);
@@ -80,6 +83,21 @@ class UsageAccumulatorContractTester {
 
 		$entityUsages = $this->usageAccumulator->getUsages();
 		$this->assertContainsUsage( $expected, $entityUsages );
+	}
+
+	private function testAddAndGetStatementUsage() {
+		$q3 = new ItemId( 'Q3' );
+		$p42 = new PropertyId( 'P42' );
+		$this->usageAccumulator->addStatementUsage( $q3, $p42 );
+
+		$expected = new EntityUsage(
+			$q3,
+			EntityUsage::STATEMENT_USAGE,
+			$p42->getSerialization()
+		);
+
+		$usages = $this->usageAccumulator->getUsages();
+		$this->assertContainsUsage( $expected, $usages );
 	}
 
 	private function testAddAndGetOtherUsage() {
