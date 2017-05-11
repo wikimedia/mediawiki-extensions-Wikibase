@@ -408,8 +408,9 @@
 					startEditingCallback,
 					entityId,
 					function( dom ) {
-						var guidMatch = dom.className.match( /wikibase-statement-(\S+)/ );
-						return guidMatch ? getStatementForGuid( guidMatch[ 1 ] ) : null;
+						var statement = $(dom).data('statement');
+						var statementDeserializer = new wb.serialization.StatementDeserializer();
+						return statement ? statementDeserializer.deserialize(statement) : null;
 					},
 					propertyId
 				),
@@ -443,6 +444,7 @@
 	};
 
 	SELF.prototype.getStatementView = function( startEditingCallback, entityId, propertyId, removeCallback, value, $dom ) {
+		console.log ( entityId, value );
 		var currentPropertyId = value ? value.getClaim().getMainSnak().getPropertyId() : propertyId;
 		var view = this._getView(
 			'statementview',
