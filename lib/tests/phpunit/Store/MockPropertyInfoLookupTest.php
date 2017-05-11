@@ -2,8 +2,9 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
+use Wikibase\DataAccess\Tests\TestDoubles\MockPropertyInfoLookup;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
 
 /**
  * @covers Wikibase\Lib\Tests\Store\MockPropertyInfoLookup

@@ -5,9 +5,9 @@ namespace Wikibase\Lib\Tests\Store;
 use BagOStuff;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\CacheAwarePropertyInfoStore;
-use Wikibase\Lib\Store\PropertyInfoLookup;
-use Wikibase\Lib\Store\PropertyInfoStore;
+use Wikibase\DataAccess\Store\CacheAwarePropertyInfoStore;
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
+use Wikibase\DataAccess\Store\PropertyInfoStore;
 
 /**
  * @covers Wikibase\Lib\Store\CacheAwarePropertyInfoStore;
@@ -21,7 +21,7 @@ use Wikibase\Lib\Store\PropertyInfoStore;
 class CacheAwarePropertyInfoStoreTest extends \PHPUnit_Framework_TestCase {
 
 	private function newCacheAwarePropertyInfoStore( BagOStuff $cache ) {
-		$mockStore = $this->getMock( PropertyInfoStore::class );
+		$mockStore = $this->getMock( \Wikibase\DataAccess\Store\PropertyInfoStore::class );
 		$mockStore->expects( $this->any() )->method( 'setPropertyInfo' );
 		$mockStore->expects( $this->any() )
 			->method( 'removePropertyInfo' )
@@ -34,7 +34,7 @@ class CacheAwarePropertyInfoStoreTest extends \PHPUnit_Framework_TestCase {
 				} )
 			);
 
-		/** @var PropertyInfoStore $mockStore */
+		/** @var \Wikibase\DataAccess\Store\PropertyInfoStore $mockStore */
 		return new CacheAwarePropertyInfoStore( $mockStore, $cache, 3600, __CLASS__ );
 	}
 

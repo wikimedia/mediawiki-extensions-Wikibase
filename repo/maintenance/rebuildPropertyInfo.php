@@ -4,7 +4,7 @@ namespace Wikibase;
 
 use LoggedUpdateMaintenance;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
-use Wikibase\Lib\Store\Sql\PropertyInfoTable;
+use Wikibase\DataAccess\Store\Sql\PropertyInfoTable;
 use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';

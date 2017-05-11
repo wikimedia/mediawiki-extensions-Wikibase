@@ -23,9 +23,9 @@ use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
+use Wikibase\DataAccess\Tests\TestDoubles\MockPropertyInfoLookup;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\TermIndex;
 

@@ -14,7 +14,7 @@ use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
 
 /**
  * A factory/locator of services dispatching the action to services configured for the
@@ -162,7 +162,7 @@ class DispatchingServiceContainer extends ServiceContainer implements Dispatchin
 	}
 
 	/**
-	 * @return PropertyInfoLookup
+	 * @return \Wikibase\DataAccess\Store\PropertyInfoLookup
 	 */
 	public function getPropertyInfoLookup() {
 		return $this->getService( 'PropertyInfoLookup' );

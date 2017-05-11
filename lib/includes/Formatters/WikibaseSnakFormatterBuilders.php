@@ -8,7 +8,7 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Formatters\HtmlExternalIdentifierFormatter;
 use Wikibase\Lib\Formatters\WikitextExternalIdentifierFormatter;
-use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
 
 /**
  * Low level factory for SnakFormatters for well known data types.
@@ -44,7 +44,7 @@ class WikibaseSnakFormatterBuilders {
 
 	/**
 	 * @param WikibaseValueFormatterBuilders $valueFormatterBuilders
-	 * @param PropertyInfoLookup $propertyInfoLookup
+	 * @param \Wikibase\DataAccess\Store\PropertyInfoLookup $propertyInfoLookup
 	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 * @param DataTypeFactory $dataTypeFactory
 	 */

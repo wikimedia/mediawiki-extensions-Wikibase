@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Specials;
 use DataTypes\DataTypeFactory;
 use HTMLForm;
 use Html;
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
@@ -12,7 +13,6 @@ use Wikibase\DataTypeSelector;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
  * Special page to list properties by data type

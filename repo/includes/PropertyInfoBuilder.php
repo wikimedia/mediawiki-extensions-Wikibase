@@ -3,11 +3,11 @@
 namespace Wikibase;
 
 use DataValues\StringValue;
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
  * Class to build the information about a property.

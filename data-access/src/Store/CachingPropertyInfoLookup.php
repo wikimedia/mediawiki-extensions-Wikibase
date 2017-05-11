@@ -1,8 +1,9 @@
 <?php
 
-namespace Wikibase\Lib\Store;
+namespace Wikibase\DataAccess\Store;
 
 use BagOStuff;
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**

@@ -2,12 +2,12 @@
 
 namespace Wikibase\DataAccess;
 
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
  * Interface of the top-level container/factory of data access services.

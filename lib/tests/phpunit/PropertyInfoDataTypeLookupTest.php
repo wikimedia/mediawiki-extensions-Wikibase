@@ -8,8 +8,8 @@ use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
-use Wikibase\Lib\Store\PropertyInfoLookup;
-use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
+use Wikibase\DataAccess\Tests\TestDoubles\MockPropertyInfoLookup;
 
 /**
  * @covers Wikibase\Lib\PropertyInfoDataTypeLookup

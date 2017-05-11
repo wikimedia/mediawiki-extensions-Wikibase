@@ -3,9 +3,10 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use InvalidArgumentException;
+use Wikibase\DataAccess\Tests\TestDoubles\MockPropertyInfoLookup;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\DispatchingPropertyInfoLookup;
-use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
 
 /**
  * @covers Wikibase\Lib\Store\DispatchingPropertyInfoLookup
@@ -22,11 +23,11 @@ class DispatchingPropertyInfoLookupTest extends \PHPUnit_Framework_TestCase {
 
 	public function setUp() {
 		$this->localPropertyInfo = [
-			'P23' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
+			'P23' => [ \Wikibase\DataAccess\Store\PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
 			'P42' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'commonsMedia', 'foo' => 'bar' ]
 		];
 		$this->fooPropertyInfo = [
-			'foo:P123' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ],
+			'foo:P123' => [ \Wikibase\DataAccess\Store\PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ],
 			'foo:P42' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'commonsMedia' ]
 		];
 	}
@@ -104,13 +105,13 @@ class DispatchingPropertyInfoLookupTest extends \PHPUnit_Framework_TestCase {
 			],
 			'non-string keys' => [
 				[
-					'' => $this->getMock( PropertyInfoLookup::class ),
-					100 => $this->getMock( PropertyInfoLookup::class ),
+					'' => $this->getMock( \Wikibase\DataAccess\Store\PropertyInfoLookup::class ),
+					100 => $this->getMock( \Wikibase\DataAccess\Store\PropertyInfoLookup::class ),
 				],
 			],
 			'repo name containing colon' => [
 				[
-					'' => $this->getMock( PropertyInfoLookup::class ),
+					'' => $this->getMock( \Wikibase\DataAccess\Store\PropertyInfoLookup::class ),
 					'fo:oo' => $this->getMock( PropertyInfoLookup::class ),
 				],
 			],

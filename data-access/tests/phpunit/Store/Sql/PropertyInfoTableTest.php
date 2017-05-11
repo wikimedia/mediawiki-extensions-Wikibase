@@ -1,14 +1,14 @@
 <?php
 
-namespace Wikibase\Lib\Tests\Store\Sql;
+namespace Wikibase\DataAccess\Tests\Store\Sql;
 
 use MediaWikiTestCase;
 use InvalidArgumentException;
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
+use Wikibase\DataAccess\Store\Sql\PropertyInfoTable;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityIdComposer;
-use Wikibase\Lib\Store\PropertyInfoLookup;
-use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 
 /**
  * @covers Wikibase\PropertyInfoTable
@@ -34,7 +34,7 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 	}
 
 	private function newPropertyInfoTable( $repository = '' ) {
-		return new PropertyInfoTable( $this->getEntityComposer(), false, $repository );
+		return new \Wikibase\DataAccess\Store\Sql\PropertyInfoTable( $this->getEntityComposer(), false, $repository );
 	}
 
 	public function testGivenNoDataTypeInInfo_setPropertyInfoThrowsException() {
@@ -194,7 +194,7 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 	public function testGivenPropertyIdFromWrongRepository_setPropertyInfoThrowsException( $repositoryName, PropertyId $id ) {
 		$this->setExpectedException( InvalidArgumentException::class );
 
-		$infoTable = new PropertyInfoTable( $this->getEntityComposer(), false, $repositoryName );
+		$infoTable = new \Wikibase\DataAccess\Store\Sql\PropertyInfoTable( $this->getEntityComposer(), false, $repositoryName );
 		$infoTable->setPropertyInfo( $id, [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] );
 	}
 
@@ -204,7 +204,7 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 	public function testGivenPropertyIdFromWrongRepository_getPropertyInfoThrowsException( $repositoryName, PropertyId $id ) {
 		$this->setExpectedException( InvalidArgumentException::class );
 
-		$infoTable = new PropertyInfoTable( $this->getEntityComposer(), false, $repositoryName );
+		$infoTable = new \Wikibase\DataAccess\Store\Sql\PropertyInfoTable( $this->getEntityComposer(), false, $repositoryName );
 		$infoTable->getPropertyInfo( $id );
 	}
 

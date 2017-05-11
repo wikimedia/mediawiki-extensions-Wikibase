@@ -1,10 +1,10 @@
 <?php
 
-namespace Wikibase\Lib\Tests\Store;
+namespace Wikibase\DataAccess\Tests\TestDoubles;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
 
 /**
  * Class MockPropertyInfoLockup is an implementation of PropertyInfoLookup based on a local array.

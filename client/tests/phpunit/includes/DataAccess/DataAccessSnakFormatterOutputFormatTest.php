@@ -23,8 +23,8 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
-use Wikibase\Lib\Store\PropertyInfoLookup;
-use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
+use Wikibase\DataAccess\Tests\TestDoubles\MockPropertyInfoLookup;
 use Wikibase\Test\MockClientStore;
 
 /**

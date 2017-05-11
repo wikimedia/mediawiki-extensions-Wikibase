@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Store;
 
 use DBError;
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikimedia\Assert\Assert;

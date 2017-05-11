@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Store;
+namespace Wikibase\DataAccess\Store;
 
 use BagOStuff;
 use InvalidArgumentException;

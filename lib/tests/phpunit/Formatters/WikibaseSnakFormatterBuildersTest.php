@@ -12,10 +12,10 @@ use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
-use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
+use Wikibase\DataAccess\Tests\TestDoubles\MockPropertyInfoLookup;
 
 /**
  * @covers Wikibase\Lib\WikibaseSnakFormatterBuilders
