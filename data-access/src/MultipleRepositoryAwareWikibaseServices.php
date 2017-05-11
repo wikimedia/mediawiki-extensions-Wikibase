@@ -9,6 +9,7 @@ use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
@@ -32,6 +33,9 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 			},
 			'EntityRevisionLookup' => function() use ( $dispatchingServiceContainer ) {
 				return $dispatchingServiceContainer->getEntityRevisionLookup();
+			},
+			'EntityStoreWatcher' => function() use ( $dispatchingServiceContainer ) {
+				return $dispatchingServiceContainer;
 			},
 			'PropertyInfoLookup' => function() use ( $dispatchingServiceContainer ) {
 				return $dispatchingServiceContainer->getPropertyInfoLookup();
@@ -64,6 +68,13 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 	 */
 	public function getEntityRevisionLookup() {
 		return $this->getService( 'EntityRevisionLookup' );
+	}
+
+	/**
+	 * @return EntityStoreWatcher
+	 */
+	public function getEntityStoreWatcher() {
+		return $this->getService( 'EntityStoreWatcher' );
 	}
 
 	/**
