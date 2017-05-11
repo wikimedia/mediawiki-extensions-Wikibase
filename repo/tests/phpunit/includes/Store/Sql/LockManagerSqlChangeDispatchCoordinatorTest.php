@@ -58,7 +58,7 @@ class LockManagerSqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 		$this->assertSame( 'foowiki', $clientArray['chd_db'] );
 		$this->assertSame( '0', $clientArray['chd_site'] );
 		$this->assertSame( '0', $clientArray['chd_seen'] );
-		$this->assertSame( 'Wikibase.TestRepo.dispatchChanges.0', $clientArray['chd_lock'] );
+		$this->assertNull( $clientArray['chd_lock'] );
 	}
 
 }
