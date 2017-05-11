@@ -4,11 +4,15 @@
 namespace Wikibase\DataAccess;
 
 use MediaWiki\Services\ServiceContainer;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Term\TermBuffer;
+use Wikibase\EntityRevision;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
@@ -18,10 +22,20 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
  *
  * @license GPL-2.0+
  */
-class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implements WikibaseServices {
+class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implements WikibaseServices, EntityStoreWatcher {
 
-	public function __construct( DispatchingServiceFactory $dispatchingServiceContainer ) {
+	/**
+	 * @var EntityStoreWatcher
+	 */
+	private $entityStoreWatcher;
+
+	public function __construct(
+		DispatchingServiceFactory $dispatchingServiceContainer,
+		EntityStoreWatcher $entityStoreWatcher
+	) {
 		parent::__construct();
+
+		$this->entityStoreWatcher = $dispatchingServiceContainer;
 
 		$this->applyWiring( [
 			'EntityInfoBuilderFactory' => function() use ( $dispatchingServiceContainer ) {
@@ -85,6 +99,34 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 	 */
 	public function getTermSearchInteractorFactory() {
 		return $this->getService( 'TermSearchInteractorFactory' );
+	}
+
+	/**
+	 * @see EntityStoreWatcher::entityUpdated
+	 *
+	 * @param EntityRevision $entityRevision
+	 */
+	public function entityUpdated( EntityRevision $entityRevision ) {
+		$this->entityStoreWatcher->entityUpdated( $entityRevision );
+	}
+
+	/**
+	 * @see EntityStoreWatcher::entityDeleted
+	 *
+	 * @param EntityId $entityId
+	 */
+	public function entityDeleted( EntityId $entityId ) {
+		$this->entityStoreWatcher->entityDeleted( $entityId );
+	}
+
+	/**
+	 * @see EntityStoreWatcher::redirectUpdated
+	 *
+	 * @param EntityRedirect $entityRedirect
+	 * @param int $revisionId
+	 */
+	public function redirectUpdated( EntityRedirect $entityRedirect, $revisionId ) {
+		$this->entityStoreWatcher->redirectUpdated( $entityRedirect, $revisionId );
 	}
 
 }
