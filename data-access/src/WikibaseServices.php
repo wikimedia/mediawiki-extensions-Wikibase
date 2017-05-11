@@ -7,6 +7,7 @@ use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
@@ -33,6 +34,11 @@ interface WikibaseServices {
 	 * @return EntityRevisionLookup
 	 */
 	public function getEntityRevisionLookup();
+
+	/**
+	 * @return EntityStoreWatcher
+	 */
+	public function getEntityStoreWatcher();
 
 	/**
 	 * Note: Instance returned is not guaranteed to be a caching decorator.
