@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_6be845b0",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-11T21:10:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_0649976a",
+      "range": {
+        "startLine": 421,
+        "startChar": 27,
+        "endLine": 421,
+        "endChar": 29
+      },
+      "revId": "9c5100444c242a936f0ca6e1a175d8f86ba99a20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_719832c4",
         "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
         "patchSetId": 1
