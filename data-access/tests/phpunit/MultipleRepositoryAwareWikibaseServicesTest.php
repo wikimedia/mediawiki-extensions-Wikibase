@@ -9,6 +9,7 @@ use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
@@ -66,21 +67,24 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 		$wikibaseServices = new MultipleRepositoryAwareWikibaseServices( $this->getDispatchingServiceContainer() );
 
 		$this->assertInstanceOf( EntityPrefetcher::class, $wikibaseServices->getEntityPrefetcher() );
-
 	}
 
 	public function testGetEntityRevisionLookup() {
 		$wikibaseServices = new MultipleRepositoryAwareWikibaseServices( $this->getDispatchingServiceContainer() );
 
 		$this->assertInstanceOf( EntityRevisionLookup::class, $wikibaseServices->getEntityRevisionLookup() );
+	}
 
+	public function testGetEntityStoreWatcher() {
+		$wikibaseServices = new MultipleRepositoryAwareWikibaseServices( $this->getDispatchingServiceContainer() );
+
+		$this->assertInstanceOf( EntityStoreWatcher::class, $wikibaseServices->getEntityStoreWatcher() );
 	}
 
 	public function testGetPropertyInfoLookup() {
 		$wikibaseServices = new MultipleRepositoryAwareWikibaseServices( $this->getDispatchingServiceContainer() );
 
 		$this->assertInstanceOf( PropertyInfoLookup::class, $wikibaseServices->getPropertyInfoLookup() );
-
 	}
 
 	public function testGetTermBuffer() {
@@ -110,6 +114,7 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 		$this->assertContains( 'EntityInfoBuilderFactory', $serviceNames );
 		$this->assertContains( 'EntityPrefetcher', $serviceNames );
 		$this->assertContains( 'EntityRevisionLookup', $serviceNames );
+		$this->assertContains( 'EntityStoreWatcher', $serviceNames );
 		$this->assertContains( 'PropertyInfoLookup', $serviceNames );
 		$this->assertContains( 'TermBuffer', $serviceNames );
 		$this->assertContains( 'TermSearchInteractorFactory', $serviceNames );

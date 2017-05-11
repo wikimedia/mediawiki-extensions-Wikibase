@@ -16,7 +16,7 @@ use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataAccess\EntityDataRetrievalServiceFactory;
+use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
@@ -106,9 +106,9 @@ class DirectSqlStore implements ClientStore {
 	private $entityRevisionLookup = null;
 
 	/**
-	 * @var EntityDataRetrievalServiceFactory
+	 * @var WikibaseServices
 	 */
-	private $entityDataRetrievalServices = null;
+	private $wikibaseServices = null;
 
 	/**
 	 * @var PropertyLabelResolver|null
@@ -181,7 +181,7 @@ class DirectSqlStore implements ClientStore {
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
-	 * @param EntityDataRetrievalServiceFactory $entityDataRetrievalServiceFactory
+	 * @param WikibaseServices $wikibaseServices
 	 * @param string|bool $repoWiki The symbolic database name of the repo wiki or false for the
 	 * local wiki.
 	 * @param string $languageCode
@@ -192,7 +192,7 @@ class DirectSqlStore implements ClientStore {
 		EntityIdParser $entityIdParser,
 		EntityIdComposer $entityIdComposer,
 		EntityNamespaceLookup $entityNamespaceLookup,
-		EntityDataRetrievalServiceFactory $entityDataRetrievalServiceFactory,
+		WikibaseServices $wikibaseServices,
 		$repoWiki = false,
 		$languageCode
 	) {
@@ -201,7 +201,7 @@ class DirectSqlStore implements ClientStore {
 		$this->entityIdParser = $entityIdParser;
 		$this->entityIdComposer = $entityIdComposer;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
-		$this->entityDataRetrievalServices = $entityDataRetrievalServiceFactory;
+		$this->wikibaseServices = $wikibaseServices;
 		$this->repoWiki = $repoWiki;
 		$this->languageCode = $languageCode;
 
@@ -347,7 +347,7 @@ class DirectSqlStore implements ClientStore {
 		// NOTE: Keep cache key in sync with SqlStore::newEntityRevisionLookup in WikibaseRepo
 		$cacheKeyPrefix = $this->cacheKeyPrefix . ':WikiPageEntityRevisionLookup';
 
-		$dispatchingLookup = $this->entityDataRetrievalServices->getEntityRevisionLookup();
+		$dispatchingLookup = $this->wikibaseServices->getEntityRevisionLookup();
 
 		// Lower caching layer using persistent cache (e.g. memcached).
 		$persistentCachingLookup = new CachingEntityRevisionLookup(
@@ -456,7 +456,7 @@ class DirectSqlStore implements ClientStore {
 	 */
 	public function getPropertyInfoLookup() {
 		if ( $this->propertyInfoLookup === null ) {
-			$propertyInfoLookup = $this->entityDataRetrievalServices->getPropertyInfoLookup();
+			$propertyInfoLookup = $this->wikibaseServices->getPropertyInfoLookup();
 			$cacheKey = $this->cacheKeyPrefix . ':CacheAwarePropertyInfoStore';
 
 			$this->propertyInfoLookup = new CachingPropertyInfoLookup(
@@ -474,7 +474,7 @@ class DirectSqlStore implements ClientStore {
 	 * @return PrefetchingWikiPageEntityMetaDataAccessor
 	 */
 	public function getEntityPrefetcher() {
-		return $this->entityDataRetrievalServices->getEntityPrefetcher();
+		return $this->wikibaseServices->getEntityPrefetcher();
 	}
 
 	/**
