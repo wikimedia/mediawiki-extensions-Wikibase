@@ -378,6 +378,7 @@ class EntityParserOutputGenerator {
 		// the JavaScript that is only necessary for editing.
 		// Then load JavaScript accordingly depending on $editable.
 		$parserOutput->addModules( 'wikibase.ui.entityViewInit' );
+		$parserOutput->addModules( 'wikibase.currentEntity' );
 
 		// Load mobile styles, which have targets => mobile
 		// and will only be loaded on mobile devices
