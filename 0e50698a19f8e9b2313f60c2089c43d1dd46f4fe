@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_1e177b4a",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-11T17:00:44Z",
+      "side": 0,
+      "message": "This should not be removed but kept as a fallback. At least for a while, as long as the full entity JSON blob is not removed from the HTML.",
+      "range": {
+        "startLine": 412,
+        "startChar": 25,
+        "endLine": 412,
+        "endChar": 44
+      },
+      "revId": "0e50698a19f8e9b2313f60c2089c43d1dd46f4fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
