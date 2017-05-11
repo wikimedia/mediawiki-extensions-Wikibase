@@ -30,7 +30,7 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 	private $entityStoreWatcher;
 
 	public function __construct(
-		DispatchingServiceFactory $dispatchingServiceContainer,
+		DispatchingDataAccessServices $dispatchingServiceContainer,
 		EntityStoreWatcher $entityStoreWatcher
 	) {
 		parent::__construct();

@@ -10,11 +10,12 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
- * An interface of a factory of data retrieval/lookup services.
+ * An interface of a container/factory of services providing access to data of entities from
+ * multiple repositories.
  *
  * @license GPL-2.0+
  */
-interface EntityDataRetrievalServiceFactory {
+interface DispatchingDataAccessServices {
 
 	/**
 	 * @return EntityInfoBuilderFactory
