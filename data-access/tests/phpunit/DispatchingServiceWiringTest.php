@@ -5,6 +5,7 @@ namespace Wikibase\DataAccess\Tests;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\DispatchingServiceContainer;
 use Wikibase\DataAccess\RepositoryServiceContainerFactory;
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
@@ -14,7 +15,6 @@ use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
  * @group Wikibase

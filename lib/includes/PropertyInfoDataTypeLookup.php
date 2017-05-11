@@ -2,10 +2,10 @@
 
 namespace Wikibase\Lib;
 
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
  * PropertyDataTypeLookup that uses an PropertyInfoLookup to find

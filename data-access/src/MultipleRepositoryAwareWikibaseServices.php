@@ -4,6 +4,7 @@
 namespace Wikibase\DataAccess;
 
 use MediaWiki\Services\ServiceContainer;
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
@@ -13,7 +14,6 @@ use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
  * Top-level container/factory of data access services making use of the "dispatching" pattern of

@@ -1,14 +1,15 @@
 <?php
 
-namespace Wikibase\Lib\Tests\Store;
+namespace Wikibase\DataAccess\Tests\Store;
 
 use HashBagOStuff;
+use Wikibase\DataAccess\Store\CachingPropertyInfoLookup;
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
+use Wikibase\DataAccess\Tests\TestDoubles\MockPropertyInfoLookup;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\CachingPropertyInfoLookup;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
- * @covers Wikibase\CachingPropertyInfoLookup
+ * @covers Wikibase\DataAccess\Store\CachingPropertyInfoLookup
  *
  * @group Wikibase
  * @group WikibasePropertyInfo
@@ -35,7 +36,7 @@ class CachingPropertyInfoLookupTest extends \MediaWikiTestCase {
 		$lookup = $this->newCachingPropertyInfoLookup( [ 'P23' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] ] );
 
 		$this->assertSame(
-			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
+			[ \Wikibase\DataAccess\Store\PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
 			$lookup->getPropertyInfo( new PropertyId( 'P23' ) )
 		);
 	}

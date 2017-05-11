@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib;
 
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikimedia\Assert\Assert;
 

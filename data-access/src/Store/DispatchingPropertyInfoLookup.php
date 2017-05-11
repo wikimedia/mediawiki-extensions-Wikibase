@@ -1,10 +1,11 @@
 <?php
 
-namespace Wikibase\Lib\Store;
+namespace Wikibase\DataAccess\Store;
 
 use DBError;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Store\StorageException;
 use Wikimedia\Assert\Assert;
 
 class DispatchingPropertyInfoLookup implements PropertyInfoLookup {

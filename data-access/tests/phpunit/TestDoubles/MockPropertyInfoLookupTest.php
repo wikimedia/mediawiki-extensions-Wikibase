@@ -1,12 +1,12 @@
 <?php
 
-namespace Wikibase\Lib\Tests\Store;
+namespace Wikibase\DataAccess\Tests\TestDoubles;
 
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
- * @covers Wikibase\Lib\Tests\Store\MockPropertyInfoLookup
+ * @covers Wikibase\DataAccess\Tests\TestDoubles\MockPropertyInfoLookup
  *
  * @group Wikibase
  * @group WikibasePropertyInfo

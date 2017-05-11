@@ -1,16 +1,16 @@
 <?php
 
-namespace Wikibase\Lib\Tests\Store;
+namespace Wikibase\DataAccess\Tests\Store;
 
 use BagOStuff;
 use InvalidArgumentException;
+use Wikibase\DataAccess\Store\CacheAwarePropertyInfoStore;
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
+use Wikibase\DataAccess\Store\PropertyInfoStore;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\CacheAwarePropertyInfoStore;
-use Wikibase\Lib\Store\PropertyInfoLookup;
-use Wikibase\Lib\Store\PropertyInfoStore;
 
 /**
- * @covers Wikibase\Lib\Store\CacheAwarePropertyInfoStore;
+ * @covers Wikibase\DataAccess\Store\CacheAwarePropertyInfoStore;
  *
  * @group Wikibase
  * @group WikibasePropertyInfo

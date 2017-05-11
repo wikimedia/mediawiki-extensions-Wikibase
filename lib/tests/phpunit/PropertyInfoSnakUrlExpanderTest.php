@@ -3,14 +3,14 @@
 namespace Wikibase\Lib\Tests;
 
 use DataValues\StringValue;
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
+use Wikibase\DataAccess\Tests\TestDoubles\MockPropertyInfoLookup;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\FieldPropertyInfoProvider;
 use Wikibase\Lib\PropertyInfoProvider;
 use Wikibase\Lib\PropertyInfoSnakUrlExpander;
-use Wikibase\Lib\Store\PropertyInfoLookup;
-use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikimedia\Assert\ParameterTypeException;
 
 /**

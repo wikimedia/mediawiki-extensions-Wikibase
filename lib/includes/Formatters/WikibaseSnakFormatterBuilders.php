@@ -5,10 +5,10 @@ namespace Wikibase\Lib;
 use DataTypes\DataTypeFactory;
 use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Formatters\HtmlExternalIdentifierFormatter;
 use Wikibase\Lib\Formatters\WikitextExternalIdentifierFormatter;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
  * Low level factory for SnakFormatters for well known data types.

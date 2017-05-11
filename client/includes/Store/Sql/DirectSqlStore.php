@@ -6,8 +6,6 @@ use HashBagOStuff;
 use ObjectCache;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
-use Wikibase\Lib\Store\CachingPropertyInfoLookup;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\Sql\SqlSubscriptionManager;
@@ -16,6 +14,8 @@ use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataAccess\Store\CachingPropertyInfoLookup;
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -438,7 +438,7 @@ class DirectSqlStore implements ClientStore {
 	/**
 	 * @see ClientStore::getPropertyInfoLookup
 	 *
-	 * @return PropertyInfoLookup
+	 * @return \Wikibase\DataAccess\Store\PropertyInfoLookup
 	 */
 	public function getPropertyInfoLookup() {
 		if ( $this->propertyInfoLookup === null ) {

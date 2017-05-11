@@ -3,12 +3,12 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use DataValues\StringValue;
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
+use Wikibase\DataAccess\Store\Sql\PropertyInfoTable;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\PropertyInfoBuilder;
-use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\PropertyInfoTableBuilder;
 use Wikibase\Repo\WikibaseRepo;
 

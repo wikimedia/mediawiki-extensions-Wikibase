@@ -1,11 +1,11 @@
 <?php
 
 use Wikibase\DataAccess\DispatchingServiceContainer;
+use Wikibase\DataAccess\Store\DispatchingPropertyInfoLookup;
 use Wikibase\Lib\Interactors\DispatchingTermSearchInteractorFactory;
 use Wikibase\Lib\Store\DispatchingEntityInfoBuilderFactory;
 use Wikibase\Lib\Store\DispatchingEntityPrefetcher;
 use Wikibase\Lib\Store\DispatchingEntityRevisionLookup;
-use Wikibase\Lib\Store\DispatchingPropertyInfoLookup;
 use Wikibase\Lib\Store\DispatchingTermBuffer;
 
 /**

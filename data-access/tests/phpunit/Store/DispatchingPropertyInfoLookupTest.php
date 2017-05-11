@@ -1,14 +1,15 @@
 <?php
 
-namespace Wikibase\Lib\Tests\Store;
+namespace Wikibase\DataAccess\Tests\Store;
 
 use InvalidArgumentException;
+use Wikibase\DataAccess\Store\DispatchingPropertyInfoLookup;
+use Wikibase\DataAccess\Store\PropertyInfoLookup;
+use Wikibase\DataAccess\Tests\TestDoubles\MockPropertyInfoLookup;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\DispatchingPropertyInfoLookup;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
- * @covers Wikibase\Lib\Store\DispatchingPropertyInfoLookup
+ * @covers Wikibase\DataAccess\Store\DispatchingPropertyInfoLookup
  *
  * @group WikibaseStore
  * @group Wikibase
