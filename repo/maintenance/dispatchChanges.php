@@ -255,17 +255,20 @@ class DispatchChanges extends Maintenance {
 	private function getCoordinator( SettingsArray $settings ) {
 		$repoID = wfWikiID();
 		$lockManagerName = $settings->getSetting( 'dispatchingLockManager' );
+		$LBFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 		if ( !is_null( $lockManagerName ) ) {
 			$lockManager = LockManagerGroup::singleton( wfWikiID() )->get( $lockManagerName );
 			return new LockManagerSqlChangeDispatchCoordinator(
 				$lockManager,
+				$LBFactory,
 				$settings->getSetting( 'changesDatabase' ),
 				$repoID
 			);
 		} else {
 			return new SqlChangeDispatchCoordinator(
 				$settings->getSetting( 'changesDatabase' ),
-				$repoID
+				$repoID,
+				$LBFactory
 			);
 		}
 	}
