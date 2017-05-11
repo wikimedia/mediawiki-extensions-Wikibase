@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_e147834e",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-11T23:18:10Z",
+      "side": 1,
+      "message": "don\u0027t we need releaseRepoReplica( $dbr ) here?",
+      "revId": "982cf3f1eee89407792db9f1db321e1101627dcf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
