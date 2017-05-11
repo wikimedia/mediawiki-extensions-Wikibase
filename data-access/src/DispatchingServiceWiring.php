@@ -1,6 +1,6 @@
 <?php
 
-use Wikibase\DataAccess\DispatchingServiceFactory;
+use Wikibase\DataAccess\DispatchingServiceContainer;
 use Wikibase\Lib\Interactors\DispatchingTermSearchInteractorFactory;
 use Wikibase\Lib\Store\DispatchingEntityInfoBuilderFactory;
 use Wikibase\Lib\Store\DispatchingEntityPrefetcher;
@@ -14,37 +14,37 @@ use Wikibase\Lib\Store\DispatchingTermBuffer;
 
 return [
 
-	'EntityInfoBuilderFactory' => function( DispatchingServiceFactory $dispatchingServiceFactory ) {
+	'EntityInfoBuilderFactory' => function( DispatchingServiceContainer $dispatchingServiceFactory ) {
 		return new DispatchingEntityInfoBuilderFactory(
 			$dispatchingServiceFactory->getServiceMap( 'EntityInfoBuilderFactory' )
 		);
 	},
 
-	'EntityPrefetcher' => function( DispatchingServiceFactory $dispatchingServiceFactory ) {
+	'EntityPrefetcher' => function( DispatchingServiceContainer $dispatchingServiceFactory ) {
 		return new DispatchingEntityPrefetcher(
 			$dispatchingServiceFactory->getServiceMap( 'EntityPrefetcher' )
 		);
 	},
 
-	'EntityRevisionLookup' => function( DispatchingServiceFactory $dispatchingServiceFactory ) {
+	'EntityRevisionLookup' => function( DispatchingServiceContainer $dispatchingServiceFactory ) {
 		return new DispatchingEntityRevisionLookup(
 			$dispatchingServiceFactory->getServiceMap( 'EntityRevisionLookup' )
 		);
 	},
 
-	'PropertyInfoLookup' => function( DispatchingServiceFactory $dispatchingServiceFactory ) {
+	'PropertyInfoLookup' => function( DispatchingServiceContainer $dispatchingServiceFactory ) {
 		return new DispatchingPropertyInfoLookup(
 			$dispatchingServiceFactory->getServiceMap( 'PropertyInfoLookup' )
 		);
 	},
 
-	'TermBuffer' => function( DispatchingServiceFactory $dispatchingServiceFactory ) {
+	'TermBuffer' => function( DispatchingServiceContainer $dispatchingServiceFactory ) {
 		return new DispatchingTermBuffer(
 			$dispatchingServiceFactory->getServiceMap( 'PrefetchingTermLookup' )
 		);
 	},
 
-	'TermSearchInteractorFactory' => function( DispatchingServiceFactory $dispatchingServiceFactory ) {
+	'TermSearchInteractorFactory' => function( DispatchingServiceContainer $dispatchingServiceFactory ) {
 		$repoSpecificFactories = $dispatchingServiceFactory->getServiceMap( 'TermSearchInteractorFactory' );
 		$entityTypeToRepoMapping = $dispatchingServiceFactory->getEntityTypeToRepoMapping();
 

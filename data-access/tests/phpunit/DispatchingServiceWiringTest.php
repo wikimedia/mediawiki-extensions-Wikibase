@@ -3,7 +3,7 @@
 namespace Wikibase\DataAccess\Tests;
 
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataAccess\DispatchingServiceFactory;
+use Wikibase\DataAccess\DispatchingServiceContainer;
 use Wikibase\DataAccess\RepositoryServiceContainerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
@@ -41,10 +41,10 @@ class DispatchingServiceWiringTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return DispatchingServiceFactory
+	 * @return DispatchingServiceContainer
 	 */
 	private function getDispatchingServiceFactory() {
-		$factory = new DispatchingServiceFactory(
+		$dispatchingServiceContainer = new DispatchingServiceContainer(
 			$this->getRepositoryServiceContainerFactory(),
 			new RepositoryDefinitions( [ '' => [
 				'database' => false,
@@ -54,8 +54,8 @@ class DispatchingServiceWiringTest extends \PHPUnit_Framework_TestCase {
 			] ] )
 		);
 
-		$factory->loadWiringFiles( [ __DIR__ . '/../../src/DispatchingServiceWiring.php' ] );
-		return $factory;
+		$dispatchingServiceContainer->loadWiringFiles( [ __DIR__ . '/../../src/DispatchingServiceWiring.php' ] );
+		return $dispatchingServiceContainer;
 	}
 
 	public function provideServices() {
