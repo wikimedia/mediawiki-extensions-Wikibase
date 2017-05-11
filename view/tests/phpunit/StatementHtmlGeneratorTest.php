@@ -12,15 +12,13 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\View\ClaimHtmlGenerator;
+use Wikibase\View\StatementHtmlGenerator;
 use Wikibase\View\DummyLocalizedTextProvider;
 use Wikibase\View\SnakHtmlGenerator;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
- * @covers Wikibase\View\ClaimHtmlGenerator
- *
- * @todo more specific tests for all parts of claim html formatting
+ * @covers Wikibase\View\StatementHtmlGenerator
  *
  * @group Wikibase
  * @group WikibaseView
@@ -30,7 +28,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @author Daniel Kinzler
  * @author H. Snater < mediawiki@snater.com >
  */
-class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
+class StatementHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @return SnakHtmlGenerator
@@ -47,33 +45,33 @@ class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider getHtmlForClaimProvider
+	 * @dataProvider getHtmlForStatementProvider
 	 *
 	 * @uses Wikibase\View\Template\Template
 	 * @uses Wikibase\View\Template\TemplateFactory
 	 * @uses Wikibase\View\Template\TemplateRegistry
 	 */
-	public function testGetHtmlForClaim(
+	public function testGetHtmlForStatement(
 		SnakHtmlGenerator $snakHtmlGenerator,
 		Statement $statement,
 		$patterns
 	) {
 		$templateFactory = TemplateFactory::getDefaultInstance();
-		$claimHtmlGenerator = new ClaimHtmlGenerator(
+		$statementHtmlGenerator = new StatementHtmlGenerator(
 			$templateFactory,
 			$snakHtmlGenerator,
 			new BasicNumberLocalizer(),
 			new DummyLocalizedTextProvider()
 		);
 
-		$html = $claimHtmlGenerator->getHtmlForClaim( $statement, 'edit' );
+		$html = $statementHtmlGenerator->getHtmlForStatement( $statement, 'edit' );
 
 		foreach ( $patterns as $message => $pattern ) {
 			$this->assertRegExp( $pattern, $html, $message );
 		}
 	}
 
-	public function getHtmlForClaimProvider() {
+	public function getHtmlForStatementProvider() {
 		$snakHtmlGenerator = $this->getSnakHtmlGeneratorMock();
 
 		$testCases = array();
@@ -125,14 +123,14 @@ class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 		$expected
 	) {
 		$templateFactory = TemplateFactory::getDefaultInstance();
-		$claimHtmlGenerator = new ClaimHtmlGenerator(
+		$statementHtmlGenerator = new StatementHtmlGenerator(
 			$templateFactory,
 			$this->getSnakHtmlGeneratorMock(),
 			new BasicNumberLocalizer(),
 			new DummyLocalizedTextProvider()
 		);
 
-		$html = $claimHtmlGenerator->getHtmlForClaim( $statement, $editSectionHtml );
+		$html = $statementHtmlGenerator->getHtmlForStatement( $statement, $editSectionHtml );
 
 		$this->assertSame(
 			$expected ? 1 : 0,
