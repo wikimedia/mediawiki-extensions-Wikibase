@@ -408,8 +408,14 @@
 					startEditingCallback,
 					entityId,
 					function( dom ) {
-						var guidMatch = dom.className.match( /wikibase-statement-(\S+)/ );
-						return guidMatch ? getStatementForGuid( guidMatch[ 1 ] ) : null;
+						var statementData = $( dom ).data( 'statement' );
+						if ( statementData ) {
+							var statementDeserializer = new wb.serialization.StatementDeserializer();
+							return statementDeserializer.deserialize( statementData );
+						} else {
+							var guidMatch = dom.className.match( /wikibase-statement-(\S+)/ );
+							return guidMatch ? getStatementForGuid( guidMatch[ 1 ] ) : null;
+						}
 					},
 					propertyId
 				),

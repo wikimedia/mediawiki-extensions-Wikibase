@@ -5,6 +5,7 @@ namespace Wikibase\View;
 use ValueFormatters\NumberLocalizer;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
+use Wikibase\DataModel\Serializers\StatementSerializer;
 use Wikibase\DataModel\Services\ByPropertyIdGrouper;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
@@ -57,6 +58,11 @@ class ClaimHtmlGenerator {
 	private $textProvider;
 
 	/**
+	 * @var StatementSerializer
+	 */
+	private $statementSerializer;
+
+	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param SnakHtmlGenerator $snakHtmlGenerator
 	 * @param NumberLocalizer $numberLocalizer
@@ -66,12 +72,14 @@ class ClaimHtmlGenerator {
 		TemplateFactory $templateFactory,
 		SnakHtmlGenerator $snakHtmlGenerator,
 		NumberLocalizer $numberLocalizer,
-		LocalizedTextProvider $textProvider
+		LocalizedTextProvider $textProvider,
+		StatementSerializer $statementSerializer
 	) {
 		$this->snakHtmlGenerator = $snakHtmlGenerator;
 		$this->templateFactory = $templateFactory;
 		$this->numberLocalizer = $numberLocalizer;
 		$this->textProvider = $textProvider;
+		$this->statementSerializer = $statementSerializer;
 	}
 
 	/**
@@ -82,7 +90,7 @@ class ClaimHtmlGenerator {
 	 *
 	 * @return string HTML
 	 */
-	public function getHtmlForClaim( Statement $statement, $editSectionHtml ) {
+	public function getHtmlForClaim( Statement $statement, $editSectionHtml, $includeStatementSerialization ) {
 		$mainSnakHtml = $this->snakHtmlGenerator->getSnakHtml(
 			$statement->getMainSnak(),
 			false
@@ -106,7 +114,8 @@ class ClaimHtmlGenerator {
 			$editSectionHtml,
 			$referencesHeadingHtml,
 			$referencesHtml,
-			$collapseReferences ? 'wikibase-initially-collapsed' : ''
+			$collapseReferences ? 'wikibase-initially-collapsed' : '',
+			$includeStatementSerialization ? htmlspecialchars( json_encode( $this->statementSerializer->serialize( $statement ) ) ) : ''
 		);
 	}
 
