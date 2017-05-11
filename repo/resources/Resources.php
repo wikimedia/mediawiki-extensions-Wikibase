@@ -86,6 +86,12 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.currentEntity' => $moduleTemplate + [
+			'scripts' => [
+				'wikibase.currentEntity.js',
+			]
+		],
+
 		'wikibase.ui.entityViewInit' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.EntityInitializer.js',
