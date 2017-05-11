@@ -8,6 +8,7 @@ use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\DispatchingServiceFactory;
+use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
 use Wikibase\DataAccess\RepositoryServiceContainerFactory;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
@@ -78,7 +79,7 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			new ItemIdParser(),
 			new EntityIdComposer( [] ),
 			new EntityNamespaceLookup( [] ),
-			$dispatchingServiceFactory,
+			new MultipleRepositoryAwareWikibaseServices( $dispatchingServiceFactory ),
 			wfWikiID(),
 			'en'
 		);
