@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Wikibase\DataAccess;
 
 use MediaWiki\Services\ServiceContainer;
@@ -21,7 +20,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
  */
 class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implements WikibaseServices {
 
-	public function __construct( DispatchingServiceFactory $dispatchingServiceContainer ) {
+	public function __construct( DispatchingDataAccessServices $dispatchingServiceContainer ) {
 		parent::__construct();
 
 		$this->entityStoreWatcher = $dispatchingServiceContainer;

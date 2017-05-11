@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess\Tests;
 
+use Wikibase\DataAccess\DispatchingDataAccessServices;
 use Wikibase\DataAccess\DispatchingServiceFactory;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
@@ -22,7 +23,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @return DispatchingServiceFactory
+	 * @return DispatchingDataAccessServices
 	 */
 	private function getDispatchingServiceContainer() {
 		$dispatchingServiceContainer = $this->getMockBuilder( DispatchingServiceFactory::class )
@@ -103,7 +104,7 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 	}
 
 	public function testGetServicesIncludesServicesProvidedByDispatchingServiceContainer() {
-		$dispatchingServiceContainer = $this->getMockBuilder( DispatchingServiceFactory::class )
+		$dispatchingServiceContainer = $this->getMockBuilder( DispatchingDataAccessServices::class )
 			->disableOriginalConstructor()
 			->getMock();
 
