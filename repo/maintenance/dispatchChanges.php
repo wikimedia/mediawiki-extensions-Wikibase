@@ -265,7 +265,8 @@ class DispatchChanges extends Maintenance {
 		} else {
 			return new SqlChangeDispatchCoordinator(
 				$settings->getSetting( 'changesDatabase' ),
-				$repoID
+				$repoID,
+				MediaWikiServices::getInstance()->getDBLoadBalancerFactory()
 			);
 		}
 	}

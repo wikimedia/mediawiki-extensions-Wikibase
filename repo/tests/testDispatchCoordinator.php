@@ -99,7 +99,8 @@ class TestDispatchCoordinator extends Maintenance {
 		} else {
 			$coordinator = new SqlChangeDispatchCoordinator(
 				$settings->getSetting( 'changesDatabase' ),
-				$repoID
+				$repoID,
+				MediaWikiServices::getInstance()->getDBLoadBalancerFactory()
 			);
 		}
 		$coordinator->setChangesTable( self::TABLE_PREFIX . 'wb_changes' );
