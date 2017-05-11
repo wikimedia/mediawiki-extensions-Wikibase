@@ -53,25 +53,17 @@ class StatementSectionsView {
 	 * @return string HTML
 	 */
 	public function getHtml( StatementList $statementList ) {
-		$statementLists = $this->statementGrouper->groupStatements( $statementList );
-		$html = '';
+		return $this->getStatementSectionHtml( $statementList, false );
+	}
 
-		foreach ( $statementLists as $key => $statements ) {
-			if ( !is_string( $key ) || !( $statements instanceof StatementList ) ) {
-				throw new InvalidArgumentException(
-					'$statementLists must be an associative array of StatementList objects'
-				);
-			}
-
-			if ( $key !== 'statements' && $statements->isEmpty() ) {
-				continue;
-			}
-
-			$html .= $this->getHtmlForSectionHeading( $key );
-			$html .= $this->statementListView->getHtml( $statements->toArray() );
-		}
-
-		return $html;
+	/**
+	 * @param StatementList $statementList
+	 *
+	 * @throws InvalidArgumentException
+	 * @return string HTML
+	 */
+	public function getHtmlWithStatementDataAttribute( StatementList $statementList ) {
+		return $this->getStatementSectionHtml( $statementList, true );
 	}
 
 	/**
@@ -102,6 +94,35 @@ class StatementSectionsView {
 			$id,
 			$className
 		);
+	}
+
+	/**
+	 * @param StatementList $statementList
+	 * @param bool $includeStatementSerialization Flag indicating whether individual statement's
+	 * 			serialization should be included in HTML as a data attribute
+	 *
+	 * @return string
+	 */
+	private function getStatementSectionHtml( StatementList $statementList, $includeStatementSerialization ) {
+		$statementLists = $this->statementGrouper->groupStatements( $statementList );
+		$html = '';
+
+		foreach ( $statementLists as $key => $statements ) {
+			if ( !is_string( $key ) || !( $statements instanceof StatementList ) ) {
+				throw new InvalidArgumentException(
+					'$statementLists must be an associative array of StatementList objects'
+				);
+			}
+
+			if ( $key !== 'statements' && $statements->isEmpty() ) {
+				continue;
+			}
+
+			$html .= $this->getHtmlForSectionHeading( $key );
+			$html .= $this->statementListView->getHtml( $statements->toArray(), $includeStatementSerialization );
+		}
+
+		return $html;
 	}
 
 }

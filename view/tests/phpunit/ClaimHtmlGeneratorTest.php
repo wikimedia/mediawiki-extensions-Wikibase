@@ -4,9 +4,11 @@ namespace Wikibase\View\Tests;
 
 use DataValues\StringValue;
 use PHPUnit_Framework_TestCase;
+use Prophecy\Argument;
 use ValueFormatters\BasicNumberLocalizer;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
+use Wikibase\DataModel\Serializers\StatementSerializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -54,19 +56,12 @@ class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 	 * @uses Wikibase\View\Template\TemplateRegistry
 	 */
 	public function testGetHtmlForClaim(
-		SnakHtmlGenerator $snakHtmlGenerator,
 		Statement $statement,
 		$patterns
 	) {
-		$templateFactory = TemplateFactory::getDefaultInstance();
-		$claimHtmlGenerator = new ClaimHtmlGenerator(
-			$templateFactory,
-			$snakHtmlGenerator,
-			new BasicNumberLocalizer(),
-			new DummyLocalizedTextProvider()
-		);
+		$claimHtmlGenerator = $this->createClaimGenerator( $this->createDummyStatementSerializer() );
 
-		$html = $claimHtmlGenerator->getHtmlForClaim( $statement, 'edit' );
+		$html = $claimHtmlGenerator->getHtmlForClaim( $statement, 'edit', false );
 
 		foreach ( $patterns as $message => $pattern ) {
 			$this->assertRegExp( $pattern, $html, $message );
@@ -74,12 +69,9 @@ class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function getHtmlForClaimProvider() {
-		$snakHtmlGenerator = $this->getSnakHtmlGeneratorMock();
-
 		$testCases = array();
 
 		$testCases[] = array(
-			$snakHtmlGenerator,
 			new Statement( new PropertySomeValueSnak( 42 ) ),
 			array(
 				'snak html' => '/SNAK HTML/',
@@ -87,7 +79,6 @@ class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$testCases[] = array(
-			$snakHtmlGenerator,
 			new Statement(
 				new PropertySomeValueSnak( 42 ),
 				new SnakList( array(
@@ -100,7 +91,6 @@ class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$testCases[] = array(
-			$snakHtmlGenerator,
 			new Statement(
 				new PropertyValueSnak( 50, new StringValue( 'chocolate!' ) ),
 				new SnakList(),
@@ -124,20 +114,51 @@ class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 		$editSectionHtml,
 		$expected
 	) {
-		$templateFactory = TemplateFactory::getDefaultInstance();
-		$claimHtmlGenerator = new ClaimHtmlGenerator(
-			$templateFactory,
-			$this->getSnakHtmlGeneratorMock(),
-			new BasicNumberLocalizer(),
-			new DummyLocalizedTextProvider()
-		);
+		$claimHtmlGenerator = $this->createClaimGenerator( $this->createDummyStatementSerializer() );
 
-		$html = $claimHtmlGenerator->getHtmlForClaim( $statement, $editSectionHtml );
+		$html = $claimHtmlGenerator->getHtmlForClaim( $statement, $editSectionHtml, false );
 
 		$this->assertSame(
 			$expected ? 1 : 0,
 			substr_count( $html, 'wikibase-initially-collapsed' )
 		);
+	}
+
+	public function testRendersDataAttributeWithSerializedStatement() {
+		$snak = new PropertyNoValueSnak( 1 );
+		$statement = new Statement( $snak );
+
+		$statementSerializer = $this->prophesize( StatementSerializer::class );
+		$statementSerializer->serialize( Argument::any() )->willReturn( 'statement-serialization' );
+		$claimHtmlGenerator = $this->createClaimGenerator( $statementSerializer->reveal() );
+
+		$output = $claimHtmlGenerator->getHtmlForClaim( $statement, '', true );
+
+		assertThat(
+			$output,
+			is( htmlPiece( havingChild( tagMatchingOutline( <<<'HTML'
+				<div class="wikibase-statementview" data-statement='"statement-serialization"'/>
+HTML
+			) ) ) ) );
+	}
+
+	public function testDoesNotRenderDataAttributeWithSerializedStatementIfFlagIsFalse() {
+		$snak = new PropertyNoValueSnak( 1 );
+		$statement = new Statement( $snak );
+
+		$statementSerializer = $this->prophesize( StatementSerializer::class );
+		$statementSerializer->serialize( Argument::any() )->willReturn( 'statement-serialization' );
+		$claimHtmlGenerator = $this->createClaimGenerator( $statementSerializer->reveal() );
+
+		$includeStatementSerialization = false;
+		$output = $claimHtmlGenerator->getHtmlForClaim( $statement, '', $includeStatementSerialization );
+
+		assertThat(
+			$output,
+			is( htmlPiece( not( havingChild( tagMatchingOutline( <<<'HTML'
+				<div class="wikibase-statementview" data-statement='"statement-serialization"'/>
+HTML
+			) ) ) ) ) );
 	}
 
 	public function referencesProvider() {
@@ -152,6 +173,27 @@ class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 			[ $referencedStatement, '', false ],
 			[ $referencedStatement, '<EDIT SECTION>', true ],
 		];
+	}
+
+	/**
+	 * @param StatementSerializer $statementSerializer
+	 * @return ClaimHtmlGenerator
+	 */
+	private function createClaimGenerator( StatementSerializer $statementSerializer ) {
+		return new ClaimHtmlGenerator(
+			TemplateFactory::getDefaultInstance(),
+			$this->getSnakHtmlGeneratorMock(),
+			new BasicNumberLocalizer(),
+			new DummyLocalizedTextProvider(),
+			$statementSerializer
+		);
+	}
+
+	/**
+	 * @return StatementSerializer
+	 */
+	private function createDummyStatementSerializer() {
+		return $this->prophesize( StatementSerializer::class )->reveal();
 	}
 
 }

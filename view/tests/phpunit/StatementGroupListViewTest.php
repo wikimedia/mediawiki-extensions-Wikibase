@@ -42,7 +42,7 @@ class StatementGroupListViewTest extends PHPUnit_Framework_TestCase {
 
 		$statementGroupListView = $this->newStatementGroupListView();
 
-		$html = $statementGroupListView->getHtml( $statements );
+		$html = $statementGroupListView->getHtml( $statements, false );
 
 		$this->assertContains( 'id="P77', $html );
 		$this->assertContains( '<PROPERTY><ID></PROPERTY>', $html );
@@ -61,7 +61,7 @@ class StatementGroupListViewTest extends PHPUnit_Framework_TestCase {
 			$this->makeNoValueStatement( 'P102' ),
 		];
 		$view = $this->newStatementGroupListView();
-		$html = $view->getHtml( $statements );
+		$html = $view->getHtml( $statements, false );
 		$this->assertRegExp( '/^[^$]*\$' . implode( '\n[^$]*\$', [
 			'P101',
 			'P102',
