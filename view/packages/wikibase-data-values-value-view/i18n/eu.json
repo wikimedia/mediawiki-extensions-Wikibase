@@ -7,9 +7,12 @@
 		]
 	},
 	"valueview-expert-emptyvalue-empty": "hutsik",
+	"valueview-expert-globecoordinateinput-precision": "Zehaztasuna:",
+	"valueview-expert-globecoordinateinput-nullprecision": "zehaztugabea",
 	"valueview-expert-globecoordinateinput-customprecision": "berezia ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregoriarra",
 	"valueview-expert-timevalue-calendar-julian": "Juliotarra",
+	"valueview-expert-timeinput-precision": "Zehaztasuna:",
 	"valueview-expert-timeinput-calendar": "Egutegia:",
 	"valueview-expertextender-calendarhint-gregorian": "(Gregoriar egutegia)",
 	"valueview-expertextender-calendarhint-julian": "(Juliotar egutegia)",

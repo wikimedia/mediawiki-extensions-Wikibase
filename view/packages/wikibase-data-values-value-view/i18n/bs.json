@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Srdjan m"
+		]
+	},
+	"valueview-expert-advancedadjustments": "napredna prilagođavanja",
+	"valueview-expert-emptyvalue-empty": "prazno",
+	"valueview-expert-timevalue-calendar-gregorian": "Gregorijanski",
+	"valueview-expert-timevalue-calendar-julian": "Julijanski",
+	"valueview-expert-timeinput-calendar": "Kalendar:",
+	"valueview-expertextender-calendarhint-gregorian": "(gregorijanski kalendar)",
+	"valueview-expertextender-calendarhint-julian": "(julijanski kalendar)",
+	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr; promijeni na gregorijanski",
+	"valueview-expertextender-calendarhint-switch-julian": "&rarr; promijeni na julijanski",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Jezik (obavezno):",
+	"valueview-expertextender-unitsuggester-label": "Jedinica (neobavezno):"
+}

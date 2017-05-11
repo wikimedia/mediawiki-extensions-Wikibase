@@ -2,10 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Sfic",
-			"Shyamal"
+			"Shyamal",
+			"चक्रपाणी"
 		]
 	},
+	"valueview-desc": "डेटा वैल्यूज़ को दिखाने और सम्पादन हेतु यू आई कॉम्पोनेन्ट",
 	"valueview-expert-advancedadjustments": "उच्च नियंत्रण",
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "$1 वैल्यूज़ की हैंडलिंग अभी सपोर्टेड नहीं है।",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "$1 डेटा टाइप की वैल्यूज़ की हैंडलिंग अभी सपोर्टेड नहीं है।",
 	"valueview-expert-emptyvalue-empty": "खाली",
 	"valueview-expert-globecoordinateinput-precision": "सूक्ष्मता",
 	"valueview-expert-globecoordinateinput-nullprecision": "अविनिर्दिष्ट",
@@ -21,5 +25,7 @@
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "भाषा (अनिवार्य):",
 	"valueview-expertextender-unitsuggester-label": "मात्रक (वैकल्पिक):",
-	"valueview-preview-label": "तरह दिखाई देगा"
+	"valueview-preview-label": "तरह दिखाई देगा",
+	"valueview-preview-novalue": "कोई वैलिड वैल्यू नहीं पहचानी गई",
+	"valueview-listrotator-manually": "मैन्युअली सेट करें"
 }

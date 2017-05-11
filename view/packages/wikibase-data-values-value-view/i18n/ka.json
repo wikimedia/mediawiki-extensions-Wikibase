@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"David1010"
+		]
+	},
+	"valueview-expert-timevalue-calendar-gregorian": "გრიგორიანული",
+	"valueview-expert-timevalue-calendar-julian": "იულიუსის",
+	"valueview-expert-timeinput-precision": "სიზუსტე:",
+	"valueview-expert-timeinput-calendar": "კალენდარი:",
+	"valueview-expertextender-calendarhint-gregorian": "(გრიგორიანული კალენდარი)",
+	"valueview-expertextender-calendarhint-julian": "(იულიუსის კალენდარი)",
+	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr; გრიგორიანულზე შეცვლა",
+	"valueview-expertextender-calendarhint-switch-julian": "&rarr; იულიუსისაზე შეცვლა",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "ენა (სავალდებულო):",
+	"valueview-expertextender-unitsuggester-label": "ერთეული (არასავალდებულო):",
+	"valueview-preview-label": "ნაჩვენები იქნება როგორც:"
+}
