@@ -3,7 +3,8 @@
 		"authors": [
 			"Milicevic01",
 			"Srdjan m",
-			"Сербијана"
+			"Сербијана",
+			"Obsuser"
 		]
 	},
 	"wikibase-client-desc": "Klijent za proširenje Vikibaza",
@@ -57,6 +58,7 @@
 	"entityusage": "Upotreba jedinica",
 	"wikibase-pageinfo-entity-id": "ID stavke na Vikipodacima",
 	"wikibase-pageinfo-entity-id-none": "Nema",
+	"wikibase-pageinfo-entity-usage": "Entiteti Vikipodataka na ovoj stranici",
 	"wikibase-otherprojects": "Ostali projekti",
 	"wikibase-otherprojects-beta-message": "Ostali projekti na bočnoj traci",
 	"wikibase-otherprojects-beta-description": "Dodaje odlomak „{{int:wikibase-otherprojects}}“ na bočnoj traci s vezama na ostale Vikimedijine projekte na osnovu podataka iz Vikibaze."

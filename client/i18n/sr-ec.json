@@ -77,7 +77,9 @@
 	"wikibase-entityusage-submit": "Прикажи странице",
 	"wikibase-pageinfo-entity-id": "ИД ставке на Википодацима",
 	"wikibase-pageinfo-entity-id-none": "Нема",
+	"wikibase-pageinfo-entity-usage": "Ентитети Википодатака на овој страници",
 	"wikibase-otherprojects": "Остали пројекти",
 	"wikibase-otherprojects-beta-message": "Остали пројекти на бочној траци",
-	"wikibase-otherprojects-beta-description": "Додаје одломак „{{int:wikibase-otherprojects}}“ на бочној траци с везама на остале Викимедијине пројекте на основу података из Викибазе."
+	"wikibase-otherprojects-beta-description": "Додаје одломак „{{int:wikibase-otherprojects}}“ на бочној траци с везама на остале Викимедијине пројекте на основу података из Викибазе.",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Веза|Везе}} са {{WBREPONAME}}"
 }
