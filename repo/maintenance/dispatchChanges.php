@@ -52,7 +52,7 @@ class DispatchChanges extends Maintenance {
 		$this->addOption( 'lock-grace-interval', "Seconds after which to probe for orphaned locks. "
 					. "Default: 60", false, true );
 		$this->addOption( 'randomness', "Number of least current target wikis to pick from at random. "
-					. "Default: 10.", false, true );
+					. "Default: 15.", false, true );
 		$this->addOption( 'max-passes', "The number of passes to perform. "
 					. "Default: 1 if --max-time is not set, infinite if it is.", false, true );
 		$this->addOption( 'max-time', "The number of seconds to run before exiting, "
@@ -104,7 +104,7 @@ class DispatchChanges extends Maintenance {
 		$maxChunks = (int)$this->getOption( 'max-chunks', 15 );
 		$dispatchInterval = (int)$this->getOption( 'dispatch-interval', 60 );
 		$lockGraceInterval = (int)$this->getOption( 'lock-grace-interval', 60 );
-		$randomness = (int)$this->getOption( 'randomness', 10 );
+		$randomness = (int)$this->getOption( 'randomness', 15 );
 
 		$this->verbose = $this->getOption( 'verbose', false );
 
@@ -255,17 +255,20 @@ class DispatchChanges extends Maintenance {
 	private function getCoordinator( SettingsArray $settings ) {
 		$repoID = wfWikiID();
 		$lockManagerName = $settings->getSetting( 'dispatchingLockManager' );
+		$LBFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 		if ( !is_null( $lockManagerName ) ) {
 			$lockManager = LockManagerGroup::singleton( wfWikiID() )->get( $lockManagerName );
 			return new LockManagerSqlChangeDispatchCoordinator(
 				$lockManager,
+				$LBFactory,
 				$settings->getSetting( 'changesDatabase' ),
 				$repoID
 			);
 		} else {
 			return new SqlChangeDispatchCoordinator(
 				$settings->getSetting( 'changesDatabase' ),
-				$repoID
+				$repoID,
+				$LBFactory
 			);
 		}
 	}
