@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_ca9f01b8",
+        "filename": "client/includes/Usage/EntityUsage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-11T06:53:08Z",
+      "side": 1,
+      "message": "This should mention if references and qualifiers also count as usage.",
+      "range": {
+        "startLine": 44,
+        "startChar": 31,
+        "endLine": 44,
+        "endChar": 67
+      },
+      "revId": "e31b0829003a69c8e7498c05066fa0bb57e45879",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_aa588d36",
+        "filename": "client/includes/Usage/EntityUsage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-11T06:53:08Z",
+      "side": 1,
+      "message": "What does \"imply\" mean in this context? Why \"or\"?",
+      "range": {
+        "startLine": 45,
+        "startChar": 19,
+        "endLine": 45,
+        "endChar": 26
+      },
+      "revId": "e31b0829003a69c8e7498c05066fa0bb57e45879",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_eaa44506",
+        "filename": "client/includes/Usage/UsageAccumulator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-11T06:53:08Z",
+      "side": 1,
+      "message": "This should mention if references and qualifiers also count as usage.",
+      "range": {
+        "startLine": 54,
+        "startChar": 18,
+        "endLine": 54,
+        "endChar": 37
+      },
+      "revId": "e31b0829003a69c8e7498c05066fa0bb57e45879",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_4a3e91b6",
+        "filename": "client/includes/Usage/UsageAccumulator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-11T06:53:08Z",
+      "side": 1,
+      "message": "This is entirely unused in this patch, right? (Except for the test, obviously.)",
+      "range": {
+        "startLine": 59,
+        "startChar": 17,
+        "endLine": 59,
+        "endChar": 34
+      },
+      "revId": "e31b0829003a69c8e7498c05066fa0bb57e45879",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_ca86216a",
+        "filename": "client/tests/phpunit/includes/Usage/UsageAccumulatorContractTester.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-11T06:53:08Z",
+      "side": 1,
+      "message": "Semantically I would expect statements after \"titles\", but before sitelinks. The new code added in this patch comes after \"title\" in almost all cases, except here in the test. I know this is super-nitpicky, but can you move your new code a little bit in this file? (This is not a request to reorder existing code, that would not be helpful.)",
+      "range": {
+        "startLine": 37,
+        "startChar": 22,
+        "endLine": 37,
+        "endChar": 27
+      },
+      "revId": "e31b0829003a69c8e7498c05066fa0bb57e45879",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
