@@ -9,6 +9,7 @@ use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
@@ -56,41 +57,48 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 		return $dispatchingServiceContainer;
 	}
 
+	private function getWikibaseServices( DispatchingServiceFactory $dispatchingServiceContainer ) {
+		return new MultipleRepositoryAwareWikibaseServices(
+			$dispatchingServiceContainer,
+			$this->getMock( EntityStoreWatcher::class )
+		);
+	}
+
 	public function testGetEntityInfoBuilderFactory() {
-		$wikibaseServices = new MultipleRepositoryAwareWikibaseServices( $this->getDispatchingServiceContainer() );
+		$wikibaseServices = $this->getWikibaseServices( $this->getDispatchingServiceContainer() );
 
 		$this->assertInstanceOf( EntityInfoBuilderFactory::class, $wikibaseServices->getEntityInfoBuilderFactory() );
 	}
 
 	public function testGetEntityPrefetcher() {
-		$wikibaseServices = new MultipleRepositoryAwareWikibaseServices( $this->getDispatchingServiceContainer() );
+		$wikibaseServices = $this->getWikibaseServices( $this->getDispatchingServiceContainer() );
 
 		$this->assertInstanceOf( EntityPrefetcher::class, $wikibaseServices->getEntityPrefetcher() );
 
 	}
 
 	public function testGetEntityRevisionLookup() {
-		$wikibaseServices = new MultipleRepositoryAwareWikibaseServices( $this->getDispatchingServiceContainer() );
+		$wikibaseServices = $this->getWikibaseServices( $this->getDispatchingServiceContainer() );
 
 		$this->assertInstanceOf( EntityRevisionLookup::class, $wikibaseServices->getEntityRevisionLookup() );
 
 	}
 
 	public function testGetPropertyInfoLookup() {
-		$wikibaseServices = new MultipleRepositoryAwareWikibaseServices( $this->getDispatchingServiceContainer() );
+		$wikibaseServices = $this->getWikibaseServices( $this->getDispatchingServiceContainer() );
 
 		$this->assertInstanceOf( PropertyInfoLookup::class, $wikibaseServices->getPropertyInfoLookup() );
 
 	}
 
 	public function testGetTermBuffer() {
-		$wikibaseServices = new MultipleRepositoryAwareWikibaseServices( $this->getDispatchingServiceContainer() );
+		$wikibaseServices = $this->getWikibaseServices( $this->getDispatchingServiceContainer() );
 
 		$this->assertInstanceOf( TermBuffer::class, $wikibaseServices->getTermBuffer() );
 	}
 
 	public function testGetTermSearchInteractorFactory() {
-		$wikibaseServices = new MultipleRepositoryAwareWikibaseServices( $this->getDispatchingServiceContainer() );
+		$wikibaseServices = $this->getWikibaseServices( $this->getDispatchingServiceContainer() );
 
 		$this->assertInstanceOf(
 			TermSearchInteractorFactory::class,
@@ -103,7 +111,7 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 			->disableOriginalConstructor()
 			->getMock();
 
-		$wikibaseServices = new MultipleRepositoryAwareWikibaseServices( $dispatchingServiceContainer );
+		$wikibaseServices = $this->getWikibaseServices( $dispatchingServiceContainer );
 
 		$serviceNames = $wikibaseServices->getServiceNames();
 
@@ -118,7 +126,7 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 	public function testGetServiceReturnsSameServiceInstanceAsDispatchingServiceContainer() {
 		$dispatchingServiceContainer = $this->getDispatchingServiceContainer();
 
-		$wikibaseServices = new MultipleRepositoryAwareWikibaseServices( $dispatchingServiceContainer );
+		$wikibaseServices = $this->getWikibaseServices( $dispatchingServiceContainer );
 
 		$this->assertSame(
 			$dispatchingServiceContainer->getEntityInfoBuilderFactory(),
