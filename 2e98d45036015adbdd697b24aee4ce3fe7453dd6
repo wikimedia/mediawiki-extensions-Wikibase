@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_59418dab",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-11T20:05:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_2780394b",
+      "revId": "2e98d45036015adbdd697b24aee4ce3fe7453dd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_87f26502",
         "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2017-05-10T17:54:23Z",
       "side": 1,
       "message": "This is missing \u0027term_entity_type\u0027 \u003d\u003e $entityType, I think.",
+      "revId": "2e98d45036015adbdd697b24aee4ce3fe7453dd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_194b15ce",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-11T20:05:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_87f26502",
       "revId": "2e98d45036015adbdd697b24aee4ce3fe7453dd6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_998c0501",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-11T20:05:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_47d3ed61",
+      "revId": "2e98d45036015adbdd697b24aee4ce3fe7453dd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_675ab1fb",
         "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
         "patchSetId": 6
@@ -64,6 +118,24 @@
       "writtenOn": "2017-05-10T17:54:23Z",
       "side": 1,
       "message": "If you have a setter, you don\u0027t need the optional constructor argument.",
+      "revId": "2e98d45036015adbdd697b24aee4ce3fe7453dd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_d91b5dd3",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-11T20:05:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_675ab1fb",
       "revId": "2e98d45036015adbdd697b24aee4ce3fe7453dd6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
