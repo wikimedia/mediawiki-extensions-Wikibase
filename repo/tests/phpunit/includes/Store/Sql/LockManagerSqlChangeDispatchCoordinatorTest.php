@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
+use MediaWiki\MediaWikiServices;
 use NullLockManager;
 use Wikibase\Repo\Store\Sql\LockManagerSqlChangeDispatchCoordinator;
 
@@ -29,7 +30,12 @@ class LockManagerSqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 	 */
 	private function getNullCoordinator() {
 		$lockManager = new NullLockManager( [] );
-		return new LockManagerSqlChangeDispatchCoordinator( $lockManager, false, 'TestRepo' );
+		return new LockManagerSqlChangeDispatchCoordinator(
+			$lockManager,
+			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			false,
+			'TestRepo'
+		);
 	}
 
 	private function resetChangesTable( $id = 23 ) {
@@ -58,7 +64,7 @@ class LockManagerSqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 		$this->assertSame( 'foowiki', $clientArray['chd_db'] );
 		$this->assertSame( '0', $clientArray['chd_site'] );
 		$this->assertSame( '0', $clientArray['chd_seen'] );
-		$this->assertSame( 'Wikibase.TestRepo.dispatchChanges.0', $clientArray['chd_lock'] );
+		$this->assertNull( $clientArray['chd_lock'] );
 	}
 
 }
