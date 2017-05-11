@@ -93,13 +93,15 @@ class TestDispatchCoordinator extends Maintenance {
 			$lockManager = LockManagerGroup::singleton( wfWikiID() )->get( $lockManagerName );
 			$coordinator = new LockManagerSqlChangeDispatchCoordinator(
 				$lockManager,
+				MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
 				$settings->getSetting( 'changesDatabase' ),
 				$repoID
 			);
 		} else {
 			$coordinator = new SqlChangeDispatchCoordinator(
 				$settings->getSetting( 'changesDatabase' ),
-				$repoID
+				$repoID,
+				MediaWikiServices::getInstance()->getDBLoadBalancerFactory()
 			);
 		}
 		$coordinator->setChangesTable( self::TABLE_PREFIX . 'wb_changes' );
