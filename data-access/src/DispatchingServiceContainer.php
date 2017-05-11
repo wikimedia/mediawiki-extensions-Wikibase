@@ -25,7 +25,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
  *
  * @license GPL-2.0+
  */
-class DispatchingServiceFactory extends ServiceContainer implements DispatchingDataAccessServices, EntityStoreWatcher {
+class DispatchingServiceContainer extends ServiceContainer implements DispatchingDataAccessServices, EntityStoreWatcher {
 
 	/**
 	 * @var RepositoryServiceContainerFactory
