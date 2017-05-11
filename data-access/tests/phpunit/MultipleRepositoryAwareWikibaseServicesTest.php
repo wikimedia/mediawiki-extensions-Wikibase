@@ -2,7 +2,7 @@
 
 namespace Wikibase\DataAccess\Tests;
 
-use Wikibase\DataAccess\DispatchingServiceFactory;
+use Wikibase\DataAccess\DispatchingDataAccessServices;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Term\TermBuffer;
@@ -22,10 +22,10 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @return DispatchingServiceFactory
+	 * @return DispatchingDataAccessServices
 	 */
 	private function getDispatchingServiceContainer() {
-		$dispatchingServiceContainer = $this->getMockBuilder( DispatchingServiceFactory::class )
+		$dispatchingServiceContainer = $this->getMockBuilder( DispatchingDataAccessServices::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -57,7 +57,7 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 		return $dispatchingServiceContainer;
 	}
 
-	private function getWikibaseServices( DispatchingServiceFactory $dispatchingServiceContainer ) {
+	private function getWikibaseServices( DispatchingDataAccessServices $dispatchingServiceContainer ) {
 		return new MultipleRepositoryAwareWikibaseServices(
 			$dispatchingServiceContainer,
 			$this->getMock( EntityStoreWatcher::class )
@@ -107,7 +107,7 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 	}
 
 	public function testGetServicesIncludesServicesProvidedByDispatchingServiceContainer() {
-		$dispatchingServiceContainer = $this->getMockBuilder( DispatchingServiceFactory::class )
+		$dispatchingServiceContainer = $this->getMockBuilder( DispatchingDataAccessServices::class )
 			->disableOriginalConstructor()
 			->getMock();
 
