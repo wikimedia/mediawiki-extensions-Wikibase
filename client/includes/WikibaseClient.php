@@ -45,7 +45,7 @@ use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\Serializer\ForbiddenSerializer;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\ClientStore;
-use Wikibase\DataAccess\DispatchingServiceFactory;
+use Wikibase\DataAccess\MultiRepositoryServices;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
 use Wikibase\DataAccess\RepositoryServiceContainerFactory;
 use Wikibase\DataAccess\WikibaseServices;
@@ -382,13 +382,13 @@ final class WikibaseClient {
 	 */
 	public function getWikibaseServices() {
 		if ( $this->wikibaseServices === null ) {
-			$factory = new DispatchingServiceFactory(
+			$dispatchingServiceContainer = new MultiRepositoryServices(
 				$this->getRepositoryServiceContainerFactory(),
 				$this->repositoryDefinitions
 			);
-			$factory->loadWiringFiles( $this->settings->getSetting( 'dispatchingServiceWiringFiles' ) );
+			$dispatchingServiceContainer->loadWiringFiles( $this->settings->getSetting( 'dispatchingServiceWiringFiles' ) );
 
-			$this->wikibaseServices = new MultipleRepositoryAwareWikibaseServices( $factory );
+			$this->wikibaseServices = new MultipleRepositoryAwareWikibaseServices( $dispatchingServiceContainer );
 		}
 
 		return $this->wikibaseServices;

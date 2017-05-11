@@ -3,7 +3,7 @@
 namespace Wikibase\DataAccess\Tests;
 
 use Wikibase\DataAccess\DispatchingDataAccessServices;
-use Wikibase\DataAccess\DispatchingServiceFactory;
+use Wikibase\DataAccess\MultiRepositoryServices;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Term\TermBuffer;
@@ -26,7 +26,7 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit_Framework_Tes
 	 * @return DispatchingDataAccessServices
 	 */
 	private function getDispatchingServiceContainer() {
-		$dispatchingServiceContainer = $this->getMockBuilder( DispatchingServiceFactory::class )
+		$dispatchingServiceContainer = $this->getMockBuilder( MultiRepositoryServices::class )
 			->disableOriginalConstructor()
 			->getMock();
 

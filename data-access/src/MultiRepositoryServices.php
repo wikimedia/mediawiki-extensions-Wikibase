@@ -18,14 +18,14 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
  * A factory/locator of services dispatching the action to services configured for the
- * particular input, based on the repository the particular input entity belongs to.
+ * particular repository.
  * Dispatching services provide a way of using entities from multiple repositories.
  *
  * Services are defined by loading wiring arrays, or by using defineService method.
  *
  * @license GPL-2.0+
  */
-class DispatchingServiceFactory extends ServiceContainer implements DispatchingDataAccessServices, EntityStoreWatcher {
+class MultiRepositoryServices extends ServiceContainer implements DispatchingDataAccessServices, EntityStoreWatcher {
 
 	/**
 	 * @var RepositoryServiceContainerFactory
