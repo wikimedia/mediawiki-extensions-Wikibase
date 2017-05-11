@@ -7,7 +7,7 @@ use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataAccess\DispatchingServiceFactory;
+use Wikibase\DataAccess\DispatchingServiceContainer;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
 use Wikibase\DataAccess\RepositoryServiceContainerFactory;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -58,18 +58,18 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$dispatchingServiceFactory = new DispatchingServiceFactory(
+		$dispatchingServiceContainer = new DispatchingServiceContainer(
 			$containerFactory,
 			$repositoryDefinitions
 		);
 
-		$dispatchingServiceFactory->defineService( 'EntityPrefetcher', function() {
+		$dispatchingServiceContainer->defineService( 'EntityPrefetcher', function() {
 			return new NullEntityPrefetcher();
 		} );
-		$dispatchingServiceFactory->defineService( 'EntityRevisionLookup', function() {
+		$dispatchingServiceContainer->defineService( 'EntityRevisionLookup', function() {
 			return $this->getMock( EntityRevisionLookup::class );
 		} );
-		$dispatchingServiceFactory->defineService( 'PropertyInfoLookup', function() {
+		$dispatchingServiceContainer->defineService( 'PropertyInfoLookup', function() {
 			return new MockPropertyInfoLookup();
 		} );
 
@@ -80,7 +80,7 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			new EntityIdComposer( [] ),
 			new EntityNamespaceLookup( [] ),
 			new MultipleRepositoryAwareWikibaseServices(
-				$dispatchingServiceFactory,
+				$dispatchingServiceContainer,
 				$this->getMock( EntityStoreWatcher::class )
 			),
 			wfWikiID(),
