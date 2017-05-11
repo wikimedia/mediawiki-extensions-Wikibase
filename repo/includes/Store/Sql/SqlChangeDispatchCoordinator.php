@@ -236,9 +236,16 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	}
 
 	/**
+	 * @return Database A connection to the repo's replica database
+	 */
+	private function getRepoReplica() {
+		return $this->getRepoLB()->getConnection( DB_REPLICA, [], $this->repoDB );
+	}
+
+	/**
 	 * @param Database $db The repo database connection to release for re-use.
 	 */
-	private function releaseRepoMaster( Database $db ) {
+	private function releaseRepoDb( Database $db ) {
 		$this->getRepoLB()->reuseConnection( $db );
 	}
 
@@ -304,14 +311,14 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 * @see selectClient()
 	 */
 	private function getCandidateClients() {
-		$db = $this->getRepoMaster();
+		$dbr = $this->getRepoReplica();
 
 		// XXX: subject to clock skew. Use DB based "now" time?
 		$freshDispatchTime = wfTimestamp( TS_MW, $this->now() - $this->dispatchInterval );
 		$staleLockTime = wfTimestamp( TS_MW, $this->now() - $this->lockGraceInterval );
 
 		// TODO: pass the max change ID as a parameter!
-		$row = $db->selectRow(
+		$row = $dbr->selectRow(
 			$this->changesTable,
 			'max( change_id ) as maxid',
 			array(),
@@ -329,16 +336,19 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		// Limit the list to $randomness items. Candidates will be picked
 		// from the resulting list at random.
 
-		$candidates = $db->selectFieldValues(
+		$where = [
+			'( chd_lock is NULL ' . // not locked
+			' OR chd_touched < ' . $dbr->addQuotes( $staleLockTime ) . ' ) ', // or the lock is old
+			'( chd_touched < ' . $dbr->addQuotes( $freshDispatchTime ) . // and wasn't touched too recently or
+			' OR ( ' . (int)$maxId. ' - chd_seen ) > ' . (int)$this->batchSize . ') ' , // or it's lagging by more changes than batchSite
+			'chd_seen < ' . (int)$maxId, // and not fully up to date.
+			'chd_disabled = 0' // and not disabled
+		];
+
+		$candidates = $dbr->selectFieldValues(
 			$this->stateTable,
 			'chd_site',
-			array( '( chd_lock is NULL ' . // not locked or...
-					' OR chd_touched < ' . $db->addQuotes( $staleLockTime ) . ' ) ', // ...the lock is old
-				'( chd_touched < ' . $db->addQuotes( $freshDispatchTime ) . // and wasn't touched too recently or...
-					' OR ( ' . (int)$maxId. ' - chd_seen ) > ' . (int)$this->batchSize . ') ' , // or it's lagging by more changes than batchSite
-				'chd_seen < ' . (int)$maxId, // and not fully up to date.
-				'chd_disabled = 0' // and not disabled
-			),
+			$where,
 			__METHOD__,
 			array(
 				'ORDER BY' => 'chd_seen ASC',
@@ -346,6 +356,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 			)
 		);
 
+		$this->releaseRepoDb( $dbr );
 		return $candidates;
 	}
 
@@ -359,9 +370,10 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 * @throws DBUnexpectedError
 	 */
 	public function initState( array $clientWikiDBs ) {
-		$db = $this->getRepoMaster();
+		$dbr = $this->getRepoReplica();
+		$dbw = $this->getRepoMaster();
 
-		$trackedSiteIds = $db->selectFieldValues(
+		$trackedSiteIds = $dbr->selectFieldValues(
 			$this->stateTable,
 			'chd_site',
 			array(),
@@ -380,7 +392,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 				'chd_disabled' => 0,
 			);
 
-			$db->insert(
+			$dbw->insert(
 				$this->stateTable,
 				$state,
 				__METHOD__,
@@ -390,7 +402,8 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 			$this->log( "Initialized dispatch state for $siteID" );
 		}
 
-		$this->releaseRepoMaster( $db );
+		$this->releaseRepoDb( $dbr );
+		$this->releaseRepoDb( $dbw );
 	}
 
 	/**
@@ -401,7 +414,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 *
 	 * @throws MWException if there are no client wikis to chose from.
 	 * @throws Exception
-	 * @return array An associative array containing the state of the selected client wiki
+	 * @return bool|array An associative array containing the state of the selected client wiki
 	 *               (see selectClient()) or false if the client wiki could not be locked.
 	 *
 	 * @see selectClient()
@@ -410,14 +423,16 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		$this->trace( "Trying $siteID" );
 
 		// start transaction
-		$db = $this->getRepoMaster();
-		$db->startAtomic( __METHOD__ );
+		$dbw = $this->getRepoMaster();
+		$dbr = $this->getRepoReplica();
+
+		$dbw->startAtomic( __METHOD__ );
 
 		try {
 			$this->trace( 'Loaded repo db master' );
 
 			// get client state
-			$state = $db->selectRow(
+			$state = $dbr->selectRow(
 				$this->stateTable,
 				array( 'chd_site', 'chd_db', 'chd_seen', 'chd_touched', 'chd_lock', 'chd_disabled' ),
 				array( 'chd_site' => $siteID ),
@@ -425,6 +440,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 				array( 'FOR UPDATE' )
 			);
 
+			$this->releaseRepoDb( $dbr );
 			$this->trace( "Loaded dispatch changes row for $siteID" );
 
 			if ( !$state ) {
@@ -440,17 +456,17 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 
 			if ( $state['chd_lock'] !== null ) {
 				// bail out if another dispatcher instance is holding a lock for that wiki
-				if ( $this->isClientLockUsed( $db, $lock ) ) {
+				if ( $this->isClientLockUsed( $dbw, $lock ) ) {
 					$this->trace( "$siteID is already being handled by another process."
 								. " (lock: " . $state['chd_lock'] . ")" );
 
-					$db->rollback( __METHOD__ );
-					$this->releaseRepoMaster( $db );
+					$dbw->rollback( __METHOD__ );
+					$this->releaseRepoDb( $dbw );
 					return false;
 				}
 			}
 
-			$ok = $this->engageClientLock( $db, $lock );
+			$ok = $this->engageClientLock( $dbw, $lock );
 
 			if ( !$ok ) {
 				// This really shouldn't happen, since we already checked if another process has a lock.
@@ -461,31 +477,20 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 
 				$this->trace( "Warning: Failed to acquire lock $lock for site $siteID!" );
 
-				$db->rollback( __METHOD__ );
-				$this->releaseRepoMaster( $db );
+				$dbw->rollback( __METHOD__ );
+				$this->releaseRepoDb( $dbw );
 				return false;
 			}
 
 			$this->trace( "Locked client $siteID with $lock" );
-
-			$state['chd_lock'] = $lock;
-			$state['chd_touched'] = wfTimestamp( TS_MW, $this->now() ); // XXX: use DB time
-
-			// update state record for already known client wiki
-			$db->update(
-				$this->stateTable,
-				$state,
-				array( 'chd_site' => $state['chd_site'] ),
-				__METHOD__
-			);
 		} catch ( Exception $ex ) {
-			$db->rollback( __METHOD__ );
-			$this->releaseRepoMaster( $db );
+			$dbw->rollback( __METHOD__ );
+			$this->releaseRepoDb( $dbw );
 			throw $ex;
 		}
 
-		$db->endAtomic( __METHOD__ );
-		$this->releaseRepoMaster( $db );
+		$dbw->endAtomic( __METHOD__ );
+		$this->releaseRepoDb( $dbw );
 
 		$this->trace( "Locked site $siteID at {$state['chd_seen']}." );
 
@@ -528,12 +533,12 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 			);
 		} catch ( Exception $ex ) {
 			$db->rollback( __METHOD__ );
-			$this->releaseRepoMaster( $db );
+			$this->releaseRepoDb( $db );
 			throw $ex;
 		}
 
 		$db->endAtomic( __METHOD__ );
-		$this->releaseRepoMaster( $db );
+		$this->releaseRepoDb( $db );
 
 		$this->trace( "Released $wikiDB for site $siteID at {$state['chd_seen']}." );
 	}
