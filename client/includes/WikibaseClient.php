@@ -46,8 +46,9 @@ use Wikibase\Client\Serializer\ForbiddenSerializer;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\ClientStore;
 use Wikibase\DataAccess\DispatchingServiceFactory;
-use Wikibase\DataAccess\EntityDataRetrievalServiceFactory;
+use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
 use Wikibase\DataAccess\RepositoryServiceContainerFactory;
+use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -120,9 +121,9 @@ final class WikibaseClient {
 	private $siteLookup;
 
 	/**
-	 * @var EntityDataRetrievalServiceFactory
+	 * @var WikibaseServices
 	 */
-	private $entityDataRetrievalServiceFactory;
+	private $wikibaseServices;
 
 	/**
 	 * @var PropertyDataTypeLookup|null
@@ -377,20 +378,20 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return EntityDataRetrievalServiceFactory
+	 * @return WikibaseServices
 	 */
-	public function getEntityDataRetrievalServiceFactory() {
-		if ( $this->entityDataRetrievalServiceFactory === null ) {
+	public function getWikibaseServices() {
+		if ( $this->wikibaseServices === null ) {
 			$factory = new DispatchingServiceFactory(
 				$this->getRepositoryServiceContainerFactory(),
 				$this->repositoryDefinitions
 			);
 			$factory->loadWiringFiles( $this->settings->getSetting( 'dispatchingServiceWiringFiles' ) );
 
-			$this->entityDataRetrievalServiceFactory = $factory;
+			$this->wikibaseServices = new MultipleRepositoryAwareWikibaseServices( $factory, $factory );
 		}
 
-		return $this->entityDataRetrievalServiceFactory;
+		return $this->wikibaseServices;
 	}
 
 	private function getRepositoryServiceContainerFactory() {
@@ -441,7 +442,7 @@ final class WikibaseClient {
 	 */
 	private function getPrefetchingTermLookup() {
 		if ( !$this->termLookup ) {
-			$this->termLookup = $this->getEntityDataRetrievalServiceFactory()->getTermBuffer();
+			$this->termLookup = $this->getWikibaseServices()->getTermBuffer();
 		}
 
 		return $this->termLookup;
@@ -455,7 +456,7 @@ final class WikibaseClient {
 	 * @return TermSearchInteractor
 	 */
 	public function newTermSearchInteractor( $displayLanguageCode ) {
-		return $this->getEntityDataRetrievalServiceFactory()->getTermSearchInteractorFactory()
+		return $this->getWikibaseServices()->getTermSearchInteractorFactory()
 			->newInteractor( $displayLanguageCode );
 	}
 
@@ -535,7 +536,7 @@ final class WikibaseClient {
 				$this->getEntityIdParser(),
 				$this->getEntityIdComposer(),
 				$this->getEntityNamespaceLookup(),
-				$this->getEntityDataRetrievalServiceFactory(),
+				$this->getWikibaseServices(),
 				$repoDatabase,
 				$this->getContentLanguage()->getCode()
 			);
