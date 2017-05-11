@@ -150,52 +150,6 @@ class SqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 		), $rows );
 	}
 
-	public function testLockClient() {
-		$this->insertChangesDispatchRows( array(
-			array(
-				'chd_site' => 'dewiki',
-				'chd_db' => 'dewikidb',
-				'chd_seen' => '0',
-				'chd_touched' => '00000000000000',
-				'chd_lock' => null,
-				'chd_disabled' => '0',
-			),
-			array(
-				'chd_site' => 'enwiki',
-				'chd_db' => 'enwikidb',
-				'chd_seen' => '0',
-				'chd_touched' => '00000000000000',
-				'chd_lock' => null,
-				'chd_disabled' => '0',
-			),
-		) );
-
-		$coordinator = $this->getCoordinator();
-
-		$coordinator->lockClient( 'dewiki' );
-
-		$rows = $this->fetchChangesDispatchRows();
-
-		$this->assertEquals( array(
-			array(
-				'chd_site' => 'dewiki',
-				'chd_db' => 'dewikidb',
-				'chd_seen' => '0',
-				'chd_touched' => '20140303000000',
-				'chd_lock' => "Wikibase.TestRepo.dispatchChanges.dewiki",
-				'chd_disabled' => '0',
-			),
-			array(
-				'chd_site' => 'enwiki',
-				'chd_db' => 'enwikidb',
-				'chd_seen' => '0',
-				'chd_touched' => '00000000000000',
-				'chd_lock' => null,
-				'chd_disabled' => '0',
-			),
-		), $rows );
-	}
-
 	public function testReleaseClient() {
 		$this->insertChangesDispatchRows( array(
 			array(
@@ -339,25 +293,6 @@ class SqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 			)
 		);
 
-		$brokenLockRows = array(
-			'dewiki' => array(
-				'chd_site' => 'dewiki',
-				'chd_db' => 'dewikidb',
-				'chd_seen' => '0',
-				'chd_touched' => '20140302235955',
-				'chd_lock' => 'Foo.Bar', // locked, but not really
-				'chd_disabled' => 0,
-			),
-			'enwiki' => array(
-				'chd_site' => 'enwiki',
-				'chd_db' => 'enwikidb',
-				'chd_seen' => '0',
-				'chd_touched' => '00000000000000', // oooold timestamp
-				'chd_lock' => 'Foo.Bar', // locked
-				'chd_disabled' => 0,
-			)
-		);
-
 		$noPendingRows = array(
 			'dewiki' => array(
 				'chd_site' => 'dewiki',
@@ -376,8 +311,8 @@ class SqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 					'chd_site' => 'nlwiki',
 					'chd_db' => 'nlwikidb',
 					'chd_seen' => '7',
-					'chd_touched' => '20140303000000',
-					'chd_lock' => 'Wikibase.TestRepo.dispatchChanges.nlwiki',
+					'chd_touched' => '20140301070000',
+					'chd_lock' => null,
 				)
 			),
 			'locked or disabled' => array(
@@ -390,18 +325,8 @@ class SqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 					'chd_site' => 'dewiki',
 					'chd_db' => 'dewikidb',
 					'chd_seen' => '0',
-					'chd_touched' => '20140303000000',
-					'chd_lock' => 'Wikibase.TestRepo.dispatchChanges.dewiki',
-				)
-			),
-			'broken lock' => array(
-				$brokenLockRows,
-				array(
-					'chd_site' => 'enwiki',
-					'chd_db' => 'enwikidb',
-					'chd_seen' => '0',
-					'chd_touched' => '20140303000000',
-					'chd_lock' => 'Wikibase.TestRepo.dispatchChanges.enwiki',
+					'chd_touched' => '20140302235907',
+					'chd_lock' => null,
 				)
 			),
 			'no pending changed' => array(
