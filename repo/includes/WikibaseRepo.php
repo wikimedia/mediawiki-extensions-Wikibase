@@ -32,7 +32,7 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataAccess\EntityDataRetrievalServiceFactory;
+use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -294,9 +294,9 @@ class WikibaseRepo {
 	private $cachingCommonsMediaFileNameLookup = null;
 
 	/**
-	 * @var EntityDataRetrievalServiceFactory|null
+	 * @var WikibaseServices|null
 	 */
-	private $entityDataRetrievalServiceFactory = null;
+	private $wikibaseServices = null;
 
 	/**
 	 * @var EntityRdfBuilderFactory|null
@@ -331,7 +331,7 @@ class WikibaseRepo {
 
 		// If client functionality is enabled, use it to enable federation.
 		if ( WikibaseSettings::isClientEnabled() ) {
-			$dataRetrievalServices = WikibaseClient::getDefaultInstance()->getEntityDataRetrievalServiceFactory();
+			$dataRetrievalServices = WikibaseClient::getDefaultInstance()->getWikibaseServices();
 			$repositoryDefinitions = WikibaseClient::getDefaultInstance()->getRepositoryDefinitions();
 		}
 
@@ -500,20 +500,21 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * FIXME: Optional $entityDataRetrievalServiceFactory makes it possible to access
+	 * FIXME: Optional $wikibaseServices makes it possible to access
 	 * entities from foreign repositories from Repo component but they also introduce the optional
 	 * dependency on the Client component. Such dependency is bad and in the long run it should be removed
-	 * by making EntityDataRetrievalServiceFactory implementation provided to WikibaseRepo not be
-	 * bound to WikibaseClient.
+	 * by making WikibaseServices implementation provided to WikibaseRepo not be bound to WikibaseClient.
+	 * WikibaseServices provided by WikibaseClient instance is only used in the transition period until
+	 * WikibaseServices no longer depends on services from Wikibase\Client namespace.
 	 *
 	 * @param SettingsArray $settings
 	 * @param DataTypeDefinitions $dataTypeDefinitions
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 * @param RepositoryDefinitions $repositoryDefinitions
-	 * @param EntityDataRetrievalServiceFactory|null $entityDataRetrievalServiceFactory optional factory
-	 *        of entity data retrieval services that will be used by the Repo instead of it creating
+	 * @param WikibaseServices|null $wikibaseServices optional container of service providing the
+	 *        access to the entity data that will be used by the Repo instead of it creating
 	 *        instances of those services itself.
-	 *        This factory could be provided in order to allow Repo make use of Dispatching services
+	 *        This container could be provided in order to allow Repo make use of Dispatching services
 	 *        and access data of entities from foreign repositories.
 	 */
 	public function __construct(
@@ -521,13 +522,13 @@ class WikibaseRepo {
 		DataTypeDefinitions $dataTypeDefinitions,
 		EntityTypeDefinitions $entityTypeDefinitions,
 		RepositoryDefinitions $repositoryDefinitions,
-		EntityDataRetrievalServiceFactory $entityDataRetrievalServiceFactory = null
+		WikibaseServices $wikibaseServices = null
 	) {
 		$this->settings = $settings;
 		$this->dataTypeDefinitions = $dataTypeDefinitions;
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
 		$this->repositoryDefinitions = $repositoryDefinitions;
-		$this->entityDataRetrievalServiceFactory = $entityDataRetrievalServiceFactory;
+		$this->wikibaseServices = $wikibaseServices;
 	}
 
 	/**
@@ -736,8 +737,8 @@ class WikibaseRepo {
 	 * @return TermIndexSearchInteractor
 	 */
 	public function newTermSearchInteractor( $displayLanguageCode ) {
-		if ( $this->entityDataRetrievalServiceFactory !== null ) {
-			return $this->entityDataRetrievalServiceFactory->getTermSearchInteractorFactory()->newInteractor(
+		if ( $this->wikibaseServices !== null ) {
+			return $this->wikibaseServices->getTermSearchInteractorFactory()->newInteractor(
 				$displayLanguageCode
 			);
 		}
@@ -955,7 +956,7 @@ class WikibaseRepo {
 				$this->getEntityIdLookup(),
 				$this->getEntityTitleLookup(),
 				$this->getEntityNamespaceLookup(),
-				$this->entityDataRetrievalServiceFactory
+				$this->wikibaseServices
 			);
 		}
 
@@ -1010,8 +1011,8 @@ class WikibaseRepo {
 	 * @return PrefetchingTermLookup
 	 */
 	private function newPrefetchingTermLookup() {
-		if ( $this->entityDataRetrievalServiceFactory !== null ) {
-			return $this->entityDataRetrievalServiceFactory->getTermBuffer();
+		if ( $this->wikibaseServices !== null ) {
+			return $this->wikibaseServices->getTermBuffer();
 		}
 		return new BufferingTermLookup(
 			$this->getStore()->getTermIndex(),
