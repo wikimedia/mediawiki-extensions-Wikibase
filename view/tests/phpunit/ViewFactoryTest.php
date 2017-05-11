@@ -7,6 +7,7 @@ use HashSiteStore;
 use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 use ValueFormatters\BasicNumberLocalizer;
+use Wikibase\DataModel\Serializers\StatementSerializer;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
@@ -79,7 +80,8 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 			array(),
 			array(),
 			array(),
-			$this->getMock( LocalizedTextProvider::class )
+			$this->getMock( LocalizedTextProvider::class ),
+			$this->createDummyStatementSerializer()
 		);
 	}
 
@@ -178,6 +180,13 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( $snakFormatter ) );
 
 		return $snakFormatterFactory;
+	}
+
+	/**
+	 * @return StatementSerializer
+	 */
+	private function createDummyStatementSerializer() {
+		return $this->prophesize( StatementSerializer::class )->reveal();
 	}
 
 }

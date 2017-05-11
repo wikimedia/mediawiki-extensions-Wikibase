@@ -6,6 +6,7 @@ use DataTypes\DataTypeFactory;
 use InvalidArgumentException;
 use SiteLookup;
 use ValueFormatters\NumberLocalizer;
+use Wikibase\DataModel\Serializers\StatementSerializer;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\LanguageFallbackChain;
@@ -101,6 +102,11 @@ class ViewFactory {
 	private $textProvider;
 
 	/**
+	 * @var StatementSerializer
+	 */
+	private $statementSerializer;
+
+	/**
 	 * @param EntityIdFormatterFactory $htmlIdFormatterFactory
 	 * @param EntityIdFormatterFactory $plainTextIdFormatterFactory
 	 * @param HtmlSnakFormatterFactory $htmlSnakFormatterFactory
@@ -116,8 +122,7 @@ class ViewFactory {
 	 * @param string[] $specialSiteLinkGroups
 	 * @param string[] $badgeItems
 	 * @param LocalizedTextProvider $textProvider
-	 *
-	 * @throws InvalidArgumentException
+	 * @param StatementSerializer $statementSerializer
 	 */
 	public function __construct(
 		EntityIdFormatterFactory $htmlIdFormatterFactory,
@@ -134,7 +139,8 @@ class ViewFactory {
 		array $siteLinkGroups = array(),
 		array $specialSiteLinkGroups = array(),
 		array $badgeItems = array(),
-		LocalizedTextProvider $textProvider
+		LocalizedTextProvider $textProvider,
+		StatementSerializer $statementSerializer
 	) {
 		if ( !$this->hasValidOutputFormat( $htmlIdFormatterFactory, 'text/html' )
 			|| !$this->hasValidOutputFormat( $plainTextIdFormatterFactory, 'text/plain' )
@@ -157,6 +163,7 @@ class ViewFactory {
 		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
 		$this->badgeItems = $badgeItems;
 		$this->textProvider = $textProvider;
+		$this->statementSerializer = $statementSerializer;
 	}
 
 	/**
@@ -296,7 +303,8 @@ class ViewFactory {
 			$this->templateFactory,
 			$snakHtmlGenerator,
 			$this->numberLocalizer,
-			$this->textProvider
+			$this->textProvider,
+			$this->statementSerializer
 		);
 		$statementGroupListView = new StatementGroupListView(
 			$this->propertyOrderProvider,
