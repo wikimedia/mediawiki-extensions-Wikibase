@@ -5,7 +5,8 @@
 			"Macofe",
 			"Asoxor",
 			"Muhammed taha",
-			"Sarchia"
+			"Sarchia",
+			"Lost Whispers"
 		]
 	},
 	"wikibase-entity-item": "بەند",
@@ -94,7 +95,7 @@
 	"wikibase-history-title-without-label": "مێژووی پێداچوونەوەکانی ($1)",
 	"wikibase-entitieswithoutlabel-label-language": "کۆدی زمان:",
 	"wikibase-entitieswithoutlabel-label-type": "جۆر:",
-	"wikibase-entitieswithoutlabel-label-alltypes": "ھەموو",
+	"wikibase-entitieswithoutlabel-submit": "دۆزینەوە",
 	"wikibase-entitieswithoutlabel-invalid-language": "«$1» کۆدێکی زمانی دروست نییە.",
 	"wikibase-restoreold": "گەڕاندنەوە",
 	"wikibase-entity-summary-restore": "گەڕاندنەوەی پێداچوونەوەی $3 لە لایەن [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
