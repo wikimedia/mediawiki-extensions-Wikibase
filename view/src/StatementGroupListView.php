@@ -68,14 +68,14 @@ class StatementGroupListView {
 	 * @param Statement[] $statements
 	 * @return string HTML
 	 */
-	public function getHtml( array $statements ) {
+	public function getHtml( array $statements, $includeStatementSerialization ) {
 		$statementsByProperty = $this->orderStatementsByPropertyOrder(
 			$this->groupStatementsByProperties( $statements )
 		);
 
 		$statementsHtml = '';
 		foreach ( $statementsByProperty as $statements ) {
-			$statementsHtml .= $this->getHtmlForStatementGroupView( $statements );
+			$statementsHtml .= $this->getHtmlForStatementGroupView( $statements, $includeStatementSerialization );
 		}
 
 		return $this->templateFactory->render(
@@ -133,14 +133,14 @@ class StatementGroupListView {
 	 *
 	 * @return string HTML
 	 */
-	private function getHtmlForStatementGroupView( array $statements ) {
+	private function getHtmlForStatementGroupView( array $statements, $includeStatementSerialization ) {
 		$propertyId = $statements[0]->getPropertyId();
 		$addStatementHtml = $this->editSectionGenerator->getAddStatementToGroupSection( $propertyId );
 
 		return $this->templateFactory->render(
 			'wikibase-statementgroupview',
 			$this->propertyIdFormatter->formatEntityId( $propertyId ),
-			$this->getHtmlForStatementListView( $statements, $addStatementHtml ),
+			$this->getHtmlForStatementListView( $statements, $addStatementHtml, $includeStatementSerialization ),
 			$propertyId->getSerialization()
 		);
 	}
@@ -151,13 +151,14 @@ class StatementGroupListView {
 	 *
 	 * @return string HTML
 	 */
-	private function getHtmlForStatementListView( array $statements, $addStatementHtml ) {
+	private function getHtmlForStatementListView( array $statements, $addStatementHtml, $includeStatementSerialization ) {
 		$statementViewsHtml = '';
 
 		foreach ( $statements as $statement ) {
 			$statementViewsHtml .= $this->claimHtmlGenerator->getHtmlForClaim(
 				$statement,
-				$this->editSectionGenerator->getStatementEditSection( $statement )
+				$this->editSectionGenerator->getStatementEditSection( $statement ),
+				$includeStatementSerialization
 			);
 		}
 
