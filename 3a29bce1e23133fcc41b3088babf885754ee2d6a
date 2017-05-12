@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_c4aa8d82",
+        "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-12T09:11:05Z",
+      "side": 1,
+      "message": "This means the test will fail on systems that do not have the new column, right?",
+      "revId": "3a29bce1e23133fcc41b3088babf885754ee2d6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
