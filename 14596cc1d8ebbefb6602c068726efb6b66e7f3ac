@@ -1,0 +1,141 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_5a53b81a",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-05-12T14:53:28Z",
+      "side": 1,
+      "message": "When not using ApiErrorFormatter_BackCompat, this would ideally just use ApiErrorFormatter-\u003eaddMessagesFromStatus()\n\nWhen BackCompat is in use, you\u0027ll probably need to keep using this code for backwards compatibility.",
+      "revId": "14596cc1d8ebbefb6602c068726efb6b66e7f3ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_7a58fc35",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-05-12T14:53:28Z",
+      "side": 1,
+      "message": "When not using ApiErrorFormatter_BackCompat, this should probably just use ApiBase::dieStatus().",
+      "revId": "14596cc1d8ebbefb6602c068726efb6b66e7f3ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_1ad30032",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-05-12T14:53:28Z",
+      "side": 1,
+      "message": "There shouldn\u0027t be any need for this rather than ApiMessage::create(). If there is, why were you passing things that aren\u0027t actually i18n messages into Status?",
+      "revId": "14596cc1d8ebbefb6602c068726efb6b66e7f3ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_5aa978db",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-05-12T14:53:28Z",
+      "side": 1,
+      "message": "Just pass $message here?",
+      "range": {
+        "startLine": 246,
+        "startChar": 30,
+        "endLine": 246,
+        "endChar": 42
+      },
+      "revId": "14596cc1d8ebbefb6602c068726efb6b66e7f3ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_da47c84e",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-05-12T14:53:28Z",
+      "side": 1,
+      "message": "ApiMessageTrait::$messageMap is protected, and shouldn\u0027t be made public.",
+      "revId": "14596cc1d8ebbefb6602c068726efb6b66e7f3ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_3a3b64c6",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-05-12T14:53:28Z",
+      "side": 1,
+      "message": "You\u0027ll need to turn this into a Message object.",
+      "range": {
+        "startLine": 278,
+        "startChar": 31,
+        "endLine": 278,
+        "endChar": 43
+      },
+      "revId": "14596cc1d8ebbefb6602c068726efb6b66e7f3ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_fa440c4c",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-05-12T14:53:28Z",
+      "side": 1,
+      "message": "getModulePath",
+      "range": {
+        "startLine": 353,
+        "startChar": 21,
+        "endLine": 353,
+        "endChar": 34
+      },
+      "revId": "14596cc1d8ebbefb6602c068726efb6b66e7f3ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
