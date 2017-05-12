@@ -190,7 +190,18 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			if ( array_key_exists( 'message', $exception ) ) {
 				$this->assertContains( $exception['message'], $e->getMessage() );
 			}
+
+			if ( array_key_exists( 'message-key', $exception ) ) {
+				$status = $e->getStatusValue();
+				$this->assertTrue(
+					$status->hasMessage( $exception['message-key'] ),
+					'Status message key'
+				);
+			}
 		} catch ( Exception $e ) {
+			if ( $e instanceof \PHPUnit_Framework_AssertionFailedError ) {
+				throw $e;
+			}
 			if ( array_key_exists( 'type', $exception ) ) {
 				$this->assertInstanceOf( $exception['type'], $e );
 			}
