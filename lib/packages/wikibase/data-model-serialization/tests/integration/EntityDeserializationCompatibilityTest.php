@@ -3,12 +3,19 @@
 namespace Tests\Wikibase\DataModel;
 
 use DataValues\Deserializers\DataValueDeserializer;
+use DataValues\Geo\Values\GlobeCoordinateValue;
+use DataValues\QuantityValue;
+use DataValues\StringValue;
+use DataValues\TimeValue;
+use DataValues\UnknownValue;
 use Deserializers\Deserializer;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\EntityIdValue;
 
 /**
  * @license GPL-2.0+
@@ -23,16 +30,14 @@ class EntityDeserializationCompatibilityTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp() {
 		$deserializerFactory = new DeserializerFactory(
-			new DataValueDeserializer(
-				array(
-					'string' => 'DataValues\StringValue',
-					'unknown' => 'DataValues\UnknownValue',
-					'globecoordinate' => 'DataValues\GlobeCoordinateValue',
-					'quantity' => 'DataValues\QuantityValue',
-					'time' => 'DataValues\TimeValue',
-					'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue',
-				)
-			),
+			new DataValueDeserializer( [
+				'string' => StringValue::class,
+				'unknown' => UnknownValue::class,
+				'globecoordinate' => GlobeCoordinateValue::class,
+				'quantity' => QuantityValue::class,
+				'time' => TimeValue::class,
+				'wikibase-entityid' => EntityIdValue::class,
+			] ),
 			new BasicEntityIdParser()
 		);
 
@@ -46,7 +51,7 @@ class EntityDeserializationCompatibilityTest extends \PHPUnit_Framework_TestCase
 		$entity = $this->deserializer->deserialize( $serialization );
 
 		$this->assertInstanceOf(
-			'Wikibase\DataModel\Entity\EntityDocument',
+			EntityDocument::class,
 			$entity,
 			'Deserialization of ' . $fileName . ' should lead to an EntityDocument instance'
 		);
@@ -57,17 +62,17 @@ class EntityDeserializationCompatibilityTest extends \PHPUnit_Framework_TestCase
 	}
 
 	private function getEntitySerializationsFromDir( $dir ) {
-		$argumentLists = array();
+		$argumentLists = [];
 
 		/**
 		 * @var SplFileInfo $fileInfo
 		 */
 		foreach ( new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $dir ) ) as $fileInfo ) {
 			if ( $fileInfo->getExtension() === 'json' ) {
-				$argumentLists[] = array(
+				$argumentLists[] = [
 					$fileInfo->getFilename(),
 					json_decode( file_get_contents( $fileInfo->getPathname() ), true )
-				);
+				];
 			}
 		}
 
