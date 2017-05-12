@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e1cb3f9_e10a2329",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-12T07:47:56Z",
+      "side": 1,
+      "message": "Why is only the read connection releases, but not the write connection?",
+      "range": {
+        "startLine": 404,
+        "startChar": 28,
+        "endLine": 404,
+        "endChar": 32
+      },
+      "revId": "982cf3f1eee89407792db9f1db321e1101627dcf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_e147834e",
         "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
         "patchSetId": 1

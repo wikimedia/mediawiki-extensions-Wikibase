@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_a4fbd910",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-12T07:47:56Z",
+      "side": 0,
+      "message": "This is the only difference I see. The lock information is not tracked any more. Well, it is set to null anyway later in releaseClient(). So I guess the only way to ever see this information is if a process crashed between these two updates. Is this impression correct?",
+      "range": {
+        "startLine": 471,
+        "startChar": 24,
+        "endLine": 471,
+        "endChar": 29
+      },
+      "revId": "d24e888971d0689c62ea2175569732ddefa36ea3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
