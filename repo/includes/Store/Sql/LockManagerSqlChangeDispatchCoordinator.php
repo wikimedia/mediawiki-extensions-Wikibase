@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
-use Database;
 use LockManager;
 use Wikibase\Store\Sql\SqlChangeDispatchCoordinator;
+use Wikimedia\Rdbms\Database;
 
 /**
  * SQL-based implementation of ChangeDispatchCoordinator when there is a

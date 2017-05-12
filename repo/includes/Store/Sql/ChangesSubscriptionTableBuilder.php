@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
-use Database;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -11,6 +10,7 @@ use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
+use Wikimedia\Rdbms\Database;
 use Wikimedia\Rdbms\LoadBalancer;
 use Wikimedia\Rdbms\ResultWrapper;
 

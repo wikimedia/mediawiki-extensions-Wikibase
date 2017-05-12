@@ -2,7 +2,6 @@
 
 namespace Wikibase;
 
-use DBQueryError;
 use HashBagOStuff;
 use ObjectCache;
 use Revision;
@@ -51,6 +50,7 @@ use Wikibase\Repo\Store\Sql\WikiPageEntityRedirectLookup;
 use Wikibase\Repo\Store\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\EntityIdLookup;
+use Wikimedia\Rdbms\DBQueryError;
 use WikiPage;
 
 /**

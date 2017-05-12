@@ -2,14 +2,14 @@
 
 namespace Wikibase\Store\Sql;
 
-use Database;
-use DBUnexpectedError;
 use Exception;
 use MWException;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
 use Wikibase\Store\ChangeDispatchCoordinator;
 use Wikimedia\Assert\Assert;
+use Wikimedia\Rdbms\Database;
+use Wikimedia\Rdbms\DBUnexpectedError;
 use Wikimedia\Rdbms\LoadBalancer;
 
 /**

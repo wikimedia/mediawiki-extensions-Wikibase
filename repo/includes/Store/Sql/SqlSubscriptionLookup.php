@@ -2,9 +2,9 @@
 
 namespace Wikibase\Store\Sql;
 
-use Database;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Store\SubscriptionLookup;
+use Wikimedia\Rdbms\Database;
 use Wikimedia\Rdbms\LoadBalancer;
 
 /**

@@ -2,13 +2,13 @@
 
 namespace Wikibase\Client\Tests\Specials;
 
-use FakeResultWrapper;
 use RequestContext;
 use SpecialPageFactory;
 use SpecialPageTestBase;
 use Title;
 use Wikibase\Client\Specials\SpecialEntityUsage;
 use Wikibase\Client\WikibaseClient;
+use Wikimedia\Rdbms\FakeResultWrapper;
 use WikiPage;
 
 /**

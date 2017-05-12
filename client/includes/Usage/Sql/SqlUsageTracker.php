@@ -3,11 +3,11 @@
 namespace Wikibase\Client\Usage\Sql;
 
 use ArrayIterator;
-use Database;
-use DBError;
 use Exception;
 use InvalidArgumentException;
 use Traversable;
+use Wikimedia\Rdbms\Database;
+use Wikimedia\Rdbms\DBError;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\UsageLookup;

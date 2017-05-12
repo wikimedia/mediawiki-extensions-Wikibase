@@ -3,8 +3,6 @@
 namespace Wikibase\Client\Usage\Sql;
 
 use ArrayIterator;
-use Database;
-use DBUnexpectedError;
 use InvalidArgumentException;
 use MWException;
 use Traversable;
@@ -12,6 +10,8 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikimedia\Rdbms\Database;
+use Wikimedia\Rdbms\DBUnexpectedError;
 
 /**
  * Helper class for updating the wbc_entity_usage table.

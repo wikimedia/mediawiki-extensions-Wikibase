@@ -2,9 +2,9 @@
 
 namespace Wikibase;
 
-use Database;
 use Wikibase\Lib\Reporting\MessageReporter;
 use MediaWiki\MediaWikiServices;
+use Wikimedia\Rdbms\Database;
 
 /**
  * Utility class for rebuilding the term_search_key field.

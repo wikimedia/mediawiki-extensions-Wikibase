@@ -2,12 +2,12 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
-use Database;
 use DBAccessBase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
+use Wikimedia\Rdbms\Database;
 
 /**
  * @license GPL-2.0+

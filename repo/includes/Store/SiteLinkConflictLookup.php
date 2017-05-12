@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Store;
 
-use Database;
 use Wikibase\DataModel\Entity\Item;
+use Wikimedia\Rdbms\Database;
 
 /**
  * Contains methods for looking up SiteLink conflicts

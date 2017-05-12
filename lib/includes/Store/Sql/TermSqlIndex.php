@@ -2,7 +2,6 @@
 
 namespace Wikibase;
 
-use Database;
 use DBAccessBase;
 use InvalidArgumentException;
 use MWException;
@@ -21,6 +20,7 @@ use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikimedia\Assert\Assert;
+use Wikimedia\Rdbms\Database;
 
 /**
  * Term lookup cache.

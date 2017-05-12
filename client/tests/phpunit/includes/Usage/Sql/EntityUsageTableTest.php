@@ -2,13 +2,13 @@
 
 namespace Wikibase\Client\Tests\Usage\Sql;
 
-use Database;
 use InvalidArgumentException;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikimedia\Rdbms\Database;
 
 /**
  * @covers Wikibase\Client\Usage\Sql\EntityUsageTable

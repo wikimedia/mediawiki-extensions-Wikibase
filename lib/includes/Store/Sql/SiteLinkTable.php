@@ -2,12 +2,12 @@
 
 namespace Wikibase\Lib\Store;
 
-use Database;
 use DBAccessBase;
 use MWException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikimedia\Rdbms\Database;
 
 /**
  * Represents a lookup database table for sitelinks.

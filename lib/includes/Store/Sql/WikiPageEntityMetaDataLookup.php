@@ -2,15 +2,15 @@
 
 namespace Wikibase\Lib\Store\Sql;
 
-use Database;
 use DBAccessBase;
-use DBQueryError;
 use InvalidArgumentException;
 use stdClass;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikimedia\Rdbms\Database;
+use Wikimedia\Rdbms\DBQueryError;
 use Wikimedia\Rdbms\ResultWrapper;
 
 /**

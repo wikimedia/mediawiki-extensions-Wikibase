@@ -2,8 +2,8 @@
 
 namespace Wikibase;
 
-use Database;
 use MWException;
+use Wikimedia\Rdbms\Database;
 use Wikimedia\Rdbms\LoadBalancer;
 
 /**
