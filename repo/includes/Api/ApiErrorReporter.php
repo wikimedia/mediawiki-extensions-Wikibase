@@ -3,15 +3,18 @@
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
+use ApiMessage;
 use ApiResult;
 use Exception;
+use IApiMessage;
 use InvalidArgumentException;
 use Language;
 use LogicException;
 use MediaWiki\MediaWikiServices;
 use Message;
-use Status;
 use ApiUsageException;
+use MessageSpecifier;
+use StatusValue;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 
 /**
@@ -54,13 +57,13 @@ class ApiErrorReporter {
 	}
 
 	/**
-	 * Reports any warnings in the Status object on the warnings section
+	 * Reports any warnings in the StatusValue object on the warnings section
 	 * of the result.
 	 *
-	 * @param Status $status
+	 * @param StatusValue $status
 	 */
-	public function reportStatusWarnings( Status $status ) {
-		$warnings = $status->getWarningsArray();
+	public function reportStatusWarnings( StatusValue $status ) {
+		$warnings = $status->getErrorsByType( 'warning' );
 
 		if ( !empty( $warnings ) ) {
 			$warnings = $this->convertMessagesToResult( $warnings );
@@ -75,6 +78,8 @@ class ApiErrorReporter {
 	 * @param string|array $warningData Warning message
 	 */
 	private function setWarning( $key, $warningData ) {
+		// FIXME: <anomie> When ApiErrorFormatter_BackCompat isn't in use, this is going to
+		//        break the warnings array by converting it to an object.
 		$result = $this->apiModule->getResult();
 		$moduleName = $this->apiModule->getModuleName();
 
@@ -87,7 +92,7 @@ class ApiErrorReporter {
 	}
 
 	/**
-	 * Aborts the request with an error based on the given (fatal) Status.
+	 * Aborts the request with an error based on the given (fatal) StatusValue.
 	 * This is intended as an alternative for ApiBase::dieUsage().
 	 *
 	 * If possible, a localized error message based on the exception is
@@ -98,7 +103,7 @@ class ApiErrorReporter {
 	 *
 	 * @see ApiBase::dieUsage()
 	 *
-	 * @param Status $status The status to report. $status->getMessage() will be used
+	 * @param StatusValue $status The status to report. $status->getMessage() will be used
 	 * to generate the error's free form description.
 	 * @param string $errorCode A code identifying the error.
 	 * @param int $httpRespCode The HTTP error code to send to the client
@@ -107,19 +112,50 @@ class ApiErrorReporter {
 	 * @throws ApiUsageException
 	 * @throws LogicException
 	 */
-	public function dieStatus( Status $status, $errorCode, $httpRespCode = 0, $extradata = array() ) {
+	public function dieStatus( StatusValue $status, $errorCode, $httpRespCode = 0, $extradata = array() ) {
 		if ( $status->isOK() ) {
-			throw new InvalidArgumentException( 'called dieStatus() with a non-fatal Status!' );
+			throw new InvalidArgumentException( 'called dieStatus() with a non-fatal StatusValue!' );
 		}
 
 		$this->addStatusToResult( $status, $extradata );
 
-		//XXX: when to prefer $statusCode over $errorCode?
-		list( , $description ) = $this->apiModule->getErrorFromStatus( $status );
-
-		$this->throwUsageException( $description, $errorCode, $httpRespCode, $extradata );
+		$msg = $this->getMessageFromStatus( $status );
+		$this->throwUsageException( $msg, $errorCode, $extradata, $httpRespCode );
 
 		throw new LogicException( 'ApiUsageException not thrown' );
+	}
+
+	/**
+	 * @param StatusValue $status
+	 *
+	 * @return IApiMessage
+	 */
+	private function getMessageFromStatus( StatusValue $status ) {
+		if ( $status->isGood() ) {
+			throw new InvalidArgumentException( 'Successful status passed to ApiBase::dieStatus' );
+		}
+
+		// NOTE: the code below was copied from ApiBase::getErrorFromStatus
+
+		$errors = $status->getErrorsByType( 'error' );
+		if ( !$errors ) {
+			// No errors? Assume the warnings should be treated as errors
+			$errors = $status->getErrorsByType( 'warning' );
+		}
+		if ( !$errors ) {
+			// Still no errors? Punt
+			$errors = [ [ 'message' => 'unknownerror-nocode', 'params' => [] ] ];
+		}
+
+		if ( $errors[0]['message'] instanceof MessageSpecifier ) {
+			$msg = $errors[0]['message'];
+		} else {
+			$msg = new Message( $errors[0]['message'], $errors[0]['params'] );
+		}
+
+		$msg = ApiMessage::createByMappingMessage( $msg, $msg->getKey() );
+
+		return $msg;
 	}
 
 	/**
@@ -207,7 +243,7 @@ class ApiErrorReporter {
 
 		$this->addMessageToResult( $message, $extradata );
 
-		$this->throwUsageException( $description, $errorCode, $httpRespCode, $extradata );
+		$this->throwUsageException( $description, $errorCode, $extradata, $httpRespCode );
 
 		throw new LogicException( 'ApiUsageException not thrown' );
 	}
@@ -232,23 +268,15 @@ class ApiErrorReporter {
 	 * @throws LogicException
 	 */
 	public function dieError( $description, $errorCode, $httpRespCode = 0, $extradata = array() ) {
-		//TODO: try a reverse lookup in ApiBase::$messageMap
+		//TODO: try a reverse lookup in ApiMessageTrait::$messageMap
 		$messageKey = "wikibase-api-$errorCode";
 		$message = wfMessage( $messageKey );
 
 		if ( $message->exists() ) {
-			$this->addMessageToResult( $message, $extradata );
-
-			$text = $message->inLanguage( 'en' )->useDatabase( false )->plain();
-
-			if ( $description == '' ) {
-				$description = $text;
-			} else {
-				$description = "$text ($description)";
-			}
+			$this->throwUsageException( $message, $errorCode, $extradata, $httpRespCode );
+		} else {
+			$this->throwUsageException( $description, $errorCode, $extradata, $httpRespCode );
 		}
-
-		$this->throwUsageException( $description, $errorCode, $httpRespCode, $extradata );
 
 		throw new LogicException( 'ApiUsageException not thrown' );
 	}
@@ -256,21 +284,21 @@ class ApiErrorReporter {
 	/**
 	 * Throws a ApiUsageException by calling ApiBase::dieUsage().
 	 *
-	 * @see ApiBase::dieUsage()
+	 * @see ApiBase::dieWithError()
 	 *
-	 * @param string $description
-	 * @param string $errorCode
-	 * @param int $httpRespCode
-	 * @param null|array $extradata
+	 * @param string|array|Message $msg See ApiMessage::create()
+	 * @param string|null $code See ApiMessage::create()
+	 * @param array|null $data See ApiMessage::create()
+	 * @param int $httpCode HTTP error code to use
 	 *
 	 * @throws ApiUsageException
 	 * @throws LogicException
 	 */
-	private function throwUsageException( $description, $errorCode, $httpRespCode = 0, $extradata = null ) {
+	private function throwUsageException( $msg, $code, array $data = null, $httpCode = 0 ) {
 		$stats = MediaWikiServices::getInstance()->getStatsdDataFactory();
 		$stats->increment( 'wikibase.repo.api.errors.total' );
 
-		$this->apiModule->getMain()->dieUsage( $description, $errorCode, $httpRespCode, $extradata );
+		$this->apiModule->getMain()->dieWithError( $msg, $code, $data, $httpCode );
 
 		throw new LogicException( 'ApiUsageException not thrown' );
 	}
@@ -302,21 +330,30 @@ class ApiErrorReporter {
 	}
 
 	/**
-	 * Add the messages from the given Status object to the $data array,
+	 * Add the messages from the given StatusValue object to the $data array,
 	 * for use in an error report.
 	 *
-	 * @param Status $status
+	 * @param StatusValue $status
 	 * @param array|null &$data
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function addStatusToResult( Status $status, &$data ) {
-		$messageSpecs = $status->getErrorsArray();
+	public function addStatusToResult( StatusValue $status, &$data ) {
+		// Use Wikibase specific representation of messages in the result.
+		// TODO: This should be phased out in favor of using ApiErrorFormatter, see below.
+		$messageSpecs = $status->getErrorsByType( 'error' );
 		$messages = $this->convertToMessageList( $messageSpecs );
 
 		foreach ( $messages as $message ) {
 			$this->addMessageToResult( $message, $data );
 		}
+
+		// Additionally, provide new (2016) API error reporting output.
+		$this->apiModule->getErrorFormatter()->addMessagesFromStatus(
+			$this->apiModule->getModuleName(),
+			$status,
+			'error'
+		);
 	}
 
 	/**
@@ -338,10 +375,10 @@ class ApiErrorReporter {
 	 *   In that case, the 'params' field is ignored and the parameter list is taken from the
 	 *   Message object.
 	 *
-	 * This provides support for message lists coming from Status::getErrorsByType() as well as
+	 * This provides support for message lists coming from StatusValue::getErrorsByType() as well as
 	 * Title::getUserPermissionsErrors() etc.
 	 *
-	 * @param array $messageSpecs a list of errors, as returned by Status::getErrorsByType()
+	 * @param array $messageSpecs a list of errors, as returned by StatusValue::getErrorsByType()
 	 *        or Title::getUserPermissionsErrors()
 	 *
 	 * @return array a result structure containing the messages from $errors as well as what
@@ -384,7 +421,7 @@ class ApiErrorReporter {
 	 *
 	 * @see convertToMessage()
 	 *
-	 * @param array $messageSpecs a list of errors, as returned by Status::getErrorsByType()
+	 * @param array $messageSpecs a list of errors, as returned by StatusValue::getErrorsByType()
 	 *        or Title::getUserPermissionsErrors().
 	 *
 	 * @return array a result structure containing the messages from $errors as well as what
@@ -436,7 +473,7 @@ class ApiErrorReporter {
 	 * Utility function for converting a message specified as a string or array
 	 * to a Message object. Returns null if this is not possible.
 	 *
-	 * The formats supported by this method are the formats used by the Status class as well as
+	 * The formats supported by this method are the formats used by the StatusValue class as well as
 	 * the one used by Title::getUserPermissionsErrors().
 	 *
 	 * The spec may be structured as follows:
