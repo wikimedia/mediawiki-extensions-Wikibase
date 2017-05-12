@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"פוילישער",
-			"පසිඳු කාවින්ද"
+			"පසිඳු කාවින්ද",
+			"Sol lemon"
 		]
 	},
 	"specialpages-group-wikibase": "וויקיבאזע",
@@ -10,7 +11,7 @@
 	"wikibase-deletedentity-property": "אויסגעמעקטע אייגנשאפט",
 	"wikibase-deletedentity-query": "אויסגעמעקטע פראגע",
 	"wikibase-error-unexpected": "פֿעלער: $1",
-	"wikibase-error-save-generic": "נישט מעגלעך אויפֿצוהיטן צוליב א פֿעלער.",
+	"wikibase-error-save-generic": "נישט מעגליך אויפֿצוהיטן צוליב א פֿעלער.",
 	"wikibase-error-remove-generic": "נישט מעגלעך אַראָפנעמען צוליב א פֿעלער.",
 	"wikibase-error-ui-edit-conflict": "צווישנצייט האט מען רעדאקטירט דעם זעלבן ווערט, וואס האט גורם געווען א רעדאקטירונג קאנפליקט. זייט אזוי גוט ווידער אנלאדן דעם בלאט.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (טראנסקריבירט)",
