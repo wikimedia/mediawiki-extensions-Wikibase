@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_e48f91cf",
+        "filename": "data-access/src/MultipleRepositoryAwareWikibaseServices.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-12T10:06:05Z",
+      "side": 1,
+      "message": "Note sure the DispatchingServiceFactory needs to be injected. Static composition may be sufficient here.",
+      "revId": "c87017dcc76aa56fb5a81b3993a5f7efe44f9456",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
