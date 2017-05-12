@@ -33,21 +33,22 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 		array $expectedDataFields,
 		ApiUsageException $ex
 	) {
+		// Using deprecated getMessageArray() because ApiUsageException::getApiMessage() isn't public.
 		$messageArray = $ex->getMessageArray();
 
 		$this->assertArrayHasKey( 'code', $messageArray );
 		$this->assertArrayHasKey( 'info', $messageArray );
 
 		if ( $info !== null ) {
-			$this->assertRegExp( $info, $messageArray['info'] );
+			$this->assertRegExp( $info, $messageArray['info'], 'error info message' );
 		}
 
 		if ( $code !== null ) {
-			$this->assertEquals( $code, $messageArray['code'] );
+			$this->assertSame( $code, $messageArray['code'], 'error code' );
 		}
 
 		if ( $httpStatusCode ) {
-			$this->assertEquals( $httpStatusCode, $ex->getCode() );
+			$this->assertSame( $httpStatusCode, $ex->getCode(), 'HTTP status code' );
 		}
 
 		foreach ( $expectedDataFields as $path => $value ) {
@@ -68,7 +69,7 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 			$this->assertInternalType( 'string', $data, $name );
 			$this->assertRegExp( $expected, $data, $name );
 		} else {
-			$this->assertEquals( $expected, $data, $name );
+			$this->assertSame( $expected, $data, $name );
 		}
 	}
 
@@ -109,7 +110,7 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 				'$code' => 'no-such-sitelink',
 				'$httpStatusCode' => 0,
 				'$extradata' => array( 'fruit' => 'Banana' ),
-				'$infoPattern' => '/sitelink.*\(ugh!\)$/',
+				'$infoPattern' => '/Could not find a sitelink/',
 				'$expectedData' => array(
 					'fruit' => 'Banana',
 					'messages/0/name' => 'wikibase-api-no-such-sitelink',
@@ -207,24 +208,22 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 			'known error code' => array(
 				'$status' => $status,
 				'$code' => 'errorreporter-test-ugh',
-				'$httpStatusCode' => 0,
 				'$extradata' => null,
 				'$infoPattern' => '/sitelink/',
 				'$expectedData' => array(
-					'messages/0/name' => 'wikibase-api-no-such-sitelink',
-					'messages/0/html' => '/gefunden/', // in German
-					'messages/1/name' => 'wikibase-noentity',
-					'messages/1/parameters/0' => 'Q123',
-					'messages/1/html' => '/ist nicht vorhanden/', // in German
+					'messages/0/name' => 'wikibase-api-errorreporter-test-ugh',
+					'messages/1/name' => 'wikibase-api-no-such-sitelink',
+					'messages/1/html' => '/gefunden/', // in German
+					'messages/2/name' => 'wikibase-noentity',
+					'messages/2/parameters/0' => 'Q123',
+					'messages/2/html' => '/ist nicht vorhanden/', // in German
 				),
 			),
 
 			// Any extra data should be passed through.
-			// The HTTP status code should be used.
 			'extradata' => array(
 				'$status' => $status,
 				'$code' => 'errorreporter-test-ugh',
-				'$httpStatusCode' => 555,
 				'$extradata' => array( 'fruit' => 'Banana' ),
 				'$infoPattern' => null,
 				'$expectedData' => array(
@@ -240,7 +239,6 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 	public function testDieStatus(
 		Status $status,
 		$code,
-		$httpStatusCode,
 		array $extradata = null,
 		$infoPattern,
 		array $expectedDataFields
@@ -250,10 +248,10 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );
 
 		try {
-			$reporter->dieStatus( $status, $code, $httpStatusCode, $extradata );
+			$reporter->dieStatus( $status, $code, 0, $extradata );
 			$this->fail( 'ApiUsageException was not thrown!' );
 		} catch ( ApiUsageException $ex ) {
-			$this->assertUsageException( $infoPattern, $code, $httpStatusCode, $expectedDataFields, $ex );
+			$this->assertUsageException( $infoPattern, $code, 0, $expectedDataFields, $ex );
 		}
 	}
 
