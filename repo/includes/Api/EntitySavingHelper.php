@@ -390,11 +390,11 @@ class EntitySavingHelper extends EntityLoadingHelper {
 				$editError = $value['errorFlags'];
 			}
 
-			if ( ( $editError & EditEntityHandler::TOKEN_ERROR ) > 0 ) {
+			if ( $editError & EditEntityHandler::TOKEN_ERROR ) {
 				$errorCode = 'badtoken';
-			} elseif ( ( $editError & EditEntityHandler::EDIT_CONFLICT_ERROR ) > 0 ) {
+			} elseif ( $editError & EditEntityHandler::EDIT_CONFLICT_ERROR ) {
 				$errorCode = 'editconflict';
-			} elseif ( ( $editError & EditEntityHandler::ANY_ERROR ) > 0 ) {
+			} elseif ( $editError & EditEntityHandler::ANY_ERROR ) {
 				$errorCode = 'failed-save';
 			}
 		}

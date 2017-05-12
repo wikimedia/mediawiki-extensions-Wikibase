@@ -70,7 +70,7 @@ return array(
 			$mentionedEntityTracker,
 			$dedupe
 		) {
-			if ( ( $flavorFlags & RdfProducer::PRODUCE_SITELINKS ) !== 0 ) {
+			if ( $flavorFlags & RdfProducer::PRODUCE_SITELINKS ) {
 				$sites = WikibaseRepo::getDefaultInstance()->getSiteLookup()->getSites();
 				// Since the only extra mapping needed for Items are site links,
 				// we just return the SiteLinksRdfBuilder directly,

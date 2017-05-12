@@ -128,7 +128,7 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 				$mentionedEntityTracker,
 				$dedupe
 			) use ( $siteLookup ) {
-				if ( ( $flavorFlags & RdfProducer::PRODUCE_SITELINKS ) !== 0 ) {
+				if ( $flavorFlags & RdfProducer::PRODUCE_SITELINKS ) {
 					$sites = $siteLookup->getSites();
 					$builder = new SiteLinksRdfBuilder( $vocabulary, $writer, $sites );
 					$builder->setDedupeBag( $dedupe );
