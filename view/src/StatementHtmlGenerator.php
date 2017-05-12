@@ -55,21 +55,29 @@ class StatementHtmlGenerator {
 	private $textProvider;
 
 	/**
+	 * @var DataAttributesProvider
+	 */
+	private $dataAttributesProvider;
+
+	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param SnakHtmlGenerator $snakHtmlGenerator
 	 * @param NumberLocalizer $numberLocalizer
 	 * @param LocalizedTextProvider $textProvider
+	 * @param DataAttributesProvider $dataAttributesProvider
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
 		SnakHtmlGenerator $snakHtmlGenerator,
 		NumberLocalizer $numberLocalizer,
-		LocalizedTextProvider $textProvider
+		LocalizedTextProvider $textProvider,
+		DataAttributesProvider $dataAttributesProvider
 	) {
 		$this->snakHtmlGenerator = $snakHtmlGenerator;
 		$this->templateFactory = $templateFactory;
 		$this->numberLocalizer = $numberLocalizer;
 		$this->textProvider = $textProvider;
+		$this->dataAttributesProvider = $dataAttributesProvider;
 	}
 
 	/**
@@ -104,7 +112,8 @@ class StatementHtmlGenerator {
 			$editSectionHtml,
 			$referencesHeadingHtml,
 			$referencesHtml,
-			$collapseReferences ? 'wikibase-initially-collapsed' : ''
+			$collapseReferences ? 'wikibase-initially-collapsed' : '',
+			$this->dataAttributesProvider->getHtml( $statement )
 		);
 	}
 

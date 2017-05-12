@@ -12,6 +12,7 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\View\NullDataAttributesProvider;
 use Wikibase\View\StatementHtmlGenerator;
 use Wikibase\View\DummyLocalizedTextProvider;
 use Wikibase\View\SnakHtmlGenerator;
@@ -61,7 +62,8 @@ class StatementHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 			$templateFactory,
 			$snakHtmlGenerator,
 			new BasicNumberLocalizer(),
-			new DummyLocalizedTextProvider()
+			new DummyLocalizedTextProvider(),
+			new NullDataAttributesProvider()
 		);
 
 		$html = $statementHtmlGenerator->getHtmlForStatement( $statement, 'edit' );
@@ -127,7 +129,8 @@ class StatementHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 			$templateFactory,
 			$this->getSnakHtmlGeneratorMock(),
 			new BasicNumberLocalizer(),
-			new DummyLocalizedTextProvider()
+			new DummyLocalizedTextProvider(),
+			new NullDataAttributesProvider()
 		);
 
 		$html = $statementHtmlGenerator->getHtmlForStatement( $statement, $editSectionHtml );

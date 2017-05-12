@@ -266,9 +266,10 @@ class ViewFactory {
 
 	/**
 	 * @param string $languageCode
-	 * @param LanguageFallbackChain $fallbackChain
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
+	 * @param LanguageFallbackChain $fallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
+	 * @param DataAttributesProvider|null $dataAttributesProvider
 	 *
 	 * @return StatementSectionsView
 	 */
@@ -276,7 +277,8 @@ class ViewFactory {
 		$languageCode,
 		LabelDescriptionLookup $labelDescriptionLookup,
 		LanguageFallbackChain $fallbackChain,
-		EditSectionGenerator $editSectionGenerator
+		EditSectionGenerator $editSectionGenerator,
+		DataAttributesProvider $dataAttributesProvider = null
 	) {
 		$snakFormatter = $this->htmlSnakFormatterFactory->getSnakFormatter(
 			$languageCode,
@@ -296,7 +298,8 @@ class ViewFactory {
 			$this->templateFactory,
 			$snakHtmlGenerator,
 			$this->numberLocalizer,
-			$this->textProvider
+			$this->textProvider,
+			$dataAttributesProvider ?: new NullDataAttributesProvider()
 		);
 		$statementGroupListView = new StatementGroupListView(
 			$this->propertyOrderProvider,
