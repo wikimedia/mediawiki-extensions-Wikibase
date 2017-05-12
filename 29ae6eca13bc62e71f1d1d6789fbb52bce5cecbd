@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_64b2a194",
+        "filename": "data-access/src/MultipleRepositoryAwareWikibaseServices.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-12T10:13:51Z",
+      "side": 1,
+      "message": "The logic here seems a bit odd. The caller is expected to provide a watcher... why? It\u0027s unclear from this perspective.\n\nThis is another reason I would favor static composition here. The fact that MultipleRepositoryAwareWikibaseServices wraps a DispatchingServiceFactory is really an implementation detail.",
+      "revId": "29ae6eca13bc62e71f1d1d6789fbb52bce5cecbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_84b7b580",
+        "filename": "repo/includes/Store/Sql/SqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-12T10:13:51Z",
+      "side": 1,
+      "message": "Perhaps WikibaseServices shouldn\u0027t be a watcher, but have a getWatcher() method?",
+      "revId": "29ae6eca13bc62e71f1d1d6789fbb52bce5cecbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
