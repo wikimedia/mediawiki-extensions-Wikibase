@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_247ca9b3",
+        "filename": "data-access/src/DispatchingServiceContainer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-12T10:16:41Z",
+      "side": 1,
+      "message": "That name seems too generic. This is specifically about dispatching to multiple repos.\n\nHow about MultiRepoServiceContainer, or just MultiRepoServices?",
+      "revId": "d1d4c3abf5956c138d13c83a16c6fd6e866a55ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
