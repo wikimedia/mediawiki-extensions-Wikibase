@@ -229,17 +229,14 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	}
 
 	/**
-	 * @return Database A connection to the repo's master database
+	 * @param string $forUpdate Either "for update" for a master, or an empty string for a replica
+	 *  connection.
+	 *
+	 * @return Database A connection to either the repo's master or replica database.
 	 */
-	private function getRepoMaster() {
-		return $this->getRepoLB()->getConnection( DB_MASTER, array(), $this->repoDB );
-	}
-
-	/**
-	 * @return Database A connection to the repo's replica database
-	 */
-	private function getRepoReplica() {
-		return $this->getRepoLB()->getConnection( DB_REPLICA, [], $this->repoDB );
+	private function getRepoConnection( $forUpdate = '' ) {
+		$i = $forUpdate === 'for update' ? DB_MASTER : DB_REPLICA;
+		return $this->getRepoLB()->getConnection( $i, [], $this->repoDB );
 	}
 
 	/**
@@ -311,7 +308,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 * @see selectClient()
 	 */
 	private function getCandidateClients() {
-		$dbr = $this->getRepoReplica();
+		$dbr = $this->getRepoConnection();
 
 		// XXX: subject to clock skew. Use DB based "now" time?
 		$freshDispatchTime = wfTimestamp( TS_MW, $this->now() - $this->dispatchInterval );
@@ -369,8 +366,8 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 * @throws DBUnexpectedError
 	 */
 	public function initState( array $clientWikiDBs ) {
-		$dbr = $this->getRepoReplica();
-		$dbw = $this->getRepoMaster();
+		$dbr = $this->getRepoConnection();
+		$dbw = $this->getRepoConnection( 'for update' );
 
 		$trackedSiteIds = $dbr->selectFieldValues(
 			$this->stateTable,
@@ -401,7 +398,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 			$this->log( "Initialized dispatch state for $siteID" );
 		}
 
-		$this->releaseRepoMaster( $dbr );
+		$this->releaseRepoMaster( $dbw );
 	}
 
 	/**
@@ -421,8 +418,8 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		$this->trace( "Trying $siteID" );
 
 		// start transaction
-		$dbw = $this->getRepoMaster();
-		$dbr = $this->getRepoReplica();
+		$dbw = $this->getRepoConnection( 'for update' );
+		$dbr = $this->getRepoConnection();
 
 		$dbw->startAtomic( __METHOD__ );
 
@@ -511,7 +508,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		$wikiDB = $state['chd_db'];
 
 		// start transaction
-		$db = $this->getRepoMaster();
+		$db = $this->getRepoConnection( 'for update' );
 		$db->startAtomic( __METHOD__ );
 
 		try {
