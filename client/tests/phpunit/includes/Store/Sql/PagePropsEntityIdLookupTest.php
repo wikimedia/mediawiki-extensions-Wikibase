@@ -2,12 +2,12 @@
 
 namespace Wikibase\Client\Tests\Store\Sql;
 
-use Database;
 use Title;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikimedia\Rdbms\Database;
 
 /**
  * @covers Wikibase\Client\Store\Sql\PagePropsEntityIdLookup

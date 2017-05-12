@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Specials;
 
-use Database;
 use Html;
 use MWNamespace;
 use QueryPage;
@@ -10,6 +9,7 @@ use Skin;
 use Title;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\NamespaceChecker;
+use Wikimedia\Rdbms\Database;
 use Wikimedia\Rdbms\FakeResultWrapper;
 use Wikimedia\Rdbms\ResultWrapper;
 

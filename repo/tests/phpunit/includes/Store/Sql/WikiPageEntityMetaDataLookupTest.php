@@ -2,8 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
-use Database;
-use FakeResultWrapper;
 use InvalidArgumentException;
 use MediaWikiTestCase;
 use stdClass;
@@ -14,6 +12,8 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Rdbms\Database;
+use Wikimedia\Rdbms\FakeResultWrapper;
 
 /**
  * This test needs to be in repo, although the class is in lib as we can't alter

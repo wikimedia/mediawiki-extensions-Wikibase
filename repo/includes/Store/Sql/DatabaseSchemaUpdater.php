@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
-use Database;
 use DatabaseUpdater;
 use HashBagOStuff;
 use MWException;
@@ -17,6 +16,7 @@ use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Rdbms\Database;
 
 /**
  * @license GPL-2.0+

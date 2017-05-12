@@ -2,13 +2,13 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
-use IDatabase;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Store\EntitiesWithoutTermFinder;
 use Wikimedia\Assert\Assert;
+use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ResultWrapper;
 
 /**

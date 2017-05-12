@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Store;
 
-use DBError;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikimedia\Rdbms\DBError;
 
 /**
  * @license GPL-2.0+

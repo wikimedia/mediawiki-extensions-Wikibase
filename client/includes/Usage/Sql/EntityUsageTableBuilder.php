@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Usage\Sql;
 
-use Database;
 use Exception;
 use InvalidArgumentException;
 use Wikibase\Client\Usage\EntityUsage;
@@ -12,6 +11,7 @@ use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
+use Wikimedia\Rdbms\Database;
 use Wikimedia\Rdbms\LoadBalancer;
 use Wikimedia\Rdbms\ResultWrapper;
 
