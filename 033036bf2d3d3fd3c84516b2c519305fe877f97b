@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_31294237",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-05-15T13:22:29Z",
+      "side": 1,
+      "message": "if we are not passing this in the constructor, then maybe just set it to the default value when defining the private variable above? (line 129)",
+      "revId": "033036bf2d3d3fd3c84516b2c519305fe877f97b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
