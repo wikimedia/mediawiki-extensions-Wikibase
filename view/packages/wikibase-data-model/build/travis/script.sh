@@ -7,3 +7,7 @@ if [[ $RUNJOB == jshint ]]; then
 	jshint src/ tests/
 	exit $?
 fi
+
+if [[ $RUNJOB == test ]]; then
+	npm install && npm test
+fi

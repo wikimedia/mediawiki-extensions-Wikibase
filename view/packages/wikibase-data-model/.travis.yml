@@ -7,6 +7,7 @@ sudo: false
 
 env:
 - RUNJOB=jshint
+- RUNJOB=test
 
 script: bash ./build/travis/script.sh
 
