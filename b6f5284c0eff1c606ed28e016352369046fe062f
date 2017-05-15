@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_abade12f",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-15T08:18:24Z",
+      "side": 1,
+      "message": "this documentation should also be removed if there is no parameter added",
+      "revId": "b6f5284c0eff1c606ed28e016352369046fe062f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
