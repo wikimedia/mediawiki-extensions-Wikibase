@@ -1,5 +1,8 @@
 # ValueView release notes
 
+## 0.19.2 (dev)
+* Raised required PHP version from 5.3 to 5.5.
+
 ## 0.19.1 (2017-04-18)
 * Added support for the `tabular-data` data type.
 * Adjusted `jQuery.ui.listrotator` to obey the Wikimedia color scheme.

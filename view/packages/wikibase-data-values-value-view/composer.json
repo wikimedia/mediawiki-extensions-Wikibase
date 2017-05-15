@@ -20,7 +20,7 @@
 		"irc": "irc://irc.freenode.net/wikidata"
 	},
 	"require": {
-		"php": ">=5.3.0",
+		"php": ">=5.5.9",
 		"data-values/javascript": "~0.8.0|~0.7.0"
 	},
 	"autoload": {
