@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_77beca14",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-05-15T19:28:36Z",
+      "side": 1,
+      "message": "You might want to wrap this in an ApiMessage so the code reported will actually be $errorCode instead of \"wikibase-api-$errorCode\". In that case you\u0027d also want to still pass in $extradata for passing into ApiMessage.\n\nPassing $description like this seems somewhat strange. You could do wfMessage( [ $messageKey, \u0027rawmessage\u0027 ], $description ), so if $messageKey doesn\u0027t exist then it\u0027ll fall back to the \u0027rawmessage\u0027 message.",
+      "revId": "211c4990f6d609f2d36d901d86fa9bddbce0edea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
