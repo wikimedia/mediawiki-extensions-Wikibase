@@ -16,6 +16,24 @@
       "revId": "033036bf2d3d3fd3c84516b2c519305fe877f97b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_51bcf666",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-15T15:02:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_31294237",
+      "revId": "033036bf2d3d3fd3c84516b2c519305fe877f97b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
