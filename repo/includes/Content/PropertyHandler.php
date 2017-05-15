@@ -19,6 +19,7 @@ use Wikibase\PropertyContent;
 use Wikibase\PropertyInfoBuilder;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Repo\Search\Elastic\Fields\PropertyFieldDefinitions;
+use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Store\EntityIdLookup;
@@ -65,6 +66,7 @@ class PropertyHandler extends EntityHandler {
 	}
 
 	/**
+	 * @param EntityPerPage $entityPerPage
 	 * @param TermIndex $termIndex
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityConstraintProvider $constraintProvider
@@ -78,6 +80,7 @@ class PropertyHandler extends EntityHandler {
 	 * @param callable|null $legacyExportFormatDetector
 	 */
 	public function __construct(
+		EntityPerPage $entityPerPage,
 		TermIndex $termIndex,
 		EntityContentDataCodec $contentCodec,
 		EntityConstraintProvider $constraintProvider,
@@ -92,6 +95,7 @@ class PropertyHandler extends EntityHandler {
 	) {
 		parent::__construct(
 			CONTENT_MODEL_WIKIBASE_PROPERTY,
+			$entityPerPage,
 			$termIndex,
 			$contentCodec,
 			$constraintProvider,

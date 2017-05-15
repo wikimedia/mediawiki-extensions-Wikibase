@@ -1476,6 +1476,7 @@ class WikibaseRepo {
 	 * @return ItemHandler
 	 */
 	public function newItemHandler() {
+		$entityPerPage = $this->getStore()->newEntityPerPage();
 		$termIndex = $this->getStore()->getTermIndex();
 		$codec = $this->getEntityContentDataCodec();
 		$constraintProvider = $this->getEntityConstraintProvider();
@@ -1484,6 +1485,7 @@ class WikibaseRepo {
 		$legacyFormatDetector = $this->getLegacyFormatDetectorCallback();
 
 		$handler = new ItemHandler(
+			$entityPerPage,
 			$termIndex,
 			$codec,
 			$constraintProvider,
@@ -1537,6 +1539,7 @@ class WikibaseRepo {
 	 * @return PropertyHandler
 	 */
 	public function newPropertyHandler() {
+		$entityPerPage = $this->getStore()->newEntityPerPage();
 		$termIndex = $this->getStore()->getTermIndex();
 		$codec = $this->getEntityContentDataCodec();
 		$constraintProvider = $this->getEntityConstraintProvider();
@@ -1546,6 +1549,7 @@ class WikibaseRepo {
 		$legacyFormatDetector = $this->getLegacyFormatDetectorCallback();
 
 		$handler = new PropertyHandler(
+			$entityPerPage,
 			$termIndex,
 			$codec,
 			$constraintProvider,

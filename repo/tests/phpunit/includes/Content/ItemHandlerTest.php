@@ -220,6 +220,7 @@ class ItemHandlerTest extends EntityHandlerTest {
 			->getMock();
 
 		return new ItemHandler(
+			$wikibaseRepo->getStore()->newEntityPerPage(),
 			$wikibaseRepo->getStore()->getTermIndex(),
 			$wikibaseRepo->getEntityContentDataCodec(),
 			$wikibaseRepo->getEntityConstraintProvider(),

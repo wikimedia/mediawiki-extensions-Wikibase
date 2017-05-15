@@ -31,6 +31,7 @@ use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Repo\Diff\EntityContentDiffView;
 use Wikibase\Repo\Search\Elastic\Fields\FieldDefinitions;
+use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\EntityValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
@@ -60,6 +61,11 @@ abstract class EntityHandler extends ContentHandler {
 	 * @var FieldDefinitions
 	 */
 	protected $fieldDefinitions;
+
+	/**
+	 * @var EntityPerPage
+	 */
+	private $entityPerPage;
 
 	/**
 	 * @var TermIndex
@@ -94,6 +100,7 @@ abstract class EntityHandler extends ContentHandler {
 
 	/**
 	 * @param string $modelId
+	 * @param EntityPerPage $entityPerPage
 	 * @param TermIndex $termIndex
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityConstraintProvider $constraintProvider
@@ -108,6 +115,7 @@ abstract class EntityHandler extends ContentHandler {
 	 */
 	public function __construct(
 		$modelId,
+		EntityPerPage $entityPerPage,
 		TermIndex $termIndex,
 		EntityContentDataCodec $contentCodec,
 		EntityConstraintProvider $constraintProvider,
@@ -124,6 +132,7 @@ abstract class EntityHandler extends ContentHandler {
 			throw new InvalidArgumentException( '$legacyExportFormatDetector must be a callable (or null)' );
 		}
 
+		$this->entityPerPage = $entityPerPage;
 		$this->termIndex = $termIndex;
 		$this->contentCodec = $contentCodec;
 		$this->constraintProvider = $constraintProvider;
@@ -656,6 +665,13 @@ abstract class EntityHandler extends ContentHandler {
 			$entityId
 		);
 
+		// Unregister the entity from the EntityPerPage table.
+		$updates[] = new DataUpdateAdapter(
+			array( $this->entityPerPage, 'deleteEntityPage' ),
+			$entityId,
+			$title->getArticleID()
+		);
+
 		return $updates;
 	}
 
@@ -685,7 +701,22 @@ abstract class EntityHandler extends ContentHandler {
 				array( $this->termIndex, 'deleteTermsOfEntity' ),
 				$entityId
 			);
+
+			// Register the redirect from the EntityPerPage table.
+			$updates[] = new DataUpdateAdapter(
+				array( $this->entityPerPage, 'addRedirectPage' ),
+				$entityId,
+				$title->getArticleID(),
+				$content->getEntityRedirect()->getTargetId()
+			);
 		} else {
+			// Register the entity in the EntityPerPage table.
+			$updates[] = new DataUpdateAdapter(
+				array( $this->entityPerPage, 'addEntityPage' ),
+				$entityId,
+				$title->getArticleID()
+			);
+
 			// Register the entity in the terms table.
 			$updates[] = new DataUpdateAdapter(
 				array( $this->termIndex, 'saveTermsOfEntity' ),
