@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_3c17d9a9",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-05-15T17:12:08Z",
+      "side": 1,
+      "message": "That\u0027s because it expects to derive the code for each error from the individual messages in the Status, a single code wouldn\u0027t make sense.\n\nI don\u0027t know to what extent it makes a difference that you\u0027re throwing away everything else that was in $status in this code path.",
+      "revId": "6921eef729db69cc306ab785ce56140e2d70f766",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
