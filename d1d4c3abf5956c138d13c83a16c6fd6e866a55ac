@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_ebb2f991",
+        "filename": "data-access/src/DispatchingServiceContainer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-15T07:58:43Z",
+      "side": 1,
+      "message": "I guess MultiRepoServices would be OK. There seems to be a tendency in this component to call stuff \"*Services\", so why not stick to that.\n\nSo for the naming: do we want to go with MultiRepoServices, or be complete and verbose as in other names and have MultiRepositoryServices?",
+      "parentUuid": "0e1cb3f9_247ca9b3",
+      "revId": "d1d4c3abf5956c138d13c83a16c6fd6e866a55ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_3a4124ad",
         "filename": "data-access/tests/phpunit/DispatchingServiceContainerTest.php",
         "patchSetId": 2
@@ -53,6 +71,30 @@
       "writtenOn": "2017-05-12T15:37:17Z",
       "side": 1,
       "message": "Why not $container as in most places in this file?\n\nSame multiple times below.",
+      "range": {
+        "startLine": 78,
+        "startChar": 2,
+        "endLine": 78,
+        "endChar": 30
+      },
+      "revId": "d1d4c3abf5956c138d13c83a16c6fd6e866a55ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_6b9029f2",
+        "filename": "data-access/tests/phpunit/DispatchingServiceContainerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-15T07:58:43Z",
+      "side": 1,
+      "message": "There are different \"containers\" in this method, so I\u0027d rather use a long name. And I should be using the long name in most of those tests I guess. There are too many \"containers\" involved here, and I don\u0027t think having a long name hurts in this context.",
+      "parentUuid": "0e1cb3f9_3a4124ad",
       "range": {
         "startLine": 78,
         "startChar": 2,
