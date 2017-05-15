@@ -301,7 +301,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		// check that the resulting json contains all the ids we asked for.
 		$data = json_decode( $json, true );
 
-		$this->assertTrue( is_array( $data ), 'decode failed: ' . $json );
+		$this->assertInternalType( 'array', $data, 'decode failed: ' . $json );
 
 		$actualIds = array_map( function( $entityData ) {
 			return $entityData['id'];
@@ -365,7 +365,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 			// check that the resulting json contains all the ids we asked for.
 			$data = json_decode( $json, true );
-			$this->assertTrue( is_array( $data ), 'decode failed: ' . $json );
+			$this->assertInternalType( 'array', $data, 'decode failed: ' . $json );
 
 			$shardIds = array_map( function( $entityData ) {
 				return $entityData['id'];
