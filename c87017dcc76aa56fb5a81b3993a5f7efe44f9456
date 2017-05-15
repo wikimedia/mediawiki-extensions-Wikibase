@@ -16,6 +16,24 @@
       "revId": "c87017dcc76aa56fb5a81b3993a5f7efe44f9456",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_ab8641bc",
+        "filename": "data-access/src/MultipleRepositoryAwareWikibaseServices.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-15T07:47:02Z",
+      "side": 1,
+      "message": "Yeah, that felt a bit odd indeed.\n\nBut in order to change this class should somehow know the wiring of the dispatching services. I guess I should merge the WikibaseSettings stuff, so it is easier to have it passed in here.\n\nI am going to make a patch to demonstrate the idea soon.",
+      "parentUuid": "0e1cb3f9_e48f91cf",
+      "revId": "c87017dcc76aa56fb5a81b3993a5f7efe44f9456",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
