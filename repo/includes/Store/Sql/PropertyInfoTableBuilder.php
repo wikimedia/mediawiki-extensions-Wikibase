@@ -140,9 +140,6 @@ class PropertyInfoTableBuilder {
 		$tables = [ 'page' ];
 
 		if ( !$this->shouldUpdateAllEntities ) {
-			// Find properties in wb_entity_per_page with no corresponding
-			// entry in wb_property_info.
-
 			$piTable = $this->propertyInfoTable->getTableName();
 
 			$tables[] = $piTable;
