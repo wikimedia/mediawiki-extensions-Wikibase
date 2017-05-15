@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_1c1a157f",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-15T18:42:47Z",
+      "side": 1,
+      "message": "Before we can do this, we now need to wait for all replicas to catch up! This ensures that lockClient() does not risk reading stale state from the replicas.\n\nHave a look at what wfWaitForSlaves() does. we could just call it, but I\u0027d rather avoid relying global state, if possible.\n\nMarius mentioned this in T162557: \"In order to prevent double dispatching, the dispatcher bumping chd_seen would need to keep it locked until the master change in question replicated to all replicas.\"",
+      "revId": "12743c567ea9fb4291b5dbe7e04f4a56a0eb8924",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
