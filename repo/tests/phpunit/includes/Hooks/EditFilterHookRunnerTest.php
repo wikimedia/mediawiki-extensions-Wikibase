@@ -156,28 +156,26 @@ class EditFilterHookRunnerTest extends \MediaWikiTestCase {
 			array( 'EditFilterMergedContent' => array() )
 		);
 
-		$hooks['EditFilterMergedContent'][] =
-			function(
-				IContextSource $context,
-				Content $content,
-				Status $status,
-				$summary,
-				User $user,
-				$minoredit
-			) use ( $expected, $inputStatus )
-			{
-				$this->assertEquals( $expected['title'], $context->getTitle()->getFullText() );
-				$this->assertSame( $context->getTitle(), $context->getWikiPage()->getTitle() );
-				$this->assertEquals( $expected['namespace'], $context->getTitle()->getNamespace() );
-				$this->assertEquals( new ItemContent( new EntityInstanceHolder( new Item() ) ), $content );
-				$this->assertTrue( $status->isGood() );
-				$this->assertTrue( is_string( $summary ) );
-				$this->assertEquals( 'EditFilterHookRunnerTestUser', $user->getName() );
-				$this->assertTrue( is_bool( $minoredit ) );
+		$hooks['EditFilterMergedContent'][] = function(
+			IContextSource $context,
+			Content $content,
+			Status $status,
+			$summary,
+			User $user,
+			$minoredit
+		) use ( $expected, $inputStatus ) {
+			$this->assertSame( $expected['title'], $context->getTitle()->getFullText() );
+			$this->assertSame( $context->getTitle(), $context->getWikiPage()->getTitle() );
+			$this->assertSame( $expected['namespace'], $context->getTitle()->getNamespace() );
+			$this->assertEquals( new ItemContent( new EntityInstanceHolder( new Item() ) ), $content );
+			$this->assertTrue( $status->isGood() );
+			$this->assertInternalType( 'string', $summary );
+			$this->assertSame( 'EditFilterHookRunnerTestUser', $user->getName() );
+			$this->assertInternalType( 'boolean', $minoredit );
 
-				//Change the status
-				$status->merge( $inputStatus );
-			};
+			// Change the status
+			$status->merge( $inputStatus );
+		};
 
 		$this->setMwGlobals( array(
 			'wgHooks' => $hooks
