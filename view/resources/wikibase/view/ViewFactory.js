@@ -335,18 +335,7 @@
 		var statementGroupSet = entity.getStatements();
 
 		function getStatementForGuid( guid ) {
-			var res = null;
-			statementGroupSet.each( function () {
-				// FIXME: This accesses a private property to avoid cloning.
-				this._groupableCollection.each( function () {
-					if ( this.getClaim().getGuid() === guid ) {
-						res = this;
-					}
-					return res === null;
-				} );
-				return res === null;
-			} );
-			return res;
+			return entity.getStatementByGuid( guid );
 		}
 
 		return this._getView(
