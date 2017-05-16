@@ -16,6 +16,24 @@
       "revId": "12743c567ea9fb4291b5dbe7e04f4a56a0eb8924",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_ccc948b0",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-16T08:11:12Z",
+      "side": 1,
+      "message": "It can be done using \\MediaWiki\\MediaWikiServices::getInstance()-\u003egetDBLoadBalancerFactory()-\u003ewaitForReplication() but let me see how I can inject it properly.",
+      "parentUuid": "0e1cb3f9_1c1a157f",
+      "revId": "12743c567ea9fb4291b5dbe7e04f4a56a0eb8924",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
