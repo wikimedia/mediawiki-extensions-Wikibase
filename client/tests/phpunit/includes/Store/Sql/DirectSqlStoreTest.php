@@ -86,11 +86,7 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetters
 	 */
-	public function testGetters( $getter, $expectedType, $needsLocalRepo = false ) {
-		if ( $needsLocalRepo && !defined( 'WB_VERSION' ) ) {
-			$this->markTestSkipped( $getter . ' needs the repository extension to be active.' );
-		}
-
+	public function testGetters( $getter, $expectedType ) {
 		$store = $this->newStore();
 
 		$this->assertTrue( method_exists( $store, $getter ), "Method $getter" );
@@ -109,12 +105,21 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			array( 'getPropertyInfoLookup', PropertyInfoLookup::class ),
 			array( 'getUsageTracker', UsageTracker::class ),
 			array( 'getUsageLookup', UsageLookup::class ),
-			array( 'getSubscriptionManager', SubscriptionManager::class, true ),
 			array( 'getEntityIdLookup', EntityIdLookup::class ),
 			array( 'getEntityPrefetcher', EntityPrefetcher::class ),
 			array( 'getEntityChangeLookup', EntityChangeLookup::class ),
 			array( 'getRecentChangesDuplicateDetector', RecentChangesDuplicateDetector::class ),
 		);
+	}
+
+	public function testGetSubscriptionManager() {
+		if ( !defined( 'WB_VERSION' ) ) {
+			$this->markTestSkipped( 'getSubscriptionManager needs the repository extension to be active.' );
+		}
+
+		$store = $this->newStore();
+
+		$this->assertInstanceOf( SubscriptionManager::class, $store->getSubscriptionManager() );
 	}
 
 }
