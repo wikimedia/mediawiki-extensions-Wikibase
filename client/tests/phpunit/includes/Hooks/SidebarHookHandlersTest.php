@@ -10,8 +10,6 @@ use RequestContext;
 use Skin;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
-use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
-use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\SidebarHookHandlers;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
@@ -61,44 +59,6 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		return new SettingsArray( array_merge( $defaults, $settings ) );
 	}
 
-	/**
-	 * @param array $projects
-	 *
-	 * @return OtherProjectsSidebarGenerator
-	 */
-	private function getSidebarGenerator( array $projects ) {
-		$sidebarGenerator = $this->getMockBuilder( OtherProjectsSidebarGenerator::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$sidebarGenerator->expects( $this->any() )
-			->method( 'buildProjectLinkSidebar' )
-			->will( $this->returnValue( $projects ) );
-
-		return $sidebarGenerator;
-	}
-
-	/**
-	 * @param array $projects
-	 *
-	 * @return OtherProjectsSidebarGeneratorFactory
-	 */
-	private function getOtherProjectsSidebarGeneratorFactory( array $projects ) {
-		$otherProjectsSidebarGenerator = $this->getSidebarGenerator( $projects );
-
-		$otherProjectsSidebarGeneratorFactory = $this->getMockBuilder(
-				OtherProjectsSidebarGeneratorFactory::class
-			)
-			->disableOriginalConstructor()
-			->getMock();
-
-		$otherProjectsSidebarGeneratorFactory->expects( $this->any() )
-			->method( 'getOtherProjectsSidebarGenerator' )
-			->will( $this->returnValue( $otherProjectsSidebarGenerator ) );
-
-		return $otherProjectsSidebarGeneratorFactory;
-	}
-
 	private function newSidebarHookHandlers( array $settings = array() ) {
 		$en = Language::factory( 'en' );
 		$settings = $this->newSettings( $settings );
@@ -115,7 +75,6 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		return new SidebarHookHandlers(
 			$namespaceChecker,
 			$badgeDisplay,
-			$this->getOtherProjectsSidebarGeneratorFactory( array( 'dummy' => 'xyz' ) ),
 			$settings->getSetting( 'otherProjectsLinksBeta' ),
 			$settings->getSetting( 'otherProjectsLinksByDefault' )
 		);

@@ -33,11 +33,6 @@ class SidebarHookHandlers {
 	private $badgeDisplay;
 
 	/**
-	 * @var OtherProjectsSidebarGeneratorFactory
-	 */
-	private $otherProjectsSidebarGeneratorFactory;
-
-	/**
 	 * @var bool
 	 */
 	private $otherProjectsLinksBeta;
@@ -71,7 +66,6 @@ class SidebarHookHandlers {
 		return new self(
 			$wikibaseClient->getNamespaceChecker(),
 			$wikibaseClient->getLanguageLinkBadgeDisplay(),
-			$wikibaseClient->getOtherProjectsSidebarGeneratorFactory(),
 			$settings->getSetting( 'otherProjectsLinksBeta' ),
 			$settings->getSetting( 'otherProjectsLinksByDefault' )
 		);
@@ -132,13 +126,11 @@ class SidebarHookHandlers {
 	public function __construct(
 		NamespaceChecker $namespaceChecker,
 		LanguageLinkBadgeDisplay $badgeDisplay,
-		OtherProjectsSidebarGeneratorFactory $otherProjectsSidebarGeneratorFactory,
 		$otherProjectsLinksBeta,
 		$otherProjectsLinksDefault
 	) {
 		$this->namespaceChecker = $namespaceChecker;
 		$this->badgeDisplay = $badgeDisplay;
-		$this->otherProjectsSidebarGeneratorFactory = $otherProjectsSidebarGeneratorFactory;
 		$this->otherProjectsLinksBeta = $otherProjectsLinksBeta;
 		$this->otherProjectsLinksDefault = $otherProjectsLinksDefault;
 	}
@@ -235,13 +227,6 @@ class SidebarHookHandlers {
 
 		if ( $this->otherProjectsLinksDefault || $betaFeatureEnabled ) {
 			$otherProjectsSidebar = $outputPage->getProperty( 'wikibase-otherprojects-sidebar' );
-
-			// in case of stuff in cache without the other projects
-			if ( $otherProjectsSidebar === null ) {
-				$otherProjectsSidebarGenerator = $this->otherProjectsSidebarGeneratorFactory
-					->getOtherProjectsSidebarGenerator();
-				$otherProjectsSidebar = $otherProjectsSidebarGenerator->buildProjectLinkSidebar( $title );
-			}
 
 			if ( !empty( $otherProjectsSidebar ) ) {
 				$sidebar['wikibase-otherprojects'] = $otherProjectsSidebar;
