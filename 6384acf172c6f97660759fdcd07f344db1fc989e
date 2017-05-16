@@ -389,6 +389,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_4c1778a8",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 875,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-16T09:19:09Z",
+      "side": 1,
+      "message": "Please check PS10 for a change in the test that was missing but is critical if I am not mistaken.\n\nIt is true that the behaviour if this class is pretty inconsistent.\n1. When using full id, just parse and don\u0027t care as the class assumes the parser does right thing.\n2. When using numeric ID pass in repo name to the ID composer, so it does the right. Still, this class assumes the composer handles the repo name information correctly and adds the prefix. No extra check etc in this case, as in the case 1.\n\nSo maybe this inconsistency is not _that_ bad? I am still a bit concerned. Should this class do some sanity check? Or is \"assume and don\u0027t care\" an OK approach here?",
+      "parentUuid": "0e1cb3f9_6b53541b",
+      "revId": "6384acf172c6f97660759fdcd07f344db1fc989e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_474d2d9a",
         "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
         "patchSetId": 4
