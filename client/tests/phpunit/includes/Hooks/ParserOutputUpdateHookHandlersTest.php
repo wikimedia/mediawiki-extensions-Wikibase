@@ -11,7 +11,7 @@ use Site;
 use SiteLookup;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
-use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
+use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\Usage\EntityUsage;
@@ -155,7 +155,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		$mockRepo->putEntity( $this->getBadgeItem() );
 
 		$parserOutputDataUpdater = new ClientParserOutputDataUpdater(
-			$this->getOtherProjectsSidebarGeneratorFactory( $settings, $mockRepo ),
+			$this->getOtherProjectsSidebarGenerator( $settings, $mockRepo ),
 			$mockRepo,
 			$mockRepo,
 			$settings->getSetting( 'siteGlobalID' )
@@ -192,14 +192,20 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		);
 	}
 
-	private function getOtherProjectsSidebarGeneratorFactory(
+	/**
+	 * @param SettingsArray $settings
+	 * @param SiteLinkLookup $siteLinkLookup
+	 * @return OtherProjectsSidebarGenerator
+	 */
+	private function getOtherProjectsSidebarGenerator(
 		SettingsArray $settings,
 		SiteLinkLookup $siteLinkLookup
 	) {
-		return new OtherProjectsSidebarGeneratorFactory(
-			$settings,
+		return new OtherProjectsSidebarGenerator(
+			$settings->getSetting( 'siteGlobalID' ),
 			$siteLinkLookup,
-			$this->getSiteLookup()
+			$this->getSiteLookup(),
+			$settings->getSetting( 'otherProjectsLinks' )
 		);
 	}
 
