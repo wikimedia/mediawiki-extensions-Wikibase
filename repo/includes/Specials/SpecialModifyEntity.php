@@ -236,8 +236,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 				'type' => 'text',
 				'cssclass' => 'wb-input',
 				'id' => $id,
-				'default' => $entity === null ? '' : $entity->getId(),
-				'cssclass' => 'wb-input'
+				'default' => $entity === null ? '' : $entity->getId()
 			),
 		);
 	}
