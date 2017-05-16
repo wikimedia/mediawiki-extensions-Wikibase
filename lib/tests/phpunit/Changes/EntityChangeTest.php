@@ -16,6 +16,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\EntityChange;
 use Wikibase\ItemContent;
+use Wikibase\WikibaseSettings;
 
 /**
  * @covers Wikibase\EntityChange
@@ -197,7 +198,7 @@ class EntityChangeTest extends ChangeRowTest {
 	}
 
 	public function testSetRevisionInfo() {
-		if ( !defined( 'WB_VERSION' ) ) {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped(
 				'Need to be able to create entity content in order to test with Revision objects.'
 			);
@@ -305,7 +306,7 @@ class EntityChangeTest extends ChangeRowTest {
 
 		$change = new EntityChange( [ 'info' => $info ] );
 
-		if ( !defined( 'WB_VERSION' ) ) {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->setExpectedException( RuntimeException::class );
 		}
 

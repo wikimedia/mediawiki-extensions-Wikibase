@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Tests\Store\Sql;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkTable;
+use Wikibase\WikibaseSettings;
 
 /**
  * @covers Wikibase\Lib\Store\SiteLinkTable
@@ -27,7 +28,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		if ( !defined( 'WB_VERSION' ) ) {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local site link table." );
 		}
 

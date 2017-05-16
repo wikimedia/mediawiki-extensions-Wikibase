@@ -17,6 +17,7 @@ use Wikibase\Lib\Tests\Store\TermIndexTest;
 use Wikibase\StringNormalizer;
 use Wikibase\TermIndexEntry;
 use Wikibase\TermSqlIndex;
+use Wikibase\WikibaseSettings;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
@@ -36,7 +37,7 @@ class TermSqlIndexTest extends TermIndexTest {
 	protected function setUp() {
 		parent::setUp();
 
-		if ( !defined( 'WB_VERSION' ) ) {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped( "Skipping because a local wb_terms table"
 				. " is not available on a WikibaseClient only instance." );
 		}

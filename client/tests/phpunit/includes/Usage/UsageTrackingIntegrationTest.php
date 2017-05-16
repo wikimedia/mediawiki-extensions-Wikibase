@@ -8,6 +8,7 @@ use Title;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\WikibaseSettings;
 use WikiPage;
 use WikitextContent;
 
@@ -44,7 +45,7 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 	private $oldEntityNamespaces;
 
 	protected function setUp() {
-		if ( !defined( 'WB_VERSION' ) ) {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped( 'Integration test requires repo and client extension to be active on the same wiki.' );
 		}
 

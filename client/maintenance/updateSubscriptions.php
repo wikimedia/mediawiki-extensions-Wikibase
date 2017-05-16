@@ -49,7 +49,7 @@ class UpdateSubscriptions extends Maintenance {
 	 * @return bool
 	 */
 	public function execute() {
-		if ( !defined( 'WBC_VERSION' ) ) {
+		if ( !WikibaseSettings::isClientEnabled() ) {
 			$this->error(
 				'You need to have WikibaseClient enabled in order to use this maintenance script!',
 				1

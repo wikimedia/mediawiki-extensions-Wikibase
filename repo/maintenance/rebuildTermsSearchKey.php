@@ -34,7 +34,7 @@ class RebuildTermsSearchKey extends LoggedUpdateMaintenance {
 	 * @return bool
 	 */
 	public function doDBUpdates() {
-		if ( !defined( 'WB_VERSION' ) ) {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->output( "You need to have Wikibase enabled in order to use this maintenance script!\n\n" );
 			exit;
 		}

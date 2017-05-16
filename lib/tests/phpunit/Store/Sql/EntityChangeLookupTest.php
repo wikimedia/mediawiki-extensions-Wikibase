@@ -8,6 +8,7 @@ use Wikibase\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Repo\Store\Sql\SqlChangeStore;
+use Wikibase\WikibaseSettings;
 
 /**
  * @covers Wikibase\Lib\Store\EntityChangeLookup
@@ -69,7 +70,7 @@ class EntityChangeLookupTest extends \MediaWikiTestCase {
 	 * @dataProvider loadChunkProvider
 	 */
 	public function testLoadChunk( array $expected, array $changesToStore, $start, $size ) {
-		if ( !defined( 'WB_VERSION' ) ) {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes table." );
 		}
 
@@ -108,7 +109,7 @@ class EntityChangeLookupTest extends \MediaWikiTestCase {
 	}
 
 	public function testLoadByRevisionId() {
-		if ( !defined( 'WB_VERSION' ) ) {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes table." );
 		}
 
@@ -127,7 +128,7 @@ class EntityChangeLookupTest extends \MediaWikiTestCase {
 	}
 
 	public function testLoadByRevisionId_notFound() {
-		if ( !defined( 'WB_VERSION' ) ) {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes table." );
 		}
 

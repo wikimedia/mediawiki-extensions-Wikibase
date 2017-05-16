@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
+use Wikibase\WikibaseSettings;
 
 /**
  * @covers Wikibase\PropertyInfoTable
@@ -26,7 +27,7 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		if ( !defined( 'WB_VERSION' ) ) {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_property_info table." );
 		}
 

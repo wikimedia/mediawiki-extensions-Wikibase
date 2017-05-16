@@ -31,7 +31,7 @@ class CreateBlacklistedItems extends Maintenance {
 		$user = $wgUser;
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-		if ( !defined( 'WB_VERSION' ) ) {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->output( "You need to have Wikibase enabled in order to use this maintenance script!\n\n" );
 			exit;
 		}

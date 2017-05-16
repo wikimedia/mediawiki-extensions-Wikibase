@@ -39,7 +39,7 @@ class ChangePropertyDataType extends Maintenance {
 	}
 
 	public function execute() {
-		if ( !defined( 'WB_VERSION' ) ) {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->error( "You need to have Wikibase enabled in order to use this maintenance script!\n", 1 );
 		}
 
