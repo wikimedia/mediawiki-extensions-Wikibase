@@ -6,7 +6,6 @@ use ParserOutput;
 use PHPUnit_Framework_TestCase;
 use Title;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
-use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
@@ -72,30 +71,11 @@ class ClientParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 		}
 
 		return new ClientParserOutputDataUpdater(
-			$this->getOtherProjectsSidebarGeneratorFactory( $otherProjects ),
+			$this->getOtherProjectsSidebarGenerator( $otherProjects ),
 			$this->mockRepo,
 			$this->mockRepo,
 			'srwiki'
 		);
-	}
-
-	/**
-	 * @param string[] $otherProjects
-	 *
-	 * @return OtherProjectsSidebarGeneratorFactory
-	 */
-	private function getOtherProjectsSidebarGeneratorFactory( array $otherProjects ) {
-		$generator = $this->getOtherProjectsSidebarGenerator( $otherProjects );
-
-		$factory = $this->getMockBuilder( OtherProjectsSidebarGeneratorFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$factory->expects( $this->any() )
-			->method( 'getOtherProjectsSidebarGenerator' )
-			->will( $this->returnValue( $generator ) );
-
-		return $factory;
 	}
 
 	/**
@@ -255,7 +235,7 @@ class ClientParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 		}
 
 		$parserOutputDataUpdater = new ClientParserOutputDataUpdater(
-			$this->getOtherProjectsSidebarGeneratorFactory( array() ),
+			$this->getOtherProjectsSidebarGenerator( [] ),
 			$siteLinkLookup,
 			$mockRepoNoSiteLinks,
 			'srwiki'
@@ -281,7 +261,7 @@ class ClientParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 		}
 
 		$parserOutputDataUpdater = new ClientParserOutputDataUpdater(
-			$this->getOtherProjectsSidebarGeneratorFactory( array() ),
+			$this->getOtherProjectsSidebarGenerator( [] ),
 			$siteLinkLookup,
 			new MockRepository(),
 			'srwiki'

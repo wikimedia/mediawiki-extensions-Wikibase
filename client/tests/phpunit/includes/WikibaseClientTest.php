@@ -13,7 +13,7 @@ use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
-use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
+use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
 use Wikibase\Client\OtherProjectsSitesProvider;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
@@ -263,9 +263,9 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( LanguageLinkBadgeDisplay::class, $returnValue );
 	}
 
-	public function testGetOtherProjectsSidebarGeneratorFactoryReturnType() {
-		$instance = $this->getWikibaseClient()->getOtherProjectsSidebarGeneratorFactory();
-		$this->assertInstanceOf( OtherProjectsSidebarGeneratorFactory::class, $instance );
+	public function testGetOtherProjectsSidebarGeneratorReturnType() {
+		$instance = $this->getWikibaseClient()->getOtherProjectsSidebarGenerator();
+		$this->assertInstanceOf( OtherProjectsSidebarGenerator::class, $instance );
 	}
 
 	public function testGetOtherProjectsSitesProvider() {
