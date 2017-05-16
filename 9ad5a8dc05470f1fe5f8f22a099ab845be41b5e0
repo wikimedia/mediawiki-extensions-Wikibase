@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_0cce6031",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-16T09:45:53Z",
+      "side": 1,
+      "message": "minor: just spotted that, don\u0027t we want to have a full path to file here? Also maybe it should be mentioning both example files, as this setting is in both repo/config/Wikibase.example.php and client/config/WikibaseClient.example.php.",
+      "revId": "9ad5a8dc05470f1fe5f8f22a099ab845be41b5e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
