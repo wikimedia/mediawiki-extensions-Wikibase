@@ -334,21 +334,6 @@
 	SELF.prototype.getStatementGroupListView = function( startEditingCallback, entity, $statementgrouplistview ) {
 		var statementGroupSet = entity.getStatements();
 
-		function getStatementForGuid( guid ) {
-			var res = null;
-			statementGroupSet.each( function () {
-				// FIXME: This accesses a private property to avoid cloning.
-				this._groupableCollection.each( function () {
-					if ( this.getClaim().getGuid() === guid ) {
-						res = this;
-					}
-					return res === null;
-				} );
-				return res === null;
-			} );
-			return res;
-		}
-
 		return this._getView(
 			'statementgrouplistview',
 			$statementgrouplistview,
@@ -358,7 +343,7 @@
 				listItemAdapter: this.getListItemAdapterForStatementGroupView(
 					startEditingCallback,
 					entity.getId(),
-					getStatementForGuid
+					entity.findStatementByGuid.bind(entity)
 				),
 				getAdder: this._getAdderWithStartEditing( startEditingCallback )
 			}
