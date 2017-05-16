@@ -292,7 +292,7 @@ class ViewFactory {
 			$propertyIdFormatter,
 			$this->textProvider
 		);
-		$claimHtmlGenerator = new ClaimHtmlGenerator(
+		$statementHtmlGenerator = new StatementHtmlGenerator(
 			$this->templateFactory,
 			$snakHtmlGenerator,
 			$this->numberLocalizer,
@@ -303,7 +303,7 @@ class ViewFactory {
 			$this->templateFactory,
 			$propertyIdFormatter,
 			$editSectionGenerator,
-			$claimHtmlGenerator
+			$statementHtmlGenerator
 		);
 
 		return new StatementSectionsView(

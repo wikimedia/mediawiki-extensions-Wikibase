@@ -14,7 +14,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Store\PropertyOrderProvider;
-use Wikibase\View\ClaimHtmlGenerator;
+use Wikibase\View\StatementHtmlGenerator;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\StatementGroupListView;
 use Wikibase\View\Template\TemplateFactory;
@@ -146,7 +146,7 @@ class StatementGroupListViewTest extends PHPUnit_Framework_TestCase {
 			$templateFactory,
 			$this->getEntityIdFormatter(),
 			$this->getMock( EditSectionGenerator::class ),
-			$this->getClaimHtmlGenerator()
+			$this->getStatementHtmlGenerator()
 		);
 	}
 
@@ -167,19 +167,19 @@ class StatementGroupListViewTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return ClaimHtmlGenerator
+	 * @return StatementHtmlGenerator
 	 */
-	private function getClaimHtmlGenerator() {
-		$claimHtmlGenerator = $this->getMockBuilder( ClaimHtmlGenerator::class )
+	private function getStatementHtmlGenerator() {
+		$statementHtmlGenerator = $this->getMockBuilder( StatementHtmlGenerator::class )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$claimHtmlGenerator->method( 'getHtmlForClaim' )
+		$statementHtmlGenerator->method( 'getHtmlForStatement' )
 			->will( $this->returnCallback( function( Statement $statement, $editSectionHtml = null ) {
 				return $statement->getGuid() . "\n";
 			} ) );
 
-		return $claimHtmlGenerator;
+		return $statementHtmlGenerator;
 	}
 
 	/**

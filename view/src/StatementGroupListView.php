@@ -37,28 +37,28 @@ class StatementGroupListView {
 	private $editSectionGenerator;
 
 	/**
-	 * @var ClaimHtmlGenerator
+	 * @var StatementHtmlGenerator
 	 */
-	private $claimHtmlGenerator;
+	private $statementHtmlGenerator;
 
 	/**
 	 * @param PropertyOrderProvider $propertyOrderProvider
 	 * @param TemplateFactory $templateFactory
 	 * @param EntityIdFormatter $propertyIdFormatter
 	 * @param EditSectionGenerator $sectionEditLinkGenerator
-	 * @param ClaimHtmlGenerator $claimHtmlGenerator
+	 * @param StatementHtmlGenerator $statementHtmlGenerator
 	 */
 	public function __construct(
 		PropertyOrderProvider $propertyOrderProvider,
 		TemplateFactory $templateFactory,
 		EntityIdFormatter $propertyIdFormatter,
 		EditSectionGenerator $sectionEditLinkGenerator,
-		ClaimHtmlGenerator $claimHtmlGenerator
+		StatementHtmlGenerator $statementHtmlGenerator
 	) {
 		$this->propertyOrderProvider = $propertyOrderProvider;
 		$this->propertyIdFormatter = $propertyIdFormatter;
 		$this->editSectionGenerator = $sectionEditLinkGenerator;
-		$this->claimHtmlGenerator = $claimHtmlGenerator;
+		$this->statementHtmlGenerator = $statementHtmlGenerator;
 		$this->templateFactory = $templateFactory;
 	}
 
@@ -155,7 +155,7 @@ class StatementGroupListView {
 		$statementViewsHtml = '';
 
 		foreach ( $statements as $statement ) {
-			$statementViewsHtml .= $this->claimHtmlGenerator->getHtmlForClaim(
+			$statementViewsHtml .= $this->statementHtmlGenerator->getHtmlForStatement(
 				$statement,
 				$this->editSectionGenerator->getStatementEditSection( $statement )
 			);

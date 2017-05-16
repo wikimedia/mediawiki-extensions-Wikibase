@@ -12,13 +12,11 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
- * Base class for generating the HTML for a Claim in Entity View.
- *
- * @todo move Statement-specific formatting elsewhere.
+ * Backend renderer that generates the HTML representation of a statement for use in an entity view.
  *
  * @license GPL-2.0+
  */
-class ClaimHtmlGenerator {
+class StatementHtmlGenerator {
 
 	private static $rankNames = [
 		Statement::RANK_DEPRECATED => 'deprecated',
@@ -82,7 +80,7 @@ class ClaimHtmlGenerator {
 	 *
 	 * @return string HTML
 	 */
-	public function getHtmlForClaim( Statement $statement, $editSectionHtml ) {
+	public function getHtmlForStatement( Statement $statement, $editSectionHtml ) {
 		$mainSnakHtml = $this->snakHtmlGenerator->getSnakHtml(
 			$statement->getMainSnak(),
 			false
@@ -111,8 +109,6 @@ class ClaimHtmlGenerator {
 	}
 
 	/**
-	 * Generates and returns the HTML representing a claim's qualifiers.
-	 *
 	 * @param SnakList $qualifiers
 	 *
 	 * @return string HTML
@@ -132,8 +128,6 @@ class ClaimHtmlGenerator {
 	}
 
 	/**
-	 * Generates the HTML for a ReferenceList object.
-	 *
 	 * @param ReferenceList $referenceList
 	 *
 	 * @return string HTML
@@ -157,8 +151,6 @@ class ClaimHtmlGenerator {
 	}
 
 	/**
-	 * Generates the HTML for a Reference object.
-	 *
 	 * @param Reference $reference
 	 *
 	 * @return string HTML
@@ -184,8 +176,6 @@ class ClaimHtmlGenerator {
 	}
 
 	/**
-	 * Generates the HTML for a list of snaks.
-	 *
 	 * @param Snak[] $snaks
 	 *
 	 * @return string HTML

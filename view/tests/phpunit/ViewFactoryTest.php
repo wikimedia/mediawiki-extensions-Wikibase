@@ -30,7 +30,7 @@ use Wikibase\View\Template\TemplateRegistry;
 /**
  * @covers Wikibase\View\ViewFactory
  *
- * @uses Wikibase\View\ClaimHtmlGenerator
+ * @uses Wikibase\View\StatementHtmlGenerator
  * @uses Wikibase\View\EditSectionGenerator
  * @uses Wikibase\View\EntityTermsView
  * @uses Wikibase\View\EntityView
