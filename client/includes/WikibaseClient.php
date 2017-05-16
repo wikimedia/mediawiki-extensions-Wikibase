@@ -38,7 +38,7 @@ use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFact
 use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
-use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
+use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
@@ -898,7 +898,7 @@ final class WikibaseClient {
 	public function getParserOutputDataUpdater() {
 		if ( $this->parserOutputDataUpdater === null ) {
 			$this->parserOutputDataUpdater = new ClientParserOutputDataUpdater(
-				$this->getOtherProjectsSidebarGeneratorFactory(),
+				$this->getOtherProjectsSidebarGenerator(),
 				$this->getStore()->getSiteLinkLookup(),
 				$this->getStore()->getEntityLookup(),
 				$this->settings->getSetting( 'siteGlobalID' )
@@ -1044,13 +1044,14 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return OtherProjectsSidebarGeneratorFactory
+	 * @return OtherProjectsSidebarGenerator
 	 */
-	public function getOtherProjectsSidebarGeneratorFactory() {
-		return new OtherProjectsSidebarGeneratorFactory(
-			$this->settings,
+	public function getOtherProjectsSidebarGenerator() {
+		return new OtherProjectsSidebarGenerator(
+			$this->settings->getSetting( 'siteGlobalID' ),
 			$this->getStore()->getSiteLinkLookup(),
-			$this->siteLookup
+			$this->siteLookup,
+			$this->settings->getSetting( 'otherProjectsLinks' )
 		);
 	}
 
