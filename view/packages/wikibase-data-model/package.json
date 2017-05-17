@@ -1,0 +1,23 @@
+{
+  "directories": {
+    "lib": "src",
+    "test": "tests"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.4",
+    "karma": "^1.7.0",
+    "karma-cli": "^1.0.1",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "karma-qunit": "^1.2.1",
+    "qunitjs": "^2.3.2"
+  },
+  "scripts": {
+    "postinstall": "composer install",
+    "test": "npm run jshint && npm run run-tests",
+    "jshint": "jshint --show-non-errors --verbose src/ tests/",
+    "run-tests": "karma start --single-run"
+  }
+}

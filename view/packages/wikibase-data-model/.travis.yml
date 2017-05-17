@@ -5,10 +5,7 @@ php:
 
 sudo: false
 
-env:
-- RUNJOB=jshint
-
-script: bash ./build/travis/script.sh
+script: npm install && npm test
 
 notifications:
   irc:

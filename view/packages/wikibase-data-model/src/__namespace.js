@@ -1,4 +1,5 @@
 /**
  * @ignore
  */
-wikibase.datamodel = wikibase.datamodel || {};
+window.wikibase = window.wikibase || {};
+window.wikibase.datamodel = window.wikibase.datamodel || {};
