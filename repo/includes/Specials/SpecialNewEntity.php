@@ -204,9 +204,11 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	}
 
 	/**
+	 * @param string|null $messageKey ignored here
+	 *
 	 * @return string HTML
 	 */
-	protected function getCopyrightHTML() {
+	protected function getCopyrightHTML( $messageKey = null ) {
 		return parent::getCopyrightHTML( 'wikibase-newentity-submit' );
 	}
 
