@@ -43,6 +43,11 @@ class ApiErrorReporter {
 	private $language;
 
 	/**
+	 * @var bool
+	 */
+	private $warnOnMissingMessage = true;
+
+	/**
 	 * @param ApiBase $apiModule the API module for collaboration
 	 * @param ExceptionLocalizer $localizer
 	 * @param Language $language
@@ -198,7 +203,7 @@ class ApiErrorReporter {
 	/**
 	 * @see ApiBase::dieWithError
 	 *
-	 * @param string|string[]|MessageSpecifier $msg See ApiErrorFormatter::addError()
+	 * @param string|string[]|MessageSpecifier $msg
 	 * @param string $errorCode A code identifying the error.
 	 * @param int $httpRespCode The HTTP error code to send to the client
 	 * @param array|null $extraData Any extra data to include in the error report
@@ -211,6 +216,10 @@ class ApiErrorReporter {
 			$params = (array)$msg;
 			$messageKey = array_shift( $params );
 			$msg = wfMessage( $messageKey, $params );
+		}
+
+		if ( !$msg->exists() && $this->warnOnMissingMessage ) {
+			wfWarn( 'No message ' . $msg->getKey() . '!' );
 		}
 
 		$this->addMessageToResult( $msg, $extraData );
@@ -229,6 +238,7 @@ class ApiErrorReporter {
 	 * exists, it is included in the error's extra data.
 	 *
 	 * @see ApiBase::dieUsage()
+	 * @deprecated use dieWithError instead.
 	 *
 	 * @param string $description An english, plain text description of the errror,
 	 * for use in logs.
@@ -521,6 +531,15 @@ class ApiErrorReporter {
 		}
 
 		return null;
+	}
+
+	/**
+	 * Allows missing message warnings to be suppressed for testing.
+	 *
+	 * @param boolean $warnOnMissingMessage
+	 */
+	public function setWarnOnMissingMessage( $warnOnMissingMessage ) {
+		$this->warnOnMissingMessage = $warnOnMissingMessage;
 	}
 
 }
