@@ -22,6 +22,30 @@
       "revId": "c8b107b9f9f33f72b252d37603bb9e18f990ae47",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_aef164ca",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-17T09:32:02Z",
+      "side": 1,
+      "message": "Correct me if I am wrong but I believe this documentation gives no \"safety\", i.e. one would be able to pass whatever else as entity argument.\n\nI don\u0027t think this patch changes anything to less \"safe\" in this regard.",
+      "parentUuid": "0e1cb3f9_8e0020b1",
+      "range": {
+        "startLine": 330,
+        "startChar": 12,
+        "endLine": 330,
+        "endChar": 63
+      },
+      "revId": "c8b107b9f9f33f72b252d37603bb9e18f990ae47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
