@@ -197,7 +197,7 @@ class ApiErrorReporter {
 			// NOTE: Ignore generic error messages, rely on the code instead!
 			// XXX: No better way to do this?
 			if ( $key !== 'wikibase-error-unexpected' ) {
-				$this->dieMessageObject( $message, $errorCode, $httpRespCode, $extradata );
+				$this->dieErrorMessage( $message, $errorCode, $httpRespCode, $extradata );
 			}
 		}
 
@@ -209,48 +209,35 @@ class ApiErrorReporter {
 	/**
 	 * Aborts the request with an error message derived from the error code.
 	 *
-	 * @param string $errorCode A code identifying the error.
-	 * @param string [$param,...] Parameters for the Message.
+	 * @param string|string[]|MessageSpecifier $message See error message to return
+	 * @param string|null $errorCode An API error code (if not given, the message key will be used)
+	 * @param int|null $httpRespCode HTTP error code to use
+	 * @param array|null $extradata Any extra data to include in the result
 	 *
 	 * @throws ApiUsageException
 	 * @throws LogicException
 	 */
-	public function dieMessage( $errorCode /*...*/ ) {
-		$messageKey = "wikibase-api-$errorCode";
-		$params = func_get_args();
-		array_shift( $params );
-		$message = wfMessage( $messageKey, $params );
+	public function dieErrorMessage( $message, $errorCode = null, $httpRespCode = 0, $extradata = array() ) {
+		if ( is_string( $message ) ) {
+			$message = [ $message ];
+		}
 
-		if ( !$message->exists() ) {
-			// Fall back to RawMessage if undefined
-			if ( $this->warnOnMissingMessage ) {
-				wfWarn( "No message $messageKey found for API error code $errorCode." );
+		if ( is_array( $message ) ) {
+			$params = $message;
+			$messageKey = array_shift( $params );
+			$message = wfMessage( $messageKey, $params );
+
+			if ( !$message->exists() ) {
+				if ( $this->warnOnMissingMessage ) {
+					wfWarn( "No message $messageKey!" );
+				}
 			}
 		}
 
-		$this->dieMessageObject( $message, $errorCode );
+		if ( is_null( $errorCode ) ) {
+			$errorCode = $message->getKey();
+		}
 
-		throw new LogicException( 'ApiUsageException not thrown' );
-	}
-
-	/**
-	 * Aborts the request with an error message. The given message is included in
-	 * the error's extra data.
-	 *
-	 * @see ApiBase::dieUsage()
-	 *
-	 * @param Message $message The error message. Will be used to generate the free form description
-	 * of the error (as plain text in the content language) and included in the extra data (as
-	 * HTML in the user's language, and as a data structure including the message key and
-	 * parameters).
-	 * @param string $errorCode A code identifying the error.
-	 * @param int $httpRespCode The HTTP error code to send to the client
-	 * @param array|null $extradata Any extra data to include in the error report
-	 *
-	 * @throws ApiUsageException
-	 * @throws LogicException
-	 */
-	private function dieMessageObject( Message $message, $errorCode, $httpRespCode = 0, $extradata = array() ) {
 		$this->addMessageToResult( $message, $extradata );
 
 		$this->throwUsageException( $message, $errorCode, $extradata, $httpRespCode );
@@ -267,6 +254,7 @@ class ApiErrorReporter {
 	 * exists, it is included in the error's extra data.
 	 *
 	 * @see ApiBase::dieUsage()
+	 * @deprecated use dieErrorMessage instead.
 	 *
 	 * @param string $description An english, plain text description of the errror,
 	 * for use in logs.
@@ -573,7 +561,7 @@ class ApiErrorReporter {
 	}
 
 	/**
-	 * Allows missing message warnings to be supressed for testing.
+	 * Allows missing message warnings to be suppressed for testing.
 	 *
 	 * @param boolean $warnOnMissingMessage
 	 */

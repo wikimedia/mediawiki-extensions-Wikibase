@@ -159,40 +159,62 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 	}
 
 	public function messageProvider() {
-		$code = 'no-such-sitelink';
-		$param = 'Foo';
+		// The appropriate message should be included in the extra data.
+		// Most importantly, the info field should contain the message text in English,
+		// while the HTML should be in German. Any Message parameters must be present.
 
 		return array(
-			// The appropriate message should be included in the extra data.
-			// Most importantly, the info field should contain the message text in English,
-			// while the HTML should be in German. Any Message parameters must be present.
-			'known error code' => array(
-				'$code' => $code,
-				'$param' => $param,
+			'without error code' => array(
+				'$message' => [ 'wikibase-api-no-such-sitelink', 'xywiki' ],
+				'$code' => null,
+				'$httpRespCode' => 0,
+				'$extradata' => [],
 				'$infoPattern' => '/sitelink/',
 				'$expectedDataFields' => array(
+					'code' => 'wikibase-api-no-such-sitelink',
 					'messages/0/name' => 'wikibase-api-no-such-sitelink',
 					'messages/0/html' => '/gefunden/', // in German
-					'messages/0/parameters/0' => '/Foo/',
+					'messages/0/parameters/0' => '/xywiki/',
 				),
-			)
+			),
+
+			'with error code' => array(
+				'$message' => [ 'wikibase-api-no-such-sitelink', 'xywiki' ],
+				'$code' => 'no-such-sitelink',
+				'$httpRespCode' => 555,
+				'$extradata' => [ 'fruit' => 'Banana' ],
+				'$infoPattern' => '/sitelink/',
+				'$expectedDataFields' => array(
+					'fruit' => 'Banana',
+					'messages/0/name' => 'wikibase-api-no-such-sitelink',
+					'messages/0/html' => '/gefunden/', // in German
+					'messages/0/parameters/0' => '/xywiki/',
+				),
+			),
 		);
 	}
 
 	/**
 	 * @dataProvider messageProvider
 	 */
-	public function testDieMessage( $code, $param, $infoPattern, array $expectedDataFields ) {
+	public function testDieErrorMessage(
+		$message,
+		$code,
+		$httpRespCode,
+		$extradata,
+		$infoPattern,
+		array $expectedDataFields
+	) {
 		$api = new ApiMain();
 		$localizer = $this->getExceptionLocalizer();
 		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );
 		$reporter->setWarnOnMissingMessage( false );
 
 		try {
-			$reporter->dieMessage( $code, $param );
+			$reporter->dieErrorMessage( $message, $code, $httpRespCode, $extradata );
 			$this->fail( 'ApiUsageException was not thrown!' );
 		} catch ( ApiUsageException $ex ) {
-			$this->assertUsageException( $infoPattern, $code, null, $expectedDataFields, $ex );
+			$this->assertUsageException( $infoPattern, $code, $httpRespCode, $expectedDataFields, $ex );
 		}
 	}
 
