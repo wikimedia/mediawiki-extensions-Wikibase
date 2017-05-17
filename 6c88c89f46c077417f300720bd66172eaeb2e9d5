@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_b0e462a4",
+        "filename": "data-access/src/MultipleRepositoryAwareWikibaseServices.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-17T15:43:53Z",
+      "side": 1,
+      "message": "ugh. Rebase failure. Fixed.",
+      "parentUuid": "0e1cb3f9_b0fa2272",
+      "revId": "6c88c89f46c077417f300720bd66172eaeb2e9d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_90f03e90",
         "filename": "data-access/src/WikibaseServices.php",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_f01c1a7e",
+        "filename": "data-access/src/WikibaseServices.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-17T15:43:53Z",
+      "side": 1,
+      "message": "Added some explanation. Might still not be enough though.",
+      "parentUuid": "0e1cb3f9_90f03e90",
+      "revId": "6c88c89f46c077417f300720bd66172eaeb2e9d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_50eaa69d",
         "filename": "repo/includes/Store/Sql/SqlStore.php",
         "patchSetId": 4
@@ -47,6 +83,24 @@
       "writtenOn": "2017-05-17T14:20:57Z",
       "side": 1,
       "message": "In the future, WikibaseServices should always be known. We\u0027ll want a repo-only version, maybe. But that\u0027s probably not very useful in practice - a repo will always be a client to itself. So there will always be at least one client.",
+      "revId": "6c88c89f46c077417f300720bd66172eaeb2e9d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_d08a36e4",
+        "filename": "repo/includes/Store/Sql/SqlStore.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-17T15:43:53Z",
+      "side": 1,
+      "message": "Yes, this condition will go once there is nothing Client-specific in WikibaseServices.",
+      "parentUuid": "0e1cb3f9_50eaa69d",
       "revId": "6c88c89f46c077417f300720bd66172eaeb2e9d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
