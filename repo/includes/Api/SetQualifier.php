@@ -169,7 +169,7 @@ class SetQualifier extends ApiBase {
 		$propertyId = $this->modificationHelper->getEntityIdFromString( $params['property'] );
 		if ( !( $propertyId instanceof PropertyId ) ) {
 			$this->errorReporter->dieWithError(
-				'wikibase-api-invalid-property-id',
+				[ 'wikibase-api-invalid-property-id', $propertyId->getSerialization() ],
 				'param-illegal'
 			);
 		}
