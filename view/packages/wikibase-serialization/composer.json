@@ -1,10 +1,6 @@
 {
 	"name": "wikibase/serialization-javascript",
 	"description": "Wikibase datamodel serialization implementation in JavaScript",
-	"require": {
-		"data-values/javascript": "~0.8.0|~0.7.0",
-		"wikibase/data-model-javascript": "~3.0.0|~2.0.0|~1.0.0"
-	},
 	"license": "GPL-2.0+",
 	"authors": [
 		{
@@ -20,9 +16,21 @@
 		"issues": "https://phabricator.wikimedia.org/",
 		"irc": "irc://irc.freenode.net/wikidata"
 	},
+	"require": {
+		"data-values/javascript": "~0.8.0|~0.7.0",
+		"wikibase/data-model-javascript": "~3.0.0|~2.0.0|~1.0.0"
+	},
+	"require-dev": {
+		"wikibase/wikibase-codesniffer": "^0.1.0"
+	},
 	"autoload": {
 		"files" : [
 			"init.php"
+		]
+	},
+	"scripts": {
+		"test": [
+			"vendor/bin/phpcs . -p -s"
 		]
 	}
 }
