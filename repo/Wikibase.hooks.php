@@ -835,10 +835,10 @@ final class RepoHooks {
 		$conceptBaseUri = $wikibaseRepo->getSettings()->getSetting( 'conceptBaseUri' );
 		$data['wikibase-conceptbaseuri'] = $conceptBaseUri;
 
-		$geoShapeStorageBaseUrl = $wikibaseRepo->getSettings()->getSetting( 'geoShapeStorageFrontendUrl' );
+		$geoShapeStorageBaseUrl = $wikibaseRepo->getSettings()->getSetting( 'geoShapeStorageBaseUrl' );
 		$data['wikibase-geoshapestoragebaseurl'] = $geoShapeStorageBaseUrl;
 
-		$tabularDataStorageBaseUrl = $wikibaseRepo->getSettings()->getSetting( 'tabularDataStorageFrontendUrl' );
+		$tabularDataStorageBaseUrl = $wikibaseRepo->getSettings()->getSetting( 'tabularDataStorageBaseUrl' );
 		$data['wikibase-tabulardatastoragebaseurl'] = $tabularDataStorageBaseUrl;
 
 		$sparqlEndpoint = $wikibaseRepo->getSettings()->getSetting( 'sparqlEndpoint' );

@@ -59,8 +59,8 @@ class DataAccessSnakFormatterOutputFormatTest extends PHPUnit_Framework_TestCase
 		$settings = $wikibaseClient->getSettings();
 		$siteId = $settings->getSetting( 'siteGlobalID' );
 
-		$settings->setSetting( 'geoShapeStorageFrontendUrl', 'https://media.something/view/' );
-		$settings->setSetting( 'tabularDataStorageFrontendUrl', 'https://tabular.data/view/' );
+		$settings->setSetting( 'geoShapeStorageBaseUrl', 'https://media.something/view/' );
+		$settings->setSetting( 'tabularDataStorageBaseUrl', 'https://tabular.data/view/' );
 		$this->setUpDummyData( $store, $siteId );
 	}
 

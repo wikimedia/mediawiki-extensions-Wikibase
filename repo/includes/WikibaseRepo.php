@@ -448,8 +448,8 @@ class WikibaseRepo {
 			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
 			$this->getLanguageNameLookup(),
 			$this->getLocalItemUriParser(),
-			$this->getSettings()->getSetting( 'geoShapeStorageFrontendUrl' ),
-			$this->getSettings()->getSetting( 'tabularDataStorageFrontendUrl' ),
+			$this->getSettings()->getSetting( 'geoShapeStorageBaseUrl' ),
+			$this->getSettings()->getSetting( 'tabularDataStorageBaseUrl' ),
 			$this->getEntityTitleLookup()
 		);
 	}
