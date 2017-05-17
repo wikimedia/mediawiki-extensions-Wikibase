@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_8e0020b1",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-17T09:25:31Z",
+      "side": 1,
+      "message": "This here is the reason why the code below can safely assume \"all entity objects\" do have a getStatements method. We must lift this assumption, and replace these hard-wired entity types with the generic Entity type and a check if the entity does have statements or not.",
+      "range": {
+        "startLine": 330,
+        "startChar": 12,
+        "endLine": 330,
+        "endChar": 63
+      },
+      "revId": "c8b107b9f9f33f72b252d37603bb9e18f990ae47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
