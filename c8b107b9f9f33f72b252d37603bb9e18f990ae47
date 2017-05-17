@@ -70,6 +70,30 @@
       "revId": "c8b107b9f9f33f72b252d37603bb9e18f990ae47",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_aebc04b2",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-17T09:52:29Z",
+      "side": 1,
+      "message": "\u003e Does the mixin approach allow for an \"instanceof StatementProvider\" check? I don\u0027t think it does. Does this mean we are stuck with a \"if ( typeof entity.getStatements \u003d\u003d\u003d \u0027function\u0027 )\" check?\n\nGiven the way those mixins are mixed in the class I guess it could only be checked if the method X exists. I assume it is a \"feature\" not an \"issue\" :)",
+      "parentUuid": "0e1cb3f9_2e99d471",
+      "range": {
+        "startLine": 330,
+        "startChar": 12,
+        "endLine": 330,
+        "endChar": 63
+      },
+      "revId": "c8b107b9f9f33f72b252d37603bb9e18f990ae47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
