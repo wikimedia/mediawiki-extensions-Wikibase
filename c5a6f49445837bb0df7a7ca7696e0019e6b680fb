@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_335ffc14",
+        "filename": "repo/resources/wikibase.currentEntity.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-05-17T16:07:56Z",
+      "side": 1,
+      "message": "Why seal the object after it’s already frozen? Freezing includes all effects of sealing iiuc.",
+      "revId": "c5a6f49445837bb0df7a7ca7696e0019e6b680fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_f39f44b7",
+        "filename": "repo/resources/wikibase.currentEntity.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-05-17T16:07:56Z",
+      "side": 1,
+      "message": "sealing?",
+      "range": {
+        "startLine": 77,
+        "startChar": 28,
+        "endLine": 77,
+        "endChar": 36
+      },
+      "revId": "c5a6f49445837bb0df7a7ca7696e0019e6b680fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_535ab023",
+        "filename": "repo/resources/wikibase.currentEntity.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-05-17T16:07:56Z",
+      "side": 1,
+      "message": "I think this should be “sealed” (though “frozen” isn’t technically wrong either).",
+      "range": {
+        "startLine": 86,
+        "startChar": 33,
+        "endLine": 86,
+        "endChar": 39
+      },
+      "revId": "c5a6f49445837bb0df7a7ca7696e0019e6b680fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
