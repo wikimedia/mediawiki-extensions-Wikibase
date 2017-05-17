@@ -7,6 +7,7 @@
     "jquery": "^3.2.1"
   },
   "devDependencies": {
+    "jshint": "^2.9.4",
     "karma": "^1.7.0",
     "karma-cli": "^1.0.1",
     "karma-phantomjs-launcher": "^1.0.4",
@@ -15,6 +16,8 @@
   },
   "scripts": {
     "postinstall": "composer install",
-    "test": "node_modules/.bin/karma start --single-run"
+    "test": "npm run jshint && npm run run-tests",
+    "jshint": "jshint --show-non-errors --verbose src/ tests/",
+    "run-tests": "karma start --single-run"
   }
 }
