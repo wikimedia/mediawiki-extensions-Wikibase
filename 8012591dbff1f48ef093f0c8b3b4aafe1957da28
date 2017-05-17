@@ -234,6 +234,30 @@
       "revId": "8012591dbff1f48ef093f0c8b3b4aafe1957da28",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_b0a9c2de",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-17T12:34:06Z",
+      "side": 1,
+      "message": "Yeah, the name of this one is a tricky one.\n\nBut on the other hand, when this is supposed to be used? Seems to me like it could be in code which needs the settings, and does not mind whether they\u0027re defined as client settings or repo settings (probably doing this good hope assumption those would be the same for setting \"keys\" that overlap).\nIf this interpretation is even close to right, how about calling it simply getSettings? The private method below would than need to be renamed but I think this is not a big deal.",
+      "parentUuid": "0e1cb3f9_c5362be4",
+      "range": {
+        "startLine": 73,
+        "startChar": 42,
+        "endLine": 73,
+        "endChar": 79
+      },
+      "revId": "8012591dbff1f48ef093f0c8b3b4aafe1957da28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
