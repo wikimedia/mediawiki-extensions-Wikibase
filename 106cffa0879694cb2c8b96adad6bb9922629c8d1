@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_305db24a",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-17T15:33:58Z",
+      "side": 1,
+      "message": "Please don\u0027t make injection optional. If we need the service, require it.\n\nThis class is not used outside this module, so we don\u0027t need to keep the constructor signature compatible.\n\nFor services that are actually optional (e.g. a logger that may or may not be set), I\u0027d prefer a setter over an optional constructor arg.",
+      "revId": "106cffa0879694cb2c8b96adad6bb9922629c8d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_3034d2f0",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-17T15:33:58Z",
+      "side": 1,
+      "message": "Because the indenting of the OR lines got removed, this is now harder to read.",
+      "revId": "106cffa0879694cb2c8b96adad6bb9922629c8d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_502f069c",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-17T15:33:58Z",
+      "side": 1,
+      "message": "I\u0027m not familiar with this method, but from what I see in wfWaitForSlaves, it seems like we should be passing some options here? Are they not needed?\n\nAlso, $this-\u003eLBFactory could be made optional: if not set, we just don\u0027t wait. But I don\u0027t think that really makes sense here.",
+      "revId": "106cffa0879694cb2c8b96adad6bb9922629c8d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
