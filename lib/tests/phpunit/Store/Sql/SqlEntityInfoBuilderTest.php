@@ -17,6 +17,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 use Wikibase\Lib\Tests\Store\EntityInfoBuilderTest;
 use Wikibase\PropertyContent;
+use Wikibase\WikibaseSettings;
 use Wikipage;
 
 /**
@@ -35,7 +36,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 	protected function setUp() {
 		parent::setUp();
 
-		if ( !defined( 'WB_VERSION' ) ) {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped( 'Entity info tables are not available locally on the client' );
 		}
 

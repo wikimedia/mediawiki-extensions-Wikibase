@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\TermIndex;
 use Wikibase\TermIndexEntry;
+use Wikibase\WikibaseSettings;
 
 /**
  * Provides wikibase terms (labels, descriptions, aliases, etc.) for local pages.
@@ -262,7 +263,7 @@ class PageTerms extends ApiQueryBase {
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
-		if ( defined( 'WB_VERSION' ) ) {
+		if ( WikibaseSettings::isRepoEnabled() ) {
 			return array(
 				'action=query&prop=pageterms&titles=Q84'
 					=> 'apihelp-query+pageterms-example-item',

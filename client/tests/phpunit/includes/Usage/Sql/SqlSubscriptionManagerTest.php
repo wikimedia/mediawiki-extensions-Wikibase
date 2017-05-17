@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Usage\Sql;
 
+use Wikibase\WikibaseSettings;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Usage\Sql\SqlSubscriptionManager;
 use Wikibase\DataModel\Entity\ItemId;
@@ -21,7 +22,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 class SqlSubscriptionManagerTest extends \MediaWikiTestCase {
 
 	protected function setUp() {
-		if ( !defined( 'WB_VERSION' ) ) {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped( 'Skipping test for SqlSubscriptionManager, '
 				. 'because the repo-side table wb_changes_subscription is not available.' );
 		}

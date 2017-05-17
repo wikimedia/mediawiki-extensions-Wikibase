@@ -273,9 +273,9 @@ class EntityChange extends DiffChange {
 	private function getStatementSerializer() {
 		// FIXME: the change row system needs to be reworked to either allow for sane injection
 		// or to avoid this kind of configuration dependent tasks.
-		if ( defined( 'WB_VERSION' ) ) {
+		if ( WikibaseSettings::isRepoEnabled() ) {
 			return WikibaseRepo::getDefaultInstance()->getStatementSerializer();
-		} elseif ( defined( 'WBC_VERSION' ) ) {
+		} elseif ( WikibaseSettings::isClientEnabled() ) {
 			throw new RuntimeException( 'Cannot serialize statements on the client' );
 		} else {
 			throw new RuntimeException( 'Need either client or repo loaded' );
@@ -289,9 +289,9 @@ class EntityChange extends DiffChange {
 	private function getStatementDeserializer() {
 		// FIXME: the change row system needs to be reworked to either allow for sane injection
 		// or to avoid this kind of configuration dependent tasks.
-		if ( defined( 'WB_VERSION' ) ) {
+		if ( WikibaseSettings::isRepoEnabled() ) {
 			return WikibaseRepo::getDefaultInstance()->getInternalFormatStatementDeserializer();
-		} elseif ( defined( 'WBC_VERSION' ) ) {
+		} elseif ( WikibaseSettings::isClientEnabled() ) {
 			return WikibaseClient::getDefaultInstance()->getInternalFormatStatementDeserializer();
 		} else {
 			throw new RuntimeException( 'Need either client or repo loaded' );

@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Store\Sql;
 
 use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use Wikibase\Client\Store\Sql\BulkSubscriptionUpdater;
+use Wikibase\WikibaseSettings;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\DataModel\Entity\ItemId;
@@ -24,7 +25,7 @@ use Wikibase\Lib\Reporting\MessageReporter;
 class BulkSubscriptionUpdaterTest extends \MediaWikiTestCase {
 
 	protected function setUp() {
-		if ( !defined( 'WB_VERSION' ) ) {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes_subscription table." );
 		}
 

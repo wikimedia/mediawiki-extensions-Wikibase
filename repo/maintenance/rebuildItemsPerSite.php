@@ -8,6 +8,7 @@ use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
 use Wikibase\Repo\Store\Sql\ItemsPerSiteBuilder;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\WikibaseSettings;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
@@ -33,7 +34,7 @@ class RebuildItemsPerSite extends Maintenance {
 	 * @see Maintenance::execute
 	 */
 	public function execute() {
-		if ( !defined( 'WB_VERSION' ) ) {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->output( "You need to have Wikibase enabled in order to use this maintenance script!\n\n" );
 			exit;
 		}

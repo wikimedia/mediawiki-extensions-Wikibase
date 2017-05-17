@@ -26,6 +26,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\TermIndex;
+use Wikibase\WikibaseSettings;
 
 /**
  * @covers Wikibase\DirectSqlStore
@@ -113,7 +114,7 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetSubscriptionManager() {
-		if ( !defined( 'WB_VERSION' ) ) {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped( 'getSubscriptionManager needs the repository extension to be active.' );
 		}
 

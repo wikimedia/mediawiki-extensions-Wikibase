@@ -38,8 +38,8 @@ class PopulateEntityUsage extends LoggedUpdateMaintenance {
 	 * @return boolean
 	 */
 	public function doDBUpdates() {
-		if ( !defined( 'WBC_VERSION' ) ) {
-			$this->output( "You need to have Wikibase enabled in order to use this maintenance script!\n\n" );
+		if ( !WikibaseSettings::isClientEnabled() ) {
+			$this->output( "You need to have WikibaseClient enabled in order to use this maintenance script!\n\n" );
 			exit;
 		}
 
