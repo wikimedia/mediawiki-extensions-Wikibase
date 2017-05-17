@@ -282,6 +282,30 @@
       "revId": "8012591dbff1f48ef093f0c8b3b4aafe1957da28",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_907cbe1c",
+        "filename": "lib/includes/WikibaseSettings.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-17T13:55:34Z",
+      "side": 1,
+      "message": "\u003e  to me it sounds like it should return ALL settings, which is not the case. \n\nYeah, I was thinking the same.\n\nGetTheSettings then.\n\nI was also thinking of the adjective \"common\", as in \"simple, ordinary\", somewhat like \"standard\", \"basic\", \"typical\", \"general\". Although it also has the same problem as \"shared\", it could suggests it means only those that are defined for both Repo and Client, and why not only those that have the same value.\n\nOTOH, I am tending to say let\u0027s call them shared/common/something, and just put a good sentence explaining what\u0027s the point in the phpdoc.\n\nSo, unless Thiemo has another suggestion, I am going to merge this soon!",
+      "parentUuid": "0e1cb3f9_f08c1a3c",
+      "range": {
+        "startLine": 73,
+        "startChar": 42,
+        "endLine": 73,
+        "endChar": 79
+      },
+      "revId": "8012591dbff1f48ef093f0c8b3b4aafe1957da28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
