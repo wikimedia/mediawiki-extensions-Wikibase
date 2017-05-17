@@ -13,7 +13,7 @@ use OutOfBoundsException;
  * @note WikibaseSettings is intended for internal use by bootstrapping code. Application service
  * logic should have individual settings injected, static entry points to application logic should
  * use top level factory methods such as WikibaseRepo::getSettings() and
- * WikibaseClient::getClientSettings().
+ * WikibaseClient::getSettings().
  *
  * @todo Move this to a separate component.
  *
