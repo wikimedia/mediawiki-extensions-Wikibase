@@ -25,6 +25,23 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_f07dfae4",
+        "filename": "data-access/src/DispatchingServiceContainer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-17T14:36:38Z",
+      "side": 1,
+      "message": "Nitpick: Some services may actually forward a call to *all* repos, and collect the results. A multicast dispatching, instead of routing dispatching.",
+      "revId": "d1d4c3abf5956c138d13c83a16c6fd6e866a55ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_247ca9b3",
         "filename": "data-access/src/DispatchingServiceContainer.php",
         "patchSetId": 2
