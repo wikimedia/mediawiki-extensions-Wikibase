@@ -182,7 +182,10 @@ class LinkTitles extends ApiBase {
 		$siteObj = $sites->getSite( $site );
 		$page = $siteObj->normalizePageName( $pageTitle );
 		if ( $page === false ) {
-			$this->errorReporter->dieMessage( 'no-external-page', $site, $pageTitle );
+			$this->errorReporter->dieErrorMessage(
+				[ 'wikibase-api-no-external-page', $site, $pageTitle ],
+				'no-external-page'
+			);
 		}
 		return array( $siteObj, $page );
 	}
