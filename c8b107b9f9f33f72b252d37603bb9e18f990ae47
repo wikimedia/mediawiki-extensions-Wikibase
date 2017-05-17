@@ -46,6 +46,30 @@
       "revId": "c8b107b9f9f33f72b252d37603bb9e18f990ae47",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_2e99d471",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-17T09:41:09Z",
+      "side": 1,
+      "message": "This documentation means it is forbidden to use this code for Lexemes. We are currently violating this, and need to fix this, either by adding the Lexeme type here (which can\u0027t be done because this would inverse the dependency), or by opening this to support other entity types.\n\nThe moment we remove \"Item|Property\" here and replace it with \"Entity\", there is no guarantee any more for a \"getStatements\" method. This must be checked somehow. All I want to know is how we are going to do this. Does the mixin approach allow for an \"instanceof StatementProvider\" check? I don\u0027t think it does. Does this mean we are stuck with a \"if ( typeof entity.getStatements \u003d\u003d\u003d \u0027function\u0027 )\" check?",
+      "parentUuid": "0e1cb3f9_aef164ca",
+      "range": {
+        "startLine": 330,
+        "startChar": 12,
+        "endLine": 330,
+        "endChar": 63
+      },
+      "revId": "c8b107b9f9f33f72b252d37603bb9e18f990ae47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
