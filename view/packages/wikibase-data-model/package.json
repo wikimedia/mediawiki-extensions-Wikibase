@@ -1,7 +1,4 @@
 {
-  "name": "wikibase-datamodel-javascript",
-  "version": "3.0.1",
-  "description": "Wikibase datamodel implementation in JavaScript",
   "directories": {
     "lib": "src",
     "test": "tests"
@@ -19,19 +16,5 @@
   "scripts": {
     "postinstall": "composer install",
     "test": "node_modules/.bin/karma start --single-run"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/wmde/WikibaseDataModelJavaScript.git"
-  },
-  "author": { "name" : "H. Snater", "url" : "http://www.snater.com"},
-  "contributors":[
-    { "name" : "H. Snater", "url" : "http://www.snater.com"},
-    { "name" : "Adrian Lang", "email" : "adrian.lang@wikimedia.de"}
-  ],
-  "license": "GPL-2.0+",
-  "bugs": {
-    "url": "https://github.com/wmde/WikibaseDataModelJavaScript/issues"
-  },
-  "homepage": "https://github.com/wmde/WikibaseDataModelJavaScript#readme"
+  }
 }
