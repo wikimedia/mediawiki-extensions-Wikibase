@@ -120,8 +120,8 @@ class GetEntities extends ApiBase {
 		$params = $this->extractRequestParams();
 
 		if ( !isset( $params['ids'] ) && ( empty( $params['sites'] ) || empty( $params['titles'] ) ) ) {
-			$this->errorReporter->dieError(
-				'Either provide the item "ids" or pairs of "sites" and "titles" for corresponding pages',
+			$this->errorReporter->dieWithError(
+				'wikibase-api-illegal-entity-selector',
 				'param-missing'
 			);
 		}
@@ -168,8 +168,12 @@ class GetEntities extends ApiBase {
 				try {
 					$ids[] = $this->idParser->parse( $id );
 				} catch ( EntityIdParsingException $e ) {
-					$this->errorReporter->dieError(
-						"Invalid id: $id", 'no-such-entity', 0, [ 'id' => $id ] );
+					$this->errorReporter->dieWithError(
+						[ 'wikibase-api-no-such-entity-1', $id ],
+						'no-such-entity',
+						0,
+						[ 'id' => $id ]
+					);
 				}
 			}
 		}
