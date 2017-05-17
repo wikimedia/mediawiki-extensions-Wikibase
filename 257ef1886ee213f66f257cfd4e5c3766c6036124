@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_138af86e",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-17T16:20:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_ddd814f7",
+      "revId": "257ef1886ee213f66f257cfd4e5c3766c6036124",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_bda2003a",
         "filename": "repo/includes/Api/ApiErrorReporter.php",
         "patchSetId": 6
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_b380ec4c",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-17T16:20:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_bda2003a",
+      "revId": "257ef1886ee213f66f257cfd4e5c3766c6036124",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_1d720ce3",
         "filename": "repo/includes/Api/ApiErrorReporter.php",
         "patchSetId": 6
@@ -47,6 +83,30 @@
       "writtenOn": "2017-05-16T17:26:52Z",
       "side": 1,
       "message": "use getModulePath(), not getModuleName().",
+      "range": {
+        "startLine": 367,
+        "startChar": 21,
+        "endLine": 367,
+        "endChar": 34
+      },
+      "revId": "257ef1886ee213f66f257cfd4e5c3766c6036124",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_739b34c2",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-17T16:20:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_1d720ce3",
       "range": {
         "startLine": 367,
         "startChar": 21,
