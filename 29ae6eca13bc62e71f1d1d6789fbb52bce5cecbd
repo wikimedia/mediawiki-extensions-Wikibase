@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_10f18efe",
+        "filename": "data-access/src/MultipleRepositoryAwareWikibaseServices.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-17T13:32:51Z",
+      "side": 1,
+      "message": "I agree this is odd.\nI\u0027ve made it two parameters, even if the thing passed as both will be the same instance because I kind of wanted to make it clear services of what \"interfaces\" are required here.\n\nBut as having getWatcher method in WikibaseServices seems a better option here, I guess this problem will go.\n\nI\u0027ll try out the static composition, either in the patch before or after this one, still not sure.",
+      "parentUuid": "0e1cb3f9_64b2a194",
+      "revId": "29ae6eca13bc62e71f1d1d6789fbb52bce5cecbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_84b7b580",
         "filename": "repo/includes/Store/Sql/SqlStore.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2017-05-12T10:13:51Z",
       "side": 1,
       "message": "Perhaps WikibaseServices shouldn\u0027t be a watcher, but have a getWatcher() method?",
+      "revId": "29ae6eca13bc62e71f1d1d6789fbb52bce5cecbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_50b94628",
+        "filename": "repo/includes/Store/Sql/SqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-17T13:32:51Z",
+      "side": 1,
+      "message": "That could work.\nI wonder whether we might want to actually have getWatcher_s_ method, in case there were multiple services that watch changes. But this is something that could be easily changed later if it turns out to be needed.",
+      "parentUuid": "0e1cb3f9_84b7b580",
       "revId": "29ae6eca13bc62e71f1d1d6789fbb52bce5cecbd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
