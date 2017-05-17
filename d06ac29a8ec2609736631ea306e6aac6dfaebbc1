@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_4ea688bf",
+        "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-17T09:35:31Z",
+      "side": 1,
+      "message": "There are only 2 tests for the \"deleteTermsOfEntity\" method, and the other one is up here. Can we move the new test up, next to this one?",
+      "revId": "d06ac29a8ec2609736631ea306e6aac6dfaebbc1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
