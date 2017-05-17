@@ -83,7 +83,7 @@ class CreateClaim extends ApiBase {
 		$propertyId = $this->modificationHelper->getEntityIdFromString( $params['property'] );
 		if ( !( $propertyId instanceof PropertyId ) ) {
 			$this->errorReporter->dieWithError(
-				'wikibase-api-invalid-property-id',
+				[ 'wikibase-api-invalid-property-id', $propertyId->getSerialization() ],
 				'param-illegal'
 			);
 		}
@@ -114,25 +114,30 @@ class CreateClaim extends ApiBase {
 	private function validateParameters( array $params ) {
 		if ( $params['snaktype'] === 'value' xor isset( $params['value'] ) ) {
 			if ( $params['snaktype'] === 'value' ) {
-				$this->errorReporter->dieWithError( [ 'param-missing', 'value' ],
+				$this->errorReporter->dieWithError(
+					[ 'wikibase-api-claim-value-missing' ],
 					'param-missing'
 				);
 			} else {
-				$this->errorReporter->dieError(
-					'You cannot provide a value when creating a claim with no PropertyValueSnak as main snak',
+				$this->errorReporter->dieWithError(
+					[ 'wikibase-api-claim-value-unexpected' ],
 					'param-illegal'
 				);
 			}
 		}
 
 		if ( !isset( $params['property'] ) ) {
-			$this->errorReporter->dieWithError( [ 'param-missing', 'property' ],
+			$this->errorReporter->dieWithError(
+				[ 'wikibase-api-param-missing-1', 'property' ],
 				'param-missing'
 			);
 		}
 
 		if ( isset( $params['value'] ) && json_decode( $params['value'], true ) === null ) {
-			$this->errorReporter->dieError( 'Could not decode snak value', 'invalid-snak' );
+			$this->errorReporter->dieWithError(
+				[ 'wikibase-api-invalid-snak' ],
+				'invalid-snak'
+			);
 		}
 	}
 

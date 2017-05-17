@@ -198,7 +198,7 @@ class ApiErrorReporter {
 	/**
 	 * @see ApiBase::dieWithError
 	 *
-	 * @param string|string[]|MessageSpecifier $msg See ApiErrorFormatter::addError()
+	 * @param string|string[]|MessageSpecifier $msg
 	 * @param string $errorCode A code identifying the error.
 	 * @param int $httpRespCode The HTTP error code to send to the client
 	 * @param array|null $extraData Any extra data to include in the error report
@@ -228,6 +228,7 @@ class ApiErrorReporter {
 	 * exists, it is included in the error's extra data.
 	 *
 	 * @see ApiBase::dieUsage()
+	 * @deprecated use dieWithError instead.
 	 *
 	 * @param string $description An english, plain text description of the errror,
 	 * for use in logs.

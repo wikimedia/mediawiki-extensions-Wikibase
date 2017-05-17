@@ -163,12 +163,29 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 		$code = 'no-such-sitelink';
 
 		return [
+			'without error code' => [
+				'$code' => null,
+				'$msg' => [ 'wikibase-api-no-such-sitelink', 'xywiki' ],
+				'$httpRespCode' => 555,
+				'$extradata' => [ 'fruit' => 'Banana' ],
+				'$infoPattern' => '/sitelink/',
+				'$expectedDataFields' => [
+					'fruit' => 'Banana',
+					'code' => 'no-such-sitelink',
+					'messages/0/name' => 'wikibase-api-no-such-sitelink',
+					'messages/0/html' => '/gefunden/', // in German
+					'messages/0/parameters/0' => '/xywiki/',
+				],
+			],
+
 			// The appropriate message should be included in the extra data.
 			// Most importantly, the info field should contain the message text in English,
 			// while the HTML should be in German. Any Message parameters must be present.
 			'known error code' => [
 				'$code' => $code,
 				'$msg' => [ 'wikibase-api-no-such-sitelink', 'Foo' ],
+				'$httpRespCode' => 0,
+				'$extradata' => [],
 				'$infoPattern' => '/sitelink/',
 				'$expectedDataFields' => [
 					'messages/0/name' => 'wikibase-api-no-such-sitelink',
@@ -182,16 +199,23 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider messageProvider
 	 */
-	public function testDieWithError( $code, $msg, $infoPattern, array $expectedDataFields ) {
+	public function testDieWithError(
+		$code,
+		$msg,
+		$httpRespCode,
+		$extradata,
+		$infoPattern,
+		array $expectedDataFields
+	) {
 		$api = new ApiMain();
 		$localizer = $this->getExceptionLocalizer();
 		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );
 
 		try {
-			$reporter->dieWithError( $msg, $code );
+			$reporter->dieWithError( $msg, $code, $httpRespCode, $extradata );
 			$this->fail( 'ApiUsageException was not thrown!' );
 		} catch ( ApiUsageException $ex ) {
-			$this->assertUsageException( $infoPattern, $code, null, $expectedDataFields, $ex );
+			$this->assertUsageException( $infoPattern, $code, $httpRespCode, $expectedDataFields, $ex );
 		}
 	}
 
