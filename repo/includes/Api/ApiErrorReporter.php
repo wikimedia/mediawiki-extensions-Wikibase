@@ -209,26 +209,36 @@ class ApiErrorReporter {
 	/**
 	 * Aborts the request with an error message derived from the error code.
 	 *
-	 * @param string $errorCode A code identifying the error.
-	 * @param string [$param,...] Parameters for the Message.
+	 * @param string|array|Message $msg See error message to return
+	 * @param string|null $errorCode An API error code (if not given, the message key will be used)
+	 * @param array|null $data Any extra data to include in the result
+	 * @param int|null $httpCode HTTP error code to use
 	 *
 	 * @throws ApiUsageException
 	 * @throws LogicException
 	 */
-	public function dieMessage( $errorCode /*...*/ ) {
-		$messageKey = "wikibase-api-$errorCode";
-		$params = func_get_args();
-		array_shift( $params );
-		$message = wfMessage( $messageKey, $params );
+	public function dieErrorMessage( $message, $errorCode = null, $httpRespCode = 0, $extradata = array() ) {
+		if ( is_string( $message ) ) {
+			$message = [ $message ];
+		}
 
-		if ( !$message->exists() ) {
-			// Fall back to RawMessage if undefined
-			if ( $this->warnOnMissingMessage ) {
-				wfWarn( "No message $messageKey found for API error code $errorCode." );
+		if ( is_array( $message ) ) {
+			$params = $message;
+			$messageKey = array_shift( $params );
+			$message = wfMessage( $messageKey, $params );
+
+			if ( !$message->exists() ) {
+				if ( $this->warnOnMissingMessage ) {
+					wfWarn( "No message $messageKey!" );
+				}
 			}
 		}
 
-		$this->dieMessageObject( $message, $errorCode );
+		if ( is_null( $errorCode ) ) {
+			$errorCode = $message->getKey();
+		}
+
+		$this->dieMessageObject( $message, $errorCode, $httpRespCode, $extradata );
 
 		throw new LogicException( 'ApiUsageException not thrown' );
 	}
