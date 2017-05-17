@@ -83,15 +83,6 @@ class RecentChangeFactory {
 		$fields = $change->getFields();
 		$fields['entity_type'] = $change->getEntityId()->getEntityType();
 
-		$info = $change->getInfo();
-		if ( isset( $info['changes'] ) ) {
-			$changesForComment = $info['changes'];
-		} else {
-			$changesForComment = array( $change );
-		}
-
-		$comment = $this->getEditCommentMulti( $changesForComment );
-
 		unset( $fields['info'] );
 		$metadata = array_merge( $fields, $rcinfo );
 
@@ -118,7 +109,7 @@ class RecentChangeFactory {
 		return array(
 			'rc_user' => 0,
 			'rc_user_text' => $userText,
-			'rc_comment' => $comment,
+			'rc_comment' => $this->getEditCommentMulti( $change ),
 			'rc_type' => RC_EXTERNAL,
 			'rc_minor' => true, // for now, always consider these minor
 			'rc_bot' => $isBot,
@@ -179,44 +170,44 @@ class RecentChangeFactory {
 			return null;
 		}
 
-		$info = $change->getInfo();
-
-		if ( isset( $info['changes'] ) ) {
-			$changesForComment = $info['changes'];
-		} else {
-			$changesForComment = array( $change );
-		}
-
-		return $this->getEditCommentMulti( $changesForComment, $target );
+		return $this->getEditCommentMulti( $change, $target );
 	}
 
 	/**
 	 * Returns a human readable comment representing the given changes.
 	 *
-	 * @param EntityChange[] $changes
+	 * @param EntityChange $change
 	 * @param Title|null $target The page we create an edit summary for. Needed to create an article
 	 *         specific edit summary on site link changes. Ignored otherwise.
 	 *
 	 * @throws MWException
 	 * @return string
 	 */
-	private function getEditCommentMulti( array $changes, Title $target = null ) {
-		$comments = array();
-		$c = 0;
+	private function getEditCommentMulti( EntityChange $change, Title $target = null ) {
+		$info = $change->getInfo();
+
+		if ( isset( $info['changes'] ) ) {
+			if ( $info['changes'] === [] ) {
+				return '';
+			}
+
+			$changes = $info['changes'];
+		} else {
+			$changes = [ $change ];
+		}
+
+		$comments = [];
 
 		foreach ( $changes as $change ) {
-			$c++;
 			$comments[] = $this->getEditComment( $change, $target );
 		}
 
-		if ( $c === 0 ) {
-			return '';
-		} elseif ( $c === 1 ) {
+		if ( count( $comments ) === 1 ) {
 			return reset( $comments );
-		} else {
-			//@todo: handle overly long lists nicely!
-			return $this->language->semicolonList( $comments );
 		}
+
+		//@todo: handle overly long lists nicely!
+		return $this->language->semicolonList( $comments );
 	}
 
 	/**
