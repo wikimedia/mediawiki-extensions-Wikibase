@@ -35,6 +35,11 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	private $connectionManager;
 
 	/**
+	 * @var string[]
+	 */
+	private $blacklistedUsageAspects;
+
+	/**
 	 * @var int
 	 */
 	private $batchSize = 100;
@@ -42,10 +47,16 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	/**
 	 * @param EntityIdParser $idParser
 	 * @param SessionConsistentConnectionManager $connectionManager
+	 * @param string[] $blacklistedUsageAspects
 	 */
-	public function __construct( EntityIdParser $idParser, SessionConsistentConnectionManager $connectionManager ) {
+	public function __construct(
+		EntityIdParser $idParser,
+		SessionConsistentConnectionManager $connectionManager,
+		array $blacklistedUsageAspects
+	) {
 		$this->idParser = $idParser;
 		$this->connectionManager = $connectionManager;
+		$this->blacklistedUsageAspects = $blacklistedUsageAspects;
 	}
 
 	/**
@@ -106,6 +117,29 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	}
 
 	/**
+	 * @param EntityUsage[] $usages
+	 *
+	 * @throws InvalidArgumentException
+	 * @return EntityUsage[]
+	 */
+	private function removeBlacklistedUsages( array $usages ) {
+		$newUsages = array();
+
+		foreach ( $usages as $usage ) {
+			if ( !( $usage instanceof EntityUsage ) ) {
+				throw new InvalidArgumentException( '$usages must contain EntityUsage objects.' );
+			}
+			if ( in_array( $usage->getAspect(), $this->blacklistedUsageAspects ) ) {
+				continue;
+			}
+
+			$newUsages[] = $usage;
+		}
+
+		return $newUsages;
+	}
+
+	/**
 	 * @see UsageTracker::addUsedEntities
 	 *
 	 * @param int $pageId
@@ -120,6 +154,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			throw new InvalidArgumentException( '$pageId must be an int.' );
 		}
 
+		$usages = $this->removeBlacklistedUsages( $usages );
 		if ( empty( $usages ) ) {
 			return;
 		}
@@ -178,6 +213,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			// queryUsages guarantees this to be identity string => EntityUsage
 			$oldUsages = $usageTable->queryUsages( $pageId );
 
+			$usages = $this->removeBlacklistedUsages( $usages );
 			$newUsages = $this->reindexEntityUsages( $usages );
 
 			$removed = array_diff_key( $oldUsages, $newUsages );
