@@ -22,6 +22,30 @@
       "revId": "9945cf6269840f2c4fa724fe9140baec74681946",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_646fe88f",
+        "filename": "docs/usagetracking.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-05-18T12:36:21Z",
+      "side": 0,
+      "message": "We will indeed get an L and an O change in that case.",
+      "parentUuid": "0e1cb3f9_245250e3",
+      "range": {
+        "startLine": 30,
+        "startChar": 7,
+        "endLine": 30,
+        "endChar": 8
+      },
+      "revId": "9945cf6269840f2c4fa724fe9140baec74681946",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
