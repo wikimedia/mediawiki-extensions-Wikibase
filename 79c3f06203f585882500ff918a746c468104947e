@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_b910cdae",
+        "filename": "repo/resources/wikibase.currentEntity.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-05-18T09:35:56Z",
+      "side": 1,
+      "message": "You *could* check `mw.config.values.wbEntity \u003d\u003d\u003d wbEntity` here, but perhaps that’s just overly paranoid. Not sure.",
+      "revId": "79c3f06203f585882500ff918a746c468104947e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_d91341b8",
+        "filename": "repo/resources/wikibase.currentEntity.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2017-05-18T09:35:56Z",
+      "side": 1,
+      "message": "Will this re-parse and re-freeze the object if multiple user scripts request this module, or does ResourceLoader reuse the promise?",
+      "revId": "79c3f06203f585882500ff918a746c468104947e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
