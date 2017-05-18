@@ -166,6 +166,11 @@ class DirectSqlStore implements ClientStore {
 	private $writeFullEntityIdColumn;
 
 	/**
+	 * @var string[]
+	 */
+	private $blacklistedUsageAspects;
+
+	/**
 	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityIdParser $entityIdParser
@@ -202,6 +207,7 @@ class DirectSqlStore implements ClientStore {
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$this->siteId = $settings->getSetting( 'siteGlobalID' );
 		$this->writeFullEntityIdColumn = $settings->getSetting( 'writeFullEntityIdColumn' );
+		$this->blacklistedUsageAspects = $settings->getSetting( 'blacklistedUsageAspects' );
 	}
 
 	/**
@@ -279,7 +285,7 @@ class DirectSqlStore implements ClientStore {
 	public function getUsageTracker() {
 		if ( $this->usageTracker === null ) {
 			$connectionManager = $this->getLocalConnectionManager();
-			$this->usageTracker = new SqlUsageTracker( $this->entityIdParser, $connectionManager );
+			$this->usageTracker = new SqlUsageTracker( $this->entityIdParser, $connectionManager, $this->blacklistedUsageAspects );
 		}
 
 		return $this->usageTracker;
