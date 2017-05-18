@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_245250e3",
+        "filename": "docs/usagetracking.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-18T12:33:25Z",
+      "side": 0,
+      "message": "Are you sure we can remove this here? What if an edit updates a label and a description? Does this create an L and an O change (for the description), or does this create a single X change (for both)?\n\nThis is mostly a remark. I guess the comment \"For the update aspects, please see AffectedPagesFinder::getChangedAspects\" answers my question.",
+      "range": {
+        "startLine": 30,
+        "startChar": 7,
+        "endLine": 30,
+        "endChar": 8
+      },
+      "revId": "9945cf6269840f2c4fa724fe9140baec74681946",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
