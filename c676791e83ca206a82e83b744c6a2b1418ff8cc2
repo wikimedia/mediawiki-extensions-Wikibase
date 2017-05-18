@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_2acd3988",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-18T19:12:00Z",
+      "side": 1,
+      "message": "I\u0027m not sure if the word \"blacklisted\" is a good choice. This does not tell me what this setting does. It could be that the usage aspect is never created, or it could be that it is just not delivered to the client wikis. I would go with \"disabled\". Also see my other comments, they are closely related to this suggestion.",
+      "range": {
+        "startLine": 85,
+        "startChar": 3,
+        "endLine": 85,
+        "endChar": 14
+      },
+      "revId": "c676791e83ca206a82e83b744c6a2b1418ff8cc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_ea8bc119",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-18T19:12:00Z",
+      "side": 1,
+      "message": "I find it confusing to see this being called two times, in two unrelated methods. Isn\u0027t it better to add this new filter to the method EntityUsageTable::addUsages() instead? I would feel much better seeing the blacklist filter there. This does have several benefits: It\u0027s a single line of code where the filter is applied. And it guarantees blacklisted aspects are removed from the database. This isn\u0027t the case with the current arrangement.",
+      "range": {
+        "startLine": 216,
+        "startChar": 20,
+        "endLine": 216,
+        "endChar": 43
+      },
+      "revId": "c676791e83ca206a82e83b744c6a2b1418ff8cc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_0a90754d",
+        "filename": "docs/options.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-18T19:12:00Z",
+      "side": 1,
+      "message": "This should say if it supports e.g. \"L\" to blacklist all label usages, no matter what the modifier is. It should also say if this supports e.g. \"L.en\" (which it doesn\u0027t currently).",
+      "range": {
+        "startLine": 108,
+        "startChar": 35,
+        "endLine": 108,
+        "endChar": 48
+      },
+      "revId": "c676791e83ca206a82e83b744c6a2b1418ff8cc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
