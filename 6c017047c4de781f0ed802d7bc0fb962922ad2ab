@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_f9be45d0",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-18T09:10:40Z",
+      "side": 1,
+      "message": "To what does the \"see\" refer to? Is this a typo?",
+      "range": {
+        "startLine": 212,
+        "startChar": 37,
+        "endLine": 212,
+        "endChar": 64
+      },
+      "revId": "6c017047c4de781f0ed802d7bc0fb962922ad2ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_59f171c7",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-18T09:10:40Z",
+      "side": 1,
+      "message": "string[] please.",
+      "range": {
+        "startLine": 212,
+        "startChar": 18,
+        "endLine": 212,
+        "endChar": 23
+      },
+      "revId": "6c017047c4de781f0ed802d7bc0fb962922ad2ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_d9bb41dd",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-18T09:10:40Z",
+      "side": 1,
+      "message": "Not present in the function header below.",
+      "range": {
+        "startLine": 215,
+        "startChar": 20,
+        "endLine": 215,
+        "endChar": 29
+      },
+      "revId": "6c017047c4de781f0ed802d7bc0fb962922ad2ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
