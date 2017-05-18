@@ -2,10 +2,13 @@
 
 namespace Wikibase\Client\Tests\Usage\Sql;
 
+use MediaWikiTestCase;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Tests\Usage\UsageLookupContractTester;
 use Wikibase\Client\Tests\Usage\UsageTrackerContractTester;
+use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\Client\Usage\Sql\SqlUsageTracker;
 
@@ -20,7 +23,7 @@ use Wikibase\Client\Usage\Sql\SqlUsageTracker;
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
-class SqlUsageTrackerTest extends \MediaWikiTestCase {
+class SqlUsageTrackerTest extends MediaWikiTestCase {
 
 	/**
 	 * @var SqlUsageTracker
@@ -45,7 +48,8 @@ class SqlUsageTrackerTest extends \MediaWikiTestCase {
 
 		$this->sqlUsageTracker = new SqlUsageTracker(
 			new ItemIdParser(),
-			new SessionConsistentConnectionManager( wfGetLB() )
+			new SessionConsistentConnectionManager( wfGetLB() ),
+			[]
 		);
 
 		$this->trackerTester = new UsageTrackerContractTester( $this->sqlUsageTracker, array( $this, 'getUsages' ) );
@@ -68,8 +72,64 @@ class SqlUsageTrackerTest extends \MediaWikiTestCase {
 		$this->trackerTester->testAddUsedEntities();
 	}
 
+	public function testAddUsedEntitiesBlacklist() {
+		$q3 = new ItemId( 'Q3' );
+		$q4 = new ItemId( 'Q4' );
+
+		$usages = [
+			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
+			new EntityUsage( $q3, EntityUsage::STATEMENT_USAGE, 'P12' ),
+			new EntityUsage( $q4, EntityUsage::LABEL_USAGE, 'de' ),
+		];
+
+		$sqlUsageTracker = new SqlUsageTracker(
+			new ItemIdParser(),
+			new SessionConsistentConnectionManager( wfGetLB() ),
+			[ EntityUsage::STATEMENT_USAGE ]
+		);
+		$sqlUsageTracker->addUsedEntities( 23, $usages );
+
+		// All entries but the blacklisted should be set
+		$this->assertEquals(
+			[ 'Q3#S', 'Q4#L.de' ],
+			array_keys( $this->getUsages( 23 ) )
+		);
+	}
+
 	public function testReplaceUsedEntities() {
 		$this->trackerTester->testReplaceUsedEntities();
+	}
+
+	public function testReplaceUsedEntitiesBlacklist() {
+		$q3 = new ItemId( 'Q3' );
+		$q4 = new ItemId( 'Q4' );
+
+		$usages = [
+			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
+			new EntityUsage( $q3, EntityUsage::STATEMENT_USAGE, 'P12' ),
+			new EntityUsage( $q4, EntityUsage::LABEL_USAGE, 'de' ),
+		];
+
+		$sqlUsageTracker = new SqlUsageTracker(
+			new ItemIdParser(),
+			new SessionConsistentConnectionManager( wfGetLB() ),
+			[]
+		);
+		// Make sure the blacklisted entries are actually removed.
+		$sqlUsageTracker->addUsedEntities( 23, $usages );
+
+		$sqlUsageTrackerWithBlacklist = new SqlUsageTracker(
+			new ItemIdParser(),
+			new SessionConsistentConnectionManager( wfGetLB() ),
+			[ EntityUsage::STATEMENT_USAGE ]
+		);
+		$sqlUsageTrackerWithBlacklist->replaceUsedEntities( 23, $usages );
+
+		// All entries but the blacklisted should be set
+		$this->assertEquals(
+			[ 'Q3#S', 'Q4#L.de' ],
+			array_keys( $this->getUsages( 23 ) )
+		);
 	}
 
 	public function testPruneUsages() {
