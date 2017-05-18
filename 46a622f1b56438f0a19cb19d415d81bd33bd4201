@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_ead74126",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-18T18:54:46Z",
+      "side": 1,
+      "message": "Not that there is anything wrong with this, but I would go with a straight sentence: \"The ID \\\"$2\\\" is unknown to the system.\"",
+      "range": {
+        "startLine": 91,
+        "startChar": 38,
+        "endLine": 91,
+        "endChar": 86
+      },
+      "revId": "46a622f1b56438f0a19cb19d415d81bd33bd4201",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_6a1d7113",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-18T18:54:46Z",
+      "side": 1,
+      "message": "An array with a key \"args\" that contains an other array with the actual arguments? Why this additional level of indirection? Weird, but I see this is just how the Exception class is.",
+      "range": {
+        "startLine": 337,
+        "startChar": 7,
+        "endLine": 337,
+        "endChar": 11
+      },
+      "revId": "46a622f1b56438f0a19cb19d415d81bd33bd4201",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
