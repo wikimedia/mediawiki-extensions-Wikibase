@@ -186,7 +186,10 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 				)
 			];
 		} catch ( InvalidArgumentException $e ) {
-			throw new ScribuntoException( 'wikibase-error-invalid-entity-id' );
+			throw new ScribuntoException(
+				'wikibase-error-invalid-entity-id',
+				[ 'args' => [ $entityId ] ]
+			);
 		} catch ( PropertyLabelNotResolvedException $e ) {
 			return [ null ];
 		}
@@ -219,7 +222,10 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 				)
 			];
 		} catch ( InvalidArgumentException $e ) {
-			throw new ScribuntoException( 'wikibase-error-invalid-entity-id' );
+			throw new ScribuntoException(
+				'wikibase-error-invalid-entity-id',
+				[ 'args' => [ $entityId ] ]
+			);
 		} catch ( PropertyLabelNotResolvedException $e ) {
 			return [ null ];
 		}

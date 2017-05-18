@@ -332,7 +332,10 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$entityArr = $this->getEntityAccessor()->getEntity( $prefixedEntityId );
 			return array( $entityArr );
 		} catch ( EntityIdParsingException $ex ) {
-			throw new ScribuntoException( 'wikibase-error-invalid-entity-id' );
+			throw new ScribuntoException(
+				'wikibase-error-invalid-entity-id',
+				[ 'args' => [ $prefixedEntityId ] ]
+			);
 		} catch ( EntityAccessLimitException $ex ) {
 			throw new ScribuntoException( 'wikibase-error-exceeded-entity-access-limit' );
 		} catch ( Exception $ex ) {
