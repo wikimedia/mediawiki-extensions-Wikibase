@@ -94,6 +94,30 @@
       "revId": "c8b107b9f9f33f72b252d37603bb9e18f990ae47",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_d94b4187",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-05-18T10:29:06Z",
+      "side": 1,
+      "message": "Lets just say that all entities have statements (as soon as currently it is the case) and proceed.\nI can remove StatementsProvider and move `find...` method to Entity",
+      "parentUuid": "0e1cb3f9_aebc04b2",
+      "range": {
+        "startLine": 330,
+        "startChar": 12,
+        "endLine": 330,
+        "endChar": 63
+      },
+      "revId": "c8b107b9f9f33f72b252d37603bb9e18f990ae47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
