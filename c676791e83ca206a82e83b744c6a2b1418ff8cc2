@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_ad32c0ed",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-05-19T10:24:12Z",
+      "side": 1,
+      "message": "Hm, I\u0027m not sure about this… we don\u0027t really disable the usage type, we just don\u0027t persist it (which might be the same thing in the end, I\u0027m not sure about that). I agree that blacklist is the wrong term, so I\u0027ll go with disabled for now.",
+      "parentUuid": "0e1cb3f9_2acd3988",
+      "range": {
+        "startLine": 85,
+        "startChar": 3,
+        "endLine": 85,
+        "endChar": 14
+      },
+      "revId": "c676791e83ca206a82e83b744c6a2b1418ff8cc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_ea8bc119",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_2dff90fd",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-05-19T10:24:12Z",
+      "side": 1,
+      "message": "Adding it to addUsages there wont suffice, we explicitly need to remove them here (see the call to removeUsages on line 222)k",
+      "parentUuid": "0e1cb3f9_ea8bc119",
+      "range": {
+        "startLine": 216,
+        "startChar": 20,
+        "endLine": 216,
+        "endChar": 43
+      },
+      "revId": "c676791e83ca206a82e83b744c6a2b1418ff8cc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_0a90754d",
         "filename": "docs/options.wiki",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2017-05-18T19:12:00Z",
       "side": 1,
       "message": "This should say if it supports e.g. \"L\" to blacklist all label usages, no matter what the modifier is. It should also say if this supports e.g. \"L.en\" (which it doesn\u0027t currently).",
+      "range": {
+        "startLine": 108,
+        "startChar": 35,
+        "endLine": 108,
+        "endChar": 48
+      },
+      "revId": "c676791e83ca206a82e83b744c6a2b1418ff8cc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_0da08cf0",
+        "filename": "docs/options.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-05-19T10:24:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_0a90754d",
       "range": {
         "startLine": 108,
         "startChar": 35,
