@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_8d6fbc8e",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-19T10:37:35Z",
+      "side": 1,
+      "message": "Ok, you are right.",
+      "parentUuid": "0e1cb3f9_2dff90fd",
+      "range": {
+        "startLine": 216,
+        "startChar": 20,
+        "endLine": 216,
+        "endChar": 43
+      },
+      "revId": "c676791e83ca206a82e83b744c6a2b1418ff8cc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_0a90754d",
         "filename": "docs/options.wiki",
         "patchSetId": 2
