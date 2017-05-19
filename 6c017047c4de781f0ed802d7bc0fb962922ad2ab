@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_f0bbafdc",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-05-19T13:16:16Z",
+      "side": 1,
+      "message": "string[] might not be inaccurate. wfMessage() accepts various specially-formatted small arrays and Message objects as parameters too.",
+      "parentUuid": "0e1cb3f9_59f171c7",
+      "range": {
+        "startLine": 212,
+        "startChar": 18,
+        "endLine": 212,
+        "endChar": 23
+      },
+      "revId": "6c017047c4de781f0ed802d7bc0fb962922ad2ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_d9bb41dd",
         "filename": "repo/includes/Api/ApiErrorReporter.php",
         "patchSetId": 1
@@ -65,6 +89,23 @@
         "endLine": 215,
         "endChar": 29
       },
+      "revId": "6c017047c4de781f0ed802d7bc0fb962922ad2ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_10a663be",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-05-19T13:16:16Z",
+      "side": 1,
+      "message": "I note this will bypass any of the mappings normally done by ApiMessageTrait::getApiCode() on the message key, if you care about that.",
       "revId": "6c017047c4de781f0ed802d7bc0fb962922ad2ab",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
