@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_f7e729a5",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-05-19T09:37:13Z",
+      "side": 1,
+      "message": "Since this is no longer called when ApiErrorFormatter_BackCompat is not in use (thanks to line 69), there\u0027s nothing needing fixing here besides maybe a doc note not to call this from anything except reportStatusWarnings()",
+      "revId": "a48174f0513cec0c613a4f3df95275e659745b21",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_ba967895",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-05-19T09:37:13Z",
+      "side": 1,
+      "message": "I wonder whether it\u0027d be worth inlining the important bits of the code you\u0027re effectively calling below to avoid a bunch of extra work. I believe this will return the same \u0027info\u0027 member that is all you\u0027re using in the one caller.\n\n $errors \u003d $status-\u003egetErrorsByType( \u0027error\u0027 );\n if ( !$errors ) {\n     return null;\n }\n $msg \u003d ApiMessage::create( $errors[0] )\n     -\u003einLanguage( \u0027en\u0027 )\n     -\u003euseDatabase( false );\n return ApiErrorReporter::stripMarkup( $msg-\u003etext() );",
+      "revId": "a48174f0513cec0c613a4f3df95275e659745b21",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_badd1875",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-05-19T09:37:13Z",
+      "side": 1,
+      "message": "This is unfortunately different from most messages, which interpret a string as a message key rather than as raw English text. :/",
+      "revId": "a48174f0513cec0c613a4f3df95275e659745b21",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_9ae2942d",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-05-19T09:37:13Z",
+      "side": 1,
+      "message": "tyop",
+      "range": {
+        "startLine": 306,
+        "startChar": 26,
+        "endLine": 306,
+        "endChar": 29
+      },
+      "revId": "a48174f0513cec0c613a4f3df95275e659745b21",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
