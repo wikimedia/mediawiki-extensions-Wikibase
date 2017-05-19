@@ -44,11 +44,20 @@ use Wikibase\Repo\WikibaseRepo;
  * @covers Wikibase\DumpRdf
  *
  * @group Wikibase
+ * @group Database
  *
  * @license GPL-2.0+
  * @author Addshore
  */
 class DumpRdfTest extends MediaWikiLangTestCase {
+
+	protected function setUp() {
+		parent::setUp();
+
+		// Needed because SiteLinksRdfBuilder is constructed from global state
+		// in WikibaseRepo.entitytypes.php.
+		TestSites::insertIntoDb();
+	}
 
 	public function testScript() {
 		$dumpScript = new DumpRdf();
