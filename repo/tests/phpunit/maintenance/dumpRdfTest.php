@@ -39,6 +39,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\Tests\Store\MockEntityIdPager;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers Wikibase\DumpRdf
@@ -189,6 +190,35 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 			$this->fixLineEndings( $expectedOut ),
 			$this->fixLineEndings( $actualOut )
 		);
+	}
+
+	/**
+	 * @dataProvider getRedirectModeProvider
+	 */
+	public function testGetRedirectMode( $expected, $redirectOnly ) {
+		$dumpScript = TestingAccessWrapper::newFromObject( new DumpRdf() );
+
+		$dumpArgv = [ 0 => 'foo' ];
+		if ( $redirectOnly ) {
+			$dumpArgv[] = '--redirect-only';
+		}
+
+		$dumpScript->loadWithArgv( $dumpArgv );
+
+		$this->assertSame( $expected, $dumpScript->getRedirectMode() );
+	}
+
+	public function getRedirectModeProvider() {
+		return [
+			[
+				EntityIdPager::INCLUDE_REDIRECTS,
+				false
+			],
+			[
+				EntityIdPager::ONLY_REDIRECTS,
+				true
+			]
+		];
 	}
 
 	/**
