@@ -223,5 +223,8 @@ return call_user_func( function() {
 	// characters (e.g. space, percent, etc.) should NOT be encoded.
 	$defaults['tabularDataStorageBaseUrl'] = 'https://commons.wikimedia.org/wiki/';
 
+	// Enable reading of term_full_entity_id column in wb_terms table.
+	$defaults['readFullEntityIdColumn'] = false;
+
 	return $defaults;
 } );

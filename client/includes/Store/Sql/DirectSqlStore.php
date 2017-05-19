@@ -171,6 +171,11 @@ class DirectSqlStore implements ClientStore {
 	private $disabledUsageAspects;
 
 	/**
+	 * @var bool
+	 */
+	private $readFullEntityIdColumn;
+
+	/**
 	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityIdParser $entityIdParser
@@ -208,6 +213,7 @@ class DirectSqlStore implements ClientStore {
 		$this->siteId = $settings->getSetting( 'siteGlobalID' );
 		$this->writeFullEntityIdColumn = $settings->getSetting( 'writeFullEntityIdColumn' );
 		$this->disabledUsageAspects = $settings->getSetting( 'disabledUsageAspects' );
+		$this->readFullEntityIdColumn = $settings->getSetting( 'readFullEntityIdColumn' );
 	}
 
 	/**
@@ -381,6 +387,7 @@ class DirectSqlStore implements ClientStore {
 				'',
 				$this->writeFullEntityIdColumn
 			);
+			$this->termIndex->setReadFullEntityIdColumn( $this->readFullEntityIdColumn );
 		}
 
 		return $this->termIndex;
