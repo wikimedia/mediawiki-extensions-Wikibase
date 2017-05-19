@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_d0af8b8f",
+        "filename": "repo/maintenance/dumpRdf.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2017-05-19T13:17:25Z",
+      "side": 1,
+      "message": "only",
+      "range": {
+        "startLine": 82,
+        "startChar": 49,
+        "endLine": 82,
+        "endChar": 53
+      },
+      "revId": "dd525160c0ce50b103ab820bd8ec5a0447a050af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
