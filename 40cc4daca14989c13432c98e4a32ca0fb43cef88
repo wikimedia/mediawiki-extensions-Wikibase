@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_fc0148ba",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-19T20:06:33Z",
+      "side": 1,
+      "message": "Wait. Why is this here if duplicates are a problem? And why isn\u0027t there an index that blocks duplicates on the database level?",
+      "range": {
+        "startLine": 237,
+        "startChar": 12,
+        "endLine": 237,
+        "endChar": 18
+      },
+      "revId": "40cc4daca14989c13432c98e4a32ca0fb43cef88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
