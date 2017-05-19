@@ -208,22 +208,50 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 		$success = true;
 		foreach ( $terms as $term ) {
-			$success = $dbw->insert(
-				$this->tableName,
-				array_merge(
-					$this->getTermFields( $term ),
-					$entityIdentifiers
-				),
-				__METHOD__,
-				array( 'IGNORE' )
-			);
-
+			$success = $this->insertTerm( $entityIdentifiers, $term, $dbw );
 			if ( !$success ) {
 				break;
 			}
 		}
 
 		return $success;
+	}
+
+	/**
+	 * @param array $entityIdentifiers Term table fields identifying an entity
+	 * @param TermIndexEntry $term
+	 * @param Database $dbw
+	 *
+	 * @return bool Success indicator
+	 */
+	private function insertTerm( array $entityIdentifiers, TermIndexEntry $term, Database $dbw ) {
+		$fields = array_merge(
+			$this->getTermFields( $term ),
+			$entityIdentifiers
+		);
+
+		$hasRow = (bool)$dbw->selectField(
+			$this->tableName,
+			'1',
+			// Compare all fields to insert, but term_weight (as it is a float)
+			array_diff_key( $fields, [ 'term_weight' => 1 ] ),
+			__METHOD__
+		);
+
+		if ( $hasRow ) {
+			wfDebugLog(
+				'TermSqlIndex-duplicate',
+				'Attempted to insert duplicate Term into ' . $this->tableName .
+					' for ' . $term->getEntityId()->getSerialization() . ': ' . implode( ', ', $fields )
+			);
+			return true;
+		}
+
+		return $dbw->insert(
+			$this->tableName,
+			$fields,
+			__METHOD__
+		);
 	}
 
 	/**
