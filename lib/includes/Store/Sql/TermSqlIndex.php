@@ -208,12 +208,31 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 		$success = true;
 		foreach ( $terms as $term ) {
+			$fields = array_merge(
+				$this->getTermFields( $term ),
+				$entityIdentifiers
+			);
+
+			$hasRow = $dbw->selectField(
+				$this->tableName,
+				'1',
+				// Don't try to compare term_weight as it is a float
+				array_diff_key( $fields, [ 'term_weight' => 1 ] ),
+				__METHOD__
+			);
+
+			if ( $hasRow ) {
+				wfDebugLog(
+					'TermSqlIndex-duplicate',
+					'Attempted to insert duplicate Term into ' . $this->tableName .
+						' for ' . $entityId->getSerialization() . ': ' . implode( ', ', $fields )
+				);
+				continue;
+			}
+
 			$success = $dbw->insert(
 				$this->tableName,
-				array_merge(
-					$this->getTermFields( $term ),
-					$entityIdentifiers
-				),
+				$fields,
 				__METHOD__,
 				array( 'IGNORE' )
 			);
