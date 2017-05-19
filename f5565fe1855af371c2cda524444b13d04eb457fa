@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_4bef4cad",
+        "filename": "repo/includes/Diff/EntityContentDiffView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-05-19T15:12:18Z",
+      "side": 1,
+      "message": "It\u0027s not clear to me what diff-specific stuff is being avoided here.",
+      "revId": "f5565fe1855af371c2cda524444b13d04eb457fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
