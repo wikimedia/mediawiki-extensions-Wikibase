@@ -79,6 +79,7 @@ class DumpRdf extends DumpScript {
 			false,
 			true
 		);
+		$this->addOption( 'redirect-only', 'Whether to just dump information about redirects.', false, false );
 	}
 
 	/**
@@ -139,12 +140,18 @@ class DumpRdf extends DumpScript {
 	}
 
 	/**
-	 * Returns EntityIdPager::INCLUDE_REDIRECTS.
+	 * Returns on of the EntityIdPager::… constants.
 	 *
 	 * @return mixed a EntityIdPager::XXX_REDIRECTS constant
 	 */
 	protected function getRedirectMode() {
-		return EntityIdPager::INCLUDE_REDIRECTS;
+		$redirectOnly = $this->getOption( 'redirect-only', false );
+
+		if ( $redirectOnly ) {
+			return EntityIdPager::ONLY_REDIRECTS;
+		} else {
+			return EntityIdPager::INCLUDE_REDIRECTS;
+		}
 	}
 
 	/**
