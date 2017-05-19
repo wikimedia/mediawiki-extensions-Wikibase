@@ -166,6 +166,11 @@ class DirectSqlStore implements ClientStore {
 	private $writeFullEntityIdColumn;
 
 	/**
+	 * @var bool
+	 */
+	private $readFullEntityIdColumn;
+
+	/**
 	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityIdParser $entityIdParser
@@ -202,6 +207,7 @@ class DirectSqlStore implements ClientStore {
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$this->siteId = $settings->getSetting( 'siteGlobalID' );
 		$this->writeFullEntityIdColumn = $settings->getSetting( 'writeFullEntityIdColumn' );
+		$this->readFullEntityIdColumn = $settings->getSetting( 'readFullEntityIdColumn' );
 	}
 
 	/**
@@ -375,6 +381,7 @@ class DirectSqlStore implements ClientStore {
 				'',
 				$this->writeFullEntityIdColumn
 			);
+			$this->termIndex->setReadFullEntityIdColumn( $this->readFullEntityIdColumn );
 		}
 
 		return $this->termIndex;

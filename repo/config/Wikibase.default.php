@@ -226,4 +226,7 @@ return [
 		return $settings->hasSetting( 'hasFullEntityIdColumn' ) ?
 			$settings->getSetting( 'hasFullEntityIdColumn' ) : true;
 	},
+
+	// Enable reading of term_full_entity_id column in wb_terms table.
+	'readFullEntityIdColumn' => false,
 ];

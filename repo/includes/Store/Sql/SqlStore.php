@@ -185,6 +185,11 @@ class SqlStore implements Store {
 	private $writeFullEntityIdColumn;
 
 	/**
+	 * @var bool
+	 */
+	private $readFullEntityIdColumn;
+
+	/**
 	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityIdParser $entityIdParser
@@ -222,6 +227,7 @@ class SqlStore implements Store {
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$this->idBlacklist = $settings->getSetting( 'idBlacklist' );
 		$this->writeFullEntityIdColumn = $settings->getSetting( 'writeFullEntityIdColumn' );
+		$this->readFullEntityIdColumn = $settings->getSetting( 'readFullEntityIdColumn' );
 	}
 
 	/**
@@ -253,7 +259,7 @@ class SqlStore implements Store {
 		//TODO: Get $stringNormalizer from WikibaseRepo?
 		//      Can't really pass this via the constructor...
 		$stringNormalizer = new StringNormalizer();
-		return new TermSqlIndex(
+		$termSqlIndex = new TermSqlIndex(
 			$stringNormalizer,
 			$this->entityIdComposer,
 			$this->entityIdParser,
@@ -261,6 +267,10 @@ class SqlStore implements Store {
 			'',
 			$this->writeFullEntityIdColumn
 		);
+
+		$termSqlIndex->setReadFullEntityIdColumn( $this->readFullEntityIdColumn );
+
+		return $termSqlIndex;
 	}
 
 	/**
@@ -335,7 +345,7 @@ class SqlStore implements Store {
 	 * @return EntitiesWithoutTermFinder
 	 */
 	public function newEntitiesWithoutTermFinder() {
-		return new SqlEntitiesWithoutTermFinder(
+		$sqlEntitiesWithoutTermFinder = new SqlEntitiesWithoutTermFinder(
 			$this->entityIdParser,
 			$this->entityNamespaceLookup,
 			[ // TODO: Make this configurable!
@@ -343,6 +353,12 @@ class SqlStore implements Store {
 				Property::ENTITY_TYPE => 'P'
 			]
 		);
+
+		$sqlEntitiesWithoutTermFinder->setCanReadFullEntityIdColumn(
+			$this->readFullEntityIdColumn
+		);
+
+		return $sqlEntitiesWithoutTermFinder;
 	}
 
 	/**
