@@ -22,6 +22,30 @@
       "revId": "912085fa8ce2fd48e165f44be7f651ecde098c6d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_cd229450",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-05-19T10:48:25Z",
+      "side": 1,
+      "message": "We still track both currently, so the \"C\" usages are just supplementary to the \"O\" usages.\n\nI chose to keep this here as this is what we actually interested in (make sure this doesn\u0027t end up in the database) and it allows us to have this check in just one place.",
+      "parentUuid": "0e1cb3f9_cd3db48b",
+      "range": {
+        "startLine": 157,
+        "startChar": 19,
+        "endLine": 157,
+        "endChar": 42
+      },
+      "revId": "912085fa8ce2fd48e165f44be7f651ecde098c6d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
