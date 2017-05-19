@@ -21,6 +21,7 @@ use Wikibase\TermIndexEntry;
 use Wikibase\TermSqlIndex;
 use Wikibase\WikibaseSettings;
 use Wikimedia\Assert\ParameterAssertionException;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers Wikibase\TermSqlIndex
@@ -632,6 +633,43 @@ class TermSqlIndexTest extends TermIndexTest {
 		);
 
 		$this->assertSame( 'Q1112362', $row->term_full_entity_id );
+	}
+
+	public function testInsertTerms_duplicate() {
+		$item = new Item( new ItemId( 'Q1112362' ) );
+		$termEs = new TermIndexEntry( [
+			'entityId' => $item->getId(),
+			'termText' => 'Spanish',
+			'termLanguage' => 'es',
+			'termType' => 'description'
+		] );
+		$termDe = new TermIndexEntry( [
+			'entityId' => $item->getId(),
+			'termText' => 'German',
+			'termLanguage' => 'de',
+			'termType' => 'description'
+		] );
+
+		$termIndex = $this->getTermIndex();
+		$termIndex->setReadFullEntityIdColumn( true );
+		$termIndex = TestingAccessWrapper::newFromObject( $termIndex );
+
+		$this->assertTrue(
+			$termIndex->insertTerms(
+				$item,
+				[ $termEs, $termDe, $termEs ],
+				$termIndex->getConnection( DB_MASTER )
+			)
+		);
+
+		$rowCount = $this->db->selectRowCount(
+			'wb_terms',
+			null,
+			[ 'term_entity_id' => '1112362', 'term_entity_type' => 'item' ],
+			__METHOD__
+		);
+
+		$this->assertSame( 2, $rowCount );
 	}
 
 }
