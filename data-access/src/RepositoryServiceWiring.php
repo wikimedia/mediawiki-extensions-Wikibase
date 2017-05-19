@@ -28,13 +28,17 @@ return [
 		RepositoryServiceContainer $services,
 		WikibaseClient $client
 	) {
-		return new SqlEntityInfoBuilderFactory(
+		$factory = new SqlEntityInfoBuilderFactory(
 			$services->getEntityIdParser(),
 			$client->getEntityIdComposer(),
 			$client->getEntityNamespaceLookup(),
 			$services->getDatabaseName(),
 			$services->getRepositoryName()
 		);
+
+		$factory->setReadFullEntityIdColumn( $client->getSettings()->getSetting( 'readFullEntityIdColumn' ) );
+
+		return $factory;
 	},
 
 	'EntityPrefetcher' => function(
@@ -97,13 +101,15 @@ return [
 		RepositoryServiceContainer $services,
 		WikibaseClient $client
 	) {
-		return new TermSqlIndex(
+		$index = new TermSqlIndex(
 			$client->getStringNormalizer(),
 			$client->getEntityIdComposer(),
-			$client->getEntityIdParser(),
+			$services->getEntityIdParser(),
 			$services->getDatabaseName(),
 			$services->getRepositoryName()
 		);
+		$index->setReadFullEntityIdColumn( $client->getSettings()->getSetting( 'readFullEntityIdColumn' ) );
+		return $index;
 	},
 
 	'TermSearchInteractorFactory' => function(
