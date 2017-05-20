@@ -46,6 +46,23 @@
       "revId": "deaa9fab19a420bd1fa340b9d6cf8e2df0deecee",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_21823498",
+        "filename": "client/includes/Hooks/SidebarHookHandlers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-05-20T10:24:09Z",
+      "side": 0,
+      "message": "can we rely on this being in parser output now?\n\nand not regenerate this always here on page/sidebar rendering?",
+      "revId": "deaa9fab19a420bd1fa340b9d6cf8e2df0deecee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

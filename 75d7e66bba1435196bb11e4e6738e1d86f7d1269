@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_e152fc3e",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2017-05-20T10:24:09Z",
+      "side": 1,
+      "message": "is this used? think we had a reason to have in process caching of this and should be careful we still only have one instance of this.",
+      "revId": "75d7e66bba1435196bb11e4e6738e1d86f7d1269",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
