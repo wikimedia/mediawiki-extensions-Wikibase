@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
 use DataValues\IllegalValueException;
+use FauxRequest;
 use Language;
 use Status;
 use ApiUsageException;
@@ -145,9 +146,7 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 		$infoPattern,
 		array $expectedDataFields
 	) {
-		$api = new ApiMain();
-		$localizer = $this->getExceptionLocalizer();
-		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );
+		$reporter = $this->getApiErrorReporter();
 
 		try {
 			$reporter->dieException( $exception, $code, $httpStatusCode, $extradata );
@@ -182,9 +181,7 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 	 * @dataProvider messageProvider
 	 */
 	public function testDieMessage( $code, $param, $infoPattern, array $expectedDataFields ) {
-		$api = new ApiMain();
-		$localizer = $this->getExceptionLocalizer();
-		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );
+		$reporter = $this->getApiErrorReporter();
 
 		try {
 			$reporter->dieMessage( $code, $param );
@@ -247,9 +244,7 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 		$infoPattern,
 		array $expectedDataFields
 	) {
-		$api = new ApiMain();
-		$localizer = $this->getExceptionLocalizer();
-		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );
+		$reporter = $this->getApiErrorReporter();
 
 		try {
 			$reporter->dieStatus( $status, $code, $httpStatusCode, $extradata );
@@ -301,9 +296,7 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 		$infoPattern,
 		array $expectedDataFields
 	) {
-		$api = new ApiMain();
-		$localizer = $this->getExceptionLocalizer();
-		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );
+		$reporter = $this->getApiErrorReporter();
 
 		try {
 			$reporter->dieError( $description, $code, $httpStatusCode, $extradata );
@@ -336,13 +329,10 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 	 * @dataProvider warningProvider
 	 */
 	public function testReportStatusWarnings( Status $status, array $expectedDataFields ) {
-		$api = new ApiMain();
-		$localizer = $this->getExceptionLocalizer();
-		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );
-
+		$reporter = $this->getApiErrorReporter();
 		$reporter->reportStatusWarnings( $status );
 
-		$result = $api->getResult()->getResultData();
+		$result = $reporter->testApiModule->getResult()->getResultData();
 
 		foreach ( $expectedDataFields as $path => $value ) {
 			$path = explode( '/', $path );
@@ -359,6 +349,24 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 		);
 
 		return new DispatchingExceptionLocalizer( $localizers );
+	}
+
+	/**
+	 * @return ApierrorReporter
+	 */
+	private function getApiErrorReporter( $format = 'bc' ) {
+		$options = [
+			'errorformat' => $format,
+			'errorlang' => 'de'
+		];
+
+		$api = new ApiMain( new FauxRequest( $options ) );
+		$localizer = $this->getExceptionLocalizer();
+
+		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );
+		$reporter->testApiModule = $api; // attach API module, so tests can access the Result object
+
+		return $reporter;
 	}
 
 }

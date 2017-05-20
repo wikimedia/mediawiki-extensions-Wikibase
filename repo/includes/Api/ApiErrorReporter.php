@@ -59,25 +59,34 @@ class ApiErrorReporter {
 	}
 
 	/**
+	 * @return bool
+	 */
+	private function isUsingBackCompatFormatter() {
+		$formatter = $this->apiModule->getErrorFormatter();
+
+		return $formatter instanceof ApiErrorFormatter_BackCompat;
+	}
+
+	/**
 	 * Reports any warnings in the StatusValue object on the warnings section
 	 * of the result.
 	 *
 	 * @param StatusValue $status
 	 */
 	public function reportStatusWarnings( StatusValue $status ) {
-		$formatter = $this->apiModule->getErrorFormatter();
+		if ( $this->isUsingBackCompatFormatter() ) {
+			$warnings = $status->getErrorsByType( 'warning' );
 
-		if ( !( $formatter instanceof ApiErrorFormatter_BackCompat ) ) {
-			$formatter->addMessagesFromStatus( $this->apiModule->getModulePath(), $status, 'warning' );
+			if ( !empty( $warnings ) ) {
+				$warnings = $this->convertMessagesToResult( $warnings );
+				$this->setWarning( 'messages', $warnings );
+			}
+
 			return;
 		}
 
-		$warnings = $status->getErrorsByType( 'warning' );
-
-		if ( !empty( $warnings ) ) {
-			$warnings = $this->convertMessagesToResult( $warnings );
-			$this->setWarning( 'messages', $warnings );
-		}
+		$formatter = $this->apiModule->getErrorFormatter();
+		$formatter->addMessagesFromStatus( $this->apiModule->getModulePath(), $status, 'warning' );
 	}
 
 	/**
@@ -234,7 +243,9 @@ class ApiErrorReporter {
 	 * @throws LogicException
 	 */
 	private function dieMessageObject( Message $message, $errorCode, $httpRespCode = 0, $extradata = array() ) {
-		$this->addMessageToResult( $message, $extradata );
+		if ( $this->isUsingBackCompatFormatter() ) {
+			$this->addMessageToResult( $message, $extradata );
+		}
 
 		$this->throwUsageException( $message, $errorCode, $extradata, $httpRespCode );
 
@@ -263,8 +274,10 @@ class ApiErrorReporter {
 	public function dieError( $description, $errorCode, $httpRespCode = 0, $extradata = array() ) {
 		$message = $this->getMessageForCode( $errorCode, $description, $extradata );
 
-		$this->addMessageToResult( $message, $extradata );
-		$message->setApiData( $extradata );
+		if ( $this->isUsingBackCompatFormatter() ) {
+			$this->addMessageToResult( $message, $extradata );
+			$message->setApiData( $extradata );
+		}
 
 		$this->throwUsageException( $message, $errorCode, $extradata, $httpRespCode );
 
@@ -355,13 +368,15 @@ class ApiErrorReporter {
 	 * @throws InvalidArgumentException
 	 */
 	public function addStatusToResult( StatusValue $status, &$data ) {
-		// Use Wikibase specific representation of messages in the result.
-		// TODO: This should be phased out in favor of using ApiErrorFormatter, see below.
-		$messageSpecs = $status->getErrorsByType( 'error' );
-		$messages = $this->convertToMessageList( $messageSpecs );
+		if ( $this->isUsingBackCompatFormatter() ) {
+			// Use Wikibase specific representation of messages in the result.
+			// TODO: This should be phased out in favor of using ApiErrorFormatter, see below.
+			$messageSpecs = $status->getErrorsByType( 'error' );
+			$messages = $this->convertToMessageList( $messageSpecs );
 
-		foreach ( $messages as $message ) {
-			$this->addMessageToResult( $message, $data );
+			foreach ( $messages as $message ) {
+				$this->addMessageToResult( $message, $data );
+			}
 		}
 
 		// Additionally, provide new (2016) API error reporting output.
