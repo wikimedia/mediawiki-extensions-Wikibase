@@ -1,7 +1,7 @@
 ( function( $ ) {
 	'use strict';
 
-	var PARENT =  $.Widget;
+	var PARENT = $.Widget;
 
 	/**
 	 * Base prototype for all widgets using the `mw.wbTemplate` templating system.
