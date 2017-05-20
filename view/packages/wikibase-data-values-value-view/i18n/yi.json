@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"פוילישער"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "ליידיק",
+	"valueview-expert-globecoordinateinput-precision": "גענויקייט:",
+	"valueview-expert-globecoordinateinput-nullprecision": "אומספעציפֿירט",
+	"valueview-expert-timevalue-calendar-gregorian": "גרעגאריאניש",
+	"valueview-expert-timevalue-calendar-julian": "יוליאניש",
+	"valueview-expert-timeinput-precision": "גענויקייט:",
+	"valueview-expert-timeinput-calendar": "קאלאענדאר:",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)"
+}

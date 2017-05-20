@@ -4,11 +4,15 @@
 			"Cainamarques",
 			"Luckas",
 			"O andarilho",
-			"Eduardo Addad de Oliveira"
+			"Eduardo Addad de Oliveira",
+			"Felipe L. Ewald",
+			"Trigonometria87"
 		]
 	},
 	"valueview-desc": "Componentes da interface para exibir e editar valores de dados.",
 	"valueview-expert-advancedadjustments": "ajustes avançados",
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "A manipulação de valores \"$1\" ainda não é suportada.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "A manipulação de valores para o tipo de dados \"$1\" ainda não é suportada.",
 	"valueview-expert-emptyvalue-empty": "vazio",
 	"valueview-expert-globecoordinateinput-precision": "Precisão:",
 	"valueview-expert-globecoordinateinput-nullprecision": "Não especificado",
@@ -19,6 +23,9 @@
 	"valueview-expert-timeinput-calendar": "Calendário:",
 	"valueview-expertextender-calendarhint-gregorian": "(Calendário gregoriano)",
 	"valueview-expertextender-calendarhint-julian": "(Calendário juliano)",
+	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr; alterar para Gregoriano",
+	"valueview-expertextender-calendarhint-switch-julian": "&rarr; alterar para Juliano",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "Idioma (obrigatório):",
 	"valueview-expertextender-unitsuggester-label": "Unidade (opcional):",
 	"valueview-preview-label": "será exibido como:",
