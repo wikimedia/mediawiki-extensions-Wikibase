@@ -476,7 +476,7 @@
 				};
 			}
 
-			var snakDeserializer =  new wb.serialization.SnakDeserializer();
+			var snakDeserializer = new wb.serialization.SnakDeserializer();
 			try {
 				return snakDeserializer.deserialize( value );
 			} catch ( e ) {

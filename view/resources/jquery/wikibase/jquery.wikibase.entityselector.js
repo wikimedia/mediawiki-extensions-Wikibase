@@ -305,7 +305,7 @@
 
 			if ( entityStub.aliases ) {
 				$label.append(
-						$( '<span class="ui-entityselector-aliases"/>' ).text( ' (' + entityStub.aliases.join( ', ' ) +  ')' )
+						$( '<span class="ui-entityselector-aliases"/>' ).text( ' (' + entityStub.aliases.join( ', ' ) + ')' )
 				);
 			}
 
