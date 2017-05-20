@@ -29,7 +29,7 @@ class PageImagesDataUpdaterTest extends PHPUnit_Framework_TestCase {
 	 * @return PageImagesDataUpdater
 	 */
 	private function newInstance( array $propertyIds ) {
-		return new PageImagesDataUpdater( $propertyIds );
+		return new PageImagesDataUpdater( $propertyIds, 'page_image' );
 	}
 
 	/**
