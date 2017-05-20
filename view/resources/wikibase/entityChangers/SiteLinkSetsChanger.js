@@ -76,7 +76,7 @@
 
 			var diffValue = getDiffValue();
 			var siteLinksChanger = this._siteLinksChanger;
-			var resultValue =  diffValue.unchanged;
+			var resultValue = diffValue.unchanged;
 
 			return chain( diffValue.changed.map( function( siteLink ) {
 				return function() {

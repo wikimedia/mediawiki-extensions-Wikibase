@@ -137,7 +137,7 @@
 					self._unbindGlobalEventListeners();
 				};
 
-				$( document ).on( 'mouseup.' + self.widgetName, degrade  );
+				$( document ).on( 'mouseup.' + self.widgetName, degrade );
 				$( window ).on( 'resize.' + self.widgetName, function( event ) { self.repositionMenu(); } );
 			} );
 

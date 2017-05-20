@@ -1,7 +1,7 @@
 ( function( $ ) {
 	'use strict';
 
-	var PARENT =  $.ui.TemplatedWidget;
+	var PARENT = $.ui.TemplatedWidget;
 
 /**
  * View for displaying and editing list items, each represented by a single random widget.
