@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_c12338a5",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-20T09:29:49Z",
+      "side": 1,
+      "message": "This could maybe say that the full id column is used instead of the numeric id column. But this is probably clear so maybe no need to be too verbose.",
+      "revId": "9574fe19764faf73599e7c895cf7a6c2a6e83750",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
