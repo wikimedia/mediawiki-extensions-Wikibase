@@ -69,7 +69,7 @@ wb.utilities.V4GuidGenerator = util.inherit(
 				}
 
 				while ( hex.length < 4 ) {
-					hex = '0' +  hex;
+					hex = '0' + hex;
 				}
 
 				guid += hex;

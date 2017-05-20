@@ -6,7 +6,7 @@
 ( function( $ ) {
 	'use strict';
 
-	var PARENT =  $.ui.TemplatedWidget;
+	var PARENT = $.ui.TemplatedWidget;
 
 /**
  * TemplatedWidget enhanced with editing capabilities.
