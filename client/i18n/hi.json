@@ -50,7 +50,18 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} परिवर्तन्",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} सम्पादन",
 	"wikibase-unconnectedpages-submit": "पृष्ठ दिखाएँ",
+	"wikibase-pageswithbadges-badge": "बैज:",
+	"wikibase-pageswithbadges-submit": "पृष्ठ दिखाएँ",
+	"entityusage": "इकाई उपयोग",
+	"wikibase-entityusage-entity": "इकाई:",
+	"wikibase-entityusage-submit": "पृष्ठ दिखाएँ",
+	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} वस्तु आईडी",
 	"wikibase-pageinfo-entity-id-none": "कुछ नहीं",
+	"wikibase-pageinfo-entity-usage-S": "साइटकड़ी",
+	"wikibase-pageinfo-entity-usage-L": "लेबल: $1",
 	"wikibase-pageinfo-entity-usage-T": "शीर्षक",
-	"wikibase-otherprojects": "अन्य परियोजनाओं में"
+	"wikibase-pageinfo-entity-usage-X": "सभी इकाई डाटा",
+	"wikibase-otherprojects": "अन्य परियोजनाओं में",
+	"wikibase-otherprojects-beta-message": "अन्य परियोजना साइडबार",
+	"notification-link-text-view-item": "वस्तु {{GENDER:$1|देखें}}"
 }

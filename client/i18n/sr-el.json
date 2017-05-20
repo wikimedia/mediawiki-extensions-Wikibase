@@ -45,7 +45,7 @@
 	"wikibase-replicationnote": "Imajte na umu da je potrebno i do nekoliko minuta da promene postanu vidljive na svim vikijima.",
 	"wikibase-watchlist-show-changes-pref": "Prikaži izmene na Vikipodacima u spisku nadgledanja",
 	"wikibase-error-serialize-error": "Neuspešna serijalizacija podataka.",
-	"wikibase-error-invalid-entity-id": "Uneti identifikator je nepoznat sistemu. Molimo unesite važeći ID.",
+	"wikibase-error-invalid-entity-id": "ID „$2” je nepoznat sistemu. Koristite validan ID entiteta.",
 	"unconnectedpages": "Stranice koje nisu povezane sa stavkama",
 	"unconnectedpages-summary": "Ova posebna stranica prikazuje stranice koje nisu povezane sa stavkama (za imenske prostore koji to podržavaju). Najnovije stranice su uvek prikazane prve.",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|međujezička veza|međujezičkih veza}} na stranici)",

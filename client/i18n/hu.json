@@ -8,7 +8,8 @@
 			"Tacsipacsi",
 			"Csega",
 			"Dorgan",
-			"Grin"
+			"Grin",
+			"Urbalazs"
 		]
 	},
 	"wikibase-client-desc": "Kliens a Wikibase kiterjesztéshez",
@@ -35,7 +36,7 @@
 	"wikibase-comment-sitelink-remove": "Nyelvközi hivatkozás törlése: $1",
 	"wikibase-comment-multi": "$1 változtatás",
 	"wikibase-dataitem": "{{WBREPONAME}}-adatlap",
-	"wikibase-editlinks": "Linkek szerkesztése",
+	"wikibase-editlinks": "Hivatkozások szerkesztése",
 	"wikibase-editlinkstitle": "Nyelvközi hivatkozások szerkesztése",
 	"wikibase-addlinkstitle": "Nyelvközi hivatkozások hozzáadása",
 	"wikibase-linkitem-addlinks": "Linkek hozzáadása",
@@ -60,6 +61,7 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-szerkesztés",
 	"wikibase-replicationnote": "A változtatás néhány percen belül minden wikin látható lesz.",
 	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}-változások mutatása a figyelőlistádon",
+	"wikibase-error-invalid-entity-id": "A(z) „$2” azonosító ismeretlen a rendszeren. Használjon érvényes entitásazonosítót.",
 	"unconnectedpages": "{{WBREPONAME}}-hivatkozás nélküli lapok",
 	"unconnectedpages-summary": "Ez a lap listázza azokat a lapokat, amik nincsenek összekapcsolva {{WBREPONAME}}-elemekkel (azokban a névterekben, amik támogatják ezt). A lista lapazonosító szerint csökkenő sorrendben van, így a legújabb lapok vannak felül.",
 	"wikibase-unconnectedpages-format-row": "($1 nyelvközi hivatkozás a lapon)",

@@ -3,7 +3,8 @@
 		"authors": [
 			"Milicevic01",
 			"Macofe",
-			"Srdjan m"
+			"Srdjan m",
+			"Obsuser"
 		]
 	},
 	"wikibase-desc": "Skladište struktuiranih podataka",
@@ -80,7 +81,7 @@
 	"wikibase-validator-label-conflict": "Svojstvo $3 već ima naziv „$1“ povezan sa jezičkim kodom $2.",
 	"wikibase-validator-label-with-description-conflict": "Stavka $3 već ima naziv „$1“ povezan sa jezičkim kodom $2, sa istim opisom",
 	"wikibase-wikibaserepopage-invalid-langcode": "Jezički kod „$1“ je nepoznat. Molimo koristite jezičke kodove poznate sistemu, kao što je „sr“.",
-	"wikibase-wikibaserepopage-invalid-id": "Identifikator „$1“ je nepoznat sistemu. Molimo unesite važeći ID.",
+	"wikibase-wikibaserepopage-invalid-id": "ID „$1” je nepoznat sistemu. Koristite validan ID entiteta.",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 je preusmerenje.",
 	"special-itembytitle": "Stavke prema nazivima",
 	"wikibase-itembytitle-lookup-fieldset": "Pretraga stavki prema sajtu i nazivu",

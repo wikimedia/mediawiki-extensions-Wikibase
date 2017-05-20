@@ -88,7 +88,7 @@
 	"wikibase-watchlist-show-changes-pref": "הצגת עריכות שנעשו ב{{GRAMMAR:תחילית|{{WBREPONAME}}}} ברשימת המעקב",
 	"wikibase-error-deserialize-error": "הוצאת נתונים מהסדרה לא עבדה.",
 	"wikibase-error-serialize-error": "כשל בהכנת נתונים לשמירה",
-	"wikibase-error-invalid-entity-id": "המזהה שהוזן אינו ידוע למערכת. נא להשתמש במזהה ישות תקין.",
+	"wikibase-error-invalid-entity-id": "המזהה \"$2\" אינו ידוע למערכת. נא להשתמש במזהה ישות תקין.",
 	"wikibase-error-exceeded-entity-access-limit": "נעשתה גישה ליותר מדי ישויות {{WBREPONAME}}.",
 	"unconnectedpages": "דפים שאינם מקושרים לפריטים",
 	"unconnectedpages-summary": "הדף הזה מציג רשימת דפים שאין פריט נתונים שמקושר אליהם (במרחבי שם שתומכים בפריטים מקושרים). הרשימה ממוינת בסדר יורד לפי מזהה הדף, כך שדפים חדשים יותר מופיעים קודם.",

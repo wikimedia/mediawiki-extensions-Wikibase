@@ -82,6 +82,8 @@
 	"datatypes-type-wikibase-item": "Item",
 	"datatypes-type-wikibase-property": "Eigenschap",
 	"datatypes-type-commonsMedia": "Mediabestand van Commons",
+	"datatypes-type-geo-shape": "Geografische vorm",
+	"datatypes-type-tabular-data": "Gegevens in tabelvorm",
 	"datatypes-type-external-id": "Externe identificatiecode",
 	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-Gannum": "$1 miljard jaar g.j.",
