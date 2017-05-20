@@ -41,7 +41,11 @@ end
 
 Given(/^I have an item with label "(.*)" and description "(.*)"$/) do |label, description|
   item_data = '{"labels":{"en":{"language":"en","value":"' + label + '"}},"descriptions":{"en":{"language":"en","value":"' + description + '"}}}'
-  @item_under_test = visit(ItemPage).create_item(item_data)
+  begin
+    @item_under_test = visit(ItemPage).create_item(item_data)
+  rescue MediawikiApi::ApiError => error
+    fail unless error.code == 'modification-failed' && /Item .+ already has label/i =~ error.info
+  end
 end
 
 Given(/^I am on the page of the item to test$/) do
