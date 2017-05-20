@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_015370e7",
+        "filename": "repo/includes/Api/ApiErrorReporter.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2017-05-20T09:18:01Z",
+      "side": 1,
+      "message": "I think you misunderstood. I was suggesting that you use the code I pasted instead of the code below that creates an ApiResult, an ApiErrorFormatter_BackCompat, and so on.",
+      "parentUuid": "0e1cb3f9_215b1428",
+      "revId": "a48174f0513cec0c613a4f3df95275e659745b21",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_badd1875",
         "filename": "repo/includes/Api/ApiErrorReporter.php",
         "patchSetId": 10
