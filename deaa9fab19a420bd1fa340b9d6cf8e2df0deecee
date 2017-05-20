@@ -22,6 +22,30 @@
       "revId": "deaa9fab19a420bd1fa340b9d6cf8e2df0deecee",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_e18f5c24",
+        "filename": "client/includes/Hooks/SidebarHookHandlers.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-20T09:47:22Z",
+      "side": 0,
+      "message": "Once otherProjectsSidebarGenerator is injected this is no need for this line.",
+      "parentUuid": "0e1cb3f9_ff7150de",
+      "range": {
+        "startLine": 237,
+        "startChar": 27,
+        "endLine": 237,
+        "endChar": 38
+      },
+      "revId": "deaa9fab19a420bd1fa340b9d6cf8e2df0deecee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

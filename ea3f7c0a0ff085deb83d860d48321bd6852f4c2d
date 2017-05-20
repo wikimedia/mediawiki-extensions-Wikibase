@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_8196a040",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1056,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-20T09:47:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_bf7c38b5",
+      "range": {
+        "startLine": 1056,
+        "startChar": 42,
+        "endLine": 1056,
+        "endChar": 75
+      },
+      "revId": "ea3f7c0a0ff085deb83d860d48321bd6852f4c2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_7f86a0ad",
         "filename": "client/tests/phpunit/includes/Hooks/SidebarHookHandlersTest.php",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-05-16T14:20:17Z",
       "side": 1,
       "message": "Short array syntax?",
+      "range": {
+        "startLine": 96,
+        "startChar": 31,
+        "endLine": 96,
+        "endChar": 37
+      },
+      "revId": "ea3f7c0a0ff085deb83d860d48321bd6852f4c2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_619cac5f",
+        "filename": "client/tests/phpunit/includes/Hooks/SidebarHookHandlersTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-20T09:47:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_7f86a0ad",
       "range": {
         "startLine": 96,
         "startChar": 31,
