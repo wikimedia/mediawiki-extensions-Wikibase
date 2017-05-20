@@ -74,7 +74,7 @@ $.widget( 'wikibase.entitysearch', PARENT, {
 
 			this._close();
 		}
-		return PARENT.prototype._setOption.apply( this,  arguments );
+		return PARENT.prototype._setOption.apply( this, arguments );
 	},
 
 	/**

@@ -19,7 +19,7 @@
 	 * @return {string}
 	 */
 	function getParameterType( param ) {
-		return ( param instanceof jQuery )  ? 'jQuery' : typeof param;
+		return ( param instanceof jQuery ) ? 'jQuery' : typeof param;
 	}
 
 	/**
