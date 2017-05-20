@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_441e5612",
+        "filename": ".eslintrc.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-05-20T11:10:30Z",
+      "side": 1,
+      "message": "I\u0027d suggest at least:\n\n\"browser\": true,\n\"jquery\": true\n\"QUnit\": true (ideally just for the test code)",
+      "revId": "c90573b848f8f7a4e9e14ac13207ba783fdf9941",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
