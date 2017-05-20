@@ -4,6 +4,7 @@ namespace Wikibase\Repo\ParserOutput;
 
 use GeoData\GeoData;
 use Language;
+use PageImages;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
@@ -187,8 +188,11 @@ class EntityParserOutputGeneratorFactory {
 			new ImageLinksDataUpdater( $propertyDataTypeMatcher )
 		);
 
-		if ( !empty( $this->preferredPageImagesProperties ) ) {
-			$updaters[] = new PageImagesDataUpdater( $this->preferredPageImagesProperties );
+		if ( !empty( $this->preferredPageImagesProperties ) && class_exists( PageImages::class ) ) {
+			$updaters[] = new PageImagesDataUpdater(
+				$this->preferredPageImagesProperties,
+				PageImages::PROP_NAME
+			);
 		}
 
 		if ( class_exists( GeoData::class ) ) {

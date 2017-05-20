@@ -27,6 +27,11 @@ class PageImagesDataUpdater implements StatementDataUpdater {
 	/**
 	 * @var string
 	 */
+	private $pagePropName;
+
+	/**
+	 * @var string
+	 */
 	private $bestProperty;
 
 	/**
@@ -41,9 +46,11 @@ class PageImagesDataUpdater implements StatementDataUpdater {
 
 	/**
 	 * @param string[] $imagePropertyIds List of image property id strings, in order of preference.
+	 * @param string $pagePropName PageImages page prop name
 	 */
-	public function __construct( array $imagePropertyIds ) {
+	public function __construct( array $imagePropertyIds, $pagePropName ) {
 		$this->propertyPriorities = array_flip( array_unique( array_values( $imagePropertyIds ) ) );
+		$this->pagePropName = $pagePropName;
 	}
 
 	/**
@@ -175,13 +182,10 @@ class PageImagesDataUpdater implements StatementDataUpdater {
 	 * @param ParserOutput $parserOutput
 	 */
 	public function updateParserOutput( ParserOutput $parserOutput ) {
-		// This page property's name is the only "soft dependency" on the PageImages extension.
-		$propertyName = 'page_image';
-
 		if ( $this->bestFileName === null ) {
-			$parserOutput->unsetProperty( $propertyName );
+			$parserOutput->unsetProperty( $this->pagePropName );
 		} else {
-			$parserOutput->setProperty( $propertyName, $this->bestFileName );
+			$parserOutput->setProperty( $this->pagePropName, $this->bestFileName );
 		}
 	}
 
