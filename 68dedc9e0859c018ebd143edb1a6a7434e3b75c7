@@ -22,6 +22,30 @@
       "revId": "68dedc9e0859c018ebd143edb1a6a7434e3b75c7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_bbff4cfb",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.badgeselector.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-05-21T09:28:03Z",
+      "side": 1,
+      "message": "Because we tell it to do so. These are the coding standards at https://www.mediawiki.org/wiki/CC and of course subject to discussion.",
+      "parentUuid": "0e1cb3f9_38a0259a",
+      "range": {
+        "startLine": 249,
+        "startChar": 24,
+        "endLine": 249,
+        "endChar": 31
+      },
+      "revId": "68dedc9e0859c018ebd143edb1a6a7434e3b75c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
