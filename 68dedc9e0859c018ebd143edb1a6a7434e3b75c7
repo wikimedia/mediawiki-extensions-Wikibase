@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_38a0259a",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.badgeselector.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-21T09:22:59Z",
+      "side": 1,
+      "message": "ESLint complaints about whitespace in *comments*? Why? I really think this hurts more than it helps. I wish we could agree on disabling such rules.",
+      "range": {
+        "startLine": 249,
+        "startChar": 24,
+        "endLine": 249,
+        "endChar": 31
+      },
+      "revId": "68dedc9e0859c018ebd143edb1a6a7434e3b75c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
