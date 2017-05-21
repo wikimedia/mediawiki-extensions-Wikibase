@@ -27,7 +27,7 @@ script:
 notifications:
   email:
     recipients:
-      - abraham.taherivand@wikimedia.de
+      - wikidata-ci-status@wikimedia.de
     on_success: change
     on_failure: always
   irc:
