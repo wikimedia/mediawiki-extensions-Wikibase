@@ -61,7 +61,7 @@
 	"wikibase-watchlist-show-changes-pref": "Zobrazit změny {{grammar:2sg|{{WBREPONAME}}}} ve sledovaných stránkách",
 	"wikibase-error-deserialize-error": "Nepodařilo se deserializovat data.",
 	"wikibase-error-serialize-error": "Nepodařilo se zaserializovat data.",
-	"wikibase-error-invalid-entity-id": "Systém zadané ID nezná. Použijte platné ID entity.",
+	"wikibase-error-invalid-entity-id": "Systém zadané ID „$2“ nezná. Použijte platné ID entity.",
 	"wikibase-error-exceeded-entity-access-limit": "Načteno příliš mnoho entit {{GRAMMAR:2sg|{{WBREPONAME}}}}.",
 	"unconnectedpages": "Stránky nepropojené s položkou",
 	"unconnectedpages-summary": "Tato stránka obsahuje seznam stránek, které nejsou propojeny s datovou položkou (ve jmenných prostorech, které toto propojení umožňují). Seznam je seřazen sestupně podle ID stránky, takže novější stránky se zobrazují první.",

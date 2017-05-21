@@ -47,7 +47,7 @@
 	"wikibase-replicationnote": "Spremembe se bodo na vseh wikijih morda prikazale šele po več minutah.",
 	"wikibase-watchlist-show-changes-pref": "Pokaži urejanja {{GRAMMAR:rodilnik|{{WBREPONAME}}}} v spisku nadzorov",
 	"wikibase-error-serialize-error": "Serializacija podatkov ni uspela.",
-	"wikibase-error-invalid-entity-id": "Vnesenega ID-ja sistem ne pozna. Prosimo, vnesite veljaven ID entitete.",
+	"wikibase-error-invalid-entity-id": "ID-ja »$2« sistem ne pozna. Prosimo, vnesite veljaven ID entitete.",
 	"unconnectedpages": "Strani, ki niso povezane z objekti",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|medjezikovna povezava|medjezikovni povezavi|medjezikovne povezave|medjezikovnih povezav}} na strani)",
 	"wikibase-unconnectedpages-submit": "Prikaži strani",

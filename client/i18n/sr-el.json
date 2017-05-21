@@ -59,6 +59,8 @@
 	"wikibase-pageinfo-entity-id": "ID stavke na Vikipodacima",
 	"wikibase-pageinfo-entity-id-none": "Nema",
 	"wikibase-pageinfo-entity-usage": "Entiteti Vikipodataka na ovoj stranici",
+	"wikibase-pageinfo-entity-usage-X": "Svi podaci o entitetima",
+	"wikibase-pageinfo-entity-usage-O": "Ostalo (izjave)",
 	"wikibase-otherprojects": "Ostali projekti",
 	"wikibase-otherprojects-beta-message": "Ostali projekti na bočnoj traci",
 	"wikibase-otherprojects-beta-description": "Dodaje odlomak „{{int:wikibase-otherprojects}}“ na bočnoj traci s vezama na ostale Vikimedijine projekte na osnovu podataka iz Vikibaze."
