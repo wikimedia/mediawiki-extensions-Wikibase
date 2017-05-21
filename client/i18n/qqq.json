@@ -123,6 +123,7 @@
 	"wikibase-pageinfo-entity-usage-S": "Name for ''sitelink'' entity usage\n{{Identical|Sitelink}}",
 	"wikibase-pageinfo-entity-usage-L": "Name for ''label'' entity usage\n{{Identical|Label}}",
 	"wikibase-pageinfo-entity-usage-T": "Name for ''title'' entity usage\n{{Identical|Title}}",
+	"wikibase-pageinfo-entity-usage-C": "Name for ''statement'' entity usage\n",
 	"wikibase-pageinfo-entity-usage-X": "Name for ''all'' entity usage",
 	"wikibase-pageinfo-entity-usage-O": "Name for ''other'' entity usage",
 	"wikibase-property-render-error": "Error message shown when the #property parser function fails to render a property value.\n\nParameters:\n* $1 - the property ID or name\n* $2 - the original error message (this is typically in English and may be rather technical)",
