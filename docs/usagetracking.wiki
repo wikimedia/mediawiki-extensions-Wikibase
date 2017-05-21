@@ -11,24 +11,25 @@ This is used to optimize change notifications on two levels:
 
 == Client side usage tracking ==
 
-Each client wiki tracks which pages use (which aspect of) which entity (from which repo). The "aspect" is used to decide which kind of change is relevant for the given kind of usage, and what kind of update is needed for the page in question. The following aspects are defined:
+Each client wiki tracks which pages use (which aspect of) which entity (from which repo). The "aspect" is used to decide which kind of change is relevant for the given kind of usage, and what kind of update is needed for the page in question. Among others the following aspects are defined:
 
 * sitelinks: only an item's sitelinks are used. This would be the case for a client page that is connected to an item on the repo via an incoming sitelink, but does not access any data of the item directly. A change to the sitelinks may be applied without re-parsing the page, by overwriting the sitelinks in the cached ParserOutput opbject.
 * label: only the entity's label is used. This would be the case when a localized reference to the entity is shown on a page. It's also used in cases when a property is referenced by label. A page that uses a label should be updated when that label chances, but this kind of update my be considered low priority. The language in which the label is used is tracked along as a "modification" of the label aspect. In case language fallback is applied, all relevant languages are considered to be used on the page.
 * all: any and all aspects of the entity may be used on the given page. This includes statements, claims, and labels. This kind of usage triggers a full re-parse on any change to the entity. This aspect of use is recorded when entity data is accessed via Lua or the #property parser function.
 
-Entity usage on client pages is tracked using the following codes:
+Entity usage on client pages is tracked using the following codes (each representing one aspect):
 * sitelinks (S): the entity's sitelinks are used.
 * label (L.xx): the entity's label in in language xx changed.
 * title (T): the title of the local page corresponding to the entity is used.
-* all (X): other aspects (such as statement data), or all aspects, are or may be used.
+* statements (C): certain statements (identified by their property id) from the entity are used.
+* other (O): something else about the entity (such as statement data) is used.
+* all (X): all aspects of an entity are or may be used.
 
 Changes result in updates to pages that use the respective entity based on the aspect that is used. Changes are classified accordingly:
 * sitelinks (S): any change to the entity's sitelinks. Pages that use the S or X aspect are updated.
 * label (L.xx): the label in the language "xx" changed. Pages that use the L.xx or X aspect are updated.
 * title (T): the sitelink corresponding to the local wiki was changed. Pages that use the S, T, or X aspect are updated.
-* all (X): Everything about the entity changed, all pages using the entity are updated.
-* other (O): something else about the entity (such as statement data) changed. Only pages that use the X aspect are updated.
+* other (O): something else about the entity (such as statement data) changed. Only pages that use the O or X aspects are updated.
 
 This way, editing e.g. statements will not cause pages that just show the entities label to be purged.
 
