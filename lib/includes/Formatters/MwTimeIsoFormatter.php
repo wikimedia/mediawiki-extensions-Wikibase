@@ -85,8 +85,8 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 		$localizedDate = $this->language->sprintfDate( $dateFormat, $mwTimestamp );
 
 		if ( $mwYear !== $localizedYear ) {
-			// If we cannot reliably fix the year, return the full time stamp. This should
-			// never happen as Language::sprintfDate should always return a 4 digit year.
+			// Check if we can reliably fix the year. This should never fail as
+			// Language::sprintfDate should always return a 4 digit year.
 			if ( substr_count( $localizedDate, $mwYear ) !== 1 ) {
 				throw new InvalidArgumentException( 'Cannot identify year in formatted date.' );
 			}
@@ -104,11 +104,17 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 	 * @return string Date format string to be used by Language::sprintfDate
 	 */
 	private function getDateFormat( $precision ) {
+		$datePreference = 'dmy';
+
+		if ( !in_array( $datePreference, $this->language->getDatePreferences() ) ) {
+			$datePreference = 'default';
+		}
+
 		if ( $precision === TimeValue::PRECISION_MONTH ) {
-			$format = $this->language->getDateFormatString( 'monthonly', 'dmy' );
+			$format = $this->language->getDateFormatString( 'monthonly', $datePreference );
 			return sprintf( '%s Y', $this->getMonthFormat( $format ) );
 		} elseif ( $precision === TimeValue::PRECISION_DAY ) {
-			$format = $this->language->getDateFormatString( 'date', 'dmy' );
+			$format = $this->language->getDateFormatString( 'date', $datePreference );
 			return sprintf( '%s %s Y', $this->getDayFormat( $format ), $this->getMonthFormat( $format ) );
 		} else {
 			throw new InvalidArgumentException( 'Unsupported precision' );

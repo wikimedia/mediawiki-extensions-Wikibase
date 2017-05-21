@@ -319,6 +319,11 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 			// Preserve punctuation as given in MessagesXx.php but skip suffixes and words
 			array(
 				'+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY,
+				'16. augusztus 2013',
+				'hu'
+			),
+			array(
+				'+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY,
 				'16 Avgust, 2013',
 				'kaa'
 			),
@@ -329,7 +334,7 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 			),
 			array(
 				'+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY,
-				'16 8月 2013',
+				'16 8 2013',
 				'yue'
 			),
 

@@ -37,7 +37,6 @@ class TimeFormatterParserRoundtripTest extends PHPUnit_Framework_TestCase {
 			->method( 'getMonthNumbers' )
 			->will( $this->returnValue( array(
 				'January' => 1,
-				'8月' => 8,
 				'agosto' => 8,
 				'Augusti' => 8,
 				'Avgust' => 8,
@@ -216,7 +215,7 @@ class TimeFormatterParserRoundtripTest extends PHPUnit_Framework_TestCase {
 			),
 			array(
 				'+2013-08-16T00:00:00Z',
-				'16 8月 2013',
+				'16 8 2013',
 				'yue'
 			),
 		);
