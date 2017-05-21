@@ -634,4 +634,27 @@ class TermSqlIndexTest extends TermIndexTest {
 		$this->assertSame( 'Q1112362', $row->term_full_entity_id );
 	}
 
+	public function testDeleteTermsForEntity_withReadFullEntityId() {
+		$index = $this->getTermIndex();
+		$index->clear();
+		$index->setReadFullEntityIdColumn( true );
+
+		$item = new Item( new ItemId( 'Q10' ) );
+		$item->setLabel( 'en', 'abc' );
+
+		$index->saveTermsOfEntity( $item );
+
+		$searchCriteria = [ new TermIndexSearchCriteria( [ 'termText' => 'abc' ] ) ];
+
+		$matches = $index->getMatchingTerms( $searchCriteria );
+
+		$this->assertNotEmpty( $matches );
+
+		$index->deleteTermsOfEntity( $item->getId() );
+
+		$matches = $index->getMatchingTerms( $searchCriteria );
+
+		$this->assertEmpty( $matches );
+	}
+
 }
