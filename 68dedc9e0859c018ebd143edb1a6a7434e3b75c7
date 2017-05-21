@@ -70,6 +70,30 @@
       "revId": "68dedc9e0859c018ebd143edb1a6a7434e3b75c7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_9b7e08e0",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.badgeselector.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2017-05-21T10:23:34Z",
+      "side": 1,
+      "message": "I\u0027ve disabled this rule for now, and restored changes made to satisfy it.\n\nLet\u0027s discuss it if it is needed.",
+      "parentUuid": "0e1cb3f9_3bf25ce0",
+      "range": {
+        "startLine": 249,
+        "startChar": 24,
+        "endLine": 249,
+        "endChar": 31
+      },
+      "revId": "68dedc9e0859c018ebd143edb1a6a7434e3b75c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
