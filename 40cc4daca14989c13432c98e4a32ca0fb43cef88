@@ -19,6 +19,29 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_1b119857",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-21T09:42:35Z",
+      "side": 1,
+      "message": "This code scares me a bit, because it heavily obfuscates what this query will actually do in the end. I followed the code paths and believe this is what the WHERE will contain:\n\n term_language\n term_type\n term_text\n term_search_key\n term_entity_id\n term_entity_type\n term_full_entity_id\n\nThis is the order in the WHERE.\n\nThere are a lot of keys on the wb_terms table. Which one will be used for this query?\n\nNote that this WHERE contains both the old term_entity_type + term_entity_id combination, as well as the new term_full_entity_id. This is redundant, and probably makes the query slower than it needs to be.\n\nNote that term_entity_type is *not* in any index that combines two or more fields. It\u0027s only in its own \"wb_terms_entity_type\" index.",
+      "range": {
+        "startLine": 220,
+        "startChar": 4,
+        "endLine": 220,
+        "endChar": 53
+      },
+      "revId": "40cc4daca14989c13432c98e4a32ca0fb43cef88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_fc0148ba",
         "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
         "patchSetId": 1
