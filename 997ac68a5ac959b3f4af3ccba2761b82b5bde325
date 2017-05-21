@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_afb9427a",
+        "filename": "client/i18n/qqq.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-21T20:49:22Z",
+      "side": 1,
+      "message": "A message that ends with a \\n is a bit awkward. Should probably say {{Identical|Statement}}.",
+      "range": {
+        "startLine": 126,
+        "startChar": 73,
+        "endLine": 126,
+        "endChar": 75
+      },
+      "revId": "997ac68a5ac959b3f4af3ccba2761b82b5bde325",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
