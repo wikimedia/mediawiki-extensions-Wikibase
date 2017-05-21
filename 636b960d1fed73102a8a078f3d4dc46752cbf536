@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_c83681e4",
+        "filename": "repo/Wikibase.i18n.alias.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 330
+      },
+      "writtenOn": "2017-05-21T13:16:32Z",
+      "side": 1,
+      "message": "Looks like a stray space",
+      "revId": "636b960d1fed73102a8a078f3d4dc46752cbf536",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_28570507",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialItemsMostSitelinksTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 330
+      },
+      "writtenOn": "2017-05-21T13:16:32Z",
+      "side": 1,
+      "message": "Aren\u0027t you forgetting yourself here? Or did I write this? ;-)",
+      "revId": "636b960d1fed73102a8a078f3d4dc46752cbf536",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
