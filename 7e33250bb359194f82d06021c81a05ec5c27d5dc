@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_5be4f0da",
+        "filename": "tests/browser/features/step_definitions/entity_steps.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-21T10:10:43Z",
+      "side": 1,
+      "message": "This is probably null when an error happens, even if we are ignoring a specific error.",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 20
+      },
+      "revId": "7e33250bb359194f82d06021c81a05ec5c27d5dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_9b8cc833",
+        "filename": "tests/browser/features/step_definitions/entity_steps.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-21T10:10:43Z",
+      "side": 1,
+      "message": "Not needed.",
+      "range": {
+        "startLine": 47,
+        "startChar": 82,
+        "endLine": 47,
+        "endChar": 83
+      },
+      "revId": "7e33250bb359194f82d06021c81a05ec5c27d5dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
