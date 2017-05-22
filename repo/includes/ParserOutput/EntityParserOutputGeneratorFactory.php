@@ -191,7 +191,7 @@ class EntityParserOutputGeneratorFactory {
 		if ( !empty( $this->preferredPageImagesProperties ) && class_exists( PageImages::class ) ) {
 			$updaters[] = new PageImagesDataUpdater(
 				$this->preferredPageImagesProperties,
-				PageImages::PROP_NAME
+				PageImages::PROP_NAME_FREE
 			);
 		}
 
