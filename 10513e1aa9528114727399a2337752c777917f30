@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_0fc86b59",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-22T14:41:30Z",
+      "side": 1,
+      "message": "That\u0027s a weird statement that raises more questions than is answers. Where does this number come from? Is this configuration?",
+      "range": {
+        "startLine": 11,
+        "startChar": 296,
+        "endLine": 11,
+        "endChar": 298
+      },
+      "revId": "10513e1aa9528114727399a2337752c777917f30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
