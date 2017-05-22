@@ -22,6 +22,30 @@
       "revId": "10513e1aa9528114727399a2337752c777917f30",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_4fe423db",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-05-22T14:44:07Z",
+      "side": 1,
+      "message": "All entity fetches which can\u0027t be served from the LRU cache in mw.wikibase.lua are considered expensive.\n\nThe LRU cache size in Lua is hard coded to 15, that\u0027s why calls will be expensive again if more than 14 other entities have been fetched.",
+      "parentUuid": "0e1cb3f9_0fc86b59",
+      "range": {
+        "startLine": 11,
+        "startChar": 296,
+        "endLine": 11,
+        "endChar": 298
+      },
+      "revId": "10513e1aa9528114727399a2337752c777917f30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
