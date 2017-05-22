@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_72d22e5f",
+        "filename": "repo/includes/Store/Sql/LockManagerSqlChangeDispatchCoordinator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-05-22T16:56:10Z",
+      "side": 1,
+      "message": "phpdoc needs updating",
+      "revId": "948d3780ea338d8e4dd19965960ddc99a975c054",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_12cad2a3",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-05-22T16:56:10Z",
+      "side": 1,
+      "message": "Can\u0027t be null",
+      "range": {
+        "startLine": 111,
+        "startChar": 20,
+        "endLine": 111,
+        "endChar": 25
+      },
+      "revId": "948d3780ea338d8e4dd19965960ddc99a975c054",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_32c59690",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-05-22T16:56:10Z",
+      "side": 1,
+      "message": "No longer the case",
+      "revId": "948d3780ea338d8e4dd19965960ddc99a975c054",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_9234a2a8",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-05-22T16:56:10Z",
+      "side": 1,
+      "message": "I don\u0027t think having a master connection here (and an atomic section) is needed anymore.",
+      "revId": "948d3780ea338d8e4dd19965960ddc99a975c054",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
