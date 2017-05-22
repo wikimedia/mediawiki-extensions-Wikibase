@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_eca2e53a",
+        "filename": "client/includes/DataAccess/StatementTransclusionInteractor.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-05-22T12:17:33Z",
+      "side": 1,
+      "message": "I just realized that this will also record an additional other usage now when used via Lua\u0027s mw.wikibase.entity:format… (which already records an all usage, when using mw.wikibase.getEntity).",
+      "revId": "d9c401b3845f9d37a0fea7cedaed1c9340483e30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
