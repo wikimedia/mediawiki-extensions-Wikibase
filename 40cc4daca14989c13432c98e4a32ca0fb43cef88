@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_ef7737fb",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-05-22T15:23:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_d236a8ff",
+      "revId": "40cc4daca14989c13432c98e4a32ca0fb43cef88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_1b119857",
         "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
         "patchSetId": 1
@@ -30,6 +48,30 @@
       "writtenOn": "2017-05-21T09:42:35Z",
       "side": 1,
       "message": "This code scares me a bit, because it heavily obfuscates what this query will actually do in the end. I followed the code paths and believe this is what the WHERE will contain:\n\n term_language\n term_type\n term_text\n term_search_key\n term_entity_id\n term_entity_type\n term_full_entity_id\n\nThis is the order in the WHERE.\n\nThere are a lot of keys on the wb_terms table. Which one will be used for this query?\n\nNote that this WHERE contains both the old term_entity_type + term_entity_id combination, as well as the new term_full_entity_id. This is redundant, and probably makes the query slower than it needs to be.\n\nNote that term_entity_type is *not* in any index that combines two or more fields. It\u0027s only in its own \"wb_terms_entity_type\" index.",
+      "range": {
+        "startLine": 220,
+        "startChar": 4,
+        "endLine": 220,
+        "endChar": 53
+      },
+      "revId": "40cc4daca14989c13432c98e4a32ca0fb43cef88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_8fc47b12",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-05-22T15:23:46Z",
+      "side": 1,
+      "message": "The only index that could single-handedly be used here is term_search_full (but even that might not be fully accurate).\n\nUsing all of these fields here should be ok as the most part of this query can be done on an index (and MySQL can select the best one), but in order to actually do the comparison we will need to access the full row anyway.\n\nI don\u0027t think that\u0027s going to be a problem, especially since we\u0027re about to write to the table (which is quite expensive compared to reading).",
+      "parentUuid": "0e1cb3f9_1b119857",
       "range": {
         "startLine": 220,
         "startChar": 4,
@@ -77,6 +119,30 @@
       "side": 1,
       "message": "Per DBAs we should not rely only on database constraints to prevent writes. Maybe IGNORE here should be removed but adding this part of code is a good move IMO",
       "parentUuid": "0e1cb3f9_fc0148ba",
+      "range": {
+        "startLine": 237,
+        "startChar": 12,
+        "endLine": 237,
+        "endChar": 18
+      },
+      "revId": "40cc4daca14989c13432c98e4a32ca0fb43cef88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_8f655b43",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2017-05-22T15:23:46Z",
+      "side": 1,
+      "message": "The only thing on wb_terms which is mandated to be unique is term_row_id (which is auto increment), thus we can safely remove this. Done.",
+      "parentUuid": "0e1cb3f9_725f9c44",
       "range": {
         "startLine": 237,
         "startChar": 12,
