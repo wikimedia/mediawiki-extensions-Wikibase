@@ -8,7 +8,7 @@ Changes to the Wikibase Lua interface are subject to the [[d:Wikidata:Stable Int
 === mw.wikibase.getEntity ===
 <code>wikibase.getEntity()</code><br>
 <code>wikibase.getEntity( id )</code><br>
-:<span style="color: red;">This function is [[mw:Manual:$wgExpensiveParserFunctionLimit|expensive]] when called with the id of an entity not connected to the current page.</span>
+:<span style="color: red;">This function is [[mw:Manual:$wgExpensiveParserFunctionLimit|expensive]] when called with the ID of an entity not connected to the current page.</span> Loading entities doesn't count as expensive if the same entity is loaded twice during a module run. However, due to restrictions in the caching, if more than 14 other entities are loaded inbetween, the entity must be fetched again, which then counts as expensive.
 
 Gets a [[#mw.wikibase.entity|mw.wikibase.entity]] table with data of the Wikibase item requested by id. If no id was given, the item connected to the current page will be returned. Requesting an item by id is only supported if arbitrary access is enabled.
 
@@ -100,7 +100,7 @@ Renders a serialized Snak value to wikitext escaped plain text. This is useful f
 
 An example call might look like this:
 <source lang="lua">
-local entity = mw.wikibase.getEntityObject()
+local entity = mw.wikibase.getEntity()
 local snak = entity['claims']['P342'][1]['qualifiers']['P342'][1]
 
 mw.wikibase.renderSnak( snak ) -- Returns the given Snak value formatted as wikitext escaped plain text.
@@ -112,7 +112,7 @@ Renders a serialized Snak value to rich wikitext. This is useful for displaying 
 
 An example call might look like this:
 <source lang="lua">
-local entity = mw.wikibase.getEntityObject()
+local entity = mw.wikibase.getEntity()
 local snak = entity['claims']['P342'][1]['qualifiers']['P342'][1]
 
 mw.wikibase.formatValue( snak ) -- Returns the given Snak value formatted as rich wikitext.
@@ -124,7 +124,7 @@ Renders a list of serialized Snak values to wikitext escaped plain text. This is
 
 An example call might look like this:
 <source lang="lua">
-local entity = mw.wikibase.getEntityObject()
+local entity = mw.wikibase.getEntity()
 local snaks = entity['claims']['P342'][1]['qualifiers']
 
 mw.wikibase.renderSnaks( snaks ) -- Returns the given Snak values formatted as wikitext escaped plain text.
@@ -136,7 +136,7 @@ Renders a list of serialized Snak values to rich wikitext. This is useful for di
 
 An example call might look like this:
 <source lang="lua">
-local entity = mw.wikibase.getEntityObject()
+local entity = mw.wikibase.getEntity()
 local snaks = entity['claims']['P342'][1]['qualifiers']
 
 mw.wikibase.formatValues( snaks ) -- Returns the given Snak values formatted as rich wikitext.
@@ -171,7 +171,7 @@ mw.wikibase.orderProperties( propertyIds ) -- Returns a table with ordered prope
 </source>
 
 == mw.wikibase.entity ==
-<code>mw.wikibase.entity</code> represents a Wikibase entity in Lua. A <code>mw.wikibase.entity</code> table for the item which is linked with the current page can be obtained with [[#mw.wikibase.getEntityObject|<code>mw.wikibase.getEntityObject</code>]].
+<code>mw.wikibase.entity</code> represents a Wikibase entity in Lua. A <code>mw.wikibase.entity</code> table for the item which is linked with the current page can be obtained with [[#mw.wikibase.getEntity|<code>mw.wikibase.getEntity</code>]].
 
 Functions documented as <code>mw.wikibase.entity.name</code> are available on the global <code>mw.wikibase.entity</code> table; functions documented as <code>mw.wikibase.entity:name</code> are methods of an <code>mw.wikibase.entity</code> object (see [[#mw.wikibase.entity.create|<code>mw.wikibase.entity.create</code>]]).
 
