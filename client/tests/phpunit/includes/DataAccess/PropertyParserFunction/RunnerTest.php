@@ -62,7 +62,6 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 		];
 
 		$this->assertEquals( $expected, $result );
-		$this->assertUsageTracking( $itemId, EntityUsage::OTHER_USAGE, $parser->getOutput() );
 		$this->assertSame( 0, $parser->mExpensiveFunctionCount );
 	}
 
@@ -101,7 +100,6 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 		];
 
 		$this->assertEquals( $expected, $result );
-		$this->assertUsageTracking( $itemId, EntityUsage::OTHER_USAGE, $parser->getOutput() );
 		$this->assertSame( 1, $parser->mExpensiveFunctionCount );
 	}
 
@@ -195,23 +193,6 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 		];
 
 		$this->assertEquals( $expected, $result );
-	}
-
-	private function assertUsageTracking( ItemId $id, $aspect, ParserOutput $parserOutput ) {
-		$usageAcc = new ParserOutputUsageAccumulator( $parserOutput );
-		$usages = $usageAcc->getUsages();
-		$expected = new EntityUsage( $id, $aspect );
-
-		$usageIdentities = array_map(
-			function ( EntityUsage $usage ) {
-				return $usage->getIdentityString();
-			},
-			$usages
-		);
-
-		$expectedIdentities = [ $expected->getIdentityString() ];
-
-		$this->assertEquals( $expectedIdentities, array_values( $usageIdentities ) );
 	}
 
 	/**

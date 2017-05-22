@@ -62,14 +62,16 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 			$propertyIdResolver,
 			new SnaksFinder(),
 			$plainTextSnakFormatter,
-			$entityLookup
+			$entityLookup,
+			$this->getUsageAccumulator()
 		);
 		$richWikitextTransclusionInteractor = new StatementTransclusionInteractor(
 			$lang,
 			$propertyIdResolver,
 			new SnaksFinder(),
 			$richWikitextSnakFormatter,
-			$entityLookup
+			$entityLookup,
+			$this->getUsageAccumulator()
 		);
 
 		return new WikibaseLuaEntityBindings(

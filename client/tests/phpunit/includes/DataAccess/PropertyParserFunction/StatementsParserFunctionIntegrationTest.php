@@ -6,10 +6,12 @@ use Language;
 use MediaWikiTestCase;
 use Parser;
 use ParserOptions;
+use ParserOutput;
 use Title;
 use User;
 use Wikibase\Client\Tests\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Test\MockClientStore;
 
 /**
@@ -75,39 +77,75 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 	public function testStatementsParserFunction_byPropertyLabel() {
 		$result = $this->parseWikitextToHtml( '{{#statements:LuaTestStringProperty}}' );
 
-		$this->assertSame( "<p><span><span>Lua&#160;:)</span></span>\n</p>", $result );
+		$this->assertSame( "<p><span><span>Lua&#160;:)</span></span>\n</p>", $result->getText() );
+
+		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
+		$this->assertArrayEquals(
+			[ 'P342#L.de', 'Q32487#O' ],
+			array_keys( $usageAccumulator->getUsages() )
+		);
 	}
 
 	public function testStatementsParserFunction_byPropertyId() {
 		$result = $this->parseWikitextToHtml( '{{#statements:P342}}' );
 
-		$this->assertSame( "<p><span><span>Lua&#160;:)</span></span>\n</p>", $result );
+		$this->assertSame( "<p><span><span>Lua&#160;:)</span></span>\n</p>", $result->getText() );
+
+		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
+		$this->assertArrayEquals(
+			[ 'Q32487#O' ],
+			array_keys( $usageAccumulator->getUsages() )
+		);
 	}
 
 	public function testStatementsParserFunction_arbitraryAccess() {
 		$result = $this->parseWikitextToHtml( '{{#statements:P342|from=Q32488}}' );
 
-		$this->assertSame( "<p><span><span>Lua&#160;:)</span></span>\n</p>", $result );
+		$this->assertSame( "<p><span><span>Lua&#160;:)</span></span>\n</p>", $result->getText() );
+
+		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
+		$this->assertArrayEquals(
+			[ 'Q32488#O' ],
+			array_keys( $usageAccumulator->getUsages() )
+		);
 	}
 
 	public function testStatementsParserFunction_multipleValues() {
 		$result = $this->parseWikitextToHtml( '{{#statements:P342|from=Q32489}}' );
 
-		$this->assertSame( "<p><span><span>Lua&#160;:)</span>, <span>Lua&#160;:)</span></span>\n</p>", $result );
+		$this->assertSame( "<p><span><span>Lua&#160;:)</span>, <span>Lua&#160;:)</span></span>\n</p>", $result->getText() );
+
+		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
+		$this->assertArrayEquals(
+			[ 'Q32489#O' ],
+			array_keys( $usageAccumulator->getUsages() )
+		);
 	}
 
 	public function testStatementsParserFunction_arbitraryAccessNotFound() {
 		$result = $this->parseWikitextToHtml( '{{#statements:P342|from=Q1234567}}' );
 
-		$this->assertSame( '', $result );
+		$this->assertSame( '', $result->getText() );
+
+		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
+		$this->assertArrayEquals(
+			[ 'Q1234567#O' ],
+			array_keys( $usageAccumulator->getUsages() )
+		);
 	}
 
 	public function testStatementsParserFunction_byNonExistent() {
-		$result = $this->parseWikitextToHtml( '{{#statements:P2147483647}}' );
+		$result = $this->parseWikitextToHtml( '{{#statements:P2147483645}}' );
 
 		$this->assertRegExp(
-			'/<p.*class=".*wikibase-error.*">.*P2147483647.*<\/p>/',
-			$result
+			'/<p.*class=".*wikibase-error.*">.*P2147483645.*<\/p>/',
+			$result->getText()
+		);
+
+		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
+		$this->assertArrayEquals(
+			[ 'Q32487#O' ],
+			array_keys( $usageAccumulator->getUsages() )
 		);
 	}
 
@@ -117,14 +155,20 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 			'A page not connected to an item'
 		);
 
-		$this->assertSame( '', $result );
+		$this->assertSame( '', $result->getText() );
+
+		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
+		$this->assertArrayEquals(
+			[],
+			array_keys( $usageAccumulator->getUsages() )
+		);
 	}
 
 	/**
 	 * @param string $wikiText
 	 * @param string $title
 	 *
-	 * @return string HTML
+	 * @return ParserOutput
 	 */
 	private function parseWikitextToHtml( $wikiText, $title = 'WikibaseClientDataAccessTest' ) {
 		$popt = new ParserOptions( User::newFromId( 0 ), Language::factory( 'en' ) );
@@ -135,9 +179,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 		}
 
 		$parser = new Parser( [ 'class' => 'Parser' ] );
-		$pout = $parser->parse( $wikiText, Title::newFromText( $title ), $popt, Parser::OT_HTML );
-
-		return $pout->getText();
+		return $parser->parse( $wikiText, Title::newFromText( $title ), $popt, Parser::OT_HTML );
 	}
 
 }
