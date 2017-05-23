@@ -380,13 +380,16 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	/**
 	 * Wrapper for getEntityId in WikibaseLanguageIndependentLuaBindings
 	 *
-	 * @param string|null $pageTitle
+	 * @param string $pageTitle
+	 * @param string|null $globalSiteId
 	 *
 	 * @return array
 	 */
-	public function getEntityId( $pageTitle = null ) {
-		$this->checkType( 'getEntityByTitle', 1, $pageTitle, 'string' );
-		return [ $this->getLanguageIndependentLuaBindings()->getEntityId( $pageTitle ) ];
+	public function getEntityId( $pageTitle, $globalSiteId ) {
+		$this->checkType( 'getEntityId', 1, $pageTitle, 'string' );
+		$this->checkTypeOptional( 'getEntityId', 2, $globalSiteId, 'string', null );
+
+		return [ $this->getLanguageIndependentLuaBindings()->getEntityId( $pageTitle, $globalSiteId ) ];
 	}
 
 	/**

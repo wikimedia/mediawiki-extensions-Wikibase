@@ -49,6 +49,12 @@ An example call might look like this:
 mw.wikibase.getEntityUrl( 'Q42' ) -- Returns the URL to the item as a string, like "https://www.wikidata.org/wiki/Special:EntityPage/Q42".
 </source>
 
+=== mw.wikibase.getEntityIdForPage ===
+<code>wikibase.getEntityIdForPage( pageTitle, globalSiteId )</code><br>
+Takes a page title and a global site id and returns the entity id in the repository.
+
+If no site id is specified, the current site is used.
+
 === mw.wikibase.label ===
 <code>wikibase.label()</code><br>
 <code>wikibase.label( id )</code><br>
