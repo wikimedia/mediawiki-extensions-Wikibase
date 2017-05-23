@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_33491591",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2017-05-23T19:26:25Z",
+      "side": 1,
+      "message": "May wanna use IDatabase instead. If using the $index parameter as proposed, getRepoDB() seems like a sensible name for consistency with similar methods.",
+      "range": {
+        "startLine": 235,
+        "startChar": 12,
+        "endLine": 235,
+        "endChar": 20
+      },
+      "revId": "4870138c21cdfe9ece0e911ed4ac6047e70e2661",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
