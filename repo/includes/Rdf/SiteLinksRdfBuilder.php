@@ -92,8 +92,9 @@ class SiteLinksRdfBuilder implements EntityRdfBuilder {
 				// Somehow we've got site that we don't know about - skip
 				continue;
 			}
+			$baseUrl = str_replace( '$1', wfUrlencode( str_replace( ' ', '_', $siteLink->getPageName() ) ),
+									$site->getLinkPath() );
 			// XXX: ideally, we'd use https if the target site supports it.
-			$baseUrl = str_replace( '$1', rawurlencode( $siteLink->getPageName() ), $site->getLinkPath() );
 			if ( !parse_url( $baseUrl, PHP_URL_SCHEME ) ) {
 				$url = "http:".$baseUrl;
 			} else {

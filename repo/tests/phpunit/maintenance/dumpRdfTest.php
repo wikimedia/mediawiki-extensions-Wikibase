@@ -131,7 +131,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 				new ItemId( 'Q4' ),
 				null,
 				new SiteLinkList( array(
-					new SiteLink( 'enwiki', 'San Jose' ),
+					new SiteLink( 'enwiki', 'Category:San Jose' ),
 					new SiteLink( 'dewiki', 'USA' )
 				) ),
 				null
