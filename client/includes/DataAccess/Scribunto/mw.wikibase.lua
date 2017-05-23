@@ -104,12 +104,16 @@ function wikibase.setupInterface()
 		return pageEntityId
 	end
 
-	-- Get the entity id for a given page in the current wiki.
+	-- Takes a page title string either in the local wiki or an other wiki on the same cluster
+	-- specified by the global site identifier, and returns the item ID connected via a sitelink, if
+	-- one exists. Returns nil if there's no linked item.
 	--
 	-- @param {string} pageTitle
-	wikibase.getEntityIdForTitle = function( pageTitle )
+	-- @param {string} [globalSiteId]
+	wikibase.getEntityIdForTitle = function( pageTitle, globalSiteId )
 		checkType( 'getEntityIdForTitle', 1, pageTitle, 'string' )
-		return php.getEntityId( pageTitle )
+		checkTypeMulti( 'getEntityIdForTitle', 2, globalSiteId, { 'string', 'nil' } )
+		return php.getEntityId( pageTitle, globalSiteId )
 	end
 
 	-- Get the mw.wikibase.entity object for the current page or for the

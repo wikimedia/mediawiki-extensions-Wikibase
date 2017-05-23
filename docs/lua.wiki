@@ -32,7 +32,8 @@ mw.wikibase.getEntityIdForCurrentPage() -- Returns the Item id as string, like "
 
 === mw.wikibase.getEntityIdForTitle ===
 <code>wikibase.getEntityIdForTitle( pageTitle )</code><br>
-Takes a string page title in the local wiki and returns the connected item ID, if it exists. Returns nil if there's no linked item.
+<code>wikibase.getEntityIdForTitle( pageTitle, globalSiteId )</code><br>
+Takes a page title string either in the local wiki or an other wiki on the same cluster specified by the global site identifier, and returns the item ID connected via a sitelink, if one exists. Returns nil if there's no linked item.
 
 <source lang="lua">
 mw.wikibase.getEntityIdForTitle( 'Berlin' ) -- Returns the ID of the item linked with the "Berlin" page, like "Q64"

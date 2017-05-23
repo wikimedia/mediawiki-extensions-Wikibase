@@ -103,6 +103,9 @@ class WikibaseLanguageIndependentLuaBindingsTest extends PHPUnit_Framework_TestC
 		$id = $wikibaseLuaBindings->getEntityId( 'Rome' );
 		$this->assertSame( 'Q33', $id );
 
+		$id = $wikibaseLuaBindings->getEntityId( 'Rome', 'enwiki' );
+		$this->assertSame( 'Q33', $id );
+
 		$itemId = new ItemId( $id );
 		$this->assertTrue(
 			$this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::TITLE_USAGE ),
@@ -114,6 +117,9 @@ class WikibaseLanguageIndependentLuaBindingsTest extends PHPUnit_Framework_TestC
 		);
 
 		$id = $wikibaseLuaBindings->getEntityId( 'Barcelona' );
+		$this->assertNull( $id );
+
+		$id = $wikibaseLuaBindings->getEntityId( 'Rome', 'frwiki' );
 		$this->assertNull( $id );
 	}
 
