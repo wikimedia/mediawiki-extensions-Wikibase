@@ -46,6 +46,30 @@
       "revId": "10513e1aa9528114727399a2337752c777917f30",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_3b81f14f",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-23T11:22:59Z",
+      "side": 1,
+      "message": "Thanks for the explanation. I\u0027m afraid I did not made my request clear enough: I think this should be explained in the documentation, not only in a comment here on this Gerrit patch.",
+      "parentUuid": "0e1cb3f9_4fe423db",
+      "range": {
+        "startLine": 11,
+        "startChar": 296,
+        "endLine": 11,
+        "endChar": 298
+      },
+      "revId": "10513e1aa9528114727399a2337752c777917f30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
