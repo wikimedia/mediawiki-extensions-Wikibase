@@ -97,6 +97,22 @@ local tests = {
 	  args = { 123 },
 	  expect = "bad argument #1 to 'getEntity' (string or nil expected, got number)"
 	},
+	{ name = 'mw.wikibase.getItemIdForLink (site id and title)', func = mw.wikibase.getItemIdForLink,
+      args = { 'fooSiteId', 'FooBarFoo' },
+      expect = { 'Q32487' }
+    },
+    { name = 'mw.wikibase.getItemIdForLink (not existing site id and title)', func = mw.wikibase.getItemIdForLink,
+      args = { 'bar', 'FooBarFoo' },
+      expect = { nil }
+    },
+    { name = 'mw.wikibase.getItemIdForLink (site id and not existing title)', func = mw.wikibase.getItemIdForLink,
+      args = { 'fooSiteId', 'Bar' },
+      expect = { nil }
+    },
+    { name = 'mw.wikibase.getItemIdForLink (title)', func = mw.wikibase.getItemIdForLink,
+      args = { nil, 'FooBarFoo' },
+      expect = { 'Q32487' }
+    },
 	{ name = 'mw.wikibase.label', func = mw.wikibase.label, type='ToString',
 	  args = { 'Q32487' },
 	  expect = { 'Lua Test Item' }

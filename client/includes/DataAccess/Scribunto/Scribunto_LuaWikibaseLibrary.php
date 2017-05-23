@@ -350,9 +350,10 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 *
 	 * @return array
 	 */
-	public function getEntityId( $pageTitle = null ) {
-		$this->checkType( 'getEntityByTitle', 1, $pageTitle, 'string' );
-		return array( $this->getLanguageIndependentLuaBindings()->getEntityId( $pageTitle ) );
+	public function getEntityId( $pageTitle = null, $globalSiteId = null ) {
+		$this->checkType( 'getEntityId', 1, $pageTitle, 'string' );
+		$this->checkType( 'getEntityId', 2, $globalSiteId, [ 'string', 'NULL' ] );
+		return array( $this->getLanguageIndependentLuaBindings()->getEntityId( $pageTitle, $globalSiteId ) );
 	}
 
 	/**

@@ -143,6 +143,17 @@ function wikibase.setupInterface()
 		return php.getEntityUrl( id )
 	end
 
+	-- Get the entity id for a given page.
+    --
+    -- @param {string} [globalSiteId]
+    -- @param {string} [pageTitle]
+    wikibase.getItemIdForLink = function( globalSiteId, pageTitle )
+    	checkTypeMulti( 'getItemIdForLink', 1, globalSiteId, { 'string', 'nil' } )
+		checkTypeMulti( 'getItemIdForLink', 2, pageTitle, { 'string' } )
+    	return php.getEntityId( pageTitle, globalSiteId )
+    end
+
+
 	-- Get the label, label language for the given entity id, if specified,
 	-- or of the connected entity, if exists.
 	--
