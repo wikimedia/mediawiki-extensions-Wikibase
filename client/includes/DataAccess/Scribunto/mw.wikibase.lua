@@ -104,6 +104,14 @@ function wikibase.setupInterface()
 		return pageEntityId
 	end
 
+	-- Get the entity id for a given page in the current wiki.
+	--
+	-- @param {string} pageTitle
+	wikibase.getEntityIdForTitle = function( pageTitle )
+		checkType( 'getEntityIdForTitle', 1, pageTitle, 'string' )
+		return php.getEntityId( pageTitle )
+	end
+
 	-- Get the mw.wikibase.entity object for the current page or for the
 	-- specified id.
 	--
