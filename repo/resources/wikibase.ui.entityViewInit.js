@@ -164,11 +164,13 @@
 	 * Update the state of the watch link if the user has watchdefault enabled.
 	 */
 	function attachWatchLinkUpdater( $entityview, viewName ) {
-		var update = mw.page && mw.page.watch ? mw.page.watch.updateWatchLink : null;
+		var update;
 
-		if ( !update || !mw.user.options.get( 'watchdefault' ) ) {
+		if ( mw.loader.getState( 'mediawiki.page.watch.ajax' ) !== 'ready' || !mw.user.options.get( 'watchdefault' ) ) {
 			return;
 		}
+
+		update = require( 'mediawiki.page.watch.ajax' ).updateWatchLink;
 
 		function updateWatchLink() {
 			// All four supported skins are using the same ID, the other selectors
