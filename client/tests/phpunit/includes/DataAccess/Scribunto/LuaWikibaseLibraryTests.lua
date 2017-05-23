@@ -71,6 +71,18 @@ local tests = {
 	{ name = 'mw.wikibase.getEntityIdForCurrentPage', func = mw.wikibase.getEntityIdForCurrentPage,
 	  expect = { 'Q32487' }
 	},
+	{ name = 'mw.wikibase.getEntityIdForTitle with existing title', func = mw.wikibase.getEntityIdForTitle,
+		args = { 'WikibaseClientDataAccessTest' },
+		expect = { 'Q32487' }
+	},
+	{ name = 'mw.wikibase.getEntityIdForTitle with non existing title', func = mw.wikibase.getEntityIdForTitle,
+		args = { 'Bar' },
+		expect = { nil }
+	},
+	{ name = 'mw.wikibase.getEntityIdForTitle with invalid title', func = mw.wikibase.getEntityIdForTitle,
+		args = { 'a<a' },
+		expect = { nil }
+	},
 	{ name = 'mw.wikibase.getEntity (type)', func = testGetEntityType, type='ToString',
 	  expect = { 'table' }
 	},

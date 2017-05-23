@@ -30,6 +30,10 @@ An example call might look like this:
 mw.wikibase.getEntityIdForCurrentPage() -- Returns the Item id as string, like "Q42"
 </source>
 
+=== mw.wikibase.getEntityIdForTitle ===
+<code>wikibase.getEntityIdForPage( pageTitle )</code><br>
+Takes a page title in the local wiki and returns the connected entity ID, if it exists.
+
 === mw.wikibase.getEntityUrl ===
 <code>wikibase.getEntityUrl()</code><br>
 <code>wikibase.getEntityUrl( id )</code><br>
