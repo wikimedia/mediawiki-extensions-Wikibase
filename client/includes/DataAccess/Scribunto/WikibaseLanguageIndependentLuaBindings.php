@@ -89,14 +89,15 @@ class WikibaseLanguageIndependentLuaBindings {
 	}
 
 	/**
-	 * Get entity id from page title.
+	 * Get entity ID from page title and optionally global site ID.
 	 *
 	 * @param string $pageTitle
+	 * @param string|null $globalSiteId
 	 *
 	 * @return string|null
 	 */
-	public function getEntityId( $pageTitle ) {
-		$id = $this->siteLinkLookup->getItemIdForLink( $this->siteId, $pageTitle );
+	public function getEntityId( $pageTitle, $globalSiteId ) {
+		$id = $this->siteLinkLookup->getItemIdForLink( $globalSiteId ?: $this->siteId, $pageTitle );
 
 		if ( !$id ) {
 			return null;
