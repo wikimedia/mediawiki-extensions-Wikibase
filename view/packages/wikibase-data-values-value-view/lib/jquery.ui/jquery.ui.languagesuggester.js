@@ -58,7 +58,7 @@ $.widget( 'ui.languagesuggester', PARENT, {
 			regex = this._escapeRegex( term ),
 			matcher = new RegExp( regex, 'i' ),
 			subCodeMatcher = new RegExp( '^' + regex + '-', 'i' ),
-			prefixMatcher =  new RegExp( '^' + regex, 'i' ),
+			prefixMatcher = new RegExp( '^' + regex, 'i' ),
 			promoters = [
 				function( item ) { return item.code.toLowerCase() === term.toLowerCase(); },
 				function( item ) { return subCodeMatcher.test( item.code ); },

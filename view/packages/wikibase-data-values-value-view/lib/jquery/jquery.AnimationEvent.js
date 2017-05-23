@@ -149,8 +149,8 @@ jQuery.AnimationEvent = ( function( $, PurposedCallbacks ) {
 	// matter since they will be overwritten when creating an instance, but do it the "clean" way
 	// anyhow:
 	SELF.prototype = new $.Event();
-	delete( SELF.prototype.timeStamp );
-	delete( SELF.prototype[ jQuery.expando ] );
+	delete SELF.prototype.timeStamp;
+	delete SELF.prototype[ jQuery.expando ];
 
 	/**
 	 * All animation step callback option names usable in `jQuery.Animation`'s options.

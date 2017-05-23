@@ -223,7 +223,7 @@
 	 *        parameter. Each inner array should contain a DataTypeMock object or a DataValue
 	 *        constructor and an Expert constructor which is expected to be registered for it.
 	 */
-	function expertStoreRegistrationTest( assert, toRegister, toExpect  ) {
+	function expertStoreRegistrationTest( assert, toRegister, toExpect ) {
 		assert.expect( toRegister.length + toExpect.length );
 		var expertStore = new vv.ExpertStore();
 

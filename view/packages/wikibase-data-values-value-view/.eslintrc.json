@@ -1,0 +1,29 @@
+{
+	"extends": "wikimedia",
+	"env": {
+		"browser": true,
+		"jquery": true
+	},
+	"globals": {
+		"dataValues": false,
+		"globeCoordinate": false,
+		"mediaWiki": false,
+		"util": false,
+		"valueFormatters": false,
+		"valueParsers": false
+	},
+	"rules": {
+		"array-bracket-spacing": "off",
+		"comma-spacing": "off",
+		"computed-property-spacing": "off",
+		"indent": "off",
+		"no-underscore-dangle": "off",
+		"no-unused-vars": "off",
+		"one-var": "off",
+		"operator-linebreak": "off",
+		"space-before-function-paren": "off",
+		"valid-jsdoc": "off",
+		"vars-on-top": "off",
+		"wrap-iife": "off"
+	}
+}
