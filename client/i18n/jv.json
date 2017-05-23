@@ -93,6 +93,7 @@
 	"wikibase-pageinfo-entity-usage-S": "Pranala situs",
 	"wikibase-pageinfo-entity-usage-L": "Labèl: $1",
 	"wikibase-pageinfo-entity-usage-T": "Sesirah",
+	"wikibase-pageinfo-entity-usage-C": "Kalimah: $1",
 	"wikibase-pageinfo-entity-usage-X": "Kabèh data èntitas",
 	"wikibase-pageinfo-entity-usage-O": "Liyané (Perklaring)",
 	"wikibase-property-render-error": "Wurung nyepakaké properti $1: $2",

@@ -110,6 +110,7 @@
 	"wikibase-pageinfo-entity-usage-S": "Link do strony",
 	"wikibase-pageinfo-entity-usage-L": "Etykieta: $1",
 	"wikibase-pageinfo-entity-usage-T": "Tytuł",
+	"wikibase-pageinfo-entity-usage-C": "Deklaracja: $1",
 	"wikibase-pageinfo-entity-usage-X": "Wszystkie dane encji",
 	"wikibase-pageinfo-entity-usage-O": "Inne (stwierdzenia)",
 	"wikibase-property-render-error": "Nie można zrenderować właściwości $1: $2",

@@ -122,6 +122,7 @@
 	"wikibase-pageinfo-entity-usage-S": "网站链接",
 	"wikibase-pageinfo-entity-usage-L": "标签：$1",
 	"wikibase-pageinfo-entity-usage-T": "标题",
+	"wikibase-pageinfo-entity-usage-C": "声明：$1",
 	"wikibase-pageinfo-entity-usage-X": "所有实体数据",
 	"wikibase-pageinfo-entity-usage-O": "其他（声明）",
 	"wikibase-property-render-error": "无法生成属性$1：$2",

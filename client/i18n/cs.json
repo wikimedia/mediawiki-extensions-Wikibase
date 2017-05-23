@@ -85,6 +85,7 @@
 	"wikibase-pageinfo-entity-usage-S": "Odkaz na stránku",
 	"wikibase-pageinfo-entity-usage-L": "Štítek: $1",
 	"wikibase-pageinfo-entity-usage-T": "Název",
+	"wikibase-pageinfo-entity-usage-C": "Tvrzení: $1",
 	"wikibase-pageinfo-entity-usage-X": "Všechny údaje entity",
 	"wikibase-pageinfo-entity-usage-O": "Jiné (tvrzení)",
 	"wikibase-property-render-error": "Nepodařilo se zobrazit vlastnost $1: $2",

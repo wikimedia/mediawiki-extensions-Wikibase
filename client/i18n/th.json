@@ -5,12 +5,13 @@
 			"Horus",
 			"Octahedron80",
 			"Pilarbini",
-			"Pon44695"
+			"Pon44695",
+			"Ans"
 		]
 	},
-	"tooltip-t-wikibase": "ลิงก์เชื่อมต่อข้อมูลที่เก็บไอเท็ม",
+	"tooltip-t-wikibase": "ลิงก์ไปยังรายการในคลังเชื่อมโยงข้อมูล",
 	"wikibase-comment-update": "{{WBREPONAME}} ไอเท็มถูกเปลี่ยนแปลง",
-	"wikibase-dataitem": "{{WBREPONAME}} ไอเท็ม",
+	"wikibase-dataitem": "ในรายการ {{WBREPONAME}}",
 	"wikibase-editlinks": "แก้ไขลิงก์",
 	"wikibase-editlinkstitle": "แก้ไขลิงก์ข้ามภาษา",
 	"wikibase-linkitem-addlinks": "เพิ่มลิงก์ข้ามภาษา",

@@ -84,6 +84,7 @@
 	"wikibase-pageinfo-entity-usage-S": "Sitekoppeling",
 	"wikibase-pageinfo-entity-usage-L": "Label: $1",
 	"wikibase-pageinfo-entity-usage-T": "Titel",
+	"wikibase-pageinfo-entity-usage-C": "Verklaring: $1",
 	"wikibase-pageinfo-entity-usage-X": "Alle entiteitsgegevens",
 	"wikibase-pageinfo-entity-usage-O": "Overige (verklaringen)",
 	"wikibase-property-render-error": "Het verwerken van de eigenschap $1 is mislukt: $2",
