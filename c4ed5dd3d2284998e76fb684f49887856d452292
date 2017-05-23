@@ -22,6 +22,30 @@
       "revId": "c4ed5dd3d2284998e76fb684f49887856d452292",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_21ca1e4b",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2017-05-23T16:23:12Z",
+      "side": 1,
+      "message": "Done. I did all the changes you suggested",
+      "parentUuid": "0e1cb3f9_61fb36df",
+      "range": {
+        "startLine": 150,
+        "startChar": 13,
+        "endLine": 150,
+        "endChar": 29
+      },
+      "revId": "c4ed5dd3d2284998e76fb684f49887856d452292",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
