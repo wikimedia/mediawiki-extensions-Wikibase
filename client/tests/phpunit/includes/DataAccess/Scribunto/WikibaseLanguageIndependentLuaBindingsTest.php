@@ -100,7 +100,10 @@ class WikibaseLanguageIndependentLuaBindingsTest extends PHPUnit_Framework_TestC
 			$usages
 		);
 
-		$id = $wikibaseLuaBindings->getEntityId( 'Rome' );
+		$id = $wikibaseLuaBindings->getEntityId( 'Rome', null );
+		$this->assertSame( 'Q33', $id );
+
+		$id = $wikibaseLuaBindings->getEntityId( 'Rome', 'enwiki' );
 		$this->assertSame( 'Q33', $id );
 
 		$itemId = new ItemId( $id );
@@ -113,7 +116,10 @@ class WikibaseLanguageIndependentLuaBindingsTest extends PHPUnit_Framework_TestC
 			'sitelink usage'
 		);
 
-		$id = $wikibaseLuaBindings->getEntityId( 'Barcelona' );
+		$id = $wikibaseLuaBindings->getEntityId( 'Barcelona', null );
+		$this->assertNull( $id );
+
+		$id = $wikibaseLuaBindings->getEntityId( 'Rome', 'frwiki' );
 		$this->assertNull( $id );
 	}
 
