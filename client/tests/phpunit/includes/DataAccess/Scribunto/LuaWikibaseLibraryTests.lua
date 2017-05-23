@@ -111,6 +111,14 @@ local tests = {
 	  args = { 'a<a' },
 	  expect = { nil }
 	},
+	{ name = 'mw.wikibase.getEntityIdForTitle with existing page and site id', func = mw.wikibase.getEntityIdForTitle,
+		args = { 'FooBarFoo', 'fooSiteId' },
+		expect = { 'Q32487' }
+	},
+	{ name = 'mw.wikibase.getEntityIdForTitle with non existing site id', func = mw.wikibase.getEntityIdForTitle,
+		args = { 'FooBarFoo', 'bar' },
+		expect = { nil }
+	},
 	{ name = 'mw.wikibase.getEntity (type)', func = testGetEntityType, type='ToString',
 	  expect = { 'table' }
 	},
