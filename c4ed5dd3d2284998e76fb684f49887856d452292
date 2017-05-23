@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_61fb36df",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-23T15:48:59Z",
+      "side": 1,
+      "message": "I think this is not a good method name for two reasons:\n* Please do not use \"…Item…\" but \"…Entity…\" as in the similar method \"getEntityIdForCurrentPage\" above. Even if client pages are currently linked to items, there is no strict guarantee this will always be the case. Using the generic term \"entity\" is fine here.\n* I find the word \"…Link\" confusing for two reasons. It is easily confused with \"sitelink\". And even if a user realizes this is not about sitelinks, what kind of link is meant? A globalSiteId and a pageTitle is not a \"link\". \"…ForPage\" might work.\n\nYou could even flip the parameters and make the globalSiteId optional. Not sure if this is helpful.",
+      "range": {
+        "startLine": 150,
+        "startChar": 13,
+        "endLine": 150,
+        "endChar": 29
+      },
+      "revId": "c4ed5dd3d2284998e76fb684f49887856d452292",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
