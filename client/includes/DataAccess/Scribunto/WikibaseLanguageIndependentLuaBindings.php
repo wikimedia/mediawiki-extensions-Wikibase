@@ -89,21 +89,28 @@ class WikibaseLanguageIndependentLuaBindings {
 	}
 
 	/**
-	 * Get entity id from page title.
+	 * Get entity ID from page title and optionally global site ID.
 	 *
 	 * @param string $pageTitle
+	 * @param string|null $globalSiteId
 	 *
 	 * @return string|null
 	 */
-	public function getEntityId( $pageTitle ) {
-		$id = $this->siteLinkLookup->getItemIdForLink( $this->siteId, $pageTitle );
+	public function getEntityId( $pageTitle, $globalSiteId ) {
+		$globalSiteId = $globalSiteId ?: $this->siteId;
+		$itemId = $this->siteLinkLookup->getItemIdForLink( $globalSiteId, $pageTitle );
 
-		if ( !$id ) {
+		if ( !$itemId ) {
 			return null;
 		}
 
-		$this->usageAccumulator->addTitleUsage( $id );
-		return $id->getSerialization();
+		if ( $globalSiteId === $this->siteId ) {
+			$this->usageAccumulator->addTitleUsage( $itemId );
+		} else {
+			$this->usageAccumulator->addSiteLinksUsage( $itemId );
+		}
+
+		return $itemId->getSerialization();
 	}
 
 	/**
