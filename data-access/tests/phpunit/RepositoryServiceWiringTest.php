@@ -9,6 +9,7 @@ use Wikibase\DataAccess\RepositoryServiceContainer;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParser;
+use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -48,6 +49,7 @@ class RepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 			[ 'EntityRevisionLookup', EntityRevisionLookup::class ],
 			[ 'PrefetchingTermLookup', PrefetchingTermLookup::class ],
 			[ 'PropertyInfoLookup', PropertyInfoLookup::class ],
+			[ 'TermBuffer', TermBuffer::class ],
 			[ 'TermIndex', TermIndex::class ],
 			[ 'TermSearchInteractorFactory', TermSearchInteractorFactory::class ],
 			[ 'WikiPageEntityMetaDataAccessor', WikiPageEntityMetaDataAccessor::class ],
@@ -75,6 +77,7 @@ class RepositoryServiceWiringTest extends \PHPUnit_Framework_TestCase {
 				'EntityRevisionLookup',
 				'PrefetchingTermLookup',
 				'PropertyInfoLookup',
+				'TermBuffer',
 				'TermIndex',
 				'TermSearchInteractorFactory',
 				'WikiPageEntityMetaDataAccessor'

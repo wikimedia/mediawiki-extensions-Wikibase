@@ -14,7 +14,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
  *
  * @license GPL-2.0+
  */
-interface EntityDataRetrievalServiceFactory {
+interface DataAccessServices {
 
 	/**
 	 * @return EntityInfoBuilderFactory
