@@ -33,10 +33,27 @@ class SetAliasesTest extends ModifyTermTestCase {
 		self::$hasSetup = true;
 	}
 
-	public function testSetAliases_create() {
+	public function testSetAliases_cannotCreateProperty() {
 		$params = array(
 			'action' => self::$testAction,
 			'new' => 'property',
+			'language' => 'en',
+			'set' => 'Foo',
+		);
+
+		// -- do the request --------------------------------------------------
+		try {
+			$this->doApiRequestWithToken( $params );
+			$this->fail( 'Implicit creation of Property should fail.' );
+		} catch ( ApiUsageException $ex ) {
+			$this->assertEquals( 'failed-save', $ex->getCodeString() );
+		}
+	}
+
+	public function testSetAliases_createItem() {
+		$params = array(
+			'action' => self::$testAction,
+			'new' => 'item',
 			'language' => 'en',
 			'set' => 'Foo',
 		);
