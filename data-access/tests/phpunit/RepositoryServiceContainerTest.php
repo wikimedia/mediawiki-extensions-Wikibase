@@ -109,7 +109,7 @@ class RepositoryServiceContainerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param $event
+	 * @param string $event
 	 *
 	 * Returns a RepositoryServiceContainer with the following services defined:
 	 *  - 'watcherService' - dummy service implementing EntityStoreWatcher interface,

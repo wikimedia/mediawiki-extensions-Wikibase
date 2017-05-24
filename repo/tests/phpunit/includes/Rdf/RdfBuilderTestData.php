@@ -85,20 +85,21 @@ class RdfBuilderTestData {
 	}
 
 	/**
-	 * @param $dataSetName
+	 * @param string $dataSetName
+	 *
 	 * @return string
 	 */
 	private function getDataSetFileName( $dataSetName ) {
-		return $filename = "{$this->dataDir}/$dataSetName.nt";
+		return "{$this->dataDir}/$dataSetName.nt";
 	}
 
 	/**
-	 * @param $dataSetName
+	 * @param string $dataSetName
+	 *
 	 * @return bool
 	 */
 	public function hasDataSet( $dataSetName ) {
-		$filename = $this->getDataSetFileName( $dataSetName );
-		return file_exists( $filename );
+		return file_exists( $this->getDataSetFileName( $dataSetName ) );
 	}
 
 	/**
