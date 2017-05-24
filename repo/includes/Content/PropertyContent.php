@@ -112,7 +112,7 @@ class PropertyContent extends EntityContent {
 	 */
 	public function isValid() {
 		//TODO: provide a way to get the data type from the holder directly!
-		return parent::isValid() && $this->getProperty()->getDataTypeId() !== null;
+		return parent::isValid() && $this->getProperty()->getDataTypeId() !== '';
 	}
 
 	/**
