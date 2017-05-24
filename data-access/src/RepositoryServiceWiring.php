@@ -93,6 +93,13 @@ return [
 		);
 	},
 
+	'TermBuffer' => function(
+		RepositoryServiceContainer $services,
+		WikibaseClient $client
+	) {
+		return $services->getService( 'PrefetchingTermLookup' );
+	},
+
 	'TermIndex' => function(
 		RepositoryServiceContainer $services,
 		WikibaseClient $client
