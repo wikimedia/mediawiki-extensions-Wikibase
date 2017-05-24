@@ -21,7 +21,7 @@ use Wikibase\Lib\Store\EntityStoreWatcher;
  *
  * @license GPL-2.0+
  */
-class RepositoryServiceContainer extends ServiceContainer implements EntityStoreWatcher {
+class RepositoryServiceContainer extends ServiceContainer implements DataAccessServices, EntityStoreWatcher {
 
 	/**
 	 * @var string|false
@@ -166,6 +166,30 @@ class RepositoryServiceContainer extends ServiceContainer implements EntityStore
 				$service->redirectUpdated( $entityRedirect, $revisionId );
 			}
 		}
+	}
+
+	public function getEntityInfoBuilderFactory() {
+		return $this->getService( 'EntityInfoBuilderFactory' );
+	}
+
+	public function getEntityPrefetcher() {
+		return $this->getService( 'EntityPrefetcher' );
+	}
+
+	public function getEntityRevisionLookup() {
+		return $this->getService( 'EntityRevisionLookup' );
+	}
+
+	public function getPropertyInfoLookup() {
+		return $this->getService( 'PropertyInfoLookup' );
+	}
+
+	public function getTermBuffer() {
+		return $this->getService( 'TermBuffer' );
+	}
+
+	public function getTermSearchInteractorFactory() {
+		return $this->getService( 'TermSearchInteractorFactory' );
 	}
 
 }
