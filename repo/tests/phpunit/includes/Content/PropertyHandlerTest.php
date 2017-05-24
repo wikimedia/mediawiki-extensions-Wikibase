@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Content;
 
+use RuntimeException;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
@@ -123,6 +124,20 @@ class PropertyHandlerTest extends EntityHandlerTest {
 
 	protected function getExpectedSearchIndexFields() {
 		return [ 'label_count', 'statement_count' ];
+	}
+
+	public function testMakeEmptyContent() {
+		$this->setExpectedException( RuntimeException::class );
+
+		$handler = $this->getHandler();
+		$handler->makeEmptyContent()->getEntity();
+	}
+
+	public function testMakeEmptyEntity() {
+		$this->setExpectedException( RuntimeException::class );
+
+		$handler = $this->getHandler();
+		$handler->makeEmptyEntity();
 	}
 
 }

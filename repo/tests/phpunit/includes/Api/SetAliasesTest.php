@@ -36,7 +36,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 	public function testSetAliases_create() {
 		$params = array(
 			'action' => self::$testAction,
-			'new' => 'property',
+			'new' => 'item',
 			'language' => 'en',
 			'set' => 'Foo',
 		);

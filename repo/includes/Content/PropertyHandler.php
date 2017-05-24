@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Content;
 use DataUpdate;
 use IContextSource;
 use Page;
+use RuntimeException;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -206,7 +207,8 @@ class PropertyHandler extends EntityHandler {
 	 * @return EntityContent
 	 */
 	public function makeEmptyEntity() {
-		return Property::newFromType( '' );
+		// XXX: throwing this exception is strictly speaking an interface violation
+		throw new RuntimeException( 'Properties cannot be created empty.' );
 	}
 
 	/**
