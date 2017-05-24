@@ -90,7 +90,8 @@ class RemoveClaims extends ApiBase {
 	public function execute() {
 		$params = $this->extractRequestParams();
 		$entityId = $this->getEntityId( $params );
-		$entity = $this->entitySavingHelper->loadEntity( $entityId );
+		$baseRev = isset( $params['baserevid'] ) ? (int)$params['baserevid'] : 0;
+		$entity = $this->entitySavingHelper->loadExistingEntityByEntityId( $entityId, $baseRev );
 
 		if ( $entity instanceof StatementListProvider ) {
 			$this->assertStatementListContainsGuids( $entity->getStatements(), $params['claim'] );

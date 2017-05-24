@@ -218,6 +218,32 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	}
 
 	/**
+	 * @param EntityId $entityId ID of the entity to load.
+	 *
+	 * @param int $baseRev
+	 * @return EntityDocument
+	 */
+	public function loadExistingEntityByEntityId( EntityId $entityId, $baseRev ) {
+		$entityRevision = $this->loadEntityRevision( $entityId, $baseRev );
+
+		if ( !$entityRevision ) {
+			$this->errorReporter->dieError(
+				'No entity was identified',
+				'no-entity-id'
+			);
+		}
+
+		$this->entitySavingFlags = EDIT_UPDATE;
+		$this->baseRevisionId = $entityRevision->getRevisionId();
+		$entity = $entityRevision->getEntity();
+
+		// remember the entity ID
+		$this->entityId = $entity->getId();
+
+		return $entity;
+	}
+
+	/**
 	 * @return bool
 	 */
 	private function isEntityCreationSupported() {
