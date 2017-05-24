@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_2211b9b1",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsMergeTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-24T13:53:28Z",
+      "side": 1,
+      "message": "This especially looks weird. I wish we could either find better names, or get rid of the \"create\" element entirely.\n\n ItemBuilder::empty( … )-\u003ebuild();\n ItemBuilder::withId( … )-\u003ebuild();\n\nThis means everything must be static, and all methods must check if they are called in a static or non-static context.",
+      "range": {
+        "startLine": 198,
+        "startChar": 28,
+        "endLine": 198,
+        "endChar": 45
+      },
+      "revId": "c69e4b7ec969863d836489a3bbc4bef20fdbe7e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_024035a7",
+        "filename": "repo/tests/phpunit/includes/ItemBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-24T13:53:28Z",
+      "side": 1,
+      "message": "I guess this was meant to be private?",
+      "range": {
+        "startLine": 53,
+        "startChar": 1,
+        "endLine": 53,
+        "endChar": 7
+      },
+      "revId": "c69e4b7ec969863d836489a3bbc4bef20fdbe7e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

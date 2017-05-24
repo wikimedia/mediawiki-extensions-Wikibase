@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_22ce9931",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsMergeTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2017-05-24T13:53:28Z",
+      "side": 0,
+      "message": "I suggest to not touch trivial usages like this in this first patch, but only usages that really benefit from the introduced builder approach. By \"benefit\" I mean all usages that call at least one of the -\u003ewith…( … ) methods.",
+      "range": {
+        "startLine": 204,
+        "startChar": 3,
+        "endLine": 204,
+        "endChar": 13
+      },
+      "revId": "8e7b58029243bd77e9bec6007e0c41a6fd794436",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
