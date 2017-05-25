@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_93d576eb",
+        "filename": "repo/tests/phpunit/includes/AnItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-05-25T11:27:21Z",
+      "side": 1,
+      "message": "I understand that it is a controversial name for class, but it reads quiet nicely:\n`AnItem::havingId(\u0027Q1\u0027)-\u003ebuild()`",
+      "range": {
+        "startLine": 18,
+        "startChar": 6,
+        "endLine": 18,
+        "endChar": 12
+      },
+      "revId": "7a9095876b0b80f200b462bfe33b735cbe9caebe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_b3d2faff",
+        "filename": "repo/tests/phpunit/includes/AnItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-05-25T11:27:21Z",
+      "side": 1,
+      "message": "Can also be replaced with `__callStatic` method and `@method` annotations on the class level.",
+      "range": {
+        "startLine": 49,
+        "startChar": 1,
+        "endLine": 53,
+        "endChar": 1
+      },
+      "revId": "7a9095876b0b80f200b462bfe33b735cbe9caebe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
