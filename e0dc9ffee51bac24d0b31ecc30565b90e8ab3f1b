@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_b04d10c9",
+        "filename": ".jshintrc",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2017-05-25T06:15:46Z",
+      "side": 1,
+      "message": "Comma is missing.",
+      "range": {
+        "startLine": 33,
+        "startChar": 18,
+        "endLine": 33,
+        "endChar": 18
+      },
+      "revId": "e0dc9ffee51bac24d0b31ecc30565b90e8ab3f1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
