@@ -22,6 +22,30 @@
       "revId": "8e7b58029243bd77e9bec6007e0c41a6fd794436",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_d3cf6e59",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsMergeTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-05-25T11:23:55Z",
+      "side": 0,
+      "message": "The benefit here is decoupling test from the constructor.\nBut I agree that `ItemBuilder::create()-\u003ebuild()` doesn\u0027t look very nice. Something like `ItemBuilder::empty()` is probably better.",
+      "parentUuid": "0e1cb3f9_22ce9931",
+      "range": {
+        "startLine": 204,
+        "startChar": 3,
+        "endLine": 204,
+        "endChar": 13
+      },
+      "revId": "8e7b58029243bd77e9bec6007e0c41a6fd794436",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

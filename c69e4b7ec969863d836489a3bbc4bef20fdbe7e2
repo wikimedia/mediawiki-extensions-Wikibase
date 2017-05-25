@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_33e6eae3",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsMergeTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2017-05-25T11:23:55Z",
+      "side": 1,
+      "message": "I\u0027ve tried two different approaches. See PS2 and PS3.\n\nMaking the same method being able to work in bot static and non-static context is impossible in PHP as far as I understood.",
+      "parentUuid": "0e1cb3f9_2211b9b1",
+      "range": {
+        "startLine": 198,
+        "startChar": 28,
+        "endLine": 198,
+        "endChar": 45
+      },
+      "revId": "c69e4b7ec969863d836489a3bbc4bef20fdbe7e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_024035a7",
         "filename": "repo/tests/phpunit/includes/ItemBuilder.php",
         "patchSetId": 1
