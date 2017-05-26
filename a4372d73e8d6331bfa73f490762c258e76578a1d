@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_d4575127",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2017-05-26T10:16:38Z",
+      "side": 1,
+      "message": "it should be $success \u003d $this-\u003einsertTerm( $entityIdentifiers, $term, $dbw ); and breaks if not successful.",
+      "range": {
+        "startLine": 211,
+        "startChar": 3,
+        "endLine": 211,
+        "endChar": 56
+      },
+      "revId": "a4372d73e8d6331bfa73f490762c258e76578a1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
