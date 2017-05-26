@@ -68,7 +68,7 @@
 	"wikibase-watchlist-show-changes-pref": "Visa {{WBREPONAME}}redigeringar i din bevakningslista",
 	"wikibase-error-deserialize-error": "Misslyckades med att avserialisera data.",
 	"wikibase-error-serialize-error": "Misslyckades att serialisera data.",
-	"wikibase-error-invalid-entity-id": "Det angivna ID:et är okänt för systemet. Var god använd ett giltigt enhets-ID.",
+	"wikibase-error-invalid-entity-id": "ID \"$2\" är okänt för systemet. Var god använd ett giltigt enhets-ID.",
 	"wikibase-error-exceeded-entity-access-limit": "Alltför många {{WBREPONAME}}-enheter hämtade.",
 	"unconnectedpages": "Sidor som inte är anslutna till objekt",
 	"unconnectedpages-summary": "Denna sida listar sidor utan något anslutet dataobjekt (i namnrymder som stöder objekt). Denna sida är sorterad efter fallande sid-ID, så att nyare sidor listas först.",

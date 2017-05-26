@@ -75,7 +75,7 @@
 	"wikibase-watchlist-show-changes-pref": "Amosar les ediciones de {{WBREPONAME}} na so llista de vixilancia",
 	"wikibase-error-deserialize-error": "Falló la deserialización de los datos",
 	"wikibase-error-serialize-error": "Falló la serialización de los datos",
-	"wikibase-error-invalid-entity-id": "La ID qu'escribió ye desconocida pal sistema. Por favor, use una ID d'entidá válida.",
+	"wikibase-error-invalid-entity-id": "La ID «$2» ye desconocida pal sistema. Por favor, usa una ID d'entidá válida.",
 	"wikibase-error-exceeded-entity-access-limit": "Accedióse a demasiaes entidaes de {{WBREPONAME}}.",
 	"unconnectedpages": "Páxines nun coneutaes con elementos",
 	"unconnectedpages-summary": "Esta páxina ye una llista de páxines sin nengún elementu de datos conectáu (en espacios de nomes qu'almiten elementos coneutaos). La llista ta ordenada por ID de páxina descendente, de mou que les páxines más nueves apaecen primero.",

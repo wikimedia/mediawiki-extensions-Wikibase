@@ -112,6 +112,7 @@
 	"wikibase-pageinfo-entity-usage-S": "קישור אתר",
 	"wikibase-pageinfo-entity-usage-L": "תווית: $1",
 	"wikibase-pageinfo-entity-usage-T": "כותרת",
+	"wikibase-pageinfo-entity-usage-C": "קביעה: $1",
 	"wikibase-pageinfo-entity-usage-X": "כל נתוני הישות",
 	"wikibase-pageinfo-entity-usage-O": "אחר (קביעוֹת)",
 	"wikibase-property-render-error": "כשל בהכנת המאפיין $1 לתצוגה: $2",

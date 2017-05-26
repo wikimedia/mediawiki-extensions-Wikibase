@@ -70,6 +70,7 @@
 	"wikibase-pageinfo-entity-usage-S": "Link vum Site",
 	"wikibase-pageinfo-entity-usage-L": "Etikett: $1",
 	"wikibase-pageinfo-entity-usage-T": "Titel",
+	"wikibase-pageinfo-entity-usage-C": "Deklaratioun: $1",
 	"wikibase-otherprojects": "An anere Projeten",
 	"notification-link-text-view-item": "Element {{GENDER:$1|weisen}}"
 }
