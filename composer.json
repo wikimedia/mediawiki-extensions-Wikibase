@@ -76,6 +76,7 @@
 		}
 	},
 	"scripts": {
+		"fix": "phpcbf",
 		"test": [
 			"@validate --no-interaction",
 			"parallel-lint . --exclude vendor",
