@@ -1,4 +1,4 @@
-( function( mw, wb, $, util ) {
+( function ( mw, wb, $, util ) {
 	'use strict';
 
 	var PARENT = $.ui.EditableTemplatedWidget;
@@ -21,7 +21,7 @@
 	 */
 	function getRankName( rank ) {
 		for ( var rankName in wb.datamodel.Statement.RANK ) {
-			if ( rank === wb.datamodel.Statement.RANK[rankName] ) {
+			if ( rank === wb.datamodel.Statement.RANK[ rankName ] ) {
 				return rankName.toLowerCase();
 			}
 		}
@@ -84,7 +84,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		_create: function() {
+		_create: function () {
 			var self = this;
 
 			PARENT.prototype._create.call( this );
@@ -92,7 +92,7 @@
 			if ( !$menu ) {
 				$menu = this._buildMenu().appendTo( 'body' ).hide();
 
-				$menu.on( 'click.' + this.widgetName, function( event ) {
+				$menu.on( 'click.' + this.widgetName, function ( event ) {
 					var $li = $( event.target ).closest( 'li' ),
 						rank = $li.data( self.widgetName + '-menuitem-rank' );
 
@@ -104,17 +104,17 @@
 
 			this.element
 			.addClass( this.widgetFullName )
-			.on( 'mouseover.' + this.widgetName, function( event ) {
+			.on( 'mouseover.' + this.widgetName, function ( event ) {
 				if ( !self.option( 'disabled' ) && self.isInEditMode() ) {
 					self.element.addClass( 'ui-state-hover' );
 				}
 			} )
-			.on( 'mouseout.' + this.widgetName, function( event ) {
+			.on( 'mouseout.' + this.widgetName, function ( event ) {
 				if ( !self.option( 'disabled' ) && self.isInEditMode() ) {
 					self.element.removeClass( 'ui-state-hover' );
 				}
 			} )
-			.on( 'click.' + this.widgetName, function( event ) {
+			.on( 'click.' + this.widgetName, function ( event ) {
 				if ( self.option( 'disabled' ) || !self.isInEditMode() || $menu.is( ':visible' ) ) {
 					$menu.hide();
 					return;
@@ -129,7 +129,7 @@
 
 				// Close the menu when clicking, regardless of whether the click is performed on the
 				// menu itself or outside of it:
-				var degrade = function( event ) {
+				var degrade = function ( event ) {
 					if ( event.target !== self.element.get( 0 ) ) {
 						$menu.hide();
 						self.element.removeClass( 'ui-state-active' );
@@ -137,8 +137,8 @@
 					self._unbindGlobalEventListeners();
 				};
 
-				$( document ).on( 'mouseup.' + self.widgetName, degrade  );
-				$( window ).on( 'resize.' + self.widgetName, function( event ) { self.repositionMenu(); } );
+				$( document ).on( 'mouseup.' + self.widgetName, degrade );
+				$( window ).on( 'resize.' + self.widgetName, function ( event ) { self.repositionMenu(); } );
 			} );
 
 			this._setRank( this.options.value );
@@ -147,7 +147,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		destroy: function() {
+		destroy: function () {
 			if ( $( '.' + this.widgetFullName ).length === 0 ) {
 				$menu.data( 'menu' ).destroy();
 				$menu.remove();
@@ -166,7 +166,7 @@
 		 * @inheritdoc
 		 * @protected
 		 */
-		_setOption: function( key, value ) {
+		_setOption: function ( key, value ) {
 			var response = PARENT.prototype._setOption.apply( this, arguments );
 			if ( key === 'rank' ) {
 				this._setRank( value );
@@ -182,7 +182,7 @@
 		 *
 		 * @private
 		 */
-		_unbindGlobalEventListeners: function() {
+		_unbindGlobalEventListeners: function () {
 			$( document ).add( $( window ) ).off( '.' + this.widgetName );
 		},
 
@@ -193,11 +193,11 @@
 		 *
 		 * @return {jQuery}
 		 */
-		_buildMenu: function() {
+		_buildMenu: function () {
 			var self = this,
 				$menu = $( '<ul/>' ).addClass( this.widgetFullName + '-menu' );
 
-			$.each( wb.datamodel.Statement.RANK, function( rankName, rank ) {
+			$.each( wb.datamodel.Statement.RANK, function ( rankName, rank ) {
 				rankName = rankName.toLowerCase();
 
 				$menu.append(
@@ -208,7 +208,7 @@
 						$( '<a/>' )
 						.text( mw.msg( 'wikibase-statementview-rank-' + rankName ) )
 						.attr( 'title', mw.msg( 'wikibase-statementview-rank-tooltip-' + rankName ) )
-						.on( 'click.' + self.widgetName, function( event ) {
+						.on( 'click.' + self.widgetName, function ( event ) {
 							event.preventDefault();
 						} )
 					)
@@ -225,7 +225,7 @@
 		 * @param {number} [rank]
 		 * @return {number|undefined}
 		 */
-		value: function( rank ) {
+		value: function ( rank ) {
 			if ( rank === undefined ) {
 				return this._rank;
 			}
@@ -242,7 +242,7 @@
 		 *
 		 * @param {number} rank
 		 */
-		_setRank: function( rank ) {
+		_setRank: function ( rank ) {
 			this._rank = rank;
 
 			if ( $menu && $menu.data( this.widgetName ) === this ) {
@@ -257,7 +257,7 @@
 		 *
 		 * @private
 		 */
-		_updateMenuCss: function() {
+		_updateMenuCss: function () {
 			$menu.children().removeClass( 'ui-state-active' );
 			$menu
 			.children( '.' + this.widgetFullName + '-menuitem-' + getRankName( this._rank ) )
@@ -269,10 +269,10 @@
 		 *
 		 * @private
 		 */
-		_updateIcon: function() {
+		_updateIcon: function () {
 			for ( var rankId in wb.datamodel.Statement.RANK ) {
 				var rankName = rankId.toLowerCase(),
-					selected = this._rank === wb.datamodel.Statement.RANK[rankId];
+					selected = this._rank === wb.datamodel.Statement.RANK[ rankId ];
 
 				this.$icon.toggleClass( this.widgetFullName + '-' + rankName, selected );
 
@@ -285,7 +285,7 @@
 		/**
 		 * (Re-)positions the menu.
 		 */
-		repositionMenu: function() {
+		repositionMenu: function () {
 			$menu.position( {
 				of: this.$icon,
 				my: ( this.options.isRTL ? 'right' : 'left' ) + ' top',
@@ -298,7 +298,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		draw: function() {
+		draw: function () {
 			if ( this.isInEditMode() ) {
 				this.element
 				.addClass( 'ui-state-default ui-state-active' )
@@ -312,11 +312,11 @@
 			return $.Deferred().resolve().promise();
 		},
 
-		_startEditing: function() {
+		_startEditing: function () {
 			return this.draw();
 		},
 
-		_stopEditing: function( dropValue ) {
+		_stopEditing: function ( dropValue ) {
 			// Hide the menu the rank selector currently references to:
 			if ( $menu && $menu.data( this.widgetName ) === this ) {
 				$menu.hide();

@@ -2,13 +2,13 @@
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 	var MODULE = wb.entityChangers;
 
 	function chain( tasks ) {
-		return tasks.reduce( function( promise, task ) {
+		return tasks.reduce( function ( promise, task ) {
 			return promise.then( task );
 		}, $.Deferred().resolve().promise() );
 	}
@@ -43,12 +43,12 @@
 		 *         Rejected parameters:
 		 *         - {wikibase.api.RepoApiError}
 		 */
-		save: function( newSiteLinkSet, oldSiteLinkSet ) {
+		save: function ( newSiteLinkSet, oldSiteLinkSet ) {
 			function getRemovedSiteLinkIds() {
 				var currentSiteIds = newSiteLinkSet.getKeys();
 				var removedSiteLinkIds = [];
 
-				oldSiteLinkSet.each( function( siteId ) {
+				oldSiteLinkSet.each( function ( siteId ) {
 					if ( $.inArray( siteId, currentSiteIds ) === -1 ) {
 						removedSiteLinkIds.push( siteId );
 					}
@@ -60,11 +60,11 @@
 			function getDiffValue() {
 				var siteLinks = [],
 					unchangedSiteLinks = [];
-				siteLinks = siteLinks.concat( getRemovedSiteLinkIds().map( function( siteId ) {
+				siteLinks = siteLinks.concat( getRemovedSiteLinkIds().map( function ( siteId ) {
 					return new wb.datamodel.SiteLink( siteId, '' );
 				} ) );
 
-				newSiteLinkSet.each( function( site, sitelink ) {
+				newSiteLinkSet.each( function ( site, sitelink ) {
 					if ( !sitelink.equals( oldSiteLinkSet.getItemByKey( site ) ) ) {
 						siteLinks.push( sitelink );
 					} else {
@@ -76,18 +76,18 @@
 
 			var diffValue = getDiffValue();
 			var siteLinksChanger = this._siteLinksChanger;
-			var resultValue =  diffValue.unchanged;
+			var resultValue = diffValue.unchanged;
 
-			return chain( diffValue.changed.map( function( siteLink ) {
-				return function() {
-					return siteLinksChanger.setSiteLink( siteLink ).done( function( savedSiteLink ) {
+			return chain( diffValue.changed.map( function ( siteLink ) {
+				return function () {
+					return siteLinksChanger.setSiteLink( siteLink ).done( function ( savedSiteLink ) {
 						if ( savedSiteLink ) { // Is null if a site link was removed
 							resultValue.push( savedSiteLink );
 						}
 					} );
 				};
-			} ) ).then( function() {
-				return new wb.datamodel.SiteLinkSet( resultValue.sort( function( s1, s2 ) {
+			} ) ).then( function () {
+				return new wb.datamodel.SiteLinkSet( resultValue.sort( function ( s1, s2 ) {
 					return s1.getSiteId().localeCompare( s2.getSiteId() );
 				} ) );
 			} );

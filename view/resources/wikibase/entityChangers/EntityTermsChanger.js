@@ -2,13 +2,13 @@
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 	var MODULE = wb.entityChangers;
 
 	function chain( tasks ) {
-		return tasks.reduce( function( promise, task ) {
+		return tasks.reduce( function ( promise, task ) {
 			return promise.then( task );
 		}, $.Deferred().resolve().promise() );
 	}
@@ -55,7 +55,7 @@
 		 *         Rejected parameters:
 		 *         - {wikibase.api.RepoApiError}
 		 */
-		save: function( newFingerprint, oldFingerprint ) {
+		save: function ( newFingerprint, oldFingerprint ) {
 			var labelsChanger = this._labelsChanger,
 				descriptionsChanger = this._descriptionsChanger,
 				aliasesChanger = this._aliasesChanger,
@@ -65,15 +65,15 @@
 			Array.prototype.push.apply( changes, this._getTermsChanges(
 				newFingerprint.getLabels(),
 				oldFingerprint.getLabels(),
-				function( newTerm ) {
-					return function() {
-						return labelsChanger.setLabel( newTerm ).done( function( savedLabel ) {
+				function ( newTerm ) {
+					return function () {
+						return labelsChanger.setLabel( newTerm ).done( function ( savedLabel ) {
 							if ( savedLabel === null ) {
 								resultFingerprint.removeLabelFor( newTerm.getLanguageCode() );
 							} else {
 								resultFingerprint.setLabel( newTerm.getLanguageCode(), savedLabel );
 							}
-						} ).fail( function( error ) {
+						} ).fail( function ( error ) {
 							error.context = { type: 'label', value: newTerm };
 						} );
 					};
@@ -82,15 +82,15 @@
 			Array.prototype.push.apply( changes, this._getTermsChanges(
 				newFingerprint.getDescriptions(),
 				oldFingerprint.getDescriptions(),
-				function( newTerm ) {
-					return function() {
-						return descriptionsChanger.setDescription( newTerm ).done( function( savedDescription ) {
+				function ( newTerm ) {
+					return function () {
+						return descriptionsChanger.setDescription( newTerm ).done( function ( savedDescription ) {
 							if ( savedDescription === null ) {
 								resultFingerprint.removeDescriptionFor( newTerm.getLanguageCode() );
 							} else {
 								resultFingerprint.setDescription( newTerm.getLanguageCode(), savedDescription );
 							}
-						} ).fail( function( error ) {
+						} ).fail( function ( error ) {
 							error.context = { type: 'description', value: newTerm };
 						} );
 					};
@@ -101,11 +101,11 @@
 			Array.prototype.push.apply( changes, this._getTermsChanges(
 				newFingerprint.getAliases(),
 				oldFingerprint.getAliases(),
-				function( newMultiTerm ) {
-					return function() {
-						return aliasesChanger.setAliases( newMultiTerm ).done( function( savedAliases ) {
+				function ( newMultiTerm ) {
+					return function () {
+						return aliasesChanger.setAliases( newMultiTerm ).done( function ( savedAliases ) {
 							resultFingerprint.setAliases( newMultiTerm.getLanguageCode(), savedAliases );
-						} ).fail( function( error ) {
+						} ).fail( function ( error ) {
 							error.context = { type: 'aliases', value: newMultiTerm };
 						} );
 					};
@@ -115,7 +115,7 @@
 			// TODO: These changes should not need to be queued.
 			// However, the back-end produces edit conflicts when issuing multiple requests at once.
 			// Remove queueing as soon as the back-end is fixed; see bug T74020.
-			return chain( changes ).then( function() {
+			return chain( changes ).then( function () {
 				return resultFingerprint;
 			} );
 		},
@@ -127,10 +127,10 @@
 		 * @return {Function[]}
 		 * @private
 		 */
-		_getTermsChanges: function( newTerms, oldTerms, getChange ) {
+		_getTermsChanges: function ( newTerms, oldTerms, getChange ) {
 			var changes = [];
 
-			newTerms.each( function( languageCode, newTerm ) {
+			newTerms.each( function ( languageCode, newTerm ) {
 				var oldTerm = oldTerms.getItemByKey( languageCode );
 
 				if ( !newTerm.equals( oldTerm ) ) {
@@ -138,12 +138,12 @@
 				}
 			} );
 
-			oldTerms.each( function( languageCode, oldTerm ) {
+			oldTerms.each( function ( languageCode, oldTerm ) {
 				var isTerm = oldTerm instanceof wb.datamodel.Term;
 
-				if ( !newTerms.hasItemForKey( languageCode )
+				if ( !newTerms.hasItemForKey( languageCode ) ||
 					// There are also MultiTerms where this does not apply
-					|| ( isTerm && newTerms.getItemByKey( languageCode ).getText() === '' )
+					( isTerm && newTerms.getItemByKey( languageCode ).getText() === '' )
 				) {
 					changes.push( getChange(
 						new oldTerm.constructor( languageCode, isTerm ? '' : [] )

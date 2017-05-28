@@ -3,7 +3,7 @@
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  * @author Thiemo Mättig
  */
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 	var WIDGET_NAME = 'statementgrouplabelscroll';
@@ -20,7 +20,7 @@
 
 	function updateActiveInstances() {
 		for ( var i in activeInstances ) {
-			activeInstances[i].update();
+			activeInstances[ i ].update();
 		}
 	}
 
@@ -47,16 +47,16 @@
 	function elementPartlyVerticallyInViewport( elem ) {
 		var top = $( elem ).offset().top;
 		return (
-			top < ( window.pageYOffset + window.innerHeight )
-			&& ( top + elem.offsetHeight ) > window.pageYOffset
+			top < ( window.pageYOffset + window.innerHeight ) &&
+			( top + elem.offsetHeight ) > window.pageYOffset
 		);
 	}
 
 	function elementFullyVerticallyInViewport( elem ) {
 		var top = $( elem ).offset().top;
 		return (
-			top >= window.pageYOffset
-			&& ( top + elem.offsetHeight ) <= ( window.pageYOffset + window.innerHeight )
+			top >= window.pageYOffset &&
+			( top + elem.offsetHeight ) <= ( window.pageYOffset + window.innerHeight )
 		);
 	}
 
@@ -81,7 +81,7 @@
 			return null;
 		}
 
-		$mainSnaks.each( function( i, mainSnakNode ) {
+		$mainSnaks.each( function ( i, mainSnakNode ) {
 			// Take first Main Snak value in viewport. If value is not fully visible in viewport,
 			// check whether the next one is fully visible, if so, take that one.
 			if ( elementPartlyVerticallyInViewport( mainSnakNode ) ) {
@@ -126,7 +126,7 @@
 		//      obviously not within the viewport.
 		//  (2) remember last visible node, start checking there and depending on scroll movement
 		//      (up/down) on its neighbouring nodes.
-		$statementGroups.each( function( i, statementGroupNode ) {
+		$statementGroups.each( function ( i, statementGroupNode ) {
 			if ( elementPartlyVerticallyInViewport( statementGroupNode ) ) {
 				var $mainSnakElement = findFirstVisibleMainSnakElement( $( statementGroupNode ) );
 				$visibleStatementGroups = $visibleStatementGroups.add( $mainSnakElement );
@@ -172,7 +172,7 @@
 		/**
 		 * @see jQuery.Widget._create
 		 */
-		_create: function() {
+		_create: function () {
 			registerWidgetInstance( this );
 
 			// Assume that all labels are in the proper place if no scrolling has happened yet.
@@ -184,16 +184,16 @@
 		/**
 		 * @see jQuery.Widget.destroy
 		 */
-		destroy: function() {
+		destroy: function () {
 			unregisterWidgetInstance( this );
 		},
 
 		/**
 		 * Will update the position of the statementgroup labels the widget is controlling.
 		 */
-		update: function() {
-			var $visibleStatementviews
-				= findFirstVisibleMainSnakElementsWithinStatementlistview( this.element )
+		update: function () {
+			var $visibleStatementviews =
+				findFirstVisibleMainSnakElementsWithinStatementlistview( this.element )
 					.closest( '.wikibase-statementview' );
 
 			for ( var i = 0; i < $visibleStatementviews.length; i++ ) {
@@ -222,7 +222,7 @@
 	 *
 	 * @return {jQuery.wikibase.statementgrouplabelscroll[]}
 	 */
-	$.wikibase[ WIDGET_NAME ].activeInstances = function() {
+	$.wikibase[ WIDGET_NAME ].activeInstances = function () {
 		return activeInstances.slice();
 	};
 

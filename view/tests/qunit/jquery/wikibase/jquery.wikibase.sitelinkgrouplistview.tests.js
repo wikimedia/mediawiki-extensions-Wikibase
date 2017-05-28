@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, QUnit ) {
+( function ( $, wb, QUnit ) {
 	'use strict';
 
 	/**
@@ -13,7 +13,7 @@
 		options = $.extend( {
 			listItemAdapter: wb.tests.getMockListItemAdapter(
 				'sitelinkgroupview',
-				function() {
+				function () {
 				}
 			)
 		}, options );
@@ -56,8 +56,8 @@
 				}
 			}
 		},
-		teardown: function() {
-			$( '.test_sitelinkgrouplistview' ).each( function() {
+		teardown: function () {
+			$( '.test_sitelinkgrouplistview' ).each( function () {
 				var $sitelinkgrouplistview = $( this ),
 					sitelinkgrouplistview = $sitelinkgrouplistview.data( 'sitelinkgrouplistview' );
 
@@ -70,7 +70,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'Create & destroy', function( assert ) {
+	QUnit.test( 'Create & destroy', function ( assert ) {
 		assert.expect( 3 );
 		var value = new wb.datamodel.SiteLinkSet( [
 			new wb.datamodel.SiteLink( 'aawiki', 'page1' ),
@@ -95,8 +95,8 @@
 			'Destroyed widget.'
 		);
 
-		assert.throws(
-			function() {
+		assert[ 'throws' ](
+			function () {
 				$sitelinkgrouplistview = createSitelinkgrouplistview();
 			},
 			'Widget does not accept an empty value.'

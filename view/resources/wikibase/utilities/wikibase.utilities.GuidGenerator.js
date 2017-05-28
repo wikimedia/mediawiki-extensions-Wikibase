@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, util, $ ) {
+( function ( wb, util, $ ) {
 	'use strict';
 
 	/**
@@ -39,14 +39,14 @@
 			 * @param {number} max Maximum number
 			 * @return {string}
 			 */
-			_getRandomHex: function( min, max ) {
+			_getRandomHex: function ( min, max ) {
 				return ( Math.floor( Math.random() * ( max - min + 1 ) ) + min ).toString( 16 );
 			},
 
 			/**
 			 * @see wb.utilities.GuidGenerator
 			 */
-			newGuid: function() {
+			newGuid: function () {
 				var self = this,
 					template = 'xx-x-x-x-xxx',
 					guid = '';
@@ -69,7 +69,7 @@
 					}
 
 					while ( hex.length < 4 ) {
-						hex = '0' +  hex;
+						hex = '0' + hex;
 					}
 
 					guid += hex;
@@ -80,4 +80,4 @@
 		}
 	);
 
-} )( wikibase, util, jQuery );
+}( wikibase, util, jQuery ) );

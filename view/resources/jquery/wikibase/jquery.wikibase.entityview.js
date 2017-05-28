@@ -1,4 +1,4 @@
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 	var PARENT = $.ui.TemplatedWidget;
@@ -63,7 +63,7 @@
 		 *
 		 * @throws {Error} when called.
 		 */
-		_create: function() {
+		_create: function () {
 			throw new Error( 'Abstract entityview cannot be created directly' );
 		},
 
@@ -73,7 +73,7 @@
 		 * @see jQuery.ui.TemplatedWidget._create
 		 * @protected
 		 */
-		_createEntityview: function() {
+		_createEntityview: function () {
 			PARENT.prototype._create.call( this );
 
 			this.element.data( $.wikibase.entityview.prototype.widgetName, this );
@@ -85,7 +85,7 @@
 		 *
 		 * @throws {Error} if a required options is missing.
 		 */
-		_init: function() {
+		_init: function () {
 			if ( !this.options.value || !this.options.buildEntityTermsView ) {
 				throw new Error( 'Required option(s) missing' );
 			}
@@ -100,7 +100,7 @@
 		/**
 		 * @protected
 		 */
-		_initEntityTerms: function() {
+		_initEntityTerms: function () {
 			var $entityTerms = $( '.wikibase-entitytermsview', this.element );
 
 			if ( !$entityTerms.length ) {
@@ -116,16 +116,16 @@
 		/**
 		 * @protected
 		 */
-		_attachEventHandlers: function() {
+		_attachEventHandlers: function () {
 			this._on( {
-				entitytermsviewafterstartediting: function( event ) {
+				entitytermsviewafterstartediting: function ( event ) {
 					event.stopPropagation();
 					this._trigger( 'afterstartediting' );
 				},
 
-				entitytermsviewafterstopediting: function( event, dropValue ) {
+				entitytermsviewafterstopediting: function ( event, dropValue ) {
 					event.stopPropagation();
-					this._trigger( 'afterstopediting', null, [dropValue] );
+					this._trigger( 'afterstopediting', null, [ dropValue ] );
 				}
 			} );
 		},
@@ -135,7 +135,7 @@
 		 *
 		 * @throws {Error} when trying to set an option to an improper value.
 		 */
-		_setOption: function( key, value ) {
+		_setOption: function ( key, value ) {
 			var response = PARENT.prototype._setOption.apply( this, arguments );
 
 			if ( key === 'disabled' ) {
@@ -150,8 +150,8 @@
 		 *
 		 * @param {string} state "disable" or "enable"
 		 */
-		_setState: function( state ) {
-			this._entityTerms[state]();
+		_setState: function ( state ) {
+			this._entityTerms[ state ]();
 		}
 
 	} );
@@ -164,11 +164,11 @@
 	 */
 	$.wikibase.entityview.TYPES = [];
 
-	$.expr[':'][$.wikibase.entityview.prototype.widgetFullName]
-		= $.expr.createPseudo( function( fullName ) {
-			return function( elem ) {
+	$.expr[ ':' ][ $.wikibase.entityview.prototype.widgetFullName ] =
+		$.expr.createPseudo( function ( fullName ) {
+			return function ( elem ) {
 				for ( var i = 0; i < $.wikibase.entityview.TYPES.length; i++ ) {
-					if ( !!$.data( elem, $.wikibase.entityview.TYPES[i] ) ) {
+					if ( $.data( elem, $.wikibase.entityview.TYPES[ i ] ) ) {
 						return true;
 					}
 				}

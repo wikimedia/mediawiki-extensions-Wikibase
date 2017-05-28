@@ -1,7 +1,7 @@
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
-	var PARENT =  $.Widget;
+	var PARENT = $.Widget;
 
 	/**
 	 * Base prototype for all widgets using the `mw.wbTemplate` templating system.
@@ -67,7 +67,7 @@
 		 *
 		 * @throws {Error} if `template` option is not specified.
 		 */
-		_create: function() {
+		_create: function () {
 			if ( !this.options.template ) {
 				throw new Error( 'template needs to be specified' );
 			}
@@ -86,12 +86,12 @@
 		 * @see jQuery.fn.applyTemplate
 		 * @private
 		 */
-		_applyTemplate: function() {
+		_applyTemplate: function () {
 			var templateParams = [],
 				self = this;
 
 			// template params which are functions are callbacks to be called in the widget's context
-			$.each( this.options.templateParams, function( i, value ) {
+			$.each( this.options.templateParams, function ( i, value ) {
 				if ( $.isFunction( value ) ) {
 					value = value.call( self );
 				}
@@ -112,7 +112,7 @@
 		 *
 		 * @throws {Error} if no DOM node is found using a specified selector.
 		 */
-		_createTemplateShortCuts: function() {
+		_createTemplateShortCuts: function () {
 			var shortCuts = this.options.templateShortCuts,
 				shortCut, shortCutSelector, $shortCutTarget;
 
@@ -120,8 +120,8 @@
 				shortCutSelector = shortCuts[ shortCut ];
 				$shortCutTarget = this.element.find( shortCutSelector );
 				if ( $shortCutTarget.length < 1 ) {
-					throw new Error( 'Template "' + this.option( 'template' ) + '" has no DOM node '
-						+ ' selectable via the jQuery expression "' + shortCutSelector + '"' );
+					throw new Error( 'Template "' + this.option( 'template' ) + '" has no DOM node ' +
+						' selectable via the jQuery expression "' + shortCutSelector + '"' );
 				}
 				this[ shortCut ] = $shortCutTarget;
 
@@ -131,7 +131,7 @@
 		/**
 		 * @see jQuery.Widget.destroy
 		 */
-		destroy: function() {
+		destroy: function () {
 			PARENT.prototype.destroy.call( this );
 
 			this.element.removeClass( this.widgetBaseClass );
@@ -153,7 +153,7 @@
 		 * @throws {Error} when trying to set `template`, `templateParams` or `templateShortCuts`
 		 *         option.
 		 */
-		_setOption: function( key, value ) {
+		_setOption: function ( key, value ) {
 			switch ( key ) {
 				case 'template':
 				case 'templateParams':
@@ -164,7 +164,7 @@
 			var response = PARENT.prototype._setOption.apply( this, arguments );
 
 			if ( key === 'disabled' ) {
-				this._trigger( 'disable', null, [value] );
+				this._trigger( 'disable', null, [ value ] );
 			}
 
 			return response;
@@ -173,7 +173,7 @@
 		/**
 		 * Applies focus to the widget.
 		 */
-		focus: function() {
+		focus: function () {
 			this.element.focus();
 		},
 
@@ -190,10 +190,10 @@
 		 * @param {*} data
 		 * @return {boolean}
 		 */
-		_trigger: function( type, event, data ) {
+		_trigger: function ( type, event, data ) {
 			var prop,
 				orig,
-				callback = this.options[type];
+				callback = this.options[ type ];
 
 			data = data || {};
 			event = $.Event( event );
@@ -202,23 +202,23 @@
 			).toLowerCase();
 			// The original event may come from any element, so we need to reset the target on the
 			// new event:
-			event.target = this.element[0];
+			event.target = this.element[ 0 ];
 
 			// Copy original event properties over to the new event:
 			orig = event.originalEvent;
 			if ( orig ) {
 				for ( prop in orig ) {
 					if ( !( prop in event ) ) {
-						event[prop] = orig[prop];
+						event[ prop ] = orig[ prop ];
 					}
 				}
 			}
 
-			this.element[this.options.encapsulate ? 'triggerHandler' : 'trigger']( event, data );
+			this.element[ this.options.encapsulate ? 'triggerHandler' : 'trigger' ]( event, data );
 			return !(
-				$.isFunction( callback )
-					&& callback.apply( this.element[0], [ event ].concat( data ) ) === false
-				|| event.isDefaultPrevented()
+				$.isFunction( callback ) &&
+					callback.apply( this.element[ 0 ], [ event ].concat( data ) ) === false ||
+				event.isDefaultPrevented()
 			);
 		}
 	} );

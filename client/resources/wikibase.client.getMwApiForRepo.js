@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function( mw, wb ) {
+( function ( mw, wb ) {
 	'use strict';
 
 	var MODULE = wb.client = wb.client || {};
@@ -10,7 +10,7 @@
 	/**
 	 * @return {mediaWiki.Api}
 	 */
-	MODULE.getMwApiForRepo = function() {
+	MODULE.getMwApiForRepo = function () {
 		var repoConfig = mw.config.get( 'wbRepo' ),
 			repoApiEndpoint = repoConfig.url + repoConfig.scriptPath + '/api.php';
 

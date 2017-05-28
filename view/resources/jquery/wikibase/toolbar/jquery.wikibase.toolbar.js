@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 	var PARENT = $.wikibase.toolbaritem;
@@ -34,7 +34,7 @@
 		/**
 		 * @see jQuery.wikibase.toolbaritem._create
 		 */
-		_create: function() {
+		_create: function () {
 			PARENT.prototype._create.call( this );
 
 			if ( this._getItems().length !== this.options.$content.length ) {
@@ -48,9 +48,9 @@
 		/**
 		 * @see jQuery.wikibase.toolbaritem.destroy
 		 */
-		destroy: function() {
+		destroy: function () {
 			// Remove toolbar items managed by the widget:
-			$.each( this._getItems(), function() {
+			$.each( this._getItems(), function () {
 				this.destroy();
 				this.element.remove();
 			} );
@@ -58,8 +58,8 @@
 			var $container = this.getContainer();
 
 			$container
-			.removeClass( this.widgetBaseClass
-				+ '-container wikibase-toolbar-container ui-state-disabled' )
+			.removeClass( this.widgetBaseClass +
+				'-container wikibase-toolbar-container ui-state-disabled' )
 			.off( '.' + this.widgetName );
 
 			if ( $container.get( 0 ) !== this.element.get( 0 ) ) {
@@ -72,9 +72,9 @@
 		/**
 		 * @return {jQuery.wikibase.toolbaritem[]}
 		 */
-		_getItems: function() {
+		_getItems: function () {
 			var items = [];
-			this.getContainer().children().each( function() {
+			this.getContainer().children().each( function () {
 				var item = $( this ).data( 'wikibase-toolbar-item' );
 				if ( item ) {
 					items.push( item );
@@ -88,21 +88,21 @@
 		 *
 		 * @return {jQuery}
 		 */
-		getContainer: function() {
+		getContainer: function () {
 			return this.options.$container || this.element;
 		},
 
-		draw: function() {
+		draw: function () {
 			var $container = this.getContainer(),
 				$children = $();
 
-			$container.children().each( function() {
+			$container.children().each( function () {
 				$( this ).detach();
 			} );
 
 			$container.empty();
 
-			this.options.$content.each( function( i ) {
+			this.options.$content.each( function ( i ) {
 				var $item = $( this );
 
 				$children = $children.add( $item );
@@ -119,10 +119,10 @@
 		/**
 		 * @see jQuery.wikibase.toolbaritem._setOption
 		 */
-		_setOption: function( key, value ) {
+		_setOption: function ( key, value ) {
 			if ( key === 'disabled' ) {
 				this._setState( value );
-				this.options[key] = value;
+				this.options[ key ] = value;
 				return this;
 			}
 
@@ -138,24 +138,24 @@
 		/**
 		 * @param {boolean} disable
 		 */
-		_setState: function( disable ) {
+		_setState: function ( disable ) {
 			this.getContainer()
 				.toggleClass( this.widgetFullName + '-disabled ui-state-disabled', !!disable )
 				.attr( 'aria-disabled', disable );
-			$.each( this._getItems(), function() {
-				this[disable ? 'disable' : 'enable']();
+			$.each( this._getItems(), function () {
+				this[ disable ? 'disable' : 'enable' ]();
 			} );
 		},
 
 		/**
 		 * @see jQuery.wikibase.toolbaritem.focus
 		 */
-		focus: function() {
+		focus: function () {
 			var items = this._getItems();
 
 			for ( var i = 0; i < items.length; i++ ) {
-				if ( !items[i].option( 'disabled' ) ) {
-					items[i].focus();
+				if ( !items[ i ].option( 'disabled' ) ) {
+					items[ i ].focus();
 					return;
 				}
 			}
@@ -165,4 +165,4 @@
 
 	} );
 
-} )( jQuery );
+}( jQuery ) );

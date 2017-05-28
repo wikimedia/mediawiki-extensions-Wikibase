@@ -2,18 +2,18 @@
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function( $, wb ) {
+( function ( $, wb ) {
 	'use strict';
 
 	QUnit.module( 'wikibase.store.CombiningEntityStore' );
 
-	QUnit.test( 'Initialize', function( assert ) {
+	QUnit.test( 'Initialize', function ( assert ) {
 		assert.expect( 1 );
 		var entityStore = new wb.store.CombiningEntityStore();
 		assert.ok( entityStore.get, 'Entity store has get() method.' );
 	} );
 
-	QUnit.test( 'get() returns a jQuery promise', function( assert ) {
+	QUnit.test( 'get() returns a jQuery promise', function ( assert ) {
 		assert.expect( 1 );
 		var entityStore = new wb.store.CombiningEntityStore( [] ),
 			promise = entityStore.get( 'id' );
@@ -24,9 +24,9 @@
 	QUnit.test(
 		'Promise is resolved asynchronously, even if the entity is cached',
 		2,
-		function( assert ) {
+		function ( assert ) {
 			var store = new wb.store.EntityStore();
-			store.get = function( entityId ) {
+			store.get = function ( entityId ) {
 				return $.Deferred().resolve();
 			};
 			var entityStore = new wb.store.CombiningEntityStore( [ store ] );
@@ -35,11 +35,11 @@
 			assert.equal( promise.state(), 'pending', 'Promise is pending.' );
 
 			QUnit.stop();
-			promise.done( function( entity ) {
+			promise.done( function ( entity ) {
 				QUnit.start();
 				assert.ok( true, 'Resolved promise.' );
 			} );
 		}
 	);
 
-} )( jQuery, wikibase );
+}( jQuery, wikibase ) );

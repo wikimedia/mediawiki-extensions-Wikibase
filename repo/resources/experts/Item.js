@@ -1,4 +1,4 @@
-( function( wb, vv ) {
+( function ( wb, vv ) {
 	'use strict';
 
 	var MODULE = wb.experts,
@@ -18,7 +18,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		_init: function() {
+		_init: function () {
 			PARENT.prototype._initEntityExpert.call( this );
 		}
 	} );

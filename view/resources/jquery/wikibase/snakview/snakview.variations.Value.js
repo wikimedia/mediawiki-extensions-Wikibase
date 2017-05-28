@@ -1,4 +1,4 @@
-( function( mw, wb, $, dv ) {
+( function ( mw, wb, $, dv ) {
 	'use strict';
 
 	var MODULE = $.wikibase.snakview.variations,
@@ -38,7 +38,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		destroy: function() {
+		destroy: function () {
 			this.$viewPort.css( 'height', 'auto' );
 			if ( this._valueView ) {
 				this._valueView.element.off( '.' + this.variationBaseClass );
@@ -51,7 +51,7 @@
 		 * @inheritdoc
 		 * @protected
 		 */
-		_setValue: function( value ) {
+		_setValue: function ( value ) {
 			this._newDataValue = null;
 			if ( value.datavalue ) {
 				this._newDataValue = dv.newDataValue( value.datavalue.type, value.datavalue.value );
@@ -62,7 +62,7 @@
 		 * @inheritdoc
 		 * @protected
 		 */
-		_getValue: function() {
+		_getValue: function () {
 			var dataValue = null;
 
 			if ( this._newDataValue !== false ) {
@@ -81,7 +81,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		draw: function() {
+		draw: function () {
 			var self = this,
 				newValue = this._newDataValue;
 
@@ -115,9 +115,9 @@
 			function _getDataType( property ) {
 				// If the set property is not there, we have to display a warning. This can happen
 				// if a property got deleted but the Snaks using it didn't change the property.
-				var dataTypeId = property
-					? property.getDataTypeId()
-					: false;
+				var dataTypeId = property ?
+					property.getDataTypeId() :
+					false;
 
 				if ( dataTypeId ) {
 					return self._dataTypeStore.getDataType( dataTypeId );
@@ -174,7 +174,7 @@
 				this.__currentNewValue = newValue;
 				this._entityStore
 				.get( this._viewState.propertyId() )
-				.done( function( fetchedProperty ) {
+				.done( function ( fetchedProperty ) {
 					if ( self.isDestroyed() ) {
 						return;
 					}
@@ -198,8 +198,8 @@
 
 					// If the new value's type is not the data value type used by the Snak's
 					// property data type, something is very wrong. Display warning!
-					if ( newValue && dataType && newValue.getType() !== dataType.getDataValueType()
-						&& newValue.getType() !== dv.UnDeserializableValue.TYPE ) {
+					if ( newValue && dataType && newValue.getType() !== dataType.getDataValueType() &&
+						newValue.getType() !== dv.UnDeserializableValue.TYPE ) {
 						handleDataValueTypeMismatch(
 							newValue.getType(),
 							dataType.getDataValueType()
@@ -209,11 +209,11 @@
 
 					// Check whether valueview exists and if so, whether it is suitable for creating
 					// a new data value valid against the given data type.
-					if ( self._valueView
+					if ( self._valueView &&
 						// can't check whether current valueview is most suitable for empty value if
 						// no indication for what kind of value (specified by the data type) is
 						// available
-						&& ( dataType || newValue !== null )
+						( dataType || newValue !== null )
 					) {
 						// display current Snak's data value in existing valueview:
 						self._valueView.value( newValue );
@@ -237,7 +237,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		startEditing: function() {
+		startEditing: function () {
 			if ( !this._valueView || this._valueView.isInEditMode() ) {
 				return;
 			}
@@ -246,7 +246,7 @@
 
 			this._valueView.element.one(
 				this._valueView.widgetEventPrefix + 'afterstartediting',
-				function() {
+				function () {
 					$( self ).triggerHandler( 'afterstartediting' );
 				}
 			);
@@ -259,7 +259,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		stopEditing: function( dropValue ) {
+		stopEditing: function ( dropValue ) {
 			if ( !this._valueView || !this._valueView.isInEditMode() ) {
 				return;
 			}
@@ -273,16 +273,16 @@
 		 *
 		 * @private
 		 */
-		_attachEventHandlers: function() {
+		_attachEventHandlers: function () {
 			var self = this;
 
 			this._removeEventHandlers();
 
 			this._valueView.element
-			.on( 'valueviewparse.' + this.variationBaseClass, function( event ) {
+			.on( 'valueviewparse.' + this.variationBaseClass, function ( event ) {
 				self._viewState.notify( 'invalid' );
 			} )
-			.on( 'valueviewchange.' + this.variationBaseClass, function( event ) {
+			.on( 'valueviewchange.' + this.variationBaseClass, function ( event ) {
 				self._viewState.notify( self._valueView.value() ? 'valid' : 'invalid' );
 			} );
 
@@ -339,7 +339,7 @@
 		 *
 		 * @private
 		 */
-		_removeEventHandlers: function() {
+		_removeEventHandlers: function () {
 			this._valueView.element.off( '.' + this.variationBaseClass );
 		},
 
@@ -356,7 +356,7 @@
 		 * @param {string} [propertyId]
 		 * @return {boolean} Whether a `jQuery.valueview` has actually been instantiated.
 		 */
-		_createNewValueView: function( dataValue, dataType, propertyId ) {
+		_createNewValueView: function ( dataValue, dataType, propertyId ) {
 			var $valueViewDom;
 
 			if ( this._valueView ) {
@@ -395,7 +395,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		disable: function() {
+		disable: function () {
 			if ( this._valueView ) {
 				this._valueView.disable();
 			}
@@ -404,7 +404,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		enable: function() {
+		enable: function () {
 			if ( this._valueView ) {
 				this._valueView.enable();
 			}
@@ -413,14 +413,14 @@
 		/**
 		 * @inheritdoc
 		 */
-		isFocusable: function() {
+		isFocusable: function () {
 			return true;
 		},
 
 		/**
 		 * @inheritdoc
 		 */
-		focus: function() {
+		focus: function () {
 			if ( this._valueView && this._viewState.isDisabled() === false ) {
 				this._valueView.focus();
 			}
@@ -429,7 +429,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		blur: function() {
+		blur: function () {
 			if ( this._valueView ) {
 				this._valueView.blur();
 			}

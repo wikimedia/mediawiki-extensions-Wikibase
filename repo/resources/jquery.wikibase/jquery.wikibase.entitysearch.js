@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 	var PARENT = $.wikibase.entityselector;
@@ -26,16 +26,16 @@
 		/**
 		 * @see jQuery.wikibase.entityselector._create
 		 */
-		_create: function() {
+		_create: function () {
 			var self = this;
 
 			PARENT.prototype._create.call( this );
 
 			this.element
-			.on( 'eachchange.' + this.widgetName, function() {
+			.on( 'eachchange.' + this.widgetName, function () {
 				var menu = self.options.menu;
-				if ( self.options.suggestionsPlaceholder
-					&& ( !menu.option( 'items' ).length || !menu.element.is( ':visible' ) )
+				if ( self.options.suggestionsPlaceholder &&
+					( !menu.option( 'items' ).length || !menu.element.is( ':visible' ) )
 				) {
 					self.options.suggestionsPlaceholder.setVisibility( true );
 					// Early update required for the suggestionsPlaceholder's visibility
@@ -52,7 +52,7 @@
 		 * @param {Object} entityStub
 		 * @return {jQuery.wikibase.entityselector.Item}
 		 */
-		_createMenuItemFromSuggestion: function( entityStub ) {
+		_createMenuItemFromSuggestion: function ( entityStub ) {
 			var $label = this._createLabelFromSuggestion( entityStub ),
 				value = entityStub.label || entityStub.id;
 
@@ -62,7 +62,7 @@
 		/**
 		 * @see jQuery.ui.suggester._setOption
 		 */
-		_setOption: function( key, value ) {
+		_setOption: function ( key, value ) {
 			if ( key === 'suggestionsPlaceholder' ) {
 				var customItems = this.options.menu.option( 'customItems' );
 
@@ -74,13 +74,13 @@
 
 				this._close();
 			}
-			return PARENT.prototype._setOption.apply( this,  arguments );
+			return PARENT.prototype._setOption.apply( this, arguments );
 		},
 
 		/**
 		 * @see jQuery.wikibase.entityselector._initMenu
 		 */
-		_initMenu: function( ooMenu ) {
+		_initMenu: function ( ooMenu ) {
 			PARENT.prototype._initMenu.apply( this, arguments );
 
 			if ( this.options.suggestionsPlaceholder ) {
@@ -91,10 +91,10 @@
 
 			$( ooMenu )
 			.off( 'selected' )
-			.on( 'selected.entitysearch', function( event, item ) {
-				if ( event.originalEvent
-					&& /^key/.test( event.originalEvent.type )
-					&& !( item instanceof $.ui.ooMenu.CustomItem )
+			.on( 'selected.entitysearch', function ( event, item ) {
+				if ( event.originalEvent &&
+					/^key/.test( event.originalEvent.type ) &&
+					!( item instanceof $.ui.ooMenu.CustomItem )
 				) {
 					window.location.href = item.getEntityStub().url;
 				}
@@ -106,7 +106,7 @@
 		/**
 		 * @see jQuery.ui.suggester._updateMenuVisibility
 		 */
-		_updateMenuVisibility: function() {
+		_updateMenuVisibility: function () {
 			if ( this._term ) {
 				this._open();
 				this.repositionMenu();
@@ -118,11 +118,11 @@
 		/**
 		 * @see jQuery.wikibase.entityselector._getSuggestions
 		 */
-		_getSuggestions: function( term ) {
+		_getSuggestions: function ( term ) {
 			var self = this,
 				promise = PARENT.prototype._getSuggestions.call( this, term );
 
-			return promise.done( function( suggestions, searchTerm ) {
+			return promise.done( function ( suggestions, searchTerm ) {
 				if ( self.options.suggestionsPlaceholder ) {
 					self.options.suggestionsPlaceholder.setVisibility( false );
 				}

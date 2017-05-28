@@ -16,10 +16,10 @@
 	 * @param {string} languageCode
 	 * @return {string}
 	 */
-	$.util.getDirectionality = function( languageCode ) {
-		var dir = $.uls && $.uls.data
-			? $.uls.data.getDir( languageCode )
-			: $( 'html' ).prop( 'dir' );
+	$.util.getDirectionality = function ( languageCode ) {
+		var dir = $.uls && $.uls.data ?
+			$.uls.data.getDir( languageCode ) :
+			$( 'html' ).prop( 'dir' );
 
 		return dir || 'auto';
 	};

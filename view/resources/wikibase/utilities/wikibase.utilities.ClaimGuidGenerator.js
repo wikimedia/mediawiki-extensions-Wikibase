@@ -4,7 +4,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 	/**
@@ -33,7 +33,7 @@
 		 *
 		 * @return {string} GUID
 		 */
-		newGuid: function() {
+		newGuid: function () {
 			return this._entityId + '$' + this._baseGenerator.newGuid();
 		}
 	} );

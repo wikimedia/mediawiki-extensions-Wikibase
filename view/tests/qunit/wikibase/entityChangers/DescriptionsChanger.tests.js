@@ -2,14 +2,14 @@
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function( sinon, wb, $ ) {
+( function ( sinon, wb, $ ) {
 	'use strict';
 
 	QUnit.module( 'wikibase.entityChangers.DescriptionsChanger', QUnit.newMwEnvironment() );
 
 	var SUBJECT = wikibase.entityChangers.DescriptionsChanger;
 
-	QUnit.test( 'is a function', function( assert ) {
+	QUnit.test( 'is a function', function ( assert ) {
 		assert.expect( 1 );
 		assert.equal(
 			typeof SUBJECT,
@@ -18,21 +18,21 @@
 		);
 	} );
 
-	QUnit.test( 'is a constructor', function( assert ) {
+	QUnit.test( 'is a constructor', function ( assert ) {
 		assert.expect( 1 );
 		assert.ok( new SUBJECT() instanceof SUBJECT );
 	} );
 
-	QUnit.test( 'setDescription performs correct API call', function( assert ) {
+	QUnit.test( 'setDescription performs correct API call', function ( assert ) {
 		assert.expect( 1 );
 		var api = {
-			setDescription: sinon.spy( function() {
+			setDescription: sinon.spy( function () {
 				return $.Deferred().promise();
 			} )
 		};
 		var descriptionsChanger = new SUBJECT(
 			api,
-			{ getDescriptionRevision: function() { return 0; } },
+			{ getDescriptionRevision: function () { return 0; } },
 			new wb.datamodel.Item( 'Q1' )
 		);
 
@@ -41,10 +41,10 @@
 		assert.ok( api.setDescription.calledOnce );
 	} );
 
-	QUnit.test( 'setDescription correctly handles API response', function( assert ) {
+	QUnit.test( 'setDescription correctly handles API response', function ( assert ) {
 		assert.expect( 1 );
 		var api = {
-			setDescription: sinon.spy( function() {
+			setDescription: sinon.spy( function () {
 				return $.Deferred().resolve( {
 					entity: {
 						descriptions: {
@@ -59,46 +59,46 @@
 		};
 		var descriptionsChanger = new SUBJECT(
 			api,
-			{ getDescriptionRevision: function() { return 0; }, setDescriptionRevision: function() {} },
+			{ getDescriptionRevision: function () { return 0; }, setDescriptionRevision: function () {} },
 			new wb.datamodel.Item( 'Q1' )
 		);
 
 		QUnit.stop();
 
 		descriptionsChanger.setDescription( new wb.datamodel.Term( 'language', 'description' ) )
-		.done( function( savedDescription ) {
+		.done( function ( savedDescription ) {
 			QUnit.start();
 			assert.equal( savedDescription.getText(), 'description' );
 		} )
-		.fail( function() {
+		.fail( function () {
 			assert.ok( false, 'setDescription failed' );
 		} );
 	} );
 
-	QUnit.test( 'setDescription correctly handles API failures', function( assert ) {
+	QUnit.test( 'setDescription correctly handles API failures', function ( assert ) {
 		assert.expect( 2 );
 		var api = {
-			setDescription: sinon.spy( function() {
+			setDescription: sinon.spy( function () {
 				return $.Deferred().reject( 'errorCode', { error: { code: 'errorCode' } } ).promise();
 			} )
 		};
 		var descriptionsChanger = new SUBJECT(
 			api,
-			{ getDescriptionRevision: function() { return 0; }, setDescriptionRevision: function() {} },
+			{ getDescriptionRevision: function () { return 0; }, setDescriptionRevision: function () {} },
 			new wb.datamodel.Item( 'Q1' )
 		);
 
 		QUnit.stop();
 
 		descriptionsChanger.setDescription( new wb.datamodel.Term( 'language', 'description' ) )
-		.done( function( savedDescription ) {
+		.done( function ( savedDescription ) {
 			assert.ok( false, 'setDescription should have failed' );
 		} )
-		.fail( function( error ) {
+		.fail( function ( error ) {
 			QUnit.start();
 			assert.ok( error instanceof wb.api.RepoApiError, 'setDescription did not fail with a RepoApiError' );
 			assert.equal( error.code, 'errorCode' );
 		} );
 	} );
 
-} )( sinon, wikibase, jQuery );
+}( sinon, wikibase, jQuery ) );

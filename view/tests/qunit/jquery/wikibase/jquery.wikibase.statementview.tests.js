@@ -2,12 +2,12 @@
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function( $, mw, wb, dv, QUnit ) {
+( function ( $, mw, wb, dv, QUnit ) {
 	'use strict';
 
 	QUnit.module( 'jquery.wikibase.statementview', QUnit.newMwEnvironment( {
-		teardown: function() {
-			$( '.test_statementview' ).each( function() {
+		teardown: function () {
+			$( '.test_statementview' ).each( function () {
 				var $statementview = $( this ),
 					statementview = $statementview.data( 'statementview' );
 
@@ -25,54 +25,54 @@
 	 * @param {jQuery} [$node]
 	 * @return {jQuery}
 	 */
-	var createStatementview = function( options, $node ) {
+	var createStatementview = function ( options, $node ) {
 		options = $.extend( {
-			getAdder: function() {
+			getAdder: function () {
 				return {
-					destroy: function() {}
+					destroy: function () {}
 				};
 			},
-			getReferenceListItemAdapter: function() {
+			getReferenceListItemAdapter: function () {
 				return wb.tests.getMockListItemAdapter(
 					'mytestreferenceview',
-					function() {
-						this.value = function() {
+					function () {
+						this.value = function () {
 							return this.options.value;
 						};
-						this.startEditing = function() {
+						this.startEditing = function () {
 						};
-						this.enterNewItem = function() {
+						this.enterNewItem = function () {
 						};
 					}
 				);
 			},
-			buildSnakView: function( options, value, $dom ) {
+			buildSnakView: function ( options, value, $dom ) {
 				var _value = value;
 				return {
-					destroy: function() {},
-					option: function() {},
-					snak: function() {
+					destroy: function () {},
+					option: function () {},
+					snak: function () {
 						return _value;
 					},
-					startEditing: function() {
+					startEditing: function () {
 						return $.Deferred().resolve().promise();
 					},
-					stopEditing: function() {}
+					stopEditing: function () {}
 				};
 			},
 			entityIdPlainFormatter: {
-				format: function( entityId ) {
+				format: function ( entityId ) {
 					return $.Deferred().resolve( entityId ).promise();
 				}
 			},
 			guidGenerator: 'I am a ClaimGuidGenerator',
 			locked: 'I am a',
 			predefined: 'I am a',
-			getQualifiersListItemAdapter: function() {
+			getQualifiersListItemAdapter: function () {
 				return wb.tests.getMockListItemAdapter(
 					'mytestqualifiersview',
-					function() {
-						this.value = function() {
+					function () {
+						this.value = function () {
 							return this.options.value;
 						};
 					}
@@ -87,7 +87,7 @@
 			.statementview( options );
 	};
 
-	QUnit.test( 'Create & destroy without value', function( assert ) {
+	QUnit.test( 'Create & destroy without value', function ( assert ) {
 		assert.expect( 2 );
 		var $statementview = createStatementview(),
 			statementview = $statementview.data( 'statementview' );
@@ -105,7 +105,7 @@
 		);
 	} );
 
-	QUnit.test( 'Create & destroy with value', function( assert ) {
+	QUnit.test( 'Create & destroy with value', function ( assert ) {
 		assert.expect( 2 );
 		var $statementview = createStatementview( {
 				value: new wb.datamodel.Statement( new wb.datamodel.Claim(
@@ -131,7 +131,7 @@
 		);
 	} );
 
-	QUnit.test( 'value after startEditing with value', function( assert ) {
+	QUnit.test( 'value after startEditing with value', function ( assert ) {
 		assert.expect( 1 );
 		var $statementview = createStatementview( {
 				value: new wb.datamodel.Statement( new wb.datamodel.Claim(
@@ -145,17 +145,17 @@
 			statementview = $statementview.data( 'statementview' );
 
 		QUnit.stop();
-		statementview.startEditing().done( function() {
+		statementview.startEditing().done( function () {
 			QUnit.start();
 			assert.ok( statementview.value(), 'value() should return a value' );
 		} );
 	} );
 
-	QUnit.test( 'value after startEditing on new statementview', function( assert ) {
+	QUnit.test( 'value after startEditing on new statementview', function ( assert ) {
 		assert.expect( 1 );
 		var $statementview = createStatementview( {
 				guidGenerator: {
-					newGuid: function() {
+					newGuid: function () {
 						return 'guid';
 					}
 				}
@@ -163,24 +163,24 @@
 			statementview = $statementview.data( 'statementview' );
 
 		QUnit.stop();
-		statementview.startEditing().done( function() {
+		statementview.startEditing().done( function () {
 			QUnit.start();
 			assert.strictEqual( statementview.value(), null, 'value should return null' );
 		} );
 	} );
 
-	QUnit.test( 'Using the generic tooltip for new claims', 1, function( assert ) {
+	QUnit.test( 'Using the generic tooltip for new claims', 1, function ( assert ) {
 		var $statementview = createStatementview(),
 			statementview = $statementview.data( 'statementview' );
 
 		var done = assert.async();
-		statementview.getHelpMessage().done( function( helpMessage ) {
+		statementview.getHelpMessage().done( function ( helpMessage ) {
 			assert.equal( mw.msg( 'wikibase-claimview-snak-new-tooltip' ), helpMessage );
 			done();
 		} );
 	} );
 
-	QUnit.test( 'Using tooltip specific for existing claims', 1, function( assert ) {
+	QUnit.test( 'Using tooltip specific for existing claims', 1, function ( assert ) {
 		var $statementview = createStatementview( {
 			value: new wb.datamodel.Statement( new wb.datamodel.Claim(
 				new wb.datamodel.PropertyNoValueSnak( 'P1', new dv.StringValue( 'g' ) )
@@ -190,13 +190,13 @@
 		var statementview = $statementview.data( 'statementview' );
 		var done = assert.async();
 
-		statementview.getHelpMessage().done( function( helpMessage ) {
+		statementview.getHelpMessage().done( function ( helpMessage ) {
 			assert.equal( mw.msg( 'wikibase-claimview-snak-tooltip', 'P1' ), helpMessage );
 			done();
 		} );
 	} );
 
-	QUnit.test( 'value with empty reference', function( assert ) {
+	QUnit.test( 'value with empty reference', function ( assert ) {
 		assert.expect( 1 );
 		var $statementview = createStatementview( {
 				value: new wb.datamodel.Statement( new wb.datamodel.Claim(
@@ -210,14 +210,14 @@
 			statementview = $statementview.data( 'statementview' );
 
 		QUnit.stop();
-		statementview.startEditing().done( function() {
+		statementview.startEditing().done( function () {
 			QUnit.start();
 			statementview._referencesListview.enterNewItem();
 			assert.strictEqual( statementview.value(), null, 'value should not return a value' );
 		} );
 	} );
 
-	QUnit.test( 'wb-new', function( assert ) {
+	QUnit.test( 'wb-new', function ( assert ) {
 		assert.expect( 2 );
 		var $statementview = createStatementview(),
 			statementview = $statementview.data( 'statementview' );

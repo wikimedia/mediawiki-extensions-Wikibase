@@ -1,4 +1,4 @@
-( function( $, util ) {
+( function ( $, util ) {
 	'use strict';
 
 	// TODO: Resolve namespace initialization
@@ -39,7 +39,7 @@
 		 *        overwriting the base `Variation`s members).
 		 * @return {jQuery.snakview.variations.Variation} The new `Variation`'s constructor.
 		 */
-		variation: function( snakConstructor, baseOrDefinition, definition ) {
+		variation: function ( snakConstructor, baseOrDefinition, definition ) {
 			if ( !$.isFunction( snakConstructor ) || !snakConstructor.TYPE ) {
 				throw new Error( 'Snak constructor required for registering a snakview variation' );
 			}
@@ -73,7 +73,7 @@
 		 *
 		 * @return {string[]}
 		 */
-		getCoveredSnakTypes: function() {
+		getCoveredSnakTypes: function () {
 			var types = [];
 
 			for ( var key in variations ) {
@@ -91,7 +91,7 @@
 		 * @param {string} snakType
 		 * @return {boolean}
 		 */
-		hasVariation: function( snakType ) {
+		hasVariation: function ( snakType ) {
 			return snakType in variations;
 		},
 
@@ -102,7 +102,7 @@
 		 * @param {string} snakType
 		 * @return {jQuery.wikibase.snakview.variations.Variation|*}
 		 */
-		getVariation: function( snakType ) {
+		getVariation: function ( snakType ) {
 			return variations[ snakType ] || null;
 		},
 
@@ -115,7 +115,7 @@
 		 * @param {jQuery} $variationViewPort
 		 * @return {jQuery.wikibase.snakview.variations.Variation|null}
 		 */
-		newFromSnakType: function( snakType, viewState, $variationViewPort ) {
+		newFromSnakType: function ( snakType, viewState, $variationViewPort ) {
 			if ( typeof snakType !== 'string' ) {
 				throw new Error( 'Snak type required for choosing a suitable variation' );
 			}

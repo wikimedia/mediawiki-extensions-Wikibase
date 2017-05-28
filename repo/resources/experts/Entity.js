@@ -1,4 +1,4 @@
-( function( mw, wb, $, vv ) {
+( function ( mw, wb, $, vv ) {
 	'use strict';
 
 	var MODULE = wb.experts,
@@ -19,14 +19,14 @@
 		 *
 		 * @throws {Error} when called because this `Expert` is meant to be abstract.
 		 */
-		_init: function() {
+		_init: function () {
 			throw new Error( 'Abstract Entity id expert cannot be instantiated directly' );
 		},
 
 		/**
 		 * @protected
 		 */
-		_initEntityExpert: function() {
+		_initEntityExpert: function () {
 			PARENT.prototype._init.call( this );
 
 			// FIXME: Use SuggestedStringValue
@@ -44,10 +44,10 @@
 			this.$input.data( 'entityselector' ).selectedEntity( entityId );
 
 			this.$input
-			.on( 'eachchange.' + this.uiBaseClass, function( e ) {
+			.on( 'eachchange.' + this.uiBaseClass, function ( e ) {
 				$( this ).data( 'entityselector' ).repositionMenu();
 			} )
-			.on( 'entityselectorselected.' + this.uiBaseClass, function( e ) {
+			.on( 'entityselectorselected.' + this.uiBaseClass, function ( e ) {
 				self._resizeInput();
 				notifier.notify( 'change' );
 			} );
@@ -61,7 +61,7 @@
 		 *
 		 * @param {string} repoApiUrl
 		 */
-		_initEntityselector: function( repoApiUrl ) {
+		_initEntityselector: function ( repoApiUrl ) {
 			this.$input.entityselector( {
 				url: repoApiUrl,
 				type: this.constructor.TYPE,
@@ -72,7 +72,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		destroy: function() {
+		destroy: function () {
 			// Prevent error when issuing destroy twice:
 			if ( this.$input ) {
 				// The entityselector may have already been destroyed by a parent component:
@@ -90,7 +90,7 @@
 		 *
 		 * @return {string}
 		 */
-		rawValue: function() {
+		rawValue: function () {
 			var entitySelector = this.$input.data( 'entityselector' ),
 				selectedEntity = entitySelector.selectedEntity();
 

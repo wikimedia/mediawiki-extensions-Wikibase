@@ -1,7 +1,7 @@
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
-	var PARENT =  $.ui.TemplatedWidget;
+	var PARENT = $.ui.TemplatedWidget;
 
 	/**
 	 * View for displaying and editing list items, each represented by a single random widget.
@@ -59,14 +59,14 @@
 		 *
 		 * @throws {Error} if a required option is not specified properly.
 		 */
-		_create: function() {
+		_create: function () {
 			this._lia = this.options.listItemAdapter;
 
-			if ( typeof this._lia !== 'object'
-				|| !( this._lia instanceof $.wikibase.listview.ListItemAdapter )
+			if ( typeof this._lia !== 'object' ||
+				!( this._lia instanceof $.wikibase.listview.ListItemAdapter )
 			) {
-				throw new Error( 'Option "listItemAdapter" has to be an instance of '
-					+ 'jQuery.wikibase.listview.ListItemAdapter' );
+				throw new Error( 'Option "listItemAdapter" has to be an instance of ' +
+					'jQuery.wikibase.listview.ListItemAdapter' );
 			}
 
 			this._reusedItems = $.makeArray( this.element.children( this.options.listItemNodeName ) );
@@ -79,9 +79,9 @@
 		/**
 		 * @inheritdoc
 		 */
-		destroy: function() {
+		destroy: function () {
 			var self = this;
-			this.items().each( function() {
+			this.items().each( function () {
 				self._removeItem( $( this ) );
 			} );
 			this._lia = null;
@@ -95,25 +95,25 @@
 		 *
 		 * @throws {Error} when trying to set `listItemAdapter` option.
 		 */
-		_setOption: function( key, value ) {
+		_setOption: function ( key, value ) {
 			var self = this;
 
 			if ( key === 'listItemAdapter' ) {
 				throw new Error( 'Can not change the ListItemAdapter after initialization' );
 			} else if ( key === 'value' ) {
-				this.items().each( function() {
+				this.items().each( function () {
 					self._removeItem( $( this ) );
 				} );
 
 				for ( var i = 0; i < value.length; i++ ) {
-					this._addLiValue( value[i] );
+					this._addLiValue( value[ i ] );
 				}
 			}
 
 			var response = PARENT.prototype._setOption.apply( this, arguments );
 
 			if ( key === 'disabled' ) {
-				this.items().each( function() {
+				this.items().each( function () {
 					var liInstance = self._lia.liInstance( $( this ) );
 					// Check if instance got destroyed in the meantime:
 					if ( liInstance ) {
@@ -130,7 +130,7 @@
 		 *
 		 * @private
 		 */
-		_createList: function() {
+		_createList: function () {
 			var i, items = this.option( 'value' );
 
 			if ( items === null ) {
@@ -139,7 +139,7 @@
 				}
 			} else {
 				for ( i in items ) {
-					this._addLiValue( items[i] );
+					this._addLiValue( items[ i ] );
 				}
 			}
 		},
@@ -151,7 +151,7 @@
 		 * @param {*[]} [value] List containing a value for each list item widget.
 		 * @return {*[]|undefined}
 		 */
-		value: function( value ) {
+		value: function ( value ) {
 			if ( value !== undefined ) {
 				return this.option( 'value', value );
 			}
@@ -159,7 +159,7 @@
 			var self = this,
 				values = [];
 
-			this.items().each( function() {
+			this.items().each( function () {
 				values.push( self._lia.liInstance( $( this ) ) );
 			} );
 
@@ -172,7 +172,7 @@
 		 *
 		 * @return {jQuery}
 		 */
-		items: function() {
+		items: function () {
 			return this.element.children( '.' + this.widgetName + '-item' );
 		},
 
@@ -181,9 +181,9 @@
 		 *
 		 * @return {jQuery}
 		 */
-		nonEmptyItems: function() {
+		nonEmptyItems: function () {
 			var lia = this._lia;
-			return this.items().filter( function() {
+			return this.items().filter( function () {
 				var item = lia.liInstance( $( this ) );
 				return !!item.value();
 			} );
@@ -196,7 +196,7 @@
 		 * @param {jQuery} $itemNode
 		 * @return {number}
 		 */
-		indexOf: function( $itemNode ) {
+		indexOf: function ( $itemNode ) {
 			var $items = this.items(),
 				itemNode = $itemNode.get( 0 );
 
@@ -214,7 +214,7 @@
 		 *
 		 * @return {jQuery.wikibase.listview.ListItemAdapter}
 		 */
-		listItemAdapter: function() {
+		listItemAdapter: function () {
 			return this._lia;
 		},
 
@@ -224,7 +224,7 @@
 		 * @param {*} liValue One list item widget's value.
 		 * @return {jQuery} New list item's node.
 		 */
-		addItem: function( liValue ) {
+		addItem: function ( liValue ) {
 			return this._addLiValue( liValue );
 		},
 
@@ -236,10 +236,10 @@
 		 * @param {*} liValue One list item widget's value.
 		 * @return {jQuery} New list item's node.
 		 */
-		_addLiValue: function( liValue ) {
-			var $newLi = this._reusedItems.length > 0
-				? $( this._reusedItems.shift() )
-				: $( '<' + this.option( 'listItemNodeName' ) + '/>' );
+		_addLiValue: function ( liValue ) {
+			var $newLi = this._reusedItems.length > 0 ?
+				$( this._reusedItems.shift() ) :
+				$( '<' + this.option( 'listItemNodeName' ) + '/>' );
 
 			$newLi.addClass( this.widgetName + '-item' );
 
@@ -266,7 +266,7 @@
 		 *
 		 * @throws {Error} if the node provided is not a list item.
 		 */
-		removeItem: function( $li ) {
+		removeItem: function ( $li ) {
 			if ( !$li.parent( this.element ).length ) {
 				throw new Error( 'The given node is not an element in this list' );
 			}
@@ -274,10 +274,10 @@
 			this._removeItem( $li );
 
 			// FIXME: Remove all itemremoved events, see https://gerrit.wikimedia.org/r/298766.
-			this._trigger( 'itemremoved', null, [null, $li] );
+			this._trigger( 'itemremoved', null, [ null, $li ] );
 		},
 
-		_removeItem: function( $li ) {
+		_removeItem: function ( $li ) {
 			this._lia.liInstance( $li ).destroy();
 			$li.remove();
 		},
@@ -291,7 +291,7 @@
 		 * @return {jQuery} return.done.$newLi The new list item node. Use
 		 *         `listItemAdapter().liInstance( $newLi )` to receive the widget instance.
 		 */
-		enterNewItem: function() {
+		enterNewItem: function () {
 			var $newLi = this._addLiValue();
 			return $.Deferred().resolve( $newLi ).promise();
 		},
@@ -299,7 +299,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		focus: function() {
+		focus: function () {
 			var $items = this.items();
 
 			if ( $items.length ) {
@@ -321,8 +321,8 @@
 		 *         Rejected parameters:
 		 *         - {Error}
 		 */
-		startEditing: function() {
-			return $.when.apply( $, this.value().map( function( listitem ) {
+		startEditing: function () {
+			return $.when.apply( $, this.value().map( function ( listitem ) {
 				return listitem.startEditing();
 			} ) );
 		}

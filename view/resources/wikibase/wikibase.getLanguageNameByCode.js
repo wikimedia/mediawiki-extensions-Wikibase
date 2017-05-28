@@ -20,7 +20,7 @@
 	 *
 	 * @return {Object} Set of languages (empty object when ULS is not available)
 	 */
-	var getLanguages = function() {
+	var getLanguages = function () {
 		return $.uls && $.uls.data.languages || {};
 	};
 
@@ -31,10 +31,10 @@
 	 * @param {string} langCode
 	 * @return {string}
 	 */
-	var getNativeLanguageName = function( langCode ) {
+	var getNativeLanguageName = function ( langCode ) {
 		var languages = getLanguages();
-		return Object.prototype.hasOwnProperty.call( languages, langCode ) && languages[langCode][2]
-			|| langCode;
+		return Object.prototype.hasOwnProperty.call( languages, langCode ) && languages[ langCode ][ 2 ] ||
+			langCode;
 	};
 
 	/**
@@ -44,10 +44,10 @@
 	 * @param {string} langCode
 	 * @return {string}
 	 */
-	wb.getLanguageNameByCode = function( langCode ) {
+	wb.getLanguageNameByCode = function ( langCode ) {
 		var ulsLanguages = $.fn.uls && $.fn.uls.defaults.languages;
-		return ulsLanguages && Object.prototype.hasOwnProperty.call( ulsLanguages, langCode )
-			&& ulsLanguages[ langCode ] || getNativeLanguageName( langCode );
+		return ulsLanguages && Object.prototype.hasOwnProperty.call( ulsLanguages, langCode ) &&
+			ulsLanguages[ langCode ] || getNativeLanguageName( langCode );
 	};
 
-} )( wikibase, jQuery );
+}( wikibase, jQuery ) );

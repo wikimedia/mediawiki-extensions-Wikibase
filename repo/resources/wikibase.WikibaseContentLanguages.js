@@ -1,9 +1,8 @@
-
 /**
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function( mw, wb, $ ) {
+( function ( mw, wb, $ ) {
 	'use strict';
 
 	var MODULE = wb;
@@ -15,7 +14,7 @@
 	var SELF = MODULE.WikibaseContentLanguages = util.inherit(
 		'WbContentLanguages',
 		PARENT,
-		function() {
+		function () {
 			this._languageMap = mw.config.get( 'wgULSLanguages' );
 		}
 	);
@@ -36,13 +35,13 @@
 		/**
 		 * @inheritdoc
 		 */
-		getAll: function() {
+		getAll: function () {
 			// Cache language codes
 			if ( !this._languageCodes && this._languageMap ) {
-				this._languageCodes = $.map( this._languageMap, function( val, key ) {
+				this._languageCodes = $.map( this._languageMap, function ( val, key ) {
 					return key;
 				} );
-				this._languageCodes = $.grep( this._languageCodes, function( code ) {
+				this._languageCodes = $.grep( this._languageCodes, function ( code ) {
 					// Make sure this is a subset of the language codes returned by
 					// WikibaseRepo::getMonolingualTextLanguages
 					// We don't want to have language codes in the suggester that are not
@@ -57,7 +56,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		getName: function( code ) {
+		getName: function ( code ) {
 			return this._languageMap ? this._languageMap[ code ] : null;
 		}
 	} );

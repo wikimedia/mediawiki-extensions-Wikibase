@@ -1,4 +1,4 @@
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 	$.wikibase = $.wikibase || {};
@@ -20,7 +20,7 @@
 	 *
 	 * @throws {Error} if a required parameter is not specified properly.
 	 */
-	var SELF =  $.wikibase.snakview.ViewState = function WbSnakviewViewState( snakView ) {
+	var SELF = $.wikibase.snakview.ViewState = function WbSnakviewViewState( snakView ) {
 		if ( !( snakView instanceof $.wikibase.snakview ) ) {
 			throw new Error( 'Can not create a snakview ViewState object without a snakview' );
 		}
@@ -40,7 +40,7 @@
 		 *
 		 * @param {string} status
 		 */
-		notify: function( status ) {
+		notify: function ( status ) {
 			this._view.updateStatus( status );
 		},
 
@@ -49,7 +49,7 @@
 		 *
 		 * @return {boolean}
 		 */
-		isInEditMode: function() {
+		isInEditMode: function () {
 			return this._view.isInEditMode();
 		},
 
@@ -58,7 +58,7 @@
 		 *
 		 * @return {string}
 		 */
-		propertyId: function() {
+		propertyId: function () {
 			return this._view.propertyId();
 		},
 
@@ -67,7 +67,7 @@
 		 *
 		 * @return {string}
 		 */
-		snakType: function() {
+		snakType: function () {
 			return this._view.snakType();
 		},
 
@@ -76,7 +76,7 @@
 		 *
 		 * @return {boolean}
 		 */
-		isDisabled: function() {
+		isDisabled: function () {
 			return this._view.option( 'disabled' );
 		}
 	} );

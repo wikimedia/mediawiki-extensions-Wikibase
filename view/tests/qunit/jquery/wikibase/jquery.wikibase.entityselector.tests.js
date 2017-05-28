@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, QUnit ) {
+( function ( $, QUnit ) {
 	'use strict';
 
 	/**
@@ -14,12 +14,12 @@
 			id: 1,
 			label: 'abc',
 			description: 'description',
-			aliases: ['ac', 'def']
+			aliases: [ 'ac', 'def' ]
 		},
 		{
 			id: 2,
 			label: 'x',
-			aliases: ['yz']
+			aliases: [ 'yz' ]
 		},
 		{
 			id: 3,
@@ -33,7 +33,7 @@
 	 * @param {Object} [options]
 	 * @return {jQuery}
 	 */
-	var newTestEntitySelector = function( options ) {
+	var newTestEntitySelector = function ( options ) {
 		options = $.extend( {
 			source: entityStubs,
 			delay: 0 // Time waster, also some tests below assume this to be < 100ms
@@ -46,12 +46,12 @@
 	};
 
 	QUnit.module( 'jquery.wikibase.entityselector', QUnit.newMwEnvironment( {
-		teardown: function() {
+		teardown: function () {
 			$( '.test-entityselector' ).remove();
 		}
 	} ) );
 
-	QUnit.test( 'Create', function( assert ) {
+	QUnit.test( 'Create', function ( assert ) {
 		assert.expect( 1 );
 		var $entitySelector = newTestEntitySelector();
 
@@ -61,23 +61,23 @@
 		);
 	} );
 
-	QUnit.test( 'Implicitly select entity by matching label / selectedEntity()', 2, function( assert ) {
+	QUnit.test( 'Implicitly select entity by matching label / selectedEntity()', 2, function ( assert ) {
 		var $entitySelector = newTestEntitySelector(),
 			entitySelector = $entitySelector.data( 'entityselector' );
 
 		$entitySelector.val( 'abc' );
 
 		$entitySelector
-		.one( 'entityselectorselected', function( event, id ) {
+		.one( 'entityselectorselected', function ( event, id ) {
 			assert.deepEqual(
 				id,
-				entityStubs[0].id,
+				entityStubs[ 0 ].id,
 				'Selected first entity.'
 			);
 
 			assert.deepEqual(
 				entitySelector.selectedEntity(),
-				entityStubs[0],
+				entityStubs[ 0 ],
 				'Verified selected entity using selectedEntity().'
 			);
 
@@ -89,7 +89,7 @@
 		$entitySelector.trigger( 'eachchange.entityselector' );
 	} );
 
-	QUnit.test( 'Don\'t implicitly select entity by matching alias / selectedEntity()', function( assert ) {
+	QUnit.test( 'Don\'t implicitly select entity by matching alias / selectedEntity()', function ( assert ) {
 		QUnit.expect( 0 );
 
 		var $entitySelector = newTestEntitySelector();
@@ -97,7 +97,7 @@
 		$entitySelector.val( 'yz' );
 
 		$entitySelector
-		.one( 'entityselectorselected', function( event, id ) {
+		.one( 'entityselectorselected', function ( event, id ) {
 			assert.ok( false, 'entity should not automatically be selected based on the alias' );
 		} );
 
@@ -105,33 +105,33 @@
 
 		$entitySelector.trigger( 'eachchange.entityselector' );
 
-		window.setTimeout( function() {
+		window.setTimeout( function () {
 			QUnit.start();
 		}, 100 );
 	} );
 
-	QUnit.test( 'Item constructor', function( assert ) {
+	QUnit.test( 'Item constructor', function ( assert ) {
 		assert.expect( 2 );
-		var item = new $.wikibase.entityselector.Item( 'label', 'value', entityStubs[0] );
+		var item = new $.wikibase.entityselector.Item( 'label', 'value', entityStubs[ 0 ] );
 
 		assert.ok(
 			item instanceof $.wikibase.entityselector.Item,
 			'Instantiated default entityselector item.'
 		);
 
-		assert.throws(
-			function() {
+		assert[ 'throws' ](
+			function () {
 				item = new $.wikibase.entityselector.Item( 'label', 'value' );
 			},
 			'Throwing error when omitting entity stub on instantiation.'
 		);
 	} );
 
-	QUnit.test( 'Cache invalidation of small (not continued) search results', function( assert ) {
+	QUnit.test( 'Cache invalidation of small (not continued) search results', function ( assert ) {
 		assert.expect( 2 );
 
 		var $entitySelector = newTestEntitySelector( {
-				source: function() {
+				source: function () {
 					return $.Deferred().resolve( [ 'Alpha' ] ).promise();
 				}
 			} ),
@@ -139,11 +139,11 @@
 
 		QUnit.stop();
 
-		entitySelector._getSuggestions().then( function( suggestions ) {
+		entitySelector._getSuggestions().then( function ( suggestions ) {
 			assert.deepEqual( suggestions, [ 'Alpha' ], 'should cache' );
 
 			return entitySelector._getSuggestions();
-		} ).done( function( suggestions, term ) {
+		} ).done( function ( suggestions, term ) {
 			assert.deepEqual( suggestions, [ 'Alpha' ], 'should not concat on existing cache' );
 
 			QUnit.start();

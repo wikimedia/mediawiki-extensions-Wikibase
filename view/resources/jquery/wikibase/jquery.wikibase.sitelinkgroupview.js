@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, mw, wb ) {
+( function ( $, mw, wb ) {
 	'use strict';
 
 	var PARENT = $.ui.EditableTemplatedWidget;
@@ -13,7 +13,7 @@
 	 */
 	function getSiteIdsOfGroup( group ) {
 		var siteIds = [];
-		$.each( wb.sites.getSitesOfGroup( group ), function( siteId, site ) {
+		$.each( wb.sites.getSitesOfGroup( group ), function ( siteId, site ) {
 			siteIds.push( siteId );
 		} );
 		return siteIds;
@@ -38,13 +38,13 @@
 		options: {
 			template: 'wikibase-sitelinkgroupview',
 			templateParams: [
-				function() {
+				function () {
 					return 'sitelinks-' + this.options.groupName;
 				},
-				function() {
+				function () {
 					// It's hard to dynamically load the right message. Fake it as best as possible.
-					return this.options.groupName[0].toUpperCase()
-						+ this.options.groupName.slice( 1 );
+					return this.options.groupName[ 0 ].toUpperCase() +
+						this.options.groupName.slice( 1 );
 				},
 				'', // counter
 				'', // sitelinklistview
@@ -77,7 +77,7 @@
 		/**
 		 * @see jQuery.ui.TemplatedWidget._create
 		 */
-		_create: function() {
+		_create: function () {
 			if ( !this.options.groupName || !this.options.getSiteLinkListView ) {
 				throw new Error( 'Required parameter(s) missing' );
 			}
@@ -99,7 +99,7 @@
 		/**
 		 * @see jQuery.ui.EditableTemplatedWidget.destroy
 		 */
-		destroy: function() {
+		destroy: function () {
 			if ( this.$sitelinklistview ) {
 				this.$sitelinklistview.data( 'sitelinklistview' ).destroy();
 			}
@@ -109,7 +109,7 @@
 		/**
 		 * @see jQuery.ui.EditableTemplatedWidget.draw
 		 */
-		draw: function() {
+		draw: function () {
 			var self = this,
 				deferred = $.Deferred();
 
@@ -124,7 +124,7 @@
 			if ( !this._$notification ) {
 				this.notification()
 				.appendTo( this.$headingSection )
-				.on( 'closeableupdate.' + this.widgetName, function() {
+				.on( 'closeableupdate.' + this.widgetName, function () {
 					var sticknode = self.element.data( 'sticknode' );
 					if ( sticknode ) {
 						sticknode.refresh();
@@ -147,7 +147,7 @@
 		/**
 		 * Creates and initializes the sitelinklistview widget.
 		 */
-		_createSitelinklistview: function() {
+		_createSitelinklistview: function () {
 			var sitelinklistview = this.options.getSiteLinkListView(
 				this._getSiteLinksOfGroup(),
 				this.$sitelinklistview,
@@ -158,10 +158,10 @@
 
 			var self = this;
 			this.$sitelinklistview
-			.on( prefix + 'change.' + this.widgetName, function( event ) {
+			.on( prefix + 'change.' + this.widgetName, function ( event ) {
 				self._trigger( 'change' );
 			} )
-			.on( prefix + 'toggleerror.' + this.widgetName, function( event, error ) {
+			.on( prefix + 'toggleerror.' + this.widgetName, function ( event, error ) {
 				self.setError( error );
 			} );
 		},
@@ -169,7 +169,7 @@
 		/**
 		 * @return {wikibase.datamodel.SiteLink[]}
 		 */
-		_getSiteLinksOfGroup: function() {
+		_getSiteLinksOfGroup: function () {
 			var self = this,
 				result = [];
 
@@ -177,7 +177,7 @@
 				return result;
 			}
 
-			this.options.value.each( function( siteId, siteLink ) {
+			this.options.value.each( function ( siteId, siteLink ) {
 				if ( $.inArray( siteId, self._siteIdsOfGroup ) !== -1 ) {
 					result.push( siteLink );
 				}
@@ -190,7 +190,7 @@
 		 * @throws {Error}
 		 * @return {wb.datamodel.SiteLinkSet}
 		 */
-		_checkValue: function( value ) {
+		_checkValue: function ( value ) {
 			if ( !value ) {
 				value = new wb.datamodel.SiteLinkSet( [] );
 			} else if ( !( value instanceof wb.datamodel.SiteLinkSet ) ) {
@@ -200,14 +200,14 @@
 			return value;
 		},
 
-		_startEditing: function() {
+		_startEditing: function () {
 			return this.$sitelinklistview.data( 'sitelinklistview' ).startEditing();
 		},
 
-		_stopEditing: function( dropValue ) {
+		_stopEditing: function ( dropValue ) {
 			var self = this;
 			return this.$sitelinklistview.data( 'sitelinklistview' ).stopEditing( dropValue )
-			.done( function() {
+			.done( function () {
 				self.notification();
 			} );
 		},
@@ -218,7 +218,7 @@
 		 * @param {wikibase.datamodel.SiteLink[]} [value]
 		 * @return {wikibase.datamodel.SiteLinkSet}
 		 */
-		value: function( value ) {
+		value: function ( value ) {
 			if ( value !== undefined ) {
 				return this.option( 'value', value );
 			}
@@ -229,14 +229,14 @@
 		/**
 		 * @see jQuery.ui.TemplatedWidget.focus
 		 */
-		focus: function() {
+		focus: function () {
 			this.$sitelinklistview.data( 'sitelinklistview' ).focus();
 		},
 
-		_getSiteLinksArray: function() {
+		_getSiteLinksArray: function () {
 			var res = [];
 			// FIXME: Replace with Set.toArray (requires DataModel JavaScript 3.0).
-			this.options.value.each( function( siteId, siteLink ) {
+			this.options.value.each( function ( siteId, siteLink ) {
 				res.push( siteLink );
 			} );
 			return res;
@@ -245,7 +245,7 @@
 		/**
 		 * @see jQuery.ui.TemplatedWidget._setOption
 		 */
-		_setOption: function( key, value ) {
+		_setOption: function ( key, value ) {
 			if ( key === 'value' ) {
 				value = this._checkValue( value );
 			} else if ( key === 'groupName' && value !== this.options.groupName ) {
@@ -273,7 +273,7 @@
 		/**
 		 * @see jQuery.ui.EditableTemplatedWidget.setError
 		 */
-		setError: function( error ) {
+		setError: function ( error ) {
 			if ( !error ) {
 				if ( this.$notification && this.$notification.hasClass( 'wb-error' ) ) {
 					this.notification();
@@ -283,7 +283,7 @@
 			PARENT.prototype.setError.call( this, error );
 		},
 
-		doErrorNotification: function( error ) {
+		doErrorNotification: function ( error ) {
 			this.notification( wb.buildErrorOutput( error ), 'wb-error' );
 		}
 	} );

@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, QUnit ) {
+( function ( $, wb, QUnit ) {
 	'use strict';
 
 	/**
@@ -10,12 +10,12 @@
 	 * @param {jQuery} [$node]
 	 * @return {jQuery}
 	 */
-	var createItemview = function( options, $node ) {
+	var createItemview = function ( options, $node ) {
 		options = $.extend( {
 			value: new wb.datamodel.Item( 'Q1' ),
-			buildEntityTermsView: function() {},
-			buildStatementGroupListView: function() {},
-			buildSitelinkGroupListView: function() {}
+			buildEntityTermsView: function () {},
+			buildStatementGroupListView: function () {},
+			buildSitelinkGroupListView: function () {}
 		}, options || {} );
 
 		$node = $node || $( '<div/>' ).appendTo( 'body' );
@@ -28,8 +28,8 @@
 	};
 
 	QUnit.module( 'jquery.wikibase.itemview', QUnit.newMwEnvironment( {
-		teardown: function() {
-			$( '.test_itemview' ).each( function() {
+		teardown: function () {
+			$( '.test_itemview' ).each( function () {
 				var $itemview = $( this ),
 					itemview = $itemview.data( 'itemview' );
 
@@ -42,10 +42,10 @@
 		}
 	} ) );
 
-	QUnit.test( 'Create & destroy', function( assert ) {
+	QUnit.test( 'Create & destroy', function ( assert ) {
 		assert.expect( 3 );
-		assert.throws(
-			function() {
+		assert[ 'throws' ](
+			function () {
 				createItemview( { value: null } );
 			},
 			'Throwing error when trying to initialize widget without a value.'

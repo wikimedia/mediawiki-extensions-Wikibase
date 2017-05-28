@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, vf, util ) {
+( function ( $, wb, vf, util ) {
 	'use strict';
 
 	wb.formatters = wb.formatters || {};
@@ -25,7 +25,7 @@
 	wb.formatters.ApiValueFormatter = util.inherit(
 		'WbApiValueFormatter',
 		PARENT,
-		function( formatValueCaller, additionalOptions, dataTypeId, propertyId, outputType ) {
+		function ( formatValueCaller, additionalOptions, dataTypeId, propertyId, outputType ) {
 			this._formatValueCaller = formatValueCaller;
 			this._options = additionalOptions;
 			this._dataTypeId = dataTypeId;
@@ -69,16 +69,16 @@
 			 *         Rejected parameters:
 			 *         - {string} HTML error message.
 			 */
-			format: function( dataValue ) {
+			format: function ( dataValue ) {
 				var deferred = $.Deferred();
 
 				this._formatValueCaller.formatValue(
 					dataValue, this._dataTypeId, this._outputType, this._propertyId, this._options
 				)
-				.done( function( formattedValue ) {
+				.done( function ( formattedValue ) {
 					deferred.resolve( formattedValue, dataValue );
 				} )
-				.fail( function( error ) {
+				.fail( function ( error ) {
 					deferred.reject( error.detailedMessage || error.code );
 				} );
 
