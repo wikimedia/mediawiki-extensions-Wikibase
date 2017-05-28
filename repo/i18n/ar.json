@@ -327,7 +327,7 @@
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, تم تحويله من $3 - $4",
 	"wikibase-api-unresolved-redirect": "يشير معرِّف الكائن المحدد إلى تحويلة، وهذا غير مدعوم في السياق الحالي.",
 	"wikibase-api-no-such-sitelink": "لم يمكن العثور على وصلة موقع إلى \"$1\" عند محاولة تعديل الشارات.",
-	"wikibase-api-target-not-empty": "لا يمكن إنشاء إعادة التوجيه على رأس كيان فارغ أو حذفها.",
+	"wikibase-api-target-not-empty": "يُمكن إنشاء التحويلة فقط تحت اسم كيان فارغ أو محذوف.",
 	"wikibase-api-target-is-redirect": "لا يجوز أن يكون هدف التحويلة تحويلة أخرى.",
 	"wikibase-api-target-is-incompatible": "محاولة التحويل إلى كائن من نمط مختلف.",
 	"wikibase-api-cant-redirect": "لا يمكن إنشاء تحويلة (ربما لأن التحويلات بين هذا النوع من الكائنات غير مدعومة أساساً).",
